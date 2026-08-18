@@ -131,6 +131,9 @@ dialog::backdrop{background:#020104d8;backdrop-filter:blur(6px)}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 @media(max-width:850px){.hero,.grid2{grid-template-columns:1fr}.hero .copy{order:2}.services{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.brand{display:none}.table{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){.copy{padding:24px}.orb-wrap{min-height:500px}.orb-stage{width:min(94vw,420px)}.formgrid{grid-template-columns:1fr}.full{grid-column:auto}}
+
+#channelChat{display:flex;flex-direction:column;gap:10px}.bubble{max-width:88%;padding:12px 14px;border-radius:18px;line-height:1.5;font-size:.82rem}.bubble.user{align-self:flex-end;background:#f3c84f;color:#1b081d}.bubble.ai{align-self:flex-start;background:#ffffff0d;border:1px solid #f4cb6535}.sim-label{font-size:.6rem;letter-spacing:.13em;color:#f5d780;text-transform:uppercase;margin-bottom:5px}.shop-card{border:1px solid #f4cb6535;border-radius:20px;padding:16px;background:#ffffff08;min-height:150px}.shop-card b{font-family:Georgia,serif;font-size:1.05rem}.shop-card p{font-size:.72rem;color:#cdbfd0;line-height:1.5}
+
 </style>
 </head>
 <body>
@@ -138,6 +141,8 @@ dialog::backdrop{background:#020104d8;backdrop-filter:blur(6px)}
 <button class="tab active" data-view="home">✦ Início</button>
 <button class="tab" data-view="tarot">◉ Tarot Livre</button>
 <button class="tab" data-view="spreads">✦ Tiragens</button>
+<button class="tab" data-view="channel">◉ Canalização IA</button>
+<button class="tab" data-view="shop">✦ Loja Mística</button>
 <button class="tab" data-view="library">☾ Biblioteca</button>
 <button class="tab" data-view="journal">✎ Diário</button>
 <button class="tab" data-view="ai">✧ Orbe IA</button>
@@ -205,8 +210,39 @@ dialog::backdrop{background:#020104d8;backdrop-filter:blur(6px)}
 </section>
 
 
+
+<section id="channel" class="view">
+  <div class="eyebrow">EXPERIÊNCIA IMERSIVA · SIMULAÇÃO POR IA</div>
+  <h2>◉ Canalização IA</h2>
+  <p class="lead">Crie uma conversa imaginativa com uma persona escolhida por você. Pode ser uma figura pública ou alguém da sua vida. A experiência é uma simulação criativa: não é contato real, telepatia nem mensagem autêntica da pessoa.</p>
+  <div class="panel content-box">
+    <div class="formgrid">
+      <input id="personaName" class="field" maxlength="90" placeholder="Nome da persona">
+      <input id="personaContext" class="field" maxlength="220" placeholder="Contexto opcional: quem é essa pessoa para você?">
+    </div>
+    <textarea id="personaMessage" class="field" rows="4" maxlength="800" placeholder="Escreva sua primeira mensagem..." style="width:100%;margin-top:12px"></textarea>
+    <div class="actions">
+      <button class="btn gold" id="startChannel">Iniciar simulação</button>
+      <button class="btn soft" id="clearChannel">Limpar conversa</button>
+    </div>
+    <div class="note" style="margin-top:14px">Sempre exibiremos “Simulação por IA” durante a conversa. A futura versão conectada ao Worker poderá responder em tempo real, mantendo a chave da IA fora do navegador.</div>
+    <div id="channelChat" style="margin-top:18px"></div>
+  </div>
+</section>
+
+<section id="shop" class="view">
+  <div class="eyebrow">CURADORIA DA DIVINA BRUXA</div>
+  <h2>✦ Loja Mística</h2>
+  <p class="lead">Uma vitrine para baralhos, livros, cristais, acessórios e produtos digitais. Os links comerciais poderão ser cadastrados sem precisar reconstruir o site.</p>
+  <div class="panel content-box">
+    <div class="note">Quando um item usar link de afiliado, a loja deverá informar claramente que uma compra pode gerar comissão.</div>
+    <div id="shopGrid" class="table" style="margin-top:18px"></div>
+    <div class="actions"><a class="btn gold" href="mailto:herculesfardim@hotmail.com?subject=Quero%20indicar%20um%20produto%20para%20a%20Loja%20M%C3%ADstica">Contato da loja</a></div>
+  </div>
+</section>
+
 <section id="library" class="view">
-<div class="eyebrow">BIBLIOTECA COMPLETA</div><h2>☾ As 78 cartas</h2>
+<div class="eyebrow">BIBLIOTECA COMPLETA · SEM ANÚNCIOS</div><h2>☾ As 78 cartas</h2>
 <p class="lead">Pesquise por nome, Arcano Maior ou naipe. Quando as artes oficiais forem enviadas, cada carta poderá receber sua imagem definitiva sem alterar a lógica do baralho.</p>
 <div class="panel content-box">
 <div class="formgrid"><input id="cardSearch" class="field" placeholder="Buscar carta"><select id="suitFilter"><option value="">Todos</option><option value="Arcano Maior">Arcanos Maiores</option><option>Copas</option><option>Ouros</option><option>Espadas</option><option>Paus</option></select></div>
@@ -244,6 +280,12 @@ dialog::backdrop{background:#020104d8;backdrop-filter:blur(6px)}
 </div>
 <div class="note" style="margin-top:16px">E-mail para solicitações: <strong>herculesfardim@hotmail.com</strong></div>
 </section>
+<div class="social-orbe" style="text-align:center;margin:40px auto 20px;padding:20px">
+<div class="eyebrow">ACOMPANHE A DIVINA BRUXA</div>
+<div class="actions" style="justify-content:center">
+<a class="btn soft" target="_blank" rel="noopener" href="https://www.instagram.com/divinabruxa33">Instagram</a>
+<a class="btn soft" target="_blank" rel="noopener" href="https://x.com/divinabruxa33">X</a>
+</div></div>
 </main>
 
 <dialog id="serviceDialog"><button class="close" onclick="serviceDialog.close()">×</button><div class="modal">
@@ -340,6 +382,34 @@ document.querySelector('#clearJournal')?.addEventListener('click',()=>{localStor
 renderLibrary();renderJournal();
 resetDeck();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+
+const SHOP_ITEMS=[
+ {name:'Tarôs & Oráculos',desc:'Espaço preparado para seus links de afiliados de baralhos e oráculos.'},
+ {name:'Livros Místicos',desc:'Curadoria de livros de Tarot, simbolismo, astrologia e espiritualidade.'},
+ {name:'Cristais & Altares',desc:'Vitrine para cristais, velas, suportes e acessórios.'},
+ {name:'Produtos Digitais',desc:'Área futura para PDFs, diários, guias e tiragens exclusivas criadas por você.'}
+];
+function renderShop(){
+ const r=document.querySelector('#shopGrid'); if(!r)return;
+ r.innerHTML=SHOP_ITEMS.map(x=>`<div class="shop-card"><b>${x.name}</b><p>${x.desc}</p><span class="sim-label">EM PREPARAÇÃO</span></div>`).join('');
+}
+function addBubble(kind,label,msg){
+ const root=document.querySelector('#channelChat'); if(!root)return;
+ const d=document.createElement('div');d.className='bubble '+kind;
+ d.innerHTML=`<div class="sim-label">${label}</div><div></div>`;
+ d.lastElementChild.textContent=msg;root.appendChild(d);root.scrollTop=root.scrollHeight;
+}
+document.querySelector('#startChannel')?.addEventListener('click',()=>{
+ const name=(document.querySelector('#personaName')?.value||'').trim();
+ const msg=(document.querySelector('#personaMessage')?.value||'').trim();
+ if(!name||!msg){toast('Preencha o nome e a primeira mensagem');return}
+ addBubble('user','VOCÊ',msg);
+ addBubble('ai','SIMULAÇÃO POR IA · '+name,'A conexão com a IA em tempo real será ativada pelo backend seguro. Esta tela já está preparada para a experiência de conversa.');
+ document.querySelector('#personaMessage').value='';
+});
+document.querySelector('#clearChannel')?.addEventListener('click',()=>{const r=document.querySelector('#channelChat');if(r)r.innerHTML='';});
+renderShop();
+
 </script>
 </body>
 </html>
