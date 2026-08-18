@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "orbe-das-realidades-ai",
-  "main": "src/index.js",
+  "main": "index.js",
   "compatibility_date": "2026-08-18",
   "vars": {
     "ALLOWED_ORIGINS": "https://divinabruxa.com.br,https://divinabruxa.github.io",
