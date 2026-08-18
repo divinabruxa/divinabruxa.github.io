@@ -1,0 +1,30 @@
+ORBE DAS REALIDADES — REPOSITÓRIO PRONTO
+
+Estrutura correta:
+
+/index.html
+/CNAME
+/worker/package.json
+/worker/schema.sql
+/worker/wrangler.jsonc
+/worker/src/index.js
+
+Cloudflare Workers Builds:
+- Repository: divinabruxa/divinabruxa.github.io
+- Path / Root directory: /worker/
+- Build command: deixar vazio
+- Deploy command: npx wrangler deploy
+
+D1:
+- Binding: DB
+- Database name: orbe-prod
+- Database ID: 1ab9f3e5-6289-472c-989b-a2c2033b2041
+
+IMPORTANTE:
+As chaves secretas NÃO ficam neste ZIP nem no GitHub. Elas devem ser cadastradas como Secrets no Cloudflare:
+OPENAI_API_KEY
+STRIPE_SECRET_KEY
+STRIPE_WEBHOOK_SECRET
+APP_TOKEN_SECRET
+STRIPE_PRICE_PREMIUM
+STRIPE_PRICE_SUPREMA
