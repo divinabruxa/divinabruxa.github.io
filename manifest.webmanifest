@@ -1,0 +1,10 @@
+{
+  "name": "Orbe das Realidades",
+  "short_name": "Orbe",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070109",
+  "theme_color": "#09020d",
+  "description": "Tarot imersivo da Divina Bruxa",
+  "icons": []
+}
