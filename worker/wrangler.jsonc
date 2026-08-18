@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "orbe-das-realidades-ai",
-  ma""main": "index.js",
+  "main": "src/index.js",
   "compatibility_date": "2026-08-18",
   "vars": {
     "ALLOWED_ORIGINS": "https://divinabruxa.com.br,https://divinabruxa.github.io",
@@ -13,7 +13,7 @@
     {
       "binding": "DB",
       "database_name": "orbe-prod",
-      "database_id": "1ab9f3e5-6289-472c-989b-a2c2033b2041": "SUBSTITUA_PELO_ID_DO_D1"
+      "database_id": "1ab9f3e5-6289-472c-989b-a2c2033b2041"
     }
   ]
 }
