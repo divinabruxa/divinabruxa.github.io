@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "orbe-das-realidades-ai",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-18",
+  "vars": {
+    "ALLOWED_ORIGINS": "https://divinabruxa.com.br,https://divinabruxa.github.io",
+    "CHAT_MODEL": "gpt-5.6-luna",
+    "TAROT_MODEL": "gpt-5.6-terra",
+    "MONTHLY_OPENAI_CAP_USD": "20"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "orbe-prod",
+      "database_id": "SUBSTITUA_PELO_ID_DO_D1"
+    }
+  ]
+}

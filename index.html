@@ -46,6 +46,12 @@ h1,h2,h3.serif{font-family:Georgia,"Times New Roman",serif;font-weight:500;lette
 .chat-compose-wrap{padding:11px 13px 14px;border-top:1px solid #f2ca6723;background:#0e0414d9;backdrop-filter:blur(12px)}.chat-compose{display:grid;grid-template-columns:1fr auto;gap:9px}.chat-input{width:100%;border:1px solid var(--line);background:#ffffff08;color:white;border-radius:18px;padding:13px 14px;outline:0}.chat-compose button{min-width:56px}.chat-tools{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:8px;color:#746a78;font-size:.58rem}.chat-tools button{border:0;background:transparent;color:#a99dac;padding:4px 0;font-size:.61rem}
 .filters{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none}.filter{flex:0 0 auto;border:1px solid var(--line);background:#15081a;color:#fff;border-radius:999px;padding:9px 13px;font-size:.78rem;font-weight:850}.filter.active{background:#3a1548;border-color:#ac6fff}.deck-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-top:14px}.search{width:min(430px,100%);border:1px solid var(--line);background:#100615;color:#fff;border-radius:999px;padding:11px 15px;outline:0}
 .history-list{display:grid;gap:11px}.history-item{border:1px solid #f2ca6725;border-radius:18px;background:#ffffff08;padding:15px}.history-item b{display:block;margin-bottom:5px}.history-item small{color:#9e91a0}.history-cards{margin-top:7px;color:#e7d6e9;line-height:1.55}.journal-empty{padding:28px;text-align:center;color:#8f8292;border:1px dashed #f2ca6732;border-radius:18px}
+
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+.plan{position:relative;padding:24px;overflow:hidden}.plan.featured{border-color:#b67aff;box-shadow:0 25px 90px #7a42ff2a,inset 0 1px #ffffff12}.plan.featured:before{content:"MAIS ESCOLHIDO";position:absolute;right:-38px;top:21px;rotate:38deg;background:linear-gradient(135deg,#d6a535,#ffe47b);color:#2b1508;font-size:.52rem;font-weight:950;letter-spacing:.07em;padding:6px 45px}.plan-name{font-size:.72rem;letter-spacing:.14em;color:#eed17c;font-weight:900}.plan-price{font:500 2.9rem Georgia,serif;margin:8px 0}.plan-price small{font:600 .72rem Inter,sans-serif;color:#9e91a1}.plan-desc{color:#bfb2c2;line-height:1.55;min-height:48px}.plan-list{display:grid;gap:10px;margin:20px 0;padding:0;list-style:none}.plan-list li{display:flex;gap:9px;color:#ded2e0;font-size:.86rem;line-height:1.4}.plan-list li:before{content:"✦";color:#e8c967}.plan .btn{width:100%}.subscription-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:20px;padding:15px 17px}.subscription-state{display:flex;align-items:center;gap:9px}.subscription-dot{width:9px;height:9px;border-radius:50%;background:#7c7180}.subscription-state.active .subscription-dot{background:#65efba;box-shadow:0 0 14px #65efba}.usage-box{display:flex;gap:10px;flex-wrap:wrap}.usage-chip{border:1px solid #f2ca6728;background:#ffffff07;border-radius:999px;padding:7px 10px;font-size:.67rem;color:#cbbdcd}.budget-note{margin-top:18px;border:1px solid #5be8ff2b;background:#5be8ff09;border-radius:18px;padding:14px;color:#bfefff;font-size:.73rem;line-height:1.55}
+@media(max-width:850px){.plans-grid{grid-template-columns:1fr}.plan-desc{min-height:0}}
+
+.account-pill{display:flex;align-items:center;gap:8px;border:1px solid #f2ca6728;background:#ffffff08;border-radius:999px;padding:8px 11px;font-size:.65rem;color:#d8cbd9}.account-pill b{color:#ffe18a}.locked{position:relative;filter:saturate(.65)}.locked:after{content:"PREMIUM";position:absolute;inset:auto 10px 10px auto;border:1px solid #ffe18a55;background:#150817e8;color:#ffe18a;border-radius:999px;padding:5px 8px;font-size:.5rem;font-weight:900}.premium-banner{margin:0 0 18px;padding:14px 16px;display:none;align-items:center;justify-content:space-between;gap:12px}.premium-banner.show{display:flex}.premium-banner .copy{color:#cdbed0;line-height:1.5;font-size:.78rem}.premium-banner .copy b{color:#ffe18a}.quota-meter{height:7px;border-radius:999px;background:#ffffff0d;overflow:hidden;margin-top:6px}.quota-meter span{display:block;height:100%;background:linear-gradient(90deg,#7d52ff,#e2bb58);width:0}.plan-mini{font-size:.6rem;color:#8f8490}
 dialog{width:min(92vw,535px);border:1px solid var(--line);border-radius:25px;background:#100616;color:#fff;padding:0;box-shadow:0 36px 110px #000d}dialog::backdrop{background:#000c;backdrop-filter:blur(9px)}.modal{padding:28px}.modal h3{font:500 2rem Georgia,serif;margin:8px 0 10px}.modal p{line-height:1.7;color:#cdbfd0}.close{position:absolute;right:10px;top:10px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#16091c;color:#fff;font-size:1.5rem}.meaning{border-left:2px solid #f2ca676e;padding-left:13px;margin-top:16px}.meaning strong{color:#f5db87}
 .toast{position:fixed;left:50%;bottom:24px;z-index:100;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#16091dee;border:1px solid var(--line);border-radius:999px;padding:11px 16px;color:white;transition:.25s;box-shadow:0 14px 40px #0008}.toast.show{opacity:1;transform:translate(-50%,0)}footer{padding:30px 0 44px;text-align:center;color:#706573;font-size:.64rem;letter-spacing:.15em}
 @media(max-width:900px){.hero-grid,.free-layout,.channel-wrap{grid-template-columns:1fr}.hero-orb{min-height:420px}.deck-grid{grid-template-columns:repeat(4,1fr)}.guided-result.cross{grid-template-columns:repeat(2,1fr)}}@media(max-width:580px){.brand{display:none}.view{padding-top:29px}.hero-copy{padding:24px 20px}.stats{grid-template-columns:repeat(2,1fr)}.orb-card,.table-panel{padding:13px}.table{grid-template-columns:repeat(2,1fr)}.deck-grid{grid-template-columns:repeat(3,1fr);gap:8px}.guided-result{grid-template-columns:repeat(3,1fr);gap:8px}.analysis-grid{grid-template-columns:1fr}.analysis-section.full{grid-column:auto}.card-meta{padding:34px 6px 7px}.card-sub{display:none}.actions .btn{flex:1 1 auto}.tab{padding:10px 13px}.channel-chat{min-height:570px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}.mist{display:none}}
@@ -59,8 +65,8 @@ dialog{width:min(92vw,535px);border:1px solid var(--line);border-radius:25px;bac
 <button class="tab" data-view="readings">✧ Tiragens</button>
 <button class="tab" data-view="channel">☿ Canalização</button>
 <button class="tab" data-view="deck">🂠 78 Cartas</button>
-<button class="tab" data-view="journal">☾ Diário</button>
-<div class="brand">✦ ORBE DAS REALIDADES</div>
+<button class="tab" data-view="plans">♛ Planos</button><button class="tab" data-view="journal">☾ Diário</button>
+<div id="navAccount" class="account-pill"><span>♛</span><span><b>Plano Livre</b><div class="plan-mini">IA premium opcional</div></span></div><div class="brand">✦ ORBE DAS REALIDADES</div>
 </div></header>
 
 <main class="shell">
@@ -72,9 +78,9 @@ dialog{width:min(92vw,535px);border:1px solid var(--line);border-radius:25px;bac
 
 <section id="free" class="view active"><div class="eyebrow">ORBE DAS REALIDADES</div><h2>◯ Tarot Livre</h2><p class="lead">Toque na Orbe. Cada toque retira uma carta do baralho embaralhado. Nenhuma carta se repete até o baralho terminar.</p><div class="free-layout"><article class="panel orb-card"><div class="orb-stage"><div class="ring"></div><div class="ring r2"></div><button id="drawOrb" class="orb"><span class="core"></span><span class="glass"></span><span class="shine"></span></button><div class="shadow"></div></div><div class="actions"><button id="drawBtn" class="btn gold">Tirar carta</button><button id="shuffleBtn" class="btn">Embaralhar</button></div><div id="counter" class="counter">78 cartas restantes</div></article><article class="panel table-panel"><div class="table-head"><div><h3>Sua mesa</h3><div class="muted">As cartas aparecem aqui.</div></div><button id="clearBtn" class="btn">Limpar mesa</button></div><div id="table" class="table"></div></article></div></section>
 
-<section id="readings" class="view"><div class="eyebrow">MOTOR DE ANÁLISE PROFUNDA</div><h2>✧ Tiragens da Orbe</h2><p class="lead">A conclusão combina posição, orientação, elementos, tensões e padrões entre as cartas. O motor evita repetir conclusões recentes armazenando assinaturas no navegador.</p><article class="panel guided-panel"><textarea id="intent" class="intent" maxlength="260" placeholder="Escreva sua pergunta ou intenção…"></textarea><div class="actions"><button class="btn gold" data-guide="one">1 carta</button><button class="btn" data-guide="three">Passado • Presente • Tendência</button><button class="btn" data-guide="choice">Dois Caminhos</button><button class="btn" data-guide="cross">Cruz Celta</button></div><div id="guidedResult" class="guided-result"></div><div id="analysis" class="analysis"></div><div class="actions" id="analysisActions" style="display:none"><button class="btn ghost" id="regenerateAnalysis">Nova conclusão</button><button class="btn ghost" id="saveReading">Salvar no Diário</button><button class="btn ghost" id="shareReading">Compartilhar</button></div></article></section>
+<section id="readings" class="view"><div id="readingsPremiumBanner" class="panel premium-banner"><div class="copy"><b>Análise IA Premium</b><br>Sem assinatura, a tiragem continua funcionando com o motor local. Com Premium, a conclusão é gerada pela IA.</div><button class="btn gold" data-go="plans">Ver planos</button></div><div class="eyebrow">MOTOR DE ANÁLISE PROFUNDA</div><h2>✧ Tiragens da Orbe</h2><p class="lead">A conclusão combina posição, orientação, elementos, tensões e padrões entre as cartas. O motor evita repetir conclusões recentes armazenando assinaturas no navegador.</p><article class="panel guided-panel"><textarea id="intent" class="intent" maxlength="260" placeholder="Escreva sua pergunta ou intenção…"></textarea><div class="actions"><button class="btn gold" data-guide="one">1 carta</button><button class="btn" data-guide="three">Passado • Presente • Tendência</button><button class="btn" data-guide="choice">Dois Caminhos</button><button class="btn" data-guide="cross">Cruz Celta</button></div><div id="guidedResult" class="guided-result"></div><div id="analysis" class="analysis"></div><div class="actions" id="analysisActions" style="display:none"><button class="btn ghost" id="regenerateAnalysis">Nova conclusão</button><button class="btn ghost" id="saveReading">Salvar no Diário</button><button class="btn ghost" id="shareReading">Compartilhar</button></div></article></section>
 
-<section id="channel" class="view">
+<section id="channel" class="view"><div id="channelPremiumBanner" class="panel premium-banner"><div class="copy"><b>Persona IA Premium</b><br>O chat local continua disponível. Com Premium, as respostas usam IA real e memória contextual.</div><button class="btn gold" data-go="plans">Ver planos</button></div>
 <div class="eyebrow">CONVERSA IA • ORÁCULO RELACIONAL</div>
 <h2>☿ Canalização Interativa</h2>
 <p class="lead">Crie uma conversa contínua em primeira pessoa, com memória do contexto, leitura emocional e arquétipos do Tarot. A experiência é feita para parecer natural e íntima — como um chat — sem afirmar que a pessoa real está respondendo.</p>
@@ -131,6 +137,47 @@ dialog{width:min(92vw,535px);border:1px solid var(--line);border-radius:25px;bac
 
 <section id="deck" class="view"><div class="eyebrow">BIBLIOTECA SAGRADA</div><h2>🂠 As 78 Cartas</h2><p class="lead">Todos os 78 espaços oficiais estão reservados. Quando você enviar as artes, coloque cada arquivo em <b>assets/cards/</b>; o site detecta automaticamente e substitui o placeholder.</p><div class="deck-head"><input id="search" class="search" placeholder="Buscar carta…"><div id="imageStatus" class="muted">0/78 artes detectadas</div></div><div class="filters"><button class="filter active" data-filter="all">Todas</button><button class="filter" data-filter="major">Maiores</button><button class="filter" data-filter="copas">Copas</button><button class="filter" data-filter="espadas">Espadas</button><button class="filter" data-filter="paus">Paus</button><button class="filter" data-filter="ouros">Ouros</button></div><div id="deckGrid" class="deck-grid"></div></section>
 
+
+<section id="plans" class="view">
+<div class="eyebrow">ORBE PREMIUM</div>
+<h2>♛ Planos da Orbe</h2>
+<p class="lead">O Tarot continua útil no plano gratuito. As assinaturas financiam a inteligência artificial e liberam análises e conversas premium com limites claros para manter o projeto sustentável.</p>
+
+<div id="subscriptionBar" class="panel subscription-bar">
+  <div id="subscriptionState" class="subscription-state"><span class="subscription-dot"></span><div><b id="subscriptionTitle">Plano Livre</b><div class="muted" id="subscriptionSubtitle">IA premium não ativada neste aparelho</div></div></div>
+  <div class="usage-box"><span class="usage-chip" id="personaUsage">Persona IA: —</span><span class="usage-chip" id="tarotUsage">Tarot IA: —</span></div>
+  <button id="manageSubscription" class="btn ghost" style="display:none">Gerenciar assinatura</button>
+</div>
+
+<div class="plans-grid">
+  <article class="panel plan">
+    <div class="plan-name">ORBE LIVRE</div>
+    <div class="plan-price">R$ 0</div>
+    <p class="plan-desc">Para conhecer o universo da Divina Bruxa sem compromisso.</p>
+    <ul class="plan-list"><li>Tarot Livre com 78 cartas</li><li>Tiragens e interpretação local</li><li>Biblioteca das cartas</li><li>Diário no aparelho</li><li>Placeholders prontos para as 78 artes oficiais</li></ul>
+    <button class="btn ghost" data-go="free">Continuar grátis</button>
+  </article>
+
+  <article class="panel plan featured">
+    <div class="plan-name">ORBE PREMIUM</div>
+    <div class="plan-price">R$ 19,90 <small>/ mês</small></div>
+    <p class="plan-desc">IA real para uso frequente, mantendo uma margem saudável para sustentar a Orbe.</p>
+    <ul class="plan-list"><li>300 mensagens Persona IA / mês</li><li>10 análises profundas de Tarot / mês</li><li>Memória de conversa</li><li>Conclusões longas e exclusivas</li><li>Diário Premium</li></ul>
+    <button class="btn gold" data-checkout="premium">Assinar Premium</button>
+  </article>
+
+  <article class="panel plan">
+    <div class="plan-name">ORBE SUPREMA</div>
+    <div class="plan-price">R$ 39,90 <small>/ mês</small></div>
+    <p class="plan-desc">Para quem usa a Orbe intensamente e quer muito mais capacidade de IA.</p>
+    <ul class="plan-list"><li>1.000 mensagens Persona IA / mês</li><li>40 análises profundas de Tarot / mês</li><li>Prioridade para recursos novos</li><li>Memória ampliada</li><li>Leituras extensas</li></ul>
+    <button class="btn gold" data-checkout="suprema">Assinar Suprema</button>
+  </article>
+</div>
+
+<div class="budget-note"><b>Proteção de orçamento:</b> o servidor tem um teto mensal de gasto da OpenAI. Quando o teto é atingido, a camada de IA é pausada sem derrubar o Tarot local. Isso impede que uso inesperado transforme a Orbe em uma conta sem limite.</div>
+</section>
+
 <section id="journal" class="view"><div class="eyebrow">MEMÓRIA DA ORBE</div><h2>☾ Diário de Leituras</h2><div class="journal-head"><p class="lead" style="margin:0">As leituras salvas ficam somente neste navegador.</p><button id="clearHistory" class="btn ghost">Apagar diário</button></div><div id="history" class="history-list"></div></section>
 </main>
 <dialog id="dialog"><button id="close" class="close">×</button><div id="modal" class="modal"></div></dialog><div id="toast" class="toast"></div>
@@ -154,7 +201,7 @@ function draw(){if(!state.pool.length){toast("O baralho terminou. Embaralhe nova
 function renderTable(){let e=$("#table");e.innerHTML=state.table.length?state.table.map((x,i)=>cardHTML(x.card,i,x.reversed)).join(""):`<div class="empty"><div><div style="font-size:2.2rem;color:#e7cc79">✦</div><b>Sua mesa está esperando.</b><br><span>Toque na Orbe ou em “Tirar carta”.</span></div></div>`}
 function showCard(c,reversed=false){$("#modal").innerHTML=`<div class="eyebrow">${esc(c.suit)} · ${reversed?"INVERTIDA":"EM PÉ"}</div><h3>${esc(c.name)}</h3><p>${esc(c.keywords)}</p><div class="meaning"><strong>${reversed?"Leitura invertida":"Leitura em pé"}</strong><p>${esc(reversed?c.reversed:c.upright)}</p></div><div class="meaning"><strong>Imagem oficial</strong><p>${state.images.has(c.id)?"A arte oficial desta carta já está instalada.":`Espaço reservado: ${esc(c.image)}`}</p></div>`;$("#dialog").showModal()}
 function renderDeck(){let q=$("#search").value.trim().toLowerCase(),arr=DECK.filter(c=>(state.filter==="all"||c.group===state.filter)&&(!q||c.name.toLowerCase().includes(q)));$("#deckGrid").innerHTML=arr.map((c,i)=>cardHTML(c,i)).join("")}
-function guide(type){let p=POS[type],arr=shuffle(DECK);state.guided=p.map((label,i)=>({card:arr[i],reversed:rev(),label}));state.analysisType=type;renderGuided();buildAnalysis(true);$("#analysisActions").style.display="flex";navigator.vibrate?.([15,30,15])}
+async function guide(type){let p=POS[type],arr=shuffle(DECK);state.guided=p.map((label,i)=>({card:arr[i],reversed:rev(),label}));state.analysisType=type;renderGuided();$("#analysis").innerHTML=`<div class="analysis-grid"><section class="analysis-section full"><div class="eyebrow">ORBE PENSANDO</div><p>Combinando posições, cartas, elementos e sua intenção…</p></section></div>`;$("#analysis").classList.add("show");let ai=await callTarotAI();if(ai){$("#analysis").innerHTML=formatAIAnalysis(ai);state.analysis={html:$("#analysis").innerHTML,sig:"IA-"+Date.now().toString(36),intent:$("#intent").value.trim(),cards:state.guided.map(x=>({name:x.card.name,label:x.label,reversed:x.reversed}))};}else{buildAnalysis(true)}$("#analysisActions").style.display="flex";navigator.vibrate?.([15,30,15])}
 function renderGuided(){let g=$("#guidedResult");g.className="guided-result"+(state.analysisType==="cross"?" cross":"");g.innerHTML=state.guided.map((x,i)=>cardHTML(x.card,i,x.reversed,x.label)).join("")}
 const OPENERS=["A primeira coisa que se destaca nesta combinação é","O eixo central desta leitura mostra","Quando as cartas são observadas como um sistema, aparece","A arquitetura simbólica desta tiragem sugere"];
 const LINKS=["Isso não funciona isoladamente:","Ao mesmo tempo,","Em outra camada,","O ponto de tensão surge porque","O movimento fica mais claro quando"];
@@ -165,6 +212,33 @@ function recentSignatures(){try{return JSON.parse(localStorage.getItem("orbe-ana
 function saveSig(sig){let a=recentSignatures().filter(x=>x!==sig);a.unshift(sig);localStorage.setItem("orbe-analysis-sigs",JSON.stringify(a.slice(0,200)))}
 function signature(seed){return btoa(unescape(encodeURIComponent(seed))).replace(/=/g,"").slice(-18)}
 function dominantElement(){let c={Fogo:0,Água:0,Ar:0,Terra:0,"Éter":0};state.guided.forEach(x=>c[x.card.element]=(c[x.card.element]||0)+1);return Object.entries(c).sort((a,b)=>b[1]-a[1])[0]}
+
+async function callTarotAI(){
+ if(!ORBE_AI_ENDPOINT||!state.guided.length||!premiumActive()||remaining("tarot")<=0)return null;
+ try{
+   const payload={
+     intent:$("#intent").value.trim(),
+     spread:state.analysisType||"tiragem",
+     cards:state.guided.map(x=>({
+       position:x.label,
+       name:x.card.name,
+       reversed:x.reversed,
+       keywords:x.card.keywords
+     }))
+   };
+   const r=await fetch(ORBE_AI_ENDPOINT.replace(/\/$/,"")+"/api/tarot",{
+     method:"POST",
+     headers:{"Content-Type":"application/json"},
+     body:JSON.stringify(payload)
+   });
+   if(!r.ok)return null;
+   const d=await r.json();
+   if(typeof d.analysis==="string"){syncUsage("tarot");return d.analysis}return null;
+ }catch{return null}
+}
+function formatAIAnalysis(t){
+ return `<div class="analysis-grid"><section class="analysis-section full"><div class="eyebrow">CONCLUSÃO IA DA ORBE</div><h3 class="serif" style="font-size:2rem;margin:8px 0 10px">Leitura profunda e integrada</h3>${t.split(/\n{2,}/).map(p=>`<p>${esc(p).replace(/\n/g,"<br>")}</p>`).join("")}<div class="analysis-signature">Análise gerada pela IA da Orbe · interpretação simbólica, não previsão infalível.</div></section></div>`;
+}
 function buildAnalysis(newVariant=false){if(!state.guided.length)return;let intent=$("#intent").value.trim();let tries=0,html="",sig="";do{let dom=dominantElement(),ups=state.guided.filter(x=>!x.reversed).length,revs=state.guided.length-ups;let a=pick(OPENERS),l1=pick(LINKS),l2=pick(LINKS),adv=pick(ADVICE),q=pick(QUESTIONS),tmp=pick(TEMPORAL);let first=state.guided[0],last=state.guided[state.guided.length-1];let middle=state.guided[Math.floor(state.guided.length/2)];let tone=revs>ups?"A presença maior de cartas invertidas sugere revisão, bloqueio ou energia que ainda não encontrou expressão clara.":"A maioria das cartas em pé sugere energia mais disponível para ação, compreensão ou movimento.";let domTxt=dom[0]==="Éter"?"Arcanos Maiores dominam a leitura, aumentando o peso de temas estruturais e decisões de ciclo.":`${dom[0]} é o elemento dominante, então ${dom[0]==="Fogo"?"ação, desejo e impulso":dom[0]==="Água"?"emoções, vínculo e sensibilidade":dom[0]==="Ar"?"pensamento, comunicação e conflito mental":"corpo, recursos e realidade prática"} pedem atenção especial.`;let positions=state.guided.map(x=>`<p><strong>${esc(x.label)} — ${esc(x.card.name)}${x.reversed?" (invertida)":""}.</strong> ${esc(x.reversed?x.card.reversed:x.card.upright)}</p>`).join("");let synthesis=`${a} <strong>${esc(first.card.name)}</strong> abrindo o campo e <strong>${esc(last.card.name)}</strong> fechando a sequência. ${l1} ${esc(middle.card.name)} funciona como ponto de articulação. ${tone}`;let relation=`${domTxt} ${l2} observe relações entre autonomia e vínculo, impulso e consequência, intuição e evidência. Em questões afetivas, esta leitura não descreve os pensamentos secretos de outra pessoa; ela ajuda a organizar o que você percebe, sente e pode verificar.`;let action=`O conselho mais útil desta combinação é <strong>${adv}</strong>. Em vez de tentar resolver tudo de uma vez, escolha uma atitude concreta, observe o resultado e atualize sua leitura da situação.`;let conclusion=`${tmp} ${intent?`Para a intenção “${esc(intent)}”, `:""}a síntese não pede certeza absoluta: pede coerência entre o que as cartas simbolizam e o que a realidade confirma.`;html=`<div class="analysis-grid"><section class="analysis-section full"><div class="eyebrow">CONCLUSÃO DA ORBE</div><h3 class="serif" style="font-size:2rem;margin:8px 0 10px">Leitura integrada</h3><p>${synthesis}</p></section><section class="analysis-section"><h4>1. Carta por carta</h4>${positions}</section><section class="analysis-section"><h4>2. Padrão dominante</h4><p>${relation}</p></section><section class="analysis-section"><h4>3. Dinâmica temporal</h4><p>${tmp}</p></section><section class="analysis-section"><h4>4. Sombra e tensão</h4><p>${tone} Pergunte onde existe repetição automática, expectativa não confirmada ou medo influenciando a interpretação.</p></section><section class="analysis-section"><h4>5. Ação concreta</h4><p>${action}</p></section><section class="analysis-section"><h4>6. Pergunta de integração</h4><p><strong>${q}</strong></p></section><section class="analysis-section full"><h4>7. Síntese final</h4><p>${conclusion}</p><div class="analysis-signature">Assinatura desta conclusão: {{SIG}}</div></section></div>`;sig=signature(state.guided.map(x=>x.card.id+(x.reversed?"R":"U")).join("|")+"|"+a+l1+l2+adv+q+tmp+Date.now()+Math.random());tries++}while(recentSignatures().includes(sig)&&tries<12);saveSig(sig);html=html.replace("{{SIG}}",sig);state.analysis={html,sig,intent,cards:state.guided.map(x=>({name:x.card.name,label:x.label,reversed:x.reversed}))};$("#analysis").innerHTML=html;$("#analysis").classList.add("show")}
 function currentReadingText(){let base=state.guided.map(x=>`${x.label}: ${x.card.name}${x.reversed?" (invertida)":""}`).join("\n");return `${$("#intent").value.trim()?`Intenção: ${$("#intent").value.trim()}\n\n`:""}${base}\n\nAssinatura: ${state.analysis?.sig||""}`}
 function saveReading(){if(!state.guided.length)return;let h={id:Date.now(),date:new Date().toLocaleString("pt-BR"),intent:$("#intent").value.trim(),cards:state.analysis.cards,sig:state.analysis.sig};state.history.unshift(h);state.history=state.history.slice(0,40);localStorage.setItem("orbe-history",JSON.stringify(state.history));renderHistory();toast("Leitura salva")}
@@ -173,7 +247,7 @@ function loadHistory(){try{state.history=JSON.parse(localStorage.getItem("orbe-h
 function renderHistory(){let e=$("#history");e.innerHTML=state.history.length?state.history.map(h=>`<article class="history-item"><b>${esc(h.intent||"Leitura da Orbe")}</b><small>${esc(h.date)} · ${esc(h.sig||"")}</small><div class="history-cards">${h.cards.map(c=>`${esc(c.label)}: <strong>${esc(c.name)}</strong>${c.reversed?" ↕":""}`).join("<br>")}</div></article>`).join(""):`<div class="journal-empty">Nenhuma leitura salva ainda.</div>`}
 function setView(id){$$(".view").forEach(v=>v.classList.toggle("active",v.id===id));$$(".tab").forEach(b=>b.classList.toggle("active",b.dataset.view===id));scrollTo({top:0,behavior:"smooth"})}
 
-const ORBE_AI_ENDPOINT=""; // Opcional: no futuro, configure aqui um endpoint seguro do seu servidor. Nunca coloque chave de API no HTML.
+const ORBE_AI_ENDPOINT=localStorage.getItem("orbe-ai-endpoint")||""; // Opcional: no futuro, configure aqui um endpoint seguro do seu servidor. Nunca coloque chave de API no HTML.
 const TONE={
 afetivo:{open:["Eu queria começar com carinho, sem fingir que tudo é simples.","Se eu colocasse essa conexão em palavras com cuidado, eu começaria assim:","Eu sinto que esta conversa merece delicadeza, então vou falar devagar."],style:["com afeto","com vulnerabilidade","sem pressionar uma resposta"]},
 romantico:{open:["Se eu pudesse transformar essa ligação em palavras íntimas, eu diria:","Existe uma parte dessa história que soa como saudade e desejo de proximidade.","Vou responder pelo lado mais afetivo dessa imagem simbólica."],style:["com ternura","como uma confissão imaginativa","sem transformar desejo em certeza"]},
@@ -227,10 +301,10 @@ function makeChannelSig(parts){let raw=parts.join("|");let h=2166136261;for(let 
 function chooseUnique(arr,salt){let used=usedChannelSigs();for(let i=0;i<12;i++){let x=arr[(Math.abs((salt+i*17))%arr.length)];let sig=makeChannelSig([x,state.channel.name,state.channel.turn,String(i)]);if(!used.includes(sig)){saveChannelSig(sig);return x}}return arr[Math.abs(salt)%arr.length]}
 function seedFrom(text){let h=0;for(let i=0;i<text.length;i++)h=(h*31+text.charCodeAt(i))|0;return Math.abs(h)}
 async function callRealAI(payload){
- if(!ORBE_AI_ENDPOINT)return null;
+ if(!ORBE_AI_ENDPOINT||!premiumActive()||remaining("persona")<=0)return null;
  try{
-  let r=await fetch(ORBE_AI_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
-  if(!r.ok)return null;let d=await r.json();return typeof d.reply==="string"?d.reply:null;
+  let r=await fetch(ORBE_AI_ENDPOINT.replace(/\/$/,"")+"/api/persona",{method:"POST",headers:authHeaders(),body:JSON.stringify(payload)});
+  if(!r.ok)return null;let d=await r.json();if(typeof d.reply==="string"){syncUsage("persona");return d.reply}return null;
  }catch{return null}
 }
 function localAIReply(text,card,reversed){
@@ -281,9 +355,85 @@ async function exportChannel(){
  let txt=`Orbe das Realidades — conversa simbólica com ${state.channel.name}\n\n`+state.channel.messages.map(m=>`${m.role==="user"?"Você":state.channel.name}: ${m.text}`).join("\n\n")+`\n\nNota: experiência ficcional/simbólica; não é comunicação real com a pessoa nomeada.`;
  try{await navigator.clipboard.writeText(txt);toast("Conversa copiada")}catch{toast("Não foi possível copiar")}
 }
+
+
+const entitlement={plan:"free",status:"inactive",limits:{persona:0,tarot:0},usage:{persona:0,tarot:0}};
+function premiumActive(){return entitlement.status==="active"&&(entitlement.plan==="premium"||entitlement.plan==="suprema")}
+function remaining(kind){return Math.max(0,(entitlement.limits[kind]||0)-(entitlement.usage[kind]||0))}
+function updatePremiumUX(){
+  const nav=$("#navAccount");
+  if(nav){
+    const label=entitlement.plan==="suprema"?"Orbe Suprema":entitlement.plan==="premium"?"Orbe Premium":"Plano Livre";
+    nav.querySelector("b").textContent=label;
+    nav.querySelector(".plan-mini").textContent=premiumActive()?`IA ativa · ${remaining("persona")} chats / ${remaining("tarot")} tarots`:"IA premium opcional";
+  }
+  $("#channelPremiumBanner")?.classList.toggle("show",!premiumActive());
+  $("#readingsPremiumBanner")?.classList.toggle("show",!premiumActive());
+}
+function syncUsage(kind){
+  if(kind==="persona") entitlement.usage.persona++;
+  if(kind==="tarot") entitlement.usage.tarot++;
+  updatePremiumUX();
+}
+function apiBase(){return (ORBE_AI_ENDPOINT||"").replace(/\/$/,"")}
+function accessToken(){return localStorage.getItem("orbe-access-token")||""}
+function authHeaders(){let h={"Content-Type":"application/json"};let t=accessToken();if(t)h.Authorization=`Bearer ${t}`;return h}
+async function checkout(plan){
+ if(!apiBase()){toast("Primeiro conecte o backend seguro da Orbe.");return}
+ const email=prompt("Digite seu e-mail para a assinatura:");
+ if(!email)return;
+ try{
+  let r=await fetch(apiBase()+"/api/checkout",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({plan,email,return_url:location.origin+location.pathname})});
+  let d=await r.json();if(!r.ok)throw new Error(d.error||"Não foi possível abrir o pagamento.");
+  location.href=d.url;
+ }catch(e){toast(e.message||"Falha ao abrir assinatura")}
+}
+async function recoverCheckout(){
+ if(!apiBase())return;
+ let p=new URLSearchParams(location.search),sid=p.get("session_id");
+ if(!sid)return refreshSubscription();
+ try{
+  let r=await fetch(apiBase()+"/api/checkout-status?session_id="+encodeURIComponent(sid));
+  let d=await r.json();
+  if(r.ok&&d.token){localStorage.setItem("orbe-access-token",d.token);history.replaceState({},document.title,location.pathname);toast("Assinatura ativada ✦")}
+ }catch{}
+ refreshSubscription()
+}
+async function refreshSubscription(){
+ let title=$("#subscriptionTitle"),sub=$("#subscriptionSubtitle"),box=$("#subscriptionState");
+ if(!apiBase()||!accessToken()){
+  Object.assign(entitlement,{plan:"free",status:"inactive",limits:{persona:0,tarot:0},usage:{persona:0,tarot:0}});
+  title.textContent="Plano Livre";sub.textContent="IA premium não ativada neste aparelho";box.classList.remove("active");updatePremiumUX();return
+ }
+ try{
+  let r=await fetch(apiBase()+"/api/me",{headers:{Authorization:`Bearer ${accessToken()}`}});
+  let d=await r.json();
+  if(!r.ok)throw new Error();
+  Object.assign(entitlement,d);
+  title.textContent=d.plan==="suprema"?"Orbe Suprema":"Orbe Premium";sub.textContent=d.status==="active"?"Assinatura ativa":"Assinatura em atualização";box.classList.toggle("active",d.status==="active");
+  $("#personaUsage").textContent=`Persona IA: ${d.usage.persona}/${d.limits.persona}`;
+  $("#tarotUsage").textContent=`Tarot IA: ${d.usage.tarot}/${d.limits.tarot}`;
+  $("#manageSubscription").style.display="inline-flex";updatePremiumUX()
+ }catch{
+  Object.assign(entitlement,{plan:"free",status:"inactive",limits:{persona:0,tarot:0},usage:{persona:0,tarot:0}});
+  title.textContent="Plano Livre";sub.textContent="Sessão premium precisa ser revalidada";box.classList.remove("active");updatePremiumUX()
+ }
+}
+async function openPortal(){
+ if(!apiBase()||!accessToken())return;
+ try{let r=await fetch(apiBase()+"/api/portal",{method:"POST",headers:authHeaders(),body:"{}"});let d=await r.json();if(!r.ok)throw new Error(d.error);location.href=d.url}catch(e){toast(e.message||"Não foi possível abrir o portal")}
+}
 function stars(){let c=$("#stars"),x=c.getContext("2d"),a=[],w,h,d;function size(){d=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;c.width=w*d;c.height=h*d;x.setTransform(d,0,0,d,0,0);a=Array.from({length:Math.min(240,Math.floor(w*h/5800))},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.2+.2,o:Math.random()*.55+.15,s:Math.random()*.003+.001}))}function frame(t){x.clearRect(0,0,w,h);for(const z of a){x.beginPath();x.fillStyle=`rgba(235,238,255,${z.o*(.7+.3*Math.sin(t*z.s+z.x))})`;x.arc(z.x,z.y,z.r,0,7);x.fill()}requestAnimationFrame(frame)}addEventListener("resize",size,{passive:true});size();requestAnimationFrame(frame)}
 function parallax(){for(const s of $$(".orb-stage")){let o=s.querySelector(".orb");s.addEventListener("pointermove",e=>{let r=s.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;o.style.transform=`rotateX(${-py*9}deg) rotateY(${px*11}deg)`});s.addEventListener("pointerleave",()=>o.style.transform="")}}
-$$(".tab").forEach(b=>b.onclick=()=>setView(b.dataset.view));$$("[data-go]").forEach(b=>b.onclick=()=>setView(b.dataset.go));$("#drawBtn").onclick=draw;$("#drawOrb").onclick=draw;$("#shuffleBtn").onclick=()=>{resetPool();state.table=[];renderTable();toast("Baralho embaralhado")};$("#clearBtn").onclick=()=>{state.table=[];renderTable()};$("#search").oninput=renderDeck;$$(".filter").forEach(b=>b.onclick=()=>{$$(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");state.filter=b.dataset.filter;renderDeck()});$$("[data-guide]").forEach(b=>b.onclick=()=>guide(b.dataset.guide));$("#regenerateAnalysis").onclick=()=>buildAnalysis(true);$("#saveReading").onclick=saveReading;$("#shareReading").onclick=shareReading;$("#startChannel").onclick=startChannel;$("#sendChat").onclick=()=>sendChannel();$("#chatInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendChannel()}});$$("[data-quick]").forEach(b=>b.onclick=()=>sendChannel(b.dataset.quick));$("#exportChannel").onclick=exportChannel;$("#clearChannel").onclick=()=>{state.channel={name:"",relation:"",tone:"afetivo",intention:"",messages:[],turn:0};localStorage.removeItem("orbe-channel");$("#chatLog").innerHTML="";$("#channelName").value="";$("#channelRelation").value="";$("#channelIntention").value="";$("#channelTone").value="afetivo";$("#chatAvatar").textContent="✦";$("#channelTitle").textContent="Conversa ainda não aberta";$("#channelSub").textContent="Orbe aguardando contexto";$("#chatContext").textContent="A conversa mantém contexto no seu aparelho e usa uma carta diferente como arquétipo de cada resposta.";$("#chatInput").disabled=true;$("#sendChat").disabled=true;updateMemoryUI();toast("Nova conversa pronta")};$("#clearHistory").onclick=()=>{if(confirm("Apagar o Diário de Leituras deste navegador?")){state.history=[];localStorage.removeItem("orbe-history");renderHistory()}};document.body.addEventListener("click",e=>{let b=e.target.closest("[data-card]");if(b){let c=DECK.find(x=>x.id===b.dataset.card);if(c)showCard(c,b.dataset.rev==="1")}});$("#close").onclick=()=>$("#dialog").close();$("#year").textContent=new Date().getFullYear();
-resetPool();renderTable();renderDeck();loadHistory();restoreChannel();stars();parallax();detectImages();
+$$(".tab").forEach(b=>b.onclick=()=>setView(b.dataset.view));$$("[data-go]").forEach(b=>b.onclick=()=>setView(b.dataset.go));$("#drawBtn").onclick=draw;$("#drawOrb").onclick=draw;$("#shuffleBtn").onclick=()=>{resetPool();state.table=[];renderTable();toast("Baralho embaralhado")};$("#clearBtn").onclick=()=>{state.table=[];renderTable()};$("#search").oninput=renderDeck;$$(".filter").forEach(b=>b.onclick=()=>{$$(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");state.filter=b.dataset.filter;renderDeck()});$$("[data-guide]").forEach(b=>b.onclick=()=>guide(b.dataset.guide));$("#regenerateAnalysis").onclick=async()=>{if(ORBE_AI_ENDPOINT){$("#analysis").innerHTML=`<div class="analysis-grid"><section class="analysis-section full"><div class="eyebrow">NOVA CONCLUSÃO</div><p>A Orbe está reorganizando a leitura…</p></section></div>`;let ai=await callTarotAI();if(ai){$("#analysis").innerHTML=formatAIAnalysis(ai);state.analysis={html:$("#analysis").innerHTML,sig:"IA-"+Date.now().toString(36),intent:$("#intent").value.trim(),cards:state.guided.map(x=>({name:x.card.name,label:x.label,reversed:x.reversed}))};return}}buildAnalysis(true)};$("#saveReading").onclick=saveReading;$("#shareReading").onclick=shareReading;$("#startChannel").onclick=startChannel;$("#sendChat").onclick=()=>sendChannel();$("#chatInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendChannel()}});$$("[data-quick]").forEach(b=>b.onclick=()=>sendChannel(b.dataset.quick));$("#exportChannel").onclick=exportChannel;$("#clearChannel").onclick=()=>{state.channel={name:"",relation:"",tone:"afetivo",intention:"",messages:[],turn:0};localStorage.removeItem("orbe-channel");$("#chatLog").innerHTML="";$("#channelName").value="";$("#channelRelation").value="";$("#channelIntention").value="";$("#channelTone").value="afetivo";$("#chatAvatar").textContent="✦";$("#channelTitle").textContent="Conversa ainda não aberta";$("#channelSub").textContent="Orbe aguardando contexto";$("#chatContext").textContent="A conversa mantém contexto no seu aparelho e usa uma carta diferente como arquétipo de cada resposta.";$("#chatInput").disabled=true;$("#sendChat").disabled=true;updateMemoryUI();toast("Nova conversa pronta")};$("#clearHistory").onclick=()=>{if(confirm("Apagar o Diário de Leituras deste navegador?")){state.history=[];localStorage.removeItem("orbe-history");renderHistory()}};document.body.addEventListener("click",e=>{let b=e.target.closest("[data-card]");if(b){let c=DECK.find(x=>x.id===b.dataset.card);if(c)showCard(c,b.dataset.rev==="1")}});$("#close").onclick=()=>$("#dialog").close();$$("[data-checkout]").forEach(b=>b.onclick=()=>checkout(b.dataset.checkout));$("#manageSubscription").onclick=openPortal;$("#year").textContent=new Date().getFullYear();
+resetPool();renderTable();renderDeck();loadHistory();restoreChannel();stars();parallax();detectImages();recoverCheckout();updatePremiumUX();
+</script>
+
+<script>
+(function(){
+  const p=new URLSearchParams(location.search);
+  const api=p.get("api");
+  if(api){ localStorage.setItem("orbe-ai-endpoint",api.replace(/\/$/,"")); history.replaceState({},document.title,location.pathname); }
+})();
 </script>
 </body></html>

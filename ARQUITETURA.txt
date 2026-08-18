@@ -1,0 +1,44 @@
+ARQUITETURA DA ORBE DAS REALIDADES
+
+FRONTEND
+divinabruxa.com.br
+- Tarot local
+- 78 cartas
+- Diário
+- Persona local
+- Planos
+- Conta/estado premium
+
+BACKEND SEGURO
+Cloudflare Worker
+- Protege chaves
+- Verifica assinatura
+- Controla cotas
+- Controla orçamento
+- Chama OpenAI
+- Cria Checkout Stripe
+
+BANCO
+Cloudflare D1
+- Assinaturas
+- Uso mensal
+- Orçamento IA
+
+PAGAMENTOS
+Stripe
+- Premium
+- Suprema
+- Portal do cliente
+- Webhooks
+
+IA
+OpenAI
+- Luna para Persona
+- Terra para Tarot profundo
+
+FALLBACK
+Se IA acabar/parar:
+- Tarot local continua
+- Site continua
+- Diário continua
+- 78 cartas continuam

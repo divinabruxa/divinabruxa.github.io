@@ -1,0 +1,46 @@
+ORBE NEGÓCIO V2 — CHECKLIST DE LANÇAMENTO
+
+1. Site
+- Substituir o index.html atual pelo arquivo site/index.html
+- Confirmar divinabruxa.com.br funcionando
+- Confirmar 78 placeholders continuam aparecendo
+
+2. Backend Cloudflare
+- Criar conta Cloudflare
+- Criar Worker
+- Criar D1
+- Aplicar schema.sql
+- Cadastrar secrets
+
+3. OpenAI
+- Criar API key
+- Colocar crédito inicial baixo (US$ 5 ou US$ 10)
+- Salvar OPENAI_API_KEY somente como Secret no Worker
+- Manter MONTHLY_OPENAI_CAP_USD em 20 ou menos
+
+4. Stripe
+- Criar produto Orbe Premium R$ 19,90/mês
+- Criar produto Orbe Suprema R$ 39,90/mês
+- Salvar Price IDs como Secrets
+- Criar webhook
+- Testar Checkout em modo de teste antes de modo real
+
+5. Testes
+- Plano Livre: Tarot funciona mesmo sem IA
+- Premium: Persona IA funciona
+- Premium: Tarot IA funciona
+- Cota mensal decrementa
+- Ao atingir cota, volta para motor local
+- Portal de assinatura abre
+- Cancelamento muda status
+
+6. Antes de cobrar usuários reais
+- Política de Privacidade
+- Termos de Uso
+- Página de contato/suporte
+- Texto claro de que Persona IA é simulação
+- Política de reembolso conforme meio de pagamento/jurisdição
+
+7. App futuro
+- Não reutilizar automaticamente o checkout web dentro do app para conteúdo digital.
+- Planejar App Store / Google Play e compras in-app separadamente.
