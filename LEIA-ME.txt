@@ -1,0 +1,9 @@
+ORBE DAS REALIDADES — V15 CORRIGIDA
+
+1. Abra index.html para usar o app/site.
+2. NÃO abra app.js: ele é apenas parte do sistema.
+3. Abra VERIFICAR-CARTAS.html se quiser conferir as 78 artes.
+4. As cartas card-00.jpg até card-77.jpg foram reorganizadas usando as artes enviadas na conversa.
+5. A arte do Cavaleiro de Paus é a arte gerada anteriormente nesta mesma conversa, pois ela não estava entre o lote final de 77 imagens únicas.
+
+Esta versão mantém as tiragens inteligentes da V14 e corrige o baralho visual.

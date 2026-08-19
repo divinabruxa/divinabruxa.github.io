@@ -1,0 +1,626 @@
+[
+  {
+    "index": 0,
+    "name": "O Louco",
+    "file": "card-00.jpg",
+    "source": "267AE249-E3F3-46D3-87A3-E4E3CA88170D.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 1,
+    "name": "O Mago",
+    "file": "card-01.jpg",
+    "source": "006B624D-3F9A-4D4A-8DD9-61C982C7DE05.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 2,
+    "name": "A Sacerdotisa",
+    "file": "card-02.jpg",
+    "source": "4B262048-CF16-48B1-BF39-F41D4CE797A3.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 3,
+    "name": "A Imperatriz",
+    "file": "card-03.jpg",
+    "source": "DDA45553-162F-4077-A954-38958435910E.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 4,
+    "name": "O Imperador",
+    "file": "card-04.jpg",
+    "source": "7F021D36-5699-425C-A08C-7353C173B1D9.jpeg",
+    "width": 1024,
+    "height": 1535
+  },
+  {
+    "index": 5,
+    "name": "O Hierofante",
+    "file": "card-05.jpg",
+    "source": "9AB04D65-912C-4C86-AB06-6A399DDD0CA2.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 6,
+    "name": "Os Enamorados",
+    "file": "card-06.jpg",
+    "source": "F8C67561-7198-480D-AB0F-EE15015FB126.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 7,
+    "name": "O Carro",
+    "file": "card-07.jpg",
+    "source": "D38B1B78-B411-498B-8BDA-82506CCF9D20.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 8,
+    "name": "A Força",
+    "file": "card-08.jpg",
+    "source": "D548E0C6-9DAC-4EF4-9B4E-F9BF9426D02E.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 9,
+    "name": "O Eremita",
+    "file": "card-09.jpg",
+    "source": "2FB7BDFF-8B69-49D2-A9B7-90D5108D45FF.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 10,
+    "name": "A Roda da Fortuna",
+    "file": "card-10.jpg",
+    "source": "3EA04819-AC23-4D4A-97DB-9AE8BF0C21FF.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 11,
+    "name": "A Justiça",
+    "file": "card-11.jpg",
+    "source": "505D3CAE-1C91-4A71-AC41-54ED21181677.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 12,
+    "name": "O Enforcado",
+    "file": "card-12.jpg",
+    "source": "2A698B6C-47BA-4CD6-A718-93559A8A03F5.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 13,
+    "name": "A Morte",
+    "file": "card-13.jpg",
+    "source": "E140C902-919A-4F08-A2DD-14C479F160B4.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 14,
+    "name": "A Temperança",
+    "file": "card-14.jpg",
+    "source": "48AF6BBA-4673-426D-BCCC-4B9F886C5DE5.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 15,
+    "name": "O Diabo",
+    "file": "card-15.jpg",
+    "source": "0BE89388-5589-4335-A23F-15DA389CFCDF.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 16,
+    "name": "A Torre",
+    "file": "card-16.jpg",
+    "source": "FDCB841D-0EBD-42CA-8C8A-AC8ECEBD7E74.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 17,
+    "name": "A Estrela",
+    "file": "card-17.jpg",
+    "source": "F1DDAB1C-CCBE-4D19-BD71-4F8F36034044.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 18,
+    "name": "A Lua",
+    "file": "card-18.jpg",
+    "source": "321F911F-C571-4BE7-9E08-F1A65DC42BE0.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 19,
+    "name": "O Sol",
+    "file": "card-19.jpg",
+    "source": "E88768F3-F40E-48D4-B15C-2F1517A41623.jpeg",
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 20,
+    "name": "O Julgamento",
+    "file": "card-20.jpg",
+    "source": "A6B37098-0EC2-40B3-8321-2B2FEDBD1F33.jpeg",
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 21,
+    "name": "O Mundo",
+    "file": "card-21.jpg",
+    "source": "1F6DB188-6B31-4AC2-8403-5FE537016433.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 22,
+    "name": "Ás de Copas",
+    "file": "card-22.jpg",
+    "source": "0E01BC1C-CC72-4062-8927-D498C0589A8A.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 23,
+    "name": "2 de Copas",
+    "file": "card-23.jpg",
+    "source": "CC9F5D55-D39C-443E-98B3-B1CFF9A59385.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 24,
+    "name": "3 de Copas",
+    "file": "card-24.jpg",
+    "source": "A297E008-B01F-4984-A07C-BE881E08DFA1.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 25,
+    "name": "4 de Copas",
+    "file": "card-25.jpg",
+    "source": "A956B35A-CFE3-4653-A28C-27FF7CDB7A96.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 26,
+    "name": "5 de Copas",
+    "file": "card-26.jpg",
+    "source": "D230CED2-88CF-4069-98F8-33830346E3A2.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 27,
+    "name": "6 de Copas",
+    "file": "card-27.jpg",
+    "source": "A067EF72-4482-46D5-9A4E-BD8DE85BFAFB.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 28,
+    "name": "7 de Copas",
+    "file": "card-28.jpg",
+    "source": "8F1B2164-38A2-4AA8-BA0B-B307FC899D86.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 29,
+    "name": "8 de Copas",
+    "file": "card-29.jpg",
+    "source": "00A7B7C3-1601-49DE-85B2-52C424381C6C.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 30,
+    "name": "9 de Copas",
+    "file": "card-30.jpg",
+    "source": "50011B40-8F30-491D-865C-3F55A6C7DB32.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 31,
+    "name": "10 de Copas",
+    "file": "card-31.jpg",
+    "source": "96ECA58E-E0BA-495F-8791-04A04094C890.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 32,
+    "name": "Pajem de Copas",
+    "file": "card-32.jpg",
+    "source": "72CB2BB8-17DC-46BC-B463-AA918C94EE78.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 33,
+    "name": "Cavaleiro de Copas",
+    "file": "card-33.jpg",
+    "source": "CA4FF3A9-9D76-4FAC-AB8D-471054500A07.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 34,
+    "name": "Rainha de Copas",
+    "file": "card-34.jpg",
+    "source": "7D7949F2-0F16-4A1F-B8BE-8C4735927DEA.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 35,
+    "name": "Rei de Copas",
+    "file": "card-35.jpg",
+    "source": "0AE86C65-4D21-4303-857A-92A90C3FD01A.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 36,
+    "name": "Ás de Ouros",
+    "file": "card-36.jpg",
+    "source": "A2887CFA-4EDF-450D-92A0-2B252CAC0847.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 37,
+    "name": "2 de Ouros",
+    "file": "card-37.jpg",
+    "source": "DF6C4FDE-2E87-48B7-9381-0F0858A489F2.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 38,
+    "name": "3 de Ouros",
+    "file": "card-38.jpg",
+    "source": "611350D3-C1C7-4160-9DC3-37D1E8C89AEA.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 39,
+    "name": "4 de Ouros",
+    "file": "card-39.jpg",
+    "source": "26AD7573-3837-43F8-BC09-F561D3981E25.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 40,
+    "name": "5 de Ouros",
+    "file": "card-40.jpg",
+    "source": "33495B41-B78E-4A92-8F6D-39BD54CFB9B4.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 41,
+    "name": "6 de Ouros",
+    "file": "card-41.jpg",
+    "source": "5F127C01-7124-4C61-8CBA-EFF6680C9BF7.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 42,
+    "name": "7 de Ouros",
+    "file": "card-42.jpg",
+    "source": "5D6DB5A3-1ED0-4D3D-82E5-F4441D025815.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 43,
+    "name": "8 de Ouros",
+    "file": "card-43.jpg",
+    "source": "7DBE7EDE-E7B2-4788-9B03-17760776E545.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 44,
+    "name": "9 de Ouros",
+    "file": "card-44.jpg",
+    "source": "A27B4820-6EDC-408D-85EF-309E2B776AD6.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 45,
+    "name": "10 de Ouros",
+    "file": "card-45.jpg",
+    "source": "C3818869-18B5-405A-8FDC-BDD91A84F93B.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 46,
+    "name": "Pajem de Ouros",
+    "file": "card-46.jpg",
+    "source": "A194BECC-5F12-408E-B120-ECC921CCBD92.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 47,
+    "name": "Cavaleiro de Ouros",
+    "file": "card-47.jpg",
+    "source": "3A7F3991-C8F1-4F63-B91A-B8B4F5400F13.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 48,
+    "name": "Rainha de Ouros",
+    "file": "card-48.jpg",
+    "source": "94104A42-0462-441A-A77E-BAAEE86CAE6F.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 49,
+    "name": "Rei de Ouros",
+    "file": "card-49.jpg",
+    "source": "A8E3B007-1E2F-40B2-B3C5-CB2234156BD8.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 50,
+    "name": "Ás de Espadas",
+    "file": "card-50.jpg",
+    "source": "886A31C8-FBA5-45B5-BCA4-789ADAE02905.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 51,
+    "name": "2 de Espadas",
+    "file": "card-51.jpg",
+    "source": "E1AEBBCB-9CB5-4538-A922-30DC0148E43C.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 52,
+    "name": "3 de Espadas",
+    "file": "card-52.jpg",
+    "source": "A67AD51C-1713-42CA-BC0C-45C0E893FC1B.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 53,
+    "name": "4 de Espadas",
+    "file": "card-53.jpg",
+    "source": "C39EA8DF-2C7A-4CFB-85AD-F05E21054855.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 54,
+    "name": "5 de Espadas",
+    "file": "card-54.jpg",
+    "source": "04D00BC0-BF37-4324-AAA0-90314EE9DDAF.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 55,
+    "name": "6 de Espadas",
+    "file": "card-55.jpg",
+    "source": "01EC31D2-702E-4785-8CA4-FCD6EA53F13E.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 56,
+    "name": "7 de Espadas",
+    "file": "card-56.jpg",
+    "source": "EB9ADF1E-6D2A-4250-AE5A-5C58FA76D7A8.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 57,
+    "name": "8 de Espadas",
+    "file": "card-57.jpg",
+    "source": "BD205803-F030-448D-B5EF-3CC07DA2E30E.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 58,
+    "name": "9 de Espadas",
+    "file": "card-58.jpg",
+    "source": "AE81A7A2-D539-4858-B091-5E16AF1FF677.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 59,
+    "name": "10 de Espadas",
+    "file": "card-59.jpg",
+    "source": "ABD385B0-700F-4D48-A8E1-A295D69A86B3.jpeg",
+    "width": 1065,
+    "height": 1477
+  },
+  {
+    "index": 60,
+    "name": "Pajem de Espadas",
+    "file": "card-60.jpg",
+    "source": "B2D75745-0A2C-45E0-9D00-D74CF9170BE9.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 61,
+    "name": "Cavaleiro de Espadas",
+    "file": "card-61.jpg",
+    "source": "56850E2A-1AD2-4202-AB5F-68C85EA161B6.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 62,
+    "name": "Rainha de Espadas",
+    "file": "card-62.jpg",
+    "source": "EF8CEC34-48A0-4479-AF84-EE8BEE89AA18.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 63,
+    "name": "Rei de Espadas",
+    "file": "card-63.jpg",
+    "source": "3C123F2D-C7F8-46AA-ABF6-F2F5DCF2AD6A.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 64,
+    "name": "Ás de Paus",
+    "file": "card-64.jpg",
+    "source": "A4BFF425-B8D1-4513-BE30-5A19089D931B.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 65,
+    "name": "2 de Paus",
+    "file": "card-65.jpg",
+    "source": "47CF7622-EDA0-4305-A542-5F491CBD59EF.jpeg",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "index": 66,
+    "name": "3 de Paus",
+    "file": "card-66.jpg",
+    "source": "2C6D2325-FF4A-4AD9-BDD3-AC8EAD8A84EA.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 67,
+    "name": "4 de Paus",
+    "file": "card-67.jpg",
+    "source": "AEA466B9-7623-4A00-A1BF-88ABE05CC7B8.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 68,
+    "name": "5 de Paus",
+    "file": "card-68.jpg",
+    "source": "1FF34330-AE35-4E9E-8A73-A532C982E2A9.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 69,
+    "name": "6 de Paus",
+    "file": "card-69.jpg",
+    "source": "8D51BE4B-A7C2-436F-BDE8-7ECFE7D38C14.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 70,
+    "name": "7 de Paus",
+    "file": "card-70.jpg",
+    "source": "622B5983-C3AF-444D-8BCE-A136368CCCB9.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 71,
+    "name": "8 de Paus",
+    "file": "card-71.jpg",
+    "source": "3B289F67-F612-4B90-BCE5-9C05B38D9ED1.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 72,
+    "name": "9 de Paus",
+    "file": "card-72.jpg",
+    "source": "52F08DFC-8B4F-4857-ABD8-B4A6F2206218.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 73,
+    "name": "10 de Paus",
+    "file": "card-73.jpg",
+    "source": "07A1FE66-29F0-4057-B25D-FA5F957BD0F8.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 74,
+    "name": "Pajem de Paus",
+    "file": "card-74.jpg",
+    "source": "C417D429-32DA-4418-82E1-2AC146102F98.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 75,
+    "name": "Cavaleiro de Paus",
+    "file": "card-75.jpg",
+    "source": "a_dramatic_richly_detailed_fantasy_illustration_s.png",
+    "width": 1023,
+    "height": 1537
+  },
+  {
+    "index": 76,
+    "name": "Rainha de Paus",
+    "file": "card-76.jpg",
+    "source": "AD2A09A2-F289-4FE6-8DB7-0E97D3339381.jpeg",
+    "width": 1022,
+    "height": 1536
+  },
+  {
+    "index": 77,
+    "name": "Rei de Paus",
+    "file": "card-77.jpg",
+    "source": "9DC05EA8-53A8-4F06-846C-5211EE185B08.jpeg",
+    "width": 1022,
+    "height": 1536
+  }
+]
