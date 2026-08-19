@@ -1,24 +1,16 @@
-ORBE VIVA 13.0 — FINAL
+ORBE DAS REALIDADES — VERSÃO PLANA PARA GITHUB PAGES
 
-ARQUIVOS
-- index.html
-- js/orbe-tarot.js
-- js/orbe-mesa.js
-- js/orbe-biblioteca.js
-- js/orbe-tiragens.js
-- js/orbe-diario.js
-- js/orbe-ia.js
-- js/orbe-negocio.js
-- js/orbe-admin.js
-- CNAME
-- .nojekyll
+Envie estes 5 arquivos para a RAIZ do repositório:
+1. index.html
+2. tarot-atlas.webp
+3. manifest.webmanifest
+4. sw.js
+5. icone.svg
 
-IMPORTANTE
-- Não apague as imagens de Tarot que já existem no seu repositório.
-- O carregador procura as imagens antigas e os nomes oficiais.
-- A IA real exige backend seguro; sem backend, a Orbe usa o modo local.
-- O Administrador desta versão estática guarda alterações neste aparelho.
-- Nenhuma chave de OpenAI/Stripe deve ser colocada no HTML ou JavaScript.
-- O álbum Sobre as Estrelas está configurado.
-- O álbum Z fica preparado até receber o link exato do Spotify.
-- Esta versão não registra service worker, reduzindo risco de cache de versões antigas.
+Não crie pastas. O arquivo tarot-atlas.webp contém as 78 cartas.
+
+No GitHub: Settings > Pages > Deploy from a branch > main > /(root) > Save.
+
+Depois de publicar, abra o endereço do GitHub Pages no Safari. No iPhone, toque em Compartilhar > Adicionar à Tela de Início.
+
+O painel Administração salva links somente no aparelho/navegador. Não coloque senhas nem chaves secretas.

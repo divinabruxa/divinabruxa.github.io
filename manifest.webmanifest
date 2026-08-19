@@ -1,11 +1,1 @@
-{
-  "name": "Orbe das Realidades — Orbe Viva 12.0",
-  "short_name": "Orbe Viva",
-  "start_url": "./?v=12",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#07040a",
-  "theme_color": "#07040a",
-  "lang": "pt-BR",
-  "description": "Orbe viva fluida, Tarot, tiragens, canalização simbólica, música, consultas, loja e painel."
-}
+{"name":"Orbe das Realidades","short_name":"Orbe","description":"Tarot da Divina Bruxa","start_url":"./","display":"standalone","background_color":"#050308","theme_color":"#08050d","lang":"pt-BR","icons":[{"src":"icone.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
