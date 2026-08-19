@@ -1,2 +1,4 @@
-ORBE VIVA 11.0
-Build leve, sem canvas, sem bibliotecas externas, sem cache persistente.
+ORBE VIVA 12.0
+Fluid Light Engine
+Compatibilidade de imagens: card-00.jpg…card-77.jpg + assets/cards/*.jpg/png/jpeg
+Sem canvas. Sem bibliotecas externas. Carregamento progressivo de cartas.

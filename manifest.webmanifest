@@ -1,11 +1,11 @@
 {
-  "name": "Orbe das Realidades — Orbe Viva 11.0",
+  "name": "Orbe das Realidades — Orbe Viva 12.0",
   "short_name": "Orbe Viva",
-  "start_url": "./?v=11",
+  "start_url": "./?v=12",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#08050b",
-  "theme_color": "#08050b",
+  "background_color": "#07040a",
+  "theme_color": "#07040a",
   "lang": "pt-BR",
-  "description": "Tarot, tiragens, Orbe conversável, canalização simbólica, consultas, loja e diário."
+  "description": "Orbe viva fluida, Tarot, tiragens, canalização simbólica, música, consultas, loja e painel."
 }

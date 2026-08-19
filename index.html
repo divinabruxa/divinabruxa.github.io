@@ -3,379 +3,409 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<meta name="theme-color" content="#08050b">
+<meta name="theme-color" content="#07040a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-<title>Orbe das Realidades — Orbe Viva 11.0</title>
-<link rel="manifest" href="manifest.webmanifest?v=11">
+<title>Orbe das Realidades — Orbe Viva 12.0</title>
+<link rel="manifest" href="manifest.webmanifest?v=12">
 <style>
 :root{
-  --bg:#08050b;--bg2:#120817;--panel:#140b19;--panel2:#1c0d23;
-  --line:#4f3844;--line2:#2e202f;--gold:#f0cc73;--cream:#fff9ec;
-  --muted:#baaebf;--purple:#8c3fd1;--violet:#4a176c;--ok:#9de2c2;
-  --orbX:0px;--orbY:0px;
+  --bg:#07040a;--bg2:#100615;--ink:#fffaf0;--muted:#b9aebe;--gold:#f4d27c;
+  --violet:#8f43d6;--violet2:#431358;--line:rgba(238,202,126,.23);
+  --glass:rgba(18,8,24,.78);--glass2:rgba(31,12,40,.7);
+  --px:0;--py:0;--p1x:0px;--p1y:0px;--p2x:0px;--p2y:0px;--p3x:0px;--p3y:0px;
+  --orb-scale:1;--ambient:265;
 }
 *{box-sizing:border-box}
 html{background:var(--bg);scroll-behavior:smooth}
 body{
-  margin:0;min-height:100vh;color:var(--cream);
-  background:
-    radial-gradient(900px 520px at 50% -120px,rgba(87,28,122,.32),transparent 70%),
-    linear-gradient(180deg,#0b060f 0%,#08050b 70%);
+  margin:0;min-height:100vh;color:var(--ink);overflow-x:hidden;
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
-  overscroll-behavior-y:none;
+  background:
+    radial-gradient(760px 520px at 50% -160px,hsla(var(--ambient),75%,40%,.24),transparent 72%),
+    linear-gradient(180deg,#0b0510 0%,#07040a 60%,#030205 100%);
+  transition:background .65s ease;
 }
 button,input,textarea,select{font:inherit}
 button{color:inherit}
-button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 a{color:inherit;text-decoration:none}
 [hidden]{display:none!important}
+button,.tap{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{
+  outline:2px solid var(--gold);outline-offset:2px
+}
+.shell{width:min(100%,860px);margin:auto}
 header{
-  position:sticky;top:0;z-index:40;
-  padding:calc(12px + env(safe-area-inset-top)) 16px 12px;
-  background:rgba(8,5,11,.86);backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(255,255,255,.06);
+  position:sticky;top:0;z-index:50;
+  padding:calc(10px + env(safe-area-inset-top)) 14px 10px;
+  background:linear-gradient(180deg,rgba(7,4,10,.94),rgba(7,4,10,.70));
+  backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.05)
 }
-.header-row{max-width:820px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.head{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .brand{min-width:0}
-.brand strong{display:block;font-family:Georgia,"Times New Roman",serif;font-size:20px;letter-spacing:.035em}
-.brand small{display:block;margin-top:2px;color:#b8a9ba;font-size:10px;letter-spacing:.27em}
+.brand strong{display:block;font:700 20px/1 Georgia,"Times New Roman",serif;letter-spacing:.045em}
+.brand small{display:block;margin-top:4px;color:#b8a8bd;font-size:9.5px;letter-spacing:.26em}
 .version{color:var(--gold)}
-.text-btn,.pill,.primary,.ghost,.danger{
-  border:1px solid var(--line);background:#150b1b;color:var(--cream);
-  border-radius:999px;padding:12px 16px;font-weight:750;min-height:44px;
-  touch-action:manipulation;-webkit-tap-highlight-color:transparent
+.glass-btn,.primary,.soft,.danger{
+  border:1px solid var(--line);border-radius:999px;background:rgba(21,10,27,.72);
+  color:var(--ink);min-height:44px;padding:11px 16px;font-weight:800;
 }
-.text-btn{padding:9px 15px;background:#100914}
-.primary{border:0;background:linear-gradient(135deg,#c79825,#ffe69a);color:#1c1100}
-.ghost{background:transparent}
-.danger{color:#ffc6c6;border-color:#744040;background:#1a0d11}
-main{max-width:820px;margin:auto;padding:16px 14px 110px}
+.primary{border:0;background:linear-gradient(135deg,#b98522,#ffe79c);color:#160d00}
+.soft{background:rgba(255,255,255,.035)}
+.danger{color:#ffd0d0;border-color:#7a4242;background:#1a0b10}
+main{padding:12px 12px 120px}
 .view{display:none}
-.view.active{display:block;animation:appear .18s ease both}
-@keyframes appear{from{opacity:.25;transform:translateY(3px)}to{opacity:1;transform:none}}
-.hero,.panel{
-  border:1px solid var(--line);
-  background:linear-gradient(155deg,rgba(31,13,39,.97),rgba(12,7,15,.98));
-  border-radius:28px;
-}
-.hero{padding:30px 22px}
-.eyebrow{color:var(--gold);font-size:11px;letter-spacing:.22em;font-weight:850;text-transform:uppercase}
-h1,h2,h3{margin-top:0}
-h1{font:clamp(48px,14vw,86px)/.88 Georgia,"Times New Roman",serif;margin:18px 0}
-h1 i{font-weight:400}
-h2{font:clamp(34px,9vw,54px)/1 Georgia,"Times New Roman",serif;margin:10px 0 12px}
-h3{font:26px/1.1 Georgia,"Times New Roman",serif;margin:8px 0}
-.lead{font-size:17px;line-height:1.58;color:#d5cad8}
+.view.active{display:block;animation:viewIn .2s ease both}
+@keyframes viewIn{from{opacity:.2;transform:translateY(3px)}to{opacity:1;transform:none}}
+.eyebrow{font-size:10.5px;font-weight:900;letter-spacing:.25em;color:var(--gold);text-transform:uppercase}
+h1,h2,h3{margin:0}
+h1{font:clamp(48px,14vw,88px)/.9 Georgia,"Times New Roman",serif;letter-spacing:-.025em}
+h2{font:clamp(38px,10vw,58px)/.96 Georgia,"Times New Roman",serif;letter-spacing:-.02em}
+h3{font:26px/1.05 Georgia,"Times New Roman",serif}
+.lead{color:#d7cddd;font-size:17px;line-height:1.58}
+.small{color:#a99daf;font-size:12px;line-height:1.48}
 .muted{color:var(--muted)}
-.small{font-size:12px;color:#a99cac;line-height:1.45}
-.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
-.panel{padding:20px;margin-top:14px}
-.stats,.grid2,.service-grid,.store-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.stat,.mini,.service,.product{
-  border:1px solid var(--line2);background:#110815;border-radius:19px;padding:16px;
+.panel{
+  border:1px solid var(--line);border-radius:28px;padding:20px;margin-top:14px;
+  background:linear-gradient(155deg,rgba(29,12,37,.82),rgba(10,6,13,.92));
 }
-.stat b{font:28px Georgia,serif;color:var(--gold)}
-.stat span{display:block;color:#aa9daf;font-size:11px;margin-top:4px}
-
-/* ORBE — no filters, no canvas, no square layers */
-.orb-stage{
-  min-height:455px;display:grid;place-items:center;overflow:hidden;
-  position:relative;contain:layout paint style;
-}
-.orb-wrap{position:relative;width:min(76vw,330px);aspect-ratio:1;display:grid;place-items:center}
-.orb-wrap::before,.orb-wrap::after{
-  content:"";position:absolute;border-radius:50%;pointer-events:none;
-  border:1px solid rgba(224,192,255,.18)
-}
-.orb-wrap::before{inset:-27px;animation:orbitSlow 14s linear infinite}
-.orb-wrap::after{inset:-54px;border-color:rgba(240,204,115,.12);animation:orbitSlow 22s linear reverse infinite}
-@keyframes orbitSlow{to{transform:rotate(360deg)}}
-.orb-dot{
-  position:absolute;width:8px;height:8px;border-radius:50%;background:#fff8dc;
-  top:-31px;left:54%;box-shadow:0 0 14px rgba(255,244,198,.8);pointer-events:none
-}
-.orb{
-  position:relative;width:100%;aspect-ratio:1;border:1px solid rgba(240,204,115,.72);
-  border-radius:50%;overflow:hidden;clip-path:circle(50% at 50% 50%);
-  background:#0c0710;padding:0;
-  box-shadow:0 0 0 9px rgba(137,58,195,.08),0 0 48px rgba(123,42,190,.38);
-  touch-action:none;-webkit-tap-highlight-color:transparent;
-  transform:translate3d(0,0,0);will-change:transform;
-}
-.orb-surface{
-  position:absolute;inset:-14%;border-radius:50%;
-  background:
-    radial-gradient(circle at calc(56% + var(--gx,0%)) calc(40% + var(--gy,0%)),rgba(238,255,255,.98) 0 1.6%,rgba(85,238,255,.95) 3%,rgba(76,75,255,.35) 10%,transparent 22%),
-    radial-gradient(circle at 31% 71%,rgba(255,245,128,.96) 0 3%,rgba(255,137,99,.72) 9%,transparent 26%),
-    radial-gradient(circle at 74% 69%,rgba(255,83,214,.88) 0 5%,rgba(150,39,211,.48) 15%,transparent 31%),
-    radial-gradient(circle at 48% 44%,rgba(117,74,255,.78),rgba(44,19,66,.96) 47%,#09060d 76%);
-  transform:translate3d(var(--orbX),var(--orbY),0) scale(1.08);
-  transition:transform .18s cubic-bezier(.2,.8,.2,1);
-  animation:orbBreathe 5.8s ease-in-out infinite alternate;
-  will-change:transform;
-}
-.orb-glass{
-  position:absolute;inset:0;border-radius:50%;pointer-events:none;
-  background:
-    radial-gradient(circle at 32% 23%,rgba(255,255,255,.42),rgba(255,255,255,.08) 11%,transparent 25%),
-    radial-gradient(circle at 50% 120%,rgba(244,206,115,.14),transparent 42%);
-}
-@keyframes orbBreathe{
-  0%{scale:1.01}
-  100%{scale:1.045}
-}
-.orb.is-listening{box-shadow:0 0 0 10px rgba(129,59,198,.14),0 0 62px rgba(151,67,231,.62)}
-.orb.is-speaking .orb-surface{animation-duration:1.7s}
-.orb-caption{margin-top:43px;text-align:center;color:#d9bceb;letter-spacing:.26em;font-size:11px;text-transform:uppercase}
-.orb-message{margin-top:14px;text-align:center;color:#dfd2e3;line-height:1.5;min-height:48px}
-
-/* navigation: text only */
-.bottom{
-  position:fixed;z-index:35;left:50%;transform:translateX(-50%);
-  bottom:max(8px,env(safe-area-inset-bottom));width:min(calc(100% - 18px),780px);
-  padding:6px;display:grid;grid-template-columns:repeat(5,1fr);gap:4px;
-  background:rgba(9,5,12,.91);backdrop-filter:blur(18px);
-  border:1px solid #4d3742;border-radius:22px;
-}
-.nav{
-  min-width:0;border:0;background:transparent;color:#a99eac;border-radius:16px;
-  padding:12px 5px;font-weight:720;font-size:12px;white-space:nowrap;
-  touch-action:manipulation;-webkit-tap-highlight-color:transparent
-}
-.nav.active{color:#fff;background:linear-gradient(135deg,#59227d,#32123f)}
-.nav-more{color:var(--gold)}
-
-/* menu */
-.sheet{
-  position:fixed;inset:0;z-index:70;background:rgba(5,3,7,.56);backdrop-filter:blur(10px);
-  display:grid;align-items:end;padding:12px
-}
-.sheet-card{
-  width:min(100%,760px);margin:0 auto;border:1px solid var(--line);border-radius:28px;
-  background:#100814;padding:18px;max-height:78vh;overflow:auto
-}
-.menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:14px}
-.menu-item{border:1px solid #3f2e43;border-radius:16px;background:#160b1b;padding:16px;text-align:left;font-weight:760}
-.menu-item small{display:block;color:#a99bac;font-weight:500;margin-top:3px}
-
-/* tarot */
-.tarot-layout{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:12px}
-.draw-orb{min-height:330px}
-.draw-orb .orb-wrap{width:min(54vw,225px)}
-.table{min-height:250px}
-.draw-card{display:grid;grid-template-columns:110px 1fr;gap:14px;align-items:start}
-.draw-card img,.spread-card img,.library-card img{
-  width:100%;display:block;background:#0c0710;border-radius:14px;border:1px solid #4d374d;
-  object-fit:cover;aspect-ratio:.66
-}
-.img-fallback{
-  display:grid;place-items:center;text-align:center;width:100%;aspect-ratio:.66;
-  border:1px solid #4d374d;border-radius:14px;background:linear-gradient(150deg,#3a164f,#100813);
-  color:#ead7ef;padding:10px;font-family:Georgia,serif
-}
-.orientation{display:inline-block;margin-top:6px;padding:5px 8px;border-radius:999px;background:#2b1635;color:#d8bfe1;font-size:11px}
-.spread-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:14px}
-.spread-card{border:1px solid #33243a;background:#100814;border-radius:16px;padding:8px}
-.spread-card b{display:block;font-family:Georgia,serif;margin-top:8px}
-.reading{margin-top:14px;border:1px solid #3b2a42;background:#0f0813;border-radius:18px;padding:17px;line-height:1.58;color:#d8cddc}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.grid2,.service-grid,.store-grid,.admin-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .field{
-  width:100%;border:1px solid #49354f;background:#0d0711;color:#fff;border-radius:15px;
-  padding:13px 14px;margin:6px 0;min-height:46px
+  width:100%;min-height:46px;margin:6px 0;padding:13px 14px;border-radius:15px;
+  border:1px solid rgba(236,203,126,.22);background:#0c0710;color:#fff
 }
 textarea.field{resize:vertical}
 select.field{appearance:none}
-.filters{display:flex;gap:7px;overflow:auto;padding:2px 0 8px;scrollbar-width:none}
-.filters::-webkit-scrollbar{display:none}
-.filter{white-space:nowrap;border:1px solid #3b2c40;background:#130a17;color:#b8aabd;border-radius:999px;padding:9px 12px}
-.filter.active{background:#4f1d70;color:#fff}
-.library-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:10px}
-.library-card{border:1px solid #34243a;background:#100813;border-radius:16px;padding:7px;text-align:left}
-.library-card b{display:block;font-family:Georgia,serif;margin:8px 3px 4px}
-.library-card small{display:block;color:#a99bac;margin:0 3px 5px}
 
-/* chat */
-.chat-shell{display:grid;grid-template-columns:.72fr 1.28fr;gap:12px}
-.chat-log{
-  height:min(54vh,520px);overflow:auto;padding:8px;border-radius:18px;
-  background:#0b0610;border:1px solid #2f2135;scrollbar-width:thin
+/* ---------- HERO: ORBE É O DESTAQUE ---------- */
+.home-hero{
+  min-height:calc(100svh - 94px);display:grid;align-content:center;justify-items:center;text-align:center;
+  padding:12px 0 18px;position:relative
 }
-.bubble{max-width:88%;padding:11px 13px;border-radius:17px;margin:8px 0;line-height:1.47}
-.bubble.me{margin-left:auto;background:#54217a}
-.bubble.orbe{background:#1b1020;border:1px solid #3c2b41}
-.bubble .who{font-size:10px;letter-spacing:.12em;color:#c8aadd;margin-bottom:4px}
+.home-copy{max-width:660px;position:relative;z-index:4}
+.home-copy h1{margin:12px 0 10px}
+.home-copy .lead{max-width:580px;margin:0 auto}
+.home-orb{margin:12px auto 4px}
+
+/* ---------- ORBE FLUIDA: só transform/opacity no movimento ---------- */
+.orb-stage{
+  position:relative;width:min(82vw,430px);aspect-ratio:1;display:grid;place-items:center;
+  contain:layout paint style;isolation:isolate
+}
+.orbit,.orbit2,.orbit3{
+  position:absolute;border-radius:50%;pointer-events:none;border:1px solid rgba(226,190,255,.16)
+}
+.orbit{inset:-10%;animation:orbit 15s linear infinite}
+.orbit2{inset:-19%;border-color:rgba(244,210,124,.11);animation:orbit 24s linear reverse infinite}
+.orbit3{inset:-29%;border-color:rgba(165,101,215,.08);animation:orbit 33s linear infinite}
+.orbit:after,.orbit2:after{
+  content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:#fff6d7;
+  box-shadow:0 0 18px #fff7;top:-4px;left:55%
+}
+@keyframes orbit{to{transform:rotate(360deg)}}
+.living-orb{
+  width:100%;aspect-ratio:1;border-radius:50%;border:1px solid rgba(244,210,124,.74);
+  position:relative;overflow:hidden;isolation:isolate;background:#030207;padding:0;
+  clip-path:circle(49.9% at 50% 50%);
+  box-shadow:0 0 0 8px rgba(118,46,166,.08),0 0 34px rgba(118,42,172,.42),0 0 90px rgba(75,23,112,.25);
+  transform:translateZ(0) scale(var(--orb-scale));will-change:transform;
+}
+.liquid{
+  position:absolute;border-radius:50%;will-change:transform,opacity;pointer-events:none
+}
+.l1{
+  width:74%;height:74%;left:2%;top:1%;
+  background:radial-gradient(circle at 36% 34%,#ffffff 0 3%,#9ffcff 8%,#6b64ff 22%,rgba(133,62,239,.8) 42%,transparent 68%);
+  transform:translate3d(var(--p1x),var(--p1y),0) rotate(8deg);opacity:.98;
+  animation:float1 7.2s ease-in-out infinite alternate
+}
+.l2{
+  width:78%;height:78%;right:-5%;bottom:-7%;
+  background:radial-gradient(circle at 50% 48%,#ffd983 0 4%,#ff7e9e 12%,#e83ad6 28%,rgba(106,34,178,.85) 48%,transparent 69%);
+  transform:translate3d(var(--p2x),var(--p2y),0) rotate(-12deg);opacity:.9;
+  animation:float2 8.7s ease-in-out infinite alternate
+}
+.l3{
+  width:68%;height:68%;right:-12%;top:10%;
+  background:radial-gradient(circle at 43% 42%,#c7ffff 0 3%,#49e6ff 10%,#3458ff 27%,rgba(59,16,126,.72) 53%,transparent 70%);
+  transform:translate3d(var(--p3x),var(--p3y),0);opacity:.82;
+  animation:float3 9.4s ease-in-out infinite alternate
+}
+.l4{
+  inset:8%;border-radius:47% 53% 55% 45% / 48% 43% 57% 52%;
+  background:conic-gradient(from 40deg,rgba(61,215,255,.12),rgba(255,74,212,.20),rgba(255,222,122,.17),rgba(65,79,255,.16),rgba(61,215,255,.12));
+  animation:waterTurn 15s linear infinite;opacity:.9
+}
+.orb-shade{
+  position:absolute;inset:0;border-radius:50%;pointer-events:none;z-index:4;
+  background:
+    radial-gradient(circle at 31% 22%,rgba(255,255,255,.48),rgba(255,255,255,.10) 9%,transparent 25%),
+    radial-gradient(circle at 68% 76%,transparent 0 44%,rgba(0,0,0,.42) 75%,rgba(0,0,0,.74) 100%);
+}
+.orb-ripple{
+  position:absolute;inset:38%;border-radius:50%;z-index:5;border:1px solid rgba(255,255,255,.58);
+  opacity:0;pointer-events:none
+}
+.living-orb.touched .orb-ripple{animation:ripple .72s ease-out}
+.living-orb.listening{box-shadow:0 0 0 9px rgba(131,66,188,.16),0 0 52px rgba(128,58,211,.72),0 0 120px rgba(60,195,255,.18)}
+.living-orb.speaking .l4{animation-duration:4s}
+@keyframes float1{to{transform:translate3d(calc(var(--p1x) + 12px),calc(var(--p1y) + 8px),0) rotate(19deg) scale(1.04)}}
+@keyframes float2{to{transform:translate3d(calc(var(--p2x) - 10px),calc(var(--p2y) - 12px),0) rotate(-3deg) scale(1.05)}}
+@keyframes float3{to{transform:translate3d(calc(var(--p3x) + 8px),calc(var(--p3y) - 8px),0) scale(1.05)}}
+@keyframes waterTurn{to{transform:rotate(360deg)}}
+@keyframes ripple{0%{opacity:.8;inset:38%}100%{opacity:0;inset:2%}}
+.orb-caption{text-align:center;margin-top:40px;font-size:10px;color:#d5bce5;letter-spacing:.28em;text-transform:uppercase}
+.orb-answer{max-width:590px;margin:12px auto 0;min-height:48px;color:#d9cfe0;line-height:1.5}
+
+/* ---------- MENU NOVO ---------- */
+.menu-overlay{
+  position:fixed;inset:0;z-index:100;background:
+    radial-gradient(520px 420px at 50% 5%,rgba(118,40,166,.36),transparent 75%),
+    rgba(5,3,7,.94);
+  backdrop-filter:blur(20px);overflow:auto;padding:calc(18px + env(safe-area-inset-top)) 14px calc(24px + env(safe-area-inset-bottom))
+}
+.menu-shell{width:min(100%,760px);margin:auto}
+.menu-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.menu-title{font:48px/.95 Georgia,serif;margin:22px 0 8px}
+.menu-sub{color:#b9aebe;line-height:1.5}
+.menu-list{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:20px}
+.menu-card{
+  min-height:112px;text-align:left;border:1px solid rgba(244,210,124,.20);border-radius:22px;
+  background:linear-gradient(145deg,rgba(35,13,44,.78),rgba(11,6,14,.9));padding:17px
+}
+.menu-card b{display:block;font:22px Georgia,serif}
+.menu-card small{display:block;color:#ae9fb2;margin-top:7px;line-height:1.35}
+.menu-card.featured{background:linear-gradient(145deg,rgba(80,27,112,.88),rgba(19,7,26,.92));border-color:rgba(244,210,124,.38)}
+.quick-dock{
+  position:fixed;z-index:45;left:50%;transform:translateX(-50%);
+  bottom:max(8px,env(safe-area-inset-bottom));width:min(calc(100% - 18px),720px);
+  display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:4px;padding:6px;border-radius:999px;
+  background:rgba(8,4,11,.88);backdrop-filter:blur(18px);border:1px solid rgba(244,210,124,.21)
+}
+.quick-dock button{border:0;background:transparent;color:#c0b2c4;border-radius:999px;padding:12px 7px;font-weight:800}
+.quick-dock button.active{background:linear-gradient(135deg,#5d2484,#2e103d);color:#fff}
+.quick-dock .open-menu{color:var(--gold)}
+
+/* tarot */
+.tarot-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:12px}
+.tarot-orb{min-height:390px;display:grid;place-items:center}
+.tarot-orb .orb-stage{width:min(58vw,245px)}
+.reading-box{min-height:280px}
+.card-row{display:grid;grid-template-columns:118px 1fr;gap:15px}
+.card-row img,.spread-card img,.library-card img,.modal-image{
+  width:100%;aspect-ratio:.66;object-fit:cover;display:block;border-radius:14px;
+  border:1px solid rgba(244,210,124,.25);background:#0c0710
+}
+.placeholder{
+  width:100%;aspect-ratio:.66;border-radius:14px;border:1px solid rgba(244,210,124,.22);
+  display:grid;place-items:center;text-align:center;padding:10px;background:linear-gradient(155deg,#401555,#0e0712);font-family:Georgia,serif
+}
+.tag{display:inline-block;background:#2b1236;border-radius:999px;padding:5px 9px;color:#d6b8df;font-size:11px}
+.spread-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:12px}
+.spread-card{border:1px solid rgba(244,210,124,.18);border-radius:16px;background:#0d0711;padding:7px}
+.spread-card b{display:block;font-family:Georgia,serif;margin-top:7px}
+.interpretation{margin-top:12px;border:1px solid rgba(244,210,124,.18);border-radius:18px;background:#0d0711;padding:16px;line-height:1.55}
+.filters{display:flex;gap:7px;overflow:auto;scrollbar-width:none;padding:2px 0 8px}
+.filters::-webkit-scrollbar{display:none}
+.filter{white-space:nowrap;border:1px solid #3c2b41;background:#130a17;color:#b9abbc;border-radius:999px;padding:9px 12px}
+.filter.active{background:#572076;color:#fff}
+.library-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:10px}
+.library-card{border:1px solid rgba(244,210,124,.18);background:#0d0711;border-radius:16px;padding:7px;text-align:left}
+.library-card b{display:block;font-family:Georgia,serif;margin:8px 3px 4px}
+.library-card small{display:block;color:#aa9cac;margin:0 3px 4px}
+
+/* channel */
+.chat-layout{display:grid;grid-template-columns:.72fr 1.28fr;gap:12px}
+.chat-log{height:min(55vh,530px);overflow:auto;border:1px solid rgba(244,210,124,.16);border-radius:19px;padding:8px;background:#0b0610}
+.bubble{max-width:88%;padding:11px 13px;margin:8px 0;border-radius:18px;line-height:1.46}
+.bubble.me{margin-left:auto;background:#542076}
+.bubble.orbe{background:#1b0e21;border:1px solid #3a2940}
+.who{font-size:9px;letter-spacing:.16em;color:#c3a6d0;margin-bottom:4px}
 .compose{display:grid;grid-template-columns:1fr auto auto;gap:7px;margin-top:8px}
 .compose .field{margin:0}
-.voice-state{min-height:18px;margin-top:7px;color:#c3a8d4;font-size:11px}
 
-/* consultations / shop */
-.price{font:31px Georgia,serif;color:var(--gold);margin:8px 0}
-.service p,.product p{color:#bcafc0;line-height:1.45}
-.product-image{
-  aspect-ratio:1.45;border-radius:14px;background:
-  radial-gradient(circle at 30% 30%,rgba(236,198,115,.28),transparent 27%),
-  radial-gradient(circle at 70% 70%,rgba(129,55,191,.42),transparent 34%),
-  #0d0711;border:1px solid #322338;margin-bottom:12px
+/* music */
+.music-card{
+  position:relative;overflow:hidden;border:1px solid rgba(244,210,124,.22);border-radius:24px;
+  background:linear-gradient(145deg,#211027,#0d0711);padding:18px
 }
+.music-card h3{margin-top:3px}
+.album-frame{width:100%;height:152px;border:0;border-radius:16px;background:#0b0610;margin-top:12px}
+.music-drawer{
+  position:fixed;z-index:80;right:10px;bottom:82px;width:min(92vw,390px);
+  border:1px solid rgba(244,210,124,.25);border-radius:25px;background:rgba(10,5,13,.96);
+  backdrop-filter:blur(18px);padding:14px;box-shadow:0 25px 70px #0009
+}
+.music-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.music-fab{
+  position:fixed;z-index:46;right:12px;bottom:88px;border:1px solid rgba(244,210,124,.3);
+  border-radius:999px;background:rgba(27,10,34,.88);backdrop-filter:blur(14px);padding:10px 13px;
+  color:var(--gold);font-weight:850
+}
+.album-empty{height:152px;border:1px dashed #4a354e;border-radius:16px;display:grid;place-items:center;text-align:center;color:#aa9cac;padding:18px;margin-top:12px}
 
-/* admin */
-.admin-box{max-width:560px;margin:22px auto}
-.admin-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#13271f;color:var(--ok);font-size:11px}
-hr{border:0;border-top:1px solid #2e2032;margin:18px 0}
+/* services/store/admin */
+.service,.product,.stat{
+  border:1px solid rgba(244,210,124,.17);background:#0e0712;border-radius:20px;padding:16px
+}
+.price{font:31px Georgia,serif;color:var(--gold);margin:8px 0}
+.product-art{aspect-ratio:1.45;border-radius:15px;border:1px solid #36263b;background:
+  radial-gradient(circle at 25% 30%,rgba(244,210,124,.22),transparent 25%),
+  radial-gradient(circle at 75% 70%,rgba(140,59,204,.38),transparent 35%),#0c0710;margin-bottom:12px}
+.badge{display:inline-block;background:#13271f;color:#a3e4c4;border-radius:999px;padding:5px 9px;font-size:11px}
+.stat b{display:block;color:var(--gold);font:27px Georgia,serif}
+.stat span{display:block;color:#aa9daf;font-size:11px;margin-top:4px}
+hr{border:0;border-top:1px solid rgba(244,210,124,.15);margin:18px 0}
 
 /* modal */
-dialog{
-  width:min(calc(100% - 24px),640px);border:1px solid var(--line);border-radius:24px;
-  background:#0d0711;color:#fff;padding:0;box-shadow:0 30px 90px #000a
-}
-dialog::backdrop{background:#050307bb;backdrop-filter:blur(6px)}
-.modal-body{padding:18px}.modal-close{float:right}
+dialog{width:min(calc(100% - 22px),650px);border:1px solid rgba(244,210,124,.25);border-radius:25px;background:#0a050d;color:#fff;padding:0}
+dialog::backdrop{background:#030205d7;backdrop-filter:blur(8px)}
+.modal-body{padding:18px}
+.modal-image{max-width:420px;margin:12px auto}
 
-/* diagnostics */
-.health{display:flex;gap:8px;align-items:center;color:#b8aabd;font-size:12px}
-.health-dot{width:8px;height:8px;border-radius:50%;background:#9de2c2}
+/* suit ambience */
+body.suit-copas{--ambient:205}
+body.suit-paus{--ambient:5}
+body.suit-espadas{--ambient:220}
+body.suit-ouros{--ambient:92}
+body.suit-major{--ambient:274}
 
-/* responsive */
-@media(max-width:680px){
-  .tarot-layout,.chat-shell{grid-template-columns:1fr}
-  .draw-orb{min-height:300px}
-  .spread-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:690px){
+  .tarot-grid,.chat-layout{grid-template-columns:1fr}
   .library-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .hero{padding:27px 19px}
+  .spread-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .home-hero{min-height:calc(100svh - 84px)}
 }
-@media(max-width:420px){
-  main{padding-left:10px;padding-right:10px}
-  .panel{padding:17px}.hero{padding:25px 17px}
-  .orb-stage{min-height:400px}
-  .bottom{width:calc(100% - 12px)}
-  .nav{font-size:11px;padding:11px 3px}
-  .stats,.grid2,.service-grid,.store-grid,.admin-grid{grid-template-columns:1fr 1fr}
-  .draw-card{grid-template-columns:96px 1fr}
+@media(max-width:430px){
+  main{padding-left:9px;padding-right:9px}
+  .panel{padding:17px;border-radius:24px}
+  .menu-list{grid-template-columns:1fr 1fr}
+  .menu-card{min-height:105px;padding:14px}
+  .menu-card b{font-size:20px}
+  .grid2,.service-grid,.store-grid,.admin-grid{grid-template-columns:1fr 1fr}
+  .card-row{grid-template-columns:105px 1fr}
+  .orb-stage{width:min(84vw,350px)}
 }
 @media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none!important;scroll-behavior:auto!important;transition:none!important}
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
 </style>
 </head>
 <body>
 <header>
-  <div class="header-row">
-    <div class="brand"><strong>ORBE DAS REALIDADES</strong><small>ORBE VIVA <span class="version">11.0</span> · MOTOR LEVE</small></div>
-    <button class="text-btn" id="menuOpen">Menu</button>
+  <div class="shell head">
+    <div class="brand"><strong>ORBE DAS REALIDADES</strong><small>ORBE VIVA <span class="version">12.0</span> · FLUID LIGHT ENGINE</small></div>
+    <button class="glass-btn" id="menuOpen">Explorar</button>
   </div>
 </header>
 
-<main>
+<main class="shell">
+
 <section id="home" class="view active">
-  <article class="hero">
-    <div class="eyebrow">Divina Bruxa · reconstruída do zero</div>
-    <h1>Uma Orbe.<br><i>78 caminhos.</i></h1>
-    <p class="lead">Uma experiência viva de Tarot para celular: toque, voz, cartas, tiragens, canalização simbólica, consultas, loja, diário e painel administrativo — sem bibliotecas pesadas e sem efeitos que bloqueiam a tela.</p>
-    <div class="actions">
-      <button class="primary" data-go="orbe">Sentir a Orbe</button>
-      <button class="ghost" data-go="tarot">Tarot Livre</button>
-      <button class="ghost" data-go="readings">Abrir tiragem</button>
+  <div class="home-hero">
+    <div class="home-copy">
+      <div class="eyebrow">A experiência central</div>
+      <h1>Orbe das<br><i>Realidades</i></h1>
+      <p class="lead">Luz que se move como água. Toque, deslize e fale. A Orbe reage ao seu gesto e conduz o Tarot sem esconder a experiência atrás de menus.</p>
     </div>
-  </article>
-  <article class="panel">
-    <div class="stats">
-      <div class="stat"><b>78</b><span>cartas oficiais preservadas</span></div>
-      <div class="stat"><b>11.0</b><span>sem canvas e sem bibliotecas externas</span></div>
-      <div class="stat"><b>Voz</b><span>quando o navegador permitir</span></div>
-      <div class="stat"><b>IA</b><span>backend pronto para conectar depois</span></div>
+    <div class="orb-stage home-orb">
+      <span class="orbit"></span><span class="orbit2"></span><span class="orbit3"></span>
+      <button class="living-orb" data-orb="hero" aria-label="Interagir com a Orbe">
+        <span class="liquid l1"></span><span class="liquid l2"></span><span class="liquid l3"></span><span class="liquid l4"></span><span class="orb-shade"></span><span class="orb-ripple"></span>
+      </button>
     </div>
-  </article>
-  <article class="panel">
-    <div class="health"><span class="health-dot"></span><b>Modo desempenho ativo.</b> A biblioteca carrega as cartas aos poucos para não travar o iPhone.</div>
-  </article>
+    <div class="orb-caption" id="homeCaption">toque · deslize · sinta</div>
+    <div class="orb-answer" id="homeAnswer">A Orbe está aberta.</div>
+    <div class="actions" style="justify-content:center">
+      <button class="primary" data-go="tarot">Tirar uma carta</button>
+      <button class="soft" data-go="channel">Conversar com a Orbe</button>
+      <button class="soft" id="voiceHome">Falar</button>
+    </div>
+  </div>
 </section>
 
 <section id="orbe" class="view">
-  <div class="eyebrow">Orbe sensorial</div>
-  <h2>A Orbe está viva.</h2>
-  <article class="panel orb-stage">
-    <div>
-      <div class="orb-wrap">
-        <span class="orb-dot"></span>
-        <button class="orb" id="mainOrb" aria-label="Tocar na Orbe">
-          <span class="orb-surface"></span><span class="orb-glass"></span>
-        </button>
-      </div>
-      <div class="orb-caption" id="orbCaption">toque · mova · fale</div>
-      <div class="orb-message" id="orbMessage">Toque na esfera. Ela reage ao seu gesto sem usar animações pesadas.</div>
+  <div class="eyebrow">Orbe sensorial</div><h2>Ela responde ao seu gesto.</h2>
+  <article class="panel" style="text-align:center">
+    <div class="orb-stage" style="margin:auto">
+      <span class="orbit"></span><span class="orbit2"></span><span class="orbit3"></span>
+      <button class="living-orb" data-orb="main" aria-label="Interagir com a Orbe">
+        <span class="liquid l1"></span><span class="liquid l2"></span><span class="liquid l3"></span><span class="liquid l4"></span><span class="orb-shade"></span><span class="orb-ripple"></span>
+      </button>
     </div>
-  </article>
-  <article class="panel">
-    <div class="actions">
-      <button class="primary" id="orbListen">Falar com a Orbe</button>
-      <button class="ghost" id="orbSignal">Receber um sinal</button>
-      <button class="ghost" data-go="channel">Abrir conversa</button>
+    <div class="orb-caption" id="orbCaption">água · luz · movimento</div>
+    <div class="orb-answer" id="orbAnswer">Passe o dedo pela esfera. As camadas internas acompanham o movimento em direções diferentes.</div>
+    <div class="actions" style="justify-content:center">
+      <button class="primary" id="receiveSignal">Receber um sinal</button>
+      <button class="soft" id="listenOrb">Falar com a Orbe</button>
+      <button class="soft" id="toggleVoice">Voz: desligada</button>
     </div>
-    <div class="small">As mensagens da Orbe são reflexivas e simbólicas. Quando a IA real for conectada, a chave ficará somente no servidor.</div>
   </article>
 </section>
 
 <section id="tarot" class="view">
-  <div class="eyebrow">Tarot livre</div><h2>Toque e revele.</h2>
-  <div class="tarot-layout">
-    <article class="panel draw-orb">
-      <div class="orb-wrap" style="margin:20px auto;width:min(56vw,230px)">
-        <button class="orb" id="drawOrb" aria-label="Tirar uma carta"><span class="orb-surface"></span><span class="orb-glass"></span></button>
-      </div>
-      <div class="orb-caption" id="deckCaption">78 cartas restantes</div>
-      <div class="actions">
-        <button class="primary" id="drawButton">Tirar carta</button>
-        <button class="ghost" id="shuffleButton">Embaralhar</button>
-        <button class="ghost" id="clearTable">Limpar mesa</button>
+  <div class="eyebrow">Tarot livre</div><h2>Toque. A carta aparece.</h2>
+  <div class="tarot-grid">
+    <article class="panel tarot-orb">
+      <div>
+        <div class="orb-stage">
+          <span class="orbit"></span><span class="orbit2"></span>
+          <button class="living-orb" id="drawOrb" data-orb="draw" aria-label="Tirar carta">
+            <span class="liquid l1"></span><span class="liquid l2"></span><span class="liquid l3"></span><span class="liquid l4"></span><span class="orb-shade"></span><span class="orb-ripple"></span>
+          </button>
+        </div>
+        <div class="orb-caption" id="deckCount">78 cartas restantes</div>
+        <div class="actions" style="justify-content:center">
+          <button class="primary" id="drawButton">Tirar carta</button>
+          <button class="soft" id="shuffleButton">Embaralhar</button>
+        </div>
       </div>
     </article>
-    <article class="panel table">
-      <h3>Sua mesa</h3><p class="muted">A mesma carta não se repete até o baralho terminar.</p>
-      <div id="freeResult" class="reading">A Orbe está pronta.</div>
+    <article class="panel reading-box">
+      <h3>Sua mesa</h3><p class="small">Sem repetição até o baralho terminar.</p>
+      <div id="freeResult" class="interpretation">A Orbe está pronta.</div>
     </article>
   </div>
 </section>
 
 <section id="readings" class="view">
-  <div class="eyebrow">Tiragens guiadas</div><h2>Leituras profundas.</h2>
+  <div class="eyebrow">Tiragens</div><h2>Escolha a profundidade.</h2>
   <article class="panel">
-    <textarea class="field" id="readingIntent" rows="3" maxlength="260" placeholder="Escreva sua pergunta ou intenção…"></textarea>
+    <textarea id="readingIntent" class="field" rows="3" maxlength="260" placeholder="Escreva sua pergunta ou intenção…"></textarea>
     <div class="grid2">
-      <button class="mini" data-spread="one"><b>1 carta</b><div class="small">momento atual</div></button>
-      <button class="mini" data-spread="three"><b>3 cartas</b><div class="small">passado · presente · tendência</div></button>
-      <button class="mini" data-spread="choice"><b>Dois Caminhos</b><div class="small">comparação de direções</div></button>
-      <button class="mini" data-spread="love"><b>Amor</b><div class="small">dinâmica afetiva</div></button>
-      <button class="mini" data-spread="path"><b>Caminho</b><div class="small">5 posições</div></button>
-      <button class="mini" data-spread="cross"><b>Cruz Celta</b><div class="small">10 posições</div></button>
+      <button class="service" data-spread="one"><b>Carta do Momento</b><div class="small">1 carta</div></button>
+      <button class="service" data-spread="three"><b>Tempo</b><div class="small">passado · presente · tendência</div></button>
+      <button class="service" data-spread="choice"><b>Dois Caminhos</b><div class="small">4 posições</div></button>
+      <button class="service" data-spread="love"><b>Amor</b><div class="small">3 posições</div></button>
+      <button class="service" data-spread="path"><b>Caminho</b><div class="small">5 posições</div></button>
+      <button class="service" data-spread="cross"><b>Cruz Celta</b><div class="small">10 posições</div></button>
     </div>
     <div id="spreadArea"></div>
   </article>
 </section>
 
 <section id="channel" class="view">
-  <div class="eyebrow">Orbe conversável</div><h2>Canalização simbólica.</h2>
-  <div class="chat-shell">
+  <div class="eyebrow">Conversa da Orbe</div><h2>Uma presença simbólica.</h2>
+  <div class="chat-layout">
     <article class="panel">
-      <p class="lead">Crie uma voz ficcional e reflexiva inspirada pelo contexto que você fornecer. Não é contato real, leitura de mente ou acesso a sentimentos privados.</p>
-      <input id="channelName" class="field" maxlength="70" placeholder="Nome da pessoa ou arquétipo">
-      <input id="channelRelation" class="field" maxlength="80" placeholder="Relação ou contexto">
-      <textarea id="channelContext" class="field" rows="4" maxlength="300" placeholder="O que você quer trabalhar nessa conversa?"></textarea>
+      <p class="lead">A Orbe cria uma conversa ficcional e reflexiva baseada no contexto que você fornece. Ela não lê a mente nem representa mensagens reais de outra pessoa.</p>
+      <input id="channelName" class="field" placeholder="Nome da pessoa ou arquétipo">
+      <input id="channelRelation" class="field" placeholder="Relação ou contexto">
+      <textarea id="channelContext" class="field" rows="4" placeholder="O que você quer compreender?"></textarea>
       <button class="primary" id="startChannel">Abrir conversa</button>
-      <div class="small" style="margin-top:10px">Quando o backend de IA estiver conectado, esta mesma tela poderá usar respostas de IA com memória.</div>
+      <p class="small">Quando o backend de IA estiver conectado, esta mesma tela passa a usar IA real com memória da conversa.</p>
     </article>
     <article class="panel">
-      <div class="chat-log" id="chatLog"><div class="bubble orbe"><div class="who">ORBE</div>Estou aqui. Você pode escrever ou tocar em “Falar”.</div></div>
+      <div id="chatLog" class="chat-log"><div class="bubble orbe"><div class="who">ORBE</div>Estou aqui. Escreva ou toque em “Falar”.</div></div>
       <div class="compose">
-        <input id="chatInput" class="field" maxlength="280" placeholder="Mensagem…">
-        <button class="ghost" id="chatVoice">Falar</button>
+        <input id="chatInput" class="field" maxlength="300" placeholder="Mensagem…">
+        <button class="soft" id="chatVoice">Falar</button>
         <button class="primary" id="chatSend">Enviar</button>
       </div>
-      <div id="voiceState" class="voice-state"></div>
+      <div class="small" id="voiceState"></div>
     </article>
   </div>
 </section>
@@ -383,24 +413,37 @@ dialog::backdrop{background:#050307bb;backdrop-filter:blur(6px)}
 <section id="deck" class="view">
   <div class="eyebrow">Biblioteca sagrada</div><h2>As 78 Cartas.</h2>
   <article class="panel">
+    <div class="small" style="margin-bottom:8px"><b>12.0:</b> o carregador procura primeiro os nomes antigos <code>card-00.jpg…card-77.jpg</code> e também a pasta <code>assets/cards/</code>.</div>
     <input id="deckSearch" class="field" placeholder="Buscar carta…">
-    <div class="filters" id="deckFilters">
+    <div class="filters">
       <button class="filter active" data-filter="all">Todas</button>
       <button class="filter" data-filter="major">Maiores</button>
       <button class="filter" data-filter="copas">Copas</button>
-      <button class="filter" data-filter="espadas">Espadas</button>
       <button class="filter" data-filter="paus">Paus</button>
+      <button class="filter" data-filter="espadas">Espadas</button>
       <button class="filter" data-filter="ouros">Ouros</button>
     </div>
-    <div id="deckStatus" class="small">Carregando em blocos leves.</div>
-    <div class="library-grid" id="deckGrid"></div>
-    <div class="actions"><button class="ghost" id="loadMore">Carregar mais cartas</button></div>
+    <div id="deckStatus" class="small">Carregamento progressivo.</div>
+    <div id="deckGrid" class="library-grid"></div>
+    <div class="actions"><button id="loadMore" class="soft">Carregar mais cartas</button><button id="testImages" class="soft">Testar minhas imagens</button></div>
+    <div id="imageDiagnostic" class="small"></div>
+  </article>
+</section>
+
+<section id="music" class="view">
+  <div class="eyebrow">Trilha da Orbe</div><h2>Sua música dentro do universo.</h2>
+  <article class="panel">
+    <p class="lead">O player permanece aberto enquanto você navega pelas telas da Orbe. No iPhone, a reprodução precisa ser iniciada por um toque do usuário.</p>
+    <div class="grid2">
+      <div class="music-card"><div class="eyebrow">Álbum I</div><h3>Sobre as Estrelas</h3><div id="album1"></div></div>
+      <div class="music-card"><div class="eyebrow">Álbum II</div><h3 id="album2Title">Z</h3><div id="album2"></div></div>
+    </div>
   </article>
 </section>
 
 <section id="services" class="view">
-  <div class="eyebrow">Atendimento particular</div><h2>Consultas.</h2>
-  <div class="service-grid" id="serviceGrid"></div>
+  <div class="eyebrow">Atendimento</div><h2>Consultas particulares.</h2>
+  <div id="serviceGrid" class="service-grid"></div>
   <article class="panel">
     <h3>Solicitar horário</h3>
     <select id="consultService" class="field"></select>
@@ -410,428 +453,463 @@ dialog::backdrop{background:#050307bb;backdrop-filter:blur(6px)}
     <input id="consultDate" class="field" type="date">
     <input id="consultTime" class="field" type="time">
     <textarea id="consultTheme" class="field" rows="3" placeholder="Tema da consulta"></textarea>
-    <button class="primary" id="consultSend">Preparar pedido por e-mail</button>
-    <div class="small" style="margin-top:10px">O pedido abre o aplicativo de e-mail do cliente com os dados preenchidos. Pagamento e confirmação são combinados no atendimento.</div>
+    <button class="primary" id="consultSend">Preparar pedido</button>
   </article>
 </section>
 
 <section id="store" class="view">
   <div class="eyebrow">Loja da Orbe</div><h2>Sua vitrine.</h2>
-  <article class="panel">
-    <p class="lead">A loja foi desenhada para receber produtos de revenda sem deixar a página pesada. Os itens podem apontar para um link externo de compra.</p>
-    <div class="store-grid" id="storeGrid"></div>
-  </article>
+  <article class="panel"><div id="storeGrid" class="store-grid"></div></article>
 </section>
 
 <section id="journal" class="view">
-  <div class="eyebrow">Memória local</div><h2>Diário da Orbe.</h2>
+  <div class="eyebrow">Memória</div><h2>Diário da Orbe.</h2>
   <article class="panel">
-    <textarea id="journalText" class="field" rows="8" placeholder="Escreva sua reflexão…"></textarea>
-    <div class="actions"><button class="primary" id="journalSave">Salvar entrada</button><button class="ghost" id="journalClear">Limpar diário</button></div>
+    <textarea id="journalText" class="field" rows="7" placeholder="Escreva sua reflexão…"></textarea>
+    <div class="actions"><button class="primary" id="journalSave">Salvar</button><button class="soft" id="journalClear">Limpar diário</button></div>
     <div id="journalList"></div>
   </article>
 </section>
 
 <section id="admin" class="view">
-  <div class="eyebrow">Painel privado</div><h2>Administração.</h2>
-  <article class="panel admin-box" id="adminLogin">
-    <h3>Entrar</h3>
+  <div class="eyebrow">Painel privado</div><h2>Controle da Orbe.</h2>
+  <article id="adminLogin" class="panel" style="max-width:560px;margin:18px auto">
     <input id="adminUser" class="field" autocomplete="username" placeholder="Usuário">
     <input id="adminPass" class="field" type="password" autocomplete="current-password" placeholder="Senha">
-    <button class="primary" id="adminEnter">Abrir painel</button>
-    <div id="adminError" class="small" style="margin-top:10px"></div>
+    <button id="adminEnter" class="primary">Entrar</button>
+    <div id="adminError" class="small" style="margin-top:9px"></div>
   </article>
-  <article class="panel" id="adminPanel" hidden>
-    <div class="badge">Painel local 11.0</div>
-    <h3 style="margin-top:12px">Controle da Orbe</h3>
-    <p class="small">Nesta versão estática, alterações administrativas ficam neste aparelho. O backend será necessário para publicar mudanças para todos os visitantes.</p>
+  <article id="adminPanel" class="panel" hidden>
+    <span class="badge">Painel local 12.0</span>
+    <p class="small">Mudanças ficam neste aparelho. Para publicar alterações para todos, o próximo passo é conectar o backend.</p>
     <div class="admin-grid">
-      <div><label class="small">E-mail de consultas</label><input id="cfgEmail" class="field"></div>
-      <div><label class="small">Endpoint de IA</label><input id="cfgApi" class="field" placeholder="https://...workers.dev"></div>
-      <div><label class="small">Mesa Real</label><input id="cfgMesa" class="field" type="number"></div>
-      <div><label class="small">Leitura de Mentes</label><input id="cfgMente" class="field" type="number"></div>
-      <div><label class="small">Conselho</label><input id="cfgConselho" class="field" type="number"></div>
-      <div><label class="small">Mensagem de abertura</label><input id="cfgWelcome" class="field"></div>
+      <div><label class="small">E-mail das consultas</label><input id="cfgEmail" class="field"></div>
+      <div><label class="small">Endpoint da IA</label><input id="cfgApi" class="field" placeholder="https://...workers.dev"></div>
+      <div><label class="small">Mesa Real (R$)</label><input id="cfgMesa" class="field" type="number"></div>
+      <div><label class="small">Leitura de Mentes (R$)</label><input id="cfgMente" class="field" type="number"></div>
+      <div><label class="small">Conselho (R$)</label><input id="cfgConselho" class="field" type="number"></div>
+      <div><label class="small">Nome do segundo álbum</label><input id="cfgAlbum2Name" class="field"></div>
     </div>
-    <div class="actions"><button class="primary" id="cfgSave">Salvar neste aparelho</button><button class="ghost" id="cfgExport">Exportar configuração</button><button class="ghost" id="cfgImport">Importar configuração</button><input id="cfgImportFile" type="file" accept="application/json" hidden></div>
+    <label class="small">Link Spotify — álbum 1</label><input id="cfgAlbum1" class="field">
+    <label class="small">Link Spotify — álbum 2</label><input id="cfgAlbum2" class="field" placeholder="Cole aqui o link do seu segundo álbum">
+    <div class="actions"><button id="cfgSave" class="primary">Salvar neste aparelho</button><button id="cfgExport" class="soft">Exportar configuração</button><button id="cfgImport" class="soft">Importar</button><input id="cfgImportFile" type="file" accept="application/json" hidden></div>
     <hr>
     <h3>Diagnóstico</h3>
-    <div class="actions"><button class="ghost" id="clearCaches">Limpar caches antigos</button><button class="danger" id="resetLocal">Apagar dados locais</button></div>
+    <div class="grid2">
+      <div class="stat"><b>78</b><span>cartas cadastradas</span></div>
+      <div class="stat"><b id="diagImages">—</b><span>imagens localizadas pelo teste</span></div>
+    </div>
+    <div class="actions"><button id="clearCaches" class="soft">Limpar caches antigos</button><button id="resetLocal" class="danger">Apagar dados locais</button></div>
   </article>
 </section>
+
 </main>
 
-<div class="bottom">
-  <button class="nav active" data-nav="home">Início</button>
-  <button class="nav" data-nav="tarot">Tarot</button>
-  <button class="nav" data-nav="readings">Tiragens</button>
-  <button class="nav" data-nav="orbe">Orbe</button>
-  <button class="nav nav-more" id="navMore">Mais</button>
+<button id="musicFab" class="music-fab">Trilha</button>
+<div id="musicDrawer" class="music-drawer" hidden>
+  <div class="music-head"><div><div class="eyebrow">Trilha da Orbe</div><b id="musicDrawerTitle">Sobre as Estrelas</b></div><button id="musicClose" class="glass-btn">Fechar</button></div>
+  <div id="musicDrawerPlayer"></div>
+  <div class="actions"><button id="drawerAlbum1" class="soft">Álbum I</button><button id="drawerAlbum2" class="soft">Álbum II</button><button class="soft" data-go="music">Biblioteca musical</button></div>
 </div>
 
-<div class="sheet" id="menuSheet" hidden>
-  <div class="sheet-card">
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div><div class="eyebrow">Navegação</div><h3 style="margin-bottom:0">Orbe Viva 11.0</h3></div><button class="text-btn" id="menuClose">Fechar</button></div>
-    <div class="menu-grid">
-      <button class="menu-item" data-go="home">Início<small>portal principal</small></button>
-      <button class="menu-item" data-go="orbe">Orbe<small>toque e voz</small></button>
-      <button class="menu-item" data-go="tarot">Tarot Livre<small>baralho sem repetição</small></button>
-      <button class="menu-item" data-go="readings">Tiragens<small>1, 2, 3, 5 ou 10 cartas</small></button>
-      <button class="menu-item" data-go="channel">Canalização<small>conversa simbólica</small></button>
-      <button class="menu-item" data-go="deck">78 Cartas<small>biblioteca em lotes</small></button>
-      <button class="menu-item" data-go="services">Consultas<small>agendamento por e-mail</small></button>
-      <button class="menu-item" data-go="store">Loja<small>vitrine editável</small></button>
-      <button class="menu-item" data-go="journal">Diário<small>leituras salvas</small></button>
-      <button class="menu-item" data-go="admin">Painel<small>administração local</small></button>
+<div class="quick-dock">
+  <button data-quick="orbe" data-go="orbe">Orbe</button>
+  <button data-quick="tarot" data-go="tarot">Tarot</button>
+  <button class="open-menu" id="dockMenu">Explorar</button>
+</div>
+
+<div id="menuOverlay" class="menu-overlay" hidden>
+  <div class="menu-shell">
+    <div class="menu-top"><div class="brand"><strong>ORBE DAS REALIDADES</strong><small>UNIVERSO 12.0</small></div><button id="menuClose" class="glass-btn">Fechar</button></div>
+    <div class="menu-title">Escolha uma<br>experiência.</div>
+    <div class="menu-sub">O menu agora é um portal de experiências, não uma barra cheia de ícones.</div>
+    <div class="menu-list">
+      <button class="menu-card featured" data-go="orbe"><b>Orbe Viva</b><small>luz, água, toque e voz</small></button>
+      <button class="menu-card featured" data-go="tarot"><b>Tarot Livre</b><small>revele uma carta sem repetição</small></button>
+      <button class="menu-card" data-go="readings"><b>Tiragens</b><small>leituras de 1 a 10 cartas</small></button>
+      <button class="menu-card" data-go="channel"><b>Canalização</b><small>conversa simbólica da Orbe</small></button>
+      <button class="menu-card" data-go="deck"><b>78 Cartas</b><small>suas artes e significados</small></button>
+      <button class="menu-card" data-go="music"><b>Trilha Sonora</b><small>seus álbuns dentro da experiência</small></button>
+      <button class="menu-card" data-go="services"><b>Consultas</b><small>Mesa Real, Leitura de Mentes e Conselho</small></button>
+      <button class="menu-card" data-go="store"><b>Loja</b><small>sua vitrine de produtos</small></button>
+      <button class="menu-card" data-go="journal"><b>Diário</b><small>memória das leituras</small></button>
+      <button class="menu-card" data-go="admin"><b>Painel</b><small>controle administrativo</small></button>
     </div>
   </div>
 </div>
 
-<dialog id="cardDialog"><div class="modal-body"><button class="text-btn modal-close" id="dialogClose">Fechar</button><div id="dialogContent"></div></div></dialog>
+<dialog id="cardDialog"><div class="modal-body"><div style="text-align:right"><button id="dialogClose" class="glass-btn">Fechar</button></div><div id="dialogContent"></div></div></dialog>
 
 <script>
 "use strict";
-const VERSION="11.0";
+const VERSION="12.0";
 const DECK=[{"id":"00-o-louco","name":"O Louco","mark":"0","group":"major","suit":"Arcanos Maiores","element":"Éter","symbol":"✦","keywords":"liberdade • começo • fé • espontaneidade","upright":"Há uma abertura para começar com mais confiança, mesmo sem controlar cada detalhe.","reversed":"A energia desta carta aparece bloqueada, exagerada ou ainda não integrada. Há uma abertura para começar com mais confiança, mesmo sem controlar cada detalhe.","image":"assets/cards/00-o-louco.jpg"},{"id":"01-o-mago","name":"O Mago","mark":"I","group":"major","suit":"Arcanos Maiores","element":"Éter","symbol":"✦","keywords":"manifestação • habilidade • ação • poder pessoal","upright":"Recursos, presença e intenção podem ser organizados em ação concreta.","reversed":"A energia desta carta aparece bloqueada, exagerada ou ainda não integrada. Recursos, presença e intenção podem ser organizados em ação concreta.","image":"assets/cards/01-o-mago.jpg"},{"id":"02-a-sacerdotisa","name":"A Sacerdotisa","mark":"II","group":"major","suit":"Arcanos Maiores","element":"Éter","symbol":"✦","keywords":"intuição • mistério • silêncio • sabedoria","upright":"Nem tudo precisa ser respondido agora; observar e escutar pode revelar mais.","reversed":"A energia desta carta aparece bloqueada, exagerada ou ainda não integrada. Nem tudo precisa ser respondido agora; observar e escutar pode revelar mais.","image":"assets/cards/02-a-sacerdotisa.jpg"},{"id":"03-a-imperatriz","name":"A Imperatriz","mark":"III","group":"major","suit":"Arcanos Maiores","element":"Éter","symbol":"✦","keywords":"criação • abundância • beleza • nutrição","upright":"Algo pede cuidado, cultivo e espaço para crescer sem ser forçado.","reversed":"A energia desta carta aparece bloqueada, exagerada ou ainda não integrada. Algo pede cuidado, cultivo e espaço para crescer sem ser forçado.","image":"assets/cards/03-a-imperatriz.jpg"},{"id":"04-o-imperador","name":"O Imperador","mark":"IV","group":"major","suit":"Arcanos Maiores","element":"Éter","symbol":"✦","keywords":"estrutura • autoridade • proteção • liderança","upright":"Limites, estrutura e responsabilidade podem devolver estabilidade.","reversed":"A energia desta carta aparece bloqueada, exagerada ou ainda não integrada. Limites, estrutura e responsabilidade podem devolver estabilidade.","image":"assets/cards/04-o-imperador.jpg"},{"id":"05-o-hierofante","name":"O Hierofante","mark":"V","group":"major","suit":"Arcanos Maiores","element":"Éter","symbol":"✦","keywords":"tradição • ensino • valores • espiritualidade","upright":"Valores, aprendizado e referências confiáveis ajudam a organizar o caminho.","reversed":"A energia desta carta aparece bloqueada, exagerada ou ainda não integrada. Valores, aprendizado e referências confiáveis ajudam a organizar o caminho.","image":"assets/cards/05-o-hierofante.jpg"},{"id":"06-os-enamorados","name":"Os Enamorados","mark":"VI","group":"major","suit":"Arcanos Maiores","element":"Éter","symbol":"✦","keywords":"amor • escolha • união • alinhamento","upright":"Uma escolha pede coerência entre desejo, vínculo e valores.","reversed":"A energia desta carta aparece bloqueada, exagerada ou ainda não integrada. Uma escolha pede coerência entre desejo, vínculo e valores.","image":"assets/cards/06-os-enamorados.jpg"},{"id":"07-o-carro","name":"O Carro","mark":"VII","group":"major","suit":"Arcanos Maiores","element":"Éter","symbol":"✦","keywords":"direção • conquista • disciplina • movimento","upright":"Direção clara e disciplina podem transformar impulso em avanço real.","reversed":"A energia desta carta aparece bloqueada, exagerada ou ainda não integrada. Direção clara e disciplina podem transformar impulso em avanço real.","image":"assets/cards/07-o-carro.jpg"},{"id":"08-a-forca","name":"A Força","mark":"VIII","group":"major","suit":"Arcanos Maiores","element":"Éter","symbol":"✦","keywords":"coragem • domínio interior • compaixão • presença","upright":"A situação responde melhor à firmeza serena do que ao confronto automático.","reversed":"A energia desta carta aparece bloqueada, exagerada ou ainda não integrada. A situação responde melhor à firmeza serena do que ao confronto automático.","image":"assets/cards/08-a-forca.jpg"},{"id":"09-o-eremita","name":"O Eremita","mark":"IX","group":"major","suit":"Arcanos Maiores","element":"Éter","symbol":"✦","keywords":"introspecção • busca • orientação • prudência","upright":"Um pouco de recolhimento pode separar ruído externo de convicção interna.","reversed":"A energia desta carta aparece bloqueada, exagerada ou ainda não integrada. Um pouco de recolhimento pode separar ruído externo de convicção interna.","image":"assets/cards/09-o-eremita.jpg"},{"id":"10-a-roda-da-fortuna","name":"A Roda da Fortuna","mark":"X","group":"major","suit":"Arcanos Maiores","element":"Éter","symbol":"✦","keywords":"ciclos • destino • mudança • oportunidade","upright":"O cenário está em movimento; flexibilidade ajuda a usar melhor a mudança.","reversed":"A energia desta carta aparece bloqueada, exagerada ou ainda não integrada. O cenário está em movimento; flexibilidade ajuda a usar melhor a mudança.","image":"assets/cards/10-a-roda-da-fortuna.jpg"},{"id":"11-a-justica","name":"A Justiça","mark":"XI","group":"major","suit":"Arcanos Maiores","element":"Éter","symbol":"✦","keywords":"equilíbrio • verdade • responsabilidade • decisão","upright":"Fatos, consequências e responsabilidade precisam ocupar o centro da decisão.","reversed":"A energia desta carta aparece bloqueada, exagerada ou ainda não integrada. Fatos, consequências e responsabilidade precisam ocupar o centro da decisão.","image":"assets/cards/11-a-justica.jpg"},{"id":"12-o-enforcado","name":"O Enforcado","mark":"XII","group":"major","suit":"Arcanos Maiores","element":"Éter","symbol":"✦","keywords":"pausa • entrega • perspectiva • sacrifício","upright":"Insistir do mesmo jeito talvez não funcione; uma nova perspectiva é necessária.","reversed":"A energia desta carta aparece bloqueada, exagerada ou ainda não integrada. Insistir do mesmo jeito talvez não funcione; uma nova perspectiva é necessária.","image":"assets/cards/12-o-enforcado.jpg"},{"id":"13-a-morte","name":"A Morte","mark":"XIII","group":"major","suit":"Arcanos Maiores","element":"Éter","symbol":"✦","keywords":"fim • transformação • renascimento • transição","upright":"Um ciclo precisa ser encerrado para que outra forma de vida ou relação apareça.","reversed":"A energia desta carta aparece bloqueada, exagerada ou ainda não integrada. Um ciclo precisa ser encerrado para que outra forma de vida ou relação apareça.","image":"assets/cards/13-a-morte.jpg"},{"id":"14-a-temperanca","name":"A Temperança","mark":"XIV","group":"major","suit":"Arcanos Maiores","element":"Éter","symbol":"✦","keywords":"harmonia • cura • integração • moderação","upright":"Integração gradual e moderação são mais produtivas do que extremos.","reversed":"A energia desta carta aparece bloqueada, exagerada ou ainda não integrada. Integração gradual e moderação são mais produtivas do que extremos.","image":"assets/cards/14-a-temperanca.jpg"},{"id":"15-o-diabo","name":"O Diabo","mark":"XV","group":"major","suit":"Arcanos Maiores","element":"Éter","symbol":"✦","keywords":"apego • desejo • sombra • libertação","upright":"Vale observar desejos, apegos e padrões que parecem escolha mas funcionam como prisão.","reversed":"A energia desta carta aparece bloqueada, exagerada ou ainda não integrada. Vale observar desejos, apegos e padrões que parecem escolha mas funcionam como prisão.","image":"assets/cards/15-o-diabo.jpg"},{"id":"16-a-torre","name":"A Torre","mark":"XVI","group":"major","suit":"Arcanos Maiores","element":"Éter","symbol":"✦","keywords":"ruptura • revelação • verdade • reconstrução","upright":"Uma verdade ou ruptura pode desmontar algo frágil e abrir espaço para reconstrução.","reversed":"A energia desta carta aparece bloqueada, exagerada ou ainda não integrada. Uma verdade ou ruptura pode desmontar algo frágil e abrir espaço para reconstrução.","image":"assets/cards/16-a-torre.jpg"},{"id":"17-a-estrela","name":"A Estrela","mark":"XVII","group":"major","suit":"Arcanos Maiores","element":"Éter","symbol":"✦","keywords":"esperança • inspiração • cura • confiança","upright":"Há espaço para recuperar confiança, esperança e uma visão mais generosa de futuro.","reversed":"A energia desta carta aparece bloqueada, exagerada ou ainda não integrada. Há espaço para recuperar confiança, esperança e uma visão mais generosa de futuro.","image":"assets/cards/17-a-estrela.jpg"},{"id":"18-a-lua","name":"A Lua","mark":"XVIII","group":"major","suit":"Arcanos Maiores","element":"Éter","symbol":"✦","keywords":"inconsciente • sensibilidade • ilusão • sonhos","upright":"Sensibilidade está alta; diferencie intuição, medo, projeção e informação concreta.","reversed":"A energia desta carta aparece bloqueada, exagerada ou ainda não integrada. Sensibilidade está alta; diferencie intuição, medo, projeção e informação concreta.","image":"assets/cards/18-a-lua.jpg"},{"id":"19-o-sol","name":"O Sol","mark":"XIX","group":"major","suit":"Arcanos Maiores","element":"Éter","symbol":"✦","keywords":"vitalidade • clareza • alegria • sucesso","upright":"Clareza, autenticidade e vitalidade favorecem decisões mais simples e abertas.","reversed":"A energia desta carta aparece bloqueada, exagerada ou ainda não integrada. Clareza, autenticidade e vitalidade favorecem decisões mais simples e abertas.","image":"assets/cards/19-o-sol.jpg"},{"id":"20-o-julgamento","name":"O Julgamento","mark":"XX","group":"major","suit":"Arcanos Maiores","element":"Éter","symbol":"✦","keywords":"despertar • chamado • perdão • renascimento","upright":"Há um chamado para revisar o passado e responder de forma mais consciente agora.","reversed":"A energia desta carta aparece bloqueada, exagerada ou ainda não integrada. Há um chamado para revisar o passado e responder de forma mais consciente agora.","image":"assets/cards/20-o-julgamento.jpg"},{"id":"21-o-mundo","name":"O Mundo","mark":"XXI","group":"major","suit":"Arcanos Maiores","element":"Éter","symbol":"✦","keywords":"conclusão • integração • realização • plenitude","upright":"Um ciclo amadureceu; reconhecer a conclusão ajuda a integrar o que foi aprendido.","reversed":"A energia desta carta aparece bloqueada, exagerada ou ainda não integrada. Um ciclo amadureceu; reconhecer a conclusão ajuda a integrar o que foi aprendido.","image":"assets/cards/21-o-mundo.jpg"},{"id":"as-de-copas","name":"Ás de Copas","mark":"Ás","group":"copas","suit":"Copas","element":"Água","symbol":"♡","keywords":"semente, abertura e oportunidade • emoções • amor • intuição • vínculos","upright":"Semente, abertura e oportunidade no campo de copas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Potencial bloqueado ou começo adiado no campo de copas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/as-de-copas.jpg"},{"id":"2-de-copas","name":"2 de Copas","mark":"2","group":"copas","suit":"Copas","element":"Água","symbol":"♡","keywords":"equilíbrio, escolha e relação • emoções • amor • intuição • vínculos","upright":"Equilíbrio, escolha e relação no campo de copas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Desequilíbrio, indecisão ou tensão relacional no campo de copas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/2-de-copas.jpg"},{"id":"3-de-copas","name":"3 de Copas","mark":"3","group":"copas","suit":"Copas","element":"Água","symbol":"♡","keywords":"expansão, expressão e desenvolvimento • emoções • amor • intuição • vínculos","upright":"Expansão, expressão e desenvolvimento no campo de copas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Dispersão, dificuldade de cooperação ou crescimento travado no campo de copas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/3-de-copas.jpg"},{"id":"4-de-copas","name":"4 de Copas","mark":"4","group":"copas","suit":"Copas","element":"Água","symbol":"♡","keywords":"estrutura, proteção e estabilidade • emoções • amor • intuição • vínculos","upright":"Estrutura, proteção e estabilidade no campo de copas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Rigidez, apego ou proteção excessiva no campo de copas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/4-de-copas.jpg"},{"id":"5-de-copas","name":"5 de Copas","mark":"5","group":"copas","suit":"Copas","element":"Água","symbol":"♡","keywords":"tensão, mudança e aprendizado • emoções • amor • intuição • vínculos","upright":"Tensão, mudança e aprendizado no campo de copas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Conflito prolongado, sensação de perda ou resistência no campo de copas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/5-de-copas.jpg"},{"id":"6-de-copas","name":"6 de Copas","mark":"6","group":"copas","suit":"Copas","element":"Água","symbol":"♡","keywords":"reorganização, passagem e fluxo • emoções • amor • intuição • vínculos","upright":"Reorganização, passagem e fluxo no campo de copas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Fluxo interrompido, dívida emocional ou transição difícil no campo de copas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/6-de-copas.jpg"},{"id":"7-de-copas","name":"7 de Copas","mark":"7","group":"copas","suit":"Copas","element":"Água","symbol":"♡","keywords":"teste, avaliação e posicionamento • emoções • amor • intuição • vínculos","upright":"Teste, avaliação e posicionamento no campo de copas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Dúvida, desgaste ou posição instável no campo de copas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/7-de-copas.jpg"},{"id":"8-de-copas","name":"8 de Copas","mark":"8","group":"copas","suit":"Copas","element":"Água","symbol":"♡","keywords":"movimento, domínio e continuidade • emoções • amor • intuição • vínculos","upright":"Movimento, domínio e continuidade no campo de copas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Atrasos, repetição ou energia mal direcionada no campo de copas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/8-de-copas.jpg"},{"id":"9-de-copas","name":"9 de Copas","mark":"9","group":"copas","suit":"Copas","element":"Água","symbol":"♡","keywords":"maturidade, intensidade e quase conclusão • emoções • amor • intuição • vínculos","upright":"Maturidade, intensidade e quase conclusão no campo de copas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Cansaço, excesso ou dificuldade de concluir no campo de copas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/9-de-copas.jpg"},{"id":"10-de-copas","name":"10 de Copas","mark":"10","group":"copas","suit":"Copas","element":"Água","symbol":"♡","keywords":"culminação, fechamento e transbordamento • emoções • amor • intuição • vínculos","upright":"Culminação, fechamento e transbordamento no campo de copas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Sobrecarga, fim evitado ou ciclo prolongado no campo de copas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/10-de-copas.jpg"},{"id":"pajem-de-copas","name":"Pajem de Copas","mark":"Pajem","group":"copas","suit":"Copas","element":"Água","symbol":"♡","keywords":"curiosidade, notícia e descoberta • emoções • amor • intuição • vínculos","upright":"Curiosidade, notícia e descoberta no campo de copas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Imaturidade, mensagem confusa ou curiosidade dispersa no campo de copas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/pajem-de-copas.jpg"},{"id":"cavaleiro-de-copas","name":"Cavaleiro de Copas","mark":"Cavaleiro","group":"copas","suit":"Copas","element":"Água","symbol":"♡","keywords":"movimento, busca e impulso • emoções • amor • intuição • vínculos","upright":"Movimento, busca e impulso no campo de copas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Pressa, impulsividade ou movimento sem direção no campo de copas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/cavaleiro-de-copas.jpg"},{"id":"rainha-de-copas","name":"Rainha de Copas","mark":"Rainha","group":"copas","suit":"Copas","element":"Água","symbol":"♡","keywords":"receptividade, domínio interno e maturidade • emoções • amor • intuição • vínculos","upright":"Receptividade, domínio interno e maturidade no campo de copas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Energia interna bloqueada, insegurança ou excesso de controle no campo de copas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/rainha-de-copas.jpg"},{"id":"rei-de-copas","name":"Rei de Copas","mark":"Rei","group":"copas","suit":"Copas","element":"Água","symbol":"♡","keywords":"direção, autoridade e maestria • emoções • amor • intuição • vínculos","upright":"Direção, autoridade e maestria no campo de copas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Autoridade rígida, domínio mal aplicado ou desequilíbrio de poder no campo de copas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/rei-de-copas.jpg"},{"id":"as-de-espadas","name":"Ás de Espadas","mark":"Ás","group":"espadas","suit":"Espadas","element":"Ar","symbol":"✧","keywords":"semente, abertura e oportunidade • mente • verdade • escolhas • desafios","upright":"Semente, abertura e oportunidade no campo de espadas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Potencial bloqueado ou começo adiado no campo de espadas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/as-de-espadas.jpg"},{"id":"2-de-espadas","name":"2 de Espadas","mark":"2","group":"espadas","suit":"Espadas","element":"Ar","symbol":"✧","keywords":"equilíbrio, escolha e relação • mente • verdade • escolhas • desafios","upright":"Equilíbrio, escolha e relação no campo de espadas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Desequilíbrio, indecisão ou tensão relacional no campo de espadas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/2-de-espadas.jpg"},{"id":"3-de-espadas","name":"3 de Espadas","mark":"3","group":"espadas","suit":"Espadas","element":"Ar","symbol":"✧","keywords":"expansão, expressão e desenvolvimento • mente • verdade • escolhas • desafios","upright":"Expansão, expressão e desenvolvimento no campo de espadas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Dispersão, dificuldade de cooperação ou crescimento travado no campo de espadas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/3-de-espadas.jpg"},{"id":"4-de-espadas","name":"4 de Espadas","mark":"4","group":"espadas","suit":"Espadas","element":"Ar","symbol":"✧","keywords":"estrutura, proteção e estabilidade • mente • verdade • escolhas • desafios","upright":"Estrutura, proteção e estabilidade no campo de espadas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Rigidez, apego ou proteção excessiva no campo de espadas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/4-de-espadas.jpg"},{"id":"5-de-espadas","name":"5 de Espadas","mark":"5","group":"espadas","suit":"Espadas","element":"Ar","symbol":"✧","keywords":"tensão, mudança e aprendizado • mente • verdade • escolhas • desafios","upright":"Tensão, mudança e aprendizado no campo de espadas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Conflito prolongado, sensação de perda ou resistência no campo de espadas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/5-de-espadas.jpg"},{"id":"6-de-espadas","name":"6 de Espadas","mark":"6","group":"espadas","suit":"Espadas","element":"Ar","symbol":"✧","keywords":"reorganização, passagem e fluxo • mente • verdade • escolhas • desafios","upright":"Reorganização, passagem e fluxo no campo de espadas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Fluxo interrompido, dívida emocional ou transição difícil no campo de espadas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/6-de-espadas.jpg"},{"id":"7-de-espadas","name":"7 de Espadas","mark":"7","group":"espadas","suit":"Espadas","element":"Ar","symbol":"✧","keywords":"teste, avaliação e posicionamento • mente • verdade • escolhas • desafios","upright":"Teste, avaliação e posicionamento no campo de espadas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Dúvida, desgaste ou posição instável no campo de espadas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/7-de-espadas.jpg"},{"id":"8-de-espadas","name":"8 de Espadas","mark":"8","group":"espadas","suit":"Espadas","element":"Ar","symbol":"✧","keywords":"movimento, domínio e continuidade • mente • verdade • escolhas • desafios","upright":"Movimento, domínio e continuidade no campo de espadas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Atrasos, repetição ou energia mal direcionada no campo de espadas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/8-de-espadas.jpg"},{"id":"9-de-espadas","name":"9 de Espadas","mark":"9","group":"espadas","suit":"Espadas","element":"Ar","symbol":"✧","keywords":"maturidade, intensidade e quase conclusão • mente • verdade • escolhas • desafios","upright":"Maturidade, intensidade e quase conclusão no campo de espadas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Cansaço, excesso ou dificuldade de concluir no campo de espadas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/9-de-espadas.jpg"},{"id":"10-de-espadas","name":"10 de Espadas","mark":"10","group":"espadas","suit":"Espadas","element":"Ar","symbol":"✧","keywords":"culminação, fechamento e transbordamento • mente • verdade • escolhas • desafios","upright":"Culminação, fechamento e transbordamento no campo de espadas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Sobrecarga, fim evitado ou ciclo prolongado no campo de espadas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/10-de-espadas.jpg"},{"id":"pajem-de-espadas","name":"Pajem de Espadas","mark":"Pajem","group":"espadas","suit":"Espadas","element":"Ar","symbol":"✧","keywords":"curiosidade, notícia e descoberta • mente • verdade • escolhas • desafios","upright":"Curiosidade, notícia e descoberta no campo de espadas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Imaturidade, mensagem confusa ou curiosidade dispersa no campo de espadas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/pajem-de-espadas.jpg"},{"id":"cavaleiro-de-espadas","name":"Cavaleiro de Espadas","mark":"Cavaleiro","group":"espadas","suit":"Espadas","element":"Ar","symbol":"✧","keywords":"movimento, busca e impulso • mente • verdade • escolhas • desafios","upright":"Movimento, busca e impulso no campo de espadas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Pressa, impulsividade ou movimento sem direção no campo de espadas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/cavaleiro-de-espadas.jpg"},{"id":"rainha-de-espadas","name":"Rainha de Espadas","mark":"Rainha","group":"espadas","suit":"Espadas","element":"Ar","symbol":"✧","keywords":"receptividade, domínio interno e maturidade • mente • verdade • escolhas • desafios","upright":"Receptividade, domínio interno e maturidade no campo de espadas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Energia interna bloqueada, insegurança ou excesso de controle no campo de espadas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/rainha-de-espadas.jpg"},{"id":"rei-de-espadas","name":"Rei de Espadas","mark":"Rei","group":"espadas","suit":"Espadas","element":"Ar","symbol":"✧","keywords":"direção, autoridade e maestria • mente • verdade • escolhas • desafios","upright":"Direção, autoridade e maestria no campo de espadas. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Autoridade rígida, domínio mal aplicado ou desequilíbrio de poder no campo de espadas. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/rei-de-espadas.jpg"},{"id":"as-de-paus","name":"Ás de Paus","mark":"Ás","group":"paus","suit":"Paus","element":"Fogo","symbol":"↟","keywords":"semente, abertura e oportunidade • energia • criatividade • desejo • ação","upright":"Semente, abertura e oportunidade no campo de paus. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Potencial bloqueado ou começo adiado no campo de paus. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/as-de-paus.jpg"},{"id":"2-de-paus","name":"2 de Paus","mark":"2","group":"paus","suit":"Paus","element":"Fogo","symbol":"↟","keywords":"equilíbrio, escolha e relação • energia • criatividade • desejo • ação","upright":"Equilíbrio, escolha e relação no campo de paus. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Desequilíbrio, indecisão ou tensão relacional no campo de paus. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/2-de-paus.jpg"},{"id":"3-de-paus","name":"3 de Paus","mark":"3","group":"paus","suit":"Paus","element":"Fogo","symbol":"↟","keywords":"expansão, expressão e desenvolvimento • energia • criatividade • desejo • ação","upright":"Expansão, expressão e desenvolvimento no campo de paus. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Dispersão, dificuldade de cooperação ou crescimento travado no campo de paus. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/3-de-paus.jpg"},{"id":"4-de-paus","name":"4 de Paus","mark":"4","group":"paus","suit":"Paus","element":"Fogo","symbol":"↟","keywords":"estrutura, proteção e estabilidade • energia • criatividade • desejo • ação","upright":"Estrutura, proteção e estabilidade no campo de paus. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Rigidez, apego ou proteção excessiva no campo de paus. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/4-de-paus.jpg"},{"id":"5-de-paus","name":"5 de Paus","mark":"5","group":"paus","suit":"Paus","element":"Fogo","symbol":"↟","keywords":"tensão, mudança e aprendizado • energia • criatividade • desejo • ação","upright":"Tensão, mudança e aprendizado no campo de paus. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Conflito prolongado, sensação de perda ou resistência no campo de paus. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/5-de-paus.jpg"},{"id":"6-de-paus","name":"6 de Paus","mark":"6","group":"paus","suit":"Paus","element":"Fogo","symbol":"↟","keywords":"reorganização, passagem e fluxo • energia • criatividade • desejo • ação","upright":"Reorganização, passagem e fluxo no campo de paus. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Fluxo interrompido, dívida emocional ou transição difícil no campo de paus. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/6-de-paus.jpg"},{"id":"7-de-paus","name":"7 de Paus","mark":"7","group":"paus","suit":"Paus","element":"Fogo","symbol":"↟","keywords":"teste, avaliação e posicionamento • energia • criatividade • desejo • ação","upright":"Teste, avaliação e posicionamento no campo de paus. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Dúvida, desgaste ou posição instável no campo de paus. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/7-de-paus.jpg"},{"id":"8-de-paus","name":"8 de Paus","mark":"8","group":"paus","suit":"Paus","element":"Fogo","symbol":"↟","keywords":"movimento, domínio e continuidade • energia • criatividade • desejo • ação","upright":"Movimento, domínio e continuidade no campo de paus. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Atrasos, repetição ou energia mal direcionada no campo de paus. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/8-de-paus.jpg"},{"id":"9-de-paus","name":"9 de Paus","mark":"9","group":"paus","suit":"Paus","element":"Fogo","symbol":"↟","keywords":"maturidade, intensidade e quase conclusão • energia • criatividade • desejo • ação","upright":"Maturidade, intensidade e quase conclusão no campo de paus. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Cansaço, excesso ou dificuldade de concluir no campo de paus. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/9-de-paus.jpg"},{"id":"10-de-paus","name":"10 de Paus","mark":"10","group":"paus","suit":"Paus","element":"Fogo","symbol":"↟","keywords":"culminação, fechamento e transbordamento • energia • criatividade • desejo • ação","upright":"Culminação, fechamento e transbordamento no campo de paus. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Sobrecarga, fim evitado ou ciclo prolongado no campo de paus. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/10-de-paus.jpg"},{"id":"pajem-de-paus","name":"Pajem de Paus","mark":"Pajem","group":"paus","suit":"Paus","element":"Fogo","symbol":"↟","keywords":"curiosidade, notícia e descoberta • energia • criatividade • desejo • ação","upright":"Curiosidade, notícia e descoberta no campo de paus. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Imaturidade, mensagem confusa ou curiosidade dispersa no campo de paus. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/pajem-de-paus.jpg"},{"id":"cavaleiro-de-paus","name":"Cavaleiro de Paus","mark":"Cavaleiro","group":"paus","suit":"Paus","element":"Fogo","symbol":"↟","keywords":"movimento, busca e impulso • energia • criatividade • desejo • ação","upright":"Movimento, busca e impulso no campo de paus. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Pressa, impulsividade ou movimento sem direção no campo de paus. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/cavaleiro-de-paus.jpg"},{"id":"rainha-de-paus","name":"Rainha de Paus","mark":"Rainha","group":"paus","suit":"Paus","element":"Fogo","symbol":"↟","keywords":"receptividade, domínio interno e maturidade • energia • criatividade • desejo • ação","upright":"Receptividade, domínio interno e maturidade no campo de paus. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Energia interna bloqueada, insegurança ou excesso de controle no campo de paus. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/rainha-de-paus.jpg"},{"id":"rei-de-paus","name":"Rei de Paus","mark":"Rei","group":"paus","suit":"Paus","element":"Fogo","symbol":"↟","keywords":"direção, autoridade e maestria • energia • criatividade • desejo • ação","upright":"Direção, autoridade e maestria no campo de paus. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Autoridade rígida, domínio mal aplicado ou desequilíbrio de poder no campo de paus. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/rei-de-paus.jpg"},{"id":"as-de-ouros","name":"Ás de Ouros","mark":"Ás","group":"ouros","suit":"Ouros","element":"Terra","symbol":"⬟","keywords":"semente, abertura e oportunidade • matéria • prosperidade • corpo • estabilidade","upright":"Semente, abertura e oportunidade no campo de ouros. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Potencial bloqueado ou começo adiado no campo de ouros. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/as-de-ouros.jpg"},{"id":"2-de-ouros","name":"2 de Ouros","mark":"2","group":"ouros","suit":"Ouros","element":"Terra","symbol":"⬟","keywords":"equilíbrio, escolha e relação • matéria • prosperidade • corpo • estabilidade","upright":"Equilíbrio, escolha e relação no campo de ouros. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Desequilíbrio, indecisão ou tensão relacional no campo de ouros. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/2-de-ouros.jpg"},{"id":"3-de-ouros","name":"3 de Ouros","mark":"3","group":"ouros","suit":"Ouros","element":"Terra","symbol":"⬟","keywords":"expansão, expressão e desenvolvimento • matéria • prosperidade • corpo • estabilidade","upright":"Expansão, expressão e desenvolvimento no campo de ouros. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Dispersão, dificuldade de cooperação ou crescimento travado no campo de ouros. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/3-de-ouros.jpg"},{"id":"4-de-ouros","name":"4 de Ouros","mark":"4","group":"ouros","suit":"Ouros","element":"Terra","symbol":"⬟","keywords":"estrutura, proteção e estabilidade • matéria • prosperidade • corpo • estabilidade","upright":"Estrutura, proteção e estabilidade no campo de ouros. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Rigidez, apego ou proteção excessiva no campo de ouros. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/4-de-ouros.jpg"},{"id":"5-de-ouros","name":"5 de Ouros","mark":"5","group":"ouros","suit":"Ouros","element":"Terra","symbol":"⬟","keywords":"tensão, mudança e aprendizado • matéria • prosperidade • corpo • estabilidade","upright":"Tensão, mudança e aprendizado no campo de ouros. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Conflito prolongado, sensação de perda ou resistência no campo de ouros. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/5-de-ouros.jpg"},{"id":"6-de-ouros","name":"6 de Ouros","mark":"6","group":"ouros","suit":"Ouros","element":"Terra","symbol":"⬟","keywords":"reorganização, passagem e fluxo • matéria • prosperidade • corpo • estabilidade","upright":"Reorganização, passagem e fluxo no campo de ouros. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Fluxo interrompido, dívida emocional ou transição difícil no campo de ouros. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/6-de-ouros.jpg"},{"id":"7-de-ouros","name":"7 de Ouros","mark":"7","group":"ouros","suit":"Ouros","element":"Terra","symbol":"⬟","keywords":"teste, avaliação e posicionamento • matéria • prosperidade • corpo • estabilidade","upright":"Teste, avaliação e posicionamento no campo de ouros. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Dúvida, desgaste ou posição instável no campo de ouros. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/7-de-ouros.jpg"},{"id":"8-de-ouros","name":"8 de Ouros","mark":"8","group":"ouros","suit":"Ouros","element":"Terra","symbol":"⬟","keywords":"movimento, domínio e continuidade • matéria • prosperidade • corpo • estabilidade","upright":"Movimento, domínio e continuidade no campo de ouros. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Atrasos, repetição ou energia mal direcionada no campo de ouros. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/8-de-ouros.jpg"},{"id":"9-de-ouros","name":"9 de Ouros","mark":"9","group":"ouros","suit":"Ouros","element":"Terra","symbol":"⬟","keywords":"maturidade, intensidade e quase conclusão • matéria • prosperidade • corpo • estabilidade","upright":"Maturidade, intensidade e quase conclusão no campo de ouros. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Cansaço, excesso ou dificuldade de concluir no campo de ouros. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/9-de-ouros.jpg"},{"id":"10-de-ouros","name":"10 de Ouros","mark":"10","group":"ouros","suit":"Ouros","element":"Terra","symbol":"⬟","keywords":"culminação, fechamento e transbordamento • matéria • prosperidade • corpo • estabilidade","upright":"Culminação, fechamento e transbordamento no campo de ouros. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Sobrecarga, fim evitado ou ciclo prolongado no campo de ouros. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/10-de-ouros.jpg"},{"id":"pajem-de-ouros","name":"Pajem de Ouros","mark":"Pajem","group":"ouros","suit":"Ouros","element":"Terra","symbol":"⬟","keywords":"curiosidade, notícia e descoberta • matéria • prosperidade • corpo • estabilidade","upright":"Curiosidade, notícia e descoberta no campo de ouros. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Imaturidade, mensagem confusa ou curiosidade dispersa no campo de ouros. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/pajem-de-ouros.jpg"},{"id":"cavaleiro-de-ouros","name":"Cavaleiro de Ouros","mark":"Cavaleiro","group":"ouros","suit":"Ouros","element":"Terra","symbol":"⬟","keywords":"movimento, busca e impulso • matéria • prosperidade • corpo • estabilidade","upright":"Movimento, busca e impulso no campo de ouros. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Pressa, impulsividade ou movimento sem direção no campo de ouros. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/cavaleiro-de-ouros.jpg"},{"id":"rainha-de-ouros","name":"Rainha de Ouros","mark":"Rainha","group":"ouros","suit":"Ouros","element":"Terra","symbol":"⬟","keywords":"receptividade, domínio interno e maturidade • matéria • prosperidade • corpo • estabilidade","upright":"Receptividade, domínio interno e maturidade no campo de ouros. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Energia interna bloqueada, insegurança ou excesso de controle no campo de ouros. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/rainha-de-ouros.jpg"},{"id":"rei-de-ouros","name":"Rei de Ouros","mark":"Rei","group":"ouros","suit":"Ouros","element":"Terra","symbol":"⬟","keywords":"direção, autoridade e maestria • matéria • prosperidade • corpo • estabilidade","upright":"Direção, autoridade e maestria no campo de ouros. A carta sugere observar como esse tema aparece na situação concreta e qual atitude pode torná-lo mais consciente.","reversed":"Autoridade rígida, domínio mal aplicado ou desequilíbrio de poder no campo de ouros. O movimento pode estar pedindo revisão de ritmo, expectativa, limite ou forma de comunicação.","image":"assets/cards/rei-de-ouros.jpg"}];
 const ADMIN_HASH="0cf56b62840c715af39d7c92a084b8749d6a28595f252d9222482623175c7a54";
-const STORE_DEFAULT=[
-  {name:"Baralho Orbe das Realidades",price:"Em breve",desc:"Espaço preparado para o seu baralho oficial.",url:""},
-  {name:"Destaque da Loja",price:"Configure no painel",desc:"Use este espaço para um produto que você deseja revender.",url:""},
-  {name:"Oferta Especial",price:"Configure no painel",desc:"Outro espaço leve e pronto para um link externo de compra.",url:""}
-];
 const DEFAULT_CONFIG={
   email:"herculesfardim@hotmail.com",
   api:"",
-  mesa:200,
-  mente:200,
-  conselho:50,
-  welcome:"A Orbe está aberta. Diga o que deseja compreender.",
-  store:STORE_DEFAULT
+  mesa:200,mente:200,conselho:50,
+  album1Name:"Sobre as Estrelas",
+  album1:"https://open.spotify.com/album/0GwJtJujeS9iwSZFADcL1k",
+  album2Name:"Z",
+  album2:"",
+  voice:false,
+  store:[
+    {name:"Baralho Orbe das Realidades",price:"Em breve",desc:"Espaço preparado para o baralho oficial.",url:""},
+    {name:"Destaque da Loja",price:"Configure no painel",desc:"Produto de revenda ou criação própria.",url:""},
+    {name:"Oferta Especial",price:"Configure no painel",desc:"Espaço para uma campanha ou lançamento.",url:""}
+  ]
 };
 const state={
-  config:loadJSON("orbe11.config",DEFAULT_CONFIG),
-  bag:[],
-  drawn:[],
-  filter:"all",
-  search:"",
-  deckLimit:12,
-  channel:null,
-  journal:loadJSON("orbe11.journal",[])
+  config:load("orbe12.config",DEFAULT_CONFIG),
+  bag:[],drawn:[],filter:"all",search:"",deckLimit:12,
+  channel:null,journal:load("orbe12.journal",[])
 };
-function loadJSON(k,fallback){try{const v=JSON.parse(localStorage.getItem(k));return v??structuredCloneSafe(fallback)}catch{return structuredCloneSafe(fallback)}}
-function structuredCloneSafe(v){return JSON.parse(JSON.stringify(v))}
-function saveJSON(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}
-function $(q,root=document){return root.querySelector(q)}
-function $$(q,root=document){return [...root.querySelectorAll(q)]}
-function escapeHTML(s=""){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
-function slugLabel(c){return c.name}
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+function clone(v){return JSON.parse(JSON.stringify(v))}
+function load(k,f){try{return JSON.parse(localStorage.getItem(k))||clone(f)}catch{return clone(f)}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}
+function esc(s=""){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+
+/* kill stale PWA caches from earlier builds */
+(async()=>{try{
+  if("serviceWorker" in navigator){const rs=await navigator.serviceWorker.getRegistrations();for(const r of rs)await r.unregister()}
+  if("caches" in window){const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)))}
+}catch{}})();
+
+/* navigation */
+const VIEWS=["home","orbe","tarot","readings","channel","deck","music","services","store","journal","admin"];
 function go(id){
+  if(!VIEWS.includes(id))id="home";
   $$(".view").forEach(v=>v.classList.toggle("active",v.id===id));
-  $$(".nav[data-nav]").forEach(n=>n.classList.toggle("active",n.dataset.nav===id));
-  $("#menuSheet").hidden=true;
+  $$("[data-quick]").forEach(b=>b.classList.toggle("active",b.dataset.quick===id));
+  $("#menuOverlay").hidden=true;
   history.replaceState(null,"","#"+id);
   window.scrollTo({top:0,behavior:"smooth"});
-  if(id==="deck") renderDeck();
-  if(id==="store") renderStore();
-  if(id==="services") renderServices();
-  if(id==="journal") renderJournal();
-  if(id==="admin") loadAdminFields();
+  if(id==="deck")renderDeck();
+  if(id==="music")renderMusicPage();
+  if(id==="services")renderServices();
+  if(id==="store")renderStore();
+  if(id==="journal")renderJournal();
+  if(id==="admin")loadAdmin();
 }
 $$("[data-go]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.go)));
-$$(".nav[data-nav]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.nav)));
-$("#menuOpen").onclick=$("#navMore").onclick=()=>{$("#menuSheet").hidden=false};
-$("#menuClose").onclick=()=>{$("#menuSheet").hidden=true};
-$("#menuSheet").addEventListener("click",e=>{if(e.target===$("#menuSheet"))$("#menuSheet").hidden=true});
+$("#menuOpen").onclick=$("#dockMenu").onclick=()=>$("#menuOverlay").hidden=false;
+$("#menuClose").onclick=()=>$("#menuOverlay").hidden=true;
 
-/* aggressive old-cache cleanup: fixes earlier stale 8.0/9.0 builds */
-(async function freshStart(){
-  try{
-    if("serviceWorker" in navigator){
-      const regs=await navigator.serviceWorker.getRegistrations();
-      for(const r of regs) await r.unregister();
-    }
-    if("caches" in window){
-      const keys=await caches.keys();
-      await Promise.all(keys.map(k=>caches.delete(k)));
-    }
-  }catch(e){}
-})();
-
-/* ORB */
-const signals=[
-  "Observe o que já está claro antes de procurar outro sinal.",
-  "Uma pergunta mais precisa pode abrir um caminho mais preciso.",
-  "Não confunda intensidade com certeza. Repare nos fatos e no que você sente.",
-  "O próximo passo não precisa resolver tudo; precisa apenas ser possível.",
-  "Volte ao centro: o que depende de você agora?",
-  "Há valor em esperar o suficiente para enxergar o padrão inteiro."
-];
-function orbSignal(){
-  const msg=signals[Math.floor(Math.random()*signals.length)];
-  $("#orbMessage").textContent=msg;$("#orbCaption").textContent="sinal recebido";
-  pulseOrb($("#mainOrb")); speak(msg,false);
-}
-$("#orbSignal").onclick=orbSignal;
-$("#mainOrb").onclick=orbSignal;
-function pulseOrb(el){
-  el.classList.add("is-speaking");setTimeout(()=>el.classList.remove("is-speaking"),1200);
-  try{navigator.vibrate?.(18)}catch{}
-}
-let orbRaf=0;
-function bindOrbMotion(el){
-  const surf=$(".orb-surface",el);
-  const move=e=>{
-    const r=el.getBoundingClientRect();
-    const p=e.touches?e.touches[0]:e;
-    const x=Math.max(-1,Math.min(1,(p.clientX-r.left)/r.width*2-1));
-    const y=Math.max(-1,Math.min(1,(p.clientY-r.top)/r.height*2-1));
-    cancelAnimationFrame(orbRaf);
-    orbRaf=requestAnimationFrame(()=>{
-      el.style.setProperty("--orbX",(x*7)+"px");
-      el.style.setProperty("--orbY",(y*7)+"px");
-      surf?.style.setProperty("--gx",(x*4)+"%");
-      surf?.style.setProperty("--gy",(y*4)+"%");
-    });
+/* Living Orb pointer physics */
+let raf=0;
+function bindOrb(el){
+  let down=false,lastX=.5,lastY=.5;
+  const apply=(x,y)=>{
+    const dx=(x-.5),dy=(y-.5);
+    el.style.setProperty("--p1x",`${dx*26}px`);el.style.setProperty("--p1y",`${dy*26}px`);
+    el.style.setProperty("--p2x",`${dx*-19}px`);el.style.setProperty("--p2y",`${dy*-19}px`);
+    el.style.setProperty("--p3x",`${dx*12}px`);el.style.setProperty("--p3y",`${dy*-14}px`);
+    el.style.setProperty("--orb-scale",down?"1.018":"1");
   };
-  el.addEventListener("pointermove",move,{passive:true});
-  el.addEventListener("pointerleave",()=>{el.style.setProperty("--orbX","0px");el.style.setProperty("--orbY","0px")},{passive:true});
+  const move=e=>{
+    const r=el.getBoundingClientRect();lastX=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));lastY=Math.max(0,Math.min(1,(e.clientY-r.top)/r.height));
+    cancelAnimationFrame(raf);raf=requestAnimationFrame(()=>apply(lastX,lastY));
+  };
+  el.addEventListener("pointerdown",e=>{down=true;el.setPointerCapture?.(e.pointerId);el.classList.remove("touched");void el.offsetWidth;el.classList.add("touched");move(e);try{navigator.vibrate?.(13)}catch{}},{passive:true});
+  el.addEventListener("pointermove",e=>{if(down||e.pointerType==="mouse")move(e)},{passive:true});
+  const end=()=>{down=false;el.style.setProperty("--orb-scale","1");setTimeout(()=>apply(.5,.5),70)};
+  el.addEventListener("pointerup",end,{passive:true});el.addEventListener("pointercancel",end,{passive:true});el.addEventListener("pointerleave",()=>{if(!down)end()},{passive:true});
 }
-bindOrbMotion($("#mainOrb"));bindOrbMotion($("#drawOrb"));
+$$(".living-orb").forEach(bindOrb);
+
+const signals=[
+  "O que parece urgente talvez precise primeiro ficar claro.",
+  "Observe a diferença entre o que você sente, o que você imagina e o que consegue verificar.",
+  "A próxima resposta pode estar numa pergunta mais simples.",
+  "Escolha um passo pequeno que devolva movimento à situação.",
+  "Nem toda intensidade é direção. Procure também consistência.",
+  "Proteja sua energia enquanto decide o que merece continuidade."
+];
+function signal(target="#homeAnswer"){
+  const t=signals[Math.floor(Math.random()*signals.length)];
+  $(target).textContent=t;$$(".living-orb").forEach(o=>{o.classList.add("speaking");setTimeout(()=>o.classList.remove("speaking"),1200)});
+  if(state.config.voice)speak(t);
+}
+$('[data-orb="hero"]').onclick=()=>signal("#homeAnswer");
+$('[data-orb="main"]').onclick=()=>signal("#orbAnswer");
+$("#receiveSignal").onclick=()=>signal("#orbAnswer");
 
 /* voice */
-function recognition(){
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  return SR?new SR():null;
-}
-function startListening(onText){
-  const r=recognition();
-  if(!r){$("#voiceState").textContent="O reconhecimento de voz não está disponível neste navegador. Você pode escrever normalmente.";return}
+function speechRecognition(){const C=window.SpeechRecognition||window.webkitSpeechRecognition;return C?new C():null}
+function listen(cb){
+  const r=speechRecognition();
+  if(!r){$("#voiceState").textContent="Reconhecimento de voz não disponível neste navegador.";return}
   r.lang="pt-BR";r.interimResults=false;r.maxAlternatives=1;
-  $("#mainOrb").classList.add("is-listening");$("#orbCaption").textContent="ouvindo…";$("#voiceState").textContent="Ouvindo…";
-  r.onresult=e=>onText(e.results[0][0].transcript);
-  r.onerror=()=>{$("#voiceState").textContent="Não consegui ouvir. Tente novamente ou escreva."};
-  r.onend=()=>{$("#mainOrb").classList.remove("is-listening");$("#orbCaption").textContent="toque · mova · fale"};
+  $$(".living-orb").forEach(o=>o.classList.add("listening"));$("#voiceState").textContent="Ouvindo…";
+  r.onresult=e=>cb(e.results[0][0].transcript);
+  r.onend=()=>{$$(".living-orb").forEach(o=>o.classList.remove("listening"));$("#voiceState").textContent=""};
+  r.onerror=()=>{$("#voiceState").textContent="Não consegui ouvir. Você pode escrever."};
   try{r.start()}catch{}
 }
-$("#orbListen").onclick=()=>startListening(t=>{go("channel");$("#chatInput").value=t;sendChat()});
-$("#chatVoice").onclick=()=>startListening(t=>{$("#chatInput").value=t;sendChat()});
-function speak(text,force=false){
+function speak(t){
   if(!("speechSynthesis" in window))return;
-  if(!force)return;
-  const u=new SpeechSynthesisUtterance(text);u.lang="pt-BR";u.rate=.96;u.pitch=1.02;
-  speechSynthesis.cancel();speechSynthesis.speak(u);
+  const u=new SpeechSynthesisUtterance(t);u.lang="pt-BR";u.rate=.97;u.pitch=1.03;speechSynthesis.cancel();speechSynthesis.speak(u)
+}
+$("#voiceHome").onclick=()=>listen(t=>{go("channel");$("#chatInput").value=t;sendChat()});
+$("#listenOrb").onclick=()=>listen(t=>{$("#orbAnswer").textContent=`Você disse: “${t}”`;setTimeout(()=>signal("#orbAnswer"),420)});
+$("#toggleVoice").onclick=()=>{state.config.voice=!state.config.voice;save("orbe12.config",state.config);updateVoiceButton()};
+function updateVoiceButton(){$("#toggleVoice").textContent=`Voz: ${state.config.voice?"ligada":"desligada"}`}
+updateVoiceButton();
+
+/* card image compatibility */
+const rankOrder=["as","2","3","4","5","6","7","8","9","10","pajem","cavaleiro","rainha","rei"];
+function legacyCardIndex(c){
+  if(c.group==="major") return DECK.filter(x=>x.group==="major").findIndex(x=>x.id===c.id);
+  const rank=c.id.split("-de-")[0];
+  const r=rankOrder.indexOf(rank);
+  const base={copas:22,paus:36,espadas:50,ouros:64}[c.group];
+  return (base??0)+Math.max(0,r);
+}
+function imageCandidates(c){
+  const n=legacyCardIndex(c),p=String(n).padStart(2,"0");
+  const base=[
+    `card-${p}.jpg`,`card-${n}.jpg`,
+    `assets/cards/card-${p}.jpg`,`assets/cards/card-${n}.jpg`,
+    c.image,`assets/cards/${c.id}.jpg`,`${c.id}.jpg`,
+    `card-${p}.png`,`assets/cards/card-${p}.png`,`assets/cards/${c.id}.png`,`${c.id}.png`,
+    `card-${p}.jpeg`,`assets/cards/card-${p}.jpeg`
+  ];
+  return [...new Set(base.filter(Boolean))];
+}
+function imageHTML(c,cls=""){
+  const cand=imageCandidates(c).map(x=>x+"?v=12");
+  return `<img class="${cls}" src="${esc(cand[0])}" alt="${esc(c.name)}" loading="lazy" decoding="async" data-candidates='${esc(JSON.stringify(cand))}' data-try="0">`;
+}
+function hydrateImages(root=document){
+  $$("img[data-candidates]",root).forEach(img=>{
+    if(img.dataset.bound)return;img.dataset.bound="1";
+    img.addEventListener("error",()=>{
+      let arr=[];try{arr=JSON.parse(img.dataset.candidates)}catch{}
+      let i=(+img.dataset.try||0)+1;img.dataset.try=i;
+      if(i<arr.length){img.src=arr[i]}
+      else{img.outerHTML=`<div class="placeholder">${esc(img.alt)}</div>`}
+    });
+  });
 }
 
-/* TAROT */
-function resetBag(){
-  state.bag=DECK.map((_,i)=>i);
-  for(let i=state.bag.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[state.bag[i],state.bag[j]]=[state.bag[j],state.bag[i]]}
-  state.drawn=[];updateDeckCaption();
+/* deck shuffle */
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function resetDeck(){state.bag=shuffle(DECK.map((_,i)=>i));state.drawn=[];updateCount()}
+function updateCount(){$("#deckCount").textContent=`${state.bag.length} cartas restantes`}
+function take(){
+  if(!state.bag.length)resetDeck();
+  const card=DECK[state.bag.pop()],rev=Math.random()<.28;state.drawn.push({card,rev});updateCount();setAmbience(card);return{card,rev}
 }
-function updateDeckCaption(){$("#deckCaption").textContent=`${state.bag.length||78} cartas restantes`}
-function takeCard(){
-  if(!state.bag.length)resetBag();
-  const idx=state.bag.pop(),card=DECK[idx],rev=Math.random()<.28;
-  state.drawn.push({card,rev,time:Date.now()});updateDeckCaption();
-  return {card,rev};
-}
-function cardImage(card,extra=""){
-  return `<img ${extra} src="${card.image}?v=11" alt="${escapeHTML(card.name)}" loading="lazy" decoding="async" onerror="this.outerHTML='<div class=&quot;img-fallback&quot;>${escapeHTML(card.name)}</div>'">`;
+function setAmbience(c){
+  document.body.classList.remove("suit-copas","suit-paus","suit-espadas","suit-ouros","suit-major");
+  document.body.classList.add(c.group==="major"?"suit-major":`suit-${c.group}`)
 }
 function drawFree(){
-  const {card,rev}=takeCard();
-  $("#freeResult").innerHTML=`<div class="draw-card">${cardImage(card)}<div><div class="eyebrow">${escapeHTML(card.suit)}</div><h3>${escapeHTML(card.name)}</h3><div class="orientation">${rev?"Invertida":"Direta"}</div><p>${escapeHTML(rev?card.reversed:card.upright)}</p><p class="small">${escapeHTML(card.keywords)}</p><button class="ghost" data-open-card="${escapeHTML(card.id)}">Ver carta</button></div></div>`;
-  bindCardOpen($("#freeResult"));
-  try{navigator.vibrate?.(16)}catch{}
+  const {card,rev}=take();
+  $("#freeResult").innerHTML=`<div class="card-row">${imageHTML(card)}<div><div class="eyebrow">${esc(card.suit)}</div><h3>${esc(card.name)}</h3><span class="tag">${rev?"Invertida":"Direta"}</span><p>${esc(rev?card.reversed:card.upright)}</p><p class="small">${esc(card.keywords)}</p><button class="soft" data-card="${esc(card.id)}">Ampliar carta</button></div></div>`;
+  hydrateImages($("#freeResult"));bindCardButtons($("#freeResult"));
+  $("#drawOrb").classList.remove("touched");void $("#drawOrb").offsetWidth;$("#drawOrb").classList.add("touched");
 }
-$("#drawButton").onclick=$("#drawOrb").onclick=drawFree;
-$("#shuffleButton").onclick=()=>{resetBag();$("#freeResult").textContent="Baralho embaralhado. A Orbe está pronta."};
-$("#clearTable").onclick=()=>{$("#freeResult").textContent="Mesa limpa. O baralho atual foi preservado."};
-resetBag();
+$("#drawButton").onclick=drawFree;$("#drawOrb").addEventListener("dblclick",drawFree);
+$("#shuffleButton").onclick=()=>{resetDeck();$("#freeResult").textContent="Baralho embaralhado. A Orbe está pronta."};
+resetDeck();
 
+/* spreads */
 const SPREADS={
-  one:{title:"Carta do Momento",positions:["Agora"]},
-  three:{title:"Passado · Presente · Tendência",positions:["Passado","Presente","Tendência"]},
-  choice:{title:"Dois Caminhos",positions:["O que move você","Caminho A","Caminho B","Ponto de atenção"]},
-  love:{title:"Amor & Relações",positions:["Você","A dinâmica","Orientação"]},
-  path:{title:"Caminho",positions:["Origem","Força atual","Desafio","Abertura","Próximo passo"]},
-  cross:{title:"Cruz Celta",positions:["Situação","Desafio","Base","Passado","Possibilidade","Próximo movimento","Você","Ambiente","Esperanças/medos","Síntese"]}
+ one:{title:"Carta do Momento",pos:["Agora"]},
+ three:{title:"Passado · Presente · Tendência",pos:["Passado","Presente","Tendência"]},
+ choice:{title:"Dois Caminhos",pos:["Núcleo","Caminho A","Caminho B","Critério"]},
+ love:{title:"Amor & Relações",pos:["Você","Dinâmica","Orientação"]},
+ path:{title:"Caminho",pos:["Origem","Força","Desafio","Abertura","Próximo passo"]},
+ cross:{title:"Cruz Celta",pos:["Situação","Desafio","Base","Passado","Possibilidade","Próximo movimento","Você","Ambiente","Esperanças/medos","Síntese"]}
 };
 $$("[data-spread]").forEach(b=>b.onclick=()=>openSpread(b.dataset.spread));
-function openSpread(key){
-  const s=SPREADS[key],intent=$("#readingIntent").value.trim(),cards=s.positions.map(()=>takeCard());
-  const html=cards.map((x,i)=>`<div class="spread-card">${cardImage(x.card)}<b>${escapeHTML(s.positions[i])}</b><small>${escapeHTML(x.card.name)} · ${x.rev?"Invertida":"Direta"}</small></div>`).join("");
-  const interpretation=cards.map((x,i)=>`<b>${escapeHTML(s.positions[i])} — ${escapeHTML(x.card.name)}:</b> ${escapeHTML(x.rev?x.card.reversed:x.card.upright)}`).join("<br><br>");
-  $("#spreadArea").innerHTML=`<div class="reading"><b>${escapeHTML(s.title)}</b>${intent?`<div class="small" style="margin-top:5px">Intenção: ${escapeHTML(intent)}</div>`:""}</div><div class="spread-grid">${html}</div><div class="reading">${interpretation}<div class="actions"><button class="ghost" id="saveSpread">Salvar no Diário</button>${state.config.api?'<button class="primary" id="aiSpread">Analisar com IA</button>':""}</div><div class="small">Leitura simbólica para reflexão; não é garantia de acontecimentos futuros.</div></div>`;
-  $("#saveSpread").onclick=()=>saveReading(s.title,intent,cards);
+function openSpread(k){
+  const s=SPREADS[k],intent=$("#readingIntent").value.trim(),cards=s.pos.map(()=>take());
+  $("#spreadArea").innerHTML=`<div class="interpretation"><b>${esc(s.title)}</b>${intent?`<div class="small">Intenção: ${esc(intent)}</div>`:""}</div><div class="spread-grid">${cards.map((x,i)=>`<div class="spread-card">${imageHTML(x.card)}<b>${esc(s.pos[i])}</b><small>${esc(x.card.name)} · ${x.rev?"Invertida":"Direta"}</small></div>`).join("")}</div><div class="interpretation">${cards.map((x,i)=>`<b>${esc(s.pos[i])} — ${esc(x.card.name)}:</b> ${esc(x.rev?x.card.reversed:x.card.upright)}`).join("<br><br>")}<div class="actions"><button id="saveSpread" class="soft">Salvar no Diário</button>${state.config.api?'<button id="aiSpread" class="primary">Analisar com IA</button>':""}</div><div class="small">Leitura simbólica e reflexiva; não garante acontecimentos futuros.</div></div>`;
+  hydrateImages($("#spreadArea"));$("#saveSpread").onclick=()=>saveReading(s.title,intent,cards);
   if($("#aiSpread"))$("#aiSpread").onclick=()=>deepAI(s,intent,cards);
-}
-async function deepAI(spread,intent,cards){
-  const btn=$("#aiSpread");btn.disabled=true;btn.textContent="Analisando…";
-  try{
-    const data=await apiCall("/api/tarot",{spread:spread.title,intent,cards:cards.map(x=>({name:x.card.name,orientation:x.rev?"reversed":"upright",keywords:x.card.keywords}))});
-    $("#spreadArea").insertAdjacentHTML("beforeend",`<div class="reading"><b>Análise da IA</b><br>${escapeHTML(data.text||data.message||"Resposta recebida.")}</div>`);
-  }catch(e){alert("A IA ainda não está conectada ou o endpoint não respondeu.")}finally{btn.disabled=false;btn.textContent="Analisar com IA"}
-}
-
-/* CHANNEL */
-$("#startChannel").onclick=()=>{
-  const name=$("#channelName").value.trim()||"essa pessoa";
-  state.channel={name,relation:$("#channelRelation").value.trim(),context:$("#channelContext").value.trim(),messages:[]};
-  $("#chatLog").innerHTML=`<div class="bubble orbe"><div class="who">ORBE · SIMULAÇÃO</div>A conversa simbólica sobre ${escapeHTML(name)} foi aberta. Escreva o que você gostaria de dizer ou compreender.</div>`;
-  $("#chatInput").focus();
-};
-$("#chatSend").onclick=sendChat;$("#chatInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendChat()}});
-async function sendChat(){
-  const input=$("#chatInput"),text=input.value.trim();if(!text)return;
-  input.value="";addBubble("me",text,"VOCÊ");
-  $("#voiceState").textContent="A Orbe está formulando uma resposta…";
-  let answer;
-  if(state.config.api){
-    try{
-      const data=await apiCall("/api/persona",{message:text,persona:state.channel||{},history:(state.channel?.messages||[]).slice(-10)});
-      answer=data.text||data.message;
-    }catch{}
-  }
-  if(!answer)answer=localChannelReply(text);
-  setTimeout(()=>{addBubble("orbe",answer,state.channel?`VOZ SIMBÓLICA · ${state.channel.name}`:"ORBE");$("#voiceState").textContent="";},220);
-  if(state.channel){state.channel.messages.push({role:"user",text},{role:"assistant",text:answer});}
-}
-function addBubble(kind,text,who){
-  const log=$("#chatLog");log.insertAdjacentHTML("beforeend",`<div class="bubble ${kind}"><div class="who">${escapeHTML(who)}</div>${escapeHTML(text)}</div>`);log.scrollTop=log.scrollHeight;
-}
-function localChannelReply(text){
-  const low=text.toLowerCase(),name=state.channel?.name||"essa pessoa";
-  if(low.includes("amor")||low.includes("ama"))return `Ao pensar em ${name}, trate o desejo e os sinais concretos como coisas diferentes. O que as atitudes reais mostram — e o que você gostaria que mostrassem?`;
-  if(low.includes("voltar")||low.includes("volta"))return `Em vez de transformar retorno em certeza, observe o que precisaria mudar para que uma reaproximação fosse saudável e possível para você.`;
-  if(low.includes("saudade"))return `A saudade pode dizer muito sobre o vínculo que você sente. Pergunte o que ela está pedindo: contato, encerramento, cuidado ou apenas espaço para sentir.`;
-  if(low.includes("medo"))return `Dê um nome preciso ao medo. Depois separe: o que é fato, o que é hipótese e qual parte está sob seu controle agora.`;
-  return `Ouça esta frase como um espelho simbólico: “Eu não posso responder pelo que ${name} sente de verdade, mas posso ajudar você a enxergar o que esta relação desperta em você e qual escolha preserva sua clareza.”`;
 }
 async function apiCall(path,payload){
   const base=(state.config.api||"").replace(/\/$/,"");if(!base)throw new Error("no api");
   const r=await fetch(base+path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
-  if(!r.ok)throw new Error("api");return await r.json();
+  if(!r.ok)throw new Error("api");return await r.json()
+}
+async function deepAI(s,intent,cards){
+  const b=$("#aiSpread");b.disabled=true;b.textContent="Analisando…";
+  try{
+    const data=await apiCall("/api/tarot",{spread:s.title,intent,cards:cards.map(x=>({name:x.card.name,orientation:x.rev?"reversed":"upright",keywords:x.card.keywords}))});
+    $("#spreadArea").insertAdjacentHTML("beforeend",`<div class="interpretation"><b>Leitura da IA</b><br>${esc(data.text||data.message||"Resposta recebida.")}</div>`)
+  }catch{alert("A IA ainda não está conectada.")}finally{b.disabled=false;b.textContent="Analisar com IA"}
 }
 
-/* DECK LIBRARY — renders only 12 at a time */
-function filteredDeck(){
-  const s=state.search.toLowerCase();
-  return DECK.filter(c=>(state.filter==="all"||c.group===state.filter)&&(!s||`${c.name} ${c.keywords} ${c.suit}`.toLowerCase().includes(s)));
+/* channel */
+$("#startChannel").onclick=()=>{
+  state.channel={name:$("#channelName").value.trim()||"essa pessoa",relation:$("#channelRelation").value.trim(),context:$("#channelContext").value.trim(),messages:[]};
+  $("#chatLog").innerHTML=`<div class="bubble orbe"><div class="who">ORBE · VOZ SIMBÓLICA</div>A conversa sobre ${esc(state.channel.name)} foi aberta. O que você gostaria de dizer ou compreender?</div>`;
+};
+$("#chatSend").onclick=sendChat;$("#chatInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();sendChat()}});
+$("#chatVoice").onclick=()=>listen(t=>{$("#chatInput").value=t;sendChat()});
+async function sendChat(){
+  const el=$("#chatInput"),t=el.value.trim();if(!t)return;el.value="";bubble("me",t,"VOCÊ");
+  $("#voiceState").textContent="A Orbe está respondendo…";let ans;
+  if(state.config.api){try{const d=await apiCall("/api/persona",{message:t,persona:state.channel||{},history:(state.channel?.messages||[]).slice(-12)});ans=d.text||d.message}catch{}}
+  if(!ans)ans=localReply(t);
+  setTimeout(()=>{bubble("orbe",ans,state.channel?`VOZ SIMBÓLICA · ${state.channel.name}`:"ORBE");$("#voiceState").textContent="";if(state.config.voice)speak(ans)},200);
+  if(state.channel)state.channel.messages.push({role:"user",text:t},{role:"assistant",text:ans})
 }
+function bubble(k,t,w){const log=$("#chatLog");log.insertAdjacentHTML("beforeend",`<div class="bubble ${k}"><div class="who">${esc(w)}</div>${esc(t)}</div>`);log.scrollTop=log.scrollHeight}
+function localReply(t){
+  const s=t.toLowerCase(),n=state.channel?.name||"essa pessoa";
+  if(/amor|ama|gosta/.test(s))return `Ao pensar em ${n}, separe desejo de evidência. O que as atitudes concretas mostram — e o que você gostaria que mostrassem?`;
+  if(/voltar|retorno|volta/.test(s))return `Uma reaproximação só pode ser tratada como possibilidade, não como certeza. O que precisaria mudar para que ela fosse saudável?`;
+  if(/saudade/.test(s))return `A saudade pode apontar para vínculo, ausência ou necessidade de encerramento. Qual dessas partes pesa mais hoje?`;
+  if(/medo|ansiedade/.test(s))return `Separe três camadas: fato, hipótese e medo. Qual delas está comandando sua interpretação agora?`;
+  return `Eu posso funcionar como um espelho simbólico: não sei o que ${n} pensa em segredo, mas posso ajudar você a organizar o que sente, o que observa e o que deseja escolher.`
+}
+
+/* library */
+function filtered(){const q=state.search.toLowerCase();return DECK.filter(c=>(state.filter==="all"||c.group===state.filter)&&(!q||`${c.name} ${c.suit} ${c.keywords}`.toLowerCase().includes(q)))}
 function renderDeck(reset=false){
   if(reset)state.deckLimit=12;
-  const list=filteredDeck(),show=list.slice(0,state.deckLimit);
-  $("#deckGrid").innerHTML=show.map(c=>`<button class="library-card" data-open-card="${escapeHTML(c.id)}">${cardImage(c)}<b>${escapeHTML(c.name)}</b><small>${escapeHTML(c.keywords)}</small></button>`).join("");
-  $("#deckStatus").textContent=`Mostrando ${show.length} de ${list.length} cartas · imagens carregadas somente quando entram na tela`;
-  $("#loadMore").hidden=show.length>=list.length;bindCardOpen($("#deckGrid"));
+  const list=filtered(),show=list.slice(0,state.deckLimit);
+  $("#deckGrid").innerHTML=show.map(c=>`<button class="library-card" data-card="${esc(c.id)}">${imageHTML(c)}<b>${esc(c.name)}</b><small>${esc(c.keywords)}</small></button>`).join("");
+  hydrateImages($("#deckGrid"));bindCardButtons($("#deckGrid"));
+  $("#deckStatus").textContent=`Mostrando ${show.length} de ${list.length} cartas`;
+  $("#loadMore").hidden=show.length>=list.length;
 }
-$("#deckSearch").addEventListener("input",e=>{state.search=e.target.value;renderDeck(true)});
+$("#deckSearch").oninput=e=>{state.search=e.target.value;renderDeck(true)};
 $$(".filter").forEach(b=>b.onclick=()=>{$$(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");state.filter=b.dataset.filter;renderDeck(true)});
 $("#loadMore").onclick=()=>{state.deckLimit+=12;renderDeck()};
-function bindCardOpen(root){$$("[data-open-card]",root).forEach(b=>b.onclick=()=>openCard(b.dataset.openCard))}
+function bindCardButtons(root){$$("[data-card]",root).forEach(b=>b.onclick=()=>openCard(b.dataset.card))}
 function openCard(id){
   const c=DECK.find(x=>x.id===id);if(!c)return;
-  $("#dialogContent").innerHTML=`<div style="clear:both;padding-top:10px">${cardImage(c)}<h2 style="margin-top:16px">${escapeHTML(c.name)}</h2><p class="lead">${escapeHTML(c.upright)}</p><p class="small">${escapeHTML(c.keywords)}</p></div>`;
-  $("#cardDialog").showModal();
+  $("#dialogContent").innerHTML=`${imageHTML(c,"modal-image")}<div class="eyebrow">${esc(c.suit)}</div><h2>${esc(c.name)}</h2><p class="lead">${esc(c.upright)}</p><p class="small">${esc(c.keywords)}</p>`;
+  hydrateImages($("#dialogContent"));$("#cardDialog").showModal()
 }
 $("#dialogClose").onclick=()=>$("#cardDialog").close();
 
-/* CONSULTATIONS */
-function services(){
-  return [
-    {key:"mesa",name:"Mesa Real",price:Number(state.config.mesa)||200,desc:"Leitura aprofundada para um tema central, desafios, possibilidades e orientação prática."},
-    {key:"mente",name:"Leitura de Mentes",price:Number(state.config.mente)||200,desc:"Leitura intuitiva e simbólica sobre uma dinâmica relacional; não acessa pensamentos privados."},
-    {key:"conselho",name:"Conselho",price:Number(state.config.conselho)||50,desc:"Uma pergunta objetiva e uma orientação focada."}
-  ];
+/* diagnostic: probes all compatibility paths without rendering them */
+async function existsOne(c){
+  const candidates=imageCandidates(c);
+  for(const url of candidates){
+    try{
+      const r=await fetch(url,{method:"HEAD",cache:"no-store"});
+      if(r.ok)return url;
+    }catch{}
+  }
+  // Some hosts reject HEAD; fallback image probe for first legacy root file.
+  return await new Promise(resolve=>{
+    const im=new Image(),u=candidates[0]+"?probe="+Date.now();
+    const done=v=>{im.onload=im.onerror=null;resolve(v)};
+    im.onload=()=>done(candidates[0]);im.onerror=()=>done(null);im.src=u;
+  });
 }
+$("#testImages").onclick=async()=>{
+  const b=$("#testImages");b.disabled=true;b.textContent="Testando…";
+  let ok=0;
+  for(let i=0;i<DECK.length;i+=6){
+    const batch=await Promise.all(DECK.slice(i,i+6).map(existsOne));ok+=batch.filter(Boolean).length;
+    $("#imageDiagnostic").textContent=`Teste: ${ok} imagens encontradas até agora…`;
+  }
+  $("#imageDiagnostic").textContent=`Resultado: ${ok}/78 imagens localizadas.`;
+  $("#diagImages").textContent=`${ok}/78`;b.disabled=false;b.textContent="Testar minhas imagens";
+};
+
+/* music */
+function spotifyId(url){
+  const m=String(url||"").match(/open\.spotify\.com\/album\/([A-Za-z0-9]+)/);return m?m[1]:""
+}
+function albumFrame(url){
+  const id=spotifyId(url);
+  return id?`<iframe class="album-frame" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" src="https://open.spotify.com/embed/album/${id}?utm_source=generator"></iframe>`:`<div class="album-empty">Link do álbum ainda não configurado.<br>Abra Painel → música e cole o link do Spotify.</div>`
+}
+function renderMusicPage(){
+  $("#album1").innerHTML=albumFrame(state.config.album1);
+  $("#album2Title").textContent=state.config.album2Name||"Álbum II";
+  $("#album2").innerHTML=albumFrame(state.config.album2)
+}
+function drawerAlbum(which){
+  const url=which===1?state.config.album1:state.config.album2,name=which===1?(state.config.album1Name||"Álbum I"):(state.config.album2Name||"Álbum II");
+  $("#musicDrawerTitle").textContent=name;$("#musicDrawerPlayer").innerHTML=albumFrame(url);$("#musicDrawer").hidden=false
+}
+$("#musicFab").onclick=()=>drawerAlbum(1);$("#musicClose").onclick=()=>$("#musicDrawer").hidden=true;
+$("#drawerAlbum1").onclick=()=>drawerAlbum(1);$("#drawerAlbum2").onclick=()=>drawerAlbum(2);
+renderMusicPage();
+
+/* consultations */
+function services(){return[
+ {key:"mesa",name:"Mesa Real",price:+state.config.mesa||200,desc:"Leitura aprofundada para um tema central."},
+ {key:"mente",name:"Leitura de Mentes",price:+state.config.mente||200,desc:"Leitura simbólica sobre dinâmica relacional; não acessa pensamentos privados."},
+ {key:"conselho",name:"Conselho",price:+state.config.conselho||50,desc:"Uma pergunta objetiva e uma orientação focada."}
+]}
 function renderServices(){
-  const s=services();
-  $("#serviceGrid").innerHTML=s.map(x=>`<article class="service"><div class="eyebrow">${escapeHTML(x.name)}</div><div class="price">R$ ${x.price.toFixed(0)}</div><p>${escapeHTML(x.desc)}</p><button class="ghost" data-service="${x.key}">Escolher</button></article>`).join("");
-  $("#consultService").innerHTML=s.map(x=>`<option value="${x.key}">${escapeHTML(x.name)} · R$ ${x.price.toFixed(0)}</option>`).join("");
-  $$("[data-service]",$("#serviceGrid")).forEach(b=>b.onclick=()=>{$("#consultService").value=b.dataset.service;$("#consultName").scrollIntoView({behavior:"smooth",block:"center"})});
+ const s=services();
+ $("#serviceGrid").innerHTML=s.map(x=>`<article class="service"><div class="eyebrow">${esc(x.name)}</div><div class="price">R$ ${x.price.toFixed(0)}</div><p class="muted">${esc(x.desc)}</p><button class="soft" data-service="${x.key}">Escolher</button></article>`).join("");
+ $("#consultService").innerHTML=s.map(x=>`<option value="${x.key}">${esc(x.name)} · R$ ${x.price.toFixed(0)}</option>`).join("");
+ $$("[data-service]",$("#serviceGrid")).forEach(b=>b.onclick=()=>{$("#consultService").value=b.dataset.service;$("#consultName").scrollIntoView({behavior:"smooth",block:"center"})})
 }
 $("#consultSend").onclick=()=>{
-  const s=services().find(x=>x.key===$("#consultService").value)||services()[0];
-  const lines=[
-    `Olá, quero solicitar uma consulta da Orbe das Realidades.`,
-    `Serviço: ${s.name} — R$ ${s.price.toFixed(0)}`,
-    `Nome: ${$("#consultName").value.trim()}`,
-    `E-mail: ${$("#consultEmail").value.trim()}`,
-    `Telefone: ${$("#consultPhone").value.trim()}`,
-    `Data preferida: ${$("#consultDate").value||"a combinar"}`,
-    `Horário preferido: ${$("#consultTime").value||"a combinar"}`,
-    `Tema: ${$("#consultTheme").value.trim()||"não informado"}`
-  ];
-  location.href=`mailto:${encodeURIComponent(state.config.email)}?subject=${encodeURIComponent("Consulta — "+s.name+" — Orbe das Realidades")}&body=${encodeURIComponent(lines.join("\n"))}`;
+ const s=services().find(x=>x.key===$("#consultService").value)||services()[0];
+ const body=[
+  "Olá, quero solicitar uma consulta da Orbe das Realidades.",
+  `Serviço: ${s.name} — R$ ${s.price.toFixed(0)}`,
+  `Nome: ${$("#consultName").value.trim()}`,
+  `E-mail: ${$("#consultEmail").value.trim()}`,
+  `Telefone: ${$("#consultPhone").value.trim()}`,
+  `Data: ${$("#consultDate").value||"a combinar"}`,
+  `Horário: ${$("#consultTime").value||"a combinar"}`,
+  `Tema: ${$("#consultTheme").value.trim()||"não informado"}`
+ ].join("\n");
+ location.href=`mailto:${encodeURIComponent(state.config.email)}?subject=${encodeURIComponent("Consulta — "+s.name)}&body=${encodeURIComponent(body)}`
 };
 renderServices();
 
-/* STORE */
+/* store */
 function renderStore(){
-  const items=Array.isArray(state.config.store)&&state.config.store.length?state.config.store:STORE_DEFAULT;
-  $("#storeGrid").innerHTML=items.map(x=>`<article class="product"><div class="product-image"></div><h3>${escapeHTML(x.name||"Produto")}</h3><div class="price">${escapeHTML(x.price||"")}</div><p>${escapeHTML(x.desc||"")}</p>${x.url?`<a class="primary" href="${escapeHTML(x.url)}" target="_blank" rel="noopener">Ver produto</a>`:`<button class="ghost" disabled>Configure no painel</button>`}</article>`).join("");
+ const items=Array.isArray(state.config.store)?state.config.store:DEFAULT_CONFIG.store;
+ $("#storeGrid").innerHTML=items.map(x=>`<article class="product"><div class="product-art"></div><h3>${esc(x.name)}</h3><div class="price">${esc(x.price)}</div><p class="muted">${esc(x.desc)}</p>${x.url?`<a class="primary" href="${esc(x.url)}" target="_blank" rel="noopener">Ver produto</a>`:`<button class="soft" disabled>Configure no Painel</button>`}</article>`).join("")
 }
 renderStore();
 
-/* JOURNAL */
+/* journal */
 function saveReading(title,intent,cards){
-  state.journal.unshift({at:new Date().toISOString(),title,intent,cards:cards.map(x=>({name:x.card.name,rev:x.rev}))});
-  state.journal=state.journal.slice(0,40);saveJSON("orbe11.journal",state.journal);alert("Leitura salva no Diário.");
+ state.journal.unshift({at:new Date().toISOString(),title,intent,cards:cards.map(x=>({name:x.card.name,rev:x.rev}))});state.journal=state.journal.slice(0,50);save("orbe12.journal",state.journal);alert("Leitura salva.")
 }
-$("#journalSave").onclick=()=>{
-  const t=$("#journalText").value.trim();if(!t)return;
-  state.journal.unshift({at:new Date().toISOString(),title:"Entrada pessoal",text:t});state.journal=state.journal.slice(0,40);saveJSON("orbe11.journal",state.journal);$("#journalText").value="";renderJournal();
-};
-$("#journalClear").onclick=()=>{if(confirm("Apagar o diário salvo neste aparelho?")){state.journal=[];saveJSON("orbe11.journal",[]);renderJournal()}};
+$("#journalSave").onclick=()=>{const t=$("#journalText").value.trim();if(!t)return;state.journal.unshift({at:new Date().toISOString(),title:"Entrada pessoal",text:t});state.journal=state.journal.slice(0,50);save("orbe12.journal",state.journal);$("#journalText").value="";renderJournal()};
+$("#journalClear").onclick=()=>{if(confirm("Apagar o Diário deste aparelho?")){state.journal=[];save("orbe12.journal",[]);renderJournal()}};
 function renderJournal(){
-  $("#journalList").innerHTML=state.journal.length?state.journal.map(x=>`<div class="reading"><b>${escapeHTML(x.title)}</b><div class="small">${new Date(x.at).toLocaleString("pt-BR")}</div>${x.text?`<p>${escapeHTML(x.text)}</p>`:""}${x.intent?`<p class="small">Intenção: ${escapeHTML(x.intent)}</p>`:""}${x.cards?`<p>${x.cards.map(c=>escapeHTML(c.name)+(c.rev?" (invertida)":"")).join(" · ")}</p>`:""}</div>`).join(""):`<div class="reading">Seu diário ainda está vazio.</div>`;
+ $("#journalList").innerHTML=state.journal.length?state.journal.map(x=>`<div class="interpretation"><b>${esc(x.title)}</b><div class="small">${new Date(x.at).toLocaleString("pt-BR")}</div>${x.text?`<p>${esc(x.text)}</p>`:""}${x.intent?`<p class="small">Intenção: ${esc(x.intent)}</p>`:""}${x.cards?`<p>${x.cards.map(c=>esc(c.name)+(c.rev?" (invertida)":"")).join(" · ")}</p>`:""}</div>`).join(""):`<div class="interpretation">Seu diário está vazio.</div>`
 }
 
-/* ADMIN */
-async function hashText(s){
-  const bytes=new TextEncoder().encode(s),h=await crypto.subtle.digest("SHA-256",bytes);
-  return [...new Uint8Array(h)].map(b=>b.toString(16).padStart(2,"0")).join("");
-}
+/* admin */
+async function hash(s){const b=new TextEncoder().encode(s),h=await crypto.subtle.digest("SHA-256",b);return[...new Uint8Array(h)].map(x=>x.toString(16).padStart(2,"0")).join("")}
 $("#adminEnter").onclick=async()=>{
-  const h=await hashText(`${$("#adminUser").value.trim()}:${$("#adminPass").value}`);
-  if(h===ADMIN_HASH){sessionStorage.setItem("orbe11.admin","1");$("#adminLogin").hidden=true;$("#adminPanel").hidden=false;loadAdminFields()}
-  else $("#adminError").textContent="Login não reconhecido.";
+ const h=await hash(`${$("#adminUser").value.trim()}:${$("#adminPass").value}`);
+ if(h===ADMIN_HASH){sessionStorage.setItem("orbe12.admin","1");$("#adminLogin").hidden=true;$("#adminPanel").hidden=false;loadAdmin()}
+ else $("#adminError").textContent="Login não reconhecido."
 };
-function loadAdminFields(){
-  if(sessionStorage.getItem("orbe11.admin")==="1"){$("#adminLogin").hidden=true;$("#adminPanel").hidden=false}
-  $("#cfgEmail").value=state.config.email||"";
-  $("#cfgApi").value=state.config.api||"";
-  $("#cfgMesa").value=state.config.mesa||200;
-  $("#cfgMente").value=state.config.mente||200;
-  $("#cfgConselho").value=state.config.conselho||50;
-  $("#cfgWelcome").value=state.config.welcome||DEFAULT_CONFIG.welcome;
+function loadAdmin(){
+ if(sessionStorage.getItem("orbe12.admin")==="1"){$("#adminLogin").hidden=true;$("#adminPanel").hidden=false}
+ $("#cfgEmail").value=state.config.email||"";$("#cfgApi").value=state.config.api||"";
+ $("#cfgMesa").value=state.config.mesa||200;$("#cfgMente").value=state.config.mente||200;$("#cfgConselho").value=state.config.conselho||50;
+ $("#cfgAlbum1").value=state.config.album1||"";$("#cfgAlbum2").value=state.config.album2||"";$("#cfgAlbum2Name").value=state.config.album2Name||"Z";
 }
 $("#cfgSave").onclick=()=>{
-  state.config={...state.config,email:$("#cfgEmail").value.trim(),api:$("#cfgApi").value.trim(),mesa:+$("#cfgMesa").value||200,mente:+$("#cfgMente").value||200,conselho:+$("#cfgConselho").value||50,welcome:$("#cfgWelcome").value.trim()||DEFAULT_CONFIG.welcome};
-  saveJSON("orbe11.config",state.config);renderServices();renderStore();$("#orbMessage").textContent=state.config.welcome;alert("Configuração salva neste aparelho.");
+ state.config={...state.config,email:$("#cfgEmail").value.trim(),api:$("#cfgApi").value.trim(),mesa:+$("#cfgMesa").value||200,mente:+$("#cfgMente").value||200,conselho:+$("#cfgConselho").value||50,album1:$("#cfgAlbum1").value.trim(),album2:$("#cfgAlbum2").value.trim(),album2Name:$("#cfgAlbum2Name").value.trim()||"Álbum II"};
+ save("orbe12.config",state.config);renderServices();renderMusicPage();updateVoiceButton();alert("Configuração salva neste aparelho.")
 };
-$("#cfgExport").onclick=()=>{
-  const blob=new Blob([JSON.stringify(state.config,null,2)],{type:"application/json"}),a=document.createElement("a");
-  a.href=URL.createObjectURL(blob);a.download="orbe-viva-11-config.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500);
-};
+$("#cfgExport").onclick=()=>{const blob=new Blob([JSON.stringify(state.config,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="orbe-viva-12-config.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)};
 $("#cfgImport").onclick=()=>$("#cfgImportFile").click();
-$("#cfgImportFile").onchange=async e=>{
-  const f=e.target.files[0];if(!f)return;
-  try{const cfg=JSON.parse(await f.text());state.config={...DEFAULT_CONFIG,...cfg};saveJSON("orbe11.config",state.config);loadAdminFields();renderServices();renderStore();alert("Configuração importada.")}catch{alert("Arquivo de configuração inválido.")}
-};
-$("#clearCaches").onclick=async()=>{
-  try{
-    if("serviceWorker" in navigator){const rs=await navigator.serviceWorker.getRegistrations();for(const r of rs)await r.unregister()}
-    if("caches" in window){const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)))}
-    alert("Caches antigos removidos. Recarregue a página.")
-  }catch{alert("Não foi possível limpar tudo automaticamente neste navegador.")}
-};
-$("#resetLocal").onclick=()=>{if(confirm("Apagar Diário, configurações e sessão local deste aparelho?")){["orbe11.config","orbe11.journal"].forEach(k=>localStorage.removeItem(k));sessionStorage.clear();location.reload()}};
+$("#cfgImportFile").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{state.config={...DEFAULT_CONFIG,...JSON.parse(await f.text())};save("orbe12.config",state.config);loadAdmin();renderServices();renderMusicPage();alert("Configuração importada.")}catch{alert("Arquivo inválido.")}};
+$("#clearCaches").onclick=async()=>{try{if("serviceWorker"in navigator){const rs=await navigator.serviceWorker.getRegistrations();for(const r of rs)await r.unregister()}if("caches"in window){const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)))}alert("Caches antigos removidos.")}catch{alert("Não consegui limpar todos os caches.")}};
+$("#resetLocal").onclick=()=>{if(confirm("Apagar configurações, diário e sessão deste aparelho?")){localStorage.removeItem("orbe12.config");localStorage.removeItem("orbe12.journal");sessionStorage.clear();location.reload()}};
 
-/* initial routing */
-$("#orbMessage").textContent=state.config.welcome||DEFAULT_CONFIG.welcome;
-const first=location.hash.replace("#","");if(["home","orbe","tarot","readings","channel","deck","services","store","journal","admin"].includes(first))go(first);
-window.addEventListener("pageshow",()=>document.body.classList.add("ready"),{once:true});
+/* init */
+const start=location.hash.slice(1);if(VIEWS.includes(start))go(start);
+hydrateImages();renderDeck();
 </script>
-</body></html>
+</body>
+</html>
