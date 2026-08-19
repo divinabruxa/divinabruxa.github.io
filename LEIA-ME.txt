@@ -1,16 +1,23 @@
-ORBE DAS REALIDADES — VERSÃO PLANA PARA GITHUB PAGES
+ORBE DAS REALIDADES — EDIÇÃO PLANA PARA GITHUB
 
-Envie estes 5 arquivos para a RAIZ do repositório:
+Esta edição foi criada especialmente para envio pelo iPhone.
+Ela não contém nenhuma pasta. Envie estes 7 arquivos para a RAIZ do repositório:
 1. index.html
 2. tarot-atlas.webp
 3. manifest.webmanifest
 4. sw.js
 5. icone.svg
+6. CNAME
+7. LEIA-ME.txt
 
+Não envie apenas o ZIP ao GitHub Pages. Extraia o ZIP e envie os 7 arquivos.
 Não crie pastas. O arquivo tarot-atlas.webp contém as 78 cartas.
+O nome deve ser exatamente index.html, em letras minúsculas.
+Não deixe o iPhone renomear para index (1).html.
 
 No GitHub: Settings > Pages > Deploy from a branch > main > /(root) > Save.
 
 Depois de publicar, abra o endereço do GitHub Pages no Safari. No iPhone, toque em Compartilhar > Adicionar à Tela de Início.
 
 O painel Administração salva links somente no aparelho/navegador. Não coloque senhas nem chaves secretas.
+O arquivo CNAME já contém: divinabruxa.com.br
