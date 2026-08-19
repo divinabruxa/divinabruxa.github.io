@@ -1,10 +1,16 @@
 {
-  "name": "Orbe das Realidades",
-  "short_name": "Orbe",
-  "start_url": "/",
+  "name": "Orbe das Realidades · Orbe Viva 5.0",
+  "short_name": "Orbe Viva",
+  "start_url": "./",
   "display": "standalone",
-  "background_color": "#070109",
-  "theme_color": "#09020d",
-  "description": "Tarot imersivo da Divina Bruxa",
-  "icons": []
+  "background_color": "#050307",
+  "theme_color": "#120817",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
 }

@@ -1,9 +1,25 @@
-ORBE DAS REALIDADES — V15 CORRIGIDA
+ORBE DAS REALIDADES — ORBE VIVA 5.0
 
-1. Abra index.html para usar o app/site.
-2. NÃO abra app.js: ele é apenas parte do sistema.
-3. Abra VERIFICAR-CARTAS.html se quiser conferir as 78 artes.
-4. As cartas card-00.jpg até card-77.jpg foram reorganizadas usando as artes enviadas na conversa.
-5. A arte do Cavaleiro de Paus é a arte gerada anteriormente nesta mesma conversa, pois ela não estava entre o lote final de 77 imagens únicas.
+INSTALAÇÃO NO GITHUB PAGES
+1. Extraia este ZIP.
+2. Envie TODOS os arquivos de dentro da pasta para a raiz do repositório.
+3. Não envie apenas o ZIP.
+4. Mantenha seu arquivo CNAME se já usa domínio próprio.
+5. Faça Commit e aguarde o GitHub Pages atualizar.
+6. No iPhone, abra o site no Safari > Compartilhar > Adicionar à Tela de Início.
 
-Esta versão mantém as tiragens inteligentes da V14 e corrige o baralho visual.
+CORREÇÕES PRINCIPAIS
+- 78 imagens reais ligadas diretamente a cada carta.
+- Toque em qualquer carta abre a imagem em tamanho grande.
+- Orbe com resposta ao toque, movimento, brilho, partículas e vibração.
+- Tarot Livre sem repetição até terminar o baralho.
+- Tiragens de 1, 3, 5 e 10 cartas.
+- Galeria das 78 cartas.
+- Diário local.
+- Dois álbuns do Spotify integrados.
+- Área De Frente com o Tarot.
+- Painel Admin local para vídeo e texto.
+- PWA instalável e cache offline.
+
+OBSERVAÇÃO SOBRE ADMIN E VÍDEOS
+GitHub Pages é hospedagem estática: uma página não pode publicar novos arquivos no próprio repositório. O painel Admin desta versão salva vídeo e texto no aparelho do administrador. Para publicar vídeos e loja para todos os visitantes sem mexer no código, a próxima etapa é conectar um backend/armazenamento.
