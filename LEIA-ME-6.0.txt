@@ -1,0 +1,7 @@
+ORBE DAS REALIDADES — ORBE VIVA 6.0
+
+Inclui: 78 cartas preservadas, Orbe Viva, Tarot Livre, Tiragens, Canalização simbólica preparada para IA, Consultas (R$200/R$200/R$50), Loja editável, De Frente com o Tarot, Diário e Admin local.
+
+IMPORTANTE: para Admin sincronizado entre aparelhos, e-mail automático, loja/pedidos online e IA real, conecte Supabase e uma função server-side. Nunca coloque uma chave secreta da OpenAI no app.js/index.html.
+
+Arquivos de preparação: supabase-schema.sql e supabase/functions/orbe-ai/index.ts.
