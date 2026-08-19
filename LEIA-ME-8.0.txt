@@ -1,0 +1,44 @@
+ORBE DAS REALIDADES — ORBE VIVA 8.0
+
+O QUE ESTA VERSÃO CORRIGE
+- Reconstrução do motor visual para reduzir travamentos no iPhone.
+- Orbe usa animações CSS leves e movimento ao toque com apenas 1 requestAnimationFrame por gesto.
+- Não há loops JavaScript permanentes controlando a Orbe.
+- Galeria e Tarot continuam usando card-00.jpg até card-77.jpg já existentes.
+- Cache/PWA recebeu uma versão nova para evitar servir arquivos antigos.
+- Upload local de vídeo tem limite de 250 MB para proteger o navegador de travamentos.
+- Admin, Loja, Consultas, Canalização, Diário, Vídeos e Música foram mantidos.
+
+INSTALAÇÃO
+1. NÃO apague card-00.jpg até card-77.jpg.
+2. Preserve o CNAME.
+3. Substitua apenas:
+   index.html
+   styles.css
+   app.js
+   sw.js
+   manifest.webmanifest
+   icon.svg
+4. Faça Commit.
+5. Aguarde o GitHub Pages atualizar.
+6. No iPhone, feche a versão antiga, abra o site novamente e, se necessário, teste em aba privada para ignorar cache antigo.
+
+ADMINISTRADOR
+Usuário: Isis33
+Senha: 98075639A
+
+IMPORTANTE SOBRE O ADMIN
+Esta versão tem Admin local e funcional, mas GitHub Pages é um site estático.
+Isso significa que alterações feitas no Admin ficam no navegador daquele aparelho.
+Para editar uma vez e todos os visitantes verem, precisaremos conectar autenticação + banco + armazenamento online.
+
+CONSULTAS
+Mesa Real: R$ 200
+Leitura de Mente: R$ 200
+Carta de Conselho: R$ 50
+O formulário coleta nome, e-mail, WhatsApp/telefone, data, horário e tema, salva no Admin local e abre o aplicativo de e-mail com tudo preenchido.
+
+CANALIZAÇÃO
+Modo local = reflexão simbólica.
+O Admin aceita futuramente um endpoint seguro de IA.
+Nunca coloque chave secreta dentro do app.js.

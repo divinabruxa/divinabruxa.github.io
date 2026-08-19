@@ -1,88 +1,167 @@
-const CARDS=[{"index": 0, "name": "O Louco", "group": "Arcano Maior"}, {"index": 1, "name": "O Mago", "group": "Arcano Maior"}, {"index": 2, "name": "A Sacerdotisa", "group": "Arcano Maior"}, {"index": 3, "name": "A Imperatriz", "group": "Arcano Maior"}, {"index": 4, "name": "O Imperador", "group": "Arcano Maior"}, {"index": 5, "name": "O Hierofante", "group": "Arcano Maior"}, {"index": 6, "name": "Os Enamorados", "group": "Arcano Maior"}, {"index": 7, "name": "O Carro", "group": "Arcano Maior"}, {"index": 8, "name": "A Força", "group": "Arcano Maior"}, {"index": 9, "name": "O Eremita", "group": "Arcano Maior"}, {"index": 10, "name": "A Roda da Fortuna", "group": "Arcano Maior"}, {"index": 11, "name": "A Justiça", "group": "Arcano Maior"}, {"index": 12, "name": "O Enforcado", "group": "Arcano Maior"}, {"index": 13, "name": "A Morte", "group": "Arcano Maior"}, {"index": 14, "name": "A Temperança", "group": "Arcano Maior"}, {"index": 15, "name": "O Diabo", "group": "Arcano Maior"}, {"index": 16, "name": "A Torre", "group": "Arcano Maior"}, {"index": 17, "name": "A Estrela", "group": "Arcano Maior"}, {"index": 18, "name": "A Lua", "group": "Arcano Maior"}, {"index": 19, "name": "O Sol", "group": "Arcano Maior"}, {"index": 20, "name": "O Julgamento", "group": "Arcano Maior"}, {"index": 21, "name": "O Mundo", "group": "Arcano Maior"}, {"index": 22, "name": "Ás de Copas", "group": "Copas"}, {"index": 23, "name": "2 de Copas", "group": "Copas"}, {"index": 24, "name": "3 de Copas", "group": "Copas"}, {"index": 25, "name": "4 de Copas", "group": "Copas"}, {"index": 26, "name": "5 de Copas", "group": "Copas"}, {"index": 27, "name": "6 de Copas", "group": "Copas"}, {"index": 28, "name": "7 de Copas", "group": "Copas"}, {"index": 29, "name": "8 de Copas", "group": "Copas"}, {"index": 30, "name": "9 de Copas", "group": "Copas"}, {"index": 31, "name": "10 de Copas", "group": "Copas"}, {"index": 32, "name": "Pajem de Copas", "group": "Copas"}, {"index": 33, "name": "Cavaleiro de Copas", "group": "Copas"}, {"index": 34, "name": "Rainha de Copas", "group": "Copas"}, {"index": 35, "name": "Rei de Copas", "group": "Copas"}, {"index": 36, "name": "Ás de Ouros", "group": "Ouros"}, {"index": 37, "name": "2 de Ouros", "group": "Ouros"}, {"index": 38, "name": "3 de Ouros", "group": "Ouros"}, {"index": 39, "name": "4 de Ouros", "group": "Ouros"}, {"index": 40, "name": "5 de Ouros", "group": "Ouros"}, {"index": 41, "name": "6 de Ouros", "group": "Ouros"}, {"index": 42, "name": "7 de Ouros", "group": "Ouros"}, {"index": 43, "name": "8 de Ouros", "group": "Ouros"}, {"index": 44, "name": "9 de Ouros", "group": "Ouros"}, {"index": 45, "name": "10 de Ouros", "group": "Ouros"}, {"index": 46, "name": "Pajem de Ouros", "group": "Ouros"}, {"index": 47, "name": "Cavaleiro de Ouros", "group": "Ouros"}, {"index": 48, "name": "Rainha de Ouros", "group": "Ouros"}, {"index": 49, "name": "Rei de Ouros", "group": "Ouros"}, {"index": 50, "name": "Ás de Espadas", "group": "Espadas"}, {"index": 51, "name": "2 de Espadas", "group": "Espadas"}, {"index": 52, "name": "3 de Espadas", "group": "Espadas"}, {"index": 53, "name": "4 de Espadas", "group": "Espadas"}, {"index": 54, "name": "5 de Espadas", "group": "Espadas"}, {"index": 55, "name": "6 de Espadas", "group": "Espadas"}, {"index": 56, "name": "7 de Espadas", "group": "Espadas"}, {"index": 57, "name": "8 de Espadas", "group": "Espadas"}, {"index": 58, "name": "9 de Espadas", "group": "Espadas"}, {"index": 59, "name": "10 de Espadas", "group": "Espadas"}, {"index": 60, "name": "Pajem de Espadas", "group": "Espadas"}, {"index": 61, "name": "Cavaleiro de Espadas", "group": "Espadas"}, {"index": 62, "name": "Rainha de Espadas", "group": "Espadas"}, {"index": 63, "name": "Rei de Espadas", "group": "Espadas"}, {"index": 64, "name": "Ás de Paus", "group": "Paus"}, {"index": 65, "name": "2 de Paus", "group": "Paus"}, {"index": 66, "name": "3 de Paus", "group": "Paus"}, {"index": 67, "name": "4 de Paus", "group": "Paus"}, {"index": 68, "name": "5 de Paus", "group": "Paus"}, {"index": 69, "name": "6 de Paus", "group": "Paus"}, {"index": 70, "name": "7 de Paus", "group": "Paus"}, {"index": 71, "name": "8 de Paus", "group": "Paus"}, {"index": 72, "name": "9 de Paus", "group": "Paus"}, {"index": 73, "name": "10 de Paus", "group": "Paus"}, {"index": 74, "name": "Pajem de Paus", "group": "Paus"}, {"index": 75, "name": "Cavaleiro de Paus", "group": "Paus"}, {"index": 76, "name": "Rainha de Paus", "group": "Paus"}, {"index": 77, "name": "Rei de Paus", "group": "Paus"}];
+
+const CARDS=[{"i": 0, "name": "O Louco", "group": "Arcano Maior"}, {"i": 1, "name": "O Mago", "group": "Arcano Maior"}, {"i": 2, "name": "A Sacerdotisa", "group": "Arcano Maior"}, {"i": 3, "name": "A Imperatriz", "group": "Arcano Maior"}, {"i": 4, "name": "O Imperador", "group": "Arcano Maior"}, {"i": 5, "name": "O Hierofante", "group": "Arcano Maior"}, {"i": 6, "name": "Os Enamorados", "group": "Arcano Maior"}, {"i": 7, "name": "O Carro", "group": "Arcano Maior"}, {"i": 8, "name": "A Força", "group": "Arcano Maior"}, {"i": 9, "name": "O Eremita", "group": "Arcano Maior"}, {"i": 10, "name": "A Roda da Fortuna", "group": "Arcano Maior"}, {"i": 11, "name": "A Justiça", "group": "Arcano Maior"}, {"i": 12, "name": "O Enforcado", "group": "Arcano Maior"}, {"i": 13, "name": "A Morte", "group": "Arcano Maior"}, {"i": 14, "name": "A Temperança", "group": "Arcano Maior"}, {"i": 15, "name": "O Diabo", "group": "Arcano Maior"}, {"i": 16, "name": "A Torre", "group": "Arcano Maior"}, {"i": 17, "name": "A Estrela", "group": "Arcano Maior"}, {"i": 18, "name": "A Lua", "group": "Arcano Maior"}, {"i": 19, "name": "O Sol", "group": "Arcano Maior"}, {"i": 20, "name": "O Julgamento", "group": "Arcano Maior"}, {"i": 21, "name": "O Mundo", "group": "Arcano Maior"}, {"i": 22, "name": "Ás de Copas", "group": "Copas"}, {"i": 23, "name": "2 de Copas", "group": "Copas"}, {"i": 24, "name": "3 de Copas", "group": "Copas"}, {"i": 25, "name": "4 de Copas", "group": "Copas"}, {"i": 26, "name": "5 de Copas", "group": "Copas"}, {"i": 27, "name": "6 de Copas", "group": "Copas"}, {"i": 28, "name": "7 de Copas", "group": "Copas"}, {"i": 29, "name": "8 de Copas", "group": "Copas"}, {"i": 30, "name": "9 de Copas", "group": "Copas"}, {"i": 31, "name": "10 de Copas", "group": "Copas"}, {"i": 32, "name": "Pajem de Copas", "group": "Copas"}, {"i": 33, "name": "Cavaleiro de Copas", "group": "Copas"}, {"i": 34, "name": "Rainha de Copas", "group": "Copas"}, {"i": 35, "name": "Rei de Copas", "group": "Copas"}, {"i": 36, "name": "Ás de Ouros", "group": "Ouros"}, {"i": 37, "name": "2 de Ouros", "group": "Ouros"}, {"i": 38, "name": "3 de Ouros", "group": "Ouros"}, {"i": 39, "name": "4 de Ouros", "group": "Ouros"}, {"i": 40, "name": "5 de Ouros", "group": "Ouros"}, {"i": 41, "name": "6 de Ouros", "group": "Ouros"}, {"i": 42, "name": "7 de Ouros", "group": "Ouros"}, {"i": 43, "name": "8 de Ouros", "group": "Ouros"}, {"i": 44, "name": "9 de Ouros", "group": "Ouros"}, {"i": 45, "name": "10 de Ouros", "group": "Ouros"}, {"i": 46, "name": "Pajem de Ouros", "group": "Ouros"}, {"i": 47, "name": "Cavaleiro de Ouros", "group": "Ouros"}, {"i": 48, "name": "Rainha de Ouros", "group": "Ouros"}, {"i": 49, "name": "Rei de Ouros", "group": "Ouros"}, {"i": 50, "name": "Ás de Espadas", "group": "Espadas"}, {"i": 51, "name": "2 de Espadas", "group": "Espadas"}, {"i": 52, "name": "3 de Espadas", "group": "Espadas"}, {"i": 53, "name": "4 de Espadas", "group": "Espadas"}, {"i": 54, "name": "5 de Espadas", "group": "Espadas"}, {"i": 55, "name": "6 de Espadas", "group": "Espadas"}, {"i": 56, "name": "7 de Espadas", "group": "Espadas"}, {"i": 57, "name": "8 de Espadas", "group": "Espadas"}, {"i": 58, "name": "9 de Espadas", "group": "Espadas"}, {"i": 59, "name": "10 de Espadas", "group": "Espadas"}, {"i": 60, "name": "Pajem de Espadas", "group": "Espadas"}, {"i": 61, "name": "Cavaleiro de Espadas", "group": "Espadas"}, {"i": 62, "name": "Rainha de Espadas", "group": "Espadas"}, {"i": 63, "name": "Rei de Espadas", "group": "Espadas"}, {"i": 64, "name": "Ás de Paus", "group": "Paus"}, {"i": 65, "name": "2 de Paus", "group": "Paus"}, {"i": 66, "name": "3 de Paus", "group": "Paus"}, {"i": 67, "name": "4 de Paus", "group": "Paus"}, {"i": 68, "name": "5 de Paus", "group": "Paus"}, {"i": 69, "name": "6 de Paus", "group": "Paus"}, {"i": 70, "name": "7 de Paus", "group": "Paus"}, {"i": 71, "name": "8 de Paus", "group": "Paus"}, {"i": 72, "name": "9 de Paus", "group": "Paus"}, {"i": 73, "name": "10 de Paus", "group": "Paus"}, {"i": 74, "name": "Pajem de Paus", "group": "Paus"}, {"i": 75, "name": "Cavaleiro de Paus", "group": "Paus"}, {"i": 76, "name": "Rainha de Paus", "group": "Paus"}, {"i": 77, "name": "Rei de Paus", "group": "Paus"}];
 const ADMIN_USER="Isis33";
 const ADMIN_HASH="bf516cdd9df8ca987b867a291b08049fc0590d181e78b4a35c7ddefea2058736";
-const EMAIL="herculesfardim@hotmail.com";
+const DEFAULT_EMAIL='herculesfardim@hotmail.com';
+
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-function go(id){$$('.view').forEach(v=>v.classList.toggle('active',v.id===id));$$('.tab').forEach(b=>b.classList.toggle('active',b.dataset.view===id));scrollTo({top:0,behavior:'smooth'})} window.go=go;
-$$('.tab').forEach(b=>b.onclick=()=>go(b.dataset.view));
-function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function img(c){return `card-${String(c.index).padStart(2,'0')}.jpg`}
-function sparkle(stage,x,y){const r=stage.getBoundingClientRect();for(let i=0;i<15;i++){const s=document.createElement('i');s.className='spark';s.style.left=(x-r.left)+'px';s.style.top=(y-r.top)+'px';const a=Math.random()*Math.PI*2,d=45+Math.random()*130;s.style.setProperty('--dx',Math.cos(a)*d+'px');s.style.setProperty('--dy',Math.sin(a)*d+'px');stage.appendChild(s);setTimeout(()=>s.remove(),1100)}}
-function animateOrb(stage,e){stage.classList.remove('touched');void stage.offsetWidth;stage.classList.add('touched');if(e?.clientX)sparkle(stage,e.clientX,e.clientY);const cap=stage.querySelector('.orb-caption');if(cap)cap.textContent='escutando';setTimeout(()=>{stage.classList.add('thinking');if(cap)cap.textContent='movendo as possibilidades'},320);setTimeout(()=>{stage.classList.remove('touched','thinking');if(cap)cap.textContent=stage.id==='freeOrb'?'pronta':'toque · mova · sinta'},1500);if(navigator.vibrate)navigator.vibrate([12,18,12])}
-function bindOrb(stage,action){const btn=stage.querySelector('.orb-button');if(!btn)return;let tx=0,ty=0,rx=0,ry=0;function loop(){rx+=(ty-rx)*.11;ry+=(tx-ry)*.11;btn.style.setProperty('--rx',rx+'deg');btn.style.setProperty('--ry',ry+'deg');requestAnimationFrame(loop)}loop();btn.addEventListener('pointerdown',e=>{animateOrb(stage,e);action?.()});btn.addEventListener('pointermove',e=>{const r=btn.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;btn.style.setProperty('--px',`${x*100}%`);btn.style.setProperty('--py',`${y*100}%`);btn.style.setProperty('--tx',`${(x-.5)*22}px`);btn.style.setProperty('--ty',`${(y-.5)*22}px`);tx=(x-.5)*14;ty=-(y-.5)*14;btn.style.setProperty('--a',`${x*260}deg`)});btn.addEventListener('pointerleave',()=>{btn.style.setProperty('--tx','0px');btn.style.setProperty('--ty','0px');tx=ty=0})}
+const store={
+ get(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch{return d}},
+ set(k,v){localStorage.setItem(k,JSON.stringify(v))}
+};
+const cardImg=c=>`card-${String(c.i).padStart(2,'0')}.jpg`;
+const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 
-let pile=[],drawn=[],guided=[];
-function reset(){pile=shuffle(CARDS);drawn=[];renderSpread();updateCount()}
-function updateCount(){$('#count').textContent=`${pile.length} cartas restantes`}
-function cardButton(c){return `<button class="drawn card" data-i="${c.index}"><img src="${img(c)}" alt="${esc(c.name)}"><div class="meta"><b>${esc(c.name)}</b><div class="muted">${esc(c.group)}</div></div></button>`}
-function renderSpread(){$('#spread').innerHTML=drawn.map(cardButton).join('')}
-function draw(){if(!pile.length)reset();const c=pile.pop();drawn.push(c);renderSpread();updateCount()}
-$('#drawBtn').onclick=()=>{animateOrb($('#freeOrb'));draw()};$('#shuffleBtn').onclick=reset;$('#clearBtn').onclick=()=>{drawn=[];renderSpread()};
-bindOrb($('#freeOrb'),draw);bindOrb($('#heroOrb'),()=>setTimeout(()=>go('free'),420));
+function go(id){
+  $$('.view').forEach(v=>v.classList.toggle('active',v.id===id));
+  $$('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.view===id));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+$$('.nav-btn').forEach(b=>b.addEventListener('click',()=>go(b.dataset.view)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
 
-function renderDeck(q=''){q=q.toLowerCase().trim();$('#deckGrid').innerHTML=CARDS.filter(c=>(c.name+' '+c.group).toLowerCase().includes(q)).map(c=>`<article class="card" data-i="${c.index}"><img src="${img(c)}" alt="${esc(c.name)}"><div class="meta"><b>${esc(c.name)}</b><div class="muted">${esc(c.group)}</div></div></article>`).join('')}
-$('#search').oninput=e=>renderDeck(e.target.value);
-function openCard(i){const c=CARDS[i];$('#modalImg').src=img(c);$('#modalTitle').textContent=c.name;$('#modalText').textContent=c.group;$('#modal').classList.add('on')}
-document.addEventListener('click',e=>{const c=e.target.closest('[data-i]');if(c)openCard(+c.dataset.i)});
-$('#modalClose').onclick=()=>$('#modal').classList.remove('on');$('#modal').onclick=e=>{if(e.target.id==='modal')e.currentTarget.classList.remove('on')};
+function react(stage,label='escutando'){
+  if(!stage)return;
+  stage.classList.remove('react'); void stage.offsetWidth; stage.classList.add('react');
+  const cap=stage.querySelector('.orb-caption'); const old=cap?.textContent;
+  if(cap) cap.textContent=label;
+  if(navigator.vibrate) try{navigator.vibrate(16)}catch{}
+  clearTimeout(stage._reactTimer);
+  stage._reactTimer=setTimeout(()=>{stage.classList.remove('react');if(cap)cap.textContent=old||'pronta'},900);
+}
+function bindOrb(stage,onTap){
+  if(!stage)return;
+  const orb=stage.querySelector('.living-orb'); if(!orb)return;
+  let raf=0;
+  const move=e=>{
+    if(raf)return;
+    raf=requestAnimationFrame(()=>{
+      raf=0;
+      const r=orb.getBoundingClientRect();
+      const x=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));
+      const y=Math.max(0,Math.min(1,(e.clientY-r.top)/r.height));
+      orb.style.setProperty('--x',(x*100)+'%'); orb.style.setProperty('--y',(y*100)+'%');
+      orb.style.setProperty('--dx',((x-.5)*10)+'px'); orb.style.setProperty('--dy',((y-.5)*10)+'px');
+    });
+  };
+  orb.addEventListener('pointermove',move,{passive:true});
+  orb.addEventListener('pointerleave',()=>{orb.style.setProperty('--dx','0px');orb.style.setProperty('--dy','0px')},{passive:true});
+  orb.addEventListener('pointerdown',e=>{react(stage);onTap?.(e)},{passive:true});
+}
 
-const POS={1:['Mensagem central'],3:['Passado / raiz','Presente','Tendência / conselho'],5:['Situação','Desafio','Raiz','O que ajuda','Tendência'],10:['Situação','Desafio','Fundação','Passado recente','Possibilidade','Próximo passo','Você','Ambiente','Esperanças e medos','Síntese']};
-function guidedDraw(n){guided=shuffle(CARDS).slice(0,n);$('#guidedSpread').innerHTML=guided.map((c,i)=>`<div><div class="slot-label">${POS[n][i]}</div>${cardButton(c)}</div>`).join('');$('#readingText').style.display='block';$('#readingText').innerHTML='<strong>Leitura aberta.</strong> Observe as posições e o diálogo entre as cartas. A IA poderá transformar esta combinação em uma interpretação contextual quando o endpoint estiver conectado.'}
-$$('.guide').forEach(b=>b.onclick=()=>guidedDraw(+b.dataset.n));
-function journal(){const a=JSON.parse(localStorage.getItem('orbe-journal')||'[]');$('#journalList').innerHTML=a.length?a.map(x=>`<div class="notice" style="margin:9px 0"><b>${esc(x.date)}</b><div>${esc(x.question||'')}</div><div class="muted">${x.cards.map(esc).join(' · ')}</div></div>`).join(''):'<p class="muted">Nenhuma leitura salva ainda.</p>'}
-$('#saveGuided').onclick=()=>{if(!guided.length)return;const a=JSON.parse(localStorage.getItem('orbe-journal')||'[]');a.unshift({date:new Date().toLocaleString('pt-BR'),question:$('#question').value.trim(),cards:guided.map(c=>c.name)});localStorage.setItem('orbe-journal',JSON.stringify(a.slice(0,60)));journal()};
-$('#clearJournal').onclick=()=>{localStorage.removeItem('orbe-journal');journal()};
+let pile=[],freeDrawn=[],guided=[];
+function resetDeck(){pile=shuffle(CARDS);freeDrawn=[];renderFree();}
+function cardHTML(c,extra=''){return `<button class="tarot-card" data-card="${c.i}" ${extra}><img src="${cardImg(c)}" alt="${escapeHTML(c.name)}" loading="lazy"><div class="tarot-meta"><b>${escapeHTML(c.name)}</b><small>${escapeHTML(c.group)}</small></div></button>`}
+function renderFree(){$('#remaining').textContent=`${pile.length} cartas restantes`;$('#freeTable').innerHTML=freeDrawn.length?freeDrawn.map(c=>cardHTML(c)).join(''):'<div class="empty">Toque na Orbe para revelar a primeira carta.</div>'}
+function drawCard(){if(!pile.length)pile=shuffle(CARDS);const c=pile.pop();freeDrawn.push(c);renderFree();$('#orbStatus').textContent='revelada';setTimeout(()=>$('#orbStatus').textContent='pronta',700)}
+$('#drawBtn').addEventListener('click',()=>{react(document.querySelector('[data-orb="draw"]'));drawCard()});
+$('#shuffleBtn').addEventListener('click',resetDeck);
+$('#clearBtn').addEventListener('click',()=>{freeDrawn=[];renderFree()});
+bindOrb(document.querySelector('[data-orb="hero"]'),()=>setTimeout(()=>go('free'),250));
+bindOrb(document.querySelector('[data-orb="draw"]'),drawCard);
 
-const DEFAULT_PRODUCTS=[
-{name:'Baralhos e Tarô',price:'Veja ofertas',desc:'Curadoria de baralhos, livros e acessórios. Cadastre seu link de afiliado no Admin.',link:''},
-{name:'Cristais e itens místicos',price:'Curadoria',desc:'Espaço para produtos selecionados e links de afiliado.',link:''},
-{name:'Presentes da Orbe',price:'Seleção especial',desc:'Produtos temáticos escolhidos por você.',link:''}
-];
-function products(){return JSON.parse(localStorage.getItem('orbe-products')||JSON.stringify(DEFAULT_PRODUCTS))}
-function saveProducts(x){localStorage.setItem('orbe-products',JSON.stringify(x));renderProducts();renderAdminProducts();refreshStats()}
-function renderProducts(q=''){let x=products().filter(p=>(p.name+' '+p.desc).toLowerCase().includes(q.toLowerCase()));$('#shopGrid').innerHTML=x.map((p,i)=>`<article class="panel product"><h3>${esc(p.name)}</h3><div class="price">${esc(p.price)}</div><p class="muted">${esc(p.desc||'')}</p>${p.link?`<a class="btn gold" href="${esc(p.link)}" target="_blank" rel="noopener sponsored">Ver produto</a>`:'<span class="badge">Configure o link no Admin</span>'}</article>`).join('')}
-function renderAdminProducts(){let x=products();$('#adminProducts').innerHTML=x.map((p,i)=>`<div><b>${esc(p.name)}</b> · ${esc(p.price)}<div class="muted">${esc(p.link||'Sem link')}</div><button class="btn danger" onclick="removeProduct(${i})">Excluir</button></div>`).join('')}
-window.removeProduct=i=>{let x=products();x.splice(i,1);saveProducts(x)};
-$('#addProduct').onclick=()=>{let n=$('#prodName').value.trim(),pr=$('#prodPrice').value.trim();if(!n||!pr)return alert('Informe nome e preço.');let x=products();x.push({name:n,price:pr,link:$('#prodLink').value.trim(),desc:$('#prodDesc').value.trim()});saveProducts(x);['prodName','prodPrice','prodLink','prodDesc'].forEach(id=>$('#'+id).value='')};
-$('#shopSearch').oninput=e=>renderProducts(e.target.value);
+const POS={
+  1:['Mensagem central'],
+  3:['Passado / raiz','Presente','Tendência / conselho'],
+  5:['Situação','Desafio','Raiz','O que ajuda','Tendência'],
+  10:['Situação','Desafio','Fundação','Passado recente','Possibilidade','Próximo passo','Você','Ambiente','Esperanças e medos','Síntese']
+};
+$$('.spread-btn').forEach(btn=>btn.addEventListener('click',()=>{
+  const n=+btn.dataset.count; guided=shuffle(CARDS).slice(0,n);
+  $('#guidedTable').innerHTML=guided.map((c,i)=>`<div class="spread-slot"><span>${POS[n][i]}</span>${cardHTML(c)}</div>`).join('');
+  $('#guidedNote').classList.remove('hidden');
+  $('#guidedNote').innerHTML='<b>Leitura aberta.</b> Observe primeiro a imagem, a posição e as relações entre as cartas. A IA online poderá depois integrar a sequência em uma interpretação contextual.';
+}));
+$('#saveReading').addEventListener('click',()=>{
+  if(!guided.length)return;
+  const list=store.get('orbe8-journal',[]);
+  list.unshift({date:new Date().toLocaleString('pt-BR'),question:$('#question').value.trim(),cards:guided.map(c=>c.name)});
+  store.set('orbe8-journal',list.slice(0,60)); renderJournal();
+});
 
-function consultations(){return JSON.parse(localStorage.getItem('orbe-consults')||'[]')}
-function renderConsults(){let x=consultations();$('#adminConsults').innerHTML=x.length?x.map(c=>`<div><b>${esc(c.service)}</b><br>${esc(c.name)} · ${esc(c.email)} · ${esc(c.phone)}<br><span class="muted">${esc(c.dateWanted)} às ${esc(c.timeWanted)} · ${esc(c.message||'')}<br>Registrado: ${esc(c.created)}</span></div>`).join(''):'<p class="muted">Nenhuma solicitação registrada neste aparelho.</p>';refreshStats()}
-$$('.chooseService').forEach(b=>b.onclick=()=>{$('#service').value=b.dataset.service;$('#consultForm').scrollIntoView({behavior:'smooth'})});
-$('#consultForm').onsubmit=e=>{e.preventDefault();const c={service:$('#service').value,name:$('#clientName').value.trim(),email:$('#clientEmail').value.trim(),phone:$('#clientPhone').value.trim(),dateWanted:$('#clientDate').value,timeWanted:$('#clientTime').value,message:$('#clientMessage').value.trim(),created:new Date().toLocaleString('pt-BR')};let x=consultations();x.unshift(c);localStorage.setItem('orbe-consults',JSON.stringify(x));renderConsults();const subject=encodeURIComponent('Nova consulta — '+c.service);const body=encodeURIComponent(`Serviço: ${c.service}\nNome: ${c.name}\nE-mail: ${c.email}\nTelefone/WhatsApp: ${c.phone}\nData desejada: ${c.dateWanted}\nHorário desejado: ${c.timeWanted}\n\nMensagem:\n${c.message}`);$('#consultStatus').style.display='block';$('#consultStatus').innerHTML='<strong>Solicitação preparada.</strong> O seu aplicativo de e-mail será aberto agora com todos os dados preenchidos.';setTimeout(()=>location.href=`mailto:${EMAIL}?subject=${subject}&body=${body}`,250)};
+function openCard(i){const c=CARDS[i];$('#modalImage').src=cardImg(c);$('#modalName').textContent=c.name;$('#modalGroup').textContent=c.group;$('#cardModal').classList.add('open');$('#cardModal').setAttribute('aria-hidden','false')}
+document.addEventListener('click',e=>{const el=e.target.closest('[data-card]');if(el)openCard(+el.dataset.card)});
+$('#modalClose').addEventListener('click',()=>$('#cardModal').classList.remove('open'));
+$('#cardModal').addEventListener('click',e=>{if(e.target.id==='cardModal')e.currentTarget.classList.remove('open')});
 
-function channelHistory(){return JSON.parse(sessionStorage.getItem('orbe-channel')||'[]')}
-function saveChannel(h){sessionStorage.setItem('orbe-channel',JSON.stringify(h.slice(-30)))}
-function addBubble(role,text){const el=document.createElement('div');el.className='bubble '+role;el.textContent=text;$('#channelChat').appendChild(el);$('#channelChat').scrollTop=$('#channelChat').scrollHeight}
+function renderDeck(q=''){q=q.trim().toLowerCase();$('#deckGrid').innerHTML=CARDS.filter(c=>(c.name+' '+c.group).toLowerCase().includes(q)).map(c=>cardHTML(c)).join('')}
+$('#deckSearch').addEventListener('input',e=>renderDeck(e.target.value));
+
+function renderJournal(){const list=store.get('orbe8-journal',[]);$('#journalList').innerHTML=list.length?list.map(x=>`<div class="journal-item"><b>${escapeHTML(x.date)}</b><div>${escapeHTML(x.question||'Sem pergunta escrita')}</div><small>${x.cards.map(escapeHTML).join(' · ')}</small></div>`).join(''):'<p>Nenhuma leitura salva ainda.</p>'}
+$('#clearJournal').addEventListener('click',()=>{localStorage.removeItem('orbe8-journal');renderJournal()});
+
 const localReplies=[
-'Observe o que está sendo projetado nessa situação e o que você consegue confirmar na realidade. A carta pode servir como espelho, não como prova.',
-'Existe uma diferença entre desejo, medo e evidência. Use esta leitura para separar essas três camadas.',
-'A Orbe convida você a perguntar: qual atitude concreta está sob seu controle agora?',
-'Nem toda resposta precisa ser definitiva. Algumas situações pedem tempo, limite e observação antes de uma decisão.',
-'Use o simbolismo para organizar sentimentos e possibilidades, sem tratar a leitura como acesso literal à mente de outra pessoa.'
+ 'Use a leitura para separar desejo, medo e evidência. O que você consegue confirmar na realidade agora?',
+ 'A Orbe sugere olhar para o que está sob seu controle: limite, conversa, escolha ou espera.',
+ 'Nem toda incerteza pede uma resposta imediata. Talvez o próximo passo seja observar antes de concluir.',
+ 'O simbolismo pode revelar como você está vivendo a situação, mas não prova pensamentos privados de outra pessoa.',
+ 'Pergunte a si mesma qual atitude deixaria você mais alinhada com seus valores, mesmo sem garantia do resultado.'
 ];
-async function askOrb(text){text=(text||'').trim();if(!text)return;addBubble('user',text);let h=channelHistory();h.push({role:'user',content:text});saveChannel(h);const endpoint=localStorage.getItem('orbe-ai-endpoint')||'';const typing=document.createElement('div');typing.className='bubble orb typing';typing.textContent='A Orbe está formando a resposta…';$('#channelChat').appendChild(typing);$('#channelChat').scrollTop=$('#channelChat').scrollHeight;try{if(endpoint){const res=await fetch(endpoint,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name:$('#channelName').value.trim(),intention:$('#channelQuestion').value.trim(),message:text,history:h.slice(-12),cards:guided.map(c=>c.name)})});if(!res.ok)throw new Error('Falha na IA');const data=await res.json();typing.remove();const reply=data.reply||data.output||data.message||'A Orbe respondeu, mas o formato do servidor precisa ser ajustado.';addBubble('orb',reply);h.push({role:'assistant',content:reply});saveChannel(h);$('#aiModeLabel').textContent='Modo atual: IA conectada.'}else{await new Promise(r=>setTimeout(r,650));typing.remove();const c=CARDS[Math.floor(Math.random()*CARDS.length)];const reply=`${c.name} surge como símbolo. ${localReplies[Math.floor(Math.random()*localReplies.length)]}`;addBubble('orb',reply);h.push({role:'assistant',content:reply});saveChannel(h)}}catch(err){typing.remove();addBubble('orb','Não consegui acessar a IA agora. Voltei ao modo simbólico local.');$('#aiModeLabel').textContent='Modo atual: simbólico local.'}}
-$('#channelSend').onclick=()=>{const t=$('#channelInput').value;$('#channelInput').value='';askOrb(t)};$('#channelInput').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('#channelSend').click()}});
-bindOrb($('#aiOrb'),()=>{const base=$('#channelQuestion').value.trim()||'Abra uma reflexão simbólica para esta situação.';askOrb(base)});
+function bubble(role,text){const d=document.createElement('div');d.className='bubble '+role;d.textContent=text;$('#chatLog').appendChild(d);$('#chatLog').scrollTop=$('#chatLog').scrollHeight}
+async function askOrb(text){
+  text=(text||'').trim();if(!text)return;
+  bubble('user',text);
+  const endpoint=store.get('orbe8-ai-endpoint','');
+  if(endpoint){
+    const wait=document.createElement('div');wait.className='bubble orb';wait.textContent='A Orbe está formando a resposta…';$('#chatLog').appendChild(wait);
+    try{
+      const r=await fetch(endpoint,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message:text,name:$('#channelName').value.trim(),intention:$('#channelIntent').value.trim()})});
+      const data=await r.json();wait.remove();bubble('orb',data.reply||data.output||data.message||'A conexão respondeu, mas o formato precisa ser ajustado.');$('#aiMode').textContent='IA online conectada';
+    }catch{wait.remove();bubble('orb','A IA online não respondeu. Continuei em modo simbólico local.');}
+  }else{
+    const c=CARDS[Math.floor(Math.random()*CARDS.length)];
+    await new Promise(r=>setTimeout(r,250));
+    bubble('orb',`${c.name} aparece como símbolo. ${localReplies[Math.floor(Math.random()*localReplies.length)]}`);
+  }
+}
+$('#chatSend').addEventListener('click',()=>{const t=$('#chatInput').value;$('#chatInput').value='';askOrb(t)});
+$('#chatInput').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('#chatSend').click()}});
+bindOrb(document.querySelector('[data-orb="chat"]'),()=>askOrb($('#channelIntent').value.trim()||'Abra uma reflexão simbólica para este momento.'));
 
-let db;const rq=indexedDB.open('orbe-viva-7',1);rq.onupgradeneeded=e=>{const d=e.target.result;if(!d.objectStoreNames.contains('episodes'))d.createObjectStore('episodes',{keyPath:'id'})};rq.onsuccess=e=>{db=e.target.result;renderEpisodes()};
-function getEpisodes(cb){if(!db)return cb([]);const r=db.transaction('episodes').objectStore('episodes').getAll();r.onsuccess=()=>cb((r.result||[]).sort((a,b)=>b.id-a.id))}
-function renderEpisodes(){getEpisodes(eps=>{$('#adminEpisodes').innerHTML=eps.length?eps.map(e=>`<div><b>${esc(e.title)}</b><div class="muted">${esc(e.desc||'')}</div></div>`).join(''):'<p class="muted">Nenhum episódio salvo neste aparelho.</p>';$('#episodeArchive').innerHTML='';if(!eps.length){$('#episodeEmpty').classList.remove('hidden');$('#episodeVideo').classList.add('hidden')}else{const e=eps[0];$('#episodeEmpty').classList.add('hidden');$('#episodeVideo').classList.remove('hidden');$('#episodeVideo').src=URL.createObjectURL(e.file);$('#episodeTitle').textContent=e.title;$('#episodeDescription').textContent=e.desc||'';eps.slice(1).forEach(x=>{const a=document.createElement('article');a.className='panel episode';a.innerHTML=`<h3>${esc(x.title)}</h3><p class="muted">${esc(x.desc||'')}</p>`;const v=document.createElement('video');v.controls=true;v.playsInline=true;v.src=URL.createObjectURL(x.file);a.prepend(v);$('#episodeArchive').appendChild(a)})}refreshStats()})}
-$('#saveEpisode').onclick=()=>{const f=$('#epFile').files[0],title=$('#epTitle').value.trim()||'Novo episódio';if(!f||!db)return alert('Escolha um vídeo.');const t=db.transaction('episodes','readwrite');t.objectStore('episodes').put({id:Date.now(),title,desc:$('#epDesc').value.trim(),file:f});t.oncomplete=()=>{$('#epFile').value='';$('#epTitle').value='';$('#epDesc').value='';renderEpisodes()}};
-$('#clearEpisodes').onclick=()=>{if(!db)return;const t=db.transaction('episodes','readwrite');t.objectStore('episodes').clear();t.oncomplete=renderEpisodes};
+$$('.service-pick').forEach(b=>b.addEventListener('click',()=>{$('#serviceSelect').value=b.dataset.service;$('#bookingForm').scrollIntoView({behavior:'smooth'})}));
+function bookings(){return store.get('orbe8-bookings',[])}
+$('#bookingForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const b={service:$('#serviceSelect').value,name:$('#bookName').value.trim(),email:$('#bookEmail').value.trim(),phone:$('#bookPhone').value.trim(),date:$('#bookDate').value,time:$('#bookTime').value,message:$('#bookMessage').value.trim(),created:new Date().toLocaleString('pt-BR')};
+  const list=bookings();list.unshift(b);store.set('orbe8-bookings',list);renderAdminBookings();refreshStats();
+  const email=store.get('orbe8-email',DEFAULT_EMAIL);
+  const subject=encodeURIComponent('Consulta — '+b.service);
+  const body=encodeURIComponent(`Serviço: ${b.service}\nNome: ${b.name}\nE-mail: ${b.email}\nTelefone/WhatsApp: ${b.phone}\nData: ${b.date}\nHorário: ${b.time}\n\nTema:\n${b.message}`);
+  $('#bookingStatus').classList.remove('hidden');$('#bookingStatus').innerHTML='<b>Solicitação registrada.</b> O aplicativo de e-mail será aberto com os dados preenchidos.';
+  setTimeout(()=>location.href=`mailto:${email}?subject=${subject}&body=${body}`,250);
+});
+
+const DEFAULT_PRODUCTS=[{name:'Baralhos e Tarot',price:'Curadoria',desc:'Cadastre aqui seu primeiro link de afiliado.',link:''},{name:'Cristais e itens místicos',price:'Curadoria',desc:'Espaço para sua seleção de produtos.',link:''}];
+function products(){return store.get('orbe8-products',DEFAULT_PRODUCTS)}
+function renderProducts(q=''){q=q.toLowerCase();$('#shopGrid').innerHTML=products().filter(p=>(p.name+' '+p.desc).toLowerCase().includes(q)).map((p,i)=>`<article class="glass product"><h3>${escapeHTML(p.name)}</h3><div class="price">${escapeHTML(p.price)}</div><p>${escapeHTML(p.desc||'')}</p>${p.link?`<a class="btn gold" href="${escapeHTML(p.link)}" target="_blank" rel="noopener sponsored">Ver produto</a>`:'<small>Configure o link no Admin</small>'}</article>`).join('')}
+$('#shopSearch').addEventListener('input',e=>renderProducts(e.target.value));
+function renderAdminProducts(){$('#adminProducts').innerHTML=products().map((p,i)=>`<div class="admin-row"><b>${escapeHTML(p.name)}</b> · ${escapeHTML(p.price)}<br><small>${escapeHTML(p.link||'Sem link')}</small><br><button class="btn ghost" data-remove-product="${i}">Excluir</button></div>`).join('')}
+$('#prodAdd').addEventListener('click',()=>{const name=$('#prodName').value.trim(),price=$('#prodPrice').value.trim();if(!name||!price)return;const list=products();list.push({name,price,link:$('#prodLink').value.trim(),desc:$('#prodDesc').value.trim()});store.set('orbe8-products',list);['prodName','prodPrice','prodLink','prodDesc'].forEach(id=>$('#'+id).value='');renderProducts();renderAdminProducts();refreshStats()});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-remove-product]');if(!b)return;const list=products();list.splice(+b.dataset.removeProduct,1);store.set('orbe8-products',list);renderProducts();renderAdminProducts();refreshStats()});
+
+let db=null;
+const req=indexedDB.open('orbe8-db',1);
+req.onupgradeneeded=e=>{const d=e.target.result;if(!d.objectStoreNames.contains('episodes'))d.createObjectStore('episodes',{keyPath:'id'})};
+req.onsuccess=e=>{db=e.target.result;renderEpisodes()};
+req.onerror=()=>{console.warn('IndexedDB indisponível')}; 
+function getEpisodes(){return new Promise(resolve=>{if(!db)return resolve([]);const r=db.transaction('episodes').objectStore('episodes').getAll();r.onsuccess=()=>resolve((r.result||[]).sort((a,b)=>b.id-a.id));r.onerror=()=>resolve([])})}
+async function renderEpisodes(){const eps=await getEpisodes();$('#adminEpisodes').innerHTML=eps.length?eps.map(e=>`<div class="admin-row"><b>${escapeHTML(e.title)}</b><br><small>${escapeHTML(e.desc||'')}</small></div>`).join(''):'<p>Nenhum episódio salvo.</p>';$('#videoArchive').innerHTML='';if(!eps.length){$('#videoEmpty').classList.remove('hidden');$('#featuredVideo').classList.add('hidden')}else{$('#videoEmpty').classList.add('hidden');const first=eps[0];$('#featuredVideo').classList.remove('hidden');$('#featuredVideo').src=URL.createObjectURL(first.file);$('#featuredTitle').textContent=first.title;$('#featuredDesc').textContent=first.desc||'';for(const e of eps.slice(1)){const el=document.createElement('article');el.className='glass video-card';const v=document.createElement('video');v.controls=true;v.playsInline=true;v.src=URL.createObjectURL(e.file);const h=document.createElement('h3');h.textContent=e.title;const p=document.createElement('p');p.textContent=e.desc||'';el.append(v,h,p);$('#videoArchive').appendChild(el)}}refreshStats(eps.length)}
+$('#epSave').addEventListener('click',()=>{const f=$('#epFile').files[0];if(!f||!db)return alert('Escolha um vídeo primeiro.');if(f.size>250*1024*1024)return alert('Para evitar travamentos, esta demonstração local aceita até 250 MB. Vídeos maiores serão publicados pelo armazenamento online.');const tx=db.transaction('episodes','readwrite');tx.objectStore('episodes').put({id:Date.now(),title:$('#epTitle').value.trim()||'Novo episódio',desc:$('#epDesc').value.trim(),file:f});tx.oncomplete=()=>{$('#epFile').value='';$('#epTitle').value='';$('#epDesc').value='';renderEpisodes()}});
+$('#epClear').addEventListener('click',()=>{if(!db)return;const tx=db.transaction('episodes','readwrite');tx.objectStore('episodes').clear();tx.oncomplete=renderEpisodes});
 
 async function sha256(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
-async function adminLogin(){const u=$('#adminUser').value.trim(),p=$('#adminPass').value;const h=await sha256(p);if(u===ADMIN_USER&&h===ADMIN_HASH){sessionStorage.setItem('orbe-admin','1');showAdmin()}else $('#adminError').textContent='Usuário ou senha incorretos.'}
-function showAdmin(){const ok=sessionStorage.getItem('orbe-admin')==='1';$('#adminLogin').classList.toggle('hidden',ok);$('#adminPortal').classList.toggle('hidden',!ok);if(ok){renderAdminProducts();renderConsults();renderEpisodes();refreshStats()}}
-$('#adminEnter').onclick=adminLogin;$('#adminPass').addEventListener('keydown',e=>{if(e.key==='Enter')adminLogin()});$('#adminLogout').onclick=()=>{sessionStorage.removeItem('orbe-admin');showAdmin()};
-$$('.admin-btn').forEach(b=>b.onclick=()=>{$$('.admin-btn').forEach(x=>x.classList.remove('gold'));b.classList.add('gold');$$('.admin-page').forEach(p=>p.classList.toggle('active',p.dataset.page===b.dataset.admin))});
-function showMessage(){const m=localStorage.getItem('orbe-admin-message')||'A Orbe está aberta. Escolha uma experiência e siga a sua curiosidade.';$('#savedMessage').textContent=m;$('#adminMessage').value=m}
-$('#saveMessage').onclick=()=>{localStorage.setItem('orbe-admin-message',$('#adminMessage').value.trim());showMessage()};
-$('#saveAI').onclick=()=>{localStorage.setItem('orbe-ai-endpoint',$('#aiEndpoint').value.trim());aiStatus()};
-$('#testAI').onclick=async()=>{const ep=$('#aiEndpoint').value.trim();if(!ep)return $('#aiStatus').textContent='Informe um endpoint seguro primeiro.';$('#aiStatus').textContent='Testando…';try{const r=await fetch(ep,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message:'Responda apenas: Orbe conectada.'})});$('#aiStatus').textContent=r.ok?'Conexão respondeu. Agora ajuste o formato final da função de IA.':'O endpoint respondeu com erro HTTP '+r.status}catch(e){$('#aiStatus').textContent='Não foi possível conectar: '+e.message}};
-function aiStatus(){const ep=localStorage.getItem('orbe-ai-endpoint')||'';$('#aiEndpoint').value=ep;$('#aiStatus').textContent=ep?'Endpoint salvo neste aparelho.':'IA real ainda não conectada; usando modo simbólico local.';$('#aiModeLabel').textContent=ep?'Modo atual: endpoint de IA configurado.':'Modo atual: simbólico local.'}
-function refreshStats(){$('#statProducts').textContent=products().length;$('#statConsults').textContent=consultations().length;getEpisodes?.(x=>$('#statEpisodes').textContent=x.length)}
+function showAdmin(){const ok=sessionStorage.getItem('orbe8-admin')==='1';$('#adminLogin').classList.toggle('hidden',ok);$('#adminPortal').classList.toggle('hidden',!ok);if(ok){renderAdminProducts();renderAdminBookings();refreshStats();loadAdminFields()}}
+$('#adminEnter').addEventListener('click',async()=>{const ok=$('#adminUser').value.trim()===ADMIN_USER && await sha256($('#adminPass').value)===ADMIN_HASH;if(ok){sessionStorage.setItem('orbe8-admin','1');$('#adminError').textContent='';showAdmin()}else $('#adminError').textContent='Usuário ou senha incorretos.'});
+$('#adminPass').addEventListener('keydown',e=>{if(e.key==='Enter')$('#adminEnter').click()});
+$('#adminLogout').addEventListener('click',()=>{sessionStorage.removeItem('orbe8-admin');showAdmin()});
+$$('.admin-tab').forEach(b=>b.addEventListener('click',()=>{$$('.admin-tab').forEach(x=>x.classList.toggle('active',x===b));$$('.admin-page').forEach(p=>p.classList.toggle('active',p.dataset.adminPage===b.dataset.page))}));
+function renderAdminBookings(){const list=bookings();$('#adminBookings').innerHTML=list.length?list.map(b=>`<div class="admin-row"><b>${escapeHTML(b.service)}</b><br>${escapeHTML(b.name)} · ${escapeHTML(b.phone)} · ${escapeHTML(b.email)}<br><small>${escapeHTML(b.date)} às ${escapeHTML(b.time)} · ${escapeHTML(b.message||'')}</small></div>`).join(''):'<p>Nenhuma solicitação registrada neste aparelho.</p>'}
+function loadAdminFields(){const msg=store.get('orbe8-home-message','A Orbe está aberta. Escolha uma experiência e siga sua curiosidade.');$('#homeMessageEdit').value=msg;$('#homeMessage').textContent=msg;const ep=store.get('orbe8-ai-endpoint','');$('#aiEndpoint').value=ep;$('#aiStatus').textContent=ep?'Endpoint de IA salvo neste aparelho.':'Modo simbólico local ativo.'}
+$('#homeMessageSave').addEventListener('click',()=>{const msg=$('#homeMessageEdit').value.trim();store.set('orbe8-home-message',msg);$('#homeMessage').textContent=msg});
+$('#aiSave').addEventListener('click',()=>{store.set('orbe8-ai-endpoint',$('#aiEndpoint').value.trim());loadAdminFields()});
+$('#aiTest').addEventListener('click',async()=>{const ep=$('#aiEndpoint').value.trim();if(!ep)return $('#aiStatus').textContent='Informe um endpoint primeiro.';$('#aiStatus').textContent='Testando…';try{const r=await fetch(ep,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message:'Teste de conexão da Orbe'})});$('#aiStatus').textContent=r.ok?'O endpoint respondeu.':'O endpoint respondeu com erro '+r.status}catch(e){$('#aiStatus').textContent='Falha de conexão: '+e.message}});
+async function refreshStats(knownEpisodes){$('#stProducts').textContent=products().length;$('#stBookings').textContent=bookings().length;$('#stEpisodes').textContent=knownEpisodes??(await getEpisodes()).length}
 
-if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
-renderDeck();journal();renderProducts();showMessage();aiStatus();showAdmin();reset();renderConsults();
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+resetDeck();renderDeck();renderJournal();renderProducts();showAdmin();loadAdminFields();
