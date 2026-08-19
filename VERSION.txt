@@ -1,0 +1,2 @@
+ORBE VIVA 11.0
+Build leve, sem canvas, sem bibliotecas externas, sem cache persistente.
