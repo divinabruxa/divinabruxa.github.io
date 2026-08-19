@@ -1,30 +1,11 @@
-ORBE DAS REALIDADES — REPOSITÓRIO PRONTO
+ORBE DAS REALIDADES — PACOTE GITHUB SEM PASTAS
 
-Estrutura correta:
+1. Abra este ZIP no aplicativo Arquivos do iPhone.
+2. Toque em Descompactar.
+3. Abra a pasta criada e selecione TODOS os arquivos.
+4. No repositório GitHub, use Add file > Upload files.
+5. Envie todos os arquivos juntos para a raiz.
+6. Confirme em Commit changes.
+7. Em Settings > Pages, selecione Deploy from a branch e a pasta /(root).
 
-/index.html
-/CNAME
-/worker/package.json
-/worker/schema.sql
-/worker/wrangler.jsonc
-/worker/src/index.js
-
-Cloudflare Workers Builds:
-- Repository: divinabruxa/divinabruxa.github.io
-- Path / Root directory: /worker/
-- Build command: deixar vazio
-- Deploy command: npx wrangler deploy
-
-D1:
-- Binding: DB
-- Database name: orbe-prod
-- Database ID: 1ab9f3e5-6289-472c-989b-a2c2033b2041
-
-IMPORTANTE:
-As chaves secretas NÃO ficam neste ZIP nem no GitHub. Elas devem ser cadastradas como Secrets no Cloudflare:
-OPENAI_API_KEY
-STRIPE_SECRET_KEY
-STRIPE_WEBHOOK_SECRET
-APP_TOKEN_SECRET
-STRIPE_PRICE_PREMIUM
-STRIPE_PRICE_SUPREMA
+IMPORTANTE: não renomeie arquivos e não envie o ZIP diretamente como site. O ZIP serve apenas para transportar os arquivos.
