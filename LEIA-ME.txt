@@ -1,7 +1,7 @@
 ORBE DAS REALIDADES — EDIÇÃO PLANA PARA GITHUB
 
-Esta é a versão 4, criada especialmente para envio pelo iPhone.
-Ela não contém nenhuma pasta. Envie estes 11 arquivos para a RAIZ do repositório:
+Esta é a versão 5, criada especialmente para envio pelo iPhone.
+Ela não contém nenhuma pasta. Envie estes 14 arquivos para a RAIZ do repositório:
 1. index.html
 2. tarot-atlas.webp
 3. manifest.webmanifest
@@ -13,8 +13,11 @@ Ela não contém nenhuma pasta. Envie estes 11 arquivos para a RAIZ do repositó
 9. configuracao.js
 10. orbe.js
 11. atualizacao.js
+12. visual-v5.css
+13. funcional-v5.js
+14. tarot-v5.js
 
-Não envie apenas o ZIP ao GitHub Pages. Extraia o ZIP e envie os 11 arquivos.
+Não envie apenas o ZIP ao GitHub Pages. Extraia o ZIP e envie os 14 arquivos.
 Não crie pastas. O arquivo tarot-atlas.webp contém as 78 cartas.
 O nome deve ser exatamente index.html, em letras minúsculas.
 Não deixe o iPhone renomear para index (1).html.
@@ -26,9 +29,19 @@ Depois de publicar, abra o endereço do GitHub Pages no Safari. No iPhone, toque
 O painel Administração salva links somente no aparelho/navegador. Não coloque senhas nem chaves secretas.
 O arquivo CNAME já contém: divinabruxa.com.br
 
-VERSÃO 4
+VERSÃO 5
 - Orbe 3.0 com fluido WebGL e fallback automático.
 - Luz ligada ao gesto, inércia e ondas depois do toque.
 - Respeito à opção Reduzir Movimento.
-- Cache v4 que remove automaticamente a versão antiga.
+- Tarot Livre com intenção, ritual, ciclo real de 78 cartas, aprofundamento,
+  favoritas, Diário e compartilhamento.
+- Diagnóstico na Administração para identificar arquivos ausentes.
+- Navegação reforçada para toque no iPhone.
+- Cache v5 com atualização prioritária da página e remoção automática da versão antiga.
 - Arquitetura plana em vários arquivos, sem nenhuma pasta.
+
+IMPORTANTE AO ATUALIZAR
+Substitua os 14 arquivos, inclusive sw.js, visual-v5.css, funcional-v5.js e tarot-v5.js.
+Se o Safari continuar mostrando a versão antiga, feche a aba e abra novamente.
+Se estiver instalado na Tela de Início, remova o ícone antigo, abra o site no Safari
+e adicione novamente depois que a versão 5 aparecer.
