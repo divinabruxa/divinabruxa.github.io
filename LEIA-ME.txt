@@ -1,7 +1,7 @@
 ORBE DAS REALIDADES — EDIÇÃO PLANA PARA GITHUB
 
-Esta edição foi criada especialmente para envio pelo iPhone.
-Ela não contém nenhuma pasta. Envie estes 7 arquivos para a RAIZ do repositório:
+Esta é a versão 4, criada especialmente para envio pelo iPhone.
+Ela não contém nenhuma pasta. Envie estes 11 arquivos para a RAIZ do repositório:
 1. index.html
 2. tarot-atlas.webp
 3. manifest.webmanifest
@@ -9,8 +9,12 @@ Ela não contém nenhuma pasta. Envie estes 7 arquivos para a RAIZ do repositór
 5. icone.svg
 6. CNAME
 7. LEIA-ME.txt
+8. visual-v4.css
+9. configuracao.js
+10. orbe.js
+11. atualizacao.js
 
-Não envie apenas o ZIP ao GitHub Pages. Extraia o ZIP e envie os 7 arquivos.
+Não envie apenas o ZIP ao GitHub Pages. Extraia o ZIP e envie os 11 arquivos.
 Não crie pastas. O arquivo tarot-atlas.webp contém as 78 cartas.
 O nome deve ser exatamente index.html, em letras minúsculas.
 Não deixe o iPhone renomear para index (1).html.
@@ -21,3 +25,10 @@ Depois de publicar, abra o endereço do GitHub Pages no Safari. No iPhone, toque
 
 O painel Administração salva links somente no aparelho/navegador. Não coloque senhas nem chaves secretas.
 O arquivo CNAME já contém: divinabruxa.com.br
+
+VERSÃO 4
+- Orbe 3.0 com fluido WebGL e fallback automático.
+- Luz ligada ao gesto, inércia e ondas depois do toque.
+- Respeito à opção Reduzir Movimento.
+- Cache v4 que remove automaticamente a versão antiga.
+- Arquitetura plana em vários arquivos, sem nenhuma pasta.

@@ -1,0 +1,1 @@
+window.ORBE_CONFIG=Object.freeze({version:'4.0',cache:'orbe-flat-v4',orb:{quality:Math.min(devicePixelRatio||1,2),reduced:matchMedia('(prefers-reduced-motion: reduce)').matches},files:['index.html','visual-v4.css','orbe.js','atualizacao.js','configuracao.js','tarot-atlas.webp','manifest.webmanifest','icone.svg']});
