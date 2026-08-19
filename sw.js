@@ -1,1 +1,12 @@
-const C='orbe-viva-5-0';const A=["./", "./index.html", "./app.js", "./manifest.webmanifest", "./icon.svg", "./card-00.jpg", "./card-01.jpg", "./card-02.jpg", "./card-03.jpg", "./card-04.jpg", "./card-05.jpg", "./card-06.jpg", "./card-07.jpg", "./card-08.jpg", "./card-09.jpg", "./card-10.jpg", "./card-11.jpg", "./card-12.jpg", "./card-13.jpg", "./card-14.jpg", "./card-15.jpg", "./card-16.jpg", "./card-17.jpg", "./card-18.jpg", "./card-19.jpg", "./card-20.jpg", "./card-21.jpg", "./card-22.jpg", "./card-23.jpg", "./card-24.jpg", "./card-25.jpg", "./card-26.jpg", "./card-27.jpg", "./card-28.jpg", "./card-29.jpg", "./card-30.jpg", "./card-31.jpg", "./card-32.jpg", "./card-33.jpg", "./card-34.jpg", "./card-35.jpg", "./card-36.jpg", "./card-37.jpg", "./card-38.jpg", "./card-39.jpg", "./card-40.jpg", "./card-41.jpg", "./card-42.jpg", "./card-43.jpg", "./card-44.jpg", "./card-45.jpg", "./card-46.jpg", "./card-47.jpg", "./card-48.jpg", "./card-49.jpg", "./card-50.jpg", "./card-51.jpg", "./card-52.jpg", "./card-53.jpg", "./card-54.jpg", "./card-55.jpg", "./card-56.jpg", "./card-57.jpg", "./card-58.jpg", "./card-59.jpg", "./card-60.jpg", "./card-61.jpg", "./card-62.jpg", "./card-63.jpg", "./card-64.jpg", "./card-65.jpg", "./card-66.jpg", "./card-67.jpg", "./card-68.jpg", "./card-69.jpg", "./card-70.jpg", "./card-71.jpg", "./card-72.jpg", "./card-73.jpg", "./card-74.jpg", "./card-75.jpg", "./card-76.jpg", "./card-77.jpg"];self.addEventListener('install',e=>e.waitUntil(caches.open(C).then(c=>c.addAll(A))));self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x))))));self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))));
+const CACHE='orbe-viva-7.0-core';
+const CORE=['./','./index.html','./app.js','./manifest.webmanifest','./icon.svg'];
+self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())));
+self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
+self.addEventListener('fetch',e=>{
+ const u=new URL(e.request.url);
+ if(e.request.method!=='GET')return;
+ if(/card-\d\d\.jpg$/.test(u.pathname)){
+   e.respondWith(caches.open(CACHE).then(async c=>{const m=await c.match(e.request);if(m)return m;try{const r=await fetch(e.request);if(r.ok)c.put(e.request,r.clone());return r}catch(err){return m}}));return;
+ }
+ e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(resp=>{const copy=resp.clone();caches.open(CACHE).then(c=>c.put(e.request,copy));return resp})));
+});

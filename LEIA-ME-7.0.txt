@@ -1,0 +1,42 @@
+ORBE DAS REALIDADES — ORBE VIVA 7.0
+
+ESTA ENTREGA É "CÓDIGO APENAS":
+- index.html
+- app.js
+- sw.js
+- manifest.webmanifest
+- icon.svg
+
+NÃO inclui novamente as 78 imagens.
+Ela usa as imagens que já estão publicadas no seu site com os nomes:
+card-00.jpg até card-77.jpg
+
+INSTALAÇÃO NO GITHUB:
+1. Preserve seu arquivo CNAME.
+2. Substitua index.html, app.js, sw.js, manifest.webmanifest e icon.svg pelos arquivos desta pasta.
+3. NÃO apague card-00.jpg até card-77.jpg.
+4. Faça Commit na branch main.
+5. Aguarde o GitHub Pages atualizar e abra o site em aba privada se houver cache.
+
+PORTAL ADMIN:
+O login da 7.0 é um login LOCAL de demonstração. Ele protege a interface no uso normal,
+mas não é segurança de servidor: em um site estático, alguém tecnicamente avançado pode inspecionar o código.
+Quando conectarmos Supabase/Cloudflare, o login passa a ser autenticação real e segura.
+
+CONSULTAS:
+O formulário guarda a solicitação no painel local e abre o aplicativo de e-mail com:
+serviço, nome, e-mail, telefone/WhatsApp, data, horário e mensagem já preenchidos.
+Para enviar e-mails automaticamente sem abrir o app de e-mail, precisamos do backend.
+
+CANALIZAÇÃO:
+Modo atual = simulação simbólica/reflexiva local.
+Há um campo no Admin para conectar depois um endpoint seguro de IA.
+Nunca coloque uma chave secreta de IA diretamente no app.js.
+
+DE FRENTE COM O TAROT:
+Upload local funciona no aparelho do administrador.
+Para publicar vídeos para todos os visitantes sem reinstalar o site, conectaremos Storage + banco.
+
+LOJA:
+Produtos e links de afiliado podem ser cadastrados no Admin local.
+Quando o backend entrar, você poderá editar uma vez e todos os visitantes verão a atualização.

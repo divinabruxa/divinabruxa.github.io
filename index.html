@@ -1,16 +1,258 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b0610"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>Orbe das Realidades · Orbe Viva 6.0</title><link rel="manifest" href="manifest.webmanifest"><style>
-:root{--bg:#050307;--panel:#16091b;--panel2:#24102a;--gold:#f3c864;--gold2:#ffe7a6;--violet:#8a2be2;--pink:#ff4fd8;--cyan:#58e8ff;--text:#fff8f0;--muted:#b7aabc;--line:rgba(243,200,100,.28);--r:26px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 50% -10%,#2b063b 0,#0d0412 34%,#050307 70%);color:var(--text);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}button,input,textarea,select{font:inherit}.shell{width:min(1180px,calc(100% - 20px));margin:auto}.navwrap{position:sticky;top:0;z-index:50;padding:10px 0;background:linear-gradient(#050307ee,#050307aa,transparent);backdrop-filter:blur(12px)}nav{display:flex;gap:8px;overflow:auto;scrollbar-width:none}nav::-webkit-scrollbar{display:none}.tab,.btn{border:1px solid var(--line);background:#17091ccc;color:#fff;border-radius:999px;padding:11px 15px;font-weight:800;white-space:nowrap;cursor:pointer}.tab.active,.btn.gold{background:linear-gradient(135deg,#5d1677,#25102d);box-shadow:0 0 0 1px #9b49bd66,0 0 25px #9b49bd44}.btn.gold{background:linear-gradient(135deg,#f0bd3f,#ffd976);color:#1c1202;border:none}.view{display:none;padding:28px 0 80px}.view.active{display:block}.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:stretch}.panel{background:linear-gradient(180deg,rgba(42,15,48,.9),rgba(17,6,21,.94));border:1px solid var(--line);border-radius:var(--r);box-shadow:0 24px 70px #0008, inset 0 1px #ffffff09}.copy{padding:34px}.eyebrow{color:var(--gold);font-size:.72rem;letter-spacing:.18em;font-weight:900;text-transform:uppercase}.copy h1,h2{font-family:Georgia,serif}.copy h1{font-size:clamp(3rem,10vw,6rem);line-height:.82;margin:14px 0 22px}.copy h1 em{display:block;font-weight:400}.lead{color:#e8dde9;line-height:1.7}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:26px}.stat{padding:16px;border:1px solid var(--line);border-radius:18px;background:#ffffff08}.stat b{display:block;color:var(--gold2);font-size:1.7rem;font-family:Georgia,serif}.stat span{font-size:.7rem;color:var(--muted);text-transform:uppercase}.orbpanel{min-height:600px;display:grid;place-items:center;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 50%,#4f0b72 0,#21062c 45%,#0b040f 76%)}.orbpanel:before{content:"";position:absolute;inset:5%;border-radius:40px;background:repeating-radial-gradient(circle at center,transparent 0 38px,#b56cf110 40px 41px);animation:drift 14s linear infinite}@keyframes drift{to{transform:rotate(360deg)}}.orb-stage{width:min(78vw,470px);aspect-ratio:1;position:relative;display:grid;place-items:center;touch-action:none}.ring{position:absolute;border-radius:50%;border:1px solid #cf92ff44;inset:4%;animation:spin 14s linear infinite}.ring.r2{inset:12%;animation-duration:9s;animation-direction:reverse}.ring.r3{inset:20%;animation-duration:6.5s}@keyframes spin{to{transform:rotate(360deg)}}.orb-button{width:62%;aspect-ratio:1;border-radius:50%;border:1px solid #ffd87688;position:relative;overflow:hidden;cursor:pointer;transform:translate3d(var(--tx,0),var(--ty,0),0) scale(var(--sc,1));transition:transform .22s ease;box-shadow:0 0 35px #d84dff66,0 0 90px #4dcbff33,inset -30px -35px 55px #020206aa,inset 24px 24px 40px #fff2;background:radial-gradient(circle at var(--px,70%) var(--py,30%),#faffff 0 3%,#56edff 8%,transparent 18%),radial-gradient(circle at 35% 58%,#fff78d 0 4%,#ff8b38 10%,transparent 22%),radial-gradient(circle at 58% 52%,#ff55dd 0 7%,#7f40ff 30%,#12051c 65%,#020205 100%)}.orb-button:before{content:"";position:absolute;inset:-40%;background:conic-gradient(from 0deg,transparent,#fff7 10%,transparent 24%,#78ecff99 40%,transparent 52%,#ff5fe699 70%,transparent 82%);filter:blur(18px);animation:liquid 4.4s ease-in-out infinite alternate}@keyframes liquid{to{transform:rotate(220deg) scale(1.16)}}.orb-button:after{content:"";position:absolute;width:45%;height:25%;left:15%;top:9%;border-radius:50%;background:#fff9;filter:blur(2px);transform:rotate(-22deg)}.orb-stage.touched .orb-button{--sc:1.055;box-shadow:0 0 55px #ff63e7aa,0 0 130px #64e9ff88,inset -30px -35px 55px #020206aa,inset 24px 24px 40px #fff3}.orb-stage.thinking .ring{animation-duration:1.6s}.orb-caption{position:absolute;bottom:6%;font-size:.72rem;letter-spacing:.22em;color:#e5c7ec;text-transform:uppercase}.spark{position:absolute;width:5px;height:5px;border-radius:50%;background:#fff;pointer-events:none;animation:spark 1s ease-out forwards}@keyframes spark{to{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}.grid2{display:grid;grid-template-columns:.92fr 1.08fr;gap:18px}.section-title{margin:0 0 16px;font-size:clamp(2rem,7vw,4rem)}.pad{padding:24px}.table,.deck{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.card{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#0d0811;cursor:pointer;box-shadow:0 10px 30px #0007}.card img{width:100%;display:block;aspect-ratio:.67;object-fit:cover}.card .meta{padding:10px}.card .meta b{display:block;font-family:Georgia,serif}.muted{color:var(--muted);font-size:.88rem}.drawn{border:0;padding:0;background:none}.drawn img{width:100%;border-radius:14px;box-shadow:0 15px 50px #0009}.spread-grid{display:grid;grid-template-columns:repeat(5,minmax(120px,1fr));gap:12px;overflow:auto}.slot-label{text-align:center;margin-top:7px;color:var(--gold);font-size:.72rem}.field{width:100%;padding:13px 15px;border-radius:16px;border:1px solid var(--line);background:#0b060e;color:#fff;outline:none}.field:focus{border-color:#d289ff}.music-grid,.video-grid,.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.album,.videoBox{padding:18px}.album iframe{width:100%;height:352px;border:0;border-radius:14px}.videoBox video{width:100%;max-height:520px;border-radius:16px;background:#000}.footer{padding:26px 0 60px;color:#8f7e94;text-align:center}.socials{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:18px 0}.socials a{color:white;text-decoration:none;border:1px solid var(--line);padding:11px 14px;border-radius:999px}.modal{position:fixed;inset:0;background:#000c;display:none;z-index:100;padding:20px;place-items:center}.modal.on{display:grid}.modalCard{width:min(520px,100%);max-height:90vh;overflow:auto;background:#100814;border:1px solid var(--line);border-radius:24px;padding:14px}.modalCard img{width:100%;border-radius:16px}.close{float:right}.notice{padding:14px;border-radius:14px;background:#f0bd3f16;border:1px solid #f0bd3f44;color:#f8e5af;font-size:.85rem}.admin-badge{display:inline-flex;align-items:center;gap:7px;background:#1e0a27;border:1px solid #8d41ad88;padding:8px 12px;border-radius:999px;color:#f1c8ff;font-weight:800}.hidden{display:none!important}@media(max-width:860px){.hero,.grid2,.music-grid,.video-grid,.admin-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.table,.deck{grid-template-columns:repeat(2,minmax(0,1fr))}.orbpanel{min-height:520px}.spread-grid{grid-template-columns:repeat(3,minmax(130px,1fr))}}@media(max-width:520px){.copy{padding:22px}.table,.deck{grid-template-columns:repeat(2,minmax(0,1fr))}.spread-grid{grid-template-columns:repeat(2,minmax(135px,1fr))}.orbpanel{min-height:470px}}
-</style><style>.service-grid,.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.service{padding:24px}.service>span{font-size:2rem;color:var(--gold)}.service strong{display:block;font:2rem Georgia;color:var(--gold2);margin:10px 0}.product{padding:18px}.product .price{font:1.7rem Georgia;color:var(--gold2)}.admin-list>div{padding:12px 0;border-bottom:1px solid var(--line)}@media(max-width:760px){.service-grid,.product-grid{grid-template-columns:1fr}}</style></head><body><div class="navwrap"><nav class="shell"><button class="tab active" data-view="home">✦ Início</button><button class="tab" data-view="free">◉ Tarot Livre</button><button class="tab" data-view="spreads">✦ Tiragens</button><button class="tab" data-view="deck">✧ 78 Cartas</button><button class="tab" data-view="music">♫ Música</button><button class="tab" data-view="video">▶ De Frente com o Tarot</button><button class="tab" data-view="channel">✧ Canalização IA</button><button class="tab" data-view="consult">♡ Consultas</button><button class="tab" data-view="shop">✦ Loja</button><button class="tab" data-view="journal">☾ Diário</button><button class="tab" data-view="admin">⚙ Admin</button></nav></div><main class="shell">
-<section id="home" class="view active"><div class="hero"><div class="panel copy"><div class="eyebrow">DIVINA BRUXA · ORBE VIVA 6.0</div><h1>Orbe das <em>Realidades</em></h1><p class="lead">A versão viva reúne o que já foi construído: Orbe sensível ao toque, deck completo com 78 imagens, Tarot Livre, tiragens, diário, música, vídeos e um centro administrativo preparado para crescer até virar aplicativo.</p><div class="actions"><button class="btn gold" onclick="go('free')">Tirar uma carta</button><button class="btn" onclick="go('spreads')">Abrir tiragem</button><button class="btn" onclick="go('music')">Ativar trilha</button></div><div class="stats"><div class="stat"><b>78</b><span>cartas reais</span></div><div class="stat"><b>6.0</b><span>orbe viva</span></div><div class="stat"><b>2</b><span>álbuns</span></div><div class="stat"><b>∞</b><span>movimento</span></div></div></div><div class="panel orbpanel"><div class="orb-stage" id="heroOrb"><span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span><button class="orb-button" aria-label="Abrir Tarot Livre"></button><span class="orb-caption">toque · mova · sinta</span></div></div></div></section>
-<section id="free" class="view"><div class="eyebrow">TAROT LIVRE</div><h2 class="section-title">Toque na Orbe</h2><p class="lead">Cada toque retira uma carta aleatória sem repetir até o baralho terminar. Toque numa carta revelada para vê-la grande.</p><div class="grid2"><div class="panel orbpanel"><div class="orb-stage" id="freeOrb"><span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span><button class="orb-button" aria-label="Tirar carta"></button><span class="orb-caption">pronta</span></div></div><div class="panel pad"><div class="actions"><button class="btn gold" id="drawBtn">Tirar carta</button><button class="btn" id="shuffleBtn">Embaralhar</button><button class="btn" id="clearBtn">Limpar mesa</button></div><p class="muted" id="count">78 cartas restantes</p><div id="spread" class="table"></div></div></div></section>
-<section id="spreads" class="view"><div class="eyebrow">TIRAGENS</div><h2 class="section-title">Tiragens profundas</h2><div class="panel pad"><textarea class="field" id="question" rows="4" placeholder="Escreva sua pergunta ou apenas mentalize..."></textarea><div class="actions"><button class="btn guide gold" data-n="1">1 carta</button><button class="btn guide" data-n="3">3 cartas</button><button class="btn guide" data-n="5">Caminho · 5</button><button class="btn guide" data-n="10">Cruz Celta · 10</button><button class="btn" id="saveGuided">Salvar no diário</button></div><div id="guidedSpread" class="spread-grid" style="margin-top:22px"></div><div id="readingText" class="notice" style="display:none;margin-top:18px">A Orbe mostra as cartas e posições para sua reflexão.</div></div></section>
-<section id="deck" class="view"><div class="eyebrow">DECK COMPLETO</div><h2 class="section-title">As 78 cartas</h2><input id="search" class="field" placeholder="Buscar carta ou naipe..."><div id="deckGrid" class="deck" style="margin-top:18px"></div></section>
-<section id="music" class="view"><div class="eyebrow">TRILHA DA ORBE</div><h2 class="section-title">Tarot com a sua música</h2><p class="lead">Escolha um álbum e deixe a experiência acompanhar a leitura. O player usa o Spotify oficial e respeita os controles de reprodução do aparelho.</p><div class="music-grid"><article class="panel album"><h3>Sobre as Estrelas</h3><iframe src="https://open.spotify.com/embed/album/0GwJtJujeS9iwSZFADcL1k?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></article><article class="panel album"><h3>Z</h3><iframe src="https://open.spotify.com/embed/album/4mq0UaLMXK21JbrKMFdhdO?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></article></div></section>
-<section id="video" class="view"><div class="eyebrow">DE FRENTE COM O TAROT</div><h2 class="section-title">Vídeo da Semana</h2><div class="video-grid"><article class="panel videoBox"><video id="weeklyVideo" controls playsinline></video><p id="videoEmpty" class="muted">Ainda não há vídeo publicado neste aparelho.</p></article><article class="panel pad"><h3>Seu espaço semanal</h3><p class="lead">Aqui aparece o episódio que você publicar no painel Admin. Para um site estático, o upload local fica salvo neste aparelho; o painel já fica pronto para receber armazenamento online quando conectarmos o backend.</p><button class="btn" onclick="go('admin')">Abrir painel Admin</button></article></div></section>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#09020d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Orbe das Realidades · Orbe Viva 7.0</title>
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+:root{
+ --bg:#050207;--bg2:#0d0312;--panel:#130719e8;--panel2:#210b2aeb;--gold:#f5ca66;--gold2:#ffe8a4;
+ --violet:#9a4dff;--violet2:#5420a8;--pink:#ff4ed9;--cyan:#5ff0ff;--text:#fff9f2;--muted:#baa9bf;
+ --line:rgba(245,202,102,.27);--line2:rgba(190,111,255,.28);--r:26px
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;background:
+ radial-gradient(circle at 50% -12%,#35104f 0,#110419 31%,#050207 68%);
+ color:var(--text);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;background-image:
+ radial-gradient(circle at 10% 20%,#fff 0 1px,transparent 1.4px),
+ radial-gradient(circle at 67% 14%,#ffe695 0 1px,transparent 1.5px),
+ radial-gradient(circle at 80% 63%,#9bf6ff 0 1px,transparent 1.5px),
+ radial-gradient(circle at 28% 78%,#ff7ee7 0 1px,transparent 1.5px);background-size:140px 140px,190px 190px,220px 220px,170px 170px}
+button,input,textarea,select{font:inherit}.shell{width:min(1180px,calc(100% - 20px));margin:auto}
+.navwrap{position:sticky;top:0;z-index:60;padding:10px 0;background:linear-gradient(#050207f2,#050207b8,transparent);backdrop-filter:blur(18px)}
+nav{display:flex;gap:8px;overflow:auto;scrollbar-width:none;padding-bottom:2px}nav::-webkit-scrollbar{display:none}
+.tab,.btn{border:1px solid var(--line);background:#17091dcc;color:#fff;border-radius:999px;padding:11px 15px;font-weight:850;white-space:nowrap;cursor:pointer;transition:.2s}
+.tab:hover,.btn:hover{transform:translateY(-1px);border-color:#f4d17b80}
+.tab.active{background:linear-gradient(135deg,#5f167b,#25102f);box-shadow:0 0 0 1px #b65de45c,0 0 24px #a64ada39}
+.btn.gold{border:0;color:#211401;background:linear-gradient(135deg,#f0b92f,#ffe39a);box-shadow:0 8px 28px #f0bc3d25}
+.btn.soft{background:#ffffff0a}.btn.danger{border-color:#ff6f9133;color:#ffc6d2}
+.view{display:none;padding:28px 0 90px}.view.active{display:block}
+.panel{background:linear-gradient(180deg,rgba(39,13,47,.91),rgba(14,5,18,.96));border:1px solid var(--line);border-radius:var(--r);box-shadow:0 25px 75px #0008,inset 0 1px #ffffff0b}
+.hero{display:grid;grid-template-columns:1.03fr .97fr;gap:18px;align-items:stretch}.copy{padding:34px}
+.eyebrow{color:var(--gold);font-size:.7rem;letter-spacing:.2em;font-weight:950;text-transform:uppercase}
+h1,h2,h3{font-family:Georgia,serif}.copy h1{font-size:clamp(3.3rem,10vw,6.7rem);line-height:.8;margin:15px 0 22px}.copy h1 em{display:block;font-weight:400}
+.section-title{font-size:clamp(2.25rem,7vw,4.6rem);margin:8px 0 12px}.lead{color:#e9dfea;line-height:1.7}.muted{color:var(--muted)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:26px}
+.stat{padding:16px;border:1px solid var(--line);border-radius:18px;background:#ffffff07}.stat b{display:block;color:var(--gold2);font:1.8rem Georgia}.stat span{font-size:.68rem;color:var(--muted);text-transform:uppercase}
+.orbpanel{min-height:620px;display:grid;place-items:center;position:relative;overflow:hidden;background:
+ radial-gradient(circle at 50% 50%,#64107c 0,#240631 42%,#0a030d 74%)}
+.orbpanel:before{content:"";position:absolute;inset:-20%;background:
+ conic-gradient(from 0deg,transparent,#7befff12,#b25fff23,#ff56d91f,#ffd96a12,transparent);filter:blur(16px);animation:nebula 18s linear infinite}
+@keyframes nebula{to{transform:rotate(360deg)}}
+.orb-stage{width:min(84vw,500px);aspect-ratio:1;display:grid;place-items:center;position:relative;touch-action:none;isolation:isolate}
+.orb-ring{position:absolute;border-radius:50%;border:1px solid #dca4ff38;pointer-events:none;box-shadow:0 0 18px #9235ff18}
+.orb-ring.r1{inset:2%;animation:spin 16s linear infinite}.orb-ring.r2{inset:11%;animation:spin 10s linear infinite reverse}.orb-ring.r3{inset:20%;animation:spin 7s linear infinite}
+.orb-ring:before,.orb-ring:after{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 16px #fff,0 0 30px #7deeff}
+.orb-ring:before{left:8%;top:22%}.orb-ring:after{right:10%;bottom:18%}@keyframes spin{to{transform:rotate(360deg)}}
+.orb-button{width:64%;aspect-ratio:1;border-radius:50%;border:1px solid #ffe39175;position:relative;overflow:hidden;cursor:pointer;touch-action:none;
+ transform:translate3d(var(--tx,0),var(--ty,0),0) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) scale(var(--sc,1));
+ transition:transform .34s cubic-bezier(.16,1,.3,1),filter .25s;filter:saturate(1.2);
+ box-shadow:0 0 45px #d74fff70,0 0 120px #53dfff3b,inset -32px -38px 60px #010104a8,inset 20px 20px 36px #fff2;
+ background:radial-gradient(circle at var(--px,68%) var(--py,30%),#fff 0 2.7%,#73f4ff 7%,transparent 18%),
+ radial-gradient(circle at 34% 60%,#fff78a 0 4%,#ff8a36 11%,transparent 24%),
+ radial-gradient(circle at 66% 66%,#ff9ae8 0 5%,#ff4dd2 13%,transparent 27%),
+ radial-gradient(circle at 52% 48%,#a55dff 0 9%,#5924d0 25%,#190620 58%,#030105 100%)}
+.orb-button:before{content:"";position:absolute;inset:-42%;background:
+ conic-gradient(from var(--a,0deg),transparent 0 10%,#fff8 13%,transparent 24%,#6ef2ff9e 37%,transparent 49%,#ff58dcaa 63%,transparent 76%,#f7d96b80 87%,transparent);
+ filter:blur(17px);animation:liquid 4.2s ease-in-out infinite alternate;mix-blend-mode:screen}
+.orb-button:after{content:"";position:absolute;left:14%;top:8%;width:47%;height:25%;border-radius:50%;background:radial-gradient(ellipse,#ffffffc7 0,#ffffff40 45%,transparent 72%);filter:blur(4px);transform:rotate(-22deg)}
+@keyframes liquid{to{transform:rotate(240deg) scale(1.14)}}
+.orb-stage.touched .orb-button{--sc:1.06;filter:saturate(1.4) brightness(1.08);box-shadow:0 0 70px #ff64e8aa,0 0 155px #63efff7a,inset -30px -35px 55px #020206aa,inset 24px 24px 40px #fff3}
+.orb-stage.thinking .orb-ring{animation-duration:1.45s}.orb-stage.thinking .orb-button{--sc:1.085}
+.orb-caption{position:absolute;bottom:5%;font-size:.7rem;letter-spacing:.22em;color:#e7c8ed;text-transform:uppercase;text-shadow:0 0 12px #9e4dff}
+.spark{position:absolute;width:5px;height:5px;border-radius:50%;background:#fff;pointer-events:none;z-index:10;animation:spark 1.05s ease-out forwards;box-shadow:0 0 14px #fff}
+@keyframes spark{to{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}
+.grid2,.music-grid,.admin-grid,.channel-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}.pad{padding:24px}
+.table,.deck{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.card{border:1px solid var(--line);border-radius:17px;overflow:hidden;background:#0d0710;cursor:pointer;box-shadow:0 12px 34px #0007;transition:.22s}.card:hover{transform:translateY(-3px);border-color:#f7d47365}
+.card img{display:block;width:100%;aspect-ratio:.67;object-fit:cover}.card .meta{padding:10px}.card b{font-family:Georgia,serif}.drawn{border:0;padding:0;background:none}
+.spread-grid{display:grid;grid-template-columns:repeat(5,minmax(130px,1fr));gap:12px;overflow:auto;padding-bottom:4px}.slot-label{text-align:center;color:var(--gold);font-size:.71rem;margin:5px 0 7px}
+.field{width:100%;padding:13px 15px;border-radius:16px;border:1px solid var(--line);background:#0b050e;color:#fff;outline:none}.field:focus{border-color:#d188ff}
+textarea.field{min-height:112px;resize:vertical}.small{font-size:.78rem;color:#ccbcd0}.notice{padding:14px;border:1px solid #f3c86442;background:#f3c86410;border-radius:15px;color:#f7e4af}
+.service-grid,.product-grid,.episode-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.service,.product,.episode{padding:21px}.service .price,.product .price{font:2rem Georgia;color:var(--gold2);margin:8px 0}
+.service .icon{font-size:2rem}.episode video{width:100%;border-radius:17px;background:#000;max-height:520px}.episodeHero{padding:20px}.episodeHero video{width:100%;border-radius:18px;background:#000;max-height:640px}
+.chat{height:470px;overflow:auto;padding:15px;border:1px solid var(--line2);border-radius:18px;background:#07030a}.bubble{max-width:88%;padding:12px 14px;border-radius:18px;margin:9px 0;line-height:1.55}.bubble.user{margin-left:auto;background:#3b1549}.bubble.orb{background:linear-gradient(135deg,#1c0b27,#10101f);border:1px solid #a86dff33}.typing{opacity:.65;font-style:italic}
+.admin-lock{max-width:520px;margin:40px auto;padding:26px}.admin-shell{display:grid;grid-template-columns:230px 1fr;gap:16px}.admin-menu{padding:14px;display:flex;flex-direction:column;gap:8px;align-self:start;position:sticky;top:90px}.admin-page{display:none}.admin-page.active{display:block}.admin-btn{text-align:left;border-radius:14px}.admin-status{display:flex;gap:8px;align-items:center}.dot{width:9px;height:9px;border-radius:50%;background:#64e589;box-shadow:0 0 14px #64e589}
+.admin-list>div{padding:13px 0;border-bottom:1px solid var(--line)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.wide{grid-column:1/-1}
+.socials{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin:18px 0}.socials a{color:#fff;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:10px 13px}.footer{text-align:center;padding:24px 0 65px;color:#8e7a93}
+.modal{position:fixed;inset:0;background:#000d;display:none;place-items:center;z-index:100;padding:18px}.modal.on{display:grid}.modalCard{width:min(560px,100%);max-height:92vh;overflow:auto;background:#0e0612;border:1px solid var(--line);border-radius:24px;padding:14px}.modalCard img{width:100%;border-radius:17px}.hidden{display:none!important}
+.badge{display:inline-flex;padding:7px 10px;border:1px solid var(--line2);border-radius:999px;color:#e4c6ef;font-size:.72rem}.good{color:#97f2b0}.warn{color:#ffe099}
+@media(max-width:900px){.hero,.grid2,.music-grid,.admin-grid,.channel-grid{grid-template-columns:1fr}.admin-shell{grid-template-columns:1fr}.admin-menu{position:static;flex-direction:row;overflow:auto}.stats{grid-template-columns:repeat(2,1fr)}.table,.deck{grid-template-columns:repeat(2,minmax(0,1fr))}.service-grid,.product-grid,.episode-grid{grid-template-columns:1fr 1fr}.orbpanel{min-height:540px}}
+@media(max-width:560px){.copy{padding:22px}.service-grid,.product-grid,.episode-grid{grid-template-columns:1fr}.spread-grid{grid-template-columns:repeat(2,minmax(140px,1fr))}.form-grid{grid-template-columns:1fr}.wide{grid-column:auto}.orbpanel{min-height:485px}.chat{height:400px}}
+</style>
+</head>
+<body>
+<div class="navwrap"><nav class="shell">
+<button class="tab active" data-view="home">✦ Início</button>
+<button class="tab" data-view="free">◉ Tarot Livre</button>
+<button class="tab" data-view="spreads">✧ Tiragens</button>
+<button class="tab" data-view="channel">◌ Canalização</button>
+<button class="tab" data-view="consult">♡ Consultas</button>
+<button class="tab" data-view="shop">✦ Loja</button>
+<button class="tab" data-view="video">▶ De Frente com o Tarot</button>
+<button class="tab" data-view="music">♫ Música</button>
+<button class="tab" data-view="deck">🂠 78 Cartas</button>
+<button class="tab" data-view="journal">☾ Diário</button>
+<button class="tab" data-view="admin">⚙ Admin</button>
+</nav></div>
 
-<section id="channel" class="view"><div class="eyebrow">CANALIZAÇÃO · IA</div><h2 class="section-title">Orbe Inteligente</h2><div class="grid2"><div class="panel orbpanel"><div class="orb-stage" id="aiOrb"><span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span><button class="orb-button" aria-label="Canalizar"></button><span class="orb-caption">intuição · símbolos · reflexão</span></div></div><div class="panel pad"><h3>Canalização simbólica assistida por IA</h3><p class="lead">Escreva o nome, tema ou situação e uma pergunta. A experiência é interpretativa e reflexiva — não afirma ler literalmente a mente de outra pessoa.</p><input id="channelName" class="field" placeholder="Nome, tema ou situação"><textarea id="channelQuestion" class="field" rows="5" style="margin-top:10px" placeholder="O que você deseja compreender?"></textarea><div class="actions"><button id="channelBtn" class="btn gold">Consultar a Orbe</button></div><div id="channelResult" class="notice" style="margin-top:16px">A IA online será ativada ao conectar o backend seguro. A interface 6.0 já está pronta.</div></div></div></section>
-<section id="consult" class="view"><div class="eyebrow">ATENDIMENTO PARTICULAR</div><h2 class="section-title">Consultas com a Divina Bruxa</h2><div class="service-grid"><article class="panel service"><span>✦</span><h3>Mesa Real</h3><strong>R$ 200</strong><p>Consulta particular completa e aprofundada.</p><button class="btn gold chooseService" data-service="Mesa Real — R$ 200">Quero agendar</button></article><article class="panel service"><span>◉</span><h3>Leitura de Mente</h3><strong>R$ 200</strong><p>Leitura simbólica voltada à dinâmica, sentimentos e possibilidades.</p><button class="btn gold chooseService" data-service="Leitura de Mente — R$ 200">Quero agendar</button></article><article class="panel service"><span>☾</span><h3>Conselho</h3><strong>R$ 50</strong><p>Uma orientação objetiva para uma questão específica.</p><button class="btn gold chooseService" data-service="Conselho — R$ 50">Quero agendar</button></article></div><div class="panel pad" style="margin-top:18px"><h3>Solicitar horário</h3><form id="consultForm"><select id="service" class="field"><option>Mesa Real — R$ 200</option><option>Leitura de Mente — R$ 200</option><option>Conselho — R$ 50</option></select><input id="clientName" class="field" style="margin-top:10px" required placeholder="Seu nome"><input id="clientEmail" type="email" class="field" style="margin-top:10px" required placeholder="Seu e-mail"><input id="clientPhone" class="field" style="margin-top:10px" required placeholder="WhatsApp / telefone"><textarea id="clientMessage" class="field" rows="4" style="margin-top:10px" placeholder="Conte brevemente o assunto e sua disponibilidade"></textarea><div class="actions"><button class="btn gold" type="submit">Enviar solicitação</button></div></form><div id="consultStatus" class="notice" style="margin-top:14px">Na versão local, a solicitação fica registrada no painel Admin. Ao conectar o backend, ela também poderá chegar ao seu e-mail automaticamente.</div></div></section>
-<section id="shop" class="view"><div class="eyebrow">LOJA DA ORBE</div><h2 class="section-title">Loja</h2><div class="panel pad"><div class="actions"><input id="shopSearch" class="field" style="max-width:420px" placeholder="Buscar produtos..."></div><div id="shopGrid" class="product-grid" style="margin-top:18px"></div></div></section>
-<section id="journal" class="view"><div class="eyebrow">DIÁRIO MÁGICO</div><h2 class="section-title">Suas leituras</h2><div class="panel pad"><div class="actions"><button class="btn" id="clearJournal">Limpar diário</button></div><div id="journalList" style="margin-top:16px"></div></div></section>
-<section id="admin" class="view"><div class="eyebrow">PAINEL DA DIVINA BRUXA</div><h2 class="section-title">Centro Administrativo</h2><div class="admin-badge">⚙ modo local seguro</div><p class="lead">Você pode mudar o vídeo semanal, o texto de destaque e revisar o conteúdo sem editar o código. Nesta versão, essas alterações ficam no próprio navegador. Quando ligarmos um backend, o mesmo painel poderá publicar para todos os visitantes.</p><div class="admin-grid"><article class="panel pad"><h3>Vídeo semanal</h3><input class="field" type="file" id="videoUpload" accept="video/*"><p class="muted">Arquivos grandes podem ultrapassar o limite do navegador. Para vídeos de 40 minutos, a etapa de produção ideal será armazenamento online.</p><div class="actions"><button class="btn gold" id="saveVideo">Salvar vídeo neste aparelho</button><button class="btn" id="removeVideo">Remover</button></div></article><article class="panel pad"><h3>Destaque da página inicial</h3><textarea id="adminMessage" class="field" rows="5" placeholder="Escreva uma mensagem para a experiência..."></textarea><div class="actions"><button class="btn gold" id="saveMessage">Salvar texto</button></div><div id="savedMessage" class="notice" style="margin-top:14px"></div></article></div><div class="admin-grid" style="margin-top:18px"><article class="panel pad"><h3>Produtos da Loja</h3><input id="prodName" class="field" placeholder="Nome do produto"><input id="prodPrice" class="field" style="margin-top:8px" placeholder="Preço"><input id="prodLink" class="field" style="margin-top:8px" placeholder="Link de compra (opcional)"><textarea id="prodDesc" class="field" rows="3" style="margin-top:8px" placeholder="Descrição"></textarea><div class="actions"><button id="addProduct" class="btn gold">Adicionar produto</button></div><div id="adminProducts"></div></article><article class="panel pad"><h3>Solicitações de Consulta</h3><div id="adminConsults" class="admin-list"></div></article></div><div class="notice" style="margin-top:18px"><strong>Próxima conexão online:</strong> GitHub Pages não permite que uma página altere os próprios arquivos do repositório. Por isso, um administrador real para publicar vídeos, produtos e conteúdo para todos exige um backend. A Orbe Viva 6.0 já deixa a interface preparada para essa próxima etapa.</div></section>
-</main><footer class="footer shell"><div class="eyebrow">ACOMPANHE A DIVINA BRUXA</div><div class="socials"><a href="https://www.instagram.com/divinabruxa33" target="_blank" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@divinabruxa33?_r=1&_t=ZS-98zz3xN7AFo" target="_blank" rel="noopener">TikTok</a><a href="https://youtube.com/@divinabruxa33?si=E5hqtTHIo_ussOfo" target="_blank" rel="noopener">YouTube</a><a href="https://x.com/divinabruxa33" target="_blank" rel="noopener">X</a></div>DIVINA BRUXA · ORBE DAS REALIDADES · ORBE VIVA 6.0 · 2026</footer><div class="modal" id="modal"><div class="modalCard"><button class="btn close" id="modalClose">Fechar</button><img id="modalImg" alt="Carta"><h2 id="modalTitle"></h2><p class="muted" id="modalText"></p></div></div><script src="app.js"></script></body></html>
+<main class="shell">
+<section id="home" class="view active">
+<div class="hero">
+<article class="panel copy">
+<div class="eyebrow">DIVINA BRUXA · ORBE VIVA 7.0</div>
+<h1>Orbe das <em>Realidades</em></h1>
+<p class="lead">Um universo vivo de Tarot: suas 78 cartas, Orbe sensível ao toque, tiragens, canalização simbólica, consultas particulares, loja, episódios, trilha musical, diário e um portal administrativo.</p>
+<div class="actions"><button class="btn gold" onclick="go('free')">Tocar a Orbe</button><button class="btn" onclick="go('channel')">Conversar com a Orbe</button><button class="btn soft" onclick="go('consult')">Marcar consulta</button></div>
+<div class="stats"><div class="stat"><b>78</b><span>artes oficiais</span></div><div class="stat"><b>7.0</b><span>Orbe Viva</span></div><div class="stat"><b>3</b><span>serviços</span></div><div class="stat"><b>IA</b><span>pronta para conectar</span></div></div>
+</article>
+<article class="panel orbpanel">
+<div class="orb-stage" id="heroOrb">
+<span class="orb-ring r1"></span><span class="orb-ring r2"></span><span class="orb-ring r3"></span>
+<button class="orb-button" aria-label="Tocar a Orbe"></button>
+<span class="orb-caption">toque · mova · sinta</span>
+</div>
+</article>
+</div>
+</section>
+
+<section id="free" class="view">
+<div class="eyebrow">TAROT LIVRE</div><h2 class="section-title">A Orbe revela</h2><p class="lead">Toque, arraste e sinta o movimento. Cada toque retira uma carta sem repetição até o baralho terminar.</p>
+<div class="grid2">
+<article class="panel orbpanel">
+<div class="orb-stage" id="freeOrb"><span class="orb-ring r1"></span><span class="orb-ring r2"></span><span class="orb-ring r3"></span><button class="orb-button" aria-label="Tirar carta"></button><span class="orb-caption">pronta</span></div>
+<div class="actions" style="position:absolute;bottom:18px;left:18px;right:18px;justify-content:center"><button id="drawBtn" class="btn gold">Tirar carta</button><button id="shuffleBtn" class="btn">Embaralhar</button><button id="clearBtn" class="btn soft">Limpar</button></div>
+</article>
+<article class="panel pad"><div class="eyebrow">SUA MESA</div><h3><span id="count">78 cartas restantes</span></h3><div id="spread" class="table"></div></article>
+</div>
+</section>
+
+<section id="spreads" class="view">
+<div class="eyebrow">TIRAGENS GUIADAS</div><h2 class="section-title">Abra um portal</h2>
+<article class="panel pad">
+<textarea id="question" class="field" placeholder="Escreva sua pergunta ou intenção…"></textarea>
+<div class="actions"><button class="btn gold guide" data-n="1">1 carta</button><button class="btn guide" data-n="3">3 cartas</button><button class="btn guide" data-n="5">5 cartas</button><button class="btn guide" data-n="10">Cruz Celta</button></div>
+<div id="guidedSpread" class="spread-grid" style="margin-top:20px"></div>
+<div id="readingText" class="notice" style="display:none;margin-top:16px"></div>
+<div class="actions"><button class="btn soft" id="saveGuided">Salvar no Diário</button></div>
+</article>
+</section>
+
+<section id="channel" class="view">
+<div class="eyebrow">ORBE CONVERSACIONAL</div><h2 class="section-title">Canalização simbólica</h2>
+<p class="lead">Uma experiência de imaginação e reflexão com Tarot. Quando a IA segura estiver conectada, a Orbe poderá conversar em tempo real, lembrar o contexto da conversa e usar as cartas como linguagem simbólica.</p>
+<div class="channel-grid">
+<article class="panel pad">
+<div class="notice"><b>Importante:</b> esta experiência não acessa pensamentos, almas ou mensagens privadas de outra pessoa. É uma simulação criativa e reflexiva gerada pelo sistema.</div>
+<label class="small">Nome ou tema simbólico</label><input id="channelName" class="field" placeholder="Ex.: meu relacionamento, uma pessoa, uma decisão…">
+<label class="small">Intenção</label><textarea id="channelQuestion" class="field" placeholder="O que você quer compreender?"></textarea>
+<div class="orb-stage" id="aiOrb" style="width:min(88vw,360px);margin:auto"><span class="orb-ring r1"></span><span class="orb-ring r2"></span><span class="orb-ring r3"></span><button class="orb-button" aria-label="Abrir canalização"></button><span class="orb-caption">abrir conversa</span></div>
+</article>
+<article class="panel pad">
+<div id="channelChat" class="chat"><div class="bubble orb">Eu sou a Orbe. Escreva uma intenção e toque em mim. No modo local, responderei com uma reflexão simbólica. Quando a IA for conectada, esta conversa ficará muito mais profunda e contextual.</div></div>
+<div class="actions"><input id="channelInput" class="field" placeholder="Escreva sua mensagem…" style="flex:1"><button id="channelSend" class="btn gold">Enviar</button></div>
+<div class="small" id="aiModeLabel">Modo atual: simbólico local.</div>
+</article>
+</div>
+</section>
+
+<section id="consult" class="view">
+<div class="eyebrow">CONSULTAS PARTICULARES</div><h2 class="section-title">Atendimento com você</h2>
+<div class="service-grid">
+<article class="panel service"><div class="icon">✦</div><h3>Mesa Real</h3><div class="price">R$ 200</div><p class="muted">Consulta completa e aprofundada para uma questão ou momento de vida.</p><button class="btn gold chooseService" data-service="Mesa Real — R$ 200">Quero marcar</button></article>
+<article class="panel service"><div class="icon">◌</div><h3>Leitura de Mente</h3><div class="price">R$ 200</div><p class="muted">Leitura simbólica sobre sentimentos, sinais, dinâmica e possibilidades. Não revela pensamentos privados de forma literal.</p><button class="btn gold chooseService" data-service="Leitura de Mente — R$ 200">Quero marcar</button></article>
+<article class="panel service"><div class="icon">☾</div><h3>Carta de Conselho</h3><div class="price">R$ 50</div><p class="muted">Uma pergunta objetiva, uma carta e uma orientação focada.</p><button class="btn gold chooseService" data-service="Carta de Conselho — R$ 50">Quero marcar</button></article>
+</div>
+<article class="panel pad" style="margin-top:18px">
+<h3>Solicitar horário</h3>
+<form id="consultForm" class="form-grid">
+<select id="service" class="field wide" required><option value="">Escolha o serviço</option><option>Mesa Real — R$ 200</option><option>Leitura de Mente — R$ 200</option><option>Carta de Conselho — R$ 50</option></select>
+<input id="clientName" class="field" required placeholder="Nome completo">
+<input id="clientEmail" class="field" required type="email" placeholder="E-mail">
+<input id="clientPhone" class="field" required inputmode="tel" placeholder="WhatsApp / telefone">
+<input id="clientDate" class="field" required type="date">
+<input id="clientTime" class="field" required type="time">
+<textarea id="clientMessage" class="field wide" placeholder="Conte brevemente o tema da consulta"></textarea>
+<button class="btn gold wide" type="submit">Preparar solicitação por e-mail</button>
+</form>
+<div id="consultStatus" class="notice" style="display:none;margin-top:14px"></div>
+</article>
+</section>
+
+<section id="shop" class="view">
+<div class="eyebrow">LOJA MÍSTICA</div><h2 class="section-title">Curadoria da Orbe</h2><p class="lead">Produtos, baralhos, livros e itens mágicos. Você administra tudo no Portal Admin e pode usar seus links de afiliado para receber comissão quando o programa parceiro reconhecer uma compra qualificada.</p>
+<input id="shopSearch" class="field" placeholder="Buscar na loja…">
+<div id="shopGrid" class="product-grid" style="margin-top:16px"></div>
+</section>
+
+<section id="video" class="view">
+<div class="eyebrow">PROGRAMA SEMANAL</div><h2 class="section-title">De Frente com o Tarot</h2>
+<article class="panel episodeHero">
+<div id="episodeEmpty" class="notice">Nenhum episódio publicado neste aparelho ainda. Entre no Admin para cadastrar o episódio em destaque.</div>
+<video id="episodeVideo" controls playsinline class="hidden"></video>
+<h3 id="episodeTitle">De Frente com o Tarot</h3><p id="episodeDescription" class="muted">Seu espaço semanal de aproximadamente 40 minutos.</p>
+</article>
+<div id="episodeArchive" class="episode-grid" style="margin-top:16px"></div>
+</section>
+
+<section id="music" class="view">
+<div class="eyebrow">TRILHA DA ORBE</div><h2 class="section-title">Tarot com música</h2><p class="lead">Escolha um álbum e deixe a trilha acompanhar a experiência.</p>
+<div class="music-grid">
+<article class="panel pad"><h3>Sobre as Estrelas</h3><iframe style="border-radius:16px;width:100%;height:352px;border:0" src="https://open.spotify.com/embed/album/0GwJtJujeS9iwSZFADcL1k?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></article>
+<article class="panel pad"><h3>Z</h3><iframe style="border-radius:16px;width:100%;height:352px;border:0" src="https://open.spotify.com/embed/album/4mq0UaLMXK21JbrKMFdhdO?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></article>
+</div>
+</section>
+
+<section id="deck" class="view"><div class="eyebrow">BIBLIOTECA SAGRADA</div><h2 class="section-title">As 78 cartas</h2><input id="search" class="field" placeholder="Buscar carta…"><div id="deckGrid" class="deck" style="margin-top:16px"></div></section>
+
+<section id="journal" class="view"><div class="eyebrow">MEMÓRIA DA ORBE</div><h2 class="section-title">Diário mágico</h2><div class="actions"><button class="btn danger" id="clearJournal">Apagar diário</button></div><div id="journalList" style="margin-top:16px"></div></section>
+
+<section id="admin" class="view">
+<div id="adminLogin" class="panel admin-lock">
+<div class="eyebrow">PORTAL ADMINISTRATIVO</div><h2>Entrar</h2><p class="muted">Área privada para administrar loja, consultas, vídeos, mensagens e configurações da Orbe.</p>
+<input id="adminUser" class="field" autocomplete="username" placeholder="Usuário">
+<input id="adminPass" class="field" type="password" autocomplete="current-password" placeholder="Senha" style="margin-top:10px">
+<div class="actions"><button id="adminEnter" class="btn gold">Entrar no Portal</button></div>
+<div id="adminError" class="small warn"></div>
+</div>
+<div id="adminPortal" class="hidden">
+<div class="admin-status" style="margin-bottom:14px"><span class="dot"></span><span>Portal da Divina Bruxa conectado neste aparelho</span><button id="adminLogout" class="btn soft" style="margin-left:auto">Sair</button></div>
+<div class="admin-shell">
+<aside class="panel admin-menu">
+<button class="btn admin-btn gold" data-admin="dashboard">Visão geral</button>
+<button class="btn admin-btn" data-admin="store">Loja</button>
+<button class="btn admin-btn" data-admin="episodes">De Frente com o Tarot</button>
+<button class="btn admin-btn" data-admin="consultations">Consultas</button>
+<button class="btn admin-btn" data-admin="content">Conteúdo</button>
+<button class="btn admin-btn" data-admin="ai">IA da Orbe</button>
+</aside>
+<div>
+<section class="panel pad admin-page active" data-page="dashboard"><div class="eyebrow">DASHBOARD</div><h2>Controle total</h2><div class="stats"><div class="stat"><b id="statProducts">0</b><span>produtos</span></div><div class="stat"><b id="statConsults">0</b><span>consultas</span></div><div class="stat"><b id="statEpisodes">0</b><span>episódios</span></div><div class="stat"><b>78</b><span>cartas</span></div></div><div class="notice" style="margin-top:16px">Nesta 7.0 o Admin funciona no navegador. Para editar uma vez e refletir para todos os visitantes, a próxima etapa é conectar o banco de dados e autenticação segura.</div></section>
+<section class="panel pad admin-page" data-page="store"><div class="eyebrow">LOJA</div><h2>Produtos e afiliados</h2><div class="form-grid"><input id="prodName" class="field" placeholder="Nome"><input id="prodPrice" class="field" placeholder="Preço / ex.: R$ 129"><input id="prodLink" class="field wide" placeholder="Link de afiliado ou compra"><textarea id="prodDesc" class="field wide" placeholder="Descrição"></textarea><button id="addProduct" class="btn gold wide">Adicionar produto</button></div><div id="adminProducts" class="admin-list" style="margin-top:14px"></div></section>
+<section class="panel pad admin-page" data-page="episodes"><div class="eyebrow">DE FRENTE COM O TAROT</div><h2>Publicar episódio</h2><input id="epTitle" class="field" placeholder="Título do episódio"><textarea id="epDesc" class="field" placeholder="Descrição"></textarea><input id="epFile" class="field" type="file" accept="video/*"><div class="actions"><button id="saveEpisode" class="btn gold">Salvar episódio neste aparelho</button><button id="clearEpisodes" class="btn danger">Limpar episódios</button></div><div class="small">Para um vídeo semanal de 40 minutos ficar disponível para todos, conectaremos armazenamento online no backend. Aqui você já testa o fluxo do Admin.</div><div id="adminEpisodes" class="admin-list" style="margin-top:14px"></div></section>
+<section class="panel pad admin-page" data-page="consultations"><div class="eyebrow">CLIENTES</div><h2>Solicitações</h2><div id="adminConsults" class="admin-list"></div></section>
+<section class="panel pad admin-page" data-page="content"><div class="eyebrow">CONTEÚDO</div><h2>Mensagem da Home</h2><textarea id="adminMessage" class="field" placeholder="Mensagem especial"></textarea><div class="actions"><button id="saveMessage" class="btn gold">Salvar</button></div><div id="savedMessage" class="notice" style="margin-top:14px"></div></section>
+<section class="panel pad admin-page" data-page="ai"><div class="eyebrow">INTELIGÊNCIA DA ORBE</div><h2>Conexão segura</h2><p class="muted">A 7.0 já sabe conversar em modo simbólico local. Quando você conectar um endpoint seguro, a Orbe passa a conversar com IA de verdade sem expor a chave secreta no site.</p><input id="aiEndpoint" class="field" placeholder="Endpoint seguro da IA (opcional)"><div class="actions"><button id="saveAI" class="btn gold">Salvar endpoint</button><button id="testAI" class="btn">Testar</button></div><div id="aiStatus" class="notice" style="margin-top:14px"></div></section>
+</div></div></div>
+</section>
+</main>
+
+<footer class="shell footer">
+<div class="socials">
+<a href="https://www.instagram.com/divinabruxa33?igsi=Ym10ZTExbmplaG5z&utm_source=qr" target="_blank" rel="noopener">Instagram</a>
+<a href="https://x.com/divinabruxa33?s=11" target="_blank" rel="noopener">X</a>
+<a href="https://www.tiktok.com/@divinabruxa33?_r=1&_t=ZS-98zz3xN7AFo" target="_blank" rel="noopener">TikTok</a>
+<a href="https://youtube.com/@divinabruxa33?si=E5hqtTHIo_ussOfo" target="_blank" rel="noopener">YouTube</a>
+<a href="https://open.spotify.com/album/0GwJtJujeS9iwSZFADcL1k" target="_blank" rel="noopener">Spotify</a>
+</div>
+<div>ORBE DAS REALIDADES · DIVINA BRUXA · ORBE VIVA 7.0</div>
+</footer>
+
+<div id="modal" class="modal"><div class="modalCard"><button id="modalClose" class="btn close">Fechar</button><img id="modalImg" alt=""><h2 id="modalTitle"></h2><p id="modalText" class="muted"></p></div></div>
+<script src="app.js"></script>
+</body></html>
