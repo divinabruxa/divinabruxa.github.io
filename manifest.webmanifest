@@ -1,16 +1,9 @@
 {
-  "name": "Orbe das Realidades — Orbe Viva 8.0",
-  "short_name": "Orbe 8.0",
+  "name": "Orbe das Realidades — Orbe Viva 9.0",
+  "short_name": "Orbe Viva",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#050107",
-  "theme_color": "#07020b",
-  "icons": [
-    {
-      "src": "icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    }
-  ]
+  "background_color": "#050208",
+  "theme_color": "#09030d",
+  "lang": "pt-BR"
 }

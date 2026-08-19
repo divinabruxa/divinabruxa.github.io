@@ -1,237 +1,66 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#07020b">
-<meta name="apple-mobile-web-app-capable" content="yes">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#09030d"><meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Orbe das Realidades · Orbe Viva 8.0</title>
+<meta name="apple-mobile-web-app-title" content="Orbe Viva">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icon.svg">
-<link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<div class="stars" aria-hidden="true"></div>
+<title>Orbe das Realidades — Orbe Viva 9.0</title>
+<style>
+:root{--bg:#050208;--panel:#100716cc;--panel2:#1b0a25cc;--gold:#f0c66b;--vio:#a855f7;--pink:#e64bd6;--cyan:#71e9ff;--text:#fff8ff;--muted:#b9a9bd;--line:#f0c66b35}
+*{box-sizing:border-box}html{background:var(--bg);scroll-behavior:smooth}body{margin:0;color:var(--text);font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"SF Pro Display",Segoe UI,sans-serif;background:radial-gradient(circle at 50% -10%,#351047 0,#11051a 30%,#050208 66%);min-height:100vh;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(#fff 0.7px,transparent .8px);background-size:31px 31px;opacity:.12}
+.shell{width:min(1120px,calc(100% - 24px));margin:auto}.top{position:sticky;top:0;z-index:20;background:#07030bd9;backdrop-filter:blur(22px);border-bottom:1px solid var(--line)}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between}.brand{font-family:Georgia,serif;letter-spacing:.08em;font-weight:800}.brand small{display:block;font:500 .62rem ui-sans-serif;letter-spacing:.32em;color:#aa94ae;margin-top:4px}.gold{color:var(--gold)}
+.menu{display:flex;gap:8px;overflow:auto}.tab,.btn{appearance:none;border:1px solid var(--line);background:#160a1d;color:#fff;border-radius:999px;padding:11px 15px;font:inherit;cursor:pointer}.tab.active,.btn.primary{background:linear-gradient(135deg,#6e1c8f,#35104d);box-shadow:0 0 28px #a855f733;border-color:#d783ff66}.view{display:none;padding:28px 0 110px}.view.active{display:block}.hero{display:grid;grid-template-columns:1fr 1.05fr;gap:18px;align-items:stretch}.panel{background:linear-gradient(145deg,#120817dd,#08030ddd);border:1px solid var(--line);border-radius:30px;box-shadow:0 28px 90px #0009,inset 0 1px #ffffff08}.copy{padding:36px}.eyebrow{font-size:.72rem;letter-spacing:.25em;color:var(--gold);font-weight:800}.serif,h1,h2,h3{font-family:Georgia,serif}h1{font-size:clamp(2.6rem,7vw,5.6rem);line-height:.92;margin:14px 0}h2{font-size:clamp(2rem,5vw,3.5rem);margin:10px 0}.lead{font-size:1.05rem;line-height:1.7;color:#d6c7da}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.orbPanel{min-height:620px;display:grid;place-items:center;overflow:hidden;position:relative}.orbStage{width:min(84vw,460px);aspect-ratio:1;position:relative;display:grid;place-items:center;perspective:900px}.ring{position:absolute;inset:4%;border:1px solid #b777ff50;border-radius:50%;animation:spin 20s linear infinite}.ring.r2{inset:12%;border-color:#f0c66b45;animation-direction:reverse;animation-duration:15s}.ring.r3{inset:21%;border-color:#71e9ff30;animation-duration:10s}.orb{width:67%;aspect-ratio:1;border:1px solid #f8dc8a99;border-radius:50%;position:relative;overflow:hidden;cursor:pointer;background:radial-gradient(circle at 57% 42%,#fff 0 2%,#71e9ff 3% 7%,transparent 16%),radial-gradient(circle at 33% 65%,#fff4a3 0 3%,#ff8d74 9%,transparent 25%),radial-gradient(circle at 68% 68%,#ff79de 0 5%,transparent 23%),radial-gradient(circle at 46% 48%,#7b4cff,#381057 45%,#0b0714 75%);box-shadow:0 0 22px #a855f7,0 0 80px #a855f766,0 0 150px #e64bd633,inset -30px -40px 60px #0009,inset 18px 12px 32px #ffffff35;animation:breathe 3.4s ease-in-out infinite;touch-action:manipulation}
+.orb:before{content:"";position:absolute;inset:-30%;background:conic-gradient(from 0deg,transparent,#72e9ff55,transparent,#ff64d855,transparent,#ffd66d55,transparent);animation:spin 7s linear infinite;filter:blur(13px)}.orb:after{content:"";position:absolute;left:17%;top:12%;width:42%;height:22%;border-radius:50%;background:#fff7;filter:blur(18px);transform:rotate(-25deg)}.pulse{animation:hit .65s ease!important}
+@keyframes spin{to{transform:rotate(360deg)}}@keyframes breathe{50%{transform:scale(1.035);filter:saturate(1.2)}}@keyframes hit{40%{transform:scale(.94);filter:brightness(1.8)}}
+.hint{text-align:center;color:#d7bddc;letter-spacing:.28em;font-size:.72rem;margin-top:28px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:24px}.stat{padding:15px;border:1px solid var(--line);border-radius:18px;background:#ffffff05}.stat b{display:block;font-size:1.35rem;color:var(--gold)}.stat span{font-size:.72rem;color:var(--muted)}
+.sectionHead{margin-bottom:20px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.feature{padding:22px}.feature b{font-family:Georgia,serif;font-size:1.25rem}.feature p{color:var(--muted);line-height:1.55}.cardReveal{padding:24px;min-height:300px}.tarot{width:min(250px,75vw);aspect-ratio:2/3;border-radius:22px;border:1px solid #f0c66b88;background:radial-gradient(circle at 50% 34%,#a855f766,transparent 28%),linear-gradient(145deg,#2c0c3b,#08030c);display:grid;place-items:center;text-align:center;padding:22px;margin:18px auto;box-shadow:0 24px 80px #000a,0 0 40px #a855f733}.tarot .sym{font-size:4rem;color:var(--gold)}.tarot strong{font-family:Georgia,serif;font-size:1.35rem}.tarot small{color:#c9b5ce}.spread{display:flex;gap:10px;overflow:auto;padding:12px 0}.mini{min-width:145px;padding:16px;border:1px solid var(--line);border-radius:20px;background:#110718}.mini b{color:var(--gold)}textarea,input{width:100%;background:#08030d;border:1px solid var(--line);color:#fff;border-radius:18px;padding:15px;font:inherit;outline:none}textarea{min-height:110px;resize:vertical}.result{margin-top:16px;padding:18px;border-radius:22px;background:#ffffff05;border:1px solid var(--line);line-height:1.65}.deck{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.deckItem{padding:14px;border-radius:18px;border:1px solid var(--line);background:#100617;min-height:110px}.deckItem b{display:block}.deckItem small{color:var(--muted)}.bottom{display:none}
+.service{padding:24px}.price{font:700 2rem Georgia;color:var(--gold)}footer{text-align:center;color:#786a7c;padding:40px 0 120px;font-size:.75rem}
+.toast{position:fixed;left:50%;bottom:95px;transform:translate(-50%,20px);opacity:0;background:#180a20;border:1px solid var(--line);padding:12px 17px;border-radius:999px;z-index:50;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:760px){.nav{height:70px}.menu{display:none}.hero{grid-template-columns:1fr}.copy{padding:24px}.orbPanel{min-height:520px}.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.deck{grid-template-columns:repeat(2,1fr)}.bottom{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;z-index:30;bottom:calc(8px + env(safe-area-inset-bottom));left:10px;right:10px;padding:7px;background:#0c0510e8;backdrop-filter:blur(20px);border:1px solid var(--line);border-radius:24px}.bottom button{border:0;background:none;color:#a997ad;padding:9px 2px;font-size:.67rem}.bottom button.active{color:#fff;background:#6f208b55;border-radius:17px}.bottom i{display:block;font-style:normal;font-size:1.25rem;margin-bottom:3px}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;scroll-behavior:auto!important}}
+</style></head><body>
+<header class="top"><div class="shell nav"><div class="brand"><span class="gold">✦</span> ORBE DAS REALIDADES<small>ORBE VIVA 9.0</small></div><nav class="menu"><button class="tab active" data-view="home">Início</button><button class="tab" data-view="tarot">Tarot</button><button class="tab" data-view="spreads">Tiragens</button><button class="tab" data-view="deck">78 Cartas</button><button class="tab" data-view="channel">Canalização</button><button class="tab" data-view="services">Consultas</button></nav></div></header>
+<main class="shell">
+<section id="home" class="view active"><div class="hero"><article class="panel copy"><div class="eyebrow">DIVINA BRUXA · EXPERIÊNCIA IMERSIVA</div><h1>Uma Orbe.<br><span class="gold">78 caminhos.</span></h1><p class="lead">Tarot completo para celular, com uma Orbe realmente viva, tiragens guiadas, diário local, canalização simbólica e consultas.</p><div class="actions"><button class="btn primary" data-go="tarot">Tocar a Orbe</button><button class="btn" data-go="spreads">Abrir Tiragens</button></div><div class="stats"><div class="stat"><b>78</b><span>cartas</span></div><div class="stat"><b>5</b><span>tiragens</span></div><div class="stat"><b>∞</b><span>Tarot Livre</span></div><div class="stat"><b>9.0</b><span>Orbe Viva</span></div></div></article><article class="panel orbPanel"><div><div class="orbStage"><div class="ring"></div><div class="ring r2"></div><div class="ring r3"></div><button class="orb" id="homeOrb" aria-label="Tocar na Orbe"></button></div><div class="hint">TOQUE · DESLIZE · SINTA</div></div></article></div>
+<div class="grid" style="margin-top:16px"><article class="panel feature"><b>◉ Tarot Livre</b><p>Toque na Orbe e retire cartas sem repetição até o baralho terminar.</p></article><article class="panel feature"><b>✦ Tiragens profundas</b><p>1 carta, 3 cartas, Dois Caminhos, Amor & Relações e Cruz Celta.</p></article><article class="panel feature"><b>☿ Diário + Canalização</b><p>Salve leituras no aparelho e use uma conversa simbólica guiada pelos arquétipos.</p></article></div></section>
 
-<header class="topbar">
-  <div class="brand"><span class="brand-glyph">✦</span><span><b>ORBE DAS REALIDADES</b><small>ORBE VIVA 8.0</small></span></div>
-  <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
-</header>
+<section id="tarot" class="view"><div class="sectionHead"><div class="eyebrow">TAROT LIVRE</div><h2>Toque na <span class="gold">Orbe</span></h2><p class="lead">Cada toque retira uma carta. O baralho só repete depois das 78.</p></div><div class="hero"><article class="panel orbPanel"><div><div class="orbStage"><div class="ring"></div><div class="ring r2"></div><button class="orb" id="drawOrb"></button></div><div class="actions" style="justify-content:center"><button class="btn primary" id="drawBtn">Tirar carta</button><button class="btn" id="shuffle">Embaralhar</button></div></div></article><article class="panel cardReveal" id="reveal"><p class="lead">Sua carta aparecerá aqui.</p></article></div></section>
 
-<nav class="dock" id="dock" aria-label="Navegação principal">
-  <button class="nav-btn active" data-view="home">⌂<span>Início</span></button>
-  <button class="nav-btn" data-view="free">◉<span>Orbe</span></button>
-  <button class="nav-btn" data-view="spreads">✧<span>Tiragens</span></button>
-  <button class="nav-btn" data-view="channel">☿<span>Canalização</span></button>
-  <button class="nav-btn" data-view="consult">♡<span>Consultas</span></button>
-  <button class="nav-btn" data-view="shop">✦<span>Loja</span></button>
-  <button class="nav-btn" data-view="video">▶<span>Vídeos</span></button>
-  <button class="nav-btn" data-view="music">♫<span>Música</span></button>
-  <button class="nav-btn" data-view="deck">🂠<span>Cartas</span></button>
-  <button class="nav-btn" data-view="journal">☾<span>Diário</span></button>
-  <button class="nav-btn" data-view="admin">⚙<span>Admin</span></button>
-</nav>
+<section id="spreads" class="view"><div class="eyebrow">TIRAGENS</div><h2>Escolha seu <span class="gold">caminho</span></h2><textarea id="question" placeholder="Escreva sua pergunta ou intenção…"></textarea><div class="spread"><button class="mini" data-count="1"><b>1 Carta</b><br><small>Essência do momento</small></button><button class="mini" data-count="3"><b>3 Cartas</b><br><small>Passado · Presente · Tendência</small></button><button class="mini" data-count="6"><b>Dois Caminhos</b><br><small>Compare possibilidades</small></button><button class="mini" data-count="5"><b>Amor & Relações</b><br><small>Você · vínculo · limites · ação · tendência</small></button><button class="mini" data-count="10"><b>Cruz Celta</b><br><small>Leitura ampla</small></button></div><div id="spreadResult" class="result">Escolha uma tiragem.</div><div class="actions"><button class="btn" id="save">Salvar no Diário</button><button class="btn" id="share">Compartilhar</button></div><div class="panel feature" style="margin-top:16px"><b>Diário Mágico</b><div id="journal" class="lead" style="font-size:.9rem"></div><button class="btn" id="clearJournal">Limpar Diário</button></div></section>
 
-<main>
-<section class="view active" id="home">
-  <div class="hero-shell">
-    <div class="hero-copy glass">
-      <p class="kicker">DIVINA BRUXA · EXPERIÊNCIA IMERSIVA</p>
-      <h1>Orbe das <em>Realidades</em></h1>
-      <p class="lead">Tarot vivo, fluido e feito para o toque. Suas 78 cartas continuam intactas; a versão 8.0 reconstrói a experiência ao redor delas com mais leveza, brilho e controle.</p>
-      <div class="cta-row">
-        <button class="btn gold" data-go="free">Tocar a Orbe</button>
-        <button class="btn" data-go="channel">Conversar com a Orbe</button>
-        <button class="btn ghost" data-go="consult">Marcar consulta</button>
-      </div>
-      <div class="stat-row">
-        <div><strong>78</strong><span>cartas oficiais</span></div>
-        <div><strong>8.0</strong><span>motor otimizado</span></div>
-        <div><strong>3</strong><span>consultas pagas</span></div>
-        <div><strong>Admin</strong><span>portal privado</span></div>
-      </div>
-    </div>
-    <div class="hero-orb glass">
-      <div class="orb-stage" data-orb="hero">
-        <div class="aura aura-a"></div><div class="aura aura-b"></div>
-        <div class="orbit orbit-a"><i></i></div><div class="orbit orbit-b"><i></i></div>
-        <button class="living-orb" aria-label="Tocar a Orbe"><span class="orb-liquid"></span><span class="orb-light"></span><span class="orb-glint"></span></button>
-        <div class="orb-caption">toque · deslize · sinta</div>
-      </div>
-    </div>
-  </div>
-  <div id="homeMessage" class="home-message glass"></div>
-</section>
+<section id="deck" class="view"><div class="eyebrow">BARALHO COMPLETO</div><h2>As <span class="gold">78 Cartas</span></h2><input id="search" placeholder="Buscar carta…"><div id="deckGrid" class="deck" style="margin-top:16px"></div></section>
 
-<section class="view" id="free">
-  <div class="section-head"><p class="kicker">TAROT LIVRE</p><h2>A Orbe revela</h2><p>Toque na esfera. O baralho embaralha sem repetir cartas até terminar.</p></div>
-  <div class="two-col">
-    <div class="glass orb-card">
-      <div class="orb-stage compact" data-orb="draw">
-        <div class="aura aura-a"></div><div class="aura aura-b"></div>
-        <div class="orbit orbit-a"><i></i></div><div class="orbit orbit-b"><i></i></div>
-        <button class="living-orb" aria-label="Tirar carta"><span class="orb-liquid"></span><span class="orb-light"></span><span class="orb-glint"></span></button>
-        <div class="orb-caption" id="orbStatus">pronta</div>
-      </div>
-      <div class="cta-row center">
-        <button class="btn gold" id="drawBtn">Tirar carta</button>
-        <button class="btn" id="shuffleBtn">Embaralhar</button>
-        <button class="btn ghost" id="clearBtn">Limpar</button>
-      </div>
-      <div class="counter" id="remaining">78 cartas restantes</div>
-    </div>
-    <div class="glass content-card">
-      <h3>Sua mesa</h3>
-      <div id="freeTable" class="card-grid"><div class="empty">Toque na Orbe para revelar a primeira carta.</div></div>
-    </div>
-  </div>
-</section>
+<section id="channel" class="view"><div class="eyebrow">EXPERIÊNCIA IMAGINATIVA</div><h2>Canalização <span class="gold">Simbólica</span></h2><p class="lead">Uma conversa reflexiva guiada pelo Tarot. Não é contato real com outra pessoa nem acesso aos pensamentos dela.</p><div class="grid"><article class="panel feature"><input id="person" placeholder="Nome da pessoa"><textarea id="channelQ" placeholder="O que você gostaria de compreender?"></textarea><button class="btn primary" id="channelBtn">Abrir mensagem simbólica</button></article><article class="panel feature"><div id="channelResult" class="lead">A mensagem aparecerá aqui.</div></article></div></section>
 
-<section class="view" id="spreads">
-  <div class="section-head"><p class="kicker">TIRAGENS GUIADAS</p><h2>Abra um portal</h2><p>Escolha a disposição e observe as cartas na mesa.</p></div>
-  <div class="glass content-card">
-    <textarea id="question" class="input" placeholder="Sua pergunta ou intenção…"></textarea>
-    <div class="cta-row">
-      <button class="btn gold spread-btn" data-count="1">1 carta</button>
-      <button class="btn spread-btn" data-count="3">3 cartas</button>
-      <button class="btn spread-btn" data-count="5">5 cartas</button>
-      <button class="btn spread-btn" data-count="10">Cruz Celta</button>
-    </div>
-    <div id="guidedTable" class="spread-grid"></div>
-    <div id="guidedNote" class="note hidden"></div>
-    <div class="cta-row"><button id="saveReading" class="btn ghost">Salvar no Diário</button></div>
-  </div>
-</section>
-
-<section class="view" id="channel">
-  <div class="section-head"><p class="kicker">ORBE CONVERSACIONAL</p><h2>Canalização simbólica</h2><p>Um chat de reflexão com linguagem de Tarot. A experiência é simbólica e não acessa pensamentos, almas ou mensagens privadas de outras pessoas.</p></div>
-  <div class="two-col">
-    <div class="glass content-card">
-      <div class="note"><b>Modo seguro:</b> use nomes, situações ou temas como inspiração narrativa. Quando a IA online for conectada, ela continuará sendo apresentada como simulação/reflexão, não contato literal.</div>
-      <input id="channelName" class="input" placeholder="Nome ou tema">
-      <textarea id="channelIntent" class="input" placeholder="O que você quer compreender?"></textarea>
-      <div class="orb-stage mini" data-orb="chat">
-        <div class="aura aura-a"></div><div class="orbit orbit-a"><i></i></div>
-        <button class="living-orb" aria-label="Abrir conversa"><span class="orb-liquid"></span><span class="orb-light"></span><span class="orb-glint"></span></button>
-        <div class="orb-caption">abrir reflexão</div>
-      </div>
-    </div>
-    <div class="glass content-card">
-      <div class="chat" id="chatLog"><div class="bubble orb">Eu sou a Orbe. Escreva sua intenção ou toque em mim para começar.</div></div>
-      <div class="chat-row"><input id="chatInput" class="input" placeholder="Escreva sua mensagem…"><button id="chatSend" class="btn gold">Enviar</button></div>
-      <small id="aiMode">Modo simbólico local · IA online ainda não conectada</small>
-    </div>
-  </div>
-</section>
-
-<section class="view" id="consult">
-  <div class="section-head"><p class="kicker">ATENDIMENTO PARTICULAR</p><h2>Consultas</h2><p>A pessoa escolhe o serviço, informa contato, data e horário e prepara a solicitação diretamente para seu e-mail.</p></div>
-  <div class="service-grid">
-    <article class="glass service"><span>✦</span><h3>Mesa Real</h3><strong>R$ 200</strong><p>Leitura extensa para um tema ou momento de vida.</p><button class="btn gold service-pick" data-service="Mesa Real — R$ 200">Marcar horário</button></article>
-    <article class="glass service"><span>◌</span><h3>Leitura de Mente</h3><strong>R$ 200</strong><p>Leitura simbólica sobre dinâmica, sinais e possibilidades; não revela pensamentos privados de forma literal.</p><button class="btn gold service-pick" data-service="Leitura de Mente — R$ 200">Marcar horário</button></article>
-    <article class="glass service"><span>☾</span><h3>Carta de Conselho</h3><strong>R$ 50</strong><p>Uma questão objetiva, uma carta e orientação focada.</p><button class="btn gold service-pick" data-service="Carta de Conselho — R$ 50">Marcar horário</button></article>
-  </div>
-  <form class="glass booking" id="bookingForm">
-    <h3>Solicitar consulta</h3>
-    <select id="serviceSelect" class="input" required><option value="">Escolha o serviço</option><option>Mesa Real — R$ 200</option><option>Leitura de Mente — R$ 200</option><option>Carta de Conselho — R$ 50</option></select>
-    <div class="form-grid">
-      <input id="bookName" class="input" required placeholder="Nome completo">
-      <input id="bookEmail" class="input" type="email" required placeholder="E-mail">
-      <input id="bookPhone" class="input" required inputmode="tel" placeholder="WhatsApp / telefone">
-      <input id="bookDate" class="input" type="date" required>
-      <input id="bookTime" class="input" type="time" required>
-      <textarea id="bookMessage" class="input span-2" placeholder="Tema da consulta"></textarea>
-    </div>
-    <button class="btn gold" type="submit">Enviar solicitação por e-mail</button>
-    <div class="note hidden" id="bookingStatus"></div>
-  </form>
-</section>
-
-<section class="view" id="shop">
-  <div class="section-head"><p class="kicker">LOJA MÍSTICA</p><h2>Curadoria da Orbe</h2><p>Cadastre produtos e seus links de afiliado pelo Admin.</p></div>
-  <input id="shopSearch" class="input" placeholder="Buscar produto…">
-  <div id="shopGrid" class="product-grid"></div>
-</section>
-
-<section class="view" id="video">
-  <div class="section-head"><p class="kicker">PROGRAMA SEMANAL</p><h2>De Frente com o Tarot</h2><p>Espaço para seus episódios longos, com título, descrição e vídeo.</p></div>
-  <div class="glass video-feature">
-    <div id="videoEmpty" class="note">Nenhum episódio salvo neste aparelho. Publique pelo Admin.</div>
-    <video id="featuredVideo" controls playsinline class="hidden"></video>
-    <h3 id="featuredTitle">De Frente com o Tarot</h3>
-    <p id="featuredDesc">Seu programa semanal.</p>
-  </div>
-  <div id="videoArchive" class="video-grid"></div>
-</section>
-
-<section class="view" id="music">
-  <div class="section-head"><p class="kicker">TRILHA DA ORBE</p><h2>Sua música dentro do Tarot</h2><p>Dois álbuns para acompanhar a experiência. O usuário escolhe quando tocar.</p></div>
-  <div class="music-grid">
-    <div class="glass music-card"><h3>Sobre as Estrelas</h3><iframe src="https://open.spotify.com/embed/album/0GwJtJujeS9iwSZFADcL1k?utm_source=generator" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe></div>
-    <div class="glass music-card"><h3>Z</h3><iframe src="https://open.spotify.com/embed/album/4mq0UaLMXK21JbrKMFdhdO?utm_source=generator" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe></div>
-  </div>
-</section>
-
-<section class="view" id="deck">
-  <div class="section-head"><p class="kicker">BIBLIOTECA SAGRADA</p><h2>As 78 cartas</h2><p>As imagens continuam usando os arquivos card-00.jpg até card-77.jpg que já estão publicados.</p></div>
-  <input id="deckSearch" class="input" placeholder="Buscar carta…">
-  <div id="deckGrid" class="deck-grid"></div>
-</section>
-
-<section class="view" id="journal">
-  <div class="section-head"><p class="kicker">MEMÓRIA DA ORBE</p><h2>Diário mágico</h2></div>
-  <button id="clearJournal" class="btn ghost">Apagar diário</button>
-  <div id="journalList"></div>
-</section>
-
-<section class="view" id="admin">
-  <div class="admin-login glass" id="adminLogin">
-    <p class="kicker">PORTAL DA DIVINA BRUXA</p><h2>Administrador</h2>
-    <p>Entre para gerenciar conteúdo desta versão.</p>
-    <input id="adminUser" class="input" autocomplete="username" placeholder="Usuário">
-    <input id="adminPass" class="input" type="password" autocomplete="current-password" placeholder="Senha">
-    <button id="adminEnter" class="btn gold">Entrar</button>
-    <small id="adminError"></small>
-  </div>
-
-  <div id="adminPortal" class="hidden">
-    <div class="admin-head glass"><div><p class="kicker">PORTAL ADMINISTRATIVO</p><h2>Controle da Orbe</h2></div><button id="adminLogout" class="btn ghost">Sair</button></div>
-    <div class="admin-layout">
-      <aside class="admin-menu glass">
-        <button class="admin-tab active" data-page="dashboard">Visão geral</button>
-        <button class="admin-tab" data-page="store">Loja</button>
-        <button class="admin-tab" data-page="episodes">Vídeos</button>
-        <button class="admin-tab" data-page="clients">Consultas</button>
-        <button class="admin-tab" data-page="content">Conteúdo</button>
-        <button class="admin-tab" data-page="ai">IA da Orbe</button>
-      </aside>
-      <div class="admin-pages">
-        <section class="admin-page glass active" data-admin-page="dashboard"><h3>Visão geral</h3><div class="stat-row"><div><strong id="stProducts">0</strong><span>produtos</span></div><div><strong id="stBookings">0</strong><span>consultas</span></div><div><strong id="stEpisodes">0</strong><span>episódios</span></div><div><strong>78</strong><span>cartas</span></div></div><div class="note">Este Admin funciona sem travar e salva neste navegador. Para virar um painel online de verdade, acessível de qualquer aparelho e refletindo mudanças para todos, conectaremos o backend depois.</div></section>
-        <section class="admin-page glass" data-admin-page="store"><h3>Gerenciar loja</h3><div class="form-grid"><input id="prodName" class="input" placeholder="Produto"><input id="prodPrice" class="input" placeholder="Preço"><input id="prodLink" class="input span-2" placeholder="Link de afiliado"><textarea id="prodDesc" class="input span-2" placeholder="Descrição"></textarea></div><button id="prodAdd" class="btn gold">Adicionar</button><div id="adminProducts"></div></section>
-        <section class="admin-page glass" data-admin-page="episodes"><h3>De Frente com o Tarot</h3><input id="epTitle" class="input" placeholder="Título"><textarea id="epDesc" class="input" placeholder="Descrição"></textarea><input id="epFile" class="input" type="file" accept="video/*"><button id="epSave" class="btn gold">Salvar vídeo neste aparelho</button><button id="epClear" class="btn ghost">Apagar vídeos</button><p class="help">Para publicar um vídeo de 40 minutos para todos sem reenviar o site, conectaremos armazenamento online.</p><div id="adminEpisodes"></div></section>
-        <section class="admin-page glass" data-admin-page="clients"><h3>Solicitações de consulta</h3><div id="adminBookings"></div></section>
-        <section class="admin-page glass" data-admin-page="content"><h3>Mensagem especial da Home</h3><textarea id="homeMessageEdit" class="input" placeholder="Mensagem"></textarea><button id="homeMessageSave" class="btn gold">Salvar</button></section>
-        <section class="admin-page glass" data-admin-page="ai"><h3>Inteligência da Orbe</h3><p>O chat já funciona em modo simbólico local. Aqui você poderá conectar um endereço seguro de IA depois.</p><input id="aiEndpoint" class="input" placeholder="Endpoint seguro da IA"><button id="aiSave" class="btn gold">Salvar endpoint</button><button id="aiTest" class="btn">Testar</button><div class="note" id="aiStatus"></div></section>
-      </div>
-    </div>
-  </div>
-</section>
+<section id="services" class="view"><div class="eyebrow">CONSULTAS</div><h2>Atendimento <span class="gold">particular</span></h2><div class="grid"><article class="panel service"><h3>Mesa Real</h3><div class="price">R$ 200</div><p class="lead">Leitura particular aprofundada.</p></article><article class="panel service"><h3>Leitura de Mentes</h3><div class="price">R$ 200</div><p class="lead">Nome comercial do serviço; a experiência deve ser apresentada como leitura simbólica, sem alegar acesso literal a pensamentos privados.</p></article><article class="panel service"><h3>Contato</h3><input placeholder="Seu e-mail"><input style="margin-top:10px" placeholder="Seu telefone"><textarea style="margin-top:10px" placeholder="Sua mensagem"></textarea><button class="btn primary">Preparar solicitação</button></article></div></section>
 </main>
-
-<footer>
-  <div class="socials">
-    <a href="https://www.instagram.com/divinabruxa33?igsi=Ym10ZTExbmplaG5z&utm_source=qr" target="_blank">Instagram</a>
-    <a href="https://x.com/divinabruxa33?s=11" target="_blank">X</a>
-    <a href="https://www.tiktok.com/@divinabruxa33?_r=1&_t=ZS-98zz3xN7AFo" target="_blank">TikTok</a>
-    <a href="https://youtube.com/@divinabruxa33?si=E5hqtTHIo_ussOfo" target="_blank">YouTube</a>
-  </div>
-  <p>ORBE DAS REALIDADES · DIVINA BRUXA · ORBE VIVA 8.0</p>
-</footer>
-
-<div class="modal" id="cardModal" aria-hidden="true">
-  <div class="modal-card"><button id="modalClose" class="modal-close">×</button><img id="modalImage"><h2 id="modalName"></h2><p id="modalGroup"></p></div>
-</div>
-
-<script src="app.js" defer></script>
-</body></html>
+<nav class="bottom"><button class="active" data-view="home"><i>⌂</i>Início</button><button data-view="tarot"><i>◉</i>Orbe</button><button data-view="spreads"><i>✦</i>Tiragens</button><button data-view="channel"><i>☿</i>Canalização</button><button data-view="services"><i>♡</i>Consultas</button></nav>
+<footer>ORBE DAS REALIDADES · ORBE VIVA 9.0 · As leituras são simbólicas e reflexivas.</footer><div class="toast" id="toast"></div>
+<script>
+const DECK=[{"name": "O Louco", "group": "Arcano Maior", "element": "Éter", "symbol": "✦", "meaning": "O Louco convida a observar o tema central desta fase com presença, liberdade e responsabilidade."}, {"name": "O Mago", "group": "Arcano Maior", "element": "Éter", "symbol": "✦", "meaning": "O Mago convida a observar o tema central desta fase com presença, liberdade e responsabilidade."}, {"name": "A Sacerdotisa", "group": "Arcano Maior", "element": "Éter", "symbol": "✦", "meaning": "A Sacerdotisa convida a observar o tema central desta fase com presença, liberdade e responsabilidade."}, {"name": "A Imperatriz", "group": "Arcano Maior", "element": "Éter", "symbol": "✦", "meaning": "A Imperatriz convida a observar o tema central desta fase com presença, liberdade e responsabilidade."}, {"name": "O Imperador", "group": "Arcano Maior", "element": "Éter", "symbol": "✦", "meaning": "O Imperador convida a observar o tema central desta fase com presença, liberdade e responsabilidade."}, {"name": "O Hierofante", "group": "Arcano Maior", "element": "Éter", "symbol": "✦", "meaning": "O Hierofante convida a observar o tema central desta fase com presença, liberdade e responsabilidade."}, {"name": "Os Enamorados", "group": "Arcano Maior", "element": "Éter", "symbol": "✦", "meaning": "Os Enamorados convida a observar o tema central desta fase com presença, liberdade e responsabilidade."}, {"name": "O Carro", "group": "Arcano Maior", "element": "Éter", "symbol": "✦", "meaning": "O Carro convida a observar o tema central desta fase com presença, liberdade e responsabilidade."}, {"name": "A Justiça", "group": "Arcano Maior", "element": "Éter", "symbol": "✦", "meaning": "A Justiça convida a observar o tema central desta fase com presença, liberdade e responsabilidade."}, {"name": "O Eremita", "group": "Arcano Maior", "element": "Éter", "symbol": "✦", "meaning": "O Eremita convida a observar o tema central desta fase com presença, liberdade e responsabilidade."}, {"name": "A Roda da Fortuna", "group": "Arcano Maior", "element": "Éter", "symbol": "✦", "meaning": "A Roda da Fortuna convida a observar o tema central desta fase com presença, liberdade e responsabilidade."}, {"name": "A Força", "group": "Arcano Maior", "element": "Éter", "symbol": "✦", "meaning": "A Força convida a observar o tema central desta fase com presença, liberdade e responsabilidade."}, {"name": "O Enforcado", "group": "Arcano Maior", "element": "Éter", "symbol": "✦", "meaning": "O Enforcado convida a observar o tema central desta fase com presença, liberdade e responsabilidade."}, {"name": "A Morte", "group": "Arcano Maior", "element": "Éter", "symbol": "✦", "meaning": "A Morte convida a observar o tema central desta fase com presença, liberdade e responsabilidade."}, {"name": "A Temperança", "group": "Arcano Maior", "element": "Éter", "symbol": "✦", "meaning": "A Temperança convida a observar o tema central desta fase com presença, liberdade e responsabilidade."}, {"name": "O Diabo", "group": "Arcano Maior", "element": "Éter", "symbol": "✦", "meaning": "O Diabo convida a observar o tema central desta fase com presença, liberdade e responsabilidade."}, {"name": "A Torre", "group": "Arcano Maior", "element": "Éter", "symbol": "✦", "meaning": "A Torre convida a observar o tema central desta fase com presença, liberdade e responsabilidade."}, {"name": "A Estrela", "group": "Arcano Maior", "element": "Éter", "symbol": "✦", "meaning": "A Estrela convida a observar o tema central desta fase com presença, liberdade e responsabilidade."}, {"name": "A Lua", "group": "Arcano Maior", "element": "Éter", "symbol": "✦", "meaning": "A Lua convida a observar o tema central desta fase com presença, liberdade e responsabilidade."}, {"name": "O Sol", "group": "Arcano Maior", "element": "Éter", "symbol": "✦", "meaning": "O Sol convida a observar o tema central desta fase com presença, liberdade e responsabilidade."}, {"name": "O Julgamento", "group": "Arcano Maior", "element": "Éter", "symbol": "✦", "meaning": "O Julgamento convida a observar o tema central desta fase com presença, liberdade e responsabilidade."}, {"name": "O Mundo", "group": "Arcano Maior", "element": "Éter", "symbol": "✦", "meaning": "O Mundo convida a observar o tema central desta fase com presença, liberdade e responsabilidade."}, {"name": "Ás de Paus", "group": "Paus", "element": "Fogo", "symbol": "♜", "meaning": "Ás de Paus coloca fogo em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Dois de Paus", "group": "Paus", "element": "Fogo", "symbol": "♜", "meaning": "Dois de Paus coloca fogo em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Três de Paus", "group": "Paus", "element": "Fogo", "symbol": "♜", "meaning": "Três de Paus coloca fogo em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Quatro de Paus", "group": "Paus", "element": "Fogo", "symbol": "♜", "meaning": "Quatro de Paus coloca fogo em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Cinco de Paus", "group": "Paus", "element": "Fogo", "symbol": "♜", "meaning": "Cinco de Paus coloca fogo em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Seis de Paus", "group": "Paus", "element": "Fogo", "symbol": "♜", "meaning": "Seis de Paus coloca fogo em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Sete de Paus", "group": "Paus", "element": "Fogo", "symbol": "♜", "meaning": "Sete de Paus coloca fogo em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Oito de Paus", "group": "Paus", "element": "Fogo", "symbol": "♜", "meaning": "Oito de Paus coloca fogo em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Nove de Paus", "group": "Paus", "element": "Fogo", "symbol": "♜", "meaning": "Nove de Paus coloca fogo em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Dez de Paus", "group": "Paus", "element": "Fogo", "symbol": "♜", "meaning": "Dez de Paus coloca fogo em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Pajem de Paus", "group": "Paus", "element": "Fogo", "symbol": "♜", "meaning": "Pajem de Paus coloca fogo em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Cavaleiro de Paus", "group": "Paus", "element": "Fogo", "symbol": "♜", "meaning": "Cavaleiro de Paus coloca fogo em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Rainha de Paus", "group": "Paus", "element": "Fogo", "symbol": "♜", "meaning": "Rainha de Paus coloca fogo em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Rei de Paus", "group": "Paus", "element": "Fogo", "symbol": "♜", "meaning": "Rei de Paus coloca fogo em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Ás de Copas", "group": "Copas", "element": "Água", "symbol": "♡", "meaning": "Ás de Copas coloca água em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Dois de Copas", "group": "Copas", "element": "Água", "symbol": "♡", "meaning": "Dois de Copas coloca água em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Três de Copas", "group": "Copas", "element": "Água", "symbol": "♡", "meaning": "Três de Copas coloca água em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Quatro de Copas", "group": "Copas", "element": "Água", "symbol": "♡", "meaning": "Quatro de Copas coloca água em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Cinco de Copas", "group": "Copas", "element": "Água", "symbol": "♡", "meaning": "Cinco de Copas coloca água em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Seis de Copas", "group": "Copas", "element": "Água", "symbol": "♡", "meaning": "Seis de Copas coloca água em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Sete de Copas", "group": "Copas", "element": "Água", "symbol": "♡", "meaning": "Sete de Copas coloca água em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Oito de Copas", "group": "Copas", "element": "Água", "symbol": "♡", "meaning": "Oito de Copas coloca água em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Nove de Copas", "group": "Copas", "element": "Água", "symbol": "♡", "meaning": "Nove de Copas coloca água em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Dez de Copas", "group": "Copas", "element": "Água", "symbol": "♡", "meaning": "Dez de Copas coloca água em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Pajem de Copas", "group": "Copas", "element": "Água", "symbol": "♡", "meaning": "Pajem de Copas coloca água em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Cavaleiro de Copas", "group": "Copas", "element": "Água", "symbol": "♡", "meaning": "Cavaleiro de Copas coloca água em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Rainha de Copas", "group": "Copas", "element": "Água", "symbol": "♡", "meaning": "Rainha de Copas coloca água em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Rei de Copas", "group": "Copas", "element": "Água", "symbol": "♡", "meaning": "Rei de Copas coloca água em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Ás de Espadas", "group": "Espadas", "element": "Ar", "symbol": "◇", "meaning": "Ás de Espadas coloca ar em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Dois de Espadas", "group": "Espadas", "element": "Ar", "symbol": "◇", "meaning": "Dois de Espadas coloca ar em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Três de Espadas", "group": "Espadas", "element": "Ar", "symbol": "◇", "meaning": "Três de Espadas coloca ar em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Quatro de Espadas", "group": "Espadas", "element": "Ar", "symbol": "◇", "meaning": "Quatro de Espadas coloca ar em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Cinco de Espadas", "group": "Espadas", "element": "Ar", "symbol": "◇", "meaning": "Cinco de Espadas coloca ar em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Seis de Espadas", "group": "Espadas", "element": "Ar", "symbol": "◇", "meaning": "Seis de Espadas coloca ar em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Sete de Espadas", "group": "Espadas", "element": "Ar", "symbol": "◇", "meaning": "Sete de Espadas coloca ar em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Oito de Espadas", "group": "Espadas", "element": "Ar", "symbol": "◇", "meaning": "Oito de Espadas coloca ar em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Nove de Espadas", "group": "Espadas", "element": "Ar", "symbol": "◇", "meaning": "Nove de Espadas coloca ar em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Dez de Espadas", "group": "Espadas", "element": "Ar", "symbol": "◇", "meaning": "Dez de Espadas coloca ar em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Pajem de Espadas", "group": "Espadas", "element": "Ar", "symbol": "◇", "meaning": "Pajem de Espadas coloca ar em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Cavaleiro de Espadas", "group": "Espadas", "element": "Ar", "symbol": "◇", "meaning": "Cavaleiro de Espadas coloca ar em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Rainha de Espadas", "group": "Espadas", "element": "Ar", "symbol": "◇", "meaning": "Rainha de Espadas coloca ar em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Rei de Espadas", "group": "Espadas", "element": "Ar", "symbol": "◇", "meaning": "Rei de Espadas coloca ar em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Ás de Ouros", "group": "Ouros", "element": "Terra", "symbol": "◉", "meaning": "Ás de Ouros coloca terra em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Dois de Ouros", "group": "Ouros", "element": "Terra", "symbol": "◉", "meaning": "Dois de Ouros coloca terra em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Três de Ouros", "group": "Ouros", "element": "Terra", "symbol": "◉", "meaning": "Três de Ouros coloca terra em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Quatro de Ouros", "group": "Ouros", "element": "Terra", "symbol": "◉", "meaning": "Quatro de Ouros coloca terra em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Cinco de Ouros", "group": "Ouros", "element": "Terra", "symbol": "◉", "meaning": "Cinco de Ouros coloca terra em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Seis de Ouros", "group": "Ouros", "element": "Terra", "symbol": "◉", "meaning": "Seis de Ouros coloca terra em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Sete de Ouros", "group": "Ouros", "element": "Terra", "symbol": "◉", "meaning": "Sete de Ouros coloca terra em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Oito de Ouros", "group": "Ouros", "element": "Terra", "symbol": "◉", "meaning": "Oito de Ouros coloca terra em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Nove de Ouros", "group": "Ouros", "element": "Terra", "symbol": "◉", "meaning": "Nove de Ouros coloca terra em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Dez de Ouros", "group": "Ouros", "element": "Terra", "symbol": "◉", "meaning": "Dez de Ouros coloca terra em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Pajem de Ouros", "group": "Ouros", "element": "Terra", "symbol": "◉", "meaning": "Pajem de Ouros coloca terra em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Cavaleiro de Ouros", "group": "Ouros", "element": "Terra", "symbol": "◉", "meaning": "Cavaleiro de Ouros coloca terra em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Rainha de Ouros", "group": "Ouros", "element": "Terra", "symbol": "◉", "meaning": "Rainha de Ouros coloca terra em foco e convida a transformar percepção em uma escolha concreta."}, {"name": "Rei de Ouros", "group": "Ouros", "element": "Terra", "symbol": "◉", "meaning": "Rei de Ouros coloca terra em foco e convida a transformar percepção em uma escolha concreta."}];
+let pool=[],lastReading=null;
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+function toast(t){let e=$("#toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),1600)}
+function go(id){$$(".view").forEach(x=>x.classList.toggle("active",x.id===id));$$("[data-view]").forEach(x=>x.classList.toggle("active",x.dataset.view===id));scrollTo({top:0,behavior:"smooth"})}
+$$("[data-view]").forEach(b=>b.onclick=()=>go(b.dataset.view));$$("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
+function reset(){pool=[...DECK].sort(()=>Math.random()-.5)}
+function pick(){if(!pool.length)reset();return pool.pop()}
+function pulse(el){el.classList.remove("pulse");void el.offsetWidth;el.classList.add("pulse");if(navigator.vibrate)navigator.vibrate(35)}
+function draw(){let c=pick();pulse($("#drawOrb"));$("#reveal").innerHTML=`<div class="tarot"><div><div class="sym">${c.symbol}</div><strong>${c.name}</strong><br><small>${c.group} · ${c.element}</small></div></div><p class="lead">${c.meaning}</p><small>${pool.length} cartas restantes antes de reembaralhar.</small>`}
+$("#drawBtn").onclick=draw;$("#drawOrb").onclick=draw;$("#shuffle").onclick=()=>{reset();toast("Baralho embaralhado")};$("#homeOrb").onclick=()=>{pulse($("#homeOrb"));setTimeout(()=>go("tarot"),280)}
+function labels(n){return n===3?["Passado","Presente","Tendência"]:n===6?["Caminho A · força","Caminho A · desafio","Caminho A · tendência","Caminho B · força","Caminho B · desafio","Caminho B · tendência"]:n===5?["Você","O vínculo","Limite","Ação possível","Tendência"]:n===10?["Situação","Cruzamento","Base","Passado","Possibilidade","Próximo passo","Você","Ambiente","Esperanças/medos","Síntese"]:["Mensagem"]}
+function spread(n){let d=[...DECK].sort(()=>Math.random()-.5).slice(0,n), labs=labels(n),q=$("#question").value.trim();lastReading={date:new Date().toLocaleString("pt-BR"),q,cards:d.map((c,i)=>({label:labs[i],name:c.name}))};let html=(q?`<b>Intenção:</b> ${q}<br><br>`:"")+d.map((c,i)=>`<b>${labs[i]} — ${c.name}</b><br>${c.meaning}`).join("<br><br>");html+=`<hr style="border-color:#f0c66b25"><b>Síntese da Orbe:</b> observe o padrão entre as cartas, escolha o que pode ser verificado na realidade e transforme a leitura em uma ação concreta. Tendências não são destinos fixos.`;$("#spreadResult").innerHTML=html}
+$$("[data-count]").forEach(b=>b.onclick=()=>spread(+b.dataset.count));
+function journal(){let a=JSON.parse(localStorage.getItem("orbe9-journal")||"[]");$("#journal").innerHTML=a.length?a.slice(0,8).map(x=>`<p><b>${x.date}</b><br>${x.q||"Leitura"} · ${x.cards.map(c=>c.name).join(", ")}</p>`).join(""):"Nenhuma leitura salva ainda."}
+$("#save").onclick=()=>{if(!lastReading)return toast("Faça uma tiragem primeiro");let a=JSON.parse(localStorage.getItem("orbe9-journal")||"[]");a.unshift(lastReading);localStorage.setItem("orbe9-journal",JSON.stringify(a.slice(0,40)));journal();toast("Salvo no Diário")}
+$("#share").onclick=async()=>{if(!lastReading)return toast("Faça uma tiragem primeiro");let t=`Orbe das Realidades\n${lastReading.q||""}\n${lastReading.cards.map(c=>c.label+": "+c.name).join("\n")}`;try{navigator.share?await navigator.share({title:"Orbe das Realidades",text:t}):await navigator.clipboard.writeText(t)}catch{}}
+$("#clearJournal").onclick=()=>{localStorage.removeItem("orbe9-journal");journal();toast("Diário limpo")}
+function renderDeck(){let q=$("#search").value.toLowerCase();$("#deckGrid").innerHTML=DECK.filter(c=>c.name.toLowerCase().includes(q)).map(c=>`<div class="deckItem"><b>${c.symbol} ${c.name}</b><small>${c.group} · ${c.element}</small></div>`).join("")}$("#search").oninput=renderDeck;
+$("#channelBtn").onclick=()=>{let n=$("#person").value.trim(),q=$("#channelQ").value.trim();if(!n)return toast("Digite um nome");let c=DECK[Math.floor(Math.random()*78)];$("#channelResult").innerHTML=`<b>Arquétipo: ${c.name}</b><br><br>Esta é uma voz simbólica, não ${n} de verdade. ${c.meaning} Sobre “${q||"esta relação"}”, use a mensagem como espelho para organizar o que você sente e aquilo que consegue confirmar na realidade.`}
+reset();renderDeck();journal();
+</script></body></html>
