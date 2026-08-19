@@ -1,4 +1,3 @@
-ORBE VIVA 12.0
-Fluid Light Engine
-Compatibilidade de imagens: card-00.jpg…card-77.jpg + assets/cards/*.jpg/png/jpeg
-Sem canvas. Sem bibliotecas externas. Carregamento progressivo de cartas.
+ORBE VIVA 13.0 — FINAL
+Orbe líquida com auroras contínuas, mobile-first e 9 núcleos integrados.
+Sem service worker para evitar cache antigo durante a publicação inicial.
