@@ -1,4 +1,4 @@
-ORBE DAS REALIDADES — ATUALIZAÇÃO 03 (SOMENTE CÓDIGO)
+ORBE DAS REALIDADES — ATUALIZAÇÃO 04 (SOMENTE CÓDIGO)
 
 Este ZIP é plano: não contém pastas e não contém imagens.
 As 78 imagens que já estão no seu GitHub permanecem intactas.
@@ -22,6 +22,10 @@ ENTREGA DESTA ETAPA
 - Orbe 3.0 com água/luz, inércia, toque e ondas.
 - Navegação por camadas sem menu no rodapé.
 - Tarot Livre 78/78, sem significados, sem repetição, direto/invertido e memória.
-- Carta do Dia separada, com significado e persistência diária.
-- Tiragens, Diário, Whit, Loja, Consultas, Assinaturas, Vídeos, Música, Login e Administração preparados em módulos.
-- PWA e cache v3 para forçar a atualização.
+- Ritual Diário corrigido em três passos: respiração, intenção e revelação.
+- Carta do Dia com significado individual, posição direta/invertida e persistência diária.
+- Seis tiragens com posições reais, cartas sem repetição, significados e salvamento.
+- Diário visual com miniaturas, exclusão e registros estruturados.
+- Espelho da Orbe com cartas registradas, carta frequente, energia dominante e invertidas.
+- Whit, Loja, Consultas, Assinaturas, Vídeos, Música, Login e Administração preparados em módulos.
+- PWA e cache v4 para forçar a atualização.
