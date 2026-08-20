@@ -11,7 +11,7 @@
     "name": "rolldown-runtime"
   },
   "app/OrbeApp.tsx": {
-    "file": "assets/OrbeApp-Cwt9p9zD.js",
+    "file": "assets/OrbeApp-CUUtaf3W.js",
     "name": "OrbeApp",
     "src": "app/OrbeApp.tsx",
     "isDynamicEntry": true,
@@ -21,7 +21,7 @@
     ]
   },
   "node_modules/vinext/dist/shims/layout-segment-context.js": {
-    "file": "assets/layout-segment-context-D6ybVzny.js",
+    "file": "assets/layout-segment-context-DQYapzts.js",
     "name": "layout-segment-context",
     "src": "node_modules/vinext/dist/shims/layout-segment-context.js",
     "isDynamicEntry": true,
@@ -32,7 +32,7 @@
     ]
   },
   "virtual:vinext-app-browser-entry": {
-    "file": "assets/index-L0-9kncg.js",
+    "file": "assets/index-CGEy8uR9.js",
     "name": "index",
     "src": "virtual:vinext-app-browser-entry",
     "isEntry": true,
