@@ -1,16 +1,1 @@
-{
-  "name": "Orbe das Realidades",
-  "short_name": "Orbe",
-  "description": "Tarot completo, tiragens, diário, escola, música e Orbe IA da Divina Bruxa.",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#030207",
-  "theme_color": "#080611",
-  "orientation": "portrait-primary",
-  "categories": ["lifestyle", "entertainment", "education"],
-  "shortcuts": [
-    {"name": "Tarot Livre", "url": "/?tela=tarot"},
-    {"name": "Carta do Dia", "url": "/?tela=ritual"},
-    {"name": "Diário", "url": "/?tela=journal"}
-  ]
-}
+{"name":"Orbe das Realidades","short_name":"Orbe","description":"Tarot da Divina Bruxa","start_url":"./","display":"standalone","background_color":"#07030d","theme_color":"#07030d","icons":[{"src":"card-00.jpg","sizes":"1024x1536","type":"image/jpeg","purpose":"any maskable"}]}
