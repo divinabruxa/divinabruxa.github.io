@@ -1,31 +1,27 @@
-ORBE DAS REALIDADES — INSTALAÇÃO NO GITHUB PELO IPHONE
+ORBE DAS REALIDADES — ATUALIZAÇÃO 03 (SOMENTE CÓDIGO)
 
-EDIÇÃO 2
-- Ritual diário com campo de intenção e revelação animada.
-- Tarot Livre com embaralhamento uniforme e carta nascendo da mesa.
-- Botão de instalação quando o navegador oferecer suporte.
-- Cache atualizado para substituir automaticamente a versão anterior.
+Este ZIP é plano: não contém pastas e não contém imagens.
+As 78 imagens que já estão no seu GitHub permanecem intactas.
 
-1. Abra o repositório correto no site github.com.
-2. Entre na página principal do repositório.
-3. Toque em Add file > Upload files.
-4. No aplicativo Arquivos, abra esta pasta descompactada.
-5. Toque nos três pontos > Selecionar e marque TODOS os arquivos.
-6. Envie os arquivos diretamente para a raiz do repositório.
-7. Confirme em Commit changes.
-8. No GitHub, abra Settings > Pages.
-9. Em Source, escolha Deploy from a branch.
-10. Escolha main e /(root), depois Save.
+COMO INSTALAR PELO IPHONE
+1. Abra o ZIP no app Arquivos.
+2. Selecione todos os arquivos que estão dentro dele.
+3. No GitHub, abra o repositório do site.
+4. Toque em Add file > Upload files.
+5. Envie todos estes arquivos para a raiz do repositório.
+6. Confirme em Commit changes.
+7. Aguarde de 2 a 5 minutos e abra divinabruxa.com.br.
 
 IMPORTANTE
-- Não envie somente o ZIP: o GitHub Pages não descompacta ZIP sozinho.
-- index.html, app.css e app.js precisam ficar na raiz.
-- CNAME também precisa ficar na raiz para usar divinabruxa.com.br.
-- As 78 imagens card-00 até card-77 precisam ser enviadas.
-- O site pode levar alguns minutos para atualizar.
-- Se aparecer a versão antiga, limpe os dados do Safari ou aguarde o cache atualizar.
+- Aceite substituir os arquivos antigos com o mesmo nome.
+- Não apague card-00.jpg até card-77.jpg/card-47.png.
+- Se o Safari mostrar a versão antiga: Ajustes > Safari > Avançado > Dados dos Sites, procure divinabruxa.com.br e apague somente esses dados; depois abra o site novamente.
+- A senha da administração e a chave da IA NÃO podem ficar em arquivos públicos. Login real, IA real, pagamentos e assinaturas exigem um pequeno servidor seguro, que será a próxima etapa.
 
-SEGURANÇA
-- Nunca coloque sua chave de IA dentro de app.js ou index.html.
-- Nunca coloque a senha real da administração em arquivos públicos.
-- Pagamentos, login real, IA e administração segura exigem uma função de servidor.
+ENTREGA DESTA ETAPA
+- Orbe 3.0 com água/luz, inércia, toque e ondas.
+- Navegação por camadas sem menu no rodapé.
+- Tarot Livre 78/78, sem significados, sem repetição, direto/invertido e memória.
+- Carta do Dia separada, com significado e persistência diária.
+- Tiragens, Diário, Whit, Loja, Consultas, Assinaturas, Vídeos, Música, Login e Administração preparados em módulos.
+- PWA e cache v3 para forçar a atualização.

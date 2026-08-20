@@ -1,1 +1,1 @@
-{"name":"Orbe das Realidades","short_name":"Orbe","description":"Tarot da Divina Bruxa","start_url":"./","display":"standalone","background_color":"#07030d","theme_color":"#07030d","icons":[{"src":"card-00.jpg","sizes":"1024x1536","type":"image/jpeg","purpose":"any maskable"}]}
+{"name":"Orbe das Realidades","short_name":"Orbe","description":"Tarot da Divina Bruxa","start_url":"./","display":"standalone","background_color":"#05020a","theme_color":"#05020a","orientation":"portrait-primary","lang":"pt-BR"}
