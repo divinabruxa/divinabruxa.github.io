@@ -1,4 +1,4 @@
-ORBE DAS REALIDADES — ATUALIZAÇÃO 08 · TAROT LIVRE — MESA VIVA (SOMENTE CÓDIGO)
+ORBE DAS REALIDADES — ATUALIZAÇÃO 09 · TAROT LIVRE — MESA REAL 78 (SOMENTE CÓDIGO)
 
 Este ZIP é plano: não contém pastas e não contém imagens.
 As 78 imagens que já estão no seu GitHub permanecem intactas.
@@ -68,3 +68,13 @@ NOVIDADES DA ATUALIZAÇÃO 08
 - Carta direta ou invertida, sem significados no Tarot Livre.
 - Reinício liberado somente quando o ciclo 78/78 termina.
 - PWA e cache v8 para forçar a atualização no Safari.
+
+NOVIDADES DA ATUALIZAÇÃO 09
+- Todo gesto de arrastar foi removido do Tarot Livre.
+- A Orbe da mesa é o único controle que revela novas cartas.
+- Mesa Real com 78 posições fixas: 13 fileiras de 6 cartas.
+- Cada toque ocupa automaticamente a próxima posição da mesa.
+- As cartas não se repetem e o progresso 78/78 continua salvo no aparelho.
+- Toque em qualquer carta revelada da mesa para ampliá-la novamente.
+- Tarot Livre permanece sem significados, exatamente como solicitado.
+- PWA e cache v9 para entregar a nova versão ao Safari.
