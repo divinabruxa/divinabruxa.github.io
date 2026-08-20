@@ -1,4 +1,4 @@
-ORBE DAS REALIDADES — ATUALIZAÇÃO 09 · TAROT LIVRE — MESA REAL 78 (SOMENTE CÓDIGO)
+ORBE DAS REALIDADES — ATUALIZAÇÃO 10 · ORBE 5.0 + LOJA CONSTELAÇÃO (SOMENTE CÓDIGO)
 
 Este ZIP é plano: não contém pastas e não contém imagens.
 As 78 imagens que já estão no seu GitHub permanecem intactas.
@@ -78,3 +78,16 @@ NOVIDADES DA ATUALIZAÇÃO 09
 - Toque em qualquer carta revelada da mesa para ampliá-la novamente.
 - Tarot Livre permanece sem significados, exatamente como solicitado.
 - PWA e cache v9 para entregar a nova versão ao Safari.
+
+NOVIDADES DA ATUALIZAÇÃO 10
+- Orbe 5.0 com ondas concêntricas no ponto tocado, matéria fluida, refração e inércia.
+- A onda continua depois que o dedo é solto e a luz acompanha o movimento.
+- Respeito a Reduzir Movimento e fallback leve continuam ativos.
+- Loja reconstruída como vitrine editorial por universos, sem perder busca e favoritos.
+- Seção Apple & Tecnologia com iPhone Pro, MacBook Pro, iPad Pro, Apple Watch Ultra e AirPods Max.
+- Presentes Premium com telescópio, geodo de ametista, projetor de galáxia e kit de Tarot.
+- Todos os botões consultam preço e estoque atuais diretamente na Amazon.
+- A identificação de associado orbedasrealid-20 é inserida automaticamente em cada link.
+- Avisos de publicidade e transparência foram preservados para não fingir venda direta.
+- Mesa Real 78 da Atualização 09 foi preservada sem gestos e sem significados.
+- PWA e cache v10 para o Safari receber os novos arquivos.
