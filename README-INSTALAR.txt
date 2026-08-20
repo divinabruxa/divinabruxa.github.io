@@ -1,5 +1,11 @@
 ORBE DAS REALIDADES — INSTALAÇÃO NO GITHUB PELO IPHONE
 
+EDIÇÃO 2
+- Ritual diário com campo de intenção e revelação animada.
+- Tarot Livre com embaralhamento uniforme e carta nascendo da mesa.
+- Botão de instalação quando o navegador oferecer suporte.
+- Cache atualizado para substituir automaticamente a versão anterior.
+
 1. Abra o repositório correto no site github.com.
 2. Entre na página principal do repositório.
 3. Toque em Add file > Upload files.
