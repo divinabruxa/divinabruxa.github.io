@@ -1,4 +1,4 @@
-ORBE DAS REALIDADES — ATUALIZAÇÃO 07 · ORBE 4.0 (SOMENTE CÓDIGO)
+ORBE DAS REALIDADES — ATUALIZAÇÃO 08 · TAROT LIVRE — MESA VIVA (SOMENTE CÓDIGO)
 
 Este ZIP é plano: não contém pastas e não contém imagens.
 As 78 imagens que já estão no seu GitHub permanecem intactas.
@@ -60,3 +60,11 @@ Os produtos abrem buscas reais na Amazon. Depois, você também pode trocar o ca
 SEGURANÇA
 - Nunca coloque senha administrativa ou chave da OpenAI em config.js, app.js ou qualquer arquivo público do GitHub.
 - IA, login real, checkout e assinaturas precisam de funções protegidas no servidor.
+NOVIDADES DA ATUALIZAÇÃO 08
+- Tarot Livre redesenhado como uma mesa independente e responsiva.
+- Toque na mini-Orbe, no baralho ou deslize para cima para revelar.
+- Ciclo completo de 78 cartas sem nenhuma repetição.
+- Progresso visual, contador restante e memória horizontal da mesa.
+- Carta direta ou invertida, sem significados no Tarot Livre.
+- Reinício liberado somente quando o ciclo 78/78 termina.
+- PWA e cache v8 para forçar a atualização no Safari.

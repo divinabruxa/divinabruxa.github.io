@@ -1,0 +1,42 @@
+/* Atualização 08 — Tarot Livre · Mesa Viva */
+.tarot-screen{padding-bottom:max(32px,env(safe-area-inset-bottom))}
+.tarot-screen .section-head{align-items:flex-end;margin-bottom:10px}
+.tarot-screen .section-head h2{max-width:8ch}
+.tarot-screen #remaining{color:rgba(245,229,222,.58);letter-spacing:.08em;text-transform:uppercase;font-size:.7rem}
+.tarot-screen #count{font-family:var(--serif);font-weight:400;font-size:3.7rem;line-height:.85;color:#e8c779}
+.tarot-screen #count small{font-family:var(--sans);font-size:.8rem;color:rgba(255,255,255,.42)}
+.deck-progress{height:2px;background:rgba(255,255,255,.08);overflow:hidden;margin:0 2px 16px}
+.deck-progress i{display:block;width:0;height:100%;background:linear-gradient(90deg,#b584ff,#ff76d8,#f1cb78);box-shadow:0 0 14px #d67aff;transition:width .7s cubic-bezier(.22,.8,.22,1)}
+.tarot-table{isolation:isolate;position:relative;display:grid;place-items:center;min-height:min(69svh,710px);overflow:hidden;border:1px solid rgba(225,193,127,.25);border-radius:34px;background:radial-gradient(circle at 50% 42%,rgba(111,42,155,.31),transparent 44%),linear-gradient(155deg,rgba(24,14,38,.98),rgba(5,4,13,.98));box-shadow:inset 0 1px rgba(255,255,255,.08),inset 0 -60px 100px rgba(0,0,0,.4),0 24px 80px rgba(0,0,0,.38);touch-action:pan-x;outline:none}
+.tarot-table:focus-visible{box-shadow:0 0 0 2px #e8c779,0 24px 80px rgba(0,0,0,.38)}
+.tarot-table::before,.tarot-table::after{content:"";position:absolute;z-index:-1;inset:8%;border:1px solid rgba(196,132,255,.12);border-radius:50%;transform:rotate(18deg)}
+.tarot-table::after{inset:16% 4%;border-color:rgba(232,199,121,.1);transform:rotate(-26deg)}
+.table-stars i{position:absolute;width:3px;height:3px;border-radius:50%;background:#eadfff;box-shadow:0 0 10px #c984ff;opacity:.62;animation:tableTwinkle 3s ease-in-out infinite}
+.table-stars i:nth-child(1){left:12%;top:15%}.table-stars i:nth-child(2){right:9%;top:27%;animation-delay:-1s}.table-stars i:nth-child(3){left:22%;bottom:13%;animation-delay:-2s}.table-stars i:nth-child(4){right:21%;bottom:18%;animation-delay:-.4s}.table-stars i:nth-child(5){left:52%;top:8%;animation-delay:-1.7s}
+.deck-stack{appearance:none;position:absolute;z-index:5;left:18px;bottom:58px;width:76px;height:112px;padding:0;border:0;background:none;color:#f3dcaa;filter:drop-shadow(0 15px 18px rgba(0,0,0,.6));cursor:pointer}
+.deck-stack i{position:absolute;inset:0;border:1px solid rgba(232,199,121,.44);border-radius:11px;background:linear-gradient(145deg,#251431,#090713)}
+.deck-stack i:nth-child(1){transform:rotate(-7deg) translate(-5px,2px)}.deck-stack i:nth-child(2){transform:rotate(-3deg) translate(-2px,1px)}
+.deck-stack i:nth-child(3){background:radial-gradient(circle at 50% 46%,#d86aff 0 2px,transparent 3px),repeating-conic-gradient(from 0deg,rgba(165,92,255,.25) 0 9deg,transparent 9deg 18deg),linear-gradient(145deg,#2a1737,#0b0714)}
+.deck-stack span{position:absolute;inset:0;display:grid;place-content:center;gap:4px;font-size:.54rem;letter-spacing:.25em}
+.deck-stack small{font-family:var(--serif);font-size:1.4rem;letter-spacing:0;color:#f3dcaa}
+.deck-stack:not(:disabled){animation:deckBreathe 3.2s ease-in-out infinite}.deck-stack:active{transform:scale(.94)}.deck-stack:disabled{opacity:.28}
+.current{position:relative;z-index:3;width:min(63vw,330px);aspect-ratio:2/3;display:grid;place-items:center;perspective:1000px}
+.current img{display:block;width:100%;height:100%;object-fit:cover;border-radius:15px;border:1px solid rgba(239,205,133,.7);box-shadow:0 30px 70px rgba(0,0,0,.75),0 0 30px rgba(172,88,255,.23)}
+.current.reversed img{transform:rotate(180deg)}
+.current .card-label{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;align-items:center;gap:8px;max-width:88%;padding:7px 11px;border:1px solid rgba(232,199,121,.3);border-radius:999px;background:rgba(4,3,9,.8);backdrop-filter:blur(12px);white-space:nowrap}
+.current .card-label strong{overflow:hidden;text-overflow:ellipsis;font-family:var(--serif);font-size:.77rem;font-weight:500}.current .card-label span{font-size:.48rem;letter-spacing:.16em;color:#e8c779}
+.current.empty{width:min(54vw,260px);aspect-ratio:2/3;border:1px solid rgba(229,197,128,.22);border-radius:18px;background:linear-gradient(145deg,rgba(52,28,70,.7),rgba(8,6,17,.8))}
+.empty-card{display:grid;place-items:center;gap:10px;padding:24px;text-align:center;color:rgba(245,229,222,.65);font-family:var(--serif);font-size:1rem}.empty-card>span{font-size:2rem;color:#da85ff;text-shadow:0 0 22px #c251ff}.empty-card small{font-family:var(--sans);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:#e8c779}
+.current.birth{animation:cardBirth .85s cubic-bezier(.18,.86,.2,1)}.tarot-table.revealing::before{animation:revealRing .8s ease-out}
+.draw-orb{position:absolute;z-index:6;right:17px;bottom:49px;width:76px;height:76px;border-radius:50%;border:1px solid rgba(232,199,121,.5);background:radial-gradient(circle at 40% 34%,#fff 0 3%,#ee90ff 7%,#8c30c8 26%,#24114c 63%,#070511 100%);box-shadow:inset 0 0 18px rgba(255,255,255,.28),0 0 0 6px rgba(162,77,225,.12),0 0 34px rgba(209,88,255,.5);color:white;display:grid;place-content:center;gap:3px}
+.draw-orb span{font-size:1.1rem}.draw-orb small{font-size:.43rem;letter-spacing:.08em}.draw-orb:disabled{filter:grayscale(1);opacity:.3}
+.swipe-cue{position:absolute;bottom:19px;left:50%;transform:translateX(-50%);margin:0;font-size:.48rem;letter-spacing:.22em;color:rgba(245,229,222,.38)}
+.free-rule{display:grid;grid-template-columns:auto 1fr;gap:14px;margin:16px 2px 24px;padding:14px 16px;border-left:1px solid #e8c779;background:linear-gradient(90deg,rgba(232,199,121,.07),transparent)}
+.free-rule b{font-family:var(--serif);font-size:1rem;color:#e8c779}.free-rule span{font-size:.72rem;line-height:1.5;color:rgba(245,229,222,.58)}
+.memory-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:10px}.memory-head p{margin:0 0 3px;font-size:.52rem;letter-spacing:.22em;color:#d8b86b}.memory-head h3{margin:0;font-family:var(--serif);font-size:1.4rem;font-weight:400}
+.memory{display:flex;gap:9px;overflow-x:auto;scroll-snap-type:x mandatory;padding:3px 3px 15px;min-height:122px;overscroll-behavior-inline:contain}.memory::-webkit-scrollbar{height:2px}.memory::-webkit-scrollbar-thumb{background:rgba(232,199,121,.35)}
+.memory button{position:relative;flex:0 0 67px;aspect-ratio:2/3;padding:0;border:1px solid rgba(232,199,121,.2);border-radius:8px;overflow:hidden;background:#090713;scroll-snap-align:start}.memory img{width:100%;height:100%;object-fit:cover}.memory button.is-reversed img{transform:rotate(180deg)}.memory button.selected{border-color:#e8c779;box-shadow:0 0 15px rgba(218,133,255,.35)}.memory span{position:absolute;right:4px;bottom:4px;display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:rgba(5,3,10,.86);font-size:.55rem;color:#e8c779}
+@keyframes deckBreathe{50%{filter:drop-shadow(0 15px 18px rgba(0,0,0,.6)) drop-shadow(0 0 11px rgba(206,101,255,.55));transform:translateY(-3px)}}@keyframes tableTwinkle{50%{opacity:.18;transform:scale(.55)}}@keyframes cardBirth{0%{opacity:0;transform:translateY(38px) scale(.25) rotateY(95deg);filter:brightness(2.4) blur(8px)}55%{filter:brightness(1.45) blur(0)}100%{opacity:1;transform:none;filter:none}}@keyframes revealRing{0%{opacity:1;transform:rotate(18deg) scale(.4)}100%{opacity:0;transform:rotate(70deg) scale(1.45)}}
+@media(max-width:390px){.tarot-table{min-height:620px;border-radius:27px}.current{width:min(66vw,290px)}.deck-stack{left:10px;width:66px;height:98px}.draw-orb{right:10px;width:67px;height:67px}.tarot-screen #count{font-size:3.1rem}.free-rule{grid-template-columns:1fr;gap:5px}}
+@media(orientation:landscape) and (max-height:520px){.tarot-table{min-height:420px}.current{width:auto;height:350px}.deck-stack{bottom:45px}.draw-orb{bottom:40px}}
+@media(prefers-reduced-motion:reduce){.deck-stack,.table-stars i,.current.birth,.tarot-table.revealing::before{animation:none!important}.deck-progress i{transition:none}}
