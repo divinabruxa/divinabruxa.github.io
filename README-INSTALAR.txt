@@ -41,12 +41,10 @@ CONFIGURAÇÃO OPCIONAL
 - Ou preencha contactEmail. Assim pedidos e consultas serão enviados automaticamente.
 - Se ambos ficarem vazios, o aplicativo copia a solicitação para a pessoa colar onde desejar.
 
-COMO ATIVAR A COMISSÃO DA AMAZON
-1. Entre no Programa de Associados da Amazon e aguarde a aprovação da sua conta.
-2. Abra config.js neste pacote.
-3. Localize amazonAssociateTag: 'SEU-CODIGO-20'.
-4. Troque SOMENTE SEU-CODIGO-20 pelo seu código de associado aprovado.
-5. Envie novamente config.js ao GitHub e aguarde a atualização.
+COMISSÃO DA AMAZON ATIVADA
+- A ID de Associado orbedasrealid-20 já está configurada em config.js.
+- Os botões da Loja acrescentam automaticamente essa ID aos links da Amazon.
+- Não altere amazonAssociateTag, a menos que a Amazon forneça uma nova ID.
 
 Os produtos abrem buscas reais na Amazon. Depois, você também pode trocar o campo search de qualquer produto por um campo url com o Link Especial exato gerado na sua conta de Associado. Preços e estoque são exibidos pela Amazon para evitar informação desatualizada no aplicativo.
 

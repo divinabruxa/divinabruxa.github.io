@@ -8,7 +8,7 @@ export const CONFIG=Object.freeze({
   cardPath:'',
   adminUser:'Isis33',
   // Troque apenas pelo seu código aprovado de Associado Amazon. Nunca coloque senhas ou chaves API aqui.
-  amazonAssociateTag:'SEU-CODIGO-20',
+  amazonAssociateTag:'orbedasrealid-20',
   products:[
     {id:'tarot-rider',name:'Tarot Rider-Waite',category:'Baralhos',symbol:'☼',search:'tarot rider waite português',description:'O clássico para começar, estudar símbolos e aprofundar leituras.',note:'Compare edições, idioma e tamanho antes da compra.',tags:['baralho','iniciante'],featured:true},
     {id:'tarot-marselha',name:'Tarot de Marselha',category:'Baralhos',symbol:'✦',search:'tarot de marselha português',description:'Tradição, cores marcantes e uma linguagem visual histórica.',tags:['baralho','tradicional']},
