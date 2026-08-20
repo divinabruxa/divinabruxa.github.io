@@ -1,4 +1,4 @@
-ORBE DAS REALIDADES — ATUALIZAÇÃO 06 (SOMENTE CÓDIGO)
+ORBE DAS REALIDADES — ATUALIZAÇÃO 07 · ORBE 4.0 (SOMENTE CÓDIGO)
 
 Este ZIP é plano: não contém pastas e não contém imagens.
 As 78 imagens que já estão no seu GitHub permanecem intactas.
@@ -34,7 +34,16 @@ ENTREGA DESTA ETAPA
 - De Frente com o Tarot com área editorial e link do canal.
 - Música com player incorporado do álbum Sobre as Estrelas.
 - Whit, Login e Administração continuam preparados para a etapa de servidor seguro.
-- PWA e cache v6 para forçar a atualização.
+- Base PWA consolidada das etapas anteriores.
+
+NOVIDADE DA ATUALIZAÇÃO 07
+- Orbe 4.0 renderizada pela GPU/WebGL quando disponível.
+- Matéria luminosa orgânica com profundidade, refração, auroras e fluxo contínuo.
+- A luz segue o dedo com inércia e continua em movimento depois que você solta.
+- Toque curto abre o Tarot Livre; deslizar movimenta a Orbe sem abrir a tela por acidente.
+- Estados de toque, energia e revelação, vibração leve e respeito a Reduzir Movimento.
+- Fallback automático para Canvas em aparelhos sem WebGL.
+- PWA e cache v7 para o Safari receber esta atualização.
 
 CONFIGURAÇÃO OPCIONAL
 - Abra config.js e preencha whatsapp somente com país + DDD + número, sem sinais.

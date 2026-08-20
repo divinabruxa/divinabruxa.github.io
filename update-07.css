@@ -1,0 +1,17 @@
+.orb-shell{isolation:isolate;overflow:visible;cursor:pointer;transition:filter .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+.orb-shell canvas{z-index:1;display:block;transform:translateZ(0);will-change:contents;box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),inset -28px -38px 60px rgba(0,0,20,.46),0 0 55px rgba(132,48,255,.56),0 0 120px rgba(225,55,200,.18)}
+.orb-halo{position:absolute;z-index:0;inset:-13%;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(124,237,255,.2) 0,rgba(225,58,211,.18) 37%,rgba(103,35,255,.12) 54%,transparent 72%);filter:blur(22px);opacity:.75;animation:orb-breathe 5.8s ease-in-out infinite}
+.orb-glass{position:absolute;z-index:2;inset:1.6%;border-radius:50%;pointer-events:none;background:radial-gradient(ellipse at 29% 20%,rgba(255,255,255,.32) 0 2%,rgba(255,255,255,.10) 7%,transparent 23%),linear-gradient(138deg,rgba(255,255,255,.11),transparent 28% 72%,rgba(87,220,255,.09));box-shadow:inset 18px 24px 38px rgba(255,255,255,.06),inset -22px -25px 42px rgba(0,0,15,.42)}
+.orb-shell.is-touching{transform:scale(.985);filter:drop-shadow(0 0 50px rgba(108,238,255,.78))}
+.orb-shell.is-touching .orb-halo{opacity:1;transform:scale(1.08)}
+.orb-shell.is-opening{transform:scale(1.055);filter:drop-shadow(0 0 75px rgba(255,255,255,.68))}
+.orb-shell.is-opening .orb-halo{animation:orb-reveal .86s cubic-bezier(.2,.8,.2,1)}
+.orb-shell.is-opening .orb-copy{opacity:0;transform:translateY(-12px);transition:.3s ease}
+.orb-copy{pointer-events:none;color:rgba(255,255,255,.84)}
+.touch-hint b{color:var(--gold);font-weight:600}
+.mini-orb{animation:mini-orb-life 4.7s ease-in-out infinite;background:radial-gradient(circle at 31% 24%,#fff 0 3%,#72f5ff 7%,#f04fc8 27%,#45127b 55%,#03020a 78%)}
+@keyframes orb-breathe{0%,100%{transform:scale(.96);opacity:.58}50%{transform:scale(1.06);opacity:.9}}
+@keyframes orb-reveal{0%{transform:scale(.92);opacity:.7}42%{transform:scale(1.22);opacity:1}100%{transform:scale(1.7);opacity:0}}
+@keyframes mini-orb-life{0%,100%{box-shadow:0 0 18px #7d2bea;filter:hue-rotate(0deg)}50%{box-shadow:0 0 32px #e447c5;filter:hue-rotate(22deg)}}
+@media(max-width:560px){.orb-shell{width:min(82vw,430px)}.touch-hint{font-size:14px}}
+@media(prefers-reduced-motion:reduce){.orb-halo,.mini-orb{animation:none}.orb-shell{transition:none}}
