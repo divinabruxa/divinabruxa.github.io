@@ -41,6 +41,7 @@ export class FreeTarot {
   bind() {
     this.orb.addEventListener('click', () => this.draw());
     this.root.querySelector('#resetDeck').addEventListener('click', () => this.reset());
+    this.root.querySelector('#shuffleDeck').addEventListener('click', () => this.reshuffle());
     this.realTable.addEventListener('click', event => {
       const button = event.target.closest('[data-index]');
       if (button) this.show(Number(button.dataset.index), false, true);
@@ -90,7 +91,7 @@ export class FreeTarot {
     this.orb.disabled = this.state.completed;
     this.orb.setAttribute('aria-label', waiting ? `Revelar próxima carta. ${waiting} restantes.` : 'Mesa completa');
     this.root.querySelector('#orbState').textContent = this.state.completed ? 'MESA COMPLETA' : 'TOQUE PARA REVELAR';
-    this.root.querySelector('#resetDeck').hidden = !this.state.completed;
+    this.root.querySelector('#shuffleDeck').disabled = waiting < 2;
     this.realTable.innerHTML = Array.from({ length: DECK_SIZE }, (_, index) => {
       const id = this.state.revealed[index];
       if (id === undefined) return `<div class="table-slot waiting" role="listitem" aria-label="Posição ${index + 1}, aguardando carta"><span class="position">${index + 1}</span></div>`;
@@ -102,12 +103,20 @@ export class FreeTarot {
   }
 
   reset() {
-    if (!this.state.completed) return;
+    if (this.state.revealed.length && !confirm('Apagar as cartas desta mesa e iniciar um novo baralho?')) return;
     this.state = fresh();
     this.selected = -1;
     store.set('free-tarot', this.state);
     this.stage.className = 'current table-preview empty';
     this.stage.innerHTML = '<div class="empty-card"><span>✦</span>A próxima carta nascerá da Orbe.<small>Toque somente na Orbe</small></div>';
     this.render();
+  }
+
+  reshuffle() {
+    if (this.state.waiting.length < 2) return;
+    this.state.waiting = shuffle(this.state.waiting);
+    store.set('free-tarot', this.state);
+    navigator.vibrate?.(16);
+    dispatchEvent(new CustomEvent('orbe:toast',{detail:`${this.state.waiting.length} cartas restantes foram embaralhadas.`}));
   }
 }

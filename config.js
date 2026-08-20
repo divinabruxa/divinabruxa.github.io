@@ -3,8 +3,14 @@ export const CONFIG=Object.freeze({
   youtube:'https://www.youtube.com/@divinabruxa33',
   spotify:'https://open.spotify.com/album/0GwJtJujeS9iwSZFADcL1k',
   spotifyAlbumId:'0GwJtJujeS9iwSZFADcL1k',
+  spotifyAlbums:[
+    {name:'Sobre as Estrelas',artist:'Hércules DX',id:'0GwJtJujeS9iwSZFADcL1k'},
+    {name:'Z',artist:'Hércules DX',id:'4mq0UaLMXK21JbrKMFdhdO'}
+  ],
   whatsapp:'',
-  contactEmail:'',
+  contactEmail:'orbedasrealidades@hotmail.com',
+  apiBase:'',
+  youtubeVideos:[],
   cardPath:'',
   adminUser:'Isis33',
   // Troque apenas pelo seu código aprovado de Associado Amazon. Nunca coloque senhas ou chaves API aqui.

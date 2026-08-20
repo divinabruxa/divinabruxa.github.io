@@ -27,7 +27,20 @@ const NUMBERS={Ás:'uma semente e um novo começo',2:'uma escolha ou parceria',3
 
 export function meaning(card,reversed=false){
   const major=ARCANA[card.name];
-  if(major)return {keywords:major[0],message:reversed?`A energia de ${major[0]} está bloqueada ou exagerada. Observe onde você resiste antes de agir.`:major[1],question:`Como ${major[0].split(',')[0]} aparece na minha realidade agora?`};
+  if(major){const essence=major[0],guidance=major[1];return enrich(card,essence,guidance,reversed);}
   const rank=card.name.split(' de ')[0],suit=SUITS[card.suit];
-  return {keywords:`${NUMBERS[rank]} · ${suit[0]}`,message:reversed?`Esta carta mostra um desequilíbrio em ${suit[0]}. Respire, reveja expectativas e não force uma resposta.`:`Hoje, ${suit[1]}. Esta carta aponta ${NUMBERS[rank]}.`,question:`Que atitude concreta transforma esta energia de ${card.suit} em consciência?`};
+  return enrich(card,`${NUMBERS[rank]} · ${suit[0]}`,`Hoje, ${suit[1]}. Esta carta aponta ${NUMBERS[rank]}.`,reversed);
+}
+
+function enrich(card,keywords,guidance,reversed){
+ const suit=card.suit==='Maiores'?'uma transformação central da sua jornada':`o território de ${SUITS[card.suit][0]}`;
+ const message=reversed?`A energia de ${keywords} pede revisão. Não leia a posição invertida como castigo: ela indica uma força interior bloqueada, excessiva ou ainda não reconhecida. Antes de procurar uma resposta fora, observe onde você está repetindo uma defesa antiga.`:`${guidance} A presença desta carta mostra que ${suit} está ativo agora. Ela não determina um destino: oferece uma linguagem para reconhecer padrões, possibilidades e escolhas com mais consciência.`;
+ return {keywords,message,
+  light:`Na expressão luminosa, ${card.name} convida você a agir com presença, honestidade e responsabilidade. Perceba os recursos que já existem, inclusive os pequenos, e escolha um movimento que possa ser sustentado na vida real.`,
+  shadow:`Na sombra, esta energia pode aparecer como pressa, rigidez, idealização, medo de perder o controle ou dificuldade de escutar os próprios limites. O caminho não é negar a sombra, mas compreender o que ela tenta proteger.`,
+  practical:`Transforme a leitura em prática: escreva o que está sob seu controle, escolha uma atitude simples para as próximas vinte e quatro horas e deixe para depois aquilo que ainda depende de clareza.`,
+  emotional:`Emocionalmente, esta carta pede espaço para sentir sem confundir sentimento com sentença. Nomear o que acontece dentro de você diminui a força do automático e devolve liberdade à escolha.`,
+  spiritual:`No plano simbólico, ${card.name} recorda que toda passagem contém aprendizado. Use a imagem como espelho de reflexão — não como prova absoluta, previsão inevitável ou substituição de decisões profissionais.`,
+  question:`Onde a energia de ${keywords.split(' · ')[0]} já está presente na minha realidade — e qual verdade eu consigo acolher hoje?`,
+  questions:[`O que esta carta ilumina que eu estava evitando nomear?`,`Que escolha preserva minha dignidade e também respeita meus limites?`,`Qual atitude concreta transforma esta mensagem em experiência?`]};
 }

@@ -1,0 +1,36 @@
+ORBE DAS REALIDADES — RECURSOS QUE EXIGEM SERVIDOR SEGURO
+
+Esta pasta funciona no GitHub Pages para Tarot, Carta do Dia, Tiragens,
+Diário local, música, vídeos, vitrine afiliada e envio pelo aplicativo de e-mail.
+
+Para contas reais, assinatura, administração protegida, histórico em vários
+aparelhos, e-mail automático e Whit IA, conecte um backend HTTPS em apiBase,
+no arquivo config.js. Nunca coloque senha administrativa, chave OpenAI ou
+chaves de pagamento nos arquivos públicos.
+
+ROTAS ESPERADAS PELO APLICATIVO
+POST /auth/register       cadastro de usuário com hash forte e verificação
+POST /auth/login          cria sessão segura em cookie HttpOnly
+POST /auth/admin          valida administração no servidor
+POST /auth/logout         encerra a sessão
+GET  /account             perfil, plano e consentimentos
+GET  /history             histórico sincronizado
+POST /history             salva diário e leituras
+POST /ai/chat             verifica assinatura antes de chamar a IA
+POST /consultations       envia e-mail e grava solicitação
+POST /subscriptions       cria checkout seguro
+GET/POST /admin/content   controla vídeos, produtos, preços e conteúdo
+
+REGRAS OBRIGATÓRIAS
+- Senhas armazenadas somente como hash Argon2id ou bcrypt.
+- Sessões em cookies Secure, HttpOnly e SameSite.
+- IA e pagamento sempre chamados pelo servidor.
+- Rate limiting, logs de auditoria, recuperação de senha e verificação de e-mail.
+- Consentimento e ferramentas de exportar/excluir dados (LGPD).
+- A canalização da Whit deve aparecer sempre como dramatização ficcional.
+
+E-MAIL DE CONSULTAS CONFIGURADO
+orbedasrealidades@hotmail.com
+
+Enquanto não há servidor, o formulário abre o aplicativo de e-mail da pessoa
+com a solicitação pronta. Isso é seguro e funciona em hospedagem estática.

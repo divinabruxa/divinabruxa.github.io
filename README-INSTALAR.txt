@@ -1,4 +1,4 @@
-ORBE DAS REALIDADES — ATUALIZAÇÃO 10 · ORBE 5.0 + LOJA CONSTELAÇÃO (SOMENTE CÓDIGO)
+ORBE DAS REALIDADES — ATUALIZAÇÃO 11 · CONTA, WHIT, DIÁRIO E MÍDIA (SOMENTE CÓDIGO)
 
 Este ZIP é plano: não contém pastas e não contém imagens.
 As 78 imagens que já estão no seu GitHub permanecem intactas.
@@ -14,7 +14,7 @@ COMO INSTALAR PELO IPHONE
 
 IMPORTANTE
 - Aceite substituir os arquivos antigos com o mesmo nome.
-- Não apague card-00.jpg até card-77.jpg/card-47.png.
+- Não apague as 78 imagens de cartas que já estão no GitHub.
 - Se o Safari mostrar a versão antiga: Ajustes > Safari > Avançado > Dados dos Sites, procure divinabruxa.com.br e apague somente esses dados; depois abra o site novamente.
 - A senha da administração e a chave da IA NÃO podem ficar em arquivos públicos. Login real, IA real, pagamentos e assinaturas exigem um pequeno servidor seguro, que será a próxima etapa.
 
@@ -60,6 +60,19 @@ Os produtos abrem buscas reais na Amazon. Depois, você também pode trocar o ca
 SEGURANÇA
 - Nunca coloque senha administrativa ou chave da OpenAI em config.js, app.js ou qualquer arquivo público do GitHub.
 - IA, login real, checkout e assinaturas precisam de funções protegidas no servidor.
+
+NOVIDADES DA ATUALIZAÇÃO 11
+- Tarot Livre agora pode embaralhar somente as cartas restantes.
+- A Mesa Real pode ser reiniciada a qualquer momento, com confirmação.
+- Carta do Dia ganhou leitura extensa em sete camadas e perguntas de integração.
+- Tiragens ganharam luz, sombra, prática e síntese profunda por posição.
+- Diário ampliado com título, humor, intenção, tags, busca e exportação JSON.
+- Consultas abrem um e-mail completo para orbedasrealidades@hotmail.com.
+- Whit ganhou três modos, memória local e canalização simbólica claramente ficcional.
+- Sobre as Estrelas e Z estão disponíveis em players separados do Spotify.
+- De Frente com o Tarot está preparado como biblioteca semanal de capítulos.
+- Cache PWA v11 remove automaticamente a versão antiga no próximo carregamento.
+- BACKEND-CONFIGURAR.txt documenta as rotas para login, assinatura, IA e admin reais.
 NOVIDADES DA ATUALIZAÇÃO 08
 - Tarot Livre redesenhado como uma mesa independente e responsiva.
 - Toque na mini-Orbe, no baralho ou deslize para cima para revelar.
