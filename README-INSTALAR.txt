@@ -1,4 +1,4 @@
-ORBE DAS REALIDADES — ATUALIZAÇÃO 04 (SOMENTE CÓDIGO)
+ORBE DAS REALIDADES — ATUALIZAÇÃO 05 (SOMENTE CÓDIGO)
 
 Este ZIP é plano: não contém pastas e não contém imagens.
 As 78 imagens que já estão no seu GitHub permanecem intactas.
@@ -27,5 +27,15 @@ ENTREGA DESTA ETAPA
 - Seis tiragens com posições reais, cartas sem repetição, significados e salvamento.
 - Diário visual com miniaturas, exclusão e registros estruturados.
 - Espelho da Orbe com cartas registradas, carta frequente, energia dominante e invertidas.
-- Whit, Loja, Consultas, Assinaturas, Vídeos, Música, Login e Administração preparados em módulos.
-- PWA e cache v4 para forçar a atualização.
+- Loja com catálogo, sacola persistente, total e solicitação de pedido.
+- Consultas com preços corretos, seleção e formulário de disponibilidade.
+- Assinaturas organizadas sem simular cobrança antes do checkout seguro.
+- De Frente com o Tarot com área editorial e link do canal.
+- Música com player incorporado do álbum Sobre as Estrelas.
+- Whit, Login e Administração continuam preparados para a etapa de servidor seguro.
+- PWA e cache v5 para forçar a atualização.
+
+CONFIGURAÇÃO OPCIONAL
+- Abra config.js e preencha whatsapp somente com país + DDD + número, sem sinais.
+- Ou preencha contactEmail. Assim pedidos e consultas serão enviados automaticamente.
+- Se ambos ficarem vazios, o aplicativo copia a solicitação para a pessoa colar onde desejar.
