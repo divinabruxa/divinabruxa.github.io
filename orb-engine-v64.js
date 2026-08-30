@@ -1,12 +1,13 @@
 /*
- * DIVINA BRUXA — REALITY ORB ENGINE V66 · BREATH & EMOTION
+ * DIVINA BRUXA — REALITY ORB ENGINE V67 · DEEP BREATH & STARDUST
  *
  * Um motor novo, criado para a Orbe das Realidades:
  * - WebGL 2 com fallback WebGL 1 e fallback fotográfico;
  * - entrada de baixa latência com eventos coalescidos e previsão curta;
  * - animação independente da taxa da tela (60/90/120 Hz);
  * - resolução Retina adaptativa por desempenho real do aparelho;
- * - respiração visível: matéria, núcleo e luz inspiram e expiram juntos;
+ * - respiração profunda em quatro fases: inspira, sustenta, pulsa e expira;
+ * - poeira astral viva, atraída pelo toque sem formar linhas ou símbolos;
  * - campo de memória GPU: o plasma recorda e dissolve o caminho do dedo;
  * - camada viva de segurança para desktops sem WebGL;
  * - plasma, luz e rastros exclusivamente dentro da esfera;
@@ -104,6 +105,14 @@ function shaderSources(webgl2, fragmentPrecision) {
       return length(pa - ba * h);
     }
 
+    float stardust(vec2 uv, float scale, float threshold, float seed){
+      vec2 grid = uv * scale;
+      vec2 cell = floor(grid);
+      vec2 local = fract(grid) - .5;
+      float particle = exp(-dot(local, local) * 190.0);
+      return particle * step(threshold, hash21(cell + seed));
+    }
+
     void main(){
       vec2 centered = vUv - .5;
       float radius = length(centered);
@@ -120,20 +129,25 @@ function shaderSources(webgl2, fragmentPrecision) {
 
       // Vida autônoma: um ciclo de inspiração e expiração que se vê na matéria.
       // A esfera externa permanece fixa; somente o universo interno se expande.
-      float breathWave = .5 + .5 * sin(time * 1.08 - 1.5708 + sin(time * .17) * .20);
-      float breath = breathWave * breathWave * (3.0 - 2.0 * breathWave);
+      float breathWave = .5 + .5 * sin(time * .82 - 1.5708 + sin(time * .13) * .15);
+      float breathSoft = breathWave * breathWave * (3.0 - 2.0 * breathWave);
+      float breath = breathSoft * breathSoft * (3.0 - 2.0 * breathSoft);
       float breathLift = (breath - .5) * uBreathStrength;
-      float heartBeat = pow(max(0.0, sin(time * 2.16 - .38)), 18.0);
-      heartBeat *= (.30 + breath * .70) * uBreathStrength;
+      float soulCycle = fract(time * .82 / 6.2831853);
+      float firstBeatDistance = (soulCycle - .485) / .026;
+      float secondBeatDistance = (soulCycle - .565) / .034;
+      float firstBeat = exp(-firstBeatDistance * firstBeatDistance);
+      float secondBeat = exp(-secondBeatDistance * secondBeatDistance) * .66;
+      float heartBeat = (firstBeat + secondBeat) * uBreathStrength;
       float slowSoul = .5 + .5 * sin(time * .31 + fbm(centered * 3.1 + time * .025) * 3.2);
       float livingCloud = fbm(centered * 6.2 + vec2(time * .055, -time * .041));
-      float soulCurrent = (.0022 + slowSoul * .0034 + livingCloud * .0022) * innerMask * (.84 + breath * .34);
+      float soulCurrent = (.0024 + slowSoul * .0038 + livingCloud * .0025) * innerMask * (.76 + breath * .52);
 
       // Curvatura óptica de uma esfera real, sem desenhar contornos ou símbolos.
-      float internalBreathScale = 1.0 - breathLift * .086 - heartBeat * .008;
+      float internalBreathScale = 1.0 - breathLift * .118 - heartBeat * .012;
       vec2 sampleUv = .5 + centered * (1.0 + radius * radius * .075) * internalBreathScale;
       sampleUv += tangent * soulCurrent * sin(time * .51 + radius * 9.0 + livingCloud * 2.8);
-      sampleUv += radial * (.0018 * sin(time * .68 + radius * 12.0) - .0038 * breathLift - .0044 * heartBeat * innerMask);
+      sampleUv += radial * (.0021 * sin(time * .59 + radius * 12.0) - .0052 * breathLift - .0060 * heartBeat * innerMask);
 
       // O toque dobra o plasma no ponto exato do dedo.
       vec2 delta = vUv - uPointer;
@@ -186,9 +200,9 @@ function shaderSources(webgl2, fragmentPrecision) {
       // A luz também respira: violeta profundo na expiração, calor no auge da inspiração.
       float inhaleGlow = smoothstep(.48, 1.0, breath) * uBreathStrength;
       float exhaleGlow = smoothstep(.52, 1.0, 1.0 - breath) * uBreathStrength;
-      color.rgb *= .965 + breath * .095 * uBreathStrength + slowSoul * .015 + heartBeat * .052;
-      color.rgb += vec3(.18, .018, .31) * exhaleGlow * innerMask * .060;
-      color.rgb += vec3(.64, .16, .68) * inhaleGlow * innerMask * .048;
+      color.rgb *= .935 + breath * .145 * uBreathStrength + slowSoul * .018 + heartBeat * .068;
+      color.rgb += vec3(.18, .018, .31) * exhaleGlow * innerMask * .072;
+      color.rgb += vec3(.64, .16, .68) * inhaleGlow * innerMask * .066;
 
       // Plasma luminoso sob o dedo, com ouro apenas nos pontos de maior densidade.
       float plasma = 0.0;
@@ -239,17 +253,27 @@ function shaderSources(webgl2, fragmentPrecision) {
       color.rgb += vec3(.42, .09, .82) * veil * .37;
       color.rgb += vec3(.91, .35, .98) * veil * veil * .25;
 
-      vec2 starCell = floor(vUv * (34.0 + uQuality * 10.0));
-      vec2 starLocal = fract(vUv * (34.0 + uQuality * 10.0)) - .5;
-      float starSeed = hash21(starCell + 19.7);
-      float star = exp(-dot(starLocal, starLocal) * 155.0) * step(.952, starSeed);
-      star *= (.10 + energy * .48 + uResonance * .34) * (.64 + .36 * sin(time * 7.0 + starSeed * 31.0));
-      star *= 1.0 - smoothstep(.43, .5, radius);
-      color.rgb += vec3(1.0, .77, .98) * star * 1.25;
+      // Poeira astral em duas profundidades. Ela flutua, respira e se reúne sob o dedo.
+      vec2 dustUv = vUv + vec2(time * .0052, -time * .0037);
+      dustUv += tangent * (.002 + breath * .0045);
+      dustUv -= touchNormal * touchField * (.012 + pressure * .010);
+      dustUv += touchTangent * touchField * spinDirection * .009;
+      float dustNear = stardust(dustUv, 39.0 + uQuality * 9.0, .946, 19.7);
+      float dustFar = stardust(dustUv * .73 + vec2(-time * .002, time * .003), 31.0 + uQuality * 7.0, .956, 71.3);
+      float dustSeed = hash21(floor(dustUv * 43.0) + 8.4);
+      float twinkle = .52 + .48 * sin(time * (2.7 + dustSeed * 3.8) + dustSeed * 31.0);
+      float dust = (dustNear + dustFar * .72) * twinkle;
+      dust *= (.16 + breath * .22 + energy * .48 + uResonance * .36 + touchField * .42);
+      dust *= 1.0 - smoothstep(.42, .495, radius);
+      color.rgb += mix(vec3(.77, .47, 1.0), vec3(1.0, .82, .48), dustSeed) * dust * 1.42;
+
+      float touchSpark = stardust((vUv - uPointer) * (1.0 + energy * .08) + .5 + vec2(time * .018, -time * .011), 54.0, .961, 113.0);
+      touchSpark *= touchField * (.42 + pressure * .58) * (1.0 - smoothstep(.43, .5, radius));
+      color.rgb += vec3(1.0, .72, .96) * touchSpark * 1.65;
 
       // O coração pulsa dentro da fotografia, sem marcador geométrico fixo.
-      float nucleus = exp(-length(vUv - vec2(.505, .518)) * (25.0 - breath * 8.0 - heartBeat * 2.8));
-      nucleus *= .11 + breath * .31 * uBreathStrength + heartBeat * .30 + energy * .20 + uCharge * .20;
+      float nucleus = exp(-length(vUv - vec2(.505, .518)) * (27.0 - breath * 11.0 - heartBeat * 3.4));
+      nucleus *= .08 + breath * .39 * uBreathStrength + heartBeat * .38 + energy * .20 + uCharge * .20;
       vec3 soulColor = mix(vec3(.67, .34, 1.0), vec3(1.0, .75, .93), breath);
       color.rgb += soulColor * nucleus * (.56 + inhaleGlow * .16);
 
@@ -394,7 +418,7 @@ export class RealityOrbEngine {
 
   init() {
     if (!this.canvas || !this.shell) return;
-    this.shell.dataset.orbEngine = 'v66';
+    this.shell.dataset.orbEngine = 'v67';
     this.shell.classList.add('orb-loading');
     this.shell.style.setProperty('--orb-touch-x', '50%');
     this.shell.style.setProperty('--orb-touch-y', '50%');
@@ -682,9 +706,9 @@ export class RealityOrbEngine {
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([35, 4, 52, 255]));
 
     const candidates = [
-      new URL('./divina-orb-v48.png?v=66', import.meta.url).href,
+      new URL('./divina-orb-v48.png?v=67', import.meta.url).href,
       new URL('./divina-orb-v48.png', import.meta.url).href,
-      new URL('./divina-orb.png?v=66', import.meta.url).href
+      new URL('./divina-orb.png?v=67', import.meta.url).href
     ];
     let attempt = 0;
     const tryNextImage = () => {
