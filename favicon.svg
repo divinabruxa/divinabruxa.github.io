@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="orb" cx="44%" cy="35%">
+      <stop offset="0" stop-color="#fff6ff"/>
+      <stop offset=".08" stop-color="#ed8cff"/>
+      <stop offset=".34" stop-color="#a523d0"/>
+      <stop offset=".72" stop-color="#3b075a"/>
+      <stop offset="1" stop-color="#08010d"/>
+    </radialGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="12" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="512" height="512" rx="116" fill="#08040e"/>
+  <circle cx="256" cy="256" r="188" fill="url(#orb)" stroke="#e0ad59" stroke-width="6" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="215" fill="none" stroke="#e0ad59" stroke-opacity=".6" stroke-width="3" stroke-dasharray="7 16"/>
+  <text x="256" y="306" text-anchor="middle" fill="#ffd993" font-family="Georgia,serif" font-size="154">33</text>
+  <text x="256" y="174" text-anchor="middle" fill="#ffd993" font-family="Georgia,serif" font-size="44">☾ ◉ ☽</text>
+</svg>

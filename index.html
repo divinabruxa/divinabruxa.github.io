@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#05020b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Divina Bruxa — Orbe das Realidades</title>
+  <meta name="description" content="A Orbe das Realidades — uma experiência viva de Divina Bruxa.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="divina-orb-v48.png?v=59" as="image">
+  <link rel="stylesheet" href="styles.css?v=59">
+  <script type="module" src="app.js?v=59"></script>
+</head>
+<body>
+  <div class="starfield" aria-hidden="true"></div>
+  <header class="site-header">
+    <button class="brand" data-home aria-label="Voltar ao início">
+      <img src="orb-mini-v48.png?v=59" alt="" class="brand-orb">
+      <span><strong>DIVINA BRUXA</strong><small>ORBE DAS REALIDADES</small></span>
+    </button>
+    <button id="menuButton" class="menu-button" aria-controls="magicMenu" aria-expanded="false" aria-label="Abrir Menu Mágico">
+      <i></i><i></i><i></i><span>MENU</span>
+    </button>
+  </header>
+
+  <main class="home" id="home">
+    <div class="home-copy">
+      <p class="eyebrow">O PORTAL ESTÁ ABERTO</p>
+      <h1>Sua jornada<span>✦</span></h1>
+      <p>O universo guardou um caminho para você.</p>
+    </div>
+    <div class="orb-stage">
+      <div class="orb-aura" aria-hidden="true"></div>
+      <button id="orbShell" class="orb-shell" aria-label="Orbe viva. Toque, segure, deslize ou gire. Duplo toque abre o Tarot Livre.">
+        <canvas id="orbCanvas" aria-hidden="true"></canvas>
+        <span class="orb-glass" aria-hidden="true"></span>
+      </button>
+    </div>
+    <p class="awaken">✦ TOQUE PARA DESPERTAR ✦</p>
+    <p id="orbStatus" class="orb-status" aria-live="polite">A Orbe está respirando</p>
+    <p class="touch-hint">Toque duplo abre o Tarot Livre</p>
+  </main>
+
+  <nav class="bottom-dock" aria-label="Navegação principal">
+    <button class="dock-item active" data-home><span>⌂</span><small>Início</small></button>
+    <button class="dock-item" id="dockPaths"><span>▦</span><small>Caminhos</small></button>
+    <button class="dock-item dock-orb" data-orb-ia><img src="orb-mini-v48.png?v=59" alt=""><small>Orbe IA</small></button>
+    <button class="dock-item" data-placeholder="Diário"><span>▤</span><small>Diário</small></button>
+    <button class="dock-item" data-placeholder="Conta"><span>◎</span><small>Conta</small></button>
+  </nav>
+
+  <aside id="magicMenu" class="magic-menu" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="menuTitle">
+    <div class="menu-sheet">
+      <div class="menu-top">
+        <div class="menu-brand"><img src="orb-mini-v48.png?v=59" alt=""><span><strong>DIVINA BRUXA</strong><small>ORBE DAS REALIDADES</small></span></div>
+        <button id="closeMenu" class="close-menu" aria-label="Fechar Menu Mágico">×</button>
+      </div>
+      <h2 id="menuTitle">ORBE VIVA — MENU MÁGICO</h2>
+      <div class="menu-universe">
+        <div class="menu-orbits" aria-hidden="true"><i></i><i></i><i></i></div>
+        <button class="menu-core" data-orb-ia aria-label="Abrir Orbe IA"><img src="orb-mini-v48.png?v=59" alt=""></button>
+        <nav class="radial-menu" aria-label="Caminhos da Orbe">
+          <button data-placeholder="Início"><span>⌂</span><b>Início</b></button>
+          <button data-placeholder="Tiragens"><span>✧</span><b>Tiragens</b></button>
+          <button data-placeholder="Carta do Dia"><span>☉</span><b>Carta do Dia</b></button>
+          <button data-orb-ia><span>✦</span><b>Orbe IA</b></button>
+          <button data-placeholder="Consultas"><span>♙</span><b>Consultas</b></button>
+          <button data-placeholder="Música"><span>♫</span><b>Música</b></button>
+          <button data-placeholder="Conta"><span>◎</span><b>Conta</b></button>
+          <button data-placeholder="Tarot Livre"><span>▣</span><b>Tarot Livre</b></button>
+        </nav>
+      </div>
+      <div class="menu-rail">
+        <button data-placeholder="Tarot Completo"><span>✺</span><strong>TAROT COMPLETO</strong><small>78 cartas · livre e profundo</small></button>
+        <button data-placeholder="Ritual Diário"><span>☾</span><strong>RITUAL DIÁRIO</strong><small>uma carta para o agora</small></button>
+        <button data-placeholder="Consultas"><span>♙</span><strong>CONSULTAS</strong><small>atendimento e orientações</small></button>
+        <button data-orb-ia><span>✦</span><strong>ORBE IA</strong><small>intuitiva e exclusiva</small></button>
+        <button data-placeholder="Música &amp; Vibração"><span>♫</span><strong>MÚSICA &amp; VIBRAÇÃO</strong><small>eleve sua energia</small></button>
+        <button data-placeholder="Loja Mística"><span>◇</span><strong>LOJA MÍSTICA</strong><small>itens para sua jornada</small></button>
+      </div>
+      <div class="menu-chips"><button data-placeholder="Diário">Diário</button><button data-placeholder="Premium">Premium</button><button data-placeholder="Escola do Tarot">Escola</button></div>
+    </div>
+  </aside>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
