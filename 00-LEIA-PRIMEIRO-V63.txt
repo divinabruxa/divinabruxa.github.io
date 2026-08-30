@@ -1,0 +1,19 @@
+DIVINA BRUXA — V63 MINI-ORB TOUCH
+
+Envie somente estes arquivos para a raiz do repositório:
+  app.js
+  index.html
+  visual-v47.css
+  sw.js
+  mini-orb-engine.js
+
+O que mudou:
+  - A mini-Orbe central do dock inferior responde ao toque e ao arraste curto.
+  - A mini-Orbe central do Menu Mágico responde antes da navegação para a Orbe IA.
+  - A mini-Orbe da marca também acompanha o ponto do ponteiro/toque.
+  - Brilho, foco interno, pulso de soltura e vibração curta (quando o aparelho permite).
+  - O gesto não arrasta a página nem altera o layout.
+  - A Orbe principal continua usando o motor V62 já instalado.
+
+Não envie novamente imagens, cartas ou arquivos das etapas anteriores.
+Depois do upload, faça uma atualização forçada do site para o novo service worker.

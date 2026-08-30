@@ -1,0 +1,21 @@
+{
+  "version": "V63",
+  "scope": "mini-orb-touch",
+  "files": [
+    "app.js",
+    "index.html",
+    "visual-v47.css",
+    "sw.js",
+    "mini-orb-engine.js"
+  ],
+  "checks": {
+    "main_orb_engine": "preserved_v62",
+    "dock_mini_orb": "pointerdown_move_release_feedback",
+    "magic_menu_core_orb": "pointerdown_move_release_feedback",
+    "brand_mini_orb": "pointerdown_move_release_feedback",
+    "layout_drag": "blocked_by_touch_action_none",
+    "navigation": "data_go_click_preserved",
+    "reversed_cards": "unchanged_zero_reversed"
+  },
+  "cache": "divina-bruxa-v63-mini-orbs"
+}
