@@ -1,12 +1,14 @@
 /*
- * DIVINA BRUXA — REALITY ORB ENGINE V65 · SOUL MEMORY
+ * DIVINA BRUXA — REALITY ORB ENGINE V66 · BREATH & EMOTION
  *
  * Um motor novo, criado para a Orbe das Realidades:
  * - WebGL 2 com fallback WebGL 1 e fallback fotográfico;
  * - entrada de baixa latência com eventos coalescidos e previsão curta;
  * - animação independente da taxa da tela (60/90/120 Hz);
  * - resolução Retina adaptativa por desempenho real do aparelho;
+ * - respiração visível: matéria, núcleo e luz inspiram e expiram juntos;
  * - campo de memória GPU: o plasma recorda e dissolve o caminho do dedo;
+ * - camada viva de segurança para desktops sem WebGL;
  * - plasma, luz e rastros exclusivamente dentro da esfera;
  * - toque, pressão, arraste, giro, impulso, toque longo e duplo toque;
  * - haptics preparados para Web, iOS/Android e futuro app Capacitor.
@@ -63,6 +65,7 @@ function shaderSources(webgl2, fragmentPrecision) {
     uniform float uSpin;
     uniform float uFlick;
     uniform float uQuality;
+    uniform float uBreathStrength;
 
     float hash21(vec2 p){
       p = fract(p * vec2(123.34, 456.21));
@@ -115,16 +118,22 @@ function shaderSources(webgl2, fragmentPrecision) {
       vec2 radial = safeNormal(centered);
       vec2 tangent = vec2(-radial.y, radial.x);
 
-      // Vida autônoma: respiração assimétrica e matéria cósmica sempre em fluxo.
-      float breath = .5 + .5 * sin(time * .83 + sin(time * .19) * .55);
+      // Vida autônoma: um ciclo de inspiração e expiração que se vê na matéria.
+      // A esfera externa permanece fixa; somente o universo interno se expande.
+      float breathWave = .5 + .5 * sin(time * 1.08 - 1.5708 + sin(time * .17) * .20);
+      float breath = breathWave * breathWave * (3.0 - 2.0 * breathWave);
+      float breathLift = (breath - .5) * uBreathStrength;
+      float heartBeat = pow(max(0.0, sin(time * 2.16 - .38)), 18.0);
+      heartBeat *= (.30 + breath * .70) * uBreathStrength;
       float slowSoul = .5 + .5 * sin(time * .31 + fbm(centered * 3.1 + time * .025) * 3.2);
       float livingCloud = fbm(centered * 6.2 + vec2(time * .055, -time * .041));
-      float soulCurrent = (.0022 + slowSoul * .0034 + livingCloud * .0022) * innerMask;
+      float soulCurrent = (.0022 + slowSoul * .0034 + livingCloud * .0022) * innerMask * (.84 + breath * .34);
 
       // Curvatura óptica de uma esfera real, sem desenhar contornos ou símbolos.
-      vec2 sampleUv = .5 + centered * (1.0 + radius * radius * .075);
+      float internalBreathScale = 1.0 - breathLift * .086 - heartBeat * .008;
+      vec2 sampleUv = .5 + centered * (1.0 + radius * radius * .075) * internalBreathScale;
       sampleUv += tangent * soulCurrent * sin(time * .51 + radius * 9.0 + livingCloud * 2.8);
-      sampleUv += radial * (.0018 * sin(time * .68 + radius * 12.0) + .0014 * (breath - .5));
+      sampleUv += radial * (.0018 * sin(time * .68 + radius * 12.0) - .0038 * breathLift - .0044 * heartBeat * innerMask);
 
       // O toque dobra o plasma no ponto exato do dedo.
       vec2 delta = vUv - uPointer;
@@ -174,7 +183,12 @@ function shaderSources(webgl2, fragmentPrecision) {
         color.b = mix(color.b, violetSample.b, .15);
       }
 
-      color.rgb *= 1.0 + breath * .018 + slowSoul * .015;
+      // A luz também respira: violeta profundo na expiração, calor no auge da inspiração.
+      float inhaleGlow = smoothstep(.48, 1.0, breath) * uBreathStrength;
+      float exhaleGlow = smoothstep(.52, 1.0, 1.0 - breath) * uBreathStrength;
+      color.rgb *= .965 + breath * .095 * uBreathStrength + slowSoul * .015 + heartBeat * .052;
+      color.rgb += vec3(.18, .018, .31) * exhaleGlow * innerMask * .060;
+      color.rgb += vec3(.64, .16, .68) * inhaleGlow * innerMask * .048;
 
       // Plasma luminoso sob o dedo, com ouro apenas nos pontos de maior densidade.
       float plasma = 0.0;
@@ -233,10 +247,11 @@ function shaderSources(webgl2, fragmentPrecision) {
       star *= 1.0 - smoothstep(.43, .5, radius);
       color.rgb += vec3(1.0, .77, .98) * star * 1.25;
 
-      // Núcleo respirando sem marcador geométrico fixo.
-      float nucleus = exp(-length(vUv - vec2(.505, .518)) * (23.0 - breath * 2.0));
-      nucleus *= .17 + breath * .09 + energy * .20 + uCharge * .20;
-      color.rgb += vec3(1.0, .68 + livingCloud * .18, 1.0) * nucleus * .58;
+      // O coração pulsa dentro da fotografia, sem marcador geométrico fixo.
+      float nucleus = exp(-length(vUv - vec2(.505, .518)) * (25.0 - breath * 8.0 - heartBeat * 2.8));
+      nucleus *= .11 + breath * .31 * uBreathStrength + heartBeat * .30 + energy * .20 + uCharge * .20;
+      vec3 soulColor = mix(vec3(.67, .34, 1.0), vec3(1.0, .75, .93), breath);
+      color.rgb += soulColor * nucleus * (.56 + inhaleGlow * .16);
 
       // Volume e profundidade na borda, sem acrescentar linhas ao redor da Orbe.
       float sphereShade = 1.0 - smoothstep(.33, .5, radius) * .24;
@@ -354,6 +369,7 @@ export class RealityOrbEngine {
     this.previousAngle = 0;
     this.settleTimer = 0;
     this.holdTimers = [];
+    this.cssPhaseTimers = new Map();
     this.status = document.querySelector('#orbStatus');
 
     this.pointer = { x: .5, y: .5, targetX: .5, targetY: .5, previousX: .5, previousY: .5 };
@@ -378,22 +394,31 @@ export class RealityOrbEngine {
 
   init() {
     if (!this.canvas || !this.shell) return;
-    this.shell.dataset.orbEngine = 'v65';
+    this.shell.dataset.orbEngine = 'v66';
+    this.shell.classList.add('orb-loading');
+    this.shell.style.setProperty('--orb-touch-x', '50%');
+    this.shell.style.setProperty('--orb-touch-y', '50%');
+    this.shell.style.setProperty('--orb-touch-energy', '0');
     this.shell.style.touchAction = 'none';
     this.shell.style.userSelect = 'none';
     this.shell.style.webkitUserSelect = 'none';
     this.shell.style.webkitTouchCallout = 'none';
     Object.assign(this.canvas.style, {
       display: 'block', position: 'absolute', inset: '0', width: '100%', height: '100%',
-      borderRadius: '50%', touchAction: 'none', transform: 'translateZ(0)', imageRendering: 'auto'
+      borderRadius: '50%', touchAction: 'none', transform: 'translateZ(0)', imageRendering: 'auto', opacity: '0'
     });
     this.canvas.setAttribute('aria-hidden', 'true');
     this.bindInput();
     this.bindLifecycle();
-    if (!this.createRenderer()) return;
-    this.resize();
-    this.loadTexture();
-    this.requestFrame();
+    try {
+      if (!this.createRenderer()) return;
+      this.resize();
+      this.loadTexture();
+      this.requestFrame();
+    } catch (error) {
+      console.warn('Reality Orb renderer unavailable:', error);
+      this.fallback('renderer');
+    }
   }
 
   bindLifecycle() {
@@ -401,18 +426,22 @@ export class RealityOrbEngine {
       event.preventDefault();
       this.lost = true;
       this.stop();
-      this.canvas.style.opacity = '0';
-      this.shell.classList.add('webgl-fallback');
+      this.fallback('context-lost');
     };
     this.onContextRestored = () => {
       this.lost = false;
       this.canvas.style.display = 'block';
-      this.canvas.style.opacity = '1';
-      this.shell.classList.remove('webgl-fallback');
-      if (this.createRenderer()) {
-        this.resize();
-        this.loadTexture();
-        this.requestFrame();
+      this.canvas.style.opacity = '0';
+      this.shell.classList.add('orb-loading');
+      try {
+        if (this.createRenderer()) {
+          this.resize();
+          this.loadTexture();
+          this.requestFrame();
+        }
+      } catch (error) {
+        console.warn('Reality Orb restore unavailable:', error);
+        this.fallback('restore');
       }
     };
     this.canvas.addEventListener('webglcontextlost', this.onContextLost, { passive: false });
@@ -459,7 +488,7 @@ export class RealityOrbEngine {
     };
     const gl2 = this.canvas.getContext('webgl2', attributes);
     const gl = gl2 || this.canvas.getContext('webgl', attributes) || this.canvas.getContext('experimental-webgl', attributes);
-    if (!gl) { this.fallback(); return false; }
+    if (!gl) { this.fallback('no-webgl'); return false; }
     this.gl = gl;
     this.webgl2 = Boolean(gl2);
     this.lost = false;
@@ -472,7 +501,7 @@ export class RealityOrbEngine {
     const source = shaderSources(this.webgl2, precision);
     const vertexShader = this.compile(gl.VERTEX_SHADER, source.vertex);
     const fragmentShader = this.compile(gl.FRAGMENT_SHADER, source.fragment);
-    if (!vertexShader || !fragmentShader) { this.fallback(); return false; }
+    if (!vertexShader || !fragmentShader) { this.fallback('shader'); return false; }
 
     const program = gl.createProgram();
     gl.attachShader(program, vertexShader);
@@ -483,7 +512,7 @@ export class RealityOrbEngine {
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
       console.warn('Reality Orb program:', gl.getProgramInfoLog(program));
       gl.deleteProgram(program);
-      this.fallback();
+      this.fallback('program');
       return false;
     }
     this.program = program;
@@ -499,7 +528,7 @@ export class RealityOrbEngine {
     this.mainPosition = position;
 
     const names = ['uTime', 'uPointer', 'uVelocity', 'uTrail1', 'uTrail2', 'uTrail3',
-      'uEnergy', 'uPressure', 'uCharge', 'uRelease', 'uResonance', 'uSpin', 'uFlick', 'uQuality', 'uFieldTexel', 'uMemoryStrength'];
+      'uEnergy', 'uPressure', 'uCharge', 'uRelease', 'uResonance', 'uSpin', 'uFlick', 'uQuality', 'uBreathStrength', 'uFieldTexel', 'uMemoryStrength'];
     this.uniforms = Object.fromEntries(names.map(name => [name, gl.getUniformLocation(program, name)]));
     gl.uniform1i(gl.getUniformLocation(program, 'uTexture'), 0);
     gl.uniform1i(gl.getUniformLocation(program, 'uField'), 1);
@@ -638,6 +667,10 @@ export class RealityOrbEngine {
   loadTexture() {
     const gl = this.gl;
     if (!gl || this.lost) return;
+    this.ready = false;
+    this.shell.classList.add('orb-loading');
+    this.canvas.style.display = 'block';
+    this.canvas.style.opacity = '0';
     const texture = gl.createTexture();
     this.texture = texture;
     gl.activeTexture(gl.TEXTURE0);
@@ -648,32 +681,54 @@ export class RealityOrbEngine {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([35, 4, 52, 255]));
 
-    const image = new Image();
-    image.decoding = 'async';
-    image.onload = () => {
-      if (!this.gl || this.lost || this.destroyed) return;
-      gl.activeTexture(gl.TEXTURE0);
-      gl.bindTexture(gl.TEXTURE_2D, texture);
-      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-      gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
-      if (gl.UNPACK_COLORSPACE_CONVERSION_WEBGL !== undefined) gl.pixelStorei(gl.UNPACK_COLORSPACE_CONVERSION_WEBGL, gl.NONE);
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
-      const powerOfTwo = value => (value & (value - 1)) === 0;
-      if (powerOfTwo(image.width) && powerOfTwo(image.height)) {
-        gl.generateMipmap(gl.TEXTURE_2D);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+    const candidates = [
+      new URL('./divina-orb-v48.png?v=66', import.meta.url).href,
+      new URL('./divina-orb-v48.png', import.meta.url).href,
+      new URL('./divina-orb.png?v=66', import.meta.url).href
+    ];
+    let attempt = 0;
+    const tryNextImage = () => {
+      if (attempt >= candidates.length) {
+        this.fallback('image');
+        return;
       }
-      const anisotropy = gl.getExtension('EXT_texture_filter_anisotropic') ||
-        gl.getExtension('WEBKIT_EXT_texture_filter_anisotropic') || gl.getExtension('MOZ_EXT_texture_filter_anisotropic');
-      if (anisotropy) {
-        const maximum = gl.getParameter(anisotropy.MAX_TEXTURE_MAX_ANISOTROPY_EXT) || 1;
-        gl.texParameterf(gl.TEXTURE_2D, anisotropy.TEXTURE_MAX_ANISOTROPY_EXT, Math.min(4, maximum));
-      }
-      this.ready = true;
-      this.requestFrame();
+      const image = new Image();
+      image.decoding = 'async';
+      image.onload = () => {
+        if (!this.gl || this.lost || this.destroyed) return;
+        try {
+          gl.activeTexture(gl.TEXTURE0);
+          gl.bindTexture(gl.TEXTURE_2D, texture);
+          gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+          gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+          if (gl.UNPACK_COLORSPACE_CONVERSION_WEBGL !== undefined) gl.pixelStorei(gl.UNPACK_COLORSPACE_CONVERSION_WEBGL, gl.NONE);
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+          const powerOfTwo = value => (value & (value - 1)) === 0;
+          if (powerOfTwo(image.width) && powerOfTwo(image.height)) {
+            gl.generateMipmap(gl.TEXTURE_2D);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+          }
+          const anisotropy = gl.getExtension('EXT_texture_filter_anisotropic') ||
+            gl.getExtension('WEBKIT_EXT_texture_filter_anisotropic') || gl.getExtension('MOZ_EXT_texture_filter_anisotropic');
+          if (anisotropy) {
+            const maximum = gl.getParameter(anisotropy.MAX_TEXTURE_MAX_ANISOTROPY_EXT) || 1;
+            gl.texParameterf(gl.TEXTURE_2D, anisotropy.TEXTURE_MAX_ANISOTROPY_EXT, Math.min(4, maximum));
+          }
+          this.ready = true;
+          this.shell.classList.remove('orb-loading', 'webgl-fallback');
+          this.shell.classList.add('orb-live');
+          this.shell.removeAttribute('data-orb-fallback');
+          this.canvas.style.opacity = '1';
+          this.requestFrame();
+        } catch (error) {
+          console.warn('Reality Orb texture unavailable:', error);
+          tryNextImage();
+        }
+      };
+      image.onerror = tryNextImage;
+      image.src = candidates[attempt++];
     };
-    image.onerror = () => this.fallback();
-    image.src = 'divina-orb-v48.png?v=48';
+    tryNextImage();
   }
 
   resize() {
@@ -733,6 +788,9 @@ export class RealityOrbEngine {
       const point = this.point(event);
       this.pointer.x = this.pointer.targetX = this.pointer.previousX = point.x;
       this.pointer.y = this.pointer.targetY = this.pointer.previousY = point.y;
+      this.setTouchPresentation(point, 1);
+      shell.classList.add('is-touching');
+      shell.classList.remove('phase-release');
       this.trail.forEach(item => { item.x = point.x; item.y = point.y; });
       this.velocity.x = this.velocity.y = 0;
       this.previousAngle = Math.atan2(point.y - .5, point.x - .5);
@@ -826,10 +884,12 @@ export class RealityOrbEngine {
     this.state.flick = clamp(Math.max(this.state.flick * .72, speed * .48), 0, 1.35);
     this.state.pressure = event.pressure > 0 ? event.pressure : clamp(.30 + speed * .16, .30, .92);
     this.memoryStrength = 1;
+    this.setTouchPresentation(point, clamp(.46 + speed * .30, .46, 1));
 
     const elapsed = nowMs() - this.holdStartedAt;
     if (this.angularTravel > 1.05) {
       this.state.resonance = clamp(this.state.resonance + Math.abs(angleDelta) * .10, 0, 1.25);
+      this.playShellPhase('resonance', 900);
       this.announce('A matéria da Orbe gira junto com você', 'RESSONÂNCIA');
     } else if (speed > 1.12) {
       this.announce('Um fluxo de luz atravessou a Orbe', 'IMPULSO');
@@ -843,6 +903,7 @@ export class RealityOrbEngine {
       if (!this.down) return;
       this.state.charge = Math.max(this.state.charge, .42);
       this.state.energy = Math.max(this.state.energy, 1.10);
+      this.playShellPhase('resonance', 720);
       this.announce('A sua intenção está entrando na Orbe', 'CANALIZA', true);
       this.haptic('hold');
       this.boostUntil = nowMs() + 2300;
@@ -852,6 +913,7 @@ export class RealityOrbEngine {
       if (!this.down) return;
       this.state.resonance = Math.max(this.state.resonance, .95);
       this.state.energy = Math.max(this.state.energy, 1.28);
+      this.playShellPhase('resonance', 1500);
       this.announce('A Orbe entrou em ressonância com você', 'RESSONÂNCIA', true);
       this.haptic('resonance');
       this.boostUntil = nowMs() + 3000;
@@ -863,6 +925,7 @@ export class RealityOrbEngine {
       this.state.charge = 1;
       this.state.resonance = 1.25;
       this.state.energy = 1.52;
+      this.playShellPhase('resonance', 2300);
       this.announce('O universo está pulsando dentro da Orbe', 'NÚCLEO', true);
       this.haptic('deep');
       this.boostUntil = nowMs() + 3800;
@@ -877,6 +940,9 @@ export class RealityOrbEngine {
     const heldFor = endedAt - this.holdStartedAt;
     this.down = false;
     this.activePointer = null;
+    this.shell.classList.remove('is-touching');
+    this.shell.style.setProperty('--orb-touch-energy', cancelled ? '.22' : '.64');
+    this.playShellPhase('release', cancelled ? 520 : 920);
     this.clearHoldTimers();
     try { this.shell.releasePointerCapture(event.pointerId); } catch {}
 
@@ -888,7 +954,7 @@ export class RealityOrbEngine {
     this.boostUntil = endedAt + 2300;
 
     const isTap = !cancelled && heldFor < 430 && this.totalTravel < .045;
-    if (isTap && endedAt - this.lastTapAt < 370) {
+    if (isTap && this.lastTapAt > 0 && endedAt - this.lastTapAt < 370) {
       this.lastTapAt = 0;
       this.openTarot();
     } else if (isTap) {
@@ -914,6 +980,9 @@ export class RealityOrbEngine {
   cancelActiveTouch() {
     this.down = false;
     this.activePointer = null;
+    this.shell.classList.remove('is-touching');
+    this.shell.style.setProperty('--orb-touch-energy', '.18');
+    this.playShellPhase('release', 520);
     this.clearHoldTimers();
     this.state.pressure = 0;
     this.state.release = Math.max(this.state.release, .46);
@@ -925,6 +994,30 @@ export class RealityOrbEngine {
   clearHoldTimers() {
     this.holdTimers.forEach(clearTimeout);
     this.holdTimers.length = 0;
+  }
+
+  setTouchPresentation(point, intensity = 1) {
+    if (!this.shell || !point) return;
+    this.shell.style.setProperty('--orb-touch-x', `${(clamp(point.x) * 100).toFixed(2)}%`);
+    this.shell.style.setProperty('--orb-touch-y', `${((1 - clamp(point.y)) * 100).toFixed(2)}%`);
+    this.shell.style.setProperty('--orb-touch-energy', clamp(intensity, 0, 1).toFixed(3));
+  }
+
+  playShellPhase(name, duration = 800) {
+    if (!this.shell) return;
+    const className = `phase-${name}`;
+    clearTimeout(this.cssPhaseTimers.get(className));
+    this.shell.classList.remove(className);
+    requestAnimationFrame(() => {
+      if (this.destroyed || !this.shell) return;
+      this.shell.classList.add(className);
+      const timer = setTimeout(() => {
+        this.shell?.classList.remove(className);
+        this.cssPhaseTimers.delete(className);
+        if (!this.down) this.shell?.style.setProperty('--orb-touch-energy', '0');
+      }, duration);
+      this.cssPhaseTimers.set(className, timer);
+    });
   }
 
   announce(text, phase = 'RESPIRA', force = false) {
@@ -967,6 +1060,7 @@ export class RealityOrbEngine {
     this.state.release = 1;
     this.state.resonance = 1.25;
     this.state.charge = Math.max(this.state.charge, .68);
+    this.playShellPhase('resonance', 1500);
     this.boostUntil = nowMs() + 2800;
     this.announce('O portal do Tarot Livre está se abrindo', 'PORTAL', true);
     this.haptic('open');
@@ -1060,6 +1154,7 @@ export class RealityOrbEngine {
     gl.uniform1f(this.uniforms.uSpin, this.state.spin);
     gl.uniform1f(this.uniforms.uFlick, this.state.flick);
     gl.uniform1f(this.uniforms.uQuality, this.shaderQuality);
+    gl.uniform1f(this.uniforms.uBreathStrength, this.reducedMotion ? .28 : 1);
     const fieldTexel = this.fieldEnabled ? 1 / this.fieldSize : 1;
     gl.uniform2f(this.uniforms.uFieldTexel, fieldTexel, fieldTexel);
     gl.uniform1f(this.uniforms.uMemoryStrength, this.fieldEnabled ? this.memoryStrength : 0);
@@ -1084,13 +1179,16 @@ export class RealityOrbEngine {
     }
   }
 
-  fallback() {
+  fallback(reason = 'unknown') {
     this.ready = false;
+    this.stop();
     if (this.canvas) {
-      this.canvas.style.display = 'none';
+      this.canvas.style.display = 'block';
       this.canvas.style.opacity = '0';
     }
+    this.shell?.classList.remove('orb-loading', 'orb-live');
     this.shell?.classList.add('webgl-fallback');
+    if (this.shell) this.shell.dataset.orbFallback = reason;
     this.announce('A Orbe está respirando', 'RESPIRA', true);
   }
 
@@ -1098,6 +1196,8 @@ export class RealityOrbEngine {
     this.destroyed = true;
     this.stop();
     this.clearHoldTimers();
+    this.cssPhaseTimers.forEach(clearTimeout);
+    this.cssPhaseTimers.clear();
     clearTimeout(this.settleTimer);
     this.resizeObserver?.disconnect();
     this.intersectionObserver?.disconnect();

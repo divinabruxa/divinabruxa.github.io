@@ -77,17 +77,23 @@ main{position:relative;z-index:1}
 .orb-stage-ref:before,.orb-stage-ref:after,.orb-stage-ref>.orbit-mark{display:none!important;content:none!important}
 
 /* The circle is defended at three layers: shell, canvas and shader (next stage). */
-.orb-shell{position:relative;isolation:isolate;z-index:2;display:grid;place-items:center;width:88%;height:auto;aspect-ratio:1;margin:0;padding:0;border:0;border-radius:50%;overflow:hidden;clip-path:circle(50% at 50% 50%);background:transparent;cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;overscroll-behavior:contain;contain:layout paint;will-change:transform,filter;filter:drop-shadow(0 0 28px rgba(176,45,255,.44));transition:transform .22s ease,filter .22s ease}
-.orb-shell:before{content:"";position:absolute;z-index:0;inset:0;border-radius:50%;background-image:url("./divina-orb-v48.png?v=48");background-size:cover;background-position:center;opacity:0;transition:opacity .18s}
-.orb-shell.webgl-fallback:before{opacity:1}
-.orb-shell:after{content:"";position:absolute;z-index:3;inset:0;border-radius:50%;pointer-events:none;background:radial-gradient(ellipse at 28% 16%,rgba(255,255,255,.29) 0 2%,rgba(255,255,255,.075) 9%,transparent 27%),radial-gradient(ellipse at 70% 82%,transparent 48%,rgba(2,0,8,.30) 94%);mix-blend-mode:screen;opacity:.58}
-.orb-shell canvas{position:absolute!important;z-index:1!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;border:0!important;border-radius:50%!important;clip-path:circle(50% at 50% 50%)!important;background:transparent!important;touch-action:none!important;transform:translateZ(0);image-rendering:auto}
-.orb-halo{position:absolute;z-index:-1;inset:-18%;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(223,74,255,.32),rgba(133,37,239,.13) 44%,transparent 72%);filter:blur(20px);opacity:.76;animation:v47OrbBreath 5.8s ease-in-out infinite}
-.orb-glass{position:absolute;z-index:4;inset:0;border-radius:50%;pointer-events:none;background:radial-gradient(ellipse at 26% 14%,rgba(255,255,255,.27) 0 1.5%,rgba(255,255,255,.05) 9%,transparent 25%),linear-gradient(137deg,rgba(255,255,255,.09),transparent 30% 70%,rgba(255,91,238,.07));mix-blend-mode:screen;opacity:.52}
-.orb-shell.is-touching{transform:scale(.988);filter:drop-shadow(0 0 45px rgba(212,82,255,.76))}
-.orb-shell.is-touching .orb-halo{opacity:1;transform:scale(1.07)}
-.orb-shell.phase-release{animation:v47OrbRelease .74s cubic-bezier(.16,.84,.2,1)}
-.orb-shell.phase-resonance{filter:drop-shadow(0 0 54px rgba(221,75,255,.8))}
+.orb-shell{--orb-touch-x:50%;--orb-touch-y:50%;--orb-touch-energy:0;--orb-touch-scale:0;position:relative;isolation:isolate;z-index:2;display:grid;place-items:center;width:88%;height:auto;aspect-ratio:1;margin:0;padding:0;border:0;border-radius:50%;overflow:hidden;clip-path:circle(50% at 50% 50%);background:radial-gradient(circle at 50% 52%,#37104f 0,#13051f 45%,#05020b 76%);cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;overscroll-behavior:contain;contain:layout paint;will-change:filter;filter:drop-shadow(0 0 28px rgba(176,45,255,.44));transition:filter .22s ease}
+.orb-shell:before{content:"";position:absolute;z-index:0;inset:-1px;border-radius:50%;pointer-events:none;background-image:url("./divina-orb-v48.png?v=66"),radial-gradient(circle at 50% 52%,#7b1bb4 0 4%,#2b0752 28%,#08020f 72%),radial-gradient(circle,#1c062b,#030107);background-size:cover,cover,cover;background-position:center;transform-origin:var(--orb-touch-x) var(--orb-touch-y);opacity:1;filter:saturate(1.02) brightness(.96);will-change:transform,filter;animation:v66OrbSoulBreath 5.82s cubic-bezier(.42,0,.34,1) infinite;transition:opacity .24s}
+.orb-shell.orb-loading:before,.orb-shell.webgl-fallback:before{opacity:1}
+.orb-shell:after{content:"";position:absolute;z-index:3;inset:0;border-radius:50%;pointer-events:none;background:radial-gradient(circle at var(--orb-touch-x) var(--orb-touch-y),rgba(255,240,255,.50) 0 1.2%,rgba(228,77,255,.20) 4%,rgba(139,42,255,.08) 12%,transparent 27%),radial-gradient(ellipse at 28% 16%,rgba(255,255,255,.27) 0 2%,rgba(255,255,255,.065) 9%,transparent 27%),radial-gradient(ellipse at 70% 82%,transparent 48%,rgba(2,0,8,.30) 94%);mix-blend-mode:screen;opacity:.40;transition:opacity .16s}
+.orb-shell canvas{position:absolute!important;z-index:1!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;border:0!important;border-radius:50%!important;clip-path:circle(50% at 50% 50%)!important;background:transparent!important;touch-action:none!important;transform:translateZ(0);image-rendering:auto;opacity:0;transition:opacity .34s ease}
+.orb-halo{position:absolute;z-index:-1;inset:-18%;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(223,74,255,.35),rgba(133,37,239,.14) 44%,transparent 72%);filter:blur(20px);opacity:.76;animation:v66OrbAuraBreath 5.82s cubic-bezier(.42,0,.34,1) infinite}
+.orb-glass{position:absolute;z-index:4;inset:0;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 50.5% 51.8%,rgba(255,250,255,.78) 0 .45%,rgba(246,168,255,.32) 1.5%,rgba(214,71,255,.14) 4.5%,rgba(137,33,255,.045) 9%,transparent 16%),radial-gradient(ellipse at 26% 14%,rgba(255,255,255,.25) 0 1.5%,rgba(255,255,255,.045) 9%,transparent 25%),linear-gradient(137deg,rgba(255,255,255,.075),transparent 30% 70%,rgba(255,91,238,.055));mix-blend-mode:screen;opacity:.48;will-change:opacity,filter;animation:v66OrbHeart 5.82s cubic-bezier(.42,0,.34,1) infinite}
+.orb-shell.is-touching{--orb-touch-scale:.026;filter:drop-shadow(0 0 46px rgba(212,82,255,.78))}
+.orb-shell.is-touching:after{opacity:.88}
+.orb-shell.is-touching .orb-halo{opacity:1}
+.orb-shell.is-touching .orb-glass{filter:brightness(1.22) saturate(1.18)}
+.orb-shell.phase-release:before{animation:v66OrbReleaseInternal .92s cubic-bezier(.16,.84,.2,1)}
+.orb-shell.phase-release:after{opacity:.69}
+.orb-shell.phase-release .orb-glass{animation:v66OrbHeartRelease .92s cubic-bezier(.16,.84,.2,1)}
+.orb-shell.phase-resonance{filter:drop-shadow(0 0 55px rgba(221,75,255,.82))}
+.orb-shell.phase-resonance:after{opacity:.78}
+.orb-shell.phase-resonance .orb-glass{filter:brightness(1.28) saturate(1.22)}
 .awaken{margin:17px 0 0;color:var(--gold-bright);font:500 13px var(--serif);letter-spacing:.22em;text-transform:uppercase}
 .orb-status{min-height:18px;margin:8px 0 0;color:var(--muted);font-size:12px}
 .touch-hint{margin:5px 0 0;color:#aaa0b0;font-size:12px}
@@ -135,8 +141,11 @@ main{position:relative;z-index:1}
 .section-head h2,h2{font-family:var(--serif);font-weight:400}.drawer nav{display:block}
 
 @keyframes v47ScreenIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-@keyframes v47OrbBreath{0%,100%{transform:scale(.94);opacity:.58}50%{transform:scale(1.06);opacity:.96}}
-@keyframes v47OrbRelease{0%{transform:scale(1)}42%{transform:scale(1.035);filter:drop-shadow(0 0 62px rgba(244,142,255,.9))}100%{transform:scale(1)}}
+@keyframes v66OrbSoulBreath{0%,100%{transform:scale(calc(1.012 + var(--orb-touch-scale)));filter:saturate(1) brightness(.92)}42%{transform:scale(calc(1.068 + var(--orb-touch-scale)));filter:saturate(1.12) brightness(1.07)}50%{transform:scale(calc(1.057 + var(--orb-touch-scale)));filter:saturate(1.08) brightness(1.02)}58%{transform:scale(calc(1.071 + var(--orb-touch-scale)));filter:saturate(1.14) brightness(1.10)}68%{transform:scale(calc(1.052 + var(--orb-touch-scale)));filter:saturate(1.07) brightness(1.01)}}
+@keyframes v66OrbAuraBreath{0%,100%{transform:scale(.94);opacity:.56}42%{transform:scale(1.07);opacity:.96}50%{transform:scale(1.035);opacity:.82}58%{transform:scale(1.075);opacity:1}}
+@keyframes v66OrbHeart{0%,100%{opacity:.39;filter:brightness(.86)}42%{opacity:.67;filter:brightness(1.18)}50%{opacity:.54;filter:brightness(1.02)}58%{opacity:.73;filter:brightness(1.26)}68%{opacity:.49;filter:brightness(.98)}}
+@keyframes v66OrbReleaseInternal{0%{transform:scale(1.04);filter:saturate(1.08) brightness(1.04)}38%{transform:scale(1.105);filter:saturate(1.28) brightness(1.24)}100%{transform:scale(1.018);filter:saturate(1.02) brightness(.96)}}
+@keyframes v66OrbHeartRelease{0%{opacity:.52;filter:brightness(1)}36%{opacity:.92;filter:brightness(1.45)}100%{opacity:.43;filter:brightness(.94)}}
 @keyframes v47MiniBreath{0%,100%{filter:saturate(.94);box-shadow:0 0 16px rgba(171,49,239,.66),0 0 0 4px rgba(223,180,109,.06)}50%{filter:saturate(1.18);box-shadow:0 0 28px rgba(225,66,220,.88),0 0 0 4px rgba(223,180,109,.09)}}
 @keyframes v58Orbit{to{transform:rotate(360deg)}}
 @keyframes v58OrbitReverse{to{transform:rotate(-360deg)}}
@@ -151,4 +160,4 @@ main{position:relative;z-index:1}
 }
 @media(max-width:365px){.brand b{font-size:15px}.brand small{font-size:6px}.magic-menu-universe{width:96vw}.magic-menu-radial button{width:63px}.magic-menu-radial button span{width:36px;height:36px;font-size:15px}.magic-menu-radial button b{font-size:7px}.magic-menu-rail{grid-template-columns:1fr}.magic-menu-rail button{min-height:55px}}
 @media(orientation:landscape) and (max-height:560px){.home-screen{padding-top:78px}.home-copy h1{font-size:42px}.orb-stage-ref{width:min(55vh,330px);margin-top:4px}.awaken{margin-top:6px}.magic-menu-universe{width:min(54vh,330px)}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.screen.active{animation:none}.orb-halo,.mini-orb{animation:none!important}.orb-shell,.magic-dock button,.magic-menu .magic-menu-sheet{transition:none}.magic-menu-universe *{animation:none!important}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.screen.active{animation:none}.orb-halo,.mini-orb,.orb-shell:before,.orb-glass{animation:none!important}.orb-shell:before{transform:scale(1.025);filter:saturate(1.04) brightness(1)}.orb-shell,.magic-dock button,.magic-menu .magic-menu-sheet{transition:none}.magic-menu-universe *{animation:none!important}}
