@@ -46,9 +46,9 @@ button:focus-visible{outline:2px solid var(--gold-bright);outline-offset:4px}
 .menu-button:active{filter:brightness(1.25);background:rgba(77,25,99,.46)}
 
 /* Pequenas Orbes V70: a mesma galáxia aprovada, viva em repouso e ao toque. */
-.mini-orb{--mini-x:0px;--mini-y:0px;--mini-idle-x:0px;--mini-idle-y:0px;--mini-layer-x:0px;--mini-layer-y:0px;--mini-glow-x:50%;--mini-glow-y:50%;position:relative;isolation:isolate;display:block;flex:none;width:48px;height:48px;overflow:hidden;border:0;border-radius:50%;background-color:#0a0310;background-image:url("./divina-orb-v68.png?v=70");background-size:109%;background-position:calc(50% + var(--mini-idle-x) + var(--mini-x)) calc(50% + var(--mini-idle-y) + var(--mini-y));background-repeat:no-repeat;box-shadow:0 0 23px rgba(207,58,255,.78),0 0 43px rgba(105,34,202,.28);filter:saturate(var(--mini-saturation,1.06)) brightness(var(--mini-brightness,.98));touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;will-change:filter,background-position;transition:filter .18s,box-shadow .18s,background-position .12s}
+.mini-orb{--mini-glow-x:50%;--mini-glow-y:50%;position:relative;isolation:isolate;display:block;flex:none;width:48px;height:48px;overflow:hidden;border:0;border-radius:50%;background-color:#0a0310;background-image:url("./divina-orb-v68.png?v=71");background-size:104%;background-position:50% 50%;background-repeat:no-repeat;box-shadow:0 0 23px rgba(207,58,255,.78),0 0 43px rgba(105,34,202,.28);filter:saturate(var(--mini-saturation,1.06)) brightness(var(--mini-brightness,.98));touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;will-change:filter;transition:filter .18s,box-shadow .18s}
 .mini-orb:before{content:"";position:absolute;z-index:3;inset:-10%;border-radius:50%;pointer-events:none;background:radial-gradient(circle at var(--mini-glow-x) var(--mini-glow-y),rgba(255,248,224,.94) 0 2%,rgba(238,96,255,.38) 13%,transparent 44%);mix-blend-mode:screen;opacity:0;transition:opacity .16s}
-.mini-orb:after{content:"";position:absolute;z-index:2;inset:0;border-radius:50%;pointer-events:none;background-image:radial-gradient(ellipse at 27% 15%,rgba(255,255,255,.20),transparent 24%),url("./divina-orb-v68.png?v=70");background-size:100% 100%,112%;background-position:center,calc(50% + var(--mini-layer-x)) calc(50% + var(--mini-layer-y));background-repeat:no-repeat;mix-blend-mode:screen;opacity:var(--mini-layer-opacity,.14);will-change:opacity,background-position}
+.mini-orb:after{content:"";position:absolute;z-index:2;inset:0;border-radius:50%;pointer-events:none;background-image:radial-gradient(ellipse at 27% 15%,rgba(255,255,255,.20),transparent 24%),url("./divina-orb-v68.png?v=71");background-size:100% 100%,104%;background-position:center,50% 50%;background-repeat:no-repeat;mix-blend-mode:screen;opacity:var(--mini-layer-opacity,.14);will-change:opacity}
 .mini-orb.mini-awake{filter:saturate(1.28) brightness(1.22);box-shadow:0 0 29px rgba(233,83,255,.98),0 0 57px rgba(128,50,226,.48)}
 .mini-orb.mini-awake:before{opacity:1}.mini-orb.mini-release:before{animation:v68MiniRelease .62s ease-out}
 
@@ -144,6 +144,36 @@ main{position:relative;z-index:1}
 .drawer.magic-menu.open .magic-menu-radial button,.drawer.magic-menu.open .magic-menu-rail button,.drawer.magic-menu.open .magic-menu-extra button{animation:v68MenuReveal .42s ease backwards}
 .drawer.magic-menu.open .magic-menu-radial button:nth-child(2),.drawer.magic-menu.open .magic-menu-rail button:nth-child(2){animation-delay:.035s}.drawer.magic-menu.open .magic-menu-radial button:nth-child(3),.drawer.magic-menu.open .magic-menu-rail button:nth-child(3){animation-delay:.07s}.drawer.magic-menu.open .magic-menu-radial button:nth-child(4),.drawer.magic-menu.open .magic-menu-rail button:nth-child(4){animation-delay:.105s}.drawer.magic-menu.open .magic-menu-radial button:nth-child(5),.drawer.magic-menu.open .magic-menu-rail button:nth-child(5){animation-delay:.14s}.drawer.magic-menu.open .magic-menu-radial button:nth-child(6),.drawer.magic-menu.open .magic-menu-rail button:nth-child(6){animation-delay:.175s}.drawer.magic-menu.open .magic-menu-radial button:nth-child(7){animation-delay:.21s}.drawer.magic-menu.open .magic-menu-radial button:nth-child(8){animation-delay:.245s}
 
+/* V71 — Menu de um único anel, fiel à referência e completamente estável. */
+.magic-menu-kicker{display:flex;align-items:center;justify-content:center;gap:13px;margin-top:18px;margin-bottom:5px;white-space:nowrap}
+.magic-menu-kicker:before,.magic-menu-kicker:after{content:"";width:min(15vw,105px);height:1px;background:linear-gradient(90deg,transparent,rgba(224,182,108,.48))}.magic-menu-kicker:after{transform:scaleX(-1)}
+.magic-menu-universe{width:min(96vw,520px);margin-top:2px;margin-bottom:22px}
+.magic-menu-universe:before{inset:24%;background:radial-gradient(circle,rgba(224,66,255,.34),rgba(112,36,218,.13) 48%,transparent 72%);animation:v71SacredAura 7.8s ease-in-out infinite}
+.magic-menu-orbits{inset:16%;border-color:rgba(231,190,117,.55);box-shadow:inset 0 0 32px rgba(148,47,214,.08),0 0 28px rgba(207,139,68,.06);animation:none!important}
+.magic-menu-orbits i{display:none!important;animation:none!important}
+.magic-menu-orbits:before,.magic-menu-orbits:after{width:5px;height:5px;background:#f8dda8;box-shadow:0 0 7px #ffd98c,0 0 17px #dc7cff;animation:v71OrbitStar 4.8s ease-in-out infinite}
+.magic-menu-orbits:before{left:50%;top:-3px}.magic-menu-orbits:after{right:-3px;top:50%;animation-delay:-2.4s}
+.magic-menu-core{width:42%;transform:none!important}
+.magic-menu-core:before{inset:-24%;animation:v71SacredAura 7.8s ease-in-out infinite}
+.magic-menu-core .mini-orb{background-position:50% 50%!important;transform:none!important;box-shadow:0 0 34px rgba(222,73,255,.96),0 0 78px rgba(111,42,211,.48),0 0 118px rgba(87,25,164,.18)}
+.magic-menu-radial button{width:136px;height:48px;min-height:48px;display:flex;align-items:center;justify-content:flex-start;gap:8px;color:#d4c9d6;text-align:left;filter:none;transform:none}
+.magic-menu-radial button span{flex:0 0 44px;width:44px;height:44px;border-color:rgba(232,193,121,.72);background:radial-gradient(circle at 35% 25%,rgba(101,36,133,.38),transparent 44%),linear-gradient(145deg,rgba(18,8,28,.98),rgba(4,2,9,.98));box-shadow:inset 0 0 18px rgba(166,47,218,.17),0 0 14px rgba(222,173,92,.08)}
+.magic-menu-radial button b{font:500 10px/1.12 var(--serif);white-space:normal;text-shadow:0 0 14px rgba(230,185,111,.12)}
+.magic-menu-radial button:nth-child(1),.magic-menu-radial button:nth-child(5){left:50%;width:120px;height:74px;flex-direction:column;justify-content:flex-start;gap:4px;text-align:center;transform:translateX(-50%)}
+.magic-menu-radial button:nth-child(1){top:calc(16% - 22px)}
+.magic-menu-radial button:nth-child(2){left:calc(75% - 22px);right:auto;top:calc(25% - 22px)}
+.magic-menu-radial button:nth-child(3){left:calc(84% - 22px);right:auto;top:calc(50% - 22px)}
+.magic-menu-radial button:nth-child(4){left:calc(75% - 22px);right:auto;top:calc(75% - 22px);bottom:auto}
+.magic-menu-radial button:nth-child(5){top:calc(84% - 22px);bottom:auto}
+.magic-menu-radial button:nth-child(6),.magic-menu-radial button:nth-child(7),.magic-menu-radial button:nth-child(8){left:auto;flex-direction:row-reverse;text-align:right}
+.magic-menu-radial button:nth-child(6){right:calc(75% - 22px);top:calc(75% - 22px);bottom:auto}
+.magic-menu-radial button:nth-child(7){right:calc(84% - 22px);top:calc(50% - 22px)}
+.magic-menu-radial button:nth-child(8){right:calc(75% - 22px);top:calc(25% - 22px)}
+.magic-menu-radial button:hover span,.magic-menu-radial button:focus-visible span,.magic-menu-radial button.is-current span{border-color:#f2ce8a;box-shadow:inset 0 0 20px rgba(185,59,234,.24),0 0 16px rgba(231,183,101,.25)}
+.magic-dock .dock-orb:before{top:-29px;width:82px;height:82px}
+.magic-dock .dock-orb .mini-orb,.magic-dock .dock-orb .mini-orb.mini-awake{top:-20px;width:60px;height:60px;background-position:50% 50%!important;transform:translateX(-50%)!important}
+.magic-menu-brand .mini-orb,.brand .mini-orb{background-position:50% 50%!important;transform:none!important}
+
 /* Compatibilidade das demais telas. */
 .section-head h2,h2{font-family:var(--serif);font-weight:400}.drawer nav{display:block}.toast{z-index:90}
 
@@ -158,16 +188,18 @@ main{position:relative;z-index:1}
 @keyframes v68MenuCoreBreath{0%,100%{opacity:.46;filter:blur(15px)}50%{opacity:1;filter:blur(11px)}}
 @keyframes v68MenuReveal{from{opacity:0;filter:blur(4px) brightness(1.35)}to{opacity:1;filter:none}}
 @keyframes v70DockAura{0%,100%{opacity:.46;filter:blur(11px)}50%{opacity:.92;filter:blur(7px)}}
+@keyframes v71SacredAura{0%,100%{opacity:.50;filter:blur(19px)}50%{opacity:.94;filter:blur(14px)}}
+@keyframes v71OrbitStar{0%,100%{opacity:.48;filter:brightness(.9)}50%{opacity:1;filter:brightness(1.45)}}
 
 @media(max-width:430px){
   .app-header{padding-left:14px;padding-right:14px}.brand{gap:9px}.brand .mini-orb{width:43px;height:43px}.brand b{font-size:17px}.brand small{font-size:7px;letter-spacing:.24em}
   .menu-button{min-width:50px;width:50px;padding:0;grid-template-columns:1fr;grid-template-rows:1fr 1fr;place-content:center;gap:2px}.menu-button i{grid-column:1;width:20px;margin-left:auto;margin-right:auto}.menu-button span{display:none}
   .home-screen{padding-top:calc(99px + env(safe-area-inset-top))}.home-copy h1{font-size:clamp(47px,13.4vw,68px)}.home-copy .intro{font-size:15px}
   .orb-stage-ref{width:min(93vw,46svh,410px);margin-top:15px}.awaken{font-size:11px;letter-spacing:.17em}.orb-status,.touch-hint{font-size:11px}
-  .magic-dock{width:calc(100% - 16px);height:75px;--dock-height:75px}.magic-dock small{font-size:8px}.magic-dock .dock-orb .mini-orb{width:60px;height:60px;top:-24px}.magic-dock .dock-orb small{margin-top:29px}
-  .magic-menu .magic-menu-sheet{padding-left:11px;padding-right:11px}.magic-menu-universe{width:min(95vw,382px)}.magic-menu-radial button{width:69px}.magic-menu-radial button span{width:39px;height:39px;font-size:16px}.magic-menu-radial button b{font-size:8px}
+  .magic-dock{width:calc(100% - 16px);height:75px;--dock-height:75px}.magic-dock small{font-size:8px}.magic-dock .dock-orb .mini-orb{width:58px;height:58px;top:-19px}.magic-dock .dock-orb small{margin-top:29px}
+  .magic-menu .magic-menu-sheet{padding-left:8px;padding-right:8px}.magic-menu-universe{width:min(97vw,410px)}.magic-menu-radial button{width:110px;gap:6px}.magic-menu-radial button:nth-child(3),.magic-menu-radial button:nth-child(7){width:94px}.magic-menu-radial button span{width:40px;height:40px;flex-basis:40px;font-size:16px}.magic-menu-radial button b{font-size:8px}
   .magic-menu-rail{gap:7px}.magic-menu-rail button{min-height:63px;padding:8px;grid-template-columns:34px 1fr;column-gap:7px}.magic-menu-rail button>span{width:32px;height:32px}.magic-menu-rail strong{font-size:8px}.magic-menu-rail small{font-size:7px}
 }
-@media(max-width:365px){.brand b{font-size:15px}.brand small{font-size:6px}.magic-menu-universe{width:97vw}.magic-menu-radial button{width:63px}.magic-menu-radial button span{width:36px;height:36px}.magic-menu-radial button b{font-size:7px}.magic-menu-rail{grid-template-columns:1fr}.magic-menu-rail button{min-height:56px}}
+@media(max-width:365px){.brand b{font-size:15px}.brand small{font-size:6px}.magic-menu-universe{width:98vw}.magic-menu-radial button{width:104px}.magic-menu-radial button:nth-child(3),.magic-menu-radial button:nth-child(7){width:88px}.magic-menu-radial button span{width:38px;height:38px;flex-basis:38px}.magic-menu-radial button b{font-size:7px}.magic-menu-rail{grid-template-columns:1fr}.magic-menu-rail button{min-height:56px}}
 @media(orientation:landscape) and (max-height:560px){.home-screen{padding-top:78px}.home-copy h1{font-size:42px}.orb-stage-ref{width:min(58vh,340px);margin-top:4px}.awaken{margin-top:6px}.magic-menu-universe{width:min(58vh,340px)}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.screen.active{animation:none}.orb-stage-ref:before,.orb-shell:before,.mini-orb,.magic-dock .dock-orb:before,.magic-menu-universe:before,.magic-menu-orbits,.magic-menu-orbits i,.magic-menu-core:before{animation:none!important}.orb-shell:before{background-size:103%;filter:saturate(1.04) brightness(1)}.magic-menu .magic-menu-sheet,.orb-shell canvas{transition:none}.drawer.magic-menu.open .magic-menu-radial button,.drawer.magic-menu.open .magic-menu-rail button,.drawer.magic-menu.open .magic-menu-extra button{animation:none}}
