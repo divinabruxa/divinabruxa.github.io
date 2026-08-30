@@ -1,7 +1,7 @@
 import { CONFIG } from './config.js';
 import { escapeHTML } from './storage.js';
 import { createNavigation } from './navigation.js?v=58';
-import { LivingOrb } from './orb-engine.js?v=62';
+import { RealityOrbEngine } from './orb-engine-v64.js?v=64';
 import { bindMiniOrbs } from './mini-orb-engine.js?v=63';
 import { FreeTarot } from './tarot-engine.js';
 import { DailyRitual } from './ritual-engine.js';
@@ -16,7 +16,7 @@ const $$ = selector => [...document.querySelectorAll(selector)];
 const toast = message => { const el=$('#toast'); el.textContent=message; el.classList.add('show'); clearTimeout(toast.timer); toast.timer=setTimeout(()=>el.classList.remove('show'),2400); };
 const { go } = createNavigation();
 bindMiniOrbs();
-const orb = new LivingOrb($('#orbCanvas'),{onOpen:()=>go('tarot')});
+const orb = new RealityOrbEngine($('#orbCanvas'),{onOpen:()=>go('tarot')});
 new FreeTarot($('#tarot'));
 const journal = new JournalEngine($('#journalForm'), $('#entries'), $('#mirrorStats'));
 new DailyRitual($('#dailyCard'), entry => journal.add(entry));
