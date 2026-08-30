@@ -1,7 +1,7 @@
 import { CONFIG } from './config.js';
 import { escapeHTML } from './storage.js';
 import { createNavigation } from './navigation.js?v=58';
-import { LivingOrb } from './orb-engine.js?v=58';
+import { LivingOrb } from './orb-engine.js?v=62';
 import { FreeTarot } from './tarot-engine.js';
 import { DailyRitual } from './ritual-engine.js';
 import { SpreadsEngine } from './spreads-engine.js';

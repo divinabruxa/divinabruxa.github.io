@@ -1,0 +1,10 @@
+{
+  "checkpoint": "V62 Orbe Viva",
+  "scope": "somente motor da Orbe, Menu/Home e cache",
+  "replace": ["index.html", "app.js", "orb-engine.js", "visual-v47.css", "sw.js"],
+  "do_not_resend": ["card-00.jpg a card-77.jpg", "tarot-engine.js", "ritual-engine.js", "spreads-engine.js", "ícones e páginas já instalados"],
+  "features": ["fluxo autônomo interno", "interpolação do dedo", "120Hz quando disponível", "Menu Mágico preservado", "zero cartas invertidas"],
+  "tests": {"javascript_syntax":"PASS", "git_diff_check":"PASS", "flat_delta":"PASS"},
+  "environment": "local/STAGING",
+  "real_device_visual": "PENDING — instalar no iPhone"
+}

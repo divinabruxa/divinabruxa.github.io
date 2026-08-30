@@ -1,0 +1,9 @@
+DIVINA BRUXA — V62 ORBE VIVA
+
+ENVIE SOMENTE ESTES ARQUIVOS
+Substitua: index.html, app.js, orb-engine.js, visual-v47.css e sw.js.
+Não reenvie cartas, imagens, ícones ou páginas que já estão no repositório.
+
+O motor ganhou um fluxo autônomo interno: a matéria se move suavemente mesmo
+em repouso e se mistura ao toque, pressão, giro, arraste, flick e toque longo.
+As URLs V62 também impedem o Safari de reutilizar o motor antigo.

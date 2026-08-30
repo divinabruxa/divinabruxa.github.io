@@ -1,4 +1,4 @@
-// DIVINA BRUXA V58 — LIVING TOUCH FINAL CANDIDATE
+// DIVINA BRUXA V62 — LIVING ORB SOUL ENGINE
 // Orbe pura: RESPIRA → DESPERTA → CANALIZA → SOBRECARGA → LIBERA → RESSONA.
 // Efeitos fortes acontecem DENTRO da esfera, com orçamento adaptativo para iPhone/Safari.
 export class LivingOrb {
@@ -61,6 +61,9 @@ export class LivingOrb {
         float charge=smoothstep(1.55,3.8,phase);
         float motion=clamp(e+burst*.62+charge*.58+resonance*.26,0.,2.15);
         float living=.5+.5*sin(t*.43+fbm(uv*3.2+t*.035)*2.8);
+        // Movimento autônomo: a matéria continua viva mesmo sem um dedo.
+        float soulPulse=.5+.5*sin(t*.31+fbm(uv*1.7+t*.03)*4.0);
+        float soulFlow=(.0024+.0038*soulPulse)*(1.0-smoothstep(.34,.5,r));
 
         // A textura continua fotográfica; a magia deforma apenas onde a mão atua.
         float vortex=(.006+.043*motion)*exp(-d*3.8);
@@ -73,6 +76,7 @@ export class LivingOrb {
         warped += (local-dp)*(.08*motion);
         float orbitalFlow=flow*(.010+.012*resonance)*exp(-r*2.8);
         warped += vec2(-c.y,c.x)*orbitalFlow*(.55+.45*sin(t*2.0+r*19.0));
+        warped += vec2(-c.y,c.x)*soulFlow*sin(t*.55+r*8.0);
         float n=(fbm(uv*7.0+vec2(t*.12,-t*.08))-.5)*.010*(.22+motion);
         warped += vec2(n,-n*.72);
         // respiração global muito sutil
