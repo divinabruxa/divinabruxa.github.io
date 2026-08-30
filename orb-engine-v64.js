@@ -1,11 +1,12 @@
 /*
- * DIVINA BRUXA — REALITY ORB ENGINE V64
+ * DIVINA BRUXA — REALITY ORB ENGINE V65 · SOUL MEMORY
  *
  * Um motor novo, criado para a Orbe das Realidades:
  * - WebGL 2 com fallback WebGL 1 e fallback fotográfico;
  * - entrada de baixa latência com eventos coalescidos e previsão curta;
  * - animação independente da taxa da tela (60/90/120 Hz);
  * - resolução Retina adaptativa por desempenho real do aparelho;
+ * - campo de memória GPU: o plasma recorda e dissolve o caminho do dedo;
  * - plasma, luz e rastros exclusivamente dentro da esfera;
  * - toque, pressão, arraste, giro, impulso, toque longo e duplo toque;
  * - haptics preparados para Web, iOS/Android e futuro app Capacitor.
@@ -45,6 +46,9 @@ function shaderSources(webgl2, fragmentPrecision) {
 
   const fragment = `${header}
     uniform sampler2D uTexture;
+    uniform sampler2D uField;
+    uniform vec2 uFieldTexel;
+    uniform float uMemoryStrength;
     uniform float uTime;
     uniform vec2 uPointer;
     uniform vec2 uVelocity;
@@ -142,6 +146,21 @@ function shaderSources(webgl2, fragmentPrecision) {
       vec2 trailDirection = safeNormal(uPointer - uTrail3);
       sampleUv += vec2(-trailDirection.y, trailDirection.x) * trailCloud * .0038;
 
+      // Campo de memória persistente: cada pixel tocado continua fluindo por instantes.
+      vec4 soulMemory = vec4(0.0);
+      vec2 memoryGradient = vec2(0.0);
+      if(uMemoryStrength > .002){
+        soulMemory = SAMPLE(uField, vUv);
+        float memoryLeft = SAMPLE(uField, clamp(vUv - vec2(uFieldTexel.x, 0.0), vec2(.001), vec2(.999))).r;
+        float memoryRight = SAMPLE(uField, clamp(vUv + vec2(uFieldTexel.x, 0.0), vec2(.001), vec2(.999))).r;
+        float memoryDown = SAMPLE(uField, clamp(vUv - vec2(0.0, uFieldTexel.y), vec2(.001), vec2(.999))).r;
+        float memoryUp = SAMPLE(uField, clamp(vUv + vec2(0.0, uFieldTexel.y), vec2(.001), vec2(.999))).r;
+        memoryGradient = vec2(memoryRight - memoryLeft, memoryUp - memoryDown);
+      }
+      vec2 memoryCurl = vec2(-memoryGradient.y, memoryGradient.x);
+      sampleUv += memoryCurl * (.012 + soulMemory.g * .009) * soulMemory.r;
+      sampleUv -= memoryGradient * .0045 * soulMemory.r;
+
       sampleUv = clamp(sampleUv, vec2(.002), vec2(.998));
       vec4 color = SAMPLE(uTexture, sampleUv);
 
@@ -172,6 +191,12 @@ function shaderSources(webgl2, fragmentPrecision) {
       if(energy > .025) trailTexture += .42 * fbm(vUv * 14.0 + vec2(-time * .41, time * .29));
       color.rgb += vec3(.58, .12, .94) * trailCloud * trailTexture * .48;
       color.rgb += vec3(1.0, .61, .30) * trailCloud * trailCloud * (.11 + uFlick * .20);
+
+      // A memória não vira uma linha: reaparece como matéria difusa e viva.
+      float memoryTexture = .62 + livingCloud * .38;
+      color.rgb += vec3(.46, .08, .82) * soulMemory.r * memoryTexture * .36;
+      color.rgb += vec3(.93, .27, 1.0) * soulMemory.g * soulMemory.r * .31;
+      color.rgb += vec3(1.0, .65, .27) * soulMemory.g * soulMemory.g * .12;
 
       // Toque longo: a nebulosa ganha profundidade e parece reunir intenção.
       float chargeVeil = 0.0;
@@ -226,7 +251,66 @@ function shaderSources(webgl2, fragmentPrecision) {
       ${output}
     }`;
 
-  return { vertex, fragment };
+  const fieldHeader = webgl2 ? `#version 300 es
+    precision ${fragmentPrecision} float;
+    in vec2 vUv;
+    out vec4 memoryColor;
+    #define SAMPLE texture` : `
+    precision ${fragmentPrecision} float;
+    varying vec2 vUv;
+    #define SAMPLE texture2D`;
+  const fieldOutput = webgl2 ? 'memoryColor = field;' : 'gl_FragColor = field;';
+  const fieldFragment = `${fieldHeader}
+    uniform sampler2D uPreviousField;
+    uniform float uTime;
+    uniform float uDelta;
+    uniform float uDown;
+    uniform float uEnergy;
+    uniform float uFlick;
+    uniform vec2 uPointer;
+    uniform vec2 uVelocity;
+    uniform vec2 uTrail1;
+    uniform vec2 uTrail2;
+    uniform vec2 uTrail3;
+
+    float segmentDistance(vec2 p, vec2 a, vec2 b){
+      vec2 pa = p - a;
+      vec2 ba = b - a;
+      float h = clamp(dot(pa, ba) / max(dot(ba, ba), .00001), 0.0, 1.0);
+      return length(pa - ba * h);
+    }
+
+    void main(){
+      vec2 centered = vUv - .5;
+      float radius = length(centered);
+      float frames = clamp(uDelta * 60.0, .25, 4.0);
+      vec2 velocity = clamp(uVelocity, vec2(-2.6), vec2(2.6));
+
+      // A memória é transportada pela velocidade do gesto e por uma corrente lenta.
+      vec2 curl = vec2(-centered.y, centered.x);
+      float breathingDrift = sin(uTime * .43 + radius * 8.0) * .0016;
+      vec2 backtrace = vUv - velocity * (.0015 + uDown * .0019) + curl * breathingDrift;
+      vec4 previous = SAMPLE(uPreviousField, clamp(backtrace, vec2(.002), vec2(.998)));
+      float decay = pow(.966, frames);
+      float memory = previous.r * decay;
+      float shimmer = previous.g * pow(.949, frames);
+
+      vec2 touchDelta = vUv - uPointer;
+      float brush = exp(-dot(touchDelta, touchDelta) * 174.0) * uDown * clamp(uEnergy, 0.0, 1.5);
+      float pathDistance = min(segmentDistance(vUv, uPointer, uTrail1),
+                           min(segmentDistance(vUv, uTrail1, uTrail2),
+                               segmentDistance(vUv, uTrail2, uTrail3)));
+      float path = exp(-pathDistance * (47.0 - uFlick * 8.0)) * uDown * clamp(.24 + length(velocity) * .28, 0.0, 1.25);
+      float impulse = clamp(brush + path * .68, 0.0, 1.0);
+      memory = clamp(max(memory, impulse) + impulse * .11, 0.0, 1.0);
+      shimmer = clamp(max(shimmer, brush * (.30 + uFlick * .54) + path * .18), 0.0, 1.0);
+
+      float sphereMask = 1.0 - smoothstep(.485, .505, radius);
+      vec4 field = vec4(memory * sphereMask, shimmer * sphereMask, previous.b * decay, 1.0);
+      ${fieldOutput}
+    }`;
+
+  return { vertex, fragment, fieldFragment };
 }
 
 export class RealityOrbEngine {
@@ -238,6 +322,14 @@ export class RealityOrbEngine {
     this.program = null;
     this.texture = null;
     this.uniforms = {};
+    this.fieldProgram = null;
+    this.fieldUniforms = {};
+    this.fieldTextures = [];
+    this.fieldFramebuffers = [];
+    this.fieldRead = 0;
+    this.fieldEnabled = false;
+    this.neutralField = null;
+    this.memoryStrength = 0;
     this.webgl2 = false;
     this.ready = false;
     this.lost = false;
@@ -278,6 +370,7 @@ export class RealityOrbEngine {
     this.renderScale = this.baseScale;
     this.maxPixels = this.deviceTier === 'low' ? 960 : this.deviceTier === 'mid' ? 1440 : 1792;
     this.shaderQuality = this.deviceTier === 'low' ? .66 : this.deviceTier === 'mid' ? .84 : 1;
+    this.fieldSize = this.reducedMotion ? 96 : this.deviceTier === 'low' ? 128 : this.deviceTier === 'mid' ? 192 : 256;
     this.dpr = clamp(window.devicePixelRatio || 1, 1, 3);
 
     this.init();
@@ -285,7 +378,7 @@ export class RealityOrbEngine {
 
   init() {
     if (!this.canvas || !this.shell) return;
-    this.shell.dataset.orbEngine = 'v64';
+    this.shell.dataset.orbEngine = 'v65';
     this.shell.style.touchAction = 'none';
     this.shell.style.userSelect = 'none';
     this.shell.style.webkitUserSelect = 'none';
@@ -403,11 +496,16 @@ export class RealityOrbEngine {
     gl.enableVertexAttribArray(position);
     gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
     this.buffer = buffer;
+    this.mainPosition = position;
 
     const names = ['uTime', 'uPointer', 'uVelocity', 'uTrail1', 'uTrail2', 'uTrail3',
-      'uEnergy', 'uPressure', 'uCharge', 'uRelease', 'uResonance', 'uSpin', 'uFlick', 'uQuality'];
+      'uEnergy', 'uPressure', 'uCharge', 'uRelease', 'uResonance', 'uSpin', 'uFlick', 'uQuality', 'uFieldTexel', 'uMemoryStrength'];
     this.uniforms = Object.fromEntries(names.map(name => [name, gl.getUniformLocation(program, name)]));
     gl.uniform1i(gl.getUniformLocation(program, 'uTexture'), 0);
+    gl.uniform1i(gl.getUniformLocation(program, 'uField'), 1);
+
+    this.fieldEnabled = this.createFieldPipeline(source);
+    if (!this.fieldEnabled) this.createNeutralFieldTexture();
 
     const viewportLimit = Number(gl.getParameter(gl.MAX_RENDERBUFFER_SIZE) || this.maxPixels);
     this.maxPixels = Math.min(this.maxPixels, viewportLimit);
@@ -425,6 +523,116 @@ export class RealityOrbEngine {
       return null;
     }
     return shader;
+  }
+
+  createFieldPipeline(source) {
+    const gl = this.gl;
+    const vertexShader = this.compile(gl.VERTEX_SHADER, source.vertex);
+    const fragmentShader = this.compile(gl.FRAGMENT_SHADER, source.fieldFragment);
+    if (!vertexShader || !fragmentShader) return false;
+
+    const program = gl.createProgram();
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
+    gl.linkProgram(program);
+    gl.deleteShader(vertexShader);
+    gl.deleteShader(fragmentShader);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      console.warn('Reality Orb memory field:', gl.getProgramInfoLog(program));
+      gl.deleteProgram(program);
+      return false;
+    }
+
+    this.fieldProgram = program;
+    this.fieldPosition = gl.getAttribLocation(program, 'aPosition');
+    const names = ['uTime', 'uDelta', 'uDown', 'uEnergy', 'uFlick', 'uPointer', 'uVelocity', 'uTrail1', 'uTrail2', 'uTrail3'];
+    this.fieldUniforms = Object.fromEntries(names.map(name => [name, gl.getUniformLocation(program, name)]));
+    gl.useProgram(program);
+    gl.uniform1i(gl.getUniformLocation(program, 'uPreviousField'), 1);
+
+    this.fieldTextures = [];
+    this.fieldFramebuffers = [];
+    for (let index = 0; index < 2; index++) {
+      const texture = gl.createTexture();
+      gl.activeTexture(gl.TEXTURE1);
+      gl.bindTexture(gl.TEXTURE_2D, texture);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      const internalFormat = this.webgl2 ? gl.RGBA8 : gl.RGBA;
+      gl.texImage2D(gl.TEXTURE_2D, 0, internalFormat, this.fieldSize, this.fieldSize, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+
+      const framebuffer = gl.createFramebuffer();
+      gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
+      gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0);
+      if (gl.checkFramebufferStatus(gl.FRAMEBUFFER) !== gl.FRAMEBUFFER_COMPLETE) {
+        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+        return false;
+      }
+      gl.viewport(0, 0, this.fieldSize, this.fieldSize);
+      gl.clearColor(0, 0, 0, 0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      this.fieldTextures.push(texture);
+      this.fieldFramebuffers.push(framebuffer);
+    }
+
+    this.fieldRead = 0;
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    gl.viewport(0, 0, Math.max(1, this.canvas.width), Math.max(1, this.canvas.height));
+    gl.clearColor(0, 0, 0, 0);
+    gl.useProgram(this.program);
+    this.bindQuad(this.mainPosition);
+    return true;
+  }
+
+  createNeutralFieldTexture() {
+    const gl = this.gl;
+    if (!gl) return;
+    const texture = gl.createTexture();
+    this.neutralField = texture;
+    gl.activeTexture(gl.TEXTURE1);
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 255]));
+    gl.activeTexture(gl.TEXTURE0);
+  }
+
+  bindQuad(position) {
+    const gl = this.gl;
+    if (!gl || position == null || position < 0) return;
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
+    gl.enableVertexAttribArray(position);
+    gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
+  }
+
+  updateField(time, seconds) {
+    if (!this.fieldEnabled || !this.fieldProgram || this.fieldTextures.length !== 2) return;
+    const gl = this.gl;
+    const writeIndex = 1 - this.fieldRead;
+    gl.bindFramebuffer(gl.FRAMEBUFFER, this.fieldFramebuffers[writeIndex]);
+    gl.viewport(0, 0, this.fieldSize, this.fieldSize);
+    gl.useProgram(this.fieldProgram);
+    this.bindQuad(this.fieldPosition);
+    gl.activeTexture(gl.TEXTURE1);
+    gl.bindTexture(gl.TEXTURE_2D, this.fieldTextures[this.fieldRead]);
+    gl.uniform1f(this.fieldUniforms.uTime, (time - this.startedAt) / 1000);
+    gl.uniform1f(this.fieldUniforms.uDelta, seconds);
+    gl.uniform1f(this.fieldUniforms.uDown, this.down ? 1 : 0);
+    gl.uniform1f(this.fieldUniforms.uEnergy, this.state.energy);
+    gl.uniform1f(this.fieldUniforms.uFlick, this.state.flick);
+    gl.uniform2f(this.fieldUniforms.uPointer, this.pointer.x, this.pointer.y);
+    gl.uniform2f(this.fieldUniforms.uVelocity, clamp(this.velocity.x * .28, -2.6, 2.6), clamp(this.velocity.y * .28, -2.6, 2.6));
+    gl.uniform2f(this.fieldUniforms.uTrail1, this.trail[0].x, this.trail[0].y);
+    gl.uniform2f(this.fieldUniforms.uTrail2, this.trail[1].x, this.trail[1].y);
+    gl.uniform2f(this.fieldUniforms.uTrail3, this.trail[2].x, this.trail[2].y);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+    this.fieldRead = writeIndex;
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    gl.viewport(0, 0, this.canvas.width, this.canvas.height);
   }
 
   loadTexture() {
@@ -532,6 +740,7 @@ export class RealityOrbEngine {
       this.state.energy = Math.max(this.state.energy, 1.02);
       this.state.release = 0;
       this.state.flick = 0;
+      this.memoryStrength = 1;
       this.boostUntil = nowMs() + 2400;
       this.lastFrame = 0;
       this.announce('O coração da Orbe reconheceu o seu toque', 'DESPERTA', true);
@@ -616,6 +825,7 @@ export class RealityOrbEngine {
     this.state.energy = clamp(Math.max(this.state.energy, .72 + speed * .25), 0, 1.55);
     this.state.flick = clamp(Math.max(this.state.flick * .72, speed * .48), 0, 1.35);
     this.state.pressure = event.pressure > 0 ? event.pressure : clamp(.30 + speed * .16, .30, .92);
+    this.memoryStrength = 1;
 
     const elapsed = nowMs() - this.holdStartedAt;
     if (this.angularTravel > 1.05) {
@@ -674,6 +884,7 @@ export class RealityOrbEngine {
     this.state.energy = Math.max(this.state.energy, cancelled ? .65 : heldFor > 900 ? 1.34 : 1.08);
     this.state.resonance = Math.max(this.state.resonance, heldFor > 900 ? .82 : .22);
     this.state.pressure = 0;
+    this.memoryStrength = Math.max(this.memoryStrength, 1);
     this.boostUntil = endedAt + 2300;
 
     const isTap = !cancelled && heldFor < 430 && this.totalTravel < .045;
@@ -706,6 +917,7 @@ export class RealityOrbEngine {
     this.clearHoldTimers();
     this.state.pressure = 0;
     this.state.release = Math.max(this.state.release, .46);
+    this.memoryStrength = Math.max(this.memoryStrength, .72);
     this.boostUntil = nowMs() + 900;
     this.requestFrame();
   }
@@ -781,7 +993,7 @@ export class RealityOrbEngine {
     if (!this.gl || this.lost || this.destroyed || !this.visible || document.hidden) return;
 
     const active = this.down || time < this.boostUntil || this.state.energy > .035 || this.state.release > .025 ||
-      this.state.resonance > .025 || Math.abs(this.state.spin) > .025 || this.state.flick > .025;
+      this.state.resonance > .025 || Math.abs(this.state.spin) > .025 || this.state.flick > .025 || this.memoryStrength > .025;
     const idleInterval = this.reducedMotion ? 1000 / 14 : 1000 / 30;
     if (!active && this.lastFrame && time - this.lastFrame < idleInterval) {
       this.requestFrame();
@@ -813,6 +1025,7 @@ export class RealityOrbEngine {
     this.state.flick *= Math.exp(-(this.down ? 1.8 : 4.4) * seconds);
     this.velocity.x *= Math.exp(-(this.down ? 2.4 : 5.8) * seconds);
     this.velocity.y *= Math.exp(-(this.down ? 2.4 : 5.8) * seconds);
+    this.memoryStrength = this.down ? 1 : this.memoryStrength * Math.exp(-1.72 * seconds);
 
     if (!this.down) {
       const trailFollow = expFollow(4.2, seconds);
@@ -825,10 +1038,14 @@ export class RealityOrbEngine {
     }
 
     const gl = this.gl;
+    this.updateField(time, seconds);
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.useProgram(this.program);
+    this.bindQuad(this.mainPosition);
     gl.activeTexture(gl.TEXTURE0);
     gl.bindTexture(gl.TEXTURE_2D, this.texture);
+    gl.activeTexture(gl.TEXTURE1);
+    gl.bindTexture(gl.TEXTURE_2D, this.fieldEnabled ? this.fieldTextures[this.fieldRead] : this.neutralField);
     gl.uniform1f(this.uniforms.uTime, (time - this.startedAt) / 1000);
     gl.uniform2f(this.uniforms.uPointer, this.pointer.x, this.pointer.y);
     gl.uniform2f(this.uniforms.uVelocity, clamp(this.velocity.x * .28, -2.6, 2.6), clamp(this.velocity.y * .28, -2.6, 2.6));
@@ -843,6 +1060,9 @@ export class RealityOrbEngine {
     gl.uniform1f(this.uniforms.uSpin, this.state.spin);
     gl.uniform1f(this.uniforms.uFlick, this.state.flick);
     gl.uniform1f(this.uniforms.uQuality, this.shaderQuality);
+    const fieldTexel = this.fieldEnabled ? 1 / this.fieldSize : 1;
+    gl.uniform2f(this.uniforms.uFieldTexel, fieldTexel, fieldTexel);
+    gl.uniform1f(this.uniforms.uMemoryStrength, this.fieldEnabled ? this.memoryStrength : 0);
     gl.drawArrays(gl.TRIANGLES, 0, 6);
 
     if ((this.down || time < this.boostUntil) && frameMilliseconds < 70) this.adaptQuality(frameMilliseconds, time);
@@ -897,7 +1117,11 @@ export class RealityOrbEngine {
     const gl = this.gl;
     if (gl) {
       if (this.texture) gl.deleteTexture(this.texture);
+      if (this.neutralField) gl.deleteTexture(this.neutralField);
+      this.fieldTextures.forEach(texture => gl.deleteTexture(texture));
+      this.fieldFramebuffers.forEach(framebuffer => gl.deleteFramebuffer(framebuffer));
       if (this.buffer) gl.deleteBuffer(this.buffer);
+      if (this.fieldProgram) gl.deleteProgram(this.fieldProgram);
       if (this.program) gl.deleteProgram(this.program);
     }
   }
