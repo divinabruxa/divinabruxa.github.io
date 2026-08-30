@@ -1,5 +1,5 @@
-const CACHE='divina-bruxa-v68-living-matter';
-const CORE=['./','./index.html','./app.css','./motion.css','./update-04.css','./update-05.css','./update-06.css','./update-08.css','./update-09.css','./update-11.css','./visual-v68.css','./visual-v68.css?v=68','./divina-orb-v68.png','./divina-orb-v68.png?v=68','./cosmic-background.png','./orb-engine-v68.js','./orb-engine-v68.js?v=68','./app.js','./app.js?v=68','./mini-orb-engine.js','./mini-orb-engine.js?v=63','./navigation.js','./navigation.js?v=58'];
+const CACHE='divina-bruxa-v69-idle-galaxy';
+const CORE=['./','./index.html','./app.css','./motion.css','./update-04.css','./update-05.css','./update-06.css','./update-08.css','./update-09.css','./update-11.css','./visual-v68.css','./visual-v68.css?v=69','./divina-orb-v68.png','./divina-orb-v68.png?v=69','./cosmic-background.png','./orb-engine-v68.js','./orb-engine-v68.js?v=69','./app.js','./app.js?v=69','./mini-orb-engine.js','./mini-orb-engine.js?v=63','./navigation.js','./navigation.js?v=58'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(fetch(e.request).then(r=>{const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy));return r}).catch(()=>caches.match(e.request).then(r=>r||caches.match('./index.html'))))});

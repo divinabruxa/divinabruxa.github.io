@@ -1,5 +1,5 @@
 /*
- * DIVINA BRUXA — LIVING MATTER ENGINE V68
+ * DIVINA BRUXA — LIVING MATTER ENGINE V69 · IDLE GALAXY
  *
  * A borda da esfera nunca se move. A vida acontece dentro dela:
  * respiração orgânica, matéria líquida, profundidade óptica, cáusticas,
@@ -8,7 +8,7 @@
  * como fallback permanente — inclusive em computadores sem aceleração gráfica.
  */
 
-const ORB_IMAGE = new URL('./divina-orb-v68.png?v=68', import.meta.url).href;
+const ORB_IMAGE = new URL('./divina-orb-v68.png?v=69', import.meta.url).href;
 const clamp = (value, min = 0, max = 1) => Math.max(min, Math.min(max, value));
 const lerp = (from, to, amount) => from + (to - from) * amount;
 const follow = (rate, seconds) => 1 - Math.exp(-rate * seconds);
@@ -99,39 +99,59 @@ const FRAGMENT_SHADER = `
     float rippleWave = sin(rippleDistance * 25.0 - uRippleAge * 8.6) *
       exp(-rippleDistance * 2.8) * rippleLife;
 
-    float slowNoise = fbm(sphere * 1.52 + vec2(time * .036, -time * .029));
-    float fineNoise = fbm(sphere * 3.36 + vec2(-time * .044, time * .034) + slowNoise * 1.16);
+    float slowNoise = fbm(sphere * 1.42 + vec2(time * .067, -time * .049));
+    float fineNoise = fbm(sphere * 3.24 + vec2(-time * .078, time * .058) + slowNoise * 1.24);
     vec2 livingFlow = vec2(slowNoise - .5, fineNoise - .5);
+    float livingTide = sin(time * .34 + slowNoise * 6.28318 + radius * 3.2);
 
     // A fotografia respira por dentro. A circunferência externa permanece fixa.
-    float innerScale = .982 - uBreath * .018 - energy * .004 * inner;
+    float innerScale = .982 - uBreath * .028 - energy * .004 * inner;
     vec2 material = sphere * innerScale;
-    float soulTurn = sin(time * .17) * .008 + (uBreath - .5) * .014 + uSpin * .018;
+    float soulTurn = sin(time * .21) * .014 + (uBreath - .5) * .021 +
+      livingTide * .004 + uSpin * .018;
     material = rotatePoint(material, soulTurn * (1.0 - radius * .68));
     vec2 tangent = vec2(-material.y, material.x);
-    material += tangent * (slowNoise - .5) * (.020 + uBreath * .009) * inner;
-    material += livingFlow * (.010 + energy * .010) * inner;
+    material += tangent * (slowNoise - .5) * (.031 + uBreath * .012) * inner;
+    material += tangent * livingTide * .006 * inner;
+    material += livingFlow * (.017 + energy * .010) * inner;
     material -= uVelocity * touchField * (.012 + uPressure * .016);
     material += fingerDirection * touchField * uTouch * (.012 + uPressure * .019);
     material += rippleDirection * rippleWave * (.013 + energy * .008);
 
     vec2 sampleUv = clamp(material * .5 + .5, vec2(.008), vec2(.992));
     vec2 deepMaterial = rotatePoint(material * (.992 - uBreath * .006),
-      -.010 - slowNoise * .012 + time * .0018);
+      -.012 - slowNoise * .014 + time * .0043);
     vec2 nearMaterial = rotatePoint(material * .986,
-      .008 + fineNoise * .010 - time * .0014);
+      .010 + fineNoise * .012 - time * .0035);
 
     vec4 base = texture2D(uTexture, sampleUv);
     vec4 deepLayer = texture2D(uTexture, clamp(deepMaterial * .5 + .5, vec2(.008), vec2(.992)));
     vec4 nearLayer = texture2D(uTexture, clamp(nearMaterial * .5 + .5, vec2(.008), vec2(.992)));
-    vec3 color = base.rgb * .68 + deepLayer.rgb * .19 + nearLayer.rgb * .13;
+    vec3 color = base.rgb * .72 + deepLayer.rgb * .16 + nearLayer.rgb * .12;
 
-    // Respiração, relevo esférico e luz interna sem glitter sobreposto.
-    color *= .89 + uBreath * .17 + energy * .055;
+    // Respiração profunda e uma maré luminosa que nunca congela.
+    float galaxyWave = .5 + .5 * sin(time * .48 - radius * 8.0 + slowNoise * 3.7);
+    color *= .855 + uBreath * .245 + galaxyWave * .058 * inner + energy * .055;
     color = pow(max(color, vec3(0.0)), vec3(.965));
     float caustic = pow(.5 + .5 * sin((slowNoise + fineNoise) * 19.0 - time * .66), 14.0);
     color += mix(vec3(.40, .10, .78), vec3(1.0, .56, .19), fineNoise) *
-      caustic * (.026 + uBreath * .038) * inner;
+      caustic * (.034 + uBreath * .050) * inner;
+
+    // Uma presença luminosa atravessa lentamente a galáxia em repouso.
+    vec2 wanderingSoul = vec2(sin(time * .21), cos(time * .17)) * .27;
+    float wanderingGlow = exp(-dot(sphere - wanderingSoul, sphere - wanderingSoul) * 4.2);
+    vec3 wanderingColor = mix(vec3(.49, .12, 1.0), vec3(1.0, .48, .20),
+      .5 + .5 * sin(time * .13));
+    color += wanderingColor * wanderingGlow * (.028 + uBreath * .052) * inner;
+
+    // Somente as estrelas já presentes na fotografia cintilam: não há pontos sobrepostos.
+    float sourceLight = max(base.r, max(base.g, base.b));
+    float existingStar = pow(smoothstep(.70, 1.0, sourceLight), 2.5);
+    float starRhythm = .5 + .5 * sin(time * 3.15 + sampleUv.x * 187.0 +
+      sampleUv.y * 131.0 + fineNoise * 18.0);
+    float starTwinkle = pow(starRhythm, 8.0) * existingStar;
+    color += mix(vec3(.88, .77, 1.0), vec3(1.0, .72, .30), slowNoise) *
+      starTwinkle * (.075 + uBreath * .055);
 
     float touchCore = exp(-fingerDistance * fingerDistance * 31.0);
     color += vec3(.86, .20, 1.0) * touchField * energy * .11;
@@ -150,7 +170,7 @@ const FRAGMENT_SHADER = `
 
     float heart = exp(-dot(sphere - vec2(-.015, .015), sphere - vec2(-.015, .015)) * 7.2);
     color += mix(vec3(.52, .12, 1.0), vec3(1.0, .65, .34), slowNoise) *
-      heart * (.025 + uBreath * .055 + energy * .025);
+      heart * (.032 + uBreath * .078 + energy * .025);
 
     gl_FragColor = vec4(color, edge);
   }
@@ -202,8 +222,8 @@ export class RealityOrbEngine {
     this.pointer = { x: .5, y: .5, targetX: .5, targetY: .5, previousX: .5, previousY: .5 };
     this.velocity = { x: 0, y: 0 };
     this.ripple = { x: .5, y: .5, age: 99 };
-    this.energy = .12;
-    this.targetEnergy = .12;
+    this.energy = .16;
+    this.targetEnergy = .16;
     this.pressure = 0;
     this.targetPressure = 0;
     this.spin = 0;
@@ -472,7 +492,7 @@ export class RealityOrbEngine {
     this.announce(message, 'PULSO');
     this.haptic(7);
     setTimeout(() => {
-      if (!this.down && !this.opening) this.targetEnergy = .15;
+      if (!this.down && !this.opening) this.targetEnergy = .17;
     }, 520);
     this.requestFrame();
   }
@@ -492,7 +512,7 @@ export class RealityOrbEngine {
     setTimeout(() => {
       this.opening = false;
       this.targetPressure = 0;
-      this.targetEnergy = .14;
+      this.targetEnergy = .16;
     }, 1100);
   }
 
@@ -552,7 +572,7 @@ export class RealityOrbEngine {
       this.targetPressure = Math.max(this.targetPressure, .36 + held * .56);
       if (held > .72) this.announce('A Orbe guarda a sua intenção', 'INTENÇÃO');
     } else {
-      this.targetEnergy = Math.max(this.hovering ? .20 : .11, this.targetEnergy * Math.exp(-1.9 * seconds));
+      this.targetEnergy = Math.max(this.hovering ? .24 : .16, this.targetEnergy * Math.exp(-1.9 * seconds));
     }
     this.energy = lerp(this.energy, this.targetEnergy, follow(this.down ? 8.5 : 3.4, seconds));
     this.pressure = lerp(this.pressure, this.targetPressure, follow(this.down ? 7.8 : 5.2, seconds));
@@ -560,6 +580,8 @@ export class RealityOrbEngine {
     this.velocity.y *= Math.exp(-(this.down ? 2.8 : 5.5) * seconds);
     this.spin *= Math.exp(-(this.down ? 1.4 : 3.2) * seconds);
     this.ripple.age += seconds;
+    this.shell?.style.setProperty('--orb-touch-x', `${(this.pointer.x * 100).toFixed(2)}%`);
+    this.shell?.style.setProperty('--orb-touch-y', `${(this.pointer.y * 100).toFixed(2)}%`);
     this.shell?.style.setProperty('--orb-touch-energy', this.energy.toFixed(3));
     this.shell?.style.setProperty('--orb-touch-opacity', clamp(.13 + this.energy * .38, .13, .72).toFixed(3));
     return elapsed;
