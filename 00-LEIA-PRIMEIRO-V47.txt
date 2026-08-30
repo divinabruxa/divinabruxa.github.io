@@ -1,0 +1,34 @@
+DIVINA BRUXA — V47 VISUAL CORE
+
+ETAPA ENTREGUE
+Esta etapa limpa a camada visual da Home, da Orbe e do Menu Mágico.
+O objetivo é criar uma única base de apresentação, sem misturar as folhas
+home-v41 até home-v46.
+
+ARQUIVOS PRINCIPAIS
+- index.html
+- visual-v47.css
+- orb-engine.js
+- sw.js
+
+O QUE FOI CORRIGIDO
+- Home com identidade, mensagem, Orbe e dock; os blocos extras continuam
+  preservados no HTML, mas ficam dentro do Menu/rotas nas próximas etapas.
+- Orbe protegida por círculo no shell, no canvas e no fallback de imagem.
+- Regras antigas de home-v41.css a home-v46.css deixaram de ser carregadas.
+- O Menu Mágico passou a ter uma base única e posições radiais estáveis.
+- Cache recebeu um namespace novo para não reutilizar a versão visual anterior.
+- A imagem da Orbe usa o caminho versionado V47.
+
+COMO INSTALAR NO GITHUB PAGES
+1. Faça uma cópia dos arquivos atuais do repositório.
+2. Extraia este pacote.
+3. Envie os arquivos extraídos diretamente para a raiz do repositório.
+4. Substitua somente os arquivos deste checkpoint quando solicitado; não
+   apague CNAME, manifest.webmanifest, ícones ou os motores existentes.
+5. No iPhone, abra o site em uma aba privada ou limpe os dados do site antes
+   de comparar, para que o Service Worker V47 seja instalado.
+
+IMPORTANTE
+Este é um checkpoint de aparência local/STAGING. Não publique produção nem
+altere DNS nesta etapa. As cartas oficiais serão auditadas em uma etapa própria.

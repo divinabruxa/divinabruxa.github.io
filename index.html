@@ -1,89 +1,77 @@
-<!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
-  <meta name="theme-color" content="#05020b">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Divina Bruxa — Orbe das Realidades</title>
-  <meta name="description" content="A Orbe das Realidades — uma experiência viva de Divina Bruxa.">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="divina-orb-v48.png?v=59" as="image">
-  <link rel="stylesheet" href="styles.css?v=59">
-  <script type="module" src="app.js?v=59"></script>
-</head>
-<body>
-  <div class="starfield" aria-hidden="true"></div>
-  <header class="site-header">
-    <button class="brand" data-home aria-label="Voltar ao início">
-      <img src="orb-mini-v48.png?v=59" alt="" class="brand-orb">
-      <span><strong>DIVINA BRUXA</strong><small>ORBE DAS REALIDADES</small></span>
-    </button>
-    <button id="menuButton" class="menu-button" aria-controls="magicMenu" aria-expanded="false" aria-label="Abrir Menu Mágico">
-      <i></i><i></i><i></i><span>MENU</span>
-    </button>
-  </header>
+<!doctype html><html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#05020b"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Divina Bruxa — Orbe das Realidades</title><meta name="description" content="Tarot da Divina Bruxa — uma experiência viva e instalável.">
+<link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="app.css"><link rel="stylesheet" href="motion.css"><link rel="stylesheet" href="update-04.css"><link rel="stylesheet" href="update-05.css"><link rel="stylesheet" href="update-06.css"><link rel="stylesheet" href="update-08.css"><link rel="stylesheet" href="update-09.css"><link rel="stylesheet" href="update-11.css"><link rel="stylesheet" href="visual-v47.css?v=58"><script type="module" src="app.js?v=58"></script>
 
-  <main class="home" id="home">
-    <div class="home-copy">
-      <p class="eyebrow">O PORTAL ESTÁ ABERTO</p>
-      <h1>Sua jornada<span>✦</span></h1>
-      <p>O universo guardou um caminho para você.</p>
-    </div>
-    <div class="orb-stage">
-      <div class="orb-aura" aria-hidden="true"></div>
-      <button id="orbShell" class="orb-shell" aria-label="Orbe viva. Toque, segure, deslize ou gire. Duplo toque abre o Tarot Livre.">
-        <canvas id="orbCanvas" aria-hidden="true"></canvas>
-        <span class="orb-glass" aria-hidden="true"></span>
-      </button>
-    </div>
-    <p class="awaken">✦ TOQUE PARA DESPERTAR ✦</p>
-    <p id="orbStatus" class="orb-status" aria-live="polite">A Orbe está respirando</p>
-    <p class="touch-hint">Toque duplo abre o Tarot Livre</p>
-  </main>
+<link rel="preload" href="divina-orb-v48.png?v=48" as="image">
+<link rel="preload" href="cosmic-background.png" as="image">
+</head><body><div class="cosmos" aria-hidden="true"></div>
+<header class="app-header"><button class="brand" data-go="home"><span class="mini-orb"></span><span><b>DIVINA BRUXA</b><small>ORBE DAS REALIDADES</small></span></button><button id="menuBtn" class="menu-button" aria-label="Abrir menu"><i></i><i></i><span>MENU</span></button></header>
+<main id="app">
+<section id="home" class="screen active home-screen">
+<div class="portal-divider"><i></i><b>✦</b><i></i></div>
+<div class="home-copy"><p class="eyebrow">O PORTAL ESTÁ ABERTO</p><h1>Sua jornada<span>✦</span></h1><p class="intro">O universo guardou um caminho para você.</p></div>
+<div class="orb-stage-ref"><button id="orb" class="orb-shell" aria-label="Orbe viva: toque, segure, arraste ou gire; toque duplo abre o Tarot Livre"><span class="orb-halo" aria-hidden="true"></span><canvas id="orbCanvas"></canvas><span class="orb-glass" aria-hidden="true"></span></button></div>
+<p class="awaken">✦ TOQUE PARA DESPERTAR ✦</p><p id="orbStatus" class="orb-status" aria-live="polite">A Orbe está respirando</p><p class="touch-hint">Toque duplo abre o Tarot Livre</p>
 
-  <nav class="bottom-dock" aria-label="Navegação principal">
-    <button class="dock-item active" data-home><span>⌂</span><small>Início</small></button>
-    <button class="dock-item" id="dockPaths"><span>▦</span><small>Caminhos</small></button>
-    <button class="dock-item dock-orb" data-orb-ia><img src="orb-mini-v48.png?v=59" alt=""><small>Orbe IA</small></button>
-    <button class="dock-item" data-placeholder="Diário"><span>▤</span><small>Diário</small></button>
-    <button class="dock-item" data-placeholder="Conta"><span>◎</span><small>Conta</small></button>
-  </nav>
+<section class="home-paths" aria-labelledby="homePathsTitle">
+  <div class="home-section-title"><p>CAMINHOS DA ORBE</p><h2 id="homePathsTitle">Tarot vivo, profundo e belo</h2></div>
+  <div class="home-path-grid">
+    <button class="home-path-card" data-go="tarot"><span class="path-sigil">▣</span><small>78 CARTAS SEM REPETIÇÃO</small><strong>Tarot Livre</strong><em>Uma mesa viva para escolher e revelar no seu ritmo.</em><b>EXPLORAR →</b></button>
+    <button class="home-path-card" data-go="spreads"><span class="path-sigil">✧</span><small>ESTRUTURAS PROFUNDAS</small><strong>Tiragens</strong><em>Cruz Celta, Triângulo Mágico, Árvore da Vida e muito mais.</em><b>EXPLORAR →</b></button>
+    <button class="home-path-card" data-go="daily"><span class="path-sigil">☉</span><small>UM ENCONTRO POR DIA</small><strong>Carta do Dia</strong><em>Uma carta profunda para iluminar o seu agora.</em><b>EXPLORAR →</b></button>
+  </div>
+</section>
 
-  <aside id="magicMenu" class="magic-menu" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="menuTitle">
-    <div class="menu-sheet">
-      <div class="menu-top">
-        <div class="menu-brand"><img src="orb-mini-v48.png?v=59" alt=""><span><strong>DIVINA BRUXA</strong><small>ORBE DAS REALIDADES</small></span></div>
-        <button id="closeMenu" class="close-menu" aria-label="Fechar Menu Mágico">×</button>
-      </div>
-      <h2 id="menuTitle">ORBE VIVA — MENU MÁGICO</h2>
-      <div class="menu-universe">
-        <div class="menu-orbits" aria-hidden="true"><i></i><i></i><i></i></div>
-        <button class="menu-core" data-orb-ia aria-label="Abrir Orbe IA"><img src="orb-mini-v48.png?v=59" alt=""></button>
-        <nav class="radial-menu" aria-label="Caminhos da Orbe">
-          <button data-placeholder="Início"><span>⌂</span><b>Início</b></button>
-          <button data-placeholder="Tiragens"><span>✧</span><b>Tiragens</b></button>
-          <button data-placeholder="Carta do Dia"><span>☉</span><b>Carta do Dia</b></button>
-          <button data-orb-ia><span>✦</span><b>Orbe IA</b></button>
-          <button data-placeholder="Consultas"><span>♙</span><b>Consultas</b></button>
-          <button data-placeholder="Música"><span>♫</span><b>Música</b></button>
-          <button data-placeholder="Conta"><span>◎</span><b>Conta</b></button>
-          <button data-placeholder="Tarot Livre"><span>▣</span><b>Tarot Livre</b></button>
-        </nav>
-      </div>
-      <div class="menu-rail">
-        <button data-placeholder="Tarot Completo"><span>✺</span><strong>TAROT COMPLETO</strong><small>78 cartas · livre e profundo</small></button>
-        <button data-placeholder="Ritual Diário"><span>☾</span><strong>RITUAL DIÁRIO</strong><small>uma carta para o agora</small></button>
-        <button data-placeholder="Consultas"><span>♙</span><strong>CONSULTAS</strong><small>atendimento e orientações</small></button>
-        <button data-orb-ia><span>✦</span><strong>ORBE IA</strong><small>intuitiva e exclusiva</small></button>
-        <button data-placeholder="Música &amp; Vibração"><span>♫</span><strong>MÚSICA &amp; VIBRAÇÃO</strong><small>eleve sua energia</small></button>
-        <button data-placeholder="Loja Mística"><span>◇</span><strong>LOJA MÍSTICA</strong><small>itens para sua jornada</small></button>
-      </div>
-      <div class="menu-chips"><button data-placeholder="Diário">Diário</button><button data-placeholder="Premium">Premium</button><button data-placeholder="Escola do Tarot">Escola</button></div>
+<section class="home-skins" aria-labelledby="homeSkinsTitle">
+  <div class="home-section-title compact"><p>SKINS DA ORBE</p><h2 id="homeSkinsTitle">Vivas e únicas</h2></div>
+  <div class="home-skin-rail">
+    <button data-go="ai"><span class="skin-orb skin-classic"></span><small>Clássica Divina</small></button>
+    <button data-go="ai"><span class="skin-orb skin-lunar"></span><small>Lunar Mistério</small></button>
+    <button data-go="ai"><span class="skin-orb skin-solar"></span><small>Solar Dourada</small></button>
+    <button data-go="ai"><span class="skin-orb skin-ocean"></span><small>Oceanos de Copas</small></button>
+    <button data-go="ai"><span class="skin-orb skin-emerald"></span><small>Esmeralda Ancestral</small></button>
+    <button data-go="ai"><span class="skin-orb skin-fire"></span><small>Fogo Sagrado</small></button>
+    <button data-go="ai"><span class="skin-orb skin-cosmic"></span><small>Cósmica</small></button>
+    <button data-go="ai"><span class="skin-orb skin-eclipse"></span><small>Eclipse Sombria</small></button>
+  </div>
+</section>
+
+<section class="home-touch" aria-labelledby="homeTouchTitle">
+  <div class="home-section-title"><p>A ORBE RESPONDE AO SEU TOQUE</p><h2 id="homeTouchTitle">Magia que reconhece você</h2></div>
+  <div class="home-touch-grid">
+    <div class="touch-art" aria-hidden="true"><img src="divina-orb-v48.png" alt=""><span>☝</span></div>
+    <div class="touch-actions">
+      <div><span>☝</span><p><strong>Toque</strong><small>Desperta a energia</small></p></div>
+      <div><span>✦</span><p><strong>Duplo toque</strong><small>Abre o Tarot Livre</small></p></div>
+      <div><span>◇</span><p><strong>Segurar</strong><small>Firma a sua intenção</small></p></div>
+      <div><span>↻</span><p><strong>Giro</strong><small>Muda o fluxo da luz</small></p></div>
     </div>
-  </aside>
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-</body>
-</html>
+  </div>
+</section>
+
+<section class="home-commerce" aria-label="Consultas e loja">
+  <article><div class="commerce-heading"><span>♙</span><p><small>ATENDIMENTO COM AS BRUXAS</small><strong>Consultas Exclusivas</strong></p></div><button data-go="consultations"><span>Mesa Real Profissional<small>R$ 500</small></span><b>›</b></button><button data-go="consultations"><span>Leitura de Pensamentos<small>R$ 500</small></span><b>›</b></button><button data-go="consultations"><span>Carta de Conselho<small>R$ 300</small></span><b>›</b></button><button class="home-gold-action" data-go="consultations">AGENDAR CONSULTA</button></article>
+  <article><div class="commerce-heading"><span>◇</span><p><small>ITENS PARA A SUA JORNADA</small><strong>Loja Mística</strong></p></div><button data-go="store"><span>Decks de Tarot<small>Ver seleção</small></span><b>›</b></button><button data-go="store"><span>Cristais &amp; Pedras<small>Ver seleção</small></span><b>›</b></button><button data-go="store"><span>Incensos &amp; Essências<small>Ver seleção</small></span><b>›</b></button><button class="home-gold-action" data-go="store">VER LOJA COMPLETA</button></article>
+</section>
+
+<footer class="home-trust"><div><span>▣</span><p><strong>100% RESPONSIVO</strong><small>Mobile first</small></p></div><div><span>✦</span><p><strong>PWA &amp; APP READY</strong><small>Instalável</small></p></div><div><span>♢</span><p><strong>SEGURO &amp; PRIVADO</strong><small>Seus dados protegidos</small></p></div><div><span>☁</span><p><strong>OFFLINE DISPONÍVEL</strong><small>Funções essenciais</small></p></div><div><span>♡</span><p><strong>FEITO COM AMOR</strong><small>Para almas despertas</small></p></div></footer>
+</section>
+
+<section id="tarot" class="screen tarot-screen"><div class="section-head"><div><p class="eyebrow">TAROT LIVRE · MESA REAL</p><h2>A realidade respondeu.</h2><p id="remaining">78 cartas aguardam</p></div><strong id="count">0<small>/78</small></strong></div><div class="deck-progress" aria-hidden="true"><i id="deckProgress"></i></div><div id="revealAltar" class="reveal-altar"><div class="altar-rings" aria-hidden="true"><i></i><i></i><i></i></div><div id="current" class="current table-preview empty" aria-live="polite"><div class="empty-card"><span>✦</span>A próxima carta nascerá da Orbe.<small>Toque somente na Orbe</small></div></div><button id="tableOrb" class="table-orb" aria-label="Revelar próxima carta"><span class="table-orb-light" aria-hidden="true"></span><strong>✦</strong><small id="orbState">TOQUE PARA REVELAR</small></button></div><div class="free-rule"><b>Tarot Livre</b><span>Somente as imagens. Cada toque na Orbe ocupa a próxima posição, sem significado e sem repetição.</span></div><div class="real-table-head"><div><p>MESA REAL</p><h3>78 posições · 13 fileiras de 6</h3></div><div class="table-actions"><button id="shuffleDeck" class="text-button">Embaralhar restantes</button><button id="resetDeck" class="text-button">Recomeçar mesa</button></div></div><div id="realTable" class="real-table" role="list" aria-label="Mesa Real com 78 posições"></div></section>
+
+<section id="daily" class="screen"><p class="eyebrow">RITUAL DIÁRIO</p><h2>Um encontro com o agora.</h2><p class="lead">Respire, declare sua intenção e receba uma carta com significado. Ela permanece a mesma durante todo o dia.</p><div id="dailyCard" class="ritual-panel"></div></section>
+<section id="spreads" class="screen"><p class="eyebrow">TIRAGENS</p><h2>Escolha uma forma.</h2><p class="lead">Aqui as posições e os significados trabalham juntos.</p><div id="spreadGrid" class="card-grid"></div><div id="spreadResult"></div></section>
+<section id="ai" class="screen"><p class="eyebrow">WHIT · ORBE IA · EXCLUSIVO PARA ASSINANTES</p><h2>Converse com presença.</h2><div class="ai-settings panel"><label>Modo de conversa<select id="aiMode"><option value="support">Acolhimento e reflexão</option><option value="tarot">Tarot e símbolos</option><option value="channel">Canalização simbólica</option></select></label><label id="personaField" hidden>Nome da figura simbólica<input id="aiPersona" placeholder="Ex.: Elon Musk"></label><p id="channelNotice" class="security-note" hidden>Esta é uma dramatização ficcional criada por IA. Não é a pessoa real, não acessa pensamentos, memórias privadas ou mensagens espirituais.</p></div><div id="chat" class="chat"><p class="bubble bot">Eu sou Whit. Posso acolher perguntas e refletir sobre símbolos. Minhas respostas são geradas por IA e não substituem ajuda médica, jurídica, financeira ou psicológica.</p></div><form id="chatForm" class="chat-form"><input id="chatInput" required placeholder="Escreva para a Orbe…"><button>Enviar</button></form><button id="clearChat" class="text-button">Limpar conversa</button><p class="security-note">A chave da IA nunca deve ser colocada nos arquivos públicos do GitHub. A conexão acontece por um servidor protegido.</p></section>
+<section id="journal" class="screen"><p class="eyebrow">DIÁRIO DA ORBE</p><h2>Sua memória simbólica.</h2><div class="mirror-head"><div><p class="eyebrow">ESPELHO DA ORBE</p><h3>O que suas leituras revelam.</h3></div></div><div id="mirrorStats" class="mirror-stats"></div><form id="journalForm" class="panel journal-form"><label>Título<input name="title" required placeholder="Nome desta memória"></label><label>Como você está se sentindo?<select name="mood"><option>Em paz</option><option>Curiosa</option><option>Confiante</option><option>Em dúvida</option><option>Ansiosa</option><option>Em transformação</option></select></label><label>Pergunta ou intenção<input name="question" placeholder="O que você deseja compreender?"></label><label>Reflexão<textarea name="text" required placeholder="Escreva sensações, acontecimentos, símbolos e aprendizados…"></textarea></label><label>Temas e palavras-chave<input name="tags" placeholder="amor, trabalho, sonho, decisão…"></label><button class="primary">Guardar no diário</button></form><div class="journal-tools"><input id="journalSearch" type="search" placeholder="Buscar no diário"><button id="exportJournal" class="text-button">Exportar memórias</button></div><div id="entries" class="entries"></div></section>
+<section id="store" class="screen"><p class="eyebrow">LOJA DA ORBE · PRODUTOS REAIS</p><h2>Escolhas com intenção.</h2><p class="lead">Uma curadoria de produtos reais. Você compra diretamente na Amazon e apoia o crescimento da Orbe.</p><div id="storeApp"></div></section>
+<section id="consultations" class="screen"><p class="eyebrow">CONSULTAS PARTICULARES</p><h2>Uma leitura feita para você.</h2><p class="lead">Escolha o atendimento e envie os dados para solicitar disponibilidade.</p><div id="consultationApp"></div></section>
+<section id="subscriptions" class="screen"><p class="eyebrow">ASSINATURAS</p><h2>Aprofunde sua jornada.</h2><p class="lead">Planos claros, sem ativar cobranças enquanto o pagamento seguro não estiver conectado.</p><div id="subscriptionApp"></div></section>
+<section id="videos" class="screen"><p class="eyebrow">DE FRENTE COM O TAROT</p><h2>Vídeos e revelações.</h2><div id="videoApp"></div></section>
+<section id="music" class="screen"><p class="eyebrow">MÚSICA</p><h2>Dois universos sonoros.</h2><div id="musicApp"></div></section>
+<section id="login" class="screen"><p class="eyebrow">MINHA ORBE</p><h2>Entre no seu espaço.</h2><form class="panel" id="userLogin"><input type="email" placeholder="E-mail" required><input type="password" placeholder="Senha" required><button class="primary">Entrar</button></form><p class="security-note">Contas reais exigem um servidor e banco de dados seguros.</p></section>
+<section id="admin" class="screen"><p class="eyebrow">ADMINISTRAÇÃO</p><h2>Controle do universo.</h2><form id="adminLogin" class="panel"><input id="adminUser" placeholder="Login" autocomplete="username" required><input id="adminPass" type="password" placeholder="Senha" autocomplete="current-password" required><button class="primary">Continuar</button><p id="adminMsg" class="security-note">A senha não fica gravada no GitHub. A versão segura será validada no servidor.</p></form></section>
+</main>
+<nav class="magic-dock" aria-label="Navegação principal"><button data-go="home"><span>⌂</span><small>Início</small></button><button id="pathsBtn"><span>▦</span><small>Caminhos</small></button><button data-go="ai" class="dock-orb"><span class="mini-orb"></span><small>Orbe IA</small></button><button data-go="journal"><span>▤</span><small>Diário</small></button><button data-go="login"><span>◎</span><small>Conta</small></button></nav><aside id="drawer" class="drawer magic-menu" aria-hidden="true"><div class="drawer-sheet magic-menu-sheet"><div class="drawer-top magic-menu-top"><div class="magic-menu-brand"><span class="mini-orb"></span><span><b>DIVINA BRUXA</b><small>ORBE DAS REALIDADES</small></span></div><button id="closeMenu" aria-label="Fechar menu">×</button></div><p class="magic-menu-kicker">ORBE VIVA — MENU MÁGICO</p><div class="magic-menu-universe"><div class="magic-menu-orbits" aria-hidden="true"><i></i><i></i><i></i></div><button class="magic-menu-core" data-go="ai" aria-label="Abrir Orbe IA"><span class="mini-orb"></span></button><nav class="magic-menu-radial" aria-label="Caminhos da Orbe"><button data-go="home"><span>⌂</span><b>Início</b></button><button data-go="spreads"><span>✧</span><b>Tiragens</b></button><button data-go="daily"><span>☉</span><b>Carta do Dia</b></button><button data-go="ai"><span>✦</span><b>Orbe IA</b></button><button data-go="consultations"><span>♙</span><b>Consultas</b></button><button data-go="music"><span>♫</span><b>Música</b></button><button data-go="login"><span>◎</span><b>Conta</b></button><button data-go="tarot"><span>▣</span><b>Tarot Livre</b></button></nav></div><div class="magic-menu-rail"><button data-go="tarot"><span>✺</span><strong>TAROT COMPLETO</strong><small>78 cartas · livre e profundo</small></button><button data-go="daily"><span>☾</span><strong>RITUAL DIÁRIO</strong><small>uma carta para o agora</small></button><button data-go="consultations"><span>♙</span><strong>CONSULTAS</strong><small>atendimento e orientações</small></button><button data-go="ai"><span>✦</span><strong>ORBE IA</strong><small>intuitiva e exclusiva</small></button><button data-go="music"><span>♫</span><strong>MÚSICA & VIBRAÇÃO</strong><small>eleve sua energia</small></button><button data-go="store"><span>◇</span><strong>LOJA MÍSTICA</strong><small>itens para sua jornada</small></button></div><div class="magic-menu-extra"><button data-go="journal">Diário</button><button data-go="videos">De Frente com o Tarot</button><button data-go="subscriptions">Premium</button><button data-go="admin">Admin</button><button id="installApp" hidden>Instalar aplicativo</button></div></div></aside><div id="toast" class="toast"></div>
+</body></html>

@@ -1,0 +1,26 @@
+{
+  "checkpoint": "V47 Visual Core",
+  "scope": "Etapa 1 — base única de Home, Orbe e Menu Mágico",
+  "environment": "local/STAGING; produção não autorizada",
+  "tests": {
+    "git_diff_check": "PASS",
+    "javascript_syntax_app": "PASS",
+    "javascript_syntax_orb_engine": "PASS",
+    "javascript_syntax_navigation": "PASS",
+    "index_local_references": "PASS",
+    "legacy_home_stylesheets_removed_from_index": "PASS",
+    "retina_orb_resize": "NOT RUN — reservado para Etapa 3",
+    "real_iphone_safari_visual": "NOT RUN — requer instalação no aparelho",
+    "official_tarot_art_audit": "NOT RUN — Etapa 8"
+  },
+  "acceptance": {
+    "home_sections_visible": ["identity", "message", "orb", "dock"],
+    "orb_must_remain_circular": true,
+    "orb_must_not_move_page": true,
+    "home_extra_sections_hidden": true,
+    "menu_has_single_visual_core": true,
+    "preserve_cname": true,
+    "production_publish": false
+  },
+  "next": "V48 — Orbe Ultra HD e derivados transparentes"
+}

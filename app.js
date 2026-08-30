@@ -1,32 +1,32 @@
-import { LivingOrb } from './orb-engine.js?v=59';
+import { CONFIG } from './config.js';
+import { escapeHTML } from './storage.js';
+import { createNavigation } from './navigation.js?v=58';
+import { LivingOrb } from './orb-engine.js?v=58';
+import { FreeTarot } from './tarot-engine.js';
+import { DailyRitual } from './ritual-engine.js';
+import { SpreadsEngine } from './spreads-engine.js';
+import { JournalEngine } from './journal-engine.js';
+import { CommerceEngine } from './commerce-engine.js';
+import { MediaEngine } from './media-engine.js';
+import { AIEngine } from './ai-engine.js';
 
 const $ = selector => document.querySelector(selector);
-const menu = $('#magicMenu');
-const menuButton = $('#menuButton');
-const closeButton = $('#closeMenu');
-const toast = $('#toast');
-let lastFocus = null;
-const items = () => [...menu.querySelectorAll('button')].filter(item => !item.disabled && item.offsetParent !== null);
-const showToast = message => { toast.textContent = message; toast.classList.add('show'); clearTimeout(showToast.timer); showToast.timer = setTimeout(() => toast.classList.remove('show'), 2400); };
-const setOpen = open => {
-  menu.classList.toggle('open', open); menu.setAttribute('aria-hidden', String(!open)); menuButton.setAttribute('aria-expanded', String(open));
-  document.documentElement.classList.toggle('menu-open', open); document.querySelector('#home').inert = open; document.querySelector('.bottom-dock').inert = open;
-  if (open) requestAnimationFrame(() => closeButton.focus({ preventScroll: true }));
-  else if (lastFocus?.focus) lastFocus.focus({ preventScroll: true });
-};
-const openMenu = () => { if (menu.classList.contains('open')) return; lastFocus = document.activeElement; setOpen(true); };
-const closeMenu = () => setOpen(false);
-menuButton.addEventListener('click', openMenu); closeButton.addEventListener('click', closeMenu);
-menu.addEventListener('click', event => { if (event.target === menu) closeMenu(); });
-document.addEventListener('keydown', event => {
-  if (!menu.classList.contains('open')) return;
-  if (event.key === 'Escape') return closeMenu();
-  if (event.key === 'Tab') { const list = items(); const first = list[0], last = list[list.length - 1]; if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); } else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); } }
-});
-document.querySelectorAll('[data-home]').forEach(button => button.addEventListener('click', closeMenu));
-document.querySelectorAll('[data-orb-ia]').forEach(button => button.addEventListener('click', () => { closeMenu(); showToast('A Orbe IA será ativada na próxima etapa.'); }));
-document.querySelectorAll('[data-placeholder]').forEach(button => button.addEventListener('click', () => showToast(`${button.dataset.placeholder} será aberto na próxima etapa.`)));
-$('#dockPaths').addEventListener('click', openMenu);
-const orb = new LivingOrb($('#orbCanvas'), { onOpen: () => showToast('O Tarot Livre será aberto na próxima etapa.') });
-window.orbe = { openMenu, closeMenu, orb };
-if ('serviceWorker' in navigator) addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=59').catch(() => {}));
+const $$ = selector => [...document.querySelectorAll(selector)];
+const toast = message => { const el=$('#toast'); el.textContent=message; el.classList.add('show'); clearTimeout(toast.timer); toast.timer=setTimeout(()=>el.classList.remove('show'),2400); };
+const { go } = createNavigation();
+const orb = new LivingOrb($('#orbCanvas'),{onOpen:()=>go('tarot')});
+new FreeTarot($('#tarot'));
+const journal = new JournalEngine($('#journalForm'), $('#entries'), $('#mirrorStats'));
+new DailyRitual($('#dailyCard'), entry => journal.add(entry));
+new SpreadsEngine($('#spreadGrid'), $('#spreadResult'), entry => journal.add(entry));
+addEventListener('orbe:toast', event => toast(event.detail));
+new CommerceEngine({store:$('#storeApp'),consultations:$('#consultationApp'),subscriptions:$('#subscriptionApp')},CONFIG);
+new MediaEngine({videos:$('#videoApp'),music:$('#musicApp')},CONFIG);
+new AIEngine($('#ai'),CONFIG);
+
+$('#userLogin').onsubmit=event=>{event.preventDefault();toast('Login seguro será ativado com o servidor.');};
+$('#adminLogin').onsubmit=event=>{event.preventDefault();if($('#adminUser').value!==CONFIG.adminUser){$('#adminMsg').textContent='Login não reconhecido.';return;}$('#adminMsg').textContent='Usuário reconhecido. A senha será validada somente pelo servidor seguro — nunca pelo arquivo público.';};
+
+let installPrompt=null;addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event;$('#installApp').hidden=false;});$('#installApp').onclick=async()=>{if(!installPrompt){toast('No iPhone: Compartilhar → Adicionar à Tela de Início.');return;}installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;};
+if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+window.orbe={go};

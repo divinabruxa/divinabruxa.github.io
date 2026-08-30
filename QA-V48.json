@@ -1,0 +1,28 @@
+{
+  "checkpoint": "V48 Orbe Ultra HD",
+  "scope": "Etapa 2 — asset de Orbe e integração",
+  "environment": "local/STAGING; produção não autorizada",
+  "asset": {
+    "master_source": "divina-orb-v48-master-source.png",
+    "runtime": "divina-orb-v48.png",
+    "mini": "orb-mini-v48.png",
+    "runtime_dimensions": "2048x2048",
+    "mini_dimensions": "768x768",
+    "color": "RGBA",
+    "alpha_min": 0,
+    "alpha_max": 65535,
+    "text_or_symbols": false
+  },
+  "tests": {
+    "git_diff_check": "PASS",
+    "javascript_syntax_app": "PASS",
+    "javascript_syntax_orb_engine": "PASS",
+    "javascript_syntax_navigation": "PASS",
+    "asset_alpha_validation": "PASS",
+    "runtime_asset_references": "PASS",
+    "retina_framebuffer": "NOT RUN — Etapa 3",
+    "real_iphone_safari_visual": "NOT RUN — requer instalação no aparelho",
+    "official_tarot_art_audit": "NOT RUN — Etapa 8"
+  },
+  "next": "V49 — motor Retina adaptativo e máscara circular no shader"
+}

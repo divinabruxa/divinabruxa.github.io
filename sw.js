@@ -1,5 +1,5 @@
-const CACHE='divina-bruxa-v59-orb-menu-clean';
-const CORE=['./','./index.html','./styles.css?v=59','./app.js?v=59','./orb-engine.js?v=59','./divina-orb-v48.png?v=59','./orb-mini-v48.png?v=59','./cosmic-background.png','./manifest.webmanifest','./favicon.svg'];
-self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting())));
-self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
-self.addEventListener('fetch',event=>{if(event.request.method!=='GET')return;event.respondWith(fetch(event.request).then(response=>{const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(event.request,copy));return response}).catch(()=>caches.match(event.request).then(response=>response||caches.match('./index.html'))))});
+const CACHE='divina-bruxa-v58-living-touch-final';
+const CORE=['./','./index.html','./app.css','./motion.css','./update-04.css','./update-05.css','./update-06.css','./update-08.css','./update-09.css','./update-11.css','./visual-v47.css','./visual-v47.css?v=58','./divina-orb-v48.png','./divina-orb-v48.png?v=48','./orb-mini-v48.png','./orb-mini-v48.png?v=48','./cosmic-background.png','./orb-engine.js','./orb-engine.js?v=58','./app.js','./app.js?v=58','./navigation.js','./navigation.js?v=58'];
+self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())));
+self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
+self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(fetch(e.request).then(r=>{const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy));return r}).catch(()=>caches.match(e.request).then(r=>r||caches.match('./index.html'))))});

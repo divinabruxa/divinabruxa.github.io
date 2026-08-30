@@ -1,0 +1,29 @@
+DIVINA BRUXA — V48 ORBE ULTRA HD
+
+ETAPA ENTREGUE
+Substitui a textura visual da Orbe por uma matriz mais detalhada, com
+nebulosa violeta/magenta, filamentos elétricos, partículas douradas e
+reflexos de vidro. O asset continua circular e com transparência verdadeira.
+
+ARQUIVOS DA ORBE
+- divina-orb-v48-master-source.png — master gerado, preservado sem alteração.
+- divina-orb-v48.png — matriz retina de uso no site (2048 × 2048 RGBA).
+- orb-mini-v48.png — matriz otimizada para dock e Menu Mágico (768 × 768 RGBA).
+
+INVARIANTES PRESERVADAS
+- sem texto, letras, números, símbolos ou marcas d’água dentro da esfera;
+- sem “Ísis” e sem “33” na arte;
+- fundo genuinamente transparente;
+- movimento continua interno à Orbe;
+- instalação apenas em desenvolvimento/STAGING.
+
+INSTALAÇÃO
+Extraia os arquivos do ZIP e envie-os diretamente para a raiz do GitHub.
+Não crie pastas. Preserve CNAME, manifest.webmanifest, ícones e os motores.
+O arquivo index.html, o orb-engine.js, o visual-v47.css e o sw.js já apontam
+para a Orbe V48 e para o cache V48.
+
+OBSERVAÇÃO
+A definição percebida no iPhone também depende da Etapa 3, que ajustará o
+framebuffer ao devicePixelRatio. Esta etapa entrega a nova textura; não é uma
+promessa de resolução nativa antes do ajuste do motor.
