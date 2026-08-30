@@ -1,0 +1,19 @@
+DIVINA BRUXA — V60 NOVO REPOSITÓRIO COMPLETO
+
+Este é o pacote para um repositório vazio. Ele reúne a Home visual da Orbe,
+Menu Mágico, motor de toque, Tarot Livre e as 78 imagens individuais que o
+motor procura. Todos os arquivos ficam na raiz, sem pastas.
+
+INSTALAÇÃO
+1. Crie o repositório público divinabruxa.github.io.
+2. Extraia este ZIP.
+3. Envie todos os arquivos extraídos para a raiz do GitHub.
+4. Preserve CNAME e ative Pages em main / (root).
+
+A Home começa limpa, com a Orbe como protagonista e os demais caminhos no
+Menu Mágico. A Orbe não contém texto, números ou símbolos na arte e o toque
+fica preso dentro da esfera. As 78 cartas usam arquivos card-00 a card-77,
+sem repetição e sem cartas invertidas no Tarot Livre.
+
+Esta é a base visual e funcional para reconstruir o site. Login real, IA real,
+pagamentos e publicação de produção não são ativados por arquivos públicos.

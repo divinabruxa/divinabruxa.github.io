@@ -1,0 +1,10 @@
+{
+  "checkpoint": "V60 Novo Repositório Completo",
+  "scope": "pacote completo para repositório vazio",
+  "runtime": ["index.html", "app.js", "navigation.js", "orb-engine.js", "tarot-engine.js", "tarot-data.js", "tarot-meanings.js", "ritual-engine.js", "meaning-engine.js", "spreads-engine.js", "journal-engine.js", "commerce-engine.js", "media-engine.js", "ai-engine.js", "storage.js", "config.js", "sw.js"],
+  "visual": ["app.css", "motion.css", "update-04.css", "update-05.css", "update-06.css", "update-08.css", "update-09.css", "update-11.css", "visual-v47.css"],
+  "cards": {"individual_assets": 78, "atlas": "tarot-atlas.webp", "reversed": false},
+  "tests": {"javascript_syntax": "PASS", "git_diff_check": "PASS", "flat_zip_no_folders": "PASS", "card_assets_78": "PASS", "orb_rgba": "PASS", "real_iphone_visual": "NOT RUN — requer instalação no aparelho"},
+  "environment": "local/STAGING",
+  "phase": "Fase 2 visual com Tarot integrado; aprovação da Orbe/Menu antes de produção"
+}
