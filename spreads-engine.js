@@ -1,26 +1,60 @@
 import { CARDS } from './tarot-data.js';
-import { meaning } from './meaning-engine.js';
+import { store, escapeHTML } from './storage.js';
 import { cardImageMarkup } from './tarot-image-runtime.js';
+import { dailyMeaning } from './daily-meaning-runtime.js';
+import { SPREADS, SPREAD_STORAGE_KEY, spreadById, validSpreadSession } from './spreads-policy.js';
+import { synthesizeSpread } from './spread-synthesis.js';
 
-const DEFINITIONS=[
-  {name:'Uma Carta',positions:['Resposta'],description:'Uma direção clara para o agora.'},
-  {name:'Passado · Presente · Tendência',positions:['Passado','Presente','Tendência'],description:'Entenda a linha do tempo da questão.'},
-  {name:'Situação · Ação · Resultado',positions:['Situação','Ação','Resultado'],description:'Transforme reflexão em movimento.'},
-  {name:'Amor',positions:['Você','A outra energia','O caminho da relação'],description:'Uma leitura simbólica dos vínculos.'},
-  {name:'Dois Caminhos',positions:['Situação','Caminho A','Resultado A','Caminho B','Resultado B'],description:'Compare as energias de duas escolhas.'},
-  {name:'Cruz Celta',positions:['Presente','Desafio','Raiz','Passado','Possibilidade','Futuro próximo','Você','Ambiente','Esperanças e medos','Síntese'],description:'Um panorama profundo em dez posições.'}
-];
-function random(max){const u=new Uint32Array(1);crypto.getRandomValues(u);return u[0]%max;}
-function shuffle(){const a=[...CARDS];for(let i=a.length-1;i;i--){const j=random(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;}
+const safe = value => escapeHTML(value ?? '');
+const random = max => { const value = new Uint32Array(1); crypto.getRandomValues(value); return value[0] % max; };
+const shuffledIds = () => { const ids = CARDS.map(card => card.id); for (let i = ids.length - 1; i; i -= 1) { const j = random(i + 1); [ids[i], ids[j]] = [ids[j], ids[i]]; } return ids; };
 
-export class SpreadsEngine{
-  constructor(grid,result,onSave){this.grid=grid;this.result=result;this.onSave=onSave;this.renderMenu();}
-  renderMenu(){this.grid.innerHTML=DEFINITIONS.map((s,i)=>`<button data-spread="${i}"><h3>${s.name}</h3><span>${s.description}</span><small>${s.positions.length} carta${s.positions.length>1?'s':''}</small></button>`).join('');this.grid.onclick=e=>{const b=e.target.closest('[data-spread]');if(b)this.draw(Number(b.dataset.spread));};}
-  draw(index){
-    const spread=DEFINITIONS[index];
-    const cards=shuffle().slice(0,spread.positions.length).map((card,i)=>({card,position:spread.positions[i]}));
-    this.result.innerHTML=`<article class="spread-reading"><p class="eyebrow">${spread.name}</p><div class="spread-layout count-${cards.length}">${cards.map(x=>`<figure><span>${x.position}</span>${cardImageMarkup(x.card,{priority:'high'})}<figcaption>${x.card.name}</figcaption></figure>`).join('')}</div><div class="spread-meanings">${cards.map(x=>{const m=meaning(x.card,false);return `<article><span>${x.position} · DIRETA</span><h3>${x.card.name}</h3><p class="keywords">${m.keywords}</p><p>${m.message}</p><h4>Luz desta posição</h4><p>${m.light}</p><h4>Sombra e cuidado</h4><p>${m.shadow}</p><h4>Integração</h4><p>${m.practical}</p><p class="reflection">${m.question}</p></article>`}).join('')}</div><article class="spread-synthesis"><span>SÍNTESE DA TIRAGEM</span><p>Leia estas cartas como uma conversa: observe os temas repetidos e transforme a leitura em uma decisão consciente.</p></article><button class="primary" data-save-spread>Guardar tiragem no Diário</button></article>`;
-    this.result.querySelector('[data-save-spread]').onclick=()=>this.onSave({title:`Tiragem — ${spread.name}`,text:cards.map(x=>`${x.position}: ${x.card.name} (direta)`).join('\n'),question:'O que esta tiragem revela sobre meu momento?',tags:`tiragem, ${spread.name}`,mood:'Reflexiva',cardIds:cards.map(x=>x.card.id),type:'spread'});
-    this.result.scrollIntoView({behavior:'smooth'});
+export class SpreadsEngine {
+  constructor(grid, result, onSave) {
+    this.grid = grid;
+    this.result = result;
+    this.onSave = onSave;
+    this.session = store.get(SPREAD_STORAGE_KEY);
+    this.renderMenu();
+    if (validSpreadSession(this.session)) this.renderReading(true);
+  }
+
+  renderMenu() {
+    this.grid.innerHTML = SPREADS.map(spread => `<button data-spread="${spread.id}"${spread.premium ? ' data-premium="true"' : ''}><h3>${safe(spread.name)}</h3><span>${safe(spread.description)}</span><small>${spread.positions.length} ${spread.positions.length === 1 ? 'carta' : 'cartas'}${spread.premium ? ' · PREMIUM' : ''}</small></button>`).join('');
+    this.grid.onclick = event => {
+      const button = event.target.closest('[data-spread]');
+      if (!button) return;
+      if (button.dataset.premium === 'true') return this.renderPremium();
+      this.begin(button.dataset.spread);
+    };
+  }
+
+  begin(spreadId) {
+    const spread = spreadById(spreadId);
+    if (!spread || spread.premium) return;
+    this.session = { spreadId, cardIds: shuffledIds().slice(0, spread.positions.length), orientation: 'normal', createdAt: new Date().toISOString(), revision: 1 };
+    store.set(SPREAD_STORAGE_KEY, this.session);
+    navigator.vibrate?.([16, 30, 20]);
+    this.renderReading(false);
+  }
+
+  renderPremium() {
+    this.result.innerHTML = `<article class="spread-reading spread-premium"><p class="eyebrow">MESA REAL · PREMIUM</p><h3>78 cartas · 13 fileiras de 6</h3><p>A estrutura está preparada, mas a ativação Premium permanecerá bloqueada até o pagamento seguro e a retomada entre dispositivos serem validados em ambiente de testes.</p><button class="text-button" data-go-tarot>Conhecer a Mesa Real do Tarot Livre</button></article>`;
+    this.result.querySelector('[data-go-tarot]').onclick = () => globalThis.orbe?.go?.('tarot');
+  }
+
+  renderReading(resumed) {
+    if (!validSpreadSession(this.session)) return;
+    const spread = spreadById(this.session.spreadId);
+    const items = this.session.cardIds.map((id, index) => ({ card: CARDS[id], position: spread.positions[index] }));
+    const synthesis = synthesizeSpread(items);
+    const readings = items.map(({ card, position }, index) => {
+      const meaning = dailyMeaning(card);
+      return `<article><span>POSIÇÃO ${index + 1}/${items.length} · ${safe(position)} · DIRETA</span><h3>${safe(card.name)}</h3><p class="keywords">${meaning.keywords.map(safe).join(' · ')}</p><h4>Essência nesta posição</h4><p>${safe(meaning.essence)}</p><h4>Luz</h4><p>${safe(meaning.light)}</p><h4>Tensão e cuidado</h4><p>${safe(meaning.tension)}</p><h4>Conselho prático</h4><p>${safe(meaning.advice)}</p><p class="reflection">${safe(meaning.reflectionQuestion)}</p></article>`;
+    }).join('');
+    this.result.innerHTML = `<article class="spread-reading"><p class="eyebrow">${safe(spread.name)}${resumed ? ' · RETOMADA' : ''}</p><div class="spread-progress" aria-label="${items.length} de ${items.length} posições reveladas"><i style="width:100%"></i></div><div class="spread-layout count-${items.length}">${items.map(({ card, position }, index) => `<figure><span>${index + 1} · ${safe(position)}</span>${cardImageMarkup(card, { priority: index < 3 ? 'high' : 'auto' })}<figcaption>${safe(card.name)}</figcaption></figure>`).join('')}</div><div class="spread-meanings">${readings}</div><article class="spread-synthesis"><span>SÍNTESE DA TIRAGEM</span><p>${safe(synthesis.opening)}</p><p>${safe(synthesis.pattern)}</p><p>${safe(synthesis.integration)}</p></article><div class="spread-actions"><button class="primary" data-save-spread>Guardar no Diário</button><button class="text-button" data-new-spread>Nova tiragem</button></div></article>`;
+    this.result.querySelector('[data-save-spread]').onclick = () => this.onSave({ title: `Tiragem — ${spread.name}`, text: `${items.map(item => `${item.position}: ${item.card.name} (direta)`).join('\n')}\n\n${synthesis.opening} ${synthesis.pattern} ${synthesis.integration}`, question: 'O que esta tiragem ilumina no meu momento?', tags: `tiragem, ${spread.name}, ${synthesis.dominantSuit}`, mood: 'Reflexiva', cardIds: this.session.cardIds, type: 'spread', orientation: 'normal' });
+    this.result.querySelector('[data-new-spread]').onclick = () => { store.remove(SPREAD_STORAGE_KEY); this.session = null; this.result.innerHTML = ''; this.grid.scrollIntoView({ behavior: 'smooth' }); };
+    this.result.scrollIntoView({ behavior: resumed ? 'auto' : 'smooth' });
   }
 }
