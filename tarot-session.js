@@ -4,6 +4,8 @@
 export const TAROT_SESSION_SCHEMA = '5.2.1';
 export const DECK_SIZE = 78;
 export const CARD_IDS = Object.freeze(Array.from({ length: DECK_SIZE }, (_, index) => index));
+export const TAROT_BACKUP_KIND = 'divina-bruxa-tarot-livre';
+export const TAROT_BACKUP_VERSION = 1;
 
 const secureRandomInt = max => {
   if (!Number.isInteger(max) || max < 1) return 0;
@@ -117,4 +119,41 @@ export function serializeTarotState(state) {
 export function restoreTarotState(serialized, options = {}) {
   try { return normalizeTarotState(JSON.parse(serialized), options); }
   catch { return null; }
+}
+
+export function compareTarotStates(left, right) {
+  const a = normalizeTarotState(left);
+  const b = normalizeTarotState(right);
+  if (!a && !b) return 0;
+  if (!a) return -1;
+  if (!b) return 1;
+  if (a.sessionId === b.sessionId && a.revision !== b.revision) return a.revision > b.revision ? 1 : -1;
+  if (a.updatedAt !== b.updatedAt) return a.updatedAt > b.updatedAt ? 1 : -1;
+  if (a.revealed.length !== b.revealed.length) return a.revealed.length > b.revealed.length ? 1 : -1;
+  return a.sessionId.localeCompare(b.sessionId);
+}
+
+export function createTarotBackup(state, { now = Date.now } = {}) {
+  const normalized = normalizeTarotState(state, { now });
+  if (!normalized) return '';
+  return JSON.stringify({
+    kind: TAROT_BACKUP_KIND,
+    version: TAROT_BACKUP_VERSION,
+    exportedAt: integerTime(now()),
+    state: normalized
+  }, null, 2);
+}
+
+export function restoreTarotBackup(serialized, { now = Date.now } = {}) {
+  try {
+    const backup = JSON.parse(serialized);
+    if (backup?.kind !== TAROT_BACKUP_KIND || backup?.version !== TAROT_BACKUP_VERSION) return null;
+    const state = normalizeTarotState(backup.state, { now });
+    if (!state) return null;
+    return {
+      ...state,
+      revision: state.revision + 1,
+      updatedAt: integerTime(now())
+    };
+  } catch { return null; }
 }

@@ -1,0 +1,14 @@
+/* DIVINA BRUXA — CONTROLES E RETOMADA — CHECKPOINT 2.3 */
+#tarot .table-recovery{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 17px;border-inline:1px solid rgba(232,199,121,.18);border-top:1px solid rgba(232,199,121,.1);background:linear-gradient(90deg,rgba(63,23,79,.32),rgba(7,4,12,.86))}
+#tarot .table-recovery>p{display:flex;align-items:center;gap:11px;margin:0;color:#d8bf7d}
+#tarot .table-recovery>p>span:first-child{display:grid;place-items:center;width:34px;height:34px;border:1px solid rgba(232,199,121,.3);border-radius:50%;background:rgba(17,7,24,.75);text-shadow:0 0 12px #cf66ee}
+#tarot .table-recovery>p>span:last-child{display:grid;gap:3px}
+#tarot .table-recovery b{color:#e9dcbf;font:500 .69rem/1.25 ui-sans-serif,system-ui,sans-serif}
+#tarot .table-recovery small{color:#887b8b;font:400 .56rem/1.35 ui-sans-serif,system-ui,sans-serif}
+#tarot .table-recovery>div{display:flex;align-items:center;gap:8px}
+#tarot .table-recovery button{min-height:44px;padding:0 14px;border:1px solid rgba(232,199,121,.3);border-radius:999px;color:#e9ce8c;background:rgba(14,6,21,.82);font:600 .57rem/1 ui-sans-serif,system-ui,sans-serif;cursor:pointer;transition:transform .18s,border-color .18s,background .18s,box-shadow .18s}
+#tarot .table-recovery button:hover,#tarot .table-recovery button:focus-visible{border-color:rgba(246,216,145,.72);background:rgba(54,20,67,.78);box-shadow:0 0 20px rgba(175,69,214,.14)}
+#tarot .table-recovery button:focus-visible{outline:2px solid #f3d68e;outline-offset:2px}
+#tarot .table-recovery button:active{transform:scale(.97)}
+@media(max-width:620px){#tarot .table-recovery{display:grid;grid-template-columns:1fr;gap:12px;padding:14px}#tarot .table-recovery>div{display:grid;grid-template-columns:1fr 1fr}#tarot .table-recovery button{width:100%;padding-inline:8px}}
+@media(prefers-reduced-motion:reduce){#tarot .table-recovery button{transition:none}}
