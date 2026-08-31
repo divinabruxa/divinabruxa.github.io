@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "5.0.1",
+  "checkpoint": "0.1",
+  "generatedAt": "2026-08-31",
+  "purpose": "Registro imutável da base visual e funcional aprovada antes das próximas macroetapas.",
+  "productionLocks": {
+    "productionPublishAuthorized": false,
+    "dnsChangesAuthorized": false,
+    "realBillingAuthorized": false,
+    "storeSubmissionAuthorized": false,
+    "orbeAiSolEnabled": false
+  },
+  "approvedBase": {
+    "package": "DIVINA-BRUXA-V77-BACKUP-COMPLETO-DEFINITIVO.zip",
+    "sha256": "d7faa3d2787c8fafb2ea5b4743af7e48c05594615a4a7633698372d2f5196fde",
+    "visualContract": "V77-CENTRO-MOBILE-EXATO",
+    "preserve": ["home", "orb-engine", "mini-orbs", "magic-menu", "footer-menu", "CNAME", "78-card-artworks"]
+  },
+  "canonicalTarot": {
+    "count": 78,
+    "indexRange": [0, 77],
+    "first": "O Louco",
+    "last": "Rei de Ouros",
+    "orientation": "normal",
+    "repeats": false,
+    "reversed": false,
+    "atlas": {
+      "file": "tarot-atlas.webp",
+      "sha256": "f065f64f68a58f471974199edea1af8ca358c244e6bdedf1360859e5a0cfaa8d"
+    },
+    "catalog": {
+      "file": "tarot-data.js",
+      "sha256": "2991d5b03454065e21ae7558199b90f781ce89606d2acd7a88325cbc893230bb"
+    },
+    "imageManifest": {
+      "file": "tarot-image-manifest-v5.json",
+      "sha256": "69e4177d4004412bb30bd9473e82d8b05f5fcd66ebe800e643fdff2443258d9f"
+    }
+  },
+  "runtimeFiles": {
+    "index.html": "9c10c1ca5e671cff3909c46a41111e0b1c6c0fed2170626dca3097bdf8ca7e51",
+    "app.js": "63bf1cab0b03af7b7b2e293f2ed0dac78b3e0e3d98e75fffb6156d2d15378dbd",
+    "sw.js": "4d4db75036f359c5040371d00583d272d0ca7daf5bf462766b00f4c25d25cf6a",
+    "orb-engine.js": "efb7b1b77bcdfb9ddf7f0d9e6b2fe810c72d4264cab9aab792e29590393e2711",
+    "orb-engine-v68.js": "d5e223afd91bd87d68ba8dd3ae954f9d31e07dfa81cc3dc576c2c70e3379777d",
+    "mini-orb-engine.js": "a5fe0a6d2557b21c242c6657575231b90dac2c104ff1f404b86dd91cde3d246c",
+    "tarot-engine.js": "d7e7d52e2931cb9f242addf7195063a12beed52b42c0ec0fcfe786bede3cf101",
+    "tarot-session.js": "dbd13fad80388fe6bc63b41e3bba29f1197e2853b18f04a244d4e4255e4ec030",
+    "tarot-continuity.js": "454e2a298bf7a7d379ef731a29daeabf728d88c2dbfad6f3142d4ae4a9205ca2",
+    "CNAME": "5221eb592e0235f65c0dd92e75ff80248b30ba7d08a10ee1613a80d4f791d8e6"
+  },
+  "next": "0.2-diagnostico-supremo-de-conteudo"
+}
