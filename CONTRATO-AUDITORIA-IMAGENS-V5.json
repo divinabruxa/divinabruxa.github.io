@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "5.0.1",
+  "checkpoint": "1.2",
+  "status": "PASS",
+  "artworkPolicy": {
+    "officialArtworks": 78,
+    "replacedArtworks": 0,
+    "upscaledArtworks": 0,
+    "orientation": "normal",
+    "source": "individual + atlas fallback",
+    "reuploadRequired": false
+  },
+  "manifest": {
+    "file": "tarot-image-manifest-v5.json",
+    "sha256": "69e4177d4004412bb30bd9473e82d8b05f5fcd66ebe800e643fdff2443258d9f",
+    "records": 78,
+    "uniqueHashes": 78,
+    "mappingStatus": "verified"
+  },
+  "atlas": {
+    "file": "tarot-atlas.webp",
+    "sha256": "f065f64f68a58f471974199edea1af8ca358c244e6bdedf1360859e5a0cfaa8d",
+    "dimensions": "3000x3600",
+    "grid": "10x8",
+    "cell": "300x450",
+    "usedCells": 78
+  },
+  "individualArtwork": {
+    "dimensions": "300x450",
+    "formats": ["JPEG", "PNG"],
+    "validFiles": 78,
+    "lazyLoading": true,
+    "asyncDecoding": true,
+    "preloadLimit": 3
+  },
+  "fallbackRules": [
+    "caminho individual canônico",
+    "célula correspondente do atlas",
+    "nunca imagem invisível",
+    "nunca carta substituta"
+  ],
+  "verification": {
+    "command": "node verify-tarot-images-v5.mjs",
+    "expectedPasses": 28,
+    "lastRun": "2026-08-31",
+    "lastResult": "28/28"
+  },
+  "nextCheckpoint": "1.3 — Conteúdo-mãe das Cartas"
+}
