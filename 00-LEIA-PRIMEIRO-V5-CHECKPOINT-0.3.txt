@@ -1,0 +1,51 @@
+DIVINA BRUXA — CHECKPOINT 0.3
+CONTRATO DE REGRESSÃO V77
+
+NOVOS ARQUIVOS DESTA ENTREGA
+
+1. v77-baseline.json
+2. verify-v77.mjs
+3. 00-LEIA-PRIMEIRO-V5-CHECKPOINT-0.3.txt
+
+SUBSTITUIR
+
+Nenhum arquivo existente.
+
+REMOVER
+
+Nenhum arquivo.
+
+O QUE ESTES ARQUIVOS FAZEM
+
+- registram as assinaturas digitais da aparência V77 aprovada;
+- protegem o motor da Orbe e o motor das mini-orbes;
+- protegem a centralização mobile e o movimento somente vertical do menu;
+- conferem o Menu Mágico e o menu inferior;
+- conferem todas as rotas do site;
+- exigem exatamente 78 cartas;
+- impedem carta invertida;
+- conferem as 78 imagens em 300 x 450;
+- conferem os 78 conteúdos profundos;
+- conferem as 78 páginas editoriais e o sitemap.
+
+COMO INSTALAR
+
+Envie os três arquivos para a raiz do repositório GitHub.
+Eles não mudam a aparência e não aparecem para os visitantes.
+
+COMO VALIDAR
+
+Em um computador com Node.js, dentro da pasta do site:
+
+node verify-v77.mjs
+
+O teste deve terminar com:
+
+V77 protegida. A evolução de conteúdo pode continuar.
+
+PRÓXIMO CHECKPOINT
+
+1.1 — CATÁLOGO CANÔNICO UNIFICADO
+
+Será criada uma única fonte oficial para as 78 cartas, preparando a integração
+dos significados profundos ao aplicativo sem alterar a Orbe ou os menus.

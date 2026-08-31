@@ -1,0 +1,38 @@
+{
+  "name": "Divina Bruxa — Contrato de Regressão V77",
+  "version": "5.0-checkpoint-0.3",
+  "visualBaseline": "V77 — Centro Mobile Exato",
+  "backup": {
+    "file": "DIVINA-BRUXA-V77-BACKUP-COMPLETO-DEFINITIVO.zip",
+    "files": 412,
+    "sha256": "d7faa3d2787c8fafb2ea5b4743af7e48c05594615a4a7633698372d2f5196fde"
+  },
+  "protectedFiles": {
+    "visual-v68.css": "5e46575096d098e2c0d1e045efd46699e449fdf6713bfff6b929cb5764118683",
+    "orb-engine-v68.js": "d5e223afd91bd87d68ba8dd3ae954f9d31e07dfa81cc3dc576c2c70e3379777d",
+    "mini-orb-engine.js": "a5fe0a6d2557b21c242c6657575231b90dac2c104ff1f404b86dd91cde3d246c",
+    "navigation.js": "deef2d03325584ac1a4242a54bd2a7b78125144c8c40dfd46cb0723b464c0084",
+    "divina-orb-v68.png": "2fb1c886c27672f85d9bd5c2ae01a0e5f35f624d9621c8c38cc645a52544d31a",
+    "divina-mini-orb-hd-v72.jpeg": "1cd5568336770221f48e6931ed3a48e04e29ce026955d9a490fa634d87690d04",
+    "cosmic-background.png": "e32bda23a885b9357af69425ebd59516af56df35fe9b52474ebfc19e8b277cc6"
+  },
+  "referenceFiles": {
+    "tarot-atlas.webp": "f065f64f68a58f471974199edea1af8ca358c244e6bdedf1360859e5a0cfaa8d",
+    "tarot-data.js": "39734a4e85aa4ebfca82d41c8d9be7cb8dcf02d794c736edb6aa4970173b1b21",
+    "tarot-meanings.js": "e50ec43161a34de2279042a7a714038a39e2b38875d62850db66066d654550d9"
+  },
+  "contracts": {
+    "cardCount": 78,
+    "firstCard": "O Louco",
+    "lastCard": "Rei de Ouros",
+    "normalOnly": true,
+    "cardWidth": 300,
+    "cardHeight": 450,
+    "mainSections": 14,
+    "mainNavigationTargets": 14,
+    "orbitalMenuButtons": 9,
+    "dockButtons": 5,
+    "editorialCardPages": 78,
+    "deepMeaningLayers": 15
+  }
+}
