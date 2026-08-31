@@ -1,9 +1,54 @@
-import { CARDS } from './tarot-data.js';import { meaning } from './meaning-engine.js';import { store,escapeHTML } from './storage.js';import { cardImageMarkup } from './tarot-image-runtime.js';
-const today=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/Sao_Paulo'}).format(new Date());
-export class DailyRitual{
- constructor(root,onSave){this.root=root;this.onSave=onSave;this.stage=0;this.data=store.get('daily');if(this.data)this.data.reversed=false;this.render();}
- pick(){const u=new Uint32Array(1);crypto.getRandomValues(u);return u[0]%78;}
- render(){if(this.data?.date===today())return this.reveal();this.root.innerHTML=`<div class="ritual-steps"><i class="on"></i><i></i><i></i></div><div class="ritual-breathe"><span></span></div><p class="eyebrow">PASSO 1 · RESPIRAR</p><h3>Chegue ao presente.</h3><p>Toque na Orbe e faça uma respiração lenta.</p><button class="primary" data-next>Começar ritual</button>`;this.root.querySelector('[data-next]').onclick=()=>this.intention();}
- intention(){this.root.innerHTML=`<div class="ritual-steps"><i class="on"></i><i class="on"></i><i></i></div><p class="eyebrow">PASSO 2 · INTENÇÃO</p><h3>O que deseja compreender?</h3><input id="dailyIntention" maxlength="120" placeholder="Uma palavra ou uma pergunta"><button class="primary" data-draw>Despertar minha carta</button>`;this.root.querySelector('[data-draw]').onclick=()=>{this.data={date:today(),id:this.pick(),reversed:false,intention:this.root.querySelector('#dailyIntention').value.trim()};store.set('daily',this.data);navigator.vibrate?.([18,35,24]);this.reveal(true);};}
- reveal(animate=false){const card=CARDS[this.data.id],m=meaning(card,false);this.data.reversed=false;this.root.innerHTML=`<div class="ritual-steps"><i class="on"></i><i class="on"></i><i class="on"></i></div>${this.data.intention?`<p class="intention">Sua intenção · ${escapeHTML(this.data.intention)}</p>`:''}<div class="current daily-reveal ${animate?'birth':''}">${cardImageMarkup(card,{priority:'high'})}</div><p class="eyebrow">SUA CARTA DO DIA · DIRETA</p><h3>${card.name}</h3><p class="keywords">${m.keywords}</p><article class="meaning-card"><span>ESSÊNCIA DA CARTA</span><p>${m.message}</p></article><article class="meaning-card"><span>EXPRESSÃO LUMINOSA</span><p>${m.light}</p></article><article class="meaning-card"><span>SOMBRA E DESAFIO</span><p>${m.shadow}</p></article><article class="meaning-card"><span>CAMADA EMOCIONAL</span><p>${m.emotional}</p></article><article class="meaning-card"><span>CAMADA SIMBÓLICA</span><p>${m.spiritual}</p></article><article class="meaning-card"><span>INTEGRAÇÃO PRÁTICA</span><p>${m.practical}</p></article><article class="meaning-card"><span>PERGUNTAS PARA O DIA</span>${m.questions.map(q=>`<p>• ${q}</p>`).join('')}</article><button class="primary" data-save>Guardar carta e reflexão</button>`;this.root.querySelector('[data-save]').onclick=()=>this.onSave({title:`Carta do Dia — ${card.name}`,text:`${m.message}\n\n${m.practical}`,question:this.data.intention||m.question,tags:`carta do dia, ${card.suit}`,mood:'Reflexiva',cardId:card.id,type:'daily'});}
+import { CARDS } from './tarot-data.js';
+import { store, escapeHTML } from './storage.js';
+import { cardImageMarkup } from './tarot-image-runtime.js';
+import { brasiliaDate, createDailyRecord, isDailyRecord, DAILY_STORAGE_KEY } from './daily-policy.js';
+import { dailyMeaning } from './daily-meaning-runtime.js';
+
+const safe = value => escapeHTML(value ?? '');
+const section = (title, body) => body ? `<article class="meaning-card"><span>${safe(title)}</span><p>${safe(body)}</p></article>` : '';
+
+export class DailyRitual {
+  constructor(root, onSave) {
+    this.root = root;
+    this.onSave = onSave;
+    this.data = store.get(DAILY_STORAGE_KEY);
+    if (this.data?.reversed) this.data = null;
+    this.render();
+  }
+
+  render() {
+    if (isDailyRecord(this.data)) return this.reveal(false);
+    if (navigator.onLine === false) {
+      this.root.innerHTML = `<p class="eyebrow">RITUAL DIÁRIO</p><h3>Sua próxima carta espera pela conexão.</h3><p>Offline, a Divina Bruxa permite rever uma carta já revelada. Conecte-se para realizar um novo ritual.</p>`;
+      return;
+    }
+    this.root.innerHTML = `<div class="ritual-steps"><i class="on"></i><i></i><i></i></div><div class="ritual-breathe"><span></span></div><p class="eyebrow">PASSO 1 · RESPIRAR</p><h3>Chegue ao presente.</h3><p>Toque na Orbe, respire lentamente e deixe o agora se aproximar.</p><button class="primary" data-next>Começar ritual</button>`;
+    this.root.querySelector('[data-next]').onclick = () => this.intention();
+  }
+
+  intention() {
+    this.root.innerHTML = `<div class="ritual-steps"><i class="on"></i><i class="on"></i><i></i></div><p class="eyebrow">PASSO 2 · INTENÇÃO PRIVADA</p><h3>O que deseja compreender?</h3><p>Esta intenção permanece somente neste dispositivo e não aparece ao compartilhar a carta.</p><input id="dailyIntention" maxlength="120" autocomplete="off" placeholder="Uma palavra ou pergunta opcional"><button class="primary" data-draw>Despertar minha carta</button>`;
+    this.root.querySelector('[data-draw]').onclick = () => {
+      const existing = store.get(DAILY_STORAGE_KEY);
+      if (isDailyRecord(existing)) {
+        this.data = existing;
+        this.reveal(false);
+        return;
+      }
+      this.data = createDailyRecord(this.root.querySelector('#dailyIntention').value);
+      store.set(DAILY_STORAGE_KEY, this.data);
+      navigator.vibrate?.([18, 35, 24]);
+      this.reveal(true);
+    };
+  }
+
+  reveal(animate = false) {
+    if (!isDailyRecord(this.data, brasiliaDate())) return this.render();
+    const card = CARDS[this.data.id];
+    const m = dailyMeaning(card);
+    const keywords = m.keywords.map(safe).join(' · ');
+    const symbols = m.symbols.length ? `<article class="meaning-card"><span>SÍMBOLOS</span>${m.symbols.map(item => `<p>✦ ${safe(item)}</p>`).join('')}</article>` : '';
+    this.root.innerHTML = `<div class="ritual-steps"><i class="on"></i><i class="on"></i><i class="on"></i></div>${this.data.intention ? `<p class="intention">Sua intenção privada · ${safe(this.data.intention)}</p>` : ''}<div class="current daily-reveal ${animate ? 'birth' : ''}">${cardImageMarkup(card, { priority: 'high' })}</div><p class="eyebrow">SUA CARTA DO DIA · DIRETA</p><h3>${safe(card.name)}</h3><p class="keywords">${keywords}</p>${section('ESSÊNCIA', m.essence)}${section('LUZ', m.light)}${section('TENSÃO', m.tension)}${section('AMOR', m.love)}${section('RELACIONAMENTOS', m.relationships)}${section('CARREIRA', m.career)}${section('DINHEIRO', m.money)}${section('ESPIRITUALIDADE', m.spirituality)}${section('CONSELHO', m.advice)}${symbols}${section('PERGUNTA PARA O DIA', m.reflectionQuestion)}<button class="primary" data-save>Guardar no Diário</button><p class="free-rule">A carta permanece a mesma até a próxima data no fuso de Brasília.</p>`;
+    this.root.querySelector('[data-save]').onclick = () => this.onSave({ title: `Carta do Dia — ${card.name}`, text: `${m.essence}\n\n${m.advice}`, question: this.data.intention || m.reflectionQuestion, tags: `carta do dia, ${card.suit}`, mood: 'Reflexiva', cardId: card.id, type: 'daily', orientation: 'normal' });
+  }
 }
