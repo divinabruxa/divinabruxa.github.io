@@ -1,62 +1,39 @@
-/* DIVINA BRUXA — MESA REAL 13 × 6 — CHECKPOINT 2.2
-   Grade estável, navegação mobile e ampliação HD sem inversão ou distorção.
-*/
-.real-table-tools{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 2px 10px;color:rgba(245,229,222,.62)}
-.real-table-tools p{display:flex;align-items:center;gap:9px;margin:0;min-width:0}
-.real-table-tools p>span{display:grid;place-items:center;width:30px;height:30px;flex:0 0 auto;border:1px solid rgba(232,199,121,.28);border-radius:50%;color:#e8c779}
-.real-table-tools p>span svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.real-table-tools p>span svg path{vector-effect:non-scaling-stroke}
-.real-table-tools p>span+span{display:grid;gap:2px;width:auto;height:auto;border:0;border-radius:0;color:inherit}
-.real-table-tools strong{font-family:var(--serif);font-size:.84rem;font-weight:500;color:#f2dfb1}
-.real-table-tools small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.61rem;letter-spacing:.04em}
-.table-view-actions{display:flex;align-items:center;gap:6px;flex:0 0 auto}
-.table-view-actions button{min-width:44px;min-height:44px;border:1px solid rgba(232,199,121,.28);border-radius:999px;background:rgba(12,7,19,.82);color:#e8c779}
-.table-view-actions button:disabled{opacity:.28}
-.table-view-actions .table-compact{padding:0 13px;font-size:.67rem;letter-spacing:.04em}
-.table-pan{display:grid;place-items:center;padding:0;font-family:var(--serif);font-size:1.35rem}
-
-.real-table-viewport{position:relative;width:100%;overflow-x:auto;overflow-y:hidden;padding:4px 2px 16px;scroll-padding-inline:2px;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(232,199,121,.45) rgba(255,255,255,.05);overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y}
-.real-table-viewport::-webkit-scrollbar{height:3px}.real-table-viewport::-webkit-scrollbar-track{background:rgba(255,255,255,.05)}.real-table-viewport::-webkit-scrollbar-thumb{border-radius:99px;background:rgba(232,199,121,.45)}
-.real-table-viewport:focus-visible{outline:2px solid #e8c779;outline-offset:3px;border-radius:20px}
-.real-table{margin:0;grid-auto-flow:row;grid-auto-rows:auto}
-.table-slot:nth-child(6n+1){scroll-snap-align:start}
-#tarot .table-slot img,#tarot .current img{object-fit:contain;background:#07040d;transform:none!important}
-#tarot .table-slot{contain:layout paint}
-#tarot .table-slot.revealed:focus-visible{outline:2px solid #f7dda0;outline-offset:2px}
-
-.card-lightbox{width:min(92vw,480px);max-width:480px;max-height:min(92svh,820px);margin:auto;padding:24px 24px 20px;border:1px solid rgba(239,205,133,.55);border-radius:30px;color:#f8eddd;background:radial-gradient(circle at 50% 35%,rgba(133,47,179,.38),transparent 48%),linear-gradient(155deg,#1a0d27,#05030b 76%);box-shadow:inset 0 1px rgba(255,255,255,.12),0 30px 100px rgba(0,0,0,.85),0 0 55px rgba(173,70,236,.25);overflow:hidden}
-.card-lightbox::backdrop{background:rgba(2,1,6,.82);backdrop-filter:blur(12px)}
-.card-lightbox[open]{animation:tarotLightboxIn .32s cubic-bezier(.16,.82,.22,1) both}
-.lightbox-aura{position:absolute;inset:8% 4% 17%;border:1px solid rgba(214,151,255,.16);border-radius:50%;pointer-events:none;animation:tarotLightboxAura 12s linear infinite}
-.lightbox-aura::before,.lightbox-aura::after{content:"";position:absolute;inset:8% -6%;border:1px solid rgba(232,199,121,.12);border-radius:50%;transform:rotate(48deg)}
-.lightbox-aura::after{inset:-6% 12%;transform:rotate(-32deg)}
-.lightbox-close{position:absolute;z-index:4;top:14px;right:14px;width:44px;height:44px;padding:0;border:1px solid rgba(232,199,121,.38);border-radius:50%;background:rgba(8,4,13,.78);color:#f0d38e;font-size:1.55rem;line-height:1}
-.card-lightbox figure{position:relative;z-index:2;display:grid;justify-items:center;gap:13px;margin:0}
-.lightbox-image{width:min(68vw,340px);height:min(66svh,510px);aspect-ratio:2/3;display:grid;place-items:center;border-radius:18px;background:#07040d;box-shadow:0 26px 75px rgba(0,0,0,.75),0 0 34px rgba(192,75,255,.28)}
-.lightbox-image img{display:block;width:100%;height:100%;object-fit:contain;transform:none!important;border:1px solid rgba(239,205,133,.72);border-radius:18px;background:#07040d}
-.card-lightbox figcaption{display:grid;justify-items:center;gap:4px;text-align:center}
-.card-lightbox figcaption>span{font-size:.55rem;letter-spacing:.22em;color:#d9b76a}
-.card-lightbox figcaption strong{max-width:88vw;font-family:var(--serif);font-size:1.32rem;font-weight:500}
-.card-lightbox figcaption small{font-size:.55rem;letter-spacing:.18em;color:rgba(245,229,222,.5)}
-.lightbox-nav{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}
-.lightbox-nav button{min-height:46px;padding:0 12px;border:1px solid rgba(232,199,121,.3);border-radius:999px;background:rgba(10,5,16,.8);color:#e8c779;font-size:.68rem}
-.lightbox-nav button:disabled{opacity:.28}
+/* DIVINA BRUXA — MESA REAL 13 × 6 — CHECKPOINT 2.2.1 */
+#tarot .real-table-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px}
+#tarot .table-actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}
+#tarot .table-actions button{min-height:44px}
+#tarot .real-table-tools{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 16px}
+#tarot .real-table-tools p{display:flex;align-items:center;gap:10px;margin:0;color:#b9aab8;font:600 .64rem/1.4 ui-sans-serif,system-ui,sans-serif}
+#tarot .real-table-tools p>span+span{display:grid;gap:2px}
+#tarot .real-table-tools small{color:#776b79;font-size:.56rem;font-weight:400;white-space:nowrap}
+#tarot .table-view-actions{display:flex;align-items:center;gap:7px}
+#tarot .table-scroll,#tarot .table-compact{min-width:44px;min-height:44px;border:1px solid rgba(232,199,121,.32);border-radius:999px;color:#e8c779;background:#100617;cursor:pointer}
+#tarot .table-compact{min-width:126px;padding:0 14px;font-size:.61rem}
+#tarot .table-scroll:disabled{opacity:.28;cursor:default}
+#tarot .real-table-viewport{max-width:100%;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;touch-action:pan-x pan-y;scroll-behavior:smooth;scrollbar-color:rgba(232,199,121,.45) rgba(255,255,255,.035);scrollbar-width:thin}
+#tarot .real-table{--tarot-card-width:clamp(100px,14vw,128px);display:grid;grid-template-columns:repeat(6,var(--tarot-card-width));gap:9px;width:max-content;min-width:100%;padding:16px}
+#tarot .table-slot{position:relative;display:grid;place-items:center;width:var(--tarot-card-width);aspect-ratio:2/3;padding:0;overflow:hidden;border-radius:9px;scroll-margin-inline:40px}
+#tarot .table-slot img{display:block;width:100%;height:100%;object-fit:contain;transform:none!important;background:#07040d}
+#tarot .table-slot .position{font-family:Georgia,serif;font-size:.7rem;color:#d9bc75}
+#tarot .table-slot .order{position:absolute;right:4px;bottom:4px;display:grid;place-items:center;min-width:20px;height:20px;padding:0 4px;border:1px solid rgba(232,199,121,.48);border-radius:999px;color:#f3dda9;background:rgba(5,2,10,.84);font:600 .48rem/1 ui-sans-serif,system-ui,sans-serif}
+#tarot .real-table-viewport.is-compact .real-table{grid-template-columns:repeat(6,minmax(0,1fr));width:100%;gap:4px;padding:7px}
+#tarot .real-table-viewport.is-compact .table-slot{width:100%;border-radius:5px}
+#tarot .card-lightbox{width:min(92vw,420px);max-height:94dvh;padding:0;border:1px solid rgba(232,199,121,.54);border-radius:25px;color:#f4e9ef;background:#07030c;box-shadow:0 30px 120px #000,0 0 70px rgba(162,52,210,.3)}
+#tarot .card-lightbox::backdrop{background:rgba(2,1,5,.88);backdrop-filter:blur(10px)}
+#tarot .card-lightbox-shell{display:grid;grid-template-rows:auto minmax(0,1fr) auto;padding:14px}
+#tarot .card-lightbox-close{justify-self:end;width:44px;height:44px;border:1px solid rgba(232,199,121,.38);border-radius:50%;color:#e8c779;background:#120719;font-size:1.4rem;cursor:pointer}
+#tarot .card-lightbox-image{display:grid;place-items:center;min-height:0;padding:5px 22px}
+#tarot .card-lightbox-image img{display:block;width:min(100%,300px);max-height:67dvh;object-fit:contain;transform:none!important;border:1px solid rgba(232,199,121,.55);border-radius:9px;box-shadow:0 18px 55px #000}
+#tarot .card-lightbox-meta{text-align:center;padding:10px 0 2px}
+#tarot .card-lightbox-meta h3{margin:5px 0;color:#f2e7e8;font:400 1.25rem/1.2 Georgia,serif}
+#tarot .card-lightbox-meta p{margin:0;color:#d5b96f;font:600 .55rem/1.2 ui-sans-serif,system-ui,sans-serif;letter-spacing:.14em}
+#tarot .card-lightbox-nav{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
+#tarot .card-lightbox-nav button{min-height:44px;border:1px solid rgba(232,199,121,.3);border-radius:999px;color:#ead59c;background:#14081d;cursor:pointer}
+#tarot .card-lightbox-nav button:disabled{opacity:.3}
 body.card-lightbox-open{overflow:hidden}
-
-@keyframes tarotLightboxIn{from{opacity:0;transform:translateY(20px) scale(.94);filter:blur(5px)}to{opacity:1;transform:none;filter:none}}
-@keyframes tarotLightboxAura{to{transform:rotate(360deg)}}
-
 @media(max-width:560px){
- .real-table-tools{align-items:flex-end;margin-top:-2px}.real-table-tools p{max-width:47%}.real-table-tools small{white-space:normal;line-height:1.35}.table-view-actions{gap:5px}.table-view-actions .table-compact{max-width:112px;padding:0 10px;line-height:1.2}
- .real-table-viewport{width:calc(100% + 34px);margin-inline:-17px;padding:4px 17px 16px;scroll-padding-inline:17px;scroll-snap-type:x proximity}
- .real-table{--tarot-card-width:clamp(82px,23vw,96px);width:max-content;min-width:max-content;grid-template-columns:repeat(6,var(--tarot-card-width));gap:8px;padding:9px}
- .real-table-viewport.is-compact .real-table{width:calc(100vw - 34px);min-width:calc(100vw - 34px);grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;padding:7px}
- .real-table-viewport.is-compact .table-slot .order{width:14px;height:14px;font-size:.4rem}
- .card-lightbox{width:calc(100vw - 24px);max-height:calc(100svh - 24px);padding:20px 16px 16px;border-radius:26px}
- .lightbox-image{width:min(72vw,330px);height:min(65svh,495px)}
- .card-lightbox figcaption strong{font-size:1.18rem}
+ #tarot .real-table{--tarot-card-width:clamp(82px,23vw,96px);grid-template-columns:repeat(6,var(--tarot-card-width));gap:6px;padding:10px}
+ #tarot .real-table-tools{align-items:stretch}
+ #tarot .real-table-tools p{min-width:0}
 }
-
-@media(min-width:561px){.table-compact{display:none}.real-table-tools small{white-space:normal}.real-table-viewport{overflow-x:hidden}.table-pan{display:none}}
-@media(orientation:landscape) and (max-height:560px){.card-lightbox{width:min(88vw,720px);max-width:720px;padding:12px 68px}.card-lightbox figure{grid-template-columns:auto 1fr;align-items:center}.lightbox-image{width:auto;height:min(73svh,410px)}.lightbox-nav{margin-left:calc(min(73svh,410px) * .666 + 14px)}}
-@media(prefers-reduced-motion:reduce){.real-table-viewport{scroll-behavior:auto}.card-lightbox[open],.lightbox-aura{animation:none!important}}
+@media(prefers-reduced-motion:reduce){#tarot .real-table-viewport{scroll-behavior:auto}}

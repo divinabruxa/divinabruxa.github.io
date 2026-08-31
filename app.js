@@ -3,7 +3,7 @@ import { escapeHTML } from './storage.js';
 import { createNavigation } from './navigation.js?v=75';
 import { RealityOrbEngine } from './orb-engine-v68.js?v=69';
 import { bindMiniOrbs } from './mini-orb-engine.js?v=71';
-import { FreeTarot } from './tarot-engine.js?v=82';
+import { FreeTarot } from './tarot-engine.js?v=83';
 import { DailyRitual } from './ritual-engine.js';
 import { SpreadsEngine } from './spreads-engine.js';
 import { JournalEngine } from './journal-engine.js';
