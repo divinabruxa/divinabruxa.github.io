@@ -229,6 +229,18 @@ main{position:relative;z-index:1}
 .home-screen.orb-menu-open .orb-shell{animation:v73OrbRecognition .92s cubic-bezier(.16,.82,.22,1)}
 .home-screen.orb-menu-open .orb-stage-ref:before{animation:v73StageAwaken .92s ease-out,v68AuraBreath 7.8s ease-in-out .92s infinite}
 
+/* V74 — Sigilos vetoriais de alta definição, desenhados pela luz. */
+.home-orb-menu button{--sigil-delay:0s}
+.home-orb-menu button:nth-of-type(2){--sigil-delay:.025s}.home-orb-menu button:nth-of-type(3){--sigil-delay:.05s}.home-orb-menu button:nth-of-type(4){--sigil-delay:.075s}.home-orb-menu button:nth-of-type(5){--sigil-delay:.10s}.home-orb-menu button:nth-of-type(6){--sigil-delay:.125s}.home-orb-menu button:nth-of-type(7){--sigil-delay:.15s}.home-orb-menu button:nth-of-type(8){--sigil-delay:.175s}
+.home-orb-menu button span{border-color:rgba(241,205,139,.78);background:radial-gradient(circle at 33% 24%,rgba(134,56,169,.45),transparent 42%),radial-gradient(circle at 50% 58%,rgba(45,13,67,.92),rgba(7,3,13,.98) 72%);box-shadow:inset 0 1px rgba(255,246,221,.13),inset 0 0 22px rgba(181,61,229,.22),0 0 0 3px rgba(229,183,105,.035),0 0 15px rgba(229,178,96,.13)}
+.home-orb-menu button span:after{inset:2px;background:radial-gradient(ellipse at 28% 15%,rgba(255,251,233,.18),transparent 28%),conic-gradient(from 210deg,transparent 0 28%,rgba(246,197,255,.12) 35%,transparent 43% 74%,rgba(255,221,157,.10) 80%,transparent 87%);opacity:.66;will-change:transform}
+.home-orb-menu svg{position:relative;z-index:2;width:23px;height:23px;display:block;overflow:visible;fill:none;stroke:currentColor;stroke-width:1.55;stroke-linecap:round;stroke-linejoin:round;color:#f3cf8c;filter:drop-shadow(0 0 4px rgba(244,198,117,.34));opacity:.98;transition:color .18s,filter .18s}
+.home-orb-menu svg *{vector-effect:non-scaling-stroke;stroke-dasharray:72;stroke-dashoffset:0}
+.home-orb-menu button:hover svg,.home-orb-menu button:focus-visible svg,.home-orb-menu button.is-current svg{color:#ffe7b0;filter:drop-shadow(0 0 5px rgba(255,216,145,.68)) drop-shadow(0 0 9px rgba(212,89,255,.30))}
+.home-screen.orb-menu-open .home-orb-menu button span:after{animation:v74GemSheen 9s linear calc(var(--sigil-delay) + .65s) infinite}
+.home-screen.orb-menu-open .home-orb-menu svg{animation:v74SigilBreath 5.8s ease-in-out calc(var(--sigil-delay) + .92s) infinite}
+.home-screen.orb-menu-open .home-orb-menu svg *{animation:v74SigilDraw .78s cubic-bezier(.18,.78,.22,1) calc(var(--sigil-delay) + .12s) both}
+
 /* Compatibilidade das demais telas. */
 .section-head h2,h2{font-family:var(--serif);font-weight:400}.drawer nav{display:block}.toast{z-index:90}
 
@@ -257,6 +269,9 @@ main{position:relative;z-index:1}
 @keyframes v73PortalHalo{0%{opacity:0;transform:scale(.62)}48%{opacity:.88}100%{opacity:0;transform:scale(1.28)}}
 @keyframes v73OrbRecognition{0%{filter:drop-shadow(0 0 25px rgba(173,42,251,.42)) drop-shadow(0 0 55px rgba(99,31,186,.18))}45%{filter:drop-shadow(0 0 50px rgba(237,104,255,.88)) drop-shadow(0 0 104px rgba(130,54,231,.42))}100%{filter:drop-shadow(0 0 26px rgba(173,42,251,.42)) drop-shadow(0 0 64px rgba(99,31,186,.18))}}
 @keyframes v73StageAwaken{0%{opacity:.38;filter:blur(23px)}45%{opacity:1;filter:blur(15px)}100%{opacity:.68;filter:blur(20px)}}
+@keyframes v74SigilDraw{0%{stroke-dashoffset:72;opacity:0}32%{opacity:1}100%{stroke-dashoffset:0;opacity:1}}
+@keyframes v74SigilBreath{0%,100%{opacity:.90;filter:drop-shadow(0 0 3px rgba(244,198,117,.25))}50%{opacity:1;filter:drop-shadow(0 0 6px rgba(255,216,145,.58)) drop-shadow(0 0 8px rgba(210,83,255,.24))}}
+@keyframes v74GemSheen{to{transform:rotate(360deg)}}
 
 @media(max-width:430px){
   .app-header{padding-left:14px;padding-right:14px}.brand{gap:9px}.brand .mini-orb{width:43px;height:43px}.brand b{font-size:17px}.brand small{font-size:7px;letter-spacing:.24em}
@@ -270,4 +285,4 @@ main{position:relative;z-index:1}
 }
 @media(max-width:365px){.brand b{font-size:15px}.brand small{font-size:6px}.magic-menu-universe{width:98vw}.magic-menu-radial button{width:104px}.magic-menu-radial button:nth-child(3),.magic-menu-radial button:nth-child(7){width:88px}.magic-menu-radial button span{width:38px;height:38px;flex-basis:38px}.magic-menu-radial button b{font-size:7px}.magic-menu-rail{grid-template-columns:1fr}.magic-menu-rail button{min-height:56px}}
 @media(orientation:landscape) and (max-height:560px){.home-screen{padding-top:78px}.home-copy h1{font-size:42px}.orb-stage-ref{width:min(58vh,340px);margin-top:4px}.awaken{margin-top:6px}.magic-menu-universe{width:min(58vh,340px)}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.screen.active{animation:none}.orb-stage-ref:before,.orb-shell:before,.mini-orb,.magic-dock .dock-orb:before,.magic-menu-universe:before,.magic-menu-orbits,.magic-menu-orbits i,.magic-menu-core:before,.home-orb-menu:before,.home-orb-menu:after,.home-orb-menu>p,.home-orb-menu button,.home-orb-menu button span,.home-orb-menu button span:before,.home-screen.orb-menu-open .orb-shell,.home-screen.orb-menu-open .orb-stage-ref:before{animation:none!important}.orb-shell:before{background-size:103%;filter:saturate(1.04) brightness(1)}.magic-menu .magic-menu-sheet,.orb-shell canvas,.orb-stage-ref,.orb-shell{transition:none}.drawer.magic-menu.open .magic-menu-radial button,.drawer.magic-menu.open .magic-menu-rail button,.drawer.magic-menu.open .magic-menu-extra button{animation:none}.home-screen.orb-menu-open .home-orb-menu button{opacity:1;filter:none}.home-screen.orb-menu-open .home-orb-menu:before,.home-screen.orb-menu-open .home-orb-menu:after,.home-screen.orb-menu-open .home-orb-menu>p{opacity:1;filter:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.screen.active{animation:none}.orb-stage-ref:before,.orb-shell:before,.mini-orb,.magic-dock .dock-orb:before,.magic-menu-universe:before,.magic-menu-orbits,.magic-menu-orbits i,.magic-menu-core:before,.home-orb-menu:before,.home-orb-menu:after,.home-orb-menu>p,.home-orb-menu button,.home-orb-menu button span,.home-orb-menu button span:before,.home-orb-menu button span:after,.home-orb-menu svg,.home-orb-menu svg *,.home-screen.orb-menu-open .orb-shell,.home-screen.orb-menu-open .orb-stage-ref:before{animation:none!important}.orb-shell:before{background-size:103%;filter:saturate(1.04) brightness(1)}.magic-menu .magic-menu-sheet,.orb-shell canvas,.orb-stage-ref,.orb-shell{transition:none}.drawer.magic-menu.open .magic-menu-radial button,.drawer.magic-menu.open .magic-menu-rail button,.drawer.magic-menu.open .magic-menu-extra button{animation:none}.home-screen.orb-menu-open .home-orb-menu button{opacity:1;filter:none}.home-screen.orb-menu-open .home-orb-menu:before,.home-screen.orb-menu-open .home-orb-menu:after,.home-screen.orb-menu-open .home-orb-menu>p{opacity:1;filter:none}.home-orb-menu svg *{stroke-dashoffset:0}}
