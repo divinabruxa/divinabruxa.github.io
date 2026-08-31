@@ -1,0 +1,9 @@
+/* DIVINA BRUXA — SELO EDITORIAL DO TAROT LIVRE — CHECKPOINT 2.4 */
+#tarot .editorial-covenant{position:relative;isolation:isolate;display:grid;grid-template-columns:48px minmax(0,1fr);gap:13px;margin:0 0 28px;padding:17px 18px;overflow:hidden;border:1px solid rgba(232,199,121,.2);border-radius:19px;background:radial-gradient(circle at 6% 0,rgba(180,68,220,.2),transparent 32%),linear-gradient(135deg,rgba(30,12,42,.88),rgba(7,4,12,.92));box-shadow:inset 0 1px rgba(255,255,255,.035)}
+#tarot .editorial-covenant::after{content:"";position:absolute;z-index:-1;right:-24px;top:-48px;width:150px;aspect-ratio:1;border:1px solid rgba(232,199,121,.12);border-radius:50%;box-shadow:inset 0 0 35px rgba(171,62,210,.08)}
+#tarot .editorial-seal{grid-row:1/4;display:grid;place-items:center;align-self:start;width:46px;height:46px;border:1px solid rgba(232,199,121,.5);border-radius:50%;color:#edcf88;background:radial-gradient(circle,rgba(166,58,205,.25),rgba(8,4,13,.92) 68%);font-size:1.05rem;text-shadow:0 0 14px #d766f3;box-shadow:0 0 22px rgba(162,55,203,.18)}
+#tarot .editorial-covenant h3{margin:1px 0 4px;color:#f1e4dc;font:400 1.12rem/1.2 Georgia,serif}
+#tarot .editorial-covenant>div>p{margin:0;color:#a99baa;font:400 .65rem/1.55 ui-sans-serif,system-ui,sans-serif}
+#tarot .editorial-principles{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.editorial-principles span{padding:6px 9px;border:1px solid rgba(232,199,121,.2);border-radius:999px;color:#d8bd7a;background:rgba(8,4,13,.54);font:600 .48rem/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+#tarot .editorial-state{grid-column:2;margin:0;padding-top:10px;border-top:1px solid rgba(232,199,121,.1);color:#d5c8d3;font:500 .6rem/1.4 ui-sans-serif,system-ui,sans-serif}
+@media(max-width:480px){#tarot .editorial-covenant{grid-template-columns:40px minmax(0,1fr);gap:11px;padding:15px}#tarot .editorial-seal{width:38px;height:38px}.editorial-principles span{font-size:.44rem}}
