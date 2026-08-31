@@ -1,0 +1,34 @@
+DIVINA BRUXA — PLANO SUPREMO 5.0
+CHECKPOINT 1.1 — CATÁLOGO CANÔNICO ÚNICO DAS 78 CARTAS
+
+ESTE ZIP TEM SOMENTE O NECESSÁRIO PARA ESTA ETAPA:
+
+SUBSTITUIR NA RAIZ DO GITHUB
+1. tarot-data.js
+
+ADICIONAR NA RAIZ DO GITHUB
+2. verify-catalog-v5.mjs
+3. 00-LEIA-PRIMEIRO-V5-CHECKPOINT-1.1.txt
+
+NÃO APAGUE NENHUM OUTRO ARQUIVO.
+NÃO ALTERE A ORBE, O MENU, O RODAPÉ OU AS IMAGENS.
+
+O QUE FICOU PRONTO
+- Uma fonte oficial única para as 78 cartas.
+- Identidade permanente e índice de 0 a 77.
+- Nomes PT-BR e nomes futuros EN/ES.
+- Arcano, naipe, número ou corte, elemento e correspondências.
+- Caminho exato da imagem de cada carta.
+- Ordem canônica de O Louco até Rei de Ouros.
+- Orientação obrigatória normal; nenhuma carta invertida.
+- Compatibilidade preservada com os motores atuais.
+
+VALIDAÇÃO OPCIONAL
+Em um computador com Node.js, na pasta do site:
+node verify-catalog-v5.mjs
+
+O resultado correto termina com:
+Catálogo Canônico V5 íntegro: 78 cartas normais, de O Louco a Rei de Ouros.
+
+PRÓXIMO CONTINUA
+Checkpoint 1.2 — auditoria técnica das 78 imagens, sem trocar as artes.
