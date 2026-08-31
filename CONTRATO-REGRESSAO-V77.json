@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "5.0.1",
+  "checkpoint": "0.3",
+  "baseline": "V77 — Centro Mobile Exato",
+  "status": "PASS",
+  "purpose": "Contrato de regressão para proteger a aparência aprovada enquanto o conteúdo evolui.",
+  "requiredChecks": {
+    "visual": [
+      "visual-v68.css carregado",
+      "orb-engine-v68.js preservado",
+      "mini-orb-engine.js preservado",
+      "Orbe principal centralizada no mobile portrait",
+      "sem compensação horizontal -50%",
+      "menu aberto move apenas no eixo vertical",
+      "fallback sem WebGL e Reduced Motion preservados"
+    ],
+    "navigation": [
+      "14 telas principais preservadas",
+      "14 destinos sem links quebrados",
+      "Menu Mágico com 9 portais",
+      "portal de vídeos presente",
+      "menu inferior com 5 joias",
+      "mini-orbe inferior abre Orbe IA"
+    ],
+    "tarot": [
+      "78 cartas exatas",
+      "IDs e nomes únicos",
+      "O Louco no índice 0",
+      "Rei de Ouros no índice 77",
+      "orientação normal apenas",
+      "78 imagens válidas de 300x450",
+      "78 páginas editoriais e sitemap preservados"
+    ]
+  },
+  "verification": {
+    "command": "node verify-v77.mjs",
+    "expectedPasses": 49,
+    "lastRun": "2026-08-31",
+    "lastResult": "49/49"
+  },
+  "policy": {
+    "appearanceChanges": "blocked without explicit visual checkpoint",
+    "artworkUpload": "blocked unless an image checkpoint authorizes it",
+    "production": "staging only"
+  },
+  "nextCheckpoint": "1.1 — Fundação Canônica das 78 Cartas"
+}
