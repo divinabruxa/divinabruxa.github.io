@@ -174,6 +174,40 @@ main{position:relative;z-index:1}
 .magic-dock .dock-orb .mini-orb,.magic-dock .dock-orb .mini-orb.mini-awake{top:-20px;width:60px;height:60px;background-position:50% 50%!important;transform:translateX(-50%)!important}
 .magic-menu-brand .mini-orb,.brand .mini-orb{background-position:50% 50%!important;transform:none!important}
 
+/* V72 — O Menu nasce sobre a própria Orbe principal da Home. */
+.drawer.magic-menu{display:none!important}
+.home-copy,.awaken,.orb-status,.touch-hint{transition:opacity .24s ease,filter .24s ease}
+.orb-stage-ref{transition:width .42s cubic-bezier(.2,.78,.2,1),margin .42s cubic-bezier(.2,.78,.2,1)}
+.orb-shell{transition:width .42s cubic-bezier(.2,.78,.2,1),filter .2s}
+.home-orb-menu{position:absolute;z-index:5;inset:0;display:block;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .26s ease,visibility .26s ease}
+.home-orb-menu:before{content:"";position:absolute;z-index:0;inset:17%;border:1px solid rgba(232,191,118,.62);border-radius:50%;box-shadow:inset 0 0 32px rgba(161,52,221,.09),0 0 22px rgba(228,175,93,.06);opacity:.9}
+.home-orb-menu:after{content:"";position:absolute;z-index:0;inset:25%;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(223,65,255,.19),rgba(112,36,211,.07) 51%,transparent 72%);filter:blur(13px);animation:v72MenuAura 7.8s ease-in-out infinite}
+.home-orb-menu>p{position:absolute;z-index:4;left:50%;top:-34px;width:100%;margin:0;transform:translateX(-50%);color:var(--gold-bright);font:500 clamp(10px,2.8vw,14px) var(--serif);letter-spacing:.20em;white-space:nowrap;text-align:center;text-shadow:0 0 16px rgba(233,189,116,.14)}
+.home-orb-menu>p:before,.home-orb-menu>p:after{content:"";display:inline-block;width:min(12vw,76px);height:1px;margin:0 10px 4px;background:linear-gradient(90deg,transparent,rgba(226,183,110,.48))}.home-orb-menu>p:after{transform:scaleX(-1)}
+.home-orb-menu button{position:absolute;z-index:6;width:112px;height:46px;min-height:46px;display:flex;align-items:center;justify-content:flex-start;gap:7px;padding:0;border:0;background:transparent;color:#d8cdd9;text-align:left;pointer-events:auto;touch-action:manipulation;opacity:0;filter:blur(3px);transition:color .18s,filter .18s}
+.home-orb-menu button span{flex:0 0 42px;width:42px;height:42px;display:grid;place-items:center;border:1px solid rgba(232,192,120,.72);border-radius:50%;background:radial-gradient(circle at 35% 24%,rgba(104,37,139,.40),transparent 44%),linear-gradient(145deg,rgba(18,8,28,.98),rgba(4,2,9,.98));color:var(--gold-bright);font-size:18px;line-height:1;box-shadow:inset 0 0 18px rgba(169,48,220,.18),0 0 13px rgba(229,178,96,.10)}
+.home-orb-menu button b{font:500 9px/1.12 var(--serif);white-space:normal;text-shadow:0 0 13px rgba(230,185,111,.12)}
+.home-orb-menu button:nth-of-type(1),.home-orb-menu button:nth-of-type(5){left:50%;width:108px;height:68px;flex-direction:column;justify-content:flex-start;gap:3px;text-align:center;transform:translateX(-50%)}
+.home-orb-menu button:nth-of-type(1){top:calc(17% - 21px)}
+.home-orb-menu button:nth-of-type(2){left:calc(73% - 21px);top:calc(27% - 21px)}
+.home-orb-menu button:nth-of-type(3){left:calc(83% - 21px);top:calc(50% - 21px)}
+.home-orb-menu button:nth-of-type(4){left:calc(73% - 21px);top:calc(73% - 21px)}
+.home-orb-menu button:nth-of-type(5){top:calc(83% - 21px)}
+.home-orb-menu button:nth-of-type(6),.home-orb-menu button:nth-of-type(7),.home-orb-menu button:nth-of-type(8){flex-direction:row-reverse;text-align:right}
+.home-orb-menu button:nth-of-type(6){right:calc(73% - 21px);top:calc(73% - 21px)}
+.home-orb-menu button:nth-of-type(7){right:calc(83% - 21px);top:calc(50% - 21px)}
+.home-orb-menu button:nth-of-type(8){right:calc(73% - 21px);top:calc(27% - 21px)}
+.home-orb-menu button:hover,.home-orb-menu button:focus-visible,.home-orb-menu button.is-current{color:var(--gold-bright);filter:brightness(1.2) drop-shadow(0 0 9px rgba(232,184,101,.28));outline:0}.home-orb-menu button:focus-visible span{outline:2px solid var(--gold-bright);outline-offset:3px}
+.home-screen.orb-menu-open .home-copy,.home-screen.orb-menu-open>.awaken,.home-screen.orb-menu-open>.orb-status,.home-screen.orb-menu-open>.touch-hint{opacity:0;filter:blur(3px);pointer-events:none}
+.home-screen.orb-menu-open .orb-stage-ref{width:min(98vw,520px);margin-top:18px}
+.home-screen.orb-menu-open .orb-shell{width:50%;transform:none!important}
+.home-screen.orb-menu-open .home-orb-menu{visibility:visible;opacity:1}
+.home-screen.orb-menu-open .home-orb-menu button{animation:v72MenuNode .36s ease forwards}
+.home-screen.orb-menu-open .home-orb-menu button:nth-of-type(2){animation-delay:.025s}.home-screen.orb-menu-open .home-orb-menu button:nth-of-type(3){animation-delay:.05s}.home-screen.orb-menu-open .home-orb-menu button:nth-of-type(4){animation-delay:.075s}.home-screen.orb-menu-open .home-orb-menu button:nth-of-type(5){animation-delay:.10s}.home-screen.orb-menu-open .home-orb-menu button:nth-of-type(6){animation-delay:.125s}.home-screen.orb-menu-open .home-orb-menu button:nth-of-type(7){animation-delay:.15s}.home-screen.orb-menu-open .home-orb-menu button:nth-of-type(8){animation-delay:.175s}
+.menu-button i{transform-origin:center;transition:transform .22s ease}.menu-button.is-open i:first-child{transform:translateY(5px) rotate(45deg)}.menu-button.is-open i:nth-child(2){transform:translateY(-5px) rotate(-45deg)}
+.magic-dock .dock-orb .mini-orb,.magic-dock .dock-orb .mini-orb.mini-awake{background-color:#13051f!important;background-image:url("./divina-mini-orb-hd-v72.jpeg?v=72")!important;background-size:111%!important;background-position:50% 50%!important;background-repeat:no-repeat!important;border:1px solid rgba(238,201,135,.66);filter:saturate(var(--mini-saturation,1.08)) brightness(var(--mini-brightness,1));image-rendering:auto;transform:translateX(-50%)!important;box-shadow:0 0 24px rgba(224,68,255,.94),0 0 50px rgba(116,42,213,.44)}
+.magic-dock .dock-orb .mini-orb:after{background-image:radial-gradient(ellipse at 25% 14%,rgba(255,255,255,.22),transparent 25%)!important;background-size:100% 100%!important;background-position:center!important;opacity:.72}
+
 /* Compatibilidade das demais telas. */
 .section-head h2,h2{font-family:var(--serif);font-weight:400}.drawer nav{display:block}.toast{z-index:90}
 
@@ -190,6 +224,8 @@ main{position:relative;z-index:1}
 @keyframes v70DockAura{0%,100%{opacity:.46;filter:blur(11px)}50%{opacity:.92;filter:blur(7px)}}
 @keyframes v71SacredAura{0%,100%{opacity:.50;filter:blur(19px)}50%{opacity:.94;filter:blur(14px)}}
 @keyframes v71OrbitStar{0%,100%{opacity:.48;filter:brightness(.9)}50%{opacity:1;filter:brightness(1.45)}}
+@keyframes v72MenuAura{0%,100%{opacity:.48;filter:blur(15px)}50%{opacity:.94;filter:blur(11px)}}
+@keyframes v72MenuNode{from{opacity:0;filter:blur(4px) brightness(1.25)}to{opacity:1;filter:none}}
 
 @media(max-width:430px){
   .app-header{padding-left:14px;padding-right:14px}.brand{gap:9px}.brand .mini-orb{width:43px;height:43px}.brand b{font-size:17px}.brand small{font-size:7px;letter-spacing:.24em}
@@ -197,9 +233,10 @@ main{position:relative;z-index:1}
   .home-screen{padding-top:calc(99px + env(safe-area-inset-top))}.home-copy h1{font-size:clamp(47px,13.4vw,68px)}.home-copy .intro{font-size:15px}
   .orb-stage-ref{width:min(93vw,46svh,410px);margin-top:15px}.awaken{font-size:11px;letter-spacing:.17em}.orb-status,.touch-hint{font-size:11px}
   .magic-dock{width:calc(100% - 16px);height:75px;--dock-height:75px}.magic-dock small{font-size:8px}.magic-dock .dock-orb .mini-orb{width:58px;height:58px;top:-19px}.magic-dock .dock-orb small{margin-top:29px}
+  .home-orb-menu button{width:100px;gap:5px}.home-orb-menu button:nth-of-type(3),.home-orb-menu button:nth-of-type(7){width:90px}.home-orb-menu button:nth-of-type(1),.home-orb-menu button:nth-of-type(5){width:104px}.home-orb-menu button span{width:39px;height:39px;flex-basis:39px;font-size:16px}.home-orb-menu button b{font-size:8px}.home-orb-menu>p:before,.home-orb-menu>p:after{width:8vw;margin-left:7px;margin-right:7px}
   .magic-menu .magic-menu-sheet{padding-left:8px;padding-right:8px}.magic-menu-universe{width:min(97vw,410px)}.magic-menu-radial button{width:110px;gap:6px}.magic-menu-radial button:nth-child(3),.magic-menu-radial button:nth-child(7){width:94px}.magic-menu-radial button span{width:40px;height:40px;flex-basis:40px;font-size:16px}.magic-menu-radial button b{font-size:8px}
   .magic-menu-rail{gap:7px}.magic-menu-rail button{min-height:63px;padding:8px;grid-template-columns:34px 1fr;column-gap:7px}.magic-menu-rail button>span{width:32px;height:32px}.magic-menu-rail strong{font-size:8px}.magic-menu-rail small{font-size:7px}
 }
 @media(max-width:365px){.brand b{font-size:15px}.brand small{font-size:6px}.magic-menu-universe{width:98vw}.magic-menu-radial button{width:104px}.magic-menu-radial button:nth-child(3),.magic-menu-radial button:nth-child(7){width:88px}.magic-menu-radial button span{width:38px;height:38px;flex-basis:38px}.magic-menu-radial button b{font-size:7px}.magic-menu-rail{grid-template-columns:1fr}.magic-menu-rail button{min-height:56px}}
 @media(orientation:landscape) and (max-height:560px){.home-screen{padding-top:78px}.home-copy h1{font-size:42px}.orb-stage-ref{width:min(58vh,340px);margin-top:4px}.awaken{margin-top:6px}.magic-menu-universe{width:min(58vh,340px)}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.screen.active{animation:none}.orb-stage-ref:before,.orb-shell:before,.mini-orb,.magic-dock .dock-orb:before,.magic-menu-universe:before,.magic-menu-orbits,.magic-menu-orbits i,.magic-menu-core:before{animation:none!important}.orb-shell:before{background-size:103%;filter:saturate(1.04) brightness(1)}.magic-menu .magic-menu-sheet,.orb-shell canvas{transition:none}.drawer.magic-menu.open .magic-menu-radial button,.drawer.magic-menu.open .magic-menu-rail button,.drawer.magic-menu.open .magic-menu-extra button{animation:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.screen.active{animation:none}.orb-stage-ref:before,.orb-shell:before,.mini-orb,.magic-dock .dock-orb:before,.magic-menu-universe:before,.magic-menu-orbits,.magic-menu-orbits i,.magic-menu-core:before,.home-orb-menu:after,.home-orb-menu button{animation:none!important}.orb-shell:before{background-size:103%;filter:saturate(1.04) brightness(1)}.magic-menu .magic-menu-sheet,.orb-shell canvas,.orb-stage-ref,.orb-shell{transition:none}.drawer.magic-menu.open .magic-menu-radial button,.drawer.magic-menu.open .magic-menu-rail button,.drawer.magic-menu.open .magic-menu-extra button{animation:none}.home-screen.orb-menu-open .home-orb-menu button{opacity:1;filter:none}}
