@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "5.0.1",
+  "checkpoint": "3.2",
+  "status": "READY_FOR_INTEGRATION",
+  "purpose": "Contrato funcional das tiragens, com posições explícitas, cartas únicas e síntese consciente.",
+  "spreads": [
+    {"id":"single","name":"Uma Carta","cards":1,"positions":["Resposta"]},
+    {"id":"timeline","name":"Passado · Presente · Tendência","cards":3,"positions":["Passado","Presente","Tendência"]},
+    {"id":"action","name":"Situação · Ação · Resultado","cards":3,"positions":["Situação","Ação","Resultado"]},
+    {"id":"love","name":"Amor","cards":3,"positions":["Você","A outra energia","O caminho da relação"]},
+    {"id":"paths","name":"Dois Caminhos","cards":5,"positions":["Situação","Caminho A","Resultado A","Caminho B","Resultado B"]},
+    {"id":"celtic-cross","name":"Cruz Celta","cards":10,"positions":["Presente","Desafio","Raiz","Passado","Possibilidade","Futuro próximo","Você","Ambiente","Esperanças e medos","Síntese"]}
+  ],
+  "drawRules": {
+    "catalogSource": "tarot-data.js",
+    "uniqueCardsPerReading": true,
+    "maxCards": 10,
+    "orientation": "normal",
+    "reversedAllowed": false,
+    "meaningSource": "tarot-meanings.js",
+    "tarotLivreMeaningSource": false,
+    "saveToJournal": true,
+    "questionRequiredBeforeFutureBackend": true
+  },
+  "synthesis": {
+    "required": true,
+    "method": "themes-repeated-plus-concrete-choice",
+    "deterministicPrediction": false,
+    "thirdPartyMindReading": false,
+    "professionalAdviceReplacement": false
+  },
+  "nextCheckpoint": "3.3 — Mesa Real 13×6 e retomada"
+}
