@@ -1,0 +1,38 @@
+DIVINA BRUXA — PLANO SUPREMO 5.0
+CHECKPOINT 1.2 — AUDITORIA SUPREMA DAS 78 IMAGENS
+
+ENVIE TODOS OS ARQUIVOS DESTE ZIP PARA A RAIZ DO GITHUB.
+Quando o GitHub perguntar, confirme a substituição dos arquivos com nomes iguais.
+
+RESULTADO DA AUDITORIA
+- 78 artes oficiais presentes e visualmente conferidas.
+- Exatamente 300 × 450 pixels por carta.
+- Atlas oficial íntegro: 3000 × 3600, grade 10 × 8.
+- Ordem correta: O Louco até Rei de Ouros.
+- Todas as cartas normais; nenhuma invertida.
+- Associação entre nome, índice, arquivo e célula do atlas confirmada.
+- Associação antiga de Paus e Espadas corrigida sem mudar os IDs permanentes.
+- SHA-256 registrado para cada arte e para o atlas.
+- Nenhuma arte foi redesenhada, regenerada, ampliada ou substituída.
+- Carregamento progressivo e decodificação assíncrona.
+- Preload inteligente limitado às próximas três cartas.
+- Fallback visível pelo atlas oficial se um arquivo individual falhar.
+- Falhas ficam registradas sem deixar carta invisível.
+- Suporte offline preservado sem baixar 78 cartas de uma vez.
+
+ARQUIVOS DE INSTALAÇÃO
+Consulte INSTALL-MANIFEST-V5-CHECKPOINT-1.2.json para a lista exata de NOVOS,
+SUBSTITUIR e REMOVER. A lista REMOVER está vazia.
+
+NÃO ENVIE NOVAMENTE
+- card-00 até card-77
+- tarot-atlas.webp
+- arquivos da Orbe, menu ou rodapé
+
+VALIDAÇÃO OPCIONAL
+node verify-tarot-images-v5.mjs
+node verify-catalog-v5.mjs
+node verify-v77.mjs
+
+PRÓXIMO CONTINUA
+Checkpoint 1.3 — conteúdo-mãe profundo das 78 cartas.

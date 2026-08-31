@@ -23,7 +23,7 @@ check('orientação oficial é normal', REQUIRED_ORIENTATION === 'normal');
 check('catálogo contém exatamente 78 cartas', CARDS.length === 78, `encontradas: ${CARDS.length}`);
 check('IDs numéricos seguem 0–77', CARDS.every((card, index) => card.id === index));
 check('índices seguem 0–77', CARDS.every((card, index) => card.index === index));
-check('atlasIndex segue 0–77', CARDS.every((card, index) => card.atlasIndex === index));
+check('atlasIndex cobre 0–77 sem repetição', unique(CARDS.map(card => card.atlasIndex)) && CARDS.every(card => card.atlasIndex >= 0 && card.atlasIndex <= 77));
 check('IDs permanentes são únicos', unique(CARDS.map(card => card.canonicalId)));
 check('nomes PT-BR são únicos', unique(CARDS.map(card => card.names?.ptBR)));
 check('nomes EN são únicos', unique(CARDS.map(card => card.names?.en)));
@@ -44,7 +44,7 @@ check('todas as cartas estão normais', CARDS.every(card => card.orientation ===
 check('nenhuma propriedade sugere inversão', CARDS.every(card => !('reversed' in card) && !('orientationReversed' in card)));
 check('todas têm elemento', CARDS.every(card => ['Ar', 'Água', 'Fogo', 'Terra'].includes(card.element)));
 check('todas têm correspondências', CARDS.every(card => card.correspondences && Object.keys(card.correspondences).length >= 2));
-check('todas têm caminho de imagem canônico', CARDS.every((card, index) => card.image === `card-${String(index).padStart(2, '0')}.${index === 47 ? 'png' : 'jpg'}`));
+check('todas têm caminho de imagem canônico', CARDS.every(card => card.image === `card-${String(card.atlasIndex).padStart(2, '0')}.${card.atlasIndex === 47 ? 'png' : 'jpg'}`));
 check('mapa por ID permanente contém 78 cartas', Object.keys(CARD_BY_CANONICAL_ID).length === 78);
 check('mapa por nome PT-BR contém 78 cartas', Object.keys(CARD_BY_PTBR_NAME).length === 78);
 check('busca por índice é íntegra', CARDS.every(card => getCardByIndex(card.index) === card));

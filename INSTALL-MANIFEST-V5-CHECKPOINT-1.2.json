@@ -1,0 +1,25 @@
+{
+  "checkpoint": "1.2",
+  "title": "Auditoria Suprema das 78 imagens",
+  "novos": [
+    "tarot-image-runtime.js",
+    "tarot-image-manifest-v5.json",
+    "verify-tarot-images-v5.mjs",
+    "INSTALL-MANIFEST-V5-CHECKPOINT-1.2.json",
+    "00-LEIA-PRIMEIRO-V5-CHECKPOINT-1.2.txt"
+  ],
+  "substituir": [
+    "tarot-data.js",
+    "tarot-engine.js",
+    "ritual-engine.js",
+    "spreads-engine.js",
+    "journal-engine.js",
+    "verify-catalog-v5.mjs",
+    "app.js",
+    "index.html",
+    "sw.js"
+  ],
+  "remover": [],
+  "artesSubstituidas": 0,
+  "publicacaoAutorizada": false
+}

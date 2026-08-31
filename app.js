@@ -10,6 +10,7 @@ import { JournalEngine } from './journal-engine.js';
 import { CommerceEngine } from './commerce-engine.js';
 import { MediaEngine } from './media-engine.js';
 import { AIEngine } from './ai-engine.js';
+import './tarot-image-runtime.js';
 
 const $ = selector => document.querySelector(selector);
 const $$ = selector => [...document.querySelectorAll(selector)];

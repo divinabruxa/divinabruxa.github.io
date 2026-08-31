@@ -50,13 +50,22 @@ const RANKS = [
 ];
 
 const SUITS = [
-  { ptBR: 'Copas', en: 'Cups', es: 'Copas', slug: 'copas', element: 'Água', domain: 'emoções, vínculos e intuição' },
-  { ptBR: 'Espadas', en: 'Swords', es: 'Espadas', slug: 'espadas', element: 'Ar', domain: 'pensamento, verdade e decisões' },
-  { ptBR: 'Paus', en: 'Wands', es: 'Bastos', slug: 'paus', element: 'Fogo', domain: 'energia, coragem e criatividade' },
-  { ptBR: 'Ouros', en: 'Pentacles', es: 'Oros', slug: 'ouros', element: 'Terra', domain: 'corpo, trabalho e recursos' }
+  { ptBR: 'Copas', en: 'Cups', es: 'Copas', slug: 'copas', element: 'Água', domain: 'emoções, vínculos e intuição', atlasStart: 22 },
+  { ptBR: 'Espadas', en: 'Swords', es: 'Espadas', slug: 'espadas', element: 'Ar', domain: 'pensamento, verdade e decisões', atlasStart: 50 },
+  { ptBR: 'Paus', en: 'Wands', es: 'Bastos', slug: 'paus', element: 'Fogo', domain: 'energia, coragem e criatividade', atlasStart: 36 },
+  { ptBR: 'Ouros', en: 'Pentacles', es: 'Oros', slug: 'ouros', element: 'Terra', domain: 'corpo, trabalho e recursos', atlasStart: 64 }
 ];
 
 const imageFor = index => `card-${String(index).padStart(2, '0')}.${index === 47 ? 'png' : 'jpg'}`;
+const imageSourcesFor = index => {
+  const canonical = imageFor(index);
+  return Object.freeze({
+    thumbnail: canonical,
+    medium: canonical,
+    full: canonical,
+    atlasFallback: 'tarot-atlas.webp'
+  });
+};
 const permanentId = (index, slug) => `${String(index).padStart(2, '0')}-${slug}`;
 
 const majors = MAJOR_ARCANA.map(([slug, ptBR, en, es, element, astrological], index) => ({
@@ -76,11 +85,13 @@ const majors = MAJOR_ARCANA.map(([slug, ptBR, en, es, element, astrological], in
   element,
   correspondences: Object.freeze({ astrological, archetype: `Arcano Maior ${index}` }),
   image: imageFor(index),
+  imageSources: imageSourcesFor(index),
   orientation: REQUIRED_ORIENTATION
 }));
 
 const minors = SUITS.flatMap((suit, suitIndex) => RANKS.map((rank, rankIndex) => {
   const index = 22 + (suitIndex * RANKS.length) + rankIndex;
+  const atlasIndex = suit.atlasStart + rankIndex;
   const rankSlug = rank.ptBR.toLocaleLowerCase('pt-BR').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   const names = {
     ptBR: `${rank.ptBR} de ${suit.ptBR}`,
@@ -90,7 +101,7 @@ const minors = SUITS.flatMap((suit, suitIndex) => RANKS.map((rank, rankIndex) =>
   return {
     id: index,
     index,
-    atlasIndex: index,
+    atlasIndex,
     canonicalId: permanentId(index, `${rankSlug}-de-${suit.slug}`),
     names: Object.freeze(names),
     name: names.ptBR,
@@ -103,7 +114,8 @@ const minors = SUITS.flatMap((suit, suitIndex) => RANKS.map((rank, rankIndex) =>
     court: rank.kind === 'court' ? rank.ptBR : null,
     element: suit.element,
     correspondences: Object.freeze({ numerology: rank.correspondence, domain: suit.domain }),
-    image: imageFor(index),
+    image: imageFor(atlasIndex),
+    imageSources: imageSourcesFor(atlasIndex),
     orientation: REQUIRED_ORIENTATION
   };
 }));
