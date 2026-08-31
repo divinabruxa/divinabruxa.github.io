@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "5.0.1",
+  "checkpoint": "1.1",
+  "status": "PASS",
+  "sourceOfTruth": "tarot-data.js",
+  "sourceSha256": "2991d5b03454065e21ae7558199b90f781ce89606d2acd7a88325cbc893230bb",
+  "catalog": {
+    "count": 78,
+    "indexRange": {"min": 0, "max": 77},
+    "order": "O Louco → Rei de Ouros",
+    "uniqueIds": true,
+    "uniqueNamesPtBr": true,
+    "requiredOrientation": "normal",
+    "reversedCardsAllowed": false,
+    "imagePattern": "card-{index}.jpg",
+    "atlasFallback": "tarot-atlas.webp"
+  },
+  "fieldsRequiredPerCard": [
+    "id",
+    "index",
+    "canonicalId",
+    "names.ptBR",
+    "names.en",
+    "names.es",
+    "arcana",
+    "suit",
+    "element",
+    "correspondences",
+    "image",
+    "imageSources",
+    "orientation"
+  ],
+  "editorialBoundary": {
+    "catalogOnly": true,
+    "tarotLivreDoesNotReadMeanings": true,
+    "automaticInterpretation": false,
+    "futureContentMayExtend": ["Carta do Dia", "Tiragens", "Escola", "Páginas editoriais"]
+  },
+  "verification": {
+    "command": "node verify-catalog-v5.mjs",
+    "expectedPasses": 33,
+    "lastRun": "2026-08-31",
+    "lastResult": "33/33"
+  },
+  "nextCheckpoint": "1.2 — Auditoria das Imagens"
+}
