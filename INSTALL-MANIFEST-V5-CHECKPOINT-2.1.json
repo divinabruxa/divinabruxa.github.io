@@ -1,0 +1,49 @@
+{
+  "checkpoint": "2.1",
+  "title": "Motor puro e definitivo do Tarot Livre",
+  "novos": [
+    "tarot-session.js",
+    "verify-tarot-livre-v5.mjs",
+    "INSTALL-MANIFEST-V5-CHECKPOINT-2.1.json",
+    "00-LEIA-PRIMEIRO-V5-CHECKPOINT-2.1.txt"
+  ],
+  "substituir": [
+    "tarot-engine.js",
+    "app.js",
+    "index.html",
+    "sw.js",
+    "verify-tarot-content-v5.mjs",
+    "verify-v77.mjs"
+  ],
+  "remover": [],
+  "arquivosNoZip": 10,
+  "cartas": {
+    "total": 78,
+    "normais": 78,
+    "invertidas": 0,
+    "repeticoesAntesDoReset": 0
+  },
+  "motor": {
+    "schema": "5.2.1",
+    "revelacaoSomentePelaOrbe": true,
+    "bloqueioDeToquesSimultaneos": true,
+    "embaralhaSomenteRestantes": true,
+    "retomadaLocal": true,
+    "sincronizacaoEntreAbas": true,
+    "migracaoDaSessaoAnterior": true,
+    "recuperacaoDeCorrupcao": true,
+    "significadosAutomaticos": false
+  },
+  "qa": {
+    "tarotLivre": "52/52",
+    "conteudo": "22/22",
+    "imagens": "35/35",
+    "catalogo": "33/33",
+    "v77": "49/49",
+    "total": "191/191",
+    "status": "APROVADO"
+  },
+  "visualV77Alterado": false,
+  "imagensAntigasReenviadas": 0,
+  "publicacaoAutorizada": false
+}

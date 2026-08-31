@@ -1,0 +1,72 @@
+DIVINA BRUXA — PLANO SUPREMO 5.0
+CHECKPOINT 2.1 — MOTOR PURO E DEFINITIVO DO TAROT LIVRE
+
+ESTE ZIP É INCREMENTAL E NÃO REPETE ARQUIVOS ANTIGOS.
+Extraia o ZIP e envie somente os 10 arquivos soltos para a raiz do GitHub.
+Quando o GitHub perguntar, confirme a substituição dos arquivos com nomes iguais.
+
+O QUE FICOU PRONTO
+- Baralho canônico com exatamente 78 cartas.
+- Todas as cartas permanecem normais; nenhuma carta invertida.
+- Algoritmo Fisher–Yates com aleatoriedade criptográfica quando disponível.
+- Uma única revelação por toque confirmado na Orbe da mesa.
+- Toques simultâneos são bloqueados durante o nascimento da carta.
+- O 79º toque não cria carta, repetição ou posição extra.
+- A prova de resistência concluiu 2.048 mesas completas sem repetição.
+- Embaralhar restantes nunca move as cartas já abertas.
+- Recomeçar mesa continua protegido por confirmação.
+- A mesa é salva no navegador e retomada após fechar ou atualizar.
+- Sessões antigas válidas são migradas sem perder as cartas abertas.
+- Sessões corrompidas são rejeitadas e substituídas por uma mesa íntegra.
+- Outra aba aberta acompanha a sessão mais recente.
+- O Tarot Livre continua mostrando imagens, sem significados automáticos.
+- As 78 imagens HD continuam carregadas progressivamente.
+- A Orbe principal, o Menu Mágico, a mini-Orbe e o centro mobile V77 não foram alterados.
+- O novo motor também funciona no modo offline após o primeiro carregamento.
+
+ARQUIVOS NOVOS
+- tarot-session.js
+- verify-tarot-livre-v5.mjs
+- INSTALL-MANIFEST-V5-CHECKPOINT-2.1.json
+- 00-LEIA-PRIMEIRO-V5-CHECKPOINT-2.1.txt
+
+ARQUIVOS PARA SUBSTITUIR
+- tarot-engine.js
+- app.js
+- index.html
+- sw.js
+- verify-tarot-content-v5.mjs
+- verify-v77.mjs
+
+NÃO REENVIE
+- as 78 imagens card-00.webp até card-77.webp;
+- a Orbe, a mini-Orbe, o fundo ou os arquivos visuais V77;
+- qualquer outro arquivo que já esteja no repositório.
+
+DEPOIS DO ENVIO
+1. Aguarde o GitHub concluir a atualização.
+2. Feche a aba antiga do site e abra novamente.
+3. Entre em Tarot Livre e toque somente na Orbe para revelar.
+4. Atualize a página: a mesa deve continuar de onde parou.
+5. Use Embaralhar restantes: as cartas abertas devem permanecer no lugar.
+
+VALIDAÇÃO OPCIONAL
+node verify-tarot-livre-v5.mjs
+node verify-tarot-content-v5.mjs
+node verify-tarot-images-v5.mjs
+node verify-catalog-v5.mjs
+node verify-v77.mjs
+
+RESULTADO DESTA ENTREGA
+- Motor Tarot Livre: 52/52.
+- Conteúdo profundo: 22/22.
+- Imagens HD: 35/35.
+- Catálogo canônico: 33/33.
+- Proteção visual V77: 49/49.
+- Total: 191/191 verificações aprovadas.
+
+PRÓXIMO “CONTINUA”
+Checkpoint 2.2 — Mesa Real 13 × 6: estabilidade das 78 posições,
+zoom visual nítido, navegação confortável no celular e acabamento da experiência.
+
+Esta entrega não publica o site, não altera DNS, não ativa cobranças e não remove arquivos.

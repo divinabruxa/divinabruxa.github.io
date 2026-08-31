@@ -103,7 +103,7 @@ expect('nomes das cartas são únicos', new Set(CARDS.map(card => card.name)).si
 expect('primeira carta é O Louco', CARDS[0]?.name === baseline.contracts.firstCard);
 expect('última carta é Rei de Ouros', CARDS[77]?.name === baseline.contracts.lastCard);
 expect('catálogo não contém orientação invertida', CARDS.every(card => card.reversed !== true && card.orientation !== 'reversed'));
-expect('Tarot Livre grava somente orientação normal', tarotEngine.includes('this.state.reversed.push(false)') && tarotEngine.includes('const reversed = false'));
+expect('Tarot Livre não possui caminho de inversão', !tarotEngine.includes('state.reversed') && !tarotEngine.includes("classList.add('reversed')") && tarotEngine.includes('<span>DIRETA</span>'));
 expect('motor de significado bloqueia reversão', meaningEngine.includes('reversed=false;'));
 
 let imageFailures = 0;

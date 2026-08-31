@@ -1,128 +1,191 @@
+/* DIVINA BRUXA — MOTOR DEFINITIVO DO TAROT LIVRE — CHECKPOINT 2.1
+   Revelação exclusivamente pela Orbe, 78 cartas normais, sem repetição e com retomada segura.
+*/
 import { CARDS } from './tarot-data.js';
 import { store } from './storage.js';
 import { cardImageMarkup, preloadCardImages } from './tarot-image-runtime.js';
+import {
+  DECK_SIZE,
+  createTarotState,
+  drawNextCard,
+  normalizeTarotState,
+  resetTarotState,
+  shuffleRemainingCards
+} from './tarot-session.js?v=81';
 
-const DECK_SIZE = 78;
-const random = max => crypto.getRandomValues(new Uint32Array(1))[0] % max;
+const STORAGE_KEY = 'free-tarot';
+const STORAGE_EVENT_SUFFIX = `:${STORAGE_KEY}`;
+const EMPTY_ALTAR = '<div class="empty-card"><span>✦</span>A próxima carta nascerá da Orbe.<small>Toque somente na Orbe</small></div>';
 
-function shuffle(ids) {
-  const cards = [...ids];
-  for (let i = cards.length - 1; i > 0; i--) {
-    const j = random(i + 1);
-    [cards[i], cards[j]] = [cards[j], cards[i]];
-  }
-  return cards;
-}
-
-function fresh() {
-  return { waiting: shuffle(CARDS.map(card => card.id)), revealed: [], reversed: [], completed: false };
+function announce(message) {
+  if (typeof globalThis.dispatchEvent !== 'function' || typeof globalThis.CustomEvent !== 'function') return;
+  globalThis.dispatchEvent(new CustomEvent('orbe:toast', { detail: message }));
 }
 
 export class FreeTarot {
-  constructor(root) {
+  constructor(root, { storage = store } = {}) {
+    if (!root) throw new TypeError('A tela do Tarot Livre não foi encontrada.');
     this.root = root;
+    this.storage = storage;
     this.altar = root.querySelector('#revealAltar');
     this.stage = root.querySelector('#current');
     this.orb = root.querySelector('#tableOrb');
     this.realTable = root.querySelector('#realTable');
+    this.orbState = root.querySelector('#orbState');
+    this.shuffleButton = root.querySelector('#shuffleDeck');
+    this.resetButton = root.querySelector('#resetDeck');
     this.selected = -1;
     this.drawing = false;
-    this.state = store.get('free-tarot', fresh());
-    this.state.reversed = Array.isArray(this.state.revealed) ? this.state.revealed.map(() => false) : [];
-    if (!this.valid()) this.state = fresh();
+    this.releaseTimer = 0;
+
+    const restored = normalizeTarotState(this.storage.get(STORAGE_KEY, null));
+    this.state = restored ?? createTarotState();
+    this.selected = this.state.revealed.length - 1;
+    this.persist();
     preloadCardImages(this.state.waiting, 3);
     this.bind();
     this.render();
   }
 
-  valid() {
-    if (!this.state || !Array.isArray(this.state.waiting) || !Array.isArray(this.state.revealed) || !Array.isArray(this.state.reversed)) return false;
-    const ids = [...this.state.waiting, ...this.state.revealed];
-    return ids.length === DECK_SIZE && new Set(ids).size === DECK_SIZE && ids.every(id => CARDS[id]);
+  persist() {
+    try {
+      this.storage.set(STORAGE_KEY, this.state);
+      return true;
+    } catch {
+      announce('A mesa continua aberta, mas este navegador bloqueou a memória da sessão.');
+      return false;
+    }
   }
 
   bind() {
     this.orb.addEventListener('click', () => this.draw());
-    this.root.querySelector('#resetDeck').addEventListener('click', () => this.reset());
-    this.root.querySelector('#shuffleDeck').addEventListener('click', () => this.reshuffle());
+    this.resetButton.addEventListener('click', () => this.reset());
+    this.shuffleButton.addEventListener('click', () => this.reshuffle());
     this.realTable.addEventListener('click', event => {
       const button = event.target.closest('[data-index]');
       if (button) this.show(Number(button.dataset.index), false, true);
     });
+
+    this.onStorage = event => {
+      if (!event.key?.endsWith(STORAGE_EVENT_SUFFIX) || !event.newValue) return;
+      let incoming = null;
+      try { incoming = normalizeTarotState(JSON.parse(event.newValue)); } catch { return; }
+      if (!incoming || incoming.updatedAt < this.state.updatedAt) return;
+      this.state = incoming;
+      this.selected = incoming.revealed.length - 1;
+      this.drawing = false;
+      this.render();
+      preloadCardImages(this.state.waiting, 3);
+    };
+    globalThis.addEventListener?.('storage', this.onStorage);
   }
 
   draw() {
-    if (this.drawing || !this.state.waiting.length) return;
+    if (this.drawing || this.state.completed) return null;
     this.drawing = true;
     this.altar.classList.add('revealing');
-    this.root.querySelector('#orbState').textContent = 'A CARTA ESTÁ NASCENDO';
-    const id = this.state.waiting.shift();
-    this.state.revealed.push(id);
-    this.state.reversed.push(false);
-    this.state.completed = this.state.waiting.length === 0;
-    store.set('free-tarot', this.state);
-    const index = this.state.revealed.length - 1;
-    this.render(index);
-    this.show(index, true, false);
-    preloadCardImages(this.state.waiting, 3);
-    navigator.vibrate?.([12, 22, 18]);
-    window.setTimeout(() => {
-      this.drawing = false;
-      this.altar.classList.remove('revealing');
-      this.root.querySelector('#orbState').textContent = this.state.completed ? 'MESA COMPLETA' : 'TOQUE PARA REVELAR';
-    }, 820);
+    this.orbState.textContent = 'A CARTA ESTÁ NASCENDO';
+
+    try {
+      const result = drawNextCard(this.state);
+      if (result.cardId === null) return null;
+      this.state = result.state;
+      this.selected = result.position;
+      this.persist();
+      this.render(result.position);
+      this.show(result.position, true, false);
+      preloadCardImages(this.state.waiting, 3);
+      globalThis.navigator?.vibrate?.([12, 22, 18]);
+      globalThis.dispatchEvent?.(new CustomEvent('tarot:revealed', {
+        detail: { cardId: result.cardId, position: result.position, remaining: this.state.waiting.length }
+      }));
+      return result.cardId;
+    } finally {
+      globalThis.clearTimeout(this.releaseTimer);
+      this.releaseTimer = globalThis.setTimeout(() => {
+        this.drawing = false;
+        this.altar.classList.remove('revealing');
+        this.orbState.textContent = this.state.completed ? 'MESA COMPLETA' : 'TOQUE PARA REVELAR';
+      }, 820);
+    }
   }
 
   show(index, animate = true, scroll = false) {
-    const id = this.state.revealed[index];
-    const card = CARDS[id];
+    const cardId = this.state.revealed[index];
+    const card = CARDS[cardId];
     if (!card) return;
-    const reversed = false;
     this.selected = index;
-    this.stage.className = `current table-preview ${reversed ? 'reversed' : ''} ${animate ? 'birth' : ''}`;
+    this.stage.className = `current table-preview${animate ? ' birth' : ''}`;
     this.stage.innerHTML = `${cardImageMarkup(card, { alt: `${card.name}, direta`, priority: 'high' })}<div class="card-label"><strong>${card.name}</strong><span>DIRETA</span></div>`;
-    this.realTable.querySelectorAll('[data-index]').forEach(button => button.classList.toggle('selected', Number(button.dataset.index) === index));
-    if (animate) window.setTimeout(() => this.stage.classList.remove('birth'), 900);
-    if (scroll) this.altar.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+    this.realTable.querySelectorAll('[data-index]').forEach(button => {
+      button.classList.toggle('selected', Number(button.dataset.index) === index);
+    });
+    if (animate) globalThis.setTimeout(() => this.stage.classList.remove('birth'), 900);
+    if (scroll) {
+      const reducedMotion = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+      this.altar.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+    }
   }
 
   render(landing = -1) {
     const total = this.state.revealed.length;
     const waiting = this.state.waiting.length;
     this.root.querySelector('#count').innerHTML = `${total}<small>/${DECK_SIZE}</small>`;
-    this.root.querySelector('#remaining').textContent = waiting ? `${waiting} cartas aguardam` : 'Ciclo completo · 78 cartas reveladas';
+    this.root.querySelector('#remaining').textContent = waiting
+      ? `${waiting} cartas aguardam`
+      : 'Ciclo completo · 78 cartas reveladas';
     this.root.querySelector('#deckProgress').style.width = `${(total / DECK_SIZE) * 100}%`;
     this.orb.disabled = this.state.completed;
     this.orb.setAttribute('aria-label', waiting ? `Revelar próxima carta. ${waiting} restantes.` : 'Mesa completa');
-    this.root.querySelector('#orbState').textContent = this.state.completed ? 'MESA COMPLETA' : 'TOQUE PARA REVELAR';
-    this.root.querySelector('#shuffleDeck').disabled = waiting < 2;
+    this.orbState.textContent = this.state.completed ? 'MESA COMPLETA' : 'TOQUE PARA REVELAR';
+    this.shuffleButton.disabled = waiting < 2;
+
     this.realTable.innerHTML = Array.from({ length: DECK_SIZE }, (_, index) => {
-      const id = this.state.revealed[index];
-      if (id === undefined) return `<div class="table-slot waiting" role="listitem" aria-label="Posição ${index + 1}, aguardando carta"><span class="position">${index + 1}</span></div>`;
-      const card = CARDS[id];
-      const reversed = false;
-      return `<button data-index="${index}" role="listitem" class="table-slot revealed ${index === this.selected ? 'selected' : ''} ${index === landing ? 'landing' : ''}" aria-label="Abrir ${card.name}, direta">${cardImageMarkup(card, { decorative: true })}<span class="order">${index + 1}</span></button>`;
+      const cardId = this.state.revealed[index];
+      if (cardId === undefined) {
+        return `<div class="table-slot waiting" role="listitem" aria-label="Posição ${index + 1}, aguardando carta"><span class="position">${index + 1}</span></div>`;
+      }
+      const card = CARDS[cardId];
+      return `<button data-index="${index}" role="listitem" class="table-slot revealed${index === this.selected ? ' selected' : ''}${index === landing ? ' landing' : ''}" aria-label="Abrir ${card.name}, direta">${cardImageMarkup(card, { decorative: true })}<span class="order">${index + 1}</span></button>`;
     }).join('');
-    if (total && this.selected < 0) this.show(total - 1, false, false);
+
+    if (total) {
+      if (this.selected < 0 || this.selected >= total) this.selected = total - 1;
+      this.show(this.selected, false, false);
+    } else {
+      this.selected = -1;
+      this.stage.className = 'current table-preview empty';
+      this.stage.innerHTML = EMPTY_ALTAR;
+    }
   }
 
-  reset() {
-    if (this.state.revealed.length && !confirm('Apagar as cartas desta mesa e iniciar um novo baralho?')) return;
-    this.state = fresh();
+  reset(force = false) {
+    if (this.drawing) return false;
+    const needsConfirmation = this.state.revealed.length > 0 && force !== true;
+    if (needsConfirmation && globalThis.confirm && !globalThis.confirm('Apagar as cartas desta mesa e iniciar um novo baralho?')) return false;
+    this.state = resetTarotState();
     this.selected = -1;
-    store.set('free-tarot', this.state);
-    this.stage.className = 'current table-preview empty';
-    this.stage.innerHTML = '<div class="empty-card"><span>✦</span>A próxima carta nascerá da Orbe.<small>Toque somente na Orbe</small></div>';
+    this.persist();
     this.render();
     preloadCardImages(this.state.waiting, 3);
+    announce('Uma nova Mesa Real foi preparada.');
+    return true;
   }
 
   reshuffle() {
-    if (this.state.waiting.length < 2) return;
-    this.state.waiting = shuffle(this.state.waiting);
+    if (this.drawing || this.state.waiting.length < 2) return false;
+    const revealedBefore = this.state.revealed.join(',');
+    this.state = shuffleRemainingCards(this.state);
+    if (this.state.revealed.join(',') !== revealedBefore) throw new Error('As cartas reveladas não podem ser movidas.');
+    this.persist();
     preloadCardImages(this.state.waiting, 3);
-    store.set('free-tarot', this.state);
-    navigator.vibrate?.(16);
-    dispatchEvent(new CustomEvent('orbe:toast',{detail:`${this.state.waiting.length} cartas restantes foram embaralhadas.`}));
+    globalThis.navigator?.vibrate?.(16);
+    announce(`${this.state.waiting.length} cartas restantes foram embaralhadas.`);
+    return true;
+  }
+
+  destroy() {
+    globalThis.clearTimeout(this.releaseTimer);
+    globalThis.removeEventListener?.('storage', this.onStorage);
   }
 }
