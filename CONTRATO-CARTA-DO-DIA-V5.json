@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "5.0.1",
+  "checkpoint": "3.1",
+  "status": "READY_FOR_INTEGRATION",
+  "purpose": "Regra editorial e temporal da Carta do Dia, sem alterar o visual aprovado.",
+  "dailyRule": {
+    "oneCardPerCalendarDay": true,
+    "timezone": "America/Sao_Paulo",
+    "dateBoundary": "00:00",
+    "sameCardAcrossDevices": "requires authenticated backend in a future staging checkpoint",
+    "localFallback": "preserve the revealed card locally until the Brasília date changes",
+    "orientation": "normal",
+    "reveal": "after intention and deliberate action",
+    "automaticPrediction": false
+  },
+  "cardSelection": {
+    "source": "tarot-data.js",
+    "catalogCount": 78,
+    "allowedIndexes": "0..77",
+    "reversedCards": false,
+    "meaningSourceForDaily": "tarot-meanings.js",
+    "tarotLivreMeaningSource": false
+  },
+  "requiredEditorialSections": [
+    "Essência",
+    "Luz",
+    "Tensão",
+    "Amor",
+    "Relacionamentos",
+    "Carreira",
+    "Dinheiro",
+    "Espiritualidade",
+    "Conselho",
+    "Símbolos",
+    "Pergunta para o dia"
+  ],
+  "safety": {
+    "noThirdPartyMindReading": true,
+    "noDeterministicClaims": true,
+    "financialDisclaimer": true,
+    "professionalHelpNotReplaced": true
+  },
+  "nextCheckpoint": "3.2 — Tiragens com posições e síntese"
+}
