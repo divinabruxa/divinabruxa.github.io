@@ -45,6 +45,12 @@ function imageSize(file) {
       offset += length + 2;
     }
   }
+  if (data.length >= 30 && data.toString('ascii', 0, 4) === 'RIFF' && data.toString('ascii', 8, 12) === 'WEBP') {
+    const chunk = data.toString('ascii', 12, 16);
+    if (chunk === 'VP8 ' && data[23] === 0x9d && data[24] === 0x01 && data[25] === 0x2a) {
+      return { width: data.readUInt16LE(26) & 0x3fff, height: data.readUInt16LE(28) & 0x3fff };
+    }
+  }
   return null;
 }
 
@@ -105,9 +111,9 @@ for (const card of CARDS) {
   const file = path.join(root, card.image);
   if (!fs.existsSync(file)) { imageFailures += 1; continue; }
   const size = imageSize(card.image);
-  if (!size || size.width !== baseline.contracts.cardWidth || size.height !== baseline.contracts.cardHeight) imageFailures += 1;
+  if (!size || size.width < 1023 || size.height < 1402 || !card.image.endsWith('.webp')) imageFailures += 1;
 }
-expect('78 imagens existem e medem 300 × 450', imageFailures === 0, `falhas: ${imageFailures}`);
+expect('78 imagens HD existem e superam a base 300 × 450', imageFailures === 0, `falhas: ${imageFailures}`);
 
 await import(`${pathToFileURL(path.join(root, 'tarot-meanings.js')).href}?verify=${Date.now()}`);
 const meanings = globalThis.DivinaBruxaTarotMeanings;

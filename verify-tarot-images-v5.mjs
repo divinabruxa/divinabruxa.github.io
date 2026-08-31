@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* Divina Bruxa — auditoria reproduzível das imagens — Checkpoint 1.2 */
+/* Divina Bruxa — auditoria reproduzível das 78 imagens HD — Checkpoint 1.3 */
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -41,10 +41,14 @@ function imageSize(file) {
   return null;
 }
 
-check('manifesto identifica o Checkpoint 1.2', manifest.checkpoint === '1.2');
+check('manifesto identifica o Checkpoint 1.3', manifest.checkpoint === '1.3');
 check('política preserva 78 artes oficiais', manifest.policy?.officialArtworks === 78);
+check('as 78 artes possuem fonte individual em alta resolução', manifest.policy?.highResolutionArtworks === 78);
 check('nenhuma arte foi substituída', manifest.policy?.replacedArtworks === 0);
 check('nenhuma arte recebeu ampliação artificial', manifest.policy?.upscaledArtworks === 0);
+check('os dois ZIPs enviados são cópias idênticas', manifest.sourceAudit?.archivesAreByteIdentical === true);
+check('a fonte enviada contém exatamente 78 imagens reais', manifest.sourceAudit?.realImageFiles === 78 && manifest.sourceAudit?.uniqueSourceHashes === 78);
+check('o mapeamento da fonte está completo', manifest.sourceAudit?.mappingStatus === 'complete');
 check('manifesto contém 78 registros', manifest.cards?.length === 78, `encontrados: ${manifest.cards?.length ?? 0}`);
 check('catálogo continua com 78 cartas', CARDS.length === 78, `encontradas: ${CARDS.length}`);
 check('primeira carta continua O Louco', CARDS[0]?.name === 'O Louco');
@@ -59,14 +63,16 @@ for (const entry of manifest.cards ?? []) {
   if (!card || !fs.existsSync(filePath)) { fileErrors += 1; continue; }
   const size = imageSize(entry.file);
   const fileStat = fs.statSync(filePath);
-  if (!size || size.width !== 300 || size.height !== 450 || fileStat.size !== entry.bytes || hash(entry.file) !== entry.sha256) fileErrors += 1;
+  if (!size || size.width !== entry.width || size.height !== entry.height || size.width < 1023 || size.height < 1402 || !entry.file.endsWith('.webp') || fileStat.size !== entry.bytes || hash(entry.file) !== entry.sha256) fileErrors += 1;
   const expectedColumn = card.atlasIndex % 10;
   const expectedRow = Math.floor(card.atlasIndex / 10);
-  if (entry.canonicalId !== card.canonicalId || entry.name !== card.name || entry.atlasIndex !== card.atlasIndex || entry.file !== card.image || entry.orientation !== 'normal' || entry.mappingStatus !== 'verified' || entry.atlasCell?.column !== expectedColumn || entry.atlasCell?.row !== expectedRow || entry.atlasCell?.x !== expectedColumn * 300 || entry.atlasCell?.y !== expectedRow * 450) mappingErrors += 1;
+  if (entry.canonicalId !== card.canonicalId || entry.name !== card.name || entry.atlasIndex !== card.atlasIndex || entry.file !== card.image || entry.orientation !== 'normal' || entry.mappingStatus !== 'verified-high-resolution' || entry.atlasCell?.column !== expectedColumn || entry.atlasCell?.row !== expectedRow || entry.atlasCell?.x !== expectedColumn * 300 || entry.atlasCell?.y !== expectedRow * 450) mappingErrors += 1;
 }
-check('78 arquivos passam em formato, dimensão, tamanho e SHA-256', fileErrors === 0, `falhas: ${fileErrors}`);
+check('78 arquivos HD passam em formato, dimensão, tamanho e SHA-256', fileErrors === 0, `falhas: ${fileErrors}`);
 check('78 associações catálogo ↔ imagem ↔ atlas estão corretas', mappingErrors === 0, `falhas: ${mappingErrors}`);
 check('todos os hashes individuais são únicos', new Set(manifest.cards.map(card => card.sha256)).size === 78);
+check('todas as fontes originais registradas são únicas', new Set(manifest.cards.map(card => card.sourceSha256)).size === 78);
+check('catálogo aponta somente para WebP HD', CARDS.every(card => /^card-\d{2}\.webp$/.test(card.image) && card.imageSources.full === card.image));
 
 const atlas = manifest.atlas;
 const atlasExists = fs.existsSync(path.join(root, atlas.file));
@@ -95,7 +101,7 @@ const spreadEngine = fs.readFileSync(path.join(root, 'spreads-engine.js'), 'utf8
 const journalEngine = fs.readFileSync(path.join(root, 'journal-engine.js'), 'utf8');
 const index = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const sw = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
-check('imagens reservam proporção 300 × 450', runtime.includes('width="300" height="450"'));
+check('imagens reservam proporção HD sem salto de layout', runtime.includes('width="1024" height="1536"'));
 check('carregamento progressivo está ativo', runtime.includes('loading="${eager ? \'eager\' : \'lazy\'}"') && runtime.includes('decoding="async"'));
 check('preload inteligente está limitado a três cartas', runtime.includes('Math.min(limit, 3)') && tarotEngine.includes('preloadCardImages(this.state.waiting, 3)'));
 check('fallback visível usa célula do atlas', runtime.includes("backgroundSize = '1000% 800%'") && runtime.includes('atlasFallback'));
@@ -105,11 +111,12 @@ check('Carta do Dia usa runtime central', ritualEngine.includes('cardImageMarkup
 check('Tiragens usam runtime central', spreadEngine.includes('cardImageMarkup'));
 check('Diário usa runtime central', journalEngine.includes('cardImageMarkup'));
 const appVersion = Number(index.match(/app\.js\?v=(\d+)/)?.[1] ?? 0);
-check('navegador recebe a versão atual sem intervalo antigo', appVersion >= 78, `versão: ${appVersion}`);
+check('navegador recebe a versão HD sem intervalo antigo', appVersion >= 80, `versão: ${appVersion}`);
 check('modo offline preserva runtime, catálogo e atlas', ['tarot-image-runtime.js','tarot-data.js','tarot-atlas.webp'].every(file => sw.includes(`'./${file}'`)));
+check('cartas HD carregam sob demanda e não travam a instalação', !sw.includes("'./card-00.webp'"));
 
 for (const result of results) console.log(`${result.pass ? 'PASS' : 'FAIL'}  ${result.name}${result.detail ? ` — ${result.detail}` : ''}`);
 const passed = results.filter(result => result.pass).length;
 console.log(`\n${passed}/${results.length} verificações aprovadas.`);
 if (passed !== results.length) process.exitCode = 1;
-else console.log('Auditoria das 78 imagens aprovada: artes oficiais intactas, mapeadas e protegidas.');
+else console.log('Auditoria das 78 imagens HD aprovada: baralho completo, normal, nítido e mapeado sem lacunas.');

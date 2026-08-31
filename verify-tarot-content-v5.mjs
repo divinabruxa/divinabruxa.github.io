@@ -58,7 +58,7 @@ check('motor bloqueia qualquer pedido de inversão', fs.readFileSync(path.join(r
 
 const index = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const sw = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
-check('navegador recebe o novo conteúdo sem cache antigo', index.includes('app.js?v=79'));
+check('navegador recebe o novo conteúdo sem cache antigo', index.includes('app.js?v=80'));
 check('conteúdo-mãe permanece disponível offline', sw.includes("'./tarot-meanings.js'") && sw.includes("'./meaning-engine.js'"));
 
 const wordCount = contentCards.reduce((total, content) => total + expectedSchema.reduce((sum, key) => {

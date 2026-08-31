@@ -56,7 +56,7 @@ const SUITS = [
   { ptBR: 'Ouros', en: 'Pentacles', es: 'Oros', slug: 'ouros', element: 'Terra', domain: 'corpo, trabalho e recursos', atlasStart: 64 }
 ];
 
-const imageFor = index => `card-${String(index).padStart(2, '0')}.${index === 47 ? 'png' : 'jpg'}`;
+const imageFor = index => `card-${String(index).padStart(2, '0')}.webp`;
 const imageSourcesFor = index => {
   const canonical = imageFor(index);
   return Object.freeze({
