@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "5.0.1",
+  "checkpoint": "1.3",
+  "status": "PASS",
+  "purpose": "Contrato editorial da base profunda das 78 cartas, separado da experiência Tarot Livre.",
+  "source": {
+    "file": "tarot-meanings.js",
+    "sha256": "e50ec43161a34de2279042a7a714038a39e2b38875d62850db66066d654550d9",
+    "cardCount": 78,
+    "orientation": "normal"
+  },
+  "layersPerCard": [
+    "essence",
+    "dailyEnergy",
+    "keywords",
+    "light",
+    "tension",
+    "love",
+    "relationships",
+    "career",
+    "money",
+    "spirituality",
+    "challenge",
+    "advice",
+    "symbols",
+    "reflectionQuestion",
+    "action"
+  ],
+  "editorialRules": {
+    "deepTextRequired": true,
+    "normalOrientationOnly": true,
+    "noReversedInterpretation": true,
+    "noDeterministicPredictions": true,
+    "noClaimsAboutThirdPartyThoughts": true,
+    "encourageObservableChoices": true,
+    "tarotLivreUsesThisSource": false,
+    "allowedConsumers": ["Carta do Dia", "Tiragens", "Escola", "Páginas editoriais"]
+  },
+  "verification": {
+    "command": "node verify-tarot-ritual-v5.mjs",
+    "editorialLayers": 15,
+    "expectedCardCount": 78,
+    "lastRun": "2026-08-31",
+    "lastResult": "70/70"
+  },
+  "nextCheckpoint": "2.1 — Orbe Orgânica"
+}
