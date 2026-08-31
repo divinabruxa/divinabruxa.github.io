@@ -1,0 +1,37 @@
+DIVINA BRUXA — PLANO SUPREMO 5.0
+CHECKPOINT 1.3 — CONTEÚDO-MÃE PROFUNDO DAS 78 CARTAS
+
+ENVIE TODOS OS ARQUIVOS DESTE ZIP PARA A RAIZ DO GITHUB.
+Confirme a substituição somente dos arquivos com nomes iguais.
+
+O QUE FICOU PRONTO
+- Exatamente 78 cartas, todas normais.
+- Quinze camadas editoriais oficiais em cada carta.
+- Essência e mensagem central próprias.
+- Luz e tensão/sombra sem usar cartas invertidas.
+- Amor, relacionamentos, carreira, dinheiro e espiritualidade.
+- Conselho, símbolos e pergunta de reflexão.
+- Pelo menos três combinações relevantes por carta.
+- Palavras-chave e aviso responsável contextual.
+- Tarot Livre, Carta do Dia e Tiragens conectados à base profunda.
+- Conteúdo profundo disponível também no modo offline.
+
+AS 15 CAMADAS
+essence, centralMessage, light, tension, love, relationships, career, money,
+spirituality, advice, symbols, reflectionQuestion, combinations, keywords,
+responsibleNotice.
+
+IMAGENS
+Este pacote não repete nenhuma imagem. Se você possuir as 78 artes originais
+em resolução maior que 300 × 450, envie um ZIP separado com os arquivos sem
+pastas. Não envie novamente os mesmos arquivos atuais, pois isso não aumentaria
+a qualidade.
+
+VALIDAÇÃO OPCIONAL
+node verify-tarot-content-v5.mjs
+node verify-tarot-images-v5.mjs
+node verify-catalog-v5.mjs
+node verify-v77.mjs
+
+PRÓXIMO CONTINUA
+Checkpoint 2.1 — Motor puro e definitivo do Tarot Livre.

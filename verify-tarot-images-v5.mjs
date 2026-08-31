@@ -104,7 +104,8 @@ check('Tarot Livre usa runtime central', tarotEngine.includes('cardImageMarkup')
 check('Carta do Dia usa runtime central', ritualEngine.includes('cardImageMarkup'));
 check('Tiragens usam runtime central', spreadEngine.includes('cardImageMarkup'));
 check('Diário usa runtime central', journalEngine.includes('cardImageMarkup'));
-check('navegador recebe a versão atual sem intervalo antigo', index.includes('app.js?v=78'));
+const appVersion = Number(index.match(/app\.js\?v=(\d+)/)?.[1] ?? 0);
+check('navegador recebe a versão atual sem intervalo antigo', appVersion >= 78, `versão: ${appVersion}`);
 check('modo offline preserva runtime, catálogo e atlas', ['tarot-image-runtime.js','tarot-data.js','tarot-atlas.webp'].every(file => sw.includes(`'./${file}'`)));
 
 for (const result of results) console.log(`${result.pass ? 'PASS' : 'FAIL'}  ${result.name}${result.detail ? ` — ${result.detail}` : ''}`);

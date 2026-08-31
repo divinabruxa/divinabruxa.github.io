@@ -1,0 +1,19 @@
+{
+  "checkpoint": "1.3",
+  "title": "Conteúdo-Mãe profundo das 78 cartas",
+  "novos": [
+    "verify-tarot-content-v5.mjs",
+    "INSTALL-MANIFEST-V5-CHECKPOINT-1.3.json",
+    "00-LEIA-PRIMEIRO-V5-CHECKPOINT-1.3.txt"
+  ],
+  "substituir": [
+    "tarot-meanings.js",
+    "meaning-engine.js",
+    "verify-tarot-images-v5.mjs",
+    "index.html",
+    "sw.js"
+  ],
+  "remover": [],
+  "imagensIncluidas": 0,
+  "publicacaoAutorizada": false
+}

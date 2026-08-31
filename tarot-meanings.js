@@ -1,10 +1,10 @@
-/* DIVINA BRUXA — TAROT MEANINGS V2 CANDIDATE — CHECKPOINT 6.25
-   78/78 cartas. 15 camadas editoriais. Orientação única: NORMAL.
-   Candidato de substituição atômica; NÃO publicado em produção.
+/* DIVINA BRUXA — CONTEÚDO-MÃE V5 — CHECKPOINT 1.3
+   78/78 cartas. 15 camadas editoriais oficiais. Orientação única: NORMAL.
+   Fonte profunda para Tarot Livre, Carta do Dia, Tiragens, Escola e Biblioteca.
 */
 (function(global){
   "use strict";
-  const SCHEMA=Object.freeze(["essence", "dailyEnergy", "keywords", "light", "tension", "love", "relationships", "career", "money", "spirituality", "challenge", "advice", "symbols", "reflectionQuestion", "action"]);
+  const SCHEMA=Object.freeze(["essence", "centralMessage", "light", "tension", "love", "relationships", "career", "money", "spirituality", "advice", "symbols", "reflectionQuestion", "combinations", "keywords", "responsibleNotice"]);
   const CARDS={
   "00-o-louco": {
     "name": "O Louco",
@@ -2459,7 +2459,58 @@
     "action": "Ação prática: Escolha uma decisão financeira ou profissional relevante, escreva o impacto em um mês, um ano e cinco anos e ajuste o plano para que prosperidade venha acompanhada de responsabilidade e autonomia. Ao terminar, registre o que mudou em termos concretos — valor, tempo, espaço, responsabilidade ou clareza. Esse fechamento transforma a mensagem de Rei de Ouros em aprendizado observável. Se a ação revelar que seu plano é maior do que a capacidade disponível, ajuste sem vergonha. Se revelar margem para crescer, defina o próximo passo e um critério simples para acompanhar resultado. Prosperidade sustentável depende de feedback, não apenas de intenção."
   }
 };
+  const MAJOR_COMBINATIONS=Object.freeze({
+    "O Louco":[["O Mago","a liberdade encontra direção e transforma impulso em começo consciente"],["O Mundo","um ciclo completo libera espaço para uma experiência inteiramente nova"],["A Torre","a ruptura pode abrir liberdade, mas pede cuidado para não confundir coragem com imprudência"]],
+    "O Mago":[["A Sacerdotisa","ação e escuta se equilibram; intenção ganha força quando respeita informação e tempo"],["O Imperador","talento recebe estrutura, método e responsabilidade para produzir resultado"],["O Diabo","poder de influência exige ética para não se tornar manipulação ou controle"]],
+    "A Sacerdotisa":[["O Mago","intuição e iniciativa trabalham juntas quando hipótese é separada de fato"],["A Lua","a sensibilidade se aprofunda, pedindo verificação antes de tratar sensação como certeza"],["O Eremita","silêncio, estudo e recolhimento favorecem uma resposta amadurecida"]],
+    "A Imperatriz":[["O Imperador","criação e estrutura formam um ambiente capaz de sustentar crescimento"],["A Estrela","beleza, esperança e cuidado restauram a capacidade de imaginar futuro"],["O Diabo","prazer pede medida para não virar dependência, excesso ou autoabandono"]],
+    "O Imperador":[["A Imperatriz","limite e nutrição se complementam; firmeza precisa continuar humana"],["A Justiça","autoridade legítima assume critérios, consequências e prestação de contas"],["A Torre","estruturas rígidas demais podem quebrar para revelar o que precisa ser reconstruído"]],
+    "O Hierofante":[["A Sacerdotisa","tradição externa encontra sabedoria interior e pensamento crítico"],["A Justiça","valores precisam aparecer em regras coerentes, consentidas e aplicadas com equidade"],["O Louco","a liberdade questiona costumes e separa convicção verdadeira de conformismo"]],
+    "Os Enamorados":[["A Justiça","desejo e escolha assumem responsabilidade por acordos e consequências"],["O Diabo","atração intensa pede atenção a dependência, poder e consentimento"],["A Temperança","reciprocidade amadurece por diálogo, ajuste e integração das diferenças"]],
+    "O Carro":[["A Força","direção externa e domínio interior evitam que velocidade vire violência"],["A Roda da Fortuna","movimento encontra mudança de cenário e exige capacidade de adaptação"],["O Eremita","avançar pode pedir uma pausa estratégica para recuperar sentido e rota"]],
+    "A Força":[["O Carro","coragem e direção tornam a ação firme sem perder autocontrole"],["O Diabo","desejo instintivo pode ser reconhecido e integrado sem repressão nem submissão"],["A Temperança","potência se torna cura quando encontra medida, paciência e ritmo"]],
+    "O Eremita":[["A Sacerdotisa","recolhimento e observação aprofundam discernimento"],["A Estrela","a luz interior reencontra esperança suficiente para orientar o próximo passo"],["O Mundo","sabedoria acumulada ajuda a encerrar um ciclo com integração"]],
+    "A Roda da Fortuna":[["O Carro","mudança encontra direção; agir no momento certo vale mais do que tentar controlar tudo"],["A Justiça","ciclos e escolhas se cruzam, lembrando que acaso não elimina consequência"],["A Morte","a transformação deixa de ser ajuste e passa a exigir encerramento real"]],
+    "A Justiça":[["O Imperador","critério e autoridade precisam responder por suas decisões"],["Os Enamorados","escolhas afetivas ganham clareza quando valores e acordos são explícitos"],["O Julgamento","avaliação honesta permite reconhecer responsabilidade e escolher reparação"]],
+    "O Pendurado":[["A Sacerdotisa","pausa e escuta revelam o que ação apressada não conseguiria perceber"],["A Morte","entrega prepara um encerramento necessário e uma mudança de identidade"],["O Carro","a tensão entre parar e avançar pede uma nova perspectiva antes da decisão"]],
+    "A Morte":[["A Torre","fim e ruptura aceleram uma transformação que já não pode ser adiada"],["A Temperança","depois do encerramento, integração e recuperação acontecem por etapas"],["O Mundo","a conclusão recebe sentido e libera espaço para outro ciclo"]],
+    "A Temperança":[["A Força","autodomínio e medida canalizam potência sem apagar vitalidade"],["A Estrela","cura e esperança trabalham juntas de forma gradual e realista"],["O Diabo","integração consciente reduz extremos, compulsões e dependências"]],
+    "O Diabo":[["Os Enamorados","desejo revela escolhas, vínculos de poder e necessidade de consentimento"],["A Força","instinto pode ser acolhido e direcionado sem negar o corpo"],["A Torre","uma verdade incômoda rompe o mecanismo que mantinha o aprisionamento"]],
+    "A Torre":[["A Morte","ruptura e encerramento retiram sustentação do que já terminou"],["A Estrela","depois do choque, esperança nasce de verdade, cuidado e reconstrução"],["O Imperador","estruturas precisam ser refeitas com limites menos rígidos e bases mais honestas"]],
+    "A Estrela":[["A Lua","esperança convive com incerteza; sensibilidade precisa continuar ancorada"],["O Sol","inspiração se torna clareza, vitalidade e expressão visível"],["A Temperança","recuperação ganha ritmo, medida e continuidade"]],
+    "A Lua":[["A Sacerdotisa","intuição se aprofunda, mas permanece distinta de prova e certeza"],["O Sol","o que estava nebuloso pode ganhar nome, contraste e clareza"],["O Diabo","medo e desejo inconscientes pedem reconhecimento para não governarem a escolha"]],
+    "O Sol":[["A Estrela","esperança se torna presença, confiança e capacidade de compartilhar"],["A Lua","clareza e ambiguidade precisam dialogar sem negar emoção nem fato"],["O Mundo","vitalidade acompanha realização e celebração consciente de um ciclo"]],
+    "O Julgamento":[["A Justiça","revisão e responsabilidade permitem decisão, reparo e libertação"],["A Morte","o chamado exige deixar uma identidade antiga realmente terminar"],["O Mundo","consciência e integração concluem o ciclo antes do próximo começo"]],
+    "O Mundo":[["O Louco","a conclusão abre um novo começo sem apagar o aprendizado adquirido"],["O Julgamento","chamado e integração confirmam uma mudança assumida conscientemente"],["A Roda da Fortuna","o fim de um ciclo reposiciona a pessoa dentro de um movimento maior"]]
+  });
+  const SUIT_DOMAINS=Object.freeze({Paus:"ação, desejo e criatividade",Copas:"afeto, vínculo e imaginação",Espadas:"pensamento, verdade e decisão",Ouros:"corpo, trabalho e recursos"});
+  const SUIT_PARTNER=Object.freeze({Paus:"Copas",Copas:"Espadas",Espadas:"Ouros",Ouros:"Paus"});
+  const RANK_MAJOR=Object.freeze({"Ás":"O Mago","2":"A Sacerdotisa","3":"A Imperatriz","4":"O Imperador","5":"O Hierofante","6":"Os Enamorados","7":"O Carro","8":"A Força","9":"O Eremita","10":"A Roda da Fortuna","Pajem":"O Louco","Cavaleiro":"O Carro","Rainha":"A Imperatriz","Rei":"O Imperador"});
+  const RANKS=Object.freeze(["Ás","2","3","4","5","6","7","8","9","10","Pajem","Cavaleiro","Rainha","Rei"]);
+  function minorCombinations(name){
+    const match=name.match(/^(Ás|[2-9]|10|Pajem|Cavaleiro|Rainha|Rei) de (Paus|Copas|Espadas|Ouros)$/);
+    if(!match)return [];
+    const [,rank,suit]=match,partner=SUIT_PARTNER[suit],major=RANK_MAJOR[rank],nextRank=RANKS[(RANKS.indexOf(rank)+1)%RANKS.length];
+    return [
+      [`${rank} de ${partner}`,`A mesma etapa encontra dois territórios: ${SUIT_DOMAINS[suit]} dialoga com ${SUIT_DOMAINS[partner]}. Observe onde uma dimensão apoia ou contradiz a outra.`],
+      [major,`O padrão de ${rank} ganha uma chave arquetípica em ${major}; a combinação amplia consciência antes de transformar símbolo em decisão.`],
+      [`${nextRank} de ${suit}`,`A energia de ${name} aponta para ${nextRank} de ${suit}: identifique o aprendizado necessário para que ${SUIT_DOMAINS[suit]} avance sem perder medida.`]
+    ];
+  }
+  function responsibleNotice(name){
+    if(name.includes(" de Ouros"))return "Esta leitura é simbólica e não constitui orientação financeira, jurídica ou profissional. Não use a carta como autorização para gasto, dívida ou investimento; confira números, contratos, riscos e apoio qualificado.";
+    if(name.includes(" de Copas"))return "Esta leitura é simbólica e não prova sentimentos, fidelidade, intenção ou destino de outra pessoa. Priorize comunicação, consentimento, reciprocidade observável e apoio psicológico quando necessário.";
+    if(name.includes(" de Espadas"))return "Esta leitura é simbólica e não realiza diagnóstico de saúde mental nem substitui cuidado médico ou psicológico. Em sofrimento intenso, risco ou crise, procure apoio profissional e uma rede de confiança.";
+    if(name.includes(" de Paus"))return "Esta leitura é simbólica e não garante sucesso, oportunidade ou resultado. Antes de agir, considere limites, segurança, impacto sobre outras pessoas e consequências verificáveis.";
+    return "Esta leitura é simbólica: amplia reflexão, mas não prova fatos, sentimentos secretos ou destino inevitável e não substitui orientação médica, psicológica, jurídica ou financeira. Decisões importantes pedem realidade, consentimento e apoio qualificado.";
+  }
   for(const card of Object.values(CARDS)){
+    card.centralMessage=card.dailyEnergy;
+    card.combinations=Object.freeze((MAJOR_COMBINATIONS[card.name]||minorCombinations(card.name)).map(([withCard,reading])=>({
+      with:withCard,
+      reading:MAJOR_COMBINATIONS[card.name]?`${reading}. Observe como essas duas forças se apoiam, onde entram em tensão e qual delas precisa de medida na situação concreta.`:reading
+    })).map(item=>Object.freeze(item)));
+    card.responsibleNotice=responsibleNotice(card.name);
     card.keywords=Object.freeze([...card.keywords]);
     card.symbols=Object.freeze([...card.symbols]);
     Object.freeze(card);
@@ -2489,14 +2540,16 @@
         const value=card[key];
         if(key==="keywords"||key==="symbols"){
           if(!Array.isArray(value)||!value.length||value.some(item=>typeof item!=="string"||!item.trim()))errors.push(`${id}: ${key} inválido.`);
+        }else if(key==="combinations"){
+          if(!Array.isArray(value)||value.length<3||value.some(item=>!item||typeof item.with!=="string"||!item.with.trim()||typeof item.reading!=="string"||!item.reading.trim()))errors.push(`${id}: combinações inválidas.`);
         }else if(typeof value!=="string"||!value.trim())errors.push(`${id}: ${key} ausente.`);
       }
     }
     return {ok:errors.length===0,errors};
   }
   global.DivinaBruxaTarotMeanings=Object.freeze({
-    version:"2.0.0-candidate",
-    schemaVersion:"2.0.0",
+    version:"5.0.1-checkpoint-1.3",
+    schemaVersion:"5.0.1",
     cardCount:78,
     normalOnly:true,
     schema:SCHEMA,
