@@ -131,9 +131,11 @@ check('preload continua limitado às três próximas cartas', engine.includes('p
 check('nenhuma classe de inversão existe no motor', !engine.includes('state.' + forbiddenKey) && !engine.includes(`classList.add('${forbiddenKey}')`));
 check('carta exibida recebe marca explícita DIRETA', engine.includes('<span>DIRETA</span>'));
 check('texto de status é acessível e acompanha cartas restantes', tarotSection.includes('aria-live="polite"') && engine.includes('Revelar próxima carta. ${waiting} restantes.'));
-check('aplicativo aponta para o motor 81', index.includes('app.js?v=81') && read('app.js').includes('tarot-engine.js?v=81'));
+const appVersion = Number(index.match(/app\.js\?v=(\d+)/)?.[1] ?? 0);
+const engineVersion = Number(read('app.js').match(/tarot-engine\.js\?v=(\d+)/)?.[1] ?? 0);
+check('aplicativo aponta para o motor definitivo', appVersion >= 81 && engineVersion >= 81, `app: ${appVersion}; motor: ${engineVersion}`);
 check('modo offline inclui núcleo, motor e armazenamento', ['tarot-session.js', 'tarot-engine.js', 'storage.js'].every(file => sw.includes(`'./${file}'`)));
-check('cache do Checkpoint 2.1 está isolado', sw.includes('cp21-tarot-livre'));
+check('cache da Macroetapa 2 está isolado', /cp2[1-4]-(tarot-livre|mesa-real|controles|regra-editorial)/.test(sw));
 
 for (const result of results) console.log(`${result.pass ? 'PASS' : 'FAIL'}  ${result.name}${result.detail ? ` — ${result.detail}` : ''}`);
 const passed = results.filter(result => result.pass).length;

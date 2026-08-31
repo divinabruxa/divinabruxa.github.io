@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — MOTOR DEFINITIVO DO TAROT LIVRE — CHECKPOINT 2.1
-   Revelação exclusivamente pela Orbe, 78 cartas normais, sem repetição e com retomada segura.
+/* DIVINA BRUXA — MOTOR DEFINITIVO DO TAROT LIVRE — CHECKPOINT 2.2
+   Revelação pela Orbe, Mesa Real 13 × 6, ampliação HD e retomada segura.
 */
 import { CARDS } from './tarot-data.js';
 import { store } from './storage.js';
@@ -34,9 +34,26 @@ export class FreeTarot {
     this.orbState = root.querySelector('#orbState');
     this.shuffleButton = root.querySelector('#shuffleDeck');
     this.resetButton = root.querySelector('#resetDeck');
+    this.viewport = root.querySelector('#realTableViewport');
+    this.compactButton = root.querySelector('#tableCompact');
+    this.scrollPrevButton = root.querySelector('#tableScrollPrev');
+    this.scrollNextButton = root.querySelector('#tableScrollNext');
+    this.viewHint = root.querySelector('#tableViewHint');
+    this.lightbox = root.querySelector('#cardLightbox');
+    this.lightboxImage = root.querySelector('#lightboxImage');
+    this.lightboxTitle = root.querySelector('#lightboxTitle');
+    this.lightboxPosition = root.querySelector('#lightboxPosition');
+    this.lightboxPrev = root.querySelector('#lightboxPrev');
+    this.lightboxNext = root.querySelector('#lightboxNext');
+    this.lightboxClose = root.querySelector('#closeCardLightbox');
     this.selected = -1;
+    this.lightboxIndex = -1;
+    this.lightboxTrigger = null;
+    this.compactView = this.storage.get('free-tarot-table-compact', false) === true;
     this.drawing = false;
     this.releaseTimer = 0;
+    this.scrollFrame = 0;
+    this.lastTableScrollAt = -Infinity;
 
     const restored = normalizeTarotState(this.storage.get(STORAGE_KEY, null));
     this.state = restored ?? createTarotState();
@@ -44,6 +61,7 @@ export class FreeTarot {
     this.persist();
     preloadCardImages(this.state.waiting, 3);
     this.bind();
+    this.updateViewMode();
     this.render();
   }
 
@@ -62,9 +80,43 @@ export class FreeTarot {
     this.resetButton.addEventListener('click', () => this.reset());
     this.shuffleButton.addEventListener('click', () => this.reshuffle());
     this.realTable.addEventListener('click', event => {
+      const now = globalThis.performance?.now?.() ?? Date.now();
+      if (event.detail > 0 && now - this.lastTableScrollAt < 120) return;
       const button = event.target.closest('[data-index]');
-      if (button) this.show(Number(button.dataset.index), false, true);
+      if (!button) return;
+      const index = Number(button.dataset.index);
+      this.show(index, false, false);
+      this.openLightbox(index, button);
     });
+    this.compactButton.addEventListener('click', () => {
+      this.compactView = !this.compactView;
+      try { this.storage.set('free-tarot-table-compact', this.compactView); } catch { /* preferência não essencial */ }
+      this.updateViewMode();
+    });
+    this.scrollPrevButton.addEventListener('click', () => this.scrollTable(-1));
+    this.scrollNextButton.addEventListener('click', () => this.scrollTable(1));
+    this.viewport.addEventListener('scroll', () => {
+      this.lastTableScrollAt = globalThis.performance?.now?.() ?? Date.now();
+      globalThis.cancelAnimationFrame?.(this.scrollFrame);
+      this.scrollFrame = globalThis.requestAnimationFrame?.(() => this.updateScrollControls()) ?? 0;
+    }, { passive: true });
+    this.viewport.addEventListener('keydown', event => {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      event.preventDefault();
+      this.scrollTable(event.key === 'ArrowLeft' ? -1 : 1);
+    });
+    this.lightboxClose.addEventListener('click', () => this.closeLightbox());
+    this.lightboxPrev.addEventListener('click', () => this.moveLightbox(-1));
+    this.lightboxNext.addEventListener('click', () => this.moveLightbox(1));
+    this.lightbox.addEventListener('click', event => {
+      if (event.target === this.lightbox) this.closeLightbox();
+    });
+    this.lightbox.addEventListener('keydown', event => {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      event.preventDefault();
+      this.moveLightbox(event.key === 'ArrowLeft' ? -1 : 1);
+    });
+    this.lightbox.addEventListener('close', () => this.finishLightboxClose());
 
     this.onStorage = event => {
       if (!event.key?.endsWith(STORAGE_EVENT_SUFFIX) || !event.newValue) return;
@@ -75,6 +127,8 @@ export class FreeTarot {
       this.selected = incoming.revealed.length - 1;
       this.drawing = false;
       this.render();
+      if (this.lightbox.open && this.lightboxIndex >= incoming.revealed.length) this.closeLightbox();
+      else if (this.lightbox.open) this.renderLightbox();
       preloadCardImages(this.state.waiting, 3);
     };
     globalThis.addEventListener?.('storage', this.onStorage);
@@ -127,6 +181,95 @@ export class FreeTarot {
     }
   }
 
+  reducedMotion() {
+    return globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
+  }
+
+  updateViewMode() {
+    this.viewport.classList.toggle('is-compact', this.compactView);
+    this.compactButton.setAttribute('aria-pressed', String(this.compactView));
+    this.compactButton.textContent = this.compactView ? 'Ampliar cartas' : 'Ver mesa inteira';
+    this.viewHint.textContent = this.compactView
+      ? 'As seis colunas estão visíveis na largura da tela.'
+      : 'Deslize para percorrer as seis colunas.';
+    globalThis.requestAnimationFrame?.(() => this.updateScrollControls());
+  }
+
+  scrollTable(direction) {
+    const distance = Math.max(260, this.viewport.clientWidth * .78);
+    this.viewport.scrollBy({ left: direction * distance, behavior: this.reducedMotion() ? 'auto' : 'smooth' });
+  }
+
+  updateScrollControls() {
+    const maximum = Math.max(0, this.viewport.scrollWidth - this.viewport.clientWidth);
+    this.scrollPrevButton.disabled = maximum < 2 || this.viewport.scrollLeft <= 2;
+    this.scrollNextButton.disabled = maximum < 2 || this.viewport.scrollLeft >= maximum - 2;
+  }
+
+  centerTablePosition(index) {
+    globalThis.requestAnimationFrame?.(() => {
+      const slot = this.realTable.querySelector(`[data-position="${index}"]`);
+      if (!slot || this.viewport.scrollWidth <= this.viewport.clientWidth) return;
+      const left = slot.offsetLeft - ((this.viewport.clientWidth - slot.offsetWidth) / 2);
+      this.viewport.scrollTo({ left: Math.max(0, left), behavior: this.reducedMotion() ? 'auto' : 'smooth' });
+    });
+  }
+
+  openLightbox(index, trigger = null) {
+    if (!CARDS[this.state.revealed[index]]) return false;
+    this.lightboxIndex = index;
+    this.lightboxTrigger = trigger;
+    this.renderLightbox();
+    if (!this.lightbox.open) {
+      document.body.classList.add('card-lightbox-open');
+      if (typeof this.lightbox.showModal === 'function') this.lightbox.showModal();
+      else this.lightbox.setAttribute('open', '');
+    }
+    globalThis.requestAnimationFrame?.(() => this.lightboxClose.focus({ preventScroll: true }));
+    return true;
+  }
+
+  renderLightbox() {
+    const cardId = this.state.revealed[this.lightboxIndex];
+    const card = CARDS[cardId];
+    if (!card) return;
+    this.lightboxImage.innerHTML = cardImageMarkup(card, { alt: `${card.name}, direta, ampliada`, priority: 'high' });
+    this.lightboxTitle.textContent = card.name;
+    this.lightboxPosition.textContent = `POSIÇÃO ${this.lightboxIndex + 1} DE ${DECK_SIZE}`;
+    this.lightboxPrev.disabled = this.lightboxIndex <= 0;
+    this.lightboxNext.disabled = this.lightboxIndex >= this.state.revealed.length - 1;
+    preloadCardImages([
+      this.state.revealed[this.lightboxIndex - 1],
+      this.state.revealed[this.lightboxIndex + 1]
+    ], 2);
+  }
+
+  moveLightbox(direction) {
+    const nextIndex = this.lightboxIndex + direction;
+    if (nextIndex < 0 || nextIndex >= this.state.revealed.length) return false;
+    this.lightboxIndex = nextIndex;
+    this.selected = nextIndex;
+    this.renderLightbox();
+    this.show(nextIndex, false, false);
+    return true;
+  }
+
+  closeLightbox() {
+    if (!this.lightbox.open) return;
+    if (typeof this.lightbox.close === 'function') this.lightbox.close();
+    else {
+      this.lightbox.removeAttribute('open');
+      this.finishLightboxClose();
+    }
+  }
+
+  finishLightboxClose() {
+    document.body.classList.remove('card-lightbox-open');
+    const focusTarget = this.realTable.querySelector(`[data-index="${this.lightboxIndex}"]`) || this.lightboxTrigger;
+    this.lightboxTrigger = null;
+    focusTarget?.focus?.({ preventScroll: true });
+  }
+
   render(landing = -1) {
     const total = this.state.revealed.length;
     const waiting = this.state.waiting.length;
@@ -142,12 +285,17 @@ export class FreeTarot {
 
     this.realTable.innerHTML = Array.from({ length: DECK_SIZE }, (_, index) => {
       const cardId = this.state.revealed[index];
+      const row = Math.floor(index / 6) + 1;
+      const column = (index % 6) + 1;
       if (cardId === undefined) {
-        return `<div class="table-slot waiting" role="listitem" aria-label="Posição ${index + 1}, aguardando carta"><span class="position">${index + 1}</span></div>`;
+        return `<div data-position="${index}" class="table-slot waiting" role="gridcell" aria-rowindex="${row}" aria-colindex="${column}" aria-disabled="true" aria-label="Posição ${index + 1}, aguardando carta"><span class="position">${index + 1}</span></div>`;
       }
       const card = CARDS[cardId];
-      return `<button data-index="${index}" role="listitem" class="table-slot revealed${index === this.selected ? ' selected' : ''}${index === landing ? ' landing' : ''}" aria-label="Abrir ${card.name}, direta">${cardImageMarkup(card, { decorative: true })}<span class="order">${index + 1}</span></button>`;
+      return `<button type="button" data-index="${index}" data-position="${index}" role="gridcell" aria-rowindex="${row}" aria-colindex="${column}" class="table-slot revealed${index === this.selected ? ' selected' : ''}${index === landing ? ' landing' : ''}" aria-label="Ampliar ${card.name}, direta, posição ${index + 1}">${cardImageMarkup(card, { decorative: true })}<span class="order">${index + 1}</span></button>`;
     }).join('');
+
+    this.centerTablePosition(landing);
+    globalThis.requestAnimationFrame?.(() => this.updateScrollControls());
 
     if (total) {
       if (this.selected < 0 || this.selected >= total) this.selected = total - 1;
@@ -165,6 +313,7 @@ export class FreeTarot {
     if (needsConfirmation && globalThis.confirm && !globalThis.confirm('Apagar as cartas desta mesa e iniciar um novo baralho?')) return false;
     this.state = resetTarotState();
     this.selected = -1;
+    this.closeLightbox();
     this.persist();
     this.render();
     preloadCardImages(this.state.waiting, 3);
@@ -186,6 +335,8 @@ export class FreeTarot {
 
   destroy() {
     globalThis.clearTimeout(this.releaseTimer);
+    globalThis.cancelAnimationFrame?.(this.scrollFrame);
+    this.closeLightbox();
     globalThis.removeEventListener?.('storage', this.onStorage);
   }
 }

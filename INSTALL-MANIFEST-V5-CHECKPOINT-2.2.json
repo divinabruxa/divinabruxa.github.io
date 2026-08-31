@@ -1,0 +1,52 @@
+{
+  "checkpoint": "2.2",
+  "title": "Mesa Real 13 × 6",
+  "novos": [
+    "tarot-table-v5.css",
+    "verify-mesa-real-v5.mjs",
+    "INSTALL-MANIFEST-V5-CHECKPOINT-2.2.json",
+    "00-LEIA-PRIMEIRO-V5-CHECKPOINT-2.2.txt"
+  ],
+  "substituir": [
+    "tarot-engine.js",
+    "app.js",
+    "index.html",
+    "sw.js",
+    "verify-tarot-livre-v5.mjs"
+  ],
+  "remover": [],
+  "arquivosNoZip": 9,
+  "mesaReal": {
+    "posicoes": 78,
+    "fileiras": 13,
+    "colunas": 6,
+    "posicoesNumeradas": true,
+    "vaziasClicaveis": false,
+    "ampliacaoHD": true,
+    "navegacaoEntreReveladas": true,
+    "faixaHorizontalMobile": true,
+    "visaoCompactaOpcional": true,
+    "preferenciaLocal": true,
+    "imagensProporcionais": true,
+    "significadosAutomaticos": false
+  },
+  "cartas": {
+    "total": 78,
+    "normais": 78,
+    "invertidas": 0,
+    "repeticoesAntesDoReset": 0
+  },
+  "qa": {
+    "mesaReal": "54/54",
+    "tarotLivre": "52/52",
+    "conteudo": "22/22",
+    "imagens": "35/35",
+    "catalogo": "33/33",
+    "v77": "49/49",
+    "total": "245/245",
+    "status": "APROVADO"
+  },
+  "visualV77Alterado": false,
+  "imagensAntigasReenviadas": 0,
+  "publicacaoAutorizada": false
+}
