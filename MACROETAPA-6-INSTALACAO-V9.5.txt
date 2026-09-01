@@ -1,0 +1,15 @@
+DIVINA BRUXA — MACROETAPA 6 / EDITORIAL E CARTA DO DIA
+
+1. Envie `daily-editorial-contract-v9.js` para a raiz da branch de teste.
+2. Preserve `tarot-meanings.js`, `daily-policy.js` e
+   `daily-meaning-runtime.js`; eles continuam sendo as fontes de conteúdo.
+3. Use o contrato para validar cada registro antes de renderizar a Carta do
+   Dia. A data deve usar `America/Sao_Paulo`.
+4. Enquanto Auth/backend não estiverem ativos, a persistência pode ser local;
+   não anunciar sincronização real entre dispositivos.
+5. Execute `node EDITORIAL-CONTENT-VALIDATION-V9.5.mjs` e confirme 8/8 PASS.
+6. Teste os 12 campos editoriais e confirme que nenhuma orientação invertida
+   aparece.
+
+RETORNO: remova somente o contrato se necessário; não apague o catálogo.
+PRÓXIMA: Macroetapa 7 — SEO técnico, sitemap, robots, OG e dados estruturados.
