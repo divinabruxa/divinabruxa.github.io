@@ -1,0 +1,14 @@
+DIVINA BRUXA — MACROETAPA 5 / ATMOSFERAS DOS PORTAIS V8
+
+STATUS: pacote pronto; instalação remota pendente do desbloqueio GitHub (HTTP 403).
+
+ORDEM:
+1. Carregar portal-atmospheres-v8.css depois das demais camadas visuais.
+2. Carregar portal-atmospheres-v8.js como módulo depois de app.js.
+3. Atualizar o service worker após validar a página.
+
+ESCOPO:
+- Cria uma atmosfera visual própria para cada tela.
+- Mantém unidade de marca e responsividade.
+- Não altera motores, cartas, menu, Orbe ou CNAME.
+- Usa apenas CSS e JavaScript local.

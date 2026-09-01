@@ -1,0 +1,21 @@
+/* DIVINA BRUXA — ATMOSFERAS DOS PORTAIS V8 */
+.screen[data-portal]{position:relative;overflow:hidden}
+.screen[data-portal]::before{content:"";position:absolute;inset:0 0 auto;height:22rem;pointer-events:none;z-index:-1;background:radial-gradient(circle at 50% 0,var(--portal-glow,rgba(139,82,255,.2)),transparent 66%);opacity:.8}
+.screen[data-portal]::after{content:"✦";position:absolute;top:clamp(4.5rem,8vw,7rem);right:clamp(1rem,6vw,5rem);color:var(--portal-accent,var(--db-gold-soft));font-size:1.4rem;opacity:.5;filter:drop-shadow(0 0 12px var(--portal-glow,rgba(139,82,255,.5)));pointer-events:none}
+.screen[data-portal]>.eyebrow:first-child{color:var(--portal-accent,var(--db-gold-soft))}
+.screen[data-portal="tarot"]{--portal-accent:#e8c16e;--portal-glow:rgba(208,145,47,.22)}
+.screen[data-portal="daily"]{--portal-accent:#f2c973;--portal-glow:rgba(239,173,50,.2)}
+.screen[data-portal="library"]{--portal-accent:#bda0ff;--portal-glow:rgba(130,83,240,.22)}
+.screen[data-portal="school"]{--portal-accent:#9ed5ff;--portal-glow:rgba(65,143,220,.2)}
+.screen[data-portal="spreads"]{--portal-accent:#dda6ff;--portal-glow:rgba(186,81,250,.22)}
+.screen[data-portal="ai"]{--portal-accent:#d0b8ff;--portal-glow:rgba(109,72,237,.25)}
+.screen[data-portal="journal"]{--portal-accent:#f0a9c6;--portal-glow:rgba(220,93,145,.2)}
+.screen[data-portal="store"]{--portal-accent:#d8ad69;--portal-glow:rgba(172,103,32,.2)}
+.screen[data-portal="consultations"]{--portal-accent:#e5c58f;--portal-glow:rgba(191,133,61,.2)}
+.screen[data-portal="subscriptions"]{--portal-accent:#f3d792;--portal-glow:rgba(209,153,44,.23)}
+.screen[data-portal="videos"]{--portal-accent:#a9c8ff;--portal-glow:rgba(69,119,226,.2)}
+.screen[data-portal="music"]{--portal-accent:#d5a4ff;--portal-glow:rgba(165,83,240,.22)}
+.screen[data-portal="login"],.screen[data-portal="admin"]{--portal-accent:#bfa9e8;--portal-glow:rgba(91,56,156,.2)}
+.portal-mark{display:inline-grid;place-items:center;width:2.2rem;height:2.2rem;margin-bottom:.8rem;border:1px solid color-mix(in srgb,var(--portal-accent,var(--db-gold)) 55%,transparent);border-radius:50%;color:var(--portal-accent,var(--db-gold));box-shadow:0 0 24px var(--portal-glow,rgba(139,82,255,.3))}
+@supports not (color:color-mix(in srgb,white,black)){.portal-mark{border-color:var(--db-line)}}
+@media (prefers-reduced-motion:reduce){.screen[data-portal]::after{filter:none}}
