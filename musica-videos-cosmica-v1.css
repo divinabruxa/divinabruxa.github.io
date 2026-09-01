@@ -1,0 +1,7 @@
+.music-screen,.videos-screen{background:radial-gradient(circle at 50% 0,rgba(149,58,221,.28),transparent 44%),linear-gradient(180deg,#170522,#0b0215)}
+.music-screen .album-hero,.music-screen .track-card,.videos-screen .video-card,.videos-screen .episode-card{border:1px solid rgba(243,211,138,.32);border-radius:22px;background:linear-gradient(145deg,rgba(67,24,104,.72),rgba(14,3,25,.92));box-shadow:0 18px 46px rgba(0,0,0,.3),inset 0 1px rgba(255,255,255,.05);transition:transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s ease}
+.music-screen .track-card:hover,.videos-screen .video-card:hover,.videos-screen .episode-card:hover{transform:translateY(-4px);border-color:#f3d38a;box-shadow:0 0 30px rgba(184,108,255,.4)}
+.music-screen .play-button,.videos-screen .watch-button{transition:transform .22s ease,filter .22s ease}.music-screen .play-button:hover,.videos-screen .watch-button:hover{transform:scale(1.06);filter:drop-shadow(0 0 16px rgba(243,211,138,.55))}.music-screen .play-button:active,.videos-screen .watch-button:active{transform:scale(.94)}
+.music-screen audio{accent-color:#b86cff;width:100%}
+@media(max-width:640px){.music-screen .album-hero,.music-screen .track-card,.videos-screen .video-card,.videos-screen .episode-card{border-radius:17px}}
+@media(prefers-reduced-motion:reduce){.music-screen *,.videos-screen *{transition-duration:.01ms!important}}
