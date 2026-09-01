@@ -21,7 +21,7 @@ export class AIEngine {
   async send(){
     const input=this.root.querySelector('#chatInput'),content=input.value.trim(),mode=this.mode.value,persona=this.persona.value.trim(),consent=this.root.querySelector('#aiConsent')?.checked;
     if(!content||!consent)return;
-    if(mode==='sol'||!AI_POLICY.modes[mode]?.enabled===false){this.history.push({role:'assistant',content:'Este modo permanece desativado até uma futura aprovação de produção.'});this.renderHistory();return;}
+    if(mode==='sol'||!AI_POLICY.modes[mode]||AI_POLICY.modes[mode].enabled===false){this.history.push({role:'assistant',content:'Este modo permanece desativado até uma futura aprovação de produção.'});this.renderHistory();return;}
     if(mode==='channel'&&!persona){this.persona.focus();return;}
     if(!canSpend(mode)){this.history.push({role:'assistant',content:'Seus créditos demonstrativos acabaram. Nenhuma cobrança será feita.'});this.renderHistory();return;}
     this.history.push({role:'user',content});input.value='';this.renderHistory();const pending=document.createElement('p');pending.className='bubble bot';pending.textContent='A Orbe está refletindo…';this.chat.append(pending);
