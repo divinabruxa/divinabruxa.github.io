@@ -1,0 +1,20 @@
+DIVINA BRUXA — MACROETAPA 30 / PACOTE DEFINITIVO
+
+INCLUI
+- Manifesto final.
+- Gerador de checksums SHA-256.
+- Auditoria final automatizada.
+- Guia final de instalação e retorno.
+- Release notes e status honesto.
+- ZIP integral plano e ZIP compacto de instalação.
+
+ORDEM DE VERIFICAÇÃO
+1. node finalize-release-v8.mjs
+2. node qa-supreme-v8.mjs
+3. node regression-v8.28.mjs
+4. node final-audit-v8.mjs
+
+RESULTADO DA MACROETAPA
+As 30 macroetapas terminam aqui. O pacote fica encerrado e pronto para instalação
+controlada. Produção permanece separada e bloqueada até concluir as pendências
+externas documentadas.

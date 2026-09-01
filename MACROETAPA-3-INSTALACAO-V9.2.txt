@@ -1,0 +1,14 @@
+DIVINA BRUXA — MACROETAPA 3 / ATIVAÇÃO CONTROLADA V8.30
+
+1. Crie uma branch de teste e confirme o backup da Macroetapa 0.
+2. Descompacte este ZIP e envie os arquivos soltos para a raiz do repositório.
+3. Preserve CNAME, cartas, skins, imagens da orbe, menu, navigation.js e
+   arquivos do app.js. Não apague arquivos legados nesta etapa.
+4. No `index.html`, adicione somente a linha descrita em
+   `INDEX-SNIPPET-V9.2.txt`, antes de `</body>`.
+5. Limpe o cache e valide Home, menu, orbe, Tarot Livre, Tiragens, Carta do
+   Dia, Escola, Diário, Loja, Consultas e skins.
+6. Se qualquer tela falhar, remova apenas a linha do loader e reverta a branch.
+
+GATE: produção, DNS, cobrança real, envio às lojas e Sol da Orbe IA continuam
+bloqueados. Esta é uma ativação de staging, reversível e sem exclusões.

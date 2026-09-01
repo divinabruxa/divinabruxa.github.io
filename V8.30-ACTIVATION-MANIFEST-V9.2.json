@@ -1,0 +1,15 @@
+{
+  "release": "DIVINA-BRUXA-V8.30",
+  "macro": "V9.2",
+  "mode": "staging-only",
+  "production_publish_authorized": false,
+  "dns_changes_authorized": false,
+  "real_billing_authorized": false,
+  "store_submission_authorized": false,
+  "orbe_ai_sol_enabled": false,
+  "preserve": ["CNAME", "78-card-assets", "skins", "orb-assets", "navigation.js", "original-menu-orb-engine"],
+  "files_to_add_or_replace": ["404.html", "offline.html", "fallback-shell-v1.css", "sw.js"],
+  "files_to_delete": [],
+  "rollback": "restore the previous four files or revert the staging commit",
+  "next_macro": "V9.3 / Macroetapa 3 follow-up: canonical V8.30 entrypoint selection"
+}

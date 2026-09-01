@@ -1,0 +1,6 @@
+Adicionar uma única vez, imediatamente antes de </body> no index.html:
+
+<script type="module" src="divina-v8-loader.js?v=8.28"></script>
+
+Não adicionar o loader duas vezes. Não remover as linhas existentes do app.js,
+navigation.js, menu ou motor da orbe. Se o loader já existir, não duplicar.
