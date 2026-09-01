@@ -1,0 +1,13 @@
+{
+  "version": "V10",
+  "fallback": "classica-divina",
+  "sourcePattern": "skin-*.png",
+  "derivedPattern": "skin-{id}-{surface}-{width}.webp",
+  "surfaces": ["main-orb","menu-orb","header-orb","dock-orb","table-orb","context-orb","ai-orb"],
+  "widths": [64,128,256,512,1024],
+  "requiredFields": ["id","label","source","accent","glow","background","particleColor"],
+  "currentSkinCount": 30,
+  "selectionStorageKey": "divina.skin.v10",
+  "syncPolicy": "local-first-account-when-available",
+  "noRuntimeRecreation": true
+}

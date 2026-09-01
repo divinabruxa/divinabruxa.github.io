@@ -1,0 +1,12 @@
+DIVINA BRUXA — INSTALAÇÃO DA MACROETAPA 5
+
+1. Adicione estes arquivos na raiz do GitHub.
+2. Não renomeie nem apague as 30 imagens PNG atuais.
+3. O motor skin-universal-v10.js não deve ser importado na produção sem staging.
+4. No staging, marque cada superfície de orbe com data-orb-surface.
+5. Execute: node skin-coverage-guard-v10.mjs CAMINHO_DO_STAGING
+6. Teste a troca de uma skin em Home, menu, cabeçalho, dock, mesa, carregamento e IA.
+7. Confirme que a leitura em andamento não é perdida.
+8. Teste movimento reduzido, recarregamento e fallback.
+9. Gere derivados WebP/AVIF somente depois da aprovação visual.
+10. A próxima etapa será o Motor de Portais e transições mágicas.
