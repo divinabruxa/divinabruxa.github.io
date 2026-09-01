@@ -1,0 +1,11 @@
+area,cenario,resultado_esperado,ambiente,status
+boot,Home abre sem TypeError,navegação inicial completa,staging,NOT RUN
+tarot,revelar 78 cartas sem repetição,78 únicas e normais,staging,NOT RUN
+tarot,reset e embaralhar restantes,reveladas preservadas e waiting reembaralhado,staging,NOT RUN
+skins,trocar cada skin,todas as orbes acompanham a seleção,staging,NOT RUN
+pwa,instalar e abrir offline,Home/funções cacheadas disponíveis,iphone-android,NOT RUN
+seo,404 e sitemap,404 sem chunks órfãos e URLs válidas,staging,NOT RUN
+privacy,revogar marketing,preferência persistida e sem envio,staging,NOT RUN
+billing,sandbox e webhook duplicado,idempotência sem crédito duplicado,backend-staging,NOT RUN
+accessibility,reduced motion e teclado,sem animação obrigatória e foco visível,staging,NOT RUN
+security,segredo no cliente,nenhuma chave ou corpo do Diário exposto,staging,NOT RUN

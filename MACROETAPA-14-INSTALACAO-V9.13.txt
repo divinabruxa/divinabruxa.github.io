@@ -1,0 +1,12 @@
+DIVINA BRUXA — MACROETAPA 14 / QA SUPREMO
+
+1. Rode na raiz do pacote/repositório: `node qa-supreme-v9.mjs`.
+2. Corrija qualquer FAIL antes de instalar em produção.
+3. Preencha `QA-MATRIX-V9.13.csv` durante os testes em staging, usando apenas
+   PASS, FAIL, BLOCKED ou NOT RUN e anexando evidência.
+4. Execute manualmente os testes de iPhone, Android, desktop, rede lenta,
+   offline, acessibilidade, Auth/RLS, billing sandbox e restauração.
+5. Produção continua bloqueada até P0=0, P1=0 e todos os testes críticos PASS.
+
+RETORNO: preserve evidências; não apagar arquivos para silenciar uma falha.
+PRÓXIMA: Macroetapa 15 — liberação progressiva e checklist final.

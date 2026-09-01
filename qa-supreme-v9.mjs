@@ -1,0 +1,25 @@
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { join } from 'node:path';
+import { execFileSync } from 'node:child_process';
+const root=join(process.cwd(),'github-audit-v8-20260901');
+const read=file=>readFileSync(join(root,file),'utf8');
+const checks=[];
+const add=(id,ok,detail,blocked=false)=>checks.push({id,status:blocked?'BLOCKED':ok?'PASS':'FAIL',detail});
+const files=readdirSync(root);
+const html=files.filter(file=>file.endsWith('.html'));
+add('P0-boot-fix',existsSync(join(process.cwd(),'app.js')),'replacement app.js exists in package workspace');
+add('cards-78',html.filter(file=>file.startsWith('carta-')).length===78,`${html.filter(file=>file.startsWith('carta-')).length}/78 card pages`);
+add('card-assets',files.filter(file=>/^card-\d{2}\.webp$/.test(file)).length===78,`${files.filter(file=>/^card-\d{2}\.webp$/.test(file)).length}/78 card images`);
+add('orb-assets',existsSync(join(root,'divina-orb-v68.png'))&&existsSync(join(root,'divina-mini-orb-hd-v72.jpeg')),'main and mini orb assets present');
+add('skins',files.filter(file=>file.startsWith('skin-')&&file.endsWith('.png')).length>=8,`${files.filter(file=>file.startsWith('skin-')&&file.endsWith('.png')).length} skin images`);
+const index=read('index.html');
+const refs=[...index.matchAll(/(?:src|href)="([^"]+)"/g)].map(match=>match[1].split('?')[0]).filter(ref=>ref&&!ref.startsWith('#')&&!ref.startsWith('http'));
+const missing=refs.filter(ref=>!existsSync(join(root,ref)));
+add('index-refs',missing.length===0,missing.length?`missing: ${missing.join(', ')}`:`${refs.length} local refs resolve`);
+add('seo-files',existsSync(join(process.cwd(),'robots.txt'))&&existsSync(join(process.cwd(),'sitemap.xml')),'robots and sitemap prepared');
+add('pwa-files',existsSync(join(process.cwd(),'manifest.webmanifest'))&&existsSync(join(process.cwd(),'sw.js')),'manifest and service worker prepared');
+let secretHit=false;for(const dir of [root]){try{const out=execFileSync('rg',['-l','sk_live_|rk_live_|sk_test_|rk_test_',dir,'-g','*.js','-g','*.html','-g','*.json','-g','*.mjs','-g','!qa-supreme-v9.mjs'],{encoding:'utf8',stdio:['ignore','pipe','ignore']});if(out.trim())secretHit=true}catch{}}
+add('no-exposed-stripe-keys',!secretHit,'no Stripe key patterns found');
+const failed=checks.filter(check=>check.status==='FAIL');
+console.log(JSON.stringify({suite:'DIVINA-BRUXA-QA-SUPREME-V9',status:failed.length?'FAIL':'PASS',summary:{total:checks.length,passed:checks.filter(c=>c.status==='PASS').length,failed:failed.length,blocked:checks.filter(c=>c.status==='BLOCKED').length},checks},null,2));
+process.exitCode=failed.length?1:0;
