@@ -1,0 +1,21 @@
+/* DIVINA BRUXA — FUNDAÇÃO VISUAL UNIFICADA V8
+   Camada de precedência segura: carregar por último no index.html.
+   Não substitui o motor da Orbe nem as 78 artes; unifica atmosfera,
+   superfícies, foco e estados de interação.
+*/
+:root{--db-void:#05020b;--db-deep:#0d0620;--db-panel:rgba(20,10,42,.72);--db-panel-strong:rgba(28,13,56,.9);--db-gold:#e7bd68;--db-gold-soft:#f3d994;--db-lilac:#c5a7ff;--db-ink:#f8f3ff;--db-muted:#b9accf;--db-line:rgba(231,189,104,.22);--db-glow:rgba(139,82,255,.28);--db-radius:22px;--db-shadow:0 18px 60px rgba(0,0,0,.36);color-scheme:dark}
+html{background:var(--db-void)}
+body{background:radial-gradient(circle at 50% -10%,rgba(102,49,184,.18),transparent 42rem),radial-gradient(circle at 12% 72%,rgba(47,22,104,.16),transparent 32rem),var(--db-void);color:var(--db-ink)}
+body::selection{background:rgba(231,189,104,.3);color:#fff}
+.app-header{background:linear-gradient(180deg,rgba(5,2,11,.94),rgba(5,2,11,.66) 72%,transparent);border-bottom-color:rgba(231,189,104,.12);backdrop-filter:blur(18px) saturate(130%)}
+.screen{isolation:isolate}.screen:not(.home-screen){background:linear-gradient(180deg,rgba(13,6,32,.34),transparent 20rem)}
+.screen h1,.screen h2,.screen h3,.screen h4,.home-section-title{text-wrap:balance}.eyebrow{color:var(--db-gold-soft);letter-spacing:.18em}.lead,.intro,.free-rule,.security-note{color:var(--db-muted)}
+.panel,.ritual-panel,.home-path-card,.home-commerce article,.home-trust,.school-lesson,.skin-tile{background:linear-gradient(145deg,rgba(30,15,61,.78),rgba(11,5,25,.82));border:1px solid var(--db-line);box-shadow:var(--db-shadow),inset 0 1px 0 rgba(255,255,255,.045);border-radius:var(--db-radius)}
+.home-path-card,.home-commerce article,.skin-tile,.school-lesson{transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease}
+.home-path-card:hover,.home-commerce article:hover,.skin-tile:hover,.school-lesson:hover{transform:translateY(-3px);border-color:rgba(231,189,104,.46);box-shadow:0 20px 70px rgba(0,0,0,.46),0 0 32px var(--db-glow)}
+button,.text-button{touch-action:manipulation}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--db-gold-soft);outline-offset:3px;box-shadow:0 0 0 5px rgba(231,189,104,.16)}
+.primary,.home-gold-action{background:linear-gradient(135deg,#f2d58b,#bc8530);color:#190d2e;border:1px solid rgba(255,243,190,.65);box-shadow:0 10px 30px rgba(194,132,45,.26),inset 0 1px 0 rgba(255,255,255,.5)}
+.primary:hover,.home-gold-action:hover{filter:brightness(1.08)}
+input,textarea,select{background:rgba(7,3,18,.72);border-color:rgba(197,167,255,.22);color:var(--db-ink)}.card-grid{contain:layout paint}
+@media (prefers-reduced-motion:reduce){.home-path-card,.home-commerce article,.skin-tile,.school-lesson{transition:none}}

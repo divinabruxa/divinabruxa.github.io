@@ -1,0 +1,18 @@
+DIVINA BRUXA — MACROETAPA 1 / FUNDAÇÃO VISUAL V8
+
+STATUS: arquivo pronto, instalação remota bloqueada pelo GitHub (HTTP 403).
+
+Quando a escrita estiver autorizada:
+1. Enviar visual-foundation-v8.css para a raiz.
+2. No index.html, adicionar depois de menu-ring-v8.css:
+   <link rel="stylesheet" href="visual-foundation-v8.css?v=1">
+3. Não apagar arquivos.
+4. Não reenviar as 78 cartas.
+5. Não alterar CNAME.
+6. Atualizar a versão do cache somente depois de confirmar o arquivo.
+
+VERIFICAÇÃO:
+- O CSS não altera o motor da Orbe.
+- O CSS não altera imagens das cartas.
+- O CSS respeita prefers-reduced-motion.
+- A camada deve ser carregada por último para ter precedência segura.
