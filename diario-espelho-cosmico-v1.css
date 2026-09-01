@@ -1,0 +1,8 @@
+.journal-screen{background:radial-gradient(circle at 50% 0,rgba(118,47,176,.24),transparent 44%),linear-gradient(180deg,#160521,#0b0214)}
+.journal-screen .journal-card,.journal-screen .journal-editor,.journal-screen .mirror-card,.journal-screen .mood-card{border:1px solid rgba(243,211,138,.3);border-radius:20px;background:linear-gradient(145deg,rgba(60,22,94,.7),rgba(16,4,28,.92));box-shadow:0 16px 42px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.05);transition:transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s ease}
+.journal-screen .journal-card:hover,.journal-screen .mirror-card:hover{transform:translateY(-3px);box-shadow:0 22px 48px rgba(0,0,0,.34),0 0 22px rgba(184,108,255,.24)}
+.journal-screen input,.journal-screen textarea,.journal-screen select{border:1px solid rgba(243,211,138,.28);border-radius:12px;background:rgba(9,2,17,.7);color:#f7edcf;transition:border-color .2s ease,box-shadow .2s ease}
+.journal-screen input:focus,.journal-screen textarea:focus,.journal-screen select:focus{outline:none;border-color:#f3d38a;box-shadow:0 0 0 3px rgba(184,108,255,.2)}
+.journal-screen .privacy-note{color:rgba(247,237,207,.72);font-size:.82rem}
+@media(max-width:640px){.journal-screen .journal-card,.journal-screen .journal-editor,.journal-screen .mirror-card,.journal-screen .mood-card{border-radius:16px}}
+@media(prefers-reduced-motion:reduce){.journal-screen *{transition-duration:.01ms!important}}
