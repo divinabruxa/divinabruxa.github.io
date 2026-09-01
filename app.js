@@ -77,5 +77,6 @@ const headerStyle=document.createElement('link');headerStyle.rel='stylesheet';he
 const surfaceStyle=document.createElement('link');surfaceStyle.rel='stylesheet';surfaceStyle.href='./surface-unify-v6.css';document.head.appendChild(surfaceStyle);
 const accessibilityStyle=document.createElement('link');accessibilityStyle.rel='stylesheet';accessibilityStyle.href='./accessibility-polish-v6.css';document.head.appendChild(accessibilityStyle);
 const responsiveStyle=document.createElement('link');responsiveStyle.rel='stylesheet';responsiveStyle.href='./responsive-stability-v6.css';document.head.appendChild(responsiveStyle);
+const typeStyle=document.createElement('link');typeStyle.rel='stylesheet';typeStyle.href='./type-polish-v6.css';document.head.appendChild(typeStyle);
 const skinsHeading=document.querySelector('#skins h2');if(skinsHeading)skinsHeading.textContent='Trinta formas de sentir o universo.';
 window.orbe={go};
