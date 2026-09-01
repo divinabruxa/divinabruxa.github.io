@@ -1,0 +1,11 @@
+DIVINA BRUXA — MACROETAPA 7 / SEO TÉCNICO
+
+1. Envie `robots.txt` e `sitemap.xml` para a raiz pública.
+2. Não indexe áreas privadas; mantenha os Disallow do robots.
+3. Confirme no Search Console/Bing Webmaster que o sitemap foi lido.
+4. Preserve os canonicals existentes das 78 cartas.
+5. Use `SEO-IMPLEMENTATION-PLAN-V9.6.md` como checklist para o próximo ciclo
+   de OG images, JSON-LD e hreflang.
+
+RETORNO: remova somente os dois arquivos SEO se a hospedagem exigir rollback.
+PRÓXIMA: Macroetapa 8 — PWA, performance, imagens e carregamento progressivo.

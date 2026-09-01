@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /conta
+Disallow: /login
+Disallow: /checkout
+Disallow: /orbe-ia
+Disallow: /diario
+Disallow: /offline.html
+Sitemap: https://divinabruxa.com.br/sitemap.xml
