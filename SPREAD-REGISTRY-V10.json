@@ -1,0 +1,31 @@
+{
+  "version":"V10",
+  "rules":{"deckSize":78,"reversed":false,"uniqueCardsPerReading":true,"saveOptional":true},
+  "spreads":[
+    {"id":"direct","name":"Pergunta Direta","positions":1,"tier":"free"},
+    {"id":"yes-no","name":"Sim ou Não","positions":1,"tier":"free"},
+    {"id":"sdc","name":"Situação · Desafio · Conselho","positions":3,"tier":"free"},
+    {"id":"past-present-future","name":"Passado · Presente · Futuro","positions":3,"tier":"free"},
+    {"id":"four-doors","name":"Caminho de Quatro Portas","positions":4,"tier":"free"},
+    {"id":"relationships","name":"Relacionamentos","positions":5,"tier":"premium"},
+    {"id":"communication","name":"Comunicação","positions":5,"tier":"premium"},
+    {"id":"career","name":"Carreira","positions":5,"tier":"premium"},
+    {"id":"money","name":"Dinheiro","positions":5,"tier":"premium"},
+    {"id":"purpose","name":"Propósito","positions":5,"tier":"premium"},
+    {"id":"emotional-healing","name":"Cura Emocional","positions":6,"tier":"premium"},
+    {"id":"decision","name":"Decisão","positions":6,"tier":"premium"},
+    {"id":"next-step","name":"Próximo Passo","positions":3,"tier":"premium"},
+    {"id":"five-cross","name":"Cruz de Cinco","positions":5,"tier":"premium"},
+    {"id":"seven-star","name":"Estrela de Sete","positions":7,"tier":"premium"},
+    {"id":"wheel-year","name":"Roda do Ano","positions":8,"tier":"premium"},
+    {"id":"new-moon","name":"Lua Nova","positions":6,"tier":"premium"},
+    {"id":"full-moon","name":"Lua Cheia","positions":6,"tier":"premium"},
+    {"id":"solstice","name":"Solstício","positions":7,"tier":"premium"},
+    {"id":"equinox","name":"Equinócio","positions":7,"tier":"premium"},
+    {"id":"celtic-cross","name":"Cruz Celta","positions":10,"tier":"premium"},
+    {"id":"astrological-mandala","name":"Mandala Astrológica","positions":12,"tier":"premium"},
+    {"id":"tree-of-life","name":"Árvore da Vida","positions":10,"tier":"premium"},
+    {"id":"real-table","name":"Mesa Real","positions":78,"tier":"premium"}
+  ],
+  "customBuilder":{"enabled":"premium","minPositions":1,"maxPositions":24,"requiresPositionMeaning":true}
+}

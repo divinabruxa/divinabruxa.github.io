@@ -1,0 +1,12 @@
+DIVINA BRUXA — INSTALAÇÃO DA MACROETAPA 10
+
+1. Adicione os arquivos na raiz do GitHub.
+2. Não substitua o motor de tiragens atual sem manter backup.
+3. No staging, execute: node spread-guard-v10.mjs CAMINHO_DO_STAGING
+4. Cadastre os 24 métodos com significado real para cada posição.
+5. Teste cartas únicas em todas as posições e em leituras simultâneas.
+6. Valide síntese, histórico, salvar, retomar e exportar.
+7. Mantenha os métodos gratuitos generosos e reserve os avançados ao Premium.
+8. O construtor personalizado deve exigir título e significado em cada posição.
+9. Teste a Mesa Real com 78 cartas e autosave seguro.
+10. A próxima etapa será a Academia Divina, com aulas, exercícios e progresso completo.
