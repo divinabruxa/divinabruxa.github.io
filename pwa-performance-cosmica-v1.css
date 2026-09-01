@@ -1,0 +1,7 @@
+:root{--motion-cosmic:cubic-bezier(.22,1,.36,1)}
+html{scroll-behavior:smooth}
+img{content-visibility:auto}
+.offline-banner{border:1px solid rgba(243,211,138,.35);border-radius:14px;background:rgba(48,17,75,.9);color:#f3d38a;box-shadow:0 0 20px rgba(184,108,255,.2)}
+.loading-skeleton{border-radius:14px;background:linear-gradient(100deg,rgba(255,255,255,.04) 35%,rgba(184,108,255,.18) 50%,rgba(255,255,255,.04) 65%);background-size:300% 100%;animation:cosmic-shimmer 1.6s infinite}
+@keyframes cosmic-shimmer{to{background-position:-300% 0}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.loading-skeleton{animation:none}}
