@@ -16,6 +16,7 @@ import { StoreEngine } from './store-engine.js';
 import { MediaEngine } from './media-engine.js';
 import { MediaEngineV5 } from './media-engine-v5.js';
 import { NotificationEngine } from './notification-engine.js';
+import { AdminEngine } from './admin-engine.js';
 import { AIEngine } from './ai-engine.js';
 import './tarot-image-runtime.js';
 
@@ -38,11 +39,12 @@ new StoreEngine($('#storeApp'),CONFIG);
 new MediaEngine({videos:$('#videoApp'),music:$('#musicApp')},CONFIG);
 new MediaEngineV5({videos:$('#videoApp'),music:$('#musicApp')},CONFIG);
 new NotificationEngine($('#notificationApp'),go);
+new AdminEngine($('#adminApp'));
 new AIEngine($('#ai'),CONFIG);
 new PremiumEngine($('#subscriptionApp'));
 
 $('#userLogin').onsubmit=event=>{event.preventDefault();toast('Login seguro será ativado com o servidor.');};
-$('#adminLogin').onsubmit=event=>{event.preventDefault();if($('#adminUser').value!==CONFIG.adminUser){$('#adminMsg').textContent='Login não reconhecido.';return;}$('#adminMsg').textContent='Usuário reconhecido. A senha será validada somente pelo servidor seguro — nunca pelo arquivo público.';};
+$('#adminLogin').onsubmit=event=>{event.preventDefault();if($('#adminUser').value!==CONFIG.adminUser){$('#adminMsg').textContent='Login não reconhecido.';return;}window.divinaAdmin?.unlock($('#adminUser').value);$('#adminMsg').textContent='Central local aberta. A senha será validada somente pelo servidor seguro — nunca pelo arquivo público.';};
 
 let installPrompt=null;addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event;$('#installApp').hidden=false;});$('#installApp').onclick=async()=>{if(!installPrompt){toast('No iPhone: Compartilhar → Adicionar à Tela de Início.');return;}installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;};
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
