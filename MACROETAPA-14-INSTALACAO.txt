@@ -1,0 +1,15 @@
+DIVINA BRUXA — MACROETAPA 14 / CONSULTAS V8
+
+STATUS: pacote pronto; GitHub continua bloqueando gravações por HTTP 403.
+
+ORDEM:
+1. Carregar consultations-experience-v8.css depois das camadas visuais.
+2. Carregar consultations-experience-v8.js como módulo depois de app.js.
+3. Manter consultation-engine.js e consultation-policy.js.
+4. Solicitações continuam sem cobrança automática.
+
+INCLUI:
+- Serviços e preços oficiais.
+- Comunicação de disponibilidade.
+- Formulário apresentado de forma acolhedora.
+- Nenhuma alteração no envio de e-mail ou backend.
