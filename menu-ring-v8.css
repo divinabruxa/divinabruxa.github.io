@@ -137,7 +137,113 @@
   .home-menu-portals .menu-portal b{font-size:7px!important}
 }
 
+/* V8.2 — órbitas defasadas, núcleo maior e ponte viva de abertura. */
+.home-screen.orb-menu-open .orb-stage-ref{
+  width:min(calc(100vw - 18px),560px)!important;
+  margin-top:20px!important;
+  margin-bottom:26px!important;
+  transition:width .72s cubic-bezier(.16,.82,.22,1),margin .72s cubic-bezier(.16,.82,.22,1)!important;
+}
+
+.home-screen.orb-menu-open .orb-shell{
+  width:48%!important;
+  height:auto!important;
+  aspect-ratio:1/1!important;
+  transform:translateZ(0) scale(1)!important;
+  transition:width .72s cubic-bezier(.16,.82,.22,1),filter .35s ease!important;
+}
+
+.home-screen.orb-menu-transition .orb-shell{will-change:width,filter,transform!important}
+.home-screen.orb-menu-opening .orb-shell{filter:drop-shadow(0 0 48px rgba(234,91,255,.92)) drop-shadow(0 0 92px rgba(118,42,221,.38))!important}
+.home-screen.orb-menu-closing .orb-shell{filter:drop-shadow(0 0 42px rgba(229,83,255,.76)) drop-shadow(0 0 82px rgba(116,40,216,.30))!important}
+
+/* Reposicionamento simétrico do anel interno: distância constante do núcleo. */
+.home-screen.orb-menu-open .home-orb-menu > button:nth-of-type(1){left:50%!important;top:11%!important;transform:translateX(-50%)!important}
+.home-screen.orb-menu-open .home-orb-menu > button:nth-of-type(2){left:73%!important;top:25%!important;transform:translate(-50%,-50%)!important}
+.home-screen.orb-menu-open .home-orb-menu > button:nth-of-type(3){left:84%!important;top:50%!important;transform:translate(-50%,-50%)!important}
+.home-screen.orb-menu-open .home-orb-menu > button:nth-of-type(4){left:73%!important;top:75%!important;transform:translate(-50%,-50%)!important}
+.home-screen.orb-menu-open .home-orb-menu > button:nth-of-type(5){left:50%!important;top:89%!important;transform:translateX(-50%)!important}
+.home-screen.orb-menu-open .home-orb-menu > button:nth-of-type(6){right:auto!important;left:27%!important;top:75%!important;transform:translate(-50%,-50%)!important}
+.home-screen.orb-menu-open .home-orb-menu > button:nth-of-type(7){right:auto!important;left:16%!important;top:50%!important;transform:translate(-50%,-50%)!important}
+.home-screen.orb-menu-open .home-orb-menu > button:nth-of-type(8){right:auto!important;left:27%!important;top:25%!important;transform:translate(-50%,-50%)!important}
+
+/* Anel externo defasado: seis portais, nunca alinhados com o nó vizinho. */
+.home-menu-portals{inset:0!important;width:100%!important;height:100%!important;transform:none!important}
+.home-menu-portals::before{inset:2%!important;border-style:solid!important;border-color:rgba(206,139,246,.23)!important}
+.home-menu-portals .menu-portal,
+.home-menu-portals .video-portal,
+.home-menu-portals .store-portal{width:102px!important;height:48px!important;min-height:48px!important}
+.home-menu-portals .menu-portal:nth-child(1){left:75%!important;top:4%!important;transform:translate(-50%,0)!important}
+.home-menu-portals .menu-portal:nth-child(2){right:1%!important;top:50%!important;transform:translate(0,-50%)!important}
+.home-menu-portals .menu-portal:nth-child(3){right:9%!important;bottom:4%!important;transform:translate(0,0)!important}
+.home-menu-portals .menu-portal:nth-child(4){left:25%!important;bottom:4%!important;transform:translate(-50%,0)!important}
+.home-menu-portals .menu-portal:nth-child(5){left:1%!important;top:50%!important;transform:translate(0,-50%)!important}
+.home-menu-portals .menu-portal:nth-child(6){left:25%!important;top:4%!important;transform:translate(-50%,0)!important}
+
+.home-screen.orb-menu-open .home-menu-portals::before{animation:v8OuterOrbit 28s linear infinite,v8RingGlow 2.4s ease-out both!important}
+.home-screen.orb-menu-opening .home-menu-portals .menu-portal{animation:v8PortalEnter .58s cubic-bezier(.16,.82,.22,1) both!important}
+.home-screen.orb-menu-closing .home-menu-portals .menu-portal{animation:v8PortalExit .32s cubic-bezier(.4,0,.7,.2) both!important}
+.home-screen.orb-menu-transition .home-orb-menu::before{will-change:transform,opacity,filter!important}
+
+@keyframes v8PortalEnter{from{opacity:0;filter:blur(7px);transform:scale(.72)}to{opacity:1;filter:none}}
+@keyframes v8PortalExit{from{opacity:1;filter:none}to{opacity:0;filter:blur(6px);transform:scale(.72)}}
+@keyframes v8RingGlow{0%{opacity:0;filter:brightness(1.8)}100%{opacity:1;filter:none}}
+
+@media(max-width:700px){
+  .home-screen.orb-menu-open .orb-shell{width:47%!important}
+  .home-menu-portals .menu-portal{width:88px!important;height:44px!important;min-height:44px!important}
+  .home-menu-portals .menu-portal:nth-child(1),.home-menu-portals .menu-portal:nth-child(6){top:3%!important}
+  .home-menu-portals .menu-portal:nth-child(3),.home-menu-portals .menu-portal:nth-child(4){bottom:3%!important}
+}
+
+@media(max-width:390px){
+  .home-screen.orb-menu-open .orb-shell{width:44%!important}
+  .home-menu-portals .menu-portal{width:76px!important;height:40px!important;min-height:40px!important;padding-inline:4px!important;gap:4px!important}
+  .home-menu-portals .menu-portal span{width:23px!important;height:23px!important;flex-basis:23px!important;font-size:11px!important}
+  .home-menu-portals .menu-portal b{font-size:6.7px!important}
+}
+
 @media(prefers-reduced-motion:reduce){.home-menu-portals::before{animation:none!important}.home-menu-portals .menu-portal{transition:none!important}}
+
+/* V8.3 — núcleo ampliado, órbita externa espaçada e animação sem saltos.
+   As posições ficam separadas em dois eixos para que nenhum portal encoste
+   nos nós internos; a animação altera somente luz/opacidade, preservando
+   a geometria durante toda a transição. */
+.home-screen.orb-menu-open .orb-shell{
+  width:50%!important;
+  height:auto!important;
+  aspect-ratio:1/1!important;
+  transform:translateZ(0) scale(1)!important;
+  transform-origin:center!important;
+}
+
+.home-menu-portals .menu-portal:nth-child(1){left:74%!important;top:3%!important;right:auto!important;bottom:auto!important;transform:translateX(-50%)!important}
+.home-menu-portals .menu-portal:nth-child(2){right:1%!important;top:31%!important;left:auto!important;bottom:auto!important;transform:translateY(-50%)!important}
+.home-menu-portals .menu-portal:nth-child(3){right:1%!important;bottom:31%!important;left:auto!important;top:auto!important;transform:translateY(50%)!important}
+.home-menu-portals .menu-portal:nth-child(4){left:26%!important;bottom:3%!important;right:auto!important;top:auto!important;transform:translateX(-50%)!important}
+.home-menu-portals .menu-portal:nth-child(5){left:1%!important;bottom:31%!important;right:auto!important;top:auto!important;transform:translateY(50%)!important}
+.home-menu-portals .menu-portal:nth-child(6){left:1%!important;top:31%!important;right:auto!important;bottom:auto!important;transform:translateY(-50%)!important}
+
+.home-screen.orb-menu-opening .home-menu-portals .menu-portal{animation:v8PortalEnterSafe .58s cubic-bezier(.16,.82,.22,1) both!important}
+.home-screen.orb-menu-closing .home-menu-portals .menu-portal{animation:v8PortalExitSafe .32s cubic-bezier(.4,0,.7,.2) both!important}
+@keyframes v8PortalEnterSafe{from{opacity:0;filter:blur(7px);box-shadow:0 0 0 rgba(215,91,255,0)}to{opacity:1;filter:none}}
+@keyframes v8PortalExitSafe{from{opacity:1;filter:none}to{opacity:0;filter:blur(6px)}}
+
+@media(max-width:700px){
+  .home-screen.orb-menu-open .orb-shell{width:48%!important}
+  .home-menu-portals .menu-portal{width:88px!important;height:44px!important;min-height:44px!important}
+  .home-menu-portals .menu-portal:nth-child(1){left:72%!important;top:3%!important}
+  .home-menu-portals .menu-portal:nth-child(4){left:28%!important;bottom:3%!important}
+  .home-menu-portals .menu-portal:nth-child(2),.home-menu-portals .menu-portal:nth-child(6){top:31%!important}
+  .home-menu-portals .menu-portal:nth-child(3),.home-menu-portals .menu-portal:nth-child(5){bottom:31%!important}
+}
+
+@media(max-width:390px){
+  .home-screen.orb-menu-open .orb-shell{width:46%!important}
+  .home-menu-portals .menu-portal{width:78px!important;height:40px!important;min-height:40px!important;padding-inline:4px!important;gap:4px!important}
+  .home-menu-portals .menu-portal span{width:23px!important;height:23px!important;flex-basis:23px!important;font-size:11px!important}
+  .home-menu-portals .menu-portal b{font-size:6.7px!important}
+}
 
 /* V8.1 — correção de geometria mobile: a Orbe nunca pode virar elipse. */
 .home-screen.orb-menu-open .orb-shell{
