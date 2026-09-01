@@ -336,7 +336,8 @@ main{position:relative;z-index:1}
    mantendo a posição do menu mágico independente. */
 @media(max-width:700px) and (orientation:portrait){
   .home-screen:not(.orb-menu-open) .orb-stage-ref{
-    transform:translate3d(0,-5svh,0)!important;
+    transform:translate3d(0,0,0)!important;
+    margin-top:22px!important;
   }
 }
 
@@ -355,4 +356,5 @@ main{position:relative;z-index:1}
     text-align:center!important;
   }
   .home-copy h1 span{margin-left:4px!important}
+  .home-copy .intro{margin-bottom:14px!important}
 }
