@@ -32,6 +32,10 @@ export function createNavigation() {
         button.innerHTML = `<span aria-hidden="true">${symbol}</span><b>${label}</b>`;
       } else {
         button.classList.add('menu-portal');
+        if (id === 'videos') {
+          const title = button.querySelector('b');
+          if (title) title.textContent = 'Vídeo';
+        }
       }
       rail.appendChild(button);
     };

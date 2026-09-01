@@ -203,6 +203,14 @@
   .home-menu-portals .menu-portal b{font-size:6.7px!important}
 }
 
+/* V8.4 — acabamento do segundo anel e rótulo limpo do vídeo. */
+.home-menu-portals::before{
+  border:1px solid rgba(214,151,247,.34)!important;
+  border-style:solid!important;
+  background:conic-gradient(from 20deg,transparent 0 12%,rgba(239,194,124,.20) 18%,transparent 27% 48%,rgba(188,87,239,.18) 56%,transparent 68% 84%,rgba(239,194,124,.16) 91%,transparent)!important;
+}
+.home-menu-portals .video-portal small{display:none!important}
+
 @media(prefers-reduced-motion:reduce){.home-menu-portals::before{animation:none!important}.home-menu-portals .menu-portal{transition:none!important}}
 
 /* V8.3 — núcleo ampliado, órbita externa espaçada e animação sem saltos.
