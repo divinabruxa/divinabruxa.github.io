@@ -1,0 +1,15 @@
+DIVINA BRUXA — MACROETAPA 15 / LOJA MÍSTICA V8
+
+STATUS: pacote pronto; GitHub continua bloqueando gravações por HTTP 403.
+
+ORDEM:
+1. Carregar store-experience-v8.css depois das camadas visuais.
+2. Carregar store-experience-v8.js como módulo depois de app.js.
+3. Manter store-engine.js e store-policy.js.
+4. Usar disclosure de afiliado antes dos links Amazon reais.
+
+INCLUI:
+- Curadoria por categorias.
+- Transparência sobre produtos reais e afiliados.
+- Nenhum produto inventado.
+- Nenhum checkout ativado nesta etapa.

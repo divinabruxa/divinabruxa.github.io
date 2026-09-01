@@ -1,0 +1,5 @@
+/* DIVINA BRUXA — LOJA MÍSTICA V8 */
+.store-v8-guide{display:flex;gap:1rem;align-items:flex-start;margin:1.5rem 0;padding:1.15rem 1.25rem;background:linear-gradient(135deg,rgba(65,45,31,.8),rgba(17,7,22,.72));border:1px solid rgba(216,173,105,.3);border-radius:22px;box-shadow:0 18px 58px rgba(0,0,0,.26),0 0 34px rgba(172,103,32,.08)}
+.store-v8-sigil{display:grid;place-items:center;flex:none;width:2.7rem;height:2.7rem;border:1px solid rgba(216,173,105,.58);border-radius:50%;color:#f1d298;box-shadow:0 0 24px rgba(172,103,32,.18)}
+.store-v8-guide h3{margin:.15rem 0 .4rem;font-size:clamp(1.2rem,3vw,1.7rem)}.store-v8-guide p:not(.eyebrow){margin:0;color:var(--db-muted);line-height:1.65}.store-v8-categories{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem;color:#f5dfb8;font-size:.72rem}.store-v8-categories span{padding:.3rem .55rem;border:1px solid rgba(216,173,105,.24);border-radius:999px}
+@media (max-width:520px){.store-v8-guide{padding:1rem}.store-v8-categories{gap:.4rem}}
