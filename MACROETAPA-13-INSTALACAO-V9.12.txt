@@ -1,0 +1,11 @@
+DIVINA BRUXA — MACROETAPA 13 / NOTIFICAÇÕES
+
+1. Envie `notification-policy-v9.js` para a branch de teste.
+2. Renderize preferências a partir de `DEFAULT_NOTIFICATION_PREFERENCES`.
+3. Antes de enviar qualquer evento, aplique `canSendNotification`.
+4. Use `safeDailyMessage` sem revelar a carta do dia.
+5. Passe somente deep links aceitos por `safeDeepLink`.
+6. Execute `node NOTIFICATION-VALIDATION-V9.12.mjs` — esperado 8/8 PASS.
+
+RETORNO: desligue o agendador/provedor e remova o módulo da branch.
+PRÓXIMA: Macroetapa 14 — QA supremo multiplataforma e testes de regressão.
