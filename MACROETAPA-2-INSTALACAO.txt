@@ -1,0 +1,15 @@
+DIVINA BRUXA — MACROETAPA 2 / SUPERFÍCIES CÓSMICAS V8
+
+STATUS: pacote visual pronto; instalação remota pendente de autorização GitHub.
+
+ORDEM DE INSTALAÇÃO:
+1. visual-foundation-v8.css
+2. visual-surfaces-v8.css
+3. No index.html, carregar visual-surfaces-v8.css depois da fundação.
+4. Atualizar o service worker apenas depois de confirmar os dois arquivos.
+
+ESCOPO:
+- Unifica páginas internas, painéis, grids, diálogos e estados de conteúdo.
+- Mantém a Home, o menu, a Orbe e as 78 cartas intactos.
+- Inclui layout mobile-first, foco acessível e redução de movimento.
+- Não remove nenhum arquivo existente.

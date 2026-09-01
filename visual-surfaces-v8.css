@@ -1,0 +1,33 @@
+/* DIVINA BRUXA — SUPERFÍCIES CÓSMICAS V8
+   Segunda camada visual: páginas internas, painéis e estados de conteúdo.
+   Carregar depois de visual-foundation-v8.css. Sem dependências externas.
+*/
+.screen{max-width:1180px;margin-inline:auto;padding:clamp(5.5rem,10vw,8rem) clamp(1rem,4vw,2.5rem) 7rem;min-height:100dvh}
+.screen>.eyebrow:first-child{margin-bottom:.7rem}
+.screen>h2{font-size:clamp(2rem,5vw,3.7rem);line-height:1.03;margin:.15rem 0 .8rem;letter-spacing:-.035em}
+.screen>.lead{max-width:42rem;line-height:1.75;font-size:1.04rem}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:1.5rem;margin-bottom:1.5rem}
+.section-head h2{margin:.15rem 0 .35rem}
+.section-head>strong{color:var(--db-gold-soft);font-size:clamp(2.1rem,7vw,4rem);font-weight:500;line-height:1}
+.section-head>strong small{font-size:.35em;color:var(--db-muted);margin-left:.2em}
+.home-section-title{position:relative;margin-bottom:1.35rem}.home-section-title::after{content:"";display:block;width:5rem;height:1px;margin-top:.9rem;background:linear-gradient(90deg,var(--db-gold),transparent)}
+.home-section-title h2{margin:.25rem 0 0;font-size:clamp(1.65rem,4vw,2.55rem)}
+.home-path-grid,.home-touch-grid,.home-commerce,.home-trust,.card-grid{gap:clamp(.8rem,2vw,1.2rem)}
+.home-path-card{min-height:13rem;padding:1.25rem;text-align:left}
+.home-path-card strong{display:block;font-size:1.35rem;margin:.25rem 0 .45rem}.home-path-card em{display:block;color:var(--db-muted);font-style:normal;line-height:1.5}.home-path-card b{display:block;color:var(--db-gold-soft);font-size:.72rem;letter-spacing:.13em;margin-top:1.15rem}
+.panel,.ritual-panel{padding:clamp(1rem,3vw,1.6rem)}
+.panel label{color:var(--db-muted);font-size:.8rem;letter-spacing:.04em}.panel input,.panel textarea,.panel select{margin-top:.45rem}
+.panel button,.primary{min-height:2.8rem;border-radius:999px;padding:.65rem 1.05rem}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr));margin-top:2rem}
+.card-grid>*{min-width:0}
+.entries,.school-lessons,.skins-v6-grid{display:grid;gap:1rem;margin-top:1.5rem}
+.entries{grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr))}
+.entry,.school-lesson,.skin-tile{min-width:0;padding:1.1rem}
+.home-trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));padding:1rem}
+.home-trust p{margin:0}.home-trust strong,.home-trust small{display:block}.home-trust small{color:var(--db-muted);margin-top:.2rem}
+.chat{max-height:32rem;overflow:auto;scrollbar-color:rgba(231,189,104,.45) transparent}
+.bubble{border:1px solid var(--db-line);background:rgba(25,12,52,.68);border-radius:1.1rem;padding:.85rem 1rem;line-height:1.6}
+dialog{color:var(--db-ink);background:var(--db-panel-strong);border:1px solid var(--db-line);border-radius:var(--db-radius);box-shadow:0 28px 100px rgba(0,0,0,.7)}
+dialog::backdrop{background:rgba(2,0,8,.76);backdrop-filter:blur(8px)}
+@media (max-width:680px){.screen{padding-top:5rem;padding-bottom:5.5rem}.section-head{align-items:start}.section-head>strong{font-size:2.3rem}.home-path-card{min-height:11.5rem}.home-trust{grid-template-columns:repeat(2,1fr)}.panel{padding:1rem}}
+@media (prefers-reduced-motion:reduce){dialog::backdrop{backdrop-filter:none}}
