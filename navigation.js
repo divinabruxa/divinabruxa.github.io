@@ -7,6 +7,13 @@ export function createNavigation() {
   const orbMenu = document.querySelector('#orbMenu');
   const menuButton = document.querySelector('#menuBtn');
   const pathsButton = document.querySelector('#pathsBtn');
+  if (pathsButton) {
+    pathsButton.dataset.go = 'skins';
+    pathsButton.setAttribute('aria-label', 'Abrir Skins da Orbe');
+    pathsButton.removeAttribute('aria-controls');
+    const pathsLabel = pathsButton.querySelector('small');
+    if (pathsLabel) pathsLabel.textContent = 'Skins';
+  }
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
   const ensureHomePortals = () => {
@@ -65,9 +72,6 @@ export function createNavigation() {
     menuButton?.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
     const label = menuButton?.querySelector('span');
     if (label) label.textContent = open ? 'FECHAR' : 'MENU';
-    pathsButton?.classList.toggle('is-open', open);
-    pathsButton?.setAttribute('aria-expanded', String(open));
-    pathsButton?.setAttribute('aria-label', open ? 'Fechar menu mágico' : 'Abrir menu mágico');
   };
 
   const cancelMotion = () => {
@@ -94,7 +98,7 @@ export function createNavigation() {
   };
 
   const settleMotion = token => {
-    const delay = reducedMotion.matches ? 0 : 540;
+    const delay = reducedMotion.matches ? 0 : 680;
     motionTimer = setTimeout(() => finishMotion(token), delay);
   };
 
@@ -157,10 +161,8 @@ export function createNavigation() {
   ensureHomePortals();
 
   menuButton?.setAttribute('aria-controls', 'orbMenu');
-  pathsButton?.setAttribute('aria-controls', 'orbMenu');
   setMenuControls(false);
   menuButton?.addEventListener('click', toggleOrbMenu);
-  pathsButton?.addEventListener('click', toggleOrbMenu);
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && wantsMenuOpen) closeOrbMenu(true);
   });
