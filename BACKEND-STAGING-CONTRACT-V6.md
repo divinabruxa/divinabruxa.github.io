@@ -13,6 +13,14 @@ Este arquivo descreve o backend que será conectado quando a URL pública e a ch
 - `skin_entitlements`: skins cosméticas liberadas por usuário.
 - `audit_events`: eventos técnicos mínimos, sem texto do diário nem perguntas privadas.
 
+## Endpoints de skins
+
+- `GET /account/skins`: retorna somente os IDs cosméticos liberados pela conta autenticada.
+- `POST /account/skins`: recebe um `skinId` válido e cria uma concessão idempotente em staging.
+- `DELETE /account/skins/:skinId`: revoga a concessão somente no ambiente de testes.
+
+Todas as respostas devem usar JSON, sessão por cookie `HttpOnly` e códigos `401/403` quando a conta não estiver autorizada. O cliente mantém fallback local somente enquanto `CONFIG.apiBase` estiver vazio.
+
 ## Regras de acesso
 
 1. RLS ativado em todas as tabelas expostas.
