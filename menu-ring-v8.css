@@ -3,7 +3,7 @@
 .home-screen .orb-shell{width:100%!important;height:auto!important;aspect-ratio:1/1!important;transform-origin:center!important;scale:1;transition:scale .58s cubic-bezier(.22,.72,.18,1),opacity .38s ease!important;will-change:scale}
 .home-screen.orb-menu-open{justify-content:center!important}
 .home-screen.orb-menu-open .home-copy,.home-screen.orb-menu-open>.awaken,.home-screen.orb-menu-open>.orb-status,.home-screen.orb-menu-open>.touch-hint{position:absolute!important;width:1px!important;height:1px!important;margin:0!important;overflow:hidden!important;clip-path:inset(50%)!important;pointer-events:none!important}
-.home-screen.orb-menu-open .orb-stage-ref{position:fixed!important;z-index:32!important;left:50%!important;top:53svh!important;width:min(92vw,55svh,420px)!important;margin:0!important;translate:-50% -50%;transform:translate3d(0,0,0)}
+.home-screen.orb-menu-open .orb-stage-ref{position:fixed!important;z-index:32!important;left:50%!important;top:48svh!important;width:min(92vw,55svh,420px)!important;margin:0!important;translate:-50% -50%;transform:translate3d(0,0,0)}
 .home-screen.orb-menu-open .orb-shell{width:100%!important;min-height:0!important;max-height:none!important;transform:translateZ(0)!important;scale:.52;filter:none!important;pointer-events:auto!important;touch-action:none!important}
 
 .home-orb-menu{overflow:visible!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;transform:translate3d(0,8px,0);transition:opacity .38s ease,transform .58s cubic-bezier(.22,.72,.18,1),visibility 0s linear .62s!important;will-change:transform,opacity}
@@ -50,7 +50,7 @@
 
 @media(max-width:700px){
   .home-screen .orb-stage-ref,.home-screen.orb-menu-open .orb-stage-ref{width:min(calc(100vw - 28px),calc(100svh - 330px),390px)!important}
-  .home-screen.orb-menu-open .orb-stage-ref{position:fixed!important;left:50%!important;top:53svh!important;margin:0!important;translate:-50% -50%;transform:translate3d(0,0,0)}
+  .home-screen.orb-menu-open .orb-stage-ref{position:fixed!important;left:50%!important;top:48svh!important;margin:0!important;translate:-50% -50%;transform:translate3d(0,0,0)}
   .home-screen.orb-menu-open .orb-shell{width:100%!important;scale:.51}
   .home-orb-menu>button:not(.menu-portal){width:88px!important;height:52px!important;min-height:52px!important}
   .home-orb-menu>button:not(.menu-portal) span{width:36px!important;height:36px!important;flex-basis:36px!important}
