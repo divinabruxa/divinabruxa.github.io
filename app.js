@@ -90,5 +90,6 @@ const storeStyle=document.createElement('link');storeStyle.rel='stylesheet';stor
 const consultationsStyle=document.createElement('link');consultationsStyle.rel='stylesheet';consultationsStyle.href='./consultations-polish-v6.css';document.head.appendChild(consultationsStyle);
 const mediaStyle=document.createElement('link');mediaStyle.rel='stylesheet';mediaStyle.href='./media-polish-v6.css';document.head.appendChild(mediaStyle);
 const accountPremiumStyle=document.createElement('link');accountPremiumStyle.rel='stylesheet';accountPremiumStyle.href='./account-premium-polish-v6.css';document.head.appendChild(accountPremiumStyle);
+const systemPagesStyle=document.createElement('link');systemPagesStyle.rel='stylesheet';systemPagesStyle.href='./system-pages-polish-v6.css';document.head.appendChild(systemPagesStyle);
 const skinsHeading=document.querySelector('#skins h2');if(skinsHeading)skinsHeading.textContent='Trinta formas de sentir o universo.';
 window.orbe={go};
