@@ -102,7 +102,7 @@ export function createNavigation() {
   };
 
   const settleMotion = token => {
-    const delay = reducedMotion.matches ? 0 : 680;
+    const delay = reducedMotion.matches ? 0 : 600;
     motionTimer = setTimeout(() => finishMotion(token), delay);
   };
 
@@ -158,8 +158,8 @@ export function createNavigation() {
           { transform:`translate3d(${dx}px,${dy}px,0)` },
           { transform:'translate3d(0,0,0)' }
         ],{
-          duration:620,
-          easing:'cubic-bezier(.22,.72,.18,1)',
+          duration:560,
+          easing:'cubic-bezier(.32,.72,0,1)',
           fill:'both'
         });
       }
