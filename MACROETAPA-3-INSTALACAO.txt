@@ -1,0 +1,18 @@
+DIVINA BRUXA — MACROETAPA 3 / MOTOR UNIVERSAL DE SKINS V8
+
+STATUS: pacote pronto; gravação remota continua bloqueada pelo GitHub (HTTP 403).
+
+ORDEM DE INSTALAÇÃO:
+1. skin-universal-v8.js
+2. skin-universal-v8.css
+3. Carregar o CSS depois de visual-surfaces-v8.css.
+4. Carregar o JS como módulo depois de app.js.
+5. Para imagens específicas, adicionar data-orbe-skin-image aos elementos de Orbe.
+6. Atualizar o service worker somente após confirmar os arquivos.
+
+COMPORTAMENTO:
+- A seleção é salva neste aparelho.
+- O sistema observa data-orbe-skin usado pelo SkinsEngine V6.
+- Todas as superfícies recebem o mesmo evento orbe:skin-change.
+- O canvas da Orbe pode ouvir esse evento em uma próxima integração do orb-engine.
+- Não modifica cartas, CNAME, menu ou arquivos de imagens existentes.
