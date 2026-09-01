@@ -17,4 +17,7 @@ export class AuthClient {
   account() { return this.request('/account'); }
   history() { return this.request('/history'); }
   saveHistory(entry) { return this.request('/history', { method: 'POST', body: JSON.stringify(entry) }); }
+  skinEntitlements() { return this.request('/account/skins'); }
+  saveSkinEntitlement(skinId) { return this.request('/account/skins', { method: 'POST', body: JSON.stringify({ skinId }) }); }
+  revokeSkinEntitlement(skinId) { return this.request(`/account/skins/${encodeURIComponent(skinId)}`, { method: 'DELETE' }); }
 }

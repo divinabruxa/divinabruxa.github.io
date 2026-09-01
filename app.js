@@ -38,6 +38,7 @@ const { go } = createNavigation();
 installVisualGuard();
 installTarotExperience();
 new RhythmEngine($('#journal'));
+const authClient=new AuthClient(CONFIG);window.divinaAuth=authClient;
 new SkinsEngine($('#skinsApp'));
 new EcosystemEngine($('#videos'));
 new PerformanceEngine($('#performanceStatus'));
@@ -64,7 +65,6 @@ new TrustEngine($('#trustApp'));
 new AIEngine($('#ai'),CONFIG);
 new PremiumEngine($('#subscriptionApp'));
 
-const authClient=new AuthClient(CONFIG);window.divinaAuth=authClient;
 $('#userLogin').onsubmit=async event=>{event.preventDefault();const form=event.currentTarget;const email=form.elements[0]?.value?.trim();const password=form.elements[1]?.value||'';if(!authClient.enabled){toast('A conta será ativada quando o servidor seguro estiver conectado.');return;}if(!email||!password){toast('Informe e-mail e senha.');return;}const result=await authClient.login(email,password);toast(result.ok?'Sessão iniciada com segurança.':result.offline?'Servidor temporariamente indisponível.':'Não foi possível entrar.');};
 $('#userRegister').onsubmit=async event=>{event.preventDefault();const form=event.currentTarget;const name=form.elements.name.value.trim();const email=form.elements.email.value.trim();const password=form.elements.password.value;const confirm=form.elements.confirm.value;if(password!==confirm){toast('As senhas não conferem.');return;}if(!authClient.enabled){toast('O cadastro será ativado quando o servidor seguro estiver conectado.');return;}const result=await authClient.register(email,password,name);toast(result.ok?'Conta criada. Verifique seu e-mail.':result.offline?'Servidor temporariamente indisponível.':'Não foi possível criar a conta.');};
 $('#adminLogin').onsubmit=event=>{event.preventDefault();if($('#adminUser').value!==CONFIG.adminUser){$('#adminMsg').textContent='Login não reconhecido.';return;}window.divinaAdmin?.unlock($('#adminUser').value);$('#adminMsg').textContent='Central local aberta. A senha será validada somente pelo servidor seguro — nunca pelo arquivo público.';};
