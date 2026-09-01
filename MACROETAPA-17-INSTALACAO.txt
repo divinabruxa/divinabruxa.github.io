@@ -1,0 +1,15 @@
+DIVINA BRUXA — MACROETAPA 17 / CONTA E CONFIANÇA V8
+
+STATUS: pacote pronto; GitHub continua bloqueando gravações por HTTP 403.
+
+ORDEM:
+1. Carregar account-trust-v8.css depois das camadas visuais.
+2. Carregar account-trust-v8.js como módulo depois de app.js.
+3. Manter auth-client-v6.js existente.
+4. Login real continua desligado até Supabase STAGING seguro.
+
+INCLUI:
+- Explicação clara de sincronização futura.
+- Privacidade, exportação e exclusão de dados.
+- Nenhuma falsa autenticação.
+- Nenhuma senha gravada nos arquivos públicos.
