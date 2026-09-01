@@ -23,10 +23,10 @@ function paintLife(orb, seconds, still = false) {
   const cycle = ((time % 8.4) + 8.4) % 8.4 / 8.4;
   const breath = .5 - .5 * Math.cos(time * .78);
   const heartbeat = pulse(cycle, .56, .026) + pulse(cycle, .615, .018) * .58;
-  orb.style.setProperty('--mini-brightness', (still ? 1 : .93 + breath * .13 + heartbeat * .09).toFixed(3));
-  orb.style.setProperty('--mini-saturation', (still ? 1.08 : 1.02 + breath * .12).toFixed(3));
-  orb.style.setProperty('--mini-layer-opacity', (still ? .13 : .095 + breath * .11 + heartbeat * .05).toFixed(3));
-  orb.style.setProperty('--mini-aura', (still ? .62 : .48 + breath * .34 + heartbeat * .14).toFixed(3));
+  orb.style.setProperty('--mini-brightness', (still ? 1.045 : .93 + breath * .13 + heartbeat * .09).toFixed(3));
+  orb.style.setProperty('--mini-saturation', (still ? 1.12 : 1.02 + breath * .12).toFixed(3));
+  orb.style.setProperty('--mini-layer-opacity', (still ? .19 : .095 + breath * .11 + heartbeat * .05).toFixed(3));
+  orb.style.setProperty('--mini-aura', (still ? .72 : .48 + breath * .34 + heartbeat * .14).toFixed(3));
 }
 
 function energyLoop(timestamp) {
@@ -105,6 +105,9 @@ function bindOne(orb) {
   }, { passive: true });
   orb.addEventListener('pointerup', event => {
     if (orb.__miniOrbPointer === event.pointerId) release(orb);
+  }, { passive: true });
+  orb.addEventListener('lostpointercapture', () => {
+    if (orb.__miniOrbPointer != null) release(orb);
   }, { passive: true });
   orb.addEventListener('pointercancel', event => {
     if (orb.__miniOrbPointer === event.pointerId) release(orb);

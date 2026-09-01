@@ -1,0 +1,108 @@
+/* DIVINA BRUXA 7.0 — RODAPÉ MÁGICO
+   Última camada do dock. Mantém a mini-Orbe central, nítida e imóvel. */
+
+.magic-dock{
+  left:50%!important;
+  right:auto!important;
+  bottom:max(10px,env(safe-area-inset-bottom))!important;
+  width:min(720px,calc(100vw - 24px))!important;
+  height:86px!important;
+  min-height:86px!important;
+  padding:8px 10px!important;
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  align-items:stretch!important;
+  justify-items:stretch!important;
+  transform:translate3d(-50%,0,0)!important;
+  overflow:visible!important;
+}
+
+.magic-dock>button{
+  width:100%!important;
+  min-width:0!important;
+  height:70px!important;
+  margin:0!important;
+  padding:4px 2px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:3px!important;
+  transform:none!important;
+}
+
+.magic-dock>button:hover,
+.magic-dock>button:focus-visible{transform:none!important}
+
+.magic-dock .dock-sigil{width:34px!important;height:34px!important;margin:0!important;flex:none!important}
+.magic-dock>button small{margin:0!important;font-size:9px!important;line-height:1!important;white-space:nowrap!important}
+
+.magic-dock .dock-orb{position:relative!important;z-index:4!important;overflow:visible!important;isolation:isolate!important}
+
+.magic-dock .dock-orb::before{
+  content:""!important;
+  left:50%!important;
+  top:-19px!important;
+  width:82px!important;
+  height:82px!important;
+  transform:translateX(-50%)!important;
+  animation:v70DockAura 7.2s ease-in-out infinite!important;
+}
+
+.magic-dock .dock-orb .mini-orb,
+.magic-dock .dock-orb .mini-orb.mini-awake{
+  position:absolute!important;
+  z-index:3!important;
+  left:50%!important;
+  top:-12px!important;
+  width:70px!important;
+  height:70px!important;
+  min-width:70px!important;
+  min-height:70px!important;
+  margin:0!important;
+  border-radius:50%!important;
+  background-color:#08020e!important;
+  background-image:url("./divina-orb-v68.png?v=108")!important;
+  background-position:50% 50%!important;
+  background-repeat:no-repeat!important;
+  background-size:102% 102%!important;
+  image-rendering:auto!important;
+  transform:translate3d(-50%,0,0)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,244,218,.16),0 0 19px rgba(231,91,255,.94),0 0 44px rgba(126,45,220,.48)!important;
+}
+
+.magic-dock .dock-orb .mini-orb::after{
+  inset:0!important;
+  background:radial-gradient(ellipse at 27% 15%,rgba(255,255,255,.26),transparent 25%),radial-gradient(circle at 50% 52%,rgba(240,93,255,.10),transparent 58%)!important;
+  opacity:.76!important;
+}
+
+.magic-dock .dock-orb .mini-orb.mini-awake{
+  filter:saturate(1.28) brightness(1.2)!important;
+  transform:translate3d(-50%,0,0)!important;
+}
+
+.magic-dock .dock-orb small{
+  position:absolute!important;
+  left:50%!important;
+  bottom:4px!important;
+  width:max-content!important;
+  margin:0!important;
+  transform:translateX(-50%)!important;
+  color:#ffe3aa!important;
+}
+
+@media(max-width:700px){
+  .magic-dock{width:calc(100vw - 20px)!important;height:82px!important;min-height:82px!important;padding:7px 6px!important}
+  .magic-dock>button{height:68px!important}
+  .magic-dock .dock-sigil{width:32px!important;height:32px!important}
+  .magic-dock .dock-orb::before{top:-17px!important;width:78px!important;height:78px!important}
+  .magic-dock .dock-orb .mini-orb,.magic-dock .dock-orb .mini-orb.mini-awake{top:-10px!important;width:66px!important;height:66px!important;min-width:66px!important;min-height:66px!important}
+}
+
+@media(max-width:390px){
+  .magic-dock>button small{font-size:8px!important}
+  .magic-dock .dock-sigil{width:30px!important;height:30px!important}
+}
+
+@media(prefers-reduced-motion:reduce){.magic-dock .dock-orb::before{animation:none!important}}
