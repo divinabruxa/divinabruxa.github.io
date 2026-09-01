@@ -1,0 +1,14 @@
+DIVINA BRUXA — MACROETAPA 11 / TIRAGENS GUIADAS V8
+
+STATUS: pacote pronto; GitHub continua bloqueando gravações por HTTP 403.
+
+ORDEM:
+1. Carregar spreads-experience-v8.css depois das camadas visuais.
+2. Carregar spreads-experience-v8.js como módulo depois de app.js.
+3. Manter spreads-engine.js, spreads-policy.js e spread-synthesis.js.
+
+INCLUI:
+- Guia visual para escolher uma pergunta.
+- Reforço de cartas únicas e posições claras.
+- Linguagem de síntese contextual.
+- Nenhuma alteração na lógica das tiragens.
