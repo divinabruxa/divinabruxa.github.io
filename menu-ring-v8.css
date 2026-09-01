@@ -138,3 +138,49 @@
 }
 
 @media(prefers-reduced-motion:reduce){.home-menu-portals::before{animation:none!important}.home-menu-portals .menu-portal{transition:none!important}}
+
+/* V8.1 — correção de geometria mobile: a Orbe nunca pode virar elipse. */
+.home-screen.orb-menu-open .orb-shell{
+  width:38%!important;
+  height:auto!important;
+  aspect-ratio:1/1!important;
+  min-height:0!important;
+  max-height:none!important;
+  flex:none!important;
+}
+
+/* O anel externo é uma linha de luz, não um disco preenchido. */
+.home-menu-portals::before{
+  inset:6%!important;
+  border:1px dashed rgba(206,139,246,.30)!important;
+  background:transparent!important;
+  box-shadow:0 0 24px rgba(179,66,235,.12),inset 0 0 22px rgba(180,60,230,.05)!important;
+}
+
+.home-menu-portals{
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  transform:none!important;
+}
+
+/* Seis portais, sempre dentro da viewport, em torno do segundo anel. */
+.home-menu-portals .menu-portal:nth-child(1){left:50%!important;top:2%!important;transform:translateX(-50%)!important}
+.home-menu-portals .menu-portal:nth-child(2){right:7%!important;top:27%!important;transform:translateY(-50%)!important}
+.home-menu-portals .menu-portal:nth-child(3){right:7%!important;bottom:27%!important;transform:translateY(50%)!important}
+.home-menu-portals .menu-portal:nth-child(4){left:50%!important;bottom:2%!important;transform:translateX(-50%)!important}
+.home-menu-portals .menu-portal:nth-child(5){left:7%!important;bottom:27%!important;transform:translateY(50%)!important}
+.home-menu-portals .menu-portal:nth-child(6){left:7%!important;top:27%!important;transform:translateY(-50%)!important}
+
+@media(max-width:700px){
+  .home-screen.orb-menu-open .orb-shell{width:36%!important;height:auto!important;aspect-ratio:1/1!important}
+  .home-menu-portals .menu-portal{width:94px!important;height:46px!important;min-height:46px!important}
+  .home-menu-portals .menu-portal span{width:27px!important;height:27px!important;flex-basis:27px!important}
+}
+
+@media(max-width:390px){
+  .home-screen.orb-menu-open .orb-shell{width:33%!important}
+  .home-menu-portals .menu-portal{width:82px!important;height:42px!important;min-height:42px!important;gap:4px!important}
+  .home-menu-portals .menu-portal span{width:24px!important;height:24px!important;flex-basis:24px!important;font-size:11px!important}
+  .home-menu-portals .menu-portal b{font-size:7px!important}
+}
