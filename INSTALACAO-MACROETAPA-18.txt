@@ -1,0 +1,12 @@
+DIVINA BRUXA — INSTALAÇÃO DA MACROETAPA 18
+
+1. Adicione os arquivos na raiz do GitHub.
+2. No staging, execute: node commerce-guard-v10.mjs CAMINHO_DO_STAGING
+3. Configure o e-mail orbedasrealidades@hotmail.com e teste recebimento.
+4. Mantenha somente e-mail; não adicione WhatsApp ao formulário.
+5. Teste os quatro serviços, validação, confirmação e resposta ao cliente.
+6. Não prometa resultados garantidos nem aconselhamento profissional regulado.
+7. Cadastre somente produtos reais com imagem, preço e disponibilidade verificáveis.
+8. Exiba disclosure de afiliado antes do clique externo.
+9. Mantenha pagamentos reais bloqueados até aprovação do sandbox.
+10. A próxima etapa será SEO, internacionalização e aquisição responsável.

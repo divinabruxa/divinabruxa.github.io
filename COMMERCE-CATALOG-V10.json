@@ -1,0 +1,12 @@
+{
+  "version":"V10",
+  "consultations":{"contactEmail":"orbedasrealidades@hotmail.com","whatsapp":false,"services":[
+    {"id":"mesa-real-profissional","name":"Mesa Real profissional","priceBRL":500},
+    {"id":"leitura-pensamentos","name":"Leitura de Pensamentos","priceBRL":500},
+    {"id":"carta-conselho","name":"Carta de Conselho","priceBRL":300},
+    {"id":"pergunta","name":"Pergunta","priceBRL":150}
+  ],"requiredFields":["name","email","service","questionContext","consent"]},
+  "store":{"categories":["tarot","misticos","livros","casa","tecnologia","apple","presentes"],"affiliateDisclosure":true,"realImageRequired":true,"priceFreshness":"verify-before-clickout","tracking":"consented-utm"},
+  "states":["draft","available","out-of-stock","unavailable","archived"],
+  "safety":{"noGuaranteedOutcome":true,"noMedicalAdvice":true,"noLegalAdvice":true,"noFinancialAdvice":true}
+}
