@@ -1,0 +1,15 @@
+DIVINA BRUXA — MACROETAPA 16 / MÚSICA E VÍDEOS V8
+
+STATUS: pacote pronto; GitHub continua bloqueando gravações por HTTP 403.
+
+ORDEM:
+1. Carregar media-experience-v8.css depois das camadas visuais.
+2. Carregar media-experience-v8.js como módulo depois de app.js.
+3. Manter media-engine.js, media-engine-v5.js e media-policy.js.
+4. Inserir links reais apenas quando forem confirmados.
+
+INCLUI:
+- Atmosfera editorial para Música.
+- Atmosfera editorial para De Frente com o Tarot.
+- Preparação para álbuns, episódios e publicação futura.
+- Nenhum link ou conteúdo inventado.
