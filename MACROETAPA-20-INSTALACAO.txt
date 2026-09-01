@@ -1,0 +1,14 @@
+DIVINA BRUXA — MACROETAPA 20 / SEO E ANALYTICS V8
+
+STATUS: pacote pronto; GitHub continua bloqueando gravações por HTTP 403.
+
+ORDEM:
+1. Carregar seo-analytics-v8.js como módulo depois de app.js.
+2. Manter analytics-engine.js e analytics-policy.js.
+3. Validar títulos, description e robots em cada portal.
+
+PRIVACIDADE:
+- Diário, Orbe IA, Conta, Admin e Premium recebem noindex.
+- Métricas são contagens locais agregadas.
+- Não registra textos, perguntas, mensagens, e-mail ou conteúdo do Diário.
+- Não envia dados para terceiros nesta etapa.

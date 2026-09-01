@@ -1,0 +1,13 @@
+/* DIVINA BRUXA — SEO E ANALYTICS PRIVACY-FIRST V8 */
+const META=Object.freeze({
+home:['Divina Bruxa — Orbe das Realidades','Tarot vivo, Carta do Dia, tiragens, Escola e experiências da Orbe das Realidades.'],tarot:['Tarot Livre — Divina Bruxa','Mesa de Tarot Livre com 78 cartas, sem repetição e sem cartas invertidas.'],daily:['Carta do Dia — Divina Bruxa','Um encontro diário com o Tarot e uma interpretação profunda para o agora.'],library:['Biblioteca das 78 Cartas — Divina Bruxa','Conheça os símbolos, arquétipos e significados das 78 cartas do Tarot.'],school:['Escola do Tarot — Divina Bruxa','Aprenda Tarot em uma jornada completa por cartas, símbolos, combinações e tiragens.'],spreads:['Tiragens de Tarot — Divina Bruxa','Explore tiragens guiadas, posições claras e sínteses profundas.'],consultations:['Consultas de Tarot — Divina Bruxa','Conheça as consultas profissionais da Divina Bruxa e solicite disponibilidade.'],store:['Loja Mística — Divina Bruxa','Curadoria de Tarot, livros, cristais e itens para sua jornada.'],music:['Música — Divina Bruxa','Conheça o universo musical da Divina Bruxa.'],videos:['De Frente com o Tarot — Divina Bruxa','Vídeos, episódios e revelações do universo Divina Bruxa.']
+});
+const PRIVATE=new Set(['ai','journal','login','admin','subscriptions']);
+const meta=(name,content)=>{let node=document.head.querySelector(`meta[name="${name}"]`);if(!node){node=document.createElement('meta');node.name=name;document.head.append(node)}node.content=content};
+const active=()=>document.querySelector('.screen.active')?.id||'home';
+const applySEO=()=>{const id=active();const data=META[id]||META.home;document.title=data[0];meta('description',data[1]);meta('robots',PRIVATE.has(id)?'noindex,nofollow':'index,follow')};
+const KEY='divina-analytics-local-v8';
+const safeEvent=value=>String(value||'unknown').replace(/[^a-z0-9:_-]/gi,'').slice(0,64);
+const track=event=>{const key=safeEvent(event);if(!key)return;try{const data=JSON.parse(localStorage.getItem(KEY)||'{}');data[key]=(Number(data[key])||0)+1;localStorage.setItem(KEY,JSON.stringify(data))}catch{/* métricas locais opcionais */}};
+const boot=()=>{applySEO();track(`screen:${active()}`);new MutationObserver(()=>{const before=document.title;applySEO();if(document.title!==before)track(`screen:${active()}`)}).observe(document.getElementById('app')||document.body,{attributes:true,subtree:true,attributeFilter:['class']});window.divinaAnalytics=Object.freeze({track,getLocal:()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch{return{}}}})};
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
