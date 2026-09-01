@@ -23,6 +23,7 @@ import { PwaEngine } from './pwa-engine.js';
 import { TrustEngine } from './trust-engine.js';
 import { installVisualGuard } from './visual-guard-v6.js';
 import { installTarotExperience } from './tarot-experience-v6.js';
+import { RhythmEngine } from './rhythm-v6.js';
 import { AIEngine } from './ai-engine.js';
 import './tarot-image-runtime.js';
 
@@ -32,6 +33,7 @@ const toast = message => { const el=$('#toast'); el.textContent=message; el.clas
 const { go } = createNavigation();
 installVisualGuard();
 installTarotExperience();
+new RhythmEngine($('#journal'));
 bindMiniOrbs();
 const orb = new RealityOrbEngine($('#orbCanvas'),{onOpen:()=>go('tarot')});
 new FreeTarot($('#tarot'));
