@@ -13,6 +13,19 @@ export class DailyRitual {
     this.onSave = onSave;
     this.data = store.get(DAILY_STORAGE_KEY);
     if (this.data?.reversed) this.data = null;
+    this.onStorage = event => {
+      if (event.key !== DAILY_STORAGE_KEY || !event.newValue) return;
+      let next = null; try { next = JSON.parse(event.newValue); } catch { return; }
+      if (!isDailyRecord(next, brasiliaDate())) return;
+      this.data = next; this.reveal(false);
+    };
+    this.onVisibility = () => {
+      const current = store.get(DAILY_STORAGE_KEY);
+      if (isDailyRecord(current, brasiliaDate()) && current.date !== this.data?.date) { this.data = current; this.reveal(false); }
+      if (this.data && !isDailyRecord(this.data, brasiliaDate())) { this.data = null; this.render(); }
+    };
+    globalThis.addEventListener?.('storage', this.onStorage);
+    document.addEventListener?.('visibilitychange', this.onVisibility);
     this.render();
   }
 
