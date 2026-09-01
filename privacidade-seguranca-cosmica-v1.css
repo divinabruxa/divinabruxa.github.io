@@ -1,0 +1,6 @@
+.privacy-screen,.security-screen{background:radial-gradient(circle at 50% 0,rgba(115,43,177,.24),transparent 44%),linear-gradient(180deg,#12031e,#08010e)}
+.privacy-screen .privacy-card,.privacy-screen .consent-card,.security-screen .security-card{border:1px solid rgba(243,211,138,.3);border-radius:20px;background:linear-gradient(145deg,rgba(51,18,80,.72),rgba(12,3,21,.94));box-shadow:0 16px 40px rgba(0,0,0,.28)}
+.privacy-screen .privacy-card h3,.security-screen .security-card h3{color:#f3d38a}.privacy-screen .toggle{accent-color:#b86cff}.privacy-screen .danger-action{border-color:rgba(255,120,150,.55);color:#ffb8c6}
+.privacy-screen button:active,.security-screen button:active{transform:scale(.97)}
+@media(max-width:640px){.privacy-screen .privacy-card,.privacy-screen .consent-card,.security-screen .security-card{border-radius:16px}}
+@media(prefers-reduced-motion:reduce){.privacy-screen *,.security-screen *{transition-duration:.01ms!important}}
