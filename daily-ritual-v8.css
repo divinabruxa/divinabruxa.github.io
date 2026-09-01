@@ -1,0 +1,5 @@
+/* DIVINA BRUXA — RITUAL DA CARTA DO DIA V8 */
+.daily-ritual-v8{display:flex;gap:1rem;align-items:flex-start;margin:1.5rem 0 1.2rem;padding:1.15rem 1.25rem;background:linear-gradient(135deg,rgba(65,39,74,.76),rgba(16,7,27,.7));border:1px solid rgba(242,201,115,.3);border-radius:22px;box-shadow:0 18px 58px rgba(0,0,0,.25),0 0 34px rgba(239,173,50,.08)}
+.daily-ritual-sigil{display:grid;place-items:center;flex:none;width:2.7rem;height:2.7rem;border:1px solid rgba(242,201,115,.58);border-radius:50%;color:#f3d28b;box-shadow:0 0 24px rgba(239,173,50,.2)}
+.daily-ritual-v8 h3{margin:.15rem 0 .4rem;font-size:clamp(1.2rem,3vw,1.7rem)}.daily-ritual-v8 p:not(.eyebrow){margin:0;color:var(--db-muted);line-height:1.65}.daily-ritual-steps{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.9rem;color:#f0dfb7;font-size:.75rem}.daily-ritual-steps span{display:inline-flex;align-items:center;gap:.35rem}.daily-ritual-steps b{color:#f2c973}
+@media (max-width:520px){.daily-ritual-v8{padding:1rem}.daily-ritual-steps{gap:.55rem}}
