@@ -203,6 +203,60 @@
   .home-menu-portals .menu-portal b{font-size:6.7px!important}
 }
 
+/* V8.5 — segunda linha no mesmo idioma visual da órbita central. */
+.home-menu-portals .menu-portal,
+.home-menu-portals .video-portal,
+.home-menu-portals .store-portal{
+  width:50px!important;
+  height:50px!important;
+  min-height:50px!important;
+  padding:3px!important;
+  display:grid!important;
+  place-items:center!important;
+  gap:0!important;
+  border-radius:50%!important;
+  overflow:visible!important;
+  text-align:center!important;
+}
+.home-menu-portals .menu-portal span{
+  width:25px!important;
+  height:25px!important;
+  flex-basis:25px!important;
+  font-size:13px!important;
+}
+.home-menu-portals .menu-portal b{
+  position:absolute!important;
+  width:max-content!important;
+  max-width:92px!important;
+  color:#eadfe8!important;
+  font-size:7.5px!important;
+  line-height:1.08!important;
+  white-space:normal!important;
+  text-align:center!important;
+  text-shadow:0 1px 8px rgba(0,0,0,.85)!important;
+}
+.home-menu-portals .menu-portal:nth-child(1) b{top:54px!important;left:50%!important;transform:translateX(-50%)!important}
+.home-menu-portals .menu-portal:nth-child(2) b{right:54px!important;top:50%!important;transform:translateY(-50%)!important;text-align:right!important}
+.home-menu-portals .menu-portal:nth-child(3) b{right:54px!important;top:50%!important;transform:translateY(-50%)!important;text-align:right!important}
+.home-menu-portals .menu-portal:nth-child(4) b{bottom:54px!important;left:50%!important;transform:translateX(-50%)!important}
+.home-menu-portals .menu-portal:nth-child(5) b{left:54px!important;top:50%!important;transform:translateY(-50%)!important;text-align:left!important}
+.home-menu-portals .menu-portal:nth-child(6) b{left:54px!important;top:50%!important;transform:translateY(-50%)!important;text-align:left!important}
+.home-menu-portals .menu-portal:hover,.home-menu-portals .menu-portal:focus-visible,.home-menu-portals .menu-portal.is-current{transform:scale(1.07)!important}
+
+@media(max-width:700px){
+  .home-menu-portals .menu-portal,
+  .home-menu-portals .video-portal,
+  .home-menu-portals .store-portal{width:46px!important;height:46px!important;min-height:46px!important}
+  .home-menu-portals .menu-portal span{width:23px!important;height:23px!important;flex-basis:23px!important;font-size:12px!important}
+  .home-menu-portals .menu-portal b{font-size:7px!important;max-width:78px!important}
+  .home-menu-portals .menu-portal:nth-child(1) b{top:49px!important}
+  .home-menu-portals .menu-portal:nth-child(4) b{bottom:49px!important}
+  .home-menu-portals .menu-portal:nth-child(2) b,.home-menu-portals .menu-portal:nth-child(3) b{right:49px!important}
+  .home-menu-portals .menu-portal:nth-child(5) b,.home-menu-portals .menu-portal:nth-child(6) b{left:49px!important}
+}
+
+@media(prefers-reduced-motion:reduce){.home-menu-portals .menu-portal:hover,.home-menu-portals .menu-portal:focus-visible,.home-menu-portals .menu-portal.is-current{transform:none!important}}
+
 /* V8.4 — acabamento do segundo anel e rótulo limpo do vídeo. */
 .home-menu-portals::before{
   border:1px solid rgba(214,151,247,.34)!important;
