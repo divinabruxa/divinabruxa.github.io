@@ -1,0 +1,15 @@
+DIVINA BRUXA — MACROETAPA 13 / ORBE IA V8
+
+STATUS: pacote pronto; GitHub continua bloqueando gravações por HTTP 403.
+
+ORDEM:
+1. Carregar ai-experience-v8.css depois das camadas visuais.
+2. Carregar ai-experience-v8.js como módulo depois de app.js.
+3. Manter ai-engine.js, ai-policy.js e ai-credits.js.
+4. Manter ORBE_AI_SOL_ENABLED=false.
+
+INCLUI:
+- Apresentação segura e premium da Orbe IA.
+- Créditos Luna e Terra visíveis.
+- Sol explicitamente indisponível.
+- Avisos contra alegações de acesso a pensamentos ou pessoas reais.

@@ -1,0 +1,5 @@
+/* DIVINA BRUXA — ORBE IA SEGURA V8 */
+.ai-v8-guide{display:flex;gap:1rem;align-items:flex-start;margin:1.5rem 0;padding:1.15rem 1.25rem;background:linear-gradient(135deg,rgba(34,24,75,.82),rgba(8,4,22,.72));border:1px solid rgba(208,184,255,.3);border-radius:22px;box-shadow:0 18px 58px rgba(0,0,0,.27),0 0 34px rgba(109,72,237,.1)}
+.ai-v8-sigil{display:grid;place-items:center;flex:none;width:2.7rem;height:2.7rem;border:1px solid rgba(208,184,255,.58);border-radius:50%;color:#dfd0ff;box-shadow:0 0 24px rgba(109,72,237,.22)}
+.ai-v8-guide h3{margin:.15rem 0 .4rem;font-size:clamp(1.2rem,3vw,1.7rem)}.ai-v8-guide p:not(.eyebrow){margin:0;color:var(--db-muted);line-height:1.65}.ai-v8-pills{display:flex;gap:.55rem;flex-wrap:wrap;margin-top:.9rem;font-size:.72rem;color:#e8ddff}.ai-v8-pills span{padding:.3rem .55rem;border:1px solid rgba(208,184,255,.2);border-radius:999px}
+@media (max-width:520px){.ai-v8-guide{padding:1rem}.ai-v8-pills{gap:.4rem}}
