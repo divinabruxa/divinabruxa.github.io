@@ -1,0 +1,13 @@
+DIVINA BRUXA — MACROETAPA 10 / MONETIZAÇÃO SANDBOX
+
+1. Envie `monetization-sandbox-v9.js` para a branch de teste.
+2. Renderize preços a partir de `PRODUCTS`; não digite valores duplicados em
+   vários componentes.
+3. Não coloque chave Stripe, webhook secret ou preço live no GitHub/frontend.
+4. Nenhum botão deve cobrar enquanto `BILLING_GATES.realBilling` for false.
+5. Execute `node MONETIZATION-SANDBOX-VALIDATION-V9.9.mjs` — esperado 8/8 PASS.
+6. No futuro backend, use Checkout Sessions + Billing, webhooks assinados,
+   idempotência, Customer Portal e reconciliação antes de qualquer produção.
+
+RETORNO: remova somente o contrato e desligue as flags de sandbox.
+PRÓXIMA: Macroetapa 11 — consultas, loja e superfícies de conversão.
