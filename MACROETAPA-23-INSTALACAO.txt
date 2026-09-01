@@ -1,0 +1,16 @@
+DIVINA BRUXA — MACROETAPA 23 / INTEGRADOR ÚNICO V8.23
+
+STATUS: pacote pronto; GitHub continua bloqueando gravações por HTTP 403.
+
+INSTALAÇÃO:
+1. Enviar todos os arquivos do ZIP acumulado para a raiz.
+2. Adicionar ao index.html a linha contida em INDEX-SNIPPET-V8.txt.
+3. Não remover os scripts ou estilos atuais.
+4. Abrir o site e confirmar body[data-divina-v8="ready"].
+5. Atualizar sw.js somente depois da validação visual.
+
+FUNÇÃO:
+- Carrega as camadas CSS na ordem correta.
+- Carrega os módulos JS na ordem correta.
+- Evita carregamento duplicado de estilos.
+- Registra falhas sem derrubar o site existente.
