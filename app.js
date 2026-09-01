@@ -68,4 +68,5 @@ $('#adminLogin').onsubmit=event=>{event.preventDefault();if($('#adminUser').valu
 
 let installPrompt=null;addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event;$('#installApp').hidden=false;});$('#installApp').onclick=async()=>{if(!installPrompt){toast('No iPhone: Compartilhar → Adicionar à Tela de Início.');return;}installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;};
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+const pagesStyle=document.createElement('link');pagesStyle.rel='stylesheet';pagesStyle.href='./pages-v6.css';document.head.appendChild(pagesStyle);
 window.orbe={go};
