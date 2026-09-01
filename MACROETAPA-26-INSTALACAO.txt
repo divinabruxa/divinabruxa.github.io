@@ -1,0 +1,25 @@
+DIVINA BRUXA — MACROETAPA 26 / RELEASE CANDIDATE E REVISÃO
+
+ENTREGAS
+- Notas completas da candidata a lançamento.
+- Checklist visual e funcional da proprietária.
+- Registro estruturado de bloqueios de produção.
+- Estado explícito e verificável do projeto.
+- ZIP integral e ZIP compacto de revisão, ambos sem pastas internas.
+
+VALIDAÇÃO
+1. Execute: node qa-supreme-v8.mjs
+2. Exija o resultado: 123/123 PASS.
+3. Instale apenas em branch de teste ou cópia segura.
+4. Siga OWNER-REVIEW-V8.26.txt em aparelhos reais.
+
+LIMITES
+- Esta macroetapa não publica no GitHub.
+- Esta macroetapa não altera DNS.
+- Esta macroetapa não ativa pagamentos, login ou banco de dados reais.
+- Esta macroetapa não autoriza produção.
+
+PORTÃO DE SAÍDA
+A Macroetapa 26 termina como RELEASE CANDIDATE. A próxima etapa só pode
+classificar o site para homologação depois da instalação segura e da revisão
+da proprietária.

@@ -1,0 +1,51 @@
+{
+  "project": "Divina Bruxa — Orbe das Realidades",
+  "version": "8.26",
+  "status": "release_candidate_not_installed",
+  "releaseGate": "owner_review_required",
+  "automatedQA": {
+    "expectedChecks": 123,
+    "requiredResult": "123/123 PASS"
+  },
+  "authorization": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  },
+  "blockers": [
+    {
+      "id": "github-installation",
+      "state": "blocked",
+      "detail": "A integração atual possui leitura, mas a gravação no repositório retorna HTTP 403."
+    },
+    {
+      "id": "real-device-review",
+      "state": "pending",
+      "detail": "Revisão visual e funcional em iPhone, Android e computador ainda necessária."
+    },
+    {
+      "id": "backend-auth",
+      "state": "pending",
+      "detail": "Autenticação, perfis e persistência segura de servidor ainda não estão ativos."
+    },
+    {
+      "id": "billing",
+      "state": "pending",
+      "detail": "Checkout, assinaturas, webhooks, impostos e conciliação reais ainda não estão ativos."
+    },
+    {
+      "id": "legal-content",
+      "state": "pending",
+      "detail": "Textos jurídicos, política de privacidade e regras comerciais exigem aprovação humana."
+    },
+    {
+      "id": "production-observability",
+      "state": "pending",
+      "detail": "Monitoramento, alertas, consentimento analítico e métricas reais dependem do ambiente final."
+    }
+  ],
+  "productionReady": false
+}
+

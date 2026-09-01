@@ -1,0 +1,41 @@
+DIVINA BRUXA — ORBE DAS REALIDADES
+RELEASE NOTES V8.26 — CANDIDATA A LANÇAMENTO
+
+ESTADO DESTA ENTREGA
+- Pacote integral das Macroetapas 1–26 preparado.
+- Arquivos organizados em formato plano para instalação na raiz do repositório.
+- Validação automatizada concluída sem falhas.
+- Ainda não instalado no GitHub e ainda não aprovado em aparelhos reais.
+- Classificação correta: RELEASE CANDIDATE / REVISÃO DA PROPRIETÁRIA.
+
+O QUE FOI CONSTRUÍDO
+- Fundação visual cósmica e superfícies responsivas.
+- Sistema universal de skins com sincronização de todas as orbes.
+- Atmosferas por portal e experiência de retorno diário.
+- Experiências de Premium, Escola, Tarot, Ritual Diário e Tiragens.
+- Diário, Orbe IA, Consultas, Loja, Mídia, Conta e Administração.
+- Notificações, SEO, métricas preparatórias, PWA e desempenho.
+- Acessibilidade, estabilidade, carregador único e instalação reversível.
+- Suíte de qualidade automatizada com 123 verificações.
+
+PROMESSAS PRESERVADAS
+- Marca principal: Divina Bruxa.
+- Universo: Orbe das Realidades.
+- Orbe IA permanece uma experiência separada.
+- Tarot completo: 78 cartas, sem cartas invertidas.
+- Premium: R$ 199,90, compra única, sem IA.
+- Orbe IA: R$ 89,90/mês, 400 créditos; Luna 1, Terra 10, Sol desativado.
+- Consultas: Mesa Real 500; Leitura de Pensamentos 500;
+  Carta de Conselho 300; Pergunta 150.
+
+REGRA DE OURO DAS SKINS
+Ao escolher uma skin, a orbe principal, a orbe do menu interior e todas as
+demais orbes compatíveis recebem a mesma identidade visual. A seleção é
+persistida localmente e propagada por evento para componentes presentes e
+componentes adicionados posteriormente.
+
+PRÓXIMO PORTÃO
+Instalar em uma ramificação de teste, executar a revisão da proprietária em
+iPhone, Android e computador e corrigir qualquer divergência antes de liberar
+produção.
+

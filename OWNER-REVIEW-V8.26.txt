@@ -1,0 +1,61 @@
+DIVINA BRUXA — REVISÃO DA PROPRIETÁRIA V8.26
+
+OBJETIVO
+Confirmar, em aparelhos reais, que a experiência tem beleza, fluidez,
+legibilidade e coerência suficientes para avançar à homologação final.
+
+PREPARAÇÃO
+[ ] Instalar primeiro em branch de teste ou cópia segura do site.
+[ ] Preservar CNAME, card-00.webp até card-77.webp e imagens das skins.
+[ ] Inserir uma única linha do loader antes de </body> no index.html.
+[ ] Abrir o site sem cache e confirmar ausência de erros no console.
+
+TESTE ESSENCIAL DAS SKINS E ORBES
+[ ] Trocar por pelo menos cinco skins muito diferentes.
+[ ] Confirmar a troca da orbe principal.
+[ ] Confirmar a troca da orbe do menu interior.
+[ ] Confirmar a troca de todas as orbes visíveis nas páginas.
+[ ] Navegar para outra página e confirmar que a skin permanece.
+[ ] Recarregar o navegador e confirmar que a skin permanece.
+[ ] Testar uma imagem ausente e confirmar fallback elegante.
+
+TESTE VISUAL E DE FLUIDEZ
+[ ] iPhone: nenhum corte, sobreposição, salto ou rolagem horizontal.
+[ ] Android: nenhum corte, sobreposição, salto ou rolagem horizontal.
+[ ] Computador: composição equilibrada em telas pequenas e grandes.
+[ ] Menu abre, fecha e mantém foco corretamente.
+[ ] Animações são suaves e respeitam “reduzir movimento”.
+[ ] Texto permanece legível sobre todas as skins testadas.
+[ ] Botões têm estados de foco, toque, carregamento e indisponibilidade.
+
+TESTE DE CONTEÚDO E JORNADA
+[ ] Tarot apresenta 78 cartas e nunca oferece carta invertida.
+[ ] Ritual diário e retorno diário funcionam sem duplicações.
+[ ] Premium mostra R$ 199,90, compra única e sem IA.
+[ ] Orbe IA mostra R$ 89,90/mês e 400 créditos.
+[ ] Luna custa 1 crédito, Terra custa 10 e Sol está desativado.
+[ ] Consultas exibem os quatro valores aprovados.
+[ ] Diário, Escola, Tiragens, Loja, Mídia e Conta abrem corretamente.
+[ ] Nenhuma ação falsa aparenta concluir compra, login ou consulta real.
+
+ACESSIBILIDADE E CONFIANÇA
+[ ] Navegação completa por teclado no computador.
+[ ] Leitor de tela anuncia menu, diálogos e ações principais.
+[ ] Contraste suficiente em texto, botões e mensagens.
+[ ] Zoom de 200% não esconde conteúdo ou controles.
+[ ] Política, termos, privacidade e suporte estão identificados como pendentes
+    quando ainda não houver documentos jurídicos aprovados.
+
+CRITÉRIO DE APROVAÇÃO
+Somente marcar “APROVADO PELA PROPRIETÁRIA” quando todos os itens críticos
+estiverem concluídos e nenhuma falha bloquear navegação, leitura, skins,
+tarot ou segurança da experiência.
+
+DECISÃO
+[ ] APROVADO PARA HOMOLOGAÇÃO FINAL
+[ ] DEVOLVIDO PARA CORREÇÕES
+
+Observações:
+________________________________________________________________________
+________________________________________________________________________
+
