@@ -5,6 +5,7 @@ export function createNavigation() {
   const screens = [...document.querySelectorAll('.screen')];
   const home = document.querySelector('#home');
   const orbMenu = document.querySelector('#orbMenu');
+  const orbStage = document.querySelector('.orb-stage-ref');
   const menuButton = document.querySelector('#menuBtn');
   const pathsButton = document.querySelector('#pathsBtn');
   if (pathsButton) {
@@ -58,6 +59,7 @@ export function createNavigation() {
   let motionToken = 0;
   let motionFrame = 0;
   let motionTimer = 0;
+  let stageMotion = null;
 
   const setCurrent = id => document.querySelectorAll('.magic-dock [data-go], .home-orb-menu [data-go]').forEach(button => {
     const current = button.dataset.go === id;
@@ -78,6 +80,8 @@ export function createNavigation() {
     motionToken += 1;
     cancelAnimationFrame(motionFrame);
     clearTimeout(motionTimer);
+    stageMotion?.cancel();
+    stageMotion = null;
     motionFrame = 0;
     motionTimer = 0;
   };
@@ -130,6 +134,7 @@ export function createNavigation() {
     if (open && !home.classList.contains('active')) go('home');
     if (open && !wantsMenuOpen) lastFocus = document.activeElement;
 
+    const stageBefore = orbStage?.getBoundingClientRect();
     cancelMotion();
     const token = motionToken;
     wantsMenuOpen = open;
@@ -145,6 +150,19 @@ export function createNavigation() {
     motionFrame = requestAnimationFrame(() => {
       if (token !== motionToken) return;
       home.classList.toggle('orb-menu-open', open);
+      if (orbStage && stageBefore && !reducedMotion.matches) {
+        const stageAfter = orbStage.getBoundingClientRect();
+        const dx = stageBefore.left - stageAfter.left;
+        const dy = stageBefore.top - stageAfter.top;
+        stageMotion = orbStage.animate([
+          { transform:`translate3d(${dx}px,${dy}px,0)` },
+          { transform:'translate3d(0,0,0)' }
+        ],{
+          duration:620,
+          easing:'cubic-bezier(.22,.72,.18,1)',
+          fill:'both'
+        });
+      }
       settleMotion(token);
     });
   };

@@ -1,8 +1,10 @@
 /* DIVINA BRUXA — MENU ORBITAL LIMPO 9.0 */
-.home-screen .orb-stage-ref{overflow:visible!important;width:min(92vw,55svh,420px)!important;transition:margin .58s cubic-bezier(.22,.72,.18,1)!important}
+.home-screen .orb-stage-ref{overflow:visible!important;width:min(92vw,55svh,420px)!important;transform:translate3d(0,0,0);transition:none!important}
 .home-screen .orb-shell{width:100%!important;height:auto!important;aspect-ratio:1/1!important;transform-origin:center!important;scale:1;transition:scale .58s cubic-bezier(.22,.72,.18,1),opacity .38s ease!important;will-change:scale}
-.home-screen.orb-menu-open .orb-stage-ref{width:min(92vw,55svh,420px)!important;margin-top:78px!important;margin-bottom:88px!important}
-.home-screen.orb-menu-open .orb-shell{width:100%!important;min-height:0!important;max-height:none!important;transform:translateZ(0)!important;scale:.55;filter:drop-shadow(0 0 28px rgba(232,86,255,.54))!important}
+.home-screen.orb-menu-open{justify-content:center!important}
+.home-screen.orb-menu-open .home-copy,.home-screen.orb-menu-open>.awaken,.home-screen.orb-menu-open>.orb-status,.home-screen.orb-menu-open>.touch-hint{position:absolute!important;width:1px!important;height:1px!important;margin:0!important;overflow:hidden!important;clip-path:inset(50%)!important;pointer-events:none!important}
+.home-screen.orb-menu-open .orb-stage-ref{width:min(92vw,55svh,420px)!important;margin:61px auto 0!important;transform:translate3d(0,0,0)}
+.home-screen.orb-menu-open .orb-shell{width:100%!important;min-height:0!important;max-height:none!important;transform:translateZ(0)!important;scale:.52;filter:drop-shadow(0 0 28px rgba(232,86,255,.54))!important}
 
 .home-orb-menu{overflow:visible!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;transform:translate3d(0,8px,0);transition:opacity .38s ease,transform .58s cubic-bezier(.22,.72,.18,1),visibility 0s linear .62s!important;will-change:transform,opacity}
 .home-screen.orb-menu-open .home-orb-menu{visibility:visible!important;opacity:1!important;pointer-events:auto!important;transform:translate3d(0,0,0);transition-delay:0s!important}
@@ -16,14 +18,14 @@
 .home-orb-menu>button:not(.menu-portal) span{width:40px!important;height:40px!important;flex-basis:40px!important;animation:none!important}
 .home-orb-menu>button:not(.menu-portal) svg,.home-orb-menu>button:not(.menu-portal) svg *{animation:none!important}
 .home-orb-menu>button:not(.menu-portal) b{font-size:8.6px!important}
-.home-orb-menu>button:nth-of-type(1){left:50%!important;top:9%!important;transform:translateX(-50%)!important}
-.home-orb-menu>button:nth-of-type(2){left:73%!important;top:24%!important;transform:translate(-50%,-50%)!important}
-.home-orb-menu>button:nth-of-type(3){left:84%!important;top:50%!important;transform:translate(-50%,-50%)!important}
-.home-orb-menu>button:nth-of-type(4){left:73%!important;top:76%!important;transform:translate(-50%,-50%)!important}
-.home-orb-menu>button:nth-of-type(5){left:50%!important;top:91%!important;transform:translateX(-50%)!important}
-.home-orb-menu>button:nth-of-type(6){left:27%!important;right:auto!important;top:76%!important;transform:translate(-50%,-50%)!important}
-.home-orb-menu>button:nth-of-type(7){left:16%!important;right:auto!important;top:50%!important;transform:translate(-50%,-50%)!important}
-.home-orb-menu>button:nth-of-type(8){left:27%!important;right:auto!important;top:24%!important;transform:translate(-50%,-50%)!important}
+.home-orb-menu>button:nth-of-type(1){left:50%!important;top:4%!important;transform:translateX(-50%)!important}
+.home-orb-menu>button:nth-of-type(2){left:75%!important;top:20%!important;transform:translate(-50%,-50%)!important}
+.home-orb-menu>button:nth-of-type(3){left:89%!important;top:50%!important;transform:translate(-50%,-50%)!important}
+.home-orb-menu>button:nth-of-type(4){left:75%!important;top:80%!important;transform:translate(-50%,-50%)!important}
+.home-orb-menu>button:nth-of-type(5){left:50%!important;top:88%!important;transform:translateX(-50%)!important}
+.home-orb-menu>button:nth-of-type(6){left:25%!important;right:auto!important;top:80%!important;transform:translate(-50%,-50%)!important}
+.home-orb-menu>button:nth-of-type(7){left:11%!important;right:auto!important;top:50%!important;transform:translate(-50%,-50%)!important}
+.home-orb-menu>button:nth-of-type(8){left:25%!important;right:auto!important;top:20%!important;transform:translate(-50%,-50%)!important}
 
 .home-menu-portals{position:absolute!important;z-index:10!important;inset:0!important;width:100%!important;height:100%!important;margin:0!important;padding:0!important;display:block!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;transform:none!important;opacity:1!important;filter:none!important;pointer-events:none!important}
 .home-menu-portals::before{display:none!important;content:none!important}
@@ -46,8 +48,8 @@
 
 @media(max-width:700px){
   .home-screen .orb-stage-ref,.home-screen.orb-menu-open .orb-stage-ref{width:min(calc(100vw - 28px),calc(100svh - 330px),390px)!important}
-  .home-screen.orb-menu-open .orb-stage-ref{margin-top:76px!important;margin-bottom:86px!important}
-  .home-screen.orb-menu-open .orb-shell{width:100%!important;scale:.55}
+  .home-screen.orb-menu-open .orb-stage-ref{margin:58px auto 0!important;transform:translate3d(0,0,0)}
+  .home-screen.orb-menu-open .orb-shell{width:100%!important;scale:.51}
   .home-orb-menu>button:not(.menu-portal){width:88px!important;height:52px!important;min-height:52px!important}
   .home-orb-menu>button:not(.menu-portal) span{width:36px!important;height:36px!important;flex-basis:36px!important}
   .home-orb-menu>button:not(.menu-portal) b{font-size:8px!important}
@@ -63,7 +65,7 @@
 }
 @media(max-width:390px){
   .home-screen .orb-stage-ref,.home-screen.orb-menu-open .orb-stage-ref{width:min(calc(100vw - 30px),calc(100svh - 320px),360px)!important}
-  .home-screen.orb-menu-open .orb-shell{width:100%!important;scale:.54}
+  .home-screen.orb-menu-open .orb-shell{width:100%!important;scale:.50}
   .home-orb-menu>button:not(.menu-portal){width:80px!important}
   .home-menu-portals .menu-portal,.home-menu-portals .video-portal,.home-menu-portals .store-portal{width:51px!important}
   .home-menu-portals .menu-portal b{font-size:6px!important;max-width:50px!important}

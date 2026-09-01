@@ -1,4 +1,4 @@
-const CACHE='divina-bruxa-v77-menu-orbital-row-115';
+const CACHE='divina-bruxa-v77-menu-centered-flip-116';
 const SKIN_09='./skin-rosa-venus-v1.png';
 const SKIN_10='./skin-ametista-real-v1.png';
 const SKIN_11='./skin-safira-celestial-v1.png';
