@@ -1,0 +1,10 @@
+{
+  "version":"V10",
+  "modules":[
+    "fundamentos","arcanos-maiores","paus","copas","espadas","ouros","corte","numeros-padroes","naipes-elementos","posicoes-perguntas","combinacoes","sintese","tiragens-praticas","cruz-celta","mesa-real","etica-limites","pratica-avancada"
+  ],
+  "cardLessons": {"count":78,"requiredSections":["essencia","simbolos","luz","tensao","amor","relacoes","carreira","dinheiro","espiritualidade","conselho","pergunta","combinacao"]},
+  "learningTools": ["flashcards","spaced-review","quizzes","error-review","favorites","search","filters","weekly-challenges"],
+  "progress": {"levels":["started","in-progress","completed","mastered"],"sync":"account-when-available","offline":"premium-downloaded-content"},
+  "lessonMinimum": {"objectives":1,"mainTextWords":250,"example":1,"practice":1,"completionCheck":1}
+}

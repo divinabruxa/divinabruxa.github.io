@@ -1,0 +1,12 @@
+DIVINA BRUXA — INSTALAÇÃO DA MACROETAPA 11
+
+1. Adicione os arquivos na raiz do GitHub.
+2. Não apague as aulas existentes antes de migrar e comparar conteúdo.
+3. No staging, execute: node academy-content-guard-v10.mjs CAMINHO_DO_STAGING
+4. Cadastre os 17 módulos e associe as 78 aulas de cartas.
+5. Expanda cada aula com objetivos, texto profundo, exemplo, prática e conclusão.
+6. Teste quizzes, flashcards, revisão de erros, favoritos, busca e filtros.
+7. Verifique progresso de visitante, conta e modo offline Premium.
+8. Não use IA para inventar conteúdo sem revisão editorial humana.
+9. Confirme que nenhuma aula depende de cartas invertidas.
+10. A próxima etapa será o Diário e o Espelho, com privacidade e insights agregados.
