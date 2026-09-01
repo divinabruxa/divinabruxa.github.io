@@ -1,0 +1,30 @@
+/* Revelação da carta — breve, suave e totalmente opcional */
+.tarot-screen .ritual-altar.revealing .table-orb {
+  animation: tarot-orb-pulse 820ms cubic-bezier(.22,.75,.2,1) both;
+}
+.tarot-screen .table-preview.birth {
+  animation: tarot-card-arrival 720ms cubic-bezier(.16,1,.3,1) both;
+}
+.tarot-screen .table-preview.birth .tarot-card-image {
+  animation: tarot-card-glow 900ms ease-out both;
+}
+@keyframes tarot-orb-pulse {
+  0% { transform: scale(1); filter: drop-shadow(0 0 18px rgba(192,89,255,.72)); }
+  38% { transform: scale(1.085); filter: drop-shadow(0 0 42px rgba(239,164,255,1)); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 22px rgba(205,104,255,.82)); }
+}
+@keyframes tarot-card-arrival {
+  0% { opacity: 0; transform: translateY(18px) scale(.94) rotateX(7deg); }
+  55% { opacity: 1; transform: translateY(-3px) scale(1.012) rotateX(0); }
+  100% { opacity: 1; transform: translateY(0) scale(1) rotateX(0); }
+}
+@keyframes tarot-card-glow {
+  0% { filter: saturate(.82) brightness(.72) drop-shadow(0 0 0 rgba(214,121,255,0)); }
+  55% { filter: saturate(1.18) brightness(1.08) drop-shadow(0 0 26px rgba(214,121,255,.5)); }
+  100% { filter: saturate(1.06) brightness(1) drop-shadow(0 0 10px rgba(214,121,255,.18)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tarot-screen .ritual-altar.revealing .table-orb,
+  .tarot-screen .table-preview.birth,
+  .tarot-screen .table-preview.birth .tarot-card-image { animation: none; }
+}
