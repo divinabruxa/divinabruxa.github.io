@@ -1,0 +1,12 @@
+{
+  "version":"V10",
+  "canonicalDomain":"https://divinabruxa.com.br",
+  "languages":["pt-BR","en","es"],
+  "sourceLanguage":"pt-BR",
+  "indexablePublic":["home","78-cards","spreads","school-public","consultations","music","media","store-public"],
+  "noindexPrivate":["account","journal","ai","admin","checkout","consultation-private"],
+  "structuredData":["WebSite","Article","Course","Product","BreadcrumbList"],
+  "requiredMeta":["title","description","canonical","og:title","og:description","og:image","twitter:card"],
+  "sitemap":{"publishedOnly":true,"privateExcluded":true},
+  "acquisition":{"utmConsent":true,"newsletterOptIn":true,"affiliateDisclosure":true,"noSensationalClaims":true}
+}

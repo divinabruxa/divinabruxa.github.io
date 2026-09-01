@@ -1,0 +1,12 @@
+DIVINA BRUXA — INSTALAÇÃO DA MACROETAPA 19
+
+1. Adicione os arquivos na raiz do GitHub.
+2. No staging, execute: node seo-growth-guard-v10.mjs CAMINHO_DO_STAGING
+3. Revise títulos, descrições, canonical e imagem social da Home e das 78 cartas.
+4. Gere sitemap somente com conteúdo público publicado.
+5. Marque Diário, Conta, IA, Admin e checkout como noindex.
+6. Adicione JSON-LD e breadcrumbs somente quando corresponderem ao conteúdo real.
+7. Prepare PT-BR como fonte; traduza EN/ES com revisão humana.
+8. Teste compartilhamento social e links quebrados.
+9. Use UTM e newsletter somente com consentimento.
+10. A próxima etapa será observabilidade, QA final, beta e lançamento seguro.
