@@ -20,6 +20,7 @@ import { AdminEngine } from './admin-engine.js';
 import { AnalyticsEngine } from './analytics-engine.js';
 import { PrivacyEngine } from './privacy-engine.js';
 import { PwaEngine } from './pwa-engine.js';
+import { TrustEngine } from './trust-engine.js';
 import { AIEngine } from './ai-engine.js';
 import './tarot-image-runtime.js';
 
@@ -46,6 +47,7 @@ new AdminEngine($('#adminApp'));
 new AnalyticsEngine($('#analyticsApp'));
 new PrivacyEngine($('#privacyApp'));
 new PwaEngine($('#pwaStatus'));
+new TrustEngine($('#trustApp'));
 new AIEngine($('#ai'),CONFIG);
 new PremiumEngine($('#subscriptionApp'));
 
