@@ -1,0 +1,21 @@
+DIVINA BRUXA — MACROETAPA 27 / HOMOLOGAÇÃO SUPREMA
+
+INCLUI
+- Matriz completa de testes em iPhone, Android e computador.
+- Registro padronizado de evidências.
+- Resultado editável com 20 verificações reais.
+- Portão automatizado que impede aprovação prematura.
+- Contagem fixa até a Macroetapa 30.
+
+COMANDOS
+- Consultar estado: node release-gate-v8.mjs
+- Exigir aprovação: node release-gate-v8.mjs --enforce
+
+USO
+1. Execute cada item de HOMOLOGATION-MATRIX-V8.27.txt.
+2. Preencha status e evidência em HOMOLOGATION-RESULT-V8.27.json.
+3. Mantenha ownerApproval=false até a proprietária aprovar tudo.
+4. Execute o portão novamente após cada rodada.
+
+ESTADO INICIAL CORRETO
+BLOCKED: testes reais e aprovação da proprietária ainda pendentes.

@@ -1,0 +1,23 @@
+DIVINA BRUXA — REGISTRO DE EVIDÊNCIAS V8.27
+
+Copie este bloco para cada teste executado.
+
+ID DO TESTE:
+DATA E HORA:
+APARELHO:
+SISTEMA:
+NAVEGADOR:
+SKIN UTILIZADA:
+RESULTADO: PASS / FAIL / BLOCKED
+PASSOS EXECUTADOS:
+RESULTADO ESPERADO:
+RESULTADO OBSERVADO:
+ARQUIVO DA CAPTURA OU VÍDEO:
+OBSERVAÇÕES:
+
+REGRAS
+- FAIL nunca pode ser transformado em PASS sem novo teste.
+- BLOCKED precisa explicar exatamente o impedimento.
+- Evidência deve evitar dados pessoais, credenciais e conteúdo privado.
+- P0 e P1 precisam estar em PASS antes da aprovação.
+

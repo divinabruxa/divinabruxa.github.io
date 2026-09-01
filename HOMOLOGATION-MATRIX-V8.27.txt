@@ -1,0 +1,43 @@
+DIVINA BRUXA — MATRIZ DE HOMOLOGAÇÃO SUPREMA V8.27
+
+REGRA
+P0 é crítico. P1 é importante. Produção exige P0=0 aberto, P1=0 aberto,
+todos os testes como PASS e ownerApproval=true.
+
+ROTEIRO POR APARELHO
+
+IPHONE
+1. Abrir Home, tocar e dar duplo toque na orbe.
+2. Abrir/fechar menu, Orbe IA e todos os portais principais.
+3. Trocar cinco skins; validar orbe principal, menu interior e orbes das páginas.
+4. Recarregar e navegar; confirmar persistência da skin.
+5. Testar Tarot Livre, Carta do Dia e uma tiragem completa.
+6. Testar orientação, zoom, VoiceOver e reduzir movimento.
+
+ANDROID
+1. Repetir fluxo completo de orbe, menu, skins e tarot.
+2. Validar botão voltar, instalação PWA e abertura offline permitida.
+3. Confirmar ausência de rolagem horizontal e toque fantasma.
+4. Confirmar que recursos online não simulam sucesso quando offline.
+
+COMPUTADOR
+1. Testar larguras 1280, 1440 e 1920 pixels.
+2. Navegar apenas por teclado; foco nunca pode desaparecer.
+3. Testar leitor de tela, zoom de 200% e movimento reduzido.
+4. Confirmar imagens, textos, preços e estados indisponíveis.
+
+TESTES TRANSVERSAIS
+1. Tarot contém 78 cartas únicas e zero cartas invertidas.
+2. Premium: R$199,90, pagamento único e sem IA.
+3. Orbe IA: R$89,90/mês, 400 créditos; Luna 1, Terra 10, Sol OFF.
+4. Consultas: Mesa Real 500; Pensamentos 500; Conselho 300; Pergunta 150.
+5. Diário permanece privado; nenhuma métrica contém seu texto.
+6. Nenhuma ação demonstra compra, login ou envio real sem backend ativo.
+7. Console sem erros críticos; carregamento sem travamentos.
+
+EVIDÊNCIA MÍNIMA
+- Uma captura por teste visual.
+- Vídeo curto para troca universal de skins e interação da orbe.
+- Aparelho, sistema, navegador e data registrados.
+- Falhas com passo a passo, resultado esperado e resultado observado.
+

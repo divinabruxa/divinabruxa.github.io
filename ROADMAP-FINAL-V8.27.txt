@@ -1,0 +1,24 @@
+DIVINA BRUXA — CONTAGEM FINAL DE MACROETAPAS
+
+CONCLUÍDAS
+- Macroetapas 1–26: construção, integração, QA e candidata a lançamento.
+- Macroetapa 27: homologação suprema e portão de lançamento.
+
+RESTANTES APÓS ESTA ENTREGA: 3
+
+MACROETAPA 28 — CORREÇÕES REAIS
+Correção dos defeitos encontrados nos testes de iPhone, Android e computador;
+regressão completa das skins, orbes, tarot, menu, páginas e acessibilidade.
+
+MACROETAPA 29 — PREPARAÇÃO DE PRODUÇÃO
+Backend, autenticação, segurança, textos legais, pagamentos em ambiente de
+teste, monitoramento e revisão dos bloqueios. Nada real é ativado sem autorização.
+
+MACROETAPA 30 — PACOTE DEFINITIVO
+QA final, inventário, checksums, instrução de instalação/retorno e ZIP plano
+definitivo para o GitHub.
+
+OBSERVAÇÃO
+A Macroetapa 28 depende das evidências dos testes reais. Enquanto elas não
+existirem, o portão continuará corretamente bloqueado.
+

@@ -1,0 +1,29 @@
+{
+  "project": "Divina Bruxa — Orbe das Realidades",
+  "version": "8.27",
+  "ownerApproval": false,
+  "approvedAt": null,
+  "checks": [
+    {"id":"IPH-ORB-01","device":"iPhone","area":"skins-orbes","priority":"P0","status":"pending","evidence":""},
+    {"id":"IPH-NAV-01","device":"iPhone","area":"menu-navegacao","priority":"P0","status":"pending","evidence":""},
+    {"id":"IPH-TAR-01","device":"iPhone","area":"tarot-78","priority":"P0","status":"pending","evidence":""},
+    {"id":"IPH-VIS-01","device":"iPhone","area":"visual-responsivo","priority":"P1","status":"pending","evidence":""},
+    {"id":"IPH-ACC-01","device":"iPhone","area":"acessibilidade","priority":"P1","status":"pending","evidence":""},
+    {"id":"AND-ORB-01","device":"Android","area":"skins-orbes","priority":"P0","status":"pending","evidence":""},
+    {"id":"AND-NAV-01","device":"Android","area":"menu-navegacao","priority":"P0","status":"pending","evidence":""},
+    {"id":"AND-TAR-01","device":"Android","area":"tarot-78","priority":"P0","status":"pending","evidence":""},
+    {"id":"AND-VIS-01","device":"Android","area":"visual-responsivo","priority":"P1","status":"pending","evidence":""},
+    {"id":"AND-PWA-01","device":"Android","area":"pwa-offline","priority":"P1","status":"pending","evidence":""},
+    {"id":"DES-ORB-01","device":"Desktop","area":"skins-orbes","priority":"P0","status":"pending","evidence":""},
+    {"id":"DES-NAV-01","device":"Desktop","area":"menu-teclado","priority":"P0","status":"pending","evidence":""},
+    {"id":"DES-TAR-01","device":"Desktop","area":"tarot-78","priority":"P0","status":"pending","evidence":""},
+    {"id":"DES-VIS-01","device":"Desktop","area":"visual-responsivo","priority":"P1","status":"pending","evidence":""},
+    {"id":"DES-ACC-01","device":"Desktop","area":"leitor-tela-zoom","priority":"P1","status":"pending","evidence":""},
+    {"id":"ALL-PRI-01","device":"Todos","area":"precos-promessas","priority":"P0","status":"pending","evidence":""},
+    {"id":"ALL-DAT-01","device":"Todos","area":"privacidade-diario","priority":"P0","status":"pending","evidence":""},
+    {"id":"ALL-PER-01","device":"Todos","area":"desempenho","priority":"P1","status":"pending","evidence":""},
+    {"id":"ALL-ERR-01","device":"Todos","area":"erros-console","priority":"P0","status":"pending","evidence":""},
+    {"id":"ALL-RED-01","device":"Todos","area":"movimento-reduzido","priority":"P1","status":"pending","evidence":""}
+  ]
+}
+
