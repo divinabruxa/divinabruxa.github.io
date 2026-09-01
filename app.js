@@ -12,6 +12,7 @@ import { SpreadsEngine } from './spreads-engine.js';
 import { JournalEngine } from './journal-engine.js';
 import { CommerceEngine } from './commerce-engine.js';
 import { ConsultationEngine } from './consultation-engine.js';
+import { StoreEngine } from './store-engine.js';
 import { MediaEngine } from './media-engine.js';
 import { AIEngine } from './ai-engine.js';
 import './tarot-image-runtime.js';
@@ -31,6 +32,7 @@ new SpreadsEngine($('#spreadGrid'), $('#spreadResult'), entry => journal.add(ent
 addEventListener('orbe:toast', event => toast(event.detail));
 new CommerceEngine({store:$('#storeApp'),consultations:$('#consultationApp'),subscriptions:$('#subscriptionApp')},CONFIG);
 new ConsultationEngine($('#consultationApp'));
+new StoreEngine($('#storeApp'),CONFIG);
 new MediaEngine({videos:$('#videoApp'),music:$('#musicApp')},CONFIG);
 new AIEngine($('#ai'),CONFIG);
 new PremiumEngine($('#subscriptionApp'));
