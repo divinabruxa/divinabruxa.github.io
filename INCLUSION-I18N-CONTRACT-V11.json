@@ -1,0 +1,11 @@
+{
+  "version":"V11",
+  "languages":["pt-BR","en","es"],
+  "sourceLanguage":"pt-BR",
+  "accessibility":{"wcagTarget":"AA","keyboardComplete":true,"screenReaderLabels":true,"textResize":true,"zoomSafe":true,"reducedMotion":true,"audioControl":true},
+  "media":{"captionsRequired":true,"transcriptRequired":true,"imageDescriptionRequired":true},
+  "localization":{"dateFormats":true,"numberFormats":true,"currencyFormats":true,"pluralRules":true,"mixedLanguageForbidden":true,"humanReview":true},
+  "editorialReview":["tarot-factual","language","inclusion","copyright","seo","mobile-readability"],
+  "translationStates":["not-started","machine-draft","human-review","approved","published"],
+  "fallback":"show-source-language-label"
+}

@@ -1,0 +1,12 @@
+DIVINA BRUXA V11 — INSTALAÇÃO DA MACROETAPA 24
+
+1. Adicione os arquivos na raiz do GitHub.
+2. No staging, execute: node inclusion-quality-guard-v11.mjs CAMINHO_DO_STAGING
+3. Teste teclado, VoiceOver, TalkBack, zoom, contraste e texto ampliado.
+4. Adicione legendas, transcrições e descrições às mídias reais.
+5. Mantenha PT-BR como fonte e marque traduções ainda não aprovadas.
+6. Revise datas, moedas, números e plurais em EN e ES.
+7. Proíba mistura de idiomas na mesma experiência publicada.
+8. Registre revisão de Tarot, linguagem, inclusão, direitos e SEO.
+9. Teste leitura em celular e fallback para idioma-fonte.
+10. A próxima etapa será segurança operacional, incidentes e continuidade.
