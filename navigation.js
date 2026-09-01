@@ -5,6 +5,7 @@ export function createNavigation() {
   const screens = [...document.querySelectorAll('.screen')];
   const home = document.querySelector('#home');
   const orbMenu = document.querySelector('#orbMenu');
+  const orbStage = home?.querySelector('.orb-stage-ref');
   const menuButton = document.querySelector('#menuBtn');
   const pathsButton = document.querySelector('#pathsBtn');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -54,6 +55,7 @@ export function createNavigation() {
   let motionToken = 0;
   let motionFrame = 0;
   let motionTimer = 0;
+  let stageMotion = null;
 
   const setCurrent = id => document.querySelectorAll('.magic-dock [data-go], .home-orb-menu [data-go]').forEach(button => {
     const current = button.dataset.go === id;
@@ -77,6 +79,8 @@ export function createNavigation() {
     motionToken += 1;
     cancelAnimationFrame(motionFrame);
     clearTimeout(motionTimer);
+    stageMotion?.cancel();
+    stageMotion = null;
     motionFrame = 0;
     motionTimer = 0;
   };
@@ -97,8 +101,33 @@ export function createNavigation() {
   };
 
   const settleMotion = token => {
-    const delay = reducedMotion.matches ? 0 : 540;
+    const delay = reducedMotion.matches ? 0 : 640;
     motionTimer = setTimeout(() => finishMotion(token), delay);
+  };
+
+  const glideOrbStage = (from, to, opening) => {
+    if (!orbStage || !from || !to || reducedMotion.matches) return;
+    const safeWidth = Math.max(to.width, 1);
+    const safeHeight = Math.max(to.height, 1);
+    const deltaX = from.left - to.left;
+    const deltaY = from.top - to.top;
+    const scaleX = Math.max(.01, from.width / safeWidth);
+    const scaleY = Math.max(.01, from.height / safeHeight);
+    const duration = opening ? 620 : 560;
+    const animation = orbStage.animate([
+      { transform: `translate3d(${deltaX}px,${deltaY}px,0) scale(${scaleX},${scaleY})` },
+      { transform: 'translate3d(0,0,0) scale(1,1)' }
+    ], {
+      duration,
+      easing: opening ? 'cubic-bezier(.16,.82,.22,1)' : 'cubic-bezier(.32,.72,.18,1)',
+      fill: 'both'
+    });
+    stageMotion = animation;
+    animation.onfinish = () => {
+      if (stageMotion !== animation) return;
+      animation.cancel();
+      stageMotion = null;
+    };
   };
 
   const resetOrbMenu = () => {
@@ -137,6 +166,9 @@ export function createNavigation() {
     if (open && !home.classList.contains('active')) go('home');
     if (open && !wantsMenuOpen) lastFocus = document.activeElement;
 
+    // Mede o quadro que a pessoa está vendo. Assim, até uma inversão rápida
+    // continua do ponto atual, como uma transição nativa do iOS.
+    const fromRect = orbStage?.getBoundingClientRect();
     cancelMotion();
     const token = motionToken;
     wantsMenuOpen = open;
@@ -152,6 +184,8 @@ export function createNavigation() {
     motionFrame = requestAnimationFrame(() => {
       if (token !== motionToken) return;
       home.classList.toggle('orb-menu-open', open);
+      const toRect = orbStage?.getBoundingClientRect();
+      glideOrbStage(fromRect, toRect, open);
       settleMotion(token);
     });
   };
