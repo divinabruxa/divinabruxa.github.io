@@ -1,0 +1,14 @@
+DIVINA BRUXA — MACROETAPA 7 / EXPERIÊNCIA PREMIUM V8
+
+STATUS: pacote pronto; gravação remota continua bloqueada pelo GitHub (HTTP 403).
+
+ORDEM:
+1. Carregar premium-experience-v8.css depois das camadas visuais.
+2. Carregar premium-experience-v8.js como módulo depois de app.js.
+3. Manter pagamento real desligado até a aprovação visual e o sandbox.
+
+INCLUI:
+- Apresentação honesta do Premium de R$ 199,90.
+- Benefícios concretos e conteúdo de valor.
+- Pagamento único, sem cobrança recorrente.
+- Nenhuma ativação de cobrança.
