@@ -1,0 +1,11 @@
+{
+  "version":"V10",
+  "catalogs":[
+    {"id":"music","name":"Música","status":"active","external":"Spotify","items":2},
+    {"id":"de-frente","name":"De Frente com o Tarot","status":"pilot","items":0},
+    {"id":"videos","name":"Vídeos","status":"planned","items":0},
+    {"id":"seasons","name":"Temporadas","status":"planned","items":0}
+  ],
+  "truthRule":"only published items appear to visitors",
+  "requiredForPublish":["cover","description","rights","accessibilityText","seoTitle","seoDescription"]
+}

@@ -1,0 +1,10 @@
+{
+  "version":"V10",
+  "states":["draft","in-review","approved","scheduled","published","updated","archived"],
+  "requiredFields":["id","title","description","author","language","publishedAt","updatedAt","status","cover","rights"],
+  "types":["article","card-lesson","season","episode","video","audio","meditation","workbook","interview"],
+  "languages":["pt-BR","en","es"],
+  "seasonMinimum":{"episodes":4,"hasIntro":true,"hasClosing":true,"hasAccessibleTranscript":true},
+  "mediaFallbacks":["poster","text-summary","external-link"],
+  "publishingRules":{"unpublishedHidden":true,"futureNotIndexed":true,"rightsRequired":true,"sitemapOnlyPublished":true}
+}

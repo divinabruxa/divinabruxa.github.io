@@ -1,0 +1,12 @@
+DIVINA BRUXA — INSTALAÇÃO DA MACROETAPA 13
+
+1. Adicione os arquivos na raiz do GitHub.
+2. Não marque vídeos ou episódios como publicados sem arquivo real.
+3. No staging, execute: node editorial-media-guard-v10.mjs CAMINHO_DO_STAGING
+4. Cadastre autores, direitos, idioma, capa, descrição e acessibilidade.
+5. Monte uma temporada piloto com introdução, quatro episódios e encerramento.
+6. Inclua transcrição ou resumo acessível em cada mídia relevante.
+7. Teste Spotify indisponível, vídeo sem conexão e imagem social ausente.
+8. Mantenha itens futuros fora do sitemap e da busca pública.
+9. Publique com revisão editorial humana.
+10. A próxima etapa será Conta, backend, autenticação e privacidade de produção.
