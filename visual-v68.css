@@ -339,3 +339,20 @@ main{position:relative;z-index:1}
     transform:translate3d(0,-5svh,0)!important;
   }
 }
+
+/* Enquadramento do novo título: mantém o nome inteiro dentro do visor. */
+@media(max-width:700px) and (orientation:portrait){
+  .home-copy h1{
+    width:calc(100% - 24px)!important;
+    max-width:390px!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    font-size:clamp(35px,10vw,54px)!important;
+    line-height:.96!important;
+    letter-spacing:-.035em!important;
+    white-space:normal!important;
+    overflow-wrap:normal!important;
+    text-align:center!important;
+  }
+  .home-copy h1 span{margin-left:4px!important}
+}
