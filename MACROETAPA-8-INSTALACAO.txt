@@ -1,0 +1,14 @@
+DIVINA BRUXA — MACROETAPA 8 / ESCOLA PROFUNDA V8
+
+STATUS: pacote pronto; GitHub continua bloqueando gravações por HTTP 403.
+
+ORDEM:
+1. Carregar school-experience-v8.css depois das camadas visuais.
+2. Carregar school-experience-v8.js como módulo depois de app.js.
+3. Manter os 17 módulos e o motor school-engine.js existentes.
+
+INCLUI:
+- Ritual visual de aprendizagem.
+- Caminho Conhecer → Praticar → Integrar.
+- Continuidade visual para a Escola.
+- Nenhuma alteração nas 78 cartas ou nas regras do Tarot.
