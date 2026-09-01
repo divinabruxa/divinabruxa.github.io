@@ -1,0 +1,26 @@
+DIVINA BRUXA — MACROETAPA 28 / CORREÇÕES E REGRESSÃO SUPREMA
+
+ARQUIVOS SUBSTITUÍDOS
+- skin-universal-v8.js
+- orb-skin-bridge-v8.js
+- divina-v8-loader.js
+- INDEX-SNIPPET-V8.txt
+
+ARQUIVO NOVO
+- CORRECTIONS-REPORT-V8.28.txt
+
+INSTALAÇÃO
+1. Substitua os quatro arquivos acima na raiz da branch de teste.
+2. Confirme que o index.html usa exatamente o snippet V8.28.
+3. Não remova CNAME, cartas, imagens, menu ou motor original da orbe.
+4. Limpe o cache e teste a troca de skins.
+5. Execute node qa-supreme-v8.mjs.
+6. Execute node release-gate-v8.mjs.
+
+RETORNO SEGURO
+Se houver regressão, retire somente a linha do loader V8.28 do index.html e
+recoloque a linha anterior. Nenhum arquivo original precisa ser excluído.
+
+ESTADO
+Correções preventivas aplicadas. A aprovação final permanece dependente dos
+testes reais e das evidências da Macroetapa 27.

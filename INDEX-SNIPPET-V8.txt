@@ -2,7 +2,7 @@ DIVINA BRUXA — LINHA ÚNICA PARA ATIVAR O PACOTE V8
 
 Adicione esta linha no index.html imediatamente antes de </body>:
 
-<script type="module" src="divina-v8-loader.js?v=8.23"></script>
+<script type="module" src="divina-v8-loader.js?v=8.28"></script>
 
 Não remova os scripts atuais.
 Não altere CNAME.

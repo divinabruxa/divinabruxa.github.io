@@ -1,0 +1,31 @@
+DIVINA BRUXA — RELATÓRIO DE CORREÇÕES PREVENTIVAS V8.28
+
+CORRIGIDO NO CÓDIGO
+1. Corrida inicial entre o motor universal de skins e a ponte das orbes.
+2. Orbes adicionadas depois do carregamento agora recebem a skin ativa.
+3. Imagem de skin ausente recebe fallback para a Orbe Clássica Divina.
+4. Seleções de versões antigas podem migrar por chaves legadas conhecidas.
+5. Componentes com data-orbe e data-orb entram na sincronização universal.
+6. Elemento de aviso da Orbe IA deixou de ser tratado incorretamente como orbe.
+7. Observadores dinâmicos agora são agrupados por frame para evitar excesso.
+8. CSS passa a carregar em paralelo, reduzindo o tempo de preparação visual.
+9. O loader não inicializa duas vezes se for incluído novamente.
+10. Mensagens de falha de módulos agora identificam a causa encontrada.
+
+REGRESSÃO AUTOMATIZADA
+- Sintaxe JavaScript.
+- Integridade dos CSS.
+- Presença e referência de todos os módulos.
+- Pacote sem cartas e sem CNAME.
+- Portão de produção preservado.
+
+AINDA DEPENDE DE APARELHOS REAIS
+- Resposta tátil e fluidez percebida no iPhone.
+- Comportamento PWA e botão voltar no Android.
+- VoiceOver, TalkBack e leitores de tela.
+- Legibilidade de cada uma das 30 skins nas páginas reais.
+- Capturas e vídeos definidos na Macroetapa 27.
+
+CLASSIFICAÇÃO
+CORREÇÕES PREVENTIVAS CONCLUÍDAS / REGRESSÃO REAL PENDENTE.
+
