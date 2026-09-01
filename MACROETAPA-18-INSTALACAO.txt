@@ -1,0 +1,15 @@
+DIVINA BRUXA — MACROETAPA 18 / ADMIN CÓSMICO V8
+
+STATUS: pacote pronto; GitHub continua bloqueando gravações por HTTP 403.
+
+ORDEM:
+1. Carregar admin-experience-v8.css depois das camadas visuais.
+2. Carregar admin-experience-v8.js como módulo depois de app.js.
+3. Manter admin-engine.js e admin-policy.js.
+4. Admin real continua desligado até autenticação segura com MFA.
+
+INCLUI:
+- Visão dos principais módulos administrativos.
+- Separação entre operação e conteúdo privado.
+- Nenhum login administrativo falso.
+- Diário individual nunca exibido no Admin.
