@@ -1,0 +1,15 @@
+DIVINA BRUXA — MACROETAPA 6 / CONTEÚDO VIVO V8
+
+STATUS: pacote pronto; GitHub continua bloqueando gravações por HTTP 403.
+
+ORDEM:
+1. Carregar daily-return-v8.css depois das camadas visuais.
+2. Carregar daily-return-v8.js como módulo depois de app.js.
+3. Atualizar o service worker após a validação.
+
+COMPORTAMENTO:
+- Exibe um sussurro editorial diferente a cada dia.
+- Usa a data de Brasília.
+- Não revela a Carta do Dia.
+- Funciona offline e sem conta.
+- Não altera o motor das cartas.
