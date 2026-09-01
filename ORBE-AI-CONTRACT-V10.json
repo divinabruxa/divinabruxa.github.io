@@ -1,0 +1,11 @@
+{
+  "version":"V10",
+  "subscription":{"id":"orbe-ai-monthly","priceBRL":89.90,"credits":400},
+  "modes":{"luna":{"credits":1,"enabled":true},"terra":{"credits":10,"enabled":true},"sol":{"credits":0,"enabled":false}},
+  "topups":[{"credits":200,"priceBRL":39.90},{"credits":600,"priceBRL":99.90},{"credits":1500,"priceBRL":199.90}],
+  "ledger":{"immutable":true,"idempotency":true,"balanceDerived":true,"requiresReason":true},
+  "limits":{"dailyCredits":100,"requestsPerMinute":6,"maxContextTokens":6000,"timeoutMs":30000},
+  "privacy":{"diaryRequiresConsent":true,"sensitiveContentExcludedFromLogs":true,"historyDelete":true},
+  "controls":{"extraCreditConfirmation":true,"killSwitch":true,"costAlerts":true,"solEnabled":false},
+  "disclaimer":"reflexão simbólica; não substitui profissionais de saúde, jurídicos ou financeiros"
+}

@@ -1,0 +1,12 @@
+DIVINA BRUXA — INSTALAÇÃO DA MACROETAPA 17
+
+1. Adicione os arquivos na raiz do GitHub.
+2. Eles não contêm chaves nem ativam uma API de IA.
+3. No staging, execute: node ai-cost-guard-v10.mjs CAMINHO_DO_STAGING
+4. Conecte a IA somente por backend seguro, nunca diretamente no navegador com segredo.
+5. Implemente ledger transacional e idempotente antes de liberar chats.
+6. Teste Luna, Terra, saldo insuficiente, limite diário, duplicidade e kill switch.
+7. Exija confirmação antes de usar créditos extras.
+8. Remova Diário e dados sensíveis do prompt sem consentimento explícito.
+9. Mantenha Sol desativado.
+10. A próxima etapa será Consultas, Loja e fluxos comerciais completos.
