@@ -1,0 +1,17 @@
+DIVINA BRUXA — PROPRIETÁRIOS FUNCIONAIS DOS ARQUIVOS
+
+ORBE E MENU: identidade visual / experiência principal
+TAROT: 78 cartas diretas, sem invertidas
+CARTA DO DIA: uma carta por dia no fuso de Brasília
+TIRAGENS: posições, cartas únicas, síntese e histórico
+ESCOLA: aulas, exercícios, testes e progresso
+DIÁRIO: privacidade, autosave, exportação e espelho agregado
+SKINS: tema universal de todas as orbes e superfícies
+PREMIUM: conteúdo pago e direitos de acesso
+IA: créditos, limites, custos e segurança
+COMÉRCIO: pagamentos, consultas e loja
+PWA: instalação, cache, offline e atualização
+PRIVACIDADE: LGPD, consentimento e exclusão
+QUALIDADE: testes, evidências e bloqueios de release
+
+Regra: um arquivo pode apoiar vários domínios, mas apenas um domínio é responsável por sua decisão funcional.

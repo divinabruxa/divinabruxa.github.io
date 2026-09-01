@@ -1,0 +1,10 @@
+DIVINA BRUXA — INSTALAÇÃO DA MACROETAPA 2
+
+1. Adicione os arquivos deste ZIP na raiz do GitHub.
+2. Eles são manifestos, contratos e verificadores; não substituem o app público sozinhos.
+3. No staging, execute: node structure-audit-v10.mjs CAMINHO_DO_STAGING
+4. Confira os imports ausentes indicados pelo relatório.
+5. Resolva a duplicidade de MediaEngine antes de integrar novas experiências.
+6. Não apague arquivos V8/V9 nesta etapa.
+7. Registre a decisão de cada arquivo como ATIVO, ADORMECIDO ou OBSOLETO.
+8. Somente depois do gate PASS avance para a Macroetapa 3, de performance e imagens.

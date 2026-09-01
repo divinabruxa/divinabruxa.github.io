@@ -1,0 +1,21 @@
+{
+  "version": "V10",
+  "entrypoint": "app.js",
+  "policy": "one-responsibility-one-owner",
+  "runtimeDomains": {
+    "navigation": ["navigation.js"],
+    "orb": ["orb-engine-v68.js", "mini-orb-engine.js"],
+    "tarot": ["tarot-engine.js", "tarot-image-runtime.js", "ritual-engine.js"],
+    "learning": ["card-library-engine.js", "school-engine.js"],
+    "journal": ["journal-engine.js", "rhythm-v6.js"],
+    "commerce": ["commerce-engine.js", "premium-engine.js", "consultation-engine.js", "store-engine.js"],
+    "media": ["media-engine-v5.js"],
+    "platform": ["notification-engine.js", "pwa-engine.js", "privacy-engine.js", "trust-engine.js"],
+    "auth": ["auth-client-v6.js"],
+    "ai": ["ai-engine.js"],
+    "visual": ["visual-guard-v6.js", "tarot-experience-v6.js", "skins-v6.js", "performance-v6.js"]
+  },
+  "knownDuplicateToResolve": ["media-engine.js", "media-engine-v5.js"],
+  "forbiddenRuntimeImports": ["divina-v8-loader.js", "orb-skin-bridge-v9.js", "performance-runtime-v9.js"],
+  "requiredChecks": ["no-circular-imports", "no-duplicate-engine", "all-imports-resolve", "single-entrypoint"]
+}
