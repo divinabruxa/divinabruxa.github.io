@@ -1,0 +1,8 @@
+/* Divina Bruxa — base mobile segura V10. Integrar após teste visual. */
+:root { --db-safe-top: env(safe-area-inset-top, 0px); --db-safe-right: env(safe-area-inset-right, 0px); --db-safe-bottom: env(safe-area-inset-bottom, 0px); --db-safe-left: env(safe-area-inset-left, 0px); }
+body { padding-left: var(--db-safe-left); padding-right: var(--db-safe-right); }
+button, a, input, select, textarea { min-height: 44px; }
+img { max-width: 100%; height: auto; }
+:focus-visible { outline: 2px solid var(--db-gold-soft, #f6d996); outline-offset: 3px; }
+[aria-live] { min-height: 1.5em; }
+@media (max-width: 600px) { main { overflow-x: clip; } .app-header { padding-top: max(.75rem, var(--db-safe-top)); } .bottom-dock, .dock { padding-bottom: max(.5rem, var(--db-safe-bottom)); } }

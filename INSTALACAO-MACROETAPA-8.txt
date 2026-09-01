@@ -1,0 +1,12 @@
+DIVINA BRUXA — INSTALAÇÃO DA MACROETAPA 8
+
+1. Adicione os arquivos na raiz do GitHub.
+2. Não substitua manifest ou service worker sem backup.
+3. No staging, execute: node mobile-a11y-guard-v10.mjs CAMINHO_DO_STAGING
+4. Teste larguras 320, 375, 390, 430 e desktop.
+5. Teste iPhone Safari, Android Chrome, VoiceOver, TalkBack e teclado.
+6. Confirme que o dock não cobre textos ou botões.
+7. Instale o PWA em uma sessão limpa e teste atualização e offline.
+8. Confirme que IA e pagamentos informam corretamente quando estão offline.
+9. Registre screenshots e vídeos curtos dos testes.
+10. A próxima etapa será a Constelação de Hoje e o ciclo diário de retorno.

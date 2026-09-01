@@ -1,0 +1,12 @@
+{
+  "version": "V10",
+  "viewportMinWidth": 320,
+  "touchTargetMinPx": 44,
+  "contrast": "WCAG-AA",
+  "safeAreas": ["top","right","bottom","left"],
+  "offlineAllowed": ["home-shell","free-tarot","revealed-daily-card","local-journal","downloaded-school","selected-skins"],
+  "offlineBlocked": ["orbe-ai","checkout","restore-purchase","consultation-submit"],
+  "requiredManifestFields": ["name","short_name","start_url","display","icons","theme_color","background_color"],
+  "requiredAnnouncements": ["card-revealed","loading","success","error"],
+  "deviceMatrix": ["iphone-safari","android-chrome","desktop-chrome","desktop-safari","desktop-firefox"]
+}
