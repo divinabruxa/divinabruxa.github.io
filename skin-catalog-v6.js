@@ -8,3 +8,4 @@ SKINS_V6=Object.freeze([...SKINS_V6,{id:'cosmic-dragon',name:'Dragão Cósmico',
 SKINS_V6=Object.freeze([...SKINS_V6,{id:'lunar-rose',name:'Rosa Lunar',priceCents:4490,index:25,status:'planned',cosmeticOnly:true}]);
 SKINS_V6=Object.freeze([...SKINS_V6,{id:'saturn-crystal',name:'Cristal de Saturno',priceCents:4990,index:26,status:'planned',cosmeticOnly:true}]);
 SKINS_V6=Object.freeze([...SKINS_V6,{id:'violet-phoenix',name:'Fênix Violeta',priceCents:5490,index:27,status:'planned',cosmeticOnly:true}]);
+SKINS_V6=Object.freeze([...SKINS_V6,{id:'celestial-oracle',name:'Oráculo Celestial',priceCents:5990,index:28,status:'planned',cosmeticOnly:true}]);
