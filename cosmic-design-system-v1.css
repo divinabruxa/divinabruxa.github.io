@@ -1,0 +1,7 @@
+:root{--cosmic-gold:#f3d38a;--cosmic-line:rgba(243,211,138,.42);--cosmic-ease:cubic-bezier(.22,1,.36,1)}
+.screen:not(#home) .path-sigil,.screen:not(#home) .spread-symbol,.screen:not(#home) .module-icon,.screen:not(#home) .service-glyph{background:radial-gradient(circle,rgba(184,108,255,.35),rgba(18,5,31,.94) 70%);border:1px solid var(--cosmic-line);box-shadow:0 0 18px rgba(184,108,255,.22);color:var(--cosmic-gold);transition:transform .24s var(--cosmic-ease),box-shadow .24s var(--cosmic-ease)}
+.screen:not(#home) .path-sigil:hover,.screen:not(#home) .spread-symbol:hover,.screen:not(#home) .module-icon:hover,.screen:not(#home) .service-glyph:hover{transform:translateY(-2px) scale(1.04);box-shadow:0 0 26px rgba(184,108,255,.5)}
+.screen:not(#home) button:active{transform:scale(.96)}
+.screen:not(#home) button:focus-visible,.screen:not(#home) a:focus-visible{outline:2px solid var(--cosmic-gold);outline-offset:3px}
+.screen:not(#home) svg{shape-rendering:geometricPrecision;vector-effect:non-scaling-stroke}
+@media (prefers-reduced-motion:reduce){.screen:not(#home) *{transition-duration:.01ms!important;animation-duration:.01ms!important}}

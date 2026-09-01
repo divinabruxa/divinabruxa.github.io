@@ -1,0 +1,2 @@
+export const COSMIC_ICON_PATHS={home:'<path d="M3 11 12 3l9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',star:'<path d="m12 3 2.2 5.3L20 10l-5.8 1.7L12 17l-2.2-5.3L4 10l5.8-1.7z"/>',video:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3z"/>'};
+export function createCosmicIcon(name,{label}={}){const s=document.createElementNS('http://www.w3.org/2000/svg','svg');s.setAttribute('viewBox','0 0 24 24');s.setAttribute('aria-hidden',label?'false':'true');s.innerHTML=COSMIC_ICON_PATHS[name]||COSMIC_ICON_PATHS.star;return s}
