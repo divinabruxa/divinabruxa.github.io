@@ -71,5 +71,6 @@ if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWor
 const pagesStyle=document.createElement('link');pagesStyle.rel='stylesheet';pagesStyle.href='./pages-v6.css';document.head.appendChild(pagesStyle);
 const atmosphereStyle=document.createElement('link');atmosphereStyle.rel='stylesheet';atmosphereStyle.href='./pages-atmosphere-v6.css';document.head.appendChild(atmosphereStyle);
 const polishStyle=document.createElement('link');polishStyle.rel='stylesheet';polishStyle.href='./content-polish-v6.css';document.head.appendChild(polishStyle);
+const dockStyle=document.createElement('link');dockStyle.rel='stylesheet';dockStyle.href='./dock-polish-v6.css';document.head.appendChild(dockStyle);
 const skinsHeading=document.querySelector('#skins h2');if(skinsHeading)skinsHeading.textContent='Trinta formas de sentir o universo.';
 window.orbe={go};
