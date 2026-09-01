@@ -1,0 +1,10 @@
+{
+  "version":"V10",
+  "product":{"id":"divina-premium-lifetime","priceBRL":199.90,"billing":"one-time","includesAI":false},
+  "free":["home-orb","menu","free-tarot","daily-card","library-essential","intro-spreads","school-intro","local-diary","classic-skin"],
+  "premium":["academy-17-modules","card-lessons-78","flashcards","quizzes","error-review","spreads-24-plus","custom-spread-builder","advanced-real-table","mirror-advanced","offline-content","skins-30","seasonal-workbooks"],
+  "entitlementStates":["unknown","active","pending","grace","refunded","revoked","expired"],
+  "restore":{"crossDevice":true,"requiresAccount":true,"idempotent":true},
+  "ai":{"included":false,"separateProduct":"orbe-ai-monthly"},
+  "truthRule":"only grant features present in the active entitlement"
+}

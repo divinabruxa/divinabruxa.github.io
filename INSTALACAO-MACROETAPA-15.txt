@@ -1,0 +1,12 @@
+DIVINA BRUXA — INSTALAÇÃO DA MACROETAPA 15
+
+1. Adicione os arquivos na raiz do GitHub.
+2. Não anuncie benefícios que ainda não estejam publicados.
+3. No staging, execute: node premium-value-guard-v10.mjs CAMINHO_DO_STAGING
+4. Monte uma comparação clara entre gratuito e Premium.
+5. Teste usuário gratuito, Premium ativo, pendente, reembolso e restauração.
+6. Confirme que a Orbe IA permanece fora do Premium vitalício.
+7. Valide todos os 17 módulos, 78 aulas, tiragens e skins antes de cobrar.
+8. Mostre política de reembolso e estado da licença antes do checkout.
+9. Não habilite cobrança real nesta macroetapa.
+10. A próxima etapa será Billing sandbox, Checkout e webhooks idempotentes.
