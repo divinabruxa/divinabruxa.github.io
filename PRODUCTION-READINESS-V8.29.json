@@ -1,0 +1,63 @@
+{
+  "project": "Divina Bruxa — Orbe das Realidades",
+  "version": "8.29",
+  "environment": "staging",
+  "architecture": {
+    "frontend": "GitHub Pages",
+    "backendRequired": true,
+    "secretsAllowedInRepository": false,
+    "stagingProductionSeparated": false
+  },
+  "supabase": {
+    "stagingProjectConfigured": false,
+    "productionProjectConfigured": false,
+    "rlsDefaultDenyVerified": false,
+    "ownerMfaVerified": false,
+    "journalBodyPrivateVerified": false,
+    "backupRestoreTested": false,
+    "serviceRoleStoredServerSide": false
+  },
+  "stripe": {
+    "mode": "sandbox",
+    "checkoutSessionsConfigured": false,
+    "billingSubscriptionConfigured": false,
+    "customerPortalConfigured": false,
+    "restrictedServerKeyConfigured": false,
+    "webhookSignatureVerified": false,
+    "webhookIdempotencyVerified": false,
+    "restoreRefundRevocationTested": false,
+    "taxAndAccountingReviewed": false
+  },
+  "products": {
+    "premiumOneTimeBRL": 199.90,
+    "orbeAiMonthlyBRL": 89.90,
+    "orbeAiCredits": 400,
+    "lunaCreditCost": 1,
+    "terraCreditCost": 10,
+    "solEnabled": false
+  },
+  "legal": {
+    "controllerIdentified": false,
+    "privacyChannelApproved": false,
+    "privacyPolicyApproved": false,
+    "termsApproved": false,
+    "commercialAndRefundRulesApproved": false,
+    "ageAssuranceApproved": false
+  },
+  "operations": {
+    "errorMonitoringConfigured": false,
+    "alertsConfigured": false,
+    "analyticsConsentVerified": false,
+    "incidentRunbookApproved": false,
+    "supportFlowTested": false
+  },
+  "authorizations": {
+    "stagingApproved": false,
+    "ownerApproved": false,
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false
+  }
+}
+

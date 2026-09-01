@@ -1,0 +1,48 @@
+DIVINA BRUXA — ARQUITETURA SEGURA DE PRODUÇÃO V8.29
+
+FRONTEND PÚBLICO — GITHUB PAGES
+- HTML, CSS, JavaScript e imagens públicas.
+- Chave pública/publishable somente quando tecnicamente apropriada.
+- Nunca contém Stripe secret/restricted key, webhook secret ou service_role.
+- Nunca concede Premium, créditos ou assinatura apenas pelo navegador.
+
+BACKEND SEGURO — OBRIGATÓRIO
+- Supabase Auth, banco com RLS e funções de servidor/Edge Functions.
+- Criação de Checkout Sessions no servidor.
+- Verificação de assinatura dos webhooks antes do processamento.
+- Ledger imutável para créditos e uso da Orbe IA.
+- Idempotência para não conceder produto ou crédito duas vezes.
+- Logs sem perguntas privadas, texto do diário, tokens ou segredos.
+
+SUPABASE
+- Projetos STAGING e produção completamente separados.
+- RLS ativado em toda tabela de schema exposto; default deny.
+- Políticas com propriedade real: auth.uid() = user_id.
+- UPDATE exige USING e WITH CHECK.
+- user_metadata nunca decide autorização; usar app_metadata quando necessário.
+- Views com security_invoker ou fora do schema exposto.
+- service_role somente no backend; nunca no GitHub ou aplicativo.
+- MFA obrigatória para a conta proprietária/admin.
+
+STRIPE
+- Checkout Sessions para Premium de compra única.
+- Billing + Checkout Sessions para a assinatura mensal da Orbe IA.
+- Customer Portal para gerenciamento da assinatura.
+- Métodos de pagamento dinâmicos, sem lista fixa no código.
+- Chave restrita com menor privilégio possível, armazenada no servidor.
+- Webhooks assinados, idempotentes e separados por ambiente.
+- Restore, reembolso, cancelamento e revogação alteram entitlements corretamente.
+- Tributos só podem ser ativados depois de revisão e registros aplicáveis.
+
+ORBE IA
+- R$89,90/mês, 400 créditos.
+- Luna: 1 crédito; Terra: 10 créditos; Sol: desativado.
+- Débito atômico no servidor, nunca apenas no localStorage.
+- Limite, auditoria, kill switch e confirmação antes de comprar extras.
+
+DIÁRIO E PRIVACIDADE
+- Privado por padrão.
+- Admin não acessa o corpo das entradas.
+- Analytics nunca recebe o texto.
+- IA não recebe conteúdo sem ação clara e consentimento da usuária.
+

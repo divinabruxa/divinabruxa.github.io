@@ -1,0 +1,37 @@
+DIVINA BRUXA — RUNBOOK PRÉ-LANÇAMENTO V8.29
+
+FASE 1 — STAGING
+1. Instalar o frontend somente na branch de teste.
+2. Configurar Supabase STAGING e Stripe sandbox.
+3. Executar migrações, RLS, Auth, MFA e webhooks de teste.
+4. Validar compra, assinatura, cancelamento, reembolso e créditos.
+5. Executar homologação da Macroetapa 27 nos três tipos de aparelho.
+6. Corrigir e repetir até P0=0 e P1=0.
+
+FASE 2 — SEGURANÇA E PRIVACIDADE
+1. Rodar auditoria de RLS e dependências.
+2. Confirmar ausência de segredos no histórico do repositório.
+3. Restaurar backup de teste.
+4. Validar Diário, exportação e exclusão.
+5. Aprovar termos, privacidade, suporte e regras comerciais.
+
+FASE 3 — DECISÃO
+1. Executar node qa-supreme-v8.mjs.
+2. Executar node regression-v8.28.mjs.
+3. Executar node release-gate-v8.mjs --enforce.
+4. Executar node production-readiness-v8.mjs --enforce.
+5. Registrar aprovação da proprietária e evidências.
+
+FASE 4 — PRODUÇÃO, SOMENTE COM AUTORIZAÇÃO EXPLÍCITA
+1. Criar ambiente de produção separado.
+2. Configurar segredos diretamente no cofre do backend.
+3. Fazer implantação controlada e smoke test.
+4. Ativar cobrança real somente após validação financeira e jurídica.
+5. Monitorar erros, pagamentos, webhooks e suporte.
+
+RETORNO
+- Frontend: remover somente o loader V8.28 ou reverter o commit de implantação.
+- Backend: desativar funções afetadas e preservar evidências.
+- Billing: pausar novos checkouts; nunca apagar eventos ou ledger.
+- Incidente com chave: revogar/rotacionar imediatamente e auditar atividade.
+

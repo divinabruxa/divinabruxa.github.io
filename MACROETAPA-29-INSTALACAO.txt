@@ -1,0 +1,28 @@
+DIVINA BRUXA — MACROETAPA 29 / PREPARAÇÃO SEGURA DE PRODUÇÃO
+
+INCLUI
+- Arquitetura segura para GitHub Pages + backend.
+- Configuração pública de prontidão, sem credenciais.
+- Validador de produção e detector de segredos comuns.
+- Mapa de variáveis por ambiente.
+- Checklist Supabase, Stripe, privacidade e operações.
+- Runbook de lançamento e retorno.
+
+VALIDAÇÃO
+- node production-readiness-v8.mjs
+- node production-readiness-v8.mjs --enforce
+
+RESULTADO ESPERADO AGORA
+BLOCKED. O frontend está preparado, mas Supabase, Stripe sandbox, jurídico,
+monitoramento, homologação real e autorizações continuam pendentes.
+
+PROIBIDO NESTA ETAPA
+- Colocar segredos no ZIP ou GitHub.
+- Ativar pagamento real.
+- Alterar DNS.
+- Publicar produção.
+- Habilitar o modo Sol da Orbe IA.
+
+PRÓXIMA E ÚLTIMA MACROETAPA
+Macroetapa 30 — QA final e ZIP definitivo, mantendo todas as pendências externas
+descritas com honestidade.

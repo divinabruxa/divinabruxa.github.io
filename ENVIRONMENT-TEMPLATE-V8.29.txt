@@ -1,0 +1,31 @@
+DIVINA BRUXA — MAPA DE VARIÁVEIS V8.29
+
+ESTE ARQUIVO É UM MAPA. NÃO COLOQUE VALORES REAIS AQUI E NÃO ENVIE
+SEGREDOS PARA O GITHUB.
+
+FRONTEND PÚBLICO
+PUBLIC_APP_ENV=<staging-ou-production>
+PUBLIC_SITE_URL=<url-publica>
+PUBLIC_SUPABASE_URL=<url-do-projeto-correto>
+PUBLIC_SUPABASE_PUBLISHABLE_KEY=<chave-publicavel>
+PUBLIC_STRIPE_PUBLISHABLE_KEY=<chave-publicavel-do-ambiente>
+
+BACKEND / COFRE DE SEGREDOS — NUNCA NO FRONTEND
+SUPABASE_SERVER_SECRET=<configurar-no-cofre-do-backend>
+STRIPE_RESTRICTED_SERVER_KEY=<configurar-no-cofre-do-backend>
+STRIPE_WEBHOOK_SIGNING_SECRET=<configurar-no-cofre-do-backend>
+AI_PROVIDER_SECRET=<configurar-no-cofre-do-backend>
+
+IDENTIFICADORES DE PRODUTOS — SEPARADOS POR AMBIENTE
+STRIPE_PREMIUM_PRICE_ID=<id-da-compra-unica>
+STRIPE_ORBE_AI_MONTHLY_PRICE_ID=<id-da-assinatura>
+STRIPE_CREDITS_200_PRICE_ID=<id-do-pacote>
+STRIPE_CREDITS_600_PRICE_ID=<id-do-pacote>
+STRIPE_CREDITS_1500_PRICE_ID=<id-do-pacote>
+
+REGRAS
+- STAGING nunca usa identificadores, banco, usuários ou webhook de produção.
+- Produção nunca reutiliza dados de teste.
+- Segredos não aparecem em logs, capturas, suporte, analytics ou mensagens.
+- Uma chave vazada deve ser revogada imediatamente e os logs auditados.
+

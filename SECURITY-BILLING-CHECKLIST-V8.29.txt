@@ -1,0 +1,50 @@
+DIVINA BRUXA — CHECKLIST DE SEGURANÇA E COBRANÇA V8.29
+
+IDENTIDADE E BANCO
+[ ] Projeto STAGING separado do projeto de produção.
+[ ] RLS default deny em todas as tabelas expostas.
+[ ] Usuário acessa somente seus próprios dados.
+[ ] Admin único com MFA e auditoria.
+[ ] Diário privado; corpo invisível no admin e nas métricas.
+[ ] Exclusão, exportação e retenção testadas.
+[ ] Backup restaurado em ambiente seguro pelo menos uma vez.
+
+PREMIUM E ORBE IA — SANDBOX
+[ ] Premium configurado como compra única de R$199,90.
+[ ] Premium não concede Orbe IA.
+[ ] Orbe IA configurada como assinatura de R$89,90/mês.
+[ ] Assinatura concede exatamente 400 créditos conforme regra aprovada.
+[ ] Luna debita 1; Terra debita 10; Sol permanece OFF.
+[ ] Pacotes extras usam IDs separados e confirmação clara.
+[ ] Checkout é criado apenas pelo backend.
+[ ] Customer Portal gerencia assinatura e método de pagamento.
+
+WEBHOOKS E ENTITLEMENTS
+[ ] Assinatura verificada antes de processar cada evento.
+[ ] Evento duplicado não concede novamente produto ou créditos.
+[ ] Ordem atrasada de eventos não restaura acesso indevido.
+[ ] Reembolso e revogação removem direitos conforme regra comercial.
+[ ] Falha de renovação entra no fluxo de recuperação correto.
+[ ] Conciliação compara Stripe, banco e ledger.
+
+SEGREDOS
+[ ] Nenhuma chave secreta no GitHub, frontend, PWA ou aplicativo.
+[ ] Chave restrita por serviço e com menor privilégio possível.
+[ ] Chaves e webhooks diferentes em STAGING e produção.
+[ ] Política de rotação e resposta a incidente testada.
+[ ] Logs e erros nunca imprimem variáveis do ambiente.
+
+JURÍDICO E TRIBUTÁRIO
+[ ] Controlador, endereço e canal de privacidade definidos.
+[ ] Termos, privacidade, reembolso e consultas aprovados.
+[ ] Idade 18+ e mecanismo aplicável aprovados.
+[ ] Contabilidade e incidência tributária revisadas.
+[ ] Cobrança automática de tributos não é ligada sem registros aplicáveis.
+
+AUTORIZAÇÃO
+[ ] STAGING APROVADO.
+[ ] Proprietária aprovou QA e experiência.
+[ ] Autorização separada para produção registrada.
+[ ] Autorização separada para cobrança real registrada.
+[ ] Autorização separada para DNS e lojas registrada.
+
