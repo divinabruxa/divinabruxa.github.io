@@ -1,0 +1,11 @@
+DIVINA BRUXA — INSTALAÇÃO DA MACROETAPA 4
+
+1. Adicione os arquivos deste ZIP na raiz do GitHub.
+2. Não inclua o CSS no index.html ainda; primeiro valide no staging.
+3. Execute: node design-system-audit-v10.mjs CAMINHO_DO_STAGING
+4. Compare as cores com a Home aprovada antes de integrar.
+5. O contrato de skins define as sete superfícies que deverão acompanhar cada tema.
+6. Todo controle interativo precisa ter foco visível e área mínima de 44 px.
+7. Movimento reduzido e áudio desligado por padrão são obrigatórios.
+8. Só avance após aprovação visual em celular e desktop.
+9. A próxima etapa será o Sistema Universal das 30 Skins.

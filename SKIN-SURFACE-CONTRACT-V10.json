@@ -1,0 +1,12 @@
+{
+  "version": "V10",
+  "skinCount": 30,
+  "surfaces": ["main-orb","menu-orb","header-mini-orb","dock-orb","tarot-table-orb","contextual-orb","loading-orb"],
+  "requiredTokens": ["accent","accentSoft","glow","background","panel","text","particleColor"],
+  "states": ["default","hover","focus","pressed","loading","reduced-motion"],
+  "responsiveWidths": [64,128,256,512,1024],
+  "assertionsPerSkin": 42,
+  "totalVisualAssertions": 1260,
+  "fallback": "Orbe Clássica Divina",
+  "rule": "skin selection changes all orb surfaces without recreating the application runtime"
+}

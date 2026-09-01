@@ -1,0 +1,42 @@
+/* Divina Bruxa — Sistema Cósmico V10. Importar somente após revisão em staging. */
+:root {
+  --db-void: #05020b;
+  --db-night: #0d0620;
+  --db-nebula: #211044;
+  --db-violet: #7548c8;
+  --db-orchid: #bd83ff;
+  --db-gold: #e6b85c;
+  --db-gold-soft: #f6d996;
+  --db-ink: #f8f1ff;
+  --db-muted: #c4b6d8;
+  --db-glass: rgba(18, 9, 40, .72);
+  --db-line: rgba(230, 184, 92, .25);
+  --db-glow: 0 0 26px rgba(189, 131, 255, .34), 0 0 72px rgba(230, 184, 92, .14);
+  --db-shadow: 0 18px 60px rgba(0, 0, 0, .46);
+  --db-radius-sm: 12px;
+  --db-radius-md: 22px;
+  --db-radius-lg: 34px;
+  --db-space-1: .5rem;
+  --db-space-2: .75rem;
+  --db-space-3: 1rem;
+  --db-space-4: 1.5rem;
+  --db-space-5: 2.25rem;
+  --db-space-6: 3.5rem;
+  --db-font-display: "Cinzel", "Cormorant Garamond", Georgia, serif;
+  --db-font-body: Inter, system-ui, -apple-system, sans-serif;
+  --db-ease-cosmic: cubic-bezier(.22,.8,.2,1);
+  --db-duration-fast: 180ms;
+  --db-duration-ritual: 680ms;
+}
+
+.db-cosmic-surface { background: linear-gradient(145deg, var(--db-glass), rgba(8,3,20,.88)); border: 1px solid var(--db-line); border-radius: var(--db-radius-md); box-shadow: var(--db-shadow); color: var(--db-ink); }
+.db-cosmic-title { font-family: var(--db-font-display); letter-spacing: .04em; text-shadow: 0 0 22px rgba(189,131,255,.3); }
+.db-cosmic-glow { box-shadow: var(--db-glow); }
+.db-cosmic-focus:focus-visible { outline: 2px solid var(--db-gold-soft); outline-offset: 4px; }
+.db-cosmic-tap { transition: transform var(--db-duration-fast) var(--db-ease-cosmic), filter var(--db-duration-fast) var(--db-ease-cosmic); }
+.db-cosmic-tap:active { transform: scale(.97); filter: brightness(1.18); }
+
+@media (prefers-reduced-motion: reduce) {
+  .db-cosmic-tap { transition: none; }
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .001ms !important; }
+}

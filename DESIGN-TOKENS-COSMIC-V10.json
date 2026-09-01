@@ -1,0 +1,11 @@
+{
+  "version": "V10",
+  "brand": {"name":"Divina Bruxa","universe":"Orbe das Realidades","slogan":"O Tarot encontra você aqui."},
+  "palette": {"void":"#05020b","night":"#0d0620","nebula":"#211044","violet":"#7548c8","orchid":"#bd83ff","gold":"#e6b85c","ink":"#f8f1ff","muted":"#c4b6d8"},
+  "surfaces": ["portal","glass","velvet","observatory","gold-vault"],
+  "typography": {"display":"Cinzel/Cormorant Garamond","body":"Inter/system-ui","minimumBodyPx":16},
+  "radiiPx": {"small":12,"medium":22,"large":34},
+  "motion": {"fastMs":180,"ritualMs":680,"pageTransitionMs":"550-850","reducedMotion":"instant-fade"},
+  "accessibility": {"focusVisible":true,"contrastTarget":"WCAG AA","touchTargetMinPx":44},
+  "audio": {"default":"off","requiresConsent":true}
+}
