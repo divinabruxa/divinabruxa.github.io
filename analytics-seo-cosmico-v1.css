@@ -1,0 +1,6 @@
+.analytics-screen,.seo-screen{background:radial-gradient(circle at 50% 0,rgba(124,47,190,.24),transparent 44%),linear-gradient(180deg,#12031e,#08010e)}
+.analytics-screen .chart-card,.analytics-screen .funnel-card,.analytics-screen .map-card,.seo-screen .seo-card{border:1px solid rgba(243,211,138,.28);border-radius:18px;background:linear-gradient(145deg,rgba(51,18,80,.72),rgba(12,3,21,.94));box-shadow:0 14px 36px rgba(0,0,0,.28)}
+.analytics-screen .chart-bar{background:linear-gradient(180deg,#f3d38a,#8b3bd1);box-shadow:0 0 14px rgba(184,108,255,.45);border-radius:8px 8px 2px 2px;transition:height .5s cubic-bezier(.22,1,.36,1)}
+.analytics-screen .chart-legend,.seo-screen .seo-status{color:rgba(247,237,207,.72)}
+@media(max-width:640px){.analytics-screen .chart-card,.analytics-screen .funnel-card,.analytics-screen .map-card,.seo-screen .seo-card{border-radius:15px}}
+@media(prefers-reduced-motion:reduce){.analytics-screen *{transition-duration:.01ms!important}}
