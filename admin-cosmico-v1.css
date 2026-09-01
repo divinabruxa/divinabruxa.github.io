@@ -1,0 +1,8 @@
+.admin-screen{background:radial-gradient(circle at 50% 0,rgba(119,45,182,.25),transparent 42%),linear-gradient(180deg,#12031e,#08010e)}
+.admin-screen .admin-card,.admin-screen .metric-card,.admin-screen .admin-table{border:1px solid rgba(243,211,138,.28);border-radius:18px;background:linear-gradient(145deg,rgba(51,18,80,.72),rgba(12,3,21,.94));box-shadow:0 14px 36px rgba(0,0,0,.28);transition:transform .25s ease,box-shadow .25s ease}
+.admin-screen .metric-card:hover{transform:translateY(-3px);box-shadow:0 0 24px rgba(184,108,255,.3)}
+.admin-screen .metric-value{color:#f3d38a;text-shadow:0 0 14px rgba(243,211,138,.3)}
+.admin-screen .status-badge{border-radius:99px;border:1px solid rgba(243,211,138,.3);background:rgba(111,43,189,.22);color:#f3d38a}
+.admin-screen th{color:#f3d38a;border-bottom:1px solid rgba(243,211,138,.25)}.admin-screen td{border-bottom:1px solid rgba(255,255,255,.06)}
+@media(max-width:640px){.admin-screen .admin-card,.admin-screen .metric-card,.admin-screen .admin-table{border-radius:15px}}
+@media(prefers-reduced-motion:reduce){.admin-screen *{transition-duration:.01ms!important}}
