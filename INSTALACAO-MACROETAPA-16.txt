@@ -1,0 +1,12 @@
+DIVINA BRUXA — INSTALAÇÃO DA MACROETAPA 16
+
+1. Adicione os arquivos na raiz do GitHub.
+2. Não coloque chaves Stripe nesses arquivos nem no frontend.
+3. No staging, execute: node billing-sandbox-guard-v10.mjs CAMINHO_DO_STAGING
+4. Crie produtos e preços somente no ambiente de teste.
+5. Use Checkout Sessions para Premium e Billing + Checkout para IA.
+6. Omita payment_method_types e habilite métodos dinâmicos no Dashboard.
+7. Verifique assinatura, idempotência e persistência de todos os webhooks.
+8. Teste pagamento aprovado, recusado, duplicado, reembolso, cancelamento e restore.
+9. Não habilite automatic_tax sem registro e revisão contábil.
+10. Não ative cobrança real; a próxima etapa será Orbe IA controlada e ledger de créditos.

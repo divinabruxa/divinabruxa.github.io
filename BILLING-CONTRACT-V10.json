@@ -1,0 +1,16 @@
+{
+  "version":"V10",
+  "environment":"sandbox-only",
+  "apiVersion":"2026-07-29.dahlia",
+  "products":[
+    {"id":"divina-premium-lifetime","type":"one-time","amountBRL":199.90,"checkout":"sessions"},
+    {"id":"orbe-ai-monthly","type":"recurring","amountBRL":89.90,"checkout":"sessions-billing","credits":400},
+    {"id":"orbe-ai-credits-200","type":"one-time","amountBRL":39.90,"credits":200},
+    {"id":"orbe-ai-credits-600","type":"one-time","amountBRL":99.90,"credits":600},
+    {"id":"orbe-ai-credits-1500","type":"one-time","amountBRL":199.90,"credits":1500}
+  ],
+  "checkout":{"dynamicPaymentMethods":true,"paymentMethodTypesOmitted":true,"integrationIdentifierRequired":true},
+  "webhooks":{"signatureRequired":true,"idempotencyRequired":true,"persistBeforeGrant":true},
+  "events":["checkout.session.completed","invoice.paid","invoice.payment_failed","customer.subscription.updated","customer.subscription.deleted","charge.refunded"],
+  "blockedUntilApproved":["liveKeys","productionWebhook","realBilling","automaticTaxWithoutRegistration"]
+}
