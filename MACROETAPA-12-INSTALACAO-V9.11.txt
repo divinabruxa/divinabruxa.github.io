@@ -1,0 +1,12 @@
+DIVINA BRUXA — MACROETAPA 12 / MÚSICA E VÍDEOS
+
+1. Envie `media-catalog-v9.js` para a raiz da branch de teste.
+2. Cadastre itens com `createMediaEntry`; mantenha status `draft` até revisão.
+3. Só publique após revisão editorial usando `publishMediaEntry`.
+4. Preencha URLs oficiais de Spotify/YouTube somente quando confirmadas; não
+   criar links genéricos como se fossem lançamentos reais.
+5. Execute `node MEDIA-CATALOG-VALIDATION-V9.11.mjs` — esperado 8/8 PASS.
+6. Teste cards de álbum, single, temporada e episódio em telas pequenas.
+
+RETORNO: remova apenas o catálogo e a camada visual desta macroetapa.
+PRÓXIMA: Macroetapa 13 — notificações, retorno diário e retenção responsável.
