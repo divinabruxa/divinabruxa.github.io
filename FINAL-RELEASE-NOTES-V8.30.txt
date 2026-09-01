@@ -1,0 +1,35 @@
+DIVINA BRUXA — ORBE DAS REALIDADES V8.30
+PACOTE DEFINITIVO DAS MACROETAPAS 1–30
+
+ENTREGA FINALIZADA
+- Fundação visual cósmica, fluida e responsiva.
+- Sistema universal de 30 skins para todas as orbes.
+- Ponte com a orbe principal, menu interior e orbes contextuais.
+- Experiências de retorno diário, Premium, Escola, Tarot e Tiragens.
+- Ritual Diário, Diário/Espelho, Orbe IA e Consultas.
+- Loja, Mídia, Conta, Admin, Notificações, SEO e PWA.
+- Acessibilidade, estabilidade, performance e fallbacks.
+- Homologação, regressão, segurança, produção e retorno documentados.
+
+GARANTIAS DO PACOTE
+- 78 cartas normais; zero invertidas.
+- Premium R$199,90, compra única e sem IA.
+- Orbe IA R$89,90/mês, 400 créditos.
+- Luna 1, Terra 10 e Sol desativado.
+- Todas as autorizações de produção permanecem falsas.
+- Nenhum CNAME, carta ou imagem existente é removido.
+- Nenhum segredo real é incluído.
+
+VALIDAÇÃO FINAL
+- QA geral: 123/123 PASS.
+- Regressão preventiva: 13/13 PASS.
+- Checksums SHA-256 individuais.
+- Auditoria final do pacote.
+- ZIP sem pastas internas.
+
+LIMITES HONESTOS
+- O pacote ainda precisa ser instalado na branch de teste.
+- A experiência precisa ser homologada em aparelhos reais.
+- Backend, autenticação e cobrança dependem de configuração segura externa.
+- Publicação real depende de aprovação explícita da proprietária.
+

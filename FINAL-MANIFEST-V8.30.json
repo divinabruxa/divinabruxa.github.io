@@ -1,0 +1,51 @@
+{
+  "project": "Divina Bruxa — Orbe das Realidades",
+  "release": "8.30-final-package",
+  "scope": "macroetapas-1-30",
+  "archiveLayout": "flat",
+  "target": "repository-root",
+  "runtime": {
+    "loader": "divina-v8-loader.js",
+    "loaderVersion": "8.28",
+    "styles": 20,
+    "modules": 20,
+    "skinsCatalogued": 30,
+    "tarotCardsExpectedInRepository": 78,
+    "invertedCards": false
+  },
+  "preserveExisting": [
+    "CNAME",
+    "card-00.webp … card-77.webp",
+    "all skin image files",
+    "orb-engine-v68.js",
+    "navigation.js",
+    "approved menu and original orb assets"
+  ],
+  "activation": "<script type=\"module\" src=\"divina-v8-loader.js?v=8.28\"></script>",
+  "rollback": "Remove only the V8.28 loader line from index.html or revert the installation commit.",
+  "validated": {
+    "generalQA": "123/123 PASS",
+    "preventiveRegression": "13/13 PASS",
+    "flatArchiveRequired": true,
+    "secretExposureExpected": 0
+  },
+  "externalGates": {
+    "realDeviceHomologation": "pending",
+    "supabaseBackend": "pending",
+    "stripeSandbox": "pending",
+    "legalApproval": "pending",
+    "monitoring": "pending",
+    "ownerApproval": "pending"
+  },
+  "authorizations": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  },
+  "packageFinalized": true,
+  "installed": false,
+  "productionReady": false
+}
+

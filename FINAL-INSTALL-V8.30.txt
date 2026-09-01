@@ -1,0 +1,35 @@
+DIVINA BRUXA — INSTALAÇÃO FINAL V8.30
+
+ANTES DE COMEÇAR
+1. Faça backup ou crie uma branch de teste.
+2. Não exclua nenhum arquivo existente.
+3. Preserve CNAME, as 78 cartas, imagens das skins, menu e motor da orbe.
+4. Nunca envie credenciais ou chaves secretas para o GitHub.
+
+UPLOAD PELO IPHONE
+1. Baixe e descompacte o ZIP definitivo.
+2. Abra o repositório divinabruxa/divinabruxa.github.io.
+3. Entre na branch de teste.
+4. Use Add file > Upload files.
+5. Selecione todos os arquivos soltos do ZIP; não envie o próprio ZIP.
+6. Confirme a substituição dos arquivos de mesmo nome.
+7. Faça o commit com a mensagem: instalar Divina Bruxa V8.30.
+
+ATIVAÇÃO
+Antes de </body> no index.html, mantenha uma única linha:
+<script type="module" src="divina-v8-loader.js?v=8.28"></script>
+
+VALIDAÇÃO
+1. node qa-supreme-v8.mjs — exige 123/123 PASS.
+2. node regression-v8.28.mjs — exige 13/13 PASS.
+3. node final-audit-v8.mjs — exige FINAL_PACKAGE_PASS.
+4. Teste iPhone, Android e computador conforme a Macroetapa 27.
+
+RETORNO SEGURO
+- Remova apenas a linha do loader V8.28 do index.html ou reverta o commit.
+- Não apague CNAME, cartas, skins ou arquivos originais.
+
+IMPORTANTE
+Este ZIP instala a camada construída nas Macroetapas 1–30. Supabase, Stripe,
+login, pagamentos reais, DNS e publicação de produção não são ativados pelo ZIP.
+
