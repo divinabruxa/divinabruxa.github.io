@@ -1,0 +1,9 @@
+{
+  "version":"V11",
+  "features":["weekly-prompt","voluntary-sharing","study-challenges","season-comments","in-app-feedback","help-center"],
+  "privacy":{"participationOptIn":true,"pseudonym":true,"diaryNeverPublic":true,"analyticsAggregateOnly":true},
+  "safety":{"report":true,"block":true,"moderationQueue":true,"rateLimit":true,"antiHarassment":true,"antiDoxxing":true,"noHealingGuarantees":true},
+  "governance":{"rulesPublic":true,"moderationReasons":true,"incidentStatus":true,"supportSlaPublished":true},
+  "metrics":["active-participants","help-resolution-time","reports-by-category","healthy-return-rate"],
+  "excludedMetrics":["diary-body","private-question","mental-health-inference"]
+}

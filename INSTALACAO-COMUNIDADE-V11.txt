@@ -1,0 +1,12 @@
+DIVINA BRUXA V11 — INSTALAÇÃO DA MACROETAPA 22
+
+1. Adicione os arquivos na raiz do GitHub.
+2. Não publique comunidade automaticamente; primeiro defina regras e moderação.
+3. No staging, execute: node community-safety-guard-v11.mjs CAMINHO_DO_STAGING
+4. Teste participação opt-in, pseudônimo, denúncia, bloqueio e remoção.
+5. Separe completamente comunidade pública e Diário privado.
+6. Não permita doxxing, assédio, promessas de cura ou garantias de resultado.
+7. Publique regras, motivos de moderação e prazo de suporte.
+8. Colete somente métricas agregadas.
+9. Faça beta pequeno com moderador responsável.
+10. A próxima etapa será personalização segura e recomendações explicáveis.
