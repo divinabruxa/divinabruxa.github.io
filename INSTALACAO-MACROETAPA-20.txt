@@ -1,0 +1,12 @@
+DIVINA BRUXA — INSTALAÇÃO DA MACROETAPA 20
+
+1. Adicione os arquivos na raiz do GitHub.
+2. No staging, execute: node release-gate-v10.mjs CAMINHO_DO_STAGING
+3. Rode toda a matriz em desktop, iPhone e Android.
+4. Anexe screenshots, console, performance, acessibilidade, segurança e billing sandbox.
+5. Teste backup e restauração antes do beta.
+6. Convide um grupo pequeno e registre feedback estruturado.
+7. Corrija P0/P1 antes de ampliar o beta.
+8. Mantenha produção, DNS, cobrança real, lojas e Sol bloqueados.
+9. Só publique após autorização explícita e plano de rollback pronto.
+10. Com esta etapa, o plano das 21 macroetapas fica completo; evolução futura será por versões V11+.

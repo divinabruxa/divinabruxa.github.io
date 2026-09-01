@@ -1,0 +1,8 @@
+{
+  "version":"V10",
+  "events":["page_view","orb_open","daily_revealed","reading_completed","lesson_completed","premium_viewed","checkout_started","checkout_completed","ai_credit_used","consultation_requested"],
+  "dimensions":["route","language","deviceClass","skinId","acquisitionSource"],
+  "forbiddenFields":["diaryBody","questionText","aiPrompt","password","secretKey","paymentDetails"],
+  "retentionMetrics":["DAU","WAU","MAU","D1","D7","D30","cohorts","funnel"],
+  "alerts":["error-rate","p95-load","checkout-failure","webhook-failure","ai-cost","storage-capacity"]
+}
