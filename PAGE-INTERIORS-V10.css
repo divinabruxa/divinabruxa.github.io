@@ -1,0 +1,14 @@
+/* Divina Bruxa — interiores das páginas V10. Integrar somente após QA. */
+.db-page-world { min-height: 100%; padding: var(--db-space-5, 2.25rem) var(--db-space-3, 1rem); isolation: isolate; }
+.db-page-world__hero { max-width: 820px; margin: 0 auto var(--db-space-5, 2.25rem); text-align: center; }
+.db-page-world__kicker { color: var(--db-gold-soft, #f6d996); font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; }
+.db-page-world__title { margin: .45rem 0 .75rem; font-family: var(--db-font-display, Georgia, serif); color: var(--db-ink, #f8f1ff); font-size: clamp(1.8rem, 5vw, 3.4rem); }
+.db-page-world__intro { max-width: 62ch; margin: 0 auto; color: var(--db-muted, #c4b6d8); line-height: 1.75; }
+.db-page-world__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: var(--db-space-3, 1rem); max-width: 1180px; margin: 0 auto; }
+.db-page-world__card { padding: var(--db-space-4, 1.5rem); }
+.db-page-world__card h3 { margin-top: 0; color: var(--db-gold-soft, #f6d996); font-family: var(--db-font-display, Georgia, serif); }
+.db-page-world__card p { color: var(--db-muted, #c4b6d8); line-height: 1.65; }
+.db-page-world__action { min-height: 44px; border: 1px solid var(--db-line, rgba(230,184,92,.25)); border-radius: 999px; padding: .75rem 1.1rem; color: var(--db-ink, #f8f1ff); background: rgba(117,72,200,.18); cursor: pointer; }
+.db-page-world__action:hover { background: rgba(117,72,200,.34); box-shadow: var(--db-glow, 0 0 20px rgba(189,131,255,.28)); }
+.db-page-world__action:focus-visible { outline: 2px solid var(--db-gold-soft, #f6d996); outline-offset: 3px; }
+@media (max-width: 560px) { .db-page-world { padding: 1.25rem .75rem 5rem; } .db-page-world__grid { gap: .75rem; } .db-page-world__card { padding: 1.1rem; } }

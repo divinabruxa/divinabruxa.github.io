@@ -1,0 +1,19 @@
+{
+  "version": "V10",
+  "worlds": [
+    {"route":"home","name":"Portal Cósmico","hero":"A Orbe das Realidades","primaryAction":"Abrir o Tarot"},
+    {"route":"tarot","name":"Templo do Tarot","hero":"O silêncio antes da carta","primaryAction":"Tocar na Orbe"},
+    {"route":"daily","name":"Câmara Lunar","hero":"Sua carta de hoje","primaryAction":"Revelar"},
+    {"route":"library","name":"Observatório dos Arcanos","hero":"78 portas de conhecimento","primaryAction":"Explorar"},
+    {"route":"school","name":"Academia Divina","hero":"Aprender é atravessar mundos","primaryAction":"Continuar aula"},
+    {"route":"spreads","name":"Salão das Constelações","hero":"Uma pergunta, muitas perspectivas","primaryAction":"Escolher tiragem"},
+    {"route":"journal","name":"Espelho Rosa","hero":"O que as cartas despertaram em você","primaryAction":"Escrever"},
+    {"route":"premium","name":"Cofre da Coroa","hero":"A jornada completa","primaryAction":"Conhecer Premium"},
+    {"route":"ai","name":"Lua Negra","hero":"Conversa simbólica com a Orbe","primaryAction":"Abrir Orbe IA"},
+    {"route":"consultations","name":"Salão de Veludo","hero":"Leituras com presença humana","primaryAction":"Solicitar consulta"},
+    {"route":"store","name":"Bazar Dourado","hero":"Objetos para seu altar","primaryAction":"Ver produtos"},
+    {"route":"media","name":"Teatro da Nebulosa","hero":"Som, voz e temporadas","primaryAction":"Explorar mídia"}
+  ],
+  "sharedComponents": ["breadcrumb","hero","primary-action","content-grid","empty-state","error-state","loading-orb"],
+  "rules": ["one-primary-action","no-orphan-page","preserve-approved-home-orb","mobile-first"]
+}

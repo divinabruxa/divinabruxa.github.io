@@ -1,0 +1,12 @@
+DIVINA BRUXA — INSTALAÇÃO DA MACROETAPA 7
+
+1. Adicione os arquivos na raiz do GitHub.
+2. Não substitua o conteúdo das páginas automaticamente.
+3. No staging, execute: node interior-visual-guard-v10.mjs CAMINHO_DO_STAGING
+4. Integre o CSS depois do Sistema Cósmico da Macroetapa 4.
+5. Aplique um mundo visual por rota usando PAGE-WORLDS-V10.json.
+6. Toda página deve ter título, introdução, uma ação principal, carregamento, vazio e erro.
+7. Preserve a Home e o menu já aprovados.
+8. Faça revisão em telas pequenas antes de publicar.
+9. Não esconda conteúdo importante em efeitos ou animações.
+10. A próxima etapa será Mobile, PWA e acessibilidade profunda.
