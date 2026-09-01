@@ -1,0 +1,13 @@
+DIVINA BRUXA — MACROETAPA 9 / PRIVACIDADE
+
+1. Envie `privacy-center-v9.js` e `privacy-center-v9.css` para a raiz da
+   branch de teste.
+2. Carregue o CSS e o módulo depois das camadas V8/V9.
+3. Em uma área pública de Conta ou Sobre, chame
+   `renderPrivacyNotice(document.querySelector('#privacyCenter'))`.
+4. Não conecte esta etapa a chaves de serviço, tokens ou banco de produção.
+5. Teste ativar/revogar métricas opcionais e confirme que o Diário não é lido.
+6. Execute `node PRIVACY-CENTER-VALIDATION-V9.8.mjs` — esperado: 8/8 PASS.
+
+RETORNO: remova somente os dois arquivos V9.8 e o ponto de montagem visual.
+PRÓXIMA: Macroetapa 10 — monetização em sandbox, Premium e Orbe IA com ledger.
