@@ -1,0 +1,8 @@
+.ai-screen{background:radial-gradient(circle at 50% 8%,rgba(156,64,230,.3),transparent 42%),linear-gradient(180deg,#160420,#090112)}
+.ai-screen .ai-hero,.ai-screen .chat-shell,.ai-screen .mode-card,.ai-screen .credit-badge{border:1px solid rgba(243,211,138,.32);border-radius:22px;background:linear-gradient(145deg,rgba(67,24,104,.72),rgba(14,3,25,.92));box-shadow:0 18px 48px rgba(0,0,0,.3),inset 0 1px rgba(255,255,255,.05)}
+.ai-screen .mode-card{transition:transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s ease}.ai-screen .mode-card:hover,.ai-screen .mode-card[aria-pressed=true]{transform:translateY(-3px);border-color:#f3d38a;box-shadow:0 0 28px rgba(184,108,255,.4)}
+.ai-screen .chat-message{border-radius:16px;background:rgba(35,10,56,.72);border:1px solid rgba(243,211,138,.18);animation:ai-message-in .4s ease both}.ai-screen .chat-message.is-user{background:linear-gradient(135deg,rgba(104,39,161,.72),rgba(42,12,68,.86))}
+.ai-screen .chat-input{border:1px solid rgba(243,211,138,.34);border-radius:16px;background:rgba(8,2,15,.8);color:#f7edcf}.ai-screen .chat-input:focus{outline:none;border-color:#f3d38a;box-shadow:0 0 0 3px rgba(184,108,255,.2)}
+@keyframes ai-message-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(max-width:640px){.ai-screen .ai-hero,.ai-screen .chat-shell,.ai-screen .mode-card{border-radius:17px}}
+@media(prefers-reduced-motion:reduce){.ai-screen .chat-message{animation:none}.ai-screen *{transition-duration:.01ms!important}}
