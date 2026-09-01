@@ -1,0 +1,11 @@
+{
+  "version":"V11",
+  "order":["android","ios"],
+  "app":{"name":"Divina Bruxa","universe":"Orbe das Realidades","ageRating":"18+","primaryLanguage":"pt-BR","languages":["pt-BR","en","es"]},
+  "android":{"billing":"play-billing-test","integrity":"planned","signedBuild":true,"internalTesting":true},
+  "ios":{"billing":"storekit-sandbox","restorePurchases":true,"dynamicType":true,"voiceOver":true,"safeAreas":true},
+  "requiredAssets":["icon","splash","screenshots","store-description","privacy-url","terms-url","support-url"],
+  "claims":{"noHealingGuarantee":true,"noDestinyGuarantee":true,"symbolicToolDisclosure":true},
+  "blockedUntilApproved":["storeSubmission","productionBilling","publicRelease"],
+  "qa":["low-end-device","offline","billing-restore","privacy-links","accessibility","deep-links"]
+}

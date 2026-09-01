@@ -1,0 +1,12 @@
+DIVINA BRUXA V11 — INSTALAÇÃO DA MACROETAPA 27
+
+1. Adicione os arquivos na raiz do GitHub.
+2. Não envie o aplicativo para Play Store ou App Store nesta etapa.
+3. No staging, execute: node store-readiness-guard-v11.mjs CAMINHO_DO_STAGING
+4. Prepare Android primeiro: build assinada e Play Billing de teste.
+5. Prepare iOS depois: StoreKit sandbox, restore e Dynamic Type.
+6. Produza ícone, splash, screenshots, descrição e links jurídicos reais.
+7. Revise classificação 18+ e linguagem sem promessas de cura ou destino.
+8. Teste aparelhos de entrada, offline, deep links e acessibilidade.
+9. Mantenha envio, billing real e publicação bloqueados.
+10. A próxima e última macroetapa planejada será o polimento final e auditoria de excelência.
