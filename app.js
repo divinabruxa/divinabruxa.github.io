@@ -26,6 +26,7 @@ import { installTarotExperience } from './tarot-experience-v6.js';
 import { RhythmEngine } from './rhythm-v6.js';
 import { SkinsEngine } from './skins-v6.js';
 import { EcosystemEngine } from './ecosystem-v6.js';
+import { PerformanceEngine } from './performance-v6.js';
 import { AIEngine } from './ai-engine.js';
 import './tarot-image-runtime.js';
 
@@ -38,6 +39,7 @@ installTarotExperience();
 new RhythmEngine($('#journal'));
 new SkinsEngine($('#skinsApp'));
 new EcosystemEngine($('#videos'));
+new PerformanceEngine($('#performanceStatus'));
 bindMiniOrbs();
 const orb = new RealityOrbEngine($('#orbCanvas'),{onOpen:()=>go('tarot')});
 new FreeTarot($('#tarot'));
