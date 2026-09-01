@@ -17,6 +17,7 @@ import { MediaEngine } from './media-engine.js';
 import { MediaEngineV5 } from './media-engine-v5.js';
 import { NotificationEngine } from './notification-engine.js';
 import { AdminEngine } from './admin-engine.js';
+import { AnalyticsEngine } from './analytics-engine.js';
 import { AIEngine } from './ai-engine.js';
 import './tarot-image-runtime.js';
 
@@ -40,6 +41,7 @@ new MediaEngine({videos:$('#videoApp'),music:$('#musicApp')},CONFIG);
 new MediaEngineV5({videos:$('#videoApp'),music:$('#musicApp')},CONFIG);
 new NotificationEngine($('#notificationApp'),go);
 new AdminEngine($('#adminApp'));
+new AnalyticsEngine($('#analyticsApp'));
 new AIEngine($('#ai'),CONFIG);
 new PremiumEngine($('#subscriptionApp'));
 

@@ -1,0 +1,1 @@
+export const ANALYTICS_POLICY=Object.freeze({environment:'privacy-safe-local',collects:Object.freeze(['screen_view','feature_open','install_prompt']),neverCollects:Object.freeze(['journal_body','consultation_question','email','phone','tarot_meaning_text']),retentionDays:90,externalProvider:false});
