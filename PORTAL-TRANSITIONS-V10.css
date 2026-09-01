@@ -1,0 +1,12 @@
+/* Divina Bruxa — Portal de transição V10. Ativar apenas após QA em staging. */
+:root { --db-portal-duration: 680ms; --db-portal-ease: cubic-bezier(.22,.8,.2,1); }
+
+.db-portal-layer { position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0; background: radial-gradient(circle at 50% 50%, rgba(189,131,255,.34), rgba(5,2,11,.98) 68%); transform: scale(1.08); transition: opacity var(--db-portal-duration) var(--db-portal-ease), transform var(--db-portal-duration) var(--db-portal-ease); }
+.db-portal-layer.is-entering { opacity: 1; transform: scale(1); }
+.db-portal-layer::after { content: ""; position: absolute; inset: 20%; border: 1px solid rgba(246,217,150,.52); border-radius: 50%; box-shadow: 0 0 42px rgba(230,184,92,.38), inset 0 0 50px rgba(189,131,255,.22); animation: db-portal-breathe var(--db-portal-duration) var(--db-portal-ease) both; }
+@keyframes db-portal-breathe { from { opacity: 0; transform: scale(.68) rotate(-8deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .db-portal-layer { transition: opacity 120ms linear; transform: none; }
+  .db-portal-layer::after { animation: none; }
+}

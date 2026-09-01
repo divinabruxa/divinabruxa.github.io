@@ -1,0 +1,12 @@
+DIVINA BRUXA — INSTALAÇÃO DA MACROETAPA 6
+
+1. Adicione os arquivos na raiz do GitHub.
+2. Não importe o CSS nem o motor no runtime público ainda.
+3. No staging, execute: node portal-guard-v10.mjs CAMINHO_DO_STAGING
+4. Integre o portal somente ao resolver a navegação canônica da Macroetapa 1.
+5. Teste Home → Tarot, Home → Biblioteca, Menu → Escola e rota 404.
+6. Confirme que não existe tela branca, atraso acima de 900 ms ou perda de scroll.
+7. Teste teclado, leitor de tela, Escape, movimento reduzido e rede lenta.
+8. O áudio continua desligado por padrão.
+9. Só avance após registrar screenshots e tempos de transição.
+10. A próxima etapa será a reconstrução visual dos interiores das páginas.

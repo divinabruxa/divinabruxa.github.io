@@ -1,0 +1,10 @@
+{
+  "version": "V10",
+  "name": "Portal Universal Cósmico",
+  "durationMs": {"min":550,"target":680,"max":850},
+  "sequence": ["intent","orb-light","portal-open","route-render","portal-settle"],
+  "rules": ["never-blank-frame","never-block-over-900ms","preserve-scroll-intent","preserve-reading-state","audio-off-by-default"],
+  "reducedMotion": {"durationMs":120,"particles":false,"scale":false},
+  "accessibility": {"ariaHiddenLayer":true,"focusAfterRender":true,"escapeCancels":true},
+  "pageWorlds": ["portal","temple","moon-chamber","observatory","academy","rose-mirror","gold-vault","black-moon"]
+}
