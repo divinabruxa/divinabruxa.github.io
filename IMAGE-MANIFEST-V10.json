@@ -1,0 +1,13 @@
+{
+  "version": "V10",
+  "formats": ["avif", "webp", "png", "jpeg"],
+  "criticalImages": [
+    {"id":"orb-main","source":"divina-orb-v68.png","sizes":[256,512,1024],"priority":"high"},
+    {"id":"orb-mini","source":"divina-mini-orb-hd-v72.jpeg","sizes":[64,128,256],"priority":"high"},
+    {"id":"cosmos","source":"cosmic-background.png","sizes":[768,1440,2048],"priority":"high"}
+  ],
+  "cardCollection": {"count":78,"gridSizes":[160,320],"readingSizes":[640,1024],"load":"on-demand"},
+  "skinCollection": {"count":30,"thumbnailSizes":[128,256],"surfaceSizes":[512,1024],"load":"on-selection"},
+  "budgetsBytes": {"initialImages":1572864,"initialJavaScript":262144,"initialCss":262144},
+  "fallbackPolicy":"retain-current-source-until-derived-asset-is-visual-qa-approved"
+}

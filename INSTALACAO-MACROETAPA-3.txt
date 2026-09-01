@@ -1,0 +1,12 @@
+DIVINA BRUXA — INSTALAÇÃO DA MACROETAPA 3
+
+1. Adicione os arquivos deste ZIP na raiz do GitHub.
+2. Eles não substituem nem apagam suas imagens atuais.
+3. No staging, execute: node performance-budget-v10.mjs CAMINHO_DO_STAGING
+4. Registre o tamanho real das imagens críticas e o waterfall do navegador.
+5. Gere derivados AVIF/WebP em processo separado, mantendo PNG/JPG como fallback.
+6. Não carregue as 78 cartas ou as 30 skins na primeira tela.
+7. Preserve a orbe aprovada e compare screenshots antes/depois.
+8. Teste rede móvel, modo reduzido, Android, iPhone e desktop.
+9. Só avance quando a primeira tela estiver rápida sem perda visual.
+10. A próxima macroetapa será o Sistema Cósmico de Design V10.
