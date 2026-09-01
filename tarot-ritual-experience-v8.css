@@ -1,0 +1,5 @@
+/* DIVINA BRUXA — RITO DA MESA REAL V8 */
+.tarot-ritual-v8{display:flex;align-items:flex-start;gap:1rem;margin:1.2rem 0 1.6rem;padding:1rem 1.15rem;background:linear-gradient(135deg,rgba(45,24,74,.76),rgba(8,4,22,.64));border:1px solid rgba(231,189,104,.25);border-radius:20px;box-shadow:0 14px 48px rgba(0,0,0,.25)}
+.tarot-ritual-v8-sigil{display:grid;place-items:center;flex:none;width:2.5rem;height:2.5rem;border:1px solid rgba(231,189,104,.58);border-radius:50%;color:var(--db-gold-soft);box-shadow:0 0 24px rgba(231,189,104,.18)}
+.tarot-ritual-v8 h3{margin:.15rem 0 .4rem;font-size:clamp(1.15rem,3vw,1.65rem)}.tarot-ritual-v8 p:not(.eyebrow){margin:0;color:var(--db-muted);line-height:1.6}.tarot-ritual-v8-rules{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:.85rem;color:#eedbaf;font-size:.72rem;letter-spacing:.04em}.tarot-ritual-v8-rules span{padding:.3rem .55rem;border:1px solid rgba(231,189,104,.2);border-radius:999px}
+@media (max-width:520px){.tarot-ritual-v8{padding:.9rem}.tarot-ritual-v8-rules{gap:.45rem}}

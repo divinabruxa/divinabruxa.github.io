@@ -1,0 +1,14 @@
+DIVINA BRUXA — MACROETAPA 9 / RITO DA MESA REAL V8
+
+STATUS: pacote pronto; GitHub continua bloqueando gravações por HTTP 403.
+
+ORDEM:
+1. Carregar tarot-ritual-experience-v8.css depois das camadas visuais.
+2. Carregar tarot-ritual-experience-v8.js como módulo depois de app.js.
+3. Manter tarot-engine.js e tarot-data.js sem substituição.
+
+INCLUI:
+- Instrução ritualística antes da mesa.
+- Reforço visual de 78 cartas, sem repetição e sem invertidas.
+- Nenhum significado exibido no Tarot Livre.
+- Nenhuma alteração na lógica de sorteio.
