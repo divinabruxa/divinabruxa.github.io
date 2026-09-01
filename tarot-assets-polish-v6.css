@@ -1,0 +1,69 @@
+/* Tarot Livre — acabamento de acervo (V6)
+   Mantém as 78 cartas diretas, sem inversão e sem distorção. */
+:root { --tarot-edge: rgba(229, 190, 112, .42); }
+
+.tarot-card-image,
+.db18-tarot-card-image,
+.tarot-card img,
+.card-face img,
+.drawn-card img,
+.spread-card img,
+.daily-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  object-fit: cover;
+  object-position: center;
+  image-rendering: auto;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  border-radius: inherit;
+  filter: saturate(1.06) contrast(1.03);
+}
+
+.tarot-card,
+.db18-tarot-card-host,
+.card-face,
+.drawn-card,
+.spread-card,
+.daily-card {
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid var(--tarot-edge);
+  background: radial-gradient(circle at 50% 38%, rgba(111,45,157,.22), rgba(8,3,20,.96) 72%);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.025) inset, 0 14px 34px rgba(0,0,0,.32);
+}
+
+.tarot-card::after,
+.drawn-card::after,
+.spread-card::after,
+.daily-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: inset 0 0 28px rgba(176,104,255,.14), inset 0 0 0 1px rgba(255,220,154,.08);
+}
+
+/* O acervo é sempre exibido na orientação original. */
+[data-orientation="reversed"],
+.is-reversed,
+.reversed { transform: none !important; }
+
+@media (max-width: 640px) {
+  .tarot-card-image,
+  .db18-tarot-card-image,
+  .tarot-card img,
+  .card-face img,
+  .drawn-card img,
+  .spread-card img,
+  .daily-card img { object-fit: cover; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tarot-card-image,
+  .db18-tarot-card-image { transition: none !important; }
+}
