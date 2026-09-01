@@ -1,0 +1,1 @@
+export const NOTIFICATION_POLICY=Object.freeze({environment:'local-sandbox',quietHours:Object.freeze({from:22,to:8}),categories:Object.freeze(['Carta do Dia','Escola','Diário','Consultas','Música','Segurança','Orbe IA','Skins']),deepLinks:Object.freeze(['daily','school','journal','consultations','music','login','ai','skins'])});
