@@ -1,0 +1,13 @@
+/* DIVINA BRUXA — ACESSIBILIDADE, TOQUE E RESPONSIVIDADE V8 */
+:where(button,a,input,select,textarea){-webkit-tap-highlight-color:transparent}
+:where(button,a,[role="button"]){min-height:44px}
+button{user-select:none;-webkit-user-select:none}
+input,select,textarea{font-size:max(16px,1rem)}
+img{max-width:100%;height:auto}
+.screen{overflow-wrap:anywhere}
+.screen:focus{outline:none}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+@media (max-width:380px){.screen{padding-inline:.8rem}.panel,.ritual-panel{border-radius:18px}.home-trust{grid-template-columns:1fr}}
+@media (forced-colors:active){button,.panel,.ritual-panel,.home-path-card{border:1px solid ButtonText}.eyebrow{color:CanvasText}}
+@media (prefers-contrast:more){:root{--db-muted:#ded3ef;--db-line:rgba(243,217,148,.48)}.panel,.ritual-panel,.home-path-card{border-width:2px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}

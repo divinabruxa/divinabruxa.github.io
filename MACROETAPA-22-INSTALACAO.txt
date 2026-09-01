@@ -1,0 +1,16 @@
+DIVINA BRUXA — MACROETAPA 22 / ACESSIBILIDADE E ESTABILIDADE V8
+
+STATUS: pacote pronto; GitHub continua bloqueando gravações por HTTP 403.
+
+ORDEM:
+1. Carregar accessibility-stability-v8.css por último.
+2. Carregar accessibility-stability-v8.js como módulo depois de app.js.
+3. Testar em iPhone, Android, teclado e leitor de tela.
+
+INCLUI:
+- Alvos de toque com pelo menos 44 px.
+- Campos protegidos contra zoom acidental no iPhone.
+- Regiões e títulos acessíveis.
+- Escape fecha diálogos.
+- Contraste elevado e movimento reduzido.
+- Nenhuma alteração no motor da Orbe.
