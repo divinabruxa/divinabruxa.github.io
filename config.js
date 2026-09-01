@@ -40,12 +40,14 @@ export const CONFIG=Object.freeze({
   ],
   plans:[
     {id:'presence',name:'Presença',price:0,cycle:'para sempre',description:'Tarot Livre, Carta do Dia e ritual diário.'},
-    {id:'lunar',name:'Orbe Lunar',price:19.90,cycle:'por mês',description:'Diário ampliado, tiragens e jornada de estudos.'},
-    {id:'supreme',name:'Orbe Suprema',price:39.90,cycle:'por mês',description:'Experiência completa, conteúdos e benefícios exclusivos.'}
+    {id:'premium',name:'Divina Bruxa Premium',price:199.90,cycle:'pagamento único',description:'Mesa Real, Escola offline e skins cosméticas.'},
+    {id:'orbe-ia',name:'Orbe IA',price:89.90,cycle:'por mês · 400 créditos',description:'Conversas simbólicas com controle de créditos.'}
   ],
+  aiCredits:[{id:'ia-200',credits:200,price:39.90},{id:'ia-600',credits:600,price:99.90},{id:'ia-1500',credits:1500,price:199.90}],
   services:[
-    {name:'Mesa Real',price:200,description:'Leitura profunda e completa da sua realidade atual.'},
-    {name:'Leitura de Mentes',price:200,description:'Leitura simbólica da dinâmica, intenções e padrões da relação.'},
-    {name:'Carta de Conselho',price:100,description:'Uma carta, uma questão e uma orientação objetiva.'}
+    {name:'Mesa Real',price:500,description:'Leitura profunda e completa da sua realidade atual.'},
+    {name:'Leitura de Pensamentos',price:500,description:'Leitura simbólica da dinâmica, intenções e padrões da relação.'},
+    {name:'Carta de Conselho',price:300,description:'Uma carta, uma questão e uma orientação objetiva.'},
+    {name:'Pergunta',price:150,description:'Uma pergunta objetiva com orientação simbólica.'}
   ]
 });
