@@ -1,6 +1,6 @@
 import { escapeHTML, store } from './storage.js';
 import { AI_POLICY, aiDisclosure } from './ai-policy.js';
-import { canSpend, creditState, spend } from './ai-credits.js';
+import { canSpend, creditState, grantCredits, spend } from './ai-credits.js';
 
 export class AIEngine {
   constructor(root, config) {
@@ -8,7 +8,9 @@ export class AIEngine {
   }
   ensureControls(){
     if(!this.mode.querySelector('[value="sol"]')){const option=document.createElement('option');option.value='sol';option.textContent='Sol · expansão (indisponível)';option.disabled=true;this.mode.append(option);}
-    this.root.querySelector('#aiMode').insertAdjacentHTML('afterend','<p class="ai-credit-status" data-ai-credits></p><label class="ai-consent"><input type="checkbox" id="aiConsent"> Entendo que a Orbe IA é uma ferramenta simbólica e não uma pessoa real.</label>');
+    const packs=(this.config.aiCredits||[]).map(pack=>`<button type="button" data-credit-pack="${pack.credits}">${pack.credits} créditos · R$ ${Number(pack.price).toFixed(2).replace('.',',')} <small>simular sandbox</small></button>`).join('');
+    this.root.querySelector('#aiMode').insertAdjacentHTML('afterend',`<p class="ai-credit-status" data-ai-credits></p><div class="ai-credit-packs" aria-label="Pacotes de créditos em ambiente de testes">${packs}</div><label class="ai-consent"><input type="checkbox" id="aiConsent"> Entendo que a Orbe IA é uma ferramenta simbólica e não uma pessoa real.</label>`);
+    this.root.querySelectorAll('[data-credit-pack]').forEach(button=>button.onclick=()=>{grantCredits(button.dataset.creditPack);this.updateCredits();this.renderHistory();window.dispatchEvent(new CustomEvent('orbe:toast',{detail:'Créditos adicionados somente no sandbox.'}));});
     this.updateCredits();
   }
   updateCredits(){const state=creditState();const status=this.root.querySelector('[data-ai-credits]');if(status)status.textContent=`Créditos demonstrativos: ${state.remaining} · Luna 1 crédito · Terra 10 créditos` ;}
