@@ -21,6 +21,7 @@ import { AnalyticsEngine } from './analytics-engine.js';
 import { PrivacyEngine } from './privacy-engine.js';
 import { PwaEngine } from './pwa-engine.js';
 import { TrustEngine } from './trust-engine.js';
+import { AuthClient } from './auth-client-v6.js';
 import { installVisualGuard } from './visual-guard-v6.js';
 import { installTarotExperience } from './tarot-experience-v6.js';
 import { RhythmEngine } from './rhythm-v6.js';
@@ -63,7 +64,8 @@ new TrustEngine($('#trustApp'));
 new AIEngine($('#ai'),CONFIG);
 new PremiumEngine($('#subscriptionApp'));
 
-$('#userLogin').onsubmit=event=>{event.preventDefault();toast('Login seguro será ativado com o servidor.');};
+const authClient=new AuthClient(CONFIG);window.divinaAuth=authClient;
+$('#userLogin').onsubmit=async event=>{event.preventDefault();const form=event.currentTarget;const email=form.elements[0]?.value?.trim();const password=form.elements[1]?.value||'';if(!authClient.enabled){toast('A conta será ativada quando o servidor seguro estiver conectado.');return;}if(!email||!password){toast('Informe e-mail e senha.');return;}const result=await authClient.login(email,password);toast(result.ok?'Sessão iniciada com segurança.':result.offline?'Servidor temporariamente indisponível.':'Não foi possível entrar.');};
 $('#adminLogin').onsubmit=event=>{event.preventDefault();if($('#adminUser').value!==CONFIG.adminUser){$('#adminMsg').textContent='Login não reconhecido.';return;}window.divinaAdmin?.unlock($('#adminUser').value);$('#adminMsg').textContent='Central local aberta. A senha será validada somente pelo servidor seguro — nunca pelo arquivo público.';};
 
 let installPrompt=null;addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event;$('#installApp').hidden=false;});$('#installApp').onclick=async()=>{if(!installPrompt){toast('No iPhone: Compartilhar → Adicionar à Tela de Início.');return;}installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;};
