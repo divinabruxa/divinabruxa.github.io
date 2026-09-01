@@ -1,0 +1,1 @@
+export function installTarotExperience(){document.documentElement.dataset.tarotExperience='v6';document.querySelectorAll('.tarot-screen,.ritual-panel,#schoolApp,#spreadGrid,#cardLibraryApp').forEach(el=>el.setAttribute('data-experience','v6'));}

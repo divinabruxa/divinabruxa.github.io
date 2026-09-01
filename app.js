@@ -22,6 +22,7 @@ import { PrivacyEngine } from './privacy-engine.js';
 import { PwaEngine } from './pwa-engine.js';
 import { TrustEngine } from './trust-engine.js';
 import { installVisualGuard } from './visual-guard-v6.js';
+import { installTarotExperience } from './tarot-experience-v6.js';
 import { AIEngine } from './ai-engine.js';
 import './tarot-image-runtime.js';
 
@@ -30,6 +31,7 @@ const $$ = selector => [...document.querySelectorAll(selector)];
 const toast = message => { const el=$('#toast'); el.textContent=message; el.classList.add('show'); clearTimeout(toast.timer); toast.timer=setTimeout(()=>el.classList.remove('show'),2400); };
 const { go } = createNavigation();
 installVisualGuard();
+installTarotExperience();
 bindMiniOrbs();
 const orb = new RealityOrbEngine($('#orbCanvas'),{onOpen:()=>go('tarot')});
 new FreeTarot($('#tarot'));
