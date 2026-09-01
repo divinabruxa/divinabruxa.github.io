@@ -1,0 +1,8 @@
+{
+  "version":"V10",
+  "environments":{"staging":"isolated","production":"isolated","billing":"separate-test-and-live"},
+  "tables":["profiles","settings","entitlements","purchases","subscriptions","ai_credit_ledger","ai_usage","daily_cards","readings","spreads","school_progress","diary_entries","skins","consultations","content","affiliate_items","notifications","campaigns","audit_events","webhook_events","jobs","privacy_requests"],
+  "ownership":{"userOwned":["profiles","settings","daily_cards","readings","spreads","school_progress","diary_entries","skins","privacy_requests"],"adminAggregatesOnly":["diary_entries","ai_usage","readings"]},
+  "security":{"rls":"enabled-on-every-exposed-table","defaultPolicy":"deny","serviceRole":"backend-only","authorizationSource":"server-controlled-app-metadata","views":"security-invoker-or-private-schema"},
+  "retention":{"diary":"user-controlled","audit":"minimal-operational","analytics":"aggregate-only"}
+}

@@ -1,0 +1,12 @@
+DIVINA BRUXA — INSTALAÇÃO DA MACROETAPA 14
+
+1. Adicione os arquivos na raiz do GitHub.
+2. Eles não criam banco nem alteram credenciais automaticamente.
+3. No staging, execute: node backend-security-guard-v10.mjs CAMINHO_DO_STAGING
+4. Separe projetos, chaves, webhooks, usuários e analytics de staging e produção.
+5. Crie migrations oficiais somente após revisar o mapa de dados.
+6. Habilite RLS em toda tabela exposta e teste usuário A contra usuário B.
+7. Nunca use service_role, secrets ou decisão de admin no frontend.
+8. Ative MFA para a proprietária e teste recuperação e revogação de sessão.
+9. Publique Privacy Center, exportação, exclusão e consentimento antes do billing real.
+10. A próxima etapa será o Premium, entitlements e proposta de valor comercial.
