@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — RUNTIME DE IMAGENS V5 — CHECKPOINT 1.3
-   Artes HD, carregamento progressivo, preload limitado e fallback visível pelo atlas oficial.
+/* DIVINA BRUXA — RUNTIME DE IMAGENS V5 — CHECKPOINT 1.2
+   Carregamento progressivo, preload limitado e fallback visível pelo atlas oficial.
 */
 import { CARDS } from './tarot-data.js';
 
@@ -15,7 +15,7 @@ const escapeAttribute = value => String(value ?? '')
 export function cardImageMarkup(card, { alt = card.name, priority = 'lazy', decorative = false } = {}) {
   if (!card || !Number.isInteger(card.index)) return '';
   const eager = priority === 'high';
-  return `<img src="${escapeAttribute(card.imageSources.medium)}" data-card-index="${card.index}" width="1024" height="1536" loading="${eager ? 'eager' : 'lazy'}" decoding="async" fetchpriority="${eager ? 'high' : 'low'}" alt="${decorative ? '' : escapeAttribute(alt)}">`;
+  return `<img class="tarot-card-image" src="${escapeAttribute(card.imageSources.medium)}" data-card-index="${card.index}" width="1024" height="1536" sizes="(max-width: 640px) 42vw, (max-width: 1100px) 18vw, 300px" loading="${eager ? 'eager' : 'lazy'}" decoding="async" fetchpriority="${eager ? 'high' : 'low'}" alt="${decorative ? '' : escapeAttribute(alt)}">`;
 }
 
 export function preloadCardImages(cardIds, limit = 3) {
