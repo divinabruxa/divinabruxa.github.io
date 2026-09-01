@@ -1,0 +1,7 @@
+.consultations-screen{background:radial-gradient(circle at 50% 0,rgba(145,56,213,.28),transparent 44%),linear-gradient(180deg,#170522,#0b0215)}
+.consultations-screen .consultation-hero,.consultations-screen .service-card,.consultations-screen .consultation-form{border:1px solid rgba(243,211,138,.32);border-radius:22px;background:linear-gradient(145deg,rgba(67,24,104,.72),rgba(14,3,25,.92));box-shadow:0 18px 46px rgba(0,0,0,.3),inset 0 1px rgba(255,255,255,.05);transition:transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s ease}
+.consultations-screen .service-card:hover{transform:translateY(-4px);border-color:#f3d38a;box-shadow:0 0 30px rgba(184,108,255,.4)}
+.consultations-screen input,.consultations-screen textarea,.consultations-screen select{border:1px solid rgba(243,211,138,.3);border-radius:12px;background:rgba(8,2,15,.8);color:#f7edcf}.consultations-screen input:focus,.consultations-screen textarea:focus,.consultations-screen select:focus{outline:none;border-color:#f3d38a;box-shadow:0 0 0 3px rgba(184,108,255,.2)}
+.consultations-screen .form-status{border-radius:12px;background:rgba(116,48,170,.2);color:#f3d38a}
+@media(max-width:640px){.consultations-screen .consultation-hero,.consultations-screen .service-card,.consultations-screen .consultation-form{border-radius:17px}}
+@media(prefers-reduced-motion:reduce){.consultations-screen *{transition-duration:.01ms!important}}
