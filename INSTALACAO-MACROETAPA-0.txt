@@ -1,0 +1,10 @@
+DIVINA BRUXA — INSTALAÇÃO DA MACROETAPA 0
+
+1. Não enviar estes arquivos para a raiz pública ainda.
+2. Guardar o ZIP como pacote de controle da versão atual.
+3. Confirmar que o commit público continua sendo 4096b2eb20d3351fc61aee70ad1f808c8982638a.
+4. Criar staging separado antes da Macroetapa 1.
+5. Capturar as telas douradas: Home, menu, Tarot Livre, Carta do Dia, Biblioteca, Escola, Diário, Premium e 404.
+6. Executar: node QA-GATE-V10.mjs CAMINHO_DO_STAGING
+7. Se o resultado não for PASS, não avançar.
+8. A Macroetapa 1 começa somente com a aprovação da proprietária.
