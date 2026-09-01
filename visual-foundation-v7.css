@@ -1,0 +1,349 @@
+/* DIVINA BRUXA 7.0 — FUNDAÇÃO VISUAL DEFINITIVA
+   Esta é a única camada autorizada a decidir geometria da Home e do dock.
+   O motor, a textura e as respostas da Orbe principal permanecem intactos. */
+
+:root{
+  --db7-page-max: 960px;
+  --db7-dock-width: min(720px, calc(100vw - 24px));
+  --db7-dock-height: 86px;
+  --db7-dock-bottom: max(10px, env(safe-area-inset-bottom));
+  --db7-content-clearance: calc(var(--db7-dock-height) + var(--db7-dock-bottom) + 40px);
+  --db7-gold: #e4bc79;
+  --db7-gold-light: #ffe3aa;
+  --db7-ink: #f8f0e8;
+}
+
+html,body{
+  width:100%;
+  max-width:100%;
+  min-height:100%;
+  overflow-x:clip!important;
+}
+
+body{
+  min-height:100svh;
+  padding:0!important;
+}
+
+main{
+  width:100%;
+  min-height:100svh;
+  overflow:visible;
+}
+
+/* Toda tela termina antes do dock, inclusive em iPhones com barra de gesto. */
+.screen{
+  width:min(100%,var(--db7-page-max));
+  min-height:100svh;
+  margin-inline:auto!important;
+  padding-bottom:var(--db7-content-clearance)!important;
+  scroll-margin-top:96px;
+}
+
+.screen img,.screen canvas,.screen video,.screen svg{max-width:100%}
+
+/* Home aprovada: composição compacta, central e sem espaços artificiais. */
+.home-screen,
+.home-screen.active{
+  width:100%!important;
+  max-width:none!important;
+  min-height:100svh!important;
+  height:auto!important;
+  margin:0!important;
+  padding:
+    calc(112px + env(safe-area-inset-top))
+    clamp(14px,3vw,28px)
+    var(--db7-content-clearance)!important;
+  overflow:visible!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:0!important;
+}
+
+.home-screen .portal-divider{display:none!important}
+
+.home-screen .home-copy{
+  position:relative!important;
+  inset:auto!important;
+  flex:none!important;
+  width:min(100%,780px)!important;
+  max-width:780px!important;
+  min-height:0!important;
+  margin:0 auto!important;
+  padding:0!important;
+  transform:none!important;
+}
+
+.home-screen .home-copy .eyebrow{
+  margin:0 0 12px!important;
+  color:var(--db7-gold)!important;
+  font-size:clamp(10px,2.4vw,13px)!important;
+  line-height:1.2!important;
+  letter-spacing:clamp(.22em,1vw,.34em)!important;
+}
+
+.home-screen .home-copy h1{
+  margin:0!important;
+  color:var(--db7-ink)!important;
+  font-size:clamp(54px,12.5vw,88px)!important;
+  line-height:.96!important;
+  letter-spacing:-.045em!important;
+  white-space:nowrap!important;
+}
+
+.home-screen .home-copy h1 span{display:inline!important}
+
+.home-screen .home-copy .intro{
+  margin:12px 0 0!important;
+  font-size:clamp(15px,3.8vw,21px)!important;
+  line-height:1.35!important;
+}
+
+/* A circunferência continua imóvel; o motor anima somente a matéria interna. */
+.home-screen .orb-stage-ref{
+  position:relative!important;
+  inset:auto!important;
+  flex:none!important;
+  width:min(84vw,52svh,520px)!important;
+  min-width:0!important;
+  max-width:520px!important;
+  height:auto!important;
+  aspect-ratio:1!important;
+  margin:20px auto 0!important;
+  padding:0!important;
+  transform:none!important;
+}
+
+.home-screen .orb-shell{
+  width:100%!important;
+  max-width:100%!important;
+  height:100%!important;
+  min-width:0!important;
+  min-height:0!important;
+  margin:0!important;
+  transform:translateZ(0) scale(1)!important;
+  transform-origin:50% 50%!important;
+}
+
+.home-screen .awaken{
+  position:relative!important;
+  inset:auto!important;
+  flex:none!important;
+  margin:16px auto 0!important;
+  transform:none!important;
+}
+
+.home-screen .orb-status,
+.home-screen .touch-hint{
+  position:relative!important;
+  inset:auto!important;
+  flex:none!important;
+  transform:none!important;
+}
+
+.home-screen .orb-status{margin:7px auto 0!important}
+.home-screen .touch-hint{margin:4px auto 0!important}
+
+/* Dock estável: nenhuma regra antiga pode deslocar a cápsula ou a mini-Orbe. */
+.magic-dock{
+  position:fixed!important;
+  z-index:90!important;
+  left:50%!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:var(--db7-dock-bottom)!important;
+  width:var(--db7-dock-width)!important;
+  max-width:720px!important;
+  height:var(--db7-dock-height)!important;
+  min-height:var(--db7-dock-height)!important;
+  margin:0!important;
+  padding:8px 10px!important;
+  box-sizing:border-box!important;
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  align-items:stretch!important;
+  justify-items:stretch!important;
+  transform:translate3d(-50%,0,0)!important;
+  transform-origin:50% 100%!important;
+  overflow:visible!important;
+  contain:layout style!important;
+}
+
+.magic-dock>button{
+  position:relative!important;
+  inset:auto!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:70px!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:4px 2px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:3px!important;
+  transform:none!important;
+}
+
+.magic-dock>button:hover,
+.magic-dock>button:focus-visible{transform:none!important}
+
+.magic-dock .dock-sigil{
+  flex:none!important;
+  width:34px!important;
+  height:34px!important;
+  margin:0!important;
+}
+
+.magic-dock>button small{
+  flex:none!important;
+  margin:0!important;
+  font-size:9px!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+}
+
+.magic-dock .dock-orb{
+  position:relative!important;
+  z-index:4!important;
+  overflow:visible!important;
+  isolation:isolate!important;
+}
+
+.magic-dock .dock-orb::before{
+  left:50%!important;
+  top:-20px!important;
+  width:82px!important;
+  height:82px!important;
+  transform:translateX(-50%)!important;
+}
+
+.magic-dock .dock-orb::after{
+  left:50%!important;
+  top:-13px!important;
+  width:70px!important;
+  height:70px!important;
+  transform:translateX(-50%)!important;
+}
+
+.magic-dock .dock-orb .mini-orb,
+.magic-dock .dock-orb .mini-orb.mini-awake{
+  position:absolute!important;
+  z-index:3!important;
+  left:50%!important;
+  right:auto!important;
+  top:-13px!important;
+  width:70px!important;
+  height:70px!important;
+  min-width:70px!important;
+  min-height:70px!important;
+  margin:0!important;
+  border-radius:50%!important;
+  background-color:#08020e!important;
+  background-image:url("./divina-orb-v68.png?v=107")!important;
+  background-position:50% 50%!important;
+  background-repeat:no-repeat!important;
+  background-size:102% 102%!important;
+  image-rendering:auto!important;
+  transform:translate3d(-50%,0,0)!important;
+  transform-origin:50% 50%!important;
+  filter:saturate(var(--mini-saturation,1.08)) brightness(var(--mini-brightness,1.01))!important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,244,218,.14),
+    0 0 17px rgba(231,91,255,.88),
+    0 0 38px rgba(126,45,220,.44)!important;
+}
+
+/* Uma única película de vidro; não repetimos a imagem, evitando aparência borrada. */
+.magic-dock .dock-orb .mini-orb::after{
+  inset:0!important;
+  background:
+    radial-gradient(ellipse at 27% 15%,rgba(255,255,255,.24),transparent 25%),
+    radial-gradient(circle at 50% 52%,rgba(240,93,255,.08),transparent 58%)!important;
+  opacity:.72!important;
+}
+
+.magic-dock .dock-orb .mini-orb.mini-awake{
+  filter:saturate(1.24) brightness(1.18)!important;
+  transform:translate3d(-50%,0,0)!important;
+}
+
+.magic-dock .dock-orb small{
+  position:absolute!important;
+  left:50%!important;
+  bottom:4px!important;
+  width:max-content!important;
+  margin:0!important;
+  transform:translateX(-50%)!important;
+  color:var(--db7-gold-light)!important;
+}
+
+/* O menu aberto encobre o dock sem desmontar sua geometria ao fechar. */
+body.menu-open .magic-dock,
+.drawer.magic-menu.open~.magic-dock{pointer-events:none}
+
+@media (max-width:700px){
+  :root{
+    --db7-dock-width:calc(100vw - 20px);
+    --db7-dock-height:82px;
+    --db7-content-clearance:calc(var(--db7-dock-height) + var(--db7-dock-bottom) + 34px);
+  }
+
+  .home-screen,.home-screen.active{
+    padding-top:calc(106px + env(safe-area-inset-top))!important;
+  }
+
+  .home-screen .orb-stage-ref{
+    width:min(86vw,49svh,440px)!important;
+    margin-top:17px!important;
+  }
+
+  .magic-dock{padding:7px 6px!important}
+  .magic-dock>button{height:68px!important}
+  .magic-dock .dock-sigil{width:32px!important;height:32px!important}
+  .magic-dock .dock-orb::before{top:-18px!important;width:78px!important;height:78px!important}
+  .magic-dock .dock-orb::after{top:-11px!important;width:66px!important;height:66px!important}
+  .magic-dock .dock-orb .mini-orb,
+  .magic-dock .dock-orb .mini-orb.mini-awake{
+    top:-11px!important;
+    width:66px!important;
+    height:66px!important;
+    min-width:66px!important;
+    min-height:66px!important;
+  }
+}
+
+@media (max-width:390px){
+  .home-screen,.home-screen.active{
+    padding-inline:12px!important;
+    padding-top:calc(98px + env(safe-area-inset-top))!important;
+  }
+
+  .home-screen .home-copy h1{font-size:clamp(48px,15vw,60px)!important}
+  .home-screen .home-copy .intro{font-size:14px!important}
+  .home-screen .orb-stage-ref{width:min(87vw,47svh,360px)!important}
+  .magic-dock>button small{font-size:8px!important}
+  .magic-dock .dock-sigil{width:30px!important;height:30px!important}
+}
+
+@media (max-height:720px) and (orientation:portrait){
+  .home-screen,.home-screen.active{padding-top:88px!important}
+  .home-screen .home-copy .eyebrow{margin-bottom:7px!important}
+  .home-screen .home-copy h1{font-size:clamp(45px,12vw,62px)!important}
+  .home-screen .home-copy .intro{margin-top:7px!important}
+  .home-screen .orb-stage-ref{width:min(74vw,43svh,320px)!important;margin-top:10px!important}
+  .home-screen .awaken{margin-top:9px!important}
+}
+
+@media (min-width:900px){
+  .home-screen,.home-screen.active{padding-top:126px!important}
+  .home-screen .orb-stage-ref{width:min(48vw,52svh,520px)!important}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .magic-dock,
+  .magic-dock *,
+  .home-screen .orb-stage-ref{transition:none!important}
+}
