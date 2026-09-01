@@ -1,0 +1,3548 @@
+{
+  "project": "Divina Bruxa — Orbe das Realidades",
+  "repository": "divinabruxa/divinabruxa.github.io",
+  "branch": "main",
+  "commit": "8ab7dbabe29d4c7dd53ef36718b12773754b7aa0",
+  "auditedAt": "2026-09-01",
+  "checkoutRoot": "github-audit-v8-20260901",
+  "totalFiles": 574,
+  "totalBytes": 189450299,
+  "byCategory": {
+    "active-entry": 5,
+    "card-asset": 156,
+    "card-editorial": 78,
+    "error-or-offline": 2,
+    "legacy-versioned": 87,
+    "skin-asset": 30,
+    "supporting-or-unclassified": 149,
+    "v8-candidate": 67
+  },
+  "duplicateGroups": [
+    [
+      "BACKEND-STAGING-CONTRACT-V6 2.md",
+      "BACKEND-STAGING-CONTRACT-V6.md"
+    ]
+  ],
+  "authoritativeCurrentRuntime": [
+    "index.html",
+    "app.js",
+    "config.js",
+    "sw.js",
+    "manifest.webmanifest"
+  ],
+  "v8CandidateRuntime": [
+    "accessibility-stability-v8.css",
+    "accessibility-stability-v8.js",
+    "account-trust-v8.css",
+    "account-trust-v8.js",
+    "admin-experience-v8.css",
+    "admin-experience-v8.js",
+    "ai-experience-v8.css",
+    "ai-experience-v8.js",
+    "CHECKLIST-POS-INSTALACAO-V8.25.txt",
+    "consultations-experience-v8.css",
+    "consultations-experience-v8.js",
+    "CORRECTIONS-REPORT-V8.28.txt",
+    "daily-return-v8.css",
+    "daily-return-v8.js",
+    "daily-ritual-v8.css",
+    "daily-ritual-v8.js",
+    "ENVIRONMENT-TEMPLATE-V8.29.txt",
+    "EVIDENCE-REGISTER-V8.27.txt",
+    "FINAL-INSTALL-V8.30.txt",
+    "FINAL-MANIFEST-V8.30.json",
+    "FINAL-RELEASE-NOTES-V8.30.txt",
+    "FINAL-STATUS-V8.30.txt",
+    "GO-LIVE-RUNBOOK-V8.29.txt",
+    "HOMOLOGATION-MATRIX-V8.27.txt",
+    "HOMOLOGATION-RESULT-V8.27.json",
+    "INDEX-SNIPPET-V8.txt",
+    "INSTALL-MANIFEST-V8.25.json",
+    "journal-experience-v8.css",
+    "journal-experience-v8.js",
+    "media-experience-v8.css",
+    "media-experience-v8.js",
+    "menu-ring-v8.css",
+    "notifications-experience-v8.css",
+    "notifications-experience-v8.js",
+    "orb-skin-bridge-v8.js",
+    "OWNER-REVIEW-V8.26.txt",
+    "portal-atmospheres-v8.css",
+    "portal-atmospheres-v8.js",
+    "premium-experience-v8.css",
+    "premium-experience-v8.js",
+    "PRODUCTION-ARCHITECTURE-V8.29.txt",
+    "PRODUCTION-BLOCKERS-V8.26.json",
+    "PRODUCTION-READINESS-V8.29.json",
+    "production-readiness-v8.mjs",
+    "pwa-performance-v8.css",
+    "pwa-performance-v8.js",
+    "qa-supreme-v8.mjs",
+    "README-INSTALAR-V8.25.txt",
+    "regression-v8.28.mjs",
+    "release-gate-v8.mjs",
+    "RELEASE-NOTES-V8.26.txt",
+    "ROADMAP-FINAL-V8.27.txt",
+    "school-experience-v8.css",
+    "school-experience-v8.js",
+    "SECURITY-BILLING-CHECKLIST-V8.29.txt",
+    "seo-analytics-v8.js",
+    "skin-universal-v8.css",
+    "skin-universal-v8.js",
+    "spreads-experience-v8.css",
+    "spreads-experience-v8.js",
+    "STATUS-V8.26.txt",
+    "store-experience-v8.css",
+    "store-experience-v8.js",
+    "tarot-ritual-experience-v8.css",
+    "tarot-ritual-experience-v8.js",
+    "visual-foundation-v8.css",
+    "visual-surfaces-v8.css"
+  ],
+  "files": [
+    {
+      "name": "00-LEIA-PRIMEIRO-V47.txt",
+      "bytes": 1471,
+      "sha256": "5590b8eb1dfd21c5f513b8ff6311c4cf078bede31dd4ffb4c42434e6918de285",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "00-LEIA-PRIMEIRO-V48.txt",
+      "bytes": 1307,
+      "sha256": "5277c5cd1d9f988f1278e2894c4d41f98f4b6772922822ad4c0c5fbe9d491a93",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "00-LEIA-PRIMEIRO-V5-CHECKPOINT-0.3.txt",
+      "bytes": 1259,
+      "sha256": "3bfc6fd3d7510040c5b74c5f67bf1abda3f050f15693e1967d9e5f808fa97355",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "00-LEIA-PRIMEIRO-V5-CHECKPOINT-1.1.txt",
+      "bytes": 1098,
+      "sha256": "e92ef4307709b6675d8886357482d667c45ad498f980b089ad1a3996df5cce94",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "00-LEIA-PRIMEIRO-V5-CHECKPOINT-1.2.txt",
+      "bytes": 1513,
+      "sha256": "d98b0bcb8884fe8ef696153eb33abe884044b70ec3a0263f32ab0c123a399b6a",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "00-LEIA-PRIMEIRO-V5-CHECKPOINT-1.3.txt",
+      "bytes": 1857,
+      "sha256": "931a3a8574e2228599dbbb4ff927caba5212fd31733e115be330e457688e102e",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "00-LEIA-PRIMEIRO-V5-CHECKPOINT-2.1.txt",
+      "bytes": 2882,
+      "sha256": "9f259d45f21ca46898e77d152e14d7894d36c753ad628937d9a318ec70e3c4db",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "00-LEIA-PRIMEIRO-V5-CHECKPOINT-2.2.txt",
+      "bytes": 3299,
+      "sha256": "33d282d83128cb27bce161f8a4699ee6a7f5233697a7ecc6985640ccd373c082",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "00-LEIA-PRIMEIRO-V60.txt",
+      "bytes": 917,
+      "sha256": "076e89305a4ac1e79a2f7f1d83c080fbb7bb3487f4e323df23f8a777782ea73e",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "00-LEIA-PRIMEIRO-V62.txt",
+      "bytes": 440,
+      "sha256": "41521cf79bca4aa84f3789cc227fc8b03dad22d6a6262c584ce54e71b74ecd9c",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "00-LEIA-PRIMEIRO-V63.txt",
+      "bytes": 783,
+      "sha256": "3fbb544ba79e3eebb8dfb78ec1bdbc0afbe1d2a48800998e0265bd24ae99727d",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "404.html",
+      "bytes": 15601,
+      "sha256": "8c1fb62d0eb49dcdd2039748b503c493b2bcbe67d53c0babbb1128ab55adfda8",
+      "category": "error-or-offline"
+    },
+    {
+      "name": "accessibility-polish-v6.css",
+      "bytes": 800,
+      "sha256": "75ceedca12925ecabe727d62953742add95b14e7e320e77ae4126ff504f3e830",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "accessibility-stability-v8.css",
+      "bytes": 1219,
+      "sha256": "75fcd065a927958671cd2d2a944c2cada1142c4cffe20b23f44cb9800dddf153",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "accessibility-stability-v8.js",
+      "bytes": 1073,
+      "sha256": "03ec1cc37685a1cb66a6d3011f408bfc23d04b0e894f90e3af33da8b80835079",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "account-premium-polish-v6.css",
+      "bytes": 1301,
+      "sha256": "8b7c2b10eb1a2b26407d8c7c5de13fc894e48d88bd92d6633cf416ba1d4a2bac",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "account-trust-v8.css",
+      "bytes": 1100,
+      "sha256": "a1fa1ad9658e672349186b4aed6c68c439ba979fa3ebcd222612d6c5d94bab09",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "account-trust-v8.js",
+      "bytes": 1051,
+      "sha256": "9a63d6fd8bcbde64211aa01d60f07035004d4a17dc0dd9a522497adcb600e9a6",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "admin-cosmico-v1.css",
+      "bytes": 1115,
+      "sha256": "20e30e00b36d63932fe2f8a01a52ac4f6398b033d0cb1933b340283330ed2806",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "admin-engine.js",
+      "bytes": 3414,
+      "sha256": "6f93da8e32578a92f7c9fabaec963e664e47f8532812e6470d13e54ee99e9f58",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "admin-experience-v8.css",
+      "bytes": 1062,
+      "sha256": "da814089f540f5eb7978e2583a60cf2c73f1320d165081a5e83e795c41ec325d",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "admin-experience-v8.js",
+      "bytes": 1097,
+      "sha256": "7ba7efefb70530823ce732d2f0b55a63de2378af6cb5c0a80cb4bc175323e2f2",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "admin-policy.js",
+      "bytes": 447,
+      "sha256": "58bf14fad4b912e43aecbdd9bfc750c60f815876607d54d08b3937f539a2f189",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "admin-v5.css",
+      "bytes": 3051,
+      "sha256": "b8868d9b76c30bb991f2242461d32d42564a62e0f59845f5c96bad748d4434bf",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "ai-credits.js",
+      "bytes": 1229,
+      "sha256": "64319c3c191b4c84fb6dc2d10ff23393701ac97d908f146ae925f71ee4e39f35",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "ai-engine.js",
+      "bytes": 4958,
+      "sha256": "cb22d4eeebd21aeb52e3e266dde0bf05d28551b40a488f6ed2e815b099a27200",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "ai-experience-v8.css",
+      "bytes": 955,
+      "sha256": "ebd41a8729039c365b59acb2bc68ad72562edee80f648e44effb5e56c142771d",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "ai-experience-v8.js",
+      "bytes": 934,
+      "sha256": "7b8d8beea3b2b7799b7d4170ee3db6e85507107fa4e0b800037dabfb962e17c3",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "ai-policy.js",
+      "bytes": 835,
+      "sha256": "5c06c625b5562bb860a12be5d54a9f29a731d0446fe3de117b6192b63acbc016",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "ai-polish-v6.css",
+      "bytes": 1106,
+      "sha256": "9fcc4085d124f6b9149e7364287223bd6c34df6a871b46dec48f442721adb34b",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "ai-v5.css",
+      "bytes": 322,
+      "sha256": "ee106613fce1258ab0777d2282e9c38fa242093c3d276d4710848ef201dbb62f",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "analytics-engine.js",
+      "bytes": 1988,
+      "sha256": "97c5b94c4f387d388c71e1cbcf95a378761d2e0d8179574d96719ad9e731e77c",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "analytics-policy.js",
+      "bytes": 300,
+      "sha256": "5df718d9e4e9c163da1714b32227ba2952000712f49e177d38c9ff8b5a441d1f",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "analytics-seo-cosmico-v1.css",
+      "bytes": 971,
+      "sha256": "fd21b0cd2b9cbb8eb6d3d95c756689ffe5b59a15554a63b5ac5188d149c94c84",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "analytics-v5.css",
+      "bytes": 2234,
+      "sha256": "83b11c0cc6dc17d8aa54b58e8cbc31d60dc3077939fdddf07c9721e318bef849",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "app-icon-1024.png",
+      "bytes": 1942862,
+      "sha256": "9c591df113bdea6bffed443719f031e5b5825bf0370048a99b395e48e6c4e29a",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "app.css",
+      "bytes": 9890,
+      "sha256": "9ef3858238ef8ed2b81299718c562ddcff8aca940b557ce3ef52b08bf4e9257c",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "app.js",
+      "bytes": 5615,
+      "sha256": "9e6aa74b165f03639abad6b73a5187a3d68e8392bbd1709b0e08686544d6efb0",
+      "category": "active-entry"
+    },
+    {
+      "name": "apple-touch-icon.png",
+      "bytes": 75663,
+      "sha256": "7f4e3fc77a94e98008ac89a2e25aa0d0bff24dd93d73a375a7a689e992a0fb31",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "auth-client-v6.js",
+      "bytes": 1766,
+      "sha256": "f02f90b6f09618e38c8b411250168cfd4a4bb8faed18959f988f73abd09fb532",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "auth-polish-v6.css",
+      "bytes": 239,
+      "sha256": "8e8eae2a3cb7bd3af34712118483efd610915f951fc86a9f07359be03f556a65",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "BACKEND-STAGING-CONTRACT-V6 2.md",
+      "bytes": 2233,
+      "sha256": "fa0ce189e972b20637cc17d043f17954421defe4854691ece99ce7da11773246",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "BACKEND-STAGING-CONTRACT-V6.md",
+      "bytes": 2233,
+      "sha256": "fa0ce189e972b20637cc17d043f17954421defe4854691ece99ce7da11773246",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "BILLING-STAGING-CONTRACT-V6.md",
+      "bytes": 924,
+      "sha256": "808e44001c4eb87c04a46b9f56392252b5ca5fd80be759dbc71d0e48f8123ba6",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "card-00.jpg",
+      "bytes": 574856,
+      "sha256": "d93d1054fdb337c152800be32fe323f7a00a8d029022ae448176a21b9355e30a",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-00.webp",
+      "bytes": 551212,
+      "sha256": "a6884597f06734b0b43ac93e1300c91475aa56ad3e1c300fe212a1301e583d2c",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-01.jpg",
+      "bytes": 535553,
+      "sha256": "76e6949154eed3e06a49a3285e1bc2de5a4d02302a4a1cf481f64a1e03f855fc",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-01.webp",
+      "bytes": 481678,
+      "sha256": "3d8f6126f60b8ee763d3a6405af090592af213574687f2a7e36b128d21609eec",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-02.jpg",
+      "bytes": 517614,
+      "sha256": "8832d4484e893dbf7561b27929ba778a188d3e471e505e2851c89c16e8f6e325",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-02.webp",
+      "bytes": 506026,
+      "sha256": "a48c08fe919ca1bf24a9aa6d7589b9ac598d3cb04d266ac15dadb1763d127d36",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-03.jpg",
+      "bytes": 653983,
+      "sha256": "51934dbbc17def48378665f305128a08a48ea7fd95dfc6451c00183c4888ffe6",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-03.webp",
+      "bytes": 606548,
+      "sha256": "bb6ada98b3a873a2953e8d78a2bb792f645bada31129d9e8d3827361f6d94220",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-04.jpg",
+      "bytes": 580662,
+      "sha256": "29db5017cbd13ce009985daceb5b3387e5e40f4a08088245a41c264434018df6",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-04.webp",
+      "bytes": 565984,
+      "sha256": "129c62e19c95b18d6eb5ca638c9ea5b5c87c11c898392023a6e699195dcdd117",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-05.jpg",
+      "bytes": 571461,
+      "sha256": "a502224f08c9e44dc52a016c973284d512c82b9ede2eef6436ed47940da14980",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-05.webp",
+      "bytes": 527666,
+      "sha256": "a75822667f4072dca26749c24e8e2a70282f39cc766cdc8652a7e50594fc67a9",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-06.jpg",
+      "bytes": 599525,
+      "sha256": "e224abf488a5a4f04d22f4fe8caf8946eb02c7f3dc5142bf5d9f4f0c220ffd31",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-06.webp",
+      "bytes": 529638,
+      "sha256": "5454231c9d84698fc5d4ac8edfb57cc5b1759c3454bd9e597f29c735c9b9ce7e",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-07.jpg",
+      "bytes": 597166,
+      "sha256": "d3895733edb7a3e6903d4be111a9ced0138141ae47249fa7e615c10cd5382780",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-07.webp",
+      "bytes": 621348,
+      "sha256": "1bd40b7139730ba34f614df13cb1452c7a14f1d3649f9509ca7534735f551bf4",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-08.jpg",
+      "bytes": 568472,
+      "sha256": "624cdc096124c0dc07bb2c3a7ef0428eba645e8febf6c916cdb3b75af8a473b4",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-08.webp",
+      "bytes": 550648,
+      "sha256": "5038da3becc6b2694fe4f9a9534d6e01a30264ad405822e4a2b46e2aff760b59",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-09.jpg",
+      "bytes": 623954,
+      "sha256": "2d4c51f82a12dac479e7435211c26970f090d24524b0820e478edb34e85bcb1d",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-09.webp",
+      "bytes": 558326,
+      "sha256": "10df3bcc925804c4ae33c97a0b8a724fbacbf4c6eca2936923fa368a87a74b19",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-10.jpg",
+      "bytes": 639568,
+      "sha256": "60a6592b0ffc5ba084a3358675c3ddbf6e1aea797e15dad49fe7be0c2d091e2b",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-10.webp",
+      "bytes": 568998,
+      "sha256": "880bdf52dfada262d5c285672b503795b5d5d2be43b9f84072bf220aa2828988",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-11.jpg",
+      "bytes": 522299,
+      "sha256": "f76c7f91810261b4f8b6878d4ccf012a2c9b2800cfcab290f1ddab0deea27b9d",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-11.webp",
+      "bytes": 530512,
+      "sha256": "0d0227dace200c2ff8cbab61919038dc3ce14b86a90a39d7848cf56489df26b5",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-12.jpg",
+      "bytes": 594723,
+      "sha256": "18524310f52b1a2b7d90d360f1680f9ac55b6d657b07ab0fde6e776cdb0902da",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-12.webp",
+      "bytes": 602910,
+      "sha256": "f988ab313d690fd0260e9e0ae7e3015fe0210ca5f77200640fc29d2b0ee39297",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-13.jpg",
+      "bytes": 461801,
+      "sha256": "1d5ba4e9af5b16449aceb2af2a92d3cd717af11fb5cd6a4ba873b56c1a67942d",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-13.webp",
+      "bytes": 435976,
+      "sha256": "f973fb7aa7f0537fbc515f88faf1a0be2d8e57912cda55e29ebe713ce9f6c27b",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-14.jpg",
+      "bytes": 574611,
+      "sha256": "11758dfd04818081f4ebb837bcace85b798705bb8ef794c65e0eec8a2bfd13a8",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-14.webp",
+      "bytes": 589150,
+      "sha256": "b5f3c65d1fe2e290d0c115c55543ea63b340abaffa3289d64be3123421b438cb",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-15.jpg",
+      "bytes": 457634,
+      "sha256": "4747c816a19685d01b008df9f64bd38d36ae4baba851c41acce216976f5f6b00",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-15.webp",
+      "bytes": 436778,
+      "sha256": "4791604ffc55962da19c1c27c2cbd24e1eed45dd7187312b3c8d7396766e13c1",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-16.jpg",
+      "bytes": 536664,
+      "sha256": "3b017395b44449cd638e1833ad83ce22d6e708e9553c47f78b80826d82163658",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-16.webp",
+      "bytes": 539946,
+      "sha256": "42378d587037086cf90928d35aca6f1a9139ef5a2771e493741b582d0979a403",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-17.jpg",
+      "bytes": 581634,
+      "sha256": "69389b813642d6ac2c0cde5bc8b04119f2e0e4aea881553219bd0ec88b6b132c",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-17.webp",
+      "bytes": 604996,
+      "sha256": "8e425673dbc79bbec161e030b7889f2387e24e3975897601d63c052c5c92ca55",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-18.jpg",
+      "bytes": 478435,
+      "sha256": "f92a498d9de94dcbc210dc181cb2c96838c7e2f18d052a770ce3d7ef380c05a7",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-18.webp",
+      "bytes": 460340,
+      "sha256": "1c835a4417c1a0c1cc8f9a53ef51003382616adfdc048f027158e9904b053b8b",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-19.jpg",
+      "bytes": 656353,
+      "sha256": "5884f6a084808510e72765482777503fa3092241ae746746bb512dcde6d2baf8",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-19.webp",
+      "bytes": 659528,
+      "sha256": "f648f0f6738bba072530e4f02af3b27ec03f4742fa3b7b6af0e9e676169590e1",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-20.jpg",
+      "bytes": 538580,
+      "sha256": "8b406f20e5304fb97d35a40beaa8442a12a90851bc347bc23fab15956d866dd9",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-20.webp",
+      "bytes": 511870,
+      "sha256": "d7d0af5eafdd2508ff716abb70fbb572d97d5b007bfefc2314678f376ede22b4",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-21.jpg",
+      "bytes": 752566,
+      "sha256": "160e89f8565bef5131d25583c8593924802efaec709412ed86204f5a576fe0f9",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-21.webp",
+      "bytes": 706990,
+      "sha256": "882ace6b8d391a25720beff100a055f18dd8310c45ea52cccb4d514cce433569",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-22.jpg",
+      "bytes": 572046,
+      "sha256": "5cdcb7d8cb5abc387d1f8f3ae1f67f3730ce7105aca1e7d59fc6684076096448",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-22.webp",
+      "bytes": 556652,
+      "sha256": "4aae09de30c237944a787ba5580a3cf239c305d19688d6041cbfa6a14fcef773",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-23.jpg",
+      "bytes": 509173,
+      "sha256": "857ae676d3018e514cc1f0d7365c092ebbd18c2987755ef583094fd53d26db3c",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-23.webp",
+      "bytes": 469988,
+      "sha256": "556b8089a76ee00566099b519b686d385227aabd266e8022f9b919fe2ad25f8c",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-24.jpg",
+      "bytes": 453908,
+      "sha256": "4d2ef69ab6865c00cc558b3eca6c7649d787e9d960a96af736207b91397bfcb7",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-24.webp",
+      "bytes": 434244,
+      "sha256": "33ccebd3107a6d37ac2ae06c7e3ef6955e8c9a98a286c2cc47d0d05c2ebd4d9a",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-25.jpg",
+      "bytes": 434099,
+      "sha256": "850a4ac5e3a530bc571225dcaea00fe201ba3ad60aaa40b3dcdfc74d65a07e9e",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-25.webp",
+      "bytes": 397890,
+      "sha256": "1131a410a03a28c2d34ba2b1124e782a83e407b43ba69b71aa6d3f6af329b7da",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-26.jpg",
+      "bytes": 646669,
+      "sha256": "ec32ffbc9d735920318dccfd592bd92c485f56fd482ace6751f907f856664574",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-26.webp",
+      "bytes": 606832,
+      "sha256": "8647d8914a3674e5725985220adc610dee1a22f4a14ad72ce00fec0f12446b4e",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-27.jpg",
+      "bytes": 460019,
+      "sha256": "deef7c44ff9ffe7c32c20c0a49983500e94365946d12c468f3237c6297005270",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-27.webp",
+      "bytes": 439894,
+      "sha256": "9ac4091736d786e9e432410f77cd7f98e5776394442cff295b7e971d9a1c28e8",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-28.jpg",
+      "bytes": 481477,
+      "sha256": "125c71ac01d0b332b3b8eede3798f5d67fc801a4d9199a941a03bbd206778605",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-28.webp",
+      "bytes": 466260,
+      "sha256": "e172f5f73cb443fc87557c0e7a9211b6ae031c4b43a32507030eeac59f059784",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-29.jpg",
+      "bytes": 499061,
+      "sha256": "ae1052d391753ef699ad9a7a4b3c36b776b92d6513ea2926fcb529bb79949d82",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-29.webp",
+      "bytes": 494718,
+      "sha256": "614d15895d3e608b849c2c44c8eb694908b76a5ff2b71c05ff3c7f2ea4359089",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-30.jpg",
+      "bytes": 484110,
+      "sha256": "4c28b57ce2d57ca9e3ea37bd9abc9973f7a6910c0b600f337bc299f28714c53f",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-30.webp",
+      "bytes": 495182,
+      "sha256": "50cbeea8ad16e35b82867b50f5afdf393c3e78111bf50b2d5673bd30c92c41da",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-31.jpg",
+      "bytes": 573454,
+      "sha256": "d9da5f0fdab6d63d93a0ec003983626ad7f7bf7ce51fa2fff249764eb5d40790",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-31.webp",
+      "bytes": 565302,
+      "sha256": "e90bd14ea9e8f30b1c749a656e9bce1a262168a1879617a9c69f4caff582a74c",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-32.jpg",
+      "bytes": 505871,
+      "sha256": "d009364cae37dce3403be2be44b3c2977596698f64a531b003751d39a3017fd9",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-32.webp",
+      "bytes": 456324,
+      "sha256": "a0b45541a4c96281ae1af8615cddc00e99977ec0158c8e892f32741fe2351c94",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-33.jpg",
+      "bytes": 453434,
+      "sha256": "fa72d07837b434b2902bc6930d4e27f1c11a711a2f26a6413514fcb8ffde4e3d",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-33.webp",
+      "bytes": 425300,
+      "sha256": "ff4a36ab36f4aac33269a8286c5f215a7af0a030f1f504bc92ca0745aa210f5e",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-34.jpg",
+      "bytes": 498109,
+      "sha256": "fbda1b4e7a87550727331ff33ceaa9bdedac784db3281701e1639a2d71e25a0d",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-34.webp",
+      "bytes": 491328,
+      "sha256": "a1929facf116e9ccac7fff9ef0a8557988d470823f543618797f68590e023123",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-35.jpg",
+      "bytes": 531415,
+      "sha256": "1e5d5e57e2bd3df760a124bf83663e1ab3b1b5681b491262b9107ce5332b12b2",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-35.webp",
+      "bytes": 538736,
+      "sha256": "7533d2f79d47a7d26443eba93d7a84a0b2e4c8cdd99fa5b30dda797598383531",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-36.jpg",
+      "bytes": 521429,
+      "sha256": "41af3644720c7a6c2ee64272542f581a167a43f3d00011e89ad6f3131eacc219",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-36.webp",
+      "bytes": 534166,
+      "sha256": "449e2e4f2d71de2efeb5983b5b00be30b44233ae37430189c2e16ba48a6ceb1f",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-37.jpg",
+      "bytes": 507460,
+      "sha256": "eabc993d2bc049e73239e39ca17a0f5ea5e6ad7b3285826e53089557767a3ccc",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-37.webp",
+      "bytes": 465680,
+      "sha256": "65a76cb106f96ddbd64ce9bc4c6e0a30873edb6a6b99602056fad10c96437793",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-38.jpg",
+      "bytes": 471773,
+      "sha256": "0909945e28f61bdf2b04691efa7a1a62d7e268f6eb987f86fcc37957262cc682",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-38.webp",
+      "bytes": 463418,
+      "sha256": "2d933433067b7d6f7d3462e24337f1510728ff5daeebd3419785c7cb9572a4ff",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-39.jpg",
+      "bytes": 496405,
+      "sha256": "5f7d5120584e139d20e37fe1620e143fcfc361151c29c2aaa5115f408cfb06a1",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-39.webp",
+      "bytes": 502648,
+      "sha256": "874ddd129c6391576373230c4c4f5454f7039e20287c02b9a0584ffcd1848639",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-40.jpg",
+      "bytes": 445371,
+      "sha256": "bb529d47d8f87c624abefc5ab707204742dc6d88f34fd9b43dc6305c499ef7a0",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-40.webp",
+      "bytes": 426044,
+      "sha256": "7ec3de6f790cd876efaf7c09846de87f5f3ec3baae129010cda9a3a03ccdc30a",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-41.jpg",
+      "bytes": 479661,
+      "sha256": "c68722e98aa91866d2540f458c8949edffd999d7be29294cb2dd69e7878ed9d6",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-41.webp",
+      "bytes": 484188,
+      "sha256": "36f050b3ed153a5b63a45dc42d590a9779d8fda4e502b77ee0c16f89d857c9b1",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-42.jpg",
+      "bytes": 454240,
+      "sha256": "e9607c4ce1776e1bacc7e178888554fd03ab5287208801642fe28f5a7059f0b1",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-42.webp",
+      "bytes": 443082,
+      "sha256": "4bb68fddc9a978def5cd4aa2972179c8197af9f589c8d7b89f4219cb9c644470",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-43.jpg",
+      "bytes": 504806,
+      "sha256": "3cefccb7ea0e9a53e6f23c60f63b51666179cf39626cd688500a1ea329902857",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-43.webp",
+      "bytes": 522570,
+      "sha256": "555d42cf92e1a74d519f4acac9d1b26df77852d06da5d485997578c443bbb5fe",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-44.jpg",
+      "bytes": 481610,
+      "sha256": "f492ebcaea9f25bfb0672664e0ae04996431d673dabd41e687c9812e63a944fd",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-44.webp",
+      "bytes": 482450,
+      "sha256": "76cad13c1199e1c88eae8e19125c79b99ed1fbc697b75a692943f85d7280ce0f",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-45.jpg",
+      "bytes": 474045,
+      "sha256": "c4a5ce1217879fb31846daf83c29aa6c10305468672d618e8863919129264b76",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-45.webp",
+      "bytes": 467806,
+      "sha256": "381ecbfdf272fdf5ba89fd4ac2d945efd047bafa313d1651ab6b5396829e475b",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-46.jpg",
+      "bytes": 480796,
+      "sha256": "87fce03ae5a3b4f7e46cb15cfdd7b38f901f2fa87e423f6175c54b5d93a39f05",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-46.webp",
+      "bytes": 477302,
+      "sha256": "7319791497eae61d2616bf4ebf21227f8eae45e9f68929b7bc293e9d910a21b2",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-47.png",
+      "bytes": 2155341,
+      "sha256": "547847ec8907af0cc916db2642416204ebbb9c32df331cfa45eb73a851b26730",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-47.webp",
+      "bytes": 440644,
+      "sha256": "2c7cb300731fdd7ff8837d4496761330a16eb28a3cc5c0d175378929efc28c06",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-48.jpg",
+      "bytes": 493066,
+      "sha256": "1be375f189c3a55f6a7a7f7ce7e21d404c0a6c293d45a1248cd1806223b25b43",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-48.webp",
+      "bytes": 488168,
+      "sha256": "3968dba5340b80ac64226c7e349e42857f512df77581dbee7a982efb512be8eb",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-49.jpg",
+      "bytes": 474479,
+      "sha256": "1bc3c412a5a945507af8d10ff53fb5dbea589bf85db97b550730e4bb1335c652",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-49.webp",
+      "bytes": 469374,
+      "sha256": "955a18b2dac2d6e39db38f3de0e857b7ebe25a437461398629e2a281e41674f7",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-50.jpg",
+      "bytes": 332684,
+      "sha256": "c07e18365d927974bef7a44196bc3cac9568643511363be3c10dcb8d7a80e1d0",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-50.webp",
+      "bytes": 244622,
+      "sha256": "79ca9d01b91adc2a5ff1aff01a139e6aa89f3c10054aeb76d6fc7de84ff26ff9",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-51.jpg",
+      "bytes": 368617,
+      "sha256": "31da87e6f11c832015f56b5f890aee67c4ccdc0cfffe4d9c09ae0d25db67e706",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-51.webp",
+      "bytes": 298266,
+      "sha256": "1ac8f0bb31146d0f86e4b80a03454000a161db4dc6c04558cae92688778919cf",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-52.jpg",
+      "bytes": 389718,
+      "sha256": "0b7d1a31c178364fc318b9c57d3ff8bd322f6bbdd971468e2527e5a6af524e46",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-52.webp",
+      "bytes": 341134,
+      "sha256": "f6dbea779dd409d166f90c7e02f872e5bb358462c6fc0ff03753b74f0808eb2f",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-53.jpg",
+      "bytes": 400043,
+      "sha256": "5d21d80f5ec5fe0694ebb618ff138f19b06dbe7be40a2fd80a79662c884d8bd1",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-53.webp",
+      "bytes": 358612,
+      "sha256": "ec5bf63f7e93be634b382280e71008d9b9fd1b9a4a1ca876dedb1be0f1791001",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-54.jpg",
+      "bytes": 388823,
+      "sha256": "dc5113340fa44526f8d97595ccc70f7b842a352617eb71b0a37d242b6d6076f0",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-54.webp",
+      "bytes": 336494,
+      "sha256": "1d56281525b1ec4ef132bf587583260528865fd26423a439ba9cc0d637fa58f9",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-55.jpg",
+      "bytes": 382305,
+      "sha256": "f460aa562a6e66736b88f12c3dbc01412bf07fd77841871abd6d0739352d06a1",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-55.webp",
+      "bytes": 320224,
+      "sha256": "895013c99ce5039d08c6df28e78a3940aeac0d6a97f1b3b4a63e3cb88f4e240a",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-56.jpg",
+      "bytes": 366921,
+      "sha256": "4ac1b0d77d9846964bca559355f9c9fb653434cd83b879afaccfda85fc2fed41",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-56.webp",
+      "bytes": 316480,
+      "sha256": "6b85a86cea42448f1a47e24f6daff7ba1c5b37a53c66d5f59a7c740489081acb",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-57.jpg",
+      "bytes": 366531,
+      "sha256": "ed1df3f69e3ac22361d97f241a180fcdbb3c50e140bf5aeccd442187461d42a9",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-57.webp",
+      "bytes": 327594,
+      "sha256": "01a649d0874bab4e87888d4e137555ab648160f4f85a605bd9380dfb87f244fb",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-58.jpg",
+      "bytes": 353274,
+      "sha256": "982104302dccb04ce81bc1f066856bc58786836ba47f570bc68cb809a0f50878",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-58.webp",
+      "bytes": 295380,
+      "sha256": "48c5aeff70b165b8b018b9f02db95c9aedbf84101bb0e78b6a64a78b78f47a4a",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-59.jpg",
+      "bytes": 414599,
+      "sha256": "cc5575f5fc8be3df08282bfd1bda2bb7a67899a7dd0c0bdc8939cd1d2ad55800",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-59.webp",
+      "bytes": 349220,
+      "sha256": "5df9ebd1b404662f2693931406107ae24c282d30d20aa6f0b0bb7dc04e3b672c",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-60.jpg",
+      "bytes": 408406,
+      "sha256": "a558cf06e17df2bb6bf953a6de64287b6b81b26ba6a2a7fdfc53cbdf05c25176",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-60.webp",
+      "bytes": 377914,
+      "sha256": "79d36aedcb61d525825a4a7b735b8a607f2c5ed0aaf9c1064b84115340012d45",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-61.jpg",
+      "bytes": 434469,
+      "sha256": "1d4002dd9e7a019123d218ca4514927243a266d713b596821f361fed6c3f7038",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-61.webp",
+      "bytes": 404218,
+      "sha256": "b37050770fdd282d1fecb3a67817bd25d7594c075dcb407a8f3b55faa1cf2d2a",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-62.jpg",
+      "bytes": 472175,
+      "sha256": "5028be5b629760cb209aae2c306617d39d0d494c9d64e6a54c79443a48582449",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-62.webp",
+      "bytes": 458326,
+      "sha256": "2a9df083ca61ed76a5fe2e2e73a855b369a3ba74d9fcc20d07709895dbe4c3d7",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-63.jpg",
+      "bytes": 444285,
+      "sha256": "9b01bc48b146d76f8f799c82496388255e825954cdad6366263b0f30dad60d9d",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-63.webp",
+      "bytes": 406320,
+      "sha256": "09830d98a7e292e77f0d70bf4bdd34b911daa17d1d311c249844fa8e50a9cfa4",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-64.jpg",
+      "bytes": 577687,
+      "sha256": "13bc3fdf7e8264e59ab9b788a7a88f79416d3a6343572a04f464fc8cc1279ed1",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-64.webp",
+      "bytes": 554998,
+      "sha256": "d997bc9402df5f90c38203b5d4dc483a4ade6ea3f40969d0be1c2552e2425d2b",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-65.jpg",
+      "bytes": 601705,
+      "sha256": "60b2c4bfcc072510e6ec6993e888bdc2ac00e919b609f72652ab8d4a8498f7ae",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-65.webp",
+      "bytes": 551616,
+      "sha256": "32adae91caf6ef82441360ff1b6bd30cbf487aff4644b86b41f84e1d49f34533",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-66.jpg",
+      "bytes": 634338,
+      "sha256": "f9b7cbb172aa87a67d94046951dabad6f55cd5dd03a20e6ba2a47d1340afdb9f",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-66.webp",
+      "bytes": 602258,
+      "sha256": "0288afd72aca3a547b6ead1c422f37ae3c5fb8ab704e0ed1c5ea083962ad88fb",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-67.jpg",
+      "bytes": 486240,
+      "sha256": "b547e15354ce7d527a7b5067c536f50a22aa2eb10f0a99159a92dcb350184368",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-67.webp",
+      "bytes": 489556,
+      "sha256": "3e5581b3d1126d0486085e1cea0d86fdefae348c697faac515d15b2f38cfa069",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-68.jpg",
+      "bytes": 521875,
+      "sha256": "497ee2fce6c7c6856010dcaba74c057ccadd97045f1d898957dbd87a18676f02",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-68.webp",
+      "bytes": 443452,
+      "sha256": "5ab5633739b43b283edc63d731e33ccf484edf9313e40e61c60c4a8e0025816c",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-69.jpg",
+      "bytes": 537504,
+      "sha256": "e92d4ab82439627258e67201322b0d2246b55e4438d75fdf134cc5cde539dd62",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-69.webp",
+      "bytes": 463476,
+      "sha256": "ac887d4238a65905346c7ef43bd35b05316ed5bc2fea2ecd2634b1b4d553487a",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-70.jpg",
+      "bytes": 538356,
+      "sha256": "b409c07da8664201c984f8c4075050c4cf6c5142df04304b793126963f0530cd",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-70.webp",
+      "bytes": 475350,
+      "sha256": "c29236b9b1e78ea4e527b2c1d6581c9f384e76e0f39812f35b0e4d9503f0a12a",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-71.jpg",
+      "bytes": 535381,
+      "sha256": "33e94d911b79fd9d6df7c23d23d5c2b42950387d8ee68cec02ffa08124b88123",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-71.webp",
+      "bytes": 479170,
+      "sha256": "5338e8ba92d326ef9d761af27afe84352ac3449a6a06b8a9f4a5bbe5ddbc903a",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-72.jpg",
+      "bytes": 567015,
+      "sha256": "4fedb73b745e74b7eea709a8d47e024fdfa1ef8ce6c1c38af36c6e177ca26d15",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-72.webp",
+      "bytes": 503540,
+      "sha256": "1917cb32b69301972d77b6b562e9b495086191e8ffb026078c72dae2039bf7b7",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-73.jpg",
+      "bytes": 641334,
+      "sha256": "be0070770c2a2c981601dbcb80e162c67114cf298169c6a4b29134745a5c912c",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-73.webp",
+      "bytes": 579958,
+      "sha256": "82474a92cd3bd557e7bddd3014d76e1db67351567037726b5ca30568afb9bdb9",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-74.jpg",
+      "bytes": 576138,
+      "sha256": "0b3415d9b873834a20e63801bb5e046812d01f499a4e500bb40e50deec22ef82",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-74.webp",
+      "bytes": 517370,
+      "sha256": "a194b4d48ec3308d1a59fccf350b91bad602ce0dcc352917dc2aed76267b83ab",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-75.jpg",
+      "bytes": 561468,
+      "sha256": "dd52e802b73edda5f60a206b9ecefb2d0a381ce7173d3d0bdb0f0e47fe7c90e2",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-75.webp",
+      "bytes": 498176,
+      "sha256": "9d049eeadd4b937837658846a19a492208492bcafc82e96d7de31781c9c56907",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-76.jpg",
+      "bytes": 625208,
+      "sha256": "7ce34b15cd04c162b5208baa471cc869f96902145b8aafe1c5bffaa725305487",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-76.webp",
+      "bytes": 559670,
+      "sha256": "7f17a7fba687ce74b30369a5099f146193fe3cbd67a527c59f1257844a20a81b",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-77.jpg",
+      "bytes": 563945,
+      "sha256": "03e5838c424ab8527f18342bb48638d57d53f50d026e61c265baa02512ae4dbf",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-77.webp",
+      "bytes": 553002,
+      "sha256": "649879c9a7b37a332590429594efb98f20441d313f8dcad56a38327cf5c04c25",
+      "category": "card-asset"
+    },
+    {
+      "name": "card-library-engine.js",
+      "bytes": 3681,
+      "sha256": "344ab99c3662626d1ac0db36697d99beee1970b6c258aa54cba7d4f7901370cd",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "card-library-policy.js",
+      "bytes": 834,
+      "sha256": "f509c4f51d3d22e54dcca2e389beb0ec395a677ba136087977be65aeb3fb9513",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "card-library-v5.css",
+      "bytes": 2030,
+      "sha256": "37c8580907b0b21131f74f7e4940a717eced6ef3bd6d80338e7407b21f83fca4",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "card-page.css",
+      "bytes": 1720,
+      "sha256": "4dd5ec55b879a8ce4cee2af44e36e8108f75772c0fa7d935deb8c0312e9fb4fd",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "carta-00-o-louco.html",
+      "bytes": 6771,
+      "sha256": "5cc85d2cb84f06de2a4d831dda75d6ff816acdbdba7401d02c89a036cc74d65d",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-01-o-mago.html",
+      "bytes": 6864,
+      "sha256": "afb85abd7e7318149ec77c5aa26afbca613f86677af87a1b22c0fea750489eda",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-02-a-sacerdotisa.html",
+      "bytes": 6936,
+      "sha256": "c99b8475ee81e48c92aac774f70efb183c0498559aa3ea37089075959458b8c5",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-03-a-imperatriz.html",
+      "bytes": 6971,
+      "sha256": "f70a10a0cb13f3f4bf2bb2210184016649d1881a93fb8dc2880828fe0a6b7ed3",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-04-o-imperador.html",
+      "bytes": 6922,
+      "sha256": "2ece5703b18689303b39b5974b97c59cfea2a778ef3ffdb8271bcae37bf90eeb",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-05-o-hierofante.html",
+      "bytes": 6931,
+      "sha256": "2c0edf4bf538ceae6664aa7a52dccab4ea7febcb4392dfced97467c03ca2bf77",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-06-os-enamorados.html",
+      "bytes": 7040,
+      "sha256": "351e8c8d7aa9ca1705b792daca9eddb72873b843360b2d89301eca3e3d42ea22",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-07-o-carro.html",
+      "bytes": 6908,
+      "sha256": "1c43e21677c19ff2c58d6fc56d47b923c34c4af39184331970f3d020c3b0ae1c",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-08-a-forca.html",
+      "bytes": 6979,
+      "sha256": "9d863f2ee775c58422a0ee44546f1f489a7f1c5b66051b51feb591cdc7d68bf8",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-09-o-eremita.html",
+      "bytes": 6946,
+      "sha256": "f612e83554a0789eb4f78751af15bca722f032f69d73a978b8bd83c5a51edf3c",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-10-a-roda-da-fortuna.html",
+      "bytes": 7221,
+      "sha256": "ea3be0893361d865950a16503d30e2b9263f92b20dbfc6ab489be8d7c0e1bab7",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-10-de-copas.html",
+      "bytes": 8674,
+      "sha256": "2b1113288ca633a5476c63d04f89b856dfa7d1e45437340c3e1468af40642a81",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-10-de-espadas.html",
+      "bytes": 9747,
+      "sha256": "af10b8ddc9817ca13fe8243826f28e26ef2ab62f6fae81e912cb430f853f9c37",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-10-de-ouros.html",
+      "bytes": 9757,
+      "sha256": "77e3ab40fc258ca542b3791260ec3c7a6d764e6705871359205f3182cb8e18b8",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-10-de-paus.html",
+      "bytes": 5323,
+      "sha256": "45b51ad9dc6ac97721a0f655202d44e824d0993786fc684e41028c6d3bc2d522",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-11-a-justica.html",
+      "bytes": 6985,
+      "sha256": "d2e6882c58980f2ffd9082852138b0ca35c94fdd8eac2c1419616b24e51d519c",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-12-o-pendurado.html",
+      "bytes": 7194,
+      "sha256": "6fd72412eb640a12694db297041ac17f80ef76a0a93d40232e05a9af4dbf2208",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-13-a-morte.html",
+      "bytes": 7016,
+      "sha256": "d419969cdeb5dc83335b7cf7f6f7a521e7a0dd66d09832627f7e4c0196ce8e5b",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-14-a-temperanca.html",
+      "bytes": 7070,
+      "sha256": "3a36f24a0e00b275fe2f0d108ba74ac78fb7ab317edd33933b4e71a00e35169a",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-15-o-diabo.html",
+      "bytes": 7061,
+      "sha256": "5f66477f04f19e3992a514e81377fecd4e71f71a75b9509a647245b6035722b9",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-16-a-torre.html",
+      "bytes": 7174,
+      "sha256": "a629dc497e8d6684079b00de2bfdc79fb24c910b79c58a2a771ef24e0a6951a0",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-17-a-estrela.html",
+      "bytes": 7084,
+      "sha256": "cb3d4ef4a1572615b471c4fb7f20a4c6b5a99b4029c3c45062d818ee88523c24",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-18-a-lua.html",
+      "bytes": 7167,
+      "sha256": "c481bfeba6d469b2c8858005697945c667ae491ca48c650bf106b1c4d4291a5c",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-19-o-sol.html",
+      "bytes": 7018,
+      "sha256": "0887ec9fcb609c9ac8a8e87b2415ff1af9839e010b83939d44ff6412da990ebb",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-2-de-copas.html",
+      "bytes": 8284,
+      "sha256": "d7d4a12646b1670639c0edade71cdba59f6d804087fda6301f59bf2a4049b196",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-2-de-espadas.html",
+      "bytes": 9674,
+      "sha256": "7f7a9e2ca1d6d4d422f4150127186a629927c46e78ead711e484cbf40e2ef682",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-2-de-ouros.html",
+      "bytes": 9607,
+      "sha256": "2a38827566a3d557125528e3b9868ff906a4f0cb6eb79199972fe8069167a190",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-2-de-paus.html",
+      "bytes": 5751,
+      "sha256": "f1f016bab1c3afd888afcfad8b20cc45dd96782aa7eaea3053aba736f6ffc4f1",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-20-o-julgamento.html",
+      "bytes": 7177,
+      "sha256": "47affd1b7e2d9b92b9f0c172c4c3463a1c7cff16596421833f087e9cc000dd84",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-21-o-mundo.html",
+      "bytes": 7029,
+      "sha256": "929aceff15d60a77f38a02d2aa7b62959303f4ab4a3e98147dfb3127b044b7de",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-3-de-copas.html",
+      "bytes": 8347,
+      "sha256": "839bf2b79ec558ade6bc9afc0d91d95f42c5e20f710d759b4b35a5cd4a60ccd1",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-3-de-espadas.html",
+      "bytes": 9714,
+      "sha256": "f1e5cd32c043c627deb8ea90c382698fdc80662a9a0f5563d0f429cf74105084",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-3-de-ouros.html",
+      "bytes": 9713,
+      "sha256": "c3cefba95ac9e72bd85970a4a11db9df1dcbcd0941a2a62a63da6c7a756b8f17",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-3-de-paus.html",
+      "bytes": 5701,
+      "sha256": "86310296fc5f91961cb1dc6a341eb148037b275dff8161ed1587bfaa0285cc35",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-4-de-copas.html",
+      "bytes": 8495,
+      "sha256": "bcc387ee185c493485d7f8fda3e1a83f9f19ce5ebba4064bcc4f6b04adcc5238",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-4-de-espadas.html",
+      "bytes": 9615,
+      "sha256": "80f37903ee6ea841ff5c89054d3631fe36aa3bb5564fe6219bb3f66bb2f541e5",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-4-de-ouros.html",
+      "bytes": 9785,
+      "sha256": "3f7a479c73ace73f91044a6370142805b69c9a18c087814c3511e0d8c6646551",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-4-de-paus.html",
+      "bytes": 5739,
+      "sha256": "3ce2ca99918b59b9dad6781a50753acf35d11feb40c75a8984b34634b6154857",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-5-de-copas.html",
+      "bytes": 8481,
+      "sha256": "dc7488d5e441b6fc06102bdc7372d47138027610a85e1f12245035b6d6d761cc",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-5-de-espadas.html",
+      "bytes": 9610,
+      "sha256": "4666c388592a7ed0bc7b4e2623d075574959eabe61c114bf37afaf5c2d7dce65",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-5-de-ouros.html",
+      "bytes": 9832,
+      "sha256": "ff6c5d8ab43b3e4bc2a2861878d591e4643b5ea62fbd1c9d46072b49aa9bb6f3",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-5-de-paus.html",
+      "bytes": 5617,
+      "sha256": "c14fb373c407bd43a1a5db9b3d00327faf53c2702b41a79a7ef9e4b3d8798c9f",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-6-de-copas.html",
+      "bytes": 8502,
+      "sha256": "dd96a102862742f5bea52775f9d04ed549a8e0c944a4527f54d76c0c0ae8148a",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-6-de-espadas.html",
+      "bytes": 9742,
+      "sha256": "14e23811a2d07923eb3e330799836c0955b3b7db083b844508a305f355787d22",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-6-de-ouros.html",
+      "bytes": 9726,
+      "sha256": "1792e10b52002c92f0dc615f05bb59bcf49e2106aa3ab52cd87ae2114621837c",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-6-de-paus.html",
+      "bytes": 5562,
+      "sha256": "7bdf312b5909be4ddc08088618d711f823f662f74ea0f1fcdb28109e0941c484",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-7-de-copas.html",
+      "bytes": 8563,
+      "sha256": "17dc17e2165306b779cbd2fef815ed50ca53f85deece26a68869faf2ae207ea4",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-7-de-espadas.html",
+      "bytes": 9698,
+      "sha256": "1deca2c260381e63e467f4362da2fbcd0a53faf879ef092977b7751d24771467",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-7-de-ouros.html",
+      "bytes": 9768,
+      "sha256": "cd980314d67f4e480bc6c9162752de59f19d474cad582e95d4e742e0fc206cbc",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-7-de-paus.html",
+      "bytes": 5367,
+      "sha256": "d194e7b7bbb853a76ab8d1ed8aab45c30791beeb9e55252577cb370b46637aba",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-8-de-copas.html",
+      "bytes": 8624,
+      "sha256": "5e02e35d2e7412f09f80f867b90708aff1c435044a1d6e7e490781d23a4b5f05",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-8-de-espadas.html",
+      "bytes": 9761,
+      "sha256": "db92ad7096b7d4f57c592b940b8ab32c428700a6618cac318a4eb060b90e0db0",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-8-de-ouros.html",
+      "bytes": 9688,
+      "sha256": "e53aae0ddeb5cf60371a864eb3adc8823284751157761216558a274016bd488a",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-8-de-paus.html",
+      "bytes": 5374,
+      "sha256": "2d8638762e5066496f5cdbf471bce85e311be72e9bcbd96874b9b0cd55d8bc27",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-9-de-copas.html",
+      "bytes": 8471,
+      "sha256": "2fd0dcde1d76eeeb99d6796c515c1004c30a54c946a67e862735b485c9568628",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-9-de-espadas.html",
+      "bytes": 9765,
+      "sha256": "214c48c2fb24820599a3f101f57880ee3a575a3c8d75cc107dcbaeef76a1e59b",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-9-de-ouros.html",
+      "bytes": 9753,
+      "sha256": "2401ffe6ea7e5e4c0e73e84cccf8521c234da4cb5778fa1339f2ac219b0b55ef",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-9-de-paus.html",
+      "bytes": 5421,
+      "sha256": "326e3d2061c0a88371c777f55f09b2f469b295850a4a485cc398ae1f6df3f503",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-as-de-copas.html",
+      "bytes": 8335,
+      "sha256": "c1989c9f88001e37cefea3f0a12731108b0c7571b274499be03f3c9c1c24e8e3",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-as-de-espadas.html",
+      "bytes": 9673,
+      "sha256": "129d8bce8b422c6ea8aae955d29be9defbfaa59c4fb3c9921114c534a88135d2",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-as-de-ouros.html",
+      "bytes": 9795,
+      "sha256": "0d5c924e138648b06d45813569f60d449fac9ae9436f8d10bf3750f04bf9a1d7",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-as-de-paus.html",
+      "bytes": 6220,
+      "sha256": "92893b79878e83c8857da69657408a738b16809f5506d3ce4a3f5e18acbcb99b",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-cavaleiro-de-copas.html",
+      "bytes": 8585,
+      "sha256": "b3fc81d683022f8e991880f18fd347ff0469c3ea5fd96adbfc81ca64957dcf4f",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-cavaleiro-de-espadas.html",
+      "bytes": 9733,
+      "sha256": "9f8e46af22025313b0f911aae9770ad48eaa84137ba02a433024d1f73c92490e",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-cavaleiro-de-ouros.html",
+      "bytes": 9859,
+      "sha256": "99c9153ce7b4678a8d3196a29d1e67af044e83b88c9b138d398cecae9f2fd14b",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-cavaleiro-de-paus.html",
+      "bytes": 5525,
+      "sha256": "124ad55d0fdf8061a0bb68b1b31c0db8e8ab572db8f69f99e1f80a58bb9d9082",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-pajem-de-copas.html",
+      "bytes": 8568,
+      "sha256": "3aa42df8fe2cf59dcba993cd0fb713d0ce236ced84e060371c7be1bc6e4550b5",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-pajem-de-espadas.html",
+      "bytes": 9772,
+      "sha256": "5581a7cd9787e8e198d4bc7d0d33900ba40d9ab51ab07fb66da7b84ed58c14f0",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-pajem-de-ouros.html",
+      "bytes": 9794,
+      "sha256": "6589dad6711ab21b787cbee09bc19fad0995f142c7ed3c8d06ebd3f7318c91fc",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-pajem-de-paus.html",
+      "bytes": 5265,
+      "sha256": "38959bac999cec5f15d9a0573aad4cb01144669a2bb5ab0b42f2c4148c092989",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-rainha-de-copas.html",
+      "bytes": 8559,
+      "sha256": "076b3d9891e9a3d6f42fd34826eb7db7be6e98f529357a1c48674e76156353b9",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-rainha-de-espadas.html",
+      "bytes": 9819,
+      "sha256": "c5f50c02e877a63cdfd6f89a366aacb098170784adfa55773462d2e466c46448",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-rainha-de-ouros.html",
+      "bytes": 9896,
+      "sha256": "1aa37ca47f544d3b95d20e71bf4f5bf3afaeb969d2457dd5cf82f9ffd27e5634",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-rainha-de-paus.html",
+      "bytes": 5560,
+      "sha256": "e3c49f757c46c7be043fe0600c394164851ed6723135fac6cdb9590fe92ccdb2",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-rei-de-copas.html",
+      "bytes": 8573,
+      "sha256": "bb1fa2b662bf7be4e2b6bfb79b5b70b83cdb0021a89c8ad0ae94c0c52866cdbd",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-rei-de-espadas.html",
+      "bytes": 9754,
+      "sha256": "fd7566bdd08145ff8da5ceb6de2b08665a79d50b9972ee2c39fa9314f18ee69c",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-rei-de-ouros.html",
+      "bytes": 9954,
+      "sha256": "87de49e8c055a76b509ad7064a0b4dc6c69a95aee9532599d2f370905f6e1f6d",
+      "category": "card-editorial"
+    },
+    {
+      "name": "carta-rei-de-paus.html",
+      "bytes": 5604,
+      "sha256": "63fdc7edf8cd8cd4cd29d2f5659005ee2c0d0ec6cd7dfe69eb1783fbe83bc68e",
+      "category": "card-editorial"
+    },
+    {
+      "name": "CHECKLIST-POS-INSTALACAO-V8.25.txt",
+      "bytes": 671,
+      "sha256": "3e5f83dca0ebb2a10adabce6431dcac8f3a91081857a6d9718808af3b4730127",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "CNAME",
+      "bytes": 19,
+      "sha256": "5221eb592e0235f65c0dd92e75ff80248b30ba7d08a10ee1613a80d4f791d8e6",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "COFRE-RECUPERACAO-V5-CHECKPOINT-0.1.json",
+      "bytes": 2321,
+      "sha256": "1dec62f09c074a4f8eca203aed5faa837e0e4885b87fec26b8021beaa0152f96",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "COFRE-VISUAL-DIVINA-BRUXA-V1.json",
+      "bytes": 2525,
+      "sha256": "382cf175aae17e267b8799d74ffa58fdb7d4402b1b79d7bb0afd43759a54f1f9",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "COFRE-VISUAL-V77-PLUS-CHECKPOINT-0.1.md",
+      "bytes": 2306,
+      "sha256": "29b04fadbd259665a816c3b6fb0eab928efceb1060d03678b4ed0c1649594c7a",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "commerce-engine.js",
+      "bytes": 9742,
+      "sha256": "fef8f066f1c72808573b7125971d3b53cce46b0ed770fdda7f3677b389181c25",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "config.js",
+      "bytes": 7195,
+      "sha256": "06e5da42090f63ac63a2cca8ee737d060ab223ab228d745121277a7e5ab68bb0",
+      "category": "active-entry"
+    },
+    {
+      "name": "consultas-cosmica-v1.css",
+      "bytes": 1403,
+      "sha256": "d2814a2b43d1ac41d3ea004c613c5fec37786181b5a76c8e27f6ea59cb04c88d",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "consultation-engine.js",
+      "bytes": 4483,
+      "sha256": "6c03548409d1c6a97e1b3e72601a2ae46dd390f1794fe2ae43780c7b8891f9f8",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "consultation-policy.js",
+      "bytes": 820,
+      "sha256": "12012773ea8ee55177d6e7a94945136e556b924ffa5c852066efbdea39b343fc",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "consultation-v5.css",
+      "bytes": 2895,
+      "sha256": "2a442cc488f64c7d56ab58ded99e2de2140e25e4b6bae73335a142f131eca399",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "consultations-experience-v8.css",
+      "bytes": 1131,
+      "sha256": "636997481767bffde81cc709b64c73e77b373ec107516ce8a4b4ac2ca0863f15",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "consultations-experience-v8.js",
+      "bytes": 1069,
+      "sha256": "f523b4d6247f7b4e5dc40bb29ed7e0da883610f0a23ea2522e5ee742a83ca8fa",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "consultations-polish-v6.css",
+      "bytes": 1275,
+      "sha256": "6267f0225fc1face4519424c042b9c632ab458a23b94b742430323f9f9fda4ac",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "content-copy-v6.js",
+      "bytes": 2064,
+      "sha256": "ceeae1c5b2a4a052f0c07cfe7f795d16a5c32565bd5af04291cde73eded5832c",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "content-polish-v6.css",
+      "bytes": 2496,
+      "sha256": "9c2baae7fb4b6d582421e473d85b8cf887e585298e87f656ba9a6ded6f3c3e15",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "CONTRATO-AUDITORIA-IMAGENS-V5.json",
+      "bytes": 1295,
+      "sha256": "6874de642f532fafb8c3bcc23f6dc9fe49c7adeef69a36b8bdb7b3e5cbdce575",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "CONTRATO-CARTA-DO-DIA-V5.json",
+      "bytes": 1295,
+      "sha256": "e7e8d83db97ae7c05c25b69dfd49001e2b86183a923304e6767709c3a2f90d8f",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "CONTRATO-CATALOGO-CANONICO-V5.json",
+      "bytes": 1192,
+      "sha256": "c41ecd62de0b1e951045bb15edda80b8aa100934ef4e43c28fa39abe79727bbd",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "CONTRATO-CONTEUDO-MAE-CARTAS-V5.json",
+      "bytes": 1243,
+      "sha256": "92f54f1760abbc63a3c45b00d8ef2fa9edcf0f41497ad9fb9e5bb8631ee6cd16",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "CONTRATO-REGRESSAO-V77.json",
+      "bytes": 1522,
+      "sha256": "8f9038b8bb2c8832027d00101b4eed61a520a92283d401f66b03d77aa8e62dc8",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "CONTRATO-TIRAGENS-V5.json",
+      "bytes": 1584,
+      "sha256": "3694a858befec62fb5da74917738c4b854bad25fffcf0ec2e5fa5708cea9a028",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "CORRECTIONS-REPORT-V8.28.txt",
+      "bytes": 1384,
+      "sha256": "66c6ca7410f9bb6e29a28856808302365d33b1123e51bf4810203c895a7db268",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "cosmic-background.png",
+      "bytes": 1663831,
+      "sha256": "e32bda23a885b9357af69425ebd59516af56df35fe9b52474ebfc19e8b277cc6",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "cosmic-design-system-v1.css",
+      "bytes": 1147,
+      "sha256": "515b4705bc2d0b242d8070da06144a6edce9ecb641fb11c5d476154996fa5f53",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "cosmic-icons-v1.js",
+      "bytes": 550,
+      "sha256": "3a7684e3b61fd48bb358ae6a6fd563ff150b3517c167f6e5470c05acb8f2061b",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "daily-meaning-runtime.js",
+      "bytes": 1337,
+      "sha256": "fe59813afa3675928eea48177b36519c3d785734ff7366789a3f76e15cee4065",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "daily-policy.js",
+      "bytes": 918,
+      "sha256": "e78ebd3ae26ff2a0c95b3203bf9bd1b3450a88c49ae1e4f4b9ac0ba506af3970",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "daily-polish-v6.css",
+      "bytes": 1077,
+      "sha256": "7d43dbbd5e6aecb6cc43d56893043d78cf9ea6f07ae1a9e9f71e77c9fa7e5662",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "daily-return-v8.css",
+      "bytes": 911,
+      "sha256": "6a0117e36d3294d0a36c6d39c8a950a955c7716d04b71ca5840b897a3eb89511",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "daily-return-v8.js",
+      "bytes": 2142,
+      "sha256": "b5770520edbb382fc4667a20e32d562cdf08e9baac48de9f6eb641058b68c06a",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "daily-ritual-v8.css",
+      "bytes": 1022,
+      "sha256": "b22bd483ca75c4f9b54f883f2b6697606867b29e03a14b895b883d1c00875012",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "daily-ritual-v8.js",
+      "bytes": 991,
+      "sha256": "b3a2e66f0898d0f3b860368f91d3d95e444a5e3871e010db806671c61011045d",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "DIAGNOSTICO-SUPREMO-CONTEUDO-V5-CHECKPOINT-0.2.md",
+      "bytes": 13365,
+      "sha256": "fc963c6ce99196849076dffab94eac44b0bce6e7d4100f6fed2e96a2b3d50b3c",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "diario-espelho-cosmico-v1.css",
+      "bytes": 1421,
+      "sha256": "88e2fb38aaa73730069f45b9ba7c0d13b0b157f63291c42cd9d4f40bce0dac8a",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "divina-mini-orb-hd-v72.jpeg",
+      "bytes": 731917,
+      "sha256": "1cd5568336770221f48e6931ed3a48e04e29ce026955d9a490fa634d87690d04",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "divina-orb-v48-master-source.png",
+      "bytes": 2979637,
+      "sha256": "45008fc1a10e9bb903019cf2ee83b2a85f7866bac53b1d0b872a80b6c417f169",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "divina-orb-v48.png",
+      "bytes": 5900400,
+      "sha256": "2b546e484c85b871c682ef8a244e3bab5733c06fd20ec44047629ceda70fd296",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "divina-orb-v68.png",
+      "bytes": 2951660,
+      "sha256": "2fb1c886c27672f85d9bd5c2ae01a0e5f35f624d9621c8c38cc645a52544d31a",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "divina-orb.png",
+      "bytes": 2776109,
+      "sha256": "552824de99c0f8cf9e4c393c1f4cbf37f3e302dfc50bc11142adb60a934f9834",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "divina-v8-loader.js",
+      "bytes": 2259,
+      "sha256": "3bc845a6298b0492f29583afb9f97d2618135a1758d952dca2609c8e56272069",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "dock-magic-v7.css",
+      "bytes": 3814,
+      "sha256": "2ff3518a6064057634c7f163bbe5ccee3211ef4492118f79ad82533dd151358a",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "dock-polish-v6.css",
+      "bytes": 1946,
+      "sha256": "2f5132abff6f8e8ae2f8ebf1891ba4c890d863d8f6253083e79513f941d29dc7",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "ecosystem-v6.css",
+      "bytes": 855,
+      "sha256": "98e5e94276ec0dcd18fc96ea13817f713cde6946af2f6524214ef12b6d854004",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "ecosystem-v6.js",
+      "bytes": 959,
+      "sha256": "1ee41e5162117be5367381e400c22a04dbfbad9d3f4ce2fa1405d2530b50226e",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "ENVIRONMENT-TEMPLATE-V8.29.txt",
+      "bytes": 1231,
+      "sha256": "c7f5926eff0381ceb16bb208a944d35505c58fd0c565789c8071bb4bc75166d0",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "escola-tarot-cosmica-v1.css",
+      "bytes": 1378,
+      "sha256": "5455f53e6f3d0a9cd9ffb4a92bff81e61a42d59c8cdf759a9fdcfbe7fdbd6c48",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "EVIDENCE-REGISTER-V8.27.txt",
+      "bytes": 553,
+      "sha256": "7bc98f236190878bd850cd2a7ba2f670942319c2562de56126e171bcd4ccbff5",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "favicon-32.png",
+      "bytes": 2802,
+      "sha256": "90c031d99f0169736db46c38cccaff06aa4b9a98ae681446f4abb71fdaee4411",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "favicon.ico",
+      "bytes": 20438,
+      "sha256": "404d60dd88a63b3594925c0edbcf7ba51845af779a1b9ba181d106e9c138034a",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "favicon.svg",
+      "bytes": 1078,
+      "sha256": "1e12946cbca0ebd3e81eb8cf4f6b65f6a36211b4ac567f03018d9d0ac1671980",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "FINAL-INSTALL-V8.30.txt",
+      "bytes": 1355,
+      "sha256": "b69d986552e93556565eb547df24a90d3e0cd2b63085bfac2f03b0dd43439b8f",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "FINAL-MANIFEST-V8.30.json",
+      "bytes": 1473,
+      "sha256": "aafaf882f98e66d19b4826ec628991cee43a68a19698497ab1f8494e46c18b66",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "FINAL-RELEASE-NOTES-V8.30.txt",
+      "bytes": 1381,
+      "sha256": "9ff3cb504101c2684956fc2c761a204a9322d5501cedc96c0bee3e09f0f20968",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "FINAL-STATUS-V8.30.txt",
+      "bytes": 510,
+      "sha256": "5fe6cc46de4755d62ff6d0c8d1f86cb18bd41036012427c25f98b60d83644c61",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "GO-LIVE-RUNBOOK-V8.29.txt",
+      "bytes": 1584,
+      "sha256": "d8352a9389915b85da559da5d5cf03f35fab1529f07e75a1f9bf0d04677cd2c5",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "header-polish-v6.css",
+      "bytes": 1277,
+      "sha256": "72699ad81a97ad61bca220bb31d1614c0b7de22f1f225fb774b28f4d5f809512",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "HOMOLOGATION-MATRIX-V8.27.txt",
+      "bytes": 1819,
+      "sha256": "234ac7abd998fa27a2801326b2c65ed99ce83ef58f67e615e6e97d4de56c2d6c",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "HOMOLOGATION-RESULT-V8.27.json",
+      "bytes": 2453,
+      "sha256": "c0e12e6f7c7ab5e5ecc9918c67c747430aa985c39c66940111386fda728fb147",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "icon-192.png",
+      "bytes": 85534,
+      "sha256": "5d3ed67d6cc3fb519643a67ec77807c88e8717e1fb76476ca29285c09c5dae51",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "icon-512.png",
+      "bytes": 540093,
+      "sha256": "59f6150d5588be4dc2b3eea996eba0c2e671572843c95e51b2c4cf33d924ccaa",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "icon-maskable-192.png",
+      "bytes": 56633,
+      "sha256": "c281d1b91507f09cf4ccfcc85fe1845a95eb007a366febbe8976a6c65646c459",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "icon-maskable-512.png",
+      "bytes": 358543,
+      "sha256": "7b95f1e6f8ae7c236d1b7e56f41edd8aa1c06c8e218e071e1ea3964aabb23c9e",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "INDEX-SNIPPET-V8.txt",
+      "bytes": 262,
+      "sha256": "0c55d22f35b96657cc8be57f3b243a51baa5403e05bdde75e42ba7b58807b43b",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "index.html",
+      "bytes": 22918,
+      "sha256": "64be1201a72d4763cbe0e75b118af3c55184e832b4cc6bdc57a132da54c96b3a",
+      "category": "active-entry"
+    },
+    {
+      "name": "INSTALL-MANIFEST-V5-CHECKPOINT-1.2.json",
+      "bytes": 573,
+      "sha256": "89779f021bd4437184b15727c7bb8f9ed2fd5333348a977fd67b648ff5a19e80",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "INSTALL-MANIFEST-V5-CHECKPOINT-1.3.json",
+      "bytes": 2211,
+      "sha256": "922f9283ac01527759ad0124701c312244125ac062b0a61c57072bbbfe20ef06",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "INSTALL-MANIFEST-V5-CHECKPOINT-2.1.json",
+      "bytes": 1155,
+      "sha256": "4656ad1d0c54787350bdcee1df018dbbc2f73818d11e2eacbb435f747506b8eb",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "INSTALL-MANIFEST-V5-CHECKPOINT-2.2.json",
+      "bytes": 1174,
+      "sha256": "66094cf97c498a8189c8cd459d35c3e5ffa036e669788e295925279bd2f52862",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "INSTALL-MANIFEST-V8.25.json",
+      "bytes": 654,
+      "sha256": "82af917ebe35bfdef9b542755543dfd66f1ba20f07fda85ee676debd38990c9d",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "interaction-polish-v6.css",
+      "bytes": 1239,
+      "sha256": "879c344a934890e62b54183ac3fb743992352a8f0fb8847b0f720631578f3570",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "journal-engine.js",
+      "bytes": 7809,
+      "sha256": "056b71821f1fae76a8f4d42bd3b111857a44c18f73c3803431ef880ba45832f2",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "journal-experience-v8.css",
+      "bytes": 998,
+      "sha256": "778cfbb8c6a8a10df81495406221e5851d8a4d65824d7ba710e31c35803a4e2d",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "journal-experience-v8.js",
+      "bytes": 916,
+      "sha256": "5510ed2bc8101a9f1b0706355a31649b55eed8aad10ab53343a02e82f95d41e2",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "journal-policy.js",
+      "bytes": 1506,
+      "sha256": "9b8eb56d717b9956cd45d39407417ea97831f99110a9a99817d9411d29d902ee",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "journal-polish-v6.css",
+      "bytes": 1382,
+      "sha256": "ff28d38c04aa983b189224225bbd1d1b05f41ffb636180789891671c22f2535c",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "journal-v5.css",
+      "bytes": 1007,
+      "sha256": "4c3dde2f90144a6a983a99234c44157f5218809ba75d0d68970d3d9a40301488",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "library-polish-v6.css",
+      "bytes": 1433,
+      "sha256": "5dbd38544aabf7b431ac2208f8dab369b2bb8249a77f30aa59ae618a71b0436e",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "MACROETAPA-1-INSTALACAO.txt",
+      "bytes": 693,
+      "sha256": "9311003381cc455db9a0b9f394ba4f325b19e1f9017159b5ada5aa9419f0eeab",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-10-INSTALACAO.txt",
+      "bytes": 518,
+      "sha256": "41374beb44947bd2a9ac5035790363ef3b18d3aa7243b200fd8d8c6a62b15034",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-11-INSTALACAO.txt",
+      "bytes": 526,
+      "sha256": "d5cacc39f8389be46e8f2bac61242298bc2449b63b8accf19a020e8b899711b6",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-12-INSTALACAO.txt",
+      "bytes": 525,
+      "sha256": "1d7c203507c576c1e4e4cb54c46fc16b3ad6d068fba1a50189a1aae20b6ddb92",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-13-INSTALACAO.txt",
+      "bytes": 541,
+      "sha256": "e0ba5e2c3f26a045d50324b06506a3f8aa0c2a93b47601b6a325371c70231e84",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-14-INSTALACAO.txt",
+      "bytes": 568,
+      "sha256": "daf83a05c0ed807972b271adbfb38ba669c2405852acb511af4f541dac9d4b1b",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-15-INSTALACAO.txt",
+      "bytes": 526,
+      "sha256": "a0fd395a8c0de8e3a457d613540a158e7dad891a0e7d949b078a0a5ae1c94684",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-16-INSTALACAO.txt",
+      "bytes": 586,
+      "sha256": "ab5ff2e0db7cb2185d35ee2dc43f4cd1d1fb57eece9291d6adada4ac27488edc",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-17-INSTALACAO.txt",
+      "bytes": 553,
+      "sha256": "0f35b50da81f49e1640d85e78655993ae1e7b5cb9116a3d5fd4e5664b7ac1051",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-18-INSTALACAO.txt",
+      "bytes": 573,
+      "sha256": "ec6afb1dce2be44e2756d5c6893a910df4395ca7729dc951d9c9ec82a6b9a1b9",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-19-INSTALACAO.txt",
+      "bytes": 521,
+      "sha256": "7cbe5fa8e6dfe90e7969a01b156a63ea3827f349089eaf40565fdf644ab685b6",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-2-INSTALACAO.txt",
+      "bytes": 627,
+      "sha256": "f9567d0ce39842f82ac6ff925429e4f164d379d821e7cdab6c855aa3163fb4e5",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-20-INSTALACAO.txt",
+      "bytes": 555,
+      "sha256": "781b6f1a5b48103be55055560d933437927d398ab2ca2afb2df19d3f2cc68fc2",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-21-INSTALACAO.txt",
+      "bytes": 615,
+      "sha256": "ed8ffec65d6748376ecfa7e1f01408283836fe072e2dc0e609b08e3c52cc9847",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-22-INSTALACAO.txt",
+      "bytes": 580,
+      "sha256": "7cd26b2e6778afd2c4c0797747b54c3ce47942907f889dd80ed00dcf3b63b6e2",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-23-INSTALACAO.txt",
+      "bytes": 625,
+      "sha256": "84c3a3c12db14b22019b06f8ea7746056abd5ba77bb2cd2b8964d117800b783b",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-24-INSTALACAO.txt",
+      "bytes": 454,
+      "sha256": "4d9eb86d8743ca25caf11d5cdd9e9ae3f20923516f3ffcc5ea8171c603195a34",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-25-INSTALACAO.txt",
+      "bytes": 310,
+      "sha256": "0f2f280c993acfc748104d9c253b480af04d283d5c32c9c0f33710e6386affb3",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-26-INSTALACAO.txt",
+      "bytes": 920,
+      "sha256": "8febe72264b2bac1e10c3cdce71be217bce20b262fc25f7d5dd303b6276d6e80",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-27-INSTALACAO.txt",
+      "bytes": 759,
+      "sha256": "a36cf23aa3633f63a68dbe8f9b3caf4d9a93d51b824117d7e9d4cbcc9ddcf1a0",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-28-INSTALACAO.txt",
+      "bytes": 859,
+      "sha256": "1b7703656a1a625db444e6c8aae26b41dc66ab99be73b2bc61e3369b6dd57c65",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-29-INSTALACAO.txt",
+      "bytes": 936,
+      "sha256": "fee8943554dcbc133908f1307ffc6681c4128460782e6e2dbffcf8ca6620db57",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-3-INSTALACAO.txt",
+      "bytes": 808,
+      "sha256": "2f3521c40617b7050f5b5f40a615eb302cfe9c38f958774cb5d8900f144215fe",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-4-INSTALACAO.txt",
+      "bytes": 649,
+      "sha256": "169e2b0c5e7abbe0ef4d54c86eecfbde27ec7ce1909f97775773a1554e23aa19",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-5-INSTALACAO.txt",
+      "bytes": 545,
+      "sha256": "39cd1a9fc8a63bf7bfbacf18b3c6fa0235a088182bda9e156e6b90fd7be621eb",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-6-INSTALACAO.txt",
+      "bytes": 499,
+      "sha256": "c4abb229cdd3cbbcffb9997a273409bd64b4e5a4d5901749c192dd121337ff79",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-7-INSTALACAO.txt",
+      "bytes": 543,
+      "sha256": "951a735dde963be5b0160ab75a10ab068b3d0c31c16f8b3db257e48e0867dc51",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-8-INSTALACAO.txt",
+      "bytes": 517,
+      "sha256": "855bac906898cc65bf883dd404950e0f6f3f7708add12f12c2b1d21eb334bdea",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "MACROETAPA-9-INSTALACAO.txt",
+      "bytes": 552,
+      "sha256": "a47730dba769b5654dbb2e8912c5d9036ad4cec966ce2c41c62d43023756da6d",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "manifest.webmanifest",
+      "bytes": 374,
+      "sha256": "822f0b70d593e3a94656794a90e53dc7e954e9b04048066ab0507f185e47fa5e",
+      "category": "active-entry"
+    },
+    {
+      "name": "MAPA-FUNCIONAL-V5-CHECKPOINT-0.2.json",
+      "bytes": 1823,
+      "sha256": "fb21b5251689e73dfef24aba2bf352391d8609100f0b61e028fc9695a83ab51e",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "meaning-engine.js",
+      "bytes": 2401,
+      "sha256": "b828ca997b16b22a9874d44917910fde64eaff3a2b3571ea30da18f7d0311d8c",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "media-engine-v5.js",
+      "bytes": 3048,
+      "sha256": "450a34f99bb1904c5cc83bc10deadfc1dc9f1c1c999fabc45d73224cb880172a",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "media-engine.js",
+      "bytes": 2184,
+      "sha256": "8340f3a79f35515048e4c8b198a49ef0451182e72aa08f525aacbdb8fa8d3bc2",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "media-experience-v8.css",
+      "bytes": 819,
+      "sha256": "080e89757a4d40a1cf73cddd053940be0ef22f4693a364287e824f11048f46bf",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "media-experience-v8.js",
+      "bytes": 1143,
+      "sha256": "7c6a413b6a94d66880480b20b02ce8f3373a3a25996199e9a06b8dce9ddde498",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "media-policy.js",
+      "bytes": 262,
+      "sha256": "1b84f337056030737d7863b12142f83510bf6775f59543912f7e146dc5d7fcc5",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "media-polish-v6.css",
+      "bytes": 1249,
+      "sha256": "45d31c0cde65b04fd910dccde3f15c1a3a91b28a03a62d388d7c2f763f28aad6",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "media-v5.css",
+      "bytes": 3067,
+      "sha256": "184c66b22bebd2b8a257f25d6c816be65d8ed7faf3af5b2d70dc0f9e42654ad9",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "menu-magic-v7.css",
+      "bytes": 5790,
+      "sha256": "1cc98eff6ad43b6929e1ff542109272548270bee15700a4d79d9f55b965569e0",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "menu-ring-v8.css",
+      "bytes": 9687,
+      "sha256": "1c82ea3200675adf222a1aaa7d899256ec42ec8bbf7469915ec406e9843ae58f",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "mini-orb-engine.js",
+      "bytes": 5470,
+      "sha256": "26d46580f7465139ac54b9953eaa6d0488e3a89c0bee9c7f2d0fbbaa27b91916",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "motion.css",
+      "bytes": 1128,
+      "sha256": "7b59c34549fe8d124e2d50c4b04d6dfeaeda7251330ae0889247be87f6fe5718",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "musica-videos-cosmica-v1.css",
+      "bytes": 1378,
+      "sha256": "04c5048c7967b2f6131636ae26713c2bf1be21cc62070aa402617da1498cca72",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "navigation.js",
+      "bytes": 8328,
+      "sha256": "783d67a0844b603ea9afa354f0dc93d923d0df3aa5b4428b50d8a82f9223820d",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "notification-engine.js",
+      "bytes": 3148,
+      "sha256": "893284d9d417ef5723e02659735ec3c361ea93da135adf13d048884644fedc00",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "notification-policy.js",
+      "bytes": 334,
+      "sha256": "a94ba276a09a9632dfff12efa94bc2267c87f7b664a38a574e987287fa235b52",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "notification-v5.css",
+      "bytes": 2366,
+      "sha256": "c1283bdec2a782e154f89b3189dd2a1fa1a0e3b407e3ed5493b7f28064adfcba",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "notifications-experience-v8.css",
+      "bytes": 1094,
+      "sha256": "87d3363c50681dde13930ae7069b2219f6d8507898d6923c619fe2c1101f9cb4",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "notifications-experience-v8.js",
+      "bytes": 1760,
+      "sha256": "9cc4b35f5b44a34023fc0fa0711803a7d64dcef048d7b5038cdd6536755e0020",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "offline.html",
+      "bytes": 611,
+      "sha256": "73e64e56562038ed96761edb58e1f98669aad2298b01726af59f29d5799b1877",
+      "category": "error-or-offline"
+    },
+    {
+      "name": "orb-engine-v64.js",
+      "bytes": 55678,
+      "sha256": "46cd692b25846fff94c42c026092fbdb5ae10617e906e209a2e75083f890b216",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "orb-engine-v68.js",
+      "bytes": 27128,
+      "sha256": "d5e223afd91bd87d68ba8dd3ae954f9d31e07dfa81cc3dc576c2c70e3379777d",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "orb-engine.js",
+      "bytes": 27630,
+      "sha256": "efb7b1b77bcdfb9ddf7f0d9e6b2fe810c72d4264cab9aab792e29590393e2711",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "orb-mini-v48.png",
+      "bytes": 1119374,
+      "sha256": "7e4430338ba69c4857363cda44f63550dd568fe2d78a253edbd4dbc49d1b6be0",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "orb-skin-bridge-v8.js",
+      "bytes": 1947,
+      "sha256": "d764c7dd5c2f23faa49f8c9a3f8b4f924607b503bbbc3225c141e5164f345196",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "orbe-ia-cosmica-v1.css",
+      "bytes": 1504,
+      "sha256": "7050e84888cd0fea88544692094d173d7c62956387ec6b4db22f65d7265e5792",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "OWNER-REVIEW-V8.26.txt",
+      "bytes": 2809,
+      "sha256": "98f064f9c27f0c385a131f6da9afdd171e50ca9df904c2346087b007136859af",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "pages-atmosphere-v6.css",
+      "bytes": 1860,
+      "sha256": "84a3354437af3b93cb631503bfcd9fc0c6185e8a1c4b5823a3b570f68a48ae70",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "pages-v6.css",
+      "bytes": 3523,
+      "sha256": "525cedabc7a17d2250cf5a188865cabb4a15e8782cc05fd98c4252d58d1382cd",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "performance-v6.css",
+      "bytes": 686,
+      "sha256": "5e9e5b814eff809c33f64774fd8a1533bf31fa4343107e0e5d1512ccd08fb4fc",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "performance-v6.js",
+      "bytes": 834,
+      "sha256": "d0a52875dc8d808d569fe60c5ef4debb264345eb2fa3873a6c2ae035e1713a34",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "portal-atmospheres-v8.css",
+      "bytes": 2384,
+      "sha256": "77625a837aa9fe8a6a84460dc07d81e35159fc4dab6439f6005064736cd2d94f",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "portal-atmospheres-v8.js",
+      "bytes": 597,
+      "sha256": "9e004cd370de37f40c0fe2fafdabd76cdfa834561c2aea1284cdace966d0a471",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "premium-engine.js",
+      "bytes": 3244,
+      "sha256": "21be15ec80cb7e3f05a0d28a1fc6802c3ff86238ee12e6c18255f34480b20ffb",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "premium-experience-v8.css",
+      "bytes": 1409,
+      "sha256": "9a92da8270dd1fc83f4a707dd89f1412de42bce73330a3ac84669e0cc22bf225",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "premium-experience-v8.js",
+      "bytes": 1616,
+      "sha256": "4736c95d5b671defdbff1b6ebc280f14fa2e61cf8d655469de265966dcd89898",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "premium-loja-skins-cosmica-v1.css",
+      "bytes": 1507,
+      "sha256": "66356f227ee6dbaae612bbb5352cedbd927d37d5277dbd69ff2014e9d814cf9f",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "premium-policy.js",
+      "bytes": 1011,
+      "sha256": "6c4a1ce53a94d40fbe41967e8f2ce1a17a1ff577502648065fe6688badcbcafd",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "premium-v5.css",
+      "bytes": 1672,
+      "sha256": "069bddd29b2042cc1108fd63d1516e57d54f643a20362ab6d9b928faef9d1737",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "privacidade-seguranca-cosmica-v1.css",
+      "bytes": 957,
+      "sha256": "5daeee8cd8f0085b4b71f1c718526550379aed152b4b669dd224635831204c6e",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "privacy-engine.js",
+      "bytes": 2419,
+      "sha256": "29e4e268efedf70b7d3176010ed00a39e00afdda39fde43f3bf2d5074704b9b6",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "privacy-policy.js",
+      "bytes": 199,
+      "sha256": "e7b0a2955c3bc7564a154037906743a53fd2d6a842a55061d2682ca10a2289c3",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "privacy-v5.css",
+      "bytes": 2134,
+      "sha256": "0c48ab28f5bc727096d9ca5e647a140deeeb3b4f552a77b32ebef80d50be8d99",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "PRODUCTION-ARCHITECTURE-V8.29.txt",
+      "bytes": 2207,
+      "sha256": "0c599ae9c01b4c219b9de52f5cb79c470b776e6a3330bf643a3f58a015c0f94b",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "PRODUCTION-BLOCKERS-V8.26.json",
+      "bytes": 1581,
+      "sha256": "d193925a8e0661936fd9aa169914c7af3b78c503bdc735c946c018c1f7600d00",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "PRODUCTION-READINESS-V8.29.json",
+      "bytes": 1800,
+      "sha256": "f22476c3de28be278128634ffc522a46fb944e7ba12fb5d8457dd274099cace5",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "production-readiness-v8.mjs",
+      "bytes": 4920,
+      "sha256": "aaee36d30c1e31c790e80ad78504c0dec494ea51a91bdc812f2211fa786c6a24",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "pwa-engine.js",
+      "bytes": 915,
+      "sha256": "382370c2e6632db74e9b2c353de1c38b9c9d1d5e6c5a045b6ccf3d0dbf080ff0",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "pwa-performance-cosmica-v1.css",
+      "bytes": 640,
+      "sha256": "9bd56a8ec7a4727e66fd43ecdd183e2cc9d491fa0fdda221b0459300e27be05a",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "pwa-performance-v8.css",
+      "bytes": 962,
+      "sha256": "7f48c64041af1c7638988f887f36c95fa0525f0f8f526b1208ab22390a963620",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "pwa-performance-v8.js",
+      "bytes": 1048,
+      "sha256": "3e18f8a834d14548203e88f65f0046aecbddf39baf428e5357249224f6504db3",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "QA-MACROETAPA-0-VISUAL.md",
+      "bytes": 2243,
+      "sha256": "8c6f1397284f65e203866ad9b17437196b1723a613312adb6c2546b470249500",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "QA-MACROETAPA-1-ICONES.md",
+      "bytes": 206,
+      "sha256": "7fbd0a18ac06e9121d808b576284522e2cef37eafaa995fa1536fbc7775c2740",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "QA-MACROETAPA-12-PWA.md",
+      "bytes": 227,
+      "sha256": "ffc46d013500face68c85bbcaa24894b32030aa5740531873d3f15bbe7111184",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "qa-supreme-v5.mjs",
+      "bytes": 1667,
+      "sha256": "fbae05edb292ed0a1cf1e5dbaa01e52713259d05b281c94c7e5416ea9c417af6",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "qa-supreme-v8.mjs",
+      "bytes": 2504,
+      "sha256": "b17d32a630bf99ab9a111b87b878af8dc4807fe285809a8cd39a472d55e13029",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "QA-SUPREMO-V5-RELATORIO.md",
+      "bytes": 1168,
+      "sha256": "9a152749ad9d0d96a77ac1edff9e5d89aae754c925c7e9a659292d390c72808c",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "QA-V47.json",
+      "bytes": 1001,
+      "sha256": "d7de14756cebdbf9980bc5aa0dddc12eb852d4c908d7243c586eb52f89195097",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "QA-V48.json",
+      "bytes": 977,
+      "sha256": "b97b92036f6f686f11068ab2d62b650ba1c43e4b732b813c975758688886ff9a",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "QA-V59.json",
+      "bytes": 561,
+      "sha256": "011ce02f02d2f5fe8f79dae07f50b6dde9ba8056f76f20d9a92c00b8e5e44d0e",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "QA-V60.json",
+      "bytes": 1000,
+      "sha256": "629f21027c266855f69ce089bf358182ba31ee5313ed9b2132a0b5e1fae16dc7",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "QA-V62.json",
+      "bytes": 650,
+      "sha256": "ad7b1c8ec424f8a5a9daec88a66e74838a94fdc278585904502c474d4121abb3",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "QA-V63.json",
+      "bytes": 587,
+      "sha256": "9850ecfb0caeb76ee53c178cf244d379012e3b04a3a58c8a5cdb7158f8261ae8",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "README-INSTALAR-V8.25.txt",
+      "bytes": 872,
+      "sha256": "ef833d82297bfaf700d2dbb619613ae7f52d91484d7dccf1a052269e86dcb098",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "README-INSTALAR.txt",
+      "bytes": 7127,
+      "sha256": "12e68181ee3c7d898c6d820511efd4efe4550d11d851e9cb9efac4f2e698e966",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "regression-v8.28.mjs",
+      "bytes": 1678,
+      "sha256": "38132dc5dc544a1c44f27e4c63aaac7d135382a11fa53d76604e55be6459a16c",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "release-gate-v8.mjs",
+      "bytes": 2042,
+      "sha256": "3f2fc9c5a611300a7e8d706c20ad574fc90efd7d773b45ae9fa07a10eefbb81e",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "RELEASE-NOTES-V8.26.txt",
+      "bytes": 1875,
+      "sha256": "17c7b90e8c7e5128f1249263ff3d185e3661ec1b218b38d332c8ff28b1145cd6",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "responsive-stability-v6.css",
+      "bytes": 846,
+      "sha256": "fb5c3a1676c68a07bbe6a9643c0ac58d01ab570a47aaab2528f91d3358a8a5a7",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "rhythm-v6.css",
+      "bytes": 950,
+      "sha256": "cb85a718da5b0df082cf62b306b97916ccbbbe6fdbc537fd8bb627e7c1c4d9ff",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "rhythm-v6.js",
+      "bytes": 1441,
+      "sha256": "e014713e0757512439cb32aa3ab9c35b343b39f72e670eacd01ab1ecdaf7f495",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "ritual-engine.js",
+      "bytes": 4872,
+      "sha256": "18b16ddf8e3d385ff0efa14e5e85dde2b4d74cc5e2cb16db614d6336a638cf47",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "ROADMAP-FINAL-V8.27.txt",
+      "bytes": 938,
+      "sha256": "89fbbf9a39288671d99f5348259c4e932b43cdb47e9606246ec726dfe119c649",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "school-engine.js",
+      "bytes": 7669,
+      "sha256": "786127d23e1a33f5d413aa656b395286f8e3cec20620696fdb3831ff5d7ff638",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "school-experience-v8.css",
+      "bytes": 1044,
+      "sha256": "3c07267a05175c0e9bfb94702992e04ef51887cd80c76b8f90a02d336837e1d5",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "school-experience-v8.js",
+      "bytes": 953,
+      "sha256": "29bc3e4c49cf2f5c37f3c9387587f143190a23962a0360c9dd4c157907224522",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "school-policy.js",
+      "bytes": 2510,
+      "sha256": "1980f0ac802e73af2d239511f3211ee1ec80119d82c449f02f90e579ac0b97e1",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "school-polish-v6.css",
+      "bytes": 1214,
+      "sha256": "e025ed0773c06b0c5d11cab4553668ffa0b4bb7fbf01392048eca672038864d7",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "school-v5.css",
+      "bytes": 2850,
+      "sha256": "d8ec16a70b3c6fffa57417f66e2588f66da0e2cf194f08ca76925624ea4a48aa",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "SECURITY-BILLING-CHECKLIST-V8.29.txt",
+      "bytes": 2217,
+      "sha256": "fc0809d6ff04ccc0149c38f5d5b2aedba9adf16aac630da93534bbe04e6e8d5b",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "seo-analytics-v8.js",
+      "bytes": 2709,
+      "sha256": "d09be1c69a9fa48039e6b5971c1ed600fe55cc1803ab8ced34f021530614cbf3",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "skin-ametista-real-v1.png",
+      "bytes": 3035076,
+      "sha256": "7f3c386631992aa66538e8b9572488eb6819c367bd4d2b3367a0aacea58a4e52",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-aurora-boreal-v1.png",
+      "bytes": 2873636,
+      "sha256": "52fb7031eeb8d84ddfa1acf467887c3a7e355d37f5ecd844a9ef4795f18075e6",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-catalog-v6.js",
+      "bytes": 2179,
+      "sha256": "4d365fdf371b6b706fb96bbf0192a7f01e92a2dabe009b8ceab5f5c68d5be6a1",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "skin-chama-gemea-v1.png",
+      "bytes": 2613618,
+      "sha256": "d733e791ddc6eb37fc07f16db8a30e4d30a6425631ed7092e50aae8752e02003",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-classica-divina-v1.png",
+      "bytes": 2566751,
+      "sha256": "9dcb99596b94256e7bb5db2488b12bcd463ed286578edceb19814db26320c0a8",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-coroa-estrelas-v1.png",
+      "bytes": 3092180,
+      "sha256": "bebda98812f8da23e09489329f45b6b6b9ea1e26f8f019ba16a2cb7a6543f522",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-cosmica-infinita-v1.png",
+      "bytes": 2692923,
+      "sha256": "dd42cc23d250cb2f52e8110e664023187ea5137e664aa88c31c5e455246ea268",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-cristal-saturno-v1.png",
+      "bytes": 2715263,
+      "sha256": "6fd3afc3b274000d47bbf7be6f48754816cb49ac681fb00481921d2fb0a23be7",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-divina-suprema-v1.png",
+      "bytes": 3182187,
+      "sha256": "54a959df84d9acc4aa052e328af68dd9dbcf79fdeb3000c5588989742435e90d",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-dragao-cosmico-v1.png",
+      "bytes": 3041723,
+      "sha256": "f910e3404ee780243eb1819e714bd57fc503a465bd89042bb3dc88d3a1751c73",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-eclipse-sombria-v1.png",
+      "bytes": 2437279,
+      "sha256": "e91418f219206358dc7e55504cafced813cf51d069e872300a56be0749bbcbd3",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-esmeralda-ancestral-v1.png",
+      "bytes": 2744877,
+      "sha256": "f3c946ed28c64041e8b882d97bc3929b43eee411d41770e6caf644077f531877",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-fenix-violeta-v1.png",
+      "bytes": 2859977,
+      "sha256": "2d5c4fba844554f9fdcdad04b6f97d6ca31694fac15c3af093ee864c39e4abf2",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-floresta-encantada-v1.png",
+      "bytes": 3290688,
+      "sha256": "966dbc09ce3f1ea067449a974b7f53e2d47c0d9272a795ef7933fa83f018b450",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-fogo-sagrado-v1.png",
+      "bytes": 2585337,
+      "sha256": "b163cf9cae2ef21d23189d0a3c400b927ecc3c896ce33154d83d097dd3e20737",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-jardim-fadas-v1.png",
+      "bytes": 3069293,
+      "sha256": "61206df16ef15bca0170e750091507c03ae50190b9d51f7e2cb8e838ce155633",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-lua-prata-v1.png",
+      "bytes": 2790080,
+      "sha256": "d0d2859c7204ef430d07ece04c5af91f7cad2a8046e97446976f81b8eedb55c0",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-lunar-misterio-v1.png",
+      "bytes": 2432087,
+      "sha256": "992f3fb279b82e2b4824ce724741f7b998d3b636283ced6422b559d6eb045d45",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-mare-netuno-v1.png",
+      "bytes": 2830339,
+      "sha256": "6980fb3c50664e73774bd5912a62f4ba1e4267dd57d9512b06f11caff0be15d3",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-oceanos-copas-v1.png",
+      "bytes": 2840187,
+      "sha256": "d4ed89b25c2d150ea0be77f7bf5f55c4fc34f5c6dc802fff30cde16651c9d299",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-oraculo-celestial-v1.png",
+      "bytes": 2929383,
+      "sha256": "fe6269b6c2eac680bf615abe1fcd610c96120ef3213a9d37a10dd5a84e838632",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-portal-realidades-v1.png",
+      "bytes": 2597718,
+      "sha256": "5032dfa0305fa31796ec9648bc54aa3ab011df4154000ff0843007d298410de9",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-rainha-universo-v1.png",
+      "bytes": 3057321,
+      "sha256": "dee67511d089ac8d22c47eeae52bba77ff9eb30caddbc7e0bbc5686a6113f06b",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-rosa-lunar-v1.png",
+      "bytes": 2712477,
+      "sha256": "8cf98643f16f8bd2bad908142611bc74962eabd7187daaa4b1da03454157206e",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-rosa-venus-v1.png",
+      "bytes": 2873680,
+      "sha256": "b7e2a12174e5fc8c470b8667076a7707051c87e2d94337e75a18bec1f56c870e",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-rubi-bruxa-v1.png",
+      "bytes": 2730496,
+      "sha256": "cc48eba64a920ae80b3beaaaa16a436d9356ababa301c37516a0eae88366d873",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-safira-celestial-v1.png",
+      "bytes": 2926157,
+      "sha256": "0c4283616895093ea6d9a28adcef4fac89f1c3d017931f550086ea41c42f6383",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-solar-dourada-v1.png",
+      "bytes": 2696675,
+      "sha256": "f16308051475bbf2122a673c359592b7333b571ce4ae86839a5fa14560a54373",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-solsticio-dourado-v1.png",
+      "bytes": 3011782,
+      "sha256": "4d00977e7c386ed330949a6906478798db5ba690f60d3cc4fae63929a8d41aee",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-tempestade-astral-v1.png",
+      "bytes": 2268146,
+      "sha256": "a228a2851218987aecb7a2c1a6303c49fe62729b5b7620491d52cf4ec34fa876",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-templo-isis-v1.png",
+      "bytes": 3007279,
+      "sha256": "dd849c77bac1509e27fafbe5d8af476480e0f3fd0b76fe8027d37d60a64b1a8c",
+      "category": "skin-asset"
+    },
+    {
+      "name": "skin-universal-v8.css",
+      "bytes": 1431,
+      "sha256": "42eca6934d0f872d06fc48d8923959c9cec45eebbf03ca062e6c5afbfab26858",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "skin-universal-v8.js",
+      "bytes": 4594,
+      "sha256": "edad01f2bbf57cdf59bc84fdcb21bcded4de9c72ca1770de34933559f01fcc80",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "skins-v6 2.js",
+      "bytes": 2156,
+      "sha256": "4356a26fcaef70aeb3906776da54c1f64e5fc58d60ce67a6727bcb7ec571e71b",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "skins-v6.css",
+      "bytes": 5362,
+      "sha256": "f9d4d965115de6679f50a9e09c0559b23b4f343fd02e06a6e0b988b618ced783",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "skins-v6.js",
+      "bytes": 2603,
+      "sha256": "596f53048f5097d73a0f3ab548701c379f0c9c4be102962778e7be9c6b7c2dca",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "spread-synthesis.js",
+      "bytes": 1428,
+      "sha256": "c94561d7f91bb35a96a6809eb6005009050d74cfcb8c44da627ade6c6a40b0e4",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "spreads-engine.js",
+      "bytes": 5213,
+      "sha256": "7432730e8100a8f4a782b233ea1a675f175ce85e3c6c97bfd91accfce6e268dd",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "spreads-experience-v8.css",
+      "bytes": 999,
+      "sha256": "a2926e75b865676dd9b8b9d4d97cc12aa13deca1cf72bcb78cbf973638ea2a24",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "spreads-experience-v8.js",
+      "bytes": 928,
+      "sha256": "b0c4a9a749870aefde686325052c242336e2f83feb9e3c7f569bf6701922a495",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "spreads-policy.js",
+      "bytes": 2041,
+      "sha256": "ec82346a178771ee98e7c21f15ea775066a18da15c1ad7f2be74677f5c2c02fb",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "spreads-polish-v6.css",
+      "bytes": 953,
+      "sha256": "d6b36229654ac102b610f0493b2da6edd4b4416e360157c1f1da3213072e91d8",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "spreads-v5.css",
+      "bytes": 963,
+      "sha256": "80694cd41c252ce227ede09adc67b2a172934da8a0542ec8475f66e9f93dbadc",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "STATUS-V8.26.txt",
+      "bytes": 379,
+      "sha256": "70c3b7130305aa23b10d9c39e908f1bb4f916faf3c20041b26ba0a7e1a395dd1",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "storage.js",
+      "bytes": 522,
+      "sha256": "6a4eff927b64dba207caa32666d328a41c27312cf840627151803222c9fcab27",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "store-engine.js",
+      "bytes": 4820,
+      "sha256": "2ba5f8403ba255fcad022143dc6e7e40d0437e3275f506a22e2c89d681a3c06d",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "store-experience-v8.css",
+      "bytes": 994,
+      "sha256": "569f56e25fb267b687d0fb0bac07f738517c9ed99320f368ba2d23fcf1da48aa",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "store-experience-v8.js",
+      "bytes": 959,
+      "sha256": "c4cfb20a2bd5fb4ed1302608c1d4f40afe2f47b2116d1407ce08dadfbc78bd48",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "store-policy.js",
+      "bytes": 441,
+      "sha256": "72f19314c3fb6b192dbb2039c13327a6d3d505c8cc2afb3b023a920a4036ee7e",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "store-polish-v6.css",
+      "bytes": 1431,
+      "sha256": "62b3a5ca59cd342ff31688ac13fc48cc2aaed1a49e684c0fe8ec6074bfdb859c",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "store-v5.css",
+      "bytes": 6409,
+      "sha256": "aa35ef13d7a591e7e46b7b008982147bb0e4d5dc400c05213d7fd5e093c4ebeb",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "styles.css",
+      "bytes": 12882,
+      "sha256": "82c2ef9c15efba77eb4789af871ec0dae5b04b85de9b7818ee010f8f257dcc20",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "surface-unify-v6.css",
+      "bytes": 1932,
+      "sha256": "591ebd4e1160d2781e242675073e648fcabd97725a7703e42da9c1107c35095b",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "sw.js",
+      "bytes": 2199,
+      "sha256": "b202213aef778c756873fa41af4ac43f0d4fbe02fa294f0c284766dced7d4909",
+      "category": "active-entry"
+    },
+    {
+      "name": "system-pages-polish-v6.css",
+      "bytes": 1454,
+      "sha256": "92c8477724fb06bd150cfd9e812b2e2e6be59965a663178af5d04664c3567c9a",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "tarot-assets-polish-v6.css",
+      "bytes": 1975,
+      "sha256": "64908a33ad6f7a6604ca87afc0958783088cac4849f72c4c1806b82a49c7a1a8",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "tarot-atlas.webp",
+      "bytes": 2239056,
+      "sha256": "f065f64f68a58f471974199edea1af8ca358c244e6bdedf1360859e5a0cfaa8d",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "tarot-continuity.js",
+      "bytes": 1720,
+      "sha256": "454e2a298bf7a7d379ef731a29daeabf728d88c2dbfad6f3142d4ae4a9205ca2",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "tarot-controls-v5.css",
+      "bytes": 1932,
+      "sha256": "d59748cdfc31013668083575b933be70de6af7df60ada2344e5afc3aa7867a7c",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "tarot-data.js",
+      "bytes": 7459,
+      "sha256": "18e5a1a3bcecf27fdb9c14c44c964a61f6eacfadc2f52ccaa76f0cbf60ee7cc3",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "tarot-editorial-policy.js",
+      "bytes": 1430,
+      "sha256": "74a88df44364417e2d4f07d312f2b2a417ce6118f0eaa21a662d17b649d107f5",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "tarot-editorial-v5.css",
+      "bytes": 1978,
+      "sha256": "3efb63aeb44243fd0eddee0e5c7a79ce74a3fbed41e1a6e83b846d325f5ac2be",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "tarot-engine.js",
+      "bytes": 20215,
+      "sha256": "d7e7d52e2931cb9f242addf7195063a12beed52b42c0ec0fcfe786bede3cf101",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "tarot-experience-v6.css",
+      "bytes": 1266,
+      "sha256": "6241327803fa0ea4e80c8fb67bedec353beace64546dca16e76f54a8450790d5",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "tarot-experience-v6.js",
+      "bytes": 246,
+      "sha256": "5962f947bde21b293a01c69aa91308bccbe4f45b646a68b8fde7fbf8c6584fc8",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "tarot-free-polish-v6.css",
+      "bytes": 1612,
+      "sha256": "221778f77017685c955a69dde511ade24dd1928df207b7f233686b521820942a",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "tarot-image-manifest-v5.json",
+      "bytes": 61826,
+      "sha256": "680145f0a4589936e86215a079918757b26fab61d7121fb7da059194d3431fec",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "tarot-image-runtime.js",
+      "bytes": 2543,
+      "sha256": "4307586ce514eb6a39dba5d4b2a5438c41569bc7197fda049b768795ba052949",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "tarot-livre-magic-v1.css",
+      "bytes": 2070,
+      "sha256": "5de7f712eb70c8bd06a163d216b194b5184dc3b76430ff9aada24c7b383a974e",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "tarot-meanings.js",
+      "bytes": 542043,
+      "sha256": "479a62a2dc61d0a087cfa0c88ebced4221963d1a830a86d77fdf2485b428c0ba",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "tarot-reveal-v6.css",
+      "bytes": 1454,
+      "sha256": "be8bb3a4edfbb1441ab52362c5f8c49a70cf2de9d0d2194a088b999a8d7b463f",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "tarot-ritual-experience-v8.css",
+      "bytes": 1027,
+      "sha256": "9239080d4dde8c49e1a27bcc58c85ba65d158ae463dc977c14f1a28decacf523",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "tarot-ritual-experience-v8.js",
+      "bytes": 1017,
+      "sha256": "4a057f5dfa1a55e70d0b2aa4fdb0b40529852642a06722dc6191c4640d6145c1",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "tarot-ritual-v5.css",
+      "bytes": 15365,
+      "sha256": "7c4262442d137207c1f2b9fd3e8727ea29a9d673416844624ea6a62fc4b12e86",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "tarot-session.js",
+      "bytes": 6170,
+      "sha256": "dbd13fad80388fe6bc63b41e3bba29f1197e2853b18f04a244d4e4255e4ec030",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "tarot-table-v5.css",
+      "bytes": 4290,
+      "sha256": "bfe0398d688fb74cfca2741c56c34def0e0218cc99f761ac1fd95f021146835a",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "trust-engine.js",
+      "bytes": 1895,
+      "sha256": "3e5e3f3253eb726d20533574451c9a565fa375bf9f0f25353153174f51505039",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "trust-footer-v6.css",
+      "bytes": 1295,
+      "sha256": "31ed52a2096f9978ed3f087320de6c16708b8c6445b642b285abe3fda30cef5f",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "trust-policy.js",
+      "bytes": 145,
+      "sha256": "ff8f666c2a5b293c102d139464e6bd2f1c7593fbedb86126bbb8d4694007a631",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "trust-v5.css",
+      "bytes": 1200,
+      "sha256": "b6384ad2c944ad7ce8cd614c796e1dc670c89e7937af67b7f6c464ac0d2f9d8f",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "type-polish-v6.css",
+      "bytes": 657,
+      "sha256": "d2f7a945eca1845fa7fd2443ff7cf95749113b7925d40b4348f067e0aece9a5b",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "update-04.css",
+      "bytes": 3820,
+      "sha256": "32eda38deb68066f49363eb97af971b500ab21f0a2fba6f78f02b5c030786732",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "update-05.css",
+      "bytes": 3676,
+      "sha256": "c61e26869501630330f869123fdb3c3a99cca697531dd13b375fb890e05b0bcb",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "update-06.css",
+      "bytes": 5314,
+      "sha256": "04bc86ac5698dba8936a10496cac2afd3063185aae2df5bef323a255af6b1e2b",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "update-08.css",
+      "bytes": 8040,
+      "sha256": "abacea6365be646b2f8384d09d08b60c86e764f9cdbf75dd96ada74900b43934",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "update-09.css",
+      "bytes": 5615,
+      "sha256": "b6e40f178f46384077d432a3cecc6c87ddaba5c8076f23948a85ab2e14b9d2d4",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "update-11.css",
+      "bytes": 1874,
+      "sha256": "22e930fbfbced020ba6d3d1f62762f1de10278399d76f0af988cb0eaeb3ecb09",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "v77-baseline.json",
+      "bytes": 1651,
+      "sha256": "5887f5c8f3e318d9acba4ed50ef195df7cceff95b08540e699ceea4ef9c5f141",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "verify-catalog-v5.mjs",
+      "bytes": 4532,
+      "sha256": "7bd1490c264da47adb712b91b69a62a2937f8e425821335e1a076c99ff32ced3",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "verify-mesa-real-v5.mjs",
+      "bytes": 8402,
+      "sha256": "f70a9de0edd6d380d844ea4989d68a76dc1bf569972bb28553cc060295b97645",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "verify-tarot-content-v5.mjs",
+      "bytes": 5970,
+      "sha256": "df4d26bc8718b8f6b98a8cb7cfc96454e1b4e156089e343aacdd672cb549e17a",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "verify-tarot-images-v5.mjs",
+      "bytes": 8856,
+      "sha256": "7cb55c889a244b730c8fe73bf290db68a6698930ac99a2f9d96848d75782c45f",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "verify-tarot-livre-v5.mjs",
+      "bytes": 9792,
+      "sha256": "142a978968cbbea333e7291cd7efbcc47908554afa8121a6cb5f61a05f30c671",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "verify-v77.mjs",
+      "bytes": 8497,
+      "sha256": "9f1f3c22ab04bcc5d13720f12679569b1c52c5d764fcd24aff19967bdf66e335",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "verify-visual-lock-v1.mjs",
+      "bytes": 1342,
+      "sha256": "979e4849195e29fe5aff5bf222bfc67f7cba8eabd9e58c6c87bbfecec6b8bcc5",
+      "category": "supporting-or-unclassified"
+    },
+    {
+      "name": "visual-foundation-v7.css",
+      "bytes": 9859,
+      "sha256": "08481661df9eae583f95382892b83e6ba365453ea7a3faef7fe26e01ff5f20b0",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "visual-foundation-v8.css",
+      "bytes": 2806,
+      "sha256": "235f2630c55f78c5efee2bb5acb47fe625273f1c5196f9a42a0f5f34329022f3",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "visual-guard-v6.js",
+      "bytes": 592,
+      "sha256": "0da61c39f47e0302d5769d58b352236ebf43fed39960eba7ea3dc09c4131071d",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "visual-surfaces-v8.css",
+      "bytes": 3260,
+      "sha256": "267d4f31f7d3c8c65c3f1f0580277b719b18403067d246fc2ed9cef635decdb7",
+      "category": "v8-candidate"
+    },
+    {
+      "name": "visual-system-v6.css",
+      "bytes": 2209,
+      "sha256": "0d57d04dd48a05a5b3e68b71ae4005130fa8d456ba1253db934701a381891c2d",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "visual-v47.css",
+      "bytes": 31055,
+      "sha256": "4d2add0022d835d01b1e7cf1bb5ff0a1c524ec8b15e56adb33342f50a4cbb490",
+      "category": "legacy-versioned"
+    },
+    {
+      "name": "visual-v68.css",
+      "bytes": 56678,
+      "sha256": "7f5aa8147406e6ffa653cd1fbc37aeea31b1d8dee0442eade51e6924bfdb828f",
+      "category": "legacy-versioned"
+    }
+  ]
+}

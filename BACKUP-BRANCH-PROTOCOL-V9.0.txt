@@ -1,0 +1,32 @@
+DIVINA BRUXA — PROTOCOLO DE BACKUP E BRANCH V9.0
+
+OBJETIVO
+Criar um ponto de retorno antes de qualquer consolidação. Este protocolo não
+apaga, move ou substitui arquivos no GitHub.
+
+NO GITHUB
+1. Abrir divinabruxa/divinabruxa.github.io.
+2. Confirmar que a branch atual é main.
+3. Criar uma branch privada de trabalho a partir do commit atual, por exemplo:
+   audit-v9-consolidacao.
+4. Não fazer commit direto em main durante o diagnóstico.
+5. Guardar o SHA do commit-base e o nome da branch em um local seguro.
+6. Só abrir pull request depois da revisão da proprietária.
+
+NO COMPUTADOR LOCAL
+1. Guardar uma cópia somente-leitura do checkout atual.
+2. Executar generate-audit-inventory-v9.mjs.
+3. Guardar AUDIT-INVENTORY-V9.0.json e seus hashes.
+4. Não incluir .git, senhas, tokens ou dados pessoais nos ZIPs.
+
+CRITÉRIO DE SEGURANÇA
+- Nenhum arquivo é excluído para “limpar” o projeto.
+- Nenhum segredo é solicitado ou colocado no navegador.
+- Qualquer conflito de versão vira FAIL/BLOCKED, nunca é sobrescrito em silêncio.
+- A branch de trabalho deve continuar reversível até a homologação.
+
+LIMITAÇÃO ATUAL
+A integração de gravação automática no GitHub retorna HTTP 403. Portanto, este
+protocolo prepara o trabalho e a evidência, mas a criação efetiva da branch
+precisa ser feita na conta GitHub com permissão de escrita.
+

@@ -1,0 +1,24 @@
+DIVINA BRUXA — MACROETAPA 0 / COFRE, BACKUP E MAPA DE AUTORIDADE
+
+ENTREGAS
+- Inventário com SHA-256 dos 574 arquivos auditados.
+- Mapa de autoridade do runtime e dos ativos preservados.
+- Protocolo reversível de backup e branch.
+- Registro dos quatro bloqueadores P0 observados.
+- Achados do site público e do GitHub.
+
+COMANDO LOCAL
+1. Tenha o checkout do GitHub em ./github-audit-v8-20260901.
+2. Execute: node generate-audit-inventory-v9.mjs
+3. Confirme a criação de AUDIT-INVENTORY-V9.0.json.
+
+REGRAS
+- Não excluir arquivos.
+- Não alterar main durante o diagnóstico.
+- Não colocar chaves ou dados pessoais no repositório.
+- Preservar CNAME, 78 cartas, skins, menu e orbe.
+- Criar branch antes de qualquer substituição.
+
+SAÍDA
+Macroetapa 0 concluída como inventário seguro. A Macroetapa 1 começa pelos
+quatro bloqueadores P0: boot, 404, ativação V8 e PWA.

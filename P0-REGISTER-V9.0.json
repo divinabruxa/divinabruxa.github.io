@@ -1,0 +1,39 @@
+{
+  "project": "Divina Bruxa — Orbe das Realidades",
+  "version": "9.0",
+  "status": "blocked_until_fixes",
+  "observed": [
+    {
+      "id": "P0-BOOT-USER-REGISTER",
+      "state": "open",
+      "evidence": "app.js:69 referencia #userRegister ausente; TypeError observado no navegador.",
+      "owner": "runtime"
+    },
+    {
+      "id": "P0-404-ORPHAN-CHUNKS",
+      "state": "open",
+      "evidence": "404.html referencia chunks JS/CSS/icone.svg inexistentes; import dinamico falha.",
+      "owner": "routing"
+    },
+    {
+      "id": "P0-V8-NOT-ACTIVE",
+      "state": "open",
+      "evidence": "index.html nao referencia divina-v8-loader.js.",
+      "owner": "release"
+    },
+    {
+      "id": "P0-PWA-V77-CACHE",
+      "state": "open",
+      "evidence": "sw.js usa cache v77 e o registro e interrompido pelo erro de boot.",
+      "owner": "pwa"
+    }
+  ],
+  "requiredBeforeMacro1": [
+    "backup-and-branch",
+    "p0-runtime-fix",
+    "404-runtime-decision",
+    "pwa-cache-plan"
+  ],
+  "noDeletionInMacro0": true
+}
+
