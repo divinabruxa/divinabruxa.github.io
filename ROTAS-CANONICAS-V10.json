@@ -1,0 +1,25 @@
+{
+  "version": "V10",
+  "entrypoint": "index.html",
+  "runtime": "app.js",
+  "publicRoutes": [
+    {"id":"home","path":"/","section":"home","access":"public"},
+    {"id":"tarot","path":"#tarot","section":"tarot","access":"public"},
+    {"id":"daily","path":"#daily","section":"dailyCard","access":"public"},
+    {"id":"library","path":"#library","section":"cardLibrary","access":"public"},
+    {"id":"school","path":"#school","section":"school","access":"public"},
+    {"id":"spreads","path":"#spreads","section":"spreads","access":"public"},
+    {"id":"journal","path":"#journal","section":"journal","access":"local-private"},
+    {"id":"skins","path":"#skins","section":"skins","access":"public"},
+    {"id":"premium","path":"#premium","section":"subscription","access":"public"},
+    {"id":"ai","path":"#ai","section":"ai","access":"public"},
+    {"id":"consultations","path":"#consultations","section":"consultation","access":"public"},
+    {"id":"store","path":"#store","section":"store","access":"public"},
+    {"id":"media","path":"#media","section":"media","access":"public"},
+    {"id":"account","path":"#account","section":"account","access":"auth"},
+    {"id":"admin","path":"#admin","section":"admin","access":"owner-auth"}
+  ],
+  "fallback": {"id":"not-found","path":"/404.html","access":"public"},
+  "excludedFromSitemap": ["journal","account","admin","ai"],
+  "invariants": ["single-runtime-entry","single-engine-instance","no-reversed-cards","no-blank-route"]
+}

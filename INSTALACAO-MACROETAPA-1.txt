@@ -1,0 +1,12 @@
+DIVINA BRUXA — INSTALAÇÃO DA MACROETAPA 1
+
+1. Faça backup da raiz atual antes de enviar qualquer arquivo.
+2. Envie os arquivos deste ZIP para staging, não para produção.
+3. Execute: node runtime-canonical-guard-v10.mjs CAMINHO_DO_STAGING
+4. O resultado esperado é PASS. BLOCKED indica duplicidade ou legado ainda carregado.
+5. Não importe NAVIGATION-CONTRACT-V10.js nem altere app.js manualmente sem testar a matriz.
+6. Corrija primeiro a duplicidade MediaEngine e confirme a rota #skins.
+7. Teste Home, Tarot Livre, Carta do Dia, Biblioteca, Escola, Tiragens, Diário, Premium, IA, Consultas, Loja, Mídia, Conta, Admin e 404.
+8. Registre screenshots, console e tempo de carregamento.
+9. Só avance quando todas as rotas estiverem sem tela branca e sem erro de console.
+10. A próxima etapa será o sistema profissional de estrutura e organização dos arquivos.
