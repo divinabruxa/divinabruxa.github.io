@@ -1,0 +1,16 @@
+DIVINA BRUXA — MACROETAPA 21 / PWA E PERFORMANCE V8
+
+STATUS: pacote pronto; GitHub continua bloqueando gravações por HTTP 403.
+
+ORDEM:
+1. Carregar pwa-performance-v8.css depois das camadas visuais.
+2. Carregar pwa-performance-v8.js como módulo depois de app.js.
+3. Manter pwa-engine.js, performance-v6.js e o service worker atual.
+4. Atualizar sw.js somente após teste real do pacote completo.
+
+INCLUI:
+- Estado online/offline acessível.
+- Banner offline discreto.
+- Lazy loading e decoding assíncrono para imagens.
+- Detecção de instalação standalone.
+- Skins pesadas permanecem fora do cache inicial.

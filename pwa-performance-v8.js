@@ -1,0 +1,5 @@
+/* DIVINA BRUXA — PWA, OFFLINE E PERFORMANCE V8 */
+const setState=()=>{document.body.dataset.network=navigator.onLine?'online':'offline';document.body.dataset.installed=matchMedia('(display-mode: standalone)').matches||navigator.standalone?'true':'false'};
+const lazyImages=()=>document.querySelectorAll('img:not([loading])').forEach((img,index)=>{if(index>1)img.loading='lazy';img.decoding='async'});
+const boot=()=>{setState();lazyImages();addEventListener('online',setState);addEventListener('offline',setState);new MutationObserver(lazyImages).observe(document.body,{childList:true,subtree:true});const banner=document.createElement('div');banner.className='pwa-v8-status';banner.setAttribute('role','status');banner.setAttribute('aria-live','polite');banner.innerHTML='<span aria-hidden="true">☁</span><b>Modo offline</b><small>Recursos disponíveis neste aparelho continuam acessíveis.</small>';document.body.append(banner)};
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();

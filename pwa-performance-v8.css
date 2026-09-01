@@ -1,0 +1,7 @@
+/* DIVINA BRUXA — PWA E OFFLINE V8 */
+.pwa-v8-status{position:fixed;left:50%;bottom:calc(5.2rem + env(safe-area-inset-bottom));z-index:9999;display:flex;align-items:center;gap:.5rem;max-width:calc(100vw - 2rem);padding:.65rem .85rem;transform:translate(-50%,140%);opacity:0;pointer-events:none;background:rgba(13,6,30,.96);border:1px solid rgba(191,169,232,.3);border-radius:999px;box-shadow:0 16px 48px rgba(0,0,0,.45);transition:transform .3s ease,opacity .3s ease;white-space:nowrap}.pwa-v8-status span{color:var(--db-gold-soft)}.pwa-v8-status small{color:var(--db-muted)}
+body[data-network="offline"] .pwa-v8-status{transform:translate(-50%,0);opacity:1}
+body[data-network="offline"] [data-requires-online]{opacity:.52;filter:saturate(.55)}
+img{content-visibility:auto}
+@media (max-width:560px){.pwa-v8-status{white-space:normal;border-radius:18px}.pwa-v8-status small{display:none}}
+@media (prefers-reduced-motion:reduce){.pwa-v8-status{transition:none}}
