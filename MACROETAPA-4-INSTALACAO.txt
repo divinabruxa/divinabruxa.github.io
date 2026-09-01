@@ -1,0 +1,16 @@
+DIVINA BRUXA — MACROETAPA 4 / PONTE ORBE–SKINS V8
+
+STATUS: pacote pronto; GitHub continua bloqueando gravações por HTTP 403.
+
+ORDEM:
+1. Carregar orb-skin-bridge-v8.js depois de skin-universal-v8.js.
+2. Manter o CSS universal carregado.
+3. Confirmar no navegador que data-orbe-skin muda em todas as superfícies.
+4. Atualizar cache somente após validar o site.
+
+GARANTIAS:
+- Não substitui orb-engine-v68.js.
+- Não altera a física, gestos ou duplo toque da Orbe.
+- Marca automaticamente as Orbes já existentes no HTML.
+- Reaplica a marcação quando uma página interna é renderizada.
+- Envia a skin ativa ao motor por evento e metadados.
