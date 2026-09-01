@@ -1,0 +1,19 @@
+DIVINA BRUXA — MACROETAPA 2 / SHELL UNIFICADO
+
+1. Trabalhe em uma branch de teste; não altere main diretamente.
+2. Envie para a raiz os arquivos `404.html`, `offline.html` e
+   `fallback-shell-v1.css`.
+3. Substitua o arquivo `sw.js` pelo conteúdo de `sw-v9.2-unificado.js`,
+   mantendo o nome remoto `sw.js`.
+4. Limpe os dados/cache do site e recarregue uma vez online.
+5. Teste uma rota inexistente online e depois simule offline no navegador.
+6. Confirme Home, Tarot Livre, Tiragens, skins, menu e orbe.
+
+PASS esperado:
+- 404 abre sem erro de módulo/chunk no console.
+- Offline mostra `offline.html` ao navegar sem rede.
+- Service Worker instala ou informa falha claramente.
+- Home e experiências existentes continuam acessíveis.
+
+RETORNO: restaure os quatro arquivos da branch anterior ou reverta o commit.
+PRÓXIMA: Macroetapa 3 — ativação controlada do V8.30, sem misturar legados.

@@ -1,5 +1,13 @@
-const CACHE='divina-bruxa-v77-menu-ring-v8-124';
-const CORE=['./','./index.html','./manifest.webmanifest','./manifest.webmanifest?v=76','./app.css','./motion.css','./update-04.css','./update-05.css','./update-06.css','./update-08.css','./update-09.css','./update-11.css','./visual-v68.css','./visual-v68.css?v=77','./tarot-table-v5.css','./tarot-table-v5.css?v=83','./tarot-ritual-v5.css','./tarot-ritual-v5.css?v=83','./tarot-controls-v5.css','./tarot-controls-v5.css?v=84','./tarot-editorial-v5.css','./tarot-editorial-v5.css?v=85','./spreads-v5.css','./spreads-v5.css?v=87','./card-library-v5.css','./card-library-v5.css?v=88','./school-v5.css','./school-v5.css?v=89','./journal-v5.css','./journal-v5.css?v=90','./divina-orb-v68.png','./divina-orb-v68.png?v=69','./divina-orb-v68.png?v=76','./divina-mini-orb-hd-v72.jpeg','./divina-mini-orb-hd-v72.jpeg?v=72','./cosmic-background.png','./orb-engine-v68.js','./orb-engine-v68.js?v=69','./app.js','./app.js?v=90','./tarot-data.js','./tarot-meanings.js','./daily-policy.js','./daily-meaning-runtime.js','./ritual-engine.js','./spreads-policy.js','./spread-synthesis.js','./spreads-engine.js','./card-library-policy.js','./card-library-engine.js','./school-policy.js','./school-engine.js','./journal-policy.js','./journal-engine.js','./tarot-session.js','./tarot-session.js?v=84','./tarot-continuity.js','./tarot-continuity.js?v=84','./tarot-editorial-policy.js','./tarot-editorial-policy.js?v=85','./tarot-engine.js','./tarot-engine.js?v=85','./tarot-image-runtime.js','./tarot-atlas.webp','./mini-orb-engine.js','./mini-orb-engine.js?v=71','./navigation.js','./navigation.js?v=75'];
-self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())));
-self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
-self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(fetch(e.request).then(r=>{const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy));return r}).catch(()=>caches.match(e.request).then(r=>r||caches.match('./index.html'))))});
+const CACHE='divina-bruxa-v9-fallback-shell-1';
+const CORE=['./','./index.html','./offline.html','./manifest.webmanifest','./app.css','./fallback-shell-v1.css','./app.js','./divina-orb-v68.png','./cosmic-background.png'];
+self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting())));
+self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
+self.addEventListener('fetch',event=>{
+  if(event.request.method!=='GET') return;
+  const requestURL=new URL(event.request.url);
+  const isNavigation=event.request.mode==='navigate' || event.request.destination==='document';
+  event.respondWith(fetch(event.request).then(response=>{
+    if(response.ok && requestURL.origin===self.location.origin){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(event.request,copy));}
+    return response;
+  }).catch(()=>caches.match(event.request).then(cached=>cached || (isNavigation ? caches.match('./offline.html') : caches.match('./index.html')))));
+});
