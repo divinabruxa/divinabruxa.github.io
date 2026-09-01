@@ -1,0 +1,1 @@
+export const MEDIA_POLICY=Object.freeze({environment:'editorial-sandbox',statuses:Object.freeze(['rascunho','publicado']),youtubeChannel:'https://www.youtube.com/@divinabruxa33',spotifyAllowed:true,adminOnlyFields:Object.freeze(['status','slug','publishAt'])});

@@ -14,6 +14,7 @@ import { CommerceEngine } from './commerce-engine.js';
 import { ConsultationEngine } from './consultation-engine.js';
 import { StoreEngine } from './store-engine.js';
 import { MediaEngine } from './media-engine.js';
+import { MediaEngineV5 } from './media-engine-v5.js';
 import { AIEngine } from './ai-engine.js';
 import './tarot-image-runtime.js';
 
@@ -34,6 +35,7 @@ new CommerceEngine({store:$('#storeApp'),consultations:$('#consultationApp'),sub
 new ConsultationEngine($('#consultationApp'));
 new StoreEngine($('#storeApp'),CONFIG);
 new MediaEngine({videos:$('#videoApp'),music:$('#musicApp')},CONFIG);
+new MediaEngineV5({videos:$('#videoApp'),music:$('#musicApp')},CONFIG);
 new AIEngine($('#ai'),CONFIG);
 new PremiumEngine($('#subscriptionApp'));
 
