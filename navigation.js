@@ -9,6 +9,38 @@ export function createNavigation() {
   const pathsButton = document.querySelector('#pathsBtn');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
+  const ensureHomePortals = () => {
+    if (!orbMenu || orbMenu.querySelector('.home-menu-portals')) return;
+    const video = orbMenu.querySelector('.video-portal');
+    const store = orbMenu.querySelector('.store-portal');
+    if (!video && !store) return;
+    const rail = document.createElement('div');
+    rail.className = 'home-menu-portals';
+    rail.setAttribute('aria-label', 'Portais adicionais da Orbe');
+    const extras = [
+      ['daily', '☾', 'Carta do Dia'],
+      ['skins', '◈', 'Skins da Orbe'],
+      ['subscriptions', '✦', 'Premium'],
+      ['journal', '▤', 'Diário']
+    ];
+    const add = (button, id, symbol, label) => {
+      if (!button) {
+        button = document.createElement('button');
+        button.type = 'button';
+        button.dataset.go = id;
+        button.className = 'menu-portal';
+        button.innerHTML = `<span aria-hidden="true">${symbol}</span><b>${label}</b>`;
+      } else {
+        button.classList.add('menu-portal');
+      }
+      rail.appendChild(button);
+    };
+    add(video, 'videos', '▷', 'Vídeos');
+    add(store, 'store', '◇', 'Loja Mística');
+    extras.forEach(([id, symbol, label]) => add(null, id, symbol, label));
+    orbMenu.appendChild(rail);
+  };
+
   let lastFocus = null;
   let restoreFocus = false;
   let wantsMenuOpen = false;
@@ -117,6 +149,8 @@ export function createNavigation() {
     const target = event.target.closest('[data-go]');
     if (target) go(target.dataset.go);
   });
+
+  ensureHomePortals();
 
   menuButton?.setAttribute('aria-controls', 'orbMenu');
   pathsButton?.setAttribute('aria-controls', 'orbMenu');

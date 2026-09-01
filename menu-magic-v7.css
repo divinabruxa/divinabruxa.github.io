@@ -1,0 +1,110 @@
+/* DIVINA BRUXA 7.0 — MENU MÁGICO COMPLETO
+   Oito caminhos ficam na órbita. Os portais adicionais ficam numa faixa
+   própria, sem deformar o círculo nem desaparecer nas laterais do celular. */
+
+.home-screen .orb-stage-ref{overflow:visible!important}
+.home-orb-menu{overflow:visible!important}
+
+/* Os oito nós da órbita são sempre filhos diretos do menu. */
+.home-orb-menu > button:not(.home-menu-portals){
+  box-sizing:border-box!important;
+  min-height:46px!important;
+  z-index:8!important;
+}
+
+.home-menu-portals{
+  position:absolute!important;
+  z-index:10!important;
+  left:50%!important;
+  top:calc(100% + 13px)!important;
+  bottom:auto!important;
+  width:min(100%,440px)!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:7px!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:7px!important;
+  transform:translateX(-50%)!important;
+  border:1px solid rgba(224,178,105,.30)!important;
+  border-radius:18px!important;
+  background:linear-gradient(145deg,rgba(26,10,38,.90),rgba(6,3,12,.95))!important;
+  box-shadow:inset 0 1px rgba(255,245,220,.08),0 16px 35px rgba(0,0,0,.38),0 0 22px rgba(172,58,225,.10)!important;
+  pointer-events:auto!important;
+}
+
+.home-menu-portals::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:-13px;
+  width:1px;
+  height:13px;
+  background:linear-gradient(transparent,rgba(239,197,126,.70));
+  box-shadow:0 0 8px rgba(224,91,255,.32);
+}
+
+.home-menu-portals .menu-portal,
+.home-menu-portals .video-portal,
+.home-menu-portals .store-portal{
+  position:relative!important;
+  inset:auto!important;
+  left:auto!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:auto!important;
+  width:auto!important;
+  height:58px!important;
+  min-height:58px!important;
+  margin:0!important;
+  padding:6px 5px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:4px!important;
+  border:1px solid rgba(224,178,105,.24)!important;
+  border-radius:13px!important;
+  background:radial-gradient(circle at 50% 15%,rgba(125,42,160,.24),transparent 48%),rgba(7,3,13,.74)!important;
+  color:#dfd0de!important;
+  text-align:center!important;
+  transform:none!important;
+  filter:none!important;
+  opacity:1!important;
+  transition:transform .22s ease,border-color .22s ease,background .22s ease,box-shadow .22s ease!important;
+}
+
+.home-menu-portals .menu-portal::before,
+.home-menu-portals .menu-portal::after{display:none!important}
+.home-menu-portals .menu-portal span{flex:none!important;width:28px!important;height:28px!important;display:grid!important;place-items:center!important;border:1px solid rgba(234,191,118,.58)!important;border-radius:50%!important;color:#f2ce8b!important;font-size:15px!important;line-height:1!important;box-shadow:inset 0 0 12px rgba(183,56,228,.16)!important}
+.home-menu-portals .menu-portal b{display:block!important;color:#e8d6dc!important;font:500 8px/1.1 var(--serif)!important;white-space:nowrap!important;letter-spacing:.02em!important}
+.home-menu-portals .menu-portal:hover,.home-menu-portals .menu-portal:focus-visible,.home-menu-portals .menu-portal.is-current{border-color:rgba(255,220,157,.78)!important;background:rgba(42,15,55,.86)!important;box-shadow:0 0 16px rgba(209,75,245,.22),inset 0 0 16px rgba(207,134,255,.10)!important;transform:translateY(-2px)!important;outline:0!important}
+
+/* A abertura revela o rail junto com o círculo, sem quadro em branco. */
+.home-menu-portals{opacity:0;filter:blur(5px);pointer-events:none;transition:opacity .35s ease,filter .35s ease,transform .45s cubic-bezier(.16,.82,.22,1)!important}
+.home-screen.orb-menu-open .home-menu-portals{opacity:1;filter:none;pointer-events:auto;transition-delay:.20s!important}
+.home-screen.orb-menu-closing .home-menu-portals{opacity:0;filter:blur(4px);pointer-events:none;transition-delay:0s!important}
+
+/* O círculo não fica torto: as posições são simétricas e independem da largura do texto. */
+@media(max-width:700px){
+  .home-screen.orb-menu-open .orb-stage-ref{margin-bottom:142px!important}
+  .home-menu-portals{width:min(94vw,420px)!important;gap:6px!important;padding:6px!important}
+  .home-menu-portals .menu-portal{height:54px!important;min-height:54px!important}
+  .home-menu-portals .menu-portal span{width:26px!important;height:26px!important;font-size:14px!important}
+  .home-menu-portals .menu-portal b{font-size:7.5px!important}
+  .home-orb-menu > button:nth-of-type(1),.home-orb-menu > button:nth-of-type(5){width:96px!important;height:64px!important}
+  .home-orb-menu > button:nth-of-type(2),.home-orb-menu > button:nth-of-type(4){left:calc(73% - 21px)!important}
+  .home-orb-menu > button:nth-of-type(6),.home-orb-menu > button:nth-of-type(8){right:calc(73% - 21px)!important}
+  .home-orb-menu > button:nth-of-type(3),.home-orb-menu > button:nth-of-type(7){width:88px!important}
+}
+
+@media(max-width:390px){
+  .home-screen.orb-menu-open .orb-stage-ref{margin-bottom:132px!important}
+  .home-menu-portals{width:calc(100vw - 28px)!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;border-radius:16px!important}
+  .home-menu-portals .menu-portal{height:50px!important;min-height:50px!important;flex-direction:row!important;justify-content:flex-start!important;padding-inline:9px!important;text-align:left!important}
+  .home-menu-portals .menu-portal b{font-size:8px!important}
+  .home-orb-menu > button:nth-of-type(2),.home-orb-menu > button:nth-of-type(4){left:calc(71% - 20px)!important}
+  .home-orb-menu > button:nth-of-type(6),.home-orb-menu > button:nth-of-type(8){right:calc(71% - 20px)!important}
+}
+
+@media(prefers-reduced-motion:reduce){.home-menu-portals,.home-menu-portals .menu-portal{transition:none!important}}

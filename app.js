@@ -1,6 +1,6 @@
 import { CONFIG } from './config.js';
 import { escapeHTML } from './storage.js';
-import { createNavigation } from './navigation.js?v=75';
+import { createNavigation } from './navigation.js?v=77';
 import { RealityOrbEngine } from './orb-engine-v68.js?v=69';
 import { bindMiniOrbs } from './mini-orb-engine.js?v=71';
 import { FreeTarot } from './tarot-engine.js?v=85';
