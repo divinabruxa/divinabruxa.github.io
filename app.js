@@ -7,6 +7,7 @@ import { FreeTarot } from './tarot-engine.js?v=85';
 import { DailyRitual } from './ritual-engine.js';
 import { CardLibraryEngine } from './card-library-engine.js';
 import { SchoolEngine } from './school-engine.js';
+import { PremiumEngine } from './premium-engine.js';
 import { SpreadsEngine } from './spreads-engine.js';
 import { JournalEngine } from './journal-engine.js';
 import { CommerceEngine } from './commerce-engine.js';
@@ -30,6 +31,7 @@ addEventListener('orbe:toast', event => toast(event.detail));
 new CommerceEngine({store:$('#storeApp'),consultations:$('#consultationApp'),subscriptions:$('#subscriptionApp')},CONFIG);
 new MediaEngine({videos:$('#videoApp'),music:$('#musicApp')},CONFIG);
 new AIEngine($('#ai'),CONFIG);
+new PremiumEngine($('#subscriptionApp'));
 
 $('#userLogin').onsubmit=event=>{event.preventDefault();toast('Login seguro será ativado com o servidor.');};
 $('#adminLogin').onsubmit=event=>{event.preventDefault();if($('#adminUser').value!==CONFIG.adminUser){$('#adminMsg').textContent='Login não reconhecido.';return;}$('#adminMsg').textContent='Usuário reconhecido. A senha será validada somente pelo servidor seguro — nunca pelo arquivo público.';};
