@@ -1,0 +1,13 @@
+DIVINA BRUXA — MACROETAPA 15 / RELEASE GATE
+
+1. Rode `node release-gate-v9.mjs` na raiz dos artefatos; esperado: 9/9 PASS.
+2. Instale primeiro em branch de staging, nunca diretamente em produção.
+3. Preencha a matriz QA com evidências reais de iPhone, Android, desktop,
+   acessibilidade, offline, Auth/RLS e billing sandbox.
+4. Só avance para piloto com aprovação explícita da proprietária.
+5. Só avance para produção após revisão jurídica, segurança, observabilidade,
+   backups restauráveis e rollback ensaiado.
+6. Mantenha todas as flags de produção false até essa aprovação.
+
+Esta macroetapa encerra o plano V9 de preparação; o próximo trabalho é a
+execução controlada no staging, não uma publicação automática.

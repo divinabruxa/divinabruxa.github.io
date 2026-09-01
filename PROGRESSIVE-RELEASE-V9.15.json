@@ -1,0 +1,18 @@
+{
+  "release": "Divina Bruxa V9",
+  "channel": "staging",
+  "stages": [
+    {"name":"staging","audience":"test devices","requires":"QA_SUPREME_PASS","status":"ready"},
+    {"name":"pilot","audience":"small invited group","requires":"staging evidence + owner approval","status":"blocked"},
+    {"name":"production","audience":"public","requires":"pilot metrics + legal + security + owner approval","status":"blocked"}
+  ],
+  "gates": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "orbe_ai_sol_enabled": false
+  },
+  "rollback": "revert the last staging commit and restore the previous service worker",
+  "preserve": ["CNAME","78 cards","card assets","skin assets","orb engine","navigation.js"]
+}
