@@ -1,0 +1,17 @@
+DIVINA BRUXA — MACROETAPA 4 / SKINS UNIVERSAIS
+
+1. Use uma branch de teste e faça backup antes do upload.
+2. Envie `orb-skin-bridge-v9.js` e `skin-universal-v9.css` para a raiz.
+3. No `index.html`, carregue o CSS depois dos estilos V8 e carregue o bridge
+   depois de `divina-v8-loader.js`:
+
+   <link rel="stylesheet" href="skin-universal-v9.css?v=9.3">
+   <script type="module" src="orb-skin-bridge-v9.js?v=9.3"></script>
+
+4. Não duplique as linhas se elas já existirem.
+5. Teste a troca de cada skin na Home, no menu, no Tarot Livre e em qualquer
+   tela com orbe; todas devem mudar juntas.
+6. Execute `node SKIN-UNIVERSAL-VERIFICATION-V9.3.mjs` e confirme 8/8 PASS.
+
+RETORNO: remova somente as duas linhas V9.3 ou reverta o commit da branch.
+PRÓXIMA: Macroetapa 5 — núcleo Tarot e conteúdo editorial verificável.

@@ -1,0 +1,12 @@
+/* DIVINA BRUXA — TODAS AS SUPERFÍCIES DE ORBE V9 */
+[data-orbe-skin-image]{background-image:var(--db-skin-image);background-position:center;background-size:cover;background-repeat:no-repeat}
+[data-orbe-skin-image] img{object-fit:cover}
+.skin-orb,.skin-preview{background-image:var(--db-preview-image,var(--db-skin-image));background-position:center;background-size:cover;background-repeat:no-repeat}
+.table-orb-image{background-image:var(--db-skin-image);background-position:center;background-size:cover;background-repeat:no-repeat;border-radius:50%}
+.table-orb-image img{opacity:.06;mix-blend-mode:screen}
+.orb,.orb--hero,.orb--dock,.mini-orb,.table-orb,.orb-shell{--orb-skin-image:var(--db-skin-image);--orb-skin-id:var(--db-skin-id)}
+.orb[data-orbe-surface],.mini-orb[data-orbe-surface],.table-orb[data-orbe-surface],.orb-shell[data-orbe-surface]{background-image:var(--orb-skin-image);background-position:center;background-size:cover;background-repeat:no-repeat}
+.orb[data-orbe-surface]>*{position:relative}
+body[data-orbe-skin="classic"]{--db-skin-accent:#e7bd68}body[data-orbe-skin="lunar"]{--db-skin-accent:#b9c7ff}body[data-orbe-skin="solar"]{--db-skin-accent:#f4be5d}body[data-orbe-skin="ocean"]{--db-skin-accent:#6cd5df}body[data-orbe-skin="emerald"]{--db-skin-accent:#7de3a5}body[data-orbe-skin="fire"]{--db-skin-accent:#ff895f}body[data-orbe-skin="cosmic"]{--db-skin-accent:#c39bff}body[data-orbe-skin="eclipse"]{--db-skin-accent:#9d7cd8}
+body[data-orbe-skin] .eyebrow{color:var(--db-skin-accent,var(--db-gold-soft))}
+@media (prefers-reduced-motion:reduce){.orb,.mini-orb,.table-orb{transition:none!important}}
