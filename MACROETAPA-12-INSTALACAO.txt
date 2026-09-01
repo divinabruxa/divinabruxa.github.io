@@ -1,0 +1,14 @@
+DIVINA BRUXA — MACROETAPA 12 / DIÁRIO E ESPELHO V8
+
+STATUS: pacote pronto; GitHub continua bloqueando gravações por HTTP 403.
+
+ORDEM:
+1. Carregar journal-experience-v8.css depois das camadas visuais.
+2. Carregar journal-experience-v8.js como módulo depois de app.js.
+3. Manter journal-engine.js e journal-policy.js existentes.
+
+INCLUI:
+- Entrada ritualística para escrita.
+- Privacidade explicada com clareza.
+- Autosave, exportação e Espelho reforçados visualmente.
+- Nenhuma exposição do corpo das anotações.
