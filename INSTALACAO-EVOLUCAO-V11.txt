@@ -1,0 +1,12 @@
+DIVINA BRUXA V11 — INSTALAÇÃO DA MACROETAPA 21
+
+1. Adicione os arquivos na raiz do GitHub.
+2. No staging, execute: node evolution-release-v11.mjs CAMINHO_DO_STAGING
+3. Defina responsável, escopo, risco, custo e data de revisão de cada release.
+4. Faça uma entrega mensal de conteúdo e qualidade.
+5. Mantenha segurança e acessibilidade no backlog prioritário.
+6. Use feedback agregado, nunca texto íntimo do Diário.
+7. Faça beta progressivo e mantenha rollback pronto.
+8. Publique changelog claro, incluindo o que ainda não existe.
+9. Evite urgência artificial, culpa e manipulação emocional.
+10. Toda nova versão deve voltar ao ciclo de staging e QA antes de produção.

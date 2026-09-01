@@ -1,0 +1,9 @@
+{
+  "version":"V11",
+  "cadence":{"weekly":"monitoring-and-support","monthly":"content-and-quality-release","quarterly":"architecture-and-security-review"},
+  "releaseChecklist":["owner","scope","risk","cost","stagingEvidence","accessibility","security","rollback","changelog","reviewDate"],
+  "priorities":["safety","reliability","accessibility","core-tarot","premium-value","content-depth","performance","growth"],
+  "experiments":{"sensitiveFeaturesExcluded":true,"aggregatedMetricsOnly":true,"marketingOptOut":true,"artificialUrgency":false},
+  "contentCadence":{"seasonPerCycle":true,"dailyCardUpdates":true,"academyReview":true,"seasonalSkins":true},
+  "governance":{"stagingRequired":true,"publicChangelog":true,"rollbackRequired":true,"securityReviewQuarterly":true}
+}
