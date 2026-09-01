@@ -1,0 +1,4 @@
+.account-register { margin-top: 1rem; }
+.account-register summary { cursor: pointer; color: #f0cf8b; letter-spacing: .08em; }
+.account-register form { display: grid; gap: .7rem; margin-top: 1rem; }
+.account-register input { width: 100%; }
