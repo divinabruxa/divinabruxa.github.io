@@ -1,0 +1,10 @@
+{
+  "version":"V11",
+  "severity":["P0","P1","P2","P3"],
+  "objectives":{"rtoHours":4,"rpoHours":24},
+  "controls":["mfa","secret-rotation","environment-separation","dependency-monitoring","certificate-monitoring","backup-encryption","restore-test","status-page"],
+  "incidentSteps":["detect","classify","contain","preserve","correct","verify","communicate","retrospective"],
+  "safeFailure":{"payments":"no-access-grant","ai":"stop-and-inform","consultations":"queue-and-confirm","offline":"fallback-content"},
+  "privacy":{"diaryBodyInLogs":false,"minimalData":true,"notificationOnBreachReview":true},
+  "exercises":["backend-outage","duplicate-webhook","test-secret-exposure","storage-failure","cache-corruption","backup-restore","certificate-expiry"]
+}

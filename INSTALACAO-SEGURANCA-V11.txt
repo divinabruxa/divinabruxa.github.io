@@ -1,0 +1,12 @@
+DIVINA BRUXA V11 — INSTALAÇÃO DA MACROETAPA 25
+
+1. Adicione os arquivos na raiz do GitHub.
+2. No staging, execute: node security-continuity-guard-v11.mjs CAMINHO_DO_STAGING
+3. Defina responsáveis, severidades, contatos e página de status.
+4. Faça backup e restauração em ambiente separado.
+5. Teste MFA, rotação de segredos e separação staging/produção.
+6. Simule indisponibilidade, webhook duplicado, storage e certificado.
+7. Confirme que falhas de pagamento nunca concedem acesso.
+8. Confirme que Diário não aparece em logs ou relatórios.
+9. Registre RTO/RPO e o procedimento de rollback.
+10. A próxima macroetapa V11 será otimização comercial, retenção e sustentabilidade financeira.
