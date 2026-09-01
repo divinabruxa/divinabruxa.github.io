@@ -1,0 +1,13 @@
+DIVINA BRUXA — MACROETAPA 11 / CONSULTAS E LOJA
+
+1. Envie `commerce-catalog-v9.js` para a raiz da branch de teste.
+2. Renderize os quatro serviços a partir de `CONSULTATIONS`.
+3. Valide o formulário com `validateConsultation` antes de exibir confirmação.
+4. Inclua nome, e-mail, telefone, serviço e pergunta/contexto.
+5. Mostre `storeDisclosure` perto de cada link de afiliado da loja.
+6. Não prometa horário, pagamento ou resposta automática enquanto o backend não
+   estiver conectado.
+7. Execute `node COMMERCE-VALIDATION-V9.10.mjs` — esperado: 8/8 PASS.
+
+RETORNO: remova apenas o catálogo e as integrações visuais da branch.
+PRÓXIMA: Macroetapa 12 — música, vídeos e conteúdo recorrente.
