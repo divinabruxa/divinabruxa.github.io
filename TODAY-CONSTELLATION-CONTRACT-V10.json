@@ -1,0 +1,10 @@
+{
+  "version": "V10",
+  "timezone": "America/Sao_Paulo",
+  "dailyCard": {"onePerDay":true,"sameAcrossDevices":true,"reversed":false,"revealByNotification":false},
+  "modules": ["welcome","daily-card","deep-meaning","daily-pulse","micro-lesson","continue-learning","journal-prompt","weekly-ritual"],
+  "states": ["new","revealed","offline-revealed","completed"],
+  "retention": {"streaksOptional":true,"noPunishment":true,"quietHours":"22:00-08:00","marketingOptIn":true},
+  "privacy": {"journalOptional":true,"journalBodyExcludedFromAnalytics":true,"pulseIsNonDiagnostic":true},
+  "successEvents": ["hub_opened","daily_card_revealed","pulse_completed","lesson_opened","journal_saved"]
+}
