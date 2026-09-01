@@ -5,53 +5,48 @@ export function createNavigation() {
   const screens = [...document.querySelectorAll('.screen')];
   const home = document.querySelector('#home');
   const orbMenu = document.querySelector('#orbMenu');
-  const orbStage = document.querySelector('.orb-stage-ref');
   const menuButton = document.querySelector('#menuBtn');
   const pathsButton = document.querySelector('#pathsBtn');
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+  // Portais comerciais e de conteúdo ficam em uma fileira própria acima da órbita,
+  // sem alterar a geometria da Orbe principal.
+  const ensureMenuPortals = () => {
+    if (!orbMenu || orbMenu.querySelector('.home-menu-portals')) return;
+    const row = document.createElement('div');
+    row.className = 'home-menu-portals';
+    row.setAttribute('aria-label', 'Atalhos da Orbe');
+    const video = orbMenu.querySelector('.video-portal');
+    if (video) {
+      video.classList.add('menu-portal');
+      const title = video.querySelector('b');
+      if (title) title.textContent = 'Vídeo';
+      row.append(video);
+    }
+    const shortcuts = [
+      ['store', '◇', 'Loja Mística'],
+      ['daily', '☾', 'Carta do Dia'],
+      ['skins', '◆', 'Skins da Orbe'],
+      ['subscriptions', '✦', 'Premium'],
+      ['journal', '▤', 'Diário']
+    ];
+    shortcuts.forEach(([id, sigil, label]) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'menu-portal';
+      button.dataset.go = id;
+      button.innerHTML = `<span aria-hidden="true">${sigil}</span><b>${label}</b>`;
+      row.append(button);
+    });
+    orbMenu.append(row);
+  };
+  ensureMenuPortals();
   if (pathsButton) {
     pathsButton.dataset.go = 'skins';
-    pathsButton.setAttribute('aria-label', 'Abrir Skins da Orbe');
     pathsButton.removeAttribute('aria-controls');
     const pathsLabel = pathsButton.querySelector('small');
     if (pathsLabel) pathsLabel.textContent = 'Skins';
   }
-  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-
-  const ensureHomePortals = () => {
-    if (!orbMenu || orbMenu.querySelector('.home-menu-portals')) return;
-    const video = orbMenu.querySelector('.video-portal');
-    const store = orbMenu.querySelector('.store-portal');
-    if (!video && !store) return;
-    const rail = document.createElement('div');
-    rail.className = 'home-menu-portals';
-    rail.setAttribute('aria-label', 'Portais adicionais da Orbe');
-    const extras = [
-      ['daily', '☾', 'Carta do Dia'],
-      ['skins', '◈', 'Skins da Orbe'],
-      ['subscriptions', '✦', 'Premium'],
-      ['journal', '▤', 'Diário']
-    ];
-    const add = (button, id, symbol, label) => {
-      if (!button) {
-        button = document.createElement('button');
-        button.type = 'button';
-        button.dataset.go = id;
-        button.className = 'menu-portal';
-        button.innerHTML = `<span aria-hidden="true">${symbol}</span><b>${label}</b>`;
-      } else {
-        button.classList.add('menu-portal');
-        if (id === 'videos') {
-          const title = button.querySelector('b');
-          if (title) title.textContent = 'Vídeo';
-        }
-      }
-      rail.appendChild(button);
-    };
-    add(video, 'videos', '▷', 'Vídeos');
-    add(store, 'store', '◇', 'Loja Mística');
-    extras.forEach(([id, symbol, label]) => add(null, id, symbol, label));
-    orbMenu.appendChild(rail);
-  };
 
   let lastFocus = null;
   let restoreFocus = false;
@@ -59,7 +54,6 @@ export function createNavigation() {
   let motionToken = 0;
   let motionFrame = 0;
   let motionTimer = 0;
-  let stageMotion = null;
 
   const setCurrent = id => document.querySelectorAll('.magic-dock [data-go], .home-orb-menu [data-go]').forEach(button => {
     const current = button.dataset.go === id;
@@ -74,14 +68,15 @@ export function createNavigation() {
     menuButton?.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
     const label = menuButton?.querySelector('span');
     if (label) label.textContent = open ? 'FECHAR' : 'MENU';
+    pathsButton?.classList.toggle('is-open', open);
+    pathsButton?.setAttribute('aria-expanded', String(open));
+    pathsButton?.setAttribute('aria-label', open ? 'Fechar menu mágico' : 'Abrir menu mágico');
   };
 
   const cancelMotion = () => {
     motionToken += 1;
     cancelAnimationFrame(motionFrame);
     clearTimeout(motionTimer);
-    stageMotion?.cancel();
-    stageMotion = null;
     motionFrame = 0;
     motionTimer = 0;
   };
@@ -102,7 +97,7 @@ export function createNavigation() {
   };
 
   const settleMotion = token => {
-    const delay = reducedMotion.matches ? 0 : 600;
+    const delay = reducedMotion.matches ? 0 : 540;
     motionTimer = setTimeout(() => finishMotion(token), delay);
   };
 
@@ -117,6 +112,14 @@ export function createNavigation() {
   };
 
   const go = (id, push = true) => {
+    if (id === 'skins' && !document.getElementById('skins')) {
+      screens.forEach(screen => screen.classList.toggle('active', screen.id === 'home'));
+      resetOrbMenu();
+      document.body.dataset.screen = 'home';
+      setCurrent('skins');
+      document.querySelector('.home-skins')?.scrollIntoView({ behavior: reducedMotion.matches ? 'auto' : 'smooth', block: 'start' });
+      return;
+    }
     if (!document.getElementById(id)) id = 'home';
     screens.forEach(screen => screen.classList.toggle('active', screen.id === id));
     resetOrbMenu();
@@ -134,7 +137,6 @@ export function createNavigation() {
     if (open && !home.classList.contains('active')) go('home');
     if (open && !wantsMenuOpen) lastFocus = document.activeElement;
 
-    const stageBefore = orbStage?.getBoundingClientRect();
     cancelMotion();
     const token = motionToken;
     wantsMenuOpen = open;
@@ -150,19 +152,6 @@ export function createNavigation() {
     motionFrame = requestAnimationFrame(() => {
       if (token !== motionToken) return;
       home.classList.toggle('orb-menu-open', open);
-      if (orbStage && stageBefore && !reducedMotion.matches) {
-        const stageAfter = orbStage.getBoundingClientRect();
-        const dx = stageBefore.left - stageAfter.left;
-        const dy = stageBefore.top - stageAfter.top;
-        stageMotion = orbStage.animate([
-          { transform:`translate3d(${dx}px,${dy}px,0)` },
-          { transform:'translate3d(0,0,0)' }
-        ],{
-          duration:560,
-          easing:'cubic-bezier(.32,.72,0,1)',
-          fill:'both'
-        });
-      }
       settleMotion(token);
     });
   };
@@ -175,8 +164,6 @@ export function createNavigation() {
     const target = event.target.closest('[data-go]');
     if (target) go(target.dataset.go);
   });
-
-  ensureHomePortals();
 
   menuButton?.setAttribute('aria-controls', 'orbMenu');
   setMenuControls(false);
