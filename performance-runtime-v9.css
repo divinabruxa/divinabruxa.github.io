@@ -1,0 +1,4 @@
+/* DIVINA BRUXA — PERFORMANCE E FEEDBACK DE REDE V9 */
+img{content-visibility:auto}img[loading="lazy"]{contain-intrinsic-size:320px 440px}
+body[data-network="offline"] [data-requires-online]{opacity:.55;filter:saturate(.55);pointer-events:none}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}

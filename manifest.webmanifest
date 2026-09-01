@@ -1,1 +1,18 @@
-{"name":"Divina Bruxa — Orbe das Realidades","short_name":"Divina Bruxa","description":"Tarot vivo da Divina Bruxa","start_url":"./","scope":"./","display":"standalone","background_color":"#05020a","theme_color":"#05020a","orientation":"portrait-primary","lang":"pt-BR","icons":[{"src":"./divina-orb-v68.png?v=76","sizes":"1254x1254","type":"image/png","purpose":"any"}]}
+{
+  "name": "Divina Bruxa — Orbe das Realidades",
+  "short_name": "Divina Bruxa",
+  "description": "Tarot vivo da Divina Bruxa, com 78 cartas e experiências para sua jornada.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#05020a",
+  "theme_color": "#05020a",
+  "orientation": "portrait-primary",
+  "lang": "pt-BR",
+  "categories": ["lifestyle", "entertainment"],
+  "icons": [{"src":"./divina-orb-v68.png?v=76","sizes":"1254x1254","type":"image/png","purpose":"any maskable"}],
+  "shortcuts": [
+    {"name":"Tarot Livre","short_name":"Tarot","url":"./index.html#tarot","icons":[{"src":"./divina-orb-v68.png","sizes":"1254x1254"}]},
+    {"name":"Carta do Dia","short_name":"Carta do Dia","url":"./index.html#daily","icons":[{"src":"./divina-orb-v68.png","sizes":"1254x1254"}]}
+  ]
+}

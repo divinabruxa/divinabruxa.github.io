@@ -1,0 +1,13 @@
+DIVINA BRUXA — MACROETAPA 8 / PWA E PERFORMANCE
+
+1. Em uma branch de teste, envie `performance-runtime-v9.js`,
+   `performance-runtime-v9.css` e substitua `manifest.webmanifest`.
+2. Carregue o CSS e o módulo depois dos estilos/módulos V8.
+3. Mantenha o `sw.js` da Macroetapa 2 para o fallback offline.
+4. Teste iPhone, Android e desktop: primeira abertura, rolagem até cartas,
+   Tarot Livre, Carta do Dia, menu e instalação PWA.
+5. Execute `node PERFORMANCE-PWA-VALIDATION-V9.7.mjs`; esperado: 8/8 PASS.
+6. Teste em rede lenta e com `prefers-reduced-motion` ativado.
+
+RETORNO: restaure o manifesto e remova apenas os dois arquivos V9.7.
+PRÓXIMA: Macroetapa 9 — conta, privacidade e sincronização segura.
