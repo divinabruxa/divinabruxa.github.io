@@ -1,0 +1,10 @@
+{
+  "version":"V11",
+  "allowedSignals":["explicitTopic","completedLesson","favoriteSkin","startedSeason","cardReviewDue","language","deviceClass"],
+  "forbiddenSignals":["diaryBody","privateQuestion","aiPrompt","healthInference","financialInference","religionInference","sexualOrientation"],
+  "recommendations":["next-lesson","related-spread","favorite-skin","continue-season","flashcard-review","daily-prompt"],
+  "explanation":{"required":true,"template":"Porque você {signal}; você pode dispensar esta sugestão."},
+  "controls":{"optOut":true,"muteCategory":true,"clearHistory":true,"adsUseRecommendations":false},
+  "fallback":"editorial-default",
+  "metrics":"aggregate-only"
+}

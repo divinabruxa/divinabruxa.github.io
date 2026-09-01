@@ -1,0 +1,12 @@
+DIVINA BRUXA V11 — INSTALAÇÃO DA MACROETAPA 23
+
+1. Adicione os arquivos na raiz do GitHub.
+2. No staging, execute: node recommendation-guard-v11.mjs CAMINHO_DO_STAGING
+3. Use somente sinais explícitos e de baixo risco.
+4. Mostre o motivo de cada recomendação.
+5. Permita dispensar, silenciar e limpar preferências.
+6. Nunca envie Diário, prompts privados ou inferências sensíveis.
+7. Não use recomendações para anúncios ou urgência comercial.
+8. Teste visitante sem histórico e usuário com histórico mínimo.
+9. Confirme fallback editorial e métricas agregadas.
+10. A próxima etapa será acessibilidade avançada, internacionalização e qualidade de conteúdo V11.
