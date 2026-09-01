@@ -1,0 +1,8 @@
+.school-screen{background:radial-gradient(circle at 50% 0,rgba(133,54,205,.28),transparent 42%),linear-gradient(180deg,#170522,#0c0215)}
+.school-screen .school-overview,.school-screen .module-card,.school-screen .lesson-card{border:1px solid rgba(243,211,138,.32);border-radius:22px;background:linear-gradient(145deg,rgba(68,24,104,.72),rgba(18,5,31,.9));box-shadow:0 18px 46px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.06);transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s ease}
+.school-screen .module-card:hover,.school-screen .lesson-card:hover{transform:translateY(-4px);box-shadow:0 22px 52px rgba(0,0,0,.35),0 0 24px rgba(184,108,255,.25)}
+.school-screen .module-progress{height:6px;border-radius:99px;background:rgba(243,211,138,.14);overflow:hidden}.school-screen .module-progress i{display:block;height:100%;background:linear-gradient(90deg,#8b3bd1,#f3d38a);box-shadow:0 0 12px #b86cff}
+.school-screen .lesson-card[aria-current=true],.school-screen .module-card.is-active{border-color:#f3d38a;box-shadow:0 0 28px rgba(184,108,255,.45),inset 0 0 24px rgba(184,108,255,.1)}
+.school-screen button:active{transform:scale(.97)}
+@media(max-width:640px){.school-screen .school-overview,.school-screen .module-card,.school-screen .lesson-card{border-radius:18px}}
+@media(prefers-reduced-motion:reduce){.school-screen *{transition-duration:.01ms!important}}
