@@ -1,0 +1,15 @@
+DIVINA BRUXA — MACROETAPA 5 / CONTRATO DO TAROT LIVRE
+
+1. Faça upload de `tarot-core-contract-v9.js` para a raiz da branch de teste.
+2. Mantenha `tarot-session.js`, `tarot-data.js`, `tarot-engine.js` e todas as
+   imagens de cartas existentes.
+3. Se algum integrador futuro importar o contrato, use:
+   `import {createFreeTarot,revealNext,reshuffleRemaining,resetFreeTarot} from './tarot-core-contract-v9.js'`.
+4. Não altere a regra editorial: Tarot Livre mostra imagem/nome/posição, sem
+   significado automático e sem cartas invertidas.
+5. Execute `node TAROT-CORE-VALIDATION-V9.4.mjs`; o resultado esperado é 8/8.
+6. Teste revelar 78 vezes, resetar, embaralhar restantes e retomar a sessão.
+
+RETORNO: remova apenas o contrato se a branch apresentar regressão; o motor
+original permanece intacto.
+PRÓXIMA: Macroetapa 6 — conteúdo editorial profundo e Carta do Dia.
