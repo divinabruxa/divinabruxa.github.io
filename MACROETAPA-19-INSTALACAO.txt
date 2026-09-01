@@ -1,0 +1,14 @@
+DIVINA BRUXA — MACROETAPA 19 / NOTIFICAÇÕES V8
+
+STATUS: pacote pronto; GitHub continua bloqueando gravações por HTTP 403.
+
+ORDEM:
+1. Carregar notifications-experience-v8.css depois das camadas visuais.
+2. Carregar notifications-experience-v8.js como módulo depois de app.js.
+3. Manter notification-engine.js e notification-policy.js.
+
+REGRAS:
+- Marketing desligado por padrão.
+- Horário silencioso das 22h às 8h.
+- Carta do Dia nunca revelada na notificação.
+- Preferências locais até existir conta segura.
