@@ -1,0 +1,16 @@
+DIVINA BRUXA — MACROETAPA 24 / QA SUPREMO V8.24
+
+EXECUÇÃO LOCAL:
+  node qa-supreme-v8.mjs
+
+VERIFICA:
+- Presença de todos os arquivos V8.
+- Sintaxe de todos os JavaScript.
+- Equilíbrio de chaves dos CSS.
+- Referências completas no integrador.
+- Ausência de cartas e CNAME no pacote.
+
+LIMITES:
+- Não substitui testes visuais em iPhone e Android.
+- Não declara PRODUCTION READY.
+- Resultado máximo antes dos testes reais: READY FOR OWNER REVIEW.
