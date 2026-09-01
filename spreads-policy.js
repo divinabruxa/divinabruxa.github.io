@@ -13,5 +13,5 @@ export const spreadById = id => SPREADS.find(spread => spread.id === id) || null
 
 export function validSpreadSession(value) {
   const spread = spreadById(value?.spreadId);
-  return Boolean(spread && !spread.premium && Array.isArray(value.cardIds) && value.cardIds.length === spread.positions.length && new Set(value.cardIds).size === value.cardIds.length && value.cardIds.every(id => Number.isInteger(id) && id >= 0 && id < 78));
+  return Boolean(spread && !spread.premium && value.orientation === 'normal' && Array.isArray(value.cardIds) && value.cardIds.length === spread.positions.length && new Set(value.cardIds).size === value.cardIds.length && value.cardIds.every(id => Number.isInteger(id) && id >= 0 && id < 78));
 }
