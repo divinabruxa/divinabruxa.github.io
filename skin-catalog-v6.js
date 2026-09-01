@@ -4,3 +4,4 @@ export let SKINS_V6=Object.freeze([
 SKINS_V6=Object.freeze([...SKINS_V6,{id:'solstice',name:'Solstício Dourado',priceCents:2990,index:21,status:'planned',cosmeticOnly:true}]);
 SKINS_V6=Object.freeze([...SKINS_V6,{id:'neptune',name:'Maré de Netuno',priceCents:3490,index:22,status:'planned',cosmeticOnly:true}]);
 SKINS_V6=Object.freeze([...SKINS_V6,{id:'enchanted-forest',name:'Floresta Encantada',priceCents:3990,index:23,status:'planned',cosmeticOnly:true}]);
+SKINS_V6=Object.freeze([...SKINS_V6,{id:'cosmic-dragon',name:'Dragão Cósmico',priceCents:4490,index:24,status:'planned',cosmeticOnly:true}]);
