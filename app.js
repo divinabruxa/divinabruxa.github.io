@@ -80,5 +80,6 @@ const responsiveStyle=document.createElement('link');responsiveStyle.rel='styles
 const typeStyle=document.createElement('link');typeStyle.rel='stylesheet';typeStyle.href='./type-polish-v6.css';document.head.appendChild(typeStyle);
 const trustFooterStyle=document.createElement('link');trustFooterStyle.rel='stylesheet';trustFooterStyle.href='./trust-footer-v6.css';document.head.appendChild(trustFooterStyle);
 const tarotFreeStyle=document.createElement('link');tarotFreeStyle.rel='stylesheet';tarotFreeStyle.href='./tarot-free-polish-v6.css';document.head.appendChild(tarotFreeStyle);
+const spreadsStyle=document.createElement('link');spreadsStyle.rel='stylesheet';spreadsStyle.href='./spreads-polish-v6.css';document.head.appendChild(spreadsStyle);
 const skinsHeading=document.querySelector('#skins h2');if(skinsHeading)skinsHeading.textContent='Trinta formas de sentir o universo.';
 window.orbe={go};
