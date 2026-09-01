@@ -1,0 +1,32 @@
+DIVINA BRUXA — MACROETAPA 1 / CORREÇÃO DO BOOT P0
+
+ARQUIVO DE SUBSTITUIÇÃO
+- app.js (incluído neste ZIP) deve substituir o app.js atual na branch de teste.
+
+ANTES
+1. Confirme o backup e a branch criados na Macroetapa 0.
+2. Não altere main diretamente.
+3. Preserve CNAME, cartas, skins, menu, orbe e motor existente.
+
+INSTALAÇÃO
+1. Descompacte o ZIP.
+2. Envie o `app.js` incluído para a raiz da branch de teste e substitua o
+   arquivo existente com esse mesmo nome.
+3. Limpe o cache do navegador.
+4. Abra a Home, Conta, Admin e o menu.
+
+VALIDAÇÃO LOCAL
+- node BOOT-FIX-VALIDATION-V9.1.mjs — exige 8/8 PASS.
+
+VALIDAÇÃO NO SITE
+- Console sem o erro `#userRegister`.
+- Console registra sucesso ou falha explícita do PWA.
+- Menu, orbe, Tarot, Tiragens e Carta do Dia continuam navegáveis.
+- Admin não aparenta autenticar localmente.
+
+RETORNO
+Reponha o `app.js` do backup ou reverta o commit da branch. Nenhum outro
+arquivo precisa ser excluído.
+
+PRÓXIMA ETAPA
+Macroetapa 2 — unificar Home, 404 e offline, eliminando os chunks órfãos.
