@@ -1,0 +1,9 @@
+{
+  "produto": "Divina Bruxa — A Orbe das Realidades",
+  "macroetapa": 12,
+  "titulo": "Notificações e retorno diário",
+  "objetivo": "Criar uma experiência de presença responsável, com consentimento e horários silenciosos.",
+  "arquivos_substituir": ["index.html", "notification-v5.css"],
+  "criterios_aceite": ["consentimento explícito", "quiet hours 22–08", "categorias controláveis", "foco acessível", "sem envio invasivo"],
+  "status": "staging; aguarda upload manual no GitHub"
+}

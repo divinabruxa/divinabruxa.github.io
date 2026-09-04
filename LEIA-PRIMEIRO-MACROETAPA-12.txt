@@ -1,0 +1,13 @@
+DIVINA BRUXA — MACROETAPA 12
+NOTIFICAÇÕES E RETORNO DIÁRIO
+
+Envie na raiz do GitHub:
+1. SUBSTITUA index.html
+2. ADICIONE notification-v5.css
+3. ADICIONE MANIFESTO-MACROETAPA-12.json
+4. ADICIONE LEIA-PRIMEIRO-MACROETAPA-12.txt
+
+O index carrega notification-v5.css?v=112.
+Notificações reais continuam condicionadas a consentimento e staging.
+Não apague arquivos nem altere CNAME.
+Depois da publicação, responda INSTALADO.
