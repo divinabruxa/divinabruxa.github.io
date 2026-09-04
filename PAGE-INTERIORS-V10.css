@@ -1,4 +1,7 @@
-/* Divina Bruxa — interiores das páginas V10. Integrar somente após QA. */
+/* Divina Bruxa — Mundos Interiores V130.
+   A base antiga permanece para compatibilidade. Os novos mundos só existem
+   nas telas que recebem data-db-realm; Home, Tarot Livre e Skins ficam intactos. */
+
 .db-page-world { min-height: 100%; padding: var(--db-space-5, 2.25rem) var(--db-space-3, 1rem); isolation: isolate; }
 .db-page-world__hero { max-width: 820px; margin: 0 auto var(--db-space-5, 2.25rem); text-align: center; }
 .db-page-world__kicker { color: var(--db-gold-soft, #f6d996); font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; }
@@ -11,4 +14,267 @@
 .db-page-world__action { min-height: 44px; border: 1px solid var(--db-line, rgba(230,184,92,.25)); border-radius: 999px; padding: .75rem 1.1rem; color: var(--db-ink, #f8f1ff); background: rgba(117,72,200,.18); cursor: pointer; }
 .db-page-world__action:hover { background: rgba(117,72,200,.34); box-shadow: var(--db-glow, 0 0 20px rgba(189,131,255,.28)); }
 .db-page-world__action:focus-visible { outline: 2px solid var(--db-gold-soft, #f6d996); outline-offset: 3px; }
-@media (max-width: 560px) { .db-page-world { padding: 1.25rem .75rem 5rem; } .db-page-world__grid { gap: .75rem; } .db-page-world__card { padding: 1.1rem; } }
+
+html[data-runtime="v12"] #app > .screen[data-db-realm] {
+  --db-realm-accent: #b88aff;
+  --db-realm-bright: #f4dd9b;
+  --db-realm-haze: rgba(184,138,255,.18);
+  --db-realm-line: rgba(224,190,255,.25);
+  position: relative;
+  max-width: 1000px;
+  min-height: 100dvh;
+  overflow: clip;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 50% 9%, var(--db-realm-haze) 0, transparent min(58vw, 34rem)),
+    linear-gradient(180deg, rgba(7,3,15,.08), rgba(7,3,15,.72) 88%);
+}
+
+html[data-runtime="v12"] #app > .screen[data-db-realm]::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  inset: 82px -18vw 0;
+  pointer-events: none;
+  opacity: .22;
+  background:
+    linear-gradient(180deg, rgba(5,2,11,.08), rgba(5,2,11,.86)),
+    url("cosmic-background.png") center top / min(1260px, 126vw) auto no-repeat;
+}
+
+html[data-runtime="v12"] #app > .screen[data-db-realm]::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 101px;
+  left: 50%;
+  width: min(82vw, 760px);
+  height: min(34vw, 250px);
+  pointer-events: none;
+  border-top: 1px solid var(--db-realm-line);
+  border-radius: 50% 50% 0 0;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at 50% 0, var(--db-realm-haze), transparent 69%);
+  box-shadow: 0 -28px 88px var(--db-realm-haze);
+}
+
+html[data-runtime="v12"] #app > .screen[data-db-realm] > * {
+  position: relative;
+  z-index: 1;
+}
+
+html[data-runtime="v12"] #app > .screen[data-db-realm] > .eyebrow:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto .8rem;
+  color: var(--db-realm-bright);
+  font-size: .75rem;
+  line-height: 1.45;
+  letter-spacing: .25em;
+  text-align: center;
+}
+
+html[data-runtime="v12"] #app > .screen[data-db-realm] > .eyebrow:first-child::before,
+html[data-runtime="v12"] #app > .screen[data-db-realm] > .eyebrow:first-child::after {
+  content: "";
+  width: clamp(20px, 6vw, 64px);
+  height: 1px;
+  flex: 0 1 auto;
+  background: linear-gradient(90deg, transparent, var(--db-realm-line));
+}
+
+html[data-runtime="v12"] #app > .screen[data-db-realm] > .eyebrow:first-child::after {
+  transform: scaleX(-1);
+}
+
+html[data-runtime="v12"] #app > .screen[data-db-realm] > h2 {
+  max-width: 900px;
+  margin: 0 auto .9rem;
+  color: #fffaf0;
+  font-family: var(--db-font-display, Georgia, serif);
+  font-size: clamp(2.8rem, 8vw, 5rem);
+  font-weight: 400;
+  line-height: .98;
+  letter-spacing: -.035em;
+  text-align: center;
+  text-wrap: balance;
+  text-shadow: 0 0 34px var(--db-realm-haze), 0 2px 20px rgba(0,0,0,.72);
+}
+
+html[data-runtime="v12"] #app > .screen[data-db-realm] > .lead {
+  max-width: 64ch;
+  margin: 0 auto clamp(1.9rem, 5vw, 3rem);
+  color: #cfc4da;
+  font-size: 1rem;
+  line-height: 1.7;
+  text-align: center;
+  text-wrap: pretty;
+}
+
+html[data-runtime="v12"] #app > .screen[data-db-realm] :where(.panel, .ritual-panel, .feature, .card-grid > button, .card-grid > article) {
+  border-color: var(--db-realm-line);
+  background:
+    radial-gradient(circle at 16% 0, var(--db-realm-haze), transparent 44%),
+    linear-gradient(145deg, rgba(23,11,41,.92), rgba(7,4,14,.96));
+  box-shadow: 0 20px 58px rgba(0,0,0,.34), inset 0 1px rgba(255,255,255,.025);
+}
+
+html[data-runtime="v12"] #app > .screen[data-db-realm] :where(input, textarea, select) {
+  min-height: 48px;
+  border-color: var(--db-realm-line);
+  background-color: rgba(6,3,13,.88);
+}
+
+html[data-runtime="v12"] #app > .screen[data-db-realm] :where(input, textarea, select):focus {
+  border-color: var(--db-realm-accent);
+  box-shadow: 0 0 0 3px var(--db-realm-haze), 0 0 28px var(--db-realm-haze);
+}
+
+html[data-runtime="v12"] #app > .screen[data-db-realm] :where(.primary, .chat-form button) {
+  border-color: var(--db-realm-bright);
+  box-shadow: 0 12px 34px var(--db-realm-haze);
+}
+
+html[data-runtime="v12"] #app > .screen[data-db-realm] :where(button, a):focus-visible {
+  outline: 2px solid var(--db-realm-bright);
+  outline-offset: 3px;
+}
+
+html[data-runtime="v12"] #app > .screen.active[data-db-realm] {
+  animation: db-realm-arrival 440ms cubic-bezier(.16,.82,.22,1) both;
+}
+
+html[data-runtime="v12"] #app > .screen.active[data-db-realm] > .eyebrow:first-child,
+html[data-runtime="v12"] #app > .screen.active[data-db-realm] > h2,
+html[data-runtime="v12"] #app > .screen.active[data-db-realm] > .lead {
+  animation: db-realm-title 500ms cubic-bezier(.16,.82,.22,1) both;
+}
+
+html[data-runtime="v12"] #app > .screen.active[data-db-realm] > h2 { animation-delay: 35ms; }
+html[data-runtime="v12"] #app > .screen.active[data-db-realm] > .lead { animation-delay: 70ms; }
+
+html[data-runtime="v12"] #app > .screen[data-db-realm="moon"] {
+  --db-realm-accent: #c1a8ff; --db-realm-bright: #f3dc9a;
+  --db-realm-haze: rgba(151,105,255,.2); --db-realm-line: rgba(213,189,255,.28);
+}
+html[data-runtime="v12"] #app > .screen[data-db-realm="archive"] {
+  --db-realm-accent: #7caaff; --db-realm-bright: #efce82;
+  --db-realm-haze: rgba(73,114,220,.2); --db-realm-line: rgba(126,168,255,.27);
+}
+html[data-runtime="v12"] #app > .screen[data-db-realm="academy"] {
+  --db-realm-accent: #66d9dc; --db-realm-bright: #f0d38d;
+  --db-realm-haze: rgba(51,176,181,.17); --db-realm-line: rgba(112,224,227,.25);
+}
+html[data-runtime="v12"] #app > .screen[data-db-realm="oracle"] {
+  --db-realm-accent: #e997c5; --db-realm-bright: #f3cf84;
+  --db-realm-haze: rgba(211,84,154,.17); --db-realm-line: rgba(233,151,197,.27);
+}
+html[data-runtime="v12"] #app > .screen[data-db-realm="voice"] {
+  --db-realm-accent: #9be7ff; --db-realm-bright: #f4d891;
+  --db-realm-haze: rgba(104,102,255,.2); --db-realm-line: rgba(155,231,255,.25);
+}
+html[data-runtime="v12"] #app > .screen[data-db-realm="memory"] {
+  --db-realm-accent: #d59aff; --db-realm-bright: #edcf91;
+  --db-realm-haze: rgba(175,92,226,.19); --db-realm-line: rgba(213,154,255,.26);
+}
+html[data-runtime="v12"] #app > .screen[data-db-realm="market"] {
+  --db-realm-accent: #70d8a4; --db-realm-bright: #f3d17e;
+  --db-realm-haze: rgba(50,157,113,.16); --db-realm-line: rgba(112,216,164,.25);
+}
+html[data-runtime="v12"] #app > .screen[data-db-realm="sanctuary"] {
+  --db-realm-accent: #ee9ea8; --db-realm-bright: #f1ce8b;
+  --db-realm-haze: rgba(190,72,95,.17); --db-realm-line: rgba(238,158,168,.26);
+}
+html[data-runtime="v12"] #app > .screen[data-db-realm="crown"] {
+  --db-realm-accent: #f0c76f; --db-realm-bright: #ffe6a3;
+  --db-realm-haze: rgba(214,160,54,.17); --db-realm-line: rgba(240,199,111,.28);
+}
+html[data-runtime="v12"] #app > .screen[data-db-realm="vision"] {
+  --db-realm-accent: #ef6cae; --db-realm-bright: #f4d48f;
+  --db-realm-haze: rgba(202,53,128,.18); --db-realm-line: rgba(239,108,174,.26);
+}
+html[data-runtime="v12"] #app > .screen[data-db-realm="resonance"] {
+  --db-realm-accent: #77bcff; --db-realm-bright: #f0d492;
+  --db-realm-haze: rgba(71,100,216,.19); --db-realm-line: rgba(119,188,255,.25);
+}
+html[data-runtime="v12"] #app > .screen[data-db-realm="threshold"] {
+  --db-realm-accent: #cab4ed; --db-realm-bright: #efd49a;
+  --db-realm-haze: rgba(127,90,181,.17); --db-realm-line: rgba(202,180,237,.25);
+}
+html[data-runtime="v12"] #app > .screen[data-db-realm="command"] {
+  --db-realm-accent: #d7a85b; --db-realm-bright: #f7d88f;
+  --db-realm-haze: rgba(151,94,34,.16); --db-realm-line: rgba(215,168,91,.26);
+}
+
+@keyframes db-realm-arrival {
+  from { opacity: .01; transform: translate3d(0, 14px, 0) scale(.995); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes db-realm-title {
+  from { opacity: .01; transform: translate3d(0, 10px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@media (hover:hover) {
+  html[data-runtime="v12"] #app > .screen[data-db-realm] :where(.panel, .ritual-panel, .feature, .card-grid > button, .card-grid > article) {
+    transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+  }
+  html[data-runtime="v12"] #app > .screen[data-db-realm] :where(.card-grid > button, .feature):hover {
+    transform: translateY(-2px);
+    border-color: var(--db-realm-accent);
+    box-shadow: 0 22px 64px rgba(0,0,0,.4), 0 0 32px var(--db-realm-haze);
+  }
+}
+
+@media (max-width: 560px) {
+  .db-page-world { padding: 1.25rem .75rem 5rem; }
+  .db-page-world__grid { gap: .75rem; }
+  .db-page-world__card { padding: 1.1rem; }
+
+  html[data-runtime="v12"] #app > .screen[data-db-realm] {
+    max-width: none;
+    padding-right: 17px;
+    padding-left: 17px;
+  }
+  html[data-runtime="v12"] #app > .screen[data-db-realm]::before {
+    right: -35vw;
+    left: -35vw;
+    opacity: .18;
+    background-size: auto 78vh;
+  }
+  html[data-runtime="v12"] #app > .screen[data-db-realm]::after {
+    top: 94px;
+    width: 92vw;
+    height: 34vw;
+  }
+  html[data-runtime="v12"] #app > .screen[data-db-realm] > .eyebrow:first-child {
+    gap: .45rem;
+    font-size: .69rem;
+    letter-spacing: .19em;
+  }
+  html[data-runtime="v12"] #app > .screen[data-db-realm] > h2 {
+    font-size: clamp(2.55rem, 13vw, 4rem);
+    line-height: .96;
+  }
+  html[data-runtime="v12"] #app > .screen[data-db-realm] > .lead {
+    font-size: 1rem;
+    line-height: 1.64;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-runtime="v12"] #app > .screen.active[data-db-realm],
+  html[data-runtime="v12"] #app > .screen.active[data-db-realm] > .eyebrow:first-child,
+  html[data-runtime="v12"] #app > .screen.active[data-db-realm] > h2,
+  html[data-runtime="v12"] #app > .screen.active[data-db-realm] > .lead {
+    animation: none !important;
+  }
+  html[data-runtime="v12"] #app > .screen[data-db-realm] :where(.panel, .ritual-panel, .feature, .card-grid > button, .card-grid > article) {
+    transition: none !important;
+  }
+}

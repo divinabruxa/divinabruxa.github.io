@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V21 · SKINS FLUIDAS */
-const CACHE='divina-bruxa-v21-skins-fluidas';
+/* DIVINA BRUXA — SERVICE WORKER V22 · MUNDOS INTERIORES */
+const CACHE='divina-bruxa-v22-mundos-interiores';
 
 const REQUIRED=[
   './',
@@ -8,6 +8,10 @@ const REQUIRED=[
   './manifest.webmanifest',
   './app.js',
   './runtime-v12.js',
+  './runtime-v12.css',
+  './PAGE-INTERIORS-V10.css',
+  './PORTAL-TRANSITIONS-V10.css',
+  './portal-transition-v10.js',
   './skin-registry-v12.js',
   './skin-universal-v10.js',
   './skin-catalog-v6.js',
@@ -29,13 +33,13 @@ const REQUIRED=[
 
 const WARM=[
   './app.css','./motion.css','./update-04.css','./update-05.css','./update-06.css','./update-08.css','./update-09.css','./update-11.css',
-  './visual-v68.css','./runtime-v12.css','./COSMIC-DESIGN-SYSTEM-V10.css','./PAGE-INTERIORS-V10.css','./PORTAL-TRANSITIONS-V10.css',
+  './visual-v68.css','./COSMIC-DESIGN-SYSTEM-V10.css',
   './cosmic-design-system-v1.css','./menu-ring-v8.css','./home-orb-only-v1.css','./home-orb-words-v2.css',
   './tarot-table-v5.css','./tarot-ritual-v5.css','./tarot-controls-v5.css','./tarot-editorial-v5.css',
   './spreads-v5.css',
   './card-library-v5.css','./ai-v5.css','./premium-v5.css','./consultation-v5.css','./notification-v5.css','./admin-analytics-v1.css',
   './musica-videos-cosmica-v1.css','./store-v5.css','./school-v5.css','./journal-v5.css','./fallback-shell-v1.css','./pwa-final-v1.css',
-  './portal-transition-v10.js','./navigation.js','./orb-engine-v68.js','./mini-orb-engine.js',
+  './navigation.js','./orb-engine-v68.js','./mini-orb-engine.js',
   './storage.js','./config.js','./visual-guard-v6.js','./tarot-experience-v6.js','./tarot-continuity.js','./tarot-meanings.js',
   './ritual-engine.js','./daily-policy.js','./daily-meaning-runtime.js','./card-library-engine.js','./card-library-policy.js',
   './school-engine.js','./school-policy.js','./spreads-engine.js','./spreads-policy.js','./spread-synthesis.js','./journal-engine.js','./journal-policy.js',

@@ -1,0 +1,36 @@
+DIVINA BRUXA — MACROETAPA V130
+MUNDOS INTERIORES + PORTAIS FLUIDOS
+
+O QUE ESTA VERSÃO FAZ
+
+1. Dá uma atmosfera cósmica própria para cada página interna:
+   Carta do Dia, Biblioteca, Escola, Tiragens, Orbe IA, Diário,
+   Loja, Consultas, Premium, Vídeos, Música, Conta e Admin.
+
+2. Cria uma abertura curta e fluida para esses mundos, usando somente
+   opacidade e transformação acelerada. Toques rápidos cancelam a animação
+   anterior sem piscar e sem deixar transições presas.
+
+3. Mantém suporte a Reduzir Movimento e foco visível por teclado.
+
+4. Atualiza o cache offline para V22.
+
+ÁREAS CONGELADAS E PRESERVADAS
+
+- Home e Orbe principal
+- motor e gestos da Orbe
+- menu mágico e sua geometria
+- dock inferior e mini-Orbe
+- Tarot Livre V128
+- galeria e troca de Skins V129
+
+COMO INSTALAR PELO GITHUB NO IPHONE
+
+1. Abra o repositório divinabruxa/divinabruxa.github.io.
+2. Envie TODOS os arquivos deste ZIP para a raiz do repositório.
+3. Quando o GitHub perguntar, confirme a substituição dos arquivos existentes.
+4. Não crie pasta e não envie este arquivo ZIP para dentro do repositório.
+5. Aguarde o Deployment ficar verde.
+6. Feche e abra novamente o site ou aplicativo uma vez para o cache V22 assumir.
+
+Este ZIP contém somente arquivos novos ou substitutos desta macroetapa.

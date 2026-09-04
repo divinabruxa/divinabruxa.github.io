@@ -1,10 +1,26 @@
 import { applySkinContract, preloadSkinAsset, preparedSkinImage, readStoredSkin } from './skin-universal-v10.js?v=129';
-import { createPortalTransition } from './portal-transition-v10.js';
+import { createPortalTransition } from './portal-transition-v10.js?v=130';
 import { SKIN_REGISTRY_V12, skinByIdV12 } from './skin-registry-v12.js';
 
 const ACTIVE_SKIN_KEY = 'divina.skin.v10';
 let portal = null;
 let skinSwitchToken = 0;
+
+const PAGE_REALMS = Object.freeze({
+  daily: 'moon',
+  library: 'archive',
+  school: 'academy',
+  spreads: 'oracle',
+  ai: 'voice',
+  journal: 'memory',
+  store: 'market',
+  consultations: 'sanctuary',
+  subscriptions: 'crown',
+  videos: 'vision',
+  music: 'resonance',
+  login: 'threshold',
+  admin: 'command'
+});
 
 function ensureSkinsScreen() {
   let screen = document.getElementById('skins');
@@ -54,6 +70,17 @@ function decorateWorlds() {
   document.querySelectorAll('#app > .screen:not(#home)').forEach(screen => {
     screen.classList.add('db-page-world');
     screen.querySelector('h2')?.classList.add('db-cosmic-title');
+    const realm = PAGE_REALMS[screen.id];
+    if (!realm) return;
+    screen.dataset.dbRealm = realm;
+    const eyebrow = screen.querySelector(':scope > .eyebrow');
+    const title = screen.querySelector(':scope > h2');
+    const intro = screen.querySelector(':scope > .lead');
+    eyebrow?.classList.add('db-page-world__kicker');
+    title?.classList.add('db-page-world__title');
+    intro?.classList.add('db-page-world__intro');
+    if (title && !title.id) title.id = `${screen.id}Title`;
+    if (title) screen.setAttribute('aria-labelledby', title.id);
   });
 }
 
@@ -173,7 +200,7 @@ function installPortalLayer() {
     const target = event.target.closest('[data-go]');
     const destination = target?.dataset.go;
     if (!destination || document.getElementById(destination)?.classList.contains('active')) return;
-    portal.enter().catch(() => {});
+    portal.enter(destination).catch(() => {});
   }, true);
 }
 
@@ -195,6 +222,6 @@ export function installRuntimeV12() {
 
   document.documentElement.dataset.runtime = 'v12';
   document.dispatchEvent(new CustomEvent('divina:runtime-ready', {
-    detail: { version: '12.1.0', skins: SKIN_REGISTRY_V12.skins.length }
+    detail: { version: '12.2.0', skins: SKIN_REGISTRY_V12.skins.length, realms: Object.keys(PAGE_REALMS).length }
   }));
 }

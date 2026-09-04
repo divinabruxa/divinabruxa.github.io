@@ -1,4 +1,4 @@
-/* Divina Bruxa V12 — ativação segura do runtime existente. */
+/* Divina Bruxa V130 — runtime seguro + isolamento dos Mundos Interiores. */
 
 html[data-runtime="v12"] #app > .screen {
   padding-bottom: calc(154px + env(safe-area-inset-bottom));
@@ -16,7 +16,8 @@ html[data-runtime="v12"] #app > #home.active > section {
   opacity: 1 !important;
 }
 
-html[data-runtime="v12"] #app > .screen.active:not(#home) {
+/* A animação já aprovada continua idêntica somente no Tarot Livre e nas Skins. */
+html[data-runtime="v12"] #app > .screen.active:is(#tarot, #skins) {
   animation: db-world-arrival 560ms cubic-bezier(.22,.8,.2,1) both;
 }
 
@@ -101,12 +102,11 @@ html[data-runtime="v12"] .magic-dock {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html[data-runtime="v12"] #app > .screen.active:not(#home),
+  html[data-runtime="v12"] #app > .screen.active:is(#tarot, #skins),
   html[data-runtime="v12"] .skin-tile { animation: none; transition: none; }
 }
 
-
-/* Macroetapa 1 — sétimo portal visível sem tocar na geometria da Orbe. */
+/* Sétimo portal visível sem tocar na geometria da Orbe. */
 html[data-runtime="v12"] .home-menu-portals {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
@@ -133,5 +133,3 @@ html[data-runtime="v12"] .home-menu-portals .menu-portal b {
     font-size: .56rem;
   }
 }
-
-
