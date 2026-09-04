@@ -1,0 +1,492 @@
+/* DIVINA BRUXA — NASCIMENTO MÁGICO DA CARTA V1
+   Macroetapa 3 de 7: portal, travessia estelar, consagração e pouso.
+   Escopo estrito: somente #tarot. A Orbe principal e o menu não são alterados. */
+
+html[data-runtime="v12"] #tarot.tarot-livre-official{
+  --tl-magic-center-y:334px;
+  --tl-magic-orb-bottom:104px;
+}
+
+html[data-runtime="v12"] #tarot .tarot-magic-sr{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  margin:-1px!important;
+  padding:0!important;
+  overflow:hidden!important;
+  clip:rect(0 0 0 0)!important;
+  clip-path:inset(50%)!important;
+  white-space:nowrap!important;
+}
+
+/* Entrada da página: o mundo do Tarot se forma em camadas. */
+html[data-runtime="v12"] #tarot.tarot-livre-official.active > .section-head{
+  animation:tl-page-crown-arrive .78s cubic-bezier(.2,.78,.2,1) both;
+}
+
+html[data-runtime="v12"] #tarot.tarot-livre-official.active > .deck-progress{
+  animation:tl-page-line-awaken .9s .10s cubic-bezier(.2,.78,.2,1) both;
+}
+
+html[data-runtime="v12"] #tarot.tarot-livre-official.active > .ritual-altar{
+  animation:tl-page-portal-arrive .92s .08s cubic-bezier(.16,.82,.2,1) both;
+}
+
+html[data-runtime="v12"] #tarot.tarot-livre-official.active > .real-table-head,
+html[data-runtime="v12"] #tarot.tarot-livre-official.active > .real-table-viewport{
+  animation:tl-page-archive-arrive .82s .26s cubic-bezier(.2,.78,.2,1) both;
+}
+
+/* Campo invisível que só desperta durante uma revelação. */
+html[data-runtime="v12"] #tarot .tarot-birth-fx{
+  position:absolute;
+  z-index:7;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  border-radius:inherit;
+}
+
+html[data-runtime="v12"] #tarot .tarot-birth-bridge,
+html[data-runtime="v12"] #tarot .tarot-birth-horizon,
+html[data-runtime="v12"] #tarot .tarot-birth-gate,
+html[data-runtime="v12"] #tarot .tarot-birth-flare,
+html[data-runtime="v12"] #tarot .tarot-birth-dust{
+  position:absolute;
+  left:50%;
+  top:var(--tl-magic-center-y);
+  pointer-events:none;
+  opacity:0;
+}
+
+/* Ponte vertical de energia: liga a Orbe ao centro da carta. */
+html[data-runtime="v12"] #tarot .tarot-birth-bridge{
+  top:calc(var(--tl-magic-center-y) + 72px);
+  bottom:var(--tl-magic-orb-bottom);
+  width:5px;
+  height:auto;
+  transform:translateX(-50%) scaleY(.02);
+  transform-origin:50% 100%;
+  border-radius:999px;
+  background:linear-gradient(180deg,transparent,rgba(231,167,255,.88) 22%,#fff6cf 58%,rgba(200,70,250,.84) 84%,transparent);
+  box-shadow:0 0 8px #fff7d8,0 0 24px rgba(230,116,255,.94),0 0 54px rgba(172,50,232,.72);
+  filter:blur(.2px);
+}
+
+html[data-runtime="v12"] #tarot .tarot-birth-bridge::before,
+html[data-runtime="v12"] #tarot .tarot-birth-bridge::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background:inherit;
+  filter:blur(7px);
+  transform:translateX(-13px) scaleX(2.7);
+  opacity:.56;
+}
+
+html[data-runtime="v12"] #tarot .tarot-birth-bridge::after{
+  transform:translateX(13px) scaleX(2.7);
+  opacity:.34;
+}
+
+/* Horizonte de luz no instante em que o portal se abre. */
+html[data-runtime="v12"] #tarot .tarot-birth-horizon{
+  width:min(92%,660px);
+  height:2px;
+  transform:translate(-50%,-50%) scaleX(.03);
+  border-radius:999px;
+  background:linear-gradient(90deg,transparent,rgba(191,87,244,.18) 16%,#f7d993 44%,#fff 50%,#f7d993 56%,rgba(191,87,244,.18) 84%,transparent);
+  box-shadow:0 0 12px rgba(255,243,201,.92),0 0 42px rgba(217,92,255,.76),0 0 90px rgba(151,46,216,.38);
+}
+
+/* Três círculos do portal, visíveis apenas durante o nascimento. */
+html[data-runtime="v12"] #tarot .tarot-birth-gate{
+  width:min(78vw,470px);
+  aspect-ratio:1;
+  transform:translate(-50%,-50%) scale(.34) rotate(-24deg);
+  border:1px solid rgba(255,221,151,.82);
+  border-radius:50%;
+  background:
+    repeating-conic-gradient(from 4deg,rgba(255,225,162,.0) 0 12deg,rgba(255,225,162,.40) 12deg 12.55deg,transparent 12.55deg 30deg),
+    radial-gradient(circle,transparent 0 56%,rgba(196,75,244,.12) 57%,transparent 69%);
+  box-shadow:inset 0 0 34px rgba(197,67,244,.24),0 0 28px rgba(251,214,143,.30),0 0 86px rgba(185,63,235,.36);
+}
+
+html[data-runtime="v12"] #tarot .tarot-birth-gate::before,
+html[data-runtime="v12"] #tarot .tarot-birth-gate::after,
+html[data-runtime="v12"] #tarot .tarot-birth-gate > i{
+  content:"";
+  position:absolute;
+  border:1px solid rgba(231,187,255,.45);
+  border-radius:50%;
+}
+
+html[data-runtime="v12"] #tarot .tarot-birth-gate::before{
+  inset:8%;
+  transform:rotate(41deg) scaleY(.91);
+  border-color:rgba(255,224,158,.52);
+}
+
+html[data-runtime="v12"] #tarot .tarot-birth-gate::after{
+  inset:16%;
+  transform:rotate(-58deg) scaleX(.88);
+  border-style:dashed;
+}
+
+html[data-runtime="v12"] #tarot .tarot-birth-gate > i:nth-child(1){inset:23%;border-color:rgba(255,241,205,.50)}
+html[data-runtime="v12"] #tarot .tarot-birth-gate > i:nth-child(2){inset:-7% 18%;transform:rotate(63deg);border-color:rgba(210,113,255,.28)}
+html[data-runtime="v12"] #tarot .tarot-birth-gate > i:nth-child(3){inset:18% -7%;transform:rotate(-34deg);border-color:rgba(238,200,122,.25)}
+
+/* Clarão central, cuidadosamente limitado ao altar. */
+html[data-runtime="v12"] #tarot .tarot-birth-flare{
+  width:min(70vw,420px);
+  aspect-ratio:1;
+  transform:translate(-50%,-50%) scale(.08);
+  border-radius:50%;
+  background:
+    radial-gradient(circle,#fff 0 1.5%,#fff6c9 2.5%,rgba(244,157,255,.96) 6%,rgba(185,58,236,.58) 18%,rgba(91,21,151,.25) 39%,transparent 69%);
+  filter:blur(1px);
+  mix-blend-mode:screen;
+}
+
+/* Poeira estelar: cada ponto segue uma órbita própria. */
+html[data-runtime="v12"] #tarot .tarot-birth-dust{
+  width:1px;
+  height:1px;
+  transform:translate(-50%,-50%);
+  opacity:1;
+}
+
+html[data-runtime="v12"] #tarot .tarot-birth-dust > i{
+  --dust-x:0px;
+  --dust-y:-160px;
+  --dust-delay:0ms;
+  position:absolute;
+  left:0;
+  top:0;
+  width:4px;
+  height:4px;
+  opacity:0;
+  border-radius:50%;
+  background:#fff8d8;
+  box-shadow:0 0 5px #fff,0 0 13px #e58bff,0 0 24px rgba(190,71,238,.88);
+}
+
+html[data-runtime="v12"] #tarot .tarot-birth-dust > i:nth-child(1){--dust-x:-168px;--dust-y:-218px;--dust-delay:20ms}
+html[data-runtime="v12"] #tarot .tarot-birth-dust > i:nth-child(2){--dust-x:-82px;--dust-y:-252px;--dust-delay:150ms;width:3px;height:3px}
+html[data-runtime="v12"] #tarot .tarot-birth-dust > i:nth-child(3){--dust-x:55px;--dust-y:-240px;--dust-delay:65ms}
+html[data-runtime="v12"] #tarot .tarot-birth-dust > i:nth-child(4){--dust-x:175px;--dust-y:-194px;--dust-delay:210ms;width:3px;height:3px}
+html[data-runtime="v12"] #tarot .tarot-birth-dust > i:nth-child(5){--dust-x:211px;--dust-y:-52px;--dust-delay:95ms}
+html[data-runtime="v12"] #tarot .tarot-birth-dust > i:nth-child(6){--dust-x:183px;--dust-y:129px;--dust-delay:250ms;width:3px;height:3px}
+html[data-runtime="v12"] #tarot .tarot-birth-dust > i:nth-child(7){--dust-x:63px;--dust-y:212px;--dust-delay:30ms}
+html[data-runtime="v12"] #tarot .tarot-birth-dust > i:nth-child(8){--dust-x:-73px;--dust-y:221px;--dust-delay:185ms;width:3px;height:3px}
+html[data-runtime="v12"] #tarot .tarot-birth-dust > i:nth-child(9){--dust-x:-191px;--dust-y:143px;--dust-delay:115ms}
+html[data-runtime="v12"] #tarot .tarot-birth-dust > i:nth-child(10){--dust-x:-218px;--dust-y:-21px;--dust-delay:275ms;width:3px;height:3px}
+html[data-runtime="v12"] #tarot .tarot-birth-dust > i:nth-child(11){--dust-x:-131px;--dust-y:-122px;--dust-delay:80ms;width:2px;height:2px}
+html[data-runtime="v12"] #tarot .tarot-birth-dust > i:nth-child(12){--dust-x:139px;--dust-y:91px;--dust-delay:235ms;width:2px;height:2px}
+
+/* Fase 1 — a Orbe recolhe energia e ergue a ponte. */
+html[data-runtime="v12"] #tarot .ritual-altar.magic-awakening .tarot-birth-bridge{
+  animation:tl-bridge-rise .46s cubic-bezier(.18,.82,.2,1) both;
+}
+
+html[data-runtime="v12"] #tarot .ritual-altar.magic-awakening #tableOrb .table-orb-image{
+  animation:tl-orb-invocation .46s cubic-bezier(.2,.8,.2,1) both!important;
+}
+
+html[data-runtime="v12"] #tarot .ritual-altar.magic-awakening #tableOrb .table-orb-aura{
+  animation:tl-orb-aura-open .52s cubic-bezier(.2,.8,.2,1) both!important;
+}
+
+/* Fase 2 — o portal abre e a matéria da carta atravessa as estrelas. */
+html[data-runtime="v12"] #tarot .ritual-altar.magic-manifesting .tarot-birth-bridge{
+  animation:tl-bridge-crossing .88s ease-out both;
+}
+
+html[data-runtime="v12"] #tarot .ritual-altar.magic-manifesting .tarot-birth-horizon{
+  animation:tl-horizon-open .88s cubic-bezier(.1,.8,.2,1) both;
+}
+
+html[data-runtime="v12"] #tarot .ritual-altar.magic-manifesting .tarot-birth-gate{
+  animation:tl-gate-open 1.18s cubic-bezier(.12,.82,.2,1) both;
+}
+
+html[data-runtime="v12"] #tarot .ritual-altar.magic-manifesting .tarot-birth-gate::before{
+  animation:tl-gate-spin 1.4s ease-out both;
+}
+
+html[data-runtime="v12"] #tarot .ritual-altar.magic-manifesting .tarot-birth-gate::after{
+  animation:tl-gate-spin-reverse 1.4s ease-out both;
+}
+
+html[data-runtime="v12"] #tarot .ritual-altar.magic-manifesting .tarot-birth-flare{
+  animation:tl-flare-open .92s cubic-bezier(.1,.8,.2,1) both;
+}
+
+html[data-runtime="v12"] #tarot .ritual-altar.magic-manifesting .tarot-birth-dust > i{
+  animation:tl-dust-flight 1.12s var(--dust-delay) cubic-bezier(.16,.72,.2,1) both;
+}
+
+html[data-runtime="v12"] #tarot .ritual-altar.magic-manifesting #tableOrb .table-orb-image{
+  animation:tl-orb-release .88s cubic-bezier(.16,.82,.2,1) both!important;
+}
+
+html[data-runtime="v12"] #tarot .ritual-altar.magic-manifesting #tableOrb .table-orb-aura{
+  animation:tl-orb-release-aura 1.02s ease-out both!important;
+}
+
+/* Fase 3 — a carta se torna matéria e recebe o selo dourado. */
+html[data-runtime="v12"] #tarot .ritual-card-center .current.birth{
+  isolation:isolate;
+  transform-origin:50% 82%;
+  transform-style:preserve-3d;
+  backface-visibility:hidden;
+  will-change:transform,opacity,filter;
+  animation:tl-card-incarnation 1.22s cubic-bezier(.14,.82,.18,1) both!important;
+}
+
+html[data-runtime="v12"] #tarot .ritual-card-center .current.birth::before{
+  content:"";
+  position:absolute;
+  z-index:4;
+  inset:0;
+  pointer-events:none;
+  border-radius:inherit;
+  background:
+    radial-gradient(circle at 50% 48%,rgba(255,255,255,.96),rgba(255,231,166,.78) 8%,rgba(221,106,255,.40) 24%,transparent 55%);
+  mix-blend-mode:screen;
+  animation:tl-card-sanctify 1.08s .10s ease-out both;
+}
+
+html[data-runtime="v12"] #tarot .ritual-card-center .current.birth::after{
+  content:"";
+  position:absolute;
+  z-index:5;
+  top:-20%;
+  bottom:-20%;
+  left:-72%;
+  width:38%;
+  pointer-events:none;
+  transform:skewX(-17deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.74),rgba(255,232,169,.42),transparent);
+  filter:blur(3px);
+  mix-blend-mode:screen;
+  animation:tl-card-light-sweep .92s .38s cubic-bezier(.18,.72,.2,1) both;
+}
+
+html[data-runtime="v12"] #tarot .ritual-altar.magic-born .ritual-card-center{
+  animation:tl-card-coronation 1.18s ease-out both;
+}
+
+/* A mesma carta pousa no arquivo de seis colunas. */
+html[data-runtime="v12"] #tarot .real-table .table-slot.revealed.landing{
+  transform-origin:50% 0;
+  will-change:transform,opacity,filter;
+  animation:tl-archive-card-land 1.05s .18s cubic-bezier(.14,.82,.2,1) both!important;
+}
+
+html[data-runtime="v12"] #tarot .real-table .table-slot.revealed.landing::after{
+  content:"";
+  position:absolute;
+  z-index:3;
+  inset:-1px;
+  pointer-events:none;
+  border:1px solid rgba(255,232,175,.92);
+  border-radius:inherit;
+  box-shadow:inset 0 0 12px rgba(255,236,190,.42),0 0 18px rgba(208,83,249,.72);
+  animation:tl-archive-seal 1.15s .25s ease-out both;
+}
+
+html[data-runtime="v12"] #tarot .ritual-altar[aria-busy="true"] #tableOrb{
+  cursor:progress;
+}
+
+/* Keyframes da invocação. */
+@keyframes tl-page-crown-arrive{
+  from{opacity:0;transform:translateY(-18px);filter:blur(7px)}
+  to{opacity:1;transform:none;filter:none}
+}
+
+@keyframes tl-page-line-awaken{
+  from{opacity:0;transform:scaleX(.08)}
+  to{opacity:1;transform:scaleX(1)}
+}
+
+@keyframes tl-page-portal-arrive{
+  0%{opacity:0;transform:translateY(22px) scale(.975);filter:blur(9px) brightness(.75)}
+  58%{filter:blur(0) brightness(1.12)}
+  100%{opacity:1;transform:none;filter:none}
+}
+
+@keyframes tl-page-archive-arrive{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:none}
+}
+
+@keyframes tl-bridge-rise{
+  0%{opacity:0;transform:translateX(-50%) scaleY(.02)}
+  28%{opacity:.72}
+  100%{opacity:1;transform:translateX(-50%) scaleY(1)}
+}
+
+@keyframes tl-bridge-crossing{
+  0%{opacity:1;transform:translateX(-50%) scaleY(1);filter:brightness(1)}
+  32%{opacity:1;filter:brightness(2.3)}
+  100%{opacity:0;transform:translateX(-50%) scaleY(1.08);filter:brightness(1)}
+}
+
+@keyframes tl-orb-invocation{
+  0%{scale:1;filter:brightness(1) saturate(1)}
+  48%{scale:.91;filter:brightness(1.28) saturate(1.18)}
+  100%{scale:1.12;filter:brightness(1.92) saturate(1.36)}
+}
+
+@keyframes tl-orb-aura-open{
+  0%{opacity:.45;transform:scale(.86) rotate(0)}
+  100%{opacity:1;transform:scale(1.38) rotate(84deg);box-shadow:0 0 52px rgba(223,105,255,.88)}
+}
+
+@keyframes tl-orb-release{
+  0%{scale:1.12;filter:brightness(1.92) saturate(1.36)}
+  34%{scale:1.22;filter:brightness(2.55) saturate(1.48)}
+  100%{scale:1;filter:brightness(1) saturate(1)}
+}
+
+@keyframes tl-orb-release-aura{
+  0%{opacity:1;transform:scale(1.38) rotate(84deg)}
+  68%{opacity:.54;transform:scale(1.72) rotate(170deg)}
+  100%{opacity:.34;transform:scale(1) rotate(230deg)}
+}
+
+@keyframes tl-horizon-open{
+  0%{opacity:0;transform:translate(-50%,-50%) scaleX(.03)}
+  24%{opacity:1}
+  62%{opacity:.86;transform:translate(-50%,-50%) scaleX(1)}
+  100%{opacity:0;transform:translate(-50%,-50%) scaleX(1.07)}
+}
+
+@keyframes tl-gate-open{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.34) rotate(-24deg);filter:blur(9px)}
+  22%{opacity:1}
+  70%{opacity:.92;transform:translate(-50%,-50%) scale(1.04) rotate(17deg);filter:blur(0)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1.16) rotate(29deg);filter:blur(1px)}
+}
+
+@keyframes tl-gate-spin{
+  from{transform:rotate(41deg) scaleY(.91)}
+  to{transform:rotate(166deg) scaleY(.91)}
+}
+
+@keyframes tl-gate-spin-reverse{
+  from{transform:rotate(-58deg) scaleX(.88)}
+  to{transform:rotate(-196deg) scaleX(.88)}
+}
+
+@keyframes tl-flare-open{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.08)}
+  21%{opacity:1}
+  58%{opacity:.86;transform:translate(-50%,-50%) scale(1.02)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1.42)}
+}
+
+@keyframes tl-dust-flight{
+  0%{opacity:0;transform:translate(0,0) scale(.2)}
+  19%{opacity:1}
+  72%{opacity:.92}
+  100%{opacity:0;transform:translate(var(--dust-x),var(--dust-y)) scale(.08)}
+}
+
+@keyframes tl-card-incarnation{
+  0%{opacity:0;transform:translateY(124px) scale(.30) rotateX(16deg) rotateY(88deg);filter:blur(15px) brightness(2.8) saturate(.55)}
+  36%{opacity:.76;transform:translateY(34px) scale(.72) rotateX(5deg) rotateY(28deg);filter:blur(4px) brightness(1.92) saturate(1.16)}
+  68%{opacity:1;transform:translateY(-8px) scale(1.035) rotateX(0) rotateY(-2deg);filter:blur(0) brightness(1.30) saturate(1.12)}
+  84%{transform:translateY(2px) scale(.993);filter:brightness(1.08) saturate(1.04)}
+  100%{opacity:1;transform:none;filter:none}
+}
+
+@keyframes tl-card-sanctify{
+  0%{opacity:0;transform:scale(.2)}
+  30%{opacity:.92}
+  100%{opacity:0;transform:scale(1.42)}
+}
+
+@keyframes tl-card-light-sweep{
+  0%{opacity:0;left:-72%}
+  20%{opacity:.88}
+  100%{opacity:0;left:137%}
+}
+
+@keyframes tl-card-coronation{
+  0%{filter:drop-shadow(0 27px 38px rgba(0,0,0,.72)) drop-shadow(0 0 0 transparent)}
+  48%{filter:drop-shadow(0 27px 38px rgba(0,0,0,.72)) drop-shadow(0 0 34px rgba(238,199,119,.72)) drop-shadow(0 0 64px rgba(202,71,244,.55))}
+  100%{filter:drop-shadow(0 27px 38px rgba(0,0,0,.72))}
+}
+
+@keyframes tl-archive-card-land{
+  0%{opacity:0;transform:translateY(-25px) scale(1.16);filter:blur(5px) brightness(2.1)}
+  58%{opacity:1;transform:translateY(3px) scale(.97);filter:blur(0) brightness(1.34)}
+  100%{opacity:1;transform:none;filter:none}
+}
+
+@keyframes tl-archive-seal{
+  0%{opacity:0;transform:scale(.74)}
+  34%{opacity:1}
+  100%{opacity:0;transform:scale(1.13)}
+}
+
+@media(max-width:640px){
+  html[data-runtime="v12"] #tarot.tarot-livre-official{
+    --tl-magic-center-y:250px;
+    --tl-magic-orb-bottom:92px;
+  }
+
+  html[data-runtime="v12"] #tarot .tarot-birth-gate{width:min(96vw,370px)}
+  html[data-runtime="v12"] #tarot .tarot-birth-flare{width:min(90vw,350px)}
+  html[data-runtime="v12"] #tarot .tarot-birth-horizon{width:96%}
+  html[data-runtime="v12"] #tarot .tarot-birth-bridge{top:calc(var(--tl-magic-center-y) + 58px)}
+
+  html[data-runtime="v12"] #tarot .tarot-birth-dust > i:nth-child(1){--dust-x:-132px;--dust-y:-185px}
+  html[data-runtime="v12"] #tarot .tarot-birth-dust > i:nth-child(2){--dust-x:-66px;--dust-y:-211px}
+  html[data-runtime="v12"] #tarot .tarot-birth-dust > i:nth-child(3){--dust-x:49px;--dust-y:-204px}
+  html[data-runtime="v12"] #tarot .tarot-birth-dust > i:nth-child(4){--dust-x:137px;--dust-y:-164px}
+  html[data-runtime="v12"] #tarot .tarot-birth-dust > i:nth-child(5){--dust-x:157px;--dust-y:-42px}
+  html[data-runtime="v12"] #tarot .tarot-birth-dust > i:nth-child(6){--dust-x:137px;--dust-y:108px}
+  html[data-runtime="v12"] #tarot .tarot-birth-dust > i:nth-child(7){--dust-x:53px;--dust-y:176px}
+  html[data-runtime="v12"] #tarot .tarot-birth-dust > i:nth-child(8){--dust-x:-62px;--dust-y:181px}
+  html[data-runtime="v12"] #tarot .tarot-birth-dust > i:nth-child(9){--dust-x:-145px;--dust-y:116px}
+  html[data-runtime="v12"] #tarot .tarot-birth-dust > i:nth-child(10){--dust-x:-162px;--dust-y:-18px}
+}
+
+@media(max-width:355px){
+  html[data-runtime="v12"] #tarot.tarot-livre-official{
+    --tl-magic-center-y:227px;
+    --tl-magic-orb-bottom:84px;
+  }
+}
+
+@media(orientation:landscape) and (max-height:560px){
+  html[data-runtime="v12"] #tarot.tarot-livre-official{
+    --tl-magic-center-y:223px;
+    --tl-magic-orb-bottom:79px;
+  }
+  html[data-runtime="v12"] #tarot .tarot-birth-gate{width:350px}
+  html[data-runtime="v12"] #tarot .tarot-birth-flare{width:320px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-runtime="v12"] #tarot.tarot-livre-official.active > .section-head,
+  html[data-runtime="v12"] #tarot.tarot-livre-official.active > .deck-progress,
+  html[data-runtime="v12"] #tarot.tarot-livre-official.active > .ritual-altar,
+  html[data-runtime="v12"] #tarot.tarot-livre-official.active > .real-table-head,
+  html[data-runtime="v12"] #tarot.tarot-livre-official.active > .real-table-viewport,
+  html[data-runtime="v12"] #tarot .ritual-card-center .current.birth,
+  html[data-runtime="v12"] #tarot .ritual-card-center .current.birth::before,
+  html[data-runtime="v12"] #tarot .ritual-card-center .current.birth::after,
+  html[data-runtime="v12"] #tarot .real-table .table-slot.revealed.landing,
+  html[data-runtime="v12"] #tarot .real-table .table-slot.revealed.landing::after{
+    animation:none!important;
+  }
+
+  html[data-runtime="v12"] #tarot .tarot-birth-fx{display:none!important}
+}

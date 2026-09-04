@@ -1,0 +1,60 @@
+DIVINA BRUXA — ORBE DAS REALIDADES
+TAROT LIVRE — MACROETAPA 3 DE 7
+NASCIMENTO MÁGICO DA CARTA — V119
+
+COMO INSTALAR
+
+Envie os 5 arquivos deste ZIP diretamente para a raiz do seu GitHub, no mesmo
+nível do index.html. Não crie nenhuma pasta.
+
+1. index.html — substituir o arquivo existente
+2. app.js — substituir o arquivo existente
+3. tarot-engine.js — substituir o arquivo existente
+4. tarot-livre-reveal-magic-v1.css — adicionar como arquivo novo
+5. LEIA-PRIMEIRO-MACROETAPA-3-NASCIMENTO-MAGICO.txt — adicionar como arquivo novo
+
+O QUE ESTA MACROETAPA ENTREGA
+
+- Entrada celestial em camadas quando a página do Tarot Livre é aberta.
+- Fase 1: a Orbe recolhe energia e abre uma ponte de luz.
+- Fase 2: um portal cósmico se forma com círculos, clarão e poeira estelar.
+- Fase 3: a carta atravessa o portal, materializa-se inteira e recebe um brilho
+  de consagração dourada.
+- A nova carta também pousa magicamente no arquivo de seis colunas.
+- Mensagens visuais dentro da Orbe durante cada fase da revelação.
+- Anúncio acessível da carta e da posição revelada para leitores de tela.
+- Modo de movimento reduzido, sem atrasos ou efeitos intensos.
+- Bloqueio interno contra dois sorteios durante a mesma animação.
+
+PROTEÇÕES INEGOCIÁVEIS PRESERVADAS
+
+- 78 cartas.
+- Sempre diretas; nenhuma carta invertida.
+- Nenhuma repetição no mesmo ciclo.
+- Carta grande e inteira no centro.
+- Arquivo com exatamente 6 cartas por fileira.
+- Botões de embaralhar e recomeçar.
+- Setas de carta anterior e próxima.
+- Skin escolhida continua acompanhando a Orbe do Tarot Livre.
+
+ARQUIVOS QUE ESTA ENTREGA NÃO ALTERA
+
+- orb-engine-v68.js
+- mini-orb-engine.js
+- navigation.js
+- menu-ring-v8.css
+- home-orb-only-v1.css
+- home-orb-identity-v1.js
+- arquivos das skins
+- CNAME
+
+Portanto, a Orbe principal, suas palavras, seu movimento, o menu e o dock continuam
+exatamente protegidos.
+
+DEPOIS DE ENVIAR
+
+Espere o GitHub Pages concluir a publicação. Feche todas as abas antigas e abra
+novamente https://www.divinabruxa.com.br para evitar o cache da versão anterior.
+
+Ao terminar, escreva “INSTALADO”. A próxima entrega será a Macroetapa 4 de 7:
+gestos de deslizar, navegação tátil entre as cartas e polimento da interação.

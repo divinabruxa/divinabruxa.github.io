@@ -4,7 +4,7 @@ import { installRuntimeV12 } from './runtime-v12.js?v=100';
 import { createNavigation } from './navigation.js?v=100';
 import { RealityOrbEngine } from './orb-engine-v68.js?v=100';
 import { bindMiniOrbs } from './mini-orb-engine.js?v=71';
-import { FreeTarot } from './tarot-engine.js?v=118';
+import { FreeTarot } from './tarot-engine.js?v=119';
 import { DailyRitual } from './ritual-engine.js';
 import { CardLibraryEngine } from './card-library-engine.js';
 import { SchoolEngine } from './school-engine.js';

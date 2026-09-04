@@ -11,6 +11,8 @@ import { freeCardAriaLabel, freeCardLabel, isFreeTarotCard, tarotEditorialStatus
 const STORAGE_KEY = 'free-tarot';
 const STORAGE_EVENT_SUFFIX = `:${STORAGE_KEY}`;
 const EMPTY_ALTAR = '<div class="empty-card"><span aria-hidden="true">✦</span><b>O PORTAL AGUARDA</b><small>Toque na Orbe para revelar</small></div>';
+const PORTAL_OPENING_MS = 320;
+const PORTAL_CROSSING_MS = 120;
 function announce(message) {
   if (typeof globalThis.dispatchEvent === 'function' && typeof globalThis.CustomEvent === 'function') globalThis.dispatchEvent(new CustomEvent('orbe:toast', { detail: message }));
 }
@@ -41,6 +43,11 @@ function installOfficialStructure(root) {
   if (wheel && !root.querySelector('#currentCardNav')) {
     wheel.insertAdjacentHTML('beforeend', '<nav id="currentCardNav" class="tarot-current-nav" aria-label="Navegação das cartas reveladas"><button id="currentCardPrev" type="button" aria-label="Mostrar carta anterior" disabled><span aria-hidden="true">←</span><small>ANTERIOR</small></button><button id="currentCardNext" type="button" aria-label="Mostrar próxima carta" disabled><span aria-hidden="true">→</span><small>PRÓXIMA</small></button></nav>');
   }
+
+  const altar = root.querySelector('#revealAltar');
+  if (altar && !root.querySelector('#tarotBirthFx')) {
+    altar.insertAdjacentHTML('afterbegin', '<div id="tarotBirthFx" class="tarot-birth-fx" aria-hidden="true"><span class="tarot-birth-bridge"></span><span class="tarot-birth-horizon"></span><span class="tarot-birth-gate"><i></i><i></i><i></i></span><span class="tarot-birth-flare"></span><span class="tarot-birth-dust"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div><p id="tarotMagicAnnouncement" class="tarot-magic-sr" role="status" aria-live="polite" aria-atomic="true"></p>');
+  }
 }
 
 export class FreeTarot {
@@ -52,6 +59,7 @@ export class FreeTarot {
     if (!root.querySelector('#tarotEditorialState')) root.querySelector('.free-rule')?.insertAdjacentHTML('afterend', '<aside class="editorial-covenant" aria-labelledby="editorialCovenantTitle"><span class="editorial-seal" aria-hidden="true">✦</span><div><h3 id="editorialCovenantTitle">A Orbe revela. Você interpreta.</h3><p>O Tarot Livre abre somente a imagem, o nome e a posição. Nenhum significado automático interfere na sua leitura.</p><div class="editorial-principles" aria-label="Princípios do Tarot Livre"><span>78 cartas</span><span>Sempre diretas</span><span>Sem repetição</span></div></div><p id="tarotEditorialState" class="editorial-state" aria-live="polite">O círculo aguarda o primeiro toque na Orbe.</p></aside>');
     this.altar = root.querySelector('#revealAltar'); this.stage = root.querySelector('#current'); this.orb = root.querySelector('#tableOrb'); this.realTable = root.querySelector('#realTable');
     this.orbState = root.querySelector('#orbState'); this.shuffleButton = root.querySelector('#shuffleDeck'); this.resetButton = root.querySelector('#resetDeck');
+    this.magicFx = root.querySelector('#tarotBirthFx'); this.magicAnnouncement = root.querySelector('#tarotMagicAnnouncement');
     this.currentNav = root.querySelector('#currentCardNav'); this.currentPrev = root.querySelector('#currentCardPrev'); this.currentNext = root.querySelector('#currentCardNext');
     this.viewport = root.querySelector('#realTableViewport'); this.compactButton = root.querySelector('#tableCompact'); this.scrollPrevButton = root.querySelector('#tableScrollPrev'); this.scrollNextButton = root.querySelector('#tableScrollNext'); this.viewHint = root.querySelector('#tableViewHint');
     this.lightbox = root.querySelector('#cardLightbox'); this.lightboxImage = root.querySelector('#lightboxImage'); this.lightboxTitle = root.querySelector('#lightboxTitle'); this.lightboxPosition = root.querySelector('#lightboxPosition'); this.lightboxPrev = root.querySelector('#lightboxPrev'); this.lightboxNext = root.querySelector('#lightboxNext'); this.lightboxClose = root.querySelector('#closeCardLightbox');
@@ -59,6 +67,7 @@ export class FreeTarot {
     this.backupButton = root.querySelector('#saveTableBackup'); this.restoreButton = root.querySelector('#restoreTableBackup'); this.backupInput = root.querySelector('#tableBackupInput'); this.saveState = root.querySelector('#tableSaveState');
     this.editorialState = root.querySelector('#tarotEditorialState');
     this.selected = -1; this.lightboxIndex = -1; this.lightboxTrigger = null; this.compactView = this.storage.get('free-tarot-table-compact', false) === true; this.drawing = false; this.releaseTimer = 0; this.scrollFrame = 0; this.lastTableScrollAt = -Infinity;
+    this.root.dataset.revealPhase = 'idle';
     this.coordinator = new TarotSessionCoordinator({ storage: this.storage, key: STORAGE_KEY });
     this.state = normalizeTarotState(this.storage.get(STORAGE_KEY, null)) ?? createTarotState();
     this.selected = this.state.revealed.length - 1;
@@ -121,15 +130,55 @@ export class FreeTarot {
 
   async draw() {
     if (this.drawing || this.state.completed) return null;
-    this.drawing = true; this.altar.classList.add('revealing'); this.orbState.textContent = 'A CARTA ESTÁ NASCENDO';
+    const revealStartedAt = globalThis.performance?.now?.() ?? Date.now();
+    let revealed = false;
+    this.drawing = true; this.altar.classList.add('revealing'); this.startRevealMagic();
     try {
       const result = await this.coordinator.commit(latest => drawNextCard(latest)); if (result.cardId === null) return null;
+      await this.openRevealPortal(revealStartedAt);
       this.state = result.state; this.selected = result.position; this.persist(); this.render(result.position); this.show(result.position, true, false); preloadCardImages(this.state.waiting, 3);
+      this.finishRevealMagic(CARDS[result.cardId], result.position); revealed = true;
       globalThis.navigator?.vibrate?.([12, 22, 18]); globalThis.dispatchEvent?.(new CustomEvent('tarot:revealed', { detail: { cardId: result.cardId, position: result.position, remaining: this.state.waiting.length } })); return result.cardId;
     } finally {
       globalThis.clearTimeout(this.releaseTimer);
-      this.releaseTimer = globalThis.setTimeout(() => { this.drawing = false; this.altar.classList.remove('revealing'); this.orbState.textContent = this.state.completed ? 'MESA COMPLETA' : 'REVELAR CARTA'; }, 820);
+      const settleDelay = this.reducedMotion() ? 30 : (revealed ? 1320 : 180);
+      this.releaseTimer = globalThis.setTimeout(() => this.settleRevealMagic(), settleDelay);
     }
+  }
+
+  startRevealMagic() {
+    this.altar.classList.remove('magic-awakening', 'magic-manifesting', 'magic-born');
+    this.root.dataset.revealPhase = 'awakening';
+    this.altar.setAttribute('aria-busy', 'true'); this.orb.setAttribute('aria-busy', 'true');
+    void this.altar.offsetWidth;
+    this.altar.classList.add('magic-awakening');
+    this.orbState.textContent = 'O PORTAL ESTÁ SE ABRINDO';
+    if (this.magicAnnouncement) this.magicAnnouncement.textContent = 'A Orbe está abrindo o portal.';
+  }
+
+  async openRevealPortal(startedAt) {
+    if (!this.reducedMotion()) {
+      const now = globalThis.performance?.now?.() ?? Date.now();
+      await new Promise(resolve => globalThis.setTimeout(resolve, Math.max(0, PORTAL_OPENING_MS - (now - startedAt))));
+    }
+    this.altar.classList.remove('magic-awakening'); this.altar.classList.add('magic-manifesting');
+    this.root.dataset.revealPhase = 'manifesting';
+    this.orbState.textContent = 'A CARTA ATRAVESSA AS ESTRELAS';
+    if (!this.reducedMotion()) await new Promise(resolve => globalThis.setTimeout(resolve, PORTAL_CROSSING_MS));
+  }
+
+  finishRevealMagic(card, position) {
+    this.altar.classList.add('magic-born'); this.root.dataset.revealPhase = 'born';
+    this.orbState.textContent = 'CARTA REVELADA';
+    if (this.magicAnnouncement && card) this.magicAnnouncement.textContent = `${card.name}, direta. Carta ${position + 1} de ${DECK_SIZE} revelada.`;
+  }
+
+  settleRevealMagic() {
+    this.drawing = false;
+    this.altar.classList.remove('revealing', 'magic-awakening', 'magic-manifesting', 'magic-born');
+    this.altar.removeAttribute('aria-busy'); this.orb.removeAttribute('aria-busy');
+    this.root.dataset.revealPhase = 'idle';
+    this.orbState.textContent = this.state.completed ? 'MESA COMPLETA' : 'REVELAR CARTA';
   }
 
   moveCurrent(direction) {
@@ -154,7 +203,7 @@ export class FreeTarot {
     this.realTable.querySelectorAll('[data-index]').forEach(button => button.classList.toggle('selected', Number(button.dataset.index) === index));
     this.orbitalCards.querySelectorAll('[data-orbit-index]').forEach(button => button.classList.toggle('selected', Number(button.dataset.orbitIndex) === index));
     this.updateCurrentControls();
-    if (animate) globalThis.setTimeout(() => this.stage.classList.remove('birth'), 900);
+    if (animate) globalThis.setTimeout(() => this.stage.classList.remove('birth'), 1450);
     if (scroll) this.altar.scrollIntoView({ behavior: this.reducedMotion() ? 'auto' : 'smooth', block: 'start' });
   }
 
