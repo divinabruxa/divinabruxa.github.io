@@ -1,0 +1,11 @@
+CORREÇÃO DE CACHE — MACROETAPA 3
+
+Envie na raiz do GitHub:
+1. SUBSTITUA index.html
+2. SUBSTITUA tarot-livre-magic-v1.css
+3. ADICIONE MANIFESTO-MACROETAPA-3-CACHE.json
+4. ADICIONE LEIA-PRIMEIRO-MACROETAPA-3-CACHE.txt
+
+O index passa a carregar tarot-livre-magic-v1.css?v=102.
+Não altere CNAME nem apague arquivos.
+Depois da publicação, responda INSTALADO.

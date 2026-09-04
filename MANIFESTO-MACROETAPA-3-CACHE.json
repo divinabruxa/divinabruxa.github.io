@@ -1,0 +1,8 @@
+{
+  "produto": "Divina Bruxa — A Orbe das Realidades",
+  "macroetapa": 3,
+  "titulo": "Tarot Livre — atualização de cache",
+  "objetivo": "Forçar o navegador e o CDN a carregar o acabamento da Macroetapa 3.",
+  "arquivos_substituir": ["index.html", "tarot-livre-magic-v1.css"],
+  "status": "staging; aguarda upload manual no GitHub"
+}

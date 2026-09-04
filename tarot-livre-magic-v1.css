@@ -22,3 +22,4 @@ html[data-runtime="v12"] #tarot .tarot-action:focus-visible,html[data-runtime="v
 html[data-runtime="v12"] #tarot .deck-progress i{background:linear-gradient(90deg,var(--db-skin-accent,#8b3bd1),var(--db-skin-light,#f3d38a));}
 @media(max-width:560px){html[data-runtime="v12"] #tarot .real-table{grid-template-columns:repeat(6,var(--tarot-card-width));}}
 
+
