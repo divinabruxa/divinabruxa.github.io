@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — MOTOR DO TAROT LIVRE · FLUIDEZ IOS V126
-   Setas determinísticas, revelação leve e nenhuma navegação por gesto.
+/* DIVINA BRUXA — MOTOR DO TAROT LIVRE · NOME MÁGICO V128
+   Setas determinísticas, revelação leve, balão da carta e nenhuma navegação por gesto.
 */
 import { CARDS } from './tarot-data.js';
 import { store } from './storage.js';
@@ -21,7 +21,7 @@ function announce(message) {
 
 function installOfficialStructure(root) {
   root.classList.add('tarot-livre-official');
-  root.dataset.tarotLivre = 'ios-v126';
+  root.dataset.tarotLivre = 'ios-v128';
   document.documentElement.dataset.tarotMotion = 'ios-v1';
 
   const eyebrow = root.querySelector('.section-head .eyebrow');
@@ -62,6 +62,9 @@ function installOfficialStructure(root) {
   if (altar && !root.querySelector('#tarotBirthFx')) {
     altar.insertAdjacentHTML('afterbegin', '<span id="tarotBirthFx" class="tarot-ios-flash" aria-hidden="true"></span><p id="tarotMagicAnnouncement" class="tarot-magic-sr" role="status" aria-live="polite" aria-atomic="true"></p>');
   }
+  if (altar && !root.querySelector('#tarotCardToast')) {
+    altar.insertAdjacentHTML('afterbegin', '<div id="tarotCardToast" class="tarot-card-toast" aria-hidden="true"><span aria-hidden="true">✦</span><strong id="tarotCardToastName">CARTA REVELADA</strong><span aria-hidden="true">✦</span></div>');
+  }
 }
 
 export class FreeTarot {
@@ -74,6 +77,7 @@ export class FreeTarot {
     this.altar = root.querySelector('#revealAltar'); this.stage = root.querySelector('#current'); this.orb = root.querySelector('#tableOrb'); this.realTable = root.querySelector('#realTable');
     this.orbState = root.querySelector('#orbState'); this.shuffleButton = root.querySelector('#shuffleDeck'); this.resetButton = root.querySelector('#resetDeck');
     this.magicFx = root.querySelector('#tarotBirthFx'); this.magicAnnouncement = root.querySelector('#tarotMagicAnnouncement');
+    this.cardToast = root.querySelector('#tarotCardToast'); this.cardToastName = root.querySelector('#tarotCardToastName');
     this.currentNav = root.querySelector('#currentCardNav'); this.currentPrev = root.querySelector('#currentCardPrev'); this.currentNext = root.querySelector('#currentCardNext');
     this.gestureHint = root.querySelector('#tarotGestureHint');
     this.viewport = root.querySelector('#realTableViewport'); this.compactButton = root.querySelector('#tableCompact'); this.scrollPrevButton = root.querySelector('#tableScrollPrev'); this.scrollNextButton = root.querySelector('#tableScrollNext'); this.viewHint = root.querySelector('#tableViewHint');
@@ -81,7 +85,7 @@ export class FreeTarot {
     this.orbitalCards = root.querySelector('#orbitalCards'); this.ritualRevealed = root.querySelector('#ritualRevealed'); this.ritualRemaining = root.querySelector('#ritualRemaining');
     this.backupButton = root.querySelector('#saveTableBackup'); this.restoreButton = root.querySelector('#restoreTableBackup'); this.backupInput = root.querySelector('#tableBackupInput'); this.saveState = root.querySelector('#tableSaveState');
     this.editorialState = root.querySelector('#tarotEditorialState');
-    this.selected = -1; this.lightboxIndex = -1; this.lightboxTrigger = null; this.compactView = true; this.drawing = false; this.releaseTimer = 0; this.scrollFrame = 0; this.lastTableScrollAt = -Infinity;
+    this.selected = -1; this.lightboxIndex = -1; this.lightboxTrigger = null; this.compactView = true; this.drawing = false; this.releaseTimer = 0; this.toastTimer = 0; this.toastToken = 0; this.scrollFrame = 0; this.lastTableScrollAt = -Infinity;
     this.navigationAnimation = null; this.navigationToken = 0;
     this.root.dataset.revealPhase = 'idle';
     this.coordinator = new TarotSessionCoordinator({ storage: this.storage, key: STORAGE_KEY });
@@ -165,6 +169,7 @@ export class FreeTarot {
   }
 
   startRevealMagic() {
+    this.hideCardToast();
     this.altar.classList.remove('magic-awakening', 'magic-manifesting', 'magic-born', 'ios-awakening', 'ios-crossing', 'ios-born');
     this.root.dataset.revealPhase = 'awakening';
     this.altar.setAttribute('aria-busy', 'true'); this.orb.setAttribute('aria-busy', 'true');
@@ -188,6 +193,35 @@ export class FreeTarot {
     this.altar.classList.remove('ios-crossing'); this.altar.classList.add('ios-born'); this.root.dataset.revealPhase = 'born';
     this.orbState.textContent = 'CARTA REVELADA';
     if (this.magicAnnouncement && card) this.magicAnnouncement.textContent = `${card.name}, direta. Carta ${position + 1} de ${DECK_SIZE} revelada.`;
+    this.showCardToast(card);
+  }
+
+  hideCardToast() {
+    globalThis.clearTimeout(this.toastTimer);
+    this.toastToken += 1;
+    if (!this.cardToast) return;
+    this.cardToast.classList.remove('is-visible');
+    this.cardToast.setAttribute('aria-hidden', 'true');
+  }
+
+  showCardToast(card) {
+    if (!card || !this.cardToast || !this.cardToastName) return;
+    this.hideCardToast();
+    this.cardToastName.textContent = String(card.name).toLocaleUpperCase('pt-BR');
+    const token = ++this.toastToken;
+    const revealToast = () => {
+      if (token !== this.toastToken) return;
+      this.cardToast.classList.add('is-visible');
+      this.cardToast.setAttribute('aria-hidden', 'false');
+      this.toastTimer = globalThis.setTimeout(() => {
+        if (token !== this.toastToken) return;
+        this.cardToast.classList.remove('is-visible');
+        this.cardToast.setAttribute('aria-hidden', 'true');
+      }, 2600);
+    };
+    if (typeof globalThis.requestAnimationFrame === 'function') {
+      globalThis.requestAnimationFrame(() => globalThis.requestAnimationFrame(revealToast));
+    } else revealToast();
   }
 
   settleRevealMagic() {
@@ -291,6 +325,7 @@ export class FreeTarot {
 
   show(index, animate = true, scroll = false) {
     const card = CARDS[this.state.revealed[index]]; if (!isFreeTarotCard(card)) return;
+    this.hideCardToast();
     this.selected = index; this.stage.className = 'current table-preview';
     this.stage.innerHTML = `${cardImageMarkup(card, { alt: `${card.name}, direta`, priority: 'high' })}${freeCardLabel(card)}`;
     this.stage.setAttribute('aria-label', `${card.name}, direta. Carta ${index + 1} de ${this.state.revealed.length}. Use as setas para navegar.`);
@@ -359,7 +394,7 @@ export class FreeTarot {
   async reset(force = false) {
     if (this.drawing || this.navigationAnimation) return false;
     if (this.state.revealed.length > 0 && force !== true && globalThis.confirm && !globalThis.confirm('Apagar as cartas desta mesa e iniciar um novo baralho?')) return false;
-    this.state = await this.coordinator.commit(() => resetTarotState()); this.selected = -1; this.closeLightbox(); this.render(); preloadCardImages(this.state.waiting, 3); announce('Uma nova Mesa Real foi preparada.'); return true;
+    this.hideCardToast(); this.state = await this.coordinator.commit(() => resetTarotState()); this.selected = -1; this.closeLightbox(); this.render(); preloadCardImages(this.state.waiting, 3); announce('Uma nova Mesa Real foi preparada.'); return true;
   }
   async reshuffle() {
     if (this.drawing || this.navigationAnimation || this.state.waiting.length < 2) return false;
@@ -389,5 +424,5 @@ export class FreeTarot {
     announce(`Mesa retomada com ${this.state.revealed.length} cartas reveladas.`); return true;
   }
 
-  destroy() { globalThis.clearTimeout(this.releaseTimer); globalThis.cancelAnimationFrame?.(this.scrollFrame); this.navigationToken += 1; this.navigationAnimation?.cancel?.(); this.navigationAnimation = null; this.closeLightbox(); globalThis.removeEventListener?.('storage', this.onStorage); document.removeEventListener('visibilitychange', this.onVisibility); }
+  destroy() { globalThis.clearTimeout(this.releaseTimer); this.hideCardToast(); globalThis.cancelAnimationFrame?.(this.scrollFrame); this.navigationToken += 1; this.navigationAnimation?.cancel?.(); this.navigationAnimation = null; this.closeLightbox(); globalThis.removeEventListener?.('storage', this.onStorage); document.removeEventListener('visibilitychange', this.onVisibility); }
 }

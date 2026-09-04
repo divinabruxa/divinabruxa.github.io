@@ -1,0 +1,43 @@
+DIVINA BRUXA — NOME MÁGICO DA CARTA V128
+
+O QUE ESTA VERSÃO ENTREGA
+
+1. Corrige a frase branca que estava escapando acima da carta.
+   Ela era uma mensagem para leitores de tela e agora permanece corretamente invisível.
+
+2. Ao revelar uma CARTA NOVA pela Orbe ou pela seta direita, aparece um balão mágico:
+
+   ✦ NOME DA CARTA ✦
+
+3. O balão fica acima da carta, não cobre a ilustração e desaparece suavemente após 2,6 segundos.
+
+4. Voltar ou avançar entre cartas já reveladas não repete a notificação.
+
+5. A animação é leve, com somente opacidade e transformação, sem gesto de arrastar, sem partículas contínuas e sem efeito pesado.
+
+6. O cenário oficial V127, o tamanho e a posição da carta, as setas, a Orbe, a Home, o menu, o dock e o sistema universal de skins foram preservados.
+
+COMO INSTALAR NO GITHUB
+
+Envie os 6 arquivos deste ZIP diretamente para a raiz do repositório, sem criar pasta interna:
+
+- index.html
+- app.js
+- tarot-engine.js
+- tarot-livre-ios-v1.css
+- sw.js
+- LEIA-PRIMEIRO-NOME-MAGICO-CARTA-V128.txt
+
+Confirme "Replace files" para os cinco arquivos existentes. O arquivo LEIA-PRIMEIRO é novo.
+
+Depois que o GitHub publicar, feche todas as abas antigas do site, abra novamente e teste o Tarot Livre.
+
+TESTE CERTO
+
+- Toque na Orbe: uma nova carta aparece e o nome surge no balão acima dela.
+- Toque na seta esquerda: volta uma carta sem novo balão.
+- Toque na seta direita numa carta antiga: avança sem novo balão.
+- Na carta mais recente, toque na seta direita: revela nova carta e mostra o balão.
+- Confirme que nenhuma frase branca ficou solta sobre o cenário.
+
+VERSÃO: V128

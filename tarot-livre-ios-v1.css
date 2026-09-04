@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — TAROT LIVRE · VISUAL DE REFERÊNCIA + FLUIDEZ IOS V127
+/* DIVINA BRUXA — TAROT LIVRE · NOTIFICAÇÃO MÁGICA + FLUIDEZ IOS V128
    Somente compositor: transform e opacity. Sem gesto, blur animado ou partículas contínuas. */
 
 html[data-runtime="v12"] #app>#tarot.tarot-livre-official{
@@ -116,6 +116,75 @@ html[data-runtime="v12"] #tarot .ritual-altar{
   background:transparent;
   box-shadow:none;
   contain:layout style;
+}
+
+/* A locução continua disponível para leitores de tela, sem escapar para a imagem. */
+html[data-runtime="v12"] #tarot .tarot-magic-sr{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  margin:-1px!important;
+  padding:0!important;
+  overflow:hidden!important;
+  clip:rect(0 0 0 0)!important;
+  clip-path:inset(50%)!important;
+  border:0!important;
+  white-space:nowrap!important;
+}
+
+/* Balão curto: revela somente o nome e nunca cobre a arte da carta. */
+html[data-runtime="v12"] #tarot .tarot-card-toast{
+  position:absolute;
+  z-index:28;
+  top:-14px;
+  left:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  width:max-content;
+  max-width:min(calc(100% - 64px),430px);
+  min-height:28px;
+  padding:4px 15px;
+  overflow:hidden;
+  pointer-events:none;
+  visibility:hidden;
+  opacity:0;
+  border:1px solid rgba(244,207,133,.82);
+  border-radius:999px;
+  color:#ffe6a7;
+  background:linear-gradient(145deg,rgba(25,9,34,.98),rgba(5,2,10,.98));
+  box-shadow:inset 0 1px rgba(255,247,221,.09),0 8px 24px rgba(0,0,0,.55),0 0 18px rgba(190,64,231,.28);
+  transform:translate3d(-50%,-8px,0) scale(.96);
+  transition:opacity .18s ease,transform .34s cubic-bezier(.22,1,.36,1),visibility 0s linear .34s;
+  contain:layout paint style;
+  will-change:transform,opacity;
+}
+
+html[data-runtime="v12"] #tarot .tarot-card-toast.is-visible{
+  visibility:visible;
+  opacity:1;
+  transform:translate3d(-50%,0,0) scale(1);
+  transition-delay:0s;
+}
+
+html[data-runtime="v12"] #tarot .tarot-card-toast span{
+  flex:0 0 auto;
+  color:#efc978;
+  font-size:10px;
+  line-height:1;
+  text-shadow:0 0 10px rgba(255,219,145,.7);
+}
+
+html[data-runtime="v12"] #tarot .tarot-card-toast strong{
+  min-width:0;
+  overflow:hidden;
+  color:#fff0c6;
+  font:600 clamp(13px,2.2vw,16px)/1 Georgia,"Times New Roman",serif;
+  letter-spacing:.12em;
+  text-overflow:ellipsis;
+  text-shadow:0 2px 7px #020106,0 0 12px rgba(227,181,98,.33);
+  white-space:nowrap;
 }
 
 html[data-runtime="v12"] #tarot .ritual-altar::before,
@@ -539,7 +608,7 @@ html[data-runtime="v12"] #tarot .card-lightbox::backdrop{background:rgba(1,0,4,.
     background:url("./tarot-temple-oficial-v127.jpeg") top center/100% auto no-repeat;
   }
 
-  html[data-runtime="v12"] #tarot .section-head{padding:5px 4px 9px}
+  html[data-runtime="v12"] #tarot .section-head{padding:5px 4px 14px}
   html[data-runtime="v12"] #tarot .section-head .eyebrow{font-size:clamp(8px,2.25vw,10px);letter-spacing:.31em}
   html[data-runtime="v12"] #tarot .section-head h2{margin:8px 0 5px;font-size:clamp(44px,12vw,52px)}
   html[data-runtime="v12"] #tarot .section-head #count{font-size:20px}
@@ -573,6 +642,12 @@ html[data-runtime="v12"] #tarot .card-lightbox::backdrop{background:rgba(1,0,4,.
     letter-spacing:.13em;
   }
 
+  html[data-runtime="v12"] #tarot .tarot-card-toast{
+    gap:7px;
+    max-width:calc(100% - 58px);
+    padding-inline:13px;
+  }
+
   html[data-runtime="v12"] #tarot .real-table-head{gap:23px;margin-top:4px;padding-inline:2px}
   html[data-runtime="v12"] #tarot .table-actions{gap:8px}
   html[data-runtime="v12"] #tarot .table-actions .text-button{gap:6px;min-height:52px;padding:8px 5px;font-size:clamp(7px,2.05vw,9px);letter-spacing:.015em}
@@ -590,6 +665,8 @@ html[data-runtime="v12"] #tarot .card-lightbox::backdrop{background:rgba(1,0,4,.
   html[data-runtime="v12"] #tarot .tarot-current-nav button{width:38px;height:38px}
   html[data-runtime="v12"] #tarot .table-orb{top:347px;width:86px;height:86px}
   html[data-runtime="v12"] #tarot .tarot-gesture-hint{top:calc(100% + 76px);font-size:6px;letter-spacing:.09em}
+  html[data-runtime="v12"] #tarot .tarot-card-toast{gap:6px;max-width:calc(100% - 48px);padding-inline:11px}
+  html[data-runtime="v12"] #tarot .tarot-card-toast strong{font-size:12px;letter-spacing:.09em}
 }
 
 @media(orientation:landscape) and (max-height:560px){
@@ -607,6 +684,7 @@ html[data-runtime="v12"] #tarot .card-lightbox::backdrop{background:rgba(1,0,4,.
   html[data-runtime="v12"] #tarot .tarot-ios-flash{animation:none!important}
   html[data-runtime="v12"] #tarot .tarot-current-nav button,
   html[data-runtime="v12"] #tarot .table-orb,
+  html[data-runtime="v12"] #tarot .tarot-card-toast,
   html[data-runtime="v12"] #tarot .table-actions .text-button,
   html[data-runtime="v12"] #tarot .table-slot.revealed{transition:none!important}
 }
@@ -616,6 +694,7 @@ html[data-runtime="v12"] #tarot .card-lightbox::backdrop{background:rgba(1,0,4,.
   html[data-runtime="v12"] #tarot .ritual-card-center .table-preview,
   html[data-runtime="v12"] #tarot .tarot-current-nav button,
   html[data-runtime="v12"] #tarot .table-orb-image,
+  html[data-runtime="v12"] #tarot .tarot-card-toast,
   html[data-runtime="v12"] #tarot .table-actions .text-button,
   html[data-runtime="v12"] #tarot .table-slot.revealed{border:1px solid CanvasText}
 }

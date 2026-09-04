@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V19 · TAROT LIVRE REFERÊNCIA OFICIAL */
-const CACHE='divina-bruxa-v19-tarot-reference-2';
+/* DIVINA BRUXA — SERVICE WORKER V20 · NOME MÁGICO DA CARTA */
+const CACHE='divina-bruxa-v20-tarot-card-toast';
 
 const REQUIRED=[
   './',
