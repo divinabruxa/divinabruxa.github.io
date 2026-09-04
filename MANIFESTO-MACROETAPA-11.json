@@ -1,0 +1,9 @@
+{
+  "produto": "Divina Bruxa — A Orbe das Realidades",
+  "macroetapa": 11,
+  "titulo": "Música e De Frente com o Tarot",
+  "objetivo": "Criar um universo editorial premium para música, vídeos e episódios do YouTube.",
+  "arquivos_substituir": ["index.html", "musica-videos-cosmica-v1.css"],
+  "criterios_aceite": ["cards editoriais elegantes", "iframe seguro", "foco acessível", "responsivo", "menu preservado"],
+  "status": "staging; aguarda upload manual no GitHub"
+}

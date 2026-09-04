@@ -1,0 +1,13 @@
+DIVINA BRUXA — MACROETAPA 11
+MÚSICA E DE FRENTE COM O TAROT
+
+Envie na raiz do GitHub:
+1. SUBSTITUA index.html
+2. ADICIONE musica-videos-cosmica-v1.css
+3. ADICIONE MANIFESTO-MACROETAPA-11.json
+4. ADICIONE LEIA-PRIMEIRO-MACROETAPA-11.txt
+
+O index carrega musica-videos-cosmica-v1.css?v=111.
+Não altere o menu da Orbe nem links do YouTube sem validação.
+Não apague arquivos e não altere CNAME.
+Depois da publicação, responda INSTALADO.
