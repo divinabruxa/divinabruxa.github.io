@@ -1,0 +1,29 @@
+DIVINA BRUXA — ATLAS VISUAL CÓSMICO V132
+CAPÍTULO 1 · SANTUÁRIO LUNAR DA CARTA DO DIA
+
+ENVIE ESTES 5 ARQUIVOS PARA A RAIZ DO GITHUB:
+
+1. index.html
+2. sw.js
+3. cosmic-visual-atlas-v1.css
+4. cosmic-visual-atlas-v1.js
+5. carta-dia-santuario-lunar-v1.webp
+
+Substitua index.html e sw.js quando o GitHub perguntar.
+Os outros três arquivos são novos.
+Não apague nenhum outro arquivo do site.
+
+O QUE ESTA MACROETAPA ENTREGA
+
+• Primeira arte original do Atlas Visual: Santuário Lunar da Carta do Dia.
+• Imagem vertical, sem texto e preparada para o conteúdo HTML continuar legível.
+• Arquivo WebP de somente cerca de 116 KB, mantendo 864 × 1821 pixels.
+• Carregamento fora da rota crítica: a Home não espera pela imagem.
+• Pré-decodificação antes da revelação, evitando clarão, salto e travamento.
+• Entrada curta e suave; Reduced Motion continua respeitado.
+• Se a imagem falhar, o fundo cósmico V130 permanece funcionando.
+• A Home, a Orbe, o menu, o Tarot Livre e as Skins não foram alterados.
+
+DEPOIS DE ENVIAR
+
+Espere o GitHub Pages concluir a publicação. Feche completamente o site ou aplicativo e abra novamente para o cache V24 assumir o controle.

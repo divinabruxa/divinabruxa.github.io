@@ -1,0 +1,41 @@
+/* DIVINA BRUXA — ATLAS VISUAL CÓSMICO V1
+   Primeira realidade ilustrada: o Santuário Lunar da Carta do Dia. */
+
+html[data-runtime="v12"] #app > #daily[data-db-realm="moon"]::before {
+  transition: opacity 320ms cubic-bezier(.22,.8,.2,1);
+}
+
+html[data-runtime="v12"] #app > #daily[data-db-realm="moon"][data-db-atlas="ready"]::before {
+  opacity: .62;
+  background-image:
+    linear-gradient(180deg, rgba(5,2,11,.54) 0%, rgba(5,2,11,.38) 25%, rgba(5,2,11,.7) 64%, rgba(5,2,11,.98) 91%),
+    var(--db-atlas-image);
+  background-position: center top, center top;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 100% 100%, min(864px, 112vw) auto;
+  animation: db-atlas-materialize 520ms cubic-bezier(.16,.82,.22,1) both;
+}
+
+html[data-runtime="v12"] #app > #daily[data-db-realm="moon"][data-db-atlas="ready"]::after {
+  border-top-color: rgba(243,220,154,.38);
+  background: radial-gradient(ellipse at 50% 0, rgba(193,168,255,.2), transparent 69%);
+  box-shadow: 0 -28px 88px rgba(151,105,255,.24);
+}
+
+@keyframes db-atlas-materialize {
+  from { opacity: .2; }
+  to { opacity: .62; }
+}
+
+@media (max-width: 560px) {
+  html[data-runtime="v12"] #app > #daily[data-db-realm="moon"][data-db-atlas="ready"]::before {
+    background-size: 100% 100%, min(864px, 112vw) auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-runtime="v12"] #app > #daily[data-db-realm="moon"]::before {
+    transition: none;
+    animation: none;
+  }
+}

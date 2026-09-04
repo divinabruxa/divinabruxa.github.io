@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V23 · SINCRONISMO ABSOLUTO DAS ORBES */
-const CACHE='divina-bruxa-v23-orbes-absolutas';
+/* DIVINA BRUXA — SERVICE WORKER V24 · ATLAS VISUAL CÓSMICO */
+const CACHE='divina-bruxa-v24-atlas-visual';
 
 const REQUIRED=[
   './',
@@ -27,6 +27,8 @@ const REQUIRED=[
   './tarot-temple-oficial-v127.jpeg',
   './orb-skin-release-v1.css',
   './orb-skin-release-v1.js',
+  './cosmic-visual-atlas-v1.css',
+  './cosmic-visual-atlas-v1.js',
   './divina-orb-v68.png',
   './divina-mini-orb-hd-v72.jpeg'
 ];
@@ -47,7 +49,7 @@ const WARM=[
   './notification-engine.js','./notification-policy.js','./admin-engine.js','./admin-policy.js','./analytics-engine.js','./analytics-policy.js',
   './privacy-engine.js','./privacy-policy.js','./pwa-engine.js','./trust-engine.js','./trust-policy.js','./auth-client-v6.js','./rhythm-v6.js',
   './ecosystem-v6.js','./performance-v6.js','./ai-engine.js','./ai-policy.js','./ai-credits.js','./premium-engine.js','./premium-policy.js',
-  './cosmic-background.png'
+  './cosmic-background.png','./carta-dia-santuario-lunar-v1.webp'
 ];
 
 self.addEventListener('install',event=>event.waitUntil((async()=>{
