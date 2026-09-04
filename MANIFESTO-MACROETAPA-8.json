@@ -1,0 +1,8 @@
+{
+  "produto": "Divina Bruxa — A Orbe das Realidades",
+  "macroetapa": 8,
+  "titulo": "Premium, Skins e créditos",
+  "objetivo": "Apresentar valor premium com clareza e beleza, sem ativar cobrança real.",
+  "arquivos_substituir": ["index.html", "premium-v5.css"],
+  "status": "staging; aguarda upload manual no GitHub"
+}
