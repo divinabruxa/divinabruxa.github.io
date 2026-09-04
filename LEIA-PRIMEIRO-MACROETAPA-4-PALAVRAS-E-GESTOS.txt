@@ -1,0 +1,72 @@
+DIVINA BRUXA — ORBE DAS REALIDADES
+TAROT LIVRE — MACROETAPA 4 DE 7
+PALAVRAS FORA DA ORBE + NAVEGAÇÃO POR GESTOS — V120
+
+COMO INSTALAR
+
+Envie os 6 arquivos deste ZIP diretamente para a raiz do GitHub, no mesmo nível
+do index.html. Não crie nenhuma pasta.
+
+1. index.html — substituir o arquivo existente
+2. app.js — substituir o arquivo existente
+3. tarot-engine.js — substituir o arquivo existente
+4. home-orb-words-v2.css — adicionar como arquivo novo
+5. tarot-livre-gestures-v1.css — adicionar como arquivo novo
+6. LEIA-PRIMEIRO-MACROETAPA-4-PALAVRAS-E-GESTOS.txt — adicionar como arquivo novo
+
+CORREÇÃO VISUAL DA HOME
+
+As palavras agora ficam organizadas fora da imagem da Orbe:
+
+ACIMA DA ORBE
+
+- O PORTAL ESTÁ ABERTO
+- Orbe das Realidades ✦
+- O universo guardou um caminho para você.
+
+ABAIXO DA ORBE
+
+- ✦ TOQUE PARA DESPERTAR ✦
+- O estado vivo da Orbe, incluindo “A matéria acompanhou o seu gesto”.
+
+A antiga inscrição ESPÍRITO / ORBE DAS REALIDADES sobre o centro da esfera deixa
+de ser carregada. O arquivo antigo home-orb-identity-v1.js pode permanecer no
+GitHub, mas o novo index.html não o executa.
+
+NAVEGAÇÃO DO TAROT LIVRE
+
+- Deslizar a carta para a DIREITA mostra a próxima carta já revelada.
+- Deslizar a carta para a ESQUERDA mostra a carta anterior.
+- A carta acompanha o dedo antes de completar o gesto.
+- Um gesto curto retorna a carta suavemente ao centro.
+- Nos extremos, a carta responde sem ultrapassar o histórico existente.
+- As setas laterais receberam a mesma transição fluida.
+- As teclas de seta também funcionam para acessibilidade.
+- A rolagem vertical da página continua livre e não é confundida com o gesto.
+
+PROTEÇÕES PRESERVADAS
+
+- A Orbe principal continua com o mesmo motor, tamanho, fluidez e resposta.
+- O menu mágico e o dock não foram alterados.
+- As skins continuam mudando todas as Orbes.
+- 78 cartas, sempre diretas e sem repetição.
+- Carta inteira e grande no centro.
+- Arquivo com 6 cartas por fileira.
+- Nascimento mágico da Macroetapa 3 preservado.
+
+ARQUIVOS PROTEGIDOS QUE NÃO ESTÃO NESTE ZIP
+
+- orb-engine-v68.js
+- mini-orb-engine.js
+- navigation.js
+- menu-ring-v8.css
+- arquivos das skins
+- CNAME
+
+DEPOIS DE ENVIAR
+
+Espere o GitHub Pages publicar. Feche todas as abas antigas e abra novamente
+https://www.divinabruxa.com.br para impedir que o navegador mostre a versão em
+cache.
+
+Ao terminar, escreva “INSTALADO”. A próxima entrega será a Macroetapa 5 de 7.

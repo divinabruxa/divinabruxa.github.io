@@ -1,0 +1,161 @@
+/* DIVINA BRUXA — GESTOS DO TAROT LIVRE V1
+   Direita = próxima carta. Esquerda = carta anterior.
+   O gesto pertence somente à carta central e preserva a rolagem vertical. */
+
+html[data-runtime="v12"] #tarot .ritual-card-center .current{
+  --tarot-swipe-x:0px;
+  --tarot-swipe-tilt:0deg;
+  --tarot-swipe-opacity:1;
+  touch-action:pan-y pinch-zoom;
+  overscroll-behavior-x:contain;
+  user-select:none;
+  -webkit-user-select:none;
+  -webkit-touch-callout:none;
+  cursor:grab;
+}
+
+html[data-runtime="v12"] #tarot .ritual-card-center .current.empty{
+  cursor:default;
+}
+
+html[data-runtime="v12"] #tarot .ritual-card-center .current img,
+html[data-runtime="v12"] #tarot .ritual-card-center .current .card-label{
+  pointer-events:none;
+  user-select:none;
+  -webkit-user-select:none;
+  -webkit-user-drag:none;
+}
+
+html[data-runtime="v12"] #tarot .ritual-card-center .current:focus-visible{
+  outline:2px solid #ffe3a2;
+  outline-offset:7px;
+  box-shadow:
+    inset 0 0 0 5px rgba(5,2,11,.76),
+    inset 0 0 0 6px rgba(232,199,122,.23),
+    0 28px 62px rgba(0,0,0,.72),
+    0 0 38px rgba(218,91,255,.55);
+}
+
+html[data-runtime="v12"] #tarot .ritual-card-center .current.is-swiping{
+  cursor:grabbing;
+  opacity:var(--tarot-swipe-opacity)!important;
+  transform:translate3d(var(--tarot-swipe-x),0,0) rotate(var(--tarot-swipe-tilt))!important;
+  filter:brightness(1.07) drop-shadow(0 28px 40px rgba(0,0,0,.75)) drop-shadow(0 0 22px rgba(207,77,245,.26))!important;
+  transition:none!important;
+  will-change:transform,opacity;
+}
+
+html[data-runtime="v12"] #tarot .ritual-card-center .current.swipe-return{
+  opacity:var(--tarot-swipe-opacity)!important;
+  transform:translate3d(var(--tarot-swipe-x),0,0) rotate(var(--tarot-swipe-tilt))!important;
+  transition:transform .28s cubic-bezier(.18,.82,.2,1),opacity .24s ease!important;
+}
+
+html[data-runtime="v12"] #tarot .ritual-card-center .current.swipe-edge{
+  animation:tl-swipe-edge .30s cubic-bezier(.2,.72,.2,1) both!important;
+}
+
+html[data-runtime="v12"] #tarot .ritual-card-center .current.swipe-exit-next{
+  animation:tl-swipe-exit-next .17s cubic-bezier(.4,0,.72,.2) both!important;
+}
+
+html[data-runtime="v12"] #tarot .ritual-card-center .current.swipe-exit-previous{
+  animation:tl-swipe-exit-previous .17s cubic-bezier(.4,0,.72,.2) both!important;
+}
+
+html[data-runtime="v12"] #tarot .ritual-card-center .current.swipe-enter-next{
+  animation:tl-swipe-enter-next .36s cubic-bezier(.14,.82,.2,1) both!important;
+}
+
+html[data-runtime="v12"] #tarot .ritual-card-center .current.swipe-enter-previous{
+  animation:tl-swipe-enter-previous .36s cubic-bezier(.14,.82,.2,1) both!important;
+}
+
+html[data-runtime="v12"] #tarot .tarot-gesture-hint{
+  position:absolute;
+  z-index:19;
+  left:50%;
+  bottom:2px;
+  width:max-content;
+  max-width:80%;
+  margin:0;
+  padding:6px 12px;
+  transform:translateX(-50%);
+  pointer-events:none;
+  border:1px solid rgba(232,199,122,.20);
+  border-radius:999px;
+  color:rgba(240,215,164,.70);
+  background:rgba(5,2,10,.58);
+  box-shadow:inset 0 1px rgba(255,247,222,.04),0 7px 20px rgba(0,0,0,.22);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  font:600 clamp(6px,1.45vw,8px)/1 Inter,ui-sans-serif,system-ui,sans-serif;
+  letter-spacing:.12em;
+  text-align:center;
+  white-space:nowrap;
+}
+
+html[data-runtime="v12"] #tarot .tarot-current-nav button:not(:disabled):active{
+  transform:translateY(-50%) scale(.92);
+  filter:brightness(1.35);
+}
+
+@keyframes tl-swipe-edge{
+  0%,100%{transform:translateX(0);filter:none}
+  28%{transform:translateX(-8px);filter:brightness(1.15)}
+  58%{transform:translateX(7px)}
+  80%{transform:translateX(-3px)}
+}
+
+@keyframes tl-swipe-exit-next{
+  from{opacity:1;transform:translate3d(0,0,0) rotate(0);filter:none}
+  to{opacity:0;transform:translate3d(42%,4px,0) rotate(4deg) scale(.96);filter:blur(3px) brightness(1.22)}
+}
+
+@keyframes tl-swipe-exit-previous{
+  from{opacity:1;transform:translate3d(0,0,0) rotate(0);filter:none}
+  to{opacity:0;transform:translate3d(-42%,4px,0) rotate(-4deg) scale(.96);filter:blur(3px) brightness(1.22)}
+}
+
+@keyframes tl-swipe-enter-next{
+  0%{opacity:0;transform:translate3d(-34%,1px,0) rotate(-3deg) scale(.97);filter:blur(3px) brightness(1.20)}
+  68%{opacity:1;transform:translate3d(2%,0,0) rotate(.3deg) scale(1.006);filter:none}
+  100%{opacity:1;transform:none;filter:none}
+}
+
+@keyframes tl-swipe-enter-previous{
+  0%{opacity:0;transform:translate3d(34%,1px,0) rotate(3deg) scale(.97);filter:blur(3px) brightness(1.20)}
+  68%{opacity:1;transform:translate3d(-2%,0,0) rotate(-.3deg) scale(1.006);filter:none}
+  100%{opacity:1;transform:none;filter:none}
+}
+
+@media(max-width:640px){
+  html[data-runtime="v12"] #tarot .tarot-gesture-hint{
+    bottom:0;
+    max-width:88%;
+    padding:5px 9px;
+    font-size:6.5px;
+    letter-spacing:.08em;
+  }
+}
+
+@media(max-width:355px){
+  html[data-runtime="v12"] #tarot .tarot-gesture-hint{
+    font-size:6px;
+    letter-spacing:.055em;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-runtime="v12"] #tarot .ritual-card-center .current.is-swiping,
+  html[data-runtime="v12"] #tarot .ritual-card-center .current.swipe-return,
+  html[data-runtime="v12"] #tarot .ritual-card-center .current.swipe-edge,
+  html[data-runtime="v12"] #tarot .ritual-card-center .current.swipe-exit-next,
+  html[data-runtime="v12"] #tarot .ritual-card-center .current.swipe-exit-previous,
+  html[data-runtime="v12"] #tarot .ritual-card-center .current.swipe-enter-next,
+  html[data-runtime="v12"] #tarot .ritual-card-center .current.swipe-enter-previous{
+    animation:none!important;
+    transition:none!important;
+    filter:none!important;
+  }
+}

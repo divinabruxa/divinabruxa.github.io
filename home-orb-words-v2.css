@@ -1,0 +1,234 @@
+/* DIVINA BRUXA — COROA TEXTUAL DA ORBE V2
+   As palavras vivem acima e abaixo da esfera, nunca sobre a imagem.
+   O motor WebGL, o tamanho, os gestos, o menu e as skins permanecem intactos. */
+
+html[data-runtime="v12"] #app > #home.home-screen.active{
+  display:flex!important;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  grid-template-rows:none;
+  place-items:initial;
+  width:100%;
+  max-width:none;
+  min-height:100svh;
+  padding:calc(106px + env(safe-area-inset-top)) 14px calc(118px + env(safe-area-inset-bottom));
+  overflow:visible;
+}
+
+/* A antiga inscrição interna é removida: o interior volta a ser somente universo. */
+html[data-runtime="v12"] #home #orb .orb-sacred-voice{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+}
+
+html[data-runtime="v12"] #app > #home.home-screen.active > .home-copy{
+  position:relative;
+  z-index:3;
+  display:block!important;
+  flex:none;
+  width:min(100%,720px);
+  margin:clamp(4px,1.8svh,18px) auto 0;
+  padding:0 4px;
+  text-align:center;
+  animation:home-words-crown-arrive .82s cubic-bezier(.18,.82,.2,1) both;
+}
+
+html[data-runtime="v12"] #app > #home.home-screen.active > .home-copy::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  left:50%;
+  top:43%;
+  width:min(94vw,680px);
+  height:190%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+  background:radial-gradient(ellipse,rgba(121,37,169,.13),rgba(71,19,111,.045) 43%,transparent 72%);
+  filter:blur(13px);
+}
+
+html[data-runtime="v12"] #app > #home.home-screen.active > .home-copy .eyebrow{
+  margin:0;
+  color:#e7c77c;
+  font:600 clamp(9px,2.25vw,12px)/1.3 Georgia,"Times New Roman",serif;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  text-shadow:0 0 18px rgba(231,199,124,.20);
+}
+
+html[data-runtime="v12"] #app > #home.home-screen.active > .home-copy h1{
+  width:auto!important;
+  max-width:none!important;
+  margin:clamp(10px,1.5svh,15px) auto 9px!important;
+  overflow:visible!important;
+  color:#f7eee6;
+  font:400 clamp(50px,10vw,79px)/.88 Georgia,"Times New Roman",serif!important;
+  letter-spacing:-.045em!important;
+  overflow-wrap:normal!important;
+  white-space:normal!important;
+  text-align:center!important;
+  text-wrap:balance;
+  text-shadow:0 8px 34px rgba(0,0,0,.50),0 0 28px rgba(193,81,233,.16);
+}
+
+html[data-runtime="v12"] #app > #home.home-screen.active > .home-copy h1 span{
+  display:inline-block;
+  margin-left:5px!important;
+  color:#f5d98f;
+  font-size:.27em;
+  vertical-align:.25em;
+  text-shadow:0 0 11px rgba(255,231,172,.58),0 0 24px rgba(218,83,255,.44);
+}
+
+html[data-runtime="v12"] #app > #home.home-screen.active > .home-copy .intro{
+  max-width:620px;
+  margin:0 auto!important;
+  color:#b8aebc;
+  font:400 clamp(14px,3.6vw,19px)/1.42 Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  letter-spacing:0;
+  text-wrap:balance;
+}
+
+/* A esfera ocupa sua própria faixa; nenhum texto entra em seu círculo. */
+html[data-runtime="v12"] #app > #home.home-screen.active > .orb-stage-ref{
+  position:relative;
+  z-index:2;
+  display:grid!important;
+  flex:none;
+  margin:clamp(13px,2svh,22px) auto 0!important;
+}
+
+html[data-runtime="v12"] #app > #home.home-screen.active > .awaken{
+  position:relative;
+  z-index:3;
+  display:block!important;
+  flex:none;
+  margin:clamp(15px,2.3svh,25px) 0 0!important;
+  color:#f2d999;
+  font:600 clamp(10px,2.5vw,13px)/1.35 Georgia,"Times New Roman",serif;
+  letter-spacing:.24em;
+  text-align:center;
+  text-transform:uppercase;
+  text-shadow:0 0 13px rgba(255,228,168,.26),0 0 28px rgba(194,70,235,.19);
+  animation:home-words-call-arrive .68s .32s cubic-bezier(.18,.82,.2,1) both;
+}
+
+html[data-runtime="v12"] #app > #home.home-screen.active > .orb-status{
+  position:relative;
+  z-index:3;
+  display:block!important;
+  flex:none;
+  min-height:19px;
+  margin:8px 0 0!important;
+  color:#ada2b2;
+  font:400 clamp(11px,2.8vw,14px)/1.4 Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  text-align:center;
+  text-wrap:balance;
+  animation:home-words-call-arrive .68s .39s cubic-bezier(.18,.82,.2,1) both;
+}
+
+html[data-runtime="v12"] #app > #home.home-screen.active > .touch-hint{
+  display:none!important;
+}
+
+/* Ao abrir o menu, a coroa se recolhe como já acontecia no visual aprovado. */
+html[data-runtime="v12"] #app > #home.home-screen.active.orb-menu-open > .home-copy,
+html[data-runtime="v12"] #app > #home.home-screen.active.orb-menu-open > .awaken,
+html[data-runtime="v12"] #app > #home.home-screen.active.orb-menu-open > .orb-status,
+html[data-runtime="v12"] #app > #home.home-screen.active.orb-menu-transition > .home-copy,
+html[data-runtime="v12"] #app > #home.home-screen.active.orb-menu-transition > .awaken,
+html[data-runtime="v12"] #app > #home.home-screen.active.orb-menu-transition > .orb-status{
+  opacity:0!important;
+  filter:blur(3px);
+  pointer-events:none;
+  animation:none!important;
+}
+
+@keyframes home-words-crown-arrive{
+  from{opacity:0;transform:translateY(-15px);filter:blur(6px)}
+  to{opacity:1;transform:none;filter:none}
+}
+
+@keyframes home-words-call-arrive{
+  from{opacity:0;transform:translateY(9px)}
+  to{opacity:1;transform:none}
+}
+
+@media(max-width:430px){
+  html[data-runtime="v12"] #app > #home.home-screen.active{
+    padding:calc(96px + env(safe-area-inset-top)) 10px calc(108px + env(safe-area-inset-bottom));
+  }
+
+  html[data-runtime="v12"] #app > #home.home-screen.active > .home-copy{
+    margin-top:clamp(2px,1.2svh,11px);
+  }
+
+  html[data-runtime="v12"] #app > #home.home-screen.active > .home-copy .eyebrow{
+    font-size:clamp(8px,2.35vw,10px);
+    letter-spacing:.29em;
+  }
+
+  html[data-runtime="v12"] #app > #home.home-screen.active > .home-copy h1{
+    margin-top:clamp(9px,1.3svh,13px)!important;
+    margin-bottom:8px!important;
+    font-size:clamp(47px,14vw,62px)!important;
+  }
+
+  html[data-runtime="v12"] #app > #home.home-screen.active > .home-copy .intro{
+    width:min(100%,360px);
+    padding:0 4px;
+    font-size:clamp(13px,3.7vw,15px);
+  }
+
+  html[data-runtime="v12"] #app > #home.home-screen.active > .orb-stage-ref{
+    margin-top:clamp(10px,1.7svh,16px)!important;
+  }
+
+  html[data-runtime="v12"] #app > #home.home-screen.active > .awaken{
+    margin-top:clamp(13px,2svh,19px)!important;
+    font-size:clamp(9px,2.7vw,11px);
+    letter-spacing:.18em;
+  }
+
+  html[data-runtime="v12"] #app > #home.home-screen.active > .orb-status{
+    margin-top:7px!important;
+    font-size:11px;
+  }
+}
+
+@media(max-width:360px){
+  html[data-runtime="v12"] #app > #home.home-screen.active > .home-copy h1{
+    font-size:clamp(43px,13.6vw,52px)!important;
+  }
+  html[data-runtime="v12"] #app > #home.home-screen.active > .home-copy .intro{font-size:12px}
+}
+
+@media(max-height:700px) and (orientation:portrait){
+  html[data-runtime="v12"] #app > #home.home-screen.active{
+    padding-top:calc(86px + env(safe-area-inset-top));
+  }
+  html[data-runtime="v12"] #app > #home.home-screen.active > .home-copy h1{font-size:clamp(42px,12.8vw,55px)!important}
+  html[data-runtime="v12"] #app > #home.home-screen.active > .orb-stage-ref{margin-top:8px!important}
+  html[data-runtime="v12"] #app > #home.home-screen.active > .awaken{margin-top:10px!important}
+}
+
+@media(orientation:landscape) and (max-height:560px){
+  html[data-runtime="v12"] #app > #home.home-screen.active{
+    padding:76px 12px calc(98px + env(safe-area-inset-bottom));
+  }
+  html[data-runtime="v12"] #app > #home.home-screen.active > .home-copy{margin-top:0}
+  html[data-runtime="v12"] #app > #home.home-screen.active > .home-copy h1{font-size:38px!important;line-height:.9!important;margin:6px auto!important}
+  html[data-runtime="v12"] #app > #home.home-screen.active > .home-copy .intro{font-size:12px}
+  html[data-runtime="v12"] #app > #home.home-screen.active > .orb-stage-ref{margin-top:4px!important}
+  html[data-runtime="v12"] #app > #home.home-screen.active > .awaken{margin-top:6px!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-runtime="v12"] #app > #home.home-screen.active > .home-copy,
+  html[data-runtime="v12"] #app > #home.home-screen.active > .awaken,
+  html[data-runtime="v12"] #app > #home.home-screen.active > .orb-status{
+    animation:none!important;
+  }
+}

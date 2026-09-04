@@ -43,6 +43,17 @@ function installOfficialStructure(root) {
   if (wheel && !root.querySelector('#currentCardNav')) {
     wheel.insertAdjacentHTML('beforeend', '<nav id="currentCardNav" class="tarot-current-nav" aria-label="Navegação das cartas reveladas"><button id="currentCardPrev" type="button" aria-label="Mostrar carta anterior" disabled><span aria-hidden="true">←</span><small>ANTERIOR</small></button><button id="currentCardNext" type="button" aria-label="Mostrar próxima carta" disabled><span aria-hidden="true">→</span><small>PRÓXIMA</small></button></nav>');
   }
+  if (wheel && !root.querySelector('#tarotGestureHint')) {
+    wheel.insertAdjacentHTML('beforeend', '<p id="tarotGestureHint" class="tarot-gesture-hint"><span aria-hidden="true">←</span> DESLIZE PARA NAVEGAR <span aria-hidden="true">→</span></p>');
+  }
+
+  const stage = root.querySelector('#current');
+  if (stage) {
+    stage.tabIndex = 0;
+    stage.setAttribute('role', 'group');
+    stage.setAttribute('aria-roledescription', 'carta do Tarot Livre');
+    stage.setAttribute('aria-describedby', 'tarotGestureHint');
+  }
 
   const altar = root.querySelector('#revealAltar');
   if (altar && !root.querySelector('#tarotBirthFx')) {
@@ -61,12 +72,14 @@ export class FreeTarot {
     this.orbState = root.querySelector('#orbState'); this.shuffleButton = root.querySelector('#shuffleDeck'); this.resetButton = root.querySelector('#resetDeck');
     this.magicFx = root.querySelector('#tarotBirthFx'); this.magicAnnouncement = root.querySelector('#tarotMagicAnnouncement');
     this.currentNav = root.querySelector('#currentCardNav'); this.currentPrev = root.querySelector('#currentCardPrev'); this.currentNext = root.querySelector('#currentCardNext');
+    this.gestureHint = root.querySelector('#tarotGestureHint');
     this.viewport = root.querySelector('#realTableViewport'); this.compactButton = root.querySelector('#tableCompact'); this.scrollPrevButton = root.querySelector('#tableScrollPrev'); this.scrollNextButton = root.querySelector('#tableScrollNext'); this.viewHint = root.querySelector('#tableViewHint');
     this.lightbox = root.querySelector('#cardLightbox'); this.lightboxImage = root.querySelector('#lightboxImage'); this.lightboxTitle = root.querySelector('#lightboxTitle'); this.lightboxPosition = root.querySelector('#lightboxPosition'); this.lightboxPrev = root.querySelector('#lightboxPrev'); this.lightboxNext = root.querySelector('#lightboxNext'); this.lightboxClose = root.querySelector('#closeCardLightbox');
     this.orbitalCards = root.querySelector('#orbitalCards'); this.ritualRevealed = root.querySelector('#ritualRevealed'); this.ritualRemaining = root.querySelector('#ritualRemaining');
     this.backupButton = root.querySelector('#saveTableBackup'); this.restoreButton = root.querySelector('#restoreTableBackup'); this.backupInput = root.querySelector('#tableBackupInput'); this.saveState = root.querySelector('#tableSaveState');
     this.editorialState = root.querySelector('#tarotEditorialState');
     this.selected = -1; this.lightboxIndex = -1; this.lightboxTrigger = null; this.compactView = this.storage.get('free-tarot-table-compact', false) === true; this.drawing = false; this.releaseTimer = 0; this.scrollFrame = 0; this.lastTableScrollAt = -Infinity;
+    this.cardGesture = null; this.gestureAnimating = false; this.gestureTimer = 0;
     this.root.dataset.revealPhase = 'idle';
     this.coordinator = new TarotSessionCoordinator({ storage: this.storage, key: STORAGE_KEY });
     this.state = normalizeTarotState(this.storage.get(STORAGE_KEY, null)) ?? createTarotState();
@@ -83,8 +96,14 @@ export class FreeTarot {
     this.orb.addEventListener('click', () => this.draw());
     this.resetButton.addEventListener('click', () => this.reset());
     this.shuffleButton.addEventListener('click', () => this.reshuffle());
-    this.currentPrev.addEventListener('click', () => this.moveCurrent(-1));
-    this.currentNext.addEventListener('click', () => this.moveCurrent(1));
+    this.currentPrev.addEventListener('click', () => this.navigateCurrent(-1, 'botão'));
+    this.currentNext.addEventListener('click', () => this.navigateCurrent(1, 'botão'));
+    this.stage.addEventListener('pointerdown', event => this.beginCardGesture(event));
+    this.stage.addEventListener('pointermove', event => this.moveCardGesture(event));
+    this.stage.addEventListener('pointerup', event => this.endCardGesture(event));
+    this.stage.addEventListener('pointercancel', event => this.endCardGesture(event, true));
+    this.stage.addEventListener('keydown', event => this.handleCardKeydown(event));
+    this.stage.addEventListener('dragstart', event => event.preventDefault());
     this.realTable.addEventListener('click', event => {
       const now = globalThis.performance?.now?.() ?? Date.now();
       if (event.detail > 0 && now - this.lastTableScrollAt < 120) return;
@@ -181,6 +200,125 @@ export class FreeTarot {
     this.orbState.textContent = this.state.completed ? 'MESA COMPLETA' : 'REVELAR CARTA';
   }
 
+  beginCardGesture(event) {
+    if (this.drawing || this.gestureAnimating || this.selected < 0 || event.isPrimary === false) return false;
+    if (event.pointerType === 'mouse' && event.button !== 0) return false;
+    globalThis.clearTimeout(this.gestureTimer);
+    this.stage.classList.remove('swipe-return', 'swipe-edge', 'swipe-exit-next', 'swipe-exit-previous', 'swipe-enter-next', 'swipe-enter-previous');
+    this.stage.style.setProperty('--tarot-swipe-x', '0px');
+    this.stage.style.setProperty('--tarot-swipe-tilt', '0deg');
+    this.stage.style.setProperty('--tarot-swipe-opacity', '1');
+    this.stage.classList.add('is-swiping');
+    this.cardGesture = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      lastX: event.clientX,
+      lastY: event.clientY,
+      startedAt: globalThis.performance?.now?.() ?? Date.now(),
+      horizontal: false,
+      vertical: false
+    };
+    return true;
+  }
+
+  moveCardGesture(event) {
+    const gesture = this.cardGesture;
+    if (!gesture || gesture.pointerId !== event.pointerId || gesture.vertical) return false;
+    gesture.lastX = event.clientX; gesture.lastY = event.clientY;
+    const dx = event.clientX - gesture.startX; const dy = event.clientY - gesture.startY;
+    const absX = Math.abs(dx); const absY = Math.abs(dy);
+    if (!gesture.horizontal) {
+      if (absY > 12 && absY > absX * 1.12) { gesture.vertical = true; this.returnCardGesture(false); return false; }
+      if (absX < 9 || absX <= absY * 1.08) return false;
+      gesture.horizontal = true;
+      try { this.stage.setPointerCapture?.(event.pointerId); } catch { /* captura opcional */ }
+    }
+    event.preventDefault();
+    const direction = dx >= 0 ? 1 : -1;
+    const canMove = this.selected + direction >= 0 && this.selected + direction < this.state.revealed.length;
+    const visualX = Math.max(-112, Math.min(112, dx * (canMove ? .72 : .18)));
+    this.stage.style.setProperty('--tarot-swipe-x', `${visualX}px`);
+    this.stage.style.setProperty('--tarot-swipe-tilt', `${Math.max(-4.2, Math.min(4.2, visualX / 27))}deg`);
+    this.stage.style.setProperty('--tarot-swipe-opacity', String(Math.max(.76, 1 - Math.abs(visualX) / 430)));
+    return true;
+  }
+
+  endCardGesture(event, cancelled = false) {
+    const gesture = this.cardGesture;
+    if (!gesture || gesture.pointerId !== event.pointerId) return false;
+    const endX = Number.isFinite(event.clientX) ? event.clientX : gesture.lastX;
+    const endY = Number.isFinite(event.clientY) ? event.clientY : gesture.lastY;
+    const dx = endX - gesture.startX; const dy = endY - gesture.startY;
+    const elapsed = (globalThis.performance?.now?.() ?? Date.now()) - gesture.startedAt;
+    try { if (this.stage.hasPointerCapture?.(event.pointerId)) this.stage.releasePointerCapture?.(event.pointerId); } catch { /* captura opcional */ }
+    this.cardGesture = null;
+    const threshold = Math.min(62, Math.max(42, this.stage.clientWidth * .15));
+    if (!cancelled && gesture.horizontal && Math.abs(dx) >= threshold && Math.abs(dx) > Math.abs(dy) * 1.12 && elapsed < 1100) {
+      return this.navigateCurrent(dx > 0 ? 1 : -1, 'gesto');
+    }
+    this.returnCardGesture(false);
+    return false;
+  }
+
+  returnCardGesture(atEdge = false) {
+    this.cardGesture = null;
+    this.stage.classList.remove('is-swiping', 'swipe-exit-next', 'swipe-exit-previous', 'swipe-enter-next', 'swipe-enter-previous');
+    this.stage.classList.add(atEdge ? 'swipe-edge' : 'swipe-return');
+    this.stage.style.setProperty('--tarot-swipe-x', '0px');
+    this.stage.style.setProperty('--tarot-swipe-tilt', '0deg');
+    this.stage.style.setProperty('--tarot-swipe-opacity', '1');
+    globalThis.clearTimeout(this.gestureTimer);
+    this.gestureTimer = globalThis.setTimeout(() => {
+      this.stage.classList.remove('swipe-return', 'swipe-edge');
+      this.stage.style.removeProperty('--tarot-swipe-x');
+      this.stage.style.removeProperty('--tarot-swipe-tilt');
+      this.stage.style.removeProperty('--tarot-swipe-opacity');
+    }, 320);
+  }
+
+  resetCardGestureVisual() {
+    this.cardGesture = null;
+    this.stage.classList.remove('is-swiping', 'swipe-return', 'swipe-edge', 'swipe-exit-next', 'swipe-exit-previous', 'swipe-enter-next', 'swipe-enter-previous');
+    this.stage.style.removeProperty('--tarot-swipe-x');
+    this.stage.style.removeProperty('--tarot-swipe-tilt');
+    this.stage.style.removeProperty('--tarot-swipe-opacity');
+  }
+
+  navigateCurrent(direction, source = 'botão') {
+    if (this.drawing || this.gestureAnimating) return false;
+    const next = this.selected + direction;
+    if (next < 0 || next >= this.state.revealed.length) { this.returnCardGesture(true); return false; }
+    if (this.reducedMotion()) {
+      this.resetCardGestureVisual();
+      const moved = this.moveCurrent(direction); if (moved) this.announceCardNavigation(source);
+      return moved;
+    }
+    this.gestureAnimating = true; this.resetCardGestureVisual(); globalThis.clearTimeout(this.gestureTimer);
+    this.stage.classList.add(direction > 0 ? 'swipe-exit-next' : 'swipe-exit-previous');
+    this.gestureTimer = globalThis.setTimeout(() => {
+      this.moveCurrent(direction);
+      this.stage.classList.add(direction > 0 ? 'swipe-enter-next' : 'swipe-enter-previous');
+      this.announceCardNavigation(source);
+      this.gestureTimer = globalThis.setTimeout(() => {
+        this.stage.classList.remove('swipe-enter-next', 'swipe-enter-previous');
+        this.gestureAnimating = false;
+      }, 380);
+    }, 170);
+    return true;
+  }
+
+  announceCardNavigation(source) {
+    const card = CARDS[this.state.revealed[this.selected]]; if (!card || !this.magicAnnouncement) return;
+    const prefix = source === 'gesto' ? 'Navegação por gesto. ' : '';
+    this.magicAnnouncement.textContent = `${prefix}${card.name}, direta. Carta ${this.selected + 1} de ${this.state.revealed.length} reveladas.`;
+  }
+
+  handleCardKeydown(event) {
+    if (event.altKey || event.ctrlKey || event.metaKey || (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight')) return;
+    event.preventDefault(); this.navigateCurrent(event.key === 'ArrowRight' ? 1 : -1, 'teclado');
+  }
+
   moveCurrent(direction) {
     const next = this.selected + direction;
     if (next < 0 || next >= this.state.revealed.length) return false;
@@ -194,16 +332,18 @@ export class FreeTarot {
     this.currentNav.dataset.empty = String(empty);
     this.currentPrev.disabled = empty || this.selected <= 0;
     this.currentNext.disabled = empty || this.selected >= total - 1;
+    if (this.gestureHint) this.gestureHint.textContent = empty ? 'REVELE A PRIMEIRA CARTA' : '← ESQUERDA: ANTERIOR · DIREITA: PRÓXIMA →';
   }
 
   show(index, animate = true, scroll = false) {
     const card = CARDS[this.state.revealed[index]]; if (!isFreeTarotCard(card)) return;
     this.selected = index; this.stage.className = `current table-preview${animate ? ' birth' : ''}`;
     this.stage.innerHTML = `${cardImageMarkup(card, { alt: `${card.name}, direta`, priority: 'high' })}${freeCardLabel(card)}`;
+    this.stage.setAttribute('aria-label', `${card.name}, direta. Carta ${index + 1} de ${this.state.revealed.length}. Use as setas ou deslize para navegar.`);
     this.realTable.querySelectorAll('[data-index]').forEach(button => button.classList.toggle('selected', Number(button.dataset.index) === index));
     this.orbitalCards.querySelectorAll('[data-orbit-index]').forEach(button => button.classList.toggle('selected', Number(button.dataset.orbitIndex) === index));
     this.updateCurrentControls();
-    if (animate) globalThis.setTimeout(() => this.stage.classList.remove('birth'), 1450);
+    if (animate) globalThis.setTimeout(() => this.stage.classList.remove('birth'), 1320);
     if (scroll) this.altar.scrollIntoView({ behavior: this.reducedMotion() ? 'auto' : 'smooth', block: 'start' });
   }
 
@@ -250,17 +390,17 @@ export class FreeTarot {
     }).join('');
     this.renderOrbit(landing); this.centerTablePosition(landing); globalThis.requestAnimationFrame?.(() => this.updateScrollControls());
     if (total) { if (this.selected < 0 || this.selected >= total) this.selected = total - 1; this.show(this.selected, false, false); }
-    else { this.selected = -1; this.stage.className = 'current table-preview empty'; this.stage.innerHTML = EMPTY_ALTAR; }
+    else { this.selected = -1; this.stage.className = 'current table-preview empty'; this.stage.innerHTML = EMPTY_ALTAR; this.stage.setAttribute('aria-label', 'Nenhuma carta revelada. Toque na Orbe para começar.'); }
     this.updateCurrentControls();
   }
 
   async reset(force = false) {
-    if (this.drawing) return false;
+    if (this.drawing || this.gestureAnimating) return false;
     if (this.state.revealed.length > 0 && force !== true && globalThis.confirm && !globalThis.confirm('Apagar as cartas desta mesa e iniciar um novo baralho?')) return false;
     this.state = await this.coordinator.commit(() => resetTarotState()); this.selected = -1; this.closeLightbox(); this.render(); preloadCardImages(this.state.waiting, 3); announce('Uma nova Mesa Real foi preparada.'); return true;
   }
   async reshuffle() {
-    if (this.drawing || this.state.waiting.length < 2) return false;
+    if (this.drawing || this.gestureAnimating || this.state.waiting.length < 2) return false;
     const revealedBefore = this.state.revealed.join(','); this.state = await this.coordinator.commit(latest => shuffleRemainingCards(latest)); if (!this.state.revealed.join(',').startsWith(revealedBefore)) throw new Error('As cartas reveladas não podem ser movidas.'); this.render(); preloadCardImages(this.state.waiting, 3); globalThis.navigator?.vibrate?.(16); announce(`${this.state.waiting.length} cartas restantes foram embaralhadas.`); return true;
   }
 
