@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V16 · SINCRONISMO TOTAL DAS ORBES */
-const CACHE='divina-bruxa-v16-orb-sync-1';
+/* DIVINA BRUXA — SERVICE WORKER V18 · TAROT LIVRE FLUIDO */
+const CACHE='divina-bruxa-v18-tarot-ios-1';
 
 const REQUIRED=[
   './',
@@ -15,9 +15,8 @@ const REQUIRED=[
   './tarot-data.js',
   './tarot-image-runtime.js',
   './tarot-editorial-policy.js',
-  './tarot-livre-exact-visual-v1.css',
-  './tarot-livre-polish-v1.css',
-  './tarot-livre-polish-v1.js',
+  './tarot-livre-official-v1.css',
+  './tarot-livre-ios-v1.css',
   './tarot-temple-background-v1.webp',
   './orb-skin-release-v1.css',
   './orb-skin-release-v1.js',
@@ -29,8 +28,8 @@ const WARM=[
   './app.css','./motion.css','./update-04.css','./update-05.css','./update-06.css','./update-08.css','./update-09.css','./update-11.css',
   './visual-v68.css','./runtime-v12.css','./COSMIC-DESIGN-SYSTEM-V10.css','./PAGE-INTERIORS-V10.css','./PORTAL-TRANSITIONS-V10.css',
   './skins-v6.css','./cosmic-design-system-v1.css','./menu-ring-v8.css','./home-orb-only-v1.css','./home-orb-words-v2.css',
-  './tarot-table-v5.css','./tarot-ritual-v5.css','./tarot-controls-v5.css','./tarot-editorial-v5.css','./tarot-livre-magic-v1.css',
-  './tarot-livre-official-v1.css','./tarot-livre-reveal-magic-v1.css','./tarot-livre-gestures-v1.css','./spreads-v5.css',
+  './tarot-table-v5.css','./tarot-ritual-v5.css','./tarot-controls-v5.css','./tarot-editorial-v5.css',
+  './spreads-v5.css',
   './card-library-v5.css','./ai-v5.css','./premium-v5.css','./consultation-v5.css','./notification-v5.css','./admin-analytics-v1.css',
   './musica-videos-cosmica-v1.css','./store-v5.css','./school-v5.css','./journal-v5.css','./fallback-shell-v1.css','./pwa-final-v1.css',
   './portal-transition-v10.js','./navigation.js','./orb-engine-v68.js','./mini-orb-engine.js','./skins-v6.js','./skin-catalog-v6.js',

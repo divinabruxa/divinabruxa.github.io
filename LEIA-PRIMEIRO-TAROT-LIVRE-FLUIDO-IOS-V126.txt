@@ -1,0 +1,69 @@
+DIVINA BRUXA — TAROT LIVRE
+CORREÇÃO VISUAL E DE FLUIDEZ V126
+
+ESTA É A ETAPA PRIORITÁRIA DO TAROT LIVRE.
+A próxima página só será iniciada depois da aprovação desta tela.
+
+O QUE MUDA
+
+1. O Tarot Livre volta à composição direta da imagem de referência:
+   - O Portal das 78 Cartas;
+   - título Tarot Livre e contador central;
+   - uma carta grande no centro;
+   - setas circulares à esquerda e à direita;
+   - Orbe Revelar Carta abaixo da carta;
+   - dois botões em formato de cápsula;
+   - Cartas Reveladas em seis colunas;
+   - cenário do templo cósmico em tela cheia.
+
+2. A navegação por gesto foi removida por completo.
+
+3. NOVA REGRA DAS SETAS
+   - seta esquerda: volta para a carta anterior;
+   - seta direita: mostra a próxima carta já revelada;
+   - quando a carta atual é a última, a seta direita revela uma carta nova;
+   - com a mesa vazia, a seta direita revela a primeira carta;
+   - as setas do teclado seguem a mesma regra.
+
+4. FLUIDEZ
+   - removidas as camadas antigas de partículas, portais e filtros animados;
+   - removido o rastreamento contínuo do dedo e do ponteiro;
+   - removido o som adicional e seu motor desta tela;
+   - animação da carta feita somente com opacity e transform;
+   - duração curta e curva suave inspirada no iOS;
+   - próxima carta pré-carregada;
+   - arquivo de cartas com contenção de pintura;
+   - nenhuma animação infinita no Tarot Livre;
+   - modo de movimento reduzido respeitado.
+
+5. REGRAS PRESERVADAS
+   - 78 cartas;
+   - nenhuma repetição;
+   - cartas sempre diretas;
+   - embaralhar somente as cartas restantes;
+   - recomeçar do zero;
+   - mesa salva no aparelho;
+   - a Orbe Revelar Carta acompanha a skin ativa;
+   - Home, orbe principal, menu e dock não são alterados.
+
+COMO INSTALAR
+
+Envie TODOS os 7 arquivos deste ZIP diretamente para a raiz do GitHub.
+Não crie pasta.
+
+SUBSTITUA:
+- index.html
+- app.js
+- tarot-engine.js
+- sw.js
+
+ADICIONE:
+- tarot-livre-ios-v1.css
+- tarot-temple-background-v1.webp
+- LEIA-PRIMEIRO-TAROT-LIVRE-FLUIDO-IOS-V126.txt
+
+Depois do envio, aguarde o GitHub Pages publicar.
+Feche o site ou aplicativo por completo e abra novamente para o novo cache V18 entrar.
+
+ARQUIVOS: 7
+FORMATO: ZIP PLANO, SEM PASTAS
