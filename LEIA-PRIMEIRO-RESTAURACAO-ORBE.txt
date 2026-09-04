@@ -1,0 +1,14 @@
+RESTAURAÇÃO EMERGENCIAL — ORBE E MENU
+
+Envie na raiz do GitHub:
+1. SUBSTITUA index.html
+2. SUBSTITUA pwa-final-v1.css
+3. ADICIONE MANIFESTO-RESTAURACAO-ORBE-MENU.json
+4. ADICIONE LEIA-PRIMEIRO-RESTAURACAO-ORBE.txt
+
+Esta correção remove o CSS global que podia alterar o gesto contínuo da Orbe.
+O index deixa de carregar pwa-final-v1.css; o arquivo fica neutro como segurança.
+Não altere orb-engine-v68.js, menu-ring-v8.css, navigation.js ou skins.
+Não apague arquivos e não altere CNAME.
+
+Depois da publicação, responda INSTALADO para eu testar toque, arrasto/giro, duplo toque, abrir/fechar menu e skins.

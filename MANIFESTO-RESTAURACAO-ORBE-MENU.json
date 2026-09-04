@@ -1,0 +1,8 @@
+{
+  "tipo": "correcao-emergencial",
+  "objetivo": "Restaurar a fluidez original da Orbe e do menu orbital.",
+  "causa": "Regras globais touch-action/contain da Macroetapa 14 podiam interferir nos gestos do motor.",
+  "arquivos_substituir": ["index.html", "pwa-final-v1.css"],
+  "efeitos": ["remove touch-action global", "remove contain de telas", "preserva motor e geometria anteriores", "preserva skins"],
+  "status": "staging; aguarda upload manual no GitHub"
+}
