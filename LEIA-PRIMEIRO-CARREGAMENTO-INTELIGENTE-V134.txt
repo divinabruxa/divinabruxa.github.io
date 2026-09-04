@@ -1,0 +1,61 @@
+DIVINA BRUXA — V134
+CARREGAMENTO INTELIGENTE · MUNDOS SOB DEMANDA
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+
+1. Abra este ZIP e extraia os arquivos.
+2. Envie TODOS os 9 arquivos diretamente para a raiz do repositório.
+3. Quando o GitHub perguntar, confirme a substituição dos arquivos com o mesmo nome.
+4. Não crie nenhuma pasta: o pacote já está totalmente plano.
+5. Não é necessário reenviar as imagens e Orbes da V133.
+6. Aguarde a publicação do GitHub Pages; depois feche totalmente o Safari e abra o site novamente.
+
+ARQUIVOS NOVOS
+
+- page-loader-v1.js
+- cosmic-media-v1.js
+- cosmic-media-v1.css
+- LEIA-PRIMEIRO-CARREGAMENTO-INTELIGENTE-V134.txt
+
+ARQUIVOS SUBSTITUÍDOS
+
+- index.html
+- app.js
+- visual-guard-v6.js
+- cosmic-visual-atlas-v1.js
+- sw.js
+
+O QUE ESTA MACROETAPA ENTREGA
+
+- A Home nasce primeiro; os motores dos outros mundos só carregam quando a pessoa vai entrar neles.
+- Os 32 módulos estáticos anteriores foram reduzidos a 11 módulos essenciais na abertura.
+- Tarot Livre, Carta do Dia, Biblioteca, Escola, Tiragens, Diário, Orbe IA, Loja, Consultas, Premium, Vídeos e Música continuam completos e passam a abrir sob demanda.
+- Foram eliminados três downloads antigos e invisíveis que somavam 5,10 MiB na primeira abertura.
+- Imagens do próprio site passam a usar cache-first depois do primeiro carregamento bem-sucedido.
+- Foi criada a base segura para as novas artes responsivas das próximas páginas: carregamento por mundo, decodificação assíncrona e entrada suave.
+- O fundo da Carta do Dia não é mais aquecido silenciosamente antes de a página ser visitada.
+- O cache offline foi renovado e não obriga mais todos os motores ocultos a serem baixados na instalação.
+
+PROTEÇÃO DO VISUAL APROVADO
+
+Esta versão NÃO altera:
+
+- tamanho, posição, motor ou gestos da Orbe principal;
+- palavras da Orbe das Realidades;
+- Menu Mágico e dock inferior;
+- aparência e funcionamento aprovados do Tarot Livre;
+- catálogo das 30 skins e sincronização de todas as Orbes;
+- artes das 78 cartas.
+
+TESTES FEITOS ANTES DA ENTREGA
+
+- sintaxe validada em todos os JavaScripts do pacote;
+- 25 importações conferidas contra os arquivos atuais do GitHub;
+- 14 motores e seus nomes exportados conferidos;
+- 31 arquivos essenciais e 33 recursos de aquecimento do PWA conferidos, sem referência quebrada;
+- pacote plano, sem pastas, duplicatas ou arquivos ausentes;
+- base V133 comparada com os arquivos que estão publicados no repositório.
+
+DEPOIS DE INSTALAR
+
+Escreva "Instalado". A próxima ação será auditar a V134 já publicada no iPhone/site real, percorrendo Home e todos os portais sob demanda. Depois seguimos para a V135 e começamos a primeira nova arte original, uma página por vez.

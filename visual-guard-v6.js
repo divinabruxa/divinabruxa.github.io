@@ -1,8 +1,18 @@
-const lockTargets='.orb-shell,.mini-orb,.home-orb-menu,.magic-menu';
-export function installVisualGuard(){
-  document.addEventListener('gesturestart',e=>{if(e.target.closest?.(lockTargets))e.preventDefault()},{passive:false});
-  document.addEventListener('touchmove',e=>{if(e.target.closest?.('.orb-shell'))e.preventDefault()},{passive:false});
-  const preload=['divina-orb-v68.png?v=76','divina-mini-orb-hd-v72.jpeg?v=72','cosmic-background.png'];
-  preload.forEach(src=>{const img=new Image();img.decoding='async';img.src=src;});
-  document.documentElement.dataset.visualBase='v77-plus';
+/* DIVINA BRUXA — GUARDA VISUAL V7 · CASCA LEVE
+   Protege os gestos aprovados sem antecipar imagens de páginas ocultas. */
+
+const lockTargets = '.orb-shell,.mini-orb,.home-orb-menu,.magic-menu';
+
+export function installVisualGuard() {
+  document.addEventListener('gesturestart', event => {
+    if (event.target.closest?.(lockTargets)) event.preventDefault();
+  }, { passive: false });
+
+  document.addEventListener('touchmove', event => {
+    if (event.target.closest?.('.orb-shell')) event.preventDefault();
+  }, { passive: false });
+
+  // A V133 já prepara somente a miniatura e a textura da skin ativa no <head>.
+  // Não baixar novamente PNGs antigos, a mini-Orbe legada ou fundos de telas ocultas.
+  document.documentElement.dataset.visualBase = 'v134-fast';
 }

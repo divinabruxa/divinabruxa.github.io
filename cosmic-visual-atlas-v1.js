@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — ATLAS VISUAL CÓSMICO V1
+/* DIVINA BRUXA — ATLAS VISUAL CÓSMICO V2
    Carrega cada mundo somente quando ele será visitado e revela a arte após a decodificação. */
 
 const ATLAS = Object.freeze({
@@ -99,7 +99,3 @@ document.addEventListener('visibilitychange', () => {
 });
 
 revealActiveWorld();
-
-const warmDaily = () => prepare('daily', { priority: 'low' });
-if ('requestIdleCallback' in window) window.requestIdleCallback(warmDaily, { timeout: 4200 });
-else window.setTimeout(warmDaily, 2400);

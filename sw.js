@@ -1,6 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V25 · ORBES INSTANTÂNEAS */
-const CACHE='divina-bruxa-v25-orbes-instantaneas';
-const FAST_IMAGE=/(?:divina-icon-fast-v1\.png|(?:divina-orb|skin-[^/]+)-(?:fast|thumb)-v1\.webp)$/;
+/* DIVINA BRUXA — SERVICE WORKER V26 · MUNDOS SOB DEMANDA */
+const CACHE='divina-bruxa-v26-mundos-sob-demanda';
 
 const REQUIRED=[
   './',
@@ -8,6 +7,9 @@ const REQUIRED=[
   './offline.html',
   './manifest.webmanifest',
   './app.js',
+  './page-loader-v1.js',
+  './cosmic-media-v1.js',
+  './cosmic-media-v1.css',
   './runtime-v12.js',
   './runtime-v12.css',
   './PAGE-INTERIORS-V10.css',
@@ -18,13 +20,13 @@ const REQUIRED=[
   './skin-catalog-v6.js',
   './skins-v6.js',
   './skins-v6.css',
-  './tarot-engine.js',
-  './tarot-session.js',
-  './tarot-data.js',
-  './tarot-image-runtime.js',
-  './tarot-editorial-policy.js',
-  './tarot-livre-official-v1.css',
-  './tarot-livre-ios-v1.css',
+  './config.js',
+  './auth-client-v6.js',
+  './navigation.js',
+  './orb-engine-v68.js',
+  './mini-orb-engine.js',
+  './visual-guard-v6.js',
+  './tarot-experience-v6.js',
   './orb-skin-release-v1.css',
   './orb-skin-release-v1.js',
   './cosmic-visual-atlas-v1.css',
@@ -39,17 +41,10 @@ const WARM=[
   './visual-v68.css','./COSMIC-DESIGN-SYSTEM-V10.css',
   './cosmic-design-system-v1.css','./menu-ring-v8.css','./home-orb-only-v1.css','./home-orb-words-v2.css',
   './tarot-table-v5.css','./tarot-ritual-v5.css','./tarot-controls-v5.css','./tarot-editorial-v5.css',
+  './tarot-livre-official-v1.css','./tarot-livre-ios-v1.css',
   './spreads-v5.css',
   './card-library-v5.css','./ai-v5.css','./premium-v5.css','./consultation-v5.css','./notification-v5.css','./admin-analytics-v1.css',
-  './musica-videos-cosmica-v1.css','./store-v5.css','./school-v5.css','./journal-v5.css','./fallback-shell-v1.css','./pwa-final-v1.css',
-  './navigation.js','./orb-engine-v68.js','./mini-orb-engine.js',
-  './storage.js','./config.js','./visual-guard-v6.js','./tarot-experience-v6.js','./tarot-continuity.js','./tarot-meanings.js',
-  './ritual-engine.js','./daily-policy.js','./daily-meaning-runtime.js','./card-library-engine.js','./card-library-policy.js',
-  './school-engine.js','./school-policy.js','./spreads-engine.js','./spreads-policy.js','./spread-synthesis.js','./journal-engine.js','./journal-policy.js',
-  './commerce-engine.js','./consultation-engine.js','./consultation-policy.js','./store-engine.js','./store-policy.js','./media-engine-v5.js','./media-policy.js',
-  './notification-engine.js','./notification-policy.js','./admin-engine.js','./admin-policy.js','./analytics-engine.js','./analytics-policy.js',
-  './privacy-engine.js','./privacy-policy.js','./pwa-engine.js','./trust-engine.js','./trust-policy.js','./auth-client-v6.js','./rhythm-v6.js',
-  './ecosystem-v6.js','./performance-v6.js','./ai-engine.js','./ai-policy.js','./ai-credits.js','./premium-engine.js','./premium-policy.js'
+  './musica-videos-cosmica-v1.css','./store-v5.css','./school-v5.css','./journal-v5.css','./fallback-shell-v1.css','./pwa-final-v1.css'
 ];
 
 self.addEventListener('install',event=>event.waitUntil((async()=>{
@@ -72,7 +67,7 @@ self.addEventListener('fetch',event=>{
   const navigation=event.request.mode==='navigate'||event.request.destination==='document';
 
   event.respondWith((async()=>{
-    if(sameOrigin&&FAST_IMAGE.test(url.pathname)){
+    if(sameOrigin&&event.request.destination==='image'){
       const cached=await caches.match(event.request,{ignoreSearch:true});
       if(cached) return cached;
       try{
