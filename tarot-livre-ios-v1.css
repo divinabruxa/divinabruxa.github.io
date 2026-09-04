@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — TAROT LIVRE · VISUAL DE REFERÊNCIA + FLUIDEZ IOS V126
+/* DIVINA BRUXA — TAROT LIVRE · VISUAL DE REFERÊNCIA + FLUIDEZ IOS V127
    Somente compositor: transform e opacity. Sem gesto, blur animado ou partículas contínuas. */
 
 html[data-runtime="v12"] #app>#tarot.tarot-livre-official{
@@ -17,7 +17,7 @@ html[data-runtime="v12"] #app>#tarot.tarot-livre-official{
   contain:layout style;
 }
 
-/* O mesmo santuário vertical da referência, sem camadas animadas por cima. */
+/* Santuário oficial enviado pela Divina Bruxa, sem recorte, zoom ou camadas animadas. */
 html[data-runtime="v12"] #app>#tarot.tarot-livre-official::before{
   content:"";
   position:absolute;
@@ -26,9 +26,7 @@ html[data-runtime="v12"] #app>#tarot.tarot-livre-official::before{
   display:block!important;
   pointer-events:none;
   opacity:1;
-  background:
-    linear-gradient(180deg,rgba(1,0,4,.08) 0,transparent 54%,rgba(1,0,4,.36) 76%,#010104 100%),
-    url("./tarot-temple-background-v1.webp?v=126") top center/min(100%,864px) auto no-repeat;
+  background:url("./tarot-temple-oficial-v127.jpeg") top center/min(100%,729px) auto no-repeat;
   mask-image:none;
   -webkit-mask-image:none;
   transform:translateZ(0);
@@ -195,7 +193,11 @@ html[data-runtime="v12"] #tarot .ritual-card-center .tarot-card-image{
   backface-visibility:hidden;
 }
 
-html[data-runtime="v12"] #tarot .ritual-card-center .card-label{display:none!important}
+html[data-runtime="v12"] #tarot .ritual-card-center .card-label{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+}
 
 html[data-runtime="v12"] #tarot .ritual-card-center .empty-card{
   position:absolute;
@@ -261,7 +263,7 @@ html[data-runtime="v12"] #tarot .tarot-current-nav button:focus-visible{outline:
 html[data-runtime="v12"] #tarot .table-orb{
   position:absolute;
   z-index:16;
-  top:610px;
+  top:642px;
   bottom:auto;
   left:50%;
   right:auto;
@@ -530,42 +532,42 @@ html[data-runtime="v12"] #tarot .card-lightbox::backdrop{background:rgba(1,0,4,.
 
 @media(max-width:640px){
   html[data-runtime="v12"] #app>#tarot.tarot-livre-official{
-    padding:calc(94px + env(safe-area-inset-top)) 7px calc(132px + env(safe-area-inset-bottom));
+    padding:calc(112px + env(safe-area-inset-top)) 7px calc(132px + env(safe-area-inset-bottom));
   }
 
   html[data-runtime="v12"] #app>#tarot.tarot-livre-official::before{
-    background:
-      linear-gradient(180deg,rgba(1,0,4,.06) 0,transparent 55%,rgba(1,0,4,.4) 78%,#010104 100%),
-      url("./tarot-temple-background-v1.webp?v=126") top center/100% auto no-repeat;
+    background:url("./tarot-temple-oficial-v127.jpeg") top center/100% auto no-repeat;
   }
 
   html[data-runtime="v12"] #tarot .section-head{padding:5px 4px 9px}
   html[data-runtime="v12"] #tarot .section-head .eyebrow{font-size:clamp(8px,2.25vw,10px);letter-spacing:.31em}
-  html[data-runtime="v12"] #tarot .section-head h2{margin:8px 0 5px;font-size:clamp(50px,14vw,62px)}
+  html[data-runtime="v12"] #tarot .section-head h2{margin:8px 0 5px;font-size:clamp(44px,12vw,52px)}
   html[data-runtime="v12"] #tarot .section-head #count{font-size:20px}
 
-  html[data-runtime="v12"] #tarot .ritual-altar{min-height:635px}
-  html[data-runtime="v12"] #tarot .ritual-wheel{height:435px;width:100%}
+  html[data-runtime="v12"] #tarot .ritual-altar{min-height:466px}
+  html[data-runtime="v12"] #tarot .ritual-wheel{height:360px;width:100%}
 
   html[data-runtime="v12"] #tarot .ritual-card-center .table-preview,
   html[data-runtime="v12"] #tarot .ritual-card-center .current.empty{
-    width:min(70vw,278px);
-    border-radius:15px;
+    width:min(54vw,222px);
+    border-radius:13px;
   }
 
-  html[data-runtime="v12"] #tarot .ritual-card-center .tarot-card-image{border-radius:11px}
+  html[data-runtime="v12"] #tarot .ritual-card-center .tarot-card-image{border-radius:9px}
 
-  html[data-runtime="v12"] #tarot .tarot-current-nav button{width:49px;height:49px}
-  html[data-runtime="v12"] #tarot .tarot-current-nav button:first-child{left:clamp(1px,2.2vw,12px)}
-  html[data-runtime="v12"] #tarot .tarot-current-nav button:last-child{right:clamp(1px,2.2vw,12px)}
-  html[data-runtime="v12"] #tarot .tarot-current-nav button span{font-size:1.28rem}
+  html[data-runtime="v12"] #tarot .tarot-current-nav button{width:42px;height:42px}
+  html[data-runtime="v12"] #tarot .tarot-current-nav button:first-child{left:clamp(5px,4vw,16px)}
+  html[data-runtime="v12"] #tarot .tarot-current-nav button:last-child{right:clamp(5px,4vw,16px)}
+  html[data-runtime="v12"] #tarot .tarot-current-nav button span{font-size:1.16rem}
 
-  html[data-runtime="v12"] #tarot .table-orb{top:446px;width:126px;height:126px}
-  html[data-runtime="v12"] #tarot .table-orb small{width:76px;max-width:76px;font-size:8px;letter-spacing:.12em}
-  html[data-runtime="v12"] #tarot .tarot-ios-flash{top:218px;width:min(72vw,300px)}
+  html[data-runtime="v12"] #tarot .table-orb{top:383px;width:94px;height:94px}
+  html[data-runtime="v12"] #tarot .table-orb-aura{inset:-7px}
+  html[data-runtime="v12"] #tarot .table-orb-image{inset:5px}
+  html[data-runtime="v12"] #tarot .table-orb small{width:62px;max-width:62px;font-size:7px;line-height:1.35;letter-spacing:.1em}
+  html[data-runtime="v12"] #tarot .tarot-ios-flash{top:180px;width:min(58vw,230px)}
 
   html[data-runtime="v12"] #tarot .tarot-gesture-hint{
-    top:calc(100% + 111px);
+    top:calc(100% + 84px);
     max-width:calc(100vw - 20px);
     font-size:clamp(6px,1.9vw,8px);
     letter-spacing:.13em;
@@ -581,13 +583,13 @@ html[data-runtime="v12"] #tarot .card-lightbox::backdrop{background:rgba(1,0,4,.
 }
 
 @media(max-width:355px){
-  html[data-runtime="v12"] #tarot .ritual-altar{min-height:570px}
-  html[data-runtime="v12"] #tarot .ritual-wheel{height:382px}
+  html[data-runtime="v12"] #tarot .ritual-altar{min-height:430px}
+  html[data-runtime="v12"] #tarot .ritual-wheel{height:330px}
   html[data-runtime="v12"] #tarot .ritual-card-center .table-preview,
-  html[data-runtime="v12"] #tarot .ritual-card-center .current.empty{width:min(68vw,230px)}
-  html[data-runtime="v12"] #tarot .tarot-current-nav button{width:42px;height:42px}
-  html[data-runtime="v12"] #tarot .table-orb{top:394px;width:111px;height:111px}
-  html[data-runtime="v12"] #tarot .tarot-gesture-hint{top:calc(100% + 95px);font-size:6px;letter-spacing:.09em}
+  html[data-runtime="v12"] #tarot .ritual-card-center .current.empty{width:min(55vw,184px)}
+  html[data-runtime="v12"] #tarot .tarot-current-nav button{width:38px;height:38px}
+  html[data-runtime="v12"] #tarot .table-orb{top:347px;width:86px;height:86px}
+  html[data-runtime="v12"] #tarot .tarot-gesture-hint{top:calc(100% + 76px);font-size:6px;letter-spacing:.09em}
 }
 
 @media(orientation:landscape) and (max-height:560px){

@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V18 · TAROT LIVRE FLUIDO */
-const CACHE='divina-bruxa-v18-tarot-ios-1';
+/* DIVINA BRUXA — SERVICE WORKER V19 · TAROT LIVRE REFERÊNCIA OFICIAL */
+const CACHE='divina-bruxa-v19-tarot-reference-2';
 
 const REQUIRED=[
   './',
@@ -17,7 +17,7 @@ const REQUIRED=[
   './tarot-editorial-policy.js',
   './tarot-livre-official-v1.css',
   './tarot-livre-ios-v1.css',
-  './tarot-temple-background-v1.webp',
+  './tarot-temple-oficial-v127.jpeg',
   './orb-skin-release-v1.css',
   './orb-skin-release-v1.js',
   './divina-orb-v68.png',

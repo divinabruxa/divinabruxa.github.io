@@ -1,0 +1,49 @@
+DIVINA BRUXA — TAROT LIVRE
+CORREÇÃO DE ENQUADRAMENTO OFICIAL V127
+
+OBJETIVO DESTA CORREÇÃO
+
+Deixar o Tarot Livre com a mesma composição da segunda imagem de referência:
+- o santuário cósmico enviado passa a ser o fundo oficial da página;
+- a carta fica centralizada sobre o portal, sem esconder o cenário;
+- no celular, a carta ocupa aproximadamente 54% da largura em vez de quase 70%;
+- a Orbe Revelar Carta fica abaixo da carta, com apenas uma aproximação mínima;
+- as setas ficam menores, simétricas e alinhadas ao centro da carta;
+- o título fica menor e não invade o cabeçalho;
+- o nome duplicado fora da carta permanece totalmente oculto;
+- a mesa continua com seis cartas por fileira.
+
+O QUE NÃO FOI ALTERADO
+
+- Home;
+- Orbe principal e seu motor;
+- menu mágico;
+- dock inferior;
+- troca global das skins;
+- regras das 78 cartas;
+- cartas sempre diretas e sem repetição;
+- seta esquerda volta;
+- seta direita avança ou revela uma nova carta;
+- Orbe revela uma nova carta;
+- embaralhar restantes e recomeçar do zero;
+- fluidez V126 sem gesto de arrastar.
+
+COMO INSTALAR
+
+Envie os 5 arquivos deste ZIP diretamente para a raiz do GitHub.
+Não crie pasta.
+
+SUBSTITUA:
+- index.html
+- tarot-livre-ios-v1.css
+- tarot-temple-oficial-v127.jpeg
+- sw.js
+
+ADICIONE:
+- LEIA-PRIMEIRO-TAROT-LIVRE-REFERENCIA-V127.txt
+
+Depois do envio, aguarde a publicação do GitHub Pages.
+Feche o site ou aplicativo completamente e abra novamente para o cache V19 entrar.
+
+ARQUIVOS: 5
+FORMATO: ZIP PLANO, SEM PASTAS
