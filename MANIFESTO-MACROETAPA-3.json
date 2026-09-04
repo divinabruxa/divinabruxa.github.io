@@ -1,0 +1,9 @@
+{
+  "produto": "Divina Bruxa — A Orbe das Realidades",
+  "macroetapa": 3,
+  "titulo": "Tarot Livre — ritual tátil e mesa estável",
+  "objetivo": "Reforçar a experiência de revelação com foco acessível, cores alinhadas à skin e grade fixa de 6 colunas.",
+  "arquivo_substituir": "tarot-livre-magic-v1.css",
+  "criterios_aceite": ["6 colunas por fileira", "sem cartas invertidas", "sem repetição preservada pelo motor", "foco de teclado visível", "Orbe e toque mantidos intactos"],
+  "status": "staging; aguarda upload manual no GitHub"
+}

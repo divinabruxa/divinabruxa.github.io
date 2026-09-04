@@ -1,0 +1,17 @@
+DIVINA BRUXA — MACROETAPA 3
+TAROT LIVRE — RITUAL TÁTIL E MESA ESTÁVEL
+
+Envie na raiz do GitHub:
+1. SUBSTITUA tarot-livre-magic-v1.css
+2. ADICIONE MANIFESTO-MACROETAPA-3.json
+3. ADICIONE LEIA-PRIMEIRO-MACROETAPA-3.txt
+
+Esta etapa não altera o motor das cartas. Ela reforça:
+- mesa Real com exatamente 6 colunas;
+- foco acessível na Orbe e nos controles;
+- cores de progresso acompanhando a skin ativa;
+- navegação segura em telas pequenas;
+- respeito às regras de 78 cartas, sem repetição e sem invertidas.
+
+Não apague arquivos, não altere CNAME e não mexa no domínio.
+Depois da publicação, responda INSTALADO.

@@ -12,3 +12,13 @@
 @keyframes tarot-card-arrive{from{opacity:0;transform:translateY(18px) scale(.94) rotateY(-8deg)}to{opacity:1;transform:none}}
 @media(max-width:640px){.tarot-screen .ritual-altar{margin-inline:12px;border-radius:22px}.tarot-screen .real-table-viewport{margin-inline:12px}}
 @media(prefers-reduced-motion:reduce){.tarot-screen .current:not(.empty){animation:none}}
+
+
+/* Macroetapa 3 — Tarot Livre: gesto claro, foco visível e mesa estável. */
+html[data-runtime="v12"] #tarot .table-orb:focus-visible{outline:3px solid color-mix(in srgb,var(--db-skin-light,#f0d68a) 82%,transparent);outline-offset:6px;border-radius:50%}
+html[data-runtime="v12"] #tarot .real-table{grid-template-columns:repeat(6,var(--tarot-card-width));}
+html[data-runtime="v12"] #tarot .real-table [role="gridcell"]{will-change:transform;}
+html[data-runtime="v12"] #tarot .tarot-action:focus-visible,html[data-runtime="v12"] #tarot button:focus-visible{outline:2px solid color-mix(in srgb,var(--db-skin-light,#f0d68a) 78%,transparent);outline-offset:3px}
+html[data-runtime="v12"] #tarot .deck-progress i{background:linear-gradient(90deg,var(--db-skin-accent,#8b3bd1),var(--db-skin-light,#f3d38a));}
+@media(max-width:560px){html[data-runtime="v12"] #tarot .real-table{grid-template-columns:repeat(6,var(--tarot-card-width));}}
+
