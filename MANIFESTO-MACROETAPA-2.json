@@ -1,0 +1,10 @@
+{
+  "produto": "Divina Bruxa — A Orbe das Realidades",
+  "macroetapa": 2,
+  "titulo": "Biblioteca premium das 78 cartas",
+  "objetivo": "Dar à Biblioteca uma experiência de descoberta elegante, legível e responsiva, com filtros sempre acessíveis e microanimações cósmicas.",
+  "arquivos_substituir": ["library-polish-v6.css"],
+  "arquivos_adicionar": ["MANIFESTO-MACROETAPA-2.json", "LEIA-PRIMEIRO-MACROETAPA-2.txt"],
+  "criterios_aceite": ["Filtros permanecem acessíveis durante a rolagem", "Foco de teclado visível", "Cartas entram suavemente sem deslocar a Orbe", "Respeita reduced motion", "Sem cartas invertidas"],
+  "status": "staging; aguarda upload manual no GitHub"
+}

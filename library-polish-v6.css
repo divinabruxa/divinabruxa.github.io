@@ -1,1 +1,37 @@
 #library{--page-glow:rgba(91,125,255,.24)}#library #cardLibraryApp{background:radial-gradient(circle at 50% 0,rgba(77,112,242,.16),transparent 40%),linear-gradient(145deg,rgba(18,17,44,.92),rgba(8,5,18,.96));border-color:rgba(134,158,255,.28)}#library #cardLibraryApp input,#library #cardLibraryApp select{border-color:rgba(134,158,255,.28)}#library .card-library-grid,#library .library-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}#library .card-library-card,#library .library-card{border:1px solid rgba(134,158,255,.24);border-radius:18px;background:linear-gradient(145deg,rgba(27,24,62,.88),rgba(10,7,24,.92));padding:10px;box-shadow:0 10px 26px rgba(0,0,0,.25);transition:transform .25s,border-color .25s,box-shadow .25s}#library .card-library-card:hover,#library .library-card:hover{transform:translateY(-4px);border-color:rgba(189,176,255,.7);box-shadow:0 12px 30px rgba(92,106,255,.22)}#library .card-library-card img,#library .library-card img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:12px;background:#100a22}#library .card-library-card h3,#library .library-card h3{color:#ebd395;font:600 1rem Georgia;margin:10px 2px 4px}#library .card-library-card p,#library .library-card p{color:#bfb6d6;font-size:.8rem;margin:0 2px;line-height:1.4}@media(max-width:700px){#library .card-library-grid,#library .library-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}}
+
+
+/* Macroetapa 2 — Biblioteca premium: leitura, foco e descoberta. */
+html[data-runtime="v12"] #library .library-tools {
+  position: sticky;
+  top: clamp(72px, 10vh, 110px);
+  z-index: 4;
+  padding: .9rem;
+  border: 1px solid color-mix(in srgb, var(--db-skin-light, #f0d68a) 26%, transparent);
+  border-radius: 22px;
+  background: color-mix(in srgb, var(--db-skin-deep, #0b0618) 86%, transparent);
+  backdrop-filter: blur(18px) saturate(1.15);
+  box-shadow: 0 18px 50px rgba(0,0,0,.22);
+}
+html[data-runtime="v12"] #library .library-tools input:focus,
+html[data-runtime="v12"] #library .library-tools select:focus {
+  outline: 2px solid color-mix(in srgb, var(--db-skin-light, #f0d68a) 72%, transparent);
+  outline-offset: 2px;
+}
+html[data-runtime="v12"] #library .library-status { margin: 1rem .2rem; letter-spacing: .02em; }
+html[data-runtime="v12"] #library .library-card { animation: db-library-arrival 520ms cubic-bezier(.2,.75,.2,1) both; animation-delay: calc(var(--library-index, 0) * 28ms); }
+html[data-runtime="v12"] #library .library-card:nth-child(n) { --library-index: 1; }
+html[data-runtime="v12"] #library .library-card:nth-child(2n) { --library-index: 2; }
+html[data-runtime="v12"] #library .library-card:nth-child(3n) { --library-index: 3; }
+html[data-runtime="v12"] #library .library-card a { min-height: 100%; }
+html[data-runtime="v12"] #library .library-card b { transition: letter-spacing .2s ease, color .2s ease; }
+html[data-runtime="v12"] #library .library-card:hover b,
+html[data-runtime="v12"] #library .library-card:focus-within b { letter-spacing: .16em; color: var(--db-skin-light, #f0d68a); }
+@keyframes db-library-arrival { from { opacity: 0; transform: translateY(12px) scale(.985); } to { opacity: 1; transform: none; } }
+@media (max-width: 760px) {
+  html[data-runtime="v12"] #library .library-tools { top: 64px; border-radius: 18px; padding: .7rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-runtime="v12"] #library .library-card { animation: none; }
+}
+

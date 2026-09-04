@@ -1,0 +1,20 @@
+DIVINA BRUXA — MACROETAPA 2
+BIBLIOTECA PREMIUM DAS 78 CARTAS
+
+Envie na raiz do GitHub:
+
+1. SUBSTITUA library-polish-v6.css
+2. ADICIONE MANIFESTO-MACROETAPA-2.json
+3. ADICIONE LEIA-PRIMEIRO-MACROETAPA-2.txt
+
+Não apague arquivos, não altere CNAME e não mexa no domínio.
+
+Esta etapa melhora a experiência da Biblioteca das 78 Cartas:
+- filtros ficam acessíveis durante a leitura;
+- foco de teclado e contraste recebem acabamento premium;
+- cartas entram com uma animação sutil e responsiva;
+- reduced motion é respeitado;
+- a Orbe principal e as skins permanecem intactas.
+
+Depois do GitHub publicar, responda: INSTALADO.
+Eu validarei a Biblioteca em desktop e celular antes da próxima macroetapa.
