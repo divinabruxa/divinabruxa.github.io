@@ -1,0 +1,9 @@
+{
+  "produto": "Divina Bruxa — A Orbe das Realidades",
+  "macroetapa": 5,
+  "titulo": "Escola do Tarot premium",
+  "objetivo": "Dar à Escola uma trilha de aprendizagem elegante, clara, acessível e responsiva.",
+  "arquivos_substituir": ["index.html", "school-v5.css"],
+  "criterios_aceite": ["módulos legíveis", "progresso destacado", "foco visível", "hover sutil", "reduced motion", "skins preservadas"],
+  "status": "staging; aguarda upload manual no GitHub"
+}
