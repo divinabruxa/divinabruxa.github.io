@@ -1,0 +1,98 @@
+DIVINA BRUXA — ORBE DAS REALIDADES
+MACROETAPA 6 DE 7 — POLIMENTO MÁGICO DO TAROT LIVRE
+VERSÃO V122
+
+O QUE ESTA ENTREGA FAZ
+
+Esta etapa adiciona vida e resposta aos estados do Tarot Livre aprovado na
+V121, sem alterar a sua composição principal:
+
+- luz cósmica suave acompanha o toque ou o ponteiro;
+- estrelas delicadas respiram sobre o cenário;
+- cada nova carta recebe uma consagração luminosa única;
+- o contador responde visualmente quando uma carta nasce;
+- “Embaralhar novamente” ganha movimento próprio sem mover cartas abertas;
+- “Recomeçar do zero” desperta uma nova mesa depois da confirmação existente;
+- a 78ª carta fecha o círculo com uma celebração especial;
+- miniaturas respondem ao foco, toque e ponteiro;
+- a ampliação da carta passa a pertencer ao mesmo universo visual;
+- som mágico opcional com timbres sintetizados, sem arquivo de áudio externo;
+- o som começa sempre desligado e nunca toca automaticamente;
+- a preferência de som fica guardada somente no aparelho;
+- efeitos novos respeitam a configuração “Reduzir Movimento”.
+
+O QUE FOI PRESERVADO
+
+- cenário e composição visual V121;
+- Home e palavras da Orbe das Realidades;
+- tamanho, física, toque e movimento da Orbe principal;
+- menu e dock inferior;
+- imagem da Orbe ao lado do nome Divina Bruxa;
+- troca universal de skins, inclusive na Orbe do Tarot Livre;
+- 78 cartas sempre diretas e sem repetição;
+- revelar somente ao tocar na Orbe;
+- gesto para a direita = carta seguinte;
+- gesto para a esquerda = carta anterior;
+- botões, confirmação de recomeço e galeria em seis colunas;
+- nenhum efeito tátil novo foi colocado na versão web.
+
+COMO USAR O SOM OPCIONAL
+
+Um pequeno símbolo musical aparece discretamente na página Tarot Livre.
+Ele começa riscado/desligado. Toque uma vez para ativar e novamente para
+desativar. Nenhum som é reproduzido sem essa escolha.
+
+ARQUIVOS DO ZIP
+
+1. index.html
+   Substitui o index.html existente. A V121 foi preservada e recebeu somente
+   as duas inclusões da V122.
+
+2. tarot-livre-polish-v1.css
+   Arquivo novo com todos os estados e efeitos visuais desta etapa.
+
+3. tarot-livre-polish-v1.js
+   Arquivo novo que observa os estados do motor existente e acrescenta o
+   polimento sem modificar as regras das cartas.
+
+4. LEIA-PRIMEIRO-MACROETAPA-6-POLIMENTO-MAGICO.txt
+   Este guia.
+
+COMO INSTALAR NO GITHUB
+
+1. Abra a raiz do repositório divinabruxa/divinabruxa.github.io.
+2. Envie os 4 arquivos do ZIP diretamente para a raiz.
+3. Não crie nenhuma pasta.
+4. Autorize a substituição de index.html.
+5. Confirme o commit e aguarde a publicação.
+6. No iPhone, feche a aba antiga, abra novamente e atualize a página.
+
+Não renomeie os arquivos. Não apague nem envie novamente os arquivos da V121.
+Este ZIP contém somente arquivos novos e o index.html realmente alterado.
+
+VALIDAÇÃO CONCLUÍDA
+
+- 25 de 25 verificações específicas da V122 aprovadas;
+- sintaxe JavaScript aprovada;
+- estrutura CSS aprovada;
+- 78 revelações confirmadas;
+- nenhuma carta repetida;
+- todas as cartas sempre diretas;
+- direção dos gestos preservada;
+- skins preservadas na Orbe do Tarot;
+- som sem reprodução automática e sem dependência externa;
+- rolagem não é bloqueada pelos efeitos de toque;
+- Home, cabeçalho, menu, dock e Orbe principal fora do novo escopo;
+- V121 preservada fora das duas inclusões V122.
+
+DEPOIS DESTA INSTALAÇÃO
+
+Restará 1 macroetapa deste ciclo:
+
+MACROETAPA 7 DE 7 — AUDITORIA FINAL E SAÍDA DO BETA
+
+- conferir a V122 publicada no endereço oficial;
+- testar celular, desktop, botões, gestos, skins e estados completos;
+- verificar velocidade, acessibilidade, cache e instalação PWA;
+- corrigir qualquer regressão real encontrada;
+- entregar o pacote final deste ciclo visual do Tarot Livre.

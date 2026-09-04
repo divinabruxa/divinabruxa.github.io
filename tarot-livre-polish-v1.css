@@ -1,0 +1,360 @@
+/* DIVINA BRUXA — TAROT LIVRE · POLIMENTO INTERATIVO V1
+   Macroetapa 6 de 7. Escopo estrito: somente #tarot. */
+
+html[data-runtime="v12"] #tarot[data-tarot-polish="v1"]{
+  --tl-pointer-x:50%;
+  --tl-pointer-y:34%;
+  --tl-card-hue:286;
+}
+
+html[data-runtime="v12"] #tarot .tarot-cosmos-alive{
+  position:absolute;
+  z-index:0;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+html[data-runtime="v12"] #tarot .tarot-cosmos-alive::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:.42;
+  background:radial-gradient(circle 250px at var(--tl-pointer-x) var(--tl-pointer-y),rgba(209,91,250,.17),rgba(122,34,179,.055) 38%,transparent 72%);
+  transition:opacity .7s ease;
+}
+
+html[data-runtime="v12"] #tarot.is-touching .tarot-cosmos-alive::before{
+  opacity:.88;
+}
+
+html[data-runtime="v12"] #tarot .tarot-cosmos-alive > i{
+  position:absolute;
+  left:var(--star-x);
+  top:var(--star-y);
+  width:calc(var(--star-size) * 2px);
+  height:calc(var(--star-size) * 2px);
+  border-radius:50%;
+  opacity:.18;
+  background:#fff5cd;
+  box-shadow:0 0 5px #fff4c7,0 0 12px rgba(220,107,255,.74);
+  animation:tl-polish-star 4.7s var(--star-delay) ease-in-out infinite;
+}
+
+html[data-runtime="v12"] #tarot > .section-head,
+html[data-runtime="v12"] #tarot > .ritual-altar,
+html[data-runtime="v12"] #tarot > .real-table-head,
+html[data-runtime="v12"] #tarot > .real-table-viewport{
+  position:relative;
+  z-index:2;
+}
+
+html[data-runtime="v12"] #tarot .tarot-polish-status{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  margin:-1px!important;
+  padding:0!important;
+  overflow:hidden!important;
+  clip:rect(0 0 0 0)!important;
+  clip-path:inset(50%)!important;
+  white-space:nowrap!important;
+}
+
+/* Som opcional, sempre iniciado pela própria pessoa. */
+html[data-runtime="v12"] #tarot .tarot-sound-toggle{
+  position:absolute;
+  z-index:25;
+  right:7px;
+  bottom:5px;
+  display:grid;
+  place-items:center;
+  width:46px;
+  height:46px;
+  padding:0;
+  border:1px solid rgba(231,195,121,.52);
+  border-radius:50%;
+  color:#e8c77d;
+  background:radial-gradient(circle at 35% 28%,rgba(103,33,139,.44),transparent 44%),rgba(5,2,10,.76);
+  box-shadow:inset 0 0 17px rgba(192,65,231,.12),0 8px 24px rgba(0,0,0,.42);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  cursor:pointer;
+  transition:border-color .25s ease,box-shadow .25s ease,color .25s ease,transform .2s ease;
+}
+
+html[data-runtime="v12"] #tarot .tarot-sound-toggle span{
+  font:400 21px/1 Georgia,"Times New Roman",serif;
+  transform:translateY(-1px);
+}
+
+html[data-runtime="v12"] #tarot .tarot-sound-toggle span[data-sound-state="off"]{
+  opacity:.48;
+}
+
+html[data-runtime="v12"] #tarot .tarot-sound-toggle span[data-sound-state="off"]::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:24px;
+  height:1px;
+  background:currentColor;
+  transform:translate(-50%,-50%) rotate(-45deg);
+}
+
+html[data-runtime="v12"] #tarot .tarot-sound-toggle small{
+  position:absolute;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  clip-path:inset(50%);
+}
+
+html[data-runtime="v12"] #tarot .tarot-sound-toggle[aria-pressed="true"]{
+  color:#ffe4a6;
+  border-color:rgba(255,221,151,.88);
+  box-shadow:inset 0 0 20px rgba(196,69,235,.22),0 0 22px rgba(204,77,244,.28),0 8px 24px rgba(0,0,0,.42);
+}
+
+html[data-runtime="v12"] #tarot .tarot-sound-toggle:active{
+  transform:scale(.91);
+}
+
+html[data-runtime="v12"] #tarot .tarot-sound-toggle:focus-visible{
+  outline:2px solid #ffe3a2;
+  outline-offset:4px;
+}
+
+html[data-runtime="v12"] #tarot .tarot-sound-toggle:disabled{
+  display:none;
+}
+
+html[data-runtime="v12"] #tarot.is-sound-awake .tarot-sound-toggle{
+  animation:tl-polish-sound-awake .72s ease-out both;
+}
+
+/* Uma carta revelada recebe uma única consagração luminosa. */
+html[data-runtime="v12"] #tarot .ritual-card-center::before{
+  content:"";
+  position:absolute;
+  z-index:0;
+  left:50%;
+  top:50%;
+  width:min(74vw,470px);
+  aspect-ratio:1;
+  border-radius:50%;
+  opacity:0;
+  transform:translate(-50%,-50%) scale(.55);
+  pointer-events:none;
+  background:
+    repeating-conic-gradient(from 0deg,hsla(var(--tl-card-hue),88%,75%,0) 0 13deg,hsla(var(--tl-card-hue),88%,75%,.32) 13.2deg 13.6deg,transparent 13.8deg 30deg),
+    radial-gradient(circle,rgba(255,238,190,.24),hsla(var(--tl-card-hue),78%,58%,.16) 34%,transparent 67%);
+  filter:drop-shadow(0 0 27px hsla(var(--tl-card-hue),82%,62%,.34));
+}
+
+html[data-runtime="v12"] #tarot .ritual-card-center .current{
+  z-index:2;
+}
+
+html[data-runtime="v12"] #tarot.is-card-born .ritual-card-center::before{
+  animation:tl-polish-card-halo 1.55s cubic-bezier(.16,.78,.2,1) both;
+}
+
+html[data-runtime="v12"] #tarot.is-card-born .section-head #count{
+  animation:tl-polish-count .68s .24s ease-out both;
+}
+
+/* Embaralhar movimenta somente o baralho restante; a carta escolhida não muda. */
+html[data-runtime="v12"] #tarot.is-shuffling .ritual-card-center .current:not(.empty){
+  transform-origin:50% 88%;
+  animation:tl-polish-shuffle-card .86s cubic-bezier(.2,.74,.2,1) both!important;
+}
+
+html[data-runtime="v12"] #tarot.is-shuffling .tarot-cosmos-alive::before{
+  animation:tl-polish-shuffle-light .86s ease-out both;
+}
+
+html[data-runtime="v12"] #tarot #shuffleDeck[aria-busy="true"]::before{
+  animation:tl-polish-shuffle-icon .72s linear infinite;
+}
+
+/* Recomeçar dissolve o círculo antigo e desperta o verso vazio. */
+html[data-runtime="v12"] #tarot.is-resetting .ritual-card-center .empty-card{
+  animation:tl-polish-reset-birth 1.02s cubic-bezier(.16,.78,.2,1) both;
+}
+
+html[data-runtime="v12"] #tarot.is-resetting .table-orb{
+  animation:tl-polish-orb-reset 1.02s ease-out both;
+}
+
+/* A última carta fecha o círculo sem tornar a Orbe cinza. */
+html[data-runtime="v12"] #tarot[data-table-state="complete"] .table-orb:disabled{
+  opacity:1;
+  filter:none;
+}
+
+html[data-runtime="v12"] #tarot[data-table-state="complete"] .table-orb:disabled .table-orb-image{
+  filter:none;
+  animation:tl-polish-complete-orb 4.2s ease-in-out infinite!important;
+}
+
+html[data-runtime="v12"] #tarot.is-completing .tarot-cosmos-alive > i{
+  animation:tl-polish-complete-star 1.8s var(--star-delay) ease-out both;
+}
+
+html[data-runtime="v12"] #tarot.is-completing .real-table-viewport{
+  animation:tl-polish-table-complete 1.8s .18s ease-out both;
+}
+
+/* Respostas delicadas dos controles e da galeria. */
+html[data-runtime="v12"] #tarot .table-actions .text-button:not(:disabled):active{
+  transform:translateY(1px) scale(.975);
+}
+
+html[data-runtime="v12"] #tarot .table-slot.revealed{
+  transition:transform .23s ease,filter .23s ease,border-color .23s ease,box-shadow .23s ease;
+}
+
+@media(hover:hover){
+  html[data-runtime="v12"] #tarot .table-slot.revealed:hover{
+    z-index:3;
+    transform:translateY(-4px) scale(1.035);
+    filter:brightness(1.08);
+    border-color:rgba(255,222,153,.92);
+    box-shadow:0 13px 26px rgba(0,0,0,.66),0 0 18px rgba(203,73,241,.25);
+  }
+}
+
+html[data-runtime="v12"] #tarot .table-slot.revealed:focus-visible{
+  z-index:4;
+  outline:2px solid #ffe1a0;
+  outline-offset:3px;
+}
+
+/* A ampliação da carta continua funcional, agora pertencendo ao mesmo universo. */
+html[data-runtime="v12"] #tarot .card-lightbox{
+  border:0;
+  background:rgba(2,0,6,.78);
+  backdrop-filter:blur(16px) saturate(1.15);
+  -webkit-backdrop-filter:blur(16px) saturate(1.15);
+}
+
+html[data-runtime="v12"] #tarot .card-lightbox::backdrop{
+  background:rgba(1,0,4,.82);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+
+html[data-runtime="v12"] #tarot .card-lightbox-shell{
+  border-color:rgba(232,197,126,.62);
+  background:
+    radial-gradient(circle at 50% 22%,rgba(112,30,157,.25),transparent 38%),
+    linear-gradient(155deg,rgba(20,7,30,.98),rgba(3,1,7,.99));
+  box-shadow:inset 0 1px rgba(255,244,217,.08),0 30px 90px rgba(0,0,0,.75),0 0 42px rgba(177,53,220,.15);
+}
+
+@keyframes tl-polish-star{
+  0%,100%{opacity:.14;transform:scale(.72)}
+  48%{opacity:.82;transform:scale(1.45)}
+}
+
+@keyframes tl-polish-sound-awake{
+  0%{transform:scale(.86);filter:brightness(.8)}
+  45%{transform:scale(1.12);filter:brightness(1.5);box-shadow:0 0 34px rgba(226,100,255,.55)}
+  100%{transform:none;filter:none}
+}
+
+@keyframes tl-polish-card-halo{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.45) rotate(-22deg)}
+  34%{opacity:.92}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1.16) rotate(28deg)}
+}
+
+@keyframes tl-polish-count{
+  0%{opacity:.45;transform:translateY(5px) scale(.84);filter:blur(3px)}
+  58%{opacity:1;transform:translateY(-2px) scale(1.12);filter:none}
+  100%{transform:none}
+}
+
+@keyframes tl-polish-shuffle-card{
+  0%,100%{transform:none;filter:none}
+  18%{transform:translateX(-7px) rotate(-1.2deg);filter:brightness(1.14)}
+  39%{transform:translateX(8px) rotate(1.4deg);filter:brightness(1.3)}
+  61%{transform:translateX(-5px) rotate(-.7deg);filter:brightness(1.17)}
+  80%{transform:translateX(3px) rotate(.35deg)}
+}
+
+@keyframes tl-polish-shuffle-light{
+  0%,100%{opacity:.42;filter:none}
+  40%{opacity:1;filter:hue-rotate(24deg) brightness(1.3)}
+}
+
+@keyframes tl-polish-shuffle-icon{to{transform:rotate(360deg)}}
+
+@keyframes tl-polish-reset-birth{
+  0%{opacity:0;transform:scale(.82);filter:blur(8px) brightness(1.8)}
+  54%{opacity:1;transform:scale(1.025);filter:blur(0) brightness(1.22)}
+  100%{transform:none;filter:none}
+}
+
+@keyframes tl-polish-orb-reset{
+  0%,100%{filter:drop-shadow(0 16px 24px rgba(0,0,0,.60))}
+  44%{filter:brightness(1.45) drop-shadow(0 0 34px rgba(226,92,255,.76))}
+}
+
+@keyframes tl-polish-complete-orb{
+  0%,100%{filter:brightness(1) saturate(1);box-shadow:inset 0 0 23px rgba(255,255,255,.14),0 0 0 6px rgba(132,48,183,.12),0 0 42px rgba(210,74,255,.64)}
+  50%{filter:brightness(1.18) saturate(1.14);box-shadow:inset 0 0 28px rgba(255,255,255,.20),0 0 0 7px rgba(224,183,103,.17),0 0 60px rgba(226,101,255,.86)}
+}
+
+@keyframes tl-polish-complete-star{
+  0%{opacity:.08;transform:scale(.4)}
+  38%{opacity:1;transform:scale(2.5)}
+  100%{opacity:.18;transform:scale(.8)}
+}
+
+@keyframes tl-polish-table-complete{
+  0%{filter:brightness(.85)}
+  42%{filter:brightness(1.22) drop-shadow(0 0 20px rgba(226,93,255,.28))}
+  100%{filter:none}
+}
+
+@media(max-width:640px){
+  html[data-runtime="v12"] #tarot .tarot-sound-toggle{
+    right:3px;
+    bottom:0;
+    width:44px;
+    height:44px;
+  }
+
+  html[data-runtime="v12"] #tarot .tarot-cosmos-alive::before{
+    background:radial-gradient(circle 180px at var(--tl-pointer-x) var(--tl-pointer-y),rgba(209,91,250,.15),rgba(122,34,179,.045) 40%,transparent 74%);
+  }
+
+  html[data-runtime="v12"] #tarot .ritual-card-center::before{
+    width:min(93vw,370px);
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-runtime="v12"] #tarot .tarot-cosmos-alive::before{
+    display:none;
+  }
+
+  html[data-runtime="v12"] #tarot .tarot-cosmos-alive > i,
+  html[data-runtime="v12"] #tarot.is-sound-awake .tarot-sound-toggle,
+  html[data-runtime="v12"] #tarot.is-card-born .ritual-card-center::before,
+  html[data-runtime="v12"] #tarot.is-card-born .section-head #count,
+  html[data-runtime="v12"] #tarot.is-shuffling .ritual-card-center .current:not(.empty),
+  html[data-runtime="v12"] #tarot.is-shuffling .tarot-cosmos-alive::before,
+  html[data-runtime="v12"] #tarot #shuffleDeck[aria-busy="true"]::before,
+  html[data-runtime="v12"] #tarot.is-resetting .ritual-card-center .empty-card,
+  html[data-runtime="v12"] #tarot.is-resetting .table-orb,
+  html[data-runtime="v12"] #tarot[data-table-state="complete"] .table-orb:disabled .table-orb-image,
+  html[data-runtime="v12"] #tarot.is-completing .tarot-cosmos-alive > i,
+  html[data-runtime="v12"] #tarot.is-completing .real-table-viewport{
+    animation:none!important;
+    transition:none!important;
+  }
+}
