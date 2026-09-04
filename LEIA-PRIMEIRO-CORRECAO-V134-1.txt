@@ -1,0 +1,55 @@
+DIVINA BRUXA — CORREÇÃO V134.1
+MÍDIA VISÍVEL · SEM ALTERAR O VISUAL APROVADO
+
+POR QUE ESTE PACOTE É NECESSÁRIO
+
+A auditoria após a instalação da V134 encontrou uma colisão de atributo na nova base de mídia. As imagens carregavam corretamente, mas algumas delas — principalmente a carta central do Tarot Livre e a prévia da skin atual — recebiam opacidade zero.
+
+COMO INSTALAR
+
+1. Extraia este ZIP.
+2. Envie os 6 arquivos diretamente para a raiz do GitHub.
+3. Substitua os arquivos com o mesmo nome.
+4. Não crie pastas.
+5. Não é necessário reenviar nenhuma Orbe, skin ou carta.
+6. Aguarde o GitHub Pages publicar, feche totalmente o Safari e abra o site novamente.
+
+ARQUIVOS DESTA CORREÇÃO
+
+- index.html
+- app.js
+- cosmic-media-v1.js
+- cosmic-media-v1.css
+- sw.js
+- LEIA-PRIMEIRO-CORRECAO-V134-1.txt
+
+O QUE FOI CORRIGIDO
+
+- O marcador interno do motor agora se chama data-cosmic-media-runtime.
+- data-cosmic-media volta a existir somente nos elementos que realmente receberão as novas artes.
+- A regra de transparência foi limitada ao interior do aplicativo e aos futuros componentes de mídia.
+- Cartas, prévias de skins e demais imagens atuais deixam de ser afetadas.
+- As URLs receberam uma nova versão para impedir o Safari de reutilizar o CSS defeituoso.
+- O cache do PWA foi renovado para a versão 27.
+
+O QUE NÃO FOI ALTERADO
+
+- Orbe principal, motor, tamanho, gestos e palavras;
+- Menu Mágico e dock;
+- visual e lógica do Tarot Livre;
+- 30 skins e sincronização global;
+- 78 artes das cartas;
+- carregamento sob demanda criado na V134.
+
+AUDITORIA DA V134
+
+- Todos os 8 arquivos publicados coincidiram exatamente com o pacote entregue.
+- Os 12 portais carregados sob demanda abriram com estado ready.
+- Tarot Livre preservou 78 posições e a Orbe da skin ativa.
+- As 30 skins foram encontradas; a troca Clássica ↔ Lunar sincronizou Home, cabeçalho, dock e Tarot Livre.
+- O PWA registrou a V134.
+- Não houve erro originado pelo código do site; os únicos registros de console vieram da extensão técnica do navegador de auditoria.
+
+DEPOIS DE INSTALAR
+
+Escreva “Instalado”. A correção será validada no site publicado antes de começarmos a primeira arte original da V135.

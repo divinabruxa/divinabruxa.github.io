@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — MÍDIA CÓSMICA RESPONSIVA V1
+/* DIVINA BRUXA — MÍDIA CÓSMICA RESPONSIVA V1.1
    Base para artes de página: só materializa imagens do mundo visitado. */
 
 const hydrated = new WeakSet();
@@ -77,6 +77,9 @@ export function installCosmicMedia() {
     scanScreen(document.getElementById(event.detail?.id));
   });
   scanActive();
-  document.documentElement.dataset.cosmicMedia = 'v1';
+  // O marcador do motor não pode reutilizar `data-cosmic-media`, reservado
+  // exclusivamente aos elementos visuais. Isso mantém cartas e skins visíveis.
+  delete document.documentElement.dataset.cosmicMedia;
+  document.documentElement.dataset.cosmicMediaRuntime = 'v1.1';
   return { scan: scanActive, destroy: () => observer.disconnect() };
 }

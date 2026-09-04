@@ -1,7 +1,7 @@
-/* DIVINA BRUXA — BASE DE ARTES RESPONSIVAS V1
+/* DIVINA BRUXA — BASE DE ARTES RESPONSIVAS V1.1
    Inerte nas páginas atuais; será usada pelas novas artes, uma página por vez. */
 
-[data-cosmic-media]{
+#app [data-cosmic-media]{
   position:relative;
   overflow:hidden;
   isolation:isolate;
@@ -11,7 +11,7 @@
     linear-gradient(145deg,rgba(16,7,27,.96),rgba(4,1,9,.98));
 }
 
-[data-cosmic-media][data-cosmic-bg]{
+#app [data-cosmic-media][data-cosmic-bg]{
   background-image:var(--db-cosmic-media),
     radial-gradient(circle at 50% 42%,rgba(150,65,205,.16),transparent 48%),
     linear-gradient(145deg,rgba(16,7,27,.96),rgba(4,1,9,.98));
@@ -20,8 +20,8 @@
   background-repeat:no-repeat;
 }
 
-[data-cosmic-media] img,
-img[data-cosmic-media]{
+#app [data-cosmic-media]:not(img) img,
+#app img[data-cosmic-media]{
   display:block;
   width:100%;
   height:auto;
@@ -29,10 +29,10 @@ img[data-cosmic-media]{
   transition:opacity .42s cubic-bezier(.2,.75,.2,1);
 }
 
-[data-cosmic-media].is-cosmic-ready img,
-img[data-cosmic-media].is-cosmic-ready{opacity:1}
+#app [data-cosmic-media].is-cosmic-ready:not(img) img,
+#app img[data-cosmic-media].is-cosmic-ready{opacity:1}
 
 @media(prefers-reduced-motion:reduce){
-  [data-cosmic-media] img,
-  img[data-cosmic-media]{transition:none}
+  #app [data-cosmic-media]:not(img) img,
+  #app img[data-cosmic-media]{transition:none}
 }

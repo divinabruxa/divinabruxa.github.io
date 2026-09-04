@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V26 · MUNDOS SOB DEMANDA */
-const CACHE='divina-bruxa-v26-mundos-sob-demanda';
+/* DIVINA BRUXA — SERVICE WORKER V27 · MÍDIA VISÍVEL E SEGURA */
+const CACHE='divina-bruxa-v27-midia-visivel';
 
 const REQUIRED=[
   './',
