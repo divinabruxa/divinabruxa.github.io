@@ -1,0 +1,10 @@
+{
+  "produto": "Divina Bruxa — A Orbe das Realidades",
+  "macroetapa": 13,
+  "titulo": "Admin, Analytics e SEO/ASO",
+  "objetivo": "Preparar a camada visual e os metadados públicos para operação segura e descoberta orgânica.",
+  "arquivos_substituir": ["index.html"],
+  "arquivos_adicionar": ["admin-analytics-v1.css"],
+  "criterios_aceite": ["metadados OG e robots", "painéis administrativos preparados", "foco acessível", "sem dados privados expostos", "runtime preservado"],
+  "status": "staging; aguarda upload manual no GitHub"
+}

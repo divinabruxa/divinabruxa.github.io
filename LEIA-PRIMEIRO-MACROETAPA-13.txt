@@ -1,0 +1,13 @@
+DIVINA BRUXA — MACROETAPA 13
+ADMIN, ANALYTICS E SEO/ASO
+
+Envie na raiz do GitHub:
+1. SUBSTITUA index.html
+2. ADICIONE admin-analytics-v1.css
+3. ADICIONE MANIFESTO-MACROETAPA-13.json
+4. ADICIONE LEIA-PRIMEIRO-MACROETAPA-13.txt
+
+O index carrega admin-analytics-v1.css?v=113 e recebe metadados robots/OG.
+Esta etapa não publica dados administrativos nem ativa analytics invasivo.
+Não apague arquivos, não altere CNAME.
+Depois da publicação, responda INSTALADO.
