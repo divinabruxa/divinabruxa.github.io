@@ -1,0 +1,13 @@
+CORREÇÃO DA MACROETAPA 2
+
+O arquivo visual ativo da Biblioteca é card-library-v5.css.
+
+Envie na raiz do GitHub:
+1. SUBSTITUA card-library-v5.css
+2. ADICIONE MANIFESTO-MACROETAPA-2-CORRECAO.json
+3. ADICIONE LEIA-PRIMEIRO-MACROETAPA-2-CORRECAO.txt
+
+Não apague library-polish-v6.css; ele permanece no repositório sem ser alterado.
+Não altere CNAME nem configurações do domínio.
+
+Depois da publicação, responda INSTALADO para eu validar o CSS no site real.

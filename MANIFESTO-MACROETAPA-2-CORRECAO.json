@@ -1,0 +1,9 @@
+{
+  "produto": "Divina Bruxa — A Orbe das Realidades",
+  "macroetapa": 2,
+  "titulo": "Biblioteca premium — correção do arquivo ativo",
+  "objetivo": "Aplicar o acabamento visual no CSS realmente carregado pela página.",
+  "arquivo_substituir": "card-library-v5.css",
+  "observacao": "O pacote anterior citava library-polish-v6.css, que não é carregado pelo index.html; esta correção substitui somente o arquivo ativo.",
+  "status": "staging; aguarda upload manual no GitHub"
+}
