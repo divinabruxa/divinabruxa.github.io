@@ -1,14 +1,82 @@
-const CACHE='divina-bruxa-v14-final-1';
-const CORE=['./','./index.html','./offline.html','./manifest.webmanifest','./app.css','./fallback-shell-v1.css','./app.js','./runtime-v12.js','./runtime-v12.css','./pwa-final-v1.css','./skin-registry-v12.js','./skin-universal-v10.js','./portal-transition-v10.js','./COSMIC-DESIGN-SYSTEM-V10.css','./PAGE-INTERIORS-V10.css','./PORTAL-TRANSITIONS-V10.css','./skins-v6.css','./skins-v6.js','./skin-catalog-v6.js','./orb-engine-v68.js','./divina-orb-v68.png','./cosmic-background.png'];
-self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting())));
-self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
+/* DIVINA BRUXA — SERVICE WORKER V15 · LANÇAMENTO TAROT LIVRE */
+const CACHE='divina-bruxa-v15-tarot-release-1';
+
+const REQUIRED=[
+  './',
+  './index.html',
+  './offline.html',
+  './manifest.webmanifest',
+  './app.js',
+  './runtime-v12.js',
+  './skin-registry-v12.js',
+  './skin-universal-v10.js',
+  './tarot-engine.js',
+  './tarot-session.js',
+  './tarot-data.js',
+  './tarot-image-runtime.js',
+  './tarot-editorial-policy.js',
+  './tarot-livre-exact-visual-v1.css',
+  './tarot-livre-polish-v1.css',
+  './tarot-livre-polish-v1.js',
+  './tarot-temple-background-v1.webp',
+  './orb-skin-release-v1.css',
+  './orb-skin-release-v1.js',
+  './divina-orb-v68.png',
+  './divina-mini-orb-hd-v72.jpeg'
+];
+
+const WARM=[
+  './app.css','./motion.css','./update-04.css','./update-05.css','./update-06.css','./update-08.css','./update-09.css','./update-11.css',
+  './visual-v68.css','./runtime-v12.css','./COSMIC-DESIGN-SYSTEM-V10.css','./PAGE-INTERIORS-V10.css','./PORTAL-TRANSITIONS-V10.css',
+  './skins-v6.css','./cosmic-design-system-v1.css','./menu-ring-v8.css','./home-orb-only-v1.css','./home-orb-words-v2.css',
+  './tarot-table-v5.css','./tarot-ritual-v5.css','./tarot-controls-v5.css','./tarot-editorial-v5.css','./tarot-livre-magic-v1.css',
+  './tarot-livre-official-v1.css','./tarot-livre-reveal-magic-v1.css','./tarot-livre-gestures-v1.css','./spreads-v5.css',
+  './card-library-v5.css','./ai-v5.css','./premium-v5.css','./consultation-v5.css','./notification-v5.css','./admin-analytics-v1.css',
+  './musica-videos-cosmica-v1.css','./store-v5.css','./school-v5.css','./journal-v5.css','./fallback-shell-v1.css','./pwa-final-v1.css',
+  './portal-transition-v10.js','./navigation.js','./orb-engine-v68.js','./mini-orb-engine.js','./skins-v6.js','./skin-catalog-v6.js',
+  './storage.js','./config.js','./visual-guard-v6.js','./tarot-experience-v6.js','./tarot-continuity.js','./tarot-meanings.js',
+  './ritual-engine.js','./daily-policy.js','./daily-meaning-runtime.js','./card-library-engine.js','./card-library-policy.js',
+  './school-engine.js','./school-policy.js','./spreads-engine.js','./spreads-policy.js','./spread-synthesis.js','./journal-engine.js','./journal-policy.js',
+  './commerce-engine.js','./consultation-engine.js','./consultation-policy.js','./store-engine.js','./store-policy.js','./media-engine-v5.js','./media-policy.js',
+  './notification-engine.js','./notification-policy.js','./admin-engine.js','./admin-policy.js','./analytics-engine.js','./analytics-policy.js',
+  './privacy-engine.js','./privacy-policy.js','./pwa-engine.js','./trust-engine.js','./trust-policy.js','./auth-client-v6.js','./rhythm-v6.js',
+  './ecosystem-v6.js','./performance-v6.js','./ai-engine.js','./ai-policy.js','./ai-credits.js','./premium-engine.js','./premium-policy.js',
+  './cosmic-background.png'
+];
+
+self.addEventListener('install',event=>event.waitUntil((async()=>{
+  const cache=await caches.open(CACHE);
+  await cache.addAll(REQUIRED);
+  await Promise.allSettled(WARM.map(asset=>cache.add(asset)));
+  await self.skipWaiting();
+})()));
+
+self.addEventListener('activate',event=>event.waitUntil((async()=>{
+  const keys=await caches.keys();
+  await Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)));
+  await self.clients.claim();
+})()));
+
 self.addEventListener('fetch',event=>{
   if(event.request.method!=='GET') return;
-  const requestURL=new URL(event.request.url);
-  const isNavigation=event.request.mode==='navigate' || event.request.destination==='document';
-  event.respondWith(fetch(event.request).then(response=>{
-    if(response.ok && requestURL.origin===self.location.origin){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(event.request,copy));}
-    return response;
-  }).catch(()=>caches.match(event.request).then(cached=>cached || (isNavigation ? caches.match('./offline.html') : caches.match('./index.html')))));
+  const url=new URL(event.request.url);
+  const sameOrigin=url.origin===self.location.origin;
+  const navigation=event.request.mode==='navigate'||event.request.destination==='document';
+
+  event.respondWith((async()=>{
+    try{
+      const response=await fetch(event.request);
+      if(response.ok&&sameOrigin){
+        const cache=await caches.open(CACHE);
+        await cache.put(event.request,response.clone());
+      }
+      return response;
+    }catch{
+      const cached=await caches.match(event.request,{ignoreSearch:true});
+      if(cached) return cached;
+      if(navigation) return (await caches.match('./offline.html'))||Response.error();
+      return new Response('',{status:503,statusText:'Offline'});
+    }
+  })());
 });
 

@@ -1,0 +1,46 @@
+DIVINA BRUXA — TAROT LIVRE
+MACROETAPA 7 DE 7 · AUDITORIA FINAL E LANÇAMENTO · V123
+
+COMO INSTALAR
+1. Abra a raiz do repositório divinabruxa.github.io no GitHub.
+2. Envie os cinco arquivos abaixo diretamente para a raiz, sem criar pasta.
+3. Quando o GitHub perguntar, escolha substituir o index.html e o sw.js existentes.
+4. Aguarde a publicação e abra o site novamente. Se ainda aparecer a versão anterior,
+   feche a aba e abra o endereço de novo para o novo cache assumir.
+
+ARQUIVOS QUE DEVEM SER ENVIADOS
+- index.html
+- orb-skin-release-v1.css
+- orb-skin-release-v1.js
+- sw.js
+- LEIA-PRIMEIRO-MACROETAPA-7-LANCAMENTO-V123.txt
+
+O QUE ESTA VERSÃO FINALIZA
+- Faz a orbe do rodapé acompanhar a skin ativa, corrigindo a última superfície que
+  ainda podia permanecer com a textura clássica.
+- Reforça o mesmo contrato visual para Home, marca, menu, Tarot e orbes internas,
+  sem alterar tamanho, posição, gestos, motor ou movimento aprovados.
+- Mantém a orbe de revelação do Tarot ligada à mesma skin.
+- Reforça o modo offline do aplicativo: os motores e visuais essenciais do Tarot
+  entram no cache inicial, consultas ignoram apenas o parâmetro de versão e arquivos
+  ausentes deixam de receber HTML com tipo incorreto.
+- Preserva integralmente a mesa de 78 cartas, a grade de seis colunas, a navegação
+  por setas e gestos, o embaralhamento e o recomeço com confirmação.
+
+RESULTADO DA AUDITORIA ANTES DO PACOTE
+- Home publicada sem rolagem horizontal.
+- Títulos acima da orbe, sem palavras sobre a imagem.
+- Marca, menu e navegação visíveis.
+- Tarot Livre publicado com cenário cósmico, carta central grande e orbe de revelar.
+- Seis cartas reveladas no teste, todas diferentes, dentro de uma grade de seis colunas.
+- Botões anterior e próxima aprovados.
+- Deslizar à direita avançou; deslizar à esquerda voltou.
+- Embaralhar preservou as cartas já reveladas e reorganizou somente as restantes.
+- Som opcional iniciou desligado.
+- Nenhum erro próprio do site apareceu no console durante o percurso auditado.
+
+IMPORTANTE
+Este ZIP não altera a composição aprovada da Home, o motor fluido da orbe, o menu,
+o dock, as cartas nem os textos posicionados acima e abaixo da orbe. A intervenção
+visual desta etapa é somente o sincronismo da textura da skin.
+

@@ -1,0 +1,19 @@
+/* DIVINA BRUXA — SINCRONISMO FINAL DAS ORBES V1
+   Corrige somente a textura ativa. Geometria, motor, gestos e movimento permanecem intactos. */
+
+html[data-runtime="v12"] [data-orb-surface]:not(img),
+html[data-runtime="v12"] #tableOrb .table-orb-image{
+  background-image:var(--db-release-orb-image)!important;
+  background-position:50% 50%!important;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+}
+
+/* A película de vidro continua viva, sem recolocar a textura clássica sobre outra skin. */
+html[data-runtime="v12"] .mini-orb[data-orb-surface]::after{
+  background-image:radial-gradient(ellipse at 25% 14%,rgba(255,255,255,.22),transparent 25%)!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  background-size:100% 100%!important;
+}
+
