@@ -1,1 +1,13 @@
 .ai-credit-status{margin:.65rem 0;color:#d8b776;font-size:.82rem}.ai-consent{display:flex;gap:.55rem;align-items:flex-start;margin:.5rem 0;color:#cbbdce;font-size:.82rem;line-height:1.45}.ai-consent input{margin-top:.2rem;accent-color:#b777d8}.ai-settings select option:disabled{color:#777}.security-note{line-height:1.6}
+
+
+/* Macroetapa 7 — Orbe IA: presença, crédito e segurança. */
+html[data-runtime="v12"] #ai .ai-settings,html[data-runtime="v12"] #ai .chat,html[data-runtime="v12"] #ai .chat-form{border:1px solid color-mix(in srgb,var(--db-skin-light,#f0d68a) 26%,transparent);background:linear-gradient(155deg,rgba(25,11,45,.9),rgba(8,4,18,.96));box-shadow:0 18px 52px rgba(0,0,0,.24)}
+html[data-runtime="v12"] #ai input,html[data-runtime="v12"] #ai select{border-color:color-mix(in srgb,var(--db-skin-light,#f0d68a) 30%,transparent);background:rgba(7,3,16,.82)}
+html[data-runtime="v12"] #ai input:focus,html[data-runtime="v12"] #ai select:focus{outline:2px solid color-mix(in srgb,var(--db-skin-light,#f0d68a) 78%,transparent);outline-offset:2px}
+html[data-runtime="v12"] #ai button:focus-visible{outline:2px solid color-mix(in srgb,var(--db-skin-light,#f0d68a) 80%,transparent);outline-offset:3px}
+html[data-runtime="v12"] #ai .bubble{animation:db-ai-arrival .42s ease both}
+@keyframes db-ai-arrival{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(max-width:640px){html[data-runtime="v12"] #ai .chat-form{position:sticky;bottom:calc(82px + env(safe-area-inset-bottom));z-index:3}}
+@media(prefers-reduced-motion:reduce){html[data-runtime="v12"] #ai .bubble{animation:none}}
+

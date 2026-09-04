@@ -1,0 +1,9 @@
+{
+  "produto": "Divina Bruxa — A Orbe das Realidades",
+  "macroetapa": 7,
+  "titulo": "Orbe IA — presença e créditos seguros",
+  "objetivo": "Dar à Orbe IA uma interface premium, clara e segura, mantendo Sol desativado e cobrança real bloqueada.",
+  "arquivos_substituir": ["index.html", "ai-v5.css"],
+  "criterios_aceite": ["chat legível", "modo e persona claros", "foco acessível", "formulário confortável no celular", "sem chave pública de IA", "Sol permanece OFF"],
+  "status": "staging; aguarda upload manual no GitHub"
+}
