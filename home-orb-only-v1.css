@@ -29,6 +29,56 @@ html[data-runtime="v12"] #app > #home.active >.orb-stage-ref{
   margin:auto;
 }
 
+/* Assinatura sagrada: somente as duas palavras pedidas, dentro da Orbe.
+   A camada não recebe toques e não interfere no canvas, gestos ou menu. */
+html[data-runtime="v12"] #home #orb .orb-sacred-voice{
+  position:absolute;
+  z-index:7;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:0 12%;
+  pointer-events:none;
+  user-select:none;
+  -webkit-user-select:none;
+  text-align:center;
+  color:#f8e4b4;
+  text-transform:uppercase;
+  transform:translateZ(0);
+  transition:opacity .28s ease,filter .28s ease;
+  filter:drop-shadow(0 2px 3px rgba(2,0,8,.96)) drop-shadow(0 0 13px rgba(245,207,137,.52)) drop-shadow(0 0 25px rgba(192,70,238,.48));
+}
+
+html[data-runtime="v12"] #home #orb .orb-sacred-voice strong{
+  display:block;
+  padding-left:.22em;
+  font:500 clamp(22px,6.2vw,37px)/1 Georgia,"Times New Roman",serif;
+  letter-spacing:.22em;
+}
+
+html[data-runtime="v12"] #home #orb .orb-sacred-voice small{
+  display:block;
+  margin-top:10px;
+  padding-left:.27em;
+  font:600 clamp(8px,2.05vw,12px)/1.2 Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  letter-spacing:.27em;
+  color:#efd093;
+}
+
+html[data-runtime="v12"] #home #orb.is-touching .orb-sacred-voice,
+html[data-runtime="v12"] #home #orb.phase-release .orb-sacred-voice,
+html[data-runtime="v12"] #home #orb.phase-resonance .orb-sacred-voice{
+  filter:drop-shadow(0 2px 3px rgba(2,0,8,.96)) drop-shadow(0 0 17px rgba(255,226,167,.78)) drop-shadow(0 0 34px rgba(218,84,255,.72));
+}
+
+html[data-runtime="v12"] #home.orb-menu-open #orb .orb-sacred-voice,
+html[data-runtime="v12"] #home.orb-menu-transition #orb .orb-sacred-voice,
+html[data-runtime="v12"] #home.orb-menu-closing #orb .orb-sacred-voice{
+  opacity:0;
+}
+
 /* A imagem continua vindo do motor de skins por estilo inline. */
 html[data-runtime="v12"] .app-header .brand .mini-orb{
   display:block!important;
@@ -46,4 +96,19 @@ html[data-runtime="v12"] .app-header .brand .mini-orb{
   }
 }
 
+@media(max-width:365px){
+  html[data-runtime="v12"] #home #orb .orb-sacred-voice strong{
+    font-size:20px;
+  }
+  html[data-runtime="v12"] #home #orb .orb-sacred-voice small{
+    font-size:7px;
+    letter-spacing:.22em;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-runtime="v12"] #home #orb .orb-sacred-voice{
+    transition:none;
+  }
+}
 
