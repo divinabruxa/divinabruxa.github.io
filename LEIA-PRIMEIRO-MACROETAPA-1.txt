@@ -1,0 +1,20 @@
+DIVINA BRUXA — MACROETAPA 1
+NAVEGAÇÃO ORBITAL COMPLETA
+
+Envie os 4 arquivos deste ZIP para a raiz do repositório:
+
+1. SUBSTITUA navigation.js
+2. SUBSTITUA runtime-v12.css
+3. ADICIONE MANIFESTO-MACROETAPA-1.json
+4. ADICIONE LEIA-PRIMEIRO-MACROETAPA-1.txt
+
+Não apague arquivos, não altere CNAME e não mexa em configurações de domínio.
+
+O que esta etapa entrega:
+- Biblioteca das 78 Cartas visível no menu orbital principal;
+- acesso à rota #library por toque/clique;
+- grade responsiva dos atalhos, inclusive no celular;
+- preservação da Orbe principal, das transições e das skins.
+
+Depois do GitHub publicar, responda apenas: INSTALADO.
+Eu farei a auditoria de desktop, celular, teclado, rota e skins antes da Macroetapa 2.

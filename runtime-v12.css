@@ -104,3 +104,33 @@ html[data-runtime="v12"] .magic-dock {
   html[data-runtime="v12"] #app > .screen.active:not(#home),
   html[data-runtime="v12"] .skin-tile { animation: none; transition: none; }
 }
+
+
+/* Macroetapa 1 — sétimo portal visível sem tocar na geometria da Orbe. */
+html[data-runtime="v12"] .home-menu-portals {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: clamp(.28rem, 1.2vw, .7rem);
+  align-items: stretch;
+}
+html[data-runtime="v12"] .home-menu-portals .menu-portal {
+  min-width: 0;
+}
+html[data-runtime="v12"] .home-menu-portals .menu-portal b {
+  white-space: normal;
+  line-height: 1.05;
+}
+@media (max-width: 560px) {
+  html[data-runtime="v12"] .home-menu-portals {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: .35rem;
+  }
+  html[data-runtime="v12"] .home-menu-portals .menu-portal {
+    min-height: 3.25rem;
+    padding-inline: .18rem;
+  }
+  html[data-runtime="v12"] .home-menu-portals .menu-portal b {
+    font-size: .56rem;
+  }
+}
+

@@ -1,0 +1,16 @@
+{
+  "produto": "Divina Bruxa — A Orbe das Realidades",
+  "macroetapa": 1,
+  "titulo": "Navegação orbital completa",
+  "objetivo": "Tornar a Biblioteca das 78 Cartas um atalho visível no menu orbital, preservando a Orbe e suas transições.",
+  "arquivos_substituir": ["navigation.js", "runtime-v12.css"],
+  "arquivos_adicionar": ["MANIFESTO-MACROETAPA-1.json", "LEIA-PRIMEIRO-MACROETAPA-1.txt"],
+  "criterios_aceite": [
+    "Menu orbital exibe Biblioteca junto dos atalhos existentes",
+    "Biblioteca abre pela rota #library",
+    "Layout se adapta a telas pequenas",
+    "Nenhuma alteração na geometria ou textura aprovada da Orbe",
+    "Sem exclusão de arquivos e sem mudança de CNAME"
+  ],
+  "status": "staging; aguarda upload manual no GitHub"
+}

@@ -29,7 +29,8 @@ export function createNavigation() {
       ['daily', '☾', 'Carta do Dia'],
       ['skins', '◆', 'Skins da Orbe'],
       ['subscriptions', '✦', 'Premium'],
-      ['journal', '▤', 'Diário']
+      ['journal', '▤', 'Diário'],
+      ['library', '▥', 'Biblioteca']
     ];
     shortcuts.forEach(([id, sigil, label]) => {
       const button = document.createElement('button');
@@ -213,3 +214,4 @@ export function createNavigation() {
   go(location.hash.slice(1) || 'home', false);
   return { go, openOrbMenu, closeOrbMenu };
 }
+
