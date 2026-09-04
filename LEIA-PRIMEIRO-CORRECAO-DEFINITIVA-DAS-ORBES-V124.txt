@@ -1,0 +1,33 @@
+DIVINA BRUXA — CORREÇÃO DEFINITIVA DAS ORBES · V124
+
+POR QUE ESTA CORREÇÃO EXISTE
+A V123 chegou ao domínio, mas a auditoria visual encontrou duas regras antigas que
+ainda podiam vencer a skin escolhida: a textura fixa da orbe central do rodapé e a
+textura já carregada dentro do canvas da orbe principal.
+
+COMO INSTALAR
+1. Envie os cinco arquivos deste ZIP diretamente para a raiz do GitHub.
+2. Substitua os quatro arquivos existentes quando o GitHub perguntar.
+3. Não crie nenhuma pasta.
+4. Aguarde a publicação, feche a aba antiga e abra o site novamente.
+
+ARQUIVOS
+- index.html
+- orb-skin-release-v1.css
+- orb-skin-release-v1.js
+- sw.js
+- LEIA-PRIMEIRO-CORRECAO-DEFINITIVA-DAS-ORBES-V124.txt
+
+O QUE MUDA
+- A orbe principal passa a trocar também a textura interna usada pelo WebGL.
+- A orbe central do rodapé recebe a skin com prioridade superior às regras antigas.
+- Cabeçalho, menu, rodapé, Tarot Livre e orbes internas usam a mesma imagem ativa.
+- A película de vidro permanece, sem misturar a textura clássica sobre outra skin.
+
+O QUE NÃO MUDA
+- Motor, fluidez, respiração, fases, toque, duplo toque e gestos da orbe.
+- Tamanho e posição da orbe.
+- Menu e dock aprovados.
+- Home e seus textos.
+- Tarot Livre, cartas, grade, setas, embaralhamento e recomeço.
+

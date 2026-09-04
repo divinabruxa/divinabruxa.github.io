@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V15 · LANÇAMENTO TAROT LIVRE */
-const CACHE='divina-bruxa-v15-tarot-release-1';
+/* DIVINA BRUXA — SERVICE WORKER V16 · SINCRONISMO TOTAL DAS ORBES */
+const CACHE='divina-bruxa-v16-orb-sync-1';
 
 const REQUIRED=[
   './',
@@ -79,4 +79,3 @@ self.addEventListener('fetch',event=>{
     }
   })());
 });
-

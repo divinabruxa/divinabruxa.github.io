@@ -9,6 +9,12 @@ html[data-runtime="v12"] #tableOrb .table-orb-image{
   background-size:cover!important;
 }
 
+/* A especificidade desta salvaguarda vence as regras antigas do dock sem mudar sua forma. */
+html[data-runtime="v12"] body .magic-dock .dock-orb .mini-orb[data-orb-surface="dock"],
+html[data-runtime="v12"] body .magic-dock .dock-orb .mini-orb.mini-awake[data-orb-surface="dock"]{
+  background-image:var(--db-release-orb-image)!important;
+}
+
 /* A película de vidro continua viva, sem recolocar a textura clássica sobre outra skin. */
 html[data-runtime="v12"] .mini-orb[data-orb-surface]::after{
   background-image:radial-gradient(ellipse at 25% 14%,rgba(255,255,255,.22),transparent 25%)!important;
@@ -16,4 +22,3 @@ html[data-runtime="v12"] .mini-orb[data-orb-surface]::after{
   background-repeat:no-repeat!important;
   background-size:100% 100%!important;
 }
-
