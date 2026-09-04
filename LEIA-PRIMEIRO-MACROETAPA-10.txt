@@ -1,0 +1,12 @@
+DIVINA BRUXA — MACROETAPA 10
+LOJA MÍSTICA E AMAZON
+
+Envie na raiz do GitHub:
+1. SUBSTITUA index.html
+2. ADICIONE store-v5.css
+3. ADICIONE MANIFESTO-MACROETAPA-10.json
+4. ADICIONE LEIA-PRIMEIRO-MACROETAPA-10.txt
+
+O index carrega store-v5.css?v=110.
+Não altere códigos de afiliado sem validação e não altere CNAME.
+Depois da publicação, responda INSTALADO.

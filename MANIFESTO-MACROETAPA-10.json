@@ -1,0 +1,8 @@
+{
+  "produto": "Divina Bruxa — A Orbe das Realidades",
+  "macroetapa": 10,
+  "titulo": "Loja Mística e Amazon",
+  "objetivo": "Apresentar a curadoria de produtos com beleza, transparência de afiliados e links seguros.",
+  "arquivos_substituir": ["index.html", "store-v5.css"],
+  "status": "staging; aguarda upload manual no GitHub"
+}
