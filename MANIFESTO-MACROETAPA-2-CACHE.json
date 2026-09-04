@@ -1,0 +1,9 @@
+{
+  "produto": "Divina Bruxa — A Orbe das Realidades",
+  "macroetapa": 2,
+  "titulo": "Correção final de cache da Biblioteca",
+  "objetivo": "Forçar a entrega do CSS premium ativo no navegador e CDN.",
+  "arquivos_substituir": ["index.html", "card-library-v5.css"],
+  "criterios_aceite": ["index carrega card-library-v5.css?v=101", "filtros sticky visíveis", "Orbe e skins preservadas"],
+  "status": "staging; aguarda upload manual no GitHub"
+}
