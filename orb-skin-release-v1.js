@@ -1,8 +1,8 @@
 /* DIVINA BRUXA — SINCRONISMO ABSOLUTO DAS ORBES V3
    Uma textura pré-decodificada, uma troca atômica e nenhuma varredura causada por textos comuns. */
 
-import { skinByIdV12 } from './skin-registry-v12.js';
-import { preloadSkinAsset } from './skin-universal-v10.js?v=129';
+import { skinByIdV12 } from './skin-registry-v12.js?v=133';
+import { preloadSkinAsset } from './skin-universal-v10.js?v=133';
 
 const html = document.documentElement;
 const ORB_CANDIDATE = '#orb,.app-header .mini-orb,.magic-menu-brand .mini-orb,.magic-menu-core .mini-orb,.magic-dock .dock-orb .mini-orb,#tableOrb .table-orb-image img,#dailyCard .ritual-breathe span,.mini-orb';

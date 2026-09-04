@@ -1,0 +1,54 @@
+DIVINA BRUXA — V133 · ORBES INSTANTÂNEAS
+
+OBJETIVO
+Corrigir a demora e os círculos escuros enquanto a Orbe principal, as mini-Orbes
+e a página de Skins carregam — sem mudar tamanho, posição, motor, gestos, menu,
+movimento ou a aparência aprovada.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+1. Descompacte o ZIP.
+2. Abra a pasta criada e selecione TODOS os arquivos que estão dentro dela.
+3. Envie todos diretamente para a raiz do repositório divinabruxa.github.io.
+4. Quando o GitHub perguntar, confirme a substituição dos arquivos com o mesmo nome.
+5. Não envie somente o ZIP: o site precisa dos arquivos descompactados.
+6. Não apague as imagens PNG antigas. Elas ficam guardadas como cópia de segurança.
+7. Espere a publicação do GitHub Pages e feche completamente o Safari ou o app instalado.
+8. Abra novamente www.divinabruxa.com.br. A primeira abertura atualiza o cache V133;
+   as próximas recebem as imagens otimizadas diretamente do aparelho.
+
+O QUE MUDOU
+- Cada uma das 30 skins ganhou uma miniatura WebP de 384 px para aparecer imediatamente.
+- Cada uma das 30 skins ganhou uma textura WebP de 1024 px para o motor HD da Orbe.
+- O conjunto ativo caiu de aproximadamente 84,5 MB para aproximadamente 8,8 MB.
+- A skin salva começa a carregar antes dos módulos do aplicativo.
+- A Orbe abre primeiro com sua miniatura e troca para HD somente após a decodificação.
+- A página de Skins carrega progressivamente apenas as miniaturas próximas da tela.
+- Miniaturas recentes permanecem prontas por 12 segundos para não piscar ao rolar.
+- Preloads pesados e desnecessários da Home foram retirados.
+- O ícone do site caiu para cerca de 70 KB, mantendo a mesma arte.
+- O cache V25 entrega os novos arquivos imutáveis sem esperar a rede nas próximas visitas.
+
+ARQUIVOS DE CONTROLE SUBSTITUÍDOS
+index.html
+app.js
+runtime-v12.js
+skin-registry-v12.js
+skins-v6.js
+orb-skin-release-v1.js
+orb-skin-release-v1.css
+sw.js
+
+ARQUIVOS NOVOS
+30 arquivos *-thumb-v1.webp
+30 arquivos *-fast-v1.webp
+divina-icon-fast-v1.png
+
+VALIDAÇÃO FEITA
+- 30 skins conferidas no registro.
+- 30 miniaturas em 384 x 384.
+- 30 texturas principais em 1024 x 1024.
+- Todas as superfícies da Orbe apontam para a mesma skin ativa.
+- Bootstrap da skin salva conferido individualmente nas 30 opções.
+- Sintaxe JavaScript e manifesto do ZIP conferidos.
+
+VERSÃO: V133 · 04/09/2026

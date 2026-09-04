@@ -1,5 +1,6 @@
-/* DIVINA BRUXA — SERVICE WORKER V24 · ATLAS VISUAL CÓSMICO */
-const CACHE='divina-bruxa-v24-atlas-visual';
+/* DIVINA BRUXA — SERVICE WORKER V25 · ORBES INSTANTÂNEAS */
+const CACHE='divina-bruxa-v25-orbes-instantaneas';
+const FAST_IMAGE=/(?:divina-icon-fast-v1\.png|(?:divina-orb|skin-[^/]+)-(?:fast|thumb)-v1\.webp)$/;
 
 const REQUIRED=[
   './',
@@ -24,13 +25,13 @@ const REQUIRED=[
   './tarot-editorial-policy.js',
   './tarot-livre-official-v1.css',
   './tarot-livre-ios-v1.css',
-  './tarot-temple-oficial-v127.jpeg',
   './orb-skin-release-v1.css',
   './orb-skin-release-v1.js',
   './cosmic-visual-atlas-v1.css',
   './cosmic-visual-atlas-v1.js',
-  './divina-orb-v68.png',
-  './divina-mini-orb-hd-v72.jpeg'
+  './divina-orb-fast-v1.webp',
+  './divina-orb-thumb-v1.webp',
+  './divina-icon-fast-v1.png'
 ];
 
 const WARM=[
@@ -48,8 +49,7 @@ const WARM=[
   './commerce-engine.js','./consultation-engine.js','./consultation-policy.js','./store-engine.js','./store-policy.js','./media-engine-v5.js','./media-policy.js',
   './notification-engine.js','./notification-policy.js','./admin-engine.js','./admin-policy.js','./analytics-engine.js','./analytics-policy.js',
   './privacy-engine.js','./privacy-policy.js','./pwa-engine.js','./trust-engine.js','./trust-policy.js','./auth-client-v6.js','./rhythm-v6.js',
-  './ecosystem-v6.js','./performance-v6.js','./ai-engine.js','./ai-policy.js','./ai-credits.js','./premium-engine.js','./premium-policy.js',
-  './cosmic-background.png','./carta-dia-santuario-lunar-v1.webp'
+  './ecosystem-v6.js','./performance-v6.js','./ai-engine.js','./ai-policy.js','./ai-credits.js','./premium-engine.js','./premium-policy.js'
 ];
 
 self.addEventListener('install',event=>event.waitUntil((async()=>{
@@ -72,6 +72,21 @@ self.addEventListener('fetch',event=>{
   const navigation=event.request.mode==='navigate'||event.request.destination==='document';
 
   event.respondWith((async()=>{
+    if(sameOrigin&&FAST_IMAGE.test(url.pathname)){
+      const cached=await caches.match(event.request,{ignoreSearch:true});
+      if(cached) return cached;
+      try{
+        const response=await fetch(event.request);
+        if(response.ok){
+          const cache=await caches.open(CACHE);
+          await cache.put(event.request,response.clone());
+        }
+        return response;
+      }catch{
+        return new Response('',{status:503,statusText:'Offline'});
+      }
+    }
+
     try{
       const response=await fetch(event.request);
       if(response.ok&&sameOrigin){

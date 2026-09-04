@@ -1,6 +1,6 @@
 import { CONFIG } from './config.js';
 import { escapeHTML } from './storage.js';
-import { installRuntimeV12 } from './runtime-v12.js?v=130';
+import { installRuntimeV12 } from './runtime-v12.js?v=133';
 import { createNavigation } from './navigation.js?v=100';
 import { RealityOrbEngine } from './orb-engine-v68.js?v=100';
 import { bindMiniOrbs } from './mini-orb-engine.js?v=71';
@@ -25,7 +25,7 @@ import { AuthClient } from './auth-client-v6.js';
 import { installVisualGuard } from './visual-guard-v6.js';
 import { installTarotExperience } from './tarot-experience-v6.js';
 import { RhythmEngine } from './rhythm-v6.js';
-import { SkinsEngine } from './skins-v6.js?v=129';
+import { SkinsEngine } from './skins-v6.js?v=133';
 import { EcosystemEngine } from './ecosystem-v6.js';
 import { PerformanceEngine } from './performance-v6.js';
 import { AIEngine } from './ai-engine.js';

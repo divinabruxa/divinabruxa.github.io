@@ -11,12 +11,12 @@ html[data-runtime="v12"] #tableOrb .table-orb-image{
 
 /* Quando o aparelho usa a camada de segurança sem WebGL, ela recebe a skin ativa. */
 html[data-runtime="v12"] #home #orb[data-orb-surface="home"]::before{
-  background-image:var(--db-release-orb-image,url("./divina-orb-v68.png?v=69"))!important;
+  background-image:var(--db-release-orb-image,var(--db-boot-orb-image,url("./divina-orb-thumb-v1.webp")))!important;
 }
 
 /* A Orbe ritual da Carta do Dia também pertence à mesma realidade escolhida. */
 html[data-runtime="v12"] #dailyCard .ritual-breathe span{
-  background-image:var(--db-release-orb-image,url("./divina-orb-v68.png?v=69"))!important;
+  background-image:var(--db-release-orb-image,var(--db-boot-orb-image,url("./divina-orb-thumb-v1.webp")))!important;
   background-position:50% 50%!important;
   background-repeat:no-repeat!important;
   background-size:cover!important;

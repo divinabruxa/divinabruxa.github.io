@@ -8,6 +8,10 @@ const surfaceMap = image => Object.freeze({
   internal: image
 });
 
+const optimizedAsset = (original, variant) => original === 'divina-orb-v68.png'
+  ? `divina-orb-${variant}-v1.webp`
+  : original.replace(/-v1\.png$/, `-${variant}-v1.webp`);
+
 const definitions = [
   // A clássica usa exatamente a textura V68 já aprovada para não alterar a Home atual.
   ['classic', 'Clássica Divina', 'divina-orb-v68.png', '#a565d6', '#f0d68a'],
@@ -42,16 +46,22 @@ const definitions = [
   ['star-crown', 'Coroa das Estrelas', 'skin-coroa-estrelas-v1.png', '#b08334', '#fff0bd']
 ];
 
-const skins = definitions.map(([id, name, image, accent, light]) => Object.freeze({
+const skins = definitions.map(([id, name, original, accent, light]) => {
+  const image = optimizedAsset(original, 'fast');
+  const preview = optimizedAsset(original, 'thumb');
+  return Object.freeze({
   id,
   name,
+  original,
   image,
+  preview,
   tokens: Object.freeze({ accent, light }),
   surfaces: surfaceMap(image)
-}));
+  });
+});
 
 export const SKIN_REGISTRY_V12 = Object.freeze({
-  version: '12.0.0',
+  version: '12.3.0',
   skins: Object.freeze(skins),
   fallbackSkin: skins[0]
 });

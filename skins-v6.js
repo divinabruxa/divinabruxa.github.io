@@ -2,10 +2,11 @@
    Galeria progressiva, troca atômica e nenhuma reconstrução da página ao escolher uma skin. */
 
 import { SKINS_V6 } from './skin-catalog-v6.js';
-import { skinByIdV12 } from './skin-registry-v12.js';
-import { activateSkinFluidV12, activeSkinV12, prepareSkinV12 } from './runtime-v12.js?v=129';
+import { skinByIdV12 } from './skin-registry-v12.js?v=133';
+import { activateSkinFluidV12, activeSkinV12, prepareSkinV12 } from './runtime-v12.js?v=133';
 
 const KEY = 'divina-skin-entitlements-v6';
+const PREVIEW_RELEASE_DELAY = 12000;
 const money = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
 const escapeHTML = value => String(value).replace(/[&<>"]/g, character => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'
@@ -48,14 +49,14 @@ export class SkinsEngine {
     const current = skin.id === active;
     const owned = this.owned.has(skin.id);
     const price = catalogSkin.priceCents ? money.format(catalogSkin.priceCents / 100) : 'Grátis';
-    const source = escapeHTML(skin.image);
+    const source = escapeHTML(skin.preview || skin.image);
     return `
       <article class="skin-tile${current ? ' is-active' : ''}" data-skin-card="${escapeHTML(skin.id)}"
         style="--skin-accent:${escapeHTML(skin.tokens.accent)};--skin-light:${escapeHTML(skin.tokens.light)}"
         role="listitem"${current ? ' aria-current="true"' : ''}>
         <div class="skin-preview" role="img" aria-label="Prévia da skin ${escapeHTML(skin.name)}">
           <img ${current ? `src="${source}" ` : ''}data-preview-src="${source}" data-preview-skin="${escapeHTML(skin.id)}"
-            class="${current ? 'is-loaded' : ''}" alt="" width="320" height="320" decoding="async" fetchpriority="low" aria-hidden="true">
+            class="${current ? 'is-loaded' : ''}" alt="" width="320" height="320" loading="lazy" decoding="async" fetchpriority="low" aria-hidden="true">
           <span class="skin-active-seal" aria-hidden="true">✦</span>
         </div>
         <div class="skin-copy">
@@ -76,7 +77,7 @@ export class SkinsEngine {
       <div class="skins-v7-shell">
         <section class="skins-v7-current" aria-labelledby="skinsCurrentTitle">
           <div class="skins-v7-active-orb" aria-hidden="true">
-            <img id="skinsCurrentImage" src="${escapeHTML(skin.image)}" alt="" width="320" height="320" decoding="async" fetchpriority="high">
+            <img id="skinsCurrentImage" src="${escapeHTML(skin.preview || skin.image)}" alt="" width="320" height="320" decoding="async" fetchpriority="high">
             <span>✦</span>
           </div>
           <div class="skins-v7-current-copy">
@@ -162,7 +163,7 @@ export class SkinsEngine {
           this.queuePreviewRelease(preview);
         }
       });
-    }, { rootMargin: '120px 0px', threshold: 0.01 });
+    }, { rootMargin: '360px 0px', threshold: 0.01 });
 
     previews.forEach(preview => this.previewObserver.observe(preview));
   }
@@ -205,7 +206,7 @@ export class SkinsEngine {
       preview.removeAttribute('src');
       preview.classList.remove('is-loaded');
       delete preview.dataset.previewLoading;
-    }, 900);
+    }, PREVIEW_RELEASE_DELAY);
     this.previewUnloadTimers.set(preview, timer);
   }
 
@@ -274,8 +275,9 @@ export class SkinsEngine {
 
     if (this.currentTitle) this.currentTitle.textContent = activeSkin.name;
     if (this.currentImage) {
-      const target = new URL(activeSkin.image, document.baseURI).href;
-      if (this.currentImage.src !== target) this.currentImage.src = activeSkin.image;
+      const source = activeSkin.preview || activeSkin.image;
+      const target = new URL(source, document.baseURI).href;
+      if (this.currentImage.src !== target) this.currentImage.src = source;
     }
     if (this.classicButton) this.classicButton.disabled = active === 'classic' || Boolean(this.pending);
 

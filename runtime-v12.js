@@ -1,6 +1,6 @@
-import { applySkinContract, preloadSkinAsset, preparedSkinImage, readStoredSkin } from './skin-universal-v10.js?v=129';
+import { applySkinContract, preloadSkinAsset, preparedSkinImage, readStoredSkin } from './skin-universal-v10.js?v=133';
 import { createPortalTransition } from './portal-transition-v10.js?v=130';
-import { SKIN_REGISTRY_V12, skinByIdV12 } from './skin-registry-v12.js';
+import { SKIN_REGISTRY_V12, skinByIdV12 } from './skin-registry-v12.js?v=133';
 
 const ACTIVE_SKIN_KEY = 'divina.skin.v10';
 let portal = null;
@@ -158,7 +158,7 @@ export function activateSkinV12(id, { persist = true } = {}) {
 
 export async function activateSkinFluidV12(id, { persist = true } = {}) {
   const skin = skinByIdV12(id);
-  if (activeSkinV12() === skin.id) return true;
+  if (document.documentElement.dataset.skin && activeSkinV12() === skin.id) return true;
 
   const token = ++skinSwitchToken;
   const html = document.documentElement;
@@ -214,14 +214,14 @@ export function installRuntimeV12() {
   installPortalLayer();
 
   const stored = readStoredSkin(localStorage, ACTIVE_SKIN_KEY) || 'classic';
-  if (stored === 'classic') activateSkinV12('classic', { persist: false });
-  else {
-    activateSkinV12('classic', { persist: false });
-    activateSkinFluidV12(stored, { persist: false }).catch(() => {});
-  }
+  activateSkinFluidV12(stored, { persist: false }).then(applied => {
+    if (!applied && skinByIdV12(stored).id !== 'classic') {
+      activateSkinFluidV12('classic', { persist: false }).catch(() => {});
+    }
+  }).catch(() => {});
 
   document.documentElement.dataset.runtime = 'v12';
   document.dispatchEvent(new CustomEvent('divina:runtime-ready', {
-    detail: { version: '12.2.0', skins: SKIN_REGISTRY_V12.skins.length, realms: Object.keys(PAGE_REALMS).length }
+    detail: { version: '12.3.0', skins: SKIN_REGISTRY_V12.skins.length, realms: Object.keys(PAGE_REALMS).length }
   }));
 }
