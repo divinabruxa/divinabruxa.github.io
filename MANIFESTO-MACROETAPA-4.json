@@ -1,0 +1,9 @@
+{
+  "produto": "Divina Bruxa — A Orbe das Realidades",
+  "macroetapa": 4,
+  "titulo": "Carta do Dia e Tiragens premium",
+  "objetivo": "Dar aos rituais diários e às tiragens uma apresentação editorial cósmica, legível e acessível.",
+  "arquivos_substituir": ["index.html", "tarot-editorial-v5.css", "spreads-v5.css"],
+  "criterios_aceite": ["Carta do Dia com destaque ritual", "Tiragens com posições legíveis", "foco visível", "responsivo", "sem cartas invertidas"],
+  "status": "staging; aguarda upload manual no GitHub"
+}
