@@ -1,0 +1,9 @@
+{
+  "produto": "Divina Bruxa — A Orbe das Realidades",
+  "macroetapa": 6,
+  "titulo": "Diário e Espelho protegidos",
+  "objetivo": "Criar um espaço íntimo, bonito e confortável para registrar e observar jornadas pessoais.",
+  "arquivos_substituir": ["index.html", "journal-v5.css"],
+  "criterios_aceite": ["editor legível", "privacidade destacada", "foco acessível", "responsivo", "sem exposição do texto do diário"],
+  "status": "staging; aguarda upload manual no GitHub"
+}
