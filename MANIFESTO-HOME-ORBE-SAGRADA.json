@@ -1,0 +1,25 @@
+{
+  "produto": "Divina Bruxa — A Orbe das Realidades",
+  "tipo": "correcao-visual-prioritaria",
+  "titulo": "Home Orbe Sagrada",
+  "substituir": [
+    "index.html",
+    "runtime-v12.css"
+  ],
+  "adicionar": [
+    "home-orb-only-v1.css",
+    "PLANO-SUPREMO-VISUAL-V13.txt"
+  ],
+  "bloqueios": [
+    "orb-engine-v68.js",
+    "navigation.js",
+    "menu-ring-v8.css",
+    "imagens de skins"
+  ],
+  "aceite": [
+    "Home mostra somente a Orbe principal e a navegação fixa",
+    "mini Orbe aparece ao lado de Divina Bruxa",
+    "gestos e transições permanecem iguais à versão aprovada",
+    "menu orbital permanece intacto"
+  ]
+}

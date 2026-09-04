@@ -1,0 +1,48 @@
+/* DIVINA BRUXA — HOME SOMENTE COM A ORBE PRINCIPAL.
+   Não altera motor, canvas, gestos, menu orbital ou skins. */
+
+html[data-runtime="v12"] #home.active{
+  display:grid!important;
+  grid-template-rows:1fr;
+  place-items:center;
+  min-height:100svh;
+  max-width:none;
+  padding:calc(96px + env(safe-area-inset-top)) 16px calc(112px + env(safe-area-inset-bottom));
+  overflow:hidden;
+}
+
+html[data-runtime="v12"] #home.active>.portal-divider,
+html[data-runtime="v12"] #home.active>.home-copy,
+html[data-runtime="v12"] #home.active>.awaken,
+html[data-runtime="v12"] #home.active>.orb-status,
+html[data-runtime="v12"] #home.active>.touch-hint,
+html[data-runtime="v12"] #home.active>.home-paths,
+html[data-runtime="v12"] #home.active>.home-skins,
+html[data-runtime="v12"] #home.active>.home-touch,
+html[data-runtime="v12"] #home.active>.home-commerce,
+html[data-runtime="v12"] #home.active>.home-trust{
+  display:none!important;
+}
+
+html[data-runtime="v12"] #home.active>.orb-stage-ref{
+  display:block!important;
+  margin:auto;
+}
+
+/* A imagem continua vindo do motor de skins por estilo inline. */
+html[data-runtime="v12"] .app-header .brand .mini-orb{
+  display:block!important;
+  opacity:1!important;
+  visibility:visible!important;
+  background-color:#0a0310;
+  background-size:104%!important;
+  background-position:50% 50%!important;
+  background-repeat:no-repeat!important;
+}
+
+@media(max-width:560px){
+  html[data-runtime="v12"] #home.active{
+    padding:calc(82px + env(safe-area-inset-top)) 10px calc(96px + env(safe-area-inset-bottom));
+  }
+}
+

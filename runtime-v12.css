@@ -21,7 +21,7 @@ html[data-runtime="v12"] #app > .screen.active:not(#home) {
 }
 
 html[data-runtime="v12"] [data-orb-surface]:not(img) {
-  background-image: var(--db-orb-surface-image) !important;
+  background-image: var(--db-orb-surface-image);
   background-position: center !important;
   background-repeat: no-repeat !important;
   background-size: cover !important;
@@ -133,4 +133,5 @@ html[data-runtime="v12"] .home-menu-portals .menu-portal b {
     font-size: .56rem;
   }
 }
+
 

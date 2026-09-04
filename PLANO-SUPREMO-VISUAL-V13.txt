@@ -1,0 +1,34 @@
+PLANO SUPREMO VISUAL — NOVO CICLO
+DIVINA BRUXA · A ORBE DAS REALIDADES
+
+REGRA CENTRAL
+A Orbe principal e o menu orbital ficam congelados como patrimônio visual. Nenhuma nova etapa poderá mudar motor, gesto, geometria, tamanho, textura ou transição sem aprovação visual explícita.
+
+ETAPA VISUAL 1 — HOME SAGRADA
+- Home somente com cabeçalho, Orbe principal, menu e dock.
+- Retirar títulos, textos, cards, skins, consultas e loja da Home.
+- Restaurar mini Orbe ao lado do nome Divina Bruxa.
+- Preservar toque, giro, respiração, duplo toque e menu.
+
+ETAPA VISUAL 2 — BÍBLIA DE ARTE
+- Definir paleta cósmica, iluminação, molduras, partículas e tipografia.
+- Criar uma identidade exclusiva para cada página sem perder a unidade da marca.
+- Definir formatos mobile, tablet e desktop antes de produzir imagens.
+
+ETAPA VISUAL 3 — IMAGENS ORIGINAIS, UMA POR UMA
+- Produzir uma imagem hero exclusiva para cada página.
+- Ordem: Tarot Livre, Carta do Dia, Tiragens, Biblioteca, Escola, Diário, Orbe IA, Premium/Skins, Consultas, Loja, Música, Vídeo e Conta.
+- Cada imagem será criada, revisada e aprovada individualmente antes da próxima.
+- Não copiar Labyrinthos; usar apenas como referência de riqueza e consistência.
+
+ETAPA VISUAL 4 — MUNDOS ÚNICOS
+- Aplicar cenário, transição de entrada e detalhes mágicos específicos por página.
+- Skins devem continuar mudando todas as Orbes do aplicativo.
+- Manter legibilidade, fluidez, acessibilidade e reduced motion.
+
+ETAPA VISUAL 5 — QA VISUAL SUPREMO
+- Comparar iPhone, Android, tablet e desktop.
+- Testar todas as skins, rotas, gestos, menu, dock e transições.
+- Corrigir cortes, sobreposições, textos espremidos e imagens de baixa qualidade.
+- Só depois retomar conteúdo, monetização e saída do beta.
+

@@ -1,0 +1,26 @@
+CORREÇÃO VISUAL PRIORITÁRIA — HOME E ÍCONE
+
+Envie os 6 arquivos deste ZIP para a raiz do GitHub:
+
+SUBSTITUIR:
+1. index.html
+2. runtime-v12.css
+
+ADICIONAR:
+3. home-orb-only-v1.css
+4. MANIFESTO-HOME-ORBE-SAGRADA.json
+5. PLANO-SUPREMO-VISUAL-V13.txt
+6. LEIA-PRIMEIRO-HOME-ORBE-SAGRADA.txt
+
+Esta correção:
+- deixa a Home somente com a Orbe principal;
+- restaura a mini Orbe ao lado de DIVINA BRUXA;
+- remove o CSS global da Macroetapa 14 que poderia afetar os gestos;
+- não altera orb-engine-v68.js;
+- não altera navigation.js;
+- não altera menu-ring-v8.css;
+- não altera as imagens das skins.
+
+Não apague arquivos e não altere CNAME.
+Depois da publicação, responda INSTALADO.
+
