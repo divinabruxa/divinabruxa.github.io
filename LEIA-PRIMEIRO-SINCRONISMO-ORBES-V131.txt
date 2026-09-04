@@ -1,0 +1,24 @@
+DIVINA BRUXA — SINCRONISMO ABSOLUTO DAS ORBES V131
+
+ENVIE ESTES 4 ARQUIVOS PARA A RAIZ DO GITHUB:
+
+1. index.html
+2. orb-skin-release-v1.css
+3. orb-skin-release-v1.js
+4. sw.js
+
+Quando o GitHub perguntar, substitua os arquivos que já existem.
+Não apague nenhum outro arquivo do site.
+
+O QUE ESTA CORREÇÃO FAZ
+
+• A camada de segurança da Orbe principal passa a usar a skin escolhida, inclusive em aparelhos sem WebGL.
+• A pequena Orbe ritual da página Carta do Dia passa a usar a mesma skin.
+• Toda nova Orbe ritual criada ao entrar na página é reconhecida automaticamente.
+• A troca continua pré-carregada, atômica e fluida.
+• A Home, as palavras, a geometria, os gestos e o motor da Orbe não foram alterados.
+• O menu, o dock, o Tarot Livre V128, a página de Skins V129 e os 13 mundos internos V130 não foram redesenhados.
+
+DEPOIS DE ENVIAR
+
+Espere o GitHub Pages concluir a publicação. Feche completamente o site ou aplicativo e abra novamente para o novo cache V23 assumir o controle.

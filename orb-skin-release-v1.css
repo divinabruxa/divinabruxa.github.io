@@ -1,9 +1,22 @@
-/* DIVINA BRUXA — SINCRONISMO FINAL DAS ORBES V1
+/* DIVINA BRUXA — SINCRONISMO ABSOLUTO DAS ORBES V3
    Corrige somente a textura ativa. Geometria, motor, gestos e movimento permanecem intactos. */
 
 html[data-runtime="v12"] [data-orb-surface]:not(img),
 html[data-runtime="v12"] #tableOrb .table-orb-image{
   background-image:var(--db-release-orb-image)!important;
+  background-position:50% 50%!important;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+}
+
+/* Quando o aparelho usa a camada de segurança sem WebGL, ela recebe a skin ativa. */
+html[data-runtime="v12"] #home #orb[data-orb-surface="home"]::before{
+  background-image:var(--db-release-orb-image,url("./divina-orb-v68.png?v=69"))!important;
+}
+
+/* A Orbe ritual da Carta do Dia também pertence à mesma realidade escolhida. */
+html[data-runtime="v12"] #dailyCard .ritual-breathe span{
+  background-image:var(--db-release-orb-image,url("./divina-orb-v68.png?v=69"))!important;
   background-position:50% 50%!important;
   background-repeat:no-repeat!important;
   background-size:cover!important;

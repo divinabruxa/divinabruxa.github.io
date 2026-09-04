@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V22 · MUNDOS INTERIORES */
-const CACHE='divina-bruxa-v22-mundos-interiores';
+/* DIVINA BRUXA — SERVICE WORKER V23 · SINCRONISMO ABSOLUTO DAS ORBES */
+const CACHE='divina-bruxa-v23-orbes-absolutas';
 
 const REQUIRED=[
   './',

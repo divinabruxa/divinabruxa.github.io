@@ -1,11 +1,11 @@
-/* DIVINA BRUXA — SINCRONISMO FLUIDO DAS ORBES V2
+/* DIVINA BRUXA — SINCRONISMO ABSOLUTO DAS ORBES V3
    Uma textura pré-decodificada, uma troca atômica e nenhuma varredura causada por textos comuns. */
 
 import { skinByIdV12 } from './skin-registry-v12.js';
 import { preloadSkinAsset } from './skin-universal-v10.js?v=129';
 
 const html = document.documentElement;
-const ORB_CANDIDATE = '#orb,.app-header .mini-orb,.magic-menu-brand .mini-orb,.magic-menu-core .mini-orb,.magic-dock .dock-orb .mini-orb,#tableOrb .table-orb-image img,.mini-orb';
+const ORB_CANDIDATE = '#orb,.app-header .mini-orb,.magic-menu-brand .mini-orb,.magic-menu-core .mini-orb,.magic-dock .dock-orb .mini-orb,#tableOrb .table-orb-image img,#dailyCard .ritual-breathe span,.mini-orb';
 let scheduled = 0;
 let pendingDetail = {};
 let canvasToken = 0;
@@ -19,7 +19,8 @@ function markSurfaces() {
     ['.magic-menu-brand .mini-orb', 'menu'],
     ['.magic-menu-core .mini-orb', 'menu'],
     ['.magic-dock .dock-orb .mini-orb', 'dock'],
-    ['#tableOrb .table-orb-image img', 'table']
+    ['#tableOrb .table-orb-image img', 'table'],
+    ['#dailyCard .ritual-breathe span', 'internal']
   ];
 
   for (const [selector, surface] of surfaces) {
@@ -137,7 +138,7 @@ function synchronize(detail = {}) {
   if (html.style.getPropertyValue('--db-release-orb-image') !== cssImage) {
     html.style.setProperty('--db-release-orb-image', cssImage);
   }
-  html.dataset.orbRelease = 'v2';
+  html.dataset.orbRelease = 'v3';
 
   const absolute = new URL(source, document.baseURI).href;
   document.querySelectorAll('[data-orb-surface]').forEach(node => {
