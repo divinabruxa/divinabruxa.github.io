@@ -1,0 +1,8 @@
+/* Divina Bruxa — Macroetapa 14: PWA final, performance e acessibilidade. */
+html[data-runtime="v12"]{text-rendering:optimizeLegibility}
+html[data-runtime="v12"] img{content-visibility:auto}
+html[data-runtime="v12"] button,html[data-runtime="v12"] a,input,textarea,select{touch-action:manipulation}
+html[data-runtime="v12"] :focus-visible{outline-color:var(--db-skin-light,#f0d68a);outline-offset:3px}
+html[data-runtime="v12"] .screen.active{contain:layout style}
+@media(prefers-reduced-motion:reduce){html[data-runtime="v12"] *,html[data-runtime="v12"] *::before,html[data-runtime="v12"] *::after{scroll-behavior:auto!important;animation-duration:.001ms!important;transition-duration:.001ms!important}}
+

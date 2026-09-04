@@ -1,0 +1,10 @@
+{
+  "produto": "Divina Bruxa — A Orbe das Realidades",
+  "macroetapa": 14,
+  "titulo": "PWA, performance e QA final",
+  "objetivo": "Preparar a versão beta para instalação, uso offline essencial, acessibilidade e auditoria final.",
+  "arquivos_substituir": ["index.html", "sw.js"],
+  "arquivos_adicionar": ["pwa-final-v1.css"],
+  "criterios_aceite": ["cache final v14", "offline fallback preservado", "reduced motion", "foco visível", "imagens lazy-friendly", "sem cobrança/DNS/produção liberados"],
+  "status": "staging; aguarda upload manual no GitHub"
+}

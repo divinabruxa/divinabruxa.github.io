@@ -1,0 +1,14 @@
+DIVINA BRUXA — MACROETAPA 14
+PWA, PERFORMANCE E QA FINAL
+
+Envie na raiz do GitHub:
+1. SUBSTITUA index.html
+2. SUBSTITUA sw.js
+3. ADICIONE pwa-final-v1.css
+4. ADICIONE MANIFESTO-MACROETAPA-14.json
+5. ADICIONE LEIA-PRIMEIRO-MACROETAPA-14.txt
+
+O cache do Service Worker passa para v14 e inclui o CSS final.
+O pacote mantém fallback offline, reduced motion e foco acessível.
+Não altere CNAME, DNS, cobrança real ou publicação de produção.
+Depois da publicação, responda INSTALADO para a auditoria final.
