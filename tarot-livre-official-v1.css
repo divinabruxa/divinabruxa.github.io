@@ -1,0 +1,591 @@
+/* DIVINA BRUXA — TAROT LIVRE OFICIAL V1
+   Macroetapa 2 de 7: composição visual da tela aprovada.
+   Mantém o motor das 78 cartas, a sessão e as skins existentes. */
+
+html[data-runtime="v12"] #app > #tarot.tarot-livre-official{
+  --tl-gold:#e8c77a;
+  --tl-gold-bright:#ffe4aa;
+  --tl-ink:#f8f0e8;
+  --tl-muted:#aa9eae;
+  isolation:isolate;
+  position:relative;
+  width:100%;
+  max-width:none;
+  min-height:100svh;
+  padding:calc(108px + env(safe-area-inset-top)) clamp(14px,4vw,42px) calc(150px + env(safe-area-inset-bottom));
+  overflow:visible;
+  color:var(--tl-ink);
+  background:
+    radial-gradient(ellipse at 50% 18%,rgba(113,35,160,.34),transparent 34rem),
+    radial-gradient(ellipse at 10% 58%,rgba(74,21,118,.16),transparent 30rem),
+    radial-gradient(ellipse at 90% 72%,rgba(114,39,155,.14),transparent 27rem),
+    linear-gradient(180deg,#030107 0%,#090311 44%,#030107 100%);
+}
+
+html[data-runtime="v12"] #app > #tarot.tarot-livre-official::before{
+  content:"";
+  position:absolute;
+  z-index:-2;
+  inset:0;
+  pointer-events:none;
+  opacity:.31;
+  background-image:
+    radial-gradient(circle,rgba(255,247,224,.82) 0 .7px,transparent 1.35px),
+    radial-gradient(circle,rgba(215,137,255,.72) 0 .8px,transparent 1.45px),
+    radial-gradient(circle,rgba(237,192,111,.62) 0 .65px,transparent 1.3px);
+  background-size:103px 127px,173px 199px,251px 277px;
+  background-position:17px 23px,71px 89px,119px 47px;
+  mask-image:linear-gradient(#000,rgba(0,0,0,.82) 76%,transparent 100%);
+}
+
+html[data-runtime="v12"] #app > #tarot.tarot-livre-official::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  top:235px;
+  left:50%;
+  width:min(94vw,980px);
+  aspect-ratio:1;
+  transform:translateX(-50%);
+  border-radius:50%;
+  pointer-events:none;
+  background:radial-gradient(circle,rgba(200,79,244,.12),rgba(99,28,154,.045) 46%,transparent 70%);
+  filter:blur(16px);
+}
+
+html[data-runtime="v12"] #tarot .section-head{
+  display:grid!important;
+  grid-template-columns:1fr;
+  justify-items:center;
+  align-items:center;
+  width:min(100%,860px);
+  margin:0 auto;
+  padding:10px 8px 18px;
+  border:0;
+  text-align:center;
+}
+
+html[data-runtime="v12"] #tarot .section-head > div{
+  display:grid;
+  justify-items:center;
+}
+
+html[data-runtime="v12"] #tarot .section-head .eyebrow{
+  margin:0;
+  color:var(--tl-gold);
+  font:600 clamp(9px,2.2vw,12px)/1.2 Inter,ui-sans-serif,system-ui,sans-serif;
+  letter-spacing:.31em;
+  text-transform:uppercase;
+}
+
+html[data-runtime="v12"] #tarot .section-head h2{
+  margin:12px 0 3px;
+  color:#f7e9d8;
+  font:400 clamp(52px,10vw,82px)/.94 Georgia,"Times New Roman",serif;
+  letter-spacing:-.045em;
+  text-shadow:0 7px 38px rgba(0,0,0,.5),0 0 28px rgba(185,84,233,.24);
+}
+
+html[data-runtime="v12"] #tarot .section-head #count{
+  display:flex;
+  align-items:baseline;
+  justify-content:center;
+  gap:5px;
+  margin-top:10px;
+  color:var(--tl-gold-bright);
+  font:400 clamp(22px,4vw,31px)/1 Georgia,"Times New Roman",serif;
+  letter-spacing:.08em;
+  text-shadow:0 0 17px rgba(232,199,122,.25);
+}
+
+html[data-runtime="v12"] #tarot .section-head #count small{
+  color:var(--tl-gold);
+  font:500 .52em/1 Inter,ui-sans-serif,system-ui,sans-serif;
+  letter-spacing:.04em;
+}
+
+html[data-runtime="v12"] #tarot .section-head #remaining{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  margin:-1px!important;
+  padding:0!important;
+  overflow:hidden!important;
+  clip:rect(0 0 0 0)!important;
+  clip-path:inset(50%)!important;
+  white-space:nowrap!important;
+}
+
+html[data-runtime="v12"] #tarot .deck-progress{
+  width:min(68vw,430px);
+  height:2px;
+  margin:0 auto 22px;
+  border-radius:999px;
+  background:rgba(232,199,122,.11);
+  box-shadow:0 0 18px rgba(177,61,226,.12);
+}
+
+html[data-runtime="v12"] #tarot .deck-progress i{
+  border-radius:inherit;
+  box-shadow:0 0 13px rgba(211,93,255,.65);
+}
+
+html[data-runtime="v12"] #tarot .ritual-altar{
+  isolation:isolate;
+  position:relative;
+  width:min(100%,790px);
+  min-height:810px;
+  margin:0 auto;
+  overflow:hidden;
+  border:1px solid rgba(232,199,122,.30);
+  border-radius:42px;
+  background:
+    radial-gradient(circle at 50% 38%,rgba(136,47,190,.34),transparent 31%),
+    radial-gradient(circle at 50% 61%,rgba(69,21,107,.20),transparent 40%),
+    linear-gradient(160deg,rgba(24,9,36,.97),rgba(3,1,8,.99) 74%);
+  box-shadow:
+    inset 0 1px rgba(255,247,224,.09),
+    inset 0 -150px 180px rgba(0,0,0,.58),
+    0 32px 110px rgba(0,0,0,.62),
+    0 0 48px rgba(151,52,207,.13);
+}
+
+html[data-runtime="v12"] #tarot .ritual-altar::before{
+  opacity:.27;
+  background-size:79px 83px,137px 149px;
+}
+
+html[data-runtime="v12"] #tarot .ritual-altar::after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  top:43%;
+  left:50%;
+  width:min(82%,610px);
+  aspect-ratio:1;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  pointer-events:none;
+  opacity:.46;
+  background:
+    radial-gradient(circle,transparent 0 45%,rgba(231,190,113,.20) 45.3% 45.6%,transparent 46%),
+    repeating-conic-gradient(from 0deg,rgba(232,199,122,.15) 0 .35deg,transparent .35deg 15deg),
+    radial-gradient(circle,rgba(202,83,248,.16),transparent 66%);
+  mask-image:radial-gradient(circle,#000 0 69%,transparent 70%);
+  filter:drop-shadow(0 0 24px rgba(196,78,240,.16));
+}
+
+html[data-runtime="v12"] #tarot .orbital-cards,
+html[data-runtime="v12"] #tarot .altar-rings,
+html[data-runtime="v12"] #tarot .ritual-constellation,
+html[data-runtime="v12"] #tarot .ritual-stats{
+  display:none!important;
+}
+
+html[data-runtime="v12"] #tarot .ritual-wheel{
+  position:absolute;
+  z-index:5;
+  top:48px;
+  left:50%;
+  width:min(calc(100% - 42px),680px);
+  height:570px;
+  aspect-ratio:auto;
+  transform:translateX(-50%);
+  display:grid;
+  place-items:center;
+}
+
+html[data-runtime="v12"] #tarot .ritual-wheel::before,
+html[data-runtime="v12"] #tarot .ritual-wheel::after{
+  display:none!important;
+}
+
+html[data-runtime="v12"] #tarot .ritual-card-center{
+  position:relative;
+  z-index:8;
+  display:grid;
+  place-items:center;
+  width:100%;
+  height:100%;
+  filter:drop-shadow(0 27px 38px rgba(0,0,0,.72));
+}
+
+html[data-runtime="v12"] #tarot .ritual-card-center .table-preview,
+html[data-runtime="v12"] #tarot .ritual-card-center .current.empty{
+  position:relative;
+  width:min(70vw,315px);
+  min-height:0;
+  aspect-ratio:2/3;
+  margin:0;
+  overflow:hidden;
+  border:1px solid rgba(244,210,142,.70);
+  border-radius:18px;
+  background:
+    radial-gradient(circle at 50% 43%,rgba(207,78,246,.34),transparent 29%),
+    linear-gradient(145deg,rgba(41,15,60,.98),rgba(5,2,11,.99));
+  box-shadow:
+    inset 0 0 0 5px rgba(5,2,11,.76),
+    inset 0 0 0 6px rgba(232,199,122,.23),
+    0 28px 62px rgba(0,0,0,.72),
+    0 0 34px rgba(196,75,239,.22);
+}
+
+html[data-runtime="v12"] #tarot .ritual-card-center .current:not(.empty){
+  border-color:rgba(255,224,161,.82);
+  background:#05020a;
+}
+
+html[data-runtime="v12"] #tarot .ritual-card-center .tarot-card-image{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  transform:none!important;
+  border:0;
+  border-radius:16px;
+  background:#05020a;
+  box-shadow:none;
+}
+
+html[data-runtime="v12"] #tarot .ritual-card-center .empty-card{
+  position:absolute;
+  inset:9px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  width:auto;
+  height:auto;
+  padding:24px;
+  border:1px solid rgba(232,199,122,.23);
+  border-radius:12px;
+  color:var(--tl-gold-bright);
+  background:
+    radial-gradient(circle at 50% 43%,rgba(223,95,255,.22),transparent 31%),
+    radial-gradient(circle at 50% 50%,rgba(78,22,122,.28),rgba(4,2,10,.82) 72%);
+  text-align:center;
+}
+
+html[data-runtime="v12"] #tarot .empty-card > span{
+  color:#f9dfa6;
+  font-size:2.2rem;
+  text-shadow:0 0 17px rgba(255,225,165,.76),0 0 35px rgba(218,76,255,.80);
+}
+
+html[data-runtime="v12"] #tarot .empty-card > b{
+  color:#f4d99c;
+  font:500 clamp(10px,2.7vw,14px)/1.25 Georgia,"Times New Roman",serif;
+  letter-spacing:.22em;
+}
+
+html[data-runtime="v12"] #tarot .empty-card > small{
+  color:#b6a7ba;
+  font:500 clamp(8px,2vw,10px)/1.4 Inter,ui-sans-serif,system-ui,sans-serif;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+html[data-runtime="v12"] #tarot .ritual-card-center .card-label{
+  left:50%;
+  right:auto;
+  bottom:9px;
+  width:max-content;
+  max-width:88%;
+  transform:translateX(-50%);
+  padding:7px 11px;
+  border:1px solid rgba(238,202,130,.34);
+  border-radius:999px;
+  background:rgba(3,1,8,.84);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+
+html[data-runtime="v12"] #tarot .tarot-current-nav{
+  position:absolute;
+  z-index:18;
+  inset:0;
+  pointer-events:none;
+}
+
+html[data-runtime="v12"] #tarot .tarot-current-nav button{
+  position:absolute;
+  top:50%;
+  display:grid;
+  place-items:center;
+  width:58px;
+  height:58px;
+  padding:0;
+  transform:translateY(-50%);
+  pointer-events:auto;
+  border:1px solid rgba(239,202,130,.72);
+  border-radius:50%;
+  color:var(--tl-gold-bright);
+  background:radial-gradient(circle at 38% 28%,rgba(110,42,142,.44),transparent 42%),rgba(7,3,13,.88);
+  box-shadow:inset 0 0 20px rgba(178,62,224,.18),0 10px 30px rgba(0,0,0,.48),0 0 17px rgba(197,84,232,.12);
+  cursor:pointer;
+  transition:transform .2s ease,filter .2s ease,opacity .2s ease;
+}
+
+html[data-runtime="v12"] #tarot .tarot-current-nav button:first-child{left:2px}
+html[data-runtime="v12"] #tarot .tarot-current-nav button:last-child{right:2px}
+html[data-runtime="v12"] #tarot .tarot-current-nav button span{font-size:1.55rem;line-height:1}
+html[data-runtime="v12"] #tarot .tarot-current-nav button small{position:absolute;top:calc(100% + 7px);font-size:.43rem;letter-spacing:.14em}
+html[data-runtime="v12"] #tarot .tarot-current-nav button:not(:disabled):hover{filter:brightness(1.28);transform:translateY(-50%) scale(1.04)}
+html[data-runtime="v12"] #tarot .tarot-current-nav button:disabled{opacity:.22;cursor:default;filter:grayscale(.5)}
+html[data-runtime="v12"] #tarot .tarot-current-nav button:focus-visible{outline:2px solid var(--tl-gold-bright);outline-offset:4px}
+
+html[data-runtime="v12"] #tarot .table-orb{
+  left:50%;
+  right:auto;
+  bottom:29px;
+  width:136px;
+  height:136px;
+  transform:translateX(-50%)!important;
+}
+
+html[data-runtime="v12"] #tarot .table-orb-image{
+  inset:8px;
+  border:1px solid rgba(255,226,170,.62);
+  box-shadow:inset 0 0 23px rgba(255,255,255,.14),0 0 0 6px rgba(132,48,183,.12),0 0 47px rgba(210,74,255,.74);
+}
+
+html[data-runtime="v12"] #tarot .table-orb small{
+  position:absolute;
+  z-index:6;
+  top:50%;
+  bottom:auto;
+  left:50%;
+  width:82px;
+  max-width:82px;
+  padding:0;
+  transform:translate(-50%,-50%);
+  border:0;
+  border-radius:0;
+  color:#fff0c9;
+  background:none;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  font:600 9px/1.35 Georgia,"Times New Roman",serif;
+  letter-spacing:.14em;
+  white-space:normal;
+  text-shadow:0 2px 5px #020007,0 0 12px rgba(255,235,190,.88),0 0 25px rgba(218,70,255,.92);
+}
+
+html[data-runtime="v12"] #tarot .free-rule,
+html[data-runtime="v12"] #tarot .editorial-covenant,
+html[data-runtime="v12"] #tarot .real-table-tools,
+html[data-runtime="v12"] #tarot .table-recovery{
+  display:none!important;
+}
+
+html[data-runtime="v12"] #tarot .real-table-head{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:32px;
+  width:min(100%,860px);
+  margin:30px auto 0;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:none;
+}
+
+html[data-runtime="v12"] #tarot .real-table-head > div:first-child{
+  order:2;
+  text-align:center;
+}
+
+html[data-runtime="v12"] #tarot .real-table-head p{
+  margin:0 0 8px;
+  color:var(--tl-gold);
+  font:600 9px/1 Inter,ui-sans-serif,system-ui,sans-serif;
+  letter-spacing:.30em;
+}
+
+html[data-runtime="v12"] #tarot .real-table-head h3{
+  margin:0;
+  color:#f4e7d8;
+  font:400 clamp(30px,6vw,46px)/1 Georgia,"Times New Roman",serif;
+  letter-spacing:-.025em;
+}
+
+html[data-runtime="v12"] #tarot .table-actions{
+  order:1;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  width:min(100%,720px);
+  margin:0 auto;
+}
+
+html[data-runtime="v12"] #tarot .table-actions .text-button{
+  min-height:54px;
+  padding:10px 18px;
+  border:1px solid rgba(232,199,122,.48);
+  border-radius:999px;
+  color:#f1dcae;
+  background:linear-gradient(145deg,rgba(27,11,39,.94),rgba(6,3,12,.98));
+  box-shadow:inset 0 1px rgba(255,247,225,.07),0 13px 32px rgba(0,0,0,.30),0 0 22px rgba(176,59,219,.08);
+  font:600 clamp(8px,1.8vw,11px)/1.25 Inter,ui-sans-serif,system-ui,sans-serif;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+}
+
+html[data-runtime="v12"] #tarot .table-actions .text-button:not(:disabled):hover{
+  border-color:rgba(255,225,164,.82);
+  background:linear-gradient(145deg,rgba(54,20,68,.96),rgba(8,3,15,.99));
+  box-shadow:inset 0 1px rgba(255,249,229,.11),0 13px 34px rgba(0,0,0,.34),0 0 27px rgba(198,74,239,.18);
+}
+
+html[data-runtime="v12"] #tarot .table-actions .text-button:disabled{
+  opacity:.42;
+  cursor:default;
+}
+
+html[data-runtime="v12"] #tarot .real-table-viewport{
+  width:min(100%,860px);
+  max-width:860px;
+  margin:15px auto 0;
+  overflow:visible;
+  border:1px solid rgba(232,199,122,.24);
+  border-radius:24px;
+  background:linear-gradient(150deg,rgba(18,7,27,.88),rgba(3,1,8,.96));
+  box-shadow:inset 0 0 70px rgba(115,34,156,.10),0 24px 70px rgba(0,0,0,.44);
+}
+
+html[data-runtime="v12"] #tarot .real-table{
+  --tarot-card-width:auto;
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  gap:clamp(5px,1.2vw,11px);
+  width:100%;
+  min-width:0;
+  padding:clamp(9px,2vw,18px);
+  border:0;
+  border-radius:24px;
+  background:radial-gradient(circle at 50% 0%,rgba(119,37,161,.16),transparent 45%);
+  box-shadow:none;
+}
+
+html[data-runtime="v12"] #tarot .real-table:not(:has(.revealed))::before{
+  content:"Suas cartas reveladas aparecerão aqui";
+  grid-column:1/-1;
+  display:grid;
+  place-items:center;
+  min-height:112px;
+  color:#95889a;
+  font:500 clamp(9px,2.3vw,12px)/1.5 Inter,ui-sans-serif,system-ui,sans-serif;
+  letter-spacing:.12em;
+  text-align:center;
+  text-transform:uppercase;
+}
+
+html[data-runtime="v12"] #tarot .table-slot.waiting{
+  display:none!important;
+}
+
+html[data-runtime="v12"] #tarot .table-slot.revealed{
+  position:relative;
+  display:grid;
+  place-items:center;
+  width:100%;
+  min-width:0;
+  aspect-ratio:2/3;
+  overflow:hidden;
+  border:1px solid rgba(232,199,122,.46);
+  border-radius:8px;
+  background:#05020a;
+  box-shadow:0 9px 20px rgba(0,0,0,.46),0 0 14px rgba(177,65,218,.08);
+}
+
+html[data-runtime="v12"] #tarot .table-slot.revealed img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  transform:none!important;
+  background:#05020a;
+}
+
+html[data-runtime="v12"] #tarot .table-slot.revealed.selected{
+  outline:1px solid var(--tl-gold-bright);
+  outline-offset:2px;
+  box-shadow:0 9px 22px rgba(0,0,0,.50),0 0 19px rgba(211,83,249,.48);
+}
+
+html[data-runtime="v12"] #tarot .table-slot .order{
+  right:3px;
+  bottom:3px;
+  min-width:17px;
+  height:17px;
+  padding:0 3px;
+  font-size:.42rem;
+}
+
+@media(max-width:640px){
+  html[data-runtime="v12"] #app > #tarot.tarot-livre-official{
+    padding:calc(92px + env(safe-area-inset-top)) 10px calc(132px + env(safe-area-inset-bottom));
+  }
+
+  html[data-runtime="v12"] #tarot .section-head{padding:8px 5px 14px}
+  html[data-runtime="v12"] #tarot .section-head h2{font-size:clamp(48px,14vw,62px)}
+  html[data-runtime="v12"] #tarot .section-head #count{font-size:22px}
+  html[data-runtime="v12"] #tarot .deck-progress{margin-bottom:17px}
+
+  html[data-runtime="v12"] #tarot .ritual-altar{
+    width:100%;
+    min-height:680px;
+    margin:0 auto!important;
+    border-radius:30px;
+  }
+
+  html[data-runtime="v12"] #tarot .ritual-altar::after{top:41%;width:94%}
+  html[data-runtime="v12"] #tarot .ritual-wheel{top:25px;width:calc(100% - 16px);height:450px}
+  html[data-runtime="v12"] #tarot .ritual-card-center .table-preview,
+  html[data-runtime="v12"] #tarot .ritual-card-center .current.empty{width:min(70vw,270px);border-radius:15px}
+  html[data-runtime="v12"] #tarot .ritual-card-center .tarot-card-image{border-radius:13px}
+
+  html[data-runtime="v12"] #tarot .tarot-current-nav button{width:46px;height:46px}
+  html[data-runtime="v12"] #tarot .tarot-current-nav button:first-child{left:0}
+  html[data-runtime="v12"] #tarot .tarot-current-nav button:last-child{right:0}
+  html[data-runtime="v12"] #tarot .tarot-current-nav button span{font-size:1.25rem}
+  html[data-runtime="v12"] #tarot .tarot-current-nav button small{display:none}
+
+  html[data-runtime="v12"] #tarot .table-orb{bottom:25px;width:118px;height:118px}
+  html[data-runtime="v12"] #tarot .table-orb small{width:72px;max-width:72px;font-size:8px}
+
+  html[data-runtime="v12"] #tarot .real-table-head{gap:27px;margin-top:25px;padding-inline:2px}
+  html[data-runtime="v12"] #tarot .table-actions{gap:8px}
+  html[data-runtime="v12"] #tarot .table-actions .text-button{min-height:49px;padding:8px 7px;font-size:clamp(7px,2.05vw,9px);letter-spacing:.055em}
+  html[data-runtime="v12"] #tarot .real-table-head h3{font-size:34px}
+
+  html[data-runtime="v12"] #tarot .real-table-viewport{margin-top:12px;border-radius:18px}
+  html[data-runtime="v12"] #tarot .real-table{grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:4px;padding:7px;border-radius:18px}
+  html[data-runtime="v12"] #tarot .table-slot.revealed{width:100%;border-radius:5px}
+  html[data-runtime="v12"] #tarot .table-slot .order{right:2px;bottom:2px;min-width:13px;height:13px;font-size:.35rem}
+}
+
+@media(max-width:355px){
+  html[data-runtime="v12"] #tarot .ritual-altar{min-height:625px}
+  html[data-runtime="v12"] #tarot .ritual-wheel{height:405px}
+  html[data-runtime="v12"] #tarot .ritual-card-center .table-preview,
+  html[data-runtime="v12"] #tarot .ritual-card-center .current.empty{width:min(69vw,235px)}
+  html[data-runtime="v12"] #tarot .tarot-current-nav button{width:41px;height:41px}
+  html[data-runtime="v12"] #tarot .table-orb{width:108px;height:108px;bottom:22px}
+}
+
+@media(orientation:landscape) and (max-height:560px){
+  html[data-runtime="v12"] #app > #tarot.tarot-livre-official{padding-top:82px}
+  html[data-runtime="v12"] #tarot .ritual-altar{min-height:590px}
+  html[data-runtime="v12"] #tarot .ritual-wheel{left:50%;top:18px;width:min(74%,610px);height:410px;transform:translateX(-50%)}
+  html[data-runtime="v12"] #tarot .ritual-card-center .table-preview,
+  html[data-runtime="v12"] #tarot .ritual-card-center .current.empty{width:220px;height:auto;margin:0}
+  html[data-runtime="v12"] #tarot .table-orb{left:50%;right:auto;bottom:18px;transform:translateX(-50%)!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-runtime="v12"] #tarot .tarot-current-nav button,
+  html[data-runtime="v12"] #tarot .table-actions .text-button{
+    transition:none;
+  }
+}

@@ -1,0 +1,50 @@
+DIVINA BRUXA — ORBE DAS REALIDADES
+TAROT LIVRE — MACROETAPA 2 DE 7
+ESTRUTURA VISUAL OFICIAL — V118
+
+COMO INSTALAR
+
+Envie os 5 arquivos deste ZIP diretamente para a raiz do seu GitHub:
+
+1. index.html — substituir o arquivo existente
+2. app.js — substituir o arquivo existente
+3. tarot-engine.js — substituir o arquivo existente
+4. tarot-livre-official-v1.css — adicionar como arquivo novo
+5. LEIA-PRIMEIRO-MACROETAPA-2-TAROT-LIVRE.txt — adicionar como arquivo novo
+
+No GitHub, confirme a substituição dos três arquivos existentes. Não crie nenhuma
+pasta: todos os arquivos devem ficar no mesmo nível do index.html.
+
+O QUE ESTA MACROETAPA ENTREGA
+
+- Página oficial do Tarot Livre com visual cósmico, violeta e dourado.
+- Uma carta inteira, grande e centralizada.
+- Orbe de revelação posicionada abaixo da carta.
+- Botões “EMBARALHAR NOVAMENTE” e “RECOMEÇAR DO ZERO”.
+- Setas para voltar à carta anterior e avançar à carta seguinte já revelada.
+- Arquivo visual das cartas reveladas em exatamente 6 colunas.
+- Continuidade da regra principal: 78 cartas, sem repetição e sempre diretas.
+- Continuidade automática da skin escolhida na Orbe do Tarot Livre.
+- Sessão e histórico local preservados pelo motor já existente.
+
+PROTEÇÕES DESTA ENTREGA
+
+Esta macroetapa NÃO substitui nem altera:
+
+- orb-engine-v68.js
+- navigation.js
+- menu-ring-v8.css
+- runtime-v12.css
+- arquivos das skins
+- CNAME
+
+Assim, a Orbe principal, o movimento aprovado, o menu e a navegação inferior
+continuam protegidos.
+
+DEPOIS DE ENVIAR
+
+Espere o GitHub Pages publicar a atualização. Feche todas as abas antigas do site
+e abra novamente https://www.divinabruxa.com.br para evitar cache visual antigo.
+
+Ao confirmar que os arquivos foram enviados, escreva “INSTALADO”. A próxima
+entrega será a Macroetapa 3 de 7.

@@ -10,19 +10,49 @@ import { freeCardAriaLabel, freeCardLabel, isFreeTarotCard, tarotEditorialStatus
 
 const STORAGE_KEY = 'free-tarot';
 const STORAGE_EVENT_SUFFIX = `:${STORAGE_KEY}`;
-const EMPTY_ALTAR = '<div class="empty-card"><span>✦</span>A próxima carta nascerá da Orbe.<small>Toque somente na Orbe</small></div>';
+const EMPTY_ALTAR = '<div class="empty-card"><span aria-hidden="true">✦</span><b>O PORTAL AGUARDA</b><small>Toque na Orbe para revelar</small></div>';
 function announce(message) {
   if (typeof globalThis.dispatchEvent === 'function' && typeof globalThis.CustomEvent === 'function') globalThis.dispatchEvent(new CustomEvent('orbe:toast', { detail: message }));
+}
+
+function installOfficialStructure(root) {
+  root.classList.add('tarot-livre-official');
+  root.dataset.tarotLivre = 'official-v1';
+
+  const eyebrow = root.querySelector('.section-head .eyebrow');
+  const title = root.querySelector('.section-head h2');
+  const orbState = root.querySelector('#orbState');
+  const shuffleButton = root.querySelector('#shuffleDeck');
+  const resetButton = root.querySelector('#resetDeck');
+  const archiveKicker = root.querySelector('.real-table-head p');
+  const archiveTitle = root.querySelector('.real-table-head h3');
+  const archive = root.querySelector('#realTable');
+
+  if (eyebrow) eyebrow.textContent = 'O PORTAL DAS 78 CARTAS';
+  if (title) title.textContent = 'Tarot Livre';
+  if (orbState) orbState.textContent = 'REVELAR CARTA';
+  if (shuffleButton) shuffleButton.textContent = 'EMBARALHAR NOVAMENTE';
+  if (resetButton) resetButton.textContent = 'RECOMEÇAR DO ZERO';
+  if (archiveKicker) archiveKicker.textContent = 'SEU CÍRCULO';
+  if (archiveTitle) archiveTitle.textContent = 'Cartas reveladas';
+  archive?.setAttribute('aria-label', 'Cartas reveladas em seis colunas');
+
+  const wheel = root.querySelector('.ritual-wheel');
+  if (wheel && !root.querySelector('#currentCardNav')) {
+    wheel.insertAdjacentHTML('beforeend', '<nav id="currentCardNav" class="tarot-current-nav" aria-label="Navegação das cartas reveladas"><button id="currentCardPrev" type="button" aria-label="Mostrar carta anterior" disabled><span aria-hidden="true">←</span><small>ANTERIOR</small></button><button id="currentCardNext" type="button" aria-label="Mostrar próxima carta" disabled><span aria-hidden="true">→</span><small>PRÓXIMA</small></button></nav>');
+  }
 }
 
 export class FreeTarot {
   constructor(root, { storage = store } = {}) {
     if (!root) throw new TypeError('A tela do Tarot Livre não foi encontrada.');
     this.root = root; this.storage = storage;
+    installOfficialStructure(root);
     if (!root.querySelector('#tableSaveState')) root.querySelector('.real-table-tools')?.insertAdjacentHTML('afterend', '<div class="table-recovery" aria-label="Guardar e retomar a Mesa Real"><p><span aria-hidden="true">✧</span><span><b id="tableSaveState">Nova mesa salva neste aparelho</b><small>Você pode fechar e voltar sem perder as cartas.</small></span></p><div><button id="saveTableBackup" type="button">Guardar cópia</button><button id="restoreTableBackup" type="button">Retomar arquivo</button><input id="tableBackupInput" type="file" accept="application/json,.json" hidden></div></div>');
     if (!root.querySelector('#tarotEditorialState')) root.querySelector('.free-rule')?.insertAdjacentHTML('afterend', '<aside class="editorial-covenant" aria-labelledby="editorialCovenantTitle"><span class="editorial-seal" aria-hidden="true">✦</span><div><h3 id="editorialCovenantTitle">A Orbe revela. Você interpreta.</h3><p>O Tarot Livre abre somente a imagem, o nome e a posição. Nenhum significado automático interfere na sua leitura.</p><div class="editorial-principles" aria-label="Princípios do Tarot Livre"><span>78 cartas</span><span>Sempre diretas</span><span>Sem repetição</span></div></div><p id="tarotEditorialState" class="editorial-state" aria-live="polite">O círculo aguarda o primeiro toque na Orbe.</p></aside>');
     this.altar = root.querySelector('#revealAltar'); this.stage = root.querySelector('#current'); this.orb = root.querySelector('#tableOrb'); this.realTable = root.querySelector('#realTable');
     this.orbState = root.querySelector('#orbState'); this.shuffleButton = root.querySelector('#shuffleDeck'); this.resetButton = root.querySelector('#resetDeck');
+    this.currentNav = root.querySelector('#currentCardNav'); this.currentPrev = root.querySelector('#currentCardPrev'); this.currentNext = root.querySelector('#currentCardNext');
     this.viewport = root.querySelector('#realTableViewport'); this.compactButton = root.querySelector('#tableCompact'); this.scrollPrevButton = root.querySelector('#tableScrollPrev'); this.scrollNextButton = root.querySelector('#tableScrollNext'); this.viewHint = root.querySelector('#tableViewHint');
     this.lightbox = root.querySelector('#cardLightbox'); this.lightboxImage = root.querySelector('#lightboxImage'); this.lightboxTitle = root.querySelector('#lightboxTitle'); this.lightboxPosition = root.querySelector('#lightboxPosition'); this.lightboxPrev = root.querySelector('#lightboxPrev'); this.lightboxNext = root.querySelector('#lightboxNext'); this.lightboxClose = root.querySelector('#closeCardLightbox');
     this.orbitalCards = root.querySelector('#orbitalCards'); this.ritualRevealed = root.querySelector('#ritualRevealed'); this.ritualRemaining = root.querySelector('#ritualRemaining');
@@ -44,6 +74,8 @@ export class FreeTarot {
     this.orb.addEventListener('click', () => this.draw());
     this.resetButton.addEventListener('click', () => this.reset());
     this.shuffleButton.addEventListener('click', () => this.reshuffle());
+    this.currentPrev.addEventListener('click', () => this.moveCurrent(-1));
+    this.currentNext.addEventListener('click', () => this.moveCurrent(1));
     this.realTable.addEventListener('click', event => {
       const now = globalThis.performance?.now?.() ?? Date.now();
       if (event.detail > 0 && now - this.lastTableScrollAt < 120) return;
@@ -96,8 +128,23 @@ export class FreeTarot {
       globalThis.navigator?.vibrate?.([12, 22, 18]); globalThis.dispatchEvent?.(new CustomEvent('tarot:revealed', { detail: { cardId: result.cardId, position: result.position, remaining: this.state.waiting.length } })); return result.cardId;
     } finally {
       globalThis.clearTimeout(this.releaseTimer);
-      this.releaseTimer = globalThis.setTimeout(() => { this.drawing = false; this.altar.classList.remove('revealing'); this.orbState.textContent = this.state.completed ? 'MESA COMPLETA' : 'TOQUE PARA REVELAR'; }, 820);
+      this.releaseTimer = globalThis.setTimeout(() => { this.drawing = false; this.altar.classList.remove('revealing'); this.orbState.textContent = this.state.completed ? 'MESA COMPLETA' : 'REVELAR CARTA'; }, 820);
     }
+  }
+
+  moveCurrent(direction) {
+    const next = this.selected + direction;
+    if (next < 0 || next >= this.state.revealed.length) return false;
+    this.show(next, false, false);
+    return true;
+  }
+
+  updateCurrentControls() {
+    const total = this.state.revealed.length;
+    const empty = total === 0 || this.selected < 0;
+    this.currentNav.dataset.empty = String(empty);
+    this.currentPrev.disabled = empty || this.selected <= 0;
+    this.currentNext.disabled = empty || this.selected >= total - 1;
   }
 
   show(index, animate = true, scroll = false) {
@@ -106,6 +153,7 @@ export class FreeTarot {
     this.stage.innerHTML = `${cardImageMarkup(card, { alt: `${card.name}, direta`, priority: 'high' })}${freeCardLabel(card)}`;
     this.realTable.querySelectorAll('[data-index]').forEach(button => button.classList.toggle('selected', Number(button.dataset.index) === index));
     this.orbitalCards.querySelectorAll('[data-orbit-index]').forEach(button => button.classList.toggle('selected', Number(button.dataset.orbitIndex) === index));
+    this.updateCurrentControls();
     if (animate) globalThis.setTimeout(() => this.stage.classList.remove('birth'), 900);
     if (scroll) this.altar.scrollIntoView({ behavior: this.reducedMotion() ? 'auto' : 'smooth', block: 'start' });
   }
@@ -144,7 +192,7 @@ export class FreeTarot {
 
   render(landing = -1) {
     const total = this.state.revealed.length; const waiting = this.state.waiting.length;
-    this.root.querySelector('#count').innerHTML = `${total}<small>/${DECK_SIZE}</small>`; this.root.querySelector('#remaining').textContent = waiting ? `${waiting} cartas aguardam` : 'Ciclo completo · 78 cartas reveladas'; this.root.querySelector('#deckProgress').style.width = `${(total / DECK_SIZE) * 100}%`; this.ritualRevealed.textContent = String(total); this.ritualRemaining.textContent = String(waiting); this.saveState.textContent = total ? `Mesa salva neste aparelho · ${total} de ${DECK_SIZE}` : 'Nova mesa salva neste aparelho'; this.editorialState.textContent = tarotEditorialStatus(total, DECK_SIZE); this.orb.disabled = this.state.completed; this.orb.setAttribute('aria-label', waiting ? `Revelar próxima carta. ${waiting} restantes.` : 'Mesa completa'); this.orbState.textContent = this.state.completed ? 'MESA COMPLETA' : 'TOQUE PARA REVELAR'; this.shuffleButton.disabled = waiting < 2;
+    this.root.querySelector('#count').innerHTML = `${total}<small>/${DECK_SIZE}</small>`; this.root.querySelector('#remaining').textContent = waiting ? `${waiting} cartas aguardam` : 'Ciclo completo · 78 cartas reveladas'; this.root.querySelector('#deckProgress').style.width = `${(total / DECK_SIZE) * 100}%`; this.ritualRevealed.textContent = String(total); this.ritualRemaining.textContent = String(waiting); this.saveState.textContent = total ? `Mesa salva neste aparelho · ${total} de ${DECK_SIZE}` : 'Nova mesa salva neste aparelho'; this.editorialState.textContent = tarotEditorialStatus(total, DECK_SIZE); this.orb.disabled = this.state.completed; this.orb.setAttribute('aria-label', waiting ? `Revelar próxima carta. ${waiting} restantes.` : 'Mesa completa'); this.orbState.textContent = this.state.completed ? 'MESA COMPLETA' : 'REVELAR CARTA'; this.shuffleButton.disabled = waiting < 2;
     this.realTable.innerHTML = Array.from({ length: DECK_SIZE }, (_, index) => {
       const cardId = this.state.revealed[index]; const row = Math.floor(index / 6) + 1; const column = (index % 6) + 1;
       if (cardId === undefined) return `<div data-position="${index}" class="table-slot waiting" role="gridcell" aria-rowindex="${row}" aria-colindex="${column}" aria-disabled="true" aria-label="Posição ${index + 1}, aguardando carta"><span class="position">${index + 1}</span></div>`;
@@ -154,6 +202,7 @@ export class FreeTarot {
     this.renderOrbit(landing); this.centerTablePosition(landing); globalThis.requestAnimationFrame?.(() => this.updateScrollControls());
     if (total) { if (this.selected < 0 || this.selected >= total) this.selected = total - 1; this.show(this.selected, false, false); }
     else { this.selected = -1; this.stage.className = 'current table-preview empty'; this.stage.innerHTML = EMPTY_ALTAR; }
+    this.updateCurrentControls();
   }
 
   async reset(force = false) {
