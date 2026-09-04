@@ -1,0 +1,98 @@
+DIVINA BRUXA — ORBE DAS REALIDADES
+MACROETAPA 5 DE 7 — TAROT LIVRE · COMPOSIÇÃO VISUAL SUPREMA
+VERSÃO V121
+
+O QUE ESTA ENTREGA FAZ
+
+Esta etapa transforma somente a página Tarot Livre para seguir a composição
+visual aprovada:
+
+- santuário cósmico em tela cheia, sem caixa em volta da experiência;
+- título dourado “Tarot Livre” e contador central;
+- uma carta inteira, grande e central;
+- setas circulares à esquerda e à direita da carta;
+- Orbe “REVELAR CARTA” imediatamente abaixo da carta;
+- aviso “DESLIZE PARA NAVEGAR”;
+- botões “EMBARALHAR NOVAMENTE” e “RECOMEÇAR DO ZERO” lado a lado;
+- título “CARTAS REVELADAS”;
+- arquivo das cartas em exatamente 6 colunas;
+- entrada mágica em camadas quando a página é aberta;
+- cenário adaptado para celular, desktop, telas pequenas e paisagem;
+- cenário WebP de alta definição com apenas 89.776 bytes.
+
+O QUE FOI PRESERVADO
+
+- Home e palavras da Orbe das Realidades;
+- tamanho, física, toque e movimento da Orbe principal;
+- menu e dock inferior;
+- imagem da Orbe ao lado do nome Divina Bruxa;
+- troca universal de skins;
+- 78 cartas sempre diretas e sem repetição;
+- toque exclusivo na Orbe para revelar;
+- gesto para a direita = carta seguinte;
+- gesto para a esquerda = carta anterior;
+- confirmação antes de apagar uma mesa iniciada;
+- efeitos de nascimento da carta e acessibilidade.
+
+ARQUIVOS DO ZIP
+
+1. index.html
+   Substitui o index.html existente. O conteúdo anterior foi preservado e
+   recebeu somente a pré-carga da imagem e a nova folha visual V121.
+
+2. tarot-livre-exact-visual-v1.css
+   Arquivo novo. Contém todo o acabamento final exclusivo do Tarot Livre.
+
+3. tarot-temple-background-v1.webp
+   Arquivo novo. Cenário cósmico original, limpo e sem interface gravada.
+
+4. LEIA-PRIMEIRO-MACROETAPA-5-TAROT-LIVRE-VISUAL.txt
+   Este guia.
+
+COMO INSTALAR NO GITHUB
+
+1. Abra a raiz do repositório divinabruxa/divinabruxa.github.io.
+2. Envie os 4 arquivos do ZIP diretamente para a raiz.
+3. Não crie nenhuma pasta.
+4. Autorize a substituição de index.html.
+5. Confirme o commit.
+6. Aguarde a publicação do GitHub Pages.
+7. No iPhone, feche a aba antiga, abra novamente e atualize a página.
+
+IMPORTANTE
+
+Não renomeie os arquivos. Não apague os arquivos das etapas anteriores.
+Este ZIP contém somente arquivos novos ou realmente alterados.
+
+VALIDAÇÃO CONCLUÍDA
+
+- 22 de 22 verificações específicas da V121 aprovadas;
+- 78 cartas confirmadas;
+- nenhuma repetição em uma mesa completa;
+- todas as cartas confirmadas na orientação direta;
+- seis colunas confirmadas;
+- cenário WebP confirmado em 864 × 1821;
+- Home, cabeçalho, menu, dock e motor da Orbe fora do escopo do novo CSS;
+- index anterior preservado fora das duas inclusões V121.
+
+RESULTADO DESTA MACROETAPA
+
+O Tarot Livre deixa de parecer um painel dentro do site e passa a ser um
+portal próprio: arquitetônico, cósmico, luxuoso e vivo, com toda a interface
+real funcionando sobre a arte.
+
+DEPOIS DESTA INSTALAÇÃO
+
+Restam 2 macroetapas deste ciclo de 7:
+
+- Macroetapa 6: acabamento de interação, estados, luz, som opcional e polimento
+  fino após conferência no aparelho real.
+- Macroetapa 7: auditoria final completa, performance, acessibilidade,
+  compatibilidade, correções e pacote de saída do beta.
+
+ARTE ORIGINAL — BRIEF FINAL
+
+Santuário cósmico vertical original, simétrico, em preto, violeta, ametista e
+ouro antigo; colunas celestiais, constelações, geometria de astrolábio e piso
+astral; centro limpo para a carta viva; espaço abaixo para a Orbe; sem pessoas,
+texto, carta, Orbe, botões, menu, dock, logotipo ou marca-d’água gravados.
