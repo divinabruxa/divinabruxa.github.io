@@ -8,7 +8,7 @@
  * como fallback permanente — inclusive em computadores sem aceleração gráfica.
  */
 
-const ORB_IMAGE = new URL('./divina-orb-v68.png?v=69', import.meta.url).href;
+const DEFAULT_ORB_IMAGE = new URL('./divina-orb-v68.png?v=69', import.meta.url).href;
 const clamp = (value, min = 0, max = 1) => Math.max(min, Math.min(max, value));
 const lerp = (from, to, amount) => from + (to - from) * amount;
 const follow = (rate, seconds) => 1 - Math.exp(-rate * seconds);
@@ -230,6 +230,9 @@ export class RealityOrbEngine {
     this.raf = 0;
     this.phaseTimer = 0;
     this.tapTimer = 0;
+    this.imageSource = document.documentElement.dataset.orbImage || DEFAULT_ORB_IMAGE;
+    this.onSkinImage = event => this.replaceTexture(event.detail?.src);
+    document.addEventListener('divina:orb-image', this.onSkinImage);
     this.bind();
     this.prepare().catch(error => this.fallback(error?.message || 'renderer'));
   }
@@ -237,7 +240,7 @@ export class RealityOrbEngine {
   async prepare() {
     const image = new Image();
     image.decoding = 'async';
-    image.src = ORB_IMAGE;
+    image.src = this.imageSource;
     await new Promise((resolve, reject) => {
       image.onload = resolve;
       image.onerror = () => reject(new Error('imagem'));
@@ -315,6 +318,27 @@ export class RealityOrbEngine {
       event.preventDefault();
       this.fallback('contexto');
     });
+  }
+
+  async replaceTexture(source) {
+    if (!source || source === this.imageSource || this.destroyed) return;
+    const image = new Image();
+    image.decoding = 'async';
+    image.src = source;
+    await new Promise((resolve, reject) => {
+      image.onload = resolve;
+      image.onerror = () => reject(new Error('skin'));
+      if (image.complete && image.naturalWidth) resolve();
+    }).catch(() => null);
+    if (!image.naturalWidth || this.destroyed) return;
+    this.imageSource = source;
+    this.image = image;
+    if (this.gl && this.texture) {
+      this.gl.bindTexture(this.gl.TEXTURE_2D, this.texture);
+      this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, this.gl.RGBA, this.gl.UNSIGNED_BYTE, image);
+      this.requestFrame();
+    }
+    this.shell?.style.setProperty('--orb-skin-image', `url("${source}")`);
   }
 
   bind() {
@@ -666,6 +690,7 @@ export class RealityOrbEngine {
     this.intersectionObserver?.disconnect();
     window.removeEventListener('resize', this.onResize);
     document.removeEventListener('visibilitychange', this.onVisibility);
+    document.removeEventListener('divina:orb-image', this.onSkinImage);
     this.shell?.removeEventListener('pointerdown', this.onPointerDown);
     this.shell?.removeEventListener('pointermove', this.onPointerMove);
     this.shell?.removeEventListener('pointerup', this.onPointerUp);

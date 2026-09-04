@@ -1,0 +1,46 @@
+{
+  "package": "DIVINA-BRUXA-MACROETAPA-0-ATIVACAO-V12",
+  "version": "12.0.0",
+  "type": "runtime-activation",
+  "replace": [
+    "index.html",
+    "app.js",
+    "orb-engine-v68.js",
+    "skins-v6.js",
+    "skin-catalog-v6.js",
+    "sw.js"
+  ],
+  "add": [
+    "runtime-v12.js",
+    "runtime-v12.css",
+    "skin-registry-v12.js"
+  ],
+  "required_existing": [
+    "skin-universal-v10.js",
+    "portal-transition-v10.js",
+    "COSMIC-DESIGN-SYSTEM-V10.css",
+    "PAGE-INTERIORS-V10.css",
+    "PORTAL-TRANSITIONS-V10.css",
+    "skins-v6.css",
+    "30 skin PNG assets"
+  ],
+  "validation": {
+    "javascript_syntax": "passed",
+    "skin_registry_count": 30,
+    "orb_surfaces_per_skin": 7,
+    "skin_assets_present_in_repository": 30,
+    "missing_skin_assets": 0,
+    "legacy_media_engine_removed": true
+  },
+  "protected": [
+    "CNAME",
+    "78 card images",
+    "approved main orb geometry",
+    "approved orbital menu geometry"
+  ],
+  "production_publish_authorized": false,
+  "dns_changes_authorized": false,
+  "real_billing_authorized": false,
+  "store_submission_authorized": false,
+  "orbe_ai_sol_enabled": false
+}

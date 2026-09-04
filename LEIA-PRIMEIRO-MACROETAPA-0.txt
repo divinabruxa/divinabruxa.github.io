@@ -1,0 +1,39 @@
+DIVINA BRUXA — MACROETAPA 0 — BUILD DE ATIVAÇÃO V12
+
+ESTE PACOTE ALTERA O RUNTIME REAL.
+
+Envie os arquivos soltos para a raiz do repositório divinabruxa/divinabruxa.github.io.
+Quando o GitHub perguntar, confirme a substituição dos arquivos que já existem.
+
+SUBSTITUIR:
+- index.html
+- app.js
+- orb-engine-v68.js
+- skins-v6.js
+- skin-catalog-v6.js
+- sw.js
+
+ADICIONAR:
+- runtime-v12.js
+- runtime-v12.css
+- skin-registry-v12.js
+- MANIFESTO-MACROETAPA-0.json
+
+NÃO APAGAR NADA.
+NÃO ALTERAR CNAME.
+NÃO REENVIAR AS 78 CARTAS.
+NÃO RENOMEAR AS IMAGENS DAS SKINS.
+
+EFEITOS DESTA MACROETAPA:
+- ativa CSS e contratos V10 que já estavam no GitHub;
+- cria a página funcional Salão das Realidades / Skins;
+- disponibiliza a Biblioteca no menu;
+- revela as seções ocultas da Home;
+- cria espaço seguro acima do dock;
+- persiste a skin ativa;
+- conecta a skin à Orbe WebGL, mini-Orbes e Orbe da mesa;
+- mantém o id técnico antigo da skin Templo Lunar para preservar compatibilidade;
+- remove a duplicidade do motor de mídia;
+- atualiza o cache do PWA.
+
+Depois do upload, aguarde o GitHub Pages concluir o deployment e faça uma atualização completa do navegador. O cache V12 substituirá o cache anterior automaticamente.

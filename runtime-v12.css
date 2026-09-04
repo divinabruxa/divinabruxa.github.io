@@ -1,0 +1,106 @@
+/* Divina Bruxa V12 — ativação segura do runtime existente. */
+
+html[data-runtime="v12"] #app > .screen {
+  padding-bottom: calc(154px + env(safe-area-inset-bottom));
+}
+
+html[data-runtime="v12"] #app > .screen.db-page-world {
+  padding-top: 120px;
+  padding-right: 24px;
+  padding-left: 24px;
+}
+
+html[data-runtime="v12"] #app > #home.active > section {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+html[data-runtime="v12"] #app > .screen.active:not(#home) {
+  animation: db-world-arrival 560ms cubic-bezier(.22,.8,.2,1) both;
+}
+
+html[data-runtime="v12"] [data-orb-surface]:not(img) {
+  background-image: var(--db-orb-surface-image) !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+
+html[data-runtime="v12"] .skins-screen {
+  max-width: 1180px;
+  background:
+    radial-gradient(circle at 50% 12%, color-mix(in srgb, var(--db-skin-accent, #a565d6) 24%, transparent), transparent 38%),
+    linear-gradient(180deg, rgba(7,5,11,.3), rgba(7,5,11,.92));
+}
+
+html[data-runtime="v12"] .skins-screen::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 18% 22%, rgba(240,214,138,.18) 0 1px, transparent 2px),
+    radial-gradient(circle at 78% 32%, rgba(165,101,214,.22) 0 1px, transparent 2px),
+    radial-gradient(circle at 54% 72%, rgba(255,255,255,.12) 0 1px, transparent 2px);
+  background-size: 170px 170px, 230px 230px, 310px 310px;
+}
+
+html[data-runtime="v12"] .skins-v6-tools {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: .65rem;
+  margin: 0 0 1rem;
+}
+
+html[data-runtime="v12"] .skin-tile {
+  position: relative;
+  overflow: hidden;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+html[data-runtime="v12"] .skin-tile.is-active {
+  border-color: var(--db-skin-light, #f0d68a);
+  box-shadow: 0 0 0 1px rgba(240,214,138,.28), 0 18px 54px rgba(109,43,165,.32);
+}
+
+html[data-runtime="v12"] .skin-tile.is-active::after {
+  content: "ATIVA";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: .3rem .55rem;
+  border-radius: 999px;
+  color: #120916;
+  background: var(--db-skin-light, #f0d68a);
+  font-size: .62rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+}
+
+html[data-runtime="v12"] .magic-dock {
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+}
+
+@keyframes db-world-arrival {
+  from { opacity: 0; transform: translateY(16px) scale(.992); filter: blur(5px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+
+@media (hover:hover) {
+  html[data-runtime="v12"] .skin-tile:hover { transform: translateY(-3px); }
+}
+
+@media (max-width: 560px) {
+  html[data-runtime="v12"] #app > .screen {
+    padding-bottom: calc(142px + env(safe-area-inset-bottom));
+  }
+  html[data-runtime="v12"] .db-page-world { padding-top: 112px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-runtime="v12"] #app > .screen.active:not(#home),
+  html[data-runtime="v12"] .skin-tile { animation: none; transition: none; }
+}
