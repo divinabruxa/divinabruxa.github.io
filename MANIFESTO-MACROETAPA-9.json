@@ -1,0 +1,8 @@
+{
+  "produto": "Divina Bruxa — A Orbe das Realidades",
+  "macroetapa": 9,
+  "titulo": "Consultas profissionais",
+  "objetivo": "Apresentar consultas com acolhimento, clareza de preços e formulário acessível.",
+  "arquivos_substituir": ["index.html", "consultation-v5.css"],
+  "status": "staging; aguarda upload manual no GitHub"
+}
