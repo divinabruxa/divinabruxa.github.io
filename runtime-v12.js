@@ -1,9 +1,10 @@
-import { applySkinContract, readStoredSkin } from './skin-universal-v10.js';
+import { applySkinContract, preloadSkinAsset, preparedSkinImage, readStoredSkin } from './skin-universal-v10.js?v=129';
 import { createPortalTransition } from './portal-transition-v10.js';
 import { SKIN_REGISTRY_V12, skinByIdV12 } from './skin-registry-v12.js';
 
 const ACTIVE_SKIN_KEY = 'divina.skin.v10';
 let portal = null;
+let skinSwitchToken = 0;
 
 function ensureSkinsScreen() {
   let screen = document.getElementById('skins');
@@ -17,7 +18,7 @@ function ensureSkinsScreen() {
       <h2 class="db-page-world__title">Trinta formas de sentir o universo.</h2>
       <p class="lead db-page-world__intro">Escolha a matéria da sua Orbe. A mesma realidade acompanhará a Home, o menu, o rodapé, a mesa e todos os portais.</p>
     </div>
-    <div id="skinsApp" aria-live="polite"></div>`;
+    <div id="skinsApp"></div>`;
   const anchor = document.getElementById('subscriptions');
   (anchor?.parentNode || document.getElementById('app'))?.insertBefore(screen, anchor || null);
   return screen;
@@ -67,7 +68,7 @@ function markOrbSurfaces() {
   ];
   surfaces.forEach(([selector, surface]) => {
     document.querySelectorAll(selector).forEach(element => {
-      element.dataset.orbSurface = surface;
+      if (element.dataset.orbSurface !== surface) element.dataset.orbSurface = surface;
     });
   });
   document.querySelectorAll('.mini-orb:not([data-orb-surface])').forEach(element => {
@@ -79,28 +80,91 @@ function rememberSkin(id) {
   try { localStorage.setItem(ACTIVE_SKIN_KEY, id); } catch { /* modo privado */ }
 }
 
-export function activeSkinV12() {
-  return document.documentElement.dataset.skin || 'classic';
-}
-
-export function activateSkinV12(id, { persist = true } = {}) {
-  markOrbSurfaces();
-  const skin = skinByIdV12(id);
-  const applied = applySkinContract({ id: skin.id, registry: SKIN_REGISTRY_V12 });
-  if (!applied) return false;
-  document.body.dataset.orbeSkin = skin.id;
-  document.documentElement.dataset.orbImage = skin.surfaces.home;
-  if (persist) rememberSkin(skin.id);
-  document.querySelectorAll('[data-skin]').forEach(tile => {
-    const current = tile.dataset.skin === skin.id;
+function updateSkinCards(id) {
+  document.querySelectorAll('.skin-tile[data-skin-card]').forEach(tile => {
+    const current = tile.dataset.skinCard === id;
     tile.classList.toggle('is-active', current);
     if (current) tile.setAttribute('aria-current', 'true');
     else tile.removeAttribute('aria-current');
   });
+}
+
+function commitSkin(skin, { persist = true, preparedImage: imageElement = null } = {}) {
+  markOrbSurfaces();
+  const cssImage = `url("${skin.surfaces.home}")`;
+  document.documentElement.dataset.orbImage = skin.surfaces.home;
+  document.documentElement.style.setProperty('--db-release-orb-image', cssImage);
+  const applied = applySkinContract({ id: skin.id, registry: SKIN_REGISTRY_V12 });
+  if (!applied) return false;
+
+  if (document.body?.dataset.orbeSkin !== skin.id) document.body.dataset.orbeSkin = skin.id;
+  if (persist) rememberSkin(skin.id);
+  updateSkinCards(skin.id);
   document.dispatchEvent(new CustomEvent('divina:orb-image', {
-    detail: { id: skin.id, src: skin.surfaces.home }
+    detail: {
+      id: skin.id,
+      src: skin.surfaces.home,
+      imageElement: imageElement || preparedSkinImage(skin.surfaces.home)
+    }
   }));
   return true;
+}
+
+export function activeSkinV12() {
+  return document.documentElement.dataset.skin || 'classic';
+}
+
+export function prepareSkinV12(id, { priority = 'auto' } = {}) {
+  const skin = skinByIdV12(id);
+  return preloadSkinAsset(skin.surfaces.home, { priority }).then(image => ({ skin, image }));
+}
+
+export function activateSkinV12(id, { persist = true } = {}) {
+  skinSwitchToken += 1;
+  const skin = skinByIdV12(id);
+  delete document.documentElement.dataset.skinSwitch;
+  return commitSkin(skin, {
+    persist,
+    preparedImage: preparedSkinImage(skin.surfaces.home)
+  });
+}
+
+export async function activateSkinFluidV12(id, { persist = true } = {}) {
+  const skin = skinByIdV12(id);
+  if (activeSkinV12() === skin.id) return true;
+
+  const token = ++skinSwitchToken;
+  const html = document.documentElement;
+  html.dataset.skinSwitch = 'preparing';
+  document.dispatchEvent(new CustomEvent('divina:skin-preparing', {
+    detail: { id: skin.id, src: skin.surfaces.home }
+  }));
+
+  let image = null;
+  try {
+    ({ image } = await prepareSkinV12(skin.id, { priority: 'high' }));
+  } catch {
+    if (token === skinSwitchToken) {
+      delete html.dataset.skinSwitch;
+      document.dispatchEvent(new CustomEvent('divina:skin-error', { detail: { id: skin.id } }));
+    }
+    return false;
+  }
+
+  if (token !== skinSwitchToken) return false;
+  html.dataset.skinSwitch = 'committing';
+  const applied = commitSkin(skin, { persist, preparedImage: image });
+
+  const settle = () => {
+    if (token !== skinSwitchToken) return;
+    delete html.dataset.skinSwitch;
+    document.dispatchEvent(new CustomEvent('divina:skin-settled', {
+      detail: { id: skin.id }
+    }));
+  };
+  if (typeof requestAnimationFrame === 'function') requestAnimationFrame(() => requestAnimationFrame(settle));
+  else settle();
+  return applied;
 }
 
 function installPortalLayer() {
@@ -121,10 +185,16 @@ export function installRuntimeV12() {
   labelInputs();
   markOrbSurfaces();
   installPortalLayer();
+
   const stored = readStoredSkin(localStorage, ACTIVE_SKIN_KEY) || 'classic';
-  activateSkinV12(stored, { persist: false });
+  if (stored === 'classic') activateSkinV12('classic', { persist: false });
+  else {
+    activateSkinV12('classic', { persist: false });
+    activateSkinFluidV12(stored, { persist: false }).catch(() => {});
+  }
+
   document.documentElement.dataset.runtime = 'v12';
   document.dispatchEvent(new CustomEvent('divina:runtime-ready', {
-    detail: { version: '12.0.0', skins: SKIN_REGISTRY_V12.skins.length }
+    detail: { version: '12.1.0', skins: SKIN_REGISTRY_V12.skins.length }
   }));
 }

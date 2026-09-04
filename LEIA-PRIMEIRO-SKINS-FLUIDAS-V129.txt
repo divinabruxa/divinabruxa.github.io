@@ -1,0 +1,64 @@
+DIVINA BRUXA — SALÃO DAS REALIDADES · SKINS FLUIDAS V129
+
+O QUE ESTA MACROETAPA ENTREGA
+
+1. Uma nova página premium para as 30 skins oficiais da Divina Bruxa.
+
+2. Um painel “SUA ORBE ATUAL” mostra claramente qual realidade está ativa e confirma que ela acompanha:
+   - Home;
+   - cabeçalho;
+   - menu mágico;
+   - Orbe central do rodapé;
+   - Tarot Livre;
+   - orbes internas.
+
+3. A troca agora é preparada antes de aparecer:
+   - a imagem escolhida é carregada e decodificada;
+   - todas as superfícies mudam juntas;
+   - o motor WebGL recebe a mesma textura;
+   - não há tela piscando ou orbes temporariamente vazias.
+
+4. A galeria não é mais recriada ao trocar uma skin. Somente o estado da skin anterior e da nova é atualizado.
+
+5. As 30 imagens pesadas não carregam ao mesmo tempo:
+   - entram apenas as prévias próximas da tela;
+   - prévias distantes são liberadas da memória;
+   - somente quatro texturas preparadas permanecem na memória rápida;
+   - o iPhone fica protegido contra travamentos.
+
+6. A textura usada pelo WebGL é otimizada para até 1024 px, mantendo alta qualidade visual com uma troca mais leve.
+
+7. “Revogar cosméticas” foi removido. O novo botão “Usar Clássica Divina” troca para a skin original sem excluir skins compradas.
+
+8. O Tarot Livre V128, sua notificação mágica, a Home, o menu, o dock e a geometria das orbes foram preservados.
+
+COMO INSTALAR NO GITHUB
+
+Envie os 9 arquivos deste ZIP diretamente para a raiz do repositório, sem criar pasta interna:
+
+- index.html
+- app.js
+- runtime-v12.js
+- skin-universal-v10.js
+- skins-v6.js
+- skins-v6.css
+- orb-skin-release-v1.js
+- sw.js
+- LEIA-PRIMEIRO-SKINS-FLUIDAS-V129.txt
+
+Confirme “Replace files” para os oito arquivos existentes. O arquivo LEIA-PRIMEIRO é novo.
+
+Nenhuma das 30 imagens precisa ser enviada novamente: esta versão usa as imagens oficiais que já estão no GitHub.
+
+TESTE CERTO DEPOIS DA PUBLICAÇÃO
+
+1. Feche todas as abas antigas do site e abra novamente.
+2. Abra “Skins”.
+3. Role a galeria e confirme que as prévias aparecem progressivamente, sem congelar a página.
+4. Escolha uma skin e confirme que o botão mostra “ABRINDO…” somente enquanto a textura é preparada.
+5. Confira a mesma skin na Home, no cabeçalho, no menu, na Orbe do rodapé e no Tarot Livre.
+6. Volte à página de skins e selecione outra realidade.
+7. Use “Usar Clássica Divina” e confirme que sua coleção continua preservada.
+
+VALIDAÇÃO INTERNA: 42/42 VERIFICAÇÕES APROVADAS
+VERSÃO: V129

@@ -1,23 +1,395 @@
-.skins-v6-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.skin-tile{padding:14px;border:1px solid rgba(218,174,93,.28);border-radius:20px;background:rgba(14,7,25,.82);display:grid;gap:10px}.skin-preview{aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 25%,#f8dc9b 0 2%,transparent 8%),radial-gradient(circle at 55% 55%,var(--skin-core,#a94bea),#160622 66%);box-shadow:0 0 18px var(--skin-glow,#a94bea),inset 0 0 20px rgba(255,255,255,.18)}.skin-preview span{color:#fff1c4;font-size:24px;text-shadow:0 0 18px #fff}.skin-tile h3{font:500 15px Georgia;color:#f2d18d;margin:0}.skin-tile p{margin:3px 0;color:#aa9cb8;font-size:12px}.skin-tile strong{color:#e5c18a}.skin-tile button{border:1px solid rgba(218,174,93,.35);border-radius:999px;padding:8px;background:#28153a;color:#f0cb88}.skin-tile button:disabled{opacity:.55}.skin-lunar{--skin-core:#7582d9;--skin-glow:#7788ff}.skin-solar{--skin-core:#e3a735;--skin-glow:#ffc94f}.skin-ocean{--skin-core:#20a5cb;--skin-glow:#2bd9ff}.skin-emerald{--skin-core:#6ca943;--skin-glow:#9adb5a}.skin-fire,.skin-ruby{--skin-core:#d94f62;--skin-glow:#ff6d47}.skin-eclipse{--skin-core:#291a3d;--skin-glow:#b684ff}.skin-classic .skin-preview{background-image:url('./skin-classica-divina-v1.png');background-size:cover;background-position:center}.skin-lunar .skin-preview{background-image:url('./skin-lunar-misterio-v1.png');background-size:cover;background-position:center}.skin-solar .skin-preview{background-image:url('./skin-solar-dourada-v1.png');background-size:cover;background-position:center}.skin-ocean .skin-preview{background-image:url('./skin-oceanos-copas-v1.png');background-size:cover;background-position:center}.skin-emerald .skin-preview{background-image:url('./skin-esmeralda-ancestral-v1.png');background-size:cover;background-position:center}.skin-fire .skin-preview{background-image:url('./skin-fogo-sagrado-v1.png');background-size:cover;background-position:center}.skin-cosmic .skin-preview{background-image:url('./skin-cosmica-infinita-v1.png');background-size:cover;background-position:center}.skin-eclipse .skin-preview{background-image:url('./skin-eclipse-sombria-v1.png');background-size:cover;background-position:center}@media(max-width:700px){.skins-v6-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(prefers-reduced-motion:reduce){.skin-preview{animation:none!important}}
- .skin-venus .skin-preview{background-image:url('./skin-rosa-venus-v1.png');background-size:cover;background-position:center}
- .skin-amethyst .skin-preview{background-image:url('./skin-ametista-real-v1.png');background-size:cover;background-position:center}
- .skin-sapphire .skin-preview{background-image:url('./skin-safira-celestial-v1.png');background-size:cover;background-position:center}
- .skin-ruby .skin-preview{background-image:url('./skin-rubi-bruxa-v1.png');background-size:cover;background-position:center}
- .skin-aurora .skin-preview{background-image:url('./skin-aurora-boreal-v1.png');background-size:cover;background-position:center}
- .skin-storm .skin-preview{background-image:url('./skin-tempestade-astral-v1.png');background-size:cover;background-position:center}
- .skin-fairy .skin-preview{background-image:url('./skin-jardim-fadas-v1.png');background-size:cover;background-position:center}
- .skin-isis .skin-preview{background-image:url('./skin-templo-isis-v1.png');background-size:cover;background-position:center}
- .skin-twin-flame .skin-preview{background-image:url('./skin-chama-gemea-v1.png');background-size:cover;background-position:center}
- .skin-realities .skin-preview{background-image:url('./skin-portal-realidades-v1.png');background-size:cover;background-position:center}
- .skin-queen .skin-preview{background-image:url('./skin-rainha-universo-v1.png');background-size:cover;background-position:center}
- .skin-supreme .skin-preview{background-image:url('./skin-divina-suprema-v1.png');background-size:cover;background-position:center}
- .skin-moon-silver .skin-preview{background-image:url('./skin-lua-prata-v1.png');background-size:cover;background-position:center}
- .skin-solstice .skin-preview{background-image:url('./skin-solsticio-dourado-v1.png');background-size:cover;background-position:center}
- .skin-neptune .skin-preview{background-image:url('./skin-mare-netuno-v1.png');background-size:cover;background-position:center}
- .skin-enchanted-forest .skin-preview{background-image:url('./skin-floresta-encantada-v1.png');background-size:cover;background-position:center}
- .skin-cosmic-dragon .skin-preview{background-image:url('./skin-dragao-cosmico-v1.png');background-size:cover;background-position:center}
- .skin-lunar-rose .skin-preview{background-image:url('./skin-rosa-lunar-v1.png');background-size:cover;background-position:center}
- .skin-saturn-crystal .skin-preview{background-image:url('./skin-cristal-saturno-v1.png');background-size:cover;background-position:center}
- .skin-violet-phoenix .skin-preview{background-image:url('./skin-fenix-violeta-v1.png');background-size:cover;background-position:center}
- .skin-celestial-oracle .skin-preview{background-image:url('./skin-oraculo-celestial-v1.png');background-size:cover;background-position:center}
- .skin-star-crown .skin-preview{background-image:url('./skin-coroa-estrelas-v1.png');background-size:cover;background-position:center}
+/* DIVINA BRUXA — SALÃO DAS REALIDADES V7
+   Galeria progressiva e troca fluida das 30 skins. */
+
+html[data-runtime="v12"] #skins.skins-screen{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+}
+
+html[data-runtime="v12"] #skins.skins-screen::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 10% 18%,rgba(137,53,189,.14),transparent 27%),
+    radial-gradient(circle at 88% 42%,rgba(225,177,84,.08),transparent 24%),
+    linear-gradient(180deg,rgba(6,2,12,.12),rgba(4,1,9,.72));
+}
+
+html[data-runtime="v12"] #skins .db-page-world__hero{
+  width:min(100%,900px);
+  margin-inline:auto;
+  margin-bottom:18px;
+  text-align:center;
+}
+
+html[data-runtime="v12"] #skinsApp{
+  width:min(100%,1040px);
+  margin-inline:auto;
+}
+
+html[data-runtime="v12"] #skinsApp .skins-v7-shell{
+  display:grid;
+  gap:18px;
+}
+
+html[data-runtime="v12"] #skinsApp .skins-v7-current{
+  position:relative;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  align-items:center;
+  gap:22px;
+  min-height:156px;
+  padding:18px clamp(18px,3vw,34px);
+  overflow:hidden;
+  border:1px solid rgba(235,198,124,.55);
+  border-radius:30px;
+  color:#fff3d2;
+  background:
+    radial-gradient(circle at 12% 50%,color-mix(in srgb,var(--db-skin-accent,#a565d6) 28%,transparent),transparent 30%),
+    linear-gradient(135deg,rgba(29,11,42,.96),rgba(6,2,12,.98) 68%);
+  box-shadow:inset 0 1px rgba(255,246,220,.09),0 22px 48px rgba(0,0,0,.38);
+}
+
+html[data-runtime="v12"] #skinsApp .skins-v7-current::after{
+  content:"✦";
+  position:absolute;
+  right:clamp(18px,5vw,58px);
+  top:50%;
+  color:rgba(238,201,128,.14);
+  font-size:72px;
+  line-height:1;
+  transform:translateY(-50%);
+  pointer-events:none;
+}
+
+html[data-runtime="v12"] #skinsApp .skins-v7-active-orb{
+  position:relative;
+  width:118px;
+  aspect-ratio:1;
+  padding:6px;
+  border:1px solid rgba(255,226,163,.72);
+  border-radius:50%;
+  background:#13051d;
+  box-shadow:0 0 0 5px rgba(144,52,186,.12),0 0 30px color-mix(in srgb,var(--db-skin-accent,#a565d6) 55%,transparent);
+  transform:translateZ(0);
+  transition:opacity .18s ease,transform .28s cubic-bezier(.22,1,.36,1);
+}
+
+html[data-runtime="v12"] #skinsApp[data-switching="true"] .skins-v7-active-orb{
+  opacity:.82;
+  transform:scale(.975);
+}
+
+html[data-runtime="v12"] #skinsApp .skins-v7-active-orb img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:50%;
+  background:#100419;
+}
+
+html[data-runtime="v12"] #skinsApp .skins-v7-active-orb>span{
+  position:absolute;
+  right:-5px;
+  bottom:10px;
+  display:grid;
+  place-items:center;
+  width:29px;
+  height:29px;
+  border:1px solid rgba(255,225,158,.8);
+  border-radius:50%;
+  color:#ffe4a1;
+  background:#160822;
+  box-shadow:0 4px 14px rgba(0,0,0,.48);
+  font-size:12px;
+}
+
+html[data-runtime="v12"] #skinsApp .skins-v7-current-copy{
+  position:relative;
+  z-index:1;
+  min-width:0;
+}
+
+html[data-runtime="v12"] #skinsApp .skins-v7-current-copy>p{
+  margin:0 0 5px;
+  color:#d9b66d;
+  font:700 12px/1.3 Inter,ui-sans-serif,system-ui,sans-serif;
+  letter-spacing:.24em;
+}
+
+html[data-runtime="v12"] #skinsApp .skins-v7-current-copy>h3{
+  margin:0;
+  color:#fff0c7;
+  font:500 clamp(25px,4vw,38px)/1.05 Georgia,"Times New Roman",serif;
+  letter-spacing:-.02em;
+  text-wrap:balance;
+}
+
+html[data-runtime="v12"] #skinsApp .skins-v7-current-copy>span{
+  display:block;
+  max-width:620px;
+  margin-top:8px;
+  color:#c6b9cc;
+  font:400 15px/1.55 Inter,ui-sans-serif,system-ui,sans-serif;
+}
+
+html[data-runtime="v12"] #skinsApp .skins-v7-tools{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+}
+
+html[data-runtime="v12"] #skinsApp .skins-v7-tools button{
+  min-height:44px;
+  padding:10px 18px;
+  border:1px solid rgba(229,191,116,.43);
+  border-radius:999px;
+  color:#ecd7aa;
+  background:rgba(18,8,27,.92);
+  box-shadow:inset 0 1px rgba(255,247,220,.06);
+  font:600 13px/1.2 Inter,ui-sans-serif,system-ui,sans-serif;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  transition:border-color .16s ease,background-color .16s ease,opacity .16s ease,transform .16s ease;
+}
+
+html[data-runtime="v12"] #skinsApp .skins-v7-tools button:not(:disabled):active{
+  transform:scale(.97);
+  background:#291238;
+}
+
+html[data-runtime="v12"] #skinsApp .skins-v7-tools button:disabled{opacity:.45}
+
+html[data-runtime="v12"] #skinsApp .skins-v6-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;
+}
+
+html[data-runtime="v12"] #skinsApp .skin-tile{
+  --skin-accent:#a565d6;
+  --skin-light:#f0d68a;
+  position:relative;
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  gap:11px;
+  min-width:0;
+  padding:13px;
+  overflow:hidden;
+  border:1px solid rgba(218,174,93,.25);
+  border-radius:23px;
+  background:linear-gradient(155deg,rgba(26,11,37,.96),rgba(7,3,12,.98));
+  box-shadow:inset 0 1px rgba(255,248,225,.045),0 13px 26px rgba(0,0,0,.24);
+  contain:layout paint style;
+  transition:border-color .2s ease,box-shadow .24s ease,transform .18s cubic-bezier(.22,1,.36,1);
+}
+
+html[data-runtime="v12"] #skinsApp .skin-tile.is-active{
+  border-color:color-mix(in srgb,var(--skin-light) 82%,#c7923e);
+  box-shadow:inset 0 1px rgba(255,248,225,.1),0 15px 34px rgba(0,0,0,.32),0 0 23px color-mix(in srgb,var(--skin-accent) 26%,transparent);
+}
+
+html[data-runtime="v12"] #skinsApp .skin-tile.is-active::after{display:none!important}
+
+html[data-runtime="v12"] #skinsApp .skin-tile.is-switching{
+  border-color:var(--skin-light);
+  transform:translateY(-2px);
+}
+
+html[data-runtime="v12"] #skinsApp .skin-preview{
+  position:relative;
+  display:grid;
+  place-items:center;
+  aspect-ratio:1;
+  overflow:hidden;
+  border:1px solid color-mix(in srgb,var(--skin-light) 48%,transparent);
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 34% 25%,rgba(255,246,218,.8) 0 1%,transparent 4%),
+    radial-gradient(circle at 50% 48%,color-mix(in srgb,var(--skin-accent) 68%,#38104d),#09020e 70%);
+  box-shadow:inset 0 0 20px rgba(255,255,255,.12),0 0 18px color-mix(in srgb,var(--skin-accent) 35%,transparent);
+}
+
+html[data-runtime="v12"] #skinsApp .skin-preview::before{
+  content:"";
+  position:absolute;
+  inset:5px;
+  z-index:0;
+  border:1px solid rgba(255,235,190,.18);
+  border-radius:50%;
+  pointer-events:none;
+}
+
+html[data-runtime="v12"] #skinsApp .skin-preview img{
+  position:absolute;
+  z-index:1;
+  inset:0;
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:50%;
+  opacity:0;
+  transform:translateZ(0) scale(1.025);
+  backface-visibility:hidden;
+  transition:opacity .2s ease,transform .3s cubic-bezier(.22,1,.36,1);
+}
+
+html[data-runtime="v12"] #skinsApp .skin-preview img.is-loaded{
+  opacity:1;
+  transform:translateZ(0) scale(1);
+}
+
+html[data-runtime="v12"] #skinsApp .skin-active-seal{
+  position:absolute;
+  z-index:2;
+  right:7px;
+  bottom:7px;
+  display:grid;
+  place-items:center;
+  width:28px;
+  height:28px;
+  border:1px solid rgba(255,230,174,.8);
+  border-radius:50%;
+  color:#ffe7ab;
+  background:rgba(14,5,21,.94);
+  box-shadow:0 4px 14px rgba(0,0,0,.5);
+  font-size:12px;
+  opacity:0;
+  transform:scale(.75);
+  transition:opacity .18s ease,transform .24s cubic-bezier(.22,1,.36,1);
+}
+
+html[data-runtime="v12"] #skinsApp .skin-tile.is-active .skin-active-seal{
+  opacity:1;
+  transform:scale(1);
+}
+
+html[data-runtime="v12"] #skinsApp .skin-copy{
+  display:grid;
+  align-content:start;
+  gap:4px;
+  min-width:0;
+}
+
+html[data-runtime="v12"] #skinsApp .skin-copy h3{
+  margin:0;
+  min-height:2.5em;
+  color:#f3d696;
+  font:500 16px/1.25 Georgia,"Times New Roman",serif;
+  text-wrap:balance;
+}
+
+html[data-runtime="v12"] #skinsApp .skin-copy p{
+  margin:0;
+  min-height:2.8em;
+  color:#b8a9bf;
+  font:400 13px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;
+}
+
+html[data-runtime="v12"] #skinsApp .skin-copy strong{
+  color:var(--skin-light);
+  font:700 14px/1.3 Inter,ui-sans-serif,system-ui,sans-serif;
+}
+
+html[data-runtime="v12"] #skinsApp .skin-tile>button{
+  width:100%;
+  min-height:44px;
+  padding:9px 8px;
+  border:1px solid color-mix(in srgb,var(--skin-light) 45%,transparent);
+  border-radius:999px;
+  color:#f1dba8;
+  background:color-mix(in srgb,var(--skin-accent) 22%,#12071a);
+  font:700 12px/1.2 Inter,ui-sans-serif,system-ui,sans-serif;
+  letter-spacing:.035em;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  transition:transform .15s ease,background-color .16s ease,border-color .16s ease,opacity .16s ease;
+}
+
+html[data-runtime="v12"] #skinsApp .skin-tile>button:not(:disabled):active{transform:scale(.96)}
+html[data-runtime="v12"] #skinsApp .skin-tile>button:disabled{opacity:.54}
+html[data-runtime="v12"] #skinsApp .skin-tile.is-active>button{
+  color:#100718;
+  border-color:var(--skin-light);
+  background:var(--skin-light);
+  opacity:1;
+}
+
+html[data-runtime="v12"] #skinsApp button:focus-visible{
+  outline:2px solid #fff1c8;
+  outline-offset:3px;
+}
+
+html[data-runtime="v12"] #skinsApp .skins-v7-sr{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  margin:-1px!important;
+  padding:0!important;
+  overflow:hidden!important;
+  clip:rect(0 0 0 0)!important;
+  clip-path:inset(50%)!important;
+  border:0!important;
+  white-space:nowrap!important;
+}
+
+@media(max-width:900px){
+  html[data-runtime="v12"] #skinsApp .skins-v6-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
+@media(max-width:640px){
+  html[data-runtime="v12"] #skins .db-page-world__hero{margin-bottom:14px}
+  html[data-runtime="v12"] #skinsApp .skins-v7-shell{gap:14px}
+  html[data-runtime="v12"] #skinsApp .skins-v7-current{
+    grid-template-columns:88px minmax(0,1fr);
+    gap:14px;
+    min-height:120px;
+    padding:14px;
+    border-radius:24px;
+  }
+  html[data-runtime="v12"] #skinsApp .skins-v7-current::after{display:none}
+  html[data-runtime="v12"] #skinsApp .skins-v7-active-orb{width:84px;padding:4px}
+  html[data-runtime="v12"] #skinsApp .skins-v7-active-orb>span{right:-3px;bottom:5px;width:24px;height:24px}
+  html[data-runtime="v12"] #skinsApp .skins-v7-current-copy>p{font-size:12px;letter-spacing:.17em}
+  html[data-runtime="v12"] #skinsApp .skins-v7-current-copy>h3{font-size:clamp(22px,6.6vw,29px)}
+  html[data-runtime="v12"] #skinsApp .skins-v7-current-copy>span{font-size:13px;line-height:1.45}
+  html[data-runtime="v12"] #skinsApp .skins-v7-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  html[data-runtime="v12"] #skinsApp .skins-v7-tools button{padding-inline:8px;font-size:12px}
+  html[data-runtime="v12"] #skinsApp .skins-v6-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  html[data-runtime="v12"] #skinsApp .skin-tile{gap:8px;padding:9px;border-radius:19px}
+  html[data-runtime="v12"] #skinsApp .skin-copy h3{font-size:14px;line-height:1.28}
+  html[data-runtime="v12"] #skinsApp .skin-copy p{font-size:12px;line-height:1.35}
+  html[data-runtime="v12"] #skinsApp .skin-copy strong{font-size:13px}
+  html[data-runtime="v12"] #skinsApp .skin-tile>button{padding-inline:5px;font-size:12px;letter-spacing:0}
+  html[data-runtime="v12"] #skinsApp .skin-active-seal{right:5px;bottom:5px;width:25px;height:25px}
+}
+
+@media(max-width:355px){
+  html[data-runtime="v12"] #skinsApp .skins-v7-current{grid-template-columns:76px minmax(0,1fr);gap:11px;padding:11px}
+  html[data-runtime="v12"] #skinsApp .skins-v7-active-orb{width:74px}
+  html[data-runtime="v12"] #skinsApp .skins-v7-current-copy>span{font-size:12px}
+  html[data-runtime="v12"] #skinsApp .skins-v6-grid{gap:7px}
+  html[data-runtime="v12"] #skinsApp .skin-tile{padding:8px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-runtime="v12"] #skinsApp .skins-v7-active-orb,
+  html[data-runtime="v12"] #skinsApp .skins-v7-tools button,
+  html[data-runtime="v12"] #skinsApp .skin-tile,
+  html[data-runtime="v12"] #skinsApp .skin-preview img,
+  html[data-runtime="v12"] #skinsApp .skin-active-seal,
+  html[data-runtime="v12"] #skinsApp .skin-tile>button{transition:none!important}
+}
+
+@media(forced-colors:active){
+  html[data-runtime="v12"] #skinsApp .skins-v7-current,
+  html[data-runtime="v12"] #skinsApp .skin-tile,
+  html[data-runtime="v12"] #skinsApp .skin-preview,
+  html[data-runtime="v12"] #skinsApp button{border:1px solid CanvasText}
+}
