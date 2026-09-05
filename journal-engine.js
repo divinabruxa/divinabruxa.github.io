@@ -4,6 +4,7 @@
 import { CARDS } from './tarot-data.js';
 import { store, escapeHTML } from './storage.js';
 import { cardImageMarkup } from './tarot-image-runtime.js';
+import { AI_TAROT_SELECTION_KEY } from './ai-policy.js?v=141';
 import {
   JOURNAL_STORAGE_KEY,
   JOURNAL_DRAFT_KEY,
@@ -586,6 +587,7 @@ export class JournalEngine {
 
   prepareAI(entry) {
     const cards = entryCardIds(entry).map(id => CARDS[id]?.name).filter(Boolean);
+    store.remove(AI_TAROT_SELECTION_KEY);
     store.set(JOURNAL_AI_SELECTION_KEY, {
       id: entry.id,
       title: entry.title,

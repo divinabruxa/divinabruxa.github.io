@@ -15,6 +15,8 @@ import {
   normalizeSpreadSession
 } from './spreads-policy.js?v=139';
 import { synthesizeSpread } from './spread-synthesis.js';
+import { AI_TAROT_SELECTION_KEY } from './ai-policy.js?v=141';
+import { JOURNAL_AI_SELECTION_KEY } from './journal-policy.js?v=140';
 
 const safe = value => escapeHTML(value ?? '');
 const reducedMotion = () => globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
@@ -369,7 +371,7 @@ export class SpreadsEngine {
     this.result.querySelector('[data-save-spread]')?.addEventListener('click', () => {
       this.saveToDiary(this.session);
     });
-    this.result.querySelector('[data-open-ai]')?.addEventListener('click', () => globalThis.orbe?.go?.('ai'));
+    this.result.querySelector('[data-open-ai]')?.addEventListener('click', () => this.prepareAI(items, target));
     this.result.querySelector('[data-new-spread]')?.addEventListener('click', () => {
       if (this.isComplete()) {
         store.remove(SPREAD_STORAGE_KEY);
@@ -381,6 +383,20 @@ export class SpreadsEngine {
       }
       this.renderResetConfirmation(target);
     });
+  }
+
+  prepareAI(items, target) {
+    if (!this.isComplete()) return;
+    store.remove(JOURNAL_AI_SELECTION_KEY);
+    store.set(AI_TAROT_SELECTION_KEY, {
+      source: 'spread', spreadId: target.id, spreadName: target.name,
+      question: this.session.question || '', consentScope: 'single-spread',
+      positions: items.map(({ card, position }) => ({ position, cardId: card.id, cardName: card.name, orientation: 'normal' })),
+      selectedAt: new Date().toISOString(), private: true
+    });
+    this.notify('Somente esta tiragem foi preparada. Revise antes de enviar.');
+    globalThis.orbe?.go?.('ai');
+    window.dispatchEvent(new CustomEvent('divina:tarot-ai-selected'));
   }
 
   renderResetConfirmation(target) {

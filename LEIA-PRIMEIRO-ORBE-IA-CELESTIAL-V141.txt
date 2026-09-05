@@ -1,0 +1,120 @@
+DIVINA BRUXA — V141
+ORBE IA CELESTIAL
+
+INSTALAÇÃO NO GITHUB PELO IPHONE
+
+1. Abra este ZIP no aplicativo Arquivos.
+2. Selecione os 13 arquivos que estão soltos dentro dele.
+3. Envie todos diretamente para a raiz do repositório divinabruxa.github.io.
+4. Quando o GitHub perguntar, confirme a substituição destes arquivos:
+   - index.html
+   - app.js
+   - page-loader-v1.js
+   - cosmic-visual-atlas-v1.js
+   - ai-engine.js
+   - ai-policy.js
+   - ai-credits.js
+   - spreads-engine.js
+   - journal-engine.js
+   - sw.js
+5. Os outros três arquivos são novos:
+   - orbe-ia-celestial-v1.webp
+   - ai-celestial-v1.css
+   - este LEIA-PRIMEIRO
+6. Não crie nenhuma pasta. Todos os arquivos ficam soltos na raiz.
+7. Depois da publicação, feche completamente o site e abra novamente.
+
+O QUE NASCE NESTA MACROETAPA
+
+- A Orbe IA ganha um santuário exclusivo em obsidiana, violeta e ouro.
+- A arte original foi otimizada para 864 x 1296 px e cerca de 100 KB.
+- A imagem só é solicitada quando a Orbe IA será visitada.
+- Se a abertura realmente demorar, a Orbe da skin ativa protege a espera.
+- A atividade principal aparece como uma superfície de conversa, sem obrigar
+  a pessoa a atravessar uma apresentação antes de escrever.
+- Luna oferece Acolhimento e Reflexão por 1 crédito.
+- Terra oferece Tarot e Símbolos por 10 créditos.
+- Canalização Simbólica usa Luna por 1 crédito e permanece declaradamente
+  ficcional: não é a pessoa real e não acessa pensamentos ou mensagens espirituais.
+- Sol continua visível, porém desligada e sem qualquer desbloqueio local.
+- O plano Orbe IA continua em R$ 89,90 por mês com 400 créditos.
+- O Premium de R$ 199,90 em pagamento único continua separado e não inclui
+  IA ilimitada ou vitalícia.
+- Os pacotes permanecem em 200 créditos por R$ 39,90; 600 por R$ 99,90;
+  e 1.500 por R$ 199,90.
+- Nesta versão, os pacotes são apenas simulações locais sem cartão ou cobrança.
+- Cada simulação exige uma confirmação explícita em duas etapas.
+- O saldo demonstrativo possui ledger local append-only, recibo idempotente,
+  total concedido, total consumido e saldo após cada evento.
+- Um crédito só é debitado depois de uma resposta concluída com sucesso.
+- Falha, interrupção, ausência de servidor, assinatura inválida ou limite
+  alcançado não consomem créditos.
+- Há limite local de 6 solicitações por minuto e 100 créditos por dia; o servidor
+  seguro deverá repetir e governar esses limites quando for ativado.
+- O chat está preparado para respostas em streaming e pode ser interrompido.
+- O contexto enviado é compacto: no máximo 12 mensagens e 24 mil caracteres.
+- O contrato sinaliza elegibilidade para prompt caching no servidor, reduzindo
+  repetição e custo sem colocar chaves no navegador.
+- O histórico guarda no máximo 40 mensagens neste aparelho.
+- A pessoa pode baixar uma cópia JSON privada ou apagar tudo com confirmação.
+- O rascunho da mensagem é preservado localmente.
+- O Admin e o analytics não recebem o texto das conversas.
+- Web Search permanece desligada. A Orbe não abre páginas externas.
+- Nenhuma API key foi adicionada aos arquivos públicos do GitHub.
+- A IA não finge funcionar offline e o saldo local nunca vira autoridade de
+  assinatura, compra ou entitlement.
+- O Diário continua privado. Apenas uma entrada escolhida explicitamente pode
+  ser preparada, revisada e depois consentida para envio.
+- Uma tiragem concluída pode ser levada à Terra por escolha explícita. Nesse
+  caso, cartas reais, IDs, posições e orientação normal seguem como dados
+  estruturados; IDs fora das 78 cartas são recusados.
+- Uma seleção nova de Diário ou Tiragem substitui a anterior, impedindo contexto
+  silencioso acumulado.
+- O kill switch já é respeitado pelo frontend quando o servidor sinaliza pausa.
+- O cache V36 preserva apenas a interface e os ativos elegíveis. Respostas,
+  entitlements e operações sensíveis continuam dependentes da rede segura.
+- A interface respeita movimento reduzido, áreas de toque de 44 px e leitura
+  confortável no iPhone.
+
+PROTEÇÕES MANTIDAS
+
+- A Orbe principal da Home não foi alterada.
+- As palavras, a respiração, os gestos e o duplo toque da Orbe não foram alterados.
+- O Menu Mágico e a mini-Orbe inferior não foram alterados.
+- As 30 skins continuam sincronizadas com todas as Orbes aprovadas.
+- O Tarot Livre V136.1, sua Espiral Livre, suas setas e suas 78 posições não
+  foram alterados.
+- A Escola V138, o Templo das Tiragens V139 e o Diário V140 foram preservados.
+- Nenhuma carta invertida foi criada ou reativada.
+- Nenhuma leitura pode enviar cartas que não pertençam ao catálogo oficial de 78.
+- Nenhum pagamento, assinatura, DNS, loja ou servidor de produção foi ativado.
+- Nenhuma chave ou segredo foi colocado no navegador.
+
+COMO TESTAR DEPOIS DA PUBLICAÇÃO
+
+1. Toque na mini-Orbe central do rodapé ou abra “Orbe IA” no Menu Mágico.
+2. O novo santuário deve surgir suavemente atrás do título.
+3. Alterne entre Luna, Terra e Canalização Simbólica; Sol deve continuar OFF.
+4. Escreva uma mensagem sem consentimento: ela não deve ser enviada.
+5. Marque o consentimento e envie. Sem servidor seguro configurado, a Orbe deve
+   explicar a indisponibilidade e não consumir créditos.
+6. Use “Interromper” durante uma futura resposta em streaming e confirme que não
+   existe débito quando a resposta não é concluída.
+7. Toque em um pacote, cancele e repita confirmando. O saldo só deve mudar na
+   segunda ação e a interface deve declarar que é uma simulação sem cobrança.
+8. Baixe o histórico e confirme a criação da cópia JSON privada.
+9. Toque em “Limpar histórico”, cancele e depois confirme a exclusão.
+10. No Diário, escolha uma única memória para a IA. Revise o texto preparado,
+    confirme que nada é enviado automaticamente e teste o botão “Remover”.
+11. Conclua uma Tiragem, toque em “Refletir com a Orbe IA” e confirme que Terra
+    recebe exatamente as cartas e posições reveladas, todas diretas.
+12. Desative a conexão: o estado deve mostrar “Offline · IA indisponível”, sem
+    fingir uma resposta e sem consumir créditos.
+13. Reabra Home, Tarot Livre, Escola, Tiragens e Diário para confirmar que todos
+    continuam intactos.
+
+PRÓXIMA MACROETAPA PLANEJADA
+
+V142 — PREMIUM E CONSTELAÇÃO DAS 30 SKINS
+Uma galeria cósmica de benefícios e aparências, com entitlements protegidos,
+restore preparado e monetização ainda restrita ao sandbox.

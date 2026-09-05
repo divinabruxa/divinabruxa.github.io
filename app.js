@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — APLICATIVO V140 · DIÁRIO E ESPELHO CELESTIAL */
+/* DIVINA BRUXA — APLICATIVO V141 · ORBE IA CELESTIAL */
 
 import { CONFIG } from './config.js';
 import { installRuntimeV12 } from './runtime-v12.js?v=133';
@@ -9,7 +9,7 @@ import { AuthClient } from './auth-client-v6.js';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
 import { SkinsEngine } from './skins-v6.js?v=133';
-import { createPageLoader } from './page-loader-v1.js?v=140';
+import { createPageLoader } from './page-loader-v1.js?v=141';
 import { createOrbLoadingPortal } from './orb-loading-portal-v1.js?v=137';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 
@@ -140,6 +140,6 @@ if ('serviceWorker' in navigator) {
 const skinsHeading = document.querySelector('#skins h2');
 if (skinsHeading) skinsHeading.textContent = 'Trinta formas de sentir o universo.';
 
-document.documentElement.dataset.appShell = 'v140';
+document.documentElement.dataset.appShell = 'v141';
 window.divinaLoading = loadingPortal;
 window.orbe = { go: pageLoader.go, loadPage: pageLoader.load, loading: loadingPortal };

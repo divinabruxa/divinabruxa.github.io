@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V35 · DIÁRIO E ESPELHO CELESTIAL */
-const CACHE='divina-bruxa-v35-diario-espelho';
+/* DIVINA BRUXA — SERVICE WORKER V36 · ORBE IA CELESTIAL */
+const CACHE='divina-bruxa-v36-orbe-ia-celestial';
 
 const REQUIRED=[
   './',
@@ -50,7 +50,8 @@ const WARM=[
   './school-engine.js','./school-policy.js','./spreads-engine.js','./spreads-policy.js','./spread-synthesis.js',
   './tarot-data.js','./storage.js','./tarot-image-runtime.js','./daily-meaning-runtime.js','./tarot-meanings.js','./meaning-engine.js','./tarot-atlas.webp','./card-library-policy.js',
   './journal-v5.css','./journal-celestial-v1.css','./diario-espelho-celestial-v1.webp',
-  './journal-engine.js','./journal-policy.js','./rhythm-v6.js','./ai-engine.js','./ai-policy.js','./ai-credits.js',
+  './journal-engine.js','./journal-policy.js','./rhythm-v6.js',
+  './ai-celestial-v1.css','./orbe-ia-celestial-v1.webp','./ai-engine.js','./ai-policy.js','./ai-credits.js',
   './fallback-shell-v1.css','./pwa-final-v1.css'
 ];
 
@@ -72,6 +73,12 @@ self.addEventListener('fetch',event=>{
   const url=new URL(event.request.url);
   const sameOrigin=url.origin===self.location.origin;
   const navigation=event.request.mode==='navigate'||event.request.destination==='document';
+  const sensitive=sameOrigin&&/(^|\/)(api\/)?(ai|auth|account|entitlements|billing|payments|consultations)(\/|$)/.test(url.pathname);
+
+  if(sensitive){
+    event.respondWith(fetch(event.request).catch(()=>new Response('',{status:503,statusText:'Secure connection required'})));
+    return;
+  }
 
   event.respondWith((async()=>{
     if(sameOrigin&&event.request.destination==='image'){

@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.5 · DIÁRIO E ESPELHO CELESTIAL V140
+/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.6 · ORBE IA CELESTIAL V141
    Cada motor nasce apenas quando seu portal é solicitado. */
 
 const pageTasks = new Map();
@@ -40,7 +40,7 @@ export function createPageLoader({ config, go } = {}) {
 
   const ensureJournal = () => once(sharedTasks, 'journal', async () => {
     const [{ JournalEngine }, { RhythmEngine }] = await Promise.all([
-      import('./journal-engine.js?v=140'),
+      import('./journal-engine.js?v=141'),
       import('./rhythm-v6.js')
     ]);
     const journal = new JournalEngine($('#journalApp'));
@@ -89,7 +89,7 @@ export function createPageLoader({ config, go } = {}) {
       return new SchoolEngine($('#schoolApp'));
     },
     spreads: async () => {
-      const { SpreadsEngine } = await import('./spreads-engine.js?v=139');
+      const { SpreadsEngine } = await import('./spreads-engine.js?v=141');
       return new SpreadsEngine({
         grid: $('#spreadGrid'),
         result: $('#spreadResult'),
@@ -99,8 +99,8 @@ export function createPageLoader({ config, go } = {}) {
     },
     journal: ensureJournal,
     ai: async () => {
-      const { AIEngine } = await import('./ai-engine.js');
-      return new AIEngine($('#ai'), config);
+      const { AIEngine } = await import('./ai-engine.js?v=141');
+      return new AIEngine($('#aiApp'), config);
     },
     store: async () => {
       await ensureCommerce();
@@ -139,7 +139,9 @@ export function createPageLoader({ config, go } = {}) {
           ? 'Preparando sua tiragem…'
           : id === 'journal'
             ? 'Abrindo suas memórias privadas…'
-            : undefined
+            : id === 'ai'
+              ? 'Despertando a Orbe IA…'
+              : undefined
       });
       document.dispatchEvent(new CustomEvent('divina:page-loading', { detail: { id } }));
 

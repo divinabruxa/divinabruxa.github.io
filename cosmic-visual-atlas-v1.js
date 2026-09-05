@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — ATLAS VISUAL CÓSMICO V6 · DIÁRIO E ESPELHO CELESTIAL V140
+/* DIVINA BRUXA — ATLAS VISUAL CÓSMICO V7 · ORBE IA CELESTIAL V141
    Carrega cada mundo somente quando ele será visitado e revela a arte após a decodificação. */
 
 const ATLAS = Object.freeze({
@@ -21,6 +21,10 @@ const ATLAS = Object.freeze({
   journal: Object.freeze({
     realm: 'memory',
     image: 'diario-espelho-celestial-v1.webp'
+  }),
+  ai: Object.freeze({
+    realm: 'intelligence',
+    image: 'orbe-ia-celestial-v1.webp'
   })
 });
 
@@ -88,14 +92,18 @@ function prepare(destination, { priority = 'auto' } = {}) {
         ? 'Preparando sua tiragem…'
         : destination === 'journal'
           ? 'Abrindo suas memórias privadas…'
-          : undefined,
+          : destination === 'ai'
+            ? 'Despertando a Orbe IA…'
+            : undefined,
       label: destination === 'school'
         ? 'o Observatório da Escola'
         : destination === 'spreads'
           ? 'o Templo das Tiragens'
           : destination === 'journal'
             ? 'o Diário e Espelho Celestial'
-            : 'a atmosfera deste mundo'
+            : destination === 'ai'
+              ? 'a Orbe IA Celestial'
+              : 'a atmosfera deste mundo'
     });
   }
 
