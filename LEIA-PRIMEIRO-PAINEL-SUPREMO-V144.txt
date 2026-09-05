@@ -1,0 +1,85 @@
+DIVINA BRUXA V144 — PAINEL SUPREMO DE ADMINISTRAÇÃO
+
+MACROETAPA
+V144 concluída sobre a base V143. Este ZIP é incremental e plano: copie todos os arquivos para a raiz do projeto, substituindo os homônimos. Não há pastas dentro do pacote.
+
+ENTREGUE
+- Nova Central da Proprietária na área Admin, desenhada primeiro para iPhone.
+- Navegação completa por 18 módulos administrativos.
+- Hoje: resumo operacional, métricas autorizadas e ações rápidas.
+- Financeiro.
+- Usuárias e CRM.
+- Premium e Assinaturas.
+- Orbe IA e Custos.
+- Tarot e Carta do Dia.
+- Escola do Tarot.
+- Consultas.
+- Loja.
+- Skins.
+- Música e Vídeos.
+- Notificações.
+- Analytics e Mapa.
+- SEO e ASO.
+- Segurança.
+- Backups.
+- Auditoria.
+- Configurações.
+
+CONTROLES IMPLEMENTADOS
+- Busca e navegação responsiva entre módulos.
+- Atualização de dados sanitizados pelo backend.
+- Visão operacional com números autorizados.
+- Editor dos quatro preços futuros das Consultas.
+- Revisão dos valores antes de salvar.
+- Step-up MFA obrigatório para confirmar mudança de preços.
+- Pedidos antigos preservam seus price_snapshots.
+- Lista local de pedidos mostra somente serviço, valor, estado e data.
+- Exportação de diagnóstico com lista branca de campos seguros.
+- Logout que revoga a sessão e bloqueia novamente a Central.
+
+SEGURANÇA INEGOCIÁVEL
+- O navegador público nunca recebe uma senha administrativa embutida.
+- Não existe desbloqueio por nome, senha local, localStorage ou papel definido no frontend.
+- O servidor precisa confirmar: conta proprietária, e-mail verificado, ambiente staging e MFA ativo.
+- Sessão por cookie seguro e revogável.
+- Conta comum recebe 403 sem qualquer dado administrativo.
+- Ações críticas exigem novo código MFA.
+- Rotas de Admin foram excluídas do cache offline.
+- Produção, DNS, cobrança real, submissão às lojas e modo Sol da IA continuam bloqueados.
+
+PRIVACIDADE
+O painel não exibe nem exporta:
+- corpo ou perguntas do Diário;
+- prompts ou respostas da Orbe IA;
+- perguntas privadas de Consultas;
+- senhas;
+- chaves, tokens ou segredos.
+
+IMPORTANTE
+Sem o backend seguro configurado, a Central permanece corretamente bloqueada e mostra apenas o mapa público dos módulos. Os arquivos estáticos não podem conceder acesso administrativo com segurança. O contrato ADMIN-CONTRACT-V144.json descreve as rotas que devem ser implementadas no staging para ativar o controle real.
+
+VALIDAÇÕES
+- Política Admin V144: aprovada.
+- 18 módulos únicos: aprovados.
+- Owner-only, e-mail verificado, MFA e cookie seguro: aprovados.
+- Nenhum papel administrativo local: aprovado.
+- Flags de produção bloqueadas: aprovadas.
+- Campos privados ausentes: aprovado.
+- Contrato do backend: aprovado.
+- CSS responsivo e sintaxe JavaScript/JSON: aprovados.
+- 10 verificações de segurança e regressão: aprovadas.
+
+ARQUIVOS DA MACROETAPA (10)
+1. index.html
+2. app.js
+3. page-loader-v1.js
+4. sw.js
+5. auth-client-v6.js
+6. admin-engine.js
+7. admin-policy.js
+8. admin-command-v1.css
+9. ADMIN-CONTRACT-V144.json
+10. LEIA-PRIMEIRO-PAINEL-SUPREMO-V144.txt
+
+PRÓXIMA MACROETAPA RECOMENDADA
+V145 — Backend Admin Staging: implementar as rotas do contrato, conta proprietária, MFA, RLS e operações reais do painel sem liberar produção.

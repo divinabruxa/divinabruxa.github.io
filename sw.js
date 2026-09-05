@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V38 · CONSULTAS CELESTIAIS */
-const CACHE='divina-bruxa-v38-consultas-celestiais';
+/* DIVINA BRUXA — SERVICE WORKER V39 · PAINEL SUPREMO */
+const CACHE='divina-bruxa-v39-painel-supremo';
 
 const REQUIRED=[
   './',
@@ -49,7 +49,7 @@ const WARM=[
   './tarot-table-v5.css','./tarot-ritual-v5.css','./tarot-controls-v5.css','./tarot-editorial-v5.css',
   './tarot-livre-official-v1.css','./tarot-livre-ios-v1.css','./tarot-spiral-suction-v1.webp',
   './spreads-v5.css','./spreads-temple-v1.css','./templo-tiragens-celestial-v1.webp',
-  './card-library-v5.css','./ai-v5.css','./premium-v5.css','./consultation-v5.css','./consultations-celestial-v1.css','./notification-v5.css','./admin-analytics-v1.css',
+  './card-library-v5.css','./ai-v5.css','./premium-v5.css','./consultation-v5.css','./consultations-celestial-v1.css','./notification-v5.css','./admin-analytics-v1.css','./admin-command-v1.css',
   './musica-videos-cosmica-v1.css','./store-v5.css','./school-v5.css','./school-celestial-v1.css','./escola-tarot-observatorio-v1.webp',
   './school-engine.js','./school-policy.js','./spreads-engine.js','./spreads-policy.js','./spread-synthesis.js',
   './tarot-data.js','./storage.js','./tarot-image-runtime.js','./daily-meaning-runtime.js','./tarot-meanings.js','./meaning-engine.js','./tarot-atlas.webp','./card-library-policy.js',
@@ -57,6 +57,8 @@ const WARM=[
   './journal-engine.js','./journal-policy.js','./rhythm-v6.js','./premium-constelacao-30-skins-v1.webp',
   './ai-celestial-v1.css','./orbe-ia-celestial-v1.webp','./ai-engine.js','./ai-policy.js','./ai-credits.js',
   './consultation-engine.js','./consultation-policy.js','./consultas-celestiais-santuario-v1.webp',
+  './admin-engine.js','./admin-policy.js','./auth-client-v6.js',
+  './ADMIN-CONTRACT-V144.json',
   './fallback-shell-v1.css','./pwa-final-v1.css'
 ];
 
@@ -78,7 +80,7 @@ self.addEventListener('fetch',event=>{
   const url=new URL(event.request.url);
   const sameOrigin=url.origin===self.location.origin;
   const navigation=event.request.mode==='navigate'||event.request.destination==='document';
-  const sensitive=sameOrigin&&/(^|\/)(api\/)?(ai|auth|account|entitlements|billing|payments|consultations)(\/|$)/.test(url.pathname);
+  const sensitive=sameOrigin&&/(^|\/)(api\/)?(ai|auth|account|admin|entitlements|billing|payments|consultations)(\/|$)/.test(url.pathname);
 
   if(sensitive){
     event.respondWith(fetch(event.request).catch(()=>new Response('',{status:503,statusText:'Secure connection required'})));

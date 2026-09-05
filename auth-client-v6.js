@@ -18,6 +18,16 @@ export class AuthClient {
   history() { return this.request('/history'); }
   saveHistory(entry) { return this.request('/history', { method: 'POST', body: JSON.stringify(entry) }); }
   skinEntitlements() { return this.request('/account/skins'); }
+  premiumEntitlements() { return this.request('/account/entitlements'); }
+  restorePurchases() { return this.request('/account/entitlements/restore', { method: 'POST', body: '{}' }); }
+  adminSession() { return this.request('/admin/session'); }
+  adminSignIn(email, password) { return this.request('/admin/session', { method: 'POST', body: JSON.stringify({ email, password }) }); }
+  adminVerifyMfa(code) { return this.request('/admin/session/mfa', { method: 'POST', body: JSON.stringify({ code }) }); }
+  adminSignOut() { return this.request('/admin/session', { method: 'DELETE' }); }
+  adminOverview() { return this.request('/admin/overview'); }
+  adminModule(moduleId) { return this.request(`/admin/modules/${encodeURIComponent(moduleId)}`); }
+  adminUpdateConsultationPrices(prices, stepUpCode) { return this.request('/admin/consultations/prices', { method: 'PATCH', body: JSON.stringify({ prices, stepUpCode }) }); }
+  adminExportDiagnostic() { return this.request('/admin/diagnostic'); }
   saveSkinEntitlement(skinId) { return this.request('/account/skins', { method: 'POST', body: JSON.stringify({ skinId }) }); }
   revokeSkinEntitlement(skinId) { return this.request(`/account/skins/${encodeURIComponent(skinId)}`, { method: 'DELETE' }); }
 }

@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.8 · CONSULTAS CELESTIAIS V143
+/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.9 · PAINEL SUPREMO V144
    Cada motor nasce apenas quando seu portal é solicitado. */
 
 const pageTasks = new Map();
@@ -16,7 +16,8 @@ const PAGE_LABELS = Object.freeze({
   subscriptions: 'o universo Premium',
   skins: 'a Constelação das 30 Skins',
   videos: 'De Frente com o Tarot',
-  music: 'o universo da Música'
+  music: 'o universo da Música',
+  admin: 'a Central da Proprietária'
 });
 
 let loadingSequence = 0;
@@ -119,7 +120,11 @@ export function createPageLoader({ config, go } = {}) {
       return new PremiumEngine($('#subscriptionApp'));
     },
     videos: ensureMedia,
-    music: ensureMedia
+    music: ensureMedia,
+    admin: async () => {
+      const { AdminEngine } = await import('./admin-engine.js?v=144');
+      return new AdminEngine($('#adminApp'));
+    }
   });
 
   const load = id => {
