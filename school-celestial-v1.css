@@ -1,0 +1,844 @@
+/* DIVINA BRUXA — ESCOLA DO TAROT CELESTIAL V138 */
+
+html[data-runtime="v12"] #app > #school[data-db-realm="academy"] {
+  --db-realm-accent: #bb84ff;
+  --db-realm-bright: #f2cf82;
+  --db-realm-haze: rgba(137, 72, 221, .24);
+  --db-realm-line: rgba(239, 198, 112, .28);
+  max-width: 1120px;
+  overflow: clip;
+  background:
+    radial-gradient(ellipse at 50% 7%, rgba(120, 62, 205, .26), transparent min(66vw, 42rem)),
+    linear-gradient(180deg, rgba(5, 2, 11, .08), rgba(5, 2, 11, .94) 74%);
+}
+
+html[data-runtime="v12"] #app > #school[data-db-realm="academy"]::before {
+  opacity: .38;
+  background-image:
+    linear-gradient(180deg, rgba(4, 2, 9, .36) 0%, rgba(4, 2, 9, .42) 31%, rgba(4, 2, 9, .9) 70%, #05020b 100%),
+    radial-gradient(ellipse at 50% 8%, rgba(146, 82, 230, .28), transparent 62%);
+  background-position: center top, center top;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 100% 100%, 100% min(960px, 118vh);
+  transition: opacity 360ms cubic-bezier(.22, .8, .2, 1);
+}
+
+html[data-runtime="v12"] #app > #school[data-db-realm="academy"][data-db-atlas="ready"]::before {
+  opacity: .74;
+  background-image:
+    linear-gradient(180deg, rgba(4, 2, 9, .36) 0%, rgba(4, 2, 9, .26) 24%, rgba(4, 2, 9, .7) 57%, rgba(4, 2, 9, .98) 88%, #05020b 100%),
+    radial-gradient(ellipse at 50% 8%, rgba(164, 102, 239, .14), transparent 58%),
+    var(--db-atlas-image);
+  background-position: center top, center top, center top;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-size: 100% 100%, 100% min(1040px, 124vh), min(864px, 116vw) auto;
+  animation: db-school-observatory-arrival 620ms cubic-bezier(.16, .82, .22, 1) both;
+}
+
+html[data-runtime="v12"] #app > #school[data-db-realm="academy"]::after {
+  top: 106px;
+  border-top-color: rgba(242, 207, 130, .48);
+  background: radial-gradient(ellipse at 50% 0, rgba(159, 96, 232, .2), transparent 69%);
+  box-shadow: 0 -30px 92px rgba(122, 64, 205, .3), 0 -1px 0 rgba(242, 207, 130, .16);
+}
+
+html[data-runtime="v12"] #school > .eyebrow:first-child {
+  text-shadow: 0 2px 16px #05020b, 0 0 18px rgba(235, 190, 104, .36);
+}
+
+html[data-runtime="v12"] #school > h2 {
+  max-width: 760px;
+  font-size: clamp(3rem, 9vw, 5.6rem);
+  text-shadow: 0 3px 24px #05020b, 0 0 42px rgba(146, 81, 223, .4);
+}
+
+html[data-runtime="v12"] #school > .lead {
+  max-width: 58ch;
+  color: #e1d7e9;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, .9);
+}
+
+#school .school-celestial-map {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 650px;
+  margin: clamp(1.6rem, 5vw, 3.2rem) auto clamp(4.6rem, 16vw, 9rem);
+  border: 1px solid rgba(241, 203, 124, .31);
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(11, 5, 22, .68), rgba(30, 12, 48, .5));
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .38), inset 0 1px rgba(255, 255, 255, .06), 0 0 36px rgba(125, 60, 201, .12);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+#school .school-celestial-map > span {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  padding: .9rem .7rem;
+  text-align: center;
+}
+
+#school .school-celestial-map > span + span {
+  border-left: 1px solid rgba(241, 203, 124, .18);
+}
+
+#school .school-celestial-map b {
+  color: #f8dda1;
+  font-family: Georgia, serif;
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+#school .school-celestial-map small {
+  margin-top: .35rem;
+  color: #c9bad3;
+  font-size: .66rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+#school #schoolApp {
+  position: relative;
+  z-index: 2;
+  margin-top: 0;
+}
+
+#school .school-dashboard {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(1.4rem, 5vw, 3rem);
+  align-items: center;
+  margin: 0;
+  padding: clamp(1.35rem, 4vw, 2.25rem);
+  overflow: hidden;
+  border: 1px solid rgba(239, 198, 112, .3);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 82% 16%, rgba(161, 88, 235, .22), transparent 38%),
+    linear-gradient(145deg, rgba(23, 9, 40, .92), rgba(7, 3, 14, .95));
+  box-shadow: 0 26px 88px rgba(0, 0, 0, .42), inset 0 1px rgba(255, 255, 255, .055), 0 0 42px rgba(132, 67, 210, .1);
+}
+
+#school .school-dashboard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .5;
+  background:
+    linear-gradient(90deg, transparent 49.8%, rgba(241, 203, 124, .08) 50%, transparent 50.2%),
+    linear-gradient(0deg, transparent 49.8%, rgba(241, 203, 124, .05) 50%, transparent 50.2%);
+  background-size: 72px 72px;
+  -webkit-mask-image: radial-gradient(circle at 85% 45%, #000, transparent 60%);
+  mask-image: radial-gradient(circle at 85% 45%, #000, transparent 60%);
+}
+
+#school .school-dashboard > .school-path-copy {
+  position: relative;
+  z-index: 1;
+  display: block;
+  min-width: 0;
+}
+
+#school .school-path-copy > .eyebrow {
+  margin: 0 0 .55rem;
+  color: #efc979;
+  font-size: .68rem;
+}
+
+#school .school-path-copy > h3 {
+  max-width: 620px;
+  margin: 0;
+  color: #fff8ea;
+  font: 400 clamp(1.8rem, 5vw, 3rem)/1.03 Georgia, serif;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+
+#school .school-path-copy > p:not(.eyebrow) {
+  max-width: 58ch;
+  margin: .75rem 0 0;
+  color: #cbbfd4;
+  font-size: .95rem;
+  line-height: 1.65;
+}
+
+#school .school-path-metrics {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-top: 1.25rem;
+}
+
+#school .school-path-metrics > span {
+  display: flex;
+  align-items: baseline;
+  gap: .4rem;
+  color: #c7b8cf;
+}
+
+#school .school-path-metrics b {
+  color: #f5d58f;
+  font: 400 1.35rem Georgia, serif;
+}
+
+#school .school-path-metrics small {
+  font-size: .72rem;
+}
+
+#school .school-continue {
+  min-height: 46px;
+  margin-top: 1.3rem;
+  padding: .7rem 1.05rem .7rem 1.2rem;
+  border: 1px solid rgba(242, 207, 130, .5);
+  border-radius: 999px;
+  color: #120819;
+  background: linear-gradient(135deg, #f0cd83, #c57be7);
+  box-shadow: 0 10px 28px rgba(157, 82, 218, .22);
+  font-size: .8rem;
+  font-weight: 800;
+  letter-spacing: .035em;
+  cursor: pointer;
+}
+
+#school .school-continue span {
+  display: inline-grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: .35rem;
+  border-radius: 50%;
+  background: rgba(17, 7, 24, .12);
+}
+
+#school .school-progress-orbit {
+  --school-progress: 0deg;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: clamp(126px, 18vw, 166px);
+  aspect-ratio: 1;
+  flex: none;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at center, #12071e 0 55%, transparent 56%),
+    conic-gradient(#f2cf82 0 var(--school-progress), rgba(231, 202, 242, .11) var(--school-progress) 360deg);
+  box-shadow: 0 0 0 1px rgba(242, 207, 130, .18), 0 0 38px rgba(155, 82, 224, .24), inset 0 0 28px rgba(124, 62, 203, .18);
+}
+
+#school .school-progress-orbit::before,
+#school .school-progress-orbit::after {
+  content: "";
+  position: absolute;
+  border: 1px solid rgba(242, 207, 130, .2);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+#school .school-progress-orbit::before { inset: -8px; }
+#school .school-progress-orbit::after { inset: 13px; border-style: dashed; }
+
+#school .school-progress-orbit > span {
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+#school .school-progress-orbit b {
+  color: #fff2d0;
+  font: 400 clamp(1.7rem, 4vw, 2.2rem) Georgia, serif;
+}
+
+#school .school-progress-orbit small {
+  margin-top: .25rem;
+  color: #bcaec7;
+  font-size: .62rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+#school .school-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: end;
+  margin: 1.25rem 0;
+}
+
+#school .school-search {
+  display: block;
+  margin: 0;
+  color: #e9c778;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+#school .school-search > span { display: block; }
+
+#school .school-search input {
+  min-height: 52px;
+  margin-top: .55rem;
+  padding: .85rem 1rem .85rem 2.9rem;
+  border: 1px solid rgba(231, 195, 116, .28);
+  border-radius: 16px;
+  color: #f8effc;
+  background:
+    radial-gradient(circle at 1.35rem 50%, #e6bd6d 0 2px, transparent 3px),
+    linear-gradient(145deg, rgba(16, 7, 27, .94), rgba(7, 3, 13, .96));
+  box-shadow: inset 0 1px rgba(255, 255, 255, .03);
+  font-size: 1rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+#school .school-module-count {
+  padding: .65rem .8rem;
+  color: #bfaec9;
+  font-size: .7rem;
+  letter-spacing: .07em;
+  white-space: nowrap;
+}
+
+#school .school-workspace {
+  display: grid;
+  grid-template-columns: minmax(245px, 290px) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+#school .school-modules {
+  position: sticky;
+  top: 96px;
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+  max-height: calc(100vh - 190px);
+  margin: 0;
+  padding: .7rem;
+  overflow: auto;
+  border: 1px solid rgba(233, 195, 113, .2);
+  border-radius: 24px;
+  background: linear-gradient(160deg, rgba(19, 8, 33, .9), rgba(6, 3, 12, .93));
+  box-shadow: 0 22px 62px rgba(0, 0, 0, .34), inset 0 1px rgba(255, 255, 255, .035);
+  scrollbar-color: rgba(218, 177, 103, .5) transparent;
+}
+
+#school .school-modules > button {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.35rem minmax(0, 1fr);
+  gap: .7rem;
+  align-items: center;
+  width: 100%;
+  min-height: 70px;
+  padding: .72rem .7rem .82rem;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 17px;
+  color: #f6edf8;
+  background: rgba(255, 255, 255, .018);
+  text-align: left;
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+#school .school-modules > button:hover,
+#school .school-modules > button.active {
+  border-color: rgba(240, 203, 125, .34);
+  background: linear-gradient(135deg, rgba(98, 43, 143, .32), rgba(32, 14, 53, .68));
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .22), inset 0 1px rgba(255, 255, 255, .04);
+}
+
+#school .school-modules > button.active {
+  border-color: rgba(241, 207, 135, .68);
+  box-shadow: 0 0 0 1px rgba(241, 207, 135, .1), 0 12px 34px rgba(86, 33, 132, .3), 0 0 24px rgba(164, 90, 229, .12);
+}
+
+#school .school-module-sigil {
+  display: grid;
+  place-items: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border: 1px solid rgba(235, 194, 111, .34);
+  border-radius: 50%;
+  color: #f2cb7d;
+  background: radial-gradient(circle, rgba(150, 78, 219, .28), rgba(10, 4, 18, .82) 72%);
+  box-shadow: inset 0 0 14px rgba(151, 79, 220, .18);
+  font-size: 1rem;
+}
+
+#school .school-module-copy {
+  display: block;
+  min-width: 0;
+}
+
+#school .school-module-copy small {
+  display: block;
+  color: #c5a85f;
+  font-size: .56rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+}
+
+#school .school-module-copy strong {
+  display: block;
+  margin: .18rem 0;
+  overflow: hidden;
+  color: #f7edf8;
+  font: 400 1rem/1.1 Georgia, serif;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#school .school-module-copy em {
+  display: block;
+  color: #9f91aa;
+  font-size: .62rem;
+  font-style: normal;
+}
+
+#school .school-modules > button > i {
+  position: absolute;
+  right: .7rem;
+  bottom: .38rem;
+  left: 3.75rem;
+  height: 2px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, .07);
+}
+
+#school .school-modules > button > i > u {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #a565dd, #f1cd80);
+  box-shadow: 0 0 10px rgba(233, 190, 104, .45);
+  text-decoration: none;
+}
+
+#school .school-lessons {
+  min-width: 0;
+  margin: 0;
+  scroll-margin-top: 100px;
+}
+
+#school .school-lessons-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: end;
+  margin: 0 0 1rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid rgba(236, 197, 116, .2);
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(22, 9, 37, .78), rgba(7, 3, 14, .84));
+}
+
+#school .school-lessons-head .eyebrow {
+  margin: 0 0 .25rem;
+  color: #e9c472;
+  font-size: .62rem;
+}
+
+#school .school-lessons-head h3 {
+  margin: 0;
+  color: #fff4e3;
+  font: 400 clamp(1.65rem, 4vw, 2.4rem)/1.06 Georgia, serif;
+}
+
+#school .school-lessons-head p:not(.eyebrow) {
+  margin: .45rem 0 0;
+  color: #bcaec5;
+  font-size: .9rem;
+  line-height: 1.55;
+}
+
+#school .school-lessons-head > span {
+  padding: .45rem .65rem;
+  border: 1px solid rgba(235, 195, 112, .22);
+  border-radius: 999px;
+  color: #d4bd8a;
+  font-size: .67rem;
+  white-space: nowrap;
+}
+
+#school .school-lesson-list {
+  display: grid;
+  gap: .8rem;
+}
+
+#school .school-lesson {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3.2rem minmax(0, 1fr);
+  gap: 1rem;
+  margin: 0;
+  padding: 1.15rem;
+  overflow: hidden;
+  border: 1px solid rgba(229, 190, 111, .2);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 0 0, rgba(138, 68, 210, .14), transparent 36%),
+    linear-gradient(145deg, rgba(20, 8, 34, .94), rgba(7, 3, 14, .96));
+  box-shadow: 0 18px 48px rgba(0, 0, 0, .28), inset 0 1px rgba(255, 255, 255, .035);
+}
+
+#school .school-lesson::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 38%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(239, 199, 118, .55));
+}
+
+#school .school-lesson.is-complete {
+  border-color: rgba(239, 203, 132, .44);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, .28), inset 3px 0 #d4aa60;
+}
+
+#school .school-lesson-number {
+  display: grid;
+  place-items: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  border: 1px solid rgba(236, 195, 111, .28);
+  border-radius: 50%;
+  color: #e5c27a;
+  background: rgba(104, 46, 157, .15);
+  font: 400 1.05rem Georgia, serif;
+}
+
+#school .school-lesson-body { min-width: 0; }
+
+#school .school-lesson-kind {
+  display: block;
+  color: #d5b269;
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+#school .school-lesson h4 {
+  margin: .28rem 0 .55rem;
+  color: #fff5e8;
+  font: 400 clamp(1.35rem, 3vw, 1.8rem)/1.1 Georgia, serif;
+}
+
+#school .school-lesson p {
+  margin: 0;
+  color: #c5b9cc;
+  font-size: .92rem;
+  line-height: 1.7;
+}
+
+#school .school-practice {
+  margin-top: 1rem;
+  padding: .85rem .9rem;
+  border-left: 2px solid rgba(239, 198, 112, .65);
+  border-radius: 0 14px 14px 0;
+  background: linear-gradient(90deg, rgba(136, 68, 200, .16), transparent);
+}
+
+#school .school-practice b {
+  display: block;
+  margin-bottom: .3rem;
+  color: #e9c778;
+  font-size: .61rem;
+  letter-spacing: .14em;
+}
+
+#school .school-practice p { color: #ded2e3; }
+
+#school .card-lesson {
+  grid-template-columns: 126px minmax(0, 1fr);
+  gap: 1.2rem;
+}
+
+#school .school-card-art {
+  position: relative;
+  align-self: start;
+}
+
+#school .school-card-art img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border: 1px solid rgba(239, 200, 119, .34);
+  border-radius: 15px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, .45), 0 0 20px rgba(123, 57, 184, .12);
+}
+
+#school .school-card-art > span {
+  position: absolute;
+  right: .35rem;
+  bottom: .35rem;
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid rgba(240, 205, 134, .38);
+  border-radius: 50%;
+  color: #f3d18d;
+  background: rgba(6, 3, 12, .84);
+  font: .68rem Georgia, serif;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+#school .school-lesson details {
+  margin-top: 1rem;
+  border-top: 1px solid rgba(232, 193, 113, .16);
+}
+
+#school .school-lesson summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 48px;
+  color: #e8c376;
+  cursor: pointer;
+  list-style: none;
+}
+
+#school .school-lesson summary::-webkit-details-marker { display: none; }
+
+#school .school-lesson summary b {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid rgba(232, 193, 113, .25);
+  border-radius: 50%;
+  font-weight: 400;
+  transition: transform 180ms ease;
+}
+
+#school .school-lesson details[open] summary b { transform: rotate(45deg); }
+
+#school .school-deep-lesson {
+  padding: .2rem 0 .5rem;
+}
+
+#school .school-deep-lesson h5 {
+  margin: 1rem 0 .25rem;
+  color: #e6bf70;
+  font-size: .64rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+#school .school-deep-lesson > a {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  min-height: 44px;
+  margin-top: .8rem;
+  color: #f1ce86;
+  font-size: .82rem;
+  text-decoration: none;
+}
+
+#school .school-quiz {
+  margin-top: 1rem;
+  padding: .9rem;
+  border: 1px solid rgba(232, 193, 113, .18);
+  border-radius: 16px;
+  background: rgba(111, 49, 162, .09);
+}
+
+#school .school-quiz > b {
+  display: block;
+  margin-bottom: .7rem;
+  color: #eee2ef;
+  font-size: .78rem;
+}
+
+#school .school-quiz > div {
+  display: flex;
+  gap: .45rem;
+  flex-wrap: wrap;
+}
+
+#school .school-quiz button,
+#school .school-actions button {
+  min-height: 44px;
+  padding: .55rem .82rem;
+  border: 1px solid rgba(235, 197, 119, .27);
+  border-radius: 999px;
+  color: #eee5f1;
+  background: rgba(96, 42, 142, .2);
+  font-size: .74rem;
+  cursor: pointer;
+}
+
+#school .school-quiz button:hover,
+#school .school-actions button:hover {
+  border-color: rgba(241, 205, 132, .62);
+  background: rgba(123, 57, 180, .32);
+}
+
+#school .school-quiz small {
+  display: block;
+  min-height: 1.2em;
+  margin-top: .65rem;
+  font-size: .75rem;
+  line-height: 1.45;
+}
+
+#school .school-quiz small.correct { color: #f0d28e; }
+#school .school-quiz small.retry { color: #efb4ce; }
+
+#school .school-actions {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+#school .school-actions button[aria-pressed="true"] {
+  border-color: rgba(240, 206, 137, .62);
+  color: #16091c;
+  background: linear-gradient(135deg, #e6c47d, #c17adc);
+}
+
+#school .school-empty {
+  padding: 2rem;
+  border: 1px dashed rgba(235, 196, 116, .3);
+  border-radius: 22px;
+  color: #c8b8cf;
+  text-align: center;
+}
+
+@keyframes db-school-observatory-arrival {
+  from { opacity: .16; transform: translate3d(0, 8px, 0) scale(1.005); }
+  to { opacity: .74; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@media (hover: hover) {
+  #school .school-dashboard,
+  #school .school-lesson {
+    transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+  }
+
+  #school .school-lesson:hover {
+    transform: translateY(-2px);
+    border-color: rgba(235, 197, 119, .36);
+    box-shadow: 0 22px 56px rgba(0, 0, 0, .34), 0 0 28px rgba(134, 66, 202, .1);
+  }
+}
+
+@media (max-width: 760px) {
+  html[data-runtime="v12"] #app > #school[data-db-realm="academy"][data-db-atlas="ready"]::before {
+    background-size: 100% 100%, 100% min(1040px, 124vh), min(864px, 132vw) auto;
+  }
+
+  #school .school-celestial-map {
+    margin-bottom: clamp(3.8rem, 16vw, 6rem);
+  }
+
+  #school .school-dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  #school .school-progress-orbit {
+    position: absolute;
+    top: 1.15rem;
+    right: 1.15rem;
+    width: 92px;
+  }
+
+  #school .school-path-copy {
+    padding-top: 5.6rem;
+  }
+
+  #school .school-controls { grid-template-columns: 1fr; }
+  #school .school-module-count { padding: 0 .2rem; white-space: normal; }
+  #school .school-workspace { display: block; }
+
+  #school .school-modules {
+    position: relative;
+    top: auto;
+    flex-direction: row;
+    max-height: none;
+    margin-bottom: 1rem;
+    padding: .6rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+  }
+
+  #school .school-modules > button {
+    flex: 0 0 min(78vw, 280px);
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 540px) {
+  #school .school-celestial-map {
+    border-radius: 22px;
+  }
+
+  #school .school-celestial-map > span { padding: .8rem .35rem; }
+  #school .school-celestial-map small { font-size: .56rem; letter-spacing: .08em; }
+  #school .school-dashboard { border-radius: 24px; }
+
+  #school .school-path-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .5rem;
+  }
+
+  #school .school-path-metrics > span {
+    display: grid;
+    gap: .05rem;
+  }
+
+  #school .school-path-metrics small { font-size: .62rem; line-height: 1.2; }
+  #school .school-lessons-head { grid-template-columns: 1fr; }
+  #school .school-lessons-head > span { justify-self: start; }
+
+  #school .school-lesson {
+    grid-template-columns: 2.55rem minmax(0, 1fr);
+    gap: .7rem;
+    padding: .9rem;
+    border-radius: 19px;
+  }
+
+  #school .school-lesson-number {
+    width: 2.55rem;
+    height: 2.55rem;
+  }
+
+  #school .card-lesson {
+    grid-template-columns: 88px minmax(0, 1fr);
+    gap: .85rem;
+  }
+
+  #school .school-lesson h4 { font-size: 1.28rem; }
+  #school .school-lesson p { font-size: .86rem; line-height: 1.62; }
+  #school .school-actions { grid-column: 1 / -1; }
+  #school .school-actions button { flex: 1 1 130px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-runtime="v12"] #app > #school[data-db-realm="academy"]::before,
+  #school .school-modules > button,
+  #school .school-lesson,
+  #school .school-lesson summary b {
+    animation: none !important;
+    transition: none !important;
+  }
+}

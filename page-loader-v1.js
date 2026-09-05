@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.2 · PORTAL DA ORBE V137
+/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.3 · ESCOLA CELESTIAL V138
    Cada motor nasce apenas quando seu portal é solicitado. */
 
 const pageTasks = new Map();
@@ -85,7 +85,7 @@ export function createPageLoader({ config, go } = {}) {
       return new CardLibraryEngine($('#cardLibraryApp'));
     },
     school: async () => {
-      const { SchoolEngine } = await import('./school-engine.js');
+      const { SchoolEngine } = await import('./school-engine.js?v=138');
       return new SchoolEngine($('#schoolApp'));
     },
     spreads: async () => {

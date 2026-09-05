@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V32 · PORTAL UNIVERSAL DE CARREGAMENTO */
-const CACHE='divina-bruxa-v32-orbe-carregamento';
+/* DIVINA BRUXA — SERVICE WORKER V33 · ESCOLA DO TAROT CELESTIAL */
+const CACHE='divina-bruxa-v33-escola-celestial';
 
 const REQUIRED=[
   './',
@@ -46,7 +46,9 @@ const WARM=[
   './tarot-livre-official-v1.css','./tarot-livre-ios-v1.css','./tarot-spiral-suction-v1.webp',
   './spreads-v5.css',
   './card-library-v5.css','./ai-v5.css','./premium-v5.css','./consultation-v5.css','./notification-v5.css','./admin-analytics-v1.css',
-  './musica-videos-cosmica-v1.css','./store-v5.css','./school-v5.css','./journal-v5.css','./fallback-shell-v1.css','./pwa-final-v1.css'
+  './musica-videos-cosmica-v1.css','./store-v5.css','./school-v5.css','./school-celestial-v1.css','./escola-tarot-observatorio-v1.webp',
+  './school-engine.js','./school-policy.js','./tarot-data.js','./storage.js','./tarot-image-runtime.js','./daily-meaning-runtime.js','./card-library-policy.js',
+  './journal-v5.css','./fallback-shell-v1.css','./pwa-final-v1.css'
 ];
 
 self.addEventListener('install',event=>event.waitUntil((async()=>{

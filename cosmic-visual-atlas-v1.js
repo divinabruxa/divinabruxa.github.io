@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — ATLAS VISUAL CÓSMICO V3
+/* DIVINA BRUXA — ATLAS VISUAL CÓSMICO V4 · ESCOLA CELESTIAL V138
    Carrega cada mundo somente quando ele será visitado e revela a arte após a decodificação. */
 
 const ATLAS = Object.freeze({
@@ -9,11 +9,21 @@ const ATLAS = Object.freeze({
   library: Object.freeze({
     realm: 'archive',
     image: 'biblioteca-celestial-78-cartas-v1.webp'
+  }),
+  school: Object.freeze({
+    realm: 'academy',
+    image: 'escola-tarot-observatorio-v1.webp'
   })
 });
 
 const assets = new Map();
+const worldTasks = new Map();
 let activeDestination = '';
+let loadingSequence = 0;
+
+function announceLoading(type, detail) {
+  document.dispatchEvent(new CustomEvent(`divina:loading-${type}`, { detail }));
+}
 
 function loadAsset(source, priority = 'auto') {
   const absolute = new URL(source, document.baseURI).href;
@@ -57,9 +67,20 @@ function prepare(destination, { priority = 'auto' } = {}) {
   const screen = entry ? document.getElementById(destination) : null;
   if (!entry || !screen || screen.dataset.dbRealm !== entry.realm) return Promise.resolve(false);
   if (screen.dataset.dbAtlas === 'ready') return Promise.resolve(true);
+  if (worldTasks.has(destination)) return worldTasks.get(destination);
 
   screen.dataset.dbAtlas = 'loading';
-  return loadAsset(entry.image, priority).then(source => {
+  const loadingId = `atlas:${destination}:${++loadingSequence}`;
+  const tracked = priority === 'high';
+  if (tracked) {
+    announceLoading('start', {
+      id: loadingId,
+      pageId: destination,
+      label: destination === 'school' ? 'o Observatório da Escola' : 'a atmosfera deste mundo'
+    });
+  }
+
+  const task = loadAsset(entry.image, priority).then(source => {
     screen.style.setProperty('--db-atlas-image', `url("${source}")`);
     screen.dataset.dbAtlas = 'ready';
     return true;
@@ -67,7 +88,13 @@ function prepare(destination, { priority = 'auto' } = {}) {
     delete screen.dataset.dbAtlas;
     if (activeDestination === destination) activeDestination = '';
     return false;
+  }).finally(() => {
+    if (worldTasks.get(destination) === task) worldTasks.delete(destination);
+    if (tracked) announceLoading('end', { id: loadingId, pageId: destination });
   });
+
+  worldTasks.set(destination, task);
+  return task;
 }
 
 function revealActiveWorld() {
