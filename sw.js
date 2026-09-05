@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V34 · TEMPLO DAS TIRAGENS CELESTIAL */
-const CACHE='divina-bruxa-v34-templo-tiragens';
+/* DIVINA BRUXA — SERVICE WORKER V35 · DIÁRIO E ESPELHO CELESTIAL */
+const CACHE='divina-bruxa-v35-diario-espelho';
 
 const REQUIRED=[
   './',
@@ -49,7 +49,9 @@ const WARM=[
   './musica-videos-cosmica-v1.css','./store-v5.css','./school-v5.css','./school-celestial-v1.css','./escola-tarot-observatorio-v1.webp',
   './school-engine.js','./school-policy.js','./spreads-engine.js','./spreads-policy.js','./spread-synthesis.js',
   './tarot-data.js','./storage.js','./tarot-image-runtime.js','./daily-meaning-runtime.js','./tarot-meanings.js','./meaning-engine.js','./tarot-atlas.webp','./card-library-policy.js',
-  './journal-v5.css','./fallback-shell-v1.css','./pwa-final-v1.css'
+  './journal-v5.css','./journal-celestial-v1.css','./diario-espelho-celestial-v1.webp',
+  './journal-engine.js','./journal-policy.js','./rhythm-v6.js','./ai-engine.js','./ai-policy.js','./ai-credits.js',
+  './fallback-shell-v1.css','./pwa-final-v1.css'
 ];
 
 self.addEventListener('install',event=>event.waitUntil((async()=>{

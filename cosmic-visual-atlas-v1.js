@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — ATLAS VISUAL CÓSMICO V5 · TEMPLO DAS TIRAGENS V139
+/* DIVINA BRUXA — ATLAS VISUAL CÓSMICO V6 · DIÁRIO E ESPELHO CELESTIAL V140
    Carrega cada mundo somente quando ele será visitado e revela a arte após a decodificação. */
 
 const ATLAS = Object.freeze({
@@ -17,6 +17,10 @@ const ATLAS = Object.freeze({
   spreads: Object.freeze({
     realm: 'oracle',
     image: 'templo-tiragens-celestial-v1.webp'
+  }),
+  journal: Object.freeze({
+    realm: 'memory',
+    image: 'diario-espelho-celestial-v1.webp'
   })
 });
 
@@ -80,12 +84,18 @@ function prepare(destination, { priority = 'auto' } = {}) {
     announceLoading('start', {
       id: loadingId,
       pageId: destination,
-      message: destination === 'spreads' ? 'Preparando sua tiragem…' : undefined,
+      message: destination === 'spreads'
+        ? 'Preparando sua tiragem…'
+        : destination === 'journal'
+          ? 'Abrindo suas memórias privadas…'
+          : undefined,
       label: destination === 'school'
         ? 'o Observatório da Escola'
         : destination === 'spreads'
           ? 'o Templo das Tiragens'
-          : 'a atmosfera deste mundo'
+          : destination === 'journal'
+            ? 'o Diário e Espelho Celestial'
+            : 'a atmosfera deste mundo'
     });
   }
 

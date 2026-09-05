@@ -1,0 +1,105 @@
+DIVINA BRUXA — V140
+DIÁRIO E ESPELHO CELESTIAL
+
+INSTALAÇÃO NO GITHUB PELO IPHONE
+
+1. Abra este ZIP no aplicativo Arquivos.
+2. Selecione os 11 arquivos que estão soltos dentro dele.
+3. Envie todos diretamente para a raiz do repositório divinabruxa.github.io.
+4. Quando o GitHub perguntar, confirme a substituição destes arquivos:
+   - index.html
+   - app.js
+   - page-loader-v1.js
+   - cosmic-visual-atlas-v1.js
+   - journal-engine.js
+   - journal-policy.js
+   - ai-engine.js
+   - sw.js
+5. Os outros três arquivos são novos:
+   - diario-espelho-celestial-v1.webp
+   - journal-celestial-v1.css
+   - este LEIA-PRIMEIRO
+6. Não crie nenhuma pasta. Todos os arquivos ficam soltos na raiz.
+7. Depois da publicação, feche completamente o site e abra novamente.
+
+O QUE NASCE NESTA MACROETAPA
+
+- O Diário ganha um santuário próprio em obsidiana, violeta e ouro.
+- A arte original foi otimizada para 864 x 1296 px e cerca de 136 KB.
+- A imagem só é solicitada quando o Diário será visitado.
+- Se a abertura realmente demorar, a Orbe da skin ativa protege a espera.
+- Cada memória pode guardar título, data e hora, reflexão, intenção, humor,
+  etiquetas, coleção, pessoas, aula e cartas relacionadas.
+- Entradas antigas são migradas sem trocar identidade, datas ou conteúdo.
+- O rascunho possui autosave local e é restaurado depois de uma interrupção.
+- Os estados “Salvando”, “Rascunho salvo” e “Memória guardada” deixam claro
+  o que já foi preservado neste aparelho.
+- A linha do tempo reúne as memórias por dia; o calendário permite voltar a
+  uma data específica e navegar entre meses.
+- A busca encontra título, texto, carta ou tema. Há filtros por humor, tipo,
+  data, carta, coleção, etiqueta e favoritos.
+- Cada memória pode ser editada, favoritada ou excluída com confirmação em
+  duas etapas, sem caixas nativas abruptas.
+- O Espelho observa períodos de 7, 30, 90 e 365 dias ou todo o histórico.
+- Ele mostra frequências de cartas, naipes, arcanos, humores, temas, dias
+  ativos e palavras preservadas.
+- Os padrões são apresentados como observações, nunca como diagnósticos,
+  previsões, sentenças ou verdades absolutas.
+- “Baixar meus dados” cria uma cópia JSON privada e completa, preservando a
+  portabilidade mesmo sem servidor.
+- A Exportação Celestial editorial permanece protegida pelo Premium de
+  R$ 199,90 em pagamento único, separado da Orbe IA.
+- A ativação Premium final continua dependente do servidor seguro; este pacote
+  não desbloqueia benefícios, não cobra e não simula compra de produção.
+- A IA nunca abre ou lê o Diário inteiro. Somente uma entrada escolhida pode
+  ser preparada, após confirmação explícita em duas etapas.
+- Mesmo depois da escolha, nada é enviado até a pessoa revisar o texto, marcar
+  o consentimento da IA e tocar em “Enviar”.
+- O corpo das memórias não entra em Admin nem em analytics. O Espelho calcula
+  seus padrões localmente e seus agregados não carregam texto privado.
+- O Diário continua utilizável sem conexão; o estado local fica claramente
+  indicado enquanto a sincronização segura não existe.
+- O cache V35 prepara o motor, as políticas, a arte e a ponte de consentimento
+  para uma experiência resiliente.
+- A interface respeita movimento reduzido, áreas de toque de 44 px e leitura
+  confortável no iPhone.
+
+PROTEÇÕES MANTIDAS
+
+- A Orbe principal da Home não foi alterada.
+- As palavras, a respiração, os gestos e o duplo toque da Orbe não foram alterados.
+- O Menu Mágico e a mini-Orbe inferior não foram alterados.
+- As 30 skins continuam sincronizadas com todas as Orbes.
+- O Tarot Livre V136.1, sua Espiral Livre, suas setas e suas 78 posições não
+  foram alterados.
+- A Escola do Tarot V138 e o Templo das Tiragens V139 foram preservados.
+- Nenhuma carta invertida foi criada ou reativada.
+- Nenhum pagamento, assinatura, DNS, loja ou servidor de produção foi ativado.
+- Nenhuma chave ou segredo foi colocado no navegador.
+
+COMO TESTAR DEPOIS DA PUBLICAÇÃO
+
+1. Abra o Menu Mágico e toque em “Diário”.
+2. O santuário do Diário deve surgir suavemente atrás do título.
+3. Comece uma reflexão, aguarde um instante e feche o site sem guardar.
+4. Abra novamente: o rascunho deve reaparecer com o aviso de restauração.
+5. Guarde a memória e confirme que ela nasce na linha do tempo.
+6. Edite, favorite e use os filtros de humor, carta, data e tema.
+7. Abra o calendário, navegue entre meses e toque em um dia com memória.
+8. Troque os períodos do Espelho e confirme que os padrões mudam sem linguagem
+   de diagnóstico ou certeza absoluta.
+9. Toque em “Baixar meus dados” e confirme a criação da cópia JSON privada.
+10. Em uma memória, toque em “Levar à Orbe IA”, cancele e repita confirmando.
+    Somente a entrada escolhida deve ser preparada, sem envio automático.
+11. Marque o consentimento da IA somente se desejar e confirme que o envio
+    continua sendo uma ação separada.
+12. Desative a conexão e confirme que ainda é possível escrever e guardar.
+13. Exclua uma memória e confirme que há uma segunda ação explícita antes da
+    remoção definitiva.
+
+PRÓXIMA MACROETAPA PLANEJADA
+
+V141 — ORBE IA CELESTIAL
+Uma conversa simbólica mais clara, segura e visual, com escolhas conscientes,
+contexto controlado e transparência de créditos — preservando tudo que já está
+perfeito.

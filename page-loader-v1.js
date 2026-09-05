@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.4 · TEMPLO DAS TIRAGENS V139
+/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.5 · DIÁRIO E ESPELHO CELESTIAL V140
    Cada motor nasce apenas quando seu portal é solicitado. */
 
 const pageTasks = new Map();
@@ -40,11 +40,11 @@ export function createPageLoader({ config, go } = {}) {
 
   const ensureJournal = () => once(sharedTasks, 'journal', async () => {
     const [{ JournalEngine }, { RhythmEngine }] = await Promise.all([
-      import('./journal-engine.js'),
+      import('./journal-engine.js?v=140'),
       import('./rhythm-v6.js')
     ]);
-    new RhythmEngine($('#journal'));
-    const journal = new JournalEngine($('#journalForm'), $('#entries'), $('#mirrorStats'));
+    const journal = new JournalEngine($('#journalApp'));
+    new RhythmEngine($('#journalRhythm'));
     return journal;
   });
 
@@ -135,7 +135,11 @@ export function createPageLoader({ config, go } = {}) {
         id: loadingId,
         pageId: id,
         label: PAGE_LABELS[id] || 'o próximo portal',
-        message: id === 'spreads' ? 'Preparando sua tiragem…' : undefined
+        message: id === 'spreads'
+          ? 'Preparando sua tiragem…'
+          : id === 'journal'
+            ? 'Abrindo suas memórias privadas…'
+            : undefined
       });
       document.dispatchEvent(new CustomEvent('divina:page-loading', { detail: { id } }));
 

@@ -1,10 +1,11 @@
 import { escapeHTML, store } from './storage.js';
 import { AI_POLICY, aiDisclosure } from './ai-policy.js';
 import { canSpend, creditState, grantCredits, spend } from './ai-credits.js';
+import { JOURNAL_AI_SELECTION_KEY } from './journal-policy.js?v=140';
 
 export class AIEngine {
   constructor(root, config) {
-    this.root=root; this.config=config; this.chat=root.querySelector('#chat'); this.form=root.querySelector('#chatForm'); this.mode=root.querySelector('#aiMode'); this.persona=root.querySelector('#aiPersona'); this.history=store.get('whit-history',[]); this.ensureControls(); this.bind(); this.renderHistory();
+    this.root=root; this.config=config; this.chat=root.querySelector('#chat'); this.form=root.querySelector('#chatForm'); this.mode=root.querySelector('#aiMode'); this.persona=root.querySelector('#aiPersona'); this.history=store.get('whit-history',[]); this.ensureControls(); this.bind(); this.renderHistory(); this.prepareJournalSelection();
   }
   ensureControls(){
     if(!this.mode.querySelector('[value="sol"]')){const option=document.createElement('option');option.value='sol';option.textContent='Sol · expansão (indisponível)';option.disabled=true;this.mode.append(option);}
@@ -18,6 +19,25 @@ export class AIEngine {
     this.mode.onchange=()=>{const channel=this.mode.value==='channel';this.root.querySelector('#personaField').hidden=!channel;this.root.querySelector('#channelNotice').hidden=!channel;this.root.querySelector('#channelNotice').textContent=aiDisclosure(this.mode.value);};
     this.form.onsubmit=e=>{e.preventDefault();this.send();};
     this.root.querySelector('#clearChat').onclick=()=>{this.history=[];store.set('whit-history',[]);this.renderHistory();};
+    window.addEventListener('divina:journal-ai-selected',()=>this.prepareJournalSelection());
+  }
+  prepareJournalSelection(){
+    const selected=store.get(JOURNAL_AI_SELECTION_KEY);
+    if(!selected||selected.consentScope!=='single-entry'||typeof selected.text!=='string')return;
+    const input=this.root.querySelector('#chatInput');
+    if(!input)return;
+    const cards=Array.isArray(selected.cards)&&selected.cards.length?`\nCartas relacionadas: ${selected.cards.join(', ')}`:'';
+    const question=selected.question?`\nIntenção: ${selected.question}`:'';
+    const tags=selected.tags?`\nEtiquetas: ${selected.tags}`:'';
+    input.value=`Quero refletir somente sobre esta entrada que escolhi no meu Diário.\nTítulo: ${String(selected.title||'Memória da Orbe')}\nReflexão: ${selected.text.slice(0,5000)}${question}${cards}${tags}`;
+    this.root.querySelector('.ai-journal-selection')?.remove();
+    const notice=document.createElement('aside');
+    notice.className='ai-journal-selection';
+    notice.innerHTML='<span aria-hidden="true">◇</span><p><b>Uma única memória foi preparada.</b><small>Revise o texto abaixo. Nada será enviado até você marcar o consentimento e tocar em Enviar.</small></p><button type="button">Remover</button>';
+    notice.querySelector('button').onclick=()=>{input.value='';notice.remove();};
+    this.form.insertAdjacentElement('beforebegin',notice);
+    store.remove(JOURNAL_AI_SELECTION_KEY);
+    input.focus({preventScroll:true});
   }
   renderHistory(){this.chat.innerHTML='<p class="bubble bot">Eu sou Whit. Escolha um modo e converse com presença. Esta experiência é uma simulação de IA.</p>'+this.history.map(m=>`<p class="bubble ${m.role==='user'?'user':'bot'}">${escapeHTML(m.content)}</p>`).join('');this.chat.scrollTop=this.chat.scrollHeight;}
   async send(){
