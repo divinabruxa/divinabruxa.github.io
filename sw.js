@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V36 · ORBE IA CELESTIAL */
-const CACHE='divina-bruxa-v36-orbe-ia-celestial';
+/* DIVINA BRUXA — SERVICE WORKER V38 · CONSULTAS CELESTIAIS */
+const CACHE='divina-bruxa-v38-consultas-celestiais';
 
 const REQUIRED=[
   './',
@@ -22,6 +22,10 @@ const REQUIRED=[
   './skin-catalog-v6.js',
   './skins-v6.js',
   './skins-v6.css',
+  './premium-constellation-v1.css',
+  './premium-entitlements-v142.js',
+  './premium-policy.js',
+  './premium-engine.js',
   './config.js',
   './auth-client-v6.js',
   './navigation.js',
@@ -45,13 +49,14 @@ const WARM=[
   './tarot-table-v5.css','./tarot-ritual-v5.css','./tarot-controls-v5.css','./tarot-editorial-v5.css',
   './tarot-livre-official-v1.css','./tarot-livre-ios-v1.css','./tarot-spiral-suction-v1.webp',
   './spreads-v5.css','./spreads-temple-v1.css','./templo-tiragens-celestial-v1.webp',
-  './card-library-v5.css','./ai-v5.css','./premium-v5.css','./consultation-v5.css','./notification-v5.css','./admin-analytics-v1.css',
+  './card-library-v5.css','./ai-v5.css','./premium-v5.css','./consultation-v5.css','./consultations-celestial-v1.css','./notification-v5.css','./admin-analytics-v1.css',
   './musica-videos-cosmica-v1.css','./store-v5.css','./school-v5.css','./school-celestial-v1.css','./escola-tarot-observatorio-v1.webp',
   './school-engine.js','./school-policy.js','./spreads-engine.js','./spreads-policy.js','./spread-synthesis.js',
   './tarot-data.js','./storage.js','./tarot-image-runtime.js','./daily-meaning-runtime.js','./tarot-meanings.js','./meaning-engine.js','./tarot-atlas.webp','./card-library-policy.js',
   './journal-v5.css','./journal-celestial-v1.css','./diario-espelho-celestial-v1.webp',
-  './journal-engine.js','./journal-policy.js','./rhythm-v6.js',
+  './journal-engine.js','./journal-policy.js','./rhythm-v6.js','./premium-constelacao-30-skins-v1.webp',
   './ai-celestial-v1.css','./orbe-ia-celestial-v1.webp','./ai-engine.js','./ai-policy.js','./ai-credits.js',
+  './consultation-engine.js','./consultation-policy.js','./consultas-celestiais-santuario-v1.webp',
   './fallback-shell-v1.css','./pwa-final-v1.css'
 ];
 

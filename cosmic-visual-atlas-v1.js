@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — ATLAS VISUAL CÓSMICO V7 · ORBE IA CELESTIAL V141
+/* DIVINA BRUXA — ATLAS VISUAL CÓSMICO V9 · CONSULTAS CELESTIAIS V143
    Carrega cada mundo somente quando ele será visitado e revela a arte após a decodificação. */
 
 const ATLAS = Object.freeze({
@@ -25,6 +25,18 @@ const ATLAS = Object.freeze({
   ai: Object.freeze({
     realm: 'intelligence',
     image: 'orbe-ia-celestial-v1.webp'
+  }),
+  skins: Object.freeze({
+    realm: 'constellation',
+    image: 'premium-constelacao-30-skins-v1.webp'
+  }),
+  subscriptions: Object.freeze({
+    realm: 'crown',
+    image: 'premium-constelacao-30-skins-v1.webp'
+  }),
+  consultations: Object.freeze({
+    realm: 'sanctuary',
+    image: 'consultas-celestiais-santuario-v1.webp'
   })
 });
 
@@ -94,6 +106,10 @@ function prepare(destination, { priority = 'auto' } = {}) {
           ? 'Abrindo suas memórias privadas…'
           : destination === 'ai'
             ? 'Despertando a Orbe IA…'
+            : destination === 'consultations'
+              ? 'Abrindo o Santuário das Consultas…'
+            : destination === 'skins' || destination === 'subscriptions'
+              ? 'Acendendo a constelação das 30 skins…'
             : undefined,
       label: destination === 'school'
         ? 'o Observatório da Escola'
@@ -103,6 +119,12 @@ function prepare(destination, { priority = 'auto' } = {}) {
             ? 'o Diário e Espelho Celestial'
             : destination === 'ai'
               ? 'a Orbe IA Celestial'
+              : destination === 'consultations'
+                ? 'o Santuário das Consultas Celestiais'
+              : destination === 'skins'
+                ? 'a Constelação das 30 Skins'
+                : destination === 'subscriptions'
+                  ? 'a Coroa Premium'
               : 'a atmosfera deste mundo'
     });
   }

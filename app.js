@@ -1,15 +1,15 @@
-/* DIVINA BRUXA — APLICATIVO V141 · ORBE IA CELESTIAL */
+/* DIVINA BRUXA — APLICATIVO V143 · CONSULTAS CELESTIAIS */
 
 import { CONFIG } from './config.js';
-import { installRuntimeV12 } from './runtime-v12.js?v=133';
+import { installRuntimeV12 } from './runtime-v12.js?v=142';
 import { createNavigation } from './navigation.js?v=100';
 import { RealityOrbEngine } from './orb-engine-v68.js?v=100';
 import { bindMiniOrbs } from './mini-orb-engine.js?v=71';
 import { AuthClient } from './auth-client-v6.js';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { SkinsEngine } from './skins-v6.js?v=133';
-import { createPageLoader } from './page-loader-v1.js?v=141';
+import { SkinsEngine } from './skins-v6.js?v=142';
+import { createPageLoader } from './page-loader-v1.js?v=143';
 import { createOrbLoadingPortal } from './orb-loading-portal-v1.js?v=137';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 

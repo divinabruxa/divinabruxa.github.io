@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.6 · ORBE IA CELESTIAL V141
+/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.8 · CONSULTAS CELESTIAIS V143
    Cada motor nasce apenas quando seu portal é solicitado. */
 
 const pageTasks = new Map();
@@ -14,6 +14,7 @@ const PAGE_LABELS = Object.freeze({
   store: 'a Loja Mística',
   consultations: 'as Consultas',
   subscriptions: 'o universo Premium',
+  skins: 'a Constelação das 30 Skins',
   videos: 'De Frente com o Tarot',
   music: 'o universo da Música'
 });
@@ -109,12 +110,12 @@ export function createPageLoader({ config, go } = {}) {
     },
     consultations: async () => {
       await ensureCommerce();
-      const { ConsultationEngine } = await import('./consultation-engine.js');
+      const { ConsultationEngine } = await import('./consultation-engine.js?v=143');
       return new ConsultationEngine($('#consultationApp'));
     },
     subscriptions: async () => {
       await ensureCommerce();
-      const { PremiumEngine } = await import('./premium-engine.js');
+      const { PremiumEngine } = await import('./premium-engine.js?v=142');
       return new PremiumEngine($('#subscriptionApp'));
     },
     videos: ensureMedia,

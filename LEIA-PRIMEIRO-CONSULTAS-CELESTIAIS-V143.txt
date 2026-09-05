@@ -1,0 +1,63 @@
+DIVINA BRUXA V143 — CONSULTAS CELESTIAIS
+
+MACROETAPA
+V143 concluída sobre a base V142. Este ZIP é incremental e plano: copie todos os arquivos para a raiz do projeto e substitua os homônimos. Não há pastas dentro do pacote.
+
+NOVOS PREÇOS OFICIAIS
+- Mesa Real Profissional: R$ 250,00
+- Leitura de Mentes: R$ 150,00
+- Carta de Conselho: R$ 100,00
+- Pergunta Direta: R$ 50,00
+
+ENTREGUE
+- Nova experiência visual Santuário das Consultas Celestiais.
+- Arte original vertical em violeta, ouro e obsidiana, otimizada para iPhone.
+- Quatro serviços com descrição, conteúdo incluído, valor e seleção acessível.
+- Jornada em três etapas: escolha, dados e revisão final.
+- Formulário com nome, e-mail, telefone, data, período e pergunta/contexto.
+- Rascunho privado salvo somente no aparelho.
+- Validação de campos e contador de 3.000 caracteres.
+- Consentimento explícito antes de preparar o pedido.
+- Confirmação em duas etapas antes de abrir o aplicativo de e-mail.
+- Envio somente para orbedasrealidades@hotmail.com; WhatsApp não é usado.
+- price_snapshot com serviço, moeda, tabela, valor e data capturados no pedido.
+- Histórico local registra o pedido sem guardar o conteúdo privado da pergunta em analytics.
+- Consultas separadas do Premium, da Orbe IA e das tiragens automáticas.
+- Nenhuma consulta consome créditos de IA.
+- Nenhuma cobrança, cartão ou checkout real é ativado nesta versão.
+- Home, catálogo comercial, fallback legado, cache offline e contratos internos sincronizados com os novos preços.
+
+PREPARAÇÃO PARA O PAINEL SUPREMO
+A estrutura de cada pedido já preserva o preço histórico. Na próxima macroetapa, o Admin poderá mudar preços futuros sem alterar pedidos antigos, acompanhar solicitações e controlar os módulos do site com segurança.
+
+VALIDAÇÕES
+- Contrato de preços V143: aprovado.
+- Quatro produtos e ordem R$ 250 / R$ 150 / R$ 100 / R$ 50: aprovados.
+- Canal exclusivamente por e-mail: aprovado.
+- Billing real desligado: aprovado.
+- Separação de Premium e Orbe IA: aprovada.
+- price_snapshot: aprovado.
+- Commerce V9.10 atualizado: 8/8 verificações aprovadas.
+- Commerce V10: contato, ausência de WhatsApp, quatro serviços, campos e segurança aprovados.
+- Sintaxe JavaScript, JSON, CSS e integridade do pacote: aprovadas.
+
+ARQUIVOS DA MACROETAPA (16)
+1. index.html
+2. app.js
+3. config.js
+4. page-loader-v1.js
+5. cosmic-visual-atlas-v1.js
+6. sw.js
+7. consultation-policy.js
+8. consultation-engine.js
+9. consultations-celestial-v1.css
+10. consultas-celestiais-santuario-v1.webp
+11. commerce-engine.js
+12. commerce-catalog-v9.js
+13. COMMERCE-CATALOG-V10.json
+14. consultations-experience-v8.js
+15. COMMERCE-VALIDATION-V9.10.mjs
+16. LEIA-PRIMEIRO-CONSULTAS-CELESTIAIS-V143.txt
+
+PRÓXIMA MACROETAPA
+V144 — Painel Supremo de Administração: controle central do site inteiro, preparado primeiro para iPhone, com proteção de acesso e sem expor o conteúdo privado do Diário ou das perguntas de consulta.
