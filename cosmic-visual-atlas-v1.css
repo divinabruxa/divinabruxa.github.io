@@ -1,8 +1,46 @@
-/* DIVINA BRUXA — ATLAS VISUAL CÓSMICO V1
-   Primeira realidade ilustrada: o Santuário Lunar da Carta do Dia. */
+/* DIVINA BRUXA — ATLAS VISUAL CÓSMICO V2
+   Realidades ilustradas sob demanda: Carta do Dia e Biblioteca Celestial. */
 
 html[data-runtime="v12"] #app > #daily[data-db-realm="moon"]::before {
   transition: opacity 320ms cubic-bezier(.22,.8,.2,1);
+}
+
+/* A Biblioteca começa com uma atmosfera leve, sem solicitar o antigo
+   cosmic-background.png. A arte exclusiva só entra depois de decodificada. */
+html[data-runtime="v12"] #app > #library[data-db-realm="archive"] {
+  --db-realm-accent: #c5a2ff;
+  --db-realm-bright: #f1d28a;
+  --db-realm-haze: rgba(151,92,226,.2);
+  --db-realm-line: rgba(226,190,112,.28);
+}
+
+html[data-runtime="v12"] #app > #library[data-db-realm="archive"]::before {
+  opacity: .34;
+  background-image:
+    linear-gradient(180deg, rgba(5,2,11,.3) 0%, rgba(5,2,11,.58) 48%, rgba(5,2,11,.98) 100%),
+    radial-gradient(ellipse at 50% 8%, rgba(129,73,204,.3), transparent 62%);
+  background-position: center top, center top;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 100% 100%, 100% min(920px, 110vh);
+  transition: opacity 360ms cubic-bezier(.22,.8,.2,1);
+}
+
+html[data-runtime="v12"] #app > #library[data-db-realm="archive"][data-db-atlas="ready"]::before {
+  opacity: .68;
+  background-image:
+    linear-gradient(180deg, rgba(5,2,11,.32) 0%, rgba(5,2,11,.28) 27%, rgba(5,2,11,.72) 70%, rgba(5,2,11,.99) 100%),
+    radial-gradient(ellipse at 50% 9%, rgba(164,106,239,.16), transparent 58%),
+    var(--db-atlas-image);
+  background-position: center top, center top, center top;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-size: 100% 100%, 100% min(1040px, 124vh), min(864px, 112vw) auto;
+  animation: db-atlas-archive-materialize 560ms cubic-bezier(.16,.82,.22,1) both;
+}
+
+html[data-runtime="v12"] #app > #library[data-db-realm="archive"][data-db-atlas="ready"]::after {
+  border-top-color: rgba(241,210,138,.42);
+  background: radial-gradient(ellipse at 50% 0, rgba(172,116,240,.2), transparent 69%);
+  box-shadow: 0 -28px 88px rgba(122,75,196,.25), 0 -1px 0 rgba(241,210,138,.16);
 }
 
 html[data-runtime="v12"] #app > #daily[data-db-realm="moon"][data-db-atlas="ready"]::before {
@@ -27,14 +65,28 @@ html[data-runtime="v12"] #app > #daily[data-db-realm="moon"][data-db-atlas="read
   to { opacity: .62; }
 }
 
+@keyframes db-atlas-archive-materialize {
+  from { opacity: .16; }
+  to { opacity: .68; }
+}
+
 @media (max-width: 560px) {
   html[data-runtime="v12"] #app > #daily[data-db-realm="moon"][data-db-atlas="ready"]::before {
     background-size: 100% 100%, min(864px, 112vw) auto;
+  }
+
+  html[data-runtime="v12"] #app > #library[data-db-realm="archive"][data-db-atlas="ready"]::before {
+    background-size: 100% 100%, 100% min(1040px, 124vh), min(864px, 122vw) auto;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html[data-runtime="v12"] #app > #daily[data-db-realm="moon"]::before {
+    transition: none;
+    animation: none;
+  }
+
+  html[data-runtime="v12"] #app > #library[data-db-realm="archive"]::before {
     transition: none;
     animation: none;
   }

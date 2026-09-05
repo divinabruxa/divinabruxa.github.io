@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V27 · MÍDIA VISÍVEL E SEGURA */
-const CACHE='divina-bruxa-v27-midia-visivel';
+/* DIVINA BRUXA — SERVICE WORKER V28 · BIBLIOTECA CELESTIAL SOB DEMANDA */
+const CACHE='divina-bruxa-v28-biblioteca-celestial';
 
 const REQUIRED=[
   './',

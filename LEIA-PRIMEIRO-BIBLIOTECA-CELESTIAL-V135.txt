@@ -1,0 +1,45 @@
+DIVINA BRUXA — ORBE DAS REALIDADES
+V135 · BIBLIOTECA CELESTIAL DAS 78 CARTAS
+
+O QUE ESTA MACROETAPA ENTREGA
+
+- Primeira arte inédita criada exclusivamente para a Biblioteca Celestial.
+- Fundo vertical premium em preto, violeta e ouro antigo.
+- Arte otimizada em WebP: 864 x 1535 px e aproximadamente 135 KB.
+- Carregamento somente quando a Biblioteca será visitada.
+- A antiga imagem genérica cosmic-background.png deixa de ser solicitada nessa página.
+- Aparição suave depois que a arte já terminou de carregar e decodificar.
+- Respeito automático à preferência de movimento reduzido do aparelho.
+- Carta do Dia continua com seu Santuário Lunar já aprovado.
+
+ARQUIVOS DESTA ENTREGA
+
+1. biblioteca-celestial-78-cartas-v1.webp       NOVO
+2. cosmic-visual-atlas-v1.js                    SUBSTITUIR
+3. cosmic-visual-atlas-v1.css                   SUBSTITUIR
+4. index.html                                   SUBSTITUIR
+5. sw.js                                        SUBSTITUIR
+6. LEIA-PRIMEIRO-BIBLIOTECA-CELESTIAL-V135.txt NOVO
+
+COMO INSTALAR PELO IPHONE / GITHUB
+
+1. Abra o ZIP.
+2. Envie os seis arquivos diretamente para a raiz do repositório.
+3. Quando o GitHub perguntar, confirme a substituição dos arquivos de mesmo nome.
+4. Não crie nenhuma pasta.
+5. Aguarde a publicação e abra o site novamente.
+
+ESCOPO PROTEGIDO
+
+Esta etapa não contém nem reescreve o motor da Orbe, a geometria e os gestos
+da Home, as palavras da Orbe, o Menu Mágico, o dock, o Tarot Livre, a lógica
+das 78 cartas, as artes das cartas, o sistema das 30 skins ou seus arquivos.
+
+TESTE DEPOIS DA PUBLICAÇÃO
+
+Abra o Menu Mágico e entre em “Biblioteca”. A página deve abrir imediatamente
+com uma atmosfera escura e, em seguida, revelar com suavidade o templo-arquivo
+celestial. Os filtros e as 78 cartas devem continuar funcionando normalmente.
+
+Se o iPhone ainda mostrar a versão antiga, feche a aba do navegador, abra o
+site novamente e aguarde alguns segundos para o novo service worker assumir.

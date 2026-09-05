@@ -1,10 +1,14 @@
-/* DIVINA BRUXA — ATLAS VISUAL CÓSMICO V2
+/* DIVINA BRUXA — ATLAS VISUAL CÓSMICO V3
    Carrega cada mundo somente quando ele será visitado e revela a arte após a decodificação. */
 
 const ATLAS = Object.freeze({
   daily: Object.freeze({
     realm: 'moon',
     image: 'carta-dia-santuario-lunar-v1.webp'
+  }),
+  library: Object.freeze({
+    realm: 'archive',
+    image: 'biblioteca-celestial-78-cartas-v1.webp'
   })
 });
 
