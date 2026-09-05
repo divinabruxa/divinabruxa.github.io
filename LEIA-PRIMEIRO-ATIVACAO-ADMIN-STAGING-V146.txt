@@ -1,0 +1,42 @@
+DIVINA BRUXA — V146 ATIVAÇÃO REAL DO ADMIN STAGING
+
+O QUE JÁ FOI FEITO NO PROJETO REAL
+- Projeto divina-bruxa-staging reativado e confirmado como ACTIVE_HEALTHY.
+- Migrações V145/V146 aplicadas no PostgreSQL 17.6.
+- Seis tabelas administrativas com RLS ativo, RLS forçado e políticas DENY explícitas para anon/authenticated.
+- Cinco flags de produção gravadas como false.
+- Função Edge admin-api publicada e conectada ao painel por CONFIG.adminApiBase.
+- MFA TOTP, aal2, sessões revogáveis, auditoria sanitizada e recovery codes utilizáveis.
+- Mudança de preços atômica: histórico e catálogo atual mudam juntos.
+
+ÚNICA AÇÃO MANUAL QUE FALTA
+O Supabase Auth ainda não possui nenhuma usuária. Por segurança, nenhuma identidade ou senha foi inventada.
+
+1. No Supabase STAGING, abra Authentication > Users e crie/convidе o e-mail que será exclusivamente da proprietária.
+2. Confirme esse e-mail. Nunca coloque a senha em arquivos, GitHub ou conversa.
+3. Abra ATIVAR-PROPRIETARIA-STAGING-V146.sql, troque OWNER_EMAIL pelo e-mail confirmado e execute no SQL Editor do mesmo projeto.
+4. Instale os arquivos deste ZIP no GitHub e abra /admin.
+5. Entre com a conta criada, escaneie o QR Code TOTP e confirme o código de 6 números.
+6. Guarde os 10 códigos de recuperação exibidos uma única vez.
+
+PREÇOS QUE SERÃO ATIVADOS JUNTO COM A PROPRIETÁRIA
+- Mesa Real Profissional: R$ 250
+- Leitura de Mentes: R$ 150
+- Carta de Conselho: R$ 100
+- Pergunta Direta: R$ 50
+
+SEGURANÇA PRESERVADA
+- Só uma proprietária pode permanecer ativa.
+- Contas comuns recebem 401/403 sem dados administrativos.
+- Alterar preços exige um novo código MFA e preserva todos os snapshots antigos.
+- Recovery code exige uma sessão iniciada por senha, é consumido uma vez, remove os fatores antigos e revoga as sessões administrativas.
+- Diário, perguntas, prompts, respostas, contatos, senhas, tokens e segredos não aparecem no painel ou auditoria.
+
+PRODUÇÃO CONTINUA BLOQUEADA
+production_publish_authorized=false
+dns_changes_authorized=false
+real_billing_authorized=false
+store_submission_authorized=false
+ORBE_AI_SOL_ENABLED=false
+
+STATUS: READY FOR OWNER ENROLLMENT — NÃO É PRODUCTION READY.

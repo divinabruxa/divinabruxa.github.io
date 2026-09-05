@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — SUPABASE EDGE FUNCTION ADMIN API V145
+/* DIVINA BRUXA — SUPABASE EDGE FUNCTION ADMIN API V146
    Deno/Supabase Edge Function. Segredos existem apenas no ambiente da função. */
-import { createClient } from 'npm:@supabase/supabase-js@2';
+import { createClient } from 'npm:@supabase/supabase-js@2.112.4';
 
 const MODULES=Object.freeze(['today','finance','users','subscriptions','ai','tarot','school','consultations','store','skins','media','notifications','analytics','seo','security','backups','audit','settings']);
 const SERVICES=Object.freeze({
@@ -12,9 +12,24 @@ const SERVICES=Object.freeze({
 const COOKIE_ACCESS='db_admin_access';
 const COOKIE_REFRESH='db_admin_refresh';
 const PRIVATE_KEYS=/body|content|question|prompt|response|password|secret|token|email|phone|contact|message/i;
+const STAGING_REF='kyphdsamyygavmkzyezr';
+const DEFAULT_ORIGINS=Object.freeze([
+  'https://divinabruxa.github.io',
+  'https://divinabruxa.com.br',
+  'https://www.divinabruxa.com.br',
+  'https://divinabruxa.com',
+  'https://www.divinabruxa.com'
+]);
 
 const env=name=>Deno.env.get(name)||'';
-const allowedOrigin=()=>env('ADMIN_ALLOWED_ORIGIN').replace(/\/$/,'');
+const allowedOrigins=()=>{
+  const configured=env('ADMIN_ALLOWED_ORIGINS').split(',').map(value=>value.trim().replace(/\/$/,'')).filter(Boolean);
+  return configured.length?configured:DEFAULT_ORIGINS;
+};
+const allowedOrigin=request=>{
+  const origin=String(request.headers.get('origin')||'').replace(/\/$/,'');
+  return allowedOrigins().includes(origin)?origin:'';
+};
 const headers=(origin,extra={})=>{
   const result=new Headers({
     'content-type':'application/json; charset=utf-8','cache-control':'no-store, max-age=0','pragma':'no-cache','vary':'Origin',
@@ -27,7 +42,7 @@ const headers=(origin,extra={})=>{
 };
 const json=(status,body,origin,extra)=>new Response(JSON.stringify(body),{status,headers:headers(origin,extra)});
 const parseCookies=value=>Object.fromEntries(String(value||'').split(';').map(part=>{const at=part.indexOf('=');return at<0?[]:[decodeURIComponent(part.slice(0,at).trim()),decodeURIComponent(part.slice(at+1).trim())];}).filter(parts=>parts.length===2));
-const cookie=(name,value,maxAge)=>`${name}=${encodeURIComponent(value)}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${maxAge}`;
+const cookie=(name,value,maxAge)=>`${name}=${encodeURIComponent(value)}; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=${maxAge}`;
 const cookieHeaders=session=>[
   cookie(COOKIE_ACCESS,session.access_token,Math.max(60,Number(session.expires_in)||3600)),
   cookie(COOKIE_REFRESH,session.refresh_token,60*60*24*14)
@@ -53,9 +68,11 @@ const audit=async(db,userId,action,moduleId,result,metadata={})=>{
 const readBody=async request=>{
   try{return await request.json();}catch{return {};}
 };
-const validSetup=()=>Boolean(env('SUPABASE_URL')&&env('SUPABASE_ANON_KEY')&&env('SUPABASE_SERVICE_ROLE_KEY')&&env('ADMIN_ALLOWED_ORIGIN')&&env('ADMIN_RECOVERY_PEPPER')&&env('ENVIRONMENT')==='staging');
+const validSetup=()=>{
+  try{return Boolean(env('SUPABASE_ANON_KEY')&&env('SUPABASE_SERVICE_ROLE_KEY')&&new URL(env('SUPABASE_URL')).hostname===`${STAGING_REF}.supabase.co`);}catch{return false;}
+};
 const isMutating=request=>!['GET','HEAD','OPTIONS'].includes(request.method);
-const requestAllowed=request=>!isMutating(request)||(request.headers.get('x-divina-admin-request')==='v145'&&request.headers.get('origin')===allowedOrigin());
+const requestAllowed=(request,origin)=>!isMutating(request)||(Boolean(origin)&&request.headers.get('x-divina-admin-request')==='v146');
 
 async function recoveryCount(db,userId){
   const {count,error}=await db.from('admin_recovery_codes').select('id',{count:'exact',head:true}).eq('user_id',userId).is('used_at',null);
@@ -161,7 +178,8 @@ const randomCode=()=>{
   return Array.from(bytes,value=>(value%36).toString(36).toUpperCase()).join('').replace(/(.{3})(?=.)/g,'$1-');
 };
 const hashRecovery=async(userId,code)=>{
-  const bytes=new TextEncoder().encode(`${userId}:${code}:${env('ADMIN_RECOVERY_PEPPER')}`);
+  const pepper=env('ADMIN_RECOVERY_PEPPER')||`divina-admin-recovery:${env('SUPABASE_SERVICE_ROLE_KEY')}`;
+  const bytes=new TextEncoder().encode(`${userId}:${code}:${pepper}`);
   const digest=await crypto.subtle.digest('SHA-256',bytes);
   return Array.from(new Uint8Array(digest),value=>value.toString(16).padStart(2,'0')).join('');
 };
@@ -176,6 +194,30 @@ async function generateRecoveryCodes(request,origin){
   if(error)return json(500,{error:'recovery_codes_failed'},origin);
   await audit(context.db,context.user.id,'recovery-codes-create','security','allowed',{count:codes.length});
   return json(201,{codes,shownOnce:true,...sessionBody({...context,recoveryCodesReady:true})},origin);
+}
+
+async function recoverMfa(request,origin){
+  const context=await ownerContext(request,{requireAal2:false,requireRecovery:false});
+  if(context.error&&context.status!==428)return json(context.status,{error:context.error},origin);
+  const body=await readBody(request),recoveryCode=String(body.recoveryCode||'').trim().toUpperCase();
+  if(!/^[A-Z0-9]{3}-[A-Z0-9]{3}-[A-Z0-9]{3}$/.test(recoveryCode))return json(400,{error:'invalid_recovery_code'},origin);
+  const codeHash=await hashRecovery(context.user.id,recoveryCode);
+  const {data:stored}=await context.db.from('admin_recovery_codes').select('id').eq('user_id',context.user.id).eq('code_hash',codeHash).is('used_at',null).maybeSingle();
+  if(!stored){await audit(context.db,context.user.id,'mfa-recovery','security','denied');return json(403,{error:'invalid_recovery_code'},origin);}
+  const listed=await context.db.auth.admin.mfa.listFactors({userId:context.user.id});
+  if(listed.error)return json(500,{error:'mfa_recovery_failed'},origin);
+  const rawFactors=listed.data?.factors||listed.data?.all||listed.data||[];
+  const factors=Array.isArray(rawFactors)?rawFactors:[];
+  for(const factor of factors){
+    if(factor?.status!=='verified')continue;
+    const removed=await context.db.auth.admin.mfa.deleteFactor({id:factor.id,userId:context.user.id});
+    if(removed.error)return json(500,{error:'mfa_recovery_failed'},origin);
+  }
+  const usedAt=new Date().toISOString();
+  await context.db.from('admin_recovery_codes').update({used_at:usedAt}).eq('id',stored.id).is('used_at',null);
+  await context.db.from('admin_sessions').update({revoked_at:usedAt}).eq('user_id',context.user.id).is('revoked_at',null);
+  await audit(context.db,context.user.id,'mfa-recovery','security','allowed',{factorCount:factors.length});
+  return withCookies(origin,clearCookieHeaders(),200,{ok:true,recoveryAccepted:true,signInAgain:true,environment:'staging'});
 }
 
 async function currentPrices(db){
@@ -202,11 +244,11 @@ async function savePrices(request,origin,context){
   const verified=await auth.auth.mfa.challengeAndVerify({factorId,code});
   if(verified.error||decodeJwt(verified.data?.session?.access_token).aal!=='aal2'){await audit(context.db,context.user.id,'price-change','consultations','denied');return json(403,{error:'step_up_failed'},origin);}
   const version=`consultas-${new Date().toISOString().replace(/[-:.TZ]/g,'').slice(0,14)}-v145`;
-  const rows=Object.entries(SERVICES).map(([serviceId,serviceName])=>({price_table_version:version,service_id:serviceId,service_name:serviceName,price_cents:prices[serviceId],created_by:context.user.id}));
-  const {error}=await context.db.from('consultation_price_versions').insert(rows);
+  const {error}=await context.db.rpc('admin_apply_consultation_prices_v146',{p_prices:prices,p_created_by:context.user.id,p_version:version.replace('-v145','-v146')});
   if(error){await audit(context.db,context.user.id,'price-change','consultations','failed');return json(500,{error:'price_update_failed'},origin);}
-  await audit(context.db,context.user.id,'price-change','consultations','allowed',{priceTableVersion:version,serviceCount:4});
-  return withCookies(origin,cookieHeaders(verified.data.session),200,{ok:true,priceTableVersion:version,consultationPrices:prices,historyPreserved:true});
+  const appliedVersion=version.replace('-v145','-v146');
+  await audit(context.db,context.user.id,'price-change','consultations','allowed',{priceTableVersion:appliedVersion,serviceCount:4});
+  return withCookies(origin,cookieHeaders(verified.data.session),200,{ok:true,priceTableVersion:appliedVersion,consultationPrices:prices,historyPreserved:true});
 }
 
 async function signOut(request,origin){
@@ -219,17 +261,18 @@ async function signOut(request,origin){
 }
 
 Deno.serve(async request=>{
-  const origin=request.headers.get('origin')||allowedOrigin();
-  if(!validSetup())return json(503,{error:'staging_backend_not_configured'},origin);
-  if(origin!==allowedOrigin())return json(403,{error:'origin_denied'},allowedOrigin());
+  const origin=allowedOrigin(request),responseOrigin=origin||allowedOrigins()[0];
+  if(!validSetup())return json(503,{error:'staging_backend_not_configured'},responseOrigin);
+  if(!origin)return json(403,{error:'origin_denied'},responseOrigin);
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers:headers(origin)});
-  if(!requestAllowed(request))return json(403,{error:'request_guard_denied'},origin);
+  if(!requestAllowed(request,origin))return json(403,{error:'request_guard_denied'},origin);
   const path=cleanPath(new URL(request.url).pathname);
   try{
     if(path==='/admin/session'&&request.method==='POST')return await signIn(request,origin);
     if(path==='/admin/session/mfa/enroll'&&request.method==='POST')return await enrollMfa(request,origin);
     if(path==='/admin/session/mfa'&&request.method==='POST')return await verifyMfa(request,origin);
     if(path==='/admin/session/recovery-codes'&&request.method==='POST')return await generateRecoveryCodes(request,origin);
+    if(path==='/admin/session/recovery'&&request.method==='POST')return await recoverMfa(request,origin);
     if(path==='/admin/session'&&request.method==='DELETE')return await signOut(request,origin);
     const context=await ownerContext(request);
     if(context.error){
@@ -248,7 +291,7 @@ Deno.serve(async request=>{
     if(path==='/admin/consultations/prices'&&request.method==='PATCH')return await savePrices(request,origin,context);
     return json(404,{error:'not_found'},origin);
   }catch(error){
-    console.error('admin-api-v145',error instanceof Error?error.name:'unknown');
+    console.error('admin-api-v146',error instanceof Error?error.name:'unknown');
     return json(500,{error:'internal_error'},origin);
   }
 });

@@ -10,6 +10,7 @@ export const CONFIG=Object.freeze({
   whatsapp:'',
   contactEmail:'orbedasrealidades@hotmail.com',
   apiBase:'',
+  adminApiBase:'https://kyphdsamyygavmkzyezr.supabase.co/functions/v1/admin-api',
   youtubeVideos:[],
   cardPath:'',
   adminUser:'Isis33',

@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — PAINEL SUPREMO V145
+/* DIVINA BRUXA — PAINEL SUPREMO V146
    Sessão em cookie seguro, owner verificada e MFA; nenhum desbloqueio local. */
 import { store, escapeHTML } from './storage.js';
 import { ADMIN_POLICY, adminModuleById } from './admin-policy.js?v=144';
@@ -25,7 +25,7 @@ export class AdminEngine{
 
   async start(){
     this.renderGate('checking');
-    if(!globalThis.divinaAuth?.enabled){this.renderGate('server-required');return;}
+    if(!globalThis.divinaAuth?.adminEnabled){this.renderGate('server-required');return;}
     const result=await globalThis.divinaAuth.adminSession();
     if(this.isAuthorized(result?.body)){this.session=result.body;await this.loadOverview();this.renderPanel();return;}
     if(result?.body?.recoveryCodesRequired){this.renderGate('recovery');return;}
@@ -42,23 +42,27 @@ export class AdminEngine{
 
   renderGate(mode='signin'){
     if(!this.root)return;
-    const checking=mode==='checking',serverRequired=mode==='server-required',mfa=mode==='mfa',enroll=mode==='enroll',recovery=mode==='recovery';
-    const title=checking?'Verificando sessão segura…':serverRequired?'O painel está protegido.':enroll?'Ative o seu MFA.':mfa?'Confirme seu segundo fator.':recovery?'Guarde seus códigos de recuperação.':'Entre na sua Central.';
-    const copy=serverRequired?'Conecte o backend seguro para liberar o acesso. Não existe senha administrativa dentro dos arquivos públicos do site.':enroll?'Leia o QR Code no aplicativo autenticador e confirme os seis números.':mfa?'Digite o código do seu aplicativo autenticador. Códigos não são salvos neste aparelho.':recovery?'Eles aparecem uma única vez e não entram em logs, arquivos ou diagnósticos.':'O servidor precisa confirmar sua conta proprietária, e-mail verificado e MFA antes de enviar qualquer dado administrativo.';
-    const form=checking?'<div class="admin-gate-loading" aria-label="Carregando"></div>':serverRequired?'<aside class="admin-server-note"><b>Bloqueio correto</b><span>A prévia abaixo mostra a estrutura, mas nenhum dado ou controle foi entregue ao navegador.</span></aside>':enroll?this.mfaEnrollmentForm():mfa?this.mfaForm():recovery?this.recoveryForm():this.signInForm();
+    const checking=mode==='checking',serverRequired=mode==='server-required',mfa=mode==='mfa',enroll=mode==='enroll',recovery=mode==='recovery',recoverAccess=mode==='recover-access';
+    const title=checking?'Verificando sessão segura…':serverRequired?'O painel está protegido.':enroll?'Ative o seu MFA.':mfa?'Confirme seu segundo fator.':recovery?'Guarde seus códigos de recuperação.':recoverAccess?'Recupere o acesso com segurança.':'Entre na sua Central.';
+    const copy=serverRequired?'Conecte o backend seguro para liberar o acesso. Não existe senha administrativa dentro dos arquivos públicos do site.':enroll?'Leia o QR Code no aplicativo autenticador e confirme os seis números.':mfa?'Digite o código do seu aplicativo autenticador. Códigos não são salvos neste aparelho.':recovery?'Eles aparecem uma única vez e não entram em logs, arquivos ou diagnósticos.':recoverAccess?'Use um código guardado. Ele será consumido e todos os fatores MFA atuais serão revogados.':'O servidor precisa confirmar sua conta proprietária, e-mail verificado e MFA antes de enviar qualquer dado administrativo.';
+    const form=checking?'<div class="admin-gate-loading" aria-label="Carregando"></div>':serverRequired?'<aside class="admin-server-note"><b>Bloqueio correto</b><span>A prévia abaixo mostra a estrutura, mas nenhum dado ou controle foi entregue ao navegador.</span></aside>':enroll?this.mfaEnrollmentForm():mfa?this.mfaForm():recovery?this.recoveryForm():recoverAccess?this.recoveryAccessForm():this.signInForm();
     this.root.innerHTML=`<div class="admin-v144-gate"><section class="admin-gate-card"><span class="admin-staging-badge">STAGING · OWNER ONLY</span><div class="admin-gate-sigil" aria-hidden="true">♕</div><p class="eyebrow">CENTRAL DA PROPRIETÁRIA</p><h3>${title}</h3><p>${copy}</p>${form}<p class="admin-gate-status" data-admin-gate-status role="status" aria-live="polite"></p></section>${this.securityMap()}${this.modulePreview()}</div>`;
     this.bindGate();
   }
 
   signInForm(){return `<form class="admin-auth-form" data-admin-signin novalidate><label><span>E-mail da proprietária</span><input type="email" name="email" autocomplete="username" required></label><label><span>Senha</span><input type="password" name="password" autocomplete="current-password" required minlength="12"></label><button type="submit">CONTINUAR COM SEGURANÇA</button></form>`;}
-  mfaForm(){return `<form class="admin-auth-form" data-admin-mfa novalidate><label><span>Código MFA</span><input type="text" name="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required placeholder="000000"></label><button type="submit">VERIFICAR E ABRIR PAINEL</button><button type="button" data-back-signin>VOLTAR</button></form>`;}
+  mfaForm(){return `<form class="admin-auth-form" data-admin-mfa novalidate><label><span>Código MFA</span><input type="text" name="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required placeholder="000000"></label><button type="submit">VERIFICAR E ABRIR PAINEL</button><button type="button" data-admin-recover>PERDI O AUTENTICADOR</button><button type="button" data-back-signin>VOLTAR</button></form>`;}
   mfaEnrollmentForm(){return `<form class="admin-auth-form admin-mfa-enrollment" data-admin-mfa novalidate><img data-admin-mfa-qr alt="QR Code para ativar MFA"><label><span>Chave manual</span><output data-admin-mfa-secret>Preparando…</output></label><label><span>Código de confirmação</span><input type="text" name="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required placeholder="000000"></label><button type="submit">ATIVAR MFA</button><button type="button" data-back-signin>VOLTAR</button></form>`;}
   recoveryForm(){return `<section class="admin-recovery-setup"><button type="button" data-create-recovery>GERAR 10 CÓDIGOS</button><div data-recovery-codes></div></section>`;}
+  recoveryAccessForm(){return `<form class="admin-auth-form" data-admin-recovery-access novalidate><label><span>Código de recuperação</span><input type="text" name="recoveryCode" autocomplete="off" autocapitalize="characters" pattern="[A-Za-z0-9]{3}-[A-Za-z0-9]{3}-[A-Za-z0-9]{3}" maxlength="11" required placeholder="XXX-XXX-XXX"></label><button type="submit">RECUPERAR E REVOGAR MFA ANTIGO</button><button type="button" data-back-mfa>VOLTAR</button></form>`;}
 
   bindGate(){
     this.root.querySelector('[data-admin-signin]')?.addEventListener('submit',event=>this.signIn(event));
     this.root.querySelector('[data-admin-mfa]')?.addEventListener('submit',event=>this.verifyMfa(event));
     this.root.querySelector('[data-create-recovery]')?.addEventListener('click',event=>this.createRecoveryCodes(event.currentTarget));
+    this.root.querySelector('[data-admin-recover]')?.addEventListener('click',()=>this.renderGate('recover-access'));
+    this.root.querySelector('[data-admin-recovery-access]')?.addEventListener('submit',event=>this.recoverMfa(event));
+    this.root.querySelector('[data-back-mfa]')?.addEventListener('click',()=>this.renderGate('mfa'));
     this.root.querySelector('[data-back-signin]')?.addEventListener('click',()=>this.renderGate('signin'));
   }
 
@@ -106,6 +110,15 @@ export class AdminEngine{
     zone.innerHTML=`<p><b>Copie agora. Esta lista não será exibida novamente.</b></p><ol>${codes.map(code=>`<li><code>${safe(code)}</code></li>`).join('')}</ol><button type="button" data-recovery-confirm>JÁ GUARDEI EM LOCAL SEGURO</button>`;
     button.remove();zone.querySelector('[data-recovery-confirm]')?.addEventListener('click',async()=>{const session=await globalThis.divinaAuth.adminSession();if(this.isAuthorized(session?.body)){this.session=session.body;await this.loadOverview();this.renderPanel();}});
     this.setGateStatus('Códigos criados. Eles não serão salvos neste navegador.');
+  }
+
+  async recoverMfa(event){
+    event.preventDefault();const form=event.currentTarget,code=String(form.elements.recoveryCode.value||'').trim().toUpperCase();
+    if(!/^[A-Z0-9]{3}-[A-Z0-9]{3}-[A-Z0-9]{3}$/.test(code)){this.setGateStatus('Digite o código completo no formato XXX-XXX-XXX.',true);return;}
+    form.querySelector('button').disabled=true;this.setGateStatus('Validando e revogando o MFA antigo…');
+    const result=await globalThis.divinaAuth.adminRecoverMfa(code);
+    if(result?.ok&&result.body?.recoveryAccepted){this.renderGate('signin');this.setGateStatus('Código aceito. Entre novamente para cadastrar um novo MFA.');return;}
+    form.querySelector('button').disabled=false;this.setGateStatus('Código inválido, usado ou indisponível.',true);
   }
 
   async loadOverview(){const result=await globalThis.divinaAuth.adminOverview();this.overview=result?.ok&&result.body?result.body:{};}

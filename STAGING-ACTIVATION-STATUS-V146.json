@@ -1,0 +1,11 @@
+{
+  "version":"V146",
+  "checkedAt":"2026-09-05",
+  "project":{"ref":"kyphdsamyygavmkzyezr","name":"divina-bruxa-staging","region":"sa-east-1","status":"ACTIVE_HEALTHY","postgres":"17.6"},
+  "database":{"adminTables":6,"allAdminTablesRlsEnabled":true,"allAdminTablesRlsForced":true,"clientTableGrants":0,"explicitDenyPolicies":6,"blockedProductionFlags":5,"singleActiveOwnerConstraint":true,"atomicConsultationPriceFunction":true},
+  "edgeFunction":{"slug":"admin-api","status":"ACTIVE","version":4,"verifyJwt":false,"customAuthentication":true,"sha256":"7e17dc5bfd3811c4d4f61290faa5d18333336a6c92a1713553fb07e63a2e25a0"},
+  "verification":{"supabaseSecurityAdvisorsForV146":0,"unindexedForeignKeysForV146":0,"expectedUnusedIndexesOnEmptyTables":true,"javascriptSyntax":"PASS","contract":"PASS"},
+  "owner":{"authUsers":0,"activeOwners":0,"state":"PENDING_MANUAL_VERIFIED_USER_CREATION"},
+  "releaseState":"READY_FOR_OWNER_ENROLLMENT",
+  "productionState":"BLOCKED"
+}

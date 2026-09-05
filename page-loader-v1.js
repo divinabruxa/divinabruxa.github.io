@@ -122,7 +122,7 @@ export function createPageLoader({ config, go } = {}) {
     videos: ensureMedia,
     music: ensureMedia,
     admin: async () => {
-      const { AdminEngine } = await import('./admin-engine.js?v=145');
+      const { AdminEngine } = await import('./admin-engine.js?v=146');
       return new AdminEngine($('#adminApp'));
     }
   });

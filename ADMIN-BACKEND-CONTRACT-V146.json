@@ -1,0 +1,25 @@
+{
+  "version":"V146",
+  "environment":"staging",
+  "supabaseProject":{"name":"divina-bruxa-staging","ref":"kyphdsamyygavmkzyezr","region":"sa-east-1","status":"ACTIVE_HEALTHY"},
+  "deploymentState":"database-and-edge-active-owner-pending",
+  "adminApi":"https://kyphdsamyygavmkzyezr.supabase.co/functions/v1/admin-api",
+  "transport":{"cookies":"HttpOnly; Secure; SameSite=None","csrfHeader":"x-divina-admin-request: v146","cors":"exact official-origin allowlist","edgeVerifyJwt":false,"reason":"password login precedes user JWT; handler validates every route and requires owner + verified email + aal2 for admin data"},
+  "authorization":{"singleActiveOwner":true,"verifiedEmail":true,"mfaAal":"aal2","recoveryCodesRequired":true,"recoveryCodesUsable":true,"revocableSession":true,"unauthorized":"401-or-403-without-admin-data"},
+  "endpoints":[
+    {"method":"GET","path":"/admin/session"},
+    {"method":"POST","path":"/admin/session"},
+    {"method":"POST","path":"/admin/session/mfa/enroll"},
+    {"method":"POST","path":"/admin/session/mfa"},
+    {"method":"POST","path":"/admin/session/recovery-codes"},
+    {"method":"POST","path":"/admin/session/recovery"},
+    {"method":"DELETE","path":"/admin/session"},
+    {"method":"GET","path":"/admin/overview"},
+    {"method":"GET","path":"/admin/modules/:moduleId"},
+    {"method":"PATCH","path":"/admin/consultations/prices"},
+    {"method":"GET","path":"/admin/diagnostic"}
+  ],
+  "consultationPrices":{"mesa-real-profissional":25000,"leitura-mentes":15000,"carta-conselho":10000,"pergunta-direta":5000,"currency":"BRL","atomicHistory":true},
+  "privacy":{"journalBodies":false,"journalQuestions":false,"aiPrompts":false,"aiResponses":false,"consultationQuestions":false,"passwords":false,"secrets":false,"contacts":false,"sanitizedAnalyticsOnly":true},
+  "productionFlags":{"production_publish_authorized":false,"dns_changes_authorized":false,"real_billing_authorized":false,"store_submission_authorized":false,"ORBE_AI_SOL_ENABLED":false}
+}

@@ -1,17 +1,18 @@
 /* Cliente de autenticação: sem tokens em localStorage e sem segredos públicos. */
 export class AuthClient {
-  constructor(config) { this.base = String(config?.apiBase || '').replace(/\/$/, ''); }
+  constructor(config) { this.base = String(config?.apiBase || '').replace(/\/$/, ''); this.adminBase = String(config?.adminApiBase || '').replace(/\/$/, ''); }
   get enabled() { return Boolean(this.base); }
-  async request(path, options = {}) {
-    if (!this.enabled) return { ok: false, offline: true };
+  get adminEnabled() { return Boolean(this.adminBase); }
+  async request(path, options = {}, targetBase = this.base) {
+    if (!targetBase) return { ok: false, offline: true };
     const controller = new AbortController(); const timer = setTimeout(() => controller.abort(), 10000);
     try {
-      const response = await fetch(`${this.base}${path}`, { ...options, credentials: 'include', headers: { 'content-type': 'application/json', ...(options.headers || {}) }, signal: controller.signal });
+      const response = await fetch(`${targetBase}${path}`, { ...options, credentials: 'include', headers: { 'content-type': 'application/json', ...(options.headers || {}) }, signal: controller.signal });
       const body = await response.json().catch(() => ({}));
       return { ok: response.ok, status: response.status, body };
     } catch { return { ok: false, offline: true }; } finally { clearTimeout(timer); }
   }
-  adminRequest(path, options = {}) { return this.request(path, { ...options, headers: { 'x-divina-admin-request': 'v145', ...(options.headers || {}) } }); }
+  adminRequest(path, options = {}) { return this.request(path, { ...options, headers: { 'x-divina-admin-request': 'v146', ...(options.headers || {}) } }, this.adminBase); }
   register(email, password, name = '') { return this.request('/auth/register', { method: 'POST', body: JSON.stringify({ email, password, name }) }); }
   login(email, password) { return this.request('/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) }); }
   logout() { return this.request('/auth/logout', { method: 'POST', body: '{}' }); }
@@ -26,6 +27,7 @@ export class AuthClient {
   adminEnrollMfa() { return this.adminRequest('/admin/session/mfa/enroll', { method: 'POST', body: '{}' }); }
   adminVerifyMfa(code, factorId = '') { return this.adminRequest('/admin/session/mfa', { method: 'POST', body: JSON.stringify({ code, factorId }) }); }
   adminCreateRecoveryCodes() { return this.adminRequest('/admin/session/recovery-codes', { method: 'POST', body: '{}' }); }
+  adminRecoverMfa(recoveryCode) { return this.adminRequest('/admin/session/recovery', { method: 'POST', body: JSON.stringify({ recoveryCode }) }); }
   adminSignOut() { return this.adminRequest('/admin/session', { method: 'DELETE' }); }
   adminOverview() { return this.adminRequest('/admin/overview'); }
   adminModule(moduleId) { return this.adminRequest(`/admin/modules/${encodeURIComponent(moduleId)}`); }
