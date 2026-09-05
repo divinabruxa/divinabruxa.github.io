@@ -14,3 +14,19 @@ html[data-runtime="v12"] #library .library-card:hover b,html[data-runtime="v12"]
 @media(prefers-reduced-motion:reduce){html[data-runtime="v12"] #library .library-card{animation:none}}
 
 
+
+
+/* V135.1 — proporção real das cartas e fim correto da paginação. */
+html[data-runtime="v12"] #library .library-card picture{
+  height:auto;
+  overflow:hidden;
+}
+html[data-runtime="v12"] #library .library-card picture>img{
+  width:100%;
+  height:auto;
+  aspect-ratio:2/3;
+  object-fit:cover;
+}
+html[data-runtime="v12"] #library .library-more[hidden]{
+  display:none!important;
+}

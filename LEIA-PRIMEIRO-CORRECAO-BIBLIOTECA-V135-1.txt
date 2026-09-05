@@ -1,0 +1,27 @@
+DIVINA BRUXA — ORBE DAS REALIDADES
+V135.1 · CORREÇÃO FINAL DA BIBLIOTECA CELESTIAL
+
+O QUE FOI CORRIGIDO
+
+- As cartas voltam à proporção vertical correta de 2:3.
+- Os atributos técnicos de dimensão continuam reservando espaço, mas não
+  deixam mais cada imagem com 1536 pixels de altura na tela.
+- O botão “Revelar mais cartas” desaparece corretamente ao chegar em 78/78.
+- A arte inédita da Biblioteca e o atlas V135 permanecem intactos.
+
+ARQUIVOS DESTA ENTREGA
+
+1. card-library-v5.css                              SUBSTITUIR
+2. index.html                                       SUBSTITUIR
+3. sw.js                                            SUBSTITUIR
+4. LEIA-PRIMEIRO-CORRECAO-BIBLIOTECA-V135-1.txt    NOVO
+
+COMO INSTALAR
+
+Envie os quatro arquivos diretamente para a raiz do GitHub. Confirme a
+substituição dos três arquivos com o mesmo nome. Não crie nenhuma pasta.
+
+ESCOPO PROTEGIDO
+
+Esta correção não contém o motor da Orbe, Home, Menu Mágico, dock, Tarot Livre,
+skins, imagens das Orbes, imagens das cartas ou lógica das 78 cartas.

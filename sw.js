@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V28 · BIBLIOTECA CELESTIAL SOB DEMANDA */
-const CACHE='divina-bruxa-v28-biblioteca-celestial';
+/* DIVINA BRUXA — SERVICE WORKER V29 · GEOMETRIA DA BIBLIOTECA */
+const CACHE='divina-bruxa-v29-geometria-biblioteca';
 
 const REQUIRED=[
   './',
