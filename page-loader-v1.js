@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1
+/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.1 · SINGULARIDADE V136
    Cada motor nasce apenas quando seu portal é solicitado. */
 
 const pageTasks = new Map();
@@ -53,7 +53,7 @@ export function createPageLoader({ config, go } = {}) {
 
   const loaders = Object.freeze({
     tarot: async () => {
-      const { FreeTarot } = await import('./tarot-engine.js?v=128');
+      const { FreeTarot } = await import('./tarot-engine.js?v=136');
       return new FreeTarot($('#tarot'));
     },
     daily: async () => {

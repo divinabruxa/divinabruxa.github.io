@@ -1,0 +1,58 @@
+DIVINA BRUXA — V136
+SINGULARIDADE DO TAROT LIVRE
+
+O QUE ESTA ENTREGA FAZ
+
+1. A carta atual colapsa em espiral até o centro, como se caísse em uma singularidade.
+2. A próxima carta nasce do mesmo ponto imediatamente, com uma expansão curta e fluida.
+3. A imagem seguinte é preparada e decodificada em paralelo antes da troca visual.
+4. O antigo intervalo preto foi substituído por um núcleo violeta, dourado e cósmico.
+5. O efeito funciona ao revelar pela Orbe ou pela seta direita e ao navegar pelas cartas já reveladas.
+6. A animação usa somente transformação e transparência, evitando efeitos pesados no iPhone.
+
+RITMO DA MAGIA
+
+- Colapso da carta: 86 milissegundos.
+- Travessia do núcleo: 12 milissegundos.
+- Nascimento da nova carta: 148 milissegundos.
+- Tempo visual normal: aproximadamente 0,25 segundo.
+- Se "Reduzir Movimento" estiver ativo no aparelho, a troca é imediata e sem animação.
+
+O QUE FOI PRESERVADO
+
+- Orbe principal da Home e seu motor.
+- Palavras da Orbe das Realidades.
+- Menu Mágico e barra inferior.
+- Skins e sincronismo das Orbes.
+- Imagens, nomes e identidade das 78 cartas.
+- Baralho sem repetição e sempre em posição direta.
+- Mesa salva, embaralhar, recomeçar, setas, balão do nome e biblioteca.
+- Nenhum gesto de deslizar foi reativado.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+
+Envie os sete arquivos deste pacote para a raiz do repositório
+divinabruxa/divinabruxa.github.io.
+
+Quando o GitHub avisar que um arquivo já existe, escolha substituir o arquivo antigo.
+Não crie nenhuma pasta e não envie o arquivo ZIP para dentro do repositório.
+
+ARQUIVOS DO PACOTE
+
+1. tarot-engine.js — substitui
+2. tarot-livre-ios-v1.css — substitui
+3. page-loader-v1.js — substitui
+4. app.js — substitui
+5. index.html — substitui
+6. sw.js — substitui
+7. LEIA-PRIMEIRO-SINGULARIDADE-TAROT-V136.txt — novo
+
+DEPOIS DE INSTALAR
+
+Aguarde a publicação do GitHub Pages. Feche todas as abas antigas do site e abra
+novamente www.divinabruxa.com.br. O Service Worker V30 remove o cache visual antigo.
+
+CHECKPOINT
+
+Esta é a V136. A próxima macroetapa planejada passa a ser a V137, somente depois da
+confirmação visual desta singularidade no site publicado.

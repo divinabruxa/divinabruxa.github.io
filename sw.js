@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V29 · GEOMETRIA DA BIBLIOTECA */
-const CACHE='divina-bruxa-v29-geometria-biblioteca';
+/* DIVINA BRUXA — SERVICE WORKER V30 · SINGULARIDADE DO TAROT */
+const CACHE='divina-bruxa-v30-singularidade-tarot';
 
 const REQUIRED=[
   './',

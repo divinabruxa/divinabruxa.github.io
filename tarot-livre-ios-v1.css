@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — TAROT LIVRE · NOTIFICAÇÃO MÁGICA + FLUIDEZ IOS V128
-   Somente compositor: transform e opacity. Sem gesto, blur animado ou partículas contínuas. */
+/* DIVINA BRUXA — TAROT LIVRE · SINGULARIDADE + FLUIDEZ IOS V136
+   Troca em espiral no compositor: sem gesto, blur animado ou partículas contínuas. */
 
 html[data-runtime="v12"] #app>#tarot.tarot-livre-official{
   --tl-ios-gold:#e7c77d;
@@ -697,4 +697,152 @@ html[data-runtime="v12"] #tarot .card-lightbox::backdrop{background:rgba(1,0,4,.
   html[data-runtime="v12"] #tarot .tarot-card-toast,
   html[data-runtime="v12"] #tarot .table-actions .text-button,
   html[data-runtime="v12"] #tarot .table-slot.revealed{border:1px solid CanvasText}
+}
+
+/* V136 — a carta antiga colapsa em um ponto e a nova nasce no mesmo quadro.
+   Somente transform e opacity são animados para manter a fluidez no iPhone. */
+html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-card-center .current:not(.empty),
+html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-card-center .tarot-card-image{
+  background:
+    radial-gradient(circle at 50% 50%,rgba(117,46,159,.24) 0 12%,rgba(34,10,48,.74) 35%,#07020c 76%);
+}
+
+html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .tarot-singularity-fx{
+  position:absolute;
+  z-index:15;
+  top:300px;
+  left:50%;
+  width:min(54vw,310px);
+  aspect-ratio:1;
+  transform:translate3d(-50%,-50%,0) scale(.18) rotate(0deg);
+  transform-origin:50% 50%;
+  pointer-events:none;
+  border-radius:50%;
+  opacity:0;
+  contain:paint;
+  will-change:transform,opacity;
+}
+
+html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .tarot-singularity-fx::before,
+html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .tarot-singularity-fx::after{
+  content:"";
+  position:absolute;
+  pointer-events:none;
+  border-radius:50%;
+}
+
+html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .tarot-singularity-fx::before{
+  inset:0;
+  background:conic-gradient(
+    from 10deg,
+    transparent 0 8deg,
+    rgba(255,224,154,.92) 9deg 11deg,
+    transparent 13deg 31deg,
+    rgba(203,105,255,.76) 33deg 36deg,
+    transparent 39deg 58deg,
+    rgba(255,224,154,.68) 60deg 61deg,
+    transparent 63deg 90deg
+  );
+  -webkit-mask:radial-gradient(circle,transparent 0 17%,#000 25% 64%,transparent 73%);
+  mask:radial-gradient(circle,transparent 0 17%,#000 25% 64%,transparent 73%);
+}
+
+html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .tarot-singularity-fx::after{
+  inset:31%;
+  border:1px solid rgba(255,222,151,.82);
+  background:radial-gradient(circle,#000 0 24%,#08000d 31%,#6f1b8e 48%,rgba(220,126,255,.46) 58%,transparent 73%);
+  box-shadow:0 0 0 4px rgba(107,25,145,.2),0 0 22px rgba(221,129,255,.72),0 0 42px rgba(255,208,125,.2);
+}
+
+html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar.ios-awakening .current{
+  transform-origin:50% 50%;
+  will-change:transform,opacity;
+  animation:tl-singularity-card-collapse 86ms cubic-bezier(.55,0,.95,.38) both!important;
+}
+
+html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar.ios-crossing .current{
+  opacity:.12;
+  transform:translate3d(0,7px,0) scale(.045) rotate(30deg);
+}
+
+html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar.ios-born .current{
+  transform-origin:50% 50%;
+  will-change:transform,opacity;
+  animation:tl-singularity-card-birth 148ms cubic-bezier(.16,.86,.2,1) both!important;
+}
+
+html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar.ios-awakening .tarot-singularity-fx,
+html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar.singularity-nav-out .tarot-singularity-fx{
+  animation:tl-singularity-lens-in 88ms cubic-bezier(.45,0,.9,.42) both!important;
+}
+
+html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar.ios-crossing .tarot-singularity-fx{
+  opacity:.98;
+  transform:translate3d(-50%,-50%,0) scale(.54) rotate(210deg);
+}
+
+html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar.ios-born .tarot-singularity-fx,
+html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar.singularity-nav-in .tarot-singularity-fx{
+  animation:tl-singularity-lens-out 158ms cubic-bezier(.16,.78,.22,1) both!important;
+}
+
+html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar.ios-awakening .tarot-ios-flash,
+html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar.ios-crossing .tarot-ios-flash,
+html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar.ios-born .tarot-ios-flash{
+  opacity:0!important;
+  animation:none!important;
+}
+
+@keyframes tl-singularity-card-collapse{
+  0%{opacity:1;transform:translate3d(0,0,0) scale(1) rotate(0deg)}
+  58%{opacity:.9;transform:translate3d(0,2px,0) scale(.52) rotate(14deg)}
+  100%{opacity:.12;transform:translate3d(0,7px,0) scale(.045) rotate(30deg)}
+}
+
+@keyframes tl-singularity-card-birth{
+  0%{opacity:.12;transform:translate3d(0,7px,0) scale(.045) rotate(-30deg)}
+  76%{opacity:1;transform:translate3d(0,-1px,0) scale(1.012) rotate(-.6deg)}
+  100%{opacity:1;transform:translate3d(0,0,0) scale(1) rotate(0deg)}
+}
+
+@keyframes tl-singularity-lens-in{
+  0%{opacity:0;transform:translate3d(-50%,-50%,0) scale(.18) rotate(0deg)}
+  66%{opacity:.9;transform:translate3d(-50%,-50%,0) scale(.76) rotate(132deg)}
+  100%{opacity:.98;transform:translate3d(-50%,-50%,0) scale(.54) rotate(210deg)}
+}
+
+@keyframes tl-singularity-lens-out{
+  0%{opacity:.98;transform:translate3d(-50%,-50%,0) scale(.54) rotate(210deg)}
+  100%{opacity:0;transform:translate3d(-50%,-50%,0) scale(1.08) rotate(390deg)}
+}
+
+@media(max-width:640px){
+  html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .tarot-singularity-fx{
+    top:180px;
+    width:min(62vw,250px);
+  }
+}
+
+@media(max-width:355px){
+  html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .tarot-singularity-fx{top:165px}
+}
+
+@media(orientation:landscape) and (max-height:560px){
+  html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .tarot-singularity-fx{top:195px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .tarot-singularity-fx{
+    display:none!important;
+    animation:none!important;
+  }
+  html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar .current{
+    opacity:1!important;
+    transform:translateZ(0)!important;
+    animation:none!important;
+  }
+}
+
+@media(forced-colors:active){
+  html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .tarot-singularity-fx{display:none!important}
 }

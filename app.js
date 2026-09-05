@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — APLICATIVO V134.1 · CORREÇÃO SEGURA DA MÍDIA */
+/* DIVINA BRUXA — APLICATIVO V136 · SINGULARIDADE DO TAROT LIVRE */
 
 import { CONFIG } from './config.js';
 import { installRuntimeV12 } from './runtime-v12.js?v=133';
@@ -9,7 +9,7 @@ import { AuthClient } from './auth-client-v6.js';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
 import { SkinsEngine } from './skins-v6.js?v=133';
-import { createPageLoader } from './page-loader-v1.js?v=134';
+import { createPageLoader } from './page-loader-v1.js?v=136';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 
 const $ = selector => document.querySelector(selector);
@@ -132,5 +132,5 @@ if ('serviceWorker' in navigator) {
 const skinsHeading = document.querySelector('#skins h2');
 if (skinsHeading) skinsHeading.textContent = 'Trinta formas de sentir o universo.';
 
-document.documentElement.dataset.appShell = 'v134.1';
+document.documentElement.dataset.appShell = 'v136';
 window.orbe = { go: pageLoader.go, loadPage: pageLoader.load };
