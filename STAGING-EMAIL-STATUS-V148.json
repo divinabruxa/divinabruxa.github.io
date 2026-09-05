@@ -1,0 +1,19 @@
+{
+  "version": "V148",
+  "checkedAt": "2026-09-05",
+  "environment": "staging",
+  "function": "consultations-booking",
+  "functionVersion": 7,
+  "recipient": "orbedasrealidades@hotmail.com",
+  "provider": "resend",
+  "ownerEmailConfigured": false,
+  "requestPersistence": "active",
+  "notificationLedger": "active",
+  "automaticDelivery": "awaiting-provider-secrets",
+  "requiredSecretNames": [
+    "RESEND_API_KEY",
+    "CONSULTATIONS_EMAIL_FROM"
+  ],
+  "realBilling": false,
+  "productionChanged": false
+}

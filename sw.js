@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V42 · CONSULTAS STAGING V147 */
-const CACHE='divina-bruxa-v42-consultas-staging-v147';
+/* DIVINA BRUXA — SERVICE WORKER V43 · LOJA, TAROT E CONSULTAS STAGING V148 */
+const CACHE='divina-bruxa-v43-loja-tarot-email-v148';
 
 const REQUIRED=[
   './',
@@ -50,9 +50,9 @@ const WARM=[
   './tarot-livre-official-v1.css','./tarot-livre-ios-v1.css','./tarot-spiral-suction-v1.webp',
   './spreads-v5.css','./spreads-temple-v1.css','./templo-tiragens-celestial-v1.webp',
   './card-library-v5.css','./ai-v5.css','./premium-v5.css','./consultation-v5.css','./consultations-celestial-v1.css','./notification-v5.css','./admin-analytics-v1.css','./admin-command-v1.css',
-  './musica-videos-cosmica-v1.css','./store-v5.css','./school-v5.css','./school-celestial-v1.css','./escola-tarot-observatorio-v1.webp',
+  './musica-videos-cosmica-v1.css','./store-v5.css','./store-celestial-v1.css','./loja-mistica-celestial-v1.webp','./store-engine.js','./store-policy.js','./school-v5.css','./school-celestial-v1.css','./escola-tarot-observatorio-v1.webp',
   './school-engine.js','./school-policy.js','./spreads-engine.js','./spreads-policy.js','./spread-synthesis.js',
-  './tarot-data.js','./storage.js','./tarot-image-runtime.js','./daily-meaning-runtime.js','./tarot-meanings.js','./meaning-engine.js','./tarot-atlas.webp','./card-library-policy.js',
+  './tarot-data.js','./storage.js','./tarot-engine.js','./tarot-image-runtime.js','./daily-meaning-runtime.js','./tarot-meanings.js','./meaning-engine.js','./tarot-atlas.webp','./card-library-policy.js',
   './journal-v5.css','./journal-celestial-v1.css','./diario-espelho-celestial-v1.webp',
   './journal-engine.js','./journal-policy.js','./rhythm-v6.js','./premium-constelacao-30-skins-v1.webp',
   './ai-celestial-v1.css','./orbe-ia-celestial-v1.webp','./ai-engine.js','./ai-policy.js','./ai-credits.js',

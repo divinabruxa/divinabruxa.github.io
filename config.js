@@ -47,9 +47,9 @@ export const CONFIG=Object.freeze({
   ],
   aiCredits:[{id:'ia-200',credits:200,price:39.90},{id:'ia-600',credits:600,price:99.90},{id:'ia-1500',credits:1500,price:199.90}],
   services:[
-    {name:'Mesa Real',price:250,description:'Leitura profunda e completa da sua realidade atual.'},
+    {name:'Mesa Real Profissional',price:250,description:'Leitura profunda e completa da sua realidade atual.'},
     {name:'Leitura de Mentes',price:150,description:'Leitura simbólica da dinâmica, intenções e padrões da relação.'},
     {name:'Carta de Conselho',price:100,description:'Uma carta, uma questão e uma orientação objetiva.'},
-    {name:'Pergunta',price:50,description:'Uma pergunta objetiva com orientação simbólica.'}
+    {name:'Pergunta Direta',price:50,description:'Uma pergunta objetiva com orientação simbólica.'}
   ]
 });

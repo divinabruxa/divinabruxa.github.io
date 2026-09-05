@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SANTUÁRIO DAS CONSULTAS V147
-   Jornada móvel, agenda STAGING, price snapshot e alternativa exclusiva por e-mail. */
+/* DIVINA BRUXA — SANTUÁRIO DAS CONSULTAS V148
+   Jornada móvel, agenda STAGING, price snapshot e aviso transacional à proprietária. */
 import { store, escapeHTML } from './storage.js';
 import { CONSULTATION_POLICY, consultationById, consultationPriceSnapshot } from './consultation-policy.js?v=147';
 
@@ -70,6 +70,8 @@ export class ConsultationEngine{
     this.submitting=false;
     this.submitError='';
     this.success=null;
+    this.emailFallbackPayload=null;
+    this.ownerEmailConfigured=false;
     this.restoreCachedCatalog();
     this.render();
     if(this.apiBase)this.loadAvailability();
@@ -113,6 +115,7 @@ export class ConsultationEngine{
     try{
       const payload=await this.request(this.apiBase,{method:'GET'});
       if(payload?.ok!==true||payload?.environment!=='staging'||payload?.rules?.realBilling!==false||!Array.isArray(payload.services)||!Array.isArray(payload.slots))throw new Error('INVALID_CATALOG');
+      this.ownerEmailConfigured=payload?.notifications?.ownerEmailConfigured===true&&clean(payload?.notifications?.ownerEmail)===CONSULTATION_POLICY.contactEmail;
       if(!this.applyCatalog(payload.services,payload.priceTableVersion))throw new Error('INVALID_CATALOG');
       this.slots=payload.slots.map(slot=>({start:clean(slot?.slot_start_at||slot?.start),end:clean(slot?.slot_end_at||slot?.end)})).filter(slot=>dayKey(slot.start)&&new Date(slot.start)>new Date());
       if(this.draft.slotStartAt&&!this.slots.some(slot=>slot.start===this.draft.slotStartAt))this.draft.slotStartAt='';
@@ -267,7 +270,7 @@ export class ConsultationEngine{
         <div><dt>Telefone</dt><dd>${escapeHTML(payload.customer.phone)}</dd></div>
         <div class="is-wide"><dt>Pergunta ou contexto</dt><dd>${escapeHTML(payload.question)}</dd></div>
       </dl>
-      <aside><span aria-hidden="true">◇</span><p><b>${apiMode?'Registro seguro no STAGING.':'Envio pelo seu aplicativo de e-mail.'}</b> ${apiMode?'O horário será reservado e você receberá um protocolo.':'Você poderá revisar novamente a mensagem antes de tocar em Enviar.'} Nenhum cartão será solicitado.</p></aside>
+      <aside><span aria-hidden="true">◇</span><p><b>${apiMode?'Registro seguro no STAGING.':'Envio pelo seu aplicativo de e-mail.'}</b> ${apiMode?(this.ownerEmailConfigured?'O horário será reservado, a equipe receberá um aviso por e-mail e você receberá um protocolo.':'O horário será reservado e o aviso à equipe ficará protegido para envio; você receberá um protocolo.'):'Você poderá revisar novamente a mensagem antes de tocar em Enviar.'} Nenhum cartão será solicitado.</p></aside>
       ${this.submitError?`<p class="consultation-submit-error" role="alert">${escapeHTML(this.submitError)}</p>`:''}
       <div class="consultation-review-actions"><button type="button" class="consultation-primary-action" data-confirm-request${this.submitting?' disabled':''}>${this.submitting?'ENVIANDO COM SEGURANÇA…':apiMode?'ENVIAR SOLICITAÇÃO SEGURA':'ABRIR E-MAIL PARA ENVIAR'}</button><button type="button" class="consultation-secondary-action" data-back-details${this.submitting?' disabled':''}>VOLTAR E EDITAR</button>${apiMode&&this.submitError?'<button type="button" class="consultation-link-button" data-email-fallback>USAR O E-MAIL OFICIAL</button>':''}</div>
     </section>`;
@@ -277,14 +280,17 @@ export class ConsultationEngine{
     const result=this.success;
     if(!result)return this.servicesMarkup();
     const isApi=result.mode==='staging-api';
+    const ownerNotified=isApi&&result.notificationAccepted===true;
+    const emailNeedsActivation=isApi&&result.notificationStatus==='not_configured';
     return `<section class="consultation-flow-stage consultation-success" aria-labelledby="consultationSuccessTitle">
       <div class="consultation-success-orbit" aria-hidden="true"><i></i><i></i><span>✓</span></div>
-      <p class="eyebrow">${isApi?'SOLICITAÇÃO RECEBIDA NO STAGING':'E-MAIL PREPARADO'}</p>
+      <p class="eyebrow">${ownerNotified?'EQUIPE AVISADA POR E-MAIL':emailNeedsActivation?'AVISO AUTOMÁTICO AGUARDA ATIVAÇÃO':isApi?'SOLICITAÇÃO RECEBIDA NO STAGING':'E-MAIL PREPARADO'}</p>
       <h3 id="consultationSuccessTitle">${isApi?'Seu pedido atravessou o portal.':'Falta apenas enviar a mensagem.'}</h3>
-      <p>${isApi?'Guarde o protocolo abaixo. A confirmação e os próximos detalhes acontecerão pelo e-mail oficial.':'Seu aplicativo de e-mail foi aberto com todos os dados. Revise a mensagem e toque em Enviar para concluir.'}</p>
+      <p>${ownerNotified?'A equipe recebeu o aviso com o seu e-mail para responder diretamente. Guarde o protocolo abaixo.':emailNeedsActivation?'Seu pedido foi registrado, mas o provedor de e-mail da equipe ainda não está conectado. Use o botão de cópia por e-mail abaixo para garantir o aviso agora.':isApi?'Seu pedido foi registrado e o aviso por e-mail permanece pendente. Guarde o protocolo abaixo.':'Seu aplicativo de e-mail foi aberto com todos os dados. Revise a mensagem e toque em Enviar para concluir.'}</p>
       <div class="consultation-protocol"><small>${isApi?'SEU PROTOCOLO':'CÓDIGO DO PEDIDO'}</small><strong>${escapeHTML(result.protocol||result.id)}</strong>${isApi?'<button type="button" data-copy-protocol>COPIAR</button>':''}</div>
-      <dl><div><dt>Consulta</dt><dd>${escapeHTML(service?.name||result.serviceName)}</dd></div><div><dt>Valor</dt><dd>${moneyCents(result.priceCents)}</dd></div><div><dt>Preferência</dt><dd>${escapeHTML(result.scheduleLabel)}</dd></div><div><dt>Cobrança</dt><dd>Nenhuma realizada</dd></div></dl>
+      <dl><div><dt>Consulta</dt><dd>${escapeHTML(service?.name||result.serviceName)}</dd></div><div><dt>Valor</dt><dd>${moneyCents(result.priceCents)}</dd></div><div><dt>Preferência</dt><dd>${escapeHTML(result.scheduleLabel)}</dd></div><div><dt>Aviso à equipe</dt><dd>${ownerNotified?'Aceito por e-mail':emailNeedsActivation?'Aguardando ativação do provedor':isApi?'Pendente':'Enviar no aplicativo de e-mail'}</dd></div><div><dt>Cobrança</dt><dd>Nenhuma realizada</dd></div></dl>
       <a class="consultation-email-contact" href="mailto:${CONSULTATION_POLICY.contactEmail}"><span aria-hidden="true">✦</span><span><small>SUPORTE E CONFIRMAÇÃO</small><b>${CONSULTATION_POLICY.contactEmail}</b></span></a>
+      ${isApi&&!ownerNotified&&this.emailFallbackPayload?'<button type="button" class="consultation-primary-action" data-send-owner-copy>ENVIAR CÓPIA PELO MEU E-MAIL</button>':''}
       <button type="button" class="consultation-primary-action" data-new-request>FAZER OUTRA SOLICITAÇÃO</button>
     </section>`;
   }
@@ -340,6 +346,7 @@ export class ConsultationEngine{
     this.root.querySelector('[data-confirm-request]')?.addEventListener('click',()=>this.confirmRequest());
     this.root.querySelector('[data-email-fallback]')?.addEventListener('click',()=>this.openEmail(this.pendingPayload));
     this.root.querySelector('[data-copy-protocol]')?.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(this.success?.protocol||'');emit('Protocolo copiado.');}catch{emit('Não foi possível copiar. Selecione o protocolo na tela.');}});
+    this.root.querySelector('[data-send-owner-copy]')?.addEventListener('click',()=>this.openRegisteredEmail());
     this.root.querySelector('[data-new-request]')?.addEventListener('click',()=>this.newRequest());
   }
 
@@ -393,11 +400,23 @@ export class ConsultationEngine{
   completeRequest(result){
     const payload=this.pendingPayload,service=this.service();
     const protocol=clean(result?.protocol)||payload.id;
-    const record={id:payload.id,protocol,serviceId:service.id,serviceName:service.name,priceCents:payload.price_snapshot.priceCents,price_snapshot:payload.price_snapshot,status:clean(result?.status)||'received',paymentStatus:'not_started',slotStartAt:payload.preference.slotStartAt,createdAt:payload.createdAt};
+    const notificationAccepted=result?.notification?.accepted===true;
+    const notificationStatus=clean(result?.notification?.status)||'pending';
+    const record={id:payload.id,protocol,serviceId:service.id,serviceName:service.name,priceCents:payload.price_snapshot.priceCents,price_snapshot:payload.price_snapshot,status:clean(result?.status)||'received',paymentStatus:'not_started',notificationStatus,slotStartAt:payload.preference.slotStartAt,createdAt:payload.createdAt};
     const history=this.requests();safeSet(REQUESTS_KEY,[record,...history.filter(item=>item.id!==record.id)].slice(0,50));
     safeSet(DRAFT_KEY,{name:payload.customer.name,email:payload.customer.email,phone:payload.customer.phone});
-    this.success={mode:'staging-api',id:payload.id,protocol,serviceId:service.id,serviceName:service.name,priceCents:payload.price_snapshot.priceCents,scheduleLabel:this.scheduleLabel(payload.preference)};
-    this.submitting=false;this.pendingPayload=null;this.step='success';this.render();this.scrollFlow();emit('Solicitação recebida. Guarde o seu protocolo.');
+    this.success={mode:'staging-api',id:payload.id,protocol,serviceId:service.id,serviceName:service.name,priceCents:payload.price_snapshot.priceCents,scheduleLabel:this.scheduleLabel(payload.preference),notificationAccepted,notificationStatus};
+    this.emailFallbackPayload=notificationAccepted?null:payload;
+    this.submitting=false;this.pendingPayload=null;this.step='success';this.render();this.scrollFlow();emit(notificationAccepted?'Solicitação recebida e equipe avisada por e-mail.':notificationStatus==='not_configured'?'Solicitação recebida. Envie a cópia por e-mail para avisar a equipe agora.':'Solicitação recebida. O aviso por e-mail permanece pendente.');
+  }
+
+  openRegisteredEmail(){
+    const payload=this.emailFallbackPayload,service=this.service()||consultationById(payload?.serviceId);
+    if(!payload||!service)return;
+    const protocol=this.success?.protocol||payload.id,schedule=this.scheduleLabel(payload.preference);
+    const body=`Olá! Esta é a cópia de uma solicitação já registrada no site Divina Bruxa.\n\nProtocolo: ${protocol}\nConsulta: ${service.name}\nValor registrado: ${moneyCents(payload.price_snapshot.priceCents)}\nPreferência: ${schedule}\n\nNome: ${payload.customer.name}\nE-mail da pessoa: ${payload.customer.email}\nTelefone: ${payload.customer.phone}\n\nPergunta ou contexto:\n${payload.question}\n\nNenhuma cobrança automática foi realizada.`;
+    location.href=`mailto:${CONSULTATION_POLICY.contactEmail}?subject=${encodeURIComponent(`Cópia da consulta — ${service.name} — ${protocol}`)}&body=${encodeURIComponent(body)}`;
+    emit('Cópia preparada para a equipe. Revise e toque em Enviar.');
   }
 
   openEmail(payload){
@@ -415,7 +434,7 @@ export class ConsultationEngine{
 
   newRequest(){
     const contact={name:this.draft.name||'',email:this.draft.email||'',phone:this.draft.phone||''};
-    this.draft=contact;safeSet(DRAFT_KEY,this.draft);this.selected='';this.step='services';this.success=null;this.pendingPayload=null;this.submitError='';this.useEmailFallback=this.apiState!=='ready';this.render();this.scrollFlow();
+    this.draft=contact;safeSet(DRAFT_KEY,this.draft);this.selected='';this.step='services';this.success=null;this.pendingPayload=null;this.emailFallbackPayload=null;this.submitError='';this.useEmailFallback=this.apiState!=='ready';this.render();this.scrollFlow();
   }
 
   scrollFlow(){this.root.querySelector('.consultation-flow-stage')?.scrollIntoView({behavior:reducedMotion()?'auto':'smooth',block:'start'});}

@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — APLICATIVO V147 · CONSULTAS STAGING ATIVAS */
+/* DIVINA BRUXA — APLICATIVO V148 · LOJA, TAROT E CONSULTAS STAGING */
 
 import { CONFIG } from './config.js';
 import { installRuntimeV12 } from './runtime-v12.js?v=142';
@@ -9,7 +9,7 @@ import { AuthClient } from './auth-client-v6.js';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
 import { SkinsEngine } from './skins-v6.js?v=142';
-import { createPageLoader } from './page-loader-v1.js?v=147';
+import { createPageLoader } from './page-loader-v1.js?v=148';
 import { createOrbLoadingPortal } from './orb-loading-portal-v1.js?v=137';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 
@@ -122,7 +122,7 @@ if (installButton) {
 
 if ('serviceWorker' in navigator) {
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js')
+    navigator.serviceWorker.register('./sw.js?v=148')
       .then(() => console.info('[Divina] PWA registrado'))
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   });

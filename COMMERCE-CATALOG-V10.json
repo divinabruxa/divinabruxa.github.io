@@ -1,12 +1,13 @@
 {
-  "version":"V143",
-  "consultations":{"contactEmail":"orbedasrealidades@hotmail.com","whatsapp":false,"services":[
+  "version":"V148",
+  "environment":"staging",
+  "consultations":{"contactEmail":"orbedasrealidades@hotmail.com","whatsapp":false,"notificationChannel":"transactional-email","notificationDelivery":"provider-secrets-required","services":[
     {"id":"mesa-real-profissional","name":"Mesa Real Profissional","priceBRL":250},
     {"id":"leitura-mentes","name":"Leitura de Mentes","priceBRL":150},
     {"id":"carta-conselho","name":"Carta de Conselho","priceBRL":100},
     {"id":"pergunta-direta","name":"Pergunta Direta","priceBRL":50}
-  ],"requiredFields":["name","email","phone","service","questionContext","consent"],"priceSnapshotRequired":true,"billing":"disabled-sandbox"},
-  "store":{"categories":["tarot","misticos","livros","casa","tecnologia","apple","presentes"],"affiliateDisclosure":true,"realImageRequired":true,"priceFreshness":"verify-before-clickout","tracking":"consented-utm"},
+  ],"requiredFields":["name","email","phone","service","questionContext","consent"],"priceSnapshotRequired":true,"durableNotificationLedger":true,"billing":"disabled-sandbox"},
+  "store":{"name":"Loja Mística","productCount":21,"collectionCount":4,"categories":["Baralhos","Livros","Cristais","Ritual","Acessórios","Decoração","Apple & Tecnologia","Presentes Premium"],"affiliateDisclosure":true,"editorialImage":"loja-mistica-celestial-v1.webp","editorialImageIsExactSku":false,"exactSkuClaims":false,"externalCheckoutOnly":true,"storesPaymentData":false,"priceFreshness":"confirm-price-stock-seller-on-amazon","clickTrackingWithoutConsent":false},
   "states":["draft","available","out-of-stock","unavailable","archived"],
   "safety":{"noGuaranteedOutcome":true,"noMedicalAdvice":true,"noLegalAdvice":true,"noFinancialAdvice":true}
 }

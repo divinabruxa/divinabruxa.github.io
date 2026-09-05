@@ -1,0 +1,39 @@
+DIVINA BRUXA V148 — ATIVAR O AVISO AUTOMÁTICO DE CONSULTAS
+
+STATUS HONESTO EM 05/09/2026
+
+O formulário, a agenda STAGING, o protocolo e a fila privada de avisos já estão ativos.
+O endereço fixo que receberá os avisos é:
+
+orbedasrealidades@hotmail.com
+
+O envio automático ainda aguarda a conexão de um provedor transacional. O teste público da função retorna ownerEmailConfigured: false. Até essa ativação, pedidos com horário ficam registrados na fila como not_configured e não devem ser descritos como e-mails entregues.
+
+COMO ATIVAR SEM EXPOR SEGREDOS
+
+1. Na sua própria conta Resend, verifique um domínio ou endereço de envio.
+2. Gere uma chave de API destinada ao envio transacional.
+3. No painel do projeto STAGING do Supabase, abra Edge Functions > Secrets.
+4. Cadastre estes dois segredos:
+
+   RESEND_API_KEY = chave criada na sua conta Resend
+   CONSULTATIONS_EMAIL_FROM = Divina Bruxa <consultas@seu-dominio-verificado>
+
+5. Nunca coloque a chave em config.js, HTML, ZIP, repositório ou conversa.
+6. Depois de salvar os segredos, consulte novamente a função consultations-booking. O campo ownerEmailConfigured deve mudar para true.
+7. Faça uma solicitação de teste com um e-mail que seja seu. Confirme que a mensagem chegou em orbedasrealidades@hotmail.com e que Responder usa o e-mail informado pela pessoa.
+
+A função V148 já usa:
+
+- destinatário fixo da proprietária;
+- Reply-To com o e-mail da pessoa;
+- chave de idempotência para evitar avisos duplicados;
+- fila privada protegida por RLS;
+- nenhuma cobrança real;
+- nenhum segredo no navegador.
+
+Documentação oficial:
+https://supabase.com/docs/guides/functions/examples/send-emails
+https://supabase.com/docs/guides/functions/secrets
+
+AMBIENTE: STAGING. PRODUÇÃO, DNS E COBRANÇA NÃO FORAM ALTERADOS.

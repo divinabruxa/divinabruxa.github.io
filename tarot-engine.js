@@ -1,9 +1,9 @@
-/* DIVINA BRUXA — MOTOR DO TAROT LIVRE · ESPIRAL LIVRE V136.1
-   Sucção leve com arte própria, setas determinísticas, balão da carta e nenhum gesto.
+/* DIVINA BRUXA — MOTOR DO TAROT LIVRE · CARREGAMENTO CELESTIAL V148
+   Prévia instantânea, arte integral preparada, setas determinísticas e nenhum gesto.
 */
 import { CARDS } from './tarot-data.js';
 import { store } from './storage.js';
-import { cardImageMarkup, preloadCardImages } from './tarot-image-runtime.js';
+import { cardImageMarkup, preloadCardImages, prepareCardImage } from './tarot-image-runtime.js?v=148';
 import { TarotSessionCoordinator } from './tarot-continuity.js?v=84';
 import { DECK_SIZE, compareTarotStates, createTarotBackup, createTarotState, drawNextCard, normalizeTarotState, resetTarotState, restoreTarotBackup, shuffleRemainingCards } from './tarot-session.js?v=84';
 import { freeCardAriaLabel, freeCardLabel, isFreeTarotCard, tarotEditorialStatus } from './tarot-editorial-policy.js?v=85';
@@ -13,25 +13,18 @@ const STORAGE_EVENT_SUFFIX = `:${STORAGE_KEY}`;
 const EMPTY_ALTAR = '<div class="empty-card"><span aria-hidden="true">✦</span><b>O PORTAL AGUARDA</b><small>Toque na Orbe para revelar</small></div>';
 const SUCTION_OUT_MS = 64;
 const SUCTION_IN_MS = 112;
-const IMAGE_REVEAL_BUDGET_MS = 96;
+const IMAGE_REVEAL_BUDGET_MS = 480;
+const IMAGE_PREPARE_BUDGET_MS = 1800;
 const SUCTION_CLASSES = ['suction-out', 'suction-hold', 'suction-in', 'suction-nav-out', 'suction-nav-hold', 'suction-nav-in'];
 const pause = milliseconds => new Promise(resolve => globalThis.setTimeout(resolve, Math.max(0, milliseconds)));
 
-function warmCardImage(card) {
-  const source = card?.imageSources?.medium;
-  if (!source || typeof globalThis.Image !== 'function') return;
-  const image = new globalThis.Image();
-  image.decoding = 'async';
-  if ('fetchPriority' in image) image.fetchPriority = 'high';
-  image.src = source;
-}
 function announce(message) {
   if (typeof globalThis.dispatchEvent === 'function' && typeof globalThis.CustomEvent === 'function') globalThis.dispatchEvent(new CustomEvent('orbe:toast', { detail: message }));
 }
 
 function installOfficialStructure(root) {
   root.classList.add('tarot-livre-official');
-  root.dataset.tarotLivre = 'suction-v136-1';
+  root.dataset.tarotLivre = 'celestial-loading-v148';
   document.documentElement.dataset.tarotMotion = 'suction-v1';
 
   const eyebrow = root.querySelector('.section-head .eyebrow');
@@ -170,8 +163,9 @@ export class FreeTarot {
     this.drawing = true; this.updateCurrentControls(); this.altar.classList.add('revealing'); this.startRevealMagic();
     try {
       const result = await this.coordinator.commit(latest => drawNextCard(latest)); if (result.cardId === null) return null;
-      warmCardImage(CARDS[result.cardId]);
+      const imagePreparation = prepareCardImage(CARDS[result.cardId], { timeout: IMAGE_PREPARE_BUDGET_MS, priority: 'high' });
       await this.openRevealPortal(revealStartedAt);
+      await imagePreparation;
       this.state = result.state; this.selected = result.position; this.persist(); this.render(result.position, false); preloadCardImages(this.state.waiting, 3);
       if (!this.reducedMotion()) await this.waitForCurrentCardImage();
       this.finishRevealMagic(CARDS[result.cardId], result.position); revealed = true;
@@ -282,7 +276,7 @@ export class FreeTarot {
 
     const token = ++this.navigationToken;
     this.navigationAnimation = { token };
-    warmCardImage(CARDS[this.state.revealed[next]]);
+    const imagePreparation = prepareCardImage(CARDS[this.state.revealed[next]], { timeout: IMAGE_PREPARE_BUDGET_MS, priority: 'high' });
     this.altar.classList.remove(...SUCTION_CLASSES);
     this.altar.classList.add('suction-nav-out');
 
@@ -291,6 +285,8 @@ export class FreeTarot {
       if (token !== this.navigationToken) return false;
       this.altar.classList.remove('suction-nav-out');
       this.altar.classList.add('suction-nav-hold');
+      await imagePreparation;
+      if (token !== this.navigationToken) return false;
       this.show(next, false, false);
       await this.waitForCurrentCardImage();
       if (token !== this.navigationToken) return false;

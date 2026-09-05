@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.10 · CONSULTAS STAGING V147
+/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.11 · LOJA, TAROT E CONSULTAS STAGING V148
    Cada motor nasce apenas quando seu portal é solicitado. */
 
 const pageTasks = new Map();
@@ -55,7 +55,7 @@ export function createPageLoader({ config, go } = {}) {
   };
 
   const ensureCommerce = () => once(sharedTasks, 'commerce', async () => {
-    const { CommerceEngine } = await import('./commerce-engine.js?v=147');
+    const { CommerceEngine } = await import('./commerce-engine.js?v=148');
     return new CommerceEngine({
       store: $('#storeApp'),
       consultations: $('#consultationApp'),
@@ -75,7 +75,7 @@ export function createPageLoader({ config, go } = {}) {
 
   const loaders = Object.freeze({
     tarot: async () => {
-      const { FreeTarot } = await import('./tarot-engine.js?v=1361');
+      const { FreeTarot } = await import('./tarot-engine.js?v=148');
       return new FreeTarot($('#tarot'));
     },
     daily: async () => {
@@ -106,12 +106,12 @@ export function createPageLoader({ config, go } = {}) {
     },
     store: async () => {
       await ensureCommerce();
-      const { StoreEngine } = await import('./store-engine.js');
+      const { StoreEngine } = await import('./store-engine.js?v=148');
       return new StoreEngine($('#storeApp'), config);
     },
     consultations: async () => {
       await ensureCommerce();
-      const { ConsultationEngine } = await import('./consultation-engine.js?v=147');
+      const { ConsultationEngine } = await import('./consultation-engine.js?v=148');
       return new ConsultationEngine($('#consultationApp'), config);
     },
     subscriptions: async () => {

@@ -1,0 +1,34 @@
+DIVINA BRUXA V148 — LOJA MÍSTICA, TAROT LIVRE E CONSULTAS
+
+ENTREGA INCREMENTAL STAGING
+
+1. TAROT LIVRE
+- versão de ativos V148;
+- 78 cartas oficiais verificadas e sem repetição;
+- prévia instantânea pelo atlas enquanto a arte integral carrega;
+- espera de decodificação antes da revelação;
+- fallback visual offline em vez de carta vazia;
+- arte integral preservada assim que fica disponível.
+
+2. CONSULTAS
+- Mesa Real Profissional: R$ 250;
+- Leitura de Mentes: R$ 150;
+- Carta de Conselho: R$ 100;
+- Pergunta Direta: R$ 50;
+- endereço da proprietária: orbedasrealidades@hotmail.com;
+- agenda, preço registrado, protocolo e fila privada ativos no STAGING;
+- envio automático preparado, mas ainda depende dos segredos do provedor descritos em LEIA-PRIMEIRO-ATIVAR-EMAIL-CONSULTAS-V148.txt;
+- nenhuma cobrança real.
+
+3. LOJA MÍSTICA
+- 21 escolhas em oito categorias e quatro coleções;
+- busca sem diferença entre acentos e favoritos locais;
+- links externos seguros para a Amazon com transparência de afiliado;
+- preço, estoque, vendedor, pagamento e entrega confirmados no parceiro;
+- zero checkout interno e zero armazenamento de cartão;
+- arte editorial original, sem alegar representar SKU específico.
+
+4. ESCOPO PROTEGIDO
+- Home, Orbe, menu e valores das Consultas preservados;
+- produção, DNS, cobrança e domínio não alterados;
+- ativação da conta proprietária continua separada e exige a conta Auth real.
