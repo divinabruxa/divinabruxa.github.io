@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V30 · SINGULARIDADE DO TAROT */
-const CACHE='divina-bruxa-v30-singularidade-tarot';
+/* DIVINA BRUXA — SERVICE WORKER V31 · ESPIRAL LIVRE DO TAROT */
+const CACHE='divina-bruxa-v31-espiral-livre';
 
 const REQUIRED=[
   './',
@@ -41,7 +41,7 @@ const WARM=[
   './visual-v68.css','./COSMIC-DESIGN-SYSTEM-V10.css',
   './cosmic-design-system-v1.css','./menu-ring-v8.css','./home-orb-only-v1.css','./home-orb-words-v2.css',
   './tarot-table-v5.css','./tarot-ritual-v5.css','./tarot-controls-v5.css','./tarot-editorial-v5.css',
-  './tarot-livre-official-v1.css','./tarot-livre-ios-v1.css',
+  './tarot-livre-official-v1.css','./tarot-livre-ios-v1.css','./tarot-spiral-suction-v1.webp',
   './spreads-v5.css',
   './card-library-v5.css','./ai-v5.css','./premium-v5.css','./consultation-v5.css','./notification-v5.css','./admin-analytics-v1.css',
   './musica-videos-cosmica-v1.css','./store-v5.css','./school-v5.css','./journal-v5.css','./fallback-shell-v1.css','./pwa-final-v1.css'

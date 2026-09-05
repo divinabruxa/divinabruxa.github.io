@@ -1,0 +1,76 @@
+DIVINA BRUXA — V136.1
+ESPIRAL LIVRE DO TAROT
+
+POR QUE ESTA CORRECAO EXISTE
+
+A V136 usava uma singularidade desenhada pelo navegador e aguardava a decodificacao
+da proxima carta. No iPhone, essa combinacao podia mostrar um nucleo preto e causar
+engasgos. A V136.1 remove essa carga do caminho ativo.
+
+O NOVO EFEITO
+
+1. A carta atual e sugada para o centro em 64 milissegundos.
+2. A imagem original tarot-spiral-suction-v1.webp cobre o intervalo de carregamento.
+3. A proxima carta nasce da espiral em 112 milissegundos.
+4. Se a carta ainda estiver chegando da rede, a espiral pode protege-la por no maximo
+   96 milissegundos antes de liberar o nascimento.
+5. Tempo normal da troca: aproximadamente 0,18 segundo.
+6. Tempo maximo protegido: aproximadamente 0,27 segundo.
+
+POR QUE FICOU MAIS LEVE
+
+- Nenhuma mascara animada.
+- Nenhum blur animado.
+- Nenhum filtro animado.
+- Nenhuma particula continua.
+- Nenhuma chamada de image.decode bloqueando a troca.
+- Nenhuma animacao criada por JavaScript nas setas.
+- Somente escala, rotacao e transparencia no compositor do navegador.
+- A espiral e um WebP transparente de 512 x 512 e apenas cerca de 66 KB.
+
+O TAROT CONTINUA LIVRE
+
+- 78 cartas sempre diretas.
+- Nenhuma carta repetida na mesma mesa.
+- Orbe revela uma nova carta.
+- Seta direita revela ou avanca.
+- Seta esquerda volta para a carta anterior.
+- Balão mostra o nome da nova carta.
+- Embaralhar, recomeçar e mesa salva continuam iguais.
+- Nenhum gesto de deslizar foi reativado.
+
+NAO FOI ALTERADO
+
+- Orbe principal da Home e seu motor.
+- Palavras da Orbe das Realidades.
+- Menu Magico e barra inferior.
+- Skins e sincronismo das Orbes.
+- Imagens e identidade das cartas.
+- Biblioteca Celestial e demais paginas.
+
+COMO INSTALAR PELO IPHONE
+
+Envie os oito arquivos deste ZIP para a raiz do repositorio
+divinabruxa/divinabruxa.github.io. Nao crie pastas e nao envie o proprio ZIP para o
+GitHub. Quando um nome ja existir, substitua o arquivo antigo.
+
+ARQUIVOS
+
+1. tarot-spiral-suction-v1.webp — novo
+2. tarot-engine.js — substitui
+3. tarot-livre-ios-v1.css — substitui
+4. page-loader-v1.js — substitui
+5. app.js — substitui
+6. index.html — substitui
+7. sw.js — substitui
+8. LEIA-PRIMEIRO-ESPIRAL-LIVRE-V136-1.txt — novo
+
+DEPOIS DE INSTALAR
+
+Aguarde a publicacao do GitHub Pages. Feche todas as abas antigas do site e abra
+www.divinabruxa.com.br novamente. O Service Worker V31 remove o cache da V136.
+
+CHECKPOINT
+
+Esta e uma correcao da mesma macroetapa. A proxima macroetapa so comeca depois da
+confirmacao de que a Espiral Livre ficou fluida no site publicado.

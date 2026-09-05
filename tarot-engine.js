@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — MOTOR DO TAROT LIVRE · SINGULARIDADE V136
-   Troca instantânea em espiral, setas determinísticas, balão da carta e nenhum gesto.
+/* DIVINA BRUXA — MOTOR DO TAROT LIVRE · ESPIRAL LIVRE V136.1
+   Sucção leve com arte própria, setas determinísticas, balão da carta e nenhum gesto.
 */
 import { CARDS } from './tarot-data.js';
 import { store } from './storage.js';
@@ -11,40 +11,19 @@ import { freeCardAriaLabel, freeCardLabel, isFreeTarotCard, tarotEditorialStatus
 const STORAGE_KEY = 'free-tarot';
 const STORAGE_EVENT_SUFFIX = `:${STORAGE_KEY}`;
 const EMPTY_ALTAR = '<div class="empty-card"><span aria-hidden="true">✦</span><b>O PORTAL AGUARDA</b><small>Toque na Orbe para revelar</small></div>';
-const PORTAL_OPENING_MS = 86;
-const PORTAL_CROSSING_MS = 12;
-const NAVIGATION_OUT_MS = 88;
-const NAVIGATION_IN_MS = 148;
-const IMAGE_DECODE_BUDGET_MS = 145;
+const SUCTION_OUT_MS = 64;
+const SUCTION_IN_MS = 112;
+const IMAGE_REVEAL_BUDGET_MS = 96;
+const SUCTION_CLASSES = ['suction-out', 'suction-hold', 'suction-in', 'suction-nav-out', 'suction-nav-hold', 'suction-nav-in'];
+const pause = milliseconds => new Promise(resolve => globalThis.setTimeout(resolve, Math.max(0, milliseconds)));
 
-function prepareCardImage(card, budget = IMAGE_DECODE_BUDGET_MS) {
+function warmCardImage(card) {
   const source = card?.imageSources?.medium;
-  if (!source || typeof globalThis.Image !== 'function') return Promise.resolve();
-
-  return new Promise(resolve => {
-    const image = new globalThis.Image();
-    let settled = false;
-    let timer = 0;
-    const finish = () => {
-      if (settled) return;
-      settled = true;
-      globalThis.clearTimeout(timer);
-      resolve();
-    };
-    const decode = () => {
-      const decoded = typeof image.decode === 'function'
-        ? image.decode().catch(() => {})
-        : Promise.resolve();
-      decoded.then(finish);
-    };
-    image.decoding = 'async';
-    if ('fetchPriority' in image) image.fetchPriority = 'high';
-    image.onload = decode;
-    image.onerror = finish;
-    timer = globalThis.setTimeout(finish, Math.max(80, budget));
-    image.src = source;
-    if (image.complete && image.naturalWidth) decode();
-  });
+  if (!source || typeof globalThis.Image !== 'function') return;
+  const image = new globalThis.Image();
+  image.decoding = 'async';
+  if ('fetchPriority' in image) image.fetchPriority = 'high';
+  image.src = source;
 }
 function announce(message) {
   if (typeof globalThis.dispatchEvent === 'function' && typeof globalThis.CustomEvent === 'function') globalThis.dispatchEvent(new CustomEvent('orbe:toast', { detail: message }));
@@ -52,8 +31,8 @@ function announce(message) {
 
 function installOfficialStructure(root) {
   root.classList.add('tarot-livre-official');
-  root.dataset.tarotLivre = 'singularity-v136';
-  document.documentElement.dataset.tarotMotion = 'singularity-v1';
+  root.dataset.tarotLivre = 'suction-v136-1';
+  document.documentElement.dataset.tarotMotion = 'suction-v1';
 
   const eyebrow = root.querySelector('.section-head .eyebrow');
   const title = root.querySelector('.section-head h2');
@@ -93,8 +72,8 @@ function installOfficialStructure(root) {
   if (altar && !root.querySelector('#tarotBirthFx')) {
     altar.insertAdjacentHTML('afterbegin', '<span id="tarotBirthFx" class="tarot-ios-flash" aria-hidden="true"></span><p id="tarotMagicAnnouncement" class="tarot-magic-sr" role="status" aria-live="polite" aria-atomic="true"></p>');
   }
-  if (altar && !root.querySelector('#tarotSingularityFx')) {
-    altar.insertAdjacentHTML('afterbegin', '<span id="tarotSingularityFx" class="tarot-singularity-fx" aria-hidden="true"></span>');
+  if (altar && !root.querySelector('#tarotSuctionFx')) {
+    altar.insertAdjacentHTML('afterbegin', '<span id="tarotSuctionFx" class="tarot-suction-fx" aria-hidden="true"><img src="tarot-spiral-suction-v1.webp" width="512" height="512" alt="" loading="eager" decoding="async" fetchpriority="high"></span>');
   }
   if (altar && !root.querySelector('#tarotCardToast')) {
     altar.insertAdjacentHTML('afterbegin', '<div id="tarotCardToast" class="tarot-card-toast" aria-hidden="true"><span aria-hidden="true">✦</span><strong id="tarotCardToastName">CARTA REVELADA</strong><span aria-hidden="true">✦</span></div>');
@@ -185,52 +164,72 @@ export class FreeTarot {
   }
 
   async draw() {
-    if (this.drawing || this.state.completed) return null;
+    if (this.drawing || this.navigationAnimation || this.state.completed) return null;
     const revealStartedAt = globalThis.performance?.now?.() ?? Date.now();
     let revealed = false;
     this.drawing = true; this.updateCurrentControls(); this.altar.classList.add('revealing'); this.startRevealMagic();
     try {
       const result = await this.coordinator.commit(latest => drawNextCard(latest)); if (result.cardId === null) return null;
-      await Promise.all([
-        this.openRevealPortal(revealStartedAt),
-        prepareCardImage(CARDS[result.cardId])
-      ]);
+      warmCardImage(CARDS[result.cardId]);
+      await this.openRevealPortal(revealStartedAt);
       this.state = result.state; this.selected = result.position; this.persist(); this.render(result.position, false); preloadCardImages(this.state.waiting, 3);
+      if (!this.reducedMotion()) await this.waitForCurrentCardImage();
       this.finishRevealMagic(CARDS[result.cardId], result.position); revealed = true;
       globalThis.navigator?.vibrate?.([12, 22, 18]); globalThis.dispatchEvent?.(new CustomEvent('tarot:revealed', { detail: { cardId: result.cardId, position: result.position, remaining: this.state.waiting.length } })); return result.cardId;
     } finally {
       globalThis.clearTimeout(this.releaseTimer);
-      const settleDelay = this.reducedMotion() ? 20 : (revealed ? 180 : 110);
+      const settleDelay = this.reducedMotion() ? 20 : (revealed ? SUCTION_IN_MS + 20 : 80);
       this.releaseTimer = globalThis.setTimeout(() => this.settleRevealMagic(), settleDelay);
     }
   }
 
   startRevealMagic() {
     this.hideCardToast();
-    this.altar.classList.remove('magic-awakening', 'magic-manifesting', 'magic-born', 'ios-awakening', 'ios-crossing', 'ios-born', 'singularity-nav-out', 'singularity-nav-in');
+    this.altar.classList.remove('magic-awakening', 'magic-manifesting', 'magic-born', 'ios-awakening', 'ios-crossing', 'ios-born', 'singularity-nav-out', 'singularity-nav-in', ...SUCTION_CLASSES);
     this.root.dataset.revealPhase = 'awakening';
     this.altar.setAttribute('aria-busy', 'true'); this.orb.setAttribute('aria-busy', 'true');
-    this.altar.classList.add('ios-awakening');
-    this.orbState.textContent = 'O PORTAL ESTÁ SE ABRINDO';
-    if (this.magicAnnouncement) this.magicAnnouncement.textContent = 'A Orbe está abrindo o portal.';
+    this.altar.classList.add('suction-out');
+    this.orbState.textContent = 'A ESPIRAL ESTÁ SE ABRINDO';
+    if (this.magicAnnouncement) this.magicAnnouncement.textContent = 'A Orbe abriu a espiral.';
   }
 
   async openRevealPortal(startedAt) {
     if (!this.reducedMotion()) {
       const now = globalThis.performance?.now?.() ?? Date.now();
-      await new Promise(resolve => globalThis.setTimeout(resolve, Math.max(0, PORTAL_OPENING_MS - (now - startedAt))));
+      await pause(SUCTION_OUT_MS - (now - startedAt));
     }
-    this.altar.classList.remove('ios-awakening'); this.altar.classList.add('ios-crossing');
+    this.altar.classList.remove('suction-out'); this.altar.classList.add('suction-hold');
     this.root.dataset.revealPhase = 'manifesting';
-    this.orbState.textContent = 'A CARTA MERGULHA NA SINGULARIDADE';
-    if (!this.reducedMotion()) await new Promise(resolve => globalThis.setTimeout(resolve, PORTAL_CROSSING_MS));
+    this.orbState.textContent = 'A ESPIRAL ABRE O CAMINHO';
   }
 
   finishRevealMagic(card, position) {
-    this.altar.classList.remove('ios-crossing'); this.altar.classList.add('ios-born'); this.root.dataset.revealPhase = 'born';
+    this.altar.classList.remove('suction-hold'); this.altar.classList.add('suction-in'); this.root.dataset.revealPhase = 'born';
     this.orbState.textContent = 'CARTA REVELADA';
     if (this.magicAnnouncement && card) this.magicAnnouncement.textContent = `${card.name}, direta. Carta ${position + 1} de ${DECK_SIZE} revelada.`;
     this.showCardToast(card);
+  }
+
+  waitForCurrentCardImage(budget = IMAGE_REVEAL_BUDGET_MS) {
+    const image = this.stage.querySelector('.tarot-card-image');
+    if (!image || (image.complete && image.naturalWidth > 0)) return Promise.resolve('ready');
+    return new Promise(resolve => {
+      let settled = false;
+      let timer = 0;
+      const finish = state => {
+        if (settled) return;
+        settled = true;
+        globalThis.clearTimeout(timer);
+        image.removeEventListener('load', onLoad);
+        image.removeEventListener('error', onError);
+        resolve(state);
+      };
+      const onLoad = () => finish('ready');
+      const onError = () => finish('fallback');
+      image.addEventListener('load', onLoad, { once: true });
+      image.addEventListener('error', onError, { once: true });
+      timer = globalThis.setTimeout(() => finish('budget'), Math.max(24, budget));
+    });
   }
 
   hideCardToast() {
@@ -263,7 +262,7 @@ export class FreeTarot {
 
   settleRevealMagic() {
     this.drawing = false;
-    this.altar.classList.remove('revealing', 'magic-awakening', 'magic-manifesting', 'magic-born', 'ios-awakening', 'ios-crossing', 'ios-born', 'singularity-nav-out', 'singularity-nav-in');
+    this.altar.classList.remove('revealing', 'magic-awakening', 'magic-manifesting', 'magic-born', 'ios-awakening', 'ios-crossing', 'ios-born', 'singularity-nav-out', 'singularity-nav-in', ...SUCTION_CLASSES);
     this.altar.removeAttribute('aria-busy'); this.orb.removeAttribute('aria-busy');
     this.root.dataset.revealPhase = 'idle';
     this.orbState.textContent = this.state.completed ? 'MESA COMPLETA' : 'REVELAR CARTA';
@@ -275,62 +274,35 @@ export class FreeTarot {
     const next = this.selected + direction;
     if (next < 0 || next >= this.state.revealed.length) return false;
 
-    if (this.reducedMotion() || typeof this.stage.animate !== 'function') {
+    if (this.reducedMotion()) {
       const moved = this.moveCurrent(direction);
       if (moved) this.announceCardNavigation(source);
       return moved;
     }
 
     const token = ++this.navigationToken;
-    const spin = direction > 0 ? 30 : -30;
-    const incomingReady = prepareCardImage(CARDS[this.state.revealed[next]], 120);
-    this.altar.classList.remove('singularity-nav-in');
-    this.altar.classList.add('singularity-nav-out');
-    this.navigationAnimation = this.stage.animate([
-      { opacity:1, transform:'translate3d(0,0,0) scale(1) rotate(0deg)' },
-      { opacity:.9, transform:`translate3d(0,2px,0) scale(.52) rotate(${spin * .48}deg)`, offset:.58 },
-      { opacity:.12, transform:`translate3d(0,7px,0) scale(.045) rotate(${spin}deg)` }
-    ], {
-      duration:NAVIGATION_OUT_MS,
-      easing:'cubic-bezier(.55,0,.95,.38)',
-      fill:'forwards'
-    });
+    this.navigationAnimation = { token };
+    warmCardImage(CARDS[this.state.revealed[next]]);
+    this.altar.classList.remove(...SUCTION_CLASSES);
+    this.altar.classList.add('suction-nav-out');
 
-    try { await this.navigationAnimation.finished; }
-    catch {
-      this.altar.classList.remove('singularity-nav-out', 'singularity-nav-in');
+    try {
+      await pause(SUCTION_OUT_MS);
+      if (token !== this.navigationToken) return false;
+      this.altar.classList.remove('suction-nav-out');
+      this.altar.classList.add('suction-nav-hold');
+      this.show(next, false, false);
+      await this.waitForCurrentCardImage();
+      if (token !== this.navigationToken) return false;
+      this.announceCardNavigation(source);
+      this.altar.classList.remove('suction-nav-hold');
+      this.altar.classList.add('suction-nav-in');
+      await pause(SUCTION_IN_MS);
+      return true;
+    } finally {
+      this.altar.classList.remove(...SUCTION_CLASSES);
       if (token === this.navigationToken) this.navigationAnimation = null;
-      return false;
     }
-    if (token !== this.navigationToken) {
-      this.altar.classList.remove('singularity-nav-out', 'singularity-nav-in');
-      return false;
-    }
-
-    await incomingReady;
-
-    this.navigationAnimation.cancel();
-    this.navigationAnimation = null;
-    this.show(next, false, false);
-    this.announceCardNavigation(source);
-    this.altar.classList.remove('singularity-nav-out');
-    this.altar.classList.add('singularity-nav-in');
-    this.navigationAnimation = this.stage.animate([
-      { opacity:.12, transform:`translate3d(0,7px,0) scale(.045) rotate(${-spin}deg)` },
-      { opacity:1, transform:`translate3d(0,-1px,0) scale(1.012) rotate(${-spin * .02}deg)`, offset:.76 },
-      { opacity:1, transform:'translate3d(0,0,0) scale(1) rotate(0deg)' }
-    ], {
-      duration:NAVIGATION_IN_MS,
-      easing:'cubic-bezier(.22,1,.36,1)',
-      fill:'both'
-    });
-
-    const entering = this.navigationAnimation;
-    try { await entering.finished; } catch { /* cancelamento seguro */ }
-    entering.cancel();
-    this.altar.classList.remove('singularity-nav-out', 'singularity-nav-in');
-    if (token === this.navigationToken) this.navigationAnimation = null;
-    return true;
   }
 
   async navigateForward(source = 'botão') {
@@ -478,5 +450,5 @@ export class FreeTarot {
     announce(`Mesa retomada com ${this.state.revealed.length} cartas reveladas.`); return true;
   }
 
-  destroy() { globalThis.clearTimeout(this.releaseTimer); this.hideCardToast(); globalThis.cancelAnimationFrame?.(this.scrollFrame); this.navigationToken += 1; this.navigationAnimation?.cancel?.(); this.navigationAnimation = null; this.altar.classList.remove('singularity-nav-out', 'singularity-nav-in'); this.closeLightbox(); globalThis.removeEventListener?.('storage', this.onStorage); document.removeEventListener('visibilitychange', this.onVisibility); }
+  destroy() { globalThis.clearTimeout(this.releaseTimer); this.hideCardToast(); globalThis.cancelAnimationFrame?.(this.scrollFrame); this.navigationToken += 1; this.navigationAnimation?.cancel?.(); this.navigationAnimation = null; this.altar.classList.remove('singularity-nav-out', 'singularity-nav-in', ...SUCTION_CLASSES); this.closeLightbox(); globalThis.removeEventListener?.('storage', this.onStorage); document.removeEventListener('visibilitychange', this.onVisibility); }
 }

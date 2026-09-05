@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — TAROT LIVRE · SINGULARIDADE + FLUIDEZ IOS V136
-   Troca em espiral no compositor: sem gesto, blur animado ou partículas contínuas. */
+/* DIVINA BRUXA — TAROT LIVRE · ESPIRAL LIVRE V136.1
+   Arte própria e troca leve: sem gesto, máscara, blur animado ou partículas contínuas. */
 
 html[data-runtime="v12"] #app>#tarot.tarot-livre-official{
   --tl-ios-gold:#e7c77d;
@@ -699,144 +699,130 @@ html[data-runtime="v12"] #tarot .card-lightbox::backdrop{background:rgba(1,0,4,.
   html[data-runtime="v12"] #tarot .table-slot.revealed{border:1px solid CanvasText}
 }
 
-/* V136 — a carta antiga colapsa em um ponto e a nova nasce no mesmo quadro.
-   Somente transform e opacity são animados para manter a fluidez no iPhone. */
-html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-card-center .current:not(.empty),
-html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-card-center .tarot-card-image{
+/* V136.1 — uma única imagem transparente esconde o instante de carregamento.
+   Somente transform e opacity mudam durante a troca. */
+html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .ritual-card-center .current:not(.empty),
+html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .ritual-card-center .tarot-card-image{
   background:
-    radial-gradient(circle at 50% 50%,rgba(117,46,159,.24) 0 12%,rgba(34,10,48,.74) 35%,#07020c 76%);
+    radial-gradient(circle at 50% 47%,rgba(134,45,175,.3) 0 15%,rgba(28,8,42,.9) 48%,#09030e 100%);
 }
 
-html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .tarot-singularity-fx{
+html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .tarot-suction-fx{
   position:absolute;
-  z-index:15;
+  z-index:19;
   top:300px;
   left:50%;
-  width:min(54vw,310px);
+  display:block;
+  width:min(54vw,330px);
   aspect-ratio:1;
-  transform:translate3d(-50%,-50%,0) scale(.18) rotate(0deg);
-  transform-origin:50% 50%;
+  overflow:visible;
   pointer-events:none;
-  border-radius:50%;
   opacity:0;
-  contain:paint;
+  transform:translate3d(-50%,-50%,0) scale(.24) rotate(-36deg);
+  transform-origin:50% 50%;
+  contain:layout style;
   will-change:transform,opacity;
 }
 
-html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .tarot-singularity-fx::before,
-html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .tarot-singularity-fx::after{
-  content:"";
-  position:absolute;
-  pointer-events:none;
-  border-radius:50%;
+html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .tarot-suction-fx img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  opacity:1;
+  transform:translateZ(0);
+  backface-visibility:hidden;
 }
 
-html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .tarot-singularity-fx::before{
-  inset:0;
-  background:conic-gradient(
-    from 10deg,
-    transparent 0 8deg,
-    rgba(255,224,154,.92) 9deg 11deg,
-    transparent 13deg 31deg,
-    rgba(203,105,255,.76) 33deg 36deg,
-    transparent 39deg 58deg,
-    rgba(255,224,154,.68) 60deg 61deg,
-    transparent 63deg 90deg
-  );
-  -webkit-mask:radial-gradient(circle,transparent 0 17%,#000 25% 64%,transparent 73%);
-  mask:radial-gradient(circle,transparent 0 17%,#000 25% 64%,transparent 73%);
-}
-
-html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .tarot-singularity-fx::after{
-  inset:31%;
-  border:1px solid rgba(255,222,151,.82);
-  background:radial-gradient(circle,#000 0 24%,#08000d 31%,#6f1b8e 48%,rgba(220,126,255,.46) 58%,transparent 73%);
-  box-shadow:0 0 0 4px rgba(107,25,145,.2),0 0 22px rgba(221,129,255,.72),0 0 42px rgba(255,208,125,.2);
-}
-
-html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar.ios-awakening .current{
+html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .ritual-altar.suction-out .current,
+html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .ritual-altar.suction-nav-out .current{
   transform-origin:50% 50%;
   will-change:transform,opacity;
-  animation:tl-singularity-card-collapse 86ms cubic-bezier(.55,0,.95,.38) both!important;
+  animation:tl-card-suction-out 64ms cubic-bezier(.58,0,.92,.42) both!important;
 }
 
-html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar.ios-crossing .current{
-  opacity:.12;
-  transform:translate3d(0,7px,0) scale(.045) rotate(30deg);
+html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .ritual-altar.suction-hold .current,
+html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .ritual-altar.suction-nav-hold .current{
+  opacity:0;
+  transform:translate3d(0,3px,0) scale(.055) rotate(22deg);
 }
 
-html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar.ios-born .current{
+html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .ritual-altar.suction-in .current,
+html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .ritual-altar.suction-nav-in .current{
   transform-origin:50% 50%;
   will-change:transform,opacity;
-  animation:tl-singularity-card-birth 148ms cubic-bezier(.16,.86,.2,1) both!important;
+  animation:tl-card-suction-in 112ms cubic-bezier(.18,.84,.26,1) both!important;
 }
 
-html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar.ios-awakening .tarot-singularity-fx,
-html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar.singularity-nav-out .tarot-singularity-fx{
-  animation:tl-singularity-lens-in 88ms cubic-bezier(.45,0,.9,.42) both!important;
+html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .ritual-altar.suction-out .tarot-suction-fx,
+html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .ritual-altar.suction-nav-out .tarot-suction-fx{
+  animation:tl-vortex-suction-in 64ms cubic-bezier(.42,0,.78,.48) both!important;
 }
 
-html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar.ios-crossing .tarot-singularity-fx{
-  opacity:.98;
-  transform:translate3d(-50%,-50%,0) scale(.54) rotate(210deg);
+html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .ritual-altar.suction-hold .tarot-suction-fx,
+html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .ritual-altar.suction-nav-hold .tarot-suction-fx{
+  opacity:1;
+  transform:translate3d(-50%,-50%,0) scale(.88) rotate(92deg);
 }
 
-html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar.ios-born .tarot-singularity-fx,
-html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar.singularity-nav-in .tarot-singularity-fx{
-  animation:tl-singularity-lens-out 158ms cubic-bezier(.16,.78,.22,1) both!important;
+html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .ritual-altar.suction-in .tarot-suction-fx,
+html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .ritual-altar.suction-nav-in .tarot-suction-fx{
+  animation:tl-vortex-suction-out 112ms cubic-bezier(.2,.72,.28,1) both!important;
 }
 
-html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar.ios-awakening .tarot-ios-flash,
-html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar.ios-crossing .tarot-ios-flash,
-html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar.ios-born .tarot-ios-flash{
+html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .ritual-altar.suction-out .tarot-ios-flash,
+html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .ritual-altar.suction-hold .tarot-ios-flash,
+html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .ritual-altar.suction-in .tarot-ios-flash,
+html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .ritual-altar.suction-nav-out .tarot-ios-flash,
+html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .ritual-altar.suction-nav-hold .tarot-ios-flash,
+html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .ritual-altar.suction-nav-in .tarot-ios-flash{
   opacity:0!important;
   animation:none!important;
 }
 
-@keyframes tl-singularity-card-collapse{
+@keyframes tl-card-suction-out{
   0%{opacity:1;transform:translate3d(0,0,0) scale(1) rotate(0deg)}
-  58%{opacity:.9;transform:translate3d(0,2px,0) scale(.52) rotate(14deg)}
-  100%{opacity:.12;transform:translate3d(0,7px,0) scale(.045) rotate(30deg)}
+  48%{opacity:.96;transform:translate3d(0,1px,0) scale(.72) rotate(7deg)}
+  100%{opacity:0;transform:translate3d(0,3px,0) scale(.055) rotate(22deg)}
 }
 
-@keyframes tl-singularity-card-birth{
-  0%{opacity:.12;transform:translate3d(0,7px,0) scale(.045) rotate(-30deg)}
-  76%{opacity:1;transform:translate3d(0,-1px,0) scale(1.012) rotate(-.6deg)}
+@keyframes tl-card-suction-in{
+  0%{opacity:0;transform:translate3d(0,3px,0) scale(.055) rotate(-20deg)}
+  78%{opacity:1;transform:translate3d(0,-1px,0) scale(1.008) rotate(-.4deg)}
   100%{opacity:1;transform:translate3d(0,0,0) scale(1) rotate(0deg)}
 }
 
-@keyframes tl-singularity-lens-in{
-  0%{opacity:0;transform:translate3d(-50%,-50%,0) scale(.18) rotate(0deg)}
-  66%{opacity:.9;transform:translate3d(-50%,-50%,0) scale(.76) rotate(132deg)}
-  100%{opacity:.98;transform:translate3d(-50%,-50%,0) scale(.54) rotate(210deg)}
+@keyframes tl-vortex-suction-in{
+  0%{opacity:0;transform:translate3d(-50%,-50%,0) scale(.24) rotate(-36deg)}
+  100%{opacity:1;transform:translate3d(-50%,-50%,0) scale(.88) rotate(92deg)}
 }
 
-@keyframes tl-singularity-lens-out{
-  0%{opacity:.98;transform:translate3d(-50%,-50%,0) scale(.54) rotate(210deg)}
-  100%{opacity:0;transform:translate3d(-50%,-50%,0) scale(1.08) rotate(390deg)}
+@keyframes tl-vortex-suction-out{
+  0%{opacity:1;transform:translate3d(-50%,-50%,0) scale(.88) rotate(92deg)}
+  100%{opacity:0;transform:translate3d(-50%,-50%,0) scale(.34) rotate(202deg)}
 }
 
 @media(max-width:640px){
-  html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .tarot-singularity-fx{
+  html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .tarot-suction-fx{
     top:180px;
-    width:min(62vw,250px);
+    width:min(64vw,244px);
   }
 }
 
 @media(max-width:355px){
-  html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .tarot-singularity-fx{top:165px}
+  html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .tarot-suction-fx{top:165px;width:min(66vw,214px)}
 }
 
 @media(orientation:landscape) and (max-height:560px){
-  html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .tarot-singularity-fx{top:195px}
+  html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .tarot-suction-fx{top:195px;width:250px}
 }
 
 @media(prefers-reduced-motion:reduce){
-  html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .tarot-singularity-fx{
+  html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .tarot-suction-fx{
     display:none!important;
     animation:none!important;
   }
-  html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-altar .current{
+  html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .ritual-altar .current{
     opacity:1!important;
     transform:translateZ(0)!important;
     animation:none!important;
@@ -844,5 +830,5 @@ html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .ritual-alta
 }
 
 @media(forced-colors:active){
-  html[data-runtime="v12"][data-tarot-motion="singularity-v1"] #tarot .tarot-singularity-fx{display:none!important}
+  html[data-runtime="v12"][data-tarot-motion="suction-v1"] #tarot .tarot-suction-fx{display:none!important}
 }
