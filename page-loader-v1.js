@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.3 · ESCOLA CELESTIAL V138
+/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.4 · TEMPLO DAS TIRAGENS V139
    Cada motor nasce apenas quando seu portal é solicitado. */
 
 const pageTasks = new Map();
@@ -8,7 +8,7 @@ const PAGE_LABELS = Object.freeze({
   daily: 'a Carta do Dia',
   library: 'a Biblioteca das 78 Cartas',
   school: 'a Escola do Tarot',
-  spreads: 'as Tiragens',
+  spreads: 'o Templo das Tiragens',
   journal: 'o Diário da Orbe',
   ai: 'a Orbe IA',
   store: 'a Loja Mística',
@@ -89,8 +89,13 @@ export function createPageLoader({ config, go } = {}) {
       return new SchoolEngine($('#schoolApp'));
     },
     spreads: async () => {
-      const { SpreadsEngine } = await import('./spreads-engine.js');
-      return new SpreadsEngine($('#spreadGrid'), $('#spreadResult'), remember);
+      const { SpreadsEngine } = await import('./spreads-engine.js?v=139');
+      return new SpreadsEngine({
+        grid: $('#spreadGrid'),
+        result: $('#spreadResult'),
+        intention: $('#spreadIntention'),
+        history: $('#spreadHistory')
+      }, remember);
     },
     journal: ensureJournal,
     ai: async () => {
@@ -129,7 +134,8 @@ export function createPageLoader({ config, go } = {}) {
       announceLoading('start', {
         id: loadingId,
         pageId: id,
-        label: PAGE_LABELS[id] || 'o próximo portal'
+        label: PAGE_LABELS[id] || 'o próximo portal',
+        message: id === 'spreads' ? 'Preparando sua tiragem…' : undefined
       });
       document.dispatchEvent(new CustomEvent('divina:page-loading', { detail: { id } }));
 

@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — ATLAS VISUAL CÓSMICO V4 · ESCOLA CELESTIAL V138
+/* DIVINA BRUXA — ATLAS VISUAL CÓSMICO V5 · TEMPLO DAS TIRAGENS V139
    Carrega cada mundo somente quando ele será visitado e revela a arte após a decodificação. */
 
 const ATLAS = Object.freeze({
@@ -13,6 +13,10 @@ const ATLAS = Object.freeze({
   school: Object.freeze({
     realm: 'academy',
     image: 'escola-tarot-observatorio-v1.webp'
+  }),
+  spreads: Object.freeze({
+    realm: 'oracle',
+    image: 'templo-tiragens-celestial-v1.webp'
   })
 });
 
@@ -76,7 +80,12 @@ function prepare(destination, { priority = 'auto' } = {}) {
     announceLoading('start', {
       id: loadingId,
       pageId: destination,
-      label: destination === 'school' ? 'o Observatório da Escola' : 'a atmosfera deste mundo'
+      message: destination === 'spreads' ? 'Preparando sua tiragem…' : undefined,
+      label: destination === 'school'
+        ? 'o Observatório da Escola'
+        : destination === 'spreads'
+          ? 'o Templo das Tiragens'
+          : 'a atmosfera deste mundo'
     });
   }
 

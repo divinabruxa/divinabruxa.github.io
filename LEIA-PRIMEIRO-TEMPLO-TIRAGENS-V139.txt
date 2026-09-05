@@ -1,0 +1,92 @@
+DIVINA BRUXA — V139
+TEMPLO DAS TIRAGENS CELESTIAL
+
+INSTALAÇÃO NO GITHUB PELO IPHONE
+
+1. Abra este ZIP no aplicativo Arquivos.
+2. Selecione os 10 arquivos que estão soltos dentro dele.
+3. Envie todos diretamente para a raiz do repositório divinabruxa.github.io.
+4. Quando o GitHub perguntar, confirme a substituição destes arquivos:
+   - index.html
+   - app.js
+   - page-loader-v1.js
+   - cosmic-visual-atlas-v1.js
+   - spreads-engine.js
+   - spreads-policy.js
+   - sw.js
+5. Os outros três arquivos são novos:
+   - templo-tiragens-celestial-v1.webp
+   - spreads-temple-v1.css
+   - este LEIA-PRIMEIRO
+6. Não crie nenhuma pasta. Todos os arquivos ficam soltos na raiz.
+7. Depois da publicação, feche completamente o site e abra novamente.
+
+O QUE NASCE NESTA MACROETAPA
+
+- As Tiragens ganham um Templo exclusivo em obsidiana, violeta e ouro.
+- A arte original foi otimizada para 864 x 1296 px e cerca de 135 KB.
+- A imagem só é solicitada quando o Templo será visitado.
+- Se a abertura realmente demorar, a Orbe da skin ativa protege a espera.
+- Há 14 estruturas livres: Uma Carta; Passado, Presente e Tendência;
+  Triângulo Mágico; Situação, Desafio e Conselho; Caminho em Cinco;
+  Dois Caminhos; Amor e Relações; Trabalho e Vocação; Dinheiro e Recursos;
+  Caminho Espiritual; Mandala Astrológica; Árvore da Vida; Cruz Celta;
+  e Mesa Personalizada de 1 a 12 cartas.
+- A Mesa Real de 78 cartas aparece como o 15º caminho e continua bloqueada
+  pelo Premium, sem desbloqueio local ou cobrança real.
+- Cada toque na Orbe revela somente a próxima posição, sempre com carta
+  direta e sem repetição.
+- A tiragem é salva automaticamente depois de cada carta e pode ser retomada
+  neste mesmo aparelho, inclusive quando a conexão estiver instável.
+- Uma confirmação em duas etapas protege tiragens incompletas antes de trocar
+  ou recomeçar.
+- Cada carta revelada possui significado profundo dentro da posição, com
+  essência, lente temática, luz, ponto de atenção, conselho e reflexão.
+- A síntese aparece somente quando todas as posições forem abertas.
+- A pergunta é opcional, privada e nunca é enviada automaticamente para a IA.
+- A Orbe IA só é aberta por escolha explícita depois da tiragem completa.
+- As tiragens concluídas formam um histórico local com favoritos e etiquetas.
+- Leituras completas podem ser guardadas no Diário da Orbe.
+- A exportação do histórico continua protegida pelo Premium.
+- A Cruz Celta possui mapa próprio e legível; a Mesa Real exibe uma prévia
+  protegida em 13 fileiras de 6.
+- O cache V34 prepara o motor, os significados, o atlas das cartas e a arte do
+  Templo para uso resiliente.
+- O Templo respeita movimento reduzido, áreas de toque de 44 px e leitura no iPhone.
+
+PROTEÇÕES MANTIDAS
+
+- A Orbe principal da Home não foi alterada.
+- As palavras, a respiração, os gestos e o duplo toque da Orbe não foram alterados.
+- O Menu Mágico e a mini-Orbe inferior não foram alterados.
+- As 30 skins continuam sincronizadas com todas as Orbes, incluindo a Orbe
+  de revelação do Templo.
+- O Tarot Livre V136.1, sua Espiral Livre, suas setas e suas 78 posições não
+  foram alterados.
+- Nenhuma carta invertida foi criada ou reativada.
+- O app Mesa Real Premium permanece separado da Mesa Real Profissional de
+  R$ 500 oferecida em Consultas.
+- Nenhum pagamento, assinatura ou servidor de produção foi ativado.
+
+COMO TESTAR DEPOIS DA PUBLICAÇÃO
+
+1. Abra o Menu Mágico e toque em “Tiragens”.
+2. O Templo deve surgir suavemente atrás do título.
+3. Escreva uma intenção opcional e escolha “Passado · Presente · Tendência”.
+4. Toque na Orbe três vezes: deve nascer uma carta por posição, sem repetição.
+5. Toque nas cartas já reveladas e confirme que cada significado acompanha
+   a posição selecionada.
+6. Antes de concluir outra tiragem, toque em uma estrutura diferente e confirme
+   que o site oferece continuar ou descartar em duas etapas.
+7. Feche e abra o site durante uma tiragem: o progresso deve permanecer.
+8. Conclua a leitura, use favoritos e etiquetas e guarde a tiragem no Diário.
+9. Abra “Mesa Real” e confirme que o app Premium continua protegido e que a
+   consulta profissional aparece como uma opção separada.
+10. Em conexão lenta, a Orbe pode aparecer enquanto o Templo abre; em abertura
+    instantânea, nenhum carregador deve piscar.
+
+PRÓXIMA MACROETAPA PLANEJADA
+
+V140 — DIÁRIO E ESPELHO CELESTIAL
+Uma memória simbólica mais visual, com linha do tempo, padrões das leituras e
+reflexões privadas — preservando tudo que já está perfeito.
