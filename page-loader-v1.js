@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.11 · LOJA, TAROT E CONSULTAS STAGING V148
+/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.12 · MÚSICA E VÍDEO V149
    Cada motor nasce apenas quando seu portal é solicitado. */
 
 const pageTasks = new Map();
@@ -64,12 +64,13 @@ export function createPageLoader({ config, go } = {}) {
   });
 
   const ensureMedia = () => once(sharedTasks, 'media', async () => {
-    const [{ MediaEngineV5 }, { EcosystemEngine }] = await Promise.all([
-      import('./media-engine-v5.js'),
-      import('./ecosystem-v6.js')
+    const [{ MediaEngineV149 }, { MediaEcosystemV149 }] = await Promise.all([
+      import('./media-engine-v149.js?v=149'),
+      import('./media-ecosystem-v149.js?v=149')
     ]);
-    new EcosystemEngine($('#videos'));
-    const media = new MediaEngineV5({ videos: $('#videoApp'), music: $('#musicApp') }, config);
+    const media = new MediaEngineV149({ videos: $('#videoApp'), music: $('#musicApp') }, config);
+    new MediaEcosystemV149($('#videoApp'), 'videos');
+    new MediaEcosystemV149($('#musicApp'), 'music');
     return media;
   });
 
