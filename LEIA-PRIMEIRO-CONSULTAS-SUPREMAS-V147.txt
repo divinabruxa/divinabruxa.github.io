@@ -1,0 +1,95 @@
+DIVINA BRUXA V147 — CONSULTAS CELESTIAIS SUPREMAS
+
+MACROETAPA
+V147 concluída sobre a base V146. Este ZIP é incremental e plano: copie todos os arquivos para a raiz do projeto e substitua os homônimos. Não há pastas dentro do pacote.
+
+PREÇOS OFICIAIS
+- Mesa Real Profissional: R$ 250,00
+- Leitura de Mentes: R$ 150,00
+- Carta de Conselho: R$ 100,00
+- Pergunta Direta: R$ 50,00
+
+EXPERIÊNCIA ENTREGUE
+- Santuário das Consultas redesenhado em obsidiana, violeta e ouro.
+- Quatro portais de serviço com explicação, indicação, itens incluídos e preço.
+- Jornada guiada em quatro etapas: Consulta, Horário, Dados e Revisão.
+- Agenda real do Supabase STAGING com dias e horários de Brasília.
+- Preferência manual e envio exclusivo por e-mail quando a agenda estiver indisponível.
+- Campos otimizados para iPhone, controles de toque, área segura e resumo móvel fixo.
+- Rascunho local, contador de 3.000 caracteres e limpeza em duas confirmações.
+- Validação acessível de nome, e-mail, telefone, contexto e três consentimentos.
+- Revisão integral antes do envio e price_snapshot imutável no pedido.
+- Protocolo após registro no STAGING e botão para copiar.
+- Histórico local sanitizado sem guardar a pergunta no painel/analytics.
+- Estados completos de carregamento, indisponibilidade, erro, conflito de horário e sucesso.
+- FAQ com limites claros, inclusive para “Leitura de Mentes”.
+
+CATÁLOGO E PAINEL SUPREMO
+- A página lê os preços atuais do catálogo seguro no STAGING.
+- Os quatro IDs do site, do banco e do Painel Supremo agora são os mesmos.
+- Alterações futuras de preço pelo Admin atualizam o catálogo sem recalcular pedidos antigos.
+- O Painel V146 continua protegido por proprietária verificada + MFA.
+- A ativação da primeira proprietária continua pendente até existir a conta Auth correta.
+
+SEGURANÇA E PRIVACIDADE
+- Comunicação de consulta somente por orbedasrealidades@hotmail.com.
+- Nenhuma dependência ativa de WhatsApp.
+- Nenhuma chave secreta foi colocada no navegador.
+- Origem web validada no servidor e CORS restrito aos domínios autorizados.
+- Corpo máximo de 12 KB, honeypot antirobô e submissão idempotente.
+- Rate limit por hash SHA-256; contadores com mais de 48 horas são limpos nas solicitações seguintes e nenhum IP bruto é armazenado.
+- Três consentimentos explícitos; marketing permanece desligado.
+- Nenhuma cobrança, cartão ou checkout real foi ativado.
+- Produção, DNS, lojas e Orbe IA Sol permaneceram intocados.
+
+STAGING APLICADO
+- Projeto: divina-bruxa-staging
+- Ref: kyphdsamyygavmkzyezr
+- Região: sa-east-1
+- Migration: divina_consultas_staging_v147
+- Migration: divina_consultas_staging_v147_rate_limit
+- Migration: divina_consultas_staging_v147_catalog_rpc
+- Edge Function: consultations-booking · ACTIVE · versão 5
+- Canal: e-mail
+- Billing real: desligado
+
+VALIDAÇÕES
+- QA Consultas V147: 32/32 aprovadas, incluindo renderização dos cinco estados da jornada.
+- Commerce V9.10: 8/8 aprovadas.
+- Commerce Guard V10: 7/7 aprovadas.
+- Admin STAGING V146: 18/18 aprovadas.
+- Sintaxe JS/TS e git diff: aprovadas.
+- GET real: 200 com quatro serviços, preços corretos e agenda.
+- Origem não autorizada: 403.
+- Preflight autorizado: 204.
+- Reserva + envio + price_snapshot: aprovados dentro de transação revertida.
+- Pedidos fictícios persistidos pelo teste: 0.
+- Advisors Supabase: nenhum WARNING ou ERROR novo; somente informes do ambiente ainda sem tráfego real.
+
+ARQUIVOS DA MACROETAPA (16)
+1. index.html
+2. app.js
+3. config.js
+4. page-loader-v1.js
+5. commerce-engine.js
+6. admin-engine.js
+7. consultation-policy.js
+8. consultation-engine.js
+9. consultations-celestial-v1.css
+10. sw.js
+11. consultations-booking-v147.ts
+12. SUPABASE-CONSULTAS-STAGING-V147.sql
+13. SUPABASE-CONSULTAS-STAGING-V147-RATE-LIMIT.sql
+14. SUPABASE-CONSULTAS-STAGING-V147-CATALOG-RPC.sql
+15. QA-CONSULTAS-STAGING-V147.mjs
+16. LEIA-PRIMEIRO-CONSULTAS-SUPREMAS-V147.txt
+
+INSTALAÇÃO DOS ARQUIVOS WEB
+1. Faça backup da versão atual.
+2. Descompacte o ZIP.
+3. Envie os 16 arquivos soltos para a raiz do projeto.
+4. Substitua os arquivos homônimos.
+5. Não envie o ZIP para a raiz do site.
+
+OBSERVAÇÃO SOBRE O SUPABASE
+As três migrations e a Edge Function já foram aplicadas no STAGING oficial. Os arquivos SQL e TS acompanham o pacote para auditoria e reprodução; não precisam ser reaplicados nesse mesmo projeto.

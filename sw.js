@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V41 · ADMIN STAGING ATIVO */
-const CACHE='divina-bruxa-v41-admin-staging-active';
+/* DIVINA BRUXA — SERVICE WORKER V42 · CONSULTAS STAGING V147 */
+const CACHE='divina-bruxa-v42-consultas-staging-v147';
 
 const REQUIRED=[
   './',

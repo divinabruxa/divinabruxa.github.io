@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.9 · PAINEL SUPREMO V144
+/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.10 · CONSULTAS STAGING V147
    Cada motor nasce apenas quando seu portal é solicitado. */
 
 const pageTasks = new Map();
@@ -55,7 +55,7 @@ export function createPageLoader({ config, go } = {}) {
   };
 
   const ensureCommerce = () => once(sharedTasks, 'commerce', async () => {
-    const { CommerceEngine } = await import('./commerce-engine.js');
+    const { CommerceEngine } = await import('./commerce-engine.js?v=147');
     return new CommerceEngine({
       store: $('#storeApp'),
       consultations: $('#consultationApp'),
@@ -111,8 +111,8 @@ export function createPageLoader({ config, go } = {}) {
     },
     consultations: async () => {
       await ensureCommerce();
-      const { ConsultationEngine } = await import('./consultation-engine.js?v=143');
-      return new ConsultationEngine($('#consultationApp'));
+      const { ConsultationEngine } = await import('./consultation-engine.js?v=147');
+      return new ConsultationEngine($('#consultationApp'), config);
     },
     subscriptions: async () => {
       await ensureCommerce();

@@ -2,7 +2,7 @@
    Sessão em cookie seguro, owner verificada e MFA; nenhum desbloqueio local. */
 import { store, escapeHTML } from './storage.js';
 import { ADMIN_POLICY, adminModuleById } from './admin-policy.js?v=144';
-import { CONSULTATION_POLICY } from './consultation-policy.js?v=143';
+import { CONSULTATION_POLICY } from './consultation-policy.js?v=147';
 
 const safe=value=>escapeHTML(value??'');
 const count=(key)=>{const value=store.get(key);return Array.isArray(value)?value.length:value&&typeof value==='object'?Object.keys(value).length:0;};
@@ -156,7 +156,7 @@ export class AdminEngine{
   todayContent(){return `<section class="admin-today"><div class="admin-metric-grid">${this.metrics().map(([label,value])=>`<article><small>${safe(label)}</small><strong>${safe(value)}</strong></article>`).join('')}</div><div class="admin-today-grid"><article><p class="eyebrow">AÇÕES RÁPIDAS</p><h4>Abra o que precisa cuidar.</h4><div>${['consultations','finance','ai','notifications'].map(id=>{const module=adminModuleById(id);return `<button type="button" data-admin-module="${id}"><span>${module.sigil}</span>${safe(module.name)}</button>`;}).join('')}</div></article><article><p class="eyebrow">PRIVACIDADE ATIVA</p><h4>O painel enxerga números, não intimidades.</h4><ul><li>Corpo do Diário oculto</li><li>Prompts e respostas da IA ocultos</li><li>Perguntas de consulta ocultas</li><li>Senhas e segredos nunca retornam</li></ul></article></div></section>`;}
 
   consultationsContent(){
-    const requests=store.get('consultation-requests-v143',[]).slice(0,8);
+    const requests=store.get('consultation-requests-v147',store.get('consultation-requests-v143',[])).slice(0,8);
     return `<section class="admin-consultations"><article class="admin-price-editor"><header><div><p class="eyebrow">PREÇOS FUTUROS</p><h4>Tabela de Consultas</h4><span>Pedidos antigos mantêm o price_snapshot original.</span></div><b>ALTERAÇÃO CRÍTICA · EXIGE MFA</b></header><form data-price-form>${CONSULTATION_POLICY.services.map(service=>{const remoteCents=Number(this.overview?.consultationPrices?.[service.id]);const current=Number.isFinite(remoteCents)&&remoteCents>0?remoteCents/100:service.price;return `<label><span>${safe(service.name)}</span><div><small>R$</small><input name="${safe(service.id)}" type="number" min="1" max="5000" step="1" inputmode="decimal" value="${current}" required></div></label>`;}).join('')}<button type="submit">REVISAR NOVOS PREÇOS</button></form><div data-price-confirm></div></article><article class="admin-request-ledger"><header><div><p class="eyebrow">ESTE APARELHO</p><h4>Pedidos preparados</h4></div><strong>${requests.length}</strong></header>${requests.length?`<div class="admin-request-list">${requests.map(item=>`<span><b>${safe(item.price_snapshot?.serviceName||item.serviceId)}</b><small>${money(item.price_snapshot?.price)} · ${safe(item.status)}</small><em>${safe(String(item.createdAt||'').slice(0,10))}</em></span>`).join('')}</div>`:'<p>Nenhum pedido preparado neste aparelho.</p>'}<small>Nome, contato e pergunta não são exibidos nesta visão.</small></article></section>`;
   }
 

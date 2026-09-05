@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — APLICATIVO V146 · ADMIN STAGING ATIVO */
+/* DIVINA BRUXA — APLICATIVO V147 · CONSULTAS STAGING ATIVAS */
 
 import { CONFIG } from './config.js';
 import { installRuntimeV12 } from './runtime-v12.js?v=142';
@@ -9,7 +9,7 @@ import { AuthClient } from './auth-client-v6.js';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
 import { SkinsEngine } from './skins-v6.js?v=142';
-import { createPageLoader } from './page-loader-v1.js?v=146';
+import { createPageLoader } from './page-loader-v1.js?v=147';
 import { createOrbLoadingPortal } from './orb-loading-portal-v1.js?v=137';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 
