@@ -1,0 +1,55 @@
+DIVINA BRUXA — V137
+PORTAL UNIVERSAL DE CARREGAMENTO DA ORBE
+
+INSTALAÇÃO NO GITHUB PELO IPHONE
+
+1. Abra este ZIP no aplicativo Arquivos.
+2. Selecione os 7 arquivos que estão soltos dentro dele.
+3. Envie todos para a raiz do repositório divinabruxa.github.io.
+4. Quando o GitHub perguntar, confirme a substituição destes arquivos:
+   - index.html
+   - app.js
+   - page-loader-v1.js
+   - sw.js
+5. Os outros três arquivos são novos:
+   - orb-loading-portal-v1.js
+   - orb-loading-portal-v1.css
+   - este LEIA-PRIMEIRO
+6. Não crie nenhuma pasta. Todos os arquivos ficam soltos na raiz.
+7. Depois que o GitHub terminar, feche o site completamente e abra de novo.
+
+O QUE NASCE NESTA MACROETAPA
+
+- A sua Orbe aparece durante esperas reais de carregamento.
+- A Orbe do carregamento usa automaticamente a skin ativa.
+- A troca de skin também recebe o portal quando a imagem realmente demora.
+- Entrada e cadastro recebem o mesmo tratamento quando o servidor estiver ativo.
+- Cada mundo possui uma mensagem própria: Tarot Livre, Carta do Dia, Escola,
+  Biblioteca, Tiragens, Diário, Loja, Consultas, Premium, Música, Vídeos e Orbe IA.
+- Carregamentos com menos de 120 milissegundos não mostram nada: sem piscada.
+- O portal não prende o toque e não interrompe a navegação.
+- Vários carregamentos simultâneos são coordenados; a Orbe só sai quando todos acabam.
+- Falhas também fecham o portal corretamente.
+- Há modo de movimento reduzido para acessibilidade.
+- O novo cache V32 deixa os dois arquivos do portal disponíveis offline.
+
+PROTEÇÕES MANTIDAS
+
+- Nenhuma alteração no motor, nos gestos, nas palavras ou na geometria da Orbe principal.
+- Nenhuma alteração no Menu Mágico ou no dock.
+- Nenhuma alteração nas 30 skins nem na lógica de troca aprovada.
+- Nenhuma alteração no visual, nas cartas, nas setas ou na Espiral Livre do Tarot Livre.
+- O Tarot Livre continua usando a V136.1 aprovada.
+
+COMO PERCEBER O RESULTADO
+
+- Uma página já pronta abre imediatamente e não exibe carregador.
+- Em uma conexão lenta, surge um véu cósmico leve com a Orbe atual respirando.
+- Ao trocar a skin, a própria Orbe do portal acompanha a nova realidade.
+- Assim que o conteúdo fica pronto, o véu desaparece em 180 milissegundos.
+
+PRÓXIMA MACROETAPA PLANEJADA
+
+V138 — ESCOLA DO TAROT CELESTIAL
+Uma página editorial premium, visualmente única, com trilhas de aprendizado,
+progresso, aulas e imagens próprias — preservando tudo que já está perfeito.

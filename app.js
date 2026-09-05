@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — APLICATIVO V136.1 · ESPIRAL LIVRE DO TAROT */
+/* DIVINA BRUXA — APLICATIVO V137 · PORTAL UNIVERSAL DE CARREGAMENTO */
 
 import { CONFIG } from './config.js';
 import { installRuntimeV12 } from './runtime-v12.js?v=133';
@@ -9,7 +9,8 @@ import { AuthClient } from './auth-client-v6.js';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
 import { SkinsEngine } from './skins-v6.js?v=133';
-import { createPageLoader } from './page-loader-v1.js?v=1361';
+import { createPageLoader } from './page-loader-v1.js?v=137';
+import { createOrbLoadingPortal } from './orb-loading-portal-v1.js?v=137';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 
 const $ = selector => document.querySelector(selector);
@@ -37,6 +38,7 @@ window.divinaAuth = authClient;
 new SkinsEngine($('#skinsApp'));
 bindMiniOrbs();
 
+const loadingPortal = createOrbLoadingPortal();
 const pageLoader = createPageLoader({ config: CONFIG, go });
 new RealityOrbEngine($('#orbCanvas'), {
   onOpen: () => pageLoader.go('tarot')
@@ -60,7 +62,10 @@ bindSubmit('#userLogin', async event => {
     toast('Informe e-mail e senha.');
     return;
   }
-  const result = await authClient.login(email, password);
+  const result = await loadingPortal.track(
+    () => authClient.login(email, password),
+    { label: 'a sua conta' }
+  );
   toast(result.ok
     ? 'Sessão iniciada com segurança.'
     : result.offline
@@ -83,7 +88,10 @@ bindSubmit('#userRegister', async event => {
     toast('O cadastro será ativado quando o servidor seguro estiver conectado.');
     return;
   }
-  const result = await authClient.register(email, password, name);
+  const result = await loadingPortal.track(
+    () => authClient.register(email, password, name),
+    { label: 'o seu novo universo' }
+  );
   toast(result.ok
     ? 'Conta criada. Verifique seu e-mail.'
     : result.offline
@@ -132,5 +140,6 @@ if ('serviceWorker' in navigator) {
 const skinsHeading = document.querySelector('#skins h2');
 if (skinsHeading) skinsHeading.textContent = 'Trinta formas de sentir o universo.';
 
-document.documentElement.dataset.appShell = 'v136.1';
-window.orbe = { go: pageLoader.go, loadPage: pageLoader.load };
+document.documentElement.dataset.appShell = 'v137';
+window.divinaLoading = loadingPortal;
+window.orbe = { go: pageLoader.go, loadPage: pageLoader.load, loading: loadingPortal };

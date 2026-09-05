@@ -1,8 +1,28 @@
-/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.1 · ESPIRAL LIVRE V136.1
+/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.2 · PORTAL DA ORBE V137
    Cada motor nasce apenas quando seu portal é solicitado. */
 
 const pageTasks = new Map();
 const sharedTasks = new Map();
+const PAGE_LABELS = Object.freeze({
+  tarot: 'o Tarot Livre',
+  daily: 'a Carta do Dia',
+  library: 'a Biblioteca das 78 Cartas',
+  school: 'a Escola do Tarot',
+  spreads: 'as Tiragens',
+  journal: 'o Diário da Orbe',
+  ai: 'a Orbe IA',
+  store: 'a Loja Mística',
+  consultations: 'as Consultas',
+  subscriptions: 'o universo Premium',
+  videos: 'De Frente com o Tarot',
+  music: 'o universo da Música'
+});
+
+let loadingSequence = 0;
+
+function announceLoading(type, detail) {
+  document.dispatchEvent(new CustomEvent(`divina:loading-${type}`, { detail }));
+}
 
 function once(map, key, factory) {
   if (map.has(key)) return map.get(key);
@@ -102,9 +122,15 @@ export function createPageLoader({ config, go } = {}) {
     return once(pageTasks, id, async () => {
       const screen = document.getElementById(id);
       const html = document.documentElement;
+      const loadingId = `page:${id}:${++loadingSequence}`;
       screen?.setAttribute('aria-busy', 'true');
       screen?.setAttribute('data-module-state', 'loading');
       html.dataset.pageLoading = id;
+      announceLoading('start', {
+        id: loadingId,
+        pageId: id,
+        label: PAGE_LABELS[id] || 'o próximo portal'
+      });
       document.dispatchEvent(new CustomEvent('divina:page-loading', { detail: { id } }));
 
       try {
@@ -123,6 +149,7 @@ export function createPageLoader({ config, go } = {}) {
         console.error(`[Divina] falha ao carregar ${id}`, error);
         throw error;
       } finally {
+        announceLoading('end', { id: loadingId, pageId: id });
         screen?.removeAttribute('aria-busy');
         if (html.dataset.pageLoading === id) delete html.dataset.pageLoading;
       }

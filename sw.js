@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V31 · ESPIRAL LIVRE DO TAROT */
-const CACHE='divina-bruxa-v31-espiral-livre';
+/* DIVINA BRUXA — SERVICE WORKER V32 · PORTAL UNIVERSAL DE CARREGAMENTO */
+const CACHE='divina-bruxa-v32-orbe-carregamento';
 
 const REQUIRED=[
   './',
@@ -8,6 +8,8 @@ const REQUIRED=[
   './manifest.webmanifest',
   './app.js',
   './page-loader-v1.js',
+  './orb-loading-portal-v1.js',
+  './orb-loading-portal-v1.css',
   './cosmic-media-v1.js',
   './cosmic-media-v1.css',
   './runtime-v12.js',
