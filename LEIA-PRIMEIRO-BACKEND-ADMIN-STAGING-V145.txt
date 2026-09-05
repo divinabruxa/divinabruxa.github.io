@@ -1,0 +1,49 @@
+DIVINA BRUXA — V145 BACKEND ADMIN STAGING
+
+ESTADO DESTA ENTREGA
+Preparado e validado localmente. Ainda não aplicado nem publicado.
+Produção, DNS, cobrança real, lojas e ORBE_AI_SOL_ENABLED continuam bloqueados.
+
+ALVO AUTORIZADO
+Projeto: divina-bruxa-staging
+Ref: kyphdsamyygavmkzyezr
+Região: sa-east-1
+URL: https://kyphdsamyygavmkzyezr.supabase.co
+
+ARQUIVOS PRINCIPAIS
+1. SUPABASE-ADMIN-STAGING-V145.sql — tabelas, RLS, revogação de grants, histórico imutável e flags bloqueadas.
+2. admin-staging-api-v145.js — função Edge com login owner, MFA/TOTP, recovery codes, sessão, auditoria e preços.
+3. ADMIN-BACKEND-CONTRACT-V145.json — contrato verificável entre painel e servidor.
+
+ORDEM SEGURA DE ATIVAÇÃO (SOMENTE STAGING)
+1. Em Auth, exigir senha mínima de 12 caracteres e proteção contra senhas vazadas; depois criar/confirmar a usuária proprietária com e-mail verificado.
+2. Aplicar SUPABASE-ADMIN-STAGING-V145.sql no SQL Editor do projeto STAGING.
+3. No bloco comentado ao final do SQL, substituir OWNER_UUID pelo UUID real da proprietária e executar apenas os INSERTs.
+4. Criar a Edge Function admin-api usando admin-staging-api-v145.js como index.js.
+5. Definir os segredos da função:
+   ENVIRONMENT=staging
+   ADMIN_ALLOWED_ORIGIN=https://SEU-DOMINIO-STAGING
+   ADMIN_RECOVERY_PEPPER=<valor aleatório longo e exclusivo>
+   SUPABASE_URL, SUPABASE_ANON_KEY e SUPABASE_SERVICE_ROLE_KEY ficam somente na função.
+6. Manter a verificação JWT da função ativada. Não copiar service role, pepper ou tokens para config.js, GitHub ou ZIP público.
+7. Publicar a API atrás do mesmo domínio do site, no prefixo /api, para cookies first-party funcionarem no iPhone/Safari.
+8. Somente depois configurar CONFIG.apiBase='/api' no site STAGING.
+9. Entrar em /admin, cadastrar TOTP, confirmar aal2 e guardar os 10 recovery codes exibidos uma vez.
+10. Rodar os testes de 401, 403, RLS, revogação, CSRF/origin e histórico de preços antes de qualquer homologação.
+
+COMPORTAMENTO DE SEGURANÇA
+- A URL /admin não é o controle de acesso; servidor, owner ativa, e-mail verificado e MFA aal2 são obrigatórios.
+- Usuária comum recebe 403 sem dados administrativos.
+- Cookies são HttpOnly, Secure e SameSite=Strict quando a API está no mesmo domínio.
+- Alteração de preços exige novo código MFA e só cria versões novas.
+- Diário, perguntas, prompts, respostas, contatos, senhas, segredos e tokens não entram no painel nem na auditoria.
+- Recovery codes são armazenados somente como hash com pepper e aparecem em texto apenas na criação.
+
+PREÇOS INICIAIS PRESERVADOS
+Mesa Real Profissional: R$ 250
+Leitura de Mentes: R$ 150
+Carta de Conselho: R$ 100
+Pergunta Direta: R$ 50
+
+IMPORTANTE
+Este ZIP é plano de implantação + código. Sem credenciais conectadas nesta sessão, ele não representa uma implantação concluída.

@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — PAINEL SUPREMO V144
+/* DIVINA BRUXA — PAINEL SUPREMO V145
    Sessão em cookie seguro, owner verificada e MFA; nenhum desbloqueio local. */
 import { store, escapeHTML } from './storage.js';
 import { ADMIN_POLICY, adminModuleById } from './admin-policy.js?v=144';
@@ -17,6 +17,7 @@ export class AdminEngine{
     this.overview=null;
     this.selected='today';
     this.pendingPrices=null;
+    this.mfaFactorId='';
     if(root)this.start();
   }
 
@@ -27,10 +28,13 @@ export class AdminEngine{
     if(!globalThis.divinaAuth?.enabled){this.renderGate('server-required');return;}
     const result=await globalThis.divinaAuth.adminSession();
     if(this.isAuthorized(result?.body)){this.session=result.body;await this.loadOverview();this.renderPanel();return;}
+    if(result?.body?.recoveryCodesRequired){this.renderGate('recovery');return;}
+    if(result?.body?.mfaEnrollmentRequired){await this.beginMfaEnrollment();return;}
+    if(result?.body?.mfaRequired){this.renderGate('mfa');return;}
     this.renderGate('signin');
   }
 
-  isAuthorized(body){return Boolean(body?.ownerVerified===true&&body?.emailVerified===true&&body?.mfaVerified===true&&body?.environment==='staging');}
+  isAuthorized(body){return Boolean(body?.ownerVerified===true&&body?.emailVerified===true&&body?.mfaVerified===true&&body?.recoveryCodesReady===true&&body?.environment==='staging');}
 
   securityMap(){return `<section class="admin-security-map" aria-label="Proteções obrigatórias"><span><b>PROPRIETÁRIA</b>Conta verificada</span><span><b>MFA</b>Obrigatório</span><span><b>SESSÃO</b>Cookie seguro</span><span><b>PRODUÇÃO</b>Bloqueada</span></section>`;}
 
@@ -38,17 +42,23 @@ export class AdminEngine{
 
   renderGate(mode='signin'){
     if(!this.root)return;
-    const checking=mode==='checking',serverRequired=mode==='server-required',mfa=mode==='mfa';
-    this.root.innerHTML=`<div class="admin-v144-gate"><section class="admin-gate-card"><span class="admin-staging-badge">STAGING · OWNER ONLY</span><div class="admin-gate-sigil" aria-hidden="true">♕</div><p class="eyebrow">CENTRAL DA PROPRIETÁRIA</p><h3>${checking?'Verificando sessão segura…':serverRequired?'O painel está protegido.':mfa?'Confirme seu segundo fator.':'Entre na sua Central.'}</h3><p>${serverRequired?'Conecte o backend seguro para liberar o acesso. Não existe senha administrativa dentro dos arquivos públicos do site.':mfa?'Digite o código do seu aplicativo autenticador. Códigos não são salvos neste aparelho.':'O servidor precisa confirmar sua conta proprietária, e-mail verificado e MFA antes de enviar qualquer dado administrativo.'}</p>${checking?'<div class="admin-gate-loading" aria-label="Carregando"></div>':serverRequired?'<aside class="admin-server-note"><b>Bloqueio correto</b><span>A prévia abaixo mostra a estrutura, mas nenhum dado ou controle foi entregue ao navegador.</span></aside>':mfa?this.mfaForm():this.signInForm()}<p class="admin-gate-status" data-admin-gate-status role="status" aria-live="polite"></p></section>${this.securityMap()}${this.modulePreview()}</div>`;
+    const checking=mode==='checking',serverRequired=mode==='server-required',mfa=mode==='mfa',enroll=mode==='enroll',recovery=mode==='recovery';
+    const title=checking?'Verificando sessão segura…':serverRequired?'O painel está protegido.':enroll?'Ative o seu MFA.':mfa?'Confirme seu segundo fator.':recovery?'Guarde seus códigos de recuperação.':'Entre na sua Central.';
+    const copy=serverRequired?'Conecte o backend seguro para liberar o acesso. Não existe senha administrativa dentro dos arquivos públicos do site.':enroll?'Leia o QR Code no aplicativo autenticador e confirme os seis números.':mfa?'Digite o código do seu aplicativo autenticador. Códigos não são salvos neste aparelho.':recovery?'Eles aparecem uma única vez e não entram em logs, arquivos ou diagnósticos.':'O servidor precisa confirmar sua conta proprietária, e-mail verificado e MFA antes de enviar qualquer dado administrativo.';
+    const form=checking?'<div class="admin-gate-loading" aria-label="Carregando"></div>':serverRequired?'<aside class="admin-server-note"><b>Bloqueio correto</b><span>A prévia abaixo mostra a estrutura, mas nenhum dado ou controle foi entregue ao navegador.</span></aside>':enroll?this.mfaEnrollmentForm():mfa?this.mfaForm():recovery?this.recoveryForm():this.signInForm();
+    this.root.innerHTML=`<div class="admin-v144-gate"><section class="admin-gate-card"><span class="admin-staging-badge">STAGING · OWNER ONLY</span><div class="admin-gate-sigil" aria-hidden="true">♕</div><p class="eyebrow">CENTRAL DA PROPRIETÁRIA</p><h3>${title}</h3><p>${copy}</p>${form}<p class="admin-gate-status" data-admin-gate-status role="status" aria-live="polite"></p></section>${this.securityMap()}${this.modulePreview()}</div>`;
     this.bindGate();
   }
 
   signInForm(){return `<form class="admin-auth-form" data-admin-signin novalidate><label><span>E-mail da proprietária</span><input type="email" name="email" autocomplete="username" required></label><label><span>Senha</span><input type="password" name="password" autocomplete="current-password" required minlength="12"></label><button type="submit">CONTINUAR COM SEGURANÇA</button></form>`;}
   mfaForm(){return `<form class="admin-auth-form" data-admin-mfa novalidate><label><span>Código MFA</span><input type="text" name="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required placeholder="000000"></label><button type="submit">VERIFICAR E ABRIR PAINEL</button><button type="button" data-back-signin>VOLTAR</button></form>`;}
+  mfaEnrollmentForm(){return `<form class="admin-auth-form admin-mfa-enrollment" data-admin-mfa novalidate><img data-admin-mfa-qr alt="QR Code para ativar MFA"><label><span>Chave manual</span><output data-admin-mfa-secret>Preparando…</output></label><label><span>Código de confirmação</span><input type="text" name="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required placeholder="000000"></label><button type="submit">ATIVAR MFA</button><button type="button" data-back-signin>VOLTAR</button></form>`;}
+  recoveryForm(){return `<section class="admin-recovery-setup"><button type="button" data-create-recovery>GERAR 10 CÓDIGOS</button><div data-recovery-codes></div></section>`;}
 
   bindGate(){
     this.root.querySelector('[data-admin-signin]')?.addEventListener('submit',event=>this.signIn(event));
     this.root.querySelector('[data-admin-mfa]')?.addEventListener('submit',event=>this.verifyMfa(event));
+    this.root.querySelector('[data-create-recovery]')?.addEventListener('click',event=>this.createRecoveryCodes(event.currentTarget));
     this.root.querySelector('[data-back-signin]')?.addEventListener('click',()=>this.renderGate('signin'));
   }
 
@@ -60,6 +70,7 @@ export class AdminEngine{
     if(!email.includes('@')||password.length<12){this.setGateStatus('Informe um e-mail válido e sua senha completa.',true);return;}
     form.querySelector('button').disabled=true;this.setGateStatus('Confirmando identidade…');
     const result=await globalThis.divinaAuth.adminSignIn(email,password);
+    if(result?.ok&&result.body?.mfaEnrollmentRequired){await this.beginMfaEnrollment();return;}
     if(result?.ok&&result.body?.mfaRequired){this.renderGate('mfa');return;}
     if(result?.ok&&this.isAuthorized(result.body)){this.session=result.body;await this.loadOverview();this.renderPanel();return;}
     this.setGateStatus(result?.status===403?'Esta conta não possui acesso à Central.':'Não foi possível confirmar a proprietária.',true);form.querySelector('button').disabled=false;
@@ -70,9 +81,31 @@ export class AdminEngine{
     const form=event.currentTarget,code=String(form.elements.code.value||'').replace(/\D/g,'');
     if(code.length!==6){this.setGateStatus('Digite os seis números do código MFA.',true);return;}
     form.querySelector('button').disabled=true;this.setGateStatus('Verificando MFA…');
-    const result=await globalThis.divinaAuth.adminVerifyMfa(code);
+    const result=await globalThis.divinaAuth.adminVerifyMfa(code,this.mfaFactorId);
     if(result?.ok&&this.isAuthorized(result.body)){this.session=result.body;await this.loadOverview();this.renderPanel();return;}
+    if(result?.ok&&result.body?.recoveryCodesRequired){this.renderGate('recovery');return;}
     this.setGateStatus('Código inválido ou expirado.',true);form.querySelector('button').disabled=false;
+  }
+
+  async beginMfaEnrollment(){
+    this.renderGate('enroll');this.setGateStatus('Criando fator TOTP…');
+    const result=await globalThis.divinaAuth.adminEnrollMfa();
+    if(!result?.ok){this.setGateStatus('Não foi possível iniciar o MFA.',true);return;}
+    this.mfaFactorId=String(result.body?.factorId||'');
+    const image=this.root.querySelector('[data-admin-mfa-qr]'),secret=this.root.querySelector('[data-admin-mfa-secret]');
+    if(image&&result.body?.qrCode)image.src=result.body.qrCode;
+    if(secret)secret.textContent=String(result.body?.secret||'');
+    this.setGateStatus('Escaneie e confirme o primeiro código.');
+  }
+
+  async createRecoveryCodes(button){
+    button.disabled=true;this.setGateStatus('Gerando códigos no servidor…');
+    const result=await globalThis.divinaAuth.adminCreateRecoveryCodes();
+    if(!result?.ok){button.disabled=false;this.setGateStatus('Não foi possível gerar os códigos.',true);return;}
+    const codes=Array.isArray(result.body?.codes)?result.body.codes:[],zone=this.root.querySelector('[data-recovery-codes]');
+    zone.innerHTML=`<p><b>Copie agora. Esta lista não será exibida novamente.</b></p><ol>${codes.map(code=>`<li><code>${safe(code)}</code></li>`).join('')}</ol><button type="button" data-recovery-confirm>JÁ GUARDEI EM LOCAL SEGURO</button>`;
+    button.remove();zone.querySelector('[data-recovery-confirm]')?.addEventListener('click',async()=>{const session=await globalThis.divinaAuth.adminSession();if(this.isAuthorized(session?.body)){this.session=session.body;await this.loadOverview();this.renderPanel();}});
+    this.setGateStatus('Códigos criados. Eles não serão salvos neste navegador.');
   }
 
   async loadOverview(){const result=await globalThis.divinaAuth.adminOverview();this.overview=result?.ok&&result.body?result.body:{};}
@@ -159,7 +192,7 @@ export class AdminEngine{
     const result=await globalThis.divinaAuth.adminExportDiagnostic();
     if(!result?.ok){this.live('O diagnóstico não pôde ser autorizado.');return;}
     const source=result.body||{};
-    const payload={schema:'divina-bruxa-admin-diagnostic-v144',environment:'staging',generatedAt:new Date().toISOString(),flags:ADMIN_POLICY.flags,privacy:ADMIN_POLICY.privacy,counters:{activeUsers:integer(source.activeUsers),openConsultations:integer(source.openConsultations),auditEvents:integer(source.auditEvents)},modules:ADMIN_POLICY.modules.map(({id,name})=>({id,name}))};
+    const payload={schema:'divina-bruxa-admin-diagnostic-v145',environment:'staging',generatedAt:new Date().toISOString(),flags:ADMIN_POLICY.flags,privacy:ADMIN_POLICY.privacy,counters:{activeUsers:integer(source.activeUsers),openConsultations:integer(source.openConsultations),auditEvents:integer(source.auditEvents)},modules:ADMIN_POLICY.modules.map(({id,name})=>({id,name}))};
     const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),anchor=document.createElement('a');
     anchor.href=URL.createObjectURL(blob);anchor.download=`divina-bruxa-diagnostico-${new Date().toISOString().slice(0,10)}.json`;anchor.click();setTimeout(()=>URL.revokeObjectURL(anchor.href),1000);this.live('Diagnóstico sanitizado exportado.');
   }

@@ -1,8 +1,8 @@
-/* DIVINA BRUXA — CENTRAL DA PROPRIETÁRIA V144
+/* DIVINA BRUXA — CENTRAL DA PROPRIETÁRIA V145
    Contrato owner-only. Nenhuma função administrativa confia em papel salvo no navegador. */
 
 export const ADMIN_POLICY=Object.freeze({
-  schemaVersion:'10.0.0',environment:'staging',route:'/admin',ownerOnly:true,
+  schemaVersion:'10.1.0',environment:'staging',route:'/admin',ownerOnly:true,
   access:Object.freeze({verifiedEmailRequired:true,mfaRequired:true,recoveryCodesRequired:true,secureCookieSession:true,clientSideRoleForbidden:true,stepUpForCriticalActions:true,unauthorizedBehavior:'403-without-admin-data'}),
   flags:Object.freeze({productionPublishAuthorized:false,dnsChangesAuthorized:false,realBillingAuthorized:false,storeSubmissionAuthorized:false,orbeAISolEnabled:false}),
   privacy:Object.freeze({journalBodiesVisible:false,journalQuestionsVisible:false,aiPromptsVisible:false,aiResponsesVisible:false,consultationQuestionsVisible:false,passwordsVisible:false,secretsVisible:false,analyticsSanitized:true}),

@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V39 · PAINEL SUPREMO */
-const CACHE='divina-bruxa-v39-painel-supremo';
+/* DIVINA BRUXA — SERVICE WORKER V40 · BACKEND ADMIN STAGING */
+const CACHE='divina-bruxa-v40-admin-staging';
 
 const REQUIRED=[
   './',
@@ -58,7 +58,7 @@ const WARM=[
   './ai-celestial-v1.css','./orbe-ia-celestial-v1.webp','./ai-engine.js','./ai-policy.js','./ai-credits.js',
   './consultation-engine.js','./consultation-policy.js','./consultas-celestiais-santuario-v1.webp',
   './admin-engine.js','./admin-policy.js','./auth-client-v6.js',
-  './ADMIN-CONTRACT-V144.json',
+  './ADMIN-BACKEND-CONTRACT-V145.json',
   './fallback-shell-v1.css','./pwa-final-v1.css'
 ];
 

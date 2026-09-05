@@ -11,6 +11,7 @@ export class AuthClient {
       return { ok: response.ok, status: response.status, body };
     } catch { return { ok: false, offline: true }; } finally { clearTimeout(timer); }
   }
+  adminRequest(path, options = {}) { return this.request(path, { ...options, headers: { 'x-divina-admin-request': 'v145', ...(options.headers || {}) } }); }
   register(email, password, name = '') { return this.request('/auth/register', { method: 'POST', body: JSON.stringify({ email, password, name }) }); }
   login(email, password) { return this.request('/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) }); }
   logout() { return this.request('/auth/logout', { method: 'POST', body: '{}' }); }
@@ -20,14 +21,16 @@ export class AuthClient {
   skinEntitlements() { return this.request('/account/skins'); }
   premiumEntitlements() { return this.request('/account/entitlements'); }
   restorePurchases() { return this.request('/account/entitlements/restore', { method: 'POST', body: '{}' }); }
-  adminSession() { return this.request('/admin/session'); }
-  adminSignIn(email, password) { return this.request('/admin/session', { method: 'POST', body: JSON.stringify({ email, password }) }); }
-  adminVerifyMfa(code) { return this.request('/admin/session/mfa', { method: 'POST', body: JSON.stringify({ code }) }); }
-  adminSignOut() { return this.request('/admin/session', { method: 'DELETE' }); }
-  adminOverview() { return this.request('/admin/overview'); }
-  adminModule(moduleId) { return this.request(`/admin/modules/${encodeURIComponent(moduleId)}`); }
-  adminUpdateConsultationPrices(prices, stepUpCode) { return this.request('/admin/consultations/prices', { method: 'PATCH', body: JSON.stringify({ prices, stepUpCode }) }); }
-  adminExportDiagnostic() { return this.request('/admin/diagnostic'); }
+  adminSession() { return this.adminRequest('/admin/session'); }
+  adminSignIn(email, password) { return this.adminRequest('/admin/session', { method: 'POST', body: JSON.stringify({ email, password }) }); }
+  adminEnrollMfa() { return this.adminRequest('/admin/session/mfa/enroll', { method: 'POST', body: '{}' }); }
+  adminVerifyMfa(code, factorId = '') { return this.adminRequest('/admin/session/mfa', { method: 'POST', body: JSON.stringify({ code, factorId }) }); }
+  adminCreateRecoveryCodes() { return this.adminRequest('/admin/session/recovery-codes', { method: 'POST', body: '{}' }); }
+  adminSignOut() { return this.adminRequest('/admin/session', { method: 'DELETE' }); }
+  adminOverview() { return this.adminRequest('/admin/overview'); }
+  adminModule(moduleId) { return this.adminRequest(`/admin/modules/${encodeURIComponent(moduleId)}`); }
+  adminUpdateConsultationPrices(prices, stepUpCode) { return this.adminRequest('/admin/consultations/prices', { method: 'PATCH', body: JSON.stringify({ prices, stepUpCode }) }); }
+  adminExportDiagnostic() { return this.adminRequest('/admin/diagnostic'); }
   saveSkinEntitlement(skinId) { return this.request('/account/skins', { method: 'POST', body: JSON.stringify({ skinId }) }); }
   revokeSkinEntitlement(skinId) { return this.request(`/account/skins/${encodeURIComponent(skinId)}`, { method: 'DELETE' }); }
 }
