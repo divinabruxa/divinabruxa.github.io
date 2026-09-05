@@ -1,0 +1,40 @@
+DIVINA BRUXA V149 — MÚSICA + DE FRENTE COM O TAROT
+
+MACROETAPA EDITORIAL COMPLETA
+
+1. MÚSICA & VIBRAÇÃO
+- identidade autoral de Hércules DX;
+- álbuns Sobre as Estrelas e Z;
+- seletor acessível por toque e teclado;
+- somente um player Spotify carregado por vez;
+- link externo seguro para cada álbum;
+- nenhum histórico de escuta armazenado pela Divina Bruxa.
+
+2. DE FRENTE COM O TAROT
+- portal oficial ligado ao canal @divinabruxa33;
+- somente episódios com status publicado são exibidos;
+- rascunhos, URLs inválidas e publicações futuras permanecem ocultos;
+- estado vazio editorial para não inventar episódios;
+- links externos seguros para o YouTube.
+
+3. EXPERIÊNCIA VISUAL
+- arte editorial original do estúdio celestial;
+- enquadramento sonoro na página Música;
+- enquadramento da câmera e mesa na página De Frente;
+- visual obsidiana, violeta e ouro;
+- responsividade para iPhone, Android e desktop;
+- navegação por teclado, foco visível, Reduced Motion e Forced Colors;
+- portais finais conectando Música, Vídeo, Tarot Livre, Escola e Diário.
+
+4. CONTEÚDO CONTROLÁVEL
+- álbuns continuam em config.spotifyAlbums;
+- episódios continuam em config.youtubeVideos;
+- o contrato completo está em MEDIA-CONTENT-CONTRACT-V149.json;
+- o futuro Painel Supremo poderá editar os mesmos campos sem reconstruir a página.
+
+5. ESCOPO PROTEGIDO
+- Home, Orbe e menu preservados;
+- Tarot Livre continua V148, com 78 cartas diretas e sem repetição;
+- Consultas e seus quatro preços preservados;
+- Loja Mística V148 preservada;
+- produção, DNS, cobrança e domínio não alterados.
