@@ -1,0 +1,140 @@
+DIVINA BRUXA — V153
+SEO DAS 78 CARTAS · BIBLIOTECA ESTÁTICA · CRESCIMENTO ORGÂNICO
+
+STATUS: APROVADO PARA INSTALAÇÃO
+DATA: 06/09/2026
+
+============================================================
+O QUE ESTA VERSÃO ENTREGA
+============================================================
+
+1. 78 páginas individuais reconstruídas
+   - Uma página completa para cada carta oficial.
+   - Título e descrição exclusivos.
+   - Imagem WEBP oficial em alta resolução.
+   - Somente posição direta.
+   - Significado, energia, luz, tensão, amor, relacionamentos,
+     carreira, dinheiro, espiritualidade, símbolos, combinações,
+     desafio, conselho, reflexão e ação prática.
+   - Navegação para a carta anterior, próxima carta e cartas
+     relacionadas nas combinações.
+
+2. Novo índice público das 78 cartas
+   - Arquivo: cartas-do-tarot.html
+   - 22 Arcanos Maiores.
+   - 14 cartas de Copas.
+   - 14 cartas de Espadas.
+   - 14 cartas de Paus.
+   - 14 cartas de Ouros.
+   - Carregamento progressivo das imagens para proteger a velocidade.
+
+3. SEO técnico V153
+   - Canonical absoluto na Home, no índice e nas 78 cartas.
+   - Títulos e descrições legíveis, sem cortes no meio de palavras.
+   - Dados estruturados WebSite, Organization, CollectionPage,
+     WebPage, Article, BreadcrumbList, ItemList e ImageObject.
+   - Sitemap renovado com 80 URLs canônicas e 78 imagens.
+   - Breadcrumbs visíveis e links internos entre todas as cartas.
+   - Permissão para prévias grandes das imagens nos buscadores.
+
+4. Visual premium e mobile-first
+   - Roxo profundo e dourado da Divina Bruxa.
+   - Imagem real da carta no lugar do antigo recorte do atlas.
+   - Leitura confortável no celular.
+   - Foco visível, salto para conteúdo e movimento reduzido.
+   - Versão de impressão limpa.
+
+5. Proteções desta entrega
+   - O visual aprovado da Home não foi alterado.
+   - O Tarot Livre continua com 78 imagens, somente diretas,
+     sem significado e sem repetição.
+   - O Guardião do Portal V152 continua intacto.
+   - As quatro consultas e seus preços continuam intactos:
+       Mesa Real Profissional — R$ 250
+       Leitura de Mentes — R$ 150
+       Carta de Conselho — R$ 100
+       Pergunta Direta — R$ 50
+   - Resend e envio automático de e-mail continuam adiados,
+     conforme combinado.
+
+============================================================
+COMO INSTALAR PELO IPHONE
+============================================================
+
+1. Baixe o arquivo:
+   DIVINA-BRUXA-V153-SEO-78-CARTAS.zip
+
+2. Abra o aplicativo Arquivos do iPhone e toque uma vez no ZIP
+   para descompactar.
+
+3. Entre no GitHub e abra o repositório do site na pasta principal,
+   a mesma tela em que aparecem index.html, app.js e sw.js.
+
+4. Toque em Add file > Upload files.
+
+5. Selecione TODOS os 85 arquivos que estão dentro da pasta
+   descompactada.
+
+6. Confirme que os arquivos serão enviados diretamente para a raiz.
+   Não crie nenhuma pasta nova.
+
+7. Use esta mensagem no commit:
+   Instala V153 SEO das 78 cartas
+
+8. Confirme o upload e aguarde a publicação do GitHub Pages.
+
+IMPORTANTE
+- Não envie o arquivo ZIP para dentro do repositório.
+- Não apague os outros arquivos do site.
+- Quando o GitHub avisar que alguns nomes já existem, isso é correto:
+  escolha substituir/atualizar os arquivos.
+- O pacote tem menos de 100 arquivos e foi preparado para um único
+  envio pelo GitHub.
+
+============================================================
+O QUE TESTAR DEPOIS DA PUBLICAÇÃO
+============================================================
+
+1. Home:
+   https://divinabruxa.com.br/
+
+2. Índice das 78 cartas:
+   https://divinabruxa.com.br/cartas-do-tarot.html
+
+3. Exemplos de páginas:
+   https://divinabruxa.com.br/carta-00-o-louco.html
+   https://divinabruxa.com.br/carta-02-a-sacerdotisa.html
+   https://divinabruxa.com.br/carta-as-de-copas.html
+   https://divinabruxa.com.br/carta-rei-de-ouros.html
+
+4. Na Home, abra o Tarot Livre e revele pelo menos três cartas.
+   As imagens devem carregar normalmente e não podem se repetir.
+
+5. Abra Consultas e confira os quatro serviços e preços.
+
+Se o iPhone mostrar a versão antiga, feche a aba, abra novamente e
+toque em atualizar. O Guardião do Portal V152 permanece responsável
+pela recuperação segura do aplicativo principal.
+
+============================================================
+VALIDAÇÃO TÉCNICA CONCLUÍDA
+============================================================
+
+- QA V153: 2.221 verificações aprovadas.
+- QA Guardião do Portal V152: 31/31 aprovado.
+- QA Gate principal: aprovado.
+- 78/78 páginas encontradas.
+- 78/78 títulos exclusivos.
+- 78/78 descrições exclusivas.
+- 78/78 canonicals exclusivos.
+- 78/78 imagens oficiais sem repetição.
+- 80/80 URLs corretas no sitemap.
+- Nenhum link interno de carta quebrado.
+- Nenhuma regressão detectada no Tarot Livre.
+
+Depois que esta versão estiver publicada, a próxima etapa poderá ser
+a conexão do sitemap ao Google Search Console e o acompanhamento da
+indexação. Publicação não garante posição imediata: os buscadores
+precisam rastrear, processar e avaliar cada página.
+
+DIVINA BRUXA · ORBE DAS REALIDADES
