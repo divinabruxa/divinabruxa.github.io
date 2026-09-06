@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "160.0.0",
+  "release": "DIVINA-BRUXA-V160-BIBLIOTECA-ARCANOS",
+  "date": "2026-09-06",
+  "status": "ready-for-manual-install",
+  "purpose": "Transformar a estrutura das 78 cartas em uma biblioteca editorial pública, organizada por Arcanos e Naipes.",
+  "publicPages": [
+    {
+      "file": "arcanos-maiores.html",
+      "type": "CollectionPage",
+      "canonical": "https://divinabruxa.com.br/arcanos-maiores.html",
+      "primaryImage": "card-00.webp",
+      "itemListCount": 22,
+      "role": "major-arcana-hub"
+    },
+    {
+      "file": "arcanos-menores.html",
+      "type": "CollectionPage",
+      "canonical": "https://divinabruxa.com.br/arcanos-menores.html",
+      "primaryImage": "tarot-temple-background-v1.webp",
+      "itemListCount": 4,
+      "representedCards": 56,
+      "role": "minor-arcana-hub"
+    },
+    {
+      "file": "naipe-de-paus.html",
+      "type": "CollectionPage",
+      "canonical": "https://divinabruxa.com.br/naipe-de-paus.html",
+      "primaryImage": "card-36.webp",
+      "itemListCount": 14,
+      "element": "Fogo"
+    },
+    {
+      "file": "naipe-de-copas.html",
+      "type": "CollectionPage",
+      "canonical": "https://divinabruxa.com.br/naipe-de-copas.html",
+      "primaryImage": "card-22.webp",
+      "itemListCount": 14,
+      "element": "Água"
+    },
+    {
+      "file": "naipe-de-espadas.html",
+      "type": "CollectionPage",
+      "canonical": "https://divinabruxa.com.br/naipe-de-espadas.html",
+      "primaryImage": "card-50.webp",
+      "itemListCount": 14,
+      "element": "Ar"
+    },
+    {
+      "file": "naipe-de-ouros.html",
+      "type": "CollectionPage",
+      "canonical": "https://divinabruxa.com.br/naipe-de-ouros.html",
+      "primaryImage": "card-64.webp",
+      "itemListCount": 14,
+      "element": "Terra"
+    }
+  ],
+  "deckArchitecture": {
+    "totalCards": 78,
+    "majorArcana": 22,
+    "minorArcana": 56,
+    "suits": 4,
+    "cardsPerSuit": 14,
+    "numberedCardsPerSuit": 10,
+    "courtCardsPerSuit": 4,
+    "courtRanks": [
+      "Pajem",
+      "Cavaleiro",
+      "Rainha",
+      "Rei"
+    ],
+    "orientation": "upright-only"
+  },
+  "internalLinking": {
+    "beginnerGuideUpdated": true,
+    "beginnerGuideLinksAdded": 6,
+    "majorCardLinks": 22,
+    "minorHubSuitLinks": 4,
+    "suitCardLinks": 56,
+    "allIndividualCardLinksResolve": true,
+    "homeMenuChanged": false,
+    "homeGuideLinks": 14,
+    "homeGuideGroups": 3
+  },
+  "contentQuality": {
+    "language": "pt-BR",
+    "uniqueTitles": true,
+    "uniqueDescriptions": true,
+    "oneH1PerPage": true,
+    "semanticLandmarks": true,
+    "skipLinks": true,
+    "structuredData": true,
+    "collectionPageMarkup": true,
+    "itemListMarkup": true,
+    "visibleResponsibleUseNotes": true,
+    "deterministicPredictions": false,
+    "literalMindReadingClaims": false,
+    "professionalAdviceReplacementClaims": false,
+    "faqRichResultMarkupAdded": false,
+    "socialPreviewImageAdded": false
+  },
+  "discoverability": {
+    "sitemapUrlsBefore": 95,
+    "sitemapUrlsAfter": 101,
+    "sitemapImageEntries": 78,
+    "newSitemapUrls": 6,
+    "crawlableHtmlLinks": true,
+    "canonicalUrls": true,
+    "breadcrumbStructuredData": true
+  },
+  "reuse": {
+    "stylesheet": "seo-portal-v154.css?v=154",
+    "newCssAdded": false,
+    "newJavascriptAddedToPublicPages": false,
+    "newImagesAdded": false,
+    "existingOfficialCardImages": true
+  },
+  "safeguards": {
+    "indexChanged": false,
+    "closedHomeVisualChanged": false,
+    "orbChanged": false,
+    "tarotLivreChanged": false,
+    "tarotLivreCards": 78,
+    "tarotLivreOrientation": "upright-only",
+    "tarotLivreMeaningsInsideFreeMode": false,
+    "tarotLivreRepeats": false,
+    "mesaRealRows": 13,
+    "mesaRealColumns": 6,
+    "consultationsFunctionalCodeChanged": false,
+    "consultationPricesChanged": false,
+    "consultationPricesBrl": [
+      250,
+      150,
+      100,
+      50
+    ],
+    "consultationEmailRequired": true,
+    "billingChanged": false,
+    "realBillingEnabled": false,
+    "resendConfigured": false,
+    "searchConsoleTagRemoved": false,
+    "privateAreaLinked": false,
+    "unconfirmedPersonalNamePublished": false
+  },
+  "integrityBase": {
+    "indexV159Sha256": "bcb4271567fed2c4464a7b5f61c6870d9919c25372fb7f669730541a0ec95701",
+    "sitemapV159Sha256": "dcb6c98f35e5bebb7f833464a4d5d32b4f50cc02cff5ba3a8cbbbbf1a8e6c99c",
+    "beginnerGuideV159Sha256": "4feaccc22bb6b4ec2ab15ef49c96f116f500863c43296ca0451c33a974d7ef9a"
+  },
+  "installation": {
+    "method": "manual-flat-upload-github",
+    "filesInPackage": 12,
+    "replace": [
+      "sitemap.xml",
+      "tarot-para-iniciantes.html"
+    ],
+    "add": [
+      "arcanos-maiores.html",
+      "arcanos-menores.html",
+      "naipe-de-paus.html",
+      "naipe-de-copas.html",
+      "naipe-de-espadas.html",
+      "naipe-de-ouros.html",
+      "00-LEIA-PRIMEIRO-V160-BIBLIOTECA-ARCANOS.txt",
+      "BIBLIOTECA-ARCANOS-V160.json",
+      "QA-V160-BIBLIOTECA-ARCANOS.mjs",
+      "ARQUIVOS-V160-SHA256.txt"
+    ],
+    "deleteOtherFiles": false,
+    "commitMessage": "Instala V160 biblioteca de Arcanos e Naipes"
+  }
+}

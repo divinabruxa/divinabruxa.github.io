@@ -1,0 +1,82 @@
+DIVINA BRUXA · V160 · BIBLIOTECA DE ARCANOS E NAIPES
+============================================================
+
+O QUE ESTA VERSÃO FAZ
+
+1. Cria seis páginas públicas, completas e indexáveis:
+   - Arcanos Maiores: jornada e links para as 22 cartas
+   - Arcanos Menores: estrutura das 56 cartas
+   - Naipe de Paus: Fogo e as 14 cartas
+   - Naipe de Copas: Água e as 14 cartas
+   - Naipe de Espadas: Ar e as 14 cartas
+   - Naipe de Ouros: Terra e as 14 cartas
+2. Conecta cada página de naipe às 14 cartas individuais já publicadas.
+3. Conecta Arcanos Maiores às 22 cartas, do Louco ao Mundo.
+4. Atualiza o guia Tarot para iniciantes com os seis novos caminhos.
+5. Atualiza o sitemap de 95 para 101 páginas, mantendo 78 imagens de cartas.
+6. Mantém a Home e o Menu Mágico exatamente como estavam na V159.
+7. Reutiliza o visual e as imagens oficiais existentes.
+
+O QUE FOI PRESERVADO
+
+- Home fechada mostrando somente a Orbe.
+- Orbe, Menu Mágico, dock, skins e transições existentes.
+- Tarot Livre com 78 cartas diretas, sem repetição e sem significados.
+- Mesa Real com 13 fileiras de 6 cartas.
+- Carta do Dia, Tiragens, Escola e biblioteca das 78 cartas.
+- Consultas e valores atuais:
+  - Mesa Real Profissional: R$ 250
+  - Leitura de Mentes: R$ 150
+  - Carta de Conselho: R$ 100
+  - Pergunta Direta: R$ 50
+- E-mail obrigatório no pedido de Consulta.
+- E-mail oficial: orbedasrealidades@hotmail.com.
+- Metatag oficial do Google Search Console.
+- Billing continua sem cobrança real automática.
+- Resend continua adiado e não configurado.
+- Nenhuma imagem de compartilhamento social foi adicionada.
+- Nenhum nome pessoal não confirmado foi publicado.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+
+1. Abra a raiz do repositório divinabruxa.github.io.
+2. Toque em Add file > Upload files.
+3. Envie TODOS os 12 arquivos deste ZIP, soltos e sem criar pasta.
+4. Confirme a substituição de:
+   - sitemap.xml
+   - tarot-para-iniciantes.html
+5. Use a mensagem de commit:
+   Instala V160 biblioteca de Arcanos e Naipes
+6. Aguarde a publicação do GitHub Pages.
+7. Não apague nenhum outro arquivo do repositório.
+
+ARQUIVOS DESTA ENTREGA
+
+- sitemap.xml                                      SUBSTITUIR
+- tarot-para-iniciantes.html                       SUBSTITUIR
+- arcanos-maiores.html                             NOVO
+- arcanos-menores.html                             NOVO
+- naipe-de-paus.html                               NOVO
+- naipe-de-copas.html                              NOVO
+- naipe-de-espadas.html                            NOVO
+- naipe-de-ouros.html                              NOVO
+- 00-LEIA-PRIMEIRO-V160-BIBLIOTECA-ARCANOS.txt     NOVO
+- BIBLIOTECA-ARCANOS-V160.json                     NOVO
+- QA-V160-BIBLIOTECA-ARCANOS.mjs                   NOVO
+- ARQUIVOS-V160-SHA256.txt                         NOVO
+
+DEPENDÊNCIAS JÁ INSTALADAS
+
+As novas páginas reutilizam seo-portal-v154.css, ícones, a Orbe e imagens de
+cartas que já estão na raiz do site. Não renomeie nem apague arquivos antigos.
+
+IMPORTANTE
+
+- Todas as interpretações são apresentadas em posição direta.
+- As sínteses são entradas de estudo, não previsões deterministas.
+- As páginas não afirmam ler pensamentos nem comprovar fatos sobre terceiros.
+- Questões médicas, psicológicas, jurídicas e financeiras continuam direcionadas
+  para informação confiável e orientação profissional qualificada.
+- Não remova a metatag google-site-verification da Home.
+- Não é necessário reenviar o sitemap ao Google; o endereço continua o mesmo.
+- Depois de instalar, responda apenas: Instalado

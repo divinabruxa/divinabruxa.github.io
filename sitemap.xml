@@ -103,6 +103,42 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://divinabruxa.com.br/arcanos-maiores.html</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://divinabruxa.com.br/arcanos-menores.html</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://divinabruxa.com.br/naipe-de-paus.html</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://divinabruxa.com.br/naipe-de-copas.html</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://divinabruxa.com.br/naipe-de-espadas.html</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://divinabruxa.com.br/naipe-de-ouros.html</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://divinabruxa.com.br/carta-00-o-louco.html</loc>
     <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
