@@ -1,8 +1,8 @@
-/* DIVINA BRUXA — RUNTIME V12.4 · BASE IMORTAL V151 */
+/* DIVINA BRUXA — RUNTIME V12.4 · BASE IMORTAL V151.2 */
 import { applySkinContract, preloadSkinAsset, preparedSkinImage, readStoredSkin } from './skin-universal-v10.js?v=133';
 import { createPortalTransition } from './portal-transition-v10.js?v=130';
 import { SKIN_REGISTRY_V12, skinByIdV12 } from './skin-registry-v12.js?v=133';
-import { ownedSkinIds } from './premium-entitlements-v142.js?v=142';
+import { ownedSkinIds } from './premium-entitlements-v142.js?v=1512';
 
 const ACTIVE_SKIN_KEY = 'divina.skin.v10';
 let portal = null;

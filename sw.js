@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V46 · BASE IMORTAL V151 */
-const CACHE='divina-bruxa-v46-base-imortal-v151';
+/* DIVINA BRUXA — SERVICE WORKER V47 · BASE IMORTAL V151.2 */
+const CACHE='divina-bruxa-v47-base-imortal-v1512';
 
 const REQUIRED=[
   './',

@@ -1,0 +1,34 @@
+DIVINA BRUXA — V151.2 — CORREÇÃO COMPLETA DOS MÓDULOS
+
+O QUE FOI CORRIGIDO
+- A V151.1 publicou o arquivo que faltava.
+- O teste real encontrou uma versão antiga e incompatível do catálogo de skins.
+- Esta versão envia o catálogo correto e renova toda a cadeia de carregamento.
+- A numeração nova impede que o iPhone ou o PWA reutilizem os módulos antigos do cache.
+- O Service Worker avança para o cache V47.
+
+COMO INSTALAR PELO CELULAR
+1. Extraia este ZIP.
+2. Abra o repositório divinabruxa.github.io no GitHub.
+3. Use Adicionar arquivo / Upload files.
+4. Envie TODOS os arquivos soltos diretamente na raiz do repositório.
+5. Confirme em Commit changes.
+6. Aguarde de 1 a 5 minutos.
+7. Abra https://divinabruxa.com.br/ em uma aba privada para o primeiro teste.
+
+IMPORTANTE
+- Não apague outros arquivos do GitHub.
+- Não crie uma pasta para estes arquivos.
+- Esta correção preserva o Tarot Livre, as Consultas, os preços e as Notificações.
+
+ARQUIVOS DE EXECUÇÃO
+- index.html
+- app.js
+- runtime-v12.js
+- premium-entitlements-v142.js
+- skin-catalog-v6.js
+- sw.js
+
+ARQUIVOS DE APOIO
+- este guia
+- QA-V151-2-CORRECAO-MODULOS.mjs

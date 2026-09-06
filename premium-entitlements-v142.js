@@ -1,8 +1,8 @@
-/* DIVINA BRUXA — ENTITLEMENTS PREMIUM V142
+/* DIVINA BRUXA — ENTITLEMENTS PREMIUM V142 · COMPATIBILIDADE V151.2
    O estado local é somente sandbox; produção depende do servidor e de webhooks assinados. */
 
 import { store } from './storage.js';
-import { SKINS_V6, skinCatalogById, skinPackById } from './skin-catalog-v6.js?v=142';
+import { SKINS_V6, skinCatalogById, skinPackById } from './skin-catalog-v6.js?v=1512';
 
 export const PREMIUM_STATE_KEY='premium-entitlements-v142';
 const LEGACY_KEY='billing-sandbox-v5';

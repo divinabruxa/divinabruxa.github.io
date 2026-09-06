@@ -1,7 +1,7 @@
-/* DIVINA BRUXA — APLICATIVO V151 · BASE IMORTAL */
+/* DIVINA BRUXA — APLICATIVO V151.2 · BASE IMORTAL */
 
 import { CONFIG } from './config.js';
-import { installRuntimeV12 } from './runtime-v12.js?v=151';
+import { installRuntimeV12 } from './runtime-v12.js?v=1512';
 import { createNavigation } from './navigation.js?v=151';
 import { RealityOrbEngine } from './orb-engine-v68.js?v=100';
 import { bindMiniOrbs } from './mini-orb-engine.js?v=71';
@@ -143,7 +143,7 @@ if (installButton) {
 
 if ('serviceWorker' in navigator) {
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=151')
+    navigator.serviceWorker.register('./sw.js?v=1512')
       .then(() => console.info('[Divina] PWA registrado'))
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   });
@@ -152,6 +152,6 @@ if ('serviceWorker' in navigator) {
 const skinsHeading = document.querySelector('#skins h2');
 if (skinsHeading) skinsHeading.textContent = 'Trinta formas de sentir o universo.';
 
-document.documentElement.dataset.appShell = 'v151';
+document.documentElement.dataset.appShell = 'v1512';
 window.divinaLoading = loadingPortal;
 window.orbe = { go: pageLoader.go, loadPage: pageLoader.load, loading: loadingPortal };
