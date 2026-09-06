@@ -1,0 +1,20 @@
+DIVINA BRUXA — V151.1 — CORREÇÃO DA TELA BRANCA
+
+CAUSA CONFIRMADA
+O arquivo premium-entitlements-v142.js não foi publicado no GitHub.
+Sem ele, o módulo principal do site não consegue iniciar.
+
+COMO INSTALAR PELO CELULAR
+1. Abra este ZIP e extraia os arquivos.
+2. No GitHub, entre no repositório divinabruxa.github.io.
+3. Toque em Adicionar arquivo / Upload files.
+4. Envie os 2 arquivos diretamente na raiz do repositório (sem pasta).
+5. Confirme em Commit changes.
+6. Aguarde de 1 a 5 minutos e abra https://divinabruxa.com.br/ em uma aba privada.
+
+ARQUIVOS
+- premium-entitlements-v142.js — módulo obrigatório que faltou.
+- este guia.
+
+Esta correção não apaga nem substitui o Tarot Livre, Consultas ou Notificações.
+Ela apenas completa a V151 já instalada.
