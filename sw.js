@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V47 · BASE IMORTAL V151.2 */
-const CACHE='divina-bruxa-v47-base-imortal-v1512';
+/* DIVINA BRUXA — SERVICE WORKER V48 · GUARDIÃO DO PORTAL V152 */
+const CACHE='divina-bruxa-v48-guardiao-v152';
 
 const REQUIRED=[
   './',
@@ -49,6 +49,30 @@ const REQUIRED=[
   './icon-maskable-512.png'
 ];
 
+const CORE=[
+  './',
+  './index.html',
+  './offline.html',
+  './manifest.webmanifest',
+  './app.js',
+  './app.css',
+  './runtime-v12.js',
+  './navigation.js',
+  './page-loader-v1.js',
+  './orb-loading-portal-v1.js',
+  './orb-loading-portal-v1.css',
+  './config.js',
+  './orb-engine-v68.js',
+  './mini-orb-engine.js',
+  './auth-client-v6.js',
+  './visual-guard-v6.js',
+  './tarot-experience-v6.js',
+  './skin-universal-v10.js',
+  './skin-registry-v12.js',
+  './portal-transition-v10.js',
+  './cosmic-media-v1.js'
+];
+
 const WARM=[
   './app.css','./motion.css','./update-04.css','./update-05.css','./update-06.css','./update-08.css','./update-09.css','./update-11.css',
   './visual-v68.css','./COSMIC-DESIGN-SYSTEM-V10.css',
@@ -69,10 +93,21 @@ const WARM=[
   './fallback-shell-v1.css','./pwa-final-v1.css'
 ];
 
+const cacheAsset=async(cache,asset)=>{
+  const request=new Request(new URL(asset,self.registration.scope),{cache:'reload'});
+  const response=await fetch(request);
+  if(!response.ok||response.headers.get('content-length')==='0')throw new Error(`Invalid asset: ${asset}`);
+  await cache.put(request,response);
+  return asset;
+};
+
 self.addEventListener('install',event=>event.waitUntil((async()=>{
   const cache=await caches.open(CACHE);
-  await cache.addAll(REQUIRED);
-  await Promise.allSettled(WARM.map(asset=>cache.add(asset)));
+  const coreResults=await Promise.allSettled(CORE.map(asset=>cacheAsset(cache,asset)));
+  const coreFailures=coreResults.filter(result=>result.status==='rejected');
+  if(coreFailures.length)throw new Error(`Core cache incomplete: ${coreFailures.length}`);
+  const optional=[...new Set([...REQUIRED,...WARM])].filter(asset=>!CORE.includes(asset));
+  await Promise.allSettled(optional.map(asset=>cacheAsset(cache,asset)));
   await self.skipWaiting();
 })()));
 

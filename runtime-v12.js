@@ -1,8 +1,7 @@
-/* DIVINA BRUXA — RUNTIME V12.4 · BASE IMORTAL V151.2 */
+/* DIVINA BRUXA — RUNTIME V12.5 · GUARDIÃO DO PORTAL V152 */
 import { applySkinContract, preloadSkinAsset, preparedSkinImage, readStoredSkin } from './skin-universal-v10.js?v=133';
 import { createPortalTransition } from './portal-transition-v10.js?v=130';
 import { SKIN_REGISTRY_V12, skinByIdV12 } from './skin-registry-v12.js?v=133';
-import { ownedSkinIds } from './premium-entitlements-v142.js?v=1512';
 
 const ACTIVE_SKIN_KEY = 'divina.skin.v10';
 let portal = null;
@@ -222,8 +221,10 @@ export function installRuntimeV12() {
   markOrbSurfaces();
   installPortalLayer();
 
+  // O runtime restaura apenas a aparência já escolhida. A validação de acesso
+  // continua no SkinsEngine, carregado somente quando esse portal é aberto.
   const requested = readStoredSkin(localStorage, ACTIVE_SKIN_KEY) || 'classic';
-  const stored = ownedSkinIds().has(requested) ? requested : 'classic';
+  const stored = skinByIdV12(requested).id === requested ? requested : 'classic';
   if (stored !== requested) rememberSkin('classic');
   activateSkinFluidV12(stored, { persist: false }).then(applied => {
     if (!applied && skinByIdV12(stored).id !== 'classic') {
@@ -233,6 +234,6 @@ export function installRuntimeV12() {
 
   document.documentElement.dataset.runtime = 'v12';
   document.dispatchEvent(new CustomEvent('divina:runtime-ready', {
-    detail: { version: '12.4.0', skins: SKIN_REGISTRY_V12.skins.length, realms: Object.keys(PAGE_REALMS).length }
+    detail: { version: '12.5.0', skins: SKIN_REGISTRY_V12.skins.length, realms: Object.keys(PAGE_REALMS).length }
   }));
 }

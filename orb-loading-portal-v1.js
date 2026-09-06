@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — PORTAL UNIVERSAL DE CARREGAMENTO V1.1 · BASE IMORTAL V151
+/* DIVINA BRUXA — PORTAL UNIVERSAL DE CARREGAMENTO V1.2 · GUARDIÃO V152
    A Orbe nasce no HTML, guarda cada espera real e nunca aprisiona a navegação. */
 
 const START_EVENT = 'divina:loading-start';
@@ -6,7 +6,7 @@ const END_EVENT = 'divina:loading-end';
 const DEFAULT_SHOW_DELAY = 120;
 const EXIT_DURATION = 180;
 const RECOVERY_DELAY = 4800;
-const BOOT_REQUEST_ID = 'boot:v151';
+const BOOT_REQUEST_ID = 'boot:v152';
 
 let requestSequence = 0;
 
@@ -266,4 +266,5 @@ export function createOrbLoadingPortal({ root = document, showDelay = DEFAULT_SH
   });
 }
 
-export const ORB_BOOT_REQUEST_V151 = BOOT_REQUEST_ID;
+export const ORB_BOOT_REQUEST_V152 = BOOT_REQUEST_ID;
+export const ORB_BOOT_REQUEST_V151 = ORB_BOOT_REQUEST_V152;

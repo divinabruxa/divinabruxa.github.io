@@ -1,16 +1,15 @@
-/* DIVINA BRUXA — APLICATIVO V151.2 · BASE IMORTAL */
+/* DIVINA BRUXA — APLICATIVO V152 · GUARDIÃO DO PORTAL */
 
 import { CONFIG } from './config.js';
-import { installRuntimeV12 } from './runtime-v12.js?v=1512';
+import { installRuntimeV12 } from './runtime-v12.js?v=152';
 import { createNavigation } from './navigation.js?v=151';
 import { RealityOrbEngine } from './orb-engine-v68.js?v=100';
 import { bindMiniOrbs } from './mini-orb-engine.js?v=71';
 import { AuthClient } from './auth-client-v6.js?v=151';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { SkinsEngine } from './skins-v6.js?v=142';
-import { createPageLoader } from './page-loader-v1.js?v=151';
-import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V151 } from './orb-loading-portal-v1.js?v=151';
+import { createPageLoader } from './page-loader-v1.js?v=152';
+import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 
 const $ = selector => document.querySelector(selector);
@@ -35,12 +34,11 @@ addEventListener('orbe:toast', event => toast(event.detail));
 
 const authClient = new AuthClient(CONFIG);
 window.divinaAuth = authClient;
-new SkinsEngine($('#skinsApp'));
 bindMiniOrbs();
 
 const loadingPortal = createOrbLoadingPortal();
 const pageLoader = createPageLoader({ config: CONFIG, go });
-queueMicrotask(() => loadingPortal.end(ORB_BOOT_REQUEST_V151));
+queueMicrotask(() => loadingPortal.end(ORB_BOOT_REQUEST_V152));
 new RealityOrbEngine($('#orbCanvas'), {
   onOpen: () => pageLoader.go('tarot')
 });
@@ -141,9 +139,9 @@ if (installButton) {
   };
 }
 
-if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=1512')
+    navigator.serviceWorker.register('./sw.js?v=152')
       .then(() => console.info('[Divina] PWA registrado'))
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   });
@@ -152,6 +150,7 @@ if ('serviceWorker' in navigator) {
 const skinsHeading = document.querySelector('#skins h2');
 if (skinsHeading) skinsHeading.textContent = 'Trinta formas de sentir o universo.';
 
-document.documentElement.dataset.appShell = 'v1512';
+document.documentElement.dataset.appShell = 'v152';
+dispatchEvent(new CustomEvent('divina:boot-ready', { detail: { shell: 'v152' } }));
 window.divinaLoading = loadingPortal;
 window.orbe = { go: pageLoader.go, loadPage: pageLoader.load, loading: loadingPortal };

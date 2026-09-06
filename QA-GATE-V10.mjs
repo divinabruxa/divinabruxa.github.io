@@ -14,9 +14,17 @@ results.push({
   check: 'index:canonical-entrypoint',
   status: index.includes('app.js') ? 'PASS' : 'FAIL'
 });
+const tarotFiles = ['tarot-core-contract-v9.js', 'tarot-data.js', 'daily-policy.js', 'spreads-policy.js'];
+const tarotSource = tarotFiles
+  .filter(file => fs.existsSync(path.join(root, file)))
+  .map(file => fs.readFileSync(path.join(root, file), 'utf8'))
+  .join('\n');
+const enablesReversedCards = /\breversed\s*:\s*true\b|\borientation\s*:\s*['"](?:reversed|invertida)['"]/i.test(tarotSource);
+const declaresDirectOnly = /orientation\s*:\s*['"]normal['"]/.test(tarotSource)
+  && /reversedAllowed\s*:\s*false|reversed\s*:\s*false/.test(tarotSource);
 results.push({
   check: 'invariant:no-reversed-cards',
-  status: /revers|invertid/i.test(index) ? 'BLOCKED' : 'PASS'
+  status: !enablesReversedCards && declaresDirectOnly ? 'PASS' : 'BLOCKED'
 });
 const status = results.some(r => r.status === 'FAIL') ? 'FAIL'
   : results.some(r => r.status === 'BLOCKED') ? 'BLOCKED' : 'PASS';

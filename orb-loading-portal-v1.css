@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — PORTAL UNIVERSAL DE CARREGAMENTO V1.1 · BASE IMORTAL V151 */
+/* DIVINA BRUXA — PORTAL UNIVERSAL DE CARREGAMENTO V1.2 · GUARDIÃO V152 */
 
 .db-orb-loader {
   position: fixed;
@@ -32,6 +32,22 @@
 
 .db-orb-loader.is-recovery {
   pointer-events: auto;
+}
+
+.db-orb-loader.is-boot-error {
+  background:
+    radial-gradient(circle at 50% 44%, rgba(128, 45, 174, .38), transparent 44%),
+    rgba(4, 1, 9, .92);
+}
+
+.db-orb-loader.is-boot-error .db-orb-loader__orbit {
+  border-color: rgba(255, 218, 132, .88);
+  box-shadow: 0 0 34px rgba(188, 84, 238, .28);
+}
+
+.db-orb-loader.is-refreshing .db-orb-loader__recovery {
+  opacity: .56;
+  cursor: wait;
 }
 
 .db-orb-loader__altar {

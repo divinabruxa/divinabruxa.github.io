@@ -1,0 +1,57 @@
+DIVINA BRUXA V152 — GUARDIÃO DO PORTAL
+========================================
+
+OBJETIVO DESTA VERSÃO
+---------------------
+A V152 protege a abertura do site contra versões antigas presas no navegador
+e contra falhas em portais opcionais. Home, Tarot Livre e Consultas não ficam
+mais dependentes dos módulos de Skins ou Premium para iniciar.
+
+O QUE FOI PROTEGIDO
+-------------------
+1. O Guardião detecta falha na inicialização e oferece “ATUALIZAR O PORTAL”.
+2. O Service Worker é atualizado mesmo quando o aplicativo principal falha.
+3. Uma nova versão do Service Worker assume o controle e recarrega uma única vez.
+4. O cache essencial é validado arquivo por arquivo antes de ser ativado.
+5. Arquivos opcionais com problema não impedem a atualização do site.
+6. Skins e Premium passam a carregar somente quando seus portais são abertos.
+7. O Tarot Livre continua com 78 cartas, somente posição direta e sem repetição.
+8. Consultas continuam com os valores R$ 250, R$ 150, R$ 100 e R$ 50.
+
+COMO INSTALAR PELO CELULAR NO GITHUB
+------------------------------------
+1. Extraia este ZIP.
+2. Entre no repositório divinabruxa/divinabruxa.github.io.
+3. Toque em Add file > Upload files.
+4. Selecione TODOS os arquivos extraídos deste pacote.
+5. Confirme a substituição dos arquivos com o mesmo nome.
+6. Faça o commit diretamente na branch main.
+7. Aguarde alguns minutos e abra https://divinabruxa.com.br/.
+
+IMPORTANTE
+----------
+- Envie os arquivos para a raiz do repositório, sem criar uma pasta V152.
+- Não apague nenhum outro arquivo do site.
+- Não envie o próprio ZIP para o repositório.
+- Se aparecer “ATUALIZAR O PORTAL”, toque no botão uma vez e aguarde.
+- No iPhone instalado na Tela de Início, feche o app e abra novamente após o commit.
+
+VALIDAÇÃO CONCLUÍDA
+-------------------
+- QA V152: 31/31 verificações aprovadas.
+- 17 páginas principais preservadas.
+- Grafo completo de 55 módulos compatível.
+- 78 imagens WEBP das cartas válidas.
+- 21 arquivos essenciais definidos para proteção offline.
+- Gates de release, evolução, desempenho, mobile e acessibilidade aprovados.
+
+FORA DESTA ENTREGA
+------------------
+O envio automático de e-mail das Consultas pelo Resend continua adiado, conforme
+decidido. Pagamentos reais e ativação de produção também não são ligados por esta
+versão; o ambiente comercial permanece STAGING/SANDBOX.
+
+ROLLBACK
+--------
+Se for necessário voltar, use o histórico do GitHub para restaurar os arquivos
+substituídos pelo commit anterior (V151.2).

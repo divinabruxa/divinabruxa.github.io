@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.14 · BASE IMORTAL V151
-   Cada motor nasce sob demanda; portais essenciais podem aquecer sem renderizar. */
+/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.15 · GUARDIÃO DO PORTAL V152
+   Cada motor nasce sob demanda; um portal opcional jamais bloqueia o site inteiro. */
 
 const pageTasks = new Map();
 const sharedTasks = new Map();
@@ -120,6 +120,10 @@ export function createPageLoader({ config, go } = {}) {
       await ensureCommerce();
       const { PremiumEngine } = await import('./premium-engine.js?v=142');
       return new PremiumEngine($('#subscriptionApp'));
+    },
+    skins: async () => {
+      const { SkinsEngine } = await import('./skins-v6.js?v=142');
+      return new SkinsEngine($('#skinsApp'));
     },
     videos: ensureMedia,
     music: ensureMedia,
