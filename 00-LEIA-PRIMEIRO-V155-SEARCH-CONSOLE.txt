@@ -1,0 +1,118 @@
+DIVINA BRUXA — V155
+VERIFICAÇÃO OFICIAL DO GOOGLE SEARCH CONSOLE
+
+STATUS: APROVADO PARA INSTALAÇÃO
+DATA: 06/09/2026
+
+============================================================
+O QUE ESTA VERSÃO FAZ
+============================================================
+
+1. A propriedade abaixo já foi criada no Google Search Console:
+
+   https://divinabruxa.com.br/
+
+   Tipo: Prefixo do URL
+
+2. O Google forneceu uma metatag exclusiva e oficial.
+   A V155 coloca essa tag dentro do <head> da Home.
+
+3. Depois da instalação, o Google poderá confirmar que a conta
+   conectada ao Search Console controla o site.
+
+4. A metatag deverá permanecer na Home mesmo depois da verificação.
+   Não apague essa tag em versões futuras.
+
+============================================================
+PROTEÇÕES DESTA ENTREGA
+============================================================
+
+- A única alteração dentro do index.html é a metatag do Google.
+- Nenhuma palavra visível foi alterada.
+- O visual da Home não foi alterado.
+- A Orbe e o menu não foram alterados.
+- O Guardião do Portal V152 continua intacto.
+- O Tarot Livre continua com 78 cartas diretas, sem repetição e
+  sem significado durante a revelação.
+- As Consultas e os quatro preços não foram alterados.
+- O sitemap V154 com 85 URLs e 78 imagens permanece intacto.
+- Nenhuma imagem social provisória foi adicionada.
+- Nenhuma cobrança ou configuração de e-mail foi ativada.
+
+============================================================
+COMO INSTALAR PELO IPHONE
+============================================================
+
+1. Baixe o arquivo:
+   DIVINA-BRUXA-V155-SEARCH-CONSOLE.zip
+
+2. Abra o aplicativo Arquivos e toque uma vez no ZIP para
+   descompactar.
+
+3. No GitHub, abra o repositório do site na pasta principal.
+
+4. Toque em Add file > Upload files.
+
+5. Selecione TODOS os 5 arquivos que estão dentro da pasta
+   descompactada.
+
+6. Envie os arquivos diretamente para a raiz, ao lado do app.js.
+   Não crie nenhuma pasta nova.
+
+7. Quando o GitHub avisar que index.html já existe, escolha
+   substituir/atualizar o arquivo.
+
+8. Use esta mensagem no commit:
+   Instala V155 Google Search Console
+
+9. Confirme o upload e aguarde a publicação do GitHub Pages.
+
+IMPORTANTE
+- Não envie o ZIP para dentro do repositório.
+- Não apague outros arquivos.
+- Não renomeie o index.html.
+- Não remova a metatag do Google depois da verificação.
+
+============================================================
+OS 5 ARQUIVOS DO PACOTE
+============================================================
+
+1. 00-LEIA-PRIMEIRO-V155-SEARCH-CONSOLE.txt
+2. ARQUIVOS-V155-SHA256.txt
+3. QA-V155-SEARCH-CONSOLE.mjs
+4. SEARCH-CONSOLE-V155.json
+5. index.html
+
+============================================================
+O QUE ACONTECE DEPOIS
+============================================================
+
+Quando terminar o upload, volte ao ChatGPT e escreva:
+
+   Instalado
+
+O Search Console ficou aberto na etapa de verificação.
+
+Depois que a Home publicada for conferida, será possível:
+
+1. Tocar em Verificar no Google Search Console.
+2. Confirmar a propriedade oficialmente.
+3. Enviar o sitemap.xml já publicado.
+4. Solicitar indexação primeiro das sete páginas principais.
+
+Não faça a verificação antes de instalar, pois a metatag ainda não
+estará disponível no endereço público.
+
+============================================================
+VALIDAÇÃO TÉCNICA
+============================================================
+
+- A tag é exatamente a fornecida pelo Google.
+- A tag aparece uma única vez dentro do <head>.
+- Removendo somente a tag, o index.html volta ao hash exato da V154.
+- Nenhuma alteração visual foi introduzida.
+- QA V155 aprovado.
+- QA Guardião do Portal V152 será executado antes da entrega.
+- QA principal será executado antes da entrega.
+
+DIVINA BRUXA · ORBE DAS REALIDADES

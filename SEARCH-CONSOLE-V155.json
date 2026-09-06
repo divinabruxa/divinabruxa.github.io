@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "155.0.0",
+  "releaseDate": "2026-09-06",
+  "property": "https://divinabruxa.com.br/",
+  "propertyType": "url-prefix",
+  "status": "prepared-awaiting-github-installation",
+  "verification": {
+    "method": "html-tag",
+    "metaTag": "<meta name=\"google-site-verification\" content=\"VJjhRxQ18euRcUn_hPcAtTNi5Dj-qX3kjr7-xzvAT8k\">",
+    "source": "Google Search Console authenticated property dialog",
+    "mustRemainAfterVerification": true
+  },
+  "postInstallation": {
+    "verifyInSearchConsole": true,
+    "submitSitemap": "sitemap.xml",
+    "priorityUrls": [
+      "https://divinabruxa.com.br/",
+      "https://divinabruxa.com.br/cartas-do-tarot.html",
+      "https://divinabruxa.com.br/tarot-livre.html",
+      "https://divinabruxa.com.br/carta-do-dia.html",
+      "https://divinabruxa.com.br/tiragens-de-tarot.html",
+      "https://divinabruxa.com.br/escola-do-tarot.html",
+      "https://divinabruxa.com.br/consultas-de-tarot.html"
+    ]
+  },
+  "safeguards": {
+    "visualChanged": false,
+    "applicationChanged": false,
+    "tarotLivreChanged": false,
+    "consultationsChanged": false,
+    "billingChanged": false,
+    "socialPreviewImageAdded": false
+  }
+}
