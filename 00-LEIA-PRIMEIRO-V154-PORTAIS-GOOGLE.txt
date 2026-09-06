@@ -1,0 +1,258 @@
+DIVINA BRUXA — V154
+PORTAIS PÚBLICOS PARA GOOGLE · CINCO NOVAS PÁGINAS · 85 URLS
+
+STATUS: APROVADO PARA INSTALAÇÃO
+DATA: 06/09/2026
+
+============================================================
+O QUE ESTA VERSÃO ENTREGA
+============================================================
+
+1. Cinco páginas públicas novas
+
+   tarot-livre.html
+   - Explica a experiência gratuita com as 78 cartas.
+   - Somente posição direta.
+   - Nenhuma repetição durante a mesa.
+   - Mesa Real com 13 fileiras de 6.
+   - Sem significados automáticos durante a revelação.
+   - Botão abre a função real do Tarot Livre no site.
+
+   carta-do-dia.html
+   - Ritual diário com uma das 78 cartas.
+   - Sempre em posição direta.
+   - Respeita a data de Brasília.
+   - A mesma carta permanece neste aparelho durante o dia.
+   - Botão abre a função real Carta do Dia.
+
+   tiragens-de-tarot.html
+   - Catálogo completo com os 15 métodos reais do site.
+   - De Uma Carta até a Mesa Real de 78 posições.
+   - Mesa Personalizada de 1 a 12 posições.
+   - Cartas diretas e sem repetição dentro da tiragem.
+   - Botão abre o Templo das Tiragens real.
+
+   escola-do-tarot.html
+   - Programa completo com os 17 módulos reais da Escola.
+   - Fundamentos, 78 cartas, naipes, símbolos, combinações,
+     síntese, tiragens, Cruz Celta, Mesa Real e ética.
+   - Explica corretamente que o progresso fica neste aparelho.
+   - Botão abre a Escola do Tarot real.
+
+   consultas-de-tarot.html
+   - Página completa e transparente das quatro consultas:
+       Mesa Real Profissional — R$ 250
+       Leitura de Mentes — R$ 150
+       Carta de Conselho — R$ 100
+       Pergunta Direta — R$ 50
+   - Explica que o atendimento é humano.
+   - Explica que o e-mail da cliente é obrigatório.
+   - Explica que a solicitação não cobra automaticamente.
+   - “Leitura de Mentes” é definida como leitura simbólica da
+     dinâmica e não como leitura literal de pensamentos.
+
+2. Uma arquitetura que o Google pode encontrar
+
+   Antes, essas cinco áreas existiam principalmente em endereços
+   com # dentro da Home. Agora cada uma também possui um endereço
+   público, único, legível e com canonical próprio.
+
+   As cinco páginas estão ligadas entre si, à biblioteca das 78
+   cartas e ao aplicativo real. A biblioteca cartas-do-tarot.html
+   também foi conectada a todos os novos portais.
+
+3. SEO técnico V154
+
+   - Cinco títulos exclusivos.
+   - Cinco descrições exclusivas.
+   - Cinco canonicals absolutos.
+   - Breadcrumbs visíveis e estruturados.
+   - Dados estruturados WebSite, Organization, WebPage,
+     BreadcrumbList, WebApplication, ItemList, Course e Service.
+   - Sitemap com 85 URLs canônicas:
+       1 Home
+       1 índice das cartas
+       5 portais públicos
+       78 páginas individuais de cartas
+   - Sitemap mantém as 78 imagens oficiais das cartas.
+   - Nenhuma rota com # foi colocada no sitemap.
+   - Nenhuma imagem social provisória foi inventada.
+
+4. Visual premium, rápido e resistente
+
+   - Novo estilo compartilhado seo-portal-v154.css.
+   - Roxo profundo e dourado da Divina Bruxa.
+   - Artes cósmicas já existentes no próprio site.
+   - Páginas estáticas: não dependem do motor do aplicativo para
+     exibir seu conteúdo e, por isso, reduzem o risco de tela branca.
+   - Layout mobile-first para iPhone e telas maiores.
+   - Foco visível, salto para conteúdo e movimento reduzido.
+   - Nenhuma fonte ou biblioteca externa bloqueante.
+
+5. Proteções desta entrega
+
+   - A Home aprovada não foi alterada.
+   - A Orbe e o menu não foram alterados.
+   - O Guardião do Portal V152 não foi alterado.
+   - As 78 páginas de cartas da V153 não foram alteradas.
+   - As 78 imagens oficiais não foram duplicadas no ZIP.
+   - O Tarot Livre continua direto, sem significado e sem repetição.
+   - Os preços das consultas não foram alterados.
+   - A cobrança real continua desligada.
+   - O Resend e o e-mail automático continuam adiados, como combinado.
+
+============================================================
+COMO INSTALAR PELO IPHONE
+============================================================
+
+1. Baixe o arquivo:
+   DIVINA-BRUXA-V154-PORTAIS-PUBLICOS-GOOGLE.zip
+
+2. Abra o aplicativo Arquivos do iPhone e toque uma vez no ZIP
+   para descompactar.
+
+3. Entre no GitHub e abra o repositório do site na pasta principal,
+   a mesma tela em que aparecem index.html, app.js e sw.js.
+
+4. Toque em Add file > Upload files.
+
+5. Selecione TODOS os 12 arquivos que estão dentro da pasta
+   descompactada.
+
+6. Confirme que os arquivos serão enviados diretamente para a raiz.
+   Não crie nenhuma pasta nova.
+
+7. Use esta mensagem no commit:
+   Instala V154 portais públicos para Google
+
+8. Confirme o upload e aguarde a publicação do GitHub Pages.
+
+IMPORTANTE
+- Não envie o arquivo ZIP para dentro do repositório.
+- Não apague os outros arquivos do site.
+- Quando o GitHub avisar que alguns nomes já existem, isso é correto:
+  escolha substituir/atualizar os arquivos.
+- Os arquivos novos devem ficar ao lado do index.html.
+
+============================================================
+OS 12 ARQUIVOS DO PACOTE
+============================================================
+
+1.  00-LEIA-PRIMEIRO-V154-PORTAIS-GOOGLE.txt
+2.  ARQUIVOS-V154-SHA256.txt
+3.  QA-V154-PORTAIS-GOOGLE.mjs
+4.  SEO-INDEXACAO-V154.json
+5.  seo-portal-v154.css
+6.  tarot-livre.html
+7.  carta-do-dia.html
+8.  tiragens-de-tarot.html
+9.  escola-do-tarot.html
+10. consultas-de-tarot.html
+11. cartas-do-tarot.html
+12. sitemap.xml
+
+============================================================
+O QUE TESTAR DEPOIS DA PUBLICAÇÃO
+============================================================
+
+1. Tarot Livre público:
+   https://divinabruxa.com.br/tarot-livre.html
+
+2. Carta do Dia pública:
+   https://divinabruxa.com.br/carta-do-dia.html
+
+3. Tiragens públicas:
+   https://divinabruxa.com.br/tiragens-de-tarot.html
+
+4. Escola pública:
+   https://divinabruxa.com.br/escola-do-tarot.html
+
+5. Consultas públicas:
+   https://divinabruxa.com.br/consultas-de-tarot.html
+
+6. Biblioteca das 78 cartas:
+   https://divinabruxa.com.br/cartas-do-tarot.html
+
+7. Em tarot-livre.html, toque em “Abrir o Tarot Livre agora”.
+   Revele pelo menos três cartas e confirme que todas carregam e
+   nenhuma se repete.
+
+8. Em consultas-de-tarot.html, toque em “Solicitar uma consulta”
+   e confirme os quatro serviços, preços e campo de e-mail.
+
+Se o iPhone mostrar uma versão antiga, feche a aba, abra novamente
+e toque em atualizar. As páginas novas são estáticas; o Guardião
+V152 continua protegendo o aplicativo principal.
+
+============================================================
+PRÓXIMO PASSO: GOOGLE SEARCH CONSOLE
+============================================================
+
+ESTA V154 PREPARA O SITE, MAS AINDA NÃO FAZ A VERIFICAÇÃO.
+
+Não foi colocado nenhum código falso ou provisório. O Google cria
+um arquivo ou uma meta tag exclusiva para a proprietária do site.
+
+Depois que a V154 estiver publicada:
+
+1. Abra:
+   https://search.google.com/search-console/
+
+2. Adicione uma propriedade do tipo “Prefixo do URL” usando
+   exatamente:
+   https://divinabruxa.com.br/
+
+3. Escolha um destes métodos:
+
+   A) Arquivo HTML — recomendado para o seu modo de instalação
+      - Baixe o arquivo googleXXXXXXXX.html fornecido pelo Google.
+      - Envie o arquivo sem alterar o nome ou o conteúdo para a raiz
+        do repositório, ao lado do index.html.
+
+   B) Tag HTML
+      - Copie exatamente a meta tag fornecida pelo Google.
+      - Ela deverá ser colocada no <head> da Home.
+
+4. Volte ao Search Console e toque em “Verificar”.
+
+5. Depois da verificação, abra Sitemaps e envie:
+   sitemap.xml
+
+6. Use a Inspeção de URL para solicitar indexação primeiro destas
+   sete páginas:
+   https://divinabruxa.com.br/
+   https://divinabruxa.com.br/cartas-do-tarot.html
+   https://divinabruxa.com.br/tarot-livre.html
+   https://divinabruxa.com.br/carta-do-dia.html
+   https://divinabruxa.com.br/tiragens-de-tarot.html
+   https://divinabruxa.com.br/escola-do-tarot.html
+   https://divinabruxa.com.br/consultas-de-tarot.html
+
+Não compartilhe senha. Para a próxima pequena versão, basta trazer
+o arquivo HTML de verificação ou a meta tag exata do Google.
+
+IMPORTANTE: um sitemap ajuda o Google a descobrir as páginas, mas
+não garante indexação imediata nem uma posição específica. O Google
+ainda precisa rastrear, processar e avaliar o conteúdo.
+
+============================================================
+VALIDAÇÃO TÉCNICA CONCLUÍDA
+============================================================
+
+- QA V154: 194 verificações aprovadas no projeto completo.
+- QA das 78 cartas V153: 2.143 verificações aprovadas.
+- As 79 peças imutáveis da V153 foram comparadas sem alteração:
+  78 páginas individuais e card-page.css.
+- QA Guardião do Portal V152: 31/31 aprovado.
+- QA Gate principal: aprovado.
+- Cinco portais públicos com conteúdo substancial.
+- Cinco títulos, descrições e canonicals exclusivos.
+- 15/15 tiragens oficiais publicadas.
+- 17/17 módulos oficiais publicados.
+- 4/4 consultas e preços corretos.
+- 85/85 URLs canônicas no sitemap.
+- 78/78 imagens oficiais mantidas no sitemap.
+- Nenhum código falso do Search Console.
+- Nenhuma regressão detectada no Tarot Livre ou nas Consultas.
+
+DIVINA BRUXA · ORBE DAS REALIDADES

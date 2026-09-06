@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "154.0.0",
+  "releaseDate": "2026-09-06",
+  "canonicalOrigin": "https://divinabruxa.com.br/",
+  "indexableUrls": 85,
+  "publicPortals": [
+    {
+      "file": "tarot-livre.html",
+      "canonical": "https://divinabruxa.com.br/tarot-livre.html",
+      "applicationRoute": "https://divinabruxa.com.br/#tarot"
+    },
+    {
+      "file": "carta-do-dia.html",
+      "canonical": "https://divinabruxa.com.br/carta-do-dia.html",
+      "applicationRoute": "https://divinabruxa.com.br/#daily"
+    },
+    {
+      "file": "tiragens-de-tarot.html",
+      "canonical": "https://divinabruxa.com.br/tiragens-de-tarot.html",
+      "applicationRoute": "https://divinabruxa.com.br/#spreads"
+    },
+    {
+      "file": "escola-do-tarot.html",
+      "canonical": "https://divinabruxa.com.br/escola-do-tarot.html",
+      "applicationRoute": "https://divinabruxa.com.br/#school"
+    },
+    {
+      "file": "consultas-de-tarot.html",
+      "canonical": "https://divinabruxa.com.br/consultas-de-tarot.html",
+      "applicationRoute": "https://divinabruxa.com.br/#consultations"
+    }
+  ],
+  "tarotCardPages": 78,
+  "sitemap": "https://divinabruxa.com.br/sitemap.xml",
+  "imageEntries": 78,
+  "searchConsole": {
+    "status": "awaiting-owner-verification-token",
+    "verificationTokenIncluded": false,
+    "reason": "A verificação exige o arquivo HTML ou a meta tag exata fornecida à proprietária pelo Google Search Console. Nenhum valor provisório foi inventado.",
+    "recommendedProperty": "https://divinabruxa.com.br/"
+  },
+  "excludedPrivateApplicationAreas": [
+    "admin",
+    "conta",
+    "login",
+    "checkout",
+    "orbe-ia",
+    "diario"
+  ],
+  "safeguards": {
+    "homeVisualChanged": false,
+    "tarotLivreContractChanged": false,
+    "consultationPricesChanged": false,
+    "automaticEmailEnabled": false,
+    "realBillingEnabled": false,
+    "socialPreviewImageAdded": false
+  }
+}
