@@ -1,0 +1,164 @@
+{
+  "schemaVersion": "159.0.0",
+  "release": "DIVINA-BRUXA-V159-JORNADA-INICIANTES",
+  "date": "2026-09-06",
+  "status": "ready-for-manual-install",
+  "purpose": "Criar uma jornada editorial pública, rastreável e responsável para pessoas que estão começando no Tarot.",
+  "publicPages": [
+    {
+      "file": "guias-para-comecar.html",
+      "type": "CollectionPage",
+      "canonical": "https://divinabruxa.com.br/guias-para-comecar.html",
+      "primaryImage": "escola-tarot-observatorio-v1.webp",
+      "role": "learning-hub",
+      "topics": [
+        "escolha da experiência",
+        "estrutura das 78 cartas",
+        "jornada em cinco passos",
+        "prática responsável"
+      ]
+    },
+    {
+      "file": "tarot-para-iniciantes.html",
+      "type": "Article",
+      "canonical": "https://divinabruxa.com.br/tarot-para-iniciantes.html",
+      "primaryImage": "tarot-temple-background-v1.webp",
+      "role": "foundational-guide",
+      "topics": [
+        "22 Arcanos Maiores",
+        "56 Arcanos Menores",
+        "quatro naipes",
+        "dezesseis figuras da corte",
+        "leitura direta",
+        "prática de uma carta"
+      ]
+    },
+    {
+      "file": "como-fazer-perguntas-ao-tarot.html",
+      "type": "Article",
+      "canonical": "https://divinabruxa.com.br/como-fazer-perguntas-ao-tarot.html",
+      "primaryImage": "consultas-celestiais-santuario-v1.webp",
+      "role": "question-framing-guide",
+      "topics": [
+        "perguntas abertas",
+        "clareza e contexto",
+        "autonomia",
+        "reformulações por tema",
+        "limites responsáveis"
+      ]
+    }
+  ],
+  "learningArchitecture": {
+    "entryPoint": "guias-para-comecar.html",
+    "recommendedSequence": [
+      "escolher a experiência",
+      "conhecer a estrutura do baralho",
+      "observar uma carta",
+      "formular uma pergunta útil",
+      "praticar e registrar"
+    ],
+    "deckStructure": {
+      "totalCards": 78,
+      "majorArcana": 22,
+      "minorArcana": 56,
+      "suits": [
+        "Paus",
+        "Copas",
+        "Espadas",
+        "Ouros"
+      ],
+      "courtCards": 16,
+      "orientation": "upright-only"
+    },
+    "agencyCentered": true,
+    "deterministicPredictions": false,
+    "thirdPartyMindReadingClaims": false,
+    "professionalAdviceReplacementClaims": false
+  },
+  "contentQuality": {
+    "language": "pt-BR",
+    "beginnerFriendly": true,
+    "visibleExamples": true,
+    "visibleResponsibleUseNotes": true,
+    "visibleLearningSequence": true,
+    "uniqueTitles": true,
+    "uniqueDescriptions": true,
+    "oneH1PerPage": true,
+    "semanticLandmarks": true,
+    "skipLinks": true,
+    "structuredData": true,
+    "faqRichResultMarkupAdded": false,
+    "socialPreviewImageAdded": false
+  },
+  "discoverability": {
+    "homeGuideLinksBefore": 13,
+    "homeGuideLinksAfter": 14,
+    "homeGuideGroupsBefore": 2,
+    "homeGuideGroupsAfter": 3,
+    "homeNewLinks": [
+      "guias-para-comecar.html"
+    ],
+    "sitemapUrlsBefore": 92,
+    "sitemapUrlsAfter": 95,
+    "sitemapImageEntries": 78,
+    "crawlableHtmlLinks": true,
+    "canonicalUrls": true,
+    "breadcrumbStructuredData": true,
+    "articleStructuredData": true
+  },
+  "reuse": {
+    "stylesheet": "seo-portal-v154.css?v=154",
+    "newCssAdded": false,
+    "newJavascriptAddedToPublicPages": false,
+    "newImagesAdded": false,
+    "existingAssetsOnly": true
+  },
+  "safeguards": {
+    "closedHomeVisualChanged": false,
+    "orbChanged": false,
+    "tarotLivreChanged": false,
+    "tarotLivreCards": 78,
+    "tarotLivreOrientation": "upright-only",
+    "tarotLivreMeaningsInsideFreeMode": false,
+    "tarotLivreRepeats": false,
+    "mesaRealRows": 13,
+    "mesaRealColumns": 6,
+    "consultationsFunctionalCodeChanged": false,
+    "consultationPricesChanged": false,
+    "consultationPricesBrl": [
+      250,
+      150,
+      100,
+      50
+    ],
+    "billingChanged": false,
+    "realBillingEnabled": false,
+    "resendConfigured": false,
+    "searchConsoleTagRemoved": false,
+    "privateAreaLinkedFromGuideMenu": false,
+    "unconfirmedPersonalNamePublished": false
+  },
+  "integrityBase": {
+    "indexV158Sha256": "8700ba91f31b92b528041013e1b62352d232d8375e10ce444a6429b083914a22",
+    "sitemapV158Sha256": "0d942e918bd060167c3d2a391039bc95b05ac23e4ba1f0060bb90db9e045ce6d"
+  },
+  "installation": {
+    "method": "manual-flat-upload-github",
+    "filesInPackage": 9,
+    "replace": [
+      "index.html",
+      "sitemap.xml"
+    ],
+    "add": [
+      "guias-para-comecar.html",
+      "tarot-para-iniciantes.html",
+      "como-fazer-perguntas-ao-tarot.html",
+      "00-LEIA-PRIMEIRO-V159-JORNADA-INICIANTES.txt",
+      "JORNADA-INICIANTES-V159.json",
+      "QA-V159-JORNADA-INICIANTES.mjs",
+      "ARQUIVOS-V159-SHA256.txt"
+    ],
+    "deleteOtherFiles": false,
+    "commitMessage": "Instala V159 jornada para iniciantes"
+  }
+}

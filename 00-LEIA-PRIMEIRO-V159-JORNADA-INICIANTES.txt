@@ -1,0 +1,77 @@
+DIVINA BRUXA · V159 · JORNADA PARA INICIANTES
+============================================================
+
+O QUE ESTA VERSÃO FAZ
+
+1. Cria uma entrada clara para quem está chegando ao universo do Tarot:
+   - Guias para começar
+2. Publica dois guias completos e indexáveis:
+   - Tarot para iniciantes: estrutura das 78 cartas e primeira prática
+   - Como fazer perguntas ao Tarot: método, exemplos e limites
+3. Organiza uma jornada em cinco passos:
+   - conhecer a estrutura;
+   - observar antes de interpretar;
+   - formular uma pergunta útil;
+   - começar com uma carta;
+   - registrar e revisar.
+4. Acrescenta somente o hub ao Menu Mágico, evitando sobrecarregar a Home.
+5. Atualiza o sitemap de 92 para 95 páginas e mantém 78 imagens de cartas.
+6. Reutiliza o visual público existente, sem novo CSS, JavaScript ou imagem.
+
+O QUE FOI PRESERVADO
+
+- Home fechada mostrando somente a Orbe.
+- Orbe, Menu Mágico, dock, skins e transições existentes.
+- Tarot Livre com 78 cartas diretas, sem repetição e sem significados.
+- Mesa Real com 13 fileiras de 6 cartas.
+- Carta do Dia, Tiragens, Escola e biblioteca das 78 cartas.
+- Consultas e valores atuais:
+  - Mesa Real Profissional: R$ 250
+  - Leitura de Mentes: R$ 150
+  - Carta de Conselho: R$ 100
+  - Pergunta Direta: R$ 50
+- E-mail obrigatório no pedido de Consulta.
+- E-mail oficial: orbedasrealidades@hotmail.com.
+- Metatag oficial do Google Search Console.
+- Billing continua sem cobrança real automática.
+- Resend continua adiado e não configurado.
+- Nenhuma imagem de compartilhamento social foi adicionada.
+- Nenhum nome pessoal não confirmado foi publicado.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+
+1. Abra a raiz do repositório divinabruxa.github.io.
+2. Toque em Add file > Upload files.
+3. Envie TODOS os 9 arquivos deste ZIP, soltos e sem criar pasta.
+4. Confirme a substituição de index.html e sitemap.xml.
+5. Use a mensagem de commit:
+   Instala V159 jornada para iniciantes
+6. Aguarde a publicação do GitHub Pages.
+7. Não apague nenhum outro arquivo do repositório.
+
+ARQUIVOS DESTA ENTREGA
+
+- index.html                                      SUBSTITUIR
+- sitemap.xml                                    SUBSTITUIR
+- guias-para-comecar.html                        NOVO
+- tarot-para-iniciantes.html                     NOVO
+- como-fazer-perguntas-ao-tarot.html             NOVO
+- 00-LEIA-PRIMEIRO-V159-JORNADA-INICIANTES.txt   NOVO
+- JORNADA-INICIANTES-V159.json                    NOVO
+- QA-V159-JORNADA-INICIANTES.mjs                  NOVO
+- ARQUIVOS-V159-SHA256.txt                        NOVO
+
+DEPENDÊNCIAS JÁ INSTALADAS
+
+As três novas páginas reutilizam o CSS, os ícones e as imagens que já estão na
+raiz do site. Não renomeie nem apague arquivos antigos ao instalar esta versão.
+
+IMPORTANTE
+
+- O Tarot é apresentado como linguagem simbólica para reflexão e estudo.
+- Os guias não prometem prever um destino inevitável nem ler a mente de terceiros.
+- Questões médicas, psicológicas, jurídicas e financeiras continuam direcionadas
+  para orientação profissional qualificada.
+- Não remova a metatag google-site-verification da Home.
+- Não é necessário reenviar o sitemap ao Google; o endereço continua o mesmo.
+- Depois de instalar, responda apenas: Instalado
