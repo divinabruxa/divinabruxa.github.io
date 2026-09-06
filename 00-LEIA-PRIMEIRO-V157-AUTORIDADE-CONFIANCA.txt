@@ -1,0 +1,66 @@
+DIVINA BRUXA · V157 · AUTORIDADE, CONFIANÇA E TRANSPARÊNCIA
+================================================================
+
+O QUE ESTA VERSÃO FAZ
+
+1. Cria quatro páginas públicas, úteis e indexáveis:
+   - Sobre a Divina Bruxa
+   - Metodologia do Tarot
+   - Ética e responsabilidade
+   - Contato oficial
+2. Explica com clareza o propósito, o método e os limites responsáveis do projeto.
+3. Publica o e-mail oficial orbedasrealidades@hotmail.com em uma página própria.
+4. Conecta as quatro páginas entre si, aos seis portais de Tarot e à Home.
+5. Amplia o Menu Mágico de 6 para 10 links HTML rastreáveis.
+6. Atualiza o sitemap de 85 para 89 páginas, mantendo as 78 imagens das cartas.
+
+O QUE FOI PRESERVADO
+
+- Home fechada mostrando somente a Orbe.
+- Orbe, Menu Mágico, dock e transições existentes.
+- Tarot Livre com 78 cartas diretas, sem repetição e sem significados.
+- Mesa Real 13 × 6.
+- Carta do Dia, Tiragens, Escola e biblioteca das 78 cartas.
+- Consultas e valores atuais: R$ 250, R$ 150, R$ 100 e R$ 50.
+- Metatag oficial do Google Search Console.
+- Billing continua sem cobrança real automática.
+- Nenhuma imagem de compartilhamento social foi adicionada.
+- Nenhum nome pessoal ou biografia não confirmada foi inventado.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+
+1. Abra a raiz do repositório divinabruxa.github.io.
+2. Toque em Add file > Upload files.
+3. Envie TODOS os 10 arquivos deste ZIP, soltos e sem criar pasta.
+4. Confirme a substituição de index.html e sitemap.xml quando o GitHub solicitar.
+5. Use a mensagem de commit:
+   Instala V157 autoridade e confianca
+6. Aguarde a publicação do GitHub Pages.
+7. Não apague nenhum outro arquivo do repositório.
+
+ARQUIVOS DESTA ENTREGA
+
+- index.html                                      SUBSTITUIR
+- sitemap.xml                                    SUBSTITUIR
+- sobre-a-divina-bruxa.html                      NOVO
+- metodologia-do-tarot.html                      NOVO
+- etica-e-responsabilidade.html                  NOVO
+- contato.html                                   NOVO
+- 00-LEIA-PRIMEIRO-V157-AUTORIDADE-CONFIANCA.txt NOVO
+- SEO-AUTORIDADE-V157.json                       NOVO
+- QA-V157-AUTORIDADE-CONFIANCA.mjs               NOVO
+- ARQUIVOS-V157-SHA256.txt                       NOVO
+
+DEPENDÊNCIAS JÁ INSTALADAS
+
+As novas páginas reutilizam o CSS, os ícones e as imagens que já estão na raiz do
+site. Não renomeie nem apague arquivos antigos ao instalar esta versão.
+
+IMPORTANTE
+
+- Não remova a metatag google-site-verification da Home.
+- O e-mail da página Contato abre o aplicativo de e-mail; ele não envia sozinho.
+- A automação de e-mails das Consultas continuará para uma etapa posterior.
+- Não é necessário repetir as solicitações de indexação já realizadas.
+- Depois de instalar, responda apenas: Instalado
+

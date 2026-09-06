@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "157.0.0",
+  "releaseDate": "2026-09-06",
+  "canonicalOrigin": "https://divinabruxa.com.br/",
+  "objective": "Criar um núcleo público de autoridade, transparência e confiança que explique quem é a Divina Bruxa, como o Tarot é interpretado, quais limites orientam o projeto e qual é o canal oficial de contato.",
+  "trustCluster": {
+    "pages": [
+      {
+        "file": "sobre-a-divina-bruxa.html",
+        "canonical": "https://divinabruxa.com.br/sobre-a-divina-bruxa.html",
+        "schemaType": "AboutPage",
+        "purpose": "Apresentar propósito, experiências e princípios do projeto sem inventar uma biografia pessoal."
+      },
+      {
+        "file": "metodologia-do-tarot.html",
+        "canonical": "https://divinabruxa.com.br/metodologia-do-tarot.html",
+        "schemaType": "WebPage",
+        "purpose": "Explicar cartas diretas, luz e tensão, contexto, posições, combinações e síntese."
+      },
+      {
+        "file": "etica-e-responsabilidade.html",
+        "canonical": "https://divinabruxa.com.br/etica-e-responsabilidade.html",
+        "schemaType": "WebPage",
+        "purpose": "Declarar autonomia, consentimento, privacidade, linguagem não determinista e limites profissionais."
+      },
+      {
+        "file": "contato.html",
+        "canonical": "https://divinabruxa.com.br/contato.html",
+        "schemaType": "ContactPage",
+        "purpose": "Publicar o canal oficial de e-mail e orientar um contato seguro."
+      }
+    ],
+    "crossLinked": true,
+    "linkedFromHome": true,
+    "linkedToPublicPortals": true
+  },
+  "methodology": {
+    "deckSize": 78,
+    "orientation": "upright-only",
+    "reversalsUsed": false,
+    "repetitionInTarotLivre": false,
+    "meaningShownDuringTarotLivreReveal": false,
+    "interpretiveLayers": [
+      "symbol",
+      "position",
+      "question",
+      "context",
+      "combinations",
+      "light-and-tension",
+      "synthesis"
+    ]
+  },
+  "responsiblePractice": {
+    "tarotPositioning": "symbolic reflection and self-knowledge",
+    "deterministicClaims": false,
+    "literalMindReadingClaims": false,
+    "medicalAdvice": false,
+    "psychologicalDiagnosis": false,
+    "legalAdvice": false,
+    "financialAdvice": false,
+    "emergencyService": false,
+    "autonomyPreserved": true
+  },
+  "officialContact": {
+    "email": "orbedasrealidades@hotmail.com",
+    "publicContactPage": "https://divinabruxa.com.br/contato.html",
+    "transport": "mailto",
+    "automaticSendingEnabled": false,
+    "consultationEmailAutomationDeferred": true
+  },
+  "discoverability": {
+    "homeGuideLinksBefore": 6,
+    "homeGuideLinksAfter": 10,
+    "sitemapUrlsBefore": 85,
+    "sitemapUrlsAfter": 89,
+    "sitemapImageEntries": 78,
+    "crawlableHtmlLinks": true,
+    "uniqueTitles": true,
+    "uniqueDescriptions": true,
+    "canonicalUrls": true,
+    "structuredData": true
+  },
+  "safeguards": {
+    "closedHomeVisualChanged": false,
+    "orbChanged": false,
+    "tarotLivreChanged": false,
+    "consultationsChanged": false,
+    "consultationPricesChanged": false,
+    "billingChanged": false,
+    "searchConsoleTagRemoved": false,
+    "socialPreviewImageAdded": false,
+    "unconfirmedPersonalBiographyAdded": false
+  }
+}
+
