@@ -1,0 +1,51 @@
+DIVINA BRUXA — V151 · BASE IMORTAL
+==================================
+
+O QUE ESTA VERSÃO RESOLVE
+-------------------------
+1. A Orbe aparece antes do restante do aplicativo, inclusive em abertura direta de páginas.
+2. Nenhuma espera deve parecer uma tela branca ou preta vazia.
+3. Se a conexão demorar mais que o normal, aparece “MOSTRAR A PÁGINA AGORA”.
+4. Tarot Livre, Consultas, Carta do Dia e Notificações aquecem silenciosamente quando a rede permite.
+5. O PWA rejeita respostas vazias e preserva a última cópia íntegra disponível.
+6. O Service Worker não grava arquivos com tamanho zero no cache.
+7. Atalhos de Notificações funcionam também quando abertos por uma notificação do sistema.
+8. O manifesto passa a usar ícones próprios de 192 px, 512 px e versões maskable.
+9. A V150 das Notificações Celestiais está incorporada neste pacote.
+10. Tarot Livre, 78 cartas, preços das Consultas e visual aprovado foram preservados.
+
+ESTE PACOTE SUBSTITUI A V150
+----------------------------
+Você pode instalar a V151 diretamente mesmo que ainda não tenha instalado a V150.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+-----------------------------------
+1. Abra o repositório divinabruxa/divinabruxa.github.io.
+2. Entre na área principal onde está o arquivo index.html.
+3. Toque em Add file e depois Upload files.
+4. Envie TODOS os arquivos soltos deste ZIP.
+5. Quando o GitHub perguntar, confirme a substituição dos arquivos com o mesmo nome.
+6. Não crie uma pasta e não apague os outros arquivos do site.
+7. Confirme o envio e espere o deployment ficar verde.
+8. Abra https://divinabruxa.com.br/?v=151 para conferir.
+
+IMPORTANTE
+----------
+- O ZIP não contém pastas.
+- Nenhum arquivo do pacote está vazio.
+- Nenhuma senha ou chave privada foi incluída.
+- Nenhuma cobrança real foi ativada.
+- O Resend continua para uma etapa posterior, como você pediu.
+- DNS e domínio não são alterados por esta versão.
+
+TESTE PRINCIPAL DEPOIS DA INSTALAÇÃO
+------------------------------------
+1. Abra o site em uma nova aba.
+2. Entre no Tarot Livre e revele uma carta.
+3. Abra Consultas e confirme os valores R$ 250, R$ 150, R$ 100 e R$ 50.
+4. Abra o menu e toque em Notificações.
+5. Feche o navegador, abra novamente e confirme que a Home aparece sem tela vazia.
+
+Versão: V151
+Nome: Base Imortal
+Data: 2026-09-06

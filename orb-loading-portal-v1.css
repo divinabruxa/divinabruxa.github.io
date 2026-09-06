@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — PORTAL UNIVERSAL DE CARREGAMENTO V1 · V137 */
+/* DIVINA BRUXA — PORTAL UNIVERSAL DE CARREGAMENTO V1.1 · BASE IMORTAL V151 */
 
 .db-orb-loader {
   position: fixed;
@@ -30,6 +30,10 @@
   opacity: 1;
 }
 
+.db-orb-loader.is-recovery {
+  pointer-events: auto;
+}
+
 .db-orb-loader__altar {
   position: relative;
   width: clamp(94px, 25vw, 126px);
@@ -46,7 +50,9 @@
   aspect-ratio: 1;
   border-radius: 50%;
   background-color: #170620;
-  background-image: var(--db-release-orb-image, var(--db-boot-orb-image, url("./divina-orb-thumb-v1.webp")));
+  background-image:
+    var(--db-release-orb-image, var(--db-boot-orb-image, url("./divina-orb-fast-v1.webp"))),
+    radial-gradient(circle at 34% 28%, #fff 0 2%, #ef73ff 9%, #7a27bd 34%, #26083f 62%, #08020e 78%);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -127,6 +133,31 @@
   color: rgba(238, 227, 244, .68);
   font: 500 11px/1.3 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   letter-spacing: .04em;
+}
+
+.db-orb-loader__recovery {
+  display: none;
+  min-height: 44px;
+  margin-top: 9px;
+  padding: 0 18px;
+  border: 1px solid rgba(244, 215, 143, .7);
+  border-radius: 999px;
+  color: #fff8e9;
+  background: rgba(43, 13, 60, .88);
+  box-shadow: 0 0 24px rgba(189, 83, 230, .3);
+  font: 700 11px/1 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: .12em;
+  cursor: pointer;
+}
+
+.db-orb-loader.is-recovery .db-orb-loader__recovery {
+  display: inline-grid;
+  place-items: center;
+}
+
+.db-orb-loader__recovery:focus-visible {
+  outline: 2px solid #f4d78f;
+  outline-offset: 4px;
 }
 
 .db-orb-loader__constellation {

@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — SUPABASE EDGE FUNCTION ADMIN API V146
+/* DIVINA BRUXA — SUPABASE EDGE FUNCTION ADMIN API V150
    Deno/Supabase Edge Function. Segredos existem apenas no ambiente da função. */
 import { createClient } from 'npm:@supabase/supabase-js@2.112.4';
 
@@ -9,6 +9,14 @@ const SERVICES=Object.freeze({
   'carta-conselho':'Carta de Conselho',
   'pergunta-direta':'Pergunta Direta'
 });
+const NOTIFICATION_CATEGORIES=Object.freeze(['daily_card','school','consultations','account_security','billing','orbe_ai','music','episodes','skins','marketing']);
+const NOTIFICATION_DEEP_LINKS=Object.freeze({
+  daily_card:'/carta-do-dia',school:'/escola',consultations:'/consultas',account_security:'/conta',billing:'/conta',
+  orbe_ai:'/orbe-ia',music:'/musica',episodes:'/de-frente-com-o-tarot',skins:'/skins',marketing:'/skins'
+});
+const SAFE_DAILY_TITLE='Um novo encontro espera por você';
+const SAFE_DAILY_BODY='Sua Carta do Dia espera por você na Orbe.';
+const PERSONAL_DATA_PATTERN=/(?:[\w.+-]+@[\w.-]+\.[a-z]{2,}|(?:\+?55\s*)?(?:\(?\d{2}\)?\s*)?9?\d{4}[-\s]?\d{4})/i;
 const COOKIE_ACCESS='db_admin_access';
 const COOKIE_REFRESH='db_admin_refresh';
 const PRIVATE_KEYS=/body|content|question|prompt|response|password|secret|token|email|phone|contact|message/i;
@@ -72,7 +80,7 @@ const validSetup=()=>{
   try{return Boolean(env('SUPABASE_ANON_KEY')&&env('SUPABASE_SERVICE_ROLE_KEY')&&new URL(env('SUPABASE_URL')).hostname===`${STAGING_REF}.supabase.co`);}catch{return false;}
 };
 const isMutating=request=>!['GET','HEAD','OPTIONS'].includes(request.method);
-const requestAllowed=(request,origin)=>!isMutating(request)||(Boolean(origin)&&request.headers.get('x-divina-admin-request')==='v146');
+const requestAllowed=(request,origin)=>!isMutating(request)||(Boolean(origin)&&['v146','v150'].includes(request.headers.get('x-divina-admin-request')||''));
 
 async function recoveryCount(db,userId){
   const {count,error}=await db.from('admin_recovery_codes').select('id',{count:'exact',head:true}).eq('user_id',userId).is('used_at',null);
@@ -234,6 +242,66 @@ async function overview(context){
   return {activeUsers:0,sandboxRevenue:0,openConsultations:0,aiCreditsUsed:0,auditEvents:Number(auditEvents)||0,consultationPrices:prices,environment:'staging'};
 }
 
+async function notificationSummary(db){
+  const statuses=['draft','review','scheduled','sending','paused','completed','cancelled'];
+  const results=await Promise.all(statuses.map(async status=>{
+    const {count,error}=await db.from('notification_campaigns').select('id',{count:'exact',head:true}).eq('test_only',true).eq('status',status);
+    if(error)throw error;
+    return [status,Number(count)||0];
+  }));
+  const byStatus=Object.fromEntries(results);
+  return {total:Object.values(byStatus).reduce((sum,value)=>sum+value,0),byStatus};
+}
+
+async function notificationModule(context){
+  const {data,error}=await context.db.from('notification_campaigns')
+    .select('id,name,category,status,title,body,deep_link,locale,test_only,created_at,updated_at')
+    .eq('test_only',true).order('created_at',{ascending:false}).limit(20);
+  if(error)throw error;
+  return {
+    moduleId:'notifications',environment:'staging',testOnly:true,sendEnabled:false,providerConfigured:false,
+    quietHours:{start:'22:00',end:'08:00',timeZone:'America/Sao_Paulo'},
+    categories:NOTIFICATION_CATEGORIES,summary:await notificationSummary(context.db),campaigns:data||[],
+    sanitized:true,privateContentIncluded:false,updatedAt:new Date().toISOString()
+  };
+}
+
+const cleanCampaignText=(value,max)=>String(value||'').replace(/\s+/g,' ').trim().slice(0,max);
+
+async function createNotificationDraft(request,origin,context){
+  const body=await readBody(request),category=String(body.category||'');
+  if(!NOTIFICATION_CATEGORIES.includes(category))return json(400,{error:'invalid_notification_category'},origin);
+  let title=cleanCampaignText(body.title,120),message=cleanCampaignText(body.body,500);
+  if(category==='daily_card'){
+    title=SAFE_DAILY_TITLE;
+    message=SAFE_DAILY_BODY;
+  }
+  if(!title||!message)return json(400,{error:'notification_content_required'},origin);
+  if(PERSONAL_DATA_PATTERN.test(`${title} ${message}`))return json(400,{error:'personal_data_not_allowed'},origin);
+  const payload={
+    name:cleanCampaignText(`Rascunho V150 · ${title}`,120),category,status:'draft',title,body:message,
+    deep_link:NOTIFICATION_DEEP_LINKS[category],locale:'pt-BR',test_only:true,scheduled_at:null,created_by:context.user.id
+  };
+  const {data,error}=await context.db.from('notification_campaigns').insert(payload)
+    .select('id,name,category,status,title,body,deep_link,locale,test_only,created_at,updated_at').single();
+  if(error){await audit(context.db,context.user.id,'notification-draft-create','notifications','failed',{category});return json(500,{error:'notification_draft_failed'},origin);}
+  await audit(context.db,context.user.id,'notification-draft-create','notifications','allowed',{category,testOnly:true});
+  return json(201,{ok:true,campaign:data,summary:await notificationSummary(context.db),sendEnabled:false,environment:'staging'},origin);
+}
+
+async function deleteNotificationDraft(path,origin,context){
+  const id=decodeURIComponent(path.slice('/admin/notifications/campaigns/'.length));
+  if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id))return json(400,{error:'invalid_campaign_id'},origin);
+  const {data:campaign,error:readError}=await context.db.from('notification_campaigns').select('id,category,status,test_only').eq('id',id).maybeSingle();
+  if(readError)return json(500,{error:'notification_draft_failed'},origin);
+  if(!campaign)return json(404,{error:'notification_draft_not_found'},origin);
+  if(campaign.test_only!==true||campaign.status!=='draft')return json(409,{error:'notification_draft_locked'},origin);
+  const {error}=await context.db.from('notification_campaigns').delete().eq('id',id).eq('test_only',true).eq('status','draft');
+  if(error){await audit(context.db,context.user.id,'notification-draft-delete','notifications','failed',{category:campaign.category});return json(500,{error:'notification_draft_failed'},origin);}
+  await audit(context.db,context.user.id,'notification-draft-delete','notifications','allowed',{category:campaign.category,testOnly:true});
+  return json(200,{ok:true,deletedId:id,summary:await notificationSummary(context.db),sendEnabled:false,environment:'staging'},origin);
+}
+
 async function savePrices(request,origin,context){
   const body=await readBody(request),prices=body.prices||{},code=String(body.stepUpCode||'').replace(/\D/g,'');
   if(code.length!==6||Object.keys(prices).length!==4||Object.keys(SERVICES).some(id=>!Number.isInteger(prices[id])||prices[id]<100||prices[id]>500000))return json(400,{error:'invalid_price_table'},origin);
@@ -282,6 +350,12 @@ Deno.serve(async request=>{
     if(path==='/admin/session'&&request.method==='GET')return json(200,sessionBody(context),origin);
     if(path==='/admin/overview'&&request.method==='GET')return json(200,await overview(context),origin);
     if(path==='/admin/diagnostic'&&request.method==='GET')return json(200,await overview(context),origin);
+    if(path==='/admin/modules/notifications'&&request.method==='GET'){
+      await audit(context.db,context.user.id,'module-read','notifications','allowed');
+      return json(200,await notificationModule(context),origin);
+    }
+    if(path==='/admin/notifications/campaigns'&&request.method==='POST')return await createNotificationDraft(request,origin,context);
+    if(path.startsWith('/admin/notifications/campaigns/')&&request.method==='DELETE')return await deleteNotificationDraft(path,origin,context);
     if(path.startsWith('/admin/modules/')&&request.method==='GET'){
       const moduleId=decodeURIComponent(path.slice('/admin/modules/'.length));
       if(!MODULES.includes(moduleId))return json(404,{error:'module_not_found'},origin);
@@ -291,7 +365,7 @@ Deno.serve(async request=>{
     if(path==='/admin/consultations/prices'&&request.method==='PATCH')return await savePrices(request,origin,context);
     return json(404,{error:'not_found'},origin);
   }catch(error){
-    console.error('admin-api-v146',error instanceof Error?error.name:'unknown');
+    console.error('admin-api-v150',error instanceof Error?error.name:'unknown');
     return json(500,{error:'internal_error'},origin);
   }
 });

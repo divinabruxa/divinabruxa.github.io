@@ -1,16 +1,16 @@
-/* DIVINA BRUXA — APLICATIVO V149 · MÚSICA E DE FRENTE COM O TAROT */
+/* DIVINA BRUXA — APLICATIVO V151 · BASE IMORTAL */
 
 import { CONFIG } from './config.js';
-import { installRuntimeV12 } from './runtime-v12.js?v=142';
-import { createNavigation } from './navigation.js?v=100';
+import { installRuntimeV12 } from './runtime-v12.js?v=151';
+import { createNavigation } from './navigation.js?v=151';
 import { RealityOrbEngine } from './orb-engine-v68.js?v=100';
 import { bindMiniOrbs } from './mini-orb-engine.js?v=71';
-import { AuthClient } from './auth-client-v6.js';
+import { AuthClient } from './auth-client-v6.js?v=151';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
 import { SkinsEngine } from './skins-v6.js?v=142';
-import { createPageLoader } from './page-loader-v1.js?v=149';
-import { createOrbLoadingPortal } from './orb-loading-portal-v1.js?v=137';
+import { createPageLoader } from './page-loader-v1.js?v=151';
+import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V151 } from './orb-loading-portal-v1.js?v=151';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 
 const $ = selector => document.querySelector(selector);
@@ -40,8 +40,29 @@ bindMiniOrbs();
 
 const loadingPortal = createOrbLoadingPortal();
 const pageLoader = createPageLoader({ config: CONFIG, go });
+queueMicrotask(() => loadingPortal.end(ORB_BOOT_REQUEST_V151));
 new RealityOrbEngine($('#orbCanvas'), {
   onOpen: () => pageLoader.go('tarot')
+});
+
+const warmEssentialPortals = () => {
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  if (connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType || '')) return;
+  pageLoader.warm(['tarot', 'consultations', 'daily', 'notifications']).catch?.(() => {});
+};
+addEventListener('load', () => {
+  if ('requestIdleCallback' in window) window.requestIdleCallback(warmEssentialPortals, { timeout: 2200 });
+  else setTimeout(warmEssentialPortals, 900);
+}, { once: true });
+
+addEventListener('divina:loading-bypass', () => {
+  toast('A página foi aberta enquanto o restante termina de carregar.');
+});
+
+navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type !== 'divina-notification-open') return;
+  const target = String(event.data.target || '#home').replace(/^#/, '');
+  if (/^(home|daily|school|consultations|login|subscriptions|ai|music|videos|skins|notifications)$/.test(target)) pageLoader.go(target);
 });
 
 const bindSubmit = (selector, handler) => {
@@ -122,7 +143,7 @@ if (installButton) {
 
 if ('serviceWorker' in navigator) {
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=149')
+    navigator.serviceWorker.register('./sw.js?v=151')
       .then(() => console.info('[Divina] PWA registrado'))
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   });
@@ -131,6 +152,6 @@ if ('serviceWorker' in navigator) {
 const skinsHeading = document.querySelector('#skins h2');
 if (skinsHeading) skinsHeading.textContent = 'Trinta formas de sentir o universo.';
 
-document.documentElement.dataset.appShell = 'v141';
+document.documentElement.dataset.appShell = 'v151';
 window.divinaLoading = loadingPortal;
 window.orbe = { go: pageLoader.go, loadPage: pageLoader.load, loading: loadingPortal };

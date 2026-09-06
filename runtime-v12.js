@@ -1,6 +1,8 @@
+/* DIVINA BRUXA — RUNTIME V12.4 · BASE IMORTAL V151 */
 import { applySkinContract, preloadSkinAsset, preparedSkinImage, readStoredSkin } from './skin-universal-v10.js?v=133';
 import { createPortalTransition } from './portal-transition-v10.js?v=130';
 import { SKIN_REGISTRY_V12, skinByIdV12 } from './skin-registry-v12.js?v=133';
+import { ownedSkinIds } from './premium-entitlements-v142.js?v=142';
 
 const ACTIVE_SKIN_KEY = 'divina.skin.v10';
 let portal = null;
@@ -11,13 +13,15 @@ const PAGE_REALMS = Object.freeze({
   library: 'archive',
   school: 'academy',
   spreads: 'oracle',
-  ai: 'voice',
+  ai: 'intelligence',
   journal: 'memory',
   store: 'market',
   consultations: 'sanctuary',
   subscriptions: 'crown',
+  skins: 'constellation',
   videos: 'vision',
   music: 'resonance',
+  notifications: 'threshold',
   login: 'threshold',
   admin: 'command'
 });
@@ -30,9 +34,9 @@ function ensureSkinsScreen() {
   screen.className = 'screen db-page-world skins-screen';
   screen.innerHTML = `
     <div class="db-page-world__hero">
-      <p class="eyebrow db-page-world__kicker">SALÃO DAS REALIDADES</p>
-      <h2 class="db-page-world__title">Trinta formas de sentir o universo.</h2>
-      <p class="lead db-page-world__intro">Escolha a matéria da sua Orbe. A mesma realidade acompanhará a Home, o menu, o rodapé, a mesa e todos os portais.</p>
+      <p class="eyebrow db-page-world__kicker">CONSTELAÇÃO DAS 30 SKINS</p>
+      <h2 class="db-page-world__title">Trinta realidades. Uma Orbe viva.</h2>
+      <p class="lead db-page-world__intro">Contemple livremente e aplique somente o que pertence à sua coleção. Cada skin sincroniza sete superfícies sem alterar cartas, sorte, IA ou resultados.</p>
     </div>
     <div id="skinsApp"></div>`;
   const anchor = document.getElementById('subscriptions');
@@ -43,6 +47,11 @@ function ensureSkinsScreen() {
 function addLibraryShortcut() {
   const menu = document.querySelector('.magic-menu-extra');
   if (!menu || menu.querySelector('[data-go="library"]')) return;
+  const skins = document.createElement('button');
+  skins.type = 'button';
+  skins.dataset.go = 'skins';
+  skins.textContent = 'Constelação das 30 Skins';
+  menu.prepend(skins);
   const button = document.createElement('button');
   button.type = 'button';
   button.dataset.go = 'library';
@@ -213,7 +222,9 @@ export function installRuntimeV12() {
   markOrbSurfaces();
   installPortalLayer();
 
-  const stored = readStoredSkin(localStorage, ACTIVE_SKIN_KEY) || 'classic';
+  const requested = readStoredSkin(localStorage, ACTIVE_SKIN_KEY) || 'classic';
+  const stored = ownedSkinIds().has(requested) ? requested : 'classic';
+  if (stored !== requested) rememberSkin('classic');
   activateSkinFluidV12(stored, { persist: false }).then(applied => {
     if (!applied && skinByIdV12(stored).id !== 'classic') {
       activateSkinFluidV12('classic', { persist: false }).catch(() => {});
@@ -222,6 +233,6 @@ export function installRuntimeV12() {
 
   document.documentElement.dataset.runtime = 'v12';
   document.dispatchEvent(new CustomEvent('divina:runtime-ready', {
-    detail: { version: '12.3.0', skins: SKIN_REGISTRY_V12.skins.length, realms: Object.keys(PAGE_REALMS).length }
+    detail: { version: '12.4.0', skins: SKIN_REGISTRY_V12.skins.length, realms: Object.keys(PAGE_REALMS).length }
   }));
 }

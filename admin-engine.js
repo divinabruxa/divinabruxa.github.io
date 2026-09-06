@@ -1,13 +1,15 @@
-/* DIVINA BRUXA — PAINEL SUPREMO V146
+/* DIVINA BRUXA — PAINEL SUPREMO V150
    Sessão em cookie seguro, owner verificada e MFA; nenhum desbloqueio local. */
 import { store, escapeHTML } from './storage.js';
 import { ADMIN_POLICY, adminModuleById } from './admin-policy.js?v=144';
 import { CONSULTATION_POLICY } from './consultation-policy.js?v=147';
+import { NOTIFICATION_CATEGORIES, SAFE_DAILY_MESSAGE as SAFE_DAILY_BODY, SAFE_DAILY_TITLE } from './notification-policy-v150.js?v=150';
 
 const safe=value=>escapeHTML(value??'');
 const count=(key)=>{const value=store.get(key);return Array.isArray(value)?value.length:value&&typeof value==='object'?Object.keys(value).length:0;};
 const integer=value=>Number.isFinite(Number(value))?Math.max(0,Math.floor(Number(value))):0;
 const money=value=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(Number(value)||0);
+const dateTime=value=>{try{return new Intl.DateTimeFormat('pt-BR',{dateStyle:'short',timeStyle:'short',timeZone:'America/Sao_Paulo'}).format(new Date(value));}catch{return '—';}};
 const reducedMotion=()=>globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
 
 export class AdminEngine{
@@ -17,6 +19,7 @@ export class AdminEngine{
     this.overview=null;
     this.selected='today';
     this.pendingPrices=null;
+    this.notificationData=null;
     this.mfaFactorId='';
     if(root)this.start();
   }
@@ -140,6 +143,7 @@ export class AdminEngine{
     const module=adminModuleById(this.selected);
     this.root.innerHTML=`<div class="admin-v144-shell"><header class="admin-command-header"><div><span class="admin-staging-badge">STAGING · MFA ATIVO</span><p class="eyebrow">CENTRAL DA PROPRIETÁRIA</p><h3>Comando da Divina Bruxa</h3></div><div class="admin-owner-state"><span>SESSÃO PROTEGIDA</span><b>${safe(this.session.displayName||'Proprietária')}</b><button type="button" data-admin-logout>SAIR E BLOQUEAR</button></div></header>${this.securityMap()}<div class="admin-command-layout"><aside class="admin-sidebar"><label><span>Buscar módulo</span><input type="search" data-admin-search placeholder="Ex.: Consultas"></label><nav aria-label="Módulos administrativos">${this.navMarkup('')}</nav></aside><main class="admin-workspace" aria-labelledby="adminWorkspaceTitle"><header><div><p class="eyebrow">${safe(module.group)}</p><h3 id="adminWorkspaceTitle">${module.sigil} ${safe(module.name)}</h3><p>${safe(module.description)}</p></div><button type="button" data-refresh-module>ATUALIZAR</button></header><div data-admin-module-content>${this.moduleContent(module.id)}</div></main></div><p class="admin-live" data-admin-live role="status" aria-live="polite"></p></div>`;
     this.bindPanel();
+    if(this.selected==='notifications'&&!this.notificationData)this.loadNotifications();
   }
 
   navMarkup(query){const q=String(query||'').toLocaleLowerCase('pt-BR');return ADMIN_POLICY.modules.filter(module=>!q||`${module.name} ${module.group}`.toLocaleLowerCase('pt-BR').includes(q)).map(module=>`<button type="button" data-admin-module="${module.id}" aria-current="${module.id===this.selected?'page':'false'}"><i>${module.sigil}</i><span><b>${safe(module.name)}</b><small>${safe(module.group)}</small></span></button>`).join('')||'<p>Nenhum módulo encontrado.</p>';}
@@ -147,6 +151,7 @@ export class AdminEngine{
   moduleContent(id){
     if(id==='today')return this.todayContent();
     if(id==='consultations')return this.consultationsContent();
+    if(id==='notifications')return this.notificationsContent();
     if(id==='security')return this.securityContent();
     if(id==='audit')return this.auditContent();
     const module=adminModuleById(id);
@@ -158,6 +163,27 @@ export class AdminEngine{
   consultationsContent(){
     const requests=store.get('consultation-requests-v147',store.get('consultation-requests-v143',[])).slice(0,8);
     return `<section class="admin-consultations"><article class="admin-price-editor"><header><div><p class="eyebrow">PREÇOS FUTUROS</p><h4>Tabela de Consultas</h4><span>Pedidos antigos mantêm o price_snapshot original.</span></div><b>ALTERAÇÃO CRÍTICA · EXIGE MFA</b></header><form data-price-form>${CONSULTATION_POLICY.services.map(service=>{const remoteCents=Number(this.overview?.consultationPrices?.[service.id]);const current=Number.isFinite(remoteCents)&&remoteCents>0?remoteCents/100:service.price;return `<label><span>${safe(service.name)}</span><div><small>R$</small><input name="${safe(service.id)}" type="number" min="1" max="5000" step="1" inputmode="decimal" value="${current}" required></div></label>`;}).join('')}<button type="submit">REVISAR NOVOS PREÇOS</button></form><div data-price-confirm></div></article><article class="admin-request-ledger"><header><div><p class="eyebrow">ESTE APARELHO</p><h4>Pedidos preparados</h4></div><strong>${requests.length}</strong></header>${requests.length?`<div class="admin-request-list">${requests.map(item=>`<span><b>${safe(item.price_snapshot?.serviceName||item.serviceId)}</b><small>${money(item.price_snapshot?.price)} · ${safe(item.status)}</small><em>${safe(String(item.createdAt||'').slice(0,10))}</em></span>`).join('')}</div>`:'<p>Nenhum pedido preparado neste aparelho.</p>'}<small>Nome, contato e pergunta não são exibidos nesta visão.</small></article></section>`;
+  }
+
+  notificationsContent(){
+    const data=this.notificationData;
+    if(!data)return `<section class="admin-module-overview"><div class="admin-module-orb">☾</div><h4>Carregando rascunhos protegidos…</h4><p>Consultando somente o ambiente STAGING.</p><p data-module-state>ENVIO REAL BLOQUEADO</p></section>`;
+    const summary=data.summary||{},byStatus=summary.byStatus||{},campaigns=Array.isArray(data.campaigns)?data.campaigns:[];
+    return `<section class="admin-notification-command">
+      <div class="admin-notification-state"><span><b>STAGING</b><small>ambiente isolado</small></span><span><b>TEST ONLY</b><small>${integer(summary.total)} rascunhos e estados de teste</small></span><span><b>ENVIO BLOQUEADO</b><small>nenhum provedor conectado</small></span></div>
+      <article class="admin-notification-compose"><header><div><p class="eyebrow">NOVO RASCUNHO</p><h4>Preparar uma mensagem de teste</h4><span>Nada será agendado ou enviado.</span></div><b>OWNER + MFA</b></header>
+        <form data-notification-draft-form novalidate>
+          <label><span>Categoria</span><select name="category">${NOTIFICATION_CATEGORIES.map(category=>`<option value="${category.id}">${safe(category.label)}</option>`).join('')}</select></label>
+          <label><span>Título</span><input name="title" maxlength="120" value="${safe(SAFE_DAILY_TITLE)}" required></label>
+          <label><span>Mensagem</span><textarea name="body" maxlength="500" required>${safe(SAFE_DAILY_BODY)}</textarea></label>
+          <button type="submit">GUARDAR RASCUNHO NO STAGING</button>
+        </form>
+      </article>
+      <article class="admin-notification-ledger"><header><div><p class="eyebrow">COFRE DE TESTE</p><h4>Rascunhos recentes</h4></div><strong>${integer(byStatus.draft)}</strong></header>
+        ${campaigns.length?`<div class="admin-notification-drafts">${campaigns.map(campaign=>`<div class="admin-notification-draft"><span><em>${safe(String(campaign.category||'').replaceAll('_',' ').toUpperCase())} · ${safe(campaign.status||'draft')} · TEST ONLY</em><b>${safe(campaign.title)}</b><small>${safe(campaign.body)}</small><small>${dateTime(campaign.created_at)} · ${safe(campaign.deep_link||'sem destino')}</small></span>${campaign.status==='draft'?`<button type="button" data-delete-notification="${safe(campaign.id)}">EXCLUIR RASCUNHO</button>`:''}</div>`).join('')}</div>`:'<p>Nenhum rascunho criado no STAGING.</p>'}
+      </article>
+      <p class="admin-notification-disclaimer"><b>Proteção V150:</b> a Carta do Dia usa texto fixo sem revelar carta; dados pessoais são recusados; não existe rota de envio ou agendamento.</p>
+    </section>`;
   }
 
   securityContent(){return `<section class="admin-security-panel"><div class="admin-flag-grid">${Object.entries(ADMIN_POLICY.flags).map(([key,value])=>`<article><span>${safe(key.replaceAll(/([A-Z])/g,' $1'))}</span><b>${value?'ATIVO':'BLOQUEADO'}</b></article>`).join('')}</div><article><p class="eyebrow">CONTROLES OBRIGATÓRIOS</p><h4>Segurança sem atalhos.</h4><ul><li>E-mail da proprietária verificado</li><li>MFA e códigos de recuperação</li><li>Cookie seguro e sessão revogável</li><li>Step-up para preços, billing e publicação</li><li>RLS e validação de papel no servidor</li><li>403 sem qualquer dado para contas comuns</li></ul></article></section>`;}
@@ -172,12 +198,45 @@ export class AdminEngine{
     this.root.querySelector('[data-refresh-module]')?.addEventListener('click',()=>this.refreshModule());
     this.root.querySelector('[data-load-remote]')?.addEventListener('click',event=>this.loadModule(event.currentTarget.dataset.loadRemote));
     this.root.querySelector('[data-price-form]')?.addEventListener('submit',event=>this.reviewPrices(event));
+    this.root.querySelector('[data-notification-draft-form]')?.addEventListener('submit',event=>this.createNotificationDraft(event));
+    const notificationCategory=this.root.querySelector('[data-notification-draft-form] select[name="category"]');
+    notificationCategory?.addEventListener('change',()=>this.syncNotificationDraft(notificationCategory));
+    if(notificationCategory)this.syncNotificationDraft(notificationCategory);
+    this.root.querySelectorAll('[data-delete-notification]').forEach(button=>button.addEventListener('click',()=>this.deleteNotificationDraft(button.dataset.deleteNotification)));
     this.root.querySelector('[data-export-diagnostic]')?.addEventListener('click',()=>this.exportDiagnostic());
   }
 
   live(message){const element=this.root.querySelector('[data-admin-live]');if(element)element.textContent=message;this.notify(message);}
-  async refreshModule(){await this.loadOverview();this.renderPanel();this.live('Dados sanitizados atualizados.');}
+  async refreshModule(){if(this.selected==='notifications'){await this.loadNotifications(true);return;}await this.loadOverview();this.renderPanel();this.live('Dados sanitizados atualizados.');}
   async loadModule(id){const result=await globalThis.divinaAuth.adminModule(id);const state=this.root.querySelector('[data-module-state]');if(state)state.textContent=result?.ok?'Dados sanitizados recebidos do staging.':'Não foi possível atualizar este módulo.';}
+
+  async loadNotifications(announce=false){
+    const result=await globalThis.divinaAuth.adminNotificationOverview();
+    if(!result?.ok){this.notificationData={summary:{total:0,byStatus:{}},campaigns:[],sendEnabled:false};this.renderPanel();this.live('O cofre de notificações não pôde ser carregado.');return;}
+    this.notificationData=result.body;this.renderPanel();if(announce)this.live('Rascunhos de teste atualizados no STAGING.');
+  }
+
+  syncNotificationDraft(select){
+    const form=select.form,title=form?.elements.title,message=form?.elements.body,daily=select.value==='daily_card';
+    if(!title||!message)return;
+    if(daily){title.value=SAFE_DAILY_TITLE;message.value=SAFE_DAILY_BODY;title.readOnly=true;message.readOnly=true;return;}
+    const wasDaily=title.readOnly||message.readOnly;title.readOnly=false;message.readOnly=false;if(wasDaily){title.value='';message.value='';}
+  }
+
+  async createNotificationDraft(event){
+    event.preventDefault();const form=event.currentTarget,button=form.querySelector('button[type="submit"]'),values=Object.fromEntries(new FormData(form));
+    if(values.category!=='daily_card'&&(!String(values.title||'').trim()||!String(values.body||'').trim())){this.live('Preencha o título e a mensagem do rascunho.');return;}
+    button.disabled=true;const result=await globalThis.divinaAuth.adminCreateNotificationDraft({category:values.category,title:values.title,body:values.body});
+    if(result?.ok){this.notificationData=null;await this.loadNotifications();this.live('Rascunho TEST ONLY guardado no STAGING. Nenhum aviso foi enviado.');return;}
+    button.disabled=false;this.live(result?.body?.error==='personal_data_not_allowed'?'Retire e-mail ou telefone da mensagem de teste.':'O rascunho não pôde ser guardado.');
+  }
+
+  async deleteNotificationDraft(id){
+    if(!globalThis.confirm?.('Excluir este rascunho TEST ONLY?'))return;
+    const result=await globalThis.divinaAuth.adminDeleteNotificationDraft(id);
+    if(result?.ok){this.notificationData=null;await this.loadNotifications();this.live('Rascunho de teste excluído do STAGING.');return;}
+    this.live('O rascunho não pôde ser excluído.');
+  }
 
   reviewPrices(event){
     event.preventDefault();

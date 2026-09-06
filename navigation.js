@@ -1,4 +1,4 @@
-// DIVINA BRUXA V75 — MENU ORBITAL CONTÍNUO
+// DIVINA BRUXA V151 — MENU ORBITAL CONTÍNUO + BASE IMORTAL
 // A Orbe mantém o canvas no mesmo tamanho. Abrir, fechar e inverter o gesto
 // usam uma única transição visual, sem quadro vazio e sem deslocar a página.
 export function createNavigation() {
@@ -30,7 +30,8 @@ export function createNavigation() {
       ['skins', '◆', 'Skins da Orbe'],
       ['subscriptions', '✦', 'Premium'],
       ['journal', '▤', 'Diário'],
-      ['library', '▥', 'Biblioteca']
+      ['library', '▥', 'Biblioteca'],
+      ['notifications', '☾', 'Notificações']
     ];
     shortcuts.forEach(([id, sigil, label]) => {
       const button = document.createElement('button');
@@ -214,4 +215,3 @@ export function createNavigation() {
   go(location.hash.slice(1) || 'home', false);
   return { go, openOrbMenu, closeOrbMenu };
 }
-

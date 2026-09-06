@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V44 · MÚSICA E VÍDEO V149 */
-const CACHE='divina-bruxa-v44-midia-celestial-v149';
+/* DIVINA BRUXA — SERVICE WORKER V46 · BASE IMORTAL V151 */
+const CACHE='divina-bruxa-v46-base-imortal-v151';
 
 const REQUIRED=[
   './',
@@ -29,6 +29,9 @@ const REQUIRED=[
   './config.js',
   './auth-client-v6.js',
   './navigation.js',
+  './notification-policy-v150.js',
+  './notification-engine-v150.js',
+  './notification-celestial-v150.css',
   './orb-engine-v68.js',
   './mini-orb-engine.js',
   './visual-guard-v6.js',
@@ -39,7 +42,11 @@ const REQUIRED=[
   './cosmic-visual-atlas-v1.js',
   './divina-orb-fast-v1.webp',
   './divina-orb-thumb-v1.webp',
-  './divina-icon-fast-v1.png'
+  './divina-icon-fast-v1.png',
+  './icon-192.png',
+  './icon-512.png',
+  './icon-maskable-192.png',
+  './icon-maskable-512.png'
 ];
 
 const WARM=[
@@ -93,9 +100,14 @@ self.addEventListener('fetch',event=>{
       if(cached) return cached;
       try{
         const response=await fetch(event.request);
-        if(response.ok){
+        if(response.ok&&response.headers.get('content-length')!=='0'){
           const cache=await caches.open(CACHE);
           await cache.put(event.request,response.clone());
+        }
+        if(response.headers.get('content-length')==='0'){
+          const cached=await caches.match(event.request,{ignoreSearch:true});
+          if(cached)return cached;
+          return new Response('',{status:503,statusText:'Empty image rejected'});
         }
         return response;
       }catch{
@@ -105,9 +117,22 @@ self.addEventListener('fetch',event=>{
 
     try{
       const response=await fetch(event.request);
-      if(response.ok&&sameOrigin){
+      const zeroLength=response.headers.get('content-length')==='0';
+      const appShellNavigation=navigation&&sameOrigin&&(url.pathname==='/'||url.pathname.endsWith('/index.html'));
+      let validAppShell=true;
+      if(response.ok&&appShellNavigation){
+        const html=await response.clone().text();
+        validAppShell=html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html);
+      }
+      if(response.ok&&!zeroLength&&validAppShell&&sameOrigin){
         const cache=await caches.open(CACHE);
         await cache.put(event.request,response.clone());
+      }
+      if(zeroLength||!validAppShell){
+        const cached=await caches.match(event.request,{ignoreSearch:true});
+        if(cached)return cached;
+        if(navigation)return (await caches.match('./offline.html'))||new Response('A Divina Bruxa está se reconectando.',{status:503,headers:{'content-type':'text/plain; charset=utf-8'}});
+        return new Response('',{status:503,statusText:'Empty core asset rejected'});
       }
       return response;
     }catch{
@@ -116,5 +141,17 @@ self.addEventListener('fetch',event=>{
       if(navigation) return (await caches.match('./offline.html'))||Response.error();
       return new Response('',{status:503,statusText:'Offline'});
     }
+  })());
+});
+
+self.addEventListener('notificationclick',event=>{
+  event.notification.close();
+  const raw=String(event.notification?.data?.url||'#home');
+  const target=/^#(?:home|daily|school|consultations|login|subscriptions|ai|music|videos|skins|notifications)$/.test(raw)?raw:'#home';
+  event.waitUntil((async()=>{
+    const windows=await self.clients.matchAll({type:'window',includeUncontrolled:true});
+    const current=windows.find(client=>new URL(client.url).origin===self.location.origin);
+    if(current){await current.focus();current.postMessage({type:'divina-notification-open',target});return;}
+    await self.clients.openWindow(`./${target}`);
   })());
 });

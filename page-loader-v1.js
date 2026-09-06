@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.12 · MÚSICA E VÍDEO V149
-   Cada motor nasce apenas quando seu portal é solicitado. */
+/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.14 · BASE IMORTAL V151
+   Cada motor nasce sob demanda; portais essenciais podem aquecer sem renderizar. */
 
 const pageTasks = new Map();
 const sharedTasks = new Map();
@@ -17,6 +17,7 @@ const PAGE_LABELS = Object.freeze({
   skins: 'a Constelação das 30 Skins',
   videos: 'De Frente com o Tarot',
   music: 'o universo da Música',
+  notifications: 'as Notificações Celestiais',
   admin: 'a Central da Proprietária'
 });
 
@@ -122,11 +123,32 @@ export function createPageLoader({ config, go } = {}) {
     },
     videos: ensureMedia,
     music: ensureMedia,
+    notifications: async () => {
+      const { CelestialNotificationEngine } = await import('./notification-engine-v150.js?v=150');
+      return new CelestialNotificationEngine($('#notificationApp'), go);
+    },
     admin: async () => {
-      const { AdminEngine } = await import('./admin-engine.js?v=146');
+      const { AdminEngine } = await import('./admin-engine.js?v=150');
       return new AdminEngine($('#adminApp'));
     }
   });
+
+  const warmers = Object.freeze({
+    tarot: () => import('./tarot-engine.js?v=148'),
+    consultations: () => Promise.all([
+      import('./commerce-engine.js?v=148'),
+      import('./consultation-engine.js?v=148')
+    ]),
+    daily: () => import('./ritual-engine.js'),
+    notifications: () => import('./notification-engine-v150.js?v=150')
+  });
+
+  const warm = ids => {
+    const list = Array.isArray(ids) ? ids : [ids];
+    return Promise.allSettled(list.filter(id => warmers[id]).map(id => (
+      once(sharedTasks, `warm:${id}`, warmers[id])
+    )));
+  };
 
   const load = id => {
     const loader = loaders[id];
@@ -195,6 +217,7 @@ export function createPageLoader({ config, go } = {}) {
 
   return {
     load,
+    warm,
     go: id => {
       load(id).catch(() => {});
       go?.(id);

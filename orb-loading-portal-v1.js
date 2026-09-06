@@ -1,10 +1,12 @@
-/* DIVINA BRUXA — PORTAL UNIVERSAL DE CARREGAMENTO V1 · V137
-   A Orbe da skin ativa guarda cada espera real sem interromper a navegação. */
+/* DIVINA BRUXA — PORTAL UNIVERSAL DE CARREGAMENTO V1.1 · BASE IMORTAL V151
+   A Orbe nasce no HTML, guarda cada espera real e nunca aprisiona a navegação. */
 
 const START_EVENT = 'divina:loading-start';
 const END_EVENT = 'divina:loading-end';
 const DEFAULT_SHOW_DELAY = 120;
 const EXIT_DURATION = 180;
+const RECOVERY_DELAY = 4800;
+const BOOT_REQUEST_ID = 'boot:v151';
 
 let requestSequence = 0;
 
@@ -57,8 +59,12 @@ function buildPortal(root) {
   copy.append(
     createElement(root, 'small', 'db-orb-loader__eyebrow', 'A ORBE ABRE O CAMINHO'),
     createElement(root, 'strong', 'db-orb-loader__message', 'Alinhando o próximo portal…'),
-    createElement(root, 'span', 'db-orb-loader__whisper', 'Um instante entre as estrelas')
+    createElement(root, 'span', 'db-orb-loader__whisper', 'Um instante entre as estrelas'),
+    createElement(root, 'button', 'db-orb-loader__recovery', 'MOSTRAR A PÁGINA AGORA')
   );
+
+  const recovery = copy.querySelector('.db-orb-loader__recovery');
+  recovery.type = 'button';
 
   portal.append(constellation, altar, copy);
   root.body.append(portal);
@@ -80,11 +86,15 @@ export function createOrbLoadingPortal({ root = document, showDelay = DEFAULT_SH
   const html = root.documentElement;
   const portal = buildPortal(root);
   const message = portal.querySelector('.db-orb-loader__message');
+  const whisper = portal.querySelector('.db-orb-loader__whisper');
+  const recovery = portal.querySelector('.db-orb-loader__recovery');
   const active = new Map();
   let showTimer = 0;
   let hideTimer = 0;
+  let recoveryTimer = 0;
   let frame = 0;
   let destroyed = false;
+  let bypassed = false;
 
   const cancelTimer = name => {
     const timer = name === 'show' ? showTimer : hideTimer;
@@ -97,9 +107,26 @@ export function createOrbLoadingPortal({ root = document, showDelay = DEFAULT_SH
     if (message && request?.message) message.textContent = request.message;
   };
 
+  const clearRecovery = () => {
+    if (recoveryTimer) view.clearTimeout(recoveryTimer);
+    recoveryTimer = 0;
+    portal.classList.remove('is-recovery');
+    if (whisper) whisper.textContent = 'Um instante entre as estrelas';
+  };
+
+  const scheduleRecovery = () => {
+    clearRecovery();
+    recoveryTimer = view.setTimeout(() => {
+      recoveryTimer = 0;
+      if (destroyed || bypassed || active.size === 0) return;
+      portal.classList.add('is-recovery');
+      if (whisper) whisper.textContent = 'A conexão está demorando mais que o normal.';
+    }, RECOVERY_DELAY);
+  };
+
   const reveal = () => {
     showTimer = 0;
-    if (destroyed || active.size === 0) return;
+    if (destroyed || bypassed || active.size === 0) return;
     cancelTimer('hide');
     portal.classList.add('is-mounted');
     portal.setAttribute('aria-hidden', 'false');
@@ -113,6 +140,7 @@ export function createOrbLoadingPortal({ root = document, showDelay = DEFAULT_SH
 
   const conceal = () => {
     cancelTimer('show');
+    clearRecovery();
     portal.classList.remove('is-visible');
     portal.setAttribute('aria-hidden', 'true');
     delete html.dataset.orbLoading;
@@ -134,10 +162,12 @@ export function createOrbLoadingPortal({ root = document, showDelay = DEFAULT_SH
 
   const start = detail => {
     if (destroyed) return '';
+    if (active.size === 0) bypassed = false;
     const request = normalizeRequest(detail);
     active.set(request.id, request);
     setMessage(request);
     scheduleReveal();
+    scheduleRecovery();
     return request.id;
   };
 
@@ -148,10 +178,34 @@ export function createOrbLoadingPortal({ root = document, showDelay = DEFAULT_SH
     if (active.size) {
       const requests = Array.from(active.values());
       setMessage(requests[requests.length - 1]);
+      scheduleRecovery();
       return;
     }
+    bypassed = false;
     conceal();
   };
+
+  const bypass = () => {
+    if (destroyed || active.size === 0) return;
+    bypassed = true;
+    conceal();
+    root.dispatchEvent(new CustomEvent('divina:loading-bypass', {
+      detail: { pending: Array.from(active.keys()) }
+    }));
+  };
+
+  recovery?.addEventListener('click', bypass);
+
+  if (portal.hasAttribute('data-boot-loader')) {
+    active.set(BOOT_REQUEST_ID, normalizeRequest({
+      id: BOOT_REQUEST_ID,
+      message: 'Despertando a Divina Bruxa…'
+    }));
+    portal.classList.add('is-mounted', 'is-visible');
+    portal.setAttribute('aria-hidden', 'false');
+    html.dataset.orbLoading = 'visible';
+    scheduleRecovery();
+  }
 
   const track = (task, detail = {}) => {
     const id = start(detail);
@@ -197,15 +251,19 @@ export function createOrbLoadingPortal({ root = document, showDelay = DEFAULT_SH
       active.clear();
       cancelTimer('show');
       cancelTimer('hide');
+      clearRecovery();
       if (frame) view.cancelAnimationFrame(frame);
       root.removeEventListener(START_EVENT, onStart);
       root.removeEventListener(END_EVENT, onEnd);
       root.removeEventListener('divina:skin-preparing', onSkinPreparing);
       root.removeEventListener('divina:skin-settled', onSkinFinished);
       root.removeEventListener('divina:skin-error', onSkinFinished);
+      recovery?.removeEventListener('click', bypass);
       portal.remove();
       delete html.dataset.orbLoading;
       delete html.dataset.orbLoader;
     }
   });
 }
+
+export const ORB_BOOT_REQUEST_V151 = BOOT_REQUEST_ID;
