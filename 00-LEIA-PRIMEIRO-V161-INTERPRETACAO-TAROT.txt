@@ -1,0 +1,81 @@
+DIVINA BRUXA · V161 · NUMEROLOGIA, CORTE E COMBINAÇÕES
+============================================================
+
+O QUE ESTA VERSÃO FAZ
+
+1. Cria três guias públicos, completos e indexáveis:
+   - Numerologia no Tarot: do Ás ao 10 nos quatro naipes
+   - Figuras da Corte: Pajem, Cavaleiro, Rainha e Rei
+   - Combinações de Tarot: como unir duas ou mais cartas
+2. A página de Numerologia conecta diretamente as 40 cartas numeradas.
+3. A página da Corte conecta diretamente as 16 Figuras da Corte.
+4. A página de Combinações apresenta:
+   - método em cinco passos;
+   - reforço, contraste, desenvolvimento e redirecionamento;
+   - quatro estruturas simples de duas cartas;
+   - quatro exemplos completos com cartas reais do deck.
+5. Atualiza Arcanos Menores com acesso aos três novos guias.
+6. Atualiza o sitemap de 101 para 104 páginas, mantendo 78 imagens.
+7. Mantém a Home e o Menu Mágico exatamente como estavam na V160.
+
+O QUE FOI PRESERVADO
+
+- Home fechada mostrando somente a Orbe.
+- Orbe, Menu Mágico, dock, skins e transições existentes.
+- Tarot Livre com 78 cartas diretas, sem repetição e sem significados.
+- Mesa Real com 13 fileiras de 6 cartas.
+- Carta do Dia, Tiragens, Escola e biblioteca das 78 cartas.
+- Consultas e valores atuais:
+  - Mesa Real Profissional: R$ 250
+  - Leitura de Mentes: R$ 150
+  - Carta de Conselho: R$ 100
+  - Pergunta Direta: R$ 50
+- E-mail obrigatório no pedido de Consulta.
+- E-mail oficial: orbedasrealidades@hotmail.com.
+- Metatag oficial do Google Search Console.
+- Billing continua sem cobrança real automática.
+- Resend continua adiado e não configurado.
+- Nenhuma imagem de compartilhamento social foi adicionada.
+- Nenhum nome pessoal não confirmado foi publicado.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+
+1. Abra a raiz do repositório divinabruxa.github.io.
+2. Toque em Add file > Upload files.
+3. Envie TODOS os 9 arquivos deste ZIP, soltos e sem criar pasta.
+4. Confirme a substituição de:
+   - sitemap.xml
+   - arcanos-menores.html
+5. Use a mensagem de commit:
+   Instala V161 numerologia corte e combinacoes
+6. Aguarde a publicação do GitHub Pages.
+7. Não apague nenhum outro arquivo do repositório.
+
+ARQUIVOS DESTA ENTREGA
+
+- sitemap.xml                                      SUBSTITUIR
+- arcanos-menores.html                             SUBSTITUIR
+- numerologia-no-tarot.html                        NOVO
+- figuras-da-corte-no-tarot.html                   NOVO
+- combinacoes-de-cartas-no-tarot.html              NOVO
+- 00-LEIA-PRIMEIRO-V161-INTERPRETACAO-TAROT.txt    NOVO
+- INTERPRETACAO-TAROT-V161.json                    NOVO
+- QA-V161-INTERPRETACAO-TAROT.mjs                  NOVO
+- ARQUIVOS-V161-SHA256.txt                         NOVO
+
+DEPENDÊNCIAS JÁ INSTALADAS
+
+As novas páginas reutilizam seo-portal-v154.css, ícones, a Orbe e imagens que já
+estão na raiz do site. Não renomeie nem apague arquivos antigos.
+
+IMPORTANTE
+
+- Todas as interpretações são apresentadas em posição direta.
+- Números são padrões de estudo, não previsões inevitáveis.
+- Figuras da Corte não determinam gênero, aparência ou identidade.
+- Combinações não comprovam pensamentos, intenções ou fatos sobre terceiros.
+- Questões médicas, psicológicas, jurídicas e financeiras continuam direcionadas
+  para informação confiável e orientação profissional qualificada.
+- Não remova a metatag google-site-verification da Home.
+- Não é necessário reenviar o sitemap ao Google; o endereço continua o mesmo.
+- Depois de instalar, responda apenas: Instalado
