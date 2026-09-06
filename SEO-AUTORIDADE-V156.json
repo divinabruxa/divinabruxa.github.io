@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "156.0.0",
+  "releaseDate": "2026-09-06",
+  "canonicalOrigin": "https://divinabruxa.com.br/",
+  "objective": "Conectar a Home aos portais públicos com links HTML rastreáveis, descritivos e úteis, preservando a experiência aprovada.",
+  "crawlableNavigation": {
+    "container": "magic-menu-guides",
+    "visibleWhen": "Menu Mágico aberto",
+    "links": [
+      {
+        "label": "Tarot Livre online",
+        "href": "tarot-livre.html"
+      },
+      {
+        "label": "Carta do Dia no Tarot",
+        "href": "carta-do-dia.html"
+      },
+      {
+        "label": "Tiragens de Tarot",
+        "href": "tiragens-de-tarot.html"
+      },
+      {
+        "label": "Escola do Tarot",
+        "href": "escola-do-tarot.html"
+      },
+      {
+        "label": "Consultas de Tarot",
+        "href": "consultas-de-tarot.html"
+      },
+      {
+        "label": "Significados das 78 cartas",
+        "href": "cartas-do-tarot.html"
+      }
+    ]
+  },
+  "organizationIdentity": {
+    "type": "Organization",
+    "name": "Divina Bruxa",
+    "alternateName": "Orbe das Realidades",
+    "logo": "https://divinabruxa.com.br/icon-512.png",
+    "logoWidth": 512,
+    "logoHeight": 512
+  },
+  "searchConsoleObservedState": {
+    "property": "https://divinabruxa.com.br/",
+    "propertyVerified": true,
+    "verificationMethod": "html-tag",
+    "sitemapStatus": "processed",
+    "sitemapPagesFound": 85,
+    "alreadyIndexed": [
+      "https://divinabruxa.com.br/"
+    ],
+    "priorityQueueRequested": [
+      "https://divinabruxa.com.br/cartas-do-tarot.html",
+      "https://divinabruxa.com.br/tarot-livre.html",
+      "https://divinabruxa.com.br/carta-do-dia.html",
+      "https://divinabruxa.com.br/tiragens-de-tarot.html",
+      "https://divinabruxa.com.br/escola-do-tarot.html",
+      "https://divinabruxa.com.br/consultas-de-tarot.html"
+    ]
+  },
+  "safeguards": {
+    "closedHomeVisualChanged": false,
+    "orbChanged": false,
+    "tarotLivreChanged": false,
+    "consultationsChanged": false,
+    "billingChanged": false,
+    "searchConsoleTagRemoved": false,
+    "socialPreviewImageAdded": false
+  }
+}
+

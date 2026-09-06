@@ -1,0 +1,55 @@
+DIVINA BRUXA · V156 · LINKS RASTREÁVEIS E AUTORIDADE INTERNA
+================================================================
+
+O QUE ESTA VERSÃO FAZ
+
+1. Acrescenta ao Menu Mágico uma área discreta chamada “GUIAS COMPLETOS”.
+2. Cria links HTML reais e descritivos da Home para os seis portais públicos:
+   - Tarot Livre online
+   - Carta do Dia no Tarot
+   - Tiragens de Tarot
+   - Escola do Tarot
+   - Consultas de Tarot
+   - Significados das 78 cartas
+3. Ajuda pessoas e mecanismos de busca a compreender a estrutura do site.
+4. Reforça a identidade estruturada da Divina Bruxa com o ícone oficial de 512 × 512.
+
+O QUE FOI PRESERVADO
+
+- Home fechada mostrando somente a Orbe.
+- Orbe, Menu Mágico, dock e transições existentes.
+- Tarot Livre com 78 cartas diretas, sem repetição e sem significados.
+- Mesa Real 13 × 6.
+- Carta do Dia, Tiragens, Escola e biblioteca das 78 cartas.
+- Consultas e valores atuais.
+- Metatag oficial do Google Search Console.
+- Sitemap já processado pelo Google com 85 páginas.
+- Billing continua sem cobrança real automática.
+- Nenhuma imagem de compartilhamento social foi adicionada.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+
+1. Abra a raiz do repositório divinabruxa.github.io.
+2. Toque em Add file > Upload files.
+3. Envie TODOS os 6 arquivos deste ZIP, soltos e sem criar pasta.
+4. Confirme a substituição de index.html quando o GitHub solicitar.
+5. Use a mensagem de commit:
+   Instala V156 links rastreaveis
+6. Aguarde a publicação do GitHub Pages.
+7. Não apague nenhum outro arquivo do repositório.
+
+ARQUIVOS DESTA ENTREGA
+
+- index.html                         SUBSTITUIR
+- seo-navigation-v156.css           NOVO
+- 00-LEIA-PRIMEIRO-V156-LINKS-RASTREAVEIS.txt  NOVO
+- SEO-AUTORIDADE-V156.json           NOVO
+- QA-V156-LINKS-RASTREAVEIS.mjs      NOVO
+- ARQUIVOS-V156-SHA256.txt           NOVO
+
+IMPORTANTE
+
+- Não remova a metatag google-site-verification da Home.
+- Não é necessário reenviar o sitemap nem repetir as solicitações de indexação.
+- Depois de instalar, responda apenas: Instalado
+

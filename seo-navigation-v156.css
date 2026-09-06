@@ -1,0 +1,62 @@
+/* DIVINA BRUXA — V156 · GUIAS RASTREÁVEIS
+   Links HTML descritivos no Menu Mágico, sem alterar a Home fechada. */
+
+.magic-menu-guides{
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:7px;
+  width:min(100%,800px);
+  margin:16px auto 0;
+  padding:14px 0 2px;
+  border-top:1px solid rgba(220,177,107,.18);
+}
+
+.magic-menu-guides>strong{
+  flex:0 0 100%;
+  color:#e8c985;
+  font:500 9px/1.35 Georgia,"Times New Roman",serif;
+  letter-spacing:.2em;
+  text-align:center;
+}
+
+.magic-menu-guides>a{
+  display:inline-flex;
+  min-height:36px;
+  align-items:center;
+  justify-content:center;
+  padding:8px 12px;
+  border:1px solid rgba(220,177,107,.22);
+  border-radius:999px;
+  background:rgba(9,4,15,.74);
+  color:#cfc3d2;
+  font:500 10px/1.25 Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  text-align:center;
+  text-decoration:none;
+  touch-action:manipulation;
+  transition:border-color .18s ease,color .18s ease,background .18s ease,filter .18s ease;
+}
+
+.magic-menu-guides>a:hover,
+.magic-menu-guides>a:focus-visible{
+  border-color:rgba(244,204,132,.7);
+  background:rgba(56,20,69,.56);
+  color:#f6dfad;
+  outline:0;
+  filter:brightness(1.12);
+}
+
+.magic-menu-guides>a:focus-visible{
+  box-shadow:0 0 0 2px rgba(244,204,132,.34);
+}
+
+@media(max-width:420px){
+  .magic-menu-guides{gap:6px;padding-top:12px}
+  .magic-menu-guides>a{min-height:34px;padding:7px 10px;font-size:9px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .magic-menu-guides>a{transition:none}
+}
