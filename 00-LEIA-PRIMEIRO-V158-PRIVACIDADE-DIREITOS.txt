@@ -1,0 +1,78 @@
+DIVINA BRUXA · V158 · PRIVACIDADE, DIREITOS E ACESSIBILIDADE
+================================================================
+
+O QUE ESTA VERSÃO FAZ
+
+1. Cria três páginas públicas, indexáveis e ligadas entre si:
+   - Privacidade e dados pessoais
+   - Termos de Uso
+   - Acessibilidade
+2. Explica o funcionamento real da versão pública atual:
+   - preferências, progresso e Diário ficam principalmente no aparelho;
+   - Consultas podem enviar dados ao Supabase STAGING após revisão e consentimento;
+   - conta, Orbe IA e cobrança real continuam desativadas;
+   - Spotify, YouTube e Amazon aplicam regras próprias quando utilizados;
+   - o Resend ainda não está ativo.
+3. Publica um canal claro para direitos de dados e barreiras de acessibilidade.
+4. Declara limitações conhecidas sem afirmar certificação ou conformidade total.
+5. Acrescenta os três documentos ao Menu Mágico e aos rodapés institucionais.
+6. Atualiza o sitemap de 89 para 92 páginas, mantendo 78 imagens de cartas.
+
+O QUE FOI PRESERVADO
+
+- Home fechada mostrando somente a Orbe.
+- Orbe, Menu Mágico, dock, skins e transições existentes.
+- Tarot Livre com 78 cartas diretas, sem repetição e sem significados.
+- Mesa Real 13 × 6.
+- Carta do Dia, Tiragens, Escola e biblioteca das 78 cartas.
+- Consultas e valores atuais: R$ 250, R$ 150, R$ 100 e R$ 50.
+- E-mail oficial: orbedasrealidades@hotmail.com.
+- Metatag oficial do Google Search Console.
+- Billing continua sem cobrança real automática.
+- Nenhuma imagem de compartilhamento social foi adicionada.
+- Nenhum nome pessoal ou biografia não confirmada foi publicado.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+
+1. Abra a raiz do repositório divinabruxa.github.io.
+2. Toque em Add file > Upload files.
+3. Envie TODOS os 13 arquivos deste ZIP, soltos e sem criar pasta.
+4. Confirme a substituição dos 6 arquivos indicados abaixo.
+5. Use a mensagem de commit:
+   Instala V158 privacidade e direitos
+6. Aguarde a publicação do GitHub Pages.
+7. Não apague nenhum outro arquivo do repositório.
+
+ARQUIVOS DESTA ENTREGA
+
+- index.html                                      SUBSTITUIR
+- sitemap.xml                                    SUBSTITUIR
+- sobre-a-divina-bruxa.html                      SUBSTITUIR
+- metodologia-do-tarot.html                      SUBSTITUIR
+- etica-e-responsabilidade.html                  SUBSTITUIR
+- contato.html                                   SUBSTITUIR
+- privacidade-e-dados.html                       NOVO
+- termos-de-uso.html                             NOVO
+- acessibilidade.html                            NOVO
+- 00-LEIA-PRIMEIRO-V158-PRIVACIDADE-DIREITOS.txt NOVO
+- PRIVACIDADE-DIREITOS-V158.json                  NOVO
+- QA-V158-PRIVACIDADE-DIREITOS.mjs               NOVO
+- ARQUIVOS-V158-SHA256.txt                       NOVO
+
+DEPENDÊNCIAS JÁ INSTALADAS
+
+As novas páginas reutilizam o CSS, os ícones e as imagens que já estão na raiz do
+site. Não renomeie nem apague arquivos antigos ao instalar esta versão.
+
+IMPORTANTE
+
+- As páginas refletem o comportamento técnico observado em 06/09/2026.
+- Antes de ativar conta, IA, Resend ou cobrança real, Privacidade e Termos devem
+  ser revisados e atualizados.
+- Estes textos aumentam transparência, mas não substituem revisão jurídica
+  profissional antes do lançamento comercial em produção.
+- A página de Acessibilidade não declara certificação WCAG.
+- Não remova a metatag google-site-verification da Home.
+- Não é necessário reenviar o sitemap ao Google; ele permanece no mesmo endereço.
+- Depois de instalar, responda apenas: Instalado
+

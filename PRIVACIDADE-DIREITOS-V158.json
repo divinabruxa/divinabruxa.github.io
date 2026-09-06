@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "158.0.0",
+  "releaseDate": "2026-09-06",
+  "canonicalOrigin": "https://divinabruxa.com.br/",
+  "objective": "Publicar informações claras sobre tratamento de dados, regras de uso e acessibilidade com base no comportamento técnico atual da Divina Bruxa, sem inventar identidade empresarial nem afirmar certificações inexistentes.",
+  "publicPages": [
+    {
+      "file": "privacidade-e-dados.html",
+      "canonical": "https://divinabruxa.com.br/privacidade-e-dados.html",
+      "schemaType": "WebPage",
+      "purpose": "Explicar armazenamento local, Consultas, serviços externos, retenção, segurança e direitos de titulares."
+    },
+    {
+      "file": "termos-de-uso.html",
+      "canonical": "https://divinabruxa.com.br/termos-de-uso.html",
+      "schemaType": "WebPage",
+      "purpose": "Definir uso responsável, natureza simbólica, estado dos recursos, Consultas, links externos e autoria."
+    },
+    {
+      "file": "acessibilidade.html",
+      "canonical": "https://divinabruxa.com.br/acessibilidade.html",
+      "schemaType": "WebPage",
+      "purpose": "Registrar recursos atuais, limitações conhecidas, referências e canal para comunicar barreiras."
+    }
+  ],
+  "observedProductState": {
+    "publicBrowsingRequiresAccount": false,
+    "publicAccountApiEnabled": false,
+    "orbeAiApiEnabled": false,
+    "realBillingEnabled": false,
+    "consultationApiConfigured": true,
+    "consultationEnvironment": "staging",
+    "consultationProvider": "Supabase",
+    "consultationAutomaticEmailProvider": "Resend",
+    "consultationAutomaticEmailEnabled": false,
+    "firstPartyAdvertisingCookiesCreated": false,
+    "browserLocalStorageUsed": true,
+    "serviceWorkerCacheUsed": true,
+    "externalAnalyticsProviderEnabled": false,
+    "spotifyEmbedUsed": true,
+    "youtubeLinksUsed": true,
+    "amazonAffiliateLinksUsed": true
+  },
+  "localDataCategories": [
+    "tarot-and-daily-state",
+    "spread-history",
+    "school-progress",
+    "journal-entries-and-drafts",
+    "skin-and-interface-preferences",
+    "favorites",
+    "notification-preferences",
+    "privacy-consents",
+    "local-aggregate-events",
+    "consultation-draft"
+  ],
+  "consultationSubmission": {
+    "requiresReview": true,
+    "requiresPrivacyConsent": true,
+    "fields": [
+      "name",
+      "email",
+      "phone",
+      "question-or-context",
+      "service",
+      "schedule-preference",
+      "price-snapshot",
+      "consents",
+      "rate-limit-fingerprint"
+    ],
+    "cardDataCollected": false,
+    "realPaymentPerformed": false
+  },
+  "dataRightsChannel": {
+    "email": "orbedasrealidades@hotmail.com",
+    "suggestedSubject": "Privacidade e dados — Divina Bruxa",
+    "identityVerificationMayBeRequired": true
+  },
+  "accessibility": {
+    "reference": "WCAG 2.2",
+    "formalCertificationClaimed": false,
+    "fullApplicationAuditCompleted": false,
+    "publicPageFeatures": [
+      "semantic-html",
+      "skip-link",
+      "visible-focus",
+      "responsive-layout",
+      "reduced-motion",
+      "alternative-text"
+    ],
+    "barrierReportEmail": "orbedasrealidades@hotmail.com"
+  },
+  "authoritativeReferences": [
+    "https://www.gov.br/anpd/pt-br/assuntos/titular-de-dados-1/direito-dos-titulares",
+    "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/L13709compilado.htm",
+    "https://www.w3.org/TR/WCAG22/",
+    "https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/acessibilidade-digital"
+  ],
+  "discoverability": {
+    "homeGuideLinksBefore": 10,
+    "homeGuideLinksAfter": 13,
+    "homeGuideGroupsAfter": 2,
+    "institutionalFootersUpdated": 4,
+    "sitemapUrlsBefore": 89,
+    "sitemapUrlsAfter": 92,
+    "sitemapImageEntries": 78,
+    "crawlableHtmlLinks": true,
+    "uniqueTitles": true,
+    "uniqueDescriptions": true,
+    "canonicalUrls": true,
+    "structuredData": true
+  },
+  "accuracyBoundaries": {
+    "legalComplianceCertificationClaimed": false,
+    "wcagCertificationClaimed": false,
+    "fixedServerRetentionDeadlineInvented": false,
+    "unconfirmedCompanyIdentityAdded": false,
+    "unconfirmedAddressAdded": false,
+    "unconfirmedPersonalBiographyAdded": false,
+    "professionalLegalReviewStillRecommendedBeforeProduction": true
+  },
+  "safeguards": {
+    "closedHomeVisualChanged": false,
+    "orbChanged": false,
+    "tarotLivreChanged": false,
+    "consultationsFunctionalCodeChanged": false,
+    "consultationPricesChanged": false,
+    "billingChanged": false,
+    "searchConsoleTagRemoved": false,
+    "socialPreviewImageAdded": false
+  }
+}
+
