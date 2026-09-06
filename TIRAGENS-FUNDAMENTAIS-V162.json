@@ -1,0 +1,238 @@
+{
+  "schemaVersion": "162.0.0",
+  "release": "DIVINA-BRUXA-V162-TIRAGENS-FUNDAMENTAIS",
+  "date": "2026-09-06",
+  "status": "ready-for-manual-install",
+  "purpose": "Criar guias públicos, rastreáveis e responsáveis para as quatro estruturas fundamentais de tiragem da Divina Bruxa.",
+  "publicPages": [
+    {
+      "file": "tiragem-de-uma-carta.html",
+      "type": "Article",
+      "canonical": "https://divinabruxa.com.br/tiragem-de-uma-carta.html",
+      "primaryImage": "card-17.webp",
+      "cards": 1,
+      "officialPositions": [
+        "Mensagem central"
+      ],
+      "role": "single-card-spread-guide"
+    },
+    {
+      "file": "tiragem-de-tres-cartas.html",
+      "type": "Article",
+      "canonical": "https://divinabruxa.com.br/tiragem-de-tres-cartas.html",
+      "primaryImage": "templo-tiragens-celestial-v1.webp",
+      "cards": 3,
+      "officialMethods": 3,
+      "role": "three-card-spreads-guide"
+    },
+    {
+      "file": "cruz-celta-no-tarot.html",
+      "type": "Article",
+      "canonical": "https://divinabruxa.com.br/cruz-celta-no-tarot.html",
+      "primaryImage": "tarot-temple-background-v1.webp",
+      "cards": 10,
+      "officialPositions": [
+        "Presente",
+        "Desafio",
+        "Fundamento",
+        "Passado recente",
+        "Possibilidade consciente",
+        "Futuro próximo",
+        "Você",
+        "Ambiente",
+        "Esperanças e medos",
+        "Síntese"
+      ],
+      "role": "celtic-cross-position-guide"
+    },
+    {
+      "file": "mesa-real-no-tarot.html",
+      "type": "Article",
+      "canonical": "https://divinabruxa.com.br/mesa-real-no-tarot.html",
+      "primaryImage": "consultas-celestiais-santuario-v1.webp",
+      "cards": 78,
+      "rows": 13,
+      "columns": 6,
+      "role": "royal-table-format-guide"
+    }
+  ],
+  "spreadsArchitecture": {
+    "singleCard": {
+      "name": "Uma Carta",
+      "positions": [
+        "Mensagem central"
+      ]
+    },
+    "threeCardMethods": [
+      {
+        "name": "Passado · Presente · Tendência",
+        "positions": [
+          "Passado · raiz",
+          "Presente",
+          "Tendência · conselho"
+        ]
+      },
+      {
+        "name": "Triângulo Mágico",
+        "positions": [
+          "O que se manifesta",
+          "O que pede consciência",
+          "O caminho possível"
+        ]
+      },
+      {
+        "name": "Situação · Desafio · Conselho",
+        "positions": [
+          "Situação",
+          "Desafio",
+          "Conselho"
+        ]
+      }
+    ],
+    "celticCrossPositions": [
+      "Presente",
+      "Desafio",
+      "Fundamento",
+      "Passado recente",
+      "Possibilidade consciente",
+      "Futuro próximo",
+      "Você",
+      "Ambiente",
+      "Esperanças e medos",
+      "Síntese"
+    ],
+    "royalTable": {
+      "cards": 78,
+      "rows": 13,
+      "columns": 6,
+      "fixedRowMeanings": false,
+      "positionRange": "1-78"
+    },
+    "orientation": "upright-only",
+    "cardRepetitionInsideSession": false,
+    "agencyCentered": true
+  },
+  "royalTableSeparation": {
+    "publicGuide": {
+      "access": "public",
+      "automaticInterpretation": false
+    },
+    "freeTarot": {
+      "access": "free",
+      "cards": 78,
+      "rows": 13,
+      "columns": 6,
+      "imagesOnlyDuringReveal": true,
+      "automaticMeanings": false
+    },
+    "premiumSpreads": {
+      "access": "premium",
+      "automaticMode": true,
+      "localResume": true,
+      "humanConsultation": false
+    },
+    "professionalConsultation": {
+      "access": "human-service-request",
+      "name": "Mesa Real Profissional",
+      "priceBrl": 250,
+      "emailRequired": true,
+      "confirmationChannel": "email",
+      "automaticCharge": false
+    }
+  },
+  "internalLinking": {
+    "spreadsHubUpdated": true,
+    "spreadsHubNewGuideLinks": 4,
+    "allNewPagesCrossLinked": true,
+    "freeTarotLinkedFromRoyalTableGuide": true,
+    "professionalConsultationLinkedFromRoyalTableGuide": true,
+    "questionsGuideLinked": true,
+    "combinationsGuideLinked": true,
+    "homeChanged": false
+  },
+  "contentQuality": {
+    "language": "pt-BR",
+    "uniqueTitles": true,
+    "uniqueDescriptions": true,
+    "oneH1PerPage": true,
+    "semanticLandmarks": true,
+    "skipLinks": true,
+    "articleStructuredData": true,
+    "breadcrumbStructuredData": true,
+    "celticCrossItemListStructuredData": true,
+    "visibleResponsibleUseNotes": true,
+    "deterministicPredictions": false,
+    "literalMindReadingClaims": false,
+    "professionalAdviceReplacementClaims": false,
+    "faqRichResultMarkupAdded": false,
+    "socialPreviewImageAdded": false
+  },
+  "discoverability": {
+    "sitemapUrlsBefore": 104,
+    "sitemapUrlsAfter": 108,
+    "sitemapImageEntries": 78,
+    "newSitemapUrls": 4,
+    "crawlableHtmlLinks": true,
+    "canonicalUrls": true
+  },
+  "reuse": {
+    "stylesheet": "seo-portal-v154.css?v=154",
+    "newCssAdded": false,
+    "newJavascriptAddedToPublicPages": false,
+    "newImagesAdded": false,
+    "existingAssetsOnly": true
+  },
+  "safeguards": {
+    "indexChanged": false,
+    "closedHomeVisualChanged": false,
+    "orbChanged": false,
+    "tarotLivreChanged": false,
+    "tarotLivreCards": 78,
+    "tarotLivreOrientation": "upright-only",
+    "tarotLivreMeaningsInsideFreeMode": false,
+    "tarotLivreRepeats": false,
+    "mesaRealRows": 13,
+    "mesaRealColumns": 6,
+    "consultationsFunctionalCodeChanged": false,
+    "consultationPricesChanged": false,
+    "consultationPricesBrl": [
+      250,
+      150,
+      100,
+      50
+    ],
+    "consultationEmailRequired": true,
+    "consultationOwnerEmail": "orbedasrealidades@hotmail.com",
+    "billingChanged": false,
+    "realBillingEnabled": false,
+    "resendConfigured": false,
+    "searchConsoleTagRemoved": false,
+    "privateAreaLinked": false,
+    "unconfirmedPersonalNamePublished": false
+  },
+  "integrityBase": {
+    "indexV161Sha256": "bcb4271567fed2c4464a7b5f61c6870d9919c25372fb7f669730541a0ec95701",
+    "sitemapV161Sha256": "4048181228c139d7f8f461c51e60bb49c6f4ae08bb136cae8d41436e674a345e",
+    "spreadsHubV161Sha256": "2de13b11577422f80ce32a27d987dd4e9afe7438e18816582c53327a1efcb416"
+  },
+  "installation": {
+    "method": "manual-flat-upload-github",
+    "filesInPackage": 10,
+    "replace": [
+      "sitemap.xml",
+      "tiragens-de-tarot.html"
+    ],
+    "add": [
+      "tiragem-de-uma-carta.html",
+      "tiragem-de-tres-cartas.html",
+      "cruz-celta-no-tarot.html",
+      "mesa-real-no-tarot.html",
+      "00-LEIA-PRIMEIRO-V162-TIRAGENS-FUNDAMENTAIS.txt",
+      "TIRAGENS-FUNDAMENTAIS-V162.json",
+      "QA-V162-TIRAGENS-FUNDAMENTAIS.mjs",
+      "ARQUIVOS-V162-SHA256.txt"
+    ],
+    "deleteOtherFiles": false,
+    "commitMessage": "Instala V162 tiragens fundamentais"
+  }
+}

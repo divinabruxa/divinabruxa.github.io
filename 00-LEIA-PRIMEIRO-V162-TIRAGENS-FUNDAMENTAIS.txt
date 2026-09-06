@@ -1,0 +1,101 @@
+DIVINA BRUXA — V162 — TIRAGENS FUNDAMENTAIS
+Data: 06/09/2026
+Instalação manual e plana no GitHub
+
+OBJETIVO DESTA VERSÃO
+
+Criar quatro guias públicos para as tiragens mais procuradas e ligá-los à página
+Tiragens de Tarot. A versão ensina pergunta, posições, relações, síntese e limites
+responsáveis sem alterar o funcionamento das tiragens.
+
+NOVAS PÁGINAS
+
+1. tiragem-de-uma-carta.html
+   Método de Uma Carta, cinco passos, posições possíveis e exemplo de leitura.
+
+2. tiragem-de-tres-cartas.html
+   Três métodos oficiais do site, variações para estudo e integração das cartas.
+
+3. cruz-celta-no-tarot.html
+   As dez posições exatas adotadas pela Divina Bruxa e uma ordem clara de leitura.
+
+4. mesa-real-no-tarot.html
+   Formato 13 × 6 com 78 cartas e separação transparente entre Tarot Livre,
+   experiência Premium e Mesa Real Profissional de R$ 250.
+
+OS 10 ARQUIVOS DESTE PACOTE
+
+SUBSTITUA OS 2 ARQUIVOS EXISTENTES:
+
+- sitemap.xml
+- tiragens-de-tarot.html
+
+ADICIONE OS 8 ARQUIVOS NOVOS:
+
+- tiragem-de-uma-carta.html
+- tiragem-de-tres-cartas.html
+- cruz-celta-no-tarot.html
+- mesa-real-no-tarot.html
+- 00-LEIA-PRIMEIRO-V162-TIRAGENS-FUNDAMENTAIS.txt
+- TIRAGENS-FUNDAMENTAIS-V162.json
+- QA-V162-TIRAGENS-FUNDAMENTAIS.mjs
+- ARQUIVOS-V162-SHA256.txt
+
+COMO INSTALAR PELO IPHONE
+
+1. Abra o repositório divinabruxa.github.io no GitHub.
+2. Entre na raiz, onde estão index.html, sitemap.xml e as demais páginas.
+3. Toque em Add file e depois em Upload files.
+4. Selecione TODOS os 10 arquivos soltos deste pacote.
+5. Confirme que nenhum arquivo ficou dentro de uma pasta.
+6. O GitHub indicará que sitemap.xml e tiragens-de-tarot.html serão substituídos.
+7. Não apague nenhum outro arquivo do site.
+8. Use a mensagem: Instala V162 tiragens fundamentais
+9. Confirme o commit no ramo main.
+
+CONFERÊNCIA APÓS O COMMIT
+
+Aguarde o GitHub Pages atualizar e abra:
+
+- https://divinabruxa.com.br/tiragem-de-uma-carta.html
+- https://divinabruxa.com.br/tiragem-de-tres-cartas.html
+- https://divinabruxa.com.br/cruz-celta-no-tarot.html
+- https://divinabruxa.com.br/mesa-real-no-tarot.html
+- https://divinabruxa.com.br/tiragens-de-tarot.html
+
+O QUE FOI PRESERVADO
+
+- Home e seu visual fechado: intactos.
+- Tarot Livre: intacto, com 78 cartas oficiais, diretas, sem repetição e sem
+  significados durante a revelação.
+- Mesa Real do Tarot Livre: 13 fileiras de 6.
+- Consultas: funcionamento intacto.
+- Valores: R$ 250, R$ 150, R$ 100 e R$ 50.
+- E-mail obrigatório nas consultas.
+- Cobrança real: desligada.
+- Resend: continua adiado e não configurado.
+- Nenhuma imagem social foi adicionada.
+- Nenhum nome pessoal não confirmado foi publicado.
+
+DETALHES IMPORTANTES DA MESA REAL
+
+- Tarot Livre: gratuito, visual, 78 imagens, cartas diretas, sem repetição e sem
+  interpretação automática.
+- Mesa Real em Tiragens: modalidade automática ligada ao Premium; não é consulta.
+- Mesa Real Profissional: atendimento humano separado, R$ 250, e-mail obrigatório,
+  confirmação por e-mail e nenhuma cobrança automática ao solicitar.
+
+CONTROLE TÉCNICO
+
+- Sitemap: 108 URLs de página.
+- Sitemap de imagens: 78 entradas preservadas.
+- Folha visual reutilizada: seo-portal-v154.css?v=154.
+- Imagens reutilizadas: nenhuma imagem nova no pacote.
+- Contrato: TIRAGENS-FUNDAMENTAIS-V162.json.
+- Auditoria: QA-V162-TIRAGENS-FUNDAMENTAIS.mjs.
+- Integridade: ARQUIVOS-V162-SHA256.txt.
+
+IMPORTANTE
+
+Este pacote é incremental. Envie os 10 arquivos; não substitua o repositório inteiro
+e não apague as versões ou páginas anteriores.

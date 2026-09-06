@@ -858,4 +858,28 @@
       <image:loc>https://divinabruxa.com.br/card-77.webp</image:loc>
     </image:image>
   </url>
+  <url>
+    <loc>https://divinabruxa.com.br/tiragem-de-uma-carta.html</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://divinabruxa.com.br/tiragem-de-tres-cartas.html</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://divinabruxa.com.br/cruz-celta-no-tarot.html</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://divinabruxa.com.br/mesa-real-no-tarot.html</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
