@@ -1,0 +1,35 @@
+{
+  "schemaVersion":"175.0.0",
+  "release":"DIVINA-BRUXA-V175-CARTAS-INVERTIDAS",
+  "date":"2026-09-07",
+  "status":"ready-for-manual-install",
+  "purpose":"Explicar cartas invertidas como escolha metodológica e ensinar a encontrar potência, tensão e bloqueio usando somente cartas diretas.",
+  "guide":{
+    "page":"cartas-invertidas-no-tarot.html",
+    "stylesheet":"cartas-invertidas-v175.css?v=175",
+    "script":"cartas-invertidas-v175.js?v=175",
+    "sampleCards":["O Sol","A Lua","5 de Copas","2 de Espadas"],
+    "contexts":["momento geral","relações","trabalho","espiritualidade"],
+    "interactiveExamples":16,
+    "directReadingLenses":["imagem","posição","contexto","integração"],
+    "reversalPossibilities":4,
+    "comparisonRows":5,
+    "consistencyDecisions":5,
+    "faqQuestions":6,
+    "sources":2,
+    "structuredDataTypes":["Article","HowTo","FAQPage"]
+  },
+  "laboratoryPrivacy":{"runsLocally":true,"registrationRequired":false,"networkRequests":false,"answersStored":false,"cookiesUsed":false,"analyticsEventsAdded":false,"personalTextCollected":false},
+  "editorialMethod":{"reversalsPresentedAsMandatory":false,"reversedMeansNegative":false,"uprightMeansPositive":false,"methodDefinedBeforeReading":true,"factHypothesisProjectionSeparated":true,"userAutonomyPreserved":true,"divinaBruxaOrientation":"upright-only"},
+  "references":[
+    {"author":"Arthur Edward Waite","title":"The Illustrated Key to the Tarot","host":"Project Gutenberg","purpose":"registro histórico de significados diretos e reversos","url":"https://www.gutenberg.org/files/43548/43548-h/43548-h.htm"},
+    {"institution":"Victoria and Albert Museum","title":"A history of tarot cards","purpose":"história e estrutura de 78 cartas","url":"https://www.vam.ac.uk/articles/tarot-cards"}
+  ],
+  "searchIntegration":{"searchScript":"busca-v165.js?v=175","indexedDestinationsBefore":126,"indexedDestinationsAfter":127,"categoryCounts":{"cartas":78,"tiragens":14,"aprender":25,"portal":10},"guideFeatured":true,"exampleQueries":["cartas invertidas","carta de cabeça para baixo","tarot sem invertidas","invertida é negativa","por que não usa invertidas"]},
+  "discoverability":{"linkedFrom":["metodologia-do-tarot.html","tarot-para-iniciantes.html","guias-para-comecar.html","escola-do-tarot.html","buscar.html"],"sitemapUrlsBefore":127,"sitemapUrlsAfter":128,"sitemapImageEntries":78,"newSitemapUrls":1},
+  "accessibility":{"singleH1":true,"skipLink":true,"nativeSelects":true,"liveResult":true,"keyboardScrollableComparison":true,"nativeFaqDetails":true,"responsiveSingleColumn":true,"reducedMotionSupported":true,"printStylesIncluded":true},
+  "reuse":{"portalStylesheet":"seo-portal-v154.css?v=154","existingImage":"tarot-atlas.webp","existingImageWidth":3000,"existingImageHeight":3600,"newImagesAdded":false,"socialPreviewImageAdded":false},
+  "safeguards":{"indexChanged":false,"tarotLivreChanged":false,"tarotLivreCards":78,"tarotLivreOrientation":"upright-only","tarotLivreMeaningsInsideFreeMode":false,"tarotLivreRepeats":false,"mesaRealRows":13,"mesaRealColumns":6,"consultationsFunctionalCodeChanged":false,"consultationPricesBrl":[250,150,100,50],"consultationEmailRequired":true,"ownerEmail":"orbedasrealidades@hotmail.com","realBillingEnabled":false,"resendConfigured":false,"unconfirmedPersonalNamePublished":false},
+  "integrityBase":{"sitemapV174Sha256":"247d3f1d7a3086a9aa16b3eb2fc71f7b851ff1e5c60193dd0b7ecb93817b6d55","searchPageV174Sha256":"7f08b3ea927087eeed66034b06e24d5ab21b1b9843604cd97aab7f3dda05052f","searchScriptV174Sha256":"686cf1ab4f73449a188996a279b7bdd98e7955c3833005ac50b5c96b56d29ae3","methodologyV174Sha256":"d654c7119955fcbb656b0534d4fac201200d170c629dfdffec7dd50c514770c8","beginnerV174Sha256":"823bbdac464c1bb17cd18be7c247c2baddbf9c950d7513d848f86968b20b8e72","guidesV174Sha256":"c68623bdea394e7019780c82e5c0ffb3eb720677c9c921ec8723f94eddbee9e4","schoolV174Sha256":"dd3c876607de0fc32dedbe963dc5cbb34f1e535cfc75dee6bccb19e477cd4826"},
+  "installation":{"method":"manual-flat-upload-github","filesInPackage":14,"replace":["sitemap.xml","buscar.html","busca-v165.js","metodologia-do-tarot.html","tarot-para-iniciantes.html","guias-para-comecar.html","escola-do-tarot.html"],"add":["cartas-invertidas-no-tarot.html","cartas-invertidas-v175.css","cartas-invertidas-v175.js","00-LEIA-PRIMEIRO-V175-CARTAS-INVERTIDAS.txt","CARTAS-INVERTIDAS-V175.json","QA-V175-CARTAS-INVERTIDAS.mjs","ARQUIVOS-V175-SHA256.txt"],"deleteOtherFiles":false,"commitMessage":"Instala V175 cartas invertidas"}
+}

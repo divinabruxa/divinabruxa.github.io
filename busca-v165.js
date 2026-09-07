@@ -36,6 +36,7 @@ const PAGES = Object.freeze([
   ['Plano de estudo do Tarot em 30 dias', 'plano-de-estudo-do-tarot-em-30-dias.html', '30 dias · 10–30 min', 'aprender', 'Plano gratuito e interativo para estudar Tarot em 30 dias com sessões de 10, 20 ou 30 minutos, revisão espaçada, prática de memória, Arcanos Maiores, Arcanos Menores, naipes, números, figuras da corte, símbolos, perguntas, tiragens, combinações e ética. como cronograma rotina curso aprender memorizar decorar cartas caderno iniciante'],
   ['Diário de Tarot', 'diario-de-tarot.html', '4 modelos de ficha', 'aprender', 'Guia para criar um Diário de Tarot com gerador local de fichas para uma carta, três cartas, estudo e revisão; modelos essencial e completo, copiar, imprimir, caderno, registro de leitura, observação, hipótese, síntese, privacidade e aprendizado. como fazer anotar escrever revisar leituras journaling journal celular papel'],
   ['Como limpar e consagrar um baralho de Tarot', 'como-limpar-consagrar-baralho-de-tarot.html', 'Guia de cuidado', 'aprender', 'Separe limpeza física, consagração simbólica e guarda; monte uma rotina local segura e evite sol direto, água, umidade, fumaça, cinzas, sal, cristais sobre as cartas, óleos, álcool, calor e pressão. como limpar energizar consagrar guardar proteger cuidar baralho tarot novo primeira leitura outra pessoa tocar incenso lua ritual caixa conservação'],
+  ['Cartas invertidas no Tarot', 'cartas-invertidas-no-tarot.html', '4 lentes · 16 exemplos', 'aprender', 'Entenda se cartas invertidas são obrigatórias e pratique um método de leitura somente com cartas diretas usando imagem, posição, contexto, potência e tensão. carta de cabeça para baixo reversa reverso inversão significado negativo positivo bloqueio interiorização atraso excesso falta tarot sem invertidas por que Divina Bruxa não usa invertidas laboratório Sol Lua 5 de Copas 2 de Espadas'],
   ['Tiragem de Uma Carta', 'tiragem-de-uma-carta.html', '1 posição', 'tiragens', 'Mensagem central, pergunta, observação e reflexão prática.'],
   ['Tiragem de Três Cartas', 'tiragem-de-tres-cartas.html', '3 posições', 'tiragens', 'Estruturas, relações entre as cartas e síntese final. passado presente tendência'],
   ['Cruz Celta', 'cruz-celta-no-tarot.html', '10 posições', 'tiragens', 'Presente, desafio, base, passado, possibilidade, próximo movimento, atitude, ambiente, esperanças e síntese.'],
@@ -88,7 +89,7 @@ const entries = Object.freeze([
     title, url, kind, category, description: displayDescription(description),
     icon: category === 'tiragens' ? '✧' : category === 'aprender' ? '▤' : '◉',
     searchable: normalize(`${title} ${kind} ${description}`),
-    featured: [1,2,3,4,5,6,14,15,26,27,28,29,30,31,32,33,34].includes(index)
+    featured: [1,2,3,4,5,6,14,15,26,27,28,29,30,31,32,33,34,35].includes(index)
   }))
 ]);
 

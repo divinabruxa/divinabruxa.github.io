@@ -1,0 +1,74 @@
+DIVINA BRUXA — V175 — CARTAS INVERTIDAS NO TAROT
+Data: 07/09/2026
+
+Esta versão adiciona um novo guia metodológico:
+
+- Página completa: cartas-invertidas-no-tarot.html.
+- Explicação clara: cartas invertidas não são obrigatórias.
+- Cartas diretas não são sempre positivas; invertidas não são sempre negativas.
+- Laboratório local com 4 cartas e 4 contextos: 16 exemplos.
+- Quatro lentes: imagem, posição, contexto e integração.
+- Potência e tensão dentro da mesma carta direta.
+- Quatro possibilidades usadas por métodos com inversões.
+- Comparação prática em 5 critérios.
+- Cinco decisões de consistência para quem estudar outro método.
+- Seis dúvidas frequentes.
+- Duas fontes históricas e institucionais.
+- Busca completa ampliada de 126 para 127 destinos.
+- Nenhuma escolha do laboratório é enviada ou guardada.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+
+1. Descompacte o ZIP no aplicativo Arquivos.
+2. Abra a raiz do repositório divinabruxa.github.io no ramo main.
+3. Toque em Add file e Upload files.
+4. Selecione os 14 arquivos soltos, não o ZIP.
+5. Substitua estes 7 arquivos:
+   - sitemap.xml
+   - buscar.html
+   - busca-v165.js
+   - metodologia-do-tarot.html
+   - tarot-para-iniciantes.html
+   - guias-para-comecar.html
+   - escola-do-tarot.html
+6. Adicione os outros 7 arquivos.
+7. Não apague nenhum arquivo anterior.
+8. Confirme o commit com a mensagem: Instala V175 cartas invertidas
+
+CONFERÊNCIA PÚBLICA
+
+https://divinabruxa.com.br/cartas-invertidas-no-tarot.html
+https://divinabruxa.com.br/metodologia-do-tarot.html
+https://divinabruxa.com.br/tarot-para-iniciantes.html
+https://divinabruxa.com.br/guias-para-comecar.html
+https://divinabruxa.com.br/escola-do-tarot.html
+https://divinabruxa.com.br/buscar.html
+
+TESTES RÁPIDOS
+
+- Escolha A Lua e Relações; confira as quatro lentes.
+- Escolha 5 de Copas e Trabalho; confira a mudança de contexto.
+- Confirme que nenhuma carta é exibida de cabeça para baixo.
+- Na busca, digite: cartas invertidas
+- Na busca, digite: carta de cabeça para baixo
+- Na busca, digite: tarot sem invertidas
+
+PRESERVADO
+
+- Home intacta.
+- Tarot Livre intacto: 78 cartas oficiais, diretas, sem repetição e sem
+  significados durante a revelação; Mesa Real 13 × 6.
+- Consultas intactas: R$ 250, R$ 150, R$ 100 e R$ 50; e-mail obrigatório.
+- Cobrança real desligada e Resend ainda adiado.
+- Nenhuma imagem nova ou imagem social foi adicionada.
+- Nenhum nome pessoal foi publicado.
+
+CONTROLE
+
+- Laboratório: 16 exemplos diretos.
+- Método: 4 lentes, 5 critérios e 5 decisões de consistência.
+- Busca: 127 destinos únicos.
+- Sitemap: 128 URLs de página e 78 entradas de imagem.
+- QA: QA-V175-CARTAS-INVERTIDAS.mjs.
+- Integridade: ARQUIVOS-V175-SHA256.txt.
+- Contrato: CARTAS-INVERTIDAS-V175.json.
