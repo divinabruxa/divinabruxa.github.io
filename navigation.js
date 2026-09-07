@@ -1,14 +1,20 @@
-// DIVINA BRUXA V151 — MENU ORBITAL CONTÍNUO + BASE IMORTAL
+// DIVINA BRUXA V180 — NAVEGAÇÃO SOBERANA + BASE IMORTAL
 // A Orbe mantém o canvas no mesmo tamanho. Abrir, fechar e inverter o gesto
 // usam uma única transição visual, sem quadro vazio e sem deslocar a página.
-export function createNavigation() {
-  const screens = [...document.querySelectorAll('.screen')];
+import { isKnownRoute, normalizeRouteId, routeFromLocation } from './route-registry-v180.js?v=180';
+
+export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoStart = false } = {}) {
   const home = document.querySelector('#home');
   const orbMenu = document.querySelector('#orbMenu');
   const orbStage = home?.querySelector('.orb-stage-ref');
   const menuButton = document.querySelector('#menuBtn');
   const pathsButton = document.querySelector('#pathsBtn');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  let beforeEnter = typeof initialBeforeEnter === 'function' ? initialBeforeEnter : null;
+  let navigationToken = 0;
+  let routeSyncQueued = false;
+  let lastSyncedLocation = '';
+  let started = false;
 
   // Portais comerciais e de conteúdo ficam em uma fileira própria acima da órbita,
   // sem alterar a geometria da Orbe principal.
@@ -142,7 +148,9 @@ export function createNavigation() {
     setMenuControls(false);
   };
 
-  const go = (id, push = true) => {
+  const commit = (requestedId, push = true) => {
+    let id = normalizeRouteId(requestedId);
+    const screens = [...document.querySelectorAll('.screen')];
     if (id === 'skins' && !document.getElementById('skins')) {
       screens.forEach(screen => screen.classList.toggle('active', screen.id === 'home'));
       resetOrbMenu();
@@ -152,7 +160,11 @@ export function createNavigation() {
       return;
     }
     if (!document.getElementById(id)) id = 'home';
-    screens.forEach(screen => screen.classList.toggle('active', screen.id === id));
+    screens.forEach(screen => {
+      const active = screen.id === id;
+      screen.classList.toggle('active', active);
+      screen.setAttribute('aria-hidden', String(!active));
+    });
     resetOrbMenu();
     document.body.dataset.screen = id;
     setCurrent(id);
@@ -160,12 +172,41 @@ export function createNavigation() {
       top: 0,
       behavior: reducedMotion.matches ? 'auto' : 'smooth'
     });
-    if (push) history.pushState({ screen: id }, '', id === 'home' ? './' : `#${id}`);
+    const current = location.hash.slice(1) || 'home';
+    if (push && current !== id) history.pushState({ screen: id }, '', id === 'home' ? './' : `#${id}`);
+    lastSyncedLocation = `${location.pathname}${location.search}${location.hash}`;
+    return id;
+  };
+
+  const go = async (requestedId, push = true) => {
+    const id = normalizeRouteId(requestedId);
+    const token = ++navigationToken;
+    const html = document.documentElement;
+    html.dataset.routePending = id;
+    document.dispatchEvent(new CustomEvent('divina:route-start', { detail: { id } }));
+    let error = null;
+    try {
+      await beforeEnter?.(id);
+    } catch (reason) {
+      error = reason;
+    }
+    if (token !== navigationToken) return false;
+    const committed = commit(id, push);
+    delete html.dataset.routePending;
+    document.dispatchEvent(new CustomEvent(error ? 'divina:route-error' : 'divina:route-ready', {
+      detail: { id: committed || id, recoverable: Boolean(error) }
+    }));
+    return !error;
   };
 
   const transitionOrbMenu = (open, shouldRestore = false) => {
     if (!home || !orbMenu) return;
-    if (open && !home.classList.contains('active')) go('home');
+    if (open && !home.classList.contains('active')) {
+      go('home').then(ready => {
+        if (ready) transitionOrbMenu(true, shouldRestore);
+      });
+      return;
+    }
     if (open && !wantsMenuOpen) lastFocus = document.activeElement;
 
     // Mede o quadro que a pessoa está vendo. Assim, até uma inversão rápida
@@ -198,7 +239,9 @@ export function createNavigation() {
 
   document.addEventListener('click', event => {
     const target = event.target.closest('[data-go]');
-    if (target) go(target.dataset.go);
+    if (!target) return;
+    event.preventDefault();
+    go(target.dataset.go).catch(() => {});
   });
 
   menuButton?.setAttribute('aria-controls', 'orbMenu');
@@ -207,11 +250,37 @@ export function createNavigation() {
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && wantsMenuOpen) closeOrbMenu(true);
   });
-  addEventListener('popstate', () => go(location.hash.slice(1) || 'home', false));
+  const syncFromLocation = () => {
+    const locationKey = `${location.pathname}${location.search}${location.hash}`;
+    if (locationKey === lastSyncedLocation) return;
+    if (routeSyncQueued) return;
+    routeSyncQueued = true;
+    queueMicrotask(() => {
+      routeSyncQueued = false;
+      go(routeFromLocation(), false).catch(() => {});
+    });
+  };
+  addEventListener('popstate', syncFromLocation);
+  addEventListener('hashchange', syncFromLocation);
   reducedMotion.addEventListener?.('change', () => {
     if (home?.classList.contains('orb-menu-transition')) finishMotion(motionToken);
   });
 
-  go(location.hash.slice(1) || 'home', false);
-  return { go, openOrbMenu, closeOrbMenu };
+  const start = async () => {
+    if (started) return true;
+    started = true;
+    const raw = location.hash.slice(1) || 'home';
+    const id = routeFromLocation();
+    const ready = await go(id, false);
+    if (!isKnownRoute(raw) || raw !== id) {
+      history.replaceState({ screen: id }, '', id === 'home' ? './' : `#${id}`);
+      lastSyncedLocation = `${location.pathname}${location.search}${location.hash}`;
+    }
+    return ready;
+  };
+  const setBeforeEnter = handler => {
+    beforeEnter = typeof handler === 'function' ? handler : null;
+  };
+  if (autoStart) start().catch(() => {});
+  return Object.freeze({ go, start, setBeforeEnter, openOrbMenu, closeOrbMenu });
 }

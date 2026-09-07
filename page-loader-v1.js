@@ -1,27 +1,20 @@
-/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.15 · GUARDIÃO DO PORTAL V152
-   Cada motor nasce sob demanda; um portal opcional jamais bloqueia o site inteiro. */
+/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.16 · ROTAS SOBERANAS V180
+   Estilos e motores nascem sob demanda; toda falha oferece tentativa e retorno seguro. */
+
+import {
+  normalizeRouteId,
+  routeHasModule,
+  routeLabel,
+  routeNeedsPortalStyles
+} from './route-registry-v180.js?v=180';
 
 const pageTasks = new Map();
 const sharedTasks = new Map();
-const PAGE_LABELS = Object.freeze({
-  tarot: 'o Tarot Livre',
-  daily: 'a Carta do Dia',
-  library: 'a Biblioteca das 78 Cartas',
-  school: 'a Escola do Tarot',
-  spreads: 'o Templo das Tiragens',
-  journal: 'o Diário da Orbe',
-  ai: 'a Orbe IA',
-  store: 'a Loja Mística',
-  consultations: 'as Consultas',
-  subscriptions: 'o universo Premium',
-  skins: 'a Constelação das 30 Skins',
-  videos: 'De Frente com o Tarot',
-  music: 'o universo da Música',
-  notifications: 'as Notificações Celestiais',
-  admin: 'a Central da Proprietária'
-});
-
+const PORTAL_STYLES_ID = 'divinaPortalStylesV180';
+const PORTAL_STYLES_HREF = 'divina-core-v179.css?v=179';
+const LOAD_TIMEOUT_MS = 15000;
 let loadingSequence = 0;
+let portalStyleAttempt = 0;
 
 function announceLoading(type, detail) {
   document.dispatchEvent(new CustomEvent(`divina:loading-${type}`, { detail }));
@@ -35,6 +28,99 @@ function once(map, key, factory) {
   });
   map.set(key, task);
   return task;
+}
+
+function withTimeout(task, timeout, message) {
+  let timer = 0;
+  return Promise.race([
+    Promise.resolve(task),
+    new Promise((_, reject) => {
+      timer = setTimeout(() => reject(new Error(message)), timeout);
+    })
+  ]).finally(() => clearTimeout(timer));
+}
+
+function loadPortalStyles() {
+  return once(sharedTasks, 'styles:portals:v180', () => withTimeout(new Promise((resolve, reject) => {
+    let link = document.getElementById(PORTAL_STYLES_ID);
+    const complete = candidate => {
+      try {
+        return Boolean(candidate?.sheet?.cssRules?.length > 100);
+      } catch {
+        return false;
+      }
+    };
+    if (link?.dataset.ready === 'true' || complete(link)) {
+      if (link) link.dataset.ready = 'true';
+      resolve(link);
+      return;
+    }
+    if (link?.dataset.failed === 'true') {
+      link.remove();
+      link = null;
+    }
+    if (!link) {
+      link = document.createElement('link');
+      link.id = PORTAL_STYLES_ID;
+      link.rel = 'stylesheet';
+      link.href = portalStyleAttempt
+        ? `${PORTAL_STYLES_HREF}&retry=${++portalStyleAttempt}`
+        : PORTAL_STYLES_HREF;
+      if (!portalStyleAttempt) portalStyleAttempt = 1;
+      link.dataset.routeStyles = 'deferred';
+      document.head.append(link);
+    }
+    const ready = () => {
+      if (!complete(link)) {
+        failed();
+        return;
+      }
+      link.dataset.ready = 'true';
+      delete link.dataset.failed;
+      resolve(link);
+    };
+    const failed = () => {
+      link.dataset.failed = 'true';
+      reject(new Error('Os estilos completos do portal não responderam.'));
+    };
+    link.addEventListener('load', ready, { once: true });
+    link.addEventListener('error', failed, { once: true });
+  }), LOAD_TIMEOUT_MS, 'Tempo esgotado ao vestir o portal.'));
+}
+
+function createRecovery(screen, id) {
+  if (!screen || screen.querySelector(':scope > [data-route-recovery]')) return;
+  const panel = document.createElement('aside');
+  panel.className = 'db-route-recovery';
+  panel.dataset.routeRecovery = id;
+  panel.setAttribute('role', 'alert');
+  panel.setAttribute('aria-live', 'assertive');
+
+  const sigil = document.createElement('span');
+  sigil.className = 'db-route-recovery__sigil';
+  sigil.setAttribute('aria-hidden', 'true');
+  sigil.textContent = '✦';
+  const title = document.createElement('h3');
+  title.textContent = 'Este portal não abriu por completo';
+  const copy = document.createElement('p');
+  copy.textContent = 'Nada foi perdido. Você pode tentar novamente ou voltar para a Orbe.';
+  const actions = document.createElement('div');
+  const retry = document.createElement('button');
+  retry.type = 'button';
+  retry.dataset.routeRetry = id;
+  retry.textContent = 'TENTAR NOVAMENTE';
+  const home = document.createElement('button');
+  home.type = 'button';
+  home.dataset.go = 'home';
+  home.className = 'secondary';
+  home.textContent = 'VOLTAR AO INÍCIO';
+  actions.append(retry, home);
+  panel.append(sigil, title, copy, actions);
+  screen.prepend(panel);
+}
+
+function clearRecovery(screen) {
+  screen?.querySelector(':scope > [data-route-recovery]')?.remove();
 }
 
 export function createPageLoader({ config, go } = {}) {
@@ -154,20 +240,24 @@ export function createPageLoader({ config, go } = {}) {
     )));
   };
 
-  const load = id => {
+  const load = rawId => {
+    const id = normalizeRouteId(rawId);
+    if (!routeHasModule(id)) return Promise.resolve(null);
     const loader = loaders[id];
-    if (!loader) return Promise.resolve(null);
+    if (!loader) return Promise.reject(new Error(`Motor ausente para ${id}`));
+
     return once(pageTasks, id, async () => {
       const screen = document.getElementById(id);
       const html = document.documentElement;
       const loadingId = `page:${id}:${++loadingSequence}`;
+      clearRecovery(screen);
       screen?.setAttribute('aria-busy', 'true');
       screen?.setAttribute('data-module-state', 'loading');
       html.dataset.pageLoading = id;
       announceLoading('start', {
         id: loadingId,
         pageId: id,
-        label: PAGE_LABELS[id] || 'o próximo portal',
+        label: routeLabel(id),
         message: id === 'spreads'
           ? 'Preparando sua tiragem…'
           : id === 'journal'
@@ -179,18 +269,22 @@ export function createPageLoader({ config, go } = {}) {
       document.dispatchEvent(new CustomEvent('divina:page-loading', { detail: { id } }));
 
       try {
-        const instance = await loader();
+        const styleTask = routeNeedsPortalStyles(id) ? loadPortalStyles() : Promise.resolve(null);
+        const [, instance] = await Promise.all([
+          styleTask,
+          withTimeout(loader(), LOAD_TIMEOUT_MS, `Tempo esgotado ao abrir ${id}.`)
+        ]);
+        clearRecovery(screen);
         screen?.setAttribute('data-module-state', 'ready');
         document.dispatchEvent(new CustomEvent('divina:page-ready', { detail: { id } }));
         return instance;
       } catch (error) {
         screen?.setAttribute('data-module-state', 'error');
-        document.dispatchEvent(new CustomEvent('divina:page-error', { detail: { id } }));
-        if (document.body.dataset.screen === id) {
-          window.dispatchEvent(new CustomEvent('orbe:toast', {
-            detail: 'Este portal não conseguiu abrir agora. Toque novamente.'
-          }));
-        }
+        createRecovery(screen, id);
+        document.dispatchEvent(new CustomEvent('divina:page-error', { detail: { id, recoverable: true } }));
+        window.dispatchEvent(new CustomEvent('orbe:toast', {
+          detail: 'Este portal não conseguiu abrir agora. Você pode tentar novamente.'
+        }));
         console.error(`[Divina] falha ao carregar ${id}`, error);
         throw error;
       } finally {
@@ -201,14 +295,27 @@ export function createPageLoader({ config, go } = {}) {
     });
   };
 
+  const retry = id => {
+    const route = normalizeRouteId(id);
+    pageTasks.delete(route);
+    clearRecovery(document.getElementById(route));
+    return Promise.resolve(go ? go(route) : load(route));
+  };
+
   const primeFromIntent = event => {
     const id = event.target.closest?.('[data-go]')?.dataset.go;
-    if (id && loaders[id]) load(id).catch(() => {});
+    if (id && routeHasModule(id)) load(id).catch(() => {});
   };
 
   document.addEventListener('pointerdown', primeFromIntent, { capture: true, passive: true });
   document.addEventListener('focusin', primeFromIntent, true);
   document.addEventListener('click', primeFromIntent, true);
+  document.addEventListener('click', event => {
+    const button = event.target.closest?.('[data-route-retry]');
+    if (!button) return;
+    event.preventDefault();
+    retry(button.dataset.routeRetry).catch(() => {});
+  });
 
   observer = new MutationObserver(() => {
     const id = document.body.dataset.screen;
@@ -216,16 +323,13 @@ export function createPageLoader({ config, go } = {}) {
   });
   observer.observe(document.body, { attributes: true, attributeFilter: ['data-screen'] });
 
-  const initial = document.body.dataset.screen || location.hash.slice(1) || 'home';
-  load(initial).catch(() => {});
-
-  return {
+  return Object.freeze({
     load,
+    prepare: load,
+    retry,
     warm,
-    go: id => {
-      load(id).catch(() => {});
-      go?.(id);
-    },
+    go: id => Promise.resolve(go ? go(normalizeRouteId(id)) : load(id)),
+    portalStylesReady: () => Boolean(document.getElementById(PORTAL_STYLES_ID)?.sheet),
     destroy: () => observer?.disconnect()
-  };
+  });
 }

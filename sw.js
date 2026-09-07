@@ -1,14 +1,15 @@
-/* DIVINA BRUXA — SERVICE WORKER V50 · NÚCLEO VISUAL V179 */
-const CACHE='divina-bruxa-v50-nucleo-v179';
+/* DIVINA BRUXA — SERVICE WORKER V51 · ROTAS SOBERANAS V180 */
+const CACHE='divina-bruxa-v51-rotas-v180';
 
 const REQUIRED=[
   './',
   './index.html',
   './offline.html',
   './manifest.webmanifest',
-  './divina-core-v179.css',
+  './divina-shell-v180.css',
   './app.js',
   './page-loader-v1.js',
+  './route-registry-v180.js',
   './orb-loading-portal-v1.js',
   './cosmic-media-v1.js',
   './runtime-v12.js',
@@ -16,15 +17,9 @@ const REQUIRED=[
   './skin-registry-v12.js',
   './skin-universal-v10.js',
   './skin-catalog-v6.js',
-  './skins-v6.js',
-  './premium-entitlements-v142.js',
-  './premium-policy.js',
-  './premium-engine.js',
   './config.js',
   './auth-client-v6.js',
   './navigation.js',
-  './notification-policy-v150.js',
-  './notification-engine-v150.js',
   './orb-engine-v68.js',
   './mini-orb-engine.js',
   './visual-guard-v6.js',
@@ -45,12 +40,13 @@ const CORE=[
   './index.html',
   './offline.html',
   './manifest.webmanifest',
-  './divina-core-v179.css',
+  './divina-shell-v180.css',
   './app.js',
   './menu-completo-v177.js',
   './runtime-v12.js',
   './navigation.js',
   './page-loader-v1.js',
+  './route-registry-v180.js',
   './orb-loading-portal-v1.js',
   './config.js',
   './orb-engine-v68.js',
@@ -66,16 +62,7 @@ const CORE=[
 
 const WARM=[
   './menu-completo-v177.js','./tarot-spiral-suction-v1.webp',
-  './templo-tiragens-celestial-v1.webp',
-  './midia-celestial-estudio-v1.webp','./media-engine-v149.js','./media-policy-v149.js','./media-ecosystem-v149.js','./loja-mistica-celestial-v1.webp','./store-engine.js','./store-policy.js','./escola-tarot-observatorio-v1.webp',
-  './school-engine.js','./school-policy.js','./spreads-engine.js','./spreads-policy.js','./spread-synthesis.js',
-  './tarot-data.js','./storage.js','./tarot-engine.js','./tarot-image-runtime.js','./daily-meaning-runtime.js','./tarot-meanings.js','./meaning-engine.js','./tarot-atlas.webp','./card-library-policy.js',
-  './diario-espelho-celestial-v1.webp',
-  './journal-engine.js','./journal-policy.js','./rhythm-v6.js','./premium-constelacao-30-skins-v1.webp',
-  './orbe-ia-celestial-v1.webp','./ai-engine.js','./ai-policy.js','./ai-credits.js',
-  './consultation-engine.js','./consultation-policy.js','./consultas-celestiais-santuario-v1.webp',
-  './admin-engine.js','./admin-policy.js','./auth-client-v6.js',
-  './ADMIN-BACKEND-CONTRACT-V146.json',
+  './tarot-data.js','./storage.js','./tarot-engine.js','./tarot-image-runtime.js','./daily-meaning-runtime.js','./tarot-meanings.js','./meaning-engine.js','./tarot-atlas.webp',
   './fallback-shell-v1.css','./pwa-final-v1.css'
 ];
 

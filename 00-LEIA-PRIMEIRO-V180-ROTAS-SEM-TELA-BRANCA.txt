@@ -1,0 +1,58 @@
+DIVINA BRUXA — V180 — ROTAS SOBERANAS E PROTEÇÃO CONTRA TELA BRANCA
+
+O QUE ESTA VERSÃO FAZ
+- Mantém Home, Tarot Livre, Carta do Dia e Conta no núcleo visual rápido.
+- Adia 21 folhas de estilo exclusivas dos portais pesados até a primeira abertura.
+- Reduz o CSS inicial em mais de 50% em relação ao núcleo completo V179.
+- Centraliza 17 destinos e seus aliases em um único registro de rotas.
+- Aguarda estilo e motor antes de concluir cada navegação.
+- Se um portal falhar, mostra uma mensagem segura com TENTAR NOVAMENTE e VOLTAR AO INÍCIO.
+- Se o CSS principal falhar, mantém uma tela cósmica crítica em vez de uma página branca.
+- Protege trocas rápidas, voltar/avançar, links com hash e destinos desconhecidos.
+- Mantém módulos de Escola, Diário, Loja, Admin, mídia, Consultas e IA sob demanda.
+
+COMO INSTALAR PELO IPHONE/GITHUB
+1. Abra este ZIP.
+2. Selecione TODOS os 13 arquivos soltos.
+3. Envie os arquivos para a RAIZ do repositório no GitHub.
+4. Confirme a substituição dos cinco arquivos existentes:
+   - index.html
+   - sw.js
+   - app.js
+   - navigation.js
+   - page-loader-v1.js
+5. Os outros oito arquivos devem ser adicionados.
+6. Não crie pasta e não apague arquivos antigos.
+7. Aguarde o GitHub Pages concluir a publicação.
+8. Abra o site e atualize uma vez para o cache V51/V180 assumir.
+
+ARQUIVOS NOVOS
+- route-registry-v180.js
+- route-recovery-v180.css
+- BUILD-V180-SHELL.mjs
+- divina-shell-v180.css
+- MANIFESTO-RUNTIME-V180.json
+- QA-V180-ROTAS-SEM-TELA-BRANCA.mjs
+- 00-LEIA-PRIMEIRO-V180-ROTAS-SEM-TELA-BRANCA.txt
+- ARQUIVOS-V180-SHA256.txt
+
+GARANTIAS PRESERVADAS
+- Tarot Livre: 78 cartas oficiais, sempre diretas, sem repetição e sem significados no modo livre.
+- Mesa Real: 78 posições em 13 fileiras de 6.
+- Consultas: R$ 250, R$ 150, R$ 100 e R$ 50; e-mail obrigatório.
+- Cobrança real continua desligada.
+- Menu completo e Biblioteca continuam acessíveis.
+- Nenhuma publicação, alteração de domínio ou alteração de DNS é feita pelo pacote.
+
+VERIFICAÇÃO OPCIONAL EM UM COMPUTADOR
+sha256sum -c ARQUIVOS-V180-SHA256.txt
+node QA-V180-ROTAS-SEM-TELA-BRANCA.mjs
+
+PARA CONTROLAR O NÚCLEO DE ESTILOS
+- Edite os CSS-fonte normalmente.
+- Execute node BUILD-V180-SHELL.mjs para reconstruir o shell leve.
+- O arquivo MANIFESTO-RUNTIME-V180.json registra as fontes imediatas e adiadas.
+
+IMPORTANTE
+- divina-core-v179.css precisa continuar na raiz: ele é o visual completo carregado sob demanda.
+- Não apague as folhas CSS-fonte. Elas continuam sendo o cofre editável do site.
