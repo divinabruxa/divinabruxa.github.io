@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "173.0.0",
+  "release": "DIVINA-BRUXA-V173-DIARIO-DE-TAROT",
+  "releasedAt": "2026-09-07",
+  "primaryPage": "diario-de-tarot.html",
+  "journalGuide": {
+    "templateModels": [
+      "one-card-reading",
+      "three-card-reading",
+      "single-card-study",
+      "past-reading-review"
+    ],
+    "templateModelCount": 4,
+    "depthOptions": [
+      "essential",
+      "complete"
+    ],
+    "mediumOptions": [
+      "paper",
+      "digital"
+    ],
+    "essentialFields": 8,
+    "methodSteps": 5,
+    "commonErrors": 6,
+    "faqQuestions": 5,
+    "workedExamples": 1,
+    "privacyContexts": 3,
+    "externalReferences": 2
+  },
+  "templateGenerator": {
+    "runsLocally": true,
+    "acceptsPersonalText": false,
+    "networkRequests": false,
+    "answersStored": false,
+    "copySupported": true,
+    "copyFallbackSelectsText": true,
+    "printSupported": true,
+    "printOnlyTemplate": true,
+    "staticFallbackWithoutJavaScript": true,
+    "privateJournalRoute": "./#journal"
+  },
+  "editorialMethod": {
+    "separatesObservationHypothesisAndReference": true,
+    "preservesOriginalHypothesisForReview": true,
+    "requiresQuestionAndPositionsBeforeCards": true,
+    "treatsThirdPartyClaimsAsFacts": false,
+    "deterministicPredictionsEncouraged": false,
+    "generalLearningResearchOnly": true,
+    "researchPresentedAsTarotValidation": false
+  },
+  "privacy": {
+    "paperRisksExplained": true,
+    "digitalSyncRisksExplained": true,
+    "currentDivinaJournalLocalOnlyExplained": true,
+    "browserDataDeletionRiskExplained": true,
+    "minimumNecessaryDataRecommended": true
+  },
+  "accessibility": {
+    "skipLink": true,
+    "nativeSelects": 3,
+    "keyboardControls": true,
+    "copyStatusLiveRegion": true,
+    "readonlyTemplateOutput": true,
+    "reducedMotion": true,
+    "mobileBreakpoints": 4,
+    "printStyles": true,
+    "noJavaScriptFallback": true
+  },
+  "searchIntegration": {
+    "indexedDestinationsBefore": 124,
+    "indexedDestinationsAfter": 125,
+    "categoryCounts": {
+      "cartas": 78,
+      "tiragens": 14,
+      "aprender": 23,
+      "portal": 10
+    },
+    "featured": true,
+    "queries": [
+      "diario de tarot",
+      "como anotar leituras",
+      "ficha de leitura",
+      "caderno de tarot",
+      "revisar leitura"
+    ]
+  },
+  "discoverability": {
+    "sitemapUrlsBefore": 125,
+    "sitemapUrlsAfter": 126,
+    "sitemapImageEntries": 78,
+    "canonical": true,
+    "articleStructuredData": true,
+    "howToStructuredData": true,
+    "faqStructuredData": true,
+    "breadcrumbStructuredData": true,
+    "socialPreviewImageAdded": false
+  },
+  "safeguards": {
+    "tarotLivreChanged": false,
+    "tarotLivreCards": 78,
+    "tarotLivreOrientation": "upright-only",
+    "tarotLivreRepeats": false,
+    "tarotLivreMeaningsInsideFreeMode": false,
+    "tarotLivreMesaReal": "13x6",
+    "consultationsChanged": false,
+    "consultationPricesBrl": [
+      250,
+      150,
+      100,
+      50
+    ],
+    "consultationEmailRequired": true,
+    "ownerEmail": "orbedasrealidades@hotmail.com",
+    "realBillingAdded": false,
+    "resendAdded": false,
+    "personalNamePublished": false
+  },
+  "installation": {
+    "filesInPackage": 13,
+    "flatArchive": true,
+    "replace": [
+      "sitemap.xml",
+      "buscar.html",
+      "busca-v165.js",
+      "plano-de-estudo-do-tarot-em-30-dias.html",
+      "escola-do-tarot.html",
+      "guias-para-comecar.html"
+    ],
+    "add": [
+      "diario-de-tarot.html",
+      "diario-tarot-v173.css",
+      "diario-tarot-v173.js",
+      "00-LEIA-PRIMEIRO-V173-DIARIO-DE-TAROT.txt",
+      "DIARIO-TAROT-V173.json",
+      "QA-V173-DIARIO-DE-TAROT.mjs",
+      "ARQUIVOS-V173-SHA256.txt"
+    ]
+  }
+}

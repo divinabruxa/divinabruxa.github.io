@@ -1,0 +1,112 @@
+DIVINA BRUXA · V173 · DIÁRIO DE TAROT
+=====================================
+
+O QUE ESTA VERSÃO ENTREGA
+
+1. Nova página pública:
+   diario-de-tarot.html
+
+2. Gerador local de fichas com quatro modelos:
+   - leitura de uma carta;
+   - leitura de três cartas;
+   - estudo de uma carta;
+   - revisão de uma leitura antiga.
+
+3. Cada modelo possui:
+   - versão essencial;
+   - versão completa;
+   - orientação para papel ou impressão;
+   - orientação para nota ou diário digital;
+   - botão para copiar;
+   - botão para imprimir somente a ficha;
+   - acesso ao Diário privado já existente no aplicativo.
+
+4. Conteúdo editorial:
+   - oito campos essenciais de um registro útil;
+   - método em cinco movimentos;
+   - exemplo fictício de uma carta;
+   - orientação para papel, nota digital e Diário da Divina Bruxa;
+   - seis erros que retiram contexto;
+   - cinco dúvidas frequentes;
+   - duas referências sobre aprendizagem e revisão.
+
+5. Integração com:
+   - busca completa do portal: 125 destinos;
+   - sitemap: 126 páginas;
+   - plano de estudo em 30 dias;
+   - Escola do Tarot;
+   - Guias para começar.
+
+COMO INSTALAR PELO GITHUB NO CELULAR
+
+1. Abra o repositório divinabruxa/divinabruxa.github.io.
+2. Entre na raiz da branch Principal/main.
+3. Toque em Adicionar arquivo > Carregar arquivos.
+4. Selecione TODOS os 13 arquivos soltos deste pacote.
+5. Confirme que os arquivos aparecem diretamente na raiz.
+   Não crie uma pasta chamada V173 e não envie apenas o ZIP.
+6. Confirme a substituição dos 6 arquivos existentes.
+7. Grave as alterações e aguarde a publicação do GitHub Pages.
+
+ARQUIVOS PARA SUBSTITUIR
+
+- sitemap.xml
+- buscar.html
+- busca-v165.js
+- plano-de-estudo-do-tarot-em-30-dias.html
+- escola-do-tarot.html
+- guias-para-comecar.html
+
+ARQUIVOS NOVOS
+
+- diario-de-tarot.html
+- diario-tarot-v173.css
+- diario-tarot-v173.js
+- 00-LEIA-PRIMEIRO-V173-DIARIO-DE-TAROT.txt
+- DIARIO-TAROT-V173.json
+- QA-V173-DIARIO-DE-TAROT.mjs
+- ARQUIVOS-V173-SHA256.txt
+
+COMO CONFERIR DEPOIS DA PUBLICAÇÃO
+
+Abra:
+https://divinabruxa.com.br/diario-de-tarot.html
+
+Teste no gerador:
+- escolha “Leitura de três cartas”;
+- escolha “Completa”;
+- escolha “Nota ou diário digital”;
+- toque em “Gerar minha ficha”;
+- teste “Copiar modelo” e “Imprimir ficha”.
+
+Também abra:
+https://divinabruxa.com.br/buscar.html
+
+Pesquise por:
+- diário de tarot
+- ficha de leitura
+- caderno de tarot
+
+PRIVACIDADE DO GERADOR
+
+- O gerador não possui campos para respostas pessoais.
+- As três escolhas de formato são processadas somente no navegador.
+- Nenhuma informação é enviada ou armazenada.
+- O modelo copiado fica sob responsabilidade do suporte escolhido.
+
+PROTEÇÕES PRESERVADAS
+
+- Tarot Livre intacto: 78 cartas oficiais, diretas, sem repetição,
+  sem significados dentro do modo livre e Mesa Real 13 × 6.
+- Consultas intactas: R$ 250, R$ 150, R$ 100 e R$ 50.
+- E-mail do cliente continua obrigatório nas consultas.
+- E-mail da proprietária preservado: orbedasrealidades@hotmail.com
+- Nenhuma cobrança real e nenhuma integração com Resend adicionada.
+- Nenhum nome pessoal publicado.
+
+VALIDAÇÃO TÉCNICA
+
+No computador, na raiz do site, execute:
+node QA-V173-DIARIO-DE-TAROT.mjs
+
+O resultado esperado é PASS.
