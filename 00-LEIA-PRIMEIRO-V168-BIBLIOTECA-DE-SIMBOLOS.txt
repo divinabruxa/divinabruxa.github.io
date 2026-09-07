@@ -1,0 +1,68 @@
+DIVINA BRUXA — V168 — BIBLIOTECA DE SÍMBOLOS DO TAROT
+Data: 07/09/2026
+
+Esta versão adiciona uma nova biblioteca visual de estudo:
+
+- simbolos-do-tarot.html com 32 símbolos recorrentes.
+- 4 famílias: Céu e Luz, Natureza, Objetos, Seres e Gestos.
+- Método em 3 camadas: descrever, relacionar e sintetizar.
+- Busca local que aceita palavras digitadas sem acento.
+- Filtros por família com contagem de resultados.
+- 32 ligações editoriais para cartas, arcanos ou naipes relacionados.
+- Orientação clara de que símbolos não possuem significados universais.
+- Dados estruturados DefinedTermSet com os 32 símbolos.
+- Integração com Guias, Tarot para Iniciantes e Glossário.
+- Busca completa ampliada de 119 para 120 destinos.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+
+1. Descompacte o ZIP no aplicativo Arquivos.
+2. Abra a raiz do repositório divinabruxa.github.io no ramo main.
+3. Toque em Add file e Upload files.
+4. Selecione os 13 arquivos soltos, não o ZIP.
+5. Substitua estes 6 arquivos:
+   - sitemap.xml
+   - buscar.html
+   - busca-v165.js
+   - guias-para-comecar.html
+   - glossario-do-tarot.html
+   - tarot-para-iniciantes.html
+6. Adicione os outros 7 arquivos.
+7. Não apague nenhum arquivo anterior.
+8. Confirme o commit com a mensagem: Instala V168 biblioteca de simbolos do Tarot
+
+CONFERÊNCIA PÚBLICA
+
+https://divinabruxa.com.br/simbolos-do-tarot.html
+https://divinabruxa.com.br/guias-para-comecar.html
+https://divinabruxa.com.br/tarot-para-iniciantes.html
+https://divinabruxa.com.br/glossario-do-tarot.html
+https://divinabruxa.com.br/buscar.html
+
+TESTES RÁPIDOS NA BIBLIOTECA
+
+- Digite: lua
+- Digite sem acento: veu
+- Digite: movimento
+- Escolha o filtro: Natureza
+- Escolha o filtro: Objetos
+- Use o botão Limpar e o botão Mostrar todos os símbolos.
+
+PRESERVADO
+
+- Home intacta.
+- História do Tarot intacta, com suas 4 fontes institucionais.
+- Tarot Livre intacto: 78 cartas oficiais, diretas, sem repetição e sem
+  significados durante a revelação; Mesa Real 13 × 6.
+- Consultas intactas: R$ 250, R$ 150, R$ 100 e R$ 50; e-mail obrigatório.
+- Cobrança real desligada e Resend ainda adiado.
+- Nenhuma imagem nova ou imagem social foi adicionada.
+
+CONTROLE
+
+- Biblioteca: 32 símbolos em 4 famílias.
+- Busca: 120 destinos únicos.
+- Sitemap: 121 URLs de página e 78 entradas de imagem.
+- QA: QA-V168-BIBLIOTECA-DE-SIMBOLOS.mjs.
+- Integridade: ARQUIVOS-V168-SHA256.txt.
+- Contrato: SIMBOLOS-TAROT-V168.json.

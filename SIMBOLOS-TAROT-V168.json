@@ -1,0 +1,137 @@
+{
+  "schemaVersion": "168.0.0",
+  "release": "DIVINA-BRUXA-V168-BIBLIOTECA-DE-SIMBOLOS-DO-TAROT",
+  "date": "2026-09-07",
+  "status": "ready-for-manual-install",
+  "purpose": "Criar uma biblioteca visual pesquisável que ensine observação e interpretação contextual sem transformar símbolos em respostas fixas.",
+  "symbolLibrary": {
+    "page": "simbolos-do-tarot.html",
+    "stylesheet": "simbolos-tarot-v168.css?v=168",
+    "script": "simbolos-tarot-v168.js?v=168",
+    "definedSymbols": 32,
+    "families": 4,
+    "familyCounts": {
+      "ceu": 8,
+      "natureza": 8,
+      "objetos": 10,
+      "movimento": 6
+    },
+    "observationLayers": ["descrever", "relacionar", "sintetizar"],
+    "editorialLinksFromEntries": 32,
+    "structuredDataType": "DefinedTermSet"
+  },
+  "localFilter": {
+    "accentInsensitive": true,
+    "multiwordSearch": true,
+    "categoryFilters": ["todos", "ceu", "natureza", "objetos", "movimento"],
+    "liveResultCount": true,
+    "emptyState": true,
+    "escapeClearsQuery": true,
+    "runsLocally": true,
+    "textStored": false,
+    "textTransmitted": false
+  },
+  "interpretationMethod": {
+    "symbolHasUniversalFixedMeaning": false,
+    "symbolPresentedAsFactualProof": false,
+    "intuitionPresentedAsFactualProof": false,
+    "contextRequired": true,
+    "positionConsidered": true,
+    "questionConsidered": true,
+    "deckVariationAcknowledged": true,
+    "nonDeterministicLanguage": true
+  },
+  "searchIntegration": {
+    "searchScript": "busca-v165.js?v=168",
+    "indexedDestinationsBefore": 119,
+    "indexedDestinationsAfter": 120,
+    "cards": 78,
+    "portalPages": 42,
+    "categoryCounts": {
+      "cartas": 78,
+      "tiragens": 14,
+      "aprender": 18,
+      "portal": 10
+    },
+    "symbolsFeatured": true,
+    "exampleQueries": ["símbolos", "lua", "lanterna", "véu", "iconografia"]
+  },
+  "discoverability": {
+    "linkedFrom": ["guias-para-comecar.html", "tarot-para-iniciantes.html", "glossario-do-tarot.html", "buscar.html"],
+    "sitemapUrlsBefore": 120,
+    "sitemapUrlsAfter": 121,
+    "sitemapImageEntries": 78,
+    "newSitemapUrls": 1
+  },
+  "accessibility": {
+    "singleH1": true,
+    "skipLink": true,
+    "nativeSearchInput": true,
+    "visibleSearchLabel": true,
+    "liveResultCount": true,
+    "pressedFilterState": true,
+    "semanticSections": true,
+    "selfLinkingSymbols": true,
+    "keyboardNavigable": true,
+    "responsiveSingleColumn": true,
+    "reducedMotionSupported": true,
+    "printStylesIncluded": true
+  },
+  "reuse": {
+    "portalStylesheet": "seo-portal-v154.css?v=154",
+    "existingImage": "card-02.webp",
+    "existingImageWidth": 1024,
+    "existingImageHeight": 1536,
+    "newImagesAdded": false,
+    "socialPreviewImageAdded": false
+  },
+  "safeguards": {
+    "indexChanged": false,
+    "historyPageChanged": false,
+    "tarotLivreChanged": false,
+    "tarotLivreCards": 78,
+    "tarotLivreOrientation": "upright-only",
+    "tarotLivreMeaningsInsideFreeMode": false,
+    "tarotLivreRepeats": false,
+    "mesaRealRows": 13,
+    "mesaRealColumns": 6,
+    "consultationsFunctionalCodeChanged": false,
+    "consultationPricesBrl": [250, 150, 100, 50],
+    "consultationEmailRequired": true,
+    "realBillingEnabled": false,
+    "resendConfigured": false,
+    "unconfirmedPersonalNamePublished": false
+  },
+  "integrityBase": {
+    "sitemapV167Sha256": "1baf923a3b979d3d520b3d46bf5d63df2c4c84a82f8349725972d63b3824e4b9",
+    "searchPageV167Sha256": "674a3e30d09294a086bca28e7e2a7f72319a264dec81fd6a68ecfa830401e907",
+    "searchScriptV167Sha256": "e6ee1f7be9bbbb27b409e00e0964f5147bdf4d05b6a63f525620a5fcee00f173",
+    "guidesHubV167Sha256": "be67aef9e43e15324b6c04a0c47c9384864a2ff7283a5d19e0fac7eec4562a26",
+    "glossaryV167Sha256": "bf467edf569054505aaf427bb3a9fc421f494911d81f8c722f748f427a17d533",
+    "beginnerV167Sha256": "9d6ab9048de9d13aefd6bfcd3ce6071e709cf74d3bbeac97199ee222c8c271de",
+    "historyV167Sha256": "215a77d865f652e534865a3cc1b748ba44416e8d21f802bbcd8973ef7ba11b1d"
+  },
+  "installation": {
+    "method": "manual-flat-upload-github",
+    "filesInPackage": 13,
+    "replace": [
+      "sitemap.xml",
+      "buscar.html",
+      "busca-v165.js",
+      "guias-para-comecar.html",
+      "glossario-do-tarot.html",
+      "tarot-para-iniciantes.html"
+    ],
+    "add": [
+      "simbolos-do-tarot.html",
+      "simbolos-tarot-v168.css",
+      "simbolos-tarot-v168.js",
+      "00-LEIA-PRIMEIRO-V168-BIBLIOTECA-DE-SIMBOLOS.txt",
+      "SIMBOLOS-TAROT-V168.json",
+      "QA-V168-BIBLIOTECA-DE-SIMBOLOS.mjs",
+      "ARQUIVOS-V168-SHA256.txt"
+    ],
+    "deleteOtherFiles": false,
+    "commitMessage": "Instala V168 biblioteca de simbolos do Tarot"
+  }
+}
