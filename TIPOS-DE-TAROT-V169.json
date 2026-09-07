@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "169.0.0",
+  "release": "DIVINA-BRUXA-V169-TIPOS-DE-TAROT",
+  "date": "2026-09-07",
+  "status": "ready-for-manual-install",
+  "purpose": "Comparar três tradições visuais influentes do Tarot com contexto histórico, crédito autoral, diferenças práticas e linguagem não hierárquica.",
+  "traditionsPage": {
+    "page": "tipos-de-tarot.html",
+    "stylesheet": "tipos-tarot-v169.css?v=169",
+    "traditionsCompared": 3,
+    "comparisonRows": 5,
+    "traditionProfiles": 3,
+    "nameAndOrderExamples": 4,
+    "recognitionSteps": 4,
+    "choiceProfiles": 3,
+    "faqQuestions": 4,
+    "institutionalSources": 4,
+    "structuredDataTypes": ["Article", "FAQPage"]
+  },
+  "traditions": [
+    {
+      "name": "Tarot de Marselha",
+      "documentedReference": "Nicolas Conver, 1760",
+      "institution": "British Museum",
+      "visualFocus": ["número", "naipe", "simetria", "composição"],
+      "singleImmutableOriginalClaimed": false
+    },
+    {
+      "name": "Rider–Waite–Smith",
+      "documentedReference": "Londres, 1909",
+      "concept": "Arthur Edward Waite",
+      "art": "Pamela Colman Smith",
+      "institution": "Morgan Library & Museum",
+      "visualFocus": ["cena", "personagem", "gesto", "narrativa"]
+    },
+    {
+      "name": "Tarot de Thoth",
+      "documentedReference": "final dos anos 1930",
+      "collaborators": ["Lady Frieda Harris", "Aleister Crowley"],
+      "institutions": ["Morgan Library & Museum", "Warburg Institute"],
+      "visualFocus": ["cor", "geometria", "movimento", "correspondências"]
+    }
+  ],
+  "editorialMethod": {
+    "traditionsComparedWithoutHierarchy": true,
+    "comparisonPresentedAsExhaustiveTaxonomy": false,
+    "editionVariationAcknowledged": true,
+    "hybridDecksAcknowledged": true,
+    "artistCreditsExplicit": true,
+    "historicalClaimsLinkedToInstitutions": true,
+    "practicalObservationsSeparatedFromHistoricalClaims": true,
+    "singleBestDeckClaimed": false,
+    "singleCorrectTraditionClaimed": false
+  },
+  "divinaBruxaPosition": {
+    "contemporaryIndependentCollection": true,
+    "presentedAsHistoricalFacsimile": false,
+    "presentedAsMarseilleReproduction": false,
+    "presentedAsRwsReproduction": false,
+    "presentedAsThothReproduction": false,
+    "cards": 78,
+    "majorArcana": 22,
+    "minorArcana": 56,
+    "orientation": "upright-only"
+  },
+  "references": [
+    {
+      "institution": "British Museum",
+      "title": "Tarot de Marseilles, Nicolas Conver",
+      "url": "https://www.britishmuseum.org/collection/object/P_1904-0511-47-1-78"
+    },
+    {
+      "institution": "Morgan Library & Museum",
+      "title": "Tarot! Renaissance Symbols, Modern Visions",
+      "url": "https://www.themorgan.org/exhibitions/tarot"
+    },
+    {
+      "institution": "Morgan Library & Museum",
+      "title": "Tarot! Exhibition Labels",
+      "url": "https://www.themorgan.org/sites/default/files/pdf/exhibitions/Morgan_Tarot_ExhibitionLabels.pdf"
+    },
+    {
+      "institution": "Warburg Institute",
+      "title": "Yorke Collection Catalogue",
+      "url": "https://warburg.sas.ac.uk/sites/default/files/Yorke%20Collection%20OS%20EE1%20-%20N6.pdf"
+    }
+  ],
+  "searchIntegration": {
+    "searchScript": "busca-v165.js?v=169",
+    "indexedDestinationsBefore": 120,
+    "indexedDestinationsAfter": 121,
+    "cards": 78,
+    "portalPages": 43,
+    "categoryCounts": {
+      "cartas": 78,
+      "tiragens": 14,
+      "aprender": 19,
+      "portal": 10
+    },
+    "traditionsPageFeatured": true,
+    "exampleQueries": ["tipos de Tarot", "Marselha", "Pamela Colman Smith", "Frieda Harris", "Thoth"]
+  },
+  "discoverability": {
+    "linkedFrom": ["historia-do-tarot.html", "tarot-para-iniciantes.html", "simbolos-do-tarot.html", "glossario-do-tarot.html", "buscar.html"],
+    "sitemapUrlsBefore": 121,
+    "sitemapUrlsAfter": 122,
+    "sitemapImageEntries": 78,
+    "newSitemapUrls": 1
+  },
+  "accessibility": {
+    "singleH1": true,
+    "skipLink": true,
+    "semanticComparisonTable": true,
+    "tableKeyboardScrollable": true,
+    "columnAndRowHeaders": true,
+    "semanticSections": true,
+    "nativeFaqDetails": true,
+    "keyboardNavigable": true,
+    "responsiveSingleColumn": true,
+    "reducedMotionSupported": true,
+    "printStylesIncluded": true
+  },
+  "reuse": {
+    "portalStylesheet": "seo-portal-v154.css?v=154",
+    "existingImage": "tarot-atlas.webp",
+    "existingImageWidth": 3000,
+    "existingImageHeight": 3600,
+    "newImagesAdded": false,
+    "socialPreviewImageAdded": false
+  },
+  "safeguards": {
+    "indexChanged": false,
+    "tarotLivreChanged": false,
+    "tarotLivreCards": 78,
+    "tarotLivreOrientation": "upright-only",
+    "tarotLivreMeaningsInsideFreeMode": false,
+    "tarotLivreRepeats": false,
+    "mesaRealRows": 13,
+    "mesaRealColumns": 6,
+    "consultationsFunctionalCodeChanged": false,
+    "consultationPricesBrl": [250, 150, 100, 50],
+    "consultationEmailRequired": true,
+    "ownerEmail": "orbedasrealidades@hotmail.com",
+    "realBillingEnabled": false,
+    "resendConfigured": false,
+    "unconfirmedPersonalNamePublished": false
+  },
+  "integrityBase": {
+    "sitemapV168Sha256": "5c66c9c69ac7a60e959c599dc6c42b90b5ba6537080e080f8e0ace72309a00fd",
+    "searchPageV168Sha256": "4cc19a0b6569612950805ad1457a8ad372569608c603826842a5aef86a6a2327",
+    "searchScriptV168Sha256": "2539e712a450ba2cc01e2d3c469018d572886fc97c4b252c307860159f689ef0",
+    "historyV168Sha256": "215a77d865f652e534865a3cc1b748ba44416e8d21f802bbcd8973ef7ba11b1d",
+    "beginnerV168Sha256": "8da81b77ebc1039da5aa3d6a6fcccd4de05108aabc5e059833df5e2a696563a8",
+    "symbolsV168Sha256": "9255db5659096819509d79a3241959059df596eb74c66a25cfe290895f93c281",
+    "glossaryV168Sha256": "029c18ae62b29218baf512dcf0cf9b767aa897a7dd5cadd1a4391bbf69b90cf7"
+  },
+  "installation": {
+    "method": "manual-flat-upload-github",
+    "filesInPackage": 13,
+    "replace": [
+      "sitemap.xml",
+      "buscar.html",
+      "busca-v165.js",
+      "historia-do-tarot.html",
+      "tarot-para-iniciantes.html",
+      "simbolos-do-tarot.html",
+      "glossario-do-tarot.html"
+    ],
+    "add": [
+      "tipos-de-tarot.html",
+      "tipos-tarot-v169.css",
+      "00-LEIA-PRIMEIRO-V169-TIPOS-DE-TAROT.txt",
+      "TIPOS-DE-TAROT-V169.json",
+      "QA-V169-TIPOS-DE-TAROT.mjs",
+      "ARQUIVOS-V169-SHA256.txt"
+    ],
+    "deleteOtherFiles": false,
+    "commitMessage": "Instala V169 tipos de Tarot"
+  }
+}

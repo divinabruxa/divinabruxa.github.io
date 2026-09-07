@@ -1,0 +1,72 @@
+DIVINA BRUXA — V169 — TIPOS DE TAROT
+Data: 07/09/2026
+
+Esta versão adiciona uma nova página de autoridade editorial:
+
+- tipos-de-tarot.html compara Marselha, Rider–Waite–Smith e Thoth.
+- Tabela com 5 diferenças práticas entre as três tradições.
+- 3 perfis aprofundados: história, linguagem visual e modo de observar.
+- Guia em 4 verificações para reconhecer a família de um baralho.
+- Explicação de variações em nomes, ordem, corte e naipes.
+- Orientação para escolher sem declarar um baralho superior aos outros.
+- Posição transparente da Divina Bruxa como coleção contemporânea.
+- 4 perguntas frequentes com dados estruturados FAQPage.
+- 4 fontes institucionais: British Museum, Morgan e Warburg Institute.
+- Integração com História, Iniciantes, Símbolos e Glossário.
+- Busca completa ampliada de 120 para 121 destinos.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+
+1. Descompacte o ZIP no aplicativo Arquivos.
+2. Abra a raiz do repositório divinabruxa.github.io no ramo main.
+3. Toque em Add file e Upload files.
+4. Selecione os 13 arquivos soltos, não o ZIP.
+5. Substitua estes 7 arquivos:
+   - sitemap.xml
+   - buscar.html
+   - busca-v165.js
+   - historia-do-tarot.html
+   - tarot-para-iniciantes.html
+   - simbolos-do-tarot.html
+   - glossario-do-tarot.html
+6. Adicione os outros 6 arquivos.
+7. Não apague nenhum arquivo anterior.
+8. Confirme o commit com a mensagem: Instala V169 tipos de Tarot
+
+CONFERÊNCIA PÚBLICA
+
+https://divinabruxa.com.br/tipos-de-tarot.html
+https://divinabruxa.com.br/historia-do-tarot.html
+https://divinabruxa.com.br/tarot-para-iniciantes.html
+https://divinabruxa.com.br/simbolos-do-tarot.html
+https://divinabruxa.com.br/glossario-do-tarot.html
+https://divinabruxa.com.br/buscar.html
+
+TESTES RÁPIDOS
+
+- Abra a tabela e compare a linha Cartas numeradas.
+- Toque em Marselha, Rider–Waite–Smith e Thoth no menu interno.
+- Confira as quatro verificações do guia de reconhecimento.
+- Na busca completa, digite: Pamela Colman Smith
+- Na busca completa, digite: Frieda Harris
+- Na busca completa, digite: tipos de baralho
+
+PRESERVADO
+
+- Home intacta.
+- Tarot Livre intacto: 78 cartas oficiais, diretas, sem repetição e sem
+  significados durante a revelação; Mesa Real 13 × 6.
+- Consultas intactas: R$ 250, R$ 150, R$ 100 e R$ 50; e-mail obrigatório.
+- Cobrança real desligada e Resend ainda adiado.
+- Nenhuma imagem nova ou imagem social foi adicionada.
+- Nenhum nome pessoal foi publicado.
+
+CONTROLE
+
+- Página: 3 tradições, 5 linhas comparativas e 4 verificações.
+- Fontes: 4 referências institucionais com links diretos.
+- Busca: 121 destinos únicos.
+- Sitemap: 122 URLs de página e 78 entradas de imagem.
+- QA: QA-V169-TIPOS-DE-TAROT.mjs.
+- Integridade: ARQUIVOS-V169-SHA256.txt.
+- Contrato: TIPOS-DE-TAROT-V169.json.
