@@ -1,0 +1,258 @@
+@charset "UTF-8";
+
+.glossary-shell {
+  width: min(1040px, calc(100% - 32px));
+}
+
+.glossary-intro {
+  max-width: 800px;
+  padding: clamp(24px, 5vw, 52px) 0 28px;
+}
+
+.glossary-intro h1 {
+  margin: 10px 0 16px;
+  color: var(--gold-light);
+  font-size: clamp(2.6rem, 8vw, 5.6rem);
+  line-height: .94;
+  letter-spacing: -.045em;
+}
+
+.glossary-intro > p:last-child {
+  max-width: 64ch;
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 2vw, 1.14rem);
+  line-height: 1.75;
+}
+
+.glossary-filter {
+  padding: clamp(17px, 3vw, 24px);
+  border: 1px solid var(--line-strong);
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(38, 17, 49, .92), rgba(16, 8, 23, .9));
+  box-shadow: var(--shadow);
+}
+
+.glossary-filter > label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--gold-light);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.glossary-filter > div {
+  min-height: 58px;
+  padding: 7px 9px 7px 14px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(235, 201, 121, .35);
+  border-radius: 17px;
+  background: rgba(7, 3, 13, .78);
+}
+
+.glossary-filter > div:focus-within {
+  border-color: var(--gold-light);
+  box-shadow: 0 0 0 4px rgba(235, 201, 121, .12);
+}
+
+.glossary-filter > div > span {
+  color: var(--gold);
+  font-size: 24px;
+}
+
+.glossary-filter input {
+  width: 100%;
+  min-height: 44px;
+  border: 0;
+  outline: 0;
+  color: var(--text);
+  background: transparent;
+  font: 500 1rem/1.4 Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.glossary-filter input::placeholder {
+  color: #96889b;
+  opacity: 1;
+}
+
+.glossary-filter button,
+.glossary-empty button {
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  color: var(--gold-light);
+  background: rgba(235, 201, 121, .08);
+  font: 800 14px/1 Inter, ui-sans-serif, system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.glossary-filter > p {
+  margin: 11px 2px 0;
+  color: var(--muted-soft);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.glossary-filter > p strong {
+  color: var(--gold-light);
+}
+
+.alphabet-nav {
+  position: sticky;
+  z-index: 40;
+  top: 49px;
+  margin: 22px 0 10px;
+  padding: 9px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  overflow-x: auto;
+  border: 1px solid rgba(185, 147, 214, .18);
+  border-radius: 16px;
+  background: rgba(9, 4, 15, .92);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  scrollbar-width: none;
+}
+
+.alphabet-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.alphabet-nav a {
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.alphabet-nav a:hover {
+  border-color: var(--line-strong);
+  color: var(--gold-light);
+  background: rgba(235, 201, 121, .07);
+}
+
+.glossary-letter {
+  scroll-margin-top: 120px;
+  padding: 42px 0 10px;
+}
+
+.glossary-letter > h2 {
+  margin: 0 0 14px;
+  color: var(--gold);
+  font-size: clamp(2.2rem, 6vw, 3.8rem);
+  line-height: 1;
+}
+
+.glossary-grid {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.glossary-entry {
+  scroll-margin-top: 126px;
+  min-height: 154px;
+  padding: 21px;
+  border: 1px solid rgba(235, 201, 121, .16);
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(27, 13, 36, .82), rgba(14, 7, 21, .76));
+}
+
+.glossary-entry:target {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(235, 201, 121, .1), 0 18px 45px rgba(0,0,0,.28);
+}
+
+.glossary-entry dt {
+  margin: 0 0 9px;
+  font: 400 1.35rem/1.18 Georgia, "Times New Roman", serif;
+}
+
+.glossary-entry dt a {
+  color: var(--gold-light);
+  text-decoration: none;
+}
+
+.glossary-entry dt a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.glossary-entry dd {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.68;
+}
+
+.glossary-entry dd a {
+  color: var(--gold-light);
+  font-weight: 700;
+  text-underline-offset: 3px;
+}
+
+.glossary-empty {
+  margin: 40px 0;
+  padding: 44px 22px;
+  border: 1px dashed var(--line-strong);
+  border-radius: 24px;
+  text-align: center;
+  background: rgba(20, 10, 28, .55);
+}
+
+.glossary-empty > span {
+  color: var(--gold);
+  font-size: 34px;
+}
+
+.glossary-empty h2 {
+  margin: 12px 0 8px;
+  font-size: 1.65rem;
+}
+
+.glossary-empty p {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.glossary-filter button:focus-visible,
+.glossary-empty button:focus-visible,
+.alphabet-nav a:focus-visible,
+.glossary-entry a:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+@media (max-width: 700px) {
+  .glossary-intro h1 {
+    font-size: clamp(2.6rem, 14vw, 4.2rem);
+  }
+
+  .glossary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .glossary-entry {
+    min-height: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

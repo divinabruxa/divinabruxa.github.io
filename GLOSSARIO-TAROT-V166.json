@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "166.0.0",
+  "release": "DIVINA-BRUXA-V166-GLOSSARIO-DO-TAROT",
+  "date": "2026-09-07",
+  "status": "ready-for-manual-install",
+  "purpose": "Criar uma referência pesquisável para o vocabulário das cartas, tiragens e práticas responsáveis do portal.",
+  "glossary": {
+    "page": "glossario-do-tarot.html",
+    "stylesheet": "glossario-v166.css?v=166",
+    "script": "glossario-v166.js?v=166",
+    "definedTerms": 62,
+    "activeLetters": 17,
+    "alphabet": ["A", "B", "C", "D", "E", "F", "I", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U"],
+    "filterIsAccentInsensitive": true,
+    "filterRunsLocally": true,
+    "filterTextStored": false,
+    "filterTextTransmitted": false,
+    "structuredDataType": "DefinedTermSet"
+  },
+  "responsibleDefinitions": {
+    "energyPresentedAsScientificMeasurement": false,
+    "intuitionPresentedAsProof": false,
+    "literalMindReadingClaimed": false,
+    "deterministicPredictionClaimed": false,
+    "reversedCardsUsed": false,
+    "decisionReplacementClaimed": false
+  },
+  "searchIntegration": {
+    "searchScript": "busca-v165.js?v=166",
+    "indexedDestinationsBefore": 117,
+    "indexedDestinationsAfter": 118,
+    "cards": 78,
+    "portalPages": 40,
+    "categoryCounts": {
+      "cartas": 78,
+      "tiragens": 14,
+      "aprender": 16,
+      "portal": 10
+    },
+    "glossaryFeatured": true
+  },
+  "discoverability": {
+    "linkedFrom": ["buscar.html", "cartas-do-tarot.html", "guias-para-comecar.html"],
+    "sitemapUrlsBefore": 118,
+    "sitemapUrlsAfter": 119,
+    "sitemapImageEntries": 78,
+    "newSitemapUrls": 1
+  },
+  "accessibility": {
+    "nativeSearchInput": true,
+    "visibleLabel": true,
+    "liveTermCount": true,
+    "semanticDefinitionList": true,
+    "selfLinkingTerms": true,
+    "keyboardNavigable": true,
+    "mobileSingleColumn": true,
+    "reducedMotionSupported": true
+  },
+  "reuse": {
+    "portalStylesheet": "seo-portal-v154.css?v=154",
+    "newImagesAdded": false,
+    "socialPreviewImageAdded": false
+  },
+  "safeguards": {
+    "indexChanged": false,
+    "tarotLivreChanged": false,
+    "tarotLivreCards": 78,
+    "tarotLivreOrientation": "upright-only",
+    "tarotLivreMeaningsInsideFreeMode": false,
+    "tarotLivreRepeats": false,
+    "mesaRealRows": 13,
+    "mesaRealColumns": 6,
+    "consultationsFunctionalCodeChanged": false,
+    "consultationPricesBrl": [250, 150, 100, 50],
+    "consultationEmailRequired": true,
+    "realBillingEnabled": false,
+    "resendConfigured": false,
+    "unconfirmedPersonalNamePublished": false
+  },
+  "integrityBase": {
+    "indexV165Sha256": "bcb4271567fed2c4464a7b5f61c6870d9919c25372fb7f669730541a0ec95701",
+    "sitemapV165Sha256": "cbae2423132fe14fcce953af8660ee5c2a4c448a81a07b8ab0b57a84261fe6b0",
+    "searchPageV165Sha256": "2bfddaf204d15a37bd590afb13b956bfe55fe689b0b95b9085773fe04b396408",
+    "searchScriptV165Sha256": "55fa63b35f6ee8177d782c76ee5f894457fed399c14e5d3e6185390adc467054",
+    "cardsHubV165Sha256": "6ed5363e98956cb3142b93d01668793b866a67610b4e238a927b1e2f6314f836",
+    "guidesHubV165Sha256": "4864c413f7f6935fd22bd1cf36a3185b2dacb6c67ead90233d04238520593baf"
+  },
+  "installation": {
+    "method": "manual-flat-upload-github",
+    "filesInPackage": 12,
+    "replace": ["sitemap.xml", "buscar.html", "busca-v165.js", "cartas-do-tarot.html", "guias-para-comecar.html"],
+    "add": ["glossario-do-tarot.html", "glossario-v166.css", "glossario-v166.js", "00-LEIA-PRIMEIRO-V166-GLOSSARIO-DO-TAROT.txt", "GLOSSARIO-TAROT-V166.json", "QA-V166-GLOSSARIO-DO-TAROT.mjs", "ARQUIVOS-V166-SHA256.txt"],
+    "deleteOtherFiles": false,
+    "commitMessage": "Instala V166 glossario completo do Tarot"
+  }
+}
