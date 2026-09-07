@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "165.0.0",
+  "release": "DIVINA-BRUXA-V165-BUSCA-COMPLETA-DO-PORTAL",
+  "date": "2026-09-07",
+  "status": "ready-for-manual-install",
+  "purpose": "Permitir que visitantes encontrem qualquer carta e os principais conteúdos do portal com uma busca rápida, acessível e processada no navegador.",
+  "search": {
+    "page": "buscar.html",
+    "script": "busca-v165.js?v=165",
+    "stylesheet": "busca-v165.css?v=165",
+    "indexedDestinations": 117,
+    "uniqueDestinations": 117,
+    "cards": 78,
+    "portalPages": 39,
+    "categories": {
+      "cartas": 78,
+      "tiragens": 14,
+      "aprender": 15,
+      "portal": 10
+    },
+    "filters": ["todos", "cartas", "tiragens", "aprender", "portal"],
+    "accentInsensitive": true,
+    "cardLanguages": ["pt-BR", "en", "es"],
+    "keyboardShortcut": "/",
+    "queryState": "url-fragment",
+    "externalSearchService": false,
+    "searchTextStored": false,
+    "searchTextTransmitted": false
+  },
+  "integration": {
+    "notFoundPageUpdated": true,
+    "linkedFrom": ["cartas-do-tarot.html", "tiragens-de-tarot.html", "guias-para-comecar.html"],
+    "sitemapUrlsBefore": 117,
+    "sitemapUrlsAfter": 118,
+    "sitemapImageEntries": 78,
+    "newSitemapUrls": 1
+  },
+  "accessibility": {
+    "landmarkSearch": true,
+    "visibleLabel": true,
+    "nativeSearchInput": true,
+    "liveResultCount": true,
+    "pressedFilterState": true,
+    "keyboardNavigable": true,
+    "reducedMotionSupported": true,
+    "mobileSingleColumnResults": true
+  },
+  "reuse": {
+    "cardCatalog": "tarot-data.js",
+    "portalStylesheet": "seo-portal-v154.css?v=154",
+    "newImagesAdded": false,
+    "socialPreviewImageAdded": false
+  },
+  "safeguards": {
+    "indexChanged": false,
+    "tarotLivreChanged": false,
+    "tarotLivreCards": 78,
+    "tarotLivreOrientation": "upright-only",
+    "tarotLivreMeaningsInsideFreeMode": false,
+    "tarotLivreRepeats": false,
+    "mesaRealRows": 13,
+    "mesaRealColumns": 6,
+    "consultationsFunctionalCodeChanged": false,
+    "consultationPricesBrl": [250, 150, 100, 50],
+    "consultationEmailRequired": true,
+    "realBillingEnabled": false,
+    "resendConfigured": false,
+    "unconfirmedPersonalNamePublished": false
+  },
+  "integrityBase": {
+    "indexV164Sha256": "bcb4271567fed2c4464a7b5f61c6870d9919c25372fb7f669730541a0ec95701",
+    "sitemapV164Sha256": "1f3361eb236c135deb526c9f71daea46a8e7bcbee2374fe9783bfd194b890808",
+    "notFoundV164Sha256": "29cba84f4a9e176faaad58fe76c69b266ed8bc4e64db7545926f8dbef65b7302",
+    "cardsHubV164Sha256": "647b8ab8c0596f973d14b2cea7b7c8ae0616615de2a6baa92e55be0e89cb8ede",
+    "spreadsHubV164Sha256": "a2f27f947cdd1a1200ddf22d000c508ab9e7d439df4ac2625bcd0189cfeba562",
+    "guidesHubV164Sha256": "c9f410da98667737e1fc4b5f175ce11188aecc4fc2697cbb69f36d2020fe8529"
+  },
+  "installation": {
+    "method": "manual-flat-upload-github",
+    "filesInPackage": 12,
+    "replace": ["sitemap.xml", "404.html", "cartas-do-tarot.html", "tiragens-de-tarot.html", "guias-para-comecar.html"],
+    "add": ["buscar.html", "busca-v165.css", "busca-v165.js", "00-LEIA-PRIMEIRO-V165-BUSCA-COMPLETA-DO-PORTAL.txt", "BUSCA-PORTAL-V165.json", "QA-V165-BUSCA-PORTAL.mjs", "ARQUIVOS-V165-SHA256.txt"],
+    "deleteOtherFiles": false,
+    "commitMessage": "Instala V165 busca completa do portal"
+  }
+}

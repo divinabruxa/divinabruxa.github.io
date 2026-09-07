@@ -1,0 +1,62 @@
+DIVINA BRUXA — V165 — BUSCA COMPLETA DO PORTAL
+Data: 07/09/2026
+
+Esta versão adiciona uma busca interna rápida e privada:
+
+- 117 destinos pesquisáveis.
+- 78 páginas individuais de cartas.
+- 39 páginas de experiências, tiragens, estudos e informações do portal.
+- Busca sem acentos e também pelos nomes das cartas em inglês e espanhol.
+- Filtros: Todos, Cartas, Tiragens, Aprender e Portal.
+- Atalho de teclado / para abrir a busca.
+- Pesquisa processada localmente, sem serviço externo e sem armazenamento.
+- Página 404 agora oferece acesso direto à busca.
+- Links para Buscar nas bibliotecas de Cartas, Tiragens e Guias.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+
+1. Descompacte o ZIP no aplicativo Arquivos.
+2. Abra a raiz do repositório divinabruxa.github.io no ramo main.
+3. Toque em Add file e Upload files.
+4. Selecione os 12 arquivos soltos, não o ZIP.
+5. Substitua estes 5 arquivos:
+   - sitemap.xml
+   - 404.html
+   - cartas-do-tarot.html
+   - tiragens-de-tarot.html
+   - guias-para-comecar.html
+6. Adicione os outros 7 arquivos.
+7. Não apague nenhum arquivo anterior.
+8. Confirme o commit com a mensagem: Instala V165 busca completa do portal
+
+CONFERÊNCIA PÚBLICA
+
+https://divinabruxa.com.br/buscar.html
+https://divinabruxa.com.br/uma-pagina-que-nao-existe
+https://divinabruxa.com.br/cartas-do-tarot.html
+https://divinabruxa.com.br/tiragens-de-tarot.html
+https://divinabruxa.com.br/guias-para-comecar.html
+
+TESTES RÁPIDOS NA BUSCA
+
+- Digite: A Lua
+- Digite sem acento: arvore da vida
+- Digite: amor
+- Digite: emprego
+- Digite em inglês: pentacles
+
+PRESERVADO
+
+- Home intacta.
+- Tarot Livre intacto: 78 cartas oficiais, diretas, sem repetição e sem
+  significados durante a revelação; Mesa Real 13 × 6.
+- Consultas intactas: R$ 250, R$ 150, R$ 100 e R$ 50; e-mail obrigatório.
+- Cobrança real desligada e Resend ainda adiado.
+- Nenhuma imagem nova ou imagem social foi adicionada.
+
+CONTROLE
+
+- Sitemap: 118 URLs de página e 78 entradas de imagem.
+- QA: QA-V165-BUSCA-PORTAL.mjs.
+- Integridade: ARQUIVOS-V165-SHA256.txt.
+- Contrato: BUSCA-PORTAL-V165.json.
