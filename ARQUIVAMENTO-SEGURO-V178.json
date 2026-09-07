@@ -1,0 +1,57 @@
+{
+  "release": "DIVINA-BRUXA-V178-COFRE-INVENTARIO",
+  "status": "inventory-only-no-deletion",
+  "deleteAuthorized": false,
+  "baseline": {
+    "rootFiles": 1190,
+    "trackedBytes": 203923453,
+    "historicalOrTechnicalArtifactsForReview": 269,
+    "duplicateSuffixedNames": 2
+  },
+  "explicitDuplicateCandidates": [
+    {
+      "file": "BACKEND-STAGING-CONTRACT-V6 2.md",
+      "action": "compare-before-any-removal"
+    },
+    {
+      "file": "skins-v6 2.js",
+      "action": "compare-before-any-removal"
+    }
+  ],
+  "reviewGroups": [
+    {
+      "group": "old-installation-instructions",
+      "patterns": ["00-LEIA-PRIMEIRO-*", "LEIA-PRIMEIRO-*", "INSTALACAO-*"],
+      "rule": "Keep the latest authoritative instructions; archive superseded copies only after dependency checks."
+    },
+    {
+      "group": "old-quality-assurance",
+      "patterns": ["QA-*", "*-guard-*.mjs", "verify-*.mjs"],
+      "rule": "Never remove a test that still protects an active runtime invariant."
+    },
+    {
+      "group": "old-manifests-and-contracts",
+      "patterns": ["*MANIFEST*", "*CONTRACT*", "*STATUS*", "*ROADMAP*"],
+      "rule": "Archive superseded documentation; retain current security and backend contracts."
+    },
+    {
+      "group": "legacy-heavy-images",
+      "patterns": ["*.png", "*.jpg", "*.jpeg"],
+      "rule": "Remove only when a verified optimized replacement is active and visual equivalence is proven."
+    },
+    {
+      "group": "versioned-runtime-files",
+      "patterns": ["*-v*.js", "*-v*.css"],
+      "rule": "Trace HTML, JavaScript, CSS and service-worker references before classifying any version as inactive."
+    }
+  ],
+  "mandatoryProcedureBeforeDeletion": [
+    "Build a byte-for-byte backup of origin/main.",
+    "Resolve the complete active dependency graph.",
+    "Compare duplicate candidates by SHA-256 and content.",
+    "Prove that no HTML, JavaScript, CSS, manifest or service worker references the candidate.",
+    "Run Tarot, Library, Consultations, School and PWA regression tests.",
+    "Request explicit owner authorization for the exact deletion list.",
+    "Delete in a reversible release with rollback instructions."
+  ]
+}

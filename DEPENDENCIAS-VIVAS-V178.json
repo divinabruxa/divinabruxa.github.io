@@ -1,0 +1,49 @@
+{
+  "release": "DIVINA-BRUXA-V178-COFRE-INVENTARIO",
+  "entrypoint": "index.html",
+  "entrypointAuditBeforeV178": {
+    "uniqueLocalReferences": 71,
+    "directStylesheets": 50,
+    "directStylesheetBytes": 476725,
+    "directScripts": 4,
+    "directScriptBytes": 19814,
+    "recursiveReachableFiles": 261,
+    "recursiveDependencyEdges": 3297,
+    "missingDependencies": [
+      "premium-constellation-v1.css",
+      "premium-constelacao-30-skins-v1.webp"
+    ]
+  },
+  "repairedByV178": [
+    {
+      "file": "premium-constellation-v1.css",
+      "referencedBy": ["index.html", "sw.js"],
+      "sha256": "ac9e9b6c6c64d55338564367cc4ab5790329f4d737f3ca512712ad15c769e0aa"
+    },
+    {
+      "file": "premium-constelacao-30-skins-v1.webp",
+      "referencedBy": ["sobre-a-divina-bruxa.html", "sw.js"],
+      "sha256": "3a936950488e2d5ebae622a730192512bb236d09eb3514faa86aa0e7996f9157"
+    }
+  ],
+  "expectedAfterV178": {
+    "recursiveReachableFiles": 263,
+    "recursiveDependencyEdges": 3303,
+    "missingDependencies": 0
+  },
+  "criticalJourneys": {
+    "home": ["index.html", "app.js", "navigation.js", "page-loader-v1.js"],
+    "menu": ["menu-ring-v8.css", "menu-completo-v177.css", "menu-completo-v177.js"],
+    "tarotFree": ["tarot-data.js", "tarot-session.js", "tarot-engine.js", "tarot-image-runtime.js", "tarot-atlas.webp"],
+    "library": ["card-library-engine.js", "card-library-policy.js", "tarot-data.js", "tarot-image-runtime.js"],
+    "school": ["school-policy.js", "school-engine.js", "tarot-data.js"],
+    "consultations": ["consultation-policy.js", "consultation-engine.js", "consultations-celestial-v1.css"],
+    "pwa": ["manifest.webmanifest", "sw.js", "offline.html"]
+  },
+  "nextStageTargets": {
+    "reduceDirectStylesheets": true,
+    "preserveVisualAppearance": true,
+    "lazyLoadSecondaryScreens": true,
+    "removeFilesNow": false
+  }
+}

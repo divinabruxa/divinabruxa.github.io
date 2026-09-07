@@ -1,0 +1,76 @@
+{
+  "release": "DIVINA-BRUXA-V178-COFRE-INVENTARIO",
+  "macroStage": 0,
+  "capturedFrom": {
+    "branch": "origin/main",
+    "commit": "8798dd7d4376fe024130054f707f4e4e19f7a7c6",
+    "date": "2026-09-07",
+    "installedRelease": "V177"
+  },
+  "inventoryBeforeV178": {
+    "rootFiles": 1190,
+    "trackedBytes": 203923453,
+    "html": 131,
+    "javascript": 140,
+    "css": 145,
+    "json": 110,
+    "text": 235,
+    "images": 275,
+    "sitemapUrls": 129,
+    "cardEditorialPages": 78
+  },
+  "tarotVault": {
+    "catalogCards": 78,
+    "uniqueNumericIds": 78,
+    "uniqueCanonicalIds": 78,
+    "orientation": "normal",
+    "reversals": false,
+    "repeatBeforeExhaustion": false,
+    "freeMeanings": false,
+    "tableRows": 13,
+    "tableColumns": 6,
+    "officialImageFiles": 78,
+    "uniqueOfficialImageHashes": 78,
+    "atlasFile": "tarot-atlas.webp",
+    "atlasSha256": "f065f64f68a58f471974199edea1af8ca358c244e6bdedf1360859e5a0cfaa8d"
+  },
+  "consultations": {
+    "channel": "email",
+    "emailRequired": true,
+    "services": [
+      { "id": "mesa-real-profissional", "priceBRL": 250 },
+      { "id": "leitura-mentes", "priceBRL": 150 },
+      { "id": "carta-conselho", "priceBRL": 100 },
+      { "id": "pergunta-direta", "priceBRL": 50 }
+    ],
+    "realBilling": false,
+    "automaticEmail": "awaiting-provider-activation"
+  },
+  "criticalSha256": {
+    "index.html": "ee5c16ec626850d6814f18782fa7e5d2ff333a52ee4e1395e8c634ea5dcb80f7",
+    "app.js": "49c2c6bbc956aa60ac7e1f1218b34935182ce42e6ec59d1c14378065f22ffa6b",
+    "navigation.js": "bba10d6b74fec0e89254ce158592fd92c81672805fadcb202f4a278ce39cdd7b",
+    "page-loader-v1.js": "b93196403ad47288bc23354835b7aa937966978fd57b2dd9731f5e03eedfc079",
+    "tarot-data.js": "18e5a1a3bcecf27fdb9c14c44c964a61f6eacfadc2f52ccaa76f0cbf60ee7cc3",
+    "tarot-engine.js": "bf20a3116aa329e58a24cf04928d39cb7444e9ba2ce0b369d132cb6cdb4bd672",
+    "tarot-image-runtime.js": "82077941bfd5b5af3c065bb42e8780e37cb494ff567af62bbfff1447cdf78d9a",
+    "tarot-atlas.webp": "f065f64f68a58f471974199edea1af8ca358c244e6bdedf1360859e5a0cfaa8d",
+    "consultation-policy.js": "e6c04c44e485bc36f9a2b7c37a0e49c25df1f39b044586507da6a66ac77c8cb3",
+    "consultation-engine.js": "745ad01c46eaeab52ddb6e12cf18d8cfa115a49b5144c7a75432d23832960050",
+    "school-policy.js": "1980f0ac802e73af2d239511f3211ee1ec80119d82c449f02f90e579ac0b97e1",
+    "school-engine.js": "de1b4e02526cebd4de712b3bb5c40490c77e39f23a2b77b47787fc35fd548373",
+    "manifest.webmanifest": "e583e828466a53c3396cf8533b9653f2b2a9deea07fa84fc9cb5a4374bb675a8",
+    "sw.js": "00fb122c9d09283b823508efb1dae6cc3c3433c07907b52929be6a75a157f6cf",
+    "menu-ring-v8.css": "1c82ea3200675adf222a1aaa7d899256ec42ec8bbf7469915ec406e9843ae58f",
+    "menu-completo-v177.css": "b02312e6c87bf790483082abea206a802aa1babaea79ebb92ba22ef41a54c32f",
+    "menu-completo-v177.js": "77161cc99792554bf601cc3339387f5eb9af1e44b3a3a22e0f2fa1bbdd3ac3f1"
+  },
+  "locks": {
+    "deleteAuthorized": false,
+    "productionPublishAuthorized": false,
+    "dnsChangesAuthorized": false,
+    "realBillingAuthorized": false,
+    "storeSubmissionAuthorized": false,
+    "orbeAISolEnabled": false
+  }
+}

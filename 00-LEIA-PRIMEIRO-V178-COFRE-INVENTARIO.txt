@@ -1,0 +1,60 @@
+DIVINA BRUXA — V178 — MACROETAPA 0
+COFRE, INVENTÁRIO E MAPA DA VERSÃO VIVA
+
+RESULTADO DESTA MACROETAPA
+
+1. O V177 foi confirmado no GitHub com 65 de 65 verificações aprovadas.
+2. A versão publicada foi congelada em um mapa de integridade.
+3. As 78 cartas oficiais foram protegidas por catálogo, manifesto, dimensões e SHA-256.
+4. Foi criado um mapa das dependências críticas da Home, Tarot, Biblioteca, Escola, Consultas e PWA.
+5. Foi criado um plano de arquivamento seguro, sem excluir nenhum arquivo.
+6. Duas dependências visuais chamadas pelo site, mas ausentes no GitHub, foram recuperadas:
+   - premium-constellation-v1.css
+   - premium-constelacao-30-skins-v1.webp
+
+INVENTÁRIO CONGELADO ANTES DO V178
+
+- 1.190 arquivos na raiz
+- aproximadamente 204 MB
+- 131 páginas HTML
+- 140 arquivos JavaScript
+- 145 folhas CSS
+- 275 imagens
+- 129 URLs únicas no sitemap
+- 78 páginas editoriais de cartas
+- 269 documentos técnicos/históricos candidatos a revisão futura
+- 2 nomes duplicados com sufixo de cópia
+- 50 folhas CSS chamadas diretamente pela Home
+
+O QUE NÃO FOI FEITO
+
+- Nenhum arquivo foi apagado.
+- Nenhuma imagem das 78 cartas foi substituída.
+- Nenhum preço foi alterado.
+- Nenhuma cobrança real foi ativada.
+- Nenhuma mudança de DNS ou publicação automática foi feita.
+
+COMO INSTALAR PELO IPHONE
+
+1. Descompacte o ZIP.
+2. Abra o repositório do site no GitHub.
+3. Toque em Add file e depois Upload files.
+4. Envie os 8 arquivos soltos para a raiz do repositório.
+5. Toque em Commit changes.
+6. Não exclua nenhum outro arquivo.
+
+ARQUIVOS NOVOS
+
+- premium-constellation-v1.css
+- premium-constelacao-30-skins-v1.webp
+- 00-LEIA-PRIMEIRO-V178-COFRE-INVENTARIO.txt
+- BASELINE-VIVO-V178.json
+- DEPENDENCIAS-VIVAS-V178.json
+- ARQUIVAMENTO-SEGURO-V178.json
+- QA-BASELINE-V178.mjs
+- ARQUIVOS-V178-SHA256.txt
+
+PRÓXIMA MACROETAPA
+
+Macroetapa 1 — Arquitetura limpa e núcleo rápido.
+Ela reduzirá o peso inicial sem alterar o visual aprovado.
