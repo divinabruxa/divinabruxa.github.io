@@ -1,0 +1,51 @@
+DIVINA BRUXA — V176 — COMO MEMORIZAR AS 78 CARTAS
+Data: 07/09/2026
+
+NOVIDADES
+
+- Página: como-memorizar-as-cartas-do-tarot.html.
+- Planejador privado com 3 fases e 3 durações: 9 sessões.
+- Sessões de 10, 20 ou 30 minutos e botão para copiar.
+- Método em 5 movimentos: observar, recordar, conferir, relacionar e revisar.
+- Mapa das 78 cartas em 4 famílias de estudo.
+- Modelo de cartão de erro e 4 regras práticas.
+- Semana de revisão em 5 encontros.
+- 5 hábitos que atrapalham e 6 dúvidas frequentes.
+- 4 fontes sobre aprendizagem e estrutura do Tarot.
+- Busca ampliada de 127 para 128 destinos.
+
+COMO INSTALAR PELO IPHONE
+
+1. Descompacte o ZIP.
+2. Na raiz do repositório, toque em Add file e Upload files.
+3. Envie os 14 arquivos soltos, não o ZIP.
+4. Substitua: sitemap.xml, buscar.html, busca-v165.js,
+   plano-de-estudo-do-tarot-em-30-dias.html, diario-de-tarot.html,
+   tarot-para-iniciantes.html e escola-do-tarot.html.
+5. Adicione os outros 7 arquivos sem criar pasta.
+6. Não apague arquivos anteriores.
+7. Confirme com: Instala V176 memorizar Tarot
+
+TESTES RÁPIDOS
+
+- Escolha cada fase com 10, 20 e 30 minutos.
+- Confira se os quatro blocos sempre somam o tempo escolhido.
+- Use Copiar sessão.
+- Busque: memorizar tarot, decorar cartas e repetição espaçada.
+
+PRESERVADO
+
+- Home intacta.
+- Tarot Livre: 78 cartas oficiais, diretas, sem repetição, sem significados
+  durante a revelação e Mesa Real 13 × 6.
+- Consultas: R$ 250, R$ 150, R$ 100 e R$ 50; e-mail obrigatório.
+- Cobrança real desligada; Resend adiado.
+- Nenhuma imagem nova, imagem social ou nome pessoal publicado.
+
+CONTROLE
+
+- Busca: 128 destinos.
+- Sitemap: 129 URLs e 78 entradas de imagem.
+- QA: QA-V176-MEMORIZAR-TAROT.mjs.
+- Integridade: ARQUIVOS-V176-SHA256.txt.
+- Contrato: MEMORIZAR-TAROT-V176.json.
