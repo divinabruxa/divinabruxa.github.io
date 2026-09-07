@@ -1,0 +1,181 @@
+{
+  "schemaVersion": "171.0.0",
+  "release": "DIVINA-BRUXA-V171-COMO-EMBARALHAR-TAROT",
+  "date": "2026-09-07",
+  "status": "ready-for-manual-install",
+  "purpose": "Ensinar formas acessíveis e cuidadosas de embaralhar cartas de Tarot, separando técnica, escolha pessoal e superstição sem alterar o motor do Tarot Livre.",
+  "shuffleGuide": {
+    "page": "como-embaralhar-cartas-de-tarot.html",
+    "stylesheet": "embaralhar-tarot-v171.css?v=171",
+    "script": "embaralhar-tarot-v171.js?v=171",
+    "assistantQuestions": 3,
+    "assistantOptions": 9,
+    "assistantProfiles": ["mistura circular na mesa", "pacotes pelas mãos", "intercalação apoiada"],
+    "combinedResultSupported": true,
+    "primaryMethods": 4,
+    "preparationSteps": 6,
+    "comparisonRows": 5,
+    "accessibilityAdaptations": 4,
+    "careChecks": 6,
+    "quickPracticeSeconds": 90,
+    "faqQuestions": 5,
+    "institutionalAndAcademicSources": 3,
+    "structuredDataTypes": ["Article", "FAQPage"]
+  },
+  "assistantPrivacy": {
+    "runsLocally": true,
+    "registrationRequired": false,
+    "networkRequests": false,
+    "answersStored": false,
+    "cookiesUsed": false,
+    "analyticsEventsAdded": false
+  },
+  "editorialMethod": {
+    "singleUniversalMethodClaimed": false,
+    "mandatoryShuffleCountClaimed": false,
+    "sevenShufflesPresentedAsTarotRule": false,
+    "leftHandCutRequired": false,
+    "jumpingCardMustBeRead": false,
+    "cleansingOrConsecrationRequired": false,
+    "physicalDexterityPresentedAsReadingQuality": false,
+    "comfortAndAccessibilityPrioritized": true,
+    "paperCareGuidanceIncluded": true,
+    "allCardsKeptUpright": true
+  },
+  "methods": [
+    {
+      "name": "Mistura circular na mesa",
+      "role": "principal",
+      "bestFor": ["baralho grande", "apoio constante", "mãos cansadas"]
+    },
+    {
+      "name": "Pacotes pelas mãos",
+      "role": "principal",
+      "bestFor": ["pouco espaço", "movimento gradual", "baralho confortável nas mãos"]
+    },
+    {
+      "name": "Intercalação apoiada",
+      "role": "principal",
+      "bridgeRequired": false,
+      "bestFor": ["duas metades", "superfície firme", "intercalação"]
+    },
+    {
+      "name": "Distribuição em montes",
+      "role": "auxiliar",
+      "anotherMethodRecommendedAfter": true
+    }
+  ],
+  "references": [
+    {
+      "institution": "Victoria and Albert Museum",
+      "title": "A history of tarot cards",
+      "purpose": "estrutura de 78 cartas",
+      "url": "https://www.vam.ac.uk/articles/tarot-cards"
+    },
+    {
+      "authors": ["Dave Bayer", "Persi Diaconis"],
+      "title": "Trailing the Dovetail Shuffle to its Lair",
+      "year": 1992,
+      "purpose": "limites do conhecido resultado matemático sobre riffle em 52 cartas",
+      "url": "https://projecteuclid.org/journals/annals-of-applied-probability/volume-2/issue-2/Trailing-the-Dovetail-Shuffle-to-its-Lair/10.1214/aoap/1177005705.full"
+    },
+    {
+      "institution": "Smithsonian Institution Archives",
+      "title": "How do I keep old family papers preserved?",
+      "purpose": "cuidados gerais de manuseio e conservação de papel",
+      "url": "https://siarchives.si.edu/what-we-do/forums/collections-care-guidelines-resources/how-do-i-keep-old-family-papers-preserved"
+    }
+  ],
+  "searchIntegration": {
+    "searchScript": "busca-v165.js?v=171",
+    "indexedDestinationsBefore": 122,
+    "indexedDestinationsAfter": 123,
+    "cards": 78,
+    "portalPages": 45,
+    "categoryCounts": {
+      "cartas": 78,
+      "tiragens": 14,
+      "aprender": 21,
+      "portal": 10
+    },
+    "shuffleGuideFeatured": true,
+    "exampleQueries": ["como embaralhar", "baralho grande", "cortar baralho", "sete vezes", "carta invertida"]
+  },
+  "discoverability": {
+    "linkedFrom": ["como-escolher-um-baralho-de-tarot.html", "tarot-para-iniciantes.html", "guias-para-comecar.html", "buscar.html"],
+    "sitemapUrlsBefore": 123,
+    "sitemapUrlsAfter": 124,
+    "sitemapImageEntries": 78,
+    "newSitemapUrls": 1
+  },
+  "accessibility": {
+    "singleH1": true,
+    "skipLink": true,
+    "nativeFieldsetsAndLegends": true,
+    "requiredRadioGroups": true,
+    "liveProgress": true,
+    "liveResult": true,
+    "keyboardScrollableComparison": true,
+    "nativeFaqDetails": true,
+    "oneHandAndLimitedMobilityGuidance": true,
+    "responsiveSingleColumn": true,
+    "reducedMotionSupported": true,
+    "printStylesIncluded": true
+  },
+  "reuse": {
+    "portalStylesheet": "seo-portal-v154.css?v=154",
+    "existingImage": "tarot-atlas.webp",
+    "existingImageWidth": 3000,
+    "existingImageHeight": 3600,
+    "newImagesAdded": false,
+    "socialPreviewImageAdded": false
+  },
+  "safeguards": {
+    "indexChanged": false,
+    "tarotLivreChanged": false,
+    "tarotLivreCards": 78,
+    "tarotLivreOrientation": "upright-only",
+    "tarotLivreMeaningsInsideFreeMode": false,
+    "tarotLivreRepeats": false,
+    "mesaRealRows": 13,
+    "mesaRealColumns": 6,
+    "consultationsFunctionalCodeChanged": false,
+    "consultationPricesBrl": [250, 150, 100, 50],
+    "consultationEmailRequired": true,
+    "ownerEmail": "orbedasrealidades@hotmail.com",
+    "realBillingEnabled": false,
+    "resendConfigured": false,
+    "unconfirmedPersonalNamePublished": false
+  },
+  "integrityBase": {
+    "sitemapV170Sha256": "312e4edee6a9e4eadd5c220bac902ba7611ef31bd076787a89af5aa1e683383d",
+    "searchPageV170Sha256": "1a5572ce1fc7313b68bd83bdd1a7c4a492ae13768bded73dfd51545156eb83bc",
+    "searchScriptV170Sha256": "ac3de27a28a975eb6662fc32b39cda2a2105544cffdbeac85e94f93ead19f407",
+    "choicePageV170Sha256": "6ab72103ebd97de14d6be71047e29f06e5f69b18df0591413aa3eb2aaa86e6f8",
+    "beginnerPageV170Sha256": "ff73ea9054ede0b04fd85d60794f961e900f746f58a2c156cb832ca5ae7e505a",
+    "guidesPageV170Sha256": "c6470e3ff2b9f9472de5cec857eaf6ebdea0586cbcff8435a0130fb362a1f1dc"
+  },
+  "installation": {
+    "method": "manual-flat-upload-github",
+    "filesInPackage": 13,
+    "replace": [
+      "sitemap.xml",
+      "buscar.html",
+      "busca-v165.js",
+      "como-escolher-um-baralho-de-tarot.html",
+      "tarot-para-iniciantes.html",
+      "guias-para-comecar.html"
+    ],
+    "add": [
+      "como-embaralhar-cartas-de-tarot.html",
+      "embaralhar-tarot-v171.css",
+      "embaralhar-tarot-v171.js",
+      "00-LEIA-PRIMEIRO-V171-COMO-EMBARALHAR-TAROT.txt",
+      "EMBARALHAR-TAROT-V171.json",
+      "QA-V171-COMO-EMBARALHAR-TAROT.mjs",
+      "ARQUIVOS-V171-SHA256.txt"
+    ],
+    "deleteOtherFiles": false,
+    "commitMessage": "Instala V171 como embaralhar Tarot"
+  }
+}

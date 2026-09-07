@@ -32,6 +32,7 @@ const PAGES = Object.freeze([
   ['Símbolos do Tarot', 'simbolos-do-tarot.html', '32 símbolos', 'aprender', 'Biblioteca visual pesquisável com Sol, Lua, Estrela, relâmpago, nuvens, água, montanha, caminho, jardim, árvore, fogo, taça, espada, bastão, moeda, coroa, trono, lanterna, livro, pergaminho, balança, roda, correntes, véu, cavalo, leão, asas, mãos e gestos. imagem iconografia observação interpretação'],
   ['Tipos de Tarot', 'tipos-de-tarot.html', 'Marselha · RWS · Thoth', 'aprender', 'Compare Tarot de Marselha, Rider-Waite-Smith e Thoth: história, autoria, Pamela Colman Smith, Arthur Edward Waite, Lady Frieda Harris, Aleister Crowley, Arcanos Menores, cartas numeradas, cenas, símbolos, nomes, ordem, corte, Discos, Ajustamento, Luxúria, Éon e Universo. tipos de baralho tradição visual linhagem diferenças qual escolher'],
   ['Como escolher um baralho de Tarot', 'como-escolher-um-baralho-de-tarot.html', 'Guia interativo', 'aprender', 'Teste local para descobrir afinidade com Marselha, Rider-Waite-Smith ou Thoth, comparar cartas numeradas, formato físico ou digital, tamanho, idioma, créditos, livreto e qualidade antes da compra. primeiro baralho escolher comprar presente consagrar limpar checklist'],
+  ['Como embaralhar cartas de Tarot', 'como-embaralhar-cartas-de-tarot.html', '4 métodos', 'aprender', 'Guia acessível para embaralhar 78 cartas com mistura circular na mesa, pacotes pelas mãos, intercalação apoiada e distribuição em montes; corte, cartas grandes, mãos pequenas, mobilidade, conservação, posição direta e prática de 90 segundos. shuffle riffle quantas vezes sete limpar consagrar carta caiu invertida baralho grande cortar baralho'],
   ['Tiragem de Uma Carta', 'tiragem-de-uma-carta.html', '1 posição', 'tiragens', 'Mensagem central, pergunta, observação e reflexão prática.'],
   ['Tiragem de Três Cartas', 'tiragem-de-tres-cartas.html', '3 posições', 'tiragens', 'Estruturas, relações entre as cartas e síntese final. passado presente tendência'],
   ['Cruz Celta', 'cruz-celta-no-tarot.html', '10 posições', 'tiragens', 'Presente, desafio, base, passado, possibilidade, próximo movimento, atitude, ambiente, esperanças e síntese.'],
@@ -84,7 +85,7 @@ const entries = Object.freeze([
     title, url, kind, category, description: displayDescription(description),
     icon: category === 'tiragens' ? '✧' : category === 'aprender' ? '▤' : '◉',
     searchable: normalize(`${title} ${kind} ${description}`),
-    featured: [1,2,3,4,5,6,14,15,26,27,28,29,30].includes(index)
+    featured: [1,2,3,4,5,6,14,15,26,27,28,29,30,31].includes(index)
   }))
 ]);
 

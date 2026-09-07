@@ -1,0 +1,76 @@
+DIVINA BRUXA — V171 — COMO EMBARALHAR CARTAS DE TAROT
+Data: 07/09/2026
+
+Esta versão adiciona um novo guia prático e acessível:
+
+- Página completa: como-embaralhar-cartas-de-tarot.html.
+- Assistente privado com 3 perguntas e 9 opções.
+- Sugestão entre mesa, pacotes, intercalação ou combinação.
+- 4 métodos explicados passo a passo.
+- Sequência de preparo com 6 movimentos.
+- Tabela que diferencia misturar, distribuir e cortar.
+- Explicação responsável sobre o conhecido número sete.
+- 4 adaptações para baralhos grandes, fadiga e mobilidade.
+- 6 cuidados físicos para preservar o conjunto.
+- Respostas para 5 dúvidas frequentes.
+- Prática orientada de 90 segundos.
+- 3 fontes: V&A, Project Euclid e Smithsonian.
+- Nenhuma superstição é apresentada como obrigação.
+- O assistente roda somente no aparelho: não envia nem salva respostas.
+- Busca completa ampliada de 122 para 123 destinos.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+
+1. Descompacte o ZIP no aplicativo Arquivos.
+2. Abra a raiz do repositório divinabruxa.github.io no ramo main.
+3. Toque em Add file e Upload files.
+4. Selecione os 13 arquivos soltos, não o ZIP.
+5. Substitua estes 6 arquivos:
+   - sitemap.xml
+   - buscar.html
+   - busca-v165.js
+   - como-escolher-um-baralho-de-tarot.html
+   - tarot-para-iniciantes.html
+   - guias-para-comecar.html
+6. Adicione os outros 7 arquivos.
+7. Não apague nenhum arquivo anterior.
+8. Confirme o commit com a mensagem: Instala V171 como embaralhar Tarot
+
+CONFERÊNCIA PÚBLICA
+
+https://divinabruxa.com.br/como-embaralhar-cartas-de-tarot.html
+https://divinabruxa.com.br/como-escolher-um-baralho-de-tarot.html
+https://divinabruxa.com.br/tarot-para-iniciantes.html
+https://divinabruxa.com.br/guias-para-comecar.html
+https://divinabruxa.com.br/buscar.html
+
+TESTES RÁPIDOS
+
+- Responda às 3 perguntas e toque em Ver meu ponto de partida.
+- Confira se aparece um método e três barras de afinidade.
+- Toque em Limpar escolhas e confirme que o assistente volta ao início.
+- Na busca completa, digite: como embaralhar
+- Na busca completa, digite: baralho grande
+- Na busca completa, digite: cortar baralho
+
+PRESERVADO
+
+- Home intacta.
+- Tarot Livre intacto: 78 cartas oficiais, diretas, sem repetição e sem
+  significados durante a revelação; Mesa Real 13 × 6.
+- Consultas intactas: R$ 250, R$ 150, R$ 100 e R$ 50; e-mail obrigatório.
+- Cobrança real desligada e Resend ainda adiado.
+- Nenhuma imagem nova ou imagem social foi adicionada.
+- Nenhum nome pessoal foi publicado.
+
+CONTROLE
+
+- Guia: 3 perguntas, 4 métodos, 6 passos e 5 comparações.
+- Acessibilidade: 4 adaptações e técnica sem performance obrigatória.
+- Conservação: 6 cuidados físicos.
+- Fontes: 3 referências institucionais e acadêmicas.
+- Busca: 123 destinos únicos.
+- Sitemap: 124 URLs de página e 78 entradas de imagem.
+- QA: QA-V171-COMO-EMBARALHAR-TAROT.mjs.
+- Integridade: ARQUIVOS-V171-SHA256.txt.
+- Contrato: EMBARALHAR-TAROT-V171.json.
