@@ -1,0 +1,44 @@
+DIVINA BRUXA — V164 — BIBLIOTECA DE TIRAGENS COMPLETA
+Data: 07/09/2026
+
+Esta versão completa os guias públicos das 15 tiragens com quatro páginas:
+
+- tiragem-caminho-em-cinco.html — cinco posições, do centro ao próximo passo.
+- mandala-astrologica-no-tarot.html — doze áreas da vida.
+- arvore-da-vida-no-tarot.html — dez posições conectadas.
+- mesa-personalizada-no-tarot.html — escolha de uma a doze posições.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+
+1. Descompacte o ZIP no aplicativo Arquivos.
+2. Abra a raiz do repositório divinabruxa.github.io no ramo main.
+3. Toque em Add file e Upload files.
+4. Selecione os 10 arquivos soltos, não o ZIP.
+5. Substitua sitemap.xml e tiragens-de-tarot.html.
+6. Adicione os outros 8 arquivos.
+7. Não apague nenhum arquivo anterior.
+8. Confirme o commit com a mensagem: Instala V164 biblioteca completa de tiragens
+
+CONFERÊNCIA PÚBLICA
+
+https://divinabruxa.com.br/tiragem-caminho-em-cinco.html
+https://divinabruxa.com.br/mandala-astrologica-no-tarot.html
+https://divinabruxa.com.br/arvore-da-vida-no-tarot.html
+https://divinabruxa.com.br/mesa-personalizada-no-tarot.html
+https://divinabruxa.com.br/tiragens-de-tarot.html
+
+PRESERVADO
+
+- Home intacta.
+- Tarot Livre intacto: 78 cartas oficiais, diretas, sem repetição e sem
+  significados durante a revelação; Mesa Real 13 × 6.
+- Consultas intactas: R$ 250, R$ 150, R$ 100 e R$ 50; e-mail obrigatório.
+- Cobrança real desligada e Resend ainda adiado.
+- Nenhuma imagem, CSS, JavaScript funcional ou imagem social foi adicionada.
+
+CONTROLE
+
+- Sitemap: 117 URLs de página e 78 entradas de imagem.
+- QA: QA-V164-BIBLIOTECA-TIRAGENS.mjs.
+- Integridade: ARQUIVOS-V164-SHA256.txt.
+- Contrato: BIBLIOTECA-TIRAGENS-V164.json.

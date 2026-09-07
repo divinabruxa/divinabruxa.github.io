@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "164.0.0",
+  "release": "DIVINA-BRUXA-V164-BIBLIOTECA-TIRAGENS-COMPLETA",
+  "date": "2026-09-07",
+  "status": "ready-for-manual-install",
+  "purpose": "Completar a biblioteca pública de quinze tiragens com os quatro métodos restantes e suas posições oficiais.",
+  "publicPages": [
+    { "file": "tiragem-caminho-em-cinco.html", "canonical": "https://divinabruxa.com.br/tiragem-caminho-em-cinco.html", "method": "Caminho em Cinco", "cards": 5, "primaryImage": "card-07.webp" },
+    { "file": "mandala-astrologica-no-tarot.html", "canonical": "https://divinabruxa.com.br/mandala-astrologica-no-tarot.html", "method": "Mandala Astrológica", "cards": 12, "primaryImage": "templo-tiragens-celestial-v1.webp" },
+    { "file": "arvore-da-vida-no-tarot.html", "canonical": "https://divinabruxa.com.br/arvore-da-vida-no-tarot.html", "method": "Árvore da Vida", "cards": 10, "primaryImage": "card-21.webp" },
+    { "file": "mesa-personalizada-no-tarot.html", "canonical": "https://divinabruxa.com.br/mesa-personalizada-no-tarot.html", "method": "Mesa Personalizada", "cardsMin": 1, "cardsMax": 12, "primaryImage": "card-10.webp" }
+  ],
+  "officialMethods": {
+    "fivePath": ["Centro da questão", "O que favorece", "O que desafia", "O que pede consciência", "Próximo passo"],
+    "astrologicalMandala": ["Identidade", "Recursos", "Comunicação", "Raízes", "Criação", "Rotina", "Relacionamentos", "Transformação", "Expansão", "Vocação", "Comunidade", "Mundo interior"],
+    "treeOfLife": ["Coroa", "Sabedoria", "Entendimento", "Misericórdia", "Força", "Beleza", "Vitória", "Esplendor", "Fundamento", "Manifestação"],
+    "customTable": ["Centro da questão", "Origem", "Influência interior", "Influência exterior", "Desafio", "Recurso disponível", "O que pede consciência", "O que ganha força", "O que perde força", "Próximo passo", "Tendência", "Síntese"]
+  },
+  "contentBoundaries": {
+    "orientation": "upright-only",
+    "cardsRepeatWithinSession": false,
+    "deterministicPrediction": false,
+    "decisionReplacement": false,
+    "customCountDeclaredBeforeReveal": true,
+    "treeOfLifePresentedAsCompleteKabbalah": false
+  },
+  "discoverability": {
+    "spreadsHubUpdated": true,
+    "spreadsHubNewGuideLinks": 4,
+    "libraryMethodsTotal": 15,
+    "sitemapUrlsBefore": 113,
+    "sitemapUrlsAfter": 117,
+    "sitemapImageEntries": 78,
+    "newSitemapUrls": 4
+  },
+  "reuse": {
+    "stylesheet": "seo-portal-v154.css?v=154",
+    "newCssAdded": false,
+    "newJavascriptAddedToPublicPages": false,
+    "newImagesAdded": false,
+    "socialPreviewImageAdded": false
+  },
+  "safeguards": {
+    "indexChanged": false,
+    "tarotLivreChanged": false,
+    "tarotLivreCards": 78,
+    "tarotLivreOrientation": "upright-only",
+    "tarotLivreMeaningsInsideFreeMode": false,
+    "tarotLivreRepeats": false,
+    "mesaRealRows": 13,
+    "mesaRealColumns": 6,
+    "consultationsFunctionalCodeChanged": false,
+    "consultationPricesBrl": [250, 150, 100, 50],
+    "consultationEmailRequired": true,
+    "realBillingEnabled": false,
+    "resendConfigured": false,
+    "unconfirmedPersonalNamePublished": false
+  },
+  "integrityBase": {
+    "indexV163Sha256": "bcb4271567fed2c4464a7b5f61c6870d9919c25372fb7f669730541a0ec95701",
+    "sitemapV163Sha256": "70ddf8d7590114f3c1f4ddb45010177fda990cb0e8c6467552257f697dd1af78",
+    "spreadsHubV163Sha256": "1f6cd674e64514c752189d428d750d89e1c3f79daf258499b6030859dd14ad9f"
+  },
+  "installation": {
+    "method": "manual-flat-upload-github",
+    "filesInPackage": 10,
+    "replace": ["sitemap.xml", "tiragens-de-tarot.html"],
+    "add": ["tiragem-caminho-em-cinco.html", "mandala-astrologica-no-tarot.html", "arvore-da-vida-no-tarot.html", "mesa-personalizada-no-tarot.html", "00-LEIA-PRIMEIRO-V164-BIBLIOTECA-TIRAGENS-COMPLETA.txt", "BIBLIOTECA-TIRAGENS-V164.json", "QA-V164-BIBLIOTECA-TIRAGENS.mjs", "ARQUIVOS-V164-SHA256.txt"],
+    "deleteOtherFiles": false,
+    "commitMessage": "Instala V164 biblioteca completa de tiragens"
+  }
+}
