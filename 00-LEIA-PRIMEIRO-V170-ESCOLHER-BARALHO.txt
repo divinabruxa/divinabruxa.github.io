@@ -1,0 +1,73 @@
+DIVINA BRUXA — V170 — COMO ESCOLHER UM BARALHO DE TAROT
+Data: 07/09/2026
+
+Esta versão adiciona um novo guia prático e interativo:
+
+- Página completa: como-escolher-um-baralho-de-tarot.html.
+- Teste privado com 5 perguntas e 15 opções.
+- Afinidade inicial com Marselha, Rider–Waite–Smith ou Thoth.
+- Resultado híbrido quando há empate entre tradições.
+- 5 critérios que mudam a experiência de uso.
+- Checklist com 7 verificações antes de escolher ou comprar.
+- Comparação honesta entre baralho físico e digital.
+- Respostas para 5 mitos e dúvidas de iniciantes.
+- Prática orientada para os primeiros 15 minutos.
+- 4 fontes institucionais: V&A, British Museum e Morgan.
+- Nenhuma marca, loja ou produto específico é recomendado.
+- O teste roda somente no aparelho: não envia nem salva escolhas.
+- Busca completa ampliada de 121 para 122 destinos.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+
+1. Descompacte o ZIP no aplicativo Arquivos.
+2. Abra a raiz do repositório divinabruxa.github.io no ramo main.
+3. Toque em Add file e Upload files.
+4. Selecione os 13 arquivos soltos, não o ZIP.
+5. Substitua estes 6 arquivos:
+   - sitemap.xml
+   - buscar.html
+   - busca-v165.js
+   - tipos-de-tarot.html
+   - tarot-para-iniciantes.html
+   - guias-para-comecar.html
+6. Adicione os outros 7 arquivos.
+7. Não apague nenhum arquivo anterior.
+8. Confirme o commit com a mensagem: Instala V170 escolher baralho de Tarot
+
+CONFERÊNCIA PÚBLICA
+
+https://divinabruxa.com.br/como-escolher-um-baralho-de-tarot.html
+https://divinabruxa.com.br/tipos-de-tarot.html
+https://divinabruxa.com.br/tarot-para-iniciantes.html
+https://divinabruxa.com.br/guias-para-comecar.html
+https://divinabruxa.com.br/buscar.html
+
+TESTES RÁPIDOS
+
+- Responda às 5 perguntas e toque em Ver minha afinidade.
+- Confira se aparece um resultado e três barras de pontuação.
+- Toque em Limpar escolhas e confirme que o teste volta ao início.
+- Na busca completa, digite: escolher baralho
+- Na busca completa, digite: primeiro baralho
+- Na busca completa, digite: baralho digital
+
+PRESERVADO
+
+- Home intacta.
+- Tarot Livre intacto: 78 cartas oficiais, diretas, sem repetição e sem
+  significados durante a revelação; Mesa Real 13 × 6.
+- Consultas intactas: R$ 250, R$ 150, R$ 100 e R$ 50; e-mail obrigatório.
+- Cobrança real desligada e Resend ainda adiado.
+- Nenhuma imagem nova ou imagem social foi adicionada.
+- Nenhum nome pessoal foi publicado.
+
+CONTROLE
+
+- Guia: 5 perguntas, 15 opções, 5 critérios e 7 verificações.
+- Privacidade: 0 dados enviados e 0 escolhas armazenadas.
+- Fontes: 4 referências institucionais com links diretos.
+- Busca: 122 destinos únicos.
+- Sitemap: 123 URLs de página e 78 entradas de imagem.
+- QA: QA-V170-ESCOLHER-BARALHO.mjs.
+- Integridade: ARQUIVOS-V170-SHA256.txt.
+- Contrato: ESCOLHER-BARALHO-V170.json.

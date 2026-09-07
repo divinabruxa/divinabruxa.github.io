@@ -1,0 +1,157 @@
+{
+  "schemaVersion": "170.0.0",
+  "release": "DIVINA-BRUXA-V170-ESCOLHER-BARALHO-DE-TAROT",
+  "date": "2026-09-07",
+  "status": "ready-for-manual-install",
+  "purpose": "Ajudar visitantes a escolher um primeiro baralho de Tarot com critérios visuais, editoriais e práticos, sem recomendar marcas, vendedores ou produtos específicos.",
+  "choiceGuide": {
+    "page": "como-escolher-um-baralho-de-tarot.html",
+    "stylesheet": "escolher-baralho-v170.css?v=170",
+    "script": "escolher-baralho-v170.js?v=170",
+    "quizQuestions": 5,
+    "quizOptions": 15,
+    "quizProfiles": ["Tarot de Marselha", "Rider-Waite-Smith", "Tarot de Thoth"],
+    "hybridResultSupported": true,
+    "selectionCriteria": 5,
+    "purchaseChecks": 7,
+    "formatsCompared": ["físico", "digital"],
+    "firstPracticeMinutes": 15,
+    "faqQuestions": 5,
+    "institutionalSources": 4,
+    "structuredDataTypes": ["Article", "FAQPage"]
+  },
+  "quizPrivacy": {
+    "runsLocally": true,
+    "registrationRequired": false,
+    "networkRequests": false,
+    "choicesStored": false,
+    "cookiesUsed": false,
+    "analyticsEventsAdded": false
+  },
+  "editorialMethod": {
+    "brandRecommendations": false,
+    "sellerRecommendations": false,
+    "specificProductRecommendations": false,
+    "pricePresentedAsQualityGuarantee": false,
+    "giftRequirementClaimed": false,
+    "cleansingOrConsecrationRequired": false,
+    "physicalFormatPresentedAsSuperior": false,
+    "quizPresentedAsDefinitive": false,
+    "artistCreditsEncouraged": true,
+    "numberedCardsMustBeObserved": true,
+    "dimensionsAndLanguageMustBeChecked": true
+  },
+  "references": [
+    {
+      "institution": "Victoria and Albert Museum",
+      "title": "A history of tarot cards",
+      "url": "https://www.vam.ac.uk/articles/tarot-cards"
+    },
+    {
+      "institution": "British Museum",
+      "title": "Tarot de Marseilles, Nicolas Conver",
+      "url": "https://www.britishmuseum.org/collection/object/P_1904-0511-47-1-78"
+    },
+    {
+      "institution": "Morgan Library & Museum",
+      "title": "Tarot! Renaissance Symbols, Modern Visions",
+      "url": "https://www.themorgan.org/exhibitions/tarot"
+    },
+    {
+      "institution": "Morgan Library & Museum",
+      "title": "Tarot! Exhibition Labels",
+      "url": "https://www.themorgan.org/sites/default/files/pdf/exhibitions/Morgan_Tarot_ExhibitionLabels.pdf"
+    }
+  ],
+  "searchIntegration": {
+    "searchScript": "busca-v165.js?v=170",
+    "indexedDestinationsBefore": 121,
+    "indexedDestinationsAfter": 122,
+    "cards": 78,
+    "portalPages": 44,
+    "categoryCounts": {
+      "cartas": 78,
+      "tiragens": 14,
+      "aprender": 20,
+      "portal": 10
+    },
+    "choiceGuideFeatured": true,
+    "exampleQueries": ["escolher baralho", "primeiro baralho", "baralho digital", "checklist", "Marselha"]
+  },
+  "discoverability": {
+    "linkedFrom": ["tipos-de-tarot.html", "tarot-para-iniciantes.html", "guias-para-comecar.html", "buscar.html"],
+    "sitemapUrlsBefore": 122,
+    "sitemapUrlsAfter": 123,
+    "sitemapImageEntries": 78,
+    "newSitemapUrls": 1
+  },
+  "accessibility": {
+    "singleH1": true,
+    "skipLink": true,
+    "nativeFieldsetsAndLegends": true,
+    "requiredRadioGroups": true,
+    "liveProgress": true,
+    "liveResult": true,
+    "keyboardNavigable": true,
+    "nativeFaqDetails": true,
+    "responsiveSingleColumn": true,
+    "reducedMotionSupported": true,
+    "printStylesIncluded": true
+  },
+  "reuse": {
+    "portalStylesheet": "seo-portal-v154.css?v=154",
+    "existingImage": "card-00.webp",
+    "existingImageWidth": 1024,
+    "existingImageHeight": 1536,
+    "newImagesAdded": false,
+    "socialPreviewImageAdded": false
+  },
+  "safeguards": {
+    "indexChanged": false,
+    "tarotLivreChanged": false,
+    "tarotLivreCards": 78,
+    "tarotLivreOrientation": "upright-only",
+    "tarotLivreMeaningsInsideFreeMode": false,
+    "tarotLivreRepeats": false,
+    "mesaRealRows": 13,
+    "mesaRealColumns": 6,
+    "consultationsFunctionalCodeChanged": false,
+    "consultationPricesBrl": [250, 150, 100, 50],
+    "consultationEmailRequired": true,
+    "ownerEmail": "orbedasrealidades@hotmail.com",
+    "realBillingEnabled": false,
+    "resendConfigured": false,
+    "unconfirmedPersonalNamePublished": false
+  },
+  "integrityBase": {
+    "sitemapV169Sha256": "7a08f1e5ca2b63078f5ef67b68a7ce6d21ad6eb5e00f98b46377f4a0a47d337c",
+    "searchPageV169Sha256": "1de6810b340ca7e7ee5d4669d77a77b5c64a8bd430854158d72351ddc2c26472",
+    "searchScriptV169Sha256": "92e66400e9b448b88504f04df958c74b85b2b4027678090a48a6aac745fa2595",
+    "typesPageV169Sha256": "cd603ab78997a9828b2c6ae6bddc2365c0788f3f71319a0a13bd57c203d828ce",
+    "beginnerPageV169Sha256": "819bbdaf26319816f8aaca6e5711965821b467761266df8853c6b4707527c0ea",
+    "guidesPageV169Sha256": "d6f02428307643c34669d7a1ac1f6e899d2b526bb5e956103c1b0f9674932f6d"
+  },
+  "installation": {
+    "method": "manual-flat-upload-github",
+    "filesInPackage": 13,
+    "replace": [
+      "sitemap.xml",
+      "buscar.html",
+      "busca-v165.js",
+      "tipos-de-tarot.html",
+      "tarot-para-iniciantes.html",
+      "guias-para-comecar.html"
+    ],
+    "add": [
+      "como-escolher-um-baralho-de-tarot.html",
+      "escolher-baralho-v170.css",
+      "escolher-baralho-v170.js",
+      "00-LEIA-PRIMEIRO-V170-ESCOLHER-BARALHO.txt",
+      "ESCOLHER-BARALHO-V170.json",
+      "QA-V170-ESCOLHER-BARALHO.mjs",
+      "ARQUIVOS-V170-SHA256.txt"
+    ],
+    "deleteOtherFiles": false,
+    "commitMessage": "Instala V170 escolher baralho de Tarot"
+  }
+}
