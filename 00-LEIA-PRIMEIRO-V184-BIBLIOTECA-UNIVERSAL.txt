@@ -1,0 +1,38 @@
+DIVINA BRUXA — V184 — BIBLIOTECA UNIVERSAL DAS 78 CARTAS
+================================================================
+
+OBJETIVO
+Concluir a Macroetapa 6 do Plano Supremo: transformar a Biblioteca
+em um atlas universal, pesquisável, comparável e acessível, sem
+alterar as artes oficiais nem as regras do Tarot Livre.
+
+O QUE MUDA
+- Busca sem acento em português, inglês e espanhol.
+- Pesquisa por nome, símbolo, palavra-chave e correspondência.
+- Filtros por arcano, naipe, elemento e tipo.
+- Ordem pela jornada, nome ou elemento.
+- Atalhos para 22 Maiores, quatro naipes e 16 cartas da corte.
+- Comparação privada de até duas cartas, sem armazenamento.
+- Página pública com aprimoramento progressivo: o índice estático
+  completo permanece disponível se o JavaScript não carregar.
+- Núcleo da Biblioteca disponível offline; imagens visitadas entram
+  no cache progressivamente, sem baixar as 78 artes de uma vez.
+
+PROTEÇÕES PRESERVADAS
+- Tarot Livre: 78 cartas, diretas, sem repetição, sem significados,
+  Mesa Real 13 × 6 e nenhuma vibração do navegador.
+- Carta do Dia V183: ciclo de Brasília, carta estável e 78 conteúdos.
+- Consultas: R$ 250, R$ 150, R$ 100 e R$ 50, e-mail obrigatório e
+  nenhuma cobrança automática.
+- Home, menu, Orbes, artes e identidade cósmica preservados.
+
+INSTALAÇÃO PELO IPHONE
+1. Descompacte o ZIP.
+2. Abra a raiz do ramo main no GitHub.
+3. Envie os 13 arquivos soltos deste pacote.
+4. Aceite substituir os 7 arquivos existentes.
+5. Não envie o ZIP, não crie uma pasta e não apague arquivos antigos.
+6. Commit sugerido: Instala V184 Biblioteca Universal das 78 cartas
+
+PRÓXIMA ETAPA
+Macroetapa 7 — Tiragens definitivas.

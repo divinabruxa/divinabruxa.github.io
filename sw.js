@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V53 · CARTA DO DIA OFFLINE V183 */
-const CACHE='divina-bruxa-v53-daily-v183';
+/* DIVINA BRUXA — SERVICE WORKER V54 · BIBLIOTECA UNIVERSAL OFFLINE V184 */
+const CACHE='divina-bruxa-v54-library-v184';
 
 const REQUIRED=[
   './',
@@ -58,6 +58,9 @@ const CORE=[
   './storage.js',
   './tarot-engine.js',
   './tarot-image-runtime.js',
+  './card-library-policy.js',
+  './card-library-engine.js',
+  './biblioteca-universal-v184.css',
   './tarot-session.js',
   './tarot-continuity.js',
   './tarot-editorial-policy.js',
@@ -68,6 +71,8 @@ const CORE=[
   './daily-meaning-runtime.js',
   './tarot-meanings.js',
   './meaning-engine.js',
+  './cartas-do-tarot.html',
+  './biblioteca-universal-v184.js',
   './skin-universal-v10.js',
   './skin-registry-v12.js',
   './portal-transition-v10.js',
@@ -77,6 +82,7 @@ const CORE=[
 const WARM=[
   './menu-completo-v177.js','./tarot-spiral-suction-v1.webp',
   './tarot-data.js','./storage.js','./tarot-engine.js','./tarot-image-runtime.js','./daily-meaning-runtime.js','./tarot-meanings.js','./meaning-engine.js','./tarot-atlas.webp',
+  './card-library-policy.js','./card-library-engine.js','./biblioteca-universal-v184.css','./biblioteca-universal-v184.js','./cartas-do-tarot.html',
   './fallback-shell-v1.css','./pwa-final-v1.css'
 ];
 

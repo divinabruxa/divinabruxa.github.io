@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "184.0.0",
+  "macroStage": 6,
+  "title": "Biblioteca universal das 78 cartas",
+  "catalog": {
+    "cards": 78,
+    "majorArcana": 22,
+    "minorArcana": 56,
+    "cardsPerSuit": 14,
+    "courtCards": 16,
+    "orientation": "upright-only",
+    "deepEditorialLayersPerCard": 15,
+    "individualEditorialPages": 78
+  },
+  "discovery": {
+    "accentInsensitive": true,
+    "languages": ["pt-BR", "en", "es"],
+    "searchesNames": true,
+    "searchesKeywords": true,
+    "searchesSymbols": true,
+    "searchesCorrespondences": true,
+    "filters": ["arcana", "suit", "element", "kind"],
+    "sorts": ["journey", "name", "element"]
+  },
+  "comparison": {
+    "maximumCards": 2,
+    "stored": false,
+    "claimedAsReading": false
+  },
+  "progressiveEnhancement": {
+    "staticIndexPreserved": true,
+    "searchableAppInPortal": true,
+    "searchableAppOnPublicLibraryPage": true,
+    "essentialCatalogAvailableOffline": true,
+    "allCardImagesPrecached": false,
+    "visitedCardImagesRuntimeCached": true
+  },
+  "visualSafeguards": {
+    "homeCompositionChanged": false,
+    "orbArtworkChanged": false,
+    "tarotTableChanged": false,
+    "cardArtworkChanged": false,
+    "existingCosmicIdentityPreserved": true
+  },
+  "protectedAreas": {
+    "freeTarot": {
+      "cards": 78,
+      "uprightOnly": true,
+      "noRepeats": true,
+      "meaningsInReveal": false,
+      "table": "13x6",
+      "browserHaptics": false
+    },
+    "dailyCard": {
+      "brasiliaCycle": true,
+      "oneStableCardPerCycle": true,
+      "deepContentCards": 78
+    },
+    "consultations": {
+      "pricesBRL": [250, 150, 100, 50],
+      "emailRequired": true,
+      "automaticBilling": false
+    }
+  },
+  "installation": {
+    "filesInPackage": 13,
+    "replace": [
+      "index.html",
+      "app.js",
+      "page-loader-v1.js",
+      "sw.js",
+      "card-library-policy.js",
+      "card-library-engine.js",
+      "cartas-do-tarot.html"
+    ],
+    "add": [
+      "biblioteca-universal-v184.css",
+      "biblioteca-universal-v184.js",
+      "BIBLIOTECA-UNIVERSAL-V184.json",
+      "QA-V184-BIBLIOTECA-UNIVERSAL.mjs",
+      "00-LEIA-PRIMEIRO-V184-BIBLIOTECA-UNIVERSAL.txt",
+      "ARQUIVOS-V184-SHA256.txt"
+    ]
+  },
+  "nextObjective": "Macroetapa 7 — Tiragens definitivas"
+}

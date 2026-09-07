@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.18 · CARTA DO DIA V183
+/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.19 · BIBLIOTECA UNIVERSAL V184
    Estilos e motores nascem sob demanda; toda falha oferece tentativa e retorno seguro. */
 
 import {
@@ -171,7 +171,10 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
       return new DailyRitual($('#dailyCard'), remember, { authClient });
     },
     library: async () => {
-      const { CardLibraryEngine } = await import('./card-library-engine.js');
+      const [, { CardLibraryEngine }] = await Promise.all([
+        import('./tarot-meanings.js?v=184'),
+        import('./card-library-engine.js?v=184')
+      ]);
       return new CardLibraryEngine($('#cardLibraryApp'));
     },
     school: async () => {
