@@ -1,0 +1,103 @@
+DIVINA BRUXA · V172 · PLANO DE ESTUDO DO TAROT EM 30 DIAS
+================================================================
+
+O QUE ESTA VERSÃO ENTREGA
+
+1. Nova página pública:
+   plano-de-estudo-do-tarot-em-30-dias.html
+
+2. Plano completo com 30 dias visíveis, dividido em:
+   - dias 1–7: mapa do baralho e Arcanos Maiores;
+   - dias 8–14: naipes e cartas numeradas;
+   - dias 15–21: figuras da corte e símbolos;
+   - dias 22–28: perguntas, posições, combinações e ética;
+   - dias 29–30: revisão das lacunas e próximo ciclo.
+
+3. Planejador local com:
+   - seleção dos 30 dias;
+   - sessões de 10, 20 ou 30 minutos;
+   - roteiro adaptado para cada dia;
+   - botões de dia anterior e próximo dia;
+   - indicador visual de progresso;
+   - nenhum cadastro, envio ou armazenamento de respostas.
+
+4. Integração com:
+   - busca completa do portal: 124 destinos;
+   - sitemap: 125 páginas;
+   - Tarot para iniciantes;
+   - Escola do Tarot;
+   - Guias para começar.
+
+5. Método editorial:
+   - revisão distribuída;
+   - tentativa de recordar antes de consultar;
+   - comparação entre cartas e famílias;
+   - explicação com palavras próprias;
+   - aviso explícito de que pesquisas sobre aprendizagem não validam
+     o Tarot como instrumento de previsão.
+
+COMO INSTALAR PELO GITHUB NO CELULAR
+
+1. Abra o repositório divinabruxa/divinabruxa.github.io.
+2. Entre na raiz da branch Principal/main.
+3. Toque em Adicionar arquivo > Carregar arquivos.
+4. Selecione TODOS os 13 arquivos soltos deste pacote.
+5. Confirme que os arquivos aparecem diretamente na raiz.
+   Não crie uma pasta chamada V172 e não envie apenas o ZIP.
+6. Confirme a substituição dos 6 arquivos existentes.
+7. Grave as alterações e aguarde a publicação do GitHub Pages.
+
+ARQUIVOS PARA SUBSTITUIR
+
+- sitemap.xml
+- buscar.html
+- busca-v165.js
+- tarot-para-iniciantes.html
+- escola-do-tarot.html
+- guias-para-comecar.html
+
+ARQUIVOS NOVOS
+
+- plano-de-estudo-do-tarot-em-30-dias.html
+- plano-estudo-tarot-v172.css
+- plano-estudo-tarot-v172.js
+- 00-LEIA-PRIMEIRO-V172-PLANO-ESTUDO-TAROT.txt
+- PLANO-ESTUDO-TAROT-V172.json
+- QA-V172-PLANO-ESTUDO-TAROT.mjs
+- ARQUIVOS-V172-SHA256.txt
+
+COMO CONFERIR DEPOIS DA PUBLICAÇÃO
+
+Abra:
+https://divinabruxa.com.br/plano-de-estudo-do-tarot-em-30-dias.html
+
+Teste no planejador:
+- escolha o dia 15;
+- marque 20 minutos;
+- toque em “Montar minha sessão”;
+- use os botões de dia anterior e próximo dia.
+
+Também abra:
+https://divinabruxa.com.br/buscar.html
+
+Pesquise por:
+- plano de estudo
+- tarot 30 dias
+- memorizar cartas
+
+PROTEÇÕES PRESERVADAS
+
+- Tarot Livre intacto: 78 cartas oficiais, diretas, sem repetição,
+  sem significados dentro do modo livre e Mesa Real 13 × 6.
+- Consultas intactas: R$ 250, R$ 150, R$ 100 e R$ 50.
+- E-mail do cliente continua obrigatório nas consultas.
+- E-mail da proprietária preservado: orbedasrealidades@hotmail.com
+- Nenhuma cobrança real e nenhuma integração com Resend adicionada.
+- Nenhum nome pessoal publicado.
+
+VALIDAÇÃO TÉCNICA
+
+No computador, na raiz do site, execute:
+node QA-V172-PLANO-ESTUDO-TAROT.mjs
+
+O resultado esperado é PASS.

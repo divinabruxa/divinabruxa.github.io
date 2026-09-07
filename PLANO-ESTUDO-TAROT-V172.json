@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "172.0.0",
+  "release": "DIVINA-BRUXA-V172-PLANO-ESTUDO-TAROT-30-DIAS",
+  "releasedAt": "2026-09-07",
+  "primaryPage": "plano-de-estudo-do-tarot-em-30-dias.html",
+  "studyPlan": {
+    "days": 30,
+    "corePhases": 4,
+    "closingDays": 2,
+    "phaseRanges": [
+      "1-7",
+      "8-14",
+      "15-21",
+      "22-28",
+      "29-30"
+    ],
+    "availableDurationsMinutes": [
+      10,
+      20,
+      30
+    ],
+    "minimumDailyMinutes": 10,
+    "staticDayCards": 30,
+    "tarotCardsCovered": 78,
+    "orientation": "upright-only",
+    "masteryPromisedInThirtyDays": false,
+    "missedDayCompensationRequired": false
+  },
+  "planner": {
+    "daysAvailable": 30,
+    "durationOptions": 3,
+    "previousAndNextControls": true,
+    "progressIndicator": true,
+    "worksWithoutAccount": true,
+    "runsLocally": true,
+    "networkRequests": false,
+    "answersStored": false,
+    "staticFallbackWithoutJavaScript": true
+  },
+  "learningMethod": {
+    "movements": [
+      "spaced-practice",
+      "retrieval-practice",
+      "comparison",
+      "self-explanation"
+    ],
+    "generalLearningResearchOnly": true,
+    "presentedAsEvidenceForTarotPrediction": false,
+    "externalReferences": 4,
+    "museumReferences": 1,
+    "learningResearchReferences": 3
+  },
+  "content": {
+    "faqQuestions": 5,
+    "rhythmOptions": 3,
+    "promiseCards": 4,
+    "methodCards": 4,
+    "sourceEntries": 4,
+    "internalSupportRoutes": 20,
+    "personalNamePublished": false,
+    "socialPreviewImageAdded": false
+  },
+  "accessibility": {
+    "skipLink": true,
+    "nativeSelect": true,
+    "nativeRadioGroups": true,
+    "keyboardControls": true,
+    "liveResult": true,
+    "reducedMotion": true,
+    "mobileBreakpoints": 4,
+    "printStyles": true,
+    "noJavaScriptFallback": true
+  },
+  "searchIntegration": {
+    "indexedDestinationsBefore": 123,
+    "indexedDestinationsAfter": 124,
+    "categoryCounts": {
+      "cartas": 78,
+      "tiragens": 14,
+      "aprender": 22,
+      "portal": 10
+    },
+    "featured": true,
+    "queries": [
+      "plano de estudo",
+      "tarot 30 dias",
+      "como estudar tarot",
+      "memorizar cartas",
+      "10 minutos"
+    ]
+  },
+  "discoverability": {
+    "sitemapUrlsBefore": 124,
+    "sitemapUrlsAfter": 125,
+    "sitemapImageEntries": 78,
+    "canonical": true,
+    "articleStructuredData": true,
+    "faqStructuredData": true,
+    "breadcrumbStructuredData": true
+  },
+  "safeguards": {
+    "tarotLivreChanged": false,
+    "tarotLivreCards": 78,
+    "tarotLivreOrientation": "upright-only",
+    "tarotLivreRepeats": false,
+    "tarotLivreMeaningsInsideFreeMode": false,
+    "tarotLivreMesaReal": "13x6",
+    "consultationsChanged": false,
+    "consultationPricesBrl": [
+      250,
+      150,
+      100,
+      50
+    ],
+    "consultationEmailRequired": true,
+    "ownerEmail": "orbedasrealidades@hotmail.com",
+    "realBillingAdded": false,
+    "resendAdded": false
+  },
+  "installation": {
+    "filesInPackage": 13,
+    "flatArchive": true,
+    "replace": [
+      "sitemap.xml",
+      "buscar.html",
+      "busca-v165.js",
+      "tarot-para-iniciantes.html",
+      "escola-do-tarot.html",
+      "guias-para-comecar.html"
+    ],
+    "add": [
+      "plano-de-estudo-do-tarot-em-30-dias.html",
+      "plano-estudo-tarot-v172.css",
+      "plano-estudo-tarot-v172.js",
+      "00-LEIA-PRIMEIRO-V172-PLANO-ESTUDO-TAROT.txt",
+      "PLANO-ESTUDO-TAROT-V172.json",
+      "QA-V172-PLANO-ESTUDO-TAROT.mjs",
+      "ARQUIVOS-V172-SHA256.txt"
+    ]
+  }
+}
