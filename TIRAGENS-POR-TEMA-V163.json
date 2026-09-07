@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "163.0.0",
+  "release": "DIVINA-BRUXA-V163-TIRAGENS-POR-TEMA",
+  "date": "2026-09-07",
+  "status": "ready-for-manual-install",
+  "purpose": "Transformar cinco tiragens temáticas já existentes em guias públicos, rastreáveis, práticos e responsáveis.",
+  "publicPages": [
+    { "file": "tarot-do-amor.html", "canonical": "https://divinabruxa.com.br/tarot-do-amor.html", "method": "Amor & Relações", "cards": 6, "primaryImage": "card-06.webp" },
+    { "file": "tiragem-dois-caminhos.html", "canonical": "https://divinabruxa.com.br/tiragem-dois-caminhos.html", "method": "Dois Caminhos", "cards": 6, "primaryImage": "card-11.webp" },
+    { "file": "tarot-para-trabalho.html", "canonical": "https://divinabruxa.com.br/tarot-para-trabalho.html", "method": "Trabalho & Vocação", "cards": 5, "primaryImage": "card-66.webp" },
+    { "file": "tarot-para-dinheiro.html", "canonical": "https://divinabruxa.com.br/tarot-para-dinheiro.html", "method": "Dinheiro & Recursos", "cards": 5, "primaryImage": "card-69.webp" },
+    { "file": "tarot-espiritual.html", "canonical": "https://divinabruxa.com.br/tarot-espiritual.html", "method": "Caminho Espiritual", "cards": 5, "primaryImage": "card-02.webp" }
+  ],
+  "officialMethods": {
+    "twoPaths": ["Núcleo da escolha", "Caminho A · força", "Caminho A · desafio", "Caminho B · força", "Caminho B · desafio", "Critério para decidir"],
+    "love": ["Você", "A outra energia", "O vínculo", "O que fortalece", "O que pede limite", "Tendência"],
+    "work": ["Seu lugar agora", "Talento disponível", "Ambiente", "Desafio profissional", "Direção possível"],
+    "money": ["Realidade atual", "Recurso disponível", "Padrão a rever", "Ação concreta", "Tendência material"],
+    "spiritual": ["Presença", "Aprendizado", "Sombra a acolher", "Dom a cultivar", "Integração"]
+  },
+  "contentBoundaries": {
+    "orientation": "upright-only",
+    "literalMindReading": false,
+    "deterministicPrediction": false,
+    "decisionReplacement": false,
+    "financialAdvice": false,
+    "medicalOrMentalHealthAdvice": false,
+    "consentCentered": true,
+    "agencyCentered": true
+  },
+  "discoverability": {
+    "spreadsHubUpdated": true,
+    "spreadsHubNewGuideLinks": 5,
+    "sitemapUrlsBefore": 108,
+    "sitemapUrlsAfter": 113,
+    "sitemapImageEntries": 78,
+    "newSitemapUrls": 5
+  },
+  "reuse": {
+    "stylesheet": "seo-portal-v154.css?v=154",
+    "newCssAdded": false,
+    "newJavascriptAddedToPublicPages": false,
+    "newImagesAdded": false,
+    "socialPreviewImageAdded": false
+  },
+  "safeguards": {
+    "indexChanged": false,
+    "tarotLivreChanged": false,
+    "tarotLivreCards": 78,
+    "tarotLivreOrientation": "upright-only",
+    "tarotLivreMeaningsInsideFreeMode": false,
+    "tarotLivreRepeats": false,
+    "mesaRealRows": 13,
+    "mesaRealColumns": 6,
+    "consultationsFunctionalCodeChanged": false,
+    "consultationPricesBrl": [250, 150, 100, 50],
+    "consultationEmailRequired": true,
+    "realBillingEnabled": false,
+    "resendConfigured": false,
+    "unconfirmedPersonalNamePublished": false
+  },
+  "integrityBase": {
+    "indexV162Sha256": "bcb4271567fed2c4464a7b5f61c6870d9919c25372fb7f669730541a0ec95701",
+    "sitemapV162Sha256": "c917900609e920e6fb8d255b03e7b14277a817f561440bc64f4e1a5debb3d263",
+    "spreadsHubV162Sha256": "a56f0a974122681b9131e08e64b341c2ebc73b693768c26d6173baa70fa554d2"
+  },
+  "installation": {
+    "method": "manual-flat-upload-github",
+    "filesInPackage": 11,
+    "replace": ["sitemap.xml", "tiragens-de-tarot.html"],
+    "add": ["tarot-do-amor.html", "tiragem-dois-caminhos.html", "tarot-para-trabalho.html", "tarot-para-dinheiro.html", "tarot-espiritual.html", "00-LEIA-PRIMEIRO-V163-TIRAGENS-POR-TEMA.txt", "TIRAGENS-POR-TEMA-V163.json", "QA-V163-TIRAGENS-POR-TEMA.mjs", "ARQUIVOS-V163-SHA256.txt"],
+    "deleteOtherFiles": false,
+    "commitMessage": "Instala V163 tiragens por tema"
+  }
+}
