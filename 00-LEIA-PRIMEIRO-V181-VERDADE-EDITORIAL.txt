@@ -1,0 +1,59 @@
+DIVINA BRUXA — V181 — MACROETAPA 3
+VERDADE EDITORIAL, FONTES E CORREÇÕES
+
+O QUE ESTA VERSÃO FAZ
+
+1. Cria a página Política editorial e correções.
+2. Cria um registro público com 14 referências verificáveis.
+3. Declara a responsabilidade editorial da Divina Bruxa sem inventar pessoa,
+   biografia, formação ou credencial.
+4. Separa fato documentado, tradição, correspondência simbólica,
+   interpretação e experiência pessoal.
+5. Explica de forma transparente como automação e IA podem apoiar o trabalho.
+6. Publica um processo de correção pelo e-mail oficial.
+7. Integra as páginas ao Menu Mágico, à busca, aos fundamentos e ao sitemap.
+
+COMO INSTALAR PELO IPHONE/GITHUB
+
+1. Descompacte este ZIP.
+2. Selecione TODOS os 15 arquivos soltos.
+3. Envie-os para a RAIZ do ramo main no GitHub.
+4. Confirme a substituição dos 8 arquivos existentes.
+5. Não envie somente o ZIP, não crie pasta e não apague arquivos anteriores.
+6. Use a mensagem de commit: Instala V181 verdade editorial
+7. Aguarde a publicação do GitHub Pages e atualize o site uma vez.
+
+ARQUIVOS PARA SUBSTITUIR
+
+- menu-completo-v177.js
+- busca-v165.js
+- buscar.html
+- sitemap.xml
+- sobre-a-divina-bruxa.html
+- metodologia-do-tarot.html
+- etica-e-responsabilidade.html
+- contato.html
+
+ARQUIVOS NOVOS
+
+- politica-editorial.html
+- fontes-e-referencias.html
+- verdade-editorial-v181.css
+- VERDADE-EDITORIAL-V181.json
+- QA-V181-VERDADE-EDITORIAL.mjs
+- 00-LEIA-PRIMEIRO-V181-VERDADE-EDITORIAL.txt
+- ARQUIVOS-V181-SHA256.txt
+
+GARANTIAS PRESERVADAS
+
+- A Orbe e o visual fechado da Home não foram alterados.
+- Tarot Livre: 78 cartas oficiais, sempre diretas, sem repetição e sem
+  significados dentro da revelação livre.
+- Mesa Real: 78 posições em 13 fileiras de 6.
+- Consultas: R$ 250, R$ 150, R$ 100 e R$ 50; e-mail obrigatório.
+- Cobrança real continua desligada.
+- Nenhum arquivo antigo deve ser apagado nesta instalação.
+
+PRÓXIMA MACROETAPA
+
+Macroetapa 4 — Tarot Livre definitivo.

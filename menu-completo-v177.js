@@ -37,8 +37,30 @@ const installCompleteMenu = () => {
   });
 };
 
+const installEditorialLinks = () => {
+  const guides = document.querySelector('.magic-menu-guides');
+  if (!guides || guides.dataset.editorialVersion === '181') return Boolean(guides);
+  const privacyHeading = [...guides.querySelectorAll('strong')].find(item => item.textContent.trim() === 'PRIVACIDADE E DIREITOS');
+  if (!privacyHeading) return false;
+  const heading = document.createElement('strong');
+  heading.textContent = 'VERDADE EDITORIAL';
+  const policy = document.createElement('a');
+  policy.href = 'politica-editorial.html';
+  policy.textContent = 'Política editorial e correções';
+  const sources = document.createElement('a');
+  sources.href = 'fontes-e-referencias.html';
+  sources.textContent = 'Fontes e referências';
+  privacyHeading.before(heading, policy, sources);
+  guides.dataset.editorialVersion = '181';
+  return true;
+};
+
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', installCompleteMenu, { once: true });
+  document.addEventListener('DOMContentLoaded', () => {
+    installCompleteMenu();
+    installEditorialLinks();
+  }, { once: true });
 } else {
   installCompleteMenu();
+  installEditorialLinks();
 }

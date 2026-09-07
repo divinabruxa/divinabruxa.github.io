@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "181.0.0",
+  "release": "DIVINA-BRUXA-V181-VERDADE-EDITORIAL",
+  "releaseDate": "2026-09-07",
+  "macroStage": 3,
+  "objective": "Tornar visíveis a responsabilidade editorial, o processo de criação, as fontes, os limites e a política de correções da Divina Bruxa.",
+  "editorialResponsibility": {
+    "name": "Divina Bruxa",
+    "type": "Organization",
+    "inventedPersonByline": false,
+    "inventedCredentials": false,
+    "officialContact": "orbedasrealidades@hotmail.com"
+  },
+  "publicPages": [
+    {
+      "file": "politica-editorial.html",
+      "canonical": "https://divinabruxa.com.br/politica-editorial.html",
+      "schemaType": "WebPage",
+      "purpose": "Explicar autoria, pesquisa, revisão, automação, datas e correções."
+    },
+    {
+      "file": "fontes-e-referencias.html",
+      "canonical": "https://divinabruxa.com.br/fontes-e-referencias.html",
+      "schemaType": "CollectionPage",
+      "purpose": "Manter um registro público e verificável das referências usadas."
+    }
+  ],
+  "editorialLayers": [
+    "fato documentado",
+    "tradição",
+    "correspondência simbólica",
+    "interpretação",
+    "experiência pessoal"
+  ],
+  "sourceRegistry": {
+    "total": 14,
+    "groups": {
+      "historyAndCollections": 6,
+      "learningAndMemory": 3,
+      "physicalConservation": 2,
+      "qualityAndAccessibility": 3
+    },
+    "externalLinksUseNoopener": true,
+    "accessDate": "2026-09-07"
+  },
+  "automationDisclosure": {
+    "automationMaySupportDrafts": true,
+    "automationMaySupportTechnicalTests": true,
+    "automationMakesFactsTrue": false,
+    "editorialResponsibilityRemainsHumanOrganization": true
+  },
+  "correctionsPolicy": {
+    "publicAnchor": "https://divinabruxa.com.br/politica-editorial.html#correcoes",
+    "channel": "email",
+    "email": "orbedasrealidades@hotmail.com",
+    "materialCorrectionsUpdateReviewDate": true,
+    "datesChangedOnlyForMaterialUpdates": true
+  },
+  "discoverability": {
+    "searchDestinationsBefore": 128,
+    "searchDestinationsAfter": 130,
+    "sitemapUrlsBefore": 129,
+    "sitemapUrlsAfter": 131,
+    "sitemapImageEntries": 78,
+    "menuSection": "VERDADE EDITORIAL"
+  },
+  "safeguards": {
+    "orbChanged": false,
+    "homeVisualChanged": false,
+    "tarotLivreChanged": false,
+    "tarotLivreCards": 78,
+    "tarotLivreOrientation": "upright-only",
+    "tarotLivreRepeats": false,
+    "tarotLivreMeaningsInsideFreeMode": false,
+    "mesaRealRows": 13,
+    "mesaRealColumns": 6,
+    "consultationsFunctionalCodeChanged": false,
+    "consultationPricesBrl": [250, 150, 100, 50],
+    "consultationEmailRequired": true,
+    "realBillingEnabled": false,
+    "dnsChanged": false,
+    "socialPreviewImageAdded": false
+  },
+  "installation": {
+    "method": "manual-flat-upload-github",
+    "filesInPackage": 15,
+    "replace": [
+      "menu-completo-v177.js",
+      "busca-v165.js",
+      "buscar.html",
+      "sitemap.xml",
+      "sobre-a-divina-bruxa.html",
+      "metodologia-do-tarot.html",
+      "etica-e-responsabilidade.html",
+      "contato.html"
+    ],
+    "add": [
+      "politica-editorial.html",
+      "fontes-e-referencias.html",
+      "verdade-editorial-v181.css",
+      "VERDADE-EDITORIAL-V181.json",
+      "QA-V181-VERDADE-EDITORIAL.mjs",
+      "00-LEIA-PRIMEIRO-V181-VERDADE-EDITORIAL.txt",
+      "ARQUIVOS-V181-SHA256.txt"
+    ],
+    "deleteOtherFiles": false,
+    "commitMessage": "Instala V181 verdade editorial"
+  }
+}
