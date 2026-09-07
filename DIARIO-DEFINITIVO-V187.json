@@ -1,0 +1,84 @@
+{
+  "version": "187",
+  "release": "CUMULATIVA_ESCOLA_E_DIARIO_DEFINITIVOS",
+  "macroetapa": 9,
+  "date": "2026-09-07",
+  "base_required": "V185 ou superior",
+  "includes_previous_unpublished_release": {
+    "version": "V186",
+    "macroetapa": 8,
+    "name": "Escola do Tarot definitiva",
+    "lessons": 124,
+    "modules": 17,
+    "card_lessons": 78,
+    "theory_lessons": 46
+  },
+  "diary": {
+    "storage": "local-only",
+    "schema_version": "7.0.0",
+    "orientation": "normal",
+    "autosave": true,
+    "draft_restore": true,
+    "accent_insensitive_search": true,
+    "filters": ["mood", "type", "date", "card", "theme", "favorites"],
+    "views": ["timeline", "calendar"],
+    "relationships": {
+      "free_text": true,
+      "linked_entries": true,
+      "revision_log": true,
+      "original_entry_remains_visible": true
+    },
+    "mirror": {
+      "runs_on_device": true,
+      "periods_days": [7, 30, 90, 365, "all"],
+      "aggregates": ["entries", "cards", "suits", "moods", "active_days", "words", "revisions", "reviews_due", "links", "tags"],
+      "diagnosis": false,
+      "prediction": false
+    },
+    "portability": {
+      "format": "JSON",
+      "full_export": true,
+      "single_entry_export": true,
+      "validated_restore": true,
+      "merge_without_deletion": true,
+      "replace_requires_confirmation": true,
+      "full_deletion_requires_confirmation": true,
+      "maximum_import_bytes": 5000000,
+      "maximum_entries": 2000
+    },
+    "offline": {
+      "app_engine_cached": true,
+      "policy_cached": true,
+      "styles_cached": true,
+      "public_guide_cached": true
+    }
+  },
+  "privacy": {
+    "default": "private",
+    "admin_can_read_body": false,
+    "analytics_can_read_body": false,
+    "automatic_ai_access": false,
+    "automatic_sync": false,
+    "server_storage_claimed": false,
+    "ai_scope": "single-entry",
+    "ai_double_consent": true,
+    "ai_excludes": ["otherEntries", "draft", "relationships", "revisions", "mood", "favorites"]
+  },
+  "unchanged_invariants": {
+    "tarot_cards": 78,
+    "reversed_cards": 0,
+    "free_tarot_repetition": false,
+    "free_tarot_meanings_during_reveal": false,
+    "royal_table": "13x6",
+    "new_diary_menu_button": false,
+    "real_billing": false,
+    "production_auth": false
+  },
+  "installation": {
+    "package_files": 19,
+    "replace_files": 13,
+    "add_files": 6,
+    "flat_root_upload": true,
+    "minimum_safe_base": "V185"
+  }
+}

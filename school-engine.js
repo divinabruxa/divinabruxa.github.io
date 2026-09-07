@@ -1,14 +1,34 @@
-/* DIVINA BRUXA — ESCOLA DO TAROT CELESTIAL V138 */
+/* DIVINA BRUXA — ESCOLA DO TAROT DEFINITIVA V186 */
 
 import { CARDS } from './tarot-data.js';
 import { store, escapeHTML } from './storage.js';
 import { cardImageMarkup } from './tarot-image-runtime.js';
 import { dailyMeaning } from './daily-meaning-runtime.js';
 import { cardPageHref } from './card-library-policy.js';
-import { SCHOOL_MODULES, SCHOOL_STORAGE_KEY, normalizeSchoolState } from './school-policy.js';
+import {
+  SCHOOL_AI_SELECTION_KEY,
+  SCHOOL_CARD_TOTAL,
+  SCHOOL_FILTERS,
+  SCHOOL_LESSON_TOTAL,
+  SCHOOL_MODULES,
+  SCHOOL_NOTE_LIMIT,
+  SCHOOL_STORAGE_KEY,
+  SCHOOL_THEORY_TOTAL,
+  createSchoolAISelection,
+  mergeSchoolState,
+  normalizeSchoolBackup,
+  normalizeSchoolState,
+  normalizeSchoolText,
+  privateSchoolExport,
+  schoolFilterMatches
+} from './school-policy.js?v=186';
 
 const safe = value => escapeHTML(value ?? '');
 const ELEMENTS = Object.freeze(['Água', 'Ar', 'Fogo', 'Terra']);
+const scrollBehavior = () => globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+const nextFrame = callback => typeof globalThis.requestAnimationFrame === 'function'
+  ? globalThis.requestAnimationFrame(callback)
+  : globalThis.setTimeout(callback, 0);
 const MODULE_SIGILS = Object.freeze({
   fundamentals: '✦', majors: '☉', wands: '♨', cups: '☽', swords: '◇',
   pentacles: '⊕', court: '♛', numbers: '∞', elements: '△', positions: '⌖',
@@ -106,13 +126,26 @@ export class SchoolEngine {
     this.root = root;
     this.state = normalizeSchoolState(store.get(SCHOOL_STORAGE_KEY));
     this.query = '';
+    this.filter = 'all';
+    this.pendingAI = null;
+    this.persistenceError = false;
     this.activeModule = SCHOOL_MODULES.some(module => module.id === this.state.lastModule)
       ? this.state.lastModule
       : SCHOOL_MODULES[0].id;
     this.render();
   }
 
-  save() { store.set(SCHOOL_STORAGE_KEY, this.state); }
+  save() {
+    this.state = normalizeSchoolState(this.state);
+    try {
+      store.set(SCHOOL_STORAGE_KEY, this.state);
+      this.persistenceError = false;
+      return true;
+    } catch {
+      this.persistenceError = true;
+      return false;
+    }
+  }
 
   lessonsFor(module) {
     if (module.kind === 'major') {
@@ -127,6 +160,33 @@ export class SchoolEngine {
     return theoryLessons(module);
   }
 
+  allUniqueLessons() {
+    const seen = new Set();
+    const entries = [];
+    SCHOOL_MODULES.forEach(module => this.lessonsFor(module).forEach(lesson => {
+      if (seen.has(lesson.id)) return;
+      seen.add(lesson.id);
+      entries.push({ lesson, module });
+    }));
+    return entries;
+  }
+
+  lessonLocation(id, preferredModule = this.activeModule) {
+    const preferred = SCHOOL_MODULES.find(module => module.id === preferredModule);
+    const lesson = preferred && this.lessonsFor(preferred).find(item => item.id === id);
+    if (lesson) return { lesson, module:preferred };
+    return this.allUniqueLessons().find(entry => entry.lesson.id === id) || null;
+  }
+
+  resumeTarget() {
+    const entries = this.allUniqueLessons();
+    const current = this.state.lastLesson && this.lessonLocation(this.state.lastLesson, this.state.lastModule);
+    if (current && !this.state.completed.includes(current.lesson.id)) return current;
+    const previousIndex = this.state.lastLesson ? entries.findIndex(entry => entry.lesson.id === this.state.lastLesson) : -1;
+    const after = entries.slice(previousIndex + 1).find(entry => !this.state.completed.includes(entry.lesson.id));
+    return after || entries.find(entry => !this.state.completed.includes(entry.lesson.id)) || current || entries[0];
+  }
+
   progress() {
     const required = new Set(CARDS.map(card => `card-${card.id}`));
     const theory = new Set(
@@ -136,12 +196,19 @@ export class SchoolEngine {
     );
     const done = this.state.completed.filter(id => required.has(id)).length;
     const theoryDone = this.state.completed.filter(id => theory.has(id)).length;
+    const totalDone = done + theoryDone;
     return {
       done,
-      total: 78,
-      percent: Math.round(done / 78 * 100),
+      total: SCHOOL_CARD_TOTAL,
+      percent: Math.round(totalDone / SCHOOL_LESSON_TOTAL * 100),
       theoryDone,
-      theoryTotal: theory.size
+      theoryTotal: theory.size,
+      totalDone,
+      totalLessons: SCHOOL_LESSON_TOTAL,
+      favorites:this.state.favorites.length,
+      review:this.state.review.length,
+      notes:Object.keys(this.state.notes).length,
+      quizPassed:Object.values(this.state.quiz).filter(result => result.correct).length
     };
   }
 
@@ -154,36 +221,51 @@ export class SchoolEngine {
   render() {
     const progress = this.progress();
     const active = SCHOOL_MODULES.find(module => module.id === this.activeModule) || SCHOOL_MODULES[0];
+    const resume = this.resumeTarget();
+    const resumeModule = resume?.module || active;
     this.root.innerHTML = `
       <section class="school-dashboard" aria-labelledby="schoolPathTitle">
         <div class="school-path-copy">
           <p class="eyebrow">SEU CAMINHO CELESTIAL</p>
-          <h3 id="schoolPathTitle">Conhecimento que vira presença.</h3>
-          <p data-school-resume-copy>Retome o módulo ${String(active.order).padStart(2, '0')} · ${safe(active.title)}. Seu progresso fica guardado neste aparelho.</p>
+          <h3 id="schoolPathTitle">Conhecimento que vira prática.</h3>
+          <p data-school-resume-copy>${progress.totalDone === SCHOOL_LESSON_TOTAL ? 'Você concluiu a jornada completa. Agora pode revisar suas aulas favoritas e aprofundar a própria voz.' : `Próxima aula no módulo ${String(resumeModule.order).padStart(2, '0')} · ${safe(resumeModule.title)}.`} Seu progresso fica guardado neste aparelho.</p>
           <div class="school-path-metrics">
-            <span><b>${progress.done}</b><small>de 78 cartas</small></span>
-            <span><b>${progress.theoryDone}</b><small>de ${progress.theoryTotal} práticas</small></span>
-            <span><b>17</b><small>módulos da jornada</small></span>
+            <span><b>${progress.totalDone}</b><small>de ${progress.totalLessons} aulas</small></span>
+            <span><b>${progress.done}</b><small>de ${progress.total} cartas</small></span>
+            <span><b>${progress.quizPassed}</b><small>quizzes dominados</small></span>
+            <span><b>${progress.review}</b><small>para revisar</small></span>
           </div>
-          <button type="button" class="school-continue" data-school-continue>Continuar no módulo ${String(active.order).padStart(2, '0')} <span aria-hidden="true">↓</span></button>
+          <button type="button" class="school-continue" data-school-continue>${progress.totalDone === SCHOOL_LESSON_TOTAL ? 'Revisar a jornada' : 'Continuar da próxima aula'} <span aria-hidden="true">↓</span></button>
         </div>
-        <div class="school-progress-orbit" style="--school-progress:${progress.percent * 3.6}deg" aria-label="${progress.percent}% das aulas de cartas concluídas">
-          <span><b>${progress.percent}%</b><small>das cartas</small></span>
+        <div class="school-progress-orbit" style="--school-progress:${progress.percent * 3.6}deg" aria-label="${progress.percent}% da jornada completa concluída">
+          <span><b>${progress.percent}%</b><small>da jornada</small></span>
         </div>
       </section>
       <div class="school-controls">
         <label class="school-search">
           <span>Buscar em toda a escola</span>
-          <input type="search" data-school-search placeholder="Ex.: A Lua, Copas, ética" value="${safe(this.query)}" autocomplete="off">
+          <input type="search" data-school-search placeholder="Ex.: A Lua, The Moon, água, ética" value="${safe(this.query)}" autocomplete="off" spellcheck="false">
         </label>
-        <span class="school-module-count">17 módulos · 78 cartas · zero invertidas</span>
+        <span class="school-module-count">17 módulos · 78 cartas · ${SCHOOL_THEORY_TOTAL} práticas · zero invertidas</span>
+      </div>
+      <div class="school-filter-bar" role="group" aria-label="Filtrar aulas">
+        ${SCHOOL_FILTERS.map(filter => `<button type="button" data-school-filter="${filter.id}" aria-pressed="${this.filter === filter.id}">${safe(filter.label)}</button>`).join('')}
       </div>
       <div class="school-workspace">
         <nav class="school-modules" aria-label="Módulos da Escola do Tarot">
           ${SCHOOL_MODULES.map(module => this.moduleMarkup(module)).join('')}
         </nav>
         <section class="school-lessons" data-school-lessons aria-live="polite"></section>
-      </div>`;
+      </div>
+      <section class="school-portability" aria-labelledby="schoolBackupTitle">
+        <span aria-hidden="true">◇</span>
+        <div><p class="eyebrow">CÓPIA PRIVADA</p><h3 id="schoolBackupTitle">Proteja o seu progresso.</h3><p>Baixe uma cópia local e restaure depois sem apagar o que já existe. Notas, favoritos, revisões e quizzes não são enviados ao site.</p></div>
+        <div class="school-portability-actions">
+          <button type="button" data-school-export>Baixar cópia</button>
+          <label>Restaurar cópia<input type="file" data-school-import accept="application/json,.json"></label>
+        </div>
+        <output data-school-backup-status aria-live="polite">${this.persistenceError ? 'O navegador não permitiu salvar. Baixe uma cópia antes de sair.' : 'Armazenamento local ativo neste aparelho.'}</output>
+      </section>`;
 
     const search = this.root.querySelector('[data-school-search]');
     search.addEventListener('input', event => {
@@ -197,22 +279,26 @@ export class SchoolEngine {
       this.activeModule = button.dataset.schoolModule;
       this.state.lastModule = this.activeModule;
       this.query = '';
-      search.value = '';
+      this.filter = 'all';
+      this.pendingAI = null;
       this.save();
-      this.updateModuleSelection();
-      this.updatePathHeading();
-      this.renderLessons();
-      this.root.querySelector('[data-school-lessons]')?.scrollIntoView({
-        behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-        block: 'start'
-      });
+      this.render();
+      this.scrollToLessons();
     });
 
-    this.root.querySelector('[data-school-continue]').addEventListener('click', () => {
-      this.root.querySelector('[data-school-lessons]')?.scrollIntoView({
-        behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-        block: 'start'
-      });
+    this.root.querySelectorAll('[data-school-filter]').forEach(button => button.addEventListener('click', () => {
+      this.filter = button.dataset.schoolFilter;
+      this.pendingAI = null;
+      this.render();
+      this.scrollToLessons();
+    }));
+
+    this.root.querySelector('[data-school-continue]').addEventListener('click', () => this.continuePath());
+    this.root.querySelector('[data-school-export]').addEventListener('click', () => this.exportBackup());
+    this.root.querySelector('[data-school-import]').addEventListener('change', event => {
+      const file = event.target.files?.[0];
+      if (file) this.importBackup(file);
+      event.target.value = '';
     });
 
     this.renderLessons();
@@ -255,15 +341,68 @@ export class SchoolEngine {
     }
   }
 
+  scrollToLessons() {
+    nextFrame(() => this.root.querySelector('[data-school-lessons]')?.scrollIntoView({
+      behavior:scrollBehavior(),
+      block:'start'
+    }));
+  }
+
+  continuePath() {
+    const target = this.resumeTarget();
+    if (!target) return;
+    this.activeModule = target.module.id;
+    this.state.lastModule = target.module.id;
+    this.state.lastLesson = target.lesson.id;
+    this.filter = 'all';
+    this.query = '';
+    this.pendingAI = null;
+    this.save();
+    this.render();
+    nextFrame(() => {
+      const lesson = this.root.querySelector(`[data-lesson-id="${target.lesson.id}"]`);
+      lesson?.scrollIntoView({ behavior:scrollBehavior(), block:'center' });
+      lesson?.focus({ preventScroll:true });
+    });
+  }
+
+  searchText(lesson, module) {
+    const meaning = lesson.card ? dailyMeaning(lesson.card) : null;
+    return normalizeSchoolText([
+      lesson.title,
+      lesson.body,
+      lesson.practice,
+      module.title,
+      module.description,
+      lesson.card?.names?.ptBR,
+      lesson.card?.names?.en,
+      lesson.card?.names?.es,
+      lesson.card?.arcana,
+      lesson.card?.suit,
+      lesson.card?.element,
+      lesson.card?.rank,
+      lesson.card?.number,
+      ...Object.values(lesson.card?.correspondences || {}),
+      meaning?.essence,
+      meaning?.light,
+      meaning?.tension,
+      meaning?.advice,
+      meaning?.reflectionQuestion,
+      meaning?.action,
+      ...(meaning?.keywords || []),
+      ...(meaning?.symbols || [])
+    ].filter(Boolean).join(' '));
+  }
+
   globalResults(query) {
     const results = [];
     const seen = new Set();
+    const terms = normalizeSchoolText(query).split(' ').filter(Boolean);
     SCHOOL_MODULES.forEach(module => {
       this.lessonsFor(module).forEach(lesson => {
         if (seen.has(lesson.id)) return;
-        const searchable = [lesson.title, lesson.body, lesson.practice, lesson.card?.suit, lesson.card?.element, module.title, module.description]
-          .filter(Boolean).join(' ').toLocaleLowerCase('pt-BR');
-        if (!searchable.includes(query)) return;
+        const searchable = this.searchText(lesson, module);
+        if (!terms.every(term => searchable.includes(term))) return;
         seen.add(lesson.id);
         results.push({ lesson, module });
       });
@@ -273,57 +412,83 @@ export class SchoolEngine {
 
   renderLessons() {
     const module = SCHOOL_MODULES.find(item => item.id === this.activeModule) || SCHOOL_MODULES[0];
-    const query = this.query.trim().toLocaleLowerCase('pt-BR');
-    const results = query
+    const query = normalizeSchoolText(this.query);
+    const baseResults = query
       ? this.globalResults(query)
       : this.lessonsFor(module).map(lesson => ({ lesson, module }));
+    const results = baseResults.filter(({ lesson }) => schoolFilterMatches(lesson.id, this.state, this.filter));
+    const selectedFilter = SCHOOL_FILTERS.find(filter => filter.id === this.filter) || SCHOOL_FILTERS[0];
     const container = this.root.querySelector('[data-school-lessons]');
     if (!container) return;
 
     container.innerHTML = `
       <header class="school-lessons-head">
         <div>
-          <p class="eyebrow">${query ? 'RESULTADOS DA BUSCA' : `MÓDULO ${String(module.order).padStart(2, '0')}`}</p>
+          <p class="eyebrow">${query ? 'RESULTADOS EM TODA A ESCOLA' : `MÓDULO ${String(module.order).padStart(2, '0')}`}</p>
           <h3>${query ? `Encontrei ${results.length} ${results.length === 1 ? 'aula' : 'aulas'}` : safe(module.title)}</h3>
-          <p>${query ? `Resultados para “${safe(this.query.trim())}” em toda a Escola do Tarot.` : safe(module.description)}</p>
+          <p>${query ? `Busca sem acento por “${safe(this.query.trim())}”` : safe(module.description)}${this.filter !== 'all' ? ` · Filtro: ${safe(selectedFilter.label)}.` : ''}</p>
         </div>
         <span>${results.length} ${results.length === 1 ? 'aula' : 'aulas'}</span>
       </header>
       <div class="school-lesson-list">
-        ${results.map(({ lesson, module: lessonModule }, index) => this.lessonMarkup(lesson, lessonModule, index)).join('') || '<p class="school-empty">Nenhuma aula encontrada. Tente outra palavra.</p>'}
+        ${results.map(({ lesson, module: lessonModule }, index) => this.lessonMarkup(lesson, lessonModule, index)).join('') || '<div class="school-empty"><p>Nenhuma aula corresponde a esta combinação.</p><button type="button" data-school-reset-view>Mostrar todas as aulas deste módulo</button></div>'}
       </div>`;
 
     container.onclick = event => {
       const complete = event.target.closest('[data-complete]');
       const favorite = event.target.closest('[data-favorite]');
+      const review = event.target.closest('[data-review]');
       const quiz = event.target.closest('[data-quiz]');
+      const note = event.target.closest('[data-save-note]');
+      const askAI = event.target.closest('[data-school-ai]');
+      const cancelAI = event.target.closest('[data-school-ai-cancel]');
+      const confirmAI = event.target.closest('[data-school-ai-confirm]');
+      const reset = event.target.closest('[data-school-reset-view]');
       if (complete) this.toggleList('completed', complete.dataset.complete);
       if (favorite) this.toggleList('favorites', favorite.dataset.favorite);
+      if (review) this.toggleList('review', review.dataset.review);
       if (quiz) this.answerQuiz(quiz);
+      if (note) this.saveNote(note);
+      if (askAI) { this.pendingAI = askAI.dataset.schoolAi; this.renderLessons(); }
+      if (cancelAI) { this.pendingAI = null; this.renderLessons(); }
+      if (confirmAI) this.prepareAI(confirmAI.dataset.schoolAiConfirm);
+      if (reset) {
+        this.query = '';
+        this.filter = 'all';
+        this.render();
+        this.scrollToLessons();
+      }
     };
   }
 
   lessonMarkup(lesson, module, index) {
     const completed = this.state.completed.includes(lesson.id);
     const favorite = this.state.favorites.includes(lesson.id);
+    const review = this.state.review.includes(lesson.id);
     const position = String(index + 1).padStart(2, '0');
 
     if (!lesson.card) {
-      return `<article class="school-lesson theory ${completed ? 'is-complete' : ''}">
+      return `<article class="school-lesson theory ${completed ? 'is-complete' : ''}" data-lesson-id="${lesson.id}" tabindex="-1">
         <div class="school-lesson-number" aria-hidden="true">${position}</div>
         <div class="school-lesson-body">
-          <span class="school-lesson-kind">${safe(module.title)} · AULA FUNDAMENTAL</span>
+          <span class="school-lesson-kind">${safe(module.title)} · TEORIA E PRÁTICA</span>
           <h4>${safe(lesson.title)}</h4>
           <p>${safe(lesson.body)}</p>
           <div class="school-practice"><b>PRÁTICA DO CÉU</b><p>${safe(lesson.practice)}</p></div>
-          ${this.actionsMarkup(lesson.id, completed, favorite)}
+          ${this.noteMarkup(lesson.id, 'Registre sua resposta ao exercício')}
+          ${this.actionsMarkup(lesson.id, completed, favorite, review)}
+          ${this.aiConfirmationMarkup(lesson.id)}
         </div>
       </article>`;
     }
 
     const meaning = dailyMeaning(lesson.card);
     const alternatives = quizAlternatives(lesson.card);
-    return `<article class="school-lesson card-lesson ${completed ? 'is-complete' : ''}">
+    const quiz = this.state.quiz[lesson.id];
+    const quizMessage = quiz?.correct
+      ? `Dominado em ${quiz.attempts} ${quiz.attempts === 1 ? 'tentativa' : 'tentativas'}.`
+      : quiz ? `Em revisão após ${quiz.attempts} ${quiz.attempts === 1 ? 'tentativa' : 'tentativas'}.` : '';
+    return `<article class="school-lesson card-lesson ${completed ? 'is-complete' : ''}" data-lesson-id="${lesson.id}" tabindex="-1">
       <div class="school-card-art">${cardImageMarkup(lesson.card, { priority:'auto' })}<span aria-hidden="true">${position}</span></div>
       <div class="school-lesson-body">
         <span class="school-lesson-kind">${safe(module.title)} · ${safe(lesson.card.arcana === 'Arcano Maior' ? 'ARCANO MAIOR' : lesson.card.suit)} · DIRETA</span>
@@ -335,42 +500,188 @@ export class SchoolEngine {
             <h5>Luz</h5><p>${safe(meaning.light)}</p>
             <h5>Tensão</h5><p>${safe(meaning.tension)}</p>
             <h5>Símbolos</h5>${meaning.symbols.map(symbol => `<p>✦ ${safe(symbol)}</p>`).join('')}
+            <h5>Conselho</h5><p>${safe(meaning.advice)}</p>
+            <h5>Pergunta de reflexão</h5><p>${safe(meaning.reflectionQuestion)}</p>
+            <h5>Ação possível</h5><p>${safe(meaning.action)}</p>
             <a href="${cardPageHref(lesson.card)}">Abrir página completa <span aria-hidden="true">→</span></a>
             <div class="school-quiz">
               <b>Exercício: qual é o elemento desta carta?</b>
-              <div>${alternatives.map(value => `<button type="button" data-quiz="${safe(value)}" data-answer="${safe(lesson.card.element)}">${safe(value)}</button>`).join('')}</div>
-              <small aria-live="polite"></small>
+              <div>${alternatives.map(value => `<button type="button" data-quiz="${safe(value)}" data-answer="${safe(lesson.card.element)}" aria-pressed="${quiz?.lastAnswer === value}">${safe(value)}</button>`).join('')}</div>
+              <small class="${quiz?.correct ? 'correct' : quiz ? 'retry' : ''}" aria-live="polite">${safe(quizMessage)}</small>
             </div>
+            ${this.noteMarkup(lesson.id, 'Escreva sua leitura da imagem antes de consultar novamente')}
+            <p class="school-responsible-line">${safe(meaning.responsibleNotice)}</p>
           </div>
         </details>
-        ${this.actionsMarkup(lesson.id, completed, favorite)}
+        ${this.actionsMarkup(lesson.id, completed, favorite, review)}
+        ${this.aiConfirmationMarkup(lesson.id)}
       </div>
     </article>`;
   }
 
-  actionsMarkup(id, completed, favorite) {
+  noteMarkup(id, label) {
+    const note = this.state.notes[id] || '';
+    return `<div class="school-note">
+      <label for="school-note-${id}">${safe(label)}</label>
+      <textarea id="school-note-${id}" data-school-note="${id}" maxlength="${SCHOOL_NOTE_LIMIT}" rows="3" placeholder="Sua prática privada fica somente neste aparelho.">${safe(note)}</textarea>
+      <div><button type="button" data-save-note="${id}">${note ? 'Atualizar prática' : 'Guardar prática'}</button><small data-note-status="${id}">${note ? `Prática guardada · ${note.length}/${SCHOOL_NOTE_LIMIT}` : `0/${SCHOOL_NOTE_LIMIT} · privada e local`}</small></div>
+    </div>`;
+  }
+
+  actionsMarkup(id, completed, favorite, review) {
     return `<div class="school-actions">
       <button type="button" data-complete="${id}" aria-pressed="${completed}">${completed ? '✓ Aula concluída' : 'Marcar como concluída'}</button>
       <button type="button" data-favorite="${id}" aria-pressed="${favorite}">${favorite ? '★ Favorita' : '☆ Favoritar'}</button>
+      <button type="button" data-review="${id}" aria-pressed="${review}">${review ? '↺ Na revisão' : '↺ Revisar depois'}</button>
+      <button type="button" data-school-ai="${id}">✦ Tutor opcional</button>
+    </div>`;
+  }
+
+  aiConfirmationMarkup(id) {
+    if (this.pendingAI !== id) return '';
+    return `<div class="school-ai-confirm" role="alert">
+      <p><b>Preparar somente esta aula para a Orbe IA?</b><small>Suas notas, progresso, favoritos e histórico ficam de fora. A mensagem só será enviada se você revisar o texto, marcar o consentimento da IA e tocar em Enviar; nenhum crédito é consumido se o servidor falhar.</small></p>
+      <div><button type="button" data-school-ai-cancel>Cancelar</button><button type="button" data-school-ai-confirm="${id}">Preparar aula pública</button></div>
     </div>`;
   }
 
   toggleList(key, id) {
+    if (!['completed', 'favorites', 'review'].includes(key)) return;
     const set = new Set(this.state[key]);
     set.has(id) ? set.delete(id) : set.add(id);
     this.state[key] = [...set];
     this.state.lastLesson = id;
+    this.state.lastStudiedAt = new Date().toISOString();
+    this.pendingAI = null;
     this.save();
     this.render();
   }
 
   answerQuiz(button) {
     const output = button.closest('.school-quiz')?.querySelector('small');
-    if (!output) return;
+    const article = button.closest('[data-lesson-id]');
+    const id = article?.dataset.lessonId;
+    if (!output || !id) return;
     const correct = button.dataset.quiz === button.dataset.answer;
+    const previous = this.state.quiz[id] || { attempts:0, correct:false };
+    this.state.quiz[id] = {
+      attempts:previous.attempts + 1,
+      correct,
+      lastAnswer:button.dataset.quiz,
+      updatedAt:new Date().toISOString()
+    };
+    const review = new Set(this.state.review);
+    correct ? review.delete(id) : review.add(id);
+    this.state.review = [...review];
+    this.state.lastLesson = id;
+    this.state.lastStudiedAt = new Date().toISOString();
+    this.save();
+    button.closest('.school-quiz')?.querySelectorAll('[data-quiz]').forEach(option => {
+      option.setAttribute('aria-pressed', String(option === button));
+    });
     output.textContent = correct
-      ? 'Resposta correta. Observe como esse elemento aparece na imagem.'
-      : `Ainda não. O elemento correto é ${button.dataset.answer}.`;
+      ? 'Resposta correta. A aula saiu da fila de revisão; observe como esse elemento aparece na imagem.'
+      : `Ainda não. O elemento correto é ${button.dataset.answer}; esta aula entrou na sua revisão.`;
     output.className = correct ? 'correct' : 'retry';
+    if (correct && this.filter === 'review') globalThis.setTimeout(() => this.render(), 900);
+  }
+
+  saveNote(button) {
+    const id = button.dataset.saveNote;
+    const article = button.closest('[data-lesson-id]');
+    const textarea = article?.querySelector(`[data-school-note="${id}"]`);
+    const status = article?.querySelector(`[data-note-status="${id}"]`);
+    if (!textarea || !status) return;
+    const text = textarea.value.replace(/\u0000/g, '').trim().slice(0, SCHOOL_NOTE_LIMIT);
+    if (text) this.state.notes[id] = text;
+    else delete this.state.notes[id];
+    this.state.lastLesson = id;
+    this.state.lastStudiedAt = new Date().toISOString();
+    const saved = this.save();
+    textarea.value = text;
+    button.textContent = text ? 'Atualizar prática' : 'Guardar prática';
+    status.textContent = saved
+      ? text ? `Prática guardada · ${text.length}/${SCHOOL_NOTE_LIMIT}` : `Prática removida · 0/${SCHOOL_NOTE_LIMIT}`
+      : 'Não foi possível guardar neste navegador. Baixe uma cópia do progresso.';
+    status.className = saved ? 'saved' : 'error';
+  }
+
+  prepareAI(id) {
+    const location = this.lessonLocation(id);
+    if (!location) return;
+    const { lesson, module } = location;
+    const meaning = lesson.card ? dailyMeaning(lesson.card) : null;
+    const selection = createSchoolAISelection({
+      lessonId:lesson.id,
+      lessonTitle:lesson.title,
+      moduleId:module.id,
+      moduleTitle:module.title,
+      lesson:lesson.card
+        ? `Essência: ${meaning.essence}\nLuz: ${meaning.light}\nTensão: ${meaning.tension}\nConselho: ${meaning.advice}`
+        : lesson.body,
+      practice:lesson.card
+        ? `Pergunta: ${meaning.reflectionQuestion}\nAção possível: ${meaning.action}`
+        : lesson.practice,
+      selectedAt:new Date().toISOString()
+    });
+    if (!selection) return;
+    try {
+      store.set(SCHOOL_AI_SELECTION_KEY, selection);
+    } catch {
+      this.notify('O navegador não permitiu preparar a aula. Nenhum dado foi enviado.');
+      return;
+    }
+    this.pendingAI = null;
+    this.notify('Somente o conteúdo público desta aula foi preparado. Revise e consinta antes de enviar.');
+    globalThis.orbe?.go?.('ai');
+    globalThis.dispatchEvent?.(new CustomEvent('divina:school-ai-selected'));
+  }
+
+  notify(message) {
+    globalThis.dispatchEvent?.(new CustomEvent('orbe:toast', { detail:message }));
+  }
+
+  setBackupStatus(message, state = '') {
+    const output = this.root.querySelector('[data-school-backup-status]');
+    if (!output) return;
+    output.textContent = message;
+    output.className = state;
+  }
+
+  exportBackup() {
+    const payload = privateSchoolExport(this.state);
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json;charset=utf-8' });
+    const href = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = href;
+    link.download = `divina-bruxa-escola-${new Date().toISOString().slice(0, 10)}.json`;
+    link.rel = 'noopener';
+    document.body.append(link);
+    link.click();
+    link.remove();
+    globalThis.setTimeout(() => URL.revokeObjectURL(href), 1000);
+    this.setBackupStatus('Cópia privada criada. Guarde o arquivo em um local seguro.', 'success');
+  }
+
+  async importBackup(file) {
+    if (file.size > 1_000_000) {
+      this.setBackupStatus('Este arquivo é grande demais para ser uma cópia válida da Escola.', 'error');
+      return;
+    }
+    this.setBackupStatus('Conferindo a cópia…');
+    try {
+      const parsed = JSON.parse(await file.text());
+      const incoming = normalizeSchoolBackup(parsed);
+      if (!incoming) throw new Error('invalid');
+      this.state = mergeSchoolState(this.state, incoming);
+      this.activeModule = this.state.lastModule;
+      this.filter = 'all';
+      this.query = '';
+      this.save();
+      this.render();
+      this.setBackupStatus('Cópia restaurada e combinada com o progresso deste aparelho.', 'success');
+    } catch {
+      this.setBackupStatus('Não reconheci uma cópia válida da Escola. Nada foi alterado.', 'error');
+    }
   }
 }

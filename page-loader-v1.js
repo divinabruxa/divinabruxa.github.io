@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.20 · TIRAGENS DEFINITIVAS V185
+/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.22 · DIÁRIO DEFINITIVO V187
    Estilos e motores nascem sob demanda; toda falha oferece tentativa e retorno seguro. */
 
 import {
@@ -129,7 +129,7 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
 
   const ensureJournal = () => once(sharedTasks, 'journal', async () => {
     const [{ JournalEngine }, { RhythmEngine }] = await Promise.all([
-      import('./journal-engine.js?v=141'),
+      import('./journal-engine.js?v=187'),
       import('./rhythm-v6.js')
     ]);
     const journal = new JournalEngine($('#journalApp'));
@@ -178,7 +178,7 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
       return new CardLibraryEngine($('#cardLibraryApp'));
     },
     school: async () => {
-      const { SchoolEngine } = await import('./school-engine.js?v=138');
+      const { SchoolEngine } = await import('./school-engine.js?v=186');
       return new SchoolEngine($('#schoolApp'));
     },
     spreads: async () => {
@@ -192,7 +192,7 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
     },
     journal: ensureJournal,
     ai: async () => {
-      const { AIEngine } = await import('./ai-engine.js?v=141');
+      const { AIEngine } = await import('./ai-engine.js?v=187');
       return new AIEngine($('#aiApp'), config);
     },
     store: async () => {

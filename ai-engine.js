@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — ORBE IA CELESTIAL V141
-   Conversa consciente, contexto controlado e créditos demonstrativos auditáveis. */
+/* DIVINA BRUXA — ORBE IA CELESTIAL V187
+   Conversa consciente, Diário por entrada e tutoria escolar por consentimento. */
 
 import { escapeHTML, store } from './storage.js';
 import {
@@ -16,7 +16,8 @@ import {
   privateAIExport
 } from './ai-policy.js?v=141';
 import { canSpend, creditState, creditUsage, grantCredits, spend } from './ai-credits.js?v=141';
-import { JOURNAL_AI_SELECTION_KEY } from './journal-policy.js?v=140';
+import { JOURNAL_AI_SELECTION_KEY, normalizeJournalAISelection } from './journal-policy.js?v=187';
+import { SCHOOL_AI_SELECTION_KEY, normalizeSchoolAISelection } from './school-policy.js?v=186';
 
 const safe = value => escapeHTML(value ?? '');
 const money = value => Number(value).toFixed(2).replace('.', ',');
@@ -49,6 +50,7 @@ export class AIEngine {
     this.updateConnection();
     this.prepareJournalSelection();
     this.prepareTarotSelection();
+    this.prepareSchoolSelection();
   }
 
   notify(message) {
@@ -163,6 +165,7 @@ export class AIEngine {
     window.addEventListener('offline', () => this.updateConnection());
     window.addEventListener('divina:journal-ai-selected', () => this.prepareJournalSelection());
     window.addEventListener('divina:tarot-ai-selected', () => this.prepareTarotSelection());
+    window.addEventListener('divina:school-ai-selected', () => this.prepareSchoolSelection());
   }
 
   restoreDraft() {
@@ -241,8 +244,8 @@ export class AIEngine {
   }
 
   prepareJournalSelection() {
-    const selected = store.get(JOURNAL_AI_SELECTION_KEY);
-    if (!selected || selected.consentScope !== 'single-entry' || typeof selected.text !== 'string') return;
+    const selected = normalizeJournalAISelection(store.get(JOURNAL_AI_SELECTION_KEY));
+    if (!selected) return;
     this.clearTarotSelection(false);
     const cards = Array.isArray(selected.cards) && selected.cards.length ? `\nCartas relacionadas: ${selected.cards.join(', ')}` : '';
     const question = selected.question ? `\nIntenção: ${selected.question}` : '';
@@ -250,7 +253,7 @@ export class AIEngine {
     this.input.value = `Quero refletir somente sobre esta entrada que escolhi no meu Diário.\nTítulo: ${String(selected.title || 'Memória da Orbe')}\nReflexão: ${selected.text.slice(0, 4200)}${question}${cards}${tags}`.slice(0, AI_POLICY.limits.maxMessageCharacters);
     store.set(AI_DRAFT_KEY, { text: this.input.value, source: 'single-journal-entry', at: new Date().toISOString() });
     const slot = this.root.querySelector('[data-ai-journal-slot]');
-    slot.innerHTML = '<aside class="ai-journal-selection"><span aria-hidden="true">◇</span><p><b>Uma única memória foi preparada.</b><small>Revise o texto. Nada será enviado até você marcar o consentimento e tocar em Enviar.</small></p><button type="button" data-remove-journal>Remover</button></aside>';
+    slot.innerHTML = '<aside class="ai-journal-selection"><span aria-hidden="true">◇</span><p><b>Uma única memória foi preparada.</b><small>Outras memórias, rascunho, humor, relações e revisões ficaram de fora. Revise o texto; nada será enviado sem seu consentimento.</small></p><button type="button" data-remove-journal>Remover</button></aside>';
     slot.querySelector('[data-remove-journal]').addEventListener('click', () => {
       this.input.value = '';
       store.remove(AI_DRAFT_KEY);
@@ -276,6 +279,28 @@ export class AIEngine {
     store.remove(AI_TAROT_SELECTION_KEY);
     this.updateCharacterCount();
     this.input.focus({ preventScroll: true });
+  }
+
+  prepareSchoolSelection() {
+    const selected = normalizeSchoolAISelection(store.get(SCHOOL_AI_SELECTION_KEY));
+    if (!selected) return;
+    this.clearTarotSelection(false);
+    store.remove(AI_TAROT_SELECTION_KEY);
+    store.remove(JOURNAL_AI_SELECTION_KEY);
+    this.setMode('tarot');
+    this.input.value = `Quero estudar somente esta aula pública da Escola do Tarot.\nMódulo: ${selected.moduleTitle}\nAula: ${selected.lessonTitle}\nConteúdo: ${selected.lesson}\nPrática proposta: ${selected.practice}\nAjude-me a compreender e faça uma pergunta de recuperação da memória, sem determinismo.`.slice(0, AI_POLICY.limits.maxMessageCharacters);
+    store.set(AI_DRAFT_KEY, { text:this.input.value, source:'single-school-lesson', at:new Date().toISOString() });
+    const slot = this.root.querySelector('[data-ai-journal-slot]');
+    slot.innerHTML = '<aside class="ai-journal-selection"><span aria-hidden="true">▤</span><p><b>Uma única aula pública foi preparada.</b><small>Notas, progresso, favoritos e histórico não foram incluídos. Revise o texto; nada será enviado até você marcar o consentimento e tocar em Enviar.</small></p><button type="button" data-remove-school>Remover</button></aside>';
+    slot.querySelector('[data-remove-school]').addEventListener('click', () => {
+      this.input.value = '';
+      store.remove(AI_DRAFT_KEY);
+      slot.innerHTML = '';
+      this.updateCharacterCount();
+    });
+    store.remove(SCHOOL_AI_SELECTION_KEY);
+    this.updateCharacterCount();
+    this.input.focus({ preventScroll:true });
   }
 
   clearTarotSelection(clearInput = false) {

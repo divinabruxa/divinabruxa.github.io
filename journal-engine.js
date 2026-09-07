@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — DIÁRIO E ESPELHO CELESTIAL V140
-   Escrita privada, autosave local, calendário, linha do tempo e padrões não diagnósticos. */
+/* DIVINA BRUXA — DIÁRIO E ESPELHO CELESTIAL DEFINITIVO V187
+   Escrita privada, cofre local, relações, revisões e padrões não diagnósticos. */
 
 import { CARDS } from './tarot-data.js';
 import { store, escapeHTML } from './storage.js';
@@ -17,12 +17,17 @@ import {
   normalizeJournalEntries,
   entriesForJournalPeriod,
   calendarJournalCounts,
-  publicMirrorData,
+  localMirrorData,
   privateJournalExport,
+  normalizeJournalBackup,
+  mergeJournalEntries,
+  appendJournalRevision,
+  createJournalAISelection,
+  normalizeJournalText,
   splitJournalTags,
   entryCardIds,
   journalDateKey
-} from './journal-policy.js?v=140';
+} from './journal-policy.js?v=187';
 
 const safe = value => escapeHTML(value ?? '');
 const reducedMotion = () => globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
@@ -54,6 +59,9 @@ export class JournalEngine {
     this.editingId = null;
     this.pendingDelete = '';
     this.pendingAI = '';
+    this.pendingRevision = '';
+    this.pendingImport = null;
+    this.pendingClear = false;
     this.filters = { query: '', mood: '', type: '', date: '', card: '', theme: '', favorites: false };
     this.period = JOURNAL_PERIODS.some(item => item.id === savedView?.period) ? savedView.period : '30';
     this.view = savedView?.view === 'calendar' ? 'calendar' : 'timeline';
@@ -75,11 +83,29 @@ export class JournalEngine {
   }
 
   saveAll(entries) {
-    store.set(JOURNAL_STORAGE_KEY, normalizeJournalEntries(entries));
+    try {
+      store.set(JOURNAL_STORAGE_KEY, normalizeJournalEntries(entries));
+      return true;
+    } catch {
+      this.setSaveState('Não foi possível guardar neste aparelho', 'error');
+      this.notify('O armazenamento do aparelho está cheio ou indisponível. Baixe uma cópia antes de continuar.');
+      return false;
+    }
   }
 
   saveView() {
     store.set(JOURNAL_VIEW_KEY, { period: this.period, view: this.view });
+  }
+
+  refreshLinkOptions(selectedId = '') {
+    const field = this.form?.elements?.namedItem('linkedEntryId');
+    if (!field) return;
+    const selected = selectedId || field.value || '';
+    const options = this.all().filter(entry => entry.id !== this.editingId).map(entry =>
+      `<option value="${safe(entry.id)}">${safe(formatShortDate(entry.createdAt))} · ${safe(entry.title)}</option>`
+    ).join('');
+    field.innerHTML = `<option value="">Nenhuma memória vinculada</option>${options}`;
+    if ([...field.options].some(option => option.value === selected)) field.value = selected;
   }
 
   renderShell() {
@@ -104,7 +130,9 @@ export class JournalEngine {
             <label class="journal-field journal-field-wide"><span>Pergunta ou intenção</span><input name="question" maxlength="600" placeholder="O que deseja compreender?"></label>
             <label class="journal-field journal-field-wide"><span>Reflexão</span><textarea name="text" required maxlength="16000" rows="9" placeholder="Escreva sensações, acontecimentos, símbolos e aprendizados…"></textarea></label>
             <label class="journal-field"><span>Etiquetas</span><input name="tags" maxlength="440" placeholder="amor, trabalho, sonho"></label>
-            <label class="journal-field"><span>Relacionamentos e pessoas</span><input name="relationships" maxlength="300" placeholder="Opcional · nomes ou temas"></label>
+            <label class="journal-field"><span>Temas, relações ou pessoas</span><input name="relationships" maxlength="300" placeholder="Opcional · escreva só o necessário"></label>
+            <label class="journal-field"><span>Rever em</span><input name="reviewDate" type="date"></label>
+            <label class="journal-field journal-field-wide"><span>Vincular a outra memória</span><select name="linkedEntryId" data-journal-link-select><option value="">Nenhuma memória vinculada</option></select></label>
             <label class="journal-field journal-field-wide"><span>Aula relacionada</span><input name="relatedLesson" maxlength="180" placeholder="Opcional · módulo ou aula da Escola"></label>
           </div>
           <p class="journal-privacy"><span aria-hidden="true">◇</span><span><b>Esta página é um espaço privado.</b> O rascunho é salvo somente neste aparelho e não é sincronizado enquanto o servidor seguro não estiver ativo.</span></p>
@@ -131,10 +159,12 @@ export class JournalEngine {
           <label class="journal-favorite-filter"><input id="journalFavoriteFilter" type="checkbox"><span>Somente favoritas</span></label>
           <button type="button" class="text-button" data-clear-filters>Limpar filtros</button>
         </div>
-        <div class="journal-result-line"><span data-journal-count></span><div><button type="button" id="exportJournal" class="text-button">Baixar meus dados</button><button type="button" class="text-button journal-premium-export" data-premium-export>Exportação Celestial · Premium</button></div></div>
+        <div class="journal-result-line"><span data-journal-count></span><div><button type="button" id="exportJournal" class="text-button">Baixar cópia privada</button><button type="button" class="text-button" data-journal-import>Abrir cópia</button><button type="button" class="text-button journal-danger-control" data-journal-clear>Apagar Diário</button></div></div>
+        <input type="file" data-journal-file accept="application/json,.json" hidden>
+        <div class="journal-portability" data-journal-portability aria-live="polite"></div>
         <div id="journalCalendar" class="journal-calendar"></div>
         <div id="entries" class="entries journal-timeline" aria-live="polite"></div>
-        <footer class="journal-premium-note"><span aria-hidden="true">✦</span><p><b>Premium · R$ 199,90 · pagamento único</b><small>Histórico completo, calendário, coleções e exportação editorial. É separado da Orbe IA e não inclui IA ilimitada. A ativação final continua dependente do servidor seguro.</small></p></footer>
+        <footer class="journal-vault-note"><span aria-hidden="true">◇</span><p><b>Cofre local e portátil</b><small>Histórico, busca, calendário e cópia JSON funcionam sem conta. Não existe sincronização automática entre aparelhos nesta versão; guarde sua cópia em um local escolhido por você.</small></p></footer>
       </section>`;
 
     this.form = this.root.querySelector('#journalForm');
@@ -142,6 +172,8 @@ export class JournalEngine {
     this.mirror = this.root.querySelector('#mirrorStats');
     this.patterns = this.root.querySelector('#mirrorPatterns');
     this.calendar = this.root.querySelector('#journalCalendar');
+    this.portability = this.root.querySelector('[data-journal-portability]');
+    this.refreshLinkOptions();
   }
 
   bind() {
@@ -158,6 +190,7 @@ export class JournalEngine {
         this.filters[key] = target.type === 'checkbox' ? target.checked : target.value;
         this.pendingDelete = '';
         this.pendingAI = '';
+        this.pendingRevision = '';
         this.renderExplorer();
       });
     };
@@ -171,10 +204,14 @@ export class JournalEngine {
 
     this.root.querySelector('[data-clear-filters]').onclick = () => this.clearFilters();
     this.root.querySelector('#exportJournal').onclick = () => this.exportData();
-    this.root.querySelector('[data-premium-export]').onclick = () => {
-      this.notify('A Exportação Celestial permanece protegida pelo Premium.');
-      globalThis.orbe?.go?.('subscriptions');
+    this.root.querySelector('[data-journal-import]').onclick = () => this.root.querySelector('[data-journal-file]').click();
+    this.root.querySelector('[data-journal-file]').onchange = event => this.readBackup(event.target.files?.[0]);
+    this.root.querySelector('[data-journal-clear]').onclick = () => {
+      this.pendingImport = null;
+      this.pendingClear = true;
+      this.renderPortability();
     };
+    this.portability.onclick = event => this.handlePortabilityAction(event);
 
     this.root.querySelector('.mirror-periods').onclick = event => {
       const button = event.target.closest('[data-mirror-period]');
@@ -194,13 +231,18 @@ export class JournalEngine {
     };
 
     this.list.onclick = event => this.handleEntryAction(event);
+    this.list.addEventListener('submit', event => this.handleEntryAction(event));
     this.calendar.onclick = event => this.handleCalendarAction(event);
     window.addEventListener('online', () => this.updateNetworkState());
     window.addEventListener('offline', () => this.updateNetworkState());
+    window.addEventListener('pagehide', () => this.flushDraft());
   }
 
   formValues() {
-    return Object.fromEntries(new FormData(this.form));
+    const values = Object.fromEntries(new FormData(this.form));
+    const linked = String(values.linkedEntryId || '');
+    values.linkedEntryIds = linked ? [linked] : [];
+    return values;
   }
 
   setSaveState(message, mode = '') {
@@ -215,12 +257,23 @@ export class JournalEngine {
     this.setSaveState('Salvando rascunho…', 'saving');
     const detail = this.root.querySelector('[data-draft-detail]');
     if (detail) detail.textContent = 'Salvando…';
-    this.draftTimer = setTimeout(() => {
+    this.draftTimer = setTimeout(() => this.flushDraft(), 350);
+  }
+
+  flushDraft() {
+    clearTimeout(this.draftTimer);
+    const detail = this.root.querySelector('[data-draft-detail]');
+    try {
       const draft = { ...this.formValues(), _editingId: this.editingId, status: 'draft', updatedAt: new Date().toISOString() };
       store.set(JOURNAL_DRAFT_KEY, draft);
       this.setSaveState('Rascunho salvo neste aparelho', 'saved');
       if (detail) detail.textContent = `Rascunho salvo às ${new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`;
-    }, 350);
+      return true;
+    } catch {
+      this.setSaveState('Rascunho não salvo', 'error');
+      if (detail) detail.textContent = 'Armazenamento indisponível. Baixe uma cópia do Diário.';
+      return false;
+    }
   }
 
   restoreDraft() {
@@ -257,7 +310,7 @@ export class JournalEngine {
     } else {
       entries.unshift(createJournalEntry({ ...values, updatedAt: new Date().toISOString() }));
     }
-    this.saveAll(entries);
+    if (!this.saveAll(entries)) return;
     store.remove(JOURNAL_DRAFT_KEY);
     this.editingId = null;
     this.form.reset();
@@ -266,6 +319,7 @@ export class JournalEngine {
     this.setEditingState(false);
     this.setSaveState('Memória guardada', 'saved');
     this.root.querySelector('[data-draft-detail]').textContent = 'Tudo salvo neste aparelho.';
+    this.refreshLinkOptions();
     this.render();
     this.notify('Guardado no Diário da Orbe.');
   }
@@ -278,6 +332,7 @@ export class JournalEngine {
     this.form.elements.createdAt.value = toLocalInput();
     this.form.elements.mood.value = 'Reflexiva';
     this.setEditingState(false);
+    this.refreshLinkOptions();
     this.setSaveState('Edição cancelada', '');
     this.root.querySelector('[data-draft-detail]').textContent = 'Nenhum rascunho pendente';
   }
@@ -294,22 +349,26 @@ export class JournalEngine {
   add(input) {
     const entries = this.all();
     entries.unshift(createJournalEntry(input));
-    this.saveAll(entries);
+    if (!this.saveAll(entries)) return;
+    this.refreshLinkOptions();
     this.render();
     this.notify('Guardado no Diário da Orbe.');
   }
 
   filtered(entries) {
-    const query = this.filters.query.trim().toLocaleLowerCase('pt-BR');
-    const theme = this.filters.theme.trim().toLocaleLowerCase('pt-BR');
+    const queryTerms = normalizeJournalText(this.filters.query).split(' ').filter(Boolean);
+    const themeTerms = normalizeJournalText(this.filters.theme).split(' ').filter(Boolean);
     const cardId = this.filters.card === '' ? null : Number(this.filters.card);
+    const byId = new Map(entries.map(entry => [entry.id, entry]));
     return entries.filter(entry => {
       const cards = entryCardIds(entry);
       const cardNames = cards.map(id => CARDS[id]?.name || '').join(' ');
-      const searchable = [entry.title, entry.text, entry.question, entry.tags, entry.collection, entry.mood, entry.relationships, entry.relatedLesson, cardNames].join(' ').toLocaleLowerCase('pt-BR');
-      const themes = [entry.tags, entry.collection].join(' ').toLocaleLowerCase('pt-BR');
-      return (!query || searchable.includes(query))
-        && (!theme || themes.includes(theme))
+      const linkedTitles = entry.linkedEntryIds.map(id => byId.get(id)?.title || '').join(' ');
+      const revisionText = entry.revisions.map(revision => revision.text).join(' ');
+      const searchable = normalizeJournalText([entry.title, entry.text, entry.question, entry.tags, entry.collection, entry.mood, entry.relationships, entry.relatedLesson, cardNames, linkedTitles, revisionText].join(' '));
+      const themes = normalizeJournalText([entry.tags, entry.collection, entry.relationships].join(' '));
+      return (!queryTerms.length || queryTerms.every(term => searchable.includes(term)))
+        && (!themeTerms.length || themeTerms.every(term => themes.includes(term)))
         && (!this.filters.mood || entry.mood === this.filters.mood)
         && (!this.filters.type || entry.type === this.filters.type)
         && (!this.filters.date || journalDateKey(entry.createdAt) === this.filters.date)
@@ -332,11 +391,12 @@ export class JournalEngine {
     const entries = this.all();
     this.renderMirror(entries);
     this.renderExplorer(entries);
+    this.renderPortability();
   }
 
   renderMirror(entries) {
     const selected = entriesForJournalPeriod(entries, this.period);
-    const aggregate = publicMirrorData(selected);
+    const aggregate = localMirrorData(selected);
     const cardPair = topPair(aggregate.cardCounts);
     const topCard = cardPair ? CARDS[Number(cardPair[0])] : null;
     const suitCounts = { Maiores: 0, Copas: 0, Espadas: 0, Paus: 0, Ouros: 0 };
@@ -351,11 +411,7 @@ export class JournalEngine {
     });
     const suitPair = topPair(suitCounts);
     const moodPair = topPair(aggregate.moodCounts);
-    const tagCounts = {};
-    selected.flatMap(entry => splitJournalTags(entry.tags)).forEach(tag => {
-      tagCounts[tag] = (tagCounts[tag] || 0) + 1;
-    });
-    const tags = Object.entries(tagCounts).sort((a, b) => b[1] - a[1]).slice(0, 4);
+    const tags = Object.entries(aggregate.tagCounts).sort((a, b) => b[1] - a[1]).slice(0, 4);
     const activeDays = Object.keys(aggregate.dayCounts).length;
     const wordCount = selected.reduce((total, entry) => total + entry.text.split(/\s+/).filter(Boolean).length, 0);
     const windowDays = Array.from({ length: 7 }, (_, index) => {
@@ -378,7 +434,10 @@ export class JournalEngine {
       <div><strong>${selected.length && suitPair?.[1] ? safe(suitPair[0]) : '—'}</strong><span>naipe mais presente</span></div>
       <div><strong>${moodPair ? safe(moodPair[0]) : '—'}</strong><span>humor mais registrado</span></div>
       <div><strong>${activeDays}</strong><span>dias com memórias</span></div>
-      <div><strong>${wordCount.toLocaleString('pt-BR')}</strong><span>palavras preservadas</span></div>`;
+      <div><strong>${wordCount.toLocaleString('pt-BR')}</strong><span>palavras preservadas</span></div>
+      <div><strong>${aggregate.revisions}</strong><span>revisões acrescentadas</span></div>
+      <div><strong>${aggregate.reviewsDue}</strong><span>revisões aguardando</span></div>
+      <div><strong>${aggregate.linked}</strong><span>vínculos entre memórias</span></div>`;
 
     if (!selected.length) {
       this.patterns.innerHTML = '<p class="mirror-empty">Escreva ou guarde uma leitura para que o Espelho encontre relações neste período.</p><p class="mirror-disclaimer">O Espelho descreve frequências; não faz diagnósticos nem determina quem você é.</p>';
@@ -411,7 +470,7 @@ export class JournalEngine {
     this.root.querySelector('[data-journal-count]').textContent = `${entries.length} ${entries.length === 1 ? 'memória encontrada' : 'memórias encontradas'}`;
     this.calendar.hidden = this.view !== 'calendar';
     this.list.hidden = this.view === 'calendar';
-    if (this.view === 'calendar') this.renderCalendar(source);
+    if (this.view === 'calendar') this.renderCalendar(entries);
     else this.renderTimeline(entries);
   }
 
@@ -437,17 +496,17 @@ export class JournalEngine {
   handleCalendarAction(event) {
     if (event.target.closest('[data-calendar-prev]')) {
       this.calendarDate = new Date(this.calendarDate.getFullYear(), this.calendarDate.getMonth() - 1, 1);
-      this.renderCalendar(this.all());
+      this.renderCalendar(this.filtered(this.all()));
       return;
     }
     if (event.target.closest('[data-calendar-next]')) {
       this.calendarDate = new Date(this.calendarDate.getFullYear(), this.calendarDate.getMonth() + 1, 1);
-      this.renderCalendar(this.all());
+      this.renderCalendar(this.filtered(this.all()));
       return;
     }
     if (event.target.closest('[data-calendar-today]')) {
       this.calendarDate = new Date();
-      this.renderCalendar(this.all());
+      this.renderCalendar(this.filtered(this.all()));
       return;
     }
     const day = event.target.closest('[data-calendar-day]');
@@ -457,6 +516,113 @@ export class JournalEngine {
     this.view = 'timeline';
     this.saveView();
     this.renderExplorer();
+  }
+
+  renderPortability() {
+    if (!this.portability) return;
+    if (this.pendingImport) {
+      const amount = this.pendingImport.entries.length;
+      this.portability.innerHTML = `<section class="journal-vault-panel" role="status" aria-labelledby="journalImportTitle">
+        <span class="journal-vault-glyph" aria-hidden="true">◇</span><div><h4 id="journalImportTitle">Cópia privada verificada</h4><p>${amount} ${amount === 1 ? 'memória válida encontrada' : 'memórias válidas encontradas'}. Mesclar preserva o que já está neste aparelho; substituir troca todo o Diário atual.</p><div><button type="button" data-import-cancel>Cancelar</button><button type="button" data-import-merge>Mesclar sem apagar</button><button type="button" class="danger" data-import-replace>Substituir o Diário</button></div></div>
+      </section>`;
+      return;
+    }
+    if (this.pendingClear) {
+      this.portability.innerHTML = `<section class="journal-vault-panel journal-vault-danger" role="alert" aria-labelledby="journalClearTitle">
+        <span class="journal-vault-glyph" aria-hidden="true">!</span><div><h4 id="journalClearTitle">Apagar todas as memórias deste aparelho?</h4><p>Esta ação não pode ser desfeita pela Divina Bruxa. Baixe uma cópia privada antes se quiser recuperar o conteúdo depois.</p><label><input type="checkbox" data-clear-confirmation> Entendo que todo o Diário local será apagado.</label><div><button type="button" data-clear-cancel>Manter Diário</button><button type="button" class="danger" data-clear-confirm>Apagar tudo</button></div></div>
+      </section>`;
+      return;
+    }
+    this.portability.innerHTML = '<p class="journal-vault-status"><span aria-hidden="true">◇</span><span><b>Seus textos permanecem locais.</b> A cópia JSON contém conteúdo privado: escolha com cuidado onde salvá-la.</span></p>';
+  }
+
+  async readBackup(file) {
+    const input = this.root.querySelector('[data-journal-file]');
+    if (input) input.value = '';
+    if (!file) return;
+    if (file.size > 5_000_000) {
+      this.notify('Esta cópia ultrapassa o limite seguro de 5 MB.');
+      return;
+    }
+    try {
+      const backup = normalizeJournalBackup(JSON.parse(await file.text()));
+      if (!backup) throw new Error('invalid-backup');
+      this.pendingClear = false;
+      this.pendingImport = backup;
+      this.renderPortability();
+      this.portability.querySelector('[data-import-cancel]')?.focus();
+    } catch {
+      this.pendingImport = null;
+      this.renderPortability();
+      this.notify('A cópia não pertence ao formato privado do Diário ou está corrompida.');
+    }
+  }
+
+  handlePortabilityAction(event) {
+    if (event.target.closest('[data-import-cancel]') || event.target.closest('[data-clear-cancel]')) {
+      this.pendingImport = null;
+      this.pendingClear = false;
+      this.renderPortability();
+      return;
+    }
+    if (event.target.closest('[data-import-merge]')) {
+      this.applyBackup('merge');
+      return;
+    }
+    if (event.target.closest('[data-import-replace]')) {
+      this.applyBackup('replace');
+      return;
+    }
+    if (event.target.closest('[data-clear-confirm]')) this.clearJournal();
+  }
+
+  applyBackup(mode) {
+    if (!this.pendingImport) return;
+    const imported = this.pendingImport.entries;
+    const next = mode === 'replace' ? imported : mergeJournalEntries(this.all(), imported);
+    if (!this.saveAll(next)) return;
+    store.remove(JOURNAL_DRAFT_KEY);
+    store.remove(JOURNAL_AI_SELECTION_KEY);
+    this.pendingImport = null;
+    this.pendingClear = false;
+    this.editingId = null;
+    this.form.reset();
+    this.form.elements.createdAt.value = toLocalInput();
+    this.form.elements.mood.value = 'Reflexiva';
+    this.setEditingState(false);
+    this.refreshLinkOptions();
+    this.render();
+    this.notify(mode === 'replace' ? 'Diário substituído pela cópia escolhida.' : 'Cópia mesclada sem apagar suas memórias atuais.');
+  }
+
+  clearJournal() {
+    const confirmation = this.portability.querySelector('[data-clear-confirmation]');
+    if (!confirmation?.checked) {
+      confirmation?.focus();
+      this.notify('Confirme que entende a exclusão antes de apagar.');
+      return;
+    }
+    try {
+      store.remove(JOURNAL_STORAGE_KEY);
+      store.remove(JOURNAL_DRAFT_KEY);
+      store.remove(JOURNAL_AI_SELECTION_KEY);
+    } catch {
+      this.notify('Não foi possível apagar os dados locais neste aparelho.');
+      return;
+    }
+    this.pendingImport = null;
+    this.pendingClear = false;
+    this.pendingDelete = '';
+    this.pendingAI = '';
+    this.pendingRevision = '';
+    this.editingId = null;
+    this.form.reset();
+    this.form.elements.createdAt.value = toLocalInput();
+    this.form.elements.mood.value = 'Reflexiva';
+    this.setEditingState(false);
+    this.refreshLinkOptions();
+    this.render();
+    this.notify('Todo o Diário local foi apagado deste aparelho.');
   }
 
   renderTimeline(entries) {
@@ -477,8 +643,12 @@ export class JournalEngine {
     const ids = entryCardIds(entry);
     const cards = ids.map(id => CARDS[id]).filter(Boolean);
     const tags = splitJournalTags(entry.tags);
+    const byId = new Map(this.all().map(item => [item.id, item]));
+    const linked = entry.linkedEntryIds.map(id => byId.get(id)).filter(Boolean);
+    const reviewDue = entry.reviewDate && entry.reviewDate <= journalDateKey(new Date()) && !entry.revisions.length;
     const deleteConfirm = this.pendingDelete === entry.id ? `<div class="journal-inline-confirm" role="alert"><p><b>Excluir esta memória?</b> Esta ação não pode ser desfeita.</p><div><button type="button" data-delete-cancel>Manter memória</button><button type="button" class="danger" data-delete-confirm>Sim, excluir</button></div></div>` : '';
-    const aiConfirm = this.pendingAI === entry.id ? `<div class="journal-inline-confirm journal-ai-confirm" role="alert"><p><b>Levar somente esta entrada para a Orbe IA?</b> Ela será preparada localmente. Nada será enviado até você marcar o consentimento da IA e tocar em Enviar.</p><div><button type="button" data-ai-cancel>Cancelar</button><button type="button" data-ai-confirm>Preparar esta entrada</button></div></div>` : '';
+    const aiConfirm = this.pendingAI === entry.id ? `<div class="journal-inline-confirm journal-ai-confirm" role="alert"><p><b>Levar somente esta entrada para a Orbe IA?</b> Outras memórias, rascunho, humor, vínculos, pessoas e revisões ficam de fora. Nada será enviado até você revisar, consentir e tocar em Enviar.</p><div><button type="button" data-ai-cancel>Cancelar</button><button type="button" data-ai-confirm>Preparar somente esta entrada</button></div></div>` : '';
+    const revisionForm = this.pendingRevision === entry.id ? `<form class="journal-inline-revision" data-revision-form><label><span>Acrescente o que percebe agora sem apagar o registro original</span><textarea data-revision-text maxlength="3000" rows="4" required></textarea></label><div><button type="button" data-revision-cancel>Cancelar</button><button type="submit">Guardar revisão separada</button></div></form>` : '';
     return `<article class="journal-entry journal-memory-card${entry.favorite ? ' is-favorite' : ''}" data-entry-id="${safe(entry.id)}">
       <div class="journal-entry-rail"><span aria-hidden="true">${entry.favorite ? '★' : '✦'}</span><i></i></div>
       <div class="journal-entry-body">
@@ -490,15 +660,20 @@ export class JournalEngine {
           ${entry.collection ? `<span class="journal-collection">◇ ${safe(entry.collection)}</span>` : ''}
           ${tags.map(tag => `<span>${safe(tag)}</span>`).join('')}
           ${entry.relatedLesson ? `<span>Escola · ${safe(entry.relatedLesson)}</span>` : ''}
-          ${entry.relationships ? `<span>Pessoas · ${safe(entry.relationships)}</span>` : ''}
+          ${entry.relationships ? `<span>Relações · ${safe(entry.relationships)}</span>` : ''}
+          ${entry.reviewDate ? `<span class="journal-review-date${reviewDue ? ' is-due' : ''}">${reviewDue ? 'Revisar agora' : 'Rever'} · ${safe(formatShortDate(`${entry.reviewDate}T12:00:00`))}</span>` : ''}
         </div>
+        ${linked.length ? `<nav class="journal-memory-links" aria-label="Memórias relacionadas"><b>Memórias vinculadas</b>${linked.map(item => `<button type="button" data-open-linked="${safe(item.id)}">${safe(item.title)}</button>`).join('')}</nav>` : ''}
+        ${entry.revisions.length ? `<details class="journal-revisions"><summary>${entry.revisions.length} ${entry.revisions.length === 1 ? 'revisão preservada' : 'revisões preservadas'}</summary><ol>${entry.revisions.map(revision => `<li><small>${safe(formatDate(revision.createdAt))}</small><p>${safe(revision.text).replace(/\n/g, '<br>')}</p></li>`).join('')}</ol></details>` : ''}
         <div class="journal-entry-actions">
           <button type="button" data-favorite-entry aria-pressed="${entry.favorite}">${entry.favorite ? '★ Favorita' : '☆ Favoritar'}</button>
           <button type="button" data-edit-entry>Editar</button>
+          <button type="button" data-revise-entry>Acrescentar revisão</button>
           <button type="button" data-ai-entry>Levar à Orbe IA</button>
+          <button type="button" data-export-entry>Baixar esta memória</button>
           <button type="button" data-delete-entry>Excluir</button>
         </div>
-        ${deleteConfirm}${aiConfirm}
+        ${deleteConfirm}${aiConfirm}${revisionForm}
       </div>
     </article>`;
   }
@@ -511,9 +686,23 @@ export class JournalEngine {
     const index = entries.findIndex(entry => entry.id === id);
     if (index < 0) return;
 
+    const linkedButton = event.target.closest('[data-open-linked]');
+    if (linkedButton) {
+      const linkedId = linkedButton.dataset.openLinked;
+      this.clearFilters();
+      this.view = 'timeline';
+      this.saveView();
+      this.renderExplorer();
+      const target = this.list.querySelector(`[data-entry-id="${selectorEscape(linkedId)}"]`);
+      target?.scrollIntoView({ behavior: smooth(), block: 'center' });
+      target?.querySelector('h3')?.setAttribute('tabindex', '-1');
+      target?.querySelector('h3')?.focus({ preventScroll: true });
+      return;
+    }
+
     if (event.target.closest('[data-favorite-entry]')) {
       entries[index] = createJournalEntry({ ...entries[index], favorite: !entries[index].favorite, updatedAt: new Date().toISOString() });
-      this.saveAll(entries);
+      if (!this.saveAll(entries)) return;
       this.render();
       return;
     }
@@ -524,6 +713,7 @@ export class JournalEngine {
     if (event.target.closest('[data-delete-entry]')) {
       this.pendingDelete = id;
       this.pendingAI = '';
+      this.pendingRevision = '';
       this.renderExplorer(entries);
       this.list.querySelector(`[data-entry-id="${selectorEscape(id)}"] [data-delete-cancel]`)?.focus();
       return;
@@ -536,14 +726,45 @@ export class JournalEngine {
     if (event.target.closest('[data-delete-confirm]')) {
       entries.splice(index, 1);
       this.pendingDelete = '';
-      this.saveAll(entries);
+      if (!this.saveAll(entries)) return;
+      this.refreshLinkOptions();
       this.render();
       this.notify('Memória excluída deste aparelho.');
+      return;
+    }
+    if (event.target.closest('[data-revise-entry]')) {
+      this.pendingRevision = id;
+      this.pendingAI = '';
+      this.pendingDelete = '';
+      this.renderExplorer(entries);
+      this.list.querySelector(`[data-entry-id="${selectorEscape(id)}"] [data-revision-text]`)?.focus();
+      return;
+    }
+    if (event.target.closest('[data-revision-cancel]')) {
+      this.pendingRevision = '';
+      this.renderExplorer(entries);
+      return;
+    }
+    const revisionForm = event.target.closest('[data-revision-form]');
+    if (event.type === 'submit' && revisionForm) {
+      event.preventDefault();
+      const revisionText = revisionForm.querySelector('[data-revision-text]')?.value || '';
+      if (!revisionText.trim()) return;
+      entries[index] = appendJournalRevision(entries[index], revisionText);
+      if (!this.saveAll(entries)) return;
+      this.pendingRevision = '';
+      this.render();
+      this.notify('Revisão acrescentada sem apagar o registro original.');
+      return;
+    }
+    if (event.target.closest('[data-export-entry]')) {
+      this.exportData([entries[index]], `memoria-${journalDateKey(entries[index].createdAt)}`);
       return;
     }
     if (event.target.closest('[data-ai-entry]')) {
       this.pendingAI = id;
       this.pendingDelete = '';
+      this.pendingRevision = '';
       this.renderExplorer(entries);
       this.list.querySelector(`[data-entry-id="${selectorEscape(id)}"] [data-ai-cancel]`)?.focus();
       return;
@@ -571,13 +792,16 @@ export class JournalEngine {
       text: entry.text,
       tags: entry.tags,
       relationships: entry.relationships,
+      reviewDate: entry.reviewDate,
+      linkedEntryId: entry.linkedEntryIds[0] || '',
       relatedLesson: entry.relatedLesson
     };
+    this.refreshLinkOptions(entry.linkedEntryIds[0] || '');
     Object.entries(values).forEach(([name, value]) => {
       const field = this.form.elements.namedItem(name);
       if (field) field.value = value;
     });
-    store.set(JOURNAL_DRAFT_KEY, { ...values, _editingId: entry.id, status: 'draft', updatedAt: new Date().toISOString() });
+    if (!this.flushDraft()) return;
     this.setEditingState(true);
     this.setSaveState('Editando memória', 'saving');
     this.root.querySelector('[data-draft-detail]').textContent = 'As alterações ficam salvas como rascunho.';
@@ -587,30 +811,30 @@ export class JournalEngine {
 
   prepareAI(entry) {
     const cards = entryCardIds(entry).map(id => CARDS[id]?.name).filter(Boolean);
-    store.remove(AI_TAROT_SELECTION_KEY);
-    store.set(JOURNAL_AI_SELECTION_KEY, {
-      id: entry.id,
-      title: entry.title,
-      text: entry.text,
-      question: entry.question,
-      tags: entry.tags,
-      cards,
-      selectedAt: new Date().toISOString(),
-      consentScope: 'single-entry',
-      private: true
-    });
+    const selection = createJournalAISelection(entry, cards);
+    if (!selection) {
+      this.notify('Esta memória não possui texto para preparar.');
+      return;
+    }
+    try {
+      store.remove(AI_TAROT_SELECTION_KEY);
+      store.set(JOURNAL_AI_SELECTION_KEY, selection);
+    } catch {
+      this.notify('Não foi possível preparar esta memória no aparelho.');
+      return;
+    }
     this.pendingAI = '';
     this.notify('Somente esta entrada foi preparada. Revise antes de enviar.');
     globalThis.orbe?.go?.('ai');
     window.dispatchEvent(new CustomEvent('divina:journal-ai-selected'));
   }
 
-  exportData() {
-    const payload = privateJournalExport(this.all());
-    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  exportData(entries = this.all(), stem = 'diario-orbe') {
+    const payload = privateJournalExport(entries);
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json;charset=utf-8' });
     const anchor = document.createElement('a');
     anchor.href = URL.createObjectURL(blob);
-    anchor.download = `diario-orbe-${new Date().toISOString().slice(0, 10)}.json`;
+    anchor.download = `${stem}-${new Date().toISOString().slice(0, 10)}.json`;
     anchor.click();
     setTimeout(() => URL.revokeObjectURL(anchor.href), 1000);
     this.notify('Sua cópia privada foi preparada.');

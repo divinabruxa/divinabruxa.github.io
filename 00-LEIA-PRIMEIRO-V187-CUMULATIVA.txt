@@ -1,0 +1,95 @@
+DIVINA BRUXA V187 — ESCOLA E DIÁRIO DEFINITIVOS
+PACOTE CUMULATIVO SOBRE A V185
+
+Este pacote inclui a V186 (Macroetapa 8 — Escola definitiva) e a V187
+(Macroetapa 9 — Diário e Espelho Celestial definitivo). Portanto, você não
+precisa instalar a V186 separadamente.
+
+COMO INSTALAR PELO IPHONE
+
+1. Descompacte o ZIP.
+2. Abra a raiz do repositório divinabruxa.github.io no ramo main.
+3. Toque em Add file > Upload files.
+4. Envie os 19 arquivos soltos deste pacote.
+5. Não envie somente o ZIP e não crie uma pasta V187.
+6. Aceite substituir os 13 arquivos existentes.
+7. Não apague nenhum arquivo anterior do site.
+8. Use o commit: Instala V187 cumulativa Escola e Diario Definitivos
+
+13 ARQUIVOS SUBSTITUÍDOS
+
+- index.html
+- app.js
+- page-loader-v1.js
+- sw.js
+- school-policy.js
+- school-engine.js
+- ai-engine.js
+- escola-do-tarot.html
+- sitemap.xml
+- journal-policy.js
+- journal-engine.js
+- diario-de-tarot.html
+- busca-v165.js
+
+6 ARQUIVOS NOVOS
+
+- escola-definitiva-v186.css
+- diario-definitivo-v187.css
+- DIARIO-DEFINITIVO-V187.json
+- QA-V187-DIARIO-DEFINITIVO.mjs
+- 00-LEIA-PRIMEIRO-V187-CUMULATIVA.txt
+- ARQUIVOS-V187-SHA256.txt
+
+O QUE A ESCOLA V186 ENTREGA
+
+- 17 módulos e 124 aulas únicas.
+- 78 aulas de cartas diretas e 46 aulas de teoria e prática.
+- Busca sem acento em português, inglês e espanhol.
+- Cinco filtros, quizzes persistentes, fila de revisão e caderno por aula.
+- Cópia restaurável e funcionamento offline.
+- Tutor opcional da Orbe IA limitado a uma aula pública por consentimento.
+
+O QUE O DIÁRIO V187 ENTREGA
+
+- Rascunho automático com recuperação local.
+- Busca sem acento e filtros por humor, tipo, data, carta, tema e favoritas.
+- Linha do tempo e calendário.
+- Vínculos navegáveis entre memórias.
+- Revisões separadas que não apagam o registro original.
+- Espelho Celestial agregado no aparelho, sem diagnósticos nem previsões.
+- Cópia JSON completa ou de uma memória.
+- Restauração verificada com opção de mesclar sem apagar.
+- Substituição e exclusão total somente após confirmação explícita.
+- Motor, política, estilo e guia público preparados para uso offline.
+
+PRIVACIDADE HONESTA
+
+- O corpo do Diário permanece somente neste aparelho.
+- Admin e analytics não recebem os textos.
+- A Orbe IA não lê o Diário automaticamente.
+- Para usar IA, a pessoa escolhe uma única entrada, confirma no Diário,
+  revisa o texto preparado e confirma novamente antes do envio.
+- Outras memórias, rascunho, humor, relações, revisões e favoritas ficam fora.
+- Não existe sincronização automática entre aparelhos nesta versão.
+- A cópia JSON contém texto privado; deve ser guardada com cuidado.
+
+PROTEÇÕES PRESERVADAS
+
+- Tarot Livre: exatamente 78 cartas diretas, sem repetição.
+- Nenhum significado durante a revelação do Tarot Livre.
+- Mesa Real 13 x 6.
+- Carta do Dia estável no fuso de Brasília.
+- Biblioteca Universal e 15 Tiragens preservadas.
+- Consultas preservadas em R$ 250, R$ 150, R$ 100 e R$ 50, com e-mail.
+- Nenhuma cobrança real, sincronização, autenticação de produção ou Sol ativada.
+- Nenhum novo botão do Diário foi criado no menu.
+
+VALIDAÇÃO
+
+Execute, se desejar:
+
+node QA-V187-DIARIO-DEFINITIVO.mjs
+
+O arquivo ARQUIVOS-V187-SHA256.txt permite conferir a integridade dos outros
+18 arquivos do pacote.

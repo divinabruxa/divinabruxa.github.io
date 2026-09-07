@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V55 · TIRAGENS DEFINITIVAS OFFLINE V185 */
-const CACHE='divina-bruxa-v55-spreads-v185';
+/* DIVINA BRUXA — SERVICE WORKER V57 · ESCOLA E DIÁRIO OFFLINE V187 */
+const CACHE='divina-bruxa-v57-journal-v187';
 
 const REQUIRED=[
   './',
@@ -61,6 +61,10 @@ const CORE=[
   './card-library-policy.js',
   './card-library-engine.js',
   './biblioteca-universal-v184.css',
+  './school-engine.js',
+  './school-policy.js',
+  './escola-definitiva-v186.css',
+  './escola-do-tarot.html',
   './tarot-session.js',
   './tarot-continuity.js',
   './tarot-editorial-policy.js',
@@ -77,6 +81,9 @@ const CORE=[
   './tiragens-definitivas-v185.css',
   './ai-policy.js',
   './journal-policy.js',
+  './journal-engine.js',
+  './rhythm-v6.js',
+  './diario-definitivo-v187.css',
   './tiragens-de-tarot.html',
   './cartas-do-tarot.html',
   './biblioteca-universal-v184.js',
@@ -90,6 +97,8 @@ const WARM=[
   './menu-completo-v177.js','./tarot-spiral-suction-v1.webp',
   './tarot-data.js','./storage.js','./tarot-engine.js','./tarot-image-runtime.js','./daily-meaning-runtime.js','./tarot-meanings.js','./meaning-engine.js','./tarot-atlas.webp',
   './card-library-policy.js','./card-library-engine.js','./biblioteca-universal-v184.css','./biblioteca-universal-v184.js','./cartas-do-tarot.html',
+  './school-engine.js','./school-policy.js','./escola-definitiva-v186.css','./escola-do-tarot.html',
+  './journal-engine.js','./journal-policy.js','./rhythm-v6.js','./diario-definitivo-v187.css','./diario-de-tarot.html','./diario-tarot-v173.css','./diario-tarot-v173.js','./diario-espelho-celestial-v1.webp',
   './spreads-engine.js','./spreads-policy.js','./spread-synthesis.js','./tiragens-definitivas-v185.css','./tiragens-de-tarot.html',
   './fallback-shell-v1.css','./pwa-final-v1.css'
 ];

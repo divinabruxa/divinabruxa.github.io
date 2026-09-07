@@ -1,0 +1,283 @@
+/* DIVINA BRUXA — ESCOLA DO TAROT DEFINITIVA V186 */
+
+#school .school-filter-bar {
+  display: flex;
+  gap: .55rem;
+  margin: 0 0 1rem;
+  padding: .65rem;
+  overflow-x: auto;
+  border: 1px solid rgba(235, 196, 116, .2);
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(20, 8, 34, .86), rgba(7, 3, 14, .9));
+  scrollbar-width: thin;
+  scrollbar-color: rgba(218, 177, 103, .5) transparent;
+}
+
+#school .school-filter-bar button {
+  flex: 0 0 auto;
+  min-height: 44px;
+  padding: .65rem .9rem;
+  border: 1px solid rgba(235, 197, 119, .24);
+  border-radius: 999px;
+  color: #d9cde0;
+  background: rgba(96, 42, 142, .15);
+  font: 700 .7rem/1.1 system-ui, sans-serif;
+  letter-spacing: .04em;
+  cursor: pointer;
+}
+
+#school .school-filter-bar button[aria-pressed="true"] {
+  border-color: rgba(242, 207, 134, .72);
+  color: #16091c;
+  background: linear-gradient(135deg, #efd08c, #c986e5);
+  box-shadow: 0 8px 24px rgba(154, 78, 214, .22);
+}
+
+#school .school-lesson:focus-visible,
+#school .school-filter-bar button:focus-visible,
+#school .school-note textarea:focus-visible,
+#school .school-portability button:focus-visible,
+#school .school-portability label:focus-within {
+  outline: 3px solid #f3d58e;
+  outline-offset: 3px;
+}
+
+#school .school-note {
+  margin-top: 1rem;
+  padding: .9rem;
+  border: 1px solid rgba(231, 193, 113, .18);
+  border-radius: 17px;
+  background: linear-gradient(145deg, rgba(10, 5, 18, .76), rgba(49, 19, 70, .22));
+}
+
+#school .school-note > label {
+  display: block;
+  margin-bottom: .5rem;
+  color: #edd093;
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+#school .school-note textarea {
+  display: block;
+  width: 100%;
+  min-height: 92px;
+  resize: vertical;
+  padding: .8rem;
+  border: 1px solid rgba(229, 190, 111, .24);
+  border-radius: 13px;
+  color: #f8effb;
+  background: rgba(5, 2, 11, .8);
+  font: 400 .88rem/1.55 system-ui, sans-serif;
+}
+
+#school .school-note > div {
+  display: flex;
+  gap: .65rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: .65rem;
+}
+
+#school .school-note button,
+#school .school-empty button,
+#school .school-ai-confirm button,
+#school .school-portability button,
+#school .school-portability label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: .6rem .85rem;
+  border: 1px solid rgba(237, 201, 127, .34);
+  border-radius: 999px;
+  color: #f5e7f8;
+  background: rgba(104, 47, 151, .26);
+  font: 700 .72rem/1.2 system-ui, sans-serif;
+  cursor: pointer;
+}
+
+#school .school-note small {
+  color: #a99bb2;
+  font-size: .67rem;
+  line-height: 1.4;
+  text-align: right;
+}
+
+#school .school-note small.saved,
+#school .school-portability output.success { color: #efd08b; }
+#school .school-note small.error,
+#school .school-portability output.error { color: #f0a9c9; }
+
+#school .school-quiz button[aria-pressed="true"] {
+  border-color: rgba(241, 205, 132, .68);
+  background: rgba(156, 80, 213, .42);
+  box-shadow: inset 0 0 0 1px rgba(247, 222, 164, .12);
+}
+
+#school .school-responsible-line {
+  margin-top: 1rem !important;
+  padding: .75rem .85rem;
+  border-left: 2px solid rgba(236, 195, 113, .55);
+  color: #ae9fb7 !important;
+  background: rgba(255, 255, 255, .018);
+  font-size: .76rem !important;
+}
+
+#school .school-ai-confirm {
+  margin-top: .75rem;
+  padding: .9rem;
+  border: 1px solid rgba(213, 145, 234, .34);
+  border-radius: 17px;
+  background: radial-gradient(circle at 0 0, rgba(151, 73, 213, .2), transparent 55%), rgba(10, 4, 18, .84);
+}
+
+#school .school-ai-confirm p b,
+#school .school-ai-confirm p small {
+  display: block;
+}
+
+#school .school-ai-confirm p b {
+  color: #f5d590;
+  font: 400 1rem/1.3 Georgia, serif;
+}
+
+#school .school-ai-confirm p small {
+  margin-top: .35rem;
+  color: #c7b9cf;
+  font-size: .73rem;
+  line-height: 1.55;
+}
+
+#school .school-ai-confirm > div {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  margin-top: .7rem;
+}
+
+#school .school-ai-confirm [data-school-ai-confirm] {
+  color: #16091c;
+  background: linear-gradient(135deg, #efd08b, #c986e4);
+}
+
+#school .school-empty {
+  display: grid;
+  justify-items: center;
+  gap: .8rem;
+}
+
+#school .school-empty p { margin: 0; }
+
+#school .school-portability {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1.25rem;
+  padding: 1.15rem;
+  border: 1px solid rgba(235, 196, 116, .22);
+  border-radius: 24px;
+  background: radial-gradient(circle at 8% 20%, rgba(145, 69, 210, .17), transparent 34%), linear-gradient(145deg, rgba(19, 8, 32, .91), rgba(7, 3, 13, .94));
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .28);
+}
+
+#school .school-portability > span {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid rgba(240, 204, 130, .38);
+  border-radius: 50%;
+  color: #f0cd82;
+  background: rgba(119, 53, 174, .2);
+  font-size: 1.25rem;
+}
+
+#school .school-portability .eyebrow { margin: 0 0 .2rem; }
+
+#school .school-portability h3 {
+  margin: 0;
+  color: #fff3e2;
+  font: 400 1.35rem/1.15 Georgia, serif;
+}
+
+#school .school-portability p:not(.eyebrow) {
+  max-width: 64ch;
+  margin: .4rem 0 0;
+  color: #bcaec6;
+  font-size: .78rem;
+  line-height: 1.55;
+}
+
+#school .school-portability-actions {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+#school .school-portability label { position: relative; }
+
+#school .school-portability input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+#school .school-portability output {
+  grid-column: 2 / -1;
+  color: #a99bb2;
+  font-size: .68rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 760px) {
+  #school .school-path-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .55rem;
+  }
+
+  #school .school-path-metrics > span {
+    display: grid;
+    gap: .05rem;
+    padding: .55rem;
+    border: 1px solid rgba(235, 196, 116, .14);
+    border-radius: 13px;
+    background: rgba(255, 255, 255, .018);
+  }
+
+  #school .school-portability {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  #school .school-portability-actions,
+  #school .school-portability output {
+    grid-column: 1 / -1;
+  }
+
+  #school .school-portability-actions { justify-content: stretch; }
+  #school .school-portability-actions > * { flex: 1 1 145px; }
+}
+
+@media (max-width: 540px) {
+  #school .school-note > div { align-items: stretch; flex-direction: column; }
+  #school .school-note small { text-align: left; }
+  #school .school-actions button { flex: 1 1 145px; }
+  #school .school-portability { border-radius: 19px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #school .school-filter-bar button,
+  #school .school-note button,
+  #school .school-portability button,
+  #school .school-portability label { transition: none !important; }
+}
