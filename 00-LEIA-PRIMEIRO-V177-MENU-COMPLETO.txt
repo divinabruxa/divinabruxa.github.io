@@ -1,0 +1,63 @@
+DIVINA BRUXA — V177 — MENU COMPLETO + BIBLIOTECA RESTAURADA
+
+O QUE ESTA VERSÃO RESOLVE
+
+1. Restaura a Biblioteca das 78 Cartas no menu principal.
+2. Corrige o erro que criava 8 atalhos, mas posicionava somente 6.
+3. Organiza 16 destinos sem retirar o Tarot Livre nem as Consultas.
+4. Destaca a Biblioteca das 78 Cartas em dourado.
+5. Mantém áreas de toque, foco por teclado e adaptação para iPhone.
+6. Atualiza o cache do aplicativo para a nova versão aparecer corretamente.
+
+MENU COMPLETO
+
+Ao redor da Orbe:
+- Início
+- Tiragens
+- Escola do Tarot
+- Orbe IA
+- Consultas
+- Música
+- Conta
+- Tarot Livre
+
+Atalhos essenciais:
+- Vídeos
+- Biblioteca 78 Cartas
+- Carta do Dia
+- Loja Mística
+- Diário
+- Skins da Orbe
+- Premium
+- Notificações
+
+COMO INSTALAR PELO IPHONE
+
+1. Abra o repositório do site no GitHub.
+2. Toque em Add file e depois Upload files.
+3. Descompacte o ZIP antes de enviar.
+4. Envie os 8 arquivos soltos, na raiz do repositório.
+5. Confirme a substituição de index.html e sw.js.
+6. Toque em Commit changes.
+7. Não apague nenhum outro arquivo do site.
+
+ARQUIVOS QUE SUBSTITUEM OS EXISTENTES
+
+- index.html
+- sw.js
+
+ARQUIVOS NOVOS
+
+- menu-completo-v177.css
+- menu-completo-v177.js
+- 00-LEIA-PRIMEIRO-V177-MENU-COMPLETO.txt
+- MENU-COMPLETO-V177.json
+- QA-V177-MENU-COMPLETO.mjs
+- ARQUIVOS-V177-SHA256.txt
+
+IMPORTANTE
+
+- O ZIP é plano: não envie uma pasta envolvendo os arquivos.
+- O Tarot Livre continua com 78 cartas diretas, sem inversões e sem repetição.
+- As Consultas continuam com os preços aprovados.
+- Esta versão não ativa cobrança real nem envio de e-mail.

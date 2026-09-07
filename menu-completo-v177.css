@@ -1,0 +1,104 @@
+/* DIVINA BRUXA V177 — MENU COMPLETO E BIBLIOTECA DAS 78 CARTAS */
+
+/* O menu orbital possui oito destinos principais e oito atalhos essenciais.
+   Esta camada posiciona todos eles: nenhuma opção fica fora da tela. */
+.home-menu-portals .menu-portal {
+  width: 88px !important;
+  min-height: 57px !important;
+  padding: 4px 5px !important;
+  border: 1px solid rgba(239, 199, 128, .18) !important;
+  background: linear-gradient(145deg, rgba(26, 10, 39, .78), rgba(7, 3, 13, .72)) !important;
+  box-shadow: inset 0 1px rgba(255, 246, 221, .07), 0 8px 22px rgba(0, 0, 0, .18) !important;
+  transform: translateX(-50%) !important;
+}
+
+.home-menu-portals .menu-portal b {
+  max-width: 84px !important;
+  font-size: 7.6px !important;
+  line-height: 1.08 !important;
+  letter-spacing: .025em !important;
+}
+
+/* Linha superior: Vídeos, Biblioteca, Carta do Dia e Loja. */
+.home-menu-portals .menu-portal:nth-child(1),
+.home-menu-portals .menu-portal:nth-child(2),
+.home-menu-portals .menu-portal:nth-child(3),
+.home-menu-portals .menu-portal:nth-child(4) {
+  top: -64px !important;
+}
+
+.home-menu-portals .menu-portal:nth-child(1) { left: 12.5% !important; }
+.home-menu-portals .menu-portal:nth-child(2) { left: 37.5% !important; }
+.home-menu-portals .menu-portal:nth-child(3) { left: 62.5% !important; }
+.home-menu-portals .menu-portal:nth-child(4) { left: 87.5% !important; }
+
+/* Linha inferior: Diário, Skins, Premium e Notificações. */
+.home-menu-portals .menu-portal:nth-child(5),
+.home-menu-portals .menu-portal:nth-child(6),
+.home-menu-portals .menu-portal:nth-child(7),
+.home-menu-portals .menu-portal:nth-child(8) {
+  top: calc(100% + 7px) !important;
+}
+
+.home-menu-portals .menu-portal:nth-child(5) { left: 12.5% !important; }
+.home-menu-portals .menu-portal:nth-child(6) { left: 37.5% !important; }
+.home-menu-portals .menu-portal:nth-child(7) { left: 62.5% !important; }
+.home-menu-portals .menu-portal:nth-child(8) { left: 87.5% !important; }
+
+/* A Biblioteca é um destino central e recebe destaque visual. */
+.home-menu-portals .menu-portal[data-go="library"] {
+  border-color: rgba(255, 218, 148, .72) !important;
+  background: radial-gradient(circle at 50% 12%, rgba(239, 189, 105, .18), transparent 48%), linear-gradient(145deg, rgba(48, 18, 66, .94), rgba(10, 4, 18, .9)) !important;
+  box-shadow: inset 0 0 18px rgba(202, 83, 236, .16), 0 0 18px rgba(239, 190, 108, .18) !important;
+}
+
+.home-menu-portals .menu-portal[data-go="library"] b {
+  color: #ffe4ad !important;
+}
+
+.home-menu-portals .menu-portal:focus-visible {
+  outline: 2px solid #f5d596 !important;
+  outline-offset: 3px !important;
+}
+
+@media (max-width: 700px) {
+  .home-menu-portals .menu-portal {
+    width: 72px !important;
+    height: 52px !important;
+    min-height: 52px !important;
+  }
+
+  .home-menu-portals .menu-portal b {
+    max-width: 68px !important;
+    font-size: 6.8px !important;
+  }
+
+  .home-menu-portals .menu-portal:nth-child(1),
+  .home-menu-portals .menu-portal:nth-child(2),
+  .home-menu-portals .menu-portal:nth-child(3),
+  .home-menu-portals .menu-portal:nth-child(4) {
+    top: -58px !important;
+  }
+
+  .home-menu-portals .menu-portal:nth-child(5),
+  .home-menu-portals .menu-portal:nth-child(6),
+  .home-menu-portals .menu-portal:nth-child(7),
+  .home-menu-portals .menu-portal:nth-child(8) {
+    top: calc(100% + 6px) !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .home-menu-portals .menu-portal {
+    width: 66px !important;
+  }
+
+  .home-menu-portals .menu-portal b {
+    max-width: 62px !important;
+    font-size: 6.3px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-menu-portals .menu-portal { transition-duration: .01ms !important; }
+}

@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V48 · GUARDIÃO DO PORTAL V152 */
-const CACHE='divina-bruxa-v48-guardiao-v152';
+/* DIVINA BRUXA — SERVICE WORKER V49 · MENU COMPLETO V177 */
+const CACHE='divina-bruxa-v49-menu-completo-v177';
 
 const REQUIRED=[
   './',
@@ -56,6 +56,8 @@ const CORE=[
   './manifest.webmanifest',
   './app.js',
   './app.css',
+  './menu-completo-v177.css',
+  './menu-completo-v177.js',
   './runtime-v12.js',
   './navigation.js',
   './page-loader-v1.js',
@@ -76,7 +78,7 @@ const CORE=[
 const WARM=[
   './app.css','./motion.css','./update-04.css','./update-05.css','./update-06.css','./update-08.css','./update-09.css','./update-11.css',
   './visual-v68.css','./COSMIC-DESIGN-SYSTEM-V10.css',
-  './cosmic-design-system-v1.css','./menu-ring-v8.css','./home-orb-only-v1.css','./home-orb-words-v2.css',
+  './cosmic-design-system-v1.css','./menu-ring-v8.css','./menu-completo-v177.css','./menu-completo-v177.js','./home-orb-only-v1.css','./home-orb-words-v2.css',
   './tarot-table-v5.css','./tarot-ritual-v5.css','./tarot-controls-v5.css','./tarot-editorial-v5.css',
   './tarot-livre-official-v1.css','./tarot-livre-ios-v1.css','./tarot-spiral-suction-v1.webp',
   './spreads-v5.css','./spreads-temple-v1.css','./templo-tiragens-celestial-v1.webp',

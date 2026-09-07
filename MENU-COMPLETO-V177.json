@@ -1,0 +1,44 @@
+{
+  "release": "DIVINA-BRUXA-V177-MENU-COMPLETO",
+  "purpose": "Restaurar a Biblioteca das 78 Cartas e posicionar corretamente todos os atalhos essenciais do menu orbital.",
+  "primary_orbit": [
+    "home",
+    "spreads",
+    "school",
+    "ai",
+    "consultations",
+    "music",
+    "login",
+    "tarot"
+  ],
+  "essential_shortcuts": [
+    "videos",
+    "library",
+    "daily",
+    "store",
+    "journal",
+    "skins",
+    "subscriptions",
+    "notifications"
+  ],
+  "library": {
+    "destination": "library",
+    "label": "Biblioteca 78 Cartas",
+    "position": "top-row",
+    "highlighted": true
+  },
+  "responsive": {
+    "desktop_rows": 2,
+    "mobile_rows": 2,
+    "items_per_row": 4,
+    "focus_visible": true,
+    "reduced_motion_supported": true
+  },
+  "preserved_invariants": {
+    "free_tarot_cards": 78,
+    "free_tarot_reversals": false,
+    "free_tarot_repetition": false,
+    "consultation_prices_brl": [250, 150, 100, 50],
+    "real_billing_enabled": false
+  }
+}
