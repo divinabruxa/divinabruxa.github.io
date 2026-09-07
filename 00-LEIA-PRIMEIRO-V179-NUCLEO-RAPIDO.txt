@@ -1,0 +1,45 @@
+DIVINA BRUXA — V179 — ARQUITETURA LIMPA E NÚCLEO RÁPIDO
+
+O QUE ESTA VERSÃO FAZ
+- Consolida as 50 folhas de estilo carregadas pela página principal em 1 arquivo.
+- Preserva integralmente o conteúdo e a ordem original da cascata CSS.
+- Reduz 49 pedidos de rede no carregamento inicial de estilos.
+- Atualiza o cache offline para V50/V179 e remove do aquecimento os 50 CSS antigos.
+- Cria um manifesto ativo e um teste automático próprio da versão.
+
+COMO INSTALAR PELO IPHONE/GITHUB
+1. Abra este ZIP.
+2. Selecione TODOS os arquivos soltos.
+3. Envie para a RAIZ do repositório no GitHub.
+4. Confirme a substituição de index.html e sw.js.
+5. Não crie pasta e não apague nenhum arquivo antigo.
+6. Aguarde o GitHub Pages concluir a publicação.
+7. Abra o site e atualize a página uma vez. O cache V179 assume automaticamente.
+
+ARQUIVOS PARA SUBSTITUIR
+- index.html
+- sw.js
+
+ARQUIVOS PARA ADICIONAR
+- divina-core-v179.css
+- BUILD-V179-CSS.mjs
+- MANIFESTO-RUNTIME-V179.json
+- QA-V179-NUCLEO-RAPIDO.mjs
+- 00-LEIA-PRIMEIRO-V179-NUCLEO-RAPIDO.txt
+- ARQUIVOS-V179-SHA256.txt
+
+GARANTIAS PRESERVADAS
+- Tarot Livre: 78 cartas oficiais, somente diretas, sem repetição e sem significado no modo livre.
+- Mesa Real: 78 posições em 13 fileiras de 6.
+- Consultas: R$ 250, R$ 150, R$ 100 e R$ 50; e-mail obrigatório.
+- Cobrança real continua desligada.
+- Biblioteca e menu completo V177 continuam presentes.
+
+VERIFICAÇÃO OPCIONAL EM UM COMPUTADOR
+sha256sum -c ARQUIVOS-V179-SHA256.txt
+node QA-V179-NUCLEO-RAPIDO.mjs
+
+IMPORTANTE
+- Este pacote não publica sozinho e não altera domínio ou DNS.
+- Não apague os 50 CSS-fonte: eles continuam sendo o cofre editável do núcleo consolidado.
+- Para reconstruir o núcleo depois de uma alteração visual, execute: node BUILD-V179-CSS.mjs
