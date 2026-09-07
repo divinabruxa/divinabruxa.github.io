@@ -1,0 +1,142 @@
+{
+  "schemaVersion": "167.0.0",
+  "release": "DIVINA-BRUXA-V167-HISTORIA-DOCUMENTADA-DO-TAROT",
+  "date": "2026-09-07",
+  "status": "ready-for-manual-install",
+  "purpose": "Criar uma referência histórica baseada em evidências que diferencie registros, objetos preservados, tradições posteriores e mitos de origem.",
+  "historyPage": {
+    "page": "historia-do-tarot.html",
+    "stylesheet": "historia-tarot-v167.css?v=167",
+    "timelineMoments": 6,
+    "mythEvidenceComparisons": 4,
+    "institutionalSources": 4,
+    "sourceInstitutions": [
+      "Metropolitan Museum of Art",
+      "Morgan Library & Museum",
+      "British Museum"
+    ],
+    "earliestDocumentedPeriod": "1440s–1450s",
+    "earliestDocumentedRegion": "Northern Italy",
+    "earliestDocumentedUse": "trick-taking card game",
+    "modernCommonDeckCards": 78,
+    "structuredDataTypes": ["Article", "ImageObject", "BreadcrumbList"]
+  },
+  "editorialMethod": {
+    "historicalEvidenceSeparatedFromTradition": true,
+    "historicalEvidenceSeparatedFromMyth": true,
+    "uncertaintyExplicitlyAcknowledged": true,
+    "contemporaryArtworkLabeledAsNonHistorical": true,
+    "ancientEgyptPresentedAsProvenOrigin": false,
+    "divinationPresentedAsOriginalDocumentedUse": false,
+    "singleImmutableDeckClaimed": false,
+    "universalCardMeaningClaimed": false
+  },
+  "references": [
+    {
+      "institution": "Metropolitan Museum of Art",
+      "title": "Before Fortune-Telling: The History and Structure of Tarot Cards",
+      "url": "https://www.metmuseum.org/perspectives/tarot-2"
+    },
+    {
+      "institution": "Morgan Library & Museum",
+      "title": "Visconti-Sforza Tarot Cards",
+      "url": "https://www.themorgan.org/collection/tarot-cards"
+    },
+    {
+      "institution": "Morgan Library & Museum",
+      "title": "Tarot! Renaissance Symbols, Modern Visions",
+      "url": "https://www.themorgan.org/exhibitions/tarot"
+    },
+    {
+      "institution": "British Museum",
+      "title": "Tarot de Marseilles, Nicolas Conver",
+      "url": "https://www.britishmuseum.org/collection/object/P_1904-0511-47-1-78"
+    }
+  ],
+  "searchIntegration": {
+    "searchScript": "busca-v165.js?v=167",
+    "indexedDestinationsBefore": 118,
+    "indexedDestinationsAfter": 119,
+    "cards": 78,
+    "portalPages": 41,
+    "categoryCounts": {
+      "cartas": 78,
+      "tiragens": 14,
+      "aprender": 17,
+      "portal": 10
+    },
+    "historyFeatured": true,
+    "exampleQueries": ["história", "Visconti Sforza", "Nicolas Conver", "Egito antigo"]
+  },
+  "discoverability": {
+    "linkedFrom": ["guias-para-comecar.html", "glossario-do-tarot.html", "buscar.html"],
+    "sitemapUrlsBefore": 119,
+    "sitemapUrlsAfter": 120,
+    "sitemapImageEntries": 78,
+    "newSitemapUrls": 1
+  },
+  "accessibility": {
+    "singleH1": true,
+    "skipLink": true,
+    "semanticTimeline": true,
+    "semanticSourceList": true,
+    "internalSectionNavigation": true,
+    "descriptiveImageAlternative": true,
+    "keyboardNavigable": true,
+    "responsiveSingleColumn": true,
+    "reducedMotionSupported": true,
+    "printStylesIncluded": true
+  },
+  "reuse": {
+    "portalStylesheet": "seo-portal-v154.css?v=154",
+    "existingImage": "tarot-atlas.webp",
+    "existingImageWidth": 3000,
+    "existingImageHeight": 3600,
+    "newImagesAdded": false,
+    "socialPreviewImageAdded": false
+  },
+  "safeguards": {
+    "indexChanged": false,
+    "tarotLivreChanged": false,
+    "tarotLivreCards": 78,
+    "tarotLivreOrientation": "upright-only",
+    "tarotLivreMeaningsInsideFreeMode": false,
+    "tarotLivreRepeats": false,
+    "mesaRealRows": 13,
+    "mesaRealColumns": 6,
+    "consultationsFunctionalCodeChanged": false,
+    "consultationPricesBrl": [250, 150, 100, 50],
+    "consultationEmailRequired": true,
+    "realBillingEnabled": false,
+    "resendConfigured": false,
+    "unconfirmedPersonalNamePublished": false
+  },
+  "integrityBase": {
+    "sitemapV166Sha256": "c062276cbfde795efe3047f449fb5493f7580ce454104b92c2bdd771e407ed07",
+    "searchPageV166Sha256": "a02a7e43f2efdb9869d274b5fa781dfd996cf009fe71f70522a422563784307f",
+    "searchScriptV166Sha256": "488429ef96441e2717f1cb72896e22f4ac1a5f8350d0d3b5bb9232618ba9f0f0",
+    "guidesHubV166Sha256": "33561aae608355c9c9ba6fff3392f00e4ec41a2dfecb23f2d150a1c501977a98",
+    "glossaryV166Sha256": "2bbeda3f738b5b1bf4534d212c7d9d379df2db914633f03549e6b39cce40c231"
+  },
+  "installation": {
+    "method": "manual-flat-upload-github",
+    "filesInPackage": 11,
+    "replace": [
+      "sitemap.xml",
+      "buscar.html",
+      "busca-v165.js",
+      "guias-para-comecar.html",
+      "glossario-do-tarot.html"
+    ],
+    "add": [
+      "historia-do-tarot.html",
+      "historia-tarot-v167.css",
+      "00-LEIA-PRIMEIRO-V167-HISTORIA-DOCUMENTADA-DO-TAROT.txt",
+      "HISTORIA-TAROT-V167.json",
+      "QA-V167-HISTORIA-DO-TAROT.mjs",
+      "ARQUIVOS-V167-SHA256.txt"
+    ],
+    "deleteOtherFiles": false,
+    "commitMessage": "Instala V167 historia documentada do Tarot"
+  }
+}

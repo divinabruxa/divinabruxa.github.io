@@ -28,6 +28,7 @@ const PAGES = Object.freeze([
   ['Figuras da Corte', 'figuras-da-corte-no-tarot.html', '16 cartas', 'aprender', 'Pajem, Cavaleiro, Rainha e Rei como atitudes, papéis, estágios ou pessoas.'],
   ['Combinações de cartas', 'combinacoes-de-cartas-no-tarot.html', 'Aprender', 'aprender', 'Una duas ou mais cartas por imagem, posição, reforço, contraste e sequência.'],
   ['Glossário do Tarot', 'glossario-do-tarot.html', '62 termos', 'aprender', 'Definições claras sobre cartas, naipes, tiragens, símbolos e leitura responsável. arcano arquétipo autonomia baralho cartomancia consentimento consulente contexto correspondência desafio elemento energia figura da corte intenção interpretação intuição leitura luz tensão método oráculo orientação direta pergunta aberta posição previsão querente reciprocidade repetição significado símbolo síntese tendência'],
+  ['História do Tarot', 'historia-do-tarot.html', 'História documentada', 'aprender', 'Origem do Tarot no norte da Itália, registros de 1440 e 1450, jogo de vazas, Visconti-Sforza, Tarot de Marselha, Nicolas Conver, cartomancia, ocultismo, fatos, mitos, evidências, museus e fontes. Egito antigo renascimento renascentista'],
   ['Tiragem de Uma Carta', 'tiragem-de-uma-carta.html', '1 posição', 'tiragens', 'Mensagem central, pergunta, observação e reflexão prática.'],
   ['Tiragem de Três Cartas', 'tiragem-de-tres-cartas.html', '3 posições', 'tiragens', 'Estruturas, relações entre as cartas e síntese final. passado presente tendência'],
   ['Cruz Celta', 'cruz-celta-no-tarot.html', '10 posições', 'tiragens', 'Presente, desafio, base, passado, possibilidade, próximo movimento, atitude, ambiente, esperanças e síntese.'],
@@ -80,7 +81,7 @@ const entries = Object.freeze([
     title, url, kind, category, description: displayDescription(description),
     icon: category === 'tiragens' ? '✧' : category === 'aprender' ? '▤' : '◉',
     searchable: normalize(`${title} ${kind} ${description}`),
-    featured: [1,2,3,4,5,6,14,15,26].includes(index)
+    featured: [1,2,3,4,5,6,14,15,26,27].includes(index)
   }))
 ]);
 
