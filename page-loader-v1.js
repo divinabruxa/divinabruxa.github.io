@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.17 · TAROT LIVRE V182
+/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.18 · CARTA DO DIA V183
    Estilos e motores nascem sob demanda; toda falha oferece tentativa e retorno seguro. */
 
 import {
@@ -123,7 +123,7 @@ function clearRecovery(screen) {
   screen?.querySelector(':scope > [data-route-recovery]')?.remove();
 }
 
-export function createPageLoader({ config, go } = {}) {
+export function createPageLoader({ config, go, authClient = globalThis.divinaAuth } = {}) {
   const $ = selector => document.querySelector(selector);
   let observer = null;
 
@@ -167,8 +167,8 @@ export function createPageLoader({ config, go } = {}) {
       return new FreeTarot($('#tarot'));
     },
     daily: async () => {
-      const { DailyRitual } = await import('./ritual-engine.js');
-      return new DailyRitual($('#dailyCard'), remember);
+      const { DailyRitual } = await import('./ritual-engine.js?v=183');
+      return new DailyRitual($('#dailyCard'), remember, { authClient });
     },
     library: async () => {
       const { CardLibraryEngine } = await import('./card-library-engine.js');
@@ -229,7 +229,7 @@ export function createPageLoader({ config, go } = {}) {
       import('./commerce-engine.js?v=148'),
       import('./consultation-engine.js?v=148')
     ]),
-    daily: () => import('./ritual-engine.js'),
+    daily: () => import('./ritual-engine.js?v=183'),
     notifications: () => import('./notification-engine-v150.js?v=150')
   });
 

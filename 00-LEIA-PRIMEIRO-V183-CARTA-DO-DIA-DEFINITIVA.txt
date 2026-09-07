@@ -1,0 +1,58 @@
+DIVINA BRUXA — V183 — MACROETAPA 5
+CARTA DO DIA DEFINITIVA
+
+O QUE ESTA VERSÃO FAZ
+
+1. Garante uma única carta em cada data oficial de Brasília.
+2. Mantém a mesma seleção ao atualizar, apagar dados ou trocar de aparelho.
+3. Prepara seleção própria por conta quando a identidade segura estiver ativa.
+4. Preserva localmente a intenção privada sem usá-la para escolher a carta.
+5. Mantém cartas já reveladas antes da atualização até o fim do ciclo atual.
+6. Permite iniciar e rever o ritual offline depois da instalação do cache.
+7. Corrige a continuidade entre abas e a memória quando o armazenamento falha.
+8. Entrega o conteúdo profundo correto para as 78 cartas, inclusive os
+   56 Arcanos Menores.
+9. Acrescenta Energia do dia, Ação possível e Leitura responsável.
+10. Remove vibração do navegador e mantém todas as cartas diretas.
+
+COMO INSTALAR PELO IPHONE/GITHUB
+
+1. Descompacte este ZIP.
+2. Selecione TODOS os 12 arquivos soltos.
+3. Envie-os para a RAIZ do ramo main no GitHub.
+4. Confirme a substituição dos 8 arquivos existentes.
+5. Não envie somente o ZIP, não crie pasta e não apague arquivos anteriores.
+6. Use a mensagem de commit: Instala V183 Carta do Dia definitiva
+7. Aguarde o GitHub Pages e atualize o site uma vez.
+
+ARQUIVOS PARA SUBSTITUIR
+
+- index.html
+- app.js
+- page-loader-v1.js
+- sw.js
+- daily-policy.js
+- daily-meaning-runtime.js
+- ritual-engine.js
+- carta-do-dia.html
+
+ARQUIVOS NOVOS
+
+- CARTA-DO-DIA-DEFINITIVA-V183.json
+- QA-V183-CARTA-DO-DIA-DEFINITIVA.mjs
+- 00-LEIA-PRIMEIRO-V183-CARTA-DO-DIA-DEFINITIVA.txt
+- ARQUIVOS-V183-SHA256.txt
+
+GARANTIAS PRESERVADAS
+
+- Home, menu, Orbe, santuário lunar e artes oficiais não foram redesenhados.
+- Tarot Livre permanece com 78 cartas diretas, sem repetição, sem significados
+  e revelação exclusivamente pela Orbe.
+- Mesa do Tarot Livre permanece em 13 fileiras de 6.
+- Consultas permanecem em R$ 250, R$ 150, R$ 100 e R$ 50, com e-mail.
+- Cobrança real continua desligada.
+- Nenhum arquivo antigo deve ser apagado nesta instalação.
+
+PRÓXIMA MACROETAPA
+
+Macroetapa 6 — Biblioteca universal das 78 cartas.

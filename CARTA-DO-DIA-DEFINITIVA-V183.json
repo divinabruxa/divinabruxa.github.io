@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "183.0.0",
+  "release": "DIVINA-BRUXA-V183-CARTA-DO-DIA-DEFINITIVA",
+  "releaseDate": "2026-09-07",
+  "macroStage": 5,
+  "objective": "Entregar uma Carta do Dia estável, profunda, responsável, privada e utilizável offline, sem alterar o visual aprovado nem as áreas protegidas.",
+  "dailyCycle": {
+    "timeZone": "America/Sao_Paulo",
+    "dateBoundary": "00:00 Brasília",
+    "cardsPerCycle": 1,
+    "catalogCards": 78,
+    "orientation": "upright-only",
+    "selectionVersion": "deterministic-v183",
+    "sameCycleSameCard": true,
+    "collectiveSelectionSameAcrossDevices": true,
+    "accountScopedSelectionWhenSecureIdentityAvailable": true,
+    "fullDeckRotationDays": 78,
+    "legacySameDayRecordPreserved": true,
+    "selectionClaimedAsProofOfFate": false
+  },
+  "privacy": {
+    "intentionMaximumCharacters": 120,
+    "intentionStoredLocallyOnly": true,
+    "intentionAffectsCardSelection": false,
+    "intentionSharedAcrossDevices": false,
+    "rawAccountIdentifierStoredWithReading": false,
+    "accountIdentityReducedToLocalDigest": true,
+    "automaticThirdPartyDisclosure": false
+  },
+  "content": {
+    "source": "tarot-meanings.js",
+    "cardsWithDeepContent": 78,
+    "sections": [
+      "Energia do dia",
+      "Essência",
+      "Luz",
+      "Tensão",
+      "Amor",
+      "Relacionamentos",
+      "Carreira",
+      "Dinheiro",
+      "Espiritualidade",
+      "Conselho",
+      "Símbolos",
+      "Pergunta para o dia",
+      "Ação possível",
+      "Leitura responsável"
+    ],
+    "minorArcanaUseReducedFallback": false,
+    "deterministicPrediction": false,
+    "diagnosis": false,
+    "professionalAdviceReplacement": false
+  },
+  "continuity": {
+    "localResume": true,
+    "sameTabMemoryFallback": true,
+    "crossTabStorageEvent": true,
+    "storageEventPrefixAware": true,
+    "automaticBrasiliaMidnightReset": true,
+    "concurrentRevealKeepsExistingRecord": true
+  },
+  "offline": {
+    "newRitualAllowed": true,
+    "revealedCardReviewAllowed": true,
+    "coreAssets": [
+      "ritual-engine.js",
+      "daily-policy.js",
+      "daily-meaning-runtime.js",
+      "tarot-meanings.js",
+      "meaning-engine.js",
+      "tarot-data.js",
+      "tarot-image-runtime.js",
+      "tarot-atlas.webp"
+    ]
+  },
+  "interactionStates": ["Ready", "Intention", "Revealing", "Revealed", "Error"],
+  "accessibility": {
+    "threeStepsAnnounced": true,
+    "inputHasVisibleLabel": true,
+    "loadingUsesAriaBusy": true,
+    "statusUsesAriaLive": true,
+    "cardAlternativeTextIncludesOrientation": true,
+    "reducedMotionPreserved": true
+  },
+  "visualSafeguards": {
+    "homeCompositionChanged": false,
+    "orbArtworkChanged": false,
+    "dailySanctuaryArtworkChanged": false,
+    "tarotArtworkChanged": false,
+    "newStylesheets": 0
+  },
+  "protectedAreas": {
+    "tarotLivreFunctionalCodeChanged": false,
+    "tarotLivreCards": 78,
+    "tarotLivreOrientation": "upright-only",
+    "tarotLivreRepeats": false,
+    "tarotLivreMeaningsInsideFreeMode": false,
+    "consultationsFunctionalCodeChanged": false,
+    "consultationPricesBrl": [250, 150, 100, 50],
+    "consultationEmailRequired": true,
+    "realBillingEnabled": false,
+    "dnsChanged": false,
+    "productionBackendActivated": false
+  },
+  "discoverability": {
+    "publicPage": "carta-do-dia.html",
+    "canonical": "https://divinabruxa.com.br/carta-do-dia.html",
+    "searchDestinations": 130,
+    "sitemapUrls": 131,
+    "sitemapImageEntries": 78
+  },
+  "installation": {
+    "method": "manual-flat-upload-github",
+    "filesInPackage": 12,
+    "replace": [
+      "index.html",
+      "app.js",
+      "page-loader-v1.js",
+      "sw.js",
+      "daily-policy.js",
+      "daily-meaning-runtime.js",
+      "ritual-engine.js",
+      "carta-do-dia.html"
+    ],
+    "add": [
+      "CARTA-DO-DIA-DEFINITIVA-V183.json",
+      "QA-V183-CARTA-DO-DIA-DEFINITIVA.mjs",
+      "00-LEIA-PRIMEIRO-V183-CARTA-DO-DIA-DEFINITIVA.txt",
+      "ARQUIVOS-V183-SHA256.txt"
+    ],
+    "deleteOtherFiles": false,
+    "commitMessage": "Instala V183 Carta do Dia definitiva"
+  },
+  "nextMacroStage": 6,
+  "nextObjective": "Biblioteca universal das 78 cartas"
+}

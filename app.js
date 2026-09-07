@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — APLICATIVO V182 · TAROT LIVRE DEFINITIVO */
+/* DIVINA BRUXA — APLICATIVO V183 · CARTA DO DIA DEFINITIVA */
 
 import { CONFIG } from './config.js';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -8,7 +8,7 @@ import { bindMiniOrbs } from './mini-orb-engine.js?v=71';
 import { AuthClient } from './auth-client-v6.js?v=151';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=182';
+import { createPageLoader } from './page-loader-v1.js?v=183';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 
@@ -47,7 +47,7 @@ window.divinaAuth = authClient;
 safely('Orbes auxiliares', bindMiniOrbs);
 
 const loadingPortal = createOrbLoadingPortal();
-const pageLoader = createPageLoader({ config: CONFIG, go });
+const pageLoader = createPageLoader({ config: CONFIG, go, authClient });
 navigation.setBeforeEnter(pageLoader.prepare);
 safely('motor da Orbe', () => new RealityOrbEngine($('#orbCanvas'), {
   onOpen: () => pageLoader.go('tarot')

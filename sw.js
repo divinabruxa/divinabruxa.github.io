@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V52 · TAROT LIVRE OFFLINE V182 */
-const CACHE='divina-bruxa-v52-tarot-v182';
+/* DIVINA BRUXA — SERVICE WORKER V53 · CARTA DO DIA OFFLINE V183 */
+const CACHE='divina-bruxa-v53-daily-v183';
 
 const REQUIRED=[
   './',
@@ -63,6 +63,11 @@ const CORE=[
   './tarot-editorial-policy.js',
   './tarot-spiral-suction-v1.webp',
   './tarot-atlas.webp',
+  './ritual-engine.js',
+  './daily-policy.js',
+  './daily-meaning-runtime.js',
+  './tarot-meanings.js',
+  './meaning-engine.js',
   './skin-universal-v10.js',
   './skin-registry-v12.js',
   './portal-transition-v10.js',
