@@ -1,20 +1,23 @@
-/* DIVINA BRUXA — TEMPLO DAS TIRAGENS V139
+/* DIVINA BRUXA — TEMPLO DAS TIRAGENS DEFINITIVAS V185
    Revelação sequencial pela Orbe, leitura por posição e memória local protegida. */
 
 import { CARDS } from './tarot-data.js';
 import { store, escapeHTML } from './storage.js';
 import { cardImageMarkup, preloadCardImages } from './tarot-image-runtime.js';
 import { dailyMeaning } from './daily-meaning-runtime.js';
+import { cardPageHref } from './card-library-policy.js?v=184';
 import {
   SPREADS,
+  SPREAD_FILTERS,
   SPREAD_STORAGE_KEY,
   SPREAD_HISTORY_KEY,
   SPREAD_SCHEMA_VERSION,
   spreadById,
+  spreadsForFilter,
   positionsForSpread,
   normalizeSpreadSession
-} from './spreads-policy.js?v=139';
-import { synthesizeSpread } from './spread-synthesis.js';
+} from './spreads-policy.js?v=185';
+import { synthesizeSpread } from './spread-synthesis.js?v=185';
 import { AI_TAROT_SELECTION_KEY } from './ai-policy.js?v=141';
 import { JOURNAL_AI_SELECTION_KEY } from './journal-policy.js?v=140';
 
@@ -22,8 +25,11 @@ const safe = value => escapeHTML(value ?? '');
 const reducedMotion = () => globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
 const scrollBehavior = () => reducedMotion() ? 'auto' : 'smooth';
 const random = max => {
+  if (!Number.isInteger(max) || max < 1) return 0;
+  if (!globalThis.crypto?.getRandomValues) return Math.floor(Math.random() * max);
+  const ceiling = Math.floor(0x100000000 / max) * max;
   const value = new Uint32Array(1);
-  crypto.getRandomValues(value);
+  do globalThis.crypto.getRandomValues(value); while (value[0] >= ceiling);
   return value[0] % max;
 };
 const shuffledIds = () => {
@@ -71,6 +77,8 @@ export class SpreadsEngine {
     this.question = this.session?.question || '';
     this.justRevealed = -1;
     this.pendingSpreadId = '';
+    this.spreadFilter = 'all';
+    this.pendingDeleteHistoryId = '';
     this.renderIntention();
     this.renderMenu();
     if (this.session) {
@@ -117,7 +125,12 @@ export class SpreadsEngine {
 
   renderMenu() {
     if (!this.grid) return;
-    this.grid.innerHTML = SPREADS.map(item => {
+    const visibleSpreads = spreadsForFilter(this.spreadFilter);
+    const resume = this.session && !this.isComplete() ? `<aside class="spread-resume-banner">
+      <span aria-hidden="true">✦</span><div><small>TIRAGEM EM ANDAMENTO</small><strong>${safe(spreadById(this.session.spreadId)?.name)}</strong><p>${this.session.revealed}/${this.session.cardIds.length} posições reveladas neste aparelho.</p></div><button type="button" data-spread="${safe(this.session.spreadId)}">Retomar</button>
+    </aside>` : '';
+    const filters = `<nav class="spread-filters" aria-label="Filtrar métodos de tiragem">${SPREAD_FILTERS.map(filter => `<button type="button" data-spread-filter="${filter.id}" aria-pressed="${this.spreadFilter === filter.id}"><b>${safe(filter.label)}</b><small>${safe(filter.description)}</small></button>`).join('')}</nav>`;
+    this.grid.innerHTML = `${resume}${filters}${visibleSpreads.map(item => {
       const count = item.custom ? '1–12 cartas' : `${item.positions.length} ${item.positions.length === 1 ? 'carta' : 'cartas'}`;
       const active = this.session?.spreadId === item.id;
       return `<button type="button" class="spread-choice${active ? ' active' : ''}" data-spread="${item.id}"${item.premium ? ' data-premium="true"' : ''} aria-pressed="${active}">
@@ -125,8 +138,14 @@ export class SpreadsEngine {
         <span class="spread-choice-copy"><small>${safe(item.category)}</small><strong>${safe(item.name)}</strong><em>${safe(item.description)}</em></span>
         <span class="spread-choice-count">${count}${item.premium ? '<b>PREMIUM</b>' : ''}</span>
       </button>`;
-    }).join('');
+    }).join('')}`;
     this.grid.onclick = event => {
+      const filter = event.target.closest('[data-spread-filter]');
+      if (filter) {
+        this.spreadFilter = filter.dataset.spreadFilter;
+        this.renderMenu();
+        return;
+      }
       const button = event.target.closest('[data-spread]');
       if (!button) return;
       this.requestChoice(button.dataset.spread);
@@ -296,21 +315,28 @@ export class SpreadsEngine {
           <section><h4>Luz</h4><p>${safe(meaning.light)}</p></section>
           <section><h4>Ponto de atenção</h4><p>${safe(meaning.tension)}</p></section>
           <section><h4>Conselho prático</h4><p>${safe(meaning.advice)}</p></section>
+          <section><h4>Leitura responsável</h4><p>${safe(meaning.responsibleNotice)}</p></section>
         </div>
         <blockquote>${safe(meaning.reflectionQuestion)}</blockquote>
+        <a class="spread-library-link" href="${cardPageHref(card)}">Abrir as 15 camadas desta carta na Biblioteca →</a>
       </div>
     </article>`;
   }
 
-  synthesisMarkup(items) {
+  synthesisMarkup(items, target) {
     if (!this.isComplete()) return '';
-    const synthesis = synthesizeSpread(items);
+    const synthesis = synthesizeSpread(items, { question: this.session.question, tone: target?.tone });
     return `<article class="spread-synthesis">
       <span>SÍNTESE DA TIRAGEM</span>
       <h3>O desenho que as cartas formam juntas.</h3>
-      <p>${safe(synthesis.opening)}</p>
-      <p>${safe(synthesis.pattern)}</p>
-      <p>${safe(synthesis.integration)}</p>
+      <div class="spread-synthesis-metrics"><span><b>${synthesis.majorCount}</b>Maiores</span><span><b>${synthesis.courtCount}</b>Corte</span><span><b>${safe(synthesis.dominantElement)}</b>Elemento</span><span><b>${safe(synthesis.dominantSuit)}</b>Campo</span></div>
+      <section><h4>Escala</h4><p>${safe(synthesis.opening)}</p></section>
+      <section><h4>Padrões</h4><p>${safe(synthesis.pattern)}</p></section>
+      <section><h4>Movimento</h4><p>${safe(synthesis.movement)}</p></section>
+      <section><h4>Ponte entre posições</h4><p>${safe(synthesis.bridge)}</p></section>
+      <section><h4>Integração</h4><p>${safe(synthesis.integration)}</p></section>
+      <blockquote>${safe(synthesis.action)}</blockquote>
+      <aside><b>LEITURA RESPONSÁVEL</b><p>${safe(synthesis.responsibleNotice)}</p></aside>
     </article>`;
   }
 
@@ -346,7 +372,7 @@ export class SpreadsEngine {
       </div>
       ${orb}
       ${this.meaningMarkup(target, activeIndex)}
-      ${this.synthesisMarkup(items)}
+      ${this.synthesisMarkup(items, target)}
       <div class="spread-actions spread-reading-actions">
         ${complete ? '<button type="button" class="primary" data-save-spread>Guardar no Diário</button><button type="button" class="text-button" data-open-ai>Refletir com a Orbe IA · opcional</button>' : ''}
         <button type="button" class="text-button" data-new-spread>${complete ? 'Escolher nova tiragem' : 'Recomeçar ou trocar'}</button>
@@ -461,10 +487,10 @@ export class SpreadsEngine {
   diaryEntry(session) {
     const target = spreadById(session.spreadId);
     const items = session.cardIds.map((id, index) => ({ card: CARDS[id], position: session.positions[index] }));
-    const synthesis = synthesizeSpread(items);
+    const synthesis = synthesizeSpread(items, { question: session.question, tone: target?.tone });
     return {
       title: `Tiragem — ${target?.name || 'Tarot'}`,
-      text: `${items.map(item => `${item.position}: ${item.card.name} (direta)`).join('\n')}\n\n${synthesis.opening} ${synthesis.pattern} ${synthesis.integration}`,
+      text: `${items.map(item => `${item.position}: ${item.card.name} (direta)`).join('\n')}\n\n${synthesis.opening} ${synthesis.pattern} ${synthesis.movement} ${synthesis.bridge} ${synthesis.integration}\n\n${synthesis.action}`,
       question: session.question || 'O que esta tiragem ilumina no meu momento?',
       tags: ['tiragem', target?.name, synthesis.dominantSuit].filter(Boolean).join(', '),
       mood: 'Reflexiva',
@@ -479,6 +505,15 @@ export class SpreadsEngine {
     this.onSave?.(this.diaryEntry(session));
   }
 
+  historyDetails(entry, target) {
+    const items = entry.cardIds.map((id, index) => ({ card: CARDS[id], position: entry.positions[index] })).filter(item => item.card);
+    const synthesis = synthesizeSpread(items, { question: entry.question, tone: target?.tone });
+    return `<details class="spread-history-details"><summary>Reabrir leitura completa</summary>
+      <ol>${items.map(({ card, position }) => `<li><span>${safe(position)}</span><a href="${cardPageHref(card)}">${safe(card.name)} · direta</a></li>`).join('')}</ol>
+      <div><h5>Síntese preservada</h5><p>${safe(synthesis.opening)} ${safe(synthesis.pattern)}</p><p>${safe(synthesis.movement)}</p><p>${safe(synthesis.integration)}</p><blockquote>${safe(synthesis.action)}</blockquote></div>
+    </details>`;
+  }
+
   renderHistory() {
     if (!this.historyRoot) return;
     const entries = this.history;
@@ -491,8 +526,10 @@ export class SpreadsEngine {
           <div class="spread-history-top"><span class="spread-history-sigil" aria-hidden="true">${target?.sigil || '✦'}</span><div><small>${safe(formatDate(entry.completedAt))}</small><h4>${safe(target?.name || 'Tiragem')}</h4></div><button type="button" class="spread-favorite${entry.favorite ? ' active' : ''}" data-favorite-history aria-pressed="${entry.favorite}" aria-label="${entry.favorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}">♡</button></div>
           ${entry.question ? `<p class="spread-history-question">${safe(entry.question)}</p>` : ''}
           <p class="spread-history-cards">${cards.map(safe).join(' · ')}</p>
+          ${this.historyDetails(entry, target)}
           <label>ETIQUETAS<input type="text" data-history-tags maxlength="180" value="${safe(entry.tags.join(', '))}" placeholder="amor, decisão, trabalho"></label>
-          <button type="button" class="text-button" data-history-diary>Guardar também no Diário</button>
+          <div class="spread-history-actions"><button type="button" class="text-button" data-history-diary>Guardar no Diário</button><button type="button" class="text-button danger" data-delete-history>Excluir</button></div>
+          ${this.pendingDeleteHistoryId === entry.id ? `<div class="spread-history-delete" role="alert"><p>Excluir esta tiragem somente deste aparelho?</p><button type="button" data-cancel-delete>Cancelar</button><button type="button" data-confirm-delete>Excluir definitivamente</button></div>` : ''}
         </article>`;
       }).join('')}</div>` : '<p class="spread-history-empty">Quando uma tiragem for concluída, ela aparecerá aqui com favoritos e etiquetas.</p>'}
       <p class="spread-history-privacy">Memórias locais: não são publicadas nem enviadas automaticamente.</p>
@@ -514,6 +551,21 @@ export class SpreadsEngine {
       }
       if (event.target.closest('[data-history-diary]')) {
         this.saveToDiary(entry);
+      }
+      if (event.target.closest('[data-delete-history]')) {
+        this.pendingDeleteHistoryId = entry.id;
+        this.renderHistory();
+      }
+      if (event.target.closest('[data-cancel-delete]')) {
+        this.pendingDeleteHistoryId = '';
+        this.renderHistory();
+      }
+      if (event.target.closest('[data-confirm-delete]')) {
+        this.history = this.history.filter(item => item.id !== entry.id);
+        this.pendingDeleteHistoryId = '';
+        this.saveHistory();
+        this.renderHistory();
+        this.notify('Tiragem excluída deste aparelho.');
       }
     };
     this.historyRoot.onchange = event => {

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "185.0.0",
+  "macroStage": 7,
+  "title": "Tiragens definitivas",
+  "catalog": {
+    "methods": 15,
+    "availableWithoutBilling": 14,
+    "filters": {
+      "all": 15,
+      "quick": 5,
+      "themes": 5,
+      "deep": 3,
+      "authorAndPremium": 2
+    },
+    "celticCrossPositions": 10,
+    "customTableMinimum": 1,
+    "customTableMaximum": 12,
+    "royalTablePositions": 78,
+    "royalTableRows": 13,
+    "royalTableColumns": 6
+  },
+  "reading": {
+    "orientation": "upright-only",
+    "uniqueCardsPerSession": true,
+    "revealOnlyByOrb": true,
+    "questionStoredLocally": true,
+    "questionSentToAIWithoutConsent": false,
+    "deepSectionsPerPosition": 6,
+    "linksToUniversalLibrary": true
+  },
+  "synthesis": {
+    "layers": ["scale", "patterns", "movement", "positionBridge", "integration", "action", "responsibleNotice"],
+    "metrics": ["majorArcana", "courtCards", "dominantElement", "dominantSuit", "repeatedNumber"],
+    "claimsFixedDestiny": false,
+    "adaptsResponsibleNoticeByTheme": true
+  },
+  "continuity": {
+    "activeSessionAutosave": true,
+    "activeSessionResume": true,
+    "completedHistoryLocal": true,
+    "completedReadingCanReopen": true,
+    "favoriteAndTags": true,
+    "individualDeleteWithConfirmation": true,
+    "maximumHistoryEntries": 20
+  },
+  "offline": {
+    "engine": true,
+    "policy": true,
+    "synthesis": true,
+    "catalogAndMeanings": true,
+    "publicGuide": true,
+    "realBillingRequired": false
+  },
+  "premiumBoundary": {
+    "royalTableRemainsLocked": true,
+    "automaticBillingActivated": false,
+    "humanConsultationRemainsSeparate": true
+  },
+  "visualSafeguards": {
+    "homeCompositionChanged": false,
+    "orbArtworkChanged": false,
+    "freeTarotChanged": false,
+    "dailyCardChanged": false,
+    "cardArtworkChanged": false
+  },
+  "protectedAreas": {
+    "freeTarot": { "cards": 78, "uprightOnly": true, "noRepeats": true, "meaningsInReveal": false, "table": "13x6", "browserHaptics": false },
+    "dailyCard": { "timeZone": "America/Sao_Paulo", "cardsPerCycle": 1, "catalogCards": 78 },
+    "library": { "cards": 78, "languages": ["pt-BR", "en", "es"], "comparisonStored": false },
+    "consultations": { "pricesBRL": [250, 150, 100, 50], "emailRequired": true, "automaticBilling": false }
+  },
+  "installation": {
+    "filesInPackage": 13,
+    "replace": ["index.html", "app.js", "page-loader-v1.js", "sw.js", "spreads-policy.js", "spread-synthesis.js", "spreads-engine.js", "tiragens-de-tarot.html"],
+    "add": ["tiragens-definitivas-v185.css", "TIRAGENS-DEFINITIVAS-V185.json", "QA-V185-TIRAGENS-DEFINITIVAS.mjs", "00-LEIA-PRIMEIRO-V185-TIRAGENS-DEFINITIVAS.txt", "ARQUIVOS-V185-SHA256.txt"]
+  },
+  "nextObjective": "Macroetapa 8 — Escola do Tarot completa"
+}

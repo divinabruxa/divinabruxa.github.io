@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.19 · BIBLIOTECA UNIVERSAL V184
+/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.20 · TIRAGENS DEFINITIVAS V185
    Estilos e motores nascem sob demanda; toda falha oferece tentativa e retorno seguro. */
 
 import {
@@ -182,7 +182,7 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
       return new SchoolEngine($('#schoolApp'));
     },
     spreads: async () => {
-      const { SpreadsEngine } = await import('./spreads-engine.js?v=141');
+      const { SpreadsEngine } = await import('./spreads-engine.js?v=185');
       return new SpreadsEngine({
         grid: $('#spreadGrid'),
         result: $('#spreadResult'),

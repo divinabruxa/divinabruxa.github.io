@@ -1,9 +1,29 @@
-/* DIVINA BRUXA — POLÍTICA DO TEMPLO DAS TIRAGENS V139
+/* DIVINA BRUXA — POLÍTICA DO TEMPLO DAS TIRAGENS V185
    Uma única orientação, cartas únicas e sessões retomáveis neste aparelho. */
 
 export const SPREAD_STORAGE_KEY = 'spread-session-v5';
 export const SPREAD_HISTORY_KEY = 'spread-history-v139';
-export const SPREAD_SCHEMA_VERSION = 2;
+export const SPREAD_SCHEMA_VERSION = 3;
+
+export const SPREAD_FILTERS = Object.freeze([
+  Object.freeze({ id: 'all', label: 'Todas', description: '15 métodos' }),
+  Object.freeze({ id: 'quick', label: 'Essenciais', description: '1 a 5 cartas' }),
+  Object.freeze({ id: 'themes', label: 'Por tema', description: 'amor, escolhas e vida prática' }),
+  Object.freeze({ id: 'deep', label: 'Profundas', description: '10 a 12 posições' }),
+  Object.freeze({ id: 'author', label: 'Autoral e Premium', description: 'mesas especiais' })
+]);
+
+export function spreadFilterId(target) {
+  if (!target) return '';
+  if (target.custom || target.premium) return 'author';
+  if (target.category === 'Profunda') return 'deep';
+  if (['Escolhas', 'Amor', 'Trabalho', 'Dinheiro', 'Espiritualidade'].includes(target.category)) return 'themes';
+  return 'quick';
+}
+
+export function spreadsForFilter(filterId = 'all') {
+  return filterId === 'all' ? [...SPREADS] : SPREADS.filter(target => spreadFilterId(target) === filterId);
+}
 
 const spread = value => Object.freeze({ premium: false, custom: false, ...value });
 

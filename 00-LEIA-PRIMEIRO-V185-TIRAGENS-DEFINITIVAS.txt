@@ -1,0 +1,40 @@
+DIVINA BRUXA — V185 — TIRAGENS DEFINITIVAS
+============================================================
+
+OBJETIVO
+Concluir a Macroetapa 7 do Plano Supremo com tiragens profundas,
+retomáveis, responsáveis e utilizáveis também offline.
+
+O QUE MUDA
+- 15 métodos organizados em cinco filtros.
+- Faixa clara para retomar uma tiragem em andamento.
+- Embaralhamento seguro sem viés de módulo quando a API criptográfica
+  está disponível.
+- Seis camadas profundas em cada carta/posição, incluindo leitura
+  responsável e link para a Biblioteca Universal.
+- Síntese em sete camadas: escala, padrões, movimento, ponte entre
+  posições, integração, ação possível e limite responsável.
+- Métricas de Maiores, Corte, elemento e campo predominantes.
+- Histórico local permite reabrir a leitura completa.
+- Exclusão individual com confirmação.
+- Motor, políticas, síntese e guia público disponíveis offline.
+
+LIMITES PRESERVADOS
+- Cartas sempre diretas e sem repetição na tiragem.
+- Pergunta privada no aparelho e nunca enviada silenciosamente à IA.
+- Mesa Real automática permanece Premium e bloqueada até existir
+  validação segura da assinatura; nenhuma cobrança é ativada.
+- Mesa Real do aplicativo continua diferente da consulta humana.
+- Tarot Livre, Carta do Dia, Biblioteca, Home, Orbes e artes intactos.
+- Consultas mantêm R$ 250, R$ 150, R$ 100 e R$ 50, e-mail obrigatório
+  e nenhuma cobrança automática.
+
+INSTALAÇÃO PELO IPHONE
+1. Descompacte o ZIP.
+2. Na raiz do ramo main, envie os 13 arquivos soltos.
+3. Aceite substituir os 8 arquivos existentes.
+4. Não envie o ZIP, não crie pasta e não apague arquivos antigos.
+5. Commit sugerido: Instala V185 Tiragens Definitivas
+
+PRÓXIMA ETAPA
+Macroetapa 8 — Escola do Tarot completa.
