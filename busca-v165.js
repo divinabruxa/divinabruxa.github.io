@@ -35,6 +35,7 @@ const PAGES = Object.freeze([
   ['Como embaralhar cartas de Tarot', 'como-embaralhar-cartas-de-tarot.html', '4 métodos', 'aprender', 'Guia acessível para embaralhar 78 cartas com mistura circular na mesa, pacotes pelas mãos, intercalação apoiada e distribuição em montes; corte, cartas grandes, mãos pequenas, mobilidade, conservação, posição direta e prática de 90 segundos. shuffle riffle quantas vezes sete limpar consagrar carta caiu invertida baralho grande cortar baralho'],
   ['Plano de estudo do Tarot em 30 dias', 'plano-de-estudo-do-tarot-em-30-dias.html', '30 dias · 10–30 min', 'aprender', 'Plano gratuito e interativo para estudar Tarot em 30 dias com sessões de 10, 20 ou 30 minutos, revisão espaçada, prática de memória, Arcanos Maiores, Arcanos Menores, naipes, números, figuras da corte, símbolos, perguntas, tiragens, combinações e ética. como cronograma rotina curso aprender memorizar decorar cartas caderno iniciante'],
   ['Diário de Tarot', 'diario-de-tarot.html', '4 modelos de ficha', 'aprender', 'Guia para criar um Diário de Tarot com gerador local de fichas para uma carta, três cartas, estudo e revisão; modelos essencial e completo, copiar, imprimir, caderno, registro de leitura, observação, hipótese, síntese, privacidade e aprendizado. como fazer anotar escrever revisar leituras journaling journal celular papel'],
+  ['Como limpar e consagrar um baralho de Tarot', 'como-limpar-consagrar-baralho-de-tarot.html', 'Guia de cuidado', 'aprender', 'Separe limpeza física, consagração simbólica e guarda; monte uma rotina local segura e evite sol direto, água, umidade, fumaça, cinzas, sal, cristais sobre as cartas, óleos, álcool, calor e pressão. como limpar energizar consagrar guardar proteger cuidar baralho tarot novo primeira leitura outra pessoa tocar incenso lua ritual caixa conservação'],
   ['Tiragem de Uma Carta', 'tiragem-de-uma-carta.html', '1 posição', 'tiragens', 'Mensagem central, pergunta, observação e reflexão prática.'],
   ['Tiragem de Três Cartas', 'tiragem-de-tres-cartas.html', '3 posições', 'tiragens', 'Estruturas, relações entre as cartas e síntese final. passado presente tendência'],
   ['Cruz Celta', 'cruz-celta-no-tarot.html', '10 posições', 'tiragens', 'Presente, desafio, base, passado, possibilidade, próximo movimento, atitude, ambiente, esperanças e síntese.'],
@@ -87,7 +88,7 @@ const entries = Object.freeze([
     title, url, kind, category, description: displayDescription(description),
     icon: category === 'tiragens' ? '✧' : category === 'aprender' ? '▤' : '◉',
     searchable: normalize(`${title} ${kind} ${description}`),
-    featured: [1,2,3,4,5,6,14,15,26,27,28,29,30,31,32,33].includes(index)
+    featured: [1,2,3,4,5,6,14,15,26,27,28,29,30,31,32,33,34].includes(index)
   }))
 ]);
 

@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "174.0.0",
+  "release": "DIVINA-BRUXA-V174-CUIDAR-BARALHO-TAROT",
+  "date": "2026-09-07",
+  "status": "ready-for-manual-install",
+  "purpose": "Ensinar a diferença entre conservação física, ritual simbólico e guarda de um baralho de Tarot, com orientações seguras e sem superstição obrigatória.",
+  "guide": {
+    "page": "como-limpar-consagrar-baralho-de-tarot.html",
+    "stylesheet": "cuidar-baralho-tarot-v174.css?v=174",
+    "script": "cuidar-baralho-tarot-v174.js?v=174",
+    "routineGoals": ["primeiro uso", "entre leituras", "guardar e preservar"],
+    "routineTimesMinutes": [1, 5],
+    "routineCombinations": 6,
+    "safeSequenceSteps": 5,
+    "differencesExplained": ["cuidado físico", "ritual simbólico", "guarda"],
+    "materialsToAvoid": 6,
+    "symbolicAlternatives": 4,
+    "storageChecks": 8,
+    "faqQuestions": 6,
+    "institutionalSources": 3,
+    "structuredDataTypes": ["Article", "HowTo", "FAQPage"]
+  },
+  "routinePrivacy": {
+    "runsLocally": true,
+    "registrationRequired": false,
+    "networkRequests": false,
+    "answersStored": false,
+    "cookiesUsed": false,
+    "analyticsEventsAdded": false,
+    "personalTextCollected": false
+  },
+  "editorialMethod": {
+    "consecrationRequired": false,
+    "physicalCareSeparatedFromSymbolicRitual": true,
+    "sunlightRecommended": false,
+    "liquidsRecommended": false,
+    "smokeContactRecommended": false,
+    "saltContactRecommended": false,
+    "crystalWeightRecommended": false,
+    "oilsOrAlcoholRecommended": false,
+    "manufacturerInstructionsPrioritized": true,
+    "professionalConservatorRecommendedForValuableDamage": true
+  },
+  "references": [
+    {"institution":"Library of Congress","title":"Care, Handling and Storage of Works on Paper","url":"https://www.loc.gov/preservation/care/paper.html"},
+    {"institution":"Smithsonian Institution Archives","title":"How do I keep old family papers preserved?","url":"https://siarchives.si.edu/what-we-do/forums/collections-care-guidelines-resources/how-do-i-keep-old-family-papers-preserved"},
+    {"institution":"Library of Congress","title":"Limiting Light Damage","url":"https://www.loc.gov/preservation/care/light.html"}
+  ],
+  "searchIntegration": {
+    "searchScript": "busca-v165.js?v=174",
+    "indexedDestinationsBefore": 125,
+    "indexedDestinationsAfter": 126,
+    "categoryCounts": {"cartas":78,"tiragens":14,"aprender":24,"portal":10},
+    "guideFeatured": true,
+    "exampleQueries": ["como limpar baralho", "consagrar tarot", "guardar cartas", "incenso", "outra pessoa tocar"]
+  },
+  "discoverability": {
+    "linkedFrom": ["como-escolher-um-baralho-de-tarot.html", "como-embaralhar-cartas-de-tarot.html", "guias-para-comecar.html", "escola-do-tarot.html", "buscar.html"],
+    "sitemapUrlsBefore": 126,
+    "sitemapUrlsAfter": 127,
+    "sitemapImageEntries": 78,
+    "newSitemapUrls": 1
+  },
+  "accessibility": {
+    "singleH1": true,
+    "skipLink": true,
+    "nativeFieldsetsAndLegends": true,
+    "requiredRadioGroups": true,
+    "liveResult": true,
+    "copyStatusLive": true,
+    "nativeFaqDetails": true,
+    "responsiveSingleColumn": true,
+    "reducedMotionSupported": true,
+    "printStylesIncluded": true
+  },
+  "reuse": {
+    "portalStylesheet": "seo-portal-v154.css?v=154",
+    "existingImage": "tarot-atlas.webp",
+    "existingImageWidth": 3000,
+    "existingImageHeight": 3600,
+    "newImagesAdded": false,
+    "socialPreviewImageAdded": false
+  },
+  "safeguards": {
+    "indexChanged": false,
+    "tarotLivreChanged": false,
+    "tarotLivreCards": 78,
+    "tarotLivreOrientation": "upright-only",
+    "tarotLivreMeaningsInsideFreeMode": false,
+    "tarotLivreRepeats": false,
+    "mesaRealRows": 13,
+    "mesaRealColumns": 6,
+    "consultationsFunctionalCodeChanged": false,
+    "consultationPricesBrl": [250, 150, 100, 50],
+    "consultationEmailRequired": true,
+    "ownerEmail": "orbedasrealidades@hotmail.com",
+    "realBillingEnabled": false,
+    "resendConfigured": false,
+    "unconfirmedPersonalNamePublished": false
+  },
+  "integrityBase": {
+    "sitemapV173Sha256": "a6db23e95fbafd5d1f52b81a45c6336df9cc95979b2448e40b99e907b336cfa0",
+    "searchPageV173Sha256": "170a405eb674bf9be23b91ec17eb5026b02c664ba0cad97a9091998008d7df88",
+    "searchScriptV173Sha256": "f99b2071063b97c03b6bfcf0ad8d7cbcb4be10e616125d40bce0b53d886d774f",
+    "choicePageV173Sha256": "ca04fea54bf5dead1bdf7cd95cb05fffaf2b439fddd5c6b71f7f9caa134579a1",
+    "shufflePageV173Sha256": "3cc2117f4598bb79cbe23ad1dd2a3395297e182967878048ee7a5b9cc57efab4",
+    "guidesPageV173Sha256": "a839de8f747903ac3e0df037bd71eaed513e9e08da2b15a58a42f9f22de3106c",
+    "schoolPageV173Sha256": "e21a60c93aac0bc5d0d1f904e9173aad3a0b0575706063bae2875ffbbceaae2c"
+  },
+  "installation": {
+    "method": "manual-flat-upload-github",
+    "filesInPackage": 14,
+    "replace": ["sitemap.xml", "buscar.html", "busca-v165.js", "como-escolher-um-baralho-de-tarot.html", "como-embaralhar-cartas-de-tarot.html", "guias-para-comecar.html", "escola-do-tarot.html"],
+    "add": ["como-limpar-consagrar-baralho-de-tarot.html", "cuidar-baralho-tarot-v174.css", "cuidar-baralho-tarot-v174.js", "00-LEIA-PRIMEIRO-V174-CUIDAR-BARALHO-TAROT.txt", "CUIDAR-BARALHO-TAROT-V174.json", "QA-V174-CUIDAR-BARALHO-TAROT.mjs", "ARQUIVOS-V174-SHA256.txt"],
+    "deleteOtherFiles": false,
+    "commitMessage": "Instala V174 cuidado do baralho"
+  }
+}

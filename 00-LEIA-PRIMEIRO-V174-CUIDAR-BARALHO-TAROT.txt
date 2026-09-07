@@ -1,0 +1,77 @@
+DIVINA BRUXA — V174 — CUIDAR DO BARALHO DE TAROT
+Data: 07/09/2026
+
+Esta versão adiciona um guia completo e responsável:
+
+- Página: como-limpar-consagrar-baralho-de-tarot.html.
+- Diferença clara entre cuidado físico, ritual simbólico e guarda.
+- Orientador privado com 3 objetivos e 2 durações: 6 rotinas possíveis.
+- Rotinas de 1 ou 5 minutos, com botão para copiar.
+- Sequência segura em 5 passos.
+- 6 materiais ou contatos que podem danificar cartas.
+- 4 alternativas simbólicas sem contato prejudicial.
+- Checklist com 8 cuidados de armazenamento.
+- Orientação para umidade, mofo e dano importante.
+- 6 dúvidas frequentes.
+- 3 fontes institucionais de conservação de papel e luz.
+- Busca completa ampliada de 125 para 126 destinos.
+- Nenhuma superstição é apresentada como obrigação.
+- Nenhuma resposta do orientador é enviada ou guardada.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+
+1. Descompacte o ZIP no aplicativo Arquivos.
+2. Abra a raiz do repositório divinabruxa.github.io no ramo main.
+3. Toque em Add file e Upload files.
+4. Selecione os 14 arquivos soltos, não o ZIP.
+5. Substitua estes 7 arquivos:
+   - sitemap.xml
+   - buscar.html
+   - busca-v165.js
+   - como-escolher-um-baralho-de-tarot.html
+   - como-embaralhar-cartas-de-tarot.html
+   - guias-para-comecar.html
+   - escola-do-tarot.html
+6. Adicione os outros 7 arquivos.
+7. Não apague nenhum arquivo anterior.
+8. Confirme o commit com a mensagem: Instala V174 cuidado do baralho
+
+CONFERÊNCIA PÚBLICA
+
+https://divinabruxa.com.br/como-limpar-consagrar-baralho-de-tarot.html
+https://divinabruxa.com.br/como-escolher-um-baralho-de-tarot.html
+https://divinabruxa.com.br/como-embaralhar-cartas-de-tarot.html
+https://divinabruxa.com.br/guias-para-comecar.html
+https://divinabruxa.com.br/escola-do-tarot.html
+https://divinabruxa.com.br/buscar.html
+
+TESTES RÁPIDOS
+
+- Escolha Primeiro uso e 1 minuto; toque em Criar rotina.
+- Confira o título, os 3 passos e o botão Copiar rotina.
+- Escolha Guardar e preservar e 5 minutos; confira os 5 passos.
+- Toque em Limpar escolhas e confirme que o resultado desaparece.
+- Na busca, digite: como limpar baralho
+- Na busca, digite: consagrar tarot
+- Na busca, digite: guardar cartas
+
+PRESERVADO
+
+- Home intacta.
+- Tarot Livre intacto: 78 cartas oficiais, diretas, sem repetição e sem
+  significados durante a revelação; Mesa Real 13 × 6.
+- Consultas intactas: R$ 250, R$ 150, R$ 100 e R$ 50; e-mail obrigatório.
+- Cobrança real desligada e Resend ainda adiado.
+- Nenhuma imagem nova ou imagem social foi adicionada.
+- Nenhum nome pessoal foi publicado.
+
+CONTROLE
+
+- Guia: 3 diferenças, 5 passos, 6 riscos, 4 alternativas e 8 cuidados.
+- Orientador: 6 rotinas locais e botão de cópia.
+- Fontes: 3 referências institucionais.
+- Busca: 126 destinos únicos.
+- Sitemap: 127 URLs de página e 78 entradas de imagem.
+- QA: QA-V174-CUIDAR-BARALHO-TAROT.mjs.
+- Integridade: ARQUIVOS-V174-SHA256.txt.
+- Contrato: CUIDAR-BARALHO-TAROT-V174.json.
