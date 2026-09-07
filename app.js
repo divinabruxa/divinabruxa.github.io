@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — APLICATIVO V180 · ROTAS SOBERANAS */
+/* DIVINA BRUXA — APLICATIVO V182 · TAROT LIVRE DEFINITIVO */
 
 import { CONFIG } from './config.js';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -8,7 +8,7 @@ import { bindMiniOrbs } from './mini-orb-engine.js?v=71';
 import { AuthClient } from './auth-client-v6.js?v=151';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=180';
+import { createPageLoader } from './page-loader-v1.js?v=182';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 

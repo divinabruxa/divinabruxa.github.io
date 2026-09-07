@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V51 · ROTAS SOBERANAS V180 */
-const CACHE='divina-bruxa-v51-rotas-v180';
+/* DIVINA BRUXA — SERVICE WORKER V52 · TAROT LIVRE OFFLINE V182 */
+const CACHE='divina-bruxa-v52-tarot-v182';
 
 const REQUIRED=[
   './',
@@ -54,6 +54,15 @@ const CORE=[
   './auth-client-v6.js',
   './visual-guard-v6.js',
   './tarot-experience-v6.js',
+  './tarot-data.js',
+  './storage.js',
+  './tarot-engine.js',
+  './tarot-image-runtime.js',
+  './tarot-session.js',
+  './tarot-continuity.js',
+  './tarot-editorial-policy.js',
+  './tarot-spiral-suction-v1.webp',
+  './tarot-atlas.webp',
   './skin-universal-v10.js',
   './skin-registry-v12.js',
   './portal-transition-v10.js',

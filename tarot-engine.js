@@ -1,12 +1,12 @@
-/* DIVINA BRUXA — MOTOR DO TAROT LIVRE · CARREGAMENTO CELESTIAL V148
-   Prévia instantânea, arte integral preparada, setas determinísticas e nenhum gesto.
+/* DIVINA BRUXA — TAROT LIVRE DEFINITIVO · V182
+   Revelação exclusiva pela Orbe, 78 cartas diretas sem repetição e continuidade resiliente.
 */
 import { CARDS } from './tarot-data.js';
 import { store } from './storage.js';
-import { cardImageMarkup, preloadCardImages, prepareCardImage } from './tarot-image-runtime.js?v=148';
-import { TarotSessionCoordinator } from './tarot-continuity.js?v=84';
-import { DECK_SIZE, compareTarotStates, createTarotBackup, createTarotState, drawNextCard, normalizeTarotState, resetTarotState, restoreTarotBackup, shuffleRemainingCards } from './tarot-session.js?v=84';
-import { freeCardAriaLabel, freeCardLabel, isFreeTarotCard, tarotEditorialStatus } from './tarot-editorial-policy.js?v=85';
+import { cardImageMarkup, preloadCardImages, prepareCardImage } from './tarot-image-runtime.js?v=182';
+import { TarotSessionCoordinator } from './tarot-continuity.js?v=182';
+import { DECK_SIZE, TAROT_MAX_BACKUP_BYTES, compareTarotStates, createTarotBackup, drawNextCard, normalizeTarotState, resetTarotState, restoreTarotBackup, shuffleRemainingCards } from './tarot-session.js?v=182';
+import { freeCardAriaLabel, freeCardLabel, isFreeTarotCard, tarotEditorialStatus } from './tarot-editorial-policy.js?v=182';
 
 const STORAGE_KEY = 'free-tarot';
 const STORAGE_EVENT_SUFFIX = `:${STORAGE_KEY}`;
@@ -16,6 +16,13 @@ const SUCTION_IN_MS = 112;
 const IMAGE_REVEAL_BUDGET_MS = 480;
 const IMAGE_PREPARE_BUDGET_MS = 1800;
 const SUCTION_CLASSES = ['suction-out', 'suction-hold', 'suction-in', 'suction-nav-out', 'suction-nav-hold', 'suction-nav-in'];
+export const TAROT_INTERACTION_STATES = Object.freeze({
+  READY: 'Ready',
+  TOUCHED: 'Touched',
+  REVEALING: 'Revealing',
+  DISABLED: 'Disabled',
+  ERROR: 'Error'
+});
 const pause = milliseconds => new Promise(resolve => globalThis.setTimeout(resolve, Math.max(0, milliseconds)));
 
 function announce(message) {
@@ -24,7 +31,7 @@ function announce(message) {
 
 function installOfficialStructure(root) {
   root.classList.add('tarot-livre-official');
-  root.dataset.tarotLivre = 'celestial-loading-v148';
+  root.dataset.tarotLivre = 'definitivo-v182';
   document.documentElement.dataset.tarotMotion = 'suction-v1';
 
   const eyebrow = root.querySelector('.section-head .eyebrow');
@@ -92,20 +99,60 @@ export class FreeTarot {
     this.backupButton = root.querySelector('#saveTableBackup'); this.restoreButton = root.querySelector('#restoreTableBackup'); this.backupInput = root.querySelector('#tableBackupInput'); this.saveState = root.querySelector('#tableSaveState');
     this.editorialState = root.querySelector('#tarotEditorialState');
     this.selected = -1; this.lightboxIndex = -1; this.lightboxTrigger = null; this.compactView = true; this.drawing = false; this.releaseTimer = 0; this.toastTimer = 0; this.toastToken = 0; this.scrollFrame = 0; this.lastTableScrollAt = -Infinity;
+    this.storageBlocked = false; this.persistenceWarningShown = false;
     this.navigationAnimation = null; this.navigationToken = 0;
     this.root.dataset.revealPhase = 'idle';
     this.coordinator = new TarotSessionCoordinator({ storage: this.storage, key: STORAGE_KEY });
-    this.state = normalizeTarotState(this.storage.get(STORAGE_KEY, null)) ?? createTarotState();
+    this.state = this.coordinator.latest();
     this.selected = this.state.revealed.length - 1;
     this.persist(); preloadCardImages(this.state.waiting, 3); this.bind(); this.updateViewMode(); this.render();
   }
 
   persist() {
-    try { this.storage.set(STORAGE_KEY, this.state); return true; }
-    catch { announce('A mesa continua aberta, mas este navegador bloqueou a memória da sessão.'); return false; }
+    const { persisted } = this.coordinator.remember(this.state);
+    this.storageBlocked = !persisted;
+    if (!persisted) this.warnPersistence();
+    return persisted;
+  }
+
+  warnPersistence() {
+    if (this.saveState) this.saveState.textContent = 'Mesa preservada nesta aba · memória permanente bloqueada';
+    if (this.persistenceWarningShown) return;
+    this.persistenceWarningShown = true;
+    announce('A mesa continua segura nesta aba, mas este navegador bloqueou a retomada depois de fechar.');
+  }
+
+  setInteractionState(state, label = '') {
+    if (!Object.values(TAROT_INTERACTION_STATES).includes(state)) return false;
+    this.root.dataset.interactionState = state;
+    this.orb.dataset.interactionState = state;
+    const unavailable = state === TAROT_INTERACTION_STATES.DISABLED || state === TAROT_INTERACTION_STATES.REVEALING || this.state?.completed === true;
+    this.orb.disabled = unavailable;
+    this.orb.setAttribute('aria-disabled', String(unavailable));
+    const fallback = {
+      [TAROT_INTERACTION_STATES.READY]: 'REVELAR CARTA',
+      [TAROT_INTERACTION_STATES.TOUCHED]: 'A ORBE RESPONDE',
+      [TAROT_INTERACTION_STATES.REVEALING]: 'A ESPIRAL ESTÁ SE ABRINDO',
+      [TAROT_INTERACTION_STATES.DISABLED]: 'MESA COMPLETA',
+      [TAROT_INTERACTION_STATES.ERROR]: 'TENTAR NOVAMENTE'
+    }[state];
+    this.orbState.textContent = label || fallback;
+    return true;
   }
 
   bind() {
+    const touchOrb = () => {
+      if (!this.drawing && !this.navigationAnimation && !this.state.completed) this.setInteractionState(TAROT_INTERACTION_STATES.TOUCHED);
+    };
+    const releaseOrb = () => {
+      if (!this.drawing && this.root.dataset.interactionState === TAROT_INTERACTION_STATES.TOUCHED) this.setInteractionState(TAROT_INTERACTION_STATES.READY);
+    };
+    this.orb.addEventListener('pointerdown', touchOrb);
+    this.orb.addEventListener('pointerup', releaseOrb);
+    this.orb.addEventListener('pointercancel', releaseOrb);
+    this.orb.addEventListener('pointerleave', releaseOrb);
+    this.orb.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') touchOrb(); });
+    this.orb.addEventListener('keyup', event => { if (event.key === 'Enter' || event.key === ' ') releaseOrb(); });
     this.orb.addEventListener('click', () => this.draw());
     this.resetButton.addEventListener('click', () => this.reset());
     this.shuffleButton.addEventListener('click', () => this.reshuffle());
@@ -142,6 +189,7 @@ export class FreeTarot {
       if (!event.key?.endsWith(STORAGE_EVENT_SUFFIX) || !event.newValue) return;
       let incoming = null; try { incoming = normalizeTarotState(JSON.parse(event.newValue)); } catch { return; }
       if (!incoming || compareTarotStates(incoming, this.state) <= 0) return;
+      this.coordinator.remember(incoming, { persist: false, dispatch: false });
       this.state = incoming; this.selected = incoming.revealed.length - 1; this.drawing = false; this.render();
       if (this.lightbox.open && this.lightboxIndex >= incoming.revealed.length) this.closeLightbox(); else if (this.lightbox.open) this.renderLightbox();
       preloadCardImages(this.state.waiting, 3);
@@ -159,21 +207,35 @@ export class FreeTarot {
   async draw() {
     if (this.drawing || this.navigationAnimation || this.state.completed) return null;
     const revealStartedAt = globalThis.performance?.now?.() ?? Date.now();
-    let revealed = false;
+    let revealed = false; let failed = false;
     this.drawing = true; this.updateCurrentControls(); this.altar.classList.add('revealing'); this.startRevealMagic();
     try {
-      const result = await this.coordinator.commit(latest => drawNextCard(latest)); if (result.cardId === null) return null;
+      const result = await this.coordinator.commit(latest => drawNextCard(latest));
+      this.storageBlocked = !result.persisted;
+      if (!result.persisted) this.warnPersistence();
+      this.state = result.state;
+      if (result.cardId === null) { this.selected = this.state.revealed.length - 1; this.render(); return null; }
+      this.selected = result.position;
       const imagePreparation = prepareCardImage(CARDS[result.cardId], { timeout: IMAGE_PREPARE_BUDGET_MS, priority: 'high' });
       await this.openRevealPortal(revealStartedAt);
       await imagePreparation;
-      this.state = result.state; this.selected = result.position; this.persist(); this.render(result.position, false); preloadCardImages(this.state.waiting, 3);
+      this.render(result.position, false); preloadCardImages(this.state.waiting, 3);
       if (!this.reducedMotion()) await this.waitForCurrentCardImage();
       this.finishRevealMagic(CARDS[result.cardId], result.position); revealed = true;
-      globalThis.navigator?.vibrate?.([12, 22, 18]); globalThis.dispatchEvent?.(new CustomEvent('tarot:revealed', { detail: { cardId: result.cardId, position: result.position, remaining: this.state.waiting.length } })); return result.cardId;
+      globalThis.dispatchEvent?.(new CustomEvent('tarot:revealed', { detail: { cardId: result.cardId, position: result.position, remaining: this.state.waiting.length } })); return result.cardId;
+    } catch {
+      failed = true;
+      this.state = this.coordinator.latest();
+      this.selected = this.state.revealed.length - 1;
+      this.render();
+      this.setInteractionState(TAROT_INTERACTION_STATES.ERROR);
+      if (this.magicAnnouncement) this.magicAnnouncement.textContent = 'A revelação foi interrompida. Toque novamente na Orbe para tentar outra vez.';
+      announce('A Orbe encontrou uma interrupção. Sua mesa foi preservada; toque novamente para tentar.');
+      return null;
     } finally {
       globalThis.clearTimeout(this.releaseTimer);
       const settleDelay = this.reducedMotion() ? 20 : (revealed ? SUCTION_IN_MS + 20 : 80);
-      this.releaseTimer = globalThis.setTimeout(() => this.settleRevealMagic(), settleDelay);
+      this.releaseTimer = globalThis.setTimeout(() => this.settleRevealMagic(failed), settleDelay);
     }
   }
 
@@ -183,7 +245,7 @@ export class FreeTarot {
     this.root.dataset.revealPhase = 'awakening';
     this.altar.setAttribute('aria-busy', 'true'); this.orb.setAttribute('aria-busy', 'true');
     this.altar.classList.add('suction-out');
-    this.orbState.textContent = 'A ESPIRAL ESTÁ SE ABRINDO';
+    this.setInteractionState(TAROT_INTERACTION_STATES.REVEALING);
     if (this.magicAnnouncement) this.magicAnnouncement.textContent = 'A Orbe abriu a espiral.';
   }
 
@@ -254,12 +316,14 @@ export class FreeTarot {
     } else revealToast();
   }
 
-  settleRevealMagic() {
+  settleRevealMagic(failed = false) {
     this.drawing = false;
     this.altar.classList.remove('revealing', 'magic-awakening', 'magic-manifesting', 'magic-born', 'ios-awakening', 'ios-crossing', 'ios-born', 'singularity-nav-out', 'singularity-nav-in', ...SUCTION_CLASSES);
     this.altar.removeAttribute('aria-busy'); this.orb.removeAttribute('aria-busy');
     this.root.dataset.revealPhase = 'idle';
-    this.orbState.textContent = this.state.completed ? 'MESA COMPLETA' : 'REVELAR CARTA';
+    this.setInteractionState(failed
+      ? TAROT_INTERACTION_STATES.ERROR
+      : this.state.completed ? TAROT_INTERACTION_STATES.DISABLED : TAROT_INTERACTION_STATES.READY);
     this.updateCurrentControls();
   }
 
@@ -304,8 +368,7 @@ export class FreeTarot {
   async navigateForward(source = 'botão') {
     if (this.drawing || this.navigationAnimation) return false;
     if (this.selected < this.state.revealed.length - 1) return this.navigateCurrent(1, source);
-    if (this.state.completed) return false;
-    return (await this.draw()) !== null;
+    return false;
   }
 
   announceCardNavigation(source) {
@@ -333,15 +396,14 @@ export class FreeTarot {
     this.currentNav.dataset.empty = String(empty);
     this.currentPrev.disabled = empty || this.selected <= 0;
     const hasKnownNext = !empty && this.selected < total - 1;
-    const canReveal = !this.state.completed;
-    this.currentNext.disabled = this.drawing || (!hasKnownNext && !canReveal);
-    this.currentNext.setAttribute('aria-label', hasKnownNext ? 'Mostrar próxima carta' : canReveal ? 'Revelar nova carta' : 'Todas as cartas foram reveladas');
+    this.currentNext.disabled = this.drawing || !hasKnownNext;
+    this.currentNext.setAttribute('aria-label', hasKnownNext ? 'Mostrar próxima carta já revelada' : 'Toque na Orbe para revelar uma nova carta');
     if (this.gestureHint) this.gestureHint.innerHTML = empty
-      ? '<span aria-hidden="true">— ✦</span> SETA DIREITA: REVELAR A PRIMEIRA CARTA <span aria-hidden="true">✦ —</span>'
+      ? '<span aria-hidden="true">— ✦</span> TOQUE NA ORBE PARA REVELAR <span aria-hidden="true">✦ —</span>'
       : hasKnownNext
         ? '<span aria-hidden="true">— ✦</span> USE AS SETAS PARA NAVEGAR <span aria-hidden="true">✦ —</span>'
-        : canReveal
-          ? '<span aria-hidden="true">— ✦</span> SETA DIREITA: NOVA CARTA <span aria-hidden="true">✦ —</span>'
+        : !this.state.completed
+          ? '<span aria-hidden="true">— ✦</span> TOQUE NA ORBE PARA UMA NOVA CARTA <span aria-hidden="true">✦ —</span>'
           : '<span aria-hidden="true">— ✦</span> AS 78 CARTAS FORAM REVELADAS <span aria-hidden="true">✦ —</span>';
   }
 
@@ -349,7 +411,7 @@ export class FreeTarot {
     const card = CARDS[this.state.revealed[index]]; if (!isFreeTarotCard(card)) return;
     this.hideCardToast();
     this.selected = index; this.stage.className = 'current table-preview';
-    this.stage.innerHTML = `${cardImageMarkup(card, { alt: `${card.name}, direta`, priority: 'high' })}${freeCardLabel(card)}`;
+    this.stage.innerHTML = `${cardImageMarkup(card, { alt: `${card.name}, direta`, priority: 'high' })}${freeCardLabel(card, index + 1)}`;
     this.stage.setAttribute('aria-label', `${card.name}, direta. Carta ${index + 1} de ${this.state.revealed.length}. Use as setas para navegar.`);
     this.realTable.querySelectorAll('[data-index]').forEach(button => button.classList.toggle('selected', Number(button.dataset.index) === index));
     this.orbitalCards.querySelectorAll('[data-orbit-index]').forEach(button => button.classList.toggle('selected', Number(button.dataset.orbitIndex) === index));
@@ -400,7 +462,7 @@ export class FreeTarot {
 
   render(landing = -1, animateCurrent = false) {
     const total = this.state.revealed.length; const waiting = this.state.waiting.length;
-    this.root.querySelector('#count').innerHTML = `${total}<small>/${DECK_SIZE}</small>`; this.root.querySelector('#remaining').textContent = waiting ? `${waiting} cartas aguardam` : 'Ciclo completo · 78 cartas reveladas'; this.root.querySelector('#deckProgress').style.width = `${(total / DECK_SIZE) * 100}%`; this.ritualRevealed.textContent = String(total); this.ritualRemaining.textContent = String(waiting); this.saveState.textContent = total ? `Mesa salva neste aparelho · ${total} de ${DECK_SIZE}` : 'Nova mesa salva neste aparelho'; this.editorialState.textContent = tarotEditorialStatus(total, DECK_SIZE); this.orb.disabled = this.state.completed; this.orb.setAttribute('aria-label', waiting ? `Revelar próxima carta. ${waiting} restantes.` : 'Mesa completa'); this.orbState.textContent = this.state.completed ? 'MESA COMPLETA' : 'REVELAR CARTA'; this.shuffleButton.disabled = waiting < 2;
+    this.root.querySelector('#count').innerHTML = `${total}<small>/${DECK_SIZE}</small>`; this.root.querySelector('#remaining').textContent = waiting ? `${waiting} cartas aguardam` : 'Ciclo completo · 78 cartas reveladas'; this.root.querySelector('#deckProgress').style.width = `${(total / DECK_SIZE) * 100}%`; this.ritualRevealed.textContent = String(total); this.ritualRemaining.textContent = String(waiting); this.saveState.textContent = this.storageBlocked ? `Mesa preservada nesta aba · ${total} de ${DECK_SIZE}` : total ? `Mesa salva neste aparelho · ${total} de ${DECK_SIZE}` : 'Nova mesa salva neste aparelho'; this.editorialState.textContent = tarotEditorialStatus(total, DECK_SIZE); this.orb.disabled = this.state.completed || this.drawing; this.orb.setAttribute('aria-label', waiting ? `Revelar próxima carta pela Orbe. ${waiting} restantes.` : 'Mesa completa'); this.orbState.textContent = this.state.completed ? 'MESA COMPLETA' : this.drawing ? 'A ESPIRAL ESTÁ SE ABRINDO' : 'REVELAR CARTA'; this.shuffleButton.disabled = waiting < 2;
     this.realTable.innerHTML = Array.from({ length: DECK_SIZE }, (_, index) => {
       const cardId = this.state.revealed[index]; const row = Math.floor(index / 6) + 1; const column = (index % 6) + 1;
       if (cardId === undefined) return `<div data-position="${index}" class="table-slot waiting" role="gridcell" aria-rowindex="${row}" aria-colindex="${column}" aria-disabled="true" aria-label="Posição ${index + 1}, aguardando carta"><span class="position">${index + 1}</span></div>`;
@@ -411,16 +473,25 @@ export class FreeTarot {
     if (total) { if (this.selected < 0 || this.selected >= total) this.selected = total - 1; this.show(this.selected, animateCurrent, false); }
     else { this.selected = -1; this.stage.className = 'current table-preview empty'; this.stage.innerHTML = EMPTY_ALTAR; this.stage.setAttribute('aria-label', 'Nenhuma carta revelada. Toque na Orbe para começar.'); }
     this.updateCurrentControls();
+    if (!this.drawing) this.setInteractionState(this.state.completed ? TAROT_INTERACTION_STATES.DISABLED : TAROT_INTERACTION_STATES.READY);
   }
 
   async reset(force = false) {
     if (this.drawing || this.navigationAnimation) return false;
     if (this.state.revealed.length > 0 && force !== true && globalThis.confirm && !globalThis.confirm('Apagar as cartas desta mesa e iniciar um novo baralho?')) return false;
-    this.hideCardToast(); this.state = await this.coordinator.commit(() => resetTarotState()); this.selected = -1; this.closeLightbox(); this.render(); preloadCardImages(this.state.waiting, 3); announce('Uma nova Mesa Real foi preparada.'); return true;
+    try {
+      this.hideCardToast(); this.state = await this.coordinator.commit(latest => resetTarotState({ now: () => Math.max(Date.now(), latest.updatedAt + 1) })); this.storageBlocked = !this.coordinator.lastPersisted; if (this.storageBlocked) this.warnPersistence(); this.selected = -1; this.closeLightbox(); this.render(); preloadCardImages(this.state.waiting, 3); announce('Uma nova Mesa Real foi preparada.'); return true;
+    } catch {
+      this.setInteractionState(TAROT_INTERACTION_STATES.ERROR); announce('Não foi possível recomeçar agora. Sua mesa atual continua preservada.'); return false;
+    }
   }
   async reshuffle() {
     if (this.drawing || this.navigationAnimation || this.state.waiting.length < 2) return false;
-    const revealedBefore = this.state.revealed.join(','); this.state = await this.coordinator.commit(latest => shuffleRemainingCards(latest)); if (!this.state.revealed.join(',').startsWith(revealedBefore)) throw new Error('As cartas reveladas não podem ser movidas.'); this.render(); preloadCardImages(this.state.waiting, 3); globalThis.navigator?.vibrate?.(16); announce(`${this.state.waiting.length} cartas restantes foram embaralhadas.`); return true;
+    try {
+      const revealedBefore = this.state.revealed.join(','); this.state = await this.coordinator.commit(latest => shuffleRemainingCards(latest)); this.storageBlocked = !this.coordinator.lastPersisted; if (this.storageBlocked) this.warnPersistence(); if (this.state.revealed.join(',') !== revealedBefore) throw new Error('As cartas reveladas não podem ser movidas.'); this.render(); preloadCardImages(this.state.waiting, 3); announce(`${this.state.waiting.length} cartas restantes foram embaralhadas.`); return true;
+    } catch {
+      this.setInteractionState(TAROT_INTERACTION_STATES.ERROR); announce('Não foi possível embaralhar agora. Nenhuma carta revelada foi alterada.'); return false;
+    }
   }
 
   downloadBackup() {
@@ -437,11 +508,12 @@ export class FreeTarot {
   async restoreBackupFile(file) {
     this.backupInput.value = '';
     if (!file) return false;
+    if (Number(file.size) > TAROT_MAX_BACKUP_BYTES) { announce('Este arquivo é grande demais para ser uma cópia válida da Mesa Real.'); return false; }
     let restored = null;
     try { restored = restoreTarotBackup(await file.text()); } catch { restored = null; }
     if (!restored) { announce('Este arquivo não contém uma Mesa Real válida.'); return false; }
     if (this.state.revealed.length > 0 && globalThis.confirm && !globalThis.confirm('Substituir a mesa atual pela mesa guardada neste arquivo?')) return false;
-    this.state = await this.coordinator.commit(() => restored);
+    this.state = await this.coordinator.commit(latest => ({ ...restored, updatedAt: Math.max(restored.updatedAt, latest.updatedAt + 1) })); this.storageBlocked = !this.coordinator.lastPersisted; if (this.storageBlocked) this.warnPersistence();
     this.selected = this.state.revealed.length - 1; this.closeLightbox(); this.render(); preloadCardImages(this.state.waiting, 3);
     announce(`Mesa retomada com ${this.state.revealed.length} cartas reveladas.`); return true;
   }

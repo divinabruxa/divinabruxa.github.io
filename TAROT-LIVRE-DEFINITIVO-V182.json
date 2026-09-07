@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "182.0.0",
+  "release": "DIVINA-BRUXA-V182-TAROT-LIVRE-DEFINITIVO",
+  "releaseDate": "2026-09-07",
+  "macroStage": 4,
+  "objective": "Transformar as regras aprovadas do Tarot Livre em um contrato técnico verificável, resiliente e disponível offline sem alterar a identidade visual da experiência.",
+  "canonicalDeck": {
+    "cards": 78,
+    "orientation": "upright-only",
+    "repeatsPerSession": false,
+    "automaticMeanings": false,
+    "visibleFields": ["image", "name", "position", "orientation"],
+    "tableRows": 13,
+    "tableColumns": 6
+  },
+  "revelation": {
+    "onlyTrigger": "#tableOrb",
+    "arrowKeysReveal": false,
+    "nextButtonReveals": false,
+    "dragReveals": false,
+    "browserHaptics": false,
+    "sequence": [
+      "touch-orb",
+      "choose-from-remaining",
+      "commit-session",
+      "prepare-image",
+      "animate-reveal",
+      "render-card-and-table",
+      "update-counter",
+      "unlock-or-disable"
+    ]
+  },
+  "interactionStateMachine": ["Ready", "Touched", "Revealing", "Disabled", "Error"],
+  "continuity": {
+    "localStorageResume": true,
+    "memoryFallbackWhenStorageBlocked": true,
+    "multiTabWebLocksWhenAvailable": true,
+    "shuffleOnlyRemainingCards": true,
+    "backupMaximumBytes": 262144,
+    "invalidBackupRejected": true
+  },
+  "offlineCore": [
+    "tarot-data.js",
+    "storage.js",
+    "tarot-engine.js",
+    "tarot-image-runtime.js",
+    "tarot-session.js",
+    "tarot-continuity.js",
+    "tarot-editorial-policy.js",
+    "tarot-spiral-suction-v1.webp",
+    "tarot-atlas.webp"
+  ],
+  "accessibility": {
+    "keyboardNavigationAmongRevealedCards": true,
+    "liveRevealAnnouncement": true,
+    "busyStateExposed": true,
+    "reducedMotionRespected": true,
+    "positionVisibleAndAnnounced": true
+  },
+  "visualSafeguards": {
+    "homeChanged": false,
+    "mainOrbArtworkChanged": false,
+    "tarotCardArtworkChanged": false,
+    "approvedSixColumnTableChanged": false,
+    "newRenderBlockingStylesheets": 0
+  },
+  "protectedAreas": {
+    "consultationsFunctionalCodeChanged": false,
+    "consultationPricesBrl": [250, 150, 100, 50],
+    "consultationEmailRequired": true,
+    "realBillingEnabled": false,
+    "accountChanged": false,
+    "commerceChanged": false
+  },
+  "installation": {
+    "method": "manual-flat-upload-github",
+    "filesInPackage": 12,
+    "replace": [
+      "index.html",
+      "app.js",
+      "page-loader-v1.js",
+      "sw.js",
+      "tarot-session.js",
+      "tarot-continuity.js",
+      "tarot-editorial-policy.js",
+      "tarot-engine.js"
+    ],
+    "add": [
+      "TAROT-LIVRE-DEFINITIVO-V182.json",
+      "QA-V182-TAROT-LIVRE-DEFINITIVO.mjs",
+      "00-LEIA-PRIMEIRO-V182-TAROT-LIVRE-DEFINITIVO.txt",
+      "ARQUIVOS-V182-SHA256.txt"
+    ],
+    "deleteOtherFiles": false,
+    "commitMessage": "Instala V182 Tarot Livre definitivo"
+  },
+  "nextMacroStage": 5,
+  "nextObjective": "Carta do Dia definitiva"
+}

@@ -1,0 +1,57 @@
+DIVINA BRUXA — V182 — MACROETAPA 4
+TAROT LIVRE DEFINITIVO
+
+O QUE ESTA VERSÃO FAZ
+
+1. Torna a Orbe o único comando capaz de revelar uma nova carta.
+2. Mantém as 78 cartas sempre diretas e sem repetição na sessão.
+3. Embaralha somente as cartas que ainda não foram reveladas.
+4. Exibe imagem, nome, posição e DIRETA — sem significado automático.
+5. Formaliza cinco estados: Ready, Touched, Revealing, Disabled e Error.
+6. Preserva a sequência na memória da aba mesmo se o navegador bloquear
+   o armazenamento local.
+7. Mantém retomada entre visitas e sincronização entre abas quando permitidas.
+8. Garante o núcleo do Tarot e o atlas de imagens no cache offline.
+9. Limita e valida arquivos de cópia antes de restaurar uma mesa.
+10. Preserva o visual aprovado, as seis colunas e as artes oficiais.
+
+COMO INSTALAR PELO IPHONE/GITHUB
+
+1. Descompacte este ZIP.
+2. Selecione TODOS os 12 arquivos soltos.
+3. Envie-os para a RAIZ do ramo main no GitHub.
+4. Confirme a substituição dos 8 arquivos existentes.
+5. Não envie somente o ZIP, não crie pasta e não apague arquivos anteriores.
+6. Use a mensagem de commit: Instala V182 Tarot Livre definitivo
+7. Aguarde o GitHub Pages e atualize o site uma vez.
+
+ARQUIVOS PARA SUBSTITUIR
+
+- index.html
+- app.js
+- page-loader-v1.js
+- sw.js
+- tarot-session.js
+- tarot-continuity.js
+- tarot-editorial-policy.js
+- tarot-engine.js
+
+ARQUIVOS NOVOS
+
+- TAROT-LIVRE-DEFINITIVO-V182.json
+- QA-V182-TAROT-LIVRE-DEFINITIVO.mjs
+- 00-LEIA-PRIMEIRO-V182-TAROT-LIVRE-DEFINITIVO.txt
+- ARQUIVOS-V182-SHA256.txt
+
+GARANTIAS PRESERVADAS
+
+- Home, menu, Orbe e artes visuais não foram redesenhados.
+- Mesa do Tarot Livre: 78 posições em 13 fileiras de 6, inclusive no iPhone.
+- Nenhuma carta invertida, repetida ou acompanhada de significado automático.
+- Consultas: R$ 250, R$ 150, R$ 100 e R$ 50; e-mail obrigatório.
+- Cobrança real continua desligada.
+- Nenhum arquivo antigo deve ser apagado nesta instalação.
+
+PRÓXIMA MACROETAPA
+
+Macroetapa 5 — Carta do Dia definitiva.

@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — REGRA EDITORIAL DO TAROT LIVRE — CHECKPOINT 2.4 */
+/* DIVINA BRUXA — REGRA EDITORIAL DO TAROT LIVRE — V182 */
 export const FREE_TAROT_POLICY = Object.freeze({
   normalOnly: true,
   noRepeats: true,
@@ -14,9 +14,10 @@ export function isFreeTarotCard(card) {
   return Boolean(card && card.orientation === 'normal' && Number.isInteger(card.index) && typeof card.name === 'string');
 }
 
-export function freeCardLabel(card) {
+export function freeCardLabel(card, position) {
   if (!isFreeTarotCard(card)) throw new TypeError('O Tarot Livre aceita somente cartas normais do catálogo oficial.');
-  return `<div class="card-label"><strong>${escapeText(card.name)}</strong><span>DIRETA</span></div>`;
+  const order = Number.isInteger(position) && position > 0 ? `POSIÇÃO ${position} · ` : '';
+  return `<div class="card-label"><strong>${escapeText(card.name)}</strong><span>${order}DIRETA</span></div>`;
 }
 
 export function freeCardAriaLabel(card, position, action = 'Ampliar') {

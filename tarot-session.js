@@ -1,11 +1,12 @@
-/* DIVINA BRUXA — NÚCLEO IMUTÁVEL DO TAROT LIVRE — CHECKPOINT 2.2.1
+/* DIVINA BRUXA — NÚCLEO IMUTÁVEL DO TAROT LIVRE — V182
    78 cartas normais, sem repetição, retomada segura e embaralhamento somente das restantes.
 */
-export const TAROT_SESSION_SCHEMA = '5.2.1';
+export const TAROT_SESSION_SCHEMA = '5.4.0';
 export const DECK_SIZE = 78;
 export const CARD_IDS = Object.freeze(Array.from({ length: DECK_SIZE }, (_, index) => index));
 export const TAROT_BACKUP_KIND = 'divina-bruxa-tarot-livre';
 export const TAROT_BACKUP_VERSION = 1;
+export const TAROT_MAX_BACKUP_BYTES = 262144;
 
 const secureRandomInt = max => {
   if (!Number.isInteger(max) || max < 1) return 0;
@@ -145,6 +146,11 @@ export function createTarotBackup(state, { now = Date.now } = {}) {
 }
 
 export function restoreTarotBackup(serialized, { now = Date.now } = {}) {
+  if (typeof serialized !== 'string' || !serialized.trim()) return null;
+  const byteLength = typeof TextEncoder === 'function'
+    ? new TextEncoder().encode(serialized).byteLength
+    : serialized.length * 2;
+  if (byteLength > TAROT_MAX_BACKUP_BYTES) return null;
   try {
     const backup = JSON.parse(serialized);
     if (backup?.kind !== TAROT_BACKUP_KIND || backup?.version !== TAROT_BACKUP_VERSION) return null;

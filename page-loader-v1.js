@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.16 · ROTAS SOBERANAS V180
+/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.17 · TAROT LIVRE V182
    Estilos e motores nascem sob demanda; toda falha oferece tentativa e retorno seguro. */
 
 import {
@@ -163,7 +163,7 @@ export function createPageLoader({ config, go } = {}) {
 
   const loaders = Object.freeze({
     tarot: async () => {
-      const { FreeTarot } = await import('./tarot-engine.js?v=148');
+      const { FreeTarot } = await import('./tarot-engine.js?v=182');
       return new FreeTarot($('#tarot'));
     },
     daily: async () => {
@@ -224,7 +224,7 @@ export function createPageLoader({ config, go } = {}) {
   });
 
   const warmers = Object.freeze({
-    tarot: () => import('./tarot-engine.js?v=148'),
+    tarot: () => import('./tarot-engine.js?v=182'),
     consultations: () => Promise.all([
       import('./commerce-engine.js?v=148'),
       import('./consultation-engine.js?v=148')
