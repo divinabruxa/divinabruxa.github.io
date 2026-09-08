@@ -1,0 +1,104 @@
+{
+  "release": "V190",
+  "macro_stage": 12,
+  "name": "Orbe IA verdadeira e governada",
+  "environment": "STAGING",
+  "production_authorized": false,
+  "provider": {
+    "name": "OpenAI",
+    "api": "Responses API",
+    "application_state_stored": false,
+    "web_search_enabled": false,
+    "moderation_model": "omni-moderation-latest",
+    "models": {
+      "luna": "gpt-5.6-luna",
+      "terra": "gpt-5.6-terra",
+      "sol": null
+    },
+    "standard_price_snapshot_usd_per_million_tokens": {
+      "verified_on": "2026-09-08",
+      "luna": { "input": 0.2, "cached_input": 0.02, "output": 1.2 },
+      "terra": { "input": 2, "cached_input": 0.2, "output": 12 }
+    }
+  },
+  "credits": {
+    "server_authoritative": true,
+    "trial_luna_credits": 3,
+    "luna_per_response": 1,
+    "terra_per_response": 10,
+    "sol_enabled": false,
+    "billing_enabled": false,
+    "subscription_display_only": { "price_brl": 89.9, "monthly_credits": 400 },
+    "topups_display_only": [
+      { "credits": 200, "price_brl": 39.9 },
+      { "credits": 600, "price_brl": 99.9 },
+      { "credits": 1500, "price_brl": 199.9 }
+    ]
+  },
+  "limits": {
+    "per_user_requests_per_minute": 6,
+    "per_user_daily_credits": 100,
+    "global_daily_requests": 500,
+    "global_daily_credits": 2000,
+    "global_daily_cost_usd": 2.5,
+    "max_input_characters": 5000,
+    "max_history_messages": 12,
+    "max_context_characters": 24000,
+    "luna_max_output_tokens": 700,
+    "terra_max_output_tokens": 1400,
+    "reserved_cost_usd": { "luna": 0.02, "terra": 0.2 }
+  },
+  "governance": {
+    "atomic_reservation": true,
+    "idempotent_request_id": true,
+    "server_ledger": true,
+    "stale_reservation_refund_minutes": 15,
+    "all_request_gate": true,
+    "all_request_gate_retention_days": 30,
+    "kill_switch": true,
+    "extra_credit_confirmation_per_request": true,
+    "sol_database_constraint_off": true
+  },
+  "privacy": {
+    "browser_history_local_only": true,
+    "server_conversation_history": false,
+    "ledger_contains_conversation_text": false,
+    "admin_receives_conversation_text": false,
+    "analytics_receives_conversation_text": false,
+    "diary_access": "one explicitly selected entry per consented request",
+    "tarot_access": "one explicitly selected completed spread",
+    "school_access": "one explicitly selected public lesson",
+    "provider_request_store": false,
+    "provider_training_default": "not used unless the API organization explicitly opts in",
+    "provider_abuse_monitoring_standard_retention": "up to 30 days under current standard controls"
+  },
+  "safety": {
+    "input_moderation": true,
+    "safety_interception_credit_cost": 0,
+    "human_support_referral": true,
+    "professional_authority_claims": false,
+    "supernatural_certainty_claims": false,
+    "third_party_mind_reading_claims": false
+  },
+  "frozen_surfaces": {
+    "main_orb": true,
+    "magic_menu": true,
+    "mini_orbs": true,
+    "free_tarot": {
+      "cards": 78,
+      "orientation": "normal",
+      "duplicates": false,
+      "automatic_meaning_on_reveal": false,
+      "mesa_real": "13x6"
+    }
+  },
+  "official_sources": [
+    "https://developers.openai.com/api/docs/models",
+    "https://developers.openai.com/api/docs/pricing",
+    "https://developers.openai.com/api/docs/guides/text?api-mode=responses",
+    "https://developers.openai.com/api/docs/guides/your-data",
+    "https://developers.openai.com/api/docs/guides/moderation",
+    "https://supabase.com/docs/guides/functions/auth-headers",
+    "https://supabase.com/docs/guides/database/postgres/row-level-security"
+  ]
+}

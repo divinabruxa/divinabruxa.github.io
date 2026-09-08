@@ -1,0 +1,103 @@
+DIVINA BRUXA — V190
+ORBE IA VERDADEIRA E GOVERNADA
+============================================================
+
+RESULTADO
+------------------------------------------------------------
+Esta entrega incremental substitui somente os arquivos listados no pacote.
+A função orbe-ai-chat V3 e as migrações V190 já estão instaladas no Supabase
+STAGING kyphdsamyygavmkzyezr. O interruptor da Orbe IA está ligado apenas no
+STAGING; Sol, billing, produção e compras continuam desligados.
+
+O Resend conectado não foi chamado. Nenhum webhook, reenvio ou e-mail foi
+disparado, porque essa autorização continua sendo uma decisão separada.
+
+O QUE A V190 ENTREGA
+------------------------------------------------------------
+- Luna real: gpt-5.6-luna, 1 crédito por resposta.
+- Terra real: gpt-5.6-terra, 10 créditos por resposta.
+- Sol sem rota de servidor e travada como false no banco.
+- 3 créditos Luna de teste para uma nova carteira.
+- Saldo e ledger com autoridade exclusiva do servidor.
+- Reserva atômica, idempotência, devolução de falhas e expiração mensal.
+- Limites de usuário e ambiente, inclusive antes da moderação.
+- Teto global de US$ 2,50/dia com margem conservadora por chamada:
+  Luna US$ 0,02; Terra US$ 0,20 enquanto a chamada está em voo.
+- Chave OpenAI somente no servidor; Responses API com store:false.
+- Web Search desligada e nenhum tool conectado ao modelo.
+- Histórico legível somente no aparelho.
+- Diário somente por uma entrada escolhida, revisada e consentida.
+- Tiragem somente por uma leitura concluída, canônica, direta e sem repetição.
+- Moderação e resposta segura sem débito para conteúdo interceptado.
+- Natureza e limites da IA explicados na tela, Privacidade e Termos.
+
+INSTALAÇÃO DO DELTA NO SITE
+------------------------------------------------------------
+1. Faça uma cópia da instalação V189.
+2. Extraia o ZIP diretamente na raiz do site.
+3. Autorize a substituição dos arquivos de mesmo nome.
+4. Não crie uma subpasta: o ZIP é propositalmente plano.
+5. Atualize o site e confirme que o cache mudou para
+   divina-bruxa-v60-orbe-ai-v190.
+6. Entre com uma conta confirmada e abra Orbe IA.
+
+Não coloque OPENAI_API_KEY, service role ou qualquer outro segredo em
+config.js, HTML ou JavaScript do navegador. A tela consulta o status protegido
+do servidor e permanece bloqueada caso o segredo OpenAI não exista no runtime.
+
+BANCO EM UM AMBIENTE NOVO
+------------------------------------------------------------
+No STAGING já configurado, não reaplique estas migrações.
+
+Para reproduzir a V190 em outro ambiente compatível, aplique nesta ordem:
+1. SUPABASE-ORBE-IA-STAGING-V190.sql
+2. SUPABASE-ORBE-IA-COST-HARDENING-V190.sql
+3. SUPABASE-ORBE-IA-INDEX-HARDENING-V190.sql
+4. SUPABASE-ORBE-IA-REQUEST-GATE-V190.sql
+5. Faça deploy de orbe-ai-chat-v190.ts com verify_jwt=true.
+6. Só depois da homologação, execute ATIVAR-ORBE-IA-STAGING-V190.sql.
+
+O arquivo principal já contém todos os hardenings. Os três arquivos menores
+existem para reproduzir exatamente a trilha incremental auditada no STAGING e
+são idempotentes quando executados na ordem acima.
+
+VALIDAÇÃO
+------------------------------------------------------------
+Na raiz instalada, execute:
+
+  node QA-V190-ORBE-IA-GOVERNADA.mjs
+
+Resultado desta entrega: 300/300 PASS.
+O gate legado ORBE-AI-V10 também permaneceu em 8/8 PASS.
+
+Leia STAGING-ORBE-IA-STATUS-V190.json para o estado remoto verificado e
+ORBE-IA-GOVERNADA-V190.json para o contrato completo de produto.
+
+SUPERFÍCIES CONGELADAS
+------------------------------------------------------------
+Os seguintes arquivos permaneceram byte a byte iguais à V189:
+- orb-engine-v68.js
+- mini-orb-engine.js
+- menu-completo-v177.js
+- tarot-engine.js
+- tarot-data.js
+
+O Tarot Livre continua com 78 cartas diretas, sem repetição, sem significado
+automático na revelação e Mesa Real 13 × 6.
+
+LIMITES DESTA ENTREGA
+------------------------------------------------------------
+- Nenhuma publicação em produção.
+- Nenhuma cobrança real.
+- Nenhuma compra, assinatura ou pacote de créditos habilitado.
+- Nenhuma conta real ou sintética preservada após os testes.
+- Nenhum envio de e-mail ou webhook Resend.
+- Nenhuma chamada ao modelo foi feita durante o empacotamento, porque não há
+  conta verificada de homologação. A presença do segredo OpenAI não pôde ser
+  consultada sem criar uma identidade; o aplicativo mostra esse estado com
+  honestidade e bloqueia o envio se o provedor estiver ausente.
+
+CANAL OFICIAL
+------------------------------------------------------------
+orbedasrealidades@hotmail.com
+Sem WhatsApp.

@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V59 · CONTA SEGURA V189 */
-const CACHE='divina-bruxa-v59-account-v189';
+/* DIVINA BRUXA — SERVICE WORKER V60 · ORBE IA GOVERNADA V190 */
+const CACHE='divina-bruxa-v60-orbe-ai-v190';
 
 const REQUIRED=[
   './',
@@ -22,6 +22,7 @@ const REQUIRED=[
   './auth-client-v189.js',
   './account-engine-v189.js',
   './account-secure-v189.css',
+  './orbe-ai-governada-v190.css',
   './navigation.js',
   './orb-engine-v68.js',
   './mini-orb-engine.js',
@@ -58,6 +59,7 @@ const CORE=[
   './auth-client-v189.js',
   './account-engine-v189.js',
   './account-secure-v189.css',
+  './orbe-ai-governada-v190.css',
   './visual-guard-v6.js',
   './tarot-experience-v6.js',
   './tarot-data.js',
@@ -86,6 +88,8 @@ const CORE=[
   './spread-synthesis.js',
   './tiragens-definitivas-v185.css',
   './ai-policy.js',
+  './ai-credits.js',
+  './ai-engine.js',
   './journal-policy.js',
   './journal-engine.js',
   './rhythm-v6.js',
@@ -111,6 +115,7 @@ const WARM=[
   './journal-engine.js','./journal-policy.js','./rhythm-v6.js','./diario-definitivo-v187.css','./diario-de-tarot.html','./diario-tarot-v173.css','./diario-tarot-v173.js','./diario-espelho-celestial-v1.webp',
   './spreads-engine.js','./spreads-policy.js','./spread-synthesis.js','./tiragens-definitivas-v185.css','./tiragens-de-tarot.html',
   './consultation-policy.js','./consultation-engine.js','./consultations-celestial-v1.css','./consultations-definitive-v188.css','./consultas-de-tarot.html',
+  './ai-policy.js','./ai-credits.js','./ai-engine.js','./orbe-ai-governada-v190.css',
   './fallback-shell-v1.css','./pwa-final-v1.css'
 ];
 

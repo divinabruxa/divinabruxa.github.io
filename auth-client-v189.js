@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — CLIENTE DE CONTA V189
+/* DIVINA BRUXA — CLIENTE DE CONTA V189 · PONTE ORBE IA V190
    Sessão somente na aba (sessionStorage), nunca em localStorage e sem segredos administrativos. */
 import { AuthClient as LegacyAuthClient } from './auth-client-v6.js?v=151';
 
@@ -82,16 +82,30 @@ export class AuthClientV189 extends LegacyAuthClient {
   }
 
   async fetchJson(url, options = {}) {
+    const { signal:externalSignal, timeoutMs = REQUEST_TIMEOUT, ...fetchOptions } = options;
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT);
+    let timedOut = false;
+    const stop = () => controller.abort(externalSignal?.reason);
+    if (externalSignal?.aborted) stop();
+    else externalSignal?.addEventListener?.('abort', stop, { once:true });
+    const timer = setTimeout(() => { timedOut = true; controller.abort('timeout'); }, timeoutMs);
     try {
-      const response = await fetch(url, { ...options, signal:controller.signal });
+      const response = await fetch(url, { ...fetchOptions, signal:controller.signal });
       const body = await response.json().catch(() => ({}));
       return { ok:response.ok, status:response.status, body, message:errorMessage(body) };
     } catch (error) {
-      return { ok:false, offline:true, status:0, body:{}, message:error?.name === 'AbortError' ? 'Tempo de conexão esgotado.' : 'Servidor indisponível.' };
+      const aborted = error?.name === 'AbortError' && !timedOut;
+      return {
+        ok:false,
+        offline:!aborted,
+        aborted,
+        status:0,
+        body:{ error:{ code:aborted ? 'CLIENT_ABORTED' : timedOut ? 'CLIENT_TIMEOUT' : 'NETWORK_UNAVAILABLE' } },
+        message:aborted ? 'Solicitação interrompida.' : timedOut ? 'Tempo de conexão esgotado.' : 'Servidor indisponível.'
+      };
     } finally {
       clearTimeout(timer);
+      externalSignal?.removeEventListener?.('abort', stop);
     }
   }
 
@@ -238,19 +252,23 @@ export class AuthClientV189 extends LegacyAuthClient {
     return this.login(email, password);
   }
 
-  async functionRequest(slug, { method = 'POST', body } = {}) {
+  async functionRequest(slug, { method = 'POST', body, signal, timeoutMs } = {}) {
     const current = await this.validSession();
     if (!current || !this.functionBase) return { ok:false, status:401, body:{}, message:'Entre novamente para continuar.' };
     const headers = { ...jsonHeaders, apikey:this.publishableKey, Authorization:`Bearer ${current.access_token}` };
     return this.fetchJson(`${this.functionBase}/${encodeURIComponent(slug)}`, {
       method,
       headers,
+      signal,
+      timeoutMs,
       ...(body === undefined ? {} : { body:JSON.stringify(body) })
     });
   }
 
   syncAccount(payload) { return this.functionRequest('account-sync-v189', { body:payload }); }
   dailyCard() { return this.functionRequest('daily-card-account', { method:'GET' }); }
+  aiStatus() { return this.functionRequest('orbe-ai-chat', { method:'GET', timeoutMs:20000 }); }
+  aiChat(payload, signal) { return this.functionRequest('orbe-ai-chat', { body:payload, signal, timeoutMs:55000 }); }
   exportAccount() { return this.functionRequest('account-export', { body:{ formatVersion:'1.0.0' } }); }
   deleteAccount(payload) { return this.functionRequest('account-delete', { body:payload }); }
 }

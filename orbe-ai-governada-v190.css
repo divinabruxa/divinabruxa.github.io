@@ -1,0 +1,131 @@
+/* DIVINA BRUXA — ORBE IA VERDADEIRA E GOVERNADA V190 */
+
+#ai .ai-command-state [data-ai-connection][data-ready="true"] {
+  border-color: rgba(111, 216, 168, .34);
+  color: #bcebd3;
+  background: rgba(32, 105, 76, .18);
+}
+
+#ai .ai-auth-gate {
+  display: grid;
+  grid-template-columns: 2.7rem minmax(0, 1fr) auto;
+  gap: .8rem;
+  align-items: center;
+  margin: 0 0 .85rem;
+  padding: .9rem 1rem;
+  border: 1px solid rgba(236, 193, 107, .3);
+  border-radius: 18px;
+  color: #cfc0d3;
+  background: linear-gradient(135deg, rgba(89, 38, 112, .35), rgba(13, 6, 23, .88));
+}
+
+#ai .ai-auth-gate[hidden] { display: none; }
+#ai .ai-auth-gate > span {
+  display: grid;
+  place-items: center;
+  width: 2.7rem;
+  aspect-ratio: 1;
+  border: 1px solid rgba(236, 193, 107, .28);
+  border-radius: 50%;
+  color: #efcc83;
+  background: rgba(160, 82, 211, .14);
+}
+#ai .ai-auth-gate b,
+#ai .ai-auth-gate small { display: block; }
+#ai .ai-auth-gate b { color: #f2d69b; }
+#ai .ai-auth-gate small { margin-top: .18rem; font-size: .78rem; line-height: 1.45; }
+#ai .ai-auth-gate button,
+#ai .ai-refresh-balance {
+  min-height: 44px;
+  padding: .58rem .82rem;
+  border: 1px solid rgba(238, 198, 111, .32);
+  border-radius: 999px;
+  color: #f0cf88;
+  background: rgba(104, 48, 137, .34);
+}
+#ai .ai-refresh-balance { width: 100%; margin-top: .55rem; }
+#ai .ai-refresh-balance:disabled { cursor: wait; opacity: .48; }
+
+#ai .ai-focus-field {
+  display: grid;
+  gap: .28rem;
+  margin: 0;
+  color: #b9aabd;
+  font-size: .78rem;
+}
+#ai .ai-focus-field select {
+  width: 100%;
+  min-height: 44px;
+  padding: .62rem .75rem;
+  border: 1px solid rgba(234, 191, 105, .2);
+  border-radius: 13px;
+  color: #eadbe9;
+  background: #170c22;
+}
+#ai .ai-context-scope {
+  margin: 0;
+  padding: .62rem .72rem;
+  border-left: 2px solid rgba(234, 191, 105, .42);
+  color: #b9aabd;
+  background: rgba(255, 255, 255, .018);
+  font-size: .78rem;
+  line-height: 1.48;
+}
+#ai .ai-context-scope b { color: #e5c981; }
+
+#ai .ai-ledger-summary details {
+  grid-column: 1 / -1;
+  margin-top: .4rem;
+  border-top: 1px solid rgba(232, 189, 103, .12);
+  padding-top: .45rem;
+}
+#ai .ai-ledger-summary summary {
+  min-height: 32px;
+  color: #ddc17e;
+  cursor: pointer;
+  font-size: .78rem;
+}
+#ai [data-ai-ledger-list] {
+  display: grid;
+  gap: .35rem;
+  max-height: 15rem;
+  overflow: auto;
+  padding-right: .15rem;
+}
+#ai [data-ai-ledger-list] p {
+  margin: 0;
+  padding: .45rem .5rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .018);
+}
+#ai [data-ai-ledger-list] b,
+#ai [data-ai-ledger-list] small { display: block; }
+#ai [data-ai-ledger-list] b { color: #d8c28d; font-size: .76rem; }
+#ai [data-ai-ledger-list] small { margin-top: .12rem; color: #8f8296; font-size: .7rem; }
+
+#ai .ai-credit-store-locked .ai-pack-grid article {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: .3rem .5rem;
+  align-items: baseline;
+  min-height: 82px;
+  padding: .72rem .8rem;
+  border: 1px dashed rgba(233, 190, 104, .18);
+  border-radius: 16px;
+  color: #b9aabd;
+  background: linear-gradient(135deg, rgba(65, 27, 89, .2), rgba(8, 4, 15, .55));
+  opacity: .82;
+}
+#ai .ai-credit-store-locked .ai-pack-grid article b { color: #d9bc7c; font: 400 1.35rem/1 Georgia, serif; }
+#ai .ai-credit-store-locked .ai-pack-grid article span { font-size: .8rem; }
+#ai .ai-credit-store-locked .ai-pack-grid article em { color: #a99566; font-size: .82rem; font-style: normal; }
+#ai .ai-credit-store-locked .ai-pack-grid article small { grid-column: 1 / -1; color: #8f8296; font-size: .75rem; }
+
+@media (max-width: 760px) {
+  #ai .ai-auth-gate { grid-template-columns: 2.4rem minmax(0, 1fr); }
+  #ai .ai-auth-gate button { grid-column: 1 / -1; width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #ai [data-ai-ledger-list] { scroll-behavior: auto; }
+}

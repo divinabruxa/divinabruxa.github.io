@@ -1,0 +1,66 @@
+{
+  "release": "V190",
+  "checked_at_utc": "2026-09-08T18:39:57Z",
+  "project": {
+    "id": "kyphdsamyygavmkzyezr",
+    "name": "divina-bruxa-staging",
+    "region": "sa-east-1",
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.6.1.155"
+  },
+  "feature_flags": {
+    "orbe_ai_enabled": true,
+    "sol_enabled": false,
+    "billing_enabled": false,
+    "activated_at_utc": "2026-09-08T18:38:35.962796Z"
+  },
+  "edge_function": {
+    "slug": "orbe-ai-chat",
+    "status": "ACTIVE",
+    "version": 3,
+    "verify_jwt": true,
+    "sha256": "bbb8ef94b1a9b88074ba1363088cd6262556b69accfab51d1534f06224c5cec5"
+  },
+  "database": {
+    "usage_rows": 0,
+    "ledger_rows": 0,
+    "wallet_rows": 0,
+    "request_gate_rows": 0,
+    "auth_users": 0,
+    "legacy_rpc_count": 0,
+    "duplicate_v190_indexes": 0,
+    "service_role_only_rpcs": true,
+    "gate_rls_enabled": true
+  },
+  "verified_limits": {
+    "requests_per_minute": 6,
+    "user_daily_credits": 100,
+    "global_daily_requests": 500,
+    "global_daily_credits": 2000,
+    "global_daily_cost_usd": 2.5,
+    "luna_reserved_cost_usd": 0.02,
+    "terra_reserved_cost_usd": 0.2
+  },
+  "quality": {
+    "local_qa": "300/300 PASS",
+    "legacy_cost_gate": "8/8 PASS",
+    "html_duplicate_ids": 0,
+    "html_missing_local_assets": 0,
+    "database_synthetic_users_removed": true,
+    "database_synthetic_rows_removed": true,
+    "advisor_duplicate_index_warnings": 0,
+    "security_advisor": "INFO only: intentionally private/RLS tables have no client policies"
+  },
+  "provider_verification": {
+    "secret_presence_confirmed": false,
+    "live_model_call_executed": false,
+    "reason": "The protected status and chat endpoints require a real verified account and active session. No identity was created and no provider call or credit spend was performed for packaging.",
+    "runtime_behavior": "The signed-in interface disables sending and reports provider not configured when OPENAI_API_KEY is absent."
+  },
+  "unchanged_gates": {
+    "production": "BLOCKED",
+    "billing": "OFF",
+    "sol": "OFF",
+    "resend_webhook": "NOT CALLED; explicit consent still required"
+  }
+}

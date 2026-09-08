@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.22 · DIÁRIO DEFINITIVO V187
+/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.23 · ORBE IA GOVERNADA V190
    Estilos e motores nascem sob demanda; toda falha oferece tentativa e retorno seguro. */
 
 import {
@@ -192,7 +192,7 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
     },
     journal: ensureJournal,
     ai: async () => {
-      const { AIEngine } = await import('./ai-engine.js?v=187');
+      const { AIEngine } = await import('./ai-engine.js?v=190');
       return new AIEngine($('#aiApp'), config);
     },
     store: async () => {

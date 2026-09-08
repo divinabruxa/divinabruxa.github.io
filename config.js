@@ -10,6 +10,7 @@ export const CONFIG=Object.freeze({
   whatsapp:'',
   contactEmail:'orbedasrealidades@hotmail.com',
   apiBase:'',
+  aiEnabled:true,
   supabaseUrl:'https://kyphdsamyygavmkzyezr.supabase.co',
   supabasePublishableKey:'sb_publishable__UOlBYwmX4dl7txLy_FprA_KS_3EBq6',
   accountFunctionsBase:'https://kyphdsamyygavmkzyezr.supabase.co/functions/v1',
