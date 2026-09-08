@@ -133,6 +133,15 @@ export class SchoolEngine {
       ? this.state.lastModule
       : SCHOOL_MODULES[0].id;
     this.render();
+    this.onAccountSync = event => {
+      if (!event.detail?.school) return;
+      this.state = normalizeSchoolState(store.get(SCHOOL_STORAGE_KEY));
+      this.activeModule = SCHOOL_MODULES.some(module => module.id === this.state.lastModule)
+        ? this.state.lastModule
+        : SCHOOL_MODULES[0].id;
+      this.render();
+    };
+    globalThis.addEventListener?.('divina:account-sync-applied', this.onAccountSync);
   }
 
   save() {

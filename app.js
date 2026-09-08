@@ -1,11 +1,12 @@
-/* DIVINA BRUXA — APLICATIVO V188 · CONSULTAS DURÁVEIS E RASTREÁVEIS */
+/* DIVINA BRUXA — APLICATIVO V189 · CONTA, SINCRONIZAÇÃO E SEGURANÇA */
 
 import { CONFIG } from './config.js';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
 import { createNavigation } from './navigation.js?v=180';
 import { RealityOrbEngine } from './orb-engine-v68.js?v=100';
 import { bindMiniOrbs } from './mini-orb-engine.js?v=71';
-import { AuthClient } from './auth-client-v6.js?v=151';
+import { AuthClientV189 as AuthClient } from './auth-client-v189.js?v=189';
+import { AccountEngineV189 } from './account-engine-v189.js?v=189';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
 import { createPageLoader } from './page-loader-v1.js?v=188';
@@ -44,6 +45,7 @@ addEventListener('orbe:toast', event => toast(event.detail));
 
 const authClient = new AuthClient(CONFIG);
 window.divinaAuth = authClient;
+window.divinaAccount = safely('Conta V189', () => new AccountEngineV189($('#login'), authClient));
 safely('Orbes auxiliares', bindMiniOrbs);
 
 const loadingPortal = createOrbLoadingPortal();
@@ -71,61 +73,6 @@ navigator.serviceWorker?.addEventListener('message', event => {
   if (event.data?.type !== 'divina-notification-open') return;
   const target = String(event.data.target || '#home').replace(/^#/, '');
   if (/^(home|daily|school|consultations|login|subscriptions|ai|music|videos|skins|notifications)$/.test(target)) pageLoader.go(target);
-});
-
-const bindSubmit = (selector, handler) => {
-  const form = $(selector);
-  if (form) form.onsubmit = handler;
-};
-
-bindSubmit('#userLogin', async event => {
-  event.preventDefault();
-  const form = event.currentTarget;
-  const email = form.elements[0]?.value?.trim();
-  const password = form.elements[1]?.value || '';
-  if (!authClient.enabled) {
-    toast('A conta será ativada quando o servidor seguro estiver conectado.');
-    return;
-  }
-  if (!email || !password) {
-    toast('Informe e-mail e senha.');
-    return;
-  }
-  const result = await loadingPortal.track(
-    () => authClient.login(email, password),
-    { label: 'a sua conta' }
-  );
-  toast(result.ok
-    ? 'Sessão iniciada com segurança.'
-    : result.offline
-      ? 'Servidor temporariamente indisponível.'
-      : 'Não foi possível entrar.');
-});
-
-bindSubmit('#userRegister', async event => {
-  event.preventDefault();
-  const form = event.currentTarget;
-  const name = form.elements.name?.value?.trim() || '';
-  const email = form.elements.email?.value?.trim() || '';
-  const password = form.elements.password?.value || '';
-  const confirm = form.elements.confirm?.value || '';
-  if (password !== confirm) {
-    toast('As senhas não conferem.');
-    return;
-  }
-  if (!authClient.enabled) {
-    toast('O cadastro será ativado quando o servidor seguro estiver conectado.');
-    return;
-  }
-  const result = await loadingPortal.track(
-    () => authClient.register(email, password, name),
-    { label: 'o seu novo universo' }
-  );
-  toast(result.ok
-    ? 'Conta criada. Verifique seu e-mail.'
-    : result.offline
-      ? 'Servidor temporariamente indisponível.'
-      : 'Não foi possível criar a conta.');
 });
 
 let installPrompt = null;

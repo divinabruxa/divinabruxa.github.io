@@ -72,6 +72,13 @@ export class JournalEngine {
     this.restoreDraft();
     this.render();
     this.updateNetworkState();
+    this.onAccountSync = event => {
+      if (!event.detail?.journal) return;
+      this.refreshLinkOptions();
+      this.render();
+      this.setSaveState('Diário sincronizado com sua conta', 'saved');
+    };
+    globalThis.addEventListener?.('divina:account-sync-applied', this.onAccountSync);
   }
 
   notify(message) {

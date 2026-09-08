@@ -1,0 +1,151 @@
+{
+  "captured_at": "2026-09-08T17:08:35Z",
+  "environment": "staging",
+  "supabase": {
+    "project_ref": "kyphdsamyygavmkzyezr",
+    "project_name": "divina-bruxa-staging",
+    "region": "sa-east-1",
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.6.1.155",
+    "auth_users_after_tests": 0,
+    "real_user_data_used": false
+  },
+  "migration": {
+    "version": "20260908164449",
+    "name": "divina_account_sync_staging_v189",
+    "present": true
+  },
+  "edge_functions": [
+    {
+      "slug": "account-sync-v189",
+      "version": 2,
+      "status": "ACTIVE",
+      "verify_jwt": true,
+      "deployed_sha256": "9d000bfa567747f21a05ea8531c381eb6120e4b24d7cbc5eeb2772d93ea4b87f"
+    },
+    {
+      "slug": "daily-card-account",
+      "version": 2,
+      "status": "ACTIVE",
+      "verify_jwt": true,
+      "deployed_sha256": "78d245bf0d8731182a796296c8b17f71c3b570cbc5c25952bdb2a4c23e0add0a"
+    },
+    {
+      "slug": "account-export",
+      "version": 4,
+      "status": "ACTIVE",
+      "verify_jwt": true,
+      "deployed_sha256": "19675211336fad293fe6a787419f3c5a90c2e32b7dead8e850b8e36b5f1bf059",
+      "v189_changes": ["official origins", "active session check", "verified email", "complete School snapshot"]
+    },
+    {
+      "slug": "account-delete",
+      "version": 3,
+      "status": "ACTIVE",
+      "verify_jwt": true,
+      "deployed_sha256": "3bcc2f497d9381cde4614bc52649871dec15d16aff840354c26e4501165b7f5c",
+      "v189_changes": ["official origins"]
+    }
+  ],
+  "official_origin_preflight": {
+    "tested_origin": "https://divinabruxa.com.br",
+    "expected_access_control_allow_origin": "https://divinabruxa.com.br",
+    "account_sync_v189": 204,
+    "daily_card_account": 204,
+    "account_export": 204,
+    "account_delete": 204,
+    "passed": true
+  },
+  "database_cross_access_gate": {
+    "method": "transactional synthetic UUIDs with authenticated role and auth.uid impersonation",
+    "resources": [
+      "profiles",
+      "user_settings",
+      "school_sync_state",
+      "school_progress",
+      "school_favorites",
+      "journal_entries",
+      "daily_cards",
+      "purchases",
+      "entitlements"
+    ],
+    "account_a": { "own_rows_visible_per_resource": 1, "cross_rows_visible_per_resource": 0 },
+    "account_b": { "own_rows_visible_per_resource": 1, "cross_rows_visible_per_resource": 0 },
+    "cross_account_updates_affected_rows": 0,
+    "synthetic_rows_after_cleanup_per_resource": 0,
+    "passed": true
+  },
+  "database_security": {
+    "rls_enabled_on_all_account_resources": true,
+    "own_only_policies_use_auth_uid": true,
+    "anon_sensitive_table_grants": false,
+    "purchases_authenticated_access": "SELECT only",
+    "entitlements_authenticated_access": "SELECT only",
+    "account_sync_rpcs": "service_role only",
+    "journal_cloud_sync_default": false,
+    "journal_tombstones": true,
+    "audit_contains_counts_not_content": true,
+    "rate_limit": "30 synchronized requests per account per 60 seconds"
+  },
+  "advisors": {
+    "security": {
+      "errors": 0,
+      "warnings": 0,
+      "info": 12,
+      "info_type": "rls_enabled_no_policy",
+      "note": "Intentional server-only private tables and the non-readable deletion receipt."
+    },
+    "performance": {
+      "errors": 0,
+      "warnings": 0,
+      "info": 73,
+      "info_type": "unused_index",
+      "note": "Expected for an empty and recently created STAGING environment."
+    }
+  },
+  "controlled_account_flow": {
+    "signup": "pending owner-controlled email after site installation",
+    "email_verification": "pending",
+    "login": "pending",
+    "password_recovery": "pending",
+    "two_device_ui_sync": "pending",
+    "self_service_deletion": "pending disposable account test",
+    "reason": "The database gate used synthetic identifiers only; no real inbox or personal data was used."
+  },
+  "backup_gate": {
+    "organization_plan": "free",
+    "hosted_daily_backup_available": false,
+    "logical_encrypted_offsite_dump": "pending operator destination and database credential",
+    "isolated_restore_test": "pending",
+    "production_blocked_until_complete": true
+  },
+  "v188_email_gate": {
+    "provider": "Resend",
+    "chatgpt_connector_connected": true,
+    "supabase_provider_configured": false,
+    "delivery_tracking_configured": false,
+    "real_delivery_confirmed": false,
+    "webhook_retried_in_v189": false
+  },
+  "qa": {
+    "suite": "QA-V189-CONTA-SYNC-SEGURANCA.mjs",
+    "static_total": 270,
+    "static_passed": 270,
+    "static_and_live_total": 282,
+    "static_and_live_passed": 282,
+    "failed": 0,
+    "status": "PASS",
+    "legacy_v188_regression": {
+      "total": 262,
+      "passed": 249,
+      "expected_release_activation_or_hash_differences": 13,
+      "unexpected_failures": 0
+    }
+  },
+  "production": {
+    "deployed": false,
+    "dns_changed": false,
+    "billing_enabled": false,
+    "store_published": false
+  }
+}

@@ -2,7 +2,7 @@
 import { CARDS } from './tarot-data.js';
 import { store, escapeHTML } from './storage.js';
 import { cardImageMarkup } from './tarot-image-runtime.js?v=183';
-import { brasiliaDate, collectiveDailyIdentity, createDailyRecord, isDailyRecord, nextBrasiliaBoundary, resolveDailyIdentity, DAILY_SELECTION_VERSION, DAILY_STORAGE_KEY } from './daily-policy.js?v=183';
+import { brasiliaDate, collectiveDailyIdentity, createAccountDailyRecord, createDailyRecord, isDailyRecord, nextBrasiliaBoundary, resolveDailyIdentity, DAILY_ACCOUNT_SELECTION_VERSION, DAILY_SELECTION_VERSION, DAILY_STORAGE_KEY } from './daily-policy.js?v=189';
 import { dailyMeaning } from './daily-meaning-runtime.js?v=183';
 
 const DAILY_STORAGE_EVENT_SUFFIX = `:${DAILY_STORAGE_KEY}`;
@@ -39,7 +39,15 @@ export class DailyRitual {
     this.onVisibility = () => {
       if (document.visibilityState === 'visible') this.refreshCycle();
     };
+    this.onAccountSync = event => {
+      if (!event.detail?.daily) return;
+      const next = this.readRecord();
+      if (!next) return;
+      this.data = next;
+      this.reveal(false);
+    };
     globalThis.addEventListener?.('storage', this.onStorage);
+    globalThis.addEventListener?.('divina:account-sync-applied', this.onAccountSync);
     document.addEventListener?.('visibilitychange', this.onVisibility);
     this.scheduleNextCycle();
     this.render();
@@ -128,7 +136,12 @@ export class DailyRitual {
     if (status) status.textContent = 'A Orbe está preparando a Carta do Dia.';
     try {
       const identity = await this.identityPromise;
-      const record = createDailyRecord(intention, new Date(), identity);
+      let record = null;
+      if (this.authClient?.enabled && typeof this.authClient.dailyCard === 'function' && navigator.onLine !== false) {
+        const remote = await this.authClient.dailyCard();
+        if (remote?.ok) record = createAccountDailyRecord(remote.body, intention);
+      }
+      record ||= createDailyRecord(intention, new Date(), identity);
       const concurrent = this.readRecord(record.date);
       this.data = concurrent || record;
       if (!concurrent) this.saveRecord(record);
@@ -158,8 +171,10 @@ export class DailyRitual {
     const meaning = dailyMeaning(card);
     const keywords = meaning.keywords.map(safe).join(' · ');
     const symbols = meaning.symbols.length ? `<article class="meaning-card"><span>SÍMBOLOS</span>${meaning.symbols.map(item => `<p>✦ ${safe(item)}</p>`).join('')}</article>` : '';
-    const scope = this.data.selectionVersion !== DAILY_SELECTION_VERSION
-      ? 'A carta já revelada antes desta atualização foi preservada neste aparelho até o fim do ciclo atual.'
+    const scope = this.data.selectionVersion === DAILY_ACCOUNT_SELECTION_VERSION
+      ? 'A seleção segura desta conta foi confirmada no STAGING e permanece estável em outros aparelhos conectados.'
+      : this.data.selectionVersion !== DAILY_SELECTION_VERSION
+        ? 'A carta já revelada antes desta atualização foi preservada neste aparelho até o fim do ciclo atual.'
       : this.data.identityScope === 'account'
         ? 'A seleção desta conta permanece estável em outros aparelhos conectados.'
         : 'A seleção coletiva pela data permanece igual em qualquer aparelho.';
@@ -182,6 +197,7 @@ export class DailyRitual {
   destroy() {
     globalThis.clearTimeout(this.cycleTimer);
     globalThis.removeEventListener?.('storage', this.onStorage);
+    globalThis.removeEventListener?.('divina:account-sync-applied', this.onAccountSync);
     document.removeEventListener?.('visibilitychange', this.onVisibility);
   }
 }

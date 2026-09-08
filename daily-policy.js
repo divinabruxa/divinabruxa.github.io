@@ -1,10 +1,11 @@
-/* DIVINA BRUXA — CONTRATO TEMPORAL DA CARTA DO DIA — V183
+/* DIVINA BRUXA — CONTRATO TEMPORAL DA CARTA DO DIA — V189
    Um ciclo por data de Brasília, seleção estável entre aparelhos e orientação sempre direta.
 */
 export const DAILY_TIME_ZONE = 'America/Sao_Paulo';
 export const DAILY_STORAGE_KEY = 'daily';
 export const DAILY_SCHEMA_VERSION = '10.0.0';
 export const DAILY_SELECTION_VERSION = 'deterministic-v183';
+export const DAILY_ACCOUNT_SELECTION_VERSION = 'account-authority-v189';
 export const DAILY_CARD_COUNT = 78;
 export const DAILY_MAX_INTENTION_LENGTH = 120;
 
@@ -103,6 +104,33 @@ export function createDailyRecord(intention = '', now = new Date(), identity = c
   });
 }
 
+export function createAccountDailyRecord(value = {}, intention = '') {
+  const date = String(value.local_date || value.date || '');
+  const id = Number(value.card_id ?? value.cardIndex);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !Number.isInteger(id) || id < 0 || id >= DAILY_CARD_COUNT) {
+    throw new TypeError('Carta da conta inválida.');
+  }
+  return Object.freeze({
+    date,
+    id,
+    orientation:'normal',
+    reversed:false,
+    intention:normalizeDailyIntention(intention),
+    revealedAt:validServerDate(value.revealed_at || value.createdAt),
+    timeZone:DAILY_TIME_ZONE,
+    schemaVersion:DAILY_SCHEMA_VERSION,
+    selectionVersion:DAILY_ACCOUNT_SELECTION_VERSION,
+    identityScope:'account',
+    identityDigest:stableDailyDigest('divina-bruxa:account-authority:v189'),
+    source:'supabase-staging'
+  });
+}
+
+function validServerDate(value) {
+  const parsed = new Date(String(value || ''));
+  return Number.isNaN(parsed.getTime()) ? new Date().toISOString() : parsed.toISOString();
+}
+
 export function isDailyRecord(value, date = brasiliaDate()) {
   if (!value || value.date !== date || !Number.isInteger(value.id) || value.id < 0 || value.id >= DAILY_CARD_COUNT) return false;
   if (value.reversed === true || (value.orientation && value.orientation !== 'normal')) return false;
@@ -110,6 +138,9 @@ export function isDailyRecord(value, date = brasiliaDate()) {
   if (value.selectionVersion === DAILY_SELECTION_VERSION) {
     if (!/^(collective|account)$/.test(value.identityScope || '') || !/^[a-f0-9]{8}$/.test(value.identityDigest || '')) return false;
     if (dailyCardIndex(value.date, { scope: value.identityScope, digest: value.identityDigest }) !== value.id) return false;
+  }
+  if (value.selectionVersion === DAILY_ACCOUNT_SELECTION_VERSION) {
+    if (value.identityScope !== 'account' || value.source !== 'supabase-staging') return false;
   }
   return typeof value.intention === 'string' && value.intention.length <= DAILY_MAX_INTENTION_LENGTH;
 }

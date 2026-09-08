@@ -1,0 +1,92 @@
+{
+  "release": "V189",
+  "macroetapa": 11,
+  "title": "Conta, sincronização e segurança",
+  "date": "2026-09-08",
+  "base_release": "V188",
+  "environment": "staging",
+  "scope": {
+    "signup": true,
+    "email_verification": true,
+    "login": true,
+    "password_recovery": true,
+    "session_refresh": true,
+    "local_session_revocation": true,
+    "account_export": true,
+    "account_deletion": true,
+    "cross_device_sync": true,
+    "automatic_billing": false,
+    "production_publish": false
+  },
+  "session_security": {
+    "browser_storage": "sessionStorage",
+    "localStorage_tokens": false,
+    "refresh_token_rotation_supported": true,
+    "active_session_check_on_sensitive_edge_functions": true,
+    "admin_requires_mfa_aal2": true
+  },
+  "synchronized_resources": {
+    "daily_card": "server authority after an authenticated reveal",
+    "school": "complete snapshot plus operational progress and favorites",
+    "journal": "explicit opt-in only; saved entries and tombstones",
+    "journal_drafts": "local only",
+    "purchases": "read only",
+    "entitlements": "read only"
+  },
+  "privacy": {
+    "journal_cloud_sync_default": false,
+    "journal_requires_explicit_consent": true,
+    "journal_body_in_admin": false,
+    "journal_body_in_analytics": false,
+    "journal_body_sent_to_ai": false,
+    "account_specific_local_caches": true,
+    "self_service_export": true,
+    "self_service_deletion_with_recent_auth": true
+  },
+  "staging": {
+    "supabase_project_ref": "kyphdsamyygavmkzyezr",
+    "region": "sa-east-1",
+    "migration": {
+      "version": "20260908164449",
+      "name": "divina_account_sync_staging_v189",
+      "status": "applied"
+    },
+    "edge_functions": [
+      { "slug": "account-sync-v189", "version": 2, "verify_jwt": true, "status": "ACTIVE" },
+      { "slug": "daily-card-account", "version": 2, "verify_jwt": true, "status": "ACTIVE" },
+      { "slug": "account-export", "version": 4, "verify_jwt": true, "status": "ACTIVE" },
+      { "slug": "account-delete", "version": 3, "verify_jwt": true, "status": "ACTIVE" }
+    ]
+  },
+  "gates": {
+    "static_and_regression_qa": "passed",
+    "database_cross_access": "passed",
+    "official_origin_cors": "passed",
+    "rls_and_least_privilege": "passed",
+    "no_automatic_billing": "passed",
+    "controlled_signup_verification_recovery": "pending_owner_email_test_after_install",
+    "offsite_backup_and_isolated_restore": "pending_operator_configuration",
+    "v188_real_email_delivery": "pending_resend_server_secrets_and_controlled_test",
+    "macroetapa_11": "ready_for_install_with_operational_gates_pending"
+  },
+  "unchanged_invariants": {
+    "main_orb_frozen": true,
+    "magic_menu_frozen": true,
+    "mini_orb_frozen": true,
+    "tarot_cards": 78,
+    "reversed_cards": 0,
+    "free_tarot_repetition": false,
+    "meanings_during_free_reveal": false,
+    "mesa_real_rows": 13,
+    "mesa_real_columns": 6,
+    "consultation_prices_brl": [250, 150, 100, 50]
+  },
+  "installation": {
+    "flat_zip": true,
+    "package_files": 22,
+    "replace_files": 11,
+    "add_files": 11,
+    "rerun_sql": false,
+    "publish_or_dns_change": false
+  }
+}

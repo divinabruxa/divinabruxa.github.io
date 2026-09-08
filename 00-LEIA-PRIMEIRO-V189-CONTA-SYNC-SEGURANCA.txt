@@ -1,0 +1,131 @@
+DIVINA BRUXA V189 — CONTA, SINCRONIZAÇÃO E SEGURANÇA
+MACROETAPA 11 SOBRE A V188
+
+ESTADO DESTA ENTREGA
+
+- A V189 está pronta para instalação no site e usa somente o Supabase STAGING.
+- Cadastro, confirmação de e-mail, entrada, recuperação, sessão temporária,
+  exportação e exclusão de conta estão conectados ao backend seguro.
+- Escola, favoritos e Carta do Dia acompanham a conta. O Diário fica local por
+  padrão e só atravessa aparelhos depois de uma autorização explícita.
+- Compras e benefícios são somente leitura. Nenhuma cobrança real foi ativada.
+- O teste de isolamento do banco passou para duas contas sintéticas em todos os
+  nove recursos: cada conta viu 1 linha própria e 0 linha da outra.
+- As quatro funções de Conta respondem ao domínio oficial, exigem JWT e estão
+  ATIVAS no STAGING.
+- Nenhuma conta ou dado pessoal real foi criado durante a preparação.
+
+COMO INSTALAR PELO IPHONE
+
+1. Descompacte o ZIP no aplicativo Arquivos.
+2. Abra a raiz do repositório divinabruxa.github.io no ramo main.
+3. Toque em Add file > Upload files.
+4. Selecione os 22 arquivos soltos encontrados dentro do ZIP.
+5. Não envie apenas o ZIP e não crie uma pasta V189.
+6. Aceite substituir os 11 arquivos existentes.
+7. Não apague nenhum arquivo anterior do portal.
+8. Use o commit: Instala V189 Conta Sync e Segurança
+9. Aguarde o GitHub Pages concluir e abra o portal novamente. Se o iPhone
+   mantiver o cache antigo, feche a aba, reabra e recarregue uma vez.
+
+11 ARQUIVOS SUBSTITUÍDOS
+
+- app.js
+- config.js
+- daily-policy.js
+- index.html
+- journal-engine.js
+- privacidade-e-dados.html
+- ritual-engine.js
+- school-engine.js
+- storage.js
+- sw.js
+- termos-de-uso.html
+
+11 ARQUIVOS NOVOS
+
+- SUPABASE-CONTA-SYNC-STAGING-V189.sql
+- account-engine-v189.js
+- account-secure-v189.css
+- account-sync-v189.ts
+- auth-client-v189.js
+- daily-card-account-v189.ts
+- CONTA-SYNC-SEGURANCA-V189.json
+- STAGING-CONTA-STATUS-V189.json
+- QA-V189-CONTA-SYNC-SEGURANCA.mjs
+- 00-LEIA-PRIMEIRO-V189-CONTA-SYNC-SEGURANCA.txt
+- ARQUIVOS-V189-SHA256.txt
+
+IMPORTANTE SOBRE O SUPABASE
+
+- A migração V189 e as funções já foram implantadas no STAGING
+  kyphdsamyygavmkzyezr. NÃO execute novamente o arquivo SQL.
+- Os arquivos .sql e .ts entram no ZIP como registro auditável da entrega;
+  colocá-los no GitHub Pages não executa nem altera o backend.
+- Produção, DNS, loja, pagamentos e cobrança continuam intocados.
+
+CONFIGURAÇÃO NECESSÁRIA PARA O TESTE DE E-MAIL DA CONTA
+
+No painel do Supabase STAGING, em Authentication > URL Configuration:
+
+- Site URL: https://divinabruxa.com.br
+- Redirect URL permitida: https://divinabruxa.com.br/**
+- Para testar pela URL do GitHub Pages, permita também:
+  https://divinabruxa.github.io/**
+
+Depois confirme que o provedor SMTP transacional está configurado para os
+e-mails do Supabase Auth. A conexão do plugin Resend no ChatGPT não transfere
+chaves nem configura o SMTP do Supabase. Nunca coloque chave, segredo ou token
+no GitHub, HTML, JavaScript, captura de tela ou conversa pública.
+
+TESTE CONTROLADO APÓS A INSTALAÇÃO
+
+1. Use um e-mail pertencente à proprietária e crie uma conta descartável.
+2. Confirme o link recebido e entre na conta.
+3. Abra a Escola, conclua uma aula, favorite outra e sincronize.
+4. Crie uma entrada salva no Diário. Verifique que ela continua local.
+5. Ative conscientemente “Sincronizar meu Diário privado”, confirme o aviso e
+   teste a continuidade em um segundo aparelho ou aba privada.
+6. Revele a Carta do Dia conectada e confirme a mesma carta no segundo aparelho.
+7. Baixe a exportação e confirme profile, settings, schoolSyncState, journal,
+   dailyCards, purchases e entitlements.
+8. Solicite recuperação de senha e confirme o link.
+9. Em uma conta descartável, exporte e depois teste a exclusão com senha atual,
+   a frase EXCLUIR MINHA CONTA e a segunda confirmação.
+10. Confirme que uma conta diferente não exibe Escola, Diário ou Carta da conta
+    anterior. Não use dados sensíveis neste teste.
+
+BACKUP E PORTÃO OPERACIONAL
+
+O projeto está no plano gratuito e não possui o portão de backup diário hospedado
+confirmado para esta entrega. Antes de qualquer promoção para produção, um
+operador com a credencial do banco deve gerar um dump lógico, criptografá-lo,
+guardá-lo fora do projeto e provar a restauração em ambiente isolado. Nenhuma
+senha de banco deve ser colocada neste ZIP.
+
+O PORTÃO V188 DE E-MAIL DE CONSULTAS CONTINUA ABERTO
+
+- Resend no Supabase: ainda não configurado.
+- Rastreamento real de entrega: ainda não confirmado.
+- O webhook V188 não foi chamado nem reconfigurado nesta etapa.
+
+VALIDAÇÃO
+
+Na raiz do projeto, se desejar:
+
+node QA-V189-CONTA-SYNC-SEGURANCA.mjs
+node QA-V189-CONTA-SYNC-SEGURANCA.mjs --live
+
+O segundo comando verifica também CORS, JWT obrigatório e estado público das
+funções, sem criar conta, enviar e-mail ou gravar conteúdo pessoal.
+
+PROTEÇÕES PRESERVADAS
+
+- Orbe principal, Magic Menu e mini-Orbe não foram alterados.
+- Tarot Livre: 78 cartas diretas, sem repetição e sem significado na revelação.
+- Mesa Real: 13 fileiras por 6 colunas.
+- Preços preservados: R$ 250, R$ 150, R$ 100 e R$ 50.
+- Nenhum WhatsApp, checkout, cartão, cobrança real, publicação de produção, DNS
+  ou loja foi ativado por esta entrega.
+
+CONFIRME A INSTALAÇÃO E O TESTE CONTROLADO ANTES DE INICIAR A V190.

@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V58 · CONSULTAS DURÁVEIS V188 */
-const CACHE='divina-bruxa-v58-consultations-v188';
+/* DIVINA BRUXA — SERVICE WORKER V59 · CONTA SEGURA V189 */
+const CACHE='divina-bruxa-v59-account-v189';
 
 const REQUIRED=[
   './',
@@ -19,6 +19,9 @@ const REQUIRED=[
   './skin-catalog-v6.js',
   './config.js',
   './auth-client-v6.js',
+  './auth-client-v189.js',
+  './account-engine-v189.js',
+  './account-secure-v189.css',
   './navigation.js',
   './orb-engine-v68.js',
   './mini-orb-engine.js',
@@ -52,6 +55,9 @@ const CORE=[
   './orb-engine-v68.js',
   './mini-orb-engine.js',
   './auth-client-v6.js',
+  './auth-client-v189.js',
+  './account-engine-v189.js',
+  './account-secure-v189.css',
   './visual-guard-v6.js',
   './tarot-experience-v6.js',
   './tarot-data.js',
