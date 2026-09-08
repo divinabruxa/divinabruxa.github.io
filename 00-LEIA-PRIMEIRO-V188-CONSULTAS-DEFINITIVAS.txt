@@ -1,0 +1,129 @@
+DIVINA BRUXA V188 — CONSULTAS DEFINITIVAS
+MACROETAPA 10 SOBRE A V187
+
+ESTADO DESTA ENTREGA
+
+- O formulário, o registro durável, o protocolo, o código privado e o painel
+  com cinco estados estão prontos.
+- A migração V188 e as duas Edge Functions já estão implantadas no Supabase
+  STAGING kyphdsamyygavmkzyezr.
+- O teste sintético criou um registro real no STAGING, preservou o valor,
+  gerou protocolo, aceitou repetição idempotente e recusou código incorreto.
+- Nenhuma cobrança automática foi criada ou realizada.
+- A entrega real de e-mail AINDA NÃO está ativada: o endpoint informa
+  providerConfigured=false e deliveryTracking=false.
+- Conectar o plugin Resend ao ChatGPT não transfere as chaves para as Edge
+  Functions do Supabase. Nenhum segredo deve ser colocado neste pacote.
+
+COMO INSTALAR PELO IPHONE
+
+1. Descompacte o ZIP.
+2. Abra a raiz do repositório divinabruxa.github.io no ramo main.
+3. Toque em Add file > Upload files.
+4. Selecione e envie os 19 arquivos soltos encontrados dentro do ZIP.
+5. Não envie somente o ZIP e não crie uma pasta V188.
+6. Aceite substituir os 10 arquivos existentes.
+7. Não apague nenhum arquivo anterior do site.
+8. Use o commit: Instala V188 Consultas Definitivas
+9. Aguarde o GitHub Pages terminar e atualize o portal. Se o iPhone mantiver
+   a versão antiga, feche a aba, abra novamente e recarregue uma vez.
+
+10 ARQUIVOS SUBSTITUÍDOS
+
+- index.html
+- app.js
+- page-loader-v1.js
+- sw.js
+- busca-v165.js
+- consultation-policy.js
+- consultation-engine.js
+- consultas-de-tarot.html
+- privacidade-e-dados.html
+- termos-de-uso.html
+
+9 ARQUIVOS NOVOS
+
+- consultations-definitive-v188.css
+- consultations-booking-v188.ts
+- consultations-email-webhook-v188.ts
+- SUPABASE-CONSULTAS-STAGING-V188-TRACKING-EMAIL.sql
+- CONSULTAS-DEFINITIVAS-V188.json
+- STAGING-CONSULTAS-STATUS-V188.json
+- QA-V188-CONSULTAS-DEFINITIVAS.mjs
+- 00-LEIA-PRIMEIRO-V188-CONSULTAS-DEFINITIVAS.txt
+- ARQUIVOS-V188-SHA256.txt
+
+O QUE A V188 ENTREGA
+
+- Comparação clara dos quatro serviços e de quem cada um atende.
+- Mesa Real Profissional R$ 250; Leitura de Mentes R$ 150;
+  Carta de Conselho R$ 100; Pergunta Direta R$ 50.
+- Nome, e-mail, telefone e contexto, com revisão antes do envio.
+- Três consentimentos obrigatórios e nenhum opt-in de marketing.
+- Horário real quando a agenda responde ou preferência manual claramente
+  marcada como preferência, sem fingir disponibilidade.
+- Registro durável no STAGING, valor preservado e protocolo único.
+- Código privado aleatório; o servidor guarda somente o SHA-256.
+- Acompanhamento que nunca devolve nome, e-mail, telefone ou pergunta.
+- Estados públicos: Recebida, Aguardando confirmação, Confirmada,
+  Concluída e Cancelada.
+- Avisos separados para a proprietária e para a cliente, idempotência por
+  destinatário e webhook assinado/deduplicado, prontos para ativação.
+- Fallback explícito para orbedasrealidades@hotmail.com.
+
+ATIVAÇÃO SEGURA DO RESEND — AINDA NECESSÁRIA
+
+No projeto Supabase STAGING, abra Edge Functions > Secrets e adicione:
+
+- RESEND_API_KEY: chave criada no Resend.
+- CONSULTATIONS_EMAIL_FROM: remetente de um domínio já verificado no Resend,
+  por exemplo Divina Bruxa <consultas@SEU-DOMINIO-VERIFICADO>.
+- RESEND_WEBHOOK_SECRET: segredo whsec_ gerado ao registrar o webhook.
+
+No Resend, registre este webhook para delivered, bounced, complained e failed:
+
+https://kyphdsamyygavmkzyezr.supabase.co/functions/v1/consultations-email-webhook-v188
+
+REGRAS IMPORTANTES
+
+- Nunca coloque uma chave, segredo ou token no GitHub, HTML, JavaScript,
+  captura de tela ou conversa pública.
+- Não use um endereço de remetente antes de o domínio estar verificado.
+- Não aplique a migração em produção; esta entrega é somente STAGING.
+- O upload dos arquivos não ativa os segredos do Resend.
+- Não faça teste real com endereço de outra pessoa. Use um e-mail controlado
+  pela proprietária e um contexto sem dados sensíveis.
+
+COMO FECHAR O PORTÃO DA MACROETAPA 10
+
+1. Depois dos três segredos, abra o endpoint de consultas e confirme que
+   providerConfigured e deliveryTracking aparecem como true.
+2. Envie uma Pergunta Direta de teste para um e-mail da proprietária.
+3. Confirme o registro e o protocolo no STAGING.
+4. Confirme a chegada do aviso em orbedasrealidades@hotmail.com.
+5. Confirme a chegada da mensagem da cliente e o estado delivered no ledger.
+6. Consulte o painel com protocolo + código privado e teste um código errado.
+7. Somente então marque o portão de e-mail real como aprovado e avance para
+   a Macroetapa 11.
+
+VALIDAÇÃO
+
+Execute na raiz, se desejar:
+
+node QA-V188-CONSULTAS-DEFINITIVAS.mjs --live
+
+Depois de ativar os segredos, execute também:
+
+node QA-V188-CONSULTAS-DEFINITIVAS.mjs --live --expect-email-active
+
+O arquivo ARQUIVOS-V188-SHA256.txt confere a integridade dos outros 18
+arquivos do pacote.
+
+PROTEÇÕES PRESERVADAS
+
+- Orbe principal, Magic Menu e mini-Orbe não foram alterados.
+- Tarot Livre: 78 cartas diretas, sem repetição e sem significado na revelação.
+- Mesa Real: 13 fileiras por 6 colunas.
+- Carta do Dia, Biblioteca, Tiragens, Escola e Diário permanecem preservados.
+- Nenhum WhatsApp, checkout, cartão, cobrança real, publicação, DNS ou loja
+  foi ativado por esta entrega.

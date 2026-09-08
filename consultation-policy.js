@@ -1,8 +1,8 @@
-/* DIVINA BRUXA — CONSULTAS CELESTIAIS V147
-   Atendimento humano, catálogo controlável no STAGING e cobrança real desligada. */
+/* DIVINA BRUXA — CONSULTAS CELESTIAIS V188
+   Atendimento humano, persistência durável e rastreamento privado no STAGING. */
 
 export const CONSULTATION_POLICY=Object.freeze({
-  schemaVersion:'9.1.0',
+  schemaVersion:'10.0.0',
   priceTableVersion:'consultas-2026-09-05-v147',
   environment:'staging',
   realBilling:false,
@@ -13,6 +13,17 @@ export const CONSULTATION_POLICY=Object.freeze({
   consumesAICredits:false,
   includedInPremium:false,
   timezone:'America/Sao_Paulo',
+  tracking:Object.freeze({
+    enabled:true,
+    tokenStorage:'device-and-confirmation-email',
+    publicStatuses:Object.freeze([
+      Object.freeze({id:'received',label:'Recebida',detail:'A solicitação foi registrada com protocolo.'}),
+      Object.freeze({id:'awaiting_confirmation',label:'Aguardando confirmação',detail:'A equipe está verificando disponibilidade e detalhes.'}),
+      Object.freeze({id:'confirmed',label:'Confirmada',detail:'O atendimento foi confirmado pelo canal oficial.'}),
+      Object.freeze({id:'completed',label:'Concluída',detail:'O atendimento foi finalizado.'}),
+      Object.freeze({id:'cancelled',label:'Cancelada',detail:'A solicitação foi encerrada sem atendimento.'})
+    ])
+  }),
   services:Object.freeze([
     Object.freeze({
       id:'mesa-real-profissional',
@@ -72,7 +83,8 @@ export const CONSULTATION_POLICY=Object.freeze({
     'Consultas são atendimentos humanos separados do Premium e da Orbe IA.',
     'Nenhuma consulta consome créditos de IA.',
     'A leitura é simbólica e não substitui orientação médica, psicológica, jurídica ou financeira.',
-    'Cada pedido preserva o valor exibido no momento da confirmação.'
+    'Cada pedido preserva o valor exibido no momento da confirmação.',
+    'O protocolo e o código privado permitem acompanhar apenas dados resumidos do pedido.'
   ])
 });
 

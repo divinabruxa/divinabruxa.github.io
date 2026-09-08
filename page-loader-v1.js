@@ -202,7 +202,7 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
     },
     consultations: async () => {
       await ensureCommerce();
-      const { ConsultationEngine } = await import('./consultation-engine.js?v=148');
+      const { ConsultationEngine } = await import('./consultation-engine.js?v=188');
       return new ConsultationEngine($('#consultationApp'), config);
     },
     subscriptions: async () => {
@@ -230,7 +230,7 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
     tarot: () => import('./tarot-engine.js?v=182'),
     consultations: () => Promise.all([
       import('./commerce-engine.js?v=148'),
-      import('./consultation-engine.js?v=148')
+      import('./consultation-engine.js?v=188')
     ]),
     daily: () => import('./ritual-engine.js?v=183'),
     notifications: () => import('./notification-engine-v150.js?v=150')

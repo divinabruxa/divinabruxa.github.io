@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V57 · ESCOLA E DIÁRIO OFFLINE V187 */
-const CACHE='divina-bruxa-v57-journal-v187';
+/* DIVINA BRUXA — SERVICE WORKER V58 · CONSULTAS DURÁVEIS V188 */
+const CACHE='divina-bruxa-v58-consultations-v188';
 
 const REQUIRED=[
   './',
@@ -84,6 +84,10 @@ const CORE=[
   './journal-engine.js',
   './rhythm-v6.js',
   './diario-definitivo-v187.css',
+  './consultation-policy.js',
+  './consultation-engine.js',
+  './consultations-celestial-v1.css',
+  './consultations-definitive-v188.css',
   './tiragens-de-tarot.html',
   './cartas-do-tarot.html',
   './biblioteca-universal-v184.js',
@@ -100,6 +104,7 @@ const WARM=[
   './school-engine.js','./school-policy.js','./escola-definitiva-v186.css','./escola-do-tarot.html',
   './journal-engine.js','./journal-policy.js','./rhythm-v6.js','./diario-definitivo-v187.css','./diario-de-tarot.html','./diario-tarot-v173.css','./diario-tarot-v173.js','./diario-espelho-celestial-v1.webp',
   './spreads-engine.js','./spreads-policy.js','./spread-synthesis.js','./tiragens-definitivas-v185.css','./tiragens-de-tarot.html',
+  './consultation-policy.js','./consultation-engine.js','./consultations-celestial-v1.css','./consultations-definitive-v188.css','./consultas-de-tarot.html',
   './fallback-shell-v1.css','./pwa-final-v1.css'
 ];
 

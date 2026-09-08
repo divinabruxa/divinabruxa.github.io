@@ -7,7 +7,7 @@ const PAGES = Object.freeze([
   ['Carta do Dia', 'carta-do-dia.html', 'Experiência', 'portal', 'Revele uma carta para observar a energia simbólica do dia. hoje diária'],
   ['Tiragens de Tarot', 'tiragens-de-tarot.html', '15 métodos', 'tiragens', 'Uma Carta, Passado Presente Tendência, Triângulo Mágico, Situação Desafio Conselho, Caminho em Cinco, Dois Caminhos, Amor, Trabalho, Dinheiro, Espiritualidade, Mandala, Árvore da Vida, Cruz Celta, Mesa Personalizada e Mesa Real.'],
   ['Escola do Tarot', 'escola-do-tarot.html', 'Aprender', 'aprender', 'Trilha de estudo com fundamentos, 78 cartas, símbolos, combinações, métodos e ética. curso aulas módulos'],
-  ['Consultas de Tarot', 'consultas-de-tarot.html', 'Atendimento', 'portal', 'Serviços, valores e solicitação de consulta com e-mail obrigatório. Mesa Real, Leitura de Mentes, Conselho e Pergunta Direta.'],
+  ['Consultas de Tarot', 'consultas-de-tarot.html', 'Atendimento e protocolo', 'portal', 'Serviços, valores, solicitação durável, confirmação por e-mail e acompanhamento privado por protocolo. Estados recebida, aguardando confirmação, confirmada, concluída ou cancelada. Mesa Real, Leitura de Mentes, Conselho e Pergunta Direta.'],
   ['Sobre a Divina Bruxa', 'sobre-a-divina-bruxa.html', 'Portal', 'portal', 'Propósito da Orbe das Realidades e princípios do projeto. quem somos'],
   ['Metodologia do Tarot', 'metodologia-do-tarot.html', 'Método', 'aprender', 'Cartas diretas, contexto, luz, tensão, posições, combinações, síntese e limites.'],
   ['Ética e responsabilidade', 'etica-e-responsabilidade.html', 'Portal', 'portal', 'Autonomia, consentimento, privacidade, linguagem não determinista e limites das leituras.'],

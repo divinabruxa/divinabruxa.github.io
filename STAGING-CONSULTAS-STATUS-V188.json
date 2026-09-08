@@ -1,0 +1,129 @@
+{
+  "captured_at": "2026-09-08T00:55:25Z",
+  "environment": "staging",
+  "supabase": {
+    "project_ref": "kyphdsamyygavmkzyezr",
+    "project_name": "divina-bruxa-staging",
+    "region": "sa-east-1",
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.6.1.155"
+  },
+  "deployed_migrations": [
+    {
+      "version": "20260908002225",
+      "name": "consultations_v188_tracking_email"
+    },
+    {
+      "version": "20260908003409",
+      "name": "consultations_v188_remove_redundant_indexes"
+    }
+  ],
+  "edge_functions": [
+    {
+      "slug": "consultations-booking",
+      "version": 8,
+      "status": "ACTIVE",
+      "verify_jwt": false,
+      "custom_protections": [
+        "origin allowlist",
+        "body limit",
+        "honeypot",
+        "rate limits",
+        "server-only RPC grants"
+      ]
+    },
+    {
+      "slug": "consultations-email-webhook-v188",
+      "version": 2,
+      "status": "ACTIVE",
+      "verify_jwt": false,
+      "custom_protections": [
+        "Svix HMAC SHA-256 signature",
+        "five-minute timestamp window",
+        "constant-time byte comparison",
+        "svix-id deduplication"
+      ]
+    }
+  ],
+  "public_endpoint_read_test": {
+    "ok": true,
+    "environment": "staging",
+    "real_billing": false,
+    "manual_preference_persistence": true,
+    "private_tracking": true,
+    "owner_email": "orbedasrealidades@hotmail.com",
+    "public_statuses": [
+      "received",
+      "awaiting_confirmation",
+      "confirmed",
+      "completed",
+      "cancelled"
+    ],
+    "prices_cents": [
+      25000,
+      15000,
+      10000,
+      5000
+    ],
+    "provider_configured": false,
+    "delivery_tracking": false
+  },
+  "controlled_synthetic_submission": {
+    "uses_real_person_data": false,
+    "customer_domain": ".invalid",
+    "submission_id": "31345a0c-1741-463f-b6f2-922cf4e09d11",
+    "protocol": "DB-20260907-0DE19D21",
+    "private_tracking_code_recorded_here": false,
+    "durable_record_created": true,
+    "manual_preference_persisted": true,
+    "price_cents_preserved": 5000,
+    "public_status": "received",
+    "idempotent_resubmission": true,
+    "wrong_private_code_rejected_with_404": true,
+    "owner_email_ledger": "not_configured",
+    "customer_email_ledger": "not_configured",
+    "automatic_billing": false
+  },
+  "safe_database_aggregate_after_test": {
+    "requests_total": 2,
+    "tracked_requests": 1,
+    "owner_ledgers": 1,
+    "customer_ledgers": 1,
+    "payment_started": 0,
+    "manual_preferences": 1
+  },
+  "negative_tests": {
+    "forbidden_origin_rejected_with_403": true,
+    "unsigned_webhook_rejected_with_401": true,
+    "invalid_tracking_code_rejected_with_404": true
+  },
+  "qa": {
+    "v188_suite": {
+      "total": 269,
+      "passed": 269,
+      "failed": 0,
+      "status": "PASS_WITH_EMAIL_GATE_PENDING"
+    },
+    "v187_regression_suite": {
+      "total": 1175,
+      "passed": 1167,
+      "expected_version_or_hash_failures": 8,
+      "unexpected_failures": 0
+    }
+  },
+  "provider_activation": {
+    "resend_connector_connected_in_chatgpt": true,
+    "resend_callable_tool_available_to_this_run": false,
+    "supabase_resend_api_key_detected": false,
+    "supabase_sender_detected": false,
+    "supabase_webhook_secret_detected": false,
+    "note": "A conexão do plugin não transfere segredos para as Edge Functions do Supabase. Nenhum segredo foi inventado, exposto ou gravado no repositório."
+  },
+  "gate": {
+    "durable_record_and_protocol": "passed",
+    "private_tracking": "passed",
+    "email_code_and_ledger": "passed",
+    "confirmed_real_email_delivery": "pending",
+    "blocker": "Configure os três segredos do provedor no Supabase, registre o webhook e execute um envio controlado para um endereço pertencente à proprietária."
+  }
+}

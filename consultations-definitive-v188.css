@@ -1,0 +1,538 @@
+/* DIVINA BRUXA V188 — PROTOCOLO PRIVADO E ACOMPANHAMENTO DAS CONSULTAS */
+.consultation-track-shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: .7rem;
+  min-height: 2.8rem !important;
+  margin-top: 1rem;
+  padding: .65rem .9rem;
+  border: 1px solid rgba(244, 207, 127, .32);
+  border-radius: 999px;
+  background: rgba(244, 207, 127, .055);
+  color: #f9dfaa;
+  font: 800 .69rem/1.2 system-ui, sans-serif !important;
+  letter-spacing: .065em;
+}
+
+.consultation-track-shortcut span {
+  font-size: 1rem;
+}
+
+.consultation-review-assurances {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .55rem;
+  margin-top: .85rem;
+}
+
+.consultation-review-assurances p {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: .16rem .52rem;
+  margin: 0;
+  padding: .8rem;
+  border: 1px solid rgba(244, 207, 127, .13);
+  border-radius: .85rem;
+  background: rgba(244, 207, 127, .035);
+  text-align: left;
+}
+
+.consultation-review-assurances p > span {
+  grid-row: 1/3;
+  color: #8ce0b8;
+}
+
+.consultation-review-assurances b {
+  color: #fff;
+  font-size: .78rem;
+}
+
+.consultation-review-assurances small {
+  color: #9d90a8;
+  font-size: .69rem;
+  line-height: 1.42;
+}
+
+.consultation-tracking-secret {
+  display: grid;
+  gap: .5rem;
+  width: min(100%, 38rem);
+  margin: 0 auto 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(138, 224, 184, .3);
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(77, 184, 139, .08), rgba(120, 64, 203, .08));
+}
+
+.consultation-tracking-secret small {
+  color: #9ad9bb;
+  font-size: .65rem;
+  font-weight: 800;
+  letter-spacing: .075em;
+}
+
+.consultation-tracking-secret code {
+  display: block;
+  padding: .7rem;
+  border: 1px dashed rgba(244, 207, 127, .25);
+  border-radius: .75rem;
+  background: rgba(4, 2, 14, .55);
+  color: #ffe7ad;
+  font: 700 .9rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace;
+  letter-spacing: .04em;
+  overflow-wrap: anywhere;
+  user-select: all;
+}
+
+.consultation-tracking-secret button {
+  justify-self: center;
+  min-height: 2.75rem !important;
+  padding: .55rem .9rem;
+  border: 1px solid rgba(244, 207, 127, .25);
+  border-radius: 999px;
+  background: rgba(244, 207, 127, .055);
+  color: #f6dcaa;
+  font-size: .68rem;
+  font-weight: 800;
+}
+
+.consultation-tracking-secret p {
+  margin: 0;
+  color: #a99bb4;
+  font-size: .73rem;
+  line-height: 1.48;
+}
+
+.consultation-success > .consultation-primary-action,
+.consultation-success > .consultation-secondary-action {
+  width: min(100%, 27rem);
+  margin-top: .55rem;
+}
+
+.consultation-tracker {
+  scroll-margin-top: 5.8rem;
+  overflow: hidden;
+  border: 1px solid rgba(244, 207, 127, .26);
+  border-radius: 1.5rem;
+  background:
+    radial-gradient(circle at 100% 0, rgba(125, 70, 212, .16), transparent 30%),
+    rgba(7, 3, 20, .92);
+  box-shadow: 0 1.2rem 3.5rem rgba(0, 0, 0, .26), inset 0 1px rgba(255, 255, 255, .04);
+}
+
+.consultation-tracker.is-open {
+  border-color: rgba(244, 207, 127, .42);
+}
+
+.consultation-tracker-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: clamp(1rem, 3.2vw, 1.55rem);
+}
+
+.consultation-tracker-heading h3 {
+  margin: .25rem 0;
+  color: #fff;
+  font: 500 clamp(1.45rem, 4vw, 2.1rem)/1.08 Georgia, serif;
+}
+
+.consultation-tracker-heading p:not(.eyebrow) {
+  max-width: 670px;
+  margin: 0;
+  color: #ab9db6;
+  line-height: 1.55;
+}
+
+.consultation-tracker-heading > button {
+  flex: none;
+  min-height: 2.75rem !important;
+  padding: .65rem .9rem;
+  border: 1px solid rgba(244, 207, 127, .25);
+  border-radius: 999px;
+  background: rgba(244, 207, 127, .06);
+  color: #f6dcaa;
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .055em;
+}
+
+.consultation-tracker-body {
+  display: grid;
+  gap: .85rem;
+  padding: 0 clamp(1rem, 3.2vw, 1.55rem) clamp(1rem, 3.2vw, 1.55rem);
+  border-top: 1px solid rgba(255, 255, 255, .065);
+}
+
+.consultation-tracker-body[hidden] {
+  display: none;
+}
+
+.consultation-tracker-loading {
+  margin: .9rem 0 0;
+  padding: .85rem;
+  border-radius: .85rem;
+  background: rgba(168, 117, 255, .07);
+  color: #d8c9e4;
+  text-align: center;
+}
+
+.consultation-tracked-result {
+  display: grid;
+  gap: .85rem;
+  margin-top: .9rem;
+  padding: 1rem;
+  border: 1px solid rgba(138, 224, 184, .24);
+  border-radius: 1.1rem;
+  background: rgba(20, 10, 39, .74);
+}
+
+.consultation-tracked-result > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.consultation-tracked-result h4 {
+  margin: .2rem 0;
+  color: #a9f0cb;
+  font: 500 clamp(1.45rem, 4vw, 2rem)/1.1 Georgia, serif;
+}
+
+.consultation-tracked-result header small {
+  color: #8f829b;
+}
+
+.consultation-tracked-result header > span {
+  padding: .48rem .65rem;
+  border: 1px solid rgba(244, 207, 127, .2);
+  border-radius: .7rem;
+  color: #f5dba7;
+  font: 700 .73rem/1.25 ui-monospace, SFMono-Regular, Consolas, monospace;
+  overflow-wrap: anywhere;
+}
+
+.consultation-status-path {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.consultation-status-path li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: .45rem;
+  min-width: 0;
+  padding: .7rem;
+  border: 1px solid rgba(255, 255, 255, .065);
+  border-radius: .8rem;
+  background: rgba(255, 255, 255, .025);
+  opacity: .62;
+}
+
+.consultation-status-path li:last-child {
+  grid-column: 1/-1;
+  border-color: rgba(255, 151, 171, .13);
+}
+
+.consultation-status-path li > span {
+  display: grid;
+  place-items: center;
+  width: 1.45rem;
+  height: 1.45rem;
+  border: 1px solid rgba(168, 117, 255, .3);
+  border-radius: 50%;
+  color: #bda7d2;
+  font-size: .68rem;
+}
+
+.consultation-status-path li > div {
+  display: grid;
+  gap: .18rem;
+}
+
+.consultation-status-path b {
+  color: #d9cee1;
+  font-size: .74rem;
+}
+
+.consultation-status-path small {
+  color: #8f8299;
+  font-size: .65rem;
+  line-height: 1.4;
+}
+
+.consultation-status-path .is-complete,
+.consultation-status-path .is-current {
+  opacity: 1;
+}
+
+.consultation-status-path .is-complete > span {
+  border-color: rgba(138, 224, 184, .48);
+  color: #9de5c1;
+}
+
+.consultation-status-path .is-current {
+  border-color: rgba(244, 207, 127, .4);
+  background: rgba(244, 207, 127, .07);
+  box-shadow: inset 0 1px rgba(255, 255, 255, .04);
+}
+
+.consultation-status-path .is-current > span {
+  border-color: #f4cf7f;
+  background: #f4cf7f;
+  color: #25162b;
+}
+
+.consultation-status-path .is-current b {
+  color: #fff0c8;
+}
+
+.consultation-tracked-result > dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .5rem;
+  margin: 0;
+}
+
+.consultation-tracked-result > dl div {
+  padding: .75rem;
+  border: 1px solid rgba(255, 255, 255, .055);
+  border-radius: .75rem;
+  background: rgba(255, 255, 255, .025);
+}
+
+.consultation-tracked-result dt {
+  color: #8e8199;
+  font-size: .67rem;
+}
+
+.consultation-tracked-result dd {
+  margin: .25rem 0 0;
+  color: #f5eef8;
+  line-height: 1.42;
+  overflow-wrap: anywhere;
+}
+
+.consultation-tracker-actions {
+  display: flex;
+  gap: .6rem;
+  flex-wrap: wrap;
+}
+
+.consultation-tracker-actions button {
+  flex: 1;
+  min-width: 13rem;
+}
+
+.consultation-saved-requests {
+  display: grid;
+  gap: .5rem;
+  padding-top: .2rem;
+}
+
+.consultation-saved-requests > h4 {
+  margin: .25rem 0;
+  color: #eee4f3;
+  font: 500 1.05rem Georgia, serif;
+}
+
+.consultation-saved-requests article {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: .65rem;
+  padding: .72rem;
+  border: 1px solid rgba(168, 117, 255, .12);
+  border-radius: .85rem;
+  background: rgba(168, 117, 255, .04);
+}
+
+.consultation-saved-requests article > span {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid rgba(244, 207, 127, .24);
+  border-radius: 50%;
+  color: #f4cf7f;
+}
+
+.consultation-saved-requests article > div {
+  display: grid;
+  min-width: 0;
+  gap: .2rem;
+}
+
+.consultation-saved-requests b {
+  color: #fff;
+  font-size: .8rem;
+}
+
+.consultation-saved-requests small {
+  color: #9d90a8;
+  font-size: .68rem;
+  overflow-wrap: anywhere;
+}
+
+.consultation-saved-requests button {
+  min-height: 2.75rem !important;
+  padding: .5rem .7rem;
+  border: 1px solid rgba(244, 207, 127, .2);
+  border-radius: 999px;
+  background: rgba(244, 207, 127, .045);
+  color: #e9d8b2;
+  font-size: .62rem;
+  font-weight: 800;
+}
+
+.consultation-saved-requests [data-remove-track] {
+  border-color: rgba(255, 151, 171, .13);
+  background: transparent;
+  color: #bfaab1;
+}
+
+.consultation-restore-form {
+  display: grid;
+  grid-template-columns: minmax(190px, .75fr) repeat(2, minmax(0, 1fr)) auto;
+  align-items: end;
+  gap: .7rem;
+  padding: 1rem;
+  border: 1px solid rgba(244, 207, 127, .15);
+  border-radius: 1rem;
+  background: rgba(244, 207, 127, .035);
+}
+
+.consultation-restore-form h4 {
+  margin: .25rem 0;
+  color: #fff;
+  font: 500 1.12rem Georgia, serif;
+}
+
+.consultation-restore-form > div > small {
+  color: #8f8299;
+  font-size: .68rem;
+}
+
+.consultation-restore-form label {
+  display: grid;
+  gap: .35rem;
+  color: #d7cbdc;
+  font-size: .75rem;
+}
+
+.consultation-restore-form input {
+  width: 100%;
+  min-height: 3.05rem;
+  padding: .75rem .8rem;
+  border: 1px solid rgba(168, 117, 255, .27);
+  border-radius: .8rem;
+  background: #0b061c;
+  color: #fff;
+}
+
+.consultation-restore-form button {
+  min-width: 8rem;
+}
+
+.consultation-tracker-privacy {
+  display: flex;
+  gap: .55rem;
+  margin: 0;
+  color: #8f8299;
+  font-size: .72rem;
+  line-height: 1.5;
+}
+
+.consultation-tracker-privacy span {
+  color: #f4cf7f;
+}
+
+@media (max-width: 900px) {
+  .consultation-review-assurances,
+  .consultation-status-path {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .consultation-status-path li:last-child {
+    grid-column: auto;
+  }
+
+  .consultation-restore-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .consultation-restore-form > div {
+    grid-column: 1/-1;
+  }
+}
+
+@media (max-width: 640px) {
+  .consultation-review-assurances,
+  .consultation-status-path,
+  .consultation-tracked-result > dl,
+  .consultation-restore-form {
+    grid-template-columns: 1fr;
+  }
+
+  .consultation-tracker-heading,
+  .consultation-tracked-result > header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .consultation-tracker-heading > button {
+    align-self: stretch;
+  }
+
+  .consultation-tracked-result header > span {
+    max-width: 100%;
+  }
+
+  .consultation-saved-requests article {
+    grid-template-columns: auto 1fr;
+  }
+
+  .consultation-saved-requests article > button {
+    grid-column: span 1;
+  }
+
+  .consultation-tracker-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .consultation-tracker-actions button {
+    min-width: 0;
+  }
+
+  .consultation-restore-form > div {
+    grid-column: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .consultations-v188-shell *,
+  .consultations-v188-shell *::before,
+  .consultations-v188-shell *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .consultation-tracker,
+  .consultation-tracked-result,
+  .consultation-tracking-secret,
+  .consultation-status-path li,
+  .consultation-restore-form {
+    border: 1px solid CanvasText;
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "release": "V188",
+  "macroetapa": 10,
+  "title": "Consultas perfeitas e e-mail automático",
+  "date": "2026-09-08",
+  "base_release": "V187",
+  "environment": "staging",
+  "scope": {
+    "comparison_page": true,
+    "short_form": true,
+    "review_before_submit": true,
+    "required_consents": 3,
+    "durable_request": true,
+    "manual_preference_without_false_availability": true,
+    "private_protocol_tracking": true,
+    "owner_notification_prepared": true,
+    "customer_confirmation_prepared": true,
+    "provider_delivery_tracking_prepared": true,
+    "automatic_billing": false
+  },
+  "services": [
+    {
+      "id": "mesa-real-profissional",
+      "name": "Mesa Real Profissional",
+      "price_brl": 250,
+      "price_cents": 25000
+    },
+    {
+      "id": "leitura-mentes",
+      "name": "Leitura de Mentes",
+      "price_brl": 150,
+      "price_cents": 15000
+    },
+    {
+      "id": "carta-conselho",
+      "name": "Carta de Conselho",
+      "price_brl": 100,
+      "price_cents": 10000
+    },
+    {
+      "id": "pergunta-direta",
+      "name": "Pergunta Direta",
+      "price_brl": 50,
+      "price_cents": 5000
+    }
+  ],
+  "contact": {
+    "official_email": "orbedasrealidades@hotmail.com",
+    "email_required": true,
+    "phone_required": true,
+    "whatsapp_enabled": false
+  },
+  "tracking": {
+    "public_statuses": [
+      "received",
+      "awaiting_confirmation",
+      "confirmed",
+      "completed",
+      "cancelled"
+    ],
+    "requires_protocol_and_private_code": true,
+    "private_code_in_url": false,
+    "server_stores_private_code": false,
+    "server_stores_sha256_hash": true,
+    "status_response_contains_question": false,
+    "status_response_contains_contact_data": false
+  },
+  "email": {
+    "provider": "Resend",
+    "owner_audience": true,
+    "customer_audience": true,
+    "idempotency_key_per_request_and_audience": true,
+    "signed_webhook": "Svix HMAC SHA-256",
+    "webhook_event_deduplication": "svix-id",
+    "required_server_secrets": [
+      "RESEND_API_KEY",
+      "CONSULTATIONS_EMAIL_FROM",
+      "RESEND_WEBHOOK_SECRET"
+    ],
+    "secrets_in_repository": false,
+    "provider_configured_at_packaging": false,
+    "delivery_tracking_configured_at_packaging": false
+  },
+  "staging": {
+    "supabase_project_ref": "kyphdsamyygavmkzyezr",
+    "region": "sa-east-1",
+    "booking_function": {
+      "slug": "consultations-booking",
+      "version": 8,
+      "status": "ACTIVE"
+    },
+    "webhook_function": {
+      "slug": "consultations-email-webhook-v188",
+      "version": 2,
+      "status": "ACTIVE"
+    },
+    "migrations": [
+      "consultations_v188_tracking_email",
+      "consultations_v188_remove_redundant_indexes"
+    ]
+  },
+  "gates": {
+    "static_and_regression_qa": "passed",
+    "durable_synthetic_submission": "passed",
+    "protocol_and_private_tracking": "passed",
+    "no_automatic_billing": "passed",
+    "real_email_delivery": "pending_provider_secrets_and_controlled_delivery_test",
+    "macroetapa_10": "pending_real_email_delivery_gate"
+  },
+  "unchanged_invariants": {
+    "main_orb_frozen": true,
+    "magic_menu_frozen": true,
+    "mini_orb_frozen": true,
+    "tarot_cards": 78,
+    "reversed_cards": 0,
+    "free_tarot_repetition": false,
+    "meanings_during_free_reveal": false,
+    "mesa_real_rows": 13,
+    "mesa_real_columns": 6
+  },
+  "installation": {
+    "flat_zip": true,
+    "package_files": 19,
+    "replace_files": 10,
+    "add_files": 9,
+    "publish_or_dns_change": false
+  }
+}
