@@ -1,0 +1,47 @@
+{
+  "project": "Divina Bruxa",
+  "version": 198,
+  "macro_stage": "17 - Plano de Producao",
+  "base_required": "V197 instalada",
+  "release_kind": "production-plan-only",
+  "installation_is_authorization": false,
+  "runtime_changes": false,
+  "home_contract": {
+    "visible_content": ["localized_orb_title", "living_orb"],
+    "navigation_allowed": ["header", "orbital_menu", "bottom_dock"],
+    "content_cards_allowed": false,
+    "orb_engine_frozen": true
+  },
+  "tarot_contract": {
+    "cards": 78,
+    "orientation": "normal-only",
+    "free_tarot_repetition": false,
+    "free_tarot_meanings": false,
+    "royal_table": "13x6",
+    "official_art_frozen": true
+  },
+  "quality_gate": {
+    "automated": "P0=0 and P1=0",
+    "evidence_required": true,
+    "missing_evidence_result": "blocked",
+    "field_validation": "pending-explicit-execution"
+  },
+  "release_blocks": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "production_backend_authorized": false,
+    "production_email_authorized": false,
+    "real_billing_authorized": false,
+    "google_play_submission_authorized": false,
+    "app_store_submission_authorized": false,
+    "orbe_ai_sol_enabled": false
+  },
+  "authorization_rule": {
+    "form": "written-specific-and-later",
+    "scope_must_name": ["action", "environment", "window", "owner"],
+    "zip_installation_never_counts": true,
+    "silence_never_counts": true,
+    "authorization_is_not_transitive": true
+  }
+}
+

@@ -1,0 +1,101 @@
+{
+  "project": "Divina Bruxa",
+  "version": 198,
+  "policy": {
+    "p0_action": "stop-and-rollback",
+    "p1_action": "stop-promotion",
+    "p2_action": "backlog-with-owner-and-due-date",
+    "evidence_missing": "blocked"
+  },
+  "gates": [
+    {
+      "id": "G0",
+      "name": "release-candidate-custody",
+      "status": "prepared",
+      "external_mutation": false,
+      "requires_authorization": false,
+      "evidence": ["V197 1221/1221", "commit SHA", "artifact SHA256", "inventory", "owner"]
+    },
+    {
+      "id": "G1",
+      "name": "physical-homologation",
+      "status": "pending",
+      "external_mutation": false,
+      "requires_authorization": false,
+      "evidence": ["iPhone Safari/PWA", "Android Chrome/PWA", "VoiceOver", "TalkBack", "offline", "slow network", "field CWV p75"]
+    },
+    {
+      "id": "G2",
+      "name": "supabase-production",
+      "status": "blocked",
+      "external_mutation": true,
+      "requires_authorization": true,
+      "evidence": ["separate project", "migration dry-run", "RLS tests", "Security Advisor", "Performance Advisor", "backup restore", "Node 22+"]
+    },
+    {
+      "id": "G3",
+      "name": "hosting-dns-https",
+      "status": "blocked",
+      "external_mutation": true,
+      "requires_authorization": true,
+      "evidence": ["domain verification", "host configured before DNS", "zone export", "HTTPS", "route smoke test", "DNS rollback"]
+    },
+    {
+      "id": "G4",
+      "name": "resend-production-email",
+      "status": "blocked",
+      "external_mutation": true,
+      "requires_authorization": true,
+      "evidence": ["verified subdomain", "SPF/DKIM", "DMARC", "TLS", "bounce/complaint", "localized templates"]
+    },
+    {
+      "id": "G5",
+      "name": "live-commerce",
+      "status": "blocked",
+      "external_mutation": true,
+      "requires_authorization": true,
+      "evidence": ["sandbox matrices", "restricted keys", "signed webhook", "idempotency", "reconciliation", "refund/dispute", "tax review"]
+    },
+    {
+      "id": "G6",
+      "name": "observability-privacy-support",
+      "status": "pending",
+      "external_mutation": false,
+      "requires_authorization": false,
+      "evidence": ["SLO", "alerts tested", "runbooks", "consent", "data rights", "support"]
+    },
+    {
+      "id": "G7",
+      "name": "web-production-cutover",
+      "status": "blocked",
+      "external_mutation": true,
+      "requires_authorization": true,
+      "evidence": ["written authorization", "release window", "smoke tests", "monitoring", "rollback owner"]
+    },
+    {
+      "id": "G8",
+      "name": "google-play-release",
+      "status": "blocked",
+      "external_mutation": true,
+      "requires_authorization": true,
+      "evidence": ["native value", "Digital Asset Links if TWA", "Play Billing", "internal test", "closed test", "policy review"]
+    },
+    {
+      "id": "G9",
+      "name": "app-store-release",
+      "status": "blocked",
+      "external_mutation": true,
+      "requires_authorization": true,
+      "evidence": ["native value", "IAP", "restore", "TestFlight", "review access", "policy review"]
+    },
+    {
+      "id": "G10",
+      "name": "controlled-expansion",
+      "status": "blocked",
+      "external_mutation": true,
+      "requires_authorization": true,
+      "evidence": ["24h no P0/P1", "reconciliation clear", "SLO healthy", "owner decision"]
+    }
+  ]
+}
+

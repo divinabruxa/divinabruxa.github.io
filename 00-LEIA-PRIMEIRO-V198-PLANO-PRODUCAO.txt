@@ -1,0 +1,33 @@
+DIVINA BRUXA V198 — MACROETAPA 17 · PLANO DE PRODUCAO
+
+BASE OBRIGATORIA
+V197 instalada.
+
+COMO INSTALAR NO IPHONE / GITHUB
+1. Abra o ZIP.
+2. Envie os 13 arquivos soltos para a raiz do repositorio.
+3. Aceite substituir somente quando o GitHub solicitar.
+4. Nao apague nenhum arquivo existente.
+
+O QUE ESTA VERSAO FAZ
+- Fecha o Plano Supremo com um plano operacional de producao auditavel.
+- Organiza os portoes de hospedagem, DNS, Supabase, Resend, pagamentos,
+  observabilidade, Android, iOS, lancamento gradual e rollback.
+- Registra responsavel, evidencia exigida e criterio de aceite de cada portao.
+- Inclui QA reproduzivel e contratos legiveis por maquina.
+- Mantem a Home somente com o titulo localizado e a Orbe viva.
+- Nao altera runtime, interface, conteudo editorial, PWA ou motores do Tarot.
+
+IMPORTANTE — INSTALAR NAO E AUTORIZAR
+Esta V198 e somente preparatoria. A instalacao deste ZIP nao autoriza publicar
+em producao, alterar DNS, criar ou migrar backend de producao, ativar cobranca
+real, enviar apps as lojas, enviar emails reais ou ligar a Orbe IA Sol.
+Cada acao externa exige autorizacao escrita, especifica e posterior.
+
+VALIDACAO REPRODUZIVEL
+Execute: node QA-V198-PRODUCTION-READINESS.mjs
+
+RESULTADO DESTA MACROETAPA
+Plano completo: SIM.
+Producao ativada: NAO.
+Portoes externos pendentes: SIM, por seguranca e por falta de autorizacao.

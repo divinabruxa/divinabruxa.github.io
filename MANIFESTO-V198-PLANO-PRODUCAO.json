@@ -1,0 +1,47 @@
+{
+  "project": "Divina Bruxa",
+  "version": 198,
+  "release": "macroetapa-17-plano-producao",
+  "base_required": "V197 instalada",
+  "delivery": {
+    "type": "flat-delta",
+    "directories_inside_zip": 0,
+    "delete_existing_files": false,
+    "files": [
+      "00-LEIA-PRIMEIRO-V198-PLANO-PRODUCAO.txt",
+      "ARQUIVOS-V198-SHA256.txt",
+      "DNS-EMAIL-PLAN-V198.md",
+      "EVIDENCIA-QA-V198.json",
+      "GO-LIVE-CHECKLIST-V198.md",
+      "MANIFESTO-V198-PLANO-PRODUCAO.json",
+      "PLANO-PRODUCAO-V198.md",
+      "PRODUCTION-GATES-V198.json",
+      "PRODUCTION-READINESS-CONTRACT-V198.json",
+      "QA-V198-PRODUCTION-READINESS.mjs",
+      "ROLLBACK-RUNBOOK-V198.md",
+      "SECRETS-ENVIRONMENT-MATRIX-V198.json",
+      "STORE-RELEASE-PLAN-V198.md"
+    ]
+  },
+  "scope": {
+    "runtime_files_changed": 0,
+    "home_visual_changed": false,
+    "orb_changed": false,
+    "tarot_changed": false,
+    "service_worker_changed": false,
+    "domain_file_changed": false,
+    "external_writes": false,
+    "purpose": "Plano auditavel de producao, autorizacao, go-live e rollback"
+  },
+  "preserved_contracts": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "production_backend_authorized": false,
+    "production_email_authorized": false,
+    "real_billing_authorized": false,
+    "google_play_submission_authorized": false,
+    "app_store_submission_authorized": false,
+    "sol_enabled": false
+  }
+}
+

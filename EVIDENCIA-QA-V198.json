@@ -1,0 +1,46 @@
+{
+  "project": "Divina Bruxa",
+  "version": 198,
+  "suite": "Macroetapa 17 - Plano de Producao",
+  "generated_at": "2026-09-09T21:18:24.622Z",
+  "total": 175,
+  "passed": 175,
+  "failed": 0,
+  "gate": {
+    "p0": 0,
+    "p1": 0,
+    "package_approved": true
+  },
+  "scope": {
+    "runtime_files_changed": 0,
+    "external_writes": 0,
+    "production_activated": false
+  },
+  "gates": {
+    "total": 11,
+    "external_blocked": 8,
+    "local_pending": 2
+  },
+  "authorization": {
+    "installation_counts": false,
+    "granted_by_v198": []
+  },
+  "frozen_hashes": {
+    "orb-engine-v68.js": "3f8a1c87c558194901089f96f96059b066c7dde8bf33475816ceaca74b9a369f",
+    "mini-orb-engine.js": "26d46580f7465139ac54b9953eaa6d0488e3a89c0bee9c7f2d0fbbaa27b91916",
+    "menu-completo-v177.js": "f8c010d779844cecd24a1fa66acbefa2b3e78715e329e961496ed0954a921b64",
+    "tarot-engine.js": "2abf5a31f1a9f219074e03fe4a7052c60fed598df5fb07c4502bf8f5e8eaf92e",
+    "tarot-data.js": "18e5a1a3bcecf27fdb9c14c44c964a61f6eacfadc2f52ccaa76f0cbf60ee7cc3"
+  },
+  "prior_release": {
+    "version": 197,
+    "expected": "1221/1221",
+    "passed": true
+  },
+  "warnings": [
+    "Produção, DNS, backend, e-mail real, cobrança, lojas e Orbe IA Sol permanecem bloqueados.",
+    "Testes físicos, dados de campo e aprovações externas não podem ser fabricados por esta suíte.",
+    "Revisar changelogs e políticas oficiais novamente no dia de cada ativação autorizada."
+  ],
+  "failures": []
+}
