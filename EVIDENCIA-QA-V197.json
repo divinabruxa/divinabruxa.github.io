@@ -1,0 +1,59 @@
+{
+  "project": "Divina Bruxa",
+  "version": 197,
+  "suite": "Macroetapa 16 - QA Final / Release Candidate",
+  "generated_at": "2026-09-09T20:52:18.026Z",
+  "inventory": {
+    "total_files": 1376,
+    "html": 156,
+    "javascript": 270,
+    "css": 163,
+    "json_and_manifest": 146
+  },
+  "total": 1221,
+  "passed": 1221,
+  "failed": 0,
+  "gate": {
+    "p0": 0,
+    "p1": 0,
+    "package_approved": true
+  },
+  "coverage": {
+    "home": "title + living Orb only",
+    "tarot_cards": 78,
+    "royal_table": "13x6",
+    "languages": [
+      "pt-BR",
+      "en",
+      "es"
+    ],
+    "html_local_reference_failures": 0,
+    "javascript_syntax_failures": 0,
+    "json_parse_failures": 0,
+    "css_balance_failures": 0
+  },
+  "frozen_hashes": {
+    "orb-engine-v68.js": "3f8a1c87c558194901089f96f96059b066c7dde8bf33475816ceaca74b9a369f",
+    "mini-orb-engine.js": "26d46580f7465139ac54b9953eaa6d0488e3a89c0bee9c7f2d0fbbaa27b91916",
+    "menu-completo-v177.js": "f8c010d779844cecd24a1fa66acbefa2b3e78715e329e961496ed0954a921b64",
+    "tarot-engine.js": "2abf5a31f1a9f219074e03fe4a7052c60fed598df5fb07c4502bf8f5e8eaf92e",
+    "tarot-data.js": "18e5a1a3bcecf27fdb9c14c44c964a61f6eacfadc2f52ccaa76f0cbf60ee7cc3"
+  },
+  "field_validation": {
+    "status": "pending-after-installation",
+    "items": [
+      "iPhone Safari and installed PWA",
+      "Android Chrome and installed PWA",
+      "VoiceOver",
+      "TalkBack",
+      "slow network and real offline transition",
+      "Core Web Vitals p75 from consented field samples"
+    ]
+  },
+  "warnings": [
+    "Testes fisicos iPhone/Android, VoiceOver/TalkBack e rede real permanecem pos-instalacao.",
+    "Core Web Vitals p75 depende de amostras reais com consentimento e nao e inventado pelo QA do pacote.",
+    "Backend STAGING, billing sandbox, aprovacao juridica e publicacao continuam como portoes externos."
+  ],
+  "failures": []
+}

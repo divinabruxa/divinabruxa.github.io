@@ -1,0 +1,32 @@
+DIVINA BRUXA V197 — MACROETAPA 16 · QA FINAL
+
+BASE OBRIGATORIA
+V196 instalada.
+
+COMO INSTALAR NO IPHONE / GITHUB
+1. Abra o ZIP.
+2. Envie os 17 arquivos soltos para a raiz do repositorio.
+3. Aceite substituir quando o GitHub solicitar.
+4. Nao apague nenhum arquivo existente.
+
+O QUE ESTA VERSAO FAZ
+- Consolida a auditoria final da candidata a lancamento.
+- Valida os 153 documentos HTML e suas referencias locais.
+- Valida sintaxe JavaScript, JSON, CSS, manifesto e service worker.
+- Confirma a Home somente com o titulo localizado e a Orbe viva.
+- Confirma 78 cartas oficiais, somente normais, sem repeticao e Mesa Real 13x6.
+- Confirma PWA/offline, PT-BR/EN/ES, seguranca e bloqueios de producao.
+- Restaura Loja Mistica, Musica e De Frente com o Tarot, que estavam
+  referenciados mas ausentes na sequencia instalada sem a V191.
+- Corrige a sintaxe de um verificador antigo de transicoes.
+- Inclui as paginas editoriais restauradas no cache offline seguro.
+- Nao altera a Home, a Orbe, o menu nem os motores do Tarot.
+
+VALIDACAO REPRODUZIVEL
+Execute: node QA-V197-RELEASE-CANDIDATE.mjs
+
+LIMITES HONESTOS
+A aprovacao automatica do pacote nao substitui testes fisicos em iPhone e
+Android, VoiceOver/TalkBack, trafego real para percentil 75, backend STAGING,
+billing sandbox, e aprovacao juridica/da proprietaria. Esses portoes continuam
+registrados como pendentes e nenhuma publicacao de producao foi autorizada.

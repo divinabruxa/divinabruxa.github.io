@@ -1,0 +1,43 @@
+{
+  "project": "Divina Bruxa",
+  "version": 197,
+  "release": "macroetapa-16-qa-final-release-candidate",
+  "base_required": "V196 instalada",
+  "delivery": {
+    "type": "flat-delta",
+    "directories_inside_zip": 0,
+    "delete_existing_files": false,
+    "files": [
+      "00-LEIA-PRIMEIRO-V197-QA-FINAL.txt",
+      "ARQUIVOS-V197-SHA256.txt",
+      "de-frente-com-o-tarot.html",
+      "EVIDENCIA-QA-V197.json",
+      "editorial-catalog-v192.js",
+      "editorial-journey-v192.js",
+      "editorial-metrics-v192.js",
+      "editorial-universe-v192.css",
+      "loja-mistica.html",
+      "MANIFESTO-V197-QA-FINAL.json",
+      "media-engine-v192.js",
+      "media-policy-v192.js",
+      "musica.html",
+      "portal-guard-v10.mjs",
+      "QA-V197-RELEASE-CANDIDATE.mjs",
+      "RELEASE-CANDIDATE-CONTRACT-V197.json"
+      ,"sw.js"
+    ]
+  },
+  "scope": {
+    "runtime_files_changed": 11,
+    "home_visual_changed": false,
+    "tarot_engines_changed": false,
+    "purpose": "Auditoria final consolidada e restauracao dos modulos editoriais ausentes na sequencia sem V191"
+  },
+  "preserved_contracts": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "app_store_submission_authorized": false,
+    "sol_enabled": false
+  }
+}

@@ -52,6 +52,13 @@ const WARM_SHELL = Object.freeze([
   './seo-index-policy-v193.js',
   './editorial-catalog-v192.js',
   './editorial-metrics-v192.js',
+  './editorial-journey-v192.js',
+  './media-engine-v192.js',
+  './media-policy-v192.js',
+  './media-engine-v149.js',
+  './media-policy-v149.js',
+  './store-engine.js',
+  './store-policy.js',
   './auth-client-v6.js',
   './auth-client-v189.js',
   './account-engine-v189.js',
@@ -71,6 +78,10 @@ const WARM_SHELL = Object.freeze([
   './orbe-ai-governada-v190.css',
   './premium-billing-v191.css',
   './editorial-universe-v192.css',
+  './store-celestial-v1.css',
+  './media-celestial-v149.css',
+  './loja-mistica-celestial-v1.webp',
+  './midia-celestial-estudio-v1.webp',
   './icon-512.png',
   './icon-maskable-192.png',
   './icon-maskable-512.png'
@@ -86,6 +97,7 @@ const PUBLIC_OFFLINE_PAGES = Object.freeze([
   './etica-e-responsabilidade.html', './tarot-ethics.html', './etica-tarot.html',
   './contato.html', './contact.html', './contacto.html',
   './instalar-app.html', './install-app.html', './instalar-aplicacion.html'
+  ,'./loja-mistica.html', './musica.html', './de-frente-com-o-tarot.html'
 ]);
 
 const OFFLINE_TAROT_ASSETS = Object.freeze([

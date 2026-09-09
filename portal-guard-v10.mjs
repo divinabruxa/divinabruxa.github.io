@@ -9,7 +9,7 @@ const checks = [
   ['layer-style', css.includes('db-portal-layer')],
   ['reduced-motion', css.includes('prefers-reduced-motion')],
   ['explicit-factory', js.includes('createPortalTransition')],
-  ['max-duration', /850/.test(css) || /850/.test(js)
+  ['max-duration', /850/.test(css) || /850/.test(js)]
 ];
 const status = checks.every(([,ok])=>ok) ? 'PASS' : 'FAIL';
 console.log(JSON.stringify({gate:'PORTAL-V10',status,checks:checks.map(([check,ok])=>({check,status:ok?'PASS':'FAIL'}))},null,2));
