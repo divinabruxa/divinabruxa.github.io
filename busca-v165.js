@@ -52,7 +52,10 @@ const PAGES = Object.freeze([
   ['Caminho em Cinco', 'tiragem-caminho-em-cinco.html', '5 posições', 'tiragens', 'Centro da questão, o que favorece, desafio, consciência e próximo passo.'],
   ['Mandala Astrológica', 'mandala-astrologica-no-tarot.html', '12 posições', 'tiragens', 'Identidade, recursos, comunicação, raízes, criação, rotina, relações, transformação, expansão, vocação, comunidade e mundo interior. casas astrologia'],
   ['Árvore da Vida', 'arvore-da-vida-no-tarot.html', '10 posições', 'tiragens', 'Coroa, Sabedoria, Entendimento, Misericórdia, Força, Beleza, Vitória, Esplendor, Fundamento e Manifestação.'],
-  ['Mesa Personalizada', 'mesa-personalizada-no-tarot.html', '1–12 posições', 'tiragens', 'Escolha a quantidade de cartas antes da abertura e preserve a ordem das posições. customizada autoral']
+  ['Mesa Personalizada', 'mesa-personalizada-no-tarot.html', '1–12 posições', 'tiragens', 'Escolha a quantidade de cartas antes da abertura e preserve a ordem das posições. customizada autoral'],
+  ['Loja Mística', 'loja-mistica.html', 'Curadoria transparente', 'portal', 'Seleções para Tarot, estudo, ritual, ambiente, criação e presentes com divulgação de afiliado Amazon, compra externa, busca e favoritos locais. loja produtos baralho cristal livro diário tecnologia'],
+  ['Música de Hércules DX', 'musica.html', '2 álbuns publicados', 'portal', 'Discografia de Hércules DX com Sobre as Estrelas e Z, contexto editorial, créditos e links oficiais para o Spotify. música álbum canções orbe sonora'],
+  ['De Frente com o Tarot', 'de-frente-com-o-tarot.html', 'Piloto em preparação', 'portal', 'Projeto de conversas em vídeo sobre Tarot, protocolo de publicação, acessibilidade e estado real sem episódios públicos. série vídeo youtube capítulos entrevistas']
 ]);
 
 const normalize = value => String(value || '')

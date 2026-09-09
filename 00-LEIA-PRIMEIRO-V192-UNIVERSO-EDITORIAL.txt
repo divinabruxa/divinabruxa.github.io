@@ -1,0 +1,51 @@
+DIVINA BRUXA V192 — MACROETAPA 14
+LOJA, MÚSICA, VÍDEOS E UNIVERSO EDITORIAL
+
+TIPO DE ENTREGA
+Pacote DELTA plano para instalar SOMENTE sobre a V191.
+Ele contém apenas arquivos novos ou alterados. Não é um site completo.
+
+COMO INSTALAR
+1. Confirme que a raiz atual é a V191.
+2. Faça uma cópia de segurança dessa raiz.
+3. Extraia o conteúdo do ZIP diretamente na mesma raiz.
+4. Autorize a substituição dos arquivos com nomes iguais.
+5. Não apague os demais arquivos da V191.
+6. Execute: node QA-V192-UNIVERSO-EDITORIAL.mjs
+7. Só publique depois de revisar o resultado PASS e conceder autorização separada.
+
+O QUE MUDA
+- Loja Mística: 21 escolhas revisadas, finalidades visíveis, buscas tecnológicas
+  neutras, divulgação de associado Amazon e zero checkout interno.
+- Música: dois álbuns publicados de Hércules DX com ano, contexto, crédito,
+  link oficial e player Spotify criado somente após o toque.
+- De Frente com o Tarot: piloto identificado como em preparação e zero
+  episódios públicos; URL, revisão, direitos e acessibilidade são obrigatórios.
+- Universo editorial: ritmo permanente ligado à Biblioteca e à Escola, sem
+  transformar calendário em promessa de lançamento.
+- Métricas: desligadas por padrão, opt-in explícito, contagens agregadas apenas
+  neste aparelho, retenção de 90 dias e nenhum provedor externo.
+- SEO: páginas públicas de Loja, Música e De Frente, dados estruturados,
+  sitemap e busca interna atualizados.
+
+O QUE NÃO MUDA
+- Tarot Livre: 78 cartas, sempre diretas, sem repetição e sem significado na
+  revelação; Mesa Real 13 × 6.
+- Premium V191: R$ 199,90 vitalício; Orbe IA separada por R$ 89,90/mês com
+  400 créditos; pacotes e 30 skins preservados.
+- Conta, Consultas, Orbe IA e billing continuam no ambiente STAGING definido.
+- Canal oficial de contato: orbedasrealidades@hotmail.com. Sem WhatsApp.
+
+PORTÕES BLOQUEADOS NESTE PACOTE
+- Publicação em produção, DNS e lojas móveis.
+- Cobrança real, Checkout, webhook, Customer Portal e escrita no Stripe.
+- Escrita no Supabase e qualquer envio pela Resend.
+
+ARQUIVOS DE EVIDÊNCIA
+- EDITORIAL-UNIVERSE-V192.json
+- EDITORIAL-CALENDAR-V192.json
+- MEDIA-CATALOG-V192.json
+- EVIDENCIA-QA-V192.json
+- ARQUIVOS-V192-SHA256.txt
+
+Data da revisão: 9 de setembro de 2026.

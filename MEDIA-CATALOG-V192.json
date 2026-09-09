@@ -1,0 +1,30 @@
+{
+  "version": "V192",
+  "reviewedAt": "2026-09-09",
+  "artist": {
+    "name": "Hércules DX",
+    "spotify": "https://open.spotify.com/artist/5zMbVNQZMSm5NGcdFWMLrz"
+  },
+  "albums": [
+    {
+      "name": "Sobre as Estrelas",
+      "year": 2024,
+      "status": "published",
+      "url": "https://open.spotify.com/album/0GwJtJujeS9iwSZFADcL1k"
+    },
+    {
+      "name": "Z",
+      "year": 2026,
+      "status": "published",
+      "url": "https://open.spotify.com/album/4mq0UaLMXK21JbrKMFdhdO"
+    }
+  ],
+  "series": {
+    "name": "De Frente com o Tarot",
+    "status": "pilot-preparation",
+    "channel": "https://www.youtube.com/@divinabruxa33",
+    "episodes": [],
+    "publicEpisodeCount": 0
+  },
+  "truthRule": "Only explicit, reviewed and accessible published items appear to visitors."
+}

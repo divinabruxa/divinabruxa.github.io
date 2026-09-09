@@ -1,0 +1,40 @@
+{
+  "version": "V192",
+  "timezone": "America/Sao_Paulo",
+  "type": "editorial-rhythm-not-release-schedule",
+  "rule": "A presença no calendário nunca torna público um item em rascunho ou futuro.",
+  "weekly": [
+    {
+      "day": "monday",
+      "label": "Segunda",
+      "program": "Biblioteca em foco",
+      "destination": "./#library",
+      "purpose": "Reabrir uma carta, símbolo ou combinação já publicada.",
+      "publication": "evergreen"
+    },
+    {
+      "day": "wednesday",
+      "label": "Quarta",
+      "program": "Prática guiada",
+      "destination": "./#school",
+      "purpose": "Conectar repertório a uma aula ou exercício já disponível.",
+      "publication": "evergreen"
+    },
+    {
+      "day": "friday",
+      "label": "Sexta",
+      "program": "Escuta autoral",
+      "destination": "./#music",
+      "purpose": "Destacar um álbum oficial com contexto editorial.",
+      "publication": "published-catalog"
+    },
+    {
+      "day": "sunday",
+      "label": "Domingo",
+      "program": "Caderno De Frente",
+      "destination": "./#videos",
+      "purpose": "Receber bastidores ou episódios somente depois da confirmação editorial.",
+      "publication": "when-published"
+    }
+  ]
+}

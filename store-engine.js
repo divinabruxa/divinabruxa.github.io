@@ -1,8 +1,8 @@
-/* DIVINA BRUXA V148 — LOJA MÍSTICA CELESTIAL */
+/* DIVINA BRUXA V192 — LOJA MÍSTICA + CURADORIA EDITORIAL */
 import { store, escapeHTML } from './storage.js';
-import { STORE_POLICY, storeToneFor } from './store-policy.js?v=148';
+import { STORE_POLICY, storeToneFor } from './store-policy.js?v=192';
 
-const FAVORITES_KEY = 'mystic-store-favorites-v148';
+const FAVORITES_KEY = 'mystic-store-favorites-v192';
 const emit = message => dispatchEvent(new CustomEvent('orbe:toast', { detail: message }));
 
 export const normalizeStoreText = value => String(value ?? '')
@@ -64,7 +64,7 @@ export class StoreEngine {
     this.collectionId = '';
     this.onlyFavorites = false;
     const validIds = new Set((config.products || []).map(product => product.id));
-    const storedFavorites = store.get(FAVORITES_KEY, store.get('mystic-store-favorites-v5', []));
+    const storedFavorites = store.get(FAVORITES_KEY, store.get('mystic-store-favorites-v148', store.get('mystic-store-favorites-v5', [])));
     this.favorites = new Set(
       (Array.isArray(storedFavorites) ? storedFavorites : []).filter(id => validIds.has(id))
     );
@@ -72,13 +72,13 @@ export class StoreEngine {
     this.renderShell();
     this.bind();
     this.renderCatalog();
-    this.root.dataset.storeReady = 'v148';
+    this.root.dataset.storeReady = 'v192';
   }
 
   renderShell() {
     const productCount = (this.config.products || []).length;
     this.root.innerHTML = `
-      <div class="store-v148-shell" data-store-v148>
+      <div class="store-v148-shell store-v192-shell" data-store-v192>
         <section class="store-v148-hero" aria-labelledby="store-v148-hero-title">
           <figure class="store-v148-hero-art">
             <img src="${escapeHTML(STORE_POLICY.heroImage)}" width="864" height="1296" alt="Cartas de Tarot, ametista, diário violeta, vela e chave dourada em uma cena editorial celestial" decoding="async">
@@ -87,7 +87,7 @@ export class StoreEngine {
           <div class="store-v148-hero-copy">
             <p class="eyebrow">CURADORIA DA ORBE</p>
             <h3 id="store-v148-hero-title">Objetos que acompanham o seu universo.</h3>
-            <p>Seleções temáticas para estudar, criar rituais, transformar ambientes e presentear. Você explora aqui e decide com calma no site da Amazon.</p>
+            <p>Seleções temáticas para estudar, criar, organizar rituais e presentear. A curadoria explica o propósito; disponibilidade e decisão final ficam no site da Amazon.</p>
             <div class="store-v148-trust" aria-label="Princípios da Loja Mística">
               <span><b>◇</b> curadoria transparente</span>
               <span><b>♡</b> favoritos neste aparelho</span>
@@ -107,7 +107,7 @@ export class StoreEngine {
             <strong>TRANSPARÊNCIA DE AFILIADO</strong>
             <p>${escapeHTML(STORE_POLICY.disclosure)} ${escapeHTML(STORE_POLICY.partnerNotice)}</p>
           </div>
-          <small>Sem cartão ou pagamento dentro da Divina Bruxa</small>
+          <small>Revisada em 9 de setembro de 2026 · sem checkout interno</small>
         </aside>
 
         <section class="store-v148-catalog" aria-labelledby="store-v148-catalog-title">
@@ -161,8 +161,13 @@ export class StoreEngine {
 
         <footer class="store-v148-footer-note">
           <span aria-hidden="true">◇</span>
-          <p><strong>Antes de escolher:</strong> confira descrição, medidas, idioma, vendedor, avaliações, prazo e política de devolução diretamente na Amazon.</p>
+          <p><strong>Antes de escolher:</strong> confira descrição, medidas, idioma, vendedor, avaliações, prazo, garantia e política de devolução diretamente na Amazon.</p>
         </footer>
+        <section class="store-v192-guide" aria-labelledby="store-v192-guide-title">
+          <span aria-hidden="true">◇</span>
+          <div><p class="eyebrow">GUIA DA CURADORIA</p><h3 id="store-v192-guide-title">Entenda como cada escolha entra na Loja.</h3><p>Veja os critérios, os limites dos links de afiliado e um checklist simples para comparar anúncios.</p></div>
+          <a href="loja-mistica.html" data-editorial-target="store_guide">ABRIR GUIA PÚBLICO <b aria-hidden="true">↗</b></a>
+        </section>
       </div>`;
   }
 
@@ -248,12 +253,13 @@ export class StoreEngine {
           </div>
           <h4>${escapeHTML(product.name)}</h4>
           <p>${escapeHTML(product.description)}</p>
+          ${product.why ? `<p class="store-v192-why"><b>Por que está aqui:</b> ${escapeHTML(product.why)}</p>` : ''}
           ${product.note ? `<small class="store-v148-product-note">${escapeHTML(product.note)}</small>` : ''}
           <div class="store-v148-partner-state">
             <span>Preço e estoque</span>
             <b>Confirmar na Amazon</b>
           </div>
-          <a href="${escapeHTML(url)}" data-affiliate="${escapeHTML(product.id)}" aria-describedby="store-v148-disclosure" target="_blank" rel="nofollow sponsored noopener" aria-label="Ver seleção de ${escapeHTML(product.name)} na Amazon, abre em nova aba">
+          <a href="${escapeHTML(url)}" data-affiliate="${escapeHTML(product.id)}" data-editorial-target="store_amazon" aria-describedby="store-v148-disclosure" target="_blank" rel="nofollow sponsored noopener" aria-label="Ver seleção de ${escapeHTML(product.name)} na Amazon, abre em nova aba">
             <span>Ver seleção na Amazon</span><b aria-hidden="true">↗</b>
           </a>
           <small class="store-v148-sponsored">PUBLICIDADE · COMPRA E ENTREGA PELO PARCEIRO</small>

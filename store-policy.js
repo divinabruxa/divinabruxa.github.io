@@ -1,4 +1,4 @@
-/* DIVINA BRUXA V148 — POLÍTICA DA LOJA MÍSTICA CELESTIAL */
+/* DIVINA BRUXA V192 — POLÍTICA DA LOJA MÍSTICA CELESTIAL */
 
 const collection = (id, name, sigil, description, categories) => Object.freeze({
   id,
@@ -9,17 +9,19 @@ const collection = (id, name, sigil, description, categories) => Object.freeze({
 });
 
 export const STORE_POLICY = Object.freeze({
-  version: 'v148',
-  environment: 'affiliate-staging',
+  version: 'v192',
+  environment: 'editorial-affiliate-staging',
+  reviewedAt: '2026-09-09',
   checkout: false,
   productionBilling: false,
   storesPaymentData: false,
   affiliateHost: 'www.amazon.com.br',
   affiliateHostSuffix: '.amazon.com.br',
-  disclosure: 'Como associado da Amazon, eu recebo por compras qualificadas. O preço para você não muda.',
-  partnerNotice: 'Preço, estoque, vendedor, pagamento, entrega, troca e suporte são confirmados e realizados na Amazon.',
+  disclosure: 'Como associado da Amazon, eu recebo por compras qualificadas. Você não paga nada a mais por isso.',
+  partnerNotice: 'Preço, estoque, vendedor, configuração, pagamento, entrega, troca, garantia e suporte são confirmados e realizados na Amazon.',
   editorialImageNotice: 'Cena editorial da Divina Bruxa. Os objetos são ilustrativos e não representam um anúncio ou SKU específico.',
-  privacyNotice: 'Busca e favoritos ficam somente neste aparelho. Cliques não são gravados sem consentimento.',
+  privacyNotice: 'Busca e favoritos ficam neste aparelho. Cliques editoriais só viram contagens locais após consentimento opcional.',
+  selectionRule: 'A curadoria aponta finalidades e buscas amplas; não declara preço, estoque, avaliação ou modelo atual.',
   heroImage: 'loja-mistica-celestial-v1.webp',
   categories: Object.freeze([
     'Todos',

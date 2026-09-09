@@ -1,0 +1,67 @@
+{
+  "version": "V192",
+  "macroetapa": 14,
+  "title": "Loja, música, vídeos e universo editorial",
+  "baselineRequired": "V191",
+  "delivery": {
+    "type": "delta-flat",
+    "archive": "DIVINA-BRUXA-V192-LOJA-MUSICA-VIDEOS-UNIVERSO-EDITORIAL.zip",
+    "installMode": "replace-or-add",
+    "deleteFiles": [],
+    "containsDirectories": false,
+    "fileCount": 30
+  },
+  "replacedFiles": [
+    "app.js",
+    "busca-v165.js",
+    "buscar.html",
+    "config.js",
+    "index.html",
+    "page-loader-v1.js",
+    "politica-editorial.html",
+    "privacidade-e-dados.html",
+    "sitemap.xml",
+    "store-engine.js",
+    "store-policy.js",
+    "sw.js",
+    "termos-de-uso.html"
+  ],
+  "addedFiles": [
+    "00-LEIA-PRIMEIRO-V192-UNIVERSO-EDITORIAL.txt",
+    "ARQUIVOS-V192-SHA256.txt",
+    "de-frente-com-o-tarot.html",
+    "editorial-catalog-v192.js",
+    "EDITORIAL-CALENDAR-V192.json",
+    "editorial-journey-v192.js",
+    "editorial-metrics-v192.js",
+    "editorial-universe-v192.css",
+    "EDITORIAL-UNIVERSE-V192.json",
+    "EVIDENCIA-QA-V192.json",
+    "loja-mistica.html",
+    "MANIFESTO-V192-UNIVERSO-EDITORIAL.json",
+    "MEDIA-CATALOG-V192.json",
+    "media-engine-v192.js",
+    "media-policy-v192.js",
+    "musica.html",
+    "QA-V192-UNIVERSO-EDITORIAL.mjs"
+  ],
+  "verification": {
+    "releaseSuite": "QA-V192-UNIVERSO-EDITORIAL.mjs",
+    "releaseChecks": 280,
+    "releaseStatus": "PASS",
+    "baselineV191Checks": 271,
+    "baselineV191Status": "PASS",
+    "cleanInstallOverV191": "PASS",
+    "archiveMembersByteExact": "PASS"
+  },
+  "authorizationGates": {
+    "productionPublish": false,
+    "dns": false,
+    "realBilling": false,
+    "stripeWrites": false,
+    "resendActions": false,
+    "supabaseWrites": false,
+    "mobileStoreSubmission": false
+  },
+  "reviewedAt": "2026-09-09"
+}

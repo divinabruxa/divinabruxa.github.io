@@ -1,0 +1,124 @@
+{
+  "version": "V192",
+  "macroetapa": 14,
+  "title": "Loja, música, vídeos e universo editorial",
+  "baseline": "V191",
+  "reviewedAt": "2026-09-09",
+  "environment": "editorial-staging",
+  "scope": {
+    "store": true,
+    "music": true,
+    "videoSeries": true,
+    "editorialCalendar": true,
+    "publicSeoPages": true,
+    "localConsentMetrics": true
+  },
+  "store": {
+    "catalogItems": 21,
+    "categories": 8,
+    "collections": 4,
+    "affiliatePartner": "Amazon Brasil",
+    "associateDisclosureVisible": true,
+    "exactSkuClaims": false,
+    "internalCheckout": false,
+    "storesPaymentData": false,
+    "priceAndAvailability": "confirm-on-partner",
+    "outboundRel": ["nofollow", "sponsored", "noopener"]
+  },
+  "music": {
+    "artist": "Hércules DX",
+    "publishedAlbums": [
+      {
+        "name": "Sobre as Estrelas",
+        "year": 2024,
+        "spotifyAlbumId": "0GwJtJujeS9iwSZFADcL1k",
+        "status": "published"
+      },
+      {
+        "name": "Z",
+        "year": 2026,
+        "spotifyAlbumId": "4mq0UaLMXK21JbrKMFdhdO",
+        "status": "published"
+      }
+    ],
+    "playerMode": "click-to-load-one-active-embed",
+    "autoplay": false,
+    "listeningHistoryStored": false
+  },
+  "videoSeries": {
+    "name": "De Frente com o Tarot",
+    "status": "pilot-preparation",
+    "publicEpisodes": 0,
+    "inventedEpisodes": false,
+    "futureEpisodesVisible": false,
+    "publishRequirements": [
+      "official-url",
+      "editorial-review",
+      "description",
+      "rights",
+      "accessibility-summary",
+      "captions-or-transcript"
+    ]
+  },
+  "editorialCalendar": {
+    "type": "evergreen-curation-rhythm",
+    "releasePromise": false,
+    "slots": [
+      {"day": "Segunda", "destination": "Biblioteca", "state": "evergreen"},
+      {"day": "Quarta", "destination": "Escola", "state": "evergreen"},
+      {"day": "Sexta", "destination": "Música", "state": "published-catalog"},
+      {"day": "Domingo", "destination": "De Frente com o Tarot", "state": "when-published"}
+    ]
+  },
+  "metrics": {
+    "default": "off",
+    "consent": "explicit-local-toggle",
+    "eventType": "feature_open",
+    "storage": "local-only",
+    "externalProvider": false,
+    "retentionDays": 90,
+    "recordsSearchTerms": false,
+    "recordsUrls": false,
+    "recordsContent": false,
+    "recordsIdentity": false
+  },
+  "seo": {
+    "pages": [
+      "loja-mistica.html",
+      "musica.html",
+      "de-frente-com-o-tarot.html"
+    ],
+    "sitemapUpdated": true,
+    "internalSearchUpdated": true,
+    "structuredData": [
+      "CollectionPage",
+      "ItemList",
+      "MusicGroup",
+      "MusicAlbum",
+      "CreativeWorkSeries",
+      "BreadcrumbList"
+    ],
+    "fabricatedProductSchema": false,
+    "fabricatedVideoObject": false
+  },
+  "protectedGates": {
+    "productionPublish": false,
+    "dnsChange": false,
+    "realBilling": false,
+    "stripeWrite": false,
+    "resendAction": false,
+    "mobileStoreSubmission": false,
+    "supabaseWrite": false
+  },
+  "preservedInvariants": {
+    "tarotCards": 78,
+    "tarotOrientation": "normal-only",
+    "tarotRepeat": false,
+    "tarotMeaningOnReveal": false,
+    "mesaReal": "13x6",
+    "officialContact": "orbedasrealidades@hotmail.com",
+    "whatsapp": false,
+    "premiumBilling": "V191-staging-preserved",
+    "skins": 30
+  }
+}

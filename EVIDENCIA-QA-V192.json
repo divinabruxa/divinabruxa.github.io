@@ -1,0 +1,68 @@
+{
+  "version": "V192",
+  "generatedAt": "2026-09-09",
+  "baseline": {
+    "version": "V191",
+    "suite": "QA-V191-PREMIUM-SKINS-BILLING.mjs",
+    "status": "PASS",
+    "passed": 271,
+    "failed": 0,
+    "htmlDuplicateIds": 0,
+    "missingLocalAssets": 0
+  },
+  "release": {
+    "suite": "QA-V192-UNIVERSO-EDITORIAL.mjs",
+    "status": "PASS",
+    "passed": 280,
+    "failed": 0,
+    "coverage": [
+      "JavaScript syntax",
+      "catalog invariants",
+      "Amazon URL safety and disclosure",
+      "published music identity",
+      "video truth gate",
+      "editorial calendar connections",
+      "local consent metrics",
+      "HTML identifiers and local assets",
+      "structured data",
+      "sitemap and internal search",
+      "service worker assets",
+      "Tarot invariants",
+      "Premium prices and production gates",
+      "30 skins",
+      "frozen runtime hashes",
+      "secret-pattern exclusions"
+    ]
+  },
+  "supplemental": {
+    "skinUniversalSuite": {
+      "status": "PASS",
+      "passed": 8,
+      "failed": 0
+    }
+  },
+  "cleanInstall": {
+    "base": "V191",
+    "archiveType": "flat-delta",
+    "archiveMembers": 30,
+    "directoriesInArchive": 0,
+    "releaseSuiteAfterInstall": "PASS",
+    "archiveMembersByteExactAgainstV192": true
+  },
+  "externalTruth": {
+    "spotifyAlbums": [
+      "https://open.spotify.com/album/0GwJtJujeS9iwSZFADcL1k",
+      "https://open.spotify.com/album/4mq0UaLMXK21JbrKMFdhdO"
+    ],
+    "videoEpisodesPublished": 0,
+    "youtubePublicationWasNotInvented": true
+  },
+  "externalActions": {
+    "productionPublish": false,
+    "dnsChange": false,
+    "stripeWrite": false,
+    "resendAction": false,
+    "supabaseWrite": false,
+    "mobileStoreSubmission": false
+  }
+}

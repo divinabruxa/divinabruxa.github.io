@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V60 · ORBE IA GOVERNADA V190 */
-const CACHE='divina-bruxa-v60-orbe-ai-v190';
+/* DIVINA BRUXA — SERVICE WORKER V62 · UNIVERSO EDITORIAL V192 */
+const CACHE='divina-bruxa-v62-editorial-v192';
 
 const REQUIRED=[
   './',
@@ -18,11 +18,19 @@ const REQUIRED=[
   './skin-universal-v10.js',
   './skin-catalog-v6.js',
   './config.js',
+  './editorial-catalog-v192.js',
+  './editorial-metrics-v192.js',
+  './privacy-center-v9.js',
+  './editorial-universe-v192.css',
   './auth-client-v6.js',
   './auth-client-v189.js',
   './account-engine-v189.js',
   './account-secure-v189.css',
   './orbe-ai-governada-v190.css',
+  './premium-billing-v191.css',
+  './premium-policy-v191.js',
+  './premium-engine-v191.js',
+  './skins-v191.js',
   './navigation.js',
   './orb-engine-v68.js',
   './mini-orb-engine.js',
@@ -53,6 +61,10 @@ const CORE=[
   './route-registry-v180.js',
   './orb-loading-portal-v1.js',
   './config.js',
+  './editorial-catalog-v192.js',
+  './editorial-metrics-v192.js',
+  './privacy-center-v9.js',
+  './editorial-universe-v192.css',
   './orb-engine-v68.js',
   './mini-orb-engine.js',
   './auth-client-v6.js',
@@ -60,6 +72,10 @@ const CORE=[
   './account-engine-v189.js',
   './account-secure-v189.css',
   './orbe-ai-governada-v190.css',
+  './premium-billing-v191.css',
+  './premium-policy-v191.js',
+  './premium-engine-v191.js',
+  './skins-v191.js',
   './visual-guard-v6.js',
   './tarot-experience-v6.js',
   './tarot-data.js',
@@ -116,6 +132,9 @@ const WARM=[
   './spreads-engine.js','./spreads-policy.js','./spread-synthesis.js','./tiragens-definitivas-v185.css','./tiragens-de-tarot.html',
   './consultation-policy.js','./consultation-engine.js','./consultations-celestial-v1.css','./consultations-definitive-v188.css','./consultas-de-tarot.html',
   './ai-policy.js','./ai-credits.js','./ai-engine.js','./orbe-ai-governada-v190.css',
+  './premium-policy-v191.js','./premium-engine-v191.js','./skins-v191.js','./premium-billing-v191.css',
+  './store-engine.js','./store-policy.js','./store-celestial-v1.css','./loja-mistica-celestial-v1.webp','./loja-mistica.html',
+  './media-engine-v192.js','./media-policy-v192.js','./editorial-journey-v192.js','./media-celestial-v149.css','./midia-celestial-estudio-v1.webp','./musica.html','./de-frente-com-o-tarot.html',
   './fallback-shell-v1.css','./pwa-final-v1.css'
 ];
 
@@ -148,7 +167,7 @@ self.addEventListener('fetch',event=>{
   const url=new URL(event.request.url);
   const sameOrigin=url.origin===self.location.origin;
   const navigation=event.request.mode==='navigate'||event.request.destination==='document';
-  const sensitive=sameOrigin&&/(^|\/)(api\/)?(ai|auth|account|admin|entitlements|billing|payments|consultations)(\/|$)/.test(url.pathname);
+  const sensitive=sameOrigin&&/(^|\/)(functions\/v1\/)?(ai|auth|account|admin|entitlements|billing|payments|consultations)([-/]|$)/.test(url.pathname);
 
   if(sensitive){
     event.respondWith(fetch(event.request).catch(()=>new Response('',{status:503,statusText:'Secure connection required'})));

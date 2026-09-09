@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.23 · ORBE IA GOVERNADA V190
+/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.24 · UNIVERSO EDITORIAL V192
    Estilos e motores nascem sob demanda; toda falha oferece tentativa e retorno seguro. */
 
 import {
@@ -151,13 +151,13 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
   });
 
   const ensureMedia = () => once(sharedTasks, 'media', async () => {
-    const [{ MediaEngineV149 }, { MediaEcosystemV149 }] = await Promise.all([
-      import('./media-engine-v149.js?v=149'),
-      import('./media-ecosystem-v149.js?v=149')
+    const [{ MediaEngineV192 }, { EditorialJourneyV192 }] = await Promise.all([
+      import('./media-engine-v192.js?v=192'),
+      import('./editorial-journey-v192.js?v=192')
     ]);
-    const media = new MediaEngineV149({ videos: $('#videoApp'), music: $('#musicApp') }, config);
-    new MediaEcosystemV149($('#videoApp'), 'videos');
-    new MediaEcosystemV149($('#musicApp'), 'music');
+    const media = new MediaEngineV192({ videos: $('#videoApp'), music: $('#musicApp') }, config);
+    new EditorialJourneyV192($('#videoApp'), 'videos');
+    new EditorialJourneyV192($('#musicApp'), 'music');
     return media;
   });
 
@@ -197,8 +197,13 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
     },
     store: async () => {
       await ensureCommerce();
-      const { StoreEngine } = await import('./store-engine.js?v=148');
-      return new StoreEngine($('#storeApp'), config);
+      const [{ StoreEngine }, { EditorialJourneyV192 }] = await Promise.all([
+        import('./store-engine.js?v=192'),
+        import('./editorial-journey-v192.js?v=192')
+      ]);
+      const engine = new StoreEngine($('#storeApp'), config);
+      new EditorialJourneyV192($('#storeApp'), 'store');
+      return engine;
     },
     consultations: async () => {
       await ensureCommerce();
@@ -207,12 +212,12 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
     },
     subscriptions: async () => {
       await ensureCommerce();
-      const { PremiumEngine } = await import('./premium-engine.js?v=142');
-      return new PremiumEngine($('#subscriptionApp'));
+      const { PremiumEngineV191 } = await import('./premium-engine-v191.js?v=191');
+      return new PremiumEngineV191($('#subscriptionApp'));
     },
     skins: async () => {
-      const { SkinsEngine } = await import('./skins-v6.js?v=142');
-      return new SkinsEngine($('#skinsApp'));
+      const { SkinsEngineV191 } = await import('./skins-v191.js?v=191');
+      return new SkinsEngineV191($('#skinsApp'));
     },
     videos: ensureMedia,
     music: ensureMedia,
