@@ -1,0 +1,136 @@
+{
+  "release": "V191",
+  "macro_stage": 13,
+  "name": "Premium, 30 skins e pagamentos seguros em STAGING",
+  "environment": "STAGING",
+  "production_authorized": false,
+  "billing": {
+    "mode": "authenticated_internal_simulator",
+    "real_billing": false,
+    "card_data_collected": false,
+    "fiscal_receipts": false,
+    "commands": [
+      "snapshot",
+      "simulate_purchase",
+      "restore",
+      "refund",
+      "revoke",
+      "cancel_subscription"
+    ],
+    "idempotency": "request_uuid",
+    "idempotency_payload_conflict": "rejected",
+    "rate_limit_per_user_per_minute": 20,
+    "server_authoritative": true
+  },
+  "catalog": [
+    {
+      "key": "premium_lifetime",
+      "type": "premium",
+      "billing_mode": "payment",
+      "price_brl_cents": 19990,
+      "includes_ai": false,
+      "includes_all_30_skins": true
+    },
+    {
+      "key": "orbe_ai_monthly",
+      "type": "ai_subscription",
+      "billing_mode": "subscription",
+      "price_brl_cents": 8990,
+      "credits_per_cycle": 400
+    },
+    {
+      "key": "credits_200",
+      "type": "credits",
+      "billing_mode": "payment",
+      "price_brl_cents": 3990,
+      "credits": 200
+    },
+    {
+      "key": "credits_600",
+      "type": "credits",
+      "billing_mode": "payment",
+      "price_brl_cents": 9990,
+      "credits": 600
+    },
+    {
+      "key": "credits_1500",
+      "type": "credits",
+      "billing_mode": "payment",
+      "price_brl_cents": 19990,
+      "credits": 1500
+    }
+  ],
+  "ai_credits": {
+    "luna_per_response": 1,
+    "terra_per_response": 10,
+    "sol_enabled": false,
+    "premium_includes_ai": false
+  },
+  "skins": {
+    "count": 30,
+    "source": "skin-catalog-v6.js",
+    "server_catalog_synced": true,
+    "premium_includes_all": true,
+    "free": {
+      "id": "classic",
+      "name": "Clássica Divina"
+    },
+    "cosmetic_only": true,
+    "atomic_runtime_switch": true,
+    "previews_loaded_on_demand": true
+  },
+  "security": {
+    "authenticated_edge_function": true,
+    "verified_email_required": true,
+    "active_session_required": true,
+    "strict_origin_allowlist": true,
+    "max_request_body_bytes": 8192,
+    "new_tables_rls": true,
+    "private_tables_deny_client": true,
+    "command_rpc_service_role_only": true,
+    "secrets_in_browser": false,
+    "sensitive_routes_cached": false
+  },
+  "stripe_future_architecture": {
+    "account_connected_for_planning_only": true,
+    "objects_created": false,
+    "checkout": "hosted",
+    "payment_methods": "dynamic",
+    "subscription_model": "flat_rate",
+    "subscription_collection": "pay_upfront",
+    "cancellation": "at_period_end",
+    "customer_portal": "planned_but_disabled",
+    "webhook": "planned_but_disabled",
+    "automatic_tax": false,
+    "tax_registration_confirmed": false
+  },
+  "mobile_sequence": {
+    "android": "first_after_separate_authorization",
+    "ios": "prepared_only",
+    "store_submissions_created": false
+  },
+  "frozen_surfaces": {
+    "main_orb": true,
+    "magic_menu": true,
+    "mini_orbs": true,
+    "free_tarot": {
+      "cards": 78,
+      "orientation": "normal",
+      "duplicates": false,
+      "automatic_meaning_on_reveal": false,
+      "mesa_real": "13x6"
+    }
+  },
+  "external_actions": {
+    "production_publish": false,
+    "dns_change": false,
+    "stripe_write": false,
+    "real_payment": false,
+    "resend_call": false,
+    "mobile_store_submission": false
+  },
+  "official_contact": {
+    "email": "orbedasrealidades@hotmail.com",
+    "whatsapp": null
+  }
+}

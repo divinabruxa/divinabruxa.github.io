@@ -1,0 +1,50 @@
+DIVINA BRUXA — V192
+REPARO SEGURO PARA V192 INSTALADA SEM A V191
+============================================================
+
+QUANDO USAR ESTE PACOTE
+------------------------------------------------------------
+Use somente no cenário exato em que a V192 foi instalada diretamente sobre
+a V190, sem instalar antes o pacote V191.
+
+O QUE ESTE REPARO FAZ
+------------------------------------------------------------
+- Repõe os arquivos exclusivos da V191 exigidos pela V192.
+- Atualiza auth-client-v189.js para a revisão preservada pela V192.
+- Mantém app.js, index.html, sw.js e todos os demais arquivos compartilhados
+  na versão V192; eles não estão neste ZIP e não serão rebaixados.
+- Não ativa cobrança real, Stripe, webhook, produção ou envio pela Resend.
+- Não altera nem reaplica o banco STAGING já preparado para a V191.
+
+COMO INSTALAR
+------------------------------------------------------------
+1. Faça uma cópia da raiz atual que já recebeu a V192.
+2. Extraia este ZIP diretamente na raiz do site.
+3. Autorize a substituição de auth-client-v189.js.
+4. Não crie subpasta: o ZIP é propositalmente plano.
+5. NÃO instale o ZIP completo da V191 depois deste reparo.
+6. Na raiz instalada, execute:
+
+   node QA-V192-REPARO-V191-AUSENTE.mjs
+
+7. O resultado esperado é status PASS, com zero falhas.
+8. Abra o site com ?portal-refresh=v192-reparo-v191 e recarregue mais uma vez
+   para o service worker V192 completar o cache antes incompleto.
+
+VALIDAÇÃO COMPLETA OPCIONAL
+------------------------------------------------------------
+O QA oficial da V192 permanece válido e pode ser executado na raiz:
+
+   node QA-V192-UNIVERSO-EDITORIAL.mjs
+
+Resultado de referência da composição validada: 280/280 PASS.
+
+IMPORTANTE
+------------------------------------------------------------
+Os arquivos SQL e billing-account-v191.ts são evidências/reprodutores da
+V191. Não os execute novamente no STAGING já configurado.
+
+Canal oficial: orbedasrealidades@hotmail.com
+Sem WhatsApp.
+
+Data do reparo: 9 de setembro de 2026.

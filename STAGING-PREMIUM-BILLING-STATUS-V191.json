@@ -1,0 +1,108 @@
+{
+  "release": "V191",
+  "checked_at_utc": "2026-09-08T23:39:58Z",
+  "project": {
+    "id": "kyphdsamyygavmkzyezr",
+    "name": "divina-bruxa-staging",
+    "region": "sa-east-1",
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.6.1.155"
+  },
+  "release_gate": {
+    "environment": "staging",
+    "sandbox_simulator_enabled": true,
+    "real_billing_authorized": false,
+    "stripe_checkout_enabled": false,
+    "stripe_webhook_enabled": false,
+    "customer_portal_enabled": false,
+    "automatic_tax_enabled": false,
+    "tax_registration_confirmed": false,
+    "production_authorized": false
+  },
+  "edge_function": {
+    "slug": "billing-account-v191",
+    "status": "ACTIVE",
+    "version": 1,
+    "verify_jwt": true,
+    "sha256": "20b7aa02b0f2d9343838d87980806f476c46cbc52a688197c2704518abb43753"
+  },
+  "migrations": [
+    {
+      "version": "20260908231108",
+      "name": "premium_skins_billing_staging_v191"
+    },
+    {
+      "version": "20260908231632",
+      "name": "premium_account_trigger_hardening_v191"
+    },
+    {
+      "version": "20260908231958",
+      "name": "premium_receipt_hardening_v191"
+    },
+    {
+      "version": "20260908232209",
+      "name": "premium_index_hardening_v191"
+    },
+    {
+      "version": "20260908233833",
+      "name": "premium_idempotency_hardening_v191"
+    }
+  ],
+  "database": {
+    "active_v191_products": 5,
+    "published_skins": 30,
+    "free_skins": 1,
+    "free_skin_slug": "classic",
+    "auth_users": 0,
+    "v191_purchases": 0,
+    "v191_receipts": 0,
+    "v191_subscriptions": 0,
+    "v191_command_log_rows": 0,
+    "new_v191_tables_rls": true,
+    "command_rpc_anon_execute": false,
+    "command_rpc_authenticated_execute": false,
+    "command_rpc_service_role_execute": true
+  },
+  "remote_transaction_qa": {
+    "status": "PASS",
+    "rolled_back": true,
+    "account_trigger_classic": true,
+    "catalog_products": 5,
+    "published_skins": 30,
+    "lifecycle_commands": 9,
+    "idempotency_replay": true,
+    "idempotency_payload_conflict_rejected": true,
+    "cancel_subscription_id_separate": true,
+    "receipts_tested": 3,
+    "synthetic_users_remaining": 0,
+    "synthetic_rows_remaining": 0
+  },
+  "quality": {
+    "local_qa": "271/271 PASS",
+    "html_duplicate_ids": 0,
+    "html_missing_local_assets": 0,
+    "frozen_hashes_match": true,
+    "new_unindexed_foreign_keys": 0,
+    "security_advisor": "INFO only; deny-by-default internal tables intentionally have no permissive client policy",
+    "performance_advisor": "INFO only; unused indexes are expected before STAGING traffic"
+  },
+  "inherited_advisory": {
+    "table": "private.billing_environment_guard",
+    "rls_enabled": false,
+    "anon_select": false,
+    "anon_update": false,
+    "authenticated_select": false,
+    "authenticated_update": false,
+    "used_by_v191": false,
+    "v191_replacement": "private.billing_release_gate_v191",
+    "status": "isolated; remediation requires a separately reviewed and authorized migration"
+  },
+  "unchanged_gates": {
+    "production": "BLOCKED",
+    "real_billing": "OFF",
+    "stripe_objects_created": false,
+    "automatic_tax": "OFF",
+    "sol": "OFF",
+    "resend": "NOT CALLED"
+  }
+}

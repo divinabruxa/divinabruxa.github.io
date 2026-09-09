@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — CLIENTE DE CONTA V189 · PONTE ORBE IA V190
+/* DIVINA BRUXA — CLIENTE DE CONTA V189 · PONTES ORBE IA V190 E BILLING V191
    Sessão somente na aba (sessionStorage), nunca em localStorage e sem segredos administrativos. */
 import { AuthClient as LegacyAuthClient } from './auth-client-v6.js?v=151';
 
@@ -269,6 +269,23 @@ export class AuthClientV189 extends LegacyAuthClient {
   dailyCard() { return this.functionRequest('daily-card-account', { method:'GET' }); }
   aiStatus() { return this.functionRequest('orbe-ai-chat', { method:'GET', timeoutMs:20000 }); }
   aiChat(payload, signal) { return this.functionRequest('orbe-ai-chat', { body:payload, signal, timeoutMs:55000 }); }
+  billingSnapshot() {
+    const requestId = globalThis.crypto?.randomUUID?.();
+    return this.functionRequest('billing-account-v191', {
+      body:{ action:'snapshot', requestId }, timeoutMs:20000
+    });
+  }
+  billingSandboxCommand(payload = {}) {
+    return this.functionRequest('billing-account-v191', {
+      body:{ action:'command', ...payload }, timeoutMs:25000
+    });
+  }
+  async skinEntitlements() {
+    const result = await this.billingSnapshot();
+    return result?.ok
+      ? { ...result, body:{ ...(result.body || {}), skinIds:result.body?.snapshot?.skinIds || ['classic'] } }
+      : result;
+  }
   exportAccount() { return this.functionRequest('account-export', { body:{ formatVersion:'1.0.0' } }); }
   deleteAccount(payload) { return this.functionRequest('account-delete', { body:payload }); }
 }
