@@ -1,6 +1,7 @@
-/* DIVINA BRUXA V195 — functional EN/ES Free Tarot.
+/* DIVINA BRUXA V196 — functional EN/ES Free Tarot with offline atlas.
    Canonical 78-card deck, upright only, no repeats, no meanings. */
 import { CARDS, REQUIRED_ORIENTATION } from './tarot-data.js?v=195';
+import { applyInternationalCardImageV196 } from './international-card-image-v196.js?v=196';
 
 const randomUnit = () => {
   if (!globalThis.crypto?.getRandomValues) return Math.random();
@@ -81,12 +82,12 @@ if (root) {
       return slot;
     }
     const image = document.createElement('img');
-    image.src = card.image;
     image.alt = copy.cardAlt(position, cardName(card));
     image.width = 240;
     image.height = 360;
     image.loading = position < 7 ? 'eager' : 'lazy';
     image.decoding = 'async';
+    applyInternationalCardImageV196(image, card);
     slot.append(image);
     return slot;
   };

@@ -1,0 +1,59 @@
+DIVINA BRUXA — V196 — PWA, ACESSIBILIDADE E DESEMPENHO MUNDIAL
+================================================================
+
+BASE OBRIGATÓRIA
+- Instale esta versão somente depois da V195.
+
+A HOME CONTINUA COMO VOCÊ PEDIU
+- A página inicial mantém somente o título “Orbe das Realidades” e a Orbe viva.
+- Não foram acrescentados cards, textos editoriais, métricas ou instruções permanentes na Home.
+- Instalação e modo offline ficam dentro do menu e em páginas próprias.
+
+O QUE MUDA
+- PWA instalável com orientação clara para iPhone/iPad e Android.
+- Tarot Livre preparado offline com motor local e atlas completo das 78 cartas.
+- Três telas offline úteis e localizadas em português, inglês e espanhol.
+- Conta, pagamentos, restauração, Orbe IA e envio de consultas nunca usam resposta antiga do cache.
+- Cache dividido por shell, conteúdo público, imagens e Tarot; a limpeza toca somente caches da Divina Bruxa.
+- Foco visível, regiões inativas fora do teclado, foco preso em modais, link de salto,
+  alvos de toque, movimento reduzido, contraste aumentado e safe areas do iPhone.
+- Medição local de LCP, INP e CLS. As amostras só são guardadas neste aparelho se
+  a pessoa autorizou métricas opcionais; a V196 não transmite telemetria.
+- Fallback visual da Orbe usa WebP de 158 KB no lugar do PNG de 2,95 MB.
+- Atlas offline caiu de 2,24 MB para 1,30 MB, preservando a grade canônica 10 × 8.
+
+METAS DE DESEMPENHO
+- LCP: até 2,5 segundos.
+- INP: até 200 milissegundos.
+- CLS: até 0,1.
+- O portão final usa o percentil 75 separado entre celular e desktop.
+- O código de medição está pronto, mas o percentil real só existe depois de tráfego real.
+
+COMO INSTALAR NO GITHUB
+1. Abra a raiz do repositório que já contém a V195.
+2. Envie todos os arquivos deste ZIP como arquivos soltos, sem criar pasta.
+3. Confirme a substituição dos arquivos que já existem.
+4. Não apague nenhum arquivo antigo.
+5. Aguarde o GitHub Pages concluir a atualização.
+6. Feche e reabra o site para o service worker V196 assumir o controle.
+7. No menu, toque em “Instalar aplicativo” para ver as instruções corretas do aparelho.
+
+TESTE RÁPIDO DEPOIS DA INSTALAÇÃO
+- Home: somente título e Orbe viva.
+- Menu: abre, fecha com Escape e devolve o foco.
+- Tarot Livre: 78 cartas, todas diretas, nenhuma repetida, sem significado na revelação.
+- Instalação: abra instalar-app.html; no iPhone use Safari > Compartilhar > Adicionar à Tela de Início.
+- Offline: em instalar-app.html toque “Preparar agora”; depois ative modo avião e abra o Tarot Livre.
+- Acessibilidade: teste foco por teclado, movimento reduzido, zoom de 200% e leitor de tela.
+
+SEGURANÇA DO DELTA
+- ZIP plano: não contém pastas.
+- Nenhum arquivo antigo precisa ser apagado.
+- Os motores congelados da Orbe e do Tarot não foram alterados.
+- Nenhuma publicação, DNS, cobrança real, loja de aplicativos ou Sol foi ativada.
+
+VALIDAÇÃO
+- Execute, se desejar: node QA-V196-PWA-WCAG-PERFORMANCE.mjs
+- Portão do pacote: P0 = 0 e P1 = 0.
+- VoiceOver, TalkBack e percentil 75 real permanecem como validação pós-instalação,
+  porque não devem ser inventados por teste de laboratório.

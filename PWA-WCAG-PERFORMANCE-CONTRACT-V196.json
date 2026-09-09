@@ -1,0 +1,87 @@
+{
+  "project": "Divina Bruxa",
+  "subbrand": "Orbe das Realidades",
+  "version": 196,
+  "macrostep": "17 · PWA, acessibilidade e desempenho mundial",
+  "base_required": "V195 instalada",
+  "home_contract": {
+    "visible_content": ["localized-orb-title", "living-orb"],
+    "persistent_information_blocks": false,
+    "navigation_header_and_dock_preserved": true,
+    "install_guidance_location": "menu-or-dedicated-guide"
+  },
+  "cache_policy": {
+    "namespaces": ["shell", "public-content", "images", "tarot-offline"],
+    "strategies": {
+      "navigation": "network-first-with-localized-offline-fallback",
+      "scripts_styles_public_json": "stale-while-revalidate",
+      "images": "cache-first-with-entry-budget",
+      "tarot_assets": "cache-first-with-complete-atlas-fallback",
+      "third_party": "network-only",
+      "account_payment_ai_consultation_authority": "network-only-no-store"
+    },
+    "rejects": ["zero-length-response", "cache-control:no-store", "cache-control:private", "authorization-request"],
+    "cleanup_scope": "only caches whose names start with divina-bruxa-",
+    "previous_release_fallback_retained": "divina-bruxa-v65-international-v195"
+  },
+  "offline": {
+    "available": ["app-shell", "free-tarot-engine", "78-card-atlas", "revealed-daily-state", "local-journal", "prepared-school-content", "previously-used-skins", "public-pages-prepared-by-worker"],
+    "requires_secure_connection": ["account-authority", "payments", "checkout", "purchase-restore", "orbe-ai", "consultation-submission"],
+    "localized_fallbacks": ["pt-BR", "en", "es"],
+    "explicit_prepare_action": "PREPARE_OFFLINE_TAROT"
+  },
+  "installation": {
+    "identity_preserved": true,
+    "ios": "Safari Share > Add to Home Screen > Add",
+    "android": "browser install prompt or menu > Install app",
+    "guides": ["instalar-app.html", "install-app.html", "instalar-aplicacion.html"],
+    "app_store_submission": false
+  },
+  "performance": {
+    "core_web_vitals": {
+      "percentile": 75,
+      "LCP_ms_max": 2500,
+      "INP_ms_max": 200,
+      "CLS_max": 0.1,
+      "segmentation": ["mobile", "desktop"]
+    },
+    "measurement": {
+      "runtime": "PerformanceObserver",
+      "in_memory": true,
+      "local_persistence": "only when analytics consent is true",
+      "network_transport": false,
+      "stored_url": false,
+      "stored_account_or_diary": false,
+      "maximum_samples_per_metric": 75,
+      "field_p75_status": "pending real post-install traffic"
+    },
+    "assets": {
+      "orb_fallback": {"from": "divina-orb-v68.png", "from_bytes": 2951660, "to": "divina-orb-fast-v1.webp", "to_bytes": 157528},
+      "tarot_offline_atlas": {"from": "tarot-atlas.webp", "from_bytes": 2239056, "to": "tarot-atlas-mobile-v196.webp", "to_bytes": 1297264, "grid": "10x8"}
+    }
+  },
+  "accessibility": {
+    "target": "WCAG 2.2 AA",
+    "touch_target_px": 44,
+    "features": ["skip-link", "visible-focus", "focus-not-obscured-spacing", "inactive-regions-inert", "modal-focus-loop", "route-heading-focus", "live-network-status", "reduced-motion", "increased-contrast", "forced-colors", "safe-area-insets"],
+    "automated_blocker_gate": 0,
+    "human_validation_required": ["VoiceOver on iPhone", "TalkBack on Android", "keyboard-only", "200-percent-zoom", "slow-network", "offline", "return-from-background"]
+  },
+  "preserved_contracts": {
+    "tarot_cards": 78,
+    "orientation": "normal",
+    "repetition": false,
+    "meanings_inside_free_reveal": false,
+    "royal_table": "13x6",
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "app_store_submission_authorized": false,
+    "sol_enabled": false
+  },
+  "references": [
+    "https://web.dev/articles/vitals",
+    "https://web.dev/learn/pwa/installation",
+    "https://www.w3.org/TR/WCAG22/"
+  ]
+}

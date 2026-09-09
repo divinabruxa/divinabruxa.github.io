@@ -1,0 +1,164 @@
+/* DIVINA BRUXA — PWA, ACESSIBILIDADE E DESEMPENHO MUNDIAL V196 */
+:root { --db-v196-focus: #ffe6a8; --db-v196-panel: rgba(12, 5, 20, .97); }
+
+.db-skip-link {
+  position: fixed;
+  z-index: 10000;
+  inset: max(8px, env(safe-area-inset-top)) auto auto max(8px, env(safe-area-inset-left));
+  padding: 12px 16px;
+  border: 2px solid var(--db-v196-focus);
+  border-radius: 999px;
+  color: #100718;
+  background: #ffe6a8;
+  font: 700 14px/1.2 ui-sans-serif, system-ui, sans-serif;
+  text-decoration: none;
+  transform: translateY(-180%);
+  transition: transform .16s ease;
+}
+.db-skip-link:focus { transform: translateY(0); }
+
+:where(button, [href], input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 3px solid var(--db-v196-focus) !important;
+  outline-offset: 4px !important;
+}
+:where(.magic-dock button, .magic-menu button, .magic-menu a, .intl-header a, .intl-primary-nav a, .intl-language a, .intl-actions a, .intl-table-actions button, .intl-home-menu summary, .intl-home-menu-panel a) {
+  min-width: 44px;
+  min-height: 44px;
+}
+:where(h1, h2, h3, [role="heading"], :target) { scroll-margin-block: 112px 132px; }
+[inert] { pointer-events: none !important; }
+
+.orb-shell::before,
+.intl-orb-shell::before {
+  background-image: var(--db-release-orb-image, var(--db-boot-orb-image, url("./divina-orb-fast-v1.webp?v=196"))) !important;
+}
+
+.db-network-status {
+  position: fixed;
+  z-index: 9500;
+  left: 50%;
+  bottom: calc(96px + env(safe-area-inset-bottom));
+  width: min(calc(100% - 24px), 560px);
+  padding: 12px 46px 12px 16px;
+  border: 1px solid rgba(255, 222, 153, .62);
+  border-radius: 18px;
+  color: #fff8e7;
+  background: var(--db-v196-panel);
+  box-shadow: 0 16px 46px rgba(0, 0, 0, .55), 0 0 24px rgba(163, 65, 217, .18);
+  font: 600 13px/1.45 ui-sans-serif, system-ui, sans-serif;
+  transform: translate(-50%, 24px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.db-network-status[data-visible="true"] { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.db-network-status button {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font-size: 24px;
+  transform: translateY(-50%);
+}
+
+.db-install-dialog {
+  width: min(calc(100% - 24px), 540px);
+  max-height: min(760px, calc(100dvh - 24px));
+  padding: 0;
+  overflow: auto;
+  border: 1px solid rgba(238, 199, 124, .58);
+  border-radius: 28px;
+  color: #fff8f2;
+  background: radial-gradient(circle at 50% -10%, rgba(137, 45, 184, .3), transparent 44%), #100718;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, .75);
+}
+.db-install-dialog::backdrop { background: rgba(2, 1, 5, .8); backdrop-filter: blur(8px); }
+.db-install-dialog__inner { padding: 28px 22px calc(22px + env(safe-area-inset-bottom)); }
+.db-install-dialog__top { display: flex; align-items: start; justify-content: space-between; gap: 16px; }
+.db-install-dialog__top p { margin: 0 0 7px; color: #ebc982; font: 700 11px/1.2 ui-sans-serif, system-ui, sans-serif; letter-spacing: .15em; }
+.db-install-dialog h2 { margin: 0; font: 400 clamp(30px, 8vw, 44px)/1 Georgia, serif; }
+.db-install-dialog__close { flex: 0 0 44px; width: 44px; height: 44px; border: 1px solid rgba(238, 199, 124, .42); border-radius: 50%; color: #fff; background: rgba(255, 255, 255, .04); font-size: 26px; }
+.db-install-dialog ol { margin: 24px 0; padding-left: 24px; color: #d7cada; font: 15px/1.6 ui-sans-serif, system-ui, sans-serif; }
+.db-install-dialog li + li { margin-top: 9px; }
+.db-install-dialog__actions { display: grid; gap: 10px; }
+.db-install-dialog__actions a,
+.db-install-dialog__actions button {
+  display: grid;
+  place-items: center;
+  min-height: 48px;
+  padding: 10px 18px;
+  border: 1px solid #e8c577;
+  border-radius: 999px;
+  color: #13091c;
+  background: linear-gradient(135deg, #ffe0a0, #c79242);
+  font: 800 12px/1.25 ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: .05em;
+  text-align: center;
+  text-decoration: none;
+}
+.db-install-dialog__actions .secondary { color: #f6dfad; background: transparent; }
+
+.db-install-page {
+  margin: 0;
+  min-height: 100dvh;
+  padding: max(18px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(28px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  color: #fff8f1;
+  background: radial-gradient(circle at 50% 8%, #381450, transparent 34rem), #07030c;
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+.db-install-shell { width: min(760px, 100%); margin: 0 auto; }
+.db-install-nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.db-install-nav > a { display: inline-flex; align-items: center; min-height: 44px; color: #f2d18a; text-decoration: none; }
+.db-install-languages { display: flex; gap: 6px; }
+.db-install-languages a { display: grid; place-items: center; min-width: 44px; min-height: 44px; border: 1px solid rgba(239, 203, 130, .3); border-radius: 50%; color: #f4e7cb; text-decoration: none; }
+.db-install-languages a[aria-current="page"] { border-color: #f2d18a; background: rgba(242, 209, 138, .13); }
+.db-install-hero { padding: 38px 0 18px; text-align: center; }
+.db-install-orb { width: min(42vw, 190px); aspect-ratio: 1; margin: 0 auto 24px; border-radius: 50%; background: #0b0313 url("./divina-orb-fast-v1.webp?v=196") center/cover no-repeat; box-shadow: 0 0 0 1px rgba(245, 211, 143, .5), 0 0 58px rgba(193, 70, 244, .45); }
+.db-install-kicker { margin: 0 0 10px; color: #f0ce86; font-size: 11px; font-weight: 800; letter-spacing: .2em; }
+.db-install-page h1 { margin: 0; font: 400 clamp(42px, 11vw, 72px)/.95 Georgia, serif; }
+.db-install-lead { max-width: 58ch; margin: 18px auto 0; color: #d0c1d4; line-height: 1.65; }
+.db-install-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 22px; }
+.db-install-card { padding: 22px; border: 1px solid rgba(238, 198, 121, .28); border-radius: 24px; background: rgba(19, 8, 29, .82); }
+.db-install-card h2 { margin: 0 0 14px; font: 400 28px/1.1 Georgia, serif; }
+.db-install-card ol,
+.db-install-card ul { margin: 0; padding-left: 22px; color: #cdbfd1; line-height: 1.65; }
+.db-install-offline { margin-top: 14px; padding: 22px; border: 1px solid rgba(238, 198, 121, .38); border-radius: 24px; background: linear-gradient(145deg, rgba(50, 19, 69, .86), rgba(12, 5, 19, .94)); }
+.db-install-offline h2 { margin: 0 0 8px; font: 400 30px/1.1 Georgia, serif; }
+.db-install-offline p { color: #cdbfd1; line-height: 1.6; }
+.db-install-offline button,
+.db-install-home-link { display: inline-grid; place-items: center; min-height: 48px; padding: 10px 18px; border: 1px solid #e8c577; border-radius: 999px; color: #13091c; background: linear-gradient(135deg, #ffe0a0, #c79242); font-weight: 800; text-decoration: none; }
+.db-install-offline button:disabled { opacity: .65; }
+.db-install-result { min-height: 24px; margin: 12px 0 0; color: #f4dda9; font-weight: 700; }
+.db-install-foot { padding: 28px 0 6px; text-align: center; }
+
+body[data-network="offline"] [data-requires-online] { opacity: .58; filter: saturate(.55); }
+
+@media (max-width: 620px) {
+  .db-network-status { bottom: calc(92px + env(safe-area-inset-bottom)); }
+  .db-install-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .db-skip-link,
+  .db-network-status,
+  .db-install-page *,
+  .db-install-dialog * { animation: none !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}
+
+@media (prefers-contrast: more) {
+  .db-install-card,
+  .db-install-offline,
+  .db-install-dialog { border-color: #ffe6a8; }
+}
+
+@media (forced-colors: active) {
+  .db-network-status,
+  .db-install-dialog,
+  .db-install-card,
+  .db-install-offline { border: 2px solid CanvasText; forced-color-adjust: auto; }
+  .db-install-orb { border: 2px solid CanvasText; background: Canvas; }
+}

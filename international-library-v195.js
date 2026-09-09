@@ -1,5 +1,6 @@
-/* DIVINA BRUXA V195 — searchable 78-card library for English and Spanish. */
+/* DIVINA BRUXA V196 — searchable 78-card library with offline atlas. */
 import { CARDS, REQUIRED_ORIENTATION } from './tarot-data.js?v=195';
+import { applyInternationalCardImageV196 } from './international-card-image-v196.js?v=196';
 
 const root = typeof document === 'undefined' ? null : document.querySelector('[data-international-library]');
 
@@ -113,12 +114,12 @@ if (root) {
       const article = document.createElement('article');
       article.className = 'intl-library-card';
       const image = document.createElement('img');
-      image.src = card.image;
       image.alt = card.names[language];
       image.width = 240;
       image.height = 360;
       image.loading = 'lazy';
       image.decoding = 'async';
+      applyInternationalCardImageV196(image, card);
       const copy = document.createElement('div');
       const meta = document.createElement('small');
       meta.textContent = familyFor(card);

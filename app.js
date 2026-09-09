@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — APLICATIVO V195 · JORNADAS INTERNACIONAIS EN + ES */
+/* DIVINA BRUXA — APLICATIVO V196 · PWA, ACESSIBILIDADE E DESEMPENHO */
 
 import { CONFIG } from './config.js';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -14,6 +14,7 @@ import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-por
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
 import { installIndexPolicyV193 } from './seo-index-policy-v193.js?v=193';
+import './pwa-world-v196.js?v=196';
 
 const $ = selector => document.querySelector(selector);
 const safely = (label, task) => {
@@ -79,30 +80,9 @@ navigator.serviceWorker?.addEventListener('message', event => {
   if (/^(home|daily|school|consultations|login|subscriptions|ai|music|videos|skins|notifications)$/.test(target)) pageLoader.go(target);
 });
 
-let installPrompt = null;
-addEventListener('beforeinstallprompt', event => {
-  event.preventDefault();
-  installPrompt = event;
-  const installButton = $('#installApp');
-  if (installButton) installButton.hidden = false;
-});
-
-const installButton = $('#installApp');
-if (installButton) {
-  installButton.onclick = async () => {
-    if (!installPrompt) {
-      toast('No iPhone: Compartilhar → Adicionar à Tela de Início.');
-      return;
-    }
-    installPrompt.prompt();
-    await installPrompt.userChoice;
-    installPrompt = null;
-  };
-}
-
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=195')
+    navigator.serviceWorker.register('./sw.js?v=196')
       .then(() => console.info('[Divina] PWA registrado'))
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   });
