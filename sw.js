@@ -1,10 +1,10 @@
-/* DIVINA BRUXA — SERVICE WORKER V199 · MIGRACAO SEGURA DE CACHE */
-const VERSION = 199;
+/* DIVINA BRUXA — SERVICE WORKER V200 · VERDADE COMERCIAL ÚNICA */
+const VERSION = 200;
 const OWNED_PREFIX = 'divina-bruxa-';
-const SHELL_CACHE = 'divina-bruxa-v199-shell';
-const CONTENT_CACHE = 'divina-bruxa-v199-content';
-const IMAGE_CACHE = 'divina-bruxa-v199-images';
-const TAROT_CACHE = 'divina-bruxa-v199-tarot-offline';
+const SHELL_CACHE = 'divina-bruxa-v200-shell';
+const CONTENT_CACHE = 'divina-bruxa-v200-content';
+const IMAGE_CACHE = 'divina-bruxa-v200-images';
+const TAROT_CACHE = 'divina-bruxa-v200-tarot-offline';
 const ACTIVE_CACHES = new Set([SHELL_CACHE, CONTENT_CACHE, IMAGE_CACHE, TAROT_CACHE]);
 
 const REQUIRED_SHELL = Object.freeze([
@@ -15,7 +15,7 @@ const REQUIRED_SHELL = Object.freeze([
   './offline-es.html',
   './manifest.webmanifest',
   './pwa-world-v196.css',
-  './pwa-world-v199.js',
+  './pwa-world-v200.js',
   './performance-world-v196.js',
   './privacy-center-v9.js',
   './fallback-shell-v1.css',
@@ -28,7 +28,7 @@ const REQUIRED_SHELL = Object.freeze([
 ]);
 
 const WARM_SHELL = Object.freeze([
-  './app-v199.js',
+  './app-v200.js',
   './navigation.js',
   './route-registry-v180.js',
   './page-loader-v1.js',
@@ -47,7 +47,10 @@ const WARM_SHELL = Object.freeze([
   './skins-v191.js',
   './premium-policy-v191.js',
   './ai-policy.js',
-  './config-v199.js',
+  './config.js',
+  './config-v200.js',
+  './commercial-truth-v200.js',
+  './consultation-policy.js',
   './seo-index-policy-v193.js',
   './editorial-catalog-v192.js',
   './editorial-metrics-v192.js',
@@ -264,7 +267,7 @@ const appShellIsValid = async (url, response) => {
   return html.length > 1024
     && /id=["']app["']/.test(html)
     && /id=["']home["']/.test(html)
-    && /app-v199\.js\?v=199/.test(html)
+    && /app-v200\.js\?v=200/.test(html)
     && /home-orb-absolute-v199\.css\?v=199/.test(html);
 };
 

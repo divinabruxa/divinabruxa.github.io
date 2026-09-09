@@ -1,0 +1,36 @@
+DIVINA BRUXA — V200 — VERDADE COMERCIAL ÚNICA
+
+BASE OBRIGATÓRIA
+- Instale somente sobre a V199 já instalada.
+- Envie os arquivos deste ZIP para a raiz do repositório.
+- Substitua os arquivos com o mesmo nome.
+- Não apague nenhum outro arquivo.
+
+O QUE ESTA VERSÃO FAZ
+- Mantém os preços oficiais das consultas: R$250, R$150, R$100 e R$50.
+- Mantém Premium R$199,90; Orbe IA R$89,90/mês; créditos 200/R$39,90, 600/R$99,90 e 1.500/R$199,90.
+- Centraliza produtos, benefícios, créditos, 30 skins, contato e tag Amazon em commercial-truth-v200.js.
+- Faz config.js e config-v200.js usarem a mesma fonte.
+- Faz o formulário de consultas usar a mesma fonte por consultation-policy.js.
+- Prepara a reconciliação do Supabase/Admin/e-mails em SQL, sem executá-la.
+- Renova app e cache para V200 sem alterar o motor da Orbe, o menu ou o Tarot.
+
+BLOQUEIOS PRESERVADOS
+- Cobrança real: DESLIGADA.
+- Checkout Stripe: NÃO CRIADO.
+- Produção e DNS: NÃO ALTERADOS.
+- Orbe IA Sol: DESLIGADA.
+- Resend: NÃO CHAMADO.
+
+HOME
+- Continua mostrando apenas o título localizado e a Orbe viva.
+- Navegação continua pelo cabeçalho, menu orbital e dock.
+
+SQL
+- SUPABASE-COMMERCIAL-TRUTH-STAGING-V200.sql é um artefato preparado.
+- Não execute em produção.
+- Nesta entrega ele NÃO foi executado nem no STAGING nem na produção.
+
+PRIMEIRO CARREGAMENTO
+- Abra o site conectado à internet após instalar, para o Service Worker V200 renovar o cache.
+

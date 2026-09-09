@@ -1,0 +1,65 @@
+{
+  "version": 200,
+  "release": "plano-supremo-2.0-macroetapa-2-verdade-comercial-unica",
+  "base_required": "V199 instalada",
+  "date": "2026-09-09",
+  "environment": "staging",
+  "delivery": {
+    "type": "flat-delta",
+    "directories_inside_zip": 0,
+    "delete_existing_files": false,
+    "files": [
+      "00-LEIA-PRIMEIRO-V200-VERDADE-COMERCIAL.txt",
+      "ARQUIVOS-V200-SHA256.txt",
+      "COMMERCIAL-TRUTH-V200.json",
+      "EVIDENCIA-QA-V200.json",
+      "MANIFESTO-V200-VERDADE-COMERCIAL.json",
+      "QA-V200-VERDADE-COMERCIAL.mjs",
+      "SUPABASE-COMMERCIAL-TRUTH-STAGING-V200.sql",
+      "app-v200.js",
+      "commercial-truth-v200.js",
+      "config-v200.js",
+      "config.js",
+      "consultation-policy.js",
+      "index.html",
+      "pwa-world-v200.js",
+      "sw.js"
+    ]
+  },
+  "commercial_truth": {
+    "consultations_brl": [250, 150, 100, 50],
+    "premium_brl": 199.90,
+    "orbe_ai_monthly_brl": 89.90,
+    "orbe_ai_monthly_credits": 400,
+    "extra_credit_packs": [[200, 39.90], [600, 99.90], [1500, 199.90]],
+    "luna_cost": 1,
+    "terra_cost": 10,
+    "sol_enabled": false,
+    "skins": 30,
+    "free_skin": "classic"
+  },
+  "surfaces": {
+    "runtime_config": "canonical module",
+    "consultation_form": "canonical module through consultation-policy.js",
+    "admin": "server catalog plus prepared staging reconciliation",
+    "emails": "server-side immutable price snapshot",
+    "supabase": "prepared SQL, not executed"
+  },
+  "scope": {
+    "orb_engine_changed": false,
+    "mini_orb_changed": false,
+    "menu_changed": false,
+    "tarot_changed": false,
+    "home_content_changed": false,
+    "prices_changed": false
+  },
+  "release_blocks": {
+    "production_publish": false,
+    "dns_change": false,
+    "real_billing": false,
+    "stripe_objects": false,
+    "resend_call": false,
+    "store_submission": false,
+    "orbe_ai_sol": false
+  }
+}

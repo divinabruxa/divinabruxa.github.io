@@ -1,0 +1,30 @@
+{
+  "release": "V200",
+  "truth_version": "commercial-2026-09-09-v200",
+  "environment": "staging",
+  "currency": "BRL",
+  "real_billing": false,
+  "checkout_enabled": false,
+  "technical_compatibility": {
+    "consultation_price_table_version": "consultas-2026-09-05-v147",
+    "billing_catalog_version": "V191"
+  },
+  "official_contact": {"email": "orbedasrealidades@hotmail.com", "whatsapp": null},
+  "consultations": [
+    {"id": "mesa-real-profissional", "name": "Mesa Real Profissional", "price_brl_cents": 25000},
+    {"id": "leitura-mentes", "name": "Leitura de Mentes", "price_brl_cents": 15000},
+    {"id": "carta-conselho", "name": "Carta de Conselho", "price_brl_cents": 10000},
+    {"id": "pergunta-direta", "name": "Pergunta Direta", "price_brl_cents": 5000}
+  ],
+  "products": [
+    {"key": "premium_lifetime", "type": "premium", "price_brl_cents": 19990, "billing_mode": "payment", "includes_ai": false, "includes_all_30_skins": true},
+    {"key": "orbe_ai_monthly", "type": "ai_subscription", "price_brl_cents": 8990, "billing_mode": "subscription", "credits_per_cycle": 400},
+    {"key": "credits_200", "type": "credits", "price_brl_cents": 3990, "credits": 200},
+    {"key": "credits_600", "type": "credits", "price_brl_cents": 9990, "credits": 600},
+    {"key": "credits_1500", "type": "credits", "price_brl_cents": 19990, "credits": 1500}
+  ],
+  "ai_usage": {"luna_per_response": 1, "terra_per_response": 10, "sol_enabled": false, "premium_includes_ai": false},
+  "skins": {"count": 30, "free_id": "classic", "free_name": "Clássica Divina", "premium_includes_all": true, "cosmetic_only": true},
+  "affiliate": {"amazon_associate_tag": "orbedasrealid-20"},
+  "gates": {"production": "BLOCKED", "stripe_objects": "NOT_CREATED", "real_payment": "OFF", "resend_call": "NOT_PERFORMED"}
+}

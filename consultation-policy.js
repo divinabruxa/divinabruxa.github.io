@@ -1,12 +1,14 @@
-/* DIVINA BRUXA — CONSULTAS CELESTIAIS V188
-   Atendimento humano, persistência durável e rastreamento privado no STAGING. */
+/* DIVINA BRUXA — CONSULTAS V200
+   Política de atendimento alimentada pela verdade comercial única. */
+
+import { COMMERCIAL_TRUTH_V200, commercialServiceById } from './commercial-truth-v200.js?v=200';
 
 export const CONSULTATION_POLICY=Object.freeze({
   schemaVersion:'10.0.0',
-  priceTableVersion:'consultas-2026-09-05-v147',
+  priceTableVersion:COMMERCIAL_TRUTH_V200.consultationPriceTableVersion,
   environment:'staging',
   realBilling:false,
-  contactEmail:'orbedasrealidades@hotmail.com',
+  contactEmail:COMMERCIAL_TRUTH_V200.officialContact.email,
   channels:Object.freeze(['email']),
   phoneRequired:true,
   independentProducts:true,
@@ -24,60 +26,7 @@ export const CONSULTATION_POLICY=Object.freeze({
       Object.freeze({id:'cancelled',label:'Cancelada',detail:'A solicitação foi encerrada sem atendimento.'})
     ])
   }),
-  services:Object.freeze([
-    Object.freeze({
-      id:'mesa-real-profissional',
-      name:'Mesa Real Profissional',
-      shortName:'Mesa Real',
-      price:250,
-      priceCents:25000,
-      sigil:'✺',
-      duration:'Leitura mais completa',
-      delivery:'Confirmação por e-mail',
-      detail:'Uma leitura ampla para observar ciclos, caminhos, relações e decisões com profundidade.',
-      idealFor:'Para quem deseja compreender o cenário inteiro.',
-      includes:Object.freeze(['Mesa completa','Síntese dos caminhos','Orientação final'])
-    }),
-    Object.freeze({
-      id:'leitura-mentes',
-      name:'Leitura de Mentes',
-      shortName:'Mentes',
-      price:150,
-      priceCents:15000,
-      sigil:'☾',
-      duration:'Leitura direcionada',
-      delivery:'Confirmação por e-mail',
-      detail:'Uma leitura simbólica da dinâmica, dos sinais e das intenções percebidas entre duas pessoas.',
-      idealFor:'Para relações, dúvidas e movimentos emocionais.',
-      includes:Object.freeze(['Dinâmica atual','Intenções simbólicas','Conselho de proteção'])
-    }),
-    Object.freeze({
-      id:'carta-conselho',
-      name:'Carta de Conselho',
-      shortName:'Conselho',
-      price:100,
-      priceCents:10000,
-      sigil:'◇',
-      duration:'Uma carta profunda',
-      delivery:'Confirmação por e-mail',
-      detail:'Uma carta para iluminar uma situação e oferecer orientação clara, cuidadosa e objetiva.',
-      idealFor:'Para uma direção essencial no momento presente.',
-      includes:Object.freeze(['Uma carta','Interpretação profunda','Conselho objetivo'])
-    }),
-    Object.freeze({
-      id:'pergunta-direta',
-      name:'Pergunta Direta',
-      shortName:'Pergunta',
-      price:50,
-      priceCents:5000,
-      sigil:'✦',
-      duration:'Uma questão específica',
-      delivery:'Confirmação por e-mail',
-      detail:'Uma pergunta bem definida para compreender o momento e o próximo passo possível.',
-      idealFor:'Para uma dúvida pontual que pede foco.',
-      includes:Object.freeze(['Uma pergunta','Resposta simbólica','Direção prática'])
-    })
-  ]),
+  services:COMMERCIAL_TRUTH_V200.services,
   safeguards:Object.freeze([
     'A solicitação não realiza cobrança automática.',
     'Consultas são atendimentos humanos separados do Premium e da Orbe IA.',
@@ -88,7 +37,7 @@ export const CONSULTATION_POLICY=Object.freeze({
   ])
 });
 
-export const consultationById=id=>CONSULTATION_POLICY.services.find(service=>service.id===id)||null;
+export const consultationById=commercialServiceById;
 
 export const consultationPriceSnapshot=(service,priceTableVersion=CONSULTATION_POLICY.priceTableVersion)=>Object.freeze({
   serviceId:service.id,
