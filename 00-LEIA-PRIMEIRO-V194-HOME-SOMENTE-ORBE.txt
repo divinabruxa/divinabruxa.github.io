@@ -1,0 +1,38 @@
+DIVINA BRUXA V194 — HOME SOMENTE COM A ORBE
+================================================
+
+BASE OBRIGATÓRIA
+- Instale esta versão somente depois da V193.
+
+O QUE MUDA
+- A página inicial exibe somente o título “Orbe das Realidades” e a Orbe viva.
+- Foram retirados visualmente subtítulo, chamadas, cartões, preços,
+  blocos editoriais e o rodapé informativo da Home.
+- O título e a Orbe ficam centralizados no espaço seguro entre o cabeçalho e o dock.
+- O cabeçalho, o menu mágico e a barra inferior permanecem apenas para navegação.
+- Toque, gesto, skin, animação, WebGL e toque duplo para abrir o Tarot Livre
+  continuam preservados.
+- Nenhuma página interna foi redesenhada nesta versão.
+
+COMO INSTALAR NO GITHUB
+1. Abra a raiz do repositório que já contém a V193.
+2. Envie todos os arquivos deste ZIP como arquivos soltos, sem criar pasta.
+3. Confirme a substituição de index.html, app.js e sw.js.
+4. Confirme a inclusão de home-orb-absolute-v194.css e dos documentos da V194.
+5. Aguarde o GitHub Pages concluir a atualização e reabra o site.
+
+SEGURANÇA DO DELTA
+- ZIP plano: não contém pastas.
+- Nenhum arquivo antigo precisa ser apagado.
+- Nenhum arquivo do motor da Orbe ou do Tarot foi alterado.
+- Nenhuma publicação em produção, DNS ou cobrança foi executada por este pacote.
+
+ARQUIVOS FUNCIONAIS
+- index.html                           substitui
+- app.js                               substitui
+- sw.js                                substitui
+- home-orb-absolute-v194.css           novo
+
+VALIDAÇÃO
+- Execute, se desejar: node QA-V194-HOME-SOMENTE-ORBE.mjs
+- Portão exigido: P0 = 0 e P1 = 0.

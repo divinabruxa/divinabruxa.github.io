@@ -1,0 +1,134 @@
+/* DIVINA BRUXA V194 — HOME SOMENTE COM O TÍTULO E A ORBE
+   Mantém o cabeçalho, o menu mágico e o dock como navegação.
+   Não altera o motor WebGL, as skins, os gestos ou as páginas internas. */
+
+html[data-runtime="v12"] #app > #home.home-orb-only-v194.active {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 2.2dvh, 22px);
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  min-height: 100svh;
+  margin: 0;
+  padding: calc(96px + env(safe-area-inset-top)) 12px calc(106px + env(safe-area-inset-bottom));
+  overflow: hidden !important;
+  text-align: center;
+}
+
+/* A Home não exibe chamadas, cartões, preços ou rodapé editorial. */
+html[data-runtime="v12"] #app > #home.home-orb-only-v194.active > :not(.home-copy):not(.orb-stage-ref) {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+html[data-runtime="v12"] #app > #home.home-orb-only-v194.active > .home-copy {
+  position: relative;
+  z-index: 3;
+  display: block !important;
+  flex: none;
+  width: min(100%, 720px);
+  margin: 0 auto !important;
+  padding: 0;
+  background: none !important;
+  text-align: center;
+  animation: none !important;
+}
+
+html[data-runtime="v12"] #app > #home.home-orb-only-v194.active > .home-copy::before {
+  content: none !important;
+  display: none !important;
+}
+
+html[data-runtime="v12"] #app > #home.home-orb-only-v194.active > .home-copy .eyebrow,
+html[data-runtime="v12"] #app > #home.home-orb-only-v194.active > .home-copy .intro {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+html[data-runtime="v12"] #app > #home.home-orb-only-v194.active > .home-copy h1 {
+  width: auto !important;
+  max-width: none !important;
+  margin: 0 auto !important;
+  color: #f8f0e9;
+  font: 400 clamp(46px, 10vw, 76px)/.88 Georgia, "Times New Roman", serif !important;
+  letter-spacing: -.045em !important;
+  white-space: normal !important;
+  text-align: center !important;
+  text-wrap: balance;
+  text-shadow: 0 7px 30px rgba(0, 0, 0, .5), 0 0 28px rgba(198, 78, 239, .16);
+}
+
+html[data-runtime="v12"] #app > #home.home-orb-only-v194.active > .home-copy h1 span {
+  display: inline-block;
+  margin-left: 5px !important;
+  color: #f5d98f;
+  font-size: .27em;
+  vertical-align: .25em;
+}
+
+html[data-runtime="v12"] #app > #home.home-orb-only-v194.active:not(.orb-menu-open) > .orb-stage-ref {
+  --v75-orb-size: min(89vw, 47dvh, 470px);
+  display: grid !important;
+  place-items: center;
+  align-self: center;
+  width: var(--v75-orb-size) !important;
+  margin: 0 auto !important;
+  transform: translateZ(0);
+}
+
+html[data-runtime="v12"] #app > #home.home-orb-only-v194.active.orb-menu-open > .home-copy,
+html[data-runtime="v12"] #app > #home.home-orb-only-v194.active.orb-menu-transition > .home-copy,
+html[data-runtime="v12"] #app > #home.home-orb-only-v194.active.orb-menu-closing > .home-copy {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+html[data-runtime="v12"] body[data-screen="home"] {
+  height: 100dvh;
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
+
+html[data-runtime="v12"] body[data-screen="home"] #app {
+  height: 100dvh;
+  overflow: hidden;
+}
+
+@media (max-width: 430px) and (orientation: portrait) {
+  html[data-runtime="v12"] #app > #home.home-orb-only-v194.active {
+    padding: calc(88px + env(safe-area-inset-top)) 10px calc(96px + env(safe-area-inset-bottom));
+  }
+
+  html[data-runtime="v12"] #app > #home.home-orb-only-v194.active:not(.orb-menu-open) > .orb-stage-ref {
+    --v75-orb-size: min(88vw, 45dvh, 420px);
+  }
+
+  html[data-runtime="v12"] #app > #home.home-orb-only-v194.active > .home-copy h1 {
+    font-size: clamp(45px, 13.7vw, 60px) !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 560px) {
+  html[data-runtime="v12"] #app > #home.home-orb-only-v194.active {
+    padding: 72px 12px calc(84px + env(safe-area-inset-bottom));
+  }
+
+  html[data-runtime="v12"] #app > #home.home-orb-only-v194.active:not(.orb-menu-open) > .orb-stage-ref {
+    --v75-orb-size: min(43vh, 330px);
+  }
+
+  html[data-runtime="v12"] #app > #home.home-orb-only-v194.active > .home-copy h1 {
+    font-size: 32px !important;
+    line-height: .9 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-runtime="v12"] #app > #home.home-orb-only-v194.active > .orb-stage-ref {
+    transition: none !important;
+  }
+}

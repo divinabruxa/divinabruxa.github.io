@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V63 · SEO E AUTORIDADE V193 */
-const CACHE='divina-bruxa-v63-seo-authority-v193';
+/* DIVINA BRUXA — SERVICE WORKER V64 · HOME SOMENTE COM A ORBE V194 */
+const CACHE='divina-bruxa-v64-home-orb-only-v194';
 
 const REQUIRED=[
   './',
@@ -7,6 +7,7 @@ const REQUIRED=[
   './offline.html',
   './manifest.webmanifest',
   './divina-shell-v180.css',
+  './home-orb-absolute-v194.css',
   './app.js',
   './page-loader-v1.js',
   './route-registry-v180.js',
@@ -54,6 +55,7 @@ const CORE=[
   './offline.html',
   './manifest.webmanifest',
   './divina-shell-v180.css',
+  './home-orb-absolute-v194.css',
   './app.js',
   './menu-completo-v177.js',
   './runtime-v12.js',

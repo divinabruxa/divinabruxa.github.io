@@ -1,0 +1,53 @@
+{
+  "project": "Divina Bruxa",
+  "subbrand": "Orbe das Realidades",
+  "version": 194,
+  "release": "home-somente-orbe",
+  "base_required": "V193 instalada",
+  "delivery": {
+    "type": "flat-delta",
+    "directories_inside_zip": 0,
+    "delete_existing_files": false
+  },
+  "functional_files": {
+    "replace": [
+      "index.html",
+      "app.js",
+      "sw.js"
+    ],
+    "add": [
+      "home-orb-absolute-v194.css"
+    ]
+  },
+  "home_contract": {
+    "visible_primary_content": "Título Orbe das Realidades e Orbe viva",
+    "orb_title_visible": true,
+    "informational_sections_visible": false,
+    "header_preserved_for_navigation": true,
+    "magic_menu_preserved": true,
+    "bottom_dock_preserved": true,
+    "double_tap_opens_tarot_livre": true,
+    "internal_pages_changed": false
+  },
+  "preserved_contracts": {
+    "tarot_cards": 78,
+    "orientation": "normal",
+    "tarot_livre_repetition": false,
+    "tarot_livre_meanings_inside_reveal": false,
+    "mesa_real": "13x6",
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false
+  },
+  "frozen_files": [
+    "orb-engine-v68.js",
+    "mini-orb-engine.js",
+    "menu-completo-v177.js",
+    "tarot-engine.js",
+    "tarot-data.js"
+  ],
+  "quality_gate": {
+    "required": "P0=0; P1=0",
+    "command": "node QA-V194-HOME-SOMENTE-ORBE.mjs"
+  }
+}

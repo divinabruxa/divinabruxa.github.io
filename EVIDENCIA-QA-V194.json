@@ -1,0 +1,22 @@
+{
+  "project": "Divina Bruxa",
+  "version": 194,
+  "suite": "Home somente com a Orbe",
+  "generated_at": "2026-09-09T14:57:03.253Z",
+  "total": 75,
+  "passed": 75,
+  "failed": 0,
+  "gate": {
+    "p0": 0,
+    "p1": 0,
+    "approved": true
+  },
+  "frozen_hashes": {
+    "orb-engine-v68.js": "3f8a1c87c558194901089f96f96059b066c7dde8bf33475816ceaca74b9a369f",
+    "mini-orb-engine.js": "26d46580f7465139ac54b9953eaa6d0488e3a89c0bee9c7f2d0fbbaa27b91916",
+    "menu-completo-v177.js": "f8c010d779844cecd24a1fa66acbefa2b3e78715e329e961496ed0954a921b64",
+    "tarot-engine.js": "2abf5a31f1a9f219074e03fe4a7052c60fed598df5fb07c4502bf8f5e8eaf92e",
+    "tarot-data.js": "18e5a1a3bcecf27fdb9c14c44c964a61f6eacfadc2f52ccaa76f0cbf60ee7cc3"
+  },
+  "failures": []
+}

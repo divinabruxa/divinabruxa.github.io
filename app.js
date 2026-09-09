@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — APLICATIVO V193 · SEO, AUTORIDADE E BUSCA POR IA */
+/* DIVINA BRUXA — APLICATIVO V194 · HOME SOMENTE COM A ORBE */
 
 import { CONFIG } from './config.js';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -9,7 +9,7 @@ import { AuthClientV189 as AuthClient } from './auth-client-v189.js?v=191';
 import { AccountEngineV189 } from './account-engine-v189.js?v=189';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=193';
+import { createPageLoader } from './page-loader-v1.js?v=194';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -102,7 +102,7 @@ if (installButton) {
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=193')
+    navigator.serviceWorker.register('./sw.js?v=194')
       .then(() => console.info('[Divina] PWA registrado'))
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   });
