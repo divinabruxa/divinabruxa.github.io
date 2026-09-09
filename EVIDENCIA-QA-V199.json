@@ -1,0 +1,59 @@
+{
+  "project": "Divina Bruxa",
+  "version": 199,
+  "suite": "Plano Supremo 2.0 - Macroetapa 1 - Resgate Runtime e Home",
+  "generated_at": "2026-09-09T21:56:59.918Z",
+  "total": 159,
+  "passed": 159,
+  "failed": 0,
+  "gate": {
+    "p0": 0,
+    "p1": 0,
+    "package_approved": true
+  },
+  "recovery": {
+    "unique_entrypoint": true,
+    "cache_generation": 199,
+    "static_strategy": "network-first",
+    "eager_import_cycles": 0
+  },
+  "home": {
+    "visible_contract": [
+      "localized_orb_title",
+      "living_orb"
+    ],
+    "fail_closed": true,
+    "scroll_locked": true
+  },
+  "commercial_truth": {
+    "mesa_real_brl": 250,
+    "leitura_de_mentes_brl": 150,
+    "carta_de_conselho_brl": 100,
+    "pergunta_brl": 50
+  },
+  "frozen_hashes": {
+    "orb-engine-v68.js": "3f8a1c87c558194901089f96f96059b066c7dde8bf33475816ceaca74b9a369f",
+    "mini-orb-engine.js": "26d46580f7465139ac54b9953eaa6d0488e3a89c0bee9c7f2d0fbbaa27b91916",
+    "menu-completo-v177.js": "f8c010d779844cecd24a1fa66acbefa2b3e78715e329e961496ed0954a921b64",
+    "tarot-engine.js": "2abf5a31f1a9f219074e03fe4a7052c60fed598df5fb07c4502bf8f5e8eaf92e",
+    "tarot-data.js": "18e5a1a3bcecf27fdb9c14c44c964a61f6eacfadc2f52ccaa76f0cbf60ee7cc3"
+  },
+  "legacy_regression": {
+    "expected_total": 1221,
+    "preserved": 1219,
+    "intended_version_gate_differences": 2
+  },
+  "external_actions": {
+    "production": false,
+    "dns": false,
+    "real_billing": false,
+    "stores": false,
+    "sol": false
+  },
+  "warnings": [
+    "O primeiro carregamento apos instalar a V199 precisa estar online para receber os arquivos de nome novo.",
+    "Validacao fisica em iPhone/PWA e Android/PWA permanece necessaria depois da instalacao.",
+    "Producao, DNS, cobranca real, lojas e Orbe IA Sol permanecem bloqueados."
+  ],
+  "failures": []
+}

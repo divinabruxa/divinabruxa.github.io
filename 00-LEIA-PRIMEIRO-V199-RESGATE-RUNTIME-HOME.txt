@@ -1,0 +1,33 @@
+DIVINA BRUXA V199 — RESGATE IMORTAL DO RUNTIME E HOME ABSOLUTA
+
+BASE OBRIGATORIA
+V198 instalada.
+
+COMO INSTALAR NO IPHONE / GITHUB
+1. Abra o ZIP.
+2. Envie os 13 arquivos soltos para a raiz do repositorio.
+3. Aceite substituir index.html e sw.js quando o GitHub solicitar.
+4. Nao apague nenhum arquivo existente.
+
+O QUE ESTA VERSAO CORRIGE
+- Escapa do app antigo preso no cache usando um runtime V199 de nome novo.
+- Migra o service worker para caches V199 e remove caches antigos da Divina Bruxa.
+- Faz scripts e estilos buscarem a versao atual antes do fallback offline.
+- Faz a Home esconder tudo alem do titulo e da Orbe mesmo antes do JavaScript.
+- Restaura a inicializacao necessaria para as rotas internas e deep links.
+- Preserva Orbe, menu, mini-Orbe, gestos, cartas, artes e regras do Tarot.
+
+PRECOS OFICIAIS CONFIRMADOS — NAO ALTERADOS
+- Mesa Real: R$ 250.
+- Leitura de Mentes: R$ 150.
+- Carta de Conselho: R$ 100.
+- Pergunta: R$ 50.
+
+VALIDACAO REPRODUZIVEL
+Execute: node QA-V199-RUNTIME-HOME.mjs
+
+IMPORTANTE
+Esta versao nao ativa producao, DNS, cobranca real, lojas ou Orbe IA Sol.
+O primeiro carregamento apos a instalacao precisa estar online para receber o
+novo runtime. Depois, o service worker V199 assume a continuidade offline.
+

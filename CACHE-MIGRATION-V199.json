@@ -1,0 +1,36 @@
+{
+  "project": "Divina Bruxa",
+  "version": 199,
+  "strategy": "unique-bootstrap-then-network-first-static",
+  "first_online_boot_required": true,
+  "entrypoint_transition": {
+    "from": "app.js?v=196",
+    "to": "app-v199.js?v=199"
+  },
+  "style_transition": {
+    "from": "home-orb-absolute-v194.css?v=194",
+    "to": "home-orb-absolute-v199.css?v=199"
+  },
+  "service_worker_transition": {
+    "registration": "sw.js?v=199",
+    "active_cache_prefixes": [
+      "divina-bruxa-v199-shell",
+      "divina-bruxa-v199-content",
+      "divina-bruxa-v199-images",
+      "divina-bruxa-v199-tarot-offline"
+    ],
+    "retain_legacy_caches": false,
+    "claim_clients": true,
+    "skip_waiting": true
+  },
+  "static_assets": {
+    "online_strategy": "network-first",
+    "offline_fallback": "current-v199-cache",
+    "ignore_query_for_legacy_lookup": false
+  },
+  "authority_requests": {
+    "strategy": "network-only",
+    "cache_allowed": false
+  }
+}
+

@@ -1,12 +1,11 @@
-/* DIVINA BRUXA — SERVICE WORKER V66 · PWA MUNDIAL V196 */
-const VERSION = 196;
+/* DIVINA BRUXA — SERVICE WORKER V199 · MIGRACAO SEGURA DE CACHE */
+const VERSION = 199;
 const OWNED_PREFIX = 'divina-bruxa-';
-const SHELL_CACHE = 'divina-bruxa-v66-shell-v196';
-const CONTENT_CACHE = 'divina-bruxa-v66-content-v196';
-const IMAGE_CACHE = 'divina-bruxa-v66-images-v196';
-const TAROT_CACHE = 'divina-bruxa-v66-tarot-offline-v196';
-const PREVIOUS_CACHE = 'divina-bruxa-v65-international-v195';
-const ACTIVE_CACHES = new Set([SHELL_CACHE, CONTENT_CACHE, IMAGE_CACHE, TAROT_CACHE, PREVIOUS_CACHE]);
+const SHELL_CACHE = 'divina-bruxa-v199-shell';
+const CONTENT_CACHE = 'divina-bruxa-v199-content';
+const IMAGE_CACHE = 'divina-bruxa-v199-images';
+const TAROT_CACHE = 'divina-bruxa-v199-tarot-offline';
+const ACTIVE_CACHES = new Set([SHELL_CACHE, CONTENT_CACHE, IMAGE_CACHE, TAROT_CACHE]);
 
 const REQUIRED_SHELL = Object.freeze([
   './',
@@ -16,12 +15,12 @@ const REQUIRED_SHELL = Object.freeze([
   './offline-es.html',
   './manifest.webmanifest',
   './pwa-world-v196.css',
-  './pwa-world-v196.js',
+  './pwa-world-v199.js',
   './performance-world-v196.js',
   './privacy-center-v9.js',
   './fallback-shell-v1.css',
   './divina-shell-v180.css',
-  './home-orb-absolute-v194.css',
+  './home-orb-absolute-v199.css',
   './divina-orb-fast-v1.webp',
   './divina-orb-thumb-v1.webp',
   './divina-icon-fast-v1.png',
@@ -29,7 +28,7 @@ const REQUIRED_SHELL = Object.freeze([
 ]);
 
 const WARM_SHELL = Object.freeze([
-  './app.js',
+  './app-v199.js',
   './navigation.js',
   './route-registry-v180.js',
   './page-loader-v1.js',
@@ -48,7 +47,7 @@ const WARM_SHELL = Object.freeze([
   './skins-v191.js',
   './premium-policy-v191.js',
   './ai-policy.js',
-  './config.js',
+  './config-v199.js',
   './seo-index-policy-v193.js',
   './editorial-catalog-v192.js',
   './editorial-metrics-v192.js',
@@ -235,7 +234,7 @@ self.addEventListener('activate', event => event.waitUntil((async () => {
 })()));
 
 const matchCurrentOrPrevious = async request => {
-  for (const cacheName of [TAROT_CACHE, SHELL_CACHE, CONTENT_CACHE, IMAGE_CACHE, PREVIOUS_CACHE]) {
+  for (const cacheName of [TAROT_CACHE, SHELL_CACHE, CONTENT_CACHE, IMAGE_CACHE]) {
     const cache = await caches.open(cacheName);
     const response = await cache.match(request, { ignoreSearch: true });
     if (response) return response;
@@ -262,7 +261,11 @@ const appShellIsValid = async (url, response) => {
   const isAppShell = pathname === new URL('./', self.registration.scope).pathname || pathname.endsWith('/index.html');
   if (!isAppShell) return true;
   const html = await response.clone().text();
-  return html.length > 1024 && /id=["']app["']/.test(html) && /id=["']home["']/.test(html);
+  return html.length > 1024
+    && /id=["']app["']/.test(html)
+    && /id=["']home["']/.test(html)
+    && /app-v199\.js\?v=199/.test(html)
+    && /home-orb-absolute-v199\.css\?v=199/.test(html);
 };
 
 const offlinePageFor = async url => {
@@ -382,7 +385,7 @@ self.addEventListener('fetch', event => {
     return;
   }
   if (['script', 'style', 'font', 'manifest', 'worker'].includes(request.destination) || /\.(?:js|css|webmanifest|json)$/.test(url.pathname)) {
-    event.respondWith(staleWhileRevalidate(event, request));
+    event.respondWith(networkFirst(request));
     return;
   }
   event.respondWith(networkFirst(request));

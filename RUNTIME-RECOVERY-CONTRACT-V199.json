@@ -1,0 +1,48 @@
+{
+  "project": "Divina Bruxa",
+  "version": 199,
+  "macro_stage": "Plano Supremo 2.0 - 1/12",
+  "base_required": "V198 instalada",
+  "purpose": "recover-runtime-and-enforce-orb-only-home",
+  "boot": {
+    "entrypoint": "app-v199.js",
+    "unique_entrypoint_bypasses_legacy_cache": true,
+    "unique_config": "config-v199.js",
+    "unique_pwa_runtime": "pwa-world-v199.js",
+    "navigation_start_required": true,
+    "deep_links": ["home", "tarot", "daily", "library", "school", "spreads", "ai", "journal", "store", "consultations", "subscriptions", "videos", "music", "notifications", "login", "admin"]
+  },
+  "home": {
+    "visible_content": ["localized_orb_title", "living_orb"],
+    "navigation_outside_home_allowed": ["header", "orbital_menu", "bottom_dock"],
+    "hidden_even_if_javascript_fails": true,
+    "content_cards_allowed": false,
+    "editorial_blocks_allowed": false,
+    "scroll_locked": true
+  },
+  "frozen": {
+    "orb_engine": true,
+    "mini_orb_engine": true,
+    "orbital_menu": true,
+    "double_tap": true,
+    "tarot_cards": 78,
+    "tarot_orientation": "normal-only",
+    "free_tarot_repetition": false,
+    "free_tarot_meanings": false,
+    "royal_table": "13x6"
+  },
+  "commercial_truth_preserved": {
+    "mesa_real_brl": 250,
+    "leitura_de_mentes_brl": 150,
+    "carta_de_conselho_brl": 100,
+    "pergunta_brl": 50
+  },
+  "release_blocks": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "orbe_ai_sol_enabled": false
+  }
+}
+
