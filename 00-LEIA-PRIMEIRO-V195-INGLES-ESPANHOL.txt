@@ -1,0 +1,44 @@
+DIVINA BRUXA — V195 — INGLÊS E ESPANHOL
+=========================================
+
+BASE OBRIGATÓRIA
+- Instale esta versão somente depois da V194.
+
+O QUE MUDA
+- Publica 7 jornadas equivalentes em inglês e espanhol:
+  Home, Tarot Livre, Biblioteca das 78 cartas, Escola, Consultas,
+  Ética e Contato.
+- As Homes internacionais exibem somente o título localizado e a Orbe viva.
+- O Tarot Livre internacional é funcional: 78 cartas oficiais, sempre diretas,
+  sem repetição, sem significados na revelação e Mesa Real 13 × 6.
+- A Biblioteca internacional permite pesquisar as 78 cartas oficiais.
+- A Escola apresenta o programa público completo de 17 módulos.
+- Consultas mantêm os valores R$ 250, R$ 150, R$ 100 e R$ 50 em BRL.
+- O e-mail é obrigatório; a página apenas prepara um rascunho local no
+  aplicativo de e-mail. Não envia, não armazena e não cobra automaticamente.
+- O único canal oficial continua sendo orbedasrealidades@hotmail.com.
+- Não há WhatsApp divulgado.
+
+SEO INTERNACIONAL
+- Cada grupo usa canonical próprio e hreflang recíproco para pt-BR, en e es.
+- x-default retorna à versão pt-BR.
+- sitemap-en.xml e sitemap-es.xml são incluídos no índice de sitemaps.
+- Não existe redirecionamento automático por IP ou idioma do navegador.
+
+COMO INSTALAR NO GITHUB
+1. Abra a raiz do repositório que já contém a V194.
+2. Envie todos os arquivos deste ZIP como arquivos soltos, sem criar pasta.
+3. Confirme a substituição dos arquivos que já existem.
+4. Não apague nenhum arquivo antigo.
+5. Aguarde o GitHub Pages concluir a atualização.
+6. Reabra o site e teste também /english.html e /espanol.html.
+
+SEGURANÇA DO DELTA
+- ZIP plano: não contém pastas.
+- Nenhum arquivo antigo precisa ser apagado.
+- Os motores congelados da Orbe e do Tarot não foram alterados.
+- Nenhuma publicação, DNS, cobrança real ou loja de aplicativos foi executada.
+
+VALIDAÇÃO
+- Execute, se desejar: node QA-V195-I18N.mjs
+- Portão exigido: P0 = 0 e P1 = 0.

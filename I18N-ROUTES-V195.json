@@ -1,0 +1,29 @@
+{
+  "version": "V195",
+  "canonicalDomain": "https://divinabruxa.com.br",
+  "sourceLanguage": "pt-BR",
+  "languages": ["pt-BR", "en", "es"],
+  "xDefault": "pt-BR",
+  "seo": {
+    "canonical": "self-referential absolute URL in the same language",
+    "hreflang": "reciprocal HTML head links on every member of each cluster",
+    "sitemaps": ["sitemap-principal.xml", "sitemap-en.xml", "sitemap-es.xml"],
+    "automaticLocaleRedirect": false
+  },
+  "clusters": [
+    {"id":"home","ptBR":"/","en":"/english.html","es":"/espanol.html","scope":"minimal title plus living Orb"},
+    {"id":"free-tarot","ptBR":"/tarot-livre.html","en":"/free-tarot-reading.html","es":"/tarot-libre.html","scope":"functional 78-card upright no-repeat Royal Table 13x6; no meanings in reveal"},
+    {"id":"library","ptBR":"/cartas-do-tarot.html","en":"/tarot-card-meanings.html","es":"/significados-cartas-tarot.html","scope":"searchable 78-card catalog with concise responsible editorial notes"},
+    {"id":"school","ptBR":"/escola-do-tarot.html","en":"/tarot-school.html","es":"/escuela-tarot.html","scope":"public 17-module syllabus and starter practice"},
+    {"id":"consultations","ptBR":"/consultas-de-tarot.html","en":"/tarot-consultations.html","es":"/consultas-tarot.html","scope":"four human formats, BRL prices, required email and explicit consent"},
+    {"id":"ethics","ptBR":"/etica-e-responsabilidade.html","en":"/tarot-ethics.html","es":"/etica-tarot.html","scope":"autonomy, consent, privacy, non-deterministic language and professional limits"},
+    {"id":"contact","ptBR":"/contato.html","en":"/contact.html","es":"/contacto.html","scope":"official email support and data-safety guidance"}
+  ],
+  "parityGate": {
+    "publishedClusters": 7,
+    "localizedPages": 14,
+    "functionalTarotParity": true,
+    "editorialPublicJourneyParity": true,
+    "deepPrivateRuntimeClaimedAsTranslated": false
+  }
+}

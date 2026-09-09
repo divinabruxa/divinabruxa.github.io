@@ -1,0 +1,64 @@
+{
+  "version": "V195",
+  "environment": "STAGING",
+  "publishedAt": "2026-09-09",
+  "markets": {
+    "pt-BR": {
+      "role": "source and x-default",
+      "currency": "BRL",
+      "dateLocale": "pt-BR",
+      "timezoneForConsultations": "America/Sao_Paulo"
+    },
+    "en": {
+      "role": "international English public journey",
+      "currency": "BRL",
+      "currencyDisplay": "R$ amount · BRL",
+      "automaticConversion": false,
+      "dateLocale": "en",
+      "timezoneDisclosure": "Consultation availability is confirmed separately in America/Sao_Paulo time."
+    },
+    "es": {
+      "role": "neutral international Spanish public journey",
+      "currency": "BRL",
+      "currencyDisplay": "R$ importe · BRL",
+      "automaticConversion": false,
+      "dateLocale": "es",
+      "timezoneDisclosure": "La disponibilidad se confirma por separado en el horario America/Sao_Paulo."
+    }
+  },
+  "consultations": {
+    "humanService": true,
+    "emailRequired": true,
+    "officialEmail": "orbedasrealidades@hotmail.com",
+    "officialChannels": ["email"],
+    "whatsAppOffered": false,
+    "realBilling": false,
+    "requestCreatesBooking": false,
+    "requestCreatesCharge": false,
+    "requestConsumesAICredits": false,
+    "formBehavior": "Local mailto draft only; the page does not transmit or store form values.",
+    "consent": "Explicit checkbox before the local email draft can be opened."
+  },
+  "privacy": {
+    "trackingAddedByV195": false,
+    "cookiesAddedByV195": false,
+    "remoteFontsAddedByV195": false,
+    "formStorage": false,
+    "silentSubmission": false
+  },
+  "responsibility": {
+    "tarotIsSymbolic": true,
+    "deterministicClaims": false,
+    "literalMindReading": false,
+    "professionalSubstitution": false,
+    "emergencySupport": false,
+    "emergencyDirection": "Use the appropriate local emergency service and a trusted support network."
+  },
+  "pricing": [
+    {"id":"mesa-real-profissional","price":250,"currency":"BRL"},
+    {"id":"leitura-mentes","price":150,"currency":"BRL"},
+    {"id":"carta-conselho","price":100,"currency":"BRL"},
+    {"id":"pergunta-direta","price":50,"currency":"BRL"}
+  ]
+}
+

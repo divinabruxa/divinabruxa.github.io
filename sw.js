@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V64 · HOME SOMENTE COM A ORBE V194 */
-const CACHE='divina-bruxa-v64-home-orb-only-v194';
+/* DIVINA BRUXA — SERVICE WORKER V65 · JORNADAS INTERNACIONAIS V195 */
+const CACHE='divina-bruxa-v65-international-v195';
 
 const REQUIRED=[
   './',
@@ -8,6 +8,11 @@ const REQUIRED=[
   './manifest.webmanifest',
   './divina-shell-v180.css',
   './home-orb-absolute-v194.css',
+  './international-v195.css',
+  './international-home-v195.js',
+  './international-tarot-v195.js',
+  './international-library-v195.js',
+  './international-consultations-v195.js',
   './app.js',
   './page-loader-v1.js',
   './route-registry-v180.js',
@@ -42,6 +47,7 @@ const REQUIRED=[
   './cosmic-visual-atlas-v1.js',
   './divina-orb-fast-v1.webp',
   './divina-orb-thumb-v1.webp',
+  './divina-orb-v68.png',
   './divina-icon-fast-v1.png',
   './icon-192.png',
   './icon-512.png',
@@ -56,6 +62,25 @@ const CORE=[
   './manifest.webmanifest',
   './divina-shell-v180.css',
   './home-orb-absolute-v194.css',
+  './international-v195.css',
+  './international-home-v195.js',
+  './international-tarot-v195.js',
+  './international-library-v195.js',
+  './international-consultations-v195.js',
+  './english.html',
+  './espanol.html',
+  './free-tarot-reading.html',
+  './tarot-libre.html',
+  './tarot-card-meanings.html',
+  './significados-cartas-tarot.html',
+  './tarot-school.html',
+  './escuela-tarot.html',
+  './tarot-consultations.html',
+  './consultas-tarot.html',
+  './tarot-ethics.html',
+  './etica-tarot.html',
+  './contact.html',
+  './contacto.html',
   './app.js',
   './menu-completo-v177.js',
   './runtime-v12.js',
@@ -70,6 +95,7 @@ const CORE=[
   './privacy-center-v9.js',
   './editorial-universe-v192.css',
   './orb-engine-v68.js',
+  './divina-orb-v68.png',
   './mini-orb-engine.js',
   './auth-client-v6.js',
   './auth-client-v189.js',
@@ -128,6 +154,7 @@ const CORE=[
 ];
 
 const WARM=[
+  './biblioteca-celestial-78-cartas-v1.webp','./escola-tarot-observatorio-v1.webp','./consultas-celestiais-santuario-v1.webp','./tarot-temple-background-v1.webp',
   './menu-completo-v177.js','./tarot-spiral-suction-v1.webp',
   './tarot-data.js','./storage.js','./tarot-engine.js','./tarot-image-runtime.js','./daily-meaning-runtime.js','./tarot-meanings.js','./meaning-engine.js','./tarot-atlas.webp',
   './card-library-policy.js','./card-library-engine.js','./biblioteca-universal-v184.css','./biblioteca-universal-v184.js','./cartas-do-tarot.html',

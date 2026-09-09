@@ -1,0 +1,52 @@
+{
+  "version": "V195",
+  "sourceLanguage": "pt-BR",
+  "targetLanguages": ["en", "es"],
+  "editorialPrinciples": {
+    "brand": "Divina Bruxa is never translated.",
+    "english": "International English; concise, warm and non-deterministic.",
+    "spanish": "Neutral international Spanish; avoid country-specific slang and unnecessary gender assumptions.",
+    "orientation": "The canonical deck is upright only. Reversed or inverted language may appear only to explain that the product never uses it.",
+    "responsibility": "Symbolic language never becomes a diagnosis, secret proof, guaranteed outcome or substitute for a qualified professional.",
+    "review": "Authorial bilingual review; never a blind string-for-string substitution. Product rules and cultural clarity take priority over literal wording."
+  },
+  "terms": [
+    {"ptBR":"Orbe das Realidades","en":"Orb of Realities","es":"Orbe de las Realidades","note":"Public subbrand; retain the celestial register."},
+    {"ptBR":"Tarot Livre","en":"Free Tarot","es":"Tarot Libre","note":"Product name; free means unrestricted access, not a promise of interpretation."},
+    {"ptBR":"Mesa Real","en":"Royal Table (Mesa Real)","es":"Mesa Real","note":"Use the Portuguese product name in parentheses on first English mention."},
+    {"ptBR":"carta direta","en":"upright card","es":"carta al derecho","note":"Canonical orientation. Never translate as merely straight."},
+    {"ptBR":"sem repetição","en":"no repeats","es":"sin repeticiones","note":"Each canonical card may occupy only one position in a session."},
+    {"ptBR":"revelar","en":"reveal","es":"revelar","note":"Use for showing a card; it does not imply revelation of secret facts."},
+    {"ptBR":"tiragem","en":"spread","es":"tirada","note":"A positional Tarot structure."},
+    {"ptBR":"baralho","en":"deck","es":"mazo","note":"The canonical set of 78 cards."},
+    {"ptBR":"Arcanos Maiores","en":"Major Arcana","es":"Arcanos Mayores","note":"22 cards."},
+    {"ptBR":"Arcanos Menores","en":"Minor Arcana","es":"Arcanos Menores","note":"56 cards."},
+    {"ptBR":"Paus","en":"Wands","es":"Bastos","note":"Fire suit."},
+    {"ptBR":"Copas","en":"Cups","es":"Copas","note":"Water suit."},
+    {"ptBR":"Espadas","en":"Swords","es":"Espadas","note":"Air suit."},
+    {"ptBR":"Ouros","en":"Pentacles","es":"Oros","note":"Earth suit; prefer Pentacles over Coins in English."},
+    {"ptBR":"Pajem","en":"Page","es":"Sota","note":"Court rank."},
+    {"ptBR":"Cavaleiro","en":"Knight","es":"Caballero","note":"Court rank."},
+    {"ptBR":"Rainha","en":"Queen","es":"Reina","note":"Court rank."},
+    {"ptBR":"Rei","en":"King","es":"Rey","note":"Court rank."},
+    {"ptBR":"Escola do Tarot","en":"Tarot School","es":"Escuela de Tarot","note":"Public curriculum and learning journey."},
+    {"ptBR":"Biblioteca das 78 cartas","en":"78-card library","es":"biblioteca de 78 cartas","note":"Searchable canonical catalog."},
+    {"ptBR":"consulta","en":"consultation","es":"consulta","note":"Human service, independent from Premium and AI credits."},
+    {"ptBR":"Mesa Real Profissional","en":"Professional Royal Table","es":"Mesa Real Profesional","note":"Service name; retain Mesa Real as secondary identifier in English when useful."},
+    {"ptBR":"Leitura de Mentes","en":"Relationship Dynamics (Leitura de Mentes)","es":"Lectura de Dinámicas (Leitura de Mentes)","note":"Never use literal mind-reading claims. Explain that the format concerns symbolic dynamics and observable signals."},
+    {"ptBR":"Carta de Conselho","en":"Guidance Card","es":"Carta de Consejo","note":"One-card human consultation format."},
+    {"ptBR":"Pergunta Direta","en":"Direct Question","es":"Pregunta Directa","note":"One clearly framed question."},
+    {"ptBR":"autonomia","en":"agency / autonomy","es":"autonomía","note":"Prefer agency when referring to a person's practical ability to choose."},
+    {"ptBR":"consentimento","en":"consent","es":"consentimiento","note":"Must be explicit for user-provided information and relationship questions."},
+    {"ptBR":"linguagem não determinista","en":"non-deterministic language","es":"lenguaje no determinista","note":"Use may, can, suggests and conditional constructions."},
+    {"ptBR":"canal oficial","en":"official channel","es":"canal oficial","note":"Email only: orbedasrealidades@hotmail.com."},
+    {"ptBR":"reais brasileiros","en":"Brazilian reais (BRL)","es":"reales brasileños (BRL)","note":"Never invent or freeze an exchange rate."}
+  ],
+  "avoid": [
+    {"en":"mind reading","es":"lectura literal de mente","reason":"It would imply access to private thoughts."},
+    {"en":"guaranteed prediction","es":"predicción garantizada","reason":"It turns symbolic reflection into a false promise."},
+    {"en":"the card proves","es":"la carta demuestra","reason":"Cards do not establish external facts."},
+    {"en":"WhatsApp us","es":"escríbenos por WhatsApp","reason":"The only official public support channel is email."}
+  ]
+}
+

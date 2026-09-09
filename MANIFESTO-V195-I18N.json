@@ -1,0 +1,91 @@
+{
+  "project": "Divina Bruxa",
+  "subbrand": "Orbe das Realidades",
+  "version": 195,
+  "release": "macroetapa-16-ingles-espanhol",
+  "base_required": "V194 instalada",
+  "delivery": {
+    "type": "flat-delta",
+    "directories_inside_zip": 0,
+    "delete_existing_files": false
+  },
+  "languages": {
+    "source": "pt-BR",
+    "published": ["en", "es"],
+    "english_style": "international",
+    "spanish_style": "neutral international",
+    "automatic_redirect": false,
+    "glossary": "I18N-GLOSSARY-V195.json"
+  },
+  "published_clusters": [
+    {"id":"home","ptBR":"index.html","en":"english.html","es":"espanol.html"},
+    {"id":"free-tarot","ptBR":"tarot-livre.html","en":"free-tarot-reading.html","es":"tarot-libre.html"},
+    {"id":"library","ptBR":"cartas-do-tarot.html","en":"tarot-card-meanings.html","es":"significados-cartas-tarot.html"},
+    {"id":"school","ptBR":"escola-do-tarot.html","en":"tarot-school.html","es":"escuela-tarot.html"},
+    {"id":"consultations","ptBR":"consultas-de-tarot.html","en":"tarot-consultations.html","es":"consultas-tarot.html"},
+    {"id":"ethics","ptBR":"etica-e-responsabilidade.html","en":"tarot-ethics.html","es":"etica-tarot.html"},
+    {"id":"contact","ptBR":"contato.html","en":"contact.html","es":"contacto.html"}
+  ],
+  "functional_contracts": {
+    "localized_home_visible_content": "localized Orb title and living Orb only",
+    "localized_free_tarot": {
+      "cards": 78,
+      "orientation": "normal",
+      "repetition": false,
+      "meanings_inside_reveal": false,
+      "royal_table": "13x6"
+    },
+    "localized_library": "78 searchable canonical cards with concise responsible notes",
+    "localized_school": "17-module public syllabus and responsible starter practice",
+    "localized_consultations": {
+      "human": true,
+      "prices_brl": [250, 150, 100, 50],
+      "email_required": true,
+      "explicit_consent": true,
+      "automatic_billing": false,
+      "data_storage": false,
+      "submission": "local mailto draft"
+    }
+  },
+  "seo": {
+    "canonical": "self-referential absolute URL in same language",
+    "hreflang": ["pt-BR", "en", "es", "x-default"],
+    "reciprocal_clusters": 7,
+    "x_default": "pt-BR",
+    "language_sitemaps": ["sitemap-en.xml", "sitemap-es.xml"],
+    "es_419_used": false
+  },
+  "market_policy": {
+    "file": "I18N-MARKET-POLICY-V195.json",
+    "currency": "BRL",
+    "automatic_exchange_rate": false,
+    "official_contact": "orbedasrealidades@hotmail.com",
+    "whatsapp": false
+  },
+  "home_contract_preserved": {
+    "portuguese_title_visible": true,
+    "portuguese_orb_visible": true,
+    "portuguese_information_blocks_visible": false,
+    "header_and_dock_are_navigation": true
+  },
+  "preserved_contracts": {
+    "tarot_cards": 78,
+    "orientation": "normal",
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "app_store_submission_authorized": false
+  },
+  "frozen_files": [
+    "orb-engine-v68.js",
+    "mini-orb-engine.js",
+    "menu-completo-v177.js",
+    "tarot-engine.js",
+    "tarot-data.js"
+  ],
+  "quality_gate": {
+    "required": "P0=0; P1=0",
+    "command": "node QA-V195-I18N.mjs"
+  }
+}
+
