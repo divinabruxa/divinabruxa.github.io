@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — SERVICE WORKER V62 · UNIVERSO EDITORIAL V192 */
-const CACHE='divina-bruxa-v62-editorial-v192';
+/* DIVINA BRUXA — SERVICE WORKER V63 · SEO E AUTORIDADE V193 */
+const CACHE='divina-bruxa-v63-seo-authority-v193';
 
 const REQUIRED=[
   './',
@@ -18,6 +18,7 @@ const REQUIRED=[
   './skin-universal-v10.js',
   './skin-catalog-v6.js',
   './config.js',
+  './seo-index-policy-v193.js',
   './editorial-catalog-v192.js',
   './editorial-metrics-v192.js',
   './privacy-center-v9.js',
@@ -61,6 +62,7 @@ const CORE=[
   './route-registry-v180.js',
   './orb-loading-portal-v1.js',
   './config.js',
+  './seo-index-policy-v193.js',
   './editorial-catalog-v192.js',
   './editorial-metrics-v192.js',
   './privacy-center-v9.js',
@@ -135,6 +137,7 @@ const WARM=[
   './premium-policy-v191.js','./premium-engine-v191.js','./skins-v191.js','./premium-billing-v191.css',
   './store-engine.js','./store-policy.js','./store-celestial-v1.css','./loja-mistica-celestial-v1.webp','./loja-mistica.html',
   './media-engine-v192.js','./media-policy-v192.js','./editorial-journey-v192.js','./media-celestial-v149.css','./midia-celestial-estudio-v1.webp','./musica.html','./de-frente-com-o-tarot.html',
+  './mapa-do-tarot.html','./seo-authority-v193.css',
   './fallback-shell-v1.css','./pwa-final-v1.css'
 ];
 

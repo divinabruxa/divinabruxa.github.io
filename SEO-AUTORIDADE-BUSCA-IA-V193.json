@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "193.0.0",
+  "releaseDate": "2026-09-09",
+  "version": "V193",
+  "macroetapa": 15,
+  "baseline": "V192",
+  "canonicalOrigin": "https://divinabruxa.com.br/",
+  "objective": "Consolidar arquitetura temática, indexação técnica e autoridade editorial para busca clássica e experiências de busca com IA, sem conteúdo ou marcação artificiais.",
+  "topicArchitecture": [
+    {"id": "cartas", "hub": "cartas-do-tarot.html", "purpose": "Biblioteca e páginas das 78 cartas"},
+    {"id": "naipes", "hub": "arcanos-menores.html", "purpose": "Quatro naipes, números e figuras da corte"},
+    {"id": "simbolos", "hub": "simbolos-do-tarot.html", "purpose": "Observação visual, história, tipos e método"},
+    {"id": "tiragens", "hub": "tiragens-de-tarot.html", "purpose": "Estruturas, posições e síntese"},
+    {"id": "aprendizado", "hub": "escola-do-tarot.html", "purpose": "Guias, Escola, glossário e plano de estudo"},
+    {"id": "consultas", "hub": "consultas-de-tarot.html", "purpose": "Serviços, valores, ética, perguntas e contato"}
+  ],
+  "publicMap": "mapa-do-tarot.html",
+  "sitemaps": {
+    "index": "sitemap.xml",
+    "children": [
+      "sitemap-principal.xml",
+      "sitemap-cartas.xml",
+      "sitemap-naipes-simbolos.xml",
+      "sitemap-tiragens.xml",
+      "sitemap-aprendizado.xml",
+      "sitemap-consultas.xml"
+    ],
+    "publishedOnly": true,
+    "uniqueAcrossChildren": true,
+    "generatedFromCanonicalHtml": true
+  },
+  "indexPolicy": {
+    "public": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+    "private": "noindex,nofollow,noarchive",
+    "staticNoindex": ["404.html", "offline.html"],
+    "dynamicPrivateRoutes": ["admin", "login", "conta", "ai", "orbe-ia", "journal", "diario", "subscriptions", "premium", "checkout", "skins", "notifications"],
+    "robotsTxtIsNotSecurity": true,
+    "authenticationRemainsRequired": true
+  },
+  "structuredData": {
+    "format": "JSON-LD",
+    "principle": "Somente tipos e propriedades que correspondem ao conteúdo visível",
+    "prohibited": ["avaliações inventadas", "autoria inventada", "produtos fictícios", "episódios não publicados", "datas artificiais", "FAQ invisível"]
+  },
+  "aiSearch": {
+    "specialTechnicalRequirements": false,
+    "llmsTxtAdded": false,
+    "syntheticAeoGeoPagesAdded": false,
+    "approach": ["SEO técnico", "conteúdo original e útil", "estrutura clara", "autoria responsável", "fontes e correções", "indexação e snippets permitidos"]
+  },
+  "searchConsole": {
+    "historicalObservation": {"observedAt": "2026-09-06", "propertyVerified": true, "previousSitemapProcessed": true},
+    "v193RemoteActionPerformed": false,
+    "v193SubmissionStatus": "awaiting-publication-and-separate-authorization",
+    "recommendedPostPublicationAction": "Enviar somente sitemap.xml e acompanhar cobertura, consultas e desempenho das páginas prioritárias."
+  },
+  "officialGuidance": [
+    "https://developers.google.com/search/docs/crawling-indexing/sitemaps/large-sitemaps",
+    "https://developers.google.com/search/docs/crawling-indexing/block-indexing",
+    "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
+    "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide"
+  ],
+  "protectedGates": {
+    "productionPublication": false,
+    "dnsChanges": false,
+    "searchConsoleSubmission": false,
+    "realBilling": false,
+    "stripeWrites": false,
+    "supabaseWrites": false,
+    "resendSends": false,
+    "mobileStoreSubmission": false
+  },
+  "preservedInvariants": {
+    "tarotCards": 78,
+    "tarotOrientation": "normal-only",
+    "tarotRepeat": false,
+    "tarotMeaningOnReveal": false,
+    "mesaReal": "13x6",
+    "consultationPrices": [250, 150, 100, 50],
+    "skins": 30,
+    "officialContact": "orbedasrealidades@hotmail.com",
+    "whatsapp": false
+  }
+}

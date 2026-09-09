@@ -55,7 +55,8 @@ const PAGES = Object.freeze([
   ['Mesa Personalizada', 'mesa-personalizada-no-tarot.html', '1–12 posições', 'tiragens', 'Escolha a quantidade de cartas antes da abertura e preserve a ordem das posições. customizada autoral'],
   ['Loja Mística', 'loja-mistica.html', 'Curadoria transparente', 'portal', 'Seleções para Tarot, estudo, ritual, ambiente, criação e presentes com divulgação de afiliado Amazon, compra externa, busca e favoritos locais. loja produtos baralho cristal livro diário tecnologia'],
   ['Música de Hércules DX', 'musica.html', '2 álbuns publicados', 'portal', 'Discografia de Hércules DX com Sobre as Estrelas e Z, contexto editorial, créditos e links oficiais para o Spotify. música álbum canções orbe sonora'],
-  ['De Frente com o Tarot', 'de-frente-com-o-tarot.html', 'Piloto em preparação', 'portal', 'Projeto de conversas em vídeo sobre Tarot, protocolo de publicação, acessibilidade e estado real sem episódios públicos. série vídeo youtube capítulos entrevistas']
+  ['De Frente com o Tarot', 'de-frente-com-o-tarot.html', 'Piloto em preparação', 'portal', 'Projeto de conversas em vídeo sobre Tarot, protocolo de publicação, acessibilidade e estado real sem episódios públicos. série vídeo youtube capítulos entrevistas'],
+  ['Mapa do Tarot', 'mapa-do-tarot.html', '6 caminhos temáticos', 'aprender', 'Mapa editorial de cartas, naipes, símbolos, tiragens, aprendizado e consultas. arquitetura temática navegar estudar encontrar assunto autoridade conteúdo']
 ]);
 
 const normalize = value => String(value || '')
@@ -95,7 +96,7 @@ const entries = Object.freeze([
     title, url, kind, category, description: displayDescription(description),
     icon: category === 'tiragens' ? '✧' : category === 'aprender' ? '▤' : '◉',
     searchable: normalize(`${title} ${kind} ${description}`),
-    featured: [1,2,3,4,5,6,14,15,26,27,28,29,30,31,32,33,34,35,36,50,51].includes(index)
+    featured: [1,2,3,4,5,6,14,15,26,27,28,29,30,31,32,33,34,35,36,50,51,55].includes(index)
   }))
 ]);
 

@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.24 · UNIVERSO EDITORIAL V192
+/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.25 · AUTORIDADE TEMÁTICA V193
    Estilos e motores nascem sob demanda; toda falha oferece tentativa e retorno seguro. */
 
 import {

@@ -1,0 +1,75 @@
+DIVINA BRUXA — V193
+SEO, AUTORIDADE TEMÁTICA E BUSCA POR IA
+============================================================
+
+TIPO DE ENTREGA
+------------------------------------------------------------
+Pacote DELTA plano para instalar somente sobre a V192 completa e corrigida.
+Ele contém apenas arquivos novos ou substituídos. Não é um site completo.
+
+O QUE A V193 ENTREGA
+------------------------------------------------------------
+- Mapa do Tarot público com seis caminhos: Cartas, Naipes, Símbolos,
+  Tiragens, Aprendizado e Consultas.
+- Ligações contextuais entre o mapa, a Home, a busca e os portais centrais.
+- Índice de sitemap com seis sitemaps temáticos e 135 URLs públicas únicas.
+- Sitemap de cartas com 78 imagens oficiais declaradas.
+- 404 e offline com noindex explícito.
+- Política dinâmica de noindex para Conta, Diário, Orbe IA, Premium, Skins,
+  Notificações, Checkout e Admin.
+- robots.txt rastreável: privacidade depende de autenticação, nunca do arquivo.
+- Dados estruturados somente para conteúdo visível e verdadeiro.
+- Busca interna atualizada para encontrar o Mapa do Tarot.
+- Política editorial clara para busca tradicional e experiências com IA.
+- Nenhum llms.txt ou artifício de AEO/GEO.
+
+COMO INSTALAR PELO IPHONE OU COMPUTADOR
+------------------------------------------------------------
+1. Confirme que a raiz atual já está na V192 completa e corrigida.
+2. Faça uma cópia de segurança dessa raiz.
+3. Extraia o ZIP diretamente na raiz do site.
+4. Autorize a substituição dos arquivos com nomes iguais.
+5. Não crie subpasta e não apague os demais arquivos da V192.
+6. Confirme que o cache mudou para:
+
+   divina-bruxa-v63-seo-authority-v193
+
+7. Na raiz instalada, execute:
+
+   node QA-V193-SEO-AUTORIDADE-IA.mjs
+
+8. O resultado esperado é status PASS, com P0 = 0 e P1 = 0.
+9. Abra o site com ?portal-refresh=v193 e recarregue mais uma vez.
+
+DEPOIS DA PUBLICAÇÃO — SOMENTE COM AUTORIZAÇÃO SEPARADA
+------------------------------------------------------------
+- Enviar apenas https://divinabruxa.com.br/sitemap.xml ao Search Console.
+- Acompanhar cobertura e desempenho por grupo temático.
+- Inspecionar primeiro Home, Mapa do Tarot, 78 Cartas, Tiragens, Escola e
+  Consultas.
+
+Este pacote não publica, não altera DNS e não envia o sitemap ao Google.
+
+SUPERFÍCIES CONGELADAS
+------------------------------------------------------------
+- orb-engine-v68.js
+- mini-orb-engine.js
+- menu-completo-v177.js
+- tarot-engine.js
+- tarot-data.js
+
+O Tarot Livre continua com 78 cartas diretas, sem repetição, sem significado
+automático na revelação e Mesa Real 13 × 6.
+
+PORTÕES BLOQUEADOS
+------------------------------------------------------------
+- Produção, DNS e lojas móveis.
+- Cobrança real, Stripe, webhook e Customer Portal.
+- Escrita nova no Supabase.
+- Envio de e-mail ou webhook pela Resend.
+- Envio ao Search Console.
+
+Canal oficial: orbedasrealidades@hotmail.com
+Sem WhatsApp.
+
+Data da revisão: 9 de setembro de 2026.

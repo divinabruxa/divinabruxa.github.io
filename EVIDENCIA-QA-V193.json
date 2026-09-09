@@ -1,0 +1,40 @@
+{
+  "version": "V193",
+  "baseline": "V192-completa-corrigida",
+  "executedAt": "2026-09-09",
+  "qa": {
+    "suite": "DIVINA-BRUXA-V193-SEO-AUTORIDADE-IA",
+    "status": "PASS",
+    "passed": 886,
+    "failed": 0,
+    "total": 886
+  },
+  "severity": {"P0": 0, "P1": 0},
+  "seoInventory": {
+    "htmlFiles": 137,
+    "publicCanonicalPages": 135,
+    "sitemapChildren": 6,
+    "sitemapUrls": 135,
+    "imageEntries": 78,
+    "duplicateTitles": 0,
+    "duplicateDescriptions": 0,
+    "duplicateCanonicals": 0
+  },
+  "cleanInstall": {
+    "base": "V192-completa-corrigida",
+    "archiveType": "flat-delta",
+    "archiveMembers": 33,
+    "directoriesInArchive": 0,
+    "archiveMembersByteExactAgainstV193": true,
+    "status": "PASS"
+  },
+  "externalActions": {
+    "productionPublication": false,
+    "dnsChange": false,
+    "searchConsoleSubmission": false,
+    "stripeWrite": false,
+    "supabaseWrite": false,
+    "resendSend": false,
+    "mobileStoreSubmission": false
+  }
+}

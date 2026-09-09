@@ -1,0 +1,63 @@
+{
+  "version": "V193",
+  "macroetapa": 15,
+  "baselineRequired": "V192-completa-corrigida",
+  "releaseDate": "2026-09-09",
+  "delivery": {
+    "type": "delta-flat",
+    "installMode": "replace-or-add",
+    "containsDirectories": false,
+    "fileCount": 33,
+    "deleteFiles": []
+  },
+  "replacedFiles": [
+    "404.html",
+    "app.js",
+    "busca-v165.js",
+    "buscar.html",
+    "cartas-do-tarot.html",
+    "consultas-de-tarot.html",
+    "escola-do-tarot.html",
+    "guias-para-comecar.html",
+    "index.html",
+    "offline.html",
+    "page-loader-v1.js",
+    "politica-editorial.html",
+    "robots.txt",
+    "simbolos-do-tarot.html",
+    "sitemap.xml",
+    "sw.js",
+    "tiragens-de-tarot.html"
+  ],
+  "addedFiles": [
+    "00-LEIA-PRIMEIRO-V193-SEO-AUTORIDADE-IA.txt",
+    "ARQUIVOS-V193-SHA256.txt",
+    "BUILD-SITEMAPS-V193.mjs",
+    "EVIDENCIA-QA-V193.json",
+    "MANIFESTO-V193-SEO-AUTORIDADE-IA.json",
+    "QA-V193-SEO-AUTORIDADE-IA.mjs",
+    "SEO-AUTORIDADE-BUSCA-IA-V193.json",
+    "mapa-do-tarot.html",
+    "seo-authority-v193.css",
+    "seo-index-policy-v193.js",
+    "sitemap-aprendizado.xml",
+    "sitemap-cartas.xml",
+    "sitemap-consultas.xml",
+    "sitemap-naipes-simbolos.xml",
+    "sitemap-principal.xml",
+    "sitemap-tiragens.xml"
+  ],
+  "publicUrlCount": 135,
+  "sitemapCount": 6,
+  "imageSitemapEntries": 78,
+  "deletePolicy": "zero-delete",
+  "externalWrites": {
+    "production": false,
+    "dns": false,
+    "searchConsole": false,
+    "stripe": false,
+    "supabase": false,
+    "resend": false,
+    "mobileStores": false
+  }
+}
