@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — CARREGADOR DE MUNDOS V1.25 · AUTORIDADE TEMÁTICA V193
-   Estilos e motores nascem sob demanda; toda falha oferece tentativa e retorno seguro. */
+/* DIVINA BRUXA 2.0 — REBIRTH R002 · CARREGADOR DE MUNDOS V301
+   Cada mundo nasce sob demanda. O Tarot Livre V301 é um mundo novo; os demais permanecem íntegros até seu próprio Rebirth. */
 
 import {
   normalizeRouteId,
@@ -10,15 +10,10 @@ import {
 
 const pageTasks = new Map();
 const sharedTasks = new Map();
+const LOAD_TIMEOUT_MS = 15000;
 const PORTAL_STYLES_ID = 'divinaPortalStylesV180';
 const PORTAL_STYLES_HREF = 'divina-core-v179.css?v=179';
-const LOAD_TIMEOUT_MS = 15000;
 let loadingSequence = 0;
-let portalStyleAttempt = 0;
-
-function announceLoading(type, detail) {
-  document.dispatchEvent(new CustomEvent(`divina:loading-${type}`, { detail }));
-}
 
 function once(map, key, factory) {
   if (map.has(key)) return map.get(key);
@@ -34,58 +29,32 @@ function withTimeout(task, timeout, message) {
   let timer = 0;
   return Promise.race([
     Promise.resolve(task),
-    new Promise((_, reject) => {
-      timer = setTimeout(() => reject(new Error(message)), timeout);
-    })
+    new Promise((_, reject) => { timer = setTimeout(() => reject(new Error(message)), timeout); })
   ]).finally(() => clearTimeout(timer));
 }
 
+function ensureStyle(id, href) {
+  return once(sharedTasks, `style:${id}`, () => withTimeout(new Promise((resolve, reject) => {
+    let link = document.getElementById(id);
+    if (link?.sheet) { resolve(link); return; }
+    if (link) link.remove();
+    link = document.createElement('link');
+    link.id = id;
+    link.rel = 'stylesheet';
+    link.href = href;
+    link.dataset.rebirthStyle = 'true';
+    link.addEventListener('load', () => resolve(link), { once:true });
+    link.addEventListener('error', () => reject(new Error(`Estilo indisponível: ${href}`)), { once:true });
+    document.head.append(link);
+  }), LOAD_TIMEOUT_MS, `Tempo esgotado ao carregar ${href}.`));
+}
+
 function loadPortalStyles() {
-  return once(sharedTasks, 'styles:portals:v180', () => withTimeout(new Promise((resolve, reject) => {
-    let link = document.getElementById(PORTAL_STYLES_ID);
-    const complete = candidate => {
-      try {
-        return Boolean(candidate?.sheet?.cssRules?.length > 100);
-      } catch {
-        return false;
-      }
-    };
-    if (link?.dataset.ready === 'true' || complete(link)) {
-      if (link) link.dataset.ready = 'true';
-      resolve(link);
-      return;
-    }
-    if (link?.dataset.failed === 'true') {
-      link.remove();
-      link = null;
-    }
-    if (!link) {
-      link = document.createElement('link');
-      link.id = PORTAL_STYLES_ID;
-      link.rel = 'stylesheet';
-      link.href = portalStyleAttempt
-        ? `${PORTAL_STYLES_HREF}&retry=${++portalStyleAttempt}`
-        : PORTAL_STYLES_HREF;
-      if (!portalStyleAttempt) portalStyleAttempt = 1;
-      link.dataset.routeStyles = 'deferred';
-      document.head.append(link);
-    }
-    const ready = () => {
-      if (!complete(link)) {
-        failed();
-        return;
-      }
-      link.dataset.ready = 'true';
-      delete link.dataset.failed;
-      resolve(link);
-    };
-    const failed = () => {
-      link.dataset.failed = 'true';
-      reject(new Error('Os estilos completos do portal não responderam.'));
-    };
-    link.addEventListener('load', ready, { once: true });
-    link.addEventListener('error', failed, { once: true });
-  }), LOAD_TIMEOUT_MS, 'Tempo esgotado ao vestir o portal.'));
+  return ensureStyle(PORTAL_STYLES_ID, PORTAL_STYLES_HREF);
+}
+
+function announceLoading(type, detail) {
+  document.dispatchEvent(new CustomEvent(`divina:loading-${type}`, { detail }));
 }
 
 function createRecovery(screen, id) {
@@ -95,27 +64,7 @@ function createRecovery(screen, id) {
   panel.dataset.routeRecovery = id;
   panel.setAttribute('role', 'alert');
   panel.setAttribute('aria-live', 'assertive');
-
-  const sigil = document.createElement('span');
-  sigil.className = 'db-route-recovery__sigil';
-  sigil.setAttribute('aria-hidden', 'true');
-  sigil.textContent = '✦';
-  const title = document.createElement('h3');
-  title.textContent = 'Este portal não abriu por completo';
-  const copy = document.createElement('p');
-  copy.textContent = 'Nada foi perdido. Você pode tentar novamente ou voltar para a Orbe.';
-  const actions = document.createElement('div');
-  const retry = document.createElement('button');
-  retry.type = 'button';
-  retry.dataset.routeRetry = id;
-  retry.textContent = 'TENTAR NOVAMENTE';
-  const home = document.createElement('button');
-  home.type = 'button';
-  home.dataset.go = 'home';
-  home.className = 'secondary';
-  home.textContent = 'VOLTAR AO INÍCIO';
-  actions.append(retry, home);
-  panel.append(sigil, title, copy, actions);
+  panel.innerHTML = `<span class="db-route-recovery__sigil" aria-hidden="true">✦</span><h3>Este mundo não abriu por completo</h3><p>Nada foi perdido.</p><div><button type="button" data-route-retry="${id}">TENTAR NOVAMENTE</button><button type="button" class="secondary" data-go="home">VOLTAR À ORBE</button></div>`;
   screen.prepend(panel);
 }
 
@@ -123,8 +72,24 @@ function clearRecovery(screen) {
   screen?.querySelector(':scope > [data-route-recovery]')?.remove();
 }
 
+const LOADING_MESSAGES = Object.freeze({
+  tarot:'A Orbe abre o círculo…',
+  daily:'Abrindo o encontro de hoje…',
+  library:'Abrindo as 78 cartas…',
+  spreads:'Preparando sua tiragem…',
+  school:'Abrindo a Escola…',
+  journal:'Abrindo seu espaço privado…',
+  ai:'Whit está abrindo este espaço…',
+  store:'Abrindo a Loja Mística…',
+  consultations:'Abrindo Consultas…',
+  music:'Abrindo Música…',
+  videos:'Abrindo Vídeos…',
+  skins:'Vestindo a Orbe…'
+});
+
 export function createPageLoader({ config, go, authClient = globalThis.divinaAuth } = {}) {
   const $ = selector => document.querySelector(selector);
+  const abort = new AbortController();
   let observer = null;
 
   const ensureJournal = () => once(sharedTasks, 'journal', async () => {
@@ -137,16 +102,14 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
     return journal;
   });
 
-  const remember = entry => {
-    ensureJournal().then(journal => journal?.add?.(entry)).catch(() => {});
-  };
+  const remember = entry => ensureJournal().then(journal => journal?.add?.(entry)).catch(() => {});
 
   const ensureCommerce = () => once(sharedTasks, 'commerce', async () => {
     const { CommerceEngine } = await import('./commerce-engine.js?v=148');
     return new CommerceEngine({
-      store: $('#storeApp'),
-      consultations: $('#consultationApp'),
-      subscriptions: $('#subscriptionApp')
+      store:$('#storeApp'),
+      consultations:$('#consultationApp'),
+      subscriptions:$('#subscriptionApp')
     }, config);
   });
 
@@ -155,7 +118,7 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
       import('./media-engine-v192.js?v=192'),
       import('./editorial-journey-v192.js?v=192')
     ]);
-    const media = new MediaEngineV192({ videos: $('#videoApp'), music: $('#musicApp') }, config);
+    const media = new MediaEngineV192({ videos:$('#videoApp'), music:$('#musicApp') }, config);
     new EditorialJourneyV192($('#videoApp'), 'videos');
     new EditorialJourneyV192($('#musicApp'), 'music');
     return media;
@@ -163,8 +126,11 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
 
   const loaders = Object.freeze({
     tarot: async () => {
-      const { FreeTarot } = await import('./tarot-engine-v214.js?v=214');
-      return new FreeTarot($('#tarot'));
+      const [, module] = await Promise.all([
+        ensureStyle('divinaTarotRebirthV301', 'free-tarot-world-v301.css?v=301'),
+        import('./free-tarot-world-v301.js?v=301')
+      ]);
+      return new module.FreeTarot($('#tarot'));
     },
     daily: async () => {
       const { DailyRitual } = await import('./ritual-engine.js?v=183');
@@ -182,15 +148,15 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
       return new SchoolEngine($('#schoolApp'));
     },
     spreads: async () => {
-      const { SpreadsEngine } = await import('./spreads-engine.js?v=185');
+      const { SpreadsEngine } = await import('./spreads-engine.js?v=213');
       return new SpreadsEngine({
-        grid: $('#spreadGrid'),
-        result: $('#spreadResult'),
-        intention: $('#spreadIntention'),
-        history: $('#spreadHistory')
+        grid:$('#spreadGrid'),
+        result:$('#spreadResult'),
+        intention:$('#spreadIntention'),
+        history:$('#spreadHistory')
       }, remember);
     },
-    journal: ensureJournal,
+    journal:ensureJournal,
     ai: async () => {
       const { AIEngine } = await import('./ai-engine.js?v=190');
       return new AIEngine($('#aiApp'), config);
@@ -219,8 +185,8 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
       const { SkinsEngineV201 } = await import('./skins-v201.js?v=201');
       return new SkinsEngineV201($('#skinsApp'));
     },
-    videos: ensureMedia,
-    music: ensureMedia,
+    videos:ensureMedia,
+    music:ensureMedia,
     notifications: async () => {
       const { CelestialNotificationEngine } = await import('./notification-engine-v150.js?v=150');
       return new CelestialNotificationEngine($('#notificationApp'), go);
@@ -232,20 +198,22 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
   });
 
   const warmers = Object.freeze({
-    tarot: () => import('./tarot-engine-v214.js?v=214'),
+    tarot: () => Promise.all([
+      ensureStyle('divinaTarotRebirthV301', 'free-tarot-world-v301.css?v=301'),
+      import('./free-tarot-world-v301.js?v=301')
+    ]),
+    daily: () => import('./ritual-engine.js?v=183'),
+    library: () => import('./card-library-engine-v215.js?v=215'),
     consultations: () => Promise.all([
       import('./commerce-engine.js?v=148'),
       import('./consultation-engine.js?v=188')
     ]),
-    daily: () => import('./ritual-engine.js?v=183'),
     notifications: () => import('./notification-engine-v150.js?v=150')
   });
 
   const warm = ids => {
     const list = Array.isArray(ids) ? ids : [ids];
-    return Promise.allSettled(list.filter(id => warmers[id]).map(id => (
-      once(sharedTasks, `warm:${id}`, warmers[id])
-    )));
+    return Promise.allSettled(list.filter(id => warmers[id]).map(id => once(sharedTasks, `warm:${id}`, warmers[id])));
   };
 
   const load = rawId => {
@@ -257,48 +225,38 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
     return once(pageTasks, id, async () => {
       const screen = document.getElementById(id);
       const html = document.documentElement;
-      const loadingId = `page:${id}:${++loadingSequence}`;
+      const loadingId = `world:${id}:${++loadingSequence}`;
       clearRecovery(screen);
       screen?.setAttribute('aria-busy', 'true');
       screen?.setAttribute('data-module-state', 'loading');
       html.dataset.pageLoading = id;
       announceLoading('start', {
-        id: loadingId,
-        pageId: id,
-        label: routeLabel(id),
-        message: id === 'spreads'
-          ? 'Preparando sua tiragem…'
-          : id === 'journal'
-            ? 'Abrindo suas memórias privadas…'
-            : id === 'ai'
-              ? 'Whit está abrindo este espaço…'
-              : id === 'library'
-                ? 'Abrindo as 78 cartas…'
-                : undefined
+        id:loadingId,
+        pageId:id,
+        label:routeLabel(id),
+        message:LOADING_MESSAGES[id]
       });
-      document.dispatchEvent(new CustomEvent('divina:page-loading', { detail: { id } }));
+      document.dispatchEvent(new CustomEvent('divina:page-loading', { detail:{ id } }));
 
       try {
         const styleTask = routeNeedsPortalStyles(id) ? loadPortalStyles() : Promise.resolve(null);
         const [, instance] = await Promise.all([
           styleTask,
-          withTimeout(loader(), LOAD_TIMEOUT_MS, `Tempo esgotado ao abrir ${id}.`)
+          withTimeout(loader(), LOAD_TIMEOUT_MS, `Tempo esgotado ao abrir ${routeLabel(id)}.`)
         ]);
         clearRecovery(screen);
         screen?.setAttribute('data-module-state', 'ready');
-        document.dispatchEvent(new CustomEvent('divina:page-ready', { detail: { id } }));
+        document.dispatchEvent(new CustomEvent('divina:page-ready', { detail:{ id } }));
         return instance;
       } catch (error) {
         screen?.setAttribute('data-module-state', 'error');
         createRecovery(screen, id);
-        document.dispatchEvent(new CustomEvent('divina:page-error', { detail: { id, recoverable: true } }));
-        window.dispatchEvent(new CustomEvent('orbe:toast', {
-          detail: 'Este portal não conseguiu abrir agora. Você pode tentar novamente.'
-        }));
-        console.error(`[Divina] falha ao carregar ${id}`, error);
+        document.dispatchEvent(new CustomEvent('divina:page-error', { detail:{ id, recoverable:true } }));
+        globalThis.dispatchEvent?.(new CustomEvent('orbe:toast', { detail:'Este mundo não abriu agora. Nada foi perdido.' }));
+        console.error(`[Divina Rebirth] falha ao abrir ${id}`, error);
         throw error;
       } finally {
-        announceLoading('end', { id: loadingId, pageId: id });
+        announceLoading('end', { id:loadingId, pageId:id });
         screen?.removeAttribute('aria-busy');
         if (html.dataset.pageLoading === id) delete html.dataset.pageLoading;
       }
@@ -307,6 +265,7 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
 
   const retry = id => {
     const route = normalizeRouteId(id);
+    pageTasks.get(route)?.destroy?.();
     pageTasks.delete(route);
     clearRecovery(document.getElementById(route));
     return Promise.resolve(go ? go(route) : load(route));
@@ -317,29 +276,29 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
     if (id && routeHasModule(id)) load(id).catch(() => {});
   };
 
-  document.addEventListener('pointerdown', primeFromIntent, { capture: true, passive: true });
-  document.addEventListener('focusin', primeFromIntent, true);
-  document.addEventListener('click', primeFromIntent, true);
+  document.addEventListener('pointerdown', primeFromIntent, { capture:true, passive:true, signal:abort.signal });
+  document.addEventListener('focusin', primeFromIntent, { capture:true, signal:abort.signal });
+  document.addEventListener('click', primeFromIntent, { capture:true, signal:abort.signal });
   document.addEventListener('click', event => {
     const button = event.target.closest?.('[data-route-retry]');
     if (!button) return;
     event.preventDefault();
     retry(button.dataset.routeRetry).catch(() => {});
-  });
+  }, { signal:abort.signal });
 
   observer = new MutationObserver(() => {
     const id = document.body.dataset.screen;
     if (id) load(id).catch(() => {});
   });
-  observer.observe(document.body, { attributes: true, attributeFilter: ['data-screen'] });
+  observer.observe(document.body, { attributes:true, attributeFilter:['data-screen'] });
 
   return Object.freeze({
     load,
-    prepare: load,
+    prepare:load,
     retry,
     warm,
-    go: id => Promise.resolve(go ? go(normalizeRouteId(id)) : load(id)),
-    portalStylesReady: () => Boolean(document.getElementById(PORTAL_STYLES_ID)?.sheet),
-    destroy: () => observer?.disconnect()
+    go:id => Promise.resolve(go ? go(normalizeRouteId(id)) : load(id)),
+    portalStylesReady:() => Boolean(document.getElementById(PORTAL_STYLES_ID)?.sheet),
+    destroy:() => { abort.abort(); observer?.disconnect(); }
   });
 }
