@@ -1,0 +1,39 @@
+{
+  "project": "Divina Bruxa",
+  "release": 206,
+  "base": 205,
+  "date": "2026-09-10",
+  "status": "candidate",
+  "runtime_files": {
+    "replaced": [
+      "index.html",
+      "sw.js"
+    ],
+    "new": [
+      "home-orb-absolute-v206.css"
+    ]
+  },
+  "support_files": [
+    "00-LEIA-PRIMEIRO-V206-HOME-ORBE-ABSOLUTA.txt",
+    "HOME-ORBE-ABSOLUTA-CONTRACT-V206.json",
+    "ORBE-VISUAL-GOLDEN-MASTER-V206.json",
+    "MANIFESTO-V206-HOME-ORBE-ABSOLUTA.json",
+    "QA-V206-HOME-ORBE-ABSOLUTA.mjs",
+    "EVIDENCIA-QA-V206.json",
+    "ARQUIVOS-V206-SHA256.txt"
+  ],
+  "protected_not_resent": [
+    "CNAME",
+    "orb-engine-v68.js",
+    "navigation.js",
+    "mini-orb-engine.js",
+    "orb-skin-release-v1.js",
+    "divina-shell-v180.css",
+    "menu-completo-v177.css",
+    "78 card images"
+  ],
+  "external_writes": false,
+  "billing_activation": false,
+  "production_activation": false,
+  "flat_zip_required": true
+}

@@ -1,0 +1,28 @@
+DIVINA BRUXA — V206 — HOME ORBE ABSOLUTA + GOLDEN MASTER
+
+RESULTADO
+- No centro da Home fica somente a Orbe viva.
+- Foram removidos o título central, eyebrow, subtítulo, chamada, dica e o texto visível sob a Orbe.
+- O nome e o estado da Orbe continuam disponíveis de forma não visual para acessibilidade.
+- Cabeçalho, marca, Menu Mágico, dock, imagem, shader, skins, gestos e páginas internas foram preservados.
+
+ARQUIVOS PARA INSTALAR
+Substituir:
+- index.html
+- sw.js
+
+Adicionar:
+- home-orb-absolute-v206.css
+
+Os demais arquivos da entrega são contrato, manifesto, hashes e provas. Não precisam ser publicados para o runtime funcionar.
+
+INSTALAÇÃO
+1. Envie os três arquivos de runtime acima para a raiz do site.
+2. Não apague nenhum outro arquivo e não altere CNAME.
+3. Feche e reabra a PWA ou atualize a página. O service worker V206 troca o cache de forma versionada.
+
+ROLLBACK
+Restaure o index.html e o sw.js da V205 e remova apenas home-orb-absolute-v206.css. Nenhum dado, preço, direito, carta ou conteúdo precisa ser revertido.
+
+ESCOPO FECHADO
+Esta macroetapa não altera o motor da Orbe. O motor definitivo começa na V207, depois da instalação e aprovação da V206.

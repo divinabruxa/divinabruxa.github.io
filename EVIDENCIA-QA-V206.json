@@ -1,0 +1,32 @@
+{
+  "project": "Divina Bruxa",
+  "release": 206,
+  "suite": "QA-V206-HOME-ORBE-ABSOLUTA.mjs",
+  "status": "PASS",
+  "executed_at": "2026-09-10T18:25:17Z",
+  "result": {
+    "passed": 95,
+    "failed": 0,
+    "note": "95/95 deterministic static and integrity checks passed"
+  },
+  "coverage": [
+    "home orb-only markup",
+    "fail-closed CSS",
+    "accessibility preservation",
+    "service-worker versioning",
+    "frozen Orb and Menu hashes",
+    "78-card preservation",
+    "commercial freeze",
+    "flat release integrity"
+  ],
+  "install_simulation": {
+    "status": "PASS",
+    "frontend_baseline_index_sha256": "b147a817abf0f2f2c26d8ecccef26c3aa91c143b584b3dac86ec5c70dab7ebd6",
+    "frontend_baseline_sw_sha256": "52b3f2fd813e8760dd880d14b80ff0780c6eedf00b5b794f54cff365cfdbc064",
+    "flat_zip": true,
+    "zip_file_count": 10,
+    "cname_preserved": true,
+    "cname_sha256": "5221eb592e0235f65c0dd92e75ff80248b30ba7d08a10ee1613a80d4f791d8e6"
+  },
+  "runtime_visual_device_test": "required before production; this release does not activate production"
+}

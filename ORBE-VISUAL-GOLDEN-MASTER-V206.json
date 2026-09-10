@@ -1,0 +1,53 @@
+{
+  "project": "Divina Bruxa",
+  "release": 206,
+  "purpose": "Freeze the approved Orb and navigation appearance before motor work",
+  "authorized_visual_delta": {
+    "region": "home_center_outside_orb",
+    "changes": [
+      "remove_visible_copy",
+      "remove_visible_title_below_orb",
+      "center_existing_orb_container_in_available_space"
+    ]
+  },
+  "frozen_assets_sha256": {
+    "orb-engine-v68.js": "3f8a1c87c558194901089f96f96059b066c7dde8bf33475816ceaca74b9a369f",
+    "navigation.js": "827db63068e3e03d92a02e517c1e9f615e94d8d4ffb45e5851c4851b168f0db6",
+    "mini-orb-engine.js": "26d46580f7465139ac54b9953eaa6d0488e3a89c0bee9c7f2d0fbbaa27b91916",
+    "orb-skin-release-v1.js": "50b66b2ef864ce8a117b4663961afb6d46f76c058600b8316bc08887fa862785",
+    "divina-shell-v180.css": "d45ede5cc056a9ebd754f328b1cbb0c0b1dd4cdf0874972e8fd35e4167c8eddf",
+    "divina-orb-fast-v1.webp": "66c6915571e9547d135d9456343706da77cc50ee5332d5d89f3adcceffb1b8de",
+    "divina-orb-thumb-v1.webp": "eb11d79613119756454ca90be3599849c10650e482968ed19c17ef11e301f873"
+  },
+  "frozen_orb_geometry": {
+    "desktop": "min(89vw, 47dvh, 470px)",
+    "mobile_portrait_max_430": "min(88vw, 45dvh, 420px)",
+    "landscape_max_height_560": "min(43vh, 330px)"
+  },
+  "reference_viewports": [
+    "320x568",
+    "360x800",
+    "390x844",
+    "430x932",
+    "768x1024",
+    "1366x768",
+    "1440x900"
+  ],
+  "forbidden_deltas": [
+    "orb_image",
+    "shader",
+    "texture",
+    "color",
+    "brightness",
+    "crop",
+    "circular_shape",
+    "added_rings",
+    "added_lines",
+    "added_constellations",
+    "added_particles",
+    "added_numbers",
+    "menu_geometry",
+    "dock_geometry"
+  ],
+  "deterministic_comparison_required_from": 207
+}

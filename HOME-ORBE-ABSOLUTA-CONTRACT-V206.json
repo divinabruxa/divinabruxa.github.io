@@ -1,0 +1,50 @@
+{
+  "project": "Divina Bruxa",
+  "release": 206,
+  "macro_stage": "Home Orbe Absoluta + Golden Master",
+  "base": 205,
+  "scope": {
+    "home_center": "orb_only",
+    "visual_redesign": false,
+    "orb_engine_changed": false,
+    "menu_engine_changed": false,
+    "internal_pages_changed": false,
+    "commerce_changed": false
+  },
+  "visible_home_contract": {
+    "preserve": [
+      "app_header",
+      "brand",
+      "menu_button",
+      "living_orb",
+      "magic_dock"
+    ],
+    "remove_from_center": [
+      "eyebrow",
+      "title",
+      "subtitle",
+      "touch_call",
+      "visible_status",
+      "touch_hint",
+      "visible_orb_menu_title",
+      "cards_and_editorial_sections"
+    ],
+    "non_visual_preservation": [
+      "document_title",
+      "meta_description",
+      "structured_data",
+      "home_accessible_name",
+      "orb_accessible_name",
+      "orb_live_status"
+    ]
+  },
+  "interaction_freeze": {
+    "single_tap": "wake_and_pulse",
+    "double_tap": "open_tarot_once",
+    "hold_drag_rotate": "preserved",
+    "mini_orb_destination": "ai",
+    "reduced_motion": "preserved"
+  },
+  "delivery_rule": "new_or_replaced_files_only",
+  "production_activation": false
+}

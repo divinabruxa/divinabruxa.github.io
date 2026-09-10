@@ -1,0 +1,103 @@
+/* DIVINA BRUXA V206 — HOME ORBE ABSOLUTA
+   Exceção visual autorizada: no centro da Home fica somente a Orbe viva.
+   Cabeçalho, Menu Mágico, dock, motor WebGL, skins e gestos permanecem intactos. */
+
+/* Fail-closed: nenhuma camada antiga volta a expor conteúdo editorial na Home. */
+#app > #home.home-orb-only-v206.active > :not(.orb-stage-ref):not(#orbStatus) {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+#app > #home.home-orb-only-v206.active {
+  box-sizing: border-box;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  min-height: 100svh;
+  margin: 0;
+  padding: calc(96px + env(safe-area-inset-top)) 12px calc(106px + env(safe-area-inset-bottom));
+  overflow: hidden !important;
+  text-align: center;
+}
+
+#app > #home.home-orb-only-v206.active > .orb-stage-ref {
+  display: grid !important;
+  place-items: center;
+  align-self: center;
+  flex: 0 0 auto;
+}
+
+/* O nome e o estado continuam disponíveis para tecnologia assistiva, nunca visíveis. */
+#app > #home.home-orb-only-v206.active > #orbStatus,
+#app > #home.home-orb-only-v206.active > .db-visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Proteção de compatibilidade caso HTML antigo seja servido durante uma atualização. */
+#app > #home.home-orb-only-v206.active > .portal-divider,
+#app > #home.home-orb-only-v206.active > .home-copy,
+#app > #home.home-orb-only-v206.active > .awaken,
+#app > #home.home-orb-only-v206.active > .touch-hint,
+#app > #home.home-orb-only-v206.active .home-orb-menu > p {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+body:has(#app > #home.home-orb-only-v206.active),
+html[data-runtime="v12"] body[data-screen="home"] {
+  height: 100dvh;
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
+
+html[data-runtime="v12"] body[data-screen="home"] #app {
+  height: 100dvh;
+  overflow: hidden;
+}
+
+/* Mesmo enquadramento aprovado na V199. Estados do menu ficam sob seu próprio CSS. */
+html[data-runtime="v12"] #app > #home.home-orb-only-v206.active:not(.orb-menu-open):not(.orb-menu-transition):not(.orb-menu-closing) > .orb-stage-ref {
+  --v75-orb-size: min(89vw, 47dvh, 470px);
+  width: var(--v75-orb-size) !important;
+  margin: 0 auto !important;
+  transform: translateZ(0);
+}
+
+@media (max-width: 430px) and (orientation: portrait) {
+  #app > #home.home-orb-only-v206.active {
+    padding: calc(88px + env(safe-area-inset-top)) 10px calc(96px + env(safe-area-inset-bottom));
+  }
+
+  html[data-runtime="v12"] #app > #home.home-orb-only-v206.active:not(.orb-menu-open):not(.orb-menu-transition):not(.orb-menu-closing) > .orb-stage-ref {
+    --v75-orb-size: min(88vw, 45dvh, 420px);
+  }
+}
+
+@media (orientation: landscape) and (max-height: 560px) {
+  #app > #home.home-orb-only-v206.active {
+    padding: 72px 12px calc(84px + env(safe-area-inset-bottom));
+  }
+
+  html[data-runtime="v12"] #app > #home.home-orb-only-v206.active:not(.orb-menu-open):not(.orb-menu-transition):not(.orb-menu-closing) > .orb-stage-ref {
+    --v75-orb-size: min(43vh, 330px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-runtime="v12"] #app > #home.home-orb-only-v206.active > .orb-stage-ref {
+    transition: none !important;
+  }
+}

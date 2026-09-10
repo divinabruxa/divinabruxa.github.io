@@ -1,10 +1,10 @@
-/* DIVINA BRUXA — SERVICE WORKER V201 · CONTA REAL CONTROLADA */
-const VERSION = 201;
+/* DIVINA BRUXA — SERVICE WORKER V206 · HOME ORBE ABSOLUTA */
+const VERSION = 206;
 const OWNED_PREFIX = 'divina-bruxa-';
-const SHELL_CACHE = 'divina-bruxa-v201-shell';
-const CONTENT_CACHE = 'divina-bruxa-v201-content';
-const IMAGE_CACHE = 'divina-bruxa-v201-images';
-const TAROT_CACHE = 'divina-bruxa-v201-tarot-offline';
+const SHELL_CACHE = 'divina-bruxa-v206-shell';
+const CONTENT_CACHE = 'divina-bruxa-v206-content';
+const IMAGE_CACHE = 'divina-bruxa-v206-images';
+const TAROT_CACHE = 'divina-bruxa-v206-tarot-offline';
 const ACTIVE_CACHES = new Set([SHELL_CACHE, CONTENT_CACHE, IMAGE_CACHE, TAROT_CACHE]);
 
 const REQUIRED_SHELL = Object.freeze([
@@ -20,7 +20,7 @@ const REQUIRED_SHELL = Object.freeze([
   './privacy-center-v9.js',
   './fallback-shell-v1.css',
   './divina-shell-v180.css',
-  './home-orb-absolute-v199.css',
+  './home-orb-absolute-v206.css',
   './divina-orb-fast-v1.webp',
   './divina-orb-thumb-v1.webp',
   './divina-icon-fast-v1.png',
@@ -269,7 +269,7 @@ const appShellIsValid = async (url, response) => {
     && /id=["']app["']/.test(html)
     && /id=["']home["']/.test(html)
     && /app-v201\.js\?v=201/.test(html)
-    && /home-orb-absolute-v199\.css\?v=199/.test(html);
+    && /home-orb-absolute-v206\.css\?v=206/.test(html);
 };
 
 const offlinePageFor = async url => {
