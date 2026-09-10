@@ -1,0 +1,44 @@
+DIVINA BRUXA — V205 — LEDGER UNIVERSAL DE DIREITOS
+
+O que esta versão entrega
+- uma autoridade única, no servidor, para Premium, Orbe IA, créditos e 30 skins;
+- Premium vitalício de R$ 199,90 com todas as 30 skins e sem IA;
+- Orbe IA de R$ 89,90/mês com 400 créditos por ciclo;
+- créditos extras de 200/R$ 39,90, 600/R$ 99,90 e 1.500/R$ 199,90;
+- skins tanto dentro do Premium quanto compráveis individualmente ou em pacotes;
+- restauração pelo provedor, reembolso, revogação, disputa, chargeback e expiração;
+- proteção contra repetição de evento, crédito duplicado, preço vindo do cliente e direito fantasma;
+- painel manual limitado à proprietária com sessão ativa, MFA/AAL2, motivo, prazo e auditoria.
+
+O que NÃO foi alterado
+- Home;
+- título localizado da Orbe;
+- Orbe viva e seus gestos;
+- Menu Mágico e mini-Orbe;
+- Tarot Livre, 78 cartas, regra sem repetição, sem inversões e sem arrastar;
+- identidade violeta/dourada.
+
+Instalação do ZIP
+1. Faça backup da versão instalada.
+2. Extraia este ZIP diretamente na raiz do projeto.
+3. O pacote é plano: não há pastas internas.
+4. Ele contém apenas arquivos novos da V205; não contém a base inteira.
+5. Rode: node QA-V205-LEDGER-UNIVERSAL.mjs
+
+Estado seguro ao instalar
+- nenhuma cobrança real;
+- nenhum objeto Stripe criado automaticamente;
+- nenhuma migração persistente executada pelo pacote;
+- nenhum webhook, Checkout, restauração ou ajuste manual ativado;
+- Google Play e StoreKit apenas reservados, ainda desligados;
+- produção e live mode impossíveis pelas travas desta versão.
+
+Ativação operacional
+Somente no Supabase STAGING e Stripe TEST, seguindo LEDGER-UNIVERSAL-RUNBOOK-V205.md.
+Copiar os arquivos não é o mesmo que abrir as travas. Cada abertura é separada,
+reversível e exige uma ação consciente da proprietária.
+
+Regra absoluta
+Screenshot, parâmetro paid=true, localStorage, preço do navegador e resposta de
+Checkout nunca liberam nada. Somente evento assinado do provedor, ou ajuste
+temporário da proprietária com MFA e auditoria, altera o ledger.

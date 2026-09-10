@@ -1,0 +1,21 @@
+{
+  "release":"V205",
+  "persist_before_effects":true,
+  "full_payload_persisted":false,
+  "ordering":{"duplicate_key":"provider+environment+event_key","projection_clock":"occurred_at_then_event_key","older_event":"record_transaction_but_do_not_rewind_claim"},
+  "events":[
+    {"provider_event":"checkout.session.completed","action":"purchase_paid_or_subscription_active","authority":"retrieved_current_object","effect":"claim_or_subscription_only_after_paid_state"},
+    {"provider_event":"checkout.session.async_payment_succeeded","action":"purchase_paid","authority":"retrieved_current_object","effect":"idempotent_grant"},
+    {"provider_event":"checkout.session.async_payment_failed","action":"no_effect","effect":"history_only"},
+    {"provider_event":"payment_intent.succeeded","action":"purchase_paid","authority":"retrieved_current_object","effect":"same_canonical_root_as_checkout"},
+    {"provider_event":"payment_intent.payment_failed","action":"no_effect","effect":"history_only"},
+    {"provider_event":"customer.subscription.created","action":"subscription_state","authority":"retrieved_current_subscription","effect":"access_no_monthly_credit"},
+    {"provider_event":"customer.subscription.updated","action":"subscription_state","authority":"retrieved_current_subscription","effect":"activate_freeze_or_expire"},
+    {"provider_event":"customer.subscription.deleted","action":"subscription_expired","authority":"retrieved_current_subscription","effect":"block_ai_keep_extra_recorded"},
+    {"provider_event":"invoice.paid","action":"subscription_renewed","authority":"retrieved_current_invoice","effect":"exactly_one_400_credit_lot_per_invoice"},
+    {"provider_event":"invoice.payment_failed","action":"subscription_past_due","authority":"retrieved_current_invoice","effect":"freeze_ai"},
+    {"provider_event":"charge.refunded","action":"refund_full_or_partial","authority":"retrieved_current_charge","effect":"revoke_or_review_without_deleting_content"},
+    {"provider_event":"charge.dispute.created","action":"dispute_opened","authority":"retrieved_current_dispute_and_charge","effect":"freeze_source_and_spending"},
+    {"provider_event":"charge.dispute.closed","action":"dispute_won_or_chargeback","authority":"retrieved_current_dispute_and_charge","effect":"unfreeze_or_revoke"}
+  ]
+}

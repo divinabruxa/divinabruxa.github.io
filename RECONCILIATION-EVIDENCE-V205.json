@@ -1,0 +1,27 @@
+{
+  "release":"V205",
+  "environment":"staging",
+  "provider":"stripe_test",
+  "live_reconciliation_status":"not_executed",
+  "reason":"Nenhum objeto Stripe TEST foi criado e nenhuma trava operacional foi aberta por este pacote.",
+  "rollback_only_database_validation":{
+    "migration_parsed":true,
+    "transaction_rolled_back":true,
+    "synthetic_smoke":"PASS",
+    "duplicate_credit_effects":0,
+    "ghost_entitlements":0,
+    "negative_available_credits":0,
+    "hash_chain_errors":0
+  },
+  "required_before_checkout_test":{
+    "provider_transaction_difference":0,
+    "duplicate_credit_effects":0,
+    "ghost_entitlements":0,
+    "hash_chain_errors":0,
+    "open_review_items":0
+  },
+  "stripe_objects_created":0,
+  "real_charges":0,
+  "emails_sent":0,
+  "persistent_remote_changes":false
+}

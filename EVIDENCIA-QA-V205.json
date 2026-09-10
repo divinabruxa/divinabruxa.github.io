@@ -1,0 +1,37 @@
+{
+  "release":"V205",
+  "date":"2026-09-10",
+  "status":"PASS",
+  "static_qa":"PASS",
+  "static_checks":{"total":295,"passed":295,"failed":0,"p0":0,"p1":0},
+  "database_rollback_validation":"PASS",
+  "database_trial":{
+    "project":"Supabase STAGING",
+    "migration_parsed":true,
+    "synthetic_smoke_passed":true,
+    "transaction_rolled_back":true,
+    "persistent_objects_created":0,
+    "assets":33,
+    "sellable_products":41,
+    "stripe_test_catalog_mappings":41,
+    "premium_right_grants":30,
+    "duplicate_credit_effects":0,
+    "ghost_entitlements":0,
+    "negative_available_credits":0,
+    "hash_chain_errors":0
+  },
+  "typescript_syntax":{
+    "files":7,
+    "passed":7,
+    "failed":0
+  },
+  "stripe_test_objects_created":0,
+  "real_charges":0,
+  "emails_sent":0,
+  "persistent_remote_changes":false,
+  "home_orb_tarot_changed":false,
+  "notes":[
+    "O teste SQL usou somente identificadores sintéticos e terminou em ROLLBACK.",
+    "A reconciliação real do provedor continua pendente até catálogo, webhook e Checkout TEST serem ativados conscientemente."
+  ]
+}
