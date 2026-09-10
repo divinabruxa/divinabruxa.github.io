@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "work": "WORK7.0",
+  "product": "Divina Bruxa 2.0",
+  "universe": "Orbe das Realidades",
+  "date": "2026-09-10",
+  "installedBaseline": 208,
+  "candidate": 209,
+  "macroStage": "Orbe 2.0 — Skins, Resiliência e Fechamento Definitivo",
+  "sovereignRule": "Preservar integralmente o visual, shader, gestos e navegação V208; evoluir somente autoridade de textura e resiliência.",
+  "skinContract": {
+    "expectedCount": 30,
+    "singleTextureAuthority": "RealityOrbEngine instance",
+    "bridgeMayTouchWebGL": false,
+    "predecodeBeforeCommit": true,
+    "atomicIntent": "divina:orb-image",
+    "persistentKeyPreserved": "divina.skin.v10",
+    "publicNamesAndRightsChanged": false
+  },
+  "resilience": {
+    "webglContextLost": "static interactive fallback remains; desired texture retained",
+    "webglContextRestored": "program, buffer and texture rebuilt through the existing engine; current skin reapplied",
+    "bfcache": true,
+    "visibilityResume": true,
+    "resize": true,
+    "orientation": true,
+    "secondRenderer": false,
+    "secondGestureSystem": false,
+    "newAnimationLoop": false
+  },
+  "privacy": {
+    "privateDataRead": false,
+    "analyticsContent": false,
+    "whitPrivateContext": false
+  },
+  "frozen": [
+    "Home composition",
+    "Orb image and crop",
+    "fragment and vertex shaders",
+    "V208 gesture arbiter",
+    "single tap pulse",
+    "double tap to Tarot Livre",
+    "drag, spin, hold and cancel semantics",
+    "Magic Menu",
+    "dock",
+    "page content"
+  ],
+  "productionLocksChanged": false,
+  "delivery": {
+    "flatZip": true,
+    "onlyNewOrReplacedFiles": true,
+    "deleteLegacy": false,
+    "nextMacroStage": 210
+  }
+}

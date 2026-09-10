@@ -1,16 +1,29 @@
-/* DIVINA BRUXA — SINCRONISMO ABSOLUTO DAS ORBES V3
-   Uma textura pré-decodificada, uma troca atômica e nenhuma varredura causada por textos comuns. */
+/* DIVINA BRUXA — ORBE 2.0 V209 · SKINS ATÔMICAS
+   A ponte de skins declara intenção; somente o motor da Orbe toca na textura WebGL.
+*/
 
-import { skinByIdV12 } from './skin-registry-v12.js?v=133';
+import { SKIN_REGISTRY_V12, skinByIdV12 } from './skin-registry-v12.js?v=133';
 import { preloadSkinAsset } from './skin-universal-v10.js?v=133';
+import { installOrbResilienceV209, getOrbResilienceV209 } from './orb-resilience-v209.js?v=209';
 
 const html = document.documentElement;
 const ORB_CANDIDATE = '#orb,.app-header .mini-orb,.magic-menu-brand .mini-orb,.magic-menu-core .mini-orb,.magic-dock .dock-orb .mini-orb,#tableOrb .table-orb-image img,#dailyCard .ritual-breathe span,.mini-orb';
+const EXPECTED_SKIN_COUNT = 30;
 let scheduled = 0;
-let pendingDetail = {};
-let canvasToken = 0;
-let canvasLoading = '';
-let canvasApplied = '';
+let transaction = 0;
+let pending = {};
+let observerStarted = false;
+
+function validateRegistry() {
+  const skins = SKIN_REGISTRY_V12?.skins || [];
+  const ids = new Set(skins.map(skin => skin.id));
+  const valid = skins.length === EXPECTED_SKIN_COUNT
+    && ids.size === EXPECTED_SKIN_COUNT
+    && skins.every(skin => skin.id && (skin.surfaces?.home || skin.image));
+  html.dataset.orbSkinRegistry = valid ? '30-valid' : 'invalid';
+  if (!valid) console.error('[Divina V209] catálogo de skins inválido; mantendo fallback seguro.');
+  return valid;
+}
 
 function markSurfaces() {
   const surfaces = [
@@ -22,148 +35,109 @@ function markSurfaces() {
     ['#tableOrb .table-orb-image img', 'table'],
     ['#dailyCard .ritual-breathe span', 'internal']
   ];
-
   for (const [selector, surface] of surfaces) {
     document.querySelectorAll(selector).forEach(node => {
       if (node.dataset.orbSurface !== surface) node.dataset.orbSurface = surface;
     });
   }
-
   document.querySelectorAll('.mini-orb:not([data-orb-surface])').forEach(node => {
     node.dataset.orbSurface = 'internal';
   });
 }
 
-function currentIdentity() {
-  const id = html.dataset.skin || document.body?.dataset.orbeSkin || 'classic';
-  const skin = skinByIdV12(id);
-  const source = html.dataset.orbImage || skin.surfaces?.home || skin.image;
-  return { id: skin.id, source };
+function storedSkinId() {
+  try { return localStorage.getItem('divina.skin.v10') || ''; }
+  catch { return ''; }
 }
 
-function samePreparedImage(image, absolute) {
-  if (!image?.complete || !image.naturalWidth) return false;
-  try { return new URL(image.currentSrc || image.src, document.baseURI).href === absolute; }
-  catch { return false; }
+function currentIdentity(detail = {}) {
+  const requested = detail.id || html.dataset.skin || document.body?.dataset.orbeSkin || storedSkinId() || html.dataset.bootSkin || 'classic';
+  const skin = skinByIdV12(requested);
+  return { id: skin.id, skin, source: skin.surfaces?.home || skin.image };
 }
 
-async function createTextureSource(image) {
-  const longest = Math.max(image.naturalWidth || 0, image.naturalHeight || 0);
-  if (longest <= 1024 || typeof createImageBitmap !== 'function') return { source: image, close: null };
-  const scale = 1024 / longest;
-  const width = Math.max(1, Math.round(image.naturalWidth * scale));
-  const height = Math.max(1, Math.round(image.naturalHeight * scale));
-  try {
-    const bitmap = await createImageBitmap(image, {
-      resizeWidth: width,
-      resizeHeight: height,
-      resizeQuality: 'high'
-    });
-    return { source: bitmap, close: () => bitmap.close?.() };
-  } catch {
-    return { source: image, close: null };
-  }
+function cssImage(source) {
+  return `url("${String(source).replace(/"/g, '\\"')}")`;
 }
 
-async function synchronizeCanvas(source, preparedImage = null) {
-  const absolute = new URL(source, document.baseURI).href;
-  if (absolute === canvasApplied || absolute === canvasLoading) return;
-  canvasLoading = absolute;
-  const token = ++canvasToken;
-
-  let image = preparedImage;
-  try {
-    if (!samePreparedImage(image, absolute)) image = await preloadSkinAsset(source, { priority: 'high' });
-  } catch {
-    if (token === canvasToken) canvasLoading = '';
-    return;
+function applyPreparedSurfaces(identity) {
+  const { skin, source } = identity;
+  const rootImage = cssImage(source);
+  if (html.dataset.skin !== skin.id) html.dataset.skin = skin.id;
+  if (html.dataset.orbImage !== source) html.dataset.orbImage = source;
+  html.dataset.orbRelease = 'v209';
+  html.style.setProperty('--db-release-orb-image', rootImage);
+  html.style.setProperty('--db-skin-image', rootImage);
+  html.style.setProperty('--db-skin-id', `"${skin.id}"`);
+  for (const [key, value] of Object.entries(skin.tokens || {})) {
+    html.style.setProperty(`--db-skin-${key}`, value);
   }
 
-  if (token !== canvasToken) return;
-  const textureSource = await createTextureSource(image);
-  if (token !== canvasToken) {
-    textureSource.close?.();
-    return;
-  }
-
-  const applyTexture = attempt => {
-    if (token !== canvasToken) {
-      textureSource.close?.();
-      return;
-    }
-    const canvas = document.querySelector('#orbCanvas');
-    const gl = canvas?.getContext('webgl');
-    const texture = gl?.getParameter(gl.TEXTURE_BINDING_2D);
-    if (!gl || !texture) {
-      if (attempt < 24) setTimeout(() => applyTexture(attempt + 1), 100);
-      else {
-        canvasLoading = '';
-        textureSource.close?.();
-      }
-      return;
-    }
-
-    try {
-      gl.bindTexture(gl.TEXTURE_2D, texture);
-      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, textureSource.source);
-      canvasApplied = absolute;
-      canvasLoading = '';
-      html.dataset.orbTexture = 'synchronized';
-      canvas.dispatchEvent(new CustomEvent('divina:orb-texture-applied', {
-        detail: { src: absolute }
-      }));
-    } catch {
-      canvasLoading = '';
-    } finally {
-      textureSource.close?.();
-    }
-  };
-
-  applyTexture(0);
-}
-
-function synchronize(detail = {}) {
-  markSurfaces();
-  const current = currentIdentity();
-  const detailMatches = !detail.id || detail.id === current.id;
-  const skin = skinByIdV12(current.id);
-  const source = detailMatches
-    ? detail.src || detail.source || current.source
-    : current.source;
-  const preparedImage = detailMatches ? detail.imageElement : null;
-  if (!source) return;
-
-  const cssImage = `url("${source}")`;
-  if (html.style.getPropertyValue('--db-release-orb-image') !== cssImage) {
-    html.style.setProperty('--db-release-orb-image', cssImage);
-  }
-  html.dataset.orbRelease = 'v3';
-
-  const absolute = new URL(source, document.baseURI).href;
   document.querySelectorAll('[data-orb-surface]').forEach(node => {
+    const surface = node.dataset.orbSurface || 'internal';
+    const target = skin.surfaces?.[surface] || source;
+    if (!target) return;
+    const absolute = new URL(target, document.baseURI).href;
     node.dataset.skin = skin.id;
     if (node.dataset.orbReleaseSource === absolute) return;
     node.dataset.orbReleaseSource = absolute;
-    node.style.setProperty('--db-release-orb-image', cssImage);
+    const image = cssImage(target);
+    node.style.setProperty('--db-release-orb-image', image);
     if (node instanceof HTMLImageElement) {
-      if (node.src !== absolute) node.src = source;
+      if (node.src !== absolute) node.src = target;
     } else {
-      node.style.setProperty('background-image', cssImage, 'important');
+      node.style.setProperty('background-image', image, 'important');
     }
   });
+}
 
-  synchronizeCanvas(source, preparedImage);
+async function commit(detail = {}) {
+  markSurfaces();
+  if (!validateRegistry()) return false;
+  const identity = currentIdentity(detail);
+  const token = ++transaction;
+  html.dataset.orbSkinTransaction = 'preparing';
+
+  let prepared;
+  try {
+    prepared = await preloadSkinAsset(identity.source, { priority: 'high' });
+  } catch (error) {
+    if (token === transaction) html.dataset.orbSkinTransaction = 'fallback';
+    document.dispatchEvent(new CustomEvent('divina:skin-prepare-error', {
+      detail: { id: identity.id, recoverable: true }
+    }));
+    return false;
+  }
+  if (token !== transaction || !prepared?.naturalWidth) return false;
+
+  requestAnimationFrame(() => {
+    if (token !== transaction) return;
+    installOrbResilienceV209();
+    applyPreparedSurfaces(identity);
+    html.dataset.orbSkinTransaction = 'committed';
+    document.dispatchEvent(new CustomEvent('divina:orb-image', {
+      detail: {
+        id: identity.id,
+        src: identity.source,
+        imageElement: prepared,
+        authority: 'skin-intent-v209'
+      }
+    }));
+    document.dispatchEvent(new CustomEvent('divina:orb-skin-committed', {
+      detail: { id: identity.id, version: 209 }
+    }));
+  });
+  return true;
 }
 
 function queue(detail = {}) {
-  pendingDetail = { ...pendingDetail, ...detail };
+  pending = { ...pending, ...detail };
   cancelAnimationFrame(scheduled);
   scheduled = requestAnimationFrame(() => {
     scheduled = 0;
-    const next = pendingDetail;
-    pendingDetail = {};
-    synchronize(next);
+    const next = pending;
+    pending = {};
+    commit(next);
   });
 }
 
@@ -174,30 +148,60 @@ function containsNewOrb(records) {
   }));
 }
 
-document.addEventListener('divina:orb-image', event => queue(event.detail || {}));
+function installObservers() {
+  if (observerStarted) return;
+  observerStarted = true;
+
+  new MutationObserver(() => queue()).observe(html, {
+    attributes: true,
+    attributeFilter: ['data-skin']
+  });
+
+  if (document.body) {
+    new MutationObserver(() => queue()).observe(document.body, {
+      attributes: true,
+      attributeFilter: ['data-orbe-skin']
+    });
+    new MutationObserver(records => {
+      if (containsNewOrb(records)) queue();
+    }).observe(document.body, { childList: true, subtree: true });
+  }
+}
+
 document.addEventListener('divina:skin-applied', event => queue(event.detail || {}));
 document.addEventListener('divina:runtime-ready', () => queue());
-
-new MutationObserver(() => queue()).observe(html, {
-  attributes: true,
-  attributeFilter: ['data-skin', 'data-orb-image']
+document.addEventListener('divina:boot-ready', () => {
+  installOrbResilienceV209();
+  queue();
 });
 
-if (document.body) {
-  new MutationObserver(() => queue()).observe(document.body, {
-    attributes: true,
-    attributeFilter: ['data-orbe-skin']
-  });
-  new MutationObserver(records => {
-    if (containsNewOrb(records)) queue();
-  }).observe(document.body, {
-    childList: true,
-    subtree: true
-  });
-}
+document.addEventListener('divina:orb-image', event => {
+  if (event.detail?.authority === 'skin-intent-v209') return;
+  const detail = event.detail || {};
+  if (detail.id) queue(detail);
+});
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => queue(), { once: true });
+  document.addEventListener('DOMContentLoaded', () => {
+    installObservers();
+    installOrbResilienceV209();
+    queue();
+  }, { once: true });
 } else {
+  installObservers();
+  installOrbResilienceV209();
   queue();
 }
+
+window.divinaOrbSkinV209 = Object.freeze({
+  version: 209,
+  skinCount: EXPECTED_SKIN_COUNT,
+  apply: id => commit({ id }),
+  resilience: () => getOrbResilienceV209(),
+  snapshot: () => Object.freeze({
+    registry: html.dataset.orbSkinRegistry || 'unknown',
+    transaction: html.dataset.orbSkinTransaction || 'idle',
+    skin: html.dataset.skin || 'classic',
+    authority: html.dataset.orbAuthority || 'pending'
+  })
+});

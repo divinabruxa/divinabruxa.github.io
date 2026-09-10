@@ -1,0 +1,51 @@
+DIVINA BRUXA 2.0 — WORK7.0 — PROVA V209
+Data: 2026-09-10
+Base instalada: V208
+Candidata: V209 — Orbe 2.0: Skins, Resiliência e Fechamento Definitivo
+
+ARQUITETURA VERIFICADA
+PASS — orb-skin-release-v1.js não chama getContext(), TEXTURE_BINDING_2D ou texImage2D.
+PASS — a ponte de skins somente pré-decodifica, sincroniza superfícies e emite divina:orb-image.
+PASS — o upload GPU ocorre pela própria instância RealityOrbEngine, preservando uma única autoridade.
+PASS — nenhum novo RealityOrbEngine, createProgram ou segundo renderer é criado.
+PASS — nenhum handler pointer/touch/dblclick foi adicionado; V208 permanece soberana sobre gestos.
+PASS — recuperação declarada para webglcontextlost/webglcontextrestored, BFCache, visibility, resize e orientation.
+PASS — fallback WebGL V208 permanece preservado.
+PASS — catálogo é rejeitado em runtime se não tiver exatamente 30 IDs únicos e fontes válidas.
+PASS — chave persistente divina.skin.v10 preservada.
+PASS — nenhuma API, IA, diário, analytics, billing, DNS ou produção é ativada.
+
+SINTAXE / CONTRATO
+PASS — node --check orb-resilience-v209.js
+PASS — node --check orb-skin-release-v1.js
+PASS — WORK7-0-PRODUCT-CONTRACT-V209.json válido
+PASS — ZIP deve conter somente arquivos novos ou substituídos, sem diretórios.
+
+HASHES SHA-256
+0f7033a20da07af9d9701e5b4ec9b72ecd3ef2cb66d8c13fe274e1016add073b  orb-resilience-v209.js
+9be903883973fff3e6d069f4bf38ae00dfe638ed506b12ad8b41cc13deb926f4  orb-skin-release-v1.js
+04ed69309097e0ede34dad5ed5202186c8002c380ea62eb345c0f3453eda70e6  WORK7-0-PRODUCT-CONTRACT-V209.json
+da85128b67122701561b1b0e47a78e7e111c4edbd4936d157ee6c2f077ef0e4b  WORK7-0-ROLLBACK-V209.md
+
+ARQUIVO SUBSTITUÍDO
+- orb-skin-release-v1.js
+
+ARQUIVOS NOVOS
+- orb-resilience-v209.js
+- WORK7-0-PRODUCT-CONTRACT-V209.json
+- WORK7-0-ROLLBACK-V209.md
+- WORK7-0-PROOF-V209.txt
+
+REGIÕES NÃO MODIFICADAS
+- index.html
+- app-v208.js
+- orb-engine-v208.js e seus shaders
+- orb-gesture-core-v208.js
+- orb-motion-core-v207.js
+- mini-orb-engine-v207.js
+- Home/CSS visual
+- Menu, dock, Tarot e páginas
+- sw.js
+
+NOTA DE GATE
+Esta é a candidata de instalação da V209. Provas de navegador que exigem o runtime publicado (perda/restauração real de contexto, BFCache, rotação e soak prolongado) são o gate pós-instalação antes de declarar a versão publicada como fechada.
