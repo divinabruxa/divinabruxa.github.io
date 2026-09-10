@@ -173,7 +173,7 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
     library: async () => {
       const [, { CardLibraryEngine }] = await Promise.all([
         import('./tarot-meanings.js?v=184'),
-        import('./card-library-engine.js?v=184')
+        import('./card-library-engine-v215.js?v=215')
       ]);
       return new CardLibraryEngine($('#cardLibraryApp'));
     },
@@ -272,7 +272,9 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
             ? 'Abrindo suas memórias privadas…'
             : id === 'ai'
               ? 'Despertando a Orbe IA…'
-              : undefined
+              : id === 'library'
+                ? 'Abrindo as 78 cartas…'
+                : undefined
       });
       document.dispatchEvent(new CustomEvent('divina:page-loading', { detail: { id } }));
 
