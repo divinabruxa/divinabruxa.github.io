@@ -6,7 +6,7 @@ import {
   routeHasModule,
   routeLabel,
   routeNeedsPortalStyles
-} from './route-registry-v180.js?v=180';
+} from './route-registry-v180.js?v=300';
 
 const pageTasks = new Map();
 const sharedTasks = new Map();
@@ -271,7 +271,7 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
           : id === 'journal'
             ? 'Abrindo suas memórias privadas…'
             : id === 'ai'
-              ? 'Despertando a Orbe IA…'
+              ? 'Whit está abrindo este espaço…'
               : id === 'library'
                 ? 'Abrindo as 78 cartas…'
                 : undefined

@@ -1,415 +1,218 @@
-// DIVINA BRUXA V210 — MENU 2.0 · MOTOR DE ESTADO REVERSÍVEL
-// Preserva integralmente a geometria/visual V180. Esta versão troca apenas
-// a autoridade interna do Menu Mágico: uma intenção, um estado, uma passagem.
-import { isKnownRoute, normalizeRouteId, routeFromLocation } from './route-registry-v180.js?v=180';
+/* DIVINA BRUXA 2.0 — REBIRTH R001 · NAVEGAÇÃO ORGÂNICA V300
+   Uma única passagem entre mundos. Mantém a tela atual até o próximo mundo estar pronto,
+   fecha o menu sem corte e nunca mostra uma tela branca entre rotas. */
+import { normalizeRouteId, routeFromLocation } from './route-registry-v180.js?v=300';
 
-const MENU_STATE = Object.freeze({
-  CLOSED: 'CLOSED',
-  OPENING: 'OPENING',
-  OPEN: 'OPEN',
-  REVERSING: 'REVERSING',
-  CLOSING: 'CLOSING',
-  NAVIGATING: 'NAVIGATING'
-});
+const ROUTE_PHASE = Object.freeze({ IDLE:'idle', PREPARING:'preparing', LEAVING:'leaving', ENTERING:'entering' });
+const MENU_PHASE = Object.freeze({ CLOSED:'closed', OPENING:'opening', OPEN:'open', CLOSING:'closing' });
+const pause = ms => new Promise(resolve => setTimeout(resolve, Math.max(0, ms)));
+const focusables = root => [...(root?.querySelectorAll?.('button:not([disabled]),a[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])') || [])].filter(el => !el.hidden && el.getClientRects().length);
 
-export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoStart = false } = {}) {
+export function createNavigation({ beforeEnter: initialBeforeEnter = null } = {}) {
   const html = document.documentElement;
-  const home = document.querySelector('#home');
-  const orbMenu = document.querySelector('#orbMenu');
-  const orbStage = home?.querySelector('.orb-stage-ref');
+  const body = document.body;
+  const menu = document.querySelector('#orbMenu');
   const menuButton = document.querySelector('#menuBtn');
-  const pathsButton = document.querySelector('#pathsBtn');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-
   let beforeEnter = typeof initialBeforeEnter === 'function' ? initialBeforeEnter : null;
-  let navigationToken = 0;
-  let routeSyncQueued = false;
-  let lastSyncedLocation = '';
+  let currentRoute = 'home';
+  let routeToken = 0;
+  let menuPhase = MENU_PHASE.CLOSED;
+  let previousFocus = null;
   let started = false;
 
-  // V180 criou os atalhos sem alterar a geometria principal; V210 preserva isso byte a byte em intenção.
-  const ensureMenuPortals = () => {
-    if (!orbMenu || orbMenu.querySelector('.home-menu-portals')) return;
-    const row = document.createElement('div');
-    row.className = 'home-menu-portals';
-    row.setAttribute('aria-label', 'Atalhos da Orbe');
-    const video = orbMenu.querySelector('.video-portal');
-    if (video) {
-      video.classList.add('menu-portal');
-      const title = video.querySelector('b');
-      if (title) title.textContent = 'Vídeo';
-      row.append(video);
-    }
-    const shortcuts = [
-      ['store', '◇', 'Loja Mística'],
-      ['daily', '☾', 'Carta do Dia'],
-      ['skins', '◆', 'Skins da Orbe'],
-      ['subscriptions', '✦', 'Premium'],
-      ['journal', '▤', 'Diário'],
-      ['library', '▥', 'Biblioteca'],
-      ['notifications', '☾', 'Notificações']
-    ];
-    shortcuts.forEach(([id, sigil, label]) => {
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'menu-portal';
-      button.dataset.go = id;
-      button.innerHTML = `<span aria-hidden="true">${sigil}</span><b>${label}</b>`;
-      row.append(button);
-    });
-    orbMenu.append(row);
-  };
-  ensureMenuPortals();
+  const veil = document.createElement('div');
+  veil.className = 'db-route-veil';
+  veil.setAttribute('aria-hidden', 'true');
+  veil.innerHTML = '<span class="db-route-veil__orb" data-orb-surface="transition"></span>';
+  body.append(veil);
 
-  if (pathsButton) {
-    pathsButton.dataset.go = 'skins';
-    pathsButton.removeAttribute('aria-controls');
-    const pathsLabel = pathsButton.querySelector('small');
-    if (pathsLabel) pathsLabel.textContent = 'Skins';
-  }
+  const publishMenu = reason => document.dispatchEvent(new CustomEvent('divina:menu-state', {
+    detail:{ state:menuPhase.toUpperCase(), reason }
+  }));
 
-  let menuState = MENU_STATE.CLOSED;
-  let menuTargetOpen = false;
-  let lastFocus = null;
-  let restoreFocus = false;
-  let motionToken = 0;
-  let motionFrame = 0;
-  let stageMotion = null;
-  let motionResolve = null;
-  let motionPromise = Promise.resolve({ state: MENU_STATE.CLOSED, cancelled: false });
-
-  const publishMenuState = (next, reason = 'transition') => {
-    if (menuState === next) return;
-    const previous = menuState;
-    menuState = next;
-    html.dataset.menuState = next.toLowerCase();
-    document.dispatchEvent(new CustomEvent('divina:menu-state', {
-      detail: { previous, state: next, targetOpen: menuTargetOpen, reason }
-    }));
-  };
-
-  html.dataset.menuState = MENU_STATE.CLOSED.toLowerCase();
-
-  const setCurrent = id => document.querySelectorAll('.magic-dock [data-go], .home-orb-menu [data-go]').forEach(button => {
-    const current = button.dataset.go === id;
-    button.classList.toggle('is-current', current);
-    if (current) button.setAttribute('aria-current', 'page');
-    else button.removeAttribute('aria-current');
-  });
-
-  const setMenuControls = open => {
-    menuButton?.classList.toggle('is-open', open);
-    menuButton?.setAttribute('aria-expanded', String(open));
-    menuButton?.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
-    const label = menuButton?.querySelector('span');
+  const setMenuButton = open => {
+    if (!menuButton) return;
+    menuButton.classList.toggle('is-open', open);
+    menuButton.setAttribute('aria-expanded', String(open));
+    menuButton.setAttribute('aria-label', open ? 'Fechar universo de navegação' : 'Abrir universo de navegação');
+    const label = menuButton.querySelector('span');
     if (label) label.textContent = open ? 'FECHAR' : 'MENU';
-    pathsButton?.classList.toggle('is-open', open);
-    pathsButton?.setAttribute('aria-expanded', String(open));
-    pathsButton?.setAttribute('aria-label', open ? 'Fechar menu mágico' : 'Abrir menu mágico');
   };
 
-  const resolveMotion = result => {
-    if (!motionResolve) return;
-    const resolve = motionResolve;
-    motionResolve = null;
-    resolve(result);
+  const setMenuInteractive = interactive => {
+    if (!menu) return;
+    menu.setAttribute('aria-hidden', String(!interactive));
+    if ('inert' in menu) menu.inert = !interactive;
   };
 
-  const cancelMotion = (reason = 'superseded') => {
-    motionToken += 1;
-    cancelAnimationFrame(motionFrame);
-    motionFrame = 0;
-    stageMotion?.cancel();
-    stageMotion = null;
-    resolveMotion({ state: menuState, cancelled: true, reason });
+  const openOrbMenu = async () => {
+    if (!menu || menuPhase === MENU_PHASE.OPEN || menuPhase === MENU_PHASE.OPENING) return true;
+    previousFocus = document.activeElement;
+    menuPhase = MENU_PHASE.OPENING;
+    publishMenu('open');
+    setMenuInteractive(true);
+    setMenuButton(true);
+    html.classList.add('db-menu-open');
+    body.classList.add('db-menu-open');
+    requestAnimationFrame(() => menu.classList.add('is-open'));
+    await pause(reducedMotion.matches ? 0 : 360);
+    menuPhase = MENU_PHASE.OPEN;
+    publishMenu('opened');
+    const first = menu.querySelector('[data-menu-cluster][aria-selected="true"]') || focusables(menu)[0];
+    first?.focus?.({ preventScroll:true });
+    return true;
   };
 
-  const makeMotionPromise = () => {
-    motionPromise = new Promise(resolve => { motionResolve = resolve; });
-    return motionPromise;
+  const closeOrbMenu = async ({ restoreFocus = true } = {}) => {
+    if (!menu || menuPhase === MENU_PHASE.CLOSED || menuPhase === MENU_PHASE.CLOSING) return true;
+    menuPhase = MENU_PHASE.CLOSING;
+    publishMenu('close');
+    menu.classList.remove('is-open');
+    setMenuButton(false);
+    await pause(reducedMotion.matches ? 0 : 300);
+    html.classList.remove('db-menu-open');
+    body.classList.remove('db-menu-open');
+    setMenuInteractive(false);
+    menuPhase = MENU_PHASE.CLOSED;
+    publishMenu('closed');
+    if (restoreFocus) previousFocus?.focus?.({ preventScroll:true });
+    previousFocus = null;
+    return true;
   };
 
-  const glideOrbStage = (from, to, opening) => {
-    if (!orbStage || !from || !to || reducedMotion.matches) return null;
-    const safeWidth = Math.max(to.width, 1);
-    const safeHeight = Math.max(to.height, 1);
-    const deltaX = from.left - to.left;
-    const deltaY = from.top - to.top;
-    const scaleX = Math.max(.01, from.width / safeWidth);
-    const scaleY = Math.max(.01, from.height / safeHeight);
-    const animation = orbStage.animate([
-      { transform: `translate3d(${deltaX}px,${deltaY}px,0) scale(${scaleX},${scaleY})` },
-      { transform: 'translate3d(0,0,0) scale(1,1)' }
-    ], {
-      duration: opening ? 620 : 560,
-      easing: opening ? 'cubic-bezier(.16,.82,.22,1)' : 'cubic-bezier(.32,.72,.18,1)',
-      fill: 'both'
+  const toggleOrbMenu = () => menuPhase === MENU_PHASE.CLOSED || menuPhase === MENU_PHASE.CLOSING
+    ? openOrbMenu()
+    : closeOrbMenu();
+
+  const markCurrent = id => {
+    document.querySelectorAll('[data-go]').forEach(control => {
+      const active = control.dataset.go === id;
+      control.classList.toggle('is-current', active);
+      if (active) control.setAttribute('aria-current', 'page');
+      else control.removeAttribute('aria-current');
     });
-    stageMotion = animation;
-    animation.finished.catch(() => {}).finally(() => {
-      if (stageMotion !== animation) return;
-      animation.cancel();
-      stageMotion = null;
-    });
-    return animation;
   };
 
-  const activeVisualAnimations = () => {
-    if (reducedMotion.matches) return [];
-    const roots = [home, orbMenu].filter(Boolean);
-    const unique = new Set();
-    for (const root of roots) {
-      try {
-        for (const animation of root.getAnimations?.({ subtree: true }) || []) {
-          if (animation.playState === 'finished' || animation.playState === 'idle') continue;
-          // Respiração, aura e órbitas infinitas são vida contínua; nunca pertencem ao gate da transição.
-          const timing = animation.effect?.getTiming?.();
-          if (timing?.iterations === Infinity) continue;
-          const computed = animation.effect?.getComputedTiming?.();
-          if (computed?.endTime === Infinity) continue;
-          unique.add(animation);
-        }
-      } catch { /* Safari antigo: o fallback abaixo conclui pelo frame */ }
-    }
-    if (stageMotion) unique.add(stageMotion);
-    return [...unique];
-  };
-
-  const finishMotion = (token, { navigating = false } = {}) => {
-    if (!home || !orbMenu || token !== motionToken) return;
-    home.classList.remove('orb-menu-transition', 'orb-menu-opening', 'orb-menu-closing');
-
-    if (menuTargetOpen) {
-      home.classList.add('orb-menu-open');
-      orbMenu.setAttribute('aria-hidden', 'false');
-      publishMenuState(MENU_STATE.OPEN, 'settled-open');
-      resolveMotion({ state: MENU_STATE.OPEN, cancelled: false });
-      return;
-    }
-
-    home.classList.remove('orb-menu-open');
-    orbMenu.setAttribute('aria-hidden', 'true');
-    if (!navigating && menuState !== MENU_STATE.NAVIGATING) publishMenuState(MENU_STATE.CLOSED, 'settled-closed');
-
-    if (!navigating && restoreFocus && lastFocus?.focus) {
-      try { lastFocus.focus({ preventScroll: true }); } catch { lastFocus.focus(); }
-    }
-    if (!navigating) {
-      restoreFocus = false;
-      lastFocus = null;
-    }
-    resolveMotion({ state: menuState, cancelled: false });
-  };
-
-  const settleFromAnimations = async (token, options) => {
-    if (token !== motionToken) return;
-    if (reducedMotion.matches) {
-      finishMotion(token, options);
-      return;
-    }
-
-    // Espera as animações reais do quadro, em vez de manter vários timers concorrentes.
-    const animations = activeVisualAnimations();
-    if (!animations.length) {
-      requestAnimationFrame(() => finishMotion(token, options));
-      return;
-    }
-
-    // Um único watchdog impede que uma implementação defeituosa de Animation.finished prenda o Menu.
-    let watchdog = 0;
-    const guard = new Promise(resolve => { watchdog = setTimeout(resolve, 1200); });
-    await Promise.race([
-      Promise.allSettled(animations.map(animation => animation.finished)),
-      guard
-    ]);
-    clearTimeout(watchdog);
-    if (token === motionToken) finishMotion(token, options);
-  };
-
-  const resetOrbMenu = (reason = 'route-commit') => {
-    cancelMotion(reason);
-    menuTargetOpen = false;
-    restoreFocus = false;
-    lastFocus = null;
-    home?.classList.remove('orb-menu-open', 'orb-menu-transition', 'orb-menu-opening', 'orb-menu-closing');
-    orbMenu?.setAttribute('aria-hidden', 'true');
-    setMenuControls(false);
-    publishMenuState(MENU_STATE.CLOSED, reason);
-  };
-
-  const transitionOrbMenu = async (open, { shouldRestore = false, navigating = false } = {}) => {
-    if (!home || !orbMenu) return { state: MENU_STATE.CLOSED, cancelled: false };
-
-    if (open && menuState === MENU_STATE.NAVIGATING) {
-      return { state: MENU_STATE.NAVIGATING, cancelled: true, reason: 'navigation-locked' };
-    }
-
-    if (open && !home.classList.contains('active')) {
-      const ready = await go('home');
-      if (!ready) return { state: menuState, cancelled: true, reason: 'home-unavailable' };
-      return transitionOrbMenu(true, { shouldRestore });
-    }
-
-    const alreadySettled = open ? menuState === MENU_STATE.OPEN : menuState === MENU_STATE.CLOSED;
-    if (alreadySettled && !navigating) return { state: menuState, cancelled: false };
-
-    if (open && !menuTargetOpen && menuState !== MENU_STATE.OPENING) lastFocus = document.activeElement;
-
-    // getBoundingClientRect é usado somente no início da transação do menu, nunca no hot path do gesto da Orbe.
-    const fromRect = orbStage?.getBoundingClientRect();
-    const wasMoving = [MENU_STATE.OPENING, MENU_STATE.CLOSING, MENU_STATE.REVERSING].includes(menuState);
-    cancelMotion(open ? 'open-intent' : navigating ? 'navigation-intent' : 'close-intent');
-    const token = motionToken;
-    makeMotionPromise();
-
-    menuTargetOpen = open;
-    restoreFocus = !open && shouldRestore && !navigating;
-    setMenuControls(open);
-
-    if (navigating) publishMenuState(MENU_STATE.NAVIGATING, 'route-intent');
-    else if (wasMoving) publishMenuState(MENU_STATE.REVERSING, open ? 'reverse-open' : 'reverse-close');
-    else publishMenuState(open ? MENU_STATE.OPENING : MENU_STATE.CLOSING, open ? 'open' : 'close');
-
-    // Mantém a imagem pintada enquanto fecha. aria-hidden só volta a true após o último quadro.
-    orbMenu.setAttribute('aria-hidden', 'false');
-    home.classList.add('orb-menu-transition');
-    home.classList.toggle('orb-menu-opening', open);
-    home.classList.toggle('orb-menu-closing', !open);
-
-    motionFrame = requestAnimationFrame(() => {
-      if (token !== motionToken) return;
-      home.classList.toggle('orb-menu-open', open);
-      const toRect = orbStage?.getBoundingClientRect();
-      glideOrbStage(fromRect, toRect, open);
-      // Um segundo frame garante que transições CSS criadas pela troca de classe já estejam enumeráveis.
-      requestAnimationFrame(() => settleFromAnimations(token, { navigating }).catch(() => finishMotion(token, { navigating })));
-    });
-
-    return motionPromise;
-  };
-
-  const openOrbMenu = () => transitionOrbMenu(true);
-  const closeOrbMenu = (shouldRestore = false) => transitionOrbMenu(false, { shouldRestore });
-  const toggleOrbMenu = () => transitionOrbMenu(!menuTargetOpen, { shouldRestore: true });
-
-  const commit = (requestedId, push = true) => {
-    let id = normalizeRouteId(requestedId);
-    const screens = [...document.querySelectorAll('.screen')];
-
-    if (id === 'skins' && !document.getElementById('skins')) {
-      screens.forEach(screen => screen.classList.toggle('active', screen.id === 'home'));
-      resetOrbMenu('skins-fallback');
-      document.body.dataset.screen = 'home';
-      setCurrent('skins');
-      document.querySelector('.home-skins')?.scrollIntoView({ behavior: reducedMotion.matches ? 'auto' : 'smooth', block: 'start' });
-      return;
-    }
-
+  const commit = (rawId, push = true) => {
+    let id = normalizeRouteId(rawId);
     if (!document.getElementById(id)) id = 'home';
-    screens.forEach(screen => {
+    const screens = [...document.querySelectorAll('#app > .screen')];
+    for (const screen of screens) {
       const active = screen.id === id;
       screen.classList.toggle('active', active);
       screen.setAttribute('aria-hidden', String(!active));
-    });
-
-    resetOrbMenu('route-commit');
-    document.body.dataset.screen = id;
-    setCurrent(id);
-    window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
-
-    const current = location.hash.slice(1) || 'home';
-    if (push && current !== id) history.pushState({ screen: id }, '', id === 'home' ? './' : `#${id}`);
-    lastSyncedLocation = `${location.pathname}${location.search}${location.hash}`;
+      if ('inert' in screen) screen.inert = !active;
+    }
+    currentRoute = id;
+    body.dataset.screen = id;
+    html.dataset.world = id;
+    markCurrent(id);
+    if (push) {
+      const desired = id === 'home' ? `${location.pathname}${location.search}` : `${location.pathname}${location.search}#${id}`;
+      const current = `${location.pathname}${location.search}${location.hash}`;
+      if (current !== desired) history.pushState({ screen:id }, '', desired);
+    }
+    window.scrollTo({ top:0, left:0, behavior:'auto' });
+    document.dispatchEvent(new CustomEvent('divina:world-changed', { detail:{ id } }));
     return id;
   };
 
-  const go = async (requestedId, push = true) => {
-    const id = normalizeRouteId(requestedId);
-    const token = ++navigationToken;
+  const go = async (rawId, push = true) => {
+    const id = normalizeRouteId(rawId);
+    if (id === currentRoute && started) {
+      await closeOrbMenu({ restoreFocus:false });
+      return true;
+    }
+    const token = ++routeToken;
+    html.dataset.routePhase = ROUTE_PHASE.PREPARING;
     html.dataset.routePending = id;
-    document.dispatchEvent(new CustomEvent('divina:route-start', { detail: { id } }));
+    document.dispatchEvent(new CustomEvent('divina:route-start', { detail:{ id } }));
 
-    // A próxima página prepara em paralelo ao fechamento do Menu. A pessoa percebe uma passagem, não duas esperas.
-    const preparation = Promise.resolve().then(() => beforeEnter?.(id)).then(
-      () => ({ error: null }),
-      error => ({ error })
-    );
-    const menuClosure = menuState === MENU_STATE.CLOSED
-      ? Promise.resolve({ state: MENU_STATE.CLOSED, cancelled: false })
-      : transitionOrbMenu(false, { navigating: true });
+    const preparation = Promise.resolve().then(() => beforeEnter?.(id));
+    const menuTask = closeOrbMenu({ restoreFocus:false });
+    try {
+      await Promise.all([preparation, menuTask]);
+    } catch (error) {
+      if (token !== routeToken) return false;
+      delete html.dataset.routePending;
+      html.dataset.routePhase = ROUTE_PHASE.IDLE;
+      document.dispatchEvent(new CustomEvent('divina:route-error', { detail:{ id, error, recoverable:true } }));
+      return false;
+    }
+    if (token !== routeToken) return false;
 
-    const [{ error }] = await Promise.all([preparation, menuClosure]);
-    if (token !== navigationToken) return false;
+    html.dataset.routePhase = ROUTE_PHASE.LEAVING;
+    veil.classList.add('is-active');
+    await pause(reducedMotion.matches ? 0 : 125);
+    if (token !== routeToken) return false;
 
     const committed = commit(id, push);
-    delete html.dataset.routePending;
-    document.dispatchEvent(new CustomEvent(error ? 'divina:route-error' : 'divina:route-ready', {
-      detail: { id: committed || id, recoverable: Boolean(error) }
-    }));
-    return !error;
-  };
-
-  // Uma única autoridade de roteamento para todos os data-go.
-  document.addEventListener('click', event => {
-    const target = event.target.closest('[data-go]');
-    if (!target) return;
-    event.preventDefault();
-    go(target.dataset.go).catch(() => {});
-  });
-
-  menuButton?.setAttribute('aria-controls', 'orbMenu');
-  setMenuControls(false);
-  menuButton?.addEventListener('click', event => {
-    event.preventDefault();
-    toggleOrbMenu().catch(() => {});
-  });
-
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && menuState !== MENU_STATE.CLOSED && menuState !== MENU_STATE.NAVIGATING) {
-      event.preventDefault();
-      closeOrbMenu(true).catch(() => {});
+    html.dataset.routePhase = ROUTE_PHASE.ENTERING;
+    document.dispatchEvent(new CustomEvent('divina:route-ready', { detail:{ id:committed } }));
+    requestAnimationFrame(() => veil.classList.remove('is-active'));
+    await pause(reducedMotion.matches ? 0 : 360);
+    if (token === routeToken) {
+      html.dataset.routePhase = ROUTE_PHASE.IDLE;
+      delete html.dataset.routePending;
     }
-  });
-
-  const syncFromLocation = () => {
-    const locationKey = `${location.pathname}${location.search}${location.hash}`;
-    if (locationKey === lastSyncedLocation || routeSyncQueued) return;
-    routeSyncQueued = true;
-    queueMicrotask(() => {
-      routeSyncQueued = false;
-      go(routeFromLocation(), false).catch(() => {});
-    });
+    return true;
   };
-  addEventListener('popstate', syncFromLocation);
-  addEventListener('hashchange', syncFromLocation);
 
-  reducedMotion.addEventListener?.('change', () => {
-    if (home?.classList.contains('orb-menu-transition')) finishMotion(motionToken, { navigating: menuState === MENU_STATE.NAVIGATING });
-  });
+  const setBeforeEnter = handler => { beforeEnter = typeof handler === 'function' ? handler : null; };
+
+  const onDocumentClick = event => {
+    const goTarget = event.target.closest?.('[data-go]');
+    if (goTarget) {
+      if (goTarget.tagName === 'A') event.preventDefault();
+      go(goTarget.dataset.go);
+      return;
+    }
+    if (event.target.closest?.('#menuBtn')) {
+      event.preventDefault();
+      toggleOrbMenu();
+    }
+  };
+
+  const onKeydown = event => {
+    if (event.key === 'Escape' && menuPhase !== MENU_PHASE.CLOSED) {
+      event.preventDefault();
+      closeOrbMenu();
+      return;
+    }
+    if (event.key !== 'Tab' || menuPhase !== MENU_PHASE.OPEN || !menu) return;
+    const items = focusables(menu);
+    if (!items.length) return;
+    const first = items[0], last = items[items.length - 1];
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  };
+
+  document.addEventListener('click', onDocumentClick);
+  document.addEventListener('keydown', onKeydown);
+  window.addEventListener('popstate', () => go(routeFromLocation(), false));
 
   const start = async () => {
     if (started) return true;
     started = true;
-    const raw = location.hash.slice(1) || 'home';
-    const id = routeFromLocation();
-    const ready = await go(id, false);
-    if (!isKnownRoute(raw) || raw !== id) {
-      history.replaceState({ screen: id }, '', id === 'home' ? './' : `#${id}`);
-      lastSyncedLocation = `${location.pathname}${location.search}${location.hash}`;
-    }
-    return ready;
+    setMenuInteractive(false);
+    setMenuButton(false);
+    const initial = normalizeRouteId(routeFromLocation());
+    html.dataset.routePhase = ROUTE_PHASE.PREPARING;
+    try { await beforeEnter?.(initial); } catch {}
+    commit(initial, false);
+    html.dataset.routePhase = ROUTE_PHASE.IDLE;
+    document.dispatchEvent(new CustomEvent('divina:route-ready', { detail:{ id:currentRoute, initial:true } }));
+    return true;
   };
 
-  const setBeforeEnter = handler => {
-    beforeEnter = typeof handler === 'function' ? handler : null;
-  };
-
-  const menuSnapshot = () => Object.freeze({
-    state: menuState,
-    targetOpen: menuTargetOpen,
-    routePending: html.dataset.routePending || null
+  return Object.freeze({
+    start,
+    go,
+    setBeforeEnter,
+    openOrbMenu,
+    closeOrbMenu,
+    toggleOrbMenu,
+    state: () => ({ route:currentRoute, menu:menuPhase })
   });
-
-  if (autoStart) start().catch(() => {});
-  return Object.freeze({ go, start, setBeforeEnter, openOrbMenu, closeOrbMenu, menuSnapshot, MENU_STATE });
 }

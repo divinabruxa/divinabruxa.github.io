@@ -1,161 +1,123 @@
-/* DIVINA BRUXA — APLICATIVO V208 · WORK7.0 · WHIT CORE V212 */
+/* DIVINA BRUXA 2.0 — REBIRTH R001 · BOOTSTRAP V300
+   Novo universo visual sobre os dados e conteúdos válidos já construídos. */
 
 import { CONFIG } from './config-v200.js?v=200';
-import { installRuntimeV12 } from './runtime-v12.js?v=152';
-import { createNavigation } from './navigation.js?v=180';
-import { orbMotionV207 } from './orb-motion-core-v207.js?v=207';
-import { RealityOrbEngine } from './orb-engine-v208.js?v=208';
-import { bindMiniOrbs } from './mini-orb-engine-v207.js?v=207';
+import { createNavigation } from './navigation.js?v=300';
+import { RealityOrbHeartV300 } from './orb-engine-v300.js?v=300';
 import { AuthClientV201 as AuthClient } from './auth-client-v201.js?v=201';
 import { AccountEngineV201 } from './account-engine-v201.js?v=201';
-import { installVisualGuard } from './visual-guard-v6.js?v=134';
-import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=201';
+import { createPageLoader } from './page-loader-v1.js?v=300';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
-import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
 import { installIndexPolicyV193 } from './seo-index-policy-v193.js?v=193';
 import { createWhitCoreV212 } from './whit-core-v212.js?v=212';
+import { createWhitPresenceV300 } from './whit-presence-v300.js?v=300';
 import './pwa-world-v201.js?v=201';
 
 const $ = selector => document.querySelector(selector);
 const safely = (label, task) => {
-  try {
-    return task();
-  } catch (error) {
-    console.error(`[Divina] camada opcional indisponível: ${label}`, error);
-    document.dispatchEvent(new CustomEvent('divina:optional-error', { detail: { label } }));
+  try { return task(); }
+  catch (error) {
+    console.error(`[Divina Rebirth] ${label}`, error);
+    document.dispatchEvent(new CustomEvent('divina:optional-error', { detail:{ label } }));
     return null;
   }
 };
-const toast = message => {
+
+function toast(message) {
   const element = $('#toast');
-  if (!element) {
-    console.info('[Divina] toast:', message);
-    return;
-  }
-  element.textContent = message;
+  if (!element) return;
+  element.textContent = String(message ?? '');
   element.classList.add('show');
   clearTimeout(toast.timer);
-  toast.timer = setTimeout(() => element.classList.remove('show'), 2400);
-};
+  toast.timer = setTimeout(() => element.classList.remove('show'), 2600);
+}
 
-safely('runtime visual', installRuntimeV12);
-const navigation = createNavigation();
-const { go } = navigation;
-safely('guarda visual', installVisualGuard);
-safely('experiência do Tarot', installTarotExperience);
-safely('mídia cósmica', installCosmicMedia);
-safely('métricas editoriais locais', () => bindEditorialMetrics(document.body));
-safely('política de indexação V193', installIndexPolicyV193);
+function installRebirthStyles() {
+  const existing = document.getElementById('divinaRebirthV300');
+  if (existing) return Promise.resolve(existing);
+  return new Promise((resolve, reject) => {
+    const link = document.createElement('link');
+    link.id = 'divinaRebirthV300';
+    link.rel = 'stylesheet';
+    link.href = 'divina-rebirth-v300.css?v=300';
+    link.onload = () => resolve(link);
+    link.onerror = () => reject(new Error('O universo visual V300 não carregou.'));
+    document.head.append(link);
+  });
+}
+
 addEventListener('orbe:toast', event => toast(event.detail));
+safely('métricas editoriais', () => bindEditorialMetrics(document.body));
+safely('política de indexação', installIndexPolicyV193);
 
 const authClient = new AuthClient(CONFIG);
 window.divinaAuth = authClient;
-window.divinaAccount = safely('Conta V201', () => new AccountEngineV201($('#login'), authClient));
+window.divinaAccount = safely('conta', () => new AccountEngineV201($('#login'), authClient));
 
-const whitCore = safely('Whit 2.0 Core V212', () => createWhitCoreV212({ authClient }));
-safely('presença local Whit V212', () => whitCore?.awaken());
-
-const miniOrbBinding = safely('Orbes auxiliares V207', bindMiniOrbs);
-
+const whitCore = safely('Whit Core', () => createWhitCoreV212({ authClient }));
+const navigation = createNavigation();
+const { go } = navigation;
 const loadingPortal = createOrbLoadingPortal();
-const pageLoader = createPageLoader({ config: CONFIG, go, authClient });
+const pageLoader = createPageLoader({ config:CONFIG, go, authClient });
 navigation.setBeforeEnter(pageLoader.prepare);
-const realityOrb = safely('motor da Orbe V208', () => new RealityOrbEngine($('#orbCanvas'), {
+
+const heart = safely('Orbe Coração V300', () => new RealityOrbHeartV300($('#orbCanvas'), {
   onOpen: () => pageLoader.go('tarot')
 }));
 
-const warmEssentialPortals = () => {
+const whitPresence = safely('Whit Presença V300', () => createWhitPresenceV300({ core:whitCore, go:pageLoader.go }));
+
+const warmWorlds = () => {
   const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
   if (connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType || '')) return;
-  pageLoader.warm(['tarot', 'daily']).catch?.(() => {});
+  pageLoader.warm(['tarot','daily']).catch?.(() => {});
 };
-addEventListener('load', () => {
-  if ('requestIdleCallback' in window) window.requestIdleCallback(warmEssentialPortals, { timeout: 2200 });
-  else setTimeout(warmEssentialPortals, 900);
-}, { once: true });
 
-addEventListener('divina:loading-bypass', () => {
-  toast('A página foi aberta enquanto o restante termina de carregar.');
-});
+addEventListener('load', () => {
+  if ('requestIdleCallback' in window) requestIdleCallback(warmWorlds, { timeout:2400 });
+  else setTimeout(warmWorlds, 1100);
+}, { once:true });
 
 navigator.serviceWorker?.addEventListener('message', event => {
   if (event.data?.type !== 'divina-notification-open') return;
   const target = String(event.data.target || '#home').replace(/^#/, '');
-  if (/^(home|daily|school|consultations|login|subscriptions|ai|music|videos|skins|notifications)$/.test(target)) pageLoader.go(target);
+  if (/^(home|tarot|daily|library|school|spreads|consultations|login|subscriptions|ai|music|videos|skins|notifications|journal|store)$/.test(target)) pageLoader.go(target);
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=208')
-      .then(() => console.info('[Divina] PWA registrado'))
-      .catch(error => console.error('[Divina] falha ao registrar PWA', error));
-  });
+  addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=208').catch(() => {}), { once:true });
 }
 
-const skinsHeading = document.querySelector('#skins h2');
-if (skinsHeading) skinsHeading.textContent = 'Trinta formas de sentir o universo.';
-
 window.divinaLoading = loadingPortal;
-window.orbe = { go: pageLoader.go, loadPage: pageLoader.load, loading: loadingPortal };
+window.orbe = { go:pageLoader.go, loadPage:pageLoader.load, loading:loadingPortal };
 window.whit = whitCore;
-window.divinaWhitV212 = Object.freeze({
-  version: 212,
-  core: whitCore,
-  status: () => whitCore?.status?.() || null,
-  generationEnabled: false,
-  paidApiEnabled: false,
-  solEnabled: false
+window.divinaWhit = Object.freeze({
+  version:300,
+  core:whitCore,
+  presence:whitPresence,
+  status:() => whitCore?.status?.() || null,
+  generationEnabled:false,
+  paidApiEnabled:false,
+  solEnabled:false
 });
-window.divinaOrbV208 = Object.freeze({
-  version: 208,
-  engine: realityOrb,
-  miniOrbs: miniOrbBinding,
-  snapshot: () => orbMotionV207.snapshot()
-});
+window.divinaOrb = Object.freeze({ version:300, engine:heart, snapshot:() => heart?.snapshot?.() || null });
+window.divinaRebirth = Object.freeze({ version:300, codename:'R001-UNIVERSO-VIVO' });
 
-const waitForCoreStyles = () => new Promise((resolve, reject) => {
-  const link = document.getElementById('divinaCoreStyles');
-  const verify = () => getComputedStyle(document.documentElement).getPropertyValue('--db-shell-v180').trim() === '1';
-  const finish = () => requestAnimationFrame(() => {
-    if (!verify()) {
-      reject(new Error('O núcleo visual V180 chegou incompleto.'));
-      return;
-    }
-    document.documentElement.dataset.coreStyles = 'v180';
-    resolve(link);
-  });
-  if (!link) {
-    reject(new Error('Folha crítica V180 ausente.'));
-    return;
-  }
-  if (link.sheet) {
-    finish();
-    return;
-  }
-  const timer = setTimeout(() => reject(new Error('Tempo esgotado ao carregar o núcleo visual V180.')), 15000);
-  link.addEventListener('load', () => {
-    clearTimeout(timer);
-    finish();
-  }, { once: true });
-  link.addEventListener('error', () => {
-    clearTimeout(timer);
-    reject(new Error('Falha ao carregar o núcleo visual V180.'));
-  }, { once: true });
-});
-
-const awaken = async () => {
+async function awaken() {
   try {
-    await waitForCoreStyles();
+    await installRebirthStyles();
     await navigation.start();
-    document.documentElement.dataset.appShell = 'v180';
-    dispatchEvent(new CustomEvent('divina:boot-ready', { detail: { shell: 'v180' } }));
+    whitPresence?.start?.();
+    document.documentElement.dataset.appShell = 'rebirth-v300';
+    document.documentElement.dataset.rebirth = '300';
+    dispatchEvent(new CustomEvent('divina:boot-ready', { detail:{ shell:'rebirth-v300' } }));
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
   } catch (error) {
-    document.documentElement.dataset.bootError = 'v180';
-    dispatchEvent(new CustomEvent('divina:boot-error', { detail: { recoverable: true } }));
-    console.error('[Divina] o núcleo protegido não despertou', error);
+    document.documentElement.dataset.bootError = 'rebirth-v300';
+    dispatchEvent(new CustomEvent('divina:boot-error', { detail:{ recoverable:true, version:300 } }));
+    console.error('[Divina Rebirth] O universo não despertou', error);
   }
-};
+}
+
 awaken();
