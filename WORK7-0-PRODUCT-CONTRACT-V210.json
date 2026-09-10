@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "work": "WORK7.0",
+  "product": "Divina Bruxa 2.0",
+  "universe": "Orbe das Realidades",
+  "version": 210,
+  "macroStage": "Menu 2.0 — Motor de Estado Reversível",
+  "baseline": {
+    "publishedApp": "app-v208.js",
+    "navigationPath": "navigation.js",
+    "navigationGitBlobSha": "d89ed775428c61cdc98966e30f0ad77f84a15ef3"
+  },
+  "candidate": {
+    "navigationSha256": "087a77dc86b0cc41015e0157d07e80ba89b15d298920f1533ea8590f62faceb4"
+  },
+  "sovereignRule": "Preservar 100% do visual aprovado; alterar somente a autoridade interna do Menu Mágico.",
+  "states": ["CLOSED", "OPENING", "OPEN", "REVERSING", "CLOSING", "NAVIGATING"],
+  "invariants": {
+    "visualCssChanged": false,
+    "menuGeometryChanged": false,
+    "orbShaderChanged": false,
+    "orbGestureEngineChanged": false,
+    "orbTextureAuthorityChanged": false,
+    "commercialTruthChanged": false,
+    "privateDataAccessAdded": false,
+    "oneRouteClickAuthority": true,
+    "latestNavigationIntentWins": true,
+    "routePreparationRunsInParallelWithMenuClose": true,
+    "infiniteLivingAnimationsDoNotBlockTransitionState": true
+  },
+  "tests": {
+    "syntax": "PASS",
+    "openCloseCycles": 100,
+    "immediateReversals": 100,
+    "navigationLatestIntentWins": "PASS",
+    "orbGestureHandlersAdded": 0,
+    "webglAccessAdded": 0,
+    "result": "PASS"
+  },
+  "delivery": {
+    "oneMacroStageAtATime": true,
+    "flatZip": true,
+    "onlyNewOrReplacedFiles": true,
+    "deleteLegacy": false,
+    "nextBlockedUntilInstalled": 211
+  }
+}

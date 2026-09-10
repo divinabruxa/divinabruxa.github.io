@@ -1,0 +1,39 @@
+DIVINA BRUXA 2.0 — WORK7.0 — V210
+MENU 2.0: MOTOR DE ESTADO REVERSÍVEL
+
+RESULTADO: PASS
+
+Arquivo runtime substituído:
+- navigation.js
+
+SHA-256 navigation.js:
+087a77dc86b0cc41015e0157d07e80ba89b15d298920f1533ea8590f62faceb4
+
+PROVAS EXECUTADAS
+- node --check navigation.js: PASS
+- 100 ciclos sequenciais OPEN -> CLOSE: PASS
+- 100 reversões imediatas OPENING -> CLOSING: PASS
+- navegação concorrente: última intenção vence: PASS
+- estado final após navegação: CLOSED: PASS
+- handlers de gesto da Orbe adicionados pela V210: 0
+- acesso WebGL adicionado pela V210: 0
+- CSS/geometry do Menu alterados: 0 arquivos
+- shader/Orbe V208/V209 alterados: 0 arquivos
+
+ESTADOS AUTORITATIVOS
+CLOSED -> OPENING -> OPEN
+OPEN/OPENING <-> REVERSING -> CLOSING -> CLOSED
+qualquer escolha de rota válida -> NAVIGATING -> CLOSED
+
+PROTEÇÃO DE VIDA CONTÍNUA
+Animações infinitas de respiração, aura e órbita não participam do gate de
+abertura/fechamento. Somente animações finitas são aguardadas; um watchdog
+único de segurança evita estado preso em navegadores com Animation.finished
+defeituoso.
+
+NOTA DE CACHE
+O app publicado importa navigation.js com query histórica. O Service Worker
+existente pode entregar a cópia anterior em um primeiro carregamento e
+revalidar em segundo plano. Se isso ocorrer depois do upload, uma nova abertura
+da página já utiliza o arquivo atualizado. Nenhuma alteração destrutiva no SW
+foi feita nesta macroetapa.
