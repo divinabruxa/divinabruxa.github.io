@@ -163,7 +163,7 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
 
   const loaders = Object.freeze({
     tarot: async () => {
-      const { FreeTarot } = await import('./tarot-engine.js?v=182');
+      const { FreeTarot } = await import('./tarot-engine-v214.js?v=214');
       return new FreeTarot($('#tarot'));
     },
     daily: async () => {
@@ -232,7 +232,7 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
   });
 
   const warmers = Object.freeze({
-    tarot: () => import('./tarot-engine.js?v=182'),
+    tarot: () => import('./tarot-engine-v214.js?v=214'),
     consultations: () => Promise.all([
       import('./commerce-engine.js?v=148'),
       import('./consultation-engine.js?v=188')
