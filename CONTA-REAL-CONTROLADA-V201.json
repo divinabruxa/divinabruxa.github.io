@@ -1,0 +1,58 @@
+{
+  "version": 201,
+  "release": "conta-real-controlada",
+  "environment": "staging",
+  "account": {
+    "register": true,
+    "email_confirmation": true,
+    "login": true,
+    "logout_local": true,
+    "logout_global": true,
+    "password_recovery": true,
+    "password_change_requires_current_password": true,
+    "other_sessions_revoked_after_password_change": true,
+    "self_service_export": true,
+    "self_service_delete": true
+  },
+  "continuity": {
+    "daily_card": true,
+    "school": true,
+    "favorites": true,
+    "active_skin": true,
+    "entitlements": true,
+    "purchases_read_only": true,
+    "journal_cloud_default": false,
+    "journal_requires_explicit_opt_in": true,
+    "local_account_separation": true
+  },
+  "security": {
+    "session_storage_only": true,
+    "active_session_verified_server_side": true,
+    "email_verified_required": true,
+    "account_states": ["active", "suspended", "deletion_pending"],
+    "cross_account_access": false,
+    "rls_restrictive_policy_tables": 25,
+    "deletion_tombstone": "sha256-user-id-no-pii",
+    "owner_admin_mfa": "required-aal2",
+    "user_metadata_used_for_authorization": false,
+    "critical_states_locales": ["pt", "en", "es"]
+  },
+  "supabase": {
+    "project": "divina-bruxa-staging",
+    "project_ref": "kyphdsamyygavmkzyezr",
+    "main_migration": "prepared-awaiting-explicit-remote-authorization",
+    "legacy_rls_advisory": "prepared-separate-awaiting-explicit-decision",
+    "auth_users_observed": 0,
+    "active_admin_owners_observed": 0,
+    "real_email_flow_executed": false,
+    "owner_mfa_flow_executed": false
+  },
+  "preserved": {
+    "home": ["localized_orb_title", "living_orb"],
+    "prices_brl": [250, 150, 100, 50],
+    "real_billing": false,
+    "production_publish": false,
+    "resend_call": false,
+    "orbe_ai_sol": false
+  }
+}

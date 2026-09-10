@@ -1,0 +1,57 @@
+{
+  "version": 201,
+  "release": "plano-supremo-2.0-macroetapa-3-conta-real-controlada",
+  "base_required": "V200 instalada",
+  "date": "2026-09-09",
+  "environment": "staging",
+  "delivery": {
+    "type": "flat-delta",
+    "directories_inside_zip": 0,
+    "delete_existing_files": false,
+    "files": [
+      "00-LEIA-PRIMEIRO-V201-CONTA-REAL-CONTROLADA.txt",
+      "ARQUIVOS-V201-SHA256.txt",
+      "CONTA-REAL-CONTROLADA-V201.json",
+      "EVIDENCIA-QA-V201.json",
+      "MANIFESTO-V201-CONTA-REAL-CONTROLADA.json",
+      "QA-V201-CONTA-REAL-CONTROLADA.mjs",
+      "SUPABASE-ADVISORY-RLS-LEGACY-V201-REVIEW.sql",
+      "SUPABASE-CONTA-CONTROLADA-STAGING-V201.sql",
+      "account-engine-v201.js",
+      "account-secure-v201.css",
+      "account-state-copy-v201.js",
+      "app-v201.js",
+      "auth-client-v201.js",
+      "index.html",
+      "page-loader-v1.js",
+      "pwa-world-v201.js",
+      "skins-v201.js",
+      "sw.js"
+    ]
+  },
+  "scope": {
+    "account_runtime_changed": true,
+    "account_database_prepared": true,
+    "skin_preference_sync_changed": true,
+    "orb_engine_changed": false,
+    "mini_orb_changed": false,
+    "menu_changed": false,
+    "tarot_changed": false,
+    "home_content_changed": false,
+    "prices_changed": false
+  },
+  "release_blocks": {
+    "production_publish": false,
+    "dns_change": false,
+    "real_billing": false,
+    "stripe_objects": false,
+    "resend_call": false,
+    "personal_account_creation": false,
+    "store_submission": false,
+    "orbe_ai_sol": false
+  },
+  "remote_decisions": {
+    "main_v201_migration": "pending",
+    "legacy_billing_guard_rls": "pending-separate-approval"
+  }
+}

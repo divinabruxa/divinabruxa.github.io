@@ -1,0 +1,47 @@
+DIVINA BRUXA — V201 — CONTA REAL CONTROLADA
+
+BASE OBRIGATÓRIA
+- Instale somente sobre a V200 já instalada.
+- Envie os arquivos deste ZIP para a raiz do repositório.
+- Substitua os arquivos com o mesmo nome.
+- Não apague nenhum outro arquivo.
+
+O QUE ESTA VERSÃO FAZ
+- Mantém cadastro, confirmação de e-mail, login, recuperação e exclusão da conta.
+- Adiciona troca de senha com confirmação da senha atual.
+- Adiciona “Sair de todos os aparelhos”, além de sair somente do aparelho atual.
+- Separa com segurança o conteúdo local quando a sessão expira ou a conta é suspensa.
+- Sincroniza a skin ativa da Orbe entre aparelhos, respeitando benefícios do servidor.
+- Mantém Escola, favoritos, Carta do Dia, compras e benefícios ligados à conta.
+- Mantém o Diário local por padrão; nuvem somente após consentimento explícito.
+- Acrescenta estados críticos em português, inglês e espanhol e aviso de conexão lenta.
+- Prepara ciclo de vida server-authoritative, tombstone sem PII e RLS restritiva no Supabase STAGING.
+
+HOME E NÚCLEO CONGELADO
+- A Home continua mostrando somente o título localizado e a Orbe viva.
+- Motor da Orbe, mini-Orbe, menu, duplo toque e Tarot não foram alterados.
+- Tarot Livre continua com 78 cartas diretas, sem repetição, sem significados e Mesa Real 13x6.
+
+VERDADE COMERCIAL PRESERVADA
+- Consultas: R$250, R$150, R$100 e R$50.
+- Premium vitalício: R$199,90, sem IA e com as 30 skins.
+- Orbe IA: R$89,90/mês com 400 créditos.
+- Créditos extras: 200/R$39,90; 600/R$99,90; 1.500/R$199,90.
+- Luna: 1 crédito; Terra: 10 créditos; Sol: desligada.
+
+SUPABASE STAGING
+- SUPABASE-CONTA-CONTROLADA-STAGING-V201.sql contém a migração principal da V201.
+- SUPABASE-ADVISORY-RLS-LEGACY-V201-REVIEW.sql é uma correção de segurança separada para revisão humana.
+- Nenhum dos dois arquivos deve ser executado em produção.
+- O arquivo de advisory NÃO deve ser executado sem autorização explícita da proprietária.
+
+BLOQUEIOS PRESERVADOS
+- Cobrança real: DESLIGADA.
+- Checkout Stripe: NÃO CRIADO.
+- Produção e DNS: NÃO ALTERADOS.
+- Orbe IA Sol: DESLIGADA.
+- Resend: NÃO CHAMADO.
+- Nenhuma conta pessoal foi criada por esta entrega.
+
+PRIMEIRO CARREGAMENTO
+- Abra o site conectado à internet após instalar, para o Service Worker V201 renovar o cache.

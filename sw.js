@@ -1,10 +1,10 @@
-/* DIVINA BRUXA — SERVICE WORKER V200 · VERDADE COMERCIAL ÚNICA */
-const VERSION = 200;
+/* DIVINA BRUXA — SERVICE WORKER V201 · CONTA REAL CONTROLADA */
+const VERSION = 201;
 const OWNED_PREFIX = 'divina-bruxa-';
-const SHELL_CACHE = 'divina-bruxa-v200-shell';
-const CONTENT_CACHE = 'divina-bruxa-v200-content';
-const IMAGE_CACHE = 'divina-bruxa-v200-images';
-const TAROT_CACHE = 'divina-bruxa-v200-tarot-offline';
+const SHELL_CACHE = 'divina-bruxa-v201-shell';
+const CONTENT_CACHE = 'divina-bruxa-v201-content';
+const IMAGE_CACHE = 'divina-bruxa-v201-images';
+const TAROT_CACHE = 'divina-bruxa-v201-tarot-offline';
 const ACTIVE_CACHES = new Set([SHELL_CACHE, CONTENT_CACHE, IMAGE_CACHE, TAROT_CACHE]);
 
 const REQUIRED_SHELL = Object.freeze([
@@ -15,7 +15,7 @@ const REQUIRED_SHELL = Object.freeze([
   './offline-es.html',
   './manifest.webmanifest',
   './pwa-world-v196.css',
-  './pwa-world-v200.js',
+  './pwa-world-v201.js',
   './performance-world-v196.js',
   './privacy-center-v9.js',
   './fallback-shell-v1.css',
@@ -28,7 +28,7 @@ const REQUIRED_SHELL = Object.freeze([
 ]);
 
 const WARM_SHELL = Object.freeze([
-  './app-v200.js',
+  './app-v201.js',
   './navigation.js',
   './route-registry-v180.js',
   './page-loader-v1.js',
@@ -44,7 +44,7 @@ const WARM_SHELL = Object.freeze([
   './skin-registry-v12.js',
   './skin-universal-v10.js',
   './skin-catalog-v6.js',
-  './skins-v191.js',
+  './skins-v201.js',
   './premium-policy-v191.js',
   './ai-policy.js',
   './config.js',
@@ -62,8 +62,9 @@ const WARM_SHELL = Object.freeze([
   './store-engine.js',
   './store-policy.js',
   './auth-client-v6.js',
-  './auth-client-v189.js',
-  './account-engine-v189.js',
+  './auth-client-v201.js',
+  './account-engine-v201.js',
+  './account-state-copy-v201.js',
   './international-v195.css',
   './international-home-v195.js',
   './international-tarot-v195.js',
@@ -76,7 +77,7 @@ const WARM_SHELL = Object.freeze([
   './escola-definitiva-v186.css',
   './diario-definitivo-v187.css',
   './consultations-definitive-v188.css',
-  './account-secure-v189.css',
+  './account-secure-v201.css',
   './orbe-ai-governada-v190.css',
   './premium-billing-v191.css',
   './editorial-universe-v192.css',
@@ -267,7 +268,7 @@ const appShellIsValid = async (url, response) => {
   return html.length > 1024
     && /id=["']app["']/.test(html)
     && /id=["']home["']/.test(html)
-    && /app-v200\.js\?v=200/.test(html)
+    && /app-v201\.js\?v=201/.test(html)
     && /home-orb-absolute-v199\.css\?v=199/.test(html);
 };
 

@@ -216,8 +216,8 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
       return new PremiumEngineV191($('#subscriptionApp'));
     },
     skins: async () => {
-      const { SkinsEngineV191 } = await import('./skins-v191.js?v=191');
-      return new SkinsEngineV191($('#skinsApp'));
+      const { SkinsEngineV201 } = await import('./skins-v201.js?v=201');
+      return new SkinsEngineV201($('#skinsApp'));
     },
     videos: ensureMedia,
     music: ensureMedia,

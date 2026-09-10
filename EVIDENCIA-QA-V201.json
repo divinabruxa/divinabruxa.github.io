@@ -1,0 +1,76 @@
+{
+  "project": "Divina Bruxa",
+  "version": 201,
+  "suite": "Plano Supremo 2.0 - Macroetapa 3 - Conta Real Controlada",
+  "generated_at": "2026-09-09T23:35:20.340Z",
+  "total": 347,
+  "passed": 347,
+  "failed": 0,
+  "gate": {
+    "p0": 0,
+    "p1": 0,
+    "package_approved": true
+  },
+  "account": {
+    "flows": 10,
+    "sync_surfaces": 7,
+    "lifecycle_states": 3,
+    "rls_tables": 25,
+    "critical_locales": 3
+  },
+  "runtime": {
+    "entrypoint": "app-v201.js?v=201",
+    "cache_generation": 201,
+    "eager_import_cycles": 0
+  },
+  "home": {
+    "visible": [
+      "localized_orb_title",
+      "living_orb"
+    ],
+    "changed": false,
+    "sha256": "31bfd1ab0460e3367cd0e88dfeea03b5638ef33f996bb1351a0557ed5537bea1"
+  },
+  "commercial": {
+    "consultations_brl": [
+      250,
+      150,
+      100,
+      50
+    ],
+    "real_billing": false
+  },
+  "staging": {
+    "project_ref": "kyphdsamyygavmkzyezr",
+    "main_migration": "prepared-awaiting-explicit-remote-authorization",
+    "legacy_rls_advisory": "prepared-separate-awaiting-explicit-decision",
+    "auth_users_observed": 0,
+    "active_admin_owners_observed": 0,
+    "real_email_flow_executed": false,
+    "owner_mfa_flow_executed": false
+  },
+  "frozen_hashes": {
+    "orb-engine-v68.js": "3f8a1c87c558194901089f96f96059b066c7dde8bf33475816ceaca74b9a369f",
+    "mini-orb-engine.js": "26d46580f7465139ac54b9953eaa6d0488e3a89c0bee9c7f2d0fbbaa27b91916",
+    "menu-completo-v177.js": "f8c010d779844cecd24a1fa66acbefa2b3e78715e329e961496ed0954a921b64",
+    "tarot-engine.js": "2abf5a31f1a9f219074e03fe4a7052c60fed598df5fb07c4502bf8f5e8eaf92e",
+    "tarot-data.js": "18e5a1a3bcecf27fdb9c14c44c964a61f6eacfadc2f52ccaa76f0cbf60ee7cc3"
+  },
+  "external_actions": {
+    "production": false,
+    "dns": false,
+    "real_billing": false,
+    "stripe": false,
+    "resend": false,
+    "personal_account_creation": false,
+    "stores": false,
+    "sol": false
+  },
+  "warnings": [
+    "A migração principal V201 e a correção RLS legada permanecem decisões remotas separadas até autorização explícita.",
+    "O STAGING observado não possui contas Auth nem proprietária Admin; e-mail real e MFA da proprietária não foram disparados.",
+    "Cobrança real, produção, DNS, Stripe, lojas, Resend e Orbe IA Sol continuam bloqueados.",
+    "O primeiro carregamento após instalar a V201 precisa estar online para renovar o cache."
+  ],
+  "failures": []
+}
