@@ -1,0 +1,54 @@
+/* DIVINA BRUXA — TIRAGENS 2.0 V213 · CAMADA VISUAL ADITIVA */
+#spreads .spread-reading.v213,
+#spreads .spread-premium.v213,
+#spreads .spread-history-panel.v213,
+#spreads .spread-config-panel.v213{position:relative;isolation:isolate}
+#spreads .spread-reading.v213::before{content:"";position:absolute;z-index:-1;inset:-18px -12px auto;height:220px;pointer-events:none;background:radial-gradient(ellipse at 50% 0,rgba(153,91,222,.12),transparent 68%);filter:blur(8px)}
+#spreads .spread-layout-note{display:flex;align-items:center;justify-content:space-between;gap:.7rem;margin:.75rem 0;padding:.72rem .85rem;border:1px solid rgba(232,198,122,.22);border-radius:15px;background:linear-gradient(135deg,rgba(77,37,102,.16),rgba(8,4,16,.72));color:#bbaec3}
+#spreads .spread-layout-note b{color:#efd18a;font-size:.64rem;letter-spacing:.12em;white-space:nowrap}
+#spreads .spread-layout-note span{font-size:.7rem;line-height:1.45;text-align:right}
+#spreads .spread-cloud-status{display:inline-flex;align-items:center;gap:.35rem;min-height:26px;margin-top:.35rem;padding:.25rem .55rem;border:1px solid rgba(211,184,124,.18);border-radius:999px;color:#a99daf;background:rgba(7,3,14,.52);font-size:.62rem}
+#spreads .spread-cloud-status::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;box-shadow:0 0 9px currentColor}
+#spreads .spread-cloud-status[data-state="saved"]{color:#a9d7c3;border-color:rgba(124,207,169,.25)}
+#spreads .spread-cloud-status[data-state="saving"]{color:#edd18d;border-color:rgba(237,209,141,.25)}
+#spreads .spread-map-celtic-cross{display:grid!important;grid-template-columns:repeat(6,minmax(112px,1fr));grid-template-rows:repeat(5,auto);gap:.65rem;align-items:center;overflow-x:auto;padding:.55rem .35rem 1rem;scrollbar-width:thin;scroll-snap-type:x proximity}
+#spreads .spread-map-celtic-cross .spread-position-slot{min-width:112px;scroll-snap-align:center}
+#spreads .spread-map-celtic-cross .spread-position-slot:nth-child(1){grid-column:2;grid-row:3}
+#spreads .spread-map-celtic-cross .spread-position-slot:nth-child(2){grid-column:2;grid-row:3;transform:translate(42%,-8%) rotate(3deg);z-index:2}
+#spreads .spread-map-celtic-cross .spread-position-slot:nth-child(3){grid-column:2;grid-row:5}
+#spreads .spread-map-celtic-cross .spread-position-slot:nth-child(4){grid-column:1;grid-row:3}
+#spreads .spread-map-celtic-cross .spread-position-slot:nth-child(5){grid-column:2;grid-row:1}
+#spreads .spread-map-celtic-cross .spread-position-slot:nth-child(6){grid-column:3;grid-row:3}
+#spreads .spread-map-celtic-cross .spread-position-slot:nth-child(7){grid-column:5;grid-row:5}
+#spreads .spread-map-celtic-cross .spread-position-slot:nth-child(8){grid-column:5;grid-row:4}
+#spreads .spread-map-celtic-cross .spread-position-slot:nth-child(9){grid-column:5;grid-row:2}
+#spreads .spread-map-celtic-cross .spread-position-slot:nth-child(10){grid-column:5;grid-row:1}
+#spreads .spread-reading.is-royal .spread-map-royal-table{display:grid!important;grid-template-columns:repeat(13,minmax(74px,1fr));grid-template-rows:repeat(6,auto);grid-auto-flow:row;gap:.38rem;width:max-content;min-width:100%;overflow:visible;padding:.5rem}
+#spreads .spread-reading.is-royal .spread-map-royal-table::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 50%,rgba(150,84,220,.05),transparent 55%)}
+#spreads .spread-reading.is-royal .spread-map-royal-table .royal-slot{width:74px;min-width:74px;min-height:120px;padding:.3rem;border-radius:10px;contain:layout paint style}
+#spreads .spread-reading.is-royal .spread-map-royal-table .spread-position-label{gap:.12rem;font-size:.5rem}
+#spreads .spread-reading.is-royal .spread-map-royal-table .spread-position-label b{font-size:.52rem}
+#spreads .spread-reading.is-royal .spread-map-royal-table .spread-position-label em{font-style:normal;color:#9e8ca8}
+#spreads .spread-reading.is-royal .spread-map-royal-table .spread-position-card{min-height:72px}
+#spreads .spread-reading.is-royal .spread-map-royal-table .spread-position-card img{width:100%;height:auto;object-fit:cover}
+#spreads .spread-reading.is-royal .spread-map-royal-table .royal-slot>strong{display:block;max-width:100%;overflow:hidden;color:#ead8ed;font-size:.48rem;text-overflow:ellipsis;white-space:nowrap}
+#spreads .spread-reading.is-royal .spread-map-royal-table .royal-slot>small{font-size:.42rem}
+#spreads .spread-reading.is-royal .spread-map{margin-inline:calc(clamp(0px,2vw,12px) * -1);max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+#spreads .spread-reading.is-royal .royal-slot:nth-child(13n+1){scroll-snap-align:start}
+#spreads .spread-whit-consent{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.8rem;margin-top:1rem;padding:1rem;border:1px solid rgba(225,191,112,.38);border-radius:20px;background:radial-gradient(circle at 0 0,rgba(138,70,197,.18),transparent 36%),rgba(8,4,16,.94);box-shadow:0 18px 55px rgba(0,0,0,.24)}
+#spreads .spread-whit-consent>span{display:grid;place-items:center;width:42px;height:42px;border:1px solid rgba(238,204,128,.35);border-radius:50%;color:#efd18a;box-shadow:0 0 24px rgba(169,100,231,.16)}
+#spreads .spread-whit-consent h3{margin:.12rem 0 .45rem;color:#fff4e3;font:500 clamp(1.15rem,3.8vw,1.55rem)/1.15 Georgia,serif}
+#spreads .spread-whit-consent p{margin:0;color:#c9bbcf;font-size:.78rem;line-height:1.55}
+#spreads .spread-whit-consent small{display:block;margin-top:.5rem;color:#9f92a5;font-size:.66rem;line-height:1.45}
+#spreads .spread-whit-consent .spread-actions{grid-column:1/-1;margin-top:.15rem}
+#spreads .spread-royal-preview.v213{display:grid!important;grid-template-columns:repeat(13,minmax(18px,1fr))!important;grid-template-rows:repeat(6,1fr);gap:3px;position:relative;min-height:210px;padding:.75rem;overflow:hidden;border:1px solid rgba(233,198,119,.2);border-radius:20px;background:radial-gradient(circle at 50% 50%,rgba(128,58,178,.17),transparent 55%),rgba(6,3,12,.8)}
+#spreads .spread-royal-preview.v213 i{display:grid;place-items:center;min-width:0;border:1px solid rgba(233,198,119,.12);border-radius:4px;background:linear-gradient(145deg,rgba(95,48,124,.34),rgba(11,5,20,.86))}
+#spreads .spread-royal-preview.v213 i span{color:#887d8e;font:500 .42rem/1 system-ui,sans-serif}
+#spreads .spread-royal-preview.v213>strong{position:absolute;inset:50% auto auto 50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:.5rem;min-width:max-content;padding:.65rem .85rem;border:1px solid rgba(236,202,126,.4);border-radius:999px;background:rgba(9,4,17,.92);color:#efd18a;font-size:.62rem;letter-spacing:.1em;box-shadow:0 0 35px rgba(124,62,185,.25)}
+#spreads .spread-reading.v213 .spread-position-slot.born{animation:spread-v213-arrive .48s cubic-bezier(.2,.8,.2,1) both}
+#spreads .spread-reading.v213 .spread-orb{isolation:isolate;box-shadow:0 0 0 1px rgba(238,204,128,.12),0 0 44px rgba(135,68,202,.18)}
+#spreads .spread-reading.v213 .spread-orb::before{content:"";position:absolute;z-index:-1;inset:-20%;border-radius:50%;background:conic-gradient(from 0deg,transparent,rgba(199,137,242,.13),transparent 35%,rgba(237,202,121,.12),transparent 70%);animation:spread-v213-orbit 8s linear infinite}
+@keyframes spread-v213-arrive{0%{opacity:.15;transform:translateY(12px) scale(.94);filter:blur(5px)}100%{opacity:1;transform:none;filter:none}}
+@keyframes spread-v213-orbit{to{transform:rotate(1turn)}}
+@media(max-width:760px){#spreads .spread-layout-note{align-items:flex-start;flex-direction:column}#spreads .spread-layout-note span{text-align:left}#spreads .spread-map-celtic-cross{grid-template-columns:repeat(6,minmax(96px,1fr));gap:.5rem}#spreads .spread-map-celtic-cross .spread-position-slot{min-width:96px}#spreads .spread-map-celtic-cross .spread-position-slot:nth-child(2){transform:translate(34%,-6%) rotate(2deg)}#spreads .spread-reading.is-royal .spread-map-royal-table{grid-template-columns:repeat(13,68px)}#spreads .spread-reading.is-royal .spread-map-royal-table .royal-slot{width:68px;min-width:68px;min-height:108px}#spreads .spread-whit-consent{grid-template-columns:1fr}#spreads .spread-whit-consent>span{width:36px;height:36px}#spreads .spread-whit-consent .spread-actions{grid-column:auto}}
+@media(prefers-reduced-motion:reduce){#spreads .spread-reading.v213 .spread-position-slot.born{animation:none}#spreads .spread-reading.v213 .spread-orb::before{animation:none}}
