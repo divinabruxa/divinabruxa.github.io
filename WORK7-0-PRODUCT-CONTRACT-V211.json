@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "work": "WORK7.0",
+  "product": "Divina Bruxa 2.0",
+  "candidate": 211,
+  "baseline": 210,
+  "macroStage": "Menu 2.0 — Precisão, Acessibilidade e Fechamento Definitivo",
+  "sovereignRule": "Preservar integralmente geometria, visual, Orbe e máquina reversível V210; mudar somente precisão de interação e acessibilidade do Menu.",
+  "statesPreserved": ["CLOSED", "OPENING", "OPEN", "REVERSING", "CLOSING", "NAVIGATING"],
+  "requirements": {
+    "backgroundInertWhileMenuActive": true,
+    "orbCannotReceiveCompetingInput": true,
+    "focusContained": true,
+    "focusEntryOnOpen": true,
+    "focusReturnDelegatedToV210": true,
+    "tabCycle": true,
+    "arrowNavigation": true,
+    "homeEndNavigation": true,
+    "escapePreserved": true,
+    "reducedMotionPreserved": true,
+    "safeAreasVisualGeometryPreserved": true,
+    "zoom200NoVisualRedesign": true,
+    "screenReaderSemanticsPreserved": true
+  },
+  "forbidden": [
+    "redesign",
+    "orb shader changes",
+    "orb gesture changes",
+    "route authority duplication",
+    "new billing",
+    "new AI calls",
+    "private data collection"
+  ],
+  "delivery": {
+    "oneMacroStageAtATime": true,
+    "flatZip": true,
+    "onlyNewOrReplacedFiles": true,
+    "next": 212
+  }
+}

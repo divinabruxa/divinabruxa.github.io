@@ -1,7 +1,10 @@
-/* DIVINA BRUXA V177 — ORDEM COMPLETA DOS ATALHOS DO MENU */
+/* DIVINA BRUXA V211 — MENU COMPLETO + PRECISÃO E ACESSIBILIDADE
+   A ordem/visual V177 permanece. V211 acrescenta somente a camada não visual de interação. */
+import { installMenuAccessibilityV211 } from './menu-accessibility-v211.js?v=211';
+
 const enhanceCompleteMenu = () => {
   const row = document.querySelector('.home-menu-portals');
-  if (!row || row.dataset.menuVersion === '177') return Boolean(row);
+  if (!row) return false;
 
   const order = ['videos', 'library', 'daily', 'store', 'journal', 'skins', 'subscriptions', 'notifications'];
   const labels = {
@@ -24,17 +27,18 @@ const enhanceCompleteMenu = () => {
     row.append(button);
   });
 
-  row.dataset.menuVersion = '177';
+  row.dataset.menuVersion = '211';
   row.setAttribute('aria-label', 'Atalhos essenciais da Orbe');
   return true;
 };
 
 const installCompleteMenu = () => {
-  if (enhanceCompleteMenu()) return;
+  if (enhanceCompleteMenu()) return true;
   requestAnimationFrame(() => {
     if (enhanceCompleteMenu()) return;
     setTimeout(enhanceCompleteMenu, 120);
   });
+  return false;
 };
 
 const installEditorialLinks = () => {
@@ -55,12 +59,14 @@ const installEditorialLinks = () => {
   return true;
 };
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    installCompleteMenu();
-    installEditorialLinks();
-  }, { once: true });
-} else {
+const installV211 = () => {
   installCompleteMenu();
   installEditorialLinks();
+  installMenuAccessibilityV211();
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', installV211, { once: true });
+} else {
+  installV211();
 }
