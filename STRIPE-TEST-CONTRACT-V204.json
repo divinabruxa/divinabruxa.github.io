@@ -1,0 +1,34 @@
+{
+  "release": "V204",
+  "name": "Stripe TEST real, sem cobrança verdadeira",
+  "api_version": "2026-07-29.dahlia",
+  "stripe_node_sdk": "22.4.0",
+  "environment": "staging",
+  "provider_mode": "test",
+  "checkout_surface": "stripe_hosted_checkout",
+  "dynamic_payment_methods": true,
+  "forbidden_parameters": ["payment_method_types"],
+  "integration_identifier": "divina-bruxa-v204-kqmwzjra",
+  "automatic_tax": {"enabled":false,"blocked_until":"revisão fiscal e registros ativos confirmados"},
+  "secrets": {
+    "required": ["STRIPE_RESTRICTED_KEY_TEST", "STRIPE_WEBHOOK_SECRET_TEST"],
+    "storage": "Supabase Edge Function secrets",
+    "source_or_browser": false,
+    "logging": false
+  },
+  "authority": {
+    "catalog": "server",
+    "price": "server",
+    "checkout": "server",
+    "webhook": "signed_raw_body",
+    "grant_entitlement": "V205 server-side ledger only",
+    "client_can_grant": false
+  },
+  "release_gates": {
+    "test_catalog_provisioning_authorized": false,
+    "test_checkout_authorized": false,
+    "webhook_processing_enabled": false,
+    "entitlement_dispatch_enabled": false,
+    "live_billing_authorized": false
+  }
+}

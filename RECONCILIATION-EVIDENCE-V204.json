@@ -1,0 +1,18 @@
+{
+  "release": "V204",
+  "generated_at": "2026-09-10T00:00:00Z",
+  "environment": "staging",
+  "status": "not_executed",
+  "reason": "Nenhuma operação remota Stripe TEST foi autorizada nesta geração do pacote.",
+  "stripe_objects_created": 0,
+  "checkout_sessions_completed": 0,
+  "real_charges": 0,
+  "test_charges": 0,
+  "webhook_events_received": 0,
+  "webhook_events_processed": 0,
+  "duplicate_effects": 0,
+  "entitlements_granted": 0,
+  "reconciliation_difference_brl_cents": null,
+  "acceptance_complete": false,
+  "next_controlled_action": "Autorizar provisionamento Stripe TEST no STAGING, aplicar a migração e implantar as Edge Functions."
+}

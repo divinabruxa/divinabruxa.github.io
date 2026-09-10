@@ -1,0 +1,41 @@
+{
+  "release": "V204",
+  "generated_at": "2026-09-10T00:00:00Z",
+  "status": "PASS_LOCAL",
+  "package_approved": true,
+  "qa": {"passed":258,"total":258,"failed":0,"p0":0,"p1":0},
+  "regression": {
+    "V201": "350/350 PASS",
+    "V202": "301/301 PASS",
+    "V203": "156/156 PASS",
+    "V199_and_V200_standalone": "superseded entrypoint/cache assertions are expected to fail after V201; current V201+ suites are authoritative"
+  },
+  "sql_trial": {
+    "target": "Supabase STAGING",
+    "method": "migration executed inside transaction ending in rollback",
+    "result": "PASS",
+    "smoke_assertions": ["gates_closed","catalog_price_19990","first_delivery","duplicate_delivery","persist_before_apply","no_entitlement_dispatch","out_of_order_ignored","reconciliation_zero"],
+    "persistent_v204_tables_after_rollback": 0,
+    "persistent_v204_functions_after_rollback": 0
+  },
+  "static_guarantees": {
+    "home_changed": false,
+    "orb_engine_changed": false,
+    "commercial_truth_v200_changed": false,
+    "stripe_live_key_present": false,
+    "stripe_test_secret_value_present": false,
+    "payment_method_types_present": false,
+    "automatic_tax_enabled": false,
+    "client_entitlement_grant": false,
+    "full_webhook_payload_persisted": false
+  },
+  "remote_execution": {
+    "stripe_test_objects_created": 0,
+    "stripe_connector_mutations": 0,
+    "supabase_v204_migration_applied": false,
+    "edge_functions_deployed": false,
+    "test_checkout_executed": false,
+    "reconciliation_zero_claimed": false,
+    "reason": "Exige autorização específica e contexto Stripe TEST; somente contexto livemode estava disponível durante o empacotamento."
+  }
+}

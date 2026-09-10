@@ -1,0 +1,46 @@
+{
+  "release": "V204",
+  "macro_stage": "Stripe TEST real, sem cobrança",
+  "date": "2026-09-10",
+  "base_required": "V203",
+  "home_changed": false,
+  "orb_changed": false,
+  "production_changed": false,
+  "remote_changes_performed": false,
+  "stripe_account_mutations_performed": false,
+  "supabase_remote_mutations_performed": false,
+  "billing_live_enabled": false,
+  "automatic_tax_enabled": false,
+  "entitlements_enabled": false,
+  "catalog": {
+    "currency": "BRL",
+    "products_test_ready_for_provisioning": 9,
+    "premium_lifetime_brl_cents": 19990,
+    "orbe_ai_monthly_brl_cents": 8990,
+    "orbe_ai_monthly_credits": 400,
+    "credit_packs": [[200,3990],[600,9990],[1500,19990]],
+    "consultations_brl_cents": [25000,15000,10000,5000],
+    "premium_includes_all_30_skins": true,
+    "individual_skin_price_tiers_brl_cents": [1990,2990,3990,4990],
+    "skin_pack_prices_brl_cents": [7990,9990,12990],
+    "individual_skin_stripe_objects_deferred_to": "V205"
+  },
+  "stripe": {
+    "api_version": "2026-07-29.dahlia",
+    "node_sdk": "22.4.0",
+    "checkout": "hosted",
+    "billing": "subscription",
+    "customer_portal": true,
+    "dynamic_payment_methods": true,
+    "webhook_signature_raw_body": true,
+    "events": 13,
+    "full_payload_persisted": false
+  },
+  "acceptance": {
+    "local_package": "approved_258_of_258",
+    "sql_transaction_trial": "passed_and_rolled_back",
+    "remote_e2e": "not_executed_requires_specific_authorization",
+    "reconciliation_zero": "not_claimed"
+  },
+  "next_release": "V205 — Ledger Universal de Direitos"
+}

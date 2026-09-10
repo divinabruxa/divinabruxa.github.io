@@ -1,0 +1,68 @@
+DIVINA BRUXA — V204 — STRIPE TEST REAL, SEM COBRANÇA VERDADEIRA
+
+O QUE ESTA MACROETAPA ENTREGA
+- Catálogo Stripe TEST derivado da verdade comercial V200.
+- Checkout hospedado para pagamentos únicos e assinatura mensal da Orbe IA.
+- Customer Portal em modo TESTE.
+- Webhook assinado, idempotente e resistente a duplicação e desordem.
+- Reconciliação de valores TESTE sem conceder qualquer direito.
+- Migração aditiva e Edge Functions prontas para implantação controlada.
+
+O QUE ESTE ZIP NÃO FAZ
+- Não cria Products/Prices automaticamente ao instalar arquivos.
+- Não aplica migração nem implanta funções remotamente.
+- Não executa compra, nem mesmo de teste.
+- Não ativa cobrança real, produção, DNS, e-mail ou lojas.
+- Não concede Premium, skins, assinatura ou créditos. Isso pertence à V205.
+- Não altera a Home nem a experiência visual da Orbe.
+
+ORDEM DE INSTALAÇÃO
+1. Instale a V202 se ainda não estiver instalada.
+2. Instale a V203 se ainda não estiver instalada.
+3. Instale este ZIP V204 por cima, mantendo os demais arquivos.
+
+INSTALAÇÃO DO ZIP
+- O ZIP é plano: extraia os arquivos diretamente na raiz do projeto.
+- Substitua somente arquivos com o mesmo nome.
+- Não apague nenhum arquivo antigo.
+
+PORTÕES INICIAIS, TODOS FECHADOS
+- test_catalog_provisioning_authorized=false
+- test_checkout_authorized=false
+- webhook_processing_enabled=false
+- entitlement_dispatch_enabled=false
+- live_billing_authorized=false
+- automatic_tax_enabled=false
+
+ATIVAÇÃO REMOTA
+Exige autorização específica posterior da proprietária para:
+1. aplicar a migração V204 no Supabase STAGING;
+2. guardar os segredos TESTE no cofre das Edge Functions;
+3. implantar as cinco funções V204;
+4. abrir temporariamente o provisionamento TESTE;
+5. criar Products/Prices TESTE;
+6. registrar o webhook TESTE e abrir processamento;
+7. abrir Checkout TESTE e executar a matriz de cartões de teste;
+8. reconciliar e voltar a fechar os portões ao terminar.
+
+SEGREDOS ESPERADOS NO SUPABASE STAGING
+- STRIPE_RESTRICTED_KEY_TEST: chave restrita exclusivamente TESTE.
+- STRIPE_WEBHOOK_SECRET_TEST: segredo de assinatura do endpoint TESTE.
+- PUBLIC_SITE_ORIGIN_STAGING: origem pública exata do STAGING.
+
+Nunca coloque esses valores em arquivos, navegador, analytics, captura de tela ou logs.
+
+FUNÇÕES
+- stripe-test-catalog-provision-v204: proprietária + sessão ativa + MFA/AAL2; JWT obrigatório.
+- stripe-checkout-v204: conta verificada e ativa; JWT obrigatório.
+- stripe-customer-portal-v204: conta verificada e ativa; JWT obrigatório.
+- stripe-reconcile-v204: proprietária + sessão ativa + MFA/AAL2; JWT obrigatório.
+- stripe-webhook-v204: JWT Supabase desligado somente porque valida a assinatura Stripe sobre o corpo bruto.
+
+ACEITE DESTA ENTREGA LOCAL
+- Código, contrato, catálogo e migração podem ser auditados e testados sem cobrança.
+- Aceite remoto ponta a ponta permanece PENDENTE até autorização e execução controlada.
+
+PRÓXIMA MACROETAPA
+V205 — Ledger Universal de Direitos: Premium vitalício, assinatura, créditos, 30 skins,
+compras individuais/pacotes, restauração, reembolso, revogação e chargeback com autoridade server-side.

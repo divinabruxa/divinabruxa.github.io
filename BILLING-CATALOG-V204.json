@@ -1,0 +1,32 @@
+{
+  "release": "V204",
+  "catalog_version": "commercial-2026-09-09-v200",
+  "environment": "staging",
+  "provider_mode": "test",
+  "currency": "brl",
+  "products": [
+    {"product_key":"premium_lifetime","name":"Divina Bruxa Premium","billing_mode":"payment","amount_brl_cents":19990,"active":true,"benefit":"premium_lifetime_all_30_skins","includes_ai":false},
+    {"product_key":"orbe_ai_monthly","name":"Orbe IA","billing_mode":"subscription","amount_brl_cents":8990,"interval":"month","credits_per_cycle":400,"active":true},
+    {"product_key":"credits_200","name":"Orbe IA · 200 créditos","billing_mode":"payment","amount_brl_cents":3990,"credits":200,"active":true},
+    {"product_key":"credits_600","name":"Orbe IA · 600 créditos","billing_mode":"payment","amount_brl_cents":9990,"credits":600,"active":true},
+    {"product_key":"credits_1500","name":"Orbe IA · 1.500 créditos","billing_mode":"payment","amount_brl_cents":19990,"credits":1500,"active":true},
+    {"product_key":"consultation_mesa_real","name":"Mesa Real Profissional","billing_mode":"payment","amount_brl_cents":25000,"active":true,"fulfillment":"manual_booking_confirmed_by_email"},
+    {"product_key":"consultation_leitura_mentes","name":"Leitura de Mentes","billing_mode":"payment","amount_brl_cents":15000,"active":true,"fulfillment":"manual_booking_confirmed_by_email"},
+    {"product_key":"consultation_carta_conselho","name":"Carta de Conselho","billing_mode":"payment","amount_brl_cents":10000,"active":true,"fulfillment":"manual_booking_confirmed_by_email"},
+    {"product_key":"consultation_pergunta_direta","name":"Pergunta Direta","billing_mode":"payment","amount_brl_cents":5000,"active":true,"fulfillment":"manual_booking_confirmed_by_email"}
+  ],
+  "skin_sales_policy": {
+    "premium_includes_all_30": true,
+    "individual_price_tiers_brl_cents": [1990, 2990, 3990, 4990],
+    "pack_prices_brl_cents": [7990, 9990, 12990],
+    "stripe_products_deferred_to": "V205",
+    "reason": "O ledger universal precisa existir antes de qualquer venda individual ou pacote para impedir direitos fantasmas."
+  },
+  "gates": {
+    "stripe_objects_created_by_package": false,
+    "checkout_enabled": false,
+    "entitlements_enabled": false,
+    "live_billing_enabled": false,
+    "automatic_tax_enabled": false
+  }
+}

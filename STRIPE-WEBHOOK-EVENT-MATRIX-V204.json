@@ -1,0 +1,27 @@
+{
+  "release": "V204",
+  "persist_before_effects": true,
+  "full_payload_persisted": false,
+  "events": [
+    {"type":"checkout.session.completed","result":"checkout_completed_or_pending","entitlement":"deferred_v205"},
+    {"type":"checkout.session.async_payment_succeeded","result":"payment_succeeded","entitlement":"deferred_v205"},
+    {"type":"checkout.session.async_payment_failed","result":"payment_failed","entitlement":"none"},
+    {"type":"payment_intent.succeeded","result":"payment_succeeded","entitlement":"deferred_v205"},
+    {"type":"payment_intent.payment_failed","result":"payment_failed","entitlement":"none"},
+    {"type":"customer.subscription.created","result":"subscription_state","entitlement":"deferred_v205"},
+    {"type":"customer.subscription.updated","result":"subscription_state","entitlement":"deferred_v205"},
+    {"type":"customer.subscription.deleted","result":"subscription_cancelled","entitlement":"deferred_v205"},
+    {"type":"invoice.paid","result":"renewal_paid","entitlement":"deferred_v205"},
+    {"type":"invoice.payment_failed","result":"renewal_failed","entitlement":"none"},
+    {"type":"charge.refunded","result":"refunded","entitlement":"revoke_in_v205"},
+    {"type":"charge.dispute.created","result":"disputed","entitlement":"freeze_in_v205"},
+    {"type":"charge.dispute.closed","result":"dispute_closed","entitlement":"reconcile_in_v205"}
+  ],
+  "ordering": {
+    "duplicate_key": "stripe_event_id",
+    "state_clock": "event.created",
+    "equal_clock_tiebreaker": "stripe_event_id",
+    "older_event": "persist_then_ignore_for_state",
+    "retry": "safe_and_idempotent"
+  }
+}
