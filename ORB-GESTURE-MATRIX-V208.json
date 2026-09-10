@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "release": 208,
+  "matrix": [
+    {
+      "gesture": "tap",
+      "input": "press and release within 720 ms and below movement threshold",
+      "visual": "localized pulse and release",
+      "navigationCount": 0,
+      "announcement": "A Orbe despertou — toque novamente para abrir"
+    },
+    {
+      "gesture": "double-tap",
+      "input": "two taps within 430 ms and radius 0.16",
+      "visual": "portal resonance",
+      "navigationCount": 1,
+      "destination": "tarot"
+    },
+    {
+      "gesture": "drag",
+      "input": "movement beyond normalized threshold 0.032",
+      "visual": "material follows measured velocity and pressure",
+      "navigationCount": 0
+    },
+    {
+      "gesture": "rotation",
+      "input": "angular movement outside the center dead zone",
+      "visual": "time-based internal spin",
+      "navigationCount": 0
+    },
+    {
+      "gesture": "hold",
+      "input": "press for at least 1188 ms without drag",
+      "visual": "energy and intention state",
+      "navigationCount": 0
+    },
+    {
+      "gesture": "cancel",
+      "input": "pointercancel, lost pointer capture, suspension or teardown",
+      "visual": "safe settle",
+      "navigationCount": 0
+    },
+    {
+      "gesture": "keyboard",
+      "input": "Enter or Space",
+      "visual": "touch and portal states",
+      "navigationCount": 1,
+      "destination": "tarot"
+    },
+    {
+      "gesture": "assistive-click",
+      "input": "trusted accessible click with detail 0",
+      "visual": "portal resonance",
+      "navigationCount": 1,
+      "destination": "tarot"
+    }
+  ],
+  "testBattery": {
+    "taps": 200,
+    "drags": 200,
+    "holds": 100,
+    "doubleTaps": 100,
+    "expectedPointerNavigationCount": 100,
+    "accidentalNavigationCount": 0,
+    "duplicateNavigationCount": 0
+  }
+}

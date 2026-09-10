@@ -1,0 +1,44 @@
+DIVINA BRUXA 2.0 — WORK7.0 — V208
+ORBE 2.0: TOQUE ORGÂNICO E NAVEGAÇÃO EXATA
+
+RESULTADO
+- A Orbe continua exatamente com a imagem, o shader, a escala, a posição e a identidade visual aprovadas.
+- A Home continua mostrando somente a Orbe viva no espaço central.
+- Toque, toque duplo, arraste, giro, segurar, cancelamento, teclado e tecnologia assistiva passam por uma única autoridade de intenção.
+- Um toque pulsa e não navega.
+- O toque duplo abre o Tarot Livre uma única vez.
+- Arrastar, girar e segurar respondem sem abrir rota por engano.
+- Um gesto cancelado nunca navega.
+- O movimento usa tempo real e a amostra mais recente de cada quadro.
+- O caminho quente do arraste não mede layout nem escreve CSS.
+- A Orbe usa o mesmo relógio visual compartilhado da V207; nenhum novo loop foi criado.
+- A web continua sem vibração. A futura ponte nativa permanece preservada.
+
+ARQUIVOS PARA INSTALAR
+
+Adicionar primeiro:
+- orb-gesture-core-v208.js
+- orb-engine-v208.js
+- app-v208.js
+
+Substituir por último:
+- index.html
+- sw.js
+
+Se o GitHub aceitar envio conjunto, os cinco arquivos podem ser enviados no mesmo commit.
+Não apague os arquivos V207. Não altere nem apague CNAME.
+
+DOCUMENTOS NOVOS DO WORK7.0
+- WORK7-0-DIAGNOSTICO-E-ORDEM-OFICIAL.md
+- WORK7-0-ESPECIFICACAO-MESTRA-DIVINA-BRUXA-2.0.md
+- WORK7-0-PRODUCT-CONTRACT-V208.json
+
+Os documentos registram a ordem V208–V226. Eles não ativam produção, cobrança, banco, IA paga, e-mail, DNS ou lojas.
+
+ROLLBACK
+Restaure somente index.html e sw.js da V207. Os três arquivos novos V208 podem permanecer na raiz porque ficarão inativos. Nenhum dado, preço, direito, carta, skin ou conteúdo precisa ser revertido.
+
+ESCOPO FECHADO
+Esta macroetapa conclui somente o toque orgânico e a navegação exata da Orbe.
+A V209 fará skins, recuperação WebGL, resiliência e fechamento definitivo da Orbe 2.0.
+O Menu 2.0 começa somente na V210.

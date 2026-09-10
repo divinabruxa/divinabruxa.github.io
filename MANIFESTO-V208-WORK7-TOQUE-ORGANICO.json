@@ -1,0 +1,56 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "work": "WORK7.0",
+  "release": 208,
+  "base": 207,
+  "date": "2026-09-10",
+  "status": "candidate",
+  "scope": "Orbe 2.0 — Toque Orgânico e Navegação Exata",
+  "runtimeFiles": {
+    "replaced": ["index.html", "sw.js"],
+    "new": ["orb-gesture-core-v208.js", "orb-engine-v208.js", "app-v208.js"]
+  },
+  "work7Files": [
+    "WORK7-0-DIAGNOSTICO-E-ORDEM-OFICIAL.md",
+    "WORK7-0-ESPECIFICACAO-MESTRA-DIVINA-BRUXA-2.0.md",
+    "WORK7-0-PRODUCT-CONTRACT-V208.json"
+  ],
+  "supportFiles": [
+    "00-LEIA-PRIMEIRO-V208-WORK7-TOQUE-ORGANICO.txt",
+    "ORB-GESTURE-CONTRACT-V208.json",
+    "ORB-GESTURE-MATRIX-V208.json",
+    "MANIFESTO-V208-WORK7-TOQUE-ORGANICO.json",
+    "QA-V208-WORK7-TOQUE-ORGANICO.mjs",
+    "EVIDENCIA-QA-V208.json",
+    "ARQUIVOS-V208-SHA256.txt"
+  ],
+  "protectedNotResent": [
+    "CNAME",
+    "home-orb-absolute-v206.css",
+    "orb-motion-core-v207.js",
+    "mini-orb-engine-v207.js",
+    "divina-shell-v180.css",
+    "navigation.js",
+    "menu-completo-v177.css",
+    "orb-skin-release-v1.js",
+    "divina-orb-fast-v1.webp",
+    "divina-orb-thumb-v1.webp",
+    "78 card images"
+  ],
+  "gestureBattery": {
+    "taps": 200,
+    "drags": 200,
+    "holds": 100,
+    "doubleTaps": 100,
+    "expectedPointerNavigations": 100,
+    "expectedAccidentalNavigations": 0
+  },
+  "visualRedesign": false,
+  "shaderChange": false,
+  "homeCompositionChange": false,
+  "databaseMutation": false,
+  "externalWrites": false,
+  "billingActivation": false,
+  "productionActivation": false,
+  "flatZipRequired": true
+}

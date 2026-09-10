@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "release": 208,
+  "work": "WORK7.0",
+  "name": "Orbe 2.0 — Toque Orgânico e Navegação Exata",
+  "visualChangeAuthorized": false,
+  "visualSourcesFrozen": [
+    "VERTEX_SHADER",
+    "FRAGMENT_SHADER",
+    "home-orb-absolute-v206.css",
+    "divina-orb-v68.png",
+    "divina-orb-fast-v1.webp",
+    "divina-orb-thumb-v1.webp"
+  ],
+  "gestureThresholds": {
+    "moveNormalized": 0.032,
+    "doubleTapRadiusNormalized": 0.16,
+    "doubleTapMilliseconds": 430,
+    "tapMaximumMilliseconds": 720,
+    "holdMilliseconds": 1188,
+    "maximumDeltaSeconds": 0.05
+  },
+  "outcomes": {
+    "tap": { "pulse": 1, "navigate": 0 },
+    "doubleTap": { "pulse": "portal", "navigate": 1, "destination": "tarot" },
+    "drag": { "materialResponse": true, "navigate": 0 },
+    "hold": { "intentionResponse": true, "navigate": 0 },
+    "cancel": { "settle": true, "navigate": 0 },
+    "keyboard": { "navigate": 1, "destination": "tarot", "syntheticClickSuppressed": true }
+  },
+  "hotPath": {
+    "pointerMoveLayoutReads": 0,
+    "pointerMoveCssWrites": 0,
+    "latestCoalescedSampleOnly": true,
+    "consumptionClock": "orb-motion-core-v207",
+    "independentAnimationFrames": 0,
+    "timeBasedVelocity": true
+  },
+  "containment": {
+    "touchAction": "none-on-orb-only",
+    "overscrollBehavior": "contain-on-orb-only",
+    "pageScrollOutsideOrb": true,
+    "restoreInlineStylesOnDestroy": true
+  },
+  "accessibility": {
+    "nativeButton": true,
+    "enter": true,
+    "space": true,
+    "assistiveSyntheticClick": true,
+    "reducedMotion": true,
+    "liveStatusNonVisual": true
+  },
+  "haptics": {
+    "webVibration": false,
+    "nativeBridgeOnly": true
+  },
+  "productionEffects": {
+    "billing": false,
+    "database": false,
+    "email": false,
+    "dns": false,
+    "deployment": false
+  }
+}

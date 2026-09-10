@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "work": "WORK7.0",
+  "product": "Divina Bruxa 2.0",
+  "universe": "Orbe das Realidades",
+  "date": "2026-09-10",
+  "installedBaseline": 207,
+  "candidate": 208,
+  "sovereignRule": "Preservar tudo que já está aprovado, sem redesenhar; evoluir motor, fluidez, profundidade e verdade.",
+  "home": {
+    "visibleCenter": ["living-orb"],
+    "preserve": ["header", "brand", "menu-button", "magic-menu", "dock", "accessible-name", "seo-metadata"],
+    "forbid": ["visible-title", "visible-subtitle", "visible-eyebrow", "visible-touch-hint", "editorial-cards", "prices"]
+  },
+  "tarotTruth": {
+    "cards": 78,
+    "reversed": false,
+    "freeTarotRepeatBeforeExhaustion": false,
+    "freeTarotMeanings": false,
+    "freeTarotColumns": 6,
+    "grandTableau": { "rows": 13, "columns": 6, "cards": 78 }
+  },
+  "commercialTruth": {
+    "currency": "BRL",
+    "premium": { "price": 199.90, "kind": "one-time", "includesAllSkins": true, "includesAI": false },
+    "ai": { "price": 89.90, "kind": "monthly", "credits": 400, "lunaCost": 1, "terraCost": 10, "solEnabled": false },
+    "extraCredits": [
+      { "credits": 200, "price": 39.90 },
+      { "credits": 600, "price": 99.90 },
+      { "credits": 1500, "price": 199.90 }
+    ],
+    "consultations": [
+      { "id": "mesa-real", "name": "Mesa Real", "price": 250 },
+      { "id": "leitura-de-mentes", "name": "Leitura de Mentes", "price": 150 },
+      { "id": "carta-de-conselho", "name": "Carta de Conselho", "price": 100 },
+      { "id": "pergunta", "name": "Pergunta", "price": 50 }
+    ],
+    "skinCount": 30,
+    "individualSkinSales": true,
+    "realBillingEnabled": false
+  },
+  "contentTruth": {
+    "spreadCount": 15,
+    "spreadFilterCount": 5,
+    "schoolModules": 17,
+    "cardLessons": 78,
+    "theoryLessons": 46,
+    "totalLessons": 124,
+    "storeItems": 21,
+    "musicAlbums": 2,
+    "publishedVideoEpisodes": 0,
+    "videoState": "pilot-in-preparation",
+    "notificationCategories": 10
+  },
+  "privacy": {
+    "journalPrivateByDefault": true,
+    "aiSilentPrivateAccess": false,
+    "privateTextInAnalytics": false,
+    "privateTextInAdmin": false,
+    "privateTextInUrls": false,
+    "contextConsent": "explicit-scoped-revocable",
+    "whitMemory": ["session", "saved-preference", "explicit-memory"],
+    "minimumAudienceAge": 18
+  },
+  "notifications": {
+    "categories": ["daily", "school", "consultations", "account-security", "billing", "ai", "music", "episodes", "skins", "marketing"],
+    "defaultQuietHours": { "from": "22:00", "to": "08:00", "timezone": "America/Sao_Paulo" },
+    "marketingOptIn": true,
+    "privateContentSegmentation": false
+  },
+  "environmentLocks": {
+    "productionPublishAuthorized": false,
+    "dnsChangesAuthorized": false,
+    "realBillingAuthorized": false,
+    "storeSubmissionAuthorized": false,
+    "orbeAiSolEnabled": false
+  },
+  "universalStates": ["loading", "ready", "empty-honest", "offline", "retryable-error", "auth-required", "locked", "syncing", "success", "maintenance"],
+  "releaseOrder": [
+    { "version": 208, "world": "orb", "scope": "organic-touch-exact-navigation" },
+    { "version": 209, "world": "orb", "scope": "skins-resilience-closure" },
+    { "version": 210, "world": "menu", "scope": "reversible-state-engine" },
+    { "version": 211, "world": "menu", "scope": "precision-accessibility-closure" },
+    { "version": 212, "world": "whit", "scope": "consented-core" },
+    { "version": 213, "world": "spreads", "scope": "transactional-reading" },
+    { "version": 214, "world": "free-tarot", "scope": "complete-free-deck" },
+    { "version": 215, "world": "library", "scope": "deep-78-card-library" },
+    { "version": 216, "world": "daily-card", "scope": "brasilia-daily-ritual" },
+    { "version": 217, "world": "school", "scope": "complete-learning-path" },
+    { "version": 218, "world": "journal", "scope": "private-local-first-mirror" },
+    { "version": 219, "world": "skins-premium", "scope": "hybrid-entitlements" },
+    { "version": 220, "world": "account-consultations", "scope": "identity-booking" },
+    { "version": 221, "world": "store-music-video", "scope": "truthful-editorial-media" },
+    { "version": 222, "world": "notifications", "scope": "opt-in-presence" },
+    { "version": 223, "world": "admin-analytics-map", "scope": "private-operations" },
+    { "version": 224, "world": "seo-privacy", "scope": "discovery-lgpd" },
+    { "version": 225, "world": "global-runtime", "scope": "navigation-pwa-assets-cache" },
+    { "version": 226, "world": "release", "scope": "supreme-qa" }
+  ],
+  "delivery": {
+    "oneMacroStageAtATime": true,
+    "onlyNewOrReplacedFiles": true,
+    "flatZip": true,
+    "deleteLegacy": false,
+    "deleteCname": false,
+    "deleteTarotAssets": false
+  }
+}

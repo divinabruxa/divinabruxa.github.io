@@ -1,10 +1,10 @@
-/* DIVINA BRUXA — SERVICE WORKER V207 · ORBE 2.0 NÚCLEO ÚNICO */
-const VERSION = 207;
+/* DIVINA BRUXA — SERVICE WORKER V208 · WORK7.0 · TOQUE ORGÂNICO */
+const VERSION = 208;
 const OWNED_PREFIX = 'divina-bruxa-';
-const SHELL_CACHE = 'divina-bruxa-v207-shell';
-const CONTENT_CACHE = 'divina-bruxa-v207-content';
-const IMAGE_CACHE = 'divina-bruxa-v207-images';
-const TAROT_CACHE = 'divina-bruxa-v207-tarot-offline';
+const SHELL_CACHE = 'divina-bruxa-v208-shell';
+const CONTENT_CACHE = 'divina-bruxa-v208-content';
+const IMAGE_CACHE = 'divina-bruxa-v208-images';
+const TAROT_CACHE = 'divina-bruxa-v208-tarot-offline';
 const ACTIVE_CACHES = new Set([SHELL_CACHE, CONTENT_CACHE, IMAGE_CACHE, TAROT_CACHE]);
 
 const REQUIRED_SHELL = Object.freeze([
@@ -28,14 +28,15 @@ const REQUIRED_SHELL = Object.freeze([
 ]);
 
 const WARM_SHELL = Object.freeze([
-  './app-v207.js',
+  './app-v208.js',
   './navigation.js',
   './route-registry-v180.js',
   './page-loader-v1.js',
   './orb-loading-portal-v1.js',
   './runtime-v12.js',
   './orb-motion-core-v207.js',
-  './orb-engine-v207.js',
+  './orb-gesture-core-v208.js',
+  './orb-engine-v208.js',
   './mini-orb-engine-v207.js',
   './menu-completo-v177.js',
   './visual-guard-v6.js',
@@ -269,7 +270,7 @@ const appShellIsValid = async (url, response) => {
   return html.length > 1024
     && /id=["']app["']/.test(html)
     && /id=["']home["']/.test(html)
-    && /app-v207\.js\?v=207/.test(html)
+    && /app-v208\.js\?v=208/.test(html)
     && /home-orb-absolute-v206\.css\?v=206/.test(html);
 };
 

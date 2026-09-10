@@ -1,0 +1,55 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "work": "WORK7.0",
+  "release": 208,
+  "suite": "QA-V208-WORK7-TOQUE-ORGANICO.mjs",
+  "status": "PASS",
+  "executedAt": "2026-09-10T20:30:44Z",
+  "result": {
+    "passed": 175,
+    "failed": 0,
+    "note": "175/175 verificações estáticas, de integridade, intenção, gesto e instalação aprovadas."
+  },
+  "coverage": [
+    "Home somente com a Orbe central",
+    "árbitro puro de intenção",
+    "toque simples sem navegação",
+    "duplo toque com navegação única",
+    "arraste, giro e hold sem navegação",
+    "cancelamento seguro",
+    "teclado e clique assistivo",
+    "amostras coalescidas",
+    "velocidade baseada em tempo",
+    "hot path sem layout read ou CSS write",
+    "um relógio compartilhado",
+    "shader e assets visuais congelados",
+    "78 cartas e preços preservados",
+    "WORK7.0 especificado sem conteúdo inventado"
+  ],
+  "visualFreezeEvidence": {
+    "vertexShaderSha256": "726e91b6170425a2cc964653eb7a9f6b09b78f276e373e07e689caf27dfe2e9c",
+    "fragmentShaderSha256": "02ea3a49cf1059a02f39d9f6781be93d3775a1ccc9aaa2b79a643d23e6b42bea",
+    "homeCssSha256": "6482ea120123009bb490145cfc366eacd9cdd68de6abb02ea7189fc0e444b6a4",
+    "visualRedesign": false
+  },
+  "gestureBattery": {
+    "taps": { "executed": 200, "correct": 200, "navigations": 0 },
+    "drags": { "executed": 200, "correct": 200, "navigations": 0 },
+    "holds": { "executed": 100, "correct": 100, "navigations": 0 },
+    "doubleTaps": { "executed": 100, "correct": 100, "navigations": 100, "duplicates": 0 },
+    "cancellations": { "executed": 100, "correct": 100, "navigations": 0 }
+  },
+  "installSimulation": {
+    "status": "PASS",
+    "baseRelease": 207,
+    "normalizedIndexMatchesInstalledBase": true,
+    "baselineIndexSha256": "9eeeca75d682f3348f54c4b056f5735b1efdc49ccab045a8047cd72328d6d098",
+    "flatZip": true,
+    "zipFileCount": 15,
+    "cnamePreserved": true,
+    "cnameSha256": "5221eb592e0235f65c0dd92e75ff80248b30ba7d08a10ee1613a80d4f791d8e6"
+  },
+  "browserVisualTest": "Não solicitado; invariantes determinísticos, CSS congelado e shaders byte a byte foram verificados.",
+  "severity": { "P0": 0, "P1": 0 },
+  "productionActivation": false
+}
