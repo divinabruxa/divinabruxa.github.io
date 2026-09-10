@@ -1,0 +1,51 @@
+DIVINA BRUXA — V202 — RESEND TRANSACIONAL VERDADEIRO EM STAGING
+
+BASE OBRIGATÓRIA
+- Instale somente sobre a V201 já instalada.
+- Envie os arquivos deste ZIP para a raiz do repositório.
+- Substitua arquivos com o mesmo nome; não apague nenhum outro arquivo.
+- O ZIP é plano: não contém pastas.
+
+O QUE ESTA ENTREGA PREPARA
+- 24 templates: 8 finalidades em português, inglês e espanhol.
+- HTML compatível com clientes de e-mail e versão em texto puro.
+- Consulta confirmada para a pessoa e aviso operacional para a proprietária.
+- Verificação da assinatura Resend sobre o corpo bruto do webhook.
+- Deduplicação por svix-id e Idempotency-Key no envio.
+- Estados sent, scheduled, delivered, delayed, failed, bounced, complained e suppressed.
+- Supressão por hash SHA-256 do endereço, sem guardar o e-mail em texto puro na lista de bloqueio.
+- Ledger armazena metadados e hashes; nunca persiste o corpo do e-mail ou o payload integral do webhook.
+
+ESTADO REAL OBSERVADO
+- Resend conectado e uma chave de API existente.
+- Nenhum domínio, template ou webhook configurado no Resend.
+- Os dois registros de consulta estão em not_configured, sem ID do provedor.
+- Nenhum envio ou entrega real foi comprovado.
+- O SQL V202 passou em ensaio transacional no STAGING e foi integralmente revertido.
+
+O QUE ESTE ZIP NÃO FAZ
+- Não contém nem expõe segredos.
+- Não executa a migração automaticamente.
+- Não implanta Edge Functions automaticamente.
+- Não cria domínio Resend, webhook ou registro DNS.
+- Não envia e-mail sem consentimento explícito da proprietária no momento do teste.
+- Não altera produção, cobrança, Stripe, lojas ou Orbe IA Sol.
+
+SKINS — DECISÃO COMERCIAL REGISTRADA
+- Clássica Divina: gratuita.
+- Premium vitalício de R$199,90: libera as 30 skins; não inclui Orbe IA.
+- As skins também serão vendidas separadamente por R$19,90, R$29,90, R$39,90 ou R$49,90.
+- Packs preservados: R$79,90, R$99,90 e R$129,90.
+- A reativação segura das vendas avulsas acontecerá na V205, junto do Ledger Universal de Direitos.
+- Nenhuma cobrança foi ativada nesta versão.
+
+HOME E NÚCLEO CONGELADOS
+- A Home permanece somente com o título localizado e a Orbe viva.
+- Orbe, mini-Orbe, menu, duplo toque, Tarot e preços de consultas não foram alterados.
+
+PRÓXIMO PORTÃO REMOTO
+- Escolher o subdomínio transacional.
+- Criar e publicar SPF/DKIM/DMARC com autorização específica para DNS.
+- Guardar RESEND_API_KEY, CONSULTATIONS_EMAIL_FROM e RESEND_WEBHOOK_SECRET somente no Supabase.
+- Aplicar a migração e implantar as duas Edge Functions no STAGING.
+- Enviar uma mensagem controlada somente após confirmar o endereço pertencente à proprietária.

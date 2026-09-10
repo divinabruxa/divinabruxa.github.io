@@ -1,0 +1,30 @@
+{
+  "release": "V202",
+  "channel": "transactional-email",
+  "provider": "resend",
+  "locales": ["pt-BR", "en", "es"],
+  "templates": [
+    {"key": "account_confirmation", "category": "account", "transactional": true, "marketing": false},
+    {"key": "account_recovery", "category": "account", "transactional": true, "marketing": false},
+    {"key": "consultation_owner_new", "category": "consultation", "transactional": true, "marketing": false},
+    {"key": "consultation_customer_confirmation", "category": "consultation", "transactional": true, "marketing": false},
+    {"key": "security_alert", "category": "security", "transactional": true, "marketing": false},
+    {"key": "purchase_receipt", "category": "purchase", "transactional": true, "marketing": false},
+    {"key": "refund_confirmation", "category": "refund", "transactional": true, "marketing": false},
+    {"key": "support_update", "category": "support", "transactional": true, "marketing": false}
+  ],
+  "rendering": {
+    "html": true,
+    "plain_text": true,
+    "table_layout": true,
+    "inline_styles": true,
+    "untrusted_html_allowed": false,
+    "arbitrary_destination_url_allowed": false
+  },
+  "privacy": {
+    "email_body_persisted": false,
+    "webhook_payload_persisted": false,
+    "recipient_suppression_uses_sha256": true,
+    "journal_or_tarot_question_used": false
+  }
+}

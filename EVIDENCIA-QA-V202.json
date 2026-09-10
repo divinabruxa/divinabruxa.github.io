@@ -1,0 +1,85 @@
+{
+  "project": "Divina Bruxa",
+  "version": 202,
+  "suite": "Plano Supremo 2.0 - Macroetapa 4 - Resend Transacional",
+  "generated_at": "2026-09-10T00:56:04.333Z",
+  "total": 301,
+  "passed": 301,
+  "failed": 0,
+  "gate": {
+    "p0": 0,
+    "p1": 0,
+    "package_approved": true
+  },
+  "templates": {
+    "keys": 8,
+    "locales": 3,
+    "total": 24
+  },
+  "webhook": {
+    "events": 10,
+    "signature": "HMAC-SHA256 raw body",
+    "deduplication": "svix-id",
+    "suppression": "sha256"
+  },
+  "resend_audit": {
+    "resend_connected": true,
+    "resend_api_keys": 1,
+    "resend_domains": 0,
+    "resend_templates": 0,
+    "resend_webhooks": 0,
+    "consultation_email_ledger_rows": 2,
+    "ledger_statuses": [
+      "not_configured",
+      "not_configured"
+    ],
+    "provider_message_ids": 0,
+    "webhook_events": 0,
+    "emails_proven_sent": 0
+  },
+  "commercial_decision": {
+    "classic_skin_free": true,
+    "premium_lifetime_price_brl_cents": 19990,
+    "premium_includes_all_30_skins": true,
+    "individual_skin_sales_required": true,
+    "individual_skin_price_tiers_brl_cents": [
+      1990,
+      2990,
+      3990,
+      4990
+    ],
+    "skin_packs_brl_cents": [
+      7990,
+      9990,
+      12990
+    ],
+    "individual_catalog_reactivation": "deferred-to-v205-ledger-universal",
+    "orbe_ai_included_in_premium": false,
+    "real_billing": false
+  },
+  "home": {
+    "visible": [
+      "localized_orb_title",
+      "living_orb"
+    ],
+    "changed": false,
+    "sha256": "31bfd1ab0460e3367cd0e88dfeea03b5638ef33f996bb1351a0557ed5537bea1"
+  },
+  "remote_actions": {
+    "supabase_migration_applied": false,
+    "edge_functions_deployed": false,
+    "resend_domain_created": false,
+    "dns_changed": false,
+    "resend_webhook_created": false,
+    "email_sent": false,
+    "production_changed": false,
+    "real_billing_changed": false
+  },
+  "warnings": [
+    "A migração V202 e as Edge Functions aguardam autorização remota específica para o STAGING.",
+    "O Resend ainda não possui domínio, templates ou webhook; nenhum envio real foi comprovado.",
+    "SPF/DKIM/DMARC exigem escolha de subdomínio e autorização separada para DNS.",
+    "Cobrança real, produção, Stripe, lojas e Orbe IA Sol permanecem bloqueados."
+  ],
+  "failures": []
+}

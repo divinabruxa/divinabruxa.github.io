@@ -1,0 +1,49 @@
+{
+  "version": 202,
+  "release": "plano-supremo-2.0-macroetapa-4-resend-transacional",
+  "base_required": "V201 instalada",
+  "date": "2026-09-10",
+  "environment": "staging",
+  "delivery": {
+    "type": "flat-delta",
+    "directories_inside_zip": 0,
+    "delete_existing_files": false,
+    "files": [
+      "00-LEIA-PRIMEIRO-V202-RESEND-TRANSACIONAL.txt",
+      "ARQUIVOS-V202-SHA256.txt",
+      "EMAIL-TEMPLATES-V202.json",
+      "EVIDENCIA-QA-V202.json",
+      "MANIFESTO-V202-RESEND-TRANSACIONAL.json",
+      "QA-V202-RESEND-TRANSACIONAL.mjs",
+      "RESEND-TRANSACTIONAL-V202.json",
+      "SUPABASE-RESEND-TRANSACTIONAL-STAGING-V202.sql",
+      "consultations-booking-v202.ts",
+      "consultations-email-webhook-v202.ts",
+      "transactional-email-templates-v202.ts"
+    ]
+  },
+  "scope": {
+    "resend_runtime_prepared": true,
+    "database_migration_prepared": true,
+    "localized_templates_prepared": true,
+    "webhook_hardening_prepared": true,
+    "suppression_ledger_prepared": true,
+    "skin_hybrid_decision_recorded": true,
+    "skin_catalog_changed": false,
+    "home_changed": false,
+    "orb_changed": false,
+    "menu_changed": false,
+    "tarot_changed": false,
+    "prices_changed": false
+  },
+  "remote_actions": {
+    "supabase_migration_applied": false,
+    "edge_functions_deployed": false,
+    "resend_domain_created": false,
+    "dns_changed": false,
+    "resend_webhook_created": false,
+    "email_sent": false,
+    "production_changed": false,
+    "real_billing_changed": false
+  }
+}

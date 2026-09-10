@@ -1,0 +1,88 @@
+{
+  "version": 202,
+  "release": "resend-transacional-verdadeiro-staging",
+  "environment": "staging",
+  "project": {
+    "name": "divina-bruxa-staging",
+    "ref": "kyphdsamyygavmkzyezr"
+  },
+  "audit_observed_2026_09_10": {
+    "resend_connected": true,
+    "resend_api_keys": 1,
+    "resend_domains": 0,
+    "resend_templates": 0,
+    "resend_webhooks": 0,
+    "consultation_email_ledger_rows": 2,
+    "ledger_statuses": ["not_configured", "not_configured"],
+    "provider_message_ids": 0,
+    "webhook_events": 0,
+    "emails_proven_sent": 0
+  },
+  "prepared": {
+    "sql_trial": "pass-rolled-back",
+    "locales": ["pt-BR", "en", "es"],
+    "template_keys": [
+      "account_confirmation",
+      "account_recovery",
+      "consultation_owner_new",
+      "consultation_customer_confirmation",
+      "security_alert",
+      "purchase_receipt",
+      "refund_confirmation",
+      "support_update"
+    ],
+    "localized_templates": 24,
+    "webhook_events": [
+      "email.sent",
+      "email.scheduled",
+      "email.delivered",
+      "email.delivery_delayed",
+      "email.complained",
+      "email.bounced",
+      "email.opened",
+      "email.clicked",
+      "email.failed",
+      "email.suppressed"
+    ],
+    "raw_body_signature_verification": true,
+    "webhook_clock_skew_seconds": 300,
+    "webhook_idempotency": "svix-id-primary-key",
+    "provider_idempotency": "consultation/entity/audience/v202",
+    "suppression_storage": "sha256-email-no-plaintext",
+    "payload_storage": "sha256-only-no-email-body",
+    "marketing_allowed": false,
+    "open_tracking_required": false,
+    "click_tracking_required": false
+  },
+  "remote_gates": {
+    "database_migration": "pending-explicit-staging-authorization",
+    "edge_functions_deploy": "pending-domain-and-secrets",
+    "transactional_subdomain": "pending-owner-choice",
+    "dns_records": "not-created-or-changed",
+    "resend_api_secret_in_supabase": false,
+    "resend_webhook_secret_in_supabase": false,
+    "resend_webhook_created": false,
+    "controlled_recipient_consent": false,
+    "real_delivery_test": false
+  },
+  "commercial_decision_preserved": {
+    "classic_skin_free": true,
+    "premium_lifetime_price_brl_cents": 19990,
+    "premium_includes_all_30_skins": true,
+    "individual_skin_sales_required": true,
+    "individual_skin_price_tiers_brl_cents": [1990, 2990, 3990, 4990],
+    "skin_packs_brl_cents": [7990, 9990, 12990],
+    "individual_catalog_reactivation": "deferred-to-v205-ledger-universal",
+    "orbe_ai_included_in_premium": false,
+    "real_billing": false
+  },
+  "preserved": {
+    "home": ["localized_orb_title", "living_orb"],
+    "consultation_prices_brl": [250, 150, 100, 50],
+    "production_publish": false,
+    "dns_change": false,
+    "real_billing": false,
+    "email_sent_by_package": false,
+    "orbe_ai_sol": false
+  }
+}
