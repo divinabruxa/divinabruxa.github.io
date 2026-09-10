@@ -1,0 +1,58 @@
+{
+  "project": "Divina Bruxa",
+  "release": 207,
+  "matrix": [
+    {
+      "condition": "Home visible and normal motion",
+      "core": "ACTIVE",
+      "main_orb": "active at display refresh",
+      "mini_orbs": "visible surfaces at 30 fps"
+    },
+    {
+      "condition": "Internal route visible",
+      "core": "ACTIVE",
+      "main_orb": "SUSPENDED with zero frames",
+      "mini_orbs": "only visible header and dock surfaces"
+    },
+    {
+      "condition": "Document hidden, pagehide or freeze",
+      "core": "SUSPENDED",
+      "main_orb": "zero frames and active pointer cancelled",
+      "mini_orbs": "zero frames and active pointers released"
+    },
+    {
+      "condition": "pageshow, BFCache or document resume",
+      "core": "ACTIVE",
+      "main_orb": "previous safe state with fresh frame clock",
+      "mini_orbs": "same active timeline without a large delta"
+    },
+    {
+      "condition": "Reduced motion on Home",
+      "core": "ACTIVE",
+      "main_orb": "calm life at 15 fps",
+      "mini_orbs": "stable life at 1 fps"
+    },
+    {
+      "condition": "Main WebGL fallback",
+      "core": "ACTIVE when another surface needs it",
+      "main_orb": "FALLBACK with zero WebGL frames",
+      "mini_orbs": "continue independently in the shared core"
+    },
+    {
+      "condition": "Engine destroyed",
+      "core": "client removed",
+      "main_orb": "DESTROYED and resources released",
+      "mini_orbs": "unchanged unless their binding is destroyed"
+    }
+  ],
+  "time_policy": {
+    "resume_frame_seconds": 0.0166666667,
+    "maximum_frame_seconds": 0.05,
+    "hidden_time_added_to_animation": false
+  },
+  "idempotency": {
+    "main_orb_singleton": true,
+    "client_id_replaces_previous_registration": true,
+    "mini_orb_binding": "one binding per element"
+  }
+}

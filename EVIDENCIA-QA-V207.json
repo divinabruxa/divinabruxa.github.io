@@ -1,0 +1,46 @@
+{
+  "project": "Divina Bruxa",
+  "release": 207,
+  "suite": "QA-V207-ORBE-NUCLEO-UNICO.mjs",
+  "status": "PASS",
+  "executed_at": "2026-09-10T19:08:26Z",
+  "result": {
+    "passed": 160,
+    "failed": 0,
+    "note": "160/160 static, lifecycle, integrity and installation-simulation checks passed"
+  },
+  "coverage": [
+    "shared scheduler",
+    "suspend and resume lifecycle",
+    "route and viewport gating",
+    "single main instance",
+    "mini-Orb visible-only work",
+    "shader identity",
+    "visual asset freeze",
+    "native-only haptics",
+    "service-worker versioning",
+    "78-card and commercial freeze",
+    "flat release integrity"
+  ],
+  "visual_freeze_evidence": {
+    "vertex_shader_sha256": "726e91b6170425a2cc964653eb7a9f6b09b78f276e373e07e689caf27dfe2e9c",
+    "fragment_shader_sha256": "02ea3a49cf1059a02f39d9f6781be93d3775a1ccc9aaa2b79a643d23e6b42bea",
+    "home_css_sha256": "6482ea120123009bb490145cfc366eacd9cdd68de6abb02ea7189fc0e444b6a4"
+  },
+  "install_simulation": {
+    "status": "PASS",
+    "base_release": 206,
+    "baseline_index_sha256": "b8f8348aceb1dbc14c6df96264383d757030aa69df01f80de8bb840d88cf8228",
+    "baseline_sw_sha256": "0ce9bcfdde0a6e9e838c7fa8b2b9fb4be64c14ea11507d53847d67bc54c19f18",
+    "flat_zip": true,
+    "zip_file_count": 13,
+    "cname_preserved": true,
+    "cname_sha256": "5221eb592e0235f65c0dd92e75ff80248b30ba7d08a10ee1613a80d4f791d8e6"
+  },
+  "browser_visual_test": "not requested; deterministic visual invariants and byte-identical shaders are enforced",
+  "severity": {
+    "P0": 0,
+    "P1": 0
+  },
+  "production_activation": false
+}

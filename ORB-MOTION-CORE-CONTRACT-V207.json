@@ -1,0 +1,80 @@
+{
+  "project": "Divina Bruxa",
+  "release": 207,
+  "base": 206,
+  "macro_stage": "Orbe 2.0: Núcleo Único e Ciclo de Vida",
+  "visual_redesign": false,
+  "scheduler": {
+    "authority": "orb-motion-core-v207.js",
+    "request_animation_frame_owners": 1,
+    "clients": [
+      {
+        "id": "main-orb",
+        "normal_cadence": "display_refresh",
+        "reduced_motion_fps": 15
+      },
+      {
+        "id": "mini-orbs",
+        "normal_fps": 30,
+        "reduced_motion_fps": 1
+      }
+    ],
+    "maximum_delta_seconds": 0.05,
+    "inactive_work": "zero_frames_for_inactive_surface",
+    "css_writes": "deduplicated",
+    "mini_orbs": "visible_only"
+  },
+  "main_orb_states": [
+    "BOOT",
+    "IDLE",
+    "TOUCH",
+    "HOLD",
+    "RELEASE",
+    "PORTAL",
+    "SUSPENDED",
+    "FALLBACK",
+    "DESTROYED"
+  ],
+  "global_lifecycle_states": [
+    "ACTIVE",
+    "SUSPENDED",
+    "DESTROYED"
+  ],
+  "suspension_inputs": [
+    "document_hidden",
+    "pagehide",
+    "freeze",
+    "route_inactive",
+    "surface_outside_viewport"
+  ],
+  "resume_inputs": [
+    "visibility",
+    "pageshow",
+    "resume",
+    "bfcache",
+    "route_home",
+    "surface_visible"
+  ],
+  "native_haptics": {
+    "web_vibration_api": false,
+    "bridge": "globalThis.divinaNativeBridge.haptics",
+    "bridge_optional": true
+  },
+  "frozen": [
+    "vertex_shader",
+    "fragment_shader",
+    "orb_images",
+    "orb_geometry",
+    "menu_geometry",
+    "dock_geometry",
+    "gestures_and_destinations",
+    "prices_and_entitlements",
+    "all_internal_pages"
+  ],
+  "deferred": {
+    "V208": "touch physics and exact gesture arbitration",
+    "V209": "skin authority, WebGL restoration and Orb 2.0 closure",
+    "V210": "Menu 2.0"
+  },
+  "production_activation": false
+}

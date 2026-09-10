@@ -1,0 +1,29 @@
+DIVINA BRUXA — V207 — ORBE 2.0: NÚCLEO ÚNICO E CICLO DE VIDA
+
+RESULTADO
+- A Orbe principal e todas as mini-Orbes compartilham um único relógio de movimento.
+- O relógio trabalha somente para superfícies visíveis e necessárias.
+- Aba oculta, pagehide, congelamento, rota interna e BFCache não deixam animações órfãs.
+- O tempo da Orbe retoma com delta limitado, sem salto brusco depois de uma pausa.
+- O shader, as imagens, a geometria, o brilho aprovado, o Menu e o dock não foram redesenhados.
+- A web não solicita vibração. A háptica só pode passar por uma futura ponte nativa explícita.
+
+ARQUIVOS PARA INSTALAR
+Adicionar primeiro:
+- orb-motion-core-v207.js
+- orb-engine-v207.js
+- mini-orb-engine-v207.js
+- app-v207.js
+
+Substituir por último:
+- index.html
+- sw.js
+
+Se o GitHub aceitar o envio conjunto, os seis arquivos podem ser enviados no mesmo commit.
+Não apague nenhum arquivo anterior e não altere CNAME.
+
+ROLLBACK
+Restaure somente index.html e sw.js da V206. Os quatro arquivos V207 podem permanecer na raiz porque ficarão inativos. Nenhum conteúdo, dado, preço, direito ou carta precisa ser revertido.
+
+ESCOPO FECHADO
+Esta macroetapa conclui apenas o núcleo e o ciclo de vida. A física fina do toque pertence à V208. Skins, recuperação completa de WebGL e fechamento da Orbe pertencem à V209. O Menu 2.0 começa somente na V210.
