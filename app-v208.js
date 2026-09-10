@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — APLICATIVO V208 · WORK7.0 · TOQUE ORGÂNICO */
+/* DIVINA BRUXA — APLICATIVO V208 · WORK7.0 · WHIT CORE V212 */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -15,6 +15,7 @@ import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-por
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
 import { installIndexPolicyV193 } from './seo-index-policy-v193.js?v=193';
+import { createWhitCoreV212 } from './whit-core-v212.js?v=212';
 import './pwa-world-v201.js?v=201';
 
 const $ = selector => document.querySelector(selector);
@@ -52,6 +53,10 @@ addEventListener('orbe:toast', event => toast(event.detail));
 const authClient = new AuthClient(CONFIG);
 window.divinaAuth = authClient;
 window.divinaAccount = safely('Conta V201', () => new AccountEngineV201($('#login'), authClient));
+
+const whitCore = safely('Whit 2.0 Core V212', () => createWhitCoreV212({ authClient }));
+safely('presença local Whit V212', () => whitCore?.awaken());
+
 const miniOrbBinding = safely('Orbes auxiliares V207', bindMiniOrbs);
 
 const loadingPortal = createOrbLoadingPortal();
@@ -94,6 +99,15 @@ if (skinsHeading) skinsHeading.textContent = 'Trinta formas de sentir o universo
 
 window.divinaLoading = loadingPortal;
 window.orbe = { go: pageLoader.go, loadPage: pageLoader.load, loading: loadingPortal };
+window.whit = whitCore;
+window.divinaWhitV212 = Object.freeze({
+  version: 212,
+  core: whitCore,
+  status: () => whitCore?.status?.() || null,
+  generationEnabled: false,
+  paidApiEnabled: false,
+  solEnabled: false
+});
 window.divinaOrbV208 = Object.freeze({
   version: 208,
   engine: realityOrb,
