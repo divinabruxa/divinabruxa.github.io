@@ -40,8 +40,11 @@
   "supabase": {
     "project": "divina-bruxa-staging",
     "project_ref": "kyphdsamyygavmkzyezr",
-    "main_migration": "prepared-awaiting-explicit-remote-authorization",
-    "legacy_rls_advisory": "prepared-separate-awaiting-explicit-decision",
+    "main_migration": "applied-staging-20260910000706",
+    "legacy_rls_advisory": "applied-staging-20260910000710",
+    "remote_qa": "pass-rolled-back",
+    "rls_policy_count_observed": 25,
+    "critical_security_advisories_observed": 0,
     "auth_users_observed": 0,
     "active_admin_owners_observed": 0,
     "real_email_flow_executed": false,

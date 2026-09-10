@@ -68,6 +68,10 @@ check('tombstone sem PII', contract.security.deletion_tombstone === 'sha256-user
 check('Admin proprietário exige AAL2', contract.security.owner_admin_mfa === 'required-aal2', 'P0');
 check('autorização não usa user_metadata', contract.security.user_metadata_used_for_authorization === false, 'P0');
 check('estados PT/EN/ES', contract.security.critical_states_locales.join('/') === 'pt/en/es', 'P0');
+check('migração principal registrada como aplicada no STAGING', /^applied-staging-/.test(contract.supabase.main_migration), 'P0');
+check('correção RLS legada registrada como aplicada no STAGING', /^applied-staging-/.test(contract.supabase.legacy_rls_advisory), 'P0');
+check('QA remoto transacional registrado com rollback', contract.supabase.remote_qa === 'pass-rolled-back', 'P0');
+check('decisões remotas registram autorização explícita', Object.values(manifest.remote_decisions).every(value => value === 'applied-to-staging-explicitly-authorized'), 'P0');
 
 check('index inicia app V201', /src="app-v201\.js\?v=201"/.test(index), 'P0');
 check('index carrega CSS de Conta V201', /account-secure-v201\.css\?v=201/.test(index), 'P0');
@@ -296,7 +300,8 @@ const legacyOutput = `${legacy.stdout || ''}\n${legacy.stderr || ''}`;
 check('regressão V197 preserva ao menos 1219 checks', /1219\/1221 PASS/.test(legacyOutput), 'P0', legacyOutput.slice(-1000));
 check('regressão antiga diverge só nos 2 portões versionados', /P0=2 P1=0/.test(legacyOutput) && /index usa app V196/.test(legacyOutput) && /service worker atual V196/.test(legacyOutput), 'P0', legacyOutput.slice(-1000));
 
-warnings.push('A migração principal V201 e a correção RLS legada permanecem decisões remotas separadas até autorização explícita.');
+warnings.push('A migração principal V201 e a correção RLS legada foram aplicadas somente no STAGING após autorização explícita.');
+warnings.push('O advisory de segurança pós-migração não apontou item crítico; os 2 WARNs de SECURITY DEFINER são RPCs intencionais, limitadas a authenticated e ao próprio chamador.');
 warnings.push('O STAGING observado não possui contas Auth nem proprietária Admin; e-mail real e MFA da proprietária não foram disparados.');
 warnings.push('Cobrança real, produção, DNS, Stripe, lojas, Resend e Orbe IA Sol continuam bloqueados.');
 warnings.push('O primeiro carregamento após instalar a V201 precisa estar online para renovar o cache.');

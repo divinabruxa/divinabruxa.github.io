@@ -2,7 +2,7 @@
   "version": 201,
   "release": "plano-supremo-2.0-macroetapa-3-conta-real-controlada",
   "base_required": "V200 instalada",
-  "date": "2026-09-09",
+  "date": "2026-09-10",
   "environment": "staging",
   "delivery": {
     "type": "flat-delta",
@@ -51,7 +51,7 @@
     "orbe_ai_sol": false
   },
   "remote_decisions": {
-    "main_v201_migration": "pending",
-    "legacy_billing_guard_rls": "pending-separate-approval"
+    "main_v201_migration": "applied-to-staging-explicitly-authorized",
+    "legacy_billing_guard_rls": "applied-to-staging-explicitly-authorized"
   }
 }

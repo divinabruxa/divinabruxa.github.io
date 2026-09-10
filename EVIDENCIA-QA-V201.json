@@ -2,9 +2,9 @@
   "project": "Divina Bruxa",
   "version": 201,
   "suite": "Plano Supremo 2.0 - Macroetapa 3 - Conta Real Controlada",
-  "generated_at": "2026-09-09T23:35:20.340Z",
-  "total": 347,
-  "passed": 347,
+  "generated_at": "2026-09-10T00:14:23.012Z",
+  "total": 350,
+  "passed": 350,
   "failed": 0,
   "gate": {
     "p0": 0,
@@ -42,8 +42,8 @@
   },
   "staging": {
     "project_ref": "kyphdsamyygavmkzyezr",
-    "main_migration": "prepared-awaiting-explicit-remote-authorization",
-    "legacy_rls_advisory": "prepared-separate-awaiting-explicit-decision",
+    "main_migration": "applied-staging-20260910000706",
+    "legacy_rls_advisory": "applied-staging-20260910000710",
     "auth_users_observed": 0,
     "active_admin_owners_observed": 0,
     "real_email_flow_executed": false,
@@ -67,7 +67,9 @@
     "sol": false
   },
   "warnings": [
-    "A migração principal V201 e a correção RLS legada permanecem decisões remotas separadas até autorização explícita.",
+    "Comparação física com V200 não executada; hash canônico da Home foi validado.",
+    "A migração principal V201 e a correção RLS legada foram aplicadas somente no STAGING após autorização explícita.",
+    "O advisory de segurança pós-migração não apontou item crítico; os 2 WARNs de SECURITY DEFINER são RPCs intencionais, limitadas a authenticated e ao próprio chamador.",
     "O STAGING observado não possui contas Auth nem proprietária Admin; e-mail real e MFA da proprietária não foram disparados.",
     "Cobrança real, produção, DNS, Stripe, lojas, Resend e Orbe IA Sol continuam bloqueados.",
     "O primeiro carregamento após instalar a V201 precisa estar online para renovar o cache."

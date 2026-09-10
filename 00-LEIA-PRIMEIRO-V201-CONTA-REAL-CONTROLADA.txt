@@ -30,10 +30,12 @@ VERDADE COMERCIAL PRESERVADA
 - Luna: 1 crédito; Terra: 10 créditos; Sol: desligada.
 
 SUPABASE STAGING
-- SUPABASE-CONTA-CONTROLADA-STAGING-V201.sql contém a migração principal da V201.
-- SUPABASE-ADVISORY-RLS-LEGACY-V201-REVIEW.sql é uma correção de segurança separada para revisão humana.
+- A migração principal V201 foi aplicada em divina-bruxa-staging com autorização explícita.
+- A correção RLS legada foi aplicada separadamente no mesmo STAGING com autorização explícita.
+- A matriz transacional de cadastro, estado, sessão, suspensão e tombstone passou e foi revertida integralmente.
+- As 25 políticas restritivas foram conferidas; RLS + FORCE RLS estão ativos nas três tabelas privadas auditadas.
 - Nenhum dos dois arquivos deve ser executado em produção.
-- O arquivo de advisory NÃO deve ser executado sem autorização explícita da proprietária.
+- Os arquivos SQL permanecem no pacote como registro reproduzível das migrações instaladas.
 
 BLOQUEIOS PRESERVADOS
 - Cobrança real: DESLIGADA.
