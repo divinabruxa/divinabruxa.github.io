@@ -1,5 +1,5 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R002 · CARREGADOR DE MUNDOS V301
-   Cada mundo nasce sob demanda. O Tarot Livre V301 é um mundo novo; os demais permanecem íntegros até seu próprio Rebirth. */
+/* DIVINA BRUXA 2.0 — REBIRTH R003 · CARREGADOR DE MUNDOS V302
+   Cada mundo nasce sob demanda. Tarot Livre V301 e Biblioteca Viva V302 são mundos Rebirth; os demais aguardam sua própria etapa. */
 
 import {
   normalizeRouteId,
@@ -137,11 +137,11 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
       return new DailyRitual($('#dailyCard'), remember, { authClient });
     },
     library: async () => {
-      const [, { CardLibraryEngine }] = await Promise.all([
-        import('./tarot-meanings.js?v=184'),
-        import('./card-library-engine-v215.js?v=215')
+      const [, module] = await Promise.all([
+        ensureStyle('divinaLibraryRebirthV302', 'library-world-v302.css?v=302'),
+        import('./library-world-v302.js?v=302')
       ]);
-      return new CardLibraryEngine($('#cardLibraryApp'));
+      return new module.LibraryWorldV302($('#cardLibraryApp'));
     },
     school: async () => {
       const { SchoolEngine } = await import('./school-engine.js?v=186');
@@ -203,7 +203,10 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
       import('./free-tarot-world-v301.js?v=301')
     ]),
     daily: () => import('./ritual-engine.js?v=183'),
-    library: () => import('./card-library-engine-v215.js?v=215'),
+    library: () => Promise.all([
+      ensureStyle('divinaLibraryRebirthV302', 'library-world-v302.css?v=302'),
+      import('./library-world-v302.js?v=302')
+    ]),
     consultations: () => Promise.all([
       import('./commerce-engine.js?v=148'),
       import('./consultation-engine.js?v=188')

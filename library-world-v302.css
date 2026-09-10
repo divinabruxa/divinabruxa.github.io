@@ -1,0 +1,114 @@
+/* DIVINA BRUXA 2.0 — REBIRTH R003 · BIBLIOTECA VIVA · V302 */
+#cardLibraryApp.library-world-v302-host{--lb-gold:#f0d79a;--lb-ink:#fcf8ff;--lb-muted:rgba(229,219,238,.66);--lb-violet:#a45cff;--lb-pink:#eb63c7;--lb-panel:rgba(9,4,18,.72);width:100%;max-width:none!important;padding-inline:clamp(12px,3vw,38px)!important}
+#cardLibraryApp .lb302{width:min(1120px,100%);margin:0 auto;display:grid;gap:clamp(16px,2.8vw,30px)}
+#cardLibraryApp .lb302__head{width:min(920px,100%);margin:0 auto;display:flex;align-items:end;justify-content:space-between;gap:18px}
+#cardLibraryApp .lb302__head>div>span{display:block;margin-bottom:6px;color:var(--lb-gold);font:700 8px/1 system-ui,sans-serif;letter-spacing:.3em}
+#cardLibraryApp .lb302__head h2{margin:0;color:var(--lb-ink);font:500 clamp(30px,5vw,50px)/.95 Georgia,serif;letter-spacing:-.045em}
+#cardLibraryApp .lb302__search-toggle{min-height:44px;padding:0 17px;border:1px solid rgba(240,215,154,.24);border-radius:999px;background:rgba(17,8,29,.62);color:var(--lb-gold);font:700 11px/1 system-ui,sans-serif;letter-spacing:.08em}
+
+#cardLibraryApp .lb302__sanctuary{position:relative;isolation:isolate;width:min(920px,100%);min-height:clamp(520px,66vh,680px);margin:0 auto;display:grid;place-items:center;overflow:hidden;border:1px solid rgba(240,215,154,.08);border-radius:clamp(30px,6vw,58px);background:radial-gradient(circle at 50% 45%,rgba(146,65,226,.18),transparent 22%),radial-gradient(circle at 50% 46%,rgba(235,99,199,.07),transparent 45%),linear-gradient(180deg,rgba(11,5,21,.24),rgba(3,1,7,.72));box-shadow:inset 0 0 110px rgba(168,80,255,.035),0 30px 110px rgba(0,0,0,.24);contain:layout paint}
+#cardLibraryApp .lb302__sanctuary:before{content:"";position:absolute;left:50%;top:46%;width:min(72vw,500px);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(162,80,250,.12),rgba(232,96,199,.03) 42%,transparent 70%);filter:blur(20px);animation:lb302-breathe 8s ease-in-out infinite;pointer-events:none}
+@keyframes lb302-breathe{50%{transform:translate(-50%,-50%) scale(1.09);opacity:.72}}
+#cardLibraryApp .lb302__stars{position:absolute;inset:0;pointer-events:none}
+#cardLibraryApp .lb302__stars i{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff1c9;box-shadow:0 0 12px rgba(255,241,201,.85);opacity:.38;animation:lb302-star 5.5s ease-in-out infinite}
+#cardLibraryApp .lb302__stars i:nth-child(1){left:13%;top:21%}#cardLibraryApp .lb302__stars i:nth-child(2){left:83%;top:18%;animation-delay:-2s}#cardLibraryApp .lb302__stars i:nth-child(3){left:22%;top:74%;animation-delay:-4s}#cardLibraryApp .lb302__stars i:nth-child(4){left:77%;top:72%;animation-delay:-1s}#cardLibraryApp .lb302__stars i:nth-child(5){left:50%;top:10%;animation-delay:-3s}#cardLibraryApp .lb302__stars i:nth-child(6){left:51%;top:84%;animation-delay:-4.5s}
+@keyframes lb302-star{50%{opacity:.95;transform:scale(1.7)}}
+
+#cardLibraryApp .lb302__orb{position:absolute;z-index:5;left:50%;top:43%;width:clamp(138px,23vw,188px);aspect-ratio:1;transform:translate(-50%,-50%);padding:0;border:0;border-radius:50%;background:transparent;cursor:pointer;filter:drop-shadow(0 0 35px rgba(148,65,236,.45));transition:transform .28s ease,filter .28s ease}
+#cardLibraryApp .lb302__orb:active{transform:translate(-50%,-50%) scale(.965)}
+#cardLibraryApp .lb302__orb:focus-visible{outline:2px solid var(--lb-gold);outline-offset:8px}
+#cardLibraryApp .lb302__orb-image{position:absolute;inset:7%;border-radius:50%;background-image:var(--db-release-orb-image,var(--db-boot-orb-image));background-size:cover;background-position:center;box-shadow:inset 0 0 34px rgba(255,255,255,.08),0 0 48px rgba(138,58,224,.38)}
+#cardLibraryApp .lb302__orb-aura{position:absolute;inset:-18%;border-radius:50%;background:radial-gradient(circle,transparent 42%,rgba(166,80,246,.11) 58%,transparent 73%);animation:lb302-orb 5.6s ease-in-out infinite;pointer-events:none}
+@keyframes lb302-orb{50%{transform:scale(1.08);opacity:.7}}
+
+#cardLibraryApp .lb302__paths{position:absolute;inset:0;pointer-events:none}
+#cardLibraryApp .lb302__path{position:absolute;z-index:4;width:clamp(76px,13vw,106px);min-height:68px;padding:8px;border:1px solid rgba(240,215,154,.15);border-radius:24px;background:rgba(9,4,18,.54);backdrop-filter:blur(12px);color:var(--lb-ink);display:grid;place-items:center;align-content:center;gap:3px;pointer-events:auto;cursor:pointer;transition:transform .28s ease,border-color .28s ease,background .28s ease,box-shadow .28s ease}
+#cardLibraryApp .lb302__path span{color:var(--lb-gold);font-size:15px}#cardLibraryApp .lb302__path b{font:600 11px/1 system-ui,sans-serif}#cardLibraryApp .lb302__path small{color:var(--lb-muted);font:700 9px/1 system-ui,sans-serif}
+#cardLibraryApp .lb302__path[aria-pressed="true"]{border-color:rgba(240,215,154,.55);background:rgba(50,22,70,.74);box-shadow:0 0 28px rgba(150,67,235,.14)}
+#cardLibraryApp .lb302__path:hover,#cardLibraryApp .lb302__path:focus-visible{transform:translateY(-3px);border-color:rgba(240,215,154,.5)}
+#cardLibraryApp .lb302__path--0{left:50%;top:8%;transform:translateX(-50%)}#cardLibraryApp .lb302__path--0:hover,#cardLibraryApp .lb302__path--0:focus-visible{transform:translateX(-50%) translateY(-3px)}
+#cardLibraryApp .lb302__path--1{right:12%;top:23%}#cardLibraryApp .lb302__path--2{right:11%;top:55%}#cardLibraryApp .lb302__path--3{left:50%;bottom:8%;transform:translateX(-50%)}#cardLibraryApp .lb302__path--3:hover,#cardLibraryApp .lb302__path--3:focus-visible{transform:translateX(-50%) translateY(-3px)}
+#cardLibraryApp .lb302__path--4{left:11%;top:55%}#cardLibraryApp .lb302__path--5{left:12%;top:23%}
+
+#cardLibraryApp .lb302__whit{position:absolute;z-index:5;left:50%;top:64%;transform:translateX(-50%);width:min(420px,78%);display:flex;align-items:flex-start;justify-content:center;gap:9px;text-align:left;color:var(--lb-muted);pointer-events:none}
+#cardLibraryApp .lb302__whit-dot{flex:0 0 auto;width:7px;height:7px;margin-top:5px;border-radius:50%;background:var(--lb-gold);box-shadow:0 0 14px rgba(240,215,154,.8)}
+#cardLibraryApp .lb302__whit p{margin:0;font:500 clamp(11px,2vw,13px)/1.45 system-ui,sans-serif}#cardLibraryApp .lb302__whit b{display:block;margin-bottom:2px;color:var(--lb-gold);font-size:9px;letter-spacing:.13em;text-transform:uppercase}
+#cardLibraryApp .lb302__whit p span{display:block}
+#cardLibraryApp .lb302__hint{position:absolute;bottom:3.4%;left:50%;transform:translateX(-50%);width:90%;margin:0;text-align:center;color:rgba(230,220,239,.46);font:600 9px/1.4 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+
+#cardLibraryApp .lb302__search{width:min(720px,100%);margin:0 auto;padding:14px;border:1px solid rgba(240,215,154,.14);border-radius:22px;background:rgba(8,3,17,.76);box-shadow:0 18px 50px rgba(0,0,0,.22)}
+#cardLibraryApp .lb302__search[hidden]{display:none}
+#cardLibraryApp .lb302__search label{display:block;margin:0 0 8px;color:var(--lb-gold);font:700 9px/1 system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+#cardLibraryApp .lb302__search>div{display:grid;grid-template-columns:1fr 44px;gap:8px}
+#cardLibraryApp .lb302__search input{min-width:0;min-height:48px;padding:0 14px;border:1px solid rgba(240,215,154,.18);border-radius:14px;background:#0d0718;color:var(--lb-ink);font:500 16px/1 system-ui,sans-serif}
+#cardLibraryApp .lb302__search button{border:1px solid rgba(240,215,154,.18);border-radius:14px;background:transparent;color:var(--lb-gold);font-size:22px}
+
+#cardLibraryApp .lb302__field{width:min(1040px,100%);margin:0 auto}
+#cardLibraryApp .lb302__field>header{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:0 2px 14px}
+#cardLibraryApp .lb302__field>header small{display:block;margin-bottom:5px;color:var(--lb-gold);font:700 8px/1 system-ui,sans-serif;letter-spacing:.16em}
+#cardLibraryApp .lb302__field>header h3{margin:0;color:var(--lb-ink);font:500 clamp(22px,3.5vw,34px)/1 Georgia,serif}
+#cardLibraryApp .lb302__field>header>span{color:var(--lb-gold);font:500 28px/1 Georgia,serif}
+#cardLibraryApp .lb302__grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(7px,1.3vw,14px)}
+#cardLibraryApp .lb302__card{position:relative;min-width:0;border:1px solid rgba(240,215,154,.1);border-radius:clamp(12px,2vw,19px);background:linear-gradient(160deg,rgba(30,16,48,.76),rgba(7,3,13,.94));overflow:hidden;cursor:pointer;transition:transform .24s ease,border-color .24s ease,box-shadow .24s ease;outline:none}
+#cardLibraryApp .lb302__card:hover,#cardLibraryApp .lb302__card:focus-visible{transform:translateY(-4px);border-color:rgba(240,215,154,.46);box-shadow:0 18px 42px rgba(0,0,0,.34),0 0 26px rgba(147,65,229,.12)}
+#cardLibraryApp .lb302__card-image{aspect-ratio:2/3;overflow:hidden;background:#0b0612}
+#cardLibraryApp .lb302__card-image picture,#cardLibraryApp .lb302__card-image img{display:block;width:100%;height:100%;object-fit:cover}
+#cardLibraryApp .lb302__card-copy{padding:8px 8px 10px}
+#cardLibraryApp .lb302__card-copy small{display:block;color:var(--lb-gold);font:700 6px/1.1 system-ui,sans-serif;letter-spacing:.09em}
+#cardLibraryApp .lb302__card-copy h4{margin:5px 0 4px;color:var(--lb-ink);font:500 clamp(10px,1.5vw,14px)/1.08 Georgia,serif}
+#cardLibraryApp .lb302__card-copy span{display:block;color:var(--lb-muted);font:600 6px/1.2 system-ui,sans-serif;letter-spacing:.05em}
+#cardLibraryApp .lb302__favorite{position:absolute;right:6px;top:6px;width:30px;height:30px;padding:0;border:1px solid rgba(240,215,154,.2);border-radius:50%;background:rgba(5,2,10,.72);color:var(--lb-gold);font-size:15px;backdrop-filter:blur(8px)}
+#cardLibraryApp .lb302__more{display:block;min-height:48px;margin:20px auto 0;padding:0 18px;border:1px solid rgba(240,215,154,.24);border-radius:999px;background:rgba(18,8,31,.68);color:var(--lb-gold);font-weight:700}
+#cardLibraryApp .lb302__more[hidden]{display:none}
+#cardLibraryApp .lb302__empty{grid-column:1/-1;padding:46px 18px;text-align:center;border:1px dashed rgba(240,215,154,.2);border-radius:26px;color:var(--lb-muted)}
+#cardLibraryApp .lb302__empty>span{display:block;margin-bottom:10px;color:var(--lb-gold);font-size:26px}#cardLibraryApp .lb302__empty b{display:block;color:var(--lb-ink);font:500 21px Georgia,serif}#cardLibraryApp .lb302__empty p{margin:.5rem 0 0}
+
+body.lb302-reader-open{overflow:hidden}
+#cardLibraryApp .lb302__reader{width:min(920px,calc(100% - 20px));max-height:calc(100dvh - 20px);padding:0;border:1px solid rgba(240,215,154,.2);border-radius:30px;background:rgba(7,3,14,.96);color:var(--lb-ink);box-shadow:0 30px 120px rgba(0,0,0,.7);backdrop-filter:blur(20px)}
+#cardLibraryApp .lb302__reader::backdrop{background:rgba(1,0,4,.78);backdrop-filter:blur(7px)}
+#cardLibraryApp .lb302__reader-shell{max-height:calc(100dvh - 22px);overflow:auto;padding:clamp(14px,3vw,28px)}
+#cardLibraryApp .lb302__reader-shell>header{position:sticky;z-index:3;top:-1px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:4px 0 12px;background:linear-gradient(180deg,#07030e 70%,transparent)}
+#cardLibraryApp .lb302__reader-shell>header p{margin:0;color:var(--lb-gold);font:700 8px/1.2 system-ui,sans-serif;letter-spacing:.14em}
+#cardLibraryApp .lb302__reader-shell>header button{width:44px;height:44px;border:1px solid rgba(240,215,154,.2);border-radius:50%;background:transparent;color:var(--lb-gold);font-size:24px}
+#cardLibraryApp .lb302__reader-hero{display:grid;grid-template-columns:minmax(200px,300px) 1fr;gap:clamp(20px,4vw,42px);align-items:center}
+#cardLibraryApp .lb302__reader-image{aspect-ratio:2/3}.lb302__reader-image picture,.lb302__reader-image img{display:block;width:100%;height:100%;object-fit:cover;border-radius:22px;box-shadow:0 24px 70px rgba(0,0,0,.5),0 0 36px rgba(149,66,230,.13)}
+#cardLibraryApp .lb302__reader-intro>small{color:var(--lb-gold);font:700 8px/1 system-ui,sans-serif;letter-spacing:.15em}#cardLibraryApp .lb302__reader-intro h3{margin:8px 0 14px;font:500 clamp(32px,6vw,58px)/.92 Georgia,serif;letter-spacing:-.045em}
+#cardLibraryApp .lb302__keywords{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}.lb302__keywords span{padding:6px 9px;border:1px solid rgba(240,215,154,.15);border-radius:999px;color:var(--lb-muted);font-size:11px}
+#cardLibraryApp .lb302__reader-actions{display:flex;flex-wrap:wrap;gap:8px}.lb302__reader-actions button{min-height:44px;padding:0 14px;border:1px solid rgba(240,215,154,.22);border-radius:999px;background:rgba(24,10,39,.7);color:var(--lb-gold);font-weight:700}
+#cardLibraryApp .lb302__reader-note{max-width:550px;margin:12px 0 0;color:var(--lb-muted);font-size:11px;line-height:1.5}
+#cardLibraryApp .lb302__layers{display:grid;gap:8px;margin-top:26px}.lb302__layers details{border:1px solid rgba(240,215,154,.1);border-radius:16px;background:rgba(14,7,24,.72);overflow:hidden}.lb302__layers summary{padding:14px 16px;color:var(--lb-gold);font:700 11px/1.2 system-ui,sans-serif;cursor:pointer}.lb302__layers p,.lb302__layers ul{margin:0;padding:0 16px 16px;color:#e7dfec;font-size:14px;line-height:1.7}.lb302__layers ul{padding-left:34px}
+#cardLibraryApp .lb302__reader-nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;margin-top:20px;padding-top:16px;border-top:1px solid rgba(240,215,154,.1)}.lb302__reader-nav button{min-height:44px;border:0;background:transparent;color:var(--lb-gold);font-weight:700}.lb302__reader-nav button:last-child{text-align:right}.lb302__reader-nav span{color:var(--lb-muted);font-size:11px}
+
+#cardLibraryApp .lb302__sr{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+
+@media(max-width:760px){
+  #cardLibraryApp .lb302__sanctuary{min-height:560px}
+  #cardLibraryApp .lb302__path{width:80px;min-height:62px;border-radius:20px}
+  #cardLibraryApp .lb302__path--1{right:5%;top:24%}#cardLibraryApp .lb302__path--2{right:4%;top:56%}#cardLibraryApp .lb302__path--4{left:4%;top:56%}#cardLibraryApp .lb302__path--5{left:5%;top:24%}
+  #cardLibraryApp .lb302__whit{top:65%;width:70%}
+  #cardLibraryApp .lb302__grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  #cardLibraryApp .lb302__reader-hero{grid-template-columns:132px 1fr;align-items:start}
+}
+@media(max-width:430px){
+  #cardLibraryApp .lb302__head h2{font-size:31px}
+  #cardLibraryApp .lb302__sanctuary{min-height:520px;border-radius:30px}
+  #cardLibraryApp .lb302__orb{top:42%;width:140px}
+  #cardLibraryApp .lb302__path{width:70px;min-height:58px;padding:6px}
+  #cardLibraryApp .lb302__path b{font-size:10px}
+  #cardLibraryApp .lb302__path--0{top:6%}#cardLibraryApp .lb302__path--1{right:2%;top:23%}#cardLibraryApp .lb302__path--2{right:1%;top:56%}#cardLibraryApp .lb302__path--3{bottom:7%}#cardLibraryApp .lb302__path--4{left:1%;top:56%}#cardLibraryApp .lb302__path--5{left:2%;top:23%}
+  #cardLibraryApp .lb302__whit{top:63%;width:62%}
+  #cardLibraryApp .lb302__hint{bottom:2.4%}
+  #cardLibraryApp .lb302__grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+  #cardLibraryApp .lb302__card-copy{padding:6px}.lb302__favorite{width:28px;height:28px}
+  #cardLibraryApp .lb302__reader{width:calc(100% - 10px);border-radius:22px}
+  #cardLibraryApp .lb302__reader-hero{grid-template-columns:1fr}
+  #cardLibraryApp .lb302__reader-image{width:min(230px,72vw);margin:0 auto}
+  #cardLibraryApp .lb302__reader-intro{text-align:center}
+  #cardLibraryApp .lb302__keywords,#cardLibraryApp .lb302__reader-actions{justify-content:center}
+  #cardLibraryApp .lb302__reader-note{margin-inline:auto}
+}
+@media(prefers-reduced-motion:reduce){
+  #cardLibraryApp .lb302__sanctuary:before,#cardLibraryApp .lb302__stars i,#cardLibraryApp .lb302__orb-aura{animation:none!important}
+  #cardLibraryApp .lb302__card,#cardLibraryApp .lb302__path,#cardLibraryApp .lb302__orb{transition:none!important}
+  #cardLibraryApp .lb302__card:hover,#cardLibraryApp .lb302__card:focus-visible{transform:none}
+}
