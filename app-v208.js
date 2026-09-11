@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — REBIRTH R028 · WHIT PRESENÇA UNIVERSAL V328 · BOOT-SAFE */
+/* DIVINA BRUXA — REBIRTH R029 · MENU MÁGICO RECONSTRUÍDO V329 · BOOT-SAFE */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -50,6 +50,14 @@ const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
   .catch(error => {
     console.error('[Divina] Orbe/Menu Supremo V327 não iniciou', error);
     document.documentElement.dataset.orbMenuSupremeError = 'v327';
+  });
+
+const startMenuRebornV329 = () => startOrbMenuSupremeV327()
+  .then(() => import('./menu-reborn-v329.js?v=329'))
+  .then(module => module.installMenuRebornV329?.({ go }))
+  .catch(error => {
+    console.error('[Divina] Menu Reborn V329 não iniciou', error);
+    document.documentElement.dataset.menuRebornError = 'v329';
   });
 
 const clearRebirthShellResidue = () => {
@@ -450,7 +458,7 @@ const awaken = async () => {
     }));
 
     // R027/R028 são opcionais: nunca bloqueiam a abertura da Home.
-    startOrbMenuSupremeV327();
+    startMenuRebornV329();
     startWhitUniversalV328();
 
     // Começa a navegação fora do bloqueio visual.
@@ -480,7 +488,7 @@ const awaken = async () => {
     // Último fail-open visual: o HTML da Home existe e deve continuar acessível.
     document.documentElement.dataset.appShell = 'v180-emergency';
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
-    startOrbMenuSupremeV327();
+    startMenuRebornV329();
     startWhitUniversalV328();
     startPwaAfterBootV326();
   }

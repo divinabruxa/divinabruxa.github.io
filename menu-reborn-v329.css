@@ -1,0 +1,373 @@
+/* DIVINA BRUXA 2.0 — REBIRTH R029 · MENU MÁGICO RECONSTRUÍDO V329
+   A superfície antiga desaparece; Navigation V210 continua por trás.
+   Tudo novo usa compositor (opacity/transform/filter), sem relayout por frame. */
+
+/* ── Desliga SOMENTE a representação visual antiga ── */
+html[data-menu-reborn="v329"] #orbMenu{
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+html[data-menu-reborn="v329"] #orbMenu *,
+html[data-menu-reborn="v329"] #orbMenu::before,
+html[data-menu-reborn="v329"] #orbMenu::after{
+  animation:none!important;
+  transition:none!important;
+}
+
+/* ── A Orbe do menu mantém tamanho físico estável ── */
+html[data-menu-reborn="v329"] #home.orb-menu-open #orb,
+html[data-menu-reborn="v329"] #home.orb-menu-open #orb.r027-touching,
+html[data-menu-reborn="v329"] #home.orb-menu-open #orb[data-orb-life="TOUCH"],
+html[data-menu-reborn="v329"] #home.orb-menu-open #orb[data-orb-life="HOLD"],
+html[data-menu-reborn="v329"] #home.orb-menu-transition #orb.r027-touching{
+  scale:1!important;
+}
+
+/* A resposta da Orbe vem de luz/profundidade, não crescimento. */
+html[data-menu-reborn="v329"] #home.orb-menu-open #orb.r027-touching{
+  filter:
+    drop-shadow(0 0 46px rgba(161,60,255,.64))
+    drop-shadow(0 0 20px rgba(247,205,123,.21))!important;
+}
+html[data-menu-reborn="v329"] #home.orb-menu-open #orb.r027-touching .r027-orb-touch-light{
+  opacity:1!important;
+  transform:scale(1)!important;
+  filter:blur(.5px) brightness(1.16);
+}
+
+/* Palco aberto: a Orbe fica fixa, moderada e central. */
+html[data-runtime="v12"][data-menu-reborn="v329"] #home.home-orb-only-v206.active.orb-menu-open > .orb-stage-ref,
+html[data-runtime="v12"][data-menu-reborn="v329"] #home.home-orb-only-v206.active.orb-menu-transition > .orb-stage-ref{
+  --m329-orb-size:min(48vw,27dvh,228px);
+  position:absolute!important;
+  left:50%!important;
+  top:54%!important;
+  inset:auto!important;
+  width:var(--m329-orb-size)!important;
+  height:var(--m329-orb-size)!important;
+  margin:0!important;
+  transform:translate3d(-50%,-50%,0)!important;
+  transform-origin:50% 50%;
+}
+html[data-runtime="v12"][data-menu-reborn="v329"] #home.orb-menu-open > .orb-stage-ref > #orb,
+html[data-runtime="v12"][data-menu-reborn="v329"] #home.orb-menu-transition > .orb-stage-ref > #orb{
+  width:100%!important;
+  max-width:100%!important;
+  margin:0!important;
+  transform:none!important;
+}
+
+/* ── NOVA CONSTELAÇÃO ── */
+.menu-reborn-v329{
+  --m329-gold:#efd08a;
+  --m329-violet:#c85bf1;
+  --m329-bg:#08030e;
+  position:absolute;
+  z-index:18;
+  inset:0;
+  display:block;
+  overflow:hidden;
+  pointer-events:none;
+  opacity:0;
+  visibility:hidden;
+  transform:translateZ(0);
+  transition:opacity .30s ease,visibility 0s linear .42s;
+  contain:layout paint style;
+  isolation:isolate;
+}
+.menu-reborn-v329.is-visible{
+  opacity:1;
+  visibility:visible;
+  transition-delay:0s;
+}
+
+.m329-cosmos{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 54%,rgba(132,44,190,.15),transparent 29%),
+    radial-gradient(circle at 50% 54%,rgba(235,190,107,.055),transparent 49%);
+}
+.m329-cosmos i{
+  position:absolute;width:3px;height:3px;border-radius:50%;
+  background:#f8dda3;box-shadow:0 0 9px rgba(226,135,255,.78);
+  opacity:.52;transform:scale(.7);
+}
+.m329-cosmos i:nth-child(1){left:11%;top:26%}
+.m329-cosmos i:nth-child(2){left:82%;top:32%}
+.m329-cosmos i:nth-child(3){left:18%;top:69%}
+.m329-cosmos i:nth-child(4){left:76%;top:73%}
+.m329-cosmos i:nth-child(5){left:46%;top:21%}
+.m329-cosmos i:nth-child(6){left:55%;top:82%}
+.menu-reborn-v329.is-open .m329-cosmos i{animation:m329Star 5.8s ease-in-out infinite}
+.m329-cosmos i:nth-child(2n){animation-delay:-2.2s!important}
+.m329-cosmos i:nth-child(3n){animation-delay:-4.1s!important}
+
+/* Órbitas novas: leves e sem "linhas" atravessando a Orbe. */
+.m329-orbit{
+  position:absolute;
+  z-index:0;
+  left:50%;top:54%;
+  width:min(88vw,54dvh,520px);
+  aspect-ratio:1;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.m329-orbit__line{
+  position:absolute;left:50%;top:50%;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  border:1px solid rgba(238,199,126,.14);
+  box-shadow:0 0 20px rgba(188,65,236,.045);
+}
+.m329-orbit__line--outer{width:100%;height:100%;opacity:.56}
+.m329-orbit__line--inner{width:70%;height:70%;opacity:.26}
+.m329-orbit__comet{
+  position:absolute;left:50%;top:0;
+  width:5px;height:5px;margin-left:-2.5px;border-radius:50%;
+  background:#ffe5aa;box-shadow:0 0 8px #f2ca7d,0 0 14px rgba(208,88,255,.62);
+  transform-origin:2.5px calc(min(88vw,54dvh,520px) / 2);
+  opacity:.62;
+}
+.menu-reborn-v329.is-open .m329-orbit__comet{animation:m329Orbit 14s linear infinite}
+
+/* Oito caminhos principais */
+.m329-primary{
+  position:absolute;
+  z-index:3;
+  left:50%;top:54%;
+  width:min(88vw,54dvh,520px);
+  aspect-ratio:1;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.m329-portal{
+  appearance:none;
+  position:absolute;
+  min-width:0;
+  padding:0;border:0;background:none;color:#d9ccd9;
+  display:grid;place-items:center;gap:5px;
+  pointer-events:auto;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  opacity:0;
+  filter:blur(2px) brightness(.87);
+  transform:translate3d(0,10px,0) scale(.86);
+  transition:
+    opacity .30s ease calc(var(--m329-index) * 20ms),
+    transform .50s cubic-bezier(.16,.82,.22,1) calc(var(--m329-index) * 20ms),
+    filter .38s ease calc(var(--m329-index) * 20ms);
+}
+.menu-reborn-v329.is-open .m329-portal{
+  opacity:1;filter:none;transform:none;
+}
+.m329-portal__jewel{
+  position:relative;isolation:isolate;
+  display:grid;place-items:center;
+  width:52px;height:52px;
+  border:1px solid rgba(239,201,130,.48);
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 31% 24%,rgba(255,245,218,.12),transparent 25%),
+    radial-gradient(circle at 48% 62%,rgba(82,24,111,.84),rgba(9,4,15,.97) 72%);
+  box-shadow:
+    inset 0 1px rgba(255,248,225,.08),
+    inset 0 0 17px rgba(179,63,225,.13),
+    0 0 13px rgba(214,164,90,.08);
+  transition:transform .20s cubic-bezier(.2,.8,.2,1),box-shadow .26s ease,border-color .26s ease,filter .20s ease;
+}
+.m329-portal__sigil{
+  position:relative;z-index:2;
+  color:#efcf89;
+  font:500 23px/1 Georgia,serif;
+  font-style:normal;
+  text-shadow:0 0 7px rgba(240,201,127,.24);
+}
+.m329-portal__spark{
+  position:absolute;right:8px;top:8px;width:3px;height:3px;border-radius:50%;
+  background:#fff0c2;box-shadow:0 0 7px rgba(255,227,168,.9);opacity:.55;
+}
+.m329-portal small{
+  max-width:82px;
+  color:#d6c9d7;
+  font:500 9px/1.04 Georgia,serif;
+  text-align:center;
+  text-wrap:balance;
+  text-shadow:0 2px 9px #07020b;
+}
+.m329-portal:hover .m329-portal__jewel,
+.m329-portal:focus-visible .m329-portal__jewel,
+.m329-portal.is-current .m329-portal__jewel{
+  border-color:rgba(255,221,155,.90);
+  box-shadow:
+    inset 0 0 20px rgba(199,72,246,.20),
+    0 0 0 3px rgba(240,197,119,.04),
+    0 0 18px rgba(240,195,111,.25),
+    0 0 29px rgba(194,69,239,.12);
+}
+.m329-portal.is-current .m329-portal__jewel::after{
+  content:"";position:absolute;inset:-7px;border-radius:50%;
+  border:1px solid rgba(244,207,137,.18);
+  box-shadow:0 0 16px rgba(208,80,255,.13);
+}
+.m329-portal.is-current small{color:#f0d79c}
+.m329-portal:focus{outline:none}
+.m329-portal:focus-visible .m329-portal__jewel{outline:2px solid rgba(255,223,158,.74);outline-offset:4px}
+.m329-portal:active .m329-portal__jewel,
+.m329-portal.is-touching .m329-portal__jewel{
+  transform:scale(.89);
+  filter:brightness(1.30) saturate(1.14);
+}
+.m329-portal.m329-pulse .m329-portal__jewel{animation:m329PortalPulse .58s cubic-bezier(.16,.82,.22,1)}
+
+/* Oito posições, sem cálculos JS por frame. */
+.m329-primary .m329-portal:nth-child(1){left:50%;top:1%;transform-origin:50% 100%}
+.m329-primary .m329-portal:nth-child(2){left:76%;top:15%}
+.m329-primary .m329-portal:nth-child(3){left:88%;top:48%}
+.m329-primary .m329-portal:nth-child(4){left:75%;top:78%}
+.m329-primary .m329-portal:nth-child(5){left:50%;top:88%}
+.m329-primary .m329-portal:nth-child(6){left:14%;top:78%}
+.m329-primary .m329-portal:nth-child(7){left:1%;top:48%}
+.m329-primary .m329-portal:nth-child(8){left:14%;top:15%}
+.m329-primary .m329-portal{
+  translate:-50% -50%;
+}
+
+/* Constelações superior e inferior: portais circulares, sem cartões/caixas. */
+.m329-top,.m329-bottom{
+  position:absolute;
+  z-index:4;
+  left:50%;
+  width:min(90vw,650px);
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  align-items:start;
+  justify-items:center;
+  gap:clamp(4px,2vw,18px);
+  transform:translateX(-50%);
+  pointer-events:none;
+}
+.m329-top{top:calc(82px + env(safe-area-inset-top))}
+.m329-bottom{bottom:calc(var(--dock-height,75px) + 26px + env(safe-area-inset-bottom))}
+.m329-top .m329-portal,.m329-bottom .m329-portal{
+  position:relative;
+  inset:auto;
+  width:100%;
+  translate:none;
+}
+.m329-top .m329-portal__jewel,.m329-bottom .m329-portal__jewel{
+  width:45px;height:45px;
+  background:
+    radial-gradient(circle at 31% 24%,rgba(255,245,218,.10),transparent 25%),
+    radial-gradient(circle at 48% 62%,rgba(70,20,94,.78),rgba(8,3,13,.96) 72%);
+}
+.m329-top .m329-portal__sigil,.m329-bottom .m329-portal__sigil{font-size:19px}
+.m329-top .m329-portal small,.m329-bottom .m329-portal small{font-size:8px;max-width:72px}
+
+/* Texto mínimo: só um sopro perto do coração. */
+.m329-heart-copy{
+  position:absolute;
+  z-index:2;
+  left:50%;top:calc(54% + min(24vw,13.5dvh,114px));
+  transform:translate(-50%,38px);
+  margin:0;
+  color:rgba(232,199,135,.62);
+  font:700 7px/1 system-ui,-apple-system,sans-serif;
+  letter-spacing:.18em;
+  white-space:nowrap;
+  opacity:0;
+  transition:opacity .35s ease .18s,transform .48s cubic-bezier(.16,.82,.22,1) .18s;
+  pointer-events:none;
+}
+.menu-reborn-v329.is-open .m329-heart-copy{opacity:1;transform:translate(-50%,28px)}
+
+/* iPhone e celulares */
+@media(max-width:430px) and (orientation:portrait){
+  html[data-runtime="v12"][data-menu-reborn="v329"] #home.home-orb-only-v206.active.orb-menu-open > .orb-stage-ref,
+  html[data-runtime="v12"][data-menu-reborn="v329"] #home.home-orb-only-v206.active.orb-menu-transition > .orb-stage-ref{
+    --m329-orb-size:min(44vw,23.5dvh,198px);
+    top:54%!important;
+  }
+
+  .m329-orbit,.m329-primary{
+    top:54%;
+    width:min(91vw,48dvh,430px);
+  }
+
+  .m329-primary .m329-portal__jewel{width:48px;height:48px}
+  .m329-primary .m329-portal__sigil{font-size:20px}
+  .m329-primary .m329-portal small{font-size:8px;max-width:68px}
+
+  .m329-top{
+    top:calc(94px + env(safe-area-inset-top));
+    width:calc(100vw - 28px);
+  }
+  .m329-bottom{
+    bottom:calc(var(--dock-height,75px) + 25px + env(safe-area-inset-bottom));
+    width:calc(100vw - 28px);
+  }
+  .m329-top .m329-portal__jewel,.m329-bottom .m329-portal__jewel{width:42px;height:42px}
+  .m329-top .m329-portal small,.m329-bottom .m329-portal small{font-size:7.5px;max-width:65px}
+  .m329-heart-copy{top:calc(54% + min(22vw,11.75dvh,99px));font-size:6px}
+}
+
+/* iPhones baixos: abre espaço sem reduzir área clicável abaixo de ~44px. */
+@media(max-width:430px) and (max-height:760px) and (orientation:portrait){
+  .m329-top{top:calc(82px + env(safe-area-inset-top))}
+  .m329-bottom{bottom:calc(var(--dock-height,75px) + 18px + env(safe-area-inset-bottom))}
+  .m329-orbit,.m329-primary{width:min(86vw,45dvh,390px)}
+  .m329-primary .m329-portal__jewel{width:45px;height:45px}
+  .m329-primary .m329-portal small{font-size:7px}
+  .m329-top .m329-portal small,.m329-bottom .m329-portal small{font-size:7px}
+}
+
+/* Telas extremamente estreitas: constelações secundárias viram 2x2, nunca sobrepõem. */
+@media(max-width:350px) and (orientation:portrait){
+  .m329-top,.m329-bottom{
+    grid-template-columns:repeat(2,1fr);
+    width:210px;
+    row-gap:2px;
+  }
+  .m329-top{top:calc(72px + env(safe-area-inset-top))}
+  .m329-bottom{bottom:calc(var(--dock-height,75px) + 10px + env(safe-area-inset-bottom))}
+  .m329-orbit,.m329-primary{width:min(82vw,43dvh,340px)}
+}
+
+/* Landscape: constelação horizontal compacta e Orbe sem crescimento. */
+@media(orientation:landscape) and (max-height:560px){
+  html[data-runtime="v12"][data-menu-reborn="v329"] #home.home-orb-only-v206.active.orb-menu-open > .orb-stage-ref,
+  html[data-runtime="v12"][data-menu-reborn="v329"] #home.home-orb-only-v206.active.orb-menu-transition > .orb-stage-ref{
+    --m329-orb-size:min(32vh,180px);
+    left:50%!important;top:52%!important;
+  }
+  .m329-orbit,.m329-primary{top:52%;width:min(78vh,460px)}
+  .m329-top{left:12px;top:50%;bottom:auto;width:118px;grid-template-columns:1fr;transform:translateY(-50%)}
+  .m329-bottom{left:auto;right:12px;top:50%;bottom:auto;width:118px;grid-template-columns:1fr;transform:translateY(-50%)}
+  .m329-top .m329-portal,.m329-bottom .m329-portal{grid-template-columns:40px 1fr;justify-items:start}
+  .m329-heart-copy{top:auto;bottom:12px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .menu-reborn-v329,.menu-reborn-v329 *,
+  .menu-reborn-v329 *::before,.menu-reborn-v329 *::after{
+    animation:none!important;
+    transition:none!important;
+  }
+}
+html[data-performance-tier="constrained"] .m329-orbit__comet,
+html[data-performance-tier="constrained"] .m329-cosmos i{animation:none!important}
+html[data-performance-tier="constrained"] .m329-orbit__line--inner{display:none}
+
+@keyframes m329Star{
+  0%,100%{opacity:.24;transform:scale(.55)}
+  50%{opacity:.88;transform:scale(1.15)}
+}
+@keyframes m329Orbit{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+@keyframes m329PortalPulse{
+  0%{transform:scale(1)}
+  42%{transform:scale(1.08);filter:brightness(1.24)}
+  100%{transform:scale(1)}
+}

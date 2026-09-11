@@ -1,0 +1,90 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R029",
+  "release": "V329",
+  "world": "Menu Mágico Reconstruído",
+  "vision_source": "pedido explícito: refazer o menu do zero antes de continuar Tarot Livre",
+  "purpose": "Reconstruir integralmente a representação visual/interativa do Menu, preservando somente Navigation V210 como autoridade de rotas e a mesma Orbe V208.",
+  "replace": [
+    "app-v208.js"
+  ],
+  "new": [
+    "menu-reborn-v329.js",
+    "menu-reborn-v329.css",
+    "REBIRTH-R029-CONTRACT.json"
+  ],
+  "architecture": {
+    "visualMenuRebuiltFromScratch": true,
+    "legacyOrbMenuVisualHidden": true,
+    "routingAuthorityPreserved": "Navigation V210",
+    "secondRouter": false,
+    "homeDuplicated": false,
+    "orbDuplicated": false
+  },
+  "layout": {
+    "primaryOrbitRoutes": [
+      "home",
+      "tarot",
+      "spreads",
+      "school",
+      "ai",
+      "consultations",
+      "music",
+      "login"
+    ],
+    "topConstellation": [
+      "videos",
+      "library",
+      "daily",
+      "store"
+    ],
+    "bottomConstellation": [
+      "journal",
+      "skins",
+      "subscriptions",
+      "notifications"
+    ],
+    "rectangularCards": false,
+    "circularPortals": true,
+    "responsivePortrait": true,
+    "responsiveLowHeight": true,
+    "responsiveNarrow350": true,
+    "responsiveLandscape": true
+  },
+  "orb": {
+    "engine": "V208",
+    "samePhysicalOrb": true,
+    "growsOnMenuTouch": false,
+    "touchResponse": "light + depth + particles",
+    "doubleTapTarotPreserved": true,
+    "holdDragPreserved": true
+  },
+  "accessibility": {
+    "focusTrapRebuilt": true,
+    "escapeClosesViaExistingMenuButton": true,
+    "keyboardIncludesCentralOrb": true,
+    "focusVisibleCircular": true,
+    "backgroundInert": true
+  },
+  "performance": {
+    "layoutPerFrame": false,
+    "compositorTransforms": true,
+    "reducedMotion": true,
+    "constrainedTier": true,
+    "extraApiCalls": 0
+  },
+  "preserve": [
+    "P0 V326 boot-first",
+    "R027 Orb touch magic",
+    "R028 Whit Universal V328",
+    "Dock Stability V326",
+    "All worlds V301-V323"
+  ],
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}
