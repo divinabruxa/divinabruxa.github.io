@@ -1,0 +1,96 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "release": "V504",
+  "name": "Afinação Suprema da Fluidez — Chama Trançada, Portais e Whit Segura",
+  "macro_stage": "Macroetapa V504 — Afinação Suprema da Fluidez",
+  "scope": "Refinamento do Tarot Livre V503 e do Menu Orbital V502 após inspeção real da versão instalada, sem substituir o núcleo físico da Orbe V501.",
+  "prerequisites": [
+    "V501 — Núcleo da Orbe Suprema",
+    "V502 — Menu Orbital Vivo",
+    "V503 — Tarot Livre Supremo"
+  ],
+  "replace": [
+    "app-v208.js",
+    "page-loader-v1.js",
+    "sw.js",
+    "orbital-menu-v502.js",
+    "orbital-menu-v502.css"
+  ],
+  "new": [
+    "tarot-livre-supremo-v504.js",
+    "tarot-livre-supremo-v504.css",
+    "AFINACAO-SUPREMA-V504-CONTRACT.json",
+    "00-INSTALE-V504.txt"
+  ],
+  "canonical_orb": {
+    "core": "SupremeOrbCoreV501",
+    "renderer": "RealityOrbEngine V208 governed by V501",
+    "behavior": "The one physical living orb is claimed from Home by Tarot or Menu and always returned to the same Home cradle.",
+    "second_orb_created": false,
+    "one_living_orb": true,
+    "menu_authority_preserved": "V502"
+  },
+  "stellar_flame": {
+    "engine": "SupremeStellarFlameEngineV504",
+    "webgl": "Wider, brighter, more sinuous gold-magenta-violet ribbon with three living filaments.",
+    "canvas_fallback": "Three genuinely braided S-shaped stellar strands with glow, hot core and adaptive quality.",
+    "birth_wave": "A luminous particle wave travels from the physical orb to the principal card and opens a crown burst at insertion time.",
+    "touch_reactivity": true,
+    "floating_tarot_satellites": true,
+    "adaptive_quality": true
+  },
+  "fluidity": {
+    "menu_visual_response": "The cosmic veil appears on the first animation frame, including when returning from an inner world to Home.",
+    "menu_open_settle_ms": 430,
+    "menu_close_settle_ms": 250,
+    "card_image_gate_ms": 420,
+    "card_departure_ms": 145,
+    "card_birth_ms": 350,
+    "preloaded_upcoming_cards": 8,
+    "programmatic_title_focus_outline_removed": true
+  },
+  "whit_safe_zone": {
+    "logic_or_persona_changed": false,
+    "desktop": "Whit remains visible on the right without covering the central altar.",
+    "mobile": "Whit becomes a compact luminous presence above the dock.",
+    "during_card_birth": "Whit softens temporarily so the orb-to-card ritual remains visually unobstructed."
+  },
+  "tarot_rules": {
+    "deck_size": 78,
+    "normal_orientation_only": true,
+    "reversed_cards": false,
+    "repetition_before_completion": false,
+    "automatic_meanings": false,
+    "revealed_grid_columns": 6,
+    "shuffle_preserves_revealed_cards": true,
+    "reset_confirmation": "two taps when the circle contains revealed cards",
+    "storage_key_preserved": "free-tarot",
+    "cross_tab_coordination_preserved": true
+  },
+  "accessibility_and_performance": {
+    "keyboard_navigation": true,
+    "touch_targets_preserved": true,
+    "native_haptics_only": true,
+    "browser_vibration_used": false,
+    "reduced_motion_keeps_calm_fire": true,
+    "hidden_route_animation_pause": true,
+    "offscreen_animation_pause": true,
+    "offline_core_updated": true
+  },
+  "legacy_state": {
+    "v500_files_may_remain_on_server": true,
+    "v500_loaded": false,
+    "v503_files_may_remain_on_server": true,
+    "v503_loaded": false,
+    "v345_boot_overlay_loaded": false,
+    "v301_tarot_world_loaded": false
+  },
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "whit_server_or_advice_logic_changed": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}

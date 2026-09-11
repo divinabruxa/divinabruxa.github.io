@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — MACROETAPA V502 · MENU ORBITAL VIVO
+/* DIVINA BRUXA — MENU ORBITAL V502 · AFINAÇÃO DE FLUIDEZ V504
    A Orbe Suprema V501 é o único corpo vivo. Este menu a recebe fisicamente,
    organiza treze realidades em duas órbitas e devolve a mesma Orbe à Home.
 */
@@ -7,9 +7,9 @@ const VERSION = 502;
 const INSTANCE = Symbol.for('divina.orbital.menu.v502');
 const ROOT_ID = 'divinaOrbitalMenuV502';
 const STYLE_ID = 'divinaOrbitalMenuV502Styles';
-const STYLE_HREF = './orbital-menu-v502.css?v=502';
-const OPEN_MS = 540;
-const CLOSE_MS = 390;
+const STYLE_HREF = './orbital-menu-v502.css?v=504-fluidity';
+const OPEN_MS = 430;
+const CLOSE_MS = 250;
 
 const INNER = Object.freeze([
   { route:'tarot', label:'Tarot Livre', icon:'tarot' },
@@ -223,6 +223,7 @@ export class OrbitalMenuV502 {
 
       const portal = target.closest('[data-v502-route]');
       if (portal) {
+        if (this.state !== 'open') return;
         event.preventDefault();
         event.stopImmediatePropagation();
         this.activate(portal);
@@ -319,15 +320,23 @@ export class OrbitalMenuV502 {
     this.setMenuButton(true);
     this.publish('opening', 'request');
 
+    /* A cortina cósmica responde já no primeiro quadro. Quando o menu nasce
+       fora da Home, a volta acontece protegida por ela e a mesma Orbe só é
+       reclamada depois de chegar ao próprio berço. */
+    this.root.hidden = false;
+    this.root.setAttribute('aria-hidden', 'false');
+    document.documentElement.classList.add('db502-menu-open');
+    await frame();
+    if (token !== this.motionToken || !this.targetOpen) return false;
+    this.root.classList.add('is-open');
+
     if (routeNow() !== 'home') {
       this.returningHome = true;
       try {
         await Promise.resolve(this.go('home', { source:'orbital-menu-return-home-v502', target:this.menuButton }));
       } catch (error) {
         console.error('[Divina] não foi possível voltar à Home antes do menu', error);
-        this.targetOpen = false;
-        this.setMenuButton(false);
-        this.publish('closed', 'home-error');
+        await this.close({ restoreFocus:true, reason:'home-error', immediate:true });
         return false;
       } finally {
         this.returningHome = false;
@@ -335,17 +344,13 @@ export class OrbitalMenuV502 {
     }
     if (token !== this.motionToken || !this.targetOpen) return false;
 
-    this.root.hidden = false;
-    this.root.setAttribute('aria-hidden', 'false');
-    document.documentElement.classList.add('db502-menu-open');
-    await frame();
     this.releaseOrb = this.core.claim(this.host, {
       mode:'menu',
       ariaLabel:'Orbe das Realidades, centro do menu'
     });
+    this.host.classList.add('has-living-orb');
     await frame();
     if (token !== this.motionToken || !this.targetOpen) return false;
-    this.root.classList.add('is-open');
     this.core.pulse?.('menu-open', { intensity:0.66 });
     nativePulse('Light');
     await wait(reducedMotion() ? 30 : OPEN_MS);
@@ -370,6 +375,7 @@ export class OrbitalMenuV502 {
     try { this.releaseOrb?.(); }
     catch { this.core.returnHome?.(); }
     this.releaseOrb = null;
+    this.host.classList.remove('has-living-orb');
     this.root.classList.remove('is-closing', 'is-departing');
     this.root.hidden = true;
     this.root.setAttribute('aria-hidden', 'true');
@@ -452,7 +458,8 @@ export class OrbitalMenuV502 {
       v500LoaderActive:false,
       extraApiCalls:0,
       webVibration:false,
-      nativeHapticsOnly:true
+      nativeHapticsOnly:true,
+      fluidityTuning:'v504'
     });
   }
 
@@ -463,6 +470,7 @@ export class OrbitalMenuV502 {
     try { this.releaseOrb?.(); }
     catch { this.core?.returnHome?.(); }
     this.releaseOrb = null;
+    this.host?.classList.remove('has-living-orb');
     this.root?.remove();
     this.menuButton?.classList.remove('is-open');
     this.menuButton?.setAttribute('aria-expanded', 'false');

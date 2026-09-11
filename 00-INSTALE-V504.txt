@@ -1,0 +1,65 @@
+DIVINA BRUXA 2.0
+MACROETAPA V504 — AFINAÇÃO SUPREMA DA FLUIDEZ
+================================================
+
+PRÉ-REQUISITOS
+1. A V501 — Núcleo da Orbe Suprema deve estar instalada.
+2. A V502 — Menu Orbital Vivo deve estar instalada.
+3. A V503 — Tarot Livre Supremo deve estar instalada.
+
+COMO INSTALAR
+1. Abra o ZIP desta entrega.
+2. Envie TODOS os 9 arquivos diretamente para a mesma pasta raiz do site.
+3. Confirme a substituição destes 5 arquivos:
+   - app-v208.js
+   - page-loader-v1.js
+   - sw.js
+   - orbital-menu-v502.js
+   - orbital-menu-v502.css
+4. Confirme a inclusão destes 4 arquivos novos:
+   - tarot-livre-supremo-v504.js
+   - tarot-livre-supremo-v504.css
+   - AFINACAO-SUPREMA-V504-CONTRACT.json
+   - 00-INSTALE-V504.txt
+5. Não crie subpastas e não altere os nomes dos arquivos.
+6. Depois do envio, feche todas as abas antigas do site e abra-o novamente.
+
+O QUE ESTA VERSÃO FAZ
+- Mantém a V501 como a única Orbe física e viva de todo o site.
+- Mantém a autoridade e os 13 portais do Menu Orbital V502.
+- Faz o menu responder visualmente no primeiro instante, mesmo vindo de outra página.
+- Encurta a abertura e o fechamento do menu sem cortar a coreografia da Orbe.
+- Transforma a chama Canvas em três fios estelares realmente trançados e sinuosos.
+- Deixa também a chama WebGL mais larga, brilhante e viva.
+- Lança uma onda de fogo da Orbe até a carta exatamente quando a carta nasce.
+- Reduz a espera da primeira carta e prepara oito cartas futuras silenciosamente.
+- Remove a moldura retangular que podia aparecer ao redor do título TAROT LIVRE.
+- Coloca a Whit em uma zona segura, sem cobrir a Orbe, o contador ou o nascimento.
+- Mantém as 78 cartas diretas, sem repetição e em seis cartas por fileira.
+- Atualiza o funcionamento offline para a V504.
+
+IMPORTANTE SOBRE A WHIT
+Esta entrega não troca a mente, a personalidade, os conselhos ou o servidor da Whit.
+Ela apenas organiza sua presença visual no Tarot Livre: à direita no desktop, compacta
+no celular e suavizada por um instante durante o nascimento de uma carta.
+
+ARQUIVOS V500 E V503 ANTIGOS
+Não é necessário apagar esses arquivos manualmente. A V504 não carrega o motor V500
+nem o mundo V503. Eles podem permanecer inertes no servidor sem criar outra Orbe.
+
+TESTE RÁPIDO APÓS INSTALAR
+1. Abra a Home e confirme que existe somente uma Orbe viva no centro.
+2. Abra o Menu: a cortina deve responder imediatamente e a mesma Orbe deve ocupar o centro.
+3. Feche o Menu: a mesma Orbe deve voltar à Home.
+4. Entre em Tarot Livre e confirme que a Whit não cobre o altar central.
+5. Toque uma vez na Orbe: a chama deve viajar até a carta e a carta deve nascer rapidamente.
+6. Revele mais cartas: nenhuma deve repetir ou aparecer invertida.
+7. Volte à Home: a Orbe deve retornar ao centro original.
+8. Feche e reabra o site: as cartas reveladas devem continuar preservadas.
+
+ROLLBACK SEGURO
+Se for necessário voltar, reenvie todos os 7 arquivos do ZIP V503 e confirme as
+substituições. Não apague manualmente a V501 ou a V502.
+
+Esta entrega não publica o site, não altera DNS, não ativa cobranças e não muda
+o servidor da Whit.

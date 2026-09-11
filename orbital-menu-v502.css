@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — MACROETAPA V502 · MENU ORBITAL VIVO */
+/* DIVINA BRUXA — MENU ORBITAL V502 · AFINAÇÃO DE FLUIDEZ V504 */
 
 :root{
   --db502-gold:#f6d493;
@@ -47,7 +47,7 @@ html.db502-menu-open body{
   -webkit-user-select:none;
   user-select:none;
   -webkit-tap-highlight-color:transparent;
-  transition:opacity 260ms ease,visibility 0s linear 420ms;
+  transition:opacity 180ms ease,visibility 0s linear 260ms;
 }
 
 .db502-menu.is-open,
@@ -55,7 +55,23 @@ html.db502-menu-open body{
   opacity:1;
   visibility:visible;
   pointer-events:auto;
-  transition:opacity 220ms ease,visibility 0s;
+  transition:opacity 170ms ease,visibility 0s;
+}
+
+.db502-menu.is-closing{
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 240ms ease,visibility 0s linear 250ms;
+}
+
+.db502-menu.is-closing .db502-portal,
+.db502-menu.is-closing .db502-menu__orbit,
+.db502-menu.is-closing .db502-menu__center,
+.db502-menu.is-closing .db502-menu__heading,
+.db502-menu.is-closing .db502-menu__close,
+.db502-menu.is-closing .db502-menu__hint{
+  transition-delay:0ms!important;
+  transition-duration:210ms!important;
 }
 
 .db502-menu__backdrop{
@@ -130,7 +146,7 @@ html.db502-menu-open body{
   pointer-events:none;
   opacity:0;
   transform:translateY(-12px);
-  transition:opacity 380ms ease 90ms,transform 560ms var(--db502-curve) 70ms;
+  transition:opacity 250ms ease 45ms,transform 390ms var(--db502-curve) 35ms;
 }
 
 .db502-menu.is-open .db502-menu__heading{
@@ -174,7 +190,7 @@ html.db502-menu-open body{
   touch-action:manipulation;
   opacity:0;
   transform:scale(.7) rotate(-28deg);
-  transition:opacity 260ms ease 160ms,transform 520ms var(--db502-curve) 120ms,background 180ms ease,border-color 180ms ease;
+  transition:opacity 190ms ease 80ms,transform 360ms var(--db502-curve) 60ms,background 160ms ease,border-color 160ms ease;
 }
 
 .db502-menu.is-open .db502-menu__close{
@@ -210,7 +226,7 @@ html.db502-menu-open body{
   pointer-events:none;
   opacity:0;
   transform:scale(.56) rotate(-24deg);
-  transition:opacity 360ms ease,transform 760ms var(--db502-curve);
+  transition:opacity 250ms ease,transform 430ms var(--db502-curve);
 }
 
 .db502-menu__orbit:before,
@@ -244,7 +260,7 @@ html.db502-menu-open body{
 .db502-menu__orbit--outer{
   width:calc(var(--db502-outer-radius) * 2);
   height:calc(var(--db502-outer-radius) * 2);
-  transition-delay:45ms;
+  transition-delay:25ms;
 }
 
 .db502-menu.is-open .db502-menu__orbit{
@@ -282,8 +298,8 @@ html.db502-menu-open body{
     scale(.44);
   opacity:0;
   transition:
-    opacity 260ms ease calc(var(--portal-i) * 28ms),
-    transform 720ms var(--db502-curve) calc(var(--portal-i) * 28ms),
+    opacity 190ms ease calc(var(--portal-i) * 16ms),
+    transform 460ms var(--db502-curve) calc(var(--portal-i) * 16ms),
     filter 180ms ease;
 }
 
@@ -446,16 +462,22 @@ html.db502-menu-open body{
   border-radius:50%;
   opacity:0;
   transform:scale(.55);
-  transition:opacity 320ms ease 60ms,transform 760ms var(--db502-curve);
+  transition:opacity 230ms ease 35ms,transform 430ms var(--db502-curve) 20ms;
 }
 
 .db502-menu.is-open .db502-menu__center{
-  opacity:1;
-  transform:scale(1);
+  opacity:.28;
+  transform:scale(.78);
 }
 
 .db502-menu__center[data-supreme-orb-host="active"]{
   contain:layout style;
+}
+
+.db502-menu.is-open .db502-menu__center[data-supreme-orb-host="active"],
+.db502-menu.is-open .db502-menu__center.has-living-orb{
+  opacity:1;
+  transform:scale(1);
 }
 
 .db502-menu__center > [data-supreme-orb="living"]{
@@ -512,7 +534,7 @@ html.db502-menu-open body{
   text-shadow:0 1px 8px #000;
   opacity:0;
   transform:translateY(10px);
-  transition:opacity 320ms ease 300ms,transform 520ms var(--db502-curve) 280ms;
+  transition:opacity 220ms ease 150ms,transform 360ms var(--db502-curve) 130ms;
   pointer-events:none;
 }
 
