@@ -1,0 +1,65 @@
+DIVINA BRUXA — V515
+MACROETAPA 1 DE 4 · NÚCLEO DO UNIVERSO VIVO UNIVERSAL
+
+PRÉ-REQUISITO
+V514 instalada.
+
+COMO INSTALAR NO GITHUB
+1. Abra a raiz do mesmo site em que a V514 já está instalada.
+2. Envie os 9 arquivos deste ZIP diretamente para a raiz.
+3. Não crie pasta: todos os arquivos precisam ficar soltos.
+4. Confirme a substituição destes 3 arquivos:
+   - app-v208.js
+   - page-loader-v1.js
+   - sw.js
+5. Os outros 6 arquivos são novos:
+   - 00-INSTALE-V515.txt
+   - UNIVERSO-VIVO-UNIVERSAL-V515-CONTRACT.json
+   - living-universe-core-v515.js
+   - living-universe-core-v515.css
+   - tarot-livre-orbe-os-v515.js
+   - tarot-livre-orbe-os-v515.css
+6. Aguarde o GitHub concluir e abra o site novamente.
+7. No iPhone, feche todas as abas da Divina Bruxa e o aplicativo instalado uma
+   vez; depois abra novamente para o service worker V515 assumir.
+
+O QUE ESTA MACROETAPA ENTREGA
+- Um único universo procedural vivo ocupa a tela inteira, inclusive atrás do
+  cabeçalho, do Tarot Livre e das demais páginas.
+- Não existe fotografia cósmica no motor V515. Estrelas, nebulosas, poeira e
+  galáxias são calculadas continuamente pelo navegador.
+- O universo responde suavemente à página atual, à skin, ao toque e à Orbe.
+- O corte retangular e a faixa preta entre cabeçalho e Tarot são removidos.
+- A imagem estática V514 deixa de ser carregada pelo Tarot e pelo modo offline.
+- O clarão branco defeituoso da V514 fica totalmente desligado.
+- A carta real continua nascendo da Orbe e viajando fisicamente até o portal;
+  nenhuma carta decorativa voa sem explicação.
+- O motor protege a fluidez: uma única animação contínua, resolução adaptativa,
+  pausa quando a página fica oculta e fallback procedural sem imagem.
+
+IMPORTANTE SOBRE O FOGO
+Esta é somente a Macroetapa 1 de 4. A V515 constrói o universo correto e retira
+o fogo branco incorreto. A chama celestial orgânica, violeta, magenta e dourada
+será construída sobre este mesmo núcleo na Macroetapa 2. A V515 não apresenta
+raio e também não finge que o fogo definitivo já está pronto.
+
+O QUE CONTINUA INTOCÁVEL
+- Exatamente uma Orbe física viva: Supreme Orb V501.
+- Menu Orbital V502 e Motor Universal das Realidades V511.
+- Carta do Dia V509.
+- 78 cartas diretas, sem repetição e seis cartas por fileira.
+- Sessão existente preservada; a face só troca após decodificação.
+- Nenhum significado dentro do Tarot Livre.
+- Nenhuma mudança em Whit, servidor, API, pagamentos, autenticação, banco,
+  domínio ou DNS.
+- Nenhuma publicação foi feita por esta entrega.
+
+COMO CONFERIR
+- O universo deve aparecer desde o topo da tela, sem retângulo de imagem.
+- As estrelas devem pulsar e o campo cósmico deve respirar lentamente.
+- Ao trocar de página, a atmosfera muda sem reiniciar ou duplicar a Orbe.
+- Ao tocar na Orbe no Tarot Livre, somente a carta escolhida deve viajar.
+- Não deve existir clarão branco nem linha parecida com raio.
+
+PRÓXIMA MACROETAPA
+Macroetapa 2 de 4 — Motor de Chama Celestial Verdadeira.

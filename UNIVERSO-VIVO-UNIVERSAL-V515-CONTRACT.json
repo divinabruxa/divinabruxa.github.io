@@ -1,0 +1,102 @@
+{
+  "release": "V515",
+  "name": "Orbe OS — Núcleo do Universo Vivo Universal",
+  "macro_stage": {
+    "current": 1,
+    "total": 4,
+    "title": "Núcleo do Universo Vivo Universal",
+    "next": "Motor de Chama Celestial Verdadeira"
+  },
+  "requires": "V514 installed",
+  "files": {
+    "replace": [
+      "app-v208.js",
+      "page-loader-v1.js",
+      "sw.js"
+    ],
+    "new": [
+      "00-INSTALE-V515.txt",
+      "UNIVERSO-VIVO-UNIVERSAL-V515-CONTRACT.json",
+      "living-universe-core-v515.js",
+      "living-universe-core-v515.css",
+      "tarot-livre-orbe-os-v515.js",
+      "tarot-livre-orbe-os-v515.css"
+    ]
+  },
+  "universal_universe": {
+    "authority": "LivingUniverseCoreV515",
+    "canvas_count": 1,
+    "scope": "fixed viewport behind header and every route",
+    "static_background_images": 0,
+    "procedural_stars": true,
+    "procedural_nebulae": true,
+    "procedural_galaxies": true,
+    "procedural_cosmic_dust": true,
+    "route_reactive": true,
+    "skin_reactive": true,
+    "touch_reactive": true,
+    "continuous_between_routes": true,
+    "rectangular_background_seam": false,
+    "canvas2d_procedural_fallback": true
+  },
+  "performance": {
+    "continuous_animation_loops": 1,
+    "standard_target_fps": 60,
+    "constrained_target_fps": 40,
+    "adaptive_render_resolution": true,
+    "adaptive_quality_floor": 0.5,
+    "pauses_when_document_hidden": true,
+    "reduced_motion_supported": true,
+    "webgl_antialias_buffer": false,
+    "per_route_canvas_recreation": false,
+    "photographic_background_decode": false
+  },
+  "celestial_fire": {
+    "v514_visible": false,
+    "overexposed_white_blob": false,
+    "lightning_strokes": false,
+    "definitive_fire_included": false,
+    "definitive_fire_scheduled_release": "V516",
+    "honesty_note": "V515 establishes the universe and does not claim that the final fire is complete."
+  },
+  "orb_os": {
+    "physical_orb_authority": "Supreme Orb V501",
+    "living_orb_count": 1,
+    "second_orb_engine": false,
+    "tarot_claims_home_orb": true,
+    "menu_authority": "V502 unchanged",
+    "reality_lifecycle": "V511 preserved",
+    "universe_receives_orb_interaction": true
+  },
+  "tarot": {
+    "world": "orbe-os-v515",
+    "deck_size": 78,
+    "orientation": "upright only",
+    "repeats": 0,
+    "grid_columns": 6,
+    "meanings_in_free_tarot": false,
+    "existing_session_preserved": true,
+    "atomic_decoded_swap": true,
+    "physical_card_journey": true,
+    "card_back_during_journey": true,
+    "decorative_flying_cards": false,
+    "card_edge_birth_response": true
+  },
+  "preserved": {
+    "daily_world": "V509 unchanged",
+    "supreme_orb": "V501 unchanged",
+    "orbital_menu_logic": "V502 unchanged",
+    "reality_lifecycle": "V511 unchanged",
+    "whit_server_or_persona": "unchanged",
+    "billing_auth_database_dns": "unchanged"
+  },
+  "safety": {
+    "navigator_vibrate": false,
+    "native_capacitor_haptics_only": true,
+    "new_api_calls": 0,
+    "production_publish_authorized": false,
+    "deploy_authorized": false,
+    "dns_authorized": false,
+    "database_changes_authorized": false
+  }
+}

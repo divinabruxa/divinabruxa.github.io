@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — MACROETAPA 1 · ORBE OS / TAROT LIVRE GÊNESE V514
-   V501 continua como a única Orbe Suprema. V511 governa as passagens e V514
-   materializa cartas em fogo celestial dentro de um universo profundo vivo. */
+/* DIVINA BRUXA — MACROETAPA 1/4 · UNIVERSO VIVO UNIVERSAL V515
+   V501 continua como a única Orbe Suprema. V511 governa as passagens e V515
+   cria um único universo procedural contínuo para todas as realidades. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -9,12 +9,13 @@ import { orbMotionV207 } from './orb-motion-core-v207.js?v=207';
 import { RealityOrbEngine } from './orb-engine-v208.js?v=208';
 import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=501';
 import { installRealityLifecycleV511 } from './reality-lifecycle-v511.js?v=511';
+import { createLivingUniverseV515 } from './living-universe-core-v515.js?v=515-universal';
 import { AuthClientV201 as AuthClient } from './auth-client-v201.js?v=201';
 import { AccountEngineV201 } from './account-engine-v201.js?v=201';
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=319';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=514-celestial-fire';
+import { createPageLoader } from './page-loader-v1.js?v=515-universal';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -93,6 +94,10 @@ const safely = (label, task) => {
     return null;
   }
 };
+
+const livingUniverse = safely('Universo Vivo Universal V515', () =>
+  createLivingUniverseV515()
+);
 
 const toast = message => {
   const element = $('#toast');
@@ -184,13 +189,13 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V514 = 514;
-const releaseReloadKeyV514 = `divina-release-reload-${RELEASE_EPOCH_V514}`;
-const reloadForNewReleaseV514 = version => {
-  if (Number(version || 0) <= RELEASE_EPOCH_V514) return false;
+const RELEASE_EPOCH_V515 = 515;
+const releaseReloadKeyV515 = `divina-release-reload-${RELEASE_EPOCH_V515}`;
+const reloadForNewReleaseV515 = version => {
+  if (Number(version || 0) <= RELEASE_EPOCH_V515) return false;
   try {
-    if (sessionStorage.getItem(releaseReloadKeyV514)) return false;
-    sessionStorage.setItem(releaseReloadKeyV514, String(version));
+    if (sessionStorage.getItem(releaseReloadKeyV515)) return false;
+    sessionStorage.setItem(releaseReloadKeyV515, String(version));
   } catch {}
   location.reload();
   return true;
@@ -199,7 +204,7 @@ const reloadForNewReleaseV514 = version => {
 navigator.serviceWorker?.addEventListener('message', event => {
   if (event.data?.type === 'DIVINA_RELEASE_READY') {
     document.documentElement.dataset.releaseReady = String(event.data.version || 'unknown');
-    reloadForNewReleaseV514(event.data.version);
+    reloadForNewReleaseV515(event.data.version);
     return;
   }
   if (event.data?.type !== 'divina-notification-open') return;
@@ -209,15 +214,15 @@ navigator.serviceWorker?.addEventListener('message', event => {
   }
 });
 
-if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV514) {
-  window.__divinaSWBootstrapV514 = true;
+if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV515) {
+  window.__divinaSWBootstrapV515 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=514', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=515', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v514';
+        document.documentElement.dataset.releaseEpoch = 'v515';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V514 registrado');
+        console.info('[Divina] PWA V515 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -231,6 +236,7 @@ window.orbe = {
   go,
   loadPage:pageLoader.load,
   loading:loadingPortal,
+  universe:livingUniverse,
   supreme:supremeOrb,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -531,7 +537,7 @@ const awaken = async () => {
     document.documentElement.dataset.bootRecovery = 'v326';
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
     dispatchEvent(new CustomEvent('divina:boot-ready', {
-      detail: { shell:'v180', recovery:'v326', bootFirst:true, supremeOrb:'v501', orbitalMenu:'v502', tarotLivre:'v514', dailyWorld:'v509', realityLifecycle:'v511', transitionAuthority:'supreme-orb-v501', loaderProjection:'supreme-orb-v501', fluidity:'v514', stellarFire:'v514', physicalCardJourney:true, stellarFoundation:true, optimizedCosmicBackdrop:true, losslessRetinaMaster:true, skinReactiveUniverse:true, retinaAdaptiveEffects:true, spriteAtlasParticles:true, smoothBirthJourney:true, oneAnimationCadence:true, trueCelestialFire:true, lightningStrokes:false, volumetricBillows:true, flameTongues:true, cosmicNebula:true, livingUniverse:true, decodedBeforeSwap:true, unexplainedFlyingCards:false, cardEdgeBurst:true, oneLivingDailyOrb:true }
+      detail: { shell:'v180', recovery:'v326', bootFirst:true, supremeOrb:'v501', orbitalMenu:'v502', tarotLivre:'v515', dailyWorld:'v509', realityLifecycle:'v511', transitionAuthority:'supreme-orb-v501', loaderProjection:'supreme-orb-v501', fluidity:'v515-universal', livingUniverse:'v515', globalUniverseCanvas:true, staticUniverseImage:false, proceduralStars:true, proceduralNebulae:true, proceduralGalaxies:true, skinReactiveUniverse:true, physicalCardJourney:true, decodedBeforeSwap:true, unexplainedFlyingCards:false, legacyTarotFireVisible:false, stellarFire:'scheduled-v516', trueCelestialFire:false, lightningStrokes:false, oneLivingDailyOrb:true }
     }));
 
     // O menu é opcional para o boot: a Home abre mesmo se esta camada falhar.
