@@ -1,5 +1,5 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R006 · CARREGADOR DE MUNDOS V305
-   Mundos Rebirth: Tarot Livre V301, Biblioteca Viva V302, Carta do Dia V303 e Tiragens V305.
+/* DIVINA BRUXA 2.0 — REBIRTH R007 · CARREGADOR DE MUNDOS V306
+   Mundos Rebirth: Tarot Livre V301, Biblioteca Viva V302, Carta do Dia V303, Tiragens V305 e Escola V306.
    Home/Menu V304 permanecem fora deste carregador e preservados. */
 import {
   normalizeRouteId,
@@ -131,8 +131,11 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
       return new module.LibraryWorldV302($('#cardLibraryApp'));
     },
     school: async () => {
-      const { SchoolEngine } = await import('./school-engine.js?v=186');
-      return new SchoolEngine($('#schoolApp'));
+      const [, module] = await Promise.all([
+        ensureStyle('divinaSchoolRebirthV306', 'school-world-v306.css?v=306'),
+        import('./school-world-v306.js?v=306')
+      ]);
+      return new module.SchoolWorldV306($('#schoolApp'));
     },
     spreads: async () => {
       const [, module] = await Promise.all([
@@ -203,6 +206,10 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
     spreads: () => Promise.all([
       ensureStyle('divinaSpreadsRebirthV305', 'spreads-world-v305.css?v=305'),
       import('./spreads-world-v305.js?v=305')
+    ]),
+    school: () => Promise.all([
+      ensureStyle('divinaSchoolRebirthV306', 'school-world-v306.css?v=306'),
+      import('./school-world-v306.js?v=306')
     ]),
     consultations: () => Promise.all([
       import('./commerce-engine.js?v=148'),

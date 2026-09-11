@@ -1,0 +1,46 @@
+{
+  "release": "REBIRTH-R007",
+  "world": "Escola do Tarot 2.0",
+  "version": 306,
+  "base": "R006/V305 installed",
+  "intent": "Transformar a Escola existente em uma jornada contínua sem substituir o conteúdo real V186.",
+  "preserved": [
+    "Home e Orbe V304",
+    "Menu V304/V210-V211",
+    "Tarot Livre V301",
+    "Biblioteca V302",
+    "Carta do Dia V303",
+    "Tiragens V305",
+    "17 módulos oficiais",
+    "78 aulas de cartas",
+    "46 aulas teóricas",
+    "124 aulas totais",
+    "notas privadas locais",
+    "favoritos e revisão",
+    "quizzes",
+    "backup/restauração local",
+    "Tutor opcional com consentimento por aula"
+  ],
+  "adds": [
+    "jornada visual de 17 módulos",
+    "progresso global 124/124",
+    "progresso por módulo",
+    "continuar jornada em um toque",
+    "atalhos horizontais mobile para os 17 módulos",
+    "content-visibility nas aulas para reduzir custo de renderização",
+    "transições respeitando prefers-reduced-motion"
+  ],
+  "files": {
+    "replace": ["page-loader-v1.js"],
+    "new": ["school-world-v306.js", "school-world-v306.css", "REBIRTH-R007-CONTRACT.json"]
+  },
+  "forbidden_changes": [
+    "não alterar a Orbe",
+    "não alterar Home/Menu",
+    "não remover conteúdo escolar",
+    "não tornar notas públicas",
+    "não enviar progresso ou notas para analytics",
+    "não ativar cobrança real",
+    "não ativar IA paga"
+  ]
+}
