@@ -1,0 +1,60 @@
+{
+  "release": "REBIRTH-R014",
+  "version": 313,
+  "world": "Whit Generation Bridge",
+  "principle": "A mente V312 chega ao request real por uma ponte de chamada unica, consentida e compativel com o schema V190, sem criar um segundo motor nem enfraquecer o servidor.",
+  "invariants": {
+    "existing_ai_engine_preserved": true,
+    "existing_auth_ai_chat_wrapped_once": true,
+    "second_ai_engine": false,
+    "single_generation_request": true,
+    "extra_api_calls": 0,
+    "server_schema_changed": false,
+    "system_policy_server_authoritative": true,
+    "mind_envelope_one_shot": true,
+    "explicit_consent_required": true,
+    "local_visible_user_message_preserved": true,
+    "private_receipt_body_read": false,
+    "context_persisted_by_bridge": false,
+    "unknown_or_expired_context_falls_back": true,
+    "user_message_never_truncated_for_context": true,
+    "wire_message_max_characters": 5000,
+    "generation_flags_overridden": false,
+    "paid_api_enabled_by_bridge": false,
+    "billing_enabled_by_bridge": false,
+    "sol_enabled": false,
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "old_rebirth_layers_preserved": [
+      "Tarot Livre V301",
+      "Biblioteca Viva V302",
+      "Carta do Dia V303",
+      "Home Heart V304",
+      "Whit Core/Presence/Nerves/Context/Memory/Signature/Mind V307-V312"
+    ]
+  },
+  "files": {
+    "replace": ["app-v208.js"],
+    "new": ["whit-generation-bridge-v313.js", "REBIRTH-R014-CONTRACT.json"]
+  },
+  "tests": {
+    "javascript_syntax": true,
+    "contract_json": true,
+    "flat_zip": true,
+    "one_shot_envelope": true,
+    "message_match_guard": true,
+    "schema_guard": true,
+    "mode_guard_luna_terra_only": true,
+    "source_allowlist": true,
+    "wire_limit_5000": true,
+    "full_length_user_message_fallback": true,
+    "no_fetch_in_bridge": true,
+    "no_localstorage_in_bridge": true,
+    "no_sessionstorage_in_bridge": true,
+    "no_sol_enable": true,
+    "no_billing_enable": true,
+    "no_server_schema_change": true
+  }
+}
