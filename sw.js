@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 2.0 — MACROETAPA V506 · SERVICE WORKER DA FLUIDEZ SUPREMA
+/* DIVINA BRUXA 2.0 — MACROETAPA V507 · SERVICE WORKER DA CHAMA ESTELAR ORGÂNICA
    Cache seletivo e versionado. Nunca guarda Auth, Whit generation, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=506;
+const VERSION=507;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v506-shell';
-const CONTENT_CACHE='divina-bruxa-v506-content';
-const IMAGE_CACHE='divina-bruxa-v506-images';
-const OFFLINE_CACHE='divina-bruxa-v506-offline-core';
+const SHELL_CACHE='divina-bruxa-v507-shell';
+const CONTENT_CACHE='divina-bruxa-v507-content';
+const IMAGE_CACHE='divina-bruxa-v507-images';
+const OFFLINE_CACHE='divina-bruxa-v507-offline-core';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE]);
 
 const REQUIRED_SHELL=Object.freeze([
@@ -18,7 +18,7 @@ const REQUIRED_SHELL=Object.freeze([
   './runtime-v12.js','./orb-motion-core-v207.js','./orb-gesture-core-v208.js',
   './orb-engine-v208.js','./supreme-orb-core-v501.js','./supreme-orb-core-v501.css',
   './orbital-menu-v502.js','./orbital-menu-v502.css',
-  './tarot-livre-supremo-v506.js','./tarot-livre-supremo-v506.css',
+  './tarot-livre-supremo-v507.js','./tarot-livre-supremo-v507.css',
   './orb-loading-portal-v1.js',
   './divina-shell-v180.css','./home-orb-absolute-v206.css','./pwa-world-v196.css',
   './pwa-resilience-v324.css','./pwa-world-v324.js','./performance-world-v324.js',
@@ -49,7 +49,7 @@ const APP_DEPENDENCIES=Object.freeze([
 ]);
 
 const REBIRTH_WARM=Object.freeze([
-  './tarot-livre-supremo-v506.js','./tarot-livre-supremo-v506.css',
+  './tarot-livre-supremo-v507.js','./tarot-livre-supremo-v507.css',
   './library-world-v302.js','./library-world-v302.css',
   './daily-world-v303.js','./daily-world-v303.css','./daily-policy-v303.js',
   './spreads-world-v305.js','./spreads-world-v305.css',
@@ -64,7 +64,7 @@ const REBIRTH_WARM=Object.freeze([
 
 const OFFLINE_WORLD_ASSETS=Object.freeze([
   './tarot-data.js','./tarot-image-runtime.js','./tarot-session.js','./tarot-continuity.js',
-  './tarot-livre-supremo-v506.js','./tarot-livre-supremo-v506.css',
+  './tarot-livre-supremo-v507.js','./tarot-livre-supremo-v507.css',
   './tarot-atlas-mobile-v196.webp',
   './card-library-policy.js','./card-library-engine.js','./library-world-v302.js','./library-world-v302.css',
   './daily-world-v303.js','./daily-world-v303.css','./daily-policy-v303.js','./daily-meaning-runtime.js','./tarot-meanings.js','./meaning-engine.js',

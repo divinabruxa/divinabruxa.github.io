@@ -1,0 +1,131 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "release": "V507",
+  "name": "Chama Estelar Orgânica e Altar Responsivo",
+  "macro_stage": "Macroetapa 1 — Núcleo Orbe–Menu–Tarot, evolução V507",
+  "scope": "Transformar a chama observada na V506 em plasma turbulento, envolver a nova carta em uma coroa de fagulhas e melhorar a composição móvel, preservando V501, V502 e todas as leis do Tarot Livre.",
+  "prerequisites": [
+    "V501 — Núcleo da Orbe Suprema",
+    "V502 — Menu Orbital Vivo",
+    "V506 — Chama Viva e Nascimento Sincronizado"
+  ],
+  "replace": [
+    "app-v208.js",
+    "page-loader-v1.js",
+    "sw.js"
+  ],
+  "new": [
+    "tarot-livre-supremo-v507.js",
+    "tarot-livre-supremo-v507.css",
+    "CHAMA-ESTELAR-V507-CONTRACT.json",
+    "00-INSTALE-V507.txt"
+  ],
+  "live_v506_audit": {
+    "tarot_world": "supremo-v506",
+    "renderer_observed": "canvas",
+    "one_living_orb": true,
+    "canonical_orb_version": 501,
+    "home_orb_opens_tarot": true,
+    "menu_portals": 13,
+    "menu_returns_orb_home": true,
+    "revealed_before_test": 8,
+    "revealed_after_test": 10,
+    "principal_card_counter_grid_match": true,
+    "repetition_observed": false,
+    "reversed_card_observed": false,
+    "site_origin_console_errors_found": false,
+    "calibration_targets": [
+      "The flame still formed geometric joints in some Canvas frames.",
+      "The visual impact needed to ignite around the new card edges, not only along the travel path.",
+      "The mobile page crown needed more separation between the title and Mesa Real control."
+    ]
+  },
+  "canonical_orb": {
+    "core": "SupremeOrbCoreV501",
+    "renderer": "RealityOrbEngine V208 governed by V501",
+    "second_orb_created": false,
+    "one_living_orb": true,
+    "menu_authority_preserved": "V502",
+    "home_double_tap_preserved": true
+  },
+  "stellar_plasma": {
+    "engine": "SupremeStellarFlameEngineV507",
+    "webgl_domain_warp": true,
+    "canvas_multiscale_turbulence": true,
+    "primary_filaments": 5,
+    "organic_tongues_constrained": 16,
+    "organic_tongues_standard": 24,
+    "travelling_starlets_constrained": 22,
+    "travelling_starlets_standard": 34,
+    "continuous_ambient_embers": true,
+    "particle_streaks": true,
+    "thin_birth_tail": true,
+    "adaptive_particle_budget": true
+  },
+  "card_birth_corona": {
+    "enabled": true,
+    "geometry": "rounded card-edge portal",
+    "edge_sparks_constrained": 54,
+    "edge_sparks_standard": 96,
+    "layered_rectangular_rings": 3,
+    "stellar_rays": 12,
+    "sequence": [
+      "Prepare the next upright card without changing the visible counter.",
+      "Complete the previous-card departure.",
+      "Insert the new principal card.",
+      "Update counter and six-column constellation in the same synchronous turn.",
+      "Ignite the physical V501 pulse, card-edge corona and stellar flame together."
+    ],
+    "card_image_gate_ms": 280,
+    "card_departure_ms": 145,
+    "card_arrival_ms": 350,
+    "stellar_birth_wave_ms": 760
+  },
+  "responsive_altar": {
+    "mobile_stage_min_height_px": 650,
+    "mobile_title_and_mesa_separated": true,
+    "six_card_grid_preserved": true,
+    "safe_area_preserved": true,
+    "whit_safe_zone_preserved": true
+  },
+  "tarot_rules": {
+    "deck_size": 78,
+    "normal_orientation_only": true,
+    "reversed_cards": false,
+    "repetition_before_completion": false,
+    "automatic_meanings": false,
+    "revealed_grid_columns": 6,
+    "shuffle_preserves_revealed_cards": true,
+    "reset_confirmation": "two taps when the circle contains revealed cards",
+    "storage_key_preserved": "free-tarot",
+    "cross_tab_coordination_preserved": true
+  },
+  "accessibility_and_performance": {
+    "keyboard_navigation": true,
+    "touch_targets_preserved": true,
+    "native_haptics_only": true,
+    "browser_vibration_used": false,
+    "reduced_motion_keeps_calm_fire": true,
+    "hidden_route_animation_pause": true,
+    "offscreen_animation_pause": true,
+    "offline_core_updated": true
+  },
+  "whit_safe_zone": {
+    "logic_or_persona_changed": false,
+    "server_changed": false,
+    "visual_safe_zone_preserved": true
+  },
+  "legacy_state": {
+    "v500_through_v506_files_may_remain_on_server": true,
+    "v506_loaded_after_v507_activation": false,
+    "v501_and_v502_remain_authorities": true
+  },
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "whit_server_or_advice_logic_changed": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}
