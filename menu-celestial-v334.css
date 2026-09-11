@@ -1,0 +1,379 @@
+/* DIVINA BRUXA 2.0 — REBIRTH R034 · MENU CELESTIAL V334
+   A mesma Orbe viaja entre Home e Menu. O fechamento percorre o caminho inverso. */
+
+html[data-menu-reborn="v334"] #orbMenu{
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+html[data-menu-reborn="v334"] #orbMenu *,
+html[data-menu-reborn="v334"] #orbMenu::before,
+html[data-menu-reborn="v334"] #orbMenu::after{
+  animation:none!important;
+  transition:none!important;
+}
+
+/* ─────────────────────────────────────────────
+   ORBE CENTRAL
+   OPENING/OPEN = menor.
+   CLOSING após orb-menu-open ser removido = tamanho final da Home,
+   permitindo que o FLIP V210 anime de pequeno → grande.
+   ───────────────────────────────────────────── */
+html[data-runtime="v12"][data-menu-reborn="v334"]
+#home.home-orb-only-v206.active.orb-menu-open > .orb-stage-ref,
+html[data-runtime="v12"][data-menu-reborn="v334"]
+#home.home-orb-only-v206.active.orb-menu-transition.orb-menu-opening > .orb-stage-ref{
+  --mc334-orb-size:min(48vw,25dvh,220px);
+  position:absolute!important;
+  left:50%!important;
+  top:53%!important;
+  right:auto!important;
+  bottom:auto!important;
+  inset:auto!important;
+  width:var(--mc334-orb-size)!important;
+  height:var(--mc334-orb-size)!important;
+  margin:0!important;
+  transform:translate3d(-50%,-50%,0)!important;
+  transform-origin:50% 50%!important;
+  z-index:48!important;
+  pointer-events:auto!important;
+}
+
+/* estado final de fechamento = geometria EXATA da Home aprovada */
+html[data-runtime="v12"][data-menu-reborn="v334"]
+#home.home-orb-only-v206.active.orb-menu-transition.orb-menu-closing:not(.orb-menu-open) > .orb-stage-ref{
+  --v75-orb-size:min(89vw,47dvh,470px);
+  position:absolute!important;
+  inset:0!important;
+  left:auto!important;
+  top:auto!important;
+  width:var(--v75-orb-size)!important;
+  height:var(--v75-orb-size)!important;
+  margin:auto!important;
+  transform:translateZ(0)!important;
+  transform-origin:50% 50%!important;
+  z-index:48!important;
+}
+
+html[data-runtime="v12"][data-menu-reborn="v334"]
+#home.orb-menu-open > .orb-stage-ref > #orb,
+html[data-runtime="v12"][data-menu-reborn="v334"]
+#home.orb-menu-transition > .orb-stage-ref > #orb{
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  margin:0!important;
+  transform:none!important;
+  scale:1!important;
+}
+
+/* toque no Menu = luz, não crescimento */
+html[data-menu-reborn="v334"] #home.orb-menu-open #orb.r027-touching,
+html[data-menu-reborn="v334"] #home.orb-menu-transition #orb.r027-touching{
+  scale:1!important;
+}
+html[data-menu-reborn="v334"] #home.orb-menu-open #orb.r027-touching .r027-orb-touch-light{
+  opacity:1!important;
+  transform:scale(1)!important;
+  filter:brightness(1.15);
+}
+
+/* ── OVERLAY ── */
+.menu-celestial-v334{
+  position:fixed!important;
+  z-index:42;
+  inset:0!important;
+  display:block!important;
+  overflow:hidden;
+  pointer-events:none;
+  opacity:0;
+  visibility:hidden;
+  contain:layout paint style;
+  isolation:isolate;
+  background:
+    radial-gradient(circle at 50% 53%,rgba(116,38,167,.095),transparent 25%),
+    linear-gradient(180deg,rgba(2,1,5,.02),rgba(2,1,5,.08));
+  transition:
+    opacity .36s cubic-bezier(.16,.82,.22,1),
+    visibility 0s linear .58s;
+}
+.menu-celestial-v334.is-visible{
+  opacity:1;
+  visibility:visible;
+  transition-delay:0s;
+}
+.menu-celestial-v334.is-closing{
+  opacity:0;
+  transition-duration:.42s;
+}
+
+/* atmosfera */
+.mc334-atmosphere{position:absolute;inset:0;pointer-events:none}
+.mc334-atmosphere i{
+  position:absolute;width:3px;height:3px;border-radius:50%;
+  background:#f8dda6;box-shadow:0 0 10px rgba(216,109,255,.70);
+  opacity:.13;
+}
+.mc334-atmosphere i:nth-child(1){left:9%;top:24%}
+.mc334-atmosphere i:nth-child(2){left:88%;top:27%}
+.mc334-atmosphere i:nth-child(3){left:15%;top:60%}
+.mc334-atmosphere i:nth-child(4){left:82%;top:66%}
+.mc334-atmosphere i:nth-child(5){left:46%;top:17%}
+.mc334-atmosphere i:nth-child(6){left:59%;top:82%}
+.mc334-atmosphere i:nth-child(7){left:27%;top:77%}
+.mc334-atmosphere i:nth-child(8){left:74%;top:19%}
+.menu-celestial-v334.is-open .mc334-atmosphere i{animation:mc334Star 7.2s ease-in-out infinite}
+
+/* dois anéis ficam longe da Orbe */
+.mc334-primary,.mc334-orbit{
+  position:absolute;
+  left:50%;
+  top:53%;
+  width:min(82vw,43dvh,390px);
+  aspect-ratio:1;
+  pointer-events:none;
+  opacity:0;
+  transform:translate(-50%,-50%) scale(.48);
+  filter:blur(5px);
+  transition:
+    transform .64s cubic-bezier(.16,.82,.22,1),
+    opacity .34s ease,
+    filter .44s ease;
+}
+.menu-celestial-v334.is-open .mc334-primary,
+.menu-celestial-v334.is-open .mc334-orbit{
+  opacity:1;
+  transform:translate(-50%,-50%) scale(1);
+  filter:none;
+}
+.menu-celestial-v334.is-closing .mc334-primary,
+.menu-celestial-v334.is-closing .mc334-orbit{
+  opacity:0;
+  transform:translate(-50%,-50%) scale(.48);
+  filter:blur(4px);
+  transition-duration:.50s,.27s,.34s;
+}
+
+.mc334-orbit__outer,.mc334-orbit__inner{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  border:1px solid rgba(239,202,129,.105);border-radius:50%;
+}
+.mc334-orbit__outer{width:100%;height:100%}
+.mc334-orbit__inner{width:71%;height:71%;opacity:.24}
+.mc334-comet{
+  position:absolute;left:50%;top:0;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;
+  background:#ffe5ab;box-shadow:0 0 8px #efc77a,0 0 14px rgba(201,81,255,.60);
+  transform-origin:2.5px calc(min(82vw,43dvh,390px)/2);
+}
+.menu-celestial-v334.is-open .mc334-comet{animation:mc334Orbit 15s linear infinite}
+
+/* Portais principais usam órbita polar: nascem do centro e caminham até o círculo */
+.mc334-primary .mc334-portal{
+  --radius:min(41vw,21.5dvh,195px);
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:
+    translate(-50%,-50%)
+    rotate(var(--angle))
+    translateY(calc(-1 * var(--radius)))
+    rotate(calc(-1 * var(--angle)));
+}
+.mc334-portal{
+  appearance:none;
+  padding:0;
+  border:0;
+  background:none;
+  display:grid;
+  place-items:center;
+  gap:5px;
+  color:#d7cad8;
+  pointer-events:auto;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  opacity:0;
+  filter:blur(2px) brightness(.88);
+  transition:
+    opacity .30s ease calc(55ms + var(--i)*18ms),
+    filter .34s ease calc(55ms + var(--i)*18ms);
+}
+.menu-celestial-v334.is-open .mc334-portal{opacity:1;filter:none}
+.menu-celestial-v334.is-closing .mc334-portal{
+  opacity:0;
+  filter:blur(1.5px) brightness(.90);
+  transition-duration:.23s;
+  transition-delay:calc((7 - var(--i))*9ms);
+}
+
+.mc334-jewel{
+  position:relative;
+  display:grid;
+  place-items:center;
+  width:48px;
+  height:48px;
+  border:1px solid rgba(240,203,132,.43);
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 32% 25%,rgba(255,246,219,.12),transparent 25%),
+    radial-gradient(circle at 50% 62%,rgba(79,23,109,.82),rgba(8,3,14,.96) 72%);
+  box-shadow:
+    inset 0 0 18px rgba(184,64,228,.12),
+    0 0 14px rgba(220,170,95,.06);
+  transition:
+    transform .20s cubic-bezier(.2,.8,.2,1),
+    box-shadow .25s ease,
+    border-color .25s ease,
+    filter .20s ease;
+}
+.mc334-jewel i{
+  color:#efd08b;
+  font:500 21px/1 Georgia,serif;
+  font-style:normal;
+}
+.mc334-jewel em{
+  position:absolute;right:8px;top:8px;width:3px;height:3px;border-radius:50%;
+  background:#fff0c2;box-shadow:0 0 7px rgba(255,228,168,.9);
+}
+.mc334-portal small{
+  max-width:74px;
+  color:#d5c8d6;
+  font:500 8px/1.06 Georgia,serif;
+  text-align:center;
+  text-wrap:balance;
+}
+.mc334-portal:focus{outline:none}
+.mc334-portal:focus-visible .mc334-jewel,
+.mc334-portal.is-current .mc334-jewel{
+  border-color:rgba(255,221,155,.9);
+  box-shadow:
+    inset 0 0 20px rgba(200,73,246,.20),
+    0 0 18px rgba(240,195,111,.24),
+    0 0 30px rgba(194,70,239,.12);
+}
+.mc334-portal:focus-visible .mc334-jewel{
+  outline:2px solid rgba(255,223,158,.72);
+  outline-offset:4px;
+}
+.mc334-portal:active .mc334-jewel,
+.mc334-portal.is-touching .mc334-jewel{
+  transform:scale(.89);
+  filter:brightness(1.18);
+}
+
+/* segunda constelação */
+.mc334-upper,.mc334-lower{
+  position:absolute;
+  left:50%;
+  z-index:3;
+  width:min(90vw,650px);
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  justify-items:center;
+  gap:clamp(5px,2vw,18px);
+  transform:translateX(-50%) translateY(12px);
+  opacity:0;
+  filter:blur(2px);
+  pointer-events:none;
+  transition:
+    opacity .34s ease .18s,
+    transform .54s cubic-bezier(.16,.82,.22,1) .18s,
+    filter .34s ease .18s;
+}
+.mc334-upper{top:calc(97px + env(safe-area-inset-top))}
+.mc334-lower{bottom:calc(var(--dock-height,75px) + 25px + env(safe-area-inset-bottom))}
+.menu-celestial-v334.is-open .mc334-upper,
+.menu-celestial-v334.is-open .mc334-lower{
+  opacity:1;
+  filter:none;
+  transform:translateX(-50%) translateY(0);
+}
+.menu-celestial-v334.is-closing .mc334-upper,
+.menu-celestial-v334.is-closing .mc334-lower{
+  opacity:0;
+  filter:blur(2px);
+  transform:translateX(-50%) translateY(10px);
+  transition-delay:0s;
+  transition-duration:.24s,.34s,.24s;
+}
+.mc334-upper .mc334-portal,.mc334-lower .mc334-portal{
+  position:relative;
+  width:100%;
+}
+.mc334-upper .mc334-jewel,.mc334-lower .mc334-jewel{
+  width:42px;height:42px;
+}
+.mc334-upper .mc334-portal small,.mc334-lower .mc334-portal small{
+  font-size:7.5px;
+}
+
+/* iPhone portrait */
+@media(max-width:430px) and (orientation:portrait){
+  html[data-runtime="v12"][data-menu-reborn="v334"]
+  #home.home-orb-only-v206.active.orb-menu-open > .orb-stage-ref,
+  html[data-runtime="v12"][data-menu-reborn="v334"]
+  #home.home-orb-only-v206.active.orb-menu-transition.orb-menu-opening > .orb-stage-ref{
+    --mc334-orb-size:min(50vw,24dvh,205px);
+  }
+
+  html[data-runtime="v12"][data-menu-reborn="v334"]
+  #home.home-orb-only-v206.active.orb-menu-transition.orb-menu-closing:not(.orb-menu-open) > .orb-stage-ref{
+    --v75-orb-size:min(88vw,45dvh,420px);
+  }
+
+  .mc334-primary,.mc334-orbit{
+    width:min(82vw,42dvh,360px);
+  }
+  .mc334-primary .mc334-portal{
+    --radius:min(41vw,21dvh,180px);
+  }
+  .mc334-jewel{width:46px;height:46px}
+  .mc334-upper,.mc334-lower{width:calc(100vw - 26px)}
+}
+
+/* iPhones baixos */
+@media(max-width:430px) and (max-height:760px) and (orientation:portrait){
+  html[data-runtime="v12"][data-menu-reborn="v334"]
+  #home.home-orb-only-v206.active.orb-menu-open > .orb-stage-ref,
+  html[data-runtime="v12"][data-menu-reborn="v334"]
+  #home.home-orb-only-v206.active.orb-menu-transition.orb-menu-opening > .orb-stage-ref{
+    --mc334-orb-size:min(45vw,22dvh,180px);
+  }
+  .mc334-primary,.mc334-orbit{width:min(78vw,39dvh,330px)}
+  .mc334-primary .mc334-portal{--radius:min(39vw,19.5dvh,165px)}
+  .mc334-upper{top:calc(84px + env(safe-area-inset-top))}
+  .mc334-lower{bottom:calc(var(--dock-height,75px) + 17px + env(safe-area-inset-bottom))}
+}
+
+/* landscape */
+@media(orientation:landscape) and (max-height:560px){
+  html[data-runtime="v12"][data-menu-reborn="v334"]
+  #home.home-orb-only-v206.active.orb-menu-open > .orb-stage-ref,
+  html[data-runtime="v12"][data-menu-reborn="v334"]
+  #home.home-orb-only-v206.active.orb-menu-transition.orb-menu-opening > .orb-stage-ref{
+    --mc334-orb-size:min(31vh,170px);
+    top:52%!important;
+  }
+  html[data-runtime="v12"][data-menu-reborn="v334"]
+  #home.home-orb-only-v206.active.orb-menu-transition.orb-menu-closing:not(.orb-menu-open) > .orb-stage-ref{
+    --v75-orb-size:min(43vh,330px);
+  }
+  .mc334-primary,.mc334-orbit{top:52%;width:min(72vh,405px)}
+  .mc334-primary .mc334-portal{--radius:min(36vh,202px)}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .menu-celestial-v334,.menu-celestial-v334 *{
+    animation:none!important;
+    transition:none!important;
+  }
+}
+html[data-performance-tier="constrained"] .mc334-comet,
+html[data-performance-tier="constrained"] .mc334-atmosphere i{
+  animation:none!important;
+}
+
+@keyframes mc334Star{
+  0%,100%{opacity:.10;transform:scale(.65)}
+  50%{opacity:.60;transform:scale(1.18)}
+}
+@keyframes mc334Orbit{to{transform:rotate(360deg)}}

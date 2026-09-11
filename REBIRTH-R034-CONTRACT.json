@@ -1,0 +1,53 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R034",
+  "release": "V334",
+  "world": "Menu Celestial",
+  "reason": "Refazer o Menu novamente a partir do print: centro vazio, Orbe invisível e composição sem continuidade.",
+  "replace": [
+    "app-v208.js"
+  ],
+  "new": [
+    "menu-celestial-v334.js",
+    "menu-celestial-v334.css",
+    "REBIRTH-R034-CONTRACT.json"
+  ],
+  "menu": {
+    "routingAuthority": "Navigation V210",
+    "orbEngine": "V208",
+    "sameOrb": true,
+    "openOrbVisible": true,
+    "openOrbMobileMaxPx": 205,
+    "openOrbLowHeightMaxPx": 180,
+    "closingTargetMatchesHome": true,
+    "openCloseUsesExistingFLIP": true,
+    "portalsEmergeFromCenter": true,
+    "upperAndLowerSecondWave": true,
+    "notificationLabel": "Notificações",
+    "legacyA11yDestroyedOnInstall": true,
+    "secondRouter": false
+  },
+  "whit": {
+    "existingV333Preserved": true,
+    "hiddenOnHome": true,
+    "hiddenWhileMenuOpen": true,
+    "doubleTapRouteMessages": true,
+    "holdToDrag": true
+  },
+  "preserve": [
+    "P0 V326 boot-first",
+    "Dock Stability V326",
+    "Whit Orbit V333",
+    "Tarot Livre V330",
+    "Tiragens V331",
+    "Biblioteca Profunda V332",
+    "all previous worlds"
+  ],
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}
