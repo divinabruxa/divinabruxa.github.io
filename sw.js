@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 2.0 — MACROETAPA V504 · SERVICE WORKER DA FLUIDEZ SUPREMA
+/* DIVINA BRUXA 2.0 — MACROETAPA V505 · SERVICE WORKER DA FLUIDEZ SUPREMA
    Cache seletivo e versionado. Nunca guarda Auth, Whit generation, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=504;
+const VERSION=505;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v504-shell';
-const CONTENT_CACHE='divina-bruxa-v504-content';
-const IMAGE_CACHE='divina-bruxa-v504-images';
-const OFFLINE_CACHE='divina-bruxa-v504-offline-core';
+const SHELL_CACHE='divina-bruxa-v505-shell';
+const CONTENT_CACHE='divina-bruxa-v505-content';
+const IMAGE_CACHE='divina-bruxa-v505-images';
+const OFFLINE_CACHE='divina-bruxa-v505-offline-core';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE]);
 
 const REQUIRED_SHELL=Object.freeze([
@@ -18,7 +18,7 @@ const REQUIRED_SHELL=Object.freeze([
   './runtime-v12.js','./orb-motion-core-v207.js','./orb-gesture-core-v208.js',
   './orb-engine-v208.js','./supreme-orb-core-v501.js','./supreme-orb-core-v501.css',
   './orbital-menu-v502.js','./orbital-menu-v502.css',
-  './tarot-livre-supremo-v504.js','./tarot-livre-supremo-v504.css',
+  './tarot-livre-supremo-v505.js','./tarot-livre-supremo-v505.css',
   './orb-loading-portal-v1.js',
   './divina-shell-v180.css','./home-orb-absolute-v206.css','./pwa-world-v196.css',
   './pwa-resilience-v324.css','./pwa-world-v324.js','./performance-world-v324.js',
@@ -49,7 +49,7 @@ const APP_DEPENDENCIES=Object.freeze([
 ]);
 
 const REBIRTH_WARM=Object.freeze([
-  './tarot-livre-supremo-v504.js','./tarot-livre-supremo-v504.css',
+  './tarot-livre-supremo-v505.js','./tarot-livre-supremo-v505.css',
   './library-world-v302.js','./library-world-v302.css',
   './daily-world-v303.js','./daily-world-v303.css','./daily-policy-v303.js',
   './spreads-world-v305.js','./spreads-world-v305.css',
@@ -64,7 +64,7 @@ const REBIRTH_WARM=Object.freeze([
 
 const OFFLINE_WORLD_ASSETS=Object.freeze([
   './tarot-data.js','./tarot-image-runtime.js','./tarot-session.js','./tarot-continuity.js',
-  './tarot-livre-supremo-v504.js','./tarot-livre-supremo-v504.css',
+  './tarot-livre-supremo-v505.js','./tarot-livre-supremo-v505.css',
   './tarot-atlas-mobile-v196.webp',
   './card-library-policy.js','./card-library-engine.js','./library-world-v302.js','./library-world-v302.css',
   './daily-world-v303.js','./daily-world-v303.css','./daily-policy-v303.js','./daily-meaning-runtime.js','./tarot-meanings.js','./meaning-engine.js',

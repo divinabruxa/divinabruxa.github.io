@@ -1,5 +1,5 @@
-/* DIVINA BRUXA 2.0 — MACROETAPA V504 · CARREGADOR DA FLUIDEZ SUPREMA
-   V501 permanece a única Orbe viva; V504 afina o mundo novo do Tarot. */
+/* DIVINA BRUXA 2.0 — MACROETAPA V505 · CARREGADOR DO FOGO ESTELAR
+   V501 permanece a única Orbe viva; V505 calibra somente o mundo do Tarot. */
 
 import {
   normalizeRouteId,
@@ -119,22 +119,25 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       delete globalThis.divinaFreeTarotV345;
       globalThis.divinaTarotLivreV503?.destroy?.();
       delete globalThis.divinaTarotLivreV503;
+      globalThis.divinaTarotLivreV504?.destroy?.();
+      delete globalThis.divinaTarotLivreV504;
       [
         'freeTarotFireEngineV345Styles',
         'divinaTarotLivreCosmicoV500',
         'divinaTarotLivreChamaV401',
         'divinaTarotLivreZeroV400',
         'divinaTarotRebirthV301',
-        'divinaTarotLivreSupremoV503'
+        'divinaTarotLivreSupremoV503',
+        'divinaTarotLivreSupremoV504'
       ].forEach(styleId=>document.getElementById(styleId)?.remove());
       const [,module]=await Promise.all([
-        ensureStyle('divinaTarotLivreSupremoV504','tarot-livre-supremo-v504.css?v=504'),
-        import('./tarot-livre-supremo-v504.js?v=504')
+        ensureStyle('divinaTarotLivreSupremoV505','tarot-livre-supremo-v505.css?v=505'),
+        import('./tarot-livre-supremo-v505.js?v=505')
       ]);
-      const instance=new module.TarotLivreSupremeV504($('#tarot'),{
+      const instance=new module.TarotLivreSupremeV505($('#tarot'),{
         orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme
       });
-      globalThis.divinaTarotLivreV504=instance;
+      globalThis.divinaTarotLivreV505=instance;
       return instance;
     },
     daily: async()=>{
@@ -231,8 +234,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
 
   const warmers=Object.freeze({
     tarot:()=>Promise.all([
-      ensureStyle('divinaTarotLivreSupremoV504','tarot-livre-supremo-v504.css?v=504'),
-      import('./tarot-livre-supremo-v504.js?v=504')
+      ensureStyle('divinaTarotLivreSupremoV505','tarot-livre-supremo-v505.css?v=505'),
+      import('./tarot-livre-supremo-v505.js?v=505')
     ]),
     daily:()=>Promise.all([
       ensureStyle('divinaDailyRebirthV303','daily-world-v303.css?v=303'),

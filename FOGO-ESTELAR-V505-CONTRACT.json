@@ -1,0 +1,111 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "release": "V505",
+  "name": "Calibração Estelar do Fogo — Chama Suprema Canvas",
+  "macro_stage": "Macroetapa V505 — Calibração Estelar do Fogo",
+  "scope": "Calibração visual e adaptativa do fogo do Tarot Livre V504 já instalado, preservando integralmente a Orbe física V501, o Menu Orbital V502 e a presença atual da Whit.",
+  "prerequisites": [
+    "V501 — Núcleo da Orbe Suprema",
+    "V502 — Menu Orbital Vivo",
+    "V504 — Afinação Suprema da Fluidez"
+  ],
+  "replace": [
+    "app-v208.js",
+    "page-loader-v1.js",
+    "sw.js"
+  ],
+  "new": [
+    "tarot-livre-supremo-v505.js",
+    "tarot-livre-supremo-v505.css",
+    "FOGO-ESTELAR-V505-CONTRACT.json",
+    "00-INSTALE-V505.txt"
+  ],
+  "live_v504_audit": {
+    "one_living_orb": true,
+    "home_double_tap_to_tarot": true,
+    "menu_claims_and_returns_same_orb": true,
+    "menu_portals": 13,
+    "tarot_reveal_continuity": true,
+    "whit_outside_central_altar": true,
+    "site_origin_console_errors_found": false,
+    "renderer_observed": "canvas",
+    "calibration_target": "The Canvas flame was functionally correct but visually narrower, cooler and less dramatic than the approved reference."
+  },
+  "canonical_orb": {
+    "core": "SupremeOrbCoreV501",
+    "renderer": "RealityOrbEngine V208 governed by V501",
+    "behavior": "The one physical living orb is claimed from Home by Tarot or Menu and always returned to the same Home cradle.",
+    "second_orb_created": false,
+    "one_living_orb": true,
+    "menu_authority_preserved": "V502"
+  },
+  "stellar_flame": {
+    "engine": "SupremeStellarFlameEngineV505",
+    "canvas_body": "One broad S-shaped stellar body with violet halo, magenta-gold plasma and a white-hot core.",
+    "canvas_braids": 3,
+    "canvas_galaxies": 2,
+    "travelling_starlets": true,
+    "birth_comet_tail": true,
+    "birth_double_crown": true,
+    "webgl": "Wider stellar field, stronger sway, hotter core and brighter gold-violet filaments.",
+    "touch_reactivity": true,
+    "floating_tarot_satellites": true,
+    "adaptive_particle_budget": true,
+    "adaptive_quality": true
+  },
+  "fluidity": {
+    "menu_engine_changed": false,
+    "menu_version_preserved": "V502 with V504 fluidity tuning",
+    "card_image_gate_ms": 420,
+    "card_departure_ms": 145,
+    "card_birth_ms": 350,
+    "stellar_birth_wave_ms": 760,
+    "preloaded_upcoming_cards": 8
+  },
+  "whit_safe_zone": {
+    "logic_or_persona_changed": false,
+    "server_changed": false,
+    "desktop": "Whit remains on the right without covering the central altar.",
+    "mobile": "Whit remains compact above the dock.",
+    "during_card_birth": "Whit softens temporarily while the orb-to-card ritual is visible."
+  },
+  "tarot_rules": {
+    "deck_size": 78,
+    "normal_orientation_only": true,
+    "reversed_cards": false,
+    "repetition_before_completion": false,
+    "automatic_meanings": false,
+    "revealed_grid_columns": 6,
+    "shuffle_preserves_revealed_cards": true,
+    "reset_confirmation": "two taps when the circle contains revealed cards",
+    "storage_key_preserved": "free-tarot",
+    "cross_tab_coordination_preserved": true
+  },
+  "accessibility_and_performance": {
+    "keyboard_navigation": true,
+    "touch_targets_preserved": true,
+    "native_haptics_only": true,
+    "browser_vibration_used": false,
+    "reduced_motion_keeps_calm_fire": true,
+    "hidden_route_animation_pause": true,
+    "offscreen_animation_pause": true,
+    "canvas_mix_blend_screen": true,
+    "offline_core_updated": true
+  },
+  "legacy_state": {
+    "v500_files_may_remain_on_server": true,
+    "v503_files_may_remain_on_server": true,
+    "v504_files_may_remain_on_server": true,
+    "v500_loaded": false,
+    "v503_loaded": false,
+    "v504_loaded_after_v505_activation": false
+  },
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "whit_server_or_advice_logic_changed": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}

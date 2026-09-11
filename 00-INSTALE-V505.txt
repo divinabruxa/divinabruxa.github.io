@@ -1,0 +1,73 @@
+DIVINA BRUXA 2.0
+MACROETAPA V505 — CALIBRAÇÃO ESTELAR DO FOGO
+================================================
+
+PRÉ-REQUISITOS
+1. A V501 — Núcleo da Orbe Suprema deve estar instalada.
+2. A V502 — Menu Orbital Vivo deve estar instalada.
+3. A V504 — Afinação Suprema da Fluidez deve estar instalada.
+
+COMO INSTALAR
+1. Abra o ZIP desta entrega.
+2. Envie TODOS os 7 arquivos diretamente para a mesma pasta raiz do site.
+3. Confirme a substituição destes 3 arquivos:
+   - app-v208.js
+   - page-loader-v1.js
+   - sw.js
+4. Confirme a inclusão destes 4 arquivos novos:
+   - tarot-livre-supremo-v505.js
+   - tarot-livre-supremo-v505.css
+   - FOGO-ESTELAR-V505-CONTRACT.json
+   - 00-INSTALE-V505.txt
+5. Não crie subpastas e não altere os nomes dos arquivos.
+6. Depois do envio, feche todas as abas antigas do site e abra-o novamente.
+
+O QUE FOI CONFIRMADO NA V504 AO VIVO
+- Existe somente uma Orbe física viva.
+- O duplo toque na Orbe da Home abre o Tarot Livre.
+- O Menu Orbital leva a mesma Orbe ao centro e a devolve à Home.
+- Os 13 portais permanecem presentes.
+- A revelação preserva as cartas anteriores e reduz corretamente as aguardando.
+- A Whit permanece fora do altar central.
+- Não foi encontrado erro do próprio site durante a inspeção.
+
+O QUE A V505 MELHORA
+- Mantém exatamente o Núcleo V501 e a autoridade do Menu V502.
+- Transforma a chama Canvas em um grande corpo estelar em S, mais largo e legível.
+- Cria halo violeta, corpo magenta-dourado e núcleo branco quente na mesma chama.
+- Trança três filamentos vivos ao redor do corpo central sem criar outra Orbe.
+- Acrescenta estrelas viajantes e duas galáxias suaves ao universo do altar.
+- Faz uma cauda de fogo correr da Orbe à carta exatamente no nascimento.
+- Abre uma coroa dupla dourada e violeta ao redor da nova carta.
+- Aumenta as partículas quentes no nascimento com limites adaptativos de desempenho.
+- Deixa também a chama WebGL mais larga, quente e luminosa.
+- Mantém o funcionamento offline atualizado na V505.
+
+LEIS PRESERVADAS
+- 78 cartas, todas diretas.
+- Nenhuma carta repetida antes de completar o círculo.
+- Nenhum significado automático no Tarot Livre.
+- Seis cartas por fileira, inclusive no celular.
+- Continuidade local das cartas reveladas.
+- Vibração de navegador não é usada; somente resposta nativa quando disponível.
+- A Whit não recebe nesta entrega nova mente, personalidade, conselho ou servidor.
+
+TESTE RÁPIDO APÓS INSTALAR
+1. Abra a Home e confirme a Orbe única no centro.
+2. Dê dois toques na Orbe e entre no Tarot Livre.
+3. Confirme que a chama está larga, sinuosa, dourada, magenta e violeta.
+4. Toque uma vez na Orbe: observe a cauda de fogo viajar até a nova carta.
+5. Revele mais cartas e confirme que nenhuma repete ou aparece invertida.
+6. Abra e feche o Menu e confirme que a mesma Orbe sempre retorna à Home.
+
+ARQUIVOS ANTIGOS
+Não é necessário apagar manualmente arquivos V500, V503 ou V504. O carregador V505
+desliga os mundos anteriores e usa somente o novo Tarot Livre V505. A V501 e a V502
+continuam sendo as autoridades da Orbe e do Menu.
+
+ROLLBACK SEGURO
+Se for necessário voltar, reenvie todos os 9 arquivos do ZIP V504 e confirme as
+substituições. Não apague manualmente a V501 nem a V502.
+
+Esta entrega não publica o site, não altera DNS, não ativa cobranças e não muda
+o servidor da Whit.
