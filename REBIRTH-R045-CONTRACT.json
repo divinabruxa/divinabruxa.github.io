@@ -1,0 +1,46 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R045",
+  "release": "V345",
+  "world": "Tarot Livre Fire Engine",
+  "reason": "User installed V344 but visual fire remained too subtle. V345 replaces decorative CSS fire with a real Canvas 2D particle/flame engine.",
+  "replace": [
+    "app-v208.js"
+  ],
+  "new": [
+    "free-tarot-fire-engine-v345.js",
+    "free-tarot-fire-engine-v345.css",
+    "REBIRTH-R045-CONTRACT.json"
+  ],
+  "fire_engine": {
+    "canvas_2d": true,
+    "ambient_particles": true,
+    "orb_to_card_flame_stream": true,
+    "burst_on_reveal": true,
+    "card_fire_birth": true,
+    "fast_reveal_target_ms": 640,
+    "reduced_motion_fallback": true,
+    "constrained_device_reduces_particles": true
+  },
+  "mesa_real": {
+    "overlay": true,
+    "uses_revealed_cards": true,
+    "desktop_columns": 6,
+    "responsive_columns": true,
+    "open_close_animation": true
+  },
+  "preserve_rules": {
+    "deck_size": 78,
+    "no_repetition": true,
+    "no_reversed_cards": true,
+    "no_meanings_in_free_tarot": true,
+    "grid_columns": 6
+  },
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}

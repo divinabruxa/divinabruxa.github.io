@@ -1,0 +1,192 @@
+/* DIVINA BRUXA 2.0 — REBIRTH R045 · TAROT LIVRE FIRE ENGINE V345 */
+
+html.ft345-mesa-open,
+html.ft345-mesa-open body{overflow:hidden}
+
+#tarot[data-tarot-supreme="v345"]{
+  padding-top:calc(90px + env(safe-area-inset-top))!important;
+  padding-bottom:calc(var(--dock-height,75px) + 34px + env(safe-area-inset-bottom))!important;
+}
+#tarot[data-tarot-supreme="v345"] .ft301.ft345{width:min(1140px,100%);gap:12px}
+#tarot[data-tarot-supreme="v345"] .ft301__head{
+  position:relative;width:min(920px,100%);padding:0 clamp(8px,2vw,18px);align-items:center;opacity:.98;
+}
+#tarot[data-tarot-supreme="v345"] .ft301__head div>span{display:none}
+#tarot[data-tarot-supreme="v345"] .ft301__head h2{
+  font-size:clamp(25px,4vw,40px);letter-spacing:.08em;text-transform:uppercase;
+}
+#tarot[data-tarot-supreme="v345"] .ft301__head p{
+  font-size:clamp(14px,2.7vw,20px);color:rgba(241,209,138,.92);letter-spacing:.06em;
+}
+#tarot .ft345__mesa-real{
+  position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  min-height:44px;padding:0 18px;border-radius:999px;
+  border:1px solid rgba(240,207,138,.58);
+  background:linear-gradient(180deg,rgba(24,10,42,.88),rgba(5,2,12,.90));
+  color:#f0d29a;font:600 15px/1 Georgia,serif;letter-spacing:.08em;
+  box-shadow:0 0 30px rgba(168,69,248,.18),inset 0 0 18px rgba(255,255,255,.04);
+}
+
+/* Universe */
+#tarot[data-tarot-supreme="v345"] .ft301__ritual{
+  width:min(920px,100%);
+  min-height:clamp(640px,81dvh,900px);
+  border:1px solid rgba(240,210,143,.10);
+  border-radius:clamp(32px,5vw,54px);
+  background:
+    radial-gradient(circle at 50% 34%,rgba(255,235,195,.045),transparent 11%),
+    radial-gradient(circle at 50% 68%,rgba(166,51,237,.16),transparent 24%),
+    radial-gradient(circle at 16% 20%,rgba(81,38,168,.12),transparent 22%),
+    radial-gradient(circle at 84% 70%,rgba(59,35,146,.12),transparent 24%),
+    linear-gradient(180deg,#05010b 0%,#020006 52%,#000 100%);
+  box-shadow:inset 0 0 240px rgba(115,37,196,.10),inset 0 -90px 170px rgba(0,0,0,.72),0 30px 104px rgba(0,0,0,.44);
+  overflow:hidden;isolation:isolate;
+}
+#tarot .ft345__fire-canvas{
+  position:absolute;inset:0;z-index:1;pointer-events:none;width:100%;height:100%;
+  mix-blend-mode:screen;
+}
+
+/* Keep actual card/orb above canvas */
+#tarot[data-tarot-supreme="v345"] .ft301__card-zone,
+#tarot[data-tarot-supreme="v345"] .ft301__orb,
+#tarot[data-tarot-supreme="v345"] .ft301__nav,
+#tarot[data-tarot-supreme="v345"] .ft301__signal{
+  position:relative;z-index:3;
+}
+
+/* Card position */
+#tarot[data-tarot-supreme="v345"] .ft301__card-zone{
+  width:clamp(206px,36vw,286px);
+  margin-top:0;
+  margin-bottom:58px;
+}
+#tarot[data-tarot-supreme="v345"] .ft301__card{
+  overflow:visible;
+  transform:translateY(-16px);
+}
+#tarot[data-tarot-supreme="v345"] .ft301__card img{
+  border-color:rgba(245,214,146,.50);
+  box-shadow:0 44px 116px rgba(0,0,0,.76),0 0 60px rgba(249,187,102,.16),0 0 44px rgba(154,67,244,.32),0 0 1px rgba(255,235,188,.82);
+}
+#tarot[data-tarot-supreme="v345"] .ft301__card-name{
+  left:6px;right:6px;bottom:6px;padding:32px 11px 10px;
+  background:linear-gradient(180deg,transparent,rgba(2,1,7,.92) 54%);
+}
+
+/* Raw Orb — no rings */
+#tarot[data-tarot-supreme="v345"] .ft301__orb{
+  --ft345-x:50%;--ft345-y:50%;
+  width:clamp(124px,23vw,168px);
+  margin-top:44px;
+  transform:none!important;
+  filter:drop-shadow(0 0 38px rgba(155,64,255,.46)) drop-shadow(0 0 22px rgba(245,204,125,.18));
+}
+#tarot[data-tarot-supreme="v345"] .ft301__orb:active{transform:none!important}
+#tarot .ft345__touch-light{
+  position:absolute;inset:0;border-radius:50%;pointer-events:none;z-index:6;
+  background:radial-gradient(circle at var(--ft345-x) var(--ft345-y),rgba(255,245,215,.90) 0 2%,rgba(255,177,76,.25) 7%,rgba(235,132,255,.32) 15%,rgba(122,47,223,.12) 23%,transparent 36%);
+  mix-blend-mode:screen;opacity:0;transition:opacity .10s ease;
+}
+#tarot .ft301__orb.ft345-touch .ft345__touch-light{opacity:1}
+#tarot .ft301__orb.ft345-touch{
+  filter:drop-shadow(0 0 52px rgba(164,66,255,.78)) drop-shadow(0 0 28px rgba(246,203,127,.30));
+}
+
+/* Minimal info */
+#tarot[data-tarot-supreme="v345"] .ft301__signal{
+  min-height:22px;margin:4px 16px 16px;font:400 11px/1.3 Georgia,serif;color:rgba(242,231,248,.56);
+}
+#tarot[data-tarot-supreme="v345"] .ft301__actions{
+  width:min(920px,100%);margin:0 auto;opacity:.62;
+}
+#tarot[data-tarot-supreme="v345"] .ft301__actions button{
+  min-height:38px;border-color:rgba(240,210,143,.09);
+  background:linear-gradient(180deg,rgba(6,2,14,.54),rgba(3,1,8,.42));
+}
+
+/* Constellation */
+#tarot[data-tarot-supreme="v345"] .ft301__constellation{
+  width:min(920px,100%);padding:12px;border:1px solid rgba(240,210,143,.06);border-radius:26px;
+  background:linear-gradient(180deg,rgba(8,3,16,.46),rgba(2,1,7,.62));
+}
+#tarot[data-tarot-supreme="v345"] .ft301__grid{
+  grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  gap:clamp(4px,.8vw,8px);
+}
+#tarot[data-tarot-supreme="v345"] .ft301__grid button{
+  opacity:.82;border-color:rgba(240,210,143,.05);box-shadow:0 7px 22px rgba(0,0,0,.26);background:rgba(6,2,12,.22);
+}
+#tarot[data-tarot-supreme="v345"] .ft301__grid button.ft345-newborn{
+  animation:ft345Newborn 1.05s cubic-bezier(.16,.82,.22,1);
+}
+
+/* Mesa Real */
+#tarot .ft345__mesa-panel{position:fixed;inset:0;z-index:72}
+#tarot .ft345__mesa-backdrop{
+  position:absolute;inset:0;background:rgba(2,0,8,.80);backdrop-filter:blur(18px);
+  opacity:0;transition:opacity .32s ease;
+}
+#tarot .ft345__mesa-shell{
+  position:absolute;inset:calc(18px + env(safe-area-inset-top)) 12px calc(18px + env(safe-area-inset-bottom)) 12px;
+  border:1px solid rgba(240,210,143,.14);border-radius:30px;
+  background:
+    radial-gradient(circle at 50% 16%,rgba(155,50,225,.12),transparent 28%),
+    linear-gradient(180deg,#07020e,#020006);
+  box-shadow:0 30px 100px rgba(0,0,0,.44),inset 0 0 120px rgba(141,56,224,.08);
+  overflow:hidden;display:flex;flex-direction:column;
+  transform:translateY(22px) scale(.985);opacity:0;
+  transition:transform .36s cubic-bezier(.18,.88,.22,1),opacity .28s ease;
+}
+#tarot .ft345__mesa-panel.is-open .ft345__mesa-backdrop{opacity:1}
+#tarot .ft345__mesa-panel.is-open .ft345__mesa-shell{transform:translateY(0) scale(1);opacity:1}
+#tarot .ft345__mesa-header{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 18px 14px;
+  border-bottom:1px solid rgba(240,210,143,.08);
+}
+#tarot .ft345__mesa-header h3{margin:0;color:#f0d29a;font:600 22px/1.1 Georgia,serif;letter-spacing:.06em;text-transform:uppercase}
+#tarot .ft345__mesa-header p{margin:4px 0 0;color:rgba(242,231,248,.74);font:400 12px/1.2 Georgia,serif}
+#tarot .ft345__mesa-close{
+  min-height:40px;padding:0 16px;border-radius:999px;border:1px solid rgba(240,210,143,.32);
+  background:rgba(10,4,20,.42);color:#f0d29a;
+}
+#tarot .ft345__mesa-grid{
+  flex:1;overflow:auto;padding:14px;display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;
+}
+#tarot .ft345__mesa-card{
+  min-height:86px;border-radius:16px;border:1px solid rgba(240,210,143,.10);background:rgba(5,2,12,.36);
+  overflow:hidden;padding:0;display:flex;flex-direction:column;justify-content:flex-end;
+}
+#tarot .ft345__mesa-card img{display:block;width:100%;height:auto}
+#tarot .ft345__mesa-label{
+  display:block;padding:8px 6px;color:rgba(247,229,190,.88);font:500 10px/1.2 Georgia,serif;text-align:center;
+  background:linear-gradient(180deg,transparent,rgba(2,1,7,.94) 58%);
+}
+#tarot .ft345__mesa-empty{grid-column:1/-1;padding:14px;color:rgba(242,231,248,.72);font:400 14px/1.4 Georgia,serif}
+
+/* Responsive */
+@media(max-width:760px){
+  #tarot .ft345__mesa-real{position:static;transform:none;margin-left:auto;margin-top:8px;display:block;font-size:13px}
+  #tarot[data-tarot-supreme="v345"] .ft301__head{display:block}
+  #tarot .ft345__mesa-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media(max-width:620px){
+  #tarot[data-tarot-supreme="v345"]{padding-left:8px!important;padding-right:8px!important}
+  #tarot[data-tarot-supreme="v345"] .ft301__ritual{min-height:min(78svh,740px);border-radius:28px}
+  #tarot[data-tarot-supreme="v345"] .ft301__card-zone{width:min(56vw,236px);margin-bottom:46px}
+  #tarot[data-tarot-supreme="v345"] .ft301__orb{width:min(33vw,144px);margin-top:40px}
+  #tarot .ft345__mesa-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+}
+@media(max-width:390px){
+  #tarot[data-tarot-supreme="v345"] .ft301__ritual{min-height:600px}
+}
+@media(prefers-reduced-motion:reduce){
+  #tarot .ft345__fire-canvas{display:none!important}
+}
+
+@keyframes ft345Newborn{
+  0%{transform:scale(.88);box-shadow:0 0 0 rgba(0,0,0,0)}
+  35%{transform:scale(1.05);box-shadow:0 0 26px rgba(250,189,108,.20),0 0 22px rgba(201,85,244,.30)}
+  100%{transform:scale(1)}
+}
