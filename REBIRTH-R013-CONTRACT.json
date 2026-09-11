@@ -1,0 +1,79 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R013",
+  "release": "V312",
+  "world": "Whit Mind / Conversation Core",
+  "purpose": "Unificar presença, assinatura de personalidade, recibo de contexto, continuidade pública da sessão e metadados de memória em um envelope mental efêmero de uma única resposta, preparado apenas após consentimento explícito.",
+  "replace": [
+    "app-v208.js"
+  ],
+  "new": [
+    "whit-mind-v312.js",
+    "whit-mind-v312.css",
+    "REBIRTH-R013-CONTRACT.json"
+  ],
+  "preserve": [
+    "Whit Core V212",
+    "Whit Presence V307",
+    "Whit Nervous System V308",
+    "Whit Context Bridge V309",
+    "Whit Memory Garden V310",
+    "Whit Signature V311",
+    "Home/Orbe/Menu V304",
+    "Tarot Livre V301",
+    "Biblioteca V302",
+    "Carta do Dia V303",
+    "Tiragens V305",
+    "Escola V306",
+    "Orbe IA V190"
+  ],
+  "mind": {
+    "router": true,
+    "one_turn_envelope": true,
+    "envelope_lifetime_ms": 120000,
+    "storage": "memory-only",
+    "continuity": "public route/event metadata only",
+    "form_hook": "capture-before-AIEngine-V190-submit",
+    "message_enters_only_after_ai_consent": true,
+    "public_events_expose_message": false,
+    "existing_ai_history_is_not_read_by_v312": true
+  },
+  "privacy": {
+    "context": "active explicit V309 receipt metadata only",
+    "context_private_body_read_by_v312": false,
+    "memory": "V310 counts/status only",
+    "persistent_memory_content_read_by_v312": false,
+    "persistent_prompt_storage": false,
+    "silent_private_scans": false,
+    "diary_silent_read": false,
+    "spread_silent_read": false,
+    "school_silent_read": false
+  },
+  "persona": {
+    "source": "Whit Signature V311 generationContract",
+    "original_whit_persona": true,
+    "literal_whitney_identity": false,
+    "whitney_soul_claim": false,
+    "voice_clone": false,
+    "lyric_copying": false,
+    "invented_whitney_memories": false
+  },
+  "server": {
+    "server_bridge_active": false,
+    "ai_v190_request_schema_modified": false,
+    "generation_contract_prepared": true,
+    "mind_envelope_prepared_locally": true,
+    "future_bridge_required_to_consume_envelope_server_side": true,
+    "api_calls_added_by_v312": false
+  },
+  "ui": {
+    "ai_mind_panel": true,
+    "states": [
+      "persona connected",
+      "explicit context",
+      "memory under control",
+      "ephemeral envelope"
+    ],
+    "reduced_motion_supported": true
+  }
+}

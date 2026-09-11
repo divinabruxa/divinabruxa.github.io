@@ -1,0 +1,138 @@
+/* DIVINA BRUXA 2.0 — REBIRTH R013 · WHIT MIND V312 */
+
+.whit-mind-v312{
+  position:relative;
+  display:grid;
+  grid-template-columns:52px minmax(0,1fr);
+  gap:13px;
+  align-items:center;
+  margin:-6px 0 17px;
+  padding:14px 15px;
+  overflow:hidden;
+  border:1px solid rgba(207,161,247,.18);
+  border-radius:20px;
+  background:
+    radial-gradient(circle at 4% 46%,rgba(172,66,228,.19),transparent 28%),
+    radial-gradient(circle at 96% 140%,rgba(236,195,110,.08),transparent 42%),
+    linear-gradient(135deg,rgba(18,7,29,.79),rgba(6,4,12,.82));
+  box-shadow:inset 0 1px rgba(255,255,255,.035),0 15px 42px rgba(0,0,0,.10);
+}
+.whit-mind-v312::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(105deg,transparent 18%,rgba(255,255,255,.025) 47%,transparent 72%);
+  transform:translateX(-70%);
+  animation:wm312Sweep 9s ease-in-out infinite;
+}
+.whit-mind-v312__orb{
+  position:relative;
+  z-index:1;
+  width:48px;
+  height:48px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid rgba(236,199,126,.34);
+  background:
+    radial-gradient(circle at 38% 32%,rgba(244,218,255,.30),transparent 15%),
+    radial-gradient(circle at 50% 55%,rgba(131,43,181,.60),rgba(31,9,47,.88) 57%,rgba(7,3,13,.98) 76%);
+  box-shadow:0 0 21px rgba(184,74,229,.18),inset 0 0 15px rgba(235,190,255,.11);
+}
+.whit-mind-v312__orb i{
+  position:absolute;
+  inset:-5px;
+  border-radius:50%;
+  border:1px solid rgba(218,175,247,.11);
+  animation:wm312Breath 4.8s ease-in-out infinite;
+}
+.whit-mind-v312__orb b{
+  position:relative;
+  z-index:1;
+  color:#efd093;
+  font:400 15px/1 Georgia,serif;
+  text-shadow:0 0 14px rgba(239,208,147,.40);
+}
+.whit-mind-v312__body{position:relative;z-index:1;min-width:0}
+.whit-mind-v312__title{display:flex;gap:9px;align-items:baseline;justify-content:space-between;flex-wrap:wrap}
+.whit-mind-v312__title span{
+  color:#bda1c7;
+  font:700 8px/1.2 system-ui,-apple-system,sans-serif;
+  letter-spacing:.17em;
+}
+.whit-mind-v312__title strong{
+  color:#eed294;
+  font:600 9px/1.2 system-ui,-apple-system,sans-serif;
+  letter-spacing:.045em;
+}
+.whit-mind-v312__badges{display:flex;flex-wrap:wrap;gap:5px;margin:7px 0 6px}
+.whit-mind-v312__badges span{
+  padding:3px 6px;
+  border:1px solid rgba(196,151,225,.14);
+  border-radius:999px;
+  color:#9f8ca7;
+  background:rgba(255,255,255,.022);
+  font:700 7px/1 system-ui,-apple-system,sans-serif;
+  letter-spacing:.07em;
+}
+.whit-mind-v312[data-context="selected"] .whit-mind-v312__badges span:nth-child(2),
+.whit-mind-v312[data-consent="true"] .whit-mind-v312__badges span:nth-child(4){
+  color:#dec38d;
+  border-color:rgba(226,190,116,.26);
+}
+.whit-mind-v312 p{
+  margin:0;
+  color:#94899a;
+  font-size:9.5px;
+  line-height:1.5;
+}
+.whit-mind-v312__meter{
+  height:1px;
+  margin-top:9px;
+  overflow:hidden;
+  background:rgba(255,255,255,.04);
+}
+.whit-mind-v312__meter i{
+  display:block;
+  width:38%;
+  height:100%;
+  background:linear-gradient(90deg,transparent,rgba(219,176,239,.50),rgba(237,202,130,.48),transparent);
+  transform:translateX(-100%);
+  animation:wm312MindLine 5.4s ease-in-out infinite;
+}
+.whit-mind-v312[data-envelope="ready"]{
+  border-color:rgba(235,199,126,.29);
+  box-shadow:inset 0 1px rgba(255,255,255,.045),0 0 32px rgba(145,54,190,.10);
+}
+.whit-mind-v312[data-envelope="ready"] .whit-mind-v312__orb{
+  box-shadow:0 0 27px rgba(191,78,235,.26),0 0 42px rgba(231,192,112,.08),inset 0 0 17px rgba(235,190,255,.13);
+}
+
+@keyframes wm312Breath{
+  0%,100%{transform:scale(.96);opacity:.42}
+  50%{transform:scale(1.09);opacity:.92}
+}
+@keyframes wm312MindLine{
+  0%,20%{transform:translateX(-105%);opacity:.15}
+  55%{opacity:.75}
+  82%,100%{transform:translateX(275%);opacity:.08}
+}
+@keyframes wm312Sweep{
+  0%,58%{transform:translateX(-72%);opacity:0}
+  68%{opacity:.75}
+  88%,100%{transform:translateX(72%);opacity:0}
+}
+
+@media(max-width:520px){
+  .whit-mind-v312{grid-template-columns:43px 1fr;gap:10px;padding:12px;margin-top:-5px}
+  .whit-mind-v312__orb{width:39px;height:39px}
+  .whit-mind-v312__title strong{font-size:8px}
+  .whit-mind-v312 p{font-size:9px}
+  .whit-mind-v312__badges span{font-size:6.5px}
+}
+@media(prefers-reduced-motion:reduce){
+  .whit-mind-v312::before,
+  .whit-mind-v312__orb i,
+  .whit-mind-v312__meter i{animation:none!important}
+}

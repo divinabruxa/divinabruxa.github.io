@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — APLICATIVO V208 · WORK7.0 · WHIT SIGNATURE V311 */
+/* DIVINA BRUXA — APLICATIVO V208 · WORK7.0 · WHIT MIND V312 */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -21,6 +21,7 @@ import { createWhitNervousSystemV308 } from './whit-nervous-system-v308.js?v=308
 import { createWhitContextBridgeV309 } from './whit-context-bridge-v309.js?v=309';
 import { createWhitMemoryGardenV310 } from './whit-memory-garden-v310.js?v=310';
 import { createWhitSignatureV311 } from './whit-signature-v311.js?v=311';
+import { createWhitMindV312 } from './whit-mind-v312.js?v=312';
 import './pwa-world-v201.js?v=201';
 
 const $ = selector => document.querySelector(selector);
@@ -76,6 +77,7 @@ const whitNerves = safely('Whit Nervous System V308', () => createWhitNervousSys
 const whitContext = safely('Whit Context Bridge V309', () => createWhitContextBridgeV309({ core: whitCore, presence: whitPresence, nervousSystem: whitNerves }));
 const whitMemory = safely('Whit Memory Garden V310', () => createWhitMemoryGardenV310({ core: whitCore, presence: whitPresence, authClient }));
 const whitSignature = safely('Whit Signature V311', () => createWhitSignatureV311({ core: whitCore, presence: whitPresence, nervousSystem: whitNerves, contextBridge: whitContext, memoryGarden: whitMemory }));
+const whitMind = safely('Whit Mind V312', () => createWhitMindV312({ core: whitCore, presence: whitPresence, nervousSystem: whitNerves, contextBridge: whitContext, memoryGarden: whitMemory, signature: whitSignature, authClient }));
 
 const miniOrbBinding = safely('Orbes auxiliares V207', bindMiniOrbs);
 
@@ -239,6 +241,43 @@ window.divinaWhitV311 = Object.freeze({
   soulClaim: false,
   localPersonaEnabled: true,
   generativePersonaContractReady: true,
+  generationEnabled: false,
+  paidApiEnabled: false,
+  privateReads: false,
+  solEnabled: false
+});
+
+window.divinaWhitV312 = Object.freeze({
+  version: 312,
+  core: whitCore,
+  presence: whitPresence,
+  nervousSystem: whitNerves,
+  contextBridge: whitContext,
+  memoryGarden: whitMemory,
+  signature: whitSignature,
+  mind: whitMind,
+  persona: whitSignature?.persona || null,
+  prepareTurn: input => whitMind?.prepareTurn?.(input) || null,
+  peekEnvelopeMeta: () => whitMind?.peekEnvelopeMeta?.() || null,
+  takeEnvelope: id => whitMind?.takeEnvelope?.(id) || null,
+  generationContract: () => whitSignature?.generationContract?.() || null,
+  status: () => ({
+    core: whitCore?.status?.() || null,
+    presence: whitPresence?.status?.() || null,
+    nerves: whitNerves?.status?.() || null,
+    context: whitContext?.status?.() || null,
+    memory: whitMemory?.status?.() || null,
+    signature: whitSignature?.status?.() || null,
+    mind: whitMind?.status?.() || null
+  }),
+  originalPersona: true,
+  literalWhitneyIdentity: false,
+  voiceClone: false,
+  soulClaim: false,
+  explicitContextOnly: true,
+  transientTurnEnvelope: true,
+  persistentPromptStorage: false,
+  serverBridgeActive: false,
   generationEnabled: false,
   paidApiEnabled: false,
   privateReads: false,
