@@ -1,0 +1,72 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R028",
+  "release": "V328",
+  "world": "Whit Presença Universal 2.0",
+  "vision_source": "chat Whit + pedido de presença permanente, fluida, mágica e responsável",
+  "purpose": "Fazer Whit existir visualmente em todo o app como mini-Orbe persistente, reaproveitando os motores atuais e melhorando o estilo das respostas no mesmo request.",
+  "replace": [
+    "app-v208.js"
+  ],
+  "new": [
+    "whit-universal-presence-v328.js",
+    "whit-universal-presence-v328.css",
+    "REBIRTH-R028-CONTRACT.json"
+  ],
+  "presence": {
+    "persistentMiniOrb": true,
+    "homeSilentUntilTap": true,
+    "routeWhispersShort": true,
+    "tapExpandsMessage": true,
+    "openAIAction": true,
+    "usesGlobalSkinImage": true,
+    "audio": false,
+    "voice": false,
+    "autoplay": false,
+    "extraApiCalls": 0
+  },
+  "generation": {
+    "sameExistingRequest": true,
+    "patchPoint": "existing V313 transport after consent/context validation",
+    "secondAIEngine": false,
+    "serverSchemaChanged": false,
+    "style": "symbolic, warm, fluid, life-applied, concise, responsible",
+    "tarotDictionaryStyleReduced": true,
+    "realLifeApplicationPreferred": true,
+    "absolutePrediction": false,
+    "mindReading": false,
+    "supernaturalCertainty": false
+  },
+  "privacy": {
+    "silentPrivateReads": false,
+    "diaryBodyAutomaticRead": false,
+    "spreadQuestionAutomaticRead": false,
+    "schoolNotesAutomaticRead": false,
+    "conversationAnalytics": false,
+    "explicitContextConsentPreserved": true
+  },
+  "reuse": [
+    "Whit Presence V307",
+    "Whit Nervous System V308",
+    "Whit Context Bridge V309",
+    "Whit Memory Garden V310",
+    "Whit Signature V311",
+    "Whit Mind V312",
+    "Whit Generation Bridge V313",
+    "Whit Silent Presence V316"
+  ],
+  "preserve": [
+    "P0 V326 boot-first",
+    "R027 Orbe Suprema + Menu Vivo",
+    "Home Orb V208",
+    "Navigation V210",
+    "All Rebirth worlds V301-V323"
+  ],
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}

@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — REBIRTH R027 · ORBE SUPREMA + MENU VIVO V327 · BOOT-SAFE */
+/* DIVINA BRUXA — REBIRTH R028 · WHIT PRESENÇA UNIVERSAL V328 · BOOT-SAFE */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -107,6 +107,19 @@ const whitSignature = safely('Whit Signature V311', () => createWhitSignatureV31
 const whitMind = safely('Whit Mind V312', () => createWhitMindV312({ core: whitCore, presence: whitPresence, nervousSystem: whitNerves, contextBridge: whitContext, memoryGarden: whitMemory, signature: whitSignature, authClient }));
 const whitGeneration = safely('Whit Generation Bridge V313', () => createWhitGenerationBridgeV313({ mind: whitMind, authClient }));
 const whitSilent = safely('Whit Silent Presence V316', () => createWhitSilentPresenceV316({ presence: whitPresence, mind: whitMind }));
+
+const startWhitUniversalV328 = () => import('./whit-universal-presence-v328.js?v=328')
+  .then(module => module.installWhitUniversalPresenceV328?.({
+    presence: whitPresence,
+    nervousSystem: whitNerves,
+    silentPresence: whitSilent,
+    generationBridge: whitGeneration,
+    go
+  }))
+  .catch(error => {
+    console.error('[Divina] Whit Universal V328 não iniciou', error);
+    document.documentElement.dataset.whitUniversalError = 'v328';
+  });
 
 const miniOrbBinding = safely('Orbes auxiliares V207', bindMiniOrbs);
 
@@ -436,8 +449,9 @@ const awaken = async () => {
       detail: { shell:'v180', recovery:'v326', bootFirst:true, rebirth:'r027-v327' }
     }));
 
-    // R027 é opcional: nunca bloqueia a abertura da Home.
+    // R027/R028 são opcionais: nunca bloqueiam a abertura da Home.
     startOrbMenuSupremeV327();
+    startWhitUniversalV328();
 
     // Começa a navegação fora do bloqueio visual.
     const navigationTimeout = new Promise((_, reject) =>
@@ -467,6 +481,7 @@ const awaken = async () => {
     document.documentElement.dataset.appShell = 'v180-emergency';
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
     startOrbMenuSupremeV327();
+    startWhitUniversalV328();
     startPwaAfterBootV326();
   }
 };
