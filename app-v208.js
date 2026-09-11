@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — MACROETAPA V510 · UNIVERSO VIVO E FLUIDEZ SUPREMA · BOOT-SAFE
-   V501 continua como a única Orbe Suprema, V502 preserva o menu orbital,
-   V510 torna Menu e Tarot fluidos e V509 permanece no ritual diário. */
+/* DIVINA BRUXA — MACROETAPA 2 · MOTOR UNIVERSAL DAS REALIDADES V511
+   V501 continua como a única Orbe Suprema. V511 unifica as passagens entre
+   mundos; Tarot V510 e Carta do Dia V509 permanecem integralmente vivos. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -8,6 +8,7 @@ import { createNavigation } from './navigation.js?v=211-recovery1';
 import { orbMotionV207 } from './orb-motion-core-v207.js?v=207';
 import { RealityOrbEngine } from './orb-engine-v208.js?v=208';
 import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=501';
+import { installRealityLifecycleV511 } from './reality-lifecycle-v511.js?v=511';
 import { AuthClientV201 as AuthClient } from './auth-client-v201.js?v=201';
 import { AccountEngineV201 } from './account-engine-v201.js?v=201';
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=319';
@@ -164,6 +165,10 @@ supremeOrb = safely('Núcleo da Orbe Suprema V501', () => createSupremeOrbCoreV5
   loading:loadingPortal
 }));
 
+const realityLifecycle = safely('Motor Universal das Realidades V511', () =>
+  installRealityLifecycleV511({ core:supremeOrb })
+);
+
 const warmEssentialPortals = () => {
   const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
   if (connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType || '')) return;
@@ -179,13 +184,13 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V510 = 510;
-const releaseReloadKeyV510 = `divina-release-reload-${RELEASE_EPOCH_V510}`;
-const reloadForNewReleaseV510 = version => {
-  if (Number(version || 0) <= RELEASE_EPOCH_V510) return false;
+const RELEASE_EPOCH_V511 = 511;
+const releaseReloadKeyV511 = `divina-release-reload-${RELEASE_EPOCH_V511}`;
+const reloadForNewReleaseV511 = version => {
+  if (Number(version || 0) <= RELEASE_EPOCH_V511) return false;
   try {
-    if (sessionStorage.getItem(releaseReloadKeyV510)) return false;
-    sessionStorage.setItem(releaseReloadKeyV510, String(version));
+    if (sessionStorage.getItem(releaseReloadKeyV511)) return false;
+    sessionStorage.setItem(releaseReloadKeyV511, String(version));
   } catch {}
   location.reload();
   return true;
@@ -194,7 +199,7 @@ const reloadForNewReleaseV510 = version => {
 navigator.serviceWorker?.addEventListener('message', event => {
   if (event.data?.type === 'DIVINA_RELEASE_READY') {
     document.documentElement.dataset.releaseReady = String(event.data.version || 'unknown');
-    reloadForNewReleaseV510(event.data.version);
+    reloadForNewReleaseV511(event.data.version);
     return;
   }
   if (event.data?.type !== 'divina-notification-open') return;
@@ -204,15 +209,15 @@ navigator.serviceWorker?.addEventListener('message', event => {
   }
 });
 
-if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV510) {
-  window.__divinaSWBootstrapV510 = true;
+if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV511) {
+  window.__divinaSWBootstrapV511 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=510', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=511', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v510';
+        document.documentElement.dataset.releaseEpoch = 'v511';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V510 registrado');
+        console.info('[Divina] PWA V511 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -484,6 +489,8 @@ window.divinaOrbSupremeV501 = Object.freeze({
   independentMiniOrbEngines:false
 });
 
+window.divinaRealityLifecycleV511 = realityLifecycle;
+
 const waitForCoreStyles = () => new Promise((resolve, reject) => {
   const link = document.getElementById('divinaCoreStyles');
   const verify = () => getComputedStyle(document.documentElement).getPropertyValue('--db-shell-v180').trim() === '1';
@@ -524,7 +531,7 @@ const awaken = async () => {
     document.documentElement.dataset.bootRecovery = 'v326';
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
     dispatchEvent(new CustomEvent('divina:boot-ready', {
-      detail: { shell:'v180', recovery:'v326', bootFirst:true, supremeOrb:'v501', orbitalMenu:'v502', tarotLivre:'v510', dailyWorld:'v509', fluidity:'v510', stellarFire:'v510', plasmaFilaments:true, volumetricPlasma:true, cosmicNebula:true, livingUniverse:true, decodedBeforeSwap:true, unexplainedFlyingCards:false, cardEdgeBurst:true, oneLivingDailyOrb:true }
+      detail: { shell:'v180', recovery:'v326', bootFirst:true, supremeOrb:'v501', orbitalMenu:'v502', tarotLivre:'v510', dailyWorld:'v509', realityLifecycle:'v511', transitionAuthority:'supreme-orb-v501', loaderProjection:'supreme-orb-v501', fluidity:'v511', stellarFire:'v510', plasmaFilaments:true, volumetricPlasma:true, cosmicNebula:true, livingUniverse:true, decodedBeforeSwap:true, unexplainedFlyingCards:false, cardEdgeBurst:true, oneLivingDailyOrb:true }
     }));
 
     // O menu é opcional para o boot: a Home abre mesmo se esta camada falhar.

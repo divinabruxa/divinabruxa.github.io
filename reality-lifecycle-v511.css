@@ -1,0 +1,331 @@
+/* DIVINA BRUXA — MACROETAPA 2 · MOTOR UNIVERSAL DAS REALIDADES V511
+   A projeção abaixo é alimentada pelo canvas da Orbe Suprema V501. */
+
+:root {
+  --db511-gold: #f5d38e;
+  --db511-ivory: #fff8e9;
+  --db511-tone-a: #f158dc;
+  --db511-tone-b: #9445ff;
+  --db511-tone-c: #ffb24f;
+  --db511-curve: cubic-bezier(.16, .82, .18, 1);
+}
+
+/* O portal V130 permanece instalado para compatibilidade, mas deixa de
+   disputar quadros com a passagem soberana da Orbe V501. */
+html[data-reality-lifecycle="v511"] .db-portal-layer {
+  display: none !important;
+  animation: none !important;
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader {
+  --db511-tone-a: #f158dc;
+  --db511-tone-b: #9445ff;
+  --db511-tone-c: #ffb24f;
+  z-index: 2147481900;
+  gap: 20px;
+  background:
+    radial-gradient(circle at 50% 47%, color-mix(in srgb, var(--db511-tone-a) 25%, transparent), transparent 31%),
+    radial-gradient(ellipse 78% 54% at 50% 50%, color-mix(in srgb, var(--db511-tone-b) 16%, transparent), transparent 72%),
+    linear-gradient(180deg, rgba(2, 0, 6, .92), rgba(6, 1, 12, .965));
+  transform: translateZ(0);
+  transition: opacity 150ms ease, visibility 0s linear 180ms;
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader::before,
+html[data-reality-lifecycle="v511"] .db-orb-loader::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  top: 48%;
+  width: min(72vmax, 760px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  pointer-events: none;
+  translate: -50% -50%;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader::before {
+  border: 1px solid color-mix(in srgb, var(--db511-tone-c) 28%, transparent);
+  box-shadow:
+    inset 0 0 90px color-mix(in srgb, var(--db511-tone-b) 12%, transparent),
+    0 0 90px color-mix(in srgb, var(--db511-tone-a) 10%, transparent);
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader::after {
+  width: min(48vmax, 520px);
+  background: conic-gradient(
+    from 0deg,
+    transparent 0 16%,
+    color-mix(in srgb, var(--db511-tone-a) 14%, transparent) 23%,
+    transparent 31% 57%,
+    color-mix(in srgb, var(--db511-tone-c) 12%, transparent) 65%,
+    transparent 73%
+  );
+  filter: blur(13px);
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader.is-visible::before {
+  animation: db511-gate-breathe 2.8s ease-in-out infinite;
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader.is-visible::after {
+  animation: db511-gate-turn 9s linear infinite;
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader[data-reality-tone="dawn"] {
+  --db511-tone-a: #f28ccc;
+  --db511-tone-b: #984eff;
+  --db511-tone-c: #ffc66f;
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader[data-reality-tone="stellar-fire"],
+html[data-reality-lifecycle="v511"] .db-orb-loader[data-reality-tone="crown"] {
+  --db511-tone-a: #ff62da;
+  --db511-tone-b: #7f39ff;
+  --db511-tone-c: #ffb34e;
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader[data-reality-tone="knowledge"],
+html[data-reality-lifecycle="v511"] .db-orb-loader[data-reality-tone="archive"] {
+  --db511-tone-a: #9f62ff;
+  --db511-tone-b: #4c8fff;
+  --db511-tone-c: #f5d38e;
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader[data-reality-tone="mind"],
+html[data-reality-lifecycle="v511"] .db-orb-loader[data-reality-tone="signal"] {
+  --db511-tone-a: #c854ff;
+  --db511-tone-b: #48c9ff;
+  --db511-tone-c: #fff4d5;
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader[data-reality-tone="reflection"],
+html[data-reality-lifecycle="v511"] .db-orb-loader[data-reality-tone="halo"] {
+  --db511-tone-a: #b360ff;
+  --db511-tone-b: #52dcff;
+  --db511-tone-c: #f7e9ff;
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader[data-reality-tone="market"],
+html[data-reality-lifecycle="v511"] .db-orb-loader[data-reality-tone="sanctuary"] {
+  --db511-tone-a: #e65bcd;
+  --db511-tone-b: #7844e8;
+  --db511-tone-c: #f5d38e;
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader[data-reality-tone="resonance"],
+html[data-reality-lifecycle="v511"] .db-orb-loader[data-reality-tone="vision"] {
+  --db511-tone-a: #e955c9;
+  --db511-tone-b: #4f8dff;
+  --db511-tone-c: #f6d995;
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader__altar {
+  z-index: 2;
+  width: clamp(106px, 27vw, 142px);
+  filter: drop-shadow(0 0 28px color-mix(in srgb, var(--db511-tone-a) 35%, transparent));
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader__orb[data-reality-projection="supreme-orb-v501"] {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 78%;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: #14051f;
+  border: 1px solid rgba(255, 229, 174, .62);
+  box-shadow:
+    inset 0 0 18px rgba(255, 255, 255, .08),
+    0 0 20px color-mix(in srgb, var(--db511-tone-c) 32%, transparent),
+    0 0 52px color-mix(in srgb, var(--db511-tone-a) 48%, transparent),
+    0 0 92px color-mix(in srgb, var(--db511-tone-b) 24%, transparent);
+  animation: db511-orb-breathe 2.3s ease-in-out infinite;
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader__orb[data-orb-projection-live="true"] {
+  background-image: none;
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader__orb > .db-supreme-orb-projection-canvas {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  border-radius: 50%;
+  opacity: 1;
+  filter: saturate(1.12) contrast(1.035) brightness(1.04);
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader__orb::after {
+  z-index: 3;
+  inset: 4%;
+  background:
+    radial-gradient(ellipse at 30% 18%, rgba(255, 255, 255, .22), transparent 28%),
+    radial-gradient(circle at 50% 86%, color-mix(in srgb, var(--db511-tone-a) 12%, transparent), transparent 38%);
+  opacity: .72;
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader__orbit {
+  border-color: color-mix(in srgb, var(--db511-tone-c) 68%, transparent);
+  box-shadow:
+    inset 0 0 22px color-mix(in srgb, var(--db511-tone-b) 12%, transparent),
+    0 0 35px color-mix(in srgb, var(--db511-tone-a) 21%, transparent);
+  animation-duration: 4.8s;
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader__constellation {
+  opacity: .55;
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader__constellation i {
+  background: var(--db511-tone-c);
+  box-shadow: 0 0 9px var(--db511-tone-c), 0 0 18px color-mix(in srgb, var(--db511-tone-a) 55%, transparent);
+  animation-duration: 2.6s;
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader__copy {
+  z-index: 3;
+  gap: 8px;
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader__eyebrow {
+  color: var(--db511-gold);
+  font-size: .75rem;
+  letter-spacing: .24em;
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader__message {
+  color: var(--db511-ivory);
+  font-size: clamp(1.18rem, 5vw, 1.55rem);
+  line-height: 1.16;
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader__whisper {
+  max-width: 34ch;
+  color: rgba(243, 230, 246, .72);
+  font-size: .78rem;
+  line-height: 1.4;
+  text-wrap: balance;
+}
+
+html[data-reality-lifecycle="v511"] .db-orb-loader__recovery {
+  min-height: 46px;
+  font-size: .75rem;
+  touch-action: manipulation;
+}
+
+html[data-reality-lifecycle="v511"] #app > .screen[data-reality-leaving="true"] {
+  pointer-events: none;
+  will-change: transform, opacity;
+  animation: db511-reality-leave 260ms ease-out both;
+}
+
+html[data-reality-lifecycle="v511"] #app > .screen[data-reality-arriving="true"] {
+  transform-origin: 50% 18%;
+  will-change: transform, opacity;
+  animation: db511-reality-arrive 480ms var(--db511-curve) both;
+}
+
+html[data-reality-lifecycle="v511"] #app > .screen > h1,
+html[data-reality-lifecycle="v511"] #app > .screen > h2,
+html[data-reality-lifecycle="v511"] #app > .screen .db-page-world__title,
+html[data-reality-lifecycle="v511"] #app > .screen .tl510__title h2,
+html[data-reality-lifecycle="v511"] #app > .screen .dw509__head h2 {
+  scroll-margin-top: calc(96px + env(safe-area-inset-top));
+}
+
+body.db511-reality-traveling #whitPresenceV307.whit-presence-v307 {
+  opacity: .42 !important;
+  pointer-events: none !important;
+  transition: opacity 150ms ease !important;
+}
+
+@keyframes db511-gate-breathe {
+  0%, 100% { opacity: .2; transform: scale(.82); }
+  50% { opacity: .52; transform: scale(1.02); }
+}
+
+@keyframes db511-gate-turn {
+  0% { opacity: .12; transform: rotate(0deg) scale(.84); }
+  50% { opacity: .3; }
+  100% { opacity: .12; transform: rotate(360deg) scale(.84); }
+}
+
+@keyframes db511-orb-breathe {
+  0%, 100% { transform: translateZ(0) scale(.97); filter: brightness(.98); }
+  50% { transform: translateZ(0) scale(1.025); filter: brightness(1.08); }
+}
+
+@keyframes db511-reality-leave {
+  from { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+  to { opacity: .82; transform: translate3d(0, -4px, 0) scale(.996); }
+}
+
+@keyframes db511-reality-arrive {
+  0% { opacity: .1; transform: translate3d(0, 18px, 0) scale(.992); }
+  64% { opacity: 1; }
+  100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@media (max-width: 620px) {
+  html[data-reality-lifecycle="v511"] .db-orb-loader {
+    gap: 17px;
+    padding-inline: 18px;
+  }
+
+  html[data-reality-lifecycle="v511"] .db-orb-loader::before {
+    width: 118vw;
+  }
+
+  html[data-reality-lifecycle="v511"] .db-orb-loader::after {
+    width: 86vw;
+  }
+
+  html[data-reality-lifecycle="v511"] .db-orb-loader__altar {
+    width: clamp(106px, 31vw, 130px);
+  }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  html[data-reality-lifecycle="v511"] .db-orb-loader__altar {
+    width: 102px;
+  }
+
+  html[data-reality-lifecycle="v511"] .db-orb-loader__copy {
+    gap: 5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-reality-lifecycle="v511"] .db-orb-loader::before,
+  html[data-reality-lifecycle="v511"] .db-orb-loader::after,
+  html[data-reality-lifecycle="v511"] .db-orb-loader__orb,
+  html[data-reality-lifecycle="v511"] .db-orb-loader__orbit,
+  html[data-reality-lifecycle="v511"] .db-orb-loader__constellation i,
+  html[data-reality-lifecycle="v511"] #app > .screen[data-reality-leaving="true"],
+  html[data-reality-lifecycle="v511"] #app > .screen[data-reality-arriving="true"] {
+    animation-duration: 90ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media (forced-colors: active) {
+  html[data-reality-lifecycle="v511"] .db-orb-loader {
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  html[data-reality-lifecycle="v511"] .db-orb-loader::before,
+  html[data-reality-lifecycle="v511"] .db-orb-loader::after,
+  html[data-reality-lifecycle="v511"] .db-orb-loader__constellation {
+    display: none;
+  }
+}
+

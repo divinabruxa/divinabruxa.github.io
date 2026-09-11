@@ -1,0 +1,63 @@
+DIVINA BRUXA — MACROETAPA 2
+V511 · MOTOR UNIVERSAL DAS REALIDADES
+
+PRÉ-REQUISITO
+
+- A V510 precisa estar instalada. Esta versão foi construída diretamente
+  sobre o Menu e o Tarot Livre que acabamos de validar ao vivo.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+
+1. Abra o ZIP.
+2. Selecione os 6 arquivos soltos.
+3. Envie todos diretamente para a raiz do repositório.
+4. Não crie nenhuma pasta.
+5. Autorize a substituição de app-v208.js e sw.js.
+6. Os outros 4 arquivos são novos.
+7. Aguarde o GitHub Pages concluir a atualização.
+8. Feche todas as abas antigas da Divina Bruxa e abra o site novamente.
+
+O QUE NASCE NESTA MACROETAPA
+
+- Uma única autoridade de transição para todas as realidades do menu.
+- A camada antiga de portal permanece compatível, mas deixa de disputar
+  animações com a Orbe Suprema.
+- O portal de carregamento passa a espelhar o canvas vivo da Orbe V501.
+- Nenhum segundo motor de Orbe é criado.
+- Cada realidade recebe direção, cor e mensagem próprias.
+- A tela atual permanece protegida enquanto a próxima termina de carregar.
+- A nova página chega apenas com transform e opacidade, sem travamento pesado.
+- O título deixa de ficar escondido depois da troca de página.
+- Trocas rápidas que não precisam de carregamento não exibem espera artificial.
+- Rotas abertas por toque, menu, histórico ou notificação convergem para o
+  mesmo ciclo de saída, carregamento, chegada e recuperação.
+- Reduced Motion e recuperação de conexão continuam respeitados.
+
+ARQUIVOS NOVOS
+
+- reality-lifecycle-v511.js
+- reality-lifecycle-v511.css
+- REALITY-LIFECYCLE-V511-CONTRACT.json
+- 00-INSTALE-V511.txt
+
+ARQUIVOS QUE SUBSTITUEM
+
+- app-v208.js
+- sw.js
+
+PRESERVADO SEM ALTERAÇÃO
+
+- Orbe Suprema V501
+- Menu Orbital V502 com geometria V510
+- Tarot Livre V510
+- Carta do Dia V509
+- cartas já reveladas
+- conta, banco de dados e privacidade
+- servidor, mente e personalidade da Whit
+- cobrança, DNS e publicação automática
+
+ROLLBACK
+
+Se desejar voltar, reinstale app-v208.js e sw.js do pacote V510. Os quatro
+arquivos novos podem permanecer na raiz; sem o boot V511 eles ficam inertes.
+

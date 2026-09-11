@@ -1,0 +1,117 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "release": "V511",
+  "name": "Motor Universal das Realidades",
+  "macro_stage": "Macroetapa 2 — Fundação de passagem entre todos os mundos",
+  "scope": "Unificar as transições do site sob a Orbe Suprema V501, transformar o carregador em uma projeção do motor vivo e preservar integralmente Menu V502/V510, Tarot Livre V510 e Carta do Dia V509.",
+  "prerequisite": "V510 installed",
+  "replace": [
+    "app-v208.js",
+    "sw.js"
+  ],
+  "new": [
+    "reality-lifecycle-v511.js",
+    "reality-lifecycle-v511.css",
+    "REALITY-LIFECYCLE-V511-CONTRACT.json",
+    "00-INSTALE-V511.txt"
+  ],
+  "live_v510_audit_before_build": {
+    "release_epoch": "v510",
+    "menu_authority": "v502",
+    "menu_fluidity": "v510",
+    "menu_portals": 13,
+    "menu_label_overlaps_observed": 0,
+    "tarot_world": "supremo-v510",
+    "tarot_grid_columns": 6,
+    "tarot_decoded_card": true,
+    "tarot_decorative_cards": "none",
+    "tarot_target_fps": 60,
+    "one_living_orb": true,
+    "divina_console_errors": 0
+  },
+  "transition_authority": {
+    "authority": "SupremeOrbCoreV501",
+    "legacy_v130_portal_runtime_removed": false,
+    "legacy_v130_portal_visual_silenced": true,
+    "new_living_orb_created": false,
+    "second_orb_renderer_created": false,
+    "physical_orb_claimed_by_loader": false,
+    "loader_uses_v501_canvas_projection": true,
+    "projection_bridge_reused": "SupremeOrbCoreV501.adoptProjections",
+    "extra_animation_loop_for_projection": false
+  },
+  "lifecycle": {
+    "states": [
+      "idle",
+      "departing",
+      "loading",
+      "arriving",
+      "error"
+    ],
+    "route_signatures": 17,
+    "input_paths": [
+      "Supreme Orb navigation",
+      "route start",
+      "page loader start/end",
+      "browser history",
+      "notification route"
+    ],
+    "screen_preserved_until_content_ready": true,
+    "arrival_motion": "transform and opacity",
+    "arrival_ms": 480,
+    "watchdog_ms": 6500,
+    "same_route_boot_flash_prevented": true,
+    "route_error_recovery": true,
+    "viewport_reset_after_title_focus": true
+  },
+  "world_signatures": {
+    "home": "origin",
+    "tarot": "stellar-fire",
+    "daily": "dawn",
+    "spreads": "constellation",
+    "school": "knowledge",
+    "library": "archive",
+    "journal": "reflection",
+    "ai": "mind",
+    "store": "market",
+    "consultations": "sanctuary",
+    "music": "resonance",
+    "videos": "vision",
+    "skins": "metamorphosis",
+    "login": "halo",
+    "subscriptions": "crown",
+    "notifications": "signal",
+    "admin": "guard"
+  },
+  "performance_and_accessibility": {
+    "loader_show_delay_preserved_ms": 120,
+    "unnecessary_fast_route_loader": false,
+    "animation_properties": [
+      "transform",
+      "opacity"
+    ],
+    "reduced_motion_supported": true,
+    "recovery_button_minimum_px": 46,
+    "screen_reader_loader_status_preserved": true,
+    "native_haptics_only": true,
+    "browser_vibration_used": false,
+    "new_api_calls": 0,
+    "new_authority_requests": 0
+  },
+  "preserved_worlds": {
+    "supreme_orb": "V501 unchanged",
+    "orbital_menu": "V502 authority with V510 geometry unchanged",
+    "tarot_livre": "V510 unchanged",
+    "daily_world": "V509 unchanged",
+    "tarot_session_data_changed": false,
+    "whit_server_or_persona_changed": false,
+    "database_changed": false
+  },
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}

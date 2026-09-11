@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 2.0 — MACROETAPA V510 · SERVICE WORKER DO UNIVERSO VIVO
+/* DIVINA BRUXA 2.0 — MACROETAPA 2 · SERVICE WORKER V511
    Cache seletivo e versionado. Nunca guarda Auth, Whit generation, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=510;
+const VERSION=511;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v510-shell';
-const CONTENT_CACHE='divina-bruxa-v510-content';
-const IMAGE_CACHE='divina-bruxa-v510-images';
-const OFFLINE_CACHE='divina-bruxa-v510-offline-core';
+const SHELL_CACHE='divina-bruxa-v511-shell';
+const CONTENT_CACHE='divina-bruxa-v511-content';
+const IMAGE_CACHE='divina-bruxa-v511-images';
+const OFFLINE_CACHE='divina-bruxa-v511-offline-core';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE]);
 
 const REQUIRED_SHELL=Object.freeze([
@@ -17,6 +17,7 @@ const REQUIRED_SHELL=Object.freeze([
   './app-v208.js','./navigation.js','./route-registry-v180.js','./page-loader-v1.js',
   './runtime-v12.js','./orb-motion-core-v207.js','./orb-gesture-core-v208.js',
   './orb-engine-v208.js','./supreme-orb-core-v501.js','./supreme-orb-core-v501.css',
+  './reality-lifecycle-v511.js','./reality-lifecycle-v511.css',
   './orbital-menu-v502.js','./orbital-menu-v502.css',
   './tarot-livre-supremo-v510.js','./tarot-livre-supremo-v510.css',
   './daily-world-v509.js','./daily-world-v509.css','./daily-policy-v303.js',
