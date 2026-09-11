@@ -1,0 +1,569 @@
+/* DIVINA BRUXA — TAROT LIVRE ZERO V400
+   Universo vivo + Chama Viva Canvas 2D. Nenhum CSS V301 é carregado nesta rota. */
+
+html.tl400-mesa-open,
+html.tl400-mesa-open body{overflow:hidden}
+
+#tarot[data-tarot-world="zero-v400"]{
+  --tl-gold:#f1d08a;
+  --tl-ivory:#fff8ec;
+  --tl-violet:#a64cff;
+  width:100%;
+  max-width:none!important;
+  padding-inline:clamp(10px,2.4vw,34px)!important;
+  padding-top:calc(88px + env(safe-area-inset-top))!important;
+  padding-bottom:calc(var(--dock-height,75px) + 34px + env(safe-area-inset-bottom))!important;
+  background:
+    radial-gradient(circle at 50% 30%,rgba(84,22,139,.12),transparent 32%),
+    #020005;
+}
+#tarot .tl400{
+  width:min(1100px,100%);
+  margin:0 auto;
+  min-height:calc(100dvh - 150px);
+  display:grid;
+  gap:12px;
+}
+#tarot .tl400__head{
+  width:min(900px,100%);
+  margin:0 auto;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:16px;
+  padding:0 8px;
+}
+#tarot .tl400__title small{
+  display:block;
+  margin-bottom:5px;
+  color:rgba(241,208,138,.76);
+  font:700 7px/1 system-ui,sans-serif;
+  letter-spacing:.25em;
+}
+#tarot .tl400__title h2{
+  margin:0;
+  color:var(--tl-ivory);
+  font:500 clamp(30px,5vw,48px)/.94 Georgia,serif;
+  letter-spacing:.025em;
+  text-transform:uppercase;
+}
+#tarot .tl400__head-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+#tarot .tl400__head-actions p{
+  margin:0;
+  color:var(--tl-gold);
+  font:500 clamp(19px,3vw,28px)/1 Georgia,serif;
+}
+#tarot .tl400__head-actions p span{
+  color:rgba(242,230,248,.58);
+  font-size:.52em;
+}
+#tarot .tl400__mesa-button{
+  min-height:42px;
+  padding:0 17px;
+  border:1px solid rgba(241,208,138,.46);
+  border-radius:999px;
+  background:linear-gradient(180deg,rgba(25,9,42,.74),rgba(6,2,12,.90));
+  color:var(--tl-gold);
+  font:700 9px/1 system-ui,sans-serif;
+  letter-spacing:.12em;
+  box-shadow:0 0 24px rgba(172,65,248,.12);
+}
+
+/* Living universe */
+#tarot .tl400__universe{
+  position:relative;
+  isolation:isolate;
+  width:min(900px,100%);
+  min-height:clamp(650px,80dvh,900px);
+  margin:0 auto;
+  overflow:hidden;
+  border:1px solid rgba(241,208,138,.10);
+  border-radius:clamp(30px,5vw,52px);
+  background:
+    radial-gradient(circle at 50% 28%,rgba(166,70,248,.13),transparent 26%),
+    radial-gradient(circle at 50% 78%,rgba(153,54,240,.17),transparent 28%),
+    radial-gradient(circle at 14% 48%,rgba(57,26,128,.10),transparent 26%),
+    linear-gradient(180deg,#05010b 0%,#020006 52%,#000 100%);
+  box-shadow:
+    inset 0 0 230px rgba(116,39,196,.11),
+    inset 0 -80px 170px rgba(0,0,0,.72),
+    0 30px 100px rgba(0,0,0,.42);
+  contain:layout paint;
+}
+#tarot .tl400__canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+}
+#tarot .tl400__canvas--back{z-index:0}
+#tarot .tl400__canvas--front{
+  z-index:4;
+  mix-blend-mode:screen;
+}
+
+/* Card floats at the upper universe */
+#tarot .tl400__card-zone{
+  position:absolute;
+  z-index:3;
+  left:50%;
+  top:8%;
+  width:clamp(204px,36vw,286px);
+  aspect-ratio:2/3;
+  transform:translateX(-50%);
+  outline:none;
+  touch-action:pan-y;
+  user-select:none;
+}
+#tarot .tl400__card{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  transform-origin:50% 88%;
+  will-change:transform,opacity,filter;
+}
+#tarot .tl400__card img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:clamp(14px,3vw,22px);
+  border:1px solid rgba(246,217,150,.50);
+  background:#08020e;
+  box-shadow:
+    0 44px 116px rgba(0,0,0,.78),
+    0 0 62px rgba(247,184,93,.16),
+    0 0 46px rgba(154,67,244,.34),
+    0 0 1px rgba(255,235,188,.82);
+}
+#tarot .tl400__card-name{
+  position:absolute;
+  left:7px;right:7px;bottom:7px;
+  padding:34px 11px 10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:10px;
+  border-radius:0 0 14px 14px;
+  background:linear-gradient(180deg,transparent,rgba(2,1,7,.92) 56%);
+  color:var(--tl-ivory);
+  pointer-events:none;
+}
+#tarot .tl400__card-name b{
+  font:500 clamp(14px,2.4vw,18px)/1.1 Georgia,serif;
+}
+#tarot .tl400__card-name small{
+  color:var(--tl-gold);
+  font:700 8px/1 system-ui,sans-serif;
+  letter-spacing:.08em;
+}
+#tarot .tl400__empty-card{
+  position:absolute;
+  inset:8%;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(241,208,138,.10);
+  border-radius:24px;
+  background:radial-gradient(circle,rgba(120,42,195,.10),transparent 60%);
+  color:rgba(241,208,138,.40);
+  font-size:32px;
+}
+
+/* Raw Orb at the bottom; no rings */
+#tarot .tl400__orb{
+  --tl400-x:50%;
+  --tl400-y:50%;
+  position:absolute;
+  z-index:5;
+  left:50%;
+  bottom:8%;
+  width:clamp(126px,23vw,170px);
+  aspect-ratio:1;
+  transform:translateX(-50%);
+  padding:0;
+  border:0;
+  border-radius:50%;
+  background:transparent;
+  cursor:pointer;
+  touch-action:manipulation;
+  filter:
+    drop-shadow(0 0 40px rgba(155,64,255,.48))
+    drop-shadow(0 0 22px rgba(245,204,125,.18));
+}
+#tarot .tl400__orb:active{transform:translateX(-50%) scale(.985)}
+#tarot .tl400__orb:focus-visible{
+  outline:2px solid var(--tl-gold);
+  outline-offset:7px;
+}
+#tarot .tl400__orb-image{
+  position:absolute;
+  inset:7%;
+  border-radius:50%;
+  background-image:var(--db-release-orb-image,var(--db-skin-image,var(--db-boot-orb-image)));
+  background-size:cover;
+  background-position:center;
+  box-shadow:
+    inset 0 0 26px rgba(255,255,255,.06),
+    0 0 38px rgba(137,62,235,.40);
+}
+#tarot .tl400__orb-touch{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  pointer-events:none;
+  opacity:0;
+  mix-blend-mode:screen;
+  background:radial-gradient(circle at var(--tl400-x) var(--tl400-y),
+    rgba(255,248,220,.88) 0 2%,
+    rgba(255,184,84,.30) 7%,
+    rgba(230,104,255,.30) 15%,
+    rgba(116,44,221,.12) 24%,
+    transparent 38%);
+  transition:opacity .10s ease;
+}
+#tarot .tl400__orb:active .tl400__orb-touch{opacity:1}
+
+/* signal + nav */
+#tarot .tl400__signal{
+  position:absolute;
+  z-index:5;
+  left:50%;
+  bottom:3.8%;
+  transform:translateX(-50%);
+  min-width:200px;
+  color:rgba(245,233,249,.64);
+  font:500 11px/1.3 Georgia,serif;
+  text-align:center;
+  letter-spacing:.02em;
+}
+#tarot .tl400__nav{
+  position:absolute;
+  z-index:6;
+  left:50%;
+  top:55%;
+  transform:translate(-50%,-50%);
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+#tarot .tl400__nav button{
+  width:40px;
+  height:40px;
+  padding:0;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(241,208,138,.14);
+  border-radius:50%;
+  background:rgba(5,2,12,.34);
+  color:var(--tl-gold);
+  backdrop-filter:blur(8px);
+}
+#tarot .tl400__nav button:disabled{opacity:.18}
+#tarot .tl400__nav span{
+  min-width:54px;
+  color:rgba(242,230,248,.54);
+  font:700 8px/1 system-ui,sans-serif;
+  letter-spacing:.10em;
+  text-align:center;
+}
+
+/* phase feedback only; fire canvas is the real effect */
+#tarot .tl400[data-phase="ignite"] .tl400__orb{
+  filter:
+    drop-shadow(0 0 58px rgba(177,70,255,.78))
+    drop-shadow(0 0 30px rgba(255,184,84,.34));
+}
+#tarot .tl400[data-phase="birth"] .tl400__card img{
+  box-shadow:
+    0 44px 116px rgba(0,0,0,.78),
+    0 0 78px rgba(255,182,84,.22),
+    0 0 62px rgba(187,73,255,.40),
+    0 0 1px rgba(255,235,188,.88);
+}
+
+/* actions */
+#tarot .tl400__actions{
+  width:min(900px,100%);
+  margin:0 auto;
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  opacity:.72;
+}
+#tarot .tl400__actions button{
+  min-height:39px;
+  padding:8px 14px;
+  border:1px solid rgba(241,208,138,.10);
+  border-radius:999px;
+  background:rgba(6,2,14,.46);
+  color:rgba(241,208,138,.82);
+  font:700 8px/1 system-ui,sans-serif;
+  letter-spacing:.09em;
+}
+
+/* constellation */
+#tarot .tl400__constellation{
+  width:min(900px,100%);
+  margin:0 auto;
+  padding:12px;
+  border:1px solid rgba(241,208,138,.06);
+  border-radius:24px;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(156,62,236,.07),transparent 54%),
+    rgba(4,1,10,.46);
+}
+#tarot .tl400__constellation header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:10px;
+}
+#tarot .tl400__constellation h3{
+  margin:0;
+  color:var(--tl-ivory);
+  font:500 15px/1 Georgia,serif;
+}
+#tarot .tl400__constellation header span{
+  color:rgba(242,230,248,.54);
+  font:700 8px/1 system-ui,sans-serif;
+}
+#tarot .tl400__grid{
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:clamp(3px,.8vw,8px);
+}
+#tarot .tl400__grid button{
+  position:relative;
+  aspect-ratio:2/3;
+  padding:0;
+  overflow:hidden;
+  border:1px solid transparent;
+  border-radius:clamp(5px,1vw,10px);
+  background:#06020c;
+  opacity:.78;
+  cursor:pointer;
+}
+#tarot .tl400__grid button:hover,
+#tarot .tl400__grid button:focus-visible,
+#tarot .tl400__grid button.is-current{
+  opacity:1;
+  border-color:rgba(241,208,138,.48);
+  transform:translateY(-2px);
+}
+#tarot .tl400__grid img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+#tarot .tl400__grid button>span{
+  position:absolute;
+  right:3px;bottom:3px;
+  min-width:16px;height:16px;padding:0 3px;
+  display:grid;place-items:center;
+  border-radius:999px;
+  background:rgba(2,1,7,.76);
+  color:#fff0c6;
+  font:700 7px/1 system-ui,sans-serif;
+}
+
+/* Mesa Real — always 6 per row */
+#tarot .tl400__mesa{
+  position:fixed;
+  inset:0;
+  z-index:80;
+}
+#tarot .tl400__mesa-backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(1,0,5,.82);
+  backdrop-filter:blur(18px);
+  opacity:0;
+  transition:opacity .28s ease;
+}
+#tarot .tl400__mesa-shell{
+  position:absolute;
+  inset:calc(14px + env(safe-area-inset-top)) 10px calc(14px + env(safe-area-inset-bottom)) 10px;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  border:1px solid rgba(241,208,138,.12);
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 50% 12%,rgba(133,41,209,.12),transparent 27%),
+    linear-gradient(180deg,#07010d,#010003);
+  box-shadow:0 28px 100px rgba(0,0,0,.48),inset 0 0 120px rgba(129,45,217,.07);
+  opacity:0;
+  transform:translateY(20px) scale(.987);
+  transition:
+    opacity .28s ease,
+    transform .36s cubic-bezier(.18,.88,.22,1);
+}
+#tarot .tl400__mesa.is-open .tl400__mesa-backdrop{opacity:1}
+#tarot .tl400__mesa.is-open .tl400__mesa-shell{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+#tarot .tl400__mesa-shell>header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:17px 17px 13px;
+  border-bottom:1px solid rgba(241,208,138,.08);
+}
+#tarot .tl400__mesa-shell>header small{
+  color:rgba(241,208,138,.66);
+  font:700 6px/1 system-ui,sans-serif;
+  letter-spacing:.16em;
+}
+#tarot .tl400__mesa-shell h3{
+  margin:3px 0 0;
+  color:var(--tl-gold);
+  font:500 22px/1 Georgia,serif;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+#tarot .tl400__mesa-shell p{
+  margin:5px 0 0;
+  color:rgba(242,230,248,.62);
+  font:400 11px/1.2 Georgia,serif;
+}
+#tarot .tl400__mesa-shell>header button{
+  min-height:40px;
+  padding:0 15px;
+  border:1px solid rgba(241,208,138,.26);
+  border-radius:999px;
+  background:rgba(8,3,17,.46);
+  color:var(--tl-gold);
+}
+#tarot .tl400__mesa-grid{
+  flex:1;
+  overflow:auto;
+  padding:10px;
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  align-content:start;
+  gap:5px;
+}
+#tarot .tl400__mesa-grid button{
+  position:relative;
+  padding:0;
+  aspect-ratio:2/3;
+  border:1px solid rgba(241,208,138,.08);
+  border-radius:10px;
+  overflow:hidden;
+  background:#05010a;
+}
+#tarot .tl400__mesa-grid img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+#tarot .tl400__mesa-grid button>span{
+  position:absolute;
+  left:0;right:0;bottom:0;
+  padding:18px 4px 5px;
+  color:rgba(255,240,202,.90);
+  font:500 7px/1.1 Georgia,serif;
+  text-align:center;
+  background:linear-gradient(180deg,transparent,rgba(1,0,5,.92) 58%);
+}
+#tarot .tl400__mesa-empty{
+  grid-column:1/-1;
+  padding:18px;
+  color:rgba(242,230,248,.62);
+  font:400 14px/1.4 Georgia,serif;
+}
+
+#tarot .tl400__sr{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
+
+@media(max-width:620px){
+  #tarot[data-tarot-world="zero-v400"]{
+    padding-left:7px!important;
+    padding-right:7px!important;
+  }
+  #tarot .tl400__head{
+    padding-inline:8px;
+    display:grid;
+    grid-template-columns:1fr auto;
+    align-items:end;
+  }
+  #tarot .tl400__head-actions{
+    display:grid;
+    justify-items:end;
+    gap:7px;
+  }
+  #tarot .tl400__mesa-button{
+    min-height:38px;
+    padding-inline:13px;
+    font-size:7px;
+  }
+  #tarot .tl400__universe{
+    min-height:min(78svh,730px);
+    border-radius:28px;
+  }
+  #tarot .tl400__card-zone{
+    top:7%;
+    width:min(55vw,232px);
+  }
+  #tarot .tl400__orb{
+    bottom:8%;
+    width:min(34vw,146px);
+  }
+  #tarot .tl400__nav{top:54%}
+  #tarot .tl400__signal{
+    bottom:3.2%;
+    font-size:10px;
+  }
+  #tarot .tl400__constellation{padding:8px}
+  #tarot .tl400__grid{gap:3px}
+  /* explicit product rule: Mesa Real remains 6 per row on mobile too */
+  #tarot .tl400__mesa-grid{
+    grid-template-columns:repeat(6,minmax(0,1fr));
+    gap:3px;
+    padding:7px;
+  }
+  #tarot .tl400__mesa-grid button{
+    border-radius:6px;
+  }
+  #tarot .tl400__mesa-grid button>span{
+    display:none;
+  }
+}
+@media(max-width:390px){
+  #tarot .tl400__universe{min-height:610px}
+  #tarot .tl400__card-zone{width:min(56vw,216px)}
+  #tarot .tl400__orb{width:min(34vw,136px)}
+}
+@media(orientation:landscape) and (max-height:560px){
+  #tarot .tl400__universe{min-height:500px}
+  #tarot .tl400__card-zone{top:5%;width:min(31vh,194px)}
+  #tarot .tl400__orb{bottom:6%;width:min(25vh,138px)}
+}
+@media(prefers-reduced-motion:reduce){
+  #tarot .tl400__canvas{display:none!important}
+  #tarot .tl400 *,#tarot .tl400 *::before,#tarot .tl400 *::after{
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.001ms!important;
+  }
+}

@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — REBIRTH R045 · TAROT LIVRE FIRE ENGINE V345 · BOOT-SAFE */
+/* DIVINA BRUXA — TAROT LIVRE ZERO · V400 · BOOT-SAFE */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -11,7 +11,7 @@ import { AccountEngineV201 } from './account-engine-v201.js?v=201';
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=319';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=322';
+import { createPageLoader } from './page-loader-v1.js?v=400';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -59,12 +59,6 @@ const startMenuSceneV340 = () => import('./menu-orb-lock-v340.js?v=340')
     document.documentElement.dataset.menuRebornError = 'v340';
   });
 
-const startFreeTarotSupremeV345 = () => import('./free-tarot-fire-engine-v345.js?v=345')
-  .then(module => module.installFreeTarotFireEngineV345?.())
-  .catch(error => {
-    console.error('[Divina] Tarot Livre Fire Engine V345 não iniciou', error);
-    document.documentElement.dataset.freeTarotSupremeError = 'v345';
-  });
 
 const startSpreadsSupremeV331 = () => import('./spreads-supreme-v331.js?v=331')
   .then(module => module.installSpreadsSupremeV331?.())
@@ -480,7 +474,6 @@ const awaken = async () => {
     // R027/R028 são opcionais: nunca bloqueiam a abertura da Home.
     startMenuSceneV340();
     startWhitUniversalV333();
-    startFreeTarotSupremeV345();
     startSpreadsSupremeV331();
     startLibraryDeepV332();
 
@@ -513,7 +506,6 @@ const awaken = async () => {
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
     startMenuSceneV340();
     startWhitUniversalV333();
-    startFreeTarotSupremeV345();
     startSpreadsSupremeV331();
     startLibraryDeepV332();
     startPwaAfterBootV326();

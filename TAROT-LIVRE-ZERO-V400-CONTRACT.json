@@ -1,0 +1,55 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "release": "V400",
+  "name": "Tarot Livre Zero — Chama Viva",
+  "scope": "Tarot Livre rebuilt from zero; all other worlds preserved.",
+  "root_cause_fixed": "The official page loader was still loading free-tarot-world-v301.js/css after the newer fire overlays, so the old Tarot remained authoritative.",
+  "replace": [
+    "app-v208.js",
+    "page-loader-v1.js"
+  ],
+  "new": [
+    "tarot-livre-zero-v400.js",
+    "tarot-livre-zero-v400.css",
+    "TAROT-LIVRE-ZERO-V400-CONTRACT.json"
+  ],
+  "engine": {
+    "single_world": true,
+    "old_v301_loaded": false,
+    "old_v345_overlay_loaded": false,
+    "living_flame_canvas_2d": true,
+    "background_canvas": true,
+    "foreground_fire_canvas": true,
+    "orb_to_card_ribbons": true,
+    "particle_burst_on_reveal": true,
+    "card_fire_crown_on_reveal": true,
+    "fast_birth_ms": 430,
+    "card_kept_visible_while_next_image_prepares": true
+  },
+  "mesa_real": {
+    "in_route_scene": true,
+    "revealed_cards_only": true,
+    "columns": 6,
+    "mobile_columns": 6,
+    "smooth_open_close": true
+  },
+  "rules": {
+    "deck_size": 78,
+    "no_reversed_cards": true,
+    "no_repetition": true,
+    "no_meanings": true,
+    "grid_columns": 6
+  },
+  "assets": {
+    "new_static_images": false,
+    "uses_existing_card_art": true,
+    "uses_existing_orb_skin_variables": true
+  },
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}
