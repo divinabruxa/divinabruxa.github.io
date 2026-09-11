@@ -1,0 +1,54 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R040",
+  "release": "V340",
+  "world": "Menu Orb Lock",
+  "evidence": "Screen recording 11.2s / 30fps: Orb reaches correct small size around 4s, then snaps back large around 5-6s while menu stays open.",
+  "root_cause": "Safari does not reliably keep the finished WAAPI visual state used by V339; Home size reasserts after animation completion.",
+  "replace": [
+    "app-v208.js"
+  ],
+  "new": [
+    "menu-orb-lock-v340.js",
+    "menu-orb-lock-v340.css",
+    "REBIRTH-R040-CONTRACT.json"
+  ],
+  "architecture": {
+    "navigationV210": "routes only",
+    "visualAuthority": "V340 only",
+    "samePhysicalOrbV208": true,
+    "orbStageNeverReparented": true,
+    "openStatePinnedWithInlineTranslateScale": true,
+    "waapiFillDependency": false,
+    "cssTransitionReversible": true
+  },
+  "motion": {
+    "durationMs": 660,
+    "easing": "cubic-bezier(.65,0,.35,1)",
+    "stableOpenSize": true,
+    "physicalOrbGrowthAfterOpen": false,
+    "magicFromAuraNotSize": true,
+    "midFlightReversalNativeCSS": true
+  },
+  "labels": {
+    "tarot": "Tarot Livre",
+    "notifications": "Notificações"
+  },
+  "preserve": [
+    "Orbe V208 renderer and gestures",
+    "P0 V326",
+    "Dock V326",
+    "Whit V333",
+    "Tarot V330",
+    "Tiragens V331",
+    "Biblioteca V332",
+    "Navigation V210 routing"
+  ],
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}

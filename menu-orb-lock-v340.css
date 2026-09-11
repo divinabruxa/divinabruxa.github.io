@@ -1,0 +1,212 @@
+/* DIVINA BRUXA 2.0 — REBIRTH R040 · MENU ORB LOCK V340 */
+
+html[data-menu-reborn="v340"] #orbMenu{
+  opacity:0!important;visibility:hidden!important;pointer-events:none!important;
+}
+html[data-menu-reborn="v340"] #orbMenu *,
+html[data-menu-reborn="v340"] #orbMenu::before,
+html[data-menu-reborn="v340"] #orbMenu::after{animation:none!important;transition:none!important}
+
+/* Mantém a Home como contexto de renderização real da Orbe. */
+html[data-menu-reborn="v340"] #home[data-menu-scene="v340"]{
+  z-index:1;
+  pointer-events:none;
+}
+html[data-menu-reborn="v340"] #home[data-menu-scene="v340"] > .orb-stage-ref{
+  z-index:46!important;
+  pointer-events:auto!important;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+}
+html[data-menu-reborn="v340"] #home[data-menu-scene="v340"] > .orb-stage-ref > #orb{
+  pointer-events:auto!important;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+}
+
+/* Cena */
+.menu-orb-lock-v340{
+  position:fixed!important;z-index:40;inset:0!important;display:block!important;
+  overflow:hidden;opacity:0;visibility:hidden;pointer-events:none;
+  contain:layout paint style;isolation:isolate;
+  background:
+    radial-gradient(circle at 50% 52%,rgba(127,45,181,.10),transparent 27%),
+    radial-gradient(circle at 50% 52%,rgba(240,190,109,.025),transparent 44%),
+    linear-gradient(180deg,rgba(2,1,5,.01),rgba(2,1,5,.045));
+  transition:opacity .26s ease;
+}
+.menu-orb-lock-v340.is-visible{opacity:1;visibility:visible}
+.menu-orb-lock-v340.is-closing{opacity:1;visibility:visible}
+
+/* Centro mágico: referência geométrica + aura sem alterar tamanho físico. */
+.mol340-orb-target{
+  position:absolute;left:50%;top:52%;
+  width:min(50vw,24dvh,205px);height:min(50vw,24dvh,205px);
+  transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;
+}
+.mol340-aura{
+  position:absolute;inset:-28%;border-radius:50%;
+  background:
+    radial-gradient(circle,rgba(224,95,255,.18),rgba(143,53,226,.08) 38%,transparent 70%);
+  filter:blur(12px);
+  opacity:.38;
+  transform:scale(.88);
+  transition:opacity .48s ease,transform .62s cubic-bezier(.65,0,.35,1);
+}
+.menu-orb-lock-v340.is-open .mol340-aura{opacity:.78;transform:scale(1.08)}
+
+.mol340-dust{position:absolute;inset:-24%;pointer-events:none}
+.mol340-dust i{
+  position:absolute;width:3px;height:3px;border-radius:50%;
+  background:#ffe6ae;box-shadow:0 0 8px rgba(238,196,117,.9),0 0 13px rgba(198,78,255,.50);
+  opacity:0;
+}
+.mol340-dust i:nth-child(1){left:12%;top:30%}
+.mol340-dust i:nth-child(2){right:10%;top:24%}
+.mol340-dust i:nth-child(3){left:18%;bottom:20%}
+.mol340-dust i:nth-child(4){right:14%;bottom:25%}
+.mol340-dust i:nth-child(5){left:52%;top:0}
+.menu-orb-lock-v340.is-open .mol340-dust i{animation:mol340Dust 4.8s ease-in-out infinite}
+.mol340-dust i:nth-child(2n){animation-delay:-1.8s}
+.mol340-dust i:nth-child(3n){animation-delay:-3.1s}
+
+/* Nebulosa */
+.mol340-nebula{position:absolute;inset:0;pointer-events:none}
+.mol340-nebula i{
+  position:absolute;width:3px;height:3px;border-radius:50%;background:#f8dda5;
+  box-shadow:0 0 9px rgba(215,108,255,.68);opacity:.13;
+}
+.mol340-nebula i:nth-child(1){left:9%;top:24%}.mol340-nebula i:nth-child(2){left:89%;top:29%}
+.mol340-nebula i:nth-child(3){left:15%;top:60%}.mol340-nebula i:nth-child(4){left:82%;top:67%}
+.mol340-nebula i:nth-child(5){left:47%;top:17%}.mol340-nebula i:nth-child(6){left:58%;top:83%}
+.mol340-nebula i:nth-child(7){left:26%;top:76%}.mol340-nebula i:nth-child(8){left:75%;top:20%}
+.menu-orb-lock-v340.is-open .mol340-nebula i{animation:mol340Star 7.2s ease-in-out infinite}
+
+/* Anéis */
+.mol340-primary,.mol340-orbit{
+  position:absolute;left:50%;top:52%;width:min(88vw,43dvh,380px);aspect-ratio:1;
+  pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.48);filter:blur(5px);
+  transition:transform .66s cubic-bezier(.65,0,.35,1),opacity .30s ease,filter .40s ease;
+}
+.menu-orb-lock-v340.is-open .mol340-primary,
+.menu-orb-lock-v340.is-open .mol340-orbit{
+  opacity:1;transform:translate(-50%,-50%) scale(1);filter:none;
+}
+.menu-orb-lock-v340.is-closing .mol340-primary,
+.menu-orb-lock-v340.is-closing .mol340-orbit{
+  opacity:0;transform:translate(-50%,-50%) scale(.48);filter:blur(4px);
+}
+
+.mol340-orbit i{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  border:1px solid rgba(239,202,129,.10);border-radius:50%;
+}
+.mol340-orbit i:first-child{width:100%;height:100%}
+.mol340-orbit i:nth-child(2){width:73%;height:73%;opacity:.23}
+.mol340-orbit b{
+  position:absolute;left:50%;top:0;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;
+  background:#ffe4a8;box-shadow:0 0 8px #efc779,0 0 14px rgba(201,80,255,.58);
+  transform-origin:2.5px calc(min(88vw,43dvh,380px)/2);
+}
+.menu-orb-lock-v340.is-open .mol340-orbit b{animation:mol340Orbit 15s linear infinite}
+
+/* Portais principais */
+.mol340-primary .mol340-portal{
+  --radius:min(44vw,21.5dvh,190px);--collapsed:112px;
+  position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%) rotate(var(--angle)) translateY(calc(-1 * var(--collapsed))) rotate(calc(-1 * var(--angle))) scale(.72);
+  transition:
+    transform .66s cubic-bezier(.65,0,.35,1) calc(var(--i)*10ms),
+    opacity .28s ease calc(30ms + var(--i)*13ms),
+    filter .28s ease calc(30ms + var(--i)*13ms);
+}
+.menu-orb-lock-v340.is-open .mol340-primary .mol340-portal{
+  transform:translate(-50%,-50%) rotate(var(--angle)) translateY(calc(-1 * var(--radius))) rotate(calc(-1 * var(--angle))) scale(1);
+}
+.menu-orb-lock-v340.is-closing .mol340-primary .mol340-portal{transition-delay:calc((7 - var(--i))*7ms)}
+
+.mol340-portal{
+  appearance:none;padding:0;border:0;background:none;display:grid;place-items:center;gap:5px;color:#d7cad8;
+  pointer-events:auto;touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+  opacity:0;filter:blur(2px) brightness(.88);
+}
+.menu-orb-lock-v340.is-open .mol340-portal{opacity:1;filter:none}
+.menu-orb-lock-v340.is-closing .mol340-portal{opacity:0;filter:blur(1.5px) brightness(.9)}
+
+.mol340-jewel{
+  position:relative;display:grid;place-items:center;width:48px;height:48px;
+  border:1px solid rgba(240,203,132,.43);border-radius:50%;
+  background:
+    radial-gradient(circle at 32% 25%,rgba(255,246,219,.12),transparent 25%),
+    radial-gradient(circle at 50% 62%,rgba(79,23,109,.82),rgba(8,3,14,.96) 72%);
+  box-shadow:inset 0 0 18px rgba(184,64,228,.12),0 0 14px rgba(220,170,95,.06);
+  transition:transform .20s cubic-bezier(.2,.8,.2,1),box-shadow .25s ease,border-color .25s ease,filter .20s ease;
+}
+.mol340-jewel i{color:#efd08b;font:500 21px/1 Georgia,serif;font-style:normal}
+.mol340-jewel em{
+  position:absolute;right:8px;top:8px;width:3px;height:3px;border-radius:50%;
+  background:#fff0c2;box-shadow:0 0 7px rgba(255,228,168,.9);
+}
+.mol340-portal small{max-width:78px;color:#d5c8d6;font:500 8px/1.06 Georgia,serif;text-align:center;text-wrap:balance}
+.mol340-portal[data-go="tarot"] small{max-width:84px;white-space:nowrap;font-size:7.5px}
+.mol340-portal:focus{outline:none}
+.mol340-portal:focus-visible .mol340-jewel,
+.mol340-portal.is-current .mol340-jewel{
+  border-color:rgba(255,221,155,.9);
+  box-shadow:inset 0 0 20px rgba(200,73,246,.20),0 0 18px rgba(240,195,111,.24),0 0 30px rgba(194,70,239,.12);
+}
+.mol340-portal:active .mol340-jewel,.mol340-portal.is-touching .mol340-jewel{transform:scale(.89);filter:brightness(1.18)}
+
+/* Segunda onda */
+.mol340-upper,.mol340-lower{
+  position:absolute;left:50%;z-index:4;width:min(90vw,650px);
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));justify-items:center;gap:clamp(5px,2vw,18px);
+  transform:translateX(-50%) translateY(12px);opacity:0;filter:blur(2px);pointer-events:none;
+  transition:opacity .32s ease .16s,transform .52s cubic-bezier(.65,0,.35,1) .16s,filter .32s ease .16s;
+}
+.mol340-upper{top:calc(97px + env(safe-area-inset-top))}
+.mol340-lower{bottom:calc(var(--dock-height,75px) + 24px + env(safe-area-inset-bottom))}
+.menu-orb-lock-v340.is-open .mol340-upper,
+.menu-orb-lock-v340.is-open .mol340-lower{opacity:1;filter:none;transform:translateX(-50%) translateY(0)}
+.menu-orb-lock-v340.is-closing .mol340-upper,
+.menu-orb-lock-v340.is-closing .mol340-lower{
+  opacity:0;filter:blur(2px);transform:translateX(-50%) translateY(10px);transition-delay:0s;
+}
+.mol340-upper .mol340-portal,.mol340-lower .mol340-portal{
+  position:relative;width:100%;transition:opacity .28s ease calc(var(--i)*13ms),filter .28s ease calc(var(--i)*13ms);
+}
+.mol340-upper .mol340-jewel,.mol340-lower .mol340-jewel{width:42px;height:42px}
+.mol340-upper .mol340-portal small,.mol340-lower .mol340-portal small{font-size:7.5px}
+
+@media(max-width:430px) and (orientation:portrait){
+  .mol340-orb-target{width:min(50vw,24dvh,195px);height:min(50vw,24dvh,195px)}
+  .mol340-primary,.mol340-orbit{width:min(88vw,42dvh,350px)}
+  .mol340-primary .mol340-portal{--radius:min(44vw,21dvh,175px);--collapsed:104px}
+  .mol340-jewel{width:46px;height:46px}
+  .mol340-upper,.mol340-lower{width:calc(100vw - 26px)}
+}
+@media(max-width:430px) and (max-height:760px) and (orientation:portrait){
+  .mol340-orb-target{width:min(46vw,22dvh,176px);height:min(46vw,22dvh,176px)}
+  .mol340-primary,.mol340-orbit{width:min(82vw,39dvh,320px)}
+  .mol340-primary .mol340-portal{--radius:min(41vw,19.5dvh,160px);--collapsed:94px}
+  .mol340-upper{top:calc(84px + env(safe-area-inset-top))}
+  .mol340-lower{bottom:calc(var(--dock-height,75px) + 16px + env(safe-area-inset-bottom))}
+}
+@media(orientation:landscape) and (max-height:560px){
+  .mol340-orb-target{top:52%;width:min(31vh,170px);height:min(31vh,170px)}
+  .mol340-primary,.mol340-orbit{top:52%;width:min(72vh,400px)}
+  .mol340-primary .mol340-portal{--radius:min(36vh,200px);--collapsed:min(20vh,110px)}
+}
+@media(prefers-reduced-motion:reduce){
+  .menu-orb-lock-v340,.menu-orb-lock-v340 *{animation:none!important;transition:none!important}
+}
+html[data-performance-tier="constrained"] .mol340-orbit b,
+html[data-performance-tier="constrained"] .mol340-nebula i,
+html[data-performance-tier="constrained"] .mol340-dust i{animation:none!important}
+
+@keyframes mol340Star{0%,100%{opacity:.10;transform:scale(.65)}50%{opacity:.58;transform:scale(1.18)}}
+@keyframes mol340Orbit{to{transform:rotate(360deg)}}
+@keyframes mol340Dust{
+  0%,100%{opacity:.08;transform:translateY(2px) scale(.65)}
+  50%{opacity:.75;transform:translateY(-3px) scale(1.1)}
+}
