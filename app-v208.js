@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — REBIRTH R029 · MENU MÁGICO RECONSTRUÍDO V329 · BOOT-SAFE */
+/* DIVINA BRUXA — REBIRTH R030 · TAROT LIVRE SUPREMO V330 · BOOT-SAFE */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -58,6 +58,13 @@ const startMenuRebornV329 = () => startOrbMenuSupremeV327()
   .catch(error => {
     console.error('[Divina] Menu Reborn V329 não iniciou', error);
     document.documentElement.dataset.menuRebornError = 'v329';
+  });
+
+const startFreeTarotSupremeV330 = () => import('./free-tarot-supreme-v330.js?v=330')
+  .then(module => module.installFreeTarotSupremeV330?.())
+  .catch(error => {
+    console.error('[Divina] Tarot Livre Supremo V330 não iniciou', error);
+    document.documentElement.dataset.freeTarotSupremeError = 'v330';
   });
 
 const clearRebirthShellResidue = () => {
@@ -460,6 +467,7 @@ const awaken = async () => {
     // R027/R028 são opcionais: nunca bloqueiam a abertura da Home.
     startMenuRebornV329();
     startWhitUniversalV328();
+    startFreeTarotSupremeV330();
 
     // Começa a navegação fora do bloqueio visual.
     const navigationTimeout = new Promise((_, reject) =>
@@ -490,6 +498,7 @@ const awaken = async () => {
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
     startMenuRebornV329();
     startWhitUniversalV328();
+    startFreeTarotSupremeV330();
     startPwaAfterBootV326();
   }
 };

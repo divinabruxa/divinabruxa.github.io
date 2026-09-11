@@ -1,0 +1,60 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R030",
+  "release": "V330",
+  "world": "Tarot Livre Supremo",
+  "vision_source": "pedido: Tarot Livre mais livre, vivo, mágico, fluido e menos textual",
+  "purpose": "Transformar visual e ritual do Tarot Livre sem alterar a verdade funcional do motor V301.",
+  "replace": [
+    "app-v208.js"
+  ],
+  "new": [
+    "free-tarot-supreme-v330.js",
+    "free-tarot-supreme-v330.css",
+    "REBIRTH-R030-CONTRACT.json"
+  ],
+  "preserve": {
+    "baseEngine": "FreeTarot V301",
+    "deckSize": 78,
+    "normalOnly": true,
+    "reversedCards": false,
+    "noRepeats": true,
+    "gridColumns": 6,
+    "shuffleOnlyHidden": true,
+    "resetPreserved": true,
+    "swipeNavigation": true,
+    "keyboardNavigation": true,
+    "sessionContinuity": true
+  },
+  "experience": {
+    "lessText": true,
+    "livingRitual": true,
+    "cardBirthEvent": true,
+    "singularityWithoutBlackFrame": true,
+    "orbTouchLight": true,
+    "orbPhysicalGrowthOnTouch": false,
+    "revealedConstellation": true,
+    "cardMeaningsShown": false,
+    "whitInterpretationAutomatic": false
+  },
+  "performance": {
+    "secondTarotEngine": false,
+    "extraApiCalls": 0,
+    "reducedMotion": true,
+    "constrainedTier": true
+  },
+  "preserve_system": [
+    "P0 V326 boot-first",
+    "Menu V329",
+    "Whit Universal V328",
+    "Home Orb V208",
+    "All worlds V301-V323"
+  ],
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}
