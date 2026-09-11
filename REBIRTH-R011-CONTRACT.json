@@ -1,0 +1,49 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R011",
+  "release": "V310",
+  "world": "Whit Memory Garden",
+  "vision_source": "chat Whit + Whit Core V212 + Rebirth R008-R010",
+  "purpose": "Dar continuidade controlável à Whit com memória de sessão, preferências e memórias explícitas visíveis e reversíveis.",
+  "replace": [
+    "app-v208.js"
+  ],
+  "new": [
+    "whit-memory-garden-v310.js",
+    "whit-memory-garden-v310.css",
+    "REBIRTH-R011-CONTRACT.json"
+  ],
+  "preserve": [
+    "Whit Core V212",
+    "Whit Presence V307",
+    "Whit Nervous System V308",
+    "Whit Context Bridge V309",
+    "Home/Orbe/Menu V304",
+    "Tarot Livre V301",
+    "Biblioteca V302",
+    "Carta do Dia V303",
+    "Tiragens V305",
+    "Escola V306",
+    "Orbe IA V190"
+  ],
+  "memory_model": {
+    "session": "memory-only, clearable, non-persistent",
+    "preference": "server persistent, explicit settings and explicit save only",
+    "explicit": "server persistent, explicit user request only"
+  },
+  "privacy": {
+    "hidden_memory": false,
+    "journal_scan": false,
+    "spread_question_scan": false,
+    "school_notes_scan": false,
+    "conversation_scan": false,
+    "persistent_content_displayed_in_panel": false,
+    "memory_metadata_only_list": true
+  },
+  "cost": {
+    "model_api_calls": 0,
+    "credits_used": 0,
+    "account_backend_calls": "only when loading/saving memory controls"
+  },
+  "home_rule": "No memory UI or copy is added to the Home center."
+}

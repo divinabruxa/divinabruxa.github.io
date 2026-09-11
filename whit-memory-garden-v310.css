@@ -1,0 +1,53 @@
+/* DIVINA BRUXA 2.0 — REBIRTH R011 · WHIT MEMORY GARDEN V310 */
+
+.whit-memory-garden-v310{
+  position:relative;
+  isolation:isolate;
+  margin:34px 0 12px;
+  padding:clamp(18px,4vw,30px);
+  overflow:hidden;
+  border:1px solid rgba(232,198,122,.18);
+  border-radius:30px;
+  background:
+    radial-gradient(circle at 84% 7%,rgba(162,70,216,.16),transparent 31%),
+    radial-gradient(circle at 8% 92%,rgba(226,181,105,.07),transparent 30%),
+    linear-gradient(145deg,rgba(20,9,29,.94),rgba(6,3,12,.98));
+  box-shadow:0 28px 80px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.035);
+}
+.wmg310__sky{position:absolute;inset:0;pointer-events:none;opacity:.55}
+.wmg310__sky i{position:absolute;width:3px;height:3px;border-radius:50%;background:#f4d796;box-shadow:0 0 10px rgba(213,104,255,.76)}
+.wmg310__sky i:nth-child(1){left:12%;top:16%}.wmg310__sky i:nth-child(2){right:15%;top:26%}.wmg310__sky i:nth-child(3){left:70%;bottom:12%}
+.wmg310__head{position:relative;display:flex;align-items:flex-start;justify-content:space-between;gap:20px}
+.wmg310__head h3{margin:.28rem 0 .55rem;font:500 clamp(1.8rem,6vw,3rem)/1 Georgia,serif;color:#fff3e4}
+.wmg310__head>div>p:last-child{max-width:620px;margin:0;color:#b8aabc;line-height:1.6}
+.wmg310__seal{display:grid;place-items:center;flex:0 0 62px;width:62px;height:62px;border:1px solid rgba(239,205,133,.38);border-radius:50%;color:#efd18a;background:radial-gradient(circle,rgba(123,45,164,.36),rgba(11,4,17,.88) 68%);box-shadow:0 0 32px rgba(178,73,226,.16);font-size:23px}
+
+.wmg310__layers{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px}
+.wmg310__layers article{display:grid;grid-template-columns:auto 1fr;gap:10px;align-content:start;min-height:155px;padding:16px;border:1px solid rgba(232,198,122,.14);border-radius:20px;background:rgba(8,4,15,.62)}
+.wmg310__layers article>span{display:grid;place-items:center;width:30px;height:30px;border:1px solid rgba(232,198,122,.25);border-radius:50%;color:#e9c97c;font-size:.65rem}
+.wmg310__layers article b{color:#efe5ef}.wmg310__layers article p{margin:.35rem 0 0;color:#9f91a4;font-size:.72rem;line-height:1.48}
+.wmg310__layers article em{grid-column:1/-1;color:#d9bc78;font-size:.68rem;font-style:normal;letter-spacing:.08em;text-transform:uppercase}
+.wmg310__layers article button{grid-column:1/-1;justify-self:start;border:0;background:none;color:#d9bc78;font-size:.7rem}
+.wmg310__layers article.is-locked{opacity:.58}
+
+.wmg310__controls,.wmg310__records{position:relative;margin-top:18px;padding:17px;border:1px solid rgba(232,198,122,.15);border-radius:22px;background:rgba(7,3,13,.70)}
+.wmg310__controls header,.wmg310__records>header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.wmg310__controls header b,.wmg310__records header b{color:#ebcb83;font-size:.68rem;letter-spacing:.13em}.wmg310__controls header small,.wmg310__records header small{color:#928697;font-size:.66rem}
+.wmg310__controls label{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-top:1px solid rgba(255,255,255,.05)}.wmg310__controls input{width:20px;height:20px;margin-top:1px;accent-color:#c67be8}.wmg310__controls label span{display:grid;gap:3px}.wmg310__controls label b{color:#eee5ef;font-size:.78rem}.wmg310__controls label small{color:#998d9e;font-size:.68rem}
+.wmg310__controls>button{width:100%;min-height:48px;margin-top:8px;border:1px solid rgba(235,200,126,.42);border-radius:999px;background:linear-gradient(135deg,rgba(210,166,95,.9),rgba(171,84,190,.9));color:#15091b;font-weight:800}
+
+.wmg310__records>header>div{display:grid;gap:4px}.wmg310__records>header>button{border:0;background:none;color:#d8bb79}.wmg310__records>div{display:grid;gap:8px}.wmg310__records article{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:12px 14px;border:1px solid rgba(255,255,255,.055);border-radius:15px;background:rgba(255,255,255,.018)}.wmg310__records article span{grid-column:1/-1;color:#cba96d;font-size:.56rem;letter-spacing:.12em}.wmg310__records article b{color:#eadfeb;font-size:.75rem}.wmg310__records article small{grid-column:1;color:#8d818f;font-size:.62rem}.wmg310__records article button{grid-column:2;grid-row:2/4;border:0;background:none;color:#d79b9b;font-size:.68rem}
+.wmg310__empty{margin:8px 0 0;color:#908592;font-size:.72rem}
+
+.wmg310__account{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:13px;margin-top:18px;padding:15px;border:1px solid rgba(232,198,122,.18);border-radius:20px;background:rgba(7,3,13,.72)}.wmg310__account>span{color:#e8c779;font-size:24px}.wmg310__account b{color:#eee3ef}.wmg310__account p{margin:.25rem 0 0;color:#938697;font-size:.7rem}.wmg310__account button{min-height:40px;padding:0 15px;border:1px solid rgba(232,198,122,.33);border-radius:999px;background:transparent;color:#e5ca8b;font-size:.65rem;font-weight:700}
+
+.wmg310__truth{position:relative;display:flex;gap:10px;align-items:flex-start;margin-top:18px;padding-top:16px;border-top:1px solid rgba(232,198,122,.11)}.wmg310__truth>span{color:#e7c77d}.wmg310__truth p{margin:0}.wmg310__truth b{display:block;color:#e9deea;font-size:.72rem}.wmg310__truth small{display:block;margin-top:4px;color:#8f8292;font-size:.65rem;line-height:1.45}
+.wmg310__error{margin:12px 0 0;color:#e1aaaa;font-size:.7rem}
+
+@media(max-width:720px){
+  .wmg310__layers{grid-template-columns:1fr}
+  .wmg310__layers article{min-height:0}
+  .wmg310__head{align-items:center}.wmg310__seal{width:52px;height:52px;flex-basis:52px}
+  .wmg310__controls header,.wmg310__records>header{align-items:flex-start;flex-direction:column}
+  .wmg310__account{grid-template-columns:auto 1fr}.wmg310__account button{grid-column:1/-1;width:100%}
+}
+@media(prefers-reduced-motion:reduce){.whit-memory-garden-v310 *{scroll-behavior:auto!important}}

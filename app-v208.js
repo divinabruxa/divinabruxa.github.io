@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — APLICATIVO V208 · WORK7.0 · WHIT CONTEXT BRIDGE V309 */
+/* DIVINA BRUXA — APLICATIVO V208 · WORK7.0 · WHIT MEMORY GARDEN V310 */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -19,6 +19,7 @@ import { createWhitCoreV212 } from './whit-core-v212.js?v=212';
 import { createWhitPresenceV307 } from './whit-presence-v307.js?v=307';
 import { createWhitNervousSystemV308 } from './whit-nervous-system-v308.js?v=308';
 import { createWhitContextBridgeV309 } from './whit-context-bridge-v309.js?v=309';
+import { createWhitMemoryGardenV310 } from './whit-memory-garden-v310.js?v=310';
 import './pwa-world-v201.js?v=201';
 
 const $ = selector => document.querySelector(selector);
@@ -72,6 +73,7 @@ safely('presença local Whit V212', () => whitCore?.awaken());
 const whitPresence = safely('Whit Presence V307', () => createWhitPresenceV307({ core: whitCore, go }));
 const whitNerves = safely('Whit Nervous System V308', () => createWhitNervousSystemV308({ core: whitCore, presence: whitPresence }));
 const whitContext = safely('Whit Context Bridge V309', () => createWhitContextBridgeV309({ core: whitCore, presence: whitPresence, nervousSystem: whitNerves }));
+const whitMemory = safely('Whit Memory Garden V310', () => createWhitMemoryGardenV310({ core: whitCore, presence: whitPresence, authClient }));
 
 const miniOrbBinding = safely('Orbes auxiliares V207', bindMiniOrbs);
 
@@ -181,6 +183,30 @@ window.divinaWhitV309 = Object.freeze({
   contextBodyStoredInReceipt: false,
   sendConsentStillRequired: true,
   localOnly: true,
+  generationEnabled: false,
+  paidApiEnabled: false,
+  privateReads: false,
+  solEnabled: false
+});
+
+window.divinaWhitV310 = Object.freeze({
+  version: 310,
+  core: whitCore,
+  presence: whitPresence,
+  nervousSystem: whitNerves,
+  contextBridge: whitContext,
+  memoryGarden: whitMemory,
+  status: () => ({
+    core: whitCore?.status?.() || null,
+    presence: whitPresence?.status?.() || null,
+    nerves: whitNerves?.status?.() || null,
+    context: whitContext?.status?.() || null,
+    memory: whitMemory?.status?.() || null
+  }),
+  sessionMemoryVisible: true,
+  persistentMemoryExplicitOnly: true,
+  persistentMemoryUserControlled: true,
+  modelCallsForMemoryControls: false,
   generationEnabled: false,
   paidApiEnabled: false,
   privateReads: false,
