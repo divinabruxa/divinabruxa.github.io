@@ -1,0 +1,74 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R023",
+  "release": "V322",
+  "world": "Admin + Analytics + Mapa 2.0",
+  "vision_source": "chat Whit + WORK7.0 master vision",
+  "purpose": "Transformar a Central da Proprietária em um cérebro operacional real, com métricas agregadas e lacunas explicitamente sinalizadas.",
+  "replace": [
+    "page-loader-v1.js"
+  ],
+  "new": [
+    "admin-intelligence-v322.js",
+    "admin-intelligence-v322.css",
+    "REBIRTH-R023-CONTRACT.json"
+  ],
+  "backend_staging": {
+    "project": "divina-bruxa-staging",
+    "edge_function": "admin-analytics-v322",
+    "deployed": true,
+    "ownerOnly": true,
+    "verifiedEmail": true,
+    "mfaAal2": true,
+    "recoveryCodesRequired": true,
+    "revokedSessionRejected": true,
+    "readOnly": true
+  },
+  "metrics": {
+    "registeredAccounts": true,
+    "observedActiveAccounts1d7d30d": true,
+    "officialDauWauMauAvailable": false,
+    "dailyCard30d": true,
+    "aiRequestsCreditsCost": true,
+    "sandboxPurchasesRevenue": true,
+    "consultationCountsAndSnapshotValue": true,
+    "videoEditorialCounts": true,
+    "notificationDraftCounts": true,
+    "analyticsEventFunnel": true,
+    "platforms": true,
+    "locales": true
+  },
+  "map": {
+    "countryFieldExists": true,
+    "countrySignalCurrentlyInstrumented": false,
+    "regionSignalCurrentlyInstrumented": false,
+    "noLocationInference": true,
+    "noFakePins": true
+  },
+  "privacy": {
+    "journalBodies": false,
+    "journalQuestions": false,
+    "aiPrompts": false,
+    "aiResponses": false,
+    "consultationQuestions": false,
+    "names": false,
+    "emails": false,
+    "phones": false,
+    "preciseLocation": false
+  },
+  "preserve": [
+    "AdminEngine V150",
+    "AdminMedia V320",
+    "Admin owner + MFA security",
+    "Whit V307-V316",
+    "Home/Orbe/Menu V304",
+    "Worlds V301-V321"
+  ],
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}

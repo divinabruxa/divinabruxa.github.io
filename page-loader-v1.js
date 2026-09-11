@@ -1,7 +1,8 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R022 · CARREGADOR DE MUNDOS V321
+/* DIVINA BRUXA 2.0 — REBIRTH R023 · CARREGADOR DE MUNDOS V322
    Mundos Rebirth: Tarot Livre V301, Biblioteca V302, Carta do Dia V303,
    Tiragens V305, Escola V306, Diário/Espelho V317, Skins/Premium V318,
-   Conta/Consultas V319, Loja/Música/Vídeo V320 e Notificações V321.
+   Conta/Consultas V319, Loja/Música/Vídeo V320, Notificações V321
+   e Admin/Analytics/Mapa V322.
    Home/Menu V304 e Whit V307–V316 continuam preservados. */
 import {
   normalizeRouteId,
@@ -191,13 +192,16 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
       return new module.NotificationsWorldV321($('#notificationApp'), go);
     },
     admin: async () => {
-      const [, adminModule, worldModule] = await Promise.all([
+      const [, , adminModule, mediaModule, intelligenceModule] = await Promise.all([
         ensureStyle('divinaMediaCommerceRebirthV320', 'media-commerce-world-v320.css?v=320'),
+        ensureStyle('divinaAdminIntelligenceRebirthV322', 'admin-intelligence-v322.css?v=322'),
         import('./admin-engine.js?v=150'),
-        import('./media-commerce-world-v320.js?v=320')
+        import('./media-commerce-world-v320.js?v=320'),
+        import('./admin-intelligence-v322.js?v=322')
       ]);
       const engine = new adminModule.AdminEngine($('#adminApp'));
-      new worldModule.AdminMediaV320($('#adminApp'));
+      new mediaModule.AdminMediaV320($('#adminApp'));
+      new intelligenceModule.AdminIntelligenceV322($('#adminApp'));
       return engine;
     }
   });
@@ -255,8 +259,10 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
     ]),
     admin: () => Promise.all([
       ensureStyle('divinaMediaCommerceRebirthV320', 'media-commerce-world-v320.css?v=320'),
+      ensureStyle('divinaAdminIntelligenceRebirthV322', 'admin-intelligence-v322.css?v=322'),
       import('./admin-engine.js?v=150'),
-      import('./media-commerce-world-v320.js?v=320')
+      import('./media-commerce-world-v320.js?v=320'),
+      import('./admin-intelligence-v322.js?v=322')
     ]),
     notifications: () => Promise.all([
       ensureStyle('divinaNotificationsRebirthV321', 'notifications-world-v321.css?v=321'),
