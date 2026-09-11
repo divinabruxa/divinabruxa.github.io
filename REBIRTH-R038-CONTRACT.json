@@ -1,0 +1,53 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R038",
+  "release": "V338",
+  "world": "Menu One Motion",
+  "evidence": "Screen recording 10.53s / 30fps showed menu disappearing before Orb return completed in two separate close cycles.",
+  "root_cause": "Legacy V210 menu-button transition and Rebirth visual Orb transition were both participating in close timing.",
+  "replace": [
+    "app-v208.js"
+  ],
+  "new": [
+    "menu-one-motion-v338.js",
+    "menu-one-motion-v338.css",
+    "REBIRTH-R038-CONTRACT.json"
+  ],
+  "architecture": {
+    "navigationV210": "routes only for this menu",
+    "legacyMenuButtonClickBlockedAtCapture": true,
+    "legacyFlipRuns": false,
+    "visualAuthority": "V338 only",
+    "samePhysicalOrbV208": true,
+    "orbReparentDuringAnimation": false,
+    "orbFixedTravelerDuringMenu": true
+  },
+  "motion": {
+    "openDurationMs": 620,
+    "closeDurationMs": 600,
+    "sceneHiddenOnlyAfterOrbHome": true,
+    "midFlightReverseUsesCurrentVisualRect": true,
+    "portalCloseStartsBeforeOrbReturnMs": 55,
+    "atomicHomeHandoff": true
+  },
+  "labels": {
+    "tarot": "Tarot Livre",
+    "notifications": "Notificações"
+  },
+  "preserve": [
+    "P0 V326 boot-first",
+    "Dock V326",
+    "Whit V333",
+    "Tarot Livre V330",
+    "Tiragens V331",
+    "Biblioteca V332",
+    "Navigation V210 routing"
+  ],
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}
