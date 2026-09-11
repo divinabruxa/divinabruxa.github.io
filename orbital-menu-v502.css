@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — MENU ORBITAL V502 · GEOMETRIA VIVA V510 */
+/* DIVINA BRUXA — MENU ORBITAL V502 · AFINAÇÃO iOS V517 */
 
 :root{
   --db502-gold:#f6d493;
@@ -7,13 +7,10 @@
   --db502-pink:#ff55dc;
   --db502-blue:#69dcff;
   --db502-night:#030106;
-  --db502-center-y:52%;
-  --db502-inner-x:min(28.5vw,154px);
-  --db502-inner-y:min(16dvh,178px);
-  --db502-outer-x:min(40.5vw,226px);
-  --db502-outer-y:min(28.5dvh,310px);
-  --db502-orb-size:min(28.5vw,150px);
-  --db502-curve:cubic-bezier(.16,.84,.18,1);
+  --db502-inner-radius:min(25.5vw,19dvh,148px);
+  --db502-outer-radius:min(39vw,29dvh,224px);
+  --db502-orb-size:min(31vw,20dvh,158px);
+  --db502-curve:cubic-bezier(.2,.88,.22,1);
 }
 
 html[data-menu-authority="v502"] #orbMenu{
@@ -50,8 +47,7 @@ html.db502-menu-open body{
   -webkit-user-select:none;
   user-select:none;
   -webkit-tap-highlight-color:transparent;
-  transform:translateZ(0);
-  transition:opacity 150ms ease,visibility 0s linear 210ms;
+  transition:opacity 190ms ease,visibility 0s linear 230ms;
 }
 
 .db502-menu.is-open,
@@ -59,13 +55,13 @@ html.db502-menu-open body{
   opacity:1;
   visibility:visible;
   pointer-events:auto;
-  transition:opacity 145ms ease,visibility 0s;
+  transition:opacity 190ms ease,visibility 0s;
 }
 
 .db502-menu.is-closing{
   opacity:0;
   pointer-events:none;
-  transition:opacity 180ms ease,visibility 0s linear 190ms;
+  transition:opacity 205ms ease,visibility 0s linear 215ms;
 }
 
 .db502-menu.is-closing .db502-portal,
@@ -75,7 +71,7 @@ html.db502-menu-open body{
 .db502-menu.is-closing .db502-menu__close,
 .db502-menu.is-closing .db502-menu__hint{
   transition-delay:0ms!important;
-  transition-duration:175ms!important;
+  transition-duration:210ms!important;
 }
 
 .db502-menu__backdrop{
@@ -83,11 +79,9 @@ html.db502-menu-open body{
   z-index:-4;
   inset:0;
   background:
-    radial-gradient(circle at 50% 51%,rgba(133,31,201,.28),transparent 31%),
-    radial-gradient(ellipse 72% 50% at 50% 53%,rgba(51,8,76,.72),transparent 72%),
-    linear-gradient(180deg,rgba(2,0,5,.96),rgba(7,1,12,.985) 48%,rgba(2,0,5,.99));
-  backdrop-filter:blur(13px) saturate(1.12);
-  -webkit-backdrop-filter:blur(13px) saturate(1.12);
+    radial-gradient(circle at 50% 51%,rgba(145,36,216,.24),transparent 34%),
+    radial-gradient(ellipse 78% 56% at 50% 53%,rgba(38,5,60,.54),transparent 75%),
+    linear-gradient(180deg,rgba(2,0,5,.76),rgba(7,1,12,.84) 48%,rgba(2,0,5,.9));
 }
 
 .db502-menu__backdrop:before,
@@ -103,7 +97,7 @@ html.db502-menu-open body{
 .db502-menu__backdrop:before{
   background:
     conic-gradient(from 32deg at 50% 51%,transparent 0 13%,rgba(175,49,255,.09) 17%,transparent 22% 48%,rgba(255,92,214,.07) 54%,transparent 60% 100%);
-  filter:blur(28px);
+  filter:none;
   animation:db502Veil 22s linear infinite;
 }
 
@@ -113,7 +107,7 @@ html.db502-menu-open body{
     radial-gradient(circle at 16% 35%,rgba(165,47,255,.14),transparent 18%),
     radial-gradient(circle at 87% 67%,rgba(255,64,194,.10),transparent 19%),
     radial-gradient(circle at 64% 15%,rgba(95,208,255,.06),transparent 16%);
-  filter:blur(18px);
+  filter:none;
   animation:db502Breath 8s ease-in-out infinite alternate;
 }
 
@@ -121,6 +115,7 @@ html.db502-menu-open body{
   position:absolute;
   z-index:-2;
   inset:0;
+  display:none;
   overflow:hidden;
   pointer-events:none;
 }
@@ -150,7 +145,7 @@ html.db502-menu-open body{
   pointer-events:none;
   opacity:0;
   transform:translateY(-12px);
-  transition:opacity 250ms ease 45ms,transform 390ms var(--db502-curve) 35ms;
+  transition:opacity 220ms ease 34ms,transform 340ms var(--db502-curve) 24ms;
 }
 
 .db502-menu.is-open .db502-menu__heading{
@@ -194,7 +189,7 @@ html.db502-menu-open body{
   touch-action:manipulation;
   opacity:0;
   transform:scale(.7) rotate(-28deg);
-  transition:opacity 190ms ease 80ms,transform 360ms var(--db502-curve) 60ms,background 160ms ease,border-color 160ms ease;
+  transition:opacity 180ms ease 54ms,transform 320ms var(--db502-curve) 42ms,background 160ms ease,border-color 160ms ease;
 }
 
 .db502-menu.is-open .db502-menu__close{
@@ -224,14 +219,13 @@ html.db502-menu-open body{
   position:absolute;
   z-index:0;
   left:50%;
-  top:var(--db502-center-y);
+  top:52%;
   translate:-50% -50%;
   border-radius:50%;
   pointer-events:none;
   opacity:0;
-  transform:scale(.68) rotate(-13deg);
-  will-change:transform,opacity;
-  transition:opacity 210ms ease,transform 350ms var(--db502-curve);
+  transform:scale(.56) rotate(-24deg);
+  transition:opacity 220ms ease,transform 360ms var(--db502-curve);
 }
 
 .db502-menu__orbit:before,
@@ -258,14 +252,14 @@ html.db502-menu-open body{
 }
 
 .db502-menu__orbit--inner{
-  width:calc(var(--db502-inner-x) * 2);
-  height:calc(var(--db502-inner-y) * 2);
+  width:calc(var(--db502-inner-radius) * 2);
+  height:calc(var(--db502-inner-radius) * 2);
 }
 
 .db502-menu__orbit--outer{
-  width:calc(var(--db502-outer-x) * 2);
-  height:calc(var(--db502-outer-y) * 2);
-  transition-delay:18ms;
+  width:calc(var(--db502-outer-radius) * 2);
+  height:calc(var(--db502-outer-radius) * 2);
+  transition-delay:25ms;
 }
 
 .db502-menu.is-open .db502-menu__orbit{
@@ -283,10 +277,9 @@ html.db502-menu-open body{
 .db502-portal{
   position:absolute;
   left:50%;
-  top:var(--db502-center-y);
-  width:50px;
-  height:50px;
-  min-height:0;
+  top:52%;
+  width:82px;
+  min-height:70px;
   margin:0;
   padding:0;
   border:0;
@@ -296,32 +289,39 @@ html.db502-menu-open body{
   pointer-events:auto;
   touch-action:manipulation;
   -webkit-tap-highlight-color:transparent;
-  transform:translate3d(
-    calc(-50% + var(--portal-x,0px)),
-    calc(-50% + var(--portal-y,0px)),
-    0
-  ) scale(.52);
-  transform-origin:center;
-  will-change:transform,opacity;
+  transform:
+    translate(-50%,-50%)
+    rotate(var(--portal-angle))
+    translateX(var(--portal-radius))
+    rotate(var(--portal-inverse))
+    scale(.44);
   opacity:0;
   transition:
-    opacity 165ms ease var(--portal-delay,0ms),
-    transform 360ms var(--db502-curve) var(--portal-delay,0ms),
-    filter 150ms ease;
+    opacity 180ms ease calc(var(--portal-i) * 8ms),
+    transform 390ms var(--db502-curve) calc(var(--portal-i) * 8ms);
 }
+
+.db502-menu.is-ios-settling .db502-portal,
+.db502-menu.is-ios-settling .db502-menu__center,
+.db502-menu.is-ios-settling .db502-menu__orbit{
+  will-change:transform,opacity;
+}
+
+.db502-portal--inner{--portal-radius:var(--db502-inner-radius)}
+.db502-portal--outer{--portal-radius:var(--db502-outer-radius)}
 
 .db502-menu.is-open .db502-portal{
   opacity:1;
-  transform:translate3d(
-    calc(-50% + var(--portal-x,0px)),
-    calc(-50% + var(--portal-y,0px)),
-    0
-  ) scale(1);
+  transform:
+    translate(-50%,-50%)
+    rotate(var(--portal-angle))
+    translateX(var(--portal-radius))
+    rotate(var(--portal-inverse))
+    scale(1);
 }
 
 .db502-menu.is-departing .db502-portal:not(.is-chosen){
   opacity:.18;
-  filter:blur(.5px);
   transition-delay:0ms;
   transition-duration:180ms;
 }
@@ -381,33 +381,20 @@ html.db502-menu-open body{
 }
 
 .db502-portal__label{
-  --label-distance:35px;
-  position:absolute;
-  z-index:4;
-  left:50%;
-  top:50%;
-  display:grid;
-  place-items:center;
-  width:84px;
-  min-height:24px;
-  margin:0;
-  padding:2px 4px;
-  border-radius:999px;
+  display:block;
+  width:82px;
+  min-height:28px;
+  margin:5px 0 0;
+  padding:3px 4px;
   color:#f8eedc;
-  background:radial-gradient(ellipse at center,rgba(4,1,9,.72),rgba(4,1,9,.26) 72%,transparent);
-  font:550 clamp(10px,2.35vw,12px)/1.08 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  border-radius:9px;
+  background:linear-gradient(180deg,rgba(7,1,13,.56),rgba(4,0,8,.3));
+  font:600 clamp(10px,2.75vw,12.5px)/1.18 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   letter-spacing:.01em;
   text-align:center;
   text-wrap:balance;
   text-shadow:0 1px 5px #020003,0 0 9px rgba(182,78,244,.34);
-  pointer-events:auto;
-  touch-action:manipulation;
-  transform:translate(-50%,-50%) translateY(var(--label-distance));
-  transition:color 150ms ease,transform 180ms var(--db502-curve);
-}
-
-.db502-portal[data-label-anchor="top"] .db502-portal__label{
-  --label-distance:-35px;
+  transition:color 180ms ease,transform 180ms ease;
 }
 
 .db502-portal:hover .db502-portal__jewel,
@@ -432,14 +419,14 @@ html.db502-menu-open body{
 .db502-portal:hover .db502-portal__label,
 .db502-portal:focus-visible .db502-portal__label,
 .db502-portal.is-touching .db502-portal__label,
-.db502-portal.is-current .db502-portal__label{color:var(--db502-gold-hot);filter:brightness(1.09)}
+.db502-portal.is-current .db502-portal__label{color:var(--db502-gold-hot);transform:translateY(1px)}
 
 .db502-portal:focus-visible{outline:none}
 .db502-portal:focus-visible:after{
   content:"";
   position:absolute;
-  left:-2px;
-  top:-2px;
+  left:14px;
+  top:-3px;
   width:54px;
   height:54px;
   border:2px solid rgba(105,220,255,.8);
@@ -473,7 +460,7 @@ html.db502-menu-open body{
   position:absolute;
   z-index:4;
   left:50%;
-  top:var(--db502-center-y);
+  top:52%;
   width:var(--db502-orb-size);
   height:var(--db502-orb-size);
   translate:-50% -50%;
@@ -482,8 +469,7 @@ html.db502-menu-open body{
   border-radius:50%;
   opacity:0;
   transform:scale(.55);
-  will-change:transform,opacity;
-  transition:opacity 195ms ease 24ms,transform 350ms var(--db502-curve) 12ms;
+  transition:opacity 210ms ease 28ms,transform 360ms var(--db502-curve) 16ms;
 }
 
 .db502-menu.is-open .db502-menu__center{
@@ -555,7 +541,7 @@ html.db502-menu-open body{
   text-shadow:0 1px 8px #000;
   opacity:0;
   transform:translateY(10px);
-  transition:opacity 220ms ease 150ms,transform 360ms var(--db502-curve) 130ms;
+  transition:opacity 200ms ease 92ms,transform 320ms var(--db502-curve) 76ms;
   pointer-events:none;
 }
 
@@ -571,33 +557,75 @@ html.db502-menu-open body{
 @keyframes db502Chosen{0%{transform:scale(1.05)}36%{transform:scale(1.22);filter:brightness(1.3)}100%{transform:scale(.78);filter:brightness(1.1)}}
 
 @media (max-width:370px){
-  .db502-portal{width:44px;height:44px}
+  :root{
+    --db502-inner-radius:min(25vw,19dvh,112px);
+    --db502-outer-radius:min(39vw,29dvh,156px);
+    --db502-orb-size:min(30vw,19dvh,116px);
+  }
+  .db502-portal{width:72px;min-height:64px}
   .db502-portal__jewel{width:42px;height:42px}
-  .db502-portal__label{--label-distance:32px;width:70px;min-height:22px;padding-inline:2px;font-size:9.5px}
-  .db502-portal[data-label-anchor="top"] .db502-portal__label{--label-distance:-32px}
+  .db502-portal__label{width:72px;font-size:10px}
   .db502-menu__heading{top:max(18px,env(safe-area-inset-top))}
   .db502-menu__heading h2{margin-top:5px}
   .db502-menu__close{right:max(10px,env(safe-area-inset-right));width:44px;height:44px}
-  .db502-portal:focus-visible:after{left:-5px;top:-5px;width:50px;height:50px}
+}
+
+/* Nos dois pontos laterais em que as órbitas se aproximam, os rótulos da
+   órbita externa respiram acima da joia. Assim Loja/Tiragens e Skins/Diário
+   nunca se sobrepõem em telas estreitas. */
+@media (max-width:620px){
+  .db502-portal--outer[data-v502-route="store"] .db502-portal__label,
+  .db502-portal--outer[data-v502-route="skins"] .db502-portal__label{
+    position:absolute;
+    left:4px;
+    top:-31px;
+    width:74px;
+    margin:0;
+  }
+}
+
+@media (max-width:370px){
+  .db502-portal--outer[data-v502-route="store"] .db502-portal__label,
+  .db502-portal--outer[data-v502-route="skins"] .db502-portal__label{
+    left:6px;
+    width:60px;
+  }
+  .db502-portal--outer[data-v502-route="ai"] .db502-portal__label,
+  .db502-portal--outer[data-v502-route="login"] .db502-portal__label{
+    position:relative;
+    top:-3px;
+  }
 }
 
 @media (max-height:690px){
+  :root{
+    --db502-inner-radius:min(25vw,18dvh,124px);
+    --db502-outer-radius:min(39vw,28dvh,184px);
+    --db502-orb-size:min(29vw,18dvh,130px);
+  }
   .db502-menu__heading{top:max(13px,env(safe-area-inset-top))}
   .db502-menu__heading span{font-size:8px}
   .db502-menu__heading h2{margin-top:4px;font-size:18px}
   .db502-menu__hint{bottom:max(8px,env(safe-area-inset-bottom));font-size:10px}
   .db502-portal__jewel{width:42px;height:42px}
-  .db502-portal{width:44px;height:44px}
-  .db502-portal__label{--label-distance:31px;font-size:10px}
-  .db502-portal[data-label-anchor="top"] .db502-portal__label{--label-distance:-31px}
+  .db502-portal__label{margin-top:3px;font-size:10px}
 }
 
 @media (orientation:landscape) and (max-height:520px){
+  :root{
+    --db502-inner-radius:min(17vw,22dvh,102px);
+    --db502-outer-radius:min(28vw,37dvh,168px);
+    --db502-orb-size:min(18vw,27dvh,118px);
+  }
+  .db502-menu__orbit,
+  .db502-portal,
+  .db502-menu__center{top:53%}
   .db502-menu__heading h2{display:none}
   .db502-menu__hint{display:none}
 }
 
 @media (min-width:900px){
+  .db502-portal{width:92px}
   .db502-portal__jewel{width:50px;height:50px}
   .db502-portal__label{width:92px;font-size:13px}
 }

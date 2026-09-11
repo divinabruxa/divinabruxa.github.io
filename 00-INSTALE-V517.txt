@@ -1,0 +1,83 @@
+DIVINA BRUXA — V517
+MACROETAPA 3 DE 4 · COMPOSIÇÃO MÁGICA, PROPORÇÃO E NAVEGAÇÃO
+
+PRÉ-REQUISITO
+V516 instalada e chama aprovada.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+1. Abra o ZIP V517.
+2. Selecione todos os 12 arquivos soltos.
+3. Envie todos diretamente para a raiz do mesmo repositório.
+4. Não crie nenhuma pasta.
+5. Confirme a substituição destes 7 arquivos:
+   - app-v208.js
+   - page-loader-v1.js
+   - sw.js
+   - orbital-menu-v502.js
+   - orbital-menu-v502.css
+   - living-universe-core-v516.js
+   - living-universe-core-v516.css
+6. Os outros 5 arquivos são novos:
+   - 00-INSTALE-V517.txt
+   - COMPOSICAO-MAGICA-V517-CONTRACT.json
+   - tarot-livre-orbe-os-v517.js
+   - tarot-livre-orbe-os-v517.css
+   - tarot-mesa-bridge-v517.js
+7. Aguarde o GitHub concluir a atualização.
+8. Feche todas as abas da Divina Bruxa e o aplicativo instalado uma vez.
+9. Abra novamente para o service worker V517 assumir.
+
+O QUE ESTA MACROETAPA ENTREGA
+- A carta principal mantém proporção exata de Tarot em 2:3.
+- No iPhone, a Orbe fica visualmente maior que a carta, como na referência,
+  sem cobrir o contador, a mensagem ou o menu inferior.
+- O espaço entre Orbe e carta foi recalibrado para a chama V516 respirar.
+- A chama e o Universo Vivo V516 permanecem literalmente inalterados.
+- A troca entre cartas reveladas prepara e decodifica a próxima imagem antes
+  da substituição; a carta atual não desaparece enquanto a outra carrega.
+- A navegação histórica recebe seta anterior, seta seguinte, gesto lateral,
+  resistência nas bordas e movimento baseado em transform/opacidade.
+- O menu abre e fecha com curva de mola curta inspirada no iOS.
+- Os 13 rótulos do menu ficam separados em telas móveis; Loja/Tiragens e
+  Skins/Diário deixam de disputar o mesmo espaço.
+- O menu reutiliza o Universo Vivo global; nenhuma segunda constelação pesada
+  é criada por cima dele.
+- O toque em Tarot Livre aquece a página antes da viagem da Orbe e mantém uma
+  única Orbe física durante toda a passagem.
+- Mesa Real envia todas as cartas já reveladas na ordem em que nasceram.
+- A Mesa completa as posições restantes sem repetição até chegar às 78 cartas.
+- A autorização Premium continua pertencendo à Mesa Real. Se o acesso ainda
+  não estiver confirmado, a sequência fica guardada; nada é perdido.
+- Se existir uma tiragem incompleta, ela é preservada até a pessoa confirmar
+  explicitamente que deseja abrir uma nova Mesa Real.
+
+COMO CONFERIR NO IPHONE
+1. Abra o menu e confirme que nenhum nome aparece sobre outro.
+2. Entre em Tarot Livre pelo menu e observe a Orbe viajar sem duplicar.
+3. Revele pelo menos três cartas.
+4. Use a seta esquerda, a seta direita e deslize a carta lateralmente.
+5. Confirme que a carta está em 2:3 e a Orbe repousa maior abaixo dela.
+6. Toque em Mesa Real e confira as cartas nas primeiras posições, na mesma
+   ordem do Tarot Livre.
+7. Confirme que o universo e a chama continuam iguais aos aprovados na V516.
+
+VALIDAÇÃO DE ENGENHARIA
+- Sintaxe de todos os JavaScript: aprovada.
+- Contratos móveis calculados em 2.257 combinações de largura/altura.
+- Colisões entre rótulos do menu: zero.
+- Transferência testada com ordem preservada, 78 IDs únicos e Premium intacto.
+- Hash do Universo Vivo e da chama V516: idêntico ao pacote aprovado.
+
+O QUE CONTINUA INTOCÁVEL
+- Exatamente uma Orbe física viva: Supreme Orb V501.
+- Motor Universal das Realidades V511.
+- Carta do Dia V509.
+- 78 cartas diretas, sem repetição e seis cartas por fileira.
+- Nenhum significado dentro do Tarot Livre.
+- Nenhuma mudança em Whit, servidor, API, pagamentos, autenticação, banco,
+  domínio ou DNS.
+- Nenhuma publicação foi feita por esta entrega.
+
+PRÓXIMA MACROETAPA, SOMENTE APÓS SUA APROVAÇÃO NO IPHONE
+Macroetapa 4 de 4 — calibração final das 30 skins, desempenho e acabamento.
+

@@ -1,0 +1,108 @@
+{
+  "release": "V517",
+  "name": "Orbe OS — Composição Mágica, Proporção e Navegação",
+  "macro_stage": {
+    "current": 3,
+    "total": 4,
+    "title": "Composição fiel, proporção e passagem Tarot Livre → Mesa Real",
+    "approval_gate": "real iPhone visual and touch approval required",
+    "next": "Macroetapa 4 — 30 skins, performance and final finish"
+  },
+  "requires": "V516 installed and approved",
+  "files": {
+    "replace": [
+      "app-v208.js",
+      "page-loader-v1.js",
+      "sw.js",
+      "orbital-menu-v502.js",
+      "orbital-menu-v502.css",
+      "living-universe-core-v516.js",
+      "living-universe-core-v516.css"
+    ],
+    "new": [
+      "00-INSTALE-V517.txt",
+      "COMPOSICAO-MAGICA-V517-CONTRACT.json",
+      "tarot-livre-orbe-os-v517.js",
+      "tarot-livre-orbe-os-v517.css",
+      "tarot-mesa-bridge-v517.js"
+    ]
+  },
+  "visual_composition": {
+    "main_card_aspect_ratio": "2:3",
+    "mobile_orb_to_card_width_ratio": "1.20–1.34",
+    "card_orb_overlap": false,
+    "counter_and_signal_uncovered": true,
+    "reference_calibration": "card-orb-flame-golden-ratio-v517",
+    "approved_universe_and_fire_changed": false
+  },
+  "card_navigation": {
+    "previous_arrow": true,
+    "next_arrow": true,
+    "horizontal_pointer_gesture": true,
+    "edge_resistance": true,
+    "velocity_aware_swipe": true,
+    "decoded_before_swap": true,
+    "atomic_card_replacement": true,
+    "history_motion_properties": ["transform", "opacity"],
+    "history_transition_ms": 360
+  },
+  "menu": {
+    "authority": "Orbital Menu V502 preserved",
+    "open_ms": 340,
+    "close_ms": 210,
+    "spring": "cubic-bezier(.2,.88,.22,1)",
+    "portals": 13,
+    "mobile_label_overlaps": 0,
+    "viewports_calculated": 2257,
+    "duplicate_starfield": false,
+    "destination_preheated_on_pointerdown": true,
+    "single_physical_orb_during_route": true
+  },
+  "mesa_real_transfer": {
+    "destination": "royal-table",
+    "incoming_order_preserved": true,
+    "incoming_cards_are_first_positions": true,
+    "remaining_positions_filled_without_repeats": true,
+    "total_positions": 78,
+    "premium_authority_bypassed": false,
+    "pending_transfer_preserved_until_entitlement": true,
+    "existing_incomplete_reading_requires_explicit_replacement": true,
+    "tarot_session_preserved_after_transfer": true
+  },
+  "approved_v516_engine": {
+    "authority": "LivingUniverseCoreV516",
+    "javascript_sha256": "e788d193c64667e3b7e2235490e13fed7bf36d4f7bf756d6f3558f9d3a51dbfa",
+    "css_sha256": "77bddf404091fc40ed8ecfcab62d67c48ef3357a8d0b0c9b862c5c22ec385bf1",
+    "files_byte_identical_to_approved_v516": true,
+    "universe_canvas_count": 1,
+    "fire_inside_universe_canvas": true,
+    "continuous_animation_loops": 1,
+    "lightning_strokes": false,
+    "static_universe_images": 0
+  },
+  "tarot_rules": {
+    "deck_size": 78,
+    "orientation": "upright only",
+    "repeats": 0,
+    "grid_columns": 6,
+    "meanings_in_free_tarot": false,
+    "existing_session_preserved": true,
+    "decorative_flying_cards": false
+  },
+  "preserved": {
+    "supreme_orb": "V501 unchanged",
+    "reality_lifecycle": "V511 unchanged",
+    "daily_world": "V509 unchanged",
+    "whit_server_or_persona": "unchanged",
+    "billing_auth_database_dns": "unchanged"
+  },
+  "safety": {
+    "navigator_vibrate": false,
+    "native_capacitor_haptics_only": true,
+    "new_api_calls": 0,
+    "production_publish_authorized": false,
+    "deploy_authorized": false,
+    "dns_authorized": false,
+    "database_changes_authorized": false
+  }
+}

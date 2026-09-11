@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — MACROETAPA 2/4 · CHAMA CELESTIAL VERDADEIRA V516
-   V501 continua como a única Orbe Suprema. Universo e fogo compartilham um
-   único canvas procedural e uma única cadência de animação. */
+/* DIVINA BRUXA — MACROETAPA 3/4 · COMPOSIÇÃO E FLUIDEZ V517
+   Preserva a única Orbe V501 e o Universo/Chama V516. A V517 une menu, Tarot
+   Livre e Mesa Real com proporções calibradas e movimento contínuo. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -15,7 +15,7 @@ import { AccountEngineV201 } from './account-engine-v201.js?v=201';
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=319';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=516-celestial-fire';
+import { createPageLoader } from './page-loader-v1.js?v=517-ios-composition';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -56,7 +56,7 @@ const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
     document.documentElement.dataset.orbMenuSupremeError = 'v327';
   });
 
-const startOrbitalMenuV502 = () => import('./orbital-menu-v502.js?v=510-living-geometry')
+const startOrbitalMenuV502 = () => import('./orbital-menu-v502.js?v=517-ios-flight')
   .then(module => module.installOrbitalMenuV502?.({ core:supremeOrb, go }))
   .catch(error => {
     console.error('[Divina] Menu Orbital Vivo V502 não iniciou', error);
@@ -195,13 +195,13 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V516 = 516;
-const releaseReloadKeyV516 = `divina-release-reload-${RELEASE_EPOCH_V516}`;
-const reloadForNewReleaseV516 = version => {
-  if (Number(version || 0) <= RELEASE_EPOCH_V516) return false;
+const RELEASE_EPOCH_V517 = 517;
+const releaseReloadKeyV517 = `divina-release-reload-${RELEASE_EPOCH_V517}`;
+const reloadForNewReleaseV517 = version => {
+  if (Number(version || 0) <= RELEASE_EPOCH_V517) return false;
   try {
-    if (sessionStorage.getItem(releaseReloadKeyV516)) return false;
-    sessionStorage.setItem(releaseReloadKeyV516, String(version));
+    if (sessionStorage.getItem(releaseReloadKeyV517)) return false;
+    sessionStorage.setItem(releaseReloadKeyV517, String(version));
   } catch {}
   location.reload();
   return true;
@@ -210,7 +210,7 @@ const reloadForNewReleaseV516 = version => {
 navigator.serviceWorker?.addEventListener('message', event => {
   if (event.data?.type === 'DIVINA_RELEASE_READY') {
     document.documentElement.dataset.releaseReady = String(event.data.version || 'unknown');
-    reloadForNewReleaseV516(event.data.version);
+    reloadForNewReleaseV517(event.data.version);
     return;
   }
   if (event.data?.type !== 'divina-notification-open') return;
@@ -220,15 +220,15 @@ navigator.serviceWorker?.addEventListener('message', event => {
   }
 });
 
-if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV516) {
-  window.__divinaSWBootstrapV516 = true;
+if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV517) {
+  window.__divinaSWBootstrapV517 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=516', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=517', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v516';
+        document.documentElement.dataset.releaseEpoch = 'v517';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V516 registrado');
+        console.info('[Divina] PWA V517 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -543,7 +543,7 @@ const awaken = async () => {
     document.documentElement.dataset.bootRecovery = 'v326';
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
     dispatchEvent(new CustomEvent('divina:boot-ready', {
-      detail: { shell:'v180', recovery:'v326', bootFirst:true, supremeOrb:'v501', orbitalMenu:'v502', tarotLivre:'v516', dailyWorld:'v509', realityLifecycle:'v511', transitionAuthority:'supreme-orb-v501', loaderProjection:'supreme-orb-v501', fluidity:'v516-single-cadence', livingUniverse:'v516', globalUniverseCanvas:true, staticUniverseImage:false, proceduralStars:true, proceduralNebulae:true, proceduralGalaxies:true, skinReactiveUniverse:true, physicalCardJourney:true, decodedBeforeSwap:true, unexplainedFlyingCards:false, stellarFire:'v516-integrated', trueCelestialFire:true, lightningStrokes:false, strokedFirePaths:0, whiteOverexposure:false, volumetricBillows:true, flameTongues:true, fireInsideUniverseCanvas:true, oneLivingDailyOrb:true }
+      detail: { shell:'v180', recovery:'v326', bootFirst:true, supremeOrb:'v501', orbitalMenu:'v502-v517-tuned', tarotLivre:'v517', dailyWorld:'v509', realityLifecycle:'v511', transitionAuthority:'supreme-orb-v501', loaderProjection:'supreme-orb-v501', fluidity:'v517-ios-compositor', livingUniverse:'v516', globalUniverseCanvas:true, staticUniverseImage:false, proceduralStars:true, proceduralNebulae:true, proceduralGalaxies:true, skinReactiveUniverse:true, physicalCardJourney:true, decodedBeforeSwap:true, unexplainedFlyingCards:false, stellarFire:'v516-integrated', trueCelestialFire:true, lightningStrokes:false, strokedFirePaths:0, whiteOverexposure:false, volumetricBillows:true, flameTongues:true, fireInsideUniverseCanvas:true, iosHistoryNavigation:true, mesaRealTransfer:true, referenceProportions:true, oneLivingDailyOrb:true }
     }));
 
     // O menu é opcional para o boot: a Home abre mesmo se esta camada falhar.

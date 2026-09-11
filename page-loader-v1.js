@@ -1,5 +1,5 @@
-/* DIVINA BRUXA 2.0 — MACROETAPA 2/4 V516 · CHAMA CELESTIAL VERDADEIRA
-   V501 permanece a única Orbe viva; V509 diário é preservado sem mudanças. */
+/* DIVINA BRUXA 2.0 — MACROETAPA 3/4 V517 · COMPOSIÇÃO E FLUIDEZ
+   Preserva V501, V509 e o Universo/Chama V516; conecta Tarot e Mesa Real. */
 
 import {
   normalizeRouteId,
@@ -7,6 +7,7 @@ import {
   routeLabel,
   routeNeedsPortalStyles
 } from './route-registry-v180.js?v=300';
+import { connectTarotMesaBridgeV517 } from './tarot-mesa-bridge-v517.js?v=517';
 
 const pageTasks = new Map();
 const sharedTasks = new Map();
@@ -160,6 +161,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       delete globalThis.divinaTarotLivreV514;
       globalThis.divinaTarotLivreV515?.destroy?.();
       delete globalThis.divinaTarotLivreV515;
+      globalThis.divinaTarotLivreV516?.destroy?.();
+      delete globalThis.divinaTarotLivreV516;
       [
         'freeTarotFireEngineV345Styles',
         'divinaTarotLivreCosmicoV500',
@@ -176,16 +179,17 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
         'divinaTarotLivreOrbOSV512',
         'divinaTarotLivreOrbOSV513',
         'divinaTarotLivreOrbOSV514',
-        'divinaTarotLivreOrbOSV515'
+        'divinaTarotLivreOrbOSV515',
+        'divinaTarotLivreOrbOSV516'
       ].forEach(styleId=>document.getElementById(styleId)?.remove());
       const [,module]=await Promise.all([
-        ensureStyle('divinaTarotLivreOrbOSV516','tarot-livre-orbe-os-v516.css?v=516-celestial-fire'),
-        import('./tarot-livre-orbe-os-v516.js?v=516-celestial-fire')
+        ensureStyle('divinaTarotLivreOrbOSV517','tarot-livre-orbe-os-v517.css?v=517-ios-composition'),
+        import('./tarot-livre-orbe-os-v517.js?v=517-ios-composition')
       ]);
-      const instance=new module.TarotLivreOrbOSV516($('#tarot'),{
+      const instance=new module.TarotLivreOrbOSV517($('#tarot'),{
         orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme
       });
-      globalThis.divinaTarotLivreV516=instance;
+      globalThis.divinaTarotLivreV517=instance;
       return instance;
     },
     daily: async()=>{
@@ -223,12 +227,15 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
         ensureStyle('divinaSpreadsRebirthV305','spreads-world-v305.css?v=305'),
         import('./spreads-world-v305.js?v=305')
       ]);
-      return new module.SpreadsWorldV305({
+      const instance=new module.SpreadsWorldV305({
         grid:$('#spreadGrid'),
         result:$('#spreadResult'),
         intention:$('#spreadIntention'),
         history:$('#spreadHistory')
       },remember,{authClient,whit:globalThis.whit});
+      globalThis.divinaSpreadsWorldV305=instance;
+      connectTarotMesaBridgeV517(instance);
+      return instance;
     },
     journal:ensureJournal,
     ai:async()=>{
@@ -291,8 +298,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
 
   const warmers=Object.freeze({
     tarot:()=>Promise.all([
-      ensureStyle('divinaTarotLivreOrbOSV516','tarot-livre-orbe-os-v516.css?v=516-celestial-fire'),
-      import('./tarot-livre-orbe-os-v516.js?v=516-celestial-fire')
+      ensureStyle('divinaTarotLivreOrbOSV517','tarot-livre-orbe-os-v517.css?v=517-ios-composition'),
+      import('./tarot-livre-orbe-os-v517.js?v=517-ios-composition')
     ]),
     daily:()=>Promise.all([
       ensureStyle('divinaDailyLivingV509','daily-world-v509.css?v=509'),
