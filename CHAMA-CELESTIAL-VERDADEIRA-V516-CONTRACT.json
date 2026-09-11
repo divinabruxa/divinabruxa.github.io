@@ -1,0 +1,126 @@
+{
+  "release": "V516",
+  "name": "Orbe OS — Motor de Chama Celestial Verdadeira",
+  "macro_stage": {
+    "current": 2,
+    "total": 4,
+    "title": "Motor de Chama Celestial Verdadeira",
+    "approval_gate": "real iPhone visual approval required",
+    "next_if_approved": "Macroetapa 3 — composição e viagem narrativa",
+    "alternative_if_rejected": "preserve V515 universe and pivot to iOS-fluid interface"
+  },
+  "requires": "V515 installed",
+  "files": {
+    "replace": [
+      "app-v208.js",
+      "page-loader-v1.js",
+      "sw.js"
+    ],
+    "new": [
+      "00-INSTALE-V516.txt",
+      "CHAMA-CELESTIAL-VERDADEIRA-V516-CONTRACT.json",
+      "living-universe-core-v516.js",
+      "living-universe-core-v516.css",
+      "tarot-livre-orbe-os-v516.js",
+      "tarot-livre-orbe-os-v516.css"
+    ]
+  },
+  "celestial_fire": {
+    "authority": "LivingUniverseCoreV516",
+    "implementation": "procedural volumetric fragment field",
+    "inside_universal_universe_canvas": true,
+    "separate_fire_canvas_count": 0,
+    "static_fire_images": 0,
+    "lightning_strokes": false,
+    "stroked_orb_to_card_paths": 0,
+    "thin_centerline_rendered": false,
+    "broad_volume_field": true,
+    "serpentine_s_curve": true,
+    "braided_lobes": true,
+    "volumetric_billows": true,
+    "flame_tongues": true,
+    "luminous_wisps": true,
+    "stellar_embers": true,
+    "palette": [
+      "violet outer volume",
+      "magenta body",
+      "broken gold cores"
+    ],
+    "chromatic_mixing_instead_of_additive_white": true,
+    "white_overexposure": false,
+    "skin_reactive": true
+  },
+  "birth_sync": {
+    "origin": "upper physical surface of Supreme Orb V501",
+    "destination": "lower edge of current card portal",
+    "geometry_uses_live_dom_rects": true,
+    "visual_viewport_recalibration": true,
+    "journey_duration_ms": 1040,
+    "traveling_gold_energy": true,
+    "birth_ember_boost": true,
+    "physical_card_journey": true,
+    "card_back_during_journey": true,
+    "face_reveal_after_decode": true,
+    "decorative_flying_cards": false
+  },
+  "universe": {
+    "engine": "LivingUniverseCoreV516",
+    "inherits_v515_procedural_universe": true,
+    "static_background_images": 0,
+    "procedural_stars": true,
+    "procedural_nebulae": true,
+    "procedural_galaxies": true,
+    "continuous_between_routes": true
+  },
+  "performance": {
+    "continuous_animation_loops": 1,
+    "universe_and_fire_same_request_animation_frame": true,
+    "fire_shader_bounding_region": true,
+    "standard_target_fps": 60,
+    "constrained_target_fps": 40,
+    "adaptive_render_resolution": true,
+    "pauses_when_document_hidden": true,
+    "reduced_motion_supported": true,
+    "inactive_v514_fire_code_in_runtime_bundle": false,
+    "canvas2d_procedural_fallback": true
+  },
+  "orb_os": {
+    "physical_orb_authority": "Supreme Orb V501",
+    "living_orb_count": 1,
+    "second_orb_engine": false,
+    "tarot_claims_home_orb": true,
+    "menu_authority": "V502 unchanged",
+    "reality_lifecycle": "V511 preserved"
+  },
+  "tarot_rules": {
+    "deck_size": 78,
+    "orientation": "upright only",
+    "repeats": 0,
+    "grid_columns": 6,
+    "meanings_in_free_tarot": false,
+    "existing_session_preserved": true,
+    "atomic_decoded_swap": true
+  },
+  "honesty": {
+    "pixel_identical_to_prerendered_reference_guaranteed": false,
+    "visual_language_targeted": "organic violet-magenta-gold celestial flame",
+    "device_approval_required_before_next_macro_stage": true
+  },
+  "preserved": {
+    "daily_world": "V509 unchanged",
+    "supreme_orb": "V501 unchanged",
+    "orbital_menu_logic": "V502 unchanged",
+    "reality_lifecycle": "V511 unchanged",
+    "whit_server_or_persona": "unchanged",
+    "billing_auth_database_dns": "unchanged"
+  },
+  "safety": {
+    "navigator_vibrate": false,
+    "native_capacitor_haptics_only": true,
+    "new_api_calls": 0,
+    "production_publish_authorized": false,
+    "deploy_authorized": false,
+    "dns_authorized": false,
+    "database_changes_authorized": false
+  }
+}

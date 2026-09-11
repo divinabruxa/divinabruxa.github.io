@@ -1,0 +1,77 @@
+DIVINA BRUXA — V516
+MACROETAPA 2 DE 4 · MOTOR DE CHAMA CELESTIAL VERDADEIRA
+
+PRÉ-REQUISITO
+V515 instalada.
+
+COMO INSTALAR NO GITHUB
+1. Abra a raiz do mesmo site em que a V515 já está instalada.
+2. Envie os 9 arquivos deste ZIP diretamente para a raiz.
+3. Não crie pasta: todos os arquivos precisam ficar soltos.
+4. Confirme a substituição destes 3 arquivos:
+   - app-v208.js
+   - page-loader-v1.js
+   - sw.js
+5. Os outros 6 arquivos são novos:
+   - 00-INSTALE-V516.txt
+   - CHAMA-CELESTIAL-VERDADEIRA-V516-CONTRACT.json
+   - living-universe-core-v516.js
+   - living-universe-core-v516.css
+   - tarot-livre-orbe-os-v516.js
+   - tarot-livre-orbe-os-v516.css
+6. Aguarde o GitHub concluir.
+7. No iPhone, feche todas as abas da Divina Bruxa e o aplicativo instalado uma
+   vez; depois abra novamente para o service worker V516 assumir.
+
+O QUE ESTA MACROETAPA ENTREGA
+- A chama existe dentro do mesmo canvas WebGL do Universo Vivo Universal.
+- Não existe um segundo motor contínuo, um segundo canvas de fogo ou outra Orbe.
+- A chama é um campo procedural largo e volumétrico, e não uma linha desenhada.
+- Duas correntes orgânicas se entrelaçam em uma curva viva entre a superfície
+  superior da Orbe e a base da carta.
+- As bordas são violetas; o corpo é magenta; os núcleos quebrados são dourados.
+- A mistura de cores preserva a tonalidade e limita a luz para impedir o retorno
+  da grande mancha branca da V514.
+- O fogo contém volumes, cavidades, línguas, fumaça luminosa e brasas estelares.
+- Ao revelar uma carta, uma onda dourada e partículas viajam da Orbe até o
+  portal sincronizadas com os mesmos 1040 ms da carta real.
+- O motor mede a posição verdadeira da Orbe e da carta e se recalibra quando a
+  tela, a barra do Safari ou o conteúdo mudam de posição.
+- Em aparelhos sem WebGL, existe uma chama procedural Canvas em volumes
+  coloridos; nenhuma fotografia de fogo é usada.
+
+COMO CONFERIR A CHAMA
+- Ela deve formar uma coluna curva em S, larga e macia.
+- Deve existir violeta, magenta e dourado ao mesmo tempo.
+- Não deve existir traço fino, contorno elétrico ou raio.
+- Não deve existir uma massa branca cobrindo o centro do Tarot.
+- A base deve nascer na parte superior da Orbe.
+- O topo deve terminar atrás da parte inferior da carta.
+- Ao tocar na Orbe, a chama deve ganhar energia sem travar a página.
+- Quando a carta nascer, brasas devem subir junto com o percurso da carta.
+
+PORTÃO DE APROVAÇÃO
+Esta é a versão decisiva para a chama. A referência enviada é uma composição
+pronta e não pode ser copiada pixel por pixel por um efeito em tempo real, mas
+esta V516 reproduz sua linguagem: fogo curvo, volumétrico, violeta, magenta e
+dourado dentro de um universo vivo.
+
+Depois de testar no iPhone:
+- Se a chama estiver bonita, seguimos para a Macroetapa 3 de 4.
+- Se a chama não estiver bonita, interrompemos o caminho do fogo e preservamos
+  o Universo V515 para construir a alternativa de interface fluida inspirada
+  no iOS. Nenhuma nova tentativa de fogo será imposta.
+
+O QUE CONTINUA INTOCÁVEL
+- Exatamente uma Orbe física viva: Supreme Orb V501.
+- Menu Orbital V502 e Motor Universal das Realidades V511.
+- Carta do Dia V509.
+- 78 cartas diretas, sem repetição e seis cartas por fileira.
+- Sessão existente preservada; face trocada somente após decodificação.
+- Nenhum significado dentro do Tarot Livre.
+- Nenhuma alteração em Whit, servidor, API, pagamentos, autenticação, banco,
+  domínio ou DNS.
+- Nenhuma publicação foi feita por esta entrega.
+
+PRÓXIMA MACROETAPA, SOMENTE APÓS APROVAÇÃO
+Macroetapa 3 de 4 — Composição fiel à referência e viagem narrativa da carta.

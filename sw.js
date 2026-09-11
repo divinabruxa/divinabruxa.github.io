@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 2.0 — MACROETAPA 1/4 · UNIVERSO VIVO UNIVERSAL V515
+/* DIVINA BRUXA 2.0 — MACROETAPA 2/4 · CHAMA CELESTIAL VERDADEIRA V516
    Cache seletivo e versionado. Nunca guarda Auth, Whit generation, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=515;
+const VERSION=516;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v515-shell';
-const CONTENT_CACHE='divina-bruxa-v515-content';
-const IMAGE_CACHE='divina-bruxa-v515-images';
-const OFFLINE_CACHE='divina-bruxa-v515-offline-core';
+const SHELL_CACHE='divina-bruxa-v516-shell';
+const CONTENT_CACHE='divina-bruxa-v516-content';
+const IMAGE_CACHE='divina-bruxa-v516-images';
+const OFFLINE_CACHE='divina-bruxa-v516-offline-core';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE]);
 
 const REQUIRED_SHELL=Object.freeze([
@@ -19,8 +19,8 @@ const REQUIRED_SHELL=Object.freeze([
   './orb-engine-v208.js','./supreme-orb-core-v501.js','./supreme-orb-core-v501.css',
   './reality-lifecycle-v511.js','./reality-lifecycle-v511.css',
   './orbital-menu-v502.js','./orbital-menu-v502.css',
-  './living-universe-core-v515.js','./living-universe-core-v515.css',
-  './tarot-livre-orbe-os-v515.js','./tarot-livre-orbe-os-v515.css',
+  './living-universe-core-v516.js','./living-universe-core-v516.css',
+  './tarot-livre-orbe-os-v516.js','./tarot-livre-orbe-os-v516.css',
   './daily-world-v509.js','./daily-world-v509.css','./daily-policy-v303.js',
   './orb-loading-portal-v1.js',
   './divina-shell-v180.css','./home-orb-absolute-v206.css','./pwa-world-v196.css',
@@ -52,8 +52,8 @@ const APP_DEPENDENCIES=Object.freeze([
 ]);
 
 const REBIRTH_WARM=Object.freeze([
-  './living-universe-core-v515.js','./living-universe-core-v515.css',
-  './tarot-livre-orbe-os-v515.js','./tarot-livre-orbe-os-v515.css',
+  './living-universe-core-v516.js','./living-universe-core-v516.css',
+  './tarot-livre-orbe-os-v516.js','./tarot-livre-orbe-os-v516.css',
   './library-world-v302.js','./library-world-v302.css',
   './daily-world-v509.js','./daily-world-v509.css','./daily-policy-v303.js',
   './spreads-world-v305.js','./spreads-world-v305.css',
@@ -68,8 +68,8 @@ const REBIRTH_WARM=Object.freeze([
 
 const OFFLINE_WORLD_ASSETS=Object.freeze([
   './tarot-data.js','./tarot-image-runtime.js','./tarot-session.js','./tarot-continuity.js',
-  './living-universe-core-v515.js','./living-universe-core-v515.css',
-  './tarot-livre-orbe-os-v515.js','./tarot-livre-orbe-os-v515.css',
+  './living-universe-core-v516.js','./living-universe-core-v516.css',
+  './tarot-livre-orbe-os-v516.js','./tarot-livre-orbe-os-v516.css',
   './tarot-atlas-mobile-v196.webp',
   './card-library-policy.js','./card-library-engine.js','./library-world-v302.js','./library-world-v302.css',
   './daily-world-v509.js','./daily-world-v509.css','./daily-policy-v303.js','./daily-meaning-runtime.js','./tarot-meanings.js','./meaning-engine.js',

@@ -1,4 +1,4 @@
-/* DIVINA BRUXA 2.0 — MACROETAPA 1/4 V515 · UNIVERSO VIVO UNIVERSAL
+/* DIVINA BRUXA 2.0 — MACROETAPA 2/4 V516 · CHAMA CELESTIAL VERDADEIRA
    V501 permanece a única Orbe viva; V509 diário é preservado sem mudanças. */
 
 import {
@@ -158,6 +158,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       delete globalThis.divinaTarotLivreV513;
       globalThis.divinaTarotLivreV514?.destroy?.();
       delete globalThis.divinaTarotLivreV514;
+      globalThis.divinaTarotLivreV515?.destroy?.();
+      delete globalThis.divinaTarotLivreV515;
       [
         'freeTarotFireEngineV345Styles',
         'divinaTarotLivreCosmicoV500',
@@ -173,16 +175,17 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
         'divinaTarotLivreSupremoV510',
         'divinaTarotLivreOrbOSV512',
         'divinaTarotLivreOrbOSV513',
-        'divinaTarotLivreOrbOSV514'
+        'divinaTarotLivreOrbOSV514',
+        'divinaTarotLivreOrbOSV515'
       ].forEach(styleId=>document.getElementById(styleId)?.remove());
       const [,module]=await Promise.all([
-        ensureStyle('divinaTarotLivreOrbOSV515','tarot-livre-orbe-os-v515.css?v=515-universal'),
-        import('./tarot-livre-orbe-os-v515.js?v=515-universal')
+        ensureStyle('divinaTarotLivreOrbOSV516','tarot-livre-orbe-os-v516.css?v=516-celestial-fire'),
+        import('./tarot-livre-orbe-os-v516.js?v=516-celestial-fire')
       ]);
-      const instance=new module.TarotLivreOrbOSV515($('#tarot'),{
+      const instance=new module.TarotLivreOrbOSV516($('#tarot'),{
         orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme
       });
-      globalThis.divinaTarotLivreV515=instance;
+      globalThis.divinaTarotLivreV516=instance;
       return instance;
     },
     daily: async()=>{
@@ -288,8 +291,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
 
   const warmers=Object.freeze({
     tarot:()=>Promise.all([
-      ensureStyle('divinaTarotLivreOrbOSV515','tarot-livre-orbe-os-v515.css?v=515-universal'),
-      import('./tarot-livre-orbe-os-v515.js?v=515-universal')
+      ensureStyle('divinaTarotLivreOrbOSV516','tarot-livre-orbe-os-v516.css?v=516-celestial-fire'),
+      import('./tarot-livre-orbe-os-v516.js?v=516-celestial-fire')
     ]),
     daily:()=>Promise.all([
       ensureStyle('divinaDailyLivingV509','daily-world-v509.css?v=509'),
