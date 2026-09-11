@@ -1,0 +1,118 @@
+{
+  "project": "Divina Bruxa — Orbe das Realidades",
+  "release": "V502",
+  "macro_stage": {
+    "current": "Menu Orbital Vivo",
+    "previous": "V501 — Núcleo da Orbe Suprema",
+    "next": "V503 — Tarot Livre redesenhado e motor de fogo estelar",
+    "future": "V504 — Integração, desempenho e acabamento"
+  },
+  "dependency": {
+    "required": "V501 instalada",
+    "canonical_orb_core": "supreme-orb-core-v501.js",
+    "canonical_renderer": "RealityOrbEngine V208",
+    "new_orb_renderer_created": false
+  },
+  "files": {
+    "replace": [
+      "app-v208.js",
+      "page-loader-v1.js",
+      "sw.js"
+    ],
+    "add": [
+      "orbital-menu-v502.js",
+      "orbital-menu-v502.css",
+      "MENU-ORBITAL-V502-CONTRACT.json",
+      "00-INSTALE-V502.txt"
+    ]
+  },
+  "v500_recovery": {
+    "accidental_loader_replaced": true,
+    "v500_tarot_imports_active": false,
+    "safe_server_file_deletion_required": false,
+    "legacy_files_left_inert": [
+      "tarot-livre-cosmico-v500.js",
+      "tarot-livre-cosmico-v500.css",
+      "orbe-chama-v500.webp"
+    ],
+    "service_worker_cache_generation": 502,
+    "former_owned_caches_removed_on_activation": true,
+    "temporary_tarot_base": "free-tarot-world-v301 + fire enhancement v345",
+    "definitive_tarot_rebuild": "V503"
+  },
+  "menu": {
+    "portals_total": 13,
+    "inner_ring": [
+      "Tarot Livre",
+      "Carta do Dia",
+      "Tiragens",
+      "Escola",
+      "Biblioteca",
+      "Diário / Espelho"
+    ],
+    "outer_ring": [
+      "Orbe IA",
+      "Loja",
+      "Consultas",
+      "Música",
+      "Vídeo",
+      "Skins",
+      "Conta"
+    ],
+    "home_first": true,
+    "center_is_same_physical_orb": true,
+    "orb_claim_api": "SupremeOrbCoreV501.claim",
+    "orb_return_api": "SupremeOrbCoreV501.returnHome",
+    "footer_orb_route": "ai",
+    "main_orb_double_tap_route": "tarot"
+  },
+  "motion": {
+    "single_curve": "cubic-bezier(.2,.78,.18,1)",
+    "directional_route_signatures": true,
+    "touch_target_minimum_px": 42,
+    "touch_action": "manipulation",
+    "web_vibration": false,
+    "native_haptics_only": true,
+    "reduced_motion_supported": true,
+    "screen_drag_enabled": false
+  },
+  "accessibility": {
+    "dialog_semantics": true,
+    "escape_closes": true,
+    "keyboard_focus_loop": true,
+    "aria_live_route_feedback": true,
+    "forced_colors_fallback": true
+  },
+  "performance": {
+    "additional_api_calls": 0,
+    "additional_webgl_contexts": 0,
+    "css_particle_count": 34,
+    "service_worker_required_shell_versioned": true,
+    "secure_authority_responses_cached": false
+  },
+  "quality_checks": {
+    "javascript_syntax": "passed",
+    "v500_runtime_import_scan": "passed",
+    "legacy_v340_boot_import_scan": "passed",
+    "portal_contract": "13 routes / 13 unique destinations",
+    "deterministic_geometry": [
+      "320x568",
+      "360x640",
+      "390x844",
+      "844x390",
+      "1024x768"
+    ],
+    "geometry_out_of_bounds": 0,
+    "geometry_jewel_overlaps": 0,
+    "post_upload_runtime_check": "required on the real site"
+  },
+  "locked_decisions": {
+    "brand": "Divina Bruxa",
+    "supreme_orb": "life and navigation authority",
+    "biblioteca_present": true,
+    "number_33_present": false,
+    "isis_label_present": false,
+    "whit": "original Divina Bruxa persona; not a literal Whitney Houston identity, soul, or voice clone"
+  }
+}
+

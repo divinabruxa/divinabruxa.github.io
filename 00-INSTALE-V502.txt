@@ -1,0 +1,50 @@
+DIVINA BRUXA — MACROETAPA V502 — MENU ORBITAL VIVO
+
+ESTAMOS EM:
+V501 — Núcleo da Orbe Suprema: CONCLUÍDA E PRESERVADA
+V502 — Menu Orbital Vivo: ESTE PACOTE
+V503 — Tarot Livre redesenhado + fogo estelar: PRÓXIMA
+V504 — Integração, desempenho e acabamento: FUTURA
+
+COMO INSTALAR
+1. Envie TODOS os 7 arquivos deste ZIP para a mesma pasta onde está o index.html.
+2. Quando o painel perguntar, SUBSTITUA:
+   - app-v208.js
+   - page-loader-v1.js
+   - sw.js
+3. Mantenha os nomes exatamente como estão.
+4. Depois do envio, feche e abra o site novamente. Se ele já estava aberto,
+   uma segunda atualização permite que o Service Worker V502 assuma o controle.
+
+SOBRE A V500 INSTALADA SEM QUERER
+Não é necessário apagar nada agora. Este pacote substitui o carregador que
+ativava a V500, remove suas referências do boot e troca todo o cache pelo V502.
+Os três arquivos antigos abaixo podem continuar no servidor: ficarão inertes.
+   - tarot-livre-cosmico-v500.js
+   - tarot-livre-cosmico-v500.css
+   - orbe-chama-v500.webp
+
+O QUE MUDA NESTA MACROETAPA
+- A MESMA Orbe Suprema V501 viaja fisicamente da Home para o centro do menu.
+- Nenhuma segunda orbe ou segundo motor é criado.
+- 13 realidades aparecem em duas órbitas, com Biblioteca preservada.
+- O menu sempre volta primeiro à Home e usa a Orbe para abrir cada direção.
+- A mini-orbe central do rodapé abre diretamente a Orbe IA.
+- Resposta tátil ocorre apenas no aplicativo nativo; o navegador não vibra.
+- Escape, foco por teclado, leitor de tela e movimento reduzido são respeitados.
+
+ARQUIVOS NOVOS
+- orbital-menu-v502.js
+- orbital-menu-v502.css
+- MENU-ORBITAL-V502-CONTRACT.json
+- 00-INSTALE-V502.txt
+
+ARQUIVOS QUE SUBSTITUEM
+- app-v208.js
+- page-loader-v1.js
+- sw.js
+
+PRÓXIMA MACROETAPA
+V503 vai reconstruir o Tarot Livre exatamente na direção visual aprovada:
+Orbe Suprema, carta revelada e partículas de fogo estelar — sem reativar V500.
+

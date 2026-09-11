@@ -1,5 +1,6 @@
-/* DIVINA BRUXA 2.0 — PAGE LOADER V500
-   Tarot Livre rebuilt as a living fire cosmos. Other worlds stay untouched. */
+/* DIVINA BRUXA 2.0 — MACROETAPA V502 · CARREGADOR CORRETIVO
+   Preserva os mundos Rebirth atuais e retira a instalação acidental V500.
+   O redesenho definitivo do Tarot Livre pertence à próxima macroetapa V503. */
 
 import {
   normalizeRouteId,
@@ -67,7 +68,7 @@ function clearRecovery(screen){
 }
 
 const LOADING_MESSAGES=Object.freeze({
-  tarot:'Abrindo o Cosmos de Fogo…',
+  tarot:'A Orbe abre o círculo…',
   daily:'A Orbe encontra a carta deste dia…',
   library:'Abrindo as 78 cartas…',
   spreads:'Preparando sua tiragem…',
@@ -114,14 +115,17 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
 
   const loaders=Object.freeze({
     tarot: async()=>{
-      // V500 owns Tarot Livre. Remove former route styles in long-lived sessions.
-      document.getElementById('divinaTarotLivreZeroV400')?.remove();
-      document.getElementById('divinaTarotLivreChamaV401')?.remove();
+      // V502 neutraliza a instalação acidental V500 sem apagar arquivos do servidor.
+      // Eles ficam inertes e podem ser removidos mais tarde, com segurança.
+      document.getElementById('divinaTarotLivreCosmicoV500')?.remove();
+      if(document.documentElement.dataset.tarotLivre==='v500'){
+        delete document.documentElement.dataset.tarotLivre;
+      }
       const [,module]=await Promise.all([
-        ensureStyle('divinaTarotLivreCosmicoV500','tarot-livre-cosmico-v500.css?v=500'),
-        import('./tarot-livre-cosmico-v500.js?v=500')
+        ensureStyle('divinaTarotRebirthV301','free-tarot-world-v301.css?v=301'),
+        import('./free-tarot-world-v301.js?v=301')
       ]);
-      return new module.TarotLivreCosmicoV500($('#tarot'));
+      return new module.FreeTarot($('#tarot'));
     },
     daily: async()=>{
       const [,module]=await Promise.all([
@@ -217,8 +221,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
 
   const warmers=Object.freeze({
     tarot:()=>Promise.all([
-      ensureStyle('divinaTarotLivreCosmicoV500','tarot-livre-cosmico-v500.css?v=500'),
-      import('./tarot-livre-cosmico-v500.js?v=500')
+      ensureStyle('divinaTarotRebirthV301','free-tarot-world-v301.css?v=301'),
+      import('./free-tarot-world-v301.js?v=301')
     ]),
     daily:()=>Promise.all([
       ensureStyle('divinaDailyRebirthV303','daily-world-v303.css?v=303'),
