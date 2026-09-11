@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — APLICATIVO V208 · WORK7.0 · SEO + PRIVACY V323 */
+/* DIVINA BRUXA — APLICATIVO V208 · WORK7.0 · PWA + OFFLINE + PERFORMANCE V324 */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -11,7 +11,7 @@ import { AccountEngineV201 } from './account-engine-v201.js?v=201';
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=319';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=302-recovery1';
+import { createPageLoader } from './page-loader-v1.js?v=322';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -25,7 +25,7 @@ import { createWhitSignatureV311 } from './whit-signature-v311.js?v=311';
 import { createWhitMindV312 } from './whit-mind-v312.js?v=312';
 import { createWhitGenerationBridgeV313 } from './whit-generation-bridge-v313.js?v=316-silent1';
 import { createWhitSilentPresenceV316 } from './whit-silent-presence-v316.js?v=316';
-import './pwa-world-v201.js?v=201';
+import './pwa-world-v324.js?v=324';
 
 const $ = selector => document.querySelector(selector);
 
@@ -120,7 +120,7 @@ navigator.serviceWorker?.addEventListener('message', event => {
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=208')
+    navigator.serviceWorker.register('./sw.js?v=324')
       .then(() => console.info('[Divina] PWA registrado'))
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   });

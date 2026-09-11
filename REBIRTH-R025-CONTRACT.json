@@ -1,0 +1,72 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R025",
+  "release": "V324",
+  "world": "PWA + Offline + Performance 2.0",
+  "vision_source": "chat Whit + WORK7.0 master vision",
+  "purpose": "Fazer a experiência parecer instantânea e resiliente sem cachear dados de autoridade nem tocar no motor visual aprovado da Orbe.",
+  "replace": [
+    "app-v208.js",
+    "sw.js",
+    "instalar-app.html",
+    "install-app.html",
+    "instalar-aplicacion.html"
+  ],
+  "new": [
+    "pwa-world-v324.js",
+    "performance-world-v324.js",
+    "pwa-resilience-v324.css",
+    "REBIRTH-R025-CONTRACT.json"
+  ],
+  "offline": {
+    "tarotLivre": true,
+    "dailyPreviouslyRevealed": true,
+    "library": true,
+    "schoolStaticContent": true,
+    "journalLocal": true,
+    "currentSkinPreserved": true,
+    "premiumSkinSwitchRequiresOnline": true,
+    "aiGeneration": false,
+    "accountAuthority": false,
+    "billing": false,
+    "admin": false,
+    "consultationSubmission": false
+  },
+  "performance": {
+    "adaptiveTier": true,
+    "saveDataAware": true,
+    "effectiveConnectionAware": true,
+    "deviceMemoryAwareWhenAvailable": true,
+    "hardwareConcurrencyAwareWhenAvailable": true,
+    "coreWebVitals": [
+      "LCP",
+      "INP",
+      "CLS"
+    ],
+    "longTasksInMemory": true,
+    "telemetryTransportAdded": false,
+    "optionalSamplesRequireAnalyticsConsent": true
+  },
+  "serviceWorker": {
+    "cacheVersion": 324,
+    "singleAuthorityModule": "pwa-world-v324",
+    "authorityResponsesCached": false,
+    "oldOwnedCachesPruned": true,
+    "notificationDeepLinkAllowlistPreserved": true,
+    "offlineCoreManualPreparation": true
+  },
+  "preserve": [
+    "Home Orb V206/V208 visual and gesture engine",
+    "Orb loading portal V152",
+    "Navigation V210/V211",
+    "Whit V307-V316",
+    "Worlds V301-V323"
+  ],
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}

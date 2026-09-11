@@ -1,0 +1,52 @@
+/* DIVINA BRUXA 2.0 — REBIRTH R025 · RESILIÊNCIA V324
+   Suplemento de desempenho; não altera a Home Orb aprovada. */
+
+html[data-performance-tier="constrained"] .journal-world-v317 .jwv317__star.is-lit i,
+html[data-performance-tier="constrained"] .skins-world-v318 .spw318__living-orb i,
+html[data-performance-tier="constrained"] .notifications-world-v321 .ntw321__signal-orb i,
+html[data-performance-tier="constrained"] .mcv320-world .mcv320-stars,
+html[data-performance-tier="constrained"] .aiv322-dashboard .aiv322-loading i,
+html[data-performance-tier="constrained"] .privacy-v323 .privacy-v323__stars{
+  animation:none!important
+}
+html[data-performance-tier="constrained"] .journal-world-v317,
+html[data-performance-tier="constrained"] .skins-world-v318,
+html[data-performance-tier="constrained"] .premium-world-v318,
+html[data-performance-tier="constrained"] .account-world-v319,
+html[data-performance-tier="constrained"] .consultations-world-v319,
+html[data-performance-tier="constrained"] .mcv320-world,
+html[data-performance-tier="constrained"] .notifications-world-v321,
+html[data-performance-tier="constrained"] .aiv322-dashboard,
+html[data-performance-tier="constrained"] .privacy-v323{
+  backdrop-filter:none!important
+}
+body[data-network="offline"] [data-requires-online],
+body[data-network="offline"] [data-checkout],
+body[data-network="offline"] [data-restore-purchase],
+body[data-network="offline"] [data-purchase]{
+  opacity:.58
+}
+.db-network-status{
+  contain:layout paint style;
+  will-change:transform,opacity
+}
+.db-install-offline[data-v324]{
+  position:relative;overflow:hidden
+}
+.db-install-offline[data-v324]::after{
+  content:"LOCAL";position:absolute;right:14px;top:14px;color:rgba(237,205,139,.28);
+  font:800 9px/1 system-ui;letter-spacing:.16em
+}
+@media(prefers-reduced-motion:reduce){
+  .journal-world-v317 *,
+  .skins-world-v318 *,
+  .premium-world-v318 *,
+  .account-world-v319 *,
+  .consultations-world-v319 *,
+  .mcv320-world *,
+  .notifications-world-v321 *,
+  .aiv322-dashboard *,
+  .privacy-v323 *{
+    scroll-behavior:auto!important
+  }
+}
