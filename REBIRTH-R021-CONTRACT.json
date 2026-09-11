@@ -1,0 +1,90 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R021",
+  "release": "V320",
+  "world": "Loja + Música + Vídeo 2.0",
+  "vision_source": "chat Whit + WORK7.0 master vision",
+  "purpose": "Transformar comércio e mídia em mundos editoriais vivos e tornar Vídeo administrável pela proprietária sem episódios inventados.",
+  "replace": [
+    "page-loader-v1.js"
+  ],
+  "new": [
+    "media-commerce-world-v320.js",
+    "media-commerce-world-v320.css",
+    "REBIRTH-R021-CONTRACT.json"
+  ],
+  "backend_staging": {
+    "project": "divina-bruxa-staging",
+    "table": "public.video_episodes",
+    "migration_applied": true,
+    "edge_function": "admin-media-v320",
+    "edge_function_deployed": true,
+    "admin_security": "owner + verified email + MFA AAL2 + non-revoked admin session + recovery codes",
+    "public_read": "published rows only, published_at <= now()",
+    "anon_write": false,
+    "authenticated_write": false,
+    "service_role_browser_exposure": false
+  },
+  "video_admin": {
+    "module": "Música e Vídeos",
+    "fields": [
+      "title",
+      "season",
+      "youtubeUrl",
+      "description",
+      "publishAt",
+      "thumbnailUrl",
+      "seoTitle",
+      "seoDescription",
+      "sortOrder",
+      "isFeatured"
+    ],
+    "states": [
+      "draft",
+      "published"
+    ],
+    "create": true,
+    "edit": true,
+    "delete": true,
+    "schedule": true,
+    "seo": true,
+    "public_preview_source": "published database rows only",
+    "fakeEpisodes": 0
+  },
+  "music": {
+    "realAlbumsFromConfig": true,
+    "autoplay": false,
+    "spotifyExternalPlayer": true
+  },
+  "store": {
+    "affiliateTagFromCommercialTruth": true,
+    "amazonExternalCheckout": true,
+    "internalCheckout": false,
+    "favoritesLocal": true
+  },
+  "preserve": [
+    "StoreEngine V192",
+    "MediaEngine V192",
+    "EditorialJourney V192",
+    "AdminEngine V150",
+    "Whit V307-V316",
+    "Home/Orbe/Menu V304",
+    "Tarot Livre V301",
+    "Biblioteca V302",
+    "Carta do Dia V303",
+    "Tiragens V305",
+    "Escola V306",
+    "Diário/Espelho V317",
+    "Skins/Premium V318",
+    "Conta/Consultas V319"
+  ],
+  "guards": {
+    "noInventedEpisodes": true,
+    "noMusicAutoplay": true,
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}

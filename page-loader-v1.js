@@ -1,7 +1,7 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R020 · CARREGADOR DE MUNDOS V319
+/* DIVINA BRUXA 2.0 — REBIRTH R021 · CARREGADOR DE MUNDOS V320
    Mundos Rebirth: Tarot Livre V301, Biblioteca V302, Carta do Dia V303,
-   Tiragens V305, Escola V306, Diário/Espelho V317, Skins/Premium V318
-   e Consultas V319. Conta V319 permanece no shell autenticado.
+   Tiragens V305, Escola V306, Diário/Espelho V317, Skins/Premium V318,
+   Conta/Consultas V319 e Loja/Música/Vídeo V320.
    Home/Menu V304 e Whit V307–V316 continuam preservados. */
 import {
   normalizeRouteId,
@@ -98,14 +98,11 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
   });
 
   const ensureMedia = () => once(sharedTasks, 'media', async () => {
-    const [{ MediaEngineV192 }, { EditorialJourneyV192 }] = await Promise.all([
-      import('./media-engine-v192.js?v=192'),
-      import('./editorial-journey-v192.js?v=192')
+    const [, module] = await Promise.all([
+      ensureStyle('divinaMediaCommerceRebirthV320', 'media-commerce-world-v320.css?v=320'),
+      import('./media-commerce-world-v320.js?v=320')
     ]);
-    const media = new MediaEngineV192({ videos:$('#videoApp'), music:$('#musicApp') }, config);
-    new EditorialJourneyV192($('#videoApp'), 'videos');
-    new EditorialJourneyV192($('#musicApp'), 'music');
-    return media;
+    return new module.MediaWorldV320({ videos:$('#videoApp'), music:$('#musicApp') }, config);
   });
 
   const loaders = Object.freeze({
@@ -156,13 +153,11 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
     },
     store: async () => {
       await ensureCommerce();
-      const [{ StoreEngine }, { EditorialJourneyV192 }] = await Promise.all([
-        import('./store-engine.js?v=192'),
-        import('./editorial-journey-v192.js?v=192')
+      const [, module] = await Promise.all([
+        ensureStyle('divinaMediaCommerceRebirthV320', 'media-commerce-world-v320.css?v=320'),
+        import('./media-commerce-world-v320.js?v=320')
       ]);
-      const engine = new StoreEngine($('#storeApp'), config);
-      new EditorialJourneyV192($('#storeApp'), 'store');
-      return engine;
+      return new module.StoreWorldV320($('#storeApp'), config);
     },
     consultations: async () => {
       await ensureCommerce();
@@ -193,8 +188,14 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
       return new CelestialNotificationEngine($('#notificationApp'), go);
     },
     admin: async () => {
-      const { AdminEngine } = await import('./admin-engine.js?v=150');
-      return new AdminEngine($('#adminApp'));
+      const [, adminModule, worldModule] = await Promise.all([
+        ensureStyle('divinaMediaCommerceRebirthV320', 'media-commerce-world-v320.css?v=320'),
+        import('./admin-engine.js?v=150'),
+        import('./media-commerce-world-v320.js?v=320')
+      ]);
+      const engine = new adminModule.AdminEngine($('#adminApp'));
+      new worldModule.AdminMediaV320($('#adminApp'));
+      return engine;
     }
   });
 
@@ -235,6 +236,24 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
       import('./commerce-engine.js?v=148'),
       ensureStyle('divinaAccountConsultationsRebirthV319', 'account-consultations-world-v319.css?v=319'),
       import('./account-consultations-world-v319.js?v=319')
+    ]),
+    store: () => Promise.all([
+      import('./commerce-engine.js?v=148'),
+      ensureStyle('divinaMediaCommerceRebirthV320', 'media-commerce-world-v320.css?v=320'),
+      import('./media-commerce-world-v320.js?v=320')
+    ]),
+    music: () => Promise.all([
+      ensureStyle('divinaMediaCommerceRebirthV320', 'media-commerce-world-v320.css?v=320'),
+      import('./media-commerce-world-v320.js?v=320')
+    ]),
+    videos: () => Promise.all([
+      ensureStyle('divinaMediaCommerceRebirthV320', 'media-commerce-world-v320.css?v=320'),
+      import('./media-commerce-world-v320.js?v=320')
+    ]),
+    admin: () => Promise.all([
+      ensureStyle('divinaMediaCommerceRebirthV320', 'media-commerce-world-v320.css?v=320'),
+      import('./admin-engine.js?v=150'),
+      import('./media-commerce-world-v320.js?v=320')
     ]),
     notifications: () => import('./notification-engine-v150.js?v=150')
   });
