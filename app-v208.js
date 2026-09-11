@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — MACROETAPA 1 · ORBE OS / TAROT LIVRE GÊNESE V512
-   V501 continua como a única Orbe Suprema. V511 governa as passagens e V512
-   materializa cartas em viagem física por um universo vivo e fluido. */
+/* DIVINA BRUXA — MACROETAPA 1 · ORBE OS / TAROT LIVRE GÊNESE V513
+   V501 continua como a única Orbe Suprema. V511 governa as passagens e V513
+   materializa cartas em viagem física por um universo lossless vivo em Retina. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -14,7 +14,7 @@ import { AccountEngineV201 } from './account-engine-v201.js?v=201';
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=319';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=512-orbe-os';
+import { createPageLoader } from './page-loader-v1.js?v=513-retina-live';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -184,13 +184,13 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V512 = 512;
-const releaseReloadKeyV512 = `divina-release-reload-${RELEASE_EPOCH_V512}`;
-const reloadForNewReleaseV512 = version => {
-  if (Number(version || 0) <= RELEASE_EPOCH_V512) return false;
+const RELEASE_EPOCH_V513 = 513;
+const releaseReloadKeyV513 = `divina-release-reload-${RELEASE_EPOCH_V513}`;
+const reloadForNewReleaseV513 = version => {
+  if (Number(version || 0) <= RELEASE_EPOCH_V513) return false;
   try {
-    if (sessionStorage.getItem(releaseReloadKeyV512)) return false;
-    sessionStorage.setItem(releaseReloadKeyV512, String(version));
+    if (sessionStorage.getItem(releaseReloadKeyV513)) return false;
+    sessionStorage.setItem(releaseReloadKeyV513, String(version));
   } catch {}
   location.reload();
   return true;
@@ -199,7 +199,7 @@ const reloadForNewReleaseV512 = version => {
 navigator.serviceWorker?.addEventListener('message', event => {
   if (event.data?.type === 'DIVINA_RELEASE_READY') {
     document.documentElement.dataset.releaseReady = String(event.data.version || 'unknown');
-    reloadForNewReleaseV512(event.data.version);
+    reloadForNewReleaseV513(event.data.version);
     return;
   }
   if (event.data?.type !== 'divina-notification-open') return;
@@ -209,15 +209,15 @@ navigator.serviceWorker?.addEventListener('message', event => {
   }
 });
 
-if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV512) {
-  window.__divinaSWBootstrapV512 = true;
+if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV513) {
+  window.__divinaSWBootstrapV513 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=512', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=513', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v512';
+        document.documentElement.dataset.releaseEpoch = 'v513';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V512 registrado');
+        console.info('[Divina] PWA V513 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -531,7 +531,7 @@ const awaken = async () => {
     document.documentElement.dataset.bootRecovery = 'v326';
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
     dispatchEvent(new CustomEvent('divina:boot-ready', {
-      detail: { shell:'v180', recovery:'v326', bootFirst:true, supremeOrb:'v501', orbitalMenu:'v502', tarotLivre:'v512', dailyWorld:'v509', realityLifecycle:'v511', transitionAuthority:'supreme-orb-v501', loaderProjection:'supreme-orb-v501', fluidity:'v512', stellarFire:'v512', physicalCardJourney:true, stellarFoundation:true, optimizedCosmicBackdrop:true, oneAnimationCadence:true, plasmaFilaments:true, volumetricPlasma:true, cosmicNebula:true, livingUniverse:true, decodedBeforeSwap:true, unexplainedFlyingCards:false, cardEdgeBurst:true, oneLivingDailyOrb:true }
+      detail: { shell:'v180', recovery:'v326', bootFirst:true, supremeOrb:'v501', orbitalMenu:'v502', tarotLivre:'v513', dailyWorld:'v509', realityLifecycle:'v511', transitionAuthority:'supreme-orb-v501', loaderProjection:'supreme-orb-v501', fluidity:'v513', stellarFire:'v513', physicalCardJourney:true, stellarFoundation:true, optimizedCosmicBackdrop:true, losslessRetinaMaster:true, skinReactiveUniverse:true, retinaAdaptiveEffects:true, spriteAtlasParticles:true, smoothBirthJourney:true, oneAnimationCadence:true, plasmaFilaments:true, volumetricPlasma:true, cosmicNebula:true, livingUniverse:true, decodedBeforeSwap:true, unexplainedFlyingCards:false, cardEdgeBurst:true, oneLivingDailyOrb:true }
     }));
 
     // O menu é opcional para o boot: a Home abre mesmo se esta camada falhar.

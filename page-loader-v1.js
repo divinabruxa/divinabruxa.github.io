@@ -1,4 +1,4 @@
-/* DIVINA BRUXA 2.0 — MACROETAPA V512 · CARREGADOR DE FLUIDEZ SUPREMA
+/* DIVINA BRUXA 2.0 — MACROETAPA V513 · CARREGADOR DE FLUIDEZ RETINA
    V501 permanece a única Orbe viva; V509 diário é preservado sem mudanças. */
 
 import {
@@ -152,6 +152,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       delete globalThis.divinaTarotLivreV508;
       globalThis.divinaTarotLivreV510?.destroy?.();
       delete globalThis.divinaTarotLivreV510;
+      globalThis.divinaTarotLivreV512?.destroy?.();
+      delete globalThis.divinaTarotLivreV512;
       [
         'freeTarotFireEngineV345Styles',
         'divinaTarotLivreCosmicoV500',
@@ -164,17 +166,18 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
         'divinaTarotLivreSupremoV506',
         'divinaTarotLivreSupremoV507',
         'divinaTarotLivreSupremoV508',
-        'divinaTarotLivreSupremoV510'
+        'divinaTarotLivreSupremoV510',
+        'divinaTarotLivreOrbOSV512'
       ].forEach(styleId=>document.getElementById(styleId)?.remove());
       const [,,module]=await Promise.all([
-        ensureStyle('divinaTarotLivreOrbOSV512','tarot-livre-orbe-os-v512.css?v=512-orbe-os'),
-        ensureImage('./tarot-cosmos-v512.webp'),
-        import('./tarot-livre-orbe-os-v512.js?v=512-orbe-os')
+        ensureStyle('divinaTarotLivreOrbOSV513','tarot-livre-orbe-os-v513.css?v=513-retina-live'),
+        ensureImage('./tarot-cosmos-master-v513.webp'),
+        import('./tarot-livre-orbe-os-v513.js?v=513-retina-live')
       ]);
-      const instance=new module.TarotLivreOrbOSV512($('#tarot'),{
+      const instance=new module.TarotLivreOrbOSV513($('#tarot'),{
         orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme
       });
-      globalThis.divinaTarotLivreV512=instance;
+      globalThis.divinaTarotLivreV513=instance;
       return instance;
     },
     daily: async()=>{
@@ -280,9 +283,9 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
 
   const warmers=Object.freeze({
     tarot:()=>Promise.all([
-      ensureStyle('divinaTarotLivreOrbOSV512','tarot-livre-orbe-os-v512.css?v=512-orbe-os'),
-      ensureImage('./tarot-cosmos-v512.webp'),
-      import('./tarot-livre-orbe-os-v512.js?v=512-orbe-os')
+      ensureStyle('divinaTarotLivreOrbOSV513','tarot-livre-orbe-os-v513.css?v=513-retina-live'),
+      ensureImage('./tarot-cosmos-master-v513.webp'),
+      import('./tarot-livre-orbe-os-v513.js?v=513-retina-live')
     ]),
     daily:()=>Promise.all([
       ensureStyle('divinaDailyLivingV509','daily-world-v509.css?v=509'),

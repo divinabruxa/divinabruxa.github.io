@@ -1,0 +1,68 @@
+DIVINA BRUXA — V513
+ORBE OS · UNIVERSO RETINA VIVO
+
+MACROETAPA ATUAL
+Macroetapa 1 — Perfeição do Tarot Livre e Sistema Operacional da Orbe.
+Continuamos somente no Tarot Livre: qualidade visual, nascimento das cartas,
+fluidez no iPhone e integração cromática com as skins.
+
+PRÉ-REQUISITO
+V512 instalada.
+
+COMO INSTALAR NO GITHUB
+1. Abra a raiz do mesmo site em que a V512 já está instalada.
+2. Envie os 8 arquivos deste ZIP diretamente para a raiz.
+3. Não crie pasta: todos os arquivos precisam ficar soltos.
+4. Confirme a substituição destes 3 arquivos:
+   - app-v208.js
+   - page-loader-v1.js
+   - sw.js
+5. Os outros 5 arquivos são novos:
+   - 00-INSTALE-V513.txt
+   - ORBE-OS-TAROT-LIVRE-V513-CONTRACT.json
+   - tarot-livre-orbe-os-v513.js
+   - tarot-livre-orbe-os-v513.css
+   - tarot-cosmos-master-v513.webp
+6. Aguarde o GitHub concluir e abra o site novamente.
+7. Se o iPhone mantiver a versão anterior, feche a aba/app uma vez e abra de
+   novo para o service worker V513 assumir.
+
+O QUE MUDA
+- O fundo comprimido da V512 é substituído por um master WebP lossless de
+  1536 × 2304 pixels, sem cartas, Orbes, textos ou interface gravados na arte.
+- Sobre o master existe um céu vivo procedural: estrelas, galáxias, plasma,
+  brilho e fogo continuam nítidos na resolução adaptativa da tela.
+- O universo lê as cores da skin ativa e muda junto com as 30 skins sem trocar
+  a Orbe física ou criar um segundo motor.
+- Partículas reutilizam sprites luminosos pré-renderizados; gradientes pesados
+  deixam de ser construídos para cada partícula em cada frame.
+- A chama entre Orbe e carta fica larga, volumétrica e composta por sete
+  filamentos, com estrelas viajantes dentro dela.
+- O nascimento dura 1180 ms e usa uma curva suave: a carta permanece visível
+  saindo do núcleo, atravessa o universo e só revela a face ao chegar.
+- O motor continua mirando 60 FPS e reduz resolução de efeitos gradualmente
+  quando necessário, sem reduzir a cadência principal.
+
+QUALIDADE “DE BILHÕES DE PIXELS”
+Uma imagem literal com bilhões de pixels travaria qualquer iPhone. A V513 cria
+esse efeito visual de forma correta: master lossless detalhado + camadas vivas
+calculadas na tela. Assim, a imagem permanece limpa, profunda e fluida em vez
+de apenas carregar um arquivo gigantesco e estático.
+
+O QUE CONTINUA INTOCÁVEL
+- Exatamente 1 Orbe física viva: Supreme Orb V501.
+- Menu Orbital V502 e Motor das Realidades V511.
+- Carta do Dia V509.
+- 78 cartas diretas, sem repetição e seis cartas por fileira.
+- Sessão já revelada preservada e troca somente após a imagem decodificar.
+- Nenhum significado dentro do Tarot Livre.
+- Nenhuma mudança em Whit, servidor, API, pagamentos, autenticação, banco,
+  domínio ou DNS.
+- Nenhuma publicação foi feita por esta entrega.
+
+RESULTADO ESPERADO
+O Tarot Livre abre em um universo detalhado e vivo. A Orbe repousa sobre
+estrelas pulsantes; sua chama volumétrica alcança o portal; ao tocar nela, a
+carta nasce do centro da própria Orbe, viaja com leitura visual contínua e
+revela a face no altar sem flashes brancos, pulos ou elementos cobrindo o
+contador.
