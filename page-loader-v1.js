@@ -1,4 +1,4 @@
-/* DIVINA BRUXA 2.0 — MACROETAPA V510 · CARREGADOR DE FLUIDEZ SUPREMA
+/* DIVINA BRUXA 2.0 — MACROETAPA V512 · CARREGADOR DE FLUIDEZ SUPREMA
    V501 permanece a única Orbe viva; V509 diário é preservado sem mudanças. */
 
 import {
@@ -45,6 +45,27 @@ function ensureStyle(id,href){
     link.addEventListener('error',()=>reject(new Error(`Estilo indisponível: ${href}`)),{once:true});
     document.head.append(link);
   }),LOAD_TIMEOUT_MS,`Tempo esgotado ao carregar ${href}.`));
+}
+function ensureImage(href){
+  return once(sharedTasks,`image:${href}`,()=>new Promise(resolve=>{
+    const image=new Image();
+    let settled=false;
+    const finish=value=>{
+      if(settled)return;
+      settled=true;
+      clearTimeout(timer);
+      resolve(value);
+    };
+    const timer=setTimeout(()=>finish(false),5200);
+    image.decoding='async';
+    image.fetchPriority='high';
+    image.addEventListener('load',async()=>{
+      try{await image.decode?.();}catch{}
+      finish(image.naturalWidth>0);
+    },{once:true});
+    image.addEventListener('error',()=>finish(false),{once:true});
+    image.src=href;
+  }));
 }
 function loadPortalStyles(){
   return ensureStyle(PORTAL_STYLES_ID,PORTAL_STYLES_HREF);
@@ -129,6 +150,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       delete globalThis.divinaTarotLivreV507;
       globalThis.divinaTarotLivreV508?.destroy?.();
       delete globalThis.divinaTarotLivreV508;
+      globalThis.divinaTarotLivreV510?.destroy?.();
+      delete globalThis.divinaTarotLivreV510;
       [
         'freeTarotFireEngineV345Styles',
         'divinaTarotLivreCosmicoV500',
@@ -140,16 +163,18 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
         'divinaTarotLivreSupremoV505',
         'divinaTarotLivreSupremoV506',
         'divinaTarotLivreSupremoV507',
-        'divinaTarotLivreSupremoV508'
+        'divinaTarotLivreSupremoV508',
+        'divinaTarotLivreSupremoV510'
       ].forEach(styleId=>document.getElementById(styleId)?.remove());
-      const [,module]=await Promise.all([
-        ensureStyle('divinaTarotLivreSupremoV510','tarot-livre-supremo-v510.css?v=510-living-universe'),
-        import('./tarot-livre-supremo-v510.js?v=510-living-universe')
+      const [,,module]=await Promise.all([
+        ensureStyle('divinaTarotLivreOrbOSV512','tarot-livre-orbe-os-v512.css?v=512-orbe-os'),
+        ensureImage('./tarot-cosmos-v512.webp'),
+        import('./tarot-livre-orbe-os-v512.js?v=512-orbe-os')
       ]);
-      const instance=new module.TarotLivreSupremeV510($('#tarot'),{
+      const instance=new module.TarotLivreOrbOSV512($('#tarot'),{
         orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme
       });
-      globalThis.divinaTarotLivreV510=instance;
+      globalThis.divinaTarotLivreV512=instance;
       return instance;
     },
     daily: async()=>{
@@ -255,8 +280,9 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
 
   const warmers=Object.freeze({
     tarot:()=>Promise.all([
-      ensureStyle('divinaTarotLivreSupremoV510','tarot-livre-supremo-v510.css?v=510-living-universe'),
-      import('./tarot-livre-supremo-v510.js?v=510-living-universe')
+      ensureStyle('divinaTarotLivreOrbOSV512','tarot-livre-orbe-os-v512.css?v=512-orbe-os'),
+      ensureImage('./tarot-cosmos-v512.webp'),
+      import('./tarot-livre-orbe-os-v512.js?v=512-orbe-os')
     ]),
     daily:()=>Promise.all([
       ensureStyle('divinaDailyLivingV509','daily-world-v509.css?v=509'),

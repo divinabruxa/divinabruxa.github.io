@@ -1,0 +1,99 @@
+{
+  "release": "V512",
+  "name": "Orbe OS — Tarot Livre Gênese",
+  "macro_stage": "Macroetapa 1 — Perfeição do Tarot Livre e Sistema Operacional da Orbe",
+  "requires": "V511 installed",
+  "files": {
+    "replace": [
+      "app-v208.js",
+      "page-loader-v1.js",
+      "sw.js"
+    ],
+    "new": [
+      "00-INSTALE-V512.txt",
+      "ORBE-OS-TAROT-LIVRE-V512-CONTRACT.json",
+      "tarot-livre-orbe-os-v512.js",
+      "tarot-livre-orbe-os-v512.css",
+      "tarot-cosmos-v512.webp"
+    ]
+  },
+  "orb_os": {
+    "physical_orb_authority": "Supreme Orb V501",
+    "living_orb_count": 1,
+    "second_orb_engine": false,
+    "tarot_claims_home_orb": true,
+    "menu_authority": "V502 unchanged",
+    "reality_lifecycle": "V511 preserved",
+    "projection_engines": 0
+  },
+  "tarot_genesis": {
+    "world": "orbe-os-v512",
+    "engine": "OrbRealityEngineV512",
+    "birth_origin": "physical center of Supreme Orb V501",
+    "physical_card_journey": true,
+    "journey_duration_ms": 940,
+    "card_back_during_travel": true,
+    "face_reveal_at_portal": true,
+    "fire_path_synchronized": true,
+    "stellar_foundation_under_orb": true,
+    "decorative_flying_cards": false,
+    "card_edge_birth_burst": true,
+    "atomic_decoded_swap": true
+  },
+  "living_universe": {
+    "optimized_backdrop": "tarot-cosmos-v512.webp",
+    "backdrop_contains_cards": false,
+    "backdrop_contains_orbs": false,
+    "backdrop_contains_ui": false,
+    "live_star_layer": true,
+    "live_plasma_filaments": true,
+    "galactic_depth": true,
+    "canvas_fallback_keeps_universe_visible": true
+  },
+  "performance": {
+    "javascript_animation_loops": 1,
+    "standard_target_fps": 60,
+    "constrained_target_fps": 40,
+    "standard_adaptive_floor_fps": 50,
+    "mobile_effect_scale": 1,
+    "background_rebuilt_each_frame": false,
+    "particle_radial_gradients_per_frame": 0,
+    "transform_opacity_card_motion": true,
+    "pauses_off_route": true,
+    "pauses_when_hidden": true
+  },
+  "mobile_layout": {
+    "header_labels_overlap": false,
+    "menu_button_side": "left",
+    "home_orb_projection_position": "center",
+    "mesa_real_side": "right",
+    "bottom_dock_yields_on_tarot": true,
+    "orb_and_counter_uncovered": true,
+    "tarot_stage_edge_to_edge": true
+  },
+  "tarot_rules": {
+    "deck_size": 78,
+    "orientation": "upright only",
+    "repeats": 0,
+    "grid_columns": 6,
+    "meanings_in_free_tarot": false,
+    "existing_session_preserved": true
+  },
+  "preserved": {
+    "daily_world": "V509 unchanged",
+    "supreme_orb": "V501 unchanged",
+    "orbital_menu_logic": "V502 unchanged",
+    "reality_lifecycle": "V511 unchanged",
+    "whit_server_or_persona": "unchanged",
+    "billing_auth_database_dns": "unchanged"
+  },
+  "safety": {
+    "navigator_vibrate": false,
+    "native_haptics_only": true,
+    "new_api_calls": 0,
+    "production_publish_authorized": false,
+    "deploy_authorized": false,
+    "dns_authorized": false,
+    "database_changes_authorized": false
+  }
+}
