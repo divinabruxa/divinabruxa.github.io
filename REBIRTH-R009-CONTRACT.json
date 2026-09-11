@@ -1,0 +1,42 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R009",
+  "release": "V308",
+  "world": "Whit Nervous System",
+  "purpose": "Conectar a única Whit global aos eventos estruturais dos mundos sem ler conteúdo privado e sem uso de API.",
+  "replace": [
+    "app-v208.js"
+  ],
+  "new": [
+    "whit-nervous-system-v308.js",
+    "whit-nervous-system-v308.css",
+    "REBIRTH-R009-CONTRACT.json"
+  ],
+  "preserve": [
+    "Whit Core V212",
+    "Whit Presence V307",
+    "Home/Orbe/Menu V304",
+    "Tarot Livre V301",
+    "Biblioteca V302",
+    "Carta do Dia V303",
+    "Tiragens V305",
+    "Escola V306",
+    "Orbe IA V190"
+  ],
+  "privacy": {
+    "reads_inputs": false,
+    "reads_textareas": false,
+    "reads_journal_body": false,
+    "reads_spread_question": false,
+    "reads_school_notes": false,
+    "reads_ai_messages": false,
+    "event_metadata_only": true,
+    "explicit_context_grants_unchanged": true
+  },
+  "cost": {
+    "api_calls": 0,
+    "paid_model_calls": 0,
+    "generation": false
+  },
+  "home_rule": "Whit Nervous System records safe event metadata but never shows presence copy over the Home center."
+}

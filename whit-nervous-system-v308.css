@@ -1,0 +1,35 @@
+/* DIVINA BRUXA 2.0 — REBIRTH R009 · WHIT NERVOUS SYSTEM V308
+   Pulso visual efêmero aplicado somente à presença Whit V307. */
+
+html[data-whit-nerves="v308"] #whitPresenceV307.whit-nerve-v308 .whit-presence-v307__sigil{
+  animation:whitV308NerveSigil .72s cubic-bezier(.16,.82,.22,1) both;
+}
+html[data-whit-nerves="v308"] #whitPresenceV307.whit-nerve-v308 .whit-presence-v307__aura{
+  animation:whitV308NerveAura .76s ease-out both;
+}
+html[data-whit-nerves="v308"] #whitPresenceV307.whit-nerve-v308{
+  box-shadow:
+    0 18px 55px rgba(0,0,0,.34),
+    0 0 34px rgba(190,81,238,.10),
+    inset 0 1px rgba(255,245,220,.06);
+}
+
+@keyframes whitV308NerveSigil{
+  0%{transform:scale(.92);filter:brightness(1)}
+  38%{transform:scale(1.13);filter:brightness(1.28)}
+  100%{transform:scale(1);filter:brightness(1)}
+}
+@keyframes whitV308NerveAura{
+  0%{transform:scale(.65);opacity:.22}
+  52%{transform:scale(1.55);opacity:.82}
+  100%{transform:scale(1.16);opacity:.34}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-whit-nerves="v308"] #whitPresenceV307.whit-nerve-v308,
+  html[data-whit-nerves="v308"] #whitPresenceV307.whit-nerve-v308 .whit-presence-v307__sigil,
+  html[data-whit-nerves="v308"] #whitPresenceV307.whit-nerve-v308 .whit-presence-v307__aura{
+    animation:none!important;
+    transition:none!important;
+  }
+}

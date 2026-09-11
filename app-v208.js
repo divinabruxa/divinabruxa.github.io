@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — APLICATIVO V208 · WORK7.0 · WHIT PRESENCE V307 */
+/* DIVINA BRUXA — APLICATIVO V208 · WORK7.0 · WHIT NERVOUS SYSTEM V308 */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -17,6 +17,7 @@ import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
 import { installIndexPolicyV193 } from './seo-index-policy-v193.js?v=193';
 import { createWhitCoreV212 } from './whit-core-v212.js?v=212';
 import { createWhitPresenceV307 } from './whit-presence-v307.js?v=307';
+import { createWhitNervousSystemV308 } from './whit-nervous-system-v308.js?v=308';
 import './pwa-world-v201.js?v=201';
 
 const $ = selector => document.querySelector(selector);
@@ -68,6 +69,7 @@ window.divinaAccount = safely('Conta V201', () => new AccountEngineV201($('#logi
 const whitCore = safely('Whit 2.0 Core V212', () => createWhitCoreV212({ authClient }));
 safely('presença local Whit V212', () => whitCore?.awaken());
 const whitPresence = safely('Whit Presence V307', () => createWhitPresenceV307({ core: whitCore, go }));
+const whitNerves = safely('Whit Nervous System V308', () => createWhitNervousSystemV308({ core: whitCore, presence: whitPresence }));
 
 const miniOrbBinding = safely('Orbes auxiliares V207', bindMiniOrbs);
 
@@ -135,6 +137,25 @@ window.divinaWhitV307 = Object.freeze({
     presence: whitPresence?.status?.() || null
   }),
   localPresenceEnabled: true,
+  generationEnabled: false,
+  paidApiEnabled: false,
+  privateReads: false,
+  solEnabled: false
+});
+
+window.divinaWhitV308 = Object.freeze({
+  version: 308,
+  core: whitCore,
+  presence: whitPresence,
+  nervousSystem: whitNerves,
+  status: () => ({
+    core: whitCore?.status?.() || null,
+    presence: whitPresence?.status?.() || null,
+    nerves: whitNerves?.status?.() || null
+  }),
+  eventAwareness: true,
+  contentAwareness: false,
+  localOnly: true,
   generationEnabled: false,
   paidApiEnabled: false,
   privateReads: false,
