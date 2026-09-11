@@ -1,11 +1,11 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R025 · PWA / OFFLINE / RESILIÊNCIA V324
+/* DIVINA BRUXA 2.0 — P0 HOTFIX V325 · PWA / OFFLINE / RESILIÊNCIA V324
    Uma única autoridade PWA para app e páginas de instalação.
    Offline seletivo: mundos locais continuam; ações de autoridade exigem rede.
    Não altera o motor visual da Orbe principal. */
 
 import { installPerformanceV324, summarizeLocalWebVitalsV324, performanceTierV324 } from './performance-world-v324.js?v=324';
 
-const VERSION=324;
+const VERSION=325;
 const STYLE_ID='divinaPwaResilienceV324';
 const INSTALL_ROUTES=Object.freeze({pt:'instalar-app.html',en:'install-app.html',es:'instalar-aplicacion.html'});
 const ONLINE_ONLY_SELECTOR=[
@@ -79,7 +79,7 @@ const copy=()=>({
 const installStyle=()=>{
   if(document.getElementById(STYLE_ID))return;
   const link=document.createElement('link');
-  link.id=STYLE_ID;link.rel='stylesheet';link.href='./pwa-resilience-v324.css?v=324';
+  link.id=STYLE_ID;link.rel='stylesheet';link.href='./pwa-resilience-v324.css?v=325-p0';
   document.head.append(link);
 };
 
@@ -108,7 +108,9 @@ const setInert=(element,inert)=>{
 const syncHiddenRegions=()=>{
   document.querySelectorAll('.screen').forEach(screen=>{
     const active=screen.classList.contains('active');
-    screen.setAttribute('aria-hidden',String(!active));
+    const hidden=String(!active);
+    // P0: never rewrite an observed attribute when its value is already correct.
+    if(screen.getAttribute('aria-hidden')!==hidden)screen.setAttribute('aria-hidden',hidden);
     setInert(screen,!active);
   });
   for(const [selector,openCheck] of [
@@ -143,7 +145,15 @@ const installAccessibility=()=>{
   toast?.setAttribute('role','status');toast?.setAttribute('aria-live','polite');toast?.setAttribute('aria-atomic','true');
   document.querySelectorAll('dialog').forEach(dialog=>{dialog.setAttribute('role','dialog');dialog.setAttribute('aria-modal','true');});
   syncHiddenRegions();
-  const observer=new MutationObserver(syncHiddenRegions);
+  let syncFrame=0;
+  const queueHiddenRegionSync=()=>{
+    if(syncFrame)return;
+    syncFrame=requestAnimationFrame(()=>{
+      syncFrame=0;
+      syncHiddenRegions();
+    });
+  };
+  const observer=new MutationObserver(queueHiddenRegionSync);
   document.querySelectorAll('.screen,#orbMenu,#drawer').forEach(region=>observer.observe(region,{attributes:true,attributeFilter:['class','aria-hidden']}));
   document.addEventListener('keydown',trapVisibleLayer);
   document.addEventListener('divina:route-ready',event=>{
@@ -266,24 +276,22 @@ const setupOfflinePreparation=()=>{
 
 const setupServiceWorker=()=>{
   if(!('serviceWorker'in navigator))return;
-  globalThis.__divinaSWBootstrap=globalThis.__divinaSWBootstrap||'v324';
-  const register=()=>navigator.serviceWorker.register('./sw.js?v=324')
+  globalThis.__divinaSWBootstrap='v325-p0';
+  const register=()=>navigator.serviceWorker.register('./sw.js?v=325-p0',{updateViaCache:'none'})
     .then(registration=>{
-      dispatchEvent(new CustomEvent('divina:pwa-ready',{detail:{scope:registration.scope,version:VERSION}}));
+      dispatchEvent(new CustomEvent('divina:pwa-ready',{detail:{scope:registration.scope,version:VERSION,recovery:'p0'}}));
       registration.update().catch(()=>{});
       return registration;
     })
-    .catch(error=>console.error('[Divina] PWA V324 indisponível',error));
-  // Na Home principal o index já registra o worker cedo. Nas páginas editoriais/instalação,
-  // este módulo assume a autoridade quando ainda não existe registration.
-  navigator.serviceWorker.getRegistration().then(registration=>{
-    if(registration){
-      dispatchEvent(new CustomEvent('divina:pwa-ready',{detail:{scope:registration.scope,version:VERSION}}));
-      registration.update().catch(()=>{});
-      return;
-    }
-    if(document.readyState==='complete')register();else addEventListener('load',register,{once:true});
-  }).catch(()=>{if(document.readyState==='complete')register();else addEventListener('load',register,{once:true});});
+    .catch(error=>console.error('[Divina] PWA V325 P0 indisponível',error));
+
+  // Register immediately, then once more after window.load.
+  // The legacy inline bootstrap in index.html still asks for ?v=208;
+  // this second registration wins the race and moves the scope to the fixed worker.
+  register();
+  if(document.readyState!=='complete'){
+    addEventListener('load',()=>setTimeout(register,0),{once:true});
+  }
 };
 
 const setupReturnFromBackground=()=>{
@@ -316,7 +324,7 @@ export function initializePwaV324(){
   if(initialized||typeof document==='undefined')return false;
   initialized=true;
   installStyle();
-  document.documentElement.dataset.pwaWorld='324';
+  document.documentElement.dataset.pwaWorld='325-p0';
   installPerformanceV324();
   installAccessibility();
   setupInstall();

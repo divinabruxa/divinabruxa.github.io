@@ -1,4 +1,4 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R020 · CONTA + CONSULTAS V319
+/* DIVINA BRUXA 2.0 — P0 HOTFIX V325 · CONTA + CONSULTAS V319
    Camadas vivas sobre AccountEngine V201 e ConsultationEngine V188.
    Não duplica autenticação, RLS, sincronização, protocolo, agenda ou envio. */
 
@@ -72,7 +72,14 @@ export class AccountWorldV319{
   }
 
   observe(){
-    this.observer=new MutationObserver(()=>this.queueEnhance());
+    this.observer=new MutationObserver(records=>{
+      const meaningful=records.some(record=>{
+        const nodes=[...record.addedNodes,...record.removedNodes].filter(node=>node?.nodeType===1);
+        if(!nodes.length)return false;
+        return nodes.some(node=>node.id!==ACCOUNT_WORLD_ID);
+      });
+      if(meaningful)this.queueEnhance();
+    });
     this.observer.observe(this.root,{childList:true,subtree:false});
   }
 

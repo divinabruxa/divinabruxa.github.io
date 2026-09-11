@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R025 · SERVICE WORKER V324
+/* DIVINA BRUXA 2.0 — P0 HOTFIX V325 · SERVICE WORKER
    Cache seletivo e versionado. Nunca guarda Auth, Whit generation, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=324;
+const VERSION=325;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v324-shell';
-const CONTENT_CACHE='divina-bruxa-v324-content';
-const IMAGE_CACHE='divina-bruxa-v324-images';
-const OFFLINE_CACHE='divina-bruxa-v324-offline-core';
+const SHELL_CACHE='divina-bruxa-v325-shell';
+const CONTENT_CACHE='divina-bruxa-v325-content';
+const IMAGE_CACHE='divina-bruxa-v325-images';
+const OFFLINE_CACHE='divina-bruxa-v325-offline-core';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE]);
 
 const REQUIRED_SHELL=Object.freeze([
@@ -18,7 +18,7 @@ const REQUIRED_SHELL=Object.freeze([
   './runtime-v12.js','./orb-motion-core-v207.js','./orb-gesture-core-v208.js',
   './orb-engine-v208.js','./mini-orb-engine-v207.js','./orb-loading-portal-v1.js',
   './divina-shell-v180.css','./home-orb-absolute-v206.css','./pwa-world-v196.css',
-  './pwa-resilience-v324.css','./pwa-world-v324.js','./performance-world-v324.js',
+  './pwa-resilience-v324.css?v=325-p0','./pwa-world-v324.js?v=325-p0','./performance-world-v324.js?v=324',
   './divina-orb-fast-v1.webp','./divina-orb-thumb-v1.webp',
   './divina-icon-fast-v1.png','./icon-192.png'
 ]);

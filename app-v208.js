@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — APLICATIVO V208 · WORK7.0 · PWA + OFFLINE + PERFORMANCE V324 */
+/* DIVINA BRUXA — P0 HOTFIX V325 · BOOT RECOVERY · WORK7.0 */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -25,7 +25,7 @@ import { createWhitSignatureV311 } from './whit-signature-v311.js?v=311';
 import { createWhitMindV312 } from './whit-mind-v312.js?v=312';
 import { createWhitGenerationBridgeV313 } from './whit-generation-bridge-v313.js?v=316-silent1';
 import { createWhitSilentPresenceV316 } from './whit-silent-presence-v316.js?v=316';
-import './pwa-world-v324.js?v=324';
+import { initializePwaV324 } from './pwa-world-v324.js?v=325-p0';
 
 const $ = selector => document.querySelector(selector);
 
@@ -67,6 +67,7 @@ safely('experiência do Tarot', installTarotExperience);
 safely('mídia cósmica', installCosmicMedia);
 safely('métricas editoriais locais', () => bindEditorialMetrics(document.body));
 safely('política de indexação V193', installIndexPolicyV193);
+safely('PWA V325 P0', initializePwaV324);
 addEventListener('orbe:toast', event => toast(event.detail));
 
 const authClient = new AuthClient(CONFIG);
@@ -120,7 +121,7 @@ navigator.serviceWorker?.addEventListener('message', event => {
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=324')
+    navigator.serviceWorker.register('./sw.js?v=325-p0')
       .then(() => console.info('[Divina] PWA registrado'))
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   });
@@ -401,16 +402,26 @@ const waitForCoreStyles = () => new Promise((resolve, reject) => {
 });
 
 const awaken = async () => {
+  let stylesReady = false;
   try {
     await waitForCoreStyles();
+    stylesReady = true;
     await navigation.start();
     document.documentElement.dataset.appShell = 'v180';
-    dispatchEvent(new CustomEvent('divina:boot-ready', { detail: { shell: 'v180' } }));
+    document.documentElement.dataset.bootRecovery = 'v325';
+    dispatchEvent(new CustomEvent('divina:boot-ready', { detail: { shell: 'v180', recovery:'v325' } }));
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
   } catch (error) {
-    document.documentElement.dataset.bootError = 'v180';
-    dispatchEvent(new CustomEvent('divina:boot-error', { detail: { recoverable: true } }));
+    document.documentElement.dataset.bootError = 'v325';
+    dispatchEvent(new CustomEvent('divina:boot-error', { detail: { recoverable: true, stylesReady } }));
     console.error('[Divina] o núcleo protegido não despertou', error);
+    // Fail-open only when the critical visual shell was verified.
+    // This avoids a permanent full-screen loader after a recoverable navigation failure.
+    if (stylesReady) {
+      document.documentElement.dataset.appShell = 'v180-degraded';
+      loadingPortal.end(ORB_BOOT_REQUEST_V152);
+      toast('A Orbe abriu em modo de recuperação. Recarregue se algum mundo não responder.');
+    }
   }
 };
 awaken();
