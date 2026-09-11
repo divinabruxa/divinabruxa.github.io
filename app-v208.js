@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — REBIRTH R042 · TAROT LIVRE LENDÁRIO V342 · BOOT-SAFE */
+/* DIVINA BRUXA — REBIRTH R043 · TAROT LIVRE FOGO CELESTIAL V343 · BOOT-SAFE */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -59,11 +59,11 @@ const startMenuSceneV340 = () => import('./menu-orb-lock-v340.js?v=340')
     document.documentElement.dataset.menuRebornError = 'v340';
   });
 
-const startFreeTarotSupremeV342 = () => import('./free-tarot-legendary-v342.js?v=342')
-  .then(module => module.installFreeTarotLegendaryV342?.())
+const startFreeTarotSupremeV343 = () => import('./free-tarot-celestial-fire-v343.js?v=343')
+  .then(module => module.installFreeTarotCelestialFireV343?.())
   .catch(error => {
-    console.error('[Divina] Tarot Livre Lendário V342 não iniciou', error);
-    document.documentElement.dataset.freeTarotSupremeError = 'v342';
+    console.error('[Divina] Tarot Livre Fogo Celestial V343 não iniciou', error);
+    document.documentElement.dataset.freeTarotSupremeError = 'v343';
   });
 
 const startSpreadsSupremeV331 = () => import('./spreads-supreme-v331.js?v=331')
@@ -480,7 +480,7 @@ const awaken = async () => {
     // R027/R028 são opcionais: nunca bloqueiam a abertura da Home.
     startMenuSceneV340();
     startWhitUniversalV333();
-    startFreeTarotSupremeV342();
+    startFreeTarotSupremeV343();
     startSpreadsSupremeV331();
     startLibraryDeepV332();
 
@@ -513,7 +513,7 @@ const awaken = async () => {
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
     startMenuSceneV340();
     startWhitUniversalV333();
-    startFreeTarotSupremeV342();
+    startFreeTarotSupremeV343();
     startSpreadsSupremeV331();
     startLibraryDeepV332();
     startPwaAfterBootV326();

@@ -1,0 +1,48 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R043",
+  "release": "V343",
+  "world": "Tarot Livre Fogo Celestial",
+  "direction": "Universo preto profundo, magia do fogo celestial, carta nasce da Orbe em alta velocidade.",
+  "replace": [
+    "app-v208.js"
+  ],
+  "new": [
+    "free-tarot-celestial-fire-v343.js",
+    "free-tarot-celestial-fire-v343.css",
+    "tarot-livre-universo-fogo-v343.jpg",
+    "REBIRTH-R043-CONTRACT.json"
+  ],
+  "goals": [
+    "motor de fogo celestial e divino",
+    "revelação rápida da carta",
+    "efeito de magia e fogo saindo da Orbe",
+    "Orbe crua como no menu",
+    "mais distância entre Orbe e carta",
+    "sem cartas decorativas voando no fundo",
+    "Mesa Real abre overlay fluido com cartas já reveladas",
+    "Mesa Real em grade de 6 colunas no desktop"
+  ],
+  "preserve_rules": {
+    "deck_size": 78,
+    "no_repetition": true,
+    "no_reversed_cards": true,
+    "no_meanings_in_free_tarot": true,
+    "grid_columns": 6
+  },
+  "architecture": {
+    "base_engine": "V301",
+    "previous_layer": "V342",
+    "new_layer": "V343",
+    "background_asset": "tarot-livre-universo-fogo-v343.jpg",
+    "mesa_real_overlay": true,
+    "extra_api_calls": 0
+  },
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}
