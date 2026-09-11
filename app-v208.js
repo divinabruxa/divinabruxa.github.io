@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — APLICATIVO V208 · WORK7.0 · WHIT SILENT PRESENCE V316 */
+/* DIVINA BRUXA — APLICATIVO V208 · WORK7.0 · ACCOUNT WORLD V319 */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -8,6 +8,7 @@ import { RealityOrbEngine } from './orb-engine-v208.js?v=208';
 import { bindMiniOrbs } from './mini-orb-engine-v207.js?v=207';
 import { AuthClientV201 as AuthClient } from './auth-client-v201.js?v=201';
 import { AccountEngineV201 } from './account-engine-v201.js?v=201';
+import { AccountWorldV319 } from './account-consultations-world-v319.js?v=319';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
 import { createPageLoader } from './page-loader-v1.js?v=302-recovery1';
@@ -71,6 +72,7 @@ addEventListener('orbe:toast', event => toast(event.detail));
 const authClient = new AuthClient(CONFIG);
 window.divinaAuth = authClient;
 window.divinaAccount = safely('Conta V201', () => new AccountEngineV201($('#login'), authClient));
+window.divinaAccountWorldV319 = safely('Conta World V319', () => new AccountWorldV319($('#login'), window.divinaAccount));
 
 const whitCore = safely('Whit 2.0 Core V212', () => createWhitCoreV212({ authClient }));
 safely('presença local Whit V212', () => whitCore?.awaken());

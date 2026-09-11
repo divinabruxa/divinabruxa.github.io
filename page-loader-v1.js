@@ -1,7 +1,8 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R019 · CARREGADOR DE MUNDOS V318
+/* DIVINA BRUXA 2.0 — REBIRTH R020 · CARREGADOR DE MUNDOS V319
    Mundos Rebirth: Tarot Livre V301, Biblioteca V302, Carta do Dia V303,
-   Tiragens V305, Escola V306, Diário/Espelho V317 e Skins/Premium V318.
-   Home/Menu V304 e Whit V307–V316 permanecem preservados fora deste carregador. */
+   Tiragens V305, Escola V306, Diário/Espelho V317, Skins/Premium V318
+   e Consultas V319. Conta V319 permanece no shell autenticado.
+   Home/Menu V304 e Whit V307–V316 continuam preservados. */
 import {
   normalizeRouteId,
   routeHasModule,
@@ -165,8 +166,11 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
     },
     consultations: async () => {
       await ensureCommerce();
-      const { ConsultationEngine } = await import('./consultation-engine.js?v=188');
-      return new ConsultationEngine($('#consultationApp'), config);
+      const [, module] = await Promise.all([
+        ensureStyle('divinaAccountConsultationsRebirthV319', 'account-consultations-world-v319.css?v=319'),
+        import('./account-consultations-world-v319.js?v=319')
+      ]);
+      return new module.ConsultationsWorldV319($('#consultationApp'), config);
     },
     subscriptions: async () => {
       const [, module] = await Promise.all([
@@ -229,7 +233,8 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
     ]),
     consultations: () => Promise.all([
       import('./commerce-engine.js?v=148'),
-      import('./consultation-engine.js?v=188')
+      ensureStyle('divinaAccountConsultationsRebirthV319', 'account-consultations-world-v319.css?v=319'),
+      import('./account-consultations-world-v319.js?v=319')
     ]),
     notifications: () => import('./notification-engine-v150.js?v=150')
   });

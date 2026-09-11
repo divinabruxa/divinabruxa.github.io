@@ -1,0 +1,99 @@
+/* DIVINA BRUXA 2.0 — REBIRTH R020 · CONTA + CONSULTAS V319 */
+
+.account-world-v319,.consultations-world-v319{
+  position:relative;isolation:isolate;overflow:hidden;
+  margin:14px 0 20px;padding:clamp(18px,4vw,29px);
+  border:1px solid rgba(231,196,123,.15);border-radius:29px;
+  background:
+    radial-gradient(circle at 86% 9%,rgba(153,58,207,.15),transparent 30%),
+    radial-gradient(circle at 7% 105%,rgba(230,186,104,.07),transparent 36%),
+    linear-gradient(145deg,rgba(20,8,29,.92),rgba(6,3,11,.97));
+  box-shadow:0 25px 68px rgba(0,0,0,.23),inset 0 1px rgba(255,255,255,.035)
+}
+.acw319__stars{position:absolute;inset:0;pointer-events:none;opacity:.5}
+.acw319__stars i{position:absolute;width:3px;height:3px;border-radius:50%;background:#efd08b;box-shadow:0 0 12px rgba(199,82,238,.68)}
+.acw319__stars i:nth-child(1){left:11%;top:19%}.acw319__stars i:nth-child(2){right:18%;top:31%}.acw319__stars i:nth-child(3){left:70%;bottom:14%}
+.acw319__head{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center}
+.acw319__head>div{max-width:720px}
+.acw319__head h3{
+  margin:.27rem 0 .58rem;color:#fff1e3;
+  font:500 clamp(1.75rem,5.5vw,3.05rem)/1.03 Georgia,serif;letter-spacing:-.024em
+}
+.acw319__head p:last-child{margin:0;color:#a79aaa;line-height:1.6}
+.acw319__seal{
+  display:grid;place-items:center;width:64px;height:64px;
+  border:1px solid rgba(238,203,131,.35);border-radius:50%;color:#edcf8b;
+  background:radial-gradient(circle,rgba(127,44,166,.34),rgba(10,4,16,.92) 68%);
+  box-shadow:0 0 34px rgba(182,72,225,.13);font-size:25px
+}
+.acw319__continuity,.acw319__services{
+  position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:22px
+}
+.acw319__continuity article,.acw319__services article{
+  min-height:78px;padding:12px;border:1px solid rgba(231,196,122,.11);
+  border-radius:17px;background:rgba(7,3,13,.57)
+}
+.acw319__continuity article{display:flex;flex-direction:column;justify-content:center}
+.acw319__continuity strong{color:#efd28e;font:500 21px/1 Georgia,serif}
+.acw319__continuity span{margin-top:4px;color:#837887;font-size:7px;letter-spacing:.06em;text-transform:uppercase}
+.acw319__passages{
+  position:relative;display:grid;grid-template-columns:1fr 1fr minmax(260px,1.15fr);gap:9px;margin-top:9px
+}
+.acw319__passages button,.acw319__passages p{
+  min-height:68px;margin:0;padding:11px 13px;border:1px solid rgba(231,196,122,.11);
+  border-radius:17px;background:rgba(7,3,13,.56)
+}
+.acw319__passages button{
+  display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;
+  gap:2px 9px;text-align:left;color:#d8c6db
+}
+.acw319__passages button>span{grid-row:1/3;align-self:center;color:#e6c67b;font-size:18px}
+.acw319__passages button b{color:#d9bd7a;font-size:8px;letter-spacing:.09em}
+.acw319__passages button small{color:#807584;font-size:8px}
+.acw319__passages p{display:flex;flex-direction:column;justify-content:center;gap:4px}
+.acw319__passages p b{color:#d8c8db;font-size:9px}.acw319__passages p small{color:#817684;font-size:8px;line-height:1.42}
+
+.acw319__services article{display:flex;align-items:center;gap:10px}
+.acw319__services article>span{
+  display:grid;place-items:center;width:34px;height:34px;flex:0 0 34px;
+  border:1px solid rgba(233,199,127,.18);border-radius:50%;color:#e8c77d
+}
+.acw319__services article div{display:grid;gap:3px}
+.acw319__services small{color:#877b88;font-size:7px;text-transform:uppercase}
+.acw319__services b{color:#efd28e;font:500 15px/1 Georgia,serif}
+.acw319__consult-covenant{
+  position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:11px;align-items:center;
+  margin-top:9px;padding:12px 13px;border:1px solid rgba(231,196,122,.12);
+  border-radius:18px;background:rgba(7,3,13,.57)
+}
+.acw319__consult-covenant>span{color:#e7c77c;font-size:19px}
+.acw319__consult-covenant p{margin:0;display:grid;gap:3px}
+.acw319__consult-covenant b{color:#d9c8dc;font-size:9px}
+.acw319__consult-covenant small{color:#837887;font-size:8px;line-height:1.4}
+.acw319__consult-covenant button{
+  min-height:41px;padding:0 14px;border:1px solid rgba(234,198,125,.27);border-radius:999px;
+  background:linear-gradient(135deg,rgba(118,43,153,.37),rgba(37,14,47,.61));
+  color:#e6cb8d;font-size:8px;font-weight:800;letter-spacing:.08em
+}
+.acw319__privacy{
+  position:relative;margin:9px 0 0;color:#7f7483;font-size:8px;line-height:1.5
+}
+
+@media(max-width:760px){
+  .acw319__continuity,.acw319__services{grid-template-columns:1fr 1fr}
+  .acw319__passages{grid-template-columns:1fr 1fr}
+  .acw319__passages p{grid-column:1/-1}
+}
+@media(max-width:520px){
+  .account-world-v319,.consultations-world-v319{padding:16px 13px;border-radius:24px}
+  .acw319__head{grid-template-columns:1fr 52px}
+  .acw319__seal{width:50px;height:50px;font-size:20px}
+  .acw319__head h3{font-size:clamp(1.6rem,8.8vw,2.4rem)}
+  .acw319__passages{grid-template-columns:1fr}
+  .acw319__passages p{grid-column:auto}
+  .acw319__consult-covenant{grid-template-columns:auto 1fr}
+  .acw319__consult-covenant button{grid-column:1/-1;width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  .account-world-v319 *, .consultations-world-v319 *{scroll-behavior:auto!important}
+}

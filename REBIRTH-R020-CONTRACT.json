@@ -1,0 +1,74 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R020",
+  "release": "V319",
+  "world": "Conta + Consultas 2.0",
+  "vision_source": "chat Whit + WORK7.0 master vision",
+  "purpose": "Transformar Conta e Consultas em mundos vivos, preservando os motores de autenticação e atendimento e corrigindo a verdade comercial oficial.",
+  "replace": [
+    "app-v208.js",
+    "page-loader-v1.js",
+    "commercial-truth-v200.js"
+  ],
+  "new": [
+    "account-consultations-world-v319.js",
+    "account-consultations-world-v319.css",
+    "REBIRTH-R020-CONTRACT.json"
+  ],
+  "preserve": [
+    "AccountEngine V201",
+    "ConsultationEngine V188",
+    "AuthClient V201",
+    "Whit V307-V316",
+    "Home/Orbe/Menu V304",
+    "Tarot Livre V301",
+    "Biblioteca V302",
+    "Carta do Dia V303",
+    "Tiragens V305",
+    "Escola V306",
+    "Diário/Espelho V317",
+    "Skins/Premium V318"
+  ],
+  "commercial_truth": {
+    "contactEmail": "orbedasrealidades@hotmail.com",
+    "channels": [
+      "email"
+    ],
+    "mesaRealCents": 50000,
+    "leituraPensamentosCents": 50000,
+    "cartaConselhoCents": 30000,
+    "perguntaCents": 15000,
+    "remotePriceDriftRejected": true,
+    "realBilling": false
+  },
+  "account": {
+    "emailVerification": true,
+    "rlsPerAccount": true,
+    "journalSyncOptIn": true,
+    "journalDraftLocalOnly": true,
+    "serverPurchaseAuthority": true,
+    "exportPreserved": true,
+    "logoutAllPreserved": true
+  },
+  "consultations": {
+    "humanService": true,
+    "protocolTracking": true,
+    "privateTrackingCode": true,
+    "emailConfirmation": true,
+    "consumesAICredits": false,
+    "includedInPremium": false,
+    "automaticBilling": false
+  },
+  "privacy": {
+    "accountWorldReadsPrivateBody": false,
+    "consultationWorldEventBody": false,
+    "journalBodyToWhitAutomatically": false
+  },
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}
