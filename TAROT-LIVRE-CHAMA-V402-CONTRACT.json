@@ -1,0 +1,42 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "release": "V402",
+  "name": "Tarot Livre — Chama Celestial",
+  "reference": "User-provided image with a violet/gold celestial flame connecting Orb and card.",
+  "fixes": [
+    "permanent SVG celestial flame always visible",
+    "purple outer flame + gold middle flame + white-hot core",
+    "Canvas used only for stars/sparks/bursts, so fire no longer depends on Canvas visibility",
+    "reveal burst amplifies the permanent flame",
+    "raw Orb remains ringless",
+    "card remains above flame and readable",
+    "Mesa Real remains 6 columns",
+    "shuffle and reset remain in visible toolbar",
+    "cache-bust imports to V402",
+    "app service worker registration bumped to v402"
+  ],
+  "replace": [
+    "app-v208.js",
+    "page-loader-v1.js"
+  ],
+  "new": [
+    "tarot-livre-chama-v402.js",
+    "tarot-livre-chama-v402.css",
+    "TAROT-LIVRE-CHAMA-V402-CONTRACT.json"
+  ],
+  "rules": {
+    "deck_size": 78,
+    "no_reversed_cards": true,
+    "no_repetition": true,
+    "no_meanings": true,
+    "grid_columns": 6,
+    "mesa_real_columns": 6
+  },
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}
