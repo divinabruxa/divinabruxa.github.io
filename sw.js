@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 2.0 — MACROETAPA V508 · SERVICE WORKER DA CHAMA SOBERANA VOLUMÉTRICA
+/* DIVINA BRUXA 2.0 — MACROETAPA V509 · SERVICE WORKER DA CARTA DO DIA VIVA
    Cache seletivo e versionado. Nunca guarda Auth, Whit generation, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=508;
+const VERSION=509;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v508-shell';
-const CONTENT_CACHE='divina-bruxa-v508-content';
-const IMAGE_CACHE='divina-bruxa-v508-images';
-const OFFLINE_CACHE='divina-bruxa-v508-offline-core';
+const SHELL_CACHE='divina-bruxa-v509-shell';
+const CONTENT_CACHE='divina-bruxa-v509-content';
+const IMAGE_CACHE='divina-bruxa-v509-images';
+const OFFLINE_CACHE='divina-bruxa-v509-offline-core';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE]);
 
 const REQUIRED_SHELL=Object.freeze([
@@ -19,6 +19,7 @@ const REQUIRED_SHELL=Object.freeze([
   './orb-engine-v208.js','./supreme-orb-core-v501.js','./supreme-orb-core-v501.css',
   './orbital-menu-v502.js','./orbital-menu-v502.css',
   './tarot-livre-supremo-v508.js','./tarot-livre-supremo-v508.css',
+  './daily-world-v509.js','./daily-world-v509.css','./daily-policy-v303.js',
   './orb-loading-portal-v1.js',
   './divina-shell-v180.css','./home-orb-absolute-v206.css','./pwa-world-v196.css',
   './pwa-resilience-v324.css','./pwa-world-v324.js','./performance-world-v324.js',
@@ -41,7 +42,7 @@ const APP_DEPENDENCIES=Object.freeze([
   './whit-generation-bridge-v313.js','./whit-silent-presence-v316.js','./whit-silent-presence-v316.css',
   './menu-completo-v177.js','./orb-skin-release-v1.js','./cosmic-visual-atlas-v1.js',
   './skin-registry-v12.js','./skin-universal-v10.js','./skin-catalog-v6.js',
-  './storage.js','./school-policy.js','./journal-policy.js','./daily-policy.js',
+  './storage.js','./school-policy.js','./journal-policy.js','./daily-policy.js','./daily-policy-v303.js',
   './biblioteca-universal-v184.css','./tiragens-definitivas-v185.css','./escola-definitiva-v186.css',
   './diario-definitivo-v187.css','./consultations-definitive-v188.css','./account-secure-v201.css',
   './orbe-ai-governada-v190.css','./premium-billing-v191.css','./editorial-universe-v192.css',
@@ -51,7 +52,7 @@ const APP_DEPENDENCIES=Object.freeze([
 const REBIRTH_WARM=Object.freeze([
   './tarot-livre-supremo-v508.js','./tarot-livre-supremo-v508.css',
   './library-world-v302.js','./library-world-v302.css',
-  './daily-world-v303.js','./daily-world-v303.css','./daily-policy-v303.js',
+  './daily-world-v509.js','./daily-world-v509.css','./daily-policy-v303.js',
   './spreads-world-v305.js','./spreads-world-v305.css',
   './school-world-v306.js','./school-world-v306.css',
   './journal-world-v317.js','./journal-world-v317.css',
@@ -67,7 +68,7 @@ const OFFLINE_WORLD_ASSETS=Object.freeze([
   './tarot-livre-supremo-v508.js','./tarot-livre-supremo-v508.css',
   './tarot-atlas-mobile-v196.webp',
   './card-library-policy.js','./card-library-engine.js','./library-world-v302.js','./library-world-v302.css',
-  './daily-world-v303.js','./daily-world-v303.css','./daily-policy-v303.js','./daily-meaning-runtime.js','./tarot-meanings.js','./meaning-engine.js',
+  './daily-world-v509.js','./daily-world-v509.css','./daily-policy-v303.js','./daily-meaning-runtime.js','./tarot-meanings.js','./meaning-engine.js',
   './school-engine.js','./school-policy.js','./school-world-v306.js','./school-world-v306.css','./escola-definitiva-v186.css',
   './journal-engine.js','./journal-policy.js','./rhythm-v6.js','./journal-world-v317.js','./journal-world-v317.css','./diario-definitivo-v187.css',
   './skin-registry-v12.js','./skin-universal-v10.js','./skin-catalog-v6.js',
@@ -244,6 +245,8 @@ self.addEventListener('activate',event=>event.waitUntil((async()=>{
   const keys=await caches.keys();
   await Promise.all(keys.filter(key=>key.startsWith(OWNED_PREFIX)&&!ACTIVE_CACHES.has(key)).map(key=>caches.delete(key)));
   await self.clients.claim();
+  const windows=await self.clients.matchAll({type:'window',includeUncontrolled:true});
+  windows.forEach(client=>client.postMessage({type:'DIVINA_RELEASE_READY',version:VERSION}));
 })()));
 
 self.addEventListener('fetch',event=>{

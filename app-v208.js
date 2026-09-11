@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — MACROETAPA V508 · CHAMA SOBERANA VOLUMÉTRICA · BOOT-SAFE
-   V501 continua como a única Orbe Suprema, V502 preserva o menu orbital e
-   V508 dá volume ao plasma, nébulas vivas e coroa estelar ao nascimento. */
+/* DIVINA BRUXA — MACROETAPA V509 · CARTA DO DIA VIVA · BOOT-SAFE
+   V501 continua como a única Orbe Suprema, V502 preserva o menu orbital,
+   V508 mantém a Chama Soberana e V509 leva a própria Orbe ao ritual diário. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -179,7 +179,24 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
+const RELEASE_EPOCH_V509 = 509;
+const releaseReloadKeyV509 = `divina-release-reload-${RELEASE_EPOCH_V509}`;
+const reloadForNewReleaseV509 = version => {
+  if (Number(version || 0) <= RELEASE_EPOCH_V509) return false;
+  try {
+    if (sessionStorage.getItem(releaseReloadKeyV509)) return false;
+    sessionStorage.setItem(releaseReloadKeyV509, String(version));
+  } catch {}
+  location.reload();
+  return true;
+};
+
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_RELEASE_READY') {
+    document.documentElement.dataset.releaseReady = String(event.data.version || 'unknown');
+    reloadForNewReleaseV509(event.data.version);
+    return;
+  }
   if (event.data?.type !== 'divina-notification-open') return;
   const target = String(event.data.target || '#home').replace(/^#/, '');
   if (/^(home|daily|school|consultations|login|subscriptions|ai|music|videos|skins|notifications)$/.test(target)) {
@@ -187,12 +204,18 @@ navigator.serviceWorker?.addEventListener('message', event => {
   }
 });
 
-if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
+if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV509) {
+  window.__divinaSWBootstrapV509 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=508')
-      .then(() => console.info('[Divina] PWA registrado'))
+    navigator.serviceWorker.register('./sw.js?v=509', { updateViaCache:'none' })
+      .then(async registration => {
+        document.documentElement.dataset.releaseEpoch = 'v509';
+        await registration.update().catch(() => null);
+        registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
+        console.info('[Divina] PWA V509 registrado');
+      })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
-  });
+  }, { once:true });
 }
 
 const skinsHeading = document.querySelector('#skins h2');
@@ -501,7 +524,7 @@ const awaken = async () => {
     document.documentElement.dataset.bootRecovery = 'v326';
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
     dispatchEvent(new CustomEvent('divina:boot-ready', {
-      detail: { shell:'v180', recovery:'v326', bootFirst:true, supremeOrb:'v501', orbitalMenu:'v502', tarotLivre:'v508', fluidity:'v504', stellarFire:'v508', plasmaFilaments:true, volumetricPlasma:true, cosmicNebula:true, cardEdgeBurst:true }
+      detail: { shell:'v180', recovery:'v326', bootFirst:true, supremeOrb:'v501', orbitalMenu:'v502', tarotLivre:'v508', dailyWorld:'v509', fluidity:'v504', stellarFire:'v508', plasmaFilaments:true, volumetricPlasma:true, cosmicNebula:true, cardEdgeBurst:true, oneLivingDailyOrb:true }
     }));
 
     // O menu é opcional para o boot: a Home abre mesmo se esta camada falhar.

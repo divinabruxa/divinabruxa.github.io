@@ -1,0 +1,592 @@
+/* DIVINA BRUXA 2.0 — MACROETAPA V509 · CARTA DO DIA VIVA
+   Amanhecer cósmico ao redor da única Orbe Suprema V501. */
+
+#dailyCard.daily-world-v509-host{
+  --dw509-gold:#f6d79a;
+  --dw509-gold-hot:#fff5d5;
+  --dw509-ink:#fffaff;
+  --dw509-muted:rgba(235,223,244,.72);
+  --dw509-violet:#a347ff;
+  --dw509-purple:#641cc7;
+  --dw509-pink:#ff55cf;
+  --dw509-blue:#76dfff;
+  width:100%;
+  max-width:none!important;
+  padding-inline:clamp(12px,3vw,38px)!important;
+}
+
+#dailyCard .dw509{
+  width:min(1000px,100%);
+  margin:0 auto;
+  display:grid;
+  gap:clamp(16px,2.8vw,30px);
+  color:var(--dw509-ink);
+}
+
+#dailyCard .dw509__head{
+  width:min(860px,100%);
+  margin:0 auto;
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:18px;
+}
+
+#dailyCard .dw509__head>div>span{
+  display:block;
+  margin-bottom:8px;
+  color:var(--dw509-gold);
+  font:700 .875rem/1.2 system-ui,sans-serif;
+  letter-spacing:.24em;
+}
+
+#dailyCard .dw509__head h2{
+  margin:0;
+  color:var(--dw509-ink);
+  font:500 clamp(2.15rem,5vw,3.5rem)/.98 Georgia,serif;
+  letter-spacing:-.04em;
+}
+
+#dailyCard .dw509__head time{
+  max-width:220px;
+  color:var(--dw509-muted);
+  font:600 .875rem/1.45 system-ui,sans-serif;
+  text-align:right;
+  text-transform:lowercase;
+}
+
+#dailyCard .dw509__sanctuary{
+  position:relative;
+  isolation:isolate;
+  width:min(860px,100%);
+  min-height:clamp(540px,70vh,720px);
+  margin:0 auto;
+  padding:clamp(28px,5vw,54px) clamp(16px,4vw,36px);
+  display:grid;
+  grid-template-columns:1fr;
+  place-items:center;
+  align-content:center;
+  gap:clamp(14px,2.4vw,22px);
+  overflow:hidden;
+  border:1px solid rgba(246,215,154,.2);
+  border-radius:clamp(30px,6vw,60px);
+  background:
+    radial-gradient(circle at 50% 48%,rgba(171,70,255,.22),transparent 25%),
+    radial-gradient(ellipse 75% 60% at 50% 54%,rgba(255,78,207,.075),transparent 62%),
+    linear-gradient(180deg,rgba(18,6,35,.74),rgba(4,1,10,.92));
+  box-shadow:
+    inset 0 0 120px rgba(174,70,255,.065),
+    inset 0 0 1px rgba(255,245,213,.38),
+    0 32px 110px rgba(0,0,0,.32);
+  contain:layout paint;
+}
+
+#dailyCard .dw509__sanctuary::before,
+#dailyCard .dw509__sanctuary::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  left:50%;
+  top:49%;
+  width:min(78vw,570px);
+  aspect-ratio:1;
+  border-radius:50%;
+  translate:-50% -50%;
+  pointer-events:none;
+}
+
+#dailyCard .dw509__sanctuary::before{
+  background:
+    conic-gradient(from 25deg,transparent 0 12%,rgba(255,85,207,.13) 17%,transparent 24% 48%,rgba(151,67,255,.16) 54%,transparent 62% 100%);
+  filter:blur(24px);
+  animation:dw509-nebula-spin 24s linear infinite;
+}
+
+#dailyCard .dw509__sanctuary::after{
+  width:min(58vw,410px);
+  background:radial-gradient(circle,rgba(255,231,169,.12),rgba(178,58,255,.09) 35%,transparent 69%);
+  filter:blur(18px);
+  animation:dw509-breathe 7.2s ease-in-out infinite;
+}
+
+#dailyCard .dw509__cosmos{
+  position:absolute;
+  z-index:0;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  opacity:.96;
+}
+
+#dailyCard .dw509__portal{
+  position:absolute;
+  z-index:1;
+  left:50%;
+  top:50%;
+  width:clamp(250px,44vw,400px);
+  aspect-ratio:1;
+  border-radius:50%;
+  translate:-50% -50%;
+  pointer-events:none;
+  opacity:.55;
+  transition:opacity .45s ease,scale .65s cubic-bezier(.2,.8,.18,1),top .75s cubic-bezier(.2,.8,.18,1);
+}
+
+#dailyCard .dw509__portal--outer{
+  border:1px solid rgba(246,215,154,.14);
+  box-shadow:0 0 70px rgba(159,59,255,.1),inset 0 0 70px rgba(255,70,205,.055);
+  animation:dw509-orbit 18s linear infinite;
+}
+
+#dailyCard .dw509__portal--inner{
+  width:clamp(215px,36vw,320px);
+  border:1px dashed rgba(255,111,217,.16);
+  animation:dw509-orbit-reverse 14s linear infinite;
+}
+
+#dailyCard .dw509__orb-host{
+  --supreme-orb-claimed-size:clamp(164px,30vw,224px);
+  position:relative;
+  z-index:8;
+  width:var(--supreme-orb-claimed-size);
+  height:var(--supreme-orb-claimed-size);
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  touch-action:manipulation;
+  transition:width .7s cubic-bezier(.16,.8,.18,1),height .7s cubic-bezier(.16,.8,.18,1),transform .45s ease;
+}
+
+#dailyCard .dw509__orb-host::before,
+#dailyCard .dw509__orb-host::after{
+  content:"";
+  position:absolute;
+  inset:-18%;
+  border-radius:50%;
+  pointer-events:none;
+  opacity:.7;
+  transition:opacity .35s ease,transform .5s ease;
+}
+
+#dailyCard .dw509__orb-host::before{
+  background:radial-gradient(circle,transparent 42%,rgba(255,85,207,.18) 58%,rgba(151,67,255,.08) 67%,transparent 75%);
+  filter:blur(5px);
+  animation:dw509-orb-aura 4.8s ease-in-out infinite;
+}
+
+#dailyCard .dw509__orb-host::after{
+  inset:-30%;
+  border:1px solid rgba(246,215,154,.16);
+  box-shadow:0 0 46px rgba(159,63,255,.23),inset 0 0 34px rgba(255,92,210,.08);
+  animation:dw509-orb-ring 8s linear infinite;
+}
+
+#dailyCard .dw509__orb-host [data-supreme-orb="living"]{
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  margin:0!important;
+  cursor:pointer;
+  outline:none;
+  touch-action:manipulation;
+  filter:drop-shadow(0 0 28px rgba(158,69,255,.38));
+  transition:filter .25s ease,transform .22s ease;
+}
+
+#dailyCard .dw509__orb-host [data-supreme-orb="living"]:focus-visible{
+  outline:2px solid var(--dw509-gold-hot);
+  outline-offset:9px;
+}
+
+#dailyCard .dw509.is-orb-touching .dw509__orb-host{
+  transform:scale(.965);
+}
+
+#dailyCard .dw509.is-orb-touching .dw509__orb-host::before{
+  opacity:1;
+  transform:scale(1.16);
+}
+
+#dailyCard .dw509__sealed{
+  position:relative;
+  z-index:5;
+  width:min(460px,94%);
+  display:grid;
+  justify-items:center;
+  gap:12px;
+}
+
+#dailyCard .dw509__sealed[hidden],
+#dailyCard .dw509__card[hidden],
+#dailyCard .dw509__identity[hidden],
+#dailyCard .dw509__private[hidden],
+#dailyCard .dw509__constellation[hidden],
+#dailyCard .dw509__layer[hidden],
+#dailyCard .dw509__actions[hidden],
+#dailyCard .dw509__source[hidden],
+#dailyCard .dw509__intention[hidden]{display:none!important}
+
+#dailyCard .dw509__whisper{
+  margin:0;
+  color:var(--dw509-ink);
+  font:500 clamp(1.18rem,3vw,1.65rem)/1.3 Georgia,serif;
+  text-align:center;
+}
+
+#dailyCard .dw509__whisper span{
+  color:var(--dw509-muted);
+  font-size:.72em;
+}
+
+#dailyCard .dw509__truth,
+#dailyCard .dw509__source{
+  margin:0;
+  color:var(--dw509-muted);
+  font:650 .75rem/1.55 system-ui,sans-serif;
+  letter-spacing:.035em;
+  text-align:center;
+}
+
+#dailyCard .dw509__intention-toggle{
+  min-height:44px;
+  padding:0 18px;
+  border:0;
+  border-bottom:1px solid rgba(246,215,154,.32);
+  background:transparent;
+  color:var(--dw509-gold);
+  font:700 .875rem/1 system-ui,sans-serif;
+  cursor:pointer;
+  touch-action:manipulation;
+}
+
+#dailyCard .dw509__intention-toggle:focus-visible,
+#dailyCard .dw509__constellation button:focus-visible,
+#dailyCard .dw509__actions button:focus-visible{
+  outline:2px solid var(--dw509-gold-hot);
+  outline-offset:3px;
+}
+
+#dailyCard .dw509__intention{
+  width:min(380px,100%);
+  display:grid;
+  gap:8px;
+}
+
+#dailyCard .dw509__intention label{
+  color:var(--dw509-muted);
+  font:600 .875rem/1.4 system-ui,sans-serif;
+  text-align:center;
+}
+
+#dailyCard .dw509__intention input{
+  width:100%;
+  min-height:48px;
+  padding:0 18px;
+  border:1px solid rgba(246,215,154,.25);
+  border-radius:999px;
+  background:rgba(7,2,15,.72);
+  color:var(--dw509-ink);
+  font:500 1rem/1.2 system-ui,sans-serif;
+  text-align:center;
+  outline:none;
+}
+
+#dailyCard .dw509__intention input:focus{
+  border-color:rgba(246,215,154,.68);
+  box-shadow:0 0 0 4px rgba(163,71,255,.13),0 0 30px rgba(163,71,255,.1);
+}
+
+#dailyCard .dw509.is-opening .dw509__orb-host{
+  animation:dw509-summon .72s cubic-bezier(.16,.9,.2,1) both;
+}
+
+#dailyCard .dw509.is-opening .dw509__portal{
+  opacity:1;
+  scale:1.2;
+}
+
+#dailyCard .dw509.is-opening .dw509__sanctuary{
+  box-shadow:inset 0 0 140px rgba(189,74,255,.15),0 0 90px rgba(255,76,207,.1),0 32px 110px rgba(0,0,0,.32);
+}
+
+#dailyCard .dw509.is-revealed .dw509__sanctuary{
+  min-height:clamp(700px,82vh,880px);
+  align-content:start;
+  grid-template-rows:auto auto auto auto;
+  padding-top:clamp(38px,6vw,62px);
+  background:
+    radial-gradient(ellipse 42% 58% at 50% 36%,rgba(255,104,213,.14),transparent 69%),
+    radial-gradient(circle at 50% 54%,rgba(153,55,255,.18),transparent 29%),
+    linear-gradient(180deg,rgba(18,6,35,.82),rgba(4,1,10,.94));
+}
+
+#dailyCard .dw509.is-revealed .dw509__portal{
+  top:35%;
+  opacity:.72;
+}
+
+#dailyCard .dw509.is-revealed .dw509__orb-host{
+  --supreme-orb-claimed-size:clamp(94px,17vw,128px);
+  margin-top:clamp(-38px,-4vw,-22px);
+}
+
+#dailyCard .dw509__card{
+  position:relative;
+  z-index:6;
+  width:clamp(205px,34vw,282px);
+  aspect-ratio:2/3;
+  align-self:end;
+  border-radius:clamp(16px,3vw,24px);
+  outline:none;
+  filter:drop-shadow(0 30px 68px rgba(0,0,0,.62));
+}
+
+#dailyCard .dw509__card::before,
+#dailyCard .dw509__card::after{
+  content:"";
+  position:absolute;
+  pointer-events:none;
+  border-radius:inherit;
+}
+
+#dailyCard .dw509__card::before{
+  inset:-2px;
+  z-index:-1;
+  background:linear-gradient(145deg,rgba(255,245,213,.92),rgba(255,104,207,.54) 34%,rgba(138,60,255,.62) 72%,rgba(246,215,154,.88));
+  filter:blur(.2px);
+}
+
+#dailyCard .dw509__card::after{
+  inset:-12%;
+  z-index:-2;
+  background:radial-gradient(ellipse,rgba(255,90,210,.18),rgba(137,58,255,.08) 48%,transparent 72%);
+  filter:blur(16px);
+}
+
+#dailyCard .dw509__card img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:inherit;
+  background:#0b0613;
+}
+
+#dailyCard .dw509.is-born .dw509__card{
+  animation:dw509-card-birth 1.08s cubic-bezier(.14,.84,.14,1) both;
+}
+
+#dailyCard .dw509.is-born .dw509__card::before{
+  animation:dw509-card-corona 1.08s ease-out both;
+}
+
+#dailyCard .dw509__identity{
+  position:relative;
+  z-index:5;
+  max-width:670px;
+  text-align:center;
+}
+
+#dailyCard .dw509__identity>span{
+  color:var(--dw509-gold);
+  font:750 .75rem/1 system-ui,sans-serif;
+  letter-spacing:.22em;
+}
+
+#dailyCard .dw509__identity h3{
+  margin:8px 0 7px;
+  color:var(--dw509-ink);
+  font:500 clamp(2rem,4.8vw,2.8rem)/1 Georgia,serif;
+}
+
+#dailyCard .dw509__identity p{
+  margin:0;
+  color:var(--dw509-muted);
+  font:600 .875rem/1.55 system-ui,sans-serif;
+}
+
+#dailyCard .dw509__private{
+  position:relative;
+  z-index:5;
+  max-width:560px;
+  margin:0;
+  color:rgba(246,236,251,.8);
+  font:italic 1rem/1.55 Georgia,serif;
+  text-align:center;
+}
+
+#dailyCard .dw509__constellation{
+  width:min(860px,100%);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:8px;
+}
+
+#dailyCard .dw509__constellation button{
+  min-height:58px;
+  padding:9px 7px;
+  border:1px solid rgba(246,215,154,.17);
+  border-radius:18px;
+  background:rgba(10,4,20,.68);
+  color:var(--dw509-muted);
+  font:700 .875rem/1.2 system-ui,sans-serif;
+  cursor:pointer;
+  touch-action:manipulation;
+  transition:transform .2s ease,border-color .25s ease,color .25s ease,background .25s ease,box-shadow .25s ease;
+}
+
+#dailyCard .dw509__constellation button span{
+  display:block;
+  margin-bottom:5px;
+  color:var(--dw509-gold);
+  font-size:.875rem;
+}
+
+#dailyCard .dw509__constellation button[aria-pressed="true"]{
+  color:var(--dw509-ink);
+  border-color:rgba(246,215,154,.62);
+  background:linear-gradient(150deg,rgba(102,40,145,.78),rgba(48,17,78,.78));
+  box-shadow:0 0 30px rgba(163,71,255,.13),inset 0 0 20px rgba(255,216,154,.04);
+}
+
+#dailyCard .dw509__constellation button:active,
+#dailyCard .dw509__actions button:active{
+  transform:scale(.97);
+}
+
+#dailyCard .dw509__layer{
+  width:min(800px,100%);
+  margin:0 auto;
+  padding:clamp(22px,3.5vw,34px);
+  border:1px solid rgba(246,215,154,.15);
+  border-radius:clamp(24px,4vw,32px);
+  background:
+    radial-gradient(circle at 12% 5%,rgba(165,69,255,.11),transparent 34%),
+    linear-gradient(155deg,rgba(27,10,43,.78),rgba(6,2,13,.83));
+  box-shadow:0 28px 78px rgba(0,0,0,.22),inset 0 0 1px rgba(255,246,221,.28);
+}
+
+#dailyCard .dw509__layer>span{
+  display:block;
+  margin-bottom:14px;
+  color:var(--dw509-gold);
+  font:750 .75rem/1 system-ui,sans-serif;
+  letter-spacing:.22em;
+}
+
+#dailyCard .dw509__layer p{
+  margin:0;
+  color:rgba(250,243,253,.9);
+  font:400 clamp(1rem,2.2vw,1.18rem)/1.74 Georgia,serif;
+}
+
+#dailyCard .dw509__layer p+p{
+  margin-top:16px;
+  padding-top:16px;
+  border-top:1px solid rgba(246,215,154,.1);
+}
+
+#dailyCard .dw509__actions{
+  width:min(800px,100%);
+  margin:0 auto;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+#dailyCard .dw509__actions button{
+  min-height:48px;
+  padding:0 20px;
+  border:1px solid rgba(246,215,154,.24);
+  border-radius:999px;
+  background:rgba(13,5,25,.75);
+  color:var(--dw509-gold);
+  font:700 .875rem/1.2 system-ui,sans-serif;
+  cursor:pointer;
+  touch-action:manipulation;
+  transition:transform .2s ease,border-color .2s ease,background .2s ease;
+}
+
+#dailyCard .dw509__actions button:first-child{
+  background:linear-gradient(135deg,rgba(126,49,177,.72),rgba(62,22,95,.82));
+  border-color:rgba(246,215,154,.4);
+}
+
+#dailyCard .dw509__actions button:disabled{
+  opacity:.65;
+  cursor:default;
+}
+
+#dailyCard .dw509__sr{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
+
+@keyframes dw509-nebula-spin{to{rotate:360deg}}
+@keyframes dw509-breathe{50%{scale:1.1;opacity:.72}}
+@keyframes dw509-orbit{to{rotate:360deg}}
+@keyframes dw509-orbit-reverse{to{rotate:-360deg}}
+@keyframes dw509-orb-aura{50%{transform:scale(1.1);opacity:.92}}
+@keyframes dw509-orb-ring{to{rotate:360deg}}
+@keyframes dw509-summon{
+  0%{transform:scale(1);filter:brightness(1)}
+  46%{transform:scale(.88);filter:brightness(1.52) saturate(1.28)}
+  100%{transform:scale(1.08);filter:brightness(1.12)}
+}
+@keyframes dw509-card-birth{
+  0%{opacity:0;transform:translateY(128px) scale(.42);filter:blur(18px) brightness(2)}
+  38%{opacity:.78;transform:translateY(32px) scale(.86);filter:blur(5px) brightness(1.42)}
+  68%{opacity:1;transform:translateY(-12px) scale(1.035);filter:blur(0) brightness(1.12)}
+  100%{transform:none;filter:none}
+}
+@keyframes dw509-card-corona{
+  0%{opacity:0;filter:brightness(2.4) blur(8px);transform:scale(.72)}
+  48%{opacity:1;filter:brightness(1.5) blur(1px);transform:scale(1.025)}
+  100%{opacity:1;filter:none;transform:none}
+}
+
+@media(max-width:720px){
+  #dailyCard.daily-world-v509-host{padding-inline:10px!important}
+  #dailyCard .dw509{gap:16px}
+  #dailyCard .dw509__head{align-items:start;padding-inline:4px}
+  #dailyCard .dw509__head time{max-width:142px;font-size:.75rem}
+  #dailyCard .dw509__sanctuary{min-height:590px;border-radius:36px;padding-inline:14px}
+  #dailyCard .dw509.is-revealed .dw509__sanctuary{min-height:720px}
+  #dailyCard .dw509__constellation{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+  #dailyCard .dw509__constellation button{min-height:56px}
+}
+
+@media(max-width:410px){
+  #dailyCard .dw509__head{display:grid;gap:8px}
+  #dailyCard .dw509__head time{max-width:none;text-align:left}
+  #dailyCard .dw509__orb-host{--supreme-orb-claimed-size:min(46vw,190px)}
+  #dailyCard .dw509.is-revealed .dw509__orb-host{--supreme-orb-claimed-size:min(29vw,112px)}
+  #dailyCard .dw509__card{width:min(68vw,244px)}
+  #dailyCard .dw509__actions{display:grid;grid-template-columns:1fr}
+  #dailyCard .dw509__actions button{width:100%}
+}
+
+@media(prefers-reduced-motion:reduce){
+  #dailyCard .dw509__sanctuary::before,
+  #dailyCard .dw509__sanctuary::after,
+  #dailyCard .dw509__portal,
+  #dailyCard .dw509__orb-host::before,
+  #dailyCard .dw509__orb-host::after,
+  #dailyCard .dw509__orb-host,
+  #dailyCard .dw509__card,
+  #dailyCard .dw509__card::before{
+    animation:none!important;
+    transition:none!important;
+  }
+}

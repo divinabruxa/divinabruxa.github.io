@@ -1,0 +1,59 @@
+DIVINA BRUXA — MACROETAPA 2
+V509 · CARTA DO DIA VIVA · AMANHECER DA ORBE
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+
+1. Abra o ZIP.
+2. Selecione os 7 arquivos soltos.
+3. Envie todos diretamente para a raiz do repositório.
+4. Não crie nenhuma pasta.
+5. Autorize a substituição de:
+   - app-v208.js
+   - page-loader-v1.js
+   - sw.js
+6. Os outros 4 arquivos são novos.
+7. Aguarde o GitHub Pages terminar a atualização.
+8. Feche todas as abas antigas da Divina Bruxa e abra o site novamente.
+
+O QUE ESTA VERSÃO FAZ
+
+- Mantém a Orbe Suprema V501 como o único corpo vivo do site.
+- Remove a cópia visual usada no centro da Carta do Dia.
+- Leva fisicamente a própria V501 ao altar diário.
+- Faz a carta nascer da Orbe com aurora, fogo dourado e partículas magenta.
+- Preserva uma carta por dia, no fuso de Brasília.
+- Preserva cartas sempre diretas e o catálogo oficial de 78 cartas.
+- Preserva a autoridade da conta e a continuidade deste dispositivo.
+- Preserva significado profundo, intenção privada, Diário e presença local da Whit.
+- Mantém o Tarot Livre V508 e o Menu V502 intactos.
+- Melhora a atualização do PWA para versões futuras sem alterar dados seguros.
+
+ARQUIVOS NOVOS
+
+- daily-world-v509.js
+- daily-world-v509.css
+- CARTA-DO-DIA-VIVA-V509-CONTRACT.json
+- 00-INSTALE-V509.txt
+
+ARQUIVOS QUE SUBSTITUEM
+
+- app-v208.js
+- page-loader-v1.js
+- sw.js
+
+NÃO FOI ALTERADO
+
+- DNS
+- publicação automática
+- cobrança real
+- servidor ou personalidade da Whit
+- banco de dados
+- Orbe V501
+- Menu V502
+- Tarot Livre V508
+
+ROLLBACK
+
+Se desejar voltar, reinstale o pacote V508. Os arquivos V509 podem permanecer
+na raiz: sem o carregador V509 eles ficam inertes.
+

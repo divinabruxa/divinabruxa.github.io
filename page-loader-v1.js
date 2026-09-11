@@ -1,5 +1,5 @@
-/* DIVINA BRUXA 2.0 — MACROETAPA V508 · CARREGADOR DA CHAMA SOBERANA VOLUMÉTRICA
-   V501 permanece a única Orbe viva; V508 adiciona nébulas e células de plasma. */
+/* DIVINA BRUXA 2.0 — MACROETAPA V509 · CARREGADOR DA CARTA DO DIA VIVA
+   V501 permanece a única Orbe viva e agora viaja ao ritual diário. */
 
 import {
   normalizeRouteId,
@@ -150,11 +150,20 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       return instance;
     },
     daily: async()=>{
+      globalThis.divinaDailyWorldV509?.destroy?.();
+      delete globalThis.divinaDailyWorldV509;
+      document.getElementById('divinaDailyRebirthV303')?.remove();
       const [,module]=await Promise.all([
-        ensureStyle('divinaDailyRebirthV303','daily-world-v303.css?v=303'),
-        import('./daily-world-v303.js?v=303')
+        ensureStyle('divinaDailyLivingV509','daily-world-v509.css?v=509'),
+        import('./daily-world-v509.js?v=509')
       ]);
-      return new module.DailyWorldV303($('#dailyCard'),{onSave:remember,authClient});
+      const instance=new module.DailyWorldV509($('#dailyCard'),{
+        onSave:remember,
+        authClient,
+        orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme
+      });
+      globalThis.divinaDailyWorldV509=instance;
+      return instance;
     },
     library: async()=>{
       const [,module]=await Promise.all([
@@ -247,8 +256,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       import('./tarot-livre-supremo-v508.js?v=508')
     ]),
     daily:()=>Promise.all([
-      ensureStyle('divinaDailyRebirthV303','daily-world-v303.css?v=303'),
-      import('./daily-world-v303.js?v=303')
+      ensureStyle('divinaDailyLivingV509','daily-world-v509.css?v=509'),
+      import('./daily-world-v509.js?v=509')
     ]),
     library:()=>Promise.all([
       ensureStyle('divinaLibraryRebirthV302','library-world-v302.css?v=302'),

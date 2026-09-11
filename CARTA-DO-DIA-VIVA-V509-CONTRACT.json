@@ -1,0 +1,104 @@
+{
+  "product": "Divina Bruxa / Orbe das Realidades",
+  "macro_stage": 2,
+  "release": "V509",
+  "name": "Carta do Dia Viva — Amanhecer da Orbe",
+  "status": "installation-package",
+  "scope": "daily-card-experience",
+  "visual_thesis": "A única Orbe viva atravessa o site e amanhece dentro do altar diário; a carta surge verticalmente de uma aurora dourada, magenta e violeta.",
+  "live_audit_before_change": {
+    "site": "https://divinabruxa.com.br/#daily",
+    "observed_module": "DailyWorldV303",
+    "daily_rule_copy": "1 carta · 1 dia · Brasília · sempre direta",
+    "living_orb_count": 1,
+    "daily_center_before_v509": "independent visual button using the orb image",
+    "preserved_features": [
+      "Brasilia daily boundary",
+      "account authority when signed in",
+      "device continuity when signed out",
+      "normal orientation only",
+      "deep meaning layers",
+      "private intention",
+      "save to journal",
+      "local Whit whisper"
+    ]
+  },
+  "immutable_authorities": {
+    "living_orb": "V501",
+    "orb_count": 1,
+    "orbital_menu": "V502",
+    "menu_fluidity": "V504",
+    "free_tarot": "V508",
+    "daily_policy": "V303",
+    "daily_time_zone": "America/Sao_Paulo",
+    "deck_size": 78,
+    "orientation": "normal-only"
+  },
+  "v509_experience": {
+    "module": "DailyWorldV509",
+    "engine": "DailyAuroraEngineV509",
+    "canonical_orb_claim": true,
+    "duplicate_daily_orb": false,
+    "states": [
+      "sealed",
+      "summoning",
+      "revealed"
+    ],
+    "visual_layers": [
+      "responsive canvas starfield",
+      "violet cosmic breath",
+      "golden dawn halo",
+      "magenta rising embers",
+      "vertical card birth beam",
+      "card-edge corona"
+    ],
+    "interaction": {
+      "primary_action": "touch the V501 orb",
+      "minimum_touch_target_px": 44,
+      "native_haptics_only": true,
+      "navigator_vibrate": false,
+      "reduced_motion": true,
+      "save_data_tier": true
+    },
+    "continuity": {
+      "storage_key_preserved": "daily",
+      "existing_v303_record_preserved_until_next_day": true,
+      "account_server_record_preserved": true,
+      "offline_previously_revealed_preserved": true
+    }
+  },
+  "security_and_cost": {
+    "server_schema_changed": false,
+    "new_api_calls": 0,
+    "paid_ai_enabled": false,
+    "whit_server_changed": false,
+    "auth_cache_allowed": false,
+    "billing_cache_allowed": false,
+    "admin_cache_allowed": false,
+    "consultation_submission_cache_allowed": false
+  },
+  "files": {
+    "new": [
+      "00-INSTALE-V509.txt",
+      "CARTA-DO-DIA-VIVA-V509-CONTRACT.json",
+      "daily-world-v509.css",
+      "daily-world-v509.js"
+    ],
+    "replace": [
+      "app-v208.js",
+      "page-loader-v1.js",
+      "sw.js"
+    ],
+    "total": 7,
+    "flat_root": true
+  },
+  "authorization_locks": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "orbe_ai_sol_enabled": false
+  },
+  "rollback": "Reinstall V508; V509-only assets may remain inert in the repository."
+}
+
