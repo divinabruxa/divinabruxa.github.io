@@ -1,15 +1,17 @@
-/* DIVINA BRUXA — MENU ORBITAL V502 · AFINAÇÃO DE FLUIDEZ V504
+/* DIVINA BRUXA — MENU ORBITAL V502 · GEOMETRIA VIVA V510
    A Orbe Suprema V501 é o único corpo vivo. Este menu a recebe fisicamente,
-   organiza treze realidades em duas órbitas e devolve a mesma Orbe à Home.
+   organiza treze realidades em duas órbitas elípticas responsivas e devolve
+   a mesma Orbe à Home. Os nomes têm ancoragem própria e nunca orbitam sobre
+   a Orbe ou uns sobre os outros.
 */
 
 const VERSION = 502;
 const INSTANCE = Symbol.for('divina.orbital.menu.v502');
 const ROOT_ID = 'divinaOrbitalMenuV502';
 const STYLE_ID = 'divinaOrbitalMenuV502Styles';
-const STYLE_HREF = './orbital-menu-v502.css?v=504-fluidity';
-const OPEN_MS = 430;
-const CLOSE_MS = 250;
+const STYLE_HREF = './orbital-menu-v502.css?v=510-living-geometry';
+const OPEN_MS = 350;
+const CLOSE_MS = 190;
 
 const INNER = Object.freeze([
   { route:'tarot', label:'Tarot Livre', icon:'tarot' },
@@ -48,6 +50,7 @@ const ICONS = Object.freeze({
 
 const wait = milliseconds => new Promise(resolve => setTimeout(resolve, Math.max(0, milliseconds)));
 const frame = () => new Promise(resolve => requestAnimationFrame(resolve));
+const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 const reducedMotion = () => globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
 
 function routeNow() {
@@ -60,12 +63,18 @@ function routeNow() {
 }
 
 function installStyles() {
-  if (document.getElementById(STYLE_ID)) return;
+  const existing = document.getElementById(STYLE_ID);
+  if (existing) {
+    existing.href = STYLE_HREF;
+    existing.dataset.fluidity = 'v510';
+    return;
+  }
   const link = document.createElement('link');
   link.id = STYLE_ID;
   link.rel = 'stylesheet';
   link.href = STYLE_HREF;
   link.dataset.orbitalMenuStyle = 'v502';
+  link.dataset.fluidity = 'v510';
   document.head.append(link);
 }
 
@@ -78,7 +87,7 @@ function portalMarkup(item, ring, index, count) {
   const angle = start + ((360 / count) * index);
   const inverse = -angle;
   const spoken = item.spoken || item.label;
-  return `<button type="button" class="db502-portal db502-portal--${ring}" data-v502-route="${item.route}" data-go="${item.route}" aria-label="${spoken}" style="--portal-i:${index};--portal-angle:${angle}deg;--portal-inverse:${inverse}deg"><span class="db502-portal__jewel">${iconMarkup(item.icon)}<i aria-hidden="true"></i></span><span class="db502-portal__label">${item.label}</span></button>`;
+  return `<button type="button" class="db502-portal db502-portal--${ring}" data-v502-route="${item.route}" data-v502-ring="${ring}" data-v502-index="${index}" data-go="${item.route}" aria-label="${spoken}" style="--portal-i:${index};--portal-angle:${angle}deg;--portal-inverse:${inverse}deg"><span class="db502-portal__jewel">${iconMarkup(item.icon)}<i aria-hidden="true"></i></span><span class="db502-portal__label">${item.label}</span></button>`;
 }
 
 function createScene() {
@@ -181,6 +190,7 @@ export class OrbitalMenuV502 {
     this.motionToken = 0;
     this.navigating = false;
     this.returningHome = false;
+    this.layoutFrame = 0;
 
     document.documentElement.dataset.menuAuthority = 'v502';
     this.menuButton.setAttribute('aria-controls', ROOT_ID);
@@ -189,6 +199,7 @@ export class OrbitalMenuV502 {
     if (this.legacy && 'inert' in this.legacy) this.legacy.inert = true;
 
     this.bind();
+    this.layoutPortals();
     this.syncRoute(routeNow());
     this.setMenuButton(false);
     this.publish('closed', 'install');
@@ -290,6 +301,105 @@ export class OrbitalMenuV502 {
         this.close({ restoreFocus:false, reason:'orb-navigation', immediate:true });
       }
     }, { signal });
+
+    const requestLayout = () => {
+      cancelAnimationFrame(this.layoutFrame);
+      this.layoutFrame = requestAnimationFrame(() => this.layoutPortals());
+    };
+    globalThis.addEventListener?.('resize', requestLayout, { passive:true, signal });
+    globalThis.addEventListener?.('orientationchange', requestLayout, { passive:true, signal });
+    globalThis.visualViewport?.addEventListener?.('resize', requestLayout, { passive:true, signal });
+  }
+
+  layoutPortals() {
+    if (!this.root?.isConnected) return;
+    const bounds = this.root.getBoundingClientRect();
+    const width = Math.max(280, Math.round(bounds.width || innerWidth || 390));
+    const height = Math.max(320, Math.round(globalThis.visualViewport?.height || bounds.height || innerHeight || 760));
+    const narrow = width <= 430;
+    const short = height < 700;
+    const landscape = width > height * 1.15 && height <= 560;
+    const labelHalf = narrow ? 35 : 42;
+    const outerX = landscape
+      ? clamp(width * 0.34, 174, Math.min(260, width / 2 - labelHalf - 9))
+      : clamp(width * 0.405, narrow ? 112 : 148, Math.min(226, width / 2 - labelHalf - 7));
+    const innerX = landscape
+      ? clamp(width * 0.2, 104, Math.min(160, outerX - 55))
+      : clamp(width * 0.285, narrow ? 88 : 112, Math.min(154, outerX - (narrow ? 36 : 48)));
+    const outerY = landscape
+      ? clamp(height * 0.3, 104, 146)
+      : clamp(height * 0.285, short ? 174 : 194, 310);
+    const innerY = landscape
+      ? clamp(height * 0.19, 62, Math.min(96, outerY - 43))
+      : clamp(height * 0.16, short ? 104 : 118, Math.min(178, outerY - 70));
+    const preferredY = height * (landscape ? 0.54 : short ? 0.525 : 0.52);
+    const upperLimit = (short ? 61 : 92) + outerY * 0.91 + (narrow ? 43 : 50);
+    const lowerLimit = height - (short ? 38 : 52) - outerY - (narrow ? 39 : 47);
+    const centerY = Math.round(landscape
+      ? preferredY
+      : lowerLimit >= upperLimit ? clamp(preferredY, upperLimit, lowerLimit) : preferredY);
+    const orbSize = Math.round(clamp(
+      Math.min(width * (landscape ? 0.17 : 0.285), height * (landscape ? 0.27 : 0.16)),
+      landscape ? 88 : short ? 96 : 108,
+      landscape ? 118 : 150
+    ));
+
+    this.root.style.setProperty('--db502-center-y', `${centerY}px`);
+    this.root.style.setProperty('--db502-inner-x', `${Math.round(innerX)}px`);
+    this.root.style.setProperty('--db502-inner-y', `${Math.round(innerY)}px`);
+    this.root.style.setProperty('--db502-outer-x', `${Math.round(outerX)}px`);
+    this.root.style.setProperty('--db502-outer-y', `${Math.round(outerY)}px`);
+    this.root.style.setProperty('--db502-orb-size', `${orbSize}px`);
+
+    this.buttons.forEach((button, order) => {
+      const ring = button.dataset.v502Ring === 'outer' ? 'outer' : 'inner';
+      const index = Number(button.dataset.v502Index || 0);
+      const count = ring === 'outer' ? OUTER.length : INNER.length;
+      const start = ring === 'inner' ? -90 : (-90 + (180 / count));
+      const degrees = start + (360 / count) * index;
+      const radians = degrees * Math.PI / 180;
+      const rx = ring === 'outer' ? outerX : innerX;
+      const ry = ring === 'outer' ? outerY : innerY;
+      const x = Math.cos(radians) * rx;
+      const y = Math.sin(radians) * ry;
+      const sine = Math.sin(radians);
+      let anchor = sine < 0 ? 'top' : 'bottom';
+      // Portais quase horizontais usam o lado oposto à órbita vizinha. Isso
+      // mantém rótulos longos afastados mesmo em iPhones estreitos.
+      if (ring === 'outer' && Math.abs(sine) < 0.31) {
+        anchor = sine < 0 ? 'bottom' : 'top';
+      }
+      if (short && ring === 'inner' && index === 0) anchor = 'bottom';
+      if (short && ring === 'inner' && (index === 2 || index === 4)) anchor = 'top';
+      button.dataset.labelAnchor = anchor;
+      button.style.setProperty('--portal-x', `${x.toFixed(2)}px`);
+      button.style.setProperty('--portal-y', `${y.toFixed(2)}px`);
+      button.style.setProperty('--portal-delay', `${order * (narrow ? 9 : 11)}ms`);
+    });
+
+    this.root.dataset.layout = landscape ? 'landscape-v510' : narrow ? 'portrait-compact-v510' : 'ellipse-v510';
+    document.documentElement.dataset.menuFluidity = 'v510';
+    requestAnimationFrame(() => this.auditLabels());
+  }
+
+  auditLabels() {
+    if (!this.root?.isConnected || this.root.hidden) return 0;
+    const labels = this.buttons
+      .map(button => button.querySelector('.db502-portal__label')?.getBoundingClientRect())
+      .filter(rect => rect?.width && rect?.height);
+    let overlaps = 0;
+    for (let left = 0; left < labels.length; left += 1) {
+      for (let right = left + 1; right < labels.length; right += 1) {
+        const a = labels[left];
+        const b = labels[right];
+        if (a.left < b.right - 1 && a.right > b.left + 1 && a.top < b.bottom - 1 && a.bottom > b.top + 1) {
+          overlaps += 1;
+        }
+      }
+    }
+    this.root.dataset.labelOverlaps = String(overlaps);
+    document.documentElement.dataset.menuLabelOverlaps = String(overlaps);
+    return overlaps;
   }
 
   setMenuButton(open) {
@@ -326,6 +436,7 @@ export class OrbitalMenuV502 {
     this.root.hidden = false;
     this.root.setAttribute('aria-hidden', 'false');
     document.documentElement.classList.add('db502-menu-open');
+    this.layoutPortals();
     await frame();
     if (token !== this.motionToken || !this.targetOpen) return false;
     this.root.classList.add('is-open');
@@ -356,6 +467,7 @@ export class OrbitalMenuV502 {
     await wait(reducedMotion() ? 30 : OPEN_MS);
     if (token !== this.motionToken || !this.targetOpen) return false;
     this.publish('open', 'settled');
+    this.auditLabels();
     this.live.textContent = 'Menu aberto. Escolha uma realidade.';
     try { this.core.orb?.focus?.({ preventScroll:true }); } catch {}
     return true;
@@ -459,12 +571,15 @@ export class OrbitalMenuV502 {
       extraApiCalls:0,
       webVibration:false,
       nativeHapticsOnly:true,
-      fluidityTuning:'v504'
+      fluidityTuning:'v510',
+      responsiveEllipse:true,
+      labelOverlaps:Number(this.root?.dataset.labelOverlaps || 0)
     });
   }
 
   destroy() {
     this.abort.abort();
+    cancelAnimationFrame(this.layoutFrame);
     this.motionToken += 1;
     this.targetOpen = false;
     try { this.releaseOrb?.(); }
@@ -477,6 +592,8 @@ export class OrbitalMenuV502 {
     document.documentElement.classList.remove('db502-menu-open');
     delete document.documentElement.dataset.menuAuthority;
     delete document.documentElement.dataset.menuState;
+    delete document.documentElement.dataset.menuFluidity;
+    delete document.documentElement.dataset.menuLabelOverlaps;
     if (this.legacy && 'inert' in this.legacy) this.legacy.inert = false;
     delete globalThis.divinaMenuV502;
     delete globalThis[INSTANCE];

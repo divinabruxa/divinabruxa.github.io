@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — MACROETAPA V509 · CARTA DO DIA VIVA · BOOT-SAFE
+/* DIVINA BRUXA — MACROETAPA V510 · UNIVERSO VIVO E FLUIDEZ SUPREMA · BOOT-SAFE
    V501 continua como a única Orbe Suprema, V502 preserva o menu orbital,
-   V508 mantém a Chama Soberana e V509 leva a própria Orbe ao ritual diário. */
+   V510 torna Menu e Tarot fluidos e V509 permanece no ritual diário. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -13,7 +13,7 @@ import { AccountEngineV201 } from './account-engine-v201.js?v=201';
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=319';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=508';
+import { createPageLoader } from './page-loader-v1.js?v=510-living-universe';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -54,7 +54,7 @@ const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
     document.documentElement.dataset.orbMenuSupremeError = 'v327';
   });
 
-const startOrbitalMenuV502 = () => import('./orbital-menu-v502.js?v=504-fluidity')
+const startOrbitalMenuV502 = () => import('./orbital-menu-v502.js?v=510-living-geometry')
   .then(module => module.installOrbitalMenuV502?.({ core:supremeOrb, go }))
   .catch(error => {
     console.error('[Divina] Menu Orbital Vivo V502 não iniciou', error);
@@ -179,13 +179,13 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V509 = 509;
-const releaseReloadKeyV509 = `divina-release-reload-${RELEASE_EPOCH_V509}`;
-const reloadForNewReleaseV509 = version => {
-  if (Number(version || 0) <= RELEASE_EPOCH_V509) return false;
+const RELEASE_EPOCH_V510 = 510;
+const releaseReloadKeyV510 = `divina-release-reload-${RELEASE_EPOCH_V510}`;
+const reloadForNewReleaseV510 = version => {
+  if (Number(version || 0) <= RELEASE_EPOCH_V510) return false;
   try {
-    if (sessionStorage.getItem(releaseReloadKeyV509)) return false;
-    sessionStorage.setItem(releaseReloadKeyV509, String(version));
+    if (sessionStorage.getItem(releaseReloadKeyV510)) return false;
+    sessionStorage.setItem(releaseReloadKeyV510, String(version));
   } catch {}
   location.reload();
   return true;
@@ -194,7 +194,7 @@ const reloadForNewReleaseV509 = version => {
 navigator.serviceWorker?.addEventListener('message', event => {
   if (event.data?.type === 'DIVINA_RELEASE_READY') {
     document.documentElement.dataset.releaseReady = String(event.data.version || 'unknown');
-    reloadForNewReleaseV509(event.data.version);
+    reloadForNewReleaseV510(event.data.version);
     return;
   }
   if (event.data?.type !== 'divina-notification-open') return;
@@ -204,15 +204,15 @@ navigator.serviceWorker?.addEventListener('message', event => {
   }
 });
 
-if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV509) {
-  window.__divinaSWBootstrapV509 = true;
+if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV510) {
+  window.__divinaSWBootstrapV510 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=509', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=510', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v509';
+        document.documentElement.dataset.releaseEpoch = 'v510';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V509 registrado');
+        console.info('[Divina] PWA V510 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -524,7 +524,7 @@ const awaken = async () => {
     document.documentElement.dataset.bootRecovery = 'v326';
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
     dispatchEvent(new CustomEvent('divina:boot-ready', {
-      detail: { shell:'v180', recovery:'v326', bootFirst:true, supremeOrb:'v501', orbitalMenu:'v502', tarotLivre:'v508', dailyWorld:'v509', fluidity:'v504', stellarFire:'v508', plasmaFilaments:true, volumetricPlasma:true, cosmicNebula:true, cardEdgeBurst:true, oneLivingDailyOrb:true }
+      detail: { shell:'v180', recovery:'v326', bootFirst:true, supremeOrb:'v501', orbitalMenu:'v502', tarotLivre:'v510', dailyWorld:'v509', fluidity:'v510', stellarFire:'v510', plasmaFilaments:true, volumetricPlasma:true, cosmicNebula:true, livingUniverse:true, decodedBeforeSwap:true, unexplainedFlyingCards:false, cardEdgeBurst:true, oneLivingDailyOrb:true }
     }));
 
     // O menu é opcional para o boot: a Home abre mesmo se esta camada falhar.

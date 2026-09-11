@@ -1,5 +1,5 @@
-/* DIVINA BRUXA 2.0 — MACROETAPA V509 · CARREGADOR DA CARTA DO DIA VIVA
-   V501 permanece a única Orbe viva e agora viaja ao ritual diário. */
+/* DIVINA BRUXA 2.0 — MACROETAPA V510 · CARREGADOR DE FLUIDEZ SUPREMA
+   V501 permanece a única Orbe viva; V509 diário é preservado sem mudanças. */
 
 import {
   normalizeRouteId,
@@ -127,6 +127,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       delete globalThis.divinaTarotLivreV506;
       globalThis.divinaTarotLivreV507?.destroy?.();
       delete globalThis.divinaTarotLivreV507;
+      globalThis.divinaTarotLivreV508?.destroy?.();
+      delete globalThis.divinaTarotLivreV508;
       [
         'freeTarotFireEngineV345Styles',
         'divinaTarotLivreCosmicoV500',
@@ -137,16 +139,17 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
         'divinaTarotLivreSupremoV504',
         'divinaTarotLivreSupremoV505',
         'divinaTarotLivreSupremoV506',
-        'divinaTarotLivreSupremoV507'
+        'divinaTarotLivreSupremoV507',
+        'divinaTarotLivreSupremoV508'
       ].forEach(styleId=>document.getElementById(styleId)?.remove());
       const [,module]=await Promise.all([
-        ensureStyle('divinaTarotLivreSupremoV508','tarot-livre-supremo-v508.css?v=508'),
-        import('./tarot-livre-supremo-v508.js?v=508')
+        ensureStyle('divinaTarotLivreSupremoV510','tarot-livre-supremo-v510.css?v=510-living-universe'),
+        import('./tarot-livre-supremo-v510.js?v=510-living-universe')
       ]);
-      const instance=new module.TarotLivreSupremeV508($('#tarot'),{
+      const instance=new module.TarotLivreSupremeV510($('#tarot'),{
         orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme
       });
-      globalThis.divinaTarotLivreV508=instance;
+      globalThis.divinaTarotLivreV510=instance;
       return instance;
     },
     daily: async()=>{
@@ -252,8 +255,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
 
   const warmers=Object.freeze({
     tarot:()=>Promise.all([
-      ensureStyle('divinaTarotLivreSupremoV508','tarot-livre-supremo-v508.css?v=508'),
-      import('./tarot-livre-supremo-v508.js?v=508')
+      ensureStyle('divinaTarotLivreSupremoV510','tarot-livre-supremo-v510.css?v=510-living-universe'),
+      import('./tarot-livre-supremo-v510.js?v=510-living-universe')
     ]),
     daily:()=>Promise.all([
       ensureStyle('divinaDailyLivingV509','daily-world-v509.css?v=509'),

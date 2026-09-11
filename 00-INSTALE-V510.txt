@@ -1,0 +1,66 @@
+DIVINA BRUXA — MACROETAPA 1
+V510 · UNIVERSO VIVO · FLUIDEZ SUPREMA
+
+PRÉ-REQUISITO
+
+- A V509 deve estar instalada. Esta V510 foi construída diretamente sobre ela.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+
+1. Abra o ZIP.
+2. Selecione os 9 arquivos soltos.
+3. Envie todos diretamente para a raiz do repositório.
+4. Não crie nenhuma pasta.
+5. Autorize a substituição dos 5 arquivos indicados abaixo.
+6. Os outros 4 arquivos são novos.
+7. Aguarde o GitHub Pages terminar a atualização.
+8. Feche todas as abas antigas da Divina Bruxa e abra o site novamente.
+
+O QUE ESTA VERSÃO CORRIGE
+
+- Reorganiza os 13 portais do Menu V502 em duas órbitas elípticas responsivas.
+- Dá uma posição própria a cada nome do menu, sem frases umas sobre as outras.
+- Mantém ícones e nomes inteiros sensíveis ao toque.
+- Abre e fecha o menu com resposta mais rápida e animações só de transform/opacidade.
+- Mantém a Orbe Suprema V501 como o único corpo vivo do site.
+- Remove as cartas decorativas que vagavam no fundo do Tarot Livre.
+- Cria um universo vivo de galáxias, nébulas, estrelas e plasma nascido da Orbe.
+- Faz a chama viajar da Orbe até o portal da carta com menos estouro branco.
+- Impede o retângulo preto: a carta anterior permanece visível até a próxima
+  imagem terminar de carregar e decodificar.
+- Sincroniza o aparecimento da carta, o fogo estelar, o contador e a grade.
+- Usa alvo de 60 fps com redução automática de qualidade quando o aparelho pede.
+- Mantém 78 cartas diretas, sem repetição, seis por fileira, embaralhar e reiniciar.
+- Mantém a Carta do Dia V509 exatamente como já instalada.
+
+ARQUIVOS NOVOS
+
+- tarot-livre-supremo-v510.js
+- tarot-livre-supremo-v510.css
+- UNIVERSO-VIVO-V510-CONTRACT.json
+- 00-INSTALE-V510.txt
+
+ARQUIVOS QUE SUBSTITUEM
+
+- app-v208.js
+- page-loader-v1.js
+- sw.js
+- orbital-menu-v502.js
+- orbital-menu-v502.css
+
+NÃO FOI ALTERADO
+
+- DNS
+- publicação automática
+- cobrança real
+- servidor, mente ou personalidade da Whit
+- banco de dados
+- Orbe Suprema V501
+- Carta do Dia V509
+- dados e cartas já reveladas do Tarot Livre
+
+ROLLBACK
+
+Se desejar voltar, reinstale o pacote V509. Os dois arquivos novos do Tarot V510
+podem permanecer na raiz: sem o carregador V510 eles ficam inertes.
+

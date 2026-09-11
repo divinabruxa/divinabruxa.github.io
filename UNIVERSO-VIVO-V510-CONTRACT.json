@@ -1,0 +1,134 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "release": "V510",
+  "name": "Universo Vivo — Fluidez Suprema",
+  "macro_stage": "Macroetapa 1 — Núcleo Orbe–Menu–Tarot, reafinação V510",
+  "scope": "Corrigir a geometria responsiva do Menu V502 e reconstruir a fluidez do Tarot Livre como um universo vivo que nasce da Orbe V501, preservando integralmente a Carta do Dia V509.",
+  "prerequisites": [
+    "V501 — Núcleo da Orbe Suprema",
+    "V502 — Menu Orbital Vivo",
+    "V508 — Tarot Livre com 78 cartas diretas",
+    "V509 — Carta do Dia Viva"
+  ],
+  "replace": [
+    "app-v208.js",
+    "page-loader-v1.js",
+    "sw.js",
+    "orbital-menu-v502.js",
+    "orbital-menu-v502.css"
+  ],
+  "new": [
+    "tarot-livre-supremo-v510.js",
+    "tarot-livre-supremo-v510.css",
+    "UNIVERSO-VIVO-V510-CONTRACT.json",
+    "00-INSTALE-V510.txt"
+  ],
+  "observed_v509_mobile_problem": {
+    "source": "user supplied 512x1108 screen recording and screenshots",
+    "menu_labels_crossed_neighboring_portals": true,
+    "card_image_black_gap_observed": true,
+    "duplicate_birth_bursts_observed": true,
+    "unexplained_decorative_card_backs_observed": true,
+    "daily_world_active": "v509",
+    "canonical_orb_active": "v501",
+    "menu_authority_active": "v502"
+  },
+  "canonical_orb": {
+    "core": "SupremeOrbCoreV501",
+    "second_orb_created": false,
+    "one_living_orb": true,
+    "physical_claim_and_return_preserved": true,
+    "menu_authority_preserved": "V502"
+  },
+  "responsive_menu": {
+    "authority": "V502",
+    "fluidity_tuning": "V510",
+    "portals": 13,
+    "inner_ring_portals": 6,
+    "outer_ring_portals": 7,
+    "geometry": "responsive ellipses with independent x/y radii",
+    "responsive_layouts": [
+      "portrait compact",
+      "portrait ellipse",
+      "short landscape"
+    ],
+    "label_anchors": "top/bottom anchors selected by ring, angle and short-screen clearance",
+    "label_audit_exposed": true,
+    "open_ms": 350,
+    "close_ms": 190,
+    "label_and_icon_touchable": true,
+    "returns_to_home_before_portal_navigation": true
+  },
+  "living_universe": {
+    "engine": "SupremeVolumetricFlameEngineV510",
+    "renderers": [
+      "WebGL",
+      "Canvas fallback"
+    ],
+    "spiral_galaxies": 3,
+    "nebula_layers": 3,
+    "stable_star_field": true,
+    "orb_to_card_plasma_stream": true,
+    "decorative_flying_cards": false,
+    "card_origin": "Supreme Orb V501",
+    "single_birth_burst": true,
+    "broad_white_explosion": false
+  },
+  "atomic_card_birth": {
+    "previous_card_removed_before_next_ready": false,
+    "incoming_image_forced_eager": true,
+    "incoming_image_decode_required": true,
+    "swap_after_decode": true,
+    "failure_behavior": "preserve the previous visible card",
+    "image_timeout_ms": 4800,
+    "card_arrival_ms": 360,
+    "stellar_birth_wave_ms": 620,
+    "card_counter_grid_same_birth_turn": true
+  },
+  "performance": {
+    "standard_target_fps": 60,
+    "constrained_target_fps": 36,
+    "reduced_motion_target_fps": 24,
+    "adaptive_floor_fps": 42,
+    "mobile_webgl_render_scale": 0.62,
+    "mobile_effects_scale": 1.12,
+    "hidden_route_animation_pause": true,
+    "offscreen_animation_pause": true,
+    "particle_budget_reduced_from_v508": true,
+    "duplicate_ignite_removed_from_birth": true
+  },
+  "tarot_rules": {
+    "deck_size": 78,
+    "normal_orientation_only": true,
+    "reversed_cards": false,
+    "repetition_before_completion": false,
+    "automatic_meanings": false,
+    "revealed_grid_columns": 6,
+    "shuffle_preserves_revealed_cards": true,
+    "reset_confirmation": "two taps when the circle contains revealed cards",
+    "storage_key_preserved": "free-tarot",
+    "cross_tab_coordination_preserved": true
+  },
+  "preserved_worlds": {
+    "daily_world": "V509 unchanged",
+    "daily_source_files_in_package": false,
+    "whit_logic_or_persona_changed": false,
+    "existing_tarot_session_data_changed": false
+  },
+  "accessibility_and_safety": {
+    "keyboard_navigation": true,
+    "minimum_portal_touch_target_px": 44,
+    "native_haptics_only": true,
+    "browser_vibration_used": false,
+    "reduced_motion_supported": true,
+    "screen_reader_live_status": true
+  },
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "database_changes_authorized": false,
+    "whit_server_or_advice_logic_changed": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}
