@@ -1,0 +1,132 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "release": "V508",
+  "name": "Chama Soberana Volumétrica",
+  "macro_stage": "Macroetapa 1 — Núcleo Orbe–Menu–Tarot, evolução V508",
+  "scope": "Dar volume cósmico ao fogo Canvas observado na V507 usando nébulas, estrelas estáveis e células de plasma, preservando a Orbe V501, o Menu V502, a coroa da carta e todas as leis do Tarot Livre.",
+  "prerequisites": [
+    "V501 — Núcleo da Orbe Suprema",
+    "V502 — Menu Orbital Vivo",
+    "V507 — Chama Estelar Orgânica e Altar Responsivo"
+  ],
+  "replace": [
+    "app-v208.js",
+    "page-loader-v1.js",
+    "sw.js"
+  ],
+  "new": [
+    "tarot-livre-supremo-v508.js",
+    "tarot-livre-supremo-v508.css",
+    "CHAMA-SOBERANA-V508-CONTRACT.json",
+    "00-INSTALE-V508.txt"
+  ],
+  "live_v507_audit": {
+    "tarot_world": "supremo-v507",
+    "renderer_observed": "canvas",
+    "flame_texture": "organic-plasma",
+    "birth_corona": "card-edge",
+    "birth_sync": "atomic",
+    "one_living_orb": true,
+    "canonical_orb_version": 501,
+    "home_orb_centered": true,
+    "home_orb_opens_tarot": true,
+    "menu_authority": "v502",
+    "revealed_before_test": 10,
+    "revealed_after_test": 11,
+    "revealed_card": "A Estrela",
+    "principal_card_counter_grid_match": true,
+    "repetition_observed": false,
+    "reversed_card_observed": false,
+    "site_origin_console_errors_found": false,
+    "calibration_target": "The resting organic flame was visually thinner than the supplied cosmic-fire reference."
+  },
+  "canonical_orb": {
+    "core": "SupremeOrbCoreV501",
+    "renderer": "RealityOrbEngine V208 governed by V501",
+    "second_orb_created": false,
+    "one_living_orb": true,
+    "menu_authority_preserved": "V502",
+    "home_double_tap_preserved": true
+  },
+  "volumetric_flame": {
+    "engine": "SupremeVolumetricFlameEngineV508",
+    "canvas_nebula_layers": 3,
+    "field_stars_constrained": 54,
+    "field_stars_standard": 82,
+    "plasma_cells_constrained": 18,
+    "plasma_cells_standard": 28,
+    "primary_filaments": 5,
+    "organic_tongues_constrained": 16,
+    "organic_tongues_standard": 24,
+    "travelling_starlets_constrained": 22,
+    "travelling_starlets_standard": 34,
+    "webgl_volume_calibrated": true,
+    "broad_white_band_reintroduced": false,
+    "continuous_ambient_embers": true,
+    "particle_streaks": true
+  },
+  "birth_energy": {
+    "summon_particles_constrained": 112,
+    "summon_particles_standard": 190,
+    "edge_sparks_constrained": 74,
+    "edge_sparks_standard": 126,
+    "birth_particle_budget_constrained": 380,
+    "birth_particle_budget_standard": 680,
+    "card_edge_corona_preserved": true,
+    "layered_rectangular_rings": 3,
+    "stellar_rays": 12,
+    "card_image_gate_ms": 280,
+    "card_departure_ms": 145,
+    "card_arrival_ms": 350,
+    "stellar_birth_wave_ms": 760,
+    "atomic_sequence_preserved": true
+  },
+  "responsive_altar": {
+    "mobile_stage_min_height_px": 650,
+    "mobile_title_and_mesa_separated": true,
+    "six_card_grid_preserved": true,
+    "safe_area_preserved": true,
+    "whit_safe_zone_preserved": true
+  },
+  "tarot_rules": {
+    "deck_size": 78,
+    "normal_orientation_only": true,
+    "reversed_cards": false,
+    "repetition_before_completion": false,
+    "automatic_meanings": false,
+    "revealed_grid_columns": 6,
+    "shuffle_preserves_revealed_cards": true,
+    "reset_confirmation": "two taps when the circle contains revealed cards",
+    "storage_key_preserved": "free-tarot",
+    "cross_tab_coordination_preserved": true
+  },
+  "accessibility_and_performance": {
+    "keyboard_navigation": true,
+    "touch_targets_preserved": true,
+    "native_haptics_only": true,
+    "browser_vibration_used": false,
+    "reduced_motion_keeps_calm_fire": true,
+    "hidden_route_animation_pause": true,
+    "offscreen_animation_pause": true,
+    "adaptive_particle_budget": true,
+    "offline_core_updated": true
+  },
+  "whit_safe_zone": {
+    "logic_or_persona_changed": false,
+    "server_changed": false,
+    "visual_safe_zone_preserved": true
+  },
+  "legacy_state": {
+    "v500_through_v507_files_may_remain_on_server": true,
+    "v507_loaded_after_v508_activation": false,
+    "v501_and_v502_remain_authorities": true
+  },
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "whit_server_or_advice_logic_changed": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}

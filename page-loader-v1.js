@@ -1,5 +1,5 @@
-/* DIVINA BRUXA 2.0 — MACROETAPA V507 · CARREGADOR DA CHAMA ESTELAR ORGÂNICA
-   V501 permanece a única Orbe viva; V507 adiciona plasma, fagulhas e coroa da carta. */
+/* DIVINA BRUXA 2.0 — MACROETAPA V508 · CARREGADOR DA CHAMA SOBERANA VOLUMÉTRICA
+   V501 permanece a única Orbe viva; V508 adiciona nébulas e células de plasma. */
 
 import {
   normalizeRouteId,
@@ -125,6 +125,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       delete globalThis.divinaTarotLivreV505;
       globalThis.divinaTarotLivreV506?.destroy?.();
       delete globalThis.divinaTarotLivreV506;
+      globalThis.divinaTarotLivreV507?.destroy?.();
+      delete globalThis.divinaTarotLivreV507;
       [
         'freeTarotFireEngineV345Styles',
         'divinaTarotLivreCosmicoV500',
@@ -134,16 +136,17 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
         'divinaTarotLivreSupremoV503',
         'divinaTarotLivreSupremoV504',
         'divinaTarotLivreSupremoV505',
-        'divinaTarotLivreSupremoV506'
+        'divinaTarotLivreSupremoV506',
+        'divinaTarotLivreSupremoV507'
       ].forEach(styleId=>document.getElementById(styleId)?.remove());
       const [,module]=await Promise.all([
-        ensureStyle('divinaTarotLivreSupremoV507','tarot-livre-supremo-v507.css?v=507'),
-        import('./tarot-livre-supremo-v507.js?v=507')
+        ensureStyle('divinaTarotLivreSupremoV508','tarot-livre-supremo-v508.css?v=508'),
+        import('./tarot-livre-supremo-v508.js?v=508')
       ]);
-      const instance=new module.TarotLivreSupremeV507($('#tarot'),{
+      const instance=new module.TarotLivreSupremeV508($('#tarot'),{
         orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme
       });
-      globalThis.divinaTarotLivreV507=instance;
+      globalThis.divinaTarotLivreV508=instance;
       return instance;
     },
     daily: async()=>{
@@ -240,8 +243,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
 
   const warmers=Object.freeze({
     tarot:()=>Promise.all([
-      ensureStyle('divinaTarotLivreSupremoV507','tarot-livre-supremo-v507.css?v=507'),
-      import('./tarot-livre-supremo-v507.js?v=507')
+      ensureStyle('divinaTarotLivreSupremoV508','tarot-livre-supremo-v508.css?v=508'),
+      import('./tarot-livre-supremo-v508.js?v=508')
     ]),
     daily:()=>Promise.all([
       ensureStyle('divinaDailyRebirthV303','daily-world-v303.css?v=303'),
