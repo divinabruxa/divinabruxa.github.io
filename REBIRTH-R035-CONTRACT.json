@@ -1,0 +1,58 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R035",
+  "release": "V335",
+  "world": "Menu Scene Zero",
+  "reason": "Print mostrou centro vazio apesar de novos portais. A solução passa a reparentar a Orbe real para a cena do Menu e devolvê-la à Home.",
+  "replace": [
+    "app-v208.js"
+  ],
+  "new": [
+    "menu-scene-v335.js",
+    "menu-scene-v335.css",
+    "REBIRTH-R035-CONTRACT.json"
+  ],
+  "architecture": {
+    "routingAuthority": "Navigation V210",
+    "orbEngine": "V208",
+    "actualOrbStageReparented": true,
+    "duplicateOrb": false,
+    "legacyMenuVisualHidden": true,
+    "oldRebirthMenusNotLoadedByApp": true,
+    "oldA11yMenuDestroyedOnInstall": true,
+    "secondRouter": false
+  },
+  "motion": {
+    "existingV210FlipReused": true,
+    "open": "Home real orb rect -> scene slot rect",
+    "close": "scene slot rect -> Home real orb rect",
+    "reversalSupportedByV210": true,
+    "portalsCollapseTowardOrb": true,
+    "secondaryWave": true
+  },
+  "labels": {
+    "notifications": "Notificações"
+  },
+  "whit": {
+    "V333Preserved": true,
+    "hiddenOnHome": true,
+    "hiddenWhileMenuOpen": true,
+    "doubleTapMessages": true,
+    "holdToDrag": true
+  },
+  "preserve": [
+    "P0 V326 boot-first",
+    "Dock Stability V326",
+    "Whit Orbit V333",
+    "Tarot Livre V330",
+    "Tiragens V331",
+    "Biblioteca Profunda V332"
+  ],
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}

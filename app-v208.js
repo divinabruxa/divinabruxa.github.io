@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — REBIRTH R034 · MENU CELESTIAL V334 · BOOT-SAFE */
+/* DIVINA BRUXA — REBIRTH R035 · MENU SCENE ZERO V335 · BOOT-SAFE */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -52,12 +52,11 @@ const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
     document.documentElement.dataset.orbMenuSupremeError = 'v327';
   });
 
-const startMenuCelestialV334 = () => startOrbMenuSupremeV327()
-  .then(() => import('./menu-celestial-v334.js?v=334'))
-  .then(module => module.installMenuCelestialV334?.({ go }))
+const startMenuSceneV335 = () => import('./menu-scene-v335.js?v=335')
+  .then(module => module.installMenuSceneV335?.({ go }))
   .catch(error => {
-    console.error('[Divina] Menu Celestial V334 não iniciou', error);
-    document.documentElement.dataset.menuRebornError = 'v334';
+    console.error('[Divina] Menu Scene V335 não iniciou', error);
+    document.documentElement.dataset.menuRebornError = 'v335';
   });
 
 const startFreeTarotSupremeV330 = () => import('./free-tarot-supreme-v330.js?v=330')
@@ -479,7 +478,7 @@ const awaken = async () => {
     }));
 
     // R027/R028 são opcionais: nunca bloqueiam a abertura da Home.
-    startMenuCelestialV334();
+    startMenuSceneV335();
     startWhitUniversalV333();
     startFreeTarotSupremeV330();
     startSpreadsSupremeV331();
@@ -512,7 +511,7 @@ const awaken = async () => {
     // Último fail-open visual: o HTML da Home existe e deve continuar acessível.
     document.documentElement.dataset.appShell = 'v180-emergency';
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
-    startMenuCelestialV334();
+    startMenuSceneV335();
     startWhitUniversalV333();
     startFreeTarotSupremeV330();
     startSpreadsSupremeV331();
