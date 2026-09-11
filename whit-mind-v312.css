@@ -1,58 +1,92 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R013 · WHIT MIND V312 */
+/* DIVINA BRUXA 2.0 — REBIRTH R015 · WHIT EMBODIED PRESENCE V314
+   Replacement visual layer for Whit Mind V312.
+   Logic, consent envelopes, generation bridge and API flow remain untouched. */
 
 .whit-mind-v312{
   position:relative;
   display:grid;
-  grid-template-columns:52px minmax(0,1fr);
+  grid-template-columns:54px minmax(0,1fr);
   gap:13px;
   align-items:center;
   margin:-6px 0 17px;
   padding:14px 15px;
   overflow:hidden;
-  border:1px solid rgba(207,161,247,.18);
+  border:1px solid rgba(207,161,247,.19);
   border-radius:20px;
   background:
-    radial-gradient(circle at 4% 46%,rgba(172,66,228,.19),transparent 28%),
-    radial-gradient(circle at 96% 140%,rgba(236,195,110,.08),transparent 42%),
-    linear-gradient(135deg,rgba(18,7,29,.79),rgba(6,4,12,.82));
-  box-shadow:inset 0 1px rgba(255,255,255,.035),0 15px 42px rgba(0,0,0,.10);
+    radial-gradient(circle at 4% 46%,rgba(172,66,228,.20),transparent 28%),
+    radial-gradient(circle at 96% 140%,rgba(236,195,110,.085),transparent 42%),
+    linear-gradient(135deg,rgba(18,7,29,.80),rgba(6,4,12,.84));
+  box-shadow:inset 0 1px rgba(255,255,255,.04),0 15px 42px rgba(0,0,0,.11);
+  isolation:isolate;
 }
 .whit-mind-v312::before{
   content:"";
   position:absolute;
   inset:0;
   pointer-events:none;
-  background:linear-gradient(105deg,transparent 18%,rgba(255,255,255,.025) 47%,transparent 72%);
+  background:linear-gradient(105deg,transparent 18%,rgba(255,255,255,.028) 47%,transparent 72%);
   transform:translateX(-70%);
   animation:wm312Sweep 9s ease-in-out infinite;
 }
 .whit-mind-v312__orb{
   position:relative;
   z-index:1;
-  width:48px;
-  height:48px;
+  width:50px;
+  height:50px;
   display:grid;
   place-items:center;
+  overflow:visible;
   border-radius:50%;
-  border:1px solid rgba(236,199,126,.34);
+  border:1px solid rgba(236,199,126,.38);
   background:
-    radial-gradient(circle at 38% 32%,rgba(244,218,255,.30),transparent 15%),
-    radial-gradient(circle at 50% 55%,rgba(131,43,181,.60),rgba(31,9,47,.88) 57%,rgba(7,3,13,.98) 76%);
-  box-shadow:0 0 21px rgba(184,74,229,.18),inset 0 0 15px rgba(235,190,255,.11);
+    radial-gradient(circle at 31% 23%,rgba(255,253,244,.90) 0 2%,rgba(244,218,255,.38) 3%,transparent 9%),
+    radial-gradient(circle at 59% 39%,rgba(206,125,255,.31),transparent 28%),
+    radial-gradient(circle at 50% 57%,rgba(131,43,181,.67),rgba(31,9,47,.90) 57%,rgba(7,3,13,.99) 77%);
+  box-shadow:
+    0 0 21px rgba(184,74,229,.22),
+    0 0 38px rgba(184,74,229,.08),
+    inset 0 0 15px rgba(235,190,255,.13),
+    inset 0 -9px 15px rgba(0,0,0,.28);
+  animation:wm314CompanionBreath 4.8s ease-in-out infinite;
+  transform:translateZ(0);
+}
+.whit-mind-v312__orb::before{
+  content:"";
+  position:absolute;
+  inset:-6px;
+  border-radius:50%;
+  border:1px solid rgba(224,185,247,.12);
+  transform:rotate(18deg) scaleY(.74);
+  box-shadow:0 0 16px rgba(173,72,222,.10);
+  animation:wm314CompanionOrbit 9s linear infinite;
+}
+.whit-mind-v312__orb::after{
+  content:"";
+  position:absolute;
+  width:3px;
+  height:3px;
+  right:4px;
+  top:8px;
+  border-radius:50%;
+  background:#fff1c7;
+  box-shadow:-26px 8px 0 rgba(235,204,255,.64),-16px 29px 0 rgba(223,180,255,.48),-31px 22px 0 rgba(255,221,157,.44);
+  opacity:.70;
+  animation:wm314CompanionStars 5.8s ease-in-out infinite;
 }
 .whit-mind-v312__orb i{
   position:absolute;
   inset:-5px;
   border-radius:50%;
-  border:1px solid rgba(218,175,247,.11);
+  border:1px solid rgba(218,175,247,.10);
   animation:wm312Breath 4.8s ease-in-out infinite;
 }
 .whit-mind-v312__orb b{
   position:relative;
-  z-index:1;
-  color:#efd093;
+  z-index:2;
+  color:#f2d79c;
   font:400 15px/1 Georgia,serif;
-  text-shadow:0 0 14px rgba(239,208,147,.40);
+  text-shadow:0 0 9px rgba(239,208,147,.58),0 0 20px rgba(198,102,245,.36);
 }
 .whit-mind-v312__body{position:relative;z-index:1;min-width:0}
 .whit-mind-v312__title{display:flex;gap:9px;align-items:baseline;justify-content:space-between;flex-wrap:wrap}
@@ -106,7 +140,70 @@
   box-shadow:inset 0 1px rgba(255,255,255,.045),0 0 32px rgba(145,54,190,.10);
 }
 .whit-mind-v312[data-envelope="ready"] .whit-mind-v312__orb{
-  box-shadow:0 0 27px rgba(191,78,235,.26),0 0 42px rgba(231,192,112,.08),inset 0 0 17px rgba(235,190,255,.13);
+  box-shadow:0 0 27px rgba(191,78,235,.29),0 0 44px rgba(231,192,112,.09),inset 0 0 17px rgba(235,190,255,.14);
+}
+
+/* V314 RESPONSE SOUL — the existing pending bubble becomes Whit's visible thinking state. */
+#aiApp:has(.ai-streaming) .whit-mind-v312{
+  border-color:rgba(230,190,123,.34);
+  box-shadow:inset 0 1px rgba(255,255,255,.05),0 0 38px rgba(161,64,207,.13),0 15px 42px rgba(0,0,0,.10);
+}
+#aiApp:has(.ai-streaming) .whit-mind-v312__orb{
+  animation:wm314ThinkingOrb 1.55s cubic-bezier(.37,0,.63,1) infinite;
+  border-color:rgba(244,211,142,.62);
+}
+#aiApp:has(.ai-streaming) .whit-mind-v312__orb::before{
+  animation-duration:2.2s;
+  border-color:rgba(233,196,249,.28);
+}
+#aiApp:has(.ai-streaming) .whit-mind-v312__meter i{
+  width:52%;
+  animation:wm314ThinkingLine 1.55s ease-in-out infinite;
+}
+
+/* Conversation semantics: user remains user; Whit replies gain a restrained companion glow. */
+#aiApp .ai-chat .bubble.bot{
+  border-color:rgba(199,145,231,.16);
+  box-shadow:inset 0 1px rgba(255,255,255,.025),0 9px 28px rgba(15,4,28,.09);
+}
+#aiApp .ai-chat .bubble.bot.ai-welcome{
+  border-color:rgba(225,188,119,.18);
+}
+#aiApp .ai-chat .bubble.bot.ai-welcome > span[aria-hidden="true"],
+#aiApp .ai-chat .bubble.bot.ai-streaming > span[aria-hidden="true"]{
+  flex:0 0 auto;
+  width:28px;
+  height:28px;
+  display:grid;
+  place-items:center;
+  align-self:flex-start;
+  border:1px solid rgba(237,199,128,.34);
+  border-radius:50%;
+  color:#f2d79b;
+  background:
+    radial-gradient(circle at 34% 28%,rgba(255,255,255,.58),transparent 8%),
+    radial-gradient(circle at 50% 55%,rgba(130,42,179,.70),rgba(29,8,43,.96) 65%,rgba(6,3,12,.99));
+  box-shadow:0 0 13px rgba(191,77,235,.22),inset 0 0 10px rgba(235,190,255,.08);
+  text-shadow:0 0 9px rgba(244,211,143,.54);
+}
+#aiApp .ai-chat .bubble.bot.ai-streaming{
+  border-color:rgba(225,184,239,.24);
+  background:
+    radial-gradient(circle at 9% 50%,rgba(180,70,226,.08),transparent 28%),
+    linear-gradient(135deg,rgba(33,13,48,.50),rgba(14,7,23,.44));
+  box-shadow:0 0 24px rgba(161,66,207,.09),inset 0 1px rgba(255,255,255,.025);
+}
+#aiApp .ai-chat .bubble.bot.ai-streaming > span[aria-hidden="true"]{
+  animation:wm314PendingCore 1.45s ease-in-out infinite;
+}
+#aiApp .ai-chat .bubble.bot.ai-streaming small{
+  color:rgba(234,202,137,.72);
+  letter-spacing:.09em;
+}
+
+/* Explicitly keep user messages visually separate from Whit. */
+#aiApp .ai-chat .bubble.user{
+  filter:none;
 }
 
 @keyframes wm312Breath{
@@ -123,16 +220,51 @@
   68%{opacity:.75}
   88%,100%{transform:translateX(72%);opacity:0}
 }
+@keyframes wm314CompanionBreath{
+  0%,100%{transform:scale(.97);filter:brightness(.96)}
+  50%{transform:scale(1.025);filter:brightness(1.06)}
+}
+@keyframes wm314CompanionOrbit{
+  from{transform:rotate(18deg) scaleY(.74)}
+  to{transform:rotate(378deg) scaleY(.74)}
+}
+@keyframes wm314CompanionStars{
+  0%,100%{opacity:.38}
+  50%{opacity:.86}
+}
+@keyframes wm314ThinkingOrb{
+  0%,100%{transform:scale(.965);filter:brightness(.98);box-shadow:0 0 22px rgba(184,74,229,.25),0 0 39px rgba(184,74,229,.08),inset 0 0 15px rgba(235,190,255,.13)}
+  50%{transform:scale(1.055);filter:brightness(1.14);box-shadow:0 0 27px rgba(220,112,255,.42),0 0 58px rgba(203,92,244,.18),0 0 76px rgba(236,198,121,.08),inset 0 0 18px rgba(249,215,255,.18)}
+}
+@keyframes wm314ThinkingLine{
+  0%{transform:translateX(-105%);opacity:.18}
+  48%{opacity:.92}
+  100%{transform:translateX(205%);opacity:.16}
+}
+@keyframes wm314PendingCore{
+  0%,100%{transform:scale(.92);box-shadow:0 0 12px rgba(191,77,235,.20),inset 0 0 10px rgba(235,190,255,.08)}
+  50%{transform:scale(1.08);box-shadow:0 0 18px rgba(218,105,255,.37),0 0 29px rgba(236,196,118,.10),inset 0 0 12px rgba(245,210,255,.12)}
+}
 
 @media(max-width:520px){
-  .whit-mind-v312{grid-template-columns:43px 1fr;gap:10px;padding:12px;margin-top:-5px}
-  .whit-mind-v312__orb{width:39px;height:39px}
+  .whit-mind-v312{grid-template-columns:45px 1fr;gap:10px;padding:12px;margin-top:-5px}
+  .whit-mind-v312__orb{width:41px;height:41px}
   .whit-mind-v312__title strong{font-size:8px}
   .whit-mind-v312 p{font-size:9px}
   .whit-mind-v312__badges span{font-size:6.5px}
+  #aiApp .ai-chat .bubble.bot.ai-welcome > span[aria-hidden="true"],
+  #aiApp .ai-chat .bubble.bot.ai-streaming > span[aria-hidden="true"]{width:25px;height:25px}
 }
+
 @media(prefers-reduced-motion:reduce){
   .whit-mind-v312::before,
+  .whit-mind-v312__orb,
+  .whit-mind-v312__orb::before,
+  .whit-mind-v312__orb::after,
   .whit-mind-v312__orb i,
-  .whit-mind-v312__meter i{animation:none!important}
+  .whit-mind-v312__meter i,
+  #aiApp .ai-chat .bubble.bot.ai-streaming > span[aria-hidden="true"]{
+    animation:none!important;
+    transition:none!important;
+  }
 }

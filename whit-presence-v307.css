@@ -1,10 +1,13 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R008 · WHIT PRESENCE V307
-   Presença global leve. A Home permanece sem texto concorrendo com a Orbe. */
+/* DIVINA BRUXA 2.0 — REBIRTH R015 · WHIT EMBODIED PRESENCE V314
+   Replacement visual layer for the existing Whit Presence V307 runtime.
+   The Home remains silent because V307 runtime is still the authority. */
 
 :root{
-  --whit-presence-gold:rgba(239,205,133,.92);
-  --whit-presence-violet:rgba(190,91,245,.86);
-  --whit-presence-bg:rgba(10,4,18,.78);
+  --whit-presence-gold:rgba(239,205,133,.94);
+  --whit-presence-violet:rgba(190,91,245,.88);
+  --whit-presence-bg:rgba(10,4,18,.80);
+  --whit-v314-core:#f8dfa5;
+  --whit-v314-deep:#09030e;
 }
 
 .whit-presence-v307{
@@ -15,18 +18,22 @@
   width:min(calc(100vw - 28px),430px);
   min-height:58px;
   display:grid;
-  grid-template-columns:42px minmax(0,1fr);
+  grid-template-columns:46px minmax(0,1fr);
   align-items:center;
   gap:10px;
-  padding:9px 14px 9px 10px;
-  border:1px solid rgba(235,198,124,.20);
+  padding:9px 15px 9px 9px;
+  border:1px solid rgba(235,198,124,.22);
   border-radius:999px;
   background:
-    radial-gradient(circle at 11% 35%,rgba(190,81,238,.18),transparent 28%),
-    linear-gradient(135deg,rgba(24,9,35,.88),var(--whit-presence-bg));
-  box-shadow:0 18px 55px rgba(0,0,0,.34),inset 0 1px rgba(255,245,220,.055);
-  backdrop-filter:blur(18px) saturate(1.08);
-  -webkit-backdrop-filter:blur(18px) saturate(1.08);
+    radial-gradient(circle at 9% 40%,rgba(194,82,242,.20),transparent 29%),
+    radial-gradient(circle at 88% 120%,rgba(231,190,106,.055),transparent 42%),
+    linear-gradient(135deg,rgba(24,9,35,.90),var(--whit-presence-bg));
+  box-shadow:
+    0 18px 55px rgba(0,0,0,.35),
+    0 0 34px rgba(156,53,208,.06),
+    inset 0 1px rgba(255,245,220,.06);
+  backdrop-filter:blur(19px) saturate(1.10);
+  -webkit-backdrop-filter:blur(19px) saturate(1.10);
   opacity:0;
   visibility:hidden;
   pointer-events:none;
@@ -37,6 +44,7 @@
     visibility 0s linear .62s;
   will-change:opacity,transform;
   contain:layout style paint;
+  isolation:isolate;
 }
 .whit-presence-v307.is-visible{
   opacity:1;
@@ -46,41 +54,84 @@
 }
 .whit-presence-v307.no-transition{transition:none!important}
 
+/* V314: the old sigil reads unmistakably as a small living companion orb. */
 .whit-presence-v307__sigil{
   position:relative;
-  width:40px;
-  height:40px;
+  z-index:2;
+  width:42px;
+  height:42px;
   display:grid;
   place-items:center;
-  border:1px solid rgba(239,205,133,.52);
+  overflow:visible;
+  border:1px solid rgba(242,210,145,.58);
   border-radius:50%;
   background:
-    radial-gradient(circle at 33% 23%,rgba(255,250,235,.82) 0 2%,rgba(215,142,255,.28) 8%,transparent 28%),
-    radial-gradient(circle,#40125b 0,#180822 58%,#09030e 100%);
+    radial-gradient(circle at 32% 23%,rgba(255,252,244,.92) 0 2%,rgba(255,238,199,.46) 3%,transparent 8%),
+    radial-gradient(circle at 57% 38%,rgba(215,142,255,.36),transparent 29%),
+    radial-gradient(circle at 47% 58%,#57156f 0,#2a0a3a 34%,#15071f 61%,var(--whit-v314-deep) 100%);
   box-shadow:
-    inset 0 0 16px rgba(206,87,247,.20),
-    0 0 14px rgba(211,101,250,.20),
-    0 0 26px rgba(227,188,111,.08);
+    inset 0 0 8px rgba(255,255,255,.08),
+    inset 0 -9px 17px rgba(0,0,0,.38),
+    0 0 13px rgba(220,111,255,.28),
+    0 0 30px rgba(187,72,235,.14),
+    0 0 42px rgba(238,200,125,.07);
+  transform:translateZ(0);
+  animation:whitV314OrbBreath 4.6s ease-in-out infinite;
+}
+.whit-presence-v307__sigil::before{
+  content:"";
+  position:absolute;
+  inset:-5px;
+  border-radius:50%;
+  border:1px solid rgba(227,190,247,.15);
+  box-shadow:0 0 16px rgba(184,79,230,.13);
+  transform:rotate(14deg) scaleY(.72);
+  animation:whitV314Orbit 8.4s linear infinite;
+}
+.whit-presence-v307__sigil::after{
+  content:"";
+  position:absolute;
+  width:3px;
+  height:3px;
+  right:3px;
+  top:7px;
+  border-radius:50%;
+  background:#fff2c9;
+  box-shadow:
+    -21px 16px 0 rgba(240,211,255,.76),
+    -8px 25px 0 rgba(211,165,255,.55),
+    -27px 2px 0 rgba(255,229,173,.55),
+    0 0 8px rgba(255,236,190,.92);
+  opacity:.78;
+  animation:whitV314Stars 5.2s ease-in-out infinite;
 }
 .whit-presence-v307__sigil i{
+  position:relative;
+  z-index:2;
   width:8px;
   height:8px;
   border-radius:50%;
-  background:#f7dfa8;
-  box-shadow:0 0 8px #f3cf87,0 0 18px rgba(210,92,255,.78);
-  animation:whitV307Pulse 3.8s ease-in-out infinite;
+  background:var(--whit-v314-core);
+  box-shadow:
+    0 0 7px #f3cf87,
+    0 0 16px rgba(240,204,130,.72),
+    0 0 25px rgba(210,92,255,.62);
+  animation:whitV314Core 3.4s ease-in-out infinite;
 }
 .whit-presence-v307__aura{
   position:absolute;
-  left:10px;
-  width:40px;
-  height:40px;
+  z-index:1;
+  left:8px;
+  width:46px;
+  height:46px;
   border-radius:50%;
-  background:radial-gradient(circle,rgba(207,91,250,.22),transparent 68%);
+  background:radial-gradient(circle,rgba(207,91,250,.25),rgba(198,83,241,.08) 43%,transparent 70%);
   filter:blur(7px);
-  animation:whitV307Aura 5.6s ease-in-out infinite;
+  animation:whitV314Aura 5.4s ease-in-out infinite;
 }
 .whit-presence-v307__copy{
+  position:relative;
+  z-index:2;
   min-width:0;
   margin:0;
   display:grid;
@@ -90,28 +141,26 @@
   color:var(--whit-presence-gold);
   font:700 9px/1.1 system-ui,-apple-system,sans-serif;
   letter-spacing:.22em;
+  text-shadow:0 0 15px rgba(239,205,133,.14);
 }
 .whit-presence-v307__copy span{
-  color:#e7dce9;
+  color:#e9dfea;
   font:500 12px/1.35 Georgia,serif;
   text-wrap:balance;
 }
 
-/* A presença reage ao mundo sem redesenhar a página. */
+/* The existing local route tone remains authoritative. */
 html[data-whit-tone="tarot"] .whit-presence-v307__sigil,
 html[data-whit-tone="spreads"] .whit-presence-v307__sigil{filter:saturate(1.08)}
 html[data-whit-tone="school"] .whit-presence-v307__sigil{filter:brightness(1.06)}
 html[data-whit-tone="journal"] .whit-presence-v307__sigil{filter:saturate(.88)}
 html[data-whit-tone="ai"] .whit-presence-v307__sigil{filter:brightness(1.12) saturate(1.12)}
 
-/* Os convites já existentes para Whit ganham reconhecimento sutil.
-   Nenhum novo botão invade as páginas. */
+/* Existing invitations to Whit keep their subtle recognition. */
 html[data-whit-presence="v307"] [data-school-ai],
 html[data-whit-presence="v307"] [data-open-whit],
 html[data-whit-presence="v307"] [data-ai-open],
-html[data-whit-presence="v307"] [data-journal-ai]{
-  position:relative;
-}
+html[data-whit-presence="v307"] [data-journal-ai]{position:relative}
 html[data-whit-presence="v307"] [data-school-ai]::after,
 html[data-whit-presence="v307"] [data-open-whit]::after,
 html[data-whit-presence="v307"] [data-ai-open]::after,
@@ -124,30 +173,45 @@ html[data-whit-presence="v307"] [data-journal-ai]::after{
   box-shadow:0 0 0 1px rgba(232,192,119,.10),0 0 20px rgba(196,87,235,.08);
 }
 
-@keyframes whitV307Pulse{
-  0%,100%{transform:scale(.82);opacity:.72}
-  50%{transform:scale(1.08);opacity:1}
+@keyframes whitV314OrbBreath{
+  0%,100%{transform:scale(.965);box-shadow:inset 0 0 8px rgba(255,255,255,.08),inset 0 -9px 17px rgba(0,0,0,.38),0 0 12px rgba(220,111,255,.23),0 0 28px rgba(187,72,235,.10)}
+  50%{transform:scale(1.025);box-shadow:inset 0 0 9px rgba(255,255,255,.11),inset 0 -8px 16px rgba(0,0,0,.34),0 0 17px rgba(226,126,255,.36),0 0 37px rgba(198,89,240,.18)}
 }
-@keyframes whitV307Aura{
-  0%,100%{transform:scale(.85);opacity:.34}
-  50%{transform:scale(1.28);opacity:.72}
+@keyframes whitV314Core{
+  0%,100%{transform:scale(.80);opacity:.74}
+  50%{transform:scale(1.14);opacity:1}
+}
+@keyframes whitV314Aura{
+  0%,100%{transform:scale(.84);opacity:.34}
+  50%{transform:scale(1.24);opacity:.74}
+}
+@keyframes whitV314Orbit{
+  from{transform:rotate(14deg) scaleY(.72)}
+  to{transform:rotate(374deg) scaleY(.72)}
+}
+@keyframes whitV314Stars{
+  0%,100%{opacity:.42;filter:brightness(.9)}
+  48%{opacity:.88;filter:brightness(1.18)}
 }
 
 @media(max-width:430px){
   .whit-presence-v307{
     bottom:calc(84px + env(safe-area-inset-bottom));
     width:calc(100vw - 20px);
-    grid-template-columns:38px minmax(0,1fr);
+    grid-template-columns:40px minmax(0,1fr);
     min-height:54px;
-    padding:8px 12px 8px 9px;
+    padding:8px 12px 8px 8px;
   }
-  .whit-presence-v307__sigil,
-  .whit-presence-v307__aura{width:36px;height:36px}
+  .whit-presence-v307__sigil{width:38px;height:38px}
+  .whit-presence-v307__aura{left:6px;width:42px;height:42px}
   .whit-presence-v307__copy span{font-size:11px}
 }
 
 @media(prefers-reduced-motion:reduce){
   .whit-presence-v307,
+  .whit-presence-v307__sigil,
+  .whit-presence-v307__sigil::before,
+  .whit-presence-v307__sigil::after,
   .whit-presence-v307__sigil i,
   .whit-presence-v307__aura{
     animation:none!important;

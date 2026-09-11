@@ -1,0 +1,55 @@
+{
+  "release": "REBIRTH-R015",
+  "version": "V314",
+  "world": "Whit — Embodied Presence / Conversation Alchemy",
+  "purpose": "Make Whit visually legible as the Orb companion that is present, reflects and answers, without changing the approved Home Orb or the governed generation path.",
+  "files": {
+    "replace": [
+      "whit-presence-v307.css",
+      "whit-mind-v312.css"
+    ],
+    "new": [
+      "REBIRTH-R015-CONTRACT.json"
+    ]
+  },
+  "experience": {
+    "home": "Whit remains silent and does not overlay or redesign the approved central Home Orb.",
+    "otherWorlds": "Existing Whit Presence V307 appears briefly as a small living companion orb with contextual text and then rests.",
+    "aiWorld": "Whit Mind V312 reads as a companion orb. During the existing ai-streaming state the orb brightens and pulses while the existing response bubble says that the Orb is reflecting.",
+    "answer": "Existing assistant bubbles remain the canonical generated answer and are visually identified as Whit without changing their content.",
+    "audio": "No automatic audible speech is introduced in V314. Any future voice layer must be opt-in and use an original synthetic voice, never a real-person voice clone."
+  },
+  "preserves": {
+    "whitPresenceRuntime": "V307",
+    "whitMindRuntime": "V312",
+    "generationBridge": "V313",
+    "aiEngine": "V190",
+    "homeOrbEngine": true,
+    "homeOrbVisualIdentity": true,
+    "menuStateMachine": true,
+    "ledgerAuthority": "server",
+    "explicitPrivateContextConsent": true,
+    "historyLocalOnly": true
+  },
+  "guards": {
+    "newJavaScript": false,
+    "newNetworkCalls": 0,
+    "newAIRequests": 0,
+    "newStorage": false,
+    "automaticAudio": false,
+    "voiceClone": false,
+    "celebrityImpersonation": false,
+    "silentPrivateReads": false,
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  },
+  "accessibility": {
+    "prefersReducedMotion": true,
+    "textResponseRemainsPrimary": true,
+    "audioRequiredToUnderstand": false,
+    "mobileSafeAreaPreserved": true
+  }
+}
