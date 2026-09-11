@@ -1,0 +1,53 @@
+DIVINA BRUXA 2.0
+MACROETAPA V503 — TAROT LIVRE SUPREMO
+======================================
+
+PRÉ-REQUISITOS
+1. A V501 — Núcleo da Orbe Suprema deve estar instalada.
+2. A V502 — Menu Orbital Vivo deve estar instalada.
+
+COMO INSTALAR
+1. Abra o ZIP desta entrega.
+2. Envie TODOS os 7 arquivos diretamente para a mesma pasta raiz do site.
+3. Confirme a substituição destes 3 arquivos:
+   - app-v208.js
+   - page-loader-v1.js
+   - sw.js
+4. Confirme a inclusão dos 4 arquivos novos:
+   - tarot-livre-supremo-v503.js
+   - tarot-livre-supremo-v503.css
+   - TAROT-LIVRE-SUPREMO-V503-CONTRACT.json
+   - 00-INSTALE-V503.txt
+5. Não crie subpastas e não altere os nomes dos arquivos.
+6. Depois do envio, feche as abas antigas do site e abra-o novamente.
+
+O QUE ESTA VERSÃO FAZ
+- Mantém a Home V501 e o Menu Orbital V502.
+- Move a MESMA Orbe Suprema da Home para o centro do Tarot Livre.
+- Devolve essa mesma Orbe ao berço da Home ao sair do Tarot.
+- Acende a chama estelar dourada e violeta exatamente quando cada carta nasce.
+- Mantém 78 cartas diretas, sem invertidas e sem repetição.
+- Mostra as cartas reveladas em seis por fileira.
+- Mantém embaralhamento das cartas ocultas, novo círculo e continuidade local.
+- Atualiza o funcionamento offline para a V503.
+
+SOBRE A V500 INSTALADA POR ENGANO
+Não é necessário apagar os arquivos V500 agora. A V503 não os importa, não carrega
+o motor V500 e remove qualquer folha visual antiga que ainda tenha ficado na página.
+Eles permanecem inertes no servidor.
+
+TESTE RÁPIDO APÓS INSTALAR
+1. Abra a Home e confirme que a Orbe está viva no centro.
+2. Abra o Menu e confirme que a mesma Orbe ocupa o centro do círculo.
+3. Entre em Tarot Livre.
+4. Toque uma vez na Orbe: deve nascer uma carta com fogo e partículas estelares.
+5. Revele mais cartas: nenhuma deve repetir ou aparecer invertida.
+6. Volte à Home: a Orbe deve retornar ao centro original.
+7. Feche e reabra o site: o círculo revelado deve continuar preservado.
+
+ROLLBACK SEGURO
+Se for necessário voltar, reenvie todos os arquivos do ZIP V502 e confirme as
+substituições. Não apague manualmente a V501 ou a V502.
+
+Esta entrega não publica o site, não altera DNS, não ativa cobranças e não muda
+o servidor da Whit.

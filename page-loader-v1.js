@@ -1,6 +1,5 @@
-/* DIVINA BRUXA 2.0 — MACROETAPA V502 · CARREGADOR CORRETIVO
-   Preserva os mundos Rebirth atuais e retira a instalação acidental V500.
-   O redesenho definitivo do Tarot Livre pertence à próxima macroetapa V503. */
+/* DIVINA BRUXA 2.0 — MACROETAPA V503 · CARREGADOR DO TAROT LIVRE SUPREMO
+   V501 permanece a única Orbe viva; V503 substitui os mundos antigos do Tarot. */
 
 import {
   normalizeRouteId,
@@ -115,17 +114,25 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
 
   const loaders=Object.freeze({
     tarot: async()=>{
-      // V502 neutraliza a instalação acidental V500 sem apagar arquivos do servidor.
-      // Eles ficam inertes e podem ser removidos mais tarde, com segurança.
-      document.getElementById('divinaTarotLivreCosmicoV500')?.remove();
-      if(document.documentElement.dataset.tarotLivre==='v500'){
-        delete document.documentElement.dataset.tarotLivre;
-      }
+      // Retira somente estilos antigos. Os arquivos V500 permanecem seguros e inertes.
+      globalThis.divinaFreeTarotV345?.destroy?.();
+      delete globalThis.divinaFreeTarotV345;
+      [
+        'freeTarotFireEngineV345Styles',
+        'divinaTarotLivreCosmicoV500',
+        'divinaTarotLivreChamaV401',
+        'divinaTarotLivreZeroV400',
+        'divinaTarotRebirthV301'
+      ].forEach(styleId=>document.getElementById(styleId)?.remove());
       const [,module]=await Promise.all([
-        ensureStyle('divinaTarotRebirthV301','free-tarot-world-v301.css?v=301'),
-        import('./free-tarot-world-v301.js?v=301')
+        ensureStyle('divinaTarotLivreSupremoV503','tarot-livre-supremo-v503.css?v=503'),
+        import('./tarot-livre-supremo-v503.js?v=503')
       ]);
-      return new module.FreeTarot($('#tarot'));
+      const instance=new module.TarotLivreSupremeV503($('#tarot'),{
+        orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme
+      });
+      globalThis.divinaTarotLivreV503=instance;
+      return instance;
     },
     daily: async()=>{
       const [,module]=await Promise.all([
@@ -221,8 +228,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
 
   const warmers=Object.freeze({
     tarot:()=>Promise.all([
-      ensureStyle('divinaTarotRebirthV301','free-tarot-world-v301.css?v=301'),
-      import('./free-tarot-world-v301.js?v=301')
+      ensureStyle('divinaTarotLivreSupremoV503','tarot-livre-supremo-v503.css?v=503'),
+      import('./tarot-livre-supremo-v503.js?v=503')
     ]),
     daily:()=>Promise.all([
       ensureStyle('divinaDailyRebirthV303','daily-world-v303.css?v=303'),

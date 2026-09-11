@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — MACROETAPA V502 · MENU ORBITAL VIVO · BOOT-SAFE
-   V501 continua como a única Orbe Suprema. V502 transforma essa mesma presença
-   no centro físico do menu e neutraliza o carregador acidental V500. */
+/* DIVINA BRUXA — MACROETAPA V503 · TAROT LIVRE SUPREMO · BOOT-SAFE
+   V501 continua como a única Orbe Suprema, V502 preserva o menu orbital e
+   V503 entrega o Tarot Livre de fogo estelar sem reativar motores anteriores. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -13,7 +13,7 @@ import { AccountEngineV201 } from './account-engine-v201.js?v=201';
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=319';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=502-repair';
+import { createPageLoader } from './page-loader-v1.js?v=503';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -59,13 +59,6 @@ const startOrbitalMenuV502 = () => import('./orbital-menu-v502.js?v=502')
   .catch(error => {
     console.error('[Divina] Menu Orbital Vivo V502 não iniciou', error);
     document.documentElement.dataset.menuOrbitalError = 'v502';
-  });
-
-const startFreeTarotSupremeV345 = () => import('./free-tarot-fire-engine-v345.js?v=345')
-  .then(module => module.installFreeTarotFireEngineV345?.())
-  .catch(error => {
-    console.error('[Divina] Tarot Livre Fire Engine V345 não iniciou', error);
-    document.documentElement.dataset.freeTarotSupremeError = 'v345';
   });
 
 const startSpreadsSupremeV331 = () => import('./spreads-supreme-v331.js?v=331')
@@ -196,7 +189,7 @@ navigator.serviceWorker?.addEventListener('message', event => {
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=502')
+    navigator.serviceWorker.register('./sw.js?v=503')
       .then(() => console.info('[Divina] PWA registrado'))
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   });
@@ -508,13 +501,12 @@ const awaken = async () => {
     document.documentElement.dataset.bootRecovery = 'v326';
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
     dispatchEvent(new CustomEvent('divina:boot-ready', {
-      detail: { shell:'v180', recovery:'v326', bootFirst:true, supremeOrb:'v501', orbitalMenu:'v502' }
+      detail: { shell:'v180', recovery:'v326', bootFirst:true, supremeOrb:'v501', orbitalMenu:'v502', tarotLivre:'v503' }
     }));
 
     // O menu é opcional para o boot: a Home abre mesmo se esta camada falhar.
     startOrbitalMenuV502();
     startWhitUniversalV333();
-    startFreeTarotSupremeV345();
     startSpreadsSupremeV331();
     startLibraryDeepV332();
 
@@ -547,7 +539,6 @@ const awaken = async () => {
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
     startOrbitalMenuV502();
     startWhitUniversalV333();
-    startFreeTarotSupremeV345();
     startSpreadsSupremeV331();
     startLibraryDeepV332();
     startPwaAfterBootV326();

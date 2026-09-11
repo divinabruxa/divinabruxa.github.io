@@ -1,0 +1,85 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "release": "V503",
+  "name": "Tarot Livre Supremo — Orbe e Chama Estelar",
+  "macro_stage": "Macroetapa V503 — Tarot Livre Supremo",
+  "scope": "Redesenho integral do mundo Tarot Livre, preservando a Home V501, o Menu Orbital V502 e todos os demais mundos instalados.",
+  "prerequisites": [
+    "V501 — Núcleo da Orbe Suprema",
+    "V502 — Menu Orbital Vivo"
+  ],
+  "replace": [
+    "app-v208.js",
+    "page-loader-v1.js",
+    "sw.js"
+  ],
+  "new": [
+    "tarot-livre-supremo-v503.js",
+    "tarot-livre-supremo-v503.css",
+    "TAROT-LIVRE-SUPREMO-V503-CONTRACT.json",
+    "00-INSTALE-V503.txt"
+  ],
+  "canonical_orb": {
+    "core": "SupremeOrbCoreV501",
+    "renderer": "RealityOrbEngine V208 governed by V501",
+    "behavior": "The physical living orb DOM node is claimed from Home, moved into Tarot Livre, and returned to its Home cradle on route exit.",
+    "second_orb_created": false,
+    "one_living_orb": true,
+    "menu_v502_preserved": true
+  },
+  "stellar_flame": {
+    "engine": "SupremeStellarFlameEngineV503",
+    "primary_renderer": "adaptive WebGL fragment shader",
+    "particle_renderer": "Canvas 2D additive stellar sparks",
+    "fallback": "Canvas 2D cosmos and braided flame",
+    "birth_sync": "The strongest gold-violet particle ignition occurs in the same callback that inserts the newly revealed card.",
+    "touch_reactivity": true,
+    "orb_pulse_bridge": true,
+    "floating_tarot_satellites": true,
+    "galaxy_field": true
+  },
+  "tarot_rules": {
+    "deck_size": 78,
+    "normal_orientation_only": true,
+    "reversed_cards": false,
+    "repetition_before_completion": false,
+    "automatic_meanings": false,
+    "revealed_grid_columns": 6,
+    "shuffle_preserves_revealed_cards": true,
+    "reset_confirmation": "two taps when the circle contains revealed cards",
+    "storage_key_preserved": "free-tarot",
+    "cross_tab_coordination_preserved": true
+  },
+  "experience": {
+    "reference_composition": "title, central card, braided stellar fire, canonical orb, 0/78 counter, instruction, fixed dock",
+    "swipe_revealed_cards": true,
+    "keyboard_navigation": true,
+    "native_haptics_only": true,
+    "browser_vibration_used": false,
+    "reduced_motion_keeps_calm_fire": true,
+    "offscreen_animation_pause": true,
+    "hidden_route_animation_pause": true,
+    "adaptive_quality": true,
+    "offline_core_updated": true
+  },
+  "navigation": {
+    "route": "tarot",
+    "mesa_real_target": "spreads",
+    "footer_orb_ai_target": "ai",
+    "menu_from_inner_world_returns_home_first": true,
+    "home_double_tap_target": "tarot"
+  },
+  "legacy_state": {
+    "v500_files_may_remain_on_server": true,
+    "v500_loaded": false,
+    "v345_boot_overlay_loaded": false,
+    "v301_tarot_world_loaded": false
+  },
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}
