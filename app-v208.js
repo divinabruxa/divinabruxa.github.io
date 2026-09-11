@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — MACROETAPA V505 · CALIBRAÇÃO ESTELAR DO FOGO · BOOT-SAFE
+/* DIVINA BRUXA — MACROETAPA V506 · CHAMA VIVA E NASCIMENTO SINCRONIZADO · BOOT-SAFE
    V501 continua como a única Orbe Suprema, V502 preserva o menu orbital e
-   V505 torna a chama Canvas mais larga, quente e legível sem pesar o boot. */
+   V506 dá textura orgânica ao fogo e une carta, contador e explosão. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -13,7 +13,7 @@ import { AccountEngineV201 } from './account-engine-v201.js?v=201';
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=319';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=505';
+import { createPageLoader } from './page-loader-v1.js?v=506';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -189,7 +189,7 @@ navigator.serviceWorker?.addEventListener('message', event => {
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=505')
+    navigator.serviceWorker.register('./sw.js?v=506')
       .then(() => console.info('[Divina] PWA registrado'))
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   });
@@ -501,7 +501,7 @@ const awaken = async () => {
     document.documentElement.dataset.bootRecovery = 'v326';
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
     dispatchEvent(new CustomEvent('divina:boot-ready', {
-      detail: { shell:'v180', recovery:'v326', bootFirst:true, supremeOrb:'v501', orbitalMenu:'v502', tarotLivre:'v505', fluidity:'v504', stellarFire:'v505' }
+      detail: { shell:'v180', recovery:'v326', bootFirst:true, supremeOrb:'v501', orbitalMenu:'v502', tarotLivre:'v506', fluidity:'v504', stellarFire:'v506' }
     }));
 
     // O menu é opcional para o boot: a Home abre mesmo se esta camada falhar.

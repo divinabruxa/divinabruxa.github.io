@@ -1,0 +1,80 @@
+DIVINA BRUXA 2.0
+MACROETAPA V506 — CHAMA VIVA E NASCIMENTO SINCRONIZADO
+========================================================
+
+PRÉ-REQUISITOS
+1. A V501 — Núcleo da Orbe Suprema deve estar instalada.
+2. A V502 — Menu Orbital Vivo deve estar instalada.
+3. A V505 — Calibração Estelar do Fogo deve estar instalada.
+
+COMO INSTALAR
+1. Abra o ZIP desta entrega.
+2. Envie TODOS os 7 arquivos diretamente para a mesma pasta raiz do site.
+3. Confirme a substituição destes 3 arquivos:
+   - app-v208.js
+   - page-loader-v1.js
+   - sw.js
+4. Confirme a inclusão destes 4 arquivos novos:
+   - tarot-livre-supremo-v506.js
+   - tarot-livre-supremo-v506.css
+   - CHAMA-VIVA-V506-CONTRACT.json
+   - 00-INSTALE-V506.txt
+5. Não crie subpastas e não altere os nomes dos arquivos.
+6. Depois do envio, feche todas as abas antigas do site e abra-o novamente.
+
+O QUE FOI CONFIRMADO NA V505 AO VIVO
+- O mundo supremo V505 e o fallback Canvas carregaram corretamente.
+- Existe somente uma Orbe física viva e ela continua sendo a V501.
+- A Home mantém a Orbe centralizada.
+- O duplo toque abre o Tarot Livre.
+- O Menu conserva os 13 portais e devolve a Orbe à Home.
+- As cartas 7 e 8 nasceram sem repetir e sempre diretas.
+- A continuidade local permaneceu preservada.
+- Não foi encontrado erro do próprio site durante a inspeção.
+
+POR QUE EXISTE A V506
+A V505 deu força e largura à chama. Na inspeção real, alguns quadros ficaram claros
+e lisos demais, parecendo uma fita de luz. O contador também avançava antes de a
+imagem da nova carta terminar de entrar. A V506 corrige exatamente esses dois pontos.
+
+O QUE A V506 FAZ
+- Mantém integralmente a Orbe V501, o Menu V502 e a fluidez já aprovada.
+- Troca a faixa branca por plasma dourado, magenta e violeta com núcleo fino e quente.
+- Acrescenta línguas curvas de fogo ao redor dos três filamentos principais.
+- Aumenta as estrelas viajantes sem esconder a carta ou a Orbe.
+- Cria rastros luminosos nas partículas quentes.
+- Emite novas partículas continuamente enquanto a chama alcança a carta.
+- Reduz a largura da cauda de nascimento para ela parecer fogo, não uma fita.
+- Faz imagem da carta, contador, grade e explosão nascerem no mesmo instante lógico.
+- Mantém limites adaptativos de partículas e o modo de movimento reduzido.
+- Atualiza o cache offline para a V506.
+
+LEIS PRESERVADAS
+- 78 cartas, todas diretas.
+- Nenhuma repetição antes de completar o círculo.
+- Nenhum significado automático no Tarot Livre.
+- Seis cartas por fileira, inclusive no celular.
+- Embaralhar altera somente as cartas ocultas.
+- Novo círculo continua protegido por confirmação.
+- Vibração do navegador não é utilizada.
+- A Whit não recebe nesta entrega nova mente, personalidade, conselho ou servidor.
+
+TESTE RÁPIDO APÓS INSTALAR
+1. Abra a Home e confirme a Orbe única no centro.
+2. Dê dois toques na Orbe para abrir o Tarot Livre.
+3. Observe a chama: ela deve ser colorida, filamentada e cheia de pequenas línguas.
+4. Toque uma vez na Orbe.
+5. Confirme que a nova carta, o contador e a explosão aparecem juntos.
+6. Revele outras cartas e confirme que nenhuma repete ou aparece invertida.
+7. Abra e feche o Menu e confirme que a mesma Orbe retorna à Home.
+
+ARQUIVOS ANTIGOS
+Não é necessário apagar manualmente arquivos V500, V503, V504 ou V505. O carregador
+V506 desliga os mundos anteriores. A V501 e a V502 permanecem como autoridades.
+
+ROLLBACK SEGURO
+Se for necessário voltar, reenvie todos os 7 arquivos do ZIP V505 e confirme as
+substituições. Não apague manualmente a V501 nem a V502.
+
+Esta entrega não publica o site, não altera DNS, não ativa cobranças e não muda
+o servidor da Whit.

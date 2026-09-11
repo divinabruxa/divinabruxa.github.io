@@ -1,0 +1,120 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "release": "V506",
+  "name": "Chama Viva e Nascimento Sincronizado",
+  "macro_stage": "Macroetapa V506 — Chama Viva e Nascimento Sincronizado",
+  "scope": "Refinar a textura da chama Canvas observada na V505 instalada e tornar atômico o nascimento visual da carta, preservando a Orbe V501, o Menu V502 e todas as regras do Tarot Livre.",
+  "prerequisites": [
+    "V501 — Núcleo da Orbe Suprema",
+    "V502 — Menu Orbital Vivo",
+    "V505 — Calibração Estelar do Fogo"
+  ],
+  "replace": [
+    "app-v208.js",
+    "page-loader-v1.js",
+    "sw.js"
+  ],
+  "new": [
+    "tarot-livre-supremo-v506.js",
+    "tarot-livre-supremo-v506.css",
+    "CHAMA-VIVA-V506-CONTRACT.json",
+    "00-INSTALE-V506.txt"
+  ],
+  "live_v505_audit": {
+    "tarot_world": "supremo-v505",
+    "renderer_observed": "canvas",
+    "one_living_orb": true,
+    "canonical_orb_version": 501,
+    "home_centered": true,
+    "menu_portals": 13,
+    "menu_returns_orb_home": true,
+    "reveals_tested": 2,
+    "repetition_observed": false,
+    "reversed_card_observed": false,
+    "site_origin_console_errors_found": false,
+    "calibration_targets": [
+      "The widest bright region looked like a smooth light ribbon in some Canvas frames.",
+      "The numeric and grid state could update before the new principal-card image appeared."
+    ]
+  },
+  "canonical_orb": {
+    "core": "SupremeOrbCoreV501",
+    "renderer": "RealityOrbEngine V208 governed by V501",
+    "second_orb_created": false,
+    "one_living_orb": true,
+    "menu_authority_preserved": "V502",
+    "home_double_tap_preserved": true
+  },
+  "organic_flame": {
+    "engine": "SupremeStellarFlameEngineV506",
+    "canvas_composite": "Color-preserving source-over body with additive hot filaments and embers.",
+    "broad_white_band_removed": true,
+    "primary_braids": 3,
+    "organic_tongues_constrained": 10,
+    "organic_tongues_standard": 15,
+    "travelling_starlets_constrained": 16,
+    "travelling_starlets_standard": 22,
+    "continuous_birth_emission": true,
+    "particle_streaks": true,
+    "narrower_birth_tail": true,
+    "birth_double_crown": true,
+    "adaptive_particle_budget": true
+  },
+  "atomic_birth": {
+    "enabled": true,
+    "sequence": [
+      "Prepare the next upright card without changing the visible counter.",
+      "Complete the previous-card departure.",
+      "Insert the new principal card.",
+      "Update counter and six-column constellation in the same synchronous turn.",
+      "Ignite the birth wave and the physical V501 orb pulse immediately after insertion."
+    ],
+    "card_image_gate_ms": 420,
+    "card_departure_ms": 145,
+    "card_arrival_ms": 350,
+    "stellar_birth_wave_ms": 760
+  },
+  "tarot_rules": {
+    "deck_size": 78,
+    "normal_orientation_only": true,
+    "reversed_cards": false,
+    "repetition_before_completion": false,
+    "automatic_meanings": false,
+    "revealed_grid_columns": 6,
+    "shuffle_preserves_revealed_cards": true,
+    "reset_confirmation": "two taps when the circle contains revealed cards",
+    "storage_key_preserved": "free-tarot",
+    "cross_tab_coordination_preserved": true
+  },
+  "accessibility_and_performance": {
+    "keyboard_navigation": true,
+    "touch_targets_preserved": true,
+    "native_haptics_only": true,
+    "browser_vibration_used": false,
+    "reduced_motion_keeps_calm_fire": true,
+    "hidden_route_animation_pause": true,
+    "offscreen_animation_pause": true,
+    "canvas_css_blend_mode": "normal",
+    "offline_core_updated": true
+  },
+  "whit_safe_zone": {
+    "logic_or_persona_changed": false,
+    "server_changed": false,
+    "visual_safe_zone_preserved": true
+  },
+  "legacy_state": {
+    "v500_files_may_remain_on_server": true,
+    "v503_files_may_remain_on_server": true,
+    "v504_files_may_remain_on_server": true,
+    "v505_files_may_remain_on_server": true,
+    "v505_loaded_after_v506_activation": false
+  },
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "whit_server_or_advice_logic_changed": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}
