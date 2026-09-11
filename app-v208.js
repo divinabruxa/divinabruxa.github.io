@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — P0 HOTFIX V325 · BOOT RECOVERY · WORK7.0 */
+/* DIVINA BRUXA — P0 HOTFIX V326 · BOOT FIRST / PWA LATER · WORK7.0 */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -25,9 +25,25 @@ import { createWhitSignatureV311 } from './whit-signature-v311.js?v=311';
 import { createWhitMindV312 } from './whit-mind-v312.js?v=312';
 import { createWhitGenerationBridgeV313 } from './whit-generation-bridge-v313.js?v=316-silent1';
 import { createWhitSilentPresenceV316 } from './whit-silent-presence-v316.js?v=316';
-import { initializePwaV324 } from './pwa-world-v324.js?v=325-p0';
 
 const $ = selector => document.querySelector(selector);
+
+const installDockStabilityV326 = () => {
+  if (document.getElementById('divinaDockStabilityV326')) return;
+  const link = document.createElement('link');
+  link.id = 'divinaDockStabilityV326';
+  link.rel = 'stylesheet';
+  link.href = './dock-stability-v326.css?v=326-p0';
+  document.head.append(link);
+};
+installDockStabilityV326();
+
+const startPwaAfterBootV326 = () => import('./pwa-world-v324.js?v=326-p0')
+  .then(module => module.initializePwaV324?.())
+  .catch(error => {
+    console.error('[Divina] PWA isolado do boot não iniciou', error);
+    document.documentElement.dataset.pwaError = 'v326';
+  });
 
 const clearRebirthShellResidue = () => {
   document.getElementById('divinaRebirthV300')?.remove();
@@ -67,7 +83,6 @@ safely('experiência do Tarot', installTarotExperience);
 safely('mídia cósmica', installCosmicMedia);
 safely('métricas editoriais locais', () => bindEditorialMetrics(document.body));
 safely('política de indexação V193', installIndexPolicyV193);
-safely('PWA V325 P0', initializePwaV324);
 addEventListener('orbe:toast', event => toast(event.detail));
 
 const authClient = new AuthClient(CONFIG);
@@ -121,7 +136,7 @@ navigator.serviceWorker?.addEventListener('message', event => {
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=325-p0')
+    navigator.serviceWorker.register('./sw.js?v=326-p0')
       .then(() => console.info('[Divina] PWA registrado'))
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   });
@@ -402,26 +417,46 @@ const waitForCoreStyles = () => new Promise((resolve, reject) => {
 });
 
 const awaken = async () => {
-  let stylesReady = false;
   try {
     await waitForCoreStyles();
-    stylesReady = true;
-    await navigation.start();
+
+    // P0 V326: CSS crítico validado = a pessoa pode entrar.
+    // Navegação e PWA não têm mais permissão para manter a tela de boot fechada.
     document.documentElement.dataset.appShell = 'v180';
-    document.documentElement.dataset.bootRecovery = 'v325';
-    dispatchEvent(new CustomEvent('divina:boot-ready', { detail: { shell: 'v180', recovery:'v325' } }));
+    document.documentElement.dataset.bootRecovery = 'v326';
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
+    dispatchEvent(new CustomEvent('divina:boot-ready', {
+      detail: { shell:'v180', recovery:'v326', bootFirst:true }
+    }));
+
+    // Começa a navegação fora do bloqueio visual.
+    const navigationTimeout = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('navigation-start-timeout-v326')), 4500)
+    );
+    Promise.race([Promise.resolve(navigation.start()), navigationTimeout])
+      .then(() => {
+        document.documentElement.dataset.navigationReady = 'v326';
+      })
+      .catch(error => {
+        document.documentElement.dataset.navigationError = 'v326';
+        console.error('[Divina] navegação abriu em recuperação', error);
+        toast('A Home abriu. Um caminho ainda está terminando de despertar.');
+      })
+      .finally(() => {
+        // PWA/offline é resiliente, mas nunca mais é boot crítico.
+        startPwaAfterBootV326();
+      });
   } catch (error) {
-    document.documentElement.dataset.bootError = 'v325';
-    dispatchEvent(new CustomEvent('divina:boot-error', { detail: { recoverable: true, stylesReady } }));
-    console.error('[Divina] o núcleo protegido não despertou', error);
-    // Fail-open only when the critical visual shell was verified.
-    // This avoids a permanent full-screen loader after a recoverable navigation failure.
-    if (stylesReady) {
-      document.documentElement.dataset.appShell = 'v180-degraded';
-      loadingPortal.end(ORB_BOOT_REQUEST_V152);
-      toast('A Orbe abriu em modo de recuperação. Recarregue se algum mundo não responder.');
-    }
+    document.documentElement.dataset.bootError = 'v326-critical-css';
+    dispatchEvent(new CustomEvent('divina:boot-error', {
+      detail: { recoverable:true, criticalCss:false }
+    }));
+    console.error('[Divina] CSS crítico não despertou', error);
+
+    // Último fail-open visual: o HTML da Home existe e deve continuar acessível.
+    document.documentElement.dataset.appShell = 'v180-emergency';
+    loadingPortal.end(ORB_BOOT_REQUEST_V152);
+    startPwaAfterBootV326();
   }
 };
 awaken();

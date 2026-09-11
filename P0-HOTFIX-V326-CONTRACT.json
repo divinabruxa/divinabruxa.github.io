@@ -1,0 +1,48 @@
+{
+  "release": "P0-HOTFIX-V326",
+  "project": "Divina Bruxa 2.0",
+  "severity": "P0",
+  "symptoms": [
+    "Site can remain visually trapped on the boot loader even though HTML is delivered.",
+    "Bottom magic dock can look vertically crooked on iPhone safe-area devices."
+  ],
+  "confirmed_causes": [
+    "PWA remained a static import in the critical app module, so any PWA-layer failure could abort the entire app before boot completion.",
+    "The legacy index bootstrap still registers sw.js?v=208 on window load, competing with later worker generations.",
+    "The dock already offsets itself above env(safe-area-inset-bottom), while a later runtime rule also applied the safe-area as internal padding-bottom, compressing the five dock items inside a fixed 75/78px height."
+  ],
+  "fixes": [
+    "Remove PWA from the app's static-import critical path and dynamically load it only after the visual shell has opened.",
+    "Release the boot loader immediately after critical V180 CSS is verified; navigation runs afterward with a timeout and cannot keep the site closed.",
+    "Emergency fail-open also removes the loader if critical CSS validation itself fails.",
+    "PWA auto-start remains only on dedicated install pages; app pages start it explicitly after boot.",
+    "Register the V326 Service Worker repeatedly after load so it wins over the legacy V208 inline registration.",
+    "Service Worker installation no longer fails because an optional cache asset is temporarily unavailable.",
+    "Static script/style fetches use cache reload before falling back to cached copies.",
+    "New dock-stability-v326.css removes duplicated safe-area padding and locks the 5-column geometry without redesigning the approved dock."
+  ],
+  "replace": [
+    "app-v208.js",
+    "pwa-world-v324.js",
+    "sw.js"
+  ],
+  "new": [
+    "dock-stability-v326.css",
+    "P0-HOTFIX-V326-CONTRACT.json"
+  ],
+  "preserve": [
+    "Approved Home Orb visual and gesture engine",
+    "Magic Menu design",
+    "Five-item dock identity and central mini Orb",
+    "Whit V307-V316",
+    "Worlds V301-V323",
+    "User local data"
+  ],
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}

@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 2.0 — P0 HOTFIX V325 · SERVICE WORKER
+/* DIVINA BRUXA 2.0 — P0 HOTFIX V326 · SERVICE WORKER BOOT-SAFE
    Cache seletivo e versionado. Nunca guarda Auth, Whit generation, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=325;
+const VERSION=326;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v325-shell';
-const CONTENT_CACHE='divina-bruxa-v325-content';
-const IMAGE_CACHE='divina-bruxa-v325-images';
-const OFFLINE_CACHE='divina-bruxa-v325-offline-core';
+const SHELL_CACHE='divina-bruxa-v326-shell';
+const CONTENT_CACHE='divina-bruxa-v326-content';
+const IMAGE_CACHE='divina-bruxa-v326-images';
+const OFFLINE_CACHE='divina-bruxa-v326-offline-core';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE]);
 
 const REQUIRED_SHELL=Object.freeze([
@@ -17,8 +17,8 @@ const REQUIRED_SHELL=Object.freeze([
   './app-v208.js','./navigation.js','./route-registry-v180.js','./page-loader-v1.js',
   './runtime-v12.js','./orb-motion-core-v207.js','./orb-gesture-core-v208.js',
   './orb-engine-v208.js','./mini-orb-engine-v207.js','./orb-loading-portal-v1.js',
-  './divina-shell-v180.css','./home-orb-absolute-v206.css','./pwa-world-v196.css',
-  './pwa-resilience-v324.css?v=325-p0','./pwa-world-v324.js?v=325-p0','./performance-world-v324.js?v=324',
+  './divina-shell-v180.css','./home-orb-absolute-v206.css','./pwa-world-v196.css','./dock-stability-v326.css?v=326-p0',
+  './pwa-resilience-v324.css?v=326-p0','./pwa-world-v324.js?v=326-p0','./performance-world-v324.js?v=324',
   './divina-orb-fast-v1.webp','./divina-orb-thumb-v1.webp',
   './divina-icon-fast-v1.png','./icon-192.png'
 ]);
@@ -197,7 +197,8 @@ const navigationNetworkFirst=async(request,url)=>{
 
 const networkFirst=async request=>{
   try{
-    const response=await fetch(request);
+    const fresh=new Request(request,{cache:'reload'});
+    const response=await fetch(fresh);
     await cacheResponse(CONTENT_CACHE,request,response);
     return response;
   }catch{
@@ -229,7 +230,8 @@ const isAuthorityRequest=(request,url)=>{
 
 self.addEventListener('install',event=>event.waitUntil((async()=>{
   const requiredFailures=await cacheBatch(SHELL_CACHE,REQUIRED_SHELL,6);
-  if(requiredFailures.length)throw new Error(`required-shell-incomplete:${requiredFailures.map(item=>item.asset).join(',')}`);
+  // P0 V326: cache é melhoria, nunca pré-requisito para o site abrir.
+  if(requiredFailures.length)console.warn('[Divina SW V326] shell parcial',requiredFailures.length);
   await Promise.allSettled([
     cacheBatch(CONTENT_CACHE,[...APP_DEPENDENCIES,...REBIRTH_WARM,...PUBLIC_OFFLINE_PAGES],6),
     prepareOfflineCore()

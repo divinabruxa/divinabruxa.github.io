@@ -1,11 +1,11 @@
-/* DIVINA BRUXA 2.0 — P0 HOTFIX V325 · PWA / OFFLINE / RESILIÊNCIA V324
+/* DIVINA BRUXA 2.0 — P0 HOTFIX V326 · PWA ISOLADO DO BOOT / RESILIÊNCIA V324
    Uma única autoridade PWA para app e páginas de instalação.
    Offline seletivo: mundos locais continuam; ações de autoridade exigem rede.
    Não altera o motor visual da Orbe principal. */
 
 import { installPerformanceV324, summarizeLocalWebVitalsV324, performanceTierV324 } from './performance-world-v324.js?v=324';
 
-const VERSION=325;
+const VERSION=326;
 const STYLE_ID='divinaPwaResilienceV324';
 const INSTALL_ROUTES=Object.freeze({pt:'instalar-app.html',en:'install-app.html',es:'instalar-aplicacion.html'});
 const ONLINE_ONLY_SELECTOR=[
@@ -79,7 +79,7 @@ const copy=()=>({
 const installStyle=()=>{
   if(document.getElementById(STYLE_ID))return;
   const link=document.createElement('link');
-  link.id=STYLE_ID;link.rel='stylesheet';link.href='./pwa-resilience-v324.css?v=325-p0';
+  link.id=STYLE_ID;link.rel='stylesheet';link.href='./pwa-resilience-v324.css?v=326-p0';
   document.head.append(link);
 };
 
@@ -276,22 +276,26 @@ const setupOfflinePreparation=()=>{
 
 const setupServiceWorker=()=>{
   if(!('serviceWorker'in navigator))return;
-  globalThis.__divinaSWBootstrap='v325-p0';
-  const register=()=>navigator.serviceWorker.register('./sw.js?v=325-p0',{updateViaCache:'none'})
+  globalThis.__divinaSWBootstrap='v326-p0';
+  const register=()=>navigator.serviceWorker.register('./sw.js?v=326-p0',{updateViaCache:'none'})
     .then(registration=>{
       dispatchEvent(new CustomEvent('divina:pwa-ready',{detail:{scope:registration.scope,version:VERSION,recovery:'p0'}}));
       registration.update().catch(()=>{});
       return registration;
     })
-    .catch(error=>console.error('[Divina] PWA V325 P0 indisponível',error));
+    .catch(error=>console.error('[Divina] PWA V326 isolado indisponível',error));
 
   // Register immediately, then once more after window.load.
   // The legacy inline bootstrap in index.html still asks for ?v=208;
   // this second registration wins the race and moves the scope to the fixed worker.
   register();
-  if(document.readyState!=='complete'){
-    addEventListener('load',()=>setTimeout(register,0),{once:true});
-  }
+  const reinforce=()=>{
+    setTimeout(register,0);
+    setTimeout(register,350);
+    setTimeout(register,1400);
+  };
+  if(document.readyState!=='complete')addEventListener('load',reinforce,{once:true});
+  else reinforce();
 };
 
 const setupReturnFromBackground=()=>{
@@ -324,7 +328,7 @@ export function initializePwaV324(){
   if(initialized||typeof document==='undefined')return false;
   initialized=true;
   installStyle();
-  document.documentElement.dataset.pwaWorld='325-p0';
+  document.documentElement.dataset.pwaWorld='326-p0';
   installPerformanceV324();
   installAccessibility();
   setupInstall();
@@ -359,6 +363,7 @@ export function initializePwaV324(){
 }
 
 if(typeof document!=='undefined'){
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initializePwaV324,{once:true});
-  else queueMicrotask(initializePwaV324);
+  const autoStart=()=>document.body?.classList.contains('db-install-page')&&initializePwaV324();
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',autoStart,{once:true});
+  else queueMicrotask(autoStart);
 }
