@@ -1,0 +1,103 @@
+{
+  "product": "Divina Bruxa — Orbe das Realidades",
+  "release": "V501",
+  "macro_stage": {
+    "number": 1,
+    "total_in_current_cycle": 4,
+    "name": "Núcleo da Orbe Suprema",
+    "status": "completed"
+  },
+  "purpose": "Transformar a Orbe aprovada da Home no único centro de estado, toque e navegação do site, sem redesenhá-la e sem criar um segundo motor visual.",
+  "install": {
+    "mode": "flat_root_upload",
+    "new_files": [
+      "supreme-orb-core-v501.js",
+      "supreme-orb-core-v501.css",
+      "SUPREME-ORB-V501-CONTRACT.json",
+      "00-INSTALE-V501.txt"
+    ],
+    "replacement_files": [
+      "app-v208.js",
+      "sw.js"
+    ],
+    "delete_files": []
+  },
+  "invariants": {
+    "home_orb_visual_is_preserved": true,
+    "one_living_orb": true,
+    "independent_mini_orb_engines": false,
+    "all_public_navigation_uses_supreme_orb": true,
+    "home_is_logical_origin_without_forced_reload": true,
+    "orb_is_not_draggable": true,
+    "tarot_rules_changed": false,
+    "daily_card_changed": false,
+    "billing_changed": false,
+    "backend_changed": false
+  },
+  "public_api": {
+    "global": "window.divinaOrbSupremeV501",
+    "compatibility_global": "window.orbe",
+    "methods": [
+      "navigate",
+      "pulse",
+      "claim",
+      "returnHome",
+      "snapshot"
+    ]
+  },
+  "route_signatures_prepared": [
+    "home",
+    "tarot",
+    "daily",
+    "library",
+    "spreads",
+    "school",
+    "journal",
+    "ai",
+    "store",
+    "consultations",
+    "music",
+    "videos",
+    "skins",
+    "login",
+    "subscriptions",
+    "notifications",
+    "admin"
+  ],
+  "future_macro_stages": [
+    {
+      "release": "V502",
+      "name": "Menu Orbital Vivo",
+      "dependency": "V501"
+    },
+    {
+      "release": "V503",
+      "name": "Tarot Livre Exato + Motor de Chama Estelar",
+      "dependency": "V501 + V502"
+    },
+    {
+      "release": "V504",
+      "name": "Integração, performance e acabamento",
+      "dependency": "V501 + V502 + V503"
+    },
+    {
+      "release": "future",
+      "name": "Whit Core — mente e alma original da Divina Bruxa",
+      "principles": [
+        "presença em todo o site",
+        "conselhos responsáveis e acolhedores",
+        "memória somente com controle e consentimento",
+        "personalidade original inspirada em calor, força e musicalidade",
+        "não se apresenta como Whitney Houston",
+        "não imita voz nem afirma conter a alma de pessoa real"
+      ]
+    }
+  ],
+  "safety_flags": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "orbe_ai_sol_enabled": false
+  }
+}

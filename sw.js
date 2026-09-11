@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 2.0 — TAROT LIVRE COSMOS DE FOGO · SERVICE WORKER V500
+/* DIVINA BRUXA 2.0 — MACROETAPA V501 · SERVICE WORKER DA ORBE SUPREMA
    Cache seletivo e versionado. Nunca guarda Auth, Whit generation, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=500;
+const VERSION=501;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v500-shell';
-const CONTENT_CACHE='divina-bruxa-v500-content';
-const IMAGE_CACHE='divina-bruxa-v500-images';
-const OFFLINE_CACHE='divina-bruxa-v500-offline-core';
+const SHELL_CACHE='divina-bruxa-v501-shell';
+const CONTENT_CACHE='divina-bruxa-v501-content';
+const IMAGE_CACHE='divina-bruxa-v501-images';
+const OFFLINE_CACHE='divina-bruxa-v501-offline-core';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE]);
 
 const REQUIRED_SHELL=Object.freeze([
@@ -16,7 +16,8 @@ const REQUIRED_SHELL=Object.freeze([
   './manifest.webmanifest',
   './app-v208.js','./navigation.js','./route-registry-v180.js','./page-loader-v1.js',
   './runtime-v12.js','./orb-motion-core-v207.js','./orb-gesture-core-v208.js',
-  './orb-engine-v208.js','./mini-orb-engine-v207.js','./orb-loading-portal-v1.js',
+  './orb-engine-v208.js','./supreme-orb-core-v501.js','./supreme-orb-core-v501.css',
+  './orb-loading-portal-v1.js',
   './divina-shell-v180.css','./home-orb-absolute-v206.css','./pwa-world-v196.css',
   './pwa-resilience-v324.css','./pwa-world-v324.js','./performance-world-v324.js',
   './divina-orb-fast-v1.webp','./divina-orb-thumb-v1.webp',
@@ -46,7 +47,7 @@ const APP_DEPENDENCIES=Object.freeze([
 ]);
 
 const REBIRTH_WARM=Object.freeze([
-  './tarot-livre-cosmico-v500.js','./tarot-livre-cosmico-v500.css','./orbe-chama-v500.webp',
+  './free-tarot-world-v301.js','./free-tarot-world-v301.css',
   './library-world-v302.js','./library-world-v302.css',
   './daily-world-v303.js','./daily-world-v303.css','./daily-policy-v303.js',
   './spreads-world-v305.js','./spreads-world-v305.css',
@@ -61,7 +62,7 @@ const REBIRTH_WARM=Object.freeze([
 
 const OFFLINE_WORLD_ASSETS=Object.freeze([
   './tarot-data.js','./tarot-image-runtime.js','./tarot-session.js','./tarot-continuity.js',
-  './tarot-livre-cosmico-v500.js','./tarot-livre-cosmico-v500.css','./orbe-chama-v500.webp',
+  './free-tarot-world-v301.js','./free-tarot-world-v301.css','./tarot-spiral-suction-v1.webp',
   './tarot-atlas-mobile-v196.webp',
   './card-library-policy.js','./card-library-engine.js','./library-world-v302.js','./library-world-v302.css',
   './daily-world-v303.js','./daily-world-v303.css','./daily-policy-v303.js','./daily-meaning-runtime.js','./tarot-meanings.js','./meaning-engine.js',
@@ -297,7 +298,7 @@ self.addEventListener('message',event=>{
 self.addEventListener('notificationclick',event=>{
   event.notification.close();
   const raw=String(event.notification?.data?.url||'#home');
-  const target=/^#(?:home|daily|school|consultations|login|subscriptions|ai|music|videos|skins|notifications)$/.test(raw)?raw:'#home';
+  const target=/^#(?:home|tarot|daily|library|spreads|school|journal|consultations|store|login|subscriptions|ai|music|videos|skins|notifications)$/.test(raw)?raw:'#home';
   event.waitUntil((async()=>{
     const windows=await self.clients.matchAll({type:'window',includeUncontrolled:true});
     const current=windows.find(client=>new URL(client.url).origin===self.location.origin);

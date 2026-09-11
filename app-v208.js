@@ -1,17 +1,17 @@
-/* DIVINA BRUXA — TAROT LIVRE COSMOS DE FOGO · V500 · BOOT-SAFE */
+/* DIVINA BRUXA — MACROETAPA V501 · NÚCLEO DA ORBE SUPREMA · BOOT-SAFE */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
 import { createNavigation } from './navigation.js?v=211-recovery1';
 import { orbMotionV207 } from './orb-motion-core-v207.js?v=207';
 import { RealityOrbEngine } from './orb-engine-v208.js?v=208';
-import { bindMiniOrbs } from './mini-orb-engine-v207.js?v=207';
+import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=501';
 import { AuthClientV201 as AuthClient } from './auth-client-v201.js?v=201';
 import { AccountEngineV201 } from './account-engine-v201.js?v=201';
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=319';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=500';
+import { createPageLoader } from './page-loader-v1.js?v=501-core';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -59,6 +59,12 @@ const startMenuSceneV340 = () => import('./menu-orb-lock-v340.js?v=340')
     document.documentElement.dataset.menuRebornError = 'v340';
   });
 
+const startFreeTarotSupremeV345 = () => import('./free-tarot-fire-engine-v345.js?v=345')
+  .then(module => module.installFreeTarotFireEngineV345?.())
+  .catch(error => {
+    console.error('[Divina] Tarot Livre Fire Engine V345 não iniciou', error);
+    document.documentElement.dataset.freeTarotSupremeError = 'v345';
+  });
 
 const startSpreadsSupremeV331 = () => import('./spreads-supreme-v331.js?v=331')
   .then(module => module.installSpreadsSupremeV331?.())
@@ -106,7 +112,9 @@ const toast = message => {
 
 safely('runtime visual', installRuntimeV12);
 const navigation = createNavigation();
-const { go } = navigation;
+const navigationGo = navigation.go;
+let supremeOrb = null;
+const go = (id, options) => supremeOrb?.navigate?.(id, options) || navigationGo(id);
 safely('guarda visual', installVisualGuard);
 safely('experiência do Tarot', installTarotExperience);
 safely('mídia cósmica', installCosmicMedia);
@@ -143,14 +151,22 @@ const startWhitUniversalV333 = () => import('./whit-orbit-v333.js?v=333')
     document.documentElement.dataset.whitUniversalError = 'v333';
   });
 
-const miniOrbBinding = safely('Orbes auxiliares V207', bindMiniOrbs);
-
 const loadingPortal = createOrbLoadingPortal();
-const pageLoader = createPageLoader({ config: CONFIG, go, authClient });
+// O carregador usa a navegação direta para não criar recursão. Todo ponto de
+// entrada público usa `go`, que atravessa primeiro o núcleo da Orbe Suprema.
+const pageLoader = createPageLoader({ config: CONFIG, go:navigationGo, authClient });
 navigation.setBeforeEnter(pageLoader.prepare);
 
 const realityOrb = safely('motor da Orbe V208', () => new RealityOrbEngine($('#orbCanvas'), {
-  onOpen: () => pageLoader.go('tarot')
+  onOpen: () => go('tarot', { source:'home-orb-double-tap' })
+}));
+
+supremeOrb = safely('Núcleo da Orbe Suprema V501', () => createSupremeOrbCoreV501({
+  canvas:$('#orbCanvas'),
+  renderer:realityOrb,
+  motion:orbMotionV207,
+  go:pageLoader.go,
+  loading:loadingPortal
 }));
 
 const warmEssentialPortals = () => {
@@ -172,13 +188,13 @@ navigator.serviceWorker?.addEventListener('message', event => {
   if (event.data?.type !== 'divina-notification-open') return;
   const target = String(event.data.target || '#home').replace(/^#/, '');
   if (/^(home|daily|school|consultations|login|subscriptions|ai|music|videos|skins|notifications)$/.test(target)) {
-    pageLoader.go(target);
+    go(target, { source:'notification' });
   }
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=500')
+    navigator.serviceWorker.register('./sw.js?v=501')
       .then(() => console.info('[Divina] PWA registrado'))
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   });
@@ -188,7 +204,16 @@ const skinsHeading = document.querySelector('#skins h2');
 if (skinsHeading) skinsHeading.textContent = 'Trinta formas de sentir o universo.';
 
 window.divinaLoading = loadingPortal;
-window.orbe = { go: pageLoader.go, loadPage: pageLoader.load, loading: loadingPortal };
+window.orbe = {
+  go,
+  loadPage:pageLoader.load,
+  loading:loadingPortal,
+  supreme:supremeOrb,
+  pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
+  claim:(host, options) => supremeOrb?.claim?.(host, options),
+  returnHome:() => supremeOrb?.returnHome?.(),
+  snapshot:() => supremeOrb?.snapshot?.() || orbMotionV207.snapshot()
+};
 window.whit = whitCore;
 
 window.divinaWhitV212 = Object.freeze({
@@ -422,10 +447,23 @@ window.divinaWhitV313 = Object.freeze({
 });
 
 window.divinaOrbV208 = Object.freeze({
-  version: 208,
+  version: 501,
   engine: realityOrb,
-  miniOrbs: miniOrbBinding,
-  snapshot: () => orbMotionV207.snapshot()
+  supreme:supremeOrb,
+  miniOrbs:supremeOrb?.projections?.() || [],
+  snapshot:() => supremeOrb?.snapshot?.() || orbMotionV207.snapshot()
+});
+
+window.divinaOrbSupremeV501 = Object.freeze({
+  version:501,
+  core:supremeOrb,
+  navigate:go,
+  pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
+  claim:(host, options) => supremeOrb?.claim?.(host, options),
+  returnHome:() => supremeOrb?.returnHome?.(),
+  snapshot:() => supremeOrb?.snapshot?.() || null,
+  oneLivingOrb:true,
+  independentMiniOrbEngines:false
 });
 
 const waitForCoreStyles = () => new Promise((resolve, reject) => {
@@ -468,12 +506,13 @@ const awaken = async () => {
     document.documentElement.dataset.bootRecovery = 'v326';
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
     dispatchEvent(new CustomEvent('divina:boot-ready', {
-      detail: { shell:'v180', recovery:'v326', bootFirst:true, rebirth:'r027-v327' }
+      detail: { shell:'v180', recovery:'v326', bootFirst:true, supremeOrb:'v501' }
     }));
 
     // R027/R028 são opcionais: nunca bloqueiam a abertura da Home.
     startMenuSceneV340();
     startWhitUniversalV333();
+    startFreeTarotSupremeV345();
     startSpreadsSupremeV331();
     startLibraryDeepV332();
 
@@ -506,6 +545,7 @@ const awaken = async () => {
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
     startMenuSceneV340();
     startWhitUniversalV333();
+    startFreeTarotSupremeV345();
     startSpreadsSupremeV331();
     startLibraryDeepV332();
     startPwaAfterBootV326();

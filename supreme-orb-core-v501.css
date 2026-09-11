@@ -1,0 +1,290 @@
+/* DIVINA BRUXA — NÚCLEO DA ORBE SUPREMA V501
+   Mantém a Orbe aprovada no centro e oferece uma travessia contínua entre mundos.
+*/
+
+:root{
+  --db-supreme-gold:#ffdca1;
+  --db-supreme-hot:#fff8ec;
+  --db-supreme-pink:#ff4de1;
+  --db-supreme-violet:#8f38ff;
+  --db-supreme-blue:#76e8ff;
+}
+
+html[data-supreme-orb="v501"] #home .orb-hero{
+  display:grid!important;
+  place-items:center!important;
+  justify-items:center!important;
+  align-items:center!important;
+}
+
+html[data-supreme-orb="v501"] #home .orb--hero,
+html[data-supreme-orb="v501"] #home [data-supreme-orb="living"]{
+  justify-self:center!important;
+  margin-inline:auto!important;
+}
+
+[data-supreme-orb="living"],
+[data-orb-projection-v501="true"]{
+  -webkit-user-drag:none;
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+
+[data-orb-projection-v501="true"]{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+}
+
+.db-supreme-orb-projection-canvas{
+  position:absolute;
+  z-index:2;
+  inset:3%;
+  width:94%;
+  height:94%;
+  border-radius:50%;
+  pointer-events:none;
+  object-fit:cover;
+  filter:saturate(1.08) contrast(1.03);
+}
+
+[data-supreme-orb="living"] canvas,
+[data-orb-projection-v501="true"] canvas,
+[data-supreme-orb="living"] img,
+[data-orb-projection-v501="true"] img{
+  pointer-events:none;
+  -webkit-user-drag:none;
+}
+
+[data-supreme-orb="living"]{
+  isolation:isolate;
+  transform-origin:50% 50%;
+  will-change:filter;
+}
+
+html.db-supreme-orb-active [data-supreme-orb="living"]{
+  filter:saturate(1.08) brightness(1.05);
+}
+
+[data-supreme-orb="living"].db-supreme-orb--traveling{
+  width:var(--supreme-orb-claimed-size,var(--orb-size,clamp(172px,48vw,360px)));
+  height:var(--supreme-orb-claimed-size,var(--orb-size,clamp(172px,48vw,360px)));
+  margin:auto!important;
+  z-index:7;
+}
+
+[data-supreme-orb-host="active"]{
+  display:grid;
+  place-items:center;
+  contain:layout style;
+}
+
+.db-supreme-orb-transition{
+  --orb-origin-x:50vw;
+  --orb-origin-y:50vh;
+  --orb-travel-x:0px;
+  --orb-travel-y:-38vh;
+  --orb-travel-scale:3.2;
+  --orb-turn:0deg;
+  --orb-tone-a:var(--db-supreme-pink);
+  --orb-tone-b:var(--db-supreme-violet);
+  --orb-tone-core:var(--db-supreme-hot);
+  position:fixed;
+  inset:0;
+  z-index:2147482000;
+  pointer-events:none;
+  overflow:hidden;
+  opacity:0;
+  visibility:hidden;
+  contain:strict;
+  transition:opacity 180ms ease,visibility 0s linear 360ms;
+}
+
+.db-supreme-orb-transition[hidden]{display:none!important}
+.db-supreme-orb-transition.is-awake{
+  opacity:1;
+  visibility:visible;
+  transition:opacity 90ms ease,visibility 0s;
+}
+
+.db-supreme-orb-transition:before,
+.db-supreme-orb-transition:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+.db-supreme-orb-transition:before{
+  background:
+    radial-gradient(circle 23vmax at var(--orb-origin-x) var(--orb-origin-y),color-mix(in srgb,var(--orb-tone-a) 27%,transparent),transparent 72%),
+    radial-gradient(circle 10vmax at var(--orb-origin-x) var(--orb-origin-y),color-mix(in srgb,var(--orb-tone-core) 24%,transparent),transparent 75%);
+  opacity:0;
+  transform:scale(.72);
+}
+
+.db-supreme-orb-transition.is-awake:before{
+  animation:dbSupremeAuraV501 620ms cubic-bezier(.18,.72,.16,1) both;
+}
+
+.db-supreme-orb-transition:after{
+  background:radial-gradient(ellipse 38vmax 15vmax at 50% 50%,color-mix(in srgb,var(--orb-tone-b) 14%,transparent),transparent 70%);
+  mix-blend-mode:screen;
+  opacity:0;
+}
+
+.db-supreme-orb-transition.is-awake:after{
+  animation:dbSupremeVeilV501 640ms ease-out both;
+}
+
+.db-supreme-orb-transition__core{
+  position:absolute;
+  left:var(--orb-origin-x);
+  top:var(--orb-origin-y);
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  translate:-50% -50%;
+  opacity:0;
+  background:
+    radial-gradient(circle at 38% 34%,var(--orb-tone-core) 0 8%,var(--orb-tone-a) 25%,var(--orb-tone-b) 58%,transparent 73%);
+  box-shadow:
+    0 0 16px var(--orb-tone-core),
+    0 0 38px color-mix(in srgb,var(--orb-tone-a) 78%,transparent),
+    0 0 74px color-mix(in srgb,var(--orb-tone-b) 55%,transparent);
+  mix-blend-mode:screen;
+  will-change:transform,opacity;
+}
+
+.db-supreme-orb-transition.is-awake .db-supreme-orb-transition__core{
+  animation:dbSupremeTravelV501 590ms cubic-bezier(.16,.72,.12,1) both;
+}
+
+.db-supreme-orb-transition__particles{
+  position:absolute;
+  left:var(--orb-origin-x);
+  top:var(--orb-origin-y);
+  width:1px;
+  height:1px;
+  rotate:var(--orb-turn);
+  opacity:0;
+  will-change:opacity;
+}
+
+.db-supreme-orb-transition.is-awake .db-supreme-orb-transition__particles{
+  opacity:1;
+}
+
+.db-supreme-orb-transition__particles i{
+  --spark-x:0px;
+  --spark-y:-34vh;
+  position:absolute;
+  left:0;
+  top:0;
+  width:clamp(2px,.48vw,5px);
+  height:clamp(2px,.48vw,5px);
+  border-radius:50%;
+  opacity:0;
+  background:var(--orb-tone-core);
+  box-shadow:
+    0 0 7px var(--orb-tone-core),
+    0 0 15px var(--orb-tone-a),
+    0 0 24px color-mix(in srgb,var(--orb-tone-b) 72%,transparent);
+  mix-blend-mode:screen;
+  will-change:transform,opacity;
+}
+
+.db-supreme-orb-transition.is-awake .db-supreme-orb-transition__particles i{
+  animation:dbSupremeSparkV501 540ms cubic-bezier(.12,.67,.16,1) var(--spark-delay) both;
+}
+
+.db-supreme-orb-transition__particles i:nth-child(3n+1){--spark-x:-8vw;--spark-y:-31vh}
+.db-supreme-orb-transition__particles i:nth-child(3n+2){--spark-x:7vw;--spark-y:-39vh}
+.db-supreme-orb-transition__particles i:nth-child(3n){--spark-x:1vw;--spark-y:-45vh}
+.db-supreme-orb-transition__particles i:nth-child(5n+1){width:7px;height:2px}
+.db-supreme-orb-transition__particles i:nth-child(4n){background:var(--orb-tone-a)}
+.db-supreme-orb-transition__particles i:nth-child(7n){background:var(--db-supreme-gold)}
+
+.db-supreme-orb-transition[data-direction="up"]{--orb-travel-y:-44vh;--orb-turn:0deg}
+.db-supreme-orb-transition[data-direction="up-right"]{--orb-travel-x:32vw;--orb-travel-y:-34vh;--orb-turn:44deg}
+.db-supreme-orb-transition[data-direction="right"]{--orb-travel-x:48vw;--orb-travel-y:0;--orb-turn:90deg}
+.db-supreme-orb-transition[data-direction="down-right"]{--orb-travel-x:32vw;--orb-travel-y:34vh;--orb-turn:136deg}
+.db-supreme-orb-transition[data-direction="down"]{--orb-travel-y:46vh;--orb-turn:180deg}
+.db-supreme-orb-transition[data-direction="left"]{--orb-travel-x:-48vw;--orb-travel-y:0;--orb-turn:-90deg}
+.db-supreme-orb-transition[data-direction="in"]{--orb-travel-x:0;--orb-travel-y:0;--orb-travel-scale:.1;--orb-turn:180deg}
+.db-supreme-orb-transition[data-direction="out"]{--orb-travel-x:0;--orb-travel-y:-8vh;--orb-travel-scale:7;--orb-turn:0deg}
+.db-supreme-orb-transition[data-direction="around"]{--orb-travel-x:0;--orb-travel-y:0;--orb-travel-scale:4.5;--orb-turn:360deg}
+
+.db-supreme-orb-transition[data-tone="stellar-fire"],
+.db-supreme-orb-transition[data-tone="crown"]{
+  --orb-tone-a:#ff6bcf;
+  --orb-tone-b:#8c39ff;
+  --orb-tone-core:#fff2ba;
+}
+
+.db-supreme-orb-transition[data-tone="dawn"]{
+  --orb-tone-a:#ffbd6f;
+  --orb-tone-b:#e85cff;
+  --orb-tone-core:#fff8de;
+}
+
+.db-supreme-orb-transition[data-tone="mind"]{
+  --orb-tone-a:#c84dff;
+  --orb-tone-b:#65dbff;
+  --orb-tone-core:#ffffff;
+}
+
+.db-supreme-orb-transition[data-tone="reflection"],
+.db-supreme-orb-transition[data-tone="halo"]{
+  --orb-tone-a:#ad5aff;
+  --orb-tone-b:#5ee6ff;
+  --orb-tone-core:#f7f0ff;
+}
+
+@keyframes dbSupremeAuraV501{
+  0%{opacity:0;transform:scale(.64)}
+  24%{opacity:1}
+  100%{opacity:0;transform:scale(1.34)}
+}
+
+@keyframes dbSupremeVeilV501{
+  0%,18%{opacity:0;transform:scale(.82)}
+  48%{opacity:.9}
+  100%{opacity:0;transform:scale(1.18)}
+}
+
+@keyframes dbSupremeTravelV501{
+  0%{opacity:0;transform:translate(0,0) scale(.35)}
+  14%{opacity:1}
+  58%{opacity:.96}
+  100%{opacity:0;transform:translate(var(--orb-travel-x),var(--orb-travel-y)) scale(var(--orb-travel-scale))}
+}
+
+@keyframes dbSupremeSparkV501{
+  0%{opacity:0;transform:translate(0,0) scale(.25)}
+  15%{opacity:1}
+  72%{opacity:.82}
+  100%{opacity:0;transform:translate(var(--spark-x),var(--spark-y)) scale(.1)}
+}
+
+@media (max-width:520px){
+  .db-supreme-orb-transition{
+    --orb-travel-scale:2.7;
+  }
+  .db-supreme-orb-transition__particles i:nth-child(3n+1){--spark-x:-14vw}
+  .db-supreme-orb-transition__particles i:nth-child(3n+2){--spark-x:13vw}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .db-supreme-orb-transition:before,
+  .db-supreme-orb-transition:after,
+  .db-supreme-orb-transition__core,
+  .db-supreme-orb-transition__particles i{
+    animation-duration:90ms!important;
+    animation-iteration-count:1!important;
+  }
+  .db-supreme-orb-transition__particles{display:none!important}
+  html.db-supreme-orb-active [data-supreme-orb="living"]{filter:none}
+}

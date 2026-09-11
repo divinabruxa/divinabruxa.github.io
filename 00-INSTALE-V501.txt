@@ -1,0 +1,40 @@
+DIVINA BRUXA — MACROETAPA V501
+NÚCLEO DA ORBE SUPREMA
+
+STATUS DESTA JORNADA
+1 de 4 — CONCLUÍDA
+
+ESTE ZIP TEM SOMENTE ARQUIVOS NOVOS E ARQUIVOS QUE SUBSTITUEM.
+NÃO HÁ PASTAS DENTRO DELE.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+1. Abra a raiz do repositório da Divina Bruxa.
+2. Envie todos os seis arquivos deste ZIP para a raiz.
+3. Quando o GitHub perguntar, confirme a substituição de app-v208.js e sw.js.
+4. Não apague nenhum outro arquivo.
+5. Aguarde a publicação e abra o site novamente.
+6. Se o iPhone ainda mostrar a versão antiga, feche a aba e abra o site outra vez.
+
+O QUE ESTA MACROETAPA FAZ
+- Mantém a Orbe aprovada da Home.
+- Centraliza a Orbe na Home sem mudar seu tamanho aprovado.
+- Cria uma única autoridade para toque, energia, skin e navegação.
+- Faz menu, notificações e outros caminhos passarem pela Orbe Suprema.
+- Prepara a mesma Orbe para ser movida ao Tarot Livre na V503.
+- Remove a inicialização de motores independentes para mini-orbes.
+- Mantém Carta do Dia, Tarot atual, contas, compras e backend sem alterações.
+
+ARQUIVOS NOVOS
+- supreme-orb-core-v501.js
+- supreme-orb-core-v501.css
+- SUPREME-ORB-V501-CONTRACT.json
+- 00-INSTALE-V501.txt
+
+ARQUIVOS QUE SUBSTITUEM
+- app-v208.js
+- sw.js
+
+NÃO INSTALE O PACOTE V500 ANTERIOR.
+
+PRÓXIMA MACROETAPA APÓS VOCÊ CONFIRMAR "INSTALADO"
+V502 — MENU ORBITAL VIVO
