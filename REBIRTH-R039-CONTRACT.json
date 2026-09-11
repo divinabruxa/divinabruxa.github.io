@@ -1,0 +1,58 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R039",
+  "release": "V339",
+  "world": "Menu Orb Visible",
+  "evidence": "Screen recording 13.67s / 30fps: menu open state is fluid but center shows only aura; real Orb is not painted while removed from Home.",
+  "root_cause": "Moving .orb-stage-ref outside #home breaks the established rendering/styling context of the V208 Orb on iPhone Safari.",
+  "replace": [
+    "app-v208.js"
+  ],
+  "new": [
+    "menu-orb-visible-v339.js",
+    "menu-orb-visible-v339.css",
+    "REBIRTH-R039-CONTRACT.json"
+  ],
+  "architecture": {
+    "navigationV210": "routes only for this menu",
+    "visualAuthority": "V339 only",
+    "samePhysicalOrbV208": true,
+    "orbStageNeverReparented": true,
+    "orbRemainsInsideHome": true,
+    "animationProperty": [
+      "translate",
+      "scale",
+      "filter"
+    ],
+    "singleReversibleAnimation": true,
+    "legacyMenuClickBlocked": true
+  },
+  "motion": {
+    "durationMs": 660,
+    "easing": "cubic-bezier(.65,0,.35,1)",
+    "openAndCloseSameAnimation": true,
+    "midFlightReverse": true,
+    "sceneHiddenOnlyAfterReturn": true
+  },
+  "labels": {
+    "tarot": "Tarot Livre",
+    "notifications": "Notificações"
+  },
+  "preserve": [
+    "Orbe V208 renderer and gestures",
+    "P0 V326",
+    "Dock V326",
+    "Whit V333",
+    "Tarot V330",
+    "Tiragens V331",
+    "Biblioteca V332",
+    "Navigation V210 routing"
+  ],
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}
