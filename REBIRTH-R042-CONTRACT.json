@@ -1,0 +1,46 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R042",
+  "release": "V342",
+  "world": "Tarot Livre Lendário",
+  "direction": "Baseado na imagem cósmica aprovada pelo usuário para o Tarot Livre.",
+  "replace": [
+    "app-v208.js"
+  ],
+  "new": [
+    "free-tarot-legendary-v342.js",
+    "free-tarot-legendary-v342.css",
+    "tarot-livre-universo-v342.png",
+    "REBIRTH-R042-CONTRACT.json"
+  ],
+  "goals": [
+    "preto profundo e universo estrelado",
+    "cartas vagando pelo universo",
+    "carta nasce da Orbe e é revelada",
+    "Orbe crua como no Menu, sem anéis",
+    "mais distância entre Orbe e carta",
+    "Mesa Real disponível no Tarot Livre",
+    "mais magia e fluidez"
+  ],
+  "preserve_rules": {
+    "deck_size": 78,
+    "no_repetition": true,
+    "no_reversed_cards": true,
+    "no_meanings_in_free_tarot": true,
+    "grid_columns": 6
+  },
+  "architecture": {
+    "base_engine": "V301",
+    "previous_layer": "V341",
+    "new_layer": "V342",
+    "background_asset": "tarot-livre-universo-v342.png",
+    "extra_api_calls": 0
+  },
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}
