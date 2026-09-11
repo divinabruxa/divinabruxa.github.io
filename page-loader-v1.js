@@ -1,4 +1,4 @@
-/* DIVINA BRUXA 2.0 — PAGE LOADER V400
+/* DIVINA BRUXA 2.0 — PAGE LOADER V401
    Tarot Livre rebuilt from zero. Other worlds preserve their installed engines. */
 
 import {
@@ -114,12 +114,13 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
 
   const loaders=Object.freeze({
     tarot: async()=>{
-      // V400 is the only Tarot Livre world. V301 is not loaded at all.
+      // V401 owns Tarot Livre. Remove the former route stylesheet in long-lived sessions.
+      document.getElementById('divinaTarotLivreZeroV400')?.remove();
       const [,module]=await Promise.all([
-        ensureStyle('divinaTarotLivreZeroV400','tarot-livre-zero-v400.css?v=400'),
-        import('./tarot-livre-zero-v400.js?v=400')
+        ensureStyle('divinaTarotLivreChamaV401','tarot-livre-chama-v401.css?v=401'),
+        import('./tarot-livre-chama-v401.js?v=401')
       ]);
-      return new module.TarotLivreZeroV400($('#tarot'));
+      return new module.TarotLivreChamaV401($('#tarot'));
     },
     daily: async()=>{
       const [,module]=await Promise.all([
@@ -215,8 +216,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
 
   const warmers=Object.freeze({
     tarot:()=>Promise.all([
-      ensureStyle('divinaTarotLivreZeroV400','tarot-livre-zero-v400.css?v=400'),
-      import('./tarot-livre-zero-v400.js?v=400')
+      ensureStyle('divinaTarotLivreChamaV401','tarot-livre-chama-v401.css?v=401'),
+      import('./tarot-livre-chama-v401.js?v=401')
     ]),
     daily:()=>Promise.all([
       ensureStyle('divinaDailyRebirthV303','daily-world-v303.css?v=303'),
