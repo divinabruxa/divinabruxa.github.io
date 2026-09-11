@@ -1,0 +1,624 @@
+/* DIVINA BRUXA 2.0 — REBIRTH R044 · TAROT LIVRE FOGO ABSOLUTO V344
+   Motor de fogo absoluto para o Tarot Livre: universo preto profundo, energia viva e Mesa Real real. */
+
+html.ft344-mesa-open,
+html.ft344-mesa-open body{
+  overflow:hidden;
+}
+
+#tarot[data-tarot-supreme="v344"]{
+  padding-top:calc(90px + env(safe-area-inset-top))!important;
+  padding-bottom:calc(var(--dock-height,75px) + 34px + env(safe-area-inset-bottom))!important;
+}
+#tarot[data-tarot-supreme="v344"] .ft301.ft344{
+  gap:12px;
+  width:min(1140px,100%);
+}
+#tarot[data-tarot-supreme="v344"] .ft301__head{
+  position:relative;
+  width:min(920px,100%);
+  padding:0 clamp(8px,2vw,18px);
+  align-items:center;
+  opacity:.98;
+}
+#tarot[data-tarot-supreme="v344"] .ft301__head div>span{display:none}
+#tarot[data-tarot-supreme="v344"] .ft301__head h2{
+  font-size:clamp(25px,4vw,40px);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+#tarot[data-tarot-supreme="v344"] .ft301__head p{
+  font-size:clamp(14px,2.7vw,20px);
+  color:rgba(241,209,138,.92);
+  letter-spacing:.06em;
+}
+#tarot .ft344__mesa-real{
+  position:absolute;
+  right:10px; top:50%;
+  transform:translateY(-50%);
+  min-height:44px;
+  padding:0 18px;
+  border-radius:999px;
+  border:1px solid rgba(240,207,138,.58);
+  background:linear-gradient(180deg,rgba(24,10,42,.88),rgba(5,2,12,.90));
+  color:#f0d29a;
+  font:600 15px/1 Georgia,serif;
+  letter-spacing:.08em;
+  box-shadow:0 0 30px rgba(168,69,248,.18), inset 0 0 18px rgba(255,255,255,.04);
+}
+#tarot .ft344__mesa-real:hover,
+#tarot .ft344__mesa-real:focus-visible{
+  border-color:rgba(247,215,146,.92);
+  box-shadow:0 0 34px rgba(191,80,245,.26),0 0 14px rgba(244,207,132,.22);
+}
+
+#tarot[data-tarot-supreme="v344"] .ft301__ritual{
+  --ft344-density:.22;
+  --ft344-stream-x:50%;
+  --ft344-stream-y:78%;
+  --ft344-stream-length:270px;
+  --ft344-stream-angle:-90deg;
+  width:min(920px,100%);
+  min-height:clamp(640px,81dvh,900px);
+  border:1px solid rgba(240,210,143,.10);
+  border-radius:clamp(32px,5vw,54px);
+  background:
+    radial-gradient(circle at 50% 36%,rgba(255,234,190,.05),transparent 10%),
+    radial-gradient(circle at 50% 67%,rgba(176,62,246,.12),transparent 22%),
+    linear-gradient(180deg,rgba(2,1,7,.36),rgba(1,0,4,.84)),
+    url('./tarot-livre-fogo-absoluto-v344.jpg') center/cover no-repeat;
+  box-shadow:
+    inset 0 0 240px rgba(129,42,210,.08),
+    inset 0 -76px 160px rgba(0,0,0,.70),
+    0 30px 104px rgba(0,0,0,.40);
+  overflow:hidden;
+  isolation:isolate;
+}
+
+#tarot .ft344__deep-space,
+#tarot .ft344__nebula,
+#tarot .ft344__fire-engine,
+#tarot .ft344__birth-stream{
+  position:absolute; inset:0; pointer-events:none;
+}
+#tarot .ft344__deep-space{z-index:0}
+#tarot .ft344__deep-space i{
+  position:absolute; width:3px; height:3px; border-radius:50%;
+  background:#fff3d2;
+  box-shadow:0 0 10px rgba(228,174,255,.76),0 0 3px rgba(255,220,140,.65);
+  opacity:.18;
+}
+#tarot .ft344__deep-space i:nth-child(1){left:8%;top:12%}
+#tarot .ft344__deep-space i:nth-child(2){left:88%;top:18%}
+#tarot .ft344__deep-space i:nth-child(3){left:14%;top:35%}
+#tarot .ft344__deep-space i:nth-child(4){left:77%;top:39%}
+#tarot .ft344__deep-space i:nth-child(5){left:10%;top:70%}
+#tarot .ft344__deep-space i:nth-child(6){left:90%;top:67%}
+#tarot .ft344__deep-space i:nth-child(7){left:31%;top:11%}
+#tarot .ft344__deep-space i:nth-child(8){left:63%;top:20%}
+#tarot .ft344__deep-space i:nth-child(9){left:25%;top:57%}
+#tarot .ft344__deep-space i:nth-child(10){left:57%;top:50%}
+#tarot .ft344__deep-space i:nth-child(11){left:35%;top:82%}
+#tarot .ft344__deep-space i:nth-child(12){left:72%;top:85%}
+#tarot .ft344-awake .ft344__deep-space i{animation:ft344Star 8s ease-in-out infinite}
+#tarot .ft344__deep-space i:nth-child(2n){animation-delay:-2.3s}
+#tarot .ft344__deep-space i:nth-child(3n){animation-delay:-4.7s}
+
+#tarot .ft344__nebula{z-index:0;opacity:.86}
+#tarot .ft344__nebula i{
+  position:absolute; border-radius:50%; filter:blur(28px);
+  background:radial-gradient(circle,rgba(196,79,244,.24),rgba(65,22,123,.08) 48%,transparent 72%);
+}
+#tarot .ft344__nebula i:first-child{left:-10%;top:58%;width:300px;height:230px}
+#tarot .ft344__nebula i:nth-child(2){right:-8%;top:22%;width:250px;height:190px;background:radial-gradient(circle,rgba(112,75,255,.16),rgba(35,16,89,.05) 48%,transparent 72%)}
+#tarot .ft344__nebula i:nth-child(3){left:34%;top:4%;width:220px;height:160px;background:radial-gradient(circle,rgba(247,200,126,.08),rgba(113,31,173,.05) 48%,transparent 72%)}
+#tarot .ft344-awake .ft344__nebula i:first-child{animation:ft344Nebula 12s ease-in-out infinite}
+#tarot .ft344-awake .ft344__nebula i:nth-child(2){animation:ft344Nebula 14s ease-in-out infinite reverse}
+#tarot .ft344-awake .ft344__nebula i:nth-child(3){animation:ft344Nebula 10s ease-in-out infinite}
+
+/* Motor de fogo celestial */
+#tarot .ft344__fire-engine{
+  z-index:1;
+}
+#tarot .ft344__fire-engine i{
+  position:absolute;
+  left:50%;
+  bottom:126px;
+  transform-origin:50% 100%;
+  border-radius:999px;
+  pointer-events:none;
+}
+#tarot .ft344__fire-engine i:nth-child(1){
+  width:240px; height:540px; transform:translateX(-50%) rotate(-2deg);
+  background:linear-gradient(180deg,rgba(255,236,192,0),rgba(255,236,192,.04) 10%,rgba(255,192,101,.22) 34%,rgba(232,110,255,.44) 62%,rgba(129,61,255,0) 100%);
+  filter:blur(12px); opacity:.24;
+}
+#tarot .ft344__fire-engine i:nth-child(2){
+  width:170px; height:460px; transform:translateX(-50%) rotate(9deg);
+  background:linear-gradient(180deg,rgba(255,234,188,0),rgba(255,234,188,.04) 12%,rgba(255,174,79,.20) 35%,rgba(231,101,255,.38) 64%,rgba(129,61,255,0) 100%);
+  filter:blur(10px); opacity:.22;
+}
+#tarot .ft344__fire-engine i:nth-child(3){
+  width:160px; height:450px; transform:translateX(-50%) rotate(-10deg);
+  background:linear-gradient(180deg,rgba(255,234,188,0),rgba(255,234,188,.04) 12%,rgba(255,180,89,.18) 33%,rgba(205,92,255,.34) 60%,rgba(129,61,255,0) 100%);
+  filter:blur(10px); opacity:.20;
+}
+#tarot .ft344__fire-engine i:nth-child(4){
+  width:18px; height:18px; left:44%; bottom:300px;
+  background:radial-gradient(circle,rgba(255,245,221,1),rgba(255,185,104,.66) 28%,rgba(234,118,255,.46) 56%,transparent 76%);
+  box-shadow:0 0 22px rgba(255,181,95,.40),0 0 18px rgba(233,110,255,.52);
+  opacity:.70;
+}
+#tarot .ft344__fire-engine i:nth-child(5){
+  width:14px; height:14px; left:55%; bottom:372px;
+  background:radial-gradient(circle,rgba(255,245,221,.98),rgba(255,185,104,.60) 28%,rgba(234,118,255,.42) 56%,transparent 76%);
+  box-shadow:0 0 18px rgba(255,181,95,.36),0 0 14px rgba(233,110,255,.46);
+  opacity:.64;
+}
+#tarot .ft344__fire-engine i:nth-child(6){
+  width:13px; height:13px; left:60%; bottom:244px;
+  background:radial-gradient(circle,rgba(255,245,221,.96),rgba(255,185,104,.54) 28%,rgba(234,118,255,.40) 56%,transparent 76%);
+  box-shadow:0 0 18px rgba(255,181,95,.30),0 0 14px rgba(233,110,255,.42);
+  opacity:.60;
+}
+#tarot .ft344__fire-engine i:nth-child(7){
+  width:340px; height:340px; left:50%; bottom:44px; transform:translateX(-50%);
+  background:radial-gradient(circle,rgba(255,197,105,.10),rgba(233,102,255,.10) 34%,transparent 70%);
+  filter:blur(14px); opacity:.50;
+}
+#tarot .ft344__fire-engine i:nth-child(8){
+  width:420px; height:420px; left:50%; bottom:-36px; transform:translateX(-50%);
+  background:radial-gradient(circle,rgba(180,63,246,.10),transparent 66%);
+  filter:blur(20px); opacity:.42;
+}
+#tarot .ft344-awake .ft344__fire-engine i:nth-child(1){animation:ft344Flame 4.2s ease-in-out infinite}
+#tarot .ft344-awake .ft344__fire-engine i:nth-child(2){animation:ft344Flame 3.7s ease-in-out infinite reverse}
+#tarot .ft344-awake .ft344__fire-engine i:nth-child(3){animation:ft344Flame 4.0s ease-in-out infinite}
+#tarot .ft344-awake .ft344__fire-engine i:nth-child(4),
+#tarot .ft344-awake .ft344__fire-engine i:nth-child(5),
+#tarot .ft344-awake .ft344__fire-engine i:nth-child(6){animation:ft344Spark 2.5s ease-in-out infinite}
+#tarot .ft344-awake .ft344__fire-engine i:nth-child(7){animation:ft344Pulse 5.4s ease-in-out infinite}
+#tarot .ft344-awake .ft344__fire-engine i:nth-child(8){animation:ft344Pulse 6.2s ease-in-out infinite reverse}
+
+#tarot .ft344__singularity{
+  position:absolute; z-index:2; left:50%; top:31%;
+  width:92px; height:92px; border-radius:50%;
+  transform:translate(-50%,-50%) scale(.18);
+  opacity:0; pointer-events:none;
+  background:
+    radial-gradient(circle,#020105 0 24%,rgba(27,6,42,.98) 34%,rgba(171,58,228,.48) 46%,rgba(244,193,110,.20) 57%,transparent 74%);
+}
+#tarot .ft344__singularity::before{
+  content:""; position:absolute; inset:-30%; border-radius:50%;
+  background:conic-gradient(from 12deg,transparent,rgba(230,105,255,.56),transparent 22%,rgba(248,212,139,.52),transparent 52%,rgba(171,62,241,.50),transparent 82%);
+  -webkit-mask:radial-gradient(farthest-side,transparent 60%,#000 63%);
+  mask:radial-gradient(farthest-side,transparent 60%,#000 63%);
+}
+#tarot .ft344-singularity-active .ft344__singularity{animation:ft344Singularity .18s cubic-bezier(.2,.8,.2,1) both}
+#tarot .ft344-birth .ft344__singularity{animation:ft344SingularityOut .36s ease-out both}
+
+/* Stream rápido de fogo */
+#tarot .ft344__birth-stream{z-index:3; opacity:0}
+#tarot .ft344__birth-stream i{
+  position:absolute;
+  left:var(--ft344-stream-x);
+  top:var(--ft344-stream-y);
+  transform-origin:0 50%;
+  transform:translateY(-50%) rotate(var(--ft344-stream-angle));
+}
+#tarot .ft344__birth-stream i:first-child{
+  width:var(--ft344-stream-length); height:4px; border-radius:999px;
+  background:linear-gradient(90deg,rgba(255,229,176,0),rgba(255,229,176,1) 12%,rgba(255,160,84,.96) 28%,rgba(227,102,255,.95) 58%,rgba(255,229,176,0));
+  box-shadow:0 0 20px rgba(216,89,255,.56),0 0 44px rgba(255,182,94,.28);
+  opacity:0;
+}
+#tarot .ft344__birth-stream i:nth-child(2){
+  width:18px; height:18px; border-radius:50%;
+  background:radial-gradient(circle,rgba(255,245,221,1),rgba(255,185,104,.66) 26%,rgba(234,118,255,.46) 54%,transparent 75%);
+  box-shadow:0 0 22px rgba(255,181,95,.40),0 0 18px rgba(233,110,255,.52);
+  opacity:0;
+}
+#tarot .ft344__birth-stream i:nth-child(3){
+  width:96px; height:96px; border-radius:50%;
+  background:radial-gradient(circle,rgba(255,216,146,.34),rgba(239,99,201,.08) 50%,transparent 68%);
+  filter:blur(10px); opacity:0;
+}
+#tarot .ft344__birth-stream i:nth-child(4){
+  width:calc(var(--ft344-stream-length) * .92); height:12px; border-radius:999px;
+  background:linear-gradient(90deg,rgba(255,207,118,0),rgba(255,207,118,.25),rgba(196,82,245,0));
+  filter:blur(14px); opacity:0;
+}
+#tarot .ft344__birth-stream i:nth-child(5){
+  width:calc(var(--ft344-stream-length) * .48); height:40px; border-radius:999px;
+  background:linear-gradient(90deg,rgba(255,201,123,0),rgba(255,201,123,.18),rgba(239,97,198,.10),rgba(255,201,123,0));
+  filter:blur(20px); opacity:0;
+}
+#tarot .ft344__birth-stream i:nth-child(6){
+  width:34px; height:34px; border-radius:50%;
+  background:radial-gradient(circle,rgba(255,242,214,.80),rgba(239,97,198,.18) 40%,transparent 72%);
+  filter:blur(6px); opacity:0;
+}
+#tarot .ft344-birth-stream .ft344__birth-stream{animation:ft344StreamFade .56s ease-out both}
+#tarot .ft344-birth-stream .ft344__birth-stream i:first-child{animation:ft344Beam .54s cubic-bezier(.16,.82,.22,1) both}
+#tarot .ft344-birth-stream .ft344__birth-stream i:nth-child(2){animation:ft344Seed .54s cubic-bezier(.16,.82,.22,1) both}
+#tarot .ft344-birth-stream .ft344__birth-stream i:nth-child(3){animation:ft344GlowTrail .54s ease-out both}
+#tarot .ft344-birth-stream .ft344__birth-stream i:nth-child(4){animation:ft344BeamGhost .54s ease-out both}
+#tarot .ft344-birth-stream .ft344__birth-stream i:nth-child(5){animation:ft344BeamGhostWide .54s ease-out both}
+#tarot .ft344-birth-stream .ft344__birth-stream i:nth-child(6){animation:ft344FireBall .54s ease-out both}
+
+/* Carta */
+#tarot[data-tarot-supreme="v344"] .ft301__card-zone{
+  width:clamp(206px,36vw,286px);
+  margin-top:0;
+  margin-bottom:58px;
+}
+#tarot .ft344__card-fire{
+  position:absolute; z-index:-1; inset:-28%;
+  pointer-events:none; opacity:.34;
+}
+#tarot .ft344__card-fire i{
+  position:absolute; left:50%; top:50%;
+  transform:translate(-50%,-50%);
+  filter:blur(14px);
+}
+#tarot .ft344__card-fire i:first-child{
+  width:230px; height:360px; border-radius:44%;
+  background:radial-gradient(ellipse,rgba(250,208,129,.28),rgba(235,100,196,.10) 42%,transparent 72%);
+}
+#tarot .ft344__card-fire i:nth-child(2){
+  width:190px; height:320px; border-radius:44%;
+  background:radial-gradient(ellipse,rgba(219,93,255,.22),rgba(94,41,210,.08) 46%,transparent 72%);
+}
+#tarot .ft344__card-fire i:nth-child(3){
+  width:134px; height:244px; border-radius:44%;
+  background:radial-gradient(ellipse,rgba(255,244,220,.12),transparent 58%);
+}
+#tarot .ft344__card-fire i:nth-child(4){
+  width:240px; height:240px; border-radius:50%;
+  background:radial-gradient(circle,rgba(246,193,110,.12),transparent 66%);
+}
+#tarot .ft344__card-fire i:nth-child(5){
+  width:84px; height:180px; border-radius:50%;
+  background:linear-gradient(180deg,rgba(255,235,186,.16),rgba(236,97,255,.08),transparent);
+}
+#tarot[data-tarot-supreme="v344"] .ft301__card{
+  overflow:visible;
+  transform:translateY(-16px);
+}
+#tarot[data-tarot-supreme="v344"] .ft301__card img{
+  border-color:rgba(245,214,146,.48);
+  box-shadow:0 44px 116px rgba(0,0,0,.74),0 0 58px rgba(246,187,108,.16),0 0 42px rgba(154,67,244,.28),0 0 1px rgba(255,235,188,.80);
+}
+#tarot[data-tarot-supreme="v344"] .ft301__card-name{
+  left:6px; right:6px; bottom:6px;
+  padding:32px 11px 10px;
+  background:linear-gradient(180deg,transparent,rgba(2,1,7,.92) 54%);
+}
+#tarot .ft301__card-zone.ft344-card-touch .ft301__card{filter:brightness(1.08)}
+
+/* Orbe crua */
+#tarot[data-tarot-supreme="v344"] .ft301__orb{
+  --ft344-x:50%;
+  --ft344-y:50%;
+  width:clamp(124px,23vw,168px);
+  margin-top:42px;
+  transform:none!important;
+  filter:drop-shadow(0 0 36px rgba(155,64,255,.44)) drop-shadow(0 0 20px rgba(245,204,125,.16));
+}
+#tarot[data-tarot-supreme="v344"] .ft301__orb:active{transform:none!important}
+#tarot .ft344__orb-presence,
+#tarot .ft344__touch-light{
+  position:absolute; inset:0; border-radius:50%; pointer-events:none;
+}
+#tarot .ft344__orb-presence{inset:-22%; z-index:-1}
+#tarot .ft344__orb-presence i{
+  position:absolute; border-radius:50%;
+  background:radial-gradient(circle,rgba(220,101,255,.20),rgba(129,52,224,.06) 42%,transparent 75%);
+  filter:blur(14px); opacity:.54;
+}
+#tarot .ft344__orb-presence i:first-child{inset:0}
+#tarot .ft344__orb-presence i:nth-child(2){inset:14%;background:radial-gradient(circle,rgba(251,214,146,.10),transparent 72%);opacity:.42}
+#tarot .ft344__orb-presence i:nth-child(3){inset:-10%;background:radial-gradient(circle,rgba(255,174,79,.08),transparent 72%);opacity:.24}
+#tarot .ft344-awake .ft344__orb-presence i:first-child{animation:ft344Breath 5.4s ease-in-out infinite}
+#tarot .ft344-awake .ft344__orb-presence i:nth-child(2){animation:ft344Breath 4.2s ease-in-out infinite reverse}
+#tarot .ft344-awake .ft344__orb-presence i:nth-child(3){animation:ft344Breath 6.2s ease-in-out infinite}
+#tarot .ft344__touch-light{
+  z-index:6;
+  background:radial-gradient(circle at var(--ft344-x) var(--ft344-y),rgba(255,245,215,.88) 0 2%,rgba(255,190,97,.22) 7%,rgba(235,132,255,.30) 14%,rgba(122,47,223,.12) 22%,transparent 36%);
+  mix-blend-mode:screen; opacity:0; transition:opacity .10s ease;
+}
+#tarot .ft301__orb.ft344-touch .ft344__touch-light{opacity:1}
+#tarot .ft301__orb.ft344-touch{filter:drop-shadow(0 0 50px rgba(164,66,255,.76)) drop-shadow(0 0 24px rgba(246,203,127,.28))}
+#tarot .ft344__gesture{
+  position:absolute; left:50%; bottom:-18px; transform:translateX(-50%);
+  margin:0; white-space:nowrap; pointer-events:none;
+  color:rgba(242,208,144,.80);
+  font:800 7px/1 system-ui,-apple-system,sans-serif;
+  letter-spacing:.18em;
+}
+
+/* Signal + actions */
+#tarot[data-tarot-supreme="v344"] .ft301__signal{
+  min-height:22px;
+  margin:4px 16px 16px;
+  font-family:Georgia,serif;
+  font-size:11px;
+  letter-spacing:.02em;
+  color:rgba(242,231,248,.56);
+}
+#tarot[data-tarot-supreme="v344"] .ft301__actions{
+  width:min(920px,100%);
+  margin:0 auto;
+  opacity:.64;
+}
+#tarot[data-tarot-supreme="v344"] .ft301__actions button{
+  min-height:38px;
+  border-color:rgba(240,210,143,.09);
+  background:linear-gradient(180deg,rgba(6,2,14,.54),rgba(3,1,8,.42));
+  box-shadow:inset 0 0 18px rgba(183,77,239,.05);
+}
+
+/* Constelação */
+#tarot[data-tarot-supreme="v344"] .ft301__constellation{
+  position:relative;
+  width:min(920px,100%);
+  padding:12px;
+  border:1px solid rgba(240,210,143,.06);
+  border-radius:26px;
+  background:
+    linear-gradient(180deg,rgba(8,3,16,.46),rgba(2,1,7,.62)),
+    radial-gradient(circle at 50% 0%,rgba(196,84,244,.08),transparent 56%);
+  box-shadow:inset 0 0 66px rgba(149,66,235,.05);
+  overflow:hidden;
+}
+#tarot .ft344__constellation-glow{position:absolute;inset:0;pointer-events:none;z-index:0}
+#tarot .ft344__constellation-glow i{
+  position:absolute;width:3px;height:3px;border-radius:50%;background:#ffecc4;opacity:.18;
+  box-shadow:0 0 7px rgba(208,86,255,.48);
+}
+#tarot .ft344__constellation-glow i:nth-child(1){left:8%;top:22%}
+#tarot .ft344__constellation-glow i:nth-child(2){left:28%;top:10%}
+#tarot .ft344__constellation-glow i:nth-child(3){right:18%;top:24%}
+#tarot .ft344__constellation-glow i:nth-child(4){left:18%;bottom:14%}
+#tarot .ft344__constellation-glow i:nth-child(5){right:9%;bottom:18%}
+#tarot .ft344__constellation-glow i:nth-child(6){left:55%;bottom:32%}
+#tarot .ft344-awake .ft344__constellation-glow i{animation:ft344Star 8.6s ease-in-out infinite}
+#tarot[data-tarot-supreme="v344"] .ft301__constellation>*{position:relative;z-index:1}
+#tarot[data-tarot-supreme="v344"] .ft301__constellation>header{margin:0 3px 9px;opacity:.74}
+#tarot[data-tarot-supreme="v344"] .ft301__constellation h3{font-size:13px}
+#tarot[data-tarot-supreme="v344"] .ft301__constellation p{font-size:11px}
+#tarot[data-tarot-supreme="v344"] .ft301__grid{
+  grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  gap:clamp(4px,.8vw,8px);
+}
+#tarot[data-tarot-supreme="v344"] .ft301__grid button{
+  opacity:.80;
+  border-color:rgba(240,210,143,.05);
+  box-shadow:0 7px 22px rgba(0,0,0,.26);
+  background:rgba(6,2,12,.22);
+}
+#tarot[data-tarot-supreme="v344"] .ft301__grid button:hover,
+#tarot[data-tarot-supreme="v344"] .ft301__grid button:focus-visible,
+#tarot[data-tarot-supreme="v344"] .ft301__grid button.is-current{
+  opacity:1;
+  transform:translateY(-3px);
+  border-color:rgba(240,210,143,.42);
+  box-shadow:0 10px 28px rgba(0,0,0,.30),0 0 18px rgba(159,67,235,.15);
+}
+#tarot[data-tarot-supreme="v344"] .ft301__grid button.ft344-newborn{animation:ft344Newborn 1.12s cubic-bezier(.16,.82,.22,1)}
+
+#tarot[data-tarot-supreme="v344"] .ft301__nav{bottom:50px}
+#tarot[data-tarot-supreme="v344"] .ft301__nav button{
+  width:40px;height:40px;
+  background:rgba(6,2,14,.44);
+  border-color:rgba(240,210,143,.12);
+  backdrop-filter:blur(8px);
+}
+
+#tarot .ft344-reveal-wave::after{
+  content:""; position:absolute; z-index:1; left:50%; top:31%;
+  width:46px; height:46px; border-radius:50%;
+  border:1px solid rgba(247,212,140,.56);
+  transform:translate(-50%,-50%) scale(.4);
+  opacity:0;
+  animation:ft344RevealWave .60s ease-out forwards;
+  pointer-events:none;
+}
+
+/* Mesa Real verdadeira */
+#tarot .ft344__mesa-panel{
+  position:fixed; inset:0; z-index:72;
+}
+#tarot .ft344__mesa-backdrop{
+  position:absolute; inset:0;
+  background:rgba(2,0,8,.78);
+  backdrop-filter:blur(16px);
+  opacity:0;
+  transition:opacity .34s cubic-bezier(.22,.88,.22,1);
+}
+#tarot .ft344__mesa-shell{
+  position:absolute;
+  inset:calc(18px + env(safe-area-inset-top)) 12px calc(20px + env(safe-area-inset-bottom)) 12px;
+  border-radius:30px;
+  border:1px solid rgba(240,210,143,.14);
+  background:
+    linear-gradient(180deg,rgba(7,2,14,.82),rgba(3,1,9,.92)),
+    url('./tarot-livre-fogo-absoluto-v344.jpg') center/cover no-repeat;
+  box-shadow:0 30px 100px rgba(0,0,0,.40), inset 0 0 120px rgba(141,56,224,.08);
+  overflow:hidden;
+  display:flex; flex-direction:column;
+  transform:translateY(20px) scale(.985);
+  opacity:0;
+  transition:
+    transform .38s cubic-bezier(.18,.88,.22,1),
+    opacity .30s ease;
+}
+#tarot .ft344__mesa-panel.is-open .ft344__mesa-backdrop{opacity:1}
+#tarot .ft344__mesa-panel.is-open .ft344__mesa-shell{
+  transform:translateY(0) scale(1);
+  opacity:1;
+}
+#tarot .ft344__mesa-header{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:18px 18px 14px;
+  border-bottom:1px solid rgba(240,210,143,.08);
+  background:linear-gradient(180deg,rgba(10,4,20,.60),rgba(10,4,20,.10));
+}
+#tarot .ft344__mesa-header h3{
+  margin:0; color:#f0d29a; font:600 22px/1.1 Georgia,serif; letter-spacing:.06em; text-transform:uppercase;
+}
+#tarot .ft344__mesa-header p{
+  margin:4px 0 0; color:rgba(242,231,248,.74); font:400 12px/1.2 Georgia,serif; letter-spacing:.04em;
+}
+#tarot .ft344__mesa-close{
+  min-height:40px; padding:0 16px; border-radius:999px;
+  border:1px solid rgba(240,210,143,.32);
+  background:rgba(10,4,20,.42); color:#f0d29a;
+}
+#tarot .ft344__mesa-grid{
+  flex:1; overflow:auto;
+  padding:14px;
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:8px;
+}
+#tarot .ft344__mesa-card{
+  position:relative; min-height:86px; border-radius:16px;
+  border:1px solid rgba(240,210,143,.10);
+  background:rgba(5,2,12,.36);
+  box-shadow:0 10px 24px rgba(0,0,0,.22);
+  overflow:hidden;
+  display:flex; flex-direction:column; align-items:stretch; justify-content:flex-end;
+  padding:0;
+}
+#tarot .ft344__mesa-card img{
+  display:block; width:100%; height:auto;
+}
+#tarot .ft344__mesa-label{
+  display:block; padding:8px 6px;
+  color:rgba(247,229,190,.88);
+  font:500 10px/1.2 Georgia,serif;
+  text-align:center;
+  background:linear-gradient(180deg,transparent,rgba(2,1,7,.94) 58%);
+}
+#tarot .ft344__mesa-empty{
+  color:rgba(242,231,248,.72);
+  font:400 14px/1.4 Georgia,serif;
+  padding:14px;
+  grid-column:1/-1;
+}
+
+/* Responsivo */
+@media(max-width:760px){
+  #tarot .ft344__mesa-real{
+    position:static; transform:none; margin-left:auto; margin-top:8px; display:block; min-height:38px; font-size:13px;
+  }
+  #tarot[data-tarot-supreme="v344"] .ft301__head{display:block}
+  #tarot .ft344__mesa-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media(max-width:620px){
+  #tarot[data-tarot-supreme="v344"]{padding-left:8px!important;padding-right:8px!important}
+  #tarot[data-tarot-supreme="v344"] .ft301__ritual{min-height:min(78svh,740px);border-radius:28px}
+  #tarot[data-tarot-supreme="v344"] .ft301__card-zone{width:min(56vw,236px);margin-bottom:46px}
+  #tarot[data-tarot-supreme="v344"] .ft301__orb{width:min(33vw,144px);margin-top:38px}
+  #tarot .ft344__fire-engine i:nth-child(1){height:460px;width:190px}
+  #tarot .ft344__fire-engine i:nth-child(2){height:390px;width:144px}
+  #tarot .ft344__fire-engine i:nth-child(3){height:380px;width:136px}
+  #tarot .ft344__mesa-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+}
+@media(max-width:390px){
+  #tarot[data-tarot-supreme="v344"] .ft301__ritual{min-height:600px}
+  #tarot[data-tarot-supreme="v344"] .ft301__nav{bottom:45px}
+}
+@media(orientation:landscape) and (max-height:560px){
+  #tarot[data-tarot-supreme="v344"] .ft301__ritual{min-height:510px}
+  #tarot[data-tarot-supreme="v344"] .ft301__card-zone{width:min(30vh,196px);margin-bottom:34px}
+  #tarot[data-tarot-supreme="v344"] .ft301__orb{width:min(24vh,140px);margin-top:24px}
+}
+
+/* Performance */
+@media(prefers-reduced-motion:reduce){
+  #tarot .ft344__deep-space i,
+  #tarot .ft344__nebula i,
+  #tarot .ft344__fire-engine i,
+  #tarot .ft344__constellation-glow i,
+  #tarot .ft344__orb-presence i{animation:none!important}
+}
+html[data-performance-tier="constrained"] #tarot .ft344__deep-space i,
+html[data-performance-tier="constrained"] #tarot .ft344__nebula i,
+html[data-performance-tier="constrained"] #tarot .ft344__fire-engine i,
+html[data-performance-tier="constrained"] #tarot .ft344__constellation-glow i{animation:none!important}
+
+@keyframes ft344Star{
+  0%,100%{opacity:.14;transform:scale(.65)}
+  50%{opacity:.82;transform:scale(1.28)}
+}
+@keyframes ft344Nebula{
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(6px,-8px) scale(1.08)}
+}
+@keyframes ft344Flame{
+  0%,100%{opacity:.20;transform:translateX(-50%) scale(1) rotate(-2deg)}
+  50%{opacity:.38;transform:translateX(-50%) scale(1.10,1.06) rotate(2deg)}
+}
+@keyframes ft344Spark{
+  0%,100%{opacity:.14;transform:translateY(0) scale(.72)}
+  50%{opacity:.88;transform:translateY(-18px) scale(1.18)}
+}
+@keyframes ft344Pulse{
+  0%,100%{opacity:.32;transform:translateX(-50%) scale(1)}
+  50%{opacity:.56;transform:translateX(-50%) scale(1.08)}
+}
+@keyframes ft344Breath{
+  0%,100%{transform:scale(1);opacity:.46}
+  50%{transform:scale(1.08);opacity:.76}
+}
+@keyframes ft344Singularity{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.18) rotate(0)}
+  65%{opacity:1;transform:translate(-50%,-50%) scale(1.03) rotate(120deg)}
+  100%{opacity:.90;transform:translate(-50%,-50%) scale(.82) rotate(170deg)}
+}
+@keyframes ft344SingularityOut{
+  0%{opacity:.90;transform:translate(-50%,-50%) scale(.82) rotate(170deg)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1.76) rotate(260deg)}
+}
+@keyframes ft344RevealWave{
+  0%{opacity:.88;transform:translate(-50%,-50%) scale(.4)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(10)}
+}
+@keyframes ft344StreamFade{0%,100%{opacity:1}}
+@keyframes ft344Beam{
+  0%{opacity:0;transform:translateY(-50%) rotate(var(--ft344-stream-angle)) scaleX(.16)}
+  12%{opacity:1}
+  100%{opacity:0;transform:translateY(-50%) rotate(var(--ft344-stream-angle)) scaleX(1)}
+}
+@keyframes ft344Seed{
+  0%{opacity:.18;transform:translate(-8px,-50%) rotate(var(--ft344-stream-angle)) scale(.58)}
+  56%{opacity:1;transform:translate(calc(var(--ft344-stream-length) - 14px),-50%) rotate(var(--ft344-stream-angle)) scale(1)}
+  100%{opacity:0;transform:translate(calc(var(--ft344-stream-length) + 6px),-50%) rotate(var(--ft344-stream-angle)) scale(1.16)}
+}
+@keyframes ft344GlowTrail{
+  0%{opacity:0;transform:translate(-10px,-50%) rotate(var(--ft344-stream-angle)) scale(.5)}
+  40%{opacity:.84;transform:translate(calc(var(--ft344-stream-length)*.45),-50%) rotate(var(--ft344-stream-angle)) scale(.9)}
+  100%{opacity:0;transform:translate(calc(var(--ft344-stream-length)*.95),-50%) rotate(var(--ft344-stream-angle)) scale(1.28)}
+}
+@keyframes ft344BeamGhost{
+  0%{opacity:0;transform:translateY(-50%) rotate(var(--ft344-stream-angle)) scaleX(.22)}
+  40%{opacity:.9}
+  100%{opacity:0;transform:translateY(-50%) rotate(var(--ft344-stream-angle)) scaleX(1.04)}
+}
+@keyframes ft344BeamGhostWide{
+  0%{opacity:0;transform:translateY(-50%) rotate(var(--ft344-stream-angle)) scaleX(.18)}
+  40%{opacity:.7}
+  100%{opacity:0;transform:translateY(-50%) rotate(var(--ft344-stream-angle)) scaleX(1)}
+}
+@keyframes ft344FireBall{
+  0%{opacity:0;transform:translate(-8px,-50%) rotate(var(--ft344-stream-angle)) scale(.50)}
+  50%{opacity:1;transform:translate(calc(var(--ft344-stream-length) * .64),-50%) rotate(var(--ft344-stream-angle)) scale(1.08)}
+  100%{opacity:0;transform:translate(calc(var(--ft344-stream-length) + 4px),-50%) rotate(var(--ft344-stream-angle)) scale(1.26)}
+}
+@keyframes ft344Newborn{
+  0%{transform:scale(.88);box-shadow:0 0 0 rgba(0,0,0,0)}
+  35%{transform:scale(1.05);box-shadow:0 0 24px rgba(250,189,108,.18),0 0 20px rgba(201,85,244,.28)}
+  100%{transform:scale(1)}
+}

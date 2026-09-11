@@ -1,0 +1,47 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R044",
+  "release": "V344",
+  "world": "Tarot Livre Fogo Absoluto",
+  "direction": "Motor de fogo absoluto baseado na imagem aprovada pelo usuário.",
+  "replace": [
+    "app-v208.js"
+  ],
+  "new": [
+    "free-tarot-absolute-fire-v344.js",
+    "free-tarot-absolute-fire-v344.css",
+    "tarot-livre-fogo-absoluto-v344.jpg",
+    "REBIRTH-R044-CONTRACT.json"
+  ],
+  "goals": [
+    "fogo celestial muito mais visível",
+    "revelação rápida da carta",
+    "efeito de magia saindo da Orbe",
+    "Mesa Real overlay realmente visível",
+    "grade da Mesa Real em 6 colunas",
+    "universo preto profundo",
+    "Orbe crua como no menu"
+  ],
+  "preserve_rules": {
+    "deck_size": 78,
+    "no_repetition": true,
+    "no_reversed_cards": true,
+    "no_meanings_in_free_tarot": true,
+    "grid_columns": 6
+  },
+  "architecture": {
+    "base_engine": "V301",
+    "previous_layer": "V343",
+    "new_layer": "V344",
+    "background_asset": "tarot-livre-fogo-absoluto-v344.jpg",
+    "mesa_real_overlay": true,
+    "extra_api_calls": 0
+  },
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}
