@@ -1,0 +1,115 @@
+/* DIVINA BRUXA 2.0 — REBIRTH R019 · SKINS + PREMIUM V318 */
+
+.skins-world-v318,.premium-world-v318{
+  position:relative;isolation:isolate;overflow:hidden;
+  margin:0 0 20px;padding:clamp(18px,4vw,30px);
+  border:1px solid rgba(231,196,122,.16);border-radius:30px;
+  background:
+    radial-gradient(circle at 84% 8%,rgba(153,56,207,.16),transparent 31%),
+    radial-gradient(circle at 6% 110%,rgba(229,184,100,.07),transparent 36%),
+    linear-gradient(145deg,rgba(20,8,29,.93),rgba(6,3,11,.98));
+  box-shadow:0 26px 70px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.035)
+}
+.spw318__aurora{position:absolute;inset:0;pointer-events:none;opacity:.48}
+.spw318__aurora i{
+  position:absolute;width:3px;height:3px;border-radius:50%;background:#efd18c;
+  box-shadow:0 0 12px rgba(201,83,240,.70)
+}
+.spw318__aurora i:nth-child(1){left:12%;top:18%}
+.spw318__aurora i:nth-child(2){right:20%;top:30%}
+.spw318__aurora i:nth-child(3){left:69%;bottom:15%}
+
+.spw318__head{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 132px;gap:22px;align-items:center}
+.spw318__head>div:first-child{max-width:720px}
+.spw318__head h3{
+  margin:.28rem 0 .6rem;color:#fff1e3;
+  font:500 clamp(1.85rem,5.7vw,3.2rem)/1.02 Georgia,serif;letter-spacing:-.025em
+}
+.spw318__head p:last-child{margin:0;color:#a99cad;line-height:1.62}
+.spw318__living-orb{
+  position:relative;width:124px;height:124px;justify-self:end;border-radius:50%;
+  filter:drop-shadow(0 0 24px rgba(178,67,221,.20))
+}
+.spw318__living-orb img{width:100%;height:100%;object-fit:contain;border-radius:50%}
+.spw318__living-orb i{
+  position:absolute;inset:-8px;border:1px solid rgba(236,199,127,.16);border-radius:50%;
+  animation:spw318Breath 4.8s ease-in-out infinite
+}
+.spw318__identity{
+  position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto auto;
+  gap:12px;align-items:center;margin-top:23px;padding:13px 14px;
+  border:1px solid rgba(231,196,122,.12);border-radius:20px;background:rgba(7,3,13,.58)
+}
+.spw318__identity p{margin:0;display:grid;gap:2px}
+.spw318__identity p small{color:#887e8c;font-size:7px;letter-spacing:.12em}
+.spw318__identity p b{color:#ead295;font:500 19px/1.15 Georgia,serif}
+.spw318__identity p span{color:#857a88;font-size:8px}
+.spw318__identity>div{display:grid;text-align:center}
+.spw318__identity>div span{color:#efd28e;font:500 24px/1 Georgia,serif}
+.spw318__identity>div small{color:#807684;font-size:7px;text-transform:uppercase}
+.spw318__identity button,.spw318__covenant button{
+  min-height:42px;padding:0 15px;border:1px solid rgba(234,198,125,.28);border-radius:999px;
+  background:linear-gradient(135deg,rgba(118,43,153,.38),rgba(37,14,47,.62));
+  color:#e7cc8e;font-size:8px;font-weight:800;letter-spacing:.08em
+}
+.spw318__truth{
+  position:relative;display:flex;gap:9px;align-items:flex-start;margin:12px 0 0;padding:11px 13px;
+  border-radius:16px;background:rgba(255,255,255,.018);color:#8f8392
+}
+.spw318__truth>span:first-child{color:#e7c77c}
+.spw318__truth b{display:block;color:#d5c5d8;font-size:9px}
+.spw318__truth span span{font-size:8px}
+
+.spw318__head--premium{grid-template-columns:minmax(0,1fr) auto}
+.spw318__crown{
+  display:grid;place-items:center;width:74px;height:74px;border:1px solid rgba(237,202,130,.34);
+  border-radius:50%;color:#efd08a;font-size:32px;
+  background:radial-gradient(circle,rgba(132,45,172,.34),rgba(10,4,17,.92) 68%);
+  box-shadow:0 0 36px rgba(183,73,225,.13)
+}
+.spw318__crown-glow{
+  position:absolute;right:-40px;top:-70px;width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle,rgba(215,171,92,.08),rgba(148,52,191,.05) 38%,transparent 70%);
+  filter:blur(10px);pointer-events:none
+}
+.spw318__plans{
+  position:relative;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px
+}
+.spw318__plans article{
+  min-height:160px;padding:17px;border:1px solid rgba(232,197,123,.13);border-radius:21px;
+  background:rgba(7,3,13,.62);display:flex;flex-direction:column
+}
+.spw318__plans article.is-active{border-color:rgba(231,197,126,.30);box-shadow:0 0 28px rgba(175,65,217,.08)}
+.spw318__plans small{color:#a58b55;font-size:7px;font-weight:800;letter-spacing:.14em}
+.spw318__plans strong{margin-top:8px;color:#f1d794;font:500 clamp(1.5rem,4vw,2.25rem)/1 Georgia,serif}
+.spw318__plans p{color:#948898;font-size:9px;line-height:1.55;flex:1}
+.spw318__plans span{color:#c4a96d;font-size:7px;font-weight:800;letter-spacing:.10em}
+.spw318__covenant{
+  position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:11px;align-items:center;
+  margin-top:10px;padding:13px 14px;border:1px solid rgba(231,196,122,.12);border-radius:18px;
+  background:rgba(7,3,13,.58)
+}
+.spw318__covenant>span{color:#e8c77c;font-size:19px}
+.spw318__covenant p{margin:0;display:grid;gap:3px}
+.spw318__covenant b{color:#d9c9dc;font-size:9px}
+.spw318__covenant small{color:#827786;font-size:8px;line-height:1.4}
+
+@keyframes spw318Breath{0%,100%{transform:scale(.96);opacity:.35}50%{transform:scale(1.08);opacity:.82}}
+@media(max-width:680px){
+  .spw318__head{grid-template-columns:1fr 88px}
+  .spw318__living-orb{width:84px;height:84px}
+  .spw318__identity{grid-template-columns:1fr auto}
+  .spw318__identity button{grid-column:1/-1;width:100%}
+  .spw318__plans{grid-template-columns:1fr}
+  .spw318__covenant{grid-template-columns:auto 1fr}
+  .spw318__covenant button{grid-column:1/-1;width:100%}
+}
+@media(max-width:430px){
+  .skins-world-v318,.premium-world-v318{padding:16px 13px;border-radius:25px}
+  .spw318__head{grid-template-columns:1fr 70px}
+  .spw318__living-orb{width:66px;height:66px}
+  .spw318__head h3{font-size:clamp(1.65rem,9vw,2.45rem)}
+}
+@media(prefers-reduced-motion:reduce){
+  .spw318__living-orb i{animation:none!important}
+}

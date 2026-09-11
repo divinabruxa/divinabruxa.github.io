@@ -1,0 +1,77 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R019",
+  "release": "V318",
+  "world": "Skins + Premium 2.0",
+  "vision_source": "chat Whit + WORK7.0 master vision",
+  "purpose": "Transformar Skins e Premium em mundos vivos sem reescrever catálogo, entitlement, billing ou runtime de skins.",
+  "replace": [
+    "page-loader-v1.js"
+  ],
+  "new": [
+    "skins-premium-world-v318.js",
+    "skins-premium-world-v318.css",
+    "REBIRTH-R019-CONTRACT.json"
+  ],
+  "preserve": [
+    "SkinsEngine V201",
+    "PremiumEngine V191",
+    "PremiumPolicy V191",
+    "Whit V307-V316",
+    "Home/Orbe/Menu V304",
+    "Tarot Livre V301",
+    "Biblioteca V302",
+    "Carta do Dia V303",
+    "Tiragens V305",
+    "Escola V306",
+    "Diário/Espelho V317"
+  ],
+  "catalog": {
+    "skins": 30,
+    "freeSkin": "classic",
+    "premiumLifetimePriceCents": 19990,
+    "orbeAIMonthlyPriceCents": 8990,
+    "orbeAIMonthlyCredits": 400,
+    "lunaCost": 1,
+    "terraCost": 10,
+    "solEnabled": false,
+    "creditPacks": [
+      {
+        "credits": 200,
+        "priceCents": 3990
+      },
+      {
+        "credits": 600,
+        "priceCents": 9990
+      },
+      {
+        "credits": 1500,
+        "priceCents": 19990
+      }
+    ]
+  },
+  "experience": {
+    "globalSkinIdentity": true,
+    "livingSkinPreview": true,
+    "premiumCrownWorld": true,
+    "honestComparisonPreserved": true,
+    "serverSnapshotAuthority": true,
+    "restoreRefundRevokePreserved": true
+  },
+  "billing_guards": {
+    "environment": "staging",
+    "realBilling": false,
+    "stripeCheckout": false,
+    "stripeWebhook": false,
+    "customerPortal": false,
+    "automaticTax": false,
+    "interfaceGrantsEntitlement": false
+  },
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}

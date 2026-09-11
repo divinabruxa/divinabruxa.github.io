@@ -1,6 +1,6 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R018 · CARREGADOR DE MUNDOS V317
+/* DIVINA BRUXA 2.0 — REBIRTH R019 · CARREGADOR DE MUNDOS V318
    Mundos Rebirth: Tarot Livre V301, Biblioteca V302, Carta do Dia V303,
-   Tiragens V305, Escola V306 e Diário/Espelho V317.
+   Tiragens V305, Escola V306, Diário/Espelho V317 e Skins/Premium V318.
    Home/Menu V304 e Whit V307–V316 permanecem preservados fora deste carregador. */
 import {
   normalizeRouteId,
@@ -169,13 +169,18 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
       return new ConsultationEngine($('#consultationApp'), config);
     },
     subscriptions: async () => {
-      await ensureCommerce();
-      const { PremiumEngineV191 } = await import('./premium-engine-v191.js?v=191');
-      return new PremiumEngineV191($('#subscriptionApp'));
+      const [, module] = await Promise.all([
+        ensureStyle('divinaCrownRebirthV318', 'skins-premium-world-v318.css?v=318'),
+        import('./skins-premium-world-v318.js?v=318')
+      ]);
+      return new module.PremiumWorldV318($('#subscriptionApp'));
     },
     skins: async () => {
-      const { SkinsEngineV201 } = await import('./skins-v201.js?v=201');
-      return new SkinsEngineV201($('#skinsApp'));
+      const [, module] = await Promise.all([
+        ensureStyle('divinaCrownRebirthV318', 'skins-premium-world-v318.css?v=318'),
+        import('./skins-premium-world-v318.js?v=318')
+      ]);
+      return new module.SkinsWorldV318($('#skinsApp'));
     },
     videos:ensureMedia,
     music:ensureMedia,
@@ -213,6 +218,14 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
     journal: () => Promise.all([
       ensureStyle('divinaJournalRebirthV317', 'journal-world-v317.css?v=317'),
       import('./journal-world-v317.js?v=317')
+    ]),
+    skins: () => Promise.all([
+      ensureStyle('divinaCrownRebirthV318', 'skins-premium-world-v318.css?v=318'),
+      import('./skins-premium-world-v318.js?v=318')
+    ]),
+    subscriptions: () => Promise.all([
+      ensureStyle('divinaCrownRebirthV318', 'skins-premium-world-v318.css?v=318'),
+      import('./skins-premium-world-v318.js?v=318')
     ]),
     consultations: () => Promise.all([
       import('./commerce-engine.js?v=148'),
