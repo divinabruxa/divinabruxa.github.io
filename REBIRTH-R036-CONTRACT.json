@@ -1,0 +1,43 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R036",
+  "release": "V336",
+  "world": "Menu Scene — fechamento fluido",
+  "user_approved": "Abertura V335 está boa; corrigir fechamento e renomear Tarot para Tarot Livre.",
+  "replace": [
+    "app-v208.js"
+  ],
+  "new": [
+    "menu-scene-v336.js",
+    "menu-scene-v336.css",
+    "REBIRTH-R036-CONTRACT.json"
+  ],
+  "menu": {
+    "routingAuthority": "Navigation V210",
+    "orbEngine": "V208",
+    "sameOrb": true,
+    "openingPreservedFromV335": true,
+    "closingSingleAnimation": true,
+    "legacyFlipTransformReusedAsSameAnimation": true,
+    "sceneStaysVisibleUntilOrbReturns": true,
+    "homeTargetCapturedBeforeOpen": true,
+    "tarotLabel": "Tarot Livre",
+    "notificationsLabel": "Notificações",
+    "secondRouter": false
+  },
+  "preserve": [
+    "P0 V326 boot-first",
+    "Dock Stability V326",
+    "Whit Orbit V333",
+    "Tarot Livre V330",
+    "Tiragens V331",
+    "Biblioteca Profunda V332"
+  ],
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}
