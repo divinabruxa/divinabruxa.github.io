@@ -1,0 +1,63 @@
+DIVINA BRUXA — V514
+ORBE OS · FOGO CELESTIAL E UNIVERSO PROFUNDO
+
+MACROETAPA ATUAL
+Macroetapa 1 — Perfeição do Tarot Livre e Sistema Operacional da Orbe.
+Continuamos somente no Tarot Livre: chama verdadeira, universo vivo, nascimento
+das cartas e fluidez no iPhone.
+
+PRÉ-REQUISITO
+V513 instalada.
+
+COMO INSTALAR NO GITHUB
+1. Abra a raiz do mesmo site em que a V513 já está instalada.
+2. Envie os 8 arquivos deste ZIP diretamente para a raiz.
+3. Não crie pasta: todos os arquivos precisam ficar soltos.
+4. Confirme a substituição destes 3 arquivos:
+   - app-v208.js
+   - page-loader-v1.js
+   - sw.js
+5. Os outros 5 arquivos são novos:
+   - 00-INSTALE-V514.txt
+   - ORBE-OS-TAROT-LIVRE-V514-CONTRACT.json
+   - tarot-livre-orbe-os-v514.js
+   - tarot-livre-orbe-os-v514.css
+   - tarot-cosmos-deep-v514.webp
+6. Aguarde o GitHub concluir e abra o site novamente.
+7. Se o iPhone conservar a V513, feche a aba/app uma vez e abra novamente para
+   o service worker V514 assumir.
+
+O QUE MUDA
+- O traço central que parecia um raio deixa de ser usado pelo motor ativo.
+- O fogo agora nasce de dezenas de volumes sobrepostos: massa violeta,
+  corpos magenta e dourados, núcleos quentes, línguas suaves e brasas estelares.
+- Nenhum caminho entre Orbe e carta é desenhado com uma linha de contorno.
+- O nascimento usa o mesmo campo volumétrico; a chama acompanha a carta em vez
+  de criar um segundo efeito elétrico.
+- Um novo universo lossless de 1536 × 2304 ocupa o altar: galáxias espirais,
+  nebulosas roxas/magenta/douradas, estrelas nítidas e profundidade central.
+- O fundo não possui cartas, Orbes, textos ou interface gravados. A única carta
+  voadora é a carta real escolhida pela sessão, nascendo da Orbe V501.
+- O universo se move lentamente por transformação acelerada pela GPU, sem
+  recalcular a imagem a cada frame.
+- O nascimento foi afinado para 1040 ms com curva de entrada e pouso mais
+  responsiva. A face só aparece com a imagem decodificada.
+- A camada de efeitos usa resolução Retina adaptativa de 1,25× no celular para
+  equilibrar nitidez e 60 FPS; o master cósmico continua lossless.
+
+O QUE CONTINUA INTOCÁVEL
+- Exatamente 1 Orbe física viva: Supreme Orb V501.
+- Menu Orbital V502 e Motor das Realidades V511.
+- Carta do Dia V509.
+- 78 cartas diretas, sem repetição e seis cartas por fileira.
+- Sessão já revelada preservada e troca somente após a imagem decodificar.
+- Nenhum significado dentro do Tarot Livre.
+- Nenhuma mudança em Whit, servidor, API, pagamentos, autenticação, banco,
+  domínio ou DNS.
+- Nenhuma publicação foi feita por esta entrega.
+
+RESULTADO ESPERADO
+O Tarot Livre abre dentro de um universo fotocósmico profundo. A Orbe repousa
+sobre estrelas vivas. Entre a Orbe e a carta existe uma chama larga, macia e
+celestial — nunca um fio de raio. Ao tocar na Orbe, uma única carta real nasce
+do seu núcleo, atravessa o fogo e pousa no portal com fluidez.
