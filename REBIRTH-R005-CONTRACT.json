@@ -1,0 +1,33 @@
+{
+  "release": "REBIRTH-R005",
+  "version": 304,
+  "world": "Home Heart + Menu Magic",
+  "principle": "A Orbe permanece intacta e ocupa o centro matematico da Home; o Menu Magico evolui sem trocar o motor de navegacao.",
+  "invariants": {
+    "orb_engine_preserved": true,
+    "orb_skin_preserved": true,
+    "orb_gestures_preserved": true,
+    "double_tap_tarot_preserved": true,
+    "mini_orb_ai_preserved": true,
+    "home_closed_orb_viewport_centered": true,
+    "navigation_state_machine_preserved": "navigation.js V210",
+    "reduced_motion_preserved": true,
+    "old_worlds_preserved": ["Tarot Livre V301", "Biblioteca Viva V302", "Carta do Dia V303"]
+  },
+  "files": {
+    "replace": ["home-orb-absolute-v206.css"],
+    "new": ["REBIRTH-R005-CONTRACT.json"]
+  },
+  "tests": {
+    "home_center_desktop": true,
+    "home_center_iphone_portrait": true,
+    "home_center_landscape": true,
+    "menu_open_no_blank_frame": true,
+    "menu_close_no_blank_frame": true,
+    "menu_shortcut_stagger": true,
+    "menu_reverse_safe": true,
+    "reduced_motion": true,
+    "no_orb_engine_change": true,
+    "no_tarot_daily_library_change": true
+  }
+}

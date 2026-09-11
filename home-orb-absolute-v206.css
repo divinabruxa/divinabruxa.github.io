@@ -1,8 +1,12 @@
-/* DIVINA BRUXA V206 — HOME ORBE ABSOLUTA
-   Exceção visual autorizada: no centro da Home fica somente a Orbe viva.
-   Cabeçalho, Menu Mágico, dock, motor WebGL, skins e gestos permanecem intactos. */
+/* DIVINA BRUXA 2.0 — REBIRTH R005 · HOME HEART + MENU MAGIC V304
+   Substitui home-orb-absolute-v206.css sem tocar no motor da Orbe.
+   Objetivos:
+   1) Orbe fechada no centro matematico da Home/viewport.
+   2) Menu Magico mais continuo, leve e ceremonial.
+   3) Preservar WebGL, skins, gestos, Tarot Livre, Biblioteca e Carta do Dia.
+*/
 
-/* Fail-closed: nenhuma camada antiga volta a expor conteúdo editorial na Home. */
+/* Fail-closed: nenhuma camada antiga volta a expor conteudo editorial na Home. */
 #app > #home.home-orb-only-v206.active > :not(.orb-stage-ref):not(#orbStatus) {
   display: none !important;
   visibility: hidden !important;
@@ -10,28 +14,27 @@
 
 #app > #home.home-orb-only-v206.active {
   box-sizing: border-box;
-  display: flex !important;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  display: block !important;
   width: 100%;
   max-width: none;
   height: 100dvh;
   min-height: 100svh;
   margin: 0;
-  padding: calc(96px + env(safe-area-inset-top)) 12px calc(106px + env(safe-area-inset-bottom));
+  padding: 0 !important;
   overflow: hidden !important;
   text-align: center;
+  contain: layout paint;
 }
 
 #app > #home.home-orb-only-v206.active > .orb-stage-ref {
   display: grid !important;
   place-items: center;
-  align-self: center;
-  flex: 0 0 auto;
+  align-self: auto;
+  flex: none;
 }
 
-/* O nome e o estado continuam disponíveis para tecnologia assistiva, nunca visíveis. */
+/* O nome e o estado continuam disponiveis para tecnologia assistiva, nunca visiveis. */
 #app > #home.home-orb-only-v206.active > #orbStatus,
 #app > #home.home-orb-only-v206.active > .db-visually-hidden {
   position: absolute !important;
@@ -46,7 +49,7 @@
   border: 0 !important;
 }
 
-/* Proteção de compatibilidade caso HTML antigo seja servido durante uma atualização. */
+/* Protecao de compatibilidade caso HTML antigo seja servido durante uma atualizacao. */
 #app > #home.home-orb-only-v206.active > .portal-divider,
 #app > #home.home-orb-only-v206.active > .home-copy,
 #app > #home.home-orb-only-v206.active > .awaken,
@@ -64,40 +67,226 @@ html[data-runtime="v12"] body[data-screen="home"] {
 }
 
 html[data-runtime="v12"] body[data-screen="home"] #app {
+  position: relative;
   height: 100dvh;
   overflow: hidden;
 }
 
-/* Mesmo enquadramento aprovado na V199. Estados do menu ficam sob seu próprio CSS. */
-html[data-runtime="v12"] #app > #home.home-orb-only-v206.active:not(.orb-menu-open):not(.orb-menu-transition):not(.orb-menu-closing) > .orb-stage-ref {
+/* ─────────────────────────────────────────────────────────────
+   R005 · CORACAO DA HOME
+   O palco fechado deixa de depender do padding do header/dock.
+   inset:0 + margin:auto centra sem usar transform, portanto nao
+   interfere no FLIP/WAAPI reversivel do navigation.js V210.
+   ───────────────────────────────────────────────────────────── */
+html[data-runtime="v12"] #app > #home.home-orb-only-v206.active:not(.orb-menu-open):not(.orb-menu-transition):not(.orb-menu-closing) > .orb-stage-ref,
+html[data-runtime="v12"] #app > #home.home-orb-only-v206.active.orb-menu-transition.orb-menu-opening:not(.orb-menu-open) > .orb-stage-ref {
   --v75-orb-size: min(89vw, 47dvh, 470px);
+  position: absolute !important;
+  inset: 0 !important;
   width: var(--v75-orb-size) !important;
-  margin: 0 auto !important;
-  transform: translateZ(0);
+  height: var(--v75-orb-size) !important;
+  margin: auto !important;
+  transform: translateZ(0) !important;
+  transform-origin: 50% 50%;
 }
 
-@media (max-width: 430px) and (orientation: portrait) {
-  #app > #home.home-orb-only-v206.active {
-    padding: calc(88px + env(safe-area-inset-top)) 10px calc(96px + env(safe-area-inset-bottom));
-  }
+/* A Orbe continua ocupando exatamente o palco aprovado. */
+html[data-runtime="v12"] #app > #home.home-orb-only-v206.active:not(.orb-menu-open):not(.orb-menu-transition):not(.orb-menu-closing) > .orb-stage-ref > .orb-shell,
+html[data-runtime="v12"] #app > #home.home-orb-only-v206.active.orb-menu-transition.orb-menu-opening:not(.orb-menu-open) > .orb-stage-ref > .orb-shell {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
 
-  html[data-runtime="v12"] #app > #home.home-orb-only-v206.active:not(.orb-menu-open):not(.orb-menu-transition):not(.orb-menu-closing) > .orb-stage-ref {
+/* Mantem header e dock acima da Home sem deslocar seu centro. */
+html[data-runtime="v12"] body[data-screen="home"] .app-header,
+html[data-runtime="v12"] body[data-screen="home"] .magic-dock {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   R005 · MENU MAGIC V304
+   Nao cria um segundo motor. Apenas refina o estado existente.
+   Tudo usa opacity/scale/filter para evitar layout thrash.
+   ───────────────────────────────────────────────────────────── */
+html[data-runtime="v12"] #home.home-orb-only-v206 .home-orb-menu {
+  isolation: isolate;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-origin: 50% 50%;
+  will-change: opacity, transform;
+}
+
+/* Halo interno: nasce antes dos portais e some sem quadro vazio. */
+html[data-runtime="v12"] #home.home-orb-only-v206 .home-orb-menu::after {
+  opacity: 0 !important;
+  scale: .88;
+  filter: blur(16px) saturate(1.05);
+  transition:
+    opacity .44s cubic-bezier(.16,.82,.22,1),
+    scale .62s cubic-bezier(.16,.82,.22,1),
+    filter .62s cubic-bezier(.16,.82,.22,1) !important;
+}
+html[data-runtime="v12"] #home.home-orb-only-v206.orb-menu-open .home-orb-menu::after {
+  opacity: 1 !important;
+  scale: 1;
+  filter: blur(12px) saturate(1.12);
+}
+
+/* Anel dourado/violeta: abertura mais organica, sem giro agressivo. */
+html[data-runtime="v12"] #home.home-orb-only-v206 .home-orb-menu::before {
+  opacity: 0 !important;
+  scale: .90;
+  transition:
+    opacity .42s cubic-bezier(.16,.82,.22,1),
+    scale .66s cubic-bezier(.16,.82,.22,1),
+    filter .34s ease !important;
+  will-change: opacity, scale;
+}
+html[data-runtime="v12"] #home.home-orb-only-v206.orb-menu-open .home-orb-menu::before {
+  opacity: 1 !important;
+  scale: 1;
+  filter: drop-shadow(0 0 8px rgba(237,189,109,.30)) drop-shadow(0 0 18px rgba(198,72,255,.16)) !important;
+}
+
+/* Portais principais: uma onda curta de luz, sem flicker. */
+html[data-runtime="v12"] #home.home-orb-only-v206 .home-orb-menu > button:not(.menu-portal) {
+  --r005-delay: 0ms;
+  opacity: 0 !important;
+  scale: .88;
+  filter: blur(2px) brightness(.90) !important;
+  transition:
+    opacity .34s cubic-bezier(.16,.82,.22,1) var(--r005-delay),
+    scale .56s cubic-bezier(.16,.82,.22,1) var(--r005-delay),
+    filter .42s ease var(--r005-delay),
+    color .18s ease !important;
+  will-change: opacity, scale, filter;
+}
+html[data-runtime="v12"] #home.home-orb-only-v206 .home-orb-menu > button:nth-of-type(1) { --r005-delay: 0ms; }
+html[data-runtime="v12"] #home.home-orb-only-v206 .home-orb-menu > button:nth-of-type(2) { --r005-delay: 22ms; }
+html[data-runtime="v12"] #home.home-orb-only-v206 .home-orb-menu > button:nth-of-type(3) { --r005-delay: 44ms; }
+html[data-runtime="v12"] #home.home-orb-only-v206 .home-orb-menu > button:nth-of-type(4) { --r005-delay: 66ms; }
+html[data-runtime="v12"] #home.home-orb-only-v206 .home-orb-menu > button:nth-of-type(5) { --r005-delay: 88ms; }
+html[data-runtime="v12"] #home.home-orb-only-v206 .home-orb-menu > button:nth-of-type(6) { --r005-delay: 110ms; }
+html[data-runtime="v12"] #home.home-orb-only-v206 .home-orb-menu > button:nth-of-type(7) { --r005-delay: 132ms; }
+html[data-runtime="v12"] #home.home-orb-only-v206 .home-orb-menu > button:nth-of-type(8) { --r005-delay: 154ms; }
+html[data-runtime="v12"] #home.home-orb-only-v206.orb-menu-open .home-orb-menu > button:not(.menu-portal) {
+  opacity: 1 !important;
+  scale: 1;
+  filter: none !important;
+}
+
+/* A joia de cada portal ganha um pulso unico ao entrar, sem animacao infinita pesada. */
+html[data-runtime="v12"] #home.home-orb-only-v206 .home-orb-menu > button:not(.menu-portal) span {
+  transition:
+    box-shadow .34s ease,
+    border-color .34s ease,
+    filter .28s ease,
+    scale .28s cubic-bezier(.2,.8,.2,1) !important;
+}
+html[data-runtime="v12"] #home.home-orb-only-v206.orb-menu-open .home-orb-menu > button:not(.menu-portal) span {
+  box-shadow:
+    inset 0 1px rgba(255,246,221,.13),
+    inset 0 0 22px rgba(181,61,229,.22),
+    0 0 0 3px rgba(229,183,105,.035),
+    0 0 18px rgba(229,178,96,.16),
+    0 0 34px rgba(159,60,226,.08) !important;
+}
+html[data-runtime="v12"] #home.home-orb-only-v206 .home-orb-menu > button:not(.menu-portal):active span {
+  scale: .94;
+  filter: brightness(1.22) saturate(1.08);
+}
+
+/* Atalhos superiores: chegam depois dos oito portais, como segunda constelacao. */
+html[data-runtime="v12"] #home.home-orb-only-v206 .home-menu-portals .menu-portal {
+  --r005-shortcut-delay: 120ms;
+  opacity: 0 !important;
+  scale: .88;
+  filter: blur(1.5px) brightness(.92) !important;
+  transition:
+    opacity .32s ease var(--r005-shortcut-delay),
+    scale .50s cubic-bezier(.18,.8,.2,1) var(--r005-shortcut-delay),
+    filter .38s ease var(--r005-shortcut-delay),
+    background .20s ease !important;
+  will-change: opacity, scale, filter;
+}
+html[data-runtime="v12"] #home.home-orb-only-v206 .home-menu-portals .menu-portal:nth-child(1) { --r005-shortcut-delay: 120ms; }
+html[data-runtime="v12"] #home.home-orb-only-v206 .home-menu-portals .menu-portal:nth-child(2) { --r005-shortcut-delay: 140ms; }
+html[data-runtime="v12"] #home.home-orb-only-v206 .home-menu-portals .menu-portal:nth-child(3) { --r005-shortcut-delay: 160ms; }
+html[data-runtime="v12"] #home.home-orb-only-v206 .home-menu-portals .menu-portal:nth-child(4) { --r005-shortcut-delay: 180ms; }
+html[data-runtime="v12"] #home.home-orb-only-v206 .home-menu-portals .menu-portal:nth-child(5) { --r005-shortcut-delay: 200ms; }
+html[data-runtime="v12"] #home.home-orb-only-v206 .home-menu-portals .menu-portal:nth-child(6) { --r005-shortcut-delay: 220ms; }
+html[data-runtime="v12"] #home.home-orb-only-v206 .home-menu-portals .menu-portal:nth-child(7) { --r005-shortcut-delay: 240ms; }
+html[data-runtime="v12"] #home.home-orb-only-v206 .home-menu-portals .menu-portal:nth-child(8) { --r005-shortcut-delay: 260ms; }
+html[data-runtime="v12"] #home.home-orb-only-v206.orb-menu-open .home-menu-portals .menu-portal {
+  opacity: 1 !important;
+  scale: 1;
+  filter: none !important;
+}
+
+/* Fechamento: todos se apagam juntos para a Orbe reassumir o centro sem cauda visual. */
+html[data-runtime="v12"] #home.home-orb-only-v206.orb-menu-closing .home-orb-menu > button:not(.menu-portal),
+html[data-runtime="v12"] #home.home-orb-only-v206.orb-menu-closing .home-menu-portals .menu-portal {
+  --r005-delay: 0ms;
+  --r005-shortcut-delay: 0ms;
+  opacity: 0 !important;
+  scale: .91;
+  filter: blur(1.5px) brightness(.9) !important;
+  transition-delay: 0ms !important;
+  pointer-events: none !important;
+}
+html[data-runtime="v12"] #home.home-orb-only-v206.orb-menu-closing .home-orb-menu::before,
+html[data-runtime="v12"] #home.home-orb-only-v206.orb-menu-closing .home-orb-menu::after {
+  opacity: 0 !important;
+  scale: .93;
+  transition-duration: .30s, .42s, .30s !important;
+}
+
+/* O botao MENU acompanha a passagem com resposta delicada. */
+html[data-runtime="v12"] body[data-screen="home"] .menu-button {
+  transition:
+    transform .24s cubic-bezier(.2,.8,.2,1),
+    border-color .28s ease,
+    box-shadow .34s ease,
+    background .34s ease !important;
+}
+html[data-runtime="v12"] body[data-screen="home"] .menu-button.is-open {
+  border-color: rgba(239,207,142,.58);
+  background: rgba(28,10,39,.78);
+  box-shadow: inset 0 0 18px rgba(169,64,220,.12), 0 0 20px rgba(224,169,91,.08);
+}
+
+/* iPhone / celulares: mesmo centro real, mesmo tamanho visual aprovado. */
+@media (max-width: 430px) and (orientation: portrait) {
+  html[data-runtime="v12"] #app > #home.home-orb-only-v206.active:not(.orb-menu-open):not(.orb-menu-transition):not(.orb-menu-closing) > .orb-stage-ref,
+  html[data-runtime="v12"] #app > #home.home-orb-only-v206.active.orb-menu-transition.orb-menu-opening:not(.orb-menu-open) > .orb-stage-ref {
     --v75-orb-size: min(88vw, 45dvh, 420px);
   }
 }
 
 @media (orientation: landscape) and (max-height: 560px) {
-  #app > #home.home-orb-only-v206.active {
-    padding: 72px 12px calc(84px + env(safe-area-inset-bottom));
-  }
-
-  html[data-runtime="v12"] #app > #home.home-orb-only-v206.active:not(.orb-menu-open):not(.orb-menu-transition):not(.orb-menu-closing) > .orb-stage-ref {
+  html[data-runtime="v12"] #app > #home.home-orb-only-v206.active:not(.orb-menu-open):not(.orb-menu-transition):not(.orb-menu-closing) > .orb-stage-ref,
+  html[data-runtime="v12"] #app > #home.home-orb-only-v206.active.orb-menu-transition.orb-menu-opening:not(.orb-menu-open) > .orb-stage-ref {
     --v75-orb-size: min(43vh, 330px);
   }
 }
 
+/* Acessibilidade: a magia nao vence a preferencia de movimento reduzido. */
 @media (prefers-reduced-motion: reduce) {
-  html[data-runtime="v12"] #app > #home.home-orb-only-v206.active > .orb-stage-ref {
-    transition: none !important;
+  html[data-runtime="v12"] #home.home-orb-only-v206 .home-orb-menu,
+  html[data-runtime="v12"] #home.home-orb-only-v206 .home-orb-menu::before,
+  html[data-runtime="v12"] #home.home-orb-only-v206 .home-orb-menu::after,
+  html[data-runtime="v12"] #home.home-orb-only-v206 .home-orb-menu > button,
+  html[data-runtime="v12"] #home.home-orb-only-v206 .home-menu-portals .menu-portal,
+  html[data-runtime="v12"] body[data-screen="home"] .menu-button {
+    transition-duration: .001ms !important;
+    animation: none !important;
+  }
+
+  html[data-runtime="v12"] #home.home-orb-only-v206 .home-orb-menu > button,
+  html[data-runtime="v12"] #home.home-orb-only-v206 .home-menu-portals .menu-portal {
+    filter: none !important;
   }
 }
