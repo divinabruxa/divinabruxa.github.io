@@ -1,0 +1,207 @@
+/* DIVINA BRUXA 2.0 — R033 · MENU FLUIDO V333 */
+
+/* Compatibilidade: menu antigo invisível, mas Navigation V210 continua vivo. */
+html[data-menu-reborn="v333"] #orbMenu{
+  opacity:0!important;visibility:hidden!important;pointer-events:none!important;
+}
+html[data-menu-reborn="v333"] #orbMenu *{animation:none!important;transition:none!important}
+
+/* ORBE: pequena no menu, grande na Home. O FLIP do V210 interpola entre os dois retângulos. */
+html[data-runtime="v12"][data-menu-reborn="v333"] #home.home-orb-only-v206.active.orb-menu-transition > .orb-stage-ref,
+html[data-runtime="v12"][data-menu-reborn="v333"] #home.home-orb-only-v206.active.orb-menu-open > .orb-stage-ref,
+html[data-runtime="v12"][data-menu-reborn="v333"] #home.home-orb-only-v206.active.orb-menu-closing > .orb-stage-ref{
+  --mf333-orb-size:min(42vw,22dvh,190px);
+  position:absolute!important;
+  left:50%!important;top:53%!important;right:auto!important;bottom:auto!important;
+  inset:auto!important;
+  width:var(--mf333-orb-size)!important;height:var(--mf333-orb-size)!important;
+  margin:0!important;
+  transform:translate3d(-50%,-50%,0)!important;
+  transform-origin:50% 50%!important;
+}
+html[data-runtime="v12"][data-menu-reborn="v333"] #home.orb-menu-transition > .orb-stage-ref > #orb,
+html[data-runtime="v12"][data-menu-reborn="v333"] #home.orb-menu-open > .orb-stage-ref > #orb,
+html[data-runtime="v12"][data-menu-reborn="v333"] #home.orb-menu-closing > .orb-stage-ref > #orb{
+  width:100%!important;max-width:100%!important;height:100%!important;margin:0!important;
+  transform:none!important;scale:1!important;
+}
+/* toque = luz; tamanho permanece fixo */
+html[data-menu-reborn="v333"] #home.orb-menu-open #orb.r027-touching{scale:1!important}
+html[data-menu-reborn="v333"] #home.orb-menu-open #orb.r027-touching .r027-orb-touch-light{
+  opacity:1!important;transform:scale(1)!important;
+}
+
+/* OVERLAY */
+.menu-fluid-v333{
+  position:fixed!important;z-index:44;inset:0!important;display:block!important;
+  overflow:hidden;pointer-events:none;visibility:hidden;opacity:0;
+  contain:layout paint style;isolation:isolate;
+  background:
+    radial-gradient(circle at 50% 53%,rgba(97,29,139,.12),transparent 28%),
+    linear-gradient(180deg,rgba(2,1,5,.03),rgba(2,1,5,.10));
+  transition:opacity .34s cubic-bezier(.16,.82,.22,1),visibility 0s linear .52s;
+}
+.menu-fluid-v333.is-visible{visibility:visible;opacity:1;transition-delay:0s}
+.menu-fluid-v333.is-closing{opacity:0;transition-duration:.38s}
+
+.mf333-nebula{position:absolute;inset:0;pointer-events:none;opacity:.55}
+.mf333-nebula i{
+  position:absolute;width:3px;height:3px;border-radius:50%;
+  background:#f8dda3;box-shadow:0 0 10px rgba(215,108,255,.72);opacity:.18;
+}
+.mf333-nebula i:nth-child(1){left:11%;top:23%}.mf333-nebula i:nth-child(2){left:87%;top:30%}
+.mf333-nebula i:nth-child(3){left:17%;top:65%}.mf333-nebula i:nth-child(4){left:80%;top:71%}
+.mf333-nebula i:nth-child(5){left:49%;top:18%}.mf333-nebula i:nth-child(6){left:58%;top:84%}
+.menu-fluid-v333.is-open .mf333-nebula i{animation:mf333Star 6.8s ease-in-out infinite}
+
+/* grupo principal nasce menor no centro e expande para a órbita final */
+.mf333-primary,.mf333-ring{
+  position:absolute;left:50%;top:53%;width:min(84vw,47dvh,430px);aspect-ratio:1;
+  pointer-events:none;
+  transform:translate(-50%,-50%) scale(.72);
+  opacity:0;
+  filter:blur(4px);
+  transition:
+    transform .60s cubic-bezier(.16,.82,.22,1),
+    opacity .34s ease,
+    filter .44s ease;
+}
+.menu-fluid-v333.is-open .mf333-primary,
+.menu-fluid-v333.is-open .mf333-ring{
+  transform:translate(-50%,-50%) scale(1);
+  opacity:1;filter:none;
+}
+.menu-fluid-v333.is-closing .mf333-primary,
+.menu-fluid-v333.is-closing .mf333-ring{
+  transform:translate(-50%,-50%) scale(.74);
+  opacity:0;filter:blur(3px);
+  transition-duration:.46s,.26s,.30s;
+}
+
+.mf333-ring i{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  border:1px solid rgba(239,202,129,.12);border-radius:50%;
+}
+.mf333-ring i:first-child{width:100%;height:100%}
+.mf333-ring i:nth-child(2){width:72%;height:72%;opacity:.30}
+.mf333-ring b{
+  position:absolute;left:50%;top:0;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;
+  background:#ffe5ab;box-shadow:0 0 8px #f1ca7e,0 0 14px rgba(201,79,255,.62);
+  transform-origin:2.5px calc(min(84vw,47dvh,430px)/2);
+}
+.menu-fluid-v333.is-open .mf333-ring b{animation:mf333Orbit 14s linear infinite}
+
+/* portais: duas ondas, reversíveis */
+.mf333-portal{
+  appearance:none;position:absolute;padding:0;border:0;background:none;
+  display:grid;place-items:center;gap:5px;color:#d8cbd9;
+  pointer-events:auto;touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+  opacity:0;filter:blur(2px) brightness(.88);
+  transition:
+    opacity .30s ease calc(65ms + var(--i)*18ms),
+    filter .32s ease calc(65ms + var(--i)*18ms);
+}
+.menu-fluid-v333.is-open .mf333-portal{opacity:1;filter:none}
+.menu-fluid-v333.is-closing .mf333-portal{
+  opacity:0;filter:blur(1.5px) brightness(.9);
+  transition-delay:calc((7 - var(--i))*10ms);
+  transition-duration:.22s;
+}
+
+.mf333-jewel{
+  position:relative;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;
+  border:1px solid rgba(240,203,132,.43);
+  background:radial-gradient(circle at 32% 25%,rgba(255,246,219,.12),transparent 25%),
+    radial-gradient(circle at 50% 62%,rgba(79,23,109,.82),rgba(8,3,14,.96) 72%);
+  box-shadow:inset 0 0 18px rgba(184,64,228,.12),0 0 14px rgba(220,170,95,.06);
+  transition:transform .20s cubic-bezier(.2,.8,.2,1),box-shadow .25s ease,border-color .25s ease;
+}
+.mf333-jewel i{font:500 21px/1 Georgia,serif;font-style:normal;color:#efd08b}
+.mf333-jewel em{position:absolute;right:8px;top:8px;width:3px;height:3px;border-radius:50%;background:#fff0c2;box-shadow:0 0 7px rgba(255,228,168,.9)}
+.mf333-portal small{max-width:72px;color:#d5c8d6;font:500 8px/1.05 Georgia,serif;text-align:center;text-wrap:balance}
+.mf333-portal:focus{outline:none}
+.mf333-portal:focus-visible .mf333-jewel,
+.mf333-portal.is-current .mf333-jewel{
+  border-color:rgba(255,221,155,.90);
+  box-shadow:inset 0 0 20px rgba(200,73,246,.20),0 0 18px rgba(240,195,111,.24),0 0 30px rgba(194,70,239,.12);
+}
+.mf333-portal:focus-visible .mf333-jewel{outline:2px solid rgba(255,223,158,.72);outline-offset:4px}
+.mf333-portal:active .mf333-jewel,.mf333-portal.is-touching .mf333-jewel{transform:scale(.89)}
+
+/* 8 principais com distância maior da Orbe reduzida */
+.mf333-primary .mf333-portal{translate:-50% -50%}
+.mf333-primary .mf333-portal:nth-child(1){left:50%;top:1%}
+.mf333-primary .mf333-portal:nth-child(2){left:78%;top:16%}
+.mf333-primary .mf333-portal:nth-child(3){left:94%;top:50%}
+.mf333-primary .mf333-portal:nth-child(4){left:78%;top:84%}
+.mf333-primary .mf333-portal:nth-child(5){left:50%;top:99%}
+.mf333-primary .mf333-portal:nth-child(6){left:22%;top:84%}
+.mf333-primary .mf333-portal:nth-child(7){left:6%;top:50%}
+.mf333-primary .mf333-portal:nth-child(8){left:22%;top:16%}
+
+/* constelações secundárias entram depois e fecham primeiro */
+.mf333-top,.mf333-bottom{
+  position:absolute;left:50%;z-index:3;width:min(90vw,650px);
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));justify-items:center;gap:clamp(5px,2vw,18px);
+  transform:translateX(-50%) translateY(12px);opacity:0;filter:blur(2px);pointer-events:none;
+  transition:opacity .34s ease .17s,transform .52s cubic-bezier(.16,.82,.22,1) .17s,filter .34s ease .17s;
+}
+.mf333-top{top:calc(96px + env(safe-area-inset-top))}
+.mf333-bottom{bottom:calc(var(--dock-height,75px) + 25px + env(safe-area-inset-bottom))}
+.menu-fluid-v333.is-open .mf333-top,
+.menu-fluid-v333.is-open .mf333-bottom{opacity:1;filter:none;transform:translateX(-50%) translateY(0)}
+.menu-fluid-v333.is-closing .mf333-top,
+.menu-fluid-v333.is-closing .mf333-bottom{
+  opacity:0;filter:blur(2px);transform:translateX(-50%) translateY(10px);
+  transition-delay:0s;transition-duration:.24s,.32s,.24s;
+}
+.mf333-top .mf333-portal,.mf333-bottom .mf333-portal{position:relative;width:100%}
+.mf333-top .mf333-jewel,.mf333-bottom .mf333-jewel{width:42px;height:42px}
+.mf333-top .mf333-portal small,.mf333-bottom .mf333-portal small{font-size:7.5px}
+
+.mf333-heart{
+  position:absolute;left:50%;top:53%;z-index:2;
+  transform:translate(-50%,-50%) scale(.4);opacity:0;color:rgba(246,209,138,.44);
+  font-size:14px;pointer-events:none;
+  transition:transform .55s cubic-bezier(.16,.82,.22,1),opacity .30s ease;
+}
+.menu-fluid-v333.is-open .mf333-heart{transform:translate(-50%,-50%) scale(1);opacity:.38}
+
+/* iPhone */
+@media(max-width:430px) and (orientation:portrait){
+  html[data-runtime="v12"][data-menu-reborn="v333"] #home.home-orb-only-v206.active.orb-menu-transition > .orb-stage-ref,
+  html[data-runtime="v12"][data-menu-reborn="v333"] #home.home-orb-only-v206.active.orb-menu-open > .orb-stage-ref,
+  html[data-runtime="v12"][data-menu-reborn="v333"] #home.home-orb-only-v206.active.orb-menu-closing > .orb-stage-ref{
+    --mf333-orb-size:min(39vw,20.5dvh,174px);
+    top:53%!important;
+  }
+  .mf333-primary,.mf333-ring{width:min(88vw,45dvh,405px);top:53%}
+  .mf333-primary .mf333-jewel{width:46px;height:46px}
+  .mf333-top,.mf333-bottom{width:calc(100vw - 26px)}
+}
+@media(max-width:430px) and (max-height:760px){
+  html[data-runtime="v12"][data-menu-reborn="v333"] #home.home-orb-only-v206.active.orb-menu-transition > .orb-stage-ref,
+  html[data-runtime="v12"][data-menu-reborn="v333"] #home.home-orb-only-v206.active.orb-menu-open > .orb-stage-ref,
+  html[data-runtime="v12"][data-menu-reborn="v333"] #home.home-orb-only-v206.active.orb-menu-closing > .orb-stage-ref{
+    --mf333-orb-size:min(35vw,19dvh,154px);
+  }
+  .mf333-primary,.mf333-ring{width:min(84vw,42dvh,365px)}
+  .mf333-top{top:calc(84px + env(safe-area-inset-top))}
+  .mf333-bottom{bottom:calc(var(--dock-height,75px) + 17px + env(safe-area-inset-bottom))}
+}
+@media(orientation:landscape) and (max-height:560px){
+  html[data-runtime="v12"][data-menu-reborn="v333"] #home.home-orb-only-v206.active.orb-menu-transition > .orb-stage-ref,
+  html[data-runtime="v12"][data-menu-reborn="v333"] #home.home-orb-only-v206.active.orb-menu-open > .orb-stage-ref,
+  html[data-runtime="v12"][data-menu-reborn="v333"] #home.home-orb-only-v206.active.orb-menu-closing > .orb-stage-ref{
+    --mf333-orb-size:min(28vh,150px);top:52%!important;
+  }
+  .mf333-primary,.mf333-ring{width:min(73vh,410px);top:52%}
+}
+@media(prefers-reduced-motion:reduce){
+  .menu-fluid-v333,.menu-fluid-v333 *{animation:none!important;transition:none!important}
+}
+html[data-performance-tier="constrained"] .mf333-ring b,
+html[data-performance-tier="constrained"] .mf333-nebula i{animation:none!important}
+
+@keyframes mf333Star{0%,100%{opacity:.14;transform:scale(.6)}50%{opacity:.66;transform:scale(1.18)}}
+@keyframes mf333Orbit{to{transform:rotate(360deg)}}

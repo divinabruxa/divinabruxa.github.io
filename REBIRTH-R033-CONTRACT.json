@@ -1,0 +1,56 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R033",
+  "release": "V333",
+  "worlds": [
+    "Menu",
+    "Whit"
+  ],
+  "purpose": "Refazer novamente o Menu com Orbe reduzida e transições reversíveis, e tornar a Whit invisível na Home/Menu com mensagens de duplo toque por página.",
+  "replace": [
+    "app-v208.js"
+  ],
+  "new": [
+    "menu-fluid-v333.js",
+    "menu-fluid-v333.css",
+    "whit-orbit-v333.js",
+    "whit-orbit-v333.css",
+    "REBIRTH-R033-CONTRACT.json"
+  ],
+  "menu": {
+    "routingAuthority": "V210",
+    "orbEngine": "V208",
+    "orbReducedWhenOpen": true,
+    "mobileOpenOrbMaxPx": 174,
+    "lowHeightOpenOrbMaxPx": 154,
+    "openCloseReversible": true,
+    "twoWavePortals": true,
+    "legacyVisualHidden": true,
+    "secondRouter": false
+  },
+  "whit": {
+    "visibleOnHome": false,
+    "visibleWhileMenuOpen": false,
+    "singleTap": "controls",
+    "doubleTap": "route-specific random message",
+    "messageBagNoRepeatUntilCycle": true,
+    "holdToDrag": true,
+    "positionLocalOnly": true,
+    "apiForMessages": false,
+    "privateReads": false
+  },
+  "preserve": [
+    "P0 V326 boot-first",
+    "Tarot Livre V330",
+    "Tiragens V331",
+    "Biblioteca Profunda V332",
+    "Whit core/context/memory/privacy V307-V316"
+  ],
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}
