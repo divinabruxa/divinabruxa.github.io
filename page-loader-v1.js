@@ -1,6 +1,7 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R007 · CARREGADOR DE MUNDOS V306
-   Mundos Rebirth: Tarot Livre V301, Biblioteca Viva V302, Carta do Dia V303, Tiragens V305 e Escola V306.
-   Home/Menu V304 permanecem fora deste carregador e preservados. */
+/* DIVINA BRUXA 2.0 — REBIRTH R018 · CARREGADOR DE MUNDOS V317
+   Mundos Rebirth: Tarot Livre V301, Biblioteca V302, Carta do Dia V303,
+   Tiragens V305, Escola V306 e Diário/Espelho V317.
+   Home/Menu V304 e Whit V307–V316 permanecem preservados fora deste carregador. */
 import {
   normalizeRouteId,
   routeHasModule,
@@ -78,13 +79,11 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
   let observer = null;
 
   const ensureJournal = () => once(sharedTasks, 'journal', async () => {
-    const [{ JournalEngine }, { RhythmEngine }] = await Promise.all([
-      import('./journal-engine.js?v=187'),
-      import('./rhythm-v6.js')
+    const [, module] = await Promise.all([
+      ensureStyle('divinaJournalRebirthV317', 'journal-world-v317.css?v=317'),
+      import('./journal-world-v317.js?v=317')
     ]);
-    const journal = new JournalEngine($('#journalApp'));
-    new RhythmEngine($('#journalRhythm'));
-    return journal;
+    return new module.JournalWorldV317($('#journalApp'));
   });
   const remember = entry => ensureJournal().then(journal => journal?.add?.(entry)).catch(() => {});
 
@@ -210,6 +209,10 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
     school: () => Promise.all([
       ensureStyle('divinaSchoolRebirthV306', 'school-world-v306.css?v=306'),
       import('./school-world-v306.js?v=306')
+    ]),
+    journal: () => Promise.all([
+      ensureStyle('divinaJournalRebirthV317', 'journal-world-v317.css?v=317'),
+      import('./journal-world-v317.js?v=317')
     ]),
     consultations: () => Promise.all([
       import('./commerce-engine.js?v=148'),

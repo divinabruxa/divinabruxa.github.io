@@ -1,0 +1,62 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R018",
+  "release": "V317",
+  "world": "Diário & Espelho 2.0",
+  "vision_source": "chat Whit + WORK7.0 master vision",
+  "purpose": "Transformar o Diário/Espelho V187 em um mundo vivo sem reescrever o motor correto.",
+  "replace": [
+    "page-loader-v1.js"
+  ],
+  "new": [
+    "journal-world-v317.js",
+    "journal-world-v317.css",
+    "REBIRTH-R018-CONTRACT.json"
+  ],
+  "preserve": [
+    "JournalEngine V187",
+    "RhythmEngine V6",
+    "Whit V307-V316",
+    "Home/Orbe/Menu V304",
+    "Tarot Livre V301",
+    "Biblioteca V302",
+    "Carta do Dia V303",
+    "Tiragens V305",
+    "Escola V306"
+  ],
+  "experience": {
+    "privateVault": true,
+    "livingReturnConstellation": true,
+    "mirrorAggregateOnly": true,
+    "timelinePreserved": true,
+    "calendarPreserved": true,
+    "searchPreserved": true,
+    "autosaveDraftPreserved": true,
+    "favoritesPreserved": true,
+    "revisionsPreserved": true,
+    "linksPreserved": true,
+    "exportImportPreserved": true,
+    "explicitWhitSingleEntryConsentPreserved": true
+  },
+  "privacy": {
+    "privateByDefault": true,
+    "adminReadsBody": false,
+    "analyticsReadsText": false,
+    "whitSilentRead": false,
+    "mirrorDiagnosis": false,
+    "worldEventsContainBody": false
+  },
+  "performance": {
+    "lazyLoaded": true,
+    "homeBurdenAdded": false,
+    "contentVisibilityForLongSections": true,
+    "reducedMotion": true
+  },
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}

@@ -1,0 +1,139 @@
+/* DIVINA BRUXA 2.0 — REBIRTH R018 · DIÁRIO & ESPELHO V317
+   Camada viva sobre o motor V187 existente. */
+
+.journal-world-v317{
+  position:relative;
+  isolation:isolate;
+  margin:16px 0 22px;
+  padding:clamp(18px,4vw,30px);
+  overflow:hidden;
+  border:1px solid rgba(230,196,123,.16);
+  border-radius:30px;
+  background:
+    radial-gradient(circle at 83% 10%,rgba(153,58,207,.16),transparent 31%),
+    radial-gradient(circle at 8% 105%,rgba(228,185,103,.075),transparent 37%),
+    linear-gradient(145deg,rgba(20,8,29,.92),rgba(6,3,11,.97));
+  box-shadow:
+    0 26px 70px rgba(0,0,0,.24),
+    inset 0 1px rgba(255,255,255,.035);
+}
+.jwv317__cosmos{position:absolute;inset:0;pointer-events:none;opacity:.58}
+.jwv317__cosmos i{
+  position:absolute;width:3px;height:3px;border-radius:50%;
+  background:#f0d28d;box-shadow:0 0 12px rgba(203,87,242,.72)
+}
+.jwv317__cosmos i:nth-child(1){left:11%;top:20%}
+.jwv317__cosmos i:nth-child(2){right:18%;top:32%}
+.jwv317__cosmos i:nth-child(3){left:67%;bottom:13%}
+
+.jwv317__head{position:relative;display:flex;align-items:flex-start;justify-content:space-between;gap:22px}
+.jwv317__copy{max-width:720px}
+.jwv317__copy h3{
+  margin:.26rem 0 .6rem;
+  color:#fff1e2;
+  font:500 clamp(1.8rem,5.6vw,3.15rem)/1.02 Georgia,serif;
+  letter-spacing:-.025em
+}
+.jwv317__copy>p:last-child{margin:0;color:#a99dad;line-height:1.62;max-width:640px}
+.jwv317__seal{
+  flex:0 0 62px;width:62px;height:62px;display:grid;place-items:center;
+  border:1px solid rgba(238,203,132,.39);border-radius:50%;color:#edcf8c;
+  background:radial-gradient(circle,rgba(126,43,166,.36),rgba(10,4,16,.91) 68%);
+  box-shadow:0 0 34px rgba(182,72,225,.14),inset 0 0 16px rgba(242,207,151,.04);
+  font-size:26px
+}
+
+.jwv317__pulse{
+  position:relative;
+  display:grid;grid-template-columns:minmax(0,1.45fr) minmax(260px,.75fr);
+  gap:12px;margin-top:24px
+}
+.jwv317__constellation,.jwv317__stats{
+  border:1px solid rgba(233,199,127,.12);
+  border-radius:21px;background:rgba(7,3,13,.58)
+}
+.jwv317__constellation{padding:15px 16px}
+.jwv317__constellation header{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.jwv317__constellation header b{color:#d5b873;font:800 8px/1 system-ui;letter-spacing:.14em}
+.jwv317__constellation header small{color:#897e8b;font-size:8px}
+.jwv317__constellation>div{
+  display:grid;grid-template-columns:repeat(7,1fr);align-items:end;gap:8px;
+  height:86px;margin-top:11px;padding:0 4px
+}
+.jwv317__star{
+  position:relative;height:100%;display:flex;flex-direction:column;
+  justify-content:flex-end;align-items:center;gap:7px;color:#716877
+}
+.jwv317__star i{
+  display:block;width:calc(6px + 7px * var(--jwv-star));height:calc(6px + 7px * var(--jwv-star));
+  border-radius:50%;background:rgba(139,111,150,.32);
+  opacity:calc(.4 + var(--jwv-star) * .45)
+}
+.jwv317__star.is-lit i{
+  background:#eac978;
+  box-shadow:0 0 calc(8px + 18px * var(--jwv-star)) rgba(196,80,235,.45),0 0 9px rgba(239,205,130,.55);
+  animation:jwv317Star 4.8s ease-in-out infinite;
+  animation-delay:var(--jwv-delay)
+}
+.jwv317__star small{font-size:8px;text-transform:uppercase}
+
+.jwv317__stats{display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.jwv317__stats article{
+  min-height:74px;padding:13px;display:flex;flex-direction:column;justify-content:center;
+  border-bottom:1px solid rgba(255,255,255,.04);border-right:1px solid rgba(255,255,255,.04)
+}
+.jwv317__stats article:nth-child(even){border-right:0}
+.jwv317__stats article:nth-last-child(-n+2){border-bottom:0}
+.jwv317__stats strong{color:#f1d794;font:500 24px/1 Georgia,serif}
+.jwv317__stats span{margin-top:4px;color:#887d8b;font-size:8px;letter-spacing:.06em;text-transform:uppercase}
+
+.jwv317__passages{
+  position:relative;display:grid;grid-template-columns:1fr 1fr minmax(260px,1.2fr);
+  gap:9px;margin-top:12px
+}
+.jwv317__passages button,.jwv317__passages p{
+  min-height:70px;margin:0;padding:12px 14px;border:1px solid rgba(233,198,125,.12);
+  border-radius:18px;background:rgba(7,3,13,.57)
+}
+.jwv317__passages button{
+  display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;gap:2px 9px;
+  text-align:left;color:#d8c7dc;cursor:pointer
+}
+.jwv317__passages button>span{grid-row:1/3;align-self:center;color:#e7c77c;font-size:19px}
+.jwv317__passages button b{font-size:9px;letter-spacing:.10em;color:#ddc280}
+.jwv317__passages button small{font-size:8px;color:#817685}
+.jwv317__passages p{display:flex;flex-direction:column;justify-content:center;gap:4px}
+.jwv317__passages p b{color:#d9c8dc;font-size:10px}
+.jwv317__passages p small{color:#847987;font-size:8px;line-height:1.45}
+
+.jwv317__deferred{content-visibility:auto;contain-intrinsic-size:520px}
+
+html[data-whit-silent-presence="v316"] #journalApp .journal-private-seal{
+  box-shadow:0 0 14px rgba(194,78,233,.09)
+}
+
+@keyframes jwv317Star{
+  0%,100%{transform:scale(.88);filter:brightness(.94)}
+  50%{transform:scale(1.13);filter:brightness(1.14)}
+}
+
+@media(max-width:760px){
+  .jwv317__pulse{grid-template-columns:1fr}
+  .jwv317__passages{grid-template-columns:1fr 1fr}
+  .jwv317__passages p{grid-column:1/-1}
+}
+@media(max-width:520px){
+  .journal-world-v317{margin:10px -2px 18px;padding:17px 14px;border-radius:25px}
+  .jwv317__head{align-items:center}
+  .jwv317__seal{width:50px;height:50px;flex-basis:50px;font-size:21px}
+  .jwv317__copy h3{font-size:clamp(1.65rem,9vw,2.45rem)}
+  .jwv317__constellation{padding:13px 10px}
+  .jwv317__constellation>div{gap:3px}
+  .jwv317__stats article{min-height:68px}
+  .jwv317__passages{grid-template-columns:1fr}
+  .jwv317__passages p{grid-column:auto}
+}
+@media(prefers-reduced-motion:reduce){
+  .jwv317__star.is-lit i{animation:none!important}
+  .journal-world-v317 *{scroll-behavior:auto!important}
+}
