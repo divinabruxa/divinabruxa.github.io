@@ -1,5 +1,5 @@
-/* DIVINA BRUXA 2.0 — PAGE LOADER V402
-   Tarot Livre rebuilt from zero. Other worlds preserve their installed engines. */
+/* DIVINA BRUXA 2.0 — PAGE LOADER V500
+   Tarot Livre rebuilt as a living fire cosmos. Other worlds stay untouched. */
 
 import {
   normalizeRouteId,
@@ -67,7 +67,7 @@ function clearRecovery(screen){
 }
 
 const LOADING_MESSAGES=Object.freeze({
-  tarot:'Acendendo a Chama Viva…',
+  tarot:'Abrindo o Cosmos de Fogo…',
   daily:'A Orbe encontra a carta deste dia…',
   library:'Abrindo as 78 cartas…',
   spreads:'Preparando sua tiragem…',
@@ -114,14 +114,14 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
 
   const loaders=Object.freeze({
     tarot: async()=>{
-      // V401 owns Tarot Livre. Remove the former route stylesheet in long-lived sessions.
+      // V500 owns Tarot Livre. Remove former route styles in long-lived sessions.
       document.getElementById('divinaTarotLivreZeroV400')?.remove();
       document.getElementById('divinaTarotLivreChamaV401')?.remove();
       const [,module]=await Promise.all([
-        ensureStyle('divinaTarotLivreChamaV402','tarot-livre-chama-v402.css?v=402'),
-        import('./tarot-livre-chama-v402.js?v=402')
+        ensureStyle('divinaTarotLivreCosmicoV500','tarot-livre-cosmico-v500.css?v=500'),
+        import('./tarot-livre-cosmico-v500.js?v=500')
       ]);
-      return new module.TarotLivreChamaV402($('#tarot'));
+      return new module.TarotLivreCosmicoV500($('#tarot'));
     },
     daily: async()=>{
       const [,module]=await Promise.all([
@@ -217,8 +217,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
 
   const warmers=Object.freeze({
     tarot:()=>Promise.all([
-      ensureStyle('divinaTarotLivreChamaV402','tarot-livre-chama-v402.css?v=402'),
-      import('./tarot-livre-chama-v402.js?v=402')
+      ensureStyle('divinaTarotLivreCosmicoV500','tarot-livre-cosmico-v500.css?v=500'),
+      import('./tarot-livre-cosmico-v500.js?v=500')
     ]),
     daily:()=>Promise.all([
       ensureStyle('divinaDailyRebirthV303','daily-world-v303.css?v=303'),
