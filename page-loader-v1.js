@@ -1,6 +1,6 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R003 · CARREGADOR DE MUNDOS V302
-   Cada mundo nasce sob demanda. Tarot Livre V301 e Biblioteca Viva V302 são mundos Rebirth; os demais aguardam sua própria etapa. */
-
+/* DIVINA BRUXA 2.0 — REBIRTH R004 · CARREGADOR DE MUNDOS V303
+   Mundos Rebirth: Tarot Livre V301, Biblioteca Viva V302 e Carta do Dia V303.
+   Os demais aguardam sua própria etapa. */
 import {
   normalizeRouteId,
   routeHasModule,
@@ -24,7 +24,6 @@ function once(map, key, factory) {
   map.set(key, task);
   return task;
 }
-
 function withTimeout(task, timeout, message) {
   let timer = 0;
   return Promise.race([
@@ -32,31 +31,20 @@ function withTimeout(task, timeout, message) {
     new Promise((_, reject) => { timer = setTimeout(() => reject(new Error(message)), timeout); })
   ]).finally(() => clearTimeout(timer));
 }
-
 function ensureStyle(id, href) {
   return once(sharedTasks, `style:${id}`, () => withTimeout(new Promise((resolve, reject) => {
     let link = document.getElementById(id);
     if (link?.sheet) { resolve(link); return; }
     if (link) link.remove();
     link = document.createElement('link');
-    link.id = id;
-    link.rel = 'stylesheet';
-    link.href = href;
-    link.dataset.rebirthStyle = 'true';
+    link.id = id; link.rel = 'stylesheet'; link.href = href; link.dataset.rebirthStyle = 'true';
     link.addEventListener('load', () => resolve(link), { once:true });
     link.addEventListener('error', () => reject(new Error(`Estilo indisponível: ${href}`)), { once:true });
     document.head.append(link);
   }), LOAD_TIMEOUT_MS, `Tempo esgotado ao carregar ${href}.`));
 }
-
-function loadPortalStyles() {
-  return ensureStyle(PORTAL_STYLES_ID, PORTAL_STYLES_HREF);
-}
-
-function announceLoading(type, detail) {
-  document.dispatchEvent(new CustomEvent(`divina:loading-${type}`, { detail }));
-}
-
+function loadPortalStyles() { return ensureStyle(PORTAL_STYLES_ID, PORTAL_STYLES_HREF); }
+function announceLoading(type, detail) { document.dispatchEvent(new CustomEvent(`divina:loading-${type}`, { detail })); }
 function createRecovery(screen, id) {
   if (!screen || screen.querySelector(':scope > [data-route-recovery]')) return;
   const panel = document.createElement('aside');
@@ -67,14 +55,11 @@ function createRecovery(screen, id) {
   panel.innerHTML = `<span class="db-route-recovery__sigil" aria-hidden="true">✦</span><h3>Este mundo não abriu por completo</h3><p>Nada foi perdido.</p><div><button type="button" data-route-retry="${id}">TENTAR NOVAMENTE</button><button type="button" class="secondary" data-go="home">VOLTAR À ORBE</button></div>`;
   screen.prepend(panel);
 }
-
-function clearRecovery(screen) {
-  screen?.querySelector(':scope > [data-route-recovery]')?.remove();
-}
+function clearRecovery(screen) { screen?.querySelector(':scope > [data-route-recovery]')?.remove(); }
 
 const LOADING_MESSAGES = Object.freeze({
   tarot:'A Orbe abre o círculo…',
-  daily:'Abrindo o encontro de hoje…',
+  daily:'A Orbe encontra a carta deste dia…',
   library:'Abrindo as 78 cartas…',
   spreads:'Preparando sua tiragem…',
   school:'Abrindo a Escola…',
@@ -101,7 +86,6 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
     new RhythmEngine($('#journalRhythm'));
     return journal;
   });
-
   const remember = entry => ensureJournal().then(journal => journal?.add?.(entry)).catch(() => {});
 
   const ensureCommerce = () => once(sharedTasks, 'commerce', async () => {
@@ -133,8 +117,11 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
       return new module.FreeTarot($('#tarot'));
     },
     daily: async () => {
-      const { DailyRitual } = await import('./ritual-engine.js?v=183');
-      return new DailyRitual($('#dailyCard'), remember, { authClient });
+      const [, module] = await Promise.all([
+        ensureStyle('divinaDailyRebirthV303', 'daily-world-v303.css?v=303'),
+        import('./daily-world-v303.js?v=303')
+      ]);
+      return new module.DailyWorldV303($('#dailyCard'), { onSave:remember, authClient });
     },
     library: async () => {
       const [, module] = await Promise.all([
@@ -202,7 +189,10 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
       ensureStyle('divinaTarotRebirthV301', 'free-tarot-world-v301.css?v=301'),
       import('./free-tarot-world-v301.js?v=301')
     ]),
-    daily: () => import('./ritual-engine.js?v=183'),
+    daily: () => Promise.all([
+      ensureStyle('divinaDailyRebirthV303', 'daily-world-v303.css?v=303'),
+      import('./daily-world-v303.js?v=303')
+    ]),
     library: () => Promise.all([
       ensureStyle('divinaLibraryRebirthV302', 'library-world-v302.css?v=302'),
       import('./library-world-v302.js?v=302')
@@ -233,12 +223,7 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
       screen?.setAttribute('aria-busy', 'true');
       screen?.setAttribute('data-module-state', 'loading');
       html.dataset.pageLoading = id;
-      announceLoading('start', {
-        id:loadingId,
-        pageId:id,
-        label:routeLabel(id),
-        message:LOADING_MESSAGES[id]
-      });
+      announceLoading('start', { id:loadingId, pageId:id, label:routeLabel(id), message:LOADING_MESSAGES[id] });
       document.dispatchEvent(new CustomEvent('divina:page-loading', { detail:{ id } }));
 
       try {
@@ -268,7 +253,6 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
 
   const retry = id => {
     const route = normalizeRouteId(id);
-    pageTasks.get(route)?.destroy?.();
     pageTasks.delete(route);
     clearRecovery(document.getElementById(route));
     return Promise.resolve(go ? go(route) : load(route));
@@ -296,10 +280,7 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
   observer.observe(document.body, { attributes:true, attributeFilter:['data-screen'] });
 
   return Object.freeze({
-    load,
-    prepare:load,
-    retry,
-    warm,
+    load, prepare:load, retry, warm,
     go:id => Promise.resolve(go ? go(normalizeRouteId(id)) : load(id)),
     portalStylesReady:() => Boolean(document.getElementById(PORTAL_STYLES_ID)?.sheet),
     destroy:() => { abort.abort(); observer?.disconnect(); }

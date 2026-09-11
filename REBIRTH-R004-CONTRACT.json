@@ -1,0 +1,39 @@
+{
+  "release": "REBIRTH-R004",
+  "version": 303,
+  "world": "Carta do Dia — O Encontro Vivo",
+  "principle": "Orbe central, uma carta por dia, profundidade em camadas, Whit local e consentida.",
+  "invariants": {
+    "timezone": "America/Sao_Paulo",
+    "cards": 78,
+    "orientation": "normal-only",
+    "account": "server-authoritative same card per account/day; offline only after prior confirmed reveal on that device",
+    "guest": "stable per-device identity; available offline",
+    "meaning": "deep content preserved via progressive disclosure",
+    "whit": "local contextual whispers; no AI API call from this world",
+    "diary": "explicit save only"
+  },
+  "files": {
+    "replace": [
+      "page-loader-v1.js"
+    ],
+    "new": [
+      "daily-policy-v303.js",
+      "daily-world-v303.js",
+      "daily-world-v303.css"
+    ]
+  },
+  "tests": {
+    "normal_only": true,
+    "device_offline_identity": true,
+    "account_server_authority": true,
+    "whit_local_no_ai_api": true,
+    "progressive_layers": true,
+    "diary_explicit_save": true,
+    "reduced_motion": true,
+    "orb_centered": true,
+    "loader_v303": true,
+    "old_worlds_preserved": true,
+    "account_offline_no_divergent_fallback": true
+  }
+}
