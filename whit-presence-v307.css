@@ -1,0 +1,161 @@
+/* DIVINA BRUXA 2.0 — REBIRTH R008 · WHIT PRESENCE V307
+   Presença global leve. A Home permanece sem texto concorrendo com a Orbe. */
+
+:root{
+  --whit-presence-gold:rgba(239,205,133,.92);
+  --whit-presence-violet:rgba(190,91,245,.86);
+  --whit-presence-bg:rgba(10,4,18,.78);
+}
+
+.whit-presence-v307{
+  position:fixed;
+  z-index:52;
+  left:50%;
+  bottom:calc(92px + env(safe-area-inset-bottom));
+  width:min(calc(100vw - 28px),430px);
+  min-height:58px;
+  display:grid;
+  grid-template-columns:42px minmax(0,1fr);
+  align-items:center;
+  gap:10px;
+  padding:9px 14px 9px 10px;
+  border:1px solid rgba(235,198,124,.20);
+  border-radius:999px;
+  background:
+    radial-gradient(circle at 11% 35%,rgba(190,81,238,.18),transparent 28%),
+    linear-gradient(135deg,rgba(24,9,35,.88),var(--whit-presence-bg));
+  box-shadow:0 18px 55px rgba(0,0,0,.34),inset 0 1px rgba(255,245,220,.055);
+  backdrop-filter:blur(18px) saturate(1.08);
+  -webkit-backdrop-filter:blur(18px) saturate(1.08);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transform:translate3d(-50%,12px,0) scale(.97);
+  transition:
+    opacity .42s ease,
+    transform .58s cubic-bezier(.16,.82,.22,1),
+    visibility 0s linear .62s;
+  will-change:opacity,transform;
+  contain:layout style paint;
+}
+.whit-presence-v307.is-visible{
+  opacity:1;
+  visibility:visible;
+  transform:translate3d(-50%,0,0) scale(1);
+  transition-delay:0s;
+}
+.whit-presence-v307.no-transition{transition:none!important}
+
+.whit-presence-v307__sigil{
+  position:relative;
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(239,205,133,.52);
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 33% 23%,rgba(255,250,235,.82) 0 2%,rgba(215,142,255,.28) 8%,transparent 28%),
+    radial-gradient(circle,#40125b 0,#180822 58%,#09030e 100%);
+  box-shadow:
+    inset 0 0 16px rgba(206,87,247,.20),
+    0 0 14px rgba(211,101,250,.20),
+    0 0 26px rgba(227,188,111,.08);
+}
+.whit-presence-v307__sigil i{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#f7dfa8;
+  box-shadow:0 0 8px #f3cf87,0 0 18px rgba(210,92,255,.78);
+  animation:whitV307Pulse 3.8s ease-in-out infinite;
+}
+.whit-presence-v307__aura{
+  position:absolute;
+  left:10px;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(207,91,250,.22),transparent 68%);
+  filter:blur(7px);
+  animation:whitV307Aura 5.6s ease-in-out infinite;
+}
+.whit-presence-v307__copy{
+  min-width:0;
+  margin:0;
+  display:grid;
+  gap:2px;
+}
+.whit-presence-v307__copy b{
+  color:var(--whit-presence-gold);
+  font:700 9px/1.1 system-ui,-apple-system,sans-serif;
+  letter-spacing:.22em;
+}
+.whit-presence-v307__copy span{
+  color:#e7dce9;
+  font:500 12px/1.35 Georgia,serif;
+  text-wrap:balance;
+}
+
+/* A presença reage ao mundo sem redesenhar a página. */
+html[data-whit-tone="tarot"] .whit-presence-v307__sigil,
+html[data-whit-tone="spreads"] .whit-presence-v307__sigil{filter:saturate(1.08)}
+html[data-whit-tone="school"] .whit-presence-v307__sigil{filter:brightness(1.06)}
+html[data-whit-tone="journal"] .whit-presence-v307__sigil{filter:saturate(.88)}
+html[data-whit-tone="ai"] .whit-presence-v307__sigil{filter:brightness(1.12) saturate(1.12)}
+
+/* Os convites já existentes para Whit ganham reconhecimento sutil.
+   Nenhum novo botão invade as páginas. */
+html[data-whit-presence="v307"] [data-school-ai],
+html[data-whit-presence="v307"] [data-open-whit],
+html[data-whit-presence="v307"] [data-ai-open],
+html[data-whit-presence="v307"] [data-journal-ai]{
+  position:relative;
+}
+html[data-whit-presence="v307"] [data-school-ai]::after,
+html[data-whit-presence="v307"] [data-open-whit]::after,
+html[data-whit-presence="v307"] [data-ai-open]::after,
+html[data-whit-presence="v307"] [data-journal-ai]::after{
+  content:"";
+  position:absolute;
+  inset:-3px;
+  border-radius:inherit;
+  pointer-events:none;
+  box-shadow:0 0 0 1px rgba(232,192,119,.10),0 0 20px rgba(196,87,235,.08);
+}
+
+@keyframes whitV307Pulse{
+  0%,100%{transform:scale(.82);opacity:.72}
+  50%{transform:scale(1.08);opacity:1}
+}
+@keyframes whitV307Aura{
+  0%,100%{transform:scale(.85);opacity:.34}
+  50%{transform:scale(1.28);opacity:.72}
+}
+
+@media(max-width:430px){
+  .whit-presence-v307{
+    bottom:calc(84px + env(safe-area-inset-bottom));
+    width:calc(100vw - 20px);
+    grid-template-columns:38px minmax(0,1fr);
+    min-height:54px;
+    padding:8px 12px 8px 9px;
+  }
+  .whit-presence-v307__sigil,
+  .whit-presence-v307__aura{width:36px;height:36px}
+  .whit-presence-v307__copy span{font-size:11px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .whit-presence-v307,
+  .whit-presence-v307__sigil i,
+  .whit-presence-v307__aura{
+    animation:none!important;
+    transition:none!important;
+  }
+}
+
+html[data-whit-presence-state="resting"] .whit-presence-v307{
+  opacity:0!important;
+  visibility:hidden!important;
+}

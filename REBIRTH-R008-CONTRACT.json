@@ -1,0 +1,40 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R008",
+  "world": "Whit Presence",
+  "release": "V307",
+  "purpose": "Tornar o Whit Core V212 perceptível como presença local contínua em todos os mundos, sem API e sem leitura implícita de conteúdo privado.",
+  "replace": [
+    "app-v208.js"
+  ],
+  "new": [
+    "whit-presence-v307.js",
+    "whit-presence-v307.css",
+    "REBIRTH-R008-CONTRACT.json"
+  ],
+  "preserve": [
+    "Home/Orbe/Menu V304",
+    "Tarot Livre V301",
+    "Biblioteca V302",
+    "Carta do Dia V303",
+    "Tiragens V305",
+    "Escola V306",
+    "Whit Core V212",
+    "Orbe IA V190"
+  ],
+  "guarantees": {
+    "local_presence_without_api": true,
+    "generation_disabled_in_presence_layer": true,
+    "private_reads": false,
+    "journal_scan": false,
+    "silent_private_context": false,
+    "home_center_text_added": false,
+    "explicit_consent_preserved": true,
+    "sol_enabled": false
+  },
+  "architecture": {
+    "presence": "local/no API",
+    "context": "exact resource grant only",
+    "generation": "separate governed backend/model layer"
+  }
+}

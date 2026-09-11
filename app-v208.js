@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — APLICATIVO V208 · WORK7.0 · WHIT CORE V212 */
+/* DIVINA BRUXA — APLICATIVO V208 · WORK7.0 · WHIT PRESENCE V307 */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -16,12 +16,11 @@ import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
 import { installIndexPolicyV193 } from './seo-index-policy-v193.js?v=193';
 import { createWhitCoreV212 } from './whit-core-v212.js?v=212';
+import { createWhitPresenceV307 } from './whit-presence-v307.js?v=307';
 import './pwa-world-v201.js?v=201';
 
 const $ = selector => document.querySelector(selector);
 
-// RECOVERY R0 — remove apenas marcas transitórias do bootstrap Rebirth.
-// Não toca em localStorage, Diário, Tarot, conta ou preferências.
 const clearRebirthShellResidue = () => {
   document.getElementById('divinaRebirthV300')?.remove();
   delete document.documentElement.dataset.rebirth;
@@ -29,6 +28,7 @@ const clearRebirthShellResidue = () => {
   document.body?.classList.remove('db-menu-open','db-menu-transitioning');
 };
 clearRebirthShellResidue();
+
 const safely = (label, task) => {
   try {
     return task();
@@ -38,6 +38,7 @@ const safely = (label, task) => {
     return null;
   }
 };
+
 const toast = message => {
   const element = $('#toast');
   if (!element) {
@@ -66,12 +67,14 @@ window.divinaAccount = safely('Conta V201', () => new AccountEngineV201($('#logi
 
 const whitCore = safely('Whit 2.0 Core V212', () => createWhitCoreV212({ authClient }));
 safely('presença local Whit V212', () => whitCore?.awaken());
+const whitPresence = safely('Whit Presence V307', () => createWhitPresenceV307({ core: whitCore, go }));
 
 const miniOrbBinding = safely('Orbes auxiliares V207', bindMiniOrbs);
 
 const loadingPortal = createOrbLoadingPortal();
 const pageLoader = createPageLoader({ config: CONFIG, go, authClient });
 navigation.setBeforeEnter(pageLoader.prepare);
+
 const realityOrb = safely('motor da Orbe V208', () => new RealityOrbEngine($('#orbCanvas'), {
   onOpen: () => pageLoader.go('tarot')
 }));
@@ -81,6 +84,7 @@ const warmEssentialPortals = () => {
   if (connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType || '')) return;
   pageLoader.warm(['tarot', 'daily']).catch?.(() => {});
 };
+
 addEventListener('load', () => {
   if ('requestIdleCallback' in window) window.requestIdleCallback(warmEssentialPortals, { timeout: 2200 });
   else setTimeout(warmEssentialPortals, 900);
@@ -93,7 +97,9 @@ addEventListener('divina:loading-bypass', () => {
 navigator.serviceWorker?.addEventListener('message', event => {
   if (event.data?.type !== 'divina-notification-open') return;
   const target = String(event.data.target || '#home').replace(/^#/, '');
-  if (/^(home|daily|school|consultations|login|subscriptions|ai|music|videos|skins|notifications)$/.test(target)) pageLoader.go(target);
+  if (/^(home|daily|school|consultations|login|subscriptions|ai|music|videos|skins|notifications)$/.test(target)) {
+    pageLoader.go(target);
+  }
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
@@ -110,6 +116,7 @@ if (skinsHeading) skinsHeading.textContent = 'Trinta formas de sentir o universo
 window.divinaLoading = loadingPortal;
 window.orbe = { go: pageLoader.go, loadPage: pageLoader.load, loading: loadingPortal };
 window.whit = whitCore;
+
 window.divinaWhitV212 = Object.freeze({
   version: 212,
   core: whitCore,
@@ -118,6 +125,22 @@ window.divinaWhitV212 = Object.freeze({
   paidApiEnabled: false,
   solEnabled: false
 });
+
+window.divinaWhitV307 = Object.freeze({
+  version: 307,
+  core: whitCore,
+  presence: whitPresence,
+  status: () => ({
+    core: whitCore?.status?.() || null,
+    presence: whitPresence?.status?.() || null
+  }),
+  localPresenceEnabled: true,
+  generationEnabled: false,
+  paidApiEnabled: false,
+  privateReads: false,
+  solEnabled: false
+});
+
 window.divinaOrbV208 = Object.freeze({
   version: 208,
   engine: realityOrb,
