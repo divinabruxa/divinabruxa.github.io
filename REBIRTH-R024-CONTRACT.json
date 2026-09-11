@@ -1,0 +1,81 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R024",
+  "release": "V323",
+  "world": "SEO + ASO + Privacidade/LGPD-ready controls 2.0",
+  "vision_source": "chat Whit + WORK7.0 master vision",
+  "purpose": "Aumentar descoberta pública e tornar os controles de privacidade coerentes com as capacidades reais da Conta e do STAGING, sem certificar conformidade jurídica.",
+  "replace": [
+    "app-v208.js",
+    "seo-index-policy-v193.js",
+    "privacy-center-v9.js",
+    "privacidade-e-dados.html",
+    "manifest.webmanifest",
+    "sitemap.xml",
+    "sitemap-principal.xml"
+  ],
+  "new": [
+    "privacy-center-v323.css",
+    "aso-metadata-v323.json",
+    "REBIRTH-R024-CONTRACT.json"
+  ],
+  "seo": {
+    "publicIndexable": [
+      "home",
+      "tarot",
+      "daily",
+      "spreads",
+      "library",
+      "school",
+      "consultations",
+      "store",
+      "music",
+      "videos"
+    ],
+    "privateNoindex": [
+      "admin",
+      "account",
+      "whit-ai",
+      "journal",
+      "premium-checkout",
+      "skins",
+      "notifications",
+      "individual-consultation-tracking"
+    ],
+    "publicHashCanonicalToStaticPortal": true,
+    "robotsIsAccessControl": false,
+    "privateRoutesInSitemap": false,
+    "hreflangPreserved": true
+  },
+  "privacy": {
+    "localOptionalPreferences": true,
+    "essentialAlwaysOn": true,
+    "accountConsentLogWhenSignedIn": true,
+    "consentKeys": [
+      "analytics_optional",
+      "marketing_optional"
+    ],
+    "consentLogContainsPrivateContent": false,
+    "journalBodyRead": false,
+    "whitConversationRead": false,
+    "consultationQuestionRead": false,
+    "preciseLocation": false,
+    "accountExportAvailable": true,
+    "accountDeletionAvailable": true,
+    "privacyCenterBypassesAuthentication": false
+  },
+  "aso": {
+    "metadataPrepared": true,
+    "ptBR": true,
+    "en": true,
+    "es": true,
+    "storeSubmissionAuthorized": false
+  },
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}

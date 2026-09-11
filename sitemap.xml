@@ -1,37 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap>
-    <loc>https://divinabruxa.com.br/sitemap-principal.xml</loc>
-    <lastmod>2026-09-09</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://divinabruxa.com.br/sitemap-cartas.xml</loc>
-    <lastmod>2026-09-09</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://divinabruxa.com.br/sitemap-naipes-simbolos.xml</loc>
-    <lastmod>2026-09-09</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://divinabruxa.com.br/sitemap-tiragens.xml</loc>
-    <lastmod>2026-09-09</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://divinabruxa.com.br/sitemap-aprendizado.xml</loc>
-    <lastmod>2026-09-09</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://divinabruxa.com.br/sitemap-consultas.xml</loc>
-    <lastmod>2026-09-09</lastmod>
-  </sitemap>
-  <!-- V195 INTERNATIONAL SITEMAPS START -->
-  <sitemap>
-    <loc>https://divinabruxa.com.br/sitemap-en.xml</loc>
-    <lastmod>2026-09-09</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://divinabruxa.com.br/sitemap-es.xml</loc>
-    <lastmod>2026-09-09</lastmod>
-  </sitemap>
-  <!-- V195 INTERNATIONAL SITEMAPS END -->
+  <sitemap><loc>https://divinabruxa.com.br/sitemap-principal.xml</loc><lastmod>2026-09-10</lastmod></sitemap>
+  <sitemap><loc>https://divinabruxa.com.br/sitemap-cartas.xml</loc><lastmod>2026-09-09</lastmod></sitemap>
+  <sitemap><loc>https://divinabruxa.com.br/sitemap-naipes-simbolos.xml</loc><lastmod>2026-09-09</lastmod></sitemap>
+  <sitemap><loc>https://divinabruxa.com.br/sitemap-tiragens.xml</loc><lastmod>2026-09-09</lastmod></sitemap>
+  <sitemap><loc>https://divinabruxa.com.br/sitemap-aprendizado.xml</loc><lastmod>2026-09-09</lastmod></sitemap>
+  <sitemap><loc>https://divinabruxa.com.br/sitemap-consultas.xml</loc><lastmod>2026-09-10</lastmod></sitemap>
+  <sitemap><loc>https://divinabruxa.com.br/sitemap-en.xml</loc><lastmod>2026-09-09</lastmod></sitemap>
+  <sitemap><loc>https://divinabruxa.com.br/sitemap-es.xml</loc><lastmod>2026-09-09</lastmod></sitemap>
 </sitemapindex>

@@ -1,0 +1,40 @@
+/* DIVINA BRUXA 2.0 — REBIRTH R024 · PRIVACY CENTER V323 */
+
+.privacy-v323{
+  position:relative;isolation:isolate;overflow:hidden;margin:22px 0;padding:clamp(18px,4vw,30px);
+  border:1px solid rgba(231,196,123,.16);border-radius:30px;
+  background:
+    radial-gradient(circle at 86% 8%,rgba(151,57,205,.16),transparent 31%),
+    radial-gradient(circle at 7% 110%,rgba(229,185,103,.07),transparent 37%),
+    linear-gradient(145deg,rgba(20,8,29,.94),rgba(6,3,11,.98));
+  box-shadow:0 26px 70px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.035)
+}
+.privacy-v323__stars{position:absolute;inset:0;pointer-events:none;opacity:.5}
+.privacy-v323__stars i{position:absolute;width:3px;height:3px;border-radius:50%;background:#efd08b;box-shadow:0 0 12px rgba(200,83,239,.68)}
+.privacy-v323__stars i:nth-child(1){left:11%;top:18%}.privacy-v323__stars i:nth-child(2){right:18%;top:31%}.privacy-v323__stars i:nth-child(3){left:70%;bottom:14%}
+.privacy-v323__head{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center}
+.privacy-v323__head>div{max-width:760px}.privacy-v323__head h2{margin:.28rem 0 .6rem;color:#fff1e3;font:500 clamp(1.8rem,5.7vw,3.15rem)/1.02 Georgia,serif;letter-spacing:-.025em}
+.privacy-v323__head p:last-child{margin:0;color:#a79aaa;line-height:1.62}
+.privacy-v323__seal{display:grid;place-items:center;width:66px;height:66px;border:1px solid rgba(238,203,131,.35);border-radius:50%;color:#edcf8b;background:radial-gradient(circle,rgba(127,44,166,.34),rgba(10,4,16,.92) 68%);box-shadow:0 0 34px rgba(182,72,225,.13);font-size:25px}
+.privacy-v323__status{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:22px}
+.privacy-v323__status>span{display:grid;gap:4px;min-height:74px;padding:12px 13px;border:1px solid rgba(231,196,122,.11);border-radius:17px;background:rgba(7,3,13,.57)}
+.privacy-v323__status b{color:#dcc480;font-size:8px;letter-spacing:.08em}.privacy-v323__status small{color:#837787;font-size:8px;line-height:1.48}
+.privacy-v323__form{position:relative;display:grid;gap:8px;margin-top:9px}
+.privacy-v323__form>label{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:13px;border:1px solid rgba(231,196,122,.11);border-radius:17px;background:rgba(7,3,13,.54)}
+.privacy-v323__form>label>span{display:grid;gap:3px}.privacy-v323__form b{color:#d7c6da;font-size:10px}.privacy-v323__form small{color:#817684;font-size:8px;line-height:1.45}
+.privacy-v323__form input{appearance:none;width:42px;height:24px;border:1px solid rgba(230,195,121,.20);border-radius:999px;background:#13091a;position:relative}
+.privacy-v323__form input::after{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:#807484;transition:transform .25s ease,background .25s ease}
+.privacy-v323__form input:checked{background:rgba(99,37,129,.68)}.privacy-v323__form input:checked::after{transform:translateX(18px);background:#e8c77c}
+.privacy-v323__actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.privacy-v323__actions button{min-height:42px;padding:0 15px;border:1px solid rgba(231,196,122,.20);border-radius:999px;background:rgba(55,19,70,.50);color:#dec480;font-size:8px;font-weight:800;letter-spacing:.07em}
+.privacy-v323__actions button.primary{background:linear-gradient(135deg,rgba(186,137,68,.88),rgba(131,58,153,.88));color:#160b1d}
+.privacy-v323__form>[data-privacy-feedback]{margin:1px 0;color:#877b89;font-size:8px}
+.privacy-v323__rights{position:relative;display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:13px}
+.privacy-v323__rights article{display:grid;grid-template-columns:auto 1fr;gap:9px;padding:13px;border:1px solid rgba(231,196,122,.10);border-radius:17px;background:rgba(7,3,13,.50)}
+.privacy-v323__rights article>span{color:#e5c47a;font-size:18px}.privacy-v323__rights p{margin:0;display:grid;gap:4px}.privacy-v323__rights b{color:#d7c6da;font-size:9px}.privacy-v323__rights small{color:#817684;font-size:8px;line-height:1.45}
+.privacy-v323__rights a{grid-column:2;color:#d8b970;font-size:7px;font-weight:800;letter-spacing:.07em;text-decoration:none}
+.privacy-v323__truth{position:relative;margin-top:10px;padding:11px 13px;border-top:1px solid rgba(255,255,255,.05);color:#817684}
+.privacy-v323__truth b{display:block;color:#b9aabb;font-size:8px}.privacy-v323__truth span{display:block;margin-top:3px;font-size:8px;line-height:1.45}
+@media(max-width:660px){.privacy-v323__status,.privacy-v323__rights{grid-template-columns:1fr}}
+@media(max-width:480px){.privacy-v323{padding:16px 13px;border-radius:24px}.privacy-v323__head{grid-template-columns:1fr 52px}.privacy-v323__seal{width:50px;height:50px;font-size:20px}.privacy-v323__head h2{font-size:clamp(1.65rem,9vw,2.45rem)}.privacy-v323__form>label{grid-template-columns:1fr auto}.privacy-v323__actions{display:grid}.privacy-v323__actions button{width:100%}}
+@media(prefers-reduced-motion:reduce){.privacy-v323__form input::after{transition:none!important}}

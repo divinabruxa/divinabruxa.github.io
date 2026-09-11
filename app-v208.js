@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — APLICATIVO V208 · WORK7.0 · ACCOUNT WORLD V319 */
+/* DIVINA BRUXA — APLICATIVO V208 · WORK7.0 · SEO + PRIVACY V323 */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -15,7 +15,7 @@ import { createPageLoader } from './page-loader-v1.js?v=302-recovery1';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
-import { installIndexPolicyV193 } from './seo-index-policy-v193.js?v=193';
+import { installIndexPolicyV193 } from './seo-index-policy-v193.js?v=323';
 import { createWhitCoreV212 } from './whit-core-v212.js?v=212';
 import { createWhitPresenceV307 } from './whit-presence-v307.js?v=307';
 import { createWhitNervousSystemV308 } from './whit-nervous-system-v308.js?v=308';

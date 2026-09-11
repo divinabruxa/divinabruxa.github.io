@@ -1,0 +1,84 @@
+{
+  "release": "V323",
+  "status": "draft_only",
+  "store_submission_authorized": false,
+  "platform_priority": [
+    "Android",
+    "iOS"
+  ],
+  "product": {
+    "name": "Divina Bruxa",
+    "universe": "Orbe das Realidades",
+    "audience": "18+",
+    "defaultLocale": "pt-BR",
+    "privacyUrl": "https://divinabruxa.com.br/privacidade-e-dados.html",
+    "supportUrl": "https://divinabruxa.com.br/contato.html",
+    "websiteUrl": "https://divinabruxa.com.br/"
+  },
+  "categories": {
+    "primaryDraft": "Lifestyle",
+    "secondaryDraft": "Education",
+    "webManifest": [
+      "lifestyle",
+      "education",
+      "entertainment"
+    ]
+  },
+  "locales": {
+    "pt-BR": {
+      "name": "Divina Bruxa",
+      "subtitle": "Tarot vivo, estudos e jornada",
+      "shortDescription": "Tarot Livre, Carta do Dia, 78 cartas, Escola, Diário e a Orbe Whit em um universo vivo.",
+      "keywords": [
+        "tarot",
+        "tarô",
+        "carta do dia",
+        "78 cartas",
+        "tiragens",
+        "escola do tarot",
+        "diário de tarot",
+        "tarot livre"
+      ]
+    },
+    "en": {
+      "name": "Divina Bruxa",
+      "subtitle": "Living tarot, learning and reflection",
+      "shortDescription": "Free Tarot, Daily Card, 78-card library, Tarot School, journal and Whit in one living universe.",
+      "keywords": [
+        "tarot",
+        "daily card",
+        "tarot cards",
+        "tarot meanings",
+        "tarot school",
+        "tarot journal",
+        "free tarot"
+      ]
+    },
+    "es": {
+      "name": "Divina Bruxa",
+      "subtitle": "Tarot vivo, estudio y reflexión",
+      "shortDescription": "Tarot Libre, Carta del Día, 78 cartas, Escuela, diario y Whit dentro de un universo vivo.",
+      "keywords": [
+        "tarot",
+        "carta del día",
+        "78 cartas",
+        "tiradas",
+        "escuela de tarot",
+        "diario de tarot",
+        "tarot gratis"
+      ]
+    }
+  },
+  "claimsGuard": {
+    "medicalClaims": false,
+    "guaranteedPredictions": false,
+    "supernaturalCertainty": false,
+    "whitRealPersonClaim": false,
+    "voiceClone": false
+  },
+  "assets": {
+    "icon512": "icon-512.png",
+    "maskable512": "icon-maskable-512.png",
+    "screenshots": "prepare_in_release_stage"
+  }
+}
