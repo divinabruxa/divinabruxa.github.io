@@ -1,16 +1,6 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R014 · WHIT GENERATION BRIDGE V313
-   Liga o envelope efêmero V312 ao request V190 já existente sem criar um segundo
-   motor, sem nova chamada de API e sem alterar o schema do servidor.
-
-   REGRAS:
-   - o servidor e suas políticas continuam soberanos;
-   - só atua em authClient.aiChat() já autorizado pelo AIEngine;
-   - exige consent=true no payload E envelope V312 preparado pelo formulário;
-   - o texto visível/local do usuário permanece original;
-   - perfil/contexto entram apenas no message que já é aceito pelo schema 8.0.0;
-   - nenhum corpo privado é extraído do Mind; recibos carregam apenas metadados;
-   - se não houver espaço, envelope, consentimento ou compatibilidade, fallback exato;
-   - nunca habilita Sol, billing, provider, geração ou qualquer kill switch. */
+/* DIVINA BRUXA 2.0 — REBIRTH R017 · WHIT GENERATION BRIDGE V313 · SILENT RESTORE V316
+   Restaura a ponte V313 sem qualquer camada de voz.
+   Um único request, contexto explícito, nenhuma segunda chamada e nenhum áudio. */
 
 const RELEASE = 'V313';
 const EXPECTED_SCHEMA = '8.0.0';
@@ -26,24 +16,17 @@ const clean = (value, limit = 160) => String(value ?? '')
   .replace(/\s+/g, ' ')
   .trim()
   .slice(0, limit);
-
-const wireText = value => String(value ?? '')
-  .replace(/\u0000/g, '')
-  .trim()
-  .slice(0, MAX_WIRE_CHARACTERS);
-
+const wireText = value => String(value ?? '').replace(/\u0000/g, '').trim().slice(0, MAX_WIRE_CHARACTERS);
 const sameMessage = (left, right) => wireText(left) === wireText(right);
 const token = (value, fallback = '') => {
   const normalized = clean(value, 64).normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
   const safe = normalized.replace(/[^a-z0-9_-]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '').slice(0, 48);
   return safe || fallback;
 };
-
 const validFuture = value => {
   const time = new Date(value || '').getTime();
   return Number.isFinite(time) && time > Date.now();
 };
-
 const allowedMode = value => value === 'luna' || value === 'terra';
 const SOURCES = new Set(['message','journal-single-entry','tarot-single-spread','school-single-lesson']);
 const FOCUSES = new Set(['reflection','tarot','school','symbolic-persona']);
@@ -95,7 +78,6 @@ function buildContextLines(envelope, payload) {
   if (personaReady(envelope?.persona)) {
     lines.push('perfil=Whit, guia fictícia original da Divina Bruxa; tom caloroso, majestoso, elegante, claro e emocionalmente inteligente; devolver agência; nunca imitar pessoa real, alegar alma, leitura mental, mediunidade ou destino inevitável.');
   }
-
   const mode = allowedMode(payload?.mode) ? payload.mode : 'luna';
   const requestedFocus = payload?.focus || envelope?.focus || 'reflection';
   const focus = FOCUSES.has(requestedFocus) ? requestedFocus : 'reflection';
@@ -203,13 +185,10 @@ export class WhitGenerationBridgeV313 {
       this.installed = true;
       return true;
     }
-
     this.originalAIChat = auth.aiChat.bind(auth);
     this.wrapper = (payload, signal) => this.forward(payload, signal);
     auth.aiChat = this.wrapper;
-    try {
-      Object.defineProperty(auth, MARK, { value:this, configurable:true, enumerable:false });
-    } catch {}
+    try { Object.defineProperty(auth, MARK, { value:this, configurable:true, enumerable:false }); } catch {}
     this.installed = auth.aiChat === this.wrapper;
     return this.installed;
   }
@@ -228,11 +207,8 @@ export class WhitGenerationBridgeV313 {
     this.forwardedRequests += 1;
     const envelope = this.takePreparedEnvelope();
     let result = freeze({ payload, applied:false, reason:'no-envelope' });
-    try {
-      result = buildWhitGenerationPayloadV313(payload, envelope);
-    } catch {
-      result = freeze({ payload, applied:false, reason:'bridge-error' });
-    }
+    try { result = buildWhitGenerationPayloadV313(payload, envelope); }
+    catch { result = freeze({ payload, applied:false, reason:'bridge-error' }); }
 
     this.lastResult = result.reason;
     if (result.applied) this.contextualizedRequests += 1;
@@ -255,7 +231,6 @@ export class WhitGenerationBridgeV313 {
       }));
     }
 
-    // Exactly one call to the exact original method. No retry, no second provider call.
     return this.originalAIChat(result.payload, signal);
   }
 

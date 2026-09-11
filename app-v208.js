@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — APLICATIVO V208 · WORK7.0 · WHIT GENERATION BRIDGE V313 */
+/* DIVINA BRUXA — APLICATIVO V208 · WORK7.0 · WHIT SILENT PRESENCE V316 */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -22,7 +22,8 @@ import { createWhitContextBridgeV309 } from './whit-context-bridge-v309.js?v=309
 import { createWhitMemoryGardenV310 } from './whit-memory-garden-v310.js?v=310';
 import { createWhitSignatureV311 } from './whit-signature-v311.js?v=311';
 import { createWhitMindV312 } from './whit-mind-v312.js?v=312';
-import { createWhitGenerationBridgeV313 } from './whit-generation-bridge-v313.js?v=313';
+import { createWhitGenerationBridgeV313 } from './whit-generation-bridge-v313.js?v=316-silent1';
+import { createWhitSilentPresenceV316 } from './whit-silent-presence-v316.js?v=316';
 import './pwa-world-v201.js?v=201';
 
 const $ = selector => document.querySelector(selector);
@@ -80,6 +81,7 @@ const whitMemory = safely('Whit Memory Garden V310', () => createWhitMemoryGarde
 const whitSignature = safely('Whit Signature V311', () => createWhitSignatureV311({ core: whitCore, presence: whitPresence, nervousSystem: whitNerves, contextBridge: whitContext, memoryGarden: whitMemory }));
 const whitMind = safely('Whit Mind V312', () => createWhitMindV312({ core: whitCore, presence: whitPresence, nervousSystem: whitNerves, contextBridge: whitContext, memoryGarden: whitMemory, signature: whitSignature, authClient }));
 const whitGeneration = safely('Whit Generation Bridge V313', () => createWhitGenerationBridgeV313({ mind: whitMind, authClient }));
+const whitSilent = safely('Whit Silent Presence V316', () => createWhitSilentPresenceV316({ presence: whitPresence, mind: whitMind }));
 
 const miniOrbBinding = safely('Orbes auxiliares V207', bindMiniOrbs);
 
@@ -283,6 +285,43 @@ window.divinaWhitV312 = Object.freeze({
   generationEnabled: false,
   paidApiEnabled: false,
   privateReads: false,
+  solEnabled: false
+});
+
+
+window.divinaWhitV316 = Object.freeze({
+  version: 316,
+  core: whitCore,
+  presence: whitPresence,
+  nervousSystem: whitNerves,
+  contextBridge: whitContext,
+  memoryGarden: whitMemory,
+  signature: whitSignature,
+  mind: whitMind,
+  generationBridge: whitGeneration,
+  silentPresence: whitSilent,
+  status: () => ({
+    core: whitCore?.status?.() || null,
+    presence: whitPresence?.status?.() || null,
+    nerves: whitNerves?.status?.() || null,
+    context: whitContext?.status?.() || null,
+    memory: whitMemory?.status?.() || null,
+    signature: whitSignature?.status?.() || null,
+    mind: whitMind?.status?.() || null,
+    generationBridge: whitGeneration?.status?.() || null,
+    silentPresence: whitSilent?.status?.() || null
+  }),
+  audioEnabled: false,
+  autoplay: false,
+  voiceGateActive: false,
+  speechSynthesisUsed: false,
+  textPrimary: true,
+  visualPresenceActive: Boolean(whitSilent),
+  homeOrbTouched: false,
+  originalPersona: true,
+  literalWhitneyIdentity: false,
+  voiceClone: false,
+  soulClaim: false,
   solEnabled: false
 });
 

@@ -1,0 +1,66 @@
+{
+  "release": "REBIRTH-R017",
+  "version": "V316",
+  "world": "Whit — Silent Presence Covenant",
+  "decision": "Whit does not use audible voice. Her presence is text-first and visually alive.",
+  "purpose": "Remove R016 voice behavior from active runtime and refine Whit's silent presence.",
+  "files": {
+    "replace": [
+      "app-v208.js",
+      "whit-generation-bridge-v313.js"
+    ],
+    "new": [
+      "whit-silent-presence-v316.js",
+      "whit-silent-presence-v316.css",
+      "REBIRTH-R017-CONTRACT.json"
+    ]
+  },
+  "experience": {
+    "home": "Untouched.",
+    "otherWorlds": "Whit Presence V307 continues with contextual text.",
+    "aiWorld": "Companion Orb reflects/answers visually while text stays canonical.",
+    "audio": "Disabled by product decision."
+  },
+  "voiceDecision": {
+    "voiceGateV315Active": false,
+    "voiceFilesMayRemainDormantInRepo": true,
+    "voiceFilesImported": false,
+    "speechSynthesis": false,
+    "networkTTS": false,
+    "microphone": false,
+    "recording": false,
+    "autoplay": false
+  },
+  "preserves": {
+    "generationBridge": "V313",
+    "mind": "V312",
+    "signature": "V311",
+    "memoryGarden": "V310",
+    "contextBridge": "V309",
+    "nervousSystem": "V308",
+    "presence": "V307",
+    "aiEngine": "V190",
+    "ledgerAuthority": "server",
+    "explicitPrivateContextConsent": true,
+    "homeOrbEngine": true,
+    "homeOrbVisualIdentity": true,
+    "menuStateMachine": true
+  },
+  "guards": {
+    "newAIRequests": 0,
+    "newNetworkCalls": 0,
+    "newStorage": false,
+    "silentPrivateReads": false,
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  },
+  "accessibility": {
+    "textResponsePrimary": true,
+    "audioRequired": false,
+    "prefersReducedMotion": true
+  },
+  "nextDirection": "Whit foundation is closed enough to resume the broader Divina Bruxa 2.0 roadmap."
+}
