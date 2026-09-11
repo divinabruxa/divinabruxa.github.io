@@ -1,0 +1,64 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R032",
+  "release": "V332",
+  "severity": "P0-menu + UX recovery",
+  "worlds": [
+    "Menu",
+    "Whit",
+    "Biblioteca"
+  ],
+  "root_cause": "V329 foi montado como filho direto da Home, mas home-orb-absolute-v206.css esconde filhos diretos que não sejam .orb-stage-ref ou #orbStatus.",
+  "replace": [
+    "app-v208.js"
+  ],
+  "new": [
+    "menu-reborn-v332.js",
+    "menu-reborn-v332.css",
+    "whit-universal-v332.js",
+    "whit-universal-v332.css",
+    "library-deep-v332.js",
+    "library-deep-v332.css",
+    "REBIRTH-R032-CONTRACT.json"
+  ],
+  "menu": {
+    "mount": "body-fixed",
+    "routingAuthority": "V210",
+    "legacyVisualOnlyHidden": true,
+    "secondRouter": false
+  },
+  "whit": {
+    "hiddenOnHome": true,
+    "tapOpensPanel": true,
+    "holdToDrag": true,
+    "dragAnywhereSafeViewport": true,
+    "positionSavedLocally": true,
+    "serverPositionSync": false,
+    "libraryShortcut": true,
+    "aiShortcut": true
+  },
+  "library": {
+    "base": "LibraryWorld V302",
+    "cards": 78,
+    "contentRewritten": false,
+    "meaningSourcePreserved": true,
+    "orbDiscoveryPreserved": true,
+    "readerDeepened": true
+  },
+  "preserve": [
+    "P0 V326 boot-first",
+    "Menu navigation V210",
+    "Home Orb V208",
+    "Whit privacy rules",
+    "Tarot Livre V330",
+    "Tiragens V331",
+    "all previous worlds"
+  ],
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}

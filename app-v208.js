@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — REBIRTH R031 · TIRAGENS SUPREMAS V331 · BOOT-SAFE */
+/* DIVINA BRUXA — REBIRTH R032 · MENU RECOVERY + WHIT DRAG + BIBLIOTECA PROFUNDA V332 · BOOT-SAFE */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -52,12 +52,12 @@ const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
     document.documentElement.dataset.orbMenuSupremeError = 'v327';
   });
 
-const startMenuRebornV329 = () => startOrbMenuSupremeV327()
-  .then(() => import('./menu-reborn-v329.js?v=329'))
-  .then(module => module.installMenuRebornV329?.({ go }))
+const startMenuRebornV332 = () => startOrbMenuSupremeV327()
+  .then(() => import('./menu-reborn-v332.js?v=332'))
+  .then(module => module.installMenuRebornV332?.({ go }))
   .catch(error => {
-    console.error('[Divina] Menu Reborn V329 não iniciou', error);
-    document.documentElement.dataset.menuRebornError = 'v329';
+    console.error('[Divina] Menu Reborn V332 não iniciou', error);
+    document.documentElement.dataset.menuRebornError = 'v332';
   });
 
 const startFreeTarotSupremeV330 = () => import('./free-tarot-supreme-v330.js?v=330')
@@ -72,6 +72,13 @@ const startSpreadsSupremeV331 = () => import('./spreads-supreme-v331.js?v=331')
   .catch(error => {
     console.error('[Divina] Tiragens Supremas V331 não iniciaram', error);
     document.documentElement.dataset.spreadsSupremeError = 'v331';
+  });
+
+const startLibraryDeepV332 = () => import('./library-deep-v332.js?v=332')
+  .then(module => module.installLibraryDeepV332?.())
+  .catch(error => {
+    console.error('[Divina] Biblioteca Profunda V332 não iniciou', error);
+    document.documentElement.dataset.libraryDeepError = 'v332';
   });
 
 const clearRebirthShellResidue = () => {
@@ -130,8 +137,8 @@ const whitMind = safely('Whit Mind V312', () => createWhitMindV312({ core: whitC
 const whitGeneration = safely('Whit Generation Bridge V313', () => createWhitGenerationBridgeV313({ mind: whitMind, authClient }));
 const whitSilent = safely('Whit Silent Presence V316', () => createWhitSilentPresenceV316({ presence: whitPresence, mind: whitMind }));
 
-const startWhitUniversalV328 = () => import('./whit-universal-presence-v328.js?v=328')
-  .then(module => module.installWhitUniversalPresenceV328?.({
+const startWhitUniversalV332 = () => import('./whit-universal-v332.js?v=332')
+  .then(module => module.installWhitUniversalV332?.({
     presence: whitPresence,
     nervousSystem: whitNerves,
     silentPresence: whitSilent,
@@ -139,8 +146,8 @@ const startWhitUniversalV328 = () => import('./whit-universal-presence-v328.js?v
     go
   }))
   .catch(error => {
-    console.error('[Divina] Whit Universal V328 não iniciou', error);
-    document.documentElement.dataset.whitUniversalError = 'v328';
+    console.error('[Divina] Whit Universal V332 não iniciou', error);
+    document.documentElement.dataset.whitUniversalError = 'v332';
   });
 
 const miniOrbBinding = safely('Orbes auxiliares V207', bindMiniOrbs);
@@ -472,10 +479,11 @@ const awaken = async () => {
     }));
 
     // R027/R028 são opcionais: nunca bloqueiam a abertura da Home.
-    startMenuRebornV329();
-    startWhitUniversalV328();
+    startMenuRebornV332();
+    startWhitUniversalV332();
     startFreeTarotSupremeV330();
     startSpreadsSupremeV331();
+    startLibraryDeepV332();
 
     // Começa a navegação fora do bloqueio visual.
     const navigationTimeout = new Promise((_, reject) =>
@@ -504,10 +512,11 @@ const awaken = async () => {
     // Último fail-open visual: o HTML da Home existe e deve continuar acessível.
     document.documentElement.dataset.appShell = 'v180-emergency';
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
-    startMenuRebornV329();
-    startWhitUniversalV328();
+    startMenuRebornV332();
+    startWhitUniversalV332();
     startFreeTarotSupremeV330();
     startSpreadsSupremeV331();
+    startLibraryDeepV332();
     startPwaAfterBootV326();
   }
 };
