@@ -1,0 +1,351 @@
+/* DIVINA BRUXA — MACROETAPA 4/4 · ACABAMENTO V518
+   Pigmento responsivo, movimento composto e proteção adaptativa. */
+
+:root{
+  --db518-accent:#a565d6;
+  --db518-light:#f0d68a;
+  --db518-gold:#ffdca1;
+  --db518-deep:#07020d;
+  --db518-mist:#d76cff;
+  --db518-spark:#ff6fce;
+  --db518-cool:#76e8ff;
+  --db518-spring:cubic-bezier(.2,.82,.2,1);
+  --db518-press:cubic-bezier(.22,.78,.18,1);
+}
+
+html[data-skin-finish="v518"]{
+  color-scheme:dark;
+  background:var(--db518-deep);
+  -webkit-text-size-adjust:100%;
+  text-rendering:optimizeLegibility;
+}
+
+html[data-skin-finish="v518"] body{
+  min-height:100dvh;
+  background-color:var(--db518-deep);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+html[data-skin-finish="v518"] button,
+html[data-skin-finish="v518"] a,
+html[data-skin-finish="v518"] [role="button"]{
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+
+html[data-skin-finish="v518"] :focus-visible{
+  outline-color:var(--db518-light);
+}
+
+/* O Universo V516 permanece como matéria de fundo. Os mundos recebem apenas
+   vidro pigmentado, sem imagens estáticas e sem cobrir as estrelas. */
+html[data-skin-finish="v518"] #app > .screen.active:not(#home):not(#tarot){
+  background:
+    radial-gradient(circle at 50% 8%,color-mix(in srgb,var(--db518-accent) 8%,transparent),transparent 34rem),
+    linear-gradient(180deg,color-mix(in srgb,var(--db518-deep) 12%,transparent),transparent 32rem);
+}
+
+html[data-skin-finish="v518"] #app > .screen.active{
+  animation:db518ScreenArrival 360ms var(--db518-spring) both;
+  transform-origin:50% 18%;
+}
+
+html[data-skin-finish="v518"] .panel,
+html[data-skin-finish="v518"] .feature,
+html[data-skin-finish="v518"] .ritual-panel,
+html[data-skin-finish="v518"] .db-page-world article{
+  border-color:color-mix(in srgb,var(--db518-gold) 18%,transparent);
+}
+
+html[data-skin-finish="v518"] .magic-dock{
+  border-color:color-mix(in srgb,var(--db518-gold) 42%,transparent);
+  box-shadow:
+    0 18px 56px rgba(0,0,0,.38),
+    inset 0 1px color-mix(in srgb,var(--db518-light) 16%,transparent),
+    0 0 30px color-mix(in srgb,var(--db518-accent) 9%,transparent);
+}
+
+html[data-skin-finish="v518"] .magic-dock button:active,
+html[data-skin-finish="v518"] .app-header button:active,
+html[data-skin-finish="v518"] .skins-v191-shell button:active{
+  transform:scale(.965);
+  transition-duration:90ms;
+}
+
+/* Menu: mesma geometria V502, agora inteiramente pigmentada pela skin. */
+html[data-skin-finish="v518"] .db502-menu__backdrop{
+  background:
+    radial-gradient(circle at 50% 51%,color-mix(in srgb,var(--db518-accent) 24%,transparent),transparent 34%),
+    radial-gradient(ellipse 78% 56% at 50% 53%,color-mix(in srgb,var(--db518-mist) 13%,transparent),transparent 75%),
+    linear-gradient(180deg,color-mix(in srgb,var(--db518-deep) 82%,transparent),color-mix(in srgb,var(--db518-deep) 92%,#000) 72%);
+}
+
+html[data-skin-finish="v518"] .db502-portal__jewel{
+  border-color:color-mix(in srgb,var(--db518-gold) 48%,transparent);
+  background:
+    radial-gradient(circle at 38% 31%,color-mix(in srgb,var(--db518-light) 15%,transparent),transparent 27%),
+    radial-gradient(circle,color-mix(in srgb,var(--db518-accent) 54%,transparent),color-mix(in srgb,var(--db518-deep) 90%,#000) 70%);
+  box-shadow:
+    inset 0 0 14px color-mix(in srgb,var(--db518-spark) 17%,transparent),
+    0 0 0 3px color-mix(in srgb,var(--db518-accent) 8%,transparent),
+    0 0 17px color-mix(in srgb,var(--db518-accent) 24%,transparent);
+}
+
+html[data-skin-finish="v518"] .db502-portal__label{
+  min-height:30px;
+  line-height:1.16;
+  text-wrap:balance;
+  overflow-wrap:normal;
+}
+
+html[data-skin-finish="v518"] .db502-menu.is-ios-settling .db502-portal,
+html[data-skin-finish="v518"] .db502-menu.is-ios-settling .db502-menu__center,
+html[data-skin-finish="v518"] .db502-menu.is-ios-settling .db502-menu__orbit{
+  backface-visibility:hidden;
+  transform-style:flat;
+}
+
+/* Constelação das 30 skins: renderização preguiçosa real, cartões com leitura
+   clara no iPhone e nenhuma miniatura retida fora da vizinhança visível. */
+html[data-skin-finish="v518"] .skins-v191-shell{
+  --v191-gold:var(--db518-gold);
+  --v191-line:color-mix(in srgb,var(--db518-gold) 24%,transparent);
+  --v191-panel:color-mix(in srgb,var(--db518-deep) 78%,transparent);
+  gap:clamp(15px,3vw,22px);
+}
+
+html[data-skin-finish="v518"] .skins-world-v318{
+  border-color:color-mix(in srgb,var(--db518-gold) 22%,transparent);
+  background:
+    radial-gradient(circle at 86% 8%,color-mix(in srgb,var(--db518-accent) 18%,transparent),transparent 31%),
+    radial-gradient(circle at 6% 110%,color-mix(in srgb,var(--db518-gold) 8%,transparent),transparent 36%),
+    linear-gradient(145deg,color-mix(in srgb,var(--db518-deep) 90%,transparent),rgba(4,1,8,.96));
+}
+
+html[data-skin-finish="v518"] .skins-v191-stage{
+  overflow:hidden;
+  border-color:color-mix(in srgb,var(--db518-gold) 26%,transparent);
+  background:
+    radial-gradient(circle at 23% 50%,color-mix(in srgb,var(--db518-accent) 18%,transparent),transparent 38%),
+    linear-gradient(135deg,color-mix(in srgb,var(--db518-deep) 83%,transparent),rgba(8,3,15,.9));
+  box-shadow:inset 0 1px color-mix(in srgb,var(--db518-light) 8%,transparent),0 22px 60px rgba(0,0,0,.22);
+}
+
+html[data-skin-finish="v518"] .skins-v191-orb{
+  isolation:isolate;
+}
+
+html[data-skin-finish="v518"] .skins-v191-orb img,
+html[data-skin-finish="v518"] .spw318__living-orb img{
+  filter:
+    saturate(1.06)
+    contrast(1.025)
+    drop-shadow(0 0 25px color-mix(in srgb,var(--db518-accent) 34%,transparent));
+}
+
+html[data-skin-finish="v518"] .skin-v191-card{
+  content-visibility:auto;
+  contain:layout paint style;
+  contain-intrinsic-size:auto 430px;
+  border-color:color-mix(in srgb,var(--skin-accent,var(--db518-accent)) 27%,transparent);
+  background:
+    radial-gradient(circle at 50% 0,color-mix(in srgb,var(--skin-accent,var(--db518-accent)) 8%,transparent),transparent 44%),
+    color-mix(in srgb,var(--db518-deep) 91%,rgba(12,5,22,.9));
+  transform:translateZ(0);
+  transition:border-color 220ms ease,box-shadow 260ms ease,transform 220ms var(--db518-press),filter 220ms ease;
+}
+
+html[data-skin-finish="v518"] .skin-v191-card.is-active{
+  border-color:var(--db518-gold);
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--db518-gold) 24%,transparent),0 16px 42px color-mix(in srgb,var(--db518-accent) 16%,transparent);
+}
+
+html[data-skin-finish="v518"] .skin-v191-preview{
+  min-height:clamp(220px,31vw,340px);
+  background:
+    radial-gradient(circle at 50% 44%,color-mix(in srgb,var(--skin-light,#fff) 20%,transparent),transparent 23%),
+    radial-gradient(circle,var(--skin-accent),var(--db518-deep) 74%)!important;
+}
+
+html[data-skin-finish="v518"] .skin-v191-preview img{
+  display:block;
+  object-fit:cover;
+  transform:translateZ(0) scale(1.002);
+  transition:transform 520ms var(--db518-spring),filter 320ms ease,opacity 180ms ease;
+}
+
+@media (hover:hover){
+  html[data-skin-finish="v518"] .skin-v191-card:hover{
+    transform:translateY(-3px);
+    border-color:color-mix(in srgb,var(--skin-light,var(--db518-light)) 52%,transparent);
+  }
+  html[data-skin-finish="v518"] .skin-v191-card:hover .skin-v191-preview img{transform:scale(1.025)}
+}
+
+html[data-skin-finish="v518"] .skins-v191-tools{
+  position:sticky;
+  z-index:5;
+  top:calc(max(78px,env(safe-area-inset-top) + 62px));
+  border:1px solid color-mix(in srgb,var(--db518-gold) 14%,transparent);
+  background:color-mix(in srgb,var(--db518-deep) 88%,transparent);
+  -webkit-backdrop-filter:blur(14px) saturate(1.08);
+  backdrop-filter:blur(14px) saturate(1.08);
+}
+
+html[data-skin-finish="v518"] .skins-v191-tools input,
+html[data-skin-finish="v518"] .skins-v191-tools button,
+html[data-skin-finish="v518"] .skin-v191-card > [data-skin-action],
+html[data-skin-finish="v518"] .spw318__identity button{
+  min-height:44px;
+}
+
+/* Troca atômica: uma onda cromática curta nasce da skin escolhida. É camada
+   de interface, não uma imagem de universo nem um segundo motor de partículas. */
+.db518-skin-veil{
+  --db518-origin-x:50vw;
+  --db518-origin-y:50vh;
+  position:fixed;
+  z-index:2147480600;
+  inset:0;
+  overflow:hidden;
+  contain:strict;
+  pointer-events:none;
+  visibility:hidden;
+}
+
+.db518-skin-veil:before,
+.db518-skin-veil:after,
+.db518-skin-veil i,
+.db518-skin-veil span{
+  content:"";
+  position:absolute;
+  left:var(--db518-origin-x);
+  top:var(--db518-origin-y);
+  width:18px;
+  height:18px;
+  margin:-9px;
+  border-radius:50%;
+  opacity:0;
+  will-change:transform,opacity;
+}
+
+.db518-skin-veil:before{
+  background:radial-gradient(circle,var(--db518-light) 0 3%,var(--db518-spark) 16%,var(--db518-accent) 39%,transparent 72%);
+  mix-blend-mode:screen;
+}
+
+.db518-skin-veil:after{
+  border:1px solid color-mix(in srgb,var(--db518-gold) 72%,transparent);
+  box-shadow:0 0 24px var(--db518-accent),inset 0 0 24px color-mix(in srgb,var(--db518-spark) 46%,transparent);
+}
+
+.db518-skin-veil i{
+  background:conic-gradient(from 30deg,transparent,var(--db518-accent),transparent 33%,var(--db518-spark),transparent 67%,var(--db518-gold),transparent);
+  mix-blend-mode:screen;
+}
+
+.db518-skin-veil span{
+  background:var(--db518-light);
+  box-shadow:0 0 16px var(--db518-light),0 0 42px var(--db518-accent);
+}
+
+.db518-skin-veil.is-committing{visibility:visible}
+.db518-skin-veil.is-committing:before{animation:db518SkinBloom 500ms var(--db518-spring) both}
+.db518-skin-veil.is-committing:after{animation:db518SkinRing 460ms ease-out both}
+.db518-skin-veil.is-committing i{animation:db518SkinTurn 510ms var(--db518-spring) both}
+.db518-skin-veil.is-committing span{animation:db518SkinSpark 390ms ease-out both}
+
+/* Durante passagens críticas, só o ornamento não essencial perde custo. O
+   canvas V516 e a chama continuam vivos e intocados. */
+html.db518-motion-critical .skins-v191-tools,
+html[data-visual-quality="protected"] .skins-v191-tools{
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
+  background:color-mix(in srgb,var(--db518-deep) 96%,#000);
+}
+
+html[data-visual-quality="protected"] .skin-v191-card,
+html[data-visual-quality="protected"] .skins-v191-stage{
+  box-shadow:none;
+}
+
+html[data-visual-quality="protected"] .skin-v191-preview img,
+html[data-visual-quality="protected"] .skins-v191-orb img,
+html[data-visual-quality="protected"] .spw318__living-orb img{
+  filter:saturate(1.02) contrast(1.01);
+}
+
+html[data-visual-quality="protected"] .spw318__living-orb i,
+html[data-visual-quality="protected"] .skins-v191-orb:before,
+html[data-visual-quality="protected"] .skins-v191-orb i{
+  animation:none!important;
+}
+
+html[data-visual-quality="protected"] .db502-menu__aura{
+  filter:none;
+  opacity:.34;
+}
+
+@keyframes db518ScreenArrival{
+  from{opacity:0;transform:translate3d(0,12px,0) scale(.996)}
+  to{opacity:1;transform:translate3d(0,0,0) scale(1)}
+}
+
+@keyframes db518SkinBloom{
+  0%{opacity:0;transform:scale(.2)}
+  34%{opacity:.7}
+  100%{opacity:0;transform:scale(58)}
+}
+
+@keyframes db518SkinRing{
+  0%{opacity:0;transform:scale(.4)}
+  22%{opacity:.86}
+  100%{opacity:0;transform:scale(25)}
+}
+
+@keyframes db518SkinTurn{
+  0%{opacity:0;transform:rotate(-28deg) scale(.2)}
+  34%{opacity:.35}
+  100%{opacity:0;transform:rotate(128deg) scale(48)}
+}
+
+@keyframes db518SkinSpark{
+  0%{opacity:0;transform:scale(.2)}
+  28%{opacity:1}
+  100%{opacity:0;transform:scale(3.2)}
+}
+
+@media (max-width:680px){
+  html[data-skin-finish="v518"] .skins-v191-tools{
+    top:calc(max(72px,env(safe-area-inset-top) + 56px));
+    padding:11px;
+  }
+  html[data-skin-finish="v518"] .skin-v191-preview{min-height:min(78vw,330px)}
+  html[data-skin-finish="v518"] .skins-v191-stage{border-radius:25px}
+}
+
+@media (max-width:380px){
+  html[data-skin-finish="v518"] .skins-v191-tools > div{display:grid;grid-template-columns:repeat(3,1fr)}
+  html[data-skin-finish="v518"] .skins-v191-tools > div button{padding-inline:7px;font-size:.61rem}
+}
+
+@media (prefers-contrast:more){
+  html[data-skin-finish="v518"] .skin-v191-card,
+  html[data-skin-finish="v518"] .skins-v191-stage,
+  html[data-skin-finish="v518"] .db502-portal__jewel{border-width:2px}
+  html[data-skin-finish="v518"] .db502-portal__label{background:#050208;color:#fff}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html[data-skin-finish="v518"] #app > .screen.active{animation:none!important}
+  .db518-skin-veil{display:none!important}
+  html[data-skin-finish="v518"] .skin-v191-card,
+  html[data-skin-finish="v518"] .skin-v191-preview img{transition-duration:1ms!important;transform:none!important}
+}
+
+@media (forced-colors:active){
+  .db518-skin-veil{display:none!important}
+  html[data-skin-finish="v518"] .skin-v191-card,
+  html[data-skin-finish="v518"] .skins-v191-stage{forced-color-adjust:auto;background:Canvas;border-color:CanvasText}
+}

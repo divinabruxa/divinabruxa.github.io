@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — MACROETAPA 3/4 · COMPOSIÇÃO E FLUIDEZ V517
-   Preserva a única Orbe V501 e o Universo/Chama V516. A V517 une menu, Tarot
-   Livre e Mesa Real com proporções calibradas e movimento contínuo. */
+/* DIVINA BRUXA — MACROETAPA 4/4 · ACABAMENTO FINAL V518
+   Preserva a única Orbe V501 e o Universo/Chama V516 aprovados. A V518 fecha
+   as 30 skins, o orçamento adaptativo e o acabamento tátil/visual do sistema. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -10,6 +10,7 @@ import { RealityOrbEngine } from './orb-engine-v208.js?v=208';
 import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=501';
 import { installRealityLifecycleV511 } from './reality-lifecycle-v511.js?v=511';
 import { createLivingUniverseV516 } from './living-universe-core-v516.js?v=516-celestial-fire';
+import { installSkinPerformanceCoreV518 } from './skin-performance-core-v518.js?v=518';
 import { AuthClientV201 as AuthClient } from './auth-client-v201.js?v=201';
 import { AccountEngineV201 } from './account-engine-v201.js?v=201';
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=319';
@@ -195,13 +196,13 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V517 = 517;
-const releaseReloadKeyV517 = `divina-release-reload-${RELEASE_EPOCH_V517}`;
-const reloadForNewReleaseV517 = version => {
-  if (Number(version || 0) <= RELEASE_EPOCH_V517) return false;
+const RELEASE_EPOCH_V518 = 518;
+const releaseReloadKeyV518 = `divina-release-reload-${RELEASE_EPOCH_V518}`;
+const reloadForNewReleaseV518 = version => {
+  if (Number(version || 0) <= RELEASE_EPOCH_V518) return false;
   try {
-    if (sessionStorage.getItem(releaseReloadKeyV517)) return false;
-    sessionStorage.setItem(releaseReloadKeyV517, String(version));
+    if (sessionStorage.getItem(releaseReloadKeyV518)) return false;
+    sessionStorage.setItem(releaseReloadKeyV518, String(version));
   } catch {}
   location.reload();
   return true;
@@ -210,7 +211,7 @@ const reloadForNewReleaseV517 = version => {
 navigator.serviceWorker?.addEventListener('message', event => {
   if (event.data?.type === 'DIVINA_RELEASE_READY') {
     document.documentElement.dataset.releaseReady = String(event.data.version || 'unknown');
-    reloadForNewReleaseV517(event.data.version);
+    reloadForNewReleaseV518(event.data.version);
     return;
   }
   if (event.data?.type !== 'divina-notification-open') return;
@@ -220,15 +221,15 @@ navigator.serviceWorker?.addEventListener('message', event => {
   }
 });
 
-if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV517) {
-  window.__divinaSWBootstrapV517 = true;
+if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV518) {
+  window.__divinaSWBootstrapV518 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=517', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=518', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v517';
+        document.documentElement.dataset.releaseEpoch = 'v518';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V517 registrado');
+        console.info('[Divina] PWA V518 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -249,6 +250,9 @@ window.orbe = {
   returnHome:() => supremeOrb?.returnHome?.(),
   snapshot:() => supremeOrb?.snapshot?.() || orbMotionV207.snapshot()
 };
+const skinPerformanceCore = safely('Skins, desempenho e acabamento V518', () =>
+  installSkinPerformanceCoreV518()
+);
 window.whit = whitCore;
 
 window.divinaWhitV212 = Object.freeze({
@@ -543,7 +547,7 @@ const awaken = async () => {
     document.documentElement.dataset.bootRecovery = 'v326';
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
     dispatchEvent(new CustomEvent('divina:boot-ready', {
-      detail: { shell:'v180', recovery:'v326', bootFirst:true, supremeOrb:'v501', orbitalMenu:'v502-v517-tuned', tarotLivre:'v517', dailyWorld:'v509', realityLifecycle:'v511', transitionAuthority:'supreme-orb-v501', loaderProjection:'supreme-orb-v501', fluidity:'v517-ios-compositor', livingUniverse:'v516', globalUniverseCanvas:true, staticUniverseImage:false, proceduralStars:true, proceduralNebulae:true, proceduralGalaxies:true, skinReactiveUniverse:true, physicalCardJourney:true, decodedBeforeSwap:true, unexplainedFlyingCards:false, stellarFire:'v516-integrated', trueCelestialFire:true, lightningStrokes:false, strokedFirePaths:0, whiteOverexposure:false, volumetricBillows:true, flameTongues:true, fireInsideUniverseCanvas:true, iosHistoryNavigation:true, mesaRealTransfer:true, referenceProportions:true, oneLivingDailyOrb:true }
+      detail: { shell:'v180', recovery:'v326', bootFirst:true, supremeOrb:'v501', orbitalMenu:'v502-v517-tuned', tarotLivre:'v517', dailyWorld:'v509', realityLifecycle:'v511', transitionAuthority:'supreme-orb-v501', loaderProjection:'supreme-orb-v501', fluidity:'v518-adaptive-ios-finish', livingUniverse:'v516', globalUniverseCanvas:true, staticUniverseImage:false, proceduralStars:true, proceduralNebulae:true, proceduralGalaxies:true, skinReactiveUniverse:true, skinPerformance:'v518', skinCount:30, skinRegistryValid:skinPerformanceCore?.status?.().registryValid === true, adaptiveQuality:true, calmQualityRecovery:true, extraAnimationLoops:0, physicalCardJourney:true, decodedBeforeSwap:true, unexplainedFlyingCards:false, stellarFire:'v516-integrated', trueCelestialFire:true, lightningStrokes:false, strokedFirePaths:0, whiteOverexposure:false, volumetricBillows:true, flameTongues:true, fireInsideUniverseCanvas:true, iosHistoryNavigation:true, mesaRealTransfer:true, referenceProportions:true, oneLivingDailyOrb:true }
     }));
 
     // O menu é opcional para o boot: a Home abre mesmo se esta camada falhar.

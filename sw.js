@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 2.0 — MACROETAPA 3/4 · COMPOSIÇÃO E FLUIDEZ V517
+/* DIVINA BRUXA 2.0 — MACROETAPA 4/4 · ACABAMENTO FINAL V518
    Cache seletivo e versionado. Nunca guarda Auth, Whit generation, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=517;
+const VERSION=518;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v517-shell';
-const CONTENT_CACHE='divina-bruxa-v517-content';
-const IMAGE_CACHE='divina-bruxa-v517-images';
-const OFFLINE_CACHE='divina-bruxa-v517-offline-core';
+const SHELL_CACHE='divina-bruxa-v518-shell';
+const CONTENT_CACHE='divina-bruxa-v518-content';
+const IMAGE_CACHE='divina-bruxa-v518-images';
+const OFFLINE_CACHE='divina-bruxa-v518-offline-core';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE]);
 
 const REQUIRED_SHELL=Object.freeze([
@@ -20,6 +20,7 @@ const REQUIRED_SHELL=Object.freeze([
   './reality-lifecycle-v511.js','./reality-lifecycle-v511.css',
   './orbital-menu-v502.js','./orbital-menu-v502.css',
   './living-universe-core-v516.js','./living-universe-core-v516.css',
+  './skin-performance-core-v518.js','./skin-performance-core-v518.css',
   './tarot-livre-orbe-os-v517.js','./tarot-livre-orbe-os-v517.css','./tarot-mesa-bridge-v517.js',
   './daily-world-v509.js','./daily-world-v509.css','./daily-policy-v303.js',
   './orb-loading-portal-v1.js',

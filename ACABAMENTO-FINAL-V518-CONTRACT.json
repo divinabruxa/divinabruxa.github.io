@@ -1,0 +1,130 @@
+{
+  "release": "V518",
+  "name": "Orbe OS — Skins, Desempenho e Acabamento Final",
+  "macro_stage": {
+    "current": 4,
+    "total": 4,
+    "title": "30 skins, desempenho adaptativo e acabamento iOS",
+    "approval_gate": "real iPhone visual, touch and scroll approval required",
+    "next_after_approval": "new phase — Whit Core and a more magical Living Universe"
+  },
+  "requires": "V517 installed and approved",
+  "files": {
+    "replace": [
+      "app-v208.js",
+      "sw.js"
+    ],
+    "new": [
+      "00-INSTALE-V518.txt",
+      "ACABAMENTO-FINAL-V518-CONTRACT.json",
+      "skin-performance-core-v518.js",
+      "skin-performance-core-v518.css"
+    ],
+    "total": 6,
+    "flat_root_install": true
+  },
+  "skins": {
+    "expected": 30,
+    "registered": 30,
+    "unique_ids": 30,
+    "finish_palettes": 30,
+    "texture_authority": "Runtime V12",
+    "registry_authority": "Skin Registry V12",
+    "entitlement_authority": "account/server snapshot",
+    "atomic_predecode_preserved": true,
+    "active_texture_cache_limit_preserved": 4,
+    "lazy_catalog_images_preserved": true,
+    "offscreen_card_rendering": "content-visibility auto",
+    "cosmetic_only": true,
+    "paid_skins_unlocked_by_v518": false,
+    "luck_or_tarot_results_changed": false
+  },
+  "unified_palette": {
+    "tokens_per_skin": [
+      "accent",
+      "light",
+      "gold",
+      "deep",
+      "mist",
+      "spark",
+      "cool"
+    ],
+    "surfaces": [
+      "supreme orb",
+      "orbital menu",
+      "Tarot Livre",
+      "dock",
+      "internal worlds",
+      "Living Universe"
+    ],
+    "skin_switch_effect": "single 520ms event-driven chromatic wave",
+    "static_universe_images": 0,
+    "new_particle_engines": 0,
+    "new_continuous_animation_loops": 0
+  },
+  "adaptive_performance": {
+    "profiles": {
+      "cinematic": { "target_fps": 60, "mobile_scale": 0.72, "desktop_scale": 0.80 },
+      "balanced": { "target_fps": 60, "mobile_scale": 0.66, "desktop_scale": 0.74 },
+      "protected": { "target_fps": "40 or 24 with reduced motion", "scale": 0.54 }
+    },
+    "inputs": [
+      "save-data preference",
+      "network class",
+      "hardware concurrency",
+      "reported device memory",
+      "reduced-motion preference",
+      "local long-task pressure"
+    ],
+    "monitor_interval_ms": 4000,
+    "calm_windows_before_upgrade": 4,
+    "gradual_quality_recovery": true,
+    "local_only": true,
+    "telemetry_transport": false,
+    "new_api_calls": 0
+  },
+  "ios_finish": {
+    "minimum_skin_control_target_px": 44,
+    "compositor_properties": ["transform", "opacity"],
+    "screen_arrival_ms": 360,
+    "spring": "cubic-bezier(.2,.82,.2,1)",
+    "touch_highlight_removed": true,
+    "sticky_skin_filters": true,
+    "safe_area_aware": true,
+    "reduced_motion": true,
+    "increased_contrast": true,
+    "forced_colors": true
+  },
+  "approved_v516_engine": {
+    "authority": "LivingUniverseCoreV516",
+    "javascript_sha256": "e788d193c64667e3b7e2235490e13fed7bf36d4f7bf756d6f3558f9d3a51dbfa",
+    "css_sha256": "77bddf404091fc40ed8ecfcab62d67c48ef3357a8d0b0c9b862c5c22ec385bf1",
+    "files_in_v518_package": false,
+    "shader_changed": false,
+    "flame_changed": false,
+    "runtime_budget_wrapper_only": true,
+    "universe_canvas_count": 1,
+    "fire_inside_universe_canvas": true,
+    "lightning_strokes": false
+  },
+  "preserved": {
+    "supreme_orb": "V501 — exactly one physical living Orb",
+    "reality_lifecycle": "V511 unchanged",
+    "orbital_menu": "V502 with V517 tuning unchanged",
+    "tarot_livre": "V517 unchanged",
+    "daily_world": "V509 unchanged",
+    "whit": "unchanged and deferred to next phase",
+    "billing_auth_database_dns": "unchanged"
+  },
+  "release_integrity": {
+    "service_worker_epoch": 518,
+    "cache_epoch": 518,
+    "javascript_syntax_checked": true,
+    "css_delimiters_checked": true,
+    "production_publish_authorized": false,
+    "deploy_authorized": false,
+    "dns_authorized": false,
+    "database_changes_authorized": false
+  }
+}
+

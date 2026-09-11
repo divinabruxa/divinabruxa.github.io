@@ -1,0 +1,88 @@
+DIVINA BRUXA — V518
+MACROETAPA 4 DE 4 · SKINS, DESEMPENHO E ACABAMENTO FINAL
+
+PRÉ-REQUISITO
+V517 instalada e aprovada.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+1. Abra o ZIP V518.
+2. Selecione os 6 arquivos soltos.
+3. Envie todos diretamente para a raiz do mesmo repositório.
+4. Não crie nenhuma pasta.
+5. Confirme a substituição destes 2 arquivos:
+   - app-v208.js
+   - sw.js
+6. Os outros 4 arquivos são novos:
+   - 00-INSTALE-V518.txt
+   - ACABAMENTO-FINAL-V518-CONTRACT.json
+   - skin-performance-core-v518.js
+   - skin-performance-core-v518.css
+7. Aguarde o GitHub concluir a atualização.
+8. Feche todas as abas da Divina Bruxa e o aplicativo instalado uma vez.
+9. Abra novamente para o service worker V518 assumir.
+
+O QUE ESTA MACROETAPA ENTREGA
+- As 30 skins canônicas são validadas por quantidade, identidade e imagem.
+- A textura continua sendo trocada atomicamente pelo Runtime V12.
+- A propriedade das skins continua vindo da Conta/servidor; a V518 não libera
+  nenhuma skin paga e não interfere no Premium.
+- Cada skin agora possui um acabamento completo: cor principal, luz, ouro,
+  profundidade, névoa, centelha e cor fria.
+- A mesma paleta veste a Orbe, o menu V502, o Tarot Livre V517, o menu inferior,
+  painéis e o Universo Vivo já aprovado.
+- A troca de skin recebe uma onda cromática curta, sem outra animação contínua,
+  sem imagem estática e sem criar outra Orbe.
+- O catálogo das 30 skins usa renderização preguiçosa e descarrega miniaturas
+  distantes, reduzindo memória e trabalho fora da tela.
+- Três orçamentos adaptativos protegem a experiência: Cinemático, Equilibrado
+  e Protegido.
+- Em pressão real de processamento, a qualidade desce antes de perder fluidez.
+- Após quatro janelas tranquilas, a qualidade retorna gradualmente ao limite
+  seguro do aparelho.
+- O Universo V516 mantém o mesmo desenho aprovado. A V518 ajusta somente FPS e
+  resolução interna em tempo de execução, sem alterar o shader ou a chama.
+- Transições, pressão de toque, foco e áreas mínimas de 44 px foram afinados
+  para uma sensação mais próxima do iOS.
+- Menu, Tarot, Orbe e skins respeitam movimento reduzido, contraste reforçado,
+  teclado e aparelhos com menor capacidade.
+
+COMO CONFERIR NO IPHONE
+1. Abra a Home e depois o menu. Confirme que a Orbe continua sendo a mesma.
+2. Entre em Skins e role toda a galeria; a rolagem deve continuar leve.
+3. Use TODAS, MINHAS e PREMIUM e teste a busca.
+4. Se houver outra skin liberada na conta, aplique-a e observe uma única onda
+   curta; menu, Tarot e universo devem receber a mesma paleta.
+5. Confirme que uma skin bloqueada leva à Conta/Premium e não é aplicada.
+6. Volte ao Tarot Livre, revele cartas e use as setas/gestos da V517.
+7. Abra e feche o menu repetidamente. Os rótulos não devem se sobrepor.
+8. Deixe o site em segundo plano e volte; a animação deve despertar estável.
+9. Se o iPhone aquecer ou estiver sob carga, o sistema pode proteger a qualidade
+   e recuperá-la sozinho depois que o aparelho estabilizar.
+
+VALIDAÇÃO DE ENGENHARIA
+- Sintaxe dos três JavaScript do pacote: aprovada.
+- Estrutura e delimitadores do CSS: aprovados.
+- Registro esperado: 30 skins, 30 IDs únicos e 30 acabamentos completos.
+- Nenhum novo loop requestAnimationFrame contínuo foi criado.
+- Nenhuma Orbe, canvas de universo ou motor de chama foi duplicado.
+- O Universo/Chama V516 não faz parte dos arquivos substituídos desta versão.
+- Service worker e caches avançaram juntos para o epoch 518.
+
+O QUE CONTINUA INTOCÁVEL
+- Exatamente uma Orbe física viva: Supreme Orb V501.
+- Universo Vivo e Chama Celestial V516 aprovados.
+- Motor Universal das Realidades V511.
+- Menu Orbital V502 afinado na V517.
+- Tarot Livre, proporções, histórico e Mesa Real V517.
+- Carta do Dia V509.
+- 78 cartas diretas, sem repetição e seis cartas por fileira.
+- Nenhum significado dentro do Tarot Livre.
+- Nenhuma mudança em Whit, servidor, API, pagamentos, autenticação, banco,
+  domínio ou DNS.
+- Nenhuma publicação foi feita por esta entrega.
+
+PORTÃO DE APROVAÇÃO
+Esta Macroetapa 4 de 4 só fica encerrada depois do seu teste visual e tátil no
+iPhone. Depois da aprovação, começa a nova fase: Whit Core e evolução do
+Universo Vivo, em etapas próprias e sem desmontar esta base.
+
