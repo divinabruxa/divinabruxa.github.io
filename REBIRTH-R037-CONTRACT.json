@@ -1,0 +1,46 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R037",
+  "release": "V337",
+  "world": "Menu Fluid Core",
+  "reason": "Fechamento ainda bugava porque a Orbe trocava de contexto de layout no final e havia competição entre animações.",
+  "replace": [
+    "app-v208.js"
+  ],
+  "new": [
+    "menu-scene-v337.js",
+    "menu-scene-v337.css",
+    "REBIRTH-R037-CONTRACT.json"
+  ],
+  "motion": {
+    "singlePhysicalOrb": true,
+    "oneAnimationAuthority": true,
+    "open": "fixed overlay -> menu slot",
+    "close": "fixed overlay -> exact approved Home rect",
+    "midFlightReversal": true,
+    "currentVisualRectFrozenBeforeCancel": true,
+    "reparentOnlyAfterAnimation": true,
+    "v210ReceivesSameAnimationObject": true
+  },
+  "labels": {
+    "tarot": "Tarot Livre",
+    "notifications": "Notificações"
+  },
+  "preserve": [
+    "Navigation V210 routing/state",
+    "Orbe V208 engine and touch",
+    "P0 V326 boot-first",
+    "Dock V326",
+    "Whit V333",
+    "Tarot Livre V330",
+    "Tiragens V331",
+    "Biblioteca V332"
+  ],
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}
