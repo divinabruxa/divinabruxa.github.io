@@ -1,0 +1,47 @@
+{
+  "release": "REBIRTH-R006",
+  "version": 305,
+  "world": "Tiragens 2.0 — O Círculo Contínuo",
+  "principle": "Evoluir continuidade e intenção sem substituir o núcleo correto V213.",
+  "invariants": {
+    "methods_preserved": 15,
+    "orientation": "normal-only",
+    "cards_per_session_unique": true,
+    "celtic_cross_positions": 10,
+    "royal_table": "13x6 = 78 unique cards",
+    "premium_server_authority_preserved": true,
+    "whit_requires_explicit_consent": true,
+    "private_question_not_in_analytics": true,
+    "one_intention_one_reveal_transaction": true,
+    "base_engine": "spreads-engine.js V213",
+    "home_orb_menu_preserved": "V304",
+    "old_worlds_preserved": [
+      "Tarot Livre V301",
+      "Biblioteca Viva V302",
+      "Carta do Dia V303",
+      "Home Heart + Menu Magic V304"
+    ]
+  },
+  "files": {
+    "replace": ["page-loader-v1.js"],
+    "new": [
+      "spreads-world-v305.js",
+      "spreads-world-v305.css",
+      "REBIRTH-R006-CONTRACT.json"
+    ]
+  },
+  "tests": {
+    "flat_zip": true,
+    "loader_v305": true,
+    "v213_policy_preserved": true,
+    "rapid_reveal_guard": true,
+    "resume_state_visible": true,
+    "ritual_progress_state": true,
+    "celtic_cross_preserved": true,
+    "royal_table_preserved": true,
+    "normal_only_preserved": true,
+    "reduced_motion": true,
+    "no_home_orb_menu_change": true,
+    "no_tarot_library_daily_change": true
+  }
+}

@@ -1,0 +1,40 @@
+/* DIVINA BRUXA 2.0 — REBIRTH R006 · TIRAGENS V305
+   Continuidade ritual aditiva. O desenho V213 permanece a autoridade dos métodos. */
+#spreads[data-rebirth="v305"]{--spread-rebirth-progress:0%}
+#spreads[data-rebirth="v305"] .spread-ritual-v305{position:relative;isolation:isolate;margin:0 auto 18px;padding:13px 14px 12px;border:1px solid rgba(232,199,121,.18);border-radius:22px;background:radial-gradient(ellipse at 50% -60%,rgba(154,72,205,.18),transparent 62%),linear-gradient(145deg,rgba(19,8,29,.88),rgba(6,3,12,.82));box-shadow:inset 0 1px rgba(255,247,225,.035),0 18px 48px rgba(0,0,0,.16);overflow:hidden}
+#spreads[data-rebirth="v305"] .spread-ritual-v305::before{content:"";position:absolute;inset:-70% 35% auto;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(222,103,255,.16),transparent 68%);filter:blur(16px);pointer-events:none}
+#spreads[data-rebirth="v305"] .spread-ritual-v305__progress{position:relative;height:2px;margin:0 2px 12px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden}
+#spreads[data-rebirth="v305"] .spread-ritual-v305__progress i{position:absolute;inset:0 auto 0 0;width:var(--spread-rebirth-progress);border-radius:inherit;background:linear-gradient(90deg,rgba(191,91,234,.9),#efd18a 72%,#fff0c9);box-shadow:0 0 15px rgba(225,178,104,.45);transition:width .48s cubic-bezier(.16,.82,.22,1)}
+#spreads[data-rebirth="v305"] .spread-ritual-v305 ol{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:0;padding:0;list-style:none}
+#spreads[data-rebirth="v305"] .spread-ritual-v305 li{min-width:0;display:flex;align-items:center;justify-content:center;gap:6px;color:#7f7386;transition:color .28s ease,filter .28s ease}
+#spreads[data-rebirth="v305"] .spread-ritual-v305 li span{display:grid;place-items:center;flex:0 0 23px;width:23px;height:23px;border:1px solid rgba(229,197,128,.14);border-radius:50%;background:rgba(9,4,16,.72);font:600 9px/1 system-ui,sans-serif;transition:border-color .28s ease,background .28s ease,box-shadow .28s ease,scale .28s ease}
+#spreads[data-rebirth="v305"] .spread-ritual-v305 li b{min-width:0;overflow:hidden;font:600 9px/1.1 system-ui,sans-serif;letter-spacing:.04em;text-overflow:ellipsis;white-space:nowrap}
+#spreads[data-rebirth="v305"] .spread-ritual-v305 li.is-past{color:#bca777}
+#spreads[data-rebirth="v305"] .spread-ritual-v305 li.is-current{color:#f4deb1;filter:drop-shadow(0 0 9px rgba(227,183,105,.18))}
+#spreads[data-rebirth="v305"] .spread-ritual-v305 li.is-current span{border-color:rgba(239,207,139,.68);background:radial-gradient(circle at 35% 26%,rgba(150,65,190,.42),transparent 45%),rgba(17,7,26,.94);box-shadow:inset 0 0 13px rgba(176,64,222,.18),0 0 13px rgba(229,181,100,.12);scale:1.06}
+#spreads[data-rebirth="v305"] .spread-ritual-v305 p{position:relative;z-index:1;margin:10px 2px 0;color:#b9acbd;font-size:11px;line-height:1.4;text-align:center}
+
+#spreads[data-rebirth="v305"] .spread-reading[data-rebirth="v305"]{contain:layout style}
+#spreads[data-rebirth="v305"] .spread-reading[data-rebirth="v305"].is-resumed-v305::after{content:"TIRAGEM RETOMADA";position:absolute;z-index:3;top:12px;right:12px;padding:5px 8px;border:1px solid rgba(234,199,121,.26);border-radius:999px;background:rgba(7,3,13,.72);color:#cfb77e;font:600 8px/1 system-ui,sans-serif;letter-spacing:.12em;pointer-events:none;animation:spread-v305-resume 1.8s ease both}
+#spreads[data-rebirth="v305"] [data-rebirth-reveal="v305"]{transform:translateZ(0);backface-visibility:hidden;transition:filter .18s ease,scale .22s cubic-bezier(.16,.82,.22,1)}
+#spreads[data-rebirth="v305"] [data-rebirth-reveal="v305"]:active{scale:.965}
+#spreads[data-rebirth="v305"].is-reveal-transaction-v305 [data-rebirth-reveal="v305"]{pointer-events:none;filter:brightness(1.16) saturate(1.08);scale:.985}
+#spreads[data-rebirth="v305"].is-reveal-transaction-v305 .spread-reading[data-rebirth="v305"] .spread-orb::after{content:"";position:absolute;inset:-9%;border:1px solid rgba(244,210,139,.54);border-radius:50%;pointer-events:none;animation:spread-v305-intention .62s cubic-bezier(.16,.82,.22,1) both}
+
+@keyframes spread-v305-intention{0%{opacity:.85;scale:.82;filter:blur(0)}100%{opacity:0;scale:1.35;filter:blur(2px)}}
+@keyframes spread-v305-resume{0%,70%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-4px)}}
+
+@media(max-width:560px){
+  #spreads[data-rebirth="v305"] .spread-ritual-v305{margin-inline:-2px;padding-inline:8px}
+  #spreads[data-rebirth="v305"] .spread-ritual-v305 ol{gap:2px}
+  #spreads[data-rebirth="v305"] .spread-ritual-v305 li{gap:3px}
+  #spreads[data-rebirth="v305"] .spread-ritual-v305 li span{flex-basis:20px;width:20px;height:20px;font-size:8px}
+  #spreads[data-rebirth="v305"] .spread-ritual-v305 li b{font-size:7.4px;letter-spacing:.015em}
+  #spreads[data-rebirth="v305"] .spread-ritual-v305 p{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  #spreads[data-rebirth="v305"] .spread-ritual-v305 *,
+  #spreads[data-rebirth="v305"] [data-rebirth-reveal="v305"],
+  #spreads[data-rebirth="v305"] .spread-reading[data-rebirth="v305"].is-resumed-v305::after,
+  #spreads[data-rebirth="v305"].is-reveal-transaction-v305 .spread-reading[data-rebirth="v305"] .spread-orb::after{animation:none!important;transition:none!important}
+}
