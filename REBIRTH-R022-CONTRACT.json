@@ -1,0 +1,66 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R022",
+  "release": "V321",
+  "world": "Notificações 2.0",
+  "vision_source": "chat Whit + WORK7.0 master vision",
+  "purpose": "Transformar Notificações em uma presença consentida, silenciosa e contextual sem criar um segundo motor nem ativar push real.",
+  "replace": [
+    "page-loader-v1.js"
+  ],
+  "new": [
+    "notifications-world-v321.js",
+    "notifications-world-v321.css",
+    "REBIRTH-R022-CONTRACT.json"
+  ],
+  "preserve": [
+    "CelestialNotificationEngine V150",
+    "NotificationPolicy V150",
+    "Service Worker V208 deep-link allowlist",
+    "Admin notification drafts V150",
+    "Whit V307-V316",
+    "Home/Orbe/Menu V304",
+    "Worlds V301-V320"
+  ],
+  "categories": [
+    "daily_card",
+    "school",
+    "consultations",
+    "account_security",
+    "billing",
+    "orbe_ai",
+    "music",
+    "episodes",
+    "skins",
+    "marketing"
+  ],
+  "rules": {
+    "masterOptInDefaultOff": true,
+    "browserPermissionOnlyAfterGesture": true,
+    "marketingExplicitConsent": true,
+    "quietHoursStart": "22:00",
+    "quietHoursEnd": "08:00",
+    "quietHoursTimezone": "America/Sao_Paulo",
+    "dailyCardNotificationRevealsCard": false,
+    "privateDiarySegmentation": false,
+    "privateSpreadSegmentation": false,
+    "tarotCardSegmentation": false,
+    "whitConversationSegmentation": false,
+    "schoolPrivateNotesSegmentation": false,
+    "deepLinksAllowlisted": true
+  },
+  "staging": {
+    "pushProviderActive": false,
+    "automaticSend": false,
+    "backgroundCampaignSend": false,
+    "localTestNotificationPreserved": true,
+    "adminDraftsTestOnly": true
+  },
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}

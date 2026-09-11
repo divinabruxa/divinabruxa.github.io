@@ -1,7 +1,7 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R021 · CARREGADOR DE MUNDOS V320
+/* DIVINA BRUXA 2.0 — REBIRTH R022 · CARREGADOR DE MUNDOS V321
    Mundos Rebirth: Tarot Livre V301, Biblioteca V302, Carta do Dia V303,
    Tiragens V305, Escola V306, Diário/Espelho V317, Skins/Premium V318,
-   Conta/Consultas V319 e Loja/Música/Vídeo V320.
+   Conta/Consultas V319, Loja/Música/Vídeo V320 e Notificações V321.
    Home/Menu V304 e Whit V307–V316 continuam preservados. */
 import {
   normalizeRouteId,
@@ -184,8 +184,11 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
     videos:ensureMedia,
     music:ensureMedia,
     notifications: async () => {
-      const { CelestialNotificationEngine } = await import('./notification-engine-v150.js?v=150');
-      return new CelestialNotificationEngine($('#notificationApp'), go);
+      const [, module] = await Promise.all([
+        ensureStyle('divinaNotificationsRebirthV321', 'notifications-world-v321.css?v=321'),
+        import('./notifications-world-v321.js?v=321')
+      ]);
+      return new module.NotificationsWorldV321($('#notificationApp'), go);
     },
     admin: async () => {
       const [, adminModule, worldModule] = await Promise.all([
@@ -255,7 +258,10 @@ export function createPageLoader({ config, go, authClient = globalThis.divinaAut
       import('./admin-engine.js?v=150'),
       import('./media-commerce-world-v320.js?v=320')
     ]),
-    notifications: () => import('./notification-engine-v150.js?v=150')
+    notifications: () => Promise.all([
+      ensureStyle('divinaNotificationsRebirthV321', 'notifications-world-v321.css?v=321'),
+      import('./notifications-world-v321.js?v=321')
+    ])
   });
 
   const warm = ids => {
