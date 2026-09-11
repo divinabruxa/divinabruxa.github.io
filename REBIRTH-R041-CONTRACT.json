@@ -1,0 +1,45 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R041",
+  "release": "V341",
+  "world": "Tarot Livre Cosmos",
+  "evidence": "Screen recording 9.1s / 30fps: Tarot Livre functional, but too dark/black, visually cold, and with less magical presence than the perfected Orb/Menu.",
+  "goal": "Make Tarot Livre feel like a living universe with minimal text, stronger Orb-to-card ritual, smoother ambience, and no unnecessary information.",
+  "replace": [
+    "app-v208.js"
+  ],
+  "new": [
+    "free-tarot-cosmos-v341.js",
+    "free-tarot-cosmos-v341.css",
+    "REBIRTH-R041-CONTRACT.json"
+  ],
+  "preserve_rules": {
+    "deck_size": 78,
+    "no_repetition": true,
+    "no_reversed_cards": true,
+    "no_meanings_in_free_tarot": true,
+    "grid_columns": 6
+  },
+  "visual_changes": [
+    "warmer cosmic ritual background",
+    "aurora and living starfield",
+    "less black / less cold feeling",
+    "Orb breath and ring ambience",
+    "birth-stream from Orb to card",
+    "minimal copy only",
+    "constellation grid with more universe presence"
+  ],
+  "architecture": {
+    "base_engine": "V301",
+    "previous_layer": "V330",
+    "new_layer": "V341",
+    "no_extra_api_calls": true
+  },
+  "production_guards": {
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "ORBE_AI_SOL_ENABLED": false
+  }
+}

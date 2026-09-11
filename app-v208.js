@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — REBIRTH R040 · MENU ORBE LOCK V340 · BOOT-SAFE */
+/* DIVINA BRUXA — REBIRTH R041 · TAROT LIVRE COSMOS V341 · BOOT-SAFE */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -59,11 +59,11 @@ const startMenuSceneV340 = () => import('./menu-orb-lock-v340.js?v=340')
     document.documentElement.dataset.menuRebornError = 'v340';
   });
 
-const startFreeTarotSupremeV330 = () => import('./free-tarot-supreme-v330.js?v=330')
-  .then(module => module.installFreeTarotSupremeV330?.())
+const startFreeTarotSupremeV341 = () => import('./free-tarot-cosmos-v341.js?v=341')
+  .then(module => module.installFreeTarotCosmosV341?.())
   .catch(error => {
-    console.error('[Divina] Tarot Livre Supremo V330 não iniciou', error);
-    document.documentElement.dataset.freeTarotSupremeError = 'v330';
+    console.error('[Divina] Tarot Livre Cosmos V341 não iniciou', error);
+    document.documentElement.dataset.freeTarotSupremeError = 'v341';
   });
 
 const startSpreadsSupremeV331 = () => import('./spreads-supreme-v331.js?v=331')
@@ -480,7 +480,7 @@ const awaken = async () => {
     // R027/R028 são opcionais: nunca bloqueiam a abertura da Home.
     startMenuSceneV340();
     startWhitUniversalV333();
-    startFreeTarotSupremeV330();
+    startFreeTarotSupremeV341();
     startSpreadsSupremeV331();
     startLibraryDeepV332();
 
@@ -513,7 +513,7 @@ const awaken = async () => {
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
     startMenuSceneV340();
     startWhitUniversalV333();
-    startFreeTarotSupremeV330();
+    startFreeTarotSupremeV341();
     startSpreadsSupremeV331();
     startLibraryDeepV332();
     startPwaAfterBootV326();
