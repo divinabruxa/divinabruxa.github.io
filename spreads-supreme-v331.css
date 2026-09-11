@@ -1,0 +1,466 @@
+/* DIVINA BRUXA 2.0 — REBIRTH R031 · TIRAGENS SUPREMAS V331
+   Observatório de possibilidades: menos painel, mais espaço, relação e movimento. */
+
+#spreads[data-spreads-supreme="v331"]{
+  --sp331-gold:#efd18a;
+  --sp331-violet:#b753ea;
+  --sp331-ink:#f4e9f5;
+  --sp331-muted:#a497aa;
+  position:relative;
+  isolation:isolate;
+  overflow-x:hidden;
+  padding-top:calc(92px + env(safe-area-inset-top))!important;
+  padding-bottom:calc(var(--dock-height,75px) + 38px + env(safe-area-inset-bottom))!important;
+}
+
+/* Céu do mundo */
+#spreads .sp331__cosmos{
+  position:fixed;z-index:-1;inset:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 32%,rgba(127,44,190,.12),transparent 31rem),
+    radial-gradient(circle at 77% 66%,rgba(231,92,202,.035),transparent 26rem);
+  opacity:.82;
+}
+#spreads .sp331__cosmos i{
+  position:absolute;width:3px;height:3px;border-radius:50%;
+  background:#f8dda4;box-shadow:0 0 9px rgba(215,111,255,.70);opacity:.22;
+}
+#spreads .sp331__cosmos i:nth-child(1){left:10%;top:21%}
+#spreads .sp331__cosmos i:nth-child(2){left:88%;top:27%}
+#spreads .sp331__cosmos i:nth-child(3){left:18%;top:59%}
+#spreads .sp331__cosmos i:nth-child(4){left:78%;top:72%}
+#spreads .sp331__cosmos i:nth-child(5){left:46%;top:15%}
+#spreads .sp331__cosmos i:nth-child(6){left:57%;top:86%}
+#spreads.sp331 .sp331__cosmos i{animation:sp331Star 7s ease-in-out infinite}
+#spreads .sp331__cosmos i:nth-child(2n){animation-delay:-2.5s}
+#spreads .sp331__cosmos i:nth-child(3n){animation-delay:-4.8s}
+
+/* Intenção: pequena porta, não formulário dominante */
+#spreads .spread-intention-v331{
+  display:grid;
+  gap:7px;
+  margin:0 auto 12px;
+  width:min(920px,100%);
+  padding:12px 14px;
+  border:1px solid rgba(237,202,129,.08);
+  border-radius:20px;
+  background:rgba(8,3,14,.28);
+}
+#spreads .spread-intention-v331>span{
+  font-size:7px!important;
+  letter-spacing:.16em!important;
+  color:rgba(236,201,129,.72)!important;
+}
+#spreads .spread-intention-v331 textarea{
+  min-height:58px!important;
+  border:0!important;
+  border-bottom:1px solid rgba(239,203,130,.12)!important;
+  border-radius:0!important;
+  padding:10px 2px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  font:500 15px/1.45 Georgia,serif!important;
+}
+#spreads .spread-intention-v331 small{
+  color:rgba(167,153,174,.58)!important;
+  font-size:7px!important;
+}
+
+/* Ritual: linha viva mínima */
+#spreads .spread-ritual-v305{
+  width:min(920px,100%);
+  margin:0 auto 16px!important;
+  padding:12px!important;
+  border-color:rgba(234,198,123,.08)!important;
+  background:linear-gradient(145deg,rgba(15,6,23,.46),rgba(5,2,10,.32))!important;
+  box-shadow:none!important;
+  backdrop-filter:blur(10px);
+}
+#spreads .spread-ritual-v305__progress{
+  background:rgba(255,255,255,.035)!important;
+  margin-bottom:9px!important;
+}
+#spreads .spread-ritual-v305 ol{gap:2px!important}
+#spreads .spread-ritual-v305 li b{
+  font-size:7px!important;
+  letter-spacing:.04em!important;
+}
+#spreads .spread-ritual-v305 p{
+  margin-top:8px!important;
+  color:rgba(200,187,205,.66)!important;
+  font-family:Georgia,serif!important;
+}
+#spreads .sp331__ritual-orbit{
+  position:absolute;inset:-50% 34%;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(180,68,235,.10),transparent 68%);
+  filter:blur(13px);
+}
+
+/* Filtros: chips suaves */
+#spreads .spread-filters{
+  width:min(920px,100%);
+  margin:0 auto 13px!important;
+  display:flex!important;
+  overflow-x:auto;
+  gap:6px!important;
+  padding:2px 1px 7px!important;
+  scrollbar-width:none;
+  scroll-snap-type:x proximity;
+}
+#spreads .spread-filters::-webkit-scrollbar{display:none}
+#spreads .spread-filters button{
+  flex:0 0 auto!important;
+  min-height:38px!important;
+  padding:7px 11px!important;
+  border:1px solid rgba(237,202,129,.09)!important;
+  border-radius:999px!important;
+  background:rgba(8,3,14,.28)!important;
+  box-shadow:none!important;
+  scroll-snap-align:center;
+}
+#spreads .spread-filters button b{font-size:8px!important}
+#spreads .spread-filters button small{display:none!important}
+#spreads .spread-filters button[aria-pressed="true"]{
+  border-color:rgba(242,207,138,.38)!important;
+  color:#efd494!important;
+  box-shadow:0 0 17px rgba(184,69,231,.08)!important;
+}
+
+/* Métodos viram portais, não cartões pesados */
+#spreads .spread-choice{
+  position:relative!important;
+  isolation:isolate;
+  min-height:118px!important;
+  padding:14px 12px!important;
+  border:1px solid rgba(238,202,130,.07)!important;
+  border-radius:24px!important;
+  background:
+    radial-gradient(circle at 18% 24%,rgba(123,44,167,.14),transparent 31%),
+    rgba(7,3,13,.25)!important;
+  box-shadow:none!important;
+  transition:
+    transform .28s cubic-bezier(.16,.82,.22,1),
+    border-color .28s ease,
+    background .28s ease,
+    filter .22s ease!important;
+}
+#spreads .spread-choice::before{
+  content:"";
+  position:absolute;z-index:-1;
+  inset:18% 65% 18% -12%;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(191,72,238,.14),transparent 70%);
+  filter:blur(9px);
+  opacity:.38;
+}
+#spreads .spread-choice:hover,
+#spreads .spread-choice:focus-visible,
+#spreads .spread-choice.active{
+  transform:translateY(-3px)!important;
+  border-color:rgba(239,203,131,.25)!important;
+  background:
+    radial-gradient(circle at 18% 24%,rgba(139,49,185,.21),transparent 34%),
+    rgba(9,4,16,.42)!important;
+}
+#spreads .spread-choice:focus{outline:none}
+#spreads .spread-choice:focus-visible{
+  outline:2px solid rgba(246,211,143,.60)!important;
+  outline-offset:3px!important;
+}
+#spreads .spread-choice-sigil{
+  width:48px!important;height:48px!important;
+  display:grid!important;place-items:center!important;
+  border:1px solid rgba(239,204,135,.28)!important;
+  border-radius:50%!important;
+  background:radial-gradient(circle at 34% 26%,rgba(158,64,199,.30),rgba(15,5,24,.94) 70%)!important;
+  color:#edcc87!important;
+  box-shadow:inset 0 0 16px rgba(185,67,230,.12),0 0 14px rgba(234,187,105,.06)!important;
+  font-size:20px!important;
+}
+#spreads .spread-choice-copy{
+  min-width:0!important;
+}
+#spreads .spread-choice-copy small{
+  font-size:6.5px!important;
+  letter-spacing:.10em!important;
+  opacity:.54;
+}
+#spreads .spread-choice-copy strong{
+  font:500 16px/1.08 Georgia,serif!important;
+  color:#eaddeb!important;
+}
+#spreads .spread-choice-copy em{
+  display:-webkit-box!important;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  color:rgba(174,160,181,.62)!important;
+  font-size:8px!important;
+  line-height:1.35!important;
+}
+#spreads .spread-choice-count{
+  color:rgba(230,197,133,.66)!important;
+  font-size:7px!important;
+}
+#spreads .spread-choice-count b{
+  display:block!important;
+  margin-top:4px;
+  font-size:6px!important;
+}
+#spreads .spread-choice.sp331-choice-pulse .spread-choice-sigil{
+  animation:sp331PortalPulse .58s cubic-bezier(.16,.82,.22,1);
+}
+
+/* Leitura = mapa vivo */
+#spreads .spread-reading-v331{
+  position:relative;
+  width:min(1080px,100%);
+  margin-inline:auto;
+  padding:clamp(14px,3vw,24px)!important;
+  overflow:hidden;
+  border:1px solid rgba(239,203,130,.07)!important;
+  border-radius:clamp(24px,5vw,42px)!important;
+  background:
+    radial-gradient(circle at 50% 38%,rgba(126,44,196,.16),transparent 29%),
+    radial-gradient(circle at 77% 73%,rgba(229,84,201,.035),transparent 32%),
+    linear-gradient(180deg,rgba(8,3,15,.18),rgba(4,1,8,.56))!important;
+  box-shadow:inset 0 0 120px rgba(146,59,223,.025),0 24px 85px rgba(0,0,0,.16)!important;
+}
+#spreads .sp331__reading-space{
+  position:absolute;z-index:-1;inset:0;pointer-events:none;
+}
+#spreads .sp331__reading-space i{
+  position:absolute;width:3px;height:3px;border-radius:50%;
+  background:#f5d998;box-shadow:0 0 9px rgba(221,120,255,.6);opacity:.25;
+}
+#spreads .sp331__reading-space i:nth-child(1){left:12%;top:18%}
+#spreads .sp331__reading-space i:nth-child(2){right:13%;top:24%}
+#spreads .sp331__reading-space i:nth-child(3){left:20%;bottom:14%}
+#spreads .sp331__reading-space i:nth-child(4){right:18%;bottom:18%}
+#spreads .spread-map-v331{
+  position:relative;
+  z-index:2;
+}
+#spreads .spread-position-slot{
+  transition:transform .30s cubic-bezier(.16,.82,.22,1),filter .28s ease!important;
+}
+#spreads .spread-position-slot:hover{
+  transform:translateY(-3px);
+  filter:brightness(1.04);
+}
+
+/* Orbe da tiragem: responde sem inflar */
+#spreads .spread-orb-v331{
+  transform:none!important;
+  transition:filter .22s ease!important;
+  -webkit-tap-highlight-color:transparent;
+}
+#spreads .spread-orb-v331:active{
+  transform:none!important;
+  filter:brightness(1.17) saturate(1.10) drop-shadow(0 0 28px rgba(179,69,239,.38))!important;
+}
+#spreads .sp331-reveal-pulse .spread-orb-v331{
+  animation:sp331OrbLight .72s ease-out;
+}
+#spreads .sp331-reveal-pulse::after{
+  content:"";
+  position:absolute;z-index:1;
+  left:50%;top:48%;
+  width:34px;height:34px;
+  border:1px solid rgba(246,209,138,.42);
+  border-radius:50%;
+  transform:translate(-50%,-50%) scale(.3);
+  opacity:0;
+  pointer-events:none;
+  animation:sp331RevealWave .76s ease-out forwards;
+}
+
+/* Síntese aplicada à vida */
+#spreads .spread-synthesis-v331{
+  margin-top:18px!important;
+  padding:clamp(16px,3vw,24px)!important;
+  border:1px solid rgba(238,201,128,.10)!important;
+  border-radius:28px!important;
+  background:
+    radial-gradient(circle at 10% 0,rgba(145,53,190,.12),transparent 31%),
+    rgba(7,3,13,.48)!important;
+  box-shadow:none!important;
+}
+#spreads .spread-synthesis-v331>span{
+  color:#d6b86f!important;
+  font-size:7px!important;
+  letter-spacing:.15em!important;
+}
+#spreads .spread-synthesis-v331>h3{
+  max-width:720px;
+  margin:.45rem 0 1rem!important;
+  color:#f2e5f3!important;
+  font:500 clamp(1.35rem,4vw,2rem)/1.08 Georgia,serif!important;
+}
+#spreads .spread-life-map-v331{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+#spreads .spread-life-map-v331 section{
+  min-height:150px;
+  padding:14px;
+  border:1px solid rgba(239,204,132,.07);
+  border-radius:18px;
+  background:rgba(255,255,255,.012);
+}
+#spreads .spread-life-map-v331 small{
+  color:#caaa67;
+  font:800 7px/1 system-ui,sans-serif;
+  letter-spacing:.14em;
+}
+#spreads .spread-life-map-v331 p{
+  margin:8px 0 0;
+  color:#cfc2d2;
+  font:500 12px/1.62 Georgia,serif;
+}
+#spreads .spread-synthesis-v331 blockquote{
+  margin:9px 0 0!important;
+  padding:14px!important;
+  border:1px solid rgba(239,202,129,.09)!important;
+  border-left:2px solid rgba(234,196,121,.46)!important;
+  border-radius:16px!important;
+  background:rgba(17,7,25,.38)!important;
+}
+#spreads .spread-synthesis-v331 blockquote b{
+  display:block;
+  color:#d6b86f;
+  font:800 7px/1 system-ui,sans-serif;
+  letter-spacing:.14em;
+}
+#spreads .spread-synthesis-v331 blockquote span{
+  display:block;margin-top:7px;
+  color:#ded1e0;
+  font:500 13px/1.58 Georgia,serif;
+}
+#spreads .spread-next-step-v331{
+  display:flex;gap:10px;align-items:flex-start;
+  margin-top:8px;padding:13px 14px;
+  border-radius:17px;
+  background:radial-gradient(circle at 0 0,rgba(173,66,220,.12),transparent 38%),rgba(255,255,255,.014);
+}
+#spreads .spread-next-step-v331>span{
+  color:#efcf88;font-size:18px;
+}
+#spreads .spread-next-step-v331 p{margin:0}
+#spreads .spread-next-step-v331 b{
+  display:block;color:#d9bb76;font-size:7px;letter-spacing:.12em;
+}
+#spreads .spread-next-step-v331 small{
+  display:block;margin-top:5px;color:#cfc2d1;font:500 12px/1.5 Georgia,serif;
+}
+#spreads .spread-patterns-v331{
+  margin-top:9px;
+  border-top:1px solid rgba(255,255,255,.04);
+}
+#spreads .spread-patterns-v331 summary{
+  padding:10px 0;
+  color:rgba(180,164,185,.66);
+  font-size:8px;
+  cursor:pointer;
+}
+#spreads .spread-patterns-v331>div{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:5px;
+}
+#spreads .spread-patterns-v331 span{
+  display:grid;padding:8px;border-radius:11px;background:rgba(255,255,255,.015);
+  color:#837687;font-size:7px;
+}
+#spreads .spread-patterns-v331 b{
+  color:#e0c487;font:500 14px/1 Georgia,serif;
+}
+#spreads .spread-synthesis-v331>aside{
+  margin-top:10px!important;
+  padding:10px 0 0!important;
+  border:0!important;
+  border-top:1px solid rgba(255,255,255,.04)!important;
+  background:none!important;
+  opacity:.70;
+}
+#spreads .spread-synthesis-v331>aside b{font-size:6.5px!important}
+#spreads .spread-synthesis-v331>aside p{font-size:8px!important;line-height:1.5!important}
+
+/* Mesa Real: mantém 13x6, mas respira melhor */
+#spreads .spread-reading.is-royal.spread-reading-v331 .spread-map-royal-table{
+  gap:.32rem!important;
+  padding:.35rem!important;
+}
+#spreads .spread-reading.is-royal.spread-reading-v331 .royal-slot{
+  border-color:rgba(238,203,130,.07)!important;
+  background:rgba(7,3,13,.24)!important;
+}
+
+/* Mobile */
+@media(max-width:760px){
+  #spreads[data-spreads-supreme="v331"]{
+    padding-left:9px!important;
+    padding-right:9px!important;
+  }
+  #spreads .spread-life-map-v331{
+    grid-template-columns:1fr;
+  }
+  #spreads .spread-life-map-v331 section{
+    min-height:0;
+  }
+  #spreads .spread-choice{
+    min-height:105px!important;
+    padding:11px 10px!important;
+  }
+  #spreads .spread-choice-sigil{
+    width:44px!important;height:44px!important;
+  }
+  #spreads .spread-choice-copy em{
+    -webkit-line-clamp:1;
+  }
+  #spreads .spread-patterns-v331>div{
+    grid-template-columns:1fr 1fr;
+  }
+}
+@media(max-width:430px){
+  #spreads .spread-choice-copy strong{font-size:14px!important}
+  #spreads .spread-choice-copy em{display:none!important}
+  #spreads .spread-ritual-v305 li b{display:none!important}
+  #spreads .spread-ritual-v305 li span{margin:auto!important}
+  #spreads .spread-synthesis-v331{padding:14px!important}
+  #spreads .spread-life-map-v331 p{font-size:11.5px}
+}
+
+/* Responsabilidade/performance */
+@media(prefers-reduced-motion:reduce){
+  #spreads .sp331__cosmos i,
+  #spreads .spread-choice.sp331-choice-pulse .spread-choice-sigil,
+  #spreads .sp331-reveal-pulse .spread-orb-v331,
+  #spreads .sp331-reveal-pulse::after{
+    animation:none!important;
+  }
+}
+html[data-performance-tier="constrained"] #spreads .sp331__cosmos i{
+  animation:none!important;
+}
+html[data-performance-tier="constrained"] #spreads .sp331__reading-space i:nth-child(n+3){
+  display:none;
+}
+
+@keyframes sp331Star{
+  0%,100%{opacity:.15;transform:scale(.65)}
+  50%{opacity:.62;transform:scale(1.25)}
+}
+@keyframes sp331PortalPulse{
+  0%{transform:scale(1)}
+  42%{transform:scale(1.09);filter:brightness(1.22)}
+  100%{transform:scale(1)}
+}
+@keyframes sp331OrbLight{
+  0%{filter:brightness(1)}
+  35%{filter:brightness(1.24) saturate(1.13) drop-shadow(0 0 32px rgba(185,69,240,.44))}
+  100%{filter:brightness(1)}
+}
+@keyframes sp331RevealWave{
+  0%{opacity:.72;transform:translate(-50%,-50%) scale(.3)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(12)}
+}

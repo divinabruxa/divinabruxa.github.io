@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — REBIRTH R030 · TAROT LIVRE SUPREMO V330 · BOOT-SAFE */
+/* DIVINA BRUXA — REBIRTH R031 · TIRAGENS SUPREMAS V331 · BOOT-SAFE */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -65,6 +65,13 @@ const startFreeTarotSupremeV330 = () => import('./free-tarot-supreme-v330.js?v=3
   .catch(error => {
     console.error('[Divina] Tarot Livre Supremo V330 não iniciou', error);
     document.documentElement.dataset.freeTarotSupremeError = 'v330';
+  });
+
+const startSpreadsSupremeV331 = () => import('./spreads-supreme-v331.js?v=331')
+  .then(module => module.installSpreadsSupremeV331?.())
+  .catch(error => {
+    console.error('[Divina] Tiragens Supremas V331 não iniciaram', error);
+    document.documentElement.dataset.spreadsSupremeError = 'v331';
   });
 
 const clearRebirthShellResidue = () => {
@@ -468,6 +475,7 @@ const awaken = async () => {
     startMenuRebornV329();
     startWhitUniversalV328();
     startFreeTarotSupremeV330();
+    startSpreadsSupremeV331();
 
     // Começa a navegação fora do bloqueio visual.
     const navigationTimeout = new Promise((_, reject) =>
@@ -499,6 +507,7 @@ const awaken = async () => {
     startMenuRebornV329();
     startWhitUniversalV328();
     startFreeTarotSupremeV330();
+    startSpreadsSupremeV331();
     startPwaAfterBootV326();
   }
 };
