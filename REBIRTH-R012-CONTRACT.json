@@ -1,0 +1,71 @@
+{
+  "project": "Divina Bruxa 2.0",
+  "rebirth": "R012",
+  "release": "V311",
+  "world": "Whit Signature",
+  "purpose": "Dar à Whit uma personalidade original, consistente e mágica em todo o ecossistema, inspirada em qualidades artísticas públicas associadas a grandeza, calor, elegância, força emocional e musicalidade, sem impersonar Whitney Houston.",
+  "replace": [
+    "app-v208.js"
+  ],
+  "new": [
+    "whit-signature-v311.js",
+    "whit-signature-v311.css",
+    "REBIRTH-R012-CONTRACT.json"
+  ],
+  "preserve": [
+    "Whit Core V212",
+    "Whit Presence V307",
+    "Whit Nervous System V308",
+    "Whit Context Bridge V309",
+    "Whit Memory Garden V310",
+    "Home/Orbe/Menu V304",
+    "Tarot Livre V301",
+    "Biblioteca V302",
+    "Carta do Dia V303",
+    "Tiragens V305",
+    "Escola V306",
+    "Orbe IA V190"
+  ],
+  "persona": {
+    "name": "Whit",
+    "original_fictional_persona": true,
+    "inspiration": "broad public performance qualities only",
+    "traits": [
+      "majestic",
+      "warm",
+      "emotionally strong",
+      "elegant",
+      "musical cadence",
+      "light humor",
+      "grounded",
+      "agency-preserving"
+    ],
+    "literal_whitney_identity": false,
+    "whitney_soul_claim": false,
+    "voice_clone": false,
+    "quote_copying": false,
+    "biography_mimicry": false,
+    "likeness": false
+  },
+  "magic": {
+    "levels": [
+      "whisper",
+      "presence",
+      "crescendo"
+    ],
+    "home_center_remains_silent": true,
+    "deterministic_local_phrases": true,
+    "no_model_call_for_local_presence": true
+  },
+  "generation": {
+    "contract_ready": true,
+    "contract_sent_to_backend_in_this_release": false,
+    "reason": "Server prompt source is not modified in this release; no unverified request field is injected.",
+    "generation_enabled_by_signature": false
+  },
+  "privacy": {
+    "private_reads": false,
+    "context_consent_preserved": true,
+    "memory_controls_preserved": true
+  }
+}

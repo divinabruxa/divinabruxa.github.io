@@ -1,0 +1,99 @@
+/* DIVINA BRUXA 2.0 — REBIRTH R012 · WHIT SIGNATURE V311 */
+
+html[data-whit-signature="v311"] #whitPresenceV307[data-tone^="signature-"]{
+  border-color:rgba(244,207,132,.31);
+  background:
+    radial-gradient(circle at 10% 34%,rgba(211,104,246,.20),transparent 31%),
+    radial-gradient(circle at 88% 120%,rgba(232,188,107,.08),transparent 42%),
+    linear-gradient(135deg,rgba(25,9,36,.90),rgba(8,3,14,.91));
+}
+html[data-whit-signature-intensity="whisper"] #whitPresenceV307 .whit-presence-v307__sigil{
+  filter:saturate(.94) brightness(1.03);
+}
+html[data-whit-signature-intensity="presence"] #whitPresenceV307 .whit-presence-v307__sigil{
+  filter:saturate(1.06) brightness(1.08);
+  box-shadow:
+    inset 0 0 18px rgba(209,93,246,.20),
+    0 0 18px rgba(237,195,116,.20),
+    0 0 34px rgba(203,86,244,.14);
+}
+html[data-whit-signature-intensity="crescendo"] #whitPresenceV307 .whit-presence-v307__sigil{
+  animation:whitSignatureV311Crescendo 1.2s cubic-bezier(.16,.82,.22,1) both;
+}
+
+.whit-signature-v311__seal{
+  position:relative;
+  display:grid;
+  grid-template-columns:46px minmax(0,1fr);
+  gap:12px;
+  align-items:center;
+  margin:0 0 16px;
+  padding:13px 15px;
+  overflow:hidden;
+  border:1px solid rgba(233,197,120,.17);
+  border-radius:19px;
+  background:
+    radial-gradient(circle at 7% 50%,rgba(192,79,230,.18),transparent 32%),
+    linear-gradient(135deg,rgba(28,11,39,.72),rgba(7,4,12,.76));
+  box-shadow:inset 0 1px rgba(255,255,255,.035);
+}
+.whit-signature-v311__seal::after{
+  content:"";
+  position:absolute;
+  inset:auto -8% -80% 28%;
+  height:110px;
+  pointer-events:none;
+  background:radial-gradient(ellipse,rgba(234,192,111,.07),transparent 68%);
+  filter:blur(12px);
+}
+.whit-signature-v311__mark{
+  position:relative;
+  z-index:1;
+  display:grid;
+  place-items:center;
+  width:42px;
+  height:42px;
+  border:1px solid rgba(239,204,132,.48);
+  border-radius:50%;
+  color:#f0cf8c;
+  background:radial-gradient(circle,rgba(133,48,176,.42),rgba(12,5,18,.91) 70%);
+  box-shadow:0 0 22px rgba(196,78,233,.13);
+}
+.whit-signature-v311__seal>div{position:relative;z-index:1;min-width:0}
+.whit-signature-v311__seal small{
+  display:block;
+  margin-bottom:3px;
+  color:#c8a968;
+  font:700 8px/1.2 system-ui,-apple-system,sans-serif;
+  letter-spacing:.15em;
+}
+.whit-signature-v311__seal b{
+  display:block;
+  color:#f2e7f3;
+  font:500 14px/1.25 Georgia,serif;
+}
+.whit-signature-v311__seal p{
+  margin:5px 0 0;
+  color:#9e92a2;
+  font-size:10px;
+  line-height:1.45;
+}
+
+@keyframes whitSignatureV311Crescendo{
+  0%{transform:scale(.94);filter:brightness(.96)}
+  42%{transform:scale(1.12);filter:brightness(1.28)}
+  72%{transform:scale(1.035);filter:brightness(1.10)}
+  100%{transform:scale(1);filter:brightness(1)}
+}
+
+@media(max-width:520px){
+  .whit-signature-v311__seal{grid-template-columns:40px 1fr;padding:11px 12px}
+  .whit-signature-v311__mark{width:36px;height:36px}
+  .whit-signature-v311__seal b{font-size:12px}
+  .whit-signature-v311__seal p{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+  html[data-whit-signature-intensity="crescendo"] #whitPresenceV307 .whit-presence-v307__sigil{
+    animation:none!important;
+  }
+}
