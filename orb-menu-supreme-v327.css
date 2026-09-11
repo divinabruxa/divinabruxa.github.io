@@ -1,0 +1,144 @@
+/* DIVINA BRUXA 2.0 — REBIRTH R027 · ORBE SUPREMA + MENU VIVO V327 */
+
+html[data-orb-supreme="v327"] #orb{
+  --r027-touch-x:50%;
+  --r027-touch-y:50%;
+  -webkit-tap-highlight-color:transparent;
+}
+html[data-orb-supreme="v327"] #orb .r027-orb-veil,
+html[data-orb-supreme="v327"] #orb .r027-orb-touch-light,
+html[data-orb-supreme="v327"] #orb .r027-orb-sparks{
+  position:absolute;z-index:5;inset:0;border-radius:50%;pointer-events:none;overflow:visible;
+}
+html[data-orb-supreme="v327"] #orb .r027-orb-veil{
+  inset:-5%;
+  background:
+    radial-gradient(circle at 31% 22%,rgba(255,240,194,.13),transparent 18%),
+    radial-gradient(circle at 68% 72%,rgba(214,85,255,.12),transparent 27%),
+    conic-gradient(from 35deg,transparent 0 18%,rgba(243,203,126,.10) 23%,transparent 31% 58%,rgba(200,79,255,.09) 64%,transparent 73%);
+  filter:blur(7px) saturate(1.16);
+  opacity:.48;
+  animation:r027SoulBreath 8.4s cubic-bezier(.45,0,.55,1) infinite;
+}
+html[data-orb-supreme="v327"] #orb .r027-orb-touch-light{
+  background:radial-gradient(circle at var(--r027-touch-x) var(--r027-touch-y),
+    rgba(255,245,213,.72) 0 1.5%,rgba(238,166,255,.34) 5%,
+    rgba(125,54,230,.16) 14%,transparent 30%);
+  mix-blend-mode:screen;opacity:0;filter:blur(1px);transform:scale(.96);
+  transition:opacity .18s ease,transform .42s cubic-bezier(.16,.82,.22,1);
+}
+html[data-orb-supreme="v327"] #orb.r027-touching .r027-orb-touch-light,
+html[data-orb-supreme="v327"] #orb.r027-key-pulse .r027-orb-touch-light,
+html[data-orb-supreme="v327"] #orb[data-orb-life="TOUCH"] .r027-orb-touch-light,
+html[data-orb-supreme="v327"] #orb[data-orb-life="HOLD"] .r027-orb-touch-light{
+  opacity:.92;transform:scale(1.03);
+}
+html[data-orb-supreme="v327"] #orb.r027-touching,
+html[data-orb-supreme="v327"] #orb[data-orb-life="TOUCH"],
+html[data-orb-supreme="v327"] #orb[data-orb-life="HOLD"]{
+  filter:drop-shadow(0 0 42px rgba(152,55,255,.58)) drop-shadow(0 0 18px rgba(244,199,113,.18));
+}
+html[data-orb-supreme="v327"] #orb .r027-orb-sparks i{
+  position:absolute;width:4px;height:4px;margin:-2px 0 0 -2px;border-radius:50%;
+  background:#ffe4a9;box-shadow:0 0 8px rgba(255,220,147,.95),0 0 14px rgba(210,92,255,.75);
+  transform:translate(-50%,-50%) rotate(var(--r027-angle)) translateX(0) scale(.4);
+  opacity:0;animation:r027Spark .68s cubic-bezier(.16,.82,.22,1) var(--r027-delay) forwards;
+}
+
+/* O foco continua visível e acessível, mas vira um halo circular. */
+html[data-orb-supreme="v327"] #orb:focus{outline:none!important}
+html[data-orb-supreme="v327"] #orb:focus-visible{
+  outline:none!important;
+  box-shadow:0 0 0 2px rgba(5,2,10,.92),0 0 0 4px rgba(245,207,136,.88),0 0 28px rgba(213,83,255,.36)!important;
+}
+
+/* A superfície transparente do Menu não bloqueia mais o coração central. */
+html[data-orb-supreme="v327"] #home.orb-menu-open #orbMenu,
+html[data-orb-supreme="v327"] #home.orb-menu-transition #orbMenu{
+  pointer-events:none!important;
+}
+html[data-orb-supreme="v327"] #home #orbMenu button{
+  pointer-events:auto!important;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* Remove o quadrado do item Início/atual. A seleção mora na joia circular. */
+html[data-orb-supreme="v327"] #home #orbMenu button,
+html[data-orb-supreme="v327"] #home #orbMenu button.is-current,
+html[data-orb-supreme="v327"] #home #orbMenu button[aria-current="page"],
+html[data-orb-supreme="v327"] #home #orbMenu button:focus,
+html[data-orb-supreme="v327"] #home #orbMenu button:focus-visible{
+  outline:none!important;border:0!important;border-radius:0!important;
+  background:transparent!important;box-shadow:none!important;
+}
+html[data-orb-supreme="v327"] #home #orbMenu button:focus-visible > span,
+html[data-orb-supreme="v327"] #home #orbMenu button.is-current > span,
+html[data-orb-supreme="v327"] #home #orbMenu button[aria-current="page"] > span{
+  border-color:rgba(250,216,151,.92)!important;
+  box-shadow:inset 0 0 19px rgba(199,72,246,.24),
+    0 0 0 2px rgba(246,211,143,.11),0 0 17px rgba(246,199,115,.30),
+    0 0 31px rgba(195,71,245,.15)!important;
+}
+html[data-orb-supreme="v327"] #home #orbMenu button:focus-visible > span{
+  outline:2px solid rgba(255,224,162,.72)!important;
+  outline-offset:4px!important;
+}
+
+/* Resposta física dos portais sem animar layout. */
+html[data-orb-supreme="v327"] #home #orbMenu button > span{
+  transform:translateZ(0) scale(1);
+  transition:transform .22s cubic-bezier(.2,.8,.2,1),filter .22s ease,box-shadow .28s ease!important;
+}
+html[data-orb-supreme="v327"] #home #orbMenu button:active > span,
+html[data-orb-supreme="v327"] #home #orbMenu button.r027-portal-touch > span{
+  transform:translateZ(0) scale(.91)!important;
+  filter:brightness(1.34) saturate(1.16)!important;
+}
+
+html[data-orb-supreme="v327"] #home.orb-menu-open #orb .r027-orb-veil{
+  opacity:.66;filter:blur(6px) saturate(1.24);
+}
+html[data-orb-supreme="v327"] #home.orb-menu-open #orb.r027-touching{
+  scale:1.025;transition:scale .18s cubic-bezier(.2,.8,.2,1);
+}
+
+/* Tipografia/targets se adaptam sem desmontar a geometria aprovada. */
+@media(max-width:430px) and (orientation:portrait){
+  html[data-orb-supreme="v327"] #home .home-menu-portals .menu-portal{
+    min-width:0!important;touch-action:manipulation;
+  }
+  html[data-orb-supreme="v327"] #home .home-menu-portals .menu-portal b{
+    max-width:100%;font-size:clamp(7px,2.05vw,9px)!important;
+    line-height:1.06!important;text-wrap:balance;
+  }
+  html[data-orb-supreme="v327"] #home #orbMenu > button b{
+    text-wrap:balance;line-height:1.02;
+  }
+}
+@media(max-width:430px) and (max-height:760px) and (orientation:portrait){
+  html[data-orb-supreme="v327"] #home .home-menu-portals .menu-portal b,
+  html[data-orb-supreme="v327"] #home #orbMenu > button b{font-size:7px!important}
+}
+@media(orientation:landscape) and (max-height:560px){
+  html[data-orb-supreme="v327"] #orb .r027-orb-veil{opacity:.38}
+}
+@media(prefers-reduced-motion:reduce){
+  html[data-orb-supreme="v327"] #orb .r027-orb-veil,
+  html[data-orb-supreme="v327"] #orb .r027-orb-sparks i{animation:none!important}
+  html[data-orb-supreme="v327"] #orb .r027-orb-touch-light{transition:none!important}
+}
+html[data-performance-tier="constrained"][data-orb-supreme="v327"] #orb .r027-orb-veil{
+  animation:none!important;opacity:.34;
+}
+html[data-performance-tier="constrained"][data-orb-supreme="v327"] #orb .r027-orb-sparks{display:none!important}
+
+@keyframes r027SoulBreath{
+  0%,100%{transform:rotate(-2deg) scale(.982);opacity:.42}
+  50%{transform:rotate(2deg) scale(1.028);opacity:.67}
+}
+@keyframes r027Spark{
+  0%{opacity:0;transform:translate(-50%,-50%) rotate(var(--r027-angle)) translateX(0) scale(.35)}
+  20%{opacity:1}
+  100%{opacity:0;transform:translate(-50%,-50%) rotate(var(--r027-angle)) translateX(var(--r027-distance)) scale(.08)}
+}

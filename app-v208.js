@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — P0 HOTFIX V326 · BOOT FIRST / PWA LATER · WORK7.0 */
+/* DIVINA BRUXA — REBIRTH R027 · ORBE SUPREMA + MENU VIVO V327 · BOOT-SAFE */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -43,6 +43,13 @@ const startPwaAfterBootV326 = () => import('./pwa-world-v324.js?v=326-p0')
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
     document.documentElement.dataset.pwaError = 'v326';
+  });
+
+const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
+  .then(module => module.installOrbMenuSupremeV327?.())
+  .catch(error => {
+    console.error('[Divina] Orbe/Menu Supremo V327 não iniciou', error);
+    document.documentElement.dataset.orbMenuSupremeError = 'v327';
   });
 
 const clearRebirthShellResidue = () => {
@@ -426,8 +433,11 @@ const awaken = async () => {
     document.documentElement.dataset.bootRecovery = 'v326';
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
     dispatchEvent(new CustomEvent('divina:boot-ready', {
-      detail: { shell:'v180', recovery:'v326', bootFirst:true }
+      detail: { shell:'v180', recovery:'v326', bootFirst:true, rebirth:'r027-v327' }
     }));
+
+    // R027 é opcional: nunca bloqueia a abertura da Home.
+    startOrbMenuSupremeV327();
 
     // Começa a navegação fora do bloqueio visual.
     const navigationTimeout = new Promise((_, reject) =>
@@ -456,6 +466,7 @@ const awaken = async () => {
     // Último fail-open visual: o HTML da Home existe e deve continuar acessível.
     document.documentElement.dataset.appShell = 'v180-emergency';
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
+    startOrbMenuSupremeV327();
     startPwaAfterBootV326();
   }
 };
