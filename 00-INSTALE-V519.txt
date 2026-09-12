@@ -1,0 +1,55 @@
+DIVINA BRUXA — V519
+UNIVERSO VIVO · MACROETAPA 1 DE 4 · MOTOR CELESTIAL
+
+BASE NECESSÁRIA
+V518 já instalada.
+
+O ZIP É PLANO
+Não crie pastas. Envie os 5 arquivos técnicos abaixo diretamente para a raiz
+do site, no mesmo lugar onde já estão index.html e app-v208.js.
+
+SUBSTITUA ESTES 3 ARQUIVOS
+1. app-v208.js
+2. sw.js
+3. skin-performance-core-v518.js
+
+ADICIONE ESTES 2 ARQUIVOS NOVOS
+4. living-universe-core-v519.js
+5. living-universe-core-v519.css
+
+OS OUTROS 2 ARQUIVOS DO ZIP SÃO DOCUMENTAÇÃO
+- 00-INSTALE-V519.txt
+- UNIVERSO-VIVO-V519-CONTRACT.json
+Eles não precisam ser enviados para o site.
+
+INSTALAÇÃO NO GITHUB
+1. Abra a raiz do repositório.
+2. Faça upload dos 5 arquivos técnicos juntos.
+3. Confirme a substituição dos 3 nomes existentes.
+4. Faça o commit.
+5. Espere a publicação terminar.
+
+DEPOIS DE PUBLICAR
+1. Feche o site e o aplicativo instalado em todas as abas.
+2. Abra novamente pelo Safari.
+3. Aguarde alguns segundos. A V519 pode recarregar uma vez para trocar o cache.
+4. Feche e abra novamente o aplicativo instalado.
+
+TESTE DE APROVAÇÃO DA MACROETAPA 1/4
+- Existe somente uma Orbe Suprema física.
+- O universo aparece continuamente na Home, no menu e no Tarot Livre.
+- Estrelas têm profundidade e respondem suavemente ao toque e à rolagem.
+- As páginas mudam o clima do mesmo universo, sem corte de fotografia.
+- As skins mudam os pigmentos sem criar outro motor.
+- No Tarot Livre, a chama continua sendo fogo violeta, magenta e dourado.
+- A carta nasce da Orbe; não existem raios nem cartas voando sem explicação.
+- A navegação, a seta anterior e o envio à Mesa Real da V517 continuam intactos.
+
+PRESERVADO SEM ALTERAÇÃO DE AUTORIDADE
+- Orbe Suprema V501
+- Menu e Tarot Livre V517
+- 30 skins e direitos da conta
+- Whit, servidor, APIs, autenticação, pagamentos, banco de dados e DNS
+
+ESTA ENTREGA FECHA O CÓDIGO DA MACROETAPA 1/4.
+A aprovação visual final acontece no iPhone depois da instalação.

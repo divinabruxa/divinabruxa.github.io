@@ -1,0 +1,96 @@
+{
+  "release": "V519",
+  "program": "Universo Vivo",
+  "macroStage": "1/4",
+  "name": "Motor Celestial",
+  "baseRequired": "V518",
+  "releaseEpoch": 519,
+  "installation": {
+    "flatZip": true,
+    "target": "repository-root",
+    "replace": [
+      "app-v208.js",
+      "sw.js",
+      "skin-performance-core-v518.js"
+    ],
+    "add": [
+      "living-universe-core-v519.js",
+      "living-universe-core-v519.css"
+    ],
+    "documentation": [
+      "00-INSTALE-V519.txt",
+      "UNIVERSO-VIVO-V519-CONTRACT.json"
+    ]
+  },
+  "universe": {
+    "engine": "LivingUniverseCoreV519",
+    "staticBackgroundImage": false,
+    "continuousDomCanvases": 1,
+    "continuousAnimationLoops": 1,
+    "renderers": [
+      "webgl1-procedural",
+      "canvas2d-procedural-fallback"
+    ],
+    "depthLayers": 3,
+    "proceduralStars": true,
+    "proceduralNebulae": true,
+    "proceduralGalaxies": true,
+    "pointerParallax": true,
+    "scrollParallax": true,
+    "orbGravityField": true,
+    "continuousRouteMorph": true,
+    "routeProfiles": 17,
+    "skinReactive": true,
+    "pausesWhenHidden": true,
+    "contextLossFallback": true
+  },
+  "performance": {
+    "targetFps": {
+      "cinematic": 60,
+      "balanced": 60,
+      "protected": 40,
+      "reducedMotion": 24
+    },
+    "adaptiveResolution": true,
+    "pressureDegrade": true,
+    "calmRecovery": true,
+    "eventCoalescedResize": true,
+    "paletteReadsOutsideFrameLoop": true
+  },
+  "protectedFlame": {
+    "lineage": "V516-approved",
+    "webglFunctionIdenticalToV516": true,
+    "canvasFallbackFunctionIdenticalToV516": true,
+    "palette": [
+      "violet",
+      "magenta",
+      "gold"
+    ],
+    "lightningStrokes": false,
+    "whiteBlob": false,
+    "insideUniverseCanvas": true
+  },
+  "preserved": {
+    "supremeOrb": "V501-single-physical-orb",
+    "menu": "V502-V517-tuned",
+    "tarotLivre": "V517",
+    "mesaRealTransfer": true,
+    "previousCardNavigation": true,
+    "skins": 30,
+    "skinEntitlementAuthority": "account-server",
+    "whit": "unchanged",
+    "server": "unchanged",
+    "apis": "unchanged",
+    "auth": "unchanged",
+    "billing": "unchanged",
+    "database": "unchanged",
+    "dns": "unchanged"
+  },
+  "validation": {
+    "javascriptSyntax": "required-pass",
+    "serviceWorkerSyntax": "required-pass",
+    "webgl1ShaderCompileAndLink": "required-pass",
+    "flatArchive": "required-pass",
+    "iphoneVisualApproval": "required-after-install"
+  }
+}
