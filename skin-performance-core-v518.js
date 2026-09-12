@@ -2,7 +2,7 @@
    Uma autoridade de acabamento para as 30 skins. O Runtime V12 continua sendo
    a autoridade da troca de textura; a conta continua sendo a autoridade de
    propriedade. Esta camada não cria Orbes nem desbloqueia skins: preserva o
-   desenho aprovado da Chama V516 e governa o orçamento do Universo Vivo V519.
+   desenho aprovado da Chama V516 e governa o orçamento do Universo Vivo V520.
 */
 
 import { SKIN_REGISTRY_V12, skinByIdV12 } from './skin-registry-v12.js?v=133';
@@ -158,7 +158,7 @@ export class SkinPerformanceCoreV518 {
         quality:this.tier,
         createsOrb:false,
         unlocksSkins:false,
-        activeUniverse:'v519',
+        activeUniverse:'v520',
         approvedFlame:'v516-preserved'
       })
     }));
@@ -204,7 +204,7 @@ export class SkinPerformanceCoreV518 {
     this.activeSkin = id;
     html.dataset.finishSkin = id;
     document.body?.setAttribute('data-finish-skin', id);
-    (globalThis.divinaLivingUniverseV519 || globalThis.divinaLivingUniverseV516)?.syncPalette?.(true);
+    (globalThis.divinaLivingUniverseV520 || globalThis.divinaLivingUniverseV519 || globalThis.divinaLivingUniverseV516)?.syncPalette?.(true);
     (globalThis.divinaOrbSupremeV501?.core || globalThis.orbe?.supreme)?.syncSkin?.(id);
 
     if (animate && !reducedMotion()) {
@@ -269,7 +269,7 @@ export class SkinPerformanceCoreV518 {
   }
 
   applyBudget(reason = 'adaptive') {
-    const universe = globalThis.divinaLivingUniverseV519 || globalThis.divinaLivingUniverseV516;
+    const universe = globalThis.divinaLivingUniverseV520 || globalThis.divinaLivingUniverseV519 || globalThis.divinaLivingUniverseV516;
     const mobile = innerWidth < 700;
     const budgets = {
       cinematic:{ fps:60, scale:mobile ? 0.72 : 0.80 },
@@ -348,7 +348,7 @@ export class SkinPerformanceCoreV518 {
 
   assertIntegrity() {
     const living = document.querySelectorAll('[data-supreme-orb="living"]');
-    const canvases = document.querySelectorAll('#divinaLivingUniverseV519 canvas, #divinaLivingUniverseV516 canvas');
+    const canvases = document.querySelectorAll('#divinaLivingUniverseV520 canvas, #divinaLivingUniverseV519 canvas, #divinaLivingUniverseV516 canvas');
     document.documentElement.dataset.orbIntegrityV518 = living.length <= 1 ? 'one' : 'duplicate-detected';
     document.documentElement.dataset.universeIntegrityV518 = canvases.length <= 1 ? 'one-canvas' : 'duplicate-detected';
     return { living:living.length, universeCanvases:canvases.length };
@@ -406,8 +406,8 @@ export class SkinPerformanceCoreV518 {
       createsOrb:false,
       physicalLivingOrbs:integrity.living,
       universeCanvases:integrity.universeCanvases,
-      activeUniverseFile:'v519',
-      approvedFlameLineage:'v516-preserved-inside-v519',
+      activeUniverseFile:'v520',
+      approvedFlameLineage:'v516-preserved-inside-v520',
       quality:this.tier,
       baseQuality:this.baseTier,
       longTasks:Object.freeze({ count:this.totalLongTasks, totalMs:this.totalLongTaskMs }),

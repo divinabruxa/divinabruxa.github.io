@@ -1221,10 +1221,10 @@ body.db517-tarot-birthing #whitPresenceV307.whit-presence-v307 {
   }
 
   #tarot .tl517__stage {
-    width: calc(100% + 10px);
+    width: 100%;
     height: clamp(680px, calc(100svh - 118px), 820px);
     min-height: 680px;
-    margin-left: -5px;
+    margin-inline: auto;
     border-radius: 0;
     box-shadow:
       inset 0 -80px 150px rgba(0, 0, 0, 0.48),
@@ -1580,5 +1580,135 @@ html[data-living-universe="v516"] #tarot .tl517__stage::after {
 
   #tarot .tl517__mesa[data-state="opening"] {
     animation: none !important;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   V520 · contrato de viewport físico para Safari/iPhone
+
+   O altar nunca pode aumentar a largura rolável do documento. Carta, Orbe,
+   navegação e constelação são centralizadas pelo mesmo eixo físico da tela;
+   somente a rolagem vertical permanece disponível. */
+
+body[data-screen="tarot"] {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden !important;
+  overflow-x: clip !important;
+  overscroll-behavior-x: none;
+  touch-action: pan-y pinch-zoom;
+}
+
+body[data-screen="tarot"] #app,
+body[data-screen="tarot"] main {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+#tarot[data-tarot-world="orbe-os-v517"] {
+  box-sizing: border-box;
+  min-width: 0 !important;
+  overflow-x: hidden;
+  overflow-x: clip;
+  overscroll-behavior-inline: none;
+}
+
+#tarot[data-tarot-world="orbe-os-v517"] :where(
+  .tl517,
+  .tl517__header,
+  .tl517__stage,
+  .tl517__toolbar,
+  .tl517__constellation
+) {
+  max-width: 100%;
+  min-width: 0;
+  margin-inline: auto;
+}
+
+#tarot[data-tarot-world="orbe-os-v517"] .tl517__stage {
+  contain: layout paint style size;
+  touch-action: pan-y pinch-zoom;
+}
+
+#tarot[data-tarot-world="orbe-os-v517"] :where(
+  .tl517__portal-crown,
+  .tl517__card-zone,
+  .tl517__card-nav,
+  .tl517__orb-host,
+  .tl517__counter,
+  .tl517__signal
+) {
+  left: 50%;
+  right: auto;
+}
+
+@media (max-width: 620px) {
+  body[data-screen="tarot"] {
+    position: relative;
+    inline-size: 100vw;
+    inline-size: 100dvw;
+  }
+
+  body[data-screen="tarot"] #app,
+  body[data-screen="tarot"] main {
+    inline-size: 100vw;
+    inline-size: 100dvw;
+  }
+
+  #tarot[data-tarot-world="orbe-os-v517"] {
+    inline-size: 100vw !important;
+    inline-size: 100dvw !important;
+    max-inline-size: 100vw !important;
+    max-inline-size: 100dvw !important;
+    margin-inline: calc(50% - 50vw) !important;
+    margin-inline: calc(50% - 50dvw) !important;
+    padding-left: max(5px, env(safe-area-inset-left)) !important;
+    padding-right: max(5px, env(safe-area-inset-right)) !important;
+  }
+
+  #tarot[data-tarot-world="orbe-os-v517"] .tl517,
+  #tarot[data-tarot-world="orbe-os-v517"] .tl517__header,
+  #tarot[data-tarot-world="orbe-os-v517"] .tl517__stage,
+  #tarot[data-tarot-world="orbe-os-v517"] .tl517__constellation {
+    inline-size: 100% !important;
+    max-inline-size: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  #tarot[data-tarot-world="orbe-os-v517"] .tl517__title,
+  #tarot[data-tarot-world="orbe-os-v517"] .tl517__title h2 {
+    max-inline-size: 100%;
+    text-align: center;
+  }
+
+  #tarot[data-tarot-world="orbe-os-v517"] .tl517__title h2 {
+    white-space: nowrap;
+  }
+
+  #tarot[data-tarot-world="orbe-os-v517"] .tl517__stage {
+    margin-top: -2px !important;
+    border-radius: 0;
+  }
+
+  #tarot[data-tarot-world="orbe-os-v517"] .tl517__card-zone {
+    width: var(--tl517-card-width) !important;
+    max-width: calc(100% - 118px);
+    transform: translateX(-50%);
+  }
+
+  #tarot[data-tarot-world="orbe-os-v517"] .tl517__card-nav {
+    width: min(calc(var(--tl517-card-width) + 126px), calc(100% - 8px));
+    max-width: calc(100% - 8px);
+    transform: translateX(-50%);
+  }
+
+  #tarot[data-tarot-world="orbe-os-v517"] .tl517__orb-host {
+    width: var(--tl517-orb-size);
+    max-width: calc(100% - 40px);
+    translate: -50% 0;
   }
 }

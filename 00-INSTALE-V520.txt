@@ -1,0 +1,59 @@
+DIVINA BRUXA — V520
+UNIVERSO VIVO · MACROETAPA 1 DE 4 · NUVENS TÁTEIS E CONSTELAÇÕES
+
+BASE NECESSÁRIA
+V519 já instalada.
+
+O ZIP É PLANO
+Não crie pastas. Envie os 6 arquivos técnicos abaixo diretamente para a raiz
+do site, no mesmo lugar onde já estão index.html e app-v208.js.
+
+SUBSTITUA ESTES 4 ARQUIVOS
+1. app-v208.js
+2. sw.js
+3. skin-performance-core-v518.js
+4. tarot-livre-orbe-os-v517.css
+
+ADICIONE ESTES 2 ARQUIVOS NOVOS
+5. living-universe-core-v520.js
+6. living-universe-core-v520.css
+
+OS OUTROS 2 ARQUIVOS DO ZIP SÃO DOCUMENTAÇÃO
+- 00-INSTALE-V520.txt
+- UNIVERSO-VIVO-V520-CONTRACT.json
+Eles não precisam ser enviados para o site.
+
+INSTALAÇÃO NO GITHUB
+1. Abra a raiz do repositório.
+2. Faça upload dos 6 arquivos técnicos juntos.
+3. Confirme a substituição dos 4 nomes existentes.
+4. Faça o commit.
+5. Espere a publicação terminar.
+
+DEPOIS DE PUBLICAR
+1. Feche o site e o aplicativo instalado em todas as abas.
+2. Abra novamente pelo Safari.
+3. Aguarde alguns segundos. A V520 pode recarregar uma vez para trocar o cache.
+4. Feche e abra novamente o aplicativo instalado.
+
+TESTE DE APROVAÇÃO — CORREÇÃO DE PRECISÃO DA MACROETAPA 1/4
+- No iPhone, a página não arrasta mais para os lados.
+- Título, carta, setas, Orbe e contador permanecem no mesmo eixo central.
+- A carta mantém proporção 2:3 e a Orbe mantém a proporção aprovada.
+- Passe o dedo pelo universo: as nuvens se curvam e continuam com inércia suave.
+- Existem duas constelações completas, ligadas e respirando; não são pixels soltos.
+- O mesmo universo permanece vivo na Home, no menu e em todas as páginas.
+- As skins mudam os pigmentos do mesmo céu, sem criar outro motor.
+- A chama aprovada continua violeta, magenta e dourada, sem raios.
+- A seta anterior e o envio das cartas à Mesa Real continuam funcionando.
+
+PRESERVADO SEM ALTERAÇÃO DE AUTORIDADE
+- Uma única Orbe Suprema V501
+- Menu orbital e Tarot Livre V517
+- 78 cartas normais, sem repetição, seis por linha
+- Histórico anterior/próxima e transferência para Mesa Real
+- 30 skins e direitos da conta
+- Whit, servidor, APIs, autenticação, pagamentos, banco de dados e DNS
+
+ESTA É A CORREÇÃO V520 DA MACROETAPA UNIVERSO VIVO 1/4.
+A próxima macroetapa só começa depois da aprovação no iPhone.
