@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 2.0 — UNIVERSO VIVO · MACROETAPA 1/4 · PELE CÓSMICA TÁTIL V524
+/* DIVINA BRUXA 2.0 — CORE iOS WHIT SUPREMA · MACROETAPA 1/10 · ORBOS V525
    Cache seletivo e versionado. Nunca guarda Auth, Whit generation, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=524;
+const VERSION=525;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v524-shell';
-const CONTENT_CACHE='divina-bruxa-v524-content';
-const IMAGE_CACHE='divina-bruxa-v524-images';
-const OFFLINE_CACHE='divina-bruxa-v524-offline-core';
+const SHELL_CACHE='divina-bruxa-v525-shell';
+const CONTENT_CACHE='divina-bruxa-v525-content';
+const IMAGE_CACHE='divina-bruxa-v525-images';
+const OFFLINE_CACHE='divina-bruxa-v525-offline-core';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE]);
 
 const REQUIRED_SHELL=Object.freeze([
@@ -17,6 +17,7 @@ const REQUIRED_SHELL=Object.freeze([
   './app-v208.js','./navigation.js','./route-registry-v180.js','./page-loader-v1.js',
   './runtime-v12.js','./orb-motion-core-v207.js','./orb-gesture-core-v208.js',
   './orb-engine-v208.js','./supreme-orb-core-v501.js','./supreme-orb-core-v501.css',
+  './orb-ios-journey-core-v525.js','./orb-ios-journey-core-v525.css',
   './reality-lifecycle-v511.js','./reality-lifecycle-v511.css',
   './orbital-menu-v502.js','./orbital-menu-v502.css',
   './living-universe-core-v524.js','./living-universe-core-v524.css',
@@ -54,6 +55,7 @@ const APP_DEPENDENCIES=Object.freeze([
 ]);
 
 const REBIRTH_WARM=Object.freeze([
+  './orb-ios-journey-core-v525.js','./orb-ios-journey-core-v525.css',
   './living-universe-core-v524.js','./living-universe-core-v524.css','./divina-universe-retina-v523.webp',
   './tarot-livre-orbe-os-v517.js','./tarot-livre-orbe-os-v517.css','./tarot-mesa-bridge-v517.js',
   './library-world-v302.js','./library-world-v302.css',

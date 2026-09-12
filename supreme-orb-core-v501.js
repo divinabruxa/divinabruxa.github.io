@@ -1,6 +1,7 @@
-/* DIVINA BRUXA — NÚCLEO DA ORBE SUPREMA V501 · ÂNCORA TÁTIL V524
+/* DIVINA BRUXA — NÚCLEO DA ORBE SUPREMA V501 · ORBOS iOS V525
    Uma presença, um estado e um caminho para todos os mundos. O toque ilumina
-   o interior e move o universo, mas o corpo físico da Orbe permanece ancorado.
+   o interior sem deslocar o corpo; somente uma viagem de realidade autorizada
+   conduz a própria presença visual da Orbe pelo mesmo universo contínuo.
 */
 
 const VERSION = 501;
@@ -172,6 +173,7 @@ export class SupremeOrbCoreV501 {
     this.projectionLastPaint = 0;
     this.destroyed = false;
     this.claimedHost = null;
+    this.journeyEngine = null;
 
     installStyles();
     this.layer = createTransitionLayer();
@@ -477,26 +479,73 @@ export class SupremeOrbCoreV501 {
       target:options?.target || null
     });
 
+    const journey = this.journeyEngine;
+    let spatialJourneyActive = typeof journey?.depart === 'function' && typeof journey?.arrive === 'function';
+
     this.setMode('transition', { route, from, reason:'navigate' });
-    this.showTransition(signature, serial);
+    if (!spatialJourneyActive) this.showTransition(signature, serial);
     emit('divina:supreme-orb-will-navigate', { from, to:route, signature });
 
-    if (!reducedMotion()) await wait(constrained() ? 42 : 72);
+    if (spatialJourneyActive) {
+      try {
+        await journey.depart({
+          from,
+          to:route,
+          signature,
+          serial,
+          origin:options?.target || null,
+          source:options?.source || 'orbe-navigation'
+        });
+      } catch (journeyError) {
+        spatialJourneyActive = false;
+        journey.finishImmediately?.('safe-fallback');
+        this.showTransition(signature, serial);
+        console.info('[Divina] a navegação continuou pelo portal seguro', journeyError);
+      }
+    }
+    if (!spatialJourneyActive && !reducedMotion()) await wait(constrained() ? 42 : 72);
 
     try {
       const result = await Promise.resolve(this.commit(route));
       this.settleRoute(route, 'navigate-complete');
-      if (!reducedMotion()) await wait(constrained() ? 130 : 260);
+      if (spatialJourneyActive) {
+        try {
+          await journey.arrive({ from, to:route, signature, serial, result });
+        } catch (journeyError) {
+          journey.finishImmediately?.('arrival-safe-fallback');
+          console.info('[Divina] a realidade abriu e a Orbe reassentou em modo seguro', journeyError);
+        }
+      } else if (!reducedMotion()) {
+        await wait(constrained() ? 130 : 260);
+      }
       if (this.sequence === serial) this.hideTransition();
       emit('divina:supreme-orb-did-navigate', { from, to:route, signature });
       return result;
     } catch (error) {
       this.route = from;
       this.setMode(signatureFor(from).mode, { route:from, reason:'navigate-error' });
+      if (spatialJourneyActive) {
+        try { await journey.recover?.({ from, to:route, signature, serial, error }); }
+        catch (recoveryError) {
+          console.info('[Divina] a viagem da Orbe encerrou em modo seguro', recoveryError);
+        }
+      }
       this.hideTransition();
       emit('divina:supreme-orb-navigation-error', { from, to:route, recoverable:true });
       throw error;
     }
+  }
+
+  setJourneyEngine(engine) {
+    if (engine === this.journeyEngine) return engine;
+    this.journeyEngine?.detach?.(this);
+    this.journeyEngine = engine || null;
+    this.journeyEngine?.attach?.(this);
+    emit('divina:supreme-orb-journey-engine', {
+      active:Boolean(this.journeyEngine),
+      journeyVersion:this.journeyEngine?.version || null
+    });
+    return this.journeyEngine;
   }
 
   positionTransitionOrigin(node = this.orb) {
@@ -590,8 +639,10 @@ export class SupremeOrbCoreV501 {
   snapshot() {
     let renderer = null;
     let motion = null;
+    let journey = null;
     try { renderer = this.renderer?.snapshot?.() || null; } catch {}
     try { motion = this.motion?.snapshot?.() || null; } catch {}
+    try { journey = this.journeyEngine?.status?.() || null; } catch {}
     return {
       version:VERSION,
       route:this.route,
@@ -604,8 +655,11 @@ export class SupremeOrbCoreV501 {
       projections:this.projections().length,
       renderer,
       motion,
+      journey,
       oneLivingOrb:true,
       physicalTouchMotion:false,
+      spatialRouteTravel:Boolean(this.journeyEngine),
+      routeCurtain:false,
       universeReceivesTouchEnergy:true
     };
   }
@@ -619,6 +673,8 @@ export class SupremeOrbCoreV501 {
     cancelAnimationFrame(this.projectionLoop);
     this.abort.abort();
     this.observer?.disconnect();
+    this.journeyEngine?.destroy?.();
+    this.journeyEngine = null;
     this.layer?.remove();
     this.returnHome();
     document.documentElement.removeAttribute('data-supreme-orb');

@@ -1,0 +1,205 @@
+/* DIVINA BRUXA — ORBOS iOS · VIAGEM ESPACIAL DA ORBE V525 */
+
+:root {
+  --db525-journey-violet: var(--orb-primary, var(--p, #8f35ff));
+  --db525-journey-magenta: var(--orb-secondary, var(--s, #ff3dd7));
+  --db525-journey-gold: var(--orb-glow, var(--a, #ffd690));
+  --db525-journey-core: var(--orb-bright, var(--core, #fff8ff));
+}
+
+#divinaOrbIOSJourneyV525[hidden] {
+  display: none !important;
+}
+
+#divinaOrbIOSJourneyV525 {
+  isolation: isolate;
+  touch-action: none;
+}
+
+.db525-orb-journey__traveler {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--db525-orb-size, 92px);
+  height: var(--db525-orb-size, 92px);
+  transform-origin: 50% 50%;
+  will-change: transform;
+  contain: layout style paint;
+}
+
+.db525-orb-journey__body {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  transform-origin: 50% 50%;
+  will-change: transform, opacity, filter;
+}
+
+.db525-orb-journey__canvas,
+.db525-orb-journey__glass,
+.db525-orb-journey__aura {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.db525-orb-journey__canvas {
+  z-index: 3;
+  display: block;
+  object-fit: contain;
+  filter: saturate(1.08) contrast(1.035) brightness(1.04);
+}
+
+.db525-orb-journey__aura {
+  z-index: 1;
+  inset: -15%;
+  width: 130%;
+  height: 130%;
+  background:
+    radial-gradient(circle at 50% 52%, color-mix(in srgb, var(--db525-journey-core) 54%, transparent) 0 5%, transparent 23%),
+    radial-gradient(circle, color-mix(in srgb, var(--db525-journey-magenta) 46%, transparent) 0 38%, transparent 72%);
+  filter: blur(calc(var(--db525-orb-size, 92px) * .075));
+  opacity: .74;
+  animation: db525-aura-breath 1.32s ease-in-out infinite alternate;
+}
+
+.db525-orb-journey__glass {
+  z-index: 4;
+  box-sizing: border-box;
+  border: max(1px, calc(var(--db525-orb-size, 92px) * .008)) solid color-mix(in srgb, var(--db525-journey-gold) 64%, white 36%);
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,.32), transparent 17%),
+    radial-gradient(circle at 50% 76%, transparent 51%, rgba(255,255,255,.12) 76%, transparent 89%);
+  box-shadow:
+    inset 0 0 calc(var(--db525-orb-size, 92px) * .08) rgba(255,255,255,.2),
+    0 0 calc(var(--db525-orb-size, 92px) * .12) color-mix(in srgb, var(--db525-journey-magenta) 46%, transparent),
+    0 0 calc(var(--db525-orb-size, 92px) * .28) color-mix(in srgb, var(--db525-journey-violet) 34%, transparent);
+}
+
+.db525-orb-journey__plume {
+  position: absolute;
+  z-index: 0;
+  left: 18%;
+  top: 54%;
+  width: 64%;
+  height: 115%;
+  border-radius: 44% 56% 72% 28% / 24% 30% 70% 76%;
+  transform-origin: 50% 0;
+  transform: translateY(4%) scaleX(.82);
+  background:
+    radial-gradient(ellipse at 50% 4%, color-mix(in srgb, var(--db525-journey-core) 78%, transparent) 0 5%, transparent 20%),
+    radial-gradient(ellipse at 48% 22%, color-mix(in srgb, var(--db525-journey-gold) 78%, transparent) 0 9%, transparent 36%),
+    radial-gradient(ellipse at 40% 45%, color-mix(in srgb, var(--db525-journey-magenta) 72%, transparent) 0 16%, transparent 53%),
+    radial-gradient(ellipse at 63% 70%, color-mix(in srgb, var(--db525-journey-violet) 63%, transparent) 0 17%, transparent 62%);
+  filter: blur(calc(var(--db525-orb-size, 92px) * .065)) saturate(1.18);
+  opacity: .62;
+  mix-blend-mode: screen;
+  animation: db525-plume-flow .84s cubic-bezier(.37,0,.63,1) infinite alternate;
+}
+
+.db525-orb-journey[data-state="lift"] .db525-orb-journey__plume {
+  opacity: .28;
+  transform: translateY(0) scale(.74,.42);
+}
+
+.db525-orb-journey[data-state="arrival"] .db525-orb-journey__plume,
+.db525-orb-journey[data-state="settle"] .db525-orb-journey__plume {
+  opacity: .38;
+}
+
+.db525-orb-journey__embers {
+  position: absolute;
+  z-index: 2;
+  inset: 26% 18% -80%;
+  pointer-events: none;
+}
+
+.db525-orb-journey__embers i {
+  position: absolute;
+  left: 50%;
+  top: 9%;
+  width: clamp(1.2px, calc(var(--db525-orb-size, 92px) * .019), 4px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--db525-journey-gold) 78%, white 22%);
+  box-shadow: 0 0 7px var(--db525-journey-gold);
+  opacity: 0;
+  transform: rotate(var(--ember-angle)) translateY(calc(var(--db525-orb-size, 92px) * .22));
+  animation: db525-ember-fall .92s ease-out infinite;
+  animation-delay: var(--ember-delay);
+}
+
+.db525-orb-journey__embers i:nth-child(3n) {
+  background: var(--db525-journey-magenta);
+  box-shadow: 0 0 7px var(--db525-journey-magenta);
+}
+
+.db525-orb-journey__embers i:nth-child(4n) {
+  animation-duration: 1.18s;
+}
+
+html.db525-orb-in-flight [data-supreme-orb="living"],
+html.db525-orb-in-flight [data-orb-projection-v501="true"] {
+  opacity: 0 !important;
+  transition: none !important;
+}
+
+.db525-orb-presence {
+  position: fixed;
+  z-index: 28;
+  right: max(16px, env(safe-area-inset-right));
+  top: calc(max(14px, env(safe-area-inset-top)) + 78px);
+  width: clamp(58px, 16vw, 76px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  pointer-events: none;
+  filter: drop-shadow(0 0 14px color-mix(in srgb, var(--db525-journey-magenta) 46%, transparent));
+}
+
+.db525-orb-presence > canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
+@keyframes db525-aura-breath {
+  from { transform: scale(.96); opacity: .58; }
+  to { transform: scale(1.055); opacity: .84; }
+}
+
+@keyframes db525-plume-flow {
+  from { transform: translate(-4%, 1%) rotate(calc(var(--db525-plume-rotation, 0deg) - 3deg)) scale(.76,.78); filter: blur(calc(var(--db525-orb-size, 92px) * .055)) saturate(1.08); }
+  to { transform: translate(5%, 9%) rotate(calc(var(--db525-plume-rotation, 0deg) + 4deg)) scale(.92,1.12); filter: blur(calc(var(--db525-orb-size, 92px) * .075)) saturate(1.24); }
+}
+
+@keyframes db525-ember-fall {
+  0% { opacity: 0; transform: rotate(var(--ember-angle)) translateY(calc(var(--db525-orb-size, 92px) * .10)) scale(.5); }
+  18% { opacity: .88; }
+  100% { opacity: 0; transform: rotate(var(--ember-angle)) translateY(calc(var(--db525-orb-size, 92px) * .78)) scale(.08); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .db525-orb-journey__aura,
+  .db525-orb-journey__plume,
+  .db525-orb-journey__embers i {
+    animation: none !important;
+  }
+
+  .db525-orb-journey__plume,
+  .db525-orb-journey__embers {
+    display: none;
+  }
+}
+
+@media (max-width: 430px) {
+  .db525-orb-presence {
+    top: calc(max(10px, env(safe-area-inset-top)) + 70px);
+    width: clamp(56px, 15.5vw, 70px);
+  }
+}
