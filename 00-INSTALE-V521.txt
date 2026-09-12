@@ -1,0 +1,64 @@
+DIVINA BRUXA — V521
+UNIVERSO VIVO · MACROETAPA 1 DE 4 · CENTRO ABSOLUTO E RETINA CELESTIAL
+
+BASE NECESSÁRIA
+V520 já instalada.
+
+O ZIP É PLANO
+Não crie pastas. Envie os 6 arquivos técnicos abaixo diretamente para a raiz
+do site, no mesmo lugar onde já estão index.html e app-v208.js.
+
+SUBSTITUA ESTES 4 ARQUIVOS
+1. app-v208.js
+2. sw.js
+3. skin-performance-core-v518.js
+4. tarot-livre-orbe-os-v517.css
+
+ADICIONE ESTES 2 ARQUIVOS NOVOS
+5. living-universe-core-v521.js
+6. living-universe-core-v521.css
+
+OS OUTROS 2 ARQUIVOS DO ZIP SÃO DOCUMENTAÇÃO
+- 00-INSTALE-V521.txt
+- UNIVERSO-VIVO-V521-CONTRACT.json
+Eles não precisam ser enviados para o site.
+
+INSTALAÇÃO NO GITHUB
+1. Abra a raiz do repositório.
+2. Faça upload dos 6 arquivos técnicos juntos.
+3. Confirme a substituição dos 4 nomes existentes.
+4. Adicione os 2 arquivos V521 novos.
+5. Faça o commit e espere a publicação terminar.
+
+DEPOIS DE PUBLICAR
+1. Feche o site e o aplicativo instalado em todas as abas.
+2. Abra novamente pelo Safari e aguarde alguns segundos.
+3. A V521 pode recarregar uma vez para trocar o cache.
+4. Feche e abra novamente o aplicativo instalado.
+
+TESTE DE APROVAÇÃO — CORREÇÃO V521 DA MACROETAPA 1/4
+- No iPhone, tente puxar a página inteira para os lados: ela não deve se mover.
+- Título, carta, setas, Orbe e contador devem permanecer no mesmo eixo central.
+- A carta mantém proporção 2:3 e a Orbe mantém sua proporção aprovada.
+- Passe o dedo em uma área vazia do universo: nuvens, filamentos e constelações
+  devem se curvar ao toque e continuar com inércia suave.
+- As estrelas devem ficar nítidas na tela Retina, com núcleos, halos e brilho;
+  não devem parecer uma imagem borrada nem pixels aleatórios.
+- Existem duas constelações completas, ligadas e respirando.
+- O mesmo universo continua vivo na Home, no menu e em todas as páginas.
+- Troque de skin: os pigmentos mudam sem criar outro motor ou outra Orbe.
+- Revele uma carta: a chama aprovada continua violeta, magenta e dourada,
+  sem raios e sem estouro branco.
+- Teste a seta anterior e o envio das cartas reveladas para a Mesa Real.
+
+PRESERVADO SEM ALTERAÇÃO DE AUTORIDADE
+- Uma única Orbe Suprema V501
+- Chama V516 aprovada, preservada byte por byte
+- Menu orbital e Tarot Livre V517
+- 78 cartas normais, sem repetição, seis por linha
+- Histórico anterior/próxima e transferência para Mesa Real
+- 30 skins e direitos da conta
+- Whit, servidor, APIs, autenticação, pagamentos, banco de dados e DNS
+
+ESTA É A CORREÇÃO V521 DA MACROETAPA UNIVERSO VIVO 1/4.
+A próxima macroetapa só começa depois da aprovação física no iPhone.

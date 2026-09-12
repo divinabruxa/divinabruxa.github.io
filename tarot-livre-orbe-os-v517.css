@@ -1712,3 +1712,113 @@ body[data-screen="tarot"] main {
     translate: -50% 0;
   }
 }
+
+/* -------------------------------------------------------------------------
+   V521 · centro físico absoluto no Safari/iPhone
+
+   A largura vem de documentElement.clientWidth e não de vw/dvw. Assim o
+   altar deixa de herdar a largura rolável criada pelo documento do Safari.
+   O gesto horizontal continua pertencendo à carta, nunca à página inteira. */
+
+html[data-tarot-viewport="centered-v521"],
+html[data-tarot-viewport="centered-v521"] body,
+body[data-screen="tarot"],
+body[data-screen="tarot"] #app,
+body[data-screen="tarot"] main {
+  inline-size: 100% !important;
+  max-inline-size: 100% !important;
+  min-inline-size: 0 !important;
+  margin-inline: 0 !important;
+  overflow-x: hidden !important;
+  overscroll-behavior-x: none !important;
+}
+
+html[data-tarot-viewport="centered-v521"],
+html[data-tarot-viewport="centered-v521"] body {
+  position: relative;
+  touch-action: pan-y pinch-zoom;
+}
+
+#tarot[data-tarot-world="orbe-os-v517"][data-viewport-lock="physical-v521"] {
+  position: relative !important;
+  inset-inline: 0 !important;
+  box-sizing: border-box !important;
+  inline-size: var(--db521-viewport-width, 100%) !important;
+  min-inline-size: 0 !important;
+  max-inline-size: var(--db521-viewport-width, 100%) !important;
+  margin: 0 !important;
+  translate: none !important;
+  transform: none !important;
+  overflow-x: hidden !important;
+  overscroll-behavior-inline: none !important;
+  touch-action: pan-y pinch-zoom;
+}
+
+#tarot[data-tarot-world="orbe-os-v517"][data-viewport-lock="physical-v521"] > .tl517 {
+  box-sizing: border-box !important;
+  inline-size: 100% !important;
+  min-inline-size: 0 !important;
+  max-inline-size: 100% !important;
+  margin-inline: auto !important;
+  overflow-x: hidden !important;
+}
+
+#tarot[data-tarot-world="orbe-os-v517"][data-viewport-lock="physical-v521"] :where(
+  .tl517__header,
+  .tl517__stage,
+  .tl517__toolbar,
+  .tl517__constellation
+) {
+  box-sizing: border-box !important;
+  inline-size: 100% !important;
+  min-inline-size: 0 !important;
+  max-inline-size: 100% !important;
+  margin-inline: auto !important;
+}
+
+#tarot[data-tarot-world="orbe-os-v517"][data-viewport-lock="physical-v521"] .tl517__stage {
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+  touch-action: pan-y pinch-zoom;
+}
+
+#tarot[data-tarot-world="orbe-os-v517"][data-viewport-lock="physical-v521"] .tl517__card-zone {
+  left: 50% !important;
+  right: auto !important;
+  transform: translate3d(-50%, 0, 0) !important;
+  touch-action: pan-y;
+}
+
+#tarot[data-tarot-world="orbe-os-v517"][data-viewport-lock="physical-v521"] .tl517__card-nav {
+  left: 50% !important;
+  right: auto !important;
+  transform: translate3d(-50%, 0, 0) !important;
+}
+
+#tarot[data-tarot-world="orbe-os-v517"][data-viewport-lock="physical-v521"] .tl517__orb-host,
+#tarot[data-tarot-world="orbe-os-v517"][data-viewport-lock="physical-v521"] .tl517__counter,
+#tarot[data-tarot-world="orbe-os-v517"][data-viewport-lock="physical-v521"] .tl517__signal,
+#tarot[data-tarot-world="orbe-os-v517"][data-viewport-lock="physical-v521"] .tl517__portal-crown {
+  left: 50% !important;
+  right: auto !important;
+}
+
+@media (max-width: 620px) {
+  #tarot[data-tarot-world="orbe-os-v517"][data-viewport-lock="physical-v521"] {
+    inline-size: var(--db521-viewport-width, 100%) !important;
+    max-inline-size: var(--db521-viewport-width, 100%) !important;
+    margin-inline: 0 !important;
+    padding-left: max(5px, env(safe-area-inset-left)) !important;
+    padding-right: max(5px, env(safe-area-inset-right)) !important;
+  }
+
+  #tarot[data-tarot-world="orbe-os-v517"][data-viewport-lock="physical-v521"] .tl517__card-zone {
+    inline-size: var(--tl517-card-width) !important;
+    max-inline-size: calc(100% - 118px) !important;
+  }
+
+  #tarot[data-tarot-world="orbe-os-v517"][data-viewport-lock="physical-v521"] .tl517__card-nav {
+    inline-size: min(calc(var(--tl517-card-width) + 126px), calc(100% - 8px)) !important;
+    max-inline-size: calc(100% - 8px) !important;
+  }
+}

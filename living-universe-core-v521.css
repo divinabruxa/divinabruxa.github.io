@@ -1,0 +1,158 @@
+/* DIVINA BRUXA — UNIVERSO VIVO · MACROETAPA 1/4 · MOTOR RETINA CELESTIAL V521
+   Nuvens táteis, estrelas Retina, profundidade, Orbe e fogo compartilham um canvas. */
+
+html[data-living-universe="v521"] {
+  min-height: 100%;
+  max-width: 100%;
+  overflow-x: hidden !important;
+  overscroll-behavior-x: none;
+  background: #010005 !important;
+}
+
+body.db521-universe-active {
+  min-height: 100%;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden !important;
+  overscroll-behavior-x: none;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+#divinaLivingUniverseV521.db521-universe {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  inline-size: 100%;
+  max-inline-size: 100%;
+  block-size: 100vh;
+  block-size: 100dvh;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+  background: #010005;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+#divinaLivingUniverseV521 > canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transform: translateZ(0);
+  transform-origin: 50% 50%;
+  image-rendering: auto;
+  backface-visibility: hidden;
+}
+
+#divinaLivingUniverseV521 .db521-universe__veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 46%, transparent 20%, rgba(2, 0, 8, 0.055) 70%, rgba(0, 0, 3, 0.30) 100%),
+    linear-gradient(180deg, rgba(0, 0, 4, 0.14), transparent 15% 80%, rgba(0, 0, 4, 0.23));
+  transform: translateZ(0);
+}
+
+body.db521-universe-active #app,
+body.db521-universe-active main,
+body.db521-universe-active .app-shell,
+body.db521-universe-active .site-shell {
+  position: relative;
+  z-index: 1;
+  background-color: transparent !important;
+}
+
+body.db521-universe-active .screen,
+body.db521-universe-active .page,
+body.db521-universe-active [data-route-world] {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+body.db521-universe-active .app-header {
+  background:
+    linear-gradient(180deg, rgba(2, 0, 7, 0.68), rgba(2, 0, 7, 0.2) 76%, transparent) !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* O Tarot é um altar transparente. A chama V516 nasce atrás da Orbe e da
+   carta, dentro do próprio universo, sem canvas ou fotografia adicional. */
+html[data-living-universe="v521"] #tarot[data-tarot-world] {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+html[data-living-universe="v521"] #tarot .tl517,
+html[data-living-universe="v521"] #tarot .tl517__header,
+html[data-living-universe="v521"] #tarot .tl517__stage,
+html[data-living-universe="v521"] #tarot .tl516,
+html[data-living-universe="v521"] #tarot .tl516__header,
+html[data-living-universe="v521"] #tarot .tl516__stage {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+html[data-living-universe="v521"] #tarot .tl517__stage,
+html[data-living-universe="v521"] #tarot .tl516__stage {
+  box-shadow:
+    inset 0 0 150px color-mix(in srgb, var(--tl517-skin-accent, var(--tl516-skin-accent, #a565d6)) 7%, transparent),
+    inset 0 -90px 150px rgba(0, 0, 4, 0.28) !important;
+}
+
+html[data-living-universe="v521"] #tarot .tl517__deep-space,
+html[data-living-universe="v521"] #tarot .tl517__cosmos,
+html[data-living-universe="v521"] #tarot .tl517__effects,
+html[data-living-universe="v521"] #tarot .tl516__deep-space,
+html[data-living-universe="v521"] #tarot .tl516__cosmos,
+html[data-living-universe="v521"] #tarot .tl516__effects {
+  display: none !important;
+  opacity: 0 !important;
+}
+
+html[data-living-universe="v521"] #tarot .tl517__stage::before,
+html[data-living-universe="v521"] #tarot .tl516__stage::before {
+  opacity: 0.28 !important;
+  background:
+    radial-gradient(ellipse at 50% 50%, transparent 52%, rgba(0, 0, 3, 0.13) 100%) !important;
+  animation: none !important;
+}
+
+html[data-living-universe="v521"] #tarot .tl517__stage::after,
+html[data-living-universe="v521"] #tarot .tl516__stage::after {
+  opacity: 0.34 !important;
+}
+
+@media (max-width: 620px) {
+  body.db521-universe-active[data-screen="tarot"] .app-header {
+    background: linear-gradient(180deg, rgba(2, 0, 7, 0.42), transparent 96%) !important;
+  }
+
+  html[data-living-universe="v521"] #tarot[data-tarot-world] {
+    padding-top: calc(70px + env(safe-area-inset-top)) !important;
+  }
+
+  html[data-living-universe="v521"] #tarot .tl517__header,
+  html[data-living-universe="v521"] #tarot .tl516__header {
+    min-height: 86px !important;
+  }
+
+  html[data-living-universe="v521"] #tarot .tl517__stage,
+  html[data-living-universe="v521"] #tarot .tl516__stage {
+    margin-top: -2px;
+    box-shadow: inset 0 -80px 140px rgba(0, 0, 4, 0.22) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #divinaLivingUniverseV521 > canvas {
+    transform: none;
+  }
+}

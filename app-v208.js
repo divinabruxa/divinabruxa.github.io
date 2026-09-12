@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — UNIVERSO VIVO · MACROETAPA 1/4 · MOTOR CELESTIAL V520
+/* DIVINA BRUXA — UNIVERSO VIVO · MACROETAPA 1/4 · MOTOR CELESTIAL V521
    A única Orbe V501 governa um céu procedural contínuo em todas as realidades.
    A Chama Celestial aprovada na V516 permanece íntegra dentro do novo motor. */
 
@@ -9,8 +9,8 @@ import { orbMotionV207 } from './orb-motion-core-v207.js?v=207';
 import { RealityOrbEngine } from './orb-engine-v208.js?v=208';
 import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=501';
 import { installRealityLifecycleV511 } from './reality-lifecycle-v511.js?v=511';
-import { createLivingUniverseV520 } from './living-universe-core-v520.js?v=520-living-clouds-constellations';
-import { installSkinPerformanceCoreV518 } from './skin-performance-core-v518.js?v=520-universe-bridge';
+import { createLivingUniverseV521 } from './living-universe-core-v521.js?v=521-retina-clouds-stars';
+import { installSkinPerformanceCoreV518 } from './skin-performance-core-v518.js?v=521-retina-universe-bridge';
 import { AuthClientV201 as AuthClient } from './auth-client-v201.js?v=201';
 import { AccountEngineV201 } from './account-engine-v201.js?v=201';
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=319';
@@ -86,37 +86,80 @@ const clearRebirthShellResidue = () => {
 };
 clearRebirthShellResidue();
 
-const installTarotViewportContractV520 = () => {
+const installTarotViewportContractV521 = () => {
   const body = document.body;
   if (!body) return;
+  globalThis.__divinaTarotViewportContractV521?.abort?.();
   globalThis.__divinaTarotViewportObserverV520?.disconnect?.();
+  const controller = new AbortController();
+  const { signal } = controller;
   let frame = 0;
-  const center = () => {
-    frame = 0;
+  let settleTimer = 0;
+  let horizontalFrame = 0;
+
+  const physicalViewportWidth = () => Math.max(
+    1,
+    Math.round(document.documentElement.clientWidth || globalThis.visualViewport?.width || innerWidth)
+  );
+
+  const clampHorizontalScroll = () => {
+    horizontalFrame = 0;
     if (body.dataset.screen !== 'tarot') return;
     const scroller = document.scrollingElement;
-    if (scroller) scroller.scrollLeft = 0;
-    document.documentElement.scrollLeft = 0;
-    body.scrollLeft = 0;
-    document.documentElement.dataset.tarotViewport = 'centered-v520';
+    if (scroller && Math.abs(scroller.scrollLeft) > 0.5) scroller.scrollLeft = 0;
+    if (Math.abs(document.documentElement.scrollLeft) > 0.5) document.documentElement.scrollLeft = 0;
+    if (Math.abs(body.scrollLeft) > 0.5) body.scrollLeft = 0;
   };
+
+  const center = () => {
+    frame = 0;
+    const width = physicalViewportWidth();
+    document.documentElement.style.setProperty('--db521-viewport-width', `${width}px`);
+    document.getElementById('tarot')?.setAttribute('data-viewport-lock', 'physical-v521');
+    if (body.dataset.screen !== 'tarot') {
+      delete document.documentElement.dataset.tarotViewport;
+      delete document.documentElement.dataset.tarotViewportWidth;
+      return;
+    }
+    document.documentElement.dataset.tarotViewport = 'centered-v521';
+    document.documentElement.dataset.tarotViewportWidth = String(width);
+    clampHorizontalScroll();
+  };
+
   const schedule = () => {
     if (frame) cancelAnimationFrame(frame);
     frame = requestAnimationFrame(() => requestAnimationFrame(center));
+    clearTimeout(settleTimer);
+    settleTimer = setTimeout(center, 520);
   };
+
+  const guardHorizontalScroll = () => {
+    if (body.dataset.screen !== 'tarot' || horizontalFrame) return;
+    horizontalFrame = requestAnimationFrame(clampHorizontalScroll);
+  };
+
   const observer = new MutationObserver(records => {
     if (records.some(record => record.attributeName === 'data-screen')) schedule();
   });
   observer.observe(body, { attributes:true, attributeFilter:['data-screen'] });
-  globalThis.__divinaTarotViewportObserverV520 = observer;
+  signal.addEventListener('abort', () => {
+    observer.disconnect();
+    cancelAnimationFrame(frame);
+    cancelAnimationFrame(horizontalFrame);
+    clearTimeout(settleTimer);
+  }, { once:true });
   ['divina:route-ready','divina:page-ready','divina:supreme-orb-did-navigate']
-    .forEach(type => document.addEventListener(type, schedule, { passive:true }));
-  addEventListener('pageshow', schedule, { passive:true });
-  addEventListener('orientationchange', schedule, { passive:true });
-  globalThis.visualViewport?.addEventListener('resize', schedule, { passive:true });
+    .forEach(type => document.addEventListener(type, schedule, { passive:true, signal }));
+  addEventListener('pageshow', schedule, { passive:true, signal });
+  addEventListener('resize', schedule, { passive:true, signal });
+  addEventListener('orientationchange', schedule, { passive:true, signal });
+  addEventListener('scroll', guardHorizontalScroll, { passive:true, capture:true, signal });
+  globalThis.visualViewport?.addEventListener('resize', schedule, { passive:true, signal });
+  globalThis.visualViewport?.addEventListener('scroll', guardHorizontalScroll, { passive:true, signal });
+  globalThis.__divinaTarotViewportContractV521 = controller;
   schedule();
 };
-installTarotViewportContractV520();
+installTarotViewportContractV521();
 
 const safely = (label, task) => {
   try {
@@ -146,8 +189,14 @@ document.getElementById('divinaLivingUniverseV519')?.remove();
 document.getElementById('divinaLivingUniverseV519Styles')?.remove();
 document.body?.classList.remove('db519-universe-active');
 
-const livingUniverse = safely('Universo Vivo e Chama Celestial V520', () =>
-  createLivingUniverseV520()
+globalThis.divinaLivingUniverseV520?.destroy?.();
+delete globalThis.divinaLivingUniverseV520;
+document.getElementById('divinaLivingUniverseV520')?.remove();
+document.getElementById('divinaLivingUniverseV520Styles')?.remove();
+document.body?.classList.remove('db520-universe-active');
+
+const livingUniverse = safely('Universo Vivo Retina e Chama Celestial V521', () =>
+  createLivingUniverseV521()
 );
 
 const toast = message => {
@@ -240,13 +289,13 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V520 = 520;
-const releaseReloadKeyV520 = `divina-release-reload-${RELEASE_EPOCH_V520}`;
-const reloadForNewReleaseV520 = version => {
-  if (Number(version || 0) <= RELEASE_EPOCH_V520) return false;
+const RELEASE_EPOCH_V521 = 521;
+const releaseReloadKeyV521 = `divina-release-reload-${RELEASE_EPOCH_V521}`;
+const reloadForNewReleaseV521 = version => {
+  if (Number(version || 0) <= RELEASE_EPOCH_V521) return false;
   try {
-    if (sessionStorage.getItem(releaseReloadKeyV520)) return false;
-    sessionStorage.setItem(releaseReloadKeyV520, String(version));
+    if (sessionStorage.getItem(releaseReloadKeyV521)) return false;
+    sessionStorage.setItem(releaseReloadKeyV521, String(version));
   } catch {}
   location.reload();
   return true;
@@ -255,7 +304,7 @@ const reloadForNewReleaseV520 = version => {
 navigator.serviceWorker?.addEventListener('message', event => {
   if (event.data?.type === 'DIVINA_RELEASE_READY') {
     document.documentElement.dataset.releaseReady = String(event.data.version || 'unknown');
-    reloadForNewReleaseV520(event.data.version);
+    reloadForNewReleaseV521(event.data.version);
     return;
   }
   if (event.data?.type !== 'divina-notification-open') return;
@@ -265,15 +314,15 @@ navigator.serviceWorker?.addEventListener('message', event => {
   }
 });
 
-if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV520) {
-  window.__divinaSWBootstrapV520 = true;
+if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV521) {
+  window.__divinaSWBootstrapV521 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=520', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=521', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v520';
+        document.documentElement.dataset.releaseEpoch = 'v521';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V520 registrado');
+        console.info('[Divina] PWA V521 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -591,7 +640,7 @@ const awaken = async () => {
     document.documentElement.dataset.bootRecovery = 'v326';
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
     dispatchEvent(new CustomEvent('divina:boot-ready', {
-      detail: { shell:'v180', recovery:'v326', bootFirst:true, supremeOrb:'v501', orbitalMenu:'v502-v517-tuned', tarotLivre:'v517-v520-viewport-contract', dailyWorld:'v509', realityLifecycle:'v511', transitionAuthority:'supreme-orb-v501', loaderProjection:'supreme-orb-v501', fluidity:'v520-adaptive-ios-touch-flow', livingUniverse:'v520', universeDepthLayers:3, continuousRouteMorph:true, pointerParallax:true, scrollParallax:true, orbGravityField:true, livingCloudTouchField:true, fluidConstellations:2, constellationSegments:11, constellationTouchRefraction:true, tarotPhysicalViewportCentered:true, horizontalDocumentPan:false, clockPausesWhenHidden:true, contextFallback:true, globalUniverseCanvas:true, staticUniverseImage:false, proceduralStars:true, proceduralNebulae:true, proceduralGalaxies:true, skinReactiveUniverse:true, skinPerformance:'v518-v520-connected', skinCount:30, skinRegistryValid:skinPerformanceCore?.status?.().registryValid === true, adaptiveQuality:true, calmQualityRecovery:true, extraAnimationLoops:0, physicalCardJourney:true, decodedBeforeSwap:true, unexplainedFlyingCards:false, stellarFire:'v516-approved-inside-v520', trueCelestialFire:true, lightningStrokes:false, strokedFirePaths:0, whiteOverexposure:false, volumetricBillows:true, flameTongues:true, fireInsideUniverseCanvas:true, iosHistoryNavigation:true, mesaRealTransfer:true, referenceProportions:true, oneLivingDailyOrb:true }
+      detail: { shell:'v180', recovery:'v326', bootFirst:true, supremeOrb:'v501', orbitalMenu:'v502-v517-tuned', tarotLivre:'v517-v521-physical-viewport-lock', dailyWorld:'v509', realityLifecycle:'v511', transitionAuthority:'supreme-orb-v501', loaderProjection:'supreme-orb-v501', fluidity:'v521-retina-adaptive-ios-touch-flow', livingUniverse:'v521', universeDepthLayers:3, continuousRouteMorph:true, pointerParallax:true, scrollParallax:true, orbGravityField:true, livingCloudTouchField:true, fluidConstellations:2, constellationSegments:11, constellationTouchRefraction:true, tarotPhysicalViewportCentered:true, tarotViewportSource:'documentElement-clientWidth', horizontalDocumentPan:false, rootScrollClamp:true, clockPausesWhenHidden:true, contextFallback:true, globalUniverseCanvas:true, staticUniverseImage:false, proceduralStars:true, proceduralNebulae:true, proceduralGalaxies:true, retinaSupersampling:true, skinReactiveUniverse:true, skinPerformance:'v518-v521-connected', skinCount:30, skinRegistryValid:skinPerformanceCore?.status?.().registryValid === true, adaptiveQuality:true, calmQualityRecovery:true, extraAnimationLoops:0, physicalCardJourney:true, decodedBeforeSwap:true, unexplainedFlyingCards:false, stellarFire:'v516-approved-inside-v521', trueCelestialFire:true, lightningStrokes:false, strokedFirePaths:0, whiteOverexposure:false, volumetricBillows:true, flameTongues:true, fireInsideUniverseCanvas:true, iosHistoryNavigation:true, mesaRealTransfer:true, referenceProportions:true, oneLivingDailyOrb:true }
     }));
 
     // O menu é opcional para o boot: a Home abre mesmo se esta camada falhar.
