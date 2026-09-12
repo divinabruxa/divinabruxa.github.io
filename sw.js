@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 2.0 — CORE iOS WHIT SUPREMA · MACROETAPA 2/10 · PRESENÇA V526
+/* DIVINA BRUXA 2.0 — CORE iOS WHIT SUPREMA · MACROETAPA 3/10 · WHIT CORE V527
    Cache seletivo e versionado. Nunca guarda Auth, Whit generation, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=526;
+const VERSION=527;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v526-shell';
-const CONTENT_CACHE='divina-bruxa-v526-content';
-const IMAGE_CACHE='divina-bruxa-v526-images';
-const OFFLINE_CACHE='divina-bruxa-v526-offline-core';
+const SHELL_CACHE='divina-bruxa-v527-shell';
+const CONTENT_CACHE='divina-bruxa-v527-content';
+const IMAGE_CACHE='divina-bruxa-v527-images';
+const OFFLINE_CACHE='divina-bruxa-v527-offline-core';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE]);
 
 const REQUIRED_SHELL=Object.freeze([
@@ -19,6 +19,7 @@ const REQUIRED_SHELL=Object.freeze([
   './orb-engine-v208.js','./supreme-orb-core-v501.js','./supreme-orb-core-v501.css',
   './orb-ios-journey-core-v525.js','./orb-ios-journey-core-v525.css',
   './orb-universal-presence-v526.js','./orb-universal-presence-v526.css',
+  './whit-core-supreme-v527.js','./whit-core-supreme-v527.css',
   './reality-lifecycle-v511.js','./reality-lifecycle-v511.css',
   './orbital-menu-v502.js','./orbital-menu-v502.css',
   './living-universe-core-v524.js','./living-universe-core-v524.css',

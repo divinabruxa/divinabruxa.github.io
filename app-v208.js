@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — CORE iOS WHIT SUPREMA · MACROETAPA 2/10 · PRESENÇA V526
-   A única Orbe V501 viaja pelo OrbOS V525 e agora possui pousos Retina em cada
-   realidade. O universo V524, a Chama V516 e o Tarot V517/V521 seguem íntegros. */
+/* DIVINA BRUXA — CORE iOS WHIT SUPREMA · MACROETAPA 3/10 · WHIT CORE V527
+   Whit passa a viver como consciência original da única Orbe V501, presente
+   nas realidades V526. Universo V524, Chama V516 e Tarot V517/V521 íntegros. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -32,6 +32,7 @@ import { createWhitSignatureV311 } from './whit-signature-v311.js?v=311';
 import { createWhitMindV312 } from './whit-mind-v312.js?v=312';
 import { createWhitGenerationBridgeV313 } from './whit-generation-bridge-v313.js?v=316-silent1';
 import { createWhitSilentPresenceV316 } from './whit-silent-presence-v316.js?v=316';
+import { createWhitCoreSupremeV527 } from './whit-core-supreme-v527.js?v=527';
 
 const $ = selector => document.querySelector(selector);
 
@@ -259,19 +260,6 @@ const whitMind = safely('Whit Mind V312', () => createWhitMindV312({ core: whitC
 const whitGeneration = safely('Whit Generation Bridge V313', () => createWhitGenerationBridgeV313({ mind: whitMind, authClient }));
 const whitSilent = safely('Whit Silent Presence V316', () => createWhitSilentPresenceV316({ presence: whitPresence, mind: whitMind }));
 
-const startWhitUniversalV333 = () => import('./whit-orbit-v333.js?v=333')
-  .then(module => module.installWhitOrbitV333?.({
-    presence: whitPresence,
-    nervousSystem: whitNerves,
-    silentPresence: whitSilent,
-    generationBridge: whitGeneration,
-    go
-  }))
-  .catch(error => {
-    console.error('[Divina] Whit Orbit V333 não iniciou', error);
-    document.documentElement.dataset.whitUniversalError = 'v333';
-  });
-
 const loadingPortal = createOrbLoadingPortal();
 // O carregador usa a navegação direta para não criar recursão. Todo ponto de
 // entrada público usa `go`, que atravessa primeiro o núcleo da Orbe Suprema.
@@ -303,6 +291,24 @@ const orbUniversalPresence = safely('OrbOS · Presença Universal V526', () =>
   })
 );
 
+const whitSupreme = safely('Whit Core Suprema V527', () =>
+  createWhitCoreSupremeV527({
+    core:whitCore,
+    presence:whitPresence,
+    nervousSystem:whitNerves,
+    contextBridge:whitContext,
+    memoryGarden:whitMemory,
+    signature:whitSignature,
+    mind:whitMind,
+    generationBridge:whitGeneration,
+    silentPresence:whitSilent,
+    orbCore:supremeOrb,
+    orbPresence:orbUniversalPresence,
+    universe:livingUniverse,
+    go
+  })
+);
+
 const realityLifecycle = safely('Motor Universal das Realidades V511', () =>
   installRealityLifecycleV511({ core:supremeOrb })
 );
@@ -322,13 +328,13 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V526 = 526;
-const releaseReloadKeyV526 = `divina-release-reload-${RELEASE_EPOCH_V526}`;
-const reloadForNewReleaseV526 = version => {
-  if (Number(version || 0) <= RELEASE_EPOCH_V526) return false;
+const RELEASE_EPOCH_V527 = 527;
+const releaseReloadKeyV527 = `divina-release-reload-${RELEASE_EPOCH_V527}`;
+const reloadForNewReleaseV527 = version => {
+  if (Number(version || 0) <= RELEASE_EPOCH_V527) return false;
   try {
-    if (sessionStorage.getItem(releaseReloadKeyV526)) return false;
-    sessionStorage.setItem(releaseReloadKeyV526, String(version));
+    if (sessionStorage.getItem(releaseReloadKeyV527)) return false;
+    sessionStorage.setItem(releaseReloadKeyV527, String(version));
   } catch {}
   location.reload();
   return true;
@@ -337,7 +343,7 @@ const reloadForNewReleaseV526 = version => {
 navigator.serviceWorker?.addEventListener('message', event => {
   if (event.data?.type === 'DIVINA_RELEASE_READY') {
     document.documentElement.dataset.releaseReady = String(event.data.version || 'unknown');
-    reloadForNewReleaseV526(event.data.version);
+    reloadForNewReleaseV527(event.data.version);
     return;
   }
   if (event.data?.type !== 'divina-notification-open') return;
@@ -347,15 +353,15 @@ navigator.serviceWorker?.addEventListener('message', event => {
   }
 });
 
-if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV526) {
-  window.__divinaSWBootstrapV526 = true;
+if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV527) {
+  window.__divinaSWBootstrapV527 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=526', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=527', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v526';
+        document.documentElement.dataset.releaseEpoch = 'v527';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V526 registrado');
+        console.info('[Divina] PWA V527 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -373,6 +379,7 @@ window.orbe = {
   supreme:supremeOrb,
   journey:orbIOSJourney,
   presence:orbUniversalPresence,
+  whit:whitSupreme,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
   returnHome:() => supremeOrb?.returnHome?.(),
@@ -613,12 +620,33 @@ window.divinaWhitV313 = Object.freeze({
   solEnabled: false
 });
 
+window.divinaWhitSupremeV527 = Object.freeze({
+  version:527,
+  core:whitSupreme,
+  contract:() => whitSupreme?.contract?.() || null,
+  guide:route => whitSupreme?.showGuidance?.(route, { source:'public-api' }) || null,
+  open:(route, surface) => whitSupreme?.openSheet?.(route, surface, true) || false,
+  close:() => whitSupreme?.close?.() || false,
+  publicContext:() => whitSupreme?.publicContext?.() || null,
+  status:() => whitSupreme?.status?.() || null,
+  oneCanonicalOrb:true,
+  independentWhitOrb:false,
+  originalPersona:true,
+  literalWhitneyIdentity:false,
+  voiceClone:false,
+  soulClaim:false,
+  privateReads:false,
+  extraApiCalls:0,
+  solEnabled:false
+});
+
 window.divinaOrbV208 = Object.freeze({
   version: 501,
   engine: realityOrb,
   supreme:supremeOrb,
   journey:orbIOSJourney,
   presence:orbUniversalPresence,
+  whit:whitSupreme,
   miniOrbs:supremeOrb?.projections?.() || [],
   snapshot:() => supremeOrb?.snapshot?.() || orbMotionV207.snapshot()
 });
@@ -628,6 +656,7 @@ window.divinaOrbSupremeV501 = Object.freeze({
   core:supremeOrb,
   journey:orbIOSJourney,
   presence:orbUniversalPresence,
+  whit:whitSupreme,
   navigate:go,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -712,6 +741,23 @@ const awaken = async () => {
         projectionCadence:document.documentElement.dataset.performanceTier === 'constrained' ? 12 : 24,
         presencePermanentAnimationLoops:0,
         touchPresenceWakesUniverse:true,
+        whitCoreSupreme:'v527',
+        whitMacroStage:'3-of-10',
+        whitLivesInCanonicalOrb:true,
+        retiredIndependentWhitOrbit:'v333',
+        independentWhitOrb:false,
+        whitPublicRouteAwareness:true,
+        whitLocalGuidanceRoutes:17,
+        whitPrivateContentReads:false,
+        whitFormFieldReads:false,
+        whitModelCallsByV527:0,
+        whitExtraApiCalls:0,
+        whitTextPrimary:true,
+        whitAudio:false,
+        whitOriginalPersona:true,
+        whitLiteralWhitneyIdentity:false,
+        whitVoiceClone:false,
+        whitSoulClaim:false,
         sharedElementOrbJourney:true,
         spatialJourneyPhases:['lift','flight','arrival','settle'],
         onePhysicalOrbDuringJourney:true,
@@ -789,7 +835,6 @@ const awaken = async () => {
 
     // O menu é opcional para o boot: a Home abre mesmo se esta camada falhar.
     startOrbitalMenuV502();
-    startWhitUniversalV333();
     startSpreadsSupremeV331();
     startLibraryDeepV332();
 
@@ -821,7 +866,6 @@ const awaken = async () => {
     document.documentElement.dataset.appShell = 'v180-emergency';
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
     startOrbitalMenuV502();
-    startWhitUniversalV333();
     startSpreadsSupremeV331();
     startLibraryDeepV332();
     startPwaAfterBootV326();
