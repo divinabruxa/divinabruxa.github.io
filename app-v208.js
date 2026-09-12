@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — UNIVERSO COMPLETO DO TAROT · MACROETAPA 4/10 · V528
-   Tarot Livre, Carta do Dia e Tiragens passam a formar uma única constelação,
-   guiada pela mesma Orbe V501. Whit V527, Universo V524 e Chama V516 íntegros. */
+/* DIVINA BRUXA — SABEDORIA VIVA · MACROETAPA 5/10 · V529
+   Biblioteca, Escola e Diário passam a formar uma experiência orgânica de leitura,
+   guiada pela mesma Orbe V501. Universo V528, Whit V527 e privacidade íntegros. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -34,6 +34,7 @@ import { createWhitGenerationBridgeV313 } from './whit-generation-bridge-v313.js
 import { createWhitSilentPresenceV316 } from './whit-silent-presence-v316.js?v=316';
 import { createWhitCoreSupremeV527 } from './whit-core-supreme-v527.js?v=527';
 import { createTarotUniverseCoreV528 } from './tarot-universe-core-v528.js?v=528';
+import { createWisdomUniverseCoreV529 } from './wisdom-universe-core-v529.js?v=529';
 
 const $ = selector => document.querySelector(selector);
 
@@ -319,6 +320,16 @@ const tarotUniverse = safely('Universo Completo do Tarot V528', () =>
   })
 );
 
+const wisdomUniverse = safely('Sabedoria Viva V529', () =>
+  createWisdomUniverseCoreV529({
+    go,
+    orbCore:supremeOrb,
+    orbPresence:orbUniversalPresence,
+    universe:livingUniverse,
+    whit:whitSupreme
+  })
+);
+
 const realityLifecycle = safely('Motor Universal das Realidades V511', () =>
   installRealityLifecycleV511({ core:supremeOrb })
 );
@@ -326,7 +337,7 @@ const realityLifecycle = safely('Motor Universal das Realidades V511', () =>
 const warmEssentialPortals = () => {
   const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
   if (connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType || '')) return;
-  pageLoader.warm(['tarot', 'daily']).catch?.(() => {});
+  pageLoader.warm(['tarot', 'daily', 'library', 'school', 'journal']).catch?.(() => {});
 };
 
 addEventListener('load', () => {
@@ -338,13 +349,13 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V528 = 528;
-const releaseReloadKeyV528 = `divina-release-reload-${RELEASE_EPOCH_V528}`;
-const reloadForNewReleaseV528 = version => {
-  if (Number(version || 0) <= RELEASE_EPOCH_V528) return false;
+const RELEASE_EPOCH_V529 = 529;
+const releaseReloadKeyV529 = `divina-release-reload-${RELEASE_EPOCH_V529}`;
+const reloadForNewReleaseV529 = version => {
+  if (Number(version || 0) <= RELEASE_EPOCH_V529) return false;
   try {
-    if (sessionStorage.getItem(releaseReloadKeyV528)) return false;
-    sessionStorage.setItem(releaseReloadKeyV528, String(version));
+    if (sessionStorage.getItem(releaseReloadKeyV529)) return false;
+    sessionStorage.setItem(releaseReloadKeyV529, String(version));
   } catch {}
   location.reload();
   return true;
@@ -353,7 +364,7 @@ const reloadForNewReleaseV528 = version => {
 navigator.serviceWorker?.addEventListener('message', event => {
   if (event.data?.type === 'DIVINA_RELEASE_READY') {
     document.documentElement.dataset.releaseReady = String(event.data.version || 'unknown');
-    reloadForNewReleaseV528(event.data.version);
+    reloadForNewReleaseV529(event.data.version);
     return;
   }
   if (event.data?.type !== 'divina-notification-open') return;
@@ -363,15 +374,15 @@ navigator.serviceWorker?.addEventListener('message', event => {
   }
 });
 
-if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV528) {
-  window.__divinaSWBootstrapV528 = true;
+if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV529) {
+  window.__divinaSWBootstrapV529 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=528', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=529', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v528';
+        document.documentElement.dataset.releaseEpoch = 'v529';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V528 registrado');
+        console.info('[Divina] PWA V529 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -391,6 +402,7 @@ window.orbe = {
   presence:orbUniversalPresence,
   whit:whitSupreme,
   tarot:tarotUniverse,
+  wisdom:wisdomUniverse,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
   returnHome:() => supremeOrb?.returnHome?.(),
@@ -675,6 +687,27 @@ window.divinaTarotUniverseV528 = Object.freeze({
   extraApiCalls:0
 });
 
+window.divinaWisdomUniverseV529 = Object.freeze({
+  version:529,
+  core:wisdomUniverse,
+  contract:() => wisdomUniverse?.contract?.() || null,
+  audit:() => wisdomUniverse?.audit?.() || null,
+  status:() => wisdomUniverse?.status?.() || null,
+  travel:route => wisdomUniverse?.travel?.(route) || false,
+  askWhit:route => wisdomUniverse?.openWhit?.(route) || false,
+  worlds:['library','school','journal'],
+  libraryCards:78,
+  schoolModules:17,
+  schoolLessons:124,
+  oneCanonicalOrb:true,
+  independentOrbEngines:0,
+  independentUniverseEngines:0,
+  journalPrivateReads:false,
+  schoolNoteReads:false,
+  extraApiCalls:0,
+  permanentAnimationLoops:0
+});
+
 window.divinaOrbV208 = Object.freeze({
   version: 501,
   engine: realityOrb,
@@ -683,6 +716,7 @@ window.divinaOrbV208 = Object.freeze({
   presence:orbUniversalPresence,
   whit:whitSupreme,
   tarot:tarotUniverse,
+  wisdom:wisdomUniverse,
   miniOrbs:supremeOrb?.projections?.() || [],
   snapshot:() => supremeOrb?.snapshot?.() || orbMotionV207.snapshot()
 });
@@ -694,6 +728,7 @@ window.divinaOrbSupremeV501 = Object.freeze({
   presence:orbUniversalPresence,
   whit:whitSupreme,
   tarot:tarotUniverse,
+  wisdom:wisdomUniverse,
   navigate:go,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -783,6 +818,29 @@ const awaken = async () => {
         tarotPrivateQuestionReads:false,
         tarotPrivateMeaningReads:false,
         tarotExtraApiCalls:0,
+        wisdomUniverse:'v529',
+        wisdomMacroStage:'5-of-10',
+        wisdomWorlds:['library','school','journal'],
+        wisdomNavigation:'same-orb-v525-journey',
+        wisdomLibraryCards:78,
+        wisdomSchoolModules:17,
+        wisdomSchoolLessons:124,
+        wisdomOrganicReadingSurfaces:true,
+        wisdomTouchResponsive:true,
+        wisdomReadingProgress:'geometry-only',
+        wisdomSkinReactive:true,
+        wisdomJournalPrivateByDefault:true,
+        wisdomJournalFieldReads:0,
+        wisdomJournalBodyReads:0,
+        wisdomJournalDraftReads:0,
+        wisdomSchoolNoteReads:0,
+        wisdomWhitContext:'explicit-route-only',
+        wisdomAdminPrivateReads:0,
+        wisdomAnalyticsPrivateReads:0,
+        wisdomStorageReads:0,
+        wisdomStorageWrites:0,
+        wisdomExtraApiCalls:0,
+        wisdomPermanentAnimationLoops:0,
         realityLifecycle:'v511',
         transitionAuthority:'supreme-orb-v501-plus-orbos-v525',
         orbOS:'v525',
