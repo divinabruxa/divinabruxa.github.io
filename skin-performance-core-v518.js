@@ -2,7 +2,7 @@
    Uma autoridade de acabamento para as 30 skins. O Runtime V12 continua sendo
    a autoridade da troca de textura; a conta continua sendo a autoridade de
    propriedade. Esta camada não cria Orbes nem desbloqueia skins: preserva o
-   desenho aprovado da Chama V516 e governa a cadência estável do Universo Vivo V522.
+   desenho aprovado da Chama V516 e governa a cadência estável do Universo Vivo V523.
 */
 
 import { SKIN_REGISTRY_V12, skinByIdV12 } from './skin-registry-v12.js?v=133';
@@ -158,7 +158,7 @@ export class SkinPerformanceCoreV518 {
         quality:this.tier,
         createsOrb:false,
         unlocksSkins:false,
-        activeUniverse:'v522',
+        activeUniverse:'v523',
         approvedFlame:'v516-preserved'
       })
     }));
@@ -204,7 +204,7 @@ export class SkinPerformanceCoreV518 {
     this.activeSkin = id;
     html.dataset.finishSkin = id;
     document.body?.setAttribute('data-finish-skin', id);
-    (globalThis.divinaLivingUniverseV522 || globalThis.divinaLivingUniverseV521 || globalThis.divinaLivingUniverseV520 || globalThis.divinaLivingUniverseV519 || globalThis.divinaLivingUniverseV516)?.syncPalette?.(true);
+    (globalThis.divinaLivingUniverseV523 || globalThis.divinaLivingUniverseV522 || globalThis.divinaLivingUniverseV521 || globalThis.divinaLivingUniverseV520 || globalThis.divinaLivingUniverseV519 || globalThis.divinaLivingUniverseV516)?.syncPalette?.(true);
     (globalThis.divinaOrbSupremeV501?.core || globalThis.orbe?.supreme)?.syncSkin?.(id);
 
     if (animate && !reducedMotion()) {
@@ -269,12 +269,12 @@ export class SkinPerformanceCoreV518 {
   }
 
   applyBudget(reason = 'adaptive') {
-    const universe = globalThis.divinaLivingUniverseV522 || globalThis.divinaLivingUniverseV521 || globalThis.divinaLivingUniverseV520 || globalThis.divinaLivingUniverseV519 || globalThis.divinaLivingUniverseV516;
+    const universe = globalThis.divinaLivingUniverseV523 || globalThis.divinaLivingUniverseV522 || globalThis.divinaLivingUniverseV521 || globalThis.divinaLivingUniverseV520 || globalThis.divinaLivingUniverseV519 || globalThis.divinaLivingUniverseV516;
     const mobile = innerWidth < 700;
     const budgets = {
-      cinematic:{ fps:60, scale:mobile ? 1.88 : 1.68 },
-      balanced:{ fps:60, scale:mobile ? 1.70 : 1.56 },
-      protected:{ fps:reducedMotion() ? 24 : 40, scale:1.30 }
+      cinematic:{ fps:60, scale:mobile ? 2.05 : 1.82 },
+      balanced:{ fps:60, scale:mobile ? 1.82 : 1.68 },
+      protected:{ fps:reducedMotion() ? 24 : 40, scale:1.45 }
     };
     const budget = budgets[this.tier];
     document.documentElement.dataset.visualQuality = this.tier;
@@ -348,7 +348,7 @@ export class SkinPerformanceCoreV518 {
 
   assertIntegrity() {
     const living = document.querySelectorAll('[data-supreme-orb="living"]');
-    const canvases = document.querySelectorAll('#divinaLivingUniverseV522 canvas, #divinaLivingUniverseV521 canvas, #divinaLivingUniverseV520 canvas, #divinaLivingUniverseV519 canvas, #divinaLivingUniverseV516 canvas');
+    const canvases = document.querySelectorAll('#divinaLivingUniverseV523 canvas, #divinaLivingUniverseV522 canvas, #divinaLivingUniverseV521 canvas, #divinaLivingUniverseV520 canvas, #divinaLivingUniverseV519 canvas, #divinaLivingUniverseV516 canvas');
     document.documentElement.dataset.orbIntegrityV518 = living.length <= 1 ? 'one' : 'duplicate-detected';
     document.documentElement.dataset.universeIntegrityV518 = canvases.length <= 1 ? 'one-canvas' : 'duplicate-detected';
     return { living:living.length, universeCanvases:canvases.length };
@@ -406,8 +406,10 @@ export class SkinPerformanceCoreV518 {
       createsOrb:false,
       physicalLivingOrbs:integrity.living,
       universeCanvases:integrity.universeCanvases,
-      activeUniverseFile:'v522',
-      approvedFlameLineage:'v516-preserved-inside-v522',
+      activeUniverseFile:'v523',
+      approvedFlameLineage:'v516-preserved-inside-v523',
+      retinaTextureBackedProceduralWorld:true,
+      starLuminanceStable:true,
       retinaSupersampling:true,
       stableRetinaSession:true,
       adaptivePixelBudget:false,

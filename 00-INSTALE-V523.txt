@@ -1,0 +1,83 @@
+DIVINA BRUXA — V523
+UNIVERSO VIVO · MACROETAPA 1 DE 4 · ATMOSFERA VIVA RETINA
+
+BASE NECESSÁRIA
+V522 já instalada.
+
+O ZIP É PLANO
+Não crie pastas. Envie os 6 arquivos técnicos abaixo diretamente para a raiz
+do site, no mesmo lugar onde já estão index.html e app-v208.js.
+
+SUBSTITUA ESTES 3 ARQUIVOS
+1. app-v208.js
+2. sw.js
+3. skin-performance-core-v518.js
+
+ADICIONE ESTES 3 ARQUIVOS NOVOS
+4. living-universe-core-v523.js
+5. living-universe-core-v523.css
+6. divina-universe-retina-v523.webp
+
+OS OUTROS 2 ARQUIVOS DO ZIP SÃO DOCUMENTAÇÃO
+- 00-INSTALE-V523.txt
+- UNIVERSO-VIVO-V523-CONTRACT.json
+Eles não precisam ser enviados para o site.
+
+INSTALAÇÃO NO GITHUB
+1. Abra a raiz do repositório.
+2. Faça upload dos 6 arquivos técnicos juntos.
+3. Confirme a substituição dos 3 nomes existentes.
+4. Adicione os 3 arquivos V523 novos.
+5. Faça o commit e espere a publicação terminar.
+
+DEPOIS DE PUBLICAR
+1. Feche o site e o aplicativo instalado em todas as abas.
+2. Abra novamente pelo Safari e aguarde alguns segundos.
+3. A versão anterior pode recarregar uma vez para trocar o cache.
+4. Feche e abra novamente o aplicativo instalado.
+
+O QUE A V523 ENTREGA
+- Um mapa cósmico Retina original de 1422 x 2488, com microestrelas, poeira,
+  quatro galáxias e corredor central escuro para a interface.
+- O mapa não fica parado como uma fotografia: ele é amostrado pelo WebGL,
+  deformado por correntes orgânicas, paralaxe, rolagem, Orbe e toque.
+- Nuvens de voz viajam e respiram em regiões diferentes, sem clarear a tela
+  inteira ao mesmo tempo.
+- O gesto cria um campo de fluxo local, dobra nuvens e poeira, deixa rastro
+  de velocidade e desacelera com inércia.
+- Todas as estrelas e estrelas das constelações mantêm luminância constante.
+  A vida vem do deslocamento espacial — não de pisca-pisca.
+- Duas constelações completas se movem e refratam com o toque.
+- O mesmo canvas permanece vivo atrás da Home, menu, Tarot e demais páginas.
+- O fundo do menu ficou translúcido para revelar esse mesmo universo.
+- A resolução fica fixa durante a sessão; sob pressão, o motor reduz somente
+  a cadência e recupera 60 FPS quando o aparelho se acalma.
+- Se WebGL não estiver disponível, o mesmo mapa Retina permanece visível e o
+  Canvas 2D conserva nuvens, constelações e resposta tátil.
+
+TESTE DE APROVAÇÃO — V523 / MACROETAPA 1 DE 4
+- Observe a Home por 15 segundos: nenhuma fileira de estrelas deve piscar.
+- Arraste o dedo numa área vazia: o céu deve curvar perto do gesto e continuar
+  por um instante com inércia, sem saltos.
+- Abra e feche o menu: o universo deve continuar por trás dele, sem tela preta.
+- Entre em duas páginas: não deve nascer outro céu nem haver clarão na troca.
+- Role a barra do Safari: a nitidez não deve diminuir nem mudar de escala.
+- No Tarot Livre, título, carta, setas, Orbe e contador devem permanecer no
+  centro físico já aprovado na V521.
+- Revele uma carta: a Chama V516 aprovada deve continuar idêntica, sem raio,
+  sem traço branco e sem estouro de luz.
+- Troque de skin: nuvens, poeira, constelações e halos devem herdar os pigmentos.
+
+PRESERVADO SEM ALTERAÇÃO
+- Centralização e proporções do Tarot Livre V521
+- CSS do Tarot V517 byte por byte
+- Uma única Orbe Suprema V501
+- Chama V516 aprovada, byte por byte em WebGL e Canvas
+- Histórico anterior/próxima e transferência para Mesa Real
+- Menu orbital V502/V517, seus destinos e áreas de toque
+- 30 skins e direitos da conta
+- Whit, servidor, APIs, autenticação, pagamentos, banco de dados e DNS
+
+ESTA É A V523 DA MACROETAPA UNIVERSO VIVO 1/4.
+A próxima macroetapa só começa depois da aprovação física no iPhone.
+
