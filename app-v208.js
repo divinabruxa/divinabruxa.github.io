@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — CORE iOS WHIT SUPREMA · MACROETAPA 3/10 · WHIT CORE V527
-   Whit passa a viver como consciência original da única Orbe V501, presente
-   nas realidades V526. Universo V524, Chama V516 e Tarot V517/V521 íntegros. */
+/* DIVINA BRUXA — UNIVERSO COMPLETO DO TAROT · MACROETAPA 4/10 · V528
+   Tarot Livre, Carta do Dia e Tiragens passam a formar uma única constelação,
+   guiada pela mesma Orbe V501. Whit V527, Universo V524 e Chama V516 íntegros. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -33,6 +33,7 @@ import { createWhitMindV312 } from './whit-mind-v312.js?v=312';
 import { createWhitGenerationBridgeV313 } from './whit-generation-bridge-v313.js?v=316-silent1';
 import { createWhitSilentPresenceV316 } from './whit-silent-presence-v316.js?v=316';
 import { createWhitCoreSupremeV527 } from './whit-core-supreme-v527.js?v=527';
+import { createTarotUniverseCoreV528 } from './tarot-universe-core-v528.js?v=528';
 
 const $ = selector => document.querySelector(selector);
 
@@ -309,6 +310,15 @@ const whitSupreme = safely('Whit Core Suprema V527', () =>
   })
 );
 
+const tarotUniverse = safely('Universo Completo do Tarot V528', () =>
+  createTarotUniverseCoreV528({
+    go,
+    orbCore:supremeOrb,
+    orbPresence:orbUniversalPresence,
+    whit:whitSupreme
+  })
+);
+
 const realityLifecycle = safely('Motor Universal das Realidades V511', () =>
   installRealityLifecycleV511({ core:supremeOrb })
 );
@@ -328,13 +338,13 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V527 = 527;
-const releaseReloadKeyV527 = `divina-release-reload-${RELEASE_EPOCH_V527}`;
-const reloadForNewReleaseV527 = version => {
-  if (Number(version || 0) <= RELEASE_EPOCH_V527) return false;
+const RELEASE_EPOCH_V528 = 528;
+const releaseReloadKeyV528 = `divina-release-reload-${RELEASE_EPOCH_V528}`;
+const reloadForNewReleaseV528 = version => {
+  if (Number(version || 0) <= RELEASE_EPOCH_V528) return false;
   try {
-    if (sessionStorage.getItem(releaseReloadKeyV527)) return false;
-    sessionStorage.setItem(releaseReloadKeyV527, String(version));
+    if (sessionStorage.getItem(releaseReloadKeyV528)) return false;
+    sessionStorage.setItem(releaseReloadKeyV528, String(version));
   } catch {}
   location.reload();
   return true;
@@ -343,7 +353,7 @@ const reloadForNewReleaseV527 = version => {
 navigator.serviceWorker?.addEventListener('message', event => {
   if (event.data?.type === 'DIVINA_RELEASE_READY') {
     document.documentElement.dataset.releaseReady = String(event.data.version || 'unknown');
-    reloadForNewReleaseV527(event.data.version);
+    reloadForNewReleaseV528(event.data.version);
     return;
   }
   if (event.data?.type !== 'divina-notification-open') return;
@@ -353,15 +363,15 @@ navigator.serviceWorker?.addEventListener('message', event => {
   }
 });
 
-if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV527) {
-  window.__divinaSWBootstrapV527 = true;
+if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV528) {
+  window.__divinaSWBootstrapV528 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=527', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=528', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v527';
+        document.documentElement.dataset.releaseEpoch = 'v528';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V527 registrado');
+        console.info('[Divina] PWA V528 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -380,6 +390,7 @@ window.orbe = {
   journey:orbIOSJourney,
   presence:orbUniversalPresence,
   whit:whitSupreme,
+  tarot:tarotUniverse,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
   returnHome:() => supremeOrb?.returnHome?.(),
@@ -640,6 +651,30 @@ window.divinaWhitSupremeV527 = Object.freeze({
   solEnabled:false
 });
 
+window.divinaTarotUniverseV528 = Object.freeze({
+  version:528,
+  core:tarotUniverse,
+  contract:() => tarotUniverse?.contract?.() || null,
+  audit:() => tarotUniverse?.audit?.() || null,
+  status:() => tarotUniverse?.status?.() || null,
+  travel:route => tarotUniverse?.travel?.(route) || false,
+  worlds:['tarot','daily','spreads'],
+  canonicalCards:78,
+  normalOnly:true,
+  noRepeats:true,
+  tarotLivreGridColumns:6,
+  dailyCardsPerBrasiliaDay:1,
+  spreadMethods:15,
+  celticCrossPositions:10,
+  royalTable:'13x6',
+  oneCanonicalOrb:true,
+  independentOrbEngines:0,
+  independentRenderEngines:0,
+  privateQuestionReads:false,
+  privateMeaningReads:false,
+  extraApiCalls:0
+});
+
 window.divinaOrbV208 = Object.freeze({
   version: 501,
   engine: realityOrb,
@@ -647,6 +682,7 @@ window.divinaOrbV208 = Object.freeze({
   journey:orbIOSJourney,
   presence:orbUniversalPresence,
   whit:whitSupreme,
+  tarot:tarotUniverse,
   miniOrbs:supremeOrb?.projections?.() || [],
   snapshot:() => supremeOrb?.snapshot?.() || orbMotionV207.snapshot()
 });
@@ -657,6 +693,7 @@ window.divinaOrbSupremeV501 = Object.freeze({
   journey:orbIOSJourney,
   presence:orbUniversalPresence,
   whit:whitSupreme,
+  tarot:tarotUniverse,
   navigate:go,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -729,6 +766,23 @@ const awaken = async () => {
         orbitalMenu:'v502-v517-tuned-v526-universal-presence',
         tarotLivre:'v517-v521-physical-viewport-lock',
         dailyWorld:'v509',
+        tarotUniverse:'v528',
+        tarotMacroStage:'4-of-10',
+        tarotWorlds:['tarot','daily','spreads'],
+        canonicalTarotCards:78,
+        canonicalTarotNormalOnly:true,
+        canonicalTarotNoRepeats:true,
+        tarotLivreGridColumns:6,
+        dailyCardsPerBrasiliaDay:1,
+        spreadMethods:15,
+        celticCrossPositions:10,
+        royalTableLayout:'13x6',
+        tarotWorldNavigation:'same-orb-v525-journey',
+        tarotIndependentOrbEngines:0,
+        tarotIndependentRenderEngines:0,
+        tarotPrivateQuestionReads:false,
+        tarotPrivateMeaningReads:false,
+        tarotExtraApiCalls:0,
         realityLifecycle:'v511',
         transitionAuthority:'supreme-orb-v501-plus-orbos-v525',
         orbOS:'v525',

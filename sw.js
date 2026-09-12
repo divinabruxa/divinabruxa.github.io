@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 2.0 — CORE iOS WHIT SUPREMA · MACROETAPA 3/10 · WHIT CORE V527
+/* DIVINA BRUXA 2.0 — UNIVERSO COMPLETO DO TAROT · MACROETAPA 4/10 · V528
    Cache seletivo e versionado. Nunca guarda Auth, Whit generation, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=527;
+const VERSION=528;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v527-shell';
-const CONTENT_CACHE='divina-bruxa-v527-content';
-const IMAGE_CACHE='divina-bruxa-v527-images';
-const OFFLINE_CACHE='divina-bruxa-v527-offline-core';
+const SHELL_CACHE='divina-bruxa-v528-shell';
+const CONTENT_CACHE='divina-bruxa-v528-content';
+const IMAGE_CACHE='divina-bruxa-v528-images';
+const OFFLINE_CACHE='divina-bruxa-v528-offline-core';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE]);
 
 const REQUIRED_SHELL=Object.freeze([
@@ -20,6 +20,7 @@ const REQUIRED_SHELL=Object.freeze([
   './orb-ios-journey-core-v525.js','./orb-ios-journey-core-v525.css',
   './orb-universal-presence-v526.js','./orb-universal-presence-v526.css',
   './whit-core-supreme-v527.js','./whit-core-supreme-v527.css',
+  './tarot-universe-core-v528.js','./tarot-universe-core-v528.css',
   './reality-lifecycle-v511.js','./reality-lifecycle-v511.css',
   './orbital-menu-v502.js','./orbital-menu-v502.css',
   './living-universe-core-v524.js','./living-universe-core-v524.css',
@@ -59,6 +60,7 @@ const APP_DEPENDENCIES=Object.freeze([
 const REBIRTH_WARM=Object.freeze([
   './orb-ios-journey-core-v525.js','./orb-ios-journey-core-v525.css',
   './orb-universal-presence-v526.js','./orb-universal-presence-v526.css',
+  './tarot-universe-core-v528.js','./tarot-universe-core-v528.css',
   './living-universe-core-v524.js','./living-universe-core-v524.css','./divina-universe-retina-v523.webp',
   './tarot-livre-orbe-os-v517.js','./tarot-livre-orbe-os-v517.css','./tarot-mesa-bridge-v517.js',
   './library-world-v302.js','./library-world-v302.css',
@@ -75,6 +77,7 @@ const REBIRTH_WARM=Object.freeze([
 
 const OFFLINE_WORLD_ASSETS=Object.freeze([
   './tarot-data.js','./tarot-image-runtime.js','./tarot-session.js','./tarot-continuity.js',
+  './tarot-universe-core-v528.js','./tarot-universe-core-v528.css',
   './living-universe-core-v524.js','./living-universe-core-v524.css','./divina-universe-retina-v523.webp',
   './tarot-livre-orbe-os-v517.js','./tarot-livre-orbe-os-v517.css','./tarot-mesa-bridge-v517.js',
   './tarot-atlas-mobile-v196.webp',
