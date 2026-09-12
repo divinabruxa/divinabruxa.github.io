@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 2.0 — QA SUPREMO, EVIDENCIAS E ENTREGA · MACROETAPA 10/10 · V534
+/* DIVINA BRUXA 3.0 — FONTE DE VERDADE E ORBE FLUIDA · MACROETAPA 1/14 · V535
    Cache seletivo e versionado. Nunca guarda Auth, Whit generation, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=534;
+const VERSION=535;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v534-shell';
-const CONTENT_CACHE='divina-bruxa-v534-content';
-const IMAGE_CACHE='divina-bruxa-v534-images';
-const OFFLINE_CACHE='divina-bruxa-v534-offline-core';
+const SHELL_CACHE='divina-bruxa-v535-shell';
+const CONTENT_CACHE='divina-bruxa-v535-content';
+const IMAGE_CACHE='divina-bruxa-v535-images';
+const OFFLINE_CACHE='divina-bruxa-v535-offline-core';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE]);
 
 const REQUIRED_SHELL=Object.freeze([
@@ -15,6 +15,7 @@ const REQUIRED_SHELL=Object.freeze([
   './offline.html','./offline-en.html','./offline-es.html',
   './manifest.webmanifest',
   './app-v208.js','./navigation.js','./route-registry-v180.js','./page-loader-v1.js',
+  './world-truth-registry-v535.js','./orb-fluid-navigation-v535.js',
   './runtime-v12.js','./orb-motion-core-v207.js','./orb-gesture-core-v208.js',
   './orb-engine-v208.js','./supreme-orb-core-v501.js','./supreme-orb-core-v501.css',
   './orb-ios-journey-core-v525.js','./orb-ios-journey-core-v525.css',
@@ -213,7 +214,7 @@ const appShellIsValid=async(url,response)=>{
   const isShell=pathname===new URL('./',self.registration.scope).pathname||pathname.endsWith('/index.html');
   if(!isShell)return true;
   const html=await response.clone().text();
-  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=534/.test(html);
+  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=535/.test(html);
 };
 
 const offlinePageFor=async url=>{

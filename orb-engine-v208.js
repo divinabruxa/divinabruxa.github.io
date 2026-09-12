@@ -1,5 +1,5 @@
 /*
- * DIVINA BRUXA — WORK7.0 · ORBE 2.0 V208 · TOQUE ORGÂNICO
+ * DIVINA BRUXA — WORK7.0 · ORBE 2.0 V208 · TOQUE ORGÂNICO · FLUIDEZ V535
  *
  * A borda da esfera nunca se move. A vida acontece dentro dela:
  * respiração orgânica, matéria líquida, profundidade óptica, cáusticas,
@@ -19,6 +19,11 @@ const clamp = (value, min = 0, max = 1) => Math.max(min, Math.min(max, value));
 const lerp = (from, to, amount) => from + (to - from) * amount;
 const follow = (rate, seconds) => 1 - Math.exp(-rate * seconds);
 const clock = () => performance.now();
+const PORTAL_COMMIT_DELAY_MS_V535 = 64;
+const navigationFrameRateV535 = () => {
+  if (document.documentElement.dataset.orbNavigationState !== 'active') return 0;
+  return document.documentElement.dataset.performanceTier === 'constrained' ? 24 : 30;
+};
 
 export const ORB_LIFE_STATES_V208 = Object.freeze({
   BOOT: 'BOOT',
@@ -214,7 +219,7 @@ function gaussian(value, center, width) {
 const ORB_INSTANCE_KEY = Symbol.for('divina.reality.orb.instance.v208');
 
 export class RealityOrbEngine {
-  constructor(canvas, { onOpen } = {}) {
+  constructor(canvas, { onOpen, onIntent } = {}) {
     if (!canvas) throw new Error('O canvas da Orbe não foi encontrado.');
     const current = globalThis[ORB_INSTANCE_KEY];
     if (current && !current.destroyed) return current;
@@ -223,6 +228,7 @@ export class RealityOrbEngine {
     this.shell = canvas.closest('.orb-shell');
     this.status = document.querySelector('#orbStatus');
     this.onOpen = onOpen;
+    this.onIntent = onIntent;
     this.lastFrame = 0;
     this.opening = false;
     this.destroyed = false;
@@ -274,7 +280,7 @@ export class RealityOrbEngine {
     this.motionClient = orbMotionV207.register({
       id: 'main-orb',
       isActive: () => this.canRender(),
-      frameRate: reduced => reduced ? 15 : 0,
+      frameRate: reduced => reduced ? 15 : navigationFrameRateV535(),
       onFrame: (time, seconds, elapsed) => this.draw(time, seconds, elapsed),
       onActivate: () => this.resume('surface'),
       onDeactivate: () => this.suspend('surface'),
@@ -678,6 +684,7 @@ export class RealityOrbEngine {
       return;
     }
     if (result.outcome === ORB_GESTURE_OUTCOMES_V208.TAP) {
+      try { this.onIntent?.('tarot'); } catch {}
       this.pulse('A Orbe despertou — toque novamente para abrir', 1.05);
       clearTimeout(this.tapTimer);
       this.tapTimer = setTimeout(() => {
@@ -747,6 +754,7 @@ export class RealityOrbEngine {
   open() {
     if (this.opening || !this.gesture.beginNavigation()) return;
     this.opening = true;
+    try { this.onIntent?.('tarot'); } catch {}
     clearTimeout(this.tapTimer);
     this.targetEnergy = 1.48;
     this.targetPressure = .72;
@@ -758,7 +766,7 @@ export class RealityOrbEngine {
     this.requestFrame();
     clearTimeout(this.portalTimer);
     clearTimeout(this.portalResetTimer);
-    this.portalTimer = setTimeout(() => this.onOpen?.(), 180);
+    this.portalTimer = setTimeout(() => this.onOpen?.(), PORTAL_COMMIT_DELAY_MS_V535);
     this.portalResetTimer = setTimeout(() => {
       this.opening = false;
       this.gesture.endNavigation();

@@ -1,5 +1,6 @@
-/* DIVINA BRUXA 2.0 — MACROETAPA 3/4 V517 · COMPOSIÇÃO E FLUIDEZ
-   Preserva V501, V509 e o Universo/Chama V516; conecta Tarot e Mesa Real. */
+/* DIVINA BRUXA 2.0 — CARREGAMENTO DE MUNDOS V517 · FLUIDEZ V535
+   Preserva V501, V509 e o Universo/Chama V516; conecta Tarot e Mesa Real.
+   V535 aquece no gesto e permite que a tela abra enquanto o motor termina. */
 
 import {
   normalizeRouteId,
@@ -12,6 +13,7 @@ import { connectTarotMesaBridgeV517 } from './tarot-mesa-bridge-v517.js?v=517';
 const pageTasks = new Map();
 const sharedTasks = new Map();
 const LOAD_TIMEOUT_MS = 15000;
+export const NAVIGATION_PREPARE_BUDGET_MS_V535 = 48;
 const PORTAL_STYLES_ID = 'divinaPortalStylesV180';
 const PORTAL_STYLES_HREF = 'divina-core-v179.css?v=179';
 let loadingSequence = 0;
@@ -32,6 +34,7 @@ function withTimeout(task,timeout,message){
     new Promise((_,reject)=>{ timer=setTimeout(()=>reject(new Error(message)),timeout); })
   ]).finally(()=>clearTimeout(timer));
 }
+const wait=milliseconds=>new Promise(resolve=>setTimeout(resolve,Math.max(0,milliseconds)));
 function ensureStyle(id,href){
   return once(sharedTasks,`style:${id}`,()=>withTimeout(new Promise((resolve,reject)=>{
     let link=document.getElementById(id);
@@ -107,6 +110,9 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
   const $=selector=>document.querySelector(selector);
   const abort=new AbortController();
   let observer=null;
+  let deferredRoute=null;
+  let deferredFrame=0;
+  let deferredTimer=0;
 
   const ensureJournal=()=>once(sharedTasks,'journal',async()=>{
     const [,module]=await Promise.all([
@@ -375,6 +381,14 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     );
   };
 
+  const prime=rawId=>{
+    const id=normalizeRouteId(rawId);
+    if(!routeHasModule(id))return Promise.resolve({id,state:'static'});
+    return warmers[id]
+      ? once(sharedTasks,`warm:${id}`,warmers[id]).then(()=>({id,state:'warm'}))
+      : Promise.resolve({id,state:'on-demand'});
+  };
+
   const load=rawId=>{
     const id=normalizeRouteId(rawId);
     if(!routeHasModule(id)) return Promise.resolve(null);
@@ -425,6 +439,41 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     });
   };
 
+  const prepare=rawId=>{
+    const id=normalizeRouteId(rawId);
+    if(!routeHasModule(id))return Promise.resolve({id,state:'static'});
+    const screen=document.getElementById(id);
+    if(screen?.getAttribute('data-module-state')==='ready'){
+      return Promise.resolve({id,state:'ready'});
+    }
+    const budget=document.documentElement.dataset.performanceTier==='constrained'
+      ? 24
+      : NAVIGATION_PREPARE_BUDGET_MS_V535;
+    // Somente import/CSS entram no orçamento da viagem. A construção do mundo
+    // ocorre depois do pouso, para não bloquear o quadro de chegada da Orbe.
+    const settled=prime(id).then(
+      ()=>({id,state:'primed',deferred:true}),
+      error=>({id,state:'prime-error',error,deferred:true})
+    );
+    return Promise.race([
+      settled,
+      wait(budget).then(()=>({id,state:'priming',deferred:true}))
+    ]).then(result=>{
+      if(result.deferred){
+        document.dispatchEvent(new CustomEvent('divina:page-deferred',{
+          detail:Object.freeze({
+            id,
+            budgetMs:budget,
+            release:'V535',
+            state:result.state,
+            recoverable:true
+          })
+        }));
+      }
+      return result;
+    });
+  };
+
   const retry=id=>{
     const route=normalizeRouteId(id);
     pageTasks.delete(route);
@@ -434,7 +483,7 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
 
   const primeFromIntent=event=>{
     const id=event.target.closest?.('[data-go]')?.dataset.go;
-    if(id&&routeHasModule(id)) load(id).catch(()=>{});
+    if(id&&routeHasModule(id)) prime(id).catch(()=>{});
   };
 
   document.addEventListener('pointerdown',primeFromIntent,{capture:true,passive:true,signal:abort.signal});
@@ -447,19 +496,52 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     retry(button.dataset.routeRetry).catch(()=>{});
   },{signal:abort.signal});
 
+  const scheduleLoad=id=>{
+    const route=normalizeRouteId(id);
+    if(!routeHasModule(route))return;
+    deferredRoute=route;
+    cancelAnimationFrame(deferredFrame);
+    clearTimeout(deferredTimer);
+    deferredFrame=requestAnimationFrame(()=>{
+      deferredFrame=0;
+      deferredTimer=setTimeout(()=>{
+        deferredTimer=0;
+        const target=deferredRoute;
+        deferredRoute=null;
+        if(target)load(target).catch(()=>{});
+      },0);
+    });
+  };
+
   observer=new MutationObserver(()=>{
     const id=document.body.dataset.screen;
-    if(id) load(id).catch(()=>{});
+    if(!id)return;
+    if(document.documentElement.dataset.orbNavigationState==='active'){
+      deferredRoute=normalizeRouteId(id);
+      return;
+    }
+    scheduleLoad(id);
   });
   observer.observe(document.body,{attributes:true,attributeFilter:['data-screen']});
+  document.addEventListener('divina:supreme-orb-did-navigate',event=>{
+    scheduleLoad(event.detail?.to||deferredRoute||document.body.dataset.screen);
+  },{passive:true,signal:abort.signal});
 
   return Object.freeze({
     load,
-    prepare:load,
+    prepare,
+    prime,
     retry,
     warm,
     go:id=>Promise.resolve(go?go(normalizeRouteId(id)):load(id)),
     portalStylesReady:()=>Boolean(document.getElementById(PORTAL_STYLES_ID)?.sheet),
-    destroy:()=>{abort.abort();observer?.disconnect();}
+    navigationPrepareBudgetMs:NAVIGATION_PREPARE_BUDGET_MS_V535,
+    destroy:()=>{
+      abort.abort();
+      observer?.disconnect();
+      cancelAnimationFrame(deferredFrame);
+      clearTimeout(deferredTimer);
+      deferredRoute=null;
+    }
   });
 }

@@ -1,8 +1,10 @@
-/* DIVINA BRUXA — ORBOS iOS · VIAGEM ESPACIAL DA ORBE V525
+/* DIVINA BRUXA — ORBOS iOS · VIAGEM ESPACIAL DA ORBE V525 · FLUIDEZ V535
    Shared-element navigation for the single living Orb. The page never receives
    a second Orb engine: a temporary Retina mirror carries the same visual signal
    across the one continuous V524 universe, then yields to the destination host.
 */
+
+import { worldForRouteV535 } from './world-truth-registry-v535.js?v=535';
 
 const VERSION = 525;
 const MARK = Symbol.for('divina.orb.ios.journey.v525');
@@ -11,51 +13,42 @@ const STYLE_HREF = './orb-ios-journey-core-v525.css?v=525';
 const ROOT_ID = 'divinaOrbIOSJourneyV525';
 const HIDDEN_CLASS = 'db525-orb-in-flight';
 
-const ROUTE_GATEWAYS = Object.freeze({
-  home:[0.50,0.50],
-  tarot:[0.50,0.42],
-  daily:[0.68,0.34],
-  spreads:[0.34,0.38],
-  school:[0.70,0.38],
-  library:[0.30,0.40],
-  journal:[0.67,0.50],
-  ai:[0.50,0.44],
-  store:[0.70,0.58],
-  consultations:[0.72,0.38],
-  music:[0.30,0.52],
-  videos:[0.70,0.52],
-  skins:[0.50,0.52],
-  login:[0.50,0.34],
-  subscriptions:[0.50,0.30],
-  notifications:[0.72,0.30],
-  admin:[0.50,0.38]
-});
-
-const ROUTE_ANCHORS = Object.freeze({
-  home:['#home [data-supreme-orb="living"]','#home #orb','#home [data-orb-root]'],
-  tarot:['#tarot [data-supreme-orb="living"]','#tarot [data-tarot-orb-host]','#tarot .tl517__orb-host'],
-  daily:['#daily [data-supreme-orb="living"]','#daily [data-daily-orb-host]','#daily [data-orb-journey-anchor]'],
-  spreads:['#spreads [data-orb-journey-anchor]','#spreads [data-mesa-orb-host]'],
-  school:['#school [data-orb-journey-anchor]'],
-  library:['#library [data-orb-journey-anchor]'],
-  journal:['#journal [data-orb-journey-anchor]'],
-  ai:['#ai [data-orb-journey-anchor]','#ai [data-whit-orb]','#ai [data-whit-presence]'],
-  store:['#store [data-orb-journey-anchor]'],
-  consultations:['#consultations [data-orb-journey-anchor]'],
-  music:['#music [data-orb-journey-anchor]'],
-  videos:['#videos [data-orb-journey-anchor]'],
-  skins:['#skins [data-orb-journey-anchor]','#skins [data-skin-orb]'],
-  login:['#login [data-orb-journey-anchor]'],
-  subscriptions:['#subscriptions [data-orb-journey-anchor]'],
-  notifications:['#notifications [data-orb-journey-anchor]'],
-  admin:['#admin [data-orb-journey-anchor]']
-});
-
 const clamp = (value, minimum, maximum) => Math.min(maximum, Math.max(minimum, value));
 const wait = milliseconds => new Promise(resolve => setTimeout(resolve, Math.max(0, milliseconds)));
 const frame = () => new Promise(resolve => requestAnimationFrame(() => resolve()));
 const reducedMotion = () => globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
 const constrained = () => document.documentElement.dataset.performanceTier === 'constrained';
+const coarsePointer = () => globalThis.matchMedia?.('(pointer: coarse)').matches === true
+  || Number(navigator.maxTouchPoints || 0) > 0;
+export const ORB_JOURNEY_FLUIDITY_BUDGETS_V535 = Object.freeze({
+  reduced:Object.freeze({
+    lift:52, flight:66, arrival:70, settle:38, destinationWait:96,
+    mirrorFps:8, igniteEvery:190, ratio:1.35, minimumPixels:240, maximumPixels:420,
+    profile:'reduced-v535'
+  }),
+  constrained:Object.freeze({
+    lift:54, flight:112, arrival:128, settle:54, destinationWait:120,
+    mirrorFps:12, igniteEvery:180, ratio:1.45, minimumPixels:260, maximumPixels:460,
+    profile:'constrained-v535'
+  }),
+  touch:Object.freeze({
+    lift:64, flight:146, arrival:164, settle:68, destinationWait:150,
+    mirrorFps:18, igniteEvery:150, ratio:1.72, minimumPixels:288, maximumPixels:560,
+    profile:'touch-v535'
+  }),
+  pointer:Object.freeze({
+    lift:78, flight:184, arrival:206, settle:82, destinationWait:210,
+    mirrorFps:24, igniteEvery:126, ratio:2, minimumPixels:320, maximumPixels:680,
+    profile:'pointer-v535'
+  })
+});
+const fluidityBudget = () => reducedMotion()
+  ? ORB_JOURNEY_FLUIDITY_BUDGETS_V535.reduced
+  : constrained()
+    ? ORB_JOURNEY_FLUIDITY_BUDGETS_V535.constrained
+    : coarsePointer()
+      ? ORB_JOURNEY_FLUIDITY_BUDGETS_V535.touch
+      : ORB_JOURNEY_FLUIDITY_BUDGETS_V535.pointer;
 const viewport = () => ({
   width:Math.max(1, globalThis.visualViewport?.width || document.documentElement.clientWidth || innerWidth),
   height:Math.max(1, globalThis.visualViewport?.height || document.documentElement.clientHeight || innerHeight)
@@ -250,8 +243,9 @@ export class OrbIOSJourneyCoreV525 {
   }
 
   ensureMirrorResolution(displaySize) {
-    const ratio = Math.min(globalThis.devicePixelRatio || 1, constrained() ? 1.5 : 2.25);
-    const pixels = Math.round(clamp(displaySize * ratio, constrained() ? 288 : 384, constrained() ? 460 : 760));
+    const budget = fluidityBudget();
+    const ratio = Math.min(globalThis.devicePixelRatio || 1, budget.ratio);
+    const pixels = Math.round(clamp(displaySize * ratio, budget.minimumPixels, budget.maximumPixels));
     if (this.canvas.width !== pixels || this.canvas.height !== pixels) {
       this.canvas.width = pixels;
       this.canvas.height = pixels;
@@ -260,7 +254,7 @@ export class OrbIOSJourneyCoreV525 {
 
   paintMirror(timestamp, force = false) {
     if (!this.active && !force) return;
-    const fps = reducedMotion() ? 8 : constrained() ? 18 : 30;
+    const fps = fluidityBudget().mirrorFps;
     if (!force && timestamp - this.lastPaint < 1000 / fps) return;
     this.lastPaint = timestamp;
     const { width, height } = this.canvas;
@@ -285,10 +279,11 @@ export class OrbIOSJourneyCoreV525 {
 
   startLivingMirror() {
     cancelAnimationFrame(this.paintFrame);
+    const budget = fluidityBudget();
     const paint = timestamp => {
       if (!this.active || this.destroyed) return;
       this.paintMirror(timestamp);
-      if (timestamp - this.lastIgnite > (constrained() ? 150 : 108)) {
+      if (timestamp - this.lastIgnite > budget.igniteEvery) {
         const rect = this.traveler?.getBoundingClientRect?.();
         if (rect?.width && rect?.height) {
           const view = viewport();
@@ -307,7 +302,7 @@ export class OrbIOSJourneyCoreV525 {
 
   gatewayFor(route) {
     const view = viewport();
-    const point = ROUTE_GATEWAYS[route] || [0.5,0.44];
+    const point = worldForRouteV535(route)?.gateway || [0.5,0.44];
     return {
       x:clamp(point[0] * view.width, 44, view.width - 44),
       y:clamp(point[1] * view.height, 88, view.height - 96)
@@ -402,11 +397,12 @@ export class OrbIOSJourneyCoreV525 {
     this.igniteAt(this.currentPoint, 1.04);
     await frame();
 
+    const budget = fluidityBudget();
     if (reducedMotion()) {
       const gateway = this.gatewayFor(this.route);
       await Promise.all([
-        this.movePath([gateway], 84, 'ease-out'),
-        this.scaleBody(clamp(82/this.size, .22, 1), 84, 'ease-out')
+        this.movePath([gateway], budget.flight, 'ease-out'),
+        this.scaleBody(clamp(82/this.size, .22, 1), budget.flight, 'ease-out')
       ]);
       this.setState('portal', { to, serial:this.serial });
       return this.status();
@@ -415,8 +411,8 @@ export class OrbIOSJourneyCoreV525 {
     const liftDistance = clamp(this.size * 0.075, 9, 28);
     const lifted = { x:this.currentPoint.x, y:this.currentPoint.y-liftDistance };
     await Promise.all([
-      this.movePath([lifted], constrained() ? 74 : 96, 'cubic-bezier(.2,.8,.2,1)'),
-      this.scaleBody(0.965, constrained() ? 74 : 96, 'cubic-bezier(.2,.8,.2,1)')
+      this.movePath([lifted], budget.lift, 'cubic-bezier(.2,.8,.2,1)'),
+      this.scaleBody(0.965, budget.lift, 'cubic-bezier(.2,.8,.2,1)')
     ]);
 
     this.setState('flight', { from, to, serial:this.serial });
@@ -432,8 +428,8 @@ export class OrbIOSJourneyCoreV525 {
     };
     const flightScale = clamp((constrained() ? 78 : 90) / this.size, .18, 1.02);
     await Promise.all([
-      this.movePath([first,second,gateway], constrained() ? 180 : 238),
-      this.scaleBody(flightScale, constrained() ? 180 : 238)
+      this.movePath([first,second,gateway], budget.flight),
+      this.scaleBody(flightScale, budget.flight)
     ]);
     this.igniteAt(gateway, 0.82);
     this.setState('portal', { to, serial:this.serial });
@@ -448,7 +444,7 @@ export class OrbIOSJourneyCoreV525 {
       return { node:this.core.orb, rect:physical, kind:'physical' };
     }
 
-    const routeMatch = findNode(ROUTE_ANCHORS[route] || []);
+    const routeMatch = findNode(worldForRouteV535(route)?.journeyAnchors || []);
     if (routeMatch) return { ...routeMatch, kind:'route-anchor' };
 
     const screen = document.getElementById(route);
@@ -497,7 +493,7 @@ export class OrbIOSJourneyCoreV525 {
   }
 
   async waitForDestination(route) {
-    const deadline = performance.now() + (constrained() ? 180 : 320);
+    const deadline = performance.now() + fluidityBudget().destinationWait;
     let destination = null;
     do {
       destination = this.resolveDestination(route);
@@ -539,7 +535,8 @@ export class OrbIOSJourneyCoreV525 {
     this.ensureMirrorResolution(Math.max(this.size, destinationSize));
     this.paintMirror(performance.now(), true);
     const targetScale = clamp(destinationSize/this.size, .18, 7.5);
-    const duration = reducedMotion() ? 90 : constrained() ? 190 : 272;
+    const budget = fluidityBudget();
+    const duration = budget.arrival;
     await Promise.all([
       this.movePath([arc,approach,destination], duration, 'cubic-bezier(.2,.82,.18,1)'),
       this.scaleBody(targetScale, duration, 'cubic-bezier(.2,.82,.18,1)', true)
@@ -550,7 +547,7 @@ export class OrbIOSJourneyCoreV525 {
       { opacity:1, filter:'brightness(1.08)' },
       { opacity:.98, filter:'brightness(1.22)' },
       { opacity:0, filter:'brightness(1.08)' }
-    ], { duration:reducedMotion() ? 48 : 108, easing:'ease-out' }, { opacity:'0' });
+    ], { duration:budget.settle, easing:'ease-out' }, { opacity:'0' });
     this.finishImmediately('complete');
     return this.status();
   }
@@ -609,6 +606,14 @@ export class OrbIOSJourneyCoreV525 {
       webVibration:false,
       nativeHapticsOnly:true,
       reducedMotionSupported:true,
+      fluidityProfile:fluidityBudget().profile,
+      navigationBudgetMs:Object.freeze({
+        lift:fluidityBudget().lift,
+        flight:fluidityBudget().flight,
+        arrival:fluidityBudget().arrival,
+        settle:fluidityBudget().settle
+      }),
+      mirrorFps:fluidityBudget().mirrorFps,
       fallbackPresence:Boolean(this.fallbackPresence?.isConnected),
       mirrorPixels:this.canvas ? { width:this.canvas.width, height:this.canvas.height } : null
     });

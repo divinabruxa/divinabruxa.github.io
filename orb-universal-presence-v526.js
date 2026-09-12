@@ -1,8 +1,10 @@
-/* DIVINA BRUXA — ORBOS · PRESENÇA UNIVERSAL V526
+/* DIVINA BRUXA — ORBOS · PRESENÇA UNIVERSAL V526 · REGISTRO VIVO V535
    A única Orbe física ganha um pouso semântico em cada realidade. Cada pouso é
    somente uma janela Retina do canvas vivo V501: nenhum novo motor, universo,
    estado de Tarot ou loop permanente é criado aqui.
 */
+
+import { orbPresenceProfilesV535 } from './world-truth-registry-v535.js?v=535';
 
 const VERSION = 526;
 const MARK = Symbol.for('divina.orb.universal.presence.v526');
@@ -10,23 +12,7 @@ const STYLE_ID = 'divinaOrbUniversalPresenceV526Styles';
 const STYLE_HREF = './orb-universal-presence-v526.css?v=526';
 const CREATED_ATTR = 'data-orb-presence-created-v526';
 
-const PROFILES = Object.freeze({
-  daily:{ name:'Carta do Dia', aria:'Orbe do agora. Toque para despertar o universo.', before:'#dailyCard' },
-  library:{ name:'Biblioteca', aria:'Orbe do conhecimento. Toque para despertar o universo.', before:'#cardLibraryApp' },
-  school:{ name:'Escola do Tarot', aria:'Orbe do aprendizado. Toque para despertar o universo.', before:'.school-celestial-map' },
-  spreads:{ name:'Tiragens', aria:'Orbe das tiragens. Toque para despertar o universo.', before:'.spreads-celestial-map' },
-  ai:{ name:'Whit', aria:'Presença da Whit na Orbe. Toque para despertar o universo.', before:'.ai-celestial-map' },
-  journal:{ name:'Diário e Espelho', aria:'Orbe do espelho. Toque para despertar o universo.', before:'.journal-celestial-map' },
-  store:{ name:'Loja', aria:'Orbe das escolhas. Toque para despertar o universo.', before:'#storeApp' },
-  consultations:{ name:'Consultas', aria:'Orbe do acolhimento. Toque para despertar o universo.', before:'#consultationApp' },
-  skins:{ name:'Skins', aria:'Orbe em transformação. Toque para despertar o universo.', after:'.db-page-world__hero' },
-  subscriptions:{ name:'Premium', aria:'Orbe Premium. Toque para despertar o universo.', before:'#subscriptionApp' },
-  videos:{ name:'Vídeos', aria:'Orbe das histórias. Toque para despertar o universo.', before:'#videoApp' },
-  music:{ name:'Música', aria:'Orbe sonora. Toque para despertar o universo.', before:'#musicApp' },
-  notifications:{ name:'Notificações', aria:'Orbe dos sinais. Toque para despertar o universo.', before:'#notificationApp' },
-  login:{ name:'Conta', aria:'Orbe da continuidade. Toque para despertar o universo.', existing:'.account-v189-orb' },
-  admin:{ name:'Admin', aria:'Orbe guardiã. Toque para despertar o universo.', before:'#adminApp' }
-});
+const PROFILES = orbPresenceProfilesV535();
 
 const ROUTES = Object.freeze(Object.keys(PROFILES));
 const frame = task => requestAnimationFrame(task);

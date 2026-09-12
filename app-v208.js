@@ -1,24 +1,24 @@
-/* DIVINA BRUXA — QA SUPREMO, EVIDENCIAS E ENTREGA · MACROETAPA 10/10 · V534
-   Regressao total sobre a continuidade V524–V533. Whit, Tarot, Sabedoria Viva,
-   a Orbe aprovada e todas as travas de autoridade permanecem integras. */
+/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 1/14 · V535
+   Fonte de Verdade, Registro Vivo e navegação fluida sobre a continuidade V534.
+   Whit, Tarot, Sabedoria Viva, a Orbe aprovada e as travas permanecem integras. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
-import { createNavigation } from './navigation.js?v=211-recovery1';
+import { createNavigation } from './navigation.js?v=535-fluid-navigation';
 import { orbMotionV207 } from './orb-motion-core-v207.js?v=207';
-import { RealityOrbEngine } from './orb-engine-v208.js?v=208';
-import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=526-universal-presence-retina';
-import { createOrbIOSJourneyCoreV525 } from './orb-ios-journey-core-v525.js?v=525';
-import { createOrbUniversalPresenceV526 } from './orb-universal-presence-v526.js?v=526';
+import { RealityOrbEngine } from './orb-engine-v208.js?v=535-fluid-navigation';
+import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=535-world-truth';
+import { createOrbIOSJourneyCoreV525 } from './orb-ios-journey-core-v525.js?v=535-fluid-navigation';
+import { createOrbUniversalPresenceV526 } from './orb-universal-presence-v526.js?v=535-world-truth';
 import { installRealityLifecycleV511 } from './reality-lifecycle-v511.js?v=511';
 import { createLivingUniverseV524 } from './living-universe-core-v524.js?v=524-tactile-skin-cosmos';
-import { installSkinPerformanceCoreV518 } from './skin-performance-core-v518.js?v=524-tactile-skin-bridge';
+import { installSkinPerformanceCoreV518 } from './skin-performance-core-v518.js?v=535-mobile-fluidity';
 import { AuthClientV201 as AuthClient } from './auth-client-v201.js?v=532';
 import { AccountEngineV201 } from './account-engine-v201.js?v=201';
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=534-consultations-anchor';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=534-consultations-anchor';
+import { createPageLoader } from './page-loader-v1.js?v=535-deferred-worlds';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -39,6 +39,8 @@ import { createExperienceConversionCoreV530 } from './experience-conversion-core
 import { createIdentityRightsCoreV531 } from './identity-rights-core-v531.js?v=531';
 import { createResponsiveEnchantmentCoreV533 } from './responsive-enchantment-core-v533.js?v=533';
 import { createQaSupremeCoreV534 } from './qa-supreme-core-v534.js?v=534';
+import { createWorldTruthRegistryV535 } from './world-truth-registry-v535.js?v=535';
+import { createOrbFluidNavigationV535 } from './orb-fluid-navigation-v535.js?v=535';
 
 const $ = selector => document.querySelector(selector);
 
@@ -52,11 +54,11 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV534 = () => import('./pwa-world-v324.js?v=534')
+const startPwaAfterBootV535 = () => import('./pwa-world-v324.js?v=535')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
-    document.documentElement.dataset.pwaError = 'v534';
+    document.documentElement.dataset.pwaError = 'v535';
   });
 
 const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
@@ -186,6 +188,12 @@ const responsiveEnchantment = safely('Responsividade e Encantamento Final V533',
   createResponsiveEnchantmentCoreV533()
 );
 
+// A tela dinâmica de Skins já existe neste ponto; o primeiro diagnóstico do
+// Registro Vivo nasce, portanto, com as 17 realidades efetivamente presentes.
+const worldTruth = safely('Fonte de Verdade e Registro Vivo V535', () =>
+  createWorldTruthRegistryV535()
+);
+
 const qaSupreme = safely('QA Supremo, Evidencias e Entrega V534', () =>
   createQaSupremeCoreV534()
 );
@@ -252,7 +260,11 @@ safely('runtime visual', installRuntimeV12);
 const navigation = createNavigation();
 const navigationGo = navigation.go;
 let supremeOrb = null;
-const go = (id, options) => supremeOrb?.navigate?.(id, options) || navigationGo(id);
+let pageLoader = null;
+const go = (id, options) => {
+  pageLoader?.prime?.(id).catch?.(() => {});
+  return supremeOrb?.navigate?.(id, options) || navigationGo(id);
+};
 safely('guarda visual', installVisualGuard);
 safely('experiência do Tarot', installTarotExperience);
 safely('mídia cósmica', installCosmicMedia);
@@ -279,10 +291,11 @@ const whitSilent = safely('Whit Silent Presence V316', () => createWhitSilentPre
 const loadingPortal = createOrbLoadingPortal();
 // O carregador usa a navegação direta para não criar recursão. Todo ponto de
 // entrada público usa `go`, que atravessa primeiro o núcleo da Orbe Suprema.
-const pageLoader = createPageLoader({ config: CONFIG, go:navigationGo, authClient });
+pageLoader = createPageLoader({ config: CONFIG, go:navigationGo, authClient });
 navigation.setBeforeEnter(pageLoader.prepare);
 
 const realityOrb = safely('motor da Orbe V208', () => new RealityOrbEngine($('#orbCanvas'), {
+  onIntent: () => pageLoader.prime('tarot').catch(() => {}),
   onOpen: () => go('tarot', { source:'home-orb-double-tap' })
 }));
 
@@ -298,6 +311,16 @@ const orbIOSJourney = safely('OrbOS iOS · Viagem Espacial V525', () =>
   createOrbIOSJourneyCoreV525({ core:supremeOrb, universe:livingUniverse })
 );
 supremeOrb?.setJourneyEngine?.(orbIOSJourney);
+navigation.setRouteRequest(go);
+
+const orbFluidNavigation = safely('Navegação Fluida da Orbe V535', () =>
+  createOrbFluidNavigationV535({
+    core:supremeOrb,
+    universe:livingUniverse,
+    pageLoader,
+    journey:orbIOSJourney
+  })
+);
 
 const orbUniversalPresence = safely('OrbOS · Presença Universal V526', () =>
   createOrbUniversalPresenceV526({
@@ -382,13 +405,13 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V534 = 534;
-const releaseReloadKeyV534 = `divina-release-reload-${RELEASE_EPOCH_V534}`;
-const reloadForNewReleaseV534 = version => {
-  if (Number(version || 0) <= RELEASE_EPOCH_V534) return false;
+const RELEASE_EPOCH_V535 = 535;
+const releaseReloadKeyV535 = `divina-release-reload-${RELEASE_EPOCH_V535}`;
+const reloadForNewReleaseV535 = version => {
+  if (Number(version || 0) <= RELEASE_EPOCH_V535) return false;
   try {
-    if (sessionStorage.getItem(releaseReloadKeyV534)) return false;
-    sessionStorage.setItem(releaseReloadKeyV534, String(version));
+    if (sessionStorage.getItem(releaseReloadKeyV535)) return false;
+    sessionStorage.setItem(releaseReloadKeyV535, String(version));
   } catch {}
   location.reload();
   return true;
@@ -397,7 +420,7 @@ const reloadForNewReleaseV534 = version => {
 navigator.serviceWorker?.addEventListener('message', event => {
   if (event.data?.type === 'DIVINA_RELEASE_READY') {
     document.documentElement.dataset.releaseReady = String(event.data.version || 'unknown');
-    reloadForNewReleaseV534(event.data.version);
+    reloadForNewReleaseV535(event.data.version);
     return;
   }
   if (event.data?.type !== 'divina-notification-open') return;
@@ -407,15 +430,15 @@ navigator.serviceWorker?.addEventListener('message', event => {
   }
 });
 
-if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV534) {
-  window.__divinaSWBootstrapV534 = true;
+if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV535) {
+  window.__divinaSWBootstrapV535 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=534', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=535', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v534';
+        document.documentElement.dataset.releaseEpoch = 'v535';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V534 registrado');
+        console.info('[Divina] PWA V535 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -440,6 +463,8 @@ window.orbe = {
   identity:identityRights,
   responsive:responsiveEnchantment,
   qa:qaSupreme,
+  truth:worldTruth,
+  fluidity:orbFluidNavigation,
   observatory:null,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -885,6 +910,43 @@ window.divinaQaSupremeReleaseV534 = Object.freeze({
   sol:false
 });
 
+window.divinaWorldTruthReleaseV535 = Object.freeze({
+  version:535,
+  macroStage:'1-of-14',
+  title:'Fonte de Verdade e Registro Vivo',
+  core:worldTruth,
+  registry:worldTruth?.registry || null,
+  audit:() => worldTruth?.audit?.() || null,
+  status:() => worldTruth?.status?.() || null,
+  routeCount:17,
+  oneCanonicalOrb:true,
+  environment:'staging',
+  realBilling:false,
+  productionPublish:false,
+  dnsChanges:false,
+  storeSubmission:false,
+  sol:false
+});
+
+window.divinaOrbFluidNavigationReleaseV535 = Object.freeze({
+  version:535,
+  macroStage:'1-of-14',
+  core:orbFluidNavigation,
+  audit:() => orbFluidNavigation?.audit?.() || null,
+  status:() => orbFluidNavigation?.status?.() || null,
+  singleFlight:true,
+  navigationPrepareBudgetMs:pageLoader.navigationPrepareBudgetMs,
+  mobileUniverseFps:45,
+  routeScrollAnimation:false,
+  independentOrbEngines:0,
+  permanentAnimationLoops:0,
+  privateContentReads:0,
+  apiCalls:0,
+  realBilling:false,
+  productionPublish:false,
+  sol:false
+});
+
 window.divinaOrbV208 = Object.freeze({
   version: 501,
   engine: realityOrb,
@@ -898,6 +960,8 @@ window.divinaOrbV208 = Object.freeze({
   identity:identityRights,
   responsive:responsiveEnchantment,
   qa:qaSupreme,
+  truth:worldTruth,
+  fluidity:orbFluidNavigation,
   miniOrbs:supremeOrb?.projections?.() || [],
   snapshot:() => supremeOrb?.snapshot?.() || orbMotionV207.snapshot()
 });
@@ -914,6 +978,8 @@ window.divinaOrbSupremeV501 = Object.freeze({
   identity:identityRights,
   responsive:responsiveEnchantment,
   qa:qaSupreme,
+  truth:worldTruth,
+  fluidity:orbFluidNavigation,
   navigate:go,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -982,6 +1048,17 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
+        release:'V535',
+        supremePlan:'3.0-universo-vivo',
+        supremePlanMacroStages:14,
+        currentMacroStage:'1-of-14',
+        worldTruth:'v535',
+        worldTruthRoutes:17,
+        orbFluidNavigation:'v535',
+        orbNavigationSingleFlight:true,
+        orbNavigationPrepareBudgetMs:pageLoader.navigationPrepareBudgetMs,
+        mobileUniverseFps:45,
+        routeScrollAnimation:false,
         supremeOrb:'v501',
         orbitalMenu:'v502-v517-tuned-v526-universal-presence',
         tarotLivre:'v517-v521-physical-viewport-lock',
@@ -1283,7 +1360,7 @@ const awaken = async () => {
       })
       .finally(() => {
         // PWA/offline é resiliente, mas nunca mais é boot crítico.
-        startPwaAfterBootV534();
+        startPwaAfterBootV535();
       });
   } catch (error) {
     document.documentElement.dataset.bootError = 'v326-critical-css';
@@ -1298,7 +1375,7 @@ const awaken = async () => {
     startOrbitalMenuV502();
     startSpreadsSupremeV331();
     startLibraryDeepV332();
-    startPwaAfterBootV534();
+    startPwaAfterBootV535();
   }
 };
 awaken();

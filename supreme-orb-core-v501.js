@@ -1,8 +1,15 @@
-/* DIVINA BRUXA — NÚCLEO DA ORBE SUPREMA V501 · PRESENÇA UNIVERSAL V526
+/* DIVINA BRUXA — NÚCLEO DA ORBE SUPREMA V501 · FLUIDEZ V535
    Uma presença, um estado e um caminho para todos os mundos. O toque ilumina
    o interior sem deslocar o corpo; somente uma viagem de realidade autorizada
    conduz a própria presença visual da Orbe pelo mesmo universo contínuo.
+   V535 elimina filas de toques e usa o Registro Vivo como fonte de rotas.
 */
+
+import {
+  WORLD_SIGNATURES_V535,
+  normalizeWorldRouteV535,
+  worldSignatureV535
+} from './world-truth-registry-v535.js?v=535';
 
 const VERSION = 501;
 const MARK = Symbol.for('divina.supreme.orb.v501');
@@ -17,46 +24,6 @@ const PROJECTION_SELECTOR = [
   '.brand__mark'
 ].join(',');
 
-const ROUTE_ALIASES = Object.freeze({
-  inicio:'home',
-  free:'tarot',
-  'tarot-livre':'tarot',
-  'carta-do-dia':'daily',
-  biblioteca:'library',
-  tiragens:'spreads',
-  escola:'school',
-  diario:'journal',
-  espelho:'journal',
-  whit:'ai',
-  'orbe-ia':'ai',
-  loja:'store',
-  consultas:'consultations',
-  musica:'music',
-  video:'videos',
-  conta:'login',
-  premium:'subscriptions'
-});
-
-const SIGNATURES = Object.freeze({
-  home:{ mode:'home', direction:'in', tone:'origin' },
-  tarot:{ mode:'tarot', direction:'up', tone:'stellar-fire' },
-  daily:{ mode:'daily', direction:'up-right', tone:'dawn' },
-  spreads:{ mode:'spreads', direction:'out', tone:'constellation' },
-  school:{ mode:'school', direction:'right', tone:'knowledge' },
-  library:{ mode:'library', direction:'right', tone:'archive' },
-  journal:{ mode:'journal', direction:'in', tone:'reflection' },
-  ai:{ mode:'ai', direction:'out', tone:'mind' },
-  store:{ mode:'store', direction:'down-right', tone:'portal' },
-  consultations:{ mode:'consultations', direction:'up-right', tone:'portal' },
-  music:{ mode:'music', direction:'left', tone:'wave' },
-  videos:{ mode:'videos', direction:'left', tone:'light' },
-  skins:{ mode:'skins', direction:'around', tone:'metamorphosis' },
-  login:{ mode:'account', direction:'in', tone:'halo' },
-  subscriptions:{ mode:'premium', direction:'up', tone:'crown' },
-  notifications:{ mode:'notifications', direction:'down', tone:'signal' },
-  admin:{ mode:'admin', direction:'in', tone:'guard' }
-});
-
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 const wait = milliseconds => new Promise(resolve => setTimeout(resolve, Math.max(0, milliseconds)));
 const nextFrame = () => new Promise(resolve => requestAnimationFrame(resolve));
@@ -64,12 +31,7 @@ const reducedMotion = () => globalThis.matchMedia?.('(prefers-reduced-motion: re
 const constrained = () => document.documentElement.dataset.performanceTier === 'constrained';
 
 function normalizeRoute(value) {
-  const route = String(value || 'home')
-    .trim()
-    .replace(/^#/, '')
-    .replace(/^\//, '')
-    .toLowerCase();
-  return ROUTE_ALIASES[route] || route || 'home';
+  return normalizeWorldRouteV535(value, 'home');
 }
 
 function currentRoute() {
@@ -82,11 +44,7 @@ function currentRoute() {
 }
 
 function signatureFor(route) {
-  return SIGNATURES[normalizeRoute(route)] || {
-    mode:normalizeRoute(route),
-    direction:'out',
-    tone:'cosmos'
-  };
+  return worldSignatureV535(route);
 }
 
 function emit(type, detail = {}) {
@@ -164,6 +122,8 @@ export class SupremeOrbCoreV501 {
     this.sequence = 0;
     this.pending = Promise.resolve(null);
     this.pendingRoute = null;
+    this.navigationActive = false;
+    this.coalescedNavigations = 0;
     this.pulseTimer = 0;
     this.transitionTimer = 0;
     this.projectionNodes = new Set();
@@ -250,7 +210,9 @@ export class SupremeOrbCoreV501 {
     if (this.projectionLoop || !this.canvas) return;
     const paint = now => {
       if (this.destroyed) return;
-      const fps = reducedMotion() ? 5 : constrained() ? 12 : 24;
+      const navigationCritical = this.navigationActive
+        || document.documentElement.dataset.orbNavigationState === 'active';
+      const fps = navigationCritical ? (constrained() ? 5 : 8) : reducedMotion() ? 5 : constrained() ? 12 : 24;
       if (!document.hidden && now - this.projectionLastPaint >= 1000 / fps) {
         this.projectionLastPaint = now;
         this.paintProjections();
@@ -466,15 +428,40 @@ export class SupremeOrbCoreV501 {
   navigate(rawRoute, options = {}) {
     const route = normalizeRoute(rawRoute);
     if (!this.commit || this.destroyed) return Promise.resolve(null);
-    if (this.pendingRoute === route) return this.pending;
+    if (!this.pendingRoute && route === currentRoute() && options?.force !== true) {
+      this.settleRoute(route, 'already-present-v535');
+      this.pulse('present', { intensity:0.42 });
+      emit('divina:supreme-orb-navigation-reused', { route, source:options?.source || 'orbe-navigation' });
+      // Uma escolha da rota atual dentro do menu fecha o menu sem iniciar uma
+      // segunda viagem nem criar uma fila invisível.
+      if (document.documentElement.dataset.menuState !== 'closed') {
+        return Promise.resolve(this.commit(route));
+      }
+      return Promise.resolve(route);
+    }
+    if (this.pendingRoute) {
+      this.coalescedNavigations += 1;
+      emit('divina:supreme-orb-navigation-coalesced', {
+        activeRoute:this.pendingRoute,
+        requestedRoute:route,
+        source:options?.source || 'orbe-navigation'
+      });
+      return this.pending;
+    }
 
     const serial = ++this.sequence;
     this.pendingRoute = route;
-    this.pending = this.pending
-      .catch(() => null)
+    this.navigationActive = true;
+    document.documentElement.dataset.orbNavigationState = 'active';
+    document.documentElement.dataset.orbNavigationAuthority = 'v535';
+    this.pending = Promise.resolve()
       .then(() => this.performNavigation(route, options, serial))
       .finally(() => {
-        if (this.sequence === serial) this.pendingRoute = null;
+        if (this.sequence === serial) {
+          this.pendingRoute = null;
+          this.navigationActive = false;
+          delete document.documentElement.dataset.orbNavigationState;
+        }
       });
     return this.pending;
   }
@@ -491,7 +478,12 @@ export class SupremeOrbCoreV501 {
 
     this.setMode('transition', { route, from, reason:'navigate' });
     if (!spatialJourneyActive) this.showTransition(signature, serial);
-    emit('divina:supreme-orb-will-navigate', { from, to:route, signature });
+    emit('divina:supreme-orb-will-navigate', {
+      from,
+      to:route,
+      signature,
+      source:options?.source || 'orbe-navigation'
+    });
 
     if (spatialJourneyActive) {
       try {
@@ -662,6 +654,9 @@ export class SupremeOrbCoreV501 {
       projections:this.projections().length,
       retinaProjections:this.projections().filter(node => node.dataset.orbProjectionQuality === 'retina').length,
       projectionCadence:constrained() ? 12 : 24,
+      navigationActive:this.navigationActive,
+      navigationAuthority:'v535-single-flight',
+      coalescedNavigations:this.coalescedNavigations,
       renderer,
       motion,
       journey,
@@ -688,6 +683,8 @@ export class SupremeOrbCoreV501 {
     this.returnHome();
     document.documentElement.removeAttribute('data-supreme-orb');
     document.documentElement.removeAttribute('data-supreme-orb-mode');
+    document.documentElement.removeAttribute('data-orb-navigation-state');
+    document.documentElement.removeAttribute('data-orb-navigation-authority');
     delete globalThis[MARK];
   }
 }
@@ -699,4 +696,4 @@ export function createSupremeOrbCoreV501(options = {}) {
   return core;
 }
 
-export const SUPREME_ORB_SIGNATURES_V501 = SIGNATURES;
+export const SUPREME_ORB_SIGNATURES_V501 = WORLD_SIGNATURES_V535;

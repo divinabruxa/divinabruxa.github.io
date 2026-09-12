@@ -1,4 +1,4 @@
-// DIVINA BRUXA V210 — MENU 2.0 · MOTOR DE ESTADO REVERSÍVEL
+// DIVINA BRUXA V210 — MENU 2.0 · ROTEAMENTO ÚNICO · FLUIDEZ V535
 // Preserva integralmente a geometria/visual V180. Esta versão troca apenas
 // a autoridade interna do Menu Mágico: uma intenção, um estado, uma passagem.
 import { isKnownRoute, normalizeRouteId, routeFromLocation } from './route-registry-v180.js?v=180';
@@ -22,6 +22,7 @@ export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoS
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
   let beforeEnter = typeof initialBeforeEnter === 'function' ? initialBeforeEnter : null;
+  let routeRequest = null;
   let navigationToken = 0;
   let routeSyncQueued = false;
   let lastSyncedLocation = '';
@@ -315,7 +316,9 @@ export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoS
     resetOrbMenu('route-commit');
     document.body.dataset.screen = id;
     setCurrent(id);
-    window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+    // A troca de realidade já possui a viagem da Orbe. Um segundo movimento de
+    // scroll concorrente custa quadros no iPhone e não acrescenta informação.
+    window.scrollTo({ top: 0, behavior: 'auto' });
 
     const current = location.hash.slice(1) || 'home';
     if (push && current !== id) history.pushState({ screen: id }, '', id === 'home' ? './' : `#${id}`);
@@ -329,7 +332,8 @@ export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoS
     html.dataset.routePending = id;
     document.dispatchEvent(new CustomEvent('divina:route-start', { detail: { id } }));
 
-    // A próxima página prepara em paralelo ao fechamento do Menu. A pessoa percebe uma passagem, não duas esperas.
+    // A próxima página prepara em paralelo ao fechamento do Menu. A rota não
+    // aguarda a animação inteira: o commit reassenta o menu no mesmo quadro.
     const preparation = Promise.resolve().then(() => beforeEnter?.(id)).then(
       () => ({ error: null }),
       error => ({ error })
@@ -338,10 +342,11 @@ export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoS
       ? Promise.resolve({ state: MENU_STATE.CLOSED, cancelled: false })
       : transitionOrbMenu(false, { navigating: true });
 
-    const [{ error }] = await Promise.all([preparation, menuClosure]);
+    const { error } = await preparation;
     if (token !== navigationToken) return false;
 
     const committed = commit(id, push);
+    await Promise.resolve(menuClosure).catch(() => null);
     delete html.dataset.routePending;
     document.dispatchEvent(new CustomEvent(error ? 'divina:route-error' : 'divina:route-ready', {
       detail: { id: committed || id, recoverable: Boolean(error) }
@@ -354,7 +359,11 @@ export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoS
     const target = event.target.closest('[data-go]');
     if (!target) return;
     event.preventDefault();
-    go(target.dataset.go).catch(() => {});
+    const request = routeRequest || go;
+    Promise.resolve(request(target.dataset.go, {
+      source:'data-go-v535',
+      target
+    })).catch(() => {});
   });
 
   menuButton?.setAttribute('aria-controls', 'orbMenu');
@@ -404,6 +413,10 @@ export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoS
     beforeEnter = typeof handler === 'function' ? handler : null;
   };
 
+  const setRouteRequest = handler => {
+    routeRequest = typeof handler === 'function' ? handler : null;
+  };
+
   const menuSnapshot = () => Object.freeze({
     state: menuState,
     targetOpen: menuTargetOpen,
@@ -411,5 +424,14 @@ export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoS
   });
 
   if (autoStart) start().catch(() => {});
-  return Object.freeze({ go, start, setBeforeEnter, openOrbMenu, closeOrbMenu, menuSnapshot, MENU_STATE });
+  return Object.freeze({
+    go,
+    start,
+    setBeforeEnter,
+    setRouteRequest,
+    openOrbMenu,
+    closeOrbMenu,
+    menuSnapshot,
+    MENU_STATE
+  });
 }

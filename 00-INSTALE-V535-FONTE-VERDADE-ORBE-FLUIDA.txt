@@ -1,0 +1,51 @@
+DIVINA BRUXA — V535 · FONTE DE VERDADE E ORBE FLUIDA
+PLANO SUPREMO DIVINA BRUXA 3.0 · MACROETAPA 1 DE 14
+
+BASE OBRIGATORIA
+- Instalar somente sobre a V534 ja instalada.
+
+COMO INSTALAR
+1. Extraia o ZIP.
+2. Envie todos os 21 arquivos para a raiz do projeto, mantendo os nomes exatos.
+3. Substitua os arquivos de mesmo nome.
+4. Nao apague nenhum outro arquivo do projeto.
+5. Aguarde a publicacao terminar.
+6. Abra o site online e atualize uma vez para ativar o cache V535.
+7. Em iPhone com a PWA instalada, feche e abra o aplicativo novamente.
+
+O QUE ESTA VERSAO FAZ
+- Cria uma Fonte de Verdade e um Registro Vivo para as 17 realidades.
+- Une assinatura, portal, pouso e presenca da Orbe na mesma definicao.
+- Faz todos os botoes data-go atravessarem a mesma Orbe Suprema.
+- Elimina a fila de toques: existe somente uma viagem ativa por vez.
+- Aquece os arquivos no primeiro gesto sem montar o mundo durante o toque.
+- Limita a espera de preparacao da pagina a 48 ms; 24 ms em perfil restrito.
+- Abre a rota sem esperar a animacao completa de fechamento do Menu.
+- Remove o scroll suave concorrente no momento da troca de realidade.
+- Reduz a viagem tatil nominal de aproximadamente 714 ms para 442 ms.
+- Reduz espelhos e Universo durante a passagem e restaura o orcamento depois.
+- Impede que iPhone seja promovido ao perfil visual maximo por falta de deviceMemory.
+- Renova app, PWA e os quatro caches para V535.
+
+O QUE PERMANECE INTACTO
+- Aparencia, tamanho, recorte, luz, textura e gestos aprovados da Orbe principal.
+- Uma unica Orbe fisica e um unico Universo V524.
+- Toque simples desperta; toque duplo abre Tarot Livre uma unica vez.
+- A materia interna acompanha o dedo; o corpo da Orbe nao se desloca.
+- Home V524, Whit V527, Tarot V528, Sabedoria Viva V529 e continuidade V530-V534.
+- 78 cartas diretas sem repeticao, 6 colunas e Mesa Real 13 x 6.
+- STAGING, billing real, producao, DNS, lojas, submissao e Sol continuam fechados.
+
+VERIFICACAO LOCAL OPCIONAL
+node qa-v535-fonte-verdade-orbe-fluida.mjs
+
+Resultado esperado:
+PASS_WITH_BLOCKERS · 104 PASS · 0 FAIL · 4 BLOCKED
+
+Os quatro bloqueios sao testes humanos obrigatorios em aparelhos fisicos,
+MFA AAL2 da proprietaria, Mesa Real Premium autenticada e backup/restore.
+
+Leia QA-V535-FONTE-VERDADE-ORBE-FLUIDA.md para evidencias e checklist.
+
+PROXIMA MACROETAPA
+- V536 · Barramento de Vitalidade e Gramatica Viva.

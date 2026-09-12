@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — MACROETAPA 4/4 · SKINS, DESEMPENHO E ACABAMENTO V518
+/* DIVINA BRUXA — MACROETAPA 4/4 · SKINS, DESEMPENHO E ACABAMENTO V518 · V535
    Uma autoridade de acabamento para as 30 skins. O Runtime V12 continua sendo
    a autoridade da troca de textura; a conta continua sendo a autoridade de
    propriedade. Esta camada não cria Orbes nem desbloqueia skins: preserva o
@@ -115,7 +115,13 @@ function baseQuality() {
     || (memory > 0 && memory <= 3)
     || (cores > 0 && cores <= 2);
   if (constrained) return 'protected';
-  if ((memory >= 6 || memory === 0) && cores >= 6) return 'cinematic';
+  const touchDevice = Number(navigator.maxTouchPoints || 0) > 0
+    || globalThis.matchMedia?.('(pointer: coarse)').matches === true;
+  // Safari móvel não informa deviceMemory. V518 interpretava esse dado ausente
+  // como potência máxima e promovia iPhones a 60 fps/2.05x. V535 mantém Retina,
+  // mas começa no orçamento equilibrado para preservar gesto e navegação.
+  if (touchDevice || innerWidth < 900) return 'balanced';
+  if (memory >= 6 && cores >= 6) return 'cinematic';
   return 'balanced';
 }
 
@@ -272,9 +278,9 @@ export class SkinPerformanceCoreV518 {
     const universe = globalThis.divinaLivingUniverseV524 || globalThis.divinaLivingUniverseV523 || globalThis.divinaLivingUniverseV522 || globalThis.divinaLivingUniverseV521 || globalThis.divinaLivingUniverseV520 || globalThis.divinaLivingUniverseV519 || globalThis.divinaLivingUniverseV516;
     const mobile = innerWidth < 700;
     const budgets = {
-      cinematic:{ fps:60, scale:mobile ? 2.05 : 1.82 },
-      balanced:{ fps:60, scale:mobile ? 1.82 : 1.68 },
-      protected:{ fps:reducedMotion() ? 24 : 40, scale:1.45 }
+      cinematic:{ fps:60, scale:mobile ? 1.72 : 1.82 },
+      balanced:{ fps:mobile ? 45 : 60, scale:mobile ? 1.58 : 1.68 },
+      protected:{ fps:reducedMotion() ? 20 : mobile ? 30 : 40, scale:mobile ? 1.32 : 1.45 }
     };
     const budget = budgets[this.tier];
     document.documentElement.dataset.visualQuality = this.tier;
@@ -414,6 +420,8 @@ export class SkinPerformanceCoreV518 {
       starLuminanceStable:true,
       retinaSupersampling:true,
       stableRetinaSession:true,
+      mobileStartsCinematic:false,
+      mobileBalancedFps:45,
       adaptivePixelBudget:false,
       adaptiveFrameCadence:true,
       quality:this.tier,
