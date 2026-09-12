@@ -1,0 +1,240 @@
+/* DIVINA BRUXA — ORBOS · PRESENÇA UNIVERSAL V526 */
+
+:root {
+  /* A atmosfera pertence à skin global. O canvas continua vindo da única
+     Orbe física, enquanto névoa, vidro e pouso mudam junto das 30 peles. */
+  --db526-presence-primary: var(--db-skin-accent, var(--db-supreme-violet, #9137ff));
+  --db526-presence-secondary: var(--db-supreme-pink, color-mix(in srgb, var(--db526-presence-primary) 72%, #ff45df));
+  --db526-presence-light: var(--db-skin-light, var(--db-supreme-hot, #fff8ff));
+  --db526-presence-gold: var(--db-supreme-gold, #ffd995);
+  --db526-presence-deep: var(--db518-deep, #090016);
+  --db526-presence-cool: var(--db-supreme-blue, color-mix(in srgb, var(--db526-presence-primary) 66%, #6e8fff));
+}
+
+.db526-orb-landing {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: min(100%, 440px);
+  min-height: clamp(92px, 18vw, 116px);
+  margin: clamp(12px, 3.4vw, 24px) auto clamp(18px, 4.8vw, 34px);
+  isolation: isolate;
+  contain: layout style;
+}
+
+.db526-orb-landing::before,
+.db526-orb-landing::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  mix-blend-mode: screen;
+}
+
+.db526-orb-landing::before {
+  width: min(74vw, 310px);
+  height: clamp(76px, 18vw, 104px);
+  background:
+    radial-gradient(ellipse at 42% 52%, color-mix(in srgb, var(--db526-presence-secondary) 16%, transparent), transparent 62%),
+    radial-gradient(ellipse at 62% 46%, color-mix(in srgb, var(--db526-presence-primary) 18%, transparent), transparent 68%);
+  filter: blur(13px) saturate(1.08);
+  opacity: .58;
+  animation: db526-cloud-breathe 5.8s cubic-bezier(.45,0,.55,1) infinite alternate;
+}
+
+.db526-orb-landing::after {
+  width: clamp(90px, 25vw, 126px);
+  aspect-ratio: 1;
+  background: radial-gradient(circle, color-mix(in srgb, var(--db526-presence-gold) 13%, transparent), transparent 69%);
+  filter: blur(8px);
+  opacity: .52;
+}
+
+.db526-orb-presence {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: clamp(70px, 19vw, 88px);
+  height: clamp(70px, 19vw, 88px);
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 50%;
+  appearance: none;
+  background:
+    radial-gradient(circle at 38% 32%, rgba(255,255,255,.34), transparent 14%),
+    radial-gradient(circle at 52% 56%, var(--db526-presence-secondary), var(--db526-presence-primary) 48%, var(--db526-presence-deep) 76%);
+  color: inherit;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--db526-presence-gold) 44%, transparent),
+    0 0 15px color-mix(in srgb, var(--db526-presence-secondary) 46%, transparent),
+    0 0 38px color-mix(in srgb, var(--db526-presence-primary) 28%, transparent);
+  transition: filter 260ms ease, box-shadow 320ms ease;
+}
+
+.db526-orb-presence::before {
+  content: "";
+  position: absolute;
+  z-index: 5;
+  inset: 3%;
+  border-radius: 50%;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 32% 22%, rgba(255,255,255,.28), transparent 16%),
+    radial-gradient(circle at 72% 78%, transparent 58%, rgba(255,255,255,.09) 78%, transparent 92%);
+}
+
+.db526-orb-presence > .db-supreme-orb-projection-canvas {
+  inset: 1.5%;
+  width: 97%;
+  height: 97%;
+  filter: saturate(1.1) contrast(1.045) brightness(1.025);
+}
+
+.db526-orb-presence__mist,
+.db526-orb-presence__fallback,
+.db526-orb-presence__glass {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.db526-orb-presence__mist {
+  z-index: 1;
+  background:
+    radial-gradient(circle at 62% 36%, color-mix(in srgb, var(--db526-presence-light) 34%, transparent), transparent 18%),
+    conic-gradient(from 18deg, transparent, color-mix(in srgb, var(--db526-presence-secondary) 28%, transparent), transparent 34%, color-mix(in srgb, var(--db526-presence-cool) 24%, transparent), transparent 72%);
+  filter: blur(5px);
+  opacity: .7;
+  animation: db526-inner-drift 9.6s linear infinite;
+}
+
+.db526-orb-presence__fallback {
+  z-index: 0;
+  inset: 8%;
+  background: radial-gradient(circle at 48% 54%, var(--db526-presence-light) 0 3%, var(--db526-presence-secondary) 14%, var(--db526-presence-primary) 48%, transparent 72%);
+  filter: blur(2px);
+  opacity: .72;
+}
+
+.db526-orb-presence__glass {
+  z-index: 4;
+  box-sizing: border-box;
+  border: 1px solid color-mix(in srgb, var(--db526-presence-gold) 50%, white 12%);
+  background: radial-gradient(circle at 30% 18%, rgba(255,255,255,.2), transparent 17%);
+  box-shadow: inset 0 0 9px rgba(255,255,255,.12);
+}
+
+.db526-orb-presence--existing {
+  width: clamp(70px, 19vw, 88px) !important;
+  height: clamp(70px, 19vw, 88px) !important;
+  margin: clamp(12px, 3vw, 20px) auto !important;
+}
+
+.db526-orb-presence:focus-visible {
+  outline: 2px solid var(--db526-presence-light);
+  outline-offset: 5px;
+  box-shadow:
+    0 0 0 6px color-mix(in srgb, var(--db526-presence-primary) 26%, transparent),
+    0 0 28px color-mix(in srgb, var(--db526-presence-secondary) 56%, transparent);
+}
+
+.db526-orb-presence.is-current {
+  animation: db526-presence-breathe 4.9s cubic-bezier(.45,0,.55,1) infinite alternate;
+}
+
+.db526-orb-presence.is-awake,
+.db526-orb-presence.is-arriving {
+  filter: brightness(1.11) saturate(1.12);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--db526-presence-gold) 72%, transparent),
+    0 0 24px color-mix(in srgb, var(--db526-presence-secondary) 72%, transparent),
+    0 0 58px color-mix(in srgb, var(--db526-presence-primary) 48%, transparent);
+}
+
+.db526-orb-presence.is-awake::after,
+.db526-orb-presence.is-arriving::after {
+  content: "";
+  position: absolute;
+  z-index: 6;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, color-mix(in srgb, var(--db526-presence-light) 54%, transparent), transparent 64%);
+  animation: db526-soft-bloom 680ms ease-out both;
+}
+
+.db526-orb-presence.is-arriving::after {
+  animation-duration: 920ms;
+}
+
+.db526-orb-presence-live {
+  position: fixed !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+}
+
+@keyframes db526-cloud-breathe {
+  from { transform: translate(-52%, -50%) scale(.94,.88); opacity: .40; }
+  to { transform: translate(-48%, -50%) scale(1.08,1.03); opacity: .67; }
+}
+
+@keyframes db526-inner-drift {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes db526-presence-breathe {
+  from { filter: brightness(.985) saturate(1.01); box-shadow: 0 0 0 1px color-mix(in srgb, var(--db526-presence-gold) 38%, transparent), 0 0 14px color-mix(in srgb, var(--db526-presence-secondary) 40%, transparent), 0 0 32px color-mix(in srgb, var(--db526-presence-primary) 24%, transparent); }
+  to { filter: brightness(1.035) saturate(1.06); box-shadow: 0 0 0 1px color-mix(in srgb, var(--db526-presence-gold) 52%, transparent), 0 0 20px color-mix(in srgb, var(--db526-presence-secondary) 52%, transparent), 0 0 44px color-mix(in srgb, var(--db526-presence-primary) 34%, transparent); }
+}
+
+@keyframes db526-soft-bloom {
+  0% { opacity: 0; transform: scale(.72); }
+  28% { opacity: .92; }
+  100% { opacity: 0; transform: scale(1.46); }
+}
+
+html[data-performance-tier="constrained"] .db526-orb-landing::before {
+  filter: blur(10px);
+  animation-duration: 7.2s;
+}
+
+html[data-performance-tier="constrained"] .db526-orb-presence__mist {
+  animation-duration: 14s;
+}
+
+@media (max-width: 520px) {
+  .db526-orb-landing {
+    width: 100%;
+    min-height: 92px;
+    margin-block: 10px 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .db526-orb-landing::before,
+  .db526-orb-presence,
+  .db526-orb-presence__mist,
+  .db526-orb-presence.is-awake::after,
+  .db526-orb-presence.is-arriving::after {
+    animation: none !important;
+    transition-duration: 80ms !important;
+  }
+}

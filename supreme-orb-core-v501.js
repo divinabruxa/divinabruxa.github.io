@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — NÚCLEO DA ORBE SUPREMA V501 · ORBOS iOS V525
+/* DIVINA BRUXA — NÚCLEO DA ORBE SUPREMA V501 · PRESENÇA UNIVERSAL V526
    Uma presença, um estado e um caminho para todos os mundos. O toque ilumina
    o interior sem deslocar o corpo; somente uma viagem de realidade autorizada
    conduz a própria presença visual da Orbe pelo mesmo universo contínuo.
@@ -250,7 +250,7 @@ export class SupremeOrbCoreV501 {
     if (this.projectionLoop || !this.canvas) return;
     const paint = now => {
       if (this.destroyed) return;
-      const fps = reducedMotion() ? 5 : constrained() ? 10 : 18;
+      const fps = reducedMotion() ? 5 : constrained() ? 12 : 24;
       if (!document.hidden && now - this.projectionLastPaint >= 1000 / fps) {
         this.projectionLastPaint = now;
         this.paintProjections();
@@ -262,14 +262,20 @@ export class SupremeOrbCoreV501 {
 
   paintProjections() {
     if (!this.canvas?.width || !this.canvas?.height) return;
-    const ratio = Math.min(globalThis.devicePixelRatio || 1, constrained() ? 1 : 1.35);
+    const deviceRatio = globalThis.devicePixelRatio || 1;
+    const viewportWidth = document.documentElement.clientWidth || innerWidth;
+    const viewportHeight = document.documentElement.clientHeight || innerHeight;
     for (const node of this.projections()) {
       const mirror = node.querySelector?.(':scope > canvas.db-supreme-orb-projection-canvas');
       const context = this.projectionContexts.get(mirror);
       const rect = node.getBoundingClientRect?.();
       if (!mirror || !context || !rect?.width || !rect?.height) continue;
-      const width = Math.max(2, Math.round(rect.width * ratio));
-      const height = Math.max(2, Math.round(rect.height * ratio));
+      if (rect.bottom < -4 || rect.right < -4 || rect.top > viewportHeight + 4 || rect.left > viewportWidth + 4) continue;
+      const retina = node.dataset.orbProjectionQuality === 'retina';
+      const ratio = Math.min(deviceRatio, retina ? (constrained() ? 1.75 : 2.25) : (constrained() ? 1 : 1.5));
+      const maximum = retina ? (constrained() ? 224 : 288) : 220;
+      const width = Math.max(2, Math.min(maximum, Math.round(rect.width * ratio)));
+      const height = Math.max(2, Math.min(maximum, Math.round(rect.height * ratio)));
       if (mirror.width !== width || mirror.height !== height) {
         mirror.width = width;
         mirror.height = height;
@@ -278,6 +284,7 @@ export class SupremeOrbCoreV501 {
         context.clearRect(0, 0, width, height);
         context.drawImage(this.canvas, 0, 0, width, height);
         node.dataset.orbProjectionLive = 'true';
+        node.dataset.orbProjectionDensity = retina ? 'retina-v526' : 'balanced-v526';
       } catch {
         delete node.dataset.orbProjectionLive;
       }
@@ -653,6 +660,8 @@ export class SupremeOrbCoreV501 {
       livingOrbConnected:Boolean(this.orb?.isConnected),
       claimed:Boolean(this.claimedHost),
       projections:this.projections().length,
+      retinaProjections:this.projections().filter(node => node.dataset.orbProjectionQuality === 'retina').length,
+      projectionCadence:constrained() ? 12 : 24,
       renderer,
       motion,
       journey,

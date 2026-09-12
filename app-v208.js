@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — CORE iOS WHIT SUPREMA · MACROETAPA 1/10 · ORBOS V525
-   A única Orbe V501 permanece ancorada ao toque e viaja apenas ao escolher uma
+/* DIVINA BRUXA — CORE iOS WHIT SUPREMA · MACROETAPA 2/10 · PRESENÇA V526
+   A única Orbe V501 viaja pelo OrbOS V525 e agora possui pousos Retina em cada
    realidade. O universo V524, a Chama V516 e o Tarot V517/V521 seguem íntegros. */
 
 import { CONFIG } from './config-v200.js?v=200';
@@ -7,8 +7,9 @@ import { installRuntimeV12 } from './runtime-v12.js?v=152';
 import { createNavigation } from './navigation.js?v=211-recovery1';
 import { orbMotionV207 } from './orb-motion-core-v207.js?v=207';
 import { RealityOrbEngine } from './orb-engine-v208.js?v=208';
-import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=525-orbos-ios-journey';
+import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=526-universal-presence-retina';
 import { createOrbIOSJourneyCoreV525 } from './orb-ios-journey-core-v525.js?v=525';
+import { createOrbUniversalPresenceV526 } from './orb-universal-presence-v526.js?v=526';
 import { installRealityLifecycleV511 } from './reality-lifecycle-v511.js?v=511';
 import { createLivingUniverseV524 } from './living-universe-core-v524.js?v=524-tactile-skin-cosmos';
 import { installSkinPerformanceCoreV518 } from './skin-performance-core-v518.js?v=524-tactile-skin-bridge';
@@ -294,6 +295,14 @@ const orbIOSJourney = safely('OrbOS iOS · Viagem Espacial V525', () =>
 );
 supremeOrb?.setJourneyEngine?.(orbIOSJourney);
 
+const orbUniversalPresence = safely('OrbOS · Presença Universal V526', () =>
+  createOrbUniversalPresenceV526({
+    core:supremeOrb,
+    universe:livingUniverse,
+    journey:orbIOSJourney
+  })
+);
+
 const realityLifecycle = safely('Motor Universal das Realidades V511', () =>
   installRealityLifecycleV511({ core:supremeOrb })
 );
@@ -313,13 +322,13 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V525 = 525;
-const releaseReloadKeyV525 = `divina-release-reload-${RELEASE_EPOCH_V525}`;
-const reloadForNewReleaseV525 = version => {
-  if (Number(version || 0) <= RELEASE_EPOCH_V525) return false;
+const RELEASE_EPOCH_V526 = 526;
+const releaseReloadKeyV526 = `divina-release-reload-${RELEASE_EPOCH_V526}`;
+const reloadForNewReleaseV526 = version => {
+  if (Number(version || 0) <= RELEASE_EPOCH_V526) return false;
   try {
-    if (sessionStorage.getItem(releaseReloadKeyV525)) return false;
-    sessionStorage.setItem(releaseReloadKeyV525, String(version));
+    if (sessionStorage.getItem(releaseReloadKeyV526)) return false;
+    sessionStorage.setItem(releaseReloadKeyV526, String(version));
   } catch {}
   location.reload();
   return true;
@@ -328,7 +337,7 @@ const reloadForNewReleaseV525 = version => {
 navigator.serviceWorker?.addEventListener('message', event => {
   if (event.data?.type === 'DIVINA_RELEASE_READY') {
     document.documentElement.dataset.releaseReady = String(event.data.version || 'unknown');
-    reloadForNewReleaseV525(event.data.version);
+    reloadForNewReleaseV526(event.data.version);
     return;
   }
   if (event.data?.type !== 'divina-notification-open') return;
@@ -338,15 +347,15 @@ navigator.serviceWorker?.addEventListener('message', event => {
   }
 });
 
-if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV525) {
-  window.__divinaSWBootstrapV525 = true;
+if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV526) {
+  window.__divinaSWBootstrapV526 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=525', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=526', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v525';
+        document.documentElement.dataset.releaseEpoch = 'v526';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V525 registrado');
+        console.info('[Divina] PWA V526 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -363,6 +372,7 @@ window.orbe = {
   universe:livingUniverse,
   supreme:supremeOrb,
   journey:orbIOSJourney,
+  presence:orbUniversalPresence,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
   returnHome:() => supremeOrb?.returnHome?.(),
@@ -608,6 +618,7 @@ window.divinaOrbV208 = Object.freeze({
   engine: realityOrb,
   supreme:supremeOrb,
   journey:orbIOSJourney,
+  presence:orbUniversalPresence,
   miniOrbs:supremeOrb?.projections?.() || [],
   snapshot:() => supremeOrb?.snapshot?.() || orbMotionV207.snapshot()
 });
@@ -616,6 +627,7 @@ window.divinaOrbSupremeV501 = Object.freeze({
   version:501,
   core:supremeOrb,
   journey:orbIOSJourney,
+  presence:orbUniversalPresence,
   navigate:go,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -628,6 +640,17 @@ window.divinaOrbSupremeV501 = Object.freeze({
 });
 
 window.divinaRealityLifecycleV511 = realityLifecycle;
+
+window.divinaOrbUniversalPresenceV526 = Object.freeze({
+  version:526,
+  engine:orbUniversalPresence,
+  status:() => orbUniversalPresence?.status?.() || null,
+  onePhysicalOrb:true,
+  independentOrbEngines:0,
+  dedicatedLandingRoutes:15,
+  retinaProjection:true,
+  webVibration:false
+});
 
 const waitForCoreStyles = () => new Promise((resolve, reject) => {
   const link = document.getElementById('divinaCoreStyles');
@@ -674,12 +697,21 @@ const awaken = async () => {
         recovery:'v326',
         bootFirst:true,
         supremeOrb:'v501',
-        orbitalMenu:'v502-v517-tuned-v525-orbos-ios',
+        orbitalMenu:'v502-v517-tuned-v526-universal-presence',
         tarotLivre:'v517-v521-physical-viewport-lock',
         dailyWorld:'v509',
         realityLifecycle:'v511',
         transitionAuthority:'supreme-orb-v501-plus-orbos-v525',
         orbOS:'v525',
+        orbUniversalPresence:'v526',
+        orbPresenceMacroStage:'2-of-10',
+        physicalOrbHosts:['home','tarot'],
+        dedicatedOrbLandingRoutes:15,
+        semanticOrbLandings:true,
+        retinaOrbProjections:true,
+        projectionCadence:document.documentElement.dataset.performanceTier === 'constrained' ? 12 : 24,
+        presencePermanentAnimationLoops:0,
+        touchPresenceWakesUniverse:true,
         sharedElementOrbJourney:true,
         spatialJourneyPhases:['lift','flight','arrival','settle'],
         onePhysicalOrbDuringJourney:true,
