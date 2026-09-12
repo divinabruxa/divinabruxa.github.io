@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — EXPERIÊNCIAS, CONTEÚDO E CONVERSÃO · MACROETAPA 6/10 · V530
-   Consultas, Loja Mística, Música e De Frente com o Tarot vivem na mesma Orbe V501.
-   V524–V529, Whit, Tarot, Sabedoria Viva e privacidade permanecem íntegros. */
+/* DIVINA BRUXA — IDENTIDADE, DIREITOS E PERSONALIZAÇÃO · MACROETAPA 7/10 · V531
+   Conta, Premium, Skins e Notificações vivem na mesma Orbe V501.
+   V524–V530, Whit, Tarot, Sabedoria Viva e privacidade permanecem íntegros. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -36,6 +36,7 @@ import { createWhitCoreSupremeV527 } from './whit-core-supreme-v527.js?v=527';
 import { createTarotUniverseCoreV528 } from './tarot-universe-core-v528.js?v=528';
 import { createWisdomUniverseCoreV529 } from './wisdom-universe-core-v529.js?v=529';
 import { createExperienceConversionCoreV530 } from './experience-conversion-core-v530.js?v=530';
+import { createIdentityRightsCoreV531 } from './identity-rights-core-v531.js?v=531';
 
 const $ = selector => document.querySelector(selector);
 
@@ -341,6 +342,15 @@ const experienceConversion = safely('Experiências, Conteúdo e Conversão V530'
   })
 );
 
+const identityRights = safely('Identidade, Direitos e Personalização V531', () =>
+  createIdentityRightsCoreV531({
+    go,
+    orbCore:supremeOrb,
+    orbPresence:orbUniversalPresence,
+    universe:livingUniverse
+  })
+);
+
 const realityLifecycle = safely('Motor Universal das Realidades V511', () =>
   installRealityLifecycleV511({ core:supremeOrb })
 );
@@ -360,13 +370,13 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V530 = 530;
-const releaseReloadKeyV530 = `divina-release-reload-${RELEASE_EPOCH_V530}`;
-const reloadForNewReleaseV530 = version => {
-  if (Number(version || 0) <= RELEASE_EPOCH_V530) return false;
+const RELEASE_EPOCH_V531 = 531;
+const releaseReloadKeyV531 = `divina-release-reload-${RELEASE_EPOCH_V531}`;
+const reloadForNewReleaseV531 = version => {
+  if (Number(version || 0) <= RELEASE_EPOCH_V531) return false;
   try {
-    if (sessionStorage.getItem(releaseReloadKeyV530)) return false;
-    sessionStorage.setItem(releaseReloadKeyV530, String(version));
+    if (sessionStorage.getItem(releaseReloadKeyV531)) return false;
+    sessionStorage.setItem(releaseReloadKeyV531, String(version));
   } catch {}
   location.reload();
   return true;
@@ -375,7 +385,7 @@ const reloadForNewReleaseV530 = version => {
 navigator.serviceWorker?.addEventListener('message', event => {
   if (event.data?.type === 'DIVINA_RELEASE_READY') {
     document.documentElement.dataset.releaseReady = String(event.data.version || 'unknown');
-    reloadForNewReleaseV530(event.data.version);
+    reloadForNewReleaseV531(event.data.version);
     return;
   }
   if (event.data?.type !== 'divina-notification-open') return;
@@ -385,15 +395,15 @@ navigator.serviceWorker?.addEventListener('message', event => {
   }
 });
 
-if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV530) {
-  window.__divinaSWBootstrapV530 = true;
+if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV531) {
+  window.__divinaSWBootstrapV531 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=530', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=531', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v530';
+        document.documentElement.dataset.releaseEpoch = 'v531';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V530 registrado');
+        console.info('[Divina] PWA V531 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -415,6 +425,7 @@ window.orbe = {
   tarot:tarotUniverse,
   wisdom:wisdomUniverse,
   experience:experienceConversion,
+  identity:identityRights,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
   returnHome:() => supremeOrb?.returnHome?.(),
@@ -743,6 +754,38 @@ window.divinaExperienceConversionV530 = Object.freeze({
   permanentAnimationLoops:0
 });
 
+window.divinaIdentityRightsV531 = Object.freeze({
+  version:531,
+  core:identityRights,
+  contract:() => identityRights?.contract?.() || null,
+  audit:() => identityRights?.audit?.() || null,
+  status:() => identityRights?.status?.() || null,
+  travel:route => identityRights?.travel?.(route) || false,
+  worlds:['login','subscriptions','skins','notifications'],
+  authAuthority:'AuthClientV201',
+  accountAuthority:'AccountEngineV201',
+  authSessionStorageOnly:true,
+  entitlementAuthority:'server',
+  frontendEntitlementGrants:false,
+  premiumLifetimePriceCents:19990,
+  premiumIncludesAllSkins:true,
+  premiumIncludesAI:false,
+  aiMonthlyPriceCents:8990,
+  aiCreditsPerCycle:400,
+  skinCount:30,
+  skinsCosmeticOnly:true,
+  notificationMarketingDefault:false,
+  notificationProviderActive:false,
+  realBilling:false,
+  oneCanonicalOrb:true,
+  independentOrbEngines:0,
+  independentUniverseEngines:0,
+  privateContentReads:0,
+  storageReads:0,
+  extraApiCalls:0,
+  permanentAnimationLoops:0
+});
+
 window.divinaOrbV208 = Object.freeze({
   version: 501,
   engine: realityOrb,
@@ -753,6 +796,7 @@ window.divinaOrbV208 = Object.freeze({
   tarot:tarotUniverse,
   wisdom:wisdomUniverse,
   experience:experienceConversion,
+  identity:identityRights,
   miniOrbs:supremeOrb?.projections?.() || [],
   snapshot:() => supremeOrb?.snapshot?.() || orbMotionV207.snapshot()
 });
@@ -766,6 +810,7 @@ window.divinaOrbSupremeV501 = Object.freeze({
   tarot:tarotUniverse,
   wisdom:wisdomUniverse,
   experience:experienceConversion,
+  identity:identityRights,
   navigate:go,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -899,6 +944,38 @@ const awaken = async () => {
         experienceIndependentOrbEngines:0,
         experienceIndependentUniverseEngines:0,
         experiencePermanentAnimationLoops:0,
+        identityRights:'v531',
+        identityMacroStage:'7-of-10',
+        identityWorlds:['login','subscriptions','skins','notifications'],
+        identityNavigation:'same-orb-v525-journey',
+        identityAuthAuthority:'AuthClientV201',
+        identityAccountAuthority:'AccountEngineV201',
+        identityAuthSessionStorageOnly:true,
+        identityAuthLocalStorageTokens:false,
+        identityEntitlementAuthority:'server',
+        identityFrontendEntitlementGrants:false,
+        identityEnvironment:'staging',
+        identityRealBilling:false,
+        identityCheckoutEnabled:false,
+        identityPremiumLifetimePriceCents:19990,
+        identityPremiumIncludesAllSkins:true,
+        identityPremiumIncludesAI:false,
+        identityAiMonthlyPriceCents:8990,
+        identityAiCreditsPerCycle:400,
+        identitySkinCount:30,
+        identityFreeSkin:'classic',
+        identitySkinsCosmeticOnly:true,
+        identityNotificationConsent:'granular-explicit',
+        identityNotificationMarketingDefault:false,
+        identityNotificationQuietHours:'22:00-08:00 America/Sao_Paulo',
+        identityNotificationProviderActive:false,
+        identityPrivateContentReads:0,
+        identityStorageReads:0,
+        identityStorageWrites:0,
+        identityExtraApiCalls:0,
+        identityIndependentOrbEngines:0,
+        identityIndependentUniverseEngines:0,
+        identityPermanentAnimationLoops:0,
         realityLifecycle:'v511',
         transitionAuthority:'supreme-orb-v501-plus-orbos-v525',
         orbOS:'v525',

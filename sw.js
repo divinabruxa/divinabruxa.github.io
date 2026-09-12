@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 2.0 — EXPERIÊNCIAS, CONTEÚDO E CONVERSÃO · MACROETAPA 6/10 · V530
+/* DIVINA BRUXA 2.0 — IDENTIDADE, DIREITOS E PERSONALIZAÇÃO · MACROETAPA 7/10 · V531
    Cache seletivo e versionado. Nunca guarda Auth, Whit generation, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=530;
+const VERSION=531;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v530-shell';
-const CONTENT_CACHE='divina-bruxa-v530-content';
-const IMAGE_CACHE='divina-bruxa-v530-images';
-const OFFLINE_CACHE='divina-bruxa-v530-offline-core';
+const SHELL_CACHE='divina-bruxa-v531-shell';
+const CONTENT_CACHE='divina-bruxa-v531-content';
+const IMAGE_CACHE='divina-bruxa-v531-images';
+const OFFLINE_CACHE='divina-bruxa-v531-offline-core';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE]);
 
 const REQUIRED_SHELL=Object.freeze([
@@ -23,6 +23,7 @@ const REQUIRED_SHELL=Object.freeze([
   './tarot-universe-core-v528.js','./tarot-universe-core-v528.css',
   './wisdom-universe-core-v529.js','./wisdom-universe-core-v529.css',
   './experience-conversion-core-v530.js','./experience-conversion-core-v530.css','./media-policy-v149.js',
+  './identity-rights-core-v531.js','./identity-rights-core-v531.css',
   './reality-lifecycle-v511.js','./reality-lifecycle-v511.css',
   './orbital-menu-v502.js','./orbital-menu-v502.css',
   './living-universe-core-v524.js','./living-universe-core-v524.css',
@@ -44,6 +45,10 @@ const APP_DEPENDENCIES=Object.freeze([
   './media-commerce-world-v320.js','./media-commerce-world-v320.css',
   './auth-client-v6.js','./auth-client-v201.js','./account-engine-v201.js','./account-state-copy-v201.js',
   './account-consultations-world-v319.js','./consultation-engine.js','./consultation-policy.js',
+  './premium-engine-v191.js','./premium-policy-v191.js','./skins-v201.js',
+  './skins-premium-world-v318.js','./skins-premium-world-v318.css',
+  './notification-engine-v150.js','./notification-policy-v150.js',
+  './notifications-world-v321.js','./notifications-world-v321.css',
   './visual-guard-v6.js','./tarot-experience-v6.js','./cosmic-media-v1.js',
   './editorial-metrics-v192.js','./seo-index-policy-v193.js','./privacy-center-v9.js',
   './whit-core-v212.js','./whit-presence-v307.js','./whit-presence-v307.css',
@@ -68,6 +73,7 @@ const REBIRTH_WARM=Object.freeze([
   './tarot-universe-core-v528.js','./tarot-universe-core-v528.css',
   './wisdom-universe-core-v529.js','./wisdom-universe-core-v529.css',
   './experience-conversion-core-v530.js','./experience-conversion-core-v530.css',
+  './identity-rights-core-v531.js','./identity-rights-core-v531.css',
   './living-universe-core-v524.js','./living-universe-core-v524.css','./divina-universe-retina-v523.webp',
   './tarot-livre-orbe-os-v517.js','./tarot-livre-orbe-os-v517.css','./tarot-mesa-bridge-v517.js',
   './library-world-v302.js','./library-world-v302.css',
