@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — SABEDORIA VIVA · MACROETAPA 5/10 · V529
-   Biblioteca, Escola e Diário passam a formar uma experiência orgânica de leitura,
-   guiada pela mesma Orbe V501. Universo V528, Whit V527 e privacidade íntegros. */
+/* DIVINA BRUXA — EXPERIÊNCIAS, CONTEÚDO E CONVERSÃO · MACROETAPA 6/10 · V530
+   Consultas, Loja Mística, Música e De Frente com o Tarot vivem na mesma Orbe V501.
+   V524–V529, Whit, Tarot, Sabedoria Viva e privacidade permanecem íntegros. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -35,6 +35,7 @@ import { createWhitSilentPresenceV316 } from './whit-silent-presence-v316.js?v=3
 import { createWhitCoreSupremeV527 } from './whit-core-supreme-v527.js?v=527';
 import { createTarotUniverseCoreV528 } from './tarot-universe-core-v528.js?v=528';
 import { createWisdomUniverseCoreV529 } from './wisdom-universe-core-v529.js?v=529';
+import { createExperienceConversionCoreV530 } from './experience-conversion-core-v530.js?v=530';
 
 const $ = selector => document.querySelector(selector);
 
@@ -330,6 +331,16 @@ const wisdomUniverse = safely('Sabedoria Viva V529', () =>
   })
 );
 
+const experienceConversion = safely('Experiências, Conteúdo e Conversão V530', () =>
+  createExperienceConversionCoreV530({
+    go,
+    orbCore:supremeOrb,
+    orbPresence:orbUniversalPresence,
+    universe:livingUniverse,
+    config:CONFIG
+  })
+);
+
 const realityLifecycle = safely('Motor Universal das Realidades V511', () =>
   installRealityLifecycleV511({ core:supremeOrb })
 );
@@ -349,13 +360,13 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V529 = 529;
-const releaseReloadKeyV529 = `divina-release-reload-${RELEASE_EPOCH_V529}`;
-const reloadForNewReleaseV529 = version => {
-  if (Number(version || 0) <= RELEASE_EPOCH_V529) return false;
+const RELEASE_EPOCH_V530 = 530;
+const releaseReloadKeyV530 = `divina-release-reload-${RELEASE_EPOCH_V530}`;
+const reloadForNewReleaseV530 = version => {
+  if (Number(version || 0) <= RELEASE_EPOCH_V530) return false;
   try {
-    if (sessionStorage.getItem(releaseReloadKeyV529)) return false;
-    sessionStorage.setItem(releaseReloadKeyV529, String(version));
+    if (sessionStorage.getItem(releaseReloadKeyV530)) return false;
+    sessionStorage.setItem(releaseReloadKeyV530, String(version));
   } catch {}
   location.reload();
   return true;
@@ -364,7 +375,7 @@ const reloadForNewReleaseV529 = version => {
 navigator.serviceWorker?.addEventListener('message', event => {
   if (event.data?.type === 'DIVINA_RELEASE_READY') {
     document.documentElement.dataset.releaseReady = String(event.data.version || 'unknown');
-    reloadForNewReleaseV529(event.data.version);
+    reloadForNewReleaseV530(event.data.version);
     return;
   }
   if (event.data?.type !== 'divina-notification-open') return;
@@ -374,15 +385,15 @@ navigator.serviceWorker?.addEventListener('message', event => {
   }
 });
 
-if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV529) {
-  window.__divinaSWBootstrapV529 = true;
+if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV530) {
+  window.__divinaSWBootstrapV530 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=529', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=530', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v529';
+        document.documentElement.dataset.releaseEpoch = 'v530';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V529 registrado');
+        console.info('[Divina] PWA V530 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -403,6 +414,7 @@ window.orbe = {
   whit:whitSupreme,
   tarot:tarotUniverse,
   wisdom:wisdomUniverse,
+  experience:experienceConversion,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
   returnHome:() => supremeOrb?.returnHome?.(),
@@ -708,6 +720,29 @@ window.divinaWisdomUniverseV529 = Object.freeze({
   permanentAnimationLoops:0
 });
 
+window.divinaExperienceConversionV530 = Object.freeze({
+  version:530,
+  core:experienceConversion,
+  contract:() => experienceConversion?.contract?.() || null,
+  audit:() => experienceConversion?.audit?.() || null,
+  status:() => experienceConversion?.status?.() || null,
+  travel:route => experienceConversion?.travel?.(route) || false,
+  worlds:['consultations','store','music','videos'],
+  consultationServices:4,
+  consultationPriceCents:[50000,50000,30000,15000],
+  realBilling:false,
+  storeCheckoutInternal:false,
+  musicAutoplay:false,
+  musicUuidUsedAsSpotifyId:false,
+  futureMusicFromOwnerAdmin:true,
+  inventedVideos:0,
+  oneCanonicalOrb:true,
+  independentOrbEngines:0,
+  independentUniverseEngines:0,
+  privateContentReads:0,
+  permanentAnimationLoops:0
+});
+
 window.divinaOrbV208 = Object.freeze({
   version: 501,
   engine: realityOrb,
@@ -717,6 +752,7 @@ window.divinaOrbV208 = Object.freeze({
   whit:whitSupreme,
   tarot:tarotUniverse,
   wisdom:wisdomUniverse,
+  experience:experienceConversion,
   miniOrbs:supremeOrb?.projections?.() || [],
   snapshot:() => supremeOrb?.snapshot?.() || orbMotionV207.snapshot()
 });
@@ -729,6 +765,7 @@ window.divinaOrbSupremeV501 = Object.freeze({
   whit:whitSupreme,
   tarot:tarotUniverse,
   wisdom:wisdomUniverse,
+  experience:experienceConversion,
   navigate:go,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -841,6 +878,27 @@ const awaken = async () => {
         wisdomStorageWrites:0,
         wisdomExtraApiCalls:0,
         wisdomPermanentAnimationLoops:0,
+        experienceConversion:'v530',
+        experienceMacroStage:'6-of-10',
+        experienceWorlds:['consultations','store','music','videos'],
+        experienceNavigation:'same-orb-v525-journey',
+        experienceConsultationServices:4,
+        experienceConsultationPriceCents:[50000,50000,30000,15000],
+        experienceConsultationRealBilling:false,
+        experienceStoreCheckoutInternal:false,
+        experienceStoreAffiliateExternal:true,
+        experienceMusicFallbackAlbums:2,
+        experienceMusicPublicSource:'supabase-published-only',
+        experienceMusicUuidUsedAsSpotifyId:false,
+        experienceMusicAutoplay:false,
+        experienceFutureMusicFromOwnerAdmin:true,
+        experienceVideoPublicSource:'supabase-published-only',
+        experienceInventedVideos:0,
+        experienceOwnerMfaRequired:true,
+        experiencePrivateContentReads:0,
+        experienceIndependentOrbEngines:0,
+        experienceIndependentUniverseEngines:0,
+        experiencePermanentAnimationLoops:0,
         realityLifecycle:'v511',
         transitionAuthority:'supreme-orb-v501-plus-orbos-v525',
         orbOS:'v525',
