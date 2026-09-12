@@ -1,7 +1,6 @@
-/* DIVINA BRUXA — NÚCLEO DA ORBE SUPREMA V501
-   Uma presença, um estado e um caminho para todos os mundos.
-   Este módulo não redesenha a Orbe aprovada: ele governa o motor V208 já
-   existente, concentra a navegação e impede a criação de motores paralelos.
+/* DIVINA BRUXA — NÚCLEO DA ORBE SUPREMA V501 · ÂNCORA TÁTIL V524
+   Uma presença, um estado e um caminho para todos os mundos. O toque ilumina
+   o interior e move o universo, mas o corpo físico da Orbe permanece ancorado.
 */
 
 const VERSION = 501;
@@ -413,19 +412,21 @@ export class SupremeOrbCoreV501 {
   pulse(kind = 'pulse', detail = {}) {
     if (this.destroyed) return null;
     const intensity = clamp(Number(detail.intensity ?? (kind === 'press' ? 0.92 : 0.76)), 0, 1.4);
+    const physicalMotion = detail.physicalMotion === true;
     const payload = {
       kind,
       x:clamp(Number(detail.x ?? 0.5), 0, 1),
       y:clamp(Number(detail.y ?? 0.5), 0, 1),
       intensity,
       route:this.route,
-      mode:this.mode
+      mode:this.mode,
+      physicalMotion
     };
     this.energy = Math.max(this.energy, intensity);
 
     this.orb?.dispatchEvent?.(new CustomEvent('db:orb-pulse', { detail:payload }));
     callFirst(this.renderer, ['pulse','impact','energize'], payload);
-    callFirst(this.motion, ['pulse','impact','impulse'], payload);
+    if (physicalMotion) callFirst(this.motion, ['pulse','impact','impulse'], payload);
 
     const html = document.documentElement;
     html.dataset.supremeOrbEnergy = kind;
@@ -603,7 +604,9 @@ export class SupremeOrbCoreV501 {
       projections:this.projections().length,
       renderer,
       motion,
-      oneLivingOrb:true
+      oneLivingOrb:true,
+      physicalTouchMotion:false,
+      universeReceivesTouchEnergy:true
     };
   }
 

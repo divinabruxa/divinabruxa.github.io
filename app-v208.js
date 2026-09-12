@@ -1,16 +1,16 @@
-/* DIVINA BRUXA — UNIVERSO VIVO · MACROETAPA 1/4 · ATMOSFERA VIVA RETINA V523
-   A única Orbe V501 governa um cosmos Retina contínuo em todas as realidades.
-   A Chama Celestial aprovada na V516 e o centro físico V521 permanecem íntegros. */
+/* DIVINA BRUXA — UNIVERSO VIVO · MACROETAPA 1/4 · PELE CÓSMICA TÁTIL V524
+   A única Orbe V501 permanece ancorada enquanto nuvens Retina respondem ao toque.
+   A Chama V516 e o centro físico V521 permanecem íntegros em todas as skins. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
 import { createNavigation } from './navigation.js?v=211-recovery1';
 import { orbMotionV207 } from './orb-motion-core-v207.js?v=207';
 import { RealityOrbEngine } from './orb-engine-v208.js?v=208';
-import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=501';
+import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=524-static-touch-anchor';
 import { installRealityLifecycleV511 } from './reality-lifecycle-v511.js?v=511';
-import { createLivingUniverseV523 } from './living-universe-core-v523.js?v=523-retina-live-cosmos';
-import { installSkinPerformanceCoreV518 } from './skin-performance-core-v518.js?v=523-retina-live-bridge';
+import { createLivingUniverseV524 } from './living-universe-core-v524.js?v=524-tactile-skin-cosmos';
+import { installSkinPerformanceCoreV518 } from './skin-performance-core-v518.js?v=524-tactile-skin-bridge';
 import { AuthClientV201 as AuthClient } from './auth-client-v201.js?v=201';
 import { AccountEngineV201 } from './account-engine-v201.js?v=201';
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=319';
@@ -207,8 +207,14 @@ document.getElementById('divinaLivingUniverseV522')?.remove();
 document.getElementById('divinaLivingUniverseV522Styles')?.remove();
 document.body?.classList.remove('db522-universe-active');
 
-const livingUniverse = safely('Atmosfera Viva Retina V523', () =>
-  createLivingUniverseV523()
+globalThis.divinaLivingUniverseV523?.destroy?.();
+delete globalThis.divinaLivingUniverseV523;
+document.getElementById('divinaLivingUniverseV523')?.remove();
+document.getElementById('divinaLivingUniverseV523Styles')?.remove();
+document.body?.classList.remove('db523-universe-active');
+
+const livingUniverse = safely('Pele Cósmica Tátil V524', () =>
+  createLivingUniverseV524()
 );
 
 const toast = message => {
@@ -301,13 +307,13 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V523 = 523;
-const releaseReloadKeyV523 = `divina-release-reload-${RELEASE_EPOCH_V523}`;
-const reloadForNewReleaseV523 = version => {
-  if (Number(version || 0) <= RELEASE_EPOCH_V523) return false;
+const RELEASE_EPOCH_V524 = 524;
+const releaseReloadKeyV524 = `divina-release-reload-${RELEASE_EPOCH_V524}`;
+const reloadForNewReleaseV524 = version => {
+  if (Number(version || 0) <= RELEASE_EPOCH_V524) return false;
   try {
-    if (sessionStorage.getItem(releaseReloadKeyV523)) return false;
-    sessionStorage.setItem(releaseReloadKeyV523, String(version));
+    if (sessionStorage.getItem(releaseReloadKeyV524)) return false;
+    sessionStorage.setItem(releaseReloadKeyV524, String(version));
   } catch {}
   location.reload();
   return true;
@@ -316,7 +322,7 @@ const reloadForNewReleaseV523 = version => {
 navigator.serviceWorker?.addEventListener('message', event => {
   if (event.data?.type === 'DIVINA_RELEASE_READY') {
     document.documentElement.dataset.releaseReady = String(event.data.version || 'unknown');
-    reloadForNewReleaseV523(event.data.version);
+    reloadForNewReleaseV524(event.data.version);
     return;
   }
   if (event.data?.type !== 'divina-notification-open') return;
@@ -326,15 +332,15 @@ navigator.serviceWorker?.addEventListener('message', event => {
   }
 });
 
-if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV523) {
-  window.__divinaSWBootstrapV523 = true;
+if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV524) {
+  window.__divinaSWBootstrapV524 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=523', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=524', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v523';
+        document.documentElement.dataset.releaseEpoch = 'v524';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V523 registrado');
+        console.info('[Divina] PWA V524 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -657,14 +663,14 @@ const awaken = async () => {
         recovery:'v326',
         bootFirst:true,
         supremeOrb:'v501',
-        orbitalMenu:'v502-v517-tuned-v523-transparent-cosmos',
+        orbitalMenu:'v502-v517-tuned-v524-transparent-cosmos',
         tarotLivre:'v517-v521-physical-viewport-lock',
         dailyWorld:'v509',
         realityLifecycle:'v511',
         transitionAuthority:'supreme-orb-v501',
         loaderProjection:'supreme-orb-v501',
-        fluidity:'v523-retina-live-cosmos-touch-flow',
-        livingUniverse:'v523',
+        fluidity:'v524-retina-tactile-cloud-flow',
+        livingUniverse:'v524',
         retinaTexture:'divina-universe-retina-v523.webp',
         retinaTextureBackedProceduralWorld:true,
         photographicCosmosDetail:true,
@@ -675,6 +681,8 @@ const awaken = async () => {
         orbGravityField:true,
         livingCloudTouchField:true,
         touchWake:true,
+        tactileCloudDisplacement:true,
+        wanderingCloudField:true,
         travelingCloudBreath:true,
         cosmicDustFilaments:true,
         fluidConstellations:2,
@@ -698,7 +706,10 @@ const awaken = async () => {
         synchronizedBlinking:false,
         starLuminanceStable:true,
         skinReactiveUniverse:true,
-        skinPerformance:'v518-v523-connected',
+        selectiveSkinPigment:true,
+        paletteTransition:'continuous',
+        physicalOrbTouchMotion:false,
+        skinPerformance:'v518-v524-connected',
         skinCount:30,
         skinRegistryValid:skinPerformanceCore?.status?.().registryValid === true,
         adaptiveQuality:false,
@@ -708,7 +719,7 @@ const awaken = async () => {
         physicalCardJourney:true,
         decodedBeforeSwap:true,
         unexplainedFlyingCards:false,
-        stellarFire:'v516-approved-inside-v523',
+        stellarFire:'v516-approved-inside-v524',
         trueCelestialFire:true,
         lightningStrokes:false,
         strokedFirePaths:0,
