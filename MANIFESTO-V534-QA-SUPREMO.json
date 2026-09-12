@@ -1,0 +1,55 @@
+{
+  "project": "Divina Bruxa",
+  "release": "V534",
+  "macroStage": "10-of-10",
+  "title": "QA Supremo, Evidencias e Entrega",
+  "createdOn": "2026-09-12",
+  "base": {
+    "release": "V533",
+    "gitCommit": "9aea5d6b16fbd51eb24565a936907be89cd9151d"
+  },
+  "package": {
+    "type": "incremental-flat",
+    "rootTarget": true,
+    "deletions": 0,
+    "payloadFiles": 14,
+    "manifestHashExcluded": true
+  },
+  "qa": {
+    "suite": "DIVINA-BRUXA-QA-SUPREMO-V534",
+    "status": "PASS_WITH_BLOCKERS",
+    "total": 63,
+    "passed": 59,
+    "failed": 0,
+    "blocked": 4,
+    "knownOpenP0": 0,
+    "knownOpenP1Automated": 0,
+    "ownerReviewRequired": true,
+    "ownerReviewState": "blocked-pending-manual-evidence",
+    "productionReady": false
+  },
+  "authorityLocks": {
+    "environment": "staging",
+    "realBilling": false,
+    "productionPublish": false,
+    "dnsChanges": false,
+    "storeSubmission": false,
+    "sol": false
+  },
+  "sha256": {
+    "00-LEIA-PRIMEIRO-V534-QA-SUPREMO.txt": "d707055d55a7aceb2372fc4c9888df118ca7930b856aadd10fb06faa12d8e288",
+    "QA-SUPREMO-V534-EVIDENCIAS.md": "695e6d8439632eba141864bcbc5561f1cda0eda1a200d0abfe10b999e3fa266f",
+    "account-consultations-world-v319.js": "d47bf8e0561cf42200e2a0d51c46d79ee67f1021860f40a882490c5523150a35",
+    "app-v208.js": "c3afdf3ba6ccebaca5b7eeeaa56890e5dbef1b140d071a00a1918cf406cea76b",
+    "index.html": "91f6cb53753cfe2136ef8b18decb91ae189c5f5b960eb472fd4b194a820746c9",
+    "instalar-aplicacion.html": "f0405a5dc44ac75e2be2dd54d9c9d5f9f3eada91a68ebbd8b2dd5347a883bd35",
+    "instalar-app.html": "4a812f848fd6e421afe960cf1b41107945d5e3414e9e3a12c98d6077e908c32b",
+    "install-app.html": "6af0be9a8a3ee7aa12ebcb1ddd5562083629190935f7af845b8efb55a9f8bb95",
+    "page-loader-v1.js": "46e4131a4d02f941162a0b78dbe187f51cef73b248e99e39d8d1068d85922722",
+    "pwa-world-v324.js": "d21718248075d30a8c26395b982a623c7541936098635c245af4ff2f90eeb663",
+    "qa-supreme-core-v534.css": "bebfc89f046391481c5895a0a0a5c4d01bed35947c4e8e4915dff7ddd8bf1310",
+    "qa-supreme-core-v534.js": "d84b5b6f3f953d258b2de389d5f9863002bd75057d1fd55e13714eefb1d7afdb",
+    "qa-v534-supreme.mjs": "963466bd6401bb07ac3869585e9bc999b58bc98aa34e0cd37da69ebb66b8425e",
+    "sw.js": "489d369e1e59b5d5b3a4404e88d65ce4e1c9cbbc2efbdee3b4d912ba474502de"
+  }
+}

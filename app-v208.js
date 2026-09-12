@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — RESPONSIVIDADE E ENCANTAMENTO FINAL · MACROETAPA 9/10 · V533
-   Geometria segura, PWA adaptativo e continuidade para todos os mundos.
-   V524–V532, Whit, Tarot, Sabedoria Viva e privacidade permanecem íntegros. */
+/* DIVINA BRUXA — QA SUPREMO, EVIDENCIAS E ENTREGA · MACROETAPA 10/10 · V534
+   Regressao total sobre a continuidade V524–V533. Whit, Tarot, Sabedoria Viva,
+   a Orbe aprovada e todas as travas de autoridade permanecem integras. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -15,10 +15,10 @@ import { createLivingUniverseV524 } from './living-universe-core-v524.js?v=524-t
 import { installSkinPerformanceCoreV518 } from './skin-performance-core-v518.js?v=524-tactile-skin-bridge';
 import { AuthClientV201 as AuthClient } from './auth-client-v201.js?v=532';
 import { AccountEngineV201 } from './account-engine-v201.js?v=201';
-import { AccountWorldV319 } from './account-consultations-world-v319.js?v=319';
+import { AccountWorldV319 } from './account-consultations-world-v319.js?v=534-consultations-anchor';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=517-ios-composition';
+import { createPageLoader } from './page-loader-v1.js?v=534-consultations-anchor';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -38,6 +38,7 @@ import { createWisdomUniverseCoreV529 } from './wisdom-universe-core-v529.js?v=5
 import { createExperienceConversionCoreV530 } from './experience-conversion-core-v530.js?v=530';
 import { createIdentityRightsCoreV531 } from './identity-rights-core-v531.js?v=531';
 import { createResponsiveEnchantmentCoreV533 } from './responsive-enchantment-core-v533.js?v=533';
+import { createQaSupremeCoreV534 } from './qa-supreme-core-v534.js?v=534';
 
 const $ = selector => document.querySelector(selector);
 
@@ -51,11 +52,11 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV533 = () => import('./pwa-world-v324.js?v=533')
+const startPwaAfterBootV534 = () => import('./pwa-world-v324.js?v=534')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
-    document.documentElement.dataset.pwaError = 'v533';
+    document.documentElement.dataset.pwaError = 'v534';
   });
 
 const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
@@ -183,6 +184,10 @@ const safely = (label, task) => {
 // 30 skins antes que a navegação construa o mapa de mundos.
 const responsiveEnchantment = safely('Responsividade e Encantamento Final V533', () =>
   createResponsiveEnchantmentCoreV533()
+);
+
+const qaSupreme = safely('QA Supremo, Evidencias e Entrega V534', () =>
+  createQaSupremeCoreV534()
 );
 
 globalThis.divinaLivingUniverseV515?.destroy?.();
@@ -377,13 +382,13 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V533 = 533;
-const releaseReloadKeyV533 = `divina-release-reload-${RELEASE_EPOCH_V533}`;
-const reloadForNewReleaseV533 = version => {
-  if (Number(version || 0) <= RELEASE_EPOCH_V533) return false;
+const RELEASE_EPOCH_V534 = 534;
+const releaseReloadKeyV534 = `divina-release-reload-${RELEASE_EPOCH_V534}`;
+const reloadForNewReleaseV534 = version => {
+  if (Number(version || 0) <= RELEASE_EPOCH_V534) return false;
   try {
-    if (sessionStorage.getItem(releaseReloadKeyV533)) return false;
-    sessionStorage.setItem(releaseReloadKeyV533, String(version));
+    if (sessionStorage.getItem(releaseReloadKeyV534)) return false;
+    sessionStorage.setItem(releaseReloadKeyV534, String(version));
   } catch {}
   location.reload();
   return true;
@@ -392,7 +397,7 @@ const reloadForNewReleaseV533 = version => {
 navigator.serviceWorker?.addEventListener('message', event => {
   if (event.data?.type === 'DIVINA_RELEASE_READY') {
     document.documentElement.dataset.releaseReady = String(event.data.version || 'unknown');
-    reloadForNewReleaseV533(event.data.version);
+    reloadForNewReleaseV534(event.data.version);
     return;
   }
   if (event.data?.type !== 'divina-notification-open') return;
@@ -402,15 +407,15 @@ navigator.serviceWorker?.addEventListener('message', event => {
   }
 });
 
-if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV533) {
-  window.__divinaSWBootstrapV533 = true;
+if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV534) {
+  window.__divinaSWBootstrapV534 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=533', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=534', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v533';
+        document.documentElement.dataset.releaseEpoch = 'v534';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V533 registrado');
+        console.info('[Divina] PWA V534 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -434,6 +439,7 @@ window.orbe = {
   experience:experienceConversion,
   identity:identityRights,
   responsive:responsiveEnchantment,
+  qa:qaSupreme,
   observatory:null,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -858,6 +864,27 @@ window.divinaResponsiveEnchantmentReleaseV533 = Object.freeze({
   sol:false
 });
 
+window.divinaQaSupremeReleaseV534 = Object.freeze({
+  version:534,
+  macroStage:'10-of-10',
+  core:qaSupreme,
+  contract:()=>qaSupreme?.status?.().contract||null,
+  audit:reason=>qaSupreme?.audit?.(reason)||null,
+  status:()=>qaSupreme?.status?.()||null,
+  routeCount:17,
+  requiredP0:0,
+  requiredP1:0,
+  ownerReviewRequired:true,
+  ownerReviewState:'blocked-pending-manual-evidence',
+  productionReady:false,
+  environment:'staging',
+  realBilling:false,
+  productionPublish:false,
+  dnsChanges:false,
+  storeSubmission:false,
+  sol:false
+});
+
 window.divinaOrbV208 = Object.freeze({
   version: 501,
   engine: realityOrb,
@@ -870,6 +897,7 @@ window.divinaOrbV208 = Object.freeze({
   experience:experienceConversion,
   identity:identityRights,
   responsive:responsiveEnchantment,
+  qa:qaSupreme,
   miniOrbs:supremeOrb?.projections?.() || [],
   snapshot:() => supremeOrb?.snapshot?.() || orbMotionV207.snapshot()
 });
@@ -885,6 +913,7 @@ window.divinaOrbSupremeV501 = Object.freeze({
   experience:experienceConversion,
   identity:identityRights,
   responsive:responsiveEnchantment,
+  qa:qaSupreme,
   navigate:go,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -1108,6 +1137,28 @@ const awaken = async () => {
         responsiveProductionPublish:false,
         responsiveStoreSubmission:false,
         responsiveSol:false,
+        qaSupreme:'v534',
+        qaSupremeMacroStage:'10-of-10',
+        qaSupremeRouteCount:17,
+        qaSupremeRequiredP0:0,
+        qaSupremeRequiredP1:0,
+        qaSupremeConsultationsAnchor:'sanctuary-parent-sibling',
+        qaSupremeMenuDockMinimumGapPx:8,
+        qaSupremeMinimumTouchTargetPx:44,
+        qaSupremeOwnerReviewRequired:true,
+        qaSupremeOwnerReviewState:'blocked-pending-manual-evidence',
+        qaSupremeProductionReady:false,
+        qaSupremeEnvironment:'staging',
+        qaSupremeRealBilling:false,
+        qaSupremeProductionPublish:false,
+        qaSupremeDnsChanges:false,
+        qaSupremeStoreSubmission:false,
+        qaSupremeSol:false,
+        qaSupremePrivateContentReads:0,
+        qaSupremeStorageReads:0,
+        qaSupremeStorageWrites:0,
+        qaSupremeApiCalls:0,
+        qaSupremePermanentAnimationLoops:0,
         realityLifecycle:'v511',
         transitionAuthority:'supreme-orb-v501-plus-orbos-v525',
         orbOS:'v525',
@@ -1232,7 +1283,7 @@ const awaken = async () => {
       })
       .finally(() => {
         // PWA/offline é resiliente, mas nunca mais é boot crítico.
-        startPwaAfterBootV533();
+        startPwaAfterBootV534();
       });
   } catch (error) {
     document.documentElement.dataset.bootError = 'v326-critical-css';
@@ -1247,7 +1298,7 @@ const awaken = async () => {
     startOrbitalMenuV502();
     startSpreadsSupremeV331();
     startLibraryDeepV332();
-    startPwaAfterBootV533();
+    startPwaAfterBootV534();
   }
 };
 awaken();

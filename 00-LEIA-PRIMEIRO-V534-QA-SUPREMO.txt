@@ -1,0 +1,33 @@
+DIVINA BRUXA — V534 · QA SUPREMO, EVIDENCIAS E ENTREGA
+
+BASE OBRIGATORIA
+- Instalar somente sobre a V533 ja instalada.
+
+COMO INSTALAR
+1. Extraia o ZIP.
+2. Envie todos os arquivos para a raiz do projeto, mantendo os nomes exatos.
+3. Substitua os arquivos de mesmo nome.
+4. Nao apague nenhum outro arquivo do projeto.
+5. Aguarde a publicacao terminar.
+6. Abra o site online e atualize uma vez para ativar o cache V534.
+
+O QUE ESTA VERSAO FAZ
+- Corrige a rota Consultas.
+- Separa a dica do Menu do dock inferior.
+- Reforca alvos tateis essenciais.
+- Instala a observabilidade da Macroetapa 10/10.
+- Renova app, PWA e caches para V534.
+
+O QUE NAO FAZ
+- Nao muda a Home, a Orbe aprovada, Whit, Tarot ou Sabedoria Viva.
+- Nao ativa producao, cobranca real, DNS, lojas ou Sol.
+- Nao declara READY FOR OWNER REVIEW antes dos testes manuais obrigatorios.
+
+VERIFICACAO LOCAL OPCIONAL
+node qa-v534-supreme.mjs
+
+Resultado esperado:
+PASS_WITH_BLOCKERS · 59 PASS · 0 FAIL · 4 BLOCKED
+
+Leia QA-SUPREMO-V534-EVIDENCIAS.md para o checklist completo.
+

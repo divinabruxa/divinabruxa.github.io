@@ -242,7 +242,7 @@ export class ConsultationsWorldV319{
       </p>`;
 
     const sanctuary=this.root.querySelector('.consultation-sanctuary');
-    if(sanctuary?.nextSibling)this.root.insertBefore(world,sanctuary.nextSibling);
+    if(sanctuary?.parentElement)sanctuary.insertAdjacentElement('afterend',world);
     else this.root.prepend(world);
 
     world.querySelector('[data-acw319-start]')?.addEventListener('click',()=>{

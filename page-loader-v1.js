@@ -254,7 +254,7 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       await ensureCommerce();
       const [,module]=await Promise.all([
         ensureStyle('divinaAccountConsultationsRebirthV319','account-consultations-world-v319.css?v=319'),
-        import('./account-consultations-world-v319.js?v=319')
+        import('./account-consultations-world-v319.js?v=534-consultations-anchor')
       ]);
       return new module.ConsultationsWorldV319($('#consultationApp'),config);
     },
@@ -338,7 +338,7 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     consultations:()=>Promise.all([
       import('./commerce-engine.js?v=148'),
       ensureStyle('divinaAccountConsultationsRebirthV319','account-consultations-world-v319.css?v=319'),
-      import('./account-consultations-world-v319.js?v=319')
+      import('./account-consultations-world-v319.js?v=534-consultations-anchor')
     ]),
     store:()=>Promise.all([
       import('./commerce-engine.js?v=148'),

@@ -1,0 +1,48 @@
+/* DIVINA BRUXA — QA SUPREMO, EVIDENCIAS E ENTREGA · MACROETAPA 10/10 · V534
+   Correcoes geometricas estritas. A arte, a Orbe, a Home, o Tarot e as skins
+   aprovadas permanecem intocados. */
+
+:root{
+  --db534-dock-height:78px;
+  --db534-dock-bottom:10px;
+  --db534-menu-dock-gap:10px
+}
+
+/* A instrucao do Menu termina acima do dock fixo, inclusive com safe-area. */
+html[data-qa-supreme="v534"] .db502-menu__hint{
+  bottom:calc(var(--db534-dock-height) + var(--db534-dock-bottom) + var(--db534-menu-dock-gap) + env(safe-area-inset-bottom,0px))!important
+}
+
+@media(max-width:430px){
+  :root{--db534-dock-height:75px}
+}
+
+@media(orientation:landscape) and (max-height:560px){
+  :root{--db534-dock-height:78px;--db534-dock-bottom:6px}
+}
+
+/* Em alturas comprimidas, ocultar a dica evita disputar espaco com os portais. */
+@media(max-height:690px){
+  html[data-qa-supreme="v534"] .db502-menu__hint{display:none!important}
+}
+
+/* CTAs externos e de suporte recebem o alvo WCAG em telas de toque. */
+@media(pointer:coarse){
+  html[data-qa-supreme="v534"] :where(
+    .ec530-music__player a[href],
+    .ec530-video-note>a[href],
+    .media-v149-primary,
+    .media-v149-player>a[href],
+    .media-v149-episode>div>a[href],
+    .media-v149-empty>a[href],
+    .consultation-email-contact,
+    .consultation-boundaries a[href]
+  ){
+    box-sizing:border-box;
+    min-block-size:44px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center
+  }
+}
+
