@@ -136,6 +136,9 @@ export class AdminIntelligenceV322{
     }
 
     const d=this.data;
+    const pulseStamp=`${this.loading}:${this.error}:${d?.generatedAt||''}`;
+    if(pulse.dataset.aiv322Stamp===pulseStamp)return;
+    pulse.dataset.aiv322Stamp=pulseStamp;
     pulse.innerHTML=`
       <div class="aiv322-pulse__identity"><span aria-hidden="true">◈</span><p><small>PULSO OPERACIONAL · V322</small><b>${this.loading?'Lendo o STAGING…':this.error?'Snapshot indisponível':d?'Central conectada':'Pronta para conectar'}</b></p></div>
       <div class="aiv322-pulse__metrics">
@@ -155,6 +158,9 @@ export class AdminIntelligenceV322{
   mountAnalytics(){
     const slot=this.root.querySelector('[data-admin-module-content]');
     if(!slot)return;
+    const viewStamp=`${this.loading}:${this.error}:${this.data?.generatedAt||''}`;
+    if(slot.dataset.aiv322Stamp===viewStamp)return;
+    slot.dataset.aiv322Stamp=viewStamp;
 
     if(this.loading&&!this.data){
       slot.innerHTML=`<section id="${ANALYTICS_ID}" class="aiv322-dashboard"><div class="aiv322-loading"><i></i><b>Lendo métricas agregadas…</b><span>Nenhum texto privado entra neste snapshot.</span></div></section>`;
@@ -233,7 +239,7 @@ export class AdminIntelligenceV322{
               <i><em style="--aiv322-country:${Math.max(.05,integer(item.count)/countryMax)}"></em></i></div>`).join('')}</div>
           </div>`:
           `<div class="aiv322-atlas__empty"><div class="aiv322-globe" aria-hidden="true"><i></i><b>◎</b></div>
-          <p><b>Nenhum país registrado ainda.</b><span>O campo geográfico existe, mas o coletor atual ainda não preenche `country_code`. Região/estado também não está instrumentado. O mapa permanece vazio em vez de inferir localização.</span></p></div>`}
+          <p><b>Nenhum país registrado ainda.</b><span>O campo geográfico existe, mas o coletor atual ainda não preenche country_code. Região/estado também não está instrumentado. O mapa permanece vazio em vez de inferir localização.</span></p></div>`}
       </section>
 
       <div class="aiv322-grid aiv322-grid--ops">

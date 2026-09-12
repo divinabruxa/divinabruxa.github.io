@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 2.0 — IDENTIDADE, DIREITOS E PERSONALIZAÇÃO · MACROETAPA 7/10 · V531
+/* DIVINA BRUXA 2.0 — RESPONSIVIDADE E ENCANTAMENTO FINAL · MACROETAPA 9/10 · V533
    Cache seletivo e versionado. Nunca guarda Auth, Whit generation, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=531;
+const VERSION=533;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v531-shell';
-const CONTENT_CACHE='divina-bruxa-v531-content';
-const IMAGE_CACHE='divina-bruxa-v531-images';
-const OFFLINE_CACHE='divina-bruxa-v531-offline-core';
+const SHELL_CACHE='divina-bruxa-v533-shell';
+const CONTENT_CACHE='divina-bruxa-v533-content';
+const IMAGE_CACHE='divina-bruxa-v533-images';
+const OFFLINE_CACHE='divina-bruxa-v533-offline-core';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE]);
 
 const REQUIRED_SHELL=Object.freeze([
@@ -24,6 +24,7 @@ const REQUIRED_SHELL=Object.freeze([
   './wisdom-universe-core-v529.js','./wisdom-universe-core-v529.css',
   './experience-conversion-core-v530.js','./experience-conversion-core-v530.css','./media-policy-v149.js',
   './identity-rights-core-v531.js','./identity-rights-core-v531.css',
+  './responsive-enchantment-core-v533.js','./responsive-enchantment-core-v533.css',
   './reality-lifecycle-v511.js','./reality-lifecycle-v511.css',
   './orbital-menu-v502.js','./orbital-menu-v502.css',
   './living-universe-core-v524.js','./living-universe-core-v524.css',
@@ -40,6 +41,7 @@ const REQUIRED_SHELL=Object.freeze([
 
 const APP_DEPENDENCIES=Object.freeze([
   './config-v200.js','./commercial-truth-v200.js',
+  './pwa-world-v196.js','./performance-world-v196.js',
   './commerce-engine.js','./store-engine.js','./store-policy.js',
   './media-engine-v149.js','./media-engine-v192.js','./media-policy-v149.js','./editorial-journey-v192.js',
   './media-commerce-world-v320.js','./media-commerce-world-v320.css',
@@ -49,6 +51,8 @@ const APP_DEPENDENCIES=Object.freeze([
   './skins-premium-world-v318.js','./skins-premium-world-v318.css',
   './notification-engine-v150.js','./notification-policy-v150.js',
   './notifications-world-v321.js','./notifications-world-v321.css',
+  './admin-engine.js','./admin-policy.js',
+  './owner-observatory-v532.js','./owner-observatory-v532.css',
   './visual-guard-v6.js','./tarot-experience-v6.js','./cosmic-media-v1.js',
   './editorial-metrics-v192.js','./seo-index-policy-v193.js','./privacy-center-v9.js',
   './whit-core-v212.js','./whit-presence-v307.js','./whit-presence-v307.css',
@@ -85,6 +89,7 @@ const REBIRTH_WARM=Object.freeze([
   './media-commerce-world-v320.js','./media-commerce-world-v320.css',
   './notifications-world-v321.js','./notifications-world-v321.css',
   './admin-intelligence-v322.js','./admin-intelligence-v322.css',
+  './admin-engine.js','./admin-policy.js','./owner-observatory-v532.js','./owner-observatory-v532.css',
   './privacy-center-v323.css'
 ]);
 
@@ -207,7 +212,7 @@ const appShellIsValid=async(url,response)=>{
   const isShell=pathname===new URL('./',self.registration.scope).pathname||pathname.endsWith('/index.html');
   if(!isShell)return true;
   const html=await response.clone().text();
-  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=208/.test(html);
+  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=533/.test(html);
 };
 
 const offlinePageFor=async url=>{

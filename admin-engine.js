@@ -1,12 +1,11 @@
-/* DIVINA BRUXA — PAINEL SUPREMO V150
+/* DIVINA BRUXA — PAINEL SUPREMO V532
    Sessão em cookie seguro, owner verificada e MFA; nenhum desbloqueio local. */
-import { store, escapeHTML } from './storage.js';
-import { ADMIN_POLICY, adminModuleById } from './admin-policy.js?v=144';
+import { escapeHTML } from './storage.js';
+import { ADMIN_POLICY, adminModuleById } from './admin-policy.js?v=532';
 import { CONSULTATION_POLICY } from './consultation-policy.js?v=147';
 import { NOTIFICATION_CATEGORIES, SAFE_DAILY_MESSAGE as SAFE_DAILY_BODY, SAFE_DAILY_TITLE } from './notification-policy-v150.js?v=150';
 
 const safe=value=>escapeHTML(value??'');
-const count=(key)=>{const value=store.get(key);return Array.isArray(value)?value.length:value&&typeof value==='object'?Object.keys(value).length:0;};
 const integer=value=>Number.isFinite(Number(value))?Math.max(0,Math.floor(Number(value))):0;
 const money=value=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(Number(value)||0);
 const dateTime=value=>{try{return new Intl.DateTimeFormat('pt-BR',{dateStyle:'short',timeStyle:'short',timeZone:'America/Sao_Paulo'}).format(new Date(value));}catch{return '—';}};
@@ -129,12 +128,12 @@ export class AdminEngine{
   metrics(){
     const source=this.overview||{};
     return [
-      ['Usuárias ativas',integer(source.activeUsers)],
+      ['Contas registradas',integer(source.registeredAccounts)],
       ['Receita sandbox',money(source.sandboxRevenue)],
       ['Consultas abertas',integer(source.openConsultations)],
-      ['Créditos IA usados',integer(source.aiCreditsUsed)],
+      ['Créditos IA · 30d',integer(source.aiCreditsUsed)],
       ['Cartas oficiais',78],
-      ['Módulos da Escola',17]
+      ['Aulas da Escola',124]
     ];
   }
 
@@ -155,14 +154,13 @@ export class AdminEngine{
     if(id==='security')return this.securityContent();
     if(id==='audit')return this.auditContent();
     const module=adminModuleById(id);
-    return `<section class="admin-module-overview"><div class="admin-module-orb">${module.sigil}</div><h4>${safe(module.name)}</h4><p>${safe(module.description)}</p><dl><div><dt>Ambiente</dt><dd>STAGING</dd></div><div><dt>Acesso</dt><dd>OWNER + MFA</dd></div><div><dt>Dados privados</dt><dd>NÃO EXIBIDOS</dd></div></dl><button type="button" data-load-remote="${module.id}">CARREGAR DADOS SANITIZADOS</button><p data-module-state>Pronto para conexão segura com o backend.</p></section>`;
+    return `<section class="admin-module-overview" data-observatory-awaiting="${module.id}"><div class="admin-module-orb">${module.sigil}</div><h4>Abrindo ${safe(module.name)}…</h4><p>${safe(module.description)}</p><dl><div><dt>Ambiente</dt><dd>STAGING</dd></div><div><dt>Acesso</dt><dd>OWNER + MFA</dd></div><div><dt>Dados privados</dt><dd>NÃO EXIBIDOS</dd></div></dl><p data-module-state>O Observatório está preparando o snapshot sanitizado.</p></section>`;
   }
 
   todayContent(){return `<section class="admin-today"><div class="admin-metric-grid">${this.metrics().map(([label,value])=>`<article><small>${safe(label)}</small><strong>${safe(value)}</strong></article>`).join('')}</div><div class="admin-today-grid"><article><p class="eyebrow">AÇÕES RÁPIDAS</p><h4>Abra o que precisa cuidar.</h4><div>${['consultations','finance','ai','notifications'].map(id=>{const module=adminModuleById(id);return `<button type="button" data-admin-module="${id}"><span>${module.sigil}</span>${safe(module.name)}</button>`;}).join('')}</div></article><article><p class="eyebrow">PRIVACIDADE ATIVA</p><h4>O painel enxerga números, não intimidades.</h4><ul><li>Corpo do Diário oculto</li><li>Prompts e respostas da IA ocultos</li><li>Perguntas de consulta ocultas</li><li>Senhas e segredos nunca retornam</li></ul></article></div></section>`;}
 
   consultationsContent(){
-    const requests=store.get('consultation-requests-v147',store.get('consultation-requests-v143',[])).slice(0,8);
-    return `<section class="admin-consultations"><article class="admin-price-editor"><header><div><p class="eyebrow">PREÇOS FUTUROS</p><h4>Tabela de Consultas</h4><span>Pedidos antigos mantêm o price_snapshot original.</span></div><b>ALTERAÇÃO CRÍTICA · EXIGE MFA</b></header><form data-price-form>${CONSULTATION_POLICY.services.map(service=>{const remoteCents=Number(this.overview?.consultationPrices?.[service.id]);const current=Number.isFinite(remoteCents)&&remoteCents>0?remoteCents/100:service.price;return `<label><span>${safe(service.name)}</span><div><small>R$</small><input name="${safe(service.id)}" type="number" min="1" max="5000" step="1" inputmode="decimal" value="${current}" required></div></label>`;}).join('')}<button type="submit">REVISAR NOVOS PREÇOS</button></form><div data-price-confirm></div></article><article class="admin-request-ledger"><header><div><p class="eyebrow">ESTE APARELHO</p><h4>Pedidos preparados</h4></div><strong>${requests.length}</strong></header>${requests.length?`<div class="admin-request-list">${requests.map(item=>`<span><b>${safe(item.price_snapshot?.serviceName||item.serviceId)}</b><small>${money(item.price_snapshot?.price)} · ${safe(item.status)}</small><em>${safe(String(item.createdAt||'').slice(0,10))}</em></span>`).join('')}</div>`:'<p>Nenhum pedido preparado neste aparelho.</p>'}<small>Nome, contato e pergunta não são exibidos nesta visão.</small></article></section>`;
+    return `<section class="admin-consultations"><div data-v532-consultation-host><article class="admin-request-ledger"><header><div><p class="eyebrow">OPERAÇÃO SANITIZADA</p><h4>Carregando agregados do STAGING…</h4></div><strong>◇</strong></header><p>Nenhum pedido deste aparelho é lido pelo Admin.</p><small>Nome, contato, protocolo e pergunta permanecem invisíveis.</small></article></div><article class="admin-price-editor"><header><div><p class="eyebrow">PREÇOS FUTUROS</p><h4>Tabela de Consultas</h4><span>Pedidos antigos mantêm o price_snapshot original.</span></div><b>ALTERAÇÃO CRÍTICA · EXIGE MFA</b></header><form data-price-form>${CONSULTATION_POLICY.services.map(service=>{const remoteCents=Number(this.overview?.consultationPrices?.[service.id]);const current=Number.isFinite(remoteCents)&&remoteCents>0?remoteCents/100:service.price;return `<label><span>${safe(service.name)}</span><div><small>R$</small><input name="${safe(service.id)}" type="number" min="1" max="5000" step="1" inputmode="decimal" value="${current}" required></div></label>`;}).join('')}<button type="submit">REVISAR NOVOS PREÇOS</button></form><div data-price-confirm></div></article></section>`;
   }
 
   notificationsContent(){
@@ -264,7 +262,7 @@ export class AdminEngine{
     const result=await globalThis.divinaAuth.adminExportDiagnostic();
     if(!result?.ok){this.live('O diagnóstico não pôde ser autorizado.');return;}
     const source=result.body||{};
-    const payload={schema:'divina-bruxa-admin-diagnostic-v145',environment:'staging',generatedAt:new Date().toISOString(),flags:ADMIN_POLICY.flags,privacy:ADMIN_POLICY.privacy,counters:{activeUsers:integer(source.activeUsers),openConsultations:integer(source.openConsultations),auditEvents:integer(source.auditEvents)},modules:ADMIN_POLICY.modules.map(({id,name})=>({id,name}))};
+    const payload={schema:'divina-bruxa-owner-observatory-v532',environment:'staging',generatedAt:new Date().toISOString(),flags:ADMIN_POLICY.flags,privacy:ADMIN_POLICY.privacy,counters:{registeredAccounts:integer(source.registeredAccounts),openConsultations:integer(source.openConsultations),auditEvents:integer(source.auditEvents)},modules:ADMIN_POLICY.modules.map(({id,name})=>({id,name}))};
     const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),anchor=document.createElement('a');
     anchor.href=URL.createObjectURL(blob);anchor.download=`divina-bruxa-diagnostico-${new Date().toISOString().slice(0,10)}.json`;anchor.click();setTimeout(()=>URL.revokeObjectURL(anchor.href),1000);this.live('Diagnóstico sanitizado exportado.');
   }

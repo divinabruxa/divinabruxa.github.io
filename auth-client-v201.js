@@ -1,6 +1,6 @@
 /* DIVINA BRUXA — CLIENTE DE CONTA CONTROLADA V201
    Sessão somente na aba (sessionStorage), nunca em localStorage e sem segredos administrativos. */
-import { AuthClient as LegacyAuthClient } from './auth-client-v6.js?v=151';
+import { AuthClient as LegacyAuthClient } from './auth-client-v6.js?v=532';
 
 const SESSION_KEY = 'divina.auth.session.v201';
 const LEGACY_SESSION_KEYS = Object.freeze(['divina.auth.session.v189']);

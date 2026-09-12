@@ -1,10 +1,11 @@
-/* DIVINA BRUXA — PWA, ACESSIBILIDADE E RESILIÊNCIA V196
+/* DIVINA BRUXA — PWA, ACESSIBILIDADE E RESILIÊNCIA V196 · CORTE V533
    Instalação orientada, continuidade offline, retorno do segundo plano e
    reforços WCAG 2.2 AA sem acrescentar conteúdo permanente à Home da Orbe.
 */
 import { installWebVitalsV196, summarizeLocalWebVitalsV196 } from './performance-world-v196.js?v=196';
+import { createResponsiveEnchantmentCoreV533 } from './responsive-enchantment-core-v533.js?v=533';
 
-const VERSION = 196;
+const VERSION = 533;
 const INSTALL_ROUTES = Object.freeze({ pt: 'instalar-app.html', en: 'install-app.html', es: 'instalar-aplicacion.html' });
 const ONLINE_ONLY_SELECTOR = [
   '[data-requires-online]',
@@ -361,13 +362,14 @@ const setupReturnFromBackground = () => {
 
 const setupServiceWorker = () => {
   if (!('serviceWorker' in navigator) || globalThis.__divinaSWBootstrap) return;
-  const register = () => navigator.serviceWorker.register('./sw.js?v=196')
+  globalThis.__divinaSWBootstrap = 'v533-static';
+  const register = () => navigator.serviceWorker.register('./sw.js?v=533', { updateViaCache: 'none' })
     .then(registration => {
       dispatchEvent(new CustomEvent('divina:pwa-ready', { detail: { scope: registration.scope, version: VERSION } }));
       registration.update().catch(() => {});
       return registration;
     })
-    .catch(error => console.error('[Divina] PWA V196 indisponível', error));
+    .catch(error => console.error('[Divina] PWA V533 indisponível', error));
   if (document.readyState === 'complete') register();
   else addEventListener('load', register, { once: true });
 };
@@ -386,6 +388,7 @@ const guardOnlineOnlyClicks = () => {
 export function initializeWorldPwaV196() {
   if (initialized || typeof document === 'undefined') return false;
   initialized = true;
+  const responsive = createResponsiveEnchantmentCoreV533();
   document.documentElement.dataset.pwaWorld = String(VERSION);
   installWebVitalsV196();
   installAccessibility();
@@ -401,10 +404,12 @@ export function initializeWorldPwaV196() {
   const dynamicActions = new MutationObserver(() => updateOnlineOnlyActions(navigator.onLine));
   dynamicActions.observe(document.body, { childList: true, subtree: true });
   globalThis.divinaPwaV196 = Object.freeze({
+    version: VERSION,
     install: installApp,
     prepareOfflineTarot: () => askWorker('PREPARE_OFFLINE_TAROT'),
     offlineStatus: () => askWorker('GET_OFFLINE_STATUS'),
     webVitals: summarizeLocalWebVitalsV196,
+    responsive,
     cacheAuthorityData: false
   });
   return true;

@@ -1,8 +1,8 @@
-/* DIVINA BRUXA — CENTRAL DA PROPRIETÁRIA V146
+/* DIVINA BRUXA — CENTRAL DA PROPRIETÁRIA V532
    Contrato owner-only. Nenhuma função administrativa confia em papel salvo no navegador. */
 
 export const ADMIN_POLICY=Object.freeze({
-  schemaVersion:'10.2.0',environment:'staging',route:'/admin',ownerOnly:true,
+  schemaVersion:'10.3.0',environment:'staging',route:'/admin',ownerOnly:true,
   access:Object.freeze({verifiedEmailRequired:true,mfaRequired:true,recoveryCodesRequired:true,secureCookieSession:true,clientSideRoleForbidden:true,stepUpForCriticalActions:true,unauthorizedBehavior:'403-without-admin-data'}),
   flags:Object.freeze({productionPublishAuthorized:false,dnsChangesAuthorized:false,realBillingAuthorized:false,storeSubmissionAuthorized:false,orbeAISolEnabled:false}),
   privacy:Object.freeze({journalBodiesVisible:false,journalQuestionsVisible:false,aiPromptsVisible:false,aiResponsesVisible:false,consultationQuestionsVisible:false,passwordsVisible:false,secretsVisible:false,analyticsSanitized:true}),
@@ -13,7 +13,7 @@ export const ADMIN_POLICY=Object.freeze({
     Object.freeze({id:'subscriptions',name:'Premium e Assinaturas',sigil:'♕',group:'Receita',description:'Entitlements, compras, restore, refunds e revogações.'}),
     Object.freeze({id:'ai',name:'Orbe IA e Custos',sigil:'◉',group:'Produto',description:'Créditos, consumo, limites, custos e kill switches.'}),
     Object.freeze({id:'tarot',name:'Tarot',sigil:'▣',group:'Conteúdo',description:'78 cartas, Carta do Dia, tiragens e integridade do baralho.'}),
-    Object.freeze({id:'school',name:'Escola',sigil:'▤',group:'Conteúdo',description:'17 módulos, 78 aulas, progresso e publicação.'}),
+    Object.freeze({id:'school',name:'Escola',sigil:'▤',group:'Conteúdo',description:'17 módulos, 124 aulas, progresso e publicação.'}),
     Object.freeze({id:'consultations',name:'Consultas',sigil:'♙',group:'Operação',description:'Solicitações, status e preços futuros sem expor perguntas.'}),
     Object.freeze({id:'store',name:'Loja',sigil:'⌘',group:'Comércio',description:'Curadoria Amazon, categorias, links e código de associado.'}),
     Object.freeze({id:'skins',name:'Skins',sigil:'◆',group:'Comércio',description:'30 skins, preços, packs, propriedade e restauração.'}),

@@ -11,7 +11,7 @@
   ],
   "background_color": "#05020a",
   "theme_color": "#05020a",
-  "orientation": "portrait-primary",
+  "orientation": "any",
   "lang": "pt-BR",
   "dir": "ltr",
   "prefer_related_applications": false,

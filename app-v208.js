@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — IDENTIDADE, DIREITOS E PERSONALIZAÇÃO · MACROETAPA 7/10 · V531
-   Conta, Premium, Skins e Notificações vivem na mesma Orbe V501.
-   V524–V530, Whit, Tarot, Sabedoria Viva e privacidade permanecem íntegros. */
+/* DIVINA BRUXA — RESPONSIVIDADE E ENCANTAMENTO FINAL · MACROETAPA 9/10 · V533
+   Geometria segura, PWA adaptativo e continuidade para todos os mundos.
+   V524–V532, Whit, Tarot, Sabedoria Viva e privacidade permanecem íntegros. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -13,7 +13,7 @@ import { createOrbUniversalPresenceV526 } from './orb-universal-presence-v526.js
 import { installRealityLifecycleV511 } from './reality-lifecycle-v511.js?v=511';
 import { createLivingUniverseV524 } from './living-universe-core-v524.js?v=524-tactile-skin-cosmos';
 import { installSkinPerformanceCoreV518 } from './skin-performance-core-v518.js?v=524-tactile-skin-bridge';
-import { AuthClientV201 as AuthClient } from './auth-client-v201.js?v=201';
+import { AuthClientV201 as AuthClient } from './auth-client-v201.js?v=532';
 import { AccountEngineV201 } from './account-engine-v201.js?v=201';
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=319';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
@@ -37,6 +37,7 @@ import { createTarotUniverseCoreV528 } from './tarot-universe-core-v528.js?v=528
 import { createWisdomUniverseCoreV529 } from './wisdom-universe-core-v529.js?v=529';
 import { createExperienceConversionCoreV530 } from './experience-conversion-core-v530.js?v=530';
 import { createIdentityRightsCoreV531 } from './identity-rights-core-v531.js?v=531';
+import { createResponsiveEnchantmentCoreV533 } from './responsive-enchantment-core-v533.js?v=533';
 
 const $ = selector => document.querySelector(selector);
 
@@ -50,11 +51,11 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV326 = () => import('./pwa-world-v324.js?v=326-p0')
+const startPwaAfterBootV533 = () => import('./pwa-world-v324.js?v=533')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
-    document.documentElement.dataset.pwaError = 'v326';
+    document.documentElement.dataset.pwaError = 'v533';
   });
 
 const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
@@ -177,6 +178,12 @@ const safely = (label, task) => {
     return null;
   }
 };
+
+// Mede a tela antes de despertar o universo visual e restaura a rota das
+// 30 skins antes que a navegação construa o mapa de mundos.
+const responsiveEnchantment = safely('Responsividade e Encantamento Final V533', () =>
+  createResponsiveEnchantmentCoreV533()
+);
 
 globalThis.divinaLivingUniverseV515?.destroy?.();
 delete globalThis.divinaLivingUniverseV515;
@@ -370,13 +377,13 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V531 = 531;
-const releaseReloadKeyV531 = `divina-release-reload-${RELEASE_EPOCH_V531}`;
-const reloadForNewReleaseV531 = version => {
-  if (Number(version || 0) <= RELEASE_EPOCH_V531) return false;
+const RELEASE_EPOCH_V533 = 533;
+const releaseReloadKeyV533 = `divina-release-reload-${RELEASE_EPOCH_V533}`;
+const reloadForNewReleaseV533 = version => {
+  if (Number(version || 0) <= RELEASE_EPOCH_V533) return false;
   try {
-    if (sessionStorage.getItem(releaseReloadKeyV531)) return false;
-    sessionStorage.setItem(releaseReloadKeyV531, String(version));
+    if (sessionStorage.getItem(releaseReloadKeyV533)) return false;
+    sessionStorage.setItem(releaseReloadKeyV533, String(version));
   } catch {}
   location.reload();
   return true;
@@ -385,7 +392,7 @@ const reloadForNewReleaseV531 = version => {
 navigator.serviceWorker?.addEventListener('message', event => {
   if (event.data?.type === 'DIVINA_RELEASE_READY') {
     document.documentElement.dataset.releaseReady = String(event.data.version || 'unknown');
-    reloadForNewReleaseV531(event.data.version);
+    reloadForNewReleaseV533(event.data.version);
     return;
   }
   if (event.data?.type !== 'divina-notification-open') return;
@@ -395,15 +402,15 @@ navigator.serviceWorker?.addEventListener('message', event => {
   }
 });
 
-if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV531) {
-  window.__divinaSWBootstrapV531 = true;
+if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV533) {
+  window.__divinaSWBootstrapV533 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=531', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=533', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v531';
+        document.documentElement.dataset.releaseEpoch = 'v533';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V531 registrado');
+        console.info('[Divina] PWA V533 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -426,6 +433,8 @@ window.orbe = {
   wisdom:wisdomUniverse,
   experience:experienceConversion,
   identity:identityRights,
+  responsive:responsiveEnchantment,
+  observatory:null,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
   returnHome:() => supremeOrb?.returnHome?.(),
@@ -786,6 +795,69 @@ window.divinaIdentityRightsV531 = Object.freeze({
   permanentAnimationLoops:0
 });
 
+window.divinaOwnerObservatoryReleaseV532 = Object.freeze({
+  version:532,
+  macroStage:'8-of-10',
+  route:'admin',
+  lazyLoaded:true,
+  modules:18,
+  placeholderModules:0,
+  ownerOnly:true,
+  verifiedEmailRequired:true,
+  mfaAal2Required:true,
+  recoveryCodesRequired:true,
+  adminAuthority:'AdminEngineV532 + admin-api-v532',
+  analyticsAuthority:'AdminIntelligenceV322',
+  editorialAuthority:'AdminMediaV320',
+  oneCanonicalOrb:true,
+  independentAuthEngines:0,
+  privateContentReads:0,
+  personalIdentifierReads:0,
+  privateSchemaReads:0,
+  realBilling:false,
+  productionPublish:false,
+  storeSubmission:false,
+  sol:false,
+  status:()=>globalThis.divinaOwnerObservatoryV532?.status?.()||Object.freeze({release:'V532',loaded:false,route:'admin'})
+});
+
+window.divinaResponsiveEnchantmentReleaseV533 = Object.freeze({
+  version:533,
+  macroStage:'9-of-10',
+  core:responsiveEnchantment,
+  contract:()=>responsiveEnchantment?.contract||null,
+  viewport:()=>responsiveEnchantment?.viewport?.()||null,
+  audit:()=>responsiveEnchantment?.audit?.()||null,
+  status:()=>responsiveEnchantment?.status?.()||null,
+  viewportWidths:[320,375,390,430,768,1024,1280,1920],
+  orientations:['portrait','landscape'],
+  minimumTouchTargetPx:44,
+  safeAreas:true,
+  visualViewportAware:true,
+  keyboardAware:true,
+  backNavigationScrollRestore:true,
+  adaptiveParticles:true,
+  pageVisibilityPause:true,
+  reducedMotion:true,
+  highContrast:true,
+  pwaStandalone:true,
+  selectiveOffline:true,
+  skinsRouteRestored:true,
+  skinCount:30,
+  oneCanonicalOrb:true,
+  independentOrbEngines:0,
+  independentUniverseEngines:0,
+  permanentAnimationLoops:0,
+  privateContentReads:0,
+  storageReads:0,
+  storageWrites:0,
+  apiCalls:0,
+  realBilling:false,
+  productionPublish:false,
+  storeSubmission:false,
+  sol:false
+});
+
 window.divinaOrbV208 = Object.freeze({
   version: 501,
   engine: realityOrb,
@@ -797,6 +869,7 @@ window.divinaOrbV208 = Object.freeze({
   wisdom:wisdomUniverse,
   experience:experienceConversion,
   identity:identityRights,
+  responsive:responsiveEnchantment,
   miniOrbs:supremeOrb?.projections?.() || [],
   snapshot:() => supremeOrb?.snapshot?.() || orbMotionV207.snapshot()
 });
@@ -811,6 +884,7 @@ window.divinaOrbSupremeV501 = Object.freeze({
   wisdom:wisdomUniverse,
   experience:experienceConversion,
   identity:identityRights,
+  responsive:responsiveEnchantment,
   navigate:go,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -976,6 +1050,64 @@ const awaken = async () => {
         identityIndependentOrbEngines:0,
         identityIndependentUniverseEngines:0,
         identityPermanentAnimationLoops:0,
+        ownerObservatory:'v532',
+        ownerObservatoryMacroStage:'8-of-10',
+        ownerObservatoryRoute:'admin',
+        ownerObservatoryModules:18,
+        ownerObservatoryPlaceholderModules:0,
+        ownerObservatoryLazyLoaded:true,
+        ownerObservatoryAdminAuthority:'AdminEngineV532 + admin-api-v532',
+        ownerObservatoryAnalyticsAuthority:'AdminIntelligenceV322',
+        ownerObservatoryEditorialAuthority:'AdminMediaV320',
+        ownerObservatoryOwnerOnly:true,
+        ownerObservatoryVerifiedEmailRequired:true,
+        ownerObservatoryMfaAal2Required:true,
+        ownerObservatoryRecoveryCodesRequired:true,
+        ownerObservatoryEnvironment:'staging',
+        ownerObservatoryRealBilling:false,
+        ownerObservatoryProductionPublish:false,
+        ownerObservatoryStoreSubmission:false,
+        ownerObservatorySol:false,
+        ownerObservatoryJournalBodyReads:0,
+        ownerObservatoryConsultationQuestionReads:0,
+        ownerObservatoryAiPromptReads:0,
+        ownerObservatoryAiResponseReads:0,
+        ownerObservatoryPersonalIdentifierReads:0,
+        ownerObservatoryPrivateSchemaReads:0,
+        ownerObservatoryIndependentAuthEngines:0,
+        ownerObservatoryIndependentOrbEngines:0,
+        ownerObservatoryPermanentAnimationLoops:0,
+        responsiveEnchantment:'v533',
+        responsiveMacroStage:'9-of-10',
+        responsiveViewportWidths:[320,375,390,430,768,1024,1280,1920],
+        responsiveOrientations:['portrait','landscape'],
+        responsiveMinimumTouchTargetPx:44,
+        responsiveViewportFit:'cover',
+        responsiveInteractiveWidget:'resizes-content',
+        responsiveVisualViewportAware:true,
+        responsiveKeyboardAware:true,
+        responsiveBackNavigationScrollRestore:true,
+        responsiveAdaptiveParticles:true,
+        responsivePageVisibilityPause:true,
+        responsiveReducedMotion:true,
+        responsiveHighContrast:true,
+        responsiveForcedColors:true,
+        responsivePwaStandalone:true,
+        responsiveSelectiveOffline:true,
+        responsiveSkinsRouteRestored:Boolean(document.getElementById('skinsApp')),
+        responsiveSkinCount:30,
+        responsiveOneCanonicalOrb:true,
+        responsiveIndependentOrbEngines:0,
+        responsiveIndependentUniverseEngines:0,
+        responsivePermanentAnimationLoops:0,
+        responsivePrivateContentReads:0,
+        responsiveStorageReads:0,
+        responsiveStorageWrites:0,
+        responsiveApiCalls:0,
+        responsiveRealBilling:false,
+        responsiveProductionPublish:false,
+        responsiveStoreSubmission:false,
+        responsiveSol:false,
         realityLifecycle:'v511',
         transitionAuthority:'supreme-orb-v501-plus-orbos-v525',
         orbOS:'v525',
@@ -1058,7 +1190,7 @@ const awaken = async () => {
         skinPerformance:'v518-v524-connected',
         skinCount:30,
         skinRegistryValid:skinPerformanceCore?.status?.().registryValid === true,
-        adaptiveQuality:false,
+        adaptiveQuality:true,
         adaptiveFrameCadence:true,
         calmQualityRecovery:true,
         extraAnimationLoops:0,
@@ -1100,7 +1232,7 @@ const awaken = async () => {
       })
       .finally(() => {
         // PWA/offline é resiliente, mas nunca mais é boot crítico.
-        startPwaAfterBootV326();
+        startPwaAfterBootV533();
       });
   } catch (error) {
     document.documentElement.dataset.bootError = 'v326-critical-css';
@@ -1115,7 +1247,7 @@ const awaken = async () => {
     startOrbitalMenuV502();
     startSpreadsSupremeV331();
     startLibraryDeepV332();
-    startPwaAfterBootV326();
+    startPwaAfterBootV533();
   }
 };
 awaken();

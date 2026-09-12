@@ -12,7 +12,7 @@ export class AuthClient {
       return { ok: response.ok, status: response.status, body };
     } catch { return { ok: false, offline: true }; } finally { clearTimeout(timer); }
   }
-  adminRequest(path, options = {}) { return this.request(path, { ...options, headers: { 'x-divina-admin-request': 'v150', ...(options.headers || {}) } }, this.adminBase); }
+  adminRequest(path, options = {}) { return this.request(path, { ...options, headers: { 'x-divina-admin-request': 'v532', ...(options.headers || {}) } }, this.adminBase); }
   register(email, password, name = '') { return this.request('/auth/register', { method: 'POST', body: JSON.stringify({ email, password, name }) }); }
   login(email, password) { return this.request('/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) }); }
   logout() { return this.request('/auth/logout', { method: 'POST', body: '{}' }); }

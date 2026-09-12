@@ -1,0 +1,163 @@
+/* DIVINA BRUXA — RESPONSIVIDADE E ENCANTAMENTO FINAL · V533
+   Geometria segura para 320–1920 px. Preserva integralmente a arte aprovada. */
+
+:root{
+  --db533-safe-top:env(safe-area-inset-top,0px);
+  --db533-safe-right:env(safe-area-inset-right,0px);
+  --db533-safe-bottom:env(safe-area-inset-bottom,0px);
+  --db533-safe-left:env(safe-area-inset-left,0px);
+  --db533-visual-height:100dvh;
+  --db533-layout-height:100dvh;
+  --db533-keyboard-height:0px;
+  --db533-dock-clearance:132px;
+  --db533-particle-scale:1
+}
+
+html[data-responsive-enchantment="v533"]{
+  inline-size:100%;max-inline-size:100%;overflow-x:hidden;overflow-x:clip;
+  color-scheme:dark;-webkit-text-size-adjust:100%;text-size-adjust:100%;
+  scroll-padding-block-start:calc(104px + var(--db533-safe-top));
+  scroll-padding-block-end:calc(var(--db533-dock-clearance) + var(--db533-safe-bottom) + var(--db533-keyboard-height))
+}
+html[data-responsive-enchantment="v533"] body{
+  min-block-size:100svh;min-block-size:var(--db533-layout-height,100dvh);
+  inline-size:100%;max-inline-size:100%;overflow-x:hidden;overflow-x:clip;overscroll-behavior-x:none
+}
+html[data-responsive-enchantment="v533"] :where(main,#app,.screen,.screen>*,.screen [id$="App"],.screen [class*="grid"],.screen [class*="layout"],.screen article,.screen section){min-inline-size:0}
+html[data-responsive-enchantment="v533"] :where(img,video,canvas,svg,iframe){max-inline-size:100%}
+html[data-responsive-enchantment="v533"] :where(h1,h2,h3,h4,h5,h6,p,li,label,dd,dt,button,a,output){overflow-wrap:anywhere}
+html[data-responsive-enchantment="v533"] :where(pre,code){max-inline-size:100%;overflow:auto}
+html[data-responsive-enchantment="v533"] :where(.screen table,.admin-table,.oov532-ledger){max-inline-size:100%}
+
+html[data-responsive-enchantment="v533"] .screen:not(#home){
+  inline-size:min(100%,960px);max-inline-size:960px;
+  padding-inline-start:calc(clamp(12px,3.4vw,24px) + var(--db533-safe-left));
+  padding-inline-end:calc(clamp(12px,3.4vw,24px) + var(--db533-safe-right));
+  padding-block-end:calc(var(--db533-dock-clearance) + var(--db533-safe-bottom))
+}
+html[data-responsive-enchantment="v533"] :where(.app-header,.site-header){
+  padding-inline-start:calc(clamp(12px,3vw,22px) + var(--db533-safe-left));
+  padding-inline-end:calc(clamp(12px,3vw,22px) + var(--db533-safe-right))
+}
+html[data-responsive-enchantment="v533"] .magic-dock{
+  max-inline-size:calc(100% - var(--db533-safe-left) - var(--db533-safe-right) - 20px);
+  bottom:calc(8px + var(--db533-safe-bottom))
+}
+html[data-responsive-enchantment="v533"] :where(dialog,.db-install-dialog,#cardLightbox){
+  max-inline-size:calc(100vw - var(--db533-safe-left) - var(--db533-safe-right) - 16px);
+  max-block-size:calc(var(--db533-visual-height,100dvh) - var(--db533-safe-top) - var(--db533-safe-bottom) - 16px)
+}
+html[data-responsive-enchantment="v533"] :where(.drawer-sheet,.magic-menu-sheet,.db502-menu__sheet){
+  padding-inline-start:calc(clamp(12px,3vw,28px) + var(--db533-safe-left));
+  padding-inline-end:calc(clamp(12px,3vw,28px) + var(--db533-safe-right));
+  padding-block-start:calc(clamp(14px,3vw,26px) + var(--db533-safe-top));
+  padding-block-end:calc(clamp(18px,4vw,32px) + var(--db533-safe-bottom))
+}
+
+html[data-responsive-enchantment="v533"] :where(button,[role="button"],input,textarea,select,summary){touch-action:manipulation}
+html[data-responsive-enchantment="v533"] :where(button,[role="button"],a[href],input,textarea,select,summary):focus-visible{
+  outline:3px solid var(--db-skin-light,var(--db-supreme-gold,#ffe2a0))!important;
+  outline-offset:3px!important
+}
+html[data-responsive-enchantment="v533"] :where(h1,h2,h3,[role="heading"],:target){scroll-margin-block-start:calc(106px + var(--db533-safe-top));scroll-margin-block-end:calc(var(--db533-dock-clearance) + var(--db533-safe-bottom))}
+
+/* O teclado recolhe somente superfícies flutuantes; o conteúdo e o foco permanecem. */
+html[data-responsive-enchantment="v533"][data-keyboard="open"]{scroll-padding-block-end:calc(var(--db533-keyboard-height) + 18px)}
+html[data-responsive-enchantment="v533"][data-keyboard="open"] :where(.magic-dock,.db527-whit-core,.db-network-status){
+  opacity:0!important;pointer-events:none!important
+}
+html[data-responsive-enchantment="v533"][data-keyboard="open"] .magic-dock{transform:translate(-50%,calc(120% + var(--db533-safe-bottom)))!important}
+html[data-responsive-enchantment="v533"][data-keyboard="open"] .screen.active:not(#home){padding-block-end:max(22px,var(--db533-safe-bottom))}
+
+/* Energia adaptativa: menos partículas em aparelhos/rede limitados, sem trocar a Orbe. */
+html[data-responsive-enchantment="v533"][data-motion-profile="constrained"] :where(.cosmos,.ritual-sky,.spw318__aurora){opacity:.27}
+html[data-responsive-enchantment="v533"][data-motion-profile="constrained"] :where(.ritual-sky i:nth-child(n+5),.db525-orb-journey__embers i:nth-child(n+6),.spw318__aurora i:nth-child(n+3)){display:none!important}
+html[data-responsive-enchantment="v533"][data-motion-profile="constrained"] :where(.db525-orb-journey__aura,.spw318__living-orb i){animation-duration:7s!important}
+html[data-responsive-enchantment="v533"][data-scene-paused="true"] *,
+html[data-responsive-enchantment="v533"][data-scene-paused="true"] *::before,
+html[data-responsive-enchantment="v533"][data-scene-paused="true"] *::after{animation-play-state:paused!important}
+
+/* A rota das 30 skins volta a ser uma página completa e responsiva. */
+html[data-responsive-enchantment="v533"] #skins{position:relative;isolation:isolate}
+html[data-responsive-enchantment="v533"] #skins>h2{max-inline-size:820px;text-wrap:balance}
+html[data-responsive-enchantment="v533"] #skins>.lead{max-inline-size:760px;text-wrap:pretty}
+html[data-responsive-enchantment="v533"] #skinsApp{inline-size:100%;margin-block-start:24px}
+html[data-responsive-enchantment="v533"] #skins :where(.skin-grid,.skins-grid,.skin-catalog){grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))}
+
+@media(pointer:coarse){
+  html[data-responsive-enchantment="v533"] :where(button,[role="button"],input:not([type="hidden"]),textarea,select,summary,.primary,.text-button,nav a[href]){min-block-size:44px}
+  html[data-responsive-enchantment="v533"] :where(input:not([type="checkbox"]):not([type="radio"]),textarea,select){font-size:max(16px,1em)}
+}
+
+@media(max-width:430px){
+  :root{--db533-dock-clearance:118px}
+  html[data-responsive-enchantment="v533"] .screen:not(#home){
+    padding-block-start:calc(96px + var(--db533-safe-top));
+    padding-inline-start:calc(11px + var(--db533-safe-left));
+    padding-inline-end:calc(11px + var(--db533-safe-right))
+  }
+  html[data-responsive-enchantment="v533"] .screen:not(#home)>.eyebrow{font-size:clamp(8px,2.7vw,10px);line-height:1.45;letter-spacing:.18em}
+  html[data-responsive-enchantment="v533"] .screen:not(#home)>h2{font-size:clamp(2.05rem,11.5vw,3.25rem);line-height:1;letter-spacing:-.035em;text-wrap:balance}
+  html[data-responsive-enchantment="v533"] .screen:not(#home)>.lead{font-size:clamp(.91rem,4vw,1rem);line-height:1.58;text-wrap:pretty}
+  html[data-responsive-enchantment="v533"] :where(.section-head,.real-table-head,.shop-toolbar,.chapter-head,.media-section-head){flex-wrap:wrap;align-items:flex-start;gap:10px}
+  html[data-responsive-enchantment="v533"] :where(.card-grid,.shop-grid,.service-grid,.plan-grid,.episode-grid,.admin-grid){grid-template-columns:minmax(0,1fr)}
+  html[data-responsive-enchantment="v533"] :where(.panel,.ritual-panel,.feature,.product-card,.service-card,.plan-card){max-inline-size:100%;border-radius:min(24px,7vw)}
+  html[data-responsive-enchantment="v533"] :where(.db-install-nav,.db-install-dialog__top){align-items:flex-start;flex-wrap:wrap}
+  html[data-responsive-enchantment="v533"] :where(.oov532-crown button,.oov532-footer button,.oov532-consultation-pulse footer button,.oov532-state button,.spw318__identity button,.spw318__covenant button){min-block-size:44px}
+}
+
+@media(max-width:350px){
+  :root{--db533-dock-clearance:112px}
+  html[data-responsive-enchantment="v533"] .app-header{padding-inline-start:calc(9px + var(--db533-safe-left));padding-inline-end:calc(9px + var(--db533-safe-right))}
+  html[data-responsive-enchantment="v533"] .brand{gap:7px;max-inline-size:calc(100% - 58px)}
+  html[data-responsive-enchantment="v533"] .brand b{font-size:clamp(11px,4.2vw,15px)}
+  html[data-responsive-enchantment="v533"] .brand small{font-size:6px;letter-spacing:.14em}
+  html[data-responsive-enchantment="v533"] .magic-dock{max-inline-size:calc(100% - var(--db533-safe-left) - var(--db533-safe-right) - 12px);padding-inline:3px}
+  html[data-responsive-enchantment="v533"] .magic-dock small{font-size:6.5px;letter-spacing:0}
+  html[data-responsive-enchantment="v533"] .screen:not(#home){padding-inline-start:calc(8px + var(--db533-safe-left));padding-inline-end:calc(8px + var(--db533-safe-right))}
+}
+
+@media(min-width:768px){
+  html[data-responsive-enchantment="v533"]{scrollbar-gutter:stable}
+  html[data-responsive-enchantment="v533"] #admin{inline-size:min(100%,1120px);max-inline-size:1120px}
+}
+
+@media(min-width:1280px){
+  html[data-responsive-enchantment="v533"] .screen:not(#home):not(#admin){inline-size:min(100%,1040px);max-inline-size:1040px}
+  html[data-responsive-enchantment="v533"] #admin{inline-size:min(100%,1180px);max-inline-size:1180px}
+}
+
+@media(orientation:landscape) and (max-height:560px){
+  :root{--db533-dock-clearance:82px}
+  html[data-responsive-enchantment="v533"]{scroll-padding-block-start:calc(72px + var(--db533-safe-top));scroll-padding-block-end:calc(78px + var(--db533-safe-bottom))}
+  html[data-responsive-enchantment="v533"] .app-header{height:66px;padding-block-start:max(6px,var(--db533-safe-top));padding-block-end:5px}
+  html[data-responsive-enchantment="v533"] .screen:not(#home){padding-block-start:calc(72px + var(--db533-safe-top));padding-block-end:calc(82px + var(--db533-safe-bottom))}
+  html[data-responsive-enchantment="v533"] .magic-dock{height:62px;bottom:calc(4px + var(--db533-safe-bottom));border-radius:24px}
+  html[data-responsive-enchantment="v533"] .magic-dock .mini-orb{max-block-size:58px;max-inline-size:58px}
+  html[data-responsive-enchantment="v533"] :where(.db-install-dialog,dialog,#cardLightbox){max-block-size:calc(var(--db533-visual-height,100dvh) - 12px)}
+  html[data-responsive-enchantment="v533"] :where(.db527-whit-core,.db526-orb-landing){max-block-size:calc(var(--db533-visual-height,100dvh) - var(--db533-safe-top) - var(--db533-safe-bottom) - 18px)}
+}
+
+@media(display-mode:standalone){
+  html[data-responsive-enchantment="v533"] body{min-block-size:100dvh}
+  html[data-responsive-enchantment="v533"] .screen:not(#home){padding-block-start:calc(102px + var(--db533-safe-top));padding-block-end:calc(var(--db533-dock-clearance) + var(--db533-safe-bottom))}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-responsive-enchantment="v533"] *,
+  html[data-responsive-enchantment="v533"] *::before,
+  html[data-responsive-enchantment="v533"] *::after{
+    scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0ms!important
+  }
+  html[data-responsive-enchantment="v533"] :where(.db525-orb-journey__plume,.db525-orb-journey__embers,.ritual-sky,.spw318__aurora){display:none!important}
+}
+
+@media(prefers-contrast:more){
+  html[data-responsive-enchantment="v533"] :where(.panel,.ritual-panel,.feature,.db-install-card,.db-install-offline,.oov532-panel,.skins-world-v318,.premium-world-v318){border-color:currentColor}
+  html[data-responsive-enchantment="v533"] :where(.lead,small,.muted){color:#ded5e2}
+}
+
+@media(forced-colors:active){
+  html[data-responsive-enchantment="v533"] :where(button,[role="button"],input,textarea,select,summary,.panel,.ritual-panel,.feature){forced-color-adjust:auto;border:1px solid CanvasText}
+  html[data-responsive-enchantment="v533"] :where(button,[role="button"],a[href],input,textarea,select,summary):focus-visible{outline:3px solid Highlight!important}
+}
