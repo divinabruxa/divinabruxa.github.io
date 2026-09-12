@@ -1,0 +1,162 @@
+{
+  "release": "V522",
+  "program": "Universo Vivo",
+  "macroStage": "1/4",
+  "name": "Céu Retina Estável — Estrelas Serenas e Nuvens Orgânicas",
+  "baseRequired": "V521",
+  "releaseEpoch": 522,
+  "installation": {
+    "flatZip": true,
+    "target": "repository-root",
+    "replace": [
+      "app-v208.js",
+      "sw.js",
+      "skin-performance-core-v518.js"
+    ],
+    "add": [
+      "living-universe-core-v522.js",
+      "living-universe-core-v522.css"
+    ],
+    "documentation": [
+      "00-INSTALE-V522.txt",
+      "UNIVERSO-VIVO-V522-CONTRACT.json"
+    ]
+  },
+  "diagnosisFromV521Recording": {
+    "sourceDimensions": "512x1108",
+    "sourceFrames": 738,
+    "sourceFps": 30,
+    "observed": [
+      "full-universe-canvas-blackouts",
+      "resolution-recreation-during-viewport-and-quality-changes",
+      "synchronized-high-density-star-pulsation",
+      "soft-pixels-after-dynamic-downscale"
+    ]
+  },
+  "universe": {
+    "engine": "LivingUniverseCoreV522",
+    "staticBackgroundImage": false,
+    "continuousDomCanvases": 1,
+    "continuousAnimationLoops": 1,
+    "renderers": [
+      "webgl1-procedural",
+      "canvas2d-procedural-fallback"
+    ],
+    "retinaSupersampling": true,
+    "stableRetinaSession": true,
+    "adaptivePixelBudgetDuringAnimation": false,
+    "iphoneBalancedRenderDensity": 1.7,
+    "iphone390x844BackingPixels": 951272,
+    "safariHeightOnlyResizeIgnored": true,
+    "preserveDrawingBuffer": true,
+    "immediateDrawAfterPhysicalResize": true,
+    "depthLayers": 3,
+    "proceduralStars": true,
+    "calmStarField": true,
+    "synchronizedBlinking": false,
+    "ordinaryStarLuminance": "constant",
+    "rareGiantThreshold": 0.9965,
+    "rareGiantBreathAmplitude": 0.035,
+    "proceduralNebulae": true,
+    "organicDomainWarpedClouds": true,
+    "cloudFilaments": true,
+    "cloudRibbons": true,
+    "voiceLikeCloudFlow": true,
+    "livingCloudTouchField": true,
+    "touchVelocityFlow": true,
+    "touchInertia": true,
+    "fluidConstellations": 2,
+    "constellationSegments": 11,
+    "constellationTouchRefraction": true,
+    "pointerParallax": true,
+    "scrollParallax": true,
+    "orbGravityField": true,
+    "continuousRouteMorph": true,
+    "routeProfiles": 17,
+    "skinReactive": true,
+    "skinCount": 30,
+    "pausesWhenHidden": true,
+    "contextLossFallback": true
+  },
+  "performance": {
+    "targetFps": {
+      "cinematic": 60,
+      "balanced": 60,
+      "protected": 40,
+      "reducedMotion": 24
+    },
+    "pressurePolicy": "cadence-only-after-first-frame",
+    "pressureCadenceFps": 45,
+    "resolutionResizesDuringAnimation": false,
+    "calmRecovery": true,
+    "constellationRegionCulling": true,
+    "widthAndOrientationResizeDebounceMs": 220,
+    "paletteReadsOutsideFrameLoop": true,
+    "extraAnimationLoops": 0,
+    "shaderBenchmark": {
+      "environment": "EGL-software-780x1688-60-frames",
+      "v521MillisecondsPerFrame": 2.0514,
+      "v522MillisecondsPerFrame": 1.6708,
+      "relativeReductionPercent": 18.55
+    }
+  },
+  "temporalStability": {
+    "metric": "mean-absolute-RGB-difference",
+    "v521Adjacent33ms": 0.137606,
+    "v522Adjacent33ms": 0.021162,
+    "adjacentFrameVariationReductionPercent": 84.62,
+    "v522OrganicMotionAcross20Seconds": 9.174626,
+    "brightPixelRatioAt8Seconds": 0.048973,
+    "brightPixelRatioAt28Seconds": 0.05172
+  },
+  "protectedFlame": {
+    "lineage": "V516-approved",
+    "webglFunctionByteIdenticalToV521": true,
+    "canvasFallbackFunctionByteIdenticalToV521": true,
+    "noiseFunctionByteIdenticalToV521": true,
+    "palette": [
+      "violet",
+      "magenta",
+      "gold"
+    ],
+    "lightningStrokes": false,
+    "whiteBlob": false,
+    "insideUniverseCanvas": true
+  },
+  "preserved": {
+    "tarotV521CssByteIdentical": true,
+    "tarotPhysicalViewportContract": "V521",
+    "supremeOrb": "V501-single-physical-orb",
+    "menu": "V502-V517-tuned",
+    "tarotLivre": "V517",
+    "deckSize": 78,
+    "uprightOnly": true,
+    "noRepeats": true,
+    "gridColumns": 6,
+    "mesaRealTransfer": true,
+    "previousCardNavigation": true,
+    "skins": 30,
+    "skinEntitlementAuthority": "account-server",
+    "whit": "unchanged",
+    "server": "unchanged",
+    "apis": "unchanged",
+    "auth": "unchanged",
+    "billing": "unchanged",
+    "database": "unchanged",
+    "dns": "unchanged"
+  },
+  "validation": {
+    "javascriptSyntax": "passed",
+    "serviceWorkerSyntax": "passed",
+    "cssStructure": "passed",
+    "webgl1ShaderCompileAndLink": "passed",
+    "approvedFlameByteIdentity": "passed",
+    "tarotV521Integrity": "passed",
+    "singleCanvasAndNoStaticImage": "passed",
+    "calmStarTemporalTest": "passed",
+    "organicCloudTemporalTest": "passed",
+    "safariViewportMath390x844": "passed",
+    "flatArchive": "required-before-delivery",
+    "iphoneVisualApproval": "required-after-install"
+  }
+}
