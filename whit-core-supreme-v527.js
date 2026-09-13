@@ -421,29 +421,11 @@ export class WhitCoreSupremeV527 {
   }
 
   observe() {
-    this.domObserver = new MutationObserver(records => {
-      if (!records.some(record => record.type === 'childList')) return;
-      cancelAnimationFrame(this.refreshFrame);
-      this.refreshFrame = requestAnimationFrame(() => {
-        this.refreshFrame = 0;
-        this.refreshSurfaces();
-      });
-    });
-    this.domObserver.observe(document.body, { childList:true, subtree:true });
-
-    this.stateObserver = new MutationObserver(records => {
-      if (!records.some(record => record.attributeName === 'data-whit-silent-state')) return;
-      const silent = document.documentElement.dataset.whitSilentState;
-      if (silent === 'reflecting') this.setState('reflecting', 'silent-presence');
-      if (silent === 'answering') this.setState('answering', 'answer-arrival');
-      if (silent === 'resting' && routeNow() === 'ai' && ['reflecting','answering'].includes(this.state)) {
-        this.setState('aware', 'answer-settled');
-      }
-    });
-    this.stateObserver.observe(document.documentElement, {
-      attributes:true,
-      attributeFilter:['data-whit-silent-state']
-    });
+    // V557: os eventos de rota e de fase já fornecem os pontos exatos de
+    // atualização. Observar toda a árvore duplicava trabalho durante a viagem
+    // da Orbe e durante cada mensagem.
+    this.domObserver = null;
+    this.stateObserver = null;
   }
 
   refreshSurfaces() {
@@ -762,6 +744,7 @@ export class WhitCoreSupremeV527 {
       extraApiCalls:0,
       modelCallsByThisLayer:0,
       permanentAnimationLoops:0,
+      mutationObservers:0,
       audio:false,
       autoplay:false,
       microphone:false,

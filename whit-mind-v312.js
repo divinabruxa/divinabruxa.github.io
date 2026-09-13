@@ -169,6 +169,10 @@ export class WhitMindV312 {
 
     addEventListener('whit:context-receipt', () => this.renderPanel(), { signal });
     addEventListener('whit:memory-changed', () => this.renderPanel(), { signal });
+    addEventListener('whit:local-history-v557', event => {
+      this.messageCount = Number(event.detail?.messages || 0);
+      this.renderPanel();
+    }, { signal });
 
     // Capture happens before AIEngine V190 handles the same submit event.
     // Nothing is prepared if the user has not checked the explicit consent box.
@@ -437,16 +441,10 @@ export class WhitMindV312 {
   }
 
   connectChatObserver() {
-    if (this.chatObserver) return;
     const chat = document.querySelector('#aiApp #chat');
     if (!chat) return;
-    const update = () => {
-      this.messageCount = chat.children?.length || 0;
-      this.renderPanel();
-    };
-    update();
-    this.chatObserver = new MutationObserver(update);
-    this.chatObserver.observe(chat, { childList:true });
+    this.messageCount = chat.querySelectorAll?.('.bubble:not(.ai-welcome)')?.length || 0;
+    this.chatObserver = null;
   }
 
   disconnectChatObserver() {
@@ -506,7 +504,8 @@ export class WhitMindV312 {
       requestSchemaAltered:false,
       generationEnabled:false,
       apiUsed:false,
-      paidApiUsed:false
+      paidApiUsed:false,
+      mutationObservers:0
     });
   }
 

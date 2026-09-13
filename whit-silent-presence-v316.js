@@ -68,6 +68,14 @@ export class WhitSilentPresenceV316 {
     addEventListener('whit:generation-bridge', () => {
       if (routeNow() === 'ai') this.setState('reflecting');
     }, { signal });
+    addEventListener('whit:local-history-v557', () => {
+      if (routeNow() === 'ai') this.sync();
+    }, { signal });
+    document.addEventListener('whit:deep-phase-v540', event => {
+      if (routeNow() !== 'ai' || event.detail?.privateContentIncluded !== false) return;
+      const phase = event.detail?.phase;
+      this.setState(['listening','forming'].includes(phase) ? 'reflecting' : phase === 'answering' ? 'answering' : 'resting');
+    }, { signal });
     addEventListener('pagehide', () => this.setState('resting'), { signal });
   }
 
@@ -108,12 +116,11 @@ export class WhitSilentPresenceV316 {
   }
 
   connectChat(chat) {
-    if (this.chat === chat && this.chatObserver) return;
+    if (this.chat === chat) return;
     this.disconnectChat();
     this.chat = chat;
     this.lastAssistantCount = this.assistantBubbles().length;
-    this.chatObserver = new MutationObserver(() => this.sync());
-    this.chatObserver.observe(chat, { childList:true, subtree:true, characterData:true });
+    this.chatObserver = null;
   }
 
   disconnectChat() {
@@ -182,6 +189,7 @@ export class WhitSilentPresenceV316 {
       recording:false,
       networkCalls:0,
       textPrimary:true,
+      mutationObservers:0,
       homeTouched:false
     });
   }

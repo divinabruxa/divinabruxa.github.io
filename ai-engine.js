@@ -1,5 +1,5 @@
-/* DIVINA BRUXA 3.0 — WHIT PRESENÇA PROFUNDA V540
-   Guia local sem API + camada online governada, ledger e contexto consentido. */
+/* DIVINA BRUXA 4.0 — MACROETAPA 9/14 · WHIT LOCAL SUPREMA V557
+   Guia local contextual, memória efêmera e camada online separada. */
 
 import { escapeHTML, store } from './storage.js';
 import {
@@ -14,11 +14,11 @@ import {
   createAIRequest,
   normalizeTarotContext,
   privateAIExport
-} from './ai-policy.js?v=190';
-import { createLocalWhitResponse } from './whit-local-guide-v540.js?v=540';
+} from './ai-policy.js?v=557';
+import { createLocalWhitResponse } from './whit-local-guide-v540.js?v=557';
 import { acceptServerCreditState, clearCreditState, creditState } from './ai-credits.js?v=190';
-import { JOURNAL_AI_SELECTION_KEY, normalizeJournalAISelection } from './journal-policy.js?v=187';
-import { SCHOOL_AI_SELECTION_KEY, normalizeSchoolAISelection } from './school-policy.js?v=186';
+import { JOURNAL_AI_SELECTION_KEY, normalizeJournalAISelection } from './journal-policy.js?v=556';
+import { SCHOOL_AI_SELECTION_KEY, normalizeSchoolAISelection } from './school-policy.js?v=555';
 
 const safe = value => escapeHTML(value ?? '');
 const modeEntries = () => Object.values(AI_POLICY.modes);
@@ -35,7 +35,7 @@ const ledgerLabels = Object.freeze({
   expiration:'Ciclo encerrado'
 });
 const sourceLabels = Object.freeze({
-  message:'Somente a mensagem e o contexto local recente',
+  message:'Esta mensagem e, em continuações curtas, uma lembrança efêmera desta sessão',
   'journal-single-entry':'Uma única entrada do Diário, visível no campo',
   'tarot-single-spread':'Uma única tiragem concluída, com cartas diretas',
   'school-single-lesson':'Uma única aula pública da Escola'
@@ -53,17 +53,25 @@ function structuredOnlineAnswer(value) {
 }
 
 export class AIEngine {
-  constructor(root, config = {}) {
+  constructor(root, config = {}, options = {}) {
     this.root = root?.id === 'aiApp' ? root : document.querySelector('#aiApp');
     if (!this.root) return;
     this.config = config;
-    this.auth = globalThis.divinaAuth;
+    this.auth = options.authClient || globalThis.divinaAuth;
+    this.orbCore = options.orbCore || globalThis.divinaOrbSupremeV501?.core || globalThis.orbe?.supreme || null;
+    this.orb = this.orbCore?.orb || null;
+    this.orbRelease = null;
+    this.abort = new AbortController();
+    this.sessionTurns = [];
+    this.orbClaimed = false;
     this.history = normalizeAIHistory(store.get(AI_HISTORY_KEY, []));
     const settings = store.get(AI_SETTINGS_KEY, {});
     const legacyMode = { support:'luna', tarot:'terra', channel:'luna' }[settings?.mode];
     this.modeId = AI_POLICY.modes[legacyMode || settings?.mode]?.enabled ? (legacyMode || settings.mode) : 'luna';
     this.focusId = AI_POLICY.focuses[settings?.focus] ? settings.focus : 'reflection';
-    this.deliveryMode = settings?.delivery === 'online' ? 'online' : 'local';
+    // Cada nova abertura nasce local. A camada paga nunca é restaurada
+    // silenciosamente de uma sessão anterior.
+    this.deliveryMode = 'local';
     this.source = 'message';
     this.tarotContext = null;
     this.sending = false;
@@ -72,8 +80,11 @@ export class AIEngine {
     this.pendingExtra = null;
     this.abortController = null;
     this.phaseTimers = new Set();
+    this.root.dataset.whitLocal = 'v557';
+    document.documentElement.dataset.whitLocalSupreme = 'v557';
     this.renderShell();
     this.bind();
+    this.syncOrb();
     this.restoreDraft();
     this.renderModes();
     this.renderDelivery();
@@ -92,9 +103,18 @@ export class AIEngine {
 
   renderShell() {
     this.root.innerHTML = `
+      <section class="whit-v557-orb-zone" aria-labelledby="whitV557Title">
+        <div class="whit-v557-orb-host" data-whit-orb-host aria-label="Orbe canônica acompanhando a Whit"></div>
+        <div><p class="eyebrow">WHIT LOCAL · PRESENÇA DA ORBE</p><h3 id="whitV557Title">Escuta, contexto e próximo gesto.</h3><p>Uma presença de interface que organiza o que você escolhe trazer. Funciona neste aparelho, sem conta, sem API e sem créditos.</p></div>
+      </section>
+      <nav class="whit-v557-passages" aria-label="Passagens da Whit">
+        <button type="button" data-whit-passage="conversation"><span>✦</span><b>Conversar</b><small>escrever e receber uma reflexão local</small></button>
+        <button type="button" data-whit-passage="session"><span>⌁</span><b>Sessão</b><small>ver ou apagar a lembrança efêmera</small></button>
+        <button type="button" data-whit-passage="privacy"><span>◇</span><b>Limites</b><small>entender exatamente o que Whit vê</small></button>
+      </nav>
       <section class="ai-command" aria-label="Estado da Orbe IA">
         <div class="ai-command-title"><span aria-hidden="true">✦</span><p><b>Whit · presença governada</b><small data-ai-command-copy>Guia local disponível · você escolhe cada contexto</small></p></div>
-        <div class="ai-command-state"><span data-ai-connection>Whit local despertando…</span><span>STAGING · V540</span></div>
+        <div class="ai-command-state"><span data-ai-connection>Whit local despertando…</span><span>LOCAL · V557</span></div>
       </section>
 
       <section class="ai-auth-gate" data-ai-auth-gate>
@@ -139,12 +159,13 @@ export class AIEngine {
           <div class="ai-quick-prompts" aria-label="Começos de conversa"></div>
           <div id="chat" class="chat ai-chat" role="log" aria-live="polite" aria-relevant="additions"></div>
           <div data-ai-context-slot></div>
+          <aside class="whit-v557-session" data-whit-session aria-live="polite"><span aria-hidden="true">⌁</span><p><b>Memória desta sessão</b><small data-whit-session-copy>Nenhuma lembrança efêmera ainda.</small></p><button type="button" data-whit-clear-session disabled>Apagar sessão</button></aside>
           <form id="chatForm" class="chat-form ai-composer">
             <label class="ai-focus-field"><span>Foco desta resposta</span><select id="aiFocus">${Object.values(AI_POLICY.focuses).map(focus => `<option value="${focus.id}">${safe(focus.label)}</option>`).join('')}</select></label>
             <label for="chatInput">Sua mensagem</label>
             <textarea id="chatInput" required maxlength="${AI_POLICY.limits.maxMessageCharacters}" rows="3" placeholder="Escreva para a Orbe…"></textarea>
             <div class="ai-composer-meta"><span data-ai-character-count>0 / ${AI_POLICY.limits.maxMessageCharacters}</span><span>Web e dados ocultos: OFF</span></div>
-            <p class="ai-context-scope"><b>Contexto que será enviado:</b> <span data-ai-source-label>${sourceLabels.message}</span>.</p>
+            <p class="ai-context-scope"><b>Contexto usado nesta resposta:</b> <span data-ai-source-label>${sourceLabels.message}</span>.</p>
             <label class="ai-consent"><input type="checkbox" id="aiConsent"><span data-ai-consent-copy></span></label>
             <p class="ai-consent-error" data-ai-consent-error hidden>Marque o consentimento antes de enviar.</p>
             <div class="ai-composer-actions"><button type="submit" class="primary" data-ai-send>Enviar · <span data-ai-send-cost>1 crédito</span></button><button type="button" class="text-button" data-ai-stop hidden>Interromper</button></div>
@@ -154,16 +175,16 @@ export class AIEngine {
       </section>
 
       <section class="ai-control-deck" aria-labelledby="aiControlTitle">
-        <header><div><p class="eyebrow">CONTROLE E PORTABILIDADE</p><h3 id="aiControlTitle">Você governa o contexto.</h3></div><p>O servidor guarda saldo, ledger e métricas técnicas sem o texto. As mensagens permanecem somente neste aparelho; a OpenAI recebe apenas o envio consentido.</p></header>
+        <header><div><p class="eyebrow">CONTROLE E PORTABILIDADE</p><h3 id="aiControlTitle">Você governa o contexto.</h3></div><p>No modo local, nenhuma mensagem sai do aparelho. A camada online futura permanece separada e só envia quando você a escolhe e consente.</p></header>
         <div class="ai-control-grid">
           <section class="ai-history-controls"><span aria-hidden="true">◇</span><div><b>Histórico privado local</b><small data-ai-history-count></small></div><button type="button" data-ai-export>Baixar conversa</button><button type="button" data-ai-clear>Limpar histórico</button></section>
           <section class="ai-ledger-summary"><span aria-hidden="true">⌁</span><div><b>Ledger auditável do servidor</b><small data-ai-ledger-summary>Entre para consultar os eventos.</small></div><details data-ai-ledger-details><summary>Ver últimos eventos</summary><div data-ai-ledger-list></div></details></section>
-          <section class="ai-web-off"><span aria-hidden="true">⊘</span><div><b>Web Search desligada</b><small>Whit não pesquisa nem abre páginas externas. Sol também permanece desligado.</small></div></section>
+          <section class="ai-web-off" data-whit-privacy-anchor><span aria-hidden="true">⊘</span><div><b>Dados ocultos e Web desligados</b><small>Whit local não abre páginas, não lê outros campos, Diário, notas ou histórico antigo. Sol permanece desligado.</small></div></section>
         </div>
         <div class="ai-inline-confirm" data-ai-clear-box hidden role="alert"><p><b>Apagar toda a conversa deste aparelho?</b><small>Baixe uma cópia antes se quiser preservar o texto.</small></p><div><button type="button" data-ai-clear-cancel>Manter histórico</button><button type="button" class="danger" data-ai-clear-confirm>Sim, apagar</button></div></div>
 
         <section class="ai-credit-store ai-credit-store-locked" aria-labelledby="aiPacksTitle">
-          <header><div><p class="eyebrow">ASSINATURA E EXTRAS</p><h4 id="aiPacksTitle">Cobrança continua desligada.</h4></div><p>A V190 não simula nem concede créditos no navegador. Compras, renovações e recibos entram somente na próxima macroetapa, com confirmação do servidor.</p></header>
+          <header><div><p class="eyebrow">CAMADA FUTURA</p><h4 id="aiPacksTitle">Cobrança continua desligada.</h4></div><p>A V557 não simula, vende nem concede créditos no navegador. A Whit local continua gratuita e independente desta camada.</p></header>
           <div class="ai-pack-grid">${AI_POLICY.packs.map(pack => `<article><b>+${pack.credits}</b><span>créditos</span><em>R$ ${Number(pack.priceBRL).toFixed(2).replace('.', ',')}</em><small>Indisponível · nenhuma cobrança</small></article>`).join('')}</div>
         </section>
 
@@ -179,6 +200,7 @@ export class AIEngine {
   }
 
   bind() {
+    const { signal } = this.abort;
     this.root.querySelector('.ai-mode-list').addEventListener('click', event => {
       const button = event.target.closest('[data-ai-mode]');
       if (!button) return;
@@ -187,26 +209,27 @@ export class AIEngine {
         return;
       }
       this.setMode(button.dataset.aiMode);
-    });
+    }, { signal });
     this.root.querySelector('.ai-delivery-v540').addEventListener('click', event => {
       const button = event.target.closest('[data-ai-delivery]');
       if (button) this.setDelivery(button.dataset.aiDelivery);
-    });
-    this.focus.addEventListener('change', () => this.setFocus(this.focus.value));
-    this.form.addEventListener('submit', event => { event.preventDefault(); this.send(); });
+    }, { signal });
+    this.focus.addEventListener('change', () => this.setFocus(this.focus.value), { signal });
+    this.form.addEventListener('submit', event => { event.preventDefault(); this.send(); }, { signal });
     this.input.addEventListener('input', () => {
       store.set(AI_DRAFT_KEY, { text:this.input.value, source:this.source, at:new Date().toISOString() });
       this.updateCharacterCount();
       this.root.querySelector('[data-ai-consent-error]').hidden = true;
-    });
-    this.root.querySelector('[data-ai-stop]').addEventListener('click', () => this.abortController?.abort());
-    this.root.querySelector('[data-ai-open-account]').addEventListener('click', () => globalThis.orbe?.go?.('login'));
-    this.root.querySelector('[data-ai-refresh]').addEventListener('click', () => this.loadStatus(true));
-    this.root.querySelector('[data-ai-subscription]').addEventListener('click', () => globalThis.orbe?.go?.('subscriptions'));
-    this.root.querySelector('[data-ai-export]').addEventListener('click', () => this.exportHistory());
-    this.root.querySelector('[data-ai-clear]').addEventListener('click', () => this.showClearConfirmation());
-    this.root.querySelector('[data-ai-clear-cancel]').addEventListener('click', () => this.hideClearConfirmation());
-    this.root.querySelector('[data-ai-clear-confirm]').addEventListener('click', () => this.clearHistory());
+    }, { signal });
+    this.root.querySelector('[data-ai-stop]').addEventListener('click', () => this.abortController?.abort(), { signal });
+    this.root.querySelector('[data-ai-open-account]').addEventListener('click', () => globalThis.orbe?.go?.('login'), { signal });
+    this.root.querySelector('[data-ai-refresh]').addEventListener('click', () => this.loadStatus(true), { signal });
+    this.root.querySelector('[data-ai-subscription]').addEventListener('click', () => globalThis.orbe?.go?.('subscriptions'), { signal });
+    this.root.querySelector('[data-ai-export]').addEventListener('click', () => this.exportHistory(), { signal });
+    this.root.querySelector('[data-ai-clear]').addEventListener('click', () => this.showClearConfirmation(), { signal });
+    this.root.querySelector('[data-ai-clear-cancel]').addEventListener('click', () => this.hideClearConfirmation(), { signal });
+    this.root.querySelector('[data-ai-clear-confirm]').addEventListener('click', () => this.clearHistory(), { signal });
+    this.root.querySelector('[data-whit-clear-session]').addEventListener('click', () => this.clearSession(), { signal });
     this.root.addEventListener('click', event => {
       const prompt = event.target.closest('[data-ai-prompt]');
       if (prompt) {
@@ -216,13 +239,24 @@ export class AIEngine {
       }
       if (event.target.closest('[data-ai-extra-cancel]')) this.cancelExtra();
       if (event.target.closest('[data-ai-extra-confirm]')) this.confirmExtra();
-    });
-    window.addEventListener('online', () => this.loadStatus());
-    window.addEventListener('offline', () => this.updateConnection());
-    window.addEventListener('divina:journal-ai-selected', () => this.prepareJournalSelection());
-    window.addEventListener('divina:tarot-ai-selected', () => this.prepareTarotSelection());
-    window.addEventListener('divina:school-ai-selected', () => this.prepareSchoolSelection());
-    this.auth?.onAuthStateChange?.((event) => {
+      const passage = event.target.closest('[data-whit-passage]');
+      if (passage) this.openPassage(passage.dataset.whitPassage);
+    }, { signal });
+    window.addEventListener('online', () => this.loadStatus(), { signal });
+    window.addEventListener('offline', () => this.updateConnection(), { signal });
+    window.addEventListener('divina:journal-ai-selected', () => this.prepareJournalSelection(), { signal });
+    window.addEventListener('divina:tarot-ai-selected', () => this.prepareTarotSelection(), { signal });
+    window.addEventListener('divina:school-ai-selected', () => this.prepareSchoolSelection(), { signal });
+    document.addEventListener('divina:route-ready', event => {
+      if (event.detail?.id === 'ai') this.syncOrb(); else this.releaseOrb();
+    }, { signal });
+    this.orb?.addEventListener('click', () => {
+      const host = this.root.querySelector('[data-whit-orb-host]');
+      if (document.body?.dataset?.screen !== 'ai' || !host?.contains(this.orb)) return;
+      this.orbCore?.pulse?.('whit-listen', { intensity:.38, route:'ai' });
+      this.openPassage('conversation');
+    }, { signal });
+    this.unsubscribeAuth = this.auth?.onAuthStateChange?.((event) => {
       clearCreditState();
       if (event === 'SIGNED_OUT') {
         this.updateCredits();
@@ -291,12 +325,26 @@ export class AIEngine {
       ? 'A Whit local organiza possibilidades neste aparelho. Ela não chama modelo, não usa créditos e não promete inteligência ilimitada.'
       : 'A camada online só envia após consentimento, usa o ledger do servidor e permanece indisponível quando a autoridade segura não responde.';
     this.root.querySelector('[data-ai-consent-copy]').textContent = local
-      ? 'Autorizo Whit local a usar somente esta mensagem e o contexto que está visível acima. Nada sai deste aparelho.'
+      ? 'Autorizo Whit local a usar somente o contexto selecionado e visível acima. Nada sai deste aparelho.'
       : 'Entendo que Whit é uma IA. Autorizo enviar esta mensagem e até 12 mensagens recentes ao servidor seguro e ao provedor configurado. Nada do Diário entra sem seleção explícita.';
     this.root.querySelector('[data-ai-command-copy]').textContent = local
       ? 'Guia local disponível · sem conta, API ou créditos'
       : 'Camada online governada · ledger do servidor · Web Search desligada';
     this.setSource(this.source, this.tarotContext);
+  }
+
+  consentRequired() {
+    return this.deliveryMode === 'online' || this.source !== 'message';
+  }
+
+  renderConsent() {
+    const required = this.consentRequired();
+    const label = this.root.querySelector('.ai-consent');
+    if (label) label.hidden = !required;
+    if (!required) {
+      this.consent.checked = false;
+      this.root.querySelector('[data-ai-consent-error]').hidden = true;
+    }
   }
 
   renderQuickPrompts() {
@@ -319,12 +367,59 @@ export class AIEngine {
     }).join('');
     this.chat.scrollTop = this.chat.scrollHeight;
     this.root.querySelector('[data-ai-history-count]').textContent = `${this.history.length} ${this.history.length === 1 ? 'mensagem preservada' : 'mensagens preservadas'} neste aparelho.`;
+    this.renderSession();
   }
 
   persistHistory() {
     this.history = normalizeAIHistory(this.history);
     store.set(AI_HISTORY_KEY, this.history);
     this.renderHistory();
+    window.dispatchEvent(new CustomEvent('whit:local-history-v557', { detail:Object.freeze({ messages:this.history.length, privateContentIncluded:false }) }));
+  }
+
+  rememberSession(content) {
+    const value = String(content || '').replace(/\s+/g, ' ').trim().slice(0, 900);
+    if (!value) return;
+    this.sessionTurns.push(value);
+    if (this.sessionTurns.length > AI_POLICY.local.sessionMemoryTurns) this.sessionTurns.splice(0, this.sessionTurns.length - AI_POLICY.local.sessionMemoryTurns);
+    this.renderSession();
+  }
+
+  renderSession() {
+    const copy = this.root.querySelector('[data-whit-session-copy]');
+    const clear = this.root.querySelector('[data-whit-clear-session]');
+    const count = this.sessionTurns.length;
+    if (copy) copy.textContent = count ? `${count} ${count === 1 ? 'turno disponível' : 'turnos disponíveis'} apenas até esta página ser recarregada.` : 'Nenhuma lembrança efêmera ainda.';
+    if (clear) clear.disabled = count === 0;
+  }
+
+  clearSession() {
+    this.sessionTurns = [];
+    this.renderSession();
+    this.notify('A memória desta sessão foi apagada. O histórico local não foi alterado.');
+  }
+
+  openPassage(passage) {
+    const target = passage === 'session' ? this.root.querySelector('[data-whit-session]')
+      : passage === 'privacy' ? this.root.querySelector('[data-whit-privacy-anchor]')
+        : this.form;
+    target?.scrollIntoView({ behavior:'auto', block:'center' });
+    if (passage === 'conversation') requestAnimationFrame(() => this.input?.focus({ preventScroll:true }));
+  }
+
+  syncOrb() {
+    if (document.body?.dataset?.screen !== 'ai' || !this.orbCore?.claim || !this.orb) return false;
+    const host = this.root.querySelector('[data-whit-orb-host]');
+    if (!host) return false;
+    if (host.contains(this.orb)) return true;
+    this.releaseOrb();
+    this.orbRelease = this.orbCore.claim(host, { mode:'ai', ariaLabel:'Orbe das Realidades. Whit local está pronta para escutar o que você escolher trazer.' });
+    return true;
+  }
+
+  releaseOrb() {
+    try { this.orbRelease?.(); } catch {}
+    this.orbRelease = null;
   }
 
   appendSystemMessage(content, metadata = {}) {
@@ -410,8 +505,9 @@ export class AIEngine {
     this.source = sourceLabels[source] ? source : 'message';
     this.tarotContext = tarotContext;
     this.root.querySelector('[data-ai-source-label]').textContent = this.source === 'message' && this.deliveryMode === 'local'
-      ? 'Somente esta mensagem; o histórico não entra na reflexão local'
+      ? 'Esta mensagem; uma continuação curta pode usar somente a memória efêmera visível da sessão'
       : sourceLabels[this.source];
+    this.renderConsent();
   }
 
   showContextCard(kind, title, detail, remove) {
@@ -449,7 +545,7 @@ export class AIEngine {
     const cards = selected.positions.map(item => `${item.position}: ${item.cardName} (direta)`).join('\n');
     this.input.value = `Quero refletir somente sobre esta tiragem concluída.\nTiragem: ${selected.spreadName}\n${selected.question ? `Pergunta: ${selected.question}\n` : ''}${cards}`.slice(0, AI_POLICY.limits.maxMessageCharacters);
     store.set(AI_DRAFT_KEY, { text:this.input.value, source:this.source, at:new Date().toISOString() });
-    this.showContextCard('tarot', 'Uma única tiragem foi preparada.', 'O servidor validará IDs canônicos, cartas sem repetição e orientação direta. Revise e consinta antes de enviar.');
+    this.showContextCard('tarot', 'Uma única tiragem foi preparada.', 'Whit local usa somente as posições visíveis, com cartas diretas e sem repetição. Revise e consinta antes de refletir.');
     store.remove(AI_TAROT_SELECTION_KEY);
     this.updateCharacterCount();
     this.input.focus({ preventScroll:true });
@@ -594,7 +690,7 @@ export class AIEngine {
 
   preserveDraft(content) {
     this.input.value = String(content || '').slice(0, AI_POLICY.limits.maxMessageCharacters);
-    store.set(AI_DRAFT_KEY, { text:this.input.value, source:this.source, at:new Date().toISOString(), recovery:'v540' });
+    store.set(AI_DRAFT_KEY, { text:this.input.value, source:this.source, at:new Date().toISOString(), recovery:'v557' });
     this.updateCharacterCount();
   }
 
@@ -615,7 +711,7 @@ export class AIEngine {
     try {
       await this.phasePause(55);
       this.setPendingPhase(pending, 'forming');
-      const response = createLocalWhitResponse({ message:content, focus:this.focusId, mode:this.modeId });
+      const response = createLocalWhitResponse({ message:content, focus:this.focusId, mode:this.modeId, source:this.source, session:this.sessionTurns });
       await this.phasePause(55);
       this.setPendingPhase(pending, 'answering');
       await this.phasePause(45);
@@ -625,6 +721,7 @@ export class AIEngine {
         provenance:response.safetyIntercepted ? 'safety-local' : 'local-rule-guide',
         safetyIntercepted:response.safetyIntercepted
       }));
+      this.rememberSession(content);
       this.persistHistory();
       this.settleIntoSilence();
       this.input.value = '';
@@ -670,7 +767,7 @@ export class AIEngine {
     const content = this.input.value.trim();
     const mode = AI_POLICY.modes[this.modeId];
     if (!content) { this.input.focus(); return; }
-    if (!this.consent.checked) {
+    if (this.consentRequired() && !this.consent.checked) {
       this.root.querySelector('[data-ai-consent-error]').hidden = false;
       this.consent.focus();
       return;
@@ -804,5 +901,32 @@ export class AIEngine {
       this.setSending(false);
       this.updateConnection();
     }
+  }
+
+  status() {
+    return Object.freeze({
+      release:'V557',
+      mode:this.deliveryMode,
+      localDefault:true,
+      sessionTurns:this.sessionTurns.length,
+      sessionMemoryPersistent:false,
+      localNetworkCalls:0,
+      localModelCalls:0,
+      localCreditsUsed:0,
+      explicitVisibleContextOnly:true,
+      canonicalOrb:true,
+      duplicateOrbs:0,
+      permanentAnimationLoops:0
+    });
+  }
+
+  destroy() {
+    this.abortController?.abort();
+    this.abort.abort();
+    this.phaseTimers.forEach(timer => clearTimeout(timer));
+    this.phaseTimers.clear();
+    this.releaseOrb();
+    this.sessionTurns = [];
+    try { this.unsubscribeAuth?.(); } catch {}
   }
 }

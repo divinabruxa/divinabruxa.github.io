@@ -1,6 +1,5 @@
-/* DIVINA BRUXA 3.0 — CARREGAMENTO V548 · QA SUPREMO E OWNER REVIEW
-   Preserva V501, V509 e o Universo V524; conecta Tarot e Mesa Real.
-   V538 carrega o Tarot Livre sem fogo, sem arrasto e com imagens progressivas. */
+/* DIVINA BRUXA 4.0 — CARREGAMENTO V557 · WHIT LOCAL SUPREMA
+   Preserva os mundos V549–V556 e carrega a Whit local antes da camada paga. */
 
 import {
   normalizeRouteId,
@@ -258,9 +257,14 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     },
     journal:ensureJournal,
     ai:async()=>{
-      await ensureStyle('divinaWhitPresenceDeepV540','whit-presence-deep-v540.css?v=540');
-      const {AIEngine}=await import('./ai-engine.js?v=540');
-      return new AIEngine($('#aiApp'),config);
+      const [,,module]=await Promise.all([
+        ensureStyle('divinaWhitPresenceDeepV540','whit-presence-deep-v540.css?v=557'),
+        ensureStyle('divinaWhitLocalSupremeV557','whit-local-supreme-v557.css?v=557'),
+        import('./ai-engine.js?v=557')
+      ]);
+      const instance=new module.AIEngine($('#aiApp'),config,{authClient,orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme});
+      globalThis.divinaWhitLocalV557=instance;
+      return instance;
     },
     store:async()=>{
       await ensureCommerce();
@@ -358,6 +362,11 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       ensureStyle('divinaJournalRebirthV317','journal-world-v317.css?v=556'),
       ensureStyle('divinaJournalMirrorSupremeV556','journal-mirror-supreme-v556.css?v=556'),
       import('./journal-world-v317.js?v=556')
+    ]),
+    ai:()=>Promise.all([
+      ensureStyle('divinaWhitPresenceDeepV540','whit-presence-deep-v540.css?v=557'),
+      ensureStyle('divinaWhitLocalSupremeV557','whit-local-supreme-v557.css?v=557'),
+      import('./ai-engine.js?v=557')
     ]),
     skins:()=>Promise.all([
       ensureStyle('divinaCrownRebirthV318','skins-premium-world-v318.css?v=546'),

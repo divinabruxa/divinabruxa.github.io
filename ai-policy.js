@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — POLÍTICA DA ORBE IA GOVERNADA V190
-   Contexto mínimo, consentimento explícito e autoridade integral do servidor. */
+/* DIVINA BRUXA 4.0 — MACROETAPA 9/14 · POLÍTICA WHIT LOCAL V557
+   Contexto mínimo, memória efêmera e camada paga integralmente separada. */
 
 export const AI_HISTORY_KEY = 'whit-history';
 export const AI_DRAFT_KEY = 'whit-draft-v190';
@@ -8,10 +8,10 @@ export const AI_LEDGER_KEY = 'ai-server-snapshot-v190';
 export const AI_TAROT_SELECTION_KEY = 'ai-tarot-selection-v141';
 // V540 amplia a experiência local sem alterar o contrato de rede V8.
 // Manter esta versão preserva a compatibilidade com a ponte e o servidor já instalados.
-export const AI_SCHEMA_VERSION = '8.0.0';
+export const AI_SCHEMA_VERSION = '9.0.0';
 
 export const AI_POLICY = Object.freeze({
-  release: 'V190',
+  release: 'V557',
   schemaVersion: AI_SCHEMA_VERSION,
   demoCredits: 3,
   subscription: Object.freeze({ priceBRL: 89.90, credits: 400, cycle: 'mensal', billingEnabled: false }),
@@ -34,6 +34,7 @@ export const AI_POLICY = Object.freeze({
   limits: Object.freeze({ requestsPerMinute:6, dailyCredits:100, maxMessageCharacters:5000, maxContextMessages:12, maxContextCharacters:24000, historyMessages:40, timeoutMs:50000 }),
   controls: Object.freeze({ killSwitch:true, extraCreditConfirmation:true, solEnabled:false, webSearchEnabled:false, billingEnabled:false, serverLedger:true }),
   privacy: Object.freeze({ diaryRequiresConsent:true, diaryScope:'single-entry', analyticsReceiveText:false, adminReceivesText:false, ledgerReceivesText:false, serverConversationHistory:false, providerApplicationState:false, historyLocalOnly:true }),
+  local: Object.freeze({ default:true, requiresAccount:false, requiresApi:false, credits:0, sessionMemoryTurns:6, persistentMemoryDefault:false, readsVisibleContextOnly:true }),
   requiresAccount:true,
   requiresVerifiedEmail:true,
   requiresConsent:true,
@@ -147,7 +148,7 @@ export function createAIRequest({ history = [], mode = 'luna', focus = 'reflecti
 export function privateAIExport(history) {
   return {
     project:'Divina Bruxa',
-    release:'V190',
+    release:'V557',
     kind:'private-ai-conversation-portability-copy',
     exportedAt:new Date().toISOString(),
     private:true,

@@ -1,6 +1,6 @@
-/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 8/14 · V556
-   Diário privado organizado e Espelho agregado, leve e não diagnóstico.
-   Todo o universo aprovado até a V555 permanece íntegro. */
+/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 9/14 · V557
+   Whit local contextual, privada, honesta e integrada à Orbe canônica.
+   Todo o universo aprovado até a V556 permanece íntegro. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -18,7 +18,7 @@ import { AccountEngineV201 } from './account-engine-v201.js?v=556-journal-consen
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=534-consultations-anchor';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=556-journal-mirror';
+import { createPageLoader } from './page-loader-v1.js?v=557-whit-local';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -29,10 +29,10 @@ import { createWhitNervousSystemV308 } from './whit-nervous-system-v308.js?v=308
 import { createWhitContextBridgeV309 } from './whit-context-bridge-v309.js?v=309';
 import { createWhitMemoryGardenV310 } from './whit-memory-garden-v310.js?v=310';
 import { createWhitSignatureV311 } from './whit-signature-v311.js?v=311';
-import { createWhitMindV312 } from './whit-mind-v312.js?v=312';
+import { createWhitMindV312 } from './whit-mind-v312.js?v=557-event-driven';
 import { createWhitGenerationBridgeV313 } from './whit-generation-bridge-v313.js?v=316-silent1';
-import { createWhitSilentPresenceV316 } from './whit-silent-presence-v316.js?v=316';
-import { createWhitCoreSupremeV527 } from './whit-core-supreme-v527.js?v=527';
+import { createWhitSilentPresenceV316 } from './whit-silent-presence-v316.js?v=557-event-driven';
+import { createWhitCoreSupremeV527 } from './whit-core-supreme-v527.js?v=557-event-driven';
 import { createTarotUniverseCoreV528 } from './tarot-universe-core-v528.js?v=528';
 import { createWisdomUniverseCoreV529 } from './wisdom-universe-core-v529.js?v=529';
 import { createExperienceConversionCoreV530 } from './experience-conversion-core-v530.js?v=541-depth';
@@ -65,11 +65,11 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=556')
+const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=557')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
-    document.documentElement.dataset.pwaError = 'v556';
+    document.documentElement.dataset.pwaError = 'v557';
   });
 
 const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
@@ -498,14 +498,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v556-app';
+  window.__divinaSWBootstrap = 'v557-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=556', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=557', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v556';
+        document.documentElement.dataset.releaseEpoch = 'v557';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V556 registrado');
+        console.info('[Divina] PWA V557 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -1295,6 +1295,37 @@ window.divinaJournalMirrorReleaseV556 = Object.freeze({
   })
 });
 
+window.divinaWhitLocalReleaseV557 = Object.freeze({
+  version:557,
+  plan:'4.0-fluidity-supreme',
+  macroStage:'9-of-14',
+  title:'Whit Local Suprema',
+  preserves:'V556',
+  iphonePriority:true,
+  localDefault:true,
+  requiresAccount:false,
+  localApiCalls:0,
+  localModelCalls:0,
+  localCreditsUsed:0,
+  sessionMemoryTurns:6,
+  sessionMemoryPersistent:false,
+  visibleContextOnly:true,
+  journalSilentReads:0,
+  schoolNoteSilentReads:0,
+  tarotQuestionSilentReads:0,
+  canonicalOrb:true,
+  duplicateOrbs:0,
+  mutationObservers:0,
+  permanentAnimationLoops:0,
+  onlineBilling:false,
+  solEnabled:false,
+  status:()=>Object.freeze({
+    release:'V557',
+    whit:globalThis.divinaWhitLocalV557?.status?.()||null,
+    orb:supremeOrb?.snapshot?.()||null
+  })
+});
+
 window.divinaResponsiveEnchantmentReleaseV533 = Object.freeze({
   version:533,
   macroStage:'9-of-10',
@@ -1619,10 +1650,10 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V556',
+        release:'V557',
         supremePlan:'4.0-fluidity-supreme',
         supremePlanMacroStages:14,
-        currentMacroStage:'8-of-14',
+        currentMacroStage:'9-of-14',
         worldTruth:'v535',
         worldTruthRoutes:17,
         orbFluidNavigation:'v549',
@@ -1694,6 +1725,12 @@ const awaken = async () => {
         adminJournalBodyAccess:false,
         analyticsJournalText:false,
         whitJournalSilentRead:false,
+        whitLocalSupreme:'v557',
+        whitLocalDefault:true,
+        whitLocalSessionTurns:6,
+        whitLocalSessionPersistent:false,
+        whitLocalVisibleContextOnly:true,
+        whitLocalMutationObservers:0,
         tarotFreeUniversePausedDuringCardFlight:true,
         vitalityBus:'v536',
         livingGrammar:'v536',

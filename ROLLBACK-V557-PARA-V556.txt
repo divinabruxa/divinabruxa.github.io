@@ -1,0 +1,5 @@
+ROLLBACK V557 → V556
+
+Este pacote é incremental e preserva a V556. Se precisar retornar, reenvie os arquivos originais do pacote V556 sobre os mesmos nomes e remova somente o arquivo whit-local-supreme-v557.css da publicação.
+
+Não apague conteúdo, imagens, CNAME, dados do Diário, histórico local da Whit, progresso, compras ou preferências. O Service Worker V556 volta a assumir após a próxima atualização/reabertura.
