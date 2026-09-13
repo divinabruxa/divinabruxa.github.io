@@ -1,15 +1,15 @@
-/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 1/14 · V549
-   Baseline de fluidez e pausa transitória do cenário pesado durante navegação.
-   Todo o universo aprovado na V548 permanece íntegro. */
+/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 2/14 · V550
+   Uma Orbe canônica, uma física e projeções por evento — sem relógios rivais.
+   Todo o universo aprovado até a V549 permanece íntegro. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
 import { createNavigation } from './navigation.js?v=535-fluid-navigation';
 import { orbMotionV207 } from './orb-motion-core-v207.js?v=207';
 import { RealityOrbEngine } from './orb-engine-v208.js?v=535-fluid-navigation';
-import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=535-world-truth';
-import { createOrbIOSJourneyCoreV525 } from './orb-ios-journey-core-v525.js?v=535-fluid-navigation';
-import { createOrbUniversalPresenceV526 } from './orb-universal-presence-v526.js?v=535-world-truth';
+import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=550-single-physics';
+import { createOrbIOSJourneyCoreV525 } from './orb-ios-journey-core-v525.js?v=550-single-physics';
+import { createOrbUniversalPresenceV526 } from './orb-universal-presence-v526.js?v=550-single-physics';
 import { installRealityLifecycleV511 } from './reality-lifecycle-v511.js?v=511';
 import { createLivingUniverseV524 } from './living-universe-core-v524.js?v=537-no-fire';
 import { installSkinPerformanceCoreV518 } from './skin-performance-core-v518.js?v=535-mobile-fluidity';
@@ -65,11 +65,11 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=549')
+const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=550')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
-    document.documentElement.dataset.pwaError = 'v549';
+    document.documentElement.dataset.pwaError = 'v550';
   });
 
 const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
@@ -471,7 +471,7 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V537 = 548;
+const RELEASE_EPOCH_V537 = 549;
 const reloadForNewReleaseV537 = version => {
   const nextRelease = Number(version || 0);
   if (!Number.isFinite(nextRelease) || nextRelease <= RELEASE_EPOCH_V537) return false;
@@ -498,14 +498,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v549-app';
+  window.__divinaSWBootstrap = 'v550-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=549', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=550', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v549';
+        document.documentElement.dataset.releaseEpoch = 'v550';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V549 registrado');
+        console.info('[Divina] PWA V550 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -1104,6 +1104,31 @@ window.divinaFluiditySupremeReleaseV549 = Object.freeze({
     || Object.freeze({release:'V549',loaded:false,macroStage:'1-of-14'})
 });
 
+window.divinaSingleOrbPhysicsReleaseV550 = Object.freeze({
+  version:550,
+  plan:'4.0-fluidity-supreme',
+  macroStage:'2-of-14',
+  title:'Orbe persistente, motor e física únicos',
+  preserves:'V549',
+  iphonePriority:true,
+  oneCanonicalOrb:true,
+  oneOrbMotionClock:true,
+  projectionMode:'event-snapshot-v550',
+  projectionPermanentLoops:0,
+  journeyMirrorMode:'single-snapshot-v550',
+  journeyMirrorAnimationLoops:0,
+  heavyScenePausedDuringNavigation:true,
+  privateContentReads:0,
+  apiCalls:0,
+  status:()=>Object.freeze({
+    release:'V550',
+    orb:supremeOrb?.snapshot?.()||null,
+    presence:orbUniversalPresence?.status?.()||null,
+    journey:orbIOSJourney?.status?.()||null,
+    motion:orbMotionV207.snapshot?.()||null
+  })
+});
+
 window.divinaResponsiveEnchantmentReleaseV533 = Object.freeze({
   version:533,
   macroStage:'9-of-10',
@@ -1428,10 +1453,10 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V549',
+        release:'V550',
         supremePlan:'4.0-fluidity-supreme',
         supremePlanMacroStages:14,
-        currentMacroStage:'1-of-14',
+        currentMacroStage:'2-of-14',
         worldTruth:'v535',
         worldTruthRoutes:17,
         orbFluidNavigation:'v549',
@@ -1439,6 +1464,12 @@ const awaken = async () => {
         fluiditySupremePreserves:'v548',
         fluiditySupremeIphonePriority:true,
         heavyScenePausedDuringNavigation:true,
+        singleOrbPhysics:'v550',
+        oneOrbMotionClock:true,
+        orbProjectionMode:'event-snapshot-v550',
+        orbProjectionPermanentLoops:0,
+        orbJourneyMirrorMode:'single-snapshot-v550',
+        orbJourneyMirrorAnimationLoops:0,
         vitalityBus:'v536',
         livingGrammar:'v536',
         originDiscovery:'v537',

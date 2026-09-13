@@ -1,0 +1,17 @@
+{
+  "release": "V550",
+  "plan": "DIVINA BRUXA 4.0",
+  "macroStage": "2-of-14",
+  "title": "Orbe persistente, motor e física únicos",
+  "baseRequired": "V549",
+  "incremental": true,
+  "preservesApprovedVisual": true,
+  "oneCanonicalOrb": true,
+  "oneOrbMotionClock": true,
+  "projectionMode": "event-snapshot-v550",
+  "projectionPermanentLoops": 0,
+  "journeyMirrorAnimationLoops": 0,
+  "tarotFireRemoved": true,
+  "iphonePriority": true,
+  "automaticPhysicalPasses": 0
+}

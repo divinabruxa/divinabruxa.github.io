@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — ORBOS · PRESENÇA UNIVERSAL V526 · REGISTRO VIVO V535
+/* DIVINA BRUXA 4.0 — PRESENÇA UNIVERSAL V526 · FÍSICA ÚNICA V550
    A única Orbe física ganha um pouso semântico em cada realidade. Cada pouso é
    somente uma janela Retina do canvas vivo V501: nenhum novo motor, universo,
    estado de Tarot ou loop permanente é criado aqui.
@@ -330,7 +330,8 @@ export class OrbUniversalPresenceV526 {
       complete:connected.length === ROUTES.length,
       onePhysicalOrb:true,
       independentOrbEngines:0,
-      liveCanvasProjections:true,
+      liveCanvasProjections:false,
+      projectionMode:'event-snapshot-v550',
       retinaProjectionRequested:true,
       permanentAnimationLoops:0,
       skinReactive:true,

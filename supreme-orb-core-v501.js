@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — NÚCLEO DA ORBE SUPREMA V501 · FLUIDEZ V535
+/* DIVINA BRUXA 4.0 — ORBE SUPREMA V501 · FÍSICA ÚNICA V550
    Uma presença, um estado e um caminho para todos os mundos. O toque ilumina
    o interior sem deslocar o corpo; somente uma viagem de realidade autorizada
    conduz a própria presença visual da Orbe pelo mesmo universo contínuo.
@@ -128,8 +128,8 @@ export class SupremeOrbCoreV501 {
     this.transitionTimer = 0;
     this.projectionNodes = new Set();
     this.projectionContexts = new WeakMap();
-    this.projectionFrame = 0;
-    this.projectionLoop = 0;
+    this.projectionAdoptionFrame = 0;
+    this.projectionPaintFrame = 0;
     this.projectionLastPaint = 0;
     this.destroyed = false;
     this.claimedHost = null;
@@ -170,8 +170,11 @@ export class SupremeOrbCoreV501 {
   }
 
   scheduleProjectionAdoption(root = document) {
-    cancelAnimationFrame(this.projectionFrame);
-    this.projectionFrame = requestAnimationFrame(() => this.adoptProjections(root));
+    cancelAnimationFrame(this.projectionAdoptionFrame);
+    this.projectionAdoptionFrame = requestAnimationFrame(() => {
+      this.projectionAdoptionFrame = 0;
+      this.adoptProjections(root);
+    });
   }
 
   adoptProjections(root = document) {
@@ -207,19 +210,18 @@ export class SupremeOrbCoreV501 {
   }
 
   startProjectionBridge() {
-    if (this.projectionLoop || !this.canvas) return;
-    const paint = now => {
-      if (this.destroyed) return;
-      const navigationCritical = this.navigationActive
-        || document.documentElement.dataset.orbNavigationState === 'active';
-      const fps = navigationCritical ? (constrained() ? 5 : 8) : reducedMotion() ? 5 : constrained() ? 12 : 24;
-      if (!document.hidden && now - this.projectionLastPaint >= 1000 / fps) {
-        this.projectionLastPaint = now;
-        this.paintProjections();
-      }
-      this.projectionLoop = requestAnimationFrame(paint);
-    };
-    this.projectionLoop = requestAnimationFrame(paint);
+    this.scheduleProjectionPaint('boot');
+  }
+
+  scheduleProjectionPaint(reason = 'state-change') {
+    if (!this.canvas || this.destroyed || document.hidden) return;
+    cancelAnimationFrame(this.projectionPaintFrame);
+    this.projectionPaintFrame = requestAnimationFrame(timestamp => {
+      this.projectionPaintFrame = 0;
+      this.projectionLastPaint = timestamp;
+      this.paintProjections();
+      document.documentElement.dataset.orbProjectionSnapshot = `v550-${reason}`;
+    });
   }
 
   paintProjections() {
@@ -280,6 +282,7 @@ export class SupremeOrbCoreV501 {
     }
 
     if (skin) emit('divina:supreme-orb-skin-synced', { skin });
+    this.scheduleProjectionPaint('skin');
     return skin || null;
   }
 
@@ -398,6 +401,7 @@ export class SupremeOrbCoreV501 {
     this.orb?.dispatchEvent?.(new CustomEvent('db:orb-pulse', { detail:payload }));
     callFirst(this.renderer, ['pulse','impact','energize'], payload);
     if (physicalMotion) callFirst(this.motion, ['pulse','impact','impulse'], payload);
+    this.scheduleProjectionPaint('pulse');
 
     const html = document.documentElement;
     html.dataset.supremeOrbEnergy = kind;
@@ -595,6 +599,7 @@ export class SupremeOrbCoreV501 {
     if (this.orb) this.orb.dataset.supremeOrbMode = next;
     callFirst(this.renderer, ['setMode','setState','transitionTo'], next, detail);
     callFirst(this.motion, ['setMode','setState','transitionTo'], next, detail);
+    this.scheduleProjectionPaint('mode');
     if (previous !== next) emit('divina:supreme-orb-mode', { previous, mode:next, ...detail });
     return next;
   }
@@ -653,7 +658,8 @@ export class SupremeOrbCoreV501 {
       claimed:Boolean(this.claimedHost),
       projections:this.projections().length,
       retinaProjections:this.projections().filter(node => node.dataset.orbProjectionQuality === 'retina').length,
-      projectionCadence:constrained() ? 12 : 24,
+      projectionCadence:'event-snapshot-v550',
+      projectionPermanentLoop:false,
       navigationActive:this.navigationActive,
       navigationAuthority:'v535-single-flight',
       coalescedNavigations:this.coalescedNavigations,
@@ -673,8 +679,8 @@ export class SupremeOrbCoreV501 {
     this.destroyed = true;
     clearTimeout(this.pulseTimer);
     clearTimeout(this.transitionTimer);
-    cancelAnimationFrame(this.projectionFrame);
-    cancelAnimationFrame(this.projectionLoop);
+    cancelAnimationFrame(this.projectionAdoptionFrame);
+    cancelAnimationFrame(this.projectionPaintFrame);
     this.abort.abort();
     this.observer?.disconnect();
     this.journeyEngine?.destroy?.();

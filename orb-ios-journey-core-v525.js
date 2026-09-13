@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — ORBOS iOS · VIAGEM ESPACIAL DA ORBE V525 · FLUIDEZ V535
+/* DIVINA BRUXA 4.0 — VIAGEM DA ORBE V525 · FÍSICA ÚNICA V550
    Shared-element navigation for the single living Orb. The page never receives
    a second Orb engine: a temporary Retina mirror carries the same visual signal
    across the one continuous V524 universe, then yields to the destination host.
@@ -279,25 +279,11 @@ export class OrbIOSJourneyCoreV525 {
 
   startLivingMirror() {
     cancelAnimationFrame(this.paintFrame);
-    const budget = fluidityBudget();
-    const paint = timestamp => {
-      if (!this.active || this.destroyed) return;
-      this.paintMirror(timestamp);
-      if (timestamp - this.lastIgnite > budget.igniteEvery) {
-        const rect = this.traveler?.getBoundingClientRect?.();
-        if (rect?.width && rect?.height) {
-          const view = viewport();
-          this.universe?.ignite?.({
-            x:clamp((rect.left + rect.width/2) / view.width, 0, 1),
-            y:clamp((rect.top + rect.height/2) / view.height, 0, 1),
-            strength:0.46
-          });
-        }
-        this.lastIgnite = timestamp;
-      }
-      this.paintFrame = requestAnimationFrame(paint);
-    };
-    this.paintFrame = requestAnimationFrame(paint);
+    this.paintFrame = 0;
+    // Uma captura Retina carrega a identidade da Orbe por toda a curta viagem.
+    // Movimento e brilho ficam com Web Animations/CSS; nenhum segundo relógio
+    // redesenha o canvas enquanto a navegação precisa responder primeiro.
+    this.root.dataset.mirrorCadence = 'single-snapshot-v550';
   }
 
   gatewayFor(route) {
@@ -613,7 +599,10 @@ export class OrbIOSJourneyCoreV525 {
         arrival:fluidityBudget().arrival,
         settle:fluidityBudget().settle
       }),
-      mirrorFps:fluidityBudget().mirrorFps,
+      mirrorFps:0,
+      formerMirrorBudgetFps:fluidityBudget().mirrorFps,
+      mirrorCadence:'single-snapshot-v550',
+      mirrorAnimationLoop:false,
       fallbackPresence:Boolean(this.fallbackPresence?.isConnected),
       mirrorPixels:this.canvas ? { width:this.canvas.width, height:this.canvas.height } : null
     });
