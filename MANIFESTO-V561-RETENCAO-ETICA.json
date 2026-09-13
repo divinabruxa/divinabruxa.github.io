@@ -1,0 +1,90 @@
+{
+  "artifact": "DIVINA-BRUXA-V561-RETENCAO-ETICA-CONTEUDO-DIARIO.zip",
+  "release": "V561",
+  "plan": "Plano Supremo 4.0",
+  "macro_stage": "13/14",
+  "title": "Retenção ética e conteúdo diário",
+  "prerequisite": "V560 instalada",
+  "package_type": "incremental-flat",
+  "expected_file_count": 22,
+  "new_files": [
+    "00-INSTALE-V561-RETENCAO-ETICA.txt",
+    "AUDITORIA-RETENCAO-ETICA-V561.json",
+    "HASHES-SHA256-V561.txt",
+    "MANIFESTO-V561-RETENCAO-ETICA.json",
+    "QA-V561-RETENCAO-ETICA.md",
+    "ROLLBACK-V561-PARA-V560.txt",
+    "STAGING-EDGE-FUNCTIONS-V561.txt",
+    "STAGING-RETENCAO-ETICA-V561.sql",
+    "admin-analytics-v322-edge-v561.ts",
+    "ethical-analytics-v561-edge.ts",
+    "ethical-return-core-v561.css",
+    "ethical-return-core-v561.js",
+    "qa-v561-browser.mjs",
+    "qa-v561-ethical-return.mjs",
+    "qa-v561-service-worker-runtime.mjs"
+  ],
+  "replacement_files": [
+    "admin-intelligence-v322.js",
+    "app-v208.js",
+    "daily-world-v509.js",
+    "index.html",
+    "manifest.webmanifest",
+    "page-loader-v1.js",
+    "sw.js"
+  ],
+  "daily_return": {
+    "school_challenges": 14,
+    "deterministic_by_brasilia_day": true,
+    "streaks": false,
+    "punishment": false,
+    "history": "local route ids and days only",
+    "favorites": "local explicit only",
+    "journal_views": ["calendar", "favorites", "timeline"],
+    "journal_private_text_reads": 0,
+    "published_skin_catalog": 30,
+    "invented_skins": 0,
+    "invented_episodes": 0
+  },
+  "notifications": {
+    "categories": ["daily", "school", "skins", "episodes"],
+    "explicit_opt_in": true,
+    "automatic_permission_prompt": false,
+    "quiet_hours": "22:00-08:00 America/Sao_Paulo",
+    "daily_card_identity_in_copy": false,
+    "remote_free_text": false,
+    "external_provider_active": false,
+    "local_test": true
+  },
+  "analytics": {
+    "explicit_consent_required": true,
+    "metrics": ["DAU", "WAU", "MAU", "funnel", "D1 retention", "D7 retention", "D30 retention"],
+    "raw_identifier_stored_server_side": false,
+    "server_pseudonym": "HMAC-SHA256",
+    "retention_days": 90,
+    "event_batch_max": 20,
+    "private_text_fields": 0,
+    "precise_location": false,
+    "device_deletion": true,
+    "rls": "enabled and forced",
+    "admin_output": "aggregate only"
+  },
+  "runtime": {
+    "canonical_orb": true,
+    "new_canvas": 0,
+    "new_workers": 0,
+    "mutation_observers": 0,
+    "permanent_animation_loops": 0
+  },
+  "authority": {
+    "environment": "staging",
+    "staging_project_ref": "kyphdsamyygavmkzyezr",
+    "production_publish": false,
+    "dns_changes": false,
+    "real_billing": false,
+    "store_submission": false,
+    "sol_enabled": false,
+    "server_entitlements_preserved": true
+  },
+  "next_macro_stage": "14/14 — QA Supremo"
+}

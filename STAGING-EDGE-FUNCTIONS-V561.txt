@@ -1,0 +1,68 @@
+DIVINA BRUXA V561 — ATIVAÇÃO DAS MÉTRICAS ÉTICAS NO STAGING
+
+ESCOPO AUTORIZADO
+Projeto STAGING: kyphdsamyygavmkzyezr
+Não use este procedimento em produção.
+
+ORDEM
+1. Aplique STAGING-RETENCAO-ETICA-V561.sql no SQL Editor do STAGING.
+2. Crie um segredo exclusivo ANALYTICS_HASH_PEPPER com pelo menos 32 caracteres
+   aleatórios. Não coloque o valor no GitHub, no frontend, em chat ou neste ZIP.
+3. Opcionalmente configure ANALYTICS_ALLOWED_ORIGINS com origens exatas,
+   separadas por vírgula. Sem essa variável, a função usa a allowlist embutida.
+4. Publique ethical-analytics-v561-edge.ts com o slug:
+      ethical-analytics-v561
+5. Publique admin-analytics-v322-edge-v561.ts como nova versão do slug:
+      admin-analytics-v322
+6. Nas duas funções use verify_jwt=false. Isso não as deixa sem proteção:
+   - a ingestão valida Origin, apikey publicável, allowlists, consentimento,
+     tamanho, rate limit e eventos permitidos dentro do próprio código;
+   - o Admin restaura cookies seguros, confirma owner ativo, e-mail, AAL2/MFA,
+     sessão não revogada e códigos de recuperação.
+7. Nunca exponha SUPABASE_SECRET_KEYS, SUPABASE_SERVICE_ROLE_KEY nem o pepper.
+
+COMPATIBILIDADE DE CHAVES
+As funções preferem SUPABASE_PUBLISHABLE_KEYS e SUPABASE_SECRET_KEYS.
+As variáveis legadas SUPABASE_ANON_KEY e SUPABASE_SERVICE_ROLE_KEY ficam apenas
+como fallback transitório. O navegador envia somente a chave publicável.
+
+CONTRATO DA INGESTÃO
+- POST: lote máximo de 20 eventos estritamente enumerados.
+- DELETE: remove os eventos vinculados ao token deste aparelho.
+- Corpo máximo: 32 KiB.
+- Janela de evento: até 48 horas no passado e 5 minutos no futuro.
+- Armazenado: HMAC de ator/sessão, evento, rota permitida, estágio, idioma amplo,
+  web/PWA e horários.
+- Nunca armazenado: token cru, texto livre, Diário, carta, intenção, Consulta,
+  conteúdo Whit, nome, e-mail, telefone, IP ou localização precisa.
+- Expiração: 90 dias; a ingestão também remove linhas vencidas.
+
+VERIFICAÇÃO NO SQL EDITOR
+select public.ethical_analytics_snapshot_v561();
+
+select relname, relrowsecurity, relforcerowsecurity
+from pg_class
+where relname in (
+  'ethical_analytics_events_v561',
+  'ethical_analytics_ingest_budget_v561'
+)
+order by relname;
+
+O resultado deve mostrar relrowsecurity=true e relforcerowsecurity=true nas
+duas tabelas. O snapshot vazio é válido e deve retornar available=true e zeros.
+
+SMOKE TEST SEGURO
+1. Abra privacidade-e-dados.html no STAGING.
+2. Mantenha Métricas opcionais desligadas.
+3. Navegue entre mundos e confirme no Network que não há POST para
+   ethical-analytics-v561.
+4. Ative Métricas opcionais explicitamente.
+5. Navegue por dois mundos e confirme um POST 202, sem texto livre no payload.
+6. Abra Admin com owner + MFA e confirme DAU/WAU/MAU como métricas consentidas.
+7. Desative Métricas opcionais e confirme que o identificador local é removido.
+8. No Jardim do Retorno, use “Apagar métricas deste aparelho” para validar DELETE.
+
+FALHA SEGURA
+Se tabela, função, segredo, Origin ou chave estiver ausente, o endpoint recusa a
+requisição e o frontend mantém apenas uma fila local limitada. Nenhuma métrica é
+inventada e nenhuma função de conteúdo fica bloqueada.

@@ -1,6 +1,7 @@
-/* DIVINA BRUXA 4.0 — MACROETAPA 6/14 · CARTA DO DIA V554
+/* DIVINA BRUXA 4.0 — MACROETAPA 6/14 · CARTA DO DIA V554 + PONTE ÉTICA V561
    A Orbe canônica ocupa o altar. O céu só anima em respostas breves ao toque;
-   uma carta direta nasce por dia, com autoridade de Brasília. */
+   uma carta direta nasce por dia, com autoridade de Brasília. A ponte V561
+   anuncia somente que o ritual aconteceu; nunca expõe carta ou intenção. */
 
 import { CARDS } from './tarot-data.js';
 import { store, escapeHTML } from './storage.js';
@@ -646,6 +647,17 @@ export class DailyWorldV509 {
       if (!concurrent) this.saveRecord(record);
       if (!reducedMotion()) await wait(constrained() ? 120 : 220);
       this.renderRevealed(true);
+      globalThis.dispatchEvent?.(new CustomEvent('divina:daily-v561-revealed', {
+        detail:Object.freeze({
+          release:'V561',
+          date:this.data.date,
+          revealed:true,
+          cardIncluded:false,
+          cardIdentityIncluded:false,
+          intentionIncluded:false,
+          meaningIncluded:false
+        })
+      }));
       this.aurora?.birth();
       this.orbCore.pulse?.('daily-birth', { intensity:1.2 });
       return this.data.id;

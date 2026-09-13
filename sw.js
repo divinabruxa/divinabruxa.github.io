@@ -1,20 +1,46 @@
-/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 12/14 · V560
+/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 13/14 · V561
    Cache seletivo e versionado. Nunca guarda Auth, respostas online da Whit, billing,
-   Admin, consultas seguras ou outras respostas de autoridade. */
+   Admin, consultas seguras ou outras respostas de autoridade. Lembretes V561 usam
+   texto fixo e respeitam o silêncio de Brasília sem revelar cartas. */
 
-const VERSION=560;
+const VERSION=561;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v560-shell';
-const CONTENT_CACHE='divina-bruxa-v560-content';
-const IMAGE_CACHE='divina-bruxa-v560-images';
-const OFFLINE_CACHE='divina-bruxa-v560-offline-core';
-const PREMIUM_CACHE='divina-bruxa-v560-premium-static';
+const SHELL_CACHE='divina-bruxa-v561-shell';
+const CONTENT_CACHE='divina-bruxa-v561-content';
+const IMAGE_CACHE='divina-bruxa-v561-images';
+const OFFLINE_CACHE='divina-bruxa-v561-offline-core';
+const PREMIUM_CACHE='divina-bruxa-v561-premium-static';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE,PREMIUM_CACHE]);
 const NAVIGATION_TIMEOUT_MS=3500;
 const MAX_CONTENT_ENTRIES=180;
 const MAX_IMAGE_ENTRIES=96;
 const MAX_RUNTIME_IMAGE_BYTES=1800000;
 const PRIVATE_ROUTE_PATTERN=/(?:^|\/)(?:admin|account|conta|diario|journal|checkout|billing|pagamento|consulta-individual)(?:[./-]|$)/i;
+const ETHICAL_NOTIFICATION_TEMPLATES_V561=Object.freeze({
+  daily:Object.freeze({title:'Divina Bruxa',body:'Sua Carta do Dia está pronta para ser encontrada.',url:'#daily'}),
+  school:Object.freeze({title:'Escola do Tarot',body:'Seu desafio de hoje está disponível. Continue no seu ritmo.',url:'#school'}),
+  skins:Object.freeze({title:'Skins da Orbe',body:'Há uma novidade no catálogo oficial. Veja quando quiser.',url:'#skins'}),
+  episodes:Object.freeze({title:'De Frente com o Tarot',body:'Há um novo episódio publicado para você conhecer.',url:'#videos'})
+});
+const isBrasiliaQuietHourV561=()=>{
+  const hour=Number(new Intl.DateTimeFormat('en-US',{timeZone:'America/Sao_Paulo',hour:'2-digit',hourCycle:'h23'}).format(new Date()));
+  return Number.isFinite(hour)&&(hour>=22||hour<8);
+};
+const showEthicalNotificationV561=async(category='daily')=>{
+  if(isBrasiliaQuietHourV561())return {type:'LOCAL_NOTIFICATION_V561',ok:false,reason:'quiet-hours',quietHours:'22:00-08:00 America/Sao_Paulo'};
+  const key=Object.prototype.hasOwnProperty.call(ETHICAL_NOTIFICATION_TEMPLATES_V561,category)?category:'daily';
+  const template=ETHICAL_NOTIFICATION_TEMPLATES_V561[key];
+  await self.registration.showNotification(template.title,{
+    body:template.body,
+    icon:'./icon-192.png?v=561',
+    badge:'./icon-192.png?v=561',
+    tag:`divina-v561-${key}`,
+    renotify:false,
+    silent:true,
+    data:{url:template.url,release:'V561',category:key,privateContentIncluded:false}
+  });
+  return {type:'LOCAL_NOTIFICATION_V561',ok:true,category:key,privateContentIncluded:false};
+};
 
 const REQUIRED_SHELL=Object.freeze([
   './','./index.html',
@@ -62,6 +88,7 @@ const REQUIRED_SHELL=Object.freeze([
   './consultations-supreme-v558.css',
   './music-video-supreme-v559.js','./music-video-supreme-v559.css',
   './page-design-supreme-v560.js','./page-design-supreme-v560.css',
+  './ethical-return-core-v561.js','./ethical-return-core-v561.css',
   './orb-loading-portal-v1.js',
   './divina-shell-v180.css','./home-orb-absolute-v206.css','./pwa-world-v196.css',
   './pwa-resilience-v324.css','./pwa-world-v324.js','./performance-world-v324.js',
@@ -70,7 +97,7 @@ const REQUIRED_SHELL=Object.freeze([
 ]);
 
 // Fechamento transitivo dos imports estáticos de app-v208.js. Se qualquer um
-// falhar, a V560 não assume o controle e o worker anterior continua íntegro.
+// falhar, a V561 não assume o controle e o worker anterior continua íntegro.
 const BOOT_DEPENDENCIES=Object.freeze([
   './account-consultations-world-v319.js','./account-engine-v201.js','./account-state-copy-v201.js',
   './ai-policy.js','./auth-client-v201.js','./auth-client-v6.js','./card-library-policy.js',
@@ -93,6 +120,7 @@ const APP_DEPENDENCIES=Object.freeze([
   './media-commerce-world-v320.js','./media-commerce-world-v320.css',
   './music-video-supreme-v559.js','./music-video-supreme-v559.css',
   './page-design-supreme-v560.js','./page-design-supreme-v560.css',
+  './ethical-return-core-v561.js','./ethical-return-core-v561.css',
   './auth-client-v6.js','./auth-client-v201.js','./account-engine-v201.js','./account-state-copy-v201.js',
   './account-consultations-world-v319.js','./consultation-engine.js','./consultation-policy.js',
   './premium-engine-v191.js','./premium-policy-v191.js','./skins-v201.js',
@@ -319,7 +347,7 @@ const appShellIsValid=async(url,response)=>{
   const isShell=pathname===new URL('./',self.registration.scope).pathname||pathname.endsWith('/index.html');
   if(!isShell)return true;
   const html=await response.clone().text();
-  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=560/.test(html);
+  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=561/.test(html);
 };
 
 const offlinePageFor=async url=>{
@@ -460,6 +488,24 @@ self.addEventListener('message',event=>{
     })());
     return;
   }
+  if(type==='SHOW_LOCAL_NOTIFICATION_V561'){
+    event.waitUntil(showEthicalNotificationV561(String(event.data?.category||'daily')).then(respond).catch(()=>respond({type:'LOCAL_NOTIFICATION_V561',ok:false,reason:'show-failed'})));
+    return;
+  }
+});
+
+// O provedor externo permanece desligado na V561. Se for ativado em uma etapa
+// autorizada, o payload só escolhe uma categoria; título e corpo continuam
+// definidos aqui, sem aceitar carta, intenção ou qualquer texto remoto.
+self.addEventListener('push',event=>{
+  event.waitUntil((async()=>{
+    let payload={};
+    try{payload=event.data?.json?.()||{};}catch{return;}
+    if(payload?.release!=='V561'||payload?.consent!==true)return;
+    const category=String(payload?.category||'');
+    if(!Object.prototype.hasOwnProperty.call(ETHICAL_NOTIFICATION_TEMPLATES_V561,category))return;
+    await showEthicalNotificationV561(category);
+  })());
 });
 
 self.addEventListener('notificationclick',event=>{

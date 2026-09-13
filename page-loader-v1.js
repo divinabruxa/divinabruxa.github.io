@@ -1,5 +1,5 @@
-/* DIVINA BRUXA 4.0 — CARREGAMENTO V559 · MÚSICA + VÍDEOS SUPREMOS
-   Preserva V558 e carrega mídia pública somente quando o mundo é aberto. */
+/* DIVINA BRUXA 4.0 — CARREGAMENTO V561 · RETORNO ÉTICO
+   Preserva V560, mantém mundos lazy e conecta somente as pontes sanitizadas. */
 
 import {
   normalizeRouteId,
@@ -210,7 +210,7 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       const [,module]=await Promise.all([
         ensureStyle('divinaDailyLivingV509','daily-world-v509.css?v=554'),
         ensureStyle('divinaDailySpreadsSupremeV554','daily-spreads-supreme-v554.css?v=554'),
-        import('./daily-world-v509.js?v=554')
+        import('./daily-world-v509.js?v=561')
       ]);
       const instance=new module.DailyWorldV509($('#dailyCard'),{
         onSave:remember,
@@ -318,7 +318,7 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
         ensureStyle('divinaCompletionCenterV548Styles','completion-center-v548.css?v=548'),
         import('./admin-engine.js?v=548'),
         import('./admin-media-supreme-v559.js?v=559'),
-        import('./admin-intelligence-v322.js?v=547'),
+        import('./admin-intelligence-v322.js?v=561'),
         import('./owner-observatory-v532.js?v=548'),
         import('./completion-center-v548.js?v=548')
       ]);
@@ -344,7 +344,7 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     daily:()=>Promise.all([
       ensureStyle('divinaDailyLivingV509','daily-world-v509.css?v=554'),
       ensureStyle('divinaDailySpreadsSupremeV554','daily-spreads-supreme-v554.css?v=554'),
-      import('./daily-world-v509.js?v=554')
+      import('./daily-world-v509.js?v=561')
     ]),
     library:()=>Promise.all([
       ensureStyle('divinaLibraryRebirthV302','library-world-v302.css?v=555'),
@@ -408,7 +408,7 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       ensureStyle('divinaCompletionCenterV548Styles','completion-center-v548.css?v=548'),
       import('./admin-engine.js?v=548'),
       import('./admin-media-supreme-v559.js?v=559'),
-      import('./admin-intelligence-v322.js?v=547'),
+      import('./admin-intelligence-v322.js?v=561'),
       import('./owner-observatory-v532.js?v=548'),
       import('./completion-center-v548.js?v=548')
     ]),

@@ -1,9 +1,10 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R023 · ADMIN INTELLIGENCE V322
+/* DIVINA BRUXA 4.0 — ADMIN INTELLIGENCE V322 · RETENÇÃO ÉTICA V561
    Dashboard owner-only sobre AdminEngine V150.
    Lê somente o snapshot agregado de admin-analytics-v322.
-   Nunca lê nem renderiza corpo do Diário, perguntas, contatos, prompts ou respostas. */
+   Nunca lê nem renderiza pseudônimos, corpo do Diário, perguntas, contatos,
+   prompts ou respostas. */
 
-const RELEASE='V322';
+const RELEASE='V561';
 const PULSE_ID='adminPulseV322';
 const ANALYTICS_ID='adminAnalyticsV322';
 const REQUEST_TIMEOUT=16000;
@@ -91,7 +92,7 @@ export class AdminIntelligenceV322{
         method:'GET',
         credentials:'include',
         cache:'no-store',
-        headers:{Accept:'application/json','x-divina-admin-request':'v547'},
+        headers:{Accept:'application/json','x-divina-admin-request':'v561'},
         signal:controller.signal
       });
       return {ok:response.ok,status:response.status,body:await response.json().catch(()=>({}))};
@@ -140,7 +141,7 @@ export class AdminIntelligenceV322{
     if(pulse.dataset.aiv322Stamp===pulseStamp)return;
     pulse.dataset.aiv322Stamp=pulseStamp;
     pulse.innerHTML=`
-      <div class="aiv322-pulse__identity"><span aria-hidden="true">◈</span><p><small>PULSO OPERACIONAL · V322</small><b>${this.loading?'Lendo o STAGING…':this.error?'Snapshot indisponível':d?'Central conectada':'Pronta para conectar'}</b></p></div>
+      <div class="aiv322-pulse__identity"><span aria-hidden="true">◈</span><p><small>PULSO OPERACIONAL · V561</small><b>${this.loading?'Lendo o STAGING…':this.error?'Snapshot indisponível':d?'Central conectada':'Pronta para conectar'}</b></p></div>
       <div class="aiv322-pulse__metrics">
         <span><b>${d?integer(d.audience?.registeredAccounts):'—'}</b><small>contas</small></span>
         <span><b>${d?integer(d.consultations?.open):'—'}</b><small>consultas abertas</small></span>
@@ -179,6 +180,14 @@ export class AdminIntelligenceV322{
 
     const d=this.data;
     const observed=d.audience?.observedActiveAccounts||{};
+    const ethical=d.ethicalAnalytics?.available===true?d.ethicalAnalytics:null;
+    const official=d.audience?.officialDauWauMauAvailable===true&&Boolean(ethical);
+    const activity=ethical?.activity||{};
+    const retention=ethical?.retention||{};
+    const retentionLine=key=>{
+      const item=retention?.[key]||{};
+      return `<div><dt>${safe(key.toUpperCase())}</dt><dd>${number(item.rate).toFixed(1)}% <small>${integer(item.retained)}/${integer(item.eligible)} elegíveis</small></dd></div>`;
+    };
     const countries=d.map?.countries||[];
     const countryMax=maxCount(countries);
 
@@ -192,24 +201,29 @@ export class AdminIntelligenceV322{
 
       <section class="aiv322-scorecards" aria-label="Scorecard do produto">
         ${this.card('CONTAS',integer(d.audience?.registeredAccounts),'registradas')}
-        ${this.card('24H',integer(observed.d1),'contas ativas observadas')}
-        ${this.card('7D',integer(observed.d7),'contas ativas observadas')}
-        ${this.card('30D',integer(observed.d30),'contas ativas observadas')}
+        ${this.card(official?'DAU':'24H',integer(official?activity.dau:observed.d1),official?'pseudônimos consentidos':'contas ativas observadas')}
+        ${this.card(official?'WAU':'7D',integer(official?activity.wau:observed.d7),official?'pseudônimos consentidos':'contas ativas observadas')}
+        ${this.card(official?'MAU':'30D',integer(official?activity.mau:observed.d30),official?'pseudônimos consentidos':'contas ativas observadas')}
         ${this.card('CARTA DO DIA',integer(d.engagement?.dailyCards?.d30),'aberturas · 30d')}
         ${this.card('WHIT / IA',integer(d.ai?.requests30d),'requests · 30d')}
         ${this.card('CONSULTAS',integer(d.consultations?.requests30d),'pedidos · 30d')}
         ${this.card('SANDBOX',brl(d.revenue?.sandboxRevenueCents30d),'receita paga · 30d')}
       </section>
 
-      <aside class="aiv322-truth">
-        <span>◇</span><p><b>DAU / WAU / MAU oficial ainda não é reivindicado.</b>
-        <small>O STAGING ainda não possui um identificador de atividade completo e consentido em todos os mundos. Os números 24h/7d/30d acima são <em>contas observadas</em> somente em Carta do Dia, IA, compras e Consultas.</small></p>
+      <aside class="aiv322-truth${official?' is-available':''}">
+        <span>◇</span><p><b>${official?'DAU / WAU / MAU consentidos estão disponíveis.':'DAU / WAU / MAU oficial ainda não é reivindicado.'}</b>
+        <small>${official?'A V561 conta somente hashes pseudônimos criados após opt-in, com retenção máxima de 90 dias. O Admin recebe agregados; tokens e hashes individuais nunca entram neste painel.':'A infraestrutura V561 ainda não confirmou o snapshot consentido. Os números 24h/7d/30d acima continuam sendo contas observadas somente em Carta do Dia, IA, compras e Consultas.'}</small></p>
       </aside>
 
       <div class="aiv322-grid">
         <section class="aiv322-panel">
-          <header><div><p class="eyebrow">FUNIL</p><h5>Eventos por estágio</h5></div><span>${integer(d.coverage?.analyticsEvents)} eventos</span></header>
+          <header><div><p class="eyebrow">FUNIL</p><h5>Eventos por estágio</h5></div><span>${integer(official?ethical?.coverage?.events:d.coverage?.analyticsEvents)} eventos</span></header>
           ${bars(d.analytics?.funnel,'A instrumentação de funil ainda não registrou eventos.')}
+        </section>
+
+        <section class="aiv322-panel">
+          <header><div><p class="eyebrow">RETENÇÃO</p><h5>Retorno por coorte</h5></div><span>${official?'CONSENTIDA':'AGUARDANDO V561'}</span></header>
+          ${official?`<dl class="aiv322-dl">${retentionLine('d1')}${retentionLine('d7')}${retentionLine('d30')}<div><dt>Retornaram em 7d</dt><dd>${integer(activity.returning7d)}</dd></div></dl>`:'<p class="aiv322__empty">A retenção só aparece depois que o endpoint V561, a tabela RLS e o consentimento estiverem ativos no STAGING.</p>'}
         </section>
 
         <section class="aiv322-panel">
@@ -269,7 +283,7 @@ export class AdminIntelligenceV322{
 
         <section class="aiv322-panel aiv322-panel--privacy">
           <header><div><p class="eyebrow">PRIVACIDADE</p><h5>O que este painel não recebe</h5></div><span>ATIVA</span></header>
-          <ul><li>corpo do Diário</li><li>perguntas de Consulta</li><li>prompts e respostas Whit</li><li>nomes, e-mails e telefones</li><li>localização precisa</li></ul>
+          <ul><li>corpo do Diário</li><li>perguntas de Consulta</li><li>prompts e respostas Whit</li><li>nomes, e-mails e telefones</li><li>tokens ou hashes individuais</li><li>localização precisa</li></ul>
         </section>
       </div>
 
@@ -290,12 +304,16 @@ export class AdminIntelligenceV322{
     return Object.freeze({
       release:RELEASE,
       backend:'admin-analytics-v322',
+      ethicalIngest:'ethical-analytics-v561',
       loaded:Boolean(this.data),
       error:this.error||null,
       officialDauWauMauAvailable:this.data?.audience?.officialDauWauMauAvailable===true,
       countrySignalAvailable:this.data?.map?.countrySignalAvailable===true,
       regionSignalAvailable:false,
-      privateContentRead:false
+      privateContentRead:false,
+      rawPseudonymsRead:false,
+      analyticsConsentOnly:true,
+      analyticsRetentionDays:90
     });
   }
 

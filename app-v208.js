@@ -1,6 +1,6 @@
-/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 12/14 · V560
-   Design de páginas e mobile premium nos 17 mundos, com estados e acessibilidade.
-   Todo o universo aprovado até a V559 permanece íntegro. */
+/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 13/14 · V561
+   Retorno ético, conteúdo diário e métricas agregadas sob consentimento.
+   Todo o universo aprovado até a V560 permanece íntegro. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -18,7 +18,7 @@ import { AccountEngineV201 } from './account-engine-v201.js?v=556-journal-consen
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=558-consultations-supreme';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=559-media-supreme';
+import { createPageLoader } from './page-loader-v1.js?v=561-ethical-return';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -53,6 +53,8 @@ import { createInternationalParityCoreV545 } from './international-parity-core-v
 import { createPwaPerformanceRecoveryCoreV546 } from './pwa-performance-recovery-core-v546.js?v=546';
 import { createSecurityPrivacyCoreV547 } from './security-privacy-core-v547.js?v=547';
 import { createPageDesignSupremeV560 } from './page-design-supreme-v560.js?v=560';
+import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
+import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 
 const $ = selector => document.querySelector(selector);
 
@@ -66,11 +68,11 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=560')
+const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=561')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
-    document.documentElement.dataset.pwaError = 'v560';
+    document.documentElement.dataset.pwaError = 'v561';
   });
 
 const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
@@ -462,6 +464,16 @@ const pageDesignSupreme = safely('Design de Páginas e Mobile Premium V560', () 
   })
 );
 
+// A V561 se conecta apenas a eventos e ações explícitas. O Diário continua
+// privado; analytics só cria identificador pseudônimo após opt-in registrado.
+const ethicalReturn = safely('Retorno Ético e Conteúdo Diário V561', () =>
+  createEthicalReturnCoreV561({
+    go,
+    config:CONFIG,
+    getPrivacyPreferences
+  })
+);
+
 const warmEssentialPortals = () => {
   const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
   if ((document.body.dataset.screen && document.body.dataset.screen !== 'home')
@@ -510,14 +522,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v560-app';
+  window.__divinaSWBootstrap = 'v561-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=560', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=561', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v560';
+        document.documentElement.dataset.releaseEpoch = 'v561';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V560 registrado');
+        console.info('[Divina] PWA V561 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -554,6 +566,7 @@ window.orbe = {
   recovery:pwaPerformanceRecovery,
   security:securityPrivacy,
   design:pageDesignSupreme,
+  returnGarden:ethicalReturn,
   observatory:null,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -1417,6 +1430,42 @@ window.divinaPageDesignReleaseV560 = Object.freeze({
   audit:()=>pageDesignSupreme?.audit?.()||null
 });
 
+window.divinaEthicalReturnReleaseV561 = Object.freeze({
+  version:561,
+  plan:'4.0-fluidity-supreme',
+  macroStage:'13-of-14',
+  title:'Retenção Ética e Conteúdo Diário',
+  preserves:'V560',
+  core:ethicalReturn,
+  schoolDailyChallenges:14,
+  streaks:false,
+  punishment:false,
+  history:'local-route-ids-and-days-only',
+  favorites:'local-explicit-only',
+  journalCalendarBridge:true,
+  journalPrivateTextReads:0,
+  dailyCardIdentityInNotification:false,
+  notificationConsent:'granular-explicit',
+  notificationQuietHours:'22:00-08:00 America/Sao_Paulo',
+  notificationProviderActive:false,
+  notificationTestLocalOnly:true,
+  analyticsConsentRequired:true,
+  analyticsRetentionDays:90,
+  analyticsRawIdentifiersStored:false,
+  analyticsPrivateTextFields:0,
+  preciseLocation:false,
+  inventedEpisodes:0,
+  inventedSkins:0,
+  canonicalOrb:true,
+  mutationObservers:0,
+  permanentAnimationLoops:0,
+  productionPublish:false,
+  realBilling:false,
+  environment:'staging',
+  status:()=>ethicalReturn?.status?.()||null,
+  audit:()=>ethicalReturn?.audit?.()||null
+});
+
 window.divinaResponsiveEnchantmentReleaseV533 = Object.freeze({
   version:533,
   macroStage:'9-of-10',
@@ -1649,6 +1698,7 @@ window.divinaOrbV208 = Object.freeze({
   recovery:pwaPerformanceRecovery,
   security:securityPrivacy,
   design:pageDesignSupreme,
+  returnGarden:ethicalReturn,
   miniOrbs:supremeOrb?.projections?.() || [],
   snapshot:() => supremeOrb?.snapshot?.() || orbMotionV207.snapshot()
 });
@@ -1675,6 +1725,7 @@ window.divinaOrbSupremeV501 = Object.freeze({
   recovery:pwaPerformanceRecovery,
   security:securityPrivacy,
   design:pageDesignSupreme,
+  returnGarden:ethicalReturn,
   navigate:go,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -1743,10 +1794,32 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V560',
+        release:'V561',
         supremePlan:'4.0-fluidity-supreme',
         supremePlanMacroStages:14,
-        currentMacroStage:'12-of-14',
+        currentMacroStage:'13-of-14',
+        ethicalReturn:'v561',
+        ethicalReturnPreserves:'v560',
+        ethicalReturnSchoolChallenges:14,
+        ethicalReturnStreaks:false,
+        ethicalReturnPunishment:false,
+        ethicalReturnHistory:'route-ids-and-days-local-only',
+        ethicalReturnFavorites:'local-explicit-only',
+        ethicalReturnJournalCalendarBridge:true,
+        ethicalReturnJournalPrivateTextReads:0,
+        ethicalReturnDailyCardIdentityInNotification:false,
+        ethicalReturnNotificationConsent:'granular-explicit',
+        ethicalReturnQuietHours:'22:00-08:00 America/Sao_Paulo',
+        ethicalReturnNotificationProviderActive:false,
+        ethicalReturnAnalyticsConsentRequired:true,
+        ethicalReturnAnalyticsRetentionDays:90,
+        ethicalReturnAnalyticsRawIdentifiersStored:false,
+        ethicalReturnAnalyticsPrivateTextFields:0,
+        ethicalReturnPreciseLocation:false,
+        ethicalReturnInventedEpisodes:0,
+        ethicalReturnInventedSkins:0,
+        ethicalReturnMutationObservers:0,
+        ethicalReturnPermanentAnimationLoops:0,
         pageDesignSupreme:'v560',
         pageDesignWorlds:17,
         pageDesignFamilies:7,
