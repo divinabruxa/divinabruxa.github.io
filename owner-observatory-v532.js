@@ -1,8 +1,8 @@
-/* DIVINA BRUXA — MACROETAPA 8/10 · OBSERVATÓRIO DA PROPRIETÁRIA V532
-   Uma camada visual sobre AdminEngine V532, usando a mesma sessão HttpOnly,
+/* DIVINA BRUXA — MACROETAPA 13/14 · OBSERVATÓRIO DA PROPRIETÁRIA V547
+   Uma camada visual sobre AdminEngine, usando a mesma sessão HttpOnly,
    a mesma autoridade owner + MFA/AAL2 e somente agregados sanitizados. */
 
-const RELEASE='V532';
+const RELEASE='V547';
 const STYLE_ID='divinaOwnerObservatoryV532Styles';
 const CROWN_ID='ownerObservatoryCrownV532';
 const MANAGED=Object.freeze([
@@ -36,7 +36,7 @@ const human=value=>LABELS[String(value)]||String(value||'sem sinal').replaceAll(
 function installStyle(){
   if(document.getElementById(STYLE_ID))return;
   const link=document.createElement('link');
-  link.id=STYLE_ID;link.rel='stylesheet';link.href='./owner-observatory-v532.css?v=532';
+  link.id=STYLE_ID;link.rel='stylesheet';link.href='./owner-observatory-v532.css?v=547';
   document.head.append(link);
 }
 
@@ -234,7 +234,7 @@ function specFor(id,d){
     };
     case 'security':return {
       sigil:'⬡',eyebrow:'SEGURANÇA · ZERO ATALHOS',title:'Identidade, sessão e autoridade verificadas no servidor.',
-      copy:'A Central só nasce depois de owner ativa, e-mail verificado, MFA/AAL2 e códigos de recuperação.',
+      copy:'A Central só nasce depois de owner ativada por e-mail permitido no servidor, e-mail verificado, MFA/AAL2 e códigos de recuperação.',
       cards:[
         {label:'PROPRIETÁRIAS',value:integer(metric.activeOwners),detail:'ativas'},
         {label:'SESSÕES',value:integer(metric.activeSessions),detail:'ativas'},
@@ -243,19 +243,19 @@ function specFor(id,d){
         {label:'NEGADAS · 30D',value:integer(metric.deniedActions30d),detail:'ações',tone:metric.deniedActions30d?'warning':'safe'},
         {label:'FALHAS · 30D',value:integer(metric.failedActions30d),detail:'ações',tone:metric.failedActions30d?'warning':'safe'}
       ],
-      panels:[panel('SESSÕES','Nível de garantia',bars(d.sessionAssurance),'AAL2'),panel('PORTÕES','Autorizações de risco',facts(gateFacts(d.runtimeGates)),'FAIL CLOSED'),panel('CONTROLES','Contrato obrigatório',facts([{label:'E-mail verificado',value:'OBRIGATÓRIO',tone:'safe'},{label:'MFA / AAL2',value:'OBRIGATÓRIO',tone:'safe'},{label:'Códigos de recuperação',value:'OBRIGATÓRIO',tone:'safe'},{label:'Cookie HttpOnly + Secure',value:'ATIVO',tone:'safe'},{label:'Papel local',value:'NÃO CONFIÁVEL',tone:'safe'},{label:'Ambiente',value:'STAGING',tone:'safe'}]),'OWNER ONLY')],
-      covenant:'Contas comuns recebem 403 sem dados administrativos. Segredos nunca chegam ao bundle público.'
+      panels:[panel('SESSÕES','Nível de garantia',bars(d.sessionAssurance),'AAL2'),panel('PORTÕES','Autorizações de risco',facts(gateFacts(d.runtimeGates)),'FAIL CLOSED'),panel('CONTROLES','Contrato obrigatório',facts([{label:'E-mail verificado',value:'OBRIGATÓRIO',tone:'safe'},{label:'MFA / AAL2',value:'OBRIGATÓRIO',tone:'safe'},{label:'Códigos de recuperação',value:'OBRIGATÓRIO',tone:'safe'},{label:'Owner no servidor',value:'HASH + AUTH',tone:'safe'},{label:'Recovery code',value:'ATÔMICO',tone:'safe'},{label:'Rate limit',value:'TRANSAÇÃO',tone:'safe'},{label:'Body máximo',value:'16 KB',tone:'safe'},{label:'Papel local',value:'NÃO CONFIÁVEL',tone:'safe'},{label:'Ambiente',value:'STAGING',tone:'safe'}]),'OWNER ONLY')],
+      covenant:'Contas comuns recebem 403 sem dados administrativos. Segredos nunca chegam ao bundle público; fingerprints de limite são irreversíveis e recebem pepper do servidor.'
     };
     case 'backups':return {
       sigil:'↻',eyebrow:'BACKUPS · RECUPERAÇÃO',title:'O que não está conectado aparece como lacuna, não como promessa.',
-      copy:'O registro está isolado no schema privado. A V532 não lê esse cofre pelo navegador nem falsifica execuções.',
+      copy:'O registro está isolado no schema privado. A V547 mostra metas e agregados, sem ler linhas do cofre pelo navegador nem falsificar execuções.',
       cards:[
-        {label:'EXECUÇÕES REPORTADAS',value:integer(metric.reportedRuns),detail:'telemetria desconectada'},
-        {label:'RESTORES VERIFICADOS',value:integer(metric.verifiedRestores),detail:'ainda não reportados'},
+        {label:'EXECUÇÕES REPORTADAS',value:integer(metric.reportedRuns),detail:d.isolation?.telemetryConnected?'com evidência':'sem evidência'},
+        {label:'RESTORES VERIFICADOS',value:integer(metric.verifiedRestores),detail:d.readiness?.restoreVerified?'verificado':'pendente'},
         {label:'FALHAS',value:integer(metric.failedRuns),detail:'reportadas'},
         {label:'LEITURA PRIVADA',value:'0',detail:'campos',tone:'safe'}
       ],
-      panels:[panel('ISOLAMENTO','Cofre de backup',facts([{label:'Schema',value:d.isolation?.schema||'private'},{label:'Leitura pelo navegador',value:'BLOQUEADA',tone:'safe'},{label:'Leitura privada pela V532',value:'0',tone:'safe'},{label:'Telemetria',value:'NÃO CONECTADA',tone:'warning'}]),'PRIVADO'),panel('PRONTIDÃO','Requisitos antes de ativar',facts([{label:'Criptografia',value:'OBRIGATÓRIA'},{label:'Hash do manifesto',value:'OBRIGATÓRIO'},{label:'Teste de restauração',value:'OBRIGATÓRIO'},{label:'Retenção',value:'A CONFIGURAR',tone:'warning'},{label:'Agendamento',value:'A CONFIGURAR',tone:'warning'},{label:'RPO / RTO',value:'A DEFINIR',tone:'warning'}]),'SEM FINGIMENTO')],
+      panels:[panel('ISOLAMENTO','Cofre de backup',facts([{label:'Schema',value:d.isolation?.schema||'private'},{label:'Leitura pelo navegador',value:'BLOQUEADA',tone:'safe'},{label:'Linhas privadas retornadas',value:integer(d.isolation?.adminSnapshotReadsPrivateRows),tone:'safe'},{label:'Telemetria',value:d.isolation?.telemetryConnected?'COM EVIDÊNCIA':'SEM EVIDÊNCIA',tone:d.isolation?.telemetryConnected?'safe':'warning'}]),'PRIVADO'),panel('POLÍTICA','Metas atuais',facts([{label:'Plano STAGING',value:String(d.policy?.planTier||'free').toUpperCase()},{label:'Exportação pretendida',value:`${integer(d.policy?.databaseExportCadenceHours)} H`},{label:'Retenção pretendida',value:`${integer(d.policy?.retentionDays)} DIAS`},{label:'RPO alvo',value:`${integer(d.policy?.rpoTargetHours)} H`},{label:'RTO alvo',value:`${integer(d.policy?.rtoTargetHours)} H`},{label:'Storage separado',value:d.policy?.storageObjectsSeparate?'SIM':'REVISAR'}]),'META ≠ EVIDÊNCIA'),panel('PRONTIDÃO','Requisitos antes do selo',facts([{label:'Política',value:d.readiness?.policyConfigured?'CONFIGURADA':'AUSENTE',tone:d.readiness?.policyConfigured?'safe':'warning'},{label:'Criptografia',value:'OBRIGATÓRIA'},{label:'Hash do manifesto',value:'OBRIGATÓRIO'},{label:'Agendamento externo',value:d.readiness?.schedulerConnected?'CONECTADO':'PENDENTE',tone:d.readiness?.schedulerConnected?'safe':'warning'},{label:'Restore real',value:d.readiness?.restoreVerified?'VERIFICADO':'PENDENTE',tone:d.readiness?.restoreVerified?'safe':'warning'}]),'SEM FINGIMENTO')],
       covenant:d.message||'A automação e a restauração precisam ser conectadas antes de qualquer selo operacional.'
     };
     case 'audit':return {
@@ -272,7 +272,7 @@ function specFor(id,d){
     };
     case 'settings':return {
       sigil:'⚙',eyebrow:'CONFIGURAÇÕES · FONTE DA VERDADE',title:'Valores públicos claros; autorizações críticas somente leitura.',
-      copy:'A V532 mostra o estado efetivo dos portões sem abrir controles perigosos no frontend.',
+      copy:'A V547 mostra o estado efetivo dos portões sem abrir controles perigosos no frontend.',
       cards:[
         {label:'AMBIENTE',value:'STAGING',detail:'isolado'},
         {label:'CATÁLOGO',value:integer(d.catalog?.items),detail:'itens'},
@@ -289,7 +289,7 @@ function specFor(id,d){
 }
 
 export const OWNER_OBSERVATORY_CONTRACT_V532=Object.freeze({
-  release:RELEASE,macroStage:'8/10',route:'admin',modules:18,managedAggregateModules:15,
+  release:RELEASE,macroStage:'13/14',route:'admin',modules:18,managedAggregateModules:15,
   specializedModules:SPECIALIZED,placeholderModules:0,ownerOnly:true,verifiedEmailRequired:true,
   mfaAal2Required:true,recoveryCodesRequired:true,secureCookieSession:true,serverRoleAuthority:true,
   oneCanonicalOrb:true,independentOrbEngines:0,independentAuthEngines:0,environment:'staging',
@@ -297,7 +297,7 @@ export const OWNER_OBSERVATORY_CONTRACT_V532=Object.freeze({
   journalBodyReads:0,consultationQuestionReads:0,aiPromptReads:0,aiResponseReads:0,
   personalIdentifierReads:0,localStorageReads:0,localStorageWrites:0,privateSchemaReads:0,
   analyticsAuthority:'AdminIntelligenceV322',editorialAuthority:'AdminMediaV320',
-  adminAuthority:'AdminEngineV532 + admin-api-v532',permanentAnimationLoops:0
+  adminAuthority:'AdminEngine + admin-api-v547',transactionalRateLimit:true,atomicRecoveryCode:true,hashedOwnerAllowlist:true,permanentAnimationLoops:0
 });
 
 export class OwnerObservatoryV532{
@@ -315,7 +315,7 @@ export class OwnerObservatoryV532{
     this.bind();
     this.observe();
     this.queueMount();
-    document.documentElement.dataset.ownerObservatory='v532';
+    document.documentElement.dataset.ownerObservatory='v547';
   }
 
   bind(){
@@ -378,7 +378,7 @@ export class OwnerObservatoryV532{
     if(!crown){crown=document.createElement('section');crown.id=CROWN_ID;crown.className='oov532-crown';header.insertAdjacentElement('afterend',crown);}
     if(crown.dataset.oov532Ready==='true')return;
     crown.dataset.oov532Ready='true';
-    crown.innerHTML=`<div class="oov532-crown__mark"><span aria-hidden="true">◉</span><p><small>MACROETAPA 8/10 · V532</small><b>Observatório da Proprietária</b></p></div><div class="oov532-crown__truth"><span><b>18</b><small>áreas reais</small></span><span><b>0</b><small>placeholders</small></span><span><b>AAL2</b><small>acesso</small></span><span><b>0</b><small>leituras íntimas</small></span></div><nav aria-label="Atalhos do Observatório"><button type="button" data-oov532-open="security">SEGURANÇA</button><button type="button" data-oov532-open="backups">BACKUPS</button><button type="button" data-oov532-open="audit">AUDITORIA</button></nav>`;
+    crown.innerHTML=`<div class="oov532-crown__mark"><span aria-hidden="true">◉</span><p><small>MACROETAPA 13/14 · V547</small><b>Observatório da Proprietária</b></p></div><div class="oov532-crown__truth"><span><b>18</b><small>áreas reais</small></span><span><b>0</b><small>placeholders</small></span><span><b>AAL2</b><small>acesso</small></span><span><b>0</b><small>leituras íntimas</small></span></div><nav aria-label="Atalhos do Observatório"><button type="button" data-oov532-open="security">SEGURANÇA</button><button type="button" data-oov532-open="backups">BACKUPS</button><button type="button" data-oov532-open="audit">AUDITORIA</button></nav>`;
   }
 
   async load(id,announce=false){

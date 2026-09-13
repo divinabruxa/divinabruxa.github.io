@@ -1,7 +1,7 @@
-/* DIVINA BRUXA — PAINEL SUPREMO V532
+/* DIVINA BRUXA — PAINEL SUPREMO V547
    Sessão em cookie seguro, owner verificada e MFA; nenhum desbloqueio local. */
 import { escapeHTML } from './storage.js';
-import { ADMIN_POLICY, adminModuleById } from './admin-policy.js?v=532';
+import { ADMIN_POLICY, adminModuleById } from './admin-policy.js?v=547';
 import { CONSULTATION_POLICY } from './consultation-policy.js?v=147';
 import { NOTIFICATION_CATEGORIES, SAFE_DAILY_MESSAGE as SAFE_DAILY_BODY, SAFE_DAILY_TITLE } from './notification-policy-v150.js?v=150';
 
@@ -38,7 +38,7 @@ export class AdminEngine{
 
   isAuthorized(body){return Boolean(body?.ownerVerified===true&&body?.emailVerified===true&&body?.mfaVerified===true&&body?.recoveryCodesReady===true&&body?.environment==='staging');}
 
-  securityMap(){return `<section class="admin-security-map" aria-label="Proteções obrigatórias"><span><b>PROPRIETÁRIA</b>Conta verificada</span><span><b>MFA</b>Obrigatório</span><span><b>SESSÃO</b>Cookie seguro</span><span><b>PRODUÇÃO</b>Bloqueada</span></section>`;}
+  securityMap(){return `<section class="admin-security-map" aria-label="Proteções obrigatórias"><span><b>PROPRIETÁRIA</b>Auth + hash</span><span><b>MFA</b>AAL2 obrigatório</span><span><b>SESSÃO</b>Cookie seguro</span><span><b>ABUSO</b>Limite transacional</span><span><b>PRODUÇÃO</b>Bloqueada</span></section>`;}
 
   modulePreview(){return `<section class="admin-gate-map"><header><p class="eyebrow">MAPA DO PAINEL</p><h3>O site inteiro em 18 áreas protegidas.</h3></header><div>${ADMIN_POLICY.modules.map(module=>`<span><i>${module.sigil}</i><b>${safe(module.name)}</b><small>${safe(module.group)}</small></span>`).join('')}</div></section>`;}
 
@@ -74,7 +74,7 @@ export class AdminEngine{
     event.preventDefault();
     const form=event.currentTarget,email=String(form.elements.email.value||'').trim(),password=String(form.elements.password.value||'');
     if(!email.includes('@')||password.length<12){this.setGateStatus('Informe um e-mail válido e sua senha completa.',true);return;}
-    form.querySelector('button').disabled=true;this.setGateStatus('Confirmando identidade…');
+    form.elements.password.value='';form.querySelector('button').disabled=true;this.setGateStatus('Confirmando identidade…');
     const result=await globalThis.divinaAuth.adminSignIn(email,password);
     if(result?.ok&&result.body?.mfaEnrollmentRequired){await this.beginMfaEnrollment();return;}
     if(result?.ok&&result.body?.mfaRequired){this.renderGate('mfa');return;}
@@ -86,7 +86,7 @@ export class AdminEngine{
     event.preventDefault();
     const form=event.currentTarget,code=String(form.elements.code.value||'').replace(/\D/g,'');
     if(code.length!==6){this.setGateStatus('Digite os seis números do código MFA.',true);return;}
-    form.querySelector('button').disabled=true;this.setGateStatus('Verificando MFA…');
+    form.elements.code.value='';form.querySelector('button').disabled=true;this.setGateStatus('Verificando MFA…');
     const result=await globalThis.divinaAuth.adminVerifyMfa(code,this.mfaFactorId);
     if(result?.ok&&this.isAuthorized(result.body)){this.session=result.body;await this.loadOverview();this.renderPanel();return;}
     if(result?.ok&&result.body?.recoveryCodesRequired){this.renderGate('recovery');return;}
@@ -117,7 +117,7 @@ export class AdminEngine{
   async recoverMfa(event){
     event.preventDefault();const form=event.currentTarget,code=String(form.elements.recoveryCode.value||'').trim().toUpperCase();
     if(!/^[A-Z0-9]{3}-[A-Z0-9]{3}-[A-Z0-9]{3}$/.test(code)){this.setGateStatus('Digite o código completo no formato XXX-XXX-XXX.',true);return;}
-    form.querySelector('button').disabled=true;this.setGateStatus('Validando e revogando o MFA antigo…');
+    form.elements.recoveryCode.value='';form.querySelector('button').disabled=true;this.setGateStatus('Validando e revogando o MFA antigo…');
     const result=await globalThis.divinaAuth.adminRecoverMfa(code);
     if(result?.ok&&result.body?.recoveryAccepted){this.renderGate('signin');this.setGateStatus('Código aceito. Entre novamente para cadastrar um novo MFA.');return;}
     form.querySelector('button').disabled=false;this.setGateStatus('Código inválido, usado ou indisponível.',true);
@@ -184,7 +184,7 @@ export class AdminEngine{
     </section>`;
   }
 
-  securityContent(){return `<section class="admin-security-panel"><div class="admin-flag-grid">${Object.entries(ADMIN_POLICY.flags).map(([key,value])=>`<article><span>${safe(key.replaceAll(/([A-Z])/g,' $1'))}</span><b>${value?'ATIVO':'BLOQUEADO'}</b></article>`).join('')}</div><article><p class="eyebrow">CONTROLES OBRIGATÓRIOS</p><h4>Segurança sem atalhos.</h4><ul><li>E-mail da proprietária verificado</li><li>MFA e códigos de recuperação</li><li>Cookie seguro e sessão revogável</li><li>Step-up para preços, billing e publicação</li><li>RLS e validação de papel no servidor</li><li>403 sem qualquer dado para contas comuns</li></ul></article></section>`;}
+  securityContent(){return `<section class="admin-security-panel"><div class="admin-flag-grid">${Object.entries(ADMIN_POLICY.flags).map(([key,value])=>`<article><span>${safe(key.replaceAll(/([A-Z])/g,' $1'))}</span><b>${value?'ATIVO':'BLOQUEADO'}</b></article>`).join('')}</div><article><p class="eyebrow">CONTROLES OBRIGATÓRIOS · V547</p><h4>Segurança sem atalhos.</h4><ul><li>E-mail permitido por hash e verificado no Auth</li><li>MFA/AAL2 e códigos de recuperação de uso único</li><li>Cookie HttpOnly, Secure e sessão revogável</li><li>Rate limit transacional e corpo de requisição limitado</li><li>Step-up para preços e outras ações críticas</li><li>RLS e autorização no servidor</li><li>403 sem qualquer dado para contas comuns</li></ul></article></section>`;}
 
   auditContent(){return `<section class="admin-audit-panel"><p class="eyebrow">DIAGNÓSTICO SANITIZADO</p><h4>Auditoria sem conteúdo privado.</h4><p>O arquivo contém somente ambiente, estados de segurança, módulos e contadores autorizados.</p><button type="button" data-export-diagnostic>EXPORTAR DIAGNÓSTICO</button><small>Diário, perguntas, prompts, respostas, contatos, senhas e segredos são excluídos.</small></section>`;}
 
@@ -250,8 +250,10 @@ export class AdminEngine{
   }
 
   async savePrices(){
-    const code=String(this.root.querySelector('[data-step-up-code]')?.value||'').replace(/\D/g,'');
+    const codeInput=this.root.querySelector('[data-step-up-code]');
+    const code=String(codeInput?.value||'').replace(/\D/g,'');
     if(code.length!==6){this.live('Digite os seis números do MFA para confirmar.');return;}
+    if(codeInput)codeInput.value='';
     const button=this.root.querySelector('[data-confirm-prices]');button.disabled=true;
     const result=await globalThis.divinaAuth.adminUpdateConsultationPrices(this.pendingPrices,code);
     if(result?.ok){this.pendingPrices=null;await this.loadOverview();this.renderPanel();this.live('Novos preços enviados ao staging. Pedidos antigos foram preservados.');return;}
@@ -262,7 +264,7 @@ export class AdminEngine{
     const result=await globalThis.divinaAuth.adminExportDiagnostic();
     if(!result?.ok){this.live('O diagnóstico não pôde ser autorizado.');return;}
     const source=result.body||{};
-    const payload={schema:'divina-bruxa-owner-observatory-v532',environment:'staging',generatedAt:new Date().toISOString(),flags:ADMIN_POLICY.flags,privacy:ADMIN_POLICY.privacy,counters:{registeredAccounts:integer(source.registeredAccounts),openConsultations:integer(source.openConsultations),auditEvents:integer(source.auditEvents)},modules:ADMIN_POLICY.modules.map(({id,name})=>({id,name}))};
+    const payload={schema:'divina-bruxa-owner-observatory-v547',environment:'staging',generatedAt:new Date().toISOString(),flags:ADMIN_POLICY.flags,privacy:ADMIN_POLICY.privacy,counters:{registeredAccounts:integer(source.registeredAccounts),openConsultations:integer(source.openConsultations),auditEvents:integer(source.auditEvents)},modules:ADMIN_POLICY.modules.map(({id,name})=>({id,name}))};
     const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),anchor=document.createElement('a');
     anchor.href=URL.createObjectURL(blob);anchor.download=`divina-bruxa-diagnostico-${new Date().toISOString().slice(0,10)}.json`;anchor.click();setTimeout(()=>URL.revokeObjectURL(anchor.href),1000);this.live('Diagnóstico sanitizado exportado.');
   }

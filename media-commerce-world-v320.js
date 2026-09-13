@@ -334,7 +334,7 @@ export class AdminMediaV320{
         headers:{
           Accept:'application/json',
           'Content-Type':'application/json',
-          'x-divina-admin-request':'v320'
+          'x-divina-admin-request':'v547'
         },
         signal:controller.signal,
         ...(payload?{body:JSON.stringify(payload)}:{})

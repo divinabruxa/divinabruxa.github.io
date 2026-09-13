@@ -1,4 +1,4 @@
-/* DIVINA BRUXA 3.0 — CARREGAMENTO V546 · PWA, PERFORMANCE E RECUPERAÇÃO
+/* DIVINA BRUXA 3.0 — CARREGAMENTO V547 · SEGURANÇA, PRIVACIDADE E MATRIZ FÍSICA
    Preserva V501, V509 e o Universo V524; conecta Tarot e Mesa Real.
    V538 carrega o Tarot Livre sem fogo, sem arrasto e com imagens progressivas. */
 
@@ -294,11 +294,11 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       const [,,,adminModule,mediaModule,intelligenceModule,observatoryModule]=await Promise.all([
         ensureStyle('divinaMediaCommerceRebirthV320','media-commerce-world-v320.css?v=320'),
         ensureStyle('divinaAdminIntelligenceRebirthV322','admin-intelligence-v322.css?v=322'),
-        ensureStyle('divinaOwnerObservatoryV532Styles','owner-observatory-v532.css?v=532'),
-        import('./admin-engine.js?v=532'),
-        import('./media-commerce-world-v320.js?v=543'),
-        import('./admin-intelligence-v322.js?v=532'),
-        import('./owner-observatory-v532.js?v=532')
+        ensureStyle('divinaOwnerObservatoryV532Styles','owner-observatory-v532.css?v=547'),
+        import('./admin-engine.js?v=547'),
+        import('./media-commerce-world-v320.js?v=547'),
+        import('./admin-intelligence-v322.js?v=547'),
+        import('./owner-observatory-v532.js?v=547')
       ]);
       const engine=new adminModule.AdminEngine($('#adminApp'));
       new mediaModule.AdminMediaV320($('#adminApp'));
@@ -367,11 +367,11 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     admin:()=>Promise.all([
       ensureStyle('divinaMediaCommerceRebirthV320','media-commerce-world-v320.css?v=320'),
       ensureStyle('divinaAdminIntelligenceRebirthV322','admin-intelligence-v322.css?v=322'),
-      ensureStyle('divinaOwnerObservatoryV532Styles','owner-observatory-v532.css?v=532'),
-      import('./admin-engine.js?v=532'),
-      import('./media-commerce-world-v320.js?v=543'),
-      import('./admin-intelligence-v322.js?v=532'),
-      import('./owner-observatory-v532.js?v=532')
+      ensureStyle('divinaOwnerObservatoryV532Styles','owner-observatory-v532.css?v=547'),
+      import('./admin-engine.js?v=547'),
+      import('./media-commerce-world-v320.js?v=547'),
+      import('./admin-intelligence-v322.js?v=547'),
+      import('./owner-observatory-v532.js?v=547')
     ]),
     notifications:()=>Promise.all([
       ensureStyle('divinaNotificationsRebirthV321','notifications-world-v321.css?v=321'),

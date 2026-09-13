@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — PRIVACY CENTER V9 · REBIRTH R024 / V323
+/* DIVINA BRUXA — PRIVACY CENTER V9 · SEGURANÇA E PRIVACIDADE V547
    Preferências opcionais locais + registro de consentimento na Conta quando houver sessão.
    Nunca lê Diário, Tiragens, notas da Escola, prompts/respostas Whit ou perguntas de Consulta. */
 
@@ -6,8 +6,8 @@ import { CONFIG } from './config-v200.js?v=200';
 import { AuthClientV201 } from './auth-client-v201.js?v=201';
 
 const KEY='divina-privacy-preferences-v9';
-const POLICY_VERSION='privacy-v323-2026-09-10';
-const SOURCE='privacy-center-web-v323';
+const POLICY_VERSION='privacy-v547-2026-09-13';
+const SOURCE='privacy-center-web-v547';
 const DEFAULTS=Object.freeze({
   analytics:false,
   marketing:false,
@@ -86,6 +86,9 @@ export const privacyCapabilities=Object.freeze({
   accountControlledSync:true,
   exportRequest:true,
   deleteRequest:true,
+  analyticsRetentionDays:90,
+  adminPrivateContentReads:0,
+  ownerAuthority:'server-hash-auth-mfa',
   preciseLocation:false
 });
 
@@ -99,7 +102,7 @@ function centerMarkup(){
   return `<section class="privacy-v323" aria-labelledby="privacyCenterTitle">
     <div class="privacy-v323__stars" aria-hidden="true"><i></i><i></i><i></i></div>
     <header class="privacy-v323__head">
-      <div><p class="eyebrow">CENTRO DE PRIVACIDADE · V323</p>
+      <div><p class="eyebrow">CENTRO DE PRIVACIDADE · V547</p>
       <h2 id="privacyCenterTitle">Seu espaço continua seu.</h2>
       <p>Escolha métricas opcionais e marketing sem abrir acesso às suas intimidades. Dados essenciais de segurança continuam separados dessas escolhas.</p></div>
       <span class="privacy-v323__seal" aria-hidden="true">◇</span>

@@ -91,7 +91,7 @@ export class AdminIntelligenceV322{
         method:'GET',
         credentials:'include',
         cache:'no-store',
-        headers:{Accept:'application/json','x-divina-admin-request':'v322'},
+        headers:{Accept:'application/json','x-divina-admin-request':'v547'},
         signal:controller.signal
       });
       return {ok:response.ok,status:response.status,body:await response.json().catch(()=>({}))};

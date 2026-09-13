@@ -1,9 +1,9 @@
-/* DIVINA BRUXA — CENTRAL DA PROPRIETÁRIA V532
+/* DIVINA BRUXA — CENTRAL DA PROPRIETÁRIA V547
    Contrato owner-only. Nenhuma função administrativa confia em papel salvo no navegador. */
 
 export const ADMIN_POLICY=Object.freeze({
-  schemaVersion:'10.3.0',environment:'staging',route:'/admin',ownerOnly:true,
-  access:Object.freeze({verifiedEmailRequired:true,mfaRequired:true,recoveryCodesRequired:true,secureCookieSession:true,clientSideRoleForbidden:true,stepUpForCriticalActions:true,unauthorizedBehavior:'403-without-admin-data'}),
+  schemaVersion:'13.0.0',environment:'staging',route:'/admin',ownerOnly:true,
+  access:Object.freeze({verifiedEmailRequired:true,mfaRequired:true,recoveryCodesRequired:true,secureCookieSession:true,hashedServerAllowlist:true,transactionalRateLimit:true,atomicRecoveryCode:true,requestBodyLimit:true,clientSideRoleForbidden:true,stepUpForCriticalActions:true,unauthorizedBehavior:'403-without-admin-data'}),
   flags:Object.freeze({productionPublishAuthorized:false,dnsChangesAuthorized:false,realBillingAuthorized:false,storeSubmissionAuthorized:false,orbeAISolEnabled:false}),
   privacy:Object.freeze({journalBodiesVisible:false,journalQuestionsVisible:false,aiPromptsVisible:false,aiResponsesVisible:false,consultationQuestionsVisible:false,passwordsVisible:false,secretsVisible:false,analyticsSanitized:true}),
   modules:Object.freeze([

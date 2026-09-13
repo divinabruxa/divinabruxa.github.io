@@ -1,4 +1,4 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R024 · PRIVACY CENTER V323 */
+/* DIVINA BRUXA 3.0 — PRIVACY CENTER V547 */
 
 .privacy-v323{
   position:relative;isolation:isolate;overflow:hidden;margin:22px 0;padding:clamp(18px,4vw,30px);
@@ -38,3 +38,9 @@
 @media(max-width:660px){.privacy-v323__status,.privacy-v323__rights{grid-template-columns:1fr}}
 @media(max-width:480px){.privacy-v323{padding:16px 13px;border-radius:24px}.privacy-v323__head{grid-template-columns:1fr 52px}.privacy-v323__seal{width:50px;height:50px;font-size:20px}.privacy-v323__head h2{font-size:clamp(1.65rem,9vw,2.45rem)}.privacy-v323__form>label{grid-template-columns:1fr auto}.privacy-v323__actions{display:grid}.privacy-v323__actions button{width:100%}}
 @media(prefers-reduced-motion:reduce){.privacy-v323__form input::after{transition:none!important}}
+.privacy-data-matrix{overflow:auto;margin-top:18px;border:1px solid rgba(231,196,122,.14);border-radius:22px;background:rgba(7,3,13,.62);-webkit-overflow-scrolling:touch}
+.privacy-data-matrix table{width:100%;min-width:760px;border-collapse:collapse;color:#a99cad;font-size:.82rem;line-height:1.5}
+.privacy-data-matrix th,.privacy-data-matrix td{padding:13px 14px;border-bottom:1px solid rgba(231,196,122,.08);text-align:left;vertical-align:top}
+.privacy-data-matrix thead th{color:#e7c982;font-size:.68rem;letter-spacing:.07em;text-transform:uppercase}
+.privacy-data-matrix tbody th{color:#ddd0e0;font-weight:700}.privacy-data-matrix tr:last-child>*{border-bottom:0}
+.privacy-lab-link{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:16px 0 0}.privacy-lab-link span{max-width:620px;color:#8d8191;font-size:.8rem;line-height:1.5}
