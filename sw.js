@@ -1,14 +1,14 @@
-/* DIVINA BRUXA 3.0 — PWA, PERFORMANCE, OFFLINE E RECUPERAÇÃO · MACROETAPA 12/14 · V546
+/* DIVINA BRUXA 3.0 — SEGURANÇA, PRIVACIDADE E MATRIZ FÍSICA · MACROETAPA 13/14 · V547
    Cache seletivo e versionado. Nunca guarda Auth, respostas online da Whit, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=546;
+const VERSION=547;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v546-shell';
-const CONTENT_CACHE='divina-bruxa-v546-content';
-const IMAGE_CACHE='divina-bruxa-v546-images';
-const OFFLINE_CACHE='divina-bruxa-v546-offline-core';
-const PREMIUM_CACHE='divina-bruxa-v546-premium-static';
+const SHELL_CACHE='divina-bruxa-v547-shell';
+const CONTENT_CACHE='divina-bruxa-v547-content';
+const IMAGE_CACHE='divina-bruxa-v547-images';
+const OFFLINE_CACHE='divina-bruxa-v547-offline-core';
+const PREMIUM_CACHE='divina-bruxa-v547-premium-static';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE,PREMIUM_CACHE]);
 const NAVIGATION_TIMEOUT_MS=3500;
 const MAX_CONTENT_ENTRIES=180;
@@ -35,6 +35,7 @@ const REQUIRED_SHELL=Object.freeze([
   './public-library-core-v544.js','./public-library-core-v544.css',
   './international-parity-core-v545.js','./international-parity-v545.css','./international-card-content-v545.js',
   './pwa-performance-recovery-core-v546.js','./pwa-performance-recovery-core-v546.css','./capacitor-readiness-v546.json',
+  './security-privacy-core-v547.js','./security-privacy-core-v547.css','./SECURITY-HEADERS-V547.json',
   './tarot-universe-core-v528.js','./tarot-universe-core-v528.css',
   './wisdom-universe-core-v529.js','./wisdom-universe-core-v529.css',
   './wisdom-depth-core-v539.js','./wisdom-depth-core-v539.css',
@@ -58,7 +59,7 @@ const REQUIRED_SHELL=Object.freeze([
 ]);
 
 // Fechamento transitivo dos imports estáticos de app-v208.js. Se qualquer um
-// falhar, a V546 não assume o controle e o worker anterior continua íntegro.
+// falhar, a V547 não assume o controle e o worker anterior continua íntegro.
 const BOOT_DEPENDENCIES=Object.freeze([
   './account-consultations-world-v319.js','./account-engine-v201.js','./account-state-copy-v201.js',
   './ai-policy.js','./auth-client-v201.js','./auth-client-v6.js','./card-library-policy.js',
@@ -125,7 +126,8 @@ const FREE_OFFLINE_ASSETS=Object.freeze([
   './daily-world-v509.js','./daily-world-v509.css','./daily-policy-v303.js','./daily-meaning-runtime.js','./tarot-meanings.js','./meaning-engine.js',
   './journal-engine.js','./journal-policy.js','./rhythm-v6.js','./journal-world-v317.js','./journal-world-v317.css','./diario-definitivo-v187.css',
   './skin-registry-v12.js','./skin-universal-v10.js','./skin-catalog-v6.js',
-  './divina-orb-fast-v1.webp','./divina-orb-thumb-v1.webp'
+  './divina-orb-fast-v1.webp','./divina-orb-thumb-v1.webp',
+  './laboratorio-fisico-v547.js','./laboratorio-fisico-v547.css','./MATRIZ-FISICA-V547.json'
 ]);
 
 // Arquivos estáticos não concedem direitos. Este grupo só é preparado quando
@@ -152,7 +154,7 @@ const PUBLIC_OFFLINE_PAGES=Object.freeze([
   './loja-mistica.html','./musica.html','./de-frente-com-o-tarot.html',
   './tarot-spreads.html','./music.html','./face-to-face-with-tarot.html','./mystic-store.html',
   './tiradas-tarot.html','./musica-tarot.html','./de-frente-con-el-tarot.html','./tienda-mistica.html',
-  './privacidade-e-dados.html'
+  './privacidade-e-dados.html','./laboratorio-fisico-v547.html'
 ]);
 
 const ENGLISH_PATHS=new Set(['english.html','free-tarot-reading.html','tarot-card-meanings.html','tarot-school.html','tarot-consultations.html','tarot-ethics.html','contact.html','install-app.html','tarot-spreads.html','music.html','face-to-face-with-tarot.html','mystic-store.html']);
@@ -299,7 +301,7 @@ const appShellIsValid=async(url,response)=>{
   const isShell=pathname===new URL('./',self.registration.scope).pathname||pathname.endsWith('/index.html');
   if(!isShell)return true;
   const html=await response.clone().text();
-  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=546/.test(html);
+  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=547/.test(html);
 };
 
 const offlinePageFor=async url=>{

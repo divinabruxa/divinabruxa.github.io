@@ -1,0 +1,43 @@
+{
+  "release": "V547",
+  "environment": "staging",
+  "projectRef": "kyphdsamyygavmkzyezr",
+  "observedAt": "2026-09-13T14:23:41.549Z",
+  "security": {
+    "critical": 0,
+    "error": 0,
+    "warning": 2,
+    "info": 19,
+    "acceptedWarnings": [
+      {
+        "function": "public.account_access_is_active_v201()",
+        "reason": "RPC autenticada intencional, vinculada a auth.uid(), sem execução por anon e com search_path vazio.",
+        "remediationReviewed": true
+      },
+      {
+        "function": "public.account_control_v201()",
+        "reason": "RPC autenticada intencional, vinculada a auth.uid(), sem execução por anon e com search_path vazio.",
+        "remediationReviewed": true
+      }
+    ],
+    "informationalDefaultDenyTables": 19,
+    "defaultDenyReason": "Tabelas privadas ou service-only mantêm RLS/FORCE RLS e nenhuma policy de navegador por desenho.",
+    "remediationUrl": "https://supabase.com/docs/guides/database/database-linter"
+  },
+  "performance": {
+    "critical": 0,
+    "error": 0,
+    "warning": 0,
+    "info": 53,
+    "unusedIndexSignals": 53,
+    "authRlsInitPlanWarnings": 0,
+    "decision": "Índices não são removidos antes de tráfego representativo; o STAGING ainda não oferece evidência suficiente de desuso.",
+    "remediationUrl": "https://supabase.com/docs/guides/database/database-linter"
+  },
+  "truth": {
+    "advisorCleanMeansProductionReady": false,
+    "productionAuthorized": false,
+    "realBillingAuthorized": false,
+    "physicalTestsCountedAsPassed": false
+  }
+}

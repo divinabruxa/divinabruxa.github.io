@@ -1,0 +1,91 @@
+{
+  "release": "V547",
+  "environment": "staging",
+  "projectRef": "kyphdsamyygavmkzyezr",
+  "verifiedAt": "2026-09-13T14:23:41.549Z",
+  "database": {
+    "migrations": [
+      {
+        "version": "20260913135523",
+        "name": "seguranca_privacidade_continuidade_v547",
+        "applied": true
+      },
+      {
+        "version": "20260913140246",
+        "name": "v547_rate_limit_runtime_fix",
+        "applied": true
+      }
+    ],
+    "activeOwners": 0,
+    "activeAllowlistHashes": 1,
+    "allowlistStoresRawEmail": false,
+    "newTablesForceRls": true,
+    "serviceOnlyFunctions": [
+      "admin_continuity_snapshot_v547",
+      "consume_admin_recovery_code_v547",
+      "consume_admin_request_budget_v547"
+    ],
+    "anonCanExecuteServiceOnlyFunctions": false,
+    "authenticatedCanExecuteServiceOnlyFunctions": false
+  },
+  "edgeFunctions": [
+    {
+      "name": "admin-api",
+      "version": 9,
+      "status": "ACTIVE",
+      "authentication": "HttpOnly cookie + owner + verified email + AAL2 + recovery codes"
+    },
+    {
+      "name": "admin-media-v320",
+      "version": 3,
+      "status": "ACTIVE",
+      "authentication": "HttpOnly cookie + owner + verified email + AAL2 + recovery codes"
+    },
+    {
+      "name": "admin-analytics-v322",
+      "version": 2,
+      "status": "ACTIVE",
+      "authentication": "HttpOnly cookie + owner + verified email + AAL2 + recovery codes"
+    }
+  ],
+  "negativeSessionProbes": [
+    {
+      "function": "admin-api",
+      "status": 401,
+      "error": "missing_session"
+    },
+    {
+      "function": "admin-media-v320",
+      "status": 401,
+      "error": "missing_session"
+    },
+    {
+      "function": "admin-analytics-v322",
+      "status": 401,
+      "error": "missing_session"
+    }
+  ],
+  "continuity": {
+    "policyConfigured": true,
+    "planTier": "free",
+    "databaseExportCadenceHoursTarget": 24,
+    "retentionDaysTarget": 30,
+    "rpoTargetHours": 24,
+    "rtoTargetHours": 8,
+    "storageObjectsSeparate": true,
+    "encryptedOffsiteRequired": true,
+    "schedulerConnected": false,
+    "reportedRuns": 0,
+    "verifiedRestores": 0,
+    "restoreState": "not_verified",
+    "privateRowsReturned": 0
+  },
+  "gates": {
+    "production": false,
+    "dns": false,
+    "realBilling": false,
+    "storeSubmission": false,
+    "orbeAiSol": false,
+    "finalOwnerReview": false
+  }
+}

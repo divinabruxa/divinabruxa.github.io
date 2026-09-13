@@ -1,0 +1,70 @@
+DIVINA BRUXA 3.0 — V547
+MACROETAPA 13 DE 14 — SEGURANÇA, PRIVACIDADE E MATRIZ FÍSICA
+
+PRÉ-REQUISITO
+- V546 instalada.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+1. Abra este ZIP.
+2. Envie todos os arquivos soltos para a raiz do repositório.
+3. Quando o GitHub perguntar, substitua os arquivos de mesmo nome.
+4. Não apague nenhum outro arquivo.
+5. Aguarde o deployment concluir.
+6. Feche totalmente o PWA e abra novamente.
+7. Se a versão antiga permanecer, abra instalar-app.html e use “Verificar núcleo”; toque em “Reparar núcleo” somente se a verificação indicar problema.
+
+POR QUE ESTE ZIP POSSUI TODAS AS PÁGINAS HTML
+- A V547 instala CSP, política de referrer e marca de segurança em 321 páginas.
+- Essas substituições são intencionais e preservam o conteúdo de cada página.
+- O ZIP continua plano: todos os arquivos pertencem à raiz, sem pastas internas.
+
+O QUE ESTA VERSÃO ENTREGA
+- ADMIN real protegido no servidor por owner, e-mail verificado, MFA/AAL2 e códigos de recuperação.
+- Nenhuma senha ou papel fixo dentro do JavaScript público.
+- Allowlist da proprietária por hash; a conta oficial só é ativada após confirmação do e-mail.
+- Rate limit transacional e recovery code de uso único consumido atomicamente.
+- Limite de corpo, origem exata, Fetch Metadata, no-store, HSTS e cabeçalhos defensivos nas funções administrativas.
+- Centro de Privacidade V547 com analytics e marketing desligados por padrão, retenção de analytics de até 90 dias e direitos de exportação/exclusão pela Conta.
+- Diário, pergunta de Consulta, prompt e resposta Whit permanecem fora do Admin e de analytics.
+- CSP e política de referrer em todas as 321 páginas HTML; arquivo _headers para hospedagem compatível, sem fingir que GitHub Pages o aplica.
+- Política de backup/restore com RPO de 24 h e RTO de 8 h, mantendo agendador e restore como PENDENTES até existir prova real.
+- Laboratório Físico V547 local, com 9 perfis e 59 casos manuais; começa com 0 aprovações.
+- Evidência sanitizada do STAGING e advisors revisados.
+
+FLUIDEZ PRIMEIRO
+- Nenhum canvas, partícula, MutationObserver, loop de animação, requestAnimationFrame ou chamada de API foi acrescentado pelo núcleo público V547.
+- O laboratório usa uma imagem estática da mesma Orbe e não cria outro motor.
+- Senha, MFA, recovery codes, chave TOTP e QR temporário são apagados ao abandonar a rota ou a página.
+- Service Worker V547 continua seletivo e não guarda Admin, sessão, billing, Consultas seguras ou respostas online da Whit.
+
+PRESERVADO
+- Uma única Orbe V501, Universo V524 e viagem V525.
+- Home, menu, dock e navegação de resposta curta.
+- Tarot Livre V538 sem fogo, sem cartas invertidas, sem repetição e Mesa Real 13 × 6.
+- Whit Local sem API paga e sem créditos.
+- Escola com 17 módulos e 124 aulas.
+- Biblioteca pública, Loja Amazon, Música, Vídeos, Diário e Consultas.
+- 30 skins: Clássica grátis e 29 pagas com preço unitário; Premium inclui todas.
+- STAGING: produção, DNS, cobrança real, lojas e Sol continuam bloqueados.
+
+ATIVAÇÃO DA PROPRIETÁRIA — DEPOIS DO DEPLOYMENT
+1. Crie a Conta usando o e-mail oficial do projeto.
+2. Confirme o e-mail recebido.
+3. Abra Admin e entre com a mesma Conta.
+4. Cadastre o TOTP e confirme os seis números.
+5. Gere os 10 recovery codes e guarde-os fora do navegador.
+6. Saia e entre de novo para confirmar o ciclo.
+
+MATRIZ FÍSICA
+- Abra laboratorio-fisico-v547.html.
+- Escolha somente o aparelho/navegador que está realmente em suas mãos.
+- Marque PASSOU, FALHOU ou BLOQUEADO depois de executar cada caso.
+- Exporte o JSON sanitizado quando quiser levar resultados para o QA final.
+- Não marque um perfil que você não testou.
+
+ESTADO DO PLANO 3.0
+- Concluída no código: Macroetapa 13 de 14.
+- Próxima e final: V548 — QA Supremo e Revisão da Proprietária.
+- A obra ainda não recebe o selo “pronta” nesta versão.
+
+Depois de instalar, informe: INSTALADO, CONTINUA.

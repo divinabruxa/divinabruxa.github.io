@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 12/14 · V546
-   PWA, performance, offline e recuperação segura na mesma Orbe.
+/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 13/14 · V547
+   Segurança, privacidade e matriz física verificável na mesma Orbe.
    Fluidez, privacidade, Tarot e todas as travas anteriores permanecem íntegros. */
 
 import { CONFIG } from './config-v200.js?v=200';
@@ -18,7 +18,7 @@ import { AccountEngineV201 } from './account-engine-v201.js?v=201';
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=534-consultations-anchor';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=546';
+import { createPageLoader } from './page-loader-v1.js?v=547';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -51,6 +51,7 @@ import { createAmazonStoreCoreV543 } from './amazon-store-core-v543.js?v=543';
 import { createPublicLibraryCoreV544 } from './public-library-core-v544.js?v=544';
 import { createInternationalParityCoreV545 } from './international-parity-core-v545.js?v=545';
 import { createPwaPerformanceRecoveryCoreV546 } from './pwa-performance-recovery-core-v546.js?v=546';
+import { createSecurityPrivacyCoreV547 } from './security-privacy-core-v547.js?v=547';
 
 const $ = selector => document.querySelector(selector);
 
@@ -64,11 +65,11 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=546')
+const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=547')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
-    document.documentElement.dataset.pwaError = 'v546';
+    document.documentElement.dataset.pwaError = 'v547';
   });
 
 const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
@@ -200,6 +201,10 @@ const responsiveEnchantment = safely('Responsividade e Encantamento Final V533',
 
 const pwaPerformanceRecovery = safely('PWA, Performance, Offline e Recuperação V546', () =>
   createPwaPerformanceRecoveryCoreV546()
+);
+
+const securityPrivacy = safely('Segurança, Privacidade e Matriz Física V547', () =>
+  createSecurityPrivacyCoreV547()
 );
 
 // A tela dinâmica de Skins já existe neste ponto; o primeiro diagnóstico do
@@ -466,7 +471,7 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V537 = 546;
+const RELEASE_EPOCH_V537 = 547;
 const reloadForNewReleaseV537 = version => {
   const nextRelease = Number(version || 0);
   if (!Number.isFinite(nextRelease) || nextRelease <= RELEASE_EPOCH_V537) return false;
@@ -493,14 +498,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v546-app';
+  window.__divinaSWBootstrap = 'v547-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=546', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=547', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v546';
+        document.documentElement.dataset.releaseEpoch = 'v547';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V546 registrado');
+        console.info('[Divina] PWA V547 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -535,6 +540,7 @@ window.orbe = {
   discovery:originDiscovery,
   international:internationalParity,
   recovery:pwaPerformanceRecovery,
+  security:securityPrivacy,
   observatory:null,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -1013,9 +1019,35 @@ window.divinaPwaPerformanceRecoveryReleaseV546 = Object.freeze({
   environment:'staging'
 });
 
+window.divinaSecurityPrivacyReleaseV547 = Object.freeze({
+  version:547,
+  macroStage:'13-of-14',
+  title:'Segurança, Privacidade e Matriz Física',
+  core:securityPrivacy,
+  contract:securityPrivacy?.status?.()||null,
+  audit:()=>securityPrivacy?.audit?.()||null,
+  status:()=>securityPrivacy?.status?.()||null,
+  htmlSecurityCoverage:321,
+  physicalProfiles:9,
+  physicalCases:59,
+  automaticPhysicalPasses:0,
+  analyticsRetentionDays:90,
+  hashedOwnerAllowlist:true,
+  transactionalRateLimit:true,
+  atomicRecoveryCode:true,
+  backupAutomationVerified:false,
+  restoreVerified:false,
+  oneCanonicalOrb:true,
+  mutationObservers:0,
+  permanentAnimationLoops:0,
+  privateContentReads:0,
+  apiCalls:0,
+  environment:'staging'
+});
+
 window.divinaOwnerObservatoryReleaseV532 = Object.freeze({
-  version:532,
-  macroStage:'8-of-10',
+  version:547,
+  macroStage:'13-of-14',
   route:'admin',
   lazyLoaded:true,
   modules:18,
@@ -1024,7 +1056,7 @@ window.divinaOwnerObservatoryReleaseV532 = Object.freeze({
   verifiedEmailRequired:true,
   mfaAal2Required:true,
   recoveryCodesRequired:true,
-  adminAuthority:'AdminEngineV532 + admin-api-v532',
+  adminAuthority:'AdminEngine + admin-api-v547',
   analyticsAuthority:'AdminIntelligenceV322',
   editorialAuthority:'AdminMediaV320',
   oneCanonicalOrb:true,
@@ -1036,7 +1068,7 @@ window.divinaOwnerObservatoryReleaseV532 = Object.freeze({
   productionPublish:false,
   storeSubmission:false,
   sol:false,
-  status:()=>globalThis.divinaOwnerObservatoryV532?.status?.()||Object.freeze({release:'V532',loaded:false,route:'admin'})
+  status:()=>globalThis.divinaOwnerObservatoryV532?.status?.()||Object.freeze({release:'V547',loaded:false,route:'admin'})
 });
 
 window.divinaResponsiveEnchantmentReleaseV533 = Object.freeze({
@@ -1269,6 +1301,7 @@ window.divinaOrbV208 = Object.freeze({
   grammar:livingGrammar,
   discovery:originDiscovery,
   recovery:pwaPerformanceRecovery,
+  security:securityPrivacy,
   miniOrbs:supremeOrb?.projections?.() || [],
   snapshot:() => supremeOrb?.snapshot?.() || orbMotionV207.snapshot()
 });
@@ -1293,6 +1326,7 @@ window.divinaOrbSupremeV501 = Object.freeze({
   grammar:livingGrammar,
   discovery:originDiscovery,
   recovery:pwaPerformanceRecovery,
+  security:securityPrivacy,
   navigate:go,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -1361,10 +1395,10 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V546',
+        release:'V547',
         supremePlan:'3.0-universo-vivo',
         supremePlanMacroStages:14,
-        currentMacroStage:'12-of-14',
+        currentMacroStage:'13-of-14',
         worldTruth:'v535',
         worldTruthRoutes:17,
         orbFluidNavigation:'v535',
@@ -1554,13 +1588,29 @@ const awaken = async () => {
         pwaPerformanceOfflineAuthorityData:false,
         pwaPerformanceMutationObservers:0,
         pwaPerformancePermanentAnimationLoops:0,
-        ownerObservatory:'v532',
-        ownerObservatoryMacroStage:'8-of-10',
+        securityPrivacy:'v547',
+        securityPrivacyMacroStage:'13-of-14',
+        securityPrivacyHtmlCoverage:321,
+        securityPrivacyPhysicalProfiles:9,
+        securityPrivacyPhysicalCases:59,
+        securityPrivacyAutomaticPhysicalPasses:0,
+        securityPrivacyAnalyticsRetentionDays:90,
+        securityPrivacyHashedOwnerAllowlist:true,
+        securityPrivacyTransactionalRateLimit:true,
+        securityPrivacyAtomicRecoveryCode:true,
+        securityPrivacyBackupAutomationVerified:false,
+        securityPrivacyRestoreVerified:false,
+        securityPrivacyMutationObservers:0,
+        securityPrivacyPermanentAnimationLoops:0,
+        securityPrivacyPrivateContentReads:0,
+        securityPrivacyApiCalls:0,
+        ownerObservatory:'v547',
+        ownerObservatoryMacroStage:'13-of-14',
         ownerObservatoryRoute:'admin',
         ownerObservatoryModules:18,
         ownerObservatoryPlaceholderModules:0,
         ownerObservatoryLazyLoaded:true,
-        ownerObservatoryAdminAuthority:'AdminEngineV532 + admin-api-v532',
+        ownerObservatoryAdminAuthority:'AdminEngine + admin-api-v547',
         ownerObservatoryAnalyticsAuthority:'AdminIntelligenceV322',
         ownerObservatoryEditorialAuthority:'AdminMediaV320',
         ownerObservatoryOwnerOnly:true,
