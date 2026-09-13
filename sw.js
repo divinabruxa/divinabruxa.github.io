@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 3.0 — VITALIDADE E GRAMÁTICA VIVA · MACROETAPA 2/14 · V536
+/* DIVINA BRUXA 3.0 — ORIGEM, MENU E DESCOBERTA · MACROETAPA 3/14 · V537
    Cache seletivo e versionado. Nunca guarda Auth, Whit generation, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=536;
+const VERSION=537;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v536-shell';
-const CONTENT_CACHE='divina-bruxa-v536-content';
-const IMAGE_CACHE='divina-bruxa-v536-images';
-const OFFLINE_CACHE='divina-bruxa-v536-offline-core';
+const SHELL_CACHE='divina-bruxa-v537-shell';
+const CONTENT_CACHE='divina-bruxa-v537-content';
+const IMAGE_CACHE='divina-bruxa-v537-images';
+const OFFLINE_CACHE='divina-bruxa-v537-offline-core';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE]);
 
 const REQUIRED_SHELL=Object.freeze([
@@ -17,6 +17,7 @@ const REQUIRED_SHELL=Object.freeze([
   './app-v208.js','./navigation.js','./route-registry-v180.js','./page-loader-v1.js',
   './world-truth-registry-v535.js','./orb-fluid-navigation-v535.js',
   './vitality-bus-v536.js','./living-grammar-v536.js','./living-grammar-v536.css',
+  './origin-discovery-v537.js','./origin-discovery-v537.css',
   './runtime-v12.js','./orb-motion-core-v207.js','./orb-gesture-core-v208.js',
   './orb-engine-v208.js','./supreme-orb-core-v501.js','./supreme-orb-core-v501.css',
   './orb-ios-journey-core-v525.js','./orb-ios-journey-core-v525.css',
@@ -215,7 +216,7 @@ const appShellIsValid=async(url,response)=>{
   const isShell=pathname===new URL('./',self.registration.scope).pathname||pathname.endsWith('/index.html');
   if(!isShell)return true;
   const html=await response.clone().text();
-  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=536/.test(html);
+  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=537/.test(html);
 };
 
 const offlinePageFor=async url=>{

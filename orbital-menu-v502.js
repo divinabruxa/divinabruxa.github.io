@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — MENU ORBITAL V502 · AFINAÇÃO iOS V517
+/* DIVINA BRUXA — MENU ORBITAL V502 · DESCOBERTA/FLUIDEZ V537
    A Orbe Suprema V501 é o único corpo vivo. Este menu a recebe fisicamente,
    organiza treze realidades em duas órbitas e preserva uma viagem contínua.
 */
@@ -111,7 +111,7 @@ function createScene() {
     <p class="db502-menu__hint" id="db502MenuHint">Toque em um portal. A Orbe abre o caminho.</p>
     <span class="db502-menu__live" role="status" aria-live="polite" aria-atomic="true"></span>`;
 
-  /* O Universo Vivo V516 já existe atrás de todas as realidades. Não criamos
+  /* O Universo Vivo V524 já existe atrás de todas as realidades. Não criamos
      uma segunda constelação no menu: a mesma matéria celeste permanece viva. */
   return root;
 }
@@ -405,13 +405,12 @@ export class OrbitalMenuV502 {
       y:(rect.top + rect.height / 2) / Math.max(innerHeight, 1),
       strength:0.82
     });
-    globalThis.divinaLivingUniverseV516?.pulseCelestialFlame?.(0.52);
     nativePulse('Medium');
 
     const origin = { getBoundingClientRect:() => rect };
     await wait(reducedMotion() ? 0 : 92);
     // A Orbe volta ao berço antes da troca de tela. O portal conserva a origem
-    // visual para que o fogo direcional nasça exatamente do item tocado.
+    // visual para que a viagem preserve exatamente o item tocado.
     await this.close({ restoreFocus:false, reason:`route:${route}`, immediate:true });
     const travel = Promise.resolve(this.core.navigate(route, {
       source:'orbital-menu-v502',
@@ -464,7 +463,7 @@ export class OrbitalMenuV502 {
       extraApiCalls:0,
       webVibration:false,
       nativeHapticsOnly:true,
-      fluidityTuning:'v517-ios-flight',
+      fluidityTuning:'v537-discovery-no-fire',
       livingUniverseBackdrop:true,
       duplicateStarfield:false
     });

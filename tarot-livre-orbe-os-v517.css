@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — MACROETAPA 3/4 · COMPOSIÇÃO E FLUIDEZ V517
-   A Orbe V501, o universo e a chama V516 compartilham uma única respiração. */
+/* DIVINA BRUXA — COMPOSIÇÃO V517 · FLUIDEZ V537
+   A Orbe V501 permanece viva; o motor de fogo foi retirado do Tarot Livre. */
 
 #tarot[data-tarot-world="orbe-os-v517"] {
   --tl517-skin-accent: var(--db-skin-accent, #a565d6);
@@ -239,7 +239,7 @@
     radial-gradient(ellipse at 50% 54%, transparent 46%, rgba(0, 0, 0, 0.2) 100%);
   mix-blend-mode: normal;
   opacity: .78;
-  animation: tl517-universe-chroma 10.5s ease-in-out infinite;
+  animation: none;
 }
 
 #tarot .tl517__stage::after {
@@ -253,7 +253,7 @@
     color-mix(in srgb, var(--tl517-skin-gold) 5%, transparent) 42%,
     transparent 72%);
   filter: blur(12px);
-  animation: tl517-universe-breathe 7.8s ease-in-out infinite;
+  animation: none;
 }
 
 #tarot .tl517__canvas {
@@ -301,7 +301,7 @@
   border-radius: 50%;
   border: 1px solid rgba(243, 207, 130, 0.13);
   opacity: 0.5;
-  animation: tl517-crown-drift 11s linear infinite;
+  animation: none;
 }
 
 #tarot .tl517__portal-crown i:nth-child(2) {
@@ -438,7 +438,7 @@
 }
 
 #tarot .tl517__card[data-empty="true"] .tl517__card-back {
-  animation: tl517-card-breathe 4.8s ease-in-out infinite;
+  animation: none;
 }
 
 #tarot .tl517__card-name {
@@ -603,7 +603,7 @@
     color-mix(in srgb, var(--tl517-skin-gold) 12%, transparent) 51%,
     transparent 72%);
   filter: blur(12px);
-  animation: tl517-halo-breathe 4.2s ease-in-out infinite;
+  animation: none;
 }
 
 #tarot .tl517__orb-aura i {
@@ -611,7 +611,7 @@
   inset: 18%;
   border-radius: 50%;
   border: 1px solid rgba(255, 214, 142, 0.16);
-  animation: tl517-orb-ring 8s linear infinite;
+  animation: none;
 }
 
 #tarot .tl517__orb-aura i:nth-child(2) {
@@ -1084,7 +1084,7 @@ body.db517-tarot-birthing #whitPresenceV307.whit-presence-v307 {
   }
 }
 
-/* The flame remains present; motion is calmed instead of erased. */
+/* Movimento reduzido preserva conteúdo e elimina decoração. */
 @media (prefers-reduced-motion: reduce) {
   #tarot .tl517__deep-space {
     animation: none !important;
@@ -1282,7 +1282,7 @@ body.db517-tarot-birthing #whitPresenceV307.whit-presence-v307 {
 
 /* -------------------------------------------------------------------------
    V517 · proporção de referência e movimento iOS
-   O fogo e o universo continuam sendo desenhados exclusivamente pela V516. */
+   O Universo permanece único; o fogo foi removido no corte V537. */
 
 #tarot[data-tarot-world="orbe-os-v517"] {
   --tl517-card-width: clamp(184px, 29vw, 224px);
@@ -1535,6 +1535,22 @@ html[data-living-universe="v516"] #tarot .tl517__stage::after {
     margin-top: -2px;
     box-shadow: inset 0 -80px 140px rgba(0, 0, 4, .22) !important;
   }
+}
+
+/* V537 · prioridade absoluta para a resposta do Tarot Livre.
+   A Orbe mantém seu próprio motor vivo. O altar não mantém fogo, canvas de
+   efeitos nem animações decorativas infinitas concorrendo com toque/cartas. */
+#tarot[data-tarot-world="orbe-os-v517"] .tl517__effects,
+#tarot[data-tarot-world="orbe-os-v517"] [data-effects] {
+  display: none !important;
+}
+#tarot[data-tarot-world="orbe-os-v517"] .tl517__deep-space,
+#tarot[data-tarot-world="orbe-os-v517"] .tl517__deep-space::before,
+#tarot[data-tarot-world="orbe-os-v517"] .tl517__portal-crown i,
+#tarot[data-tarot-world="orbe-os-v517"] .tl517__card[data-empty="true"] .tl517__card-back,
+#tarot[data-tarot-world="orbe-os-v517"] .tl517__orb-aura,
+#tarot[data-tarot-world="orbe-os-v517"] .tl517__orb-aura i {
+  animation: none !important;
 }
 
 @media (max-width: 370px) {

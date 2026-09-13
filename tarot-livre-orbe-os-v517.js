@@ -1,5 +1,6 @@
-/* DIVINA BRUXA — MACROETAPA 3/4 · COMPOSIÇÃO E FLUIDEZ V517
-   Preserva integralmente o Universo/Chama V516 e a única Orbe Suprema V501.
+/* DIVINA BRUXA — MACROETAPA 3/4 · COMPOSIÇÃO V517 · FLUIDEZ V537
+   Preserva o Universo V524 e a única Orbe Suprema V501. O motor de fogo foi
+   removido por decisão da proprietária: a Orbe e as cartas respondem primeiro.
    Esta camada calibra as proporções, cria navegação tátil contínua e envia a
    sequência real do Tarot Livre para a Mesa Real sem repetir cartas. */
 
@@ -163,91 +164,21 @@ function drawPortalBack(canvas) {
 
 /* O experimento visual V514 foi removido do bundle ativo. */
 
-/* A V516 usa exclusivamente o quadro universal. Este adaptador preserva o
-   contrato de interação do Tarot sem iniciar um segundo requestAnimationFrame
-   ou fabricar outra Orbe. */
-class CelestialFireBridgeV517 {
-  constructor({ stage, orb, card }) {
-    this.stage = stage;
-    this.orb = orb;
-    this.card = card;
-    this.universe = globalThis.divinaLivingUniverseV516 || null;
-    this.mode = 'celestial-fire-integrated-v516';
-    this.targetFps = this.universe?.targetFps || (constrained() ? 40 : 60);
+/* Compatibilidade mínima com chamadas históricas do altar. Não existe canvas,
+   geometria, timer, pulso ou trabalho por quadro nesta ponte. */
+class TarotFluencyBridgeV537 {
+  constructor() {
+    this.mode = 'fire-removed-fluid-v537';
+    this.targetFps = 0;
     this.active = false;
-    this.arrivalTimer = 0;
-    this.foundationStars = null;
-    this.fireVolumes = null;
-    this.flameSprites = null;
   }
-
-  normalizedPoint(element, clientX, clientY) {
-    if (Number.isFinite(clientX) && Number.isFinite(clientY)) {
-      return {
-        x:clamp(clientX / Math.max(innerWidth, 1), 0, 1),
-        y:clamp(clientY / Math.max(innerHeight, 1), 0, 1)
-      };
-    }
-    const rect = element?.getBoundingClientRect?.();
-    return {
-      x:clamp(((rect?.left || 0) + (rect?.width || 0) / 2) / Math.max(innerWidth, 1), 0, 1),
-      y:clamp(((rect?.top || 0) + (rect?.height || 0) / 2) / Math.max(innerHeight, 1), 0, 1)
-    };
-  }
-
-  pulseAt(element, strength = 0.7) {
-    const point = this.normalizedPoint(element);
-    this.universe?.ignite?.({ ...point, strength });
-  }
-
-  touch(clientX, clientY, strength = 0.7) {
-    const point = this.normalizedPoint(this.orb, clientX, clientY);
-    this.universe?.ignite?.({ ...point, strength });
-    this.universe?.pulseCelestialFlame?.(strength);
-  }
-
-  ignite(strength = 0.8) {
-    this.pulseAt(this.orb, strength);
-    this.universe?.pulseCelestialFlame?.(strength);
-  }
-
-  absorb(strength = 0.35) {
-    this.pulseAt(this.card, strength);
-    this.universe?.pulseCelestialFlame?.(Math.max(0.2, strength));
-  }
-
-  birth(strength = 1, duration = BIRTH_TRAVEL_MS) {
-    clearTimeout(this.arrivalTimer);
-    this.pulseAt(this.orb, strength);
-    this.universe?.birthCelestialFlame?.({ strength, duration });
-    this.arrivalTimer = setTimeout(
-      () => this.pulseAt(this.card, Math.max(0.48, strength * 0.72)),
-      Math.max(90, Number(duration || BIRTH_TRAVEL_MS) * 0.82)
-    );
-  }
-
-  setActive(active) {
-    this.universe ||= globalThis.divinaLivingUniverseV516 || null;
-    this.active = Boolean(active);
-    if (this.active) {
-      this.universe?.setRoute?.('tarot');
-      this.universe?.setCelestialFlame?.({
-        orb:this.orb,
-        card:this.card,
-        active:true
-      });
-    } else {
-      this.universe?.setCelestialFlameActive?.(false);
-    }
-  }
-
+  touch() {}
+  ignite() {}
+  absorb() {}
+  birth() {}
   resize() {}
-
-  destroy() {
-    clearTimeout(this.arrivalTimer);
-    this.universe?.setCelestialFlameActive?.(false);
-    this.active = false;
-  }
+  setActive(active) { this.active = Boolean(active); }
+  destroy() { this.active = false; }
 }
 
 export class TarotLivreOrbOSV517 {
@@ -288,17 +219,17 @@ export class TarotLivreOrbOSV517 {
 
     this.build();
     this.world.dataset.birthSync = 'decoded-atomic';
-    this.world.dataset.flameTexture = 'procedural-no-image';
-    this.world.dataset.flameArchitecture = 'integrated-volumetric-field-v516';
+    this.world.dataset.flameTexture = 'removed-v537';
+    this.world.dataset.flameArchitecture = 'removed-v537';
     this.world.dataset.lightningStrokes = 'none';
     this.world.dataset.strokedFirePaths = '0';
     this.world.dataset.whiteOverexposure = 'false';
-    this.world.dataset.firePalette = 'violet-magenta-gold';
+    this.world.dataset.firePalette = 'none';
     this.world.dataset.birthCorona = 'card-edge';
     this.world.dataset.birthJourney = 'orb-to-card';
     this.world.dataset.birthEasing = 'ios-spring-compositor-v517';
     this.world.dataset.responsiveAltar = 'v517-reference-ratio';
-    this.world.dataset.visualCalibration = 'card-orb-flame-golden-ratio-v517';
+    this.world.dataset.visualCalibration = 'card-orb-fluid-v537';
     this.world.dataset.cardOrigin = 'supreme-orb-v501';
     this.world.dataset.decorativeCards = 'none';
     this.world.dataset.universeBackdrop = 'procedural-no-image-v516';
@@ -309,19 +240,15 @@ export class TarotLivreOrbOSV517 {
     this.world.dataset.frameArchitecture = 'universal-single-raf';
     this.world.dataset.particleArchitecture = 'global-procedural-shader';
     this.render(false);
-    this.fire = new CelestialFireBridgeV517({
-      stage: this.stage,
-      orb: this.orb,
-      card: this.cardZone
-    });
-    this.world.dataset.engine = this.fire.mode;
-    this.world.dataset.targetFps = String(this.fire.targetFps);
+    this.fluidity = new TarotFluencyBridgeV537();
+    this.world.dataset.engine = this.fluidity.mode;
+    this.world.dataset.targetFps = String(this.fluidity.targetFps);
     this.bind();
 
     if (routeNow() === 'tarot') {
       requestAnimationFrame(() => this.enter());
     } else {
-      this.fire.setActive(false);
+      this.fluidity.setActive(false);
     }
 
     preloadCardImages(this.state.waiting.slice(0, 8), 8);
@@ -329,8 +256,8 @@ export class TarotLivreOrbOSV517 {
     document.documentElement.dataset.tarotLivre = 'v517';
     const readiness = Object.freeze({
       version: VERSION,
-      engine: 'CelestialFireBridgeV517',
-      renderer: this.fire.mode,
+      engine: 'TarotFluencyBridgeV537',
+      renderer: this.fluidity.mode,
       canonicalOrb: 'v501',
       oneLivingOrb: true,
       deckSize: DECK_SIZE,
@@ -339,18 +266,18 @@ export class TarotLivreOrbOSV517 {
       gridColumns: 6,
       atomicBirth: true,
       decodedBeforeSwap: true,
-      organicCanvasFire: true,
-      trueCelestialFire: true,
+      organicCanvasFire: false,
+      trueCelestialFire: false,
       celestialFireScheduled:false,
       lightningStrokes: false,
       strokedFirePaths:0,
       whiteOverexposure:false,
-      volumetricBillows: true,
-      flameTongues: true,
+      volumetricBillows: false,
+      flameTongues: false,
       cardEdgeBurst: true,
       responsiveAltar: true,
-      volumetricFire: true,
-      fireInsideUniverseCanvas:true,
+      volumetricFire: false,
+      fireInsideUniverseCanvas:false,
       cosmicNebula: true,
       livingUniverse: true,
       physicalCardJourney: true,
@@ -367,7 +294,7 @@ export class TarotLivreOrbOSV517 {
       referenceProportions: true,
       oneAnimationCadence: true,
       unexplainedFlyingCards: false,
-      targetFps: this.fire.targetFps
+      targetFps: this.fluidity.targetFps
     });
     document.dispatchEvent(new CustomEvent('divina:tarot-cosmico-ready', {
       detail: readiness
@@ -481,7 +408,7 @@ export class TarotLivreOrbOSV517 {
     this.orb.addEventListener('pointerdown', event => {
       if (!this.active || !this.orbHost.contains(this.orb)) return;
       this.world.classList.add('is-orb-touching');
-      this.fire?.touch(event.clientX, event.clientY, 0.72);
+      this.fluidity?.touch(event.clientX, event.clientY, 0.72);
     }, { passive: true, ...options });
 
     const releaseOrb = () => this.world.classList.remove('is-orb-touching');
@@ -596,7 +523,7 @@ export class TarotLivreOrbOSV517 {
 
     document.addEventListener('divina:supreme-orb-pulse', event => {
       if (!this.active) return;
-      this.fire?.absorb(Number(event.detail?.intensity || 0.5));
+      this.fluidity?.absorb(Number(event.detail?.intensity || 0.5));
     }, options);
 
     document.addEventListener('divina:route-ready', event => {
@@ -657,7 +584,7 @@ export class TarotLivreOrbOSV517 {
       ? `${amount} ${amount === 1 ? 'carta segue' : 'cartas seguem'} para a Mesa Real…`
       : 'A Mesa Real está abrindo…';
     this.orbCore.pulse?.('mesa-real-transfer', { intensity:0.96 });
-    this.fire?.ignite(0.72);
+    this.fluidity?.ignite(0.72);
     nativePulse('Medium');
 
     try {
@@ -684,7 +611,7 @@ export class TarotLivreOrbOSV517 {
 
   enter() {
     if (this.active && this.orbHost.contains(this.orb)) {
-      this.fire?.setActive(true);
+      this.fluidity?.setActive(true);
       return true;
     }
     this.active = true;
@@ -701,9 +628,9 @@ export class TarotLivreOrbOSV517 {
     this.world.dataset.orbClaimed = 'true';
     this.orb.dataset.tarotReveal = 'v517';
     this.orb.setAttribute('aria-disabled', String(this.busy || this.state.completed));
-    this.fire?.setActive(true);
+    this.fluidity?.setActive(true);
     requestAnimationFrame(() => {
-      this.fire?.resize();
+      this.fluidity?.resize();
       this.orbCore.pulse?.('tarot-arrival', { intensity: 0.72 });
     });
     return true;
@@ -714,7 +641,7 @@ export class TarotLivreOrbOSV517 {
     clearTimeout(this.birthTimer);
     this.world.classList.remove('is-orb-touching', 'is-birthing');
     document.body?.classList.remove('db517-tarot-birthing');
-    this.fire?.setActive(false);
+    this.fluidity?.setActive(false);
     delete this.orb.dataset.tarotReveal;
     this.orb.removeAttribute('aria-disabled');
     if (!this.orbHost.contains(this.orb)) return false;
@@ -906,7 +833,7 @@ export class TarotLivreOrbOSV517 {
     this.busy = true;
     this.setPhase('summoning');
     this.signal.textContent = 'O universo da Orbe encontra uma carta…';
-    this.fire?.ignite(0.7);
+    this.fluidity?.ignite(0.7);
     this.orbCore.pulse?.('tarot-summon', { intensity: 0.88 });
     nativePulse('Medium');
 
@@ -926,7 +853,7 @@ export class TarotLivreOrbOSV517 {
           : `${this.state.waiting.length} aguardam`;
         this.renderGrid();
         this.world.classList.add('is-birthing');
-        this.fire?.birth(1.04, duration);
+        this.fluidity?.birth(1.04, duration);
         this.orbCore.pulse?.('tarot-birth', { intensity: 1.04 });
         clearTimeout(this.birthTimer);
         this.birthTimer = setTimeout(() => {
@@ -951,7 +878,7 @@ export class TarotLivreOrbOSV517 {
           cardId: result.cardId,
           position: result.position,
           remaining: this.state.waiting.length,
-          engine: 'celestial-fire-integrated-v516'
+          engine: 'fire-removed-fluid-v537'
         }
       }));
       globalThis.dispatchEvent?.(new CustomEvent('tarot:cosmic-revealed', {
@@ -1031,7 +958,7 @@ export class TarotLivreOrbOSV517 {
         });
         await Promise.allSettled([incoming.finished, leaving?.finished]);
       }
-      this.fire?.absorb(0.22);
+      this.fluidity?.absorb(0.22);
       return true;
     } catch (error) {
       if (token === this.cardRenderToken) this.card.dataset.imageState = 'preserved';
@@ -1068,8 +995,8 @@ export class TarotLivreOrbOSV517 {
     const revealedSignature = this.state.revealed.join(',');
     this.busy = true;
     this.setPhase('shuffling');
-    this.signal.textContent = 'A chama reorganiza apenas as cartas ocultas…';
-    this.fire?.ignite(0.92);
+    this.signal.textContent = 'A Orbe reorganiza apenas as cartas ocultas…';
+    this.fluidity?.ignite(0.92);
     this.orbCore.pulse?.('tarot-shuffle', { intensity: 0.86 });
 
     try {
@@ -1131,7 +1058,7 @@ export class TarotLivreOrbOSV517 {
     this.busy = true;
     this.setPhase('resetting');
     this.signal.textContent = 'A Orbe recolhe o círculo anterior…';
-    this.fire?.ignite(1.18);
+    this.fluidity?.ignite(1.18);
     this.orbCore.pulse?.('tarot-reset', { intensity: 1.02 });
 
     try {
@@ -1221,7 +1148,7 @@ export class TarotLivreOrbOSV517 {
     return Object.freeze({
       version: VERSION,
       active: this.active,
-      renderer: this.fire?.mode || 'pending',
+      renderer: this.fluidity?.mode || 'pending',
       canonicalOrb: this.orb?.dataset?.supremeOrbVersion || '501',
       oneLivingOrb: document.querySelectorAll('[data-supreme-orb="living"]').length === 1,
       revealed: this.state.revealed.length,
@@ -1231,18 +1158,18 @@ export class TarotLivreOrbOSV517 {
       gridColumns: 6,
       atomicBirth: this.world.dataset.birthSync === 'decoded-atomic',
       decodedBeforeSwap: this.card.dataset.imageState !== 'blank',
-      organicCanvasFire: this.world.dataset.flameTexture === 'procedural-no-image',
-      trueCelestialFire: this.world.dataset.flameArchitecture === 'integrated-volumetric-field-v516',
+      organicCanvasFire: false,
+      trueCelestialFire: false,
       celestialFireScheduled: false,
       lightningStrokes: this.world.dataset.lightningStrokes !== 'none',
       strokedFirePaths: Number(this.world.dataset.strokedFirePaths || 0),
       whiteOverexposure: this.world.dataset.whiteOverexposure !== 'false',
-      volumetricBillows: true,
-      flameTongues: true,
+      volumetricBillows: false,
+      flameTongues: false,
       cardEdgeBurst: this.world.dataset.birthCorona === 'card-edge',
       responsiveAltar: this.world.dataset.responsiveAltar === 'v517-reference-ratio',
-      volumetricFire: true,
-      fireInsideUniverseCanvas: this.world.dataset.frameArchitecture === 'universal-single-raf',
+      volumetricFire: false,
+      fireInsideUniverseCanvas: false,
       cosmicNebula: true,
       livingUniverse: this.world.dataset.universeAuthority === 'living-universe-core-v516',
       physicalCardJourney: this.world.dataset.birthJourney === 'orb-to-card',
@@ -1259,7 +1186,7 @@ export class TarotLivreOrbOSV517 {
       referenceProportions: this.world.dataset.responsiveAltar === 'v517-reference-ratio',
       oneAnimationCadence: this.world.dataset.frameArchitecture === 'universal-single-raf',
       unexplainedFlyingCards: this.world.dataset.decorativeCards !== 'none',
-      targetFps: this.fire?.targetFps || 0
+      targetFps: this.fluidity?.targetFps || 0
     });
   }
 
@@ -1270,7 +1197,7 @@ export class TarotLivreOrbOSV517 {
     clearTimeout(this.birthTimer);
     clearTimeout(this.gestureTimer);
     this.routeObserver?.disconnect();
-    this.fire?.destroy();
+    this.fluidity?.destroy();
     if (globalThis.divinaTarotLivreV517 === this) delete globalThis.divinaTarotLivreV517;
     delete document.documentElement.dataset.tarotLivre;
   }

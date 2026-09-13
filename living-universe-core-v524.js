@@ -1,8 +1,9 @@
-/* DIVINA BRUXA — UNIVERSO VIVO · MACROETAPA 1/4 · PELE CÓSMICA TÁTIL V524
+/* DIVINA BRUXA — UNIVERSO VIVO V524 · CORTE DE FLUIDEZ V537
    O céu Retina aprovado ganha pigmentação física por skin e nuvens errantes
    que cedem ao toque. A Orbe permanece ancorada enquanto o universo responde. */
 
 const VERSION = 524;
+export const CELESTIAL_FIRE_ENABLED_V537 = false;
 const STYLE_ID = 'divinaLivingUniverseV524Styles';
 const ROOT_ID = 'divinaLivingUniverseV524';
 const COSMOS_TEXTURE = './divina-universe-retina-v523.webp';
@@ -133,21 +134,6 @@ class LivingUniverseCoreV524 {
     this.orbEnergy = 0.12;
     this.orbGeometryDirty = true;
     this.elapsed = 0;
-    this.flame = {
-      requested:false,
-      target:0,
-      level:0,
-      pulse:0,
-      birthEnergy:0,
-      birthProgress:-1,
-      birthStartedAt:0,
-      birthDuration:1040,
-      from:{ x:0.5, y:0.72 },
-      to:{ x:0.5, y:0.28 },
-      orb:null,
-      card:null,
-      geometryDirty:true
-    };
     this.visible = !document.hidden;
     this.destroyed = false;
     this.startedAt = performance.now();
@@ -246,11 +232,11 @@ class LivingUniverseCoreV524 {
       orbGravityField:true,
       continuousRouteMorph:true,
       clockPausesWhenHidden:true,
-      trueCelestialFire:true,
-      fireInsideUniverseCanvas:true,
+      trueCelestialFire:false,
+      fireInsideUniverseCanvas:false,
       lightningStrokes:false,
       whiteOverexposure:false,
-      firePalette:'violet-magenta-gold',
+      firePalette:'none',
       skinReactive:true,
       selectiveSkinPigment:true,
       physicalOrbTouchMotion:false,
@@ -388,11 +374,6 @@ class LivingUniverseCoreV524 {
         uniform vec3 u_light;
         uniform vec3 u_gold;
         uniform vec3 u_deep;
-        uniform vec2 u_flame_from;
-        uniform vec2 u_flame_to;
-        uniform float u_flame_level;
-        uniform float u_flame_birth;
-        uniform float u_flame_progress;
         uniform sampler2D u_cosmos;
         uniform float u_cosmos_mix;
 
@@ -551,96 +532,6 @@ class LivingUniverseCoreV524 {
             stars+=constellationStar(river,r4);
             stars+=constellationStar(river,r5);
           }
-        }
-
-        vec3 celestialFlame(vec2 uv,float aspect,float time,out float alpha){
-          vec2 point=vec2(uv.x*aspect,uv.y);
-          vec2 origin=vec2(u_flame_from.x*aspect,u_flame_from.y);
-          vec2 destination=vec2(u_flame_to.x*aspect,u_flame_to.y);
-          vec2 axis=destination-origin;
-          float axisSquared=max(dot(axis,axis),0.0001);
-          float along=clamp(dot(point-origin,axis)/axisSquared,0.0,1.0);
-          vec2 tangent=axis*inversesqrt(axisSquared);
-          vec2 normal=vec2(-tangent.y,tangent.x);
-          float envelope=smoothstep(-0.01,0.07,along)
-            *(1.0-smoothstep(0.93,1.015,along));
-
-          float serpentine=(sin(along*6.283185+0.62)
-            +0.44*sin(along*12.56637-0.85-time*0.24))*0.033;
-          serpentine*=sin(along*3.1415926);
-          vec2 center=mix(origin,destination,along)+normal*serpentine;
-          float side=dot(point-center,normal);
-          float width=mix(0.074,0.042,along)
-            *(0.88+0.14*sin(along*25.0-time*1.18));
-
-          vec2 flow=vec2(side*18.0+sin(along*11.0)*0.62,
-                         along*8.2-time*0.86);
-          float n1=noise2(flow);
-          float n2=noise2(flow*1.87+vec2(3.7,-time*0.34));
-          float n3=noise2(vec2(side*43.0-time*0.21,
-                               along*18.0-time*1.31));
-          float displacement=(n1-0.5)*width*0.94+(n2-0.5)*width*0.42;
-          float displaced=abs(side+displacement);
-          float braid=sin(along*22.0-time*1.08+n2*4.2)*width*0.29;
-
-          float broad=1.0-smoothstep(width*0.22,width*1.42,displaced);
-          float lobeA=1.0-smoothstep(width*0.10,width*0.78,
-                                     abs(side+displacement+braid));
-          float lobeB=1.0-smoothstep(width*0.12,width*0.84,
-                                     abs(side+displacement-braid*0.82));
-          float cellular=smoothstep(0.18,0.79,n1*0.52+n2*0.29+n3*0.19+broad*0.24);
-          float outer=max(broad*0.72,max(lobeA,lobeB)*0.64)
-            *(0.56+cellular*0.44)*envelope;
-          float middle=(1.0-smoothstep(width*0.08,width*0.78,displaced))
-            *(0.46+n2*0.54)*envelope;
-          float core=(1.0-smoothstep(width*0.045,width*0.36,
-                                     abs(side+displacement*0.48)))
-            *smoothstep(0.38,0.78,n1*0.56+n3*0.44)*envelope;
-          float hotA=1.0-smoothstep(width*0.06,width*0.43,
-                                    abs(side+displacement*0.34+braid*0.68));
-          float hotB=1.0-smoothstep(width*0.07,width*0.46,
-                                    abs(side+displacement*0.31-braid*0.6));
-          float hot=max(hotA,hotB)
-            *(0.3+smoothstep(0.22,0.76,n1*0.47+n3*0.53)*0.7)*envelope;
-          float wisp=(1.0-smoothstep(width*0.28,width*1.72,
-                                    abs(side-displacement*0.34+braid)))
-            *smoothstep(0.64,0.88,n3)*envelope;
-          vec2 sparkGrid=vec2(side/max(width,0.001)*2.4,
-                              along*38.0-time*3.1);
-          vec2 sparkId=floor(sparkGrid);
-          vec2 sparkLocal=fract(sparkGrid)-0.5;
-          float sparkRandom=hash21(sparkId+u_seed*73.0);
-          sparkLocal-=vec2(hash21(sparkId+19.4)-0.5,
-                           hash21(sparkId+51.7)-0.5)*0.36;
-          float sparks=(1.0-smoothstep(0.035,0.17,length(sparkLocal)))
-            *step(0.84,sparkRandom)
-            *(1.0-smoothstep(width*0.72,width*1.9,abs(side)))
-            *envelope;
-
-          float traveler=exp(-pow((along-u_flame_progress)*11.5,2.0))
-            *(1.0-smoothstep(width*0.18,width*1.18,displaced))
-            *u_flame_birth;
-          float originBloom=exp(-length(point-origin)*20.0)*(0.28+u_flame_birth*0.3);
-          float portalBloom=exp(-length(point-destination)*27.0)
-            *(0.15+traveler*0.62);
-
-          vec3 violet=mix(u_accent,vec3(0.50,0.055,0.94),0.34);
-          vec3 magenta=mix(u_accent,vec3(1.0,0.075,0.52),0.56);
-          vec3 amber=mix(u_gold,vec3(1.0,0.34,0.035),0.34);
-          float magentaMix=clamp(middle*0.84+lobeA*lobeB*0.2,0.0,0.88);
-          float amberMix=clamp(hot*0.82+core*0.3+traveler*0.46,0.0,0.92);
-          vec3 chroma=mix(violet,magenta,magentaMix);
-          chroma=mix(chroma,amber,amberMix);
-          float luminosity=clamp(outer*0.5+middle*0.32+hot*0.38
-                                 +core*0.2+traveler*0.42,0.0,1.08);
-          vec3 flame=chroma*luminosity*1.22
-            +violet*wisp*0.18
-            +amber*sparks*(0.16+u_flame_birth*0.58)
-            +violet*originBloom*0.2
-            +amber*portalBloom*0.24;
-          alpha=clamp(outer*0.72+middle*0.42+hot*0.38+core*0.24+wisp*0.22+sparks*0.25
-                      +traveler*0.64+originBloom*0.16+portalBloom*0.2,0.0,1.0);
-          return flame*u_flame_level;
         }
 
         void main(){
@@ -879,20 +770,6 @@ class LivingUniverseCoreV524 {
           float livingPulse=0.96+0.04*sin(time*0.22+orbDistance*12.0);
           color+=mix(u_accent,u_gold,0.42)*orbAura*livingPulse;
 
-          if(u_flame_level>0.002){
-            vec2 flameOrigin=vec2(u_flame_from.x*aspect,u_flame_from.y);
-            vec2 flameDestination=vec2(u_flame_to.x*aspect,u_flame_to.y);
-            vec2 flamePoint=vec2(uv.x*aspect,uv.y);
-            vec2 low=min(flameOrigin,flameDestination)-vec2(0.16,0.095);
-            vec2 high=max(flameOrigin,flameDestination)+vec2(0.16,0.095);
-            if(flamePoint.x>low.x&&flamePoint.x<high.x
-               &&flamePoint.y>low.y&&flamePoint.y<high.y){
-              float flameAlpha=0.0;
-              vec3 flame=celestialFlame(uv,aspect,time,flameAlpha);
-              color+=flame*(0.78+flameAlpha*0.2);
-            }
-          }
-
           float touchGlow=exp(-length(p-pointer)*5.8)*u_energy;
           color+=mix(u_accent,u_gold,u_warmth)*touchGlow*0.075;
           color+=mix(u_accent,u_light,0.5)*touchField*(0.045+velocityStrength*0.072);
@@ -945,11 +822,6 @@ class LivingUniverseCoreV524 {
         light:this.gl.getUniformLocation(program, 'u_light'),
         gold:this.gl.getUniformLocation(program, 'u_gold'),
         deep:this.gl.getUniformLocation(program, 'u_deep'),
-        flameFrom:this.gl.getUniformLocation(program, 'u_flame_from'),
-        flameTo:this.gl.getUniformLocation(program, 'u_flame_to'),
-        flameLevel:this.gl.getUniformLocation(program, 'u_flame_level'),
-        flameBirth:this.gl.getUniformLocation(program, 'u_flame_birth'),
-        flameProgress:this.gl.getUniformLocation(program, 'u_flame_progress'),
         cosmosTexture:this.gl.getUniformLocation(program, 'u_cosmos'),
         cosmosMix:this.gl.getUniformLocation(program, 'u_cosmos_mix')
       };
@@ -1037,7 +909,6 @@ class LivingUniverseCoreV524 {
   bind() {
     this.resizeTimer = 0;
     this.onResize = () => {
-      this.flame.geometryDirty = true;
       this.orbGeometryDirty = true;
       const nextWidth = stableViewport().width;
       if (Math.abs(nextWidth - this.width) <= 2) return;
@@ -1049,7 +920,6 @@ class LivingUniverseCoreV524 {
     };
     addEventListener('resize', this.onResize, { passive:true });
     this.onViewportShift = event => {
-      this.flame.geometryDirty = true;
       this.orbGeometryDirty = true;
       const candidate = event?.target && event.target !== document && event.target !== globalThis
         ? event.target
@@ -1062,9 +932,6 @@ class LivingUniverseCoreV524 {
     addEventListener('scroll', this.onViewportShift, { passive:true, capture:true });
     globalThis.visualViewport?.addEventListener('resize', this.onResize, { passive:true });
     globalThis.visualViewport?.addEventListener('scroll', this.onViewportShift, { passive:true });
-    this.portalObserver = typeof ResizeObserver === 'function'
-      ? new ResizeObserver(this.onViewportShift)
-      : null;
     this.onVisibility = () => {
       this.visible = !document.hidden;
       if (this.visible) {
@@ -1219,8 +1086,6 @@ class LivingUniverseCoreV524 {
       depth:0.86
     }) };
     this.energy = Math.max(this.energy, 0.82);
-    this.flame.target = this.flame.requested && next === 'tarot' ? 1 : 0;
-    this.flame.geometryDirty = true;
     this.orbGeometryDirty = true;
     this.root.dataset.route = next;
   }
@@ -1257,81 +1122,6 @@ class LivingUniverseCoreV524 {
       ceiling:this.qualityCeiling,
       resolutionLocked:this.resolutionLocked
     });
-  }
-
-  setCelestialFlame({ orb, card, active=true }={}) {
-    this.portalObserver?.disconnect();
-    this.flame.orb = orb || null;
-    this.flame.card = card || null;
-    if (orb) this.portalObserver?.observe(orb);
-    if (card) this.portalObserver?.observe(card);
-    this.flame.geometryDirty = true;
-    this.setCelestialFlameActive(active);
-    return this;
-  }
-
-  setCelestialFlameActive(active) {
-    this.flame.requested = Boolean(active);
-    this.flame.target = this.flame.requested && this.route === 'tarot' ? 1 : 0;
-    this.flame.geometryDirty = true;
-    this.root.dataset.celestialFire = this.flame.requested ? 'alive' : 'resting';
-    if (this.flame.requested) {
-      this.flame.pulse = Math.max(this.flame.pulse, 0.3);
-      this.start();
-    } else {
-      this.flame.birthProgress = -1;
-      this.flame.birthEnergy = 0;
-      this.flame.pulse = 0;
-    }
-  }
-
-  pulseCelestialFlame(strength=0.7) {
-    this.flame.pulse = Math.max(this.flame.pulse, clamp(Number(strength) || 0.7, 0.2, 1.4));
-    this.energy = Math.max(this.energy, Math.min(1.35, this.flame.pulse));
-    this.start();
-  }
-
-  birthCelestialFlame({ strength=1, duration=1040 }={}) {
-    this.flame.birthEnergy = clamp(Number(strength) || 1, 0.35, 1.35);
-    this.flame.birthProgress = 0;
-    this.flame.birthStartedAt = performance.now();
-    this.flame.birthDuration = Math.max(180, Number(duration) || 1040);
-    this.pulseCelestialFlame(this.flame.birthEnergy);
-  }
-
-  updateFlameGeometry() {
-    if (!this.flame.geometryDirty) return;
-    this.flame.geometryDirty = false;
-    const orbRect = this.flame.orb?.getBoundingClientRect?.();
-    const cardRect = this.flame.card?.getBoundingClientRect?.();
-    if (!orbRect?.width || !orbRect?.height || !cardRect?.width || !cardRect?.height) return;
-    const viewportWidth = Math.max(innerWidth, 1);
-    const viewportHeight = Math.max(innerHeight, 1);
-    this.flame.from = {
-      x:clamp((orbRect.left + orbRect.width * 0.5) / viewportWidth, -0.15, 1.15),
-      y:clamp((orbRect.top + orbRect.height * 0.08) / viewportHeight, -0.15, 1.15)
-    };
-    this.flame.to = {
-      x:clamp((cardRect.left + cardRect.width * 0.5) / viewportWidth, -0.15, 1.15),
-      y:clamp((cardRect.bottom - cardRect.height * 0.025) / viewportHeight, -0.15, 1.15)
-    };
-  }
-
-  updateFlame(delta, timestamp) {
-    this.updateFlameGeometry();
-    const response = this.flame.target > this.flame.level ? 0.0068 : 0.009;
-    this.flame.level += (this.flame.target - this.flame.level)
-      * Math.min(1, delta * response);
-    this.flame.pulse += (0 - this.flame.pulse) * Math.min(1, delta * 0.0038);
-    if (this.flame.birthProgress >= 0) {
-      const progress = (timestamp - this.flame.birthStartedAt) / this.flame.birthDuration;
-      if (progress >= 1) {
-        this.flame.birthProgress = -1;
-        this.flame.birthEnergy = 0;
-      } else {
-        this.flame.birthProgress = clamp(progress, 0, 1);
-      }
-    }
   }
 
   resize({ force=false }={}) {
@@ -1406,19 +1196,6 @@ class LivingUniverseCoreV524 {
     gl.uniform3fv(this.uniforms.light, this.palette.light);
     gl.uniform3fv(this.uniforms.gold, this.palette.gold);
     gl.uniform3fv(this.uniforms.deep, this.palette.deep);
-    gl.uniform2f(this.uniforms.flameFrom, this.flame.from.x, this.flame.from.y);
-    gl.uniform2f(this.uniforms.flameTo, this.flame.to.x, this.flame.to.y);
-    gl.uniform1f(
-      this.uniforms.flameLevel,
-      clamp(this.flame.level + this.flame.pulse * 0.2, 0, 1.18)
-    );
-    gl.uniform1f(
-      this.uniforms.flameBirth,
-      this.flame.birthProgress < 0
-        ? 0
-        : this.flame.birthEnergy * (0.62 + Math.sin(this.flame.birthProgress * Math.PI) * 0.38)
-    );
-    gl.uniform1f(this.uniforms.flameProgress, this.flame.birthProgress);
     gl.drawArrays(gl.TRIANGLES, 0, 6);
   }
 
@@ -1510,80 +1287,6 @@ class LivingUniverseCoreV524 {
     context.restore();
   }
 
-  drawCanvasFlame(context, time) {
-    const level = clamp(this.flame.level + this.flame.pulse * 0.2, 0, 1.18);
-    if (level < 0.004) return;
-    const origin = {
-      x:this.flame.from.x * this.width,
-      y:this.flame.from.y * this.height
-    };
-    const destination = {
-      x:this.flame.to.x * this.width,
-      y:this.flame.to.y * this.height
-    };
-    const dx = destination.x - origin.x;
-    const dy = destination.y - origin.y;
-    const length = Math.hypot(dx, dy);
-    if (length < 20) return;
-    const normal = { x:-dy / length, y:dx / length };
-    const accent = this.palette.accent.map(value => Math.round(value * 255));
-    const gold = this.palette.gold.map(value => Math.round(value * 255));
-    const magenta = [
-      Math.round(accent[0] * 0.44 + 255 * 0.56),
-      Math.round(accent[1] * 0.44 + 20 * 0.56),
-      Math.round(accent[2] * 0.44 + 132 * 0.56)
-    ];
-    const volumes = constrained() ? 12 : 18;
-    const baseRadius = Math.min(this.width * 0.18, this.height * 0.085);
-
-    context.save();
-    context.globalCompositeOperation = 'screen';
-    for (let index=0; index<volumes; index+=1) {
-      const along = (index + 0.5) / volumes;
-      const envelope = Math.sin(along * Math.PI) ** 0.55;
-      const serpentine = (
-        Math.sin(along * Math.PI * 2 + 0.62)
-        + Math.sin(along * Math.PI * 4 - 0.85 - time * 0.24) * 0.44
-      ) * baseRadius * 0.52 * envelope;
-      const turbulence = (
-        Math.sin(along * 39 + time * 2.1 + index * 0.77) * 0.28
-        + Math.cos(along * 21 - time * 1.37 + index) * 0.14
-      ) * baseRadius;
-      const x = origin.x + dx * along + normal.x * (serpentine + turbulence);
-      const y = origin.y + dy * along + normal.y * (serpentine + turbulence);
-      const radius = baseRadius * (1 - along * 0.36)
-        * (0.7 + Math.sin(index * 2.73 - time * 1.6) ** 2 * 0.3);
-      const core = index % 4 === 0 ? gold : magenta;
-      const gradient = context.createRadialGradient(x,y,0,x,y,radius);
-      gradient.addColorStop(0,`rgba(${core[0]},${core[1]},${core[2]},${0.28*level})`);
-      gradient.addColorStop(0.34,`rgba(${magenta[0]},${magenta[1]},${magenta[2]},${0.2*level})`);
-      gradient.addColorStop(0.72,`rgba(${accent[0]},${accent[1]},${accent[2]},${0.13*level})`);
-      gradient.addColorStop(1,`rgba(${accent[0]},${accent[1]},${accent[2]},0)`);
-      context.fillStyle = gradient;
-      context.beginPath();
-      context.arc(x,y,radius,0,Math.PI*2);
-      context.fill();
-    }
-
-    if (this.flame.birthProgress >= 0) {
-      const along = this.flame.birthProgress;
-      const envelope = Math.sin(along * Math.PI);
-      const bend = Math.sin(along * Math.PI * 2 + 0.62) * baseRadius * 0.52 * envelope;
-      const x = origin.x + dx * along + normal.x * bend;
-      const y = origin.y + dy * along + normal.y * bend;
-      const radius = baseRadius * (0.54 + envelope * 0.34);
-      const gradient = context.createRadialGradient(x,y,0,x,y,radius);
-      gradient.addColorStop(0,`rgba(${gold[0]},${gold[1]},${gold[2]},.72)`);
-      gradient.addColorStop(0.34,`rgba(${magenta[0]},${magenta[1]},${magenta[2]},.42)`);
-      gradient.addColorStop(1,`rgba(${accent[0]},${accent[1]},${accent[2]},0)`);
-      context.fillStyle = gradient;
-      context.beginPath();
-      context.arc(x,y,radius,0,Math.PI*2);
-      context.fill();
-    }
-    context.restore();
-  }
-
   drawCanvas(timestamp) {
     const context = this.context;
     if (!context) return;
@@ -1656,7 +1359,6 @@ class LivingUniverseCoreV524 {
       }
     }
     context.globalAlpha = 1;
-    this.drawCanvasFlame(context, time);
     context.globalAlpha = 1;
     context.globalCompositeOperation = 'source-over';
   }
@@ -1727,7 +1429,6 @@ class LivingUniverseCoreV524 {
       this.cosmos.mix += (this.cosmos.target - this.cosmos.mix) * Math.min(1, delta * 0.0048);
       this.updatePalette(delta);
       this.updateOrbGeometry();
-      this.updateFlame(delta, timestamp);
       if (this.mode === 'webgl-procedural') this.drawWebGL(timestamp);
       else this.drawCanvas(timestamp);
       this.lastSuccessfulDraw = timestamp;
@@ -1817,13 +1518,13 @@ class LivingUniverseCoreV524 {
       selectiveSkinPigment:true,
       paletteTransition:'continuous-425ms-response',
       physicalOrbTouchMotion:false,
-      trueCelestialFire:true,
-      celestialFireActive:this.flame.level > 0.01,
-      fireInsideUniverseCanvas:true,
+      trueCelestialFire:false,
+      celestialFireActive:false,
+      fireInsideUniverseCanvas:false,
       lightningStrokes:false,
       whiteOverexposure:false,
-      firePalette:'violet-magenta-gold',
-      birthProgress:this.flame.birthProgress,
+      firePalette:'none',
+      birthProgress:-1,
       contextFallback:true,
       continuousAnimationLoops:1,
       paused:!this.raf
@@ -1857,7 +1558,6 @@ class LivingUniverseCoreV524 {
     document.removeEventListener('divina:orbital-menu-ready', this.onOrbJourney);
     removeEventListener('hashchange', this.onRouteEvent);
     this.contextEventCanvas?.removeEventListener('webglcontextlost', this.onContextLost);
-    this.portalObserver?.disconnect();
     if (this.gl) {
       if (this.buffer) this.gl.deleteBuffer(this.buffer);
       if (this.program) this.gl.deleteProgram(this.program);

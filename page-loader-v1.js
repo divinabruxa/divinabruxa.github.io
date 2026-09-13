@@ -1,6 +1,6 @@
-/* DIVINA BRUXA 2.0 — CARREGAMENTO DE MUNDOS V517 · FLUIDEZ V535
-   Preserva V501, V509 e o Universo/Chama V516; conecta Tarot e Mesa Real.
-   V535 aquece no gesto e permite que a tela abra enquanto o motor termina. */
+/* DIVINA BRUXA 3.0 — CARREGAMENTO V517 · FLUIDEZ V535/V537
+   Preserva V501, V509 e o Universo V524; conecta Tarot e Mesa Real.
+   V537 carrega o Tarot Livre sem o motor de fogo removido. */
 
 import {
   normalizeRouteId,
@@ -189,8 +189,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
         'divinaTarotLivreOrbOSV516'
       ].forEach(styleId=>document.getElementById(styleId)?.remove());
       const [,module]=await Promise.all([
-        ensureStyle('divinaTarotLivreOrbOSV517','tarot-livre-orbe-os-v517.css?v=517-ios-composition'),
-        import('./tarot-livre-orbe-os-v517.js?v=517-ios-composition')
+        ensureStyle('divinaTarotLivreOrbOSV517','tarot-livre-orbe-os-v517.css?v=537-no-fire'),
+        import('./tarot-livre-orbe-os-v517.js?v=537-no-fire')
       ]);
       const instance=new module.TarotLivreOrbOSV517($('#tarot'),{
         orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme
@@ -310,8 +310,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
 
   const warmers=Object.freeze({
     tarot:()=>Promise.all([
-      ensureStyle('divinaTarotLivreOrbOSV517','tarot-livre-orbe-os-v517.css?v=517-ios-composition'),
-      import('./tarot-livre-orbe-os-v517.js?v=517-ios-composition')
+      ensureStyle('divinaTarotLivreOrbOSV517','tarot-livre-orbe-os-v517.css?v=537-no-fire'),
+      import('./tarot-livre-orbe-os-v517.js?v=537-no-fire')
     ]),
     daily:()=>Promise.all([
       ensureStyle('divinaDailyLivingV509','daily-world-v509.css?v=509'),
