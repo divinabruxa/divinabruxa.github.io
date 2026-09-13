@@ -1,12 +1,12 @@
-/* DIVINA BRUXA — VERDADE COMERCIAL ÚNICA V200 · REBIRTH R020
+/* DIVINA BRUXA — VERDADE COMERCIAL ÚNICA V558 · CONSULTAS SUPREMAS
    Fonte canônica do runtime. Valores em centavos evitam divergência decimal. */
 
 const freezeItems=items=>Object.freeze(items.map(item=>Object.freeze(item)));
 
 export const COMMERCIAL_TRUTH_V200=Object.freeze({
   release:'V200',
-  truthVersion:'commercial-2026-09-10-r020',
-  consultationPriceTableVersion:'consultas-2026-09-10-r020',
+  truthVersion:'commercial-2026-09-13-v558',
+  consultationPriceTableVersion:'consultas-2026-09-13-v558',
   billingCatalogVersion:'V191',
   currency:'BRL',
   environment:'staging',
@@ -35,8 +35,8 @@ export const COMMERCIAL_TRUTH_V200=Object.freeze({
       id:'mesa-real-profissional',
       name:'Mesa Real Profissional',
       shortName:'Mesa Real',
-      price:500,
-      priceCents:50000,
+      price:250,
+      priceCents:25000,
       sigil:'✺',
       duration:'Leitura mais completa',
       delivery:'Confirmação por e-mail',
@@ -47,10 +47,10 @@ export const COMMERCIAL_TRUTH_V200=Object.freeze({
     },
     {
       id:'leitura-mentes',
-      name:'Leitura de Pensamentos',
-      shortName:'Pensamentos',
-      price:500,
-      priceCents:50000,
+      name:'Leitura de Mente',
+      shortName:'Mente',
+      price:200,
+      priceCents:20000,
       sigil:'☾',
       duration:'Leitura direcionada',
       delivery:'Confirmação por e-mail',
@@ -63,8 +63,8 @@ export const COMMERCIAL_TRUTH_V200=Object.freeze({
       id:'carta-conselho',
       name:'Carta de Conselho',
       shortName:'Conselho',
-      price:300,
-      priceCents:30000,
+      price:150,
+      priceCents:15000,
       sigil:'◇',
       duration:'Uma carta profunda',
       delivery:'Confirmação por e-mail',
@@ -77,8 +77,8 @@ export const COMMERCIAL_TRUTH_V200=Object.freeze({
       id:'pergunta-direta',
       name:'Pergunta',
       shortName:'Pergunta',
-      price:150,
-      priceCents:15000,
+      price:50,
+      priceCents:5000,
       sigil:'✦',
       duration:'Uma questão específica',
       delivery:'Confirmação por e-mail',
@@ -97,7 +97,7 @@ export const assertCommercialTruthV200=()=>{
   const truth=COMMERCIAL_TRUTH_V200;
   const consultationPrices=truth.services.map(item=>item.priceCents).join(',');
   const productKeys=[...truth.plans.filter(item=>item.priceCents>0),...truth.aiCredits].map(item=>item.productKey);
-  if(consultationPrices!=='50000,50000,30000,15000')throw new Error('COMMERCIAL_CONSULTATION_PRICE_DRIFT');
+  if(consultationPrices!=='25000,20000,15000,5000')throw new Error('COMMERCIAL_CONSULTATION_PRICE_DRIFT');
   if(new Set(productKeys).size!==productKeys.length)throw new Error('COMMERCIAL_DUPLICATE_PRODUCT_KEY');
   if(truth.skins.count!==30||truth.skins.paidCount!==29||truth.skins.individualPurchase!==true)throw new Error('COMMERCIAL_SKIN_CATALOG_DRIFT');
   if(truth.skins.priceTiersCents.join(',')!=='1990,2990,3990,4990')throw new Error('COMMERCIAL_SKIN_PRICE_DRIFT');

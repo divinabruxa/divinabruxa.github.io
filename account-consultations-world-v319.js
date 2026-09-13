@@ -1,11 +1,11 @@
-/* DIVINA BRUXA 2.0 — P0 HOTFIX V325 · CONTA + CONSULTAS V319
-   Camadas vivas sobre AccountEngine V201 e ConsultationEngine V188.
+/* DIVINA BRUXA 4.0 — CONSULTAS SUPREMAS V558
+   Camadas vivas sobre AccountEngine V201 e ConsultationEngine V558.
    Não duplica autenticação, RLS, sincronização, protocolo, agenda ou envio. */
 
-import { ConsultationEngine } from './consultation-engine.js?v=188';
-import { COMMERCIAL_TRUTH_V200 } from './commercial-truth-v200.js?v=200';
+import { ConsultationEngine } from './consultation-engine.js?v=558';
+import { COMMERCIAL_TRUTH_V200 } from './commercial-truth-v200.js?v=558';
 
-const RELEASE = 'V319';
+const RELEASE = 'V558';
 const STYLE_ID = 'accountConsultationsWorldV319Styles';
 const ACCOUNT_WORLD_ID = 'accountWorldV319';
 const CONSULT_WORLD_ID = 'consultationsWorldV319';
@@ -34,12 +34,7 @@ const emit=(type,detail={})=>document.dispatchEvent(new CustomEvent(type,{
 class GovernedConsultationEngineV319 extends ConsultationEngine{
   applyCatalog(rows,version){
     if(!Array.isArray(rows))return false;
-    if(String(version||'')!==COMMERCIAL_TRUTH_V200.consultationPriceTableVersion)return false;
-
-    for(const local of COMMERCIAL_TRUTH_V200.services){
-      const remote=rows.find(row=>String(row?.service_key||'').trim()===local.id);
-      if(!remote||Number(remote.price_brl_cents)!==Number(local.priceCents))return false;
-    }
+    if(!String(version||'').trim())return false;
     return super.applyCatalog(rows,version);
   }
 }
@@ -188,6 +183,7 @@ export class ConsultationsWorldV319{
     };
 
     this.root.dataset.consultationsWorld='v319';
+    globalThis.divinaConsultationsWorldV319=this;
     this.enhance();
 
     emit('divina:consultations-world-ready',{
@@ -203,9 +199,9 @@ export class ConsultationsWorldV319{
     if(!this.root)return false;
     document.getElementById(CONSULT_WORLD_ID)?.remove();
 
-    // Corrige a etiqueta antiga do motor sem duplicar o fluxo.
+    const prices=COMMERCIAL_TRUTH_V200.services.map(service=>service.priceCents);
     const badges=this.root.querySelectorAll('.consultation-sanctuary-badges span');
-    if(badges[1])badges[1].textContent='◇ DE R$ 150 A R$ 500';
+    if(badges[1])badges[1].textContent=`◇ DE ${money(Math.min(...prices))} A ${money(Math.max(...prices))}`;
 
     const world=document.createElement('section');
     world.id=CONSULT_WORLD_ID;
@@ -233,7 +229,7 @@ export class ConsultationsWorldV319{
 
       <div class="acw319__consult-covenant">
         <span>◇</span>
-        <p><b>Valores oficiais V319.</b><small>Mesa Real R$500 · Leitura de Pensamentos R$500 · Carta de Conselho R$300 · Pergunta R$150.</small></p>
+        <p><b>Valores oficiais V558.</b><small>Mesa Real R$250 · Leitura de Mente R$200 · Carta de Conselho R$150 · Pergunta R$50.</small></p>
         <button type="button" data-acw319-start>ESCOLHER CONSULTA</button>
       </div>
 
@@ -247,7 +243,7 @@ export class ConsultationsWorldV319{
 
     world.querySelector('[data-acw319-start]')?.addEventListener('click',()=>{
       this.root.querySelector('.consultation-services-stage')?.scrollIntoView({
-        behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',
+        behavior:'auto',
         block:'start'
       });
     });
@@ -258,7 +254,7 @@ export class ConsultationsWorldV319{
   status(){
     return Object.freeze({
       release:RELEASE,
-      baseEngine:'V188',
+      baseEngine:'V558',
       serviceCount:4,
       priceTableVersion:COMMERCIAL_TRUTH_V200.consultationPriceTableVersion,
       prices:COMMERCIAL_TRUTH_V200.services.map(item=>item.priceCents),
@@ -266,13 +262,15 @@ export class ConsultationsWorldV319{
       realBilling:false,
       aiCreditsConsumed:false,
       includedInPremium:false,
-      remotePriceDriftRejected:true
+      remoteAdminPricesAccepted:true,
+      historicalPriceSnapshots:true
     });
   }
 
   destroy(){
     this.engine?.destroy?.();
     document.getElementById(CONSULT_WORLD_ID)?.remove();
+    if(globalThis.divinaConsultationsWorldV319===this)delete globalThis.divinaConsultationsWorldV319;
     delete this.root?.dataset?.consultationsWorld;
   }
 }

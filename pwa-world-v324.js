@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 9/14 · CORTE V557
+/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 10/14 · CORTE V558
    Uma única autoridade PWA para app e páginas de instalação.
    Offline seletivo: mundos locais continuam; ações de autoridade exigem rede.
    Não altera o motor visual da Orbe principal. */
 
 import { installPerformanceV324, summarizeLocalWebVitalsV324, performanceTierV324 } from './performance-world-v324.js?v=324';
 import { createResponsiveEnchantmentCoreV533 } from './responsive-enchantment-core-v533.js?v=542-skins';
-import { createPwaPerformanceRecoveryCoreV546 } from './pwa-performance-recovery-core-v546.js?v=557';
+import { createPwaPerformanceRecoveryCoreV546 } from './pwa-performance-recovery-core-v546.js?v=558';
 
-const VERSION=557;
+const VERSION=558;
 const STYLE_ID='divinaPwaResilienceV324';
 const INSTALL_ROUTES=Object.freeze({pt:'instalar-app.html',en:'install-app.html',es:'instalar-aplicacion.html'});
 const ONLINE_ONLY_SELECTOR=[
@@ -50,7 +50,7 @@ const copy=()=>({
     preparing:'Preparando Tarot, Carta do Dia, Biblioteca, Diário e Whit Local para continuidade offline…',
     ready:'Núcleo gratuito offline preparado. Whit Local também continua sem API; recursos de autoridade exigem conexão.',
     partial:'Parte do núcleo foi preparada. Mantenha a conexão e tente novamente.',
-    verifying:'Verificando o núcleo instalado…',healthy:'Núcleo V557 íntegro e pronto.',
+    verifying:'Verificando o núcleo instalado…',healthy:'Núcleo V558 íntegro e pronto.',
     repairing:'Reparando somente os arquivos do aplicativo…',repaired:'Núcleo reparado. Reabra o aplicativo.',
     premiumDenied:'O offline Premium exige Conta conectada e entitlement ativo confirmado pelo servidor.'
   },
@@ -65,7 +65,7 @@ const copy=()=>({
     preparing:'Preparing Tarot, Daily Card, Library, Journal and Local Whit for offline continuity…',
     ready:'Free offline core prepared. Local Whit also remains available without an API; authority services require a connection.',
     partial:'Part of the offline core was prepared. Keep the connection and try again.',
-    verifying:'Checking the installed core…',healthy:'V557 core is intact and ready.',
+    verifying:'Checking the installed core…',healthy:'V558 core is intact and ready.',
     repairing:'Repairing app files only…',repaired:'Core repaired. Reopen the app.',
     premiumDenied:'Premium offline requires a connected Account and an active server-confirmed entitlement.'
   },
@@ -80,7 +80,7 @@ const copy=()=>({
     preparing:'Preparando Tarot, Carta del Día, Biblioteca, Diario y Whit Local para continuidad sin conexión…',
     ready:'Núcleo gratuito sin conexión preparado. Whit Local también continúa sin API; los servicios de autoridad necesitan conexión.',
     partial:'Parte del núcleo fue preparada. Mantén la conexión e inténtalo de nuevo.',
-    verifying:'Verificando el núcleo instalado…',healthy:'El núcleo V557 está íntegro y listo.',
+    verifying:'Verificando el núcleo instalado…',healthy:'El núcleo V558 está íntegro y listo.',
     repairing:'Reparando solamente los archivos de la aplicación…',repaired:'Núcleo reparado. Vuelve a abrir la aplicación.',
     premiumDenied:'El modo Premium sin conexión exige Cuenta conectada y un derecho activo confirmado por el servidor.'
   }
@@ -89,7 +89,7 @@ const copy=()=>({
 const installStyle=()=>{
   if(document.getElementById(STYLE_ID))return;
   const link=document.createElement('link');
-  link.id=STYLE_ID;link.rel='stylesheet';link.href='./pwa-resilience-v324.css?v=557';
+  link.id=STYLE_ID;link.rel='stylesheet';link.href='./pwa-resilience-v324.css?v=558';
   document.head.append(link);
 };
 
@@ -323,11 +323,11 @@ const setupServiceWorker=()=>{
     return;
   }
   globalThis.__divinaSWBootstrap='v557-pwa';
-  navigator.serviceWorker.register('./sw.js?v=557',{updateViaCache:'none'})
+  navigator.serviceWorker.register('./sw.js?v=558',{updateViaCache:'none'})
     .then(registration=>{
       announceRegistration(registration);
     })
-    .catch(error=>console.error('[Divina] PWA V557 isolado indisponível',error));
+    .catch(error=>console.error('[Divina] PWA V558 isolado indisponível',error));
 };
 
 const setupReturnFromBackground=()=>{

@@ -10,7 +10,7 @@ import { ROUTES_V180, normalizeRouteId } from './route-registry-v180.js?v=180';
 import {
   COMMERCIAL_TRUTH_V200,
   assertCommercialTruthV200
-} from './commercial-truth-v200.js?v=200';
+} from './commercial-truth-v200.js?v=558';
 
 const VERSION = 535;
 const INSTANCE = Symbol.for('divina.world.truth.v535');

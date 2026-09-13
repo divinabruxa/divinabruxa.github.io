@@ -1,10 +1,11 @@
-/* DIVINA BRUXA — CONSULTAS V200
+/* DIVINA BRUXA — CONSULTAS V558
    Política de atendimento alimentada pela verdade comercial única. */
 
-import { COMMERCIAL_TRUTH_V200, commercialServiceById } from './commercial-truth-v200.js?v=200';
+import { COMMERCIAL_TRUTH_V200, commercialServiceById } from './commercial-truth-v200.js?v=558';
 
 export const CONSULTATION_POLICY=Object.freeze({
-  schemaVersion:'10.0.0',
+  schemaVersion:'11.0.0',
+  release:'V558',
   priceTableVersion:COMMERCIAL_TRUTH_V200.consultationPriceTableVersion,
   environment:'staging',
   realBilling:false,

@@ -2,9 +2,9 @@
 export const OPERATIONS_EMAIL='orbedasrealidades@hotmail.com';
 export const CONSULTATIONS=Object.freeze({
   mesaReal:Object.freeze({id:'mesa-real-profissional',name:'Mesa Real Profissional',priceBRL:250}),
-  pensamentos:Object.freeze({id:'leitura-mentes',name:'Leitura de Mentes',priceBRL:150}),
-  conselho:Object.freeze({id:'carta-conselho',name:'Carta de Conselho',priceBRL:100}),
-  pergunta:Object.freeze({id:'pergunta-direta',name:'Pergunta Direta',priceBRL:50})
+  pensamentos:Object.freeze({id:'leitura-mentes',name:'Leitura de Mente',priceBRL:200}),
+  conselho:Object.freeze({id:'carta-conselho',name:'Carta de Conselho',priceBRL:150}),
+  pergunta:Object.freeze({id:'pergunta-direta',name:'Pergunta',priceBRL:50})
 });
 export const REQUIRED_FIELDS=Object.freeze(['name','email','phone','service','question']);
 export const CONSULTATION_STATUS=Object.freeze(['received','under-review','reply-by-email','scheduled','closed']);

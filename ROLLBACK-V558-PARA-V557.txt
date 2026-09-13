@@ -1,0 +1,7 @@
+ROLLBACK V558 → V557
+
+Este pacote é incremental e preserva a V557. Para voltar apenas os arquivos do site, reenvie os arquivos originais do pacote V557 sobre os mesmos nomes e remova consultations-supreme-v558.css da publicação.
+
+O banco STAGING recebeu os preços V558. Só use ROLLBACK-SUPABASE-V558.sql se você realmente quiser restaurar a tabela anterior R$250 / R$150 / R$100 / R$50. Solicitações já registradas continuam preservando seus próprios price_snapshots.
+
+Não apague conteúdo, imagens, CNAME, dados do Diário, protocolos, histórico local, progresso, compras ou preferências.

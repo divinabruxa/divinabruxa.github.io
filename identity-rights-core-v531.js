@@ -3,7 +3,7 @@
    mesma Orbe V501. Esta camada não recria autenticação, billing, entitlements,
    catálogo de skins ou consentimento e não lê conteúdo privado. */
 
-import { COMMERCIAL_TRUTH_V200 } from './commercial-truth-v200.js?v=200';
+import { COMMERCIAL_TRUTH_V200 } from './commercial-truth-v200.js?v=558';
 import { SKIN_REGISTRY_V12 } from './skin-registry-v12.js?v=12';
 
 const RELEASE = 'V542';

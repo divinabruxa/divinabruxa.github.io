@@ -2,7 +2,7 @@
    Aprofunda Consultas, Loja, Música e Vídeos sem criar outra Orbe, canvas,
    loop visual ou fonte comercial. Conteúdo privado nunca é lido. */
 
-import { COMMERCIAL_TRUTH_V200 } from './commercial-truth-v200.js?v=200';
+import { COMMERCIAL_TRUTH_V200 } from './commercial-truth-v200.js?v=558';
 import { STORE_POLICY } from './store-policy.js?v=192';
 
 const RELEASE='V541';
@@ -50,7 +50,7 @@ export const EXPERIENCE_DEPTH_PRIVACY_V541=Object.freeze({
 export const EXPERIENCE_DEPTH_CONTRACT_V541=Object.freeze({
   release:RELEASE,macroStage:'7/14',worlds:ROUTES,canonicalOrb:'V501',parallelOrbEngines:0,
   permanentAnimationLoops:0,pointerMoveEffects:0,consultationServices:4,
-  consultationPriceCents:Object.freeze([50000,50000,30000,15000]),
+  consultationPriceCents:Object.freeze([25000,20000,15000,5000]),
   consultationChannel:'email-only',consultationRealBilling:false,
   storeAssociateTag:'orbedasrealid-20',storeCheckoutInternal:false,
   musicFallbackAlbums:2,musicAutoplay:false,musicPlayerLazy:true,

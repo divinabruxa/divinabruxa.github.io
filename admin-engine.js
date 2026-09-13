@@ -2,7 +2,7 @@
    Sessão em cookie seguro, owner verificada e MFA; nenhum desbloqueio local. */
 import { escapeHTML } from './storage.js';
 import { ADMIN_POLICY, adminModuleById } from './admin-policy.js?v=548';
-import { CONSULTATION_POLICY } from './consultation-policy.js?v=147';
+import { CONSULTATION_POLICY } from './consultation-policy.js?v=558';
 import { NOTIFICATION_CATEGORIES, SAFE_DAILY_MESSAGE as SAFE_DAILY_BODY, SAFE_DAILY_TITLE } from './notification-policy-v150.js?v=150';
 
 const safe=value=>escapeHTML(value??'');

@@ -3,7 +3,7 @@
    conectados pela mesma Orbe V501. Não cria outro canvas, outra Orbe ou outro
    universo. Catálogo musical público vem somente de lançamentos publicados. */
 
-import { COMMERCIAL_TRUTH_V200 } from './commercial-truth-v200.js?v=200';
+import { COMMERCIAL_TRUTH_V200 } from './commercial-truth-v200.js?v=558';
 import { MEDIA_POLICY_V149 } from './media-policy-v149.js?v=149';
 
 const RELEASE = 'V530';
@@ -674,7 +674,7 @@ export class ExperienceConversionCoreV530 {
     const app = document.getElementById('consultationApp');
     if (!app) return;
     const badges = app.querySelectorAll('.consultation-sanctuary-badges span');
-    if (badges[1]) badges[1].textContent = '◇ DE R$ 150 A R$ 500';
+    if (badges[1]) badges[1].textContent = '◇ DE R$ 50 A R$ 250';
     app.querySelectorAll('.consultation-v147-service, .consultations-world-v319 article').forEach(surface => {
       surface.dataset.ec530Bubble = 'consultation';
     });

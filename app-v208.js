@@ -1,8 +1,8 @@
-/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 9/14 · V557
-   Whit local contextual, privada, honesta e integrada à Orbe canônica.
-   Todo o universo aprovado até a V556 permanece íntegro. */
+/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 10/14 · V558
+   Consultas humanas, preços governáveis, protocolo privado e e-mail verificável.
+   Todo o universo aprovado até a V557 permanece íntegro. */
 
-import { CONFIG } from './config-v200.js?v=200';
+import { CONFIG } from './config-v200.js?v=558';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
 import { createNavigation } from './navigation.js?v=535-fluid-navigation';
 import { orbMotionV207 } from './orb-motion-core-v207.js?v=207';
@@ -15,10 +15,10 @@ import { createLivingUniverseV524 } from './living-universe-core-v524.js?v=537-n
 import { installSkinPerformanceCoreV518 } from './skin-performance-core-v518.js?v=535-mobile-fluidity';
 import { AuthClientV201 as AuthClient } from './auth-client-v201.js?v=532';
 import { AccountEngineV201 } from './account-engine-v201.js?v=556-journal-consent';
-import { AccountWorldV319 } from './account-consultations-world-v319.js?v=534-consultations-anchor';
+import { AccountWorldV319 } from './account-consultations-world-v319.js?v=558-consultations-supreme';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=557-whit-local';
+import { createPageLoader } from './page-loader-v1.js?v=558-consultations';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -65,7 +65,7 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=557')
+const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=558')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
@@ -500,12 +500,12 @@ navigator.serviceWorker?.addEventListener('message', event => {
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
   window.__divinaSWBootstrap = 'v557-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=557', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=558', { updateViaCache:'none' })
       .then(async registration => {
         document.documentElement.dataset.releaseEpoch = 'v557';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V557 registrado');
+        console.info('[Divina] PWA V558 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -856,7 +856,7 @@ window.divinaExperienceConversionV530 = Object.freeze({
   travel:route => experienceConversion?.travel?.(route) || false,
   worlds:['consultations','store','music','videos'],
   consultationServices:4,
-  consultationPriceCents:[50000,50000,30000,15000],
+  consultationPriceCents:[25000,20000,15000,5000],
   realBilling:false,
   storeCheckoutInternal:false,
   musicAutoplay:false,
@@ -879,7 +879,7 @@ window.divinaExperienceReleaseV541 = Object.freeze({
   status:() => experienceDepth?.status?.() || null,
   worlds:['consultations','store','music','videos'],
   consultationServices:4,
-  consultationPriceCents:[50000,50000,30000,15000],
+  consultationPriceCents:[25000,20000,15000,5000],
   consultationChannel:'email-only',
   consultationRealBilling:false,
   storeAssociateTag:'orbedasrealid-20',
@@ -1326,6 +1326,27 @@ window.divinaWhitLocalReleaseV557 = Object.freeze({
   })
 });
 
+window.divinaConsultationsReleaseV558 = Object.freeze({
+  version:558,
+  plan:'4.0-fluidity-supreme',
+  macroStage:'10-of-14',
+  title:'Consultas Supremas',
+  preserves:'V557',
+  servicePricesCents:Object.freeze([25000,20000,15000,5000]),
+  adminPriceEditing:true,
+  historicalPriceSnapshots:true,
+  ownerEmail:'orbedasrealidades@hotmail.com',
+  providerAcceptanceRequiredForSentLabel:true,
+  realBilling:false,
+  canonicalOrb:true,
+  permanentAnimationLoops:0,
+  status:()=>Object.freeze({
+    release:'V558',
+    world:globalThis.divinaConsultationsWorldV319?.status?.()||null,
+    orb:supremeOrb?.snapshot?.()||null
+  })
+});
+
 window.divinaResponsiveEnchantmentReleaseV533 = Object.freeze({
   version:533,
   macroStage:'9-of-10',
@@ -1650,10 +1671,10 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V557',
+        release:'V558',
         supremePlan:'4.0-fluidity-supreme',
         supremePlanMacroStages:14,
-        currentMacroStage:'9-of-14',
+        currentMacroStage:'10-of-14',
         worldTruth:'v535',
         worldTruthRoutes:17,
         orbFluidNavigation:'v549',
@@ -1814,7 +1835,7 @@ const awaken = async () => {
         experienceWorlds:['consultations','store','music','videos'],
         experienceNavigation:'same-orb-v525-journey',
         experienceConsultationServices:4,
-        experienceConsultationPriceCents:[50000,50000,30000,15000],
+        experienceConsultationPriceCents:[25000,20000,15000,5000],
         experienceConsultationRealBilling:false,
         experienceStoreCheckoutInternal:false,
         experienceStoreAffiliateExternal:true,

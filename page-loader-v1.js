@@ -1,4 +1,4 @@
-/* DIVINA BRUXA 4.0 — CARREGAMENTO V557 · WHIT LOCAL SUPREMA
+/* DIVINA BRUXA 4.0 — CARREGAMENTO V558 · CONSULTAS SUPREMAS
    Preserva os mundos V549–V556 e carrega a Whit local antes da camada paga. */
 
 import {
@@ -277,9 +277,10 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     },
     consultations:async()=>{
       await ensureCommerce();
-      const [,module]=await Promise.all([
+      const [,,module]=await Promise.all([
         ensureStyle('divinaAccountConsultationsRebirthV319','account-consultations-world-v319.css?v=319'),
-        import('./account-consultations-world-v319.js?v=534-consultations-anchor')
+        ensureStyle('divinaConsultationsSupremeV558','consultations-supreme-v558.css?v=558'),
+        import('./account-consultations-world-v319.js?v=558-consultations-supreme')
       ]);
       return new module.ConsultationsWorldV319($('#consultationApp'),config);
     },
@@ -379,7 +380,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     consultations:()=>Promise.all([
       import('./commerce-engine.js?v=148'),
       ensureStyle('divinaAccountConsultationsRebirthV319','account-consultations-world-v319.css?v=319'),
-      import('./account-consultations-world-v319.js?v=534-consultations-anchor')
+      ensureStyle('divinaConsultationsSupremeV558','consultations-supreme-v558.css?v=558'),
+      import('./account-consultations-world-v319.js?v=558-consultations-supreme')
     ]),
     store:()=>Promise.all([
       import('./commerce-engine.js?v=148'),

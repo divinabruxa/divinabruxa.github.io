@@ -9,14 +9,14 @@ if (form) {
   const copy = Object.freeze({
     en: Object.freeze({
       subject: 'Consultation request — Divina Bruxa',
-      labels: Object.freeze({ name:'Name', email:'Reply email', service:'Requested format', topic:'Brief context', consent:'Consent recorded on page' }),
+      labels: Object.freeze({ name:'Name', email:'Reply email', phone:'Phone', service:'Requested format', topic:'Brief context', consent:'Consent recorded on page' }),
       consent:'Yes. I understand that this only prepares an email, does not reserve a time and does not charge me.',
       opening:'Your email application is opening. Review the message before sending it.',
       invalid:'Complete the required fields and confirm consent.'
     }),
     es: Object.freeze({
       subject: 'Solicitud de consulta — Divina Bruxa',
-      labels: Object.freeze({ name:'Nombre', email:'Correo de respuesta', service:'Formato solicitado', topic:'Contexto breve', consent:'Consentimiento registrado en la página' }),
+      labels: Object.freeze({ name:'Nombre', email:'Correo de respuesta', phone:'Teléfono', service:'Formato solicitado', topic:'Contexto breve', consent:'Consentimiento registrado en la página' }),
       consent:'Sí. Entiendo que esto solo prepara un correo, no reserva horario y no realiza ningún cobro.',
       opening:'Se está abriendo tu aplicación de correo. Revisa el mensaje antes de enviarlo.',
       invalid:'Completa los campos obligatorios y confirma el consentimiento.'
@@ -33,6 +33,7 @@ if (form) {
     const body = [
       `${copy.labels.name}: ${data.get('name')}`,
       `${copy.labels.email}: ${data.get('email')}`,
+      `${copy.labels.phone}: ${data.get('phone')}`,
       `${copy.labels.service}: ${data.get('service')}`,
       '',
       `${copy.labels.topic}:`,

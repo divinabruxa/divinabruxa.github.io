@@ -1,0 +1,24 @@
+ATIVAÇÃO ÚNICA — E-MAIL AUTOMÁTICO DAS CONSULTAS V558
+
+O código seguro já existe e o destinatário operacional já está definido como:
+orbedasrealidades@hotmail.com
+
+O envio automático depende de um provedor transacional. O STAGING está preparado para Resend, mas nenhuma chave está configurada hoje.
+
+No Supabase Dashboard do projeto divina-bruxa-staging:
+1. Abra Edge Functions > Secrets.
+2. Cadastre RESEND_API_KEY com a chave privada do seu projeto Resend.
+3. Cadastre CONSULTATIONS_EMAIL_FROM com um remetente do domínio verificado, por exemplo:
+   Divina Bruxa <consultas@seudominio.com.br>
+4. Não coloque essas chaves no GitHub, HTML, JavaScript ou neste ZIP.
+5. Confirme que a função consultations-booking permanece ativa.
+6. Faça uma solicitação real de teste com um e-mail seu e confira:
+   - protocolo na tela;
+   - aviso da equipe em orbedasrealidades@hotmail.com;
+   - confirmação no e-mail informado pela cliente;
+   - estado “Aceito pelo provedor” ou “Entregue”.
+
+Até essa ativação, o fallback é verdadeiro: depois de registrar o protocolo, o site abre o aplicativo de e-mail com a cópia completa para a cliente tocar em Enviar.
+
+ADMIN DE PREÇOS:
+Para editar preços no ADMIN, a conta de proprietária precisa estar ativada uma única vez e o MFA precisa estar concluído. Depois disso: ADMIN > Consultas > Preços futuros > Revisar > código MFA > Confirmar. Pedidos antigos mantêm o valor original.

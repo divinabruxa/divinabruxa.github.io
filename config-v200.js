@@ -1,4 +1,4 @@
-import { COMMERCIAL_TRUTH_V200 } from './commercial-truth-v200.js?v=200';
+import { COMMERCIAL_TRUTH_V200 } from './commercial-truth-v200.js?v=558';
 
 export const CONFIG=Object.freeze({
   appName:'Orbe das Realidades',
