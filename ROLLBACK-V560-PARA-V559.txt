@@ -1,0 +1,43 @@
+ROLLBACK V560 → V559
+DIVINA BRUXA 4.0
+
+Use este procedimento somente se precisar retirar a Macroetapa 12.
+
+PRÉ-REQUISITO
+Tenha disponível a cópia da raiz feita imediatamente antes de instalar a V560.
+
+RESTAURAÇÃO
+1. Restaure da cópia V559 estes oito arquivos:
+   - 404.html
+   - app-v208.js
+   - index.html
+   - manifest.webmanifest
+   - offline-en.html
+   - offline-es.html
+   - offline.html
+   - sw.js
+2. Retire da raiz os arquivos exclusivos da V560:
+   - page-design-supreme-v560.css
+   - page-design-supreme-v560.js
+   - qa-v560-browser.mjs
+   - qa-v560-page-design-supreme.mjs
+   - qa-v560-service-worker-runtime.mjs
+   - 00-INSTALE-V560-DESIGN-MOBILE-PREMIUM.txt
+   - AUDITORIA-DESIGN-MOBILE-V560.json
+   - HASHES-SHA256-V560.txt
+   - MANIFESTO-V560-DESIGN-MOBILE-PREMIUM.json
+   - QA-V560-DESIGN-MOBILE-PREMIUM.md
+   - ROLLBACK-V560-PARA-V559.txt
+3. Reimplante somente em STAGING.
+4. Atualize o Service Worker e confirme que o shell voltou a registrar V559.
+5. Limpe apenas os caches com prefixo divina-bruxa-v560-.
+
+NÃO ALTERA
+- Banco ou dados de usuárias.
+- Supabase, RLS ou Edge Functions.
+- DNS.
+- Cobrança.
+- Publicações de música/vídeo.
+- Conteúdo de Diário, Conta ou Admin.
+
+O rollback é exclusivamente de frontend/PWA e volta para a V559 instalada.

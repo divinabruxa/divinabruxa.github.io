@@ -1,0 +1,118 @@
+{
+  "release": "V560",
+  "generated_at_utc": "2026-09-13T22:55:29Z",
+  "scope": "Macroetapa 12/14 — design de páginas e mobile premium",
+  "source_of_truth": "PLANO-SUPREMO-AUDITORIA-DIVINA-BRUXA-V9.0.md",
+  "result": "approved",
+  "coverage": {
+    "world_count": 17,
+    "static_worlds_in_index": 16,
+    "dynamic_worlds": ["skins"],
+    "worlds": [
+      {"id": "home", "family": "origin", "visual_mark": false},
+      {"id": "tarot", "family": "ritual", "visual_mark": true},
+      {"id": "daily", "family": "ritual", "visual_mark": true},
+      {"id": "spreads", "family": "ritual", "visual_mark": true},
+      {"id": "library", "family": "wisdom", "visual_mark": true},
+      {"id": "school", "family": "wisdom", "visual_mark": true},
+      {"id": "journal", "family": "wisdom", "visual_mark": true},
+      {"id": "ai", "family": "presence", "visual_mark": true},
+      {"id": "store", "family": "experience", "visual_mark": true},
+      {"id": "consultations", "family": "experience", "visual_mark": true},
+      {"id": "music", "family": "experience", "visual_mark": true},
+      {"id": "videos", "family": "experience", "visual_mark": true},
+      {"id": "login", "family": "identity", "visual_mark": true},
+      {"id": "subscriptions", "family": "identity", "visual_mark": true},
+      {"id": "skins", "family": "identity", "visual_mark": true},
+      {"id": "notifications", "family": "identity", "visual_mark": true},
+      {"id": "admin", "family": "owner", "visual_mark": true}
+    ]
+  },
+  "visual_grammar": {
+    "tokens": true,
+    "family_accents": 7,
+    "coherent_headings": true,
+    "coherent_surfaces": true,
+    "coherent_forms": true,
+    "coherent_recovery": true,
+    "home_orb_only_preserved": true,
+    "menu_preserved": true,
+    "fallback_pages": ["404.html", "offline.html", "offline-en.html", "offline-es.html"]
+  },
+  "interaction_states": {
+    "idle": true,
+    "loading": true,
+    "success": true,
+    "error": true,
+    "retry": true,
+    "offline": true,
+    "reconnected": true,
+    "disabled": true,
+    "busy": true,
+    "focus_visible": true
+  },
+  "responsive_accessibility": {
+    "viewport_widths_px": [320, 350, 375, 390, 430, 768, 1024, 1280, 1920],
+    "portrait": true,
+    "landscape": true,
+    "safe_areas": true,
+    "visual_viewport": true,
+    "software_keyboard": true,
+    "minimum_touch_target_px": 44,
+    "coarse_pointer_target_px": 48,
+    "mobile_form_font_px": 16,
+    "zoom_200_resilience": true,
+    "skip_link": true,
+    "screen_labels": true,
+    "inactive_worlds_inert": true,
+    "aria_current_route": true,
+    "reduced_motion": true,
+    "high_contrast": true,
+    "forced_colors": true,
+    "standalone_pwa": true
+  },
+  "runtime_safety": {
+    "canonical_orb_count_expected": 1,
+    "duplicate_orbs": 0,
+    "new_canvas": 0,
+    "new_workers": 0,
+    "mutation_observers": 0,
+    "permanent_animation_loops": 0,
+    "private_reads": 0,
+    "storage_reads": 0,
+    "storage_writes": 0,
+    "api_calls": 0
+  },
+  "pwa": {
+    "version": 560,
+    "atomic_shell_includes_runtime": true,
+    "atomic_shell_includes_css": true,
+    "old_cache_eviction": true,
+    "shell_integrity_check": true,
+    "repair_path": true,
+    "offline_core": true,
+    "premium_authority_fail_closed": true
+  },
+  "qa": {
+    "syntax": "passed",
+    "manifest_json": "passed",
+    "structural_contract": "passed",
+    "service_worker_runtime": {
+      "status": "passed",
+      "checks": 32,
+      "passed": 32
+    },
+    "browser_suite": {
+      "status": "packaged-not-run",
+      "reason": "Chromium binary unavailable in the build environment",
+      "script": "qa-v560-browser.mjs"
+    }
+  },
+  "unchanged_authority": {
+    "environment": "staging",
+    "production_publish": false,
+    "dns_changes": false,
+    "real_billing": false,
+    "store_submission": false
+  }
+}

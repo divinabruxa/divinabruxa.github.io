@@ -1,6 +1,6 @@
-/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 11/14 · V559
-   Música, Vídeos e De Frente com o Tarot com verdade editorial e player sob toque.
-   Todo o universo aprovado até a V558 permanece íntegro. */
+/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 12/14 · V560
+   Design de páginas e mobile premium nos 17 mundos, com estados e acessibilidade.
+   Todo o universo aprovado até a V559 permanece íntegro. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -52,6 +52,7 @@ import { createPublicLibraryCoreV544 } from './public-library-core-v544.js?v=555
 import { createInternationalParityCoreV545 } from './international-parity-core-v545.js?v=545';
 import { createPwaPerformanceRecoveryCoreV546 } from './pwa-performance-recovery-core-v546.js?v=546';
 import { createSecurityPrivacyCoreV547 } from './security-privacy-core-v547.js?v=547';
+import { createPageDesignSupremeV560 } from './page-design-supreme-v560.js?v=560';
 
 const $ = selector => document.querySelector(selector);
 
@@ -65,11 +66,11 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=559')
+const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=560')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
-    document.documentElement.dataset.pwaError = 'v557';
+    document.documentElement.dataset.pwaError = 'v560';
   });
 
 const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
@@ -450,6 +451,17 @@ const realityLifecycle = safely('Motor Universal das Realidades V511', () =>
   installRealityLifecycleV511({ core:supremeOrb })
 );
 
+// A V560 unifica apresentação e estados sem observar conteúdo privado, criar
+// outro motor ou interferir na autoridade dos mundos já aprovados.
+const pageDesignSupreme = safely('Design de Páginas e Mobile Premium V560', () =>
+  createPageDesignSupremeV560({
+    go,
+    pageLoader,
+    responsive:responsiveEnchantment,
+    vitality:vitalityBus
+  })
+);
+
 const warmEssentialPortals = () => {
   const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
   if ((document.body.dataset.screen && document.body.dataset.screen !== 'home')
@@ -498,14 +510,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v559-app';
+  window.__divinaSWBootstrap = 'v560-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=559', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=560', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v559';
+        document.documentElement.dataset.releaseEpoch = 'v560';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V559 registrado');
+        console.info('[Divina] PWA V560 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -541,6 +553,7 @@ window.orbe = {
   international:internationalParity,
   recovery:pwaPerformanceRecovery,
   security:securityPrivacy,
+  design:pageDesignSupreme,
   observatory:null,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -1372,6 +1385,38 @@ window.divinaMediaSupremeReleaseV559 = Object.freeze({
   })
 });
 
+window.divinaPageDesignReleaseV560 = Object.freeze({
+  version:560,
+  plan:'4.0-fluidity-supreme',
+  macroStage:'12-of-14',
+  title:'Design de Páginas e Mobile Premium',
+  preserves:'V559',
+  core:pageDesignSupreme,
+  worlds:17,
+  families:7,
+  viewportWidths:[320,350,375,390,430,768,1024,1280,1920],
+  minimumTouchTargetPx:44,
+  safeAreas:true,
+  visualViewportAware:true,
+  softwareKeyboardAware:true,
+  zoom200Resilient:true,
+  reducedMotion:true,
+  highContrast:true,
+  forcedColors:true,
+  canonicalOrb:true,
+  duplicateOrbs:0,
+  mutationObservers:0,
+  permanentAnimationLoops:0,
+  privateReads:0,
+  storageWrites:0,
+  apiCalls:0,
+  productionPublish:false,
+  realBilling:false,
+  environment:'staging',
+  status:()=>pageDesignSupreme?.status?.()||null,
+  audit:()=>pageDesignSupreme?.audit?.()||null
+});
+
 window.divinaResponsiveEnchantmentReleaseV533 = Object.freeze({
   version:533,
   macroStage:'9-of-10',
@@ -1603,6 +1648,7 @@ window.divinaOrbV208 = Object.freeze({
   discovery:originDiscovery,
   recovery:pwaPerformanceRecovery,
   security:securityPrivacy,
+  design:pageDesignSupreme,
   miniOrbs:supremeOrb?.projections?.() || [],
   snapshot:() => supremeOrb?.snapshot?.() || orbMotionV207.snapshot()
 });
@@ -1628,6 +1674,7 @@ window.divinaOrbSupremeV501 = Object.freeze({
   discovery:originDiscovery,
   recovery:pwaPerformanceRecovery,
   security:securityPrivacy,
+  design:pageDesignSupreme,
   navigate:go,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -1696,10 +1743,25 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V559',
+        release:'V560',
         supremePlan:'4.0-fluidity-supreme',
         supremePlanMacroStages:14,
-        currentMacroStage:'11-of-14',
+        currentMacroStage:'12-of-14',
+        pageDesignSupreme:'v560',
+        pageDesignWorlds:17,
+        pageDesignFamilies:7,
+        pageDesignMinimumTouchTargetPx:44,
+        pageDesignSafeAreas:true,
+        pageDesignVisualViewportAware:true,
+        pageDesignSoftwareKeyboardAware:true,
+        pageDesignZoom200Resilient:true,
+        pageDesignReducedMotion:true,
+        pageDesignHighContrast:true,
+        pageDesignForcedColors:true,
+        pageDesignCanonicalOrb:true,
+        pageDesignMutationObservers:0,
+        pageDesignPermanentAnimationLoops:0,
+        pageDesignPrivateReads:0,
         worldTruth:'v535',
         worldTruthRoutes:17,
         orbFluidNavigation:'v549',

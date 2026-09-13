@@ -1,14 +1,14 @@
-/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 11/14 · V559
+/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 12/14 · V560
    Cache seletivo e versionado. Nunca guarda Auth, respostas online da Whit, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=559;
+const VERSION=560;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v559-shell';
-const CONTENT_CACHE='divina-bruxa-v559-content';
-const IMAGE_CACHE='divina-bruxa-v559-images';
-const OFFLINE_CACHE='divina-bruxa-v559-offline-core';
-const PREMIUM_CACHE='divina-bruxa-v559-premium-static';
+const SHELL_CACHE='divina-bruxa-v560-shell';
+const CONTENT_CACHE='divina-bruxa-v560-content';
+const IMAGE_CACHE='divina-bruxa-v560-images';
+const OFFLINE_CACHE='divina-bruxa-v560-offline-core';
+const PREMIUM_CACHE='divina-bruxa-v560-premium-static';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE,PREMIUM_CACHE]);
 const NAVIGATION_TIMEOUT_MS=3500;
 const MAX_CONTENT_ENTRIES=180;
@@ -61,6 +61,7 @@ const REQUIRED_SHELL=Object.freeze([
   './whit-local-supreme-v557.css',
   './consultations-supreme-v558.css',
   './music-video-supreme-v559.js','./music-video-supreme-v559.css',
+  './page-design-supreme-v560.js','./page-design-supreme-v560.css',
   './orb-loading-portal-v1.js',
   './divina-shell-v180.css','./home-orb-absolute-v206.css','./pwa-world-v196.css',
   './pwa-resilience-v324.css','./pwa-world-v324.js','./performance-world-v324.js',
@@ -69,7 +70,7 @@ const REQUIRED_SHELL=Object.freeze([
 ]);
 
 // Fechamento transitivo dos imports estáticos de app-v208.js. Se qualquer um
-// falhar, a V559 não assume o controle e o worker anterior continua íntegro.
+// falhar, a V560 não assume o controle e o worker anterior continua íntegro.
 const BOOT_DEPENDENCIES=Object.freeze([
   './account-consultations-world-v319.js','./account-engine-v201.js','./account-state-copy-v201.js',
   './ai-policy.js','./auth-client-v201.js','./auth-client-v6.js','./card-library-policy.js',
@@ -91,6 +92,7 @@ const APP_DEPENDENCIES=Object.freeze([
   './media-engine-v149.js','./media-engine-v192.js','./media-policy-v149.js','./editorial-journey-v192.js',
   './media-commerce-world-v320.js','./media-commerce-world-v320.css',
   './music-video-supreme-v559.js','./music-video-supreme-v559.css',
+  './page-design-supreme-v560.js','./page-design-supreme-v560.css',
   './auth-client-v6.js','./auth-client-v201.js','./account-engine-v201.js','./account-state-copy-v201.js',
   './account-consultations-world-v319.js','./consultation-engine.js','./consultation-policy.js',
   './premium-engine-v191.js','./premium-policy-v191.js','./skins-v201.js',
@@ -317,7 +319,7 @@ const appShellIsValid=async(url,response)=>{
   const isShell=pathname===new URL('./',self.registration.scope).pathname||pathname.endsWith('/index.html');
   if(!isShell)return true;
   const html=await response.clone().text();
-  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=559/.test(html);
+  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=560/.test(html);
 };
 
 const offlinePageFor=async url=>{
