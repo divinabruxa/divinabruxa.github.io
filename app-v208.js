@@ -1,8 +1,8 @@
-/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 10/14 · V558
-   Consultas humanas, preços governáveis, protocolo privado e e-mail verificável.
-   Todo o universo aprovado até a V557 permanece íntegro. */
+/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 11/14 · V559
+   Música, Vídeos e De Frente com o Tarot com verdade editorial e player sob toque.
+   Todo o universo aprovado até a V558 permanece íntegro. */
 
-import { CONFIG } from './config-v200.js?v=558';
+import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
 import { createNavigation } from './navigation.js?v=535-fluid-navigation';
 import { orbMotionV207 } from './orb-motion-core-v207.js?v=207';
@@ -18,7 +18,7 @@ import { AccountEngineV201 } from './account-engine-v201.js?v=556-journal-consen
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=558-consultations-supreme';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=558-consultations';
+import { createPageLoader } from './page-loader-v1.js?v=559-media-supreme';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -35,7 +35,7 @@ import { createWhitSilentPresenceV316 } from './whit-silent-presence-v316.js?v=5
 import { createWhitCoreSupremeV527 } from './whit-core-supreme-v527.js?v=557-event-driven';
 import { createTarotUniverseCoreV528 } from './tarot-universe-core-v528.js?v=528';
 import { createWisdomUniverseCoreV529 } from './wisdom-universe-core-v529.js?v=529';
-import { createExperienceConversionCoreV530 } from './experience-conversion-core-v530.js?v=541-depth';
+import { createExperienceConversionCoreV530 } from './experience-conversion-core-v530.js?v=559-media-guard';
 import { createIdentityRightsCoreV531 } from './identity-rights-core-v531.js?v=542';
 import { createResponsiveEnchantmentCoreV533 } from './responsive-enchantment-core-v533.js?v=542-skins';
 import { createQaSupremeCoreV534 } from './qa-supreme-core-v534.js?v=534';
@@ -65,7 +65,7 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=558')
+const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=559')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
@@ -498,14 +498,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v557-app';
+  window.__divinaSWBootstrap = 'v559-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=558', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=559', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v557';
+        document.documentElement.dataset.releaseEpoch = 'v559';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V558 registrado');
+        console.info('[Divina] PWA V559 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -1347,6 +1347,31 @@ window.divinaConsultationsReleaseV558 = Object.freeze({
   })
 });
 
+window.divinaMediaSupremeReleaseV559 = Object.freeze({
+  version:559,
+  plan:'4.0-fluidity-supreme',
+  macroStage:'11-of-14',
+  title:'Música, Vídeos e De Frente com o Tarot',
+  preserves:'V558',
+  verifiedAlbums:2,
+  verifiedTracks:18,
+  publishedEpisodesAtRelease:0,
+  publicSource:'supabase-rls-published-only',
+  ownerMfaRequired:true,
+  autoplay:false,
+  activePlayersMaximum:1,
+  inventedEpisodes:0,
+  permanentAnimationLoops:0,
+  productionPublish:false,
+  environment:'staging',
+  status:()=>Object.freeze({
+    release:'V559',
+    publicWorld:globalThis.divinaMusicVideoSupremeV559?.status?.()||null,
+    adminWorld:globalThis.divinaAdminMediaSupremeV559?.status?.()||null,
+    orb:supremeOrb?.snapshot?.()||null
+  })
+});
+
 window.divinaResponsiveEnchantmentReleaseV533 = Object.freeze({
   version:533,
   macroStage:'9-of-10',
@@ -1671,10 +1696,10 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V558',
+        release:'V559',
         supremePlan:'4.0-fluidity-supreme',
         supremePlanMacroStages:14,
-        currentMacroStage:'10-of-14',
+        currentMacroStage:'11-of-14',
         worldTruth:'v535',
         worldTruthRoutes:17,
         orbFluidNavigation:'v549',

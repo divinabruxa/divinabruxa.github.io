@@ -1,5 +1,5 @@
-/* DIVINA BRUXA 4.0 — CARREGAMENTO V558 · CONSULTAS SUPREMAS
-   Preserva os mundos V549–V556 e carrega a Whit local antes da camada paga. */
+/* DIVINA BRUXA 4.0 — CARREGAMENTO V559 · MÚSICA + VÍDEOS SUPREMOS
+   Preserva V558 e carrega mídia pública somente quando o mundo é aberto. */
 
 import {
   normalizeRouteId,
@@ -136,10 +136,12 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
 
   const ensureMedia=()=>once(sharedTasks,'media',async()=>{
     const [,module]=await Promise.all([
-      ensureStyle('divinaMediaCommerceRebirthV320','media-commerce-world-v320.css?v=320'),
-      import('./media-commerce-world-v320.js?v=543')
+      ensureStyle('divinaMusicVideoSupremeV559','music-video-supreme-v559.css?v=559'),
+      import('./music-video-supreme-v559.js?v=559')
     ]);
-    return new module.MediaWorldV320({videos:$('#videoApp'),music:$('#musicApp')},config);
+    const instance=new module.MusicVideoSupremeV559({videos:$('#videoApp'),music:$('#musicApp')},config);
+    globalThis.divinaMusicVideoSupremeV559=instance;
+    return instance;
   });
 
   const loaders=Object.freeze({
@@ -308,19 +310,20 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       return new module.NotificationsWorldV321($('#notificationApp'),go);
     },
     admin:async()=>{
-      const [,,,,adminModule,mediaModule,intelligenceModule,observatoryModule,completionModule]=await Promise.all([
+      const [,,,,,adminModule,mediaModule,intelligenceModule,observatoryModule,completionModule]=await Promise.all([
         ensureStyle('divinaMediaCommerceRebirthV320','media-commerce-world-v320.css?v=320'),
+        ensureStyle('divinaMusicVideoSupremeV559','music-video-supreme-v559.css?v=559'),
         ensureStyle('divinaAdminIntelligenceRebirthV322','admin-intelligence-v322.css?v=322'),
         ensureStyle('divinaOwnerObservatoryV532Styles','owner-observatory-v532.css?v=548'),
         ensureStyle('divinaCompletionCenterV548Styles','completion-center-v548.css?v=548'),
         import('./admin-engine.js?v=548'),
-        import('./media-commerce-world-v320.js?v=547'),
+        import('./admin-media-supreme-v559.js?v=559'),
         import('./admin-intelligence-v322.js?v=547'),
         import('./owner-observatory-v532.js?v=548'),
         import('./completion-center-v548.js?v=548')
       ]);
       const engine=new adminModule.AdminEngine($('#adminApp'));
-      new mediaModule.AdminMediaV320($('#adminApp'));
+      globalThis.divinaAdminMediaSupremeV559=new mediaModule.AdminMediaSupremeV559($('#adminApp'),config);
       new intelligenceModule.AdminIntelligenceV322($('#adminApp'));
       const completionCore=completionModule.createCompletionCenterV548($('#adminApp'),{orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme});
       observatoryModule.createOwnerObservatoryV532($('#adminApp'),{
@@ -390,20 +393,21 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       import('./media-commerce-world-v320.js?v=543')
     ]),
     music:()=>Promise.all([
-      ensureStyle('divinaMediaCommerceRebirthV320','media-commerce-world-v320.css?v=320'),
-      import('./media-commerce-world-v320.js?v=543')
+      ensureStyle('divinaMusicVideoSupremeV559','music-video-supreme-v559.css?v=559'),
+      import('./music-video-supreme-v559.js?v=559')
     ]),
     videos:()=>Promise.all([
-      ensureStyle('divinaMediaCommerceRebirthV320','media-commerce-world-v320.css?v=320'),
-      import('./media-commerce-world-v320.js?v=543')
+      ensureStyle('divinaMusicVideoSupremeV559','music-video-supreme-v559.css?v=559'),
+      import('./music-video-supreme-v559.js?v=559')
     ]),
     admin:()=>Promise.all([
       ensureStyle('divinaMediaCommerceRebirthV320','media-commerce-world-v320.css?v=320'),
+      ensureStyle('divinaMusicVideoSupremeV559','music-video-supreme-v559.css?v=559'),
       ensureStyle('divinaAdminIntelligenceRebirthV322','admin-intelligence-v322.css?v=322'),
       ensureStyle('divinaOwnerObservatoryV532Styles','owner-observatory-v532.css?v=548'),
       ensureStyle('divinaCompletionCenterV548Styles','completion-center-v548.css?v=548'),
       import('./admin-engine.js?v=548'),
-      import('./media-commerce-world-v320.js?v=547'),
+      import('./admin-media-supreme-v559.js?v=559'),
       import('./admin-intelligence-v322.js?v=547'),
       import('./owner-observatory-v532.js?v=548'),
       import('./completion-center-v548.js?v=548')

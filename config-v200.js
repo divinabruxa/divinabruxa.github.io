@@ -1,4 +1,4 @@
-import { COMMERCIAL_TRUTH_V200 } from './commercial-truth-v200.js?v=558';
+import { COMMERCIAL_TRUTH_V200 } from './commercial-truth-v200.js?v=559';
 
 export const CONFIG=Object.freeze({
   appName:'Orbe das Realidades',
@@ -6,8 +6,8 @@ export const CONFIG=Object.freeze({
   spotify:'https://open.spotify.com/album/0GwJtJujeS9iwSZFADcL1k',
   spotifyAlbumId:'0GwJtJujeS9iwSZFADcL1k',
   spotifyAlbums:[
-    {name:'Sobre as Estrelas',artist:'Hércules DX',id:'0GwJtJujeS9iwSZFADcL1k'},
-    {name:'Z',artist:'Hércules DX',id:'4mq0UaLMXK21JbrKMFdhdO'}
+    {name:'Sobre as Estrelas',title:'Sobre as Estrelas',artist:'Hércules DX',id:'0GwJtJujeS9iwSZFADcL1k',spotifyUrl:'https://open.spotify.com/album/0GwJtJujeS9iwSZFADcL1k',releaseType:'album',year:'2024',trackCount:10,description:'Álbum oficial de Hércules DX com 10 faixas.'},
+    {name:'Z',title:'Z',artist:'Hércules DX',id:'4mq0UaLMXK21JbrKMFdhdO',spotifyUrl:'https://open.spotify.com/album/4mq0UaLMXK21JbrKMFdhdO',releaseType:'album',year:'2026',trackCount:8,description:'Álbum oficial de Hércules DX com 8 faixas.'}
   ],
   whatsapp:'',
   contactEmail:COMMERCIAL_TRUTH_V200.officialContact.email,

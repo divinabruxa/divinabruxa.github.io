@@ -1,0 +1,57 @@
+DIVINA BRUXA V559 — PLANO SUPREMO 4.0 — MACROETAPA 11/14
+MÚSICA, VÍDEOS E “DE FRENTE COM O TAROT”
+
+PACOTE INCREMENTAL, PLANO E SEM PASTAS, PARA INSTALAR SOBRE A V558 JÁ INSTALADA.
+
+No GitHub pelo iPhone:
+1. Abra a mesma raiz em que a V558 está instalada.
+2. Use Add file > Upload files.
+3. Envie todos os arquivos soltos da raiz deste ZIP.
+4. Confirme Commit changes apenas no ambiente/branch de STAGING.
+5. Aguarde a atualização do service worker e faça uma recarga completa.
+
+Não envie a pasta do ZIP. Não apague arquivos antigos que não aparecem neste delta.
+
+VERDADE EDITORIAL DESTA VERSÃO
+- Música contém exatamente os dois álbuns oficiais informados: Sobre as Estrelas (2024, 10 faixas) e Z (2026, 8 faixas).
+- O total factual de lançamento é 2 álbuns e 18 faixas.
+- “De Frente com o Tarot” começa com zero episódios publicados.
+- Nenhum episódio, convidado, título ou data foi inventado.
+
+O QUE A V559 ENTREGA
+- catálogo musical em PT-BR, EN e ES, com filtros e detalhes;
+- um único player oficial adormecido, criado somente após toque explícito;
+- nenhum autoplay e desmontagem do iframe ao trocar conteúdo ou sair da rota;
+- temporadas, episódios, busca, tags, cartas relacionadas e navegação prontos para conteúdo futuro;
+- estado vazio honesto enquanto não houver episódio publicado;
+- CMS de lançamentos, faixas, temporadas e episódios dentro do ADMIN;
+- estados draft, review, scheduled, published e archived;
+- prévia iPhone, Android e Desktop antes de publicar;
+- leitura pública protegida por status publicado, data de publicação e RLS;
+- PWA V559 com texto de Música/Vídeos disponível offline e players/publicação somente online;
+- metadados e conteúdo público em PT-BR, EN e ES sem criar fatos inexistentes.
+
+STAGING
+- A Edge Function admin-media-v320 já foi atualizada no projeto divina-bruxa-staging.
+- A função está ACTIVE na versão 4.
+- As cinco tabelas normalizadas já existiam e não receberam migração nesta versão.
+- Todas continuam vazias no fechamento da V559.
+- RLS foi verificado; conteúdo anônimo só aparece publicado e quando published_at já chegou.
+- Owner, e-mail confirmado, MFA AAL2, sessão não revogada e recovery code continuam obrigatórios no ADMIN.
+
+Não execute SQL. Não reimplante a Edge Function somente para instalar o ZIP.
+
+CHECAGEM RÁPIDA APÓS O UPLOAD EM STAGING
+1. Abra Música: devem aparecer 2 álbuns e 18 faixas no total.
+2. Confirme que não existe iframe antes do toque em ouvir.
+3. Toque em ouvir: deve existir apenas 1 player e nunca autoplay.
+4. Abra Vídeos: deve aparecer o estado editorial com 0 episódios publicados.
+5. Abra o ADMIN com a conta proprietária e MFA para conferir o CMS e as prévias.
+6. Recarregue uma vez para confirmar que o cache ativo é divina-bruxa-v559-shell.
+
+LIMITES PRESERVADOS
+- Produção, DNS, domínio, cobrança, pagamentos, loja e preços não foram alterados.
+- A Orbe canônica e todos os mundos concluídos até a V558 foram preservados.
+- Dados de autoridade, ADMIN, billing e publicação não entram no cache offline.
+
+O teste visual qa-v559-browser.mjs acompanha o pacote para execução em um ambiente com Playwright e Chromium. O Chromium não estava disponível no runtime de fechamento; veja QA-V559-MUSICA-VIDEOS-SUPREMOS.md para o resultado completo e essa única limitação operacional.

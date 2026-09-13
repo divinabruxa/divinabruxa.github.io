@@ -690,6 +690,9 @@ export class ExperienceConversionCoreV530 {
 
   async loadMusic(force = false) {
     const root = document.getElementById('musicApp');
+    // V559 assume o catálogo normalizado. Uma consulta V530 já em voo também
+    // respeita esta marca e não pode sobrescrever a experiência nova ao concluir.
+    if (root?.dataset?.mediaEngine === 'v559') return;
     if (!root || this.musicLoading || (!force && this.musicLoaded)) return;
     if (!root.querySelector('[data-media-v149="music"]') && !root.dataset.experienceMusic) return;
     this.musicLoading = true;
@@ -723,6 +726,7 @@ export class ExperienceConversionCoreV530 {
 
   renderMusic() {
     const root = document.getElementById('musicApp');
+    if (root?.dataset?.mediaEngine === 'v559') return;
     if (!root) return;
     const albums = this.musicCatalog;
     if (!this.activeAlbumId || !albums.some(album => album.spotifyId === this.activeAlbumId)) this.activeAlbumId = albums[0]?.spotifyId || '';

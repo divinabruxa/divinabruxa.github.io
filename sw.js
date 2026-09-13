@@ -1,14 +1,14 @@
-/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 10/14 · V558
+/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 11/14 · V559
    Cache seletivo e versionado. Nunca guarda Auth, respostas online da Whit, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=558;
+const VERSION=559;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v558-shell';
-const CONTENT_CACHE='divina-bruxa-v558-content';
-const IMAGE_CACHE='divina-bruxa-v558-images';
-const OFFLINE_CACHE='divina-bruxa-v558-offline-core';
-const PREMIUM_CACHE='divina-bruxa-v558-premium-static';
+const SHELL_CACHE='divina-bruxa-v559-shell';
+const CONTENT_CACHE='divina-bruxa-v559-content';
+const IMAGE_CACHE='divina-bruxa-v559-images';
+const OFFLINE_CACHE='divina-bruxa-v559-offline-core';
+const PREMIUM_CACHE='divina-bruxa-v559-premium-static';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE,PREMIUM_CACHE]);
 const NAVIGATION_TIMEOUT_MS=3500;
 const MAX_CONTENT_ENTRIES=180;
@@ -60,6 +60,7 @@ const REQUIRED_SHELL=Object.freeze([
   './journal-mirror-supreme-v556.css',
   './whit-local-supreme-v557.css',
   './consultations-supreme-v558.css',
+  './music-video-supreme-v559.js','./music-video-supreme-v559.css',
   './orb-loading-portal-v1.js',
   './divina-shell-v180.css','./home-orb-absolute-v206.css','./pwa-world-v196.css',
   './pwa-resilience-v324.css','./pwa-world-v324.js','./performance-world-v324.js',
@@ -68,7 +69,7 @@ const REQUIRED_SHELL=Object.freeze([
 ]);
 
 // Fechamento transitivo dos imports estáticos de app-v208.js. Se qualquer um
-// falhar, a V558 não assume o controle e o worker anterior continua íntegro.
+// falhar, a V559 não assume o controle e o worker anterior continua íntegro.
 const BOOT_DEPENDENCIES=Object.freeze([
   './account-consultations-world-v319.js','./account-engine-v201.js','./account-state-copy-v201.js',
   './ai-policy.js','./auth-client-v201.js','./auth-client-v6.js','./card-library-policy.js',
@@ -89,6 +90,7 @@ const APP_DEPENDENCIES=Object.freeze([
   './commerce-engine.js','./store-engine.js','./store-policy.js',
   './media-engine-v149.js','./media-engine-v192.js','./media-policy-v149.js','./editorial-journey-v192.js',
   './media-commerce-world-v320.js','./media-commerce-world-v320.css',
+  './music-video-supreme-v559.js','./music-video-supreme-v559.css',
   './auth-client-v6.js','./auth-client-v201.js','./account-engine-v201.js','./account-state-copy-v201.js',
   './account-consultations-world-v319.js','./consultation-engine.js','./consultation-policy.js',
   './premium-engine-v191.js','./premium-policy-v191.js','./skins-v201.js',
@@ -259,9 +261,9 @@ const offlineStatus=async(existingFailures=[])=>{
     ready:ready+Number(aliasReady),total:assets.length+1,
     complete:ready===assets.length&&aliasReady,
     failures:existingFailures,
-    worlds:{tarot:true,dailyPreviouslyRevealed:true,library:true,journalLocal:true,whitLocal:true,currentSkin:true},
+    worlds:{tarot:true,dailyPreviouslyRevealed:true,library:true,journalLocal:true,whitLocal:true,musicText:true,videosText:true,currentSkin:true},
     premium:{preparedCache:PREMIUM_CACHE,requiresServerEntitlement:true,grantsEntitlement:false},
-    onlineOnly:{whitOnline:true,billing:true,admin:true,consultationSubmit:true,accountAuthority:true}
+    onlineOnly:{whitOnline:true,billing:true,admin:true,consultationSubmit:true,accountAuthority:true,spotifyPlayer:true,youtubePlayer:true,mediaPublication:true}
   };
 };
 
@@ -315,7 +317,7 @@ const appShellIsValid=async(url,response)=>{
   const isShell=pathname===new URL('./',self.registration.scope).pathname||pathname.endsWith('/index.html');
   if(!isShell)return true;
   const html=await response.clone().text();
-  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=556/.test(html);
+  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=559/.test(html);
 };
 
 const offlinePageFor=async url=>{

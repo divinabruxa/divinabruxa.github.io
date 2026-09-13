@@ -1,0 +1,98 @@
+{
+  "release": "V559",
+  "executedAt": "2026-09-13",
+  "status": "approved_with_browser_runtime_limitation",
+  "scope": "macro-11-of-14-music-video",
+  "truth": {
+    "verifiedAlbums": 2,
+    "verifiedTracks": 18,
+    "publishedEpisodes": 0,
+    "fabricatedEditorialRecords": 0
+  },
+  "publicExperience": {
+    "locales": ["pt-BR", "en", "es"],
+    "spotifyHostAllowlist": true,
+    "youtubeHostAllowlist": true,
+    "youtubeNoCookieEmbed": true,
+    "autoplay": false,
+    "maximumConcurrentIframes": 1,
+    "playerUnloadsOnExit": true,
+    "permanentAnimationLoopsAdded": 0,
+    "personalStorageReadByMediaModule": false,
+    "analyticsContainsSearchOrPii": false
+  },
+  "publicationBoundary": {
+    "publicReleaseFilter": "status=published and published_at<=now",
+    "tracksRequirePublishedRelease": true,
+    "episodesRequirePublishedSeason": true,
+    "cardsRequirePublishedEpisode": true,
+    "draftsDownloadedByPublicClient": false,
+    "futureScheduledRecordsDownloadedByPublicClient": false
+  },
+  "admin": {
+    "browserAuthority": false,
+    "ownerRequired": true,
+    "confirmedEmailRequired": true,
+    "mfaAal2Required": true,
+    "nonRevokedSessionRequired": true,
+    "remainingRecoveryCodeRequired": true,
+    "rateLimitEnabled": true,
+    "auditEventsEnabled": true,
+    "publicationConfirmation": true,
+    "previewDevices": ["iphone", "android", "desktop"]
+  },
+  "staging": {
+    "project": "divina-bruxa-staging",
+    "projectRef": "kyphdsamyygavmkzyezr",
+    "edgeFunction": "admin-media-v320",
+    "edgeFunctionId": "90e0a7b5-d29c-41de-91ae-ebf532f45aea",
+    "edgeVersion": 4,
+    "edgeStatus": "ACTIVE",
+    "verifyJwtPlatformFlag": false,
+    "customCookieAndMfaAuthorization": true,
+    "allowedOriginWithoutSession": {
+      "status": 401,
+      "error": "missing_session"
+    },
+    "disallowedOrigin": {
+      "status": 403,
+      "error": "origin_denied"
+    },
+    "tables": {
+      "music_releases": {"rows": 0, "rls": true, "policies": 5, "anonymousGet": 200},
+      "music_tracks": {"rows": 0, "rls": true, "policies": 5, "anonymousGet": 200},
+      "tarot_seasons": {"rows": 0, "rls": true, "policies": 5, "anonymousGet": 200},
+      "tarot_episodes": {"rows": 0, "rls": true, "policies": 5, "anonymousGet": 200},
+      "tarot_episode_cards": {"rows": 0, "rls": true, "policies": 5, "anonymousGet": 200}
+    },
+    "schemaMigrationApplied": false
+  },
+  "pwa": {
+    "runtimeChecks": {"passed": 32, "failed": 0},
+    "atomicShell": true,
+    "oldCacheRemovedOnActivate": true,
+    "corruptionDetectedAndRepaired": true,
+    "musicAndVideoTextOffline": true,
+    "playersOnlineOnly": true,
+    "authorityFailsClosedOffline": true,
+    "authorityCached": false
+  },
+  "qa": {
+    "mediaContractSuite": "passed",
+    "javascriptSyntax": "passed",
+    "typescriptCompile": "passed",
+    "serviceWorkerRuntime": "32/32 passed",
+    "jsonParsing": "passed",
+    "flatPackage": true,
+    "browserScriptIncluded": true,
+    "browserScriptExecuted": false,
+    "browserBlocker": "Playwright Chromium executable unavailable after download timeout"
+  },
+  "protectedSystems": {
+    "productionChanged": false,
+    "dnsChanged": false,
+    "billingChanged": false,
+    "storeChanged": false,
+    "historicalDataDeleted": false
+  }
+}
