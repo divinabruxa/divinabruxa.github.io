@@ -1,0 +1,124 @@
+/* DIVINA BRUXA 4.0 — HOME VIVA · MACROETAPA 4/14 · V552
+   Contrato final da Home: uma Orbe, um centro e uma aura sem motor próprio. */
+
+:root{
+  --db552-home-inline-safe:max(12px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
+  --db552-home-orb-size:min(89vw,47dvh,470px);
+  --db552-home-response:220ms;
+  --db552-home-curve:cubic-bezier(.22,.82,.24,1);
+}
+
+html[data-runtime="v12"] body[data-screen="home"],
+html[data-runtime="v12"] body[data-screen="home"] #app{
+  width:100%;
+  height:100dvh;
+  min-height:100svh;
+  overflow:hidden!important;
+  overscroll-behavior:none;
+}
+
+/* O palco passa a responder somente ao viewport. Header, dock e regras antigas
+   não conseguem mais empurrar o coração para fora do centro. */
+html[data-runtime="v12"] #app>#home.home-orb-only-v206.active{
+  position:fixed!important;
+  inset:0!important;
+  display:grid!important;
+  place-items:center!important;
+  width:auto!important;
+  height:auto!important;
+  min-height:0!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0 var(--db552-home-inline-safe)!important;
+  overflow:hidden!important;
+  contain:layout paint;
+}
+
+html[data-runtime="v12"] #app>#home.home-orb-only-v206.active:not(.orb-menu-open):not(.orb-menu-transition):not(.orb-menu-closing)>.orb-stage-ref,
+html[data-runtime="v12"] #app>#home.home-orb-only-v206.active.orb-menu-transition.orb-menu-opening:not(.orb-menu-open)>.orb-stage-ref{
+  --v75-orb-size:var(--db552-home-orb-size);
+  position:absolute!important;
+  inset:0!important;
+  display:grid!important;
+  place-items:center!important;
+  width:var(--db552-home-orb-size)!important;
+  height:var(--db552-home-orb-size)!important;
+  aspect-ratio:1;
+  margin:auto!important;
+  translate:none!important;
+  transform:translate3d(0,0,0)!important;
+  transform-origin:50% 50%;
+  isolation:isolate;
+  overflow:visible!important;
+}
+
+html[data-runtime="v12"] #app>#home.home-orb-only-v206.active:not(.orb-menu-open):not(.orb-menu-transition):not(.orb-menu-closing)>.orb-stage-ref>#orb,
+html[data-runtime="v12"] #app>#home.home-orb-only-v206.active.orb-menu-transition.orb-menu-opening:not(.orb-menu-open)>.orb-stage-ref>#orb{
+  width:100%!important;
+  max-width:100%!important;
+  margin:0!important;
+}
+
+/* A vida externa é uma única aura compositada. Ela reage a estados que já
+   existem na Orbe; não possui requestAnimationFrame nem animação infinita. */
+html[data-runtime="v12"] body[data-screen="home"] #home>.orb-stage-ref::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:0!important;
+  inset:-15%!important;
+  display:block!important;
+  border-radius:50%!important;
+  pointer-events:none!important;
+  background:
+    radial-gradient(circle at 42% 39%,color-mix(in srgb,var(--db-skin-accent,#a565d6) 19%,transparent),transparent 30%),
+    radial-gradient(circle at 67% 64%,color-mix(in srgb,var(--db518-mist,#d76cff) 12%,transparent),transparent 36%),
+    radial-gradient(circle,rgba(235,107,255,.16),rgba(108,47,211,.075) 44%,transparent 70%)!important;
+  filter:none!important;
+  opacity:.66!important;
+  transform:translate3d(0,0,0) scale(1)!important;
+  animation:none!important;
+  transition:opacity var(--db552-home-response) ease,transform var(--db552-home-response) var(--db552-home-curve)!important;
+  will-change:auto!important;
+}
+
+html[data-runtime="v12"] body[data-screen="home"] #home #orb>.orb-halo{
+  animation:none!important;
+  opacity:.60;
+  transform:translate3d(0,0,0) scale(1);
+  transition:opacity var(--db552-home-response) ease,transform var(--db552-home-response) var(--db552-home-curve)!important;
+  will-change:auto!important;
+}
+
+html.db-supreme-orb-active[data-runtime="v12"] body[data-screen="home"] #home>.orb-stage-ref::before,
+html[data-runtime="v12"] body[data-screen="home"] #home #orb:is(.r027-touching,.r027-key-pulse,[data-orb-life="TOUCH"],[data-orb-life="HOLD"])>.orb-halo{
+  opacity:.82!important;
+  transform:translate3d(0,0,0) scale(1.028)!important;
+}
+
+/* Travessia primeiro: a aura externa se recolhe durante qualquer passagem. */
+html[data-runtime="v12"]:is([data-orb-navigation-state="active"],[data-menu-state="opening"],[data-menu-state="closing"],[data-menu-state="navigating"]) body[data-screen="home"] #home>.orb-stage-ref::before{
+  opacity:0!important;
+  transform:translate3d(0,0,0) scale(.97)!important;
+  transition-duration:150ms!important;
+}
+
+@media(max-width:430px) and (orientation:portrait){
+  :root{--db552-home-orb-size:min(88vw,45dvh,420px)}
+}
+
+@media(max-width:360px) and (orientation:portrait){
+  :root{--db552-home-orb-size:min(87vw,44dvh,330px)}
+}
+
+@media(orientation:landscape) and (max-height:560px){
+  :root{--db552-home-orb-size:min(64dvh,38vw,330px)}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-runtime="v12"] body[data-screen="home"] #home>.orb-stage-ref::before,
+  html[data-runtime="v12"] body[data-screen="home"] #home #orb>.orb-halo{
+    animation:none!important;
+    transition:none!important;
+  }
+}
+

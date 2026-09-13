@@ -1,0 +1,19 @@
+{
+  "release": "V552",
+  "plan": "DIVINA BRUXA 4.0",
+  "macroStage": "4-of-14",
+  "title": "Home Viva",
+  "baseRequired": "V551",
+  "incremental": true,
+  "visibleHomeContent": "one-canonical-orb",
+  "viewportCenter": "absolute-dynamic-viewport",
+  "safeAreaAware": true,
+  "externalAuraLoops": 0,
+  "externalAuraEngine": false,
+  "auraDrivenByExistingOrbState": true,
+  "auraPausedDuringNavigation": true,
+  "preservesApprovedVisual": true,
+  "tarotFireRemoved": true,
+  "iphonePriority": true,
+  "automaticPhysicalPasses": 0
+}
