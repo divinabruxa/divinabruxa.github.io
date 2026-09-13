@@ -1,0 +1,22 @@
+/* DIVINA BRUXA 3.0 — PWA, PERFORMANCE, OFFLINE E RECUPERAÇÃO · V546 */
+:root{--db546-target-fps:60}
+html[data-pwa-recovery="v546"]{text-size-adjust:100%;-webkit-text-size-adjust:100%}
+html[data-pwa-recovery="v546"][data-scene-paused="true"] *,
+html[data-pwa-recovery="v546"][data-scene-paused="true"] *::before,
+html[data-pwa-recovery="v546"][data-scene-paused="true"] *::after{animation-play-state:paused!important}
+html[data-pwa-recovery="v546"] .screen:not(.active):not(#home){content-visibility:hidden}
+html[data-pwa-recovery="v546"] .screen:not(.active) *,
+html[data-pwa-recovery="v546"] .screen:not(.active) *::before,
+html[data-pwa-recovery="v546"] .screen:not(.active) *::after{animation-play-state:paused!important}
+html[data-pwa-recovery="v546"] :where(img[loading="lazy"],iframe[loading="lazy"]){content-visibility:auto;contain-intrinsic-size:320px 480px}
+html[data-pwa-recovery="v546"] :where(button,a[href],[role="button"],summary){touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+html[data-v546-capability="constrained"] :where(.cosmos,.ritual-sky,.db525-orb-journey__embers,.db526-orb-presence__mist){opacity:.22!important}
+html[data-v546-capability="constrained"] :where(.panel,.ritual-panel,.editorial-portal,.intl-header,.magic-dock){backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html[data-v546-capability="constrained"] :where(.ritual-sky i:nth-child(n+4),.db525-orb-journey__embers i:nth-child(n+4)){display:none!important}
+html[data-v546-capability="reduced"] :where(.cosmos,.ritual-sky,.db525-orb-journey__embers,.db526-orb-presence__mist){display:none!important}
+.db-install-health{display:grid;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(238,198,121,.2)}
+.db-install-health__actions{display:flex;flex-wrap:wrap;gap:9px}
+.db-install-health button.secondary{color:#f4dda9;background:transparent}
+.db-install-health output{min-height:22px;color:#f4dda9;font-weight:700;line-height:1.5}
+@media(prefers-reduced-motion:reduce){html[data-pwa-recovery="v546"] *,html[data-pwa-recovery="v546"] *::before,html[data-pwa-recovery="v546"] *::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+@media(update:slow){html[data-pwa-recovery="v546"] :where(.cosmos,.ritual-sky,.db525-orb-journey__embers){display:none!important}}

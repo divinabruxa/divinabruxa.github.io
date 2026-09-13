@@ -1,12 +1,13 @@
-/* DIVINA BRUXA 3.0 — PARIDADE INTERNACIONAL · CORTE V545 / PWA V324
+/* DIVINA BRUXA 3.0 — PWA, PERFORMANCE, OFFLINE E RECUPERAÇÃO · CORTE V546
    Uma única autoridade PWA para app e páginas de instalação.
    Offline seletivo: mundos locais continuam; ações de autoridade exigem rede.
    Não altera o motor visual da Orbe principal. */
 
 import { installPerformanceV324, summarizeLocalWebVitalsV324, performanceTierV324 } from './performance-world-v324.js?v=324';
 import { createResponsiveEnchantmentCoreV533 } from './responsive-enchantment-core-v533.js?v=542-skins';
+import { createPwaPerformanceRecoveryCoreV546 } from './pwa-performance-recovery-core-v546.js?v=546';
 
-const VERSION=545;
+const VERSION=546;
 const STYLE_ID='divinaPwaResilienceV324';
 const INSTALL_ROUTES=Object.freeze({pt:'instalar-app.html',en:'install-app.html',es:'instalar-aplicacion.html'});
 const ONLINE_ONLY_SELECTOR=[
@@ -46,9 +47,12 @@ const copy=()=>({
     ios:['Abra esta página no Safari.','Toque em Compartilhar.','Escolha “Adicionar à Tela de Início” e confirme em “Adicionar”.'],
     browser:['Abra o menu do navegador.','Escolha “Instalar aplicativo” ou “Adicionar à tela inicial”.','Confirme a instalação.'],
     guide:'Ver guia completo',close:'Fechar',
-    preparing:'Preparando Tarot, Carta do Dia, Biblioteca, Escola e Diário para continuidade offline…',
-    ready:'Núcleo offline preparado. Recursos seguros continuam exigindo conexão.',
-    partial:'Parte do núcleo foi preparada. Mantenha a conexão e tente novamente.'
+    preparing:'Preparando Tarot, Carta do Dia, Biblioteca, Diário e Whit Local para continuidade offline…',
+    ready:'Núcleo gratuito offline preparado. Whit Local também continua sem API; recursos de autoridade exigem conexão.',
+    partial:'Parte do núcleo foi preparada. Mantenha a conexão e tente novamente.',
+    verifying:'Verificando o núcleo instalado…',healthy:'Núcleo V546 íntegro e pronto.',
+    repairing:'Reparando somente os arquivos do aplicativo…',repaired:'Núcleo reparado. Reabra o aplicativo.',
+    premiumDenied:'O offline Premium exige Conta conectada e entitlement ativo confirmado pelo servidor.'
   },
   en:{
     skip:'Skip to main content',install:'Install app',installed:'App installed',
@@ -58,9 +62,12 @@ const copy=()=>({
     ios:['Open this page in Safari.','Tap Share.','Choose “Add to Home Screen”, then confirm with “Add”.'],
     browser:['Open the browser menu.','Choose “Install app” or “Add to Home Screen”.','Confirm the installation.'],
     guide:'Open full guide',close:'Close',
-    preparing:'Preparing Tarot, Daily Card, Library, School and Journal for offline continuity…',
-    ready:'Offline core prepared. Secure services still require a connection.',
-    partial:'Part of the offline core was prepared. Keep the connection and try again.'
+    preparing:'Preparing Tarot, Daily Card, Library, Journal and Local Whit for offline continuity…',
+    ready:'Free offline core prepared. Local Whit also remains available without an API; authority services require a connection.',
+    partial:'Part of the offline core was prepared. Keep the connection and try again.',
+    verifying:'Checking the installed core…',healthy:'V546 core is intact and ready.',
+    repairing:'Repairing app files only…',repaired:'Core repaired. Reopen the app.',
+    premiumDenied:'Premium offline requires a connected Account and an active server-confirmed entitlement.'
   },
   es:{
     skip:'Ir al contenido principal',install:'Instalar aplicación',installed:'Aplicación instalada',
@@ -70,16 +77,19 @@ const copy=()=>({
     ios:['Abre esta página en Safari.','Toca Compartir.','Elige “Añadir a pantalla de inicio” y confirma con “Añadir”.'],
     browser:['Abre el menú del navegador.','Elige “Instalar aplicación” o “Añadir a pantalla de inicio”.','Confirma la instalación.'],
     guide:'Ver guía completo',close:'Cerrar',
-    preparing:'Preparando Tarot, Carta del Día, Biblioteca, Escuela y Diario para continuidad sin conexión…',
-    ready:'Núcleo offline preparado. Los servicios seguros siguen necesitando conexión.',
-    partial:'Parte del núcleo fue preparada. Mantén la conexión e inténtalo de nuevo.'
+    preparing:'Preparando Tarot, Carta del Día, Biblioteca, Diario y Whit Local para continuidad sin conexión…',
+    ready:'Núcleo gratuito sin conexión preparado. Whit Local también continúa sin API; los servicios de autoridad necesitan conexión.',
+    partial:'Parte del núcleo fue preparada. Mantén la conexión e inténtalo de nuevo.',
+    verifying:'Verificando el núcleo instalado…',healthy:'El núcleo V546 está íntegro y listo.',
+    repairing:'Reparando solamente los archivos de la aplicación…',repaired:'Núcleo reparado. Vuelve a abrir la aplicación.',
+    premiumDenied:'El modo Premium sin conexión exige Cuenta conectada y un derecho activo confirmado por el servidor.'
   }
 })[locale()];
 
 const installStyle=()=>{
   if(document.getElementById(STYLE_ID))return;
   const link=document.createElement('link');
-  link.id=STYLE_ID;link.rel='stylesheet';link.href='./pwa-resilience-v324.css?v=542';
+  link.id=STYLE_ID;link.rel='stylesheet';link.href='./pwa-resilience-v324.css?v=546';
   document.head.append(link);
 };
 
@@ -145,16 +155,9 @@ const installAccessibility=()=>{
   toast?.setAttribute('role','status');toast?.setAttribute('aria-live','polite');toast?.setAttribute('aria-atomic','true');
   document.querySelectorAll('dialog').forEach(dialog=>{dialog.setAttribute('role','dialog');dialog.setAttribute('aria-modal','true');});
   syncHiddenRegions();
-  let syncFrame=0;
-  const queueHiddenRegionSync=()=>{
-    if(syncFrame)return;
-    syncFrame=requestAnimationFrame(()=>{
-      syncFrame=0;
-      syncHiddenRegions();
-    });
-  };
-  const observer=new MutationObserver(queueHiddenRegionSync);
-  document.querySelectorAll('.screen,#orbMenu,#drawer').forEach(region=>observer.observe(region,{attributes:true,attributeFilter:['class','aria-hidden']}));
+  const queueHiddenRegionSync=()=>queueMicrotask(syncHiddenRegions);
+  ['divina:route-start','divina:route-ready','divina:menu-state','divina:orb-menu-state','divina:page-ready']
+    .forEach(type=>document.addEventListener(type,queueHiddenRegionSync,{passive:true}));
   document.addEventListener('keydown',trapVisibleLayer);
   document.addEventListener('divina:route-ready',event=>{
     const screen=document.getElementById(event.detail?.id||'');
@@ -259,6 +262,12 @@ const askWorker=(type,payload={})=>new Promise((resolve,reject)=>{
   }).catch(error=>{clearTimeout(timer);reject(error);});
 });
 
+const premiumEntitlementActive=()=>navigator.onLine!==false&&Boolean(
+  globalThis.divinaAccount?.user&&globalThis.divinaAccount?.entitlements?.some?.(
+    item=>item?.key==='premium_lifetime'&&item?.status==='active'
+  )
+);
+
 const setupOfflinePreparation=()=>{
   const buttons=document.querySelectorAll('[data-prepare-offline]');
   buttons.forEach(button=>button.addEventListener('click',async()=>{
@@ -272,29 +281,53 @@ const setupOfflinePreparation=()=>{
       if(output)output.textContent=copy().partial;announce(copy().partial);
     }finally{button.disabled=false;}
   }));
+
+  document.querySelectorAll('[data-prepare-premium-offline]').forEach(button=>button.addEventListener('click',async()=>{
+    const output=document.querySelector('[data-offline-result]');
+    if(!premiumEntitlementActive()){if(output)output.textContent=copy().premiumDenied;announce(copy().premiumDenied);return;}
+    button.disabled=true;if(output)output.textContent=copy().preparing;
+    try{
+      const result=await askWorker('PREPARE_OFFLINE_PREMIUM',{premiumAuthorized:true});
+      const message=result?.complete?copy().ready:copy().partial;
+      if(output)output.textContent=message;announce(message);
+    }catch{if(output)output.textContent=copy().partial;}
+    finally{button.disabled=false;}
+  }));
+
+  document.querySelectorAll('[data-verify-offline]').forEach(button=>button.addEventListener('click',async()=>{
+    const output=document.querySelector('[data-offline-health]')||document.querySelector('[data-offline-result]');
+    button.disabled=true;if(output)output.textContent=copy().verifying;
+    try{const result=await askWorker('VERIFY_SHELL');if(output)output.textContent=result?.complete?copy().healthy:copy().partial;}
+    catch{if(output)output.textContent=copy().partial;}
+    finally{button.disabled=false;}
+  }));
+
+  document.querySelectorAll('[data-repair-offline]').forEach(button=>button.addEventListener('click',async()=>{
+    const output=document.querySelector('[data-offline-health]')||document.querySelector('[data-offline-result]');
+    button.disabled=true;if(output)output.textContent=copy().repairing;
+    try{const result=await askWorker('REPAIR_SHELL');if(output)output.textContent=result?.complete?copy().repaired:copy().partial;}
+    catch{if(output)output.textContent=copy().partial;}
+    finally{button.disabled=false;}
+  }));
 };
 
 const setupServiceWorker=()=>{
   if(!('serviceWorker'in navigator))return;
-  globalThis.__divinaSWBootstrap='v545';
-  const register=()=>navigator.serviceWorker.register('./sw.js?v=545',{updateViaCache:'none'})
-    .then(registration=>{
-      dispatchEvent(new CustomEvent('divina:pwa-ready',{detail:{scope:registration.scope,version:VERSION,recovery:'paridade-internacional-v545'}}));
-      registration.update().catch(()=>{});
-      return registration;
-    })
-    .catch(error=>console.error('[Divina] PWA V545 isolado indisponível',error));
-
-  // Register immediately, then once more after window.load.
-  // Reforça a mesma versão após o carregamento para cobrir retomadas do iOS.
-  register();
-  const reinforce=()=>{
-    setTimeout(register,0);
-    setTimeout(register,350);
-    setTimeout(register,1400);
+  const announceRegistration=registration=>{
+    dispatchEvent(new CustomEvent('divina:pwa-ready',{detail:{scope:registration.scope,version:VERSION,recovery:'pwa-performance-recovery-v546'}}));
+    registration.update().catch(()=>{});
+    return registration;
   };
-  if(document.readyState!=='complete')addEventListener('load',reinforce,{once:true});
-  else reinforce();
+  if(String(globalThis.__divinaSWBootstrap||'').startsWith('v546')){
+    navigator.serviceWorker.ready.then(announceRegistration).catch(()=>{});
+    return;
+  }
+  globalThis.__divinaSWBootstrap='v546-pwa';
+  navigator.serviceWorker.register('./sw.js?v=546',{updateViaCache:'none'})
+    .then(registration=>{
+      announceRegistration(registration);
+    })
+    .catch(error=>console.error('[Divina] PWA V546 isolado indisponível',error));
 };
 
 const setupReturnFromBackground=()=>{
@@ -328,6 +361,7 @@ export function initializePwaV324(){
   initialized=true;
   installStyle();
   const responsive=createResponsiveEnchantmentCoreV533();
+  const recovery=createPwaPerformanceRecoveryCoreV546();
   document.documentElement.dataset.pwaWorld=String(VERSION);
   installPerformanceV324();
   installAccessibility();
@@ -340,24 +374,33 @@ export function initializePwaV324(){
   updateNetwork({initial:true});
   addEventListener('online',()=>updateNetwork());
   addEventListener('offline',()=>updateNetwork());
-  const dynamic=new MutationObserver(()=>updateOnlineOnlyActions(navigator.onLine));
-  dynamic.observe(document.body,{childList:true,subtree:true});
+  ['divina:page-ready','divina:account-sync-applied','divina:identity-rights-ready-v531']
+    .forEach(type=>document.addEventListener(type,()=>updateOnlineOnlyActions(navigator.onLine),{passive:true}));
   globalThis.divinaPwaV324=Object.freeze({
     version:VERSION,
     install:installApp,
     prepareOfflineCore:()=>askWorker('PREPARE_OFFLINE_CORE'),
     prepareOfflineTarot:()=>askWorker('PREPARE_OFFLINE_CORE'),
+    prepareOfflinePremium:()=>premiumEntitlementActive()
+      ?askWorker('PREPARE_OFFLINE_PREMIUM',{premiumAuthorized:true})
+      :Promise.resolve({type:'OFFLINE_PREMIUM_STATUS',complete:false,reason:'server-entitlement-required'}),
     offlineStatus:()=>askWorker('GET_OFFLINE_STATUS'),
+    verifyShell:()=>askWorker('VERIFY_SHELL'),
+    repairShell:()=>askWorker('REPAIR_SHELL'),
     clearOptionalCaches:()=>askWorker('CLEAR_OPTIONAL_OFFLINE'),
     webVitals:summarizeLocalWebVitalsV324,
     performanceTier:performanceTierV324,
     responsive,
+    recovery,
     authorityDataCached:false,
-    aiOffline:false,
+    whitLocalOffline:true,
+    whitOnlineOffline:false,
     billingOffline:false,
     adminOffline:false,
     consultationSubmitOffline:false,
-    currentSkinPreservedOffline:true
+    currentSkinPreservedOffline:true,
+    mutationObservers:0,
+    permanentLoops:0
   });
   globalThis.divinaPwaV196=globalThis.divinaPwaV324;
   return true;

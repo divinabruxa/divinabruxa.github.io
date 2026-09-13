@@ -192,6 +192,12 @@ export class PremiumWorldV318 {
         </article>
       </div>
 
+      <section class="spw318__offline" aria-labelledby="spw318OfflineTitle">
+        <span aria-hidden="true">↓</span>
+        <p><small>CONTINUIDADE PREMIUM</small><b id="spw318OfflineTitle">Prepare seus estudos para quando a rede desaparecer.</b><em>Somente arquivos estáticos são guardados. O cache não concede direito, não guarda Conta e não substitui a confirmação do servidor.</em></p>
+        <div><button type="button" data-spw318-offline${premiumActive ? '' : ' disabled'}>${premiumActive ? 'PREPARAR OFFLINE PREMIUM' : 'PREMIUM ATIVO NECESSÁRIO'}</button><output data-spw318-offline-result aria-live="polite">${premiumActive ? 'Direito ativo confirmado nesta sessão.' : 'Restaure a Conta para confirmar seu direito.'}</output></div>
+      </section>
+
       <div class="spw318__covenant">
         <span>✦</span>
         <p><b>${authenticated ? 'Servidor STAGING conectado à conta.' : 'Entre na Conta para restaurar acessos.'}</b>
@@ -201,6 +207,26 @@ export class PremiumWorldV318 {
 
     world.querySelector('[data-spw318-skins]')?.addEventListener('click', () => {
       globalThis.orbe?.go?.('skins');
+    });
+    world.querySelector('[data-spw318-offline]')?.addEventListener('click', async event => {
+      const button = event.currentTarget;
+      const output = world.querySelector('[data-spw318-offline-result]');
+      if (!premiumActive || !globalThis.divinaPwaV324?.prepareOfflinePremium) {
+        if (output) output.textContent = 'Reconecte e restaure a Conta antes de preparar o offline Premium.';
+        return;
+      }
+      button.disabled = true;
+      if (output) output.textContent = 'Preparando Escola e tiragens Premium…';
+      try {
+        const result = await globalThis.divinaPwaV324.prepareOfflinePremium();
+        if (output) output.textContent = result?.complete
+          ? 'Offline Premium preparado. O direito continuará sendo validado pela Conta.'
+          : 'Não foi possível confirmar o direito. Reconecte, restaure a Conta e tente novamente.';
+      } catch {
+        if (output) output.textContent = 'A preparação não terminou. Mantenha a conexão e tente novamente.';
+      } finally {
+        button.disabled = false;
+      }
     });
   }
 
@@ -213,6 +239,8 @@ export class PremiumWorldV318 {
       premiumLifetimePriceCents:19990,
       skinsAlsoSoldIndividually:true,
       individualSkinPriceTiersCents:[1990,2990,3990,4990],
+      premiumOfflineControl:true,
+      offlineCacheGrantsEntitlement:false,
       aiMonthlyPriceCents:8990,
       realBilling:false,
       stripeCheckout:false,

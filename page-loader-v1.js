@@ -1,4 +1,4 @@
-/* DIVINA BRUXA 3.0 — CARREGAMENTO V544 · BIBLIOTECA PÚBLICA
+/* DIVINA BRUXA 3.0 — CARREGAMENTO V546 · PWA, PERFORMANCE E RECUPERAÇÃO
    Preserva V501, V509 e o Universo V524; conecta Tarot e Mesa Real.
    V538 carrega o Tarot Livre sem fogo, sem arrasto e com imagens progressivas. */
 
@@ -269,15 +269,15 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     },
     subscriptions:async()=>{
       const [,module]=await Promise.all([
-        ensureStyle('divinaCrownRebirthV318','skins-premium-world-v318.css?v=542'),
-        import('./skins-premium-world-v318.js?v=542')
+        ensureStyle('divinaCrownRebirthV318','skins-premium-world-v318.css?v=546'),
+        import('./skins-premium-world-v318.js?v=546')
       ]);
       return new module.PremiumWorldV318($('#subscriptionApp'));
     },
     skins:async()=>{
       const [,module]=await Promise.all([
-        ensureStyle('divinaCrownRebirthV318','skins-premium-world-v318.css?v=542'),
-        import('./skins-premium-world-v318.js?v=542')
+        ensureStyle('divinaCrownRebirthV318','skins-premium-world-v318.css?v=546'),
+        import('./skins-premium-world-v318.js?v=546')
       ]);
       return new module.SkinsWorldV318($('#skinsApp'));
     },
@@ -338,12 +338,12 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       import('./journal-world-v317.js?v=539')
     ]),
     skins:()=>Promise.all([
-      ensureStyle('divinaCrownRebirthV318','skins-premium-world-v318.css?v=542'),
-      import('./skins-premium-world-v318.js?v=542')
+      ensureStyle('divinaCrownRebirthV318','skins-premium-world-v318.css?v=546'),
+      import('./skins-premium-world-v318.js?v=546')
     ]),
     subscriptions:()=>Promise.all([
-      ensureStyle('divinaCrownRebirthV318','skins-premium-world-v318.css?v=542'),
-      import('./skins-premium-world-v318.js?v=542')
+      ensureStyle('divinaCrownRebirthV318','skins-premium-world-v318.css?v=546'),
+      import('./skins-premium-world-v318.js?v=546')
     ]),
     consultations:()=>Promise.all([
       import('./commerce-engine.js?v=148'),

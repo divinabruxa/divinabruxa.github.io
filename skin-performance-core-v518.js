@@ -2,7 +2,7 @@
    Uma autoridade de acabamento para as 30 skins. O Runtime V12 continua sendo
    a autoridade da troca de textura; a conta continua sendo a autoridade de
    propriedade. Esta camada não cria Orbes nem desbloqueia skins: preserva o
-   desenho aprovado da Chama V516 e governa a cadência estável do Universo Vivo V524.
+   desenho aprovado da Orbe e governa a cadência estável do Universo Vivo V524.
 */
 
 import { SKIN_REGISTRY_V12, skinByIdV12 } from './skin-registry-v12.js?v=133';
@@ -13,7 +13,7 @@ const STYLE_ID = 'divinaSkinPerformanceV518Styles';
 const STYLE_HREF = './skin-performance-core-v518.css?v=518';
 const VEIL_ID = 'divinaSkinVeilV518';
 const EXPECTED_SKINS = 30;
-const MONITOR_MS = 4000;
+const EVALUATION_DELAY_MS = 1600;
 const QUALITY_ORDER = Object.freeze(['protected', 'balanced', 'cinematic']);
 
 /* A identidade, a textura e accent/light continuam vindo do registro canônico.
@@ -152,7 +152,7 @@ export class SkinPerformanceCoreV518 {
     this.applyBudget('boot');
     this.bind();
     this.observeLongTasks();
-    this.scheduleMonitor();
+    this.scheduleMonitor(3200);
     this.assertIntegrity();
 
     document.dispatchEvent(new CustomEvent('divina:finish-ready', {
@@ -165,7 +165,7 @@ export class SkinPerformanceCoreV518 {
         createsOrb:false,
         unlocksSkins:false,
         activeUniverse:'v524',
-        approvedFlame:'v516-preserved'
+        tarotFire:'removed-v538'
       })
     }));
   }
@@ -318,7 +318,7 @@ export class SkinPerformanceCoreV518 {
     } catch {}
   }
 
-  scheduleMonitor() {
+  scheduleMonitor(delay = EVALUATION_DELAY_MS) {
     clearTimeout(this.monitorTimer);
     this.monitorTimer = setTimeout(() => {
       if (!document.hidden) this.evaluateWindow();
@@ -326,8 +326,7 @@ export class SkinPerformanceCoreV518 {
         this.longTaskCount = 0;
         this.longTaskMs = 0;
       }
-      this.scheduleMonitor();
-    }, MONITOR_MS);
+    }, delay);
   }
 
   evaluateWindow() {
@@ -373,8 +372,9 @@ export class SkinPerformanceCoreV518 {
       }
     }, { signal });
     document.addEventListener('divina:route-start', () => this.markMotion(860), { signal });
+    document.addEventListener('divina:route-ready', () => this.scheduleMonitor(), { signal });
     document.addEventListener('divina:supreme-orb-will-navigate', () => this.markMotion(920), { signal });
-    document.addEventListener('tarot:supreme-revealed', () => this.markMotion(1160), { signal });
+    document.addEventListener('tarot:supreme-revealed', () => { this.markMotion(1160); this.scheduleMonitor(1800); }, { signal });
     document.addEventListener('divina:menu-state', event => {
       if (/opening|closing/.test(event.detail?.state || '')) this.markMotion(520);
     }, { signal });
@@ -382,6 +382,7 @@ export class SkinPerformanceCoreV518 {
       if (!document.hidden) {
         this.applyBudget('visibility-return');
         this.applyPalette(activeSkinId(), { animate:false });
+        this.scheduleMonitor(900);
       }
     }, { signal });
     addEventListener('resize', () => this.applyBudget('viewport'), { passive:true, signal });
@@ -413,7 +414,7 @@ export class SkinPerformanceCoreV518 {
       physicalLivingOrbs:integrity.living,
       universeCanvases:integrity.universeCanvases,
       activeUniverseFile:'v524',
-      approvedFlameLineage:'v516-preserved-inside-v524',
+      tarotFireRemoved:'v538',
       selectiveSkinPigment:true,
       physicalOrbTouchMotion:false,
       retinaTextureBackedProceduralWorld:true,

@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 11/14 · V545
-   Paridade pública PT-BR, inglês e espanhol na mesma Orbe.
+/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 12/14 · V546
+   PWA, performance, offline e recuperação segura na mesma Orbe.
    Fluidez, privacidade, Tarot e todas as travas anteriores permanecem íntegros. */
 
 import { CONFIG } from './config-v200.js?v=200';
@@ -18,7 +18,7 @@ import { AccountEngineV201 } from './account-engine-v201.js?v=201';
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=534-consultations-anchor';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=535-deferred-worlds';
+import { createPageLoader } from './page-loader-v1.js?v=546';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -50,6 +50,7 @@ import { createExperienceDepthCoreV541 } from './experience-depth-core-v541.js?v
 import { createAmazonStoreCoreV543 } from './amazon-store-core-v543.js?v=543';
 import { createPublicLibraryCoreV544 } from './public-library-core-v544.js?v=544';
 import { createInternationalParityCoreV545 } from './international-parity-core-v545.js?v=545';
+import { createPwaPerformanceRecoveryCoreV546 } from './pwa-performance-recovery-core-v546.js?v=546';
 
 const $ = selector => document.querySelector(selector);
 
@@ -63,11 +64,11 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=545')
+const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=546')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
-    document.documentElement.dataset.pwaError = 'v535';
+    document.documentElement.dataset.pwaError = 'v546';
   });
 
 const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
@@ -195,6 +196,10 @@ const safely = (label, task) => {
 // 30 skins antes que a navegação construa o mapa de mundos.
 const responsiveEnchantment = safely('Responsividade e Encantamento Final V533', () =>
   createResponsiveEnchantmentCoreV533()
+);
+
+const pwaPerformanceRecovery = safely('PWA, Performance, Offline e Recuperação V546', () =>
+  createPwaPerformanceRecoveryCoreV546()
 );
 
 // A tela dinâmica de Skins já existe neste ponto; o primeiro diagnóstico do
@@ -442,26 +447,33 @@ const realityLifecycle = safely('Motor Universal das Realidades V511', () =>
 
 const warmEssentialPortals = () => {
   const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-  if (connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType || '')) return;
-  pageLoader.warm(['tarot', 'daily', 'library', 'school', 'journal']).catch?.(() => {});
+  if ((document.body.dataset.screen && document.body.dataset.screen !== 'home')
+    || document.documentElement.dataset.orbNavigationState === 'active'
+    || document.documentElement.dataset.performanceTier === 'constrained'
+    || connection?.saveData
+    || /slow-2g|(^|-)2g$/.test(connection?.effectiveType || '')) return;
+  // Só o primeiro destino mais provável aquece em repouso. Os outros mundos
+  // permanecem realmente lazy e são preparados pelo gesto que os escolhe.
+  pageLoader.warm(['tarot']).catch?.(() => {});
 };
 
 addEventListener('load', () => {
-  if ('requestIdleCallback' in window) window.requestIdleCallback(warmEssentialPortals, { timeout: 2200 });
-  else setTimeout(warmEssentialPortals, 900);
+  if ('requestIdleCallback' in window) window.requestIdleCallback(warmEssentialPortals, { timeout: 5000 });
+  else setTimeout(warmEssentialPortals, 2400);
 }, { once: true });
 
 addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V537 = 542;
-const releaseReloadKeyV537 = `divina-release-reload-${RELEASE_EPOCH_V537}`;
+const RELEASE_EPOCH_V537 = 546;
 const reloadForNewReleaseV537 = version => {
-  if (Number(version || 0) <= RELEASE_EPOCH_V537) return false;
+  const nextRelease = Number(version || 0);
+  if (!Number.isFinite(nextRelease) || nextRelease <= RELEASE_EPOCH_V537) return false;
+  const releaseReloadKeyV537 = `divina-release-reload-${nextRelease}`;
   try {
     if (sessionStorage.getItem(releaseReloadKeyV537)) return false;
-    sessionStorage.setItem(releaseReloadKeyV537, String(version));
+    sessionStorage.setItem(releaseReloadKeyV537, String(nextRelease));
   } catch {}
   location.reload();
   return true;
@@ -475,20 +487,20 @@ navigator.serviceWorker?.addEventListener('message', event => {
   }
   if (event.data?.type !== 'divina-notification-open') return;
   const target = String(event.data.target || '#home').replace(/^#/, '');
-  if (/^(home|daily|school|consultations|login|subscriptions|ai|music|videos|skins|notifications)$/.test(target)) {
+  if (/^(home|tarot|daily|library|spreads|school|journal|consultations|store|login|subscriptions|ai|music|videos|skins|notifications)$/.test(target)) {
     go(target, { source:'notification' });
   }
 });
 
-if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV537) {
-  window.__divinaSWBootstrapV537 = true;
+if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
+  window.__divinaSWBootstrap = 'v546-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=545', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=546', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v545';
+        document.documentElement.dataset.releaseEpoch = 'v546';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V545 registrado');
+        console.info('[Divina] PWA V546 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -522,6 +534,7 @@ window.orbe = {
   grammar:livingGrammar,
   discovery:originDiscovery,
   international:internationalParity,
+  recovery:pwaPerformanceRecovery,
   observatory:null,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -978,6 +991,28 @@ window.divinaInternationalParityReleaseV545 = Object.freeze({
   environment:'staging'
 });
 
+window.divinaPwaPerformanceRecoveryReleaseV546 = Object.freeze({
+  version:546,
+  macroStage:'12-of-14',
+  title:'PWA, Performance, Offline e Recuperação',
+  core:pwaPerformanceRecovery,
+  contract:pwaPerformanceRecovery?.status?.() || null,
+  audit:()=>pwaPerformanceRecovery?.audit?.() || null,
+  status:()=>pwaPerformanceRecovery?.status?.() || null,
+  targets:Object.freeze({touchResponseMs:100,LCPms:2500,INPms:200,CLS:0.1}),
+  targetFps:Object.freeze({standard:60,fallback:30,reduced:20}),
+  offlineWorlds:Object.freeze(['tarot','daily-revealed','library','journal-local','whit-local','current-skin']),
+  onlineOnly:Object.freeze(['account-authority','billing','admin','consultation-submit','whit-online']),
+  versionedCache:true,
+  safeWorkerUpdate:true,
+  navigationPreload:true,
+  oneCanonicalOrb:true,
+  privateContentReads:0,
+  storageWrites:0,
+  permanentAnimationLoops:0,
+  environment:'staging'
+});
+
 window.divinaOwnerObservatoryReleaseV532 = Object.freeze({
   version:532,
   macroStage:'8-of-10',
@@ -1233,6 +1268,7 @@ window.divinaOrbV208 = Object.freeze({
   vitality:vitalityBus,
   grammar:livingGrammar,
   discovery:originDiscovery,
+  recovery:pwaPerformanceRecovery,
   miniOrbs:supremeOrb?.projections?.() || [],
   snapshot:() => supremeOrb?.snapshot?.() || orbMotionV207.snapshot()
 });
@@ -1256,6 +1292,7 @@ window.divinaOrbSupremeV501 = Object.freeze({
   vitality:vitalityBus,
   grammar:livingGrammar,
   discovery:originDiscovery,
+  recovery:pwaPerformanceRecovery,
   navigate:go,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -1324,10 +1361,10 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V545',
+        release:'V546',
         supremePlan:'3.0-universo-vivo',
         supremePlanMacroStages:14,
-        currentMacroStage:'11-of-14',
+        currentMacroStage:'12-of-14',
         worldTruth:'v535',
         worldTruthRoutes:17,
         orbFluidNavigation:'v535',
@@ -1502,6 +1539,21 @@ const awaken = async () => {
         internationalParityIndependentOrbEngines:0,
         internationalParityPrivateContentReads:0,
         internationalParityPermanentAnimationLoops:0,
+        pwaPerformanceRecovery:'v546',
+        pwaPerformanceRecoveryMacroStage:'12-of-14',
+        pwaPerformanceTouchResponseBudgetMs:100,
+        pwaPerformanceLcpBudgetMs:2500,
+        pwaPerformanceInpBudgetMs:200,
+        pwaPerformanceClsBudget:0.1,
+        pwaPerformanceTargetFps:60,
+        pwaPerformanceFallbackFps:30,
+        pwaPerformanceReducedFps:20,
+        pwaPerformanceVersionedCache:true,
+        pwaPerformanceNavigationPreload:true,
+        pwaPerformanceOfflineWhitLocal:true,
+        pwaPerformanceOfflineAuthorityData:false,
+        pwaPerformanceMutationObservers:0,
+        pwaPerformancePermanentAnimationLoops:0,
         ownerObservatory:'v532',
         ownerObservatoryMacroStage:'8-of-10',
         ownerObservatoryRoute:'admin',
