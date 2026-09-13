@@ -1,11 +1,11 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R031 · TIRAGENS SUPREMAS V331
+/* DIVINA BRUXA 4.0 — MACROETAPA 6/14 · TIRAGENS SUPREMAS V554
    Observatório de possibilidades sobre SpreadsWorld V305 / SpreadsEngine V213.
    Não cria um segundo motor. */
 
-import { SpreadsWorldV305 } from './spreads-world-v305.js?v=305';
+import { SpreadsWorldV305 } from './spreads-world-v305.js?v=554';
 import { synthesizeSpreadV331 } from './spread-synthesis-v331.js?v=331';
 
-const RELEASE='V331';
+const RELEASE='V554';
 const STYLE_ID='spreadsSupremeV331Styles';
 const MARK=Symbol.for('divina.spreads.supreme.v331');
 const PATCH_MARK=Symbol.for('divina.spreads.synthesis.patch.v331');
@@ -20,7 +20,7 @@ const constrained=()=>document.documentElement.dataset.performanceTier==='constr
 function installStyle(){
   if(document.getElementById(STYLE_ID))return;
   const link=document.createElement('link');
-  link.id=STYLE_ID;link.rel='stylesheet';link.href='./spreads-supreme-v331.css?v=331';
+  link.id=STYLE_ID;link.rel='stylesheet';link.href='./spreads-supreme-v331.css?v=554';
   document.head.append(link);
 }
 
@@ -36,7 +36,7 @@ function patchSynthesis(){
     });
 
     return `<article class="spread-synthesis v213 spread-synthesis-v331">
-      <span>LEITURA INTEGRADA · V331</span>
+      <span>LEITURA INTEGRADA · V554</span>
       <h3>O que este desenho pode revelar sobre o seu momento.</h3>
       <div class="spread-life-map-v331">
         <section data-life-layer="now"><small>AGORA</small><p>${safe(synthesis.now)}</p></section>
@@ -76,13 +76,14 @@ export class SpreadsSupremeV331{
     this.result=null;
     this.grid=null;
     this.observer=null;
+    this.frame=0;
     this.abort=new AbortController();
     this.mounted=false;
     installStyle();
     patchSynthesis();
     this.bind();
     this.tryMount();
-    document.documentElement.dataset.spreadsSupreme='v331';
+    document.documentElement.dataset.spreadsSupreme='v554';
   }
 
   bind(){
@@ -112,7 +113,7 @@ export class SpreadsSupremeV331{
     this.root=root;
     this.result=root.querySelector('#spreadResult,.spread-result,[data-spread-result]')||document.querySelector('#spreadResult');
     this.grid=root.querySelector('#spreadGrid,[data-spread-grid],.spread-grid')||root;
-    root.dataset.spreadsSupreme='v331';
+    root.dataset.spreadsSupreme='v554';
     root.classList.add('sp331');
 
     this.enhance();
@@ -125,8 +126,12 @@ export class SpreadsSupremeV331{
         baseWorld:'V305',
         baseEngine:'V213',
         methods:15,
+        freeMethods:4,
+        premiumMethods:11,
         celticCross:10,
         royalTable:78,
+        canonicalOrb:true,
+        atlasGrid:true,
         realLifeSynthesis:true,
         automaticWhitReading:false,
         extraApiCalls:0
@@ -139,7 +144,8 @@ export class SpreadsSupremeV331{
     this.observer?.disconnect();
     this.observer=new MutationObserver(records=>{
       if(!records.some(record=>record.type==='childList'))return;
-      requestAnimationFrame(()=>this.enhance());
+      if(this.frame)return;
+      this.frame=requestAnimationFrame(()=>{this.frame=0;this.enhance();});
     });
     this.observer.observe(this.root,{childList:true,subtree:true});
   }
@@ -148,7 +154,7 @@ export class SpreadsSupremeV331{
     if(!this.root)return;
 
     if(!this.root.querySelector('.sp331__cosmos')){
-      layer(this.root,'sp331__cosmos','<i></i><i></i><i></i><i></i><i></i><i></i>');
+      layer(this.root,'sp331__cosmos','<i></i><i></i><i></i>');
     }
 
     const ritual=this.root.querySelector('.spread-ritual-v305');
@@ -167,8 +173,8 @@ export class SpreadsSupremeV331{
       if(!reading.querySelector('.sp331__reading-space')){
         layer(reading,'sp331__reading-space','<i></i><i></i><i></i><i></i>');
       }
-      const orb=reading.querySelector('.spread-orb,[data-reveal-card]');
-      orb?.classList.add('spread-orb-v331');
+      const orb=reading.querySelector('[data-spread-orb-host]');
+      orb?.classList.add('spread-orb-v554');
       const map=reading.querySelector('.spread-map');
       map?.classList.add('spread-map-v331');
     }
@@ -188,7 +194,7 @@ export class SpreadsSupremeV331{
     button.classList.remove('sp331-choice-pulse');
     requestAnimationFrame(()=>{
       button.classList.add('sp331-choice-pulse');
-      setTimeout(()=>button.classList.remove('sp331-choice-pulse'),620);
+      setTimeout(()=>button.classList.remove('sp331-choice-pulse'),260);
     });
   }
 
@@ -198,7 +204,7 @@ export class SpreadsSupremeV331{
     reading.classList.remove('sp331-reveal-pulse');
     requestAnimationFrame(()=>{
       reading.classList.add('sp331-reveal-pulse');
-      setTimeout(()=>reading.classList.remove('sp331-reveal-pulse'),820);
+      setTimeout(()=>reading.classList.remove('sp331-reveal-pulse'),280);
     });
     document.dispatchEvent(new CustomEvent('whit:whisper',{
       detail:Object.freeze({
@@ -216,8 +222,13 @@ export class SpreadsSupremeV331{
       baseEngine:'V213',
       synthesisPatched:Boolean(SpreadsWorldV305.prototype[PATCH_MARK]),
       methods:15,
+      freeMethods:4,
+      premiumMethods:11,
       celticCross:10,
       royalTable:78,
+      canonicalOrb:true,
+      atlasGrid:true,
+      gridFullImageRequests:0,
       realLifeSynthesis:true,
       cardDictionaryStyle:false,
       automaticWhitReading:false,
@@ -229,6 +240,7 @@ export class SpreadsSupremeV331{
 
   destroy(){
     this.abort.abort();
+    if(this.frame)cancelAnimationFrame(this.frame);
     this.observer?.disconnect();
     this.root?.classList.remove('sp331');
     this.root?.removeAttribute('data-spreads-supreme');

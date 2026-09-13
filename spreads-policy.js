@@ -1,7 +1,8 @@
-/* DIVINA BRUXA — POLÍTICA DAS TIRAGENS 2.0 V213
-   15 métodos, uma única orientação, cartas únicas, sessões retomáveis e Mesa Real 13×6. */
+/* DIVINA BRUXA 4.0 — MACROETAPA 6/14 · POLÍTICA V554
+   15 métodos funcionais, quatro portas gratuitas e onze experiências Premium.
+   A autoridade Premium permanece no servidor; todas as cartas são diretas e únicas. */
 
-export const SPREAD_RELEASE = 'V213';
+export const SPREAD_RELEASE = 'V554';
 export const SPREAD_STORAGE_KEY = 'spread-session-v213';
 export const SPREAD_LEGACY_STORAGE_KEYS = Object.freeze(['spread-session-v5']);
 export const SPREAD_HISTORY_KEY = 'spread-history-v139';
@@ -12,6 +13,8 @@ export const ROYAL_TABLE_COUNT = ROYAL_TABLE_COLUMNS * ROYAL_TABLE_ROWS;
 
 export const SPREAD_FILTERS = Object.freeze([
   Object.freeze({ id: 'all', label: 'Todas', description: '15 métodos' }),
+  Object.freeze({ id: 'free', label: 'Grátis', description: '4 tiragens completas' }),
+  Object.freeze({ id: 'premium', label: 'Premium', description: '11 experiências profundas' }),
   Object.freeze({ id: 'quick', label: 'Essenciais', description: '1 a 5 cartas' }),
   Object.freeze({ id: 'themes', label: 'Por tema', description: 'amor, escolhas e vida prática' }),
   Object.freeze({ id: 'deep', label: 'Profundas', description: '10 a 12 posições' }),
@@ -61,18 +64,18 @@ export const ROYAL_TABLE_POSITIONS = freezePositions(
 export const SPREADS = Object.freeze([
   spread({ id:'direct-question', name:'Uma Carta', description:'Uma mensagem central para o agora.', category:'Essencial', sigil:'✦', positions:[p('message','Mensagem central')] }),
   spread({ id:'past-present-tendency', name:'Passado · Presente · Tendência', description:'Três tempos para reconhecer o movimento da questão.', category:'3 Cartas', sigil:'☾', positions:[p('past','Passado · raiz'),p('present','Presente'),p('tendency','Tendência · conselho')] }),
-  spread({ id:'magic-triangle', name:'Triângulo Mágico', description:'Manifestação, consciência e caminho possível.', category:'3 Cartas', sigil:'△', positions:[p('manifest','O que se manifesta'),p('awareness','O que pede consciência'),p('path','O caminho possível')] }),
+  spread({ id:'magic-triangle', name:'Triângulo Mágico', description:'Manifestação, consciência e caminho possível.', category:'Premium', sigil:'△', premium:true, positions:[p('manifest','O que se manifesta'),p('awareness','O que pede consciência'),p('path','O caminho possível')] }),
   spread({ id:'situation-challenge-advice', name:'Situação · Desafio · Conselho', description:'Clareza prática para uma questão objetiva.', category:'3 Cartas', sigil:'⌖', positions:[p('situation','Situação'),p('challenge','Desafio'),p('advice','Conselho')] }),
-  spread({ id:'five-card-path', name:'Caminho em Cinco', description:'Centro, forças, tensão e próximo movimento.', category:'5 Cartas', sigil:'✧', positions:[p('center','Centro da questão'),p('support','O que favorece'),p('challenge','O que desafia'),p('awareness','O que pede consciência'),p('next','Próximo passo')] }),
-  spread({ id:'two-paths', name:'Dois Caminhos', description:'Compare duas possibilidades sem entregar sua decisão ao Tarot.', category:'Escolhas', sigil:'◇', positions:[p('core','Núcleo da escolha'),p('a-strength','Caminho A · força'),p('a-challenge','Caminho A · desafio'),p('b-strength','Caminho B · força'),p('b-challenge','Caminho B · desafio'),p('criterion','Critério para decidir')] }),
-  spread({ id:'love-relationships', name:'Amor & Relações', description:'Observe pessoas, vínculo, limites e tendência.', category:'Amor', sigil:'♡', tone:'love', positions:[p('you','Você'),p('other','A outra energia'),p('bond','O vínculo'),p('support','O que fortalece'),p('boundary','O que pede limite'),p('tendency','Tendência')] }),
-  spread({ id:'work-career', name:'Trabalho & Vocação', description:'Talentos, ambiente, desafio e direção profissional.', category:'Trabalho', sigil:'♙', tone:'career', positions:[p('now','Seu lugar agora'),p('talent','Talento disponível'),p('environment','Ambiente'),p('challenge','Desafio profissional'),p('direction','Direção possível')] }),
-  spread({ id:'money-resources', name:'Dinheiro & Recursos', description:'Uma leitura responsável sobre escolhas e realidade material.', category:'Dinheiro', sigil:'⊕', tone:'money', positions:[p('reality','Realidade atual'),p('resource','Recurso disponível'),p('pattern','Padrão a rever'),p('action','Ação concreta'),p('tendency','Tendência material')] }),
-  spread({ id:'spiritual-path', name:'Caminho Espiritual', description:'Presença, aprendizado, sombra, dom e integração.', category:'Espiritualidade', sigil:'☉', tone:'spirituality', positions:[p('presence','Presença'),p('learning','Aprendizado'),p('shadow','Sombra a acolher'),p('gift','Dom a cultivar'),p('integration','Integração')] }),
-  spread({ id:'astrological-mandala', name:'Mandala Astrológica', description:'Doze casas observam a vida por inteiro.', category:'Profunda', sigil:'◉', layout:'mandala', positions:[p('house-1','Casa 1 · Identidade'),p('house-2','Casa 2 · Recursos'),p('house-3','Casa 3 · Comunicação'),p('house-4','Casa 4 · Raízes'),p('house-5','Casa 5 · Criação'),p('house-6','Casa 6 · Rotina'),p('house-7','Casa 7 · Relacionamentos'),p('house-8','Casa 8 · Transformação'),p('house-9','Casa 9 · Expansão'),p('house-10','Casa 10 · Vocação'),p('house-11','Casa 11 · Comunidade'),p('house-12','Casa 12 · Mundo interior')] }),
-  spread({ id:'tree-of-life', name:'Árvore da Vida', description:'Dez posições conectam origem, aprendizado e realização.', category:'Profunda', sigil:'♧', layout:'tree', positions:[p('crown','Coroa'),p('wisdom','Sabedoria'),p('understanding','Entendimento'),p('mercy','Misericórdia'),p('strength','Força'),p('beauty','Beleza'),p('victory','Vitória'),p('splendor','Esplendor'),p('foundation','Fundamento'),p('manifestation','Manifestação')] }),
-  spread({ id:'celtic-cross', name:'Cruz Celta', description:'A estrutura tradicional em dez posições, preservando cruz e coluna.', category:'Profunda', sigil:'✣', layout:'celtic-cross', positions:CELTIC_CROSS_POSITIONS }),
-  spread({ id:'custom-table', name:'Mesa Personalizada', description:'Escolha de 1 a 12 posições antes de abrir as cartas.', category:'Autoral', sigil:'⋮', custom:true, positions:CUSTOM_POSITIONS }),
+  spread({ id:'five-card-path', name:'Caminho em Cinco', description:'Centro, forças, tensão e próximo movimento.', category:'Premium', sigil:'✧', premium:true, positions:[p('center','Centro da questão'),p('support','O que favorece'),p('challenge','O que desafia'),p('awareness','O que pede consciência'),p('next','Próximo passo')] }),
+  spread({ id:'two-paths', name:'Dois Caminhos', description:'Compare duas possibilidades sem entregar sua decisão ao Tarot.', category:'Premium', sigil:'◇', premium:true, positions:[p('core','Núcleo da escolha'),p('a-strength','Caminho A · força'),p('a-challenge','Caminho A · desafio'),p('b-strength','Caminho B · força'),p('b-challenge','Caminho B · desafio'),p('criterion','Critério para decidir')] }),
+  spread({ id:'love-relationships', name:'Amor & Relações', description:'Uma leitura gratuita e direta sobre você, o vínculo e o cuidado possível.', category:'Amor', sigil:'♡', tone:'love', positions:[p('you','Você nesta relação'),p('bond','O vínculo agora'),p('care','Conselho e limite saudável')] }),
+  spread({ id:'work-career', name:'Trabalho & Vocação', description:'Talentos, ambiente, desafio e direção profissional.', category:'Premium', sigil:'♙', tone:'career', premium:true, positions:[p('now','Seu lugar agora'),p('talent','Talento disponível'),p('environment','Ambiente'),p('challenge','Desafio profissional'),p('direction','Direção possível')] }),
+  spread({ id:'money-resources', name:'Dinheiro & Recursos', description:'Uma leitura responsável sobre escolhas e realidade material.', category:'Premium', sigil:'⊕', tone:'money', premium:true, positions:[p('reality','Realidade atual'),p('resource','Recurso disponível'),p('pattern','Padrão a rever'),p('action','Ação concreta'),p('tendency','Tendência material')] }),
+  spread({ id:'spiritual-path', name:'Caminho Espiritual', description:'Presença, aprendizado, sombra, dom e integração.', category:'Premium', sigil:'☉', tone:'spirituality', premium:true, positions:[p('presence','Presença'),p('learning','Aprendizado'),p('shadow','Sombra a acolher'),p('gift','Dom a cultivar'),p('integration','Integração')] }),
+  spread({ id:'astrological-mandala', name:'Mandala Astrológica', description:'Doze casas observam a vida por inteiro.', category:'Premium', sigil:'◉', premium:true, layout:'mandala', positions:[p('house-1','Casa 1 · Identidade'),p('house-2','Casa 2 · Recursos'),p('house-3','Casa 3 · Comunicação'),p('house-4','Casa 4 · Raízes'),p('house-5','Casa 5 · Criação'),p('house-6','Casa 6 · Rotina'),p('house-7','Casa 7 · Relacionamentos'),p('house-8','Casa 8 · Transformação'),p('house-9','Casa 9 · Expansão'),p('house-10','Casa 10 · Vocação'),p('house-11','Casa 11 · Comunidade'),p('house-12','Casa 12 · Mundo interior')] }),
+  spread({ id:'tree-of-life', name:'Árvore da Vida', description:'Dez posições conectam origem, aprendizado e realização.', category:'Premium', sigil:'♧', premium:true, layout:'tree', positions:[p('crown','Coroa'),p('wisdom','Sabedoria'),p('understanding','Entendimento'),p('mercy','Misericórdia'),p('strength','Força'),p('beauty','Beleza'),p('victory','Vitória'),p('splendor','Esplendor'),p('foundation','Fundamento'),p('manifestation','Manifestação')] }),
+  spread({ id:'celtic-cross', name:'Cruz Celta', description:'A estrutura tradicional em dez posições, preservando cruz e coluna.', category:'Premium', sigil:'✣', premium:true, layout:'celtic-cross', positions:CELTIC_CROSS_POSITIONS }),
+  spread({ id:'custom-table', name:'Mesa Personalizada', description:'Escolha de 1 a 12 posições antes de abrir as cartas.', category:'Premium', sigil:'⋮', premium:true, custom:true, positions:CUSTOM_POSITIONS }),
   spread({ id:'royal-table', name:'Mesa Real', description:'As 78 cartas únicas em uma matriz 13 × 6, com autosave Premium.', category:'Premium', sigil:'▦', premium:true, layout:'royal-table', positions:ROYAL_TABLE_POSITIONS })
 ]);
 
@@ -85,6 +88,8 @@ export function spreadFilterId(target) {
 }
 
 export function spreadsForFilter(filterId = 'all') {
+  if (filterId === 'free') return SPREADS.filter(target => !target.premium);
+  if (filterId === 'premium') return SPREADS.filter(target => target.premium);
   return filterId === 'all' ? [...SPREADS] : SPREADS.filter(target => spreadFilterId(target) === filterId);
 }
 

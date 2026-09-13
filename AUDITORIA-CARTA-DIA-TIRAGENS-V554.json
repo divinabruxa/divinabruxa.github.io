@@ -1,0 +1,25 @@
+{
+  "release": "V554",
+  "scope": ["daily", "spreads", "premium-gate", "canonical-orb", "iphone-fluidity", "offline-core"],
+  "findingsResolved": {
+    "dailyContinuousCanvasLoop": "replaced-by-bounded-interaction-burst",
+    "dailyInfiniteCssEffects": "overridden-to-rest",
+    "duplicateSpreadOrb": "removed-canonical-orb-claimed",
+    "premiumLocalResumeBypass": "blocked-until-server-confirmation",
+    "royalTableFullImageGrid": "replaced-by-single-atlas",
+    "concurrentSmoothScroll": "replaced-by-next-frame-auto-scroll",
+    "spreadMutationObserverFrames": "coalesced"
+  },
+  "catalog": {
+    "total": 15,
+    "free": ["direct-question", "past-present-tendency", "situation-challenge-advice", "love-relationships"],
+    "premiumCount": 11
+  },
+  "validation": {
+    "dailyAndSpreads": "76/76",
+    "serviceWorkerRuntime": "26/26",
+    "navigationRegression": "35/35",
+    "javascriptSyntax": "approved"
+  },
+  "physicalIphoneValidation": "reserved-for-macro-stage-14"
+}

@@ -1,0 +1,9 @@
+ROLLBACK CIRÚRGICO — V554 PARA V553
+
+Se for necessário voltar somente esta macroetapa:
+1. restaure app-v208.js, index.html, manifest.webmanifest, page-loader-v1.js, pwa-world-v196.js, pwa-world-v324.js e sw.js da V553;
+2. restaure daily-world-v509.js, spreads-policy.js, spreads-engine.js, spreads-world-v305.js e spreads-supreme-v331.js da V553;
+3. remova somente daily-spreads-supreme-v554.css;
+4. mantenha CNAME, cartas, imagens, Diário, contas, compras e demais arquivos.
+
+O rollback não apaga Carta do Dia, sessões de tiragem, histórico, direitos Premium ou dados privados.

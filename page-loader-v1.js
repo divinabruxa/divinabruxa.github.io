@@ -204,8 +204,9 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       delete globalThis.divinaDailyWorldV509;
       document.getElementById('divinaDailyRebirthV303')?.remove();
       const [,module]=await Promise.all([
-        ensureStyle('divinaDailyLivingV509','daily-world-v509.css?v=509'),
-        import('./daily-world-v509.js?v=509')
+        ensureStyle('divinaDailyLivingV509','daily-world-v509.css?v=554'),
+        ensureStyle('divinaDailySpreadsSupremeV554','daily-spreads-supreme-v554.css?v=554'),
+        import('./daily-world-v509.js?v=554')
       ]);
       const instance=new module.DailyWorldV509($('#dailyCard'),{
         onSave:remember,
@@ -232,15 +233,16 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     },
     spreads: async()=>{
       const [,module]=await Promise.all([
-        ensureStyle('divinaSpreadsRebirthV305','spreads-world-v305.css?v=305'),
-        import('./spreads-world-v305.js?v=305')
+        ensureStyle('divinaSpreadsRebirthV305','spreads-world-v305.css?v=554'),
+        ensureStyle('divinaDailySpreadsSupremeV554','daily-spreads-supreme-v554.css?v=554'),
+        import('./spreads-world-v305.js?v=554')
       ]);
       const instance=new module.SpreadsWorldV305({
         grid:$('#spreadGrid'),
         result:$('#spreadResult'),
         intention:$('#spreadIntention'),
         history:$('#spreadHistory')
-      },remember,{authClient,whit:globalThis.whit});
+      },remember,{authClient,whit:globalThis.whit,orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme});
       globalThis.divinaSpreadsWorldV305=instance;
       connectTarotMesaBridgeV517(instance);
       return instance;
@@ -323,8 +325,9 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       import('./tarot-livre-orbe-os-v517.js?v=553-supreme')
     ]),
     daily:()=>Promise.all([
-      ensureStyle('divinaDailyLivingV509','daily-world-v509.css?v=509'),
-      import('./daily-world-v509.js?v=509')
+      ensureStyle('divinaDailyLivingV509','daily-world-v509.css?v=554'),
+      ensureStyle('divinaDailySpreadsSupremeV554','daily-spreads-supreme-v554.css?v=554'),
+      import('./daily-world-v509.js?v=554')
     ]),
     library:()=>Promise.all([
       ensureStyle('divinaLibraryRebirthV302','library-world-v302.css?v=544'),
@@ -332,8 +335,9 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       import('./library-world-v302.js?v=544')
     ]),
     spreads:()=>Promise.all([
-      ensureStyle('divinaSpreadsRebirthV305','spreads-world-v305.css?v=305'),
-      import('./spreads-world-v305.js?v=305')
+      ensureStyle('divinaSpreadsRebirthV305','spreads-world-v305.css?v=554'),
+      ensureStyle('divinaDailySpreadsSupremeV554','daily-spreads-supreme-v554.css?v=554'),
+      import('./spreads-world-v305.js?v=554')
     ]),
     school:()=>Promise.all([
       ensureStyle('divinaSchoolRebirthV306','school-world-v306.css?v=539'),

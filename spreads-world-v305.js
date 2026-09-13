@@ -1,10 +1,10 @@
 /* DIVINA BRUXA 2.0 — REBIRTH R006 · TIRAGENS V305
    Camada de continuidade sobre o núcleo V213.
    Não duplica política, cartas, síntese, Premium nem persistência. */
-import { SpreadsEngine } from './spreads-engine.js?v=213';
-import { spreadById } from './spreads-policy.js?v=213';
+import { SpreadsEngine } from './spreads-engine.js?v=554';
+import { spreadById } from './spreads-policy.js?v=554';
 
-const frame = callback => requestAnimationFrame(() => requestAnimationFrame(callback));
+const frame = callback => requestAnimationFrame(callback);
 const percent = (value, total) => total > 0 ? Math.max(0, Math.min(100, Math.round((value / total) * 100))) : 0;
 
 export class SpreadsWorldV305 extends SpreadsEngine {
@@ -151,8 +151,8 @@ export class SpreadsWorldV305 extends SpreadsEngine {
     }
   }
 
-  renderPremium() {
-    super.renderPremium();
+  renderPremium(target) {
+    super.renderPremium(target);
     this.syncRitualFrame();
   }
 

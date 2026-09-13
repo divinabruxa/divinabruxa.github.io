@@ -1,0 +1,22 @@
+DIVINA BRUXA V554 — PLANO 4.0 — MACROETAPA 6/14
+
+PACOTE INCREMENTAL SOBRE A V553 JÁ INSTALADA.
+
+No GitHub pelo iPhone:
+1. Use Add file > Upload files.
+2. Envie todos os arquivos soltos da raiz deste ZIP.
+3. Confirme Commit changes.
+
+Esta versão:
+- transforma 15 tiragens em fluxos funcionais com cartas únicas e diretas;
+- mantém 4 tiragens completas e gratuitas;
+- protege 11 tiragens profundas com Premium vitalício confirmado pelo servidor;
+- impede que uma sessão Premium salva seja reaberta sem reconfirmar o direito;
+- usa a mesma Orbe física do site para revelar posições, sem segunda Orbe decorativa;
+- mantém Cruz Celta com 10 posições e Mesa Real com 78 cartas em 13 × 6;
+- usa o atlas oficial nas grades e carrega a arte completa somente na leitura ativa;
+- mantém Carta do Dia uma vez por dia, pela data de Brasília e sincronizada na conta;
+- substitui animações permanentes por respostas curtas de até 320 ms;
+- mantém Reduced Motion, modo limitado e alvos de toque próprios para iPhone.
+
+Não apague CNAME, cartas ou imagens. Não envie a pasta do ZIP.

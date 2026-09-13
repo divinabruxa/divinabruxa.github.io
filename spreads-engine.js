@@ -1,9 +1,9 @@
-/* DIVINA BRUXA — TIRAGENS 2.0 V213
-   Ritual vivo, 15 métodos, Cruz Celta correta, Mesa Real 13×6 e ponte explícita com Whit. */
+/* DIVINA BRUXA 4.0 — MACROETAPA 6/14 · TIRAGENS V554
+   Ritual funcional, uma Orbe canônica, Premium confirmado no servidor e atlas leve. */
 
 import { CARDS } from './tarot-data.js';
 import { store, escapeHTML } from './storage.js';
-import { cardImageMarkup, preloadCardImages } from './tarot-image-runtime.js';
+import { cardAtlasStyle, cardImageMarkup, preloadCardImages } from './tarot-image-runtime.js';
 import { dailyMeaning } from './daily-meaning-runtime.js';
 import { cardPageHref } from './card-library-policy.js?v=184';
 import {
@@ -22,14 +22,15 @@ import {
   normalizeSpreadSession,
   positionLabels,
   sessionToServerRow
-} from './spreads-policy.js?v=213';
+} from './spreads-policy.js?v=554';
 import { synthesizeSpread } from './spread-synthesis.js?v=185';
 import { AI_TAROT_SELECTION_KEY } from './ai-policy.js?v=190';
 import { JOURNAL_AI_SELECTION_KEY } from './journal-policy.js?v=140';
 
 const safe = value => escapeHTML(value ?? '');
 const reducedMotion = () => globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
-const scrollBehavior = () => reducedMotion() ? 'auto' : 'smooth';
+const scrollBehavior = () => 'auto';
+const routeNow = () => String(document.body?.dataset?.screen || location.hash || 'home').replace(/^#/,'').toLowerCase();
 const SERVER_TABLE = 'tarot_spread_sessions_v213';
 const MAX_HISTORY = 20;
 
@@ -131,6 +132,10 @@ export class SpreadsEngine {
     this.onSave = onSave;
     this.authClient = options.authClient || globalThis.divinaAuth || null;
     this.whit = options.whit || globalThis.whit || null;
+    this.orbCore = options.orbCore || globalThis.divinaOrbSupremeV501?.core || globalThis.orbe?.supreme || null;
+    this.orb = this.orbCore?.orb || null;
+    this.spreadOrbRelease = null;
+    this.abort = new AbortController();
     this.session = readStoredSession();
     this.history = cleanHistory(store.get(SPREAD_HISTORY_KEY, []));
     this.question = this.session?.question || '';
@@ -147,7 +152,8 @@ export class SpreadsEngine {
     this.onBilling = event => {
       this.premium = activePremium(event.detail);
       this.premiumChecked = true;
-      if (this.session?.spreadId === 'royal-table') this.renderReading(true);
+      const current = spreadById(this.session?.spreadId);
+      if (current?.premium) this.premium ? this.renderReading(true) : this.renderPremium(current);
     };
     this.onAuth = () => {
       this.premiumChecked = false;
@@ -156,15 +162,52 @@ export class SpreadsEngine {
     };
     addEventListener('divina:billing-updated', this.onBilling);
     addEventListener('divina:auth-state', this.onAuth);
+    document.addEventListener('divina:route-ready', event => {
+      if (String(event.detail?.id || '') === 'spreads') this.syncSpreadsOrb();
+      else this.releaseSpreadsOrb();
+    }, { signal:this.abort.signal });
+    this.orb?.addEventListener('click', () => {
+      const host = this.result?.querySelector?.('[data-spread-orb-host]');
+      if (routeNow() !== 'spreads' || !host?.contains(this.orb)) return;
+      if (this.isComplete()) this.orbCore?.pulse?.('spread-complete-presence', { intensity:.54 });
+      else this.revealNext();
+    }, { signal:this.abort.signal });
 
     this.renderIntention();
     this.renderMenu();
-    if (this.session) {
-      if (this.isComplete()) this.archiveCompleted();
-      this.renderReading(true);
-    }
+    if (this.session) this.restoreLocalSession();
     this.renderHistory();
     this.restoreCloudPremium().catch(() => {});
+  }
+
+  async restoreLocalSession() {
+    const target = spreadById(this.session?.spreadId);
+    if (!target) return;
+    if (target.premium && !await this.ensurePremium({ silent:true })) {
+      this.renderPremium(target);
+      return;
+    }
+    if (this.isComplete()) this.archiveCompleted();
+    this.renderReading(true);
+  }
+
+  releaseSpreadsOrb() {
+    try { this.spreadOrbRelease?.(); } catch {}
+    this.spreadOrbRelease = null;
+  }
+
+  syncSpreadsOrb() {
+    this.releaseSpreadsOrb();
+    if (!this.orbCore?.claim || !this.orb || routeNow() !== 'spreads') return false;
+    const host = this.result?.querySelector?.('[data-spread-orb-host]');
+    if (!host) return false;
+    const target = spreadById(this.session?.spreadId);
+    const next = this.session && !this.isComplete() ? this.session.revealed + 1 : 0;
+    this.spreadOrbRelease = this.orbCore.claim(host, {
+      mode:'spreads',
+      ariaLabel:next ? `Orbe das Realidades. Revelar posição ${next} de ${this.session.cardIds.length} em ${target?.name || 'Tarot'}.` : 'Orbe das Realidades. A tiragem está completa.'
+    });
+    return true;
   }
 
   notify(message) {
@@ -318,10 +361,10 @@ export class SpreadsEngine {
     this.grid.innerHTML = `${resume}${filters}${visibleSpreads.map(item => {
       const count = item.custom ? '1–12 cartas' : item.id === 'royal-table' ? '78 · 13 × 6' : `${item.positions.length} ${item.positions.length === 1 ? 'carta' : 'cartas'}`;
       const active = this.session?.spreadId === item.id;
-      return `<button type="button" class="spread-choice${active ? ' active' : ''}" data-spread="${item.id}"${item.premium ? ' data-premium="true"' : ''} aria-pressed="${active}">
+      return `<button type="button" class="spread-choice${active ? ' active' : ''}" data-spread="${item.id}" data-access="${item.premium ? 'premium' : 'free'}"${item.premium ? ' data-premium="true"' : ''} aria-pressed="${active}">
         <span class="spread-choice-sigil" aria-hidden="true">${item.sigil}</span>
         <span class="spread-choice-copy"><small>${safe(item.category)}</small><strong>${safe(item.name)}</strong><em>${safe(item.description)}</em></span>
-        <span class="spread-choice-count">${count}${item.premium ? '<b>PREMIUM</b>' : ''}</span>
+        <span class="spread-choice-count">${count}<b>${item.premium ? 'PREMIUM · BLOQUEADA' : 'GRÁTIS · ABERTA'}</b></span>
       </button>`;
     }).join('')}`;
     this.grid.onclick = event => {
@@ -341,12 +384,12 @@ export class SpreadsEngine {
     const target = spreadById(spreadId);
     if (!target) return;
     if (target.premium && !await this.ensurePremium()) {
-      this.renderPremium();
+      this.renderPremium(target);
       return;
     }
     if (this.session?.spreadId === spreadId) {
       this.renderReading(true);
-      this.result?.scrollIntoView({ behavior:scrollBehavior(), block:'start' });
+      this.result?.scrollIntoView({ behavior:scrollBehavior(), block:'nearest' });
       return;
     }
     if (this.session && !this.isComplete()) {
@@ -386,11 +429,12 @@ export class SpreadsEngine {
     preloadCardImages(this.session.cardIds, target.id === 'royal-table' ? 1 : 2);
     this.renderMenu();
     this.renderReading(false);
-    this.result?.scrollIntoView({ behavior:scrollBehavior(), block:'start' });
+    this.result?.scrollIntoView({ behavior:scrollBehavior(), block:'nearest' });
   }
 
   renderCustomConfig() {
     if (!this.result) return;
+    this.releaseSpreadsOrb();
     this.result.innerHTML = `<article class="spread-config-panel v213" aria-labelledby="customSpreadTitle">
       <p class="eyebrow">MESA PERSONALIZADA · V213</p>
       <h3 id="customSpreadTitle">Quantas posições deseja abrir?</h3>
@@ -413,11 +457,12 @@ export class SpreadsEngine {
     start.addEventListener('click', () => this.begin('custom-table', Number(range.value)));
     this.result.querySelector('[data-cancel-custom]')?.addEventListener('click', () => this.session ? this.renderReading(true) : (this.result.innerHTML = ''));
     update();
-    this.result.scrollIntoView({ behavior:scrollBehavior(), block:'start' });
+    this.result.scrollIntoView({ behavior:scrollBehavior(), block:'nearest' });
   }
 
   renderSwitchConfirmation(target) {
     if (!this.result || !this.session) return;
+    this.releaseSpreadsOrb();
     const current = spreadById(this.session.spreadId);
     this.result.innerHTML = `<article class="spread-confirm-panel" role="alert"><span class="spread-confirm-sigil" aria-hidden="true">◇</span><p class="eyebrow">TIRAGEM EM ANDAMENTO</p><h3>Seu progresso continua guardado.</h3><p>Você revelou ${this.session.revealed} de ${this.session.cardIds.length} posições em <b>${safe(current?.name)}</b>. Trocar agora descartará essa tiragem e abrirá <b>${safe(target.name)}</b>.</p><div class="spread-actions"><button type="button" class="primary" data-keep-spread>Continuar tiragem atual</button><button type="button" class="text-button danger" data-confirm-switch>Descartar e trocar</button></div></article>`;
     this.result.querySelector('[data-keep-spread]')?.addEventListener('click', () => { this.pendingSpreadId = ''; this.renderReading(true); });
@@ -427,10 +472,11 @@ export class SpreadsEngine {
       this.pendingSpreadId = '';
       await this.deleteCloudSession(previous).catch(() => {});
       store.remove(SPREAD_STORAGE_KEY);
+      this.releaseSpreadsOrb();
       this.session = null;
       this.renderMenu();
       const nextTarget = spreadById(next);
-      if (nextTarget?.premium && !await this.ensurePremium()) this.renderPremium();
+      if (nextTarget?.premium && !await this.ensurePremium()) this.renderPremium(nextTarget);
       else if (nextTarget?.custom) this.renderCustomConfig();
       else this.begin(next);
     });
@@ -447,7 +493,7 @@ export class SpreadsEngine {
     if (this.isComplete()) this.archiveCompleted();
     this.renderMenu();
     this.renderReading(false);
-    this.result?.querySelector(`[data-position-index="${index}"]`)?.scrollIntoView({ behavior:scrollBehavior(), block:'nearest', inline:'center' });
+    requestAnimationFrame(() => this.result?.querySelector(`[data-position-index="${index}"]`)?.scrollIntoView({ behavior:'auto', block:'nearest', inline:'center' }));
   }
 
   slotMarkup(card, position, index, target) {
@@ -458,7 +504,7 @@ export class SpreadsEngine {
     const label = positionLabel(position);
     return `<button type="button" class="spread-position-slot${revealed ? ' revealed' : ''}${active ? ' active' : ''}${born ? ' born' : ''}${compact ? ' royal-slot' : ''}" data-position-index="${index}" data-position-id="${safe(positionId(position,index))}" ${revealed ? '' : 'disabled'} aria-label="${revealed ? `${safe(label)}: ${safe(card.name)}, carta direta` : `${safe(label)}: ainda não revelada`}">
       <span class="spread-position-label"><b>${String(index + 1).padStart(2,'0')}</b>${compact ? `<em>${safe(position?.short || '')}</em>` : safe(label)}</span>
-      <span class="spread-position-card">${revealed ? cardImageMarkup(card, { priority:active ? 'high' : 'lazy' }) : '<i aria-hidden="true">✦</i><small>AGUARDA</small>'}</span>
+      <span class="spread-position-card">${revealed ? `<i class="spread-position-atlas" style="${cardAtlasStyle(card)}" aria-hidden="true"></i>` : '<i aria-hidden="true">✦</i><small>AGUARDA</small>'}</span>
       ${revealed ? `<strong>${safe(card.name)}</strong><small>DIRETA</small>` : ''}
     </button>`;
   }
@@ -505,13 +551,18 @@ export class SpreadsEngine {
     this.session = normalizeSpreadSession(this.session);
     if (!this.session || !this.result) return;
     const target = spreadById(this.session.spreadId);
+    if (target?.premium && !this.premium) {
+      this.renderPremium(target);
+      return;
+    }
+    this.releaseSpreadsOrb();
     const items = this.session.cardIds.map((id,index) => ({ card:CARDS[id], position:this.session.positions[index] }));
     const progress = Math.round(this.session.revealed / items.length * 100);
     const activeIndex = this.session.revealed ? Math.min(this.session.activeIndex, this.session.revealed - 1) : 0;
     this.session.activeIndex = activeIndex;
     const complete = this.isComplete();
     const question = this.session.question ? `<p class="spread-private-question"><span>INTENÇÃO PRIVADA</span>${safe(this.session.question)}</p>` : '';
-    const orb = complete ? '' : `<section class="spread-orb-ritual" aria-label="Revelar a próxima posição"><p>${this.session.revealed ? 'A próxima posição está pronta.' : 'Respire. Quando sentir presença, toque a Orbe.'}</p><button type="button" class="spread-orb" data-orb-surface="spreads" data-reveal-card aria-label="Revelar carta da posição ${this.session.revealed + 1}: ${safe(positionLabel(this.session.positions[this.session.revealed]))}"><span class="spread-orb-aura" aria-hidden="true"></span><span class="spread-orb-glass" aria-hidden="true"></span><small>TOQUE PARA REVELAR</small></button><span>${this.session.revealed} reveladas · ${items.length - this.session.revealed} aguardando</span></section>`;
+    const orb = `<section class="spread-orb-ritual${complete ? ' is-complete' : ''}" aria-label="${complete ? 'Presença da Orbe na leitura completa' : 'Revelar a próxima posição'}"><p>${complete ? 'A Orbe permanece com você enquanto integra o desenho.' : this.session.revealed ? 'A próxima posição está pronta.' : 'Respire. Quando sentir presença, toque a Orbe.'}</p><div class="spread-orb-host" data-spread-orb-host data-reveal-card="${complete ? 'false' : 'true'}"></div><span>${complete ? `${items.length} posições integradas` : `${this.session.revealed} reveladas · ${items.length - this.session.revealed} aguardando`}</span></section>`;
     const cloud = target.id === 'royal-table' ? `<span class="spread-cloud-status" data-spread-cloud-status data-state="${this.cloudState}">${this.cloudState === 'saved' ? 'Salva na sua conta Premium' : this.cloudState === 'saving' ? 'Salvando na sua conta…' : 'Salva neste aparelho'}</span>` : '';
 
     this.result.innerHTML = `<article class="spread-reading spread-temple-reading v213${complete ? ' complete' : ''}${target.id === 'royal-table' ? ' is-royal' : ''}">
@@ -523,28 +574,29 @@ export class SpreadsEngine {
       <div class="spread-actions spread-reading-actions">${complete ? '<button type="button" class="primary" data-save-spread>Guardar no Diário</button><button type="button" class="text-button" data-open-whit>Refletir com Whit · autorização explícita</button>' : ''}<button type="button" class="text-button" data-new-spread>${complete ? 'Escolher nova tiragem' : 'Recomeçar ou trocar'}</button></div><div data-whit-consent></div><div data-reset-confirm></div>
     </article>`;
     this.bindReading(items,target);
+    this.syncSpreadsOrb();
     this.justRevealed = -1;
   }
 
   bindReading(items, target) {
-    this.result.querySelector('[data-reveal-card]')?.addEventListener('click', () => this.revealNext());
     this.result.querySelector('.spread-map')?.addEventListener('click', event => {
       const slot = event.target.closest('[data-position-index]');
       if (!slot || slot.disabled) return;
       this.session.activeIndex = Number(slot.dataset.positionIndex);
       this.saveSession();
       this.renderReading(false);
-      this.result.querySelector('.spread-active-meaning')?.scrollIntoView({ behavior:scrollBehavior(), block:'nearest' });
+      requestAnimationFrame(() => this.result.querySelector('.spread-active-meaning')?.scrollIntoView({ behavior:'auto', block:'nearest' }));
     });
     this.result.querySelector('[data-save-spread]')?.addEventListener('click', () => this.saveToDiary(this.session));
     this.result.querySelector('[data-open-whit]')?.addEventListener('click', () => this.renderWhitConsent(items,target));
     this.result.querySelector('[data-new-spread]')?.addEventListener('click', async () => {
       if (this.isComplete()) {
         store.remove(SPREAD_STORAGE_KEY);
+        this.releaseSpreadsOrb();
         this.session = null;
         this.result.innerHTML = '';
         this.renderMenu();
-        this.grid?.scrollIntoView({ behavior:scrollBehavior(), block:'start' });
+        this.grid?.scrollIntoView({ behavior:'auto', block:'nearest' });
         return;
       }
       this.renderResetConfirmation(target);
@@ -615,19 +667,23 @@ export class SpreadsEngine {
       this.session = null;
       this.result.innerHTML = '';
       this.renderMenu();
-      this.grid?.scrollIntoView({ behavior:scrollBehavior(), block:'start' });
+      this.grid?.scrollIntoView({ behavior:'auto', block:'nearest' });
     });
     root.querySelector('[data-cancel-reset]')?.focus();
   }
 
-  renderPremium() {
+  renderPremium(target = spreadById(this.session?.spreadId) || spreadById('royal-table')) {
     if (!this.result) return;
+    this.releaseSpreadsOrb();
     const signedIn = Boolean(this.authClient?.session);
-    this.result.innerHTML = `<article class="spread-premium spread-temple-premium v213"><div class="spread-premium-copy"><p class="eyebrow">MESA REAL · PREMIUM</p><h3>78 cartas · 13 × 6 · sem repetição</h3><p>A Mesa Real digital completa usa todas as 78 cartas, sempre diretas. O progresso é salvo localmente e, com Premium ativo, também pode ser retomado pela sua conta.</p><div class="spread-premium-note"><b>STAGING continua sem cobrança real.</b><span>O acesso só é liberado quando o servidor confirma o Premium vitalício. Nenhuma interface concede Premium sozinha.</span></div><div class="spread-actions"><button type="button" class="primary" data-go-premium>${signedIn ? 'Ver meu Premium' : 'Entrar e verificar Premium'}</button><button type="button" class="text-button" data-go-consultation>Ver consulta profissional</button>${this.session ? '<button type="button" class="text-button" data-return-spread>Voltar à tiragem atual</button>' : ''}</div></div><div class="spread-royal-preview v213" aria-label="Prévia da Mesa Real: 6 linhas por 13 colunas">${Array.from({length:78},(_,index) => `<i><span>${index + 1}</span></i>`).join('')}<strong><span aria-hidden="true">◇</span>78 CARTAS · ACESSO PROTEGIDO</strong></div></article>`;
+    const isRoyal = target?.id === 'royal-table';
+    const count = target?.custom ? '1 a 12 posições' : `${target?.positions?.length || 0} ${target?.positions?.length === 1 ? 'posição' : 'posições'}`;
+    const canReturn = this.session && (!spreadById(this.session.spreadId)?.premium || this.premium);
+    this.result.innerHTML = `<article class="spread-premium spread-temple-premium v554"><div class="spread-premium-copy"><p class="eyebrow">PORTAL PREMIUM · ${safe(target?.name || 'TIRAGEM PROFUNDA')}</p><h3>${isRoyal ? '78 cartas · 13 × 6 · sem repetição' : `${safe(count)} · leitura completa`}</h3><p>${isRoyal ? 'A Mesa Real usa as 78 cartas diretas e salva o progresso com segurança.' : `${safe(target?.description || 'Uma estrutura profunda para integrar diferentes camadas da questão.')} As cartas são únicas, diretas e acompanhadas por síntese local, sem depender de IA paga.`}</p><div class="spread-premium-note"><b>O bloqueio protege um direito real.</b><span>Esta experiência só abre quando o servidor confirma o Premium vitalício da sua conta. O navegador nunca concede acesso sozinho.</span></div><div class="spread-actions"><button type="button" class="primary" data-go-premium>${signedIn ? 'Verificar meu Premium' : 'Entrar e conhecer o Premium'}</button><button type="button" class="text-button" data-go-consultation>Ver consulta profissional</button>${canReturn ? '<button type="button" class="text-button" data-return-spread>Voltar à tiragem atual</button>' : ''}</div></div><div class="spread-premium-portal v554" aria-label="Tiragem Premium bloqueada"><span aria-hidden="true">${safe(target?.sigil || '◇')}</span><strong>${safe(target?.name || 'TIRAGEM PREMIUM')}</strong><small>${safe(count)} · ACESSO PROTEGIDO</small></div></article>`;
     this.result.querySelector('[data-go-premium]')?.addEventListener('click', () => globalThis.orbe?.go?.(signedIn ? 'subscriptions' : 'login'));
     this.result.querySelector('[data-go-consultation]')?.addEventListener('click', () => globalThis.orbe?.go?.('consultations'));
     this.result.querySelector('[data-return-spread]')?.addEventListener('click', () => this.renderReading(true));
-    this.result.scrollIntoView({ behavior:scrollBehavior(), block:'start' });
+    this.result.scrollIntoView({ behavior:'auto', block:'nearest' });
   }
 
   archiveCompleted() {
@@ -701,6 +757,8 @@ export class SpreadsEngine {
 
   destroy() {
     this.destroyed = true;
+    this.abort?.abort();
+    this.releaseSpreadsOrb();
     clearTimeout(this.cloudSaveTimer);
     removeEventListener('divina:billing-updated', this.onBilling);
     removeEventListener('divina:auth-state', this.onAuth);

@@ -1,14 +1,14 @@
-/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 5/14 · V553
+/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 6/14 · V554
    Cache seletivo e versionado. Nunca guarda Auth, respostas online da Whit, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=553;
+const VERSION=554;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v553-shell';
-const CONTENT_CACHE='divina-bruxa-v553-content';
-const IMAGE_CACHE='divina-bruxa-v553-images';
-const OFFLINE_CACHE='divina-bruxa-v553-offline-core';
-const PREMIUM_CACHE='divina-bruxa-v553-premium-static';
+const SHELL_CACHE='divina-bruxa-v554-shell';
+const CONTENT_CACHE='divina-bruxa-v554-content';
+const IMAGE_CACHE='divina-bruxa-v554-images';
+const OFFLINE_CACHE='divina-bruxa-v554-offline-core';
+const PREMIUM_CACHE='divina-bruxa-v554-premium-static';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE,PREMIUM_CACHE]);
 const NAVIGATION_TIMEOUT_MS=3500;
 const MAX_CONTENT_ENTRIES=180;
@@ -55,6 +55,7 @@ const REQUIRED_SHELL=Object.freeze([
   './tarot-livre-orbe-os-v517.js','./tarot-livre-orbe-os-v517.css','./tarot-mesa-bridge-v517.js',
   './tarot-session.js','./tarot-continuity.js','./tarot-image-runtime.js',
   './daily-world-v509.js','./daily-world-v509.css','./daily-policy-v303.js',
+  './daily-spreads-supreme-v554.css',
   './orb-loading-portal-v1.js',
   './divina-shell-v180.css','./home-orb-absolute-v206.css','./pwa-world-v196.css',
   './pwa-resilience-v324.css','./pwa-world-v324.js','./performance-world-v324.js',
@@ -63,7 +64,7 @@ const REQUIRED_SHELL=Object.freeze([
 ]);
 
 // Fechamento transitivo dos imports estáticos de app-v208.js. Se qualquer um
-// falhar, a V553 não assume o controle e o worker anterior continua íntegro.
+// falhar, a V554 não assume o controle e o worker anterior continua íntegro.
 const BOOT_DEPENDENCIES=Object.freeze([
   './account-consultations-world-v319.js','./account-engine-v201.js','./account-state-copy-v201.js',
   './ai-policy.js','./auth-client-v201.js','./auth-client-v6.js','./card-library-policy.js',
@@ -128,6 +129,8 @@ const FREE_OFFLINE_ASSETS=Object.freeze([
   './card-library-policy.js','./card-library-engine.js','./library-world-v302.js','./library-world-v302.css',
   './biblioteca-universal-v184.js','./biblioteca-universal-v184.css','./busca-v165.js','./busca-v165.css',
   './daily-world-v509.js','./daily-world-v509.css','./daily-policy-v303.js','./daily-meaning-runtime.js','./tarot-meanings.js','./meaning-engine.js',
+  './daily-spreads-supreme-v554.css','./spreads-policy.js','./spreads-engine.js',
+  './spreads-world-v305.js','./spreads-world-v305.css','./spread-synthesis.js','./spread-synthesis-v331.js','./spreads-supreme-v331.js','./spreads-supreme-v331.css','./tiragens-v213.css','./tiragens-definitivas-v185.css',
   './journal-engine.js','./journal-policy.js','./rhythm-v6.js','./journal-world-v317.js','./journal-world-v317.css','./diario-definitivo-v187.css',
   './skin-registry-v12.js','./skin-universal-v10.js','./skin-catalog-v6.js',
   './divina-orb-fast-v1.webp','./divina-orb-thumb-v1.webp',
@@ -139,8 +142,6 @@ const FREE_OFFLINE_ASSETS=Object.freeze([
 // continua no servidor em toda reabertura.
 const PREMIUM_OFFLINE_ASSETS=Object.freeze([
   './school-engine.js','./school-policy.js','./school-world-v306.js','./school-world-v306.css','./escola-definitiva-v186.css',
-  './spreads-world-v305.js','./spreads-world-v305.css','./spreads-engine.js',
-  './spread-synthesis.js','./spread-synthesis-v331.js','./spreads-supreme-v331.js','./tiragens-definitivas-v185.css',
   './daily-meaning-runtime.js','./meaning-engine.js',
   './tarot-continuity.js','./tarot-session.js','./tarot-atlas-mobile-v196.webp'
 ]);
@@ -305,7 +306,7 @@ const appShellIsValid=async(url,response)=>{
   const isShell=pathname===new URL('./',self.registration.scope).pathname||pathname.endsWith('/index.html');
   if(!isShell)return true;
   const html=await response.clone().text();
-  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=553/.test(html);
+  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=554/.test(html);
 };
 
 const offlinePageFor=async url=>{

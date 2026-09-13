@@ -1,6 +1,6 @@
-/* DIVINA BRUXA 2.0 — MACROETAPA V509 · CARTA DO DIA VIVA
-   A própria Orbe Suprema V501 ocupa o altar. Uma carta direta nasce por dia,
-   com autoridade de Brasília e sem criar outra imagem de Orbe. */
+/* DIVINA BRUXA 4.0 — MACROETAPA 6/14 · CARTA DO DIA V554
+   A Orbe canônica ocupa o altar. O céu só anima em respostas breves ao toque;
+   uma carta direta nasce por dia, com autoridade de Brasília. */
 
 import { CARDS } from './tarot-data.js';
 import { store, escapeHTML } from './storage.js';
@@ -17,7 +17,7 @@ import {
 } from './daily-policy-v303.js?v=303';
 import { dailyMeaning } from './daily-meaning-runtime.js?v=183';
 
-const VERSION = 509;
+const VERSION = 554;
 const safe = value => escapeHTML(value ?? '');
 const wait = ms => new Promise(resolve => setTimeout(resolve, Math.max(0, ms)));
 const clamp = (value, minimum, maximum) => Math.min(maximum, Math.max(minimum, value));
@@ -70,6 +70,7 @@ export class DailyAuroraEngineV509 {
     this.active = false;
     this.frame = 0;
     this.lastTime = 0;
+    this.animationUntil = 0;
     this.energy = 0.18;
     this.birthStartedAt = 0;
     this.birthDuration = 0;
@@ -97,7 +98,7 @@ export class DailyAuroraEngineV509 {
       this.canvas.style.height = `${this.height}px`;
     }
     this.context.setTransform(this.pixelRatio, 0, 0, this.pixelRatio, 0, 0);
-    const count = constrained() ? 34 : 58;
+    const count = constrained() ? 14 : 24;
     this.stars = Array.from({ length:count }, (_, index) => ({
       x:seededUnit(index, 2) * this.width,
       y:seededUnit(index, 7) * this.height,
@@ -111,38 +112,48 @@ export class DailyAuroraEngineV509 {
 
   setActive(value) {
     this.active = Boolean(value);
-    if (this.active && !this.frame) {
-      this.lastTime = performance.now();
-      this.frame = requestAnimationFrame(time => this.loop(time));
-    }
     if (!this.active && this.frame) {
       cancelAnimationFrame(this.frame);
       this.frame = 0;
-      this.paint(performance.now());
     }
+    this.paint(performance.now());
+  }
+
+  animateFor(duration = 240) {
+    if (!this.active || reducedMotion()) {
+      this.paint(performance.now());
+      return;
+    }
+    const now = performance.now();
+    this.animationUntil = Math.max(this.animationUntil, now + Math.min(360, Math.max(120, duration)));
+    this.lastTime = now;
+    if (!this.frame) this.frame = requestAnimationFrame(time => this.loop(time));
   }
 
   pulse(intensity = 0.7) {
     this.energy = clamp(this.energy + Number(intensity || 0.7) * 0.32, 0.18, 1.45);
-    this.spawn(constrained() ? 10 : 18, false);
+    this.spawn(constrained() ? 5 : 9, false);
+    this.animateFor(220);
   }
 
   touch(clientX, clientY) {
     const rect = this.stage?.getBoundingClientRect?.();
     const x = rect?.width ? clamp((clientX - rect.left) / rect.width, 0, 1) : 0.5;
     const y = rect?.height ? clamp((clientY - rect.top) / rect.height, 0, 1) : 0.52;
-    this.spawn(constrained() ? 8 : 14, false, x, y);
+    this.spawn(constrained() ? 4 : 7, false, x, y);
+    this.animateFor(190);
   }
 
   birth() {
     this.birthStartedAt = performance.now();
-    this.birthDuration = reducedMotion() ? 150 : 1050;
+    this.birthDuration = reducedMotion() ? 120 : 300;
     this.energy = 1.35;
-    this.spawn(constrained() ? 56 : 96, true);
+    this.spawn(constrained() ? 16 : 28, true);
+    this.animateFor(320);
   }
 
   spawn(count, rising = false, sourceX = 0.5, sourceY = 0.53) {
-    const limit = constrained() ? 110 : 190;
+    const limit = constrained() ? 34 : 56;
     for (let index = 0; index < count && this.particles.length < limit; index += 1) {
       const angle = -Math.PI / 2 + (seededUnit(index + this.particles.length, Date.now() % 97) - 0.5) * (rising ? 1.18 : Math.PI * 1.8);
       const speed = (rising ? 72 : 34) + Math.random() * (rising ? 116 : 74);
@@ -167,7 +178,12 @@ export class DailyAuroraEngineV509 {
     this.lastTime = timestamp;
     this.update(delta);
     this.paint(timestamp);
-    this.frame = requestAnimationFrame(time => this.loop(time));
+    if (timestamp < this.animationUntil) this.frame = requestAnimationFrame(time => this.loop(time));
+    else {
+      this.particles.length = 0;
+      this.birthStartedAt = 0;
+      this.paint(timestamp);
+    }
   }
 
   update(delta) {
@@ -262,7 +278,7 @@ export class DailyWorldV509 {
   } = {}) {
     if (!root) throw new TypeError('O mundo da Carta do Dia não foi encontrado.');
     if (!orbCore?.claim || !orbCore?.orb) {
-      throw new Error('A Orbe Suprema V501 precisa despertar antes da Carta do Dia V509.');
+      throw new Error('A Orbe Suprema V501 precisa despertar antes da Carta do Dia V554.');
     }
 
     this.root = root;
@@ -285,7 +301,7 @@ export class DailyWorldV509 {
 
     this.root.classList.remove('daily-world-v303-host');
     this.root.classList.add('daily-world-v509-host');
-    this.root.dataset.dailyWorld = '509';
+    this.root.dataset.dailyWorld = '554';
     this.build();
     this.aurora = new DailyAuroraEngineV509(this.cosmos, this.sanctuary);
     this.bind();
@@ -295,7 +311,7 @@ export class DailyWorldV509 {
     if (routeNow() === 'daily') requestAnimationFrame(() => this.enter());
     else this.aurora.setActive(false);
 
-    document.documentElement.dataset.dailyWorld = 'v509';
+    document.documentElement.dataset.dailyWorld = 'v554';
     const readiness = Object.freeze({
       version:VERSION,
       canonicalOrb:'v501',
@@ -311,6 +327,7 @@ export class DailyWorldV509 {
       extraApiCalls:0
     });
     globalThis.dispatchEvent?.(new CustomEvent('divina:daily-v509-ready', { detail:readiness }));
+    globalThis.dispatchEvent?.(new CustomEvent('divina:daily-v554-ready', { detail:readiness }));
   }
 
   build() {
@@ -423,7 +440,7 @@ export class DailyWorldV509 {
       if (layerButton) {
         this.activeLayer = layerButton.dataset.dailyLayer;
         this.renderLayer();
-        this.layerPanel?.scrollIntoView?.({ behavior:reducedMotion() ? 'auto' : 'smooth', block:'nearest' });
+        requestAnimationFrame(() => this.layerPanel?.scrollIntoView?.({ behavior:'auto', block:'nearest' }));
         return;
       }
 
@@ -627,7 +644,7 @@ export class DailyWorldV509 {
       const concurrent = this.readRecord(record.date);
       this.data = concurrent || record;
       if (!concurrent) this.saveRecord(record);
-      if (!reducedMotion()) await wait(620);
+      if (!reducedMotion()) await wait(constrained() ? 120 : 220);
       this.renderRevealed(true);
       this.aurora?.birth();
       this.orbCore.pulse?.('daily-birth', { intensity:1.2 });
@@ -763,7 +780,7 @@ export class DailyWorldV509 {
     };
     requestAnimationFrame(refresh);
     clearTimeout(this.geometryTimer);
-    this.geometryTimer = setTimeout(refresh, reducedMotion() ? 40 : 760);
+    this.geometryTimer = setTimeout(refresh, reducedMotion() ? 40 : 180);
   }
 
   enter() {
@@ -785,7 +802,7 @@ export class DailyWorldV509 {
       return false;
     }
     this.world.dataset.orbClaimed = 'true';
-    this.orb.dataset.dailyReveal = 'v509';
+    this.orb.dataset.dailyReveal = 'v554';
     const offlineAccount = this.accountActive() && globalThis.navigator?.onLine === false;
     this.orb.setAttribute('aria-disabled', String(!this.data && offlineAccount));
     this.orb.setAttribute('aria-label', this.data && this.currentCard
@@ -814,7 +831,7 @@ export class DailyWorldV509 {
     catch { this.orbCore.returnHome?.(); }
     this.claimRelease = null;
     delete this.world.dataset.orbClaimed;
-    this.orbCore.settleRoute?.(nextRoute, 'daily-leave-v509');
+    this.orbCore.settleRoute?.(nextRoute, 'daily-leave-v554');
     return true;
   }
 
@@ -831,6 +848,8 @@ export class DailyWorldV509 {
       orbClaimed:Boolean(this.orbHost?.contains(this.orb)),
       duplicateDailyOrb:false,
       auroraCanvas:Boolean(this.aurora?.context),
+      permanentAnimationLoops:0,
+      interactionBurstMaxMs:320,
       accountAuthority:this.data?.selectionVersion === DAILY_ACCOUNT_SELECTION_VERSION
     });
   }
@@ -846,6 +865,6 @@ export class DailyWorldV509 {
     this.root.classList.remove('daily-world-v509-host');
     delete this.root.dataset.dailyWorld;
     if (globalThis.divinaDailyWorldV509 === this) delete globalThis.divinaDailyWorldV509;
-    if (document.documentElement.dataset.dailyWorld === 'v509') delete document.documentElement.dataset.dailyWorld;
+    if (document.documentElement.dataset.dailyWorld === 'v554') delete document.documentElement.dataset.dailyWorld;
   }
 }

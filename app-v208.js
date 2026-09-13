@@ -1,4 +1,4 @@
-/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 5/14 · V553
+/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 6/14 · V554
    Tarot Livre Supremo: resposta imediata, carta física curta e nenhum fogo.
    Todo o universo aprovado até a V552 permanece íntegro. */
 
@@ -18,7 +18,7 @@ import { AccountEngineV201 } from './account-engine-v201.js?v=201';
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=534-consultations-anchor';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=553-tarot-supreme';
+import { createPageLoader } from './page-loader-v1.js?v=554-daily-spreads';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -65,11 +65,11 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=553')
+const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=554')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
-    document.documentElement.dataset.pwaError = 'v553';
+    document.documentElement.dataset.pwaError = 'v554';
   });
 
 const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
@@ -86,7 +86,7 @@ const startOrbitalMenuV502 = () => import('./orbital-menu-v502.js?v=551-ios-moti
     document.documentElement.dataset.menuOrbitalError = 'v502';
   });
 
-const startSpreadsSupremeV331 = () => import('./spreads-supreme-v331.js?v=331')
+const startSpreadsSupremeV331 = () => import('./spreads-supreme-v331.js?v=554')
   .then(module => module.installSpreadsSupremeV331?.())
   .catch(error => {
     console.error('[Divina] Tiragens Supremas V331 não iniciaram', error);
@@ -498,14 +498,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v553-app';
+  window.__divinaSWBootstrap = 'v554-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=553', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=554', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v553';
+        document.documentElement.dataset.releaseEpoch = 'v554';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V553 registrado');
+        console.info('[Divina] PWA V554 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -1210,6 +1210,38 @@ window.divinaTarotFreeSupremeReleaseV553 = Object.freeze({
   })
 });
 
+window.divinaDailySpreadsReleaseV554 = Object.freeze({
+  version:554,
+  plan:'4.0-fluidity-supreme',
+  macroStage:'6-of-14',
+  title:'Carta do Dia e Tiragens — universo funcional Free/Premium',
+  preserves:'V553',
+  iphonePriority:true,
+  dailyOnePerBrasiliaDay:true,
+  dailyNormalOnly:true,
+  dailyPermanentAnimationLoops:0,
+  dailyInteractionBurstMs:320,
+  spreadMethods:15,
+  freeSpreads:4,
+  premiumSpreads:11,
+  premiumAuthority:'server-confirmed-premium_lifetime',
+  celticCrossPositions:10,
+  royalTableCards:78,
+  royalTableColumns:13,
+  uniqueCards:true,
+  reversedCards:false,
+  canonicalOrb:true,
+  gridFullImageRequests:0,
+  atlasGrid:true,
+  paidAiRequired:false,
+  status:()=>Object.freeze({
+    release:'V554',
+    daily:globalThis.divinaDailyWorldV509?.status?.()||null,
+    spreads:globalThis.divinaSpreadsV331?.status?.()||null,
+    orb:supremeOrb?.snapshot?.()||null
+  })
+});
+
 window.divinaResponsiveEnchantmentReleaseV533 = Object.freeze({
   version:533,
   macroStage:'9-of-10',
@@ -1534,10 +1566,10 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V553',
+        release:'V554',
         supremePlan:'4.0-fluidity-supreme',
         supremePlanMacroStages:14,
-        currentMacroStage:'5-of-14',
+        currentMacroStage:'6-of-14',
         worldTruth:'v535',
         worldTruthRoutes:17,
         orbFluidNavigation:'v549',
@@ -1578,6 +1610,15 @@ const awaken = async () => {
         tarotFreeResponseBudgetMs:80,
         tarotFreePortalBackRedrawsPerBirth:0,
         tarotFreeGridFullImageRequests:0,
+        dailySpreadsSupreme:'v554',
+        dailyOnePerBrasiliaDay:true,
+        dailyPermanentAnimationLoops:0,
+        spreadMethods:15,
+        spreadFreeMethods:4,
+        spreadPremiumMethods:11,
+        spreadPremiumAuthority:'server-confirmed-premium_lifetime',
+        spreadCanonicalOrb:true,
+        spreadGridFullImageRequests:0,
         tarotFreeUniversePausedDuringCardFlight:true,
         vitalityBus:'v536',
         livingGrammar:'v536',
