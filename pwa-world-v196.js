@@ -363,7 +363,7 @@ const setupReturnFromBackground = () => {
 const setupServiceWorker = () => {
   if (!('serviceWorker' in navigator) || globalThis.__divinaSWBootstrap) return;
   globalThis.__divinaSWBootstrap = 'v533-static';
-  const register = () => navigator.serviceWorker.register('./sw.js?v=543', { updateViaCache: 'none' })
+  const register = () => navigator.serviceWorker.register('./sw.js?v=544', { updateViaCache: 'none' })
     .then(registration => {
       dispatchEvent(new CustomEvent('divina:pwa-ready', { detail: { scope: registration.scope, version: VERSION } }));
       registration.update().catch(() => {});

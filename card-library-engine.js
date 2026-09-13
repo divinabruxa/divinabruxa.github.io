@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — BIBLIOTECA UNIVERSAL DAS 78 CARTAS V184 */
+/* DIVINA BRUXA — BIBLIOTECA PÚBLICA DAS 78 CARTAS V544 */
 import { CARDS } from './tarot-data.js';
 import { escapeHTML } from './storage.js';
 import { cardImageMarkup } from './tarot-image-runtime.js';
@@ -11,7 +11,7 @@ import {
   matchesLibraryFilters,
   meaningForCard,
   sortLibraryCards
-} from './card-library-policy.js?v=184';
+} from './card-library-policy.js?v=544';
 
 const safe = value => escapeHTML(value ?? '');
 const kinds = Object.freeze({ major: 'Arcano Maior', number: 'Carta numerada', court: 'Carta da corte' });
@@ -28,6 +28,7 @@ export class CardLibraryEngine {
     this.renderShell();
     this.bind();
     this.renderCards();
+    document.dispatchEvent(new CustomEvent('divina:public-library-ready', { detail:Object.freeze({ release:'V544', cards:78, orientation:'normal' }) }));
   }
 
   ensureMenuEntry() {
@@ -41,7 +42,7 @@ export class CardLibraryEngine {
   }
 
   renderShell() {
-    this.root.dataset.libraryVersion = '184';
+    this.root.dataset.libraryVersion = '544';
     this.root.innerHTML = `
       <nav class="library-paths" aria-label="Explorar famílias do Tarot">
         <button type="button" data-library-path="all" aria-pressed="true"><b>78</b><span>Todas</span></button>

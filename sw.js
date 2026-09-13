@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 3.0 — LOJA AMAZON · MACROETAPA 9/14 · V543
+/* DIVINA BRUXA 3.0 — BIBLIOTECA PÚBLICA · MACROETAPA 10/14 · V544
    Cache seletivo e versionado. Nunca guarda Auth, respostas online da Whit, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=543;
+const VERSION=544;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v543-shell';
-const CONTENT_CACHE='divina-bruxa-v543-content';
-const IMAGE_CACHE='divina-bruxa-v543-images';
-const OFFLINE_CACHE='divina-bruxa-v543-offline-core';
+const SHELL_CACHE='divina-bruxa-v544-shell';
+const CONTENT_CACHE='divina-bruxa-v544-content';
+const IMAGE_CACHE='divina-bruxa-v544-images';
+const OFFLINE_CACHE='divina-bruxa-v544-offline-core';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE]);
 
 const REQUIRED_SHELL=Object.freeze([
@@ -26,6 +26,7 @@ const REQUIRED_SHELL=Object.freeze([
   './whit-presence-deep-v540.js','./whit-presence-deep-v540.css','./whit-local-guide-v540.js',
   './experience-depth-core-v541.js','./experience-depth-core-v541.css',
   './amazon-store-core-v543.js','./amazon-store-core-v543.css',
+  './public-library-core-v544.js','./public-library-core-v544.css',
   './tarot-universe-core-v528.js','./tarot-universe-core-v528.css',
   './wisdom-universe-core-v529.js','./wisdom-universe-core-v529.css',
   './wisdom-depth-core-v539.js','./wisdom-depth-core-v539.css',
@@ -90,6 +91,7 @@ const REBIRTH_WARM=Object.freeze([
   './whit-presence-deep-v540.js','./whit-presence-deep-v540.css','./whit-local-guide-v540.js',
   './experience-depth-core-v541.js','./experience-depth-core-v541.css',
   './amazon-store-core-v543.js','./amazon-store-core-v543.css',
+  './public-library-core-v544.js','./public-library-core-v544.css',
   './experience-conversion-core-v530.js','./experience-conversion-core-v530.css',
   './identity-rights-core-v531.js','./identity-rights-core-v531.css',
   './living-universe-core-v524.js','./living-universe-core-v524.css','./divina-universe-retina-v523.webp',
@@ -115,11 +117,13 @@ const OFFLINE_WORLD_ASSETS=Object.freeze([
   './whit-presence-deep-v540.js','./whit-presence-deep-v540.css','./whit-local-guide-v540.js',
   './experience-depth-core-v541.js','./experience-depth-core-v541.css',
   './amazon-store-core-v543.js','./amazon-store-core-v543.css',
+  './public-library-core-v544.js','./public-library-core-v544.css',
   './ai-engine.js','./ai-policy.js','./ai-credits.js','./orbe-ai-governada-v190.css',
   './living-universe-core-v524.js','./living-universe-core-v524.css','./divina-universe-retina-v523.webp',
   './tarot-livre-orbe-os-v517.js','./tarot-livre-orbe-os-v517.css','./tarot-mesa-bridge-v517.js',
   './tarot-atlas-mobile-v196.webp',
   './card-library-policy.js','./card-library-engine.js','./library-world-v302.js','./library-world-v302.css',
+  './biblioteca-universal-v184.js','./biblioteca-universal-v184.css','./busca-v165.js','./busca-v165.css',
   './daily-world-v509.js','./daily-world-v509.css','./daily-policy-v303.js','./daily-meaning-runtime.js','./tarot-meanings.js','./meaning-engine.js',
   './school-engine.js','./school-policy.js','./school-world-v306.js','./school-world-v306.css','./escola-definitiva-v186.css',
   './journal-engine.js','./journal-policy.js','./rhythm-v6.js','./journal-world-v317.js','./journal-world-v317.css','./diario-definitivo-v187.css',
@@ -131,6 +135,7 @@ const PUBLIC_OFFLINE_PAGES=Object.freeze([
   './acessibilidade.html','./english.html','./espanol.html',
   './tarot-livre.html','./free-tarot-reading.html','./tarot-libre.html',
   './cartas-do-tarot.html','./tarot-card-meanings.html','./significados-cartas-tarot.html',
+  './buscar.html','./guias-para-comecar.html','./mapa-do-tarot.html',
   './escola-do-tarot.html','./tarot-school.html','./escuela-tarot.html',
   './consultas-de-tarot.html','./tarot-consultations.html','./consultas-tarot.html',
   './etica-e-responsabilidade.html','./tarot-ethics.html','./etica-tarot.html',

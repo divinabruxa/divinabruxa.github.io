@@ -1,4 +1,4 @@
-/* DIVINA BRUXA 3.0 — CARREGAMENTO V543 · LOJA AMAZON TRANSPARENTE
+/* DIVINA BRUXA 3.0 — CARREGAMENTO V544 · BIBLIOTECA PÚBLICA
    Preserva V501, V509 e o Universo V524; conecta Tarot e Mesa Real.
    V538 carrega o Tarot Livre sem fogo, sem arrasto e com imagens progressivas. */
 
@@ -216,8 +216,9 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     },
     library: async()=>{
       const [,module]=await Promise.all([
-        ensureStyle('divinaLibraryRebirthV302','library-world-v302.css?v=539'),
-        import('./library-world-v302.js?v=539')
+        ensureStyle('divinaLibraryRebirthV302','library-world-v302.css?v=544'),
+        ensureStyle('divinaPublicLibraryV544','public-library-core-v544.css?v=544'),
+        import('./library-world-v302.js?v=544')
       ]);
       return new module.LibraryWorldV302($('#cardLibraryApp'));
     },
@@ -320,8 +321,9 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       import('./daily-world-v509.js?v=509')
     ]),
     library:()=>Promise.all([
-      ensureStyle('divinaLibraryRebirthV302','library-world-v302.css?v=539'),
-      import('./library-world-v302.js?v=539')
+      ensureStyle('divinaLibraryRebirthV302','library-world-v302.css?v=544'),
+      ensureStyle('divinaPublicLibraryV544','public-library-core-v544.css?v=544'),
+      import('./library-world-v302.js?v=544')
     ]),
     spreads:()=>Promise.all([
       ensureStyle('divinaSpreadsRebirthV305','spreads-world-v305.css?v=305'),

@@ -1,4 +1,5 @@
 import { CARDS } from './tarot-data.js';
+import './tarot-meanings.js?v=544';
 
 const PAGES = Object.freeze([
   ['Divina Bruxa', './', 'Portal', 'portal', 'Tarot Livre, Carta do Dia, 78 cartas, tiragens, escola e consultas. início home orbe'],
@@ -81,17 +82,23 @@ const cardDescription = card => {
   return `${group}${details ? ` · ${details}` : ''}`;
 };
 
+const deepMeaning = card => globalThis.DivinaBruxaTarotMeanings?.get?.(
+  card.arcanaCode === 'major' ? card.canonicalId : card.canonicalId.replace(/^\d{2}-/, '')
+) || {};
+
 const entries = Object.freeze([
-  ...CARDS.map(card => ({
+  ...CARDS.map(card => {
+    const deep = deepMeaning(card);
+    return ({
     title: card.name,
     url: cardUrl(card),
     kind: card.arcanaCode === 'major' ? 'Arcano Maior' : card.suit,
     category: 'cartas',
     description: cardDescription(card),
     icon: card.arcanaCode === 'major' ? '✦' : ({ Copas:'♡', Espadas:'◇', Paus:'♙', Ouros:'⊕' }[card.suit] || '◇'),
-    searchable: normalize([card.name, card.names?.en, card.names?.es, card.arcana, card.suit, card.rank, card.number, card.element, card.correspondences?.astrological, card.correspondences?.numerology, card.correspondences?.domain].filter(Boolean).join(' ')),
+    searchable: normalize([card.name, card.names?.en, card.names?.es, card.arcana, card.suit, card.rank, card.number, card.element, card.correspondences?.astrological, card.correspondences?.numerology, card.correspondences?.domain, ...(deep.keywords || []), ...(deep.symbols || []), deep.essence, deep.centralMessage, deep.love, deep.career, deep.money, deep.spirituality, deep.advice].filter(Boolean).join(' ')),
     featured: false
-  })),
+  });}),
   ...PAGES.map(([title,url,kind,category,description], index) => ({
     title, url, kind, category, description: displayDescription(description),
     icon: category === 'tiragens' ? '✧' : category === 'aprender' ? '▤' : '◉',

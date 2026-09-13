@@ -1,0 +1,16 @@
+ROLLBACK V544 → V543
+
+Se for necessário voltar:
+1. Reenvie os arquivos originais da V543 substituídos pela V544:
+   app-v208.js, biblioteca-universal-v184.js, busca-v165.js, buscar.html,
+   card-library-engine.js, card-library-policy.js, cartas-do-tarot.html,
+   index.html, install-app.html, instalar-app.html, instalar-aplicacion.html,
+   library-deep-v332.js, library-world-v302.js, loja-mistica.html,
+   page-loader-v1.js, pwa-world-v196.js, pwa-world-v324.js,
+   sitemap.xml, sitemap-cartas.xml, sitemap-principal.xml e sw.js.
+2. Remova somente os dois módulos novos:
+   public-library-core-v544.js e public-library-core-v544.css.
+3. Não apague nenhum outro arquivo.
+4. Aguarde o deployment, feche o PWA e abra novamente.
+
+Os documentos e o script QA da V544 são inertes e podem permanecer.

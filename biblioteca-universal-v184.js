@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — ATIVAÇÃO PROGRESSIVA DA BIBLIOTECA UNIVERSAL V184 */
-import './tarot-meanings.js?v=184';
-import { CardLibraryEngine } from './card-library-engine.js?v=184';
+/* DIVINA BRUXA — ATIVAÇÃO PROGRESSIVA DA BIBLIOTECA PÚBLICA V544 */
+import './tarot-meanings.js?v=544';
+import { CardLibraryEngine } from './card-library-engine.js?v=544';
 
 const root = document.querySelector('#universalLibraryApp');
 if (root) {

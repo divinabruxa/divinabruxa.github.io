@@ -1,4 +1,4 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R032 · BIBLIOTECA PROFUNDA V332
+/* DIVINA BRUXA 3.0 — BIBLIOTECA PROFUNDA · CORTE V544
    Camada visual/ritual sobre LibraryWorld V302. Conteúdo editorial permanece V302/V184. */
 
 const RELEASE='V332';
@@ -14,7 +14,7 @@ function installStyle(){
 
 export class LibraryDeepV332{
   constructor(){
-    this.root=null;this.observer=null;this.abort=new AbortController();
+    this.root=null;this.abort=new AbortController();
     installStyle();this.bind();this.tryMount();
   }
 
@@ -35,7 +35,6 @@ export class LibraryDeepV332{
     this.root=root;
     root.dataset.libraryDeep='v332';
     this.enhance();
-    this.observe();
     return true;
   }
 
@@ -76,19 +75,13 @@ export class LibraryDeepV332{
     }
   }
 
-  observe(){
-    this.observer?.disconnect();
-    this.observer=new MutationObserver(()=>this.enhance());
-    this.observer.observe(this.root,{childList:true,subtree:true});
-  }
-
   status(){return Object.freeze({
     release:RELEASE,baseWorld:'V302',cards:78,contentRewritten:false,
-    meaningSourcePreserved:true,orbDiscoveryPreserved:true,extraApiCalls:0
+    meaningSourcePreserved:true,orbDiscoveryPreserved:true,mutationObservers:0,extraApiCalls:0
   });}
 
   destroy(){
-    this.abort.abort();this.observer?.disconnect();
+    this.abort.abort();
     this.root?.removeAttribute('data-library-deep');
   }
 }

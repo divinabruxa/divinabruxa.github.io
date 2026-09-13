@@ -1,15 +1,15 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R003 · BIBLIOTECA VIVA · V302
+/* DIVINA BRUXA 3.0 — BIBLIOTECA VIVA · CORTE V544
    Um atlas orgânico das 78 cartas. A Orbe conduz a descoberta; Whit orienta sem invadir. */
 
 import { CARDS } from './tarot-data.js';
 import { store, escapeHTML } from './storage.js';
 import { cardImageMarkup, preloadCardImages } from './tarot-image-runtime.js?v=184';
-import './tarot-meanings.js?v=184';
+import './tarot-meanings.js?v=544';
 import {
   cardContentId,
   meaningForCard,
   normalizeLibraryText
-} from './card-library-policy.js?v=184';
+} from './card-library-policy.js?v=544';
 
 const FAVORITES_KEY = 'library-v302-favorites';
 const WHIT_DRAFT_KEY = 'whit-draft-v190';
@@ -22,15 +22,6 @@ const PATHS = Object.freeze([
   { id:'espadas', label:'Espadas', count:14, sigil:'◇' },
   { id:'ouros', label:'Ouros', count:14, sigil:'○' }
 ]);
-const WHIT_LINES = Object.freeze([
-  'Escolha uma constelação. Eu fico por perto.',
-  'Aqui você pode estudar sem pressa. Uma carta de cada vez.',
-  'A Orbe pode escolher uma carta por você, só para explorar.',
-  'Nada precisa virar previsão. Primeiro, observa o símbolo.',
-  'Se uma carta te chamar, entra nela. Eu te acompanho.',
-  'Você não precisa decorar tudo. Procure relações entre imagem, elemento e experiência.'
-]);
-
 const safe = value => escapeHTML(value ?? '');
 const reducedMotion = () => globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
 
@@ -70,10 +61,6 @@ function searchBlob(card) {
   ].filter(Boolean).join(' '));
 }
 
-function whisperDelay() {
-  return 16000 + randomInt(12000);
-}
-
 function handoffDraft(card, deep) {
   const keywords = list(deep?.keywords).slice(0, 6).join(', ');
   const symbols = list(deep?.symbols).slice(0, 4).join('; ');
@@ -100,7 +87,6 @@ export class LibraryWorldV302 {
     this.limit = PAGE_SIZE;
     this.readerCard = null;
     this.readerTrigger = null;
-    this.whitTimer = 0;
     this.searchOpen = false;
     this.compareCards = new Set();
     this.favorites = new Set();
@@ -114,7 +100,7 @@ export class LibraryWorldV302 {
     this.build();
     this.bind();
     this.render();
-    this.startWhit();
+    document.dispatchEvent(new CustomEvent('divina:library-world-ready', { detail:Object.freeze({ release:'V544', cards:78, orientation:'normal' }) }));
   }
 
   build() {
@@ -408,11 +394,11 @@ export class LibraryWorldV302 {
     }
     const nextTarget = this.grid.querySelector(`[data-card-id="${card.id}"]`);
     if (!reducedMotion()) nextTarget?.animate?.([
-      { transform:'translateY(0) scale(1)', filter:'brightness(1)' },
-      { transform:'translateY(-8px) scale(1.025)', filter:'brightness(1.18)', offset:.55 },
-      { transform:'translateY(0) scale(1)', filter:'brightness(1)' }
-    ], { duration:620, easing:'cubic-bezier(.2,.9,.2,1)' });
-    setTimeout(() => this.openReader(card.id, nextTarget), reducedMotion() ? 0 : 320);
+      { transform:'translateY(0) scale(1)' },
+      { transform:'translateY(-5px) scale(1.018)', offset:.55 },
+      { transform:'translateY(0) scale(1)' }
+    ], { duration:420, easing:'cubic-bezier(.2,.9,.2,1)' });
+    setTimeout(() => this.openReader(card.id, nextTarget), reducedMotion() ? 0 : 180);
   }
 
   toggleFavorite(contentId, keepReader = false) {
@@ -539,24 +525,7 @@ export class LibraryWorldV302 {
     target?.focus?.({ preventScroll:true });
   }
 
-  startWhit() {
-    const cycle = () => {
-      clearTimeout(this.whitTimer);
-      this.whitTimer = setTimeout(() => {
-        if (!this.reader.open && document.visibilityState === 'visible') {
-          this.whitLine.textContent = WHIT_LINES[randomInt(WHIT_LINES.length)];
-        }
-        cycle();
-      }, whisperDelay());
-    };
-    this.whitTimer = setTimeout(() => {
-      this.whitLine.textContent = WHIT_LINES[randomInt(WHIT_LINES.length)];
-      cycle();
-    }, 6500);
-  }
-
   destroy() {
-    clearTimeout(this.whitTimer);
     this.abort.abort();
     this.closeReader();
     this.root.classList.remove('library-world-v302-host');

@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 9/14 · V543
-   Loja Amazon profunda, transparente e leve na mesma Orbe.
+/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 10/14 · V544
+   Biblioteca Pública, 78 cartas, guias e busca na mesma Orbe.
    Fluidez, privacidade, Tarot e todas as travas anteriores permanecem íntegros. */
 
 import { CONFIG } from './config-v200.js?v=200';
@@ -48,6 +48,7 @@ import { createWisdomDepthCoreV539 } from './wisdom-depth-core-v539.js?v=539';
 import { createWhitPresenceDeepV540 } from './whit-presence-deep-v540.js?v=540';
 import { createExperienceDepthCoreV541 } from './experience-depth-core-v541.js?v=541';
 import { createAmazonStoreCoreV543 } from './amazon-store-core-v543.js?v=543';
+import { createPublicLibraryCoreV544 } from './public-library-core-v544.js?v=544';
 
 const $ = selector => document.querySelector(selector);
 
@@ -61,7 +62,7 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=543')
+const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=544')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
@@ -89,7 +90,7 @@ const startSpreadsSupremeV331 = () => import('./spreads-supreme-v331.js?v=331')
     document.documentElement.dataset.spreadsSupremeError = 'v331';
   });
 
-const startLibraryDeepV332 = () => import('./library-deep-v332.js?v=332')
+const startLibraryDeepV332 = () => import('./library-deep-v332.js?v=544')
   .then(module => module.installLibraryDeepV332?.())
   .catch(error => {
     console.error('[Divina] Biblioteca Profunda V332 não iniciou', error);
@@ -426,6 +427,10 @@ const amazonStore = safely('Loja Amazon V543', () =>
   createAmazonStoreCoreV543({ config:CONFIG })
 );
 
+const publicLibrary = safely('Biblioteca Pública V544', () =>
+  createPublicLibraryCoreV544()
+);
+
 const realityLifecycle = safely('Motor Universal das Realidades V511', () =>
   installRealityLifecycleV511({ core:supremeOrb })
 );
@@ -473,12 +478,12 @@ navigator.serviceWorker?.addEventListener('message', event => {
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV537) {
   window.__divinaSWBootstrapV537 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=543', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=544', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v543';
+        document.documentElement.dataset.releaseEpoch = 'v544';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V543 registrado');
+        console.info('[Divina] PWA V544 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -929,6 +934,25 @@ window.divinaAmazonStoreReleaseV543 = Object.freeze({
   environment:'staging'
 });
 
+window.divinaPublicLibraryReleaseV544 = Object.freeze({
+  version:544,
+  macroStage:'10-of-14',
+  title:'Biblioteca Pública, 78 Cartas, Guias e Busca',
+  core:publicLibrary,
+  audit:()=>publicLibrary?.audit?.()||null,
+  status:()=>publicLibrary?.status?.()||null,
+  cards:78,
+  directCards:78,
+  deepMeanings:78,
+  publicGuides:8,
+  searchablePages:134,
+  privateSearchReads:0,
+  mutationObservers:0,
+  permanentAnimationLoops:0,
+  oneCanonicalOrb:true,
+  environment:'staging'
+});
+
 window.divinaOwnerObservatoryReleaseV532 = Object.freeze({
   version:532,
   macroStage:'8-of-10',
@@ -1275,10 +1299,10 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V543',
+        release:'V544',
         supremePlan:'3.0-universo-vivo',
         supremePlanMacroStages:14,
-        currentMacroStage:'9-of-14',
+        currentMacroStage:'10-of-14',
         worldTruth:'v535',
         worldTruthRoutes:17,
         orbFluidNavigation:'v535',
@@ -1433,6 +1457,16 @@ const awaken = async () => {
         amazonStoreStockCache:false,
         amazonStorePrivateContentReads:0,
         amazonStorePermanentAnimationLoops:0,
+        publicLibrary:'v544',
+        publicLibraryMacroStage:'10-of-14',
+        publicLibraryCards:78,
+        publicLibraryDirectCards:78,
+        publicLibraryDeepMeanings:78,
+        publicLibraryGuides:8,
+        publicLibrarySearchablePages:134,
+        publicLibraryPrivateSearchReads:0,
+        publicLibraryMutationObservers:0,
+        publicLibraryPermanentAnimationLoops:0,
         ownerObservatory:'v532',
         ownerObservatoryMacroStage:'8-of-10',
         ownerObservatoryRoute:'admin',
