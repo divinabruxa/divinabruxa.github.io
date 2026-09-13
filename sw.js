@@ -1,14 +1,14 @@
-/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 7/14 · V555
+/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 8/14 · V556
    Cache seletivo e versionado. Nunca guarda Auth, respostas online da Whit, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=555;
+const VERSION=556;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v555-shell';
-const CONTENT_CACHE='divina-bruxa-v555-content';
-const IMAGE_CACHE='divina-bruxa-v555-images';
-const OFFLINE_CACHE='divina-bruxa-v555-offline-core';
-const PREMIUM_CACHE='divina-bruxa-v555-premium-static';
+const SHELL_CACHE='divina-bruxa-v556-shell';
+const CONTENT_CACHE='divina-bruxa-v556-content';
+const IMAGE_CACHE='divina-bruxa-v556-images';
+const OFFLINE_CACHE='divina-bruxa-v556-offline-core';
+const PREMIUM_CACHE='divina-bruxa-v556-premium-static';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE,PREMIUM_CACHE]);
 const NAVIGATION_TIMEOUT_MS=3500;
 const MAX_CONTENT_ENTRIES=180;
@@ -57,6 +57,7 @@ const REQUIRED_SHELL=Object.freeze([
   './daily-world-v509.js','./daily-world-v509.css','./daily-policy-v303.js',
   './daily-spreads-supreme-v554.css',
   './school-library-supreme-v555.css',
+  './journal-mirror-supreme-v556.css',
   './orb-loading-portal-v1.js',
   './divina-shell-v180.css','./home-orb-absolute-v206.css','./pwa-world-v196.css',
   './pwa-resilience-v324.css','./pwa-world-v324.js','./performance-world-v324.js',
@@ -65,7 +66,7 @@ const REQUIRED_SHELL=Object.freeze([
 ]);
 
 // Fechamento transitivo dos imports estáticos de app-v208.js. Se qualquer um
-// falhar, a V555 não assume o controle e o worker anterior continua íntegro.
+// falhar, a V556 não assume o controle e o worker anterior continua íntegro.
 const BOOT_DEPENDENCIES=Object.freeze([
   './account-consultations-world-v319.js','./account-engine-v201.js','./account-state-copy-v201.js',
   './ai-policy.js','./auth-client-v201.js','./auth-client-v6.js','./card-library-policy.js',
@@ -134,6 +135,7 @@ const FREE_OFFLINE_ASSETS=Object.freeze([
   './daily-spreads-supreme-v554.css','./spreads-policy.js','./spreads-engine.js',
   './spreads-world-v305.js','./spreads-world-v305.css','./spread-synthesis.js','./spread-synthesis-v331.js','./spreads-supreme-v331.js','./spreads-supreme-v331.css','./tiragens-v213.css','./tiragens-definitivas-v185.css',
   './journal-engine.js','./journal-policy.js','./rhythm-v6.js','./journal-world-v317.js','./journal-world-v317.css','./diario-definitivo-v187.css',
+  './journal-mirror-supreme-v556.css',
   './school-engine.js','./school-policy.js','./school-world-v306.js','./school-world-v306.css','./escola-definitiva-v186.css',
   './skin-registry-v12.js','./skin-universal-v10.js','./skin-catalog-v6.js',
   './divina-orb-fast-v1.webp','./divina-orb-thumb-v1.webp',
@@ -309,7 +311,7 @@ const appShellIsValid=async(url,response)=>{
   const isShell=pathname===new URL('./',self.registration.scope).pathname||pathname.endsWith('/index.html');
   if(!isShell)return true;
   const html=await response.clone().text();
-  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=555/.test(html);
+  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=556/.test(html);
 };
 
 const offlinePageFor=async url=>{

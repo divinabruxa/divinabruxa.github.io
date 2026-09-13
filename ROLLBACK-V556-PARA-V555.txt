@@ -1,0 +1,5 @@
+ROLLBACK V556 → V555
+
+Este pacote é incremental e preserva a V555. Se precisar retornar, reenvie os arquivos originais do pacote V555 sobre os mesmos nomes e remova somente o arquivo journal-mirror-supreme-v556.css da publicação.
+
+Não apague conteúdo, imagens, CNAME, dados locais do Diário, progresso, compras ou preferências. O Service Worker V555 volta a assumir após a próxima atualização/reabertura.

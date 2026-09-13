@@ -1,17 +1,18 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R018 · DIÁRIO & ESPELHO V317
+/* DIVINA BRUXA 4.0 — MACROETAPA 8/14 · DIÁRIO & ESPELHO V556
    Mundo vivo construído SOBRE o JournalEngine V187 real.
    Não duplica armazenamento, editor, calendário, timeline, Espelho ou consentimento da IA. */
 
-import { JournalEngine } from './journal-engine.js?v=539';
-import { RhythmEngine } from './rhythm-v6.js';
+import { JournalEngine } from './journal-engine.js?v=556';
+import { RhythmEngine } from './rhythm-v6.js?v=556';
 import {
   entriesForJournalPeriod,
   localMirrorData,
   journalDateKey
-} from './journal-policy.js?v=187';
+} from './journal-policy.js?v=556';
 
-const RELEASE = 'V317';
+const RELEASE = 'V556';
 const WORLD_ID = 'journalWorldV317';
+const routeNow = () => String(document.body?.dataset?.screen || location.hash || 'home').replace(/^#/,'').toLowerCase();
 
 const safe = value => String(value ?? '')
   .replace(/[&<>"']/g, char => ({
@@ -52,10 +53,14 @@ const relativeDate = value => {
 };
 
 export class JournalWorldV317 {
-  constructor(root) {
+  constructor(root, options = {}) {
     this.root = root?.id === 'journalApp' ? root : document.querySelector('#journalApp');
     if (!this.root) return;
 
+    this.abort = new AbortController();
+    this.orbCore = options.orbCore || globalThis.divinaOrbSupremeV501?.core || globalThis.orbe?.supreme || null;
+    this.orb = this.orbCore?.orb || null;
+    this.orbRelease = null;
     this.engine = new JournalEngine(this.root);
     this.rhythm = new RhythmEngine(this.root.querySelector('#journalRhythm'));
     this.destroyed = false;
@@ -75,7 +80,20 @@ export class JournalWorldV317 {
       return result;
     };
 
-    this.root.dataset.journalWorld = 'v317';
+    document.addEventListener('divina:route-ready', event => {
+      if (event.detail?.id === 'journal') this.syncOrb();
+      else this.releaseOrb();
+    }, { signal:this.abort.signal });
+    this.orb?.addEventListener('click', () => {
+      const host = this.root.querySelector('[data-journal-orb-host]');
+      if (routeNow() !== 'journal' || !host?.contains(this.orb)) return;
+      this.orbCore?.pulse?.('journal-write', { intensity:.5 });
+      const editor = this.root.querySelector('#journalForm');
+      editor?.scrollIntoView({ behavior:'auto', block:'start' });
+      requestAnimationFrame(() => editor?.elements?.title?.focus({ preventScroll:true }));
+    }, { signal:this.abort.signal });
+
+    this.root.dataset.journalWorld = 'v556';
     this.enhance(true);
 
     document.dispatchEvent(new CustomEvent('divina:journal-world-ready', {
@@ -83,7 +101,10 @@ export class JournalWorldV317 {
         release:RELEASE,
         private:true,
         mirror:'aggregate-only',
-        bodyShared:false
+        bodyShared:false,
+        canonicalOrb:true,
+        pageSize:12,
+        permanentAnimationLoops:0
       })
     }));
   }
@@ -152,6 +173,7 @@ export class JournalWorldV317 {
       return `<span class="jwv317__star ${day.count ? 'is-lit' : ''}" style="--jwv-star:${strength};--jwv-delay:${index * 90}ms" title="${safe(day.key)} · ${day.count} ${day.count === 1 ? 'memória' : 'memórias'}"><i></i><small>${safe(day.label)}</small></span>`;
     }).join('');
 
+    this.releaseOrb();
     world.innerHTML = `
       <div class="jwv317__cosmos" aria-hidden="true"><i></i><i></i><i></i></div>
       <header class="jwv317__head">
@@ -160,7 +182,7 @@ export class JournalWorldV317 {
           <h3 id="journalWorldV317Title">Um lugar para guardar sem ser observado.</h3>
           <p>Escreva, retorne e perceba relações no seu próprio ritmo. O Espelho descreve padrões de registro — nunca define quem você é.</p>
         </div>
-        <span class="jwv317__seal" aria-label="Cofre privado">◇</span>
+        <div class="jwv556__orb-zone"><div class="jwv556__orb-host" data-journal-orb-host></div><small>TOQUE PARA ESCREVER</small></div>
       </header>
 
       <div class="jwv317__pulse">
@@ -180,24 +202,33 @@ export class JournalWorldV317 {
       <div class="jwv317__passages">
         <button type="button" data-jwv-write><span>✦</span><b>ESCREVER AGORA</b><small>abrir uma nova memória</small></button>
         <button type="button" data-jwv-mirror><span>☾</span><b>ABRIR O ESPELHO</b><small>ver padrões agregados</small></button>
+        <button type="button" data-jwv-calendar><span>◷</span><b>ABRIR CALENDÁRIO</b><small>reencontrar um dia</small></button>
         <p><b>Último encontro: ${safe(relativeDate(metrics.lastAt))}.</b><small>Admin, analytics e Whit não recebem o corpo das suas memórias automaticamente.</small></p>
       </div>`;
 
     world.querySelector('[data-jwv-write]')?.addEventListener('click', () => {
       const field = this.root.querySelector('#journalForm [name="title"]');
       this.root.querySelector('#journalForm')?.scrollIntoView({
-        behavior:matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+        behavior:'auto',
         block:'start'
       });
-      setTimeout(() => field?.focus({ preventScroll:true }), 260);
+      requestAnimationFrame(() => field?.focus({ preventScroll:true }));
     });
 
     world.querySelector('[data-jwv-mirror]')?.addEventListener('click', () => {
       this.root.querySelector('.journal-mirror')?.scrollIntoView({
-        behavior:matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+        behavior:'auto',
         block:'start'
       });
     });
+    world.querySelector('[data-jwv-calendar]')?.addEventListener('click', () => {
+      this.engine.view = 'calendar';
+      this.engine.saveView?.();
+      this.engine.renderExplorer?.();
+      this.root.querySelector('.journal-explorer')?.scrollIntoView({ behavior:'auto', block:'start' });
+    });
+
+    this.syncOrb();
 
     // Performance: conteúdo longo fora da viewport não custa pintura constante.
     this.root.querySelectorAll('.journal-timeline > article, .journal-mirror, .journal-explorer')
@@ -219,6 +250,24 @@ export class JournalWorldV317 {
     return this.engine?.add?.(entry);
   }
 
+  syncOrb() {
+    if (routeNow() !== 'journal' || !this.orbCore?.claim || !this.orb) return false;
+    const host = this.root.querySelector('[data-journal-orb-host]');
+    if (!host) return false;
+    if (host.contains(this.orb)) return true;
+    this.releaseOrb();
+    this.orbRelease = this.orbCore.claim(host, {
+      mode:'journal',
+      ariaLabel:'Orbe das Realidades. Toque para escrever uma memória privada no Diário.'
+    });
+    return true;
+  }
+
+  releaseOrb() {
+    try { this.orbRelease?.(); } catch {}
+    this.orbRelease = null;
+  }
+
   status() {
     const metrics = this.metrics();
     return Object.freeze({
@@ -230,13 +279,22 @@ export class JournalWorldV317 {
       adminBodyAccess:false,
       analyticsText:false,
       whitSilentRead:false,
-      baseEngine:'V187',
-      rhythmEngine:'V6'
+      canonicalOrb:true,
+      duplicateOrb:false,
+      renderedEntriesPerPage:12,
+      timelineFullImageRequests:0,
+      permanentAnimationLoops:0,
+      baseEngine:'V556',
+      preservesEngine:'V187',
+      rhythmEngine:'V556'
     });
   }
 
   destroy() {
     this.destroyed = true;
+    this.abort?.abort();
+    this.releaseOrb();
+    this.engine?.destroy?.();
     document.getElementById(WORLD_ID)?.remove();
     delete this.root?.dataset?.journalWorld;
   }

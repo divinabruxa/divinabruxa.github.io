@@ -1,15 +1,16 @@
-/* DIVINA BRUXA — DIÁRIO E ESPELHO CELESTIAL DEFINITIVO V187
+/* DIVINA BRUXA 4.0 — MACROETAPA 8/14 · DIÁRIO E ESPELHO V556
    Escrita privada, cofre local, relações, revisões e padrões não diagnósticos. */
 
 import { CARDS } from './tarot-data.js';
 import { store, escapeHTML } from './storage.js';
-import { cardImageMarkup } from './tarot-image-runtime.js';
+import { cardAtlasStyle } from './tarot-image-runtime.js?v=556';
 import { AI_TAROT_SELECTION_KEY } from './ai-policy.js?v=141';
 import {
   JOURNAL_STORAGE_KEY,
   JOURNAL_DRAFT_KEY,
   JOURNAL_VIEW_KEY,
   JOURNAL_AI_SELECTION_KEY,
+  JOURNAL_PAGE_SIZE,
   JOURNAL_PERIODS,
   JOURNAL_TYPES,
   JOURNAL_MOODS,
@@ -27,11 +28,11 @@ import {
   splitJournalTags,
   entryCardIds,
   journalDateKey
-} from './journal-policy.js?v=187';
+} from './journal-policy.js?v=556';
 
 const safe = value => escapeHTML(value ?? '');
 const reducedMotion = () => globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
-const smooth = () => reducedMotion() ? 'auto' : 'smooth';
+const smooth = () => 'auto';
 const formatDate = value => {
   try { return new Intl.DateTimeFormat('pt-BR', { dateStyle: 'long', timeStyle: 'short' }).format(new Date(value)); }
   catch { return 'Data preservada'; }
@@ -55,6 +56,9 @@ export class JournalEngine {
   constructor(root) {
     this.root = root?.id === 'journalApp' ? root : document.querySelector('#journalApp');
     if (!this.root) return;
+    this.abort = new AbortController();
+    this.searchFrame = 0;
+    this.limit = JOURNAL_PAGE_SIZE;
     const savedView = store.get(JOURNAL_VIEW_KEY, {});
     this.editingId = null;
     this.editingUpdatedAt = '';
@@ -134,17 +138,19 @@ export class JournalEngine {
             <label class="journal-field"><span>Data e hora</span><input name="createdAt" type="datetime-local" value="${toLocalInput()}"></label>
             <label class="journal-field"><span>Tipo</span><select name="type">${JOURNAL_TYPES.map(item => `<option value="${item.id}">${safe(item.label)}</option>`).join('')}</select></label>
             <label class="journal-field"><span>Como você está?</span><select name="mood">${JOURNAL_MOODS.map(mood => `<option>${safe(mood)}</option>`).join('')}</select></label>
-            <label class="journal-field"><span>Coleção</span><input name="collection" maxlength="80" placeholder="Ex.: Lua Nova"></label>
-            <label class="journal-field"><span>Carta relacionada</span><select name="cardId"><option value="">Nenhuma carta</option>${CARDS.map(card => `<option value="${card.id}">${safe(card.name)}</option>`).join('')}</select></label>
             <label class="journal-field journal-field-wide"><span>Pergunta ou intenção</span><input name="question" maxlength="600" placeholder="O que deseja compreender?"></label>
             <label class="journal-field journal-field-wide"><span>Reflexão</span><textarea name="text" required maxlength="16000" rows="9" placeholder="Escreva sensações, acontecimentos, símbolos e aprendizados…"></textarea></label>
+          </div>
+          <details class="journal-advanced"><summary><span><b>Conexões opcionais</b><small>Carta, etiquetas, revisão, coleção e vínculos</small></span><i aria-hidden="true">＋</i></summary><div class="journal-form-grid">
+            <label class="journal-field"><span>Coleção</span><input name="collection" maxlength="80" placeholder="Ex.: Lua Nova"></label>
+            <label class="journal-field"><span>Carta relacionada</span><select name="cardId"><option value="">Nenhuma carta</option>${CARDS.map(card => `<option value="${card.id}">${safe(card.name)}</option>`).join('')}</select></label>
             <label class="journal-field"><span>Etiquetas</span><input name="tags" maxlength="440" placeholder="amor, trabalho, sonho"></label>
             <label class="journal-field"><span>Temas, relações ou pessoas</span><input name="relationships" maxlength="300" placeholder="Opcional · escreva só o necessário"></label>
             <label class="journal-field"><span>Rever em</span><input name="reviewDate" type="date"></label>
+            <label class="journal-field"><span>Aula relacionada</span><input name="relatedLesson" maxlength="180" placeholder="Opcional · módulo ou aula da Escola"></label>
             <label class="journal-field journal-field-wide"><span>Vincular a outra memória</span><select name="linkedEntryId" data-journal-link-select><option value="">Nenhuma memória vinculada</option></select></label>
-            <label class="journal-field journal-field-wide"><span>Aula relacionada</span><input name="relatedLesson" maxlength="180" placeholder="Opcional · módulo ou aula da Escola"></label>
-          </div>
-          <p class="journal-privacy"><span aria-hidden="true">◇</span><span><b>Esta página é um espaço privado.</b> O rascunho é salvo somente neste aparelho e não é sincronizado enquanto o servidor seguro não estiver ativo.</span></p>
+          </div></details>
+          <p class="journal-privacy"><span aria-hidden="true">◇</span><span><b>Esta página é um espaço privado.</b> O rascunho fica somente neste aparelho. Entradas salvas só podem ser sincronizadas pela Conta, após seu consentimento explícito.</span></p>
           <div class="journal-editor-actions"><button type="submit" class="primary" data-save-entry>Guardar no Diário</button><button type="button" class="text-button" data-cancel-edit hidden>Cancelar edição</button><span data-draft-detail>Nenhum rascunho pendente</span></div>
         </form>
 
@@ -158,7 +164,7 @@ export class JournalEngine {
 
       <section class="journal-explorer" aria-labelledby="journalMemoriesTitle">
         <header class="journal-explorer-head"><div><p class="eyebrow">MEMÓRIAS</p><h3 id="journalMemoriesTitle">Seu tempo simbólico.</h3></div><div class="journal-view-tabs" role="group" aria-label="Visualização"><button type="button" data-journal-view="timeline" aria-pressed="${this.view === 'timeline'}">Linha do tempo</button><button type="button" data-journal-view="calendar" aria-pressed="${this.view === 'calendar'}">Calendário</button></div></header>
-        <div class="journal-tools">
+        <details class="journal-filter-drawer"><summary><span><b>Buscar e filtrar memórias</b><small>Texto, humor, tipo, data, carta, tema e favoritas</small></span><i aria-hidden="true">＋</i></summary><div class="journal-tools">
           <label class="journal-search"><span>Buscar</span><input id="journalSearch" type="search" placeholder="Título, texto, carta ou tema"></label>
           <label><span>Humor</span><select id="journalMoodFilter"><option value="">Todos</option>${JOURNAL_MOODS.map(mood => `<option>${safe(mood)}</option>`).join('')}</select></label>
           <label><span>Tipo</span><select id="journalTypeFilter"><option value="">Todos</option>${JOURNAL_TYPES.map(item => `<option value="${item.id}">${safe(item.label)}</option>`).join('')}</select></label>
@@ -167,13 +173,14 @@ export class JournalEngine {
           <label><span>Tema ou coleção</span><input id="journalThemeFilter" type="search" placeholder="Ex.: amor"></label>
           <label class="journal-favorite-filter"><input id="journalFavoriteFilter" type="checkbox"><span>Somente favoritas</span></label>
           <button type="button" class="text-button" data-clear-filters>Limpar filtros</button>
-        </div>
+        </div></details>
         <div class="journal-result-line"><span data-journal-count></span><div><button type="button" id="exportJournal" class="text-button">Baixar cópia privada</button><button type="button" class="text-button" data-journal-import>Abrir cópia</button><button type="button" class="text-button journal-danger-control" data-journal-clear>Apagar Diário</button></div></div>
         <input type="file" data-journal-file accept="application/json,.json" hidden>
         <div class="journal-portability" data-journal-portability aria-live="polite"></div>
         <div id="journalCalendar" class="journal-calendar"></div>
         <div id="entries" class="entries journal-timeline" aria-live="polite"></div>
-        <footer class="journal-vault-note"><span aria-hidden="true">◇</span><p><b>Cofre local e portátil</b><small>Histórico, busca, calendário e cópia JSON funcionam sem conta. Não existe sincronização automática entre aparelhos nesta versão; guarde sua cópia em um local escolhido por você.</small></p></footer>
+        <button type="button" class="journal-more" data-journal-more hidden>Abrir mais memórias</button>
+        <footer class="journal-vault-note"><span aria-hidden="true">◇</span><p><b>Cofre local e portátil</b><small>Sem ativar a Conta, tudo permanece neste aparelho. A sincronização fica desligada por padrão e só começa quando você a autoriza; rascunhos nunca saem do aparelho.</small></p></footer>
       </section>`;
 
     this.form = this.root.querySelector('#journalForm');
@@ -186,6 +193,7 @@ export class JournalEngine {
   }
 
   bind() {
+    const signal = this.abort.signal;
     this.form.onsubmit = event => {
       event.preventDefault();
       this.commitForm();
@@ -197,11 +205,13 @@ export class JournalEngine {
     const bindFilter = (selector, key, event = 'input') => {
       this.root.querySelector(selector)?.addEventListener(event, ({ target }) => {
         this.filters[key] = target.type === 'checkbox' ? target.checked : target.value;
+        this.limit = JOURNAL_PAGE_SIZE;
         this.pendingDelete = '';
         this.pendingAI = '';
         this.pendingRevision = '';
-        this.renderExplorer();
-      });
+        if (this.searchFrame) return;
+        this.searchFrame = requestAnimationFrame(() => { this.searchFrame = 0; this.renderExplorer(); });
+      }, { signal });
     };
     bindFilter('#journalSearch', 'query');
     bindFilter('#journalMoodFilter', 'mood', 'change');
@@ -242,9 +252,13 @@ export class JournalEngine {
     this.list.onclick = event => this.handleEntryAction(event);
     this.list.addEventListener('submit', event => this.handleEntryAction(event));
     this.calendar.onclick = event => this.handleCalendarAction(event);
-    window.addEventListener('online', () => this.updateNetworkState());
-    window.addEventListener('offline', () => this.updateNetworkState());
-    window.addEventListener('pagehide', () => this.flushDraft());
+    this.root.querySelector('[data-journal-more]').onclick = () => {
+      this.limit += JOURNAL_PAGE_SIZE;
+      this.renderExplorer();
+    };
+    window.addEventListener('online', () => this.updateNetworkState(), { signal });
+    window.addEventListener('offline', () => this.updateNetworkState(), { signal });
+    window.addEventListener('pagehide', () => this.flushDraft(), { signal });
   }
 
   formValues() {
@@ -292,6 +306,9 @@ export class JournalEngine {
       const field = this.form.elements.namedItem(name);
       if (field && typeof value === 'string') field.value = value;
     }
+    if (['collection','cardId','tags','relationships','reviewDate','linkedEntryId','relatedLesson'].some(name => String(draft[name] || '').trim())) {
+      this.root.querySelector('.journal-advanced').open = true;
+    }
     if (draft._editingId && this.all().some(entry => entry.id === draft._editingId)) {
       this.editingId = draft._editingId;
       const live = this.all().find(entry => entry.id === draft._editingId);
@@ -337,6 +354,7 @@ export class JournalEngine {
     this.editingUpdatedAt = '';
     this.conflictProtected = false;
     this.form.reset();
+    this.root.querySelector('.journal-advanced').open = false;
     this.form.elements.createdAt.value = toLocalInput();
     this.form.elements.mood.value = 'Reflexiva';
     this.setEditingState(false);
@@ -354,6 +372,7 @@ export class JournalEngine {
     this.conflictProtected = false;
     store.remove(JOURNAL_DRAFT_KEY);
     this.form.reset();
+    this.root.querySelector('.journal-advanced').open = false;
     this.form.elements.createdAt.value = toLocalInput();
     this.form.elements.mood.value = 'Reflexiva';
     this.setEditingState(false);
@@ -374,10 +393,11 @@ export class JournalEngine {
   add(input) {
     const entries = this.all();
     entries.unshift(createJournalEntry(input));
-    if (!this.saveAll(entries)) return;
+    if (!this.saveAll(entries)) throw new Error('journal-save-failed');
     this.refreshLinkOptions();
     this.render();
     this.notify('Guardado no Diário da Orbe.');
+    return true;
   }
 
   filtered(entries) {
@@ -409,6 +429,7 @@ export class JournalEngine {
       if (field) field.value = '';
     }
     this.root.querySelector('#journalFavoriteFilter').checked = false;
+    this.limit = JOURNAL_PAGE_SIZE;
     this.renderExplorer();
   }
 
@@ -491,12 +512,16 @@ export class JournalEngine {
 
   renderExplorer(source = this.all()) {
     const entries = this.filtered(source);
+    const visible = entries.slice(0, this.limit);
     this.updateViewTabs();
     this.root.querySelector('[data-journal-count]').textContent = `${entries.length} ${entries.length === 1 ? 'memória encontrada' : 'memórias encontradas'}`;
     this.calendar.hidden = this.view !== 'calendar';
     this.list.hidden = this.view === 'calendar';
+    const more = this.root.querySelector('[data-journal-more]');
+    more.hidden = this.view === 'calendar' || visible.length >= entries.length;
+    if (!more.hidden) more.textContent = `Abrir mais memórias · ${visible.length}/${entries.length}`;
     if (this.view === 'calendar') this.renderCalendar(entries);
-    else this.renderTimeline(entries);
+    else this.renderTimeline(visible, source);
   }
 
   renderCalendar(entries) {
@@ -650,25 +675,25 @@ export class JournalEngine {
     this.notify('Todo o Diário local foi apagado deste aparelho.');
   }
 
-  renderTimeline(entries) {
+  renderTimeline(entries, source = entries) {
     if (!entries.length) {
       this.list.innerHTML = '<div class="journal-empty"><span aria-hidden="true">☾</span><h4>Nenhuma memória neste recorte.</h4><p>Escreva uma nova reflexão ou limpe os filtros para rever o que já foi guardado.</p></div>';
       return;
     }
+    const byId = new Map(source.map(entry => [entry.id, entry]));
     let lastDay = '';
     this.list.innerHTML = entries.map(entry => {
       const day = journalDateKey(entry.createdAt);
       const divider = day === lastDay ? '' : `<h4 class="journal-day-divider"><span>${safe(formatShortDate(entry.createdAt))}</span></h4>`;
       lastDay = day;
-      return `${divider}${this.entryMarkup(entry)}`;
+      return `${divider}${this.entryMarkup(entry, byId)}`;
     }).join('');
   }
 
-  entryMarkup(entry) {
+  entryMarkup(entry, byId = new Map()) {
     const ids = entryCardIds(entry);
     const cards = ids.map(id => CARDS[id]).filter(Boolean);
     const tags = splitJournalTags(entry.tags);
-    const byId = new Map(this.all().map(item => [item.id, item]));
     const linked = entry.linkedEntryIds.map(id => byId.get(id)).filter(Boolean);
     const reviewDue = entry.reviewDate && entry.reviewDate <= journalDateKey(new Date()) && !entry.revisions.length;
     const deleteConfirm = this.pendingDelete === entry.id ? `<div class="journal-inline-confirm" role="alert"><p><b>Excluir esta memória?</b> Esta ação não pode ser desfeita.</p><div><button type="button" data-delete-cancel>Manter memória</button><button type="button" class="danger" data-delete-confirm>Sim, excluir</button></div></div>` : '';
@@ -680,7 +705,7 @@ export class JournalEngine {
         <header><div><small>${safe(typeLabel(entry.type))} · ${safe(formatDate(entry.createdAt))}</small><h3>${safe(entry.title)}</h3></div><span class="journal-mood">${safe(entry.mood)}</span></header>
         ${entry.question ? `<p class="journal-question"><b>Intenção</b>${safe(entry.question)}</p>` : ''}
         <p class="journal-text">${safe(entry.text).replace(/\n/g, '<br>')}</p>
-        ${cards.length ? `<div class="journal-related-cards">${cards.slice(0, 3).map(card => `<span>${cardImageMarkup(card, { decorative: true })}<b>${safe(card.name)}</b></span>`).join('')}${cards.length > 3 ? `<em>+${cards.length - 3} cartas nesta leitura</em>` : ''}</div>` : ''}
+        ${cards.length ? `<div class="journal-related-cards">${cards.slice(0, 3).map(card => `<span><i class="journal-card-atlas" style="${cardAtlasStyle(card)}" role="img" aria-label="${safe(card.name)}, direta"></i><b>${safe(card.name)}</b></span>`).join('')}${cards.length > 3 ? `<em>+${cards.length - 3} cartas nesta leitura</em>` : ''}</div>` : ''}
         <div class="journal-entry-meta">
           ${entry.collection ? `<span class="journal-collection">◇ ${safe(entry.collection)}</span>` : ''}
           ${tags.map(tag => `<span>${safe(tag)}</span>`).join('')}
@@ -833,6 +858,7 @@ export class JournalEngine {
       const field = this.form.elements.namedItem(name);
       if (field) field.value = value;
     });
+    this.root.querySelector('.journal-advanced').open = true;
     if (!this.flushDraft()) return;
     this.setEditingState(true);
     this.setSaveState('Editando memória', 'saving');
@@ -876,7 +902,14 @@ export class JournalEngine {
     const status = this.root.querySelector('[data-journal-network]');
     if (!status) return;
     const online = navigator.onLine !== false;
-    status.textContent = online ? 'Disponível offline' : 'Sem conexão · escreva normalmente';
+    status.textContent = online ? 'Disponível offline · sync só com consentimento' : 'Sem conexão · escreva normalmente';
     status.dataset.online = String(online);
+  }
+
+  destroy() {
+    clearTimeout(this.draftTimer);
+    if (this.searchFrame) cancelAnimationFrame(this.searchFrame);
+    this.abort?.abort();
+    globalThis.removeEventListener?.('divina:account-sync-applied', this.onAccountSync);
   }
 }

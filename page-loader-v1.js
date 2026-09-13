@@ -115,11 +115,14 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
   let deferredTimer=0;
 
   const ensureJournal=()=>once(sharedTasks,'journal',async()=>{
-    const [,module]=await Promise.all([
-      ensureStyle('divinaJournalRebirthV317','journal-world-v317.css?v=539'),
-      import('./journal-world-v317.js?v=539')
+    const [,,module]=await Promise.all([
+      ensureStyle('divinaJournalRebirthV317','journal-world-v317.css?v=556'),
+      ensureStyle('divinaJournalMirrorSupremeV556','journal-mirror-supreme-v556.css?v=556'),
+      import('./journal-world-v317.js?v=556')
     ]);
-    return new module.JournalWorldV317($('#journalApp'));
+    const instance=new module.JournalWorldV317($('#journalApp'),{orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme});
+    globalThis.divinaJournalWorldV317=instance;
+    return instance;
   });
   const remember=entry=>ensureJournal().then(journal=>journal?.add?.(entry)).catch(()=>{});
 
@@ -352,8 +355,9 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       import('./school-world-v306.js?v=555')
     ]),
     journal:()=>Promise.all([
-      ensureStyle('divinaJournalRebirthV317','journal-world-v317.css?v=539'),
-      import('./journal-world-v317.js?v=539')
+      ensureStyle('divinaJournalRebirthV317','journal-world-v317.css?v=556'),
+      ensureStyle('divinaJournalMirrorSupremeV556','journal-mirror-supreme-v556.css?v=556'),
+      import('./journal-world-v317.js?v=556')
     ]),
     skins:()=>Promise.all([
       ensureStyle('divinaCrownRebirthV318','skins-premium-world-v318.css?v=546'),

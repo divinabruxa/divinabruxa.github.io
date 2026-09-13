@@ -1,7 +1,7 @@
 /* DIVINA BRUXA — CONTA REAL CONTROLADA V201 */
 import { store, escapeHTML } from './storage.js';
 import { normalizeSchoolState, SCHOOL_STORAGE_KEY } from './school-policy.js?v=186';
-import { normalizeJournalEntries, mergeJournalEntries, JOURNAL_STORAGE_KEY } from './journal-policy.js?v=187';
+import { normalizeJournalEntries, mergeJournalEntries, JOURNAL_STORAGE_KEY } from './journal-policy.js?v=556';
 import { createAccountDailyRecord, DAILY_STORAGE_KEY } from './daily-policy.js?v=189';
 import { accountStateTextV201 as stateText } from './account-state-copy-v201.js?v=201';
 

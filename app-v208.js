@@ -1,6 +1,6 @@
-/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 7/14 · V555
-   Escola organizada em três jornadas e Biblioteca convertida em portal vivo.
-   Todo o universo aprovado até a V554 permanece íntegro. */
+/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 8/14 · V556
+   Diário privado organizado e Espelho agregado, leve e não diagnóstico.
+   Todo o universo aprovado até a V555 permanece íntegro. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -14,11 +14,11 @@ import { installRealityLifecycleV511 } from './reality-lifecycle-v511.js?v=511';
 import { createLivingUniverseV524 } from './living-universe-core-v524.js?v=537-no-fire';
 import { installSkinPerformanceCoreV518 } from './skin-performance-core-v518.js?v=535-mobile-fluidity';
 import { AuthClientV201 as AuthClient } from './auth-client-v201.js?v=532';
-import { AccountEngineV201 } from './account-engine-v201.js?v=201';
+import { AccountEngineV201 } from './account-engine-v201.js?v=556-journal-consent';
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=534-consultations-anchor';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=555-school-library';
+import { createPageLoader } from './page-loader-v1.js?v=556-journal-mirror';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -65,11 +65,11 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=555')
+const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=556')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
-    document.documentElement.dataset.pwaError = 'v555';
+    document.documentElement.dataset.pwaError = 'v556';
   });
 
 const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
@@ -498,14 +498,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v555-app';
+  window.__divinaSWBootstrap = 'v556-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=555', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=556', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v555';
+        document.documentElement.dataset.releaseEpoch = 'v556';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V555 registrado');
+        console.info('[Divina] PWA V556 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -1268,6 +1268,33 @@ window.divinaSchoolLibraryReleaseV555 = Object.freeze({
   })
 });
 
+window.divinaJournalMirrorReleaseV556 = Object.freeze({
+  version:556,
+  plan:'4.0-fluidity-supreme',
+  macroStage:'8-of-14',
+  title:'Diário privado e Espelho agregado',
+  preserves:'V555',
+  iphonePriority:true,
+  privateByDefault:true,
+  localFirst:true,
+  autosaveDraft:true,
+  timelinePageSize:12,
+  timelineFullImageRequests:0,
+  mirrorAggregateOnly:true,
+  mirrorDiagnostic:false,
+  adminBodyAccess:false,
+  analyticsText:false,
+  whitSilentRead:false,
+  automaticCheckIn:false,
+  canonicalOrb:true,
+  permanentAnimationLoops:0,
+  status:()=>Object.freeze({
+    release:'V556',
+    journal:globalThis.divinaJournalWorldV317?.status?.()||null,
+    orb:supremeOrb?.snapshot?.()||null
+  })
+});
+
 window.divinaResponsiveEnchantmentReleaseV533 = Object.freeze({
   version:533,
   macroStage:'9-of-10',
@@ -1592,10 +1619,10 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V555',
+        release:'V556',
         supremePlan:'4.0-fluidity-supreme',
         supremePlanMacroStages:14,
-        currentMacroStage:'7-of-14',
+        currentMacroStage:'8-of-14',
         worldTruth:'v535',
         worldTruthRoutes:17,
         orbFluidNavigation:'v549',
@@ -1656,6 +1683,17 @@ const awaken = async () => {
         libraryPageSize:18,
         libraryCanonicalOrb:true,
         libraryGridFullImageRequests:0,
+        journalMirrorSupreme:'v556',
+        journalPrivateByDefault:true,
+        journalTimelinePageSize:12,
+        journalTimelineFullImageRequests:0,
+        journalCanonicalOrb:true,
+        journalAutomaticCheckIn:false,
+        mirrorAggregateOnly:true,
+        mirrorDiagnostic:false,
+        adminJournalBodyAccess:false,
+        analyticsJournalText:false,
+        whitJournalSilentRead:false,
         tarotFreeUniversePausedDuringCardFlight:true,
         vitalityBus:'v536',
         livingGrammar:'v536',

@@ -1,8 +1,8 @@
-/* DIVINA BRUXA 4.0 — COMPATIBILIDADE PWA V196 → AUTORIDADE V555
+/* DIVINA BRUXA 4.0 — COMPATIBILIDADE PWA V196 → AUTORIDADE V556
    Páginas públicas antigas usam este caminho. Toda instalação, atualização,
-   offline, acessibilidade e recuperação agora passam pelo corte V555. */
+   offline, acessibilidade e recuperação agora passam pelo corte V556. */
 
-import { initializePwaV324 } from './pwa-world-v324.js?v=555';
+import { initializePwaV324 } from './pwa-world-v324.js?v=556';
 
 export const initializeWorldPwaV196=()=>initializePwaV324();
 

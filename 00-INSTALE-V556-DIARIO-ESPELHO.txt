@@ -1,0 +1,26 @@
+DIVINA BRUXA V556 — PLANO 4.0 — MACROETAPA 8/14
+
+PACOTE INCREMENTAL SOBRE A V555 JÁ INSTALADA.
+
+No GitHub pelo iPhone:
+1. Use Add file > Upload files.
+2. Envie todos os arquivos soltos da raiz deste ZIP.
+3. Confirme Commit changes.
+
+Esta versão:
+- reorganiza o Diário para escrever primeiro e revelar conexões opcionais quando você quiser;
+- recolhe filtros avançados para reduzir ruído e manter a ação principal imediata;
+- mostra 12 memórias por vez e permite abrir as próximas sem renderizar todo o histórico;
+- usa o atlas leve do Tarot na linha do tempo, sem solicitar imagens completas das cartas;
+- preserva busca, favoritos, calendário, revisões, vínculos, importação, mescla e cópia privada;
+- acrescenta Biblioteca como origem real das memórias salvas;
+- transforma o Espelho em leitura agregada local, sem diagnóstico;
+- impede que Admin, analytics ou Whit recebam textos, humores, cartas ou etiquetas automaticamente;
+- mantém a sincronização do Diário desligada por padrão e exige consentimento explícito na Conta;
+- mantém todos os rascunhos somente no aparelho, mesmo quando a sincronização é ativada;
+- corrige o ritmo para registrar presença somente por escolha e contar dias consecutivos reais;
+- conduz escrita, Espelho e calendário pela única Orbe canônica do site;
+- remove loops permanentes, rolagem animada e blur pesado desta experiência;
+- mantém Reduced Motion, alvos de toque e composição específica para iPhone.
+
+Não apague CNAME, cartas, imagens ou dados locais. Não envie a pasta do ZIP.

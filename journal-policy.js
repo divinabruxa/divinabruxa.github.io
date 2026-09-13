@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — POLÍTICA DO DIÁRIO E ESPELHO CELESTIAL V187
+/* DIVINA BRUXA 4.0 — MACROETAPA 8/14 · POLÍTICA DO DIÁRIO E ESPELHO V556
    Memória privada local, portabilidade verificável e consentimento por entrada. */
 
 export const JOURNAL_STORAGE_KEY = 'journal';
@@ -9,6 +9,7 @@ export const JOURNAL_SCHEMA_VERSION = '7.0.0';
 export const JOURNAL_BACKUP_KIND = 'private-journal-portability-copy';
 export const JOURNAL_MAX_ENTRIES = 2000;
 export const JOURNAL_MAX_REVISIONS = 30;
+export const JOURNAL_PAGE_SIZE = 12;
 
 export const JOURNAL_PERIODS = Object.freeze([
   Object.freeze({ id: '7', label: '7 dias', days: 7 }),
@@ -22,7 +23,8 @@ export const JOURNAL_TYPES = Object.freeze([
   Object.freeze({ id: 'note', label: 'Reflexão livre' }),
   Object.freeze({ id: 'daily', label: 'Carta do Dia' }),
   Object.freeze({ id: 'spread', label: 'Tiragem' }),
-  Object.freeze({ id: 'lesson', label: 'Aula da Escola' })
+  Object.freeze({ id: 'lesson', label: 'Aula da Escola' }),
+  Object.freeze({ id: 'library', label: 'Biblioteca' })
 ]);
 
 export const JOURNAL_MOODS = Object.freeze([
@@ -198,7 +200,24 @@ export function localMirrorData(entries, today = journalDateKey(new Date())) {
   });
 }
 
-export const publicMirrorData = localMirrorData;
+// Projeção autorizada para analytics/Admin: somente contagens estruturais.
+// Humores, cartas, etiquetas e qualquer corpo continuam exclusivamente locais.
+export function publicMirrorData(entries) {
+  const local = localMirrorData(entries);
+  return Object.freeze({
+    total:local.total,
+    favorites:local.favorites,
+    revisions:local.revisions,
+    linked:local.linked,
+    reviewsDue:local.reviewsDue,
+    typeCounts:local.typeCounts,
+    dayCounts:local.dayCounts,
+    includesText:false,
+    includesMood:false,
+    includesCards:false,
+    includesTags:false
+  });
+}
 
 export function privateJournalExport(entries) {
   return {
