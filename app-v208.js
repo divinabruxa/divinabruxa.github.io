@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 10/14 · V544
-   Biblioteca Pública, 78 cartas, guias e busca na mesma Orbe.
+/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 11/14 · V545
+   Paridade pública PT-BR, inglês e espanhol na mesma Orbe.
    Fluidez, privacidade, Tarot e todas as travas anteriores permanecem íntegros. */
 
 import { CONFIG } from './config-v200.js?v=200';
@@ -49,6 +49,7 @@ import { createWhitPresenceDeepV540 } from './whit-presence-deep-v540.js?v=540';
 import { createExperienceDepthCoreV541 } from './experience-depth-core-v541.js?v=541';
 import { createAmazonStoreCoreV543 } from './amazon-store-core-v543.js?v=543';
 import { createPublicLibraryCoreV544 } from './public-library-core-v544.js?v=544';
+import { createInternationalParityCoreV545 } from './international-parity-core-v545.js?v=545';
 
 const $ = selector => document.querySelector(selector);
 
@@ -62,7 +63,7 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=544')
+const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=545')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
@@ -431,6 +432,10 @@ const publicLibrary = safely('Biblioteca Pública V544', () =>
   createPublicLibraryCoreV544()
 );
 
+const internationalParity = safely('Paridade Internacional V545', () =>
+  createInternationalParityCoreV545()
+);
+
 const realityLifecycle = safely('Motor Universal das Realidades V511', () =>
   installRealityLifecycleV511({ core:supremeOrb })
 );
@@ -478,12 +483,12 @@ navigator.serviceWorker?.addEventListener('message', event => {
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV537) {
   window.__divinaSWBootstrapV537 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=544', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=545', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v544';
+        document.documentElement.dataset.releaseEpoch = 'v545';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V544 registrado');
+        console.info('[Divina] PWA V545 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -516,6 +521,7 @@ window.orbe = {
   vitality:vitalityBus,
   grammar:livingGrammar,
   discovery:originDiscovery,
+  international:internationalParity,
   observatory:null,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -953,6 +959,25 @@ window.divinaPublicLibraryReleaseV544 = Object.freeze({
   environment:'staging'
 });
 
+window.divinaInternationalParityReleaseV545 = Object.freeze({
+  version:545,
+  macroStage:'11-of-14',
+  title:'Paridade Pública PT-BR, Inglês e Espanhol',
+  core:internationalParity,
+  audit:()=>internationalParity?.audit?.()||null,
+  status:()=>internationalParity?.status?.()||null,
+  languages:3,
+  publicWorlds:9,
+  localizedCardPages:156,
+  totalCardPages:234,
+  reversedCards:false,
+  oneCanonicalOrb:true,
+  independentOrbEngines:0,
+  privateContentReads:0,
+  permanentAnimationLoops:0,
+  environment:'staging'
+});
+
 window.divinaOwnerObservatoryReleaseV532 = Object.freeze({
   version:532,
   macroStage:'8-of-10',
@@ -1299,10 +1324,10 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V544',
+        release:'V545',
         supremePlan:'3.0-universo-vivo',
         supremePlanMacroStages:14,
-        currentMacroStage:'10-of-14',
+        currentMacroStage:'11-of-14',
         worldTruth:'v535',
         worldTruthRoutes:17,
         orbFluidNavigation:'v535',
@@ -1467,6 +1492,16 @@ const awaken = async () => {
         publicLibraryPrivateSearchReads:0,
         publicLibraryMutationObservers:0,
         publicLibraryPermanentAnimationLoops:0,
+        internationalParity:'v545',
+        internationalParityMacroStage:'11-of-14',
+        internationalParityLanguages:3,
+        internationalParityPublicWorlds:9,
+        internationalParityLocalizedCardPages:156,
+        internationalParityTotalCardPages:234,
+        internationalParityReversedCards:false,
+        internationalParityIndependentOrbEngines:0,
+        internationalParityPrivateContentReads:0,
+        internationalParityPermanentAnimationLoops:0,
         ownerObservatory:'v532',
         ownerObservatoryMacroStage:'8-of-10',
         ownerObservatoryRoute:'admin',

@@ -1,6 +1,7 @@
-/* DIVINA BRUXA V196 — searchable 78-card library with offline atlas. */
+/* DIVINA BRUXA V545 — searchable 78-card library with deep localized pages. */
 import { CARDS, REQUIRED_ORIENTATION } from './tarot-data.js?v=195';
 import { applyInternationalCardImageV196 } from './international-card-image-v196.js?v=196';
+import { internationalCardHrefV545 } from './international-card-content-v545.js?v=545';
 
 const root = typeof document === 'undefined' ? null : document.querySelector('[data-international-library]');
 
@@ -127,7 +128,11 @@ if (root) {
       title.textContent = card.names[language];
       const note = document.createElement('p');
       note.textContent = noteFor(card);
-      copy.append(meta, title, note);
+      const deepLink = document.createElement('a');
+      deepLink.href = internationalCardHrefV545(card, language);
+      deepLink.textContent = language === 'es' ? 'Leer significado completo →' : 'Read the full meaning →';
+      deepLink.setAttribute('aria-label', `${deepLink.textContent.replace(' →','')}: ${card.names[language]}`);
+      copy.append(meta, title, note, deepLink);
       article.append(image, copy);
       fragment.append(article);
     });

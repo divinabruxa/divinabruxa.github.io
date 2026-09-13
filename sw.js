@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 3.0 — BIBLIOTECA PÚBLICA · MACROETAPA 10/14 · V544
+/* DIVINA BRUXA 3.0 — PARIDADE INTERNACIONAL · MACROETAPA 11/14 · V545
    Cache seletivo e versionado. Nunca guarda Auth, respostas online da Whit, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=544;
+const VERSION=545;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v544-shell';
-const CONTENT_CACHE='divina-bruxa-v544-content';
-const IMAGE_CACHE='divina-bruxa-v544-images';
-const OFFLINE_CACHE='divina-bruxa-v544-offline-core';
+const SHELL_CACHE='divina-bruxa-v545-shell';
+const CONTENT_CACHE='divina-bruxa-v545-content';
+const IMAGE_CACHE='divina-bruxa-v545-images';
+const OFFLINE_CACHE='divina-bruxa-v545-offline-core';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE]);
 
 const REQUIRED_SHELL=Object.freeze([
@@ -27,6 +27,7 @@ const REQUIRED_SHELL=Object.freeze([
   './experience-depth-core-v541.js','./experience-depth-core-v541.css',
   './amazon-store-core-v543.js','./amazon-store-core-v543.css',
   './public-library-core-v544.js','./public-library-core-v544.css',
+  './international-parity-core-v545.js','./international-parity-v545.css','./international-card-content-v545.js',
   './tarot-universe-core-v528.js','./tarot-universe-core-v528.css',
   './wisdom-universe-core-v529.js','./wisdom-universe-core-v529.css',
   './wisdom-depth-core-v539.js','./wisdom-depth-core-v539.css',
@@ -79,7 +80,8 @@ const APP_DEPENDENCIES=Object.freeze([
   './biblioteca-universal-v184.css','./tiragens-definitivas-v185.css','./escola-definitiva-v186.css',
   './diario-definitivo-v187.css','./consultations-definitive-v188.css','./account-secure-v201.css',
   './orbe-ai-governada-v190.css','./premium-billing-v191.css','./editorial-universe-v192.css',
-  './international-v195.css'
+  './international-v195.css','./international-parity-v545.css','./international-card-content-v545.js',
+  './international-library-v195.js','./international-card-image-v196.js','./international-tarot-v195.js','./international-home-v195.js'
 ]);
 
 const REBIRTH_WARM=Object.freeze([
@@ -142,11 +144,13 @@ const PUBLIC_OFFLINE_PAGES=Object.freeze([
   './contato.html','./contact.html','./contacto.html',
   './instalar-app.html','./install-app.html','./instalar-aplicacion.html',
   './loja-mistica.html','./musica.html','./de-frente-com-o-tarot.html',
+  './tarot-spreads.html','./music.html','./face-to-face-with-tarot.html','./mystic-store.html',
+  './tiradas-tarot.html','./musica-tarot.html','./de-frente-con-el-tarot.html','./tienda-mistica.html',
   './privacidade-e-dados.html'
 ]);
 
-const ENGLISH_PATHS=new Set(['english.html','free-tarot-reading.html','tarot-card-meanings.html','tarot-school.html','tarot-consultations.html','tarot-ethics.html','contact.html','install-app.html']);
-const SPANISH_PATHS=new Set(['espanol.html','tarot-libre.html','significados-cartas-tarot.html','escuela-tarot.html','consultas-tarot.html','etica-tarot.html','contacto.html','instalar-aplicacion.html']);
+const ENGLISH_PATHS=new Set(['english.html','free-tarot-reading.html','tarot-card-meanings.html','tarot-school.html','tarot-consultations.html','tarot-ethics.html','contact.html','install-app.html','tarot-spreads.html','music.html','face-to-face-with-tarot.html','mystic-store.html']);
+const SPANISH_PATHS=new Set(['espanol.html','tarot-libre.html','significados-cartas-tarot.html','escuela-tarot.html','consultas-tarot.html','etica-tarot.html','contacto.html','instalar-aplicacion.html','tiradas-tarot.html','musica-tarot.html','de-frente-con-el-tarot.html','tienda-mistica.html']);
 
 const absoluteRequest=asset=>new Request(new URL(asset,self.registration.scope),{credentials:'same-origin',cache:'reload'});
 
@@ -236,12 +240,12 @@ const appShellIsValid=async(url,response)=>{
   const isShell=pathname===new URL('./',self.registration.scope).pathname||pathname.endsWith('/index.html');
   if(!isShell)return true;
   const html=await response.clone().text();
-  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=541/.test(html);
+  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=545/.test(html);
 };
 
 const offlinePageFor=async url=>{
   const name=url.pathname.split('/').pop()||'';
-  const fallback=ENGLISH_PATHS.has(name)?'./offline-en.html':SPANISH_PATHS.has(name)?'./offline-es.html':'./offline.html';
+  const fallback=(ENGLISH_PATHS.has(name)||name.startsWith('en-'))?'./offline-en.html':(SPANISH_PATHS.has(name)||name.startsWith('es-'))?'./offline-es.html':'./offline.html';
   return matchAny(absoluteRequest(fallback));
 };
 
