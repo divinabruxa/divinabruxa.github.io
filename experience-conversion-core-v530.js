@@ -82,7 +82,7 @@ function installStyle() {
   const link = document.createElement('link');
   link.id = STYLE_ID;
   link.rel = 'stylesheet';
-  link.href = './experience-conversion-core-v530.css?v=530';
+  link.href = './experience-conversion-core-v530.css?v=541-depth';
   document.head.append(link);
 }
 
@@ -448,6 +448,7 @@ export class ExperienceConversionCoreV530 {
     this.musicRows = [];
     this.musicCatalog = mergeMusicCatalogV530(this.config.spotifyAlbums || [], []);
     this.activeAlbumId = this.musicCatalog[0]?.spotifyId || '';
+    this.loadedAlbumId = '';
     this.adminMusic = null;
     installStyle();
     this.bind();
@@ -470,7 +471,6 @@ export class ExperienceConversionCoreV530 {
 
     document.addEventListener('click', event => this.handleClick(event), { capture:true, signal });
     document.addEventListener('pointerdown', event => this.handlePointer(event, true), { passive:true, signal });
-    document.addEventListener('pointermove', event => this.handlePointer(event, false), { passive:true, signal });
     globalThis.addEventListener?.('resize', () => this.scheduleRefresh(), { passive:true, signal });
     globalThis.addEventListener?.('pageshow', () => this.scheduleRefresh(), { passive:true, signal });
 
@@ -497,6 +497,12 @@ export class ExperienceConversionCoreV530 {
     if (albumButton) {
       event.preventDefault();
       this.selectAlbum(albumButton.dataset.ec530Album, true);
+      return;
+    }
+    const playerButton = event.target?.closest?.('[data-ec530-load-player]');
+    if (playerButton) {
+      event.preventDefault();
+      this.loadAlbumPlayer(playerButton.dataset.ec530LoadPlayer);
       return;
     }
     const engineService = event.target?.closest?.('#consultationApp [data-service]');
@@ -573,7 +579,7 @@ export class ExperienceConversionCoreV530 {
       nav.setAttribute('aria-label', 'Quatro experiências conectadas pela mesma Orbe');
       nav.innerHTML = `
         <span class="ec530-nav__light" aria-hidden="true"></span>
-        <header class="ec530-nav__head"><span aria-hidden="true">✦</span><div><small>MACROETAPA 6/10 · MESMA ORBE</small><b>Experiências, Conteúdo e Conversão</b></div><em>V530</em></header>
+        <header class="ec530-nav__head"><span aria-hidden="true">✦</span><div><small>PLANO 3.0 · MACROETAPA 7/14 · MESMA ORBE</small><b>Experiências, Conteúdo e Conversão</b></div><em>V541</em></header>
         <div class="ec530-nav__paths">${ROUTES.map(id => {
           const item = PROFILE[id];
           return `<button type="button" data-ec530-route="${id}" aria-label="Viajar para ${safe(item.title)}"><span aria-hidden="true">${item.sigil}</span><span><small>${safe(item.eyebrow)}</small><b>${safe(item.title)}</b><em>${safe(item.status)}</em></span></button>`;
@@ -705,6 +711,7 @@ export class ExperienceConversionCoreV530 {
       clearTimeout(timer);
       this.musicLoading = false;
       if (!this.musicCatalog.some(album => album.spotifyId === this.activeAlbumId)) this.activeAlbumId = this.musicCatalog[0]?.spotifyId || '';
+      if (!this.musicCatalog.some(album => album.spotifyId === this.loadedAlbumId)) this.loadedAlbumId = '';
       this.renderMusic();
       document.dispatchEvent(new CustomEvent('divina:music-world-ready-v530', { detail:Object.freeze({
         release:RELEASE, albums:this.musicCatalog.length, publishedRows:this.musicRows.length,
@@ -746,6 +753,11 @@ export class ExperienceConversionCoreV530 {
   }
 
   playerMarkup(album) {
+    if (this.loadedAlbumId !== album.spotifyId) return `<article id="ec530-album-player" role="tabpanel" tabindex="-1" aria-labelledby="ec530-album-tab-${safe(album.spotifyId)}">
+      <header><span aria-hidden="true">♫</span><div><small>${safe(album.artist)}</small><h4>${safe(album.name)}</h4><p>${safe(album.description || 'Lançamento oficial disponível no Spotify.')}</p></div></header>
+      <div class="ec530-music__player-rest"><span aria-hidden="true">◇</span><p><b>Player adormecido.</b><small>Carregue somente quando quiser ouvir. Assim a página abre mais leve e nada toca sozinho.</small></p><button type="button" data-ec530-load-player="${safe(album.spotifyId)}" data-requires-online>CARREGAR PLAYER DO SPOTIFY</button></div>
+      <footer><span>${album.releaseDate ? safe(formatDate(album.releaseDate)) : 'Lançamento oficial'}</span><a href="${safe(album.spotifyUrl)}" target="_blank" rel="noopener noreferrer">ABRIR NO SPOTIFY <b aria-hidden="true">↗</b></a></footer>
+    </article>`;
     return `<article id="ec530-album-player" role="tabpanel" tabindex="-1" aria-labelledby="ec530-album-tab-${safe(album.spotifyId)}">
       <header><span aria-hidden="true">♫</span><div><small>${safe(album.artist)}</small><h4>${safe(album.name)}</h4><p>${safe(album.description || 'Lançamento oficial disponível no Spotify.')}</p></div></header>
       <iframe title="Ouvir ${safe(album.name)} de ${safe(album.artist)} no Spotify" src="https://open.spotify.com/embed/album/${encodeURIComponent(album.spotifyId)}?utm_source=generator&theme=0" loading="lazy" allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>
@@ -773,9 +785,20 @@ export class ExperienceConversionCoreV530 {
   selectAlbum(id, focusPlayer = false) {
     if (!this.musicCatalog.some(album => album.spotifyId === id)) return false;
     this.activeAlbumId = id;
+    if (focusPlayer) this.loadedAlbumId = id;
     this.renderMusic();
     this.orbCore?.pulse?.('music-choice', { intensity:.64, spotifyAlbumId:id });
     if (focusPlayer) document.getElementById('ec530-album-player')?.focus({ preventScroll:true });
+    return true;
+  }
+
+  loadAlbumPlayer(id) {
+    if (!this.musicCatalog.some(album => album.spotifyId === id)) return false;
+    this.activeAlbumId = id;
+    this.loadedAlbumId = id;
+    this.renderMusic();
+    this.orbCore?.pulse?.('music-player', { intensity:.42, spotifyAlbumId:id });
+    document.getElementById('ec530-album-player')?.focus({ preventScroll:true });
     return true;
   }
 

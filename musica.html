@@ -22,7 +22,7 @@
     <noscript><p>Ative o JavaScript para escolher e carregar o player oficial do Spotify.</p></noscript>
     <a class="editorial-back" href="./">← Voltar para a Orbe</a>
   </main>
-  <script type="module">import { CONFIG } from './config.js'; import { MediaEngineV192 } from './media-engine-v192.js?v=192'; import { EditorialJourneyV192 } from './editorial-journey-v192.js?v=192'; const root=document.querySelector('#musicApp'); new MediaEngineV192({music:root},CONFIG); new EditorialJourneyV192(root,'music');</script>
+  <script type="module">import { CONFIG } from './config.js'; import { MediaEngineV192 } from './media-engine-v192.js?v=541-lazy-player'; import { EditorialJourneyV192 } from './editorial-journey-v192.js?v=192'; import { createExperienceDepthCoreV541 } from './experience-depth-core-v541.js?v=541'; const root=document.querySelector('#musicApp'); new MediaEngineV192({music:root},CONFIG); new EditorialJourneyV192(root,'music'); createExperienceDepthCoreV541({config:CONFIG});</script>
   <script type="module" src="pwa-world-v196.js?v=196"></script>
 </body>
 </html>

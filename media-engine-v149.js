@@ -14,6 +14,7 @@ export class MediaEngineV149{
     this.roots=roots||{};
     this.config=config||{};
     this.activeAlbumId='';
+    this.loadedAlbumId='';
     this.renderMusic();
     this.renderVideos();
   }
@@ -79,14 +80,19 @@ export class MediaEngineV149{
     player.tabIndex=-1;
     player.setAttribute('role','tabpanel');
     player.setAttribute('aria-labelledby',`album-tab-${album.id}`);
-    player.innerHTML=`<div class="media-v149-player-identity"><span class="media-v149-disc" aria-hidden="true"><i></i></span><div><p>${escapeHTML(album.artist)}</p><h4>${escapeHTML(album.name)}</h4><small>Álbum no Spotify</small></div></div><div class="media-v149-wave" aria-hidden="true">${Array.from({length:18},(_,index)=>`<i style="--wave:${(index%7)+2}"></i>`).join('')}</div><iframe title="Ouvir ${escapeHTML(album.name)} de ${escapeHTML(album.artist)} no Spotify" src="https://open.spotify.com/embed/album/${encodeURIComponent(album.id)}?utm_source=generator&theme=0" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe><a href="${escapeHTML(safeMediaURL(`https://open.spotify.com/album/${album.id}`))}" target="_blank" rel="noopener noreferrer">ABRIR ÁLBUM NO SPOTIFY <span aria-hidden="true">↗</span></a>`;
+    if(this.loadedAlbumId!==album.id){
+      player.innerHTML=`<div class="media-v149-player-identity"><span class="media-v149-disc" aria-hidden="true"><i></i></span><div><p>${escapeHTML(album.artist)}</p><h4>${escapeHTML(album.name)}</h4><small>Álbum no Spotify</small></div></div><div class="media-v149-player-rest"><span aria-hidden="true">◇</span><p><b>Player adormecido.</b><small>Escolha carregar somente quando quiser ouvir. Nada começa sozinho.</small></p><button type="button" data-media-load-album="${escapeHTML(album.id)}" data-requires-online>CARREGAR PLAYER DO SPOTIFY</button></div><a href="${escapeHTML(safeMediaURL(`https://open.spotify.com/album/${album.id}`))}" target="_blank" rel="noopener noreferrer">ABRIR ÁLBUM NO SPOTIFY <span aria-hidden="true">↗</span></a>`;
+      return;
+    }
+    player.innerHTML=`<div class="media-v149-player-identity"><span class="media-v149-disc" aria-hidden="true"><i></i></span><div><p>${escapeHTML(album.artist)}</p><h4>${escapeHTML(album.name)}</h4><small>Álbum no Spotify</small></div></div><div class="media-v149-wave" aria-hidden="true">${Array.from({length:18},(_,index)=>`<i style="--wave:${(index%7)+2}"></i>`).join('')}</div><iframe title="Ouvir ${escapeHTML(album.name)} de ${escapeHTML(album.artist)} no Spotify" src="https://open.spotify.com/embed/album/${encodeURIComponent(album.id)}?utm_source=generator&theme=0" loading="lazy" allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe><a href="${escapeHTML(safeMediaURL(`https://open.spotify.com/album/${album.id}`))}" target="_blank" rel="noopener noreferrer">ABRIR ÁLBUM NO SPOTIFY <span aria-hidden="true">↗</span></a>`;
   }
 
   bindMusic(){
     const root=this.roots.music;
     root?.querySelectorAll('[data-album]').forEach(button=>button.addEventListener('click',()=>{
-      if(button.dataset.album===this.activeAlbumId)return;
+      if(button.dataset.album===this.activeAlbumId&&this.loadedAlbumId===this.activeAlbumId)return;
       this.activeAlbumId=button.dataset.album;
+      this.loadedAlbumId=this.activeAlbumId;
       root.querySelectorAll('[data-album]').forEach(tab=>{
         const active=tab.dataset.album===this.activeAlbumId;
         tab.classList.toggle('is-active',active);
@@ -96,6 +102,12 @@ export class MediaEngineV149{
       this.renderAlbumPlayer();
       root.querySelector('[data-album-player]')?.focus({preventScroll:true});
     }));
+    root?.querySelector('[data-media-load-album]')?.addEventListener('click',event=>{
+      this.activeAlbumId=event.currentTarget.dataset.mediaLoadAlbum;
+      this.loadedAlbumId=this.activeAlbumId;
+      this.renderAlbumPlayer();
+      root.querySelector('[data-album-player]')?.focus({preventScroll:true});
+    });
     root?.querySelector('.media-v149-album-tabs')?.addEventListener('keydown',event=>{
       if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key))return;
       const tabs=[...root.querySelectorAll('[data-album]')];

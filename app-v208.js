@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 6/14 · V540
-   Whit local e camada online governada na mesma Orbe, com contexto consentido.
+/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 7/14 · V541
+   Consultas, Loja, Música e Vídeos aprofundados na mesma Orbe.
    Fluidez, privacidade, Tarot e todas as travas anteriores permanecem íntegros. */
 
 import { CONFIG } from './config-v200.js?v=200';
@@ -35,7 +35,7 @@ import { createWhitSilentPresenceV316 } from './whit-silent-presence-v316.js?v=3
 import { createWhitCoreSupremeV527 } from './whit-core-supreme-v527.js?v=527';
 import { createTarotUniverseCoreV528 } from './tarot-universe-core-v528.js?v=528';
 import { createWisdomUniverseCoreV529 } from './wisdom-universe-core-v529.js?v=529';
-import { createExperienceConversionCoreV530 } from './experience-conversion-core-v530.js?v=530';
+import { createExperienceConversionCoreV530 } from './experience-conversion-core-v530.js?v=541-depth';
 import { createIdentityRightsCoreV531 } from './identity-rights-core-v531.js?v=531';
 import { createResponsiveEnchantmentCoreV533 } from './responsive-enchantment-core-v533.js?v=533';
 import { createQaSupremeCoreV534 } from './qa-supreme-core-v534.js?v=534';
@@ -46,6 +46,7 @@ import { createLivingGrammarV536 } from './living-grammar-v536.js?v=536';
 import { createOriginDiscoveryV537 } from './origin-discovery-v537.js?v=537';
 import { createWisdomDepthCoreV539 } from './wisdom-depth-core-v539.js?v=539';
 import { createWhitPresenceDeepV540 } from './whit-presence-deep-v540.js?v=540';
+import { createExperienceDepthCoreV541 } from './experience-depth-core-v541.js?v=541';
 
 const $ = selector => document.querySelector(selector);
 
@@ -59,7 +60,7 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=540')
+const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=541')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
@@ -402,6 +403,15 @@ const experienceConversion = safely('Experiências, Conteúdo e Conversão V530'
   })
 );
 
+const experienceDepth = safely('Experiências, Conteúdo e Conversão V541', () =>
+  createExperienceDepthCoreV541({
+    go,
+    orbCore:supremeOrb,
+    base:experienceConversion,
+    config:CONFIG
+  })
+);
+
 const identityRights = safely('Identidade, Direitos e Personalização V531', () =>
   createIdentityRightsCoreV531({
     go,
@@ -430,7 +440,7 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V537 = 540;
+const RELEASE_EPOCH_V537 = 541;
 const releaseReloadKeyV537 = `divina-release-reload-${RELEASE_EPOCH_V537}`;
 const reloadForNewReleaseV537 = version => {
   if (Number(version || 0) <= RELEASE_EPOCH_V537) return false;
@@ -458,12 +468,12 @@ navigator.serviceWorker?.addEventListener('message', event => {
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV537) {
   window.__divinaSWBootstrapV537 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=540', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=541', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v540';
+        document.documentElement.dataset.releaseEpoch = 'v541';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V540 registrado');
+        console.info('[Divina] PWA V541 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -487,6 +497,7 @@ window.orbe = {
   wisdom:wisdomUniverse,
   wisdomDepth,
   experience:experienceConversion,
+  experienceDepth,
   identity:identityRights,
   responsive:responsiveEnchantment,
   qa:qaSupreme,
@@ -824,6 +835,33 @@ window.divinaExperienceConversionV530 = Object.freeze({
   permanentAnimationLoops:0
 });
 
+window.divinaExperienceReleaseV541 = Object.freeze({
+  version:541,
+  macroStage:'7-of-14',
+  title:'Experiências, Conteúdo e Conversão',
+  core:experienceDepth,
+  contract:() => experienceDepth?.contract?.() || null,
+  status:() => experienceDepth?.status?.() || null,
+  worlds:['consultations','store','music','videos'],
+  consultationServices:4,
+  consultationPriceCents:[50000,50000,30000,15000],
+  consultationChannel:'email-only',
+  consultationRealBilling:false,
+  storeAssociateTag:'orbedasrealid-20',
+  storeCheckoutInternal:false,
+  musicAlbums:2,
+  musicAutoplay:false,
+  musicPlayerLazy:true,
+  inventedVideos:0,
+  oneCanonicalOrb:true,
+  independentOrbEngines:0,
+  privateContentReads:0,
+  permanentAnimationLoops:0,
+  environment:'staging',
+  productionPublish:false,
+  realBilling:false
+});
+
 window.divinaIdentityRightsV531 = Object.freeze({
   version:531,
   core:identityRights,
@@ -1102,6 +1140,7 @@ window.divinaOrbV208 = Object.freeze({
   wisdom:wisdomUniverse,
   wisdomDepth,
   experience:experienceConversion,
+  experienceDepth,
   identity:identityRights,
   responsive:responsiveEnchantment,
   qa:qaSupreme,
@@ -1124,6 +1163,7 @@ window.divinaOrbSupremeV501 = Object.freeze({
   tarot:tarotUniverse,
   wisdom:wisdomUniverse,
   experience:experienceConversion,
+  experienceDepth,
   identity:identityRights,
   responsive:responsiveEnchantment,
   qa:qaSupreme,
@@ -1200,10 +1240,10 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V540',
+        release:'V541',
         supremePlan:'3.0-universo-vivo',
         supremePlanMacroStages:14,
-        currentMacroStage:'6-of-14',
+        currentMacroStage:'7-of-14',
         worldTruth:'v535',
         worldTruthRoutes:17,
         orbFluidNavigation:'v535',
@@ -1305,6 +1345,12 @@ const awaken = async () => {
         experienceIndependentOrbEngines:0,
         experienceIndependentUniverseEngines:0,
         experiencePermanentAnimationLoops:0,
+        experienceDepth:'v541',
+        experienceDepthMacroStage:'7-of-14',
+        experienceConsultationChannel:'email-only',
+        experienceMusicPlayerLazy:true,
+        experienceVideoSearchShare:'published-only',
+        experiencePointerMoveEffects:0,
         identityRights:'v531',
         identityMacroStage:'7-of-10',
         identityWorlds:['login','subscriptions','skins','notifications'],

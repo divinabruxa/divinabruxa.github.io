@@ -22,7 +22,7 @@
     <noscript><p>Ative o JavaScript para filtrar a curadoria. A página não realiza compras nem pagamentos.</p></noscript>
     <a class="editorial-back" href="./">← Voltar para a Orbe</a>
   </main>
-  <script type="module">import { CONFIG } from './config.js'; import { StoreEngine } from './store-engine.js?v=192'; import { EditorialJourneyV192 } from './editorial-journey-v192.js?v=192'; const root=document.querySelector('#storeApp'); new StoreEngine(root,CONFIG); new EditorialJourneyV192(root,'store');</script>
+  <script type="module">import { CONFIG } from './config.js'; import { StoreEngine } from './store-engine.js?v=192'; import { EditorialJourneyV192 } from './editorial-journey-v192.js?v=192'; import { createExperienceDepthCoreV541 } from './experience-depth-core-v541.js?v=541'; const root=document.querySelector('#storeApp'); new StoreEngine(root,CONFIG); new EditorialJourneyV192(root,'store'); createExperienceDepthCoreV541({config:CONFIG});</script>
   <script type="module" src="pwa-world-v196.js?v=196"></script>
 </body>
 </html>

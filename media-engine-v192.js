@@ -1,5 +1,5 @@
 /* DIVINA BRUXA V192 — MOTOR EDITORIAL RESTAURADO PELA V197 */
-import { MediaEngineV149 } from './media-engine-v149.js?v=149';
+import { MediaEngineV149 } from './media-engine-v149.js?v=541-lazy-player';
 
 export class MediaEngineV192 extends MediaEngineV149 {
   constructor(roots, config = {}) {

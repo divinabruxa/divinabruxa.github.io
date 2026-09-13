@@ -135,7 +135,7 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
   const ensureMedia=()=>once(sharedTasks,'media',async()=>{
     const [,module]=await Promise.all([
       ensureStyle('divinaMediaCommerceRebirthV320','media-commerce-world-v320.css?v=320'),
-      import('./media-commerce-world-v320.js?v=320')
+      import('./media-commerce-world-v320.js?v=541')
     ]);
     return new module.MediaWorldV320({videos:$('#videoApp'),music:$('#musicApp')},config);
   });
@@ -253,7 +253,7 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       await ensureCommerce();
       const [,module]=await Promise.all([
         ensureStyle('divinaMediaCommerceRebirthV320','media-commerce-world-v320.css?v=320'),
-        import('./media-commerce-world-v320.js?v=320')
+        import('./media-commerce-world-v320.js?v=541')
       ]);
       return new module.StoreWorldV320($('#storeApp'),config);
     },
@@ -294,7 +294,7 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
         ensureStyle('divinaAdminIntelligenceRebirthV322','admin-intelligence-v322.css?v=322'),
         ensureStyle('divinaOwnerObservatoryV532Styles','owner-observatory-v532.css?v=532'),
         import('./admin-engine.js?v=532'),
-        import('./media-commerce-world-v320.js?v=320'),
+        import('./media-commerce-world-v320.js?v=541'),
         import('./admin-intelligence-v322.js?v=532'),
         import('./owner-observatory-v532.js?v=532')
       ]);
@@ -350,22 +350,22 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     store:()=>Promise.all([
       import('./commerce-engine.js?v=148'),
       ensureStyle('divinaMediaCommerceRebirthV320','media-commerce-world-v320.css?v=320'),
-      import('./media-commerce-world-v320.js?v=320')
+      import('./media-commerce-world-v320.js?v=541')
     ]),
     music:()=>Promise.all([
       ensureStyle('divinaMediaCommerceRebirthV320','media-commerce-world-v320.css?v=320'),
-      import('./media-commerce-world-v320.js?v=320')
+      import('./media-commerce-world-v320.js?v=541')
     ]),
     videos:()=>Promise.all([
       ensureStyle('divinaMediaCommerceRebirthV320','media-commerce-world-v320.css?v=320'),
-      import('./media-commerce-world-v320.js?v=320')
+      import('./media-commerce-world-v320.js?v=541')
     ]),
     admin:()=>Promise.all([
       ensureStyle('divinaMediaCommerceRebirthV320','media-commerce-world-v320.css?v=320'),
       ensureStyle('divinaAdminIntelligenceRebirthV322','admin-intelligence-v322.css?v=322'),
       ensureStyle('divinaOwnerObservatoryV532Styles','owner-observatory-v532.css?v=532'),
       import('./admin-engine.js?v=532'),
-      import('./media-commerce-world-v320.js?v=320'),
+      import('./media-commerce-world-v320.js?v=541'),
       import('./admin-intelligence-v322.js?v=532'),
       import('./owner-observatory-v532.js?v=532')
     ]),
