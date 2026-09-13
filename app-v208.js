@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 3/14 · V537
+/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 4/14 · V538
    Origem, Home, Menu e Descoberta sobre a continuidade V536.
    Whit, Tarot, Sabedoria Viva, a Orbe aprovada e as travas permanecem integras. */
 
@@ -57,7 +57,7 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=537')
+const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=538')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
@@ -420,7 +420,7 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V537 = 537;
+const RELEASE_EPOCH_V537 = 538;
 const releaseReloadKeyV537 = `divina-release-reload-${RELEASE_EPOCH_V537}`;
 const reloadForNewReleaseV537 = version => {
   if (Number(version || 0) <= RELEASE_EPOCH_V537) return false;
@@ -448,12 +448,12 @@ navigator.serviceWorker?.addEventListener('message', event => {
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV537) {
   window.__divinaSWBootstrapV537 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=537', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=538', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v537';
+        document.documentElement.dataset.releaseEpoch = 'v538';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V537 registrado');
+        console.info('[Divina] PWA V538 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -1014,6 +1014,31 @@ window.divinaOriginDiscoveryReleaseV537 = Object.freeze({
   sol:false
 });
 
+window.divinaTarotLivreReleaseV538 = Object.freeze({
+  version:538,
+  macroStage:'4-of-14',
+  title:'Universo Vivo do Tarot Livre',
+  responseBudgetMs:100,
+  targetFps:{standard:60,constrained:30},
+  atlasFirstProgressive:true,
+  blankFrameFree:true,
+  dragNavigation:false,
+  normalOnly:true,
+  noRepeats:true,
+  deckSize:78,
+  gridColumns:6,
+  completedLayout:'13x6',
+  meaningsInsideFreeTarot:false,
+  fireEngine:false,
+  permanentAnimationLoops:0,
+  localAutosave:true,
+  auditableState:true,
+  environment:'staging',
+  productionPublish:false,
+  realBilling:false,
+  sol:false
+});
+
 window.divinaOrbV208 = Object.freeze({
   version: 501,
   engine: realityOrb,
@@ -1121,10 +1146,10 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V537',
+        release:'V538',
         supremePlan:'3.0-universo-vivo',
         supremePlanMacroStages:14,
-        currentMacroStage:'3-of-14',
+        currentMacroStage:'4-of-14',
         worldTruth:'v535',
         worldTruthRoutes:17,
         orbFluidNavigation:'v535',
@@ -1144,7 +1169,11 @@ const awaken = async () => {
         routeScrollAnimation:false,
         supremeOrb:'v501',
         orbitalMenu:'v502-v517-tuned-v526-universal-presence',
-        tarotLivre:'v517-v521-physical-viewport-lock',
+        tarotLivre:'v538-progressive-no-fire',
+        tarotLivreResponseBudgetMs:100,
+        tarotLivreAtlasFirst:true,
+        tarotLivreDragNavigation:false,
+        tarotLivreAuditFingerprint:true,
         dailyWorld:'v509',
         tarotUniverse:'v528',
         tarotMacroStage:'4-of-10',
@@ -1406,7 +1435,8 @@ const awaken = async () => {
         calmQualityRecovery:true,
         extraAnimationLoops:0,
         physicalCardJourney:true,
-        decodedBeforeSwap:true,
+        decodedBeforeSwap:false,
+        blankFrameFree:true,
         unexplainedFlyingCards:false,
         stellarFire:'removed-v537',
         trueCelestialFire:false,

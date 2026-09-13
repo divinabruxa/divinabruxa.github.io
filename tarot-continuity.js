@@ -1,7 +1,7 @@
-/* DIVINA BRUXA — CONTINUIDADE RESILIENTE DO TAROT LIVRE — V182
+/* DIVINA BRUXA — CONTINUIDADE RESILIENTE DO TAROT LIVRE — V538
    Serializa mudanças entre abas e preserva a sessão em memória quando o navegador bloqueia o armazenamento.
 */
-import { compareTarotStates, createTarotState, normalizeTarotState } from './tarot-session.js?v=182';
+import { compareTarotStates, createTarotState, normalizeTarotState } from './tarot-session.js?v=538';
 
 const DEFAULT_LOCK = 'divina-bruxa:tarot-livre';
 
@@ -37,7 +37,14 @@ export class TarotSessionCoordinator {
     }
     this.lastPersisted = persisted;
     if (dispatch && typeof globalThis.dispatchEvent === 'function' && typeof globalThis.CustomEvent === 'function') {
-      globalThis.dispatchEvent(new CustomEvent('tarot:session-committed', { detail: { sessionId: state.sessionId, revision: state.revision, persisted } }));
+      globalThis.dispatchEvent(new CustomEvent('tarot:session-committed', {
+        detail: {
+          sessionId: state.sessionId,
+          revision: state.revision,
+          auditFingerprint: state.auditFingerprint,
+          persisted
+        }
+      }));
     }
     return { state, persisted };
   }

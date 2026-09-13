@@ -1,7 +1,7 @@
-/* DIVINA BRUXA — NÚCLEO IMUTÁVEL DO TAROT LIVRE — V182
-   78 cartas normais, sem repetição, retomada segura e embaralhamento somente das restantes.
-*/
-export const TAROT_SESSION_SCHEMA = '5.4.0';
+/* DIVINA BRUXA — NÚCLEO PURO E AUDITÁVEL DO TAROT LIVRE — V538
+   78 cartas normais, sem repetição, retomada segura, ordem verificável e
+   embaralhamento somente das cartas ainda ocultas. */
+export const TAROT_SESSION_SCHEMA = '5.5.0';
 export const DECK_SIZE = 78;
 export const CARD_IDS = Object.freeze(Array.from({ length: DECK_SIZE }, (_, index) => index));
 export const TAROT_BACKUP_KIND = 'divina-bruxa-tarot-livre';
@@ -24,6 +24,35 @@ const makeSessionId = () => {
   return `tarot-${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
 };
 
+const makeAuditSeed = () => {
+  if (globalThis.crypto?.getRandomValues) {
+    const bytes = new Uint32Array(4);
+    globalThis.crypto.getRandomValues(bytes);
+    return [...bytes].map(value => value.toString(16).padStart(8, '0')).join('');
+  }
+  return `${Date.now().toString(36)}${Math.random().toString(36).slice(2)}`;
+};
+
+const fingerprintOrder = (waiting, revealed, sessionId, auditSeed) => {
+  const source = `${sessionId}|${auditSeed}|${revealed.join(',')}|${waiting.join(',')}`;
+  let hash = 0x811c9dc5;
+  for (let index = 0; index < source.length; index += 1) {
+    hash ^= source.charCodeAt(index);
+    hash = Math.imul(hash, 0x01000193);
+  }
+  return `tl-${(hash >>> 0).toString(16).padStart(8, '0')}`;
+};
+
+export function tarotStateFingerprint(state) {
+  if (!state || !Array.isArray(state.waiting) || !Array.isArray(state.revealed)) return '';
+  return fingerprintOrder(
+    state.waiting,
+    state.revealed,
+    String(state.sessionId || ''),
+    String(state.auditSeed || '')
+  );
+}
+
 const integerTime = value => Number.isFinite(value) ? Math.max(0, Math.floor(value)) : Date.now();
 
 export function shuffleIds(source, randomInt = secureRandomInt) {
@@ -35,11 +64,12 @@ export function shuffleIds(source, randomInt = secureRandomInt) {
   return shuffled;
 }
 
-export function createTarotState({ randomInt = secureRandomInt, now = Date.now, sessionId = makeSessionId() } = {}) {
+export function createTarotState({ randomInt = secureRandomInt, now = Date.now, sessionId = makeSessionId(), auditSeed = makeAuditSeed() } = {}) {
   const timestamp = integerTime(now());
-  return {
+  const state = {
     schema: TAROT_SESSION_SCHEMA,
     sessionId,
+    auditSeed,
     revision: 0,
     normalOnly: true,
     waiting: shuffleIds(CARD_IDS, randomInt),
@@ -48,6 +78,8 @@ export function createTarotState({ randomInt = secureRandomInt, now = Date.now, 
     createdAt: timestamp,
     updatedAt: timestamp
   };
+  state.auditFingerprint = tarotStateFingerprint(state);
+  return state;
 }
 
 export function isValidTarotState(candidate) {
@@ -59,6 +91,8 @@ export function isValidTarotState(candidate) {
   if (candidate.normalOnly !== true) return false;
   if (candidate.completed !== (candidate.waiting.length === 0)) return false;
   if (typeof candidate.sessionId !== 'string' || !candidate.sessionId) return false;
+  if (typeof candidate.auditSeed !== 'string' || !candidate.auditSeed) return false;
+  if (candidate.auditFingerprint !== tarotStateFingerprint(candidate)) return false;
   return Number.isInteger(candidate.revision) && candidate.revision >= 0;
 }
 
@@ -67,9 +101,13 @@ export function normalizeTarotState(candidate, { now = Date.now } = {}) {
   const waiting = Array.isArray(candidate.waiting) ? candidate.waiting.map(Number) : null;
   const revealed = Array.isArray(candidate.revealed) ? candidate.revealed.map(Number) : null;
   if (!waiting || !revealed) return null;
+  const sessionId = typeof candidate.sessionId === 'string' && candidate.sessionId ? candidate.sessionId : makeSessionId();
   const normalized = {
     schema: TAROT_SESSION_SCHEMA,
-    sessionId: typeof candidate.sessionId === 'string' && candidate.sessionId ? candidate.sessionId : makeSessionId(),
+    sessionId,
+    auditSeed: typeof candidate.auditSeed === 'string' && candidate.auditSeed
+      ? candidate.auditSeed
+      : `legacy-${sessionId}`,
     revision: Number.isInteger(candidate.revision) && candidate.revision >= 0 ? candidate.revision : revealed.length,
     normalOnly: true,
     waiting,
@@ -78,6 +116,7 @@ export function normalizeTarotState(candidate, { now = Date.now } = {}) {
     createdAt: integerTime(candidate.createdAt),
     updatedAt: integerTime(candidate.updatedAt ?? now())
   };
+  normalized.auditFingerprint = tarotStateFingerprint(normalized);
   return isValidTarotState(normalized) ? normalized : null;
 }
 
@@ -94,18 +133,21 @@ export function drawNextCard(state, { now = Date.now } = {}) {
     completed: waiting.length === 0,
     updatedAt: integerTime(now())
   };
+  next.auditFingerprint = tarotStateFingerprint(next);
   return { state: next, cardId, position: revealed.length - 1 };
 }
 
 export function shuffleRemainingCards(state, { randomInt = secureRandomInt, now = Date.now } = {}) {
   const valid = normalizeTarotState(state, { now });
   if (!valid || valid.waiting.length < 2) return valid;
-  return {
+  const next = {
     ...valid,
     revision: valid.revision + 1,
     waiting: shuffleIds(valid.waiting, randomInt),
     updatedAt: integerTime(now())
   };
+  next.auditFingerprint = tarotStateFingerprint(next);
+  return next;
 }
 
 export function resetTarotState(options = {}) {

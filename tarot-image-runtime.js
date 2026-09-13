@@ -1,10 +1,10 @@
-/* DIVINA BRUXA V148 — RUNTIME DE IMAGENS DO TAROT LIVRE
+/* DIVINA BRUXA V538 — IMAGENS PROGRESSIVAS DO TAROT LIVRE
    Prévia instantânea pelo atlas, arte integral progressiva e fallback offline.
 */
 import { CARDS } from './tarot-data.js';
 
 const TRANSPARENT_PIXEL = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
-const CARD_ASSET_VERSION = '148';
+const CARD_ASSET_VERSION = '538';
 const imageTasks = new Map();
 
 const escapeAttribute = value => String(value ?? '')
@@ -64,9 +64,13 @@ export function prepareCardImage(cardOrId, { timeout = 1800, priority = 'high' }
 }
 
 export function preloadCardImages(cardIds, limit = 3) {
-  [...new Set(cardIds)]
-    .slice(0, Math.max(0, Math.min(limit, 3)))
-    .forEach(id => prepareCardImage(id, { timeout: 2200, priority: 'low' }));
+  const queue = [...new Set(cardIds)].slice(0, Math.max(0, Math.min(limit, 4)));
+  const warm = () => {
+    if (document.visibilityState === 'hidden') return;
+    queue.forEach(id => prepareCardImage(id, { timeout: 1800, priority: 'low' }));
+  };
+  if (typeof requestIdleCallback === 'function') requestIdleCallback(warm, { timeout: 360 });
+  else setTimeout(warm, 0);
 }
 
 function showAtlasFallback(image, index) {
@@ -86,6 +90,7 @@ document.addEventListener('load', event => {
   if (!(image instanceof HTMLImageElement) || !image.matches('.tarot-card-image[data-card-index]')) return;
   image.dataset.imageState = 'ready';
   image.classList.add('tarot-image-ready');
+  image.style.backgroundImage = 'none';
 }, true);
 
 document.addEventListener('error', event => {

@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 3.0 — ORIGEM, MENU E DESCOBERTA · MACROETAPA 3/14 · V537
+/* DIVINA BRUXA 3.0 — UNIVERSO VIVO DO TAROT LIVRE · MACROETAPA 4/14 · V538
    Cache seletivo e versionado. Nunca guarda Auth, Whit generation, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=537;
+const VERSION=538;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v537-shell';
-const CONTENT_CACHE='divina-bruxa-v537-content';
-const IMAGE_CACHE='divina-bruxa-v537-images';
-const OFFLINE_CACHE='divina-bruxa-v537-offline-core';
+const SHELL_CACHE='divina-bruxa-v538-shell';
+const CONTENT_CACHE='divina-bruxa-v538-content';
+const IMAGE_CACHE='divina-bruxa-v538-images';
+const OFFLINE_CACHE='divina-bruxa-v538-offline-core';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE]);
 
 const REQUIRED_SHELL=Object.freeze([
@@ -35,6 +35,7 @@ const REQUIRED_SHELL=Object.freeze([
   './divina-universe-retina-v523.webp',
   './skin-performance-core-v518.js','./skin-performance-core-v518.css',
   './tarot-livre-orbe-os-v517.js','./tarot-livre-orbe-os-v517.css','./tarot-mesa-bridge-v517.js',
+  './tarot-session.js','./tarot-continuity.js','./tarot-image-runtime.js',
   './daily-world-v509.js','./daily-world-v509.css','./daily-policy-v303.js',
   './orb-loading-portal-v1.js',
   './divina-shell-v180.css','./home-orb-absolute-v206.css','./pwa-world-v196.css',
@@ -216,7 +217,7 @@ const appShellIsValid=async(url,response)=>{
   const isShell=pathname===new URL('./',self.registration.scope).pathname||pathname.endsWith('/index.html');
   if(!isShell)return true;
   const html=await response.clone().text();
-  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=537/.test(html);
+  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=538/.test(html);
 };
 
 const offlinePageFor=async url=>{
