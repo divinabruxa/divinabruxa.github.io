@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — MENU ORBITAL V502 · AFINAÇÃO iOS V517 */
+/* DIVINA BRUXA 4.0 — MENU ORBITAL V502 · MOVIMENTO ÚNICO iOS V551 */
 
 :root{
   --db502-gold:#f6d493;
@@ -10,7 +10,15 @@
   --db502-inner-radius:min(25.5vw,19dvh,148px);
   --db502-outer-radius:min(39vw,29dvh,224px);
   --db502-orb-size:min(31vw,20dvh,158px);
-  --db502-curve:cubic-bezier(.2,.88,.22,1);
+  --db502-curve:cubic-bezier(.22,.82,.24,1);
+  --db502-response:150ms;
+  --db502-settle:280ms;
+  --db502-exit:180ms;
+}
+
+html.db502-menu-open .app-header{
+  z-index:2147480600;
+  background:linear-gradient(180deg,rgba(3,1,7,.82),transparent);
 }
 
 html[data-menu-authority="v502"] #orbMenu{
@@ -47,7 +55,7 @@ html.db502-menu-open body{
   -webkit-user-select:none;
   user-select:none;
   -webkit-tap-highlight-color:transparent;
-  transition:opacity 190ms ease,visibility 0s linear 230ms;
+  transition:opacity var(--db502-response) ease-out,visibility 0s linear var(--db502-exit);
 }
 
 .db502-menu.is-open,
@@ -55,13 +63,13 @@ html.db502-menu-open body{
   opacity:1;
   visibility:visible;
   pointer-events:auto;
-  transition:opacity 190ms ease,visibility 0s;
+  transition:opacity var(--db502-response) ease-out,visibility 0s;
 }
 
 .db502-menu.is-closing{
   opacity:0;
   pointer-events:none;
-  transition:opacity 205ms ease,visibility 0s linear 215ms;
+  transition:opacity var(--db502-exit) ease-in,visibility 0s linear var(--db502-exit);
 }
 
 .db502-menu.is-closing .db502-portal,
@@ -71,7 +79,7 @@ html.db502-menu-open body{
 .db502-menu.is-closing .db502-menu__close,
 .db502-menu.is-closing .db502-menu__hint{
   transition-delay:0ms!important;
-  transition-duration:210ms!important;
+  transition-duration:var(--db502-exit)!important;
 }
 
 .db502-menu__backdrop{
@@ -145,7 +153,7 @@ html.db502-menu-open body{
   pointer-events:none;
   opacity:0;
   transform:translateY(-12px);
-  transition:opacity 220ms ease 34ms,transform 340ms var(--db502-curve) 24ms;
+  transition:opacity var(--db502-response) ease-out 20ms,transform var(--db502-settle) var(--db502-curve) 12ms;
 }
 
 .db502-menu.is-open .db502-menu__heading{
@@ -225,7 +233,7 @@ html.db502-menu-open body{
   pointer-events:none;
   opacity:0;
   transform:scale(.56) rotate(-24deg);
-  transition:opacity 220ms ease,transform 360ms var(--db502-curve);
+  transition:opacity var(--db502-response) ease-out,transform var(--db502-settle) var(--db502-curve);
 }
 
 .db502-menu__orbit:before,
@@ -297,8 +305,8 @@ html.db502-menu-open body{
     scale(.44);
   opacity:0;
   transition:
-    opacity 180ms ease calc(var(--portal-i) * 8ms),
-    transform 390ms var(--db502-curve) calc(var(--portal-i) * 8ms);
+    opacity var(--db502-response) ease-out calc(var(--portal-i) * 4ms),
+    transform var(--db502-settle) var(--db502-curve) calc(var(--portal-i) * 4ms);
 }
 
 .db502-menu.is-ios-settling .db502-portal,
@@ -365,6 +373,7 @@ html.db502-menu-open body{
   background:conic-gradient(from 0deg,transparent 0 34%,rgba(255,231,171,.42) 42%,transparent 51% 77%,rgba(208,88,255,.42) 85%,transparent 94%);
   transition:opacity 180ms ease;
   animation:db502PortalSpin 3.8s linear infinite;
+  animation-play-state:paused;
 }
 
 .db502-portal svg{
@@ -414,7 +423,7 @@ html.db502-menu-open body{
 .db502-portal:hover .db502-portal__jewel i,
 .db502-portal:focus-visible .db502-portal__jewel i,
 .db502-portal.is-touching .db502-portal__jewel i,
-.db502-portal.is-chosen .db502-portal__jewel i{opacity:1}
+.db502-portal.is-chosen .db502-portal__jewel i{opacity:1;animation-play-state:running}
 
 .db502-portal:hover .db502-portal__label,
 .db502-portal:focus-visible .db502-portal__label,
@@ -469,7 +478,7 @@ html.db502-menu-open body{
   border-radius:50%;
   opacity:0;
   transform:scale(.55);
-  transition:opacity 210ms ease 28ms,transform 360ms var(--db502-curve) 16ms;
+  transition:opacity var(--db502-response) ease-out 18ms,transform var(--db502-settle) var(--db502-curve) 10ms;
 }
 
 .db502-menu.is-open .db502-menu__center{

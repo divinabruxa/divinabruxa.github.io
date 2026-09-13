@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — MENU ORBITAL V502 · DESCOBERTA/FLUIDEZ V537
+/* DIVINA BRUXA 4.0 — MENU ORBITAL V502 · CONTINUIDADE iOS V551
    A Orbe Suprema V501 é o único corpo vivo. Este menu a recebe fisicamente,
    organiza treze realidades em duas órbitas e preserva uma viagem contínua.
 */
@@ -7,9 +7,9 @@ const VERSION = 502;
 const INSTANCE = Symbol.for('divina.orbital.menu.v502');
 const ROOT_ID = 'divinaOrbitalMenuV502';
 const STYLE_ID = 'divinaOrbitalMenuV502Styles';
-const STYLE_HREF = './orbital-menu-v502.css?v=517-ios-flight';
-const OPEN_MS = 340;
-const CLOSE_MS = 210;
+const STYLE_HREF = './orbital-menu-v502.css?v=551-ios-motion';
+const OPEN_MS = 300;
+const CLOSE_MS = 180;
 
 const INNER = Object.freeze([
   { route:'tarot', label:'Tarot Livre', icon:'tarot' },
@@ -97,7 +97,6 @@ function createScene() {
       <span>ORBE DAS REALIDADES</span>
       <h2 id="db502MenuTitle">Escolha uma realidade</h2>
     </header>
-    <button type="button" class="db502-menu__close" data-v502-close="button" aria-label="Fechar menu"><span aria-hidden="true"></span></button>
     <div class="db502-menu__orbit db502-menu__orbit--outer" aria-hidden="true"></div>
     <div class="db502-menu__orbit db502-menu__orbit--inner" aria-hidden="true"></div>
     <nav class="db502-menu__portals" aria-label="Realidades da Divina Bruxa">
@@ -173,7 +172,6 @@ export class OrbitalMenuV502 {
     this.lastFocus = null;
     this.motionToken = 0;
     this.navigating = false;
-    this.returningHome = false;
 
     document.documentElement.dataset.menuAuthority = 'v502';
     this.menuButton.setAttribute('aria-controls', ROOT_ID);
@@ -216,7 +214,7 @@ export class OrbitalMenuV502 {
 
       const portal = target.closest('[data-v502-route]');
       if (portal) {
-        if (this.state !== 'open') return;
+        if (!['opening','open'].includes(this.state)) return;
         event.preventDefault();
         event.stopImmediatePropagation();
         this.activate(portal);
@@ -259,7 +257,7 @@ export class OrbitalMenuV502 {
         return;
       }
       if (event.key !== 'Tab') return;
-      const focusable = [this.root.querySelector('.db502-menu__close'), ...this.buttons, this.core.orb]
+      const focusable = [this.menuButton, ...this.buttons, this.core.orb]
         .filter(node => node instanceof HTMLElement && !node.hidden && !node.hasAttribute('disabled'));
       if (!focusable.length) return;
       const first = focusable[0];
@@ -280,7 +278,7 @@ export class OrbitalMenuV502 {
       if (event.detail?.id) this.syncRoute(event.detail.id);
     }, { signal });
     document.addEventListener('divina:supreme-orb-will-navigate', () => {
-      if (this.targetOpen && !this.navigating && !this.returningHome) {
+      if (this.targetOpen && !this.navigating) {
         this.close({ restoreFocus:false, reason:'orb-navigation', immediate:true });
       }
     }, { signal });
@@ -314,9 +312,8 @@ export class OrbitalMenuV502 {
     this.setMenuButton(true);
     this.publish('opening', 'request');
 
-    /* A cortina cósmica responde já no primeiro quadro. Quando o menu nasce
-       fora da Home, a volta acontece protegida por ela e a mesma Orbe só é
-       reclamada depois de chegar ao próprio berço. */
+    /* A cortina cósmica responde já no primeiro quadro. A V551 preserva a
+       realidade atual e reclama temporariamente a mesma Orbe. */
     this.root.hidden = false;
     this.root.setAttribute('aria-hidden', 'false');
     document.documentElement.classList.add('db502-menu-open');
@@ -325,20 +322,6 @@ export class OrbitalMenuV502 {
     if (token !== this.motionToken || !this.targetOpen) return false;
     this.root.classList.add('is-open');
     this.root.classList.add('is-ios-settling');
-
-    if (routeNow() !== 'home') {
-      this.returningHome = true;
-      try {
-        await Promise.resolve(this.go('home', { source:'orbital-menu-return-home-v502', target:this.menuButton }));
-      } catch (error) {
-        console.error('[Divina] não foi possível voltar à Home antes do menu', error);
-        await this.close({ restoreFocus:true, reason:'home-error', immediate:true });
-        return false;
-      } finally {
-        this.returningHome = false;
-      }
-    }
-    if (token !== this.motionToken || !this.targetOpen) return false;
 
     this.releaseOrb = this.core.claim(this.host, {
       mode:'menu',
@@ -408,9 +391,9 @@ export class OrbitalMenuV502 {
     nativePulse('Medium');
 
     const origin = { getBoundingClientRect:() => rect };
-    await wait(reducedMotion() ? 0 : 92);
-    // A Orbe volta ao berço antes da troca de tela. O portal conserva a origem
-    // visual para que a viagem preserve exatamente o item tocado.
+    if (!reducedMotion()) await frame();
+    // A Orbe volta ao pouso anterior antes da troca. O portal conserva a
+    // origem visual e a V551 não força uma passagem intermediária pela Home.
     await this.close({ restoreFocus:false, reason:`route:${route}`, immediate:true });
     const travel = Promise.resolve(this.core.navigate(route, {
       source:'orbital-menu-v502',
@@ -463,7 +446,9 @@ export class OrbitalMenuV502 {
       extraApiCalls:0,
       webVibration:false,
       nativeHapticsOnly:true,
-      fluidityTuning:'v537-discovery-no-fire',
+      fluidityTuning:'v551-ios-single-motion',
+      opensOverCurrentRoute:true,
+      duplicateCloseButton:false,
       livingUniverseBackdrop:true,
       duplicateStarfield:false
     });

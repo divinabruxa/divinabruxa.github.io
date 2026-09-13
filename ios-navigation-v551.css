@@ -1,0 +1,39 @@
+/* DIVINA BRUXA 4.0 — NAVEGAÇÃO iOS V551
+   Uma gramática curta de resposta, assentamento e saída. */
+
+:root{
+  --db551-ios-response:150ms;
+  --db551-ios-arrival:260ms;
+  --db551-ios-exit:180ms;
+  --db551-ios-curve:cubic-bezier(.22,.82,.24,1);
+}
+
+#app>.screen.active{
+  animation:db551-screen-arrival var(--db551-ios-arrival) var(--db551-ios-curve) both;
+}
+
+html[data-orb-navigation-state="active"] #app>.screen.active{
+  will-change:opacity,transform;
+}
+
+html[data-performance-tier="constrained"] #app>.screen.active{
+  animation-duration:180ms;
+}
+
+html[data-menu-state="opening"] .db502-menu__backdrop::before,
+html[data-menu-state="closing"] .db502-menu__backdrop::before,
+html[data-menu-state="navigating"] .db502-menu__backdrop::before,
+html[data-menu-state="opening"] .db502-menu__backdrop::after,
+html[data-menu-state="closing"] .db502-menu__backdrop::after,
+html[data-menu-state="navigating"] .db502-menu__backdrop::after{
+  animation-play-state:paused!important;
+}
+
+@keyframes db551-screen-arrival{
+  from{opacity:0;transform:translate3d(0,6px,0) scale(.997)}
+  to{opacity:1;transform:translate3d(0,0,0) scale(1)}
+}
+
+@media(prefers-reduced-motion:reduce){
+  #app>.screen.active{animation:none!important}
+}

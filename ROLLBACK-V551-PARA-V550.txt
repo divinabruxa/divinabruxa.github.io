@@ -1,0 +1,14 @@
+ROLLBACK CIRÚRGICO V551 → V550
+
+Restaure a partir da V550 somente:
+- app-v208.js
+- index.html
+- manifest.webmanifest
+- orbital-menu-v502.js
+- orbital-menu-v502.css
+- supreme-orb-core-v501.js
+- pwa-world-v196.js
+- pwa-world-v324.js
+- sw.js
+
+Remova ios-navigation-v551.css somente se estiver revertendo integralmente a V551. Não altere CNAME, cartas, imagens, conteúdo ou banco de dados.

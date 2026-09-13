@@ -1,0 +1,28 @@
+{
+  "schema": "divina-bruxa-ios-navigation-audit-v551",
+  "release": "V551",
+  "macroStage": "3-of-14",
+  "baseRequired": "V550",
+  "publishedObservation": {
+    "duplicateTopRightCloseControls": true,
+    "menuForcedHomeBeforeOpeningFromAnotherRoute": true,
+    "portalActivationDelayMs": 92,
+    "mixedMotionCurves": true
+  },
+  "correction": {
+    "singleVisibleCloseControl": true,
+    "menuOpensOverCurrentRoute": true,
+    "nestedOrbClaimRestoration": true,
+    "portalActivationDelayMs": 0,
+    "responseMs": 150,
+    "menuSettleMs": 280,
+    "menuCloseMs": 180,
+    "screenArrivalMs": 260,
+    "motionCurve": "cubic-bezier(.22,.82,.24,1)",
+    "inactivePortalSpinPaused": true,
+    "transitionBackdropEffectsPaused": true
+  },
+  "automaticPhysicalPasses": 0,
+  "privateContentReads": 0,
+  "apiCalls": 0
+}

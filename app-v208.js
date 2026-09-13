@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 2/14 · V550
-   Uma Orbe canônica, uma física e projeções por evento — sem relógios rivais.
-   Todo o universo aprovado até a V549 permanece íntegro. */
+/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 3/14 · V551
+   Navegação, Menu e transições com uma única gramática de movimento iOS.
+   Todo o universo aprovado até a V550 permanece íntegro. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
 import { createNavigation } from './navigation.js?v=535-fluid-navigation';
 import { orbMotionV207 } from './orb-motion-core-v207.js?v=207';
 import { RealityOrbEngine } from './orb-engine-v208.js?v=535-fluid-navigation';
-import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=550-single-physics';
+import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=551-claim-stack';
 import { createOrbIOSJourneyCoreV525 } from './orb-ios-journey-core-v525.js?v=550-single-physics';
 import { createOrbUniversalPresenceV526 } from './orb-universal-presence-v526.js?v=550-single-physics';
 import { installRealityLifecycleV511 } from './reality-lifecycle-v511.js?v=511';
@@ -65,11 +65,11 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=550')
+const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=551')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
-    document.documentElement.dataset.pwaError = 'v550';
+    document.documentElement.dataset.pwaError = 'v551';
   });
 
 const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
@@ -79,7 +79,7 @@ const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
     document.documentElement.dataset.orbMenuSupremeError = 'v327';
   });
 
-const startOrbitalMenuV502 = () => import('./orbital-menu-v502.js?v=537-discovery')
+const startOrbitalMenuV502 = () => import('./orbital-menu-v502.js?v=551-ios-motion')
   .then(module => module.installOrbitalMenuV502?.({ core:supremeOrb, go }))
   .catch(error => {
     console.error('[Divina] Menu Orbital Vivo V502 não iniciou', error);
@@ -471,7 +471,7 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V537 = 549;
+const RELEASE_EPOCH_V537 = 550;
 const reloadForNewReleaseV537 = version => {
   const nextRelease = Number(version || 0);
   if (!Number.isFinite(nextRelease) || nextRelease <= RELEASE_EPOCH_V537) return false;
@@ -498,14 +498,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v550-app';
+  window.__divinaSWBootstrap = 'v551-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=550', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=551', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v550';
+        document.documentElement.dataset.releaseEpoch = 'v551';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V550 registrado');
+        console.info('[Divina] PWA V551 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -1129,6 +1129,33 @@ window.divinaSingleOrbPhysicsReleaseV550 = Object.freeze({
   })
 });
 
+window.divinaIOSNavigationReleaseV551 = Object.freeze({
+  version:551,
+  plan:'4.0-fluidity-supreme',
+  macroStage:'3-of-14',
+  title:'Navegação, Menu e transições iOS',
+  preserves:'V550',
+  iphonePriority:true,
+  motionCurve:'cubic-bezier(.22,.82,.24,1)',
+  responseMs:150,
+  menuSettleMs:280,
+  menuCloseMs:180,
+  screenArrivalMs:260,
+  menuOpensOverCurrentRoute:true,
+  nestedOrbClaimRestoration:true,
+  duplicateCloseButton:false,
+  portalEarlyTouch:true,
+  transitionEffectsPaused:true,
+  privateContentReads:0,
+  apiCalls:0,
+  status:()=>Object.freeze({
+    release:'V551',
+    menu:globalThis.divinaMenuV502?.status?.()||null,
+    orb:supremeOrb?.snapshot?.()||null,
+    fluidity:orbFluidNavigation?.status?.()||null
+  })
+});
+
 window.divinaResponsiveEnchantmentReleaseV533 = Object.freeze({
   version:533,
   macroStage:'9-of-10',
@@ -1453,10 +1480,10 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V550',
+        release:'V551',
         supremePlan:'4.0-fluidity-supreme',
         supremePlanMacroStages:14,
-        currentMacroStage:'2-of-14',
+        currentMacroStage:'3-of-14',
         worldTruth:'v535',
         worldTruthRoutes:17,
         orbFluidNavigation:'v549',
@@ -1470,6 +1497,15 @@ const awaken = async () => {
         orbProjectionPermanentLoops:0,
         orbJourneyMirrorMode:'single-snapshot-v550',
         orbJourneyMirrorAnimationLoops:0,
+        iosNavigation:'v551',
+        iosMotionCurve:'cubic-bezier(.22,.82,.24,1)',
+        iosResponseMs:150,
+        iosMenuSettleMs:280,
+        iosMenuCloseMs:180,
+        iosScreenArrivalMs:260,
+        menuOpensOverCurrentRoute:true,
+        nestedOrbClaimRestoration:true,
+        duplicateMenuCloseButton:false,
         vitalityBus:'v536',
         livingGrammar:'v536',
         originDiscovery:'v537',

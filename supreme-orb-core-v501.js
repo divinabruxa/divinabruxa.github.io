@@ -1,4 +1,4 @@
-/* DIVINA BRUXA 4.0 — ORBE SUPREMA V501 · FÍSICA ÚNICA V550
+/* DIVINA BRUXA 4.0 — ORBE SUPREMA V501 · CONTINUIDADE iOS V551
    Uma presença, um estado e um caminho para todos os mundos. O toque ilumina
    o interior sem deslocar o corpo; somente uma viagem de realidade autorizada
    conduz a própria presença visual da Orbe pelo mesmo universo contínuo.
@@ -607,8 +607,16 @@ export class SupremeOrbCoreV501 {
   claim(host, { mode, ariaLabel } = {}) {
     const target = typeof host === 'string' ? document.querySelector(host) : host;
     if (!target || !this.orb) return () => {};
-    if (target.contains(this.orb)) return () => this.returnHome();
+    if (target.contains(this.orb)) return () => false;
 
+    const previous = {
+      parent:this.orb.parentNode,
+      next:this.orb.nextSibling,
+      host:this.claimedHost,
+      mode:this.mode,
+      ariaLabel:this.orb.getAttribute('aria-label')
+    };
+    if (previous.host && previous.host !== target) delete previous.host.dataset.supremeOrbHost;
     this.claimedHost = target;
     target.dataset.supremeOrbHost = 'active';
     this.orb.classList.add('db-supreme-orb--traveling');
@@ -617,7 +625,29 @@ export class SupremeOrbCoreV501 {
     if (mode) this.setMode(mode, { route:this.route, reason:'claim' });
     callFirst(this.renderer, ['resize','refresh']);
     emit('divina:supreme-orb-claimed', { mode:this.mode, host:target.id || null });
-    return () => this.returnHome();
+    let released = false;
+    return () => {
+      if (released) return false;
+      released = true;
+      if (this.claimedHost !== target) return false;
+      delete target.dataset.supremeOrbHost;
+      const parent = previous.parent?.isConnected ? previous.parent : null;
+      if (!parent) return this.returnHome();
+      if (previous.next?.parentNode === parent) parent.insertBefore(this.orb, previous.next);
+      else parent.append(this.orb);
+      this.claimedHost = previous.host?.isConnected ? previous.host : null;
+      if (this.claimedHost) this.claimedHost.dataset.supremeOrbHost = 'active';
+      this.orb.classList.toggle('db-supreme-orb--traveling', Boolean(this.claimedHost));
+      if (previous.ariaLabel) this.orb.setAttribute('aria-label', previous.ariaLabel);
+      else this.orb.removeAttribute('aria-label');
+      this.setMode(previous.mode, { route:this.route, reason:'claim-restored-v551' });
+      callFirst(this.renderer, ['resize','refresh']);
+      emit('divina:supreme-orb-claim-restored', {
+        host:this.claimedHost?.id || null,
+        mode:this.mode
+      });
+      return true;
+    };
   }
 
   returnHome() {
