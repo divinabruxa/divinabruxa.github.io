@@ -83,7 +83,7 @@ export class PremiumEngineV191 {
           <div>
             <p class="eyebrow">COROA PREMIUM · LICENÇA VITALÍCIA</p>
             <h3 id="premiumV191Title">Tudo o que aprofunda a sua jornada.</h3>
-            <p>Uma compra única para a formação completa, prática avançada e as 30 aparências da Orbe. A Orbe IA continua sendo um produto separado.</p>
+            <p>Uma compra única para a formação completa, prática avançada e as 30 aparências da Orbe. Cada skin também pode ser adquirida separadamente, sem Premium. A Orbe IA continua sendo um produto separado.</p>
             <ul>${PREMIUM_FEATURES_V191.filter(item => item.premium).slice(2).map(item => `<li><span>✦</span>${escapeHTML(item.label)}</li>`).join('')}</ul>
           </div>
           ${this.productCard('premium_lifetime', premiumActive, true)}

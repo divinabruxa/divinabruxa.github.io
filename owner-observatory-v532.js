@@ -132,7 +132,7 @@ function specFor(id,d){
         {label:'ORBE IA',value:brl(d.aiMonthlyCents),detail:`mensal · ${integer(d.aiCreditsPerCycle)} créditos`}
       ],
       panels:[panel('ASSINATURAS','Estado dos ciclos',bars(d.subscriptionStatus),'SERVIDOR'),panel('DIREITOS','Estado dos acessos',bars(d.entitlementStatus),'RESTORE'),panel('CATÁLOGO','Direitos por chave',bars(d.entitlementsByKey),'SEM IDENTIDADE'),panel('COMPRAS','Produtos adquiridos',bars(d.purchasesByProduct),'AGREGADO')],
-      covenant:'Premium inclui as 30 skins, mas não inclui Orbe IA. Billing real permanece fechado.'
+      covenant:'Premium inclui as 30 skins; cada skin paga também possui compra unitária independente. Orbe IA é separada e o billing real permanece fechado.'
     };
     case 'ai':return {
       sigil:'◉',eyebrow:'ORBE IA · CUSTO E LIMITES',title:'Consumo mensurável; conversas continuam invisíveis.',
@@ -206,7 +206,7 @@ function specFor(id,d){
     };
     case 'skins':return {
       sigil:'◆',eyebrow:'SKINS · FORMA DA ORBE',title:'Trinta formas ativas; o arquivo antigo fica arquivado.',
-      copy:'O Observatório separa o catálogo publicado dos registros históricos e confirma a autoridade do servidor.',
+      copy:'O Observatório separa catálogo, preço unitário, propriedade e restauração, sempre sob autoridade do servidor.',
       cards:[
         {label:'CATÁLOGO OFICIAL',value:integer(metric.canonicalCatalog),detail:'skins'},
         {label:'PUBLICADAS',value:integer(metric.published),detail:'ativas',tone:metric.published===30?'safe':'warning'},
@@ -216,7 +216,7 @@ function specFor(id,d){
         {label:'EQUIPADAS',value:integer(metric.equippedRecords),detail:'preferências'}
       ],
       panels:[panel('RARIDADE','Catálogo publicado',bars(d.byRarity),'30 ATIVAS'),panel('ORIGEM','Direitos por origem',bars(d.entitlementsBySource),'SERVIDOR'),panel('ESTADO','Direitos por estado',bars(d.entitlementsByStatus),'RESTORE'),panel('PROVEDORES','Produtos configurados',bars(d.productsByProvider),'STAGING')],
-      covenant:`Clássica gratuita: ${d.integrity?.classicFree?'confirmada':'atenção'}. Skins continuam 100% cosméticas e não alteram sorte, cartas, IA ou acesso.`
+      covenant:`Clássica gratuita: ${d.integrity?.classicFree?'confirmada':'atenção'}. As outras 29 podem ser adquiridas por unidade ou pelo Premium; todas continuam 100% cosméticas.`
     };
     case 'seo':return {
       sigil:'⌁',eyebrow:'SEO E ASO · DESCOBERTA',title:'O público encontra conteúdo; o privado permanece fora do índice.',

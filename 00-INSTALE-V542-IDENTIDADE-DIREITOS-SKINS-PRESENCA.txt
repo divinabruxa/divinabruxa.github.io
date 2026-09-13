@@ -1,0 +1,44 @@
+DIVINA BRUXA 3.0 — V542
+MACROETAPA 8 DE 14 — IDENTIDADE, DIREITOS, SKINS E PRESENÇA
+
+PRÉ-REQUISITO
+- V541 instalada.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+1. Abra este ZIP.
+2. Envie todos os arquivos soltos para a raiz do repositório.
+3. Quando o GitHub perguntar, substitua os arquivos de mesmo nome.
+4. Não apague nenhum outro arquivo.
+5. Aguarde o deployment concluir.
+6. Feche e reabra o PWA ou atualize a página completamente.
+
+O QUE ESTA VERSÃO ENTREGA
+- 30 skins oficiais preservadas.
+- Orbe Clássica Divina gratuita para sempre.
+- 29 skins pagas com preço unitário visível em cada cartão.
+- Faixas oficiais: R$ 19,90, R$ 29,90, R$ 39,90 e R$ 49,90.
+- Compra unitária independente: não é necessário adquirir Premium para escolher uma skin.
+- Premium vitalício de R$ 199,90 continua incluindo todas as 30 skins.
+- Orbe IA continua separada do Premium.
+- Estados diferentes para prévia, adquirida, ativa, compra unitária e Premium.
+- Restauração e propriedade continuam sob autoridade do servidor.
+- Conta, Premium, Skins e Notificações receberam conteúdo profundo sobre direitos e controle.
+
+SEGURANÇA E FLUIDEZ
+- Cobrança real e checkout de skins permanecem bloqueados em STAGING.
+- Nenhum cartão é solicitado por esta interface.
+- Nenhuma skin é liberada somente pelo navegador.
+- A mesma Orbe V501 continua em todas as páginas.
+- Nenhum novo canvas, motor, pointermove, MutationObserver ou loop permanente.
+- O aro decorativo contínuo da prévia foi removido.
+- Miniaturas continuam lazy e são descarregadas fora da vizinhança visível.
+- Skins continuam 100% cosméticas: não alteram cartas, sorte, leitura ou IA.
+
+PRESERVADO
+- Tarot Livre sem fogo, sem invertidas e com 78 cartas.
+- Whit Local sem API e sem créditos.
+- Consultas somente por e-mail.
+- Loja Amazon externa e transparente.
+- Produção, DNS, billing real e publicação em lojas continuam desligados.
+
+Depois de instalar, informe: INSTALADO, CONTINUA.

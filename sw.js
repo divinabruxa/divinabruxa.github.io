@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 3.0 — EXPERIÊNCIAS, CONTEÚDO E CONVERSÃO · MACROETAPA 7/14 · V541
+/* DIVINA BRUXA 3.0 — IDENTIDADE, DIREITOS, SKINS E PRESENÇA · MACROETAPA 8/14 · V542
    Cache seletivo e versionado. Nunca guarda Auth, respostas online da Whit, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=541;
+const VERSION=542;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v541-shell';
-const CONTENT_CACHE='divina-bruxa-v541-content';
-const IMAGE_CACHE='divina-bruxa-v541-images';
-const OFFLINE_CACHE='divina-bruxa-v541-offline-core';
+const SHELL_CACHE='divina-bruxa-v542-shell';
+const CONTENT_CACHE='divina-bruxa-v542-content';
+const IMAGE_CACHE='divina-bruxa-v542-images';
+const OFFLINE_CACHE='divina-bruxa-v542-offline-core';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE]);
 
 const REQUIRED_SHELL=Object.freeze([

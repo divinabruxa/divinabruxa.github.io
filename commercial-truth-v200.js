@@ -16,7 +16,7 @@ export const COMMERCIAL_TRUTH_V200=Object.freeze({
   affiliate:Object.freeze({amazonAssociateTag:'orbedasrealid-20'}),
   plans:freezeItems([
     {id:'presence',productKey:'presence_free',name:'Presença',price:0,priceCents:0,cycle:'para sempre',billingMode:'free',description:'Tarot Livre, Carta do Dia e ritual diário.'},
-    {id:'premium',productKey:'premium_lifetime',name:'Divina Bruxa Premium',price:199.90,priceCents:19990,cycle:'pagamento único',billingMode:'payment',description:'Mesa Real, Escola offline e todas as 30 skins cosméticas.',includesAI:false,includesAllSkins:true},
+    {id:'premium',productKey:'premium_lifetime',name:'Divina Bruxa Premium',price:199.90,priceCents:19990,cycle:'pagamento único',billingMode:'payment',description:'Mesa Real, Escola offline e todas as 30 skins cosméticas. Cada skin paga também pode ser adquirida separadamente.',includesAI:false,includesAllSkins:true},
     {id:'orbe-ia',productKey:'orbe_ai_monthly',name:'Orbe IA',price:89.90,priceCents:8990,cycle:'por mês · 400 créditos',billingMode:'subscription',description:'Conversas simbólicas com controle de créditos.',creditsPerCycle:400}
   ]),
   aiCredits:freezeItems([
@@ -25,7 +25,11 @@ export const COMMERCIAL_TRUTH_V200=Object.freeze({
     {id:'ia-1500',productKey:'credits_1500',credits:1500,price:199.90,priceCents:19990,billingMode:'payment'}
   ]),
   aiUsage:Object.freeze({lunaPerResponse:1,terraPerResponse:10,solEnabled:false,premiumIncludesAI:false}),
-  skins:Object.freeze({count:30,freeId:'classic',freeName:'Clássica Divina',premiumIncludesAll:true,cosmeticOnly:true}),
+  skins:Object.freeze({
+    count:30,freeId:'classic',freeName:'Clássica Divina',premiumIncludesAll:true,cosmeticOnly:true,
+    individualPurchase:true,paidCount:29,billingMode:'payment',priceTiersCents:Object.freeze([1990,2990,3990,4990]),
+    entitlementAuthority:'server',realBilling:false,checkoutEnabled:false
+  }),
   services:freezeItems([
     {
       id:'mesa-real-profissional',
@@ -95,6 +99,8 @@ export const assertCommercialTruthV200=()=>{
   const productKeys=[...truth.plans.filter(item=>item.priceCents>0),...truth.aiCredits].map(item=>item.productKey);
   if(consultationPrices!=='50000,50000,30000,15000')throw new Error('COMMERCIAL_CONSULTATION_PRICE_DRIFT');
   if(new Set(productKeys).size!==productKeys.length)throw new Error('COMMERCIAL_DUPLICATE_PRODUCT_KEY');
+  if(truth.skins.count!==30||truth.skins.paidCount!==29||truth.skins.individualPurchase!==true)throw new Error('COMMERCIAL_SKIN_CATALOG_DRIFT');
+  if(truth.skins.priceTiersCents.join(',')!=='1990,2990,3990,4990')throw new Error('COMMERCIAL_SKIN_PRICE_DRIFT');
   if(truth.realBilling||truth.checkoutEnabled)throw new Error('COMMERCIAL_BILLING_GATE_OPEN');
   return true;
 };

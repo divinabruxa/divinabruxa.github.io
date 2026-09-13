@@ -1,12 +1,12 @@
-/* DIVINA BRUXA 3.0 — EXPERIÊNCIAS, CONTEÚDO E CONVERSÃO · CORTE V541 / PWA V324
+/* DIVINA BRUXA 3.0 — IDENTIDADE, DIREITOS, SKINS E PRESENÇA · CORTE V542 / PWA V324
    Uma única autoridade PWA para app e páginas de instalação.
    Offline seletivo: mundos locais continuam; ações de autoridade exigem rede.
    Não altera o motor visual da Orbe principal. */
 
 import { installPerformanceV324, summarizeLocalWebVitalsV324, performanceTierV324 } from './performance-world-v324.js?v=324';
-import { createResponsiveEnchantmentCoreV533 } from './responsive-enchantment-core-v533.js?v=537';
+import { createResponsiveEnchantmentCoreV533 } from './responsive-enchantment-core-v533.js?v=542-skins';
 
-const VERSION=541;
+const VERSION=542;
 const STYLE_ID='divinaPwaResilienceV324';
 const INSTALL_ROUTES=Object.freeze({pt:'instalar-app.html',en:'install-app.html',es:'instalar-aplicacion.html'});
 const ONLINE_ONLY_SELECTOR=[
@@ -41,7 +41,7 @@ const copy=()=>({
   pt:{
     skip:'Ir para o conteúdo principal',install:'Instalar aplicativo',installed:'Aplicativo instalado',
     online:'Conexão restaurada.',offline:'Modo offline: mundos locais preparados continuam disponíveis.',
-    unavailable:'Esta ação precisa de conexão segura.',skinsOffline:'Sua skin atual continua ativa. Reconecte para restaurar ou trocar skins Premium.',
+    unavailable:'Esta ação precisa de conexão segura.',skinsOffline:'Sua skin atual continua ativa. Reconecte para restaurar ou adquirir skins e direitos Premium.',
     title:'Instalar a Orbe',kicker:'DIVINA BRUXA · APLICATIVO',
     ios:['Abra esta página no Safari.','Toque em Compartilhar.','Escolha “Adicionar à Tela de Início” e confirme em “Adicionar”.'],
     browser:['Abra o menu do navegador.','Escolha “Instalar aplicativo” ou “Adicionar à tela inicial”.','Confirme a instalação.'],
@@ -53,7 +53,7 @@ const copy=()=>({
   en:{
     skip:'Skip to main content',install:'Install app',installed:'App installed',
     online:'Connection restored.',offline:'Offline mode: prepared local worlds remain available.',
-    unavailable:'This action requires a secure connection.',skinsOffline:'Your current skin remains active. Reconnect to restore or change Premium skins.',
+    unavailable:'This action requires a secure connection.',skinsOffline:'Your current skin remains active. Reconnect to restore or purchase skins and Premium rights.',
     title:'Install the Orb',kicker:'DIVINA BRUXA · APP',
     ios:['Open this page in Safari.','Tap Share.','Choose “Add to Home Screen”, then confirm with “Add”.'],
     browser:['Open the browser menu.','Choose “Install app” or “Add to Home Screen”.','Confirm the installation.'],
@@ -65,7 +65,7 @@ const copy=()=>({
   es:{
     skip:'Ir al contenido principal',install:'Instalar aplicación',installed:'Aplicación instalada',
     online:'Conexión restablecida.',offline:'Modo sin conexión: los mundos locales preparados siguen disponibles.',
-    unavailable:'Esta acción necesita una conexión segura.',skinsOffline:'Tu skin actual sigue activa. Reconecta para restaurar o cambiar skins Premium.',
+    unavailable:'Esta acción necesita una conexión segura.',skinsOffline:'Tu skin actual sigue activa. Reconecta para restaurar o comprar skins y derechos Premium.',
     title:'Instalar la Orbe',kicker:'DIVINA BRUXA · APLICACIÓN',
     ios:['Abre esta página en Safari.','Toca Compartir.','Elige “Añadir a pantalla de inicio” y confirma con “Añadir”.'],
     browser:['Abre el menú del navegador.','Elige “Instalar aplicación” o “Añadir a pantalla de inicio”.','Confirma la instalación.'],
@@ -79,7 +79,7 @@ const copy=()=>({
 const installStyle=()=>{
   if(document.getElementById(STYLE_ID))return;
   const link=document.createElement('link');
-  link.id=STYLE_ID;link.rel='stylesheet';link.href='./pwa-resilience-v324.css?v=541';
+  link.id=STYLE_ID;link.rel='stylesheet';link.href='./pwa-resilience-v324.css?v=542';
   document.head.append(link);
 };
 
@@ -276,14 +276,14 @@ const setupOfflinePreparation=()=>{
 
 const setupServiceWorker=()=>{
   if(!('serviceWorker'in navigator))return;
-  globalThis.__divinaSWBootstrap='v541';
-  const register=()=>navigator.serviceWorker.register('./sw.js?v=541',{updateViaCache:'none'})
+  globalThis.__divinaSWBootstrap='v542';
+  const register=()=>navigator.serviceWorker.register('./sw.js?v=542',{updateViaCache:'none'})
     .then(registration=>{
-      dispatchEvent(new CustomEvent('divina:pwa-ready',{detail:{scope:registration.scope,version:VERSION,recovery:'experiencias-conversao-v541'}}));
+      dispatchEvent(new CustomEvent('divina:pwa-ready',{detail:{scope:registration.scope,version:VERSION,recovery:'identidade-skins-v542'}}));
       registration.update().catch(()=>{});
       return registration;
     })
-    .catch(error=>console.error('[Divina] PWA V541 isolado indisponível',error));
+    .catch(error=>console.error('[Divina] PWA V542 isolado indisponível',error));
 
   // Register immediately, then once more after window.load.
   // Reforça a mesma versão após o carregamento para cobrir retomadas do iOS.

@@ -7,7 +7,7 @@ export const PREMIUM_PRODUCTS_V191 = Object.freeze([
   Object.freeze({
     key:'premium_lifetime', kind:'premium', name:'Divina Bruxa Premium',
     priceCents:19990, billingMode:'payment', cycle:'pagamento único',
-    description:'A jornada completa de estudo, prática e as 30 skins da Orbe. A IA é separada.'
+    description:'A jornada completa de estudo, prática e as 30 skins da Orbe. Cada skin também pode ser comprada separadamente; a IA é separada.'
   }),
   Object.freeze({
     key:'orbe_ai_monthly', kind:'ai_subscription', name:'Orbe IA',
@@ -27,7 +27,7 @@ export const PREMIUM_FEATURES_V191 = Object.freeze([
   Object.freeze({ label:'Tiragens avançadas e Mesa Real avançada', free:false, premium:true }),
   Object.freeze({ label:'Diário e Espelho avançados', free:false, premium:true }),
   Object.freeze({ label:'Conteúdo offline e jornadas sazonais', free:false, premium:true }),
-  Object.freeze({ label:'Constelação completa das 30 skins', free:false, premium:true }),
+  Object.freeze({ label:'Constelação completa das 30 skins', free:false, premium:true, note:'Também disponíveis por unidade' }),
   Object.freeze({ label:'Orbe IA', free:false, premium:false, note:'Produto separado' })
 ]);
 
@@ -43,6 +43,8 @@ export const BILLING_POLICY_V191 = Object.freeze({
   premiumIncludesAI:false,
   premiumSkinCount:30,
   freeSkinId:'classic',
+  skinsAlsoSoldIndividually:true,
+  individualSkinCheckoutEnabled:false,
   products:PREMIUM_PRODUCTS_V191,
   lifecycle:Object.freeze(['snapshot','simulate_purchase','restore','refund','revoke','cancel_subscription'])
 });

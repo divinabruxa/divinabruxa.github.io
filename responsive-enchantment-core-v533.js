@@ -88,7 +88,7 @@ const ensureSkinsWorld=()=>{
   section.id='skins';
   section.className='screen skins-celestial-screen';
   section.setAttribute('aria-hidden','true');
-  section.innerHTML='<p class="eyebrow">SKINS DA ORBE · PERSONALIZAÇÃO CONSCIENTE</p><h2>Trinta formas de sentir o mesmo universo.</h2><p class="lead">Escolha a aparência da sua Orbe. Cada skin é somente visual: nenhuma delas muda cartas, significados, chances, direitos ou a presença da Whit.</p><div id="skinsApp"></div>';
+  section.innerHTML='<p class="eyebrow">SKINS DA ORBE · PREÇOS UNITÁRIOS · V542</p><h2>Trinta formas de sentir o mesmo universo.</h2><p class="lead">A Clássica Divina é gratuita. Cada uma das outras 29 skins pode ser comprada separadamente, sem Premium, ou recebida com o Premium vitalício. Todas são somente visuais.</p><div id="skinsApp"></div>';
   const subscriptions=document.getElementById('subscriptions');
   if(subscriptions?.parentElement===app)subscriptions.after(section);
   else app.append(section);

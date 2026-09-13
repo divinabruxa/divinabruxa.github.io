@@ -1,7 +1,7 @@
 /* DIVINA BRUXA — CONSTELAÇÃO DAS 30 SKINS V201
    Propriedade e skin ativa vêm da conta STAGING; a troca visual continua atômica. */
 
-import { SKINS_V6 } from './skin-catalog-v6.js?v=142';
+import { SKINS_V6, moneySkinV542 } from './skin-catalog-v6.js?v=542';
 import { skinByIdV12 } from './skin-registry-v12.js?v=133';
 import { activateSkinFluidV12, activeSkinV12, prepareSkinV12 } from './runtime-v12.js?v=133';
 
@@ -50,21 +50,25 @@ export class SkinsEngineV201 {
     const visible = this.visibleSkins();
     this.root.innerHTML = `
       <div class="skins-v191-shell" data-release="V201" data-switching="${Boolean(this.pending)}">
-        <aside class="skins-v191-oath"><span>30/30</span><p><b>Cosméticas, sincronizadas e honestas.</b><small>Nenhuma skin muda sorte, cartas, significado, velocidade ou acesso à IA. A Clássica Divina é sempre gratuita.</small></p></aside>
+        <aside class="skins-v191-oath"><span>30/30</span><p><b>Cosméticas, sincronizadas e com preço transparente.</b><small>Nenhuma skin muda sorte, cartas, significado, velocidade ou acesso à IA. A Clássica Divina é sempre gratuita; as outras 29 podem ser adquiridas por unidade ou recebidas com o Premium.</small></p></aside>
         <section class="skins-v191-stage" aria-labelledby="skinsV191Current">
           <div class="skins-v191-orb" aria-hidden="true"><i></i><img src="${escapeHTML(current.preview || current.image)}" alt="" width="360" height="360" decoding="async" fetchpriority="high"></div>
           <div><p class="eyebrow">SUA ORBE ATUAL</p><h3 id="skinsV191Current">${escapeHTML(current.name)}</h3><p>Uma escolha é aplicada à Home, Menu Mágico, mini-Orbe, Tarot e portais sem reiniciar o aplicativo.</p><div><button type="button" data-classic${active === 'classic' || this.pending ? ' disabled' : ''}>USAR CLÁSSICA DIVINA</button><button type="button" data-restore${this.pending ? ' disabled' : ''}>RESTAURAR DA CONTA</button></div></div>
         </section>
         <section class="skins-v191-tools" aria-label="Filtrar skins">
           <label><span>Buscar realidade</span><input type="search" value="${escapeHTML(this.query)}" placeholder="Lua, cristal, portal…" data-search></label>
-          <div><button type="button" data-filter="all" aria-pressed="${this.filter === 'all'}">TODAS</button><button type="button" data-filter="owned" aria-pressed="${this.filter === 'owned'}">MINHAS</button><button type="button" data-filter="locked" aria-pressed="${this.filter === 'locked'}">PREMIUM</button></div>
+          <div><button type="button" data-filter="all" aria-pressed="${this.filter === 'all'}">TODAS</button><button type="button" data-filter="owned" aria-pressed="${this.filter === 'owned'}">MINHAS</button><button type="button" data-filter="locked" aria-pressed="${this.filter === 'locked'}">À VENDA</button></div>
           <p><b>${this.owned.size}</b> liberada${this.owned.size === 1 ? '' : 's'} · ${visible.length} visível${visible.length === 1 ? '' : 'eis'}</p>
         </section>
         <p class="skins-v191-live" role="status" aria-live="polite" aria-atomic="true"></p>
         <div class="skins-v191-grid" role="list" aria-label="Galeria das 30 skins">
           ${visible.length ? visible.map(skin => this.card(skin, active)).join('') : '<p class="skins-v191-empty">Nenhuma skin corresponde a este filtro.</p>'}
         </div>
-        <aside class="skins-v191-premium"><p><span>✦</span><b>As 30 skins fazem parte do Premium vitalício.</b><small>A Orbe IA não está incluída. Compras reais continuam desligadas.</small></p><button type="button" data-open-premium>VER PREMIUM</button></aside>
+        <aside class="skins-v191-premium"><p><span>✦</span><b>Escolha sua forma de acesso.</b><small>Cada skin paga tem compra unitária e todas também fazem parte do Premium vitalício. A Orbe IA não está incluída.</small></p><button type="button" data-open-premium>COMPARAR COM PREMIUM</button></aside>
+        <dialog class="skin-v542-dialog" data-skin-product aria-labelledby="skinV542ProductTitle">
+          <form method="dialog"><button type="submit" class="skin-v542-close" aria-label="Fechar">×</button></form>
+          <div data-skin-product-body></div>
+        </dialog>
       </div>`;
     this.bind();
     this.observePreviews();
@@ -77,10 +81,10 @@ export class SkinsEngineV201 {
     const preview = escapeHTML(skin.preview || skin.image);
     return `<article class="skin-v191-card${current ? ' is-active' : ''}${owned ? ' is-owned' : ' is-locked'}" data-skin-card="${escapeHTML(skin.id)}" role="listitem"${current ? ' aria-current="true"' : ''} style="--skin-accent:${escapeHTML(skin.tokens.accent)};--skin-light:${escapeHTML(skin.tokens.light)}">
       <button class="skin-v191-preview" type="button" data-preview="${escapeHTML(skin.id)}" aria-label="Ampliar prévia de ${escapeHTML(skin.name)}">
-        <img ${current ? `src="${preview}" ` : ''}data-preview-src="${preview}" alt="" width="320" height="320" loading="lazy" decoding="async" fetchpriority="low"><span>${current ? 'ATIVA' : owned ? 'LIBERADA' : 'PREMIUM'}</span>
+        <img ${current ? `src="${preview}" ` : ''}data-preview-src="${preview}" alt="" width="320" height="320" loading="lazy" decoding="async" fetchpriority="low"><span>${current ? 'ATIVA' : owned ? 'ADQUIRIDA' : skin.id === 'classic' ? 'GRÁTIS' : 'COMPRA ÚNICA'}</span>
       </button>
-      <div><small>${escapeHTML(catalog.collection)}</small><h3>${escapeHTML(skin.name)}</h3><p>${skin.id === 'classic' ? 'Grátis para sempre' : 'Incluída no Premium vitalício'}</p></div>
-      <button type="button" data-skin-action="${escapeHTML(skin.id)}"${current || this.pending ? ' disabled' : ''}>${current ? 'ATIVA' : owned ? 'USAR ESTA SKIN' : 'CONHECER O PREMIUM'}</button>
+      <div><small>${escapeHTML(catalog.collection)}</small><h3>${escapeHTML(skin.name)}</h3><p>${skin.id === 'classic' ? 'Grátis para sempre' : `${moneySkinV542(catalog.priceCents)} · pagamento único`}</p><strong>${skin.id === 'classic' ? 'Sua forma essencial' : 'Também incluída no Premium'}</strong></div>
+      <button type="button" data-skin-action="${escapeHTML(skin.id)}"${current || this.pending ? ' disabled' : ''}>${current ? 'ATIVA' : owned ? 'USAR ESTA SKIN' : `VER COMPRA · ${moneySkinV542(catalog.priceCents)}`}</button>
     </article>`;
   }
 
@@ -152,11 +156,28 @@ export class SkinsEngineV201 {
   async choose(id) {
     if (this.pending || !SKINS_V6.some(skin => skin.id === id)) return;
     if (!this.owned.has(id)) {
-      announceGlobal(this.authenticated ? 'Esta realidade está incluída no Premium vitalício.' : 'Entre na Conta e conheça o Premium para liberar esta realidade.');
-      globalThis.orbe?.go?.(this.authenticated ? 'subscriptions' : 'login');
+      this.openProduct(id);
       return;
     }
     await this.switchTo(id);
+  }
+
+  openProduct(id) {
+    const catalog = SKINS_V6.find(skin => skin.id === id);
+    const skin = skinByIdV12(id);
+    const dialog = this.root.querySelector('[data-skin-product]');
+    const body = dialog?.querySelector('[data-skin-product-body]');
+    if (!catalog || !skin || !dialog || !body || catalog.id === 'classic') return false;
+    body.innerHTML = `<div class="skin-v542-product-orb" aria-hidden="true"><img src="${escapeHTML(skin.preview || skin.image)}" alt="" width="240" height="240" decoding="async"></div><p class="eyebrow">COMPRA UNITÁRIA · SEM PREMIUM OBRIGATÓRIO</p><h3 id="skinV542ProductTitle">${escapeHTML(skin.name)}</h3><strong>${moneySkinV542(catalog.priceCents)}</strong><p>Pagamento único para liberar esta skin na sua conta e restaurá-la em seus aparelhos. A aparência é cosmética e não altera cartas, sorte, leituras ou IA.</p><aside><b>STAGING · SEM COBRANÇA REAL</b><span>O produto individual está preparado, mas o checkout real continua bloqueado até revisão de segurança e autorização de produção.</span></aside><div class="skin-v542-product-actions"><button type="button" data-skin-staging-disabled disabled>COMPRA SEGURA EM PREPARAÇÃO</button><button type="button" data-skin-see-premium>VER PREMIUM COM 30 SKINS</button></div>`;
+    body.querySelector('[data-skin-see-premium]')?.addEventListener('click', () => {
+      dialog.close();
+      globalThis.orbe?.go?.('subscriptions');
+    });
+    this.prepare(id);
+    if (typeof dialog.showModal === 'function') dialog.showModal();
+    else dialog.setAttribute('open', '');
+    announceGlobal(`${skin.name}: compra unitária por ${moneySkinV542(catalog.priceCents)} preparada em STAGING.`);
+    return true;
   }
 
   async switchTo(id) {
@@ -201,7 +222,8 @@ export class SkinsEngineV201 {
       const button = card.querySelector('[data-skin-action]');
       if (button) {
         button.disabled = current || Boolean(this.pending);
-        button.textContent = current ? 'ATIVA' : this.pending === id ? 'ABRINDO…' : this.owned.has(id) ? 'USAR ESTA SKIN' : 'CONHECER O PREMIUM';
+        const catalog = SKINS_V6.find(item => item.id === id);
+        button.textContent = current ? 'ATIVA' : this.pending === id ? 'ABRINDO…' : this.owned.has(id) ? 'USAR ESTA SKIN' : `VER COMPRA · ${moneySkinV542(catalog?.priceCents)}`;
       }
     });
   }
@@ -238,7 +260,7 @@ export class SkinsEngineV201 {
     this.owned = new Set(['classic']);
     if (activeSkinV12() !== 'classic') await activateSkinFluidV12('classic').catch(() => false);
     this.render();
-    if (showFeedback) this.announce('Entre na Conta para restaurar as skins Premium.');
+    if (showFeedback) this.announce('Entre na Conta para restaurar suas skins adquiridas e os direitos do Premium.');
   }
 
   announce(message) {

@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — MACROETAPA 7/10 · IDENTIDADE, DIREITOS E PERSONALIZAÇÃO V531
+/* DIVINA BRUXA 3.0 — MACROETAPA 8/14 · IDENTIDADE, DIREITOS, SKINS E PRESENÇA V542
    Conta, Premium, Skins e Notificações formam quatro mundos conectados pela
    mesma Orbe V501. Esta camada não recria autenticação, billing, entitlements,
    catálogo de skins ou consentimento e não lê conteúdo privado. */
@@ -6,7 +6,7 @@
 import { COMMERCIAL_TRUTH_V200 } from './commercial-truth-v200.js?v=200';
 import { SKIN_REGISTRY_V12 } from './skin-registry-v12.js?v=12';
 
-const RELEASE = 'V531';
+const RELEASE = 'V542';
 const STYLE_ID = 'divinaIdentityRightsV531Styles';
 const MARK = Symbol.for('divina.identity.rights.core.v531');
 const ROUTES = Object.freeze(['login', 'subscriptions', 'skins', 'notifications']);
@@ -28,22 +28,24 @@ const PROFILE = Object.freeze({
     route:'subscriptions', sigil:'♢', eyebrow:'DIREITOS TRANSPARENTES', title:'Premium',
     status:'R$ 199,90 · uma vez', anchor:'#subscriptionApp',
     panelTitle:'Valor, acesso e restauração sem confusão.',
-    panelCopy:'Premium é vitalício e inclui as 30 skins. A Orbe IA continua separada, com créditos e ciclo próprios.',
+    panelCopy:'Premium é vitalício e inclui as 30 skins. Cada skin paga também pode ser comprada separadamente, sem exigir Premium. A Orbe IA continua separada.',
     facts:Object.freeze([
       ['PREMIUM', 'R$ 199,90 uma vez'],
       ['ORBE IA', 'R$ 89,90 por mês'],
+      ['SKIN AVULSA', 'R$ 19,90 a R$ 49,90'],
       ['AUTORIDADE', 'sempre o servidor']
     ]),
     action:Object.freeze({ route:'skins', label:'CONHECER AS 30 SKINS' })
   }),
   skins:Object.freeze({
     route:'skins', sigil:'✦', eyebrow:'FORMA ESCOLHIDA', title:'Skins',
-    status:'30 formas cosméticas', anchor:'#skinsApp',
+    status:'29 preços + 1 gratuita', anchor:'#skinsApp',
     panelTitle:'Mudar a aparência sem mudar a verdade.',
-    panelCopy:'Uma única textura acompanha a Orbe por todos os mundos. Skins nunca alteram cartas, sorte, IA ou acesso.',
+    panelCopy:'Uma única textura acompanha a Orbe por todos os mundos. Escolha uma skin avulsa ou receba todas com Premium; nenhuma altera cartas, sorte ou IA.',
     facts:Object.freeze([
       ['FORMAS', '30 no catálogo'],
       ['CLÁSSICA', 'sempre gratuita'],
+      ['PAGAS', 'compra unitária'],
       ['EFEITO', 'somente cosmético']
     ]),
     action:Object.freeze({ route:'subscriptions', label:'ENTENDER O PREMIUM' })
@@ -62,6 +64,29 @@ const PROFILE = Object.freeze({
   })
 });
 
+const DEPTH = Object.freeze({
+  login:Object.freeze([
+    Object.freeze({title:'O que a Conta continua',copy:'Skins adquiridas, skin equipada, Premium e preferências podem ser restaurados entre aparelhos quando o servidor confirma o direito.'}),
+    Object.freeze({title:'O que permanece seu',copy:'Diário e contexto íntimo continuam privados por padrão. Nenhuma tela administrativa recebe o corpo dessas escritas.'}),
+    Object.freeze({title:'Saída sempre disponível',copy:'Encerrar sessão, exportar dados e solicitar exclusão fazem parte do controle da pessoa — não são obstáculos escondidos.'})
+  ]),
+  subscriptions:Object.freeze([
+    Object.freeze({title:'Premium vitalício',copy:'R$ 199,90 uma vez para a jornada avançada e todas as 30 skins. Não inclui a Orbe IA.'}),
+    Object.freeze({title:'Skin por unidade',copy:'Quem não quiser Premium pode escolher somente a aparência desejada, com preço entre R$ 19,90 e R$ 49,90.'}),
+    Object.freeze({title:'Orbe IA separada',copy:'R$ 89,90 por mês com 400 créditos. Luna usa 1, Terra usa 10 e Sol permanece desligada.'})
+  ]),
+  skins:Object.freeze([
+    Object.freeze({title:'Essencial',copy:'Clássica Divina · gratuita para sempre.'}),
+    Object.freeze({title:'Quatro faixas honestas',copy:'R$ 19,90 · R$ 29,90 · R$ 39,90 · R$ 49,90. O preço aparece diretamente em cada skin.'}),
+    Object.freeze({title:'Um direito, todas as Orbes',copy:'Depois da confirmação do servidor, a escolha pode acompanhar Home, Menu, dock, Tarot e demais mundos.'})
+  ]),
+  notifications:Object.freeze([
+    Object.freeze({title:'Permissão antes do chamado',copy:'Cada categoria nasce da sua escolha. Marketing permanece desligado até consentimento explícito.'}),
+    Object.freeze({title:'Silêncio respeitado',copy:'O intervalo padrão das 22h às 08h segue o horário de Brasília e pode ser revisto pela pessoa.'}),
+    Object.freeze({title:'Sem intimidade como alvo',copy:'Perguntas, Diário, conversa com Whit e conteúdo de consultas não são usados para segmentar notificações.'})
+  ])
+});
+
 const safe = value => String(value ?? '').replace(/[&<>"']/g, character => ({
   '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
 }[character]));
@@ -74,7 +99,7 @@ function installStyle() {
   const link = document.createElement('link');
   link.id = STYLE_ID;
   link.rel = 'stylesheet';
-  link.href = './identity-rights-core-v531.css?v=531';
+  link.href = './identity-rights-core-v531.css?v=542';
   document.head.append(link);
 }
 
@@ -97,6 +122,12 @@ export function assertIdentityRightsContractV531() {
   if (SKIN_REGISTRY_V12.skins.length !== 30 || SKIN_REGISTRY_V12.fallbackSkin?.id !== 'classic') {
     throw new Error('IDENTITY_SKIN_CATALOG_DRIFT');
   }
+  if (COMMERCIAL_TRUTH_V200.skins?.individualPurchase !== true || COMMERCIAL_TRUTH_V200.skins?.paidCount !== 29) {
+    throw new Error('IDENTITY_SKIN_UNIT_PURCHASE_DRIFT');
+  }
+  if (COMMERCIAL_TRUTH_V200.skins?.priceTiersCents?.join(',') !== '1990,2990,3990,4990') {
+    throw new Error('IDENTITY_SKIN_UNIT_PRICE_DRIFT');
+  }
   return true;
 }
 
@@ -104,7 +135,7 @@ assertIdentityRightsContractV531();
 
 export const IDENTITY_RIGHTS_CONTRACT_V531 = Object.freeze({
   release:RELEASE,
-  macroStage:'7/10',
+  macroStage:'8/14',
   worlds:ROUTES,
   oneCanonicalOrb:true,
   usesOrbJourneyV525:true,
@@ -124,6 +155,10 @@ export const IDENTITY_RIGHTS_CONTRACT_V531 = Object.freeze({
   checkoutEnabled:false,
   premiumLifetimePriceCents:19990,
   premiumIncludesAllSkins:true,
+  skinsAlsoSoldIndividually:true,
+  paidSkinCount:29,
+  individualSkinPriceTiersCents:Object.freeze([1990,2990,3990,4990]),
+  individualSkinCheckoutEnabled:false,
   premiumIncludesAI:false,
   aiMonthlyPriceCents:8990,
   aiCreditsPerCycle:400,
@@ -151,14 +186,13 @@ export class IdentityRightsCoreV531 {
     this.orbPresence = orbPresence || globalThis.divinaOrbUniversalPresenceV526?.engine || null;
     this.universe = universe || globalThis.orbe?.universe || null;
     this.abort = new AbortController();
-    this.observer = null;
     this.frame = 0;
     this.pointerFrame = 0;
     this.pointerSample = null;
     installStyle();
     this.bind();
     this.scheduleRefresh();
-    document.documentElement.dataset.identityRights = 'v531';
+    document.documentElement.dataset.identityRights = 'v542';
   }
 
   bind() {
@@ -174,13 +208,7 @@ export class IdentityRightsCoreV531 {
     );
     document.addEventListener('click', event => this.handleClick(event), { capture:true, signal });
     document.addEventListener('pointerdown', event => this.handlePointer(event, true), { passive:true, signal });
-    document.addEventListener('pointermove', event => this.handlePointer(event, false), { passive:true, signal });
     globalThis.addEventListener?.('pageshow', () => this.scheduleRefresh(), { passive:true, signal });
-
-    this.observer = new MutationObserver(records => {
-      if (records.some(record => record.type === 'childList')) this.scheduleRefresh();
-    });
-    if (document.body) this.observer.observe(document.body, { childList:true, subtree:true });
   }
 
   handleClick(event) {
@@ -240,6 +268,7 @@ export class IdentityRightsCoreV531 {
     ROUTES.forEach(route => {
       this.mountNavigation(route);
       this.mountCovenant(route);
+      this.mountDepth(route);
       this.decorate(route);
     });
     this.updateNavigation();
@@ -257,7 +286,7 @@ export class IdentityRightsCoreV531 {
       nav.setAttribute('aria-label', 'Identidade, direitos, personalização e notificações na mesma Orbe');
       nav.innerHTML = `
         <span class="ir531-nav__aura" aria-hidden="true"></span>
-        <header class="ir531-nav__head"><span aria-hidden="true">◎</span><div><small>MACROETAPA 7/10 · MESMA ORBE</small><b>Identidade, Direitos e Personalização</b></div><em>V531</em></header>
+        <header class="ir531-nav__head"><span aria-hidden="true">◎</span><div><small>PLANO 3.0 · MACROETAPA 8/14 · MESMA ORBE</small><b>Identidade, Direitos, Skins e Presença</b></div><em>V542</em></header>
         <div class="ir531-nav__paths">${ROUTES.map(id => {
           const item = PROFILE[id];
           return `<button type="button" data-ir531-route="${id}" aria-label="Viajar para ${safe(item.title)}"><span aria-hidden="true">${item.sigil}</span><span><small>${safe(item.eyebrow)}</small><b>${safe(item.title)}</b><em>${safe(item.status)}</em></span></button>`;
@@ -267,7 +296,7 @@ export class IdentityRightsCoreV531 {
       if (anchor) anchor.insertAdjacentElement('beforebegin', nav);
       else root.prepend(nav);
     }
-    root.dataset.identityWorld = 'v531';
+    root.dataset.identityWorld = 'v542';
     return nav;
   }
 
@@ -290,6 +319,23 @@ export class IdentityRightsCoreV531 {
     const anchor = root.querySelector(profile.anchor);
     if (nav) nav.insertAdjacentElement('afterend', section);
     else if (anchor) anchor.insertAdjacentElement('beforebegin', section);
+    else root.prepend(section);
+    return section;
+  }
+
+  mountDepth(route) {
+    const root = document.getElementById(route);
+    const chapters = DEPTH[route];
+    if (!root || !chapters) return null;
+    let section = root.querySelector(':scope > [data-ir531-depth]');
+    if (section) return section;
+    section = document.createElement('section');
+    section.className = 'ir531-depth';
+    section.dataset.ir531Depth = route;
+    section.setAttribute('aria-label', `Compromissos de ${PROFILE[route].title}`);
+    section.innerHTML = chapters.map((chapter,index) => `<article><span aria-hidden="true">0${index+1}</span><h3>${safe(chapter.title)}</h3><p>${safe(chapter.copy)}</p></article>`).join('');
+    const covenant = root.querySelector(':scope > [data-ir531-covenant]');
+    if (covenant) covenant.insertAdjacentElement('afterend', section);
     else root.prepend(section);
     return section;
   }
@@ -336,15 +382,16 @@ export class IdentityRightsCoreV531 {
         root:Boolean(root),
         navCount:root?.querySelectorAll?.(':scope > [data-ir531-nav]').length || 0,
         covenantCount:root?.querySelectorAll?.(':scope > [data-ir531-covenant]').length || 0,
+        depthCount:root?.querySelectorAll?.(':scope > [data-ir531-depth]').length || 0,
         surfaceCount:root?.querySelectorAll?.('[data-ir531-surface]').length || 0
       })];
     }));
-    const mountedAllWorlds = Object.values(routes).every(item => item.root && item.navCount === 1 && item.covenantCount === 1);
+    const mountedAllWorlds = Object.values(routes).every(item => item.root && item.navCount === 1 && item.covenantCount === 1 && item.depthCount === 1);
     return Object.freeze({
       release:RELEASE,
       routes:Object.freeze(routes),
       mountedAllWorlds,
-      duplicateNavigation:Object.values(routes).some(item => item.navCount > 1 || item.covenantCount > 1),
+      duplicateNavigation:Object.values(routes).some(item => item.navCount > 1 || item.covenantCount > 1 || item.depthCount > 1),
       canonicalOrbCount:document.querySelectorAll('[data-supreme-orb="living"]').length,
       skinRegistryCount:SKIN_REGISTRY_V12.skins.length,
       premiumPriceCents:COMMERCIAL_TRUTH_V200.plans.find(item => item.productKey === 'premium_lifetime')?.priceCents || 0,
@@ -372,13 +419,13 @@ export class IdentityRightsCoreV531 {
 
   destroy() {
     this.abort.abort();
-    this.observer?.disconnect();
     if (this.frame) cancelAnimationFrame(this.frame);
     if (this.pointerFrame) cancelAnimationFrame(this.pointerFrame);
     ROUTES.forEach(route => {
       const root = document.getElementById(route);
       root?.querySelector(':scope > [data-ir531-nav]')?.remove();
       root?.querySelector(':scope > [data-ir531-covenant]')?.remove();
+      root?.querySelector(':scope > [data-ir531-depth]')?.remove();
       root?.querySelectorAll('[data-ir531-surface]').forEach(surface => delete surface.dataset.ir531Surface);
       if (root) delete root.dataset.identityWorld;
     });
@@ -400,7 +447,7 @@ export function createIdentityRightsCoreV531(options = {}) {
   document.dispatchEvent(new CustomEvent('divina:identity-rights-ready-v531', {
     detail:Object.freeze({
       release:RELEASE,
-      macroStage:'7/10',
+      macroStage:'8/14',
       worlds:ROUTES,
       canonicalOrb:'v501',
       realBilling:false,

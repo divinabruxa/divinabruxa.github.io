@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R019 · SKINS + PREMIUM V318
+/* DIVINA BRUXA 3.0 — IDENTIDADE, DIREITOS, SKINS E PRESENÇA · V542
    Mundos vivos sobre SkinsEngine V201 e PremiumEngine V191.
    Não duplica catálogo, entitlement, snapshot, billing, compra ou troca de skin. */
 
-import { SkinsEngineV201 } from './skins-v201.js?v=201';
-import { PremiumEngineV191 } from './premium-engine-v191.js?v=191';
+import { SkinsEngineV201 } from './skins-v201.js?v=542';
+import { PremiumEngineV191 } from './premium-engine-v191.js?v=542';
 import { activeSkinV12, prepareSkinV12 } from './runtime-v12.js?v=133';
 import { skinByIdV12 } from './skin-registry-v12.js?v=133';
 
-const RELEASE = 'V318';
+const RELEASE = 'V542';
 const SKINS_WORLD_ID = 'skinsWorldV318';
 const PREMIUM_WORLD_ID = 'premiumWorldV318';
 
@@ -52,6 +52,9 @@ export class SkinsWorldV318 {
     emit('divina:skins-world-ready', {
       total:30,
       freeSkin:'classic',
+      paidSkins:29,
+      individualPurchase:true,
+      priceTiersCents:[1990,2990,3990,4990],
       realBilling:false
     });
   }
@@ -74,7 +77,7 @@ export class SkinsWorldV318 {
         <div>
           <p class="eyebrow">SKINS · VESTIR A ORBE</p>
           <h3>A mesma alma. Trinta formas.</h3>
-          <p>Troque a aparência sem interromper a jornada. A skin acompanha todas as Orbes e nunca altera sorte, cartas, significado ou acesso.</p>
+          <p>Troque a aparência sem interromper a jornada. Cada skin paga pode ser comprada separadamente, sem exigir Premium, e acompanha todas as Orbes sem alterar sorte, cartas, significado ou acesso.</p>
         </div>
         <div class="spw318__living-orb" aria-hidden="true">
           <img src="${safe(active.preview || active.image)}" alt="" width="180" height="180" decoding="async">
@@ -86,9 +89,9 @@ export class SkinsWorldV318 {
         <div>
           <span>30</span><small>formas totais</small>
         </div>
-        <button type="button" data-spw318-premium>VER A COROA PREMIUM</button>
+        <button type="button" data-spw318-premium>COMPARAR COM PREMIUM</button>
       </div>
-      <p class="spw318__truth"><span>◇</span><span><b>Cosmético é cosmético.</b> Nenhuma skin melhora leituras, IA ou chances. A Clássica Divina continua gratuita.</span></p>`;
+      <p class="spw318__truth"><span>◇</span><span><b>Cosmético é cosmético.</b> Nenhuma skin melhora leituras, IA ou chances. A Clássica Divina continua gratuita; as 29 pagas têm preço unitário visível.</span></p>`;
 
     world.querySelector('[data-spw318-premium]')?.addEventListener('click', () => {
       globalThis.orbe?.go?.('subscriptions');
@@ -106,6 +109,8 @@ export class SkinsWorldV318 {
       activeSkin:activeSkinV12(),
       globalApply:true,
       cosmeticOnly:true,
+      individualPurchase:true,
+      priceTiersCents:[1990,2990,3990,4990],
       realBilling:false
     });
   }
@@ -166,7 +171,7 @@ export class PremiumWorldV318 {
         <div>
           <p class="eyebrow">COROA PREMIUM · JORNADA COMPLETA</p>
           <h3>Valor claro. Magia sem armadilha.</h3>
-          <p>Premium é vitalício e a Orbe IA continua separada. O ambiente permanece STAGING: nenhum pagamento real é processado nesta etapa.</p>
+          <p>Premium é vitalício, reúne as 30 skins e a jornada avançada. Quem preferir pode comprar somente uma skin; a Orbe IA continua separada. O ambiente permanece STAGING.</p>
         </div>
         <span class="spw318__crown" aria-hidden="true">♢</span>
       </header>
@@ -175,7 +180,7 @@ export class PremiumWorldV318 {
         <article class="${premiumActive ? 'is-active' : ''}">
           <small>PREMIUM VITALÍCIO</small>
           <strong>R$ 199,90</strong>
-          <p>17 módulos · 124 aulas · tiragens avançadas · Diário/Espelho avançados · offline preparado · 30 skins.</p>
+          <p>17 módulos · 124 aulas · tiragens avançadas · Diário/Espelho avançados · offline preparado · todas as 30 skins.</p>
           <span>${premiumActive ? 'ATIVO NO STAGING' : 'PAGAMENTO ÚNICO'}</span>
         </article>
 
@@ -206,6 +211,8 @@ export class PremiumWorldV318 {
       baseEngine:'V191',
       environment:snapshot.environment || 'staging',
       premiumLifetimePriceCents:19990,
+      skinsAlsoSoldIndividually:true,
+      individualSkinPriceTiersCents:[1990,2990,3990,4990],
       aiMonthlyPriceCents:8990,
       realBilling:false,
       stripeCheckout:false,

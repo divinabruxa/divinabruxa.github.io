@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 7/14 · V541
-   Consultas, Loja, Música e Vídeos aprofundados na mesma Orbe.
+/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 8/14 · V542
+   Identidade, direitos, skins e presença aprofundados na mesma Orbe.
    Fluidez, privacidade, Tarot e todas as travas anteriores permanecem íntegros. */
 
 import { CONFIG } from './config-v200.js?v=200';
@@ -36,8 +36,8 @@ import { createWhitCoreSupremeV527 } from './whit-core-supreme-v527.js?v=527';
 import { createTarotUniverseCoreV528 } from './tarot-universe-core-v528.js?v=528';
 import { createWisdomUniverseCoreV529 } from './wisdom-universe-core-v529.js?v=529';
 import { createExperienceConversionCoreV530 } from './experience-conversion-core-v530.js?v=541-depth';
-import { createIdentityRightsCoreV531 } from './identity-rights-core-v531.js?v=531';
-import { createResponsiveEnchantmentCoreV533 } from './responsive-enchantment-core-v533.js?v=533';
+import { createIdentityRightsCoreV531 } from './identity-rights-core-v531.js?v=542';
+import { createResponsiveEnchantmentCoreV533 } from './responsive-enchantment-core-v533.js?v=542-skins';
 import { createQaSupremeCoreV534 } from './qa-supreme-core-v534.js?v=534';
 import { createWorldTruthRegistryV535 } from './world-truth-registry-v535.js?v=535';
 import { createOrbFluidNavigationV535 } from './orb-fluid-navigation-v535.js?v=535';
@@ -60,7 +60,7 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=541')
+const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=542')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
@@ -412,7 +412,7 @@ const experienceDepth = safely('Experiências, Conteúdo e Conversão V541', () 
   })
 );
 
-const identityRights = safely('Identidade, Direitos e Personalização V531', () =>
+const identityRights = safely('Identidade, Direitos, Skins e Presença V542', () =>
   createIdentityRightsCoreV531({
     go,
     orbCore:supremeOrb,
@@ -440,7 +440,7 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V537 = 541;
+const RELEASE_EPOCH_V537 = 542;
 const releaseReloadKeyV537 = `divina-release-reload-${RELEASE_EPOCH_V537}`;
 const reloadForNewReleaseV537 = version => {
   if (Number(version || 0) <= RELEASE_EPOCH_V537) return false;
@@ -470,10 +470,10 @@ if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV537) {
   addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js?v=541', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v541';
+        document.documentElement.dataset.releaseEpoch = 'v542';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V541 registrado');
+        console.info('[Divina] PWA V542 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -862,8 +862,10 @@ window.divinaExperienceReleaseV541 = Object.freeze({
   realBilling:false
 });
 
-window.divinaIdentityRightsV531 = Object.freeze({
-  version:531,
+window.divinaIdentityRightsReleaseV542 = Object.freeze({
+  version:542,
+  macroStage:'8-of-14',
+  title:'Identidade, Direitos, Skins e Presença',
   core:identityRights,
   contract:() => identityRights?.contract?.() || null,
   audit:() => identityRights?.audit?.() || null,
@@ -877,6 +879,10 @@ window.divinaIdentityRightsV531 = Object.freeze({
   frontendEntitlementGrants:false,
   premiumLifetimePriceCents:19990,
   premiumIncludesAllSkins:true,
+  skinsAlsoSoldIndividually:true,
+  paidSkinCount:29,
+  individualSkinPriceTiersCents:[1990,2990,3990,4990],
+  individualSkinCheckoutEnabled:false,
   premiumIncludesAI:false,
   aiMonthlyPriceCents:8990,
   aiCreditsPerCycle:400,
@@ -893,6 +899,7 @@ window.divinaIdentityRightsV531 = Object.freeze({
   extraApiCalls:0,
   permanentAnimationLoops:0
 });
+window.divinaIdentityRightsV531 = window.divinaIdentityRightsReleaseV542;
 
 window.divinaOwnerObservatoryReleaseV532 = Object.freeze({
   version:532,
@@ -1240,10 +1247,10 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V541',
+        release:'V542',
         supremePlan:'3.0-universo-vivo',
         supremePlanMacroStages:14,
-        currentMacroStage:'7-of-14',
+        currentMacroStage:'8-of-14',
         worldTruth:'v535',
         worldTruthRoutes:17,
         orbFluidNavigation:'v535',
@@ -1351,8 +1358,8 @@ const awaken = async () => {
         experienceMusicPlayerLazy:true,
         experienceVideoSearchShare:'published-only',
         experiencePointerMoveEffects:0,
-        identityRights:'v531',
-        identityMacroStage:'7-of-10',
+        identityRights:'v542',
+        identityMacroStage:'8-of-14',
         identityWorlds:['login','subscriptions','skins','notifications'],
         identityNavigation:'same-orb-v525-journey',
         identityAuthAuthority:'AuthClientV201',
@@ -1366,6 +1373,10 @@ const awaken = async () => {
         identityCheckoutEnabled:false,
         identityPremiumLifetimePriceCents:19990,
         identityPremiumIncludesAllSkins:true,
+        identitySkinsAlsoSoldIndividually:true,
+        identityPaidSkinCount:29,
+        identityIndividualSkinPriceTiersCents:[1990,2990,3990,4990],
+        identityIndividualSkinCheckoutEnabled:false,
         identityPremiumIncludesAI:false,
         identityAiMonthlyPriceCents:8990,
         identityAiCreditsPerCycle:400,

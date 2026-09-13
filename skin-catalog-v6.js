@@ -35,7 +35,11 @@ const definitions = [
 ];
 
 export const SKINS_V6 = Object.freeze(definitions.map(([id,name,priceCents,collection],index)=>Object.freeze({
-  id,name,priceCents,collection,index,status:index===0?'free':'paid',cosmeticOnly:true
+  id,name,priceCents,collection,index,status:index===0?'free':'paid',cosmeticOnly:true,
+  productKey:index===0?null:`skin_${id.replaceAll('-','_')}`,
+  billingMode:index===0?'free':'payment',
+  individualPurchase:index!==0,
+  premiumIncluded:true
 })));
 
 export const SKIN_PACKS_V142 = Object.freeze([
@@ -46,3 +50,15 @@ export const SKIN_PACKS_V142 = Object.freeze([
 
 export const skinCatalogById = id => SKINS_V6.find(skin=>skin.id===id) || SKINS_V6[0];
 export const skinPackById = id => SKIN_PACKS_V142.find(pack=>pack.id===id) || null;
+export const SKIN_PRICE_TIERS_V542 = Object.freeze([1990,2990,3990,4990]);
+export const moneySkinV542 = cents => new Intl.NumberFormat('pt-BR', {
+  style:'currency',currency:'BRL'
+}).format(Math.max(0,Number(cents)||0)/100);
+export const assertSkinCatalogV542 = () => {
+  if(SKINS_V6.length!==30||SKINS_V6[0]?.id!=='classic'||SKINS_V6[0]?.priceCents!==0)throw new Error('SKIN_V542_CATALOG_DRIFT');
+  const paid=SKINS_V6.filter(skin=>skin.individualPurchase);
+  if(paid.length!==29||paid.some(skin=>!SKIN_PRICE_TIERS_V542.includes(skin.priceCents)))throw new Error('SKIN_V542_PRICE_DRIFT');
+  if(new Set(paid.map(skin=>skin.productKey)).size!==29)throw new Error('SKIN_V542_PRODUCT_KEY_DRIFT');
+  return true;
+};
+assertSkinCatalogV542();
