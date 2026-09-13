@@ -1,10 +1,10 @@
-/* DIVINA BRUXA — SUPABASE EDGE FUNCTION ADMIN API V532
+/* DIVINA BRUXA — SUPABASE EDGE FUNCTION ADMIN API V547
    Observatório owner-only com agregados sanitizados. Segredos existem apenas
    no ambiente da função; textos íntimos e identificadores pessoais não entram
    nos snapshots administrativos. */
 import { createClient } from 'npm:@supabase/supabase-js@2.112.4';
 
-const RELEASE='V532';
+const RELEASE='V547';
 const MODULES=Object.freeze(['today','finance','users','subscriptions','ai','tarot','school','consultations','store','skins','media','notifications','analytics','seo','security','backups','audit','settings']);
 const SERVICES=Object.freeze({
   'mesa-real-profissional':'Mesa Real Profissional',
@@ -24,6 +24,7 @@ const COOKIE_ACCESS='db_admin_access';
 const COOKIE_REFRESH='db_admin_refresh';
 const PRIVATE_KEYS=/body|content|question|prompt|response|password|secret|token|email|phone|contact|message/i;
 const STAGING_REF='kyphdsamyygavmkzyezr';
+const MAX_BODY_BYTES=16*1024;
 const DEFAULT_ORIGINS=Object.freeze([
   'https://divinabruxa.github.io',
   'https://divinabruxa.com.br',
@@ -43,10 +44,13 @@ const allowedOrigin=request=>{
 };
 const headers=(origin,extra={})=>{
   const result=new Headers({
-    'content-type':'application/json; charset=utf-8','cache-control':'no-store, max-age=0','pragma':'no-cache','vary':'Origin',
+    'content-type':'application/json; charset=utf-8','cache-control':'no-store, max-age=0','pragma':'no-cache','vary':'Origin, Sec-Fetch-Site',
     'access-control-allow-origin':origin,'access-control-allow-credentials':'true','access-control-allow-methods':'GET,POST,PATCH,DELETE,OPTIONS',
-    'access-control-allow-headers':'content-type,x-divina-admin-request','x-content-type-options':'nosniff','referrer-policy':'no-referrer',
-    'permissions-policy':'camera=(), microphone=(), geolocation=()'
+    'access-control-allow-headers':'content-type,x-divina-admin-request','access-control-max-age':'600',
+    'x-content-type-options':'nosniff','x-frame-options':'DENY','referrer-policy':'no-referrer',
+    'cross-origin-resource-policy':'same-site','strict-transport-security':'max-age=31536000; includeSubDomains',
+    'content-security-policy':"default-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'",
+    'permissions-policy':'camera=(), microphone=(), geolocation=(), payment=(), usb=()'
   });
   for(const [key,value] of Object.entries(extra))Array.isArray(value)?value.forEach(item=>result.append(key,item)):result.set(key,value);
   return result;
@@ -76,14 +80,57 @@ const sanitizedMetadata=value=>Object.fromEntries(Object.entries(value||{}).filt
 const audit=async(db,userId,action,moduleId,result,metadata={})=>{
   await db.from('admin_audit_events').insert({actor_user_id:userId||null,action:String(action).slice(0,80),module_id:MODULES.includes(moduleId)?moduleId:'session',result,metadata:sanitizedMetadata(metadata)});
 };
+class RequestError extends Error{constructor(status,code){super(code);this.status=status;this.code=code;}}
 const readBody=async request=>{
-  try{return await request.json();}catch{return {};}
+  const declared=Number(request.headers.get('content-length')||0);
+  if(Number.isFinite(declared)&&declared>MAX_BODY_BYTES)throw new RequestError(413,'request_body_too_large');
+  const type=String(request.headers.get('content-type')||'').toLowerCase();
+  if(!type.includes('application/json'))throw new RequestError(415,'json_content_type_required');
+  const raw=await request.text();
+  if(new TextEncoder().encode(raw).byteLength>MAX_BODY_BYTES)throw new RequestError(413,'request_body_too_large');
+  if(!raw.trim())return {};
+  try{
+    const value=JSON.parse(raw);
+    if(!value||typeof value!=='object'||Array.isArray(value))throw new Error('object_required');
+    return value;
+  }catch{throw new RequestError(400,'invalid_json_body');}
 };
 const validSetup=()=>{
   try{return Boolean(env('SUPABASE_ANON_KEY')&&env('SUPABASE_SERVICE_ROLE_KEY')&&new URL(env('SUPABASE_URL')).hostname===`${STAGING_REF}.supabase.co`);}catch{return false;}
 };
 const isMutating=request=>!['GET','HEAD','OPTIONS'].includes(request.method);
-const requestAllowed=(request,origin)=>!isMutating(request)||(Boolean(origin)&&['v146','v150','v532'].includes(request.headers.get('x-divina-admin-request')||''));
+const requestAllowed=(request,origin)=>!isMutating(request)||(Boolean(origin)&&['v532','v547'].includes(request.headers.get('x-divina-admin-request')||''));
+const fetchMetadataAllowed=request=>{
+  if(!isMutating(request))return true;
+  const mode=String(request.headers.get('sec-fetch-mode')||'').toLowerCase();
+  const destination=String(request.headers.get('sec-fetch-dest')||'').toLowerCase();
+  if(mode&&mode!=='cors')return false;
+  if(destination&&destination!=='empty')return false;
+  return true;
+};
+const sha256=async value=>{
+  const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value));
+  return Array.from(new Uint8Array(digest),item=>item.toString(16).padStart(2,'0')).join('');
+};
+const rateSpec=(path,method)=>{
+  if(path==='/admin/session/recovery')return {bucket:'mfa-recovery',limit:5,window:1800};
+  if(path==='/admin/session'&&method==='POST')return {bucket:'sign-in',limit:5,window:900};
+  if(path.includes('/mfa')||path.includes('/recovery-codes'))return {bucket:'mfa',limit:8,window:600};
+  if(method==='GET')return {bucket:'admin-read',limit:240,window:60};
+  return {bucket:'admin-write',limit:60,window:60};
+};
+const consumeRateBudget=async(request,path)=>{
+  const spec=rateSpec(path,request.method);
+  const forwarded=String(request.headers.get('x-forwarded-for')||request.headers.get('cf-connecting-ip')||'unknown').split(',')[0].trim().slice(0,96);
+  const agent=String(request.headers.get('user-agent')||'unknown').slice(0,256);
+  const pepper=env('ADMIN_RATE_LIMIT_PEPPER')||env('ADMIN_RECOVERY_PEPPER')||env('SUPABASE_SERVICE_ROLE_KEY');
+  const keyHash=await sha256(`${STAGING_REF}:${forwarded}:${agent}:${pepper}`);
+  const {data,error}=await serviceClient().rpc('consume_admin_request_budget_v547',{
+    p_key_hash:keyHash,p_bucket:spec.bucket,p_limit:spec.limit,p_window_seconds:spec.window
+  });
+  if(error||!data||typeof data.allowed!=='boolean')return {error:'rate_limit_unavailable'};
+  return {...data,bucket:spec.bucket};
+};
 const isoAgo=days=>new Date(Date.now()-days*86400000).toISOString();
 const integer=value=>Math.max(0,Math.floor(Number(value)||0));
 const number=value=>Number.isFinite(Number(value))?Number(value):0;
@@ -232,8 +279,9 @@ async function recoverMfa(request,origin){
   const body=await readBody(request),recoveryCode=String(body.recoveryCode||'').trim().toUpperCase();
   if(!/^[A-Z0-9]{3}-[A-Z0-9]{3}-[A-Z0-9]{3}$/.test(recoveryCode))return json(400,{error:'invalid_recovery_code'},origin);
   const codeHash=await hashRecovery(context.user.id,recoveryCode);
-  const {data:stored}=await context.db.from('admin_recovery_codes').select('id').eq('user_id',context.user.id).eq('code_hash',codeHash).is('used_at',null).maybeSingle();
-  if(!stored){await audit(context.db,context.user.id,'mfa-recovery','security','denied');return json(403,{error:'invalid_recovery_code'},origin);}
+  const {data:consumed,error:consumeError}=await context.db.rpc('consume_admin_recovery_code_v547',{p_user_id:context.user.id,p_code_hash:codeHash});
+  if(consumeError)return json(503,{error:'mfa_recovery_unavailable'},origin);
+  if(consumed!==true){await audit(context.db,context.user.id,'mfa-recovery','security','denied');return json(403,{error:'invalid_recovery_code'},origin);}
   const listed=await context.db.auth.admin.mfa.listFactors({userId:context.user.id});
   if(listed.error)return json(500,{error:'mfa_recovery_failed'},origin);
   const rawFactors=listed.data?.factors||listed.data?.all||listed.data||[];
@@ -244,7 +292,6 @@ async function recoverMfa(request,origin){
     if(removed.error)return json(500,{error:'mfa_recovery_failed'},origin);
   }
   const usedAt=new Date().toISOString();
-  await context.db.from('admin_recovery_codes').update({used_at:usedAt}).eq('id',stored.id).is('used_at',null);
   await context.db.from('admin_sessions').update({revoked_at:usedAt}).eq('user_id',context.user.id).is('revoked_at',null);
   await audit(context.db,context.user.id,'mfa-recovery','security','allowed',{factorCount:factors.length});
   return withCookies(origin,clearCookieHeaders(),200,{ok:true,recoveryAccepted:true,signInAgain:true,environment:'staging'});
@@ -477,16 +524,22 @@ async function securityModule(context){
   return envelope('security',{
     metrics:{activeOwners:owners.filter(item=>item.active===true).length,activeSessions:activeSessions.length,revokedSessions:sessions.filter(item=>Boolean(item.revoked_at)).length,unusedRecoveryCodes:codes.filter(item=>!item.used_at).length,deniedActions30d:audits.filter(item=>item.result==='denied').length,failedActions30d:audits.filter(item=>item.result==='failed').length},
     sessionAssurance:group(activeSessions,'assurance_level'),runtimeGates:flags.map(item=>({key:item.key,enabled:item.enabled===true,updatedAt:item.updated_at})),
-    controls:{verifiedEmailRequired:true,aal2Required:true,recoveryCodesRequired:true,httpOnlyCookie:true,secureCookie:true,serverOwnerRegistry:true,clientRoleTrusted:false,stagingLocked:true}
+    controls:{verifiedEmailRequired:true,aal2Required:true,recoveryCodesRequired:true,httpOnlyCookie:true,secureCookie:true,serverOwnerRegistry:true,hashedOwnerAllowlist:true,atomicRecoveryCode:true,transactionalRateLimit:true,requestBodyLimitBytes:MAX_BODY_BYTES,clientRoleTrusted:false,stagingLocked:true}
   });
 }
 
-async function backupsModule(){
+async function backupsModule(context){
+  const {data,error}=await context.db.rpc('admin_continuity_snapshot_v547');
+  if(error||!data)throw error||new Error('continuity_snapshot_unavailable');
   return envelope('backups',{
-    metrics:{reportedRuns:0,verifiedRestores:0,failedRuns:0},
-    isolation:{schema:'private',browserReadable:false,adminSnapshotReadsPrivateSchema:false,telemetryConnected:false},
-    readiness:{encryptedRequired:true,manifestHashRequired:true,restoreVerificationRequired:true,retentionPolicyConfigured:false,schedulerConfigured:false,rpoConfigured:false,rtoConfigured:false},
-    state:'awaiting-infrastructure',message:'A política e o cofre existem, mas a automação de backup e o teste de restauração ainda não foram conectados.'
+    metrics:{reportedRuns:integer(data.reportedRuns),verifiedRestores:integer(data.verifiedRestores),failedRuns:integer(data.failedRuns),latestCompletedAt:data.latestCompletedAt||null},
+    isolation:{schema:'private',browserReadable:false,adminSnapshotReadsPrivateRows:integer(data.privateRowsReturned),telemetryConnected:data.reportedRuns>0},
+    policy:{planTier:data.planTier||'free',databaseExportCadenceHours:integer(data.databaseExportCadenceHours),retentionDays:integer(data.retentionDays),rpoTargetHours:integer(data.rpoTargetHours),rtoTargetHours:integer(data.rtoTargetHours),storageObjectsSeparate:data.storageObjectsSeparate===true},
+    readiness:{policyConfigured:data.policyConfigured===true,encryptedRequired:data.encryptedOffsiteRequired===true,manifestHashRequired:true,restoreVerificationRequired:true,schedulerConnected:data.schedulerConnected===true,restoreVerified:data.restoreState==='verified'},
+    state:data.schedulerConnected&&data.restoreState==='verified'?'verified':'action-required',
+    message:data.schedulerConnected&&data.restoreState==='verified'
+      ?'Política, automação e restauração possuem evidência registrada.'
+      :'A política existe, mas backup externo automático e teste de restauração ainda exigem evidência real.'
   });
 }
 
@@ -517,7 +570,7 @@ async function settingsModule(context){
 async function moduleSnapshot(context,moduleId){
   const loaders={today:todayModule,finance:financeModule,users:usersModule,subscriptions:subscriptionsModule,ai:aiModule,tarot:tarotModule,school:schoolModule,consultations:consultationsModule,store:storeModule,skins:skinsModule,seo:seoModule,security:securityModule,backups:backupsModule,audit:auditModule,settings:settingsModule};
   if(loaders[moduleId])return await loaders[moduleId](context);
-  const delegates={media:'admin-media-v320',notifications:'admin-api-v532-notifications',analytics:'admin-analytics-v322'};
+  const delegates={media:'admin-media-v320',notifications:'admin-api-v547-notifications',analytics:'admin-analytics-v322'};
   return envelope(moduleId,{delegate:delegates[moduleId]||null,operational:true});
 }
 
@@ -558,7 +611,7 @@ async function createNotificationDraft(request,origin,context){
   if(!title||!message)return json(400,{error:'notification_content_required'},origin);
   if(PERSONAL_DATA_PATTERN.test(`${title} ${message}`))return json(400,{error:'personal_data_not_allowed'},origin);
   const payload={
-    name:cleanCampaignText(`Rascunho V532 · ${title}`,120),category,status:'draft',title,body:message,
+    name:cleanCampaignText(`Rascunho V547 · ${title}`,120),category,status:'draft',title,body:message,
     deep_link:NOTIFICATION_DEEP_LINKS[category],locale:'pt-BR',test_only:true,scheduled_at:null,created_by:context.user.id
   };
   const {data,error}=await context.db.from('notification_campaigns').insert(payload)
@@ -590,7 +643,7 @@ async function savePrices(request,origin,context){
   if(!factorId)return json(403,{error:'mfa_factor_missing'},origin);
   const verified=await auth.auth.mfa.challengeAndVerify({factorId,code});
   if(verified.error||decodeJwt(verified.data?.session?.access_token).aal!=='aal2'){await audit(context.db,context.user.id,'price-change','consultations','denied');return json(403,{error:'step_up_failed'},origin);}
-  const version=`consultas-${new Date().toISOString().replace(/[-:.TZ]/g,'').slice(0,14)}-v532`;
+  const version=`consultas-${new Date().toISOString().replace(/[-:.TZ]/g,'').slice(0,14)}-v547`;
   const {error}=await context.db.rpc('admin_apply_consultation_prices_v146',{p_prices:prices,p_created_by:context.user.id,p_version:version});
   if(error){await audit(context.db,context.user.id,'price-change','consultations','failed');return json(500,{error:'price_update_failed'},origin);}
   const appliedVersion=version;
@@ -614,7 +667,11 @@ Deno.serve(async request=>{
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers:headers(origin)});
   if(!requestAllowed(request,origin))return json(403,{error:'request_guard_denied'},origin);
   const path=cleanPath(new URL(request.url).pathname);
+  if(!fetchMetadataAllowed(request))return json(403,{error:'fetch_metadata_denied'},origin);
   try{
+    const budget=await consumeRateBudget(request,path);
+    if(budget.error)return json(503,{error:budget.error},origin);
+    if(budget.allowed!==true)return json(429,{error:'rate_limit_exceeded',retryAfterSeconds:integer(budget.retryAfterSeconds)},origin,{'retry-after':String(integer(budget.retryAfterSeconds)||1)});
     if(path==='/admin/session'&&request.method==='POST')return await signIn(request,origin);
     if(path==='/admin/session/mfa/enroll'&&request.method==='POST')return await enrollMfa(request,origin);
     if(path==='/admin/session/mfa'&&request.method==='POST')return await verifyMfa(request,origin);
@@ -644,7 +701,8 @@ Deno.serve(async request=>{
     if(path==='/admin/consultations/prices'&&request.method==='PATCH')return await savePrices(request,origin,context);
     return json(404,{error:'not_found'},origin);
   }catch(error){
-    console.error('admin-api-v532',error instanceof Error?error.name:'unknown');
+    if(error instanceof RequestError)return json(error.status,{error:error.code},origin);
+    console.error('admin-api-v547',error instanceof Error?error.name:'unknown');
     return json(500,{error:'internal_error'},origin);
   }
 });

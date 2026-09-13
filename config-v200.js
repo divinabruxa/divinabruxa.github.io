@@ -20,7 +20,6 @@ export const CONFIG=Object.freeze({
   adminApiBase:'https://kyphdsamyygavmkzyezr.supabase.co/functions/v1/admin-api',
   youtubeVideos:[],
   cardPath:'',
-  adminUser:'Isis33',
   // Troque apenas pelo seu código aprovado de Associado Amazon. Nunca coloque senhas ou chaves API aqui.
   amazonAssociateTag:COMMERCIAL_TRUTH_V200.affiliate.amazonAssociateTag,
   products:[
