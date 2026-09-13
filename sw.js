@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 3.0 — IDENTIDADE, DIREITOS, SKINS E PRESENÇA · MACROETAPA 8/14 · V542
+/* DIVINA BRUXA 3.0 — LOJA AMAZON · MACROETAPA 9/14 · V543
    Cache seletivo e versionado. Nunca guarda Auth, respostas online da Whit, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=542;
+const VERSION=543;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v542-shell';
-const CONTENT_CACHE='divina-bruxa-v542-content';
-const IMAGE_CACHE='divina-bruxa-v542-images';
-const OFFLINE_CACHE='divina-bruxa-v542-offline-core';
+const SHELL_CACHE='divina-bruxa-v543-shell';
+const CONTENT_CACHE='divina-bruxa-v543-content';
+const IMAGE_CACHE='divina-bruxa-v543-images';
+const OFFLINE_CACHE='divina-bruxa-v543-offline-core';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE]);
 
 const REQUIRED_SHELL=Object.freeze([
@@ -25,6 +25,7 @@ const REQUIRED_SHELL=Object.freeze([
   './whit-core-supreme-v527.js','./whit-core-supreme-v527.css',
   './whit-presence-deep-v540.js','./whit-presence-deep-v540.css','./whit-local-guide-v540.js',
   './experience-depth-core-v541.js','./experience-depth-core-v541.css',
+  './amazon-store-core-v543.js','./amazon-store-core-v543.css',
   './tarot-universe-core-v528.js','./tarot-universe-core-v528.css',
   './wisdom-universe-core-v529.js','./wisdom-universe-core-v529.css',
   './wisdom-depth-core-v539.js','./wisdom-depth-core-v539.css',
@@ -88,6 +89,7 @@ const REBIRTH_WARM=Object.freeze([
   './wisdom-depth-core-v539.js','./wisdom-depth-core-v539.css',
   './whit-presence-deep-v540.js','./whit-presence-deep-v540.css','./whit-local-guide-v540.js',
   './experience-depth-core-v541.js','./experience-depth-core-v541.css',
+  './amazon-store-core-v543.js','./amazon-store-core-v543.css',
   './experience-conversion-core-v530.js','./experience-conversion-core-v530.css',
   './identity-rights-core-v531.js','./identity-rights-core-v531.css',
   './living-universe-core-v524.js','./living-universe-core-v524.css','./divina-universe-retina-v523.webp',
@@ -112,6 +114,7 @@ const OFFLINE_WORLD_ASSETS=Object.freeze([
   './wisdom-depth-core-v539.js','./wisdom-depth-core-v539.css',
   './whit-presence-deep-v540.js','./whit-presence-deep-v540.css','./whit-local-guide-v540.js',
   './experience-depth-core-v541.js','./experience-depth-core-v541.css',
+  './amazon-store-core-v543.js','./amazon-store-core-v543.css',
   './ai-engine.js','./ai-policy.js','./ai-credits.js','./orbe-ai-governada-v190.css',
   './living-universe-core-v524.js','./living-universe-core-v524.css','./divina-universe-retina-v523.webp',
   './tarot-livre-orbe-os-v517.js','./tarot-livre-orbe-os-v517.css','./tarot-mesa-bridge-v517.js',

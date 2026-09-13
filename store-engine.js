@@ -1,6 +1,6 @@
-/* DIVINA BRUXA V192 — LOJA MÍSTICA + CURADORIA EDITORIAL */
+/* DIVINA BRUXA V543 — LOJA AMAZON · CURADORIA EDITORIAL TRANSPARENTE */
 import { store, escapeHTML } from './storage.js';
-import { STORE_POLICY, storeToneFor } from './store-policy.js?v=192';
+import { STORE_POLICY, storeToneFor } from './store-policy.js?v=543';
 
 const FAVORITES_KEY = 'mystic-store-favorites-v192';
 const emit = message => dispatchEvent(new CustomEvent('orbe:toast', { detail: message }));
@@ -30,6 +30,32 @@ export function buildAmazonAffiliateURL(product, associateTag = '') {
     url.searchParams.set('tag', tag);
   }
   return url.toString();
+}
+
+export function auditAmazonCatalogV543(products = [], associateTag = '') {
+  const ids = new Set();
+  const failures = [];
+  products.forEach((product, index) => {
+    const id = String(product?.id || '').trim();
+    const search = String(product?.search || '').trim();
+    if (!id || ids.has(id)) failures.push(`product-${index + 1}:id`);
+    ids.add(id);
+    if (!search && !product?.url) failures.push(`${id || `product-${index + 1}`}:destination`);
+    const url = new URL(buildAmazonAffiliateURL(product, associateTag));
+    if (url.protocol !== 'https:' || (url.hostname !== 'amazon.com.br' && !url.hostname.endsWith('.amazon.com.br'))) failures.push(`${id}:host`);
+    if (associateTag && url.searchParams.get('tag') !== associateTag) failures.push(`${id}:tag`);
+  });
+  return Object.freeze({
+    release: 'V543',
+    productCount: products.length,
+    uniqueProductIds: ids.size,
+    destinationHost: STORE_POLICY.affiliateHost,
+    affiliateTagPresent: Boolean(associateTag),
+    mutableCommerceClaims: 0,
+    privateAnalyticsFields: 0,
+    failures: Object.freeze(failures),
+    passed: failures.length === 0
+  });
 }
 
 export function filterStoreProducts(products = [], state = {}) {
@@ -72,7 +98,7 @@ export class StoreEngine {
     this.renderShell();
     this.bind();
     this.renderCatalog();
-    this.root.dataset.storeReady = 'v192';
+    this.root.dataset.storeReady = 'v543';
   }
 
   renderShell() {
@@ -107,7 +133,7 @@ export class StoreEngine {
             <strong>TRANSPARÊNCIA DE AFILIADO</strong>
             <p>${escapeHTML(STORE_POLICY.disclosure)} ${escapeHTML(STORE_POLICY.partnerNotice)}</p>
           </div>
-          <small>Revisada em 9 de setembro de 2026 · sem checkout interno</small>
+          <small>Revisada em 13 de setembro de 2026 · sem checkout interno</small>
         </aside>
 
         <section class="store-v148-catalog" aria-labelledby="store-v148-catalog-title">
@@ -259,10 +285,10 @@ export class StoreEngine {
             <span>Preço e estoque</span>
             <b>Confirmar na Amazon</b>
           </div>
-          <a href="${escapeHTML(url)}" data-affiliate="${escapeHTML(product.id)}" data-editorial-target="store_amazon" aria-describedby="store-v148-disclosure" target="_blank" rel="nofollow sponsored noopener" aria-label="Ver seleção de ${escapeHTML(product.name)} na Amazon, abre em nova aba">
+          <a href="${escapeHTML(url)}" data-affiliate="${escapeHTML(product.id)}" data-affiliate-host="www.amazon.com.br" data-editorial-target="store_amazon" data-no-private-analytics aria-describedby="store-v148-disclosure" target="_blank" rel="nofollow sponsored noopener" aria-label="Ver seleção de ${escapeHTML(product.name)} na Amazon, abre em nova aba">
             <span>Ver seleção na Amazon</span><b aria-hidden="true">↗</b>
           </a>
-          <small class="store-v148-sponsored">PUBLICIDADE · COMPRA E ENTREGA PELO PARCEIRO</small>
+          <small class="store-v148-sponsored">LINK DE AFILIADO · COMPRA E ENTREGA PELA AMAZON</small>
         </div>
       </article>`;
   }

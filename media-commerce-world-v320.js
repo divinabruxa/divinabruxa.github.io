@@ -4,7 +4,7 @@
    Vídeo lê somente episódios publicados do Supabase STAGING.
    AdminMedia usa a função owner+MFA admin-media-v320; nenhum CRUD editorial usa localStorage. */
 
-import { StoreEngine } from './store-engine.js?v=192';
+import { StoreEngine } from './store-engine.js?v=543';
 import { MediaEngineV192 } from './media-engine-v192.js?v=541-lazy-player';
 import { EditorialJourneyV192 } from './editorial-journey-v192.js?v=192';
 import { safeMediaURL } from './media-policy-v149.js?v=149';

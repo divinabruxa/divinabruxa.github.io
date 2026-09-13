@@ -8,9 +8,10 @@
   <meta name="description" content="Curadoria temática da Divina Bruxa com 21 escolhas e compra concluída somente no parceiro.">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://divinabruxa.com.br/loja-mistica.html">
-  <link rel="manifest" href="manifest.webmanifest?v=196">
+  <link rel="manifest" href="manifest.webmanifest?v=543">
   <link rel="stylesheet" href="editorial-universe-v192.css?v=197">
   <link rel="stylesheet" href="pwa-world-v196.css?v=196">
+  <link rel="stylesheet" href="amazon-store-core-v543.css?v=543">
 </head>
 <body class="editorial-page store-celestial-screen">
   <a class="editorial-skip" href="#conteudo">Ir para o conteúdo</a>
@@ -18,11 +19,11 @@
   <main id="conteudo" class="editorial-main">
     <header class="editorial-intro"><p class="editorial-kicker">CURADORIA TRANSPARENTE</p><h1>Loja Mística</h1><p>Explore por intenção e categoria. A Divina Bruxa não recebe cartão nem conclui compras: preço, estoque, vendedor e pagamento são confirmados diretamente na Amazon.</p></header>
     <dl class="editorial-status"><div><dt>Curadoria</dt><dd>21 escolhas</dd></div><div><dt>Checkout interno</dt><dd>Nenhum</dd></div><div><dt>Favoritos</dt><dd>Neste aparelho</dd></div></dl>
-    <div id="storeApp" class="editorial-portal" data-store-engine="v192"></div>
+    <div id="storeApp" class="editorial-portal" data-store-engine="v543"></div>
     <noscript><p>Ative o JavaScript para filtrar a curadoria. A página não realiza compras nem pagamentos.</p></noscript>
     <a class="editorial-back" href="./">← Voltar para a Orbe</a>
   </main>
-  <script type="module">import { CONFIG } from './config.js'; import { StoreEngine } from './store-engine.js?v=192'; import { EditorialJourneyV192 } from './editorial-journey-v192.js?v=192'; import { createExperienceDepthCoreV541 } from './experience-depth-core-v541.js?v=541'; const root=document.querySelector('#storeApp'); new StoreEngine(root,CONFIG); new EditorialJourneyV192(root,'store'); createExperienceDepthCoreV541({config:CONFIG});</script>
-  <script type="module" src="pwa-world-v196.js?v=196"></script>
+  <script type="module">import { CONFIG } from './config-v200.js?v=543'; import { StoreEngine } from './store-engine.js?v=543'; import { EditorialJourneyV192 } from './editorial-journey-v192.js?v=192'; import { createExperienceDepthCoreV541 } from './experience-depth-core-v541.js?v=541'; import { createAmazonStoreCoreV543 } from './amazon-store-core-v543.js?v=543'; const root=document.querySelector('#storeApp'); new StoreEngine(root,CONFIG); new EditorialJourneyV192(root,'store'); createExperienceDepthCoreV541({config:CONFIG}); window.divinaAmazonStoreReleaseV543=createAmazonStoreCoreV543({config:CONFIG});</script>
+  <script type="module" src="pwa-world-v196.js?v=543"></script>
 </body>
 </html>

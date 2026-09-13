@@ -1,4 +1,4 @@
-/* DIVINA BRUXA V192 — POLÍTICA DA LOJA MÍSTICA CELESTIAL */
+/* DIVINA BRUXA V543 — POLÍTICA DA LOJA AMAZON · CURADORIA CONSCIENTE */
 
 const collection = (id, name, sigil, description, categories) => Object.freeze({
   id,
@@ -9,9 +9,9 @@ const collection = (id, name, sigil, description, categories) => Object.freeze({
 });
 
 export const STORE_POLICY = Object.freeze({
-  version: 'v192',
+  version: 'v543',
   environment: 'editorial-affiliate-staging',
-  reviewedAt: '2026-09-09',
+  reviewedAt: '2026-09-13',
   checkout: false,
   productionBilling: false,
   storesPaymentData: false,
@@ -20,8 +20,20 @@ export const STORE_POLICY = Object.freeze({
   disclosure: 'Como associado da Amazon, eu recebo por compras qualificadas. Você não paga nada a mais por isso.',
   partnerNotice: 'Preço, estoque, vendedor, configuração, pagamento, entrega, troca, garantia e suporte são confirmados e realizados na Amazon.',
   editorialImageNotice: 'Cena editorial da Divina Bruxa. Os objetos são ilustrativos e não representam um anúncio ou SKU específico.',
-  privacyNotice: 'Busca e favoritos ficam neste aparelho. Cliques editoriais só viram contagens locais após consentimento opcional.',
+  privacyNotice: 'Busca e favoritos ficam neste aparelho. A Loja não envia sua busca, seus favoritos ou qualquer texto pessoal para analytics.',
   selectionRule: 'A curadoria aponta finalidades e buscas amplas; não declara preço, estoque, avaliação ou modelo atual.',
+  linkPolicy: Object.freeze({
+    strategy: 'amazon-search-query',
+    directSkuPromise: false,
+    priceCache: false,
+    stockCache: false,
+    ratingCache: false,
+    adjacentDisclosure: true,
+    officialPartnershipClaim: false,
+    productImages: 'editorial-original-only',
+    analyticsAllowedFields: Object.freeze(['event', 'product_id', 'category', 'destination_host']),
+    analyticsForbiddenFields: Object.freeze(['search_text', 'favorites', 'email', 'question', 'journal', 'prompt'])
+  }),
   heroImage: 'loja-mistica-celestial-v1.webp',
   categories: Object.freeze([
     'Todos',

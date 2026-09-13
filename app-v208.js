@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 8/14 · V542
-   Identidade, direitos, skins e presença aprofundados na mesma Orbe.
+/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 9/14 · V543
+   Loja Amazon profunda, transparente e leve na mesma Orbe.
    Fluidez, privacidade, Tarot e todas as travas anteriores permanecem íntegros. */
 
 import { CONFIG } from './config-v200.js?v=200';
@@ -47,6 +47,7 @@ import { createOriginDiscoveryV537 } from './origin-discovery-v537.js?v=537';
 import { createWisdomDepthCoreV539 } from './wisdom-depth-core-v539.js?v=539';
 import { createWhitPresenceDeepV540 } from './whit-presence-deep-v540.js?v=540';
 import { createExperienceDepthCoreV541 } from './experience-depth-core-v541.js?v=541';
+import { createAmazonStoreCoreV543 } from './amazon-store-core-v543.js?v=543';
 
 const $ = selector => document.querySelector(selector);
 
@@ -60,7 +61,7 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=542')
+const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=543')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
@@ -421,6 +422,10 @@ const identityRights = safely('Identidade, Direitos, Skins e Presença V542', ()
   })
 );
 
+const amazonStore = safely('Loja Amazon V543', () =>
+  createAmazonStoreCoreV543({ config:CONFIG })
+);
+
 const realityLifecycle = safely('Motor Universal das Realidades V511', () =>
   installRealityLifecycleV511({ core:supremeOrb })
 );
@@ -468,12 +473,12 @@ navigator.serviceWorker?.addEventListener('message', event => {
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV537) {
   window.__divinaSWBootstrapV537 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=541', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=543', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v542';
+        document.documentElement.dataset.releaseEpoch = 'v543';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V542 registrado');
+        console.info('[Divina] PWA V543 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -901,6 +906,29 @@ window.divinaIdentityRightsReleaseV542 = Object.freeze({
 });
 window.divinaIdentityRightsV531 = window.divinaIdentityRightsReleaseV542;
 
+window.divinaAmazonStoreReleaseV543 = Object.freeze({
+  version:543,
+  macroStage:'9-of-14',
+  title:'Loja Amazon',
+  core:amazonStore,
+  audit:()=>amazonStore?.audit?.()||null,
+  status:()=>amazonStore?.status?.()||null,
+  productCount:21,
+  collectionCount:4,
+  associateTag:'orbedasrealid-20',
+  destinationHost:'www.amazon.com.br',
+  affiliateDisclosureAdjacent:true,
+  checkoutInternal:false,
+  priceCache:false,
+  stockCache:false,
+  ratingCache:false,
+  officialPartnershipClaim:false,
+  privateContentReads:0,
+  permanentAnimationLoops:0,
+  realBilling:false,
+  environment:'staging'
+});
+
 window.divinaOwnerObservatoryReleaseV532 = Object.freeze({
   version:532,
   macroStage:'8-of-10',
@@ -1247,10 +1275,10 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V542',
+        release:'V543',
         supremePlan:'3.0-universo-vivo',
         supremePlanMacroStages:14,
-        currentMacroStage:'8-of-14',
+        currentMacroStage:'9-of-14',
         worldTruth:'v535',
         worldTruthRoutes:17,
         orbFluidNavigation:'v535',
@@ -1394,6 +1422,17 @@ const awaken = async () => {
         identityIndependentOrbEngines:0,
         identityIndependentUniverseEngines:0,
         identityPermanentAnimationLoops:0,
+        amazonStore:'v543',
+        amazonStoreMacroStage:'9-of-14',
+        amazonStoreProducts:21,
+        amazonStoreCollections:4,
+        amazonStoreAssociateTag:'orbedasrealid-20',
+        amazonStoreDestinationHost:'www.amazon.com.br',
+        amazonStoreCheckoutInternal:false,
+        amazonStorePriceCache:false,
+        amazonStoreStockCache:false,
+        amazonStorePrivateContentReads:0,
+        amazonStorePermanentAnimationLoops:0,
         ownerObservatory:'v532',
         ownerObservatoryMacroStage:'8-of-10',
         ownerObservatoryRoute:'admin',

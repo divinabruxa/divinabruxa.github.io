@@ -1,0 +1,42 @@
+DIVINA BRUXA 3.0 — V543
+MACROETAPA 9 DE 14 — LOJA AMAZON
+
+PRÉ-REQUISITO
+- V542 instalada.
+
+COMO INSTALAR NO GITHUB PELO IPHONE
+1. Abra este ZIP.
+2. Envie todos os arquivos soltos para a raiz do repositório.
+3. Quando o GitHub perguntar, substitua os arquivos de mesmo nome.
+4. Não apague nenhum outro arquivo.
+5. Aguarde o deployment concluir.
+6. Feche e reabra o PWA ou faça uma atualização completa da página.
+
+O QUE ESTA VERSÃO ENTREGA
+- Loja Amazon aprofundada com 21 escolhas editoriais e quatro caminhos por intenção.
+- Busca, categorias, coleções e favoritos continuam leves e locais.
+- Novo Ritual de Compra Consciente com conferências de idioma, edição, medidas, vendedor, avaliações, entrega e devolução.
+- Aviso de link de afiliado junto a cada saída para a Amazon.
+- Tag de associado preservada: orbedasrealid-20.
+- Links HTTPS restritos ao domínio amazon.com.br.
+- Catálogo Apple transformado em buscas amplas, sem congelar geração ou configuração.
+- Página pública loja-mistica.html conectada à mesma fonte de verdade da aplicação.
+- PWA e cache atualizados para V543.
+
+VERDADE, PRIVACIDADE E FLUIDEZ
+- Preço, estoque, avaliação, vendedor, entrega e garantia não são gravados como fatos do site.
+- Compra e pagamento acontecem somente na Amazon.
+- A Divina Bruxa não afirma parceria oficial com a Apple.
+- Imagens copiadas de anúncios não foram adicionadas.
+- Busca e favoritos não são enviados para analytics.
+- Nenhum canvas, pointermove, MutationObserver, setInterval ou loop visual permanente foi criado.
+- A mesma Orbe V501 continua sendo o único coração do site.
+- STAGING preservado; billing real e publicação em produção continuam bloqueados.
+
+PRESERVADO
+- Tarot Livre sem fogo, sem cartas invertidas e com 78 cartas.
+- Whit Local sem API paga.
+- 30 skins, preços unitários, Premium e direitos da V542.
+- Consultas somente por e-mail.
+
+Depois de instalar, informe: INSTALADO, CONTINUA.

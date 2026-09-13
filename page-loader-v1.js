@@ -1,4 +1,4 @@
-/* DIVINA BRUXA 3.0 — CARREGAMENTO V542 · FLUIDEZ E SKINS UNITÁRIAS
+/* DIVINA BRUXA 3.0 — CARREGAMENTO V543 · LOJA AMAZON TRANSPARENTE
    Preserva V501, V509 e o Universo V524; conecta Tarot e Mesa Real.
    V538 carrega o Tarot Livre sem fogo, sem arrasto e com imagens progressivas. */
 
@@ -135,7 +135,7 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
   const ensureMedia=()=>once(sharedTasks,'media',async()=>{
     const [,module]=await Promise.all([
       ensureStyle('divinaMediaCommerceRebirthV320','media-commerce-world-v320.css?v=320'),
-      import('./media-commerce-world-v320.js?v=541')
+      import('./media-commerce-world-v320.js?v=543')
     ]);
     return new module.MediaWorldV320({videos:$('#videoApp'),music:$('#musicApp')},config);
   });
@@ -253,7 +253,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       await ensureCommerce();
       const [,module]=await Promise.all([
         ensureStyle('divinaMediaCommerceRebirthV320','media-commerce-world-v320.css?v=320'),
-        import('./media-commerce-world-v320.js?v=541')
+        ensureStyle('divinaAmazonStoreV543','amazon-store-core-v543.css?v=543'),
+        import('./media-commerce-world-v320.js?v=543')
       ]);
       return new module.StoreWorldV320($('#storeApp'),config);
     },
@@ -294,7 +295,7 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
         ensureStyle('divinaAdminIntelligenceRebirthV322','admin-intelligence-v322.css?v=322'),
         ensureStyle('divinaOwnerObservatoryV532Styles','owner-observatory-v532.css?v=532'),
         import('./admin-engine.js?v=532'),
-        import('./media-commerce-world-v320.js?v=541'),
+        import('./media-commerce-world-v320.js?v=543'),
         import('./admin-intelligence-v322.js?v=532'),
         import('./owner-observatory-v532.js?v=532')
       ]);
@@ -350,22 +351,23 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     store:()=>Promise.all([
       import('./commerce-engine.js?v=148'),
       ensureStyle('divinaMediaCommerceRebirthV320','media-commerce-world-v320.css?v=320'),
-      import('./media-commerce-world-v320.js?v=541')
+      ensureStyle('divinaAmazonStoreV543','amazon-store-core-v543.css?v=543'),
+      import('./media-commerce-world-v320.js?v=543')
     ]),
     music:()=>Promise.all([
       ensureStyle('divinaMediaCommerceRebirthV320','media-commerce-world-v320.css?v=320'),
-      import('./media-commerce-world-v320.js?v=541')
+      import('./media-commerce-world-v320.js?v=543')
     ]),
     videos:()=>Promise.all([
       ensureStyle('divinaMediaCommerceRebirthV320','media-commerce-world-v320.css?v=320'),
-      import('./media-commerce-world-v320.js?v=541')
+      import('./media-commerce-world-v320.js?v=543')
     ]),
     admin:()=>Promise.all([
       ensureStyle('divinaMediaCommerceRebirthV320','media-commerce-world-v320.css?v=320'),
       ensureStyle('divinaAdminIntelligenceRebirthV322','admin-intelligence-v322.css?v=322'),
       ensureStyle('divinaOwnerObservatoryV532Styles','owner-observatory-v532.css?v=532'),
       import('./admin-engine.js?v=532'),
-      import('./media-commerce-world-v320.js?v=541'),
+      import('./media-commerce-world-v320.js?v=543'),
       import('./admin-intelligence-v322.js?v=532'),
       import('./owner-observatory-v532.js?v=532')
     ]),
