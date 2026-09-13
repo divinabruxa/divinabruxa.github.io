@@ -1,0 +1,24 @@
+/* DIVINA BRUXA 3.0 · SABEDORIA VIVA PROFUNDA V539 · sem loops permanentes */
+.sd539{--sd-accent:var(--db-skin-accent,#d9b86c);position:relative;isolation:isolate;margin:clamp(12px,2.2vw,28px) auto;padding:clamp(18px,3vw,34px);width:min(calc(100% - 24px),1120px);border:1px solid color-mix(in srgb,var(--sd-accent) 28%,transparent);border-radius:24px;background:linear-gradient(145deg,rgba(16,11,30,.92),rgba(9,7,18,.97));box-shadow:0 16px 46px rgba(0,0,0,.22);content-visibility:auto;contain-intrinsic-size:520px;color:#f8f2ff}
+.sd539__head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:start}
+.sd539__head p{margin:0 0 8px;color:var(--sd-accent);font:700 .69rem/1.3 system-ui;letter-spacing:.16em}
+.sd539__head h3{margin:0;font:600 clamp(1.35rem,3vw,2.2rem)/1.06 Georgia,serif;letter-spacing:-.025em}
+.sd539__head div>span{display:block;max-width:720px;margin-top:10px;color:rgba(248,242,255,.73);font:400 .96rem/1.65 system-ui}
+.sd539__state{display:inline-flex;align-items:center;min-height:32px;padding:7px 10px;border:1px solid rgba(255,255,255,.12);border-radius:999px;color:rgba(248,242,255,.68);font:700 .59rem/1.2 system-ui;letter-spacing:.08em;white-space:nowrap}
+.sd539__state::before{content:'';width:7px;height:7px;margin-right:7px;border-radius:50%;background:#80d9ad;box-shadow:0 0 10px rgba(128,217,173,.48)}
+.sd539__state[data-online="false"]::before{background:#d9b86c}
+.sd539__path{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:24px 0 16px;padding:0;list-style:none}
+.sd539__path li{min-width:0}
+.sd539__path button{display:grid;grid-template-columns:auto 1fr;grid-template-areas:'num verb' 'num detail';align-items:center;column-gap:10px;width:100%;min-height:68px;padding:12px;border:1px solid rgba(255,255,255,.1);border-radius:17px;background:rgba(255,255,255,.035);color:inherit;text-align:left;cursor:pointer;transition:transform .18s ease,border-color .18s ease,background .18s ease}
+.sd539__path button:hover,.sd539__path button:focus-visible{transform:translateY(-2px);border-color:color-mix(in srgb,var(--sd-accent) 55%,transparent);outline:none}
+.sd539__path .is-current button{border-color:color-mix(in srgb,var(--sd-accent) 50%,transparent);background:color-mix(in srgb,var(--sd-accent) 10%,rgba(255,255,255,.03))}
+.sd539__path small{grid-area:num;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.07);color:var(--sd-accent);font:700 .68rem system-ui}
+.sd539__path b{grid-area:verb;font:700 .82rem system-ui}.sd539__path span{grid-area:detail;overflow:hidden;color:rgba(248,242,255,.58);font:500 .68rem system-ui;text-overflow:ellipsis;white-space:nowrap}
+.sd539__context{display:flex;gap:12px;align-items:center;padding:14px 16px;border-radius:17px;background:rgba(255,255,255,.035)}
+.sd539__context>span{color:var(--sd-accent)}.sd539__context p{display:grid;gap:4px;margin:0}.sd539__context b{font:650 .82rem/1.35 system-ui}.sd539__context small{color:rgba(248,242,255,.58);font:400 .72rem/1.45 system-ui}
+.sd539__actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.sd539__actions button{min-height:44px;padding:10px 14px;border:1px solid rgba(255,255,255,.13);border-radius:999px;background:transparent;color:#f8f2ff;font:750 .65rem system-ui;letter-spacing:.07em;cursor:pointer;transition:background .18s ease,border-color .18s ease,transform .18s ease}
+.sd539__actions button:hover,.sd539__actions button:focus-visible{transform:translateY(-1px);border-color:var(--sd-accent);outline:none}.sd539__actions .is-primary{border-color:color-mix(in srgb,var(--sd-accent) 62%,transparent);background:color-mix(in srgb,var(--sd-accent) 16%,transparent)}
+.sd539 [aria-busy="true"],.sd539 button[aria-busy="true"]{pointer-events:none;opacity:.66}
+@media(max-width:680px){.sd539{width:min(calc(100% - 16px),1120px);padding:18px;border-radius:20px}.sd539__head{grid-template-columns:1fr}.sd539__state{justify-self:start;white-space:normal}.sd539__path{grid-template-columns:1fr}.sd539__path button{min-height:60px}.sd539__actions{display:grid;grid-template-columns:1fr}.sd539__actions button{width:100%}}
+@media(prefers-reduced-motion:reduce){.sd539 *{scroll-behavior:auto!important;transition:none!important}}

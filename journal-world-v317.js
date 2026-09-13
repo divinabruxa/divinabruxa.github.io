@@ -2,7 +2,7 @@
    Mundo vivo construído SOBRE o JournalEngine V187 real.
    Não duplica armazenamento, editor, calendário, timeline, Espelho ou consentimento da IA. */
 
-import { JournalEngine } from './journal-engine.js?v=187';
+import { JournalEngine } from './journal-engine.js?v=539';
 import { RhythmEngine } from './rhythm-v6.js';
 import {
   entriesForJournalPeriod,

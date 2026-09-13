@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 4/14 · V538
-   Origem, Home, Menu e Descoberta sobre a continuidade V536.
-   Whit, Tarot, Sabedoria Viva, a Orbe aprovada e as travas permanecem integras. */
+/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 5/14 · V539
+   Biblioteca, Escola, Tiragens e Diário formam uma jornada aprender-praticar-integrar.
+   Whit, Tarot, a Orbe aprovada, privacidade e travas permanecem íntegros. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -44,6 +44,7 @@ import { createOrbFluidNavigationV535 } from './orb-fluid-navigation-v535.js?v=5
 import { createVitalityBusV536 } from './vitality-bus-v536.js?v=536';
 import { createLivingGrammarV536 } from './living-grammar-v536.js?v=536';
 import { createOriginDiscoveryV537 } from './origin-discovery-v537.js?v=537';
+import { createWisdomDepthCoreV539 } from './wisdom-depth-core-v539.js?v=539';
 
 const $ = selector => document.querySelector(selector);
 
@@ -57,7 +58,7 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=538')
+const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=539')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
@@ -382,6 +383,10 @@ const wisdomUniverse = safely('Sabedoria Viva V529', () =>
   })
 );
 
+const wisdomDepth = safely('Sabedoria Viva Profunda V539', () =>
+  createWisdomDepthCoreV539({ go, orbCore:supremeOrb, vitality:vitalityBus })
+);
+
 const experienceConversion = safely('Experiências, Conteúdo e Conversão V530', () =>
   createExperienceConversionCoreV530({
     go,
@@ -420,7 +425,7 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V537 = 538;
+const RELEASE_EPOCH_V537 = 539;
 const releaseReloadKeyV537 = `divina-release-reload-${RELEASE_EPOCH_V537}`;
 const reloadForNewReleaseV537 = version => {
   if (Number(version || 0) <= RELEASE_EPOCH_V537) return false;
@@ -448,12 +453,12 @@ navigator.serviceWorker?.addEventListener('message', event => {
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV537) {
   window.__divinaSWBootstrapV537 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=538', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=539', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v538';
+        document.documentElement.dataset.releaseEpoch = 'v539';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V538 registrado');
+        console.info('[Divina] PWA V539 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -474,6 +479,7 @@ window.orbe = {
   whit:whitSupreme,
   tarot:tarotUniverse,
   wisdom:wisdomUniverse,
+  wisdomDepth,
   experience:experienceConversion,
   identity:identityRights,
   responsive:responsiveEnchantment,
@@ -1039,6 +1045,25 @@ window.divinaTarotLivreReleaseV538 = Object.freeze({
   sol:false
 });
 
+window.divinaSabedoriaVivaReleaseV539 = Object.freeze({
+  version:539,
+  macroStage:'5-of-14',
+  title:'Sabedoria Viva Profunda',
+  libraryCards:78,
+  schoolModules:17,
+  schoolLessons:124,
+  journey:['library','school','spreads','journal'],
+  whit:'optional-explicit-action-only',
+  privateFieldReads:0,
+  storageReads:0,
+  networkCalls:0,
+  permanentAnimationLoops:0,
+  environment:'staging',
+  productionPublish:false,
+  realBilling:false,
+  sol:false
+});
+
 window.divinaOrbV208 = Object.freeze({
   version: 501,
   engine: realityOrb,
@@ -1048,6 +1073,7 @@ window.divinaOrbV208 = Object.freeze({
   whit:whitSupreme,
   tarot:tarotUniverse,
   wisdom:wisdomUniverse,
+  wisdomDepth,
   experience:experienceConversion,
   identity:identityRights,
   responsive:responsiveEnchantment,
@@ -1146,10 +1172,10 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V538',
+        release:'V539',
         supremePlan:'3.0-universo-vivo',
         supremePlanMacroStages:14,
-        currentMacroStage:'4-of-14',
+        currentMacroStage:'5-of-14',
         worldTruth:'v535',
         worldTruthRoutes:17,
         orbFluidNavigation:'v535',
@@ -1193,6 +1219,10 @@ const awaken = async () => {
         tarotPrivateMeaningReads:false,
         tarotExtraApiCalls:0,
         wisdomUniverse:'v529',
+        wisdomDepth:'v539',
+        wisdomDepthJourney:['library','school','spreads','journal'],
+        wisdomDepthPrivateReads:0,
+        wisdomDepthPermanentAnimationLoops:0,
         wisdomMacroStage:'5-of-10',
         wisdomWorlds:['library','school','journal'],
         wisdomNavigation:'same-orb-v525-journey',

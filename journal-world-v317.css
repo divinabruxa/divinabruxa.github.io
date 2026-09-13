@@ -71,9 +71,7 @@
 }
 .jwv317__star.is-lit i{
   background:#eac978;
-  box-shadow:0 0 calc(8px + 18px * var(--jwv-star)) rgba(196,80,235,.45),0 0 9px rgba(239,205,130,.55);
-  animation:jwv317Star 4.8s ease-in-out infinite;
-  animation-delay:var(--jwv-delay)
+  box-shadow:0 0 calc(8px + 18px * var(--jwv-star)) rgba(196,80,235,.45),0 0 9px rgba(239,205,130,.55)
 }
 .jwv317__star small{font-size:8px;text-transform:uppercase}
 
@@ -110,11 +108,6 @@
 
 html[data-whit-silent-presence="v316"] #journalApp .journal-private-seal{
   box-shadow:0 0 14px rgba(194,78,233,.09)
-}
-
-@keyframes jwv317Star{
-  0%,100%{transform:scale(.88);filter:brightness(.94)}
-  50%{transform:scale(1.13);filter:brightness(1.14)}
 }
 
 @media(max-width:760px){

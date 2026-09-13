@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 3.0 — UNIVERSO VIVO DO TAROT LIVRE · MACROETAPA 4/14 · V538
+/* DIVINA BRUXA 3.0 — SABEDORIA VIVA PROFUNDA · MACROETAPA 5/14 · V539
    Cache seletivo e versionado. Nunca guarda Auth, Whit generation, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=538;
+const VERSION=539;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v538-shell';
-const CONTENT_CACHE='divina-bruxa-v538-content';
-const IMAGE_CACHE='divina-bruxa-v538-images';
-const OFFLINE_CACHE='divina-bruxa-v538-offline-core';
+const SHELL_CACHE='divina-bruxa-v539-shell';
+const CONTENT_CACHE='divina-bruxa-v539-content';
+const IMAGE_CACHE='divina-bruxa-v539-images';
+const OFFLINE_CACHE='divina-bruxa-v539-offline-core';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE]);
 
 const REQUIRED_SHELL=Object.freeze([
@@ -25,6 +25,7 @@ const REQUIRED_SHELL=Object.freeze([
   './whit-core-supreme-v527.js','./whit-core-supreme-v527.css',
   './tarot-universe-core-v528.js','./tarot-universe-core-v528.css',
   './wisdom-universe-core-v529.js','./wisdom-universe-core-v529.css',
+  './wisdom-depth-core-v539.js','./wisdom-depth-core-v539.css',
   './experience-conversion-core-v530.js','./experience-conversion-core-v530.css','./media-policy-v149.js',
   './identity-rights-core-v531.js','./identity-rights-core-v531.css',
   './responsive-enchantment-core-v533.js','./responsive-enchantment-core-v533.css',
@@ -81,6 +82,7 @@ const REBIRTH_WARM=Object.freeze([
   './orb-universal-presence-v526.js','./orb-universal-presence-v526.css',
   './tarot-universe-core-v528.js','./tarot-universe-core-v528.css',
   './wisdom-universe-core-v529.js','./wisdom-universe-core-v529.css',
+  './wisdom-depth-core-v539.js','./wisdom-depth-core-v539.css',
   './experience-conversion-core-v530.js','./experience-conversion-core-v530.css',
   './identity-rights-core-v531.js','./identity-rights-core-v531.css',
   './living-universe-core-v524.js','./living-universe-core-v524.css','./divina-universe-retina-v523.webp',
@@ -102,6 +104,7 @@ const OFFLINE_WORLD_ASSETS=Object.freeze([
   './tarot-data.js','./tarot-image-runtime.js','./tarot-session.js','./tarot-continuity.js',
   './tarot-universe-core-v528.js','./tarot-universe-core-v528.css',
   './wisdom-universe-core-v529.js','./wisdom-universe-core-v529.css',
+  './wisdom-depth-core-v539.js','./wisdom-depth-core-v539.css',
   './living-universe-core-v524.js','./living-universe-core-v524.css','./divina-universe-retina-v523.webp',
   './tarot-livre-orbe-os-v517.js','./tarot-livre-orbe-os-v517.css','./tarot-mesa-bridge-v517.js',
   './tarot-atlas-mobile-v196.webp',
@@ -217,7 +220,7 @@ const appShellIsValid=async(url,response)=>{
   const isShell=pathname===new URL('./',self.registration.scope).pathname||pathname.endsWith('/index.html');
   if(!isShell)return true;
   const html=await response.clone().text();
-  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=538/.test(html);
+  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=539/.test(html);
 };
 
 const offlinePageFor=async url=>{

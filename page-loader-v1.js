@@ -116,8 +116,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
 
   const ensureJournal=()=>once(sharedTasks,'journal',async()=>{
     const [,module]=await Promise.all([
-      ensureStyle('divinaJournalRebirthV317','journal-world-v317.css?v=317'),
-      import('./journal-world-v317.js?v=317')
+      ensureStyle('divinaJournalRebirthV317','journal-world-v317.css?v=539'),
+      import('./journal-world-v317.js?v=539')
     ]);
     return new module.JournalWorldV317($('#journalApp'));
   });
@@ -216,15 +216,15 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     },
     library: async()=>{
       const [,module]=await Promise.all([
-        ensureStyle('divinaLibraryRebirthV302','library-world-v302.css?v=302'),
-        import('./library-world-v302.js?v=302')
+        ensureStyle('divinaLibraryRebirthV302','library-world-v302.css?v=539'),
+        import('./library-world-v302.js?v=539')
       ]);
       return new module.LibraryWorldV302($('#cardLibraryApp'));
     },
     school: async()=>{
       const [,module]=await Promise.all([
-        ensureStyle('divinaSchoolRebirthV306','school-world-v306.css?v=306'),
-        import('./school-world-v306.js?v=306')
+        ensureStyle('divinaSchoolRebirthV306','school-world-v306.css?v=539'),
+        import('./school-world-v306.js?v=539')
       ]);
       return new module.SchoolWorldV306($('#schoolApp'));
     },
@@ -318,20 +318,20 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       import('./daily-world-v509.js?v=509')
     ]),
     library:()=>Promise.all([
-      ensureStyle('divinaLibraryRebirthV302','library-world-v302.css?v=302'),
-      import('./library-world-v302.js?v=302')
+      ensureStyle('divinaLibraryRebirthV302','library-world-v302.css?v=539'),
+      import('./library-world-v302.js?v=539')
     ]),
     spreads:()=>Promise.all([
       ensureStyle('divinaSpreadsRebirthV305','spreads-world-v305.css?v=305'),
       import('./spreads-world-v305.js?v=305')
     ]),
     school:()=>Promise.all([
-      ensureStyle('divinaSchoolRebirthV306','school-world-v306.css?v=306'),
-      import('./school-world-v306.js?v=306')
+      ensureStyle('divinaSchoolRebirthV306','school-world-v306.css?v=539'),
+      import('./school-world-v306.js?v=539')
     ]),
     journal:()=>Promise.all([
-      ensureStyle('divinaJournalRebirthV317','journal-world-v317.css?v=317'),
-      import('./journal-world-v317.js?v=317')
+      ensureStyle('divinaJournalRebirthV317','journal-world-v317.css?v=539'),
+      import('./journal-world-v317.js?v=539')
     ]),
     skins:()=>Promise.all([
       ensureStyle('divinaCrownRebirthV318','skins-premium-world-v318.css?v=318'),

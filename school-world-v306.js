@@ -91,6 +91,9 @@ export class SchoolWorldV306 {
     this.installJourney(snapshot);
     this.decorateModules(snapshot);
     this.decorateLessons();
+    document.dispatchEvent(new CustomEvent('divina:school-progress-v539', {
+      detail:Object.freeze({ done:snapshot.done, total:snapshot.total, percent:snapshot.percent, private:false, noteIncluded:false })
+    }));
   }
 
   installJourney(snapshot) {

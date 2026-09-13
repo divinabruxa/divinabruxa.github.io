@@ -102,6 +102,7 @@ export class LibraryWorldV302 {
     this.readerTrigger = null;
     this.whitTimer = 0;
     this.searchOpen = false;
+    this.compareCards = new Set();
     this.favorites = new Set();
     try {
       const saved = store.get(FAVORITES_KEY, []);
@@ -160,6 +161,7 @@ export class LibraryWorldV302 {
           </header>
           <div class="lb302__grid" data-grid></div>
           <button type="button" class="lb302__more" data-more hidden>Continuar explorando</button>
+          <aside class="lb302__compare-tray" data-compare-tray hidden aria-live="polite"></aside>
         </section>
 
         <dialog class="lb302__reader" data-reader aria-labelledby="lb302ReaderTitle">
@@ -170,6 +172,10 @@ export class LibraryWorldV302 {
             </header>
             <div data-reader-body></div>
           </article>
+        </dialog>
+
+        <dialog class="lb302__compare-dialog" data-compare-dialog aria-labelledby="lb302CompareTitle">
+          <article><header><div><small>LEITURA RELACIONAL</small><h3 id="lb302CompareTitle">Comparar cartas</h3></div><button type="button" data-compare-close aria-label="Fechar comparação">×</button></header><div data-compare-body></div></article>
         </dialog>
 
         <p class="lb302__sr" data-live aria-live="polite" role="status"></p>
@@ -190,6 +196,9 @@ export class LibraryWorldV302 {
     this.readerPath = this.root.querySelector('[data-reader-path]');
     this.live = this.root.querySelector('[data-live]');
     this.more = this.root.querySelector('[data-more]');
+    this.compareTray = this.root.querySelector('[data-compare-tray]');
+    this.compareDialog = this.root.querySelector('[data-compare-dialog]');
+    this.compareBody = this.root.querySelector('[data-compare-body]');
   }
 
   bind() {
@@ -212,6 +221,13 @@ export class LibraryWorldV302 {
     }, { signal });
 
     this.grid.addEventListener('click', event => {
+      const compare = event.target.closest('[data-compare-card]');
+      if (compare) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.toggleCompare(Number(compare.dataset.compareCard));
+        return;
+      }
       const favorite = event.target.closest('[data-favorite]');
       if (favorite) {
         event.preventDefault();
@@ -238,6 +254,20 @@ export class LibraryWorldV302 {
       if (whit) this.prepareWhit(Number(whit.dataset.readerWhit));
     }, { signal });
     this.reader.addEventListener('close', () => this.finishReaderClose(), { signal });
+
+    this.compareTray.addEventListener('click', event => {
+      const remove = event.target.closest('[data-compare-remove]');
+      if (remove) this.toggleCompare(Number(remove.dataset.compareRemove));
+      if (event.target.closest('[data-compare-open]')) this.openComparison();
+      if (event.target.closest('[data-compare-clear]')) {
+        this.compareCards.clear();
+        this.render();
+      }
+    }, { signal });
+    this.root.querySelector('[data-compare-close]').addEventListener('click', () => this.compareDialog.close?.(), { signal });
+    this.compareDialog.addEventListener('click', event => {
+      if (event.target === this.compareDialog) this.compareDialog.close?.();
+    }, { signal });
 
     this.reader.addEventListener('keydown', event => {
       if (event.key === 'ArrowLeft') { event.preventDefault(); this.navigateReader(-1); }
@@ -299,6 +329,7 @@ export class LibraryWorldV302 {
     this.grid.innerHTML = visible.map((card, index) => {
       const id = cardContentId(card);
       const favorite = this.favorites.has(id);
+      const compared = this.compareCards.has(card.id);
       return `<article class="lb302__card" data-card-id="${card.id}" tabindex="0" role="button" aria-label="Abrir ${safe(card.name)}">
         <div class="lb302__card-image">${cardImageMarkup(card, { priority:index < 4 ? 'high' : 'auto', decorative:true })}</div>
         <div class="lb302__card-copy">
@@ -307,6 +338,7 @@ export class LibraryWorldV302 {
           <span>${safe(card.element)} · DIRETA</span>
         </div>
         <button type="button" class="lb302__favorite" data-favorite="${safe(id)}" aria-pressed="${favorite}" aria-label="${favorite ? 'Remover' : 'Adicionar'} ${safe(card.name)} ${favorite ? 'dos' : 'aos'} favoritos">${favorite ? '★' : '☆'}</button>
+        <button type="button" class="lb302__compare-pick" data-compare-card="${card.id}" aria-pressed="${compared}" aria-label="${compared ? 'Remover' : 'Adicionar'} ${safe(card.name)} ${compared ? 'da' : 'à'} comparação">${compared ? '✓' : '⇄'}</button>
       </article>`;
     }).join('') || `<div class="lb302__empty"><span aria-hidden="true">✦</span><b>Nenhuma carta respondeu a essa busca.</b><p>Tente outra palavra ou volte para uma constelação.</p></div>`;
 
@@ -321,7 +353,41 @@ export class LibraryWorldV302 {
 
     this.more.hidden = visible.length >= filtered.length;
     if (!this.more.hidden) this.more.textContent = `Abrir mais estrelas · ${visible.length}/${filtered.length}`;
+    this.renderCompareTray();
     preloadCardImages(visible.slice(0, 6).map(card => card.id), 6);
+  }
+
+  toggleCompare(cardId) {
+    if (!CARDS.some(card => card.id === cardId)) return;
+    if (this.compareCards.has(cardId)) this.compareCards.delete(cardId);
+    else if (this.compareCards.size < 3) this.compareCards.add(cardId);
+    else {
+      this.live.textContent = 'A comparação aceita até três cartas.';
+      return;
+    }
+    this.render();
+  }
+
+  renderCompareTray() {
+    const cards = [...this.compareCards].map(id => CARDS.find(card => card.id === id)).filter(Boolean);
+    this.compareTray.hidden = cards.length === 0;
+    if (!cards.length) {
+      this.compareTray.innerHTML = '';
+      return;
+    }
+    this.compareTray.innerHTML = `<div><p><small>CONSTELAÇÃO DE COMPARAÇÃO</small><b>${cards.length}/3 cartas escolhidas</b></p><div>${cards.map(card => `<button type="button" data-compare-remove="${card.id}" aria-label="Remover ${safe(card.name)}">${safe(card.name)} <span>×</span></button>`).join('')}</div></div><nav><button type="button" data-compare-clear>Limpar</button><button type="button" data-compare-open class="primary" ${cards.length < 2 ? 'disabled' : ''}>COMPARAR ${cards.length < 2 ? '· ESCOLHA MAIS UMA' : 'AGORA'}</button></nav>`;
+  }
+
+  openComparison() {
+    const cards = [...this.compareCards].map(id => CARDS.find(card => card.id === id)).filter(Boolean);
+    if (cards.length < 2) return;
+    this.compareBody.innerHTML = `<p class="lb302__compare-intro">Compare sem procurar uma resposta única: observe aproximações, tensões e diferenças entre os símbolos.</p><div class="lb302__compare-grid">${cards.map(card => {
+      const deep = meaningForCard(card) || {};
+      const keywords = list(deep.keywords).slice(0, 5);
+      return `<section><div class="lb302__compare-image">${cardImageMarkup(card, { priority:'high', decorative:true })}</div><small>${safe(card.arcanaCode === 'major' ? 'ARCANO MAIOR' : card.suit)} · ${safe(card.element)}</small><h4>${safe(card.name)}</h4><p>${safe(deep.essence || deep.centralMessage || deep.dailyEnergy || 'Observe como esta carta modifica o conjunto.')}</p>${keywords.length ? `<ul>${keywords.map(word => `<li>${safe(word)}</li>`).join('')}</ul>` : ''}</section>`;
+    }).join('')}</div><footer><b>Perguntas para a síntese</b><p>O que se repete? O que entra em contraste? Qual carta oferece movimento, qual pede pausa e qual mostra uma possibilidade de integração?</p></footer>`;
+    if (typeof this.compareDialog.showModal === 'function') this.compareDialog.showModal();
+    else this.compareDialog.setAttribute('open', '');
   }
 
   orbDiscover() {
@@ -368,6 +434,9 @@ export class LibraryWorldV302 {
     if (typeof this.reader.showModal === 'function') this.reader.showModal();
     else this.reader.setAttribute('open', '');
     document.body.classList.add('lb302-reader-open');
+    document.dispatchEvent(new CustomEvent('divina:wisdom-public-context-v539', {
+      detail:Object.freeze({ kind:'card', id:cardContentId(card), label:card.name, orientation:'normal', private:false })
+    }));
     requestAnimationFrame(() => this.root.querySelector('[data-reader-close]')?.focus({ preventScroll:true }));
     return true;
   }
@@ -422,6 +491,9 @@ export class LibraryWorldV302 {
     index = (index + delta + CARDS.length) % CARDS.length;
     this.readerCard = CARDS[index];
     this.renderReader(this.readerCard);
+    document.dispatchEvent(new CustomEvent('divina:wisdom-public-context-v539', {
+      detail:Object.freeze({ kind:'card', id:cardContentId(this.readerCard), label:this.readerCard.name, orientation:'normal', private:false })
+    }));
     this.reader.querySelector('.lb302__reader-shell')?.scrollTo?.({ top:0, behavior:reducedMotion() ? 'auto' : 'smooth' });
   }
 
@@ -445,6 +517,7 @@ export class LibraryWorldV302 {
       return;
     }
     this.closeReader();
+    this.compareDialog?.close?.();
     this.whitLine.textContent = `${card.name} está pronta para você conversar comigo, sem envio automático.`;
     globalThis.orbe?.go?.('ai');
   }

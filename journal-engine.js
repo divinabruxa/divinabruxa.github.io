@@ -57,6 +57,8 @@ export class JournalEngine {
     if (!this.root) return;
     const savedView = store.get(JOURNAL_VIEW_KEY, {});
     this.editingId = null;
+    this.editingUpdatedAt = '';
+    this.conflictProtected = false;
     this.pendingDelete = '';
     this.pendingAI = '';
     this.pendingRevision = '';
@@ -271,7 +273,7 @@ export class JournalEngine {
     clearTimeout(this.draftTimer);
     const detail = this.root.querySelector('[data-draft-detail]');
     try {
-      const draft = { ...this.formValues(), _editingId: this.editingId, status: 'draft', updatedAt: new Date().toISOString() };
+      const draft = { ...this.formValues(), _editingId: this.editingId, _editingUpdatedAt:this.editingUpdatedAt, status: 'draft', updatedAt: new Date().toISOString() };
       store.set(JOURNAL_DRAFT_KEY, draft);
       this.setSaveState('Rascunho salvo neste aparelho', 'saved');
       if (detail) detail.textContent = `Rascunho salvo às ${new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`;
@@ -292,6 +294,8 @@ export class JournalEngine {
     }
     if (draft._editingId && this.all().some(entry => entry.id === draft._editingId)) {
       this.editingId = draft._editingId;
+      const live = this.all().find(entry => entry.id === draft._editingId);
+      this.editingUpdatedAt = String(draft._editingUpdatedAt || live?.updatedAt || '');
       this.setEditingState(true);
     }
     this.setSaveState('Rascunho restaurado', 'saved');
@@ -306,6 +310,16 @@ export class JournalEngine {
     const entries = this.all();
     if (this.editingId) {
       const index = entries.findIndex(entry => entry.id === this.editingId);
+      if (index >= 0 && this.editingUpdatedAt && entries[index].updatedAt !== this.editingUpdatedAt) {
+        this.conflictProtected = true;
+        this.setSaveState('Conflito protegido · a versão mais nova não foi sobrescrita', 'error');
+        this.root.querySelector('[data-draft-detail]').textContent = 'Seu rascunho foi mantido. Cancele e abra novamente a memória atualizada antes de unir as alterações.';
+        document.dispatchEvent(new CustomEvent('divina:journal-conflict-v539', {
+          detail:Object.freeze({ protected:true, privateContentIncluded:false, resolution:'reopen-entry' })
+        }));
+        this.notify('Existe uma versão mais nova desta memória. Seu rascunho foi preservado sem sobrescrevê-la.');
+        return;
+      }
       if (index >= 0) entries[index] = createJournalEntry({
         ...entries[index],
         ...values,
@@ -320,6 +334,8 @@ export class JournalEngine {
     if (!this.saveAll(entries)) return;
     store.remove(JOURNAL_DRAFT_KEY);
     this.editingId = null;
+    this.editingUpdatedAt = '';
+    this.conflictProtected = false;
     this.form.reset();
     this.form.elements.createdAt.value = toLocalInput();
     this.form.elements.mood.value = 'Reflexiva';
@@ -334,6 +350,8 @@ export class JournalEngine {
   cancelEdit() {
     clearTimeout(this.draftTimer);
     this.editingId = null;
+    this.editingUpdatedAt = '';
+    this.conflictProtected = false;
     store.remove(JOURNAL_DRAFT_KEY);
     this.form.reset();
     this.form.elements.createdAt.value = toLocalInput();
@@ -788,6 +806,13 @@ export class JournalEngine {
 
   editEntry(entry) {
     this.editingId = entry.id;
+    this.editingUpdatedAt = entry.updatedAt;
+    if (this.conflictProtected) {
+      this.conflictProtected = false;
+      document.dispatchEvent(new CustomEvent('divina:journal-conflict-resolved-v539', {
+        detail:Object.freeze({ protected:false, privateContentIncluded:false })
+      }));
+    }
     const values = {
       title: entry.title,
       createdAt: toLocalInput(entry.createdAt),
