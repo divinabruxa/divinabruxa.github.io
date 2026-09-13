@@ -1,0 +1,19 @@
+/* DIVINA BRUXA · V536 · GRAMÁTICA VIVA
+   Apenas tokens semânticos. Nenhum efeito, filtro ou animação nova. */
+:root{
+  --db-life-response:80ms;
+  --db-life-shift:160ms;
+  --db-life-journey:442ms;
+  --db-life-ease:cubic-bezier(.22,.78,.24,1);
+  --db-life-state:ready;
+}
+:root[data-life-phase="intent"]{--db-life-state:intent}
+:root[data-life-phase="transition"]{--db-life-state:transition}
+:root[data-life-phase="loading"]{--db-life-state:loading}
+:root[data-life-phase="recovering"]{--db-life-state:recovering}
+:root[data-life-presence="background"],
+:root[data-life-motion="reduced"]{
+  --db-life-response:0ms;
+  --db-life-shift:0ms;
+  --db-life-journey:0ms;
+}

@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 1/14 · V535
-   Fonte de Verdade, Registro Vivo e navegação fluida sobre a continuidade V534.
+/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 2/14 · V536
+   Barramento de Vitalidade e Gramática Viva sobre a continuidade V535.
    Whit, Tarot, Sabedoria Viva, a Orbe aprovada e as travas permanecem integras. */
 
 import { CONFIG } from './config-v200.js?v=200';
@@ -41,6 +41,8 @@ import { createResponsiveEnchantmentCoreV533 } from './responsive-enchantment-co
 import { createQaSupremeCoreV534 } from './qa-supreme-core-v534.js?v=534';
 import { createWorldTruthRegistryV535 } from './world-truth-registry-v535.js?v=535';
 import { createOrbFluidNavigationV535 } from './orb-fluid-navigation-v535.js?v=535';
+import { createVitalityBusV536 } from './vitality-bus-v536.js?v=536';
+import { createLivingGrammarV536 } from './living-grammar-v536.js?v=536';
 
 const $ = selector => document.querySelector(selector);
 
@@ -54,7 +56,7 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV535 = () => import('./pwa-world-v324.js?v=535')
+const startPwaAfterBootV536 = () => import('./pwa-world-v324.js?v=536')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
@@ -192,6 +194,15 @@ const responsiveEnchantment = safely('Responsividade e Encantamento Final V533',
 // Registro Vivo nasce, portanto, com as 17 realidades efetivamente presentes.
 const worldTruth = safely('Fonte de Verdade e Registro Vivo V535', () =>
   createWorldTruthRegistryV535()
+);
+
+// A V536 traduz eventos públicos em estado semântico. Nasce antes dos mundos
+// para ouvi-los desde o despertar, sem criar outro motor visual ou outro loop.
+const vitalityBus = safely('Barramento de Vitalidade V536', () =>
+  createVitalityBusV536()
+);
+const livingGrammar = safely('Gramática Viva V536', () =>
+  createLivingGrammarV536({ bus:vitalityBus })
 );
 
 const qaSupreme = safely('QA Supremo, Evidencias e Entrega V534', () =>
@@ -405,13 +416,13 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V535 = 535;
-const releaseReloadKeyV535 = `divina-release-reload-${RELEASE_EPOCH_V535}`;
-const reloadForNewReleaseV535 = version => {
-  if (Number(version || 0) <= RELEASE_EPOCH_V535) return false;
+const RELEASE_EPOCH_V536 = 536;
+const releaseReloadKeyV536 = `divina-release-reload-${RELEASE_EPOCH_V536}`;
+const reloadForNewReleaseV536 = version => {
+  if (Number(version || 0) <= RELEASE_EPOCH_V536) return false;
   try {
-    if (sessionStorage.getItem(releaseReloadKeyV535)) return false;
-    sessionStorage.setItem(releaseReloadKeyV535, String(version));
+    if (sessionStorage.getItem(releaseReloadKeyV536)) return false;
+    sessionStorage.setItem(releaseReloadKeyV536, String(version));
   } catch {}
   location.reload();
   return true;
@@ -420,7 +431,7 @@ const reloadForNewReleaseV535 = version => {
 navigator.serviceWorker?.addEventListener('message', event => {
   if (event.data?.type === 'DIVINA_RELEASE_READY') {
     document.documentElement.dataset.releaseReady = String(event.data.version || 'unknown');
-    reloadForNewReleaseV535(event.data.version);
+    reloadForNewReleaseV536(event.data.version);
     return;
   }
   if (event.data?.type !== 'divina-notification-open') return;
@@ -430,15 +441,15 @@ navigator.serviceWorker?.addEventListener('message', event => {
   }
 });
 
-if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV535) {
-  window.__divinaSWBootstrapV535 = true;
+if ('serviceWorker' in navigator && !window.__divinaSWBootstrapV536) {
+  window.__divinaSWBootstrapV536 = true;
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=535', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=536', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v535';
+        document.documentElement.dataset.releaseEpoch = 'v536';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V535 registrado');
+        console.info('[Divina] PWA V536 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -465,6 +476,8 @@ window.orbe = {
   qa:qaSupreme,
   truth:worldTruth,
   fluidity:orbFluidNavigation,
+  vitality:vitalityBus,
+  grammar:livingGrammar,
   observatory:null,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -947,6 +960,31 @@ window.divinaOrbFluidNavigationReleaseV535 = Object.freeze({
   sol:false
 });
 
+window.divinaVitalityReleaseV536 = Object.freeze({
+  version:536,
+  macroStage:'2-of-14',
+  title:'Barramento de Vitalidade e Gramática Viva',
+  bus:vitalityBus,
+  grammar:livingGrammar,
+  signal:(name, detail) => vitalityBus?.signal?.(name, detail) === true,
+  subscribe:(listener, options) => vitalityBus?.subscribe?.(listener, options) || (() => {}),
+  snapshot:() => vitalityBus?.snapshot?.() || null,
+  audit:() => vitalityBus?.audit?.() || null,
+  status:() => livingGrammar?.status?.() || null,
+  oneCanonicalOrb:true,
+  independentOrbEngines:0,
+  permanentAnimationLoops:0,
+  privateContentReads:0,
+  formValueReads:0,
+  storageReads:0,
+  storageWrites:0,
+  apiCalls:0,
+  environment:'staging',
+  productionPublish:false,
+  realBilling:false,
+  sol:false
+});
+
 window.divinaOrbV208 = Object.freeze({
   version: 501,
   engine: realityOrb,
@@ -962,6 +1000,8 @@ window.divinaOrbV208 = Object.freeze({
   qa:qaSupreme,
   truth:worldTruth,
   fluidity:orbFluidNavigation,
+  vitality:vitalityBus,
+  grammar:livingGrammar,
   miniOrbs:supremeOrb?.projections?.() || [],
   snapshot:() => supremeOrb?.snapshot?.() || orbMotionV207.snapshot()
 });
@@ -980,6 +1020,8 @@ window.divinaOrbSupremeV501 = Object.freeze({
   qa:qaSupreme,
   truth:worldTruth,
   fluidity:orbFluidNavigation,
+  vitality:vitalityBus,
+  grammar:livingGrammar,
   navigate:go,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -1048,13 +1090,18 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V535',
+        release:'V536',
         supremePlan:'3.0-universo-vivo',
         supremePlanMacroStages:14,
-        currentMacroStage:'1-of-14',
+        currentMacroStage:'2-of-14',
         worldTruth:'v535',
         worldTruthRoutes:17,
         orbFluidNavigation:'v535',
+        vitalityBus:'v536',
+        livingGrammar:'v536',
+        vitalityPermanentAnimationLoops:0,
+        vitalityPrivateContentReads:0,
+        vitalityApiCalls:0,
         orbNavigationSingleFlight:true,
         orbNavigationPrepareBudgetMs:pageLoader.navigationPrepareBudgetMs,
         mobileUniverseFps:45,
@@ -1360,7 +1407,7 @@ const awaken = async () => {
       })
       .finally(() => {
         // PWA/offline é resiliente, mas nunca mais é boot crítico.
-        startPwaAfterBootV535();
+        startPwaAfterBootV536();
       });
   } catch (error) {
     document.documentElement.dataset.bootError = 'v326-critical-css';
@@ -1375,7 +1422,7 @@ const awaken = async () => {
     startOrbitalMenuV502();
     startSpreadsSupremeV331();
     startLibraryDeepV332();
-    startPwaAfterBootV535();
+    startPwaAfterBootV536();
   }
 };
 awaken();

@@ -1,12 +1,12 @@
-/* DIVINA BRUXA 3.0 — FONTE DE VERDADE E ORBE FLUIDA · CORTE V535 / PWA V324
+/* DIVINA BRUXA 3.0 — VITALIDADE E GRAMÁTICA VIVA · CORTE V536 / PWA V324
    Uma única autoridade PWA para app e páginas de instalação.
    Offline seletivo: mundos locais continuam; ações de autoridade exigem rede.
    Não altera o motor visual da Orbe principal. */
 
 import { installPerformanceV324, summarizeLocalWebVitalsV324, performanceTierV324 } from './performance-world-v324.js?v=324';
-import { createResponsiveEnchantmentCoreV533 } from './responsive-enchantment-core-v533.js?v=535';
+import { createResponsiveEnchantmentCoreV533 } from './responsive-enchantment-core-v533.js?v=536';
 
-const VERSION=535;
+const VERSION=536;
 const STYLE_ID='divinaPwaResilienceV324';
 const INSTALL_ROUTES=Object.freeze({pt:'instalar-app.html',en:'install-app.html',es:'instalar-aplicacion.html'});
 const ONLINE_ONLY_SELECTOR=[
@@ -80,7 +80,7 @@ const copy=()=>({
 const installStyle=()=>{
   if(document.getElementById(STYLE_ID))return;
   const link=document.createElement('link');
-  link.id=STYLE_ID;link.rel='stylesheet';link.href='./pwa-resilience-v324.css?v=535';
+  link.id=STYLE_ID;link.rel='stylesheet';link.href='./pwa-resilience-v324.css?v=536';
   document.head.append(link);
 };
 
@@ -277,14 +277,14 @@ const setupOfflinePreparation=()=>{
 
 const setupServiceWorker=()=>{
   if(!('serviceWorker'in navigator))return;
-  globalThis.__divinaSWBootstrap='v535';
-  const register=()=>navigator.serviceWorker.register('./sw.js?v=535',{updateViaCache:'none'})
+  globalThis.__divinaSWBootstrap='v536';
+  const register=()=>navigator.serviceWorker.register('./sw.js?v=536',{updateViaCache:'none'})
     .then(registration=>{
-      dispatchEvent(new CustomEvent('divina:pwa-ready',{detail:{scope:registration.scope,version:VERSION,recovery:'fonte-verdade-orbe-fluida-v535'}}));
+      dispatchEvent(new CustomEvent('divina:pwa-ready',{detail:{scope:registration.scope,version:VERSION,recovery:'vitalidade-gramatica-viva-v536'}}));
       registration.update().catch(()=>{});
       return registration;
     })
-    .catch(error=>console.error('[Divina] PWA V535 isolado indisponível',error));
+    .catch(error=>console.error('[Divina] PWA V536 isolado indisponível',error));
 
   // Register immediately, then once more after window.load.
   // Reforça a mesma versão após o carregamento para cobrir retomadas do iOS.
