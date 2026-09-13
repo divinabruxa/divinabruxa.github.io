@@ -1,0 +1,23 @@
+DIVINA BRUXA V553 — PLANO 4.0 — MACROETAPA 5/14
+
+PACOTE INCREMENTAL SOBRE A V552 JÁ INSTALADA.
+
+No GitHub pelo iPhone:
+1. Use Add file > Upload files.
+2. Envie todos os arquivos soltos da raiz deste ZIP.
+3. Confirme Commit changes.
+
+Esta versão:
+- mantém exatamente 78 cartas oficiais, diretas e sem repetição;
+- mantém seis cartas por fileira e nenhum significado automático;
+- mantém a Orbe real como único gatilho da revelação;
+- reduz o nascimento da carta de 440 ms para 280 ms;
+- usa 190 ms em aparelhos de desempenho limitado;
+- reduz a passagem entre cartas reveladas para 160 ms;
+- elimina esperas artificiais antes da Mesa Real e depois da revelação;
+- não redesenha mais uma capa canvas de 480×720 a cada carta;
+- usa o atlas oficial na grade, evitando até 78 imagens integrais simultâneas;
+- pausa somente o canvas pesado do universo durante o voo curto da carta;
+- mantém o Tarot Livre totalmente sem fogo.
+
+Não apague CNAME, cartas ou imagens. Não envie a pasta do ZIP.

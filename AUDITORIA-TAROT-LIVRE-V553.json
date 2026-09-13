@@ -1,0 +1,41 @@
+{
+  "schema": "divina-bruxa-tarot-free-supreme-audit-v553",
+  "release": "V553",
+  "macroStage": "5-of-14",
+  "baseRequired": "V552",
+  "observedWeight": {
+    "birthTravelMs": 440,
+    "historyTransitionMs": 220,
+    "birthKeyframes": 6,
+    "simultaneousBirthAnimations": 2,
+    "canvasBackSizePerBirth": "480x720",
+    "canvasBackRedrawsPerBirth": 1,
+    "possibleFullGridImageRequests": 78,
+    "artificialMesaDelayMs": 90,
+    "postBirthDelayMs": 48
+  },
+  "correction": {
+    "birthTravelMs": 280,
+    "constrainedBirthTravelMs": 190,
+    "historyTransitionMs": 160,
+    "birthKeyframes": 3,
+    "canvasBackRedrawsPerBirth": 0,
+    "gridRenderer": "single-official-atlas",
+    "fullGridImageRequests": 0,
+    "artificialMesaDelayMs": 0,
+    "postBirthDelayMs": 0,
+    "universeCanvasPausedDuringCardFlight": true,
+    "permanentAnimationLoopsAdded": 0,
+    "fireEngine": false
+  },
+  "tarotTruth": {
+    "deckSize": 78,
+    "normalOnly": true,
+    "noRepeats": true,
+    "gridColumns": 6,
+    "automaticMeanings": false
+  },
+  "automaticPhysicalPasses": 0,
+  "privateContentReads": 0,
+  "apiCalls": 0
+}

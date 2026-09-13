@@ -1,14 +1,14 @@
-/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 4/14 · V552
+/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 5/14 · V553
    Cache seletivo e versionado. Nunca guarda Auth, respostas online da Whit, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=552;
+const VERSION=553;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v552-shell';
-const CONTENT_CACHE='divina-bruxa-v552-content';
-const IMAGE_CACHE='divina-bruxa-v552-images';
-const OFFLINE_CACHE='divina-bruxa-v552-offline-core';
-const PREMIUM_CACHE='divina-bruxa-v552-premium-static';
+const SHELL_CACHE='divina-bruxa-v553-shell';
+const CONTENT_CACHE='divina-bruxa-v553-content';
+const IMAGE_CACHE='divina-bruxa-v553-images';
+const OFFLINE_CACHE='divina-bruxa-v553-offline-core';
+const PREMIUM_CACHE='divina-bruxa-v553-premium-static';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE,PREMIUM_CACHE]);
 const NAVIGATION_TIMEOUT_MS=3500;
 const MAX_CONTENT_ENTRIES=180;
@@ -24,6 +24,7 @@ const REQUIRED_SHELL=Object.freeze([
   './world-truth-registry-v535.js','./orb-fluid-navigation-v535.js',
   './ios-navigation-v551.css',
   './home-living-v552.css',
+  './tarot-free-supreme-v553.css',
   './vitality-bus-v536.js','./living-grammar-v536.js','./living-grammar-v536.css',
   './origin-discovery-v537.js','./origin-discovery-v537.css',
   './runtime-v12.js','./orb-motion-core-v207.js','./orb-gesture-core-v208.js',
@@ -62,7 +63,7 @@ const REQUIRED_SHELL=Object.freeze([
 ]);
 
 // Fechamento transitivo dos imports estáticos de app-v208.js. Se qualquer um
-// falhar, a V552 não assume o controle e o worker anterior continua íntegro.
+// falhar, a V553 não assume o controle e o worker anterior continua íntegro.
 const BOOT_DEPENDENCIES=Object.freeze([
   './account-consultations-world-v319.js','./account-engine-v201.js','./account-state-copy-v201.js',
   './ai-policy.js','./auth-client-v201.js','./auth-client-v6.js','./card-library-policy.js',
@@ -304,7 +305,7 @@ const appShellIsValid=async(url,response)=>{
   const isShell=pathname===new URL('./',self.registration.scope).pathname||pathname.endsWith('/index.html');
   if(!isShell)return true;
   const html=await response.clone().text();
-  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=552/.test(html);
+  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=553/.test(html);
 };
 
 const offlinePageFor=async url=>{

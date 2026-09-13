@@ -1,11 +1,11 @@
-/* DIVINA BRUXA — MACROETAPA 4/14 · UNIVERSO VIVO DO TAROT LIVRE · V538
+/* DIVINA BRUXA 4.0 — MACROETAPA 5/14 · TAROT LIVRE SUPREMO · V553
    Preserva o Universo V524 e a única Orbe Suprema V501. O motor de fogo foi
    removido por decisão da proprietária: a Orbe e as cartas respondem primeiro.
    Esta camada calibra as proporções, cria navegação tátil contínua e envia a
    sequência real do Tarot Livre para a Mesa Real sem repetir cartas. */
 
 import { CARDS } from './tarot-data.js';
-import { cardImageMarkup, prepareCardImage, preloadCardImages } from './tarot-image-runtime.js?v=538';
+import { cardAtlasStyle, cardImageMarkup, preloadCardImages } from './tarot-image-runtime.js?v=538';
 import { TarotSessionCoordinator } from './tarot-continuity.js?v=538';
 import {
   DECK_SIZE,
@@ -17,15 +17,15 @@ import {
 import { store } from './storage.js';
 import { createTarotMesaTransferV517 } from './tarot-mesa-bridge-v517.js?v=517';
 
-const VERSION = 538;
+const VERSION = 553;
 const STORAGE_KEY = 'free-tarot';
 const RESET_ARM_MS = 3600;
-const BIRTH_TRAVEL_MS = 440;
-const HISTORY_TRANSITION_MS = 220;
-const RESPONSE_BUDGET_MS = 100;
+const BIRTH_TRAVEL_MS = 280;
+const BIRTH_TRAVEL_CONSTRAINED_MS = 190;
+const HISTORY_TRANSITION_MS = 160;
+const RESPONSE_BUDGET_MS = 80;
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
-const wait = milliseconds => new Promise(resolve => setTimeout(resolve, Math.max(0, milliseconds)));
 const reducedMotion = () => globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
 const constrained = () => document.documentElement.dataset.performanceTier === 'constrained';
 const routeNow = () => String(
@@ -164,9 +164,9 @@ function drawPortalBack(canvas) {
 
 /* Compatibilidade mínima com chamadas históricas do altar. Não existe canvas,
    geometria, timer, pulso ou trabalho por quadro nesta ponte. */
-class TarotFluencyBridgeV538 {
+class TarotFluencyBridgeV553 {
   constructor() {
-    this.mode = 'progressive-no-fire-v538';
+    this.mode = 'progressive-no-fire-v553';
     this.targetFps = constrained() ? 30 : 60;
     this.active = false;
   }
@@ -206,6 +206,7 @@ export class TarotLivreOrbOSV517 {
     this.cardRenderToken = 0;
     this.claimRelease = null;
     this.active = false;
+    this.universePausedByBirth = false;
 
     this.root.innerHTML = '';
     this.root.dataset.tarotWorld = 'orbe-os-v517';
@@ -222,10 +223,10 @@ export class TarotLivreOrbOSV517 {
     this.world.dataset.whiteOverexposure = 'false';
     this.world.dataset.firePalette = 'none';
     this.world.dataset.birthCorona = 'card-edge';
-    this.world.dataset.birthJourney = 'orb-to-card-short-v538';
-    this.world.dataset.birthEasing = 'ios-short-compositor-v538';
+    this.world.dataset.birthJourney = 'orb-to-card-short-v553';
+    this.world.dataset.birthEasing = 'ios-short-compositor-v553';
     this.world.dataset.responsiveAltar = 'v517-reference-ratio';
-    this.world.dataset.visualCalibration = 'card-orb-fluid-v538';
+    this.world.dataset.visualCalibration = 'card-orb-fluid-v553';
     this.world.dataset.cardOrigin = 'supreme-orb-v501';
     this.world.dataset.decorativeCards = 'none';
     this.world.dataset.universeBackdrop = 'procedural-no-image-v524';
@@ -233,13 +234,13 @@ export class TarotLivreOrbOSV517 {
     this.world.dataset.universeAuthority = 'living-universe-core-v524';
     this.world.dataset.skinReactiveUniverse = '30-palettes';
     this.world.dataset.effectsResolution = 'global-adaptive';
-    this.world.dataset.frameArchitecture = 'universal-single-raf';
+    this.world.dataset.frameArchitecture = 'universe-paused-during-card-flight-v553';
     this.world.dataset.particleArchitecture = 'global-procedural-shader';
     this.world.dataset.noDrag = 'true';
     this.world.dataset.progressiveImages = 'atlas-first';
     this.world.dataset.responseBudgetMs = String(RESPONSE_BUDGET_MS);
     this.render(false);
-    this.fluidity = new TarotFluencyBridgeV538();
+    this.fluidity = new TarotFluencyBridgeV553();
     this.world.dataset.engine = this.fluidity.mode;
     this.world.dataset.targetFps = String(this.fluidity.targetFps);
     this.bind();
@@ -250,12 +251,12 @@ export class TarotLivreOrbOSV517 {
       this.fluidity.setActive(false);
     }
 
-    preloadCardImages(this.state.waiting.slice(0, 4), 4);
+    this.preloadWaiting();
 
-    document.documentElement.dataset.tarotLivre = 'v538';
+    document.documentElement.dataset.tarotLivre = 'v553';
     const readiness = Object.freeze({
       version: VERSION,
-      engine: 'TarotFluencyBridgeV538',
+      engine: 'TarotFluencyBridgeV553',
       renderer: this.fluidity.mode,
       canonicalOrb: 'v501',
       oneLivingOrb: true,
@@ -267,6 +268,11 @@ export class TarotLivreOrbOSV517 {
       decodedBeforeSwap: false,
       atlasFirstProgressive: true,
       responseBudgetMs: RESPONSE_BUDGET_MS,
+      birthTravelMs: constrained() ? BIRTH_TRAVEL_CONSTRAINED_MS : BIRTH_TRAVEL_MS,
+      historyTransitionMs: constrained() ? 120 : HISTORY_TRANSITION_MS,
+      portalBackRedrawsPerBirth: 0,
+      gridFullImageRequests: 0,
+      universePausedDuringCardFlight: true,
       dragNavigation: false,
       organicCanvasFire: false,
       trueCelestialFire: false,
@@ -404,6 +410,32 @@ export class TarotLivreOrbOSV517 {
     drawPortalBack(this.cardBack);
   }
 
+  preloadWaiting() {
+    const limit = constrained() ? 2 : 3;
+    preloadCardImages(this.state.waiting.slice(0, limit), limit);
+  }
+
+  quietUniverseForCardFlight() {
+    const universe = globalThis.divinaLivingUniverseV524;
+    if (!universe?.pause || universe.status?.().paused === true) return false;
+    universe.pause();
+    this.universePausedByBirth = true;
+    document.documentElement.dataset.tarotBirthBudget = 'quiet-v553';
+    return true;
+  }
+
+  resumeUniverseAfterCardFlight() {
+    if (!this.universePausedByBirth) return false;
+    this.universePausedByBirth = false;
+    delete document.documentElement.dataset.tarotBirthBudget;
+    const navigationActive = document.documentElement.dataset.orbNavigationState === 'active';
+    const menuState = document.documentElement.dataset.menuState;
+    if (this.active && document.visibilityState !== 'hidden' && !navigationActive && !['opening','closing','navigating'].includes(menuState)) {
+      globalThis.divinaLivingUniverseV524?.start?.();
+    }
+    return true;
+  }
+
   bind() {
     const options = { signal: this.abort.signal };
 
@@ -448,15 +480,17 @@ export class TarotLivreOrbOSV517 {
       }
     }, options);
 
-    this.grid.addEventListener('click', event => {
+    this.grid.addEventListener('click', async event => {
       if (this.busy) return;
       const button = event.target.closest('[data-index]');
       if (!button) return;
       const index = Number(button.dataset.index);
       if (!Number.isInteger(index)) return;
       const direction = index === this.selected ? 0 : index > this.selected ? 1 : -1;
-      this.selectCard(index, direction);
-      this.stage.scrollIntoView({ behavior: reducedMotion() ? 'auto' : 'smooth', block: 'center' });
+      const selected = await this.selectCard(index, direction);
+      if (selected && !this.stage.matches(':where(:focus-within)')) {
+        this.stage.scrollIntoView({ behavior:'auto', block:'center' });
+      }
     }, options);
 
     this.onStorage = event => {
@@ -532,7 +566,6 @@ export class TarotLivreOrbOSV517 {
     nativePulse('Medium');
 
     try {
-      if (!reducedMotion()) await wait(90);
       await Promise.resolve(this.orbCore.navigate('spreads', {
         source:'tarot-livre-mesa-real-v517',
         target:this.mesaButton
@@ -570,7 +603,7 @@ export class TarotLivreOrbOSV517 {
       return false;
     }
     this.world.dataset.orbClaimed = 'true';
-    this.orb.dataset.tarotReveal = 'v538';
+    this.orb.dataset.tarotReveal = 'v553';
     this.orb.setAttribute('aria-disabled', String(this.busy || this.state.completed));
     this.fluidity?.setActive(true);
     requestAnimationFrame(() => {
@@ -584,7 +617,9 @@ export class TarotLivreOrbOSV517 {
     this.active = false;
     clearTimeout(this.birthTimer);
     this.world.classList.remove('is-orb-touching', 'is-birthing');
-    document.body?.classList.remove('db517-tarot-birthing');
+    document.body?.classList.remove('db517-tarot-birthing', 'db553-tarot-card-flight');
+    delete this.world.dataset.birthTransit;
+    this.resumeUniverseAfterCardFlight();
     this.fluidity?.setActive(false);
     delete this.orb.dataset.tarotReveal;
     this.orb.removeAttribute('aria-disabled');
@@ -621,13 +656,6 @@ export class TarotLivreOrbOSV517 {
     const card = CARDS[cardId];
     if (!card || card.orientation !== 'normal') throw new Error('Carta direta indisponível.');
 
-    // A prévia do atlas nasce imediatamente. A imagem integral ganha definição
-    // progressivamente, sem segurar a resposta da Orbe nem criar tela vazia.
-    Promise.resolve(prepareCardImage(card, {
-      timeout: 1800,
-      priority: 'high'
-    })).catch(() => false);
-
     const cradle = document.createElement('div');
     cradle.innerHTML = `${cardImageMarkup(card, {
       alt: `${card.name}, direta`,
@@ -648,11 +676,14 @@ export class TarotLivreOrbOSV517 {
       `${prepared.card.name}, direta. Carta ${index + 1} de ${this.state.revealed.length}.`
     );
     this.updateControls();
-    this.grid.querySelectorAll('[data-index]').forEach(button => {
-      const active = Number(button.dataset.index) === index;
-      button.classList.toggle('is-current', active);
-      button.setAttribute('aria-current', active ? 'true' : 'false');
-    });
+    const previous = this.grid.querySelector('.is-current');
+    if (previous && Number(previous.dataset.index) !== index) {
+      previous.classList.remove('is-current');
+      previous.setAttribute('aria-current', 'false');
+    }
+    const current = this.grid.querySelector(`[data-index="${index}"]`);
+    current?.classList.add('is-current');
+    current?.setAttribute('aria-current', 'true');
     preloadCardImages([this.state.revealed[index - 1], this.state.revealed[index + 1]], 2);
   }
 
@@ -662,7 +693,7 @@ export class TarotLivreOrbOSV517 {
     const prepared = this.prepareCardContent(index);
     if (token !== this.cardRenderToken) return false;
     this.commitPreparedCard(index, prepared);
-    const duration = reducedMotion() ? 150 : BIRTH_TRAVEL_MS;
+    const duration = reducedMotion() ? 0 : constrained() ? BIRTH_TRAVEL_CONSTRAINED_MS : BIRTH_TRAVEL_MS;
     onBirth?.({ duration });
     if (reducedMotion()) return true;
 
@@ -675,62 +706,47 @@ export class TarotLivreOrbOSV517 {
     const dx = originX - destinationX;
     const dy = originY - destinationY;
     const startScale = clamp((orbRect.width / Math.max(cardRect.width, 1)) * 0.27, 0.16, 0.32);
-    const curve = Math.min(34, Math.max(14, cardRect.width * 0.11));
-
-    const veil = document.createElement('canvas');
+    const veil = document.createElement('span');
     veil.className = 'tl517__birth-veil';
     veil.setAttribute('aria-hidden', 'true');
-    drawPortalBack(veil);
     this.card.append(veil);
     this.card.dataset.imageState = 'journey';
     this.world.dataset.birthTransit = 'active';
+    document.body?.classList.add('db553-tarot-card-flight');
+    this.quietUniverseForCardFlight();
     this.card.getAnimations?.().forEach(animation => animation.cancel());
 
     const journey = this.card.animate([
       {
-        opacity:0.12,
-        transform:`translate3d(${dx}px,${dy}px,0) scale(${startScale}) rotateZ(-7deg)`
+        opacity:0.18,
+        transform:`translate3d(${dx}px,${dy}px,0) scale(${startScale})`
       },
       {
-        opacity:0.9,
-        transform:`translate3d(${dx * 0.9 + curve * 0.32}px,${dy * 0.9}px,0) scale(${startScale * 1.28}) rotateZ(-3deg)`,
-        offset:0.14
-      },
-      {
-        opacity:0.98,
-        transform:`translate3d(${dx * 0.62 + curve}px,${dy * 0.62}px,0) scale(.56) rotateZ(3.2deg)`,
-        offset:0.38
+        opacity:0.94,
+        transform:`translate3d(${dx * .34}px,${dy * .34}px,0) scale(.78)`,
+        offset:.52
       },
       {
         opacity:1,
-        transform:`translate3d(${dx * 0.28 - curve}px,${dy * 0.28}px,0) scale(.82) rotateZ(-2deg)`,
-        offset:0.68
-      },
-      {
-        opacity:1,
-        transform:'translate3d(0,-4px,0) scale(1.025) rotateZ(.4deg)',
-        offset:0.9
-      },
-      {
-        opacity:1,
-        transform:'translate3d(0,0,0) scale(1) rotateZ(0deg)'
+        transform:'translate3d(0,0,0) scale(1)'
       }
     ], {
       duration,
-      easing:'cubic-bezier(.16,.82,.18,1)',
+      easing:'cubic-bezier(.22,.82,.24,1)',
       fill:'both'
     });
     const unveiling = veil.animate([
-      { opacity:1, transform:'perspective(700px) rotateY(0deg) scale(1)' },
-      { opacity:1, transform:'perspective(700px) rotateY(0deg) scale(1)', offset:0.68 },
-      { opacity:0.78, transform:'perspective(700px) rotateY(72deg) scale(.99)', offset:0.86 },
-      { opacity:0, transform:'perspective(700px) rotateY(94deg) scale(.98)' }
-    ], { duration, easing:'cubic-bezier(.16,.82,.18,1)', fill:'both' });
+      { opacity:1, transform:'scale(1)' },
+      { opacity:.92, transform:'scale(.998)', offset:.58 },
+      { opacity:0, transform:'scale(.985)' }
+    ], { duration, easing:'cubic-bezier(.22,.82,.24,1)', fill:'both' });
 
     await Promise.allSettled([journey.finished, unveiling.finished]);
     veil.remove();
     this.card.dataset.imageState = 'progressive';
     delete this.world.dataset.birthTransit;
+    document.body?.classList.remove('db553-tarot-card-flight');
+    this.resumeUniverseAfterCardFlight();
     return true;
   }
 
@@ -746,7 +762,7 @@ export class TarotLivreOrbOSV517 {
       this.world.dataset.lastInputResponseMs = this.lastInputResponseMs.toFixed(1);
       this.world.dataset.responseWithinBudget = String(this.lastInputResponseMs <= RESPONSE_BUDGET_MS);
       this.world.classList.remove('is-responding');
-      globalThis.dispatchEvent?.(new CustomEvent('tarot:input-response-v538', {
+      globalThis.dispatchEvent?.(new CustomEvent('tarot:input-response-v553', {
         detail: {
           milliseconds: this.lastInputResponseMs,
           budget: RESPONSE_BUDGET_MS,
@@ -785,9 +801,6 @@ export class TarotLivreOrbOSV517 {
         }, reducedMotion() ? 120 : duration + 120);
       }});
       if (!born) throw new Error('O nascimento visual foi substituído por uma atualização mais recente.');
-      if (reducedMotion()) await wait(45);
-      else await wait(48);
-
       this.signal.textContent = this.state.completed
         ? 'O círculo das 78 cartas está completo.'
         : `${card?.name || 'Carta'} nasceu da Orbe.`;
@@ -799,7 +812,7 @@ export class TarotLivreOrbOSV517 {
           cardId: result.cardId,
           position: result.position,
           remaining: this.state.waiting.length,
-          engine: 'progressive-no-fire-v538',
+          engine: 'progressive-no-fire-v553',
           auditFingerprint: tarotStateFingerprint(this.state)
         }
       }));
@@ -821,7 +834,7 @@ export class TarotLivreOrbOSV517 {
         }
       }));
 
-      preloadCardImages(this.state.waiting.slice(0, 4), 4);
+      this.preloadWaiting();
       return result.cardId;
     } catch (error) {
       console.error('[Divina] A revelação foi preservada após uma interrupção.', error);
@@ -832,6 +845,9 @@ export class TarotLivreOrbOSV517 {
       announce('Nenhuma carta foi perdida. A Orbe está pronta novamente.');
       return null;
     } finally {
+      document.body?.classList.remove('db553-tarot-card-flight');
+      delete this.world.dataset.birthTransit;
+      this.resumeUniverseAfterCardFlight();
       this.busy = false;
       this.setPhase('idle');
     }
@@ -866,15 +882,15 @@ export class TarotLivreOrbOSV517 {
           { opacity:1, transform:'translate3d(0,0,0) scale(1) rotateZ(0deg)', offset:0.72 },
           { opacity:1, transform:'translate3d(0,0,0) scale(1) rotateZ(0deg)' }
         ], {
-          duration:HISTORY_TRANSITION_MS,
-          easing:'cubic-bezier(.2,.88,.22,1)',
+          duration:constrained() ? 120 : HISTORY_TRANSITION_MS,
+          easing:'cubic-bezier(.22,.82,.24,1)',
           fill:'both'
         });
         const leaving = outgoing?.animate?.([
           { opacity:1, transform:'translate3d(0,0,0) scale(1) rotateZ(0deg)' },
           { opacity:0, transform:`translate3d(${-sign * 28}px,0,0) scale(.975) rotateZ(${-sign * 0.6}deg)` }
         ], {
-          duration:Math.round(HISTORY_TRANSITION_MS * 0.74),
+          duration:Math.round((constrained() ? 120 : HISTORY_TRANSITION_MS) * 0.74),
           easing:'cubic-bezier(.32,0,.44,1)',
           fill:'both'
         });
@@ -928,11 +944,7 @@ export class TarotLivreOrbOSV517 {
       }
       this.render(false);
       this.signal.textContent = 'As cartas ocultas foram embaralhadas.';
-      preloadCardImages([
-        this.state.waiting[0],
-        this.state.waiting[1],
-        this.state.waiting[2]
-      ], 3);
+      this.preloadWaiting();
       announce('Cartas ocultas embaralhadas. As reveladas foram preservadas.');
       nativePulse('Light');
       return true;
@@ -1045,7 +1057,7 @@ export class TarotLivreOrbOSV517 {
     const card = CARDS[cardId];
     if (!card || card.orientation !== 'normal') return '';
     const current = index === this.selected;
-    return `<button type="button" data-index="${index}" role="gridcell" class="${current ? 'is-current' : ''}" aria-current="${current ? 'true' : 'false'}" aria-label="${escapeText(card.name)}, carta ${index + 1}">${cardImageMarkup(card, { alt: '', priority: 'low' })}<span>${index + 1}</span></button>`;
+    return `<button type="button" data-index="${index}" role="gridcell" class="${current ? 'is-current' : ''}" aria-current="${current ? 'true' : 'false'}" aria-label="${escapeText(card.name)}, carta ${index + 1}"><span class="tl517__grid-art" style="${cardAtlasStyle(card)}" aria-hidden="true"></span><span class="tl517__grid-index">${index + 1}</span></button>`;
   }
 
   appendGridCard(index) {
@@ -1117,7 +1129,7 @@ export class TarotLivreOrbOSV517 {
       fireInsideUniverseCanvas: false,
       cosmicNebula: true,
       livingUniverse: this.world.dataset.universeAuthority === 'living-universe-core-v524',
-      physicalCardJourney: this.world.dataset.birthJourney === 'orb-to-card-short-v538',
+      physicalCardJourney: this.world.dataset.birthJourney === 'orb-to-card-short-v553',
       stellarFoundation: this.world.dataset.universeAuthority === 'living-universe-core-v524',
       optimizedCosmicBackdrop: false,
       staticUniverseImage: this.world.dataset.staticUniverseImage !== 'false',
@@ -1125,11 +1137,16 @@ export class TarotLivreOrbOSV517 {
       skinReactiveUniverse: this.world.dataset.skinReactiveUniverse === '30-palettes',
       retinaAdaptiveEffects: this.world.dataset.effectsResolution === 'global-adaptive',
       spriteAtlasParticles: this.world.dataset.particleArchitecture === 'palette-sprite-atlas',
-      smoothBirthJourney: this.world.dataset.birthEasing === 'ios-short-compositor-v538',
-      iosHistoryNavigation: this.world.dataset.birthEasing === 'ios-short-compositor-v538',
+      smoothBirthJourney: this.world.dataset.birthEasing === 'ios-short-compositor-v553',
+      iosHistoryNavigation: this.world.dataset.birthEasing === 'ios-short-compositor-v553',
       mesaRealTransfer: true,
       referenceProportions: this.world.dataset.responsiveAltar === 'v517-reference-ratio',
-      oneAnimationCadence: this.world.dataset.frameArchitecture === 'universal-single-raf',
+      oneAnimationCadence: this.world.dataset.frameArchitecture === 'universe-paused-during-card-flight-v553',
+      birthTravelMs: constrained() ? BIRTH_TRAVEL_CONSTRAINED_MS : BIRTH_TRAVEL_MS,
+      historyTransitionMs: constrained() ? 120 : HISTORY_TRANSITION_MS,
+      portalBackRedrawsPerBirth: 0,
+      gridFullImageRequests: 0,
+      universePausedDuringCardFlight: true,
       unexplainedFlyingCards: this.world.dataset.decorativeCards !== 'none',
       targetFps: this.fluidity?.targetFps || 0
     });
@@ -1137,6 +1154,7 @@ export class TarotLivreOrbOSV517 {
 
   destroy() {
     this.leave(routeNow());
+    this.resumeUniverseAfterCardFlight();
     this.abort.abort();
     clearTimeout(this.resetTimer);
     clearTimeout(this.birthTimer);

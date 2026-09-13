@@ -190,7 +190,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       ].forEach(styleId=>document.getElementById(styleId)?.remove());
       const [,module]=await Promise.all([
         ensureStyle('divinaTarotLivreOrbOSV517','tarot-livre-orbe-os-v517.css?v=538-fluid'),
-        import('./tarot-livre-orbe-os-v517.js?v=538-fluid')
+        ensureStyle('divinaTarotFreeSupremeV553','tarot-free-supreme-v553.css?v=553'),
+        import('./tarot-livre-orbe-os-v517.js?v=553-supreme')
       ]);
       const instance=new module.TarotLivreOrbOSV517($('#tarot'),{
         orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme
@@ -318,7 +319,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
   const warmers=Object.freeze({
     tarot:()=>Promise.all([
       ensureStyle('divinaTarotLivreOrbOSV517','tarot-livre-orbe-os-v517.css?v=538-fluid'),
-      import('./tarot-livre-orbe-os-v517.js?v=538-fluid')
+      ensureStyle('divinaTarotFreeSupremeV553','tarot-free-supreme-v553.css?v=553'),
+      import('./tarot-livre-orbe-os-v517.js?v=553-supreme')
     ]),
     daily:()=>Promise.all([
       ensureStyle('divinaDailyLivingV509','daily-world-v509.css?v=509'),

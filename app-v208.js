@@ -1,6 +1,6 @@
-/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 4/14 · V552
-   Navegação, Menu e transições com uma única gramática de movimento iOS.
-   Todo o universo aprovado até a V550 permanece íntegro. */
+/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 5/14 · V553
+   Tarot Livre Supremo: resposta imediata, carta física curta e nenhum fogo.
+   Todo o universo aprovado até a V552 permanece íntegro. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -18,7 +18,7 @@ import { AccountEngineV201 } from './account-engine-v201.js?v=201';
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=534-consultations-anchor';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=548';
+import { createPageLoader } from './page-loader-v1.js?v=553-tarot-supreme';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -65,11 +65,11 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=552')
+const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=553')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
-    document.documentElement.dataset.pwaError = 'v552';
+    document.documentElement.dataset.pwaError = 'v553';
   });
 
 const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
@@ -498,14 +498,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v552-app';
+  window.__divinaSWBootstrap = 'v553-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=552', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=553', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v552';
+        document.documentElement.dataset.releaseEpoch = 'v553';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V552 registrado');
+        console.info('[Divina] PWA V553 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -1180,6 +1180,36 @@ window.divinaHomeLivingReleaseV552 = Object.freeze({
   })
 });
 
+window.divinaTarotFreeSupremeReleaseV553 = Object.freeze({
+  version:553,
+  plan:'4.0-fluidity-supreme',
+  macroStage:'5-of-14',
+  title:'Tarot Livre Supremo sem fogo',
+  preserves:'V552',
+  iphonePriority:true,
+  deckSize:78,
+  normalOnly:true,
+  noRepeats:true,
+  gridColumns:6,
+  automaticMeanings:false,
+  fireEngine:false,
+  birthTravelMs:280,
+  constrainedBirthTravelMs:190,
+  historyTransitionMs:160,
+  responseBudgetMs:80,
+  portalBackRedrawsPerBirth:0,
+  gridFullImageRequests:0,
+  atlasGrid:true,
+  universePausedDuringCardFlight:true,
+  privateContentReads:0,
+  apiCalls:0,
+  status:()=>Object.freeze({
+    release:'V553',
+    tarot:globalThis.divinaTarotLivreV517?.status?.()||null,
+    orb:supremeOrb?.snapshot?.()||null
+  })
+});
+
 window.divinaResponsiveEnchantmentReleaseV533 = Object.freeze({
   version:533,
   macroStage:'9-of-10',
@@ -1504,10 +1534,10 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V552',
+        release:'V553',
         supremePlan:'4.0-fluidity-supreme',
         supremePlanMacroStages:14,
-        currentMacroStage:'4-of-14',
+        currentMacroStage:'5-of-14',
         worldTruth:'v535',
         worldTruthRoutes:17,
         orbFluidNavigation:'v549',
@@ -1536,6 +1566,19 @@ const awaken = async () => {
         homeExternalAuraLoops:0,
         homeExternalAuraEngine:false,
         homeAuraDrivenByExistingOrbState:true,
+        tarotFreeSupreme:'v553',
+        tarotFreeDeckSize:78,
+        tarotFreeNormalOnly:true,
+        tarotFreeNoRepeats:true,
+        tarotFreeGridColumns:6,
+        tarotFreeAutomaticMeanings:false,
+        tarotFreeBirthTravelMs:280,
+        tarotFreeConstrainedBirthTravelMs:190,
+        tarotFreeHistoryTransitionMs:160,
+        tarotFreeResponseBudgetMs:80,
+        tarotFreePortalBackRedrawsPerBirth:0,
+        tarotFreeGridFullImageRequests:0,
+        tarotFreeUniversePausedDuringCardFlight:true,
         vitalityBus:'v536',
         livingGrammar:'v536',
         originDiscovery:'v537',

@@ -25,25 +25,25 @@
   ],
   "icons": [
     {
-      "src": "./icon-192.png?v=552",
+      "src": "./icon-192.png?v=553",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icon-512.png?v=552",
+      "src": "./icon-512.png?v=553",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icon-maskable-192.png?v=552",
+      "src": "./icon-maskable-192.png?v=553",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "./icon-maskable-512.png?v=552",
+      "src": "./icon-maskable-512.png?v=553",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
@@ -56,7 +56,7 @@
       "url": "./index.html#tarot",
       "icons": [
         {
-          "src": "./icon-192.png?v=552",
+          "src": "./icon-192.png?v=553",
           "sizes": "192x192",
           "type": "image/png"
         }
@@ -68,7 +68,7 @@
       "url": "./index.html#daily",
       "icons": [
         {
-          "src": "./icon-192.png?v=552",
+      "src": "./icon-192.png?v=553",
           "sizes": "192x192",
           "type": "image/png"
         }
@@ -80,7 +80,7 @@
       "url": "./index.html#library",
       "icons": [
         {
-          "src": "./icon-192.png?v=552",
+          "src": "./icon-192.png?v=553",
           "sizes": "192x192",
           "type": "image/png"
         }
@@ -92,7 +92,7 @@
       "url": "./index.html#school",
       "icons": [
         {
-          "src": "./icon-192.png?v=552",
+      "src": "./icon-192.png?v=553",
           "sizes": "192x192",
           "type": "image/png"
         }
@@ -104,7 +104,7 @@
       "url": "./index.html#journal",
       "icons": [
         {
-          "src": "./icon-192.png?v=552",
+          "src": "./icon-192.png?v=553",
           "sizes": "192x192",
           "type": "image/png"
         }
@@ -116,7 +116,7 @@
       "url": "./index.html#ai",
       "icons": [
         {
-          "src": "./icon-192.png?v=552",
+      "src": "./icon-192.png?v=553",
           "sizes": "192x192",
           "type": "image/png"
         }
@@ -128,7 +128,7 @@
       "url": "./index.html#notifications",
       "icons": [
         {
-          "src": "./icon-192.png?v=552",
+          "src": "./icon-192.png?v=553",
           "sizes": "192x192",
           "type": "image/png"
         }
@@ -140,7 +140,7 @@
       "url": "./instalar-app.html",
       "icons": [
         {
-          "src": "./icon-192.png?v=552",
+      "src": "./icon-192.png?v=553",
           "sizes": "192x192",
           "type": "image/png"
         }

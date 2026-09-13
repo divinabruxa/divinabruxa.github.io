@@ -1,0 +1,9 @@
+ROLLBACK CIRÚRGICO — V553 PARA V552
+
+Se for necessário voltar somente esta macroetapa:
+1. restaure index.html, app-v208.js, page-loader-v1.js, pwa-world-v196.js, pwa-world-v324.js, sw.js, manifest.webmanifest e tarot-livre-orbe-os-v517.js da V552;
+2. remova somente tarot-free-supreme-v553.css;
+3. mantenha todas as cartas, imagens, CNAME e demais arquivos;
+4. não altere sessões salvas do Tarot Livre.
+
+O rollback não modifica o baralho, a ordem salva, skins, compras, Diário, Whit ou Escola.
