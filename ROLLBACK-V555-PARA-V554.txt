@@ -1,0 +1,5 @@
+ROLLBACK V555 → V554
+
+Este pacote é incremental e preserva a V554. Se precisar retornar, reenvie os arquivos originais do pacote V554 sobre os mesmos nomes.
+
+Não apague conteúdo, imagens, CNAME, dados locais de progresso, Diário ou preferências. O Service Worker V554 volta a assumir após a próxima atualização/reabertura.

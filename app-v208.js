@@ -1,6 +1,6 @@
-/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 6/14 · V554
-   Tarot Livre Supremo: resposta imediata, carta física curta e nenhum fogo.
-   Todo o universo aprovado até a V552 permanece íntegro. */
+/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 7/14 · V555
+   Escola organizada em três jornadas e Biblioteca convertida em portal vivo.
+   Todo o universo aprovado até a V554 permanece íntegro. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -18,7 +18,7 @@ import { AccountEngineV201 } from './account-engine-v201.js?v=201';
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=534-consultations-anchor';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=554-daily-spreads';
+import { createPageLoader } from './page-loader-v1.js?v=555-school-library';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -48,7 +48,7 @@ import { createWisdomDepthCoreV539 } from './wisdom-depth-core-v539.js?v=539';
 import { createWhitPresenceDeepV540 } from './whit-presence-deep-v540.js?v=540';
 import { createExperienceDepthCoreV541 } from './experience-depth-core-v541.js?v=541';
 import { createAmazonStoreCoreV543 } from './amazon-store-core-v543.js?v=543';
-import { createPublicLibraryCoreV544 } from './public-library-core-v544.js?v=544';
+import { createPublicLibraryCoreV544 } from './public-library-core-v544.js?v=555';
 import { createInternationalParityCoreV545 } from './international-parity-core-v545.js?v=545';
 import { createPwaPerformanceRecoveryCoreV546 } from './pwa-performance-recovery-core-v546.js?v=546';
 import { createSecurityPrivacyCoreV547 } from './security-privacy-core-v547.js?v=547';
@@ -65,11 +65,11 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=554')
+const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=555')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
-    document.documentElement.dataset.pwaError = 'v554';
+    document.documentElement.dataset.pwaError = 'v555';
   });
 
 const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
@@ -93,7 +93,7 @@ const startSpreadsSupremeV331 = () => import('./spreads-supreme-v331.js?v=554')
     document.documentElement.dataset.spreadsSupremeError = 'v331';
   });
 
-const startLibraryDeepV332 = () => import('./library-deep-v332.js?v=544')
+const startLibraryDeepV332 = () => import('./library-deep-v332.js?v=555')
   .then(module => module.installLibraryDeepV332?.())
   .catch(error => {
     console.error('[Divina] Biblioteca Profunda V332 não iniciou', error);
@@ -498,14 +498,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v554-app';
+  window.__divinaSWBootstrap = 'v555-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=554', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=555', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v554';
+        document.documentElement.dataset.releaseEpoch = 'v555';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V554 registrado');
+        console.info('[Divina] PWA V555 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -1242,6 +1242,32 @@ window.divinaDailySpreadsReleaseV554 = Object.freeze({
   })
 });
 
+window.divinaSchoolLibraryReleaseV555 = Object.freeze({
+  version:555,
+  plan:'4.0-fluidity-supreme',
+  macroStage:'7-of-14',
+  title:'Escola organizada e Biblioteca Portal Mágico',
+  preserves:'V554',
+  iphonePriority:true,
+  schoolModules:17,
+  schoolLessons:124,
+  schoolStages:3,
+  schoolDuplicateMaps:0,
+  freeSchoolLessons:17,
+  premiumSchoolLessons:107,
+  libraryCards:78,
+  libraryPageSize:18,
+  libraryGridFullImageRequests:0,
+  canonicalOrb:true,
+  permanentAnimationLoops:0,
+  status:()=>Object.freeze({
+    release:'V555',
+    school:globalThis.divinaSchoolWorldV306?.status?.()||null,
+    library:globalThis.divinaLibraryWorldV302?.status?.()||null,
+    orb:supremeOrb?.snapshot?.()||null
+  })
+});
+
 window.divinaResponsiveEnchantmentReleaseV533 = Object.freeze({
   version:533,
   macroStage:'9-of-10',
@@ -1566,10 +1592,10 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V554',
+        release:'V555',
         supremePlan:'4.0-fluidity-supreme',
         supremePlanMacroStages:14,
-        currentMacroStage:'6-of-14',
+        currentMacroStage:'7-of-14',
         worldTruth:'v535',
         worldTruthRoutes:17,
         orbFluidNavigation:'v549',
@@ -1619,6 +1645,17 @@ const awaken = async () => {
         spreadPremiumAuthority:'server-confirmed-premium_lifetime',
         spreadCanonicalOrb:true,
         spreadGridFullImageRequests:0,
+        schoolLibrarySupreme:'v555',
+        schoolModules:17,
+        schoolLessons:124,
+        schoolStages:3,
+        schoolDuplicateMaps:0,
+        schoolFreeLessons:17,
+        schoolPremiumLessons:107,
+        libraryCards:78,
+        libraryPageSize:18,
+        libraryCanonicalOrb:true,
+        libraryGridFullImageRequests:0,
         tarotFreeUniversePausedDuringCardFlight:true,
         vitalityBus:'v536',
         livingGrammar:'v536',

@@ -1,11 +1,11 @@
-/* DIVINA BRUXA 3.0 — MACROETAPA 10/14 · BIBLIOTECA PÚBLICA V544
-   Uma camada editorial leve sobre as 78 cartas, os guias e a busca local. */
+/* DIVINA BRUXA 4.0 — MACROETAPA 7/14 · PORTAL EDITORIAL V555
+   Uma entrada clara, profunda e leve para as 78 cartas e seus caminhos de estudo. */
 
 import { CARDS } from './tarot-data.js';
-import './tarot-meanings.js?v=544';
-import { cardContentId, normalizeLibraryText } from './card-library-policy.js?v=544';
+import './tarot-meanings.js?v=555';
+import { cardContentId, normalizeLibraryText } from './card-library-policy.js?v=555';
 
-const RELEASE='V544';
+const RELEASE='V555';
 const PATHS=Object.freeze([
   ['essencia','✦','Quero entender uma carta','essência significado mensagem'],
   ['amor','♡','Quero estudar relações','amor reciprocidade vínculo consentimento'],
@@ -62,7 +62,7 @@ function render(root){
   const anchor=root.querySelector('.lb302__sanctuary,.library-tools');
   anchor?.before(section);
   if(!anchor)root.prepend(section);
-  root.dataset.publicLibrary='v544';
+  root.dataset.publicLibrary='v555';
 }
 
 export function createPublicLibraryCoreV544(){
@@ -83,5 +83,5 @@ export function createPublicLibraryCoreV544(){
     if(root)applyQuery(root,normalizeLibraryText(button.dataset.v544Query));
   },{signal:controller.signal});
   enhance();
-  return Object.freeze({release:RELEASE,enhance,audit:()=>result,status:()=>Object.freeze({...result,macroStage:'10-of-14',permanentAnimationLoops:0,mutationObservers:0,extraApiCalls:0}),destroy:()=>controller.abort()});
+  return Object.freeze({release:RELEASE,enhance,audit:()=>result,status:()=>Object.freeze({...result,macroStage:'7-of-14',canonicalOrb:true,pageSize:18,atlasGrid:true,permanentAnimationLoops:0,mutationObservers:0,extraApiCalls:0}),destroy:()=>controller.abort()});
 }

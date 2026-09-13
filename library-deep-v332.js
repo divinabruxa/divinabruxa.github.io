@@ -1,14 +1,14 @@
-/* DIVINA BRUXA 3.0 — BIBLIOTECA PROFUNDA · CORTE V544
-   Camada visual/ritual sobre LibraryWorld V302. Conteúdo editorial permanece V302/V184. */
+/* DIVINA BRUXA 4.0 — MACROETAPA 7/14 · PORTAL PROFUNDO V555
+   Camada sensorial leve sobre a Biblioteca: uma única Orbe, nenhum laço permanente. */
 
-const RELEASE='V332';
+const RELEASE='V555';
 const STYLE_ID='libraryDeepV332Styles';
 const MARK=Symbol.for('divina.library.deep.v332');
 
 function installStyle(){
   if(document.getElementById(STYLE_ID))return;
   const link=document.createElement('link');
-  link.id=STYLE_ID;link.rel='stylesheet';link.href='./library-deep-v332.css?v=332';
+  link.id=STYLE_ID;link.rel='stylesheet';link.href='./library-deep-v332.css?v=555';
   document.head.append(link);
 }
 
@@ -33,7 +33,7 @@ export class LibraryDeepV332{
     if(!root||!root.querySelector('.lb302'))return false;
     if(this.root===root&&!force)return true;
     this.root=root;
-    root.dataset.libraryDeep='v332';
+    root.dataset.libraryDeep='v555';
     this.enhance();
     return true;
   }
@@ -60,10 +60,13 @@ export class LibraryDeepV332{
       orb.append(light);
     }
 
-    orb.addEventListener('pointerdown',()=>orb.classList.add('lb332-touch'),{passive:true,signal:this.abort.signal});
-    const release=()=>orb.classList.remove('lb332-touch');
-    orb.addEventListener('pointerup',release,{passive:true,signal:this.abort.signal});
-    orb.addEventListener('pointercancel',release,{passive:true,signal:this.abort.signal});
+    if(!orb.dataset.lb332Bound){
+      orb.dataset.lb332Bound='true';
+      orb.addEventListener('pointerdown',()=>orb.classList.add('lb332-touch'),{passive:true,signal:this.abort.signal});
+      const release=()=>orb.classList.remove('lb332-touch');
+      orb.addEventListener('pointerup',release,{passive:true,signal:this.abort.signal});
+      orb.addEventListener('pointercancel',release,{passive:true,signal:this.abort.signal});
+    }
 
     if(reader&&!reader.querySelector('.lb332-compass')){
       const shell=reader.querySelector('.lb302__reader-shell');
@@ -76,8 +79,9 @@ export class LibraryDeepV332{
   }
 
   status(){return Object.freeze({
-    release:RELEASE,baseWorld:'V302',cards:78,contentRewritten:false,
-    meaningSourcePreserved:true,orbDiscoveryPreserved:true,mutationObservers:0,extraApiCalls:0
+    release:RELEASE,baseWorld:'V555',cards:78,contentRewritten:false,pageSize:18,
+    meaningSourcePreserved:true,canonicalOrb:true,duplicateOrb:false,atlasGrid:true,
+    orbDiscoveryPreserved:true,mutationObservers:0,permanentAnimationLoops:0,extraApiCalls:0
   });}
 
   destroy(){

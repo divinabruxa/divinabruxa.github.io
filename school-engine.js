@@ -1,8 +1,8 @@
-/* DIVINA BRUXA — ESCOLA DO TAROT DEFINITIVA V186 */
+/* DIVINA BRUXA 4.0 — MACROETAPA 7/14 · ESCOLA ORGANIZADA V555 */
 
 import { CARDS } from './tarot-data.js';
 import { store, escapeHTML } from './storage.js';
-import { cardImageMarkup } from './tarot-image-runtime.js';
+import { cardAtlasStyle } from './tarot-image-runtime.js';
 import { dailyMeaning } from './daily-meaning-runtime.js';
 import { cardPageHref } from './card-library-policy.js';
 import {
@@ -11,6 +11,7 @@ import {
   SCHOOL_FILTERS,
   SCHOOL_LESSON_TOTAL,
   SCHOOL_MODULES,
+  SCHOOL_STAGES,
   SCHOOL_NOTE_LIMIT,
   SCHOOL_STORAGE_KEY,
   SCHOOL_THEORY_TOTAL,
@@ -20,12 +21,14 @@ import {
   normalizeSchoolState,
   normalizeSchoolText,
   privateSchoolExport,
-  schoolFilterMatches
-} from './school-policy.js?v=186';
+  schoolFilterMatches,
+  isSchoolLessonPremium,
+  schoolStageForModule
+} from './school-policy.js?v=555';
 
 const safe = value => escapeHTML(value ?? '');
 const ELEMENTS = Object.freeze(['Água', 'Ar', 'Fogo', 'Terra']);
-const scrollBehavior = () => globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+const scrollBehavior = () => 'auto';
 const nextFrame = callback => typeof globalThis.requestAnimationFrame === 'function'
   ? globalThis.requestAnimationFrame(callback)
   : globalThis.setTimeout(callback, 0);
@@ -89,7 +92,7 @@ const THEORY_LESSONS = Object.freeze({
   ]),
   'royal-table': Object.freeze([
     ['As 78 cartas como universo', 'A Mesa Real usa o baralho completo para observar um sistema amplo. Cada carta aparece uma vez e ganha sentido pela posição e pelas vizinhanças.', 'Antes de interpretar, observe a distribuição geral dos quatro naipes.'],
-    ['Treze fileiras de seis', 'A grade de 13 por 6 cria eixos horizontais e verticais. Defina previamente o método de leitura das linhas para manter consistência.', 'Escolha o tema de cada fileira antes de abrir a mesa.'],
+    ['Treze colunas e seis linhas', 'A grade de 13 por 6 cria eixos horizontais e verticais. Defina previamente o método de leitura das linhas para manter consistência.', 'Escolha o tema de cada linha antes de abrir a mesa.'],
     ['Núcleos e constelações', 'Agrupamentos de Arcanos Maiores, figuras da Corte ou naipes repetidos formam núcleos temáticos. Comece por eles antes dos detalhes.', 'Marque três regiões que concentram mais intensidade simbólica.'],
     ['Síntese em camadas', 'Uma Mesa Real pede leitura gradual: panorama, áreas, relações e conclusão. Tentar interpretar tudo de uma vez cria ruído.', 'Escreva uma frase para o panorama antes de abrir qualquer detalhe.']
   ]),
@@ -122,8 +125,13 @@ function quizAlternatives(card) {
 }
 
 export class SchoolEngine {
-  constructor(root) {
+  constructor(root, options = {}) {
     this.root = root;
+    this.authClient = options.authClient || globalThis.divinaAuth || null;
+    this.premium = false;
+    this.premiumChecked = false;
+    this.premiumAuthState = Boolean(this.authClient?.session);
+    this.destroyed = false;
     this.state = normalizeSchoolState(store.get(SCHOOL_STORAGE_KEY));
     this.query = '';
     this.filter = 'all';
@@ -142,6 +150,52 @@ export class SchoolEngine {
       this.render();
     };
     globalThis.addEventListener?.('divina:account-sync-applied', this.onAccountSync);
+    this.onBilling = event => {
+      this.premium = this.activePremium(event.detail);
+      this.premiumChecked = true;
+      this.render();
+    };
+    this.onAuth = () => {
+      this.premium = false;
+      this.premiumChecked = false;
+      this.premiumAuthState = Boolean(this.authClient?.session);
+      this.render();
+      this.refreshPremium().catch(() => {});
+    };
+    globalThis.addEventListener?.('divina:billing-updated', this.onBilling);
+    globalThis.addEventListener?.('divina:auth-state', this.onAuth);
+    this.refreshPremium().catch(() => {});
+  }
+
+  activePremium(snapshot) {
+    return Boolean(snapshot?.entitlements?.some(item =>
+      (item?.key === 'premium_lifetime' || item?.entitlementKey === 'premium_lifetime' || item?.entitlement_key === 'premium_lifetime')
+      && item?.status === 'active'
+    ));
+  }
+
+  async refreshPremium() {
+    const signedIn = Boolean(this.authClient?.session);
+    if (this.premiumChecked && this.premiumAuthState === signedIn) return this.premium;
+    this.premiumChecked = true;
+    this.premiumAuthState = signedIn;
+    if (!signedIn || typeof this.authClient?.billingSnapshot !== 'function') {
+      this.premium = false;
+      return false;
+    }
+    try {
+      const result = await this.authClient.billingSnapshot();
+      this.premium = Boolean(result?.ok && this.activePremium(result.body?.snapshot));
+    } catch {
+      this.premium = false;
+      this.premiumChecked = false;
+    }
+    if (!this.destroyed) this.render();
+    return this.premium;
+  }
+
+  lessonLocked(lesson) {
+    return Boolean(lesson && isSchoolLessonPremium(lesson.id) && !this.premium);
   }
 
   save() {
@@ -189,11 +243,12 @@ export class SchoolEngine {
 
   resumeTarget() {
     const entries = this.allUniqueLessons();
+    const accessible = this.premium ? entries : entries.filter(({ lesson }) => !isSchoolLessonPremium(lesson.id));
     const current = this.state.lastLesson && this.lessonLocation(this.state.lastLesson, this.state.lastModule);
-    if (current && !this.state.completed.includes(current.lesson.id)) return current;
-    const previousIndex = this.state.lastLesson ? entries.findIndex(entry => entry.lesson.id === this.state.lastLesson) : -1;
-    const after = entries.slice(previousIndex + 1).find(entry => !this.state.completed.includes(entry.lesson.id));
-    return after || entries.find(entry => !this.state.completed.includes(entry.lesson.id)) || current || entries[0];
+    if (current && !this.lessonLocked(current.lesson) && !this.state.completed.includes(current.lesson.id)) return current;
+    const previousIndex = this.state.lastLesson ? accessible.findIndex(entry => entry.lesson.id === this.state.lastLesson) : -1;
+    const after = accessible.slice(previousIndex + 1).find(entry => !this.state.completed.includes(entry.lesson.id));
+    return after || accessible.find(entry => !this.state.completed.includes(entry.lesson.id)) || current || accessible[0] || entries[0];
   }
 
   progress() {
@@ -244,6 +299,7 @@ export class SchoolEngine {
             <span><b>${progress.quizPassed}</b><small>quizzes dominados</small></span>
             <span><b>${progress.review}</b><small>para revisar</small></span>
           </div>
+          <p class="school-access-truth"><b>${this.premium ? 'PREMIUM ATIVO' : 'JORNADA GRATUITA'}</b><span>${this.premium ? '124 aulas abertas, práticas avançadas e estudo offline disponível.' : '17 aulas abertas para começar. As demais preservam seu progresso e abrem com Premium vitalício.'}</span></p>
           <button type="button" class="school-continue" data-school-continue>${progress.totalDone === SCHOOL_LESSON_TOTAL ? 'Revisar a jornada' : 'Continuar da próxima aula'} <span aria-hidden="true">↓</span></button>
         </div>
         <div class="school-progress-orbit" style="--school-progress:${progress.percent * 3.6}deg" aria-label="${progress.percent}% da jornada completa concluída">
@@ -255,14 +311,14 @@ export class SchoolEngine {
           <span>Buscar em toda a escola</span>
           <input type="search" data-school-search placeholder="Ex.: A Lua, The Moon, água, ética" value="${safe(this.query)}" autocomplete="off" spellcheck="false">
         </label>
-        <span class="school-module-count">17 módulos · 78 cartas · ${SCHOOL_THEORY_TOTAL} práticas · zero invertidas</span>
+        <span class="school-module-count">17 módulos · 78 cartas · ${SCHOOL_THEORY_TOTAL} práticas · 17 aulas grátis · zero invertidas</span>
       </div>
       <div class="school-filter-bar" role="group" aria-label="Filtrar aulas">
         ${SCHOOL_FILTERS.map(filter => `<button type="button" data-school-filter="${filter.id}" aria-pressed="${this.filter === filter.id}">${safe(filter.label)}</button>`).join('')}
       </div>
       <div class="school-workspace">
-        <nav class="school-modules" aria-label="Módulos da Escola do Tarot">
-          ${SCHOOL_MODULES.map(module => this.moduleMarkup(module)).join('')}
+        <nav class="school-modules" aria-label="Programa da Escola do Tarot em três jornadas">
+          ${SCHOOL_STAGES.map(stage => `<section class="school-stage" data-school-stage="${stage.id}"><header><span>${String(stage.order).padStart(2,'0')}</span><div><b>${safe(stage.title)}</b><small>${safe(stage.subtitle)}</small></div></header>${stage.moduleIds.map(id => SCHOOL_MODULES.find(module => module.id === id)).filter(Boolean).map(module => this.moduleMarkup(module)).join('')}</section>`).join('')}
         </nav>
         <section class="school-lessons" data-school-lessons aria-live="polite"></section>
       </div>
@@ -279,7 +335,8 @@ export class SchoolEngine {
     const search = this.root.querySelector('[data-school-search]');
     search.addEventListener('input', event => {
       this.query = event.target.value;
-      this.renderLessons();
+      if (this.searchFrame) return;
+      this.searchFrame = nextFrame(() => { this.searchFrame = 0; this.renderLessons(); });
     });
 
     this.root.querySelector('.school-modules').addEventListener('click', event => {
@@ -316,13 +373,17 @@ export class SchoolEngine {
   moduleMarkup(module) {
     const progress = this.moduleProgress(module);
     const active = module.id === this.activeModule;
+    const lessons = this.lessonsFor(module);
+    const free = lessons.filter(lesson => !isSchoolLessonPremium(lesson.id)).length;
+    const access = this.premium || free === lessons.length ? 'open' : free ? 'mixed' : 'premium';
     return `<button type="button" data-school-module="${module.id}" class="${active ? 'active' : ''}" aria-current="${active ? 'true' : 'false'}">
       <span class="school-module-sigil" aria-hidden="true">${MODULE_SIGILS[module.id] || '✦'}</span>
       <span class="school-module-copy">
         <small>MÓDULO ${String(module.order).padStart(2, '0')}</small>
         <strong>${safe(module.title)}</strong>
-        <em>${progress.done}/${progress.total} concluídas</em>
+        <em>${progress.done}/${progress.total} concluídas · ${access === 'open' ? 'aberto' : access === 'mixed' ? `${free} grátis` : 'Premium'}</em>
       </span>
+      <span class="school-module-access" data-access="${access}">${access === 'open' ? 'ABERTO' : access === 'mixed' ? 'FREE + PREMIUM' : '◇ PREMIUM'}</span>
       <i aria-hidden="true"><u style="width:${progress.percent}%"></u></i>
     </button>`;
   }
@@ -421,6 +482,7 @@ export class SchoolEngine {
 
   renderLessons() {
     const module = SCHOOL_MODULES.find(item => item.id === this.activeModule) || SCHOOL_MODULES[0];
+    const stage = schoolStageForModule(module.id);
     const query = normalizeSchoolText(this.query);
     const baseResults = query
       ? this.globalResults(query)
@@ -433,7 +495,7 @@ export class SchoolEngine {
     container.innerHTML = `
       <header class="school-lessons-head">
         <div>
-          <p class="eyebrow">${query ? 'RESULTADOS EM TODA A ESCOLA' : `MÓDULO ${String(module.order).padStart(2, '0')}`}</p>
+          <p class="eyebrow">${query ? 'RESULTADOS EM TODA A ESCOLA' : `JORNADA ${String(stage.order).padStart(2,'0')} · ${safe(stage.title)} · MÓDULO ${String(module.order).padStart(2, '0')}`}</p>
           <h3>${query ? `Encontrei ${results.length} ${results.length === 1 ? 'aula' : 'aulas'}` : safe(module.title)}</h3>
           <p>${query ? `Busca sem acento por “${safe(this.query.trim())}”` : safe(module.description)}${this.filter !== 'all' ? ` · Filtro: ${safe(selectedFilter.label)}.` : ''}</p>
         </div>
@@ -452,7 +514,9 @@ export class SchoolEngine {
       const askAI = event.target.closest('[data-school-ai]');
       const cancelAI = event.target.closest('[data-school-ai-cancel]');
       const confirmAI = event.target.closest('[data-school-ai-confirm]');
+      const premium = event.target.closest('[data-school-premium]');
       const reset = event.target.closest('[data-school-reset-view]');
+      if (premium) { globalThis.orbe?.go?.(this.authClient?.session ? 'subscriptions' : 'login'); return; }
       if (complete) this.toggleList('completed', complete.dataset.complete);
       if (favorite) this.toggleList('favorites', favorite.dataset.favorite);
       if (review) this.toggleList('review', review.dataset.review);
@@ -476,7 +540,17 @@ export class SchoolEngine {
     const review = this.state.review.includes(lesson.id);
     const position = String(index + 1).padStart(2, '0');
 
+    if (this.lessonLocked(lesson)) {
+      const preserved = completed ? '<span>Seu progresso anterior continua preservado.</span>' : '<span>O conteúdo abre com o Premium vitalício.</span>';
+      return `<article class="school-lesson school-lesson-locked" data-lesson-id="${lesson.id}" data-school-access="premium" tabindex="-1">
+        <div class="school-lesson-number" aria-hidden="true">${position}</div>
+        <div class="school-lesson-body"><span class="school-lesson-kind">${safe(module.title)} · PORTAL PREMIUM</span><h4>${safe(lesson.title || lesson.card?.name || 'Aula')}</h4><p>${lesson.card ? `${safe(lesson.card.arcana === 'Arcano Maior' ? 'Arcano Maior' : lesson.card.suit)} · ${safe(lesson.card.element)} · sempre direta.` : 'Teoria, prática e exercício guiado.'}</p><div class="school-lesson-gate"><i aria-hidden="true">◇</i><div><b>Aula protegida, não vazia.</b>${preserved}</div><button type="button" data-school-premium>${this.authClient?.session ? 'Verificar meu Premium' : 'Entrar e conhecer o Premium'}</button></div></div>
+      </article>`;
+    }
+
     if (!lesson.card) {
+      const quiz = this.state.quiz[lesson.id];
+      const quizMessage = quiz?.correct ? `Compreensão confirmada em ${quiz.attempts} ${quiz.attempts === 1 ? 'tentativa' : 'tentativas'}.` : quiz ? 'Esta prática entrou na sua revisão.' : '';
       return `<article class="school-lesson theory ${completed ? 'is-complete' : ''}" data-lesson-id="${lesson.id}" tabindex="-1">
         <div class="school-lesson-number" aria-hidden="true">${position}</div>
         <div class="school-lesson-body">
@@ -484,6 +558,7 @@ export class SchoolEngine {
           <h4>${safe(lesson.title)}</h4>
           <p>${safe(lesson.body)}</p>
           <div class="school-practice"><b>PRÁTICA DO CÉU</b><p>${safe(lesson.practice)}</p></div>
+          <div class="school-quiz"><b>Compreensão: qual postura pertence a uma leitura responsável?</b><div><button type="button" data-quiz="contexto e escolha" data-answer="contexto e escolha" aria-pressed="${quiz?.lastAnswer === 'contexto e escolha'}">Contexto e escolha</button><button type="button" data-quiz="destino fixo" data-answer="contexto e escolha" aria-pressed="${quiz?.lastAnswer === 'destino fixo'}">Destino fixo</button></div><small class="${quiz?.correct ? 'correct' : quiz ? 'retry' : ''}" aria-live="polite">${safe(quizMessage)}</small></div>
           ${this.noteMarkup(lesson.id, 'Registre sua resposta ao exercício')}
           ${this.actionsMarkup(lesson.id, completed, favorite, review)}
           ${this.aiConfirmationMarkup(lesson.id)}
@@ -498,7 +573,7 @@ export class SchoolEngine {
       ? `Dominado em ${quiz.attempts} ${quiz.attempts === 1 ? 'tentativa' : 'tentativas'}.`
       : quiz ? `Em revisão após ${quiz.attempts} ${quiz.attempts === 1 ? 'tentativa' : 'tentativas'}.` : '';
     return `<article class="school-lesson card-lesson ${completed ? 'is-complete' : ''}" data-lesson-id="${lesson.id}" tabindex="-1">
-      <div class="school-card-art">${cardImageMarkup(lesson.card, { priority:'auto' })}<span aria-hidden="true">${position}</span></div>
+      <div class="school-card-art"><i class="school-card-atlas" style="${cardAtlasStyle(lesson.card)}" role="img" aria-label="${safe(lesson.card.name)}, direta"></i><span aria-hidden="true">${position}</span></div>
       <div class="school-lesson-body">
         <span class="school-lesson-kind">${safe(module.title)} · ${safe(lesson.card.arcana === 'Arcano Maior' ? 'ARCANO MAIOR' : lesson.card.suit)} · DIRETA</span>
         <h4>${safe(lesson.card.name)}</h4>
@@ -508,8 +583,14 @@ export class SchoolEngine {
           <div class="school-deep-lesson">
             <h5>Luz</h5><p>${safe(meaning.light)}</p>
             <h5>Tensão</h5><p>${safe(meaning.tension)}</p>
+            <h5>Amor</h5><p>${safe(meaning.love)}</p>
+            <h5>Relacionamentos</h5><p>${safe(meaning.relationships)}</p>
+            <h5>Carreira</h5><p>${safe(meaning.career)}</p>
+            <h5>Dinheiro e matéria</h5><p>${safe(meaning.money)}</p>
+            <h5>Espiritualidade</h5><p>${safe(meaning.spirituality)}</p>
             <h5>Símbolos</h5>${meaning.symbols.map(symbol => `<p>✦ ${safe(symbol)}</p>`).join('')}
             <h5>Conselho</h5><p>${safe(meaning.advice)}</p>
+            <h5>Exemplo de leitura</h5><p>${safe(meaning.dailyEnergy)}</p>
             <h5>Pergunta de reflexão</h5><p>${safe(meaning.reflectionQuestion)}</p>
             <h5>Ação possível</h5><p>${safe(meaning.action)}</p>
             <a href="${cardPageHref(lesson.card)}">Abrir página completa <span aria-hidden="true">→</span></a>
@@ -588,9 +669,10 @@ export class SchoolEngine {
     button.closest('.school-quiz')?.querySelectorAll('[data-quiz]').forEach(option => {
       option.setAttribute('aria-pressed', String(option === button));
     });
+    const theory = button.dataset.answer === 'contexto e escolha';
     output.textContent = correct
-      ? 'Resposta correta. A aula saiu da fila de revisão; observe como esse elemento aparece na imagem.'
-      : `Ainda não. O elemento correto é ${button.dataset.answer}; esta aula entrou na sua revisão.`;
+      ? theory ? 'Resposta correta. Uma leitura responsável preserva contexto, autonomia e possibilidade de escolha.' : 'Resposta correta. A aula saiu da fila de revisão; observe como esse elemento aparece na imagem.'
+      : theory ? 'Ainda não. Tarot responsável não fixa destino; esta aula entrou na sua revisão.' : `Ainda não. O elemento correto é ${button.dataset.answer}; esta aula entrou na sua revisão.`;
     output.className = correct ? 'correct' : 'retry';
     if (correct && this.filter === 'review') globalThis.setTimeout(() => this.render(), 900);
   }
@@ -692,5 +774,13 @@ export class SchoolEngine {
     } catch {
       this.setBackupStatus('Não reconheci uma cópia válida da Escola. Nada foi alterado.', 'error');
     }
+  }
+
+  destroy() {
+    this.destroyed = true;
+    if (this.searchFrame) cancelAnimationFrame(this.searchFrame);
+    globalThis.removeEventListener?.('divina:account-sync-applied', this.onAccountSync);
+    globalThis.removeEventListener?.('divina:billing-updated', this.onBilling);
+    globalThis.removeEventListener?.('divina:auth-state', this.onAuth);
   }
 }

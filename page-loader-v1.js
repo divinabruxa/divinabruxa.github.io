@@ -218,18 +218,24 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     },
     library: async()=>{
       const [,module]=await Promise.all([
-        ensureStyle('divinaLibraryRebirthV302','library-world-v302.css?v=544'),
-        ensureStyle('divinaPublicLibraryV544','public-library-core-v544.css?v=544'),
-        import('./library-world-v302.js?v=544')
+        ensureStyle('divinaLibraryRebirthV302','library-world-v302.css?v=555'),
+        ensureStyle('divinaPublicLibraryV544','public-library-core-v544.css?v=555'),
+        ensureStyle('divinaSchoolLibrarySupremeV555','school-library-supreme-v555.css?v=555'),
+        import('./library-world-v302.js?v=555')
       ]);
-      return new module.LibraryWorldV302($('#cardLibraryApp'));
+      const instance=new module.LibraryWorldV302($('#cardLibraryApp'),{onSave:remember,orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme});
+      globalThis.divinaLibraryWorldV302=instance;
+      return instance;
     },
     school: async()=>{
       const [,module]=await Promise.all([
-        ensureStyle('divinaSchoolRebirthV306','school-world-v306.css?v=539'),
-        import('./school-world-v306.js?v=539')
+        ensureStyle('divinaSchoolRebirthV306','school-world-v306.css?v=555'),
+        ensureStyle('divinaSchoolLibrarySupremeV555','school-library-supreme-v555.css?v=555'),
+        import('./school-world-v306.js?v=555')
       ]);
-      return new module.SchoolWorldV306($('#schoolApp'));
+      const instance=new module.SchoolWorldV306($('#schoolApp'),{authClient,orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme});
+      globalThis.divinaSchoolWorldV306=instance;
+      return instance;
     },
     spreads: async()=>{
       const [,module]=await Promise.all([
@@ -330,9 +336,10 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       import('./daily-world-v509.js?v=554')
     ]),
     library:()=>Promise.all([
-      ensureStyle('divinaLibraryRebirthV302','library-world-v302.css?v=544'),
-      ensureStyle('divinaPublicLibraryV544','public-library-core-v544.css?v=544'),
-      import('./library-world-v302.js?v=544')
+      ensureStyle('divinaLibraryRebirthV302','library-world-v302.css?v=555'),
+      ensureStyle('divinaPublicLibraryV544','public-library-core-v544.css?v=555'),
+      ensureStyle('divinaSchoolLibrarySupremeV555','school-library-supreme-v555.css?v=555'),
+      import('./library-world-v302.js?v=555')
     ]),
     spreads:()=>Promise.all([
       ensureStyle('divinaSpreadsRebirthV305','spreads-world-v305.css?v=554'),
@@ -340,8 +347,9 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       import('./spreads-world-v305.js?v=554')
     ]),
     school:()=>Promise.all([
-      ensureStyle('divinaSchoolRebirthV306','school-world-v306.css?v=539'),
-      import('./school-world-v306.js?v=539')
+      ensureStyle('divinaSchoolRebirthV306','school-world-v306.css?v=555'),
+      ensureStyle('divinaSchoolLibrarySupremeV555','school-library-supreme-v555.css?v=555'),
+      import('./school-world-v306.js?v=555')
     ]),
     journal:()=>Promise.all([
       ensureStyle('divinaJournalRebirthV317','journal-world-v317.css?v=539'),

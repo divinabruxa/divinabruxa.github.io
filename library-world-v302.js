@@ -1,19 +1,19 @@
-/* DIVINA BRUXA 3.0 — BIBLIOTECA VIVA · CORTE V544
-   Um atlas orgânico das 78 cartas. A Orbe conduz a descoberta; Whit orienta sem invadir. */
+/* DIVINA BRUXA 4.0 — MACROETAPA 7/14 · PORTAL DA BIBLIOTECA V555
+   Atlas leve das 78 cartas. A Orbe canônica conduz; Whit orienta sem invadir. */
 
 import { CARDS } from './tarot-data.js';
 import { store, escapeHTML } from './storage.js';
-import { cardImageMarkup, preloadCardImages } from './tarot-image-runtime.js?v=184';
-import './tarot-meanings.js?v=544';
+import { cardAtlasStyle, cardImageMarkup } from './tarot-image-runtime.js?v=555';
+import './tarot-meanings.js?v=555';
 import {
   cardContentId,
   meaningForCard,
   normalizeLibraryText
-} from './card-library-policy.js?v=544';
+} from './card-library-policy.js?v=555';
 
 const FAVORITES_KEY = 'library-v302-favorites';
 const WHIT_DRAFT_KEY = 'whit-draft-v190';
-const PAGE_SIZE = 24;
+const PAGE_SIZE = 18;
 const PATHS = Object.freeze([
   { id:'all', label:'Todas', count:78, sigil:'✦' },
   { id:'major', label:'Maiores', count:22, sigil:'☉' },
@@ -24,6 +24,7 @@ const PATHS = Object.freeze([
 ]);
 const safe = value => escapeHTML(value ?? '');
 const reducedMotion = () => globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
+const routeNow = () => String(document.body?.dataset?.screen || location.hash || 'home').replace(/^#/,'').toLowerCase();
 
 function randomInt(max) {
   if (max <= 1) return 0;
@@ -78,10 +79,14 @@ function handoffDraft(card, deep) {
 }
 
 export class LibraryWorldV302 {
-  constructor(root) {
+  constructor(root, options = {}) {
     if (!root) throw new TypeError('A Biblioteca Viva não encontrou seu mundo.');
     this.root = root;
     this.abort = new AbortController();
+    this.orbCore = options.orbCore || globalThis.divinaOrbSupremeV501?.core || globalThis.orbe?.supreme || null;
+    this.orb = this.orbCore?.orb || null;
+    this.orbRelease = null;
+    this.onSave = typeof options.onSave === 'function' ? options.onSave : null;
     this.path = 'all';
     this.query = '';
     this.limit = PAGE_SIZE;
@@ -95,12 +100,13 @@ export class LibraryWorldV302 {
       if (Array.isArray(saved)) saved.forEach(id => this.favorites.add(String(id)));
     } catch {}
     this.index = new Map(CARDS.map(card => [card.id, searchBlob(card)]));
-    this.root.dataset.libraryWorld = 'rebirth-v302';
+    this.root.dataset.libraryWorld = 'v555';
     this.root.classList.add('library-world-v302-host');
     this.build();
     this.bind();
     this.render();
-    document.dispatchEvent(new CustomEvent('divina:library-world-ready', { detail:Object.freeze({ release:'V544', cards:78, orientation:'normal' }) }));
+    if (routeNow() === 'library') requestAnimationFrame(() => this.enter());
+    document.dispatchEvent(new CustomEvent('divina:library-world-ready', { detail:Object.freeze({ release:'V555', cards:78, orientation:'normal', pageSize:18, canonicalOrb:true, gridFullImageRequests:0 }) }));
   }
 
   build() {
@@ -122,10 +128,10 @@ export class LibraryWorldV302 {
             ${PATHS.map((path, index) => `<button type="button" data-path="${path.id}" class="lb302__path lb302__path--${index}" aria-pressed="${path.id === 'all'}"><span>${path.sigil}</span><b>${path.label}</b><small>${path.count}</small></button>`).join('')}
           </div>
 
-          <button type="button" class="lb302__orb" data-orb aria-label="A Orbe escolhe uma carta da constelação atual">
-            <span class="lb302__orb-image" data-orb-surface="library"></span>
+          <div class="lb302__orb" data-orb aria-label="A Orbe escolhe uma carta da constelação atual">
+            <div class="lb302__orb-host" data-library-orb-host></div>
             <span class="lb302__orb-aura" aria-hidden="true"></span>
-          </button>
+          </div>
 
           <div class="lb302__whit" data-whit aria-live="polite">
             <span class="lb302__whit-dot" aria-hidden="true"></span>
@@ -197,6 +203,10 @@ export class LibraryWorldV302 {
     }, { signal });
 
     this.root.querySelector('[data-orb]').addEventListener('click', () => this.orbDiscover(), { signal });
+    document.addEventListener('divina:route-ready', event => {
+      if (event.detail?.id === 'library') this.enter();
+      else this.leave();
+    }, { signal });
 
     this.searchToggle.addEventListener('click', () => this.toggleSearch(true), { signal });
     this.root.querySelector('[data-search-close]').addEventListener('click', () => this.toggleSearch(false), { signal });
@@ -238,6 +248,8 @@ export class LibraryWorldV302 {
       if (favorite) this.toggleFavorite(favorite.dataset.readerFavorite, true);
       const whit = event.target.closest('[data-reader-whit]');
       if (whit) this.prepareWhit(Number(whit.dataset.readerWhit));
+      const diary = event.target.closest('[data-reader-diary]');
+      if (diary) this.saveReflection(Number(diary.dataset.readerDiary), diary);
     }, { signal });
     this.reader.addEventListener('close', () => this.finishReaderClose(), { signal });
 
@@ -317,7 +329,7 @@ export class LibraryWorldV302 {
       const favorite = this.favorites.has(id);
       const compared = this.compareCards.has(card.id);
       return `<article class="lb302__card" data-card-id="${card.id}" tabindex="0" role="button" aria-label="Abrir ${safe(card.name)}">
-        <div class="lb302__card-image">${cardImageMarkup(card, { priority:index < 4 ? 'high' : 'auto', decorative:true })}</div>
+        <div class="lb302__card-image"><i class="lb302__card-atlas" style="${cardAtlasStyle(card)}" role="img" aria-label="${safe(card.name)}, direta"></i></div>
         <div class="lb302__card-copy">
           <small>${safe(card.arcanaCode === 'major' ? 'ARCANO MAIOR' : card.suit)}</small>
           <h4>${safe(card.name)}</h4>
@@ -340,7 +352,6 @@ export class LibraryWorldV302 {
     this.more.hidden = visible.length >= filtered.length;
     if (!this.more.hidden) this.more.textContent = `Abrir mais estrelas · ${visible.length}/${filtered.length}`;
     this.renderCompareTray();
-    preloadCardImages(visible.slice(0, 6).map(card => card.id), 6);
   }
 
   toggleCompare(cardId) {
@@ -397,8 +408,8 @@ export class LibraryWorldV302 {
       { transform:'translateY(0) scale(1)' },
       { transform:'translateY(-5px) scale(1.018)', offset:.55 },
       { transform:'translateY(0) scale(1)' }
-    ], { duration:420, easing:'cubic-bezier(.2,.9,.2,1)' });
-    setTimeout(() => this.openReader(card.id, nextTarget), reducedMotion() ? 0 : 180);
+    ], { duration:260, easing:'cubic-bezier(.22,.82,.24,1)' });
+    requestAnimationFrame(() => this.openReader(card.id, nextTarget));
   }
 
   toggleFavorite(contentId, keepReader = false) {
@@ -433,11 +444,19 @@ export class LibraryWorldV302 {
     const favorite = this.favorites.has(id);
     const keywords = list(deep.keywords).slice(0, 6);
     const symbols = list(deep.symbols).slice(0, 6);
+    const combinations = Array.isArray(deep.combinations) ? deep.combinations.slice(0, 4) : [];
+    const correspondences = [
+      card.correspondences?.archetype,
+      card.correspondences?.astrological && `Astrologia: ${card.correspondences.astrological}`,
+      card.correspondences?.numerology && `Numerologia: ${card.correspondences.numerology}`,
+      card.number !== null && card.number !== undefined && `Número: ${card.number}`
+    ].filter(Boolean);
     const sections = [
       ['Essência', deep.essence || deep.centralMessage],
       ['Na luz', deep.light],
       ['Na tensão', deep.tension],
       ['Amor', deep.love],
+      ['Relacionamentos', deep.relationships],
       ['Carreira e caminho', deep.career],
       ['Dinheiro e matéria', deep.money],
       ['Espiritualidade', deep.spirituality],
@@ -456,14 +475,18 @@ export class LibraryWorldV302 {
           <div class="lb302__reader-actions">
             <button type="button" data-reader-favorite="${safe(id)}" aria-pressed="${favorite}">${favorite ? '★ Favorita' : '☆ Favoritar'}</button>
             <button type="button" data-reader-whit="${card.id}">Refletir com Whit</button>
+            <button type="button" data-reader-diary="${card.id}">Guardar no Diário</button>
           </div>
-          <p class="lb302__reader-note">Whit só recebe esta carta se você escolher continuar. Nada é enviado automaticamente.</p>
+          <p class="lb302__reader-note">Whit e Diário só recebem esta carta depois da sua confirmação. Nada é lido ou enviado automaticamente.</p>
         </div>
       </div>
       <div class="lb302__layers">
         ${sections.map(([title, body], index) => `<details ${index < 2 ? 'open' : ''}><summary>${safe(title)}</summary><p>${safe(body)}</p></details>`).join('')}
+        ${correspondences.length ? `<details><summary>Arquétipo e correspondências</summary><ul>${correspondences.map(item => `<li>${safe(item)}</li>`).join('')}</ul></details>` : ''}
         ${symbols.length ? `<details><summary>Símbolos da carta</summary><ul>${symbols.map(item => `<li>${safe(item)}</li>`).join('')}</ul></details>` : ''}
+        ${combinations.length ? `<details><summary>Combinações para estudar</summary><ul>${combinations.map(item => `<li><b>${safe(item.with)}</b> — ${safe(item.reading)}</li>`).join('')}</ul></details>` : ''}
       </div>
+      <footer class="lb302__source"><b>Leitura editorial responsável</b><span>Tarot em posição direta · conteúdo autoral revisado em setembro de 2026 · símbolos contextualizados, nunca destino fixo.</span><a href="fontes-e-referencias.html">Fontes e referências</a></footer>
       <nav class="lb302__reader-nav" aria-label="Navegar pelas cartas">
         <button type="button" data-reader-nav="-1">← anterior</button>
         <span>${card.index + 1} / 78</span>
@@ -480,7 +503,7 @@ export class LibraryWorldV302 {
     document.dispatchEvent(new CustomEvent('divina:wisdom-public-context-v539', {
       detail:Object.freeze({ kind:'card', id:cardContentId(this.readerCard), label:this.readerCard.name, orientation:'normal', private:false })
     }));
-    this.reader.querySelector('.lb302__reader-shell')?.scrollTo?.({ top:0, behavior:reducedMotion() ? 'auto' : 'smooth' });
+    this.reader.querySelector('.lb302__reader-shell')?.scrollTo?.({ top:0, behavior:'auto' });
   }
 
   prepareWhit(cardId) {
@@ -508,6 +531,31 @@ export class LibraryWorldV302 {
     globalThis.orbe?.go?.('ai');
   }
 
+  async saveReflection(cardId, button) {
+    const card = CARDS.find(item => item.id === cardId);
+    if (!card || !this.onSave) return;
+    const deep = meaningForCard(card) || {};
+    const confirmed = globalThis.confirm
+      ? globalThis.confirm(`Guardar uma reflexão sobre ${card.name} no seu Diário privado?`)
+      : true;
+    if (!confirmed) return;
+    button.disabled = true;
+    try {
+      await Promise.resolve(this.onSave({
+        title:`Biblioteca — ${card.name}`,
+        text:[text(deep.essence || deep.centralMessage), text(deep.advice)].filter(Boolean).join('\n\n'),
+        question:text(deep.reflectionQuestion),
+        tags:`biblioteca, ${card.suit || 'arcano maior'}`,
+        mood:'Reflexiva', cardId:card.id, type:'library', orientation:'normal'
+      }));
+      button.textContent='Guardada no Diário';
+      this.live.textContent=`${card.name} foi guardada no seu Diário privado.`;
+    } catch {
+      button.disabled=false;
+      this.live.textContent='Não foi possível guardar agora. A carta continua aberta.';
+    }
+  }
+
   closeReader() {
     if (!this.reader.open) return;
     if (typeof this.reader.close === 'function') this.reader.close();
@@ -527,8 +575,26 @@ export class LibraryWorldV302 {
 
   destroy() {
     this.abort.abort();
+    this.leave();
     this.closeReader();
     this.root.classList.remove('library-world-v302-host');
     delete this.root.dataset.libraryWorld;
+  }
+
+  enter() {
+    this.leave();
+    const host = this.root.querySelector('[data-library-orb-host]');
+    if (!host || !this.orbCore?.claim || !this.orb || routeNow() !== 'library') return false;
+    this.orbRelease = this.orbCore.claim(host, { mode:'library', ariaLabel:'Orbe das Realidades. Descobrir uma carta na constelação atual da Biblioteca.' });
+    return true;
+  }
+
+  leave() {
+    try { this.orbRelease?.(); } catch {}
+    this.orbRelease = null;
+  }
+
+  status() {
+    return Object.freeze({ release:'V555', cards:78, pageSize:18, orientation:'normal', canonicalOrb:true, duplicateOrb:false, gridFullImageRequests:0, atlasGrid:true, compareLimit:3, permanentAnimationLoops:0 });
   }
 }

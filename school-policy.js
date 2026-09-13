@@ -1,5 +1,6 @@
-/* DIVINA BRUXA — POLÍTICA DA ESCOLA DO TAROT V186
-   Aprendizado local, portável, direto e sem envio silencioso de dados. */
+/* DIVINA BRUXA 4.0 — MACROETAPA 7/14 · ESCOLA V555
+   Jornada pedagógica em três níveis, acesso Free/Premium transparente,
+   aprendizado local, portável, direto e sem envio silencioso de dados. */
 
 export const SCHOOL_STORAGE_KEY = 'school-progress-v5';
 export const SCHOOL_AI_SELECTION_KEY = 'school-ai-selection-v186';
@@ -25,10 +26,30 @@ export const SCHOOL_MODULES = Object.freeze([
   ['synthesis','Construção de Síntese','Como transformar várias cartas em uma leitura coerente.','practice'],
   ['practice-spreads','Tiragens Práticas','Exercícios progressivos de uma, três e cinco cartas.','practice'],
   ['celtic-cross','Cruz Celta','As dez posições tradicionais e sua integração.','practice'],
-  ['royal-table','Mesa Real','As 78 posições em 13 fileiras de 6.','advanced'],
+  ['royal-table','Mesa Real','As 78 cartas em 13 colunas e 6 linhas.','advanced'],
   ['ethics','Ética','Consentimento, limites e linguagem não determinista.','foundation'],
   ['advanced','Prática Avançada','Método, registro, revisão e desenvolvimento da própria voz.','advanced']
 ].map((item, index) => Object.freeze({ id:item[0], order:index + 1, title:item[1], description:item[2], kind:item[3] })));
+
+export const SCHOOL_STAGES = Object.freeze([
+  Object.freeze({ id:'foundations', order:1, title:'Fundamentos', subtitle:'Aprender a linguagem', moduleIds:Object.freeze(['fundamentals','majors','wands','cups','swords','pentacles']) }),
+  Object.freeze({ id:'reading', order:2, title:'Leitura', subtitle:'Relacionar e interpretar', moduleIds:Object.freeze(['court','numbers','elements','positions','combinations','synthesis','practice-spreads']) }),
+  Object.freeze({ id:'mastery', order:3, title:'Maestria', subtitle:'Integrar com método e ética', moduleIds:Object.freeze(['celtic-cross','royal-table','ethics','advanced']) })
+]);
+
+export const SCHOOL_FREE_LESSON_IDS = Object.freeze([
+  'theory-fundamentals-1','theory-fundamentals-2','theory-fundamentals-3','theory-fundamentals-4',
+  'card-0','card-1','card-2','card-3','card-4','card-5','card-6',
+  'card-22','card-36','card-50','card-64',
+  'theory-elements-1','theory-practice-spreads-1'
+]);
+const FREE_LESSON_IDS = new Set(SCHOOL_FREE_LESSON_IDS);
+
+export const isSchoolLessonPremium = lessonId => isSchoolLessonId(lessonId) && !FREE_LESSON_IDS.has(String(lessonId));
+
+export function schoolStageForModule(moduleId) {
+  return SCHOOL_STAGES.find(stage => stage.moduleIds.includes(moduleId)) || SCHOOL_STAGES[0];
+}
 
 export const SCHOOL_FILTERS = Object.freeze([
   Object.freeze({ id:'all', label:'Todas' }),
@@ -54,7 +75,7 @@ export const SCHOOL_THEORY_COUNTS = Object.freeze({
 
 const MODULE_IDS = new Set(SCHOOL_MODULES.map(module => module.id));
 const FILTER_IDS = new Set(SCHOOL_FILTERS.map(filter => filter.id));
-const ELEMENTS = new Set(['Água', 'Ar', 'Fogo', 'Terra']);
+const QUIZ_ANSWERS = new Set(['Água', 'Ar', 'Fogo', 'Terra', 'contexto e escolha', 'destino fixo']);
 const THEORY_IDS = new Set(Object.entries(SCHOOL_THEORY_COUNTS).flatMap(([moduleId, total]) =>
   Array.from({ length:total }, (_, index) => `theory-${moduleId}-${index + 1}`)
 ));
@@ -105,16 +126,16 @@ const normalizeNotes = value => {
 const normalizeQuiz = value => {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return {};
   return Object.fromEntries(Object.entries(value).flatMap(([id, result]) => {
-    if (!/^card-\d{1,2}$/.test(id) || !isSchoolLessonId(id) || !result || typeof result !== 'object') return [];
+    if (!isSchoolLessonId(id) || !result || typeof result !== 'object') return [];
     const attempts = Math.max(0, Math.min(999, Math.trunc(Number(result.attempts) || 0)));
     if (!attempts) return [];
     return [[id, {
       attempts,
       correct:Boolean(result.correct),
-      lastAnswer:ELEMENTS.has(result.lastAnswer) ? result.lastAnswer : null,
+      lastAnswer:QUIZ_ANSWERS.has(result.lastAnswer) ? result.lastAnswer : null,
       updatedAt:validDate(result.updatedAt)
     }]];
-  }).slice(0, SCHOOL_CARD_TOTAL));
+  }).slice(0, SCHOOL_LESSON_TOTAL));
 };
 
 export function defaultSchoolState() {

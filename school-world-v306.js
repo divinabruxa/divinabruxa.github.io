@@ -1,183 +1,103 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R007 · ESCOLA DO TAROT V306
-   Camada de jornada sobre a Escola V186: preserva 17 módulos, 124 aulas, notas privadas,
-   favoritos, revisão, quizzes, backup local e consentimento do Tutor opcional. */
+/* DIVINA BRUXA 4.0 — MACROETAPA 7/14 · ESCOLA ORGANIZADA V555
+   Uma única jornada visível, três níveis pedagógicos e a Orbe canônica como tutora. */
 
-import { SchoolEngine } from './school-engine.js?v=186';
-import {
-  SCHOOL_MODULES,
-  SCHOOL_LESSON_TOTAL,
-  SCHOOL_CARD_TOTAL,
-  SCHOOL_THEORY_TOTAL
-} from './school-policy.js?v=186';
+import { SchoolEngine } from './school-engine.js?v=555';
+import { SCHOOL_MODULES, SCHOOL_STAGES, SCHOOL_LESSON_TOTAL } from './school-policy.js?v=555';
 
-const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
-const reducedMotion = () => globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+const reducedMotion=()=>globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches===true;
+const routeNow=()=>String(document.body?.dataset?.screen||location.hash||'home').replace(/^#/,'').toLowerCase();
 
-function progressSnapshot(engine) {
-  const completed = Array.isArray(engine?.state?.completed) ? new Set(engine.state.completed) : new Set();
-  const modules = SCHOOL_MODULES.map(module => {
-    let lessons = [];
-    try { lessons = engine.lessonsFor?.(module) || []; } catch { lessons = []; }
-    const total = lessons.length;
-    const done = lessons.reduce((sum, lesson) => sum + (completed.has(lesson.id) ? 1 : 0), 0);
-    return { module, total, done, percent: total ? Math.round(done / total * 100) : 0 };
-  });
-  const done = clamp(completed.size, 0, SCHOOL_LESSON_TOTAL);
-  return {
-    done,
-    total:SCHOOL_LESSON_TOTAL,
-    percent:Math.round(done / SCHOOL_LESSON_TOTAL * 100),
-    modules
-  };
+function stageSnapshot(engine,stage,seen=new Set()){
+  const completed=new Set(engine?.state?.completed||[]);
+  const lessons=stage.moduleIds.flatMap(id=>{
+    const module=SCHOOL_MODULES.find(item=>item.id===id);
+    return module?engine.lessonsFor(module):[];
+  }).filter(lesson=>!seen.has(lesson.id)&&seen.add(lesson.id));
+  const done=lessons.filter(lesson=>completed.has(lesson.id)).length;
+  return {stage,total:lessons.length,done,percent:lessons.length?Math.round(done/lessons.length*100):0};
 }
 
-function nextCopy(engine) {
-  try {
-    const target = engine.resumeTarget?.();
-    if (!target?.lesson || !target?.module) return 'Escolha um módulo para começar sua jornada.';
-    return `Próxima passagem: ${target.module.title} · ${target.lesson.title || target.lesson.card?.name || 'aula'}`;
-  } catch {
-    return 'Continue exatamente de onde você parou.';
-  }
-}
+export class SchoolWorldV306{
+  constructor(root,options={}){
+    if(!root)throw new Error('Escola V555 precisa de #schoolApp.');
+    this.root=root;this.destroyed=false;this.enhanceQueued=false;this.abort=new AbortController();
+    this.orbCore=options.orbCore||globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme||null;
+    this.orb=this.orbCore?.orb||null;this.orbRelease=null;
+    this.engine=new SchoolEngine(root,{authClient:options.authClient||globalThis.divinaAuth});
 
-export class SchoolWorldV306 {
-  constructor(root) {
-    if (!root) throw new Error('Escola V306 precisa de #schoolApp.');
-    this.root = root;
-    this.destroyed = false;
-    this.enhanceQueued = false;
-    this.engine = new SchoolEngine(root);
+    const originalRender=this.engine.render?.bind(this.engine);
+    if(originalRender)this.engine.render=(...args)=>{this.releaseOrb();const value=originalRender(...args);this.enhance();return value;};
+    const originalLessons=this.engine.renderLessons?.bind(this.engine);
+    if(originalLessons)this.engine.renderLessons=(...args)=>{const value=originalLessons(...args);this.queueEnhance();return value;};
 
-    const originalRender = this.engine.render?.bind(this.engine);
-    if (originalRender) {
-      this.engine.render = (...args) => {
-        const result = originalRender(...args);
-        this.queueEnhance();
-        return result;
-      };
-    }
-
-    const originalRenderLessons = this.engine.renderLessons?.bind(this.engine);
-    if (originalRenderLessons) {
-      this.engine.renderLessons = (...args) => {
-        const result = originalRenderLessons(...args);
-        this.queueEnhance();
-        return result;
-      };
-    }
-
-    this.observer = new MutationObserver(() => this.queueEnhance());
-    this.observer.observe(root, { childList:true, subtree:true });
-    this.enhance();
-    root.dataset.schoolWorld = 'v306';
-    document.dispatchEvent(new CustomEvent('divina:school-world-ready', {
-      detail:{ version:306, modules:SCHOOL_MODULES.length, lessons:SCHOOL_LESSON_TOTAL }
-    }));
-  }
-
-  queueEnhance() {
-    if (this.destroyed || this.enhanceQueued) return;
-    this.enhanceQueued = true;
-    requestAnimationFrame(() => {
-      this.enhanceQueued = false;
-      this.enhance();
-    });
-  }
-
-  enhance() {
-    if (this.destroyed || !this.root.isConnected) return;
-    const snapshot = progressSnapshot(this.engine);
-    this.installJourney(snapshot);
-    this.decorateModules(snapshot);
-    this.decorateLessons();
-    document.dispatchEvent(new CustomEvent('divina:school-progress-v539', {
-      detail:Object.freeze({ done:snapshot.done, total:snapshot.total, percent:snapshot.percent, private:false, noteIncluded:false })
-    }));
-  }
-
-  installJourney(snapshot) {
-    let altar = this.root.querySelector(':scope > .school-rebirth-journey');
-    if (!altar) {
-      altar = document.createElement('section');
-      altar.className = 'school-rebirth-journey';
-      altar.setAttribute('aria-label', 'Jornada da Escola do Tarot');
-      this.root.prepend(altar);
-    }
-
-    const signature = [
-      snapshot.done,
-      this.engine?.state?.lastModule || '',
-      this.engine?.state?.lastLesson || '',
-      ...snapshot.modules.map(item => `${item.module.id}:${item.done}`)
-    ].join('|');
-    if (altar.dataset.signature === signature) return;
-    altar.dataset.signature = signature;
-
-    altar.innerHTML = `
-      <div class="school-rebirth-sky" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-      <header class="school-rebirth-head">
-        <div>
-          <p class="eyebrow">ESCOLA DO TAROT · JORNADA VIVA</p>
-          <h3>Do primeiro símbolo à leitura inteira.</h3>
-          <p>${nextCopy(this.engine)}</p>
-        </div>
-        <div class="school-rebirth-orbit" style="--school-progress:${snapshot.percent * 3.6}deg" aria-label="${snapshot.percent}% da Escola concluída">
-          <span><b>${snapshot.percent}%</b><small>${snapshot.done}/${snapshot.total}</small></span>
-        </div>
-      </header>
-      <div class="school-rebirth-metrics" aria-label="Conteúdo da Escola">
-        <span><b>17</b><small>módulos</small></span>
-        <span><b>${SCHOOL_CARD_TOTAL}</b><small>cartas estudadas</small></span>
-        <span><b>${SCHOOL_THEORY_TOTAL}</b><small>aulas teóricas</small></span>
-        <span><b>${SCHOOL_LESSON_TOTAL}</b><small>aulas reais</small></span>
-      </div>
-      <div class="school-rebirth-path" role="list" aria-label="Os 17 módulos da jornada">
-        ${snapshot.modules.map(({ module, percent, done, total }) => `
-          <button type="button" role="listitem" data-rebirth-school-module="${module.id}" aria-label="Módulo ${module.order}: ${module.title}. ${done} de ${total} concluídas.">
-            <span>${String(module.order).padStart(2,'0')}</span>
-            <i><u style="--module-progress:${percent}%"></u></i>
-            <b>${module.title}</b>
-          </button>`).join('')}
-      </div>
-      <div class="school-rebirth-actions">
-        <button type="button" class="primary" data-rebirth-school-continue>CONTINUAR JORNADA</button>
-        <small>Seu progresso, suas notas e seus favoritos continuam privados neste aparelho.</small>
-      </div>`;
-
-    altar.querySelector('[data-rebirth-school-continue]')?.addEventListener('click', () => {
+    document.addEventListener('divina:route-ready',event=>{
+      if(event.detail?.id==='school')this.queueEnhance();else this.releaseOrb();
+    },{signal:this.abort.signal});
+    this.orb?.addEventListener('click',()=>{
+      const host=this.root.querySelector('[data-school-orb-host]');
+      if(routeNow()!=='school'||!host?.contains(this.orb))return;
+      this.orbCore?.pulse?.('school-continue',{intensity:.58});
       this.engine.continuePath?.();
-      this.queueEnhance();
-    });
-    altar.querySelectorAll('[data-rebirth-school-module]').forEach(button => button.addEventListener('click', () => {
-      const target = this.root.querySelector(`[data-school-module="${button.dataset.rebirthSchoolModule}"]`);
-      target?.click();
-      if (!reducedMotion()) {
-        this.root.querySelector('[data-school-lessons]')?.scrollIntoView({ behavior:'smooth', block:'start' });
-      }
-    }));
+    },{signal:this.abort.signal});
+
+    this.enhance();root.dataset.schoolWorld='v555';
+    document.dispatchEvent(new CustomEvent('divina:school-world-ready',{detail:Object.freeze({version:555,modules:17,lessons:SCHOOL_LESSON_TOTAL,stages:3,duplicateModuleMaps:0,canonicalOrb:true})}));
   }
 
-  decorateModules(snapshot) {
-    const map = new Map(snapshot.modules.map(item => [item.module.id, item]));
-    this.root.querySelectorAll('[data-school-module]').forEach(button => {
-      const item = map.get(button.dataset.schoolModule);
-      if (!item) return;
-      button.dataset.rebirthProgress = item.percent === 100 ? 'complete' : item.done ? 'started' : 'new';
-      button.style.setProperty('--rebirth-module-progress', `${item.percent}%`);
-    });
+  queueEnhance(){
+    if(this.destroyed||this.enhanceQueued)return;
+    this.enhanceQueued=true;
+    requestAnimationFrame(()=>{this.enhanceQueued=false;this.enhance();});
   }
 
-  decorateLessons() {
-    this.root.querySelectorAll('.school-lesson').forEach((lesson, index) => {
-      lesson.style.setProperty('--school-lesson-order', index);
-      if (!lesson.dataset.rebirthLesson) lesson.dataset.rebirthLesson = 'v306';
+  enhance(){
+    if(this.destroyed||!this.root.isConnected)return;
+    const dashboard=this.root.querySelector('.school-dashboard');
+    if(!dashboard)return;
+    dashboard.classList.add('school-v555-dashboard');
+    let compass=this.root.querySelector('.school-v555-compass');
+    if(!compass){compass=document.createElement('section');compass.className='school-v555-compass';dashboard.insertAdjacentElement('afterend',compass);}
+    const uniqueLessons=new Set();
+    const stages=SCHOOL_STAGES.map(stage=>stageSnapshot(this.engine,stage,uniqueLessons));
+    const signature=stages.map(item=>`${item.stage.id}:${item.done}`).join('|')+`|${this.engine.activeModule}|${this.engine.premium}`;
+    if(compass.dataset.signature!==signature){
+      compass.dataset.signature=signature;
+      compass.innerHTML=`<header><div><p class="eyebrow">MAPA ÚNICO DA ESCOLA</p><h3>Três jornadas. Dezessete módulos. Um próximo passo.</h3></div><span>124 AULAS</span></header><div class="school-v555-stages">${stages.map(item=>`<button type="button" data-school-stage-target="${item.stage.moduleIds[0]}"><span>${String(item.stage.order).padStart(2,'0')}</span><div><small>JORNADA ${item.stage.order}</small><b>${item.stage.title}</b><em>${item.stage.subtitle}</em><i><u style="width:${item.percent}%"></u></i><strong>${item.done}/${item.total}</strong></div></button>`).join('')}</div><p>Abra uma jornada, escolha um módulo e estude uma aula por vez. A busca continua atravessando a Escola inteira.</p><details class="school-v555-plan"><summary>Plano de estudo em 30 dias <span>ABRIR RITMO</span></summary><ol><li><b>Dias 1–7 · Fundamentos</b><span>Linguagem, estrutura e Arcanos Maiores.</span></li><li><b>Dias 8–15 · Quatro elementos</b><span>Paus, Copas, Espadas e Ouros em prática.</span></li><li><b>Dias 16–23 · Construir leituras</b><span>Corte, números, posições, combinações e síntese.</span></li><li><b>Dias 24–30 · Maestria responsável</b><span>Tiragens, ética, revisão e método próprio.</span></li></ol><p>Marque cada aula concluída e use “Revisar depois” para criar sua fila espaçada. O plano orienta; seu ritmo continua soberano.</p></details>`;
+      compass.onclick=event=>{
+        const button=event.target.closest('[data-school-stage-target]');if(!button)return;
+        this.root.querySelector(`[data-school-module="${button.dataset.schoolStageTarget}"]`)?.click();
+      };
+    }
+    this.root.querySelectorAll('[data-school-module]').forEach(button=>{
+      const module=SCHOOL_MODULES.find(item=>item.id===button.dataset.schoolModule);
+      if(module)button.dataset.schoolStage=SCHOOL_STAGES.find(stage=>stage.moduleIds.includes(module.id))?.id||'foundations';
     });
+    this.root.querySelectorAll('.school-lesson').forEach((lesson,index)=>{lesson.style.setProperty('--school-lesson-order',String(index));lesson.dataset.schoolLesson='v555';});
+    this.ensureOrbHost(dashboard);this.syncOrb();
+    const progress=this.engine.progress();
+    document.dispatchEvent(new CustomEvent('divina:school-progress-v555',{detail:Object.freeze({done:progress.totalDone,total:SCHOOL_LESSON_TOTAL,percent:progress.percent,private:false,noteIncluded:false})}));
   }
 
-  destroy() {
-    this.destroyed = true;
-    this.observer?.disconnect();
-    this.root?.removeAttribute('data-school-world');
+  ensureOrbHost(dashboard){
+    let zone=dashboard.querySelector('.school-v555-orb-zone');
+    if(zone)return zone;
+    zone=document.createElement('aside');zone.className='school-v555-orb-zone';
+    zone.innerHTML='<div class="school-v555-orb-host" data-school-orb-host></div><p><b>A Orbe acompanha o estudo</b><span>Toque para continuar exatamente da próxima aula.</span></p>';
+    dashboard.append(zone);return zone;
   }
+
+  syncOrb(){
+    if(routeNow()!=='school'||!this.orbCore?.claim||!this.orb)return false;
+    const host=this.root.querySelector('[data-school-orb-host]');if(!host)return false;
+    if(host.contains(this.orb))return true;
+    this.releaseOrb();
+    this.orbRelease=this.orbCore.claim(host,{mode:'school',ariaLabel:'Orbe das Realidades. Continuar da próxima aula da Escola do Tarot.'});
+    return true;
+  }
+
+  releaseOrb(){try{this.orbRelease?.();}catch{}this.orbRelease=null;}
+
+  status(){const progress=this.engine.progress();return Object.freeze({release:'V555',modules:17,lessons:124,stages:3,duplicateModuleMaps:0,canonicalOrb:true,freeLessons:17,premiumLessons:107,premium:this.engine.premium,progress:progress.percent,normalOnly:true,permanentAnimationLoops:0,reducedMotion:reducedMotion()});}
+
+  destroy(){this.destroyed=true;this.abort.abort();this.releaseOrb();this.engine.destroy?.();this.root?.removeAttribute('data-school-world');}
 }

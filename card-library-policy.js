@@ -1,7 +1,7 @@
-/* DIVINA BRUXA — POLÍTICA DA BIBLIOTECA PÚBLICA V544 */
-export const LIBRARY_PAGE_SIZE = 24;
+/* DIVINA BRUXA 4.0 — POLÍTICA DO PORTAL DA BIBLIOTECA V555 */
+export const LIBRARY_PAGE_SIZE = 18;
 export const LIBRARY_ORIENTATION = 'normal';
-export const LIBRARY_COMPARE_LIMIT = 2;
+export const LIBRARY_COMPARE_LIMIT = 3;
 
 export function normalizeLibraryText(value) {
   return String(value ?? '')
