@@ -1,14 +1,14 @@
-/* DIVINA BRUXA 3.0 — SEGURANÇA, PRIVACIDADE E MATRIZ FÍSICA · MACROETAPA 13/14 · V547
+/* DIVINA BRUXA 3.0 — QA SUPREMO E OWNER REVIEW · MACROETAPA 14/14 · V548
    Cache seletivo e versionado. Nunca guarda Auth, respostas online da Whit, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=547;
+const VERSION=548;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v547-shell';
-const CONTENT_CACHE='divina-bruxa-v547-content';
-const IMAGE_CACHE='divina-bruxa-v547-images';
-const OFFLINE_CACHE='divina-bruxa-v547-offline-core';
-const PREMIUM_CACHE='divina-bruxa-v547-premium-static';
+const SHELL_CACHE='divina-bruxa-v548-shell';
+const CONTENT_CACHE='divina-bruxa-v548-content';
+const IMAGE_CACHE='divina-bruxa-v548-images';
+const OFFLINE_CACHE='divina-bruxa-v548-offline-core';
+const PREMIUM_CACHE='divina-bruxa-v548-premium-static';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE,PREMIUM_CACHE]);
 const NAVIGATION_TIMEOUT_MS=3500;
 const MAX_CONTENT_ENTRIES=180;
@@ -36,6 +36,7 @@ const REQUIRED_SHELL=Object.freeze([
   './international-parity-core-v545.js','./international-parity-v545.css','./international-card-content-v545.js',
   './pwa-performance-recovery-core-v546.js','./pwa-performance-recovery-core-v546.css','./capacitor-readiness-v546.json',
   './security-privacy-core-v547.js','./security-privacy-core-v547.css','./SECURITY-HEADERS-V547.json',
+  './completion-center-v548.js','./completion-center-v548.css',
   './tarot-universe-core-v528.js','./tarot-universe-core-v528.css',
   './wisdom-universe-core-v529.js','./wisdom-universe-core-v529.css',
   './wisdom-depth-core-v539.js','./wisdom-depth-core-v539.css',
@@ -59,7 +60,7 @@ const REQUIRED_SHELL=Object.freeze([
 ]);
 
 // Fechamento transitivo dos imports estáticos de app-v208.js. Se qualquer um
-// falhar, a V547 não assume o controle e o worker anterior continua íntegro.
+// falhar, a V548 não assume o controle e o worker anterior continua íntegro.
 const BOOT_DEPENDENCIES=Object.freeze([
   './account-consultations-world-v319.js','./account-engine-v201.js','./account-state-copy-v201.js',
   './ai-policy.js','./auth-client-v201.js','./auth-client-v6.js','./card-library-policy.js',
@@ -301,7 +302,7 @@ const appShellIsValid=async(url,response)=>{
   const isShell=pathname===new URL('./',self.registration.scope).pathname||pathname.endsWith('/index.html');
   if(!isShell)return true;
   const html=await response.clone().text();
-  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=547/.test(html);
+  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=548/.test(html);
 };
 
 const offlinePageFor=async url=>{

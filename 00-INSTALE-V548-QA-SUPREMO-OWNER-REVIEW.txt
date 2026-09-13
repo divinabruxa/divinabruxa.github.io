@@ -1,0 +1,31 @@
+DIVINA BRUXA V548 — MACROETAPA 14/14 — PACOTE FINAL DO PLANO 3.0
+
+PRÉ-REQUISITO
+- V547 já instalada.
+
+INSTALAÇÃO NO GITHUB PELO IPHONE
+1. Abra este ZIP.
+2. Envie TODOS os arquivos diretamente para a raiz do mesmo repositório.
+3. Quando o GitHub perguntar, substitua os arquivos com nomes iguais.
+4. Não apague nenhum arquivo que já existe.
+5. Aguarde a publicação e abra o site uma vez com internet.
+6. Se uma versão antiga persistir, use “ATUALIZAR O PORTAL” uma vez.
+
+O QUE ESTE PACOTE FECHA
+- Macroetapa 14 de 14: QA Supremo e revisão final da proprietária.
+- Central de Conclusão dentro do ADMIN, sem criar um 19º módulo.
+- Matriz física aceita até 9 exports, um de cada aparelho/perfil.
+- O navegador envia somente contagens sanitizadas e SHA-256.
+- Registro exige owner verificada, MFA/AAL2, recovery codes e novo código MFA.
+- “Pronta para administrar” somente após 471 passes físicos, backup conectado e restore verificado.
+- Service Worker V548 com troca atômica; Tarot sem fogo e uma única Orbe preservados.
+
+STAGING CONTINUA HONESTO
+- Cobrança real: BLOQUEADA.
+- Produção/DNS/lojas: BLOQUEADOS.
+- Owner ativa no momento do pacote: 0.
+- Backup automático conectado: NÃO.
+- Restore real verificado: NÃO.
+
+DEPOIS DE INSTALAR
+Siga OPERACAO-FINAL-V548.md. Não existe V549 planejada nem Plano 4.0.

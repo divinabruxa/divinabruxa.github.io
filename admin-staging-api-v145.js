@@ -1,10 +1,10 @@
-/* DIVINA BRUXA — SUPABASE EDGE FUNCTION ADMIN API V547
+/* DIVINA BRUXA — SUPABASE EDGE FUNCTION ADMIN API V548
    Observatório owner-only com agregados sanitizados. Segredos existem apenas
    no ambiente da função; textos íntimos e identificadores pessoais não entram
    nos snapshots administrativos. */
 import { createClient } from 'npm:@supabase/supabase-js@2.112.4';
 
-const RELEASE='V547';
+const RELEASE='V548';
 const MODULES=Object.freeze(['today','finance','users','subscriptions','ai','tarot','school','consultations','store','skins','media','notifications','analytics','seo','security','backups','audit','settings']);
 const SERVICES=Object.freeze({
   'mesa-real-profissional':'Mesa Real Profissional',
@@ -99,7 +99,7 @@ const validSetup=()=>{
   try{return Boolean(env('SUPABASE_ANON_KEY')&&env('SUPABASE_SERVICE_ROLE_KEY')&&new URL(env('SUPABASE_URL')).hostname===`${STAGING_REF}.supabase.co`);}catch{return false;}
 };
 const isMutating=request=>!['GET','HEAD','OPTIONS'].includes(request.method);
-const requestAllowed=(request,origin)=>!isMutating(request)||(Boolean(origin)&&['v532','v547'].includes(request.headers.get('x-divina-admin-request')||''));
+const requestAllowed=(request,origin)=>!isMutating(request)||(Boolean(origin)&&['v547','v548'].includes(request.headers.get('x-divina-admin-request')||''));
 const fetchMetadataAllowed=request=>{
   if(!isMutating(request))return true;
   const mode=String(request.headers.get('sec-fetch-mode')||'').toLowerCase();
@@ -570,7 +570,7 @@ async function settingsModule(context){
 async function moduleSnapshot(context,moduleId){
   const loaders={today:todayModule,finance:financeModule,users:usersModule,subscriptions:subscriptionsModule,ai:aiModule,tarot:tarotModule,school:schoolModule,consultations:consultationsModule,store:storeModule,skins:skinsModule,seo:seoModule,security:securityModule,backups:backupsModule,audit:auditModule,settings:settingsModule};
   if(loaders[moduleId])return await loaders[moduleId](context);
-  const delegates={media:'admin-media-v320',notifications:'admin-api-v547-notifications',analytics:'admin-analytics-v322'};
+  const delegates={media:'admin-media-v320',notifications:'admin-api-v548-notifications',analytics:'admin-analytics-v322'};
   return envelope(moduleId,{delegate:delegates[moduleId]||null,operational:true});
 }
 
@@ -611,7 +611,7 @@ async function createNotificationDraft(request,origin,context){
   if(!title||!message)return json(400,{error:'notification_content_required'},origin);
   if(PERSONAL_DATA_PATTERN.test(`${title} ${message}`))return json(400,{error:'personal_data_not_allowed'},origin);
   const payload={
-    name:cleanCampaignText(`Rascunho V547 · ${title}`,120),category,status:'draft',title,body:message,
+    name:cleanCampaignText(`Rascunho V548 · ${title}`,120),category,status:'draft',title,body:message,
     deep_link:NOTIFICATION_DEEP_LINKS[category],locale:'pt-BR',test_only:true,scheduled_at:null,created_by:context.user.id
   };
   const {data,error}=await context.db.from('notification_campaigns').insert(payload)
@@ -643,12 +643,49 @@ async function savePrices(request,origin,context){
   if(!factorId)return json(403,{error:'mfa_factor_missing'},origin);
   const verified=await auth.auth.mfa.challengeAndVerify({factorId,code});
   if(verified.error||decodeJwt(verified.data?.session?.access_token).aal!=='aal2'){await audit(context.db,context.user.id,'price-change','consultations','denied');return json(403,{error:'step_up_failed'},origin);}
-  const version=`consultas-${new Date().toISOString().replace(/[-:.TZ]/g,'').slice(0,14)}-v547`;
+  const version=`consultas-${new Date().toISOString().replace(/[-:.TZ]/g,'').slice(0,14)}-v548`;
   const {error}=await context.db.rpc('admin_apply_consultation_prices_v146',{p_prices:prices,p_created_by:context.user.id,p_version:version});
   if(error){await audit(context.db,context.user.id,'price-change','consultations','failed');return json(500,{error:'price_update_failed'},origin);}
   const appliedVersion=version;
   await audit(context.db,context.user.id,'price-change','consultations','allowed',{priceTableVersion:appliedVersion,serviceCount:4});
   return withCookies(origin,cookieHeaders(verified.data.session),200,{ok:true,priceTableVersion:appliedVersion,consultationPrices:prices,historyPreserved:true});
+}
+
+async function verifyStepUp(context,code,action,moduleId){
+  if(!/^\d{6}$/.test(code))return {error:'step_up_required'};
+  const auth=context.restored.auth;
+  await auth.auth.setSession({access_token:context.restored.access,refresh_token:context.restored.refresh});
+  const factors=await auth.auth.mfa.listFactors(),factorId=factors.data?.totp?.find(item=>item.status==='verified')?.id;
+  if(!factorId)return {error:'mfa_factor_missing'};
+  const verified=await auth.auth.mfa.challengeAndVerify({factorId,code});
+  if(verified.error||decodeJwt(verified.data?.session?.access_token).aal!=='aal2'){
+    await audit(context.db,context.user.id,action,moduleId,'denied');return {error:'step_up_failed'};
+  }
+  return {session:verified.data.session};
+}
+
+async function finalReadiness(origin,context){
+  const {data,error}=await context.db.rpc('admin_final_readiness_v548',{p_owner_id:context.user.id});
+  if(error||!data)return json(503,{error:'final_readiness_unavailable'},origin);
+  await audit(context.db,context.user.id,'final-readiness-read','settings','allowed');
+  return ownerJson(context,200,{...data,sanitized:true,privateContentIncluded:false,personalIdentifiersIncluded:false},origin);
+}
+
+async function recordFinalReview(request,origin,context){
+  const body=await readBody(request),code=String(body.stepUpCode||'').replace(/\D/g,''),hash=String(body.evidenceHash||'').toLowerCase();
+  const values={profiles:integer(body.profiles),passed:integer(body.passed),failed:integer(body.failed),blocked:integer(body.blocked),pending:integer(body.pending)};
+  if(!/^[0-9a-f]{64}$/.test(hash)||values.profiles>9||values.passed+values.failed+values.blocked+values.pending!==471)return json(400,{error:'invalid_final_review'},origin);
+  const step=await verifyStepUp(context,code,'final-review','settings');
+  if(step.error)return json(403,{error:step.error},origin);
+  const {data,error}=await context.db.rpc('record_owner_final_review_v548',{
+    p_owner_id:context.user.id,p_evidence_sha256:hash,p_profile_count:values.profiles,
+    p_passed:values.passed,p_failed:values.failed,p_blocked:values.blocked,p_pending:values.pending
+  });
+  if(error||!data){await audit(context.db,context.user.id,'final-review','settings','failed');return json(500,{error:'final_review_failed'},origin);}
+  const readiness=await context.db.rpc('admin_final_readiness_v548',{p_owner_id:context.user.id});
+  if(readiness.error||!readiness.data)return json(503,{error:'final_readiness_unavailable'},origin);
+  await audit(context.db,context.user.id,'final-review','settings','allowed',{profiles:values.profiles,passed:values.passed,failed:values.failed,blocked:values.blocked,pending:values.pending,reviewStatus:data.reviewStatus});
+  return withCookies(origin,cookieHeaders(step.session),200,{...data,...readiness.data,sanitized:true,privateContentIncluded:false});
 }
 
 async function signOut(request,origin){
@@ -686,6 +723,8 @@ Deno.serve(async request=>{
     if(path==='/admin/session'&&request.method==='GET')return ownerJson(context,200,sessionBody(context),origin);
     if(path==='/admin/overview'&&request.method==='GET')return ownerJson(context,200,await overview(context),origin);
     if(path==='/admin/diagnostic'&&request.method==='GET')return ownerJson(context,200,await overview(context),origin);
+    if(path==='/admin/final-readiness'&&request.method==='GET')return await finalReadiness(origin,context);
+    if(path==='/admin/final-review'&&request.method==='POST')return await recordFinalReview(request,origin,context);
     if(path==='/admin/modules/notifications'&&request.method==='GET'){
       await audit(context.db,context.user.id,'module-read','notifications','allowed');
       return ownerJson(context,200,await notificationModule(context),origin);
@@ -702,7 +741,7 @@ Deno.serve(async request=>{
     return json(404,{error:'not_found'},origin);
   }catch(error){
     if(error instanceof RequestError)return json(error.status,{error:error.code},origin);
-    console.error('admin-api-v547',error instanceof Error?error.name:'unknown');
+    console.error('admin-api-v548',error instanceof Error?error.name:'unknown');
     return json(500,{error:'internal_error'},origin);
   }
 });

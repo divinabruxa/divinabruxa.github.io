@@ -1,0 +1,52 @@
+{
+  "release": "V548",
+  "capturedAt": "2026-09-13T17:35:00.000Z",
+  "project": {
+    "id": "kyphdsamyygavmkzyezr",
+    "name": "divina-bruxa-staging",
+    "region": "sa-east-1",
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.6.1.155"
+  },
+  "database": {
+    "migration": "20260913173433_conclusao_owner_review_v548",
+    "activeOwners": 0,
+    "activeAllowlistHashes": 1,
+    "finalReviews": 0,
+    "backupRuns": 0,
+    "verifiedRestores": 0,
+    "schedulerState": "not_connected",
+    "restoreState": "not_verified"
+  },
+  "readiness": {
+    "technicalConstructionComplete": true,
+    "physicalProfiles": 0,
+    "physicalPassed": 0,
+    "physicalPending": 471,
+    "ownerReviewRecorded": false,
+    "readyToAdminister": false,
+    "privateRowsReturned": 0
+  },
+  "privileges": {
+    "anonRead": false,
+    "authenticatedRead": false,
+    "serviceRoleRead": true,
+    "anonWrite": false,
+    "authenticatedWrite": false,
+    "serviceRoleWrite": true
+  },
+  "edge": {
+    "name": "admin-api",
+    "status": "ACTIVE",
+    "version": 11,
+    "verifyJwt": false,
+    "reason": "HttpOnly cookie session plus custom owner, verified-email, AAL2, recovery, origin, fetch-metadata and transactional rate-limit checks"
+  },
+  "gates": {
+    "production": false,
+    "dns": false,
+    "realBilling": false,
+    "storeSubmission": false,
+    "sol": false
+  }
+}

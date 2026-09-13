@@ -1,4 +1,4 @@
-/* DIVINA BRUXA 3.0 — CARREGAMENTO V547 · SEGURANÇA, PRIVACIDADE E MATRIZ FÍSICA
+/* DIVINA BRUXA 3.0 — CARREGAMENTO V548 · QA SUPREMO E OWNER REVIEW
    Preserva V501, V509 e o Universo V524; conecta Tarot e Mesa Real.
    V538 carrega o Tarot Livre sem fogo, sem arrasto e com imagens progressivas. */
 
@@ -291,21 +291,25 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       return new module.NotificationsWorldV321($('#notificationApp'),go);
     },
     admin:async()=>{
-      const [,,,adminModule,mediaModule,intelligenceModule,observatoryModule]=await Promise.all([
+      const [,,,,adminModule,mediaModule,intelligenceModule,observatoryModule,completionModule]=await Promise.all([
         ensureStyle('divinaMediaCommerceRebirthV320','media-commerce-world-v320.css?v=320'),
         ensureStyle('divinaAdminIntelligenceRebirthV322','admin-intelligence-v322.css?v=322'),
-        ensureStyle('divinaOwnerObservatoryV532Styles','owner-observatory-v532.css?v=547'),
-        import('./admin-engine.js?v=547'),
+        ensureStyle('divinaOwnerObservatoryV532Styles','owner-observatory-v532.css?v=548'),
+        ensureStyle('divinaCompletionCenterV548Styles','completion-center-v548.css?v=548'),
+        import('./admin-engine.js?v=548'),
         import('./media-commerce-world-v320.js?v=547'),
         import('./admin-intelligence-v322.js?v=547'),
-        import('./owner-observatory-v532.js?v=547')
+        import('./owner-observatory-v532.js?v=548'),
+        import('./completion-center-v548.js?v=548')
       ]);
       const engine=new adminModule.AdminEngine($('#adminApp'));
       new mediaModule.AdminMediaV320($('#adminApp'));
       new intelligenceModule.AdminIntelligenceV322($('#adminApp'));
+      const completionCore=completionModule.createCompletionCenterV548($('#adminApp'),{orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme});
       observatoryModule.createOwnerObservatoryV532($('#adminApp'),{
         engine,
-        orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme
+        orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme,
+        completionCore
       });
       return engine;
     }
@@ -367,11 +371,13 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     admin:()=>Promise.all([
       ensureStyle('divinaMediaCommerceRebirthV320','media-commerce-world-v320.css?v=320'),
       ensureStyle('divinaAdminIntelligenceRebirthV322','admin-intelligence-v322.css?v=322'),
-      ensureStyle('divinaOwnerObservatoryV532Styles','owner-observatory-v532.css?v=547'),
-      import('./admin-engine.js?v=547'),
+      ensureStyle('divinaOwnerObservatoryV532Styles','owner-observatory-v532.css?v=548'),
+      ensureStyle('divinaCompletionCenterV548Styles','completion-center-v548.css?v=548'),
+      import('./admin-engine.js?v=548'),
       import('./media-commerce-world-v320.js?v=547'),
       import('./admin-intelligence-v322.js?v=547'),
-      import('./owner-observatory-v532.js?v=547')
+      import('./owner-observatory-v532.js?v=548'),
+      import('./completion-center-v548.js?v=548')
     ]),
     notifications:()=>Promise.all([
       ensureStyle('divinaNotificationsRebirthV321','notifications-world-v321.css?v=321'),

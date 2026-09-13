@@ -1,7 +1,7 @@
-/* DIVINA BRUXA — PAINEL SUPREMO V547
+/* DIVINA BRUXA — PAINEL SUPREMO V548
    Sessão em cookie seguro, owner verificada e MFA; nenhum desbloqueio local. */
 import { escapeHTML } from './storage.js';
-import { ADMIN_POLICY, adminModuleById } from './admin-policy.js?v=547';
+import { ADMIN_POLICY, adminModuleById } from './admin-policy.js?v=548';
 import { CONSULTATION_POLICY } from './consultation-policy.js?v=147';
 import { NOTIFICATION_CATEGORIES, SAFE_DAILY_MESSAGE as SAFE_DAILY_BODY, SAFE_DAILY_TITLE } from './notification-policy-v150.js?v=150';
 
@@ -184,7 +184,7 @@ export class AdminEngine{
     </section>`;
   }
 
-  securityContent(){return `<section class="admin-security-panel"><div class="admin-flag-grid">${Object.entries(ADMIN_POLICY.flags).map(([key,value])=>`<article><span>${safe(key.replaceAll(/([A-Z])/g,' $1'))}</span><b>${value?'ATIVO':'BLOQUEADO'}</b></article>`).join('')}</div><article><p class="eyebrow">CONTROLES OBRIGATÓRIOS · V547</p><h4>Segurança sem atalhos.</h4><ul><li>E-mail permitido por hash e verificado no Auth</li><li>MFA/AAL2 e códigos de recuperação de uso único</li><li>Cookie HttpOnly, Secure e sessão revogável</li><li>Rate limit transacional e corpo de requisição limitado</li><li>Step-up para preços e outras ações críticas</li><li>RLS e autorização no servidor</li><li>403 sem qualquer dado para contas comuns</li></ul></article></section>`;}
+  securityContent(){return `<section class="admin-security-panel"><div class="admin-flag-grid">${Object.entries(ADMIN_POLICY.flags).map(([key,value])=>`<article><span>${safe(key.replaceAll(/([A-Z])/g,' $1'))}</span><b>${value?'ATIVO':'BLOQUEADO'}</b></article>`).join('')}</div><article><p class="eyebrow">CONTROLES OBRIGATÓRIOS · V548</p><h4>Segurança sem atalhos.</h4><ul><li>E-mail permitido por hash e verificado no Auth</li><li>MFA/AAL2 e códigos de recuperação de uso único</li><li>Cookie HttpOnly, Secure e sessão revogável</li><li>Rate limit transacional e corpo de requisição limitado</li><li>Step-up para preços e revisão final</li><li>RLS e autorização no servidor</li><li>403 sem qualquer dado para contas comuns</li></ul></article></section>`;}
 
   auditContent(){return `<section class="admin-audit-panel"><p class="eyebrow">DIAGNÓSTICO SANITIZADO</p><h4>Auditoria sem conteúdo privado.</h4><p>O arquivo contém somente ambiente, estados de segurança, módulos e contadores autorizados.</p><button type="button" data-export-diagnostic>EXPORTAR DIAGNÓSTICO</button><small>Diário, perguntas, prompts, respostas, contatos, senhas e segredos são excluídos.</small></section>`;}
 
@@ -264,7 +264,7 @@ export class AdminEngine{
     const result=await globalThis.divinaAuth.adminExportDiagnostic();
     if(!result?.ok){this.live('O diagnóstico não pôde ser autorizado.');return;}
     const source=result.body||{};
-    const payload={schema:'divina-bruxa-owner-observatory-v547',environment:'staging',generatedAt:new Date().toISOString(),flags:ADMIN_POLICY.flags,privacy:ADMIN_POLICY.privacy,counters:{registeredAccounts:integer(source.registeredAccounts),openConsultations:integer(source.openConsultations),auditEvents:integer(source.auditEvents)},modules:ADMIN_POLICY.modules.map(({id,name})=>({id,name}))};
+    const payload={schema:'divina-bruxa-owner-observatory-v548',environment:'staging',generatedAt:new Date().toISOString(),flags:ADMIN_POLICY.flags,privacy:ADMIN_POLICY.privacy,counters:{registeredAccounts:integer(source.registeredAccounts),openConsultations:integer(source.openConsultations),auditEvents:integer(source.auditEvents)},modules:ADMIN_POLICY.modules.map(({id,name})=>({id,name}))};
     const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),anchor=document.createElement('a');
     anchor.href=URL.createObjectURL(blob);anchor.download=`divina-bruxa-diagnostico-${new Date().toISOString().slice(0,10)}.json`;anchor.click();setTimeout(()=>URL.revokeObjectURL(anchor.href),1000);this.live('Diagnóstico sanitizado exportado.');
   }

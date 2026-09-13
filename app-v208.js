@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 13/14 · V547
-   Segurança, privacidade e matriz física verificável na mesma Orbe.
+/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 14/14 · V548
+   QA Supremo, Central de Conclusão e revisão final na mesma Orbe.
    Fluidez, privacidade, Tarot e todas as travas anteriores permanecem íntegros. */
 
 import { CONFIG } from './config-v200.js?v=200';
@@ -18,7 +18,7 @@ import { AccountEngineV201 } from './account-engine-v201.js?v=201';
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=534-consultations-anchor';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=547';
+import { createPageLoader } from './page-loader-v1.js?v=548';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -65,11 +65,11 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=547')
+const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=548')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
-    document.documentElement.dataset.pwaError = 'v547';
+    document.documentElement.dataset.pwaError = 'v548';
   });
 
 const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
@@ -498,14 +498,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v547-app';
+  window.__divinaSWBootstrap = 'v548-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=547', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=548', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v547';
+        document.documentElement.dataset.releaseEpoch = 'v548';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V547 registrado');
+        console.info('[Divina] PWA V548 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -1046,8 +1046,8 @@ window.divinaSecurityPrivacyReleaseV547 = Object.freeze({
 });
 
 window.divinaOwnerObservatoryReleaseV532 = Object.freeze({
-  version:547,
-  macroStage:'13-of-14',
+  version:548,
+  macroStage:'14-of-14',
   route:'admin',
   lazyLoaded:true,
   modules:18,
@@ -1056,7 +1056,7 @@ window.divinaOwnerObservatoryReleaseV532 = Object.freeze({
   verifiedEmailRequired:true,
   mfaAal2Required:true,
   recoveryCodesRequired:true,
-  adminAuthority:'AdminEngine + admin-api-v547',
+  adminAuthority:'AdminEngine + admin-api-v548',
   analyticsAuthority:'AdminIntelligenceV322',
   editorialAuthority:'AdminMediaV320',
   oneCanonicalOrb:true,
@@ -1068,7 +1068,17 @@ window.divinaOwnerObservatoryReleaseV532 = Object.freeze({
   productionPublish:false,
   storeSubmission:false,
   sol:false,
-  status:()=>globalThis.divinaOwnerObservatoryV532?.status?.()||Object.freeze({release:'V547',loaded:false,route:'admin'})
+  status:()=>globalThis.divinaOwnerObservatoryV532?.status?.()||Object.freeze({release:'V548',loaded:false,route:'admin'})
+});
+
+window.divinaCompletionReleaseV548 = Object.freeze({
+  version:548,macroStage:'14-of-14',title:'QA Supremo e Owner Review',route:'admin',
+  technicalConstructionComplete:true,ownerReviewRequired:true,physicalEvidenceRequired:true,
+  backupAutomationVerified:false,restoreVerified:false,readyToAdminister:false,
+  ownerOnly:true,mfaStepUpRequired:true,expectedPhysicalProfiles:9,expectedPhysicalEvaluations:471,
+  automaticPhysicalPasses:0,oneCanonicalOrb:true,permanentAnimationLoops:0,privateContentReads:0,
+  productionPublish:false,realBilling:false,dns:false,storeSubmission:false,environment:'staging',
+  status:()=>globalThis.divinaCompletionCenterV548?.audit?.()||Object.freeze({release:'V548',loaded:false,readyToAdminister:false})
 });
 
 window.divinaResponsiveEnchantmentReleaseV533 = Object.freeze({
@@ -1395,10 +1405,10 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V547',
+        release:'V548',
         supremePlan:'3.0-universo-vivo',
         supremePlanMacroStages:14,
-        currentMacroStage:'13-of-14',
+        currentMacroStage:'14-of-14',
         worldTruth:'v535',
         worldTruthRoutes:17,
         orbFluidNavigation:'v535',
@@ -1604,13 +1614,13 @@ const awaken = async () => {
         securityPrivacyPermanentAnimationLoops:0,
         securityPrivacyPrivateContentReads:0,
         securityPrivacyApiCalls:0,
-        ownerObservatory:'v547',
-        ownerObservatoryMacroStage:'13-of-14',
+        ownerObservatory:'v548',
+        ownerObservatoryMacroStage:'14-of-14',
         ownerObservatoryRoute:'admin',
         ownerObservatoryModules:18,
         ownerObservatoryPlaceholderModules:0,
         ownerObservatoryLazyLoaded:true,
-        ownerObservatoryAdminAuthority:'AdminEngine + admin-api-v547',
+        ownerObservatoryAdminAuthority:'AdminEngine + admin-api-v548',
         ownerObservatoryAnalyticsAuthority:'AdminIntelligenceV322',
         ownerObservatoryEditorialAuthority:'AdminMediaV320',
         ownerObservatoryOwnerOnly:true,
@@ -1631,6 +1641,15 @@ const awaken = async () => {
         ownerObservatoryIndependentAuthEngines:0,
         ownerObservatoryIndependentOrbEngines:0,
         ownerObservatoryPermanentAnimationLoops:0,
+        completionCenter:'v548',
+        completionMacroStage:'14-of-14',
+        completionTechnicalConstructionComplete:true,
+        completionOwnerReviewRequired:true,
+        completionAutomaticPhysicalPasses:0,
+        completionExpectedPhysicalEvaluations:471,
+        completionReadyToAdminister:false,
+        completionPrivateContentReads:0,
+        completionPermanentAnimationLoops:0,
         responsiveEnchantment:'v533',
         responsiveMacroStage:'9-of-10',
         responsiveViewportWidths:[320,375,390,430,768,1024,1280,1920],

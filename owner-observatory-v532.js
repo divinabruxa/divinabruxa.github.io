@@ -1,8 +1,8 @@
-/* DIVINA BRUXA — MACROETAPA 13/14 · OBSERVATÓRIO DA PROPRIETÁRIA V547
+/* DIVINA BRUXA — MACROETAPA 14/14 · OBSERVATÓRIO DA PROPRIETÁRIA V548
    Uma camada visual sobre AdminEngine, usando a mesma sessão HttpOnly,
    a mesma autoridade owner + MFA/AAL2 e somente agregados sanitizados. */
 
-const RELEASE='V547';
+const RELEASE='V548';
 const STYLE_ID='divinaOwnerObservatoryV532Styles';
 const CROWN_ID='ownerObservatoryCrownV532';
 const MANAGED=Object.freeze([
@@ -36,7 +36,7 @@ const human=value=>LABELS[String(value)]||String(value||'sem sinal').replaceAll(
 function installStyle(){
   if(document.getElementById(STYLE_ID))return;
   const link=document.createElement('link');
-  link.id=STYLE_ID;link.rel='stylesheet';link.href='./owner-observatory-v532.css?v=547';
+  link.id=STYLE_ID;link.rel='stylesheet';link.href='./owner-observatory-v532.css?v=548';
   document.head.append(link);
 }
 
@@ -248,7 +248,7 @@ function specFor(id,d){
     };
     case 'backups':return {
       sigil:'↻',eyebrow:'BACKUPS · RECUPERAÇÃO',title:'O que não está conectado aparece como lacuna, não como promessa.',
-      copy:'O registro está isolado no schema privado. A V547 mostra metas e agregados, sem ler linhas do cofre pelo navegador nem falsificar execuções.',
+      copy:'O registro está isolado no schema privado. A V548 mostra metas e agregados, sem ler linhas do cofre pelo navegador nem falsificar execuções.',
       cards:[
         {label:'EXECUÇÕES REPORTADAS',value:integer(metric.reportedRuns),detail:d.isolation?.telemetryConnected?'com evidência':'sem evidência'},
         {label:'RESTORES VERIFICADOS',value:integer(metric.verifiedRestores),detail:d.readiness?.restoreVerified?'verificado':'pendente'},
@@ -272,7 +272,7 @@ function specFor(id,d){
     };
     case 'settings':return {
       sigil:'⚙',eyebrow:'CONFIGURAÇÕES · FONTE DA VERDADE',title:'Valores públicos claros; autorizações críticas somente leitura.',
-      copy:'A V547 mostra o estado efetivo dos portões sem abrir controles perigosos no frontend.',
+      copy:'A V548 mostra o estado efetivo dos portões sem abrir controles perigosos no frontend.',
       cards:[
         {label:'AMBIENTE',value:'STAGING',detail:'isolado'},
         {label:'CATÁLOGO',value:integer(d.catalog?.items),detail:'itens'},
@@ -289,7 +289,7 @@ function specFor(id,d){
 }
 
 export const OWNER_OBSERVATORY_CONTRACT_V532=Object.freeze({
-  release:RELEASE,macroStage:'13/14',route:'admin',modules:18,managedAggregateModules:15,
+  release:RELEASE,macroStage:'14/14',route:'admin',modules:18,managedAggregateModules:15,
   specializedModules:SPECIALIZED,placeholderModules:0,ownerOnly:true,verifiedEmailRequired:true,
   mfaAal2Required:true,recoveryCodesRequired:true,secureCookieSession:true,serverRoleAuthority:true,
   oneCanonicalOrb:true,independentOrbEngines:0,independentAuthEngines:0,environment:'staging',
@@ -297,14 +297,15 @@ export const OWNER_OBSERVATORY_CONTRACT_V532=Object.freeze({
   journalBodyReads:0,consultationQuestionReads:0,aiPromptReads:0,aiResponseReads:0,
   personalIdentifierReads:0,localStorageReads:0,localStorageWrites:0,privateSchemaReads:0,
   analyticsAuthority:'AdminIntelligenceV322',editorialAuthority:'AdminMediaV320',
-  adminAuthority:'AdminEngine + admin-api-v547',transactionalRateLimit:true,atomicRecoveryCode:true,hashedOwnerAllowlist:true,permanentAnimationLoops:0
+  adminAuthority:'AdminEngine + admin-api-v548',transactionalRateLimit:true,atomicRecoveryCode:true,hashedOwnerAllowlist:true,permanentAnimationLoops:0
 });
 
 export class OwnerObservatoryV532{
-  constructor(root,{engine=null,orbCore=null}={}){
+  constructor(root,{engine=null,orbCore=null,completionCore=null}={}){
     this.root=root;
     this.engine=engine;
     this.orbCore=orbCore||globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme||null;
+    this.completionCore=completionCore;
     this.cache=new Map();
     this.errors=new Map();
     this.loading=new Set();
@@ -315,7 +316,7 @@ export class OwnerObservatoryV532{
     this.bind();
     this.observe();
     this.queueMount();
-    document.documentElement.dataset.ownerObservatory='v547';
+    document.documentElement.dataset.ownerObservatory='v548';
   }
 
   bind(){
@@ -378,7 +379,8 @@ export class OwnerObservatoryV532{
     if(!crown){crown=document.createElement('section');crown.id=CROWN_ID;crown.className='oov532-crown';header.insertAdjacentElement('afterend',crown);}
     if(crown.dataset.oov532Ready==='true')return;
     crown.dataset.oov532Ready='true';
-    crown.innerHTML=`<div class="oov532-crown__mark"><span aria-hidden="true">◉</span><p><small>MACROETAPA 13/14 · V547</small><b>Observatório da Proprietária</b></p></div><div class="oov532-crown__truth"><span><b>18</b><small>áreas reais</small></span><span><b>0</b><small>placeholders</small></span><span><b>AAL2</b><small>acesso</small></span><span><b>0</b><small>leituras íntimas</small></span></div><nav aria-label="Atalhos do Observatório"><button type="button" data-oov532-open="security">SEGURANÇA</button><button type="button" data-oov532-open="backups">BACKUPS</button><button type="button" data-oov532-open="audit">AUDITORIA</button></nav>`;
+    crown.innerHTML=`<div class="oov532-crown__mark"><span aria-hidden="true">◉</span><p><small>MACROETAPA 14/14 · V548</small><b>Observatório da Proprietária</b></p></div><div class="oov532-crown__truth"><span><b>18</b><small>áreas reais</small></span><span><b>0</b><small>placeholders</small></span><span><b>AAL2</b><small>acesso</small></span><span><b>0</b><small>leituras íntimas</small></span></div><nav aria-label="Atalhos do Observatório"><button type="button" data-oov532-open="security">SEGURANÇA</button><button type="button" data-oov532-open="backups">BACKUPS</button><button type="button" data-oov532-open="audit">AUDITORIA</button></nav>`;
+    this.completionCore?.mount?.(crown);
   }
 
   async load(id,announce=false){

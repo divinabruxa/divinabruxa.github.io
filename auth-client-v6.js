@@ -12,7 +12,7 @@ export class AuthClient {
       return { ok: response.ok, status: response.status, body };
     } catch { return { ok: false, offline: true }; } finally { clearTimeout(timer); }
   }
-  adminRequest(path, options = {}) { return this.request(path, { ...options, headers: { 'x-divina-admin-request': 'v547', ...(options.headers || {}) } }, this.adminBase); }
+  adminRequest(path, options = {}) { return this.request(path, { ...options, headers: { 'x-divina-admin-request': 'v548', ...(options.headers || {}) } }, this.adminBase); }
   register(email, password, name = '') { return this.request('/auth/register', { method: 'POST', body: JSON.stringify({ email, password, name }) }); }
   login(email, password) { return this.request('/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) }); }
   logout() { return this.request('/auth/logout', { method: 'POST', body: '{}' }); }
@@ -35,6 +35,8 @@ export class AuthClient {
   adminCreateNotificationDraft(payload) { return this.adminRequest('/admin/notifications/campaigns', { method: 'POST', body: JSON.stringify(payload) }); }
   adminDeleteNotificationDraft(campaignId) { return this.adminRequest(`/admin/notifications/campaigns/${encodeURIComponent(campaignId)}`, { method: 'DELETE' }); }
   adminUpdateConsultationPrices(prices, stepUpCode) { return this.adminRequest('/admin/consultations/prices', { method: 'PATCH', body: JSON.stringify({ prices, stepUpCode }) }); }
+  adminFinalReadiness() { return this.adminRequest('/admin/final-readiness'); }
+  adminRecordFinalReview(payload) { return this.adminRequest('/admin/final-review', { method: 'POST', body: JSON.stringify(payload) }); }
   adminExportDiagnostic() { return this.adminRequest('/admin/diagnostic'); }
   saveSkinEntitlement(skinId) { return this.request('/account/skins', { method: 'POST', body: JSON.stringify({ skinId }) }); }
   revokeSkinEntitlement(skinId) { return this.request(`/account/skins/${encodeURIComponent(skinId)}`, { method: 'DELETE' }); }
