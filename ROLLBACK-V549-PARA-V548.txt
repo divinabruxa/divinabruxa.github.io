@@ -1,0 +1,12 @@
+ROLLBACK CIRÚRGICO V549 → V548
+
+Se a V549 apresentar regressão, restaure somente estes arquivos a partir do ZIP V548 já instalado:
+- app-v208.js
+- index.html
+- manifest.webmanifest
+- orb-fluid-navigation-v535.js
+- pwa-world-v196.js
+- pwa-world-v324.js
+- sw.js
+
+Depois faça um novo commit e atualize o site uma vez no Safari. Conteúdo, cartas, imagens, CNAME e banco de dados não participam deste rollback.

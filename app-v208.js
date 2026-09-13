@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 14/14 · V548
-   QA Supremo, Central de Conclusão e revisão final na mesma Orbe.
-   Fluidez, privacidade, Tarot e todas as travas anteriores permanecem íntegros. */
+/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 1/14 · V549
+   Baseline de fluidez e pausa transitória do cenário pesado durante navegação.
+   Todo o universo aprovado na V548 permanece íntegro. */
 
 import { CONFIG } from './config-v200.js?v=200';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -40,7 +40,7 @@ import { createIdentityRightsCoreV531 } from './identity-rights-core-v531.js?v=5
 import { createResponsiveEnchantmentCoreV533 } from './responsive-enchantment-core-v533.js?v=542-skins';
 import { createQaSupremeCoreV534 } from './qa-supreme-core-v534.js?v=534';
 import { createWorldTruthRegistryV535 } from './world-truth-registry-v535.js?v=535';
-import { createOrbFluidNavigationV535 } from './orb-fluid-navigation-v535.js?v=535';
+import { createOrbFluidNavigationV535 } from './orb-fluid-navigation-v535.js?v=549';
 import { createVitalityBusV536 } from './vitality-bus-v536.js?v=536';
 import { createLivingGrammarV536 } from './living-grammar-v536.js?v=536';
 import { createOriginDiscoveryV537 } from './origin-discovery-v537.js?v=537';
@@ -65,11 +65,11 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=548')
+const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=549')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
-    document.documentElement.dataset.pwaError = 'v548';
+    document.documentElement.dataset.pwaError = 'v549';
   });
 
 const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
@@ -471,7 +471,7 @@ addEventListener('divina:loading-bypass', () => {
   toast('A página foi aberta enquanto o restante termina de carregar.');
 });
 
-const RELEASE_EPOCH_V537 = 547;
+const RELEASE_EPOCH_V537 = 548;
 const reloadForNewReleaseV537 = version => {
   const nextRelease = Number(version || 0);
   if (!Number.isFinite(nextRelease) || nextRelease <= RELEASE_EPOCH_V537) return false;
@@ -498,14 +498,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v548-app';
+  window.__divinaSWBootstrap = 'v549-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=548', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=549', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v548';
+        document.documentElement.dataset.releaseEpoch = 'v549';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V548 registrado');
+        console.info('[Divina] PWA V549 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -1081,6 +1081,29 @@ window.divinaCompletionReleaseV548 = Object.freeze({
   status:()=>globalThis.divinaCompletionCenterV548?.audit?.()||Object.freeze({release:'V548',loaded:false,readyToAdminister:false})
 });
 
+window.divinaFluiditySupremeReleaseV549 = Object.freeze({
+  version:549,
+  plan:'4.0-fluidity-supreme',
+  macroStage:'1-of-14',
+  title:'Auditoria viva e baseline de fluidez',
+  preserves:'V548',
+  iphonePriority:true,
+  oneCanonicalOrb:true,
+  heavyScenePausedDuringNavigation:true,
+  menuAndNavigationShareBudget:true,
+  targetFps:60,
+  fallbackFps:30,
+  inpBudgetMs:200,
+  touchResponseBudgetMs:100,
+  clsBudget:0.1,
+  tarotFireRemoved:true,
+  privateContentReads:0,
+  apiCalls:0,
+  status:()=>globalThis.divinaOrbFluidNavigationV549?.status?.()
+    || globalThis.divinaOrbFluidNavigationV535?.status?.()
+    || Object.freeze({release:'V549',loaded:false,macroStage:'1-of-14'})
+});
+
 window.divinaResponsiveEnchantmentReleaseV533 = Object.freeze({
   version:533,
   macroStage:'9-of-10',
@@ -1405,13 +1428,17 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V548',
-        supremePlan:'3.0-universo-vivo',
+        release:'V549',
+        supremePlan:'4.0-fluidity-supreme',
         supremePlanMacroStages:14,
-        currentMacroStage:'14-of-14',
+        currentMacroStage:'1-of-14',
         worldTruth:'v535',
         worldTruthRoutes:17,
-        orbFluidNavigation:'v535',
+        orbFluidNavigation:'v549',
+        fluiditySupreme:'v549',
+        fluiditySupremePreserves:'v548',
+        fluiditySupremeIphonePriority:true,
+        heavyScenePausedDuringNavigation:true,
         vitalityBus:'v536',
         livingGrammar:'v536',
         originDiscovery:'v537',

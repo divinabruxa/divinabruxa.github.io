@@ -1,0 +1,27 @@
+DIVINA BRUXA V549 — PLANO 4.0 — MACROETAPA 1/14
+
+PACOTE INCREMENTAL SOBRE A V548 JÁ INSTALADA.
+
+No GitHub pelo iPhone:
+1. Abra o repositório da Divina Bruxa.
+2. Use Add file > Upload files.
+3. Envie os arquivos que estão na raiz deste ZIP.
+4. Confirme Commit changes.
+5. Aguarde a publicação e abra o site no Safari.
+
+O que esta versão faz:
+- preserva integralmente a V548;
+- pausa o cenário WebGL pesado somente durante menu e troca de página;
+- mantém o último quadro bonito visível enquanto a Orbe viaja;
+- retoma o universo com o mesmo orçamento ao concluir a passagem;
+- não cria loop, observador, API ou leitura privada adicional;
+- inicia oficialmente o Plano 4.0 com 14 macroetapas.
+
+Teste físico rápido no iPhone:
+1. Abra e feche o menu cinco vezes.
+2. Vá Home > Tarot Livre > Carta do Dia > Escola > Diário > Home.
+3. Faça toques rápidos em dois destinos e confirme que só o último caminho vence.
+4. Confirme que o céu não fica preto e volta a respirar após cada passagem.
+5. No Tarot Livre, confirme que não existe fogo e que o toque nas cartas responde sem engasgo.
+
+Não apague CNAME. Não apague imagens nem cartas. Não envie a pasta do ZIP: envie os arquivos da raiz.

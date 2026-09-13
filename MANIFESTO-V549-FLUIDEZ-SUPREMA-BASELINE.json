@@ -1,0 +1,17 @@
+{
+  "release": "V549",
+  "plan": "DIVINA BRUXA 4.0",
+  "macroStage": "1-of-14",
+  "title": "Auditoria viva e baseline de fluidez",
+  "baseRequired": "V548",
+  "incremental": true,
+  "preservesApprovedContent": true,
+  "oneCanonicalOrb": true,
+  "tarotFireRemoved": true,
+  "iphonePriority": true,
+  "heavyScenePausedDuringNavigation": true,
+  "newPermanentAnimationLoops": 0,
+  "newMutationObservers": 0,
+  "automaticPhysicalPasses": 0,
+  "ownerPhysicalApprovalRequired": true
+}

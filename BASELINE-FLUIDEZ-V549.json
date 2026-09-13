@@ -1,0 +1,36 @@
+{
+  "schema": "divina-bruxa-fluidity-baseline-v549",
+  "release": "V549",
+  "plan": "4.0-fluidity-supreme",
+  "macroStage": "1-of-14",
+  "preserves": "V548",
+  "priorityDevice": "iPhone Safari and installed PWA",
+  "targets": {
+    "touchResponseMs": 100,
+    "inpMs": 200,
+    "lcpMs": 2500,
+    "cls": 0.1,
+    "targetFps": 60,
+    "fallbackFps": 30
+  },
+  "staticAudit": {
+    "reachableJavascriptFiles": 120,
+    "filesWithSchedulingPrimitives": 45,
+    "requestAnimationFrameCallSites": 71,
+    "setIntervalCallSites": 0,
+    "mutationObserverCallSites": 23,
+    "performanceObserverCallSites": 6,
+    "note": "Call sites are not simultaneous active loops; many are one-shot, lazy or route-scoped."
+  },
+  "finding": "The V524 living universe kept rendering while the Orb journey and menu transition were also active.",
+  "correction": {
+    "authority": "orb-fluid-navigation-v535.js logical V549",
+    "behavior": "Pause only the heavy universe renderer during menu and route transitions, preserve the last painted Retina frame, then restore the previous budget.",
+    "newPermanentLoops": 0,
+    "newMutationObservers": 0,
+    "privateContentReads": 0,
+    "apiCalls": 0
+  },
+  "ownerPhysicalTestRequired": true,
+  "automaticPhysicalPasses": 0
+}

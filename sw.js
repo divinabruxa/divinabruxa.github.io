@@ -1,14 +1,14 @@
-/* DIVINA BRUXA 3.0 — QA SUPREMO E OWNER REVIEW · MACROETAPA 14/14 · V548
+/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 1/14 · V549
    Cache seletivo e versionado. Nunca guarda Auth, respostas online da Whit, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=548;
+const VERSION=549;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v548-shell';
-const CONTENT_CACHE='divina-bruxa-v548-content';
-const IMAGE_CACHE='divina-bruxa-v548-images';
-const OFFLINE_CACHE='divina-bruxa-v548-offline-core';
-const PREMIUM_CACHE='divina-bruxa-v548-premium-static';
+const SHELL_CACHE='divina-bruxa-v549-shell';
+const CONTENT_CACHE='divina-bruxa-v549-content';
+const IMAGE_CACHE='divina-bruxa-v549-images';
+const OFFLINE_CACHE='divina-bruxa-v549-offline-core';
+const PREMIUM_CACHE='divina-bruxa-v549-premium-static';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE,PREMIUM_CACHE]);
 const NAVIGATION_TIMEOUT_MS=3500;
 const MAX_CONTENT_ENTRIES=180;
@@ -60,7 +60,7 @@ const REQUIRED_SHELL=Object.freeze([
 ]);
 
 // Fechamento transitivo dos imports estáticos de app-v208.js. Se qualquer um
-// falhar, a V548 não assume o controle e o worker anterior continua íntegro.
+// falhar, a V549 não assume o controle e o worker anterior continua íntegro.
 const BOOT_DEPENDENCIES=Object.freeze([
   './account-consultations-world-v319.js','./account-engine-v201.js','./account-state-copy-v201.js',
   './ai-policy.js','./auth-client-v201.js','./auth-client-v6.js','./card-library-policy.js',
@@ -302,7 +302,7 @@ const appShellIsValid=async(url,response)=>{
   const isShell=pathname===new URL('./',self.registration.scope).pathname||pathname.endsWith('/index.html');
   if(!isShell)return true;
   const html=await response.clone().text();
-  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=548/.test(html);
+  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=549/.test(html);
 };
 
 const offlinePageFor=async url=>{

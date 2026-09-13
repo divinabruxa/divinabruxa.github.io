@@ -1,12 +1,12 @@
-/* DIVINA BRUXA — PLANO SUPREMO 3.0 · MACROETAPA 1/14 · V535
-   NAVEGAÇÃO FLUIDA DA ORBE
+/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 1/14 · V549
+   NAVEGAÇÃO FLUIDA DA ORBE — FREEZE TRANSITÓRIO DO FUNDO
 
    Governa somente o custo da passagem: uma intenção, uma transação e nenhum
    acúmulo de rotas. A Orbe, a viagem V525 e o Universo V524 continuam sendo
    as autoridades visuais. Nenhum conteúdo privado ou campo é observado.
 */
 
-const VERSION = 535;
+const VERSION = 549;
 const INSTANCE = Symbol.for('divina.orb.fluid.navigation.v535');
 const HISTORY_LIMIT = 20;
 const now = () => globalThis.performance?.now?.() ?? Date.now();
@@ -43,7 +43,8 @@ export class OrbFluidNavigationV535 {
     this.history = [];
     this.sequence = 0;
     this.savedUniverseBudget = null;
-    this.restoreTimer = 0;
+    this.budgetReasons = new Set();
+    this.restoreTimers = new Map();
     this.longTaskObserver = null;
     this.totalLongTasks = 0;
     this.totalLongTaskMs = 0;
@@ -52,7 +53,7 @@ export class OrbFluidNavigationV535 {
 
     this.bind();
     this.observeLongTasks();
-    document.documentElement.dataset.orbFluidNavigation = 'v535';
+    document.documentElement.dataset.orbFluidNavigation = 'v549';
     document.dispatchEvent(new CustomEvent('divina:orb-fluid-navigation-ready', {
       detail:Object.freeze({ version:VERSION, singleFlight:true, transitionFps:transitionFps() })
     }));
@@ -77,13 +78,18 @@ export class OrbFluidNavigationV535 {
     safeListen(document, 'divina:supreme-orb-did-navigate', event => this.finish('complete', event.detail), signal, { passive:true });
     safeListen(document, 'divina:supreme-orb-navigation-error', event => this.finish('recovered-error', event.detail), signal, { passive:true });
     safeListen(document, 'divina:supreme-orb-navigation-coalesced', () => { this.coalesced += 1; }, signal, { passive:true });
+    safeListen(document, 'divina:menu-state', event => {
+      const state = String(event.detail?.state || '').toLowerCase();
+      if (['opening','closing','reversing','navigating'].includes(state)) this.applyTransitionBudget('menu');
+      else if (['open','closed'].includes(state)) this.scheduleBudgetRelease('menu', 48);
+    }, signal, { passive:true });
     safeListen(document, 'visibilitychange', () => {
       if (document.hidden && this.active) this.finish('visibility-safe-finish', { to:this.active.to });
     }, signal, { passive:true });
   }
 
   begin(detail = {}) {
-    clearTimeout(this.restoreTimer);
+    this.cancelBudgetRelease('navigation');
     if (this.active) this.finish('superseded-safe-finish', { to:this.active.to }, false);
     const startedAt = now();
     const to = String(detail.to || 'home');
@@ -107,10 +113,10 @@ export class OrbFluidNavigationV535 {
 
     const html = document.documentElement;
     html.dataset.orbNavigationState = 'active';
-    html.dataset.orbNavigationAuthority = 'v535';
+    html.dataset.orbNavigationAuthority = 'v549';
     html.dataset.orbNavigationRoute = to;
     document.body?.setAttribute('aria-busy', 'true');
-    this.applyTransitionBudget();
+    this.applyTransitionBudget('navigation');
   }
 
   mark(field, route) {
@@ -119,26 +125,54 @@ export class OrbFluidNavigationV535 {
     if (!this.active[field]) this.active[field] = stamp;
   }
 
-  applyTransitionBudget() {
-    if (!this.universe?.setPerformanceBudget || this.savedUniverseBudget) return;
-    const status = this.universe.status?.() || {};
-    this.savedUniverseBudget = Object.freeze({
-      fps:Number(status.targetFps || this.universe.targetFps || 60),
-      scale:Number(status.qualityCeiling || this.universe.qualityCeiling || this.universe.scale || 1.45),
-      profile:String(status.qualityProfile || this.universe.qualityProfile || 'balanced')
-    });
-    this.universe.setPerformanceBudget({
+  applyTransitionBudget(reason = 'navigation') {
+    if (!this.universe) return;
+    this.cancelBudgetRelease(reason);
+    this.budgetReasons.add(reason);
+    if (!this.savedUniverseBudget) {
+      const status = this.universe.status?.() || {};
+      this.savedUniverseBudget = Object.freeze({
+        fps:Number(status.targetFps || this.universe.targetFps || 60),
+        scale:Number(status.qualityCeiling || this.universe.qualityCeiling || this.universe.scale || 1.45),
+        profile:String(status.qualityProfile || this.universe.qualityProfile || 'balanced')
+      });
+    }
+    this.universe.setPerformanceBudget?.({
       fps:Math.min(this.savedUniverseBudget.fps, transitionFps()),
       scale:this.savedUniverseBudget.scale,
       profile:this.savedUniverseBudget.profile
     });
+    // O bitmap Retina permanece pintado no CSS. Somente o shader/canvas pesado
+    // cede seus quadros enquanto Menu, Orbe e página concluem a passagem.
+    this.universe.pause?.();
+    document.documentElement.dataset.heavyScene = 'paused-for-navigation';
   }
 
-  restoreUniverseBudget() {
+  scheduleBudgetRelease(reason = 'navigation', delay = 72) {
+    this.cancelBudgetRelease(reason);
+    const timer = setTimeout(() => {
+      this.restoreTimers.delete(reason);
+      this.restoreUniverseBudget(reason);
+    }, delay);
+    this.restoreTimers.set(reason, timer);
+  }
+
+  cancelBudgetRelease(reason) {
+    const timer = this.restoreTimers.get(reason);
+    if (timer) clearTimeout(timer);
+    this.restoreTimers.delete(reason);
+  }
+
+  restoreUniverseBudget(reason = null, force = false) {
+    if (reason) this.budgetReasons.delete(reason);
+    if (!force && this.budgetReasons.size) return;
+    this.budgetReasons.clear();
     const budget = this.savedUniverseBudget;
     this.savedUniverseBudget = null;
-    if (!budget || !this.universe?.setPerformanceBudget) return;
-    this.universe.setPerformanceBudget(budget);
+    delete document.documentElement.dataset.heavyScene;
+    if (!budget || !this.universe) return;
+    this.universe.setPerformanceBudget?.(budget);
+    this.universe.start?.();
   }
 
   finish(outcome = 'complete', detail = {}, restore = true) {
@@ -184,8 +218,7 @@ export class OrbFluidNavigationV535 {
     delete html.dataset.orbNavigationState;
     delete html.dataset.orbNavigationRoute;
     document.body?.removeAttribute('aria-busy');
-    clearTimeout(this.restoreTimer);
-    this.restoreTimer = setTimeout(() => this.restoreUniverseBudget(), 72);
+    this.scheduleBudgetRelease('navigation', 72);
   }
 
   observeLongTasks() {
@@ -211,12 +244,14 @@ export class OrbFluidNavigationV535 {
     const core = this.core?.snapshot?.() || {};
     const journey = this.journey?.status?.() || {};
     return Object.freeze({
-      release:'V535',
+      release:'V549',
       oneCanonicalOrb:document.querySelectorAll('#orb').length === 1,
       oneUniverseCanvas:document.querySelectorAll('#divinaLivingUniverseV524 canvas').length <= 1,
       singleFlight:core.navigationAuthority === 'v535-single-flight',
       pagePrepareBudgetMs:Number(this.pageLoader?.navigationPrepareBudgetMs || 0),
       transitionFps:transitionFps(),
+      heavyScenePaused:this.budgetReasons.size>0,
+      budgetReasons:Object.freeze([...this.budgetReasons]),
       journeyFluidity:/v535$/.test(String(journey.fluidityProfile || '')),
       privateContentReads:0,
       formValueReads:0,
@@ -237,7 +272,8 @@ export class OrbFluidNavigationV535 {
       coalescedNavigations:this.coalesced,
       last:this.history[this.history.length - 1] || null,
       longTasks:Object.freeze({ count:this.totalLongTasks, totalMs:this.totalLongTaskMs }),
-      permanentAnimationLoops:0
+      permanentAnimationLoops:0,
+      extraAnimationLoops:0
     });
   }
 
@@ -246,13 +282,15 @@ export class OrbFluidNavigationV535 {
     this.destroyed = true;
     this.abort.abort();
     this.longTaskObserver?.disconnect();
-    clearTimeout(this.restoreTimer);
-    this.restoreUniverseBudget();
+    for (const timer of this.restoreTimers.values()) clearTimeout(timer);
+    this.restoreTimers.clear();
+    this.restoreUniverseBudget(null, true);
     delete document.documentElement.dataset.orbNavigationState;
     delete document.documentElement.dataset.orbNavigationRoute;
     document.body?.removeAttribute('aria-busy');
     document.documentElement.removeAttribute('data-orb-fluid-navigation');
     document.documentElement.removeAttribute('data-orb-navigation-authority');
+    delete globalThis.divinaOrbFluidNavigationV549;
     delete globalThis[INSTANCE];
   }
 }
@@ -261,6 +299,7 @@ export function createOrbFluidNavigationV535(options = {}) {
   if (globalThis[INSTANCE]) return globalThis[INSTANCE];
   const core = new OrbFluidNavigationV535(options);
   globalThis[INSTANCE] = core;
+  globalThis.divinaOrbFluidNavigationV549 = core;
   return core;
 }
 
