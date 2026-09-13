@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 3.0 — SABEDORIA VIVA PROFUNDA · MACROETAPA 5/14 · V539
-   Cache seletivo e versionado. Nunca guarda Auth, Whit generation, billing,
+/* DIVINA BRUXA 3.0 — WHIT PRESENÇA PROFUNDA · MACROETAPA 6/14 · V540
+   Cache seletivo e versionado. Nunca guarda Auth, respostas online da Whit, billing,
    Admin, consultas seguras ou outras respostas de autoridade. */
 
-const VERSION=539;
+const VERSION=540;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v539-shell';
-const CONTENT_CACHE='divina-bruxa-v539-content';
-const IMAGE_CACHE='divina-bruxa-v539-images';
-const OFFLINE_CACHE='divina-bruxa-v539-offline-core';
+const SHELL_CACHE='divina-bruxa-v540-shell';
+const CONTENT_CACHE='divina-bruxa-v540-content';
+const IMAGE_CACHE='divina-bruxa-v540-images';
+const OFFLINE_CACHE='divina-bruxa-v540-offline-core';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE]);
 
 const REQUIRED_SHELL=Object.freeze([
@@ -23,6 +23,7 @@ const REQUIRED_SHELL=Object.freeze([
   './orb-ios-journey-core-v525.js','./orb-ios-journey-core-v525.css',
   './orb-universal-presence-v526.js','./orb-universal-presence-v526.css',
   './whit-core-supreme-v527.js','./whit-core-supreme-v527.css',
+  './whit-presence-deep-v540.js','./whit-presence-deep-v540.css','./whit-local-guide-v540.js',
   './tarot-universe-core-v528.js','./tarot-universe-core-v528.css',
   './wisdom-universe-core-v529.js','./wisdom-universe-core-v529.css',
   './wisdom-depth-core-v539.js','./wisdom-depth-core-v539.css',
@@ -68,6 +69,7 @@ const APP_DEPENDENCIES=Object.freeze([
   './whit-signature-v311.js','./whit-signature-v311.css',
   './whit-mind-v312.js','./whit-mind-v312.css',
   './whit-generation-bridge-v313.js','./whit-silent-presence-v316.js','./whit-silent-presence-v316.css',
+  './ai-engine.js','./ai-policy.js','./ai-credits.js',
   './menu-completo-v177.js','./orb-skin-release-v1.js','./cosmic-visual-atlas-v1.js',
   './skin-registry-v12.js','./skin-universal-v10.js','./skin-catalog-v6.js',
   './storage.js','./school-policy.js','./journal-policy.js','./daily-policy.js','./daily-policy-v303.js',
@@ -83,6 +85,7 @@ const REBIRTH_WARM=Object.freeze([
   './tarot-universe-core-v528.js','./tarot-universe-core-v528.css',
   './wisdom-universe-core-v529.js','./wisdom-universe-core-v529.css',
   './wisdom-depth-core-v539.js','./wisdom-depth-core-v539.css',
+  './whit-presence-deep-v540.js','./whit-presence-deep-v540.css','./whit-local-guide-v540.js',
   './experience-conversion-core-v530.js','./experience-conversion-core-v530.css',
   './identity-rights-core-v531.js','./identity-rights-core-v531.css',
   './living-universe-core-v524.js','./living-universe-core-v524.css','./divina-universe-retina-v523.webp',
@@ -105,6 +108,8 @@ const OFFLINE_WORLD_ASSETS=Object.freeze([
   './tarot-universe-core-v528.js','./tarot-universe-core-v528.css',
   './wisdom-universe-core-v529.js','./wisdom-universe-core-v529.css',
   './wisdom-depth-core-v539.js','./wisdom-depth-core-v539.css',
+  './whit-presence-deep-v540.js','./whit-presence-deep-v540.css','./whit-local-guide-v540.js',
+  './ai-engine.js','./ai-policy.js','./ai-credits.js','./orbe-ai-governada-v190.css',
   './living-universe-core-v524.js','./living-universe-core-v524.css','./divina-universe-retina-v523.webp',
   './tarot-livre-orbe-os-v517.js','./tarot-livre-orbe-os-v517.css','./tarot-mesa-bridge-v517.js',
   './tarot-atlas-mobile-v196.webp',
@@ -220,7 +225,7 @@ const appShellIsValid=async(url,response)=>{
   const isShell=pathname===new URL('./',self.registration.scope).pathname||pathname.endsWith('/index.html');
   if(!isShell)return true;
   const html=await response.clone().text();
-  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=539/.test(html);
+  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=540/.test(html);
 };
 
 const offlinePageFor=async url=>{

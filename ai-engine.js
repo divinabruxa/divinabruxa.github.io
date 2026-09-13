@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — ORBE IA VERDADEIRA E GOVERNADA V190
-   Luna e Terra reais, ledger no servidor e contexto privado sob consentimento. */
+/* DIVINA BRUXA 3.0 — WHIT PRESENÇA PROFUNDA V540
+   Guia local sem API + camada online governada, ledger e contexto consentido. */
 
 import { escapeHTML, store } from './storage.js';
 import {
@@ -15,6 +15,7 @@ import {
   normalizeTarotContext,
   privateAIExport
 } from './ai-policy.js?v=190';
+import { createLocalWhitResponse } from './whit-local-guide-v540.js?v=540';
 import { acceptServerCreditState, clearCreditState, creditState } from './ai-credits.js?v=190';
 import { JOURNAL_AI_SELECTION_KEY, normalizeJournalAISelection } from './journal-policy.js?v=187';
 import { SCHOOL_AI_SELECTION_KEY, normalizeSchoolAISelection } from './school-policy.js?v=186';
@@ -40,6 +41,17 @@ const sourceLabels = Object.freeze({
   'school-single-lesson':'Uma única aula pública da Escola'
 });
 
+function structuredOnlineAnswer(value) {
+  const answer = String(value || '').trim().slice(0, 10500);
+  if (/OBSERVA(?:ÇÃO|CAO)[\s\S]+POSSIBILIDADE[\s\S]+LIMITE[\s\S]+PRÓXIMO GESTO/i.test(answer)) return answer;
+  return [
+    `OBSERVAÇÃO\n${answer}`,
+    'POSSIBILIDADE\nLeia esta resposta como uma hipótese para reflexão, não como uma verdade automática sobre você ou o futuro.',
+    'LIMITE\nA camada online trabalha somente com o contexto consentido e pode se enganar. Ela não lê pensamentos nem substitui apoio profissional.',
+    'PRÓXIMO GESTO\nEscolha uma parte verificável da resposta e observe se ela ajuda numa ação pequena, segura e reversível.'
+  ].join('\n\n').slice(0, 12000);
+}
+
 export class AIEngine {
   constructor(root, config = {}) {
     this.root = root?.id === 'aiApp' ? root : document.querySelector('#aiApp');
@@ -51,6 +63,7 @@ export class AIEngine {
     const legacyMode = { support:'luna', tarot:'terra', channel:'luna' }[settings?.mode];
     this.modeId = AI_POLICY.modes[legacyMode || settings?.mode]?.enabled ? (legacyMode || settings.mode) : 'luna';
     this.focusId = AI_POLICY.focuses[settings?.focus] ? settings.focus : 'reflection';
+    this.deliveryMode = settings?.delivery === 'online' ? 'online' : 'local';
     this.source = 'message';
     this.tarotContext = null;
     this.sending = false;
@@ -58,10 +71,12 @@ export class AIEngine {
     this.pendingClear = false;
     this.pendingExtra = null;
     this.abortController = null;
+    this.phaseTimers = new Set();
     this.renderShell();
     this.bind();
     this.restoreDraft();
     this.renderModes();
+    this.renderDelivery();
     this.renderHistory();
     this.prepareJournalSelection();
     this.prepareTarotSelection();
@@ -78,8 +93,8 @@ export class AIEngine {
   renderShell() {
     this.root.innerHTML = `
       <section class="ai-command" aria-label="Estado da Orbe IA">
-        <div class="ai-command-title"><span aria-hidden="true">✦</span><p><b>Orbe IA governada</b><small>Ledger no servidor · Web Search desligada · chave fora do navegador</small></p></div>
-        <div class="ai-command-state"><span data-ai-connection>Verificando servidor…</span><span>STAGING · V190</span></div>
+        <div class="ai-command-title"><span aria-hidden="true">✦</span><p><b>Whit · presença governada</b><small data-ai-command-copy>Guia local disponível · você escolhe cada contexto</small></p></div>
+        <div class="ai-command-state"><span data-ai-connection>Whit local despertando…</span><span>STAGING · V540</span></div>
       </section>
 
       <section class="ai-auth-gate" data-ai-auth-gate>
@@ -112,6 +127,15 @@ export class AIEngine {
 
         <section class="ai-conversation" aria-labelledby="aiConversationTitle">
           <header class="ai-conversation-head"><div><p class="eyebrow">WHIT · ORBE IA</p><h3 id="aiConversationTitle">Converse com presença.</h3></div><div><span class="ai-private-dot" aria-hidden="true"></span><small>histórico somente local</small></div></header>
+          <section class="ai-delivery-v540" aria-labelledby="aiDeliveryTitle">
+            <div><p class="eyebrow">COMO WHIT RESPONDE</p><h4 id="aiDeliveryTitle">Presença primeiro. Potência quando você escolher.</h4></div>
+            <div role="radiogroup" aria-label="Escolher camada da Whit">
+              <button type="button" data-ai-delivery="local" role="radio"><b>WHIT LOCAL</b><small>sem conta · sem API · 0 créditos</small></button>
+              <button type="button" data-ai-delivery="online" role="radio"><b>CAMADA ONLINE</b><small>Luna 1 · Terra 10 · quando disponível</small></button>
+            </div>
+            <p data-ai-delivery-note></p>
+            <p class="ai-credit-lifecycle-v540" data-ai-credit-lifecycle data-state="idle">Whit local · nenhum crédito reservado.</p>
+          </section>
           <div class="ai-quick-prompts" aria-label="Começos de conversa"></div>
           <div id="chat" class="chat ai-chat" role="log" aria-live="polite" aria-relevant="additions"></div>
           <div data-ai-context-slot></div>
@@ -121,7 +145,7 @@ export class AIEngine {
             <textarea id="chatInput" required maxlength="${AI_POLICY.limits.maxMessageCharacters}" rows="3" placeholder="Escreva para a Orbe…"></textarea>
             <div class="ai-composer-meta"><span data-ai-character-count>0 / ${AI_POLICY.limits.maxMessageCharacters}</span><span>Web e dados ocultos: OFF</span></div>
             <p class="ai-context-scope"><b>Contexto que será enviado:</b> <span data-ai-source-label>${sourceLabels.message}</span>.</p>
-            <label class="ai-consent"><input type="checkbox" id="aiConsent"><span>Entendo que Whit é uma IA. Autorizo enviar esta mensagem e até 12 mensagens recentes desta conversa local ao servidor seguro e ao provedor OpenAI. Nada do Diário entra sem seleção explícita.</span></label>
+            <label class="ai-consent"><input type="checkbox" id="aiConsent"><span data-ai-consent-copy></span></label>
             <p class="ai-consent-error" data-ai-consent-error hidden>Marque o consentimento antes de enviar.</p>
             <div class="ai-composer-actions"><button type="submit" class="primary" data-ai-send>Enviar · <span data-ai-send-cost>1 crédito</span></button><button type="button" class="text-button" data-ai-stop hidden>Interromper</button></div>
           </form>
@@ -163,6 +187,10 @@ export class AIEngine {
         return;
       }
       this.setMode(button.dataset.aiMode);
+    });
+    this.root.querySelector('.ai-delivery-v540').addEventListener('click', event => {
+      const button = event.target.closest('[data-ai-delivery]');
+      if (button) this.setDelivery(button.dataset.aiDelivery);
     });
     this.focus.addEventListener('change', () => this.setFocus(this.focus.value));
     this.form.addEventListener('submit', event => { event.preventDefault(); this.send(); });
@@ -214,14 +242,14 @@ export class AIEngine {
   setMode(modeId) {
     if (!AI_POLICY.modes[modeId]?.enabled || this.sending) return;
     this.modeId = modeId;
-    store.set(AI_SETTINGS_KEY, { mode:modeId, focus:this.focusId });
+    store.set(AI_SETTINGS_KEY, { mode:modeId, focus:this.focusId, delivery:this.deliveryMode });
     this.renderModes();
   }
 
   setFocus(focusId) {
     if (!AI_POLICY.focuses[focusId] || this.sending) return;
     this.focusId = focusId;
-    store.set(AI_SETTINGS_KEY, { mode:this.modeId, focus:focusId });
+    store.set(AI_SETTINGS_KEY, { mode:this.modeId, focus:focusId, delivery:this.deliveryMode });
     this.renderQuickPrompts();
   }
 
@@ -231,10 +259,44 @@ export class AIEngine {
       const active = button.dataset.aiMode === this.modeId;
       button.setAttribute('aria-checked', String(active));
       button.classList.toggle('active', active);
+      const modeMeta = AI_POLICY.modes[button.dataset.aiMode];
+      const cost = button.querySelector('em');
+      if (cost && modeMeta?.enabled) cost.textContent = this.deliveryMode === 'local' ? 'LOCAL · 0' : `${modeMeta.cost} ${modeMeta.cost === 1 ? 'CRÉDITO' : 'CRÉDITOS'}`;
     });
     this.root.querySelector('[data-ai-mode-disclosure]').textContent = `${mode.description} ${aiDisclosure(this.modeId)}`;
-    this.root.querySelector('[data-ai-send-cost]').textContent = `${mode.cost} ${mode.cost === 1 ? 'crédito' : 'créditos'}`;
+    this.root.querySelector('[data-ai-send-cost]').textContent = this.deliveryMode === 'local' ? '0 créditos' : `${mode.cost} ${mode.cost === 1 ? 'crédito' : 'créditos'}`;
     this.renderQuickPrompts();
+  }
+
+  setDelivery(mode) {
+    if (!['local','online'].includes(mode) || this.sending) return;
+    this.deliveryMode = mode;
+    store.set(AI_SETTINGS_KEY, { mode:this.modeId, focus:this.focusId, delivery:mode });
+    this.consent.checked = false;
+    this.renderDelivery();
+    this.renderModes();
+    this.updateConnection();
+    if (mode === 'online') this.loadStatus();
+  }
+
+  renderDelivery() {
+    this.root.querySelectorAll('[data-ai-delivery]').forEach(button => {
+      const active = button.dataset.aiDelivery === this.deliveryMode;
+      button.setAttribute('aria-checked', String(active));
+      button.classList.toggle('active', active);
+    });
+    const local = this.deliveryMode === 'local';
+    this.root.dataset.aiDelivery = this.deliveryMode;
+    this.root.querySelector('[data-ai-delivery-note]').textContent = local
+      ? 'A Whit local organiza possibilidades neste aparelho. Ela não chama modelo, não usa créditos e não promete inteligência ilimitada.'
+      : 'A camada online só envia após consentimento, usa o ledger do servidor e permanece indisponível quando a autoridade segura não responde.';
+    this.root.querySelector('[data-ai-consent-copy]').textContent = local
+      ? 'Autorizo Whit local a usar somente esta mensagem e o contexto que está visível acima. Nada sai deste aparelho.'
+      : 'Entendo que Whit é uma IA. Autorizo enviar esta mensagem e até 12 mensagens recentes ao servidor seguro e ao provedor configurado. Nada do Diário entra sem seleção explícita.';
+    this.root.querySelector('[data-ai-command-copy]').textContent = local
+      ? 'Guia local disponível · sem conta, API ou créditos'
+      : 'Camada online governada · ledger do servidor · Web Search desligada';
+    this.setSource(this.source, this.tarotContext);
   }
 
   renderQuickPrompts() {
@@ -249,8 +311,12 @@ export class AIEngine {
   }
 
   renderHistory() {
-    const intro = `<article class="bubble bot ai-welcome"><span aria-hidden="true">✦</span><div><b>Eu sou Whit, uma IA.</b><p>Posso acolher perguntas e refletir sobre símbolos. Não sou consciência, médium ou pessoa; você escolhe o que entra.</p><small>${safe(aiDisclosure(this.modeId))}</small></div></article>`;
-    this.chat.innerHTML = intro + this.history.map(message => `<article class="bubble ${message.role === 'user' ? 'user' : 'bot'}"><div><p>${safe(message.content).replace(/\n/g, '<br>')}</p><small>${message.role === 'user' ? 'VOCÊ' : message.safetyIntercepted ? 'WHIT · PROTEÇÃO' : 'WHIT'} · ${safe(formatTime(message.at))}</small></div></article>`).join('');
+    const intro = `<article class="bubble bot ai-welcome"><span aria-hidden="true">✦</span><div><b>Eu sou Whit, uma presença de interface.</b><p>Posso organizar perguntas e refletir sobre símbolos. Não sou consciência, médium ou pessoa; você escolhe o que entra.</p><small>Whit local funciona sem API. A camada online é opcional e governada.</small></div></article>`;
+    this.chat.innerHTML = intro + this.history.map(message => {
+      const origin = message.provenance === 'local-rule-guide' || message.provenance === 'safety-local' ? 'LOCAL · SEM API' : message.provenance === 'server-model' ? 'ONLINE · SERVIDOR' : '';
+      const author = message.role === 'user' ? 'VOCÊ' : message.safetyIntercepted ? 'WHIT · PROTEÇÃO' : 'WHIT';
+      return `<article class="bubble ${message.role === 'user' ? 'user' : 'bot'}" data-provenance="${safe(message.provenance || 'legacy')}"><div><p>${safe(message.content).replace(/\n/g, '<br>')}</p><small>${author}${origin ? ` · ${origin}` : ''} · ${safe(formatTime(message.at))}</small></div></article>`;
+    }).join('');
     this.chat.scrollTop = this.chat.scrollHeight;
     this.root.querySelector('[data-ai-history-count]').textContent = `${this.history.length} ${this.history.length === 1 ? 'mensagem preservada' : 'mensagens preservadas'} neste aparelho.`;
   }
@@ -295,9 +361,11 @@ export class AIEngine {
     const state = creditState();
     const online = navigator.onLine !== false;
     const signedIn = Boolean(this.auth?.session);
-    const ready = online && signedIn && state.authoritative && state.enabled && state.providerConfigured && this.config.aiEnabled !== false;
+    const local = this.deliveryMode === 'local';
+    const ready = local || (online && signedIn && state.authoritative && state.enabled && state.providerConfigured && this.config.aiEnabled !== false);
     const status = this.root.querySelector('[data-ai-connection]');
-    status.textContent = !online ? 'Offline · IA indisponível'
+    status.textContent = local ? 'Whit local pronta · 0 créditos · sem API'
+      : !online ? 'Offline · camada online indisponível'
       : !signedIn ? 'Entre para usar'
         : this.config.aiEnabled === false ? 'Desligada nesta instalação'
         : !state.authoritative ? 'Verificando servidor…'
@@ -305,13 +373,18 @@ export class AIEngine {
             : !state.providerConfigured ? 'Provedor ainda não configurado'
               : 'Servidor e ledger disponíveis';
     status.dataset.ready = String(ready);
-    this.root.querySelector('[data-ai-auth-gate]').hidden = signedIn;
-    this.root.querySelector('[data-ai-refresh]').disabled = this.loadingStatus || !signedIn || !online;
+    this.root.querySelector('[data-ai-auth-gate]').hidden = local || signedIn;
+    this.root.querySelector('[data-ai-refresh]').disabled = local || this.loadingStatus || !signedIn || !online;
     this.root.querySelector('[data-ai-send]').disabled = this.sending || !ready;
   }
 
   async loadStatus(notify = false) {
     if (this.loadingStatus) return;
+    if (this.deliveryMode === 'local') {
+      this.updateCredits();
+      this.updateConnection();
+      return;
+    }
     if (!this.auth?.session || navigator.onLine === false || typeof this.auth?.aiStatus !== 'function') {
       clearCreditState();
       this.updateCredits();
@@ -336,7 +409,9 @@ export class AIEngine {
   setSource(source, tarotContext = null) {
     this.source = sourceLabels[source] ? source : 'message';
     this.tarotContext = tarotContext;
-    this.root.querySelector('[data-ai-source-label]').textContent = sourceLabels[this.source];
+    this.root.querySelector('[data-ai-source-label]').textContent = this.source === 'message' && this.deliveryMode === 'local'
+      ? 'Somente esta mensagem; o histórico não entra na reflexão local'
+      : sourceLabels[this.source];
   }
 
   showContextCard(kind, title, detail, remove) {
@@ -440,6 +515,7 @@ export class AIEngine {
     this.input.disabled = active;
     this.focus.disabled = active;
     this.root.querySelectorAll('[data-ai-mode]').forEach(button => { if (button.dataset.aiMode !== 'sol') button.disabled = active; });
+    this.root.querySelectorAll('[data-ai-delivery]').forEach(button => { button.disabled = active; });
     this.root.querySelector('[data-ai-send]').disabled = active;
     this.root.querySelector('[data-ai-stop]').hidden = !active;
   }
@@ -477,20 +553,115 @@ export class AIEngine {
   createPending() {
     const pending = document.createElement('article');
     pending.className = 'bubble bot ai-streaming';
-    pending.innerHTML = '<span aria-hidden="true">✦</span><div><p>A Orbe está refletindo…</p><small>RESPOSTA EM FORMAÇÃO</small></div>';
+    pending.dataset.phase = 'listening';
+    pending.innerHTML = '<span aria-hidden="true">✦</span><div><p data-ai-phase-copy>Estou escutando o que você escolheu trazer.</p><ol aria-label="Fases da resposta"><li data-phase="listening">Escuta</li><li data-phase="forming">Elaboração</li><li data-phase="answering">Resposta</li><li data-phase="silence">Silêncio</li></ol><small data-ai-phase-detail>WHIT · PRESENÇA EM FORMAÇÃO</small></div>';
     this.chat.append(pending);
     this.chat.scrollTop = this.chat.scrollHeight;
     return pending;
   }
 
+  setPendingPhase(pending, phase) {
+    if (!pending?.isConnected) return;
+    const copy = {
+      listening:['Estou escutando o que você escolheu trazer.','ESCUTA · CONTEXTO VISÍVEL'],
+      forming:['Estou organizando possibilidades e limites.','ELABORAÇÃO · SEM CERTEZA FABRICADA'],
+      answering:['A resposta encontrou uma forma.','RESPOSTA · PROVENIÊNCIA VISÍVEL'],
+      silence:['Um instante de silêncio antes do próximo gesto.','SILÊNCIO · SEM LOOP']
+    }[phase] || ['', ''];
+    pending.dataset.phase = phase;
+    pending.querySelector('[data-ai-phase-copy]').textContent = copy[0];
+    pending.querySelector('[data-ai-phase-detail]').textContent = copy[1];
+    pending.querySelectorAll('[data-phase]').forEach(step => step.classList.toggle('active', step.dataset.phase === phase));
+    document.dispatchEvent(new CustomEvent('whit:deep-phase-v540', { detail:Object.freeze({ phase, privateContentIncluded:false }) }));
+  }
+
+  phasePause(milliseconds = 60) {
+    const delay = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ? 0 : milliseconds;
+    return new Promise(resolve => {
+      const timer = setTimeout(() => { this.phaseTimers.delete(timer); resolve(); }, delay);
+      this.phaseTimers.add(timer);
+    });
+  }
+
+  settleIntoSilence() {
+    document.dispatchEvent(new CustomEvent('whit:deep-phase-v540', { detail:Object.freeze({ phase:'silence', privateContentIncluded:false }) }));
+    const timer = setTimeout(() => {
+      this.phaseTimers.delete(timer);
+      document.dispatchEvent(new CustomEvent('whit:deep-phase-v540', { detail:Object.freeze({ phase:'resting', privateContentIncluded:false }) }));
+    }, globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ? 0 : 620);
+    this.phaseTimers.add(timer);
+  }
+
+  preserveDraft(content) {
+    this.input.value = String(content || '').slice(0, AI_POLICY.limits.maxMessageCharacters);
+    store.set(AI_DRAFT_KEY, { text:this.input.value, source:this.source, at:new Date().toISOString(), recovery:'v540' });
+    this.updateCharacterCount();
+  }
+
+  updateCreditLifecycle(state, text) {
+    const output = this.root.querySelector('[data-ai-credit-lifecycle]');
+    if (!output) return;
+    output.dataset.state = state;
+    output.textContent = text;
+  }
+
+  async sendLocal(content) {
+    const message = createAIMessage('user', content, { mode:this.modeId, provenance:'system' });
+    this.history.push(message);
+    this.persistHistory();
+    this.setSending(true);
+    const pending = this.createPending();
+    this.updateCreditLifecycle('local', 'Whit local · nenhum crédito reservado');
+    try {
+      await this.phasePause(55);
+      this.setPendingPhase(pending, 'forming');
+      const response = createLocalWhitResponse({ message:content, focus:this.focusId, mode:this.modeId });
+      await this.phasePause(55);
+      this.setPendingPhase(pending, 'answering');
+      await this.phasePause(45);
+      pending.remove();
+      this.history.push(createAIMessage('assistant', response.content, {
+        mode:this.modeId,
+        provenance:response.safetyIntercepted ? 'safety-local' : 'local-rule-guide',
+        safetyIntercepted:response.safetyIntercepted
+      }));
+      this.persistHistory();
+      this.settleIntoSilence();
+      this.input.value = '';
+      store.remove(AI_DRAFT_KEY);
+      this.updateCharacterCount();
+      this.consent.checked = false;
+      this.clearPreparedContext(false);
+    } catch {
+      pending.remove();
+      this.history = this.history.filter(item => item.id !== message.id);
+      this.persistHistory();
+      this.preserveDraft(content);
+      this.appendSystemMessage('A reflexão local foi interrompida. Seu rascunho foi preservado para tentar novamente.', { provenance:'system' });
+    } finally {
+      this.setSending(false);
+      this.updateConnection();
+    }
+  }
+
   async performRequest(request, pending) {
     this.abortController = new AbortController();
-    const result = await this.auth.aiChat(request, this.abortController.signal);
-    this.abortController = null;
+    this.setPendingPhase(pending, 'forming');
+    const silenceTimer = setTimeout(() => this.setPendingPhase(pending, 'silence'), 900);
+    this.phaseTimers.add(silenceTimer);
+    let result;
+    try {
+      result = await this.auth.aiChat(request, this.abortController.signal);
+    } finally {
+      clearTimeout(silenceTimer);
+      this.phaseTimers.delete(silenceTimer);
+      this.abortController = null;
+    }
     if (!result.ok) return { ok:false, result };
-    const answer = String(result.body?.answer || '').trim().slice(0, 12000);
-    if (!answer) return { ok:false, result:{ body:{ error:{ code:'EMPTY_RESPONSE' } }, message:'A resposta veio vazia.' } };
-    pending.querySelector('p').textContent = answer;
+    const rawAnswer = String(result.body?.answer || '').trim();
+    if (!rawAnswer) return { ok:false, result:{ body:{ error:{ code:'EMPTY_RESPONSE' } }, message:'A resposta veio vazia.' } };
+    const answer = structuredOnlineAnswer(rawAnswer);
+    this.setPendingPhase(pending, 'answering');
     return { ok:true, result, answer };
   }
 
@@ -505,6 +676,10 @@ export class AIEngine {
       return;
     }
     if (!mode?.enabled) { this.appendSystemMessage('O modo Sol permanece desligado.'); return; }
+    if (this.deliveryMode === 'local') {
+      await this.sendLocal(content);
+      return;
+    }
     if (!this.auth?.session || typeof this.auth?.aiChat !== 'function') {
       this.appendSystemMessage('Entre na sua conta verificada para consultar o saldo real e conversar.');
       globalThis.orbe?.go?.('login');
@@ -526,7 +701,8 @@ export class AIEngine {
     }
 
     const request = createAIRequest({ history:this.history, mode:this.modeId, focus:this.focusId, source:this.source, message:content, tarotContext:this.tarotContext });
-    this.history.push(createAIMessage('user', content, { mode:this.modeId }));
+    const userMessage = createAIMessage('user', content, { mode:this.modeId, provenance:'system', requestId:request.requestId });
+    this.history.push(userMessage);
     this.persistHistory();
     this.input.value = '';
     store.remove(AI_DRAFT_KEY);
@@ -534,6 +710,7 @@ export class AIEngine {
     this.consent.checked = false;
     this.setSending(true);
     const pending = this.createPending();
+    this.updateCreditLifecycle('reservation', `Reserva solicitada ao servidor · ${mode.cost} ${mode.cost === 1 ? 'crédito' : 'créditos'}`);
 
     try {
       const outcome = await this.performRequest(request, pending);
@@ -542,17 +719,30 @@ export class AIEngine {
         pending.remove();
         if (code === 'EXTRA_CONFIRMATION_REQUIRED') {
           this.pendingExtra = { request:{ ...request, confirmExtra:true }, content };
+          this.updateCreditLifecycle('confirmation', 'Aguardando sua confirmação · nenhuma reserva local');
           this.showExtraConfirmation(mode.cost);
           return;
         }
+        this.history = this.history.filter(item => item.id !== userMessage.id);
+        this.persistHistory();
+        this.preserveDraft(content);
+        this.updateCreditLifecycle('released', 'Falha recuperável · nenhum débito local · confira o ledger');
         this.appendSystemMessage(this.errorText(outcome.result));
         return;
       }
       pending.remove();
-      this.history.push(createAIMessage('assistant', outcome.answer, { mode:this.modeId, safetyIntercepted:outcome.result.body?.safetyIntercepted === true }));
+      this.history.push(createAIMessage('assistant', outcome.answer, { mode:this.modeId, provenance:'server-model', requestId:request.requestId, safetyIntercepted:outcome.result.body?.safetyIntercepted === true }));
       this.persistHistory();
+      this.settleIntoSilence();
+      this.updateCreditLifecycle('confirmed', `Servidor confirmou a resposta · ${mode.cost} ${mode.cost === 1 ? 'crédito' : 'créditos'} no ledger`);
       this.clearPreparedContext(false);
       await this.loadStatus();
+    } catch {
+      this.history = this.history.filter(item => item.id !== userMessage.id);
+      this.persistHistory();
+      this.preserveDraft(content);
+      this.updateCreditLifecycle('released', 'Conexão interrompida · rascunho preservado · confira o ledger');
+      this.appendSystemMessage('A camada online foi interrompida. Seu rascunho foi preservado; atualize o ledger antes de tentar novamente.', { provenance:'system' });
     } finally {
       pending.remove();
       this.abortController = null;
@@ -573,6 +763,7 @@ export class AIEngine {
     const box = this.root.querySelector('[data-ai-extra-box]');
     box.hidden = true;
     box.innerHTML = '';
+    this.updateCreditLifecycle('released', 'Envio cancelado · nenhum crédito extra autorizado');
     this.appendSystemMessage('Envio cancelado. Nenhum crédito extra foi usado.');
   }
 
@@ -585,17 +776,28 @@ export class AIEngine {
     box.innerHTML = '';
     this.setSending(true);
     const pending = this.createPending();
+    this.updateCreditLifecycle('reservation', 'Reserva confirmada por você · aguardando servidor');
     try {
       const outcome = await this.performRequest(pendingRequest.request, pending);
       pending.remove();
       if (!outcome.ok) {
+        this.pendingExtra = pendingRequest;
+        this.preserveDraft(pendingRequest.content);
+        this.updateCreditLifecycle('released', 'Falha recuperável · confira o ledger antes de repetir');
         this.appendSystemMessage(this.errorText(outcome.result));
         return;
       }
-      this.history.push(createAIMessage('assistant', outcome.answer, { mode:this.modeId, safetyIntercepted:outcome.result.body?.safetyIntercepted === true }));
+      this.history.push(createAIMessage('assistant', outcome.answer, { mode:this.modeId, provenance:'server-model', requestId:pendingRequest.request.requestId, safetyIntercepted:outcome.result.body?.safetyIntercepted === true }));
       this.persistHistory();
+      this.settleIntoSilence();
+      this.updateCreditLifecycle('confirmed', 'Servidor confirmou a resposta no ledger');
       this.clearPreparedContext(false);
       await this.loadStatus();
+    } catch {
+      this.pendingExtra = pendingRequest;
+      this.preserveDraft(pendingRequest.content);
+      this.updateCreditLifecycle('released', 'Conexão interrompida · confirmação preservada');
+      this.appendSystemMessage('A camada online foi interrompida. A confirmação ficou preservada e nenhum débito local foi criado.', { provenance:'system' });
     } finally {
       pending.remove();
       this.abortController = null;

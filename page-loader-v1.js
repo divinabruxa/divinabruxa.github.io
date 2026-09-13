@@ -245,7 +245,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     },
     journal:ensureJournal,
     ai:async()=>{
-      const {AIEngine}=await import('./ai-engine.js?v=190');
+      await ensureStyle('divinaWhitPresenceDeepV540','whit-presence-deep-v540.css?v=540');
+      const {AIEngine}=await import('./ai-engine.js?v=540');
       return new AIEngine($('#aiApp'),config);
     },
     store:async()=>{

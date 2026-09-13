@@ -6,6 +6,8 @@ export const AI_DRAFT_KEY = 'whit-draft-v190';
 export const AI_SETTINGS_KEY = 'whit-settings-v190';
 export const AI_LEDGER_KEY = 'ai-server-snapshot-v190';
 export const AI_TAROT_SELECTION_KEY = 'ai-tarot-selection-v141';
+// V540 amplia a experiência local sem alterar o contrato de rede V8.
+// Manter esta versão preserva a compatibilidade com a ponte e o servidor já instalados.
 export const AI_SCHEMA_VERSION = '8.0.0';
 
 export const AI_POLICY = Object.freeze({
@@ -69,6 +71,8 @@ export function createAIMessage(role, content, metadata = {}) {
     role:safeRole,
     content:clean(content, 12000),
     mode:AI_POLICY.modes[mode] ? mode : null,
+    provenance:['local-rule-guide','server-model','safety-local','system'].includes(metadata.provenance) ? metadata.provenance : null,
+    requestId:clean(metadata.requestId, 160) || null,
     at:validTime(metadata.at),
     safetyIntercepted:metadata.safetyIntercepted === true
   });
