@@ -1,15 +1,15 @@
-/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 13/14 · V561
+/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 14/14 · V562
    Cache seletivo e versionado. Nunca guarda Auth, respostas online da Whit, billing,
    Admin, consultas seguras ou outras respostas de autoridade. Lembretes V561 usam
    texto fixo e respeitam o silêncio de Brasília sem revelar cartas. */
 
-const VERSION=561;
+const VERSION=562;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v561-shell';
-const CONTENT_CACHE='divina-bruxa-v561-content';
-const IMAGE_CACHE='divina-bruxa-v561-images';
-const OFFLINE_CACHE='divina-bruxa-v561-offline-core';
-const PREMIUM_CACHE='divina-bruxa-v561-premium-static';
+const SHELL_CACHE='divina-bruxa-v562-shell';
+const CONTENT_CACHE='divina-bruxa-v562-content';
+const IMAGE_CACHE='divina-bruxa-v562-images';
+const OFFLINE_CACHE='divina-bruxa-v562-offline-core';
+const PREMIUM_CACHE='divina-bruxa-v562-premium-static';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE,PREMIUM_CACHE]);
 const NAVIGATION_TIMEOUT_MS=3500;
 const MAX_CONTENT_ENTRIES=180;
@@ -89,6 +89,7 @@ const REQUIRED_SHELL=Object.freeze([
   './music-video-supreme-v559.js','./music-video-supreme-v559.css',
   './page-design-supreme-v560.js','./page-design-supreme-v560.css',
   './ethical-return-core-v561.js','./ethical-return-core-v561.css',
+  './qa-supreme-launch-v562.js',
   './orb-loading-portal-v1.js',
   './divina-shell-v180.css','./home-orb-absolute-v206.css','./pwa-world-v196.css',
   './pwa-resilience-v324.css','./pwa-world-v324.js','./performance-world-v324.js',
@@ -97,7 +98,7 @@ const REQUIRED_SHELL=Object.freeze([
 ]);
 
 // Fechamento transitivo dos imports estáticos de app-v208.js. Se qualquer um
-// falhar, a V561 não assume o controle e o worker anterior continua íntegro.
+// falhar, a V562 não assume o controle e o worker anterior continua íntegro.
 const BOOT_DEPENDENCIES=Object.freeze([
   './account-consultations-world-v319.js','./account-engine-v201.js','./account-state-copy-v201.js',
   './ai-policy.js','./auth-client-v201.js','./auth-client-v6.js','./card-library-policy.js',
@@ -121,6 +122,7 @@ const APP_DEPENDENCIES=Object.freeze([
   './music-video-supreme-v559.js','./music-video-supreme-v559.css',
   './page-design-supreme-v560.js','./page-design-supreme-v560.css',
   './ethical-return-core-v561.js','./ethical-return-core-v561.css',
+  './qa-supreme-launch-v562.js',
   './auth-client-v6.js','./auth-client-v201.js','./account-engine-v201.js','./account-state-copy-v201.js',
   './account-consultations-world-v319.js','./consultation-engine.js','./consultation-policy.js',
   './premium-engine-v191.js','./premium-policy-v191.js','./skins-v201.js',
@@ -347,7 +349,7 @@ const appShellIsValid=async(url,response)=>{
   const isShell=pathname===new URL('./',self.registration.scope).pathname||pathname.endsWith('/index.html');
   if(!isShell)return true;
   const html=await response.clone().text();
-  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=561/.test(html);
+  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=562/.test(html);
 };
 
 const offlinePageFor=async url=>{

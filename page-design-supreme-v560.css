@@ -1,6 +1,29 @@
 /* DIVINA BRUXA 4.0 — DESIGN DE PÁGINAS E MOBILE PREMIUM · V560
    Camada final de coerência visual, toque, foco, safe areas, teclado e zoom. */
 
+.v562-skip-link{
+  position:fixed;
+  z-index:2147483600;
+  inset-block-start:max(8px,env(safe-area-inset-top));
+  inset-inline-start:max(8px,env(safe-area-inset-left));
+  min-block-size:44px;
+  display:flex;
+  align-items:center;
+  padding:10px 16px;
+  border:2px solid #f0d18a;
+  border-radius:999px;
+  background:#100618;
+  color:#fff4d4;
+  font:800 14px/1.2 system-ui,sans-serif;
+  text-decoration:none;
+  transform:translateY(calc(-100% - 24px));
+}
+.v562-skip-link:focus{
+  transform:translateY(0);
+  outline:3px solid #fff;
+  outline-offset:3px;
+}
+
 html[data-page-design="v560"] {
   --v560-void: #05020a;
   --v560-ink: #fff8ff;

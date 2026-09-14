@@ -1,0 +1,168 @@
+{
+  "release": "V562",
+  "generated_at_utc": "2026-09-14T00:31:40Z",
+  "scope": "Macroetapa 14/14 — QA Supremo",
+  "source_of_truth": "PLANO-SUPREMO-AUDITORIA-DIVINA-BRUXA-V9.0.md",
+  "environment": {
+    "name": "divina-bruxa-staging",
+    "project_ref": "kyphdsamyygavmkzyezr",
+    "region": "sa-east-1",
+    "health": "ACTIVE_HEALTHY",
+    "postgres": "17.6",
+    "production_mutations": 0,
+    "dns_mutations": 0,
+    "real_billing_mutations": 0,
+    "store_submission_mutations": 0
+  },
+  "repository_baseline": {
+    "branch": "main",
+    "commit": "28a17c0e9d741008665f20c25e4e87e44a5ee894",
+    "commit_date": "2026-09-13T20:57:09-03:00",
+    "commit_message": "Add files via upload",
+    "root_files": 2241,
+    "nested_project_files": 0
+  },
+  "production_read_only_smoke": {
+    "checked_on": "2026-09-14",
+    "url": "https://divinabruxa.com.br/",
+    "served_release": "V561",
+    "home_visible": true,
+    "loader_hidden_after_boot": true,
+    "horizontal_overflow_home": false,
+    "tarot_open": "FAIL",
+    "console_error": "TypeError: module.TarotLivreOrbOSV517 is not a constructor",
+    "cause": "page-loader selected a CSS link result instead of the imported module",
+    "write_operations": 0
+  },
+  "resolved_incident": {
+    "id": "P0-LOADER-001",
+    "severity": "P0",
+    "state": "RESOLVED_IN_V562_SOURCE",
+    "affected_worlds": ["tarot", "daily", "library", "school", "spreads", "store"],
+    "preventive_scope": 13,
+    "fix": "loadModuleAfterStylesV562 always returns the final Promise result and rejects invalid modules",
+    "regression_test": "qa-v562-loader-runtime.mjs",
+    "deployment_verification": "BLOCKED_UNTIL_V562_IS_INSTALLED_IN_STAGING"
+  },
+  "supabase_read_only_audit": {
+    "checked_at_utc": "2026-09-14T00:31:40Z",
+    "public_tables": 55,
+    "public_tables_rls_enabled": 55,
+    "public_tables_rls_forced": 8,
+    "anon_writable_tables": 0,
+    "authenticated_writable_tables": 23,
+    "authenticated_writable_without_applicable_policy": 0,
+    "security_advisor": {
+      "error": 0,
+      "critical": 0,
+      "warn": 2,
+      "info": 20,
+      "accepted_warnings": [
+        {
+          "function": "public.account_access_is_active_v201()",
+          "reason": "authenticated self-service RPC bound to auth.uid/auth.jwt",
+          "self_bound": true,
+          "uses_user_metadata": false,
+          "search_path": ""
+        },
+        {
+          "function": "public.account_control_v201()",
+          "reason": "authenticated self-service RPC bound to auth.uid/auth.jwt",
+          "self_bound": true,
+          "uses_user_metadata": false,
+          "search_path": ""
+        }
+      ],
+      "info_default_deny_tables": 20
+    },
+    "performance_advisor": {
+      "error": 0,
+      "warn": 0,
+      "info_unused_indexes": 50,
+      "interpretation": "informational in a zero/near-zero-traffic STAGING database; no index was removed without workload evidence"
+    },
+    "edge_functions": {
+      "total": 17,
+      "active": 17,
+      "ethical_analytics_v561_present": false,
+      "admin_analytics_v322_version": 2,
+      "latest_required_v561_admin_analytics_present": false
+    },
+    "latest_migration": {
+      "version": "20260913204535",
+      "name": "consultas_supremas_v558"
+    },
+    "v561_backend": {
+      "analytics_events_table": false,
+      "analytics_budget_table": false,
+      "analytics_budget_function": false,
+      "analytics_snapshot_function": false,
+      "state": "BLOCKED_PENDING_V561_SQL_AND_EDGE_INSTALL"
+    },
+    "idempotency_and_concurrency_guards": {
+      "daily_unique_user_date": true,
+      "daily_on_conflict": true,
+      "credit_unique_request_reason_bucket": true,
+      "credit_row_lock": true,
+      "credit_advisory_lock": true,
+      "billing_webhook_unique_provider_event": true,
+      "skin_billing_unique_provider_event": true,
+      "sandbox_command_row_lock": true,
+      "sandbox_command_on_conflict": true
+    },
+    "authority_flags": {
+      "production_publish_authorized": false,
+      "dns_changes_authorized": false,
+      "real_billing_authorized": false,
+      "store_submission_authorized": false,
+      "ORBE_AI_SOL_ENABLED": false
+    },
+    "owner": {
+      "active_owners": 0,
+      "final_reviews": 0,
+      "approval": "BLOCKED"
+    },
+    "continuity": {
+      "scheduler_state": "not_connected",
+      "restore_state": "not_verified",
+      "backup_runs": 0,
+      "verified_restores": 0,
+      "rpo_target_hours": 24,
+      "rto_target_hours": 8,
+      "retention_days": 30,
+      "encrypted_offsite_required": true,
+      "state": "BLOCKED"
+    },
+    "billing_sandbox_evidence": {
+      "webhook_events": 0,
+      "skin_billing_events": 0,
+      "receipts": 0,
+      "subscriptions": 0,
+      "end_to_end_transaction": "NOT RUN"
+    }
+  },
+  "acceptance": {
+    "automated_source_gate": "PASS",
+    "open_p0_in_v562_source": 0,
+    "open_p1_in_v562_source": 0,
+    "launch_gate": "BLOCKED",
+    "owner_approval": "BLOCKED",
+    "staging_v562_browser": "BLOCKED",
+    "physical_471_evaluations": "NOT RUN",
+    "database_daily_concurrency_behavior": "NOT RUN",
+    "duplicate_webhook_delivery_behavior": "NOT RUN",
+    "simultaneous_credit_spend_behavior": "NOT RUN",
+    "backup_restore_drill": "BLOCKED",
+    "stripe_sandbox_end_to_end": "NOT RUN"
+  },
+  "truth": {
+    "macro_14_package_complete": true,
+    "ready_to_install_in_staging": true,
+    "ready_to_launch": false,
+    "production_publish": false,
+    "dns_changes": false,
+    "real_billing": false,
+    "store_submission": false,
+    "sol_enabled": false
+  }
+}

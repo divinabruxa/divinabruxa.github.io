@@ -1,0 +1,101 @@
+{
+  "release": "V562",
+  "generated_at_utc": "2026-09-14T00:49:36Z",
+  "scope": "Macroetapa 14/14 — QA Supremo",
+  "environment": "STAGING",
+  "source_commit": "28a17c0e9d741008665f20c25e4e87e44a5ee894",
+  "commands": [
+    {
+      "command": "node qa-v562-supreme.mjs .",
+      "state": "PASS",
+      "assertions": 44,
+      "passed": 44,
+      "failed": 0,
+      "covers": [
+        "syntax",
+        "local references",
+        "404",
+        "release alignment",
+        "PWA/offline",
+        "Tarot 78",
+        "Carta do Dia local",
+        "tiragens",
+        "skins",
+        "escola",
+        "accessibility",
+        "client security"
+      ]
+    },
+    {
+      "command": "node qa-v562-loader-runtime.mjs .",
+      "state": "PASS",
+      "loaders": 13,
+      "affected_worlds_regressed": 6,
+      "invalid_positional_module_destructuring": 0
+    },
+    {
+      "command": "node qa-v562-service-worker-runtime.mjs .",
+      "state": "PASS",
+      "assertions": 36,
+      "passed": 36,
+      "failed": 0
+    },
+    {
+      "command": "node qa-v562-browser.mjs .",
+      "state": "BLOCKED",
+      "exit_code": 2,
+      "reason": "chromium-binary-unavailable; V562 ainda não instalada no STAGING"
+    },
+    {
+      "command": "STAGING-QA-SUPREMO-V562.sql",
+      "state": "PASS",
+      "mode": "transaction read only with rollback",
+      "mutations": 0
+    },
+    {
+      "command": "production V561 read-only browser smoke",
+      "state": "FAIL",
+      "open": false,
+      "severity": "P0",
+      "reason": "Tarot recuperou após TypeError no carregador",
+      "disposition": "RESOLVED_IN_V562_SOURCE"
+    },
+    {
+      "command": "node qa-v562-package.mjs <delta> <baseline>",
+      "state": "PASS",
+      "assertions": 88,
+      "passed": 88,
+      "failed": 0,
+      "flat_files": 22,
+      "hashes_verified": 21,
+      "baseline_compared": true
+    }
+  ],
+  "acceptance": {
+    "automated_source_gate": "PASS",
+    "open_p0": 0,
+    "open_p1": 0,
+    "historical_closed_p0": 1,
+    "incremental_staging_install": "PASS",
+    "launch_gate": "BLOCKED",
+    "owner_approval": "BLOCKED"
+  },
+  "blocked_or_not_run": [
+    "V562 browser smoke in STAGING",
+    "471 physical-device evaluations",
+    "V561 backend installation",
+    "daily-card database concurrency behavior",
+    "duplicate Stripe webhook behavior",
+    "simultaneous credit spending behavior",
+    "backup/restore drill",
+    "billing sandbox end-to-end",
+    "owner approval"
+  ],
+  "authority": {
+    "production_publish": false,
+    "dns_changes": false,
+    "real_billing": false,
+    "store_submission": false,
+    "sol_enabled": false
+  }
+}

@@ -1,5 +1,5 @@
-/* DIVINA BRUXA 4.0 — CARREGAMENTO V561 · RETORNO ÉTICO
-   Preserva V560, mantém mundos lazy e conecta somente as pontes sanitizadas. */
+/* DIVINA BRUXA 4.0 — CARREGAMENTO V562 · QA SUPREMO
+   Preserva V561, mantém mundos lazy e elimina seleção posicional frágil de módulos. */
 
 import {
   normalizeRouteId,
@@ -48,6 +48,19 @@ function ensureStyle(id,href){
     link.addEventListener('error',()=>reject(new Error(`Estilo indisponível: ${href}`)),{once:true});
     document.head.append(link);
   }),LOAD_TIMEOUT_MS,`Tempo esgotado ao carregar ${href}.`));
+}
+
+// CSS e módulo continuam carregando em paralelo, mas o módulo passa a ser
+// identificado pela sua posição final em um único contrato. Isso impede que a
+// adição de uma folha de estilo transforme acidentalmente um <link> em módulo.
+export async function loadModuleAfterStylesV562(styleTasks=[],moduleTask){
+  const tasks=Array.isArray(styleTasks)?styleTasks:[styleTasks];
+  const results=await Promise.all([...tasks,moduleTask]);
+  const loadedModule=results[results.length-1];
+  if(!loadedModule||!['object','function'].includes(typeof loadedModule)){
+    throw new TypeError('module_load_invalid_v562');
+  }
+  return loadedModule;
 }
 function ensureImage(href){
   return once(sharedTasks,`image:${href}`,()=>new Promise(resolve=>{
@@ -114,11 +127,10 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
   let deferredTimer=0;
 
   const ensureJournal=()=>once(sharedTasks,'journal',async()=>{
-    const [,,module]=await Promise.all([
+    const module=await loadModuleAfterStylesV562([
       ensureStyle('divinaJournalRebirthV317','journal-world-v317.css?v=556'),
-      ensureStyle('divinaJournalMirrorSupremeV556','journal-mirror-supreme-v556.css?v=556'),
-      import('./journal-world-v317.js?v=556')
-    ]);
+      ensureStyle('divinaJournalMirrorSupremeV556','journal-mirror-supreme-v556.css?v=556')
+    ],import('./journal-world-v317.js?v=556'));
     const instance=new module.JournalWorldV317($('#journalApp'),{orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme});
     globalThis.divinaJournalWorldV317=instance;
     return instance;
@@ -135,10 +147,9 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
   });
 
   const ensureMedia=()=>once(sharedTasks,'media',async()=>{
-    const [,module]=await Promise.all([
-      ensureStyle('divinaMusicVideoSupremeV559','music-video-supreme-v559.css?v=559'),
-      import('./music-video-supreme-v559.js?v=559')
-    ]);
+    const module=await loadModuleAfterStylesV562([
+      ensureStyle('divinaMusicVideoSupremeV559','music-video-supreme-v559.css?v=559')
+    ],import('./music-video-supreme-v559.js?v=559'));
     const instance=new module.MusicVideoSupremeV559({videos:$('#videoApp'),music:$('#musicApp')},config);
     globalThis.divinaMusicVideoSupremeV559=instance;
     return instance;
@@ -192,11 +203,10 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
         'divinaTarotLivreOrbOSV515',
         'divinaTarotLivreOrbOSV516'
       ].forEach(styleId=>document.getElementById(styleId)?.remove());
-      const [,module]=await Promise.all([
+      const module=await loadModuleAfterStylesV562([
         ensureStyle('divinaTarotLivreOrbOSV517','tarot-livre-orbe-os-v517.css?v=538-fluid'),
-        ensureStyle('divinaTarotFreeSupremeV553','tarot-free-supreme-v553.css?v=553'),
-        import('./tarot-livre-orbe-os-v517.js?v=553-supreme')
-      ]);
+        ensureStyle('divinaTarotFreeSupremeV553','tarot-free-supreme-v553.css?v=553')
+      ],import('./tarot-livre-orbe-os-v517.js?v=553-supreme'));
       const instance=new module.TarotLivreOrbOSV517($('#tarot'),{
         orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme
       });
@@ -207,11 +217,10 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       globalThis.divinaDailyWorldV509?.destroy?.();
       delete globalThis.divinaDailyWorldV509;
       document.getElementById('divinaDailyRebirthV303')?.remove();
-      const [,module]=await Promise.all([
+      const module=await loadModuleAfterStylesV562([
         ensureStyle('divinaDailyLivingV509','daily-world-v509.css?v=554'),
-        ensureStyle('divinaDailySpreadsSupremeV554','daily-spreads-supreme-v554.css?v=554'),
-        import('./daily-world-v509.js?v=561')
-      ]);
+        ensureStyle('divinaDailySpreadsSupremeV554','daily-spreads-supreme-v554.css?v=554')
+      ],import('./daily-world-v509.js?v=561'));
       const instance=new module.DailyWorldV509($('#dailyCard'),{
         onSave:remember,
         authClient,
@@ -221,32 +230,29 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       return instance;
     },
     library: async()=>{
-      const [,module]=await Promise.all([
+      const module=await loadModuleAfterStylesV562([
         ensureStyle('divinaLibraryRebirthV302','library-world-v302.css?v=555'),
         ensureStyle('divinaPublicLibraryV544','public-library-core-v544.css?v=555'),
-        ensureStyle('divinaSchoolLibrarySupremeV555','school-library-supreme-v555.css?v=555'),
-        import('./library-world-v302.js?v=555')
-      ]);
+        ensureStyle('divinaSchoolLibrarySupremeV555','school-library-supreme-v555.css?v=555')
+      ],import('./library-world-v302.js?v=555'));
       const instance=new module.LibraryWorldV302($('#cardLibraryApp'),{onSave:remember,orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme});
       globalThis.divinaLibraryWorldV302=instance;
       return instance;
     },
     school: async()=>{
-      const [,module]=await Promise.all([
+      const module=await loadModuleAfterStylesV562([
         ensureStyle('divinaSchoolRebirthV306','school-world-v306.css?v=555'),
-        ensureStyle('divinaSchoolLibrarySupremeV555','school-library-supreme-v555.css?v=555'),
-        import('./school-world-v306.js?v=555')
-      ]);
+        ensureStyle('divinaSchoolLibrarySupremeV555','school-library-supreme-v555.css?v=555')
+      ],import('./school-world-v306.js?v=555'));
       const instance=new module.SchoolWorldV306($('#schoolApp'),{authClient,orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme});
       globalThis.divinaSchoolWorldV306=instance;
       return instance;
     },
     spreads: async()=>{
-      const [,module]=await Promise.all([
+      const module=await loadModuleAfterStylesV562([
         ensureStyle('divinaSpreadsRebirthV305','spreads-world-v305.css?v=554'),
-        ensureStyle('divinaDailySpreadsSupremeV554','daily-spreads-supreme-v554.css?v=554'),
-        import('./spreads-world-v305.js?v=554')
-      ]);
+        ensureStyle('divinaDailySpreadsSupremeV554','daily-spreads-supreme-v554.css?v=554')
+      ],import('./spreads-world-v305.js?v=554'));
       const instance=new module.SpreadsWorldV305({
         grid:$('#spreadGrid'),
         result:$('#spreadResult'),
@@ -259,54 +265,48 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     },
     journal:ensureJournal,
     ai:async()=>{
-      const [,,module]=await Promise.all([
+      const module=await loadModuleAfterStylesV562([
         ensureStyle('divinaWhitPresenceDeepV540','whit-presence-deep-v540.css?v=557'),
-        ensureStyle('divinaWhitLocalSupremeV557','whit-local-supreme-v557.css?v=557'),
-        import('./ai-engine.js?v=557')
-      ]);
+        ensureStyle('divinaWhitLocalSupremeV557','whit-local-supreme-v557.css?v=557')
+      ],import('./ai-engine.js?v=557'));
       const instance=new module.AIEngine($('#aiApp'),config,{authClient,orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme});
       globalThis.divinaWhitLocalV557=instance;
       return instance;
     },
     store:async()=>{
       await ensureCommerce();
-      const [,module]=await Promise.all([
+      const module=await loadModuleAfterStylesV562([
         ensureStyle('divinaMediaCommerceRebirthV320','media-commerce-world-v320.css?v=320'),
-        ensureStyle('divinaAmazonStoreV543','amazon-store-core-v543.css?v=543'),
-        import('./media-commerce-world-v320.js?v=543')
-      ]);
+        ensureStyle('divinaAmazonStoreV543','amazon-store-core-v543.css?v=543')
+      ],import('./media-commerce-world-v320.js?v=543'));
       return new module.StoreWorldV320($('#storeApp'),config);
     },
     consultations:async()=>{
       await ensureCommerce();
-      const [,,module]=await Promise.all([
+      const module=await loadModuleAfterStylesV562([
         ensureStyle('divinaAccountConsultationsRebirthV319','account-consultations-world-v319.css?v=319'),
-        ensureStyle('divinaConsultationsSupremeV558','consultations-supreme-v558.css?v=558'),
-        import('./account-consultations-world-v319.js?v=558-consultations-supreme')
-      ]);
+        ensureStyle('divinaConsultationsSupremeV558','consultations-supreme-v558.css?v=558')
+      ],import('./account-consultations-world-v319.js?v=558-consultations-supreme'));
       return new module.ConsultationsWorldV319($('#consultationApp'),config);
     },
     subscriptions:async()=>{
-      const [,module]=await Promise.all([
-        ensureStyle('divinaCrownRebirthV318','skins-premium-world-v318.css?v=546'),
-        import('./skins-premium-world-v318.js?v=546')
-      ]);
+      const module=await loadModuleAfterStylesV562([
+        ensureStyle('divinaCrownRebirthV318','skins-premium-world-v318.css?v=546')
+      ],import('./skins-premium-world-v318.js?v=546'));
       return new module.PremiumWorldV318($('#subscriptionApp'));
     },
     skins:async()=>{
-      const [,module]=await Promise.all([
-        ensureStyle('divinaCrownRebirthV318','skins-premium-world-v318.css?v=546'),
-        import('./skins-premium-world-v318.js?v=546')
-      ]);
+      const module=await loadModuleAfterStylesV562([
+        ensureStyle('divinaCrownRebirthV318','skins-premium-world-v318.css?v=546')
+      ],import('./skins-premium-world-v318.js?v=546'));
       return new module.SkinsWorldV318($('#skinsApp'));
     },
     videos:ensureMedia,
     music:ensureMedia,
     notifications:async()=>{
-      const [,module]=await Promise.all([
-        ensureStyle('divinaNotificationsRebirthV321','notifications-world-v321.css?v=321'),
-        import('./notifications-world-v321.js?v=321')
-      ]);
+      const module=await loadModuleAfterStylesV562([
+        ensureStyle('divinaNotificationsRebirthV321','notifications-world-v321.css?v=321')
+      ],import('./notifications-world-v321.js?v=321'));
       return new module.NotificationsWorldV321($('#notificationApp'),go);
     },
     admin:async()=>{

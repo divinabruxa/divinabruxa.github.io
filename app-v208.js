@@ -1,6 +1,6 @@
-/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 13/14 · V561
-   Retorno ético, conteúdo diário e métricas agregadas sob consentimento.
-   Todo o universo aprovado até a V560 permanece íntegro. */
+/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 14/14 · V562
+   QA Supremo reproduzível, correção do carregador de mundos e evidência honesta.
+   Todo o universo aprovado até a V561 permanece íntegro. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -18,7 +18,7 @@ import { AccountEngineV201 } from './account-engine-v201.js?v=556-journal-consen
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=558-consultations-supreme';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=561-ethical-return';
+import { createPageLoader } from './page-loader-v1.js?v=562-qa-supreme';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -55,6 +55,7 @@ import { createSecurityPrivacyCoreV547 } from './security-privacy-core-v547.js?v
 import { createPageDesignSupremeV560 } from './page-design-supreme-v560.js?v=560';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
+import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
 
 const $ = selector => document.querySelector(selector);
 
@@ -68,11 +69,11 @@ const installDockStabilityV326 = () => {
 };
 installDockStabilityV326();
 
-const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=561')
+const startPwaAfterBootV537 = () => import('./pwa-world-v324.js?v=562')
   .then(module => module.initializePwaV324?.())
   .catch(error => {
     console.error('[Divina] PWA isolado do boot não iniciou', error);
-    document.documentElement.dataset.pwaError = 'v561';
+    document.documentElement.dataset.pwaError = 'v562';
   });
 
 const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
@@ -474,6 +475,12 @@ const ethicalReturn = safely('Retorno Ético e Conteúdo Diário V561', () =>
   })
 );
 
+// O fechamento V562 observa somente estrutura pública e erros sanitizados da
+// sessão. Aprovação da proprietária e evidências físicas continuam manuais.
+const qaSupremeLaunch = safely('QA Supremo V562', () =>
+  createQaSupremeLaunchV562()
+);
+
 const warmEssentialPortals = () => {
   const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
   if ((document.body.dataset.screen && document.body.dataset.screen !== 'home')
@@ -522,14 +529,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v561-app';
+  window.__divinaSWBootstrap = 'v562-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=561', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=562', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v561';
+        document.documentElement.dataset.releaseEpoch = 'v562';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V561 registrado');
+        console.info('[Divina] PWA V562 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -567,6 +574,7 @@ window.orbe = {
   security:securityPrivacy,
   design:pageDesignSupreme,
   returnGarden:ethicalReturn,
+  qaLaunch:qaSupremeLaunch,
   observatory:null,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
   claim:(host, options) => supremeOrb?.claim?.(host, options),
@@ -1466,6 +1474,32 @@ window.divinaEthicalReturnReleaseV561 = Object.freeze({
   audit:()=>ethicalReturn?.audit?.()||null
 });
 
+window.divinaQaSupremeLaunchReleaseV562 = Object.freeze({
+  version:562,
+  plan:'4.0-fluidity-supreme',
+  macroStage:'14-of-14',
+  title:'QA Supremo',
+  preserves:'V561',
+  core:qaSupremeLaunch,
+  fixedIncident:'route-module-selection-v561',
+  affectedWorldsFixed:Object.freeze(['tarot','daily','library','school','spreads','store']),
+  evidenceStates:Object.freeze(['PASS','FAIL','BLOCKED','NOT RUN']),
+  requiredP0:0,
+  requiredP1:0,
+  ownerApprovalRequired:true,
+  ownerApprovalState:'BLOCKED',
+  backupRestoreState:'BLOCKED',
+  sandboxBillingState:'NOT RUN',
+  productionPublish:false,
+  dnsChanges:false,
+  realBilling:false,
+  storeSubmission:false,
+  sol:false,
+  environment:'staging',
+  status:()=>qaSupremeLaunch?.status?.()||null,
+  audit:()=>qaSupremeLaunch?.audit?.('release-api')||null
+});
+
 window.divinaResponsiveEnchantmentReleaseV533 = Object.freeze({
   version:533,
   macroStage:'9-of-10',
@@ -1794,10 +1828,22 @@ const awaken = async () => {
         shell:'v180',
         recovery:'v326',
         bootFirst:true,
-        release:'V561',
+        release:'V562',
         supremePlan:'4.0-fluidity-supreme',
         supremePlanMacroStages:14,
-        currentMacroStage:'13-of-14',
+        currentMacroStage:'14-of-14',
+        qaSupremeLaunch:'v562',
+        qaSupremeLaunchPreserves:'v561',
+        qaSupremeLaunchFixedIncident:'route-module-selection-v561',
+        qaSupremeLaunchEvidenceStates:'PASS|FAIL|BLOCKED|NOT RUN',
+        qaSupremeLaunchRequiredP0:0,
+        qaSupremeLaunchRequiredP1:0,
+        qaSupremeLaunchOwnerApprovalRequired:true,
+        qaSupremeLaunchOwnerApprovalState:'BLOCKED',
+        qaSupremeLaunchProductionReady:false,
+        qaSupremeLaunchProductionPublish:false,
+        qaSupremeLaunchRealBilling:false,
+        qaSupremeLaunchSol:false,
         ethicalReturn:'v561',
         ethicalReturnPreserves:'v560',
         ethicalReturnSchoolChallenges:14,
