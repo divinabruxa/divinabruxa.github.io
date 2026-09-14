@@ -6,7 +6,7 @@
 
 import { worldForRouteV535 } from './world-truth-registry-v535.js?v=535';
 
-const VERSION = 566;
+const VERSION = 567;
 const INSTANCE = Symbol.for('divina.orb.persistent.journey.v565');
 const ROOT_ID = 'divinaOrbPersistentJourneyV565';
 const STYLE_ID = 'divinaOrbPersistentJourneyV565Styles';
@@ -117,11 +117,15 @@ export class OrbPersistentJourneyV565 {
     this.landingHost = null;
     this.landingAnchor = null;
     this.trackFrame = 0;
+    this.settleToken = 0;
+    this.pendingMenuOrigin = null;
+    this.pendingMenuOriginAt = 0;
+    this.bridgingClaim = false;
     this.originalClaim = null;
     this.claimBridge = null;
     this.createPersistentLayer();
     this.bind();
-    document.documentElement.dataset.orbPersistentMotor = 'orbe-suprema-atom-one-v566';
+    document.documentElement.dataset.orbPersistentMotor = 'orbe-suprema-atom-one-v567';
     requestAnimationFrame(() => this.syncRestingOrb('boot'));
     emit('divina:orb-ios-journey-ready', this.status());
     emit('divina:orb-persistent-ready', this.status());
@@ -160,8 +164,15 @@ export class OrbPersistentJourneyV565 {
     for (const type of ['divina:route-ready','divina:page-ready','divina:orb-presence-created']) {
       document.addEventListener(type, () => this.syncRestingOrb(type), { signal });
     }
+    document.addEventListener('divina:menu-state', event => {
+      if (event.detail?.state !== 'closing') return;
+      const origin = rectOf(this.core?.orb);
+      if (!origin) return;
+      this.pendingMenuOrigin = { ...origin, node:null, kind:'menu-living-orb' };
+      this.pendingMenuOriginAt = performance.now();
+    }, { signal });
     document.addEventListener('divina:supreme-orb-claimed', () => {
-      if (this.active || this.core?.orb?.parentNode === this.stage) return;
+      if (this.bridgingClaim || this.active || this.core?.orb?.parentNode === this.stage) return;
       this.clearLandingAnchor();
       this.root.hidden = true;
       this.current = null;
@@ -174,15 +185,39 @@ export class OrbPersistentJourneyV565 {
     copyVariables(this.core?.orb, this.root);
     if (this.core && !this.claimBridge) {
       this.originalClaim = this.core.claim;
-      this.claimBridge = (host, options) => {
-        const release = this.originalClaim.call(this.core, host, options);
+      this.claimBridge = (host, options = {}) => {
         const target = typeof host === 'string' ? document.querySelector(host) : host;
+        const orb = this.core?.orb;
+        const targetScreen = target?.closest?.('.screen')?.id || null;
+        const bridgeRestingClaim = !this.active
+          && orb?.parentNode === this.stage
+          && targetScreen === routeNow()
+          && options?.mode !== 'menu';
+        const origin = bridgeRestingClaim ? (rectOf(this.stage) || rectOf(orb)) : null;
+        this.bridgingClaim = bridgeRestingClaim;
+        let release;
+        try { release = this.originalClaim.call(this.core, target, options); }
+        finally { this.bridgingClaim = false; }
         if (this.active && target?.isConnected && this.core?.orb) {
           this.landingHost = target;
           this.stage.append(this.core.orb);
           this.core.renderer?.resize?.();
+        } else if (bridgeRestingClaim && origin && target?.isConnected && orb) {
+          const destination = rectOf(target) || rectOf(orb);
+          this.landingHost = target;
+          this.stage.append(orb);
+          this.root.hidden = false;
+          this.placeStage(origin);
+          requestAnimationFrame(() => this.glideToClaimedHost(target,destination));
         }
-        return release;
+        if (typeof release !== 'function') return release;
+        return () => {
+          const result = release();
+          if (this.active && this.state === 'settle') this.finishImmediately('claim-released');
+          else this.settleToken += 1;
+          requestAnimationFrame(() => this.syncRestingOrb('claim-release'));
+          return result;
+        };
       };
       this.core.claim = this.claimBridge;
     }
@@ -305,7 +340,12 @@ export class OrbPersistentJourneyV565 {
     this.serial = Number(serial || 0);
     this.route = String(to || 'home');
     this.landingHost = null;
-    const origin = this.resolveOrigin();
+    const menuOriginIsFresh = source === 'orbital-menu-v502'
+      && this.pendingMenuOrigin
+      && performance.now()-this.pendingMenuOriginAt < 900;
+    const origin = menuOriginIsFresh ? this.pendingMenuOrigin : this.resolveOrigin();
+    this.pendingMenuOrigin = null;
+    this.pendingMenuOriginAt = 0;
     this.capturePhysicalOrb(origin);
     this.setState('depart',{from,to,serial:this.serial,source});
     await frame();
@@ -354,6 +394,44 @@ export class OrbPersistentJourneyV565 {
     this.settlePhysicalOrb(String(to || this.route),destination);
     emit('divina:orb-persistent-finished',{reason:'complete',route:this.route});
     return this.status();
+  }
+
+  async glideToClaimedHost(host, fallbackDestination = null) {
+    if (this.destroyed || !host?.isConnected || this.core?.orb?.parentNode !== this.stage) return false;
+    const destination = rectOf(host) || fallbackDestination;
+    if (!destination) return false;
+    const token = ++this.settleToken;
+    const start = this.current || this.resolveOrigin();
+    const dx = destination.x-start.x;
+    const dy = destination.y-start.y;
+    const approach = {
+      x:start.x+dx*.74-(dx>=0?1:-1)*clamp(Math.hypot(dx,dy)*.035,4,14),
+      y:start.y+dy*.76-clamp(Math.abs(dx)*.018,2,9)
+    };
+    const targetScale = clamp(Math.max(destination.width,destination.height)/this.sourceSize,.18,5.5);
+    this.active = true;
+    this.setState('settle',{route:this.route,destination:'late-claimed-host'});
+    this.suspendHeavyEffects();
+    await this.move(
+      [approach,destination],
+      [this.scale+(targetScale-this.scale)*.72,targetScale],
+      reducedMotion()?36:Math.min(236,budgets().arrive),
+      'cubic-bezier(.2,.82,.16,1)'
+    );
+    if (token !== this.settleToken || this.destroyed) return false;
+    this.resumeHeavyEffects();
+    this.active = false;
+    this.state = 'rest';
+    this.root.dataset.state = 'rest';
+    document.documentElement.dataset.orbJourneyState = 'rest';
+    this.clearLandingAnchor();
+    host.append(this.core.orb);
+    this.root.hidden = true;
+    this.current = null;
+    this.scale = 1;
+    this.core.renderer?.resize?.();
+    emit('divina:orb-physical-claim-settled',{route:this.route,host:host.id||null});
+    return true;
   }
 
   settlePhysicalOrb(route, destination = null) {
@@ -450,6 +528,7 @@ export class OrbPersistentJourneyV565 {
 
   finishImmediately(reason = 'complete', countInterruption = true) {
     if (countInterruption && this.active && !['complete','recovered'].includes(reason)) this.interrupted += 1;
+    this.settleToken += 1;
     this.animations.forEach(animation => { try { animation.cancel(); } catch {} });
     this.animations.clear();
     this.resumeHeavyEffects();
