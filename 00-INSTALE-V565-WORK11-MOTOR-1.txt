@@ -1,0 +1,30 @@
+DIVINA BRUXA 4.0 — WORK11 — PRIMEIRO MOTOR GLOBAL DA ORBE — V565
+
+BASE
+- Instale sobre a V563. Se o pacote documental V564 também estiver instalado, preserve-o.
+
+INSTALAÇÃO PELO IPHONE
+1. Abra este ZIP.
+2. Envie TODOS os arquivos diretamente para a raiz do mesmo repositório GitHub.
+3. Substitua somente app-v208.js, index.html e sw.js.
+4. Os demais arquivos deste ZIP são novos.
+5. Não apague nenhum arquivo existente, CNAME, carta, imagem ou conteúdo.
+6. Aguarde o GitHub Pages concluir a publicação.
+7. Abra o site com internet e use “ATUALIZAR O PORTAL” uma vez se a versão antiga continuar aberta.
+
+TESTE OBRIGATÓRIO NO IPHONE
+1. Comece na Home.
+2. Abra Tarot Livre, Carta do Dia, Escola, Biblioteca, Diário, Whit, Consultas, Música e Vídeos.
+3. Observe somente a viagem: continuidade, resposta, suavidade, ausência de pisca e ausência de susto.
+4. Faça também três trocas seguidas, sem tocar freneticamente.
+5. Volte à Home e confirme que a Orbe continua viva.
+
+CRITÉRIO DESTE CICLO
+- Se você sentir trava, engasgo, pisca, desaparecimento ou teletransporte: diga REPROVADO e descreva exatamente em qual passagem sentiu. O WORK11 corrigirá este mesmo ponto e não avançará.
+- Se a Orbe viajar viva e contínua: diga APROVADO.
+- Não avance para outra etapa antes desse veredito no iPhone.
+
+CONTEÚDO CONGELADO
+- Nenhum texto, aula, carta, preço, consulta, música, vídeo ou página foi expandido ou removido.
+- Não é Plano 5.0.
+- Não publica produção, não altera DNS, não ativa cobrança real, lojas ou Sol.

@@ -1,15 +1,15 @@
-/* DIVINA BRUXA 4.0 — HOTFIX PÓS-QA · 404 ONLINE / OFFLINE · V563
+/* DIVINA BRUXA 4.0 — WORK11 · MOTOR GLOBAL PERSISTENTE DA ORBE · V565
    Cache seletivo e versionado. Nunca guarda Auth, respostas online da Whit, billing,
    Admin, consultas seguras ou outras respostas de autoridade. Lembretes V561 usam
    texto fixo e respeitam o silêncio de Brasília sem revelar cartas. */
 
-const VERSION=563;
+const VERSION=565;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v563-shell';
-const CONTENT_CACHE='divina-bruxa-v563-content';
-const IMAGE_CACHE='divina-bruxa-v563-images';
-const OFFLINE_CACHE='divina-bruxa-v563-offline-core';
-const PREMIUM_CACHE='divina-bruxa-v563-premium-static';
+const SHELL_CACHE='divina-bruxa-v565-shell';
+const CONTENT_CACHE='divina-bruxa-v565-content';
+const IMAGE_CACHE='divina-bruxa-v565-images';
+const OFFLINE_CACHE='divina-bruxa-v565-offline-core';
+const PREMIUM_CACHE='divina-bruxa-v565-premium-static';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE,PREMIUM_CACHE]);
 const NAVIGATION_TIMEOUT_MS=3500;
 const MAX_CONTENT_ENTRIES=180;
@@ -55,6 +55,7 @@ const REQUIRED_SHELL=Object.freeze([
   './origin-discovery-v537.js','./origin-discovery-v537.css',
   './runtime-v12.js','./orb-motion-core-v207.js','./orb-gesture-core-v208.js',
   './orb-engine-v208.js','./supreme-orb-core-v501.js','./supreme-orb-core-v501.css',
+  './orb-persistent-journey-v565.js',
   './orb-ios-journey-core-v525.js','./orb-ios-journey-core-v525.css',
   './orb-universal-presence-v526.js','./orb-universal-presence-v526.css',
   './whit-core-supreme-v527.js','./whit-core-supreme-v527.css',
@@ -98,7 +99,7 @@ const REQUIRED_SHELL=Object.freeze([
 ]);
 
 // Fechamento transitivo dos imports estáticos de app-v208.js. Se qualquer um
-// falhar, a V563 não assume o controle e o worker anterior continua íntegro.
+// falhar, a V565 não assume o controle e o worker anterior continua íntegro.
 const BOOT_DEPENDENCIES=Object.freeze([
   './account-consultations-world-v319.js','./account-engine-v201.js','./account-state-copy-v201.js',
   './ai-policy.js','./auth-client-v201.js','./auth-client-v6.js','./card-library-policy.js',
@@ -349,7 +350,7 @@ const appShellIsValid=async(url,response)=>{
   const isShell=pathname===new URL('./',self.registration.scope).pathname||pathname.endsWith('/index.html');
   if(!isShell)return true;
   const html=await response.clone().text();
-  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=563/.test(html);
+  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=565/.test(html);
 };
 
 const offlinePageFor=async url=>{

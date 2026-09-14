@@ -1,6 +1,6 @@
-/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 14/14 · V562
-   QA Supremo reproduzível, correção do carregador de mundos e evidência honesta.
-   Todo o universo aprovado até a V561 permanece íntegro. */
+/* DIVINA BRUXA 4.0 — WORK11 · MOTOR GLOBAL PERSISTENTE DA ORBE · V565
+   Fechamento cirúrgico de fluidez: conteúdo congelado, uma superfície de
+   transporte persistente e efeitos pesados pausados durante cada viagem. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -8,7 +8,7 @@ import { createNavigation } from './navigation.js?v=535-fluid-navigation';
 import { orbMotionV207 } from './orb-motion-core-v207.js?v=207';
 import { RealityOrbEngine } from './orb-engine-v208.js?v=535-fluid-navigation';
 import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=551-claim-stack';
-import { createOrbIOSJourneyCoreV525 } from './orb-ios-journey-core-v525.js?v=550-single-physics';
+import { createOrbPersistentJourneyV565 } from './orb-persistent-journey-v565.js?v=565-work11';
 import { createOrbUniversalPresenceV526 } from './orb-universal-presence-v526.js?v=550-single-physics';
 import { installRealityLifecycleV511 } from './reality-lifecycle-v511.js?v=511';
 import { createLivingUniverseV524 } from './living-universe-core-v524.js?v=537-no-fire';
@@ -342,8 +342,8 @@ supremeOrb = safely('Núcleo da Orbe Suprema V501', () => createSupremeOrbCoreV5
   loading:loadingPortal
 }));
 
-const orbIOSJourney = safely('OrbOS iOS · Viagem Espacial V525', () =>
-  createOrbIOSJourneyCoreV525({ core:supremeOrb, universe:livingUniverse })
+const orbIOSJourney = safely('WORK11 · Motor Global Persistente da Orbe V565', () =>
+  createOrbPersistentJourneyV565({ core:supremeOrb, universe:livingUniverse })
 );
 supremeOrb?.setJourneyEngine?.(orbIOSJourney);
 navigation.setRouteRequest(go);
@@ -529,14 +529,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v563-app';
+  window.__divinaSWBootstrap = 'v565-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=563', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=565', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v563';
+        document.documentElement.dataset.releaseEpoch = 'v565';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V563 registrado');
+        console.info('[Divina] PWA V565 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });

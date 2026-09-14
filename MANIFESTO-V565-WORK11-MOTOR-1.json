@@ -1,0 +1,55 @@
+{
+  "release": "V565",
+  "work": "WORK11",
+  "plan": "Divina Bruxa 4.0",
+  "new_plan": false,
+  "title": "Primeiro motor global persistente da Orbe",
+  "requires": "V563 runtime; V564 audit optional",
+  "incremental": true,
+  "flat": true,
+  "content_frozen": true,
+  "file_count": 10,
+  "replacements": [
+    "app-v208.js",
+    "index.html",
+    "sw.js"
+  ],
+  "new_files": [
+    "00-INSTALE-V565-WORK11-MOTOR-1.txt",
+    "HASHES-SHA256-V565.txt",
+    "MANIFESTO-V565-WORK11-MOTOR-1.json",
+    "QA-V565-WORK11-MOTOR-1.md",
+    "ROLLBACK-V565-PARA-V563.txt",
+    "orb-persistent-journey-v565.js",
+    "qa-v565-work11.mjs"
+  ],
+  "files": [
+    "00-INSTALE-V565-WORK11-MOTOR-1.txt",
+    "HASHES-SHA256-V565.txt",
+    "MANIFESTO-V565-WORK11-MOTOR-1.json",
+    "QA-V565-WORK11-MOTOR-1.md",
+    "ROLLBACK-V565-PARA-V563.txt",
+    "app-v208.js",
+    "index.html",
+    "orb-persistent-journey-v565.js",
+    "qa-v565-work11.mjs",
+    "sw.js"
+  ],
+  "motor_contract": {
+    "persistent_layer": true,
+    "single_visual_traveler": true,
+    "per_route_recreation": false,
+    "heavy_effects_paused_during_flight": true,
+    "permanent_animation_loops": 0,
+    "content_changes": 0
+  },
+  "gate": "IPHONE_OWNER_TEST_REQUIRED",
+  "advance_before_owner_approval": false,
+  "authority": {
+    "production": false,
+    "dns": false,
+    "real_billing": false,
+    "store_submission": false,
+    "sol": false
+  }
+}
