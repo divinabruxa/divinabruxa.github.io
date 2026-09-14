@@ -1,15 +1,15 @@
-/* DIVINA BRUXA 4.0 — FLUIDEZ SUPREMA · MACROETAPA 14/14 · V562
+/* DIVINA BRUXA 4.0 — HOTFIX PÓS-QA · 404 ONLINE / OFFLINE · V563
    Cache seletivo e versionado. Nunca guarda Auth, respostas online da Whit, billing,
    Admin, consultas seguras ou outras respostas de autoridade. Lembretes V561 usam
    texto fixo e respeitam o silêncio de Brasília sem revelar cartas. */
 
-const VERSION=562;
+const VERSION=563;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v562-shell';
-const CONTENT_CACHE='divina-bruxa-v562-content';
-const IMAGE_CACHE='divina-bruxa-v562-images';
-const OFFLINE_CACHE='divina-bruxa-v562-offline-core';
-const PREMIUM_CACHE='divina-bruxa-v562-premium-static';
+const SHELL_CACHE='divina-bruxa-v563-shell';
+const CONTENT_CACHE='divina-bruxa-v563-content';
+const IMAGE_CACHE='divina-bruxa-v563-images';
+const OFFLINE_CACHE='divina-bruxa-v563-offline-core';
+const PREMIUM_CACHE='divina-bruxa-v563-premium-static';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE,PREMIUM_CACHE]);
 const NAVIGATION_TIMEOUT_MS=3500;
 const MAX_CONTENT_ENTRIES=180;
@@ -98,7 +98,7 @@ const REQUIRED_SHELL=Object.freeze([
 ]);
 
 // Fechamento transitivo dos imports estáticos de app-v208.js. Se qualquer um
-// falhar, a V562 não assume o controle e o worker anterior continua íntegro.
+// falhar, a V563 não assume o controle e o worker anterior continua íntegro.
 const BOOT_DEPENDENCIES=Object.freeze([
   './account-consultations-world-v319.js','./account-engine-v201.js','./account-state-copy-v201.js',
   './ai-policy.js','./auth-client-v201.js','./auth-client-v6.js','./card-library-policy.js',
@@ -349,7 +349,7 @@ const appShellIsValid=async(url,response)=>{
   const isShell=pathname===new URL('./',self.registration.scope).pathname||pathname.endsWith('/index.html');
   if(!isShell)return true;
   const html=await response.clone().text();
-  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=562/.test(html);
+  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=563/.test(html);
 };
 
 const offlinePageFor=async url=>{
@@ -366,6 +366,9 @@ const navigationNetworkFirst=async(request,url,preloadResponse)=>{
       if(!privateRoute)await cacheResponse(CONTENT_CACHE,request,response,MAX_CONTENT_ENTRIES).catch(()=>false);
       return response;
     }
+    // Uma resposta HTTP real não significa falta de conexão. Preserva 404/410
+    // do servidor; o portal offline fica reservado a erro de rede ou timeout.
+    if(response&&!response.ok)return response;
     const cached=await matchAny(request);if(cached)return cached;
   }catch{
     const cached=await matchAny(request);if(cached)return cached;

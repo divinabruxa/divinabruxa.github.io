@@ -529,14 +529,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v562-app';
+  window.__divinaSWBootstrap = 'v563-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=562', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=563', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v562';
+        document.documentElement.dataset.releaseEpoch = 'v563';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V562 registrado');
+        console.info('[Divina] PWA V563 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
