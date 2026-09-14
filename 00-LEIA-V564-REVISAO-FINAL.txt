@@ -1,0 +1,40 @@
+DIVINA BRUXA V564 — REVISÃO FINAL DA PROPRIETÁRIA — PLANO SUPREMO 4.0
+
+PRÉ-REQUISITO
+- V563 já instalada.
+
+COMO INSTALAR NO GITHUB
+1. Abra este ZIP.
+2. Envie TODOS os arquivos diretamente para a raiz do mesmo repositório.
+3. Este pacote contém somente arquivos novos de auditoria; nenhum arquivo do site é substituído.
+4. Não apague arquivos existentes.
+
+RESULTADO
+- Construção técnica: APROVADA para revisão da proprietária.
+- Rotas públicas: 13/13 aprovadas na instalação V563.
+- Correção 404/PWA V563: aprovada.
+- Segurança STAGING: RLS em 55/55 tabelas públicas; escrita anon 0; ERROR/CRITICAL 0.
+- Liberação para produção: BLOQUEADA.
+
+POR QUE A LIBERAÇÃO CONTINUA BLOQUEADA
+- owner ativa e verificada: 0;
+- MFA/AAL2 da owner: não configurado;
+- aceite formal da proprietária: 0;
+- matriz física real: 0/471;
+- backup automático: não conectado;
+- restore real: não verificado;
+- billing sandbox E2E e provas de concorrência: pendentes;
+- backend de analytics ético V561: ausente no STAGING.
+
+ESTE PACOTE NÃO
+- publica produção;
+- altera DNS;
+- ativa cobrança real;
+- envia aplicativos às lojas;
+- ativa a Sol;
+- modifica banco de dados.
+
+PRÓXIMO PASSO
+Abra CHECKLIST-PROPRIETARIA-V564.md e execute os blocos na ordem. A decisão formal
+está em DECISAO-V564-OWNER-REVIEW.json.
+
