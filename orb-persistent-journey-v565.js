@@ -1,12 +1,12 @@
-/* DIVINA BRUXA 4.0 — ORBE SUPREMA · MACROETAPA 1 · ÁTOMO ÚNICO
-   Mantém a API V565 para compatibilidade, mas elimina o viajante-cópia: quem
-   atravessa as realidades é o próprio #orb, com seu canvas, estado e eventos.
-   Nenhum conteúdo, rota, regra de Tarot ou superfície aprovada é recriado.
+/* DIVINA BRUXA 4.0 — ORBE SUPREMA · MACROETAPA 2 · FÍSICA APPLE
+   Mantém a API V565 e o Átomo Único aprovado na Macroetapa 1. A mesma #orb
+   agora percorre curvas físicas criticamente amortecidas, com duração adaptada
+   à distância e ao tamanho. Nenhum conteúdo ou superfície é recriado.
 */
 
 import { worldForRouteV535 } from './world-truth-registry-v535.js?v=535';
 
-const VERSION = 568;
+const VERSION = 569;
 const INSTANCE = Symbol.for('divina.orb.persistent.journey.v565');
 const ROOT_ID = 'divinaOrbPersistentJourneyV565';
 const STYLE_ID = 'divinaOrbPersistentJourneyV565Styles';
@@ -31,12 +31,48 @@ const viewport = () => ({
 });
 
 const budgets = () => reducedMotion()
-  ? { depart:36, arrive:42, wait:90, profile:'reduced-atom-one' }
+  ? { depart:36, arrive:42, wait:90, samples:2, profile:'reduced-apple-physics' }
   : constrained()
-    ? { depart:172, arrive:208, wait:140, profile:'constrained-atom-one' }
+    ? { depart:172, arrive:208, wait:140, samples:10, profile:'constrained-apple-physics' }
     : touchDevice()
-      ? { depart:216, arrive:264, wait:180, profile:'touch-atom-one' }
-      : { depart:252, arrive:296, wait:190, profile:'pointer-atom-one' };
+      ? { depart:216, arrive:264, wait:180, samples:18, profile:'touch-apple-physics' }
+      : { depart:252, arrive:296, wait:190, samples:20, profile:'pointer-apple-physics' };
+
+const mix = (from, to, amount) => from + (to-from)*amount;
+
+function appleProgress(raw) {
+  const time = clamp(Number(raw || 0),0,1);
+  if (time <= 0) return 0;
+  if (time >= 1) return 1;
+  const response = 5.2;
+  const tail = 1-(1+response)*Math.exp(-response);
+  return clamp((1-(1+response*time)*Math.exp(-response*time))/tail,0,1);
+}
+
+function bezierNumber(values, amount) {
+  const list = values.map(Number);
+  const t = clamp(amount,0,1);
+  if (list.length <= 1) return list[0] || 0;
+  if (list.length === 2) return mix(list[0],list[1],t);
+  if (list.length === 3) {
+    const inverse = 1-t;
+    return inverse*inverse*list[0]+2*inverse*t*list[1]+t*t*list[2];
+  }
+  if (list.length === 4) {
+    const inverse = 1-t;
+    return inverse**3*list[0]+3*inverse*inverse*t*list[1]+3*inverse*t*t*list[2]+t**3*list[3];
+  }
+  const position = t*(list.length-1);
+  const index = Math.min(list.length-2,Math.floor(position));
+  return mix(list[index],list[index+1],position-index);
+}
+
+function bezierPoint(points, amount) {
+  return {
+    x:bezierNumber(points.map(point => point.x),amount),
+    y:bezierNumber(points.map(point => point.y),amount)
+  };
+}
 
 function emit(type, detail = {}) {
   document.dispatchEvent(new CustomEvent(type, { detail:{ version:VERSION, ...detail } }));
@@ -127,7 +163,8 @@ export class OrbPersistentJourneyV565 {
     this.claimBridge = null;
     this.createPersistentLayer();
     this.bind();
-    document.documentElement.dataset.orbPersistentMotor = 'orbe-suprema-atom-one-v568';
+    document.documentElement.dataset.orbPersistentMotor = 'orbe-suprema-apple-physics-v569';
+    document.documentElement.dataset.orbPhysics = 'critical-damped-v569';
     requestAnimationFrame(() => this.syncRestingOrb('boot'));
     emit('divina:orb-ios-journey-ready', this.status());
     emit('divina:orb-persistent-ready', this.status());
@@ -304,17 +341,26 @@ export class OrbPersistentJourneyV565 {
     const start = this.current || points[0];
     const path = [start,...points];
     const scalePath = [this.scale,...scales];
-    const keyframes = path.map((point,index) => ({
-      transform:this.transform(point,scalePath[index] ?? scalePath[scalePath.length-1]),
-      offset:index/Math.max(1,path.length-1)
-    }));
     const finish = path[path.length-1];
     const finishScale = scalePath[scalePath.length-1] ?? 1;
+    const view = viewport();
+    const distance = Math.hypot(finish.x-start.x,finish.y-start.y);
+    const distanceRatio = clamp(distance/Math.max(1,Math.hypot(view.width,view.height)),0,1.25);
+    const sizeRatio = clamp(Math.abs(finishScale-this.scale),0,1.4);
+    const adaptiveDuration = Math.round(Math.max(1,duration)*clamp(.86+distanceRatio*.34+sizeRatio*.08,.84,1.18));
+    const samples = Math.max(2,budgets().samples);
+    const keyframes = Array.from({ length:samples+1 },(_,index) => {
+      const offset = index/samples;
+      const physicalProgress = appleProgress(offset);
+      const point = bezierPoint(path,physicalProgress);
+      const sampledScale = bezierNumber(scalePath,physicalProgress);
+      return { transform:this.transform(point,sampledScale), offset };
+    });
     if (reducedMotion() || typeof this.stage.animate !== 'function') {
       this.stage.style.transform = this.transform(finish,finishScale);
-      await wait(duration);
+      await wait(reducedMotion()?Math.min(48,adaptiveDuration):adaptiveDuration);
     } else {
-      const animation = this.stage.animate(keyframes,{duration,easing,fill:'forwards'});
+      const animation = this.stage.animate(keyframes,{duration:adaptiveDuration,easing:'linear',fill:'forwards'});
       this.animations.add(animation);
       try { await animation.finished; } catch {}
       this.animations.delete(animation);
@@ -323,6 +369,13 @@ export class OrbPersistentJourneyV565 {
     }
     this.current = finish;
     this.scale = finishScale;
+    this.lastMotion = {
+      duration:adaptiveDuration,
+      distance:Math.round(distance),
+      samples,
+      response:'critical-damped',
+      requestedEasing:easing || null
+    };
   }
 
   suspendHeavyEffects() {
@@ -565,11 +618,13 @@ export class OrbPersistentJourneyV565 {
   }
 
   status() {
-    return Object.freeze({ version:VERSION, engine:'OrbPersistentJourneyV565AtomOne', work:'ORBE-SUPREMA-MACROETAPA-1',
+    return Object.freeze({ version:VERSION, engine:'OrbPersistentJourneyV565ApplePhysics', work:'ORBE-SUPREMA-MACROETAPA-2',
       active:this.active, state:this.state, route:this.route, persistentLayer:Boolean(this.root?.isConnected), layerCreations:1,
       perRouteRecreation:false, oneLivingOrb:true, physicalOrbTransport:true, physicalOrbConnected:Boolean(this.core?.orb?.isConnected),
       travelerCopies:0, snapshotCadence:'none', handoffFade:false, teleportFallback:false, permanentAnimationLoops:0,
       heavyEffectsPausedDuringFlight:true, orbRendererPausedDuringFlight:false, fluidityProfile:budgets().profile,
+      motionLaw:'critical-damped-bezier', adaptiveDuration:true, physicsSamples:budgets().samples,
+      tactileResponsePreserved:true, lastMotion:this.lastMotion || null,
       completedNavigations:this.completed, interruptedNavigations:this.interrupted });
   }
 
@@ -585,6 +640,7 @@ export class OrbPersistentJourneyV565 {
     this.root?.remove();
     document.getElementById(STYLE_ID)?.remove();
     delete document.documentElement.dataset.orbPersistentMotor;
+    delete document.documentElement.dataset.orbPhysics;
     delete document.documentElement.dataset.orbJourneyState;
     delete globalThis[INSTANCE];
   }
