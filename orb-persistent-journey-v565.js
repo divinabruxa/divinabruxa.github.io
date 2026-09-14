@@ -6,7 +6,7 @@
 
 import { worldForRouteV535 } from './world-truth-registry-v535.js?v=535';
 
-const VERSION = 567;
+const VERSION = 568;
 const INSTANCE = Symbol.for('divina.orb.persistent.journey.v565');
 const ROOT_ID = 'divinaOrbPersistentJourneyV565';
 const STYLE_ID = 'divinaOrbPersistentJourneyV565Styles';
@@ -53,8 +53,10 @@ function installStyles() {
     #${ROOT_ID} .db565-physical-stage{position:absolute;left:0;top:0;width:var(--db565-size,88px);height:var(--db565-size,88px);pointer-events:none;transform-origin:50% 50%;will-change:transform;contain:layout style;backface-visibility:hidden;-webkit-backface-visibility:hidden}
     #${ROOT_ID} .db565-physical-stage>[data-supreme-orb="living"]{display:grid!important;width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;max-width:none!important;max-height:none!important;margin:0!important;transform:none!important;translate:none!important;scale:1!important;pointer-events:auto!important;visibility:visible!important;opacity:1!important;animation-play-state:running!important;transition:none!important;backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important}
     html[${FLIGHT_ATTR}="active"] [data-orb-projection-v501="true"],html[${FLIGHT_ATTR}="active"] [data-orb-presence-v526="true"]{animation-play-state:paused!important}
+    html[${FLIGHT_ATTR}="active"] .screen.active [data-orb-presence-v526="true"]{visibility:hidden!important}
     html[${FLIGHT_ATTR}="active"] .cosmos,html[${FLIGHT_ATTR}="active"] [class*="particles"],html[${FLIGHT_ATTR}="active"] [class*="embers"]{animation-play-state:paused!important}
     html[${FLIGHT_ATTR}="active"] .screen{animation-play-state:paused!important}
+    [data-supreme-orb-host="active"]>[data-supreme-orb="living"]{width:100%!important;height:auto!important;max-width:100%!important;max-height:100%!important;margin:0!important;aspect-ratio:1!important}
     [data-orb-physical-landing="true"]{pointer-events:none!important;background:transparent!important;box-shadow:none!important}
     [data-orb-physical-landing="true"]::before,[data-orb-physical-landing="true"]::after,[data-orb-physical-landing="true"]>*{visibility:hidden!important}
     @media(prefers-reduced-motion:reduce){#${ROOT_ID} .db565-physical-stage{will-change:auto}}
@@ -125,7 +127,7 @@ export class OrbPersistentJourneyV565 {
     this.claimBridge = null;
     this.createPersistentLayer();
     this.bind();
-    document.documentElement.dataset.orbPersistentMotor = 'orbe-suprema-atom-one-v567';
+    document.documentElement.dataset.orbPersistentMotor = 'orbe-suprema-atom-one-v568';
     requestAnimationFrame(() => this.syncRestingOrb('boot'));
     emit('divina:orb-ios-journey-ready', this.status());
     emit('divina:orb-persistent-ready', this.status());
@@ -375,7 +377,7 @@ export class OrbPersistentJourneyV565 {
   async arrive({ from, to, serial } = {}) {
     if (!this.active || Number(serial || 0)!==this.serial) return null;
     await frame();
-    const destination = await this.waitForDestination(String(to || this.route));
+    let destination = await this.waitForDestination(String(to || this.route));
     const start = this.current || this.gateway(this.route);
     const dx = destination.x-start.x;
     const dy = destination.y-start.y;
@@ -384,6 +386,26 @@ export class OrbPersistentJourneyV565 {
     const targetScale = clamp(Math.max(destination.width,destination.height)/this.sourceSize,.18,5.5);
     this.setState('arrival',{from,to,serial:this.serial,destination:destination.kind||'route-anchor'});
     await this.move([arc,approach,destination],[this.scale+(targetScale-this.scale)*.38,this.scale+(targetScale-this.scale)*.78,targetScale],budgets().arrive,'cubic-bezier(.2,.82,.16,1)');
+    const claimedDestination = rectOf(this.landingHost);
+    if (claimedDestination && this.landingHost?.closest?.('.screen')?.id === String(to || this.route)) {
+      const claimedScale = clamp(Math.max(claimedDestination.width,claimedDestination.height)/this.sourceSize,.18,5.5);
+      const claimDistance = Math.hypot(claimedDestination.x-destination.x,claimedDestination.y-destination.y);
+      const claimSizeDelta = Math.abs(claimedScale-this.scale);
+      if (claimDistance > 2 || claimSizeDelta > .02) {
+        const claimApproach = {
+          x:destination.x+(claimedDestination.x-destination.x)*.76,
+          y:destination.y+(claimedDestination.y-destination.y)*.78
+        };
+        this.setState('settle',{to,serial:this.serial,destination:'claimed-host-continuation'});
+        await this.move(
+          [claimApproach,claimedDestination],
+          [this.scale+(claimedScale-this.scale)*.74,claimedScale],
+          reducedMotion()?42:Math.min(236,budgets().arrive),
+          'cubic-bezier(.2,.82,.16,1)'
+        );
+      }
+      destination = { ...claimedDestination, kind:'claimed-host' };
+    }
     this.setState('settle',{to,serial:this.serial,destination:destination.kind||'route-anchor'});
     this.resumeHeavyEffects();
     this.completed += 1;

@@ -1,15 +1,15 @@
-/* DIVINA BRUXA 4.0 — WORK11 · MOTOR GLOBAL PERSISTENTE DA ORBE · V565
+/* DIVINA BRUXA 4.0 — ORBE SUPREMA · ÁTOMO ÚNICO · CACHE V568
    Cache seletivo e versionado. Nunca guarda Auth, respostas online da Whit, billing,
    Admin, consultas seguras ou outras respostas de autoridade. Lembretes V561 usam
    texto fixo e respeitam o silêncio de Brasília sem revelar cartas. */
 
-const VERSION=565;
+const VERSION=568;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v565-shell';
-const CONTENT_CACHE='divina-bruxa-v565-content';
-const IMAGE_CACHE='divina-bruxa-v565-images';
-const OFFLINE_CACHE='divina-bruxa-v565-offline-core';
-const PREMIUM_CACHE='divina-bruxa-v565-premium-static';
+const SHELL_CACHE='divina-bruxa-v568-shell';
+const CONTENT_CACHE='divina-bruxa-v568-content';
+const IMAGE_CACHE='divina-bruxa-v568-images';
+const OFFLINE_CACHE='divina-bruxa-v568-offline-core';
+const PREMIUM_CACHE='divina-bruxa-v568-premium-static';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE,PREMIUM_CACHE]);
 const NAVIGATION_TIMEOUT_MS=3500;
 const MAX_CONTENT_ENTRIES=180;
