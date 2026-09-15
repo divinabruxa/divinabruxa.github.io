@@ -1,14 +1,14 @@
-/* DIVINA BRUXA 4.0 — WORK11 · MOTOR GLOBAL PERSISTENTE DA ORBE · V565
-   Fechamento cirúrgico de fluidez: conteúdo congelado, uma superfície de
-   transporte persistente e efeitos pesados pausados durante cada viagem. */
+/* DIVINA BRUXA 4.0 — ORBE SUPREMA 2.0 · MACROETAPA 1 · BASE V576
+   Uma única Orbe física entre Home, menu e Tarot Livre, com altar e gesto
+   preparados antes da chegada. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
 import { createNavigation } from './navigation.js?v=535-fluid-navigation';
 import { orbMotionV207 } from './orb-motion-core-v207.js?v=207';
-import { RealityOrbEngine } from './orb-engine-v208.js?v=535-fluid-navigation';
-import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=551-claim-stack';
-import { createOrbPersistentJourneyV565 } from './orb-persistent-journey-v565.js?v=565-work11';
+import { RealityOrbEngine } from './orb-engine-v208.js?v=576-foundation';
+import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=576-foundation';
+import { createOrbPersistentJourneyV565 } from './orb-persistent-journey-v565.js?v=576-foundation';
 import { createOrbUniversalPresenceV526 } from './orb-universal-presence-v526.js?v=550-single-physics';
 import { installRealityLifecycleV511 } from './reality-lifecycle-v511.js?v=511';
 import { createLivingUniverseV524 } from './living-universe-core-v524.js?v=537-no-fire';
@@ -18,7 +18,7 @@ import { AccountEngineV201 } from './account-engine-v201.js?v=556-journal-consen
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=558-consultations-supreme';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=562-qa-supreme';
+import { createPageLoader } from './page-loader-v1.js?v=576-foundation';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -83,7 +83,7 @@ const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
     document.documentElement.dataset.orbMenuSupremeError = 'v327';
   });
 
-const startOrbitalMenuV502 = () => import('./orbital-menu-v502.js?v=551-ios-motion')
+const startOrbitalMenuV502 = () => import('./orbital-menu-v502.js?v=576-foundation')
   .then(module => module.installOrbitalMenuV502?.({ core:supremeOrb, go }))
   .catch(error => {
     console.error('[Divina] Menu Orbital Vivo V502 não iniciou', error);
@@ -342,7 +342,7 @@ supremeOrb = safely('Núcleo da Orbe Suprema V501', () => createSupremeOrbCoreV5
   loading:loadingPortal
 }));
 
-const orbIOSJourney = safely('WORK11 · Motor Global Persistente da Orbe V565', () =>
+const orbIOSJourney = safely('Orbe Suprema 2.0 · Base V576', () =>
   createOrbPersistentJourneyV565({ core:supremeOrb, universe:livingUniverse })
 );
 supremeOrb?.setJourneyEngine?.(orbIOSJourney);
@@ -529,14 +529,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v565-app';
+  window.__divinaSWBootstrap = 'v576-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=565', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=576', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v565';
+        document.documentElement.dataset.releaseEpoch = 'v576';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V565 registrado');
+        console.info('[Divina] PWA V576 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });

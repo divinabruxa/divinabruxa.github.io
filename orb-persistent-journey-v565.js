@@ -1,14 +1,11 @@
-/* DIVINA BRUXA 4.0 — ORBE SUPREMA · MACROETAPA 6 · AUTORIDADE FÍSICA V575
-   Preserva o Átomo Único, a Física Apple, a Presença Viva, a Voz e a Magia Leve. Um único balão
-   acessível nasce da posição física da #orb, recolhe antes de qualquer viagem
-   e só fala depois do pouso. A mesma Orbe atravessa retorno do app, BFCache,
-   rotação e Visual Viewport sem cópias, teletransporte ou outro loop. No Tarot,
-   o altar que contém a #orb é a autoridade absoluta do gesto e da imagem.
+/* DIVINA BRUXA 4.0 — ORBE SUPREMA 2.0 · MACROETAPA 1 · BASE V576
+   Uma única #orb física sai do menu, atravessa a troca de rota e só repousa
+   no altar definitivo do Tarot Livre. Não há viajante, cópia ou pouso tardio.
 */
 
 import { worldForRouteV535 } from './world-truth-registry-v535.js?v=535';
 
-const VERSION = 575;
+const VERSION = 576;
 const INSTANCE = Symbol.for('divina.orb.persistent.journey.v565');
 const ROOT_ID = 'divinaOrbPersistentJourneyV565';
 const STYLE_ID = 'divinaOrbPersistentJourneyV565Styles';
@@ -124,6 +121,7 @@ function installStyles() {
     html[${FLIGHT_ATTR}="active"] .screen.active [data-orb-presence-v526="true"]{visibility:hidden!important}
     html[${FLIGHT_ATTR}="active"] .cosmos,html[${FLIGHT_ATTR}="active"] [class*="particles"],html[${FLIGHT_ATTR}="active"] [class*="embers"]{animation-play-state:paused!important}
     html[${FLIGHT_ATTR}="active"] .screen{animation-play-state:paused!important}
+    html[${FLIGHT_ATTR}="active"] body[data-screen="tarot"] .app-header .brand .mini-orb{opacity:0!important;visibility:hidden!important}
     html[data-orb-physical-authority="tarot"] body[data-screen="tarot"] .app-header .brand .mini-orb{opacity:0!important;visibility:hidden!important}
     [data-supreme-orb-host="active"]>[data-supreme-orb="living"]{width:100%!important;height:auto!important;max-width:100%!important;max-height:100%!important;margin:0!important;aspect-ratio:1!important}
     [data-orb-physical-landing="true"]{pointer-events:none!important;background:transparent!important;box-shadow:none!important}
@@ -245,13 +243,13 @@ export class OrbPersistentJourneyV565 {
     this.voiceState = 'hidden';
     this.createPersistentLayer();
     this.bind();
-    document.documentElement.dataset.orbPersistentMotor = 'orbe-suprema-tarot-authority-v575';
+    document.documentElement.dataset.orbPersistentMotor = 'orbe-suprema-2-foundation-v576';
     document.documentElement.dataset.orbPhysics = 'critical-damped-v569';
     document.documentElement.dataset.orbPresenceEngine = 'event-driven-v570';
     document.documentElement.dataset.orbVoiceEngine = 'anchored-bubble-v571';
     document.documentElement.dataset.orbVoiceState = 'hidden';
     document.documentElement.dataset.orbMagicEngine = 'source-born-microlight-v573';
-    document.documentElement.dataset.orbContinuityEngine = 'tarot-physical-authority-v575';
+    document.documentElement.dataset.orbContinuityEngine = 'tarot-physical-authority-v576';
     if (!document.documentElement.dataset.orbMagicState) {
       document.documentElement.dataset.orbMagicState = 'pending';
     }
@@ -762,9 +760,10 @@ export class OrbPersistentJourneyV565 {
     return `translate3d(${(point.x-this.sourceSize/2).toFixed(2)}px,${(point.y-this.sourceSize/2).toFixed(2)}px,0) scale(${scale.toFixed(5)})`;
   }
 
-  capturePhysicalOrb(origin) {
+  capturePhysicalOrb(origin, { handoffClaim = false } = {}) {
     const orb = this.core?.orb;
     if (!orb) throw new Error('living-orb-unavailable');
+    const sourceClaim = this.core?.claimedHost || null;
     this.clearPhysicalAuthority();
     this.clearLandingAnchor();
     this.sourceSize = clamp(Math.max(origin.width,origin.height),58,Math.min(520,viewport().width*.94));
@@ -773,6 +772,13 @@ export class OrbPersistentJourneyV565 {
     this.root.style.setProperty('--db565-size',`${this.sourceSize}px`);
     this.stage.style.transform = this.transform(this.current,1);
     this.stage.append(orb);
+    if (handoffClaim && sourceClaim) {
+      const handedOff = this.core?.handoffClaimToJourney?.(this.stage);
+      if (handedOff && this.claimAuthorityTarget === handedOff) {
+        this.claimAuthorityTarget = null;
+        this.claimAuthorityRelease = null;
+      }
+    }
     this.root.hidden = false;
     copyVariables(orb,this.root);
     this.core.renderer?.resize?.();
@@ -803,10 +809,23 @@ export class OrbPersistentJourneyV565 {
     } else {
       const animation = this.stage.animate(keyframes,{duration:adaptiveDuration,easing:'linear',fill:'forwards'});
       this.animations.add(animation);
-      try { await animation.finished; } catch {}
-      this.animations.delete(animation);
-      this.stage.style.transform = this.transform(finish,finishScale);
-      try { animation.cancel(); } catch {}
+      let watchdog = 0;
+      try {
+        let finished;
+        try { finished = animation.finished; }
+        catch { finished = Promise.resolve(); }
+        await Promise.race([
+          Promise.resolve(finished).catch(() => null),
+          new Promise(resolve => {
+            watchdog = setTimeout(resolve, Math.max(220, adaptiveDuration + 240));
+          })
+        ]);
+      } finally {
+        clearTimeout(watchdog);
+        this.animations.delete(animation);
+        this.stage.style.transform = this.transform(finish,finishScale);
+        try { animation.cancel(); } catch {}
+      }
     }
     this.current = finish;
     this.scale = finishScale;
@@ -842,7 +861,7 @@ export class OrbPersistentJourneyV565 {
     const origin = menuOriginIsFresh ? this.pendingMenuOrigin : this.resolveOrigin();
     this.pendingMenuOrigin = null;
     this.pendingMenuOriginAt = 0;
-    this.capturePhysicalOrb(origin);
+    this.capturePhysicalOrb(origin,{handoffClaim:true});
     this.setState('depart',{from,to,serial:this.serial,source});
     await frame();
     this.suspendHeavyEffects();
@@ -858,13 +877,26 @@ export class OrbPersistentJourneyV565 {
   }
 
   async waitForDestination(route) {
+    const requestedRoute = String(route || this.route).replace(/^#/,'').toLowerCase();
     const deadline = performance.now()+budgets().wait;
     let destination = null;
     do {
-      destination = this.resolveDestination(route);
-      if (destination?.node || performance.now()>=deadline) return destination;
+      if (requestedRoute === 'tarot') {
+        const tarot = globalThis.divinaTarotLivreV517;
+        const host = document.querySelector('#tarot.active [data-tarot-orb-host]');
+        const reserved = tarot?.readyForArrival?.() === true
+          && host === tarot.orbHost
+          && this.core?.claimedHost === host;
+        const altar = reserved ? rectOf(host) : null;
+        if (altar) return { ...altar, kind:'tarot-owned-host' };
+      } else {
+        destination = this.resolveDestination(requestedRoute);
+      }
+      if (destination?.node) return destination;
+      if (performance.now()>=deadline) break;
       await frame();
     } while (performance.now()<deadline);
+    if (requestedRoute === 'tarot') throw new Error('tarot-owned-host-unavailable-v576');
     return destination || this.centerFallback();
   }
 
@@ -986,6 +1018,11 @@ export class OrbPersistentJourneyV565 {
       this.landingHost = host;
       this.setPhysicalAuthority(host,this.route);
       this.core.renderer?.resize?.();
+      emit('divina:orb-physical-claim-settled',{
+        route:this.route,
+        host:host.id||null,
+        authority:'single-physical-orb-v576'
+      });
       return true;
     }
     this.clearPhysicalAuthority();
@@ -1145,7 +1182,7 @@ export class OrbPersistentJourneyV565 {
     copyVariables(orb,this.root);
     copyVariables(orb,this.voice);
     this.core?.renderer?.resize?.();
-    this.core?.renderer?.resume?.('tarot-physical-authority-v575');
+    this.core?.renderer?.resume?.('tarot-physical-authority-v576');
     this.positionVoice();
     if (recovered) this.continuityRecoveries += 1;
     const connected = Boolean(orb.isConnected && this.root?.isConnected && this.voice?.isConnected);
@@ -1199,7 +1236,7 @@ export class OrbPersistentJourneyV565 {
   }
 
   status() {
-    return Object.freeze({ version:VERSION, engine:'OrbPersistentJourneyV565IPhoneContinuity', work:'ORBE-SUPREMA-MACROETAPA-6',
+    return Object.freeze({ version:VERSION, engine:'OrbPersistentJourneyV576Foundation', work:'ORBE-SUPREMA-2-MACROETAPA-1',
       active:this.active, state:this.state, route:this.route, persistentLayer:Boolean(this.root?.isConnected), layerCreations:1,
       perRouteRecreation:false, oneLivingOrb:true, physicalOrbTransport:true, physicalOrbConnected:Boolean(this.core?.orb?.isConnected),
       travelerCopies:0, snapshotCadence:'none', handoffFade:false, teleportFallback:false, permanentAnimationLoops:0,
@@ -1217,7 +1254,7 @@ export class OrbPersistentJourneyV565 {
       magicInsideLivingRenderer:true, magicDuringFlight:false, magicSourcePixelsOnly:true,
       magicPerformanceGate:true, magicReducedMotionOff:true,
       additionalParticleNodes:0, additionalCanvasNodes:0,
-      continuityModel:'iphone-pwa-v575-tarot-authority', bfcacheAware:true, freezeResumeAware:true,
+      continuityModel:'iphone-pwa-v576-tarot-foundation', bfcacheAware:true, freezeResumeAware:true,
       visualViewportAware:true, visualViewportScrollTracking:true, visualViewportSettledPass:true,
       historyRecoveryAware:true,
       physicalAuthorityRoute:document.documentElement.dataset.orbPhysicalAuthority || null,
@@ -1271,7 +1308,10 @@ export class OrbPersistentJourneyV565 {
 }
 
 export function createOrbPersistentJourneyV565(options = {}) {
-  if (globalThis[INSTANCE]) return globalThis[INSTANCE];
+  const existing = globalThis[INSTANCE];
+  if (existing?.version === VERSION && !existing.destroyed) return existing;
+  existing?.destroy?.();
+  delete globalThis[INSTANCE];
   const engine = new OrbPersistentJourneyV565(options);
   globalThis[INSTANCE] = engine;
   return engine;

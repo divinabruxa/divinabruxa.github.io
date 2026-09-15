@@ -1,8 +1,7 @@
-/* DIVINA BRUXA 4.0 — MACROETAPA 5/14 · TAROT LIVRE SUPREMO · V553
+/* DIVINA BRUXA 4.0 — ORBE SUPREMA 2.0 · MACROETAPA 1 · BASE V576
    Preserva o Universo V524 e a única Orbe Suprema V501. O motor de fogo foi
-   removido por decisão da proprietária: a Orbe e as cartas respondem primeiro.
-   Esta camada calibra as proporções, cria navegação tátil contínua e envia a
-   sequência real do Tarot Livre para a Mesa Real sem repetir cartas. */
+   removido: a Orbe e as cartas respondem primeiro. O altar agora reserva a
+   autoridade antes da chegada e só aceita revelação com posse física real. */
 
 import { CARDS } from './tarot-data.js';
 import { cardAtlasStyle, cardImageMarkup, preloadCardImages } from './tarot-image-runtime.js?v=538';
@@ -24,6 +23,7 @@ const BIRTH_TRAVEL_MS = 280;
 const BIRTH_TRAVEL_CONSTRAINED_MS = 190;
 const HISTORY_TRANSITION_MS = 160;
 const RESPONSE_BUDGET_MS = 80;
+const FOUNDATION_RELEASE = 576;
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 const reducedMotion = () => globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
@@ -54,6 +54,23 @@ function nativePulse(style = 'Light') {
   } catch {
     // Haptics are app-only and always optional.
   }
+}
+
+async function settleAnimationsV576(animations, duration) {
+  const list = animations.filter(animation => animation?.finished);
+  if (!list.length) return 'empty';
+  let watchdog = 0;
+  const result = await Promise.race([
+    Promise.allSettled(list.map(animation => animation.finished)).then(() => 'finished'),
+    new Promise(resolve => {
+      watchdog = setTimeout(() => resolve('watchdog'), Math.max(180, Number(duration || 0) + 240));
+    })
+  ]);
+  clearTimeout(watchdog);
+  if (result === 'watchdog') {
+    list.forEach(animation => { try { animation.finish(); } catch {} });
+  }
+  return result;
 }
 
 function roundedRect(context, x, y, width, height, radius) {
@@ -206,6 +223,8 @@ export class TarotLivreOrbOSV517 {
     this.cardRenderToken = 0;
     this.claimRelease = null;
     this.active = false;
+    this.destroyed = false;
+    this.foundationRelease = FOUNDATION_RELEASE;
     this.universePausedByBirth = false;
 
     this.root.innerHTML = '';
@@ -254,8 +273,10 @@ export class TarotLivreOrbOSV517 {
     this.preloadWaiting();
 
     document.documentElement.dataset.tarotLivre = 'v553';
+    document.documentElement.dataset.tarotFoundation = 'v576';
     const readiness = Object.freeze({
       version: VERSION,
+      foundationRelease: FOUNDATION_RELEASE,
       engine: 'TarotFluencyBridgeV553',
       renderer: this.fluidity.mode,
       canonicalOrb: 'v501',
@@ -509,6 +530,11 @@ export class TarotLivreOrbOSV517 {
       this.fluidity?.absorb(Number(event.detail?.intensity || 0.5));
     }, options);
 
+    document.addEventListener('divina:orb-physical-claim-settled', event => {
+      if (String(event.detail?.route || '') !== 'tarot') return;
+      this.syncOrbAuthority('physical-settle');
+    }, options);
+
     document.addEventListener('divina:route-ready', event => {
       const route = String(event.detail?.id || routeNow()).replace(/^#/, '').toLowerCase();
       if (route === 'tarot') this.enter();
@@ -587,7 +613,9 @@ export class TarotLivreOrbOSV517 {
   }
 
   enter() {
-    if (this.active && this.orbHost.contains(this.orb)) {
+    if (this.destroyed) return false;
+    if (this.active && this.orbCore.claimedHost === this.orbHost) {
+      this.syncOrbAuthority('claim-reused');
       this.fluidity?.setActive(true);
       return true;
     }
@@ -597,20 +625,47 @@ export class TarotLivreOrbOSV517 {
         mode: 'tarot',
         ariaLabel: 'Orbe das Realidades. Toque para revelar uma carta.'
       });
+      if (this.orbCore.claimedHost !== this.orbHost) {
+        throw new Error('O altar não recebeu a autoridade da Orbe.');
+      }
     } catch (error) {
       this.active = false;
       console.error('[Divina] A Orbe não alcançou o altar do Tarot.', error);
       return false;
     }
-    this.world.dataset.orbClaimed = 'true';
-    this.orb.dataset.tarotReveal = 'v553';
+    this.syncOrbAuthority('claim-reserved');
+    this.orb.dataset.tarotReveal = 'v576';
     this.orb.setAttribute('aria-disabled', String(this.busy || this.state.completed));
     this.fluidity?.setActive(true);
     requestAnimationFrame(() => {
       this.fluidity?.resize();
       this.orbCore.pulse?.('tarot-arrival', { intensity: 0.72 });
     });
+    document.dispatchEvent(new CustomEvent('divina:tarot-orb-ready', {
+      detail:Object.freeze({
+        version:FOUNDATION_RELEASE,
+        route:'tarot',
+        reserved:true,
+        physical:this.orbHost.contains(this.orb)
+      })
+    }));
     return true;
+  }
+
+  readyForArrival() {
+    return !this.destroyed
+      && this.active
+      && this.root?.isConnected
+      && this.orbHost?.isConnected
+      && this.orbCore.claimedHost === this.orbHost;
+  }
+
+  syncOrbAuthority(reason = 'sync') {
+    const physical = Boolean(this.orbHost?.contains?.(this.orb));
+    const reserved = this.orbCore.claimedHost === this.orbHost;
+    this.world.dataset.orbClaimed = physical ? 'true' : reserved ? 'reserved' : 'false';
+    this.world.dataset.orbAuthorityReason = reason;
+    return physical;
   }
 
   leave(nextRoute = 'home') {
@@ -623,16 +678,20 @@ export class TarotLivreOrbOSV517 {
     this.fluidity?.setActive(false);
     delete this.orb.dataset.tarotReveal;
     this.orb.removeAttribute('aria-disabled');
-    if (!this.orbHost.contains(this.orb)) return false;
-    try {
-      this.claimRelease?.();
-    } catch {
-      this.orbCore.returnHome?.();
+    const physicallyOwned = this.orbHost.contains(this.orb);
+    const logicallyOwned = this.orbCore.claimedHost === this.orbHost;
+    if (logicallyOwned) {
+      try {
+        this.claimRelease?.();
+      } catch {
+        if (physicallyOwned) this.orbCore.returnHome?.();
+      }
     }
     this.claimRelease = null;
     delete this.world.dataset.orbClaimed;
+    delete this.world.dataset.orbAuthorityReason;
     this.orbCore.settleRoute?.(nextRoute, 'tarot-leave-v517');
-    return true;
+    return physicallyOwned || logicallyOwned;
   }
 
   setPhase(phase) {
@@ -741,7 +800,9 @@ export class TarotLivreOrbOSV517 {
       { opacity:0, transform:'scale(.985)' }
     ], { duration, easing:'cubic-bezier(.22,.82,.24,1)', fill:'both' });
 
-    await Promise.allSettled([journey.finished, unveiling.finished]);
+    await settleAnimationsV576([journey, unveiling], duration);
+    try { journey.cancel(); } catch {}
+    try { unveiling.cancel(); } catch {}
     veil.remove();
     this.card.dataset.imageState = 'progressive';
     delete this.world.dataset.birthTransit;
@@ -894,7 +955,10 @@ export class TarotLivreOrbOSV517 {
           easing:'cubic-bezier(.32,0,.44,1)',
           fill:'both'
         });
-        await Promise.allSettled([incoming.finished, leaving?.finished]);
+        await settleAnimationsV576(
+          [incoming, leaving],
+          constrained() ? 120 : HISTORY_TRANSITION_MS
+        );
       }
       this.fluidity?.absorb(0.22);
       return true;
@@ -1097,6 +1161,7 @@ export class TarotLivreOrbOSV517 {
   status() {
     return Object.freeze({
       version: VERSION,
+      foundationRelease: FOUNDATION_RELEASE,
       active: this.active,
       renderer: this.fluidity?.mode || 'pending',
       canonicalOrb: this.orb?.dataset?.supremeOrbVersion || '501',
@@ -1153,6 +1218,8 @@ export class TarotLivreOrbOSV517 {
   }
 
   destroy() {
+    if (this.destroyed) return;
+    this.destroyed = true;
     this.leave(routeNow());
     this.resumeUniverseAfterCardFlight();
     this.abort.abort();
@@ -1162,5 +1229,6 @@ export class TarotLivreOrbOSV517 {
     this.fluidity?.destroy();
     if (globalThis.divinaTarotLivreV517 === this) delete globalThis.divinaTarotLivreV517;
     delete document.documentElement.dataset.tarotLivre;
+    delete document.documentElement.dataset.tarotFoundation;
   }
 }

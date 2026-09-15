@@ -1,0 +1,46 @@
+{
+  "release": "V576",
+  "project": "Divina Bruxa 4.0",
+  "work": "Orbe Suprema 2.0",
+  "macroStage": 1,
+  "scope": "Home -> menu -> Tarot Livre -> revelar uma carta",
+  "incremental": true,
+  "flat": true,
+  "newEffects": false,
+  "newRoutes": false,
+  "contentChanged": false,
+  "replacements": [
+    "app-v208.js",
+    "index.html",
+    "orb-persistent-journey-v565.js",
+    "orbital-menu-v502.js",
+    "page-loader-v1.js",
+    "supreme-orb-core-v501.js",
+    "sw.js",
+    "tarot-livre-orbe-os-v517.js"
+  ],
+  "newFiles": [
+    "00-INSTALE-V576-ORBE-SUPREMA-2-MACROETAPA-1.txt",
+    "DIAGNOSTICO-V576-ORBE-SUPREMA-2-MACROETAPA-1.md",
+    "HASHES-SHA256-V576.txt",
+    "MANIFESTO-V576-ORBE-SUPREMA-2-MACROETAPA-1.json",
+    "QA-RESULTADO-V576-ORBE-SUPREMA-2.json",
+    "qa-v576-orbe-suprema2-base.mjs"
+  ],
+  "files": [
+    "00-INSTALE-V576-ORBE-SUPREMA-2-MACROETAPA-1.txt",
+    "DIAGNOSTICO-V576-ORBE-SUPREMA-2-MACROETAPA-1.md",
+    "HASHES-SHA256-V576.txt",
+    "MANIFESTO-V576-ORBE-SUPREMA-2-MACROETAPA-1.json",
+    "QA-RESULTADO-V576-ORBE-SUPREMA-2.json",
+    "app-v208.js",
+    "index.html",
+    "orb-persistent-journey-v565.js",
+    "orbital-menu-v502.js",
+    "page-loader-v1.js",
+    "qa-v576-orbe-suprema2-base.mjs",
+    "supreme-orb-core-v501.js",
+    "sw.js",
+    "tarot-livre-orbe-os-v517.js"
+  ]
+}

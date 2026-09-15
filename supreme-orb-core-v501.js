@@ -133,6 +133,7 @@ export class SupremeOrbCoreV501 {
     this.projectionLastPaint = 0;
     this.destroyed = false;
     this.claimedHost = null;
+    this.journeyClaimHandoffs = 0;
     this.journeyEngine = null;
 
     installStyles();
@@ -650,6 +651,21 @@ export class SupremeOrbCoreV501 {
     };
   }
 
+  handoffClaimToJourney(stage) {
+    const target = this.claimedHost;
+    if (!target || !this.orb || !stage?.contains?.(this.orb)) return null;
+    delete target.dataset.supremeOrbHost;
+    this.claimedHost = null;
+    this.orb.classList.add('db-supreme-orb--traveling');
+    this.journeyClaimHandoffs += 1;
+    emit('divina:supreme-orb-claim-handed-off', {
+      host:target.id || null,
+      route:this.route,
+      handoffs:this.journeyClaimHandoffs
+    });
+    return target;
+  }
+
   returnHome() {
     if (!this.orb) return false;
     if (this.homeMarker?.parentNode) {
@@ -693,6 +709,7 @@ export class SupremeOrbCoreV501 {
       navigationActive:this.navigationActive,
       navigationAuthority:'v535-single-flight',
       coalescedNavigations:this.coalescedNavigations,
+      journeyClaimHandoffs:this.journeyClaimHandoffs,
       renderer,
       motion,
       journey,

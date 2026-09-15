@@ -1,0 +1,37 @@
+DIVINA BRUXA 4.0
+ORBE SUPREMA 2.0 — MACROETAPA 1 — BASE V576
+
+OBJETIVO ÚNICO
+Corrigir Home -> menu orbital -> Tarot Livre -> revelar uma carta.
+Este pacote não adiciona efeitos, páginas, conteúdo ou regras de Tarot.
+
+INSTALAÇÃO
+1. Faça uma cópia de segurança da raiz publicada atual.
+2. Extraia este ZIP diretamente na raiz do site.
+3. Substitua somente os oito arquivos listados em "replacements" no manifesto.
+4. Adicione os arquivos novos de diagnóstico e QA.
+5. Não apague nem renomeie nenhum outro arquivo da instalação.
+6. Aguarde a ativação do Service Worker V576. No iPhone, feche e reabra o app
+   instalado uma vez se a versão anterior ainda estiver visível.
+
+PRIMEIRO TESTE OBRIGATÓRIO — NÃO AVANÇAR ANTES DE APROVAR
+1. Abra a Home no iPhone em modo retrato.
+2. Confirme uma única Orbe principal no centro.
+3. Abra o menu e confirme que a mesma Orbe ocupa o centro do menu.
+4. Toque uma vez em "Tarot Livre".
+5. Observe a viagem inteira: sem retorno instantâneo à Home, sem cópia, sem
+   salto e sem uma segunda Orbe aparecendo no Tarot.
+6. Confirme a Orbe perfeitamente centralizada no altar do Tarot Livre.
+7. Depois do pouso, toque uma vez na Orbe.
+8. Resultado obrigatório: uma carta visível, contador 1/78, 77 aguardando e
+   uma miniatura no histórico.
+
+GATE
+Se qualquer item acima falhar, não avance para outra macroetapa. Preserve esta
+versão e registre a tela desde a Home até o primeiro toque no Tarot.
+
+QA LOCAL
+node qa-v576-orbe-suprema2-base.mjs .
+
+Resultado esperado: PASS, 76 aprovadas, 0 falhas.
+

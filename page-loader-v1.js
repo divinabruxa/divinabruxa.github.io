@@ -1,5 +1,6 @@
-/* DIVINA BRUXA 4.0 — CARREGAMENTO V562 · QA SUPREMO
-   Preserva V561, mantém mundos lazy e elimina seleção posicional frágil de módulos. */
+/* DIVINA BRUXA 4.0 — ORBE SUPREMA 2.0 · MACROETAPA 1 · V576
+   O Tarot Livre é construído antes do commit da rota. Assim a única Orbe
+   física encontra o altar definitivo durante a chegada, nunca depois dela. */
 
 import {
   normalizeRouteId,
@@ -13,6 +14,7 @@ const pageTasks = new Map();
 const sharedTasks = new Map();
 const LOAD_TIMEOUT_MS = 15000;
 export const NAVIGATION_PREPARE_BUDGET_MS_V535 = 48;
+const ARRIVAL_CRITICAL_ROUTES_V576 = new Set(['tarot']);
 const PORTAL_STYLES_ID = 'divinaPortalStylesV180';
 const PORTAL_STYLES_HREF = 'divina-core-v179.css?v=179';
 let loadingSequence = 0;
@@ -157,6 +159,12 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
 
   const loaders=Object.freeze({
     tarot: async()=>{
+      const current=globalThis.divinaTarotLivreV517;
+      if(current?.foundationRelease===576&&current.root===$('#tarot')&&!current.destroyed){
+        return current;
+      }
+      current?.destroy?.();
+      delete globalThis.divinaTarotLivreV517;
       // Retira somente estilos antigos. Os arquivos V500 permanecem seguros e inertes.
       globalThis.divinaFreeTarotV345?.destroy?.();
       delete globalThis.divinaFreeTarotV345;
@@ -206,7 +214,7 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       const module=await loadModuleAfterStylesV562([
         ensureStyle('divinaTarotLivreOrbOSV517','tarot-livre-orbe-os-v517.css?v=538-fluid'),
         ensureStyle('divinaTarotFreeSupremeV553','tarot-free-supreme-v553.css?v=553')
-      ],import('./tarot-livre-orbe-os-v517.js?v=553-supreme'));
+      ],import('./tarot-livre-orbe-os-v517.js?v=576-foundation'));
       const instance=new module.TarotLivreOrbOSV517($('#tarot'),{
         orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme
       });
@@ -339,7 +347,7 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     tarot:()=>Promise.all([
       ensureStyle('divinaTarotLivreOrbOSV517','tarot-livre-orbe-os-v517.css?v=538-fluid'),
       ensureStyle('divinaTarotFreeSupremeV553','tarot-free-supreme-v553.css?v=553'),
-      import('./tarot-livre-orbe-os-v517.js?v=553-supreme')
+      import('./tarot-livre-orbe-os-v517.js?v=576-foundation')
     ]),
     daily:()=>Promise.all([
       ensureStyle('divinaDailyLivingV509','daily-world-v509.css?v=554'),
@@ -438,6 +446,12 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     if(!routeHasModule(id)) return Promise.resolve(null);
     const loader=loaders[id];
     if(!loader) return Promise.reject(new Error(`Motor ausente para ${id}`));
+    if(id==='tarot'&&pageTasks.has(id)){
+      const current=globalThis.divinaTarotLivreV517;
+      if(current?.foundationRelease!==576||current.destroyed||current.root!==$('#tarot')){
+        pageTasks.delete(id);
+      }
+    }
 
     return once(pageTasks,id,async()=>{
       const screen=document.getElementById(id);
@@ -487,14 +501,26 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     const id=normalizeRouteId(rawId);
     if(!routeHasModule(id))return Promise.resolve({id,state:'static'});
     const screen=document.getElementById(id);
-    if(screen?.getAttribute('data-module-state')==='ready'){
+    if(screen?.getAttribute('data-module-state')==='ready'&&(
+      id!=='tarot'||globalThis.divinaTarotLivreV517?.foundationRelease===576
+    )){
       return Promise.resolve({id,state:'ready'});
+    }
+    // A chegada da Orbe ao Tarot não admite alvo provisório. O mundo e o
+    // listener de revelação precisam existir antes de a rota ficar visível.
+    if(ARRIVAL_CRITICAL_ROUTES_V576.has(id)){
+      return load(id).then(instance=>({
+        id,
+        state:'ready-for-arrival',
+        deferred:false,
+        instance
+      }));
     }
     const budget=document.documentElement.dataset.performanceTier==='constrained'
       ? 24
       : NAVIGATION_PREPARE_BUDGET_MS_V535;
-    // Somente import/CSS entram no orçamento da viagem. A construção do mundo
-    // ocorre depois do pouso, para não bloquear o quadro de chegada da Orbe.
+    // Nos mundos não críticos, somente import/CSS entram no orçamento da
+    // viagem. O Tarot foi resolvido acima e já possui altar antes do commit.
     const settled=prime(id).then(
       ()=>({id,state:'primed',deferred:true}),
       error=>({id,state:'prime-error',error,deferred:true})

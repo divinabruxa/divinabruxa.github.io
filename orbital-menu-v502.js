@@ -1,6 +1,6 @@
-/* DIVINA BRUXA 4.0 — MENU ORBITAL V502 · CONTINUIDADE iOS V551
+/* DIVINA BRUXA 4.0 — ORBE SUPREMA 2.0 · MENU ORBITAL · BASE V576
    A Orbe Suprema V501 é o único corpo vivo. Este menu a recebe fisicamente,
-   organiza treze realidades em duas órbitas e preserva uma viagem contínua.
+   organiza treze realidades e entrega o mesmo corpo ao motor de viagem.
 */
 
 const VERSION = 502;
@@ -341,7 +341,7 @@ export class OrbitalMenuV502 {
     return true;
   }
 
-  async close({ restoreFocus = false, reason = 'close', immediate = false } = {}) {
+  async close({ restoreFocus = false, reason = 'close', immediate = false, preserveClaim = false } = {}) {
     if (!this.targetOpen && this.state === 'closed') return false;
     this.targetOpen = false;
     const token = ++this.motionToken;
@@ -352,9 +352,11 @@ export class OrbitalMenuV502 {
     await wait(immediate ? 0 : reducedMotion() ? 24 : CLOSE_MS);
     if (token !== this.motionToken || this.targetOpen) return false;
 
-    try { this.releaseOrb?.(); }
-    catch { this.core.returnHome?.(); }
-    this.releaseOrb = null;
+    if (!preserveClaim) {
+      try { this.releaseOrb?.(); }
+      catch { this.core.returnHome?.(); }
+      this.releaseOrb = null;
+    }
     this.host.classList.remove('has-living-orb');
     this.root.classList.remove('is-closing', 'is-departing', 'is-ios-settling');
     this.root.hidden = true;
@@ -392,9 +394,14 @@ export class OrbitalMenuV502 {
 
     const origin = { getBoundingClientRect:() => rect };
     if (!reducedMotion()) await frame();
-    // A Orbe volta ao pouso anterior antes da troca. O portal conserva a
-    // origem visual e a V551 não força uma passagem intermediária pela Home.
-    await this.close({ restoreFocus:false, reason:`route:${route}`, immediate:true });
+    // O fechamento visual começa no mesmo instante, mas a posse do corpo não
+    // volta à Home. A viagem captura a #orb do centro antes de o menu sumir.
+    const closing = this.close({
+      restoreFocus:false,
+      reason:`route:${route}`,
+      immediate:true,
+      preserveClaim:true
+    });
     const travel = Promise.resolve(this.core.navigate(route, {
       source:'orbital-menu-v502',
       target:origin
@@ -402,6 +409,7 @@ export class OrbitalMenuV502 {
       value => ({ ok:true, value }),
       error => ({ ok:false, error })
     );
+    await Promise.resolve(closing).catch(() => null);
     const outcome = await travel;
     try {
       if (!outcome.ok) throw outcome.error;
@@ -415,6 +423,10 @@ export class OrbitalMenuV502 {
         detail:'Este caminho não abriu agora. A Home foi preservada.'
       }));
     } finally {
+      // A autoridade anterior já foi entregue ao motor; esta liberação apenas
+      // invalida o recibo do menu e nunca move a Orbe assentada no Tarot.
+      try { this.releaseOrb?.(); } catch {}
+      this.releaseOrb = null;
       portal.classList.remove('is-chosen');
       portal.removeAttribute('aria-busy');
       this.navigating = false;
