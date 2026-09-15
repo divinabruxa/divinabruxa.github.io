@@ -1,15 +1,15 @@
-/* DIVINA BRUXA 4.0 — ORBE SUPREMA · CONTINUIDADE IPHONE/PWA · CACHE V574
+/* DIVINA BRUXA 4.0 — ORBE SUPREMA · AUTORIDADE FÍSICA DO TAROT · CACHE V575
    Cache seletivo e versionado. Nunca guarda Auth, respostas online da Whit, billing,
    Admin, consultas seguras ou outras respostas de autoridade. Lembretes V561 usam
    texto fixo e respeitam o silêncio de Brasília sem revelar cartas. */
 
-const VERSION=574;
+const VERSION=575;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v574-shell';
-const CONTENT_CACHE='divina-bruxa-v574-content';
-const IMAGE_CACHE='divina-bruxa-v574-images';
-const OFFLINE_CACHE='divina-bruxa-v574-offline-core';
-const PREMIUM_CACHE='divina-bruxa-v574-premium-static';
+const SHELL_CACHE='divina-bruxa-v575-shell';
+const CONTENT_CACHE='divina-bruxa-v575-content';
+const IMAGE_CACHE='divina-bruxa-v575-images';
+const OFFLINE_CACHE='divina-bruxa-v575-offline-core';
+const PREMIUM_CACHE='divina-bruxa-v575-premium-static';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE,PREMIUM_CACHE]);
 const NAVIGATION_TIMEOUT_MS=3500;
 const MAX_CONTENT_ENTRIES=180;
