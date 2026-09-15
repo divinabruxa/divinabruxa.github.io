@@ -20,7 +20,6 @@ export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoS
   const menuButton = document.querySelector('#menuBtn');
   const pathsButton = document.querySelector('#pathsBtn');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  const menuDelegated = () => /^v579(?:$|-)|^v502$/.test(String(html.dataset.menuAuthority || ''));
 
   let beforeEnter = typeof initialBeforeEnter === 'function' ? initialBeforeEnter : null;
   let routeRequest = null;
@@ -31,7 +30,7 @@ export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoS
 
   // V180 criou os atalhos sem alterar a geometria principal; V210 preserva isso byte a byte em intenção.
   const ensureMenuPortals = () => {
-    if (menuDelegated() || !orbMenu || orbMenu.querySelector('.home-menu-portals')) return;
+    if (!orbMenu || orbMenu.querySelector('.home-menu-portals')) return;
     const row = document.createElement('div');
     row.className = 'home-menu-portals';
     row.setAttribute('aria-label', 'Atalhos da Orbe');
@@ -81,7 +80,6 @@ export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoS
   let motionPromise = Promise.resolve({ state: MENU_STATE.CLOSED, cancelled: false });
 
   const publishMenuState = (next, reason = 'transition') => {
-    if (menuDelegated()) return;
     if (menuState === next) return;
     const previous = menuState;
     menuState = next;
@@ -101,7 +99,6 @@ export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoS
   });
 
   const setMenuControls = open => {
-    if (menuDelegated()) return;
     menuButton?.classList.toggle('is-open', open);
     menuButton?.setAttribute('aria-expanded', String(open));
     menuButton?.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
@@ -237,17 +234,12 @@ export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoS
     lastFocus = null;
     home?.classList.remove('orb-menu-open', 'orb-menu-transition', 'orb-menu-opening', 'orb-menu-closing');
     orbMenu?.setAttribute('aria-hidden', 'true');
-    if (menuDelegated()) {
-      menuState = MENU_STATE.CLOSED;
-      return;
-    }
     setMenuControls(false);
     publishMenuState(MENU_STATE.CLOSED, reason);
   };
 
   const transitionOrbMenu = async (open, { shouldRestore = false, navigating = false } = {}) => {
     if (!home || !orbMenu) return { state: MENU_STATE.CLOSED, cancelled: false };
-    if (menuDelegated()) return { state:MENU_STATE.CLOSED, cancelled:true, reason:'delegated-menu-authority' };
 
     if (open && menuState === MENU_STATE.NAVIGATING) {
       return { state: MENU_STATE.NAVIGATING, cancelled: true, reason: 'navigation-locked' };
@@ -374,18 +366,14 @@ export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoS
     })).catch(() => {});
   });
 
-  if (!menuDelegated()) {
-    menuButton?.setAttribute('aria-controls', 'orbMenu');
-    setMenuControls(false);
-  }
+  menuButton?.setAttribute('aria-controls', 'orbMenu');
+  setMenuControls(false);
   menuButton?.addEventListener('click', event => {
-    if (menuDelegated()) return;
     event.preventDefault();
     toggleOrbMenu().catch(() => {});
   });
 
   document.addEventListener('keydown', event => {
-    if (menuDelegated()) return;
     if (event.key === 'Escape' && menuState !== MENU_STATE.CLOSED && menuState !== MENU_STATE.NAVIGATING) {
       event.preventDefault();
       closeOrbMenu(true).catch(() => {});
@@ -405,7 +393,6 @@ export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoS
   addEventListener('hashchange', syncFromLocation);
 
   reducedMotion.addEventListener?.('change', () => {
-    if (menuDelegated()) return;
     if (home?.classList.contains('orb-menu-transition')) finishMotion(motionToken, { navigating: menuState === MENU_STATE.NAVIGATING });
   });
 

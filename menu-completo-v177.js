@@ -62,9 +62,7 @@ const installEditorialLinks = () => {
 const installV211 = () => {
   installCompleteMenu();
   installEditorialLinks();
-  if (document.documentElement.dataset.menuAuthority !== 'v579') {
-    installMenuAccessibilityV211();
-  }
+  installMenuAccessibilityV211();
 };
 
 if (document.readyState === 'loading') {

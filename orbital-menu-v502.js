@@ -1,25 +1,15 @@
-/* DIVINA BRUXA 2.0 — ESSÊNCIA SUPREMA · MENU ORBITAL · V579
-   O desenho V502 permanece intacto. A V579 unifica somente a autoridade,
-   o estado, o foco e a reversão do movimento já aprovado.
+/* DIVINA BRUXA 4.0 — ORBE SUPREMA 2.0 · MENU ORBITAL · BASE V576
+   A Orbe Suprema V501 é o único corpo vivo. Este menu a recebe fisicamente,
+   organiza treze realidades e entrega o mesmo corpo ao motor de viagem.
 */
 
-const VERSION = 579;
-const AUTHORITY = 'v579';
-const INSTANCE = Symbol.for('divina.orbital.menu.v579');
+const VERSION = 502;
+const INSTANCE = Symbol.for('divina.orbital.menu.v502');
 const ROOT_ID = 'divinaOrbitalMenuV502';
 const STYLE_ID = 'divinaOrbitalMenuV502Styles';
 const STYLE_HREF = './orbital-menu-v502.css?v=551-ios-motion';
 const OPEN_MS = 300;
 const CLOSE_MS = 180;
-const MENU_STATE = Object.freeze({
-  CLOSED:'closed',
-  OPENING:'opening',
-  OPEN:'open',
-  REVERSING:'reversing',
-  CLOSING:'closing',
-  NAVIGATING:'navigating'
-});
-const MOVING_STATES = new Set([MENU_STATE.OPENING, MENU_STATE.REVERSING, MENU_STATE.CLOSING]);
 
 const INNER = Object.freeze([
   { route:'tarot', label:'Tarot Livre', icon:'tarot' },
@@ -59,12 +49,6 @@ const ICONS = Object.freeze({
 const wait = milliseconds => new Promise(resolve => setTimeout(resolve, Math.max(0, milliseconds)));
 const frame = () => new Promise(resolve => requestAnimationFrame(resolve));
 const reducedMotion = () => globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
-const safeFocus = node => {
-  if (!(node instanceof HTMLElement) || !node.isConnected) return false;
-  try { node.focus({ preventScroll:true }); }
-  catch { try { node.focus(); } catch { return false; } }
-  return document.activeElement === node;
-};
 
 function routeNow() {
   return String(
@@ -143,7 +127,6 @@ function nativePulse(style = 'Light') {
 
 function retireFormerMenus() {
   const globals = [
-    'divinaMenuV502',
     'divinaMenuV340','divinaMenuV339','divinaMenuV338','divinaMenuV337',
     'divinaMenuV336','divinaMenuV335','divinaMenuV334','divinaMenuV333',
     'divinaMenuV332','divinaMenuV329','divinaMenuA11yV327','divinaMenuA11yV211'
@@ -183,103 +166,23 @@ export class OrbitalMenuV502 {
     this.live = this.root.querySelector('.db502-menu__live');
     this.buttons = [...this.root.querySelectorAll('[data-v502-route]')];
     this.abort = new AbortController();
-    this.state = MENU_STATE.CLOSED;
+    this.state = 'closed';
     this.targetOpen = false;
     this.releaseOrb = null;
     this.lastFocus = null;
     this.motionToken = 0;
     this.navigating = false;
-    this.backgroundLocked = false;
-    this.backgroundSnapshots = [];
-    this.fallbackTabSnapshots = [];
-    this.supportsInert = typeof HTMLElement !== 'undefined' && 'inert' in HTMLElement.prototype;
 
-    document.documentElement.dataset.menuAuthority = AUTHORITY;
+    document.documentElement.dataset.menuAuthority = 'v502';
     this.menuButton.setAttribute('aria-controls', ROOT_ID);
     this.menuButton.setAttribute('aria-haspopup', 'dialog');
     this.legacy?.setAttribute('aria-hidden', 'true');
     if (this.legacy && 'inert' in this.legacy) this.legacy.inert = true;
-    this.setRootInteractive(false);
 
     this.bind();
     this.syncRoute(routeNow());
     this.setMenuButton(false);
-    this.publish(MENU_STATE.CLOSED, 'install');
-  }
-
-  isActive() {
-    return this.state !== MENU_STATE.CLOSED || this.targetOpen || this.navigating;
-  }
-
-  setRootInteractive(interactive) {
-    if (!this.root) return;
-    if (this.supportsInert) this.root.inert = !interactive;
-    if (interactive) this.root.removeAttribute('inert');
-    else this.root.setAttribute('inert', '');
-  }
-
-  lockBackground() {
-    if (this.backgroundLocked) return;
-    this.backgroundLocked = true;
-    const nodes = [
-      document.querySelector('#app'),
-      document.querySelector('.magic-dock'),
-      document.querySelector('.app-header .brand'),
-      document.querySelector('.v562-skip-link'),
-      document.querySelector('#drawer')
-    ].filter(node => node instanceof HTMLElement && node !== this.root && !this.root.contains(node));
-
-    this.backgroundSnapshots = nodes.map(node => ({
-      node,
-      ariaExisted:node.hasAttribute('aria-hidden'),
-      ariaValue:node.getAttribute('aria-hidden'),
-      inertExisted:node.hasAttribute('inert'),
-      inertValue:Boolean(node.inert)
-    }));
-
-    for (const node of nodes) {
-      node.setAttribute('aria-hidden', 'true');
-      if (this.supportsInert) {
-        node.inert = true;
-        node.setAttribute('inert', '');
-        continue;
-      }
-      const candidates = [node, ...node.querySelectorAll('button,a[href],input,select,textarea,[tabindex]')];
-      for (const candidate of candidates) {
-        if (!(candidate instanceof HTMLElement)) continue;
-        this.fallbackTabSnapshots.push({
-          node:candidate,
-          existed:candidate.hasAttribute('tabindex'),
-          value:candidate.getAttribute('tabindex')
-        });
-        candidate.setAttribute('tabindex', '-1');
-      }
-    }
-    document.documentElement.dataset.menuModal = AUTHORITY;
-  }
-
-  unlockBackground() {
-    if (!this.backgroundLocked) return;
-    this.backgroundLocked = false;
-    for (const snapshot of this.backgroundSnapshots) {
-      const { node } = snapshot;
-      if (!node?.isConnected) continue;
-      if (snapshot.ariaExisted) node.setAttribute('aria-hidden', snapshot.ariaValue ?? '');
-      else node.removeAttribute('aria-hidden');
-      if (this.supportsInert) {
-        node.inert = snapshot.inertValue;
-        if (snapshot.inertExisted) node.setAttribute('inert', '');
-        else node.removeAttribute('inert');
-      }
-    }
-    for (const snapshot of this.fallbackTabSnapshots) {
-      if (!snapshot.node?.isConnected) continue;
-      if (snapshot.existed) snapshot.node.setAttribute('tabindex', snapshot.value ?? '');
-      else snapshot.node.removeAttribute('tabindex');
-    }
-    this.backgroundSnapshots = [];
-    this.fallbackTabSnapshots = [];
-    delete document.documentElement.dataset.menuModal;
+    this.publish('closed', 'install');
   }
 
   bind() {
@@ -292,20 +195,13 @@ export class OrbitalMenuV502 {
       if (target.closest('#menuBtn, [data-menu-toggle], [data-open-menu]') === this.menuButton) {
         event.preventDefault();
         event.stopImmediatePropagation();
-        if (this.navigating) return;
         if (this.targetOpen) this.close({ restoreFocus:true, reason:'menu-button' });
         else this.open();
         return;
       }
 
-      if (this.isActive() && !this.root.contains(target)) {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        return;
-      }
-
       const dockOrb = target.closest('.magic-dock .dock-orb, .dock-orb');
-      if (!this.isActive() && dockOrb && dockOrb === this.dockOrb && !this.root.contains(dockOrb)) {
+      if (dockOrb && dockOrb === this.dockOrb && !this.root.contains(dockOrb)) {
         event.preventDefault();
         event.stopImmediatePropagation();
         this.core.pulse?.('portal', { intensity:0.78 });
@@ -318,7 +214,7 @@ export class OrbitalMenuV502 {
 
       const portal = target.closest('[data-v502-route]');
       if (portal) {
-        if (![MENU_STATE.OPENING, MENU_STATE.OPEN, MENU_STATE.REVERSING].includes(this.state)) return;
+        if (!['opening','open'].includes(this.state)) return;
         event.preventDefault();
         event.stopImmediatePropagation();
         this.activate(portal);
@@ -334,15 +230,8 @@ export class OrbitalMenuV502 {
     }, { capture:true, signal });
 
     document.addEventListener('pointerdown', event => {
-      const target = event.target instanceof Element ? event.target : null;
-      if (!target) return;
-      if (this.isActive() && !this.root.contains(target) && !this.menuButton.contains(target)) {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        return;
-      }
-      if (!this.targetOpen || !this.root.contains(target)) return;
-      const portal = target.closest('[data-v502-route]');
+      if (!this.targetOpen) return;
+      const portal = event.target?.closest?.('[data-v502-route]');
       if (!portal) return;
       portal.classList.add('is-touching');
       this.core.prime?.(portal.dataset.v502Route, { source:'menu-touch-v517', target:portal });
@@ -350,37 +239,36 @@ export class OrbitalMenuV502 {
       portal.addEventListener('pointerup', clear, { once:true });
       portal.addEventListener('pointercancel', clear, { once:true });
       setTimeout(clear, 520);
-    }, { capture:true, passive:false, signal });
+    }, { capture:true, passive:true, signal });
 
     document.addEventListener('focusin', event => {
       const portal = event.target?.closest?.('[data-v502-route]');
       if (this.targetOpen && portal) {
         this.core.prime?.(portal.dataset.v502Route, { source:'menu-focus-v502', target:portal });
       }
-      const target = event.target instanceof Node ? event.target : null;
-      if (!this.isActive() || !target || target === this.menuButton || this.menuButton.contains(target) || this.root.contains(target)) return;
-      queueMicrotask(() => safeFocus(this.targetOpen ? this.core.orb : this.menuButton));
     }, { signal });
 
     document.addEventListener('keydown', event => {
-      if (!this.isActive()) return;
-      if (event.key === 'Escape' && this.targetOpen && !this.navigating) {
+      if (!this.targetOpen) return;
+      if (event.key === 'Escape') {
         event.preventDefault();
         event.stopImmediatePropagation();
         this.close({ restoreFocus:true, reason:'escape' });
         return;
       }
       if (event.key !== 'Tab') return;
-      const focusable = [this.menuButton, this.core.orb, ...this.buttons]
-        .filter(node => node instanceof HTMLElement && node.isConnected && !node.hidden && !node.hasAttribute('disabled') && !node.closest('[inert]'));
+      const focusable = [this.menuButton, ...this.buttons, this.core.orb]
+        .filter(node => node instanceof HTMLElement && !node.hidden && !node.hasAttribute('disabled'));
       if (!focusable.length) return;
-      event.preventDefault();
-      const current = focusable.indexOf(document.activeElement);
-      const direction = event.shiftKey ? -1 : 1;
-      const next = current < 0
-        ? (event.shiftKey ? focusable.length - 1 : 0)
-        : (current + direction + focusable.length) % focusable.length;
-      safeFocus(focusable[next]);
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     }, { capture:true, signal });
 
     document.addEventListener('divina:route-ready', event => {
@@ -390,21 +278,9 @@ export class OrbitalMenuV502 {
       if (event.detail?.id) this.syncRoute(event.detail.id);
     }, { signal });
     document.addEventListener('divina:supreme-orb-will-navigate', () => {
-      if (this.isActive() && !this.navigating) {
-        this.navigating = true;
-        this.close({
-          restoreFocus:false,
-          reason:'orb-navigation',
-          preserveClaim:true,
-          navigating:true
-        });
+      if (this.targetOpen && !this.navigating) {
+        this.close({ restoreFocus:false, reason:'orb-navigation', immediate:true });
       }
-    }, { signal });
-    document.addEventListener('divina:supreme-orb-did-navigate', () => {
-      if (this.navigating) this.finishNavigation('orb-navigation-complete');
-    }, { signal });
-    document.addEventListener('divina:supreme-orb-navigation-error', () => {
-      if (this.navigating) this.finishNavigation('orb-navigation-error');
     }, { signal });
   }
 
@@ -424,69 +300,55 @@ export class OrbitalMenuV502 {
     this.root.dataset.state = state;
     document.documentElement.dataset.menuState = state;
     document.dispatchEvent(new CustomEvent('divina:menu-state', {
-      detail:Object.freeze({ version:VERSION, authority:AUTHORITY, previous, state, targetOpen:this.targetOpen, reason })
+      detail:Object.freeze({ version:VERSION, authority:'v502', previous, state, targetOpen:this.targetOpen, reason })
     }));
   }
 
   async open() {
-    if (this.navigating || this.targetOpen) return false;
-    const reversing = !this.targetOpen && MOVING_STATES.has(this.state);
+    if (this.targetOpen || this.state !== 'closed') return false;
     this.targetOpen = true;
     const token = ++this.motionToken;
-    if (!reversing) this.lastFocus = document.activeElement instanceof HTMLElement ? document.activeElement : this.menuButton;
+    this.lastFocus = document.activeElement instanceof HTMLElement ? document.activeElement : this.menuButton;
     this.setMenuButton(true);
-    this.publish(reversing ? MENU_STATE.REVERSING : MENU_STATE.OPENING, reversing ? 'reverse-open' : 'request-open');
+    this.publish('opening', 'request');
 
-    /* O quadro existente é preservado. Trocar o alvo durante o movimento
-       apenas inverte a transição CSS a partir da posição atual. */
+    /* A cortina cósmica responde já no primeiro quadro. A V551 preserva a
+       realidade atual e reclama temporariamente a mesma Orbe. */
     this.root.hidden = false;
     this.root.setAttribute('aria-hidden', 'false');
-    this.setRootInteractive(true);
-    this.root.classList.add('is-ios-settling');
     document.documentElement.classList.add('db502-menu-open');
     document.body?.classList.add('db502-menu-open');
-    this.lockBackground();
     await frame();
     if (token !== this.motionToken || !this.targetOpen) return false;
-    this.root.classList.remove('is-closing');
     this.root.classList.add('is-open');
+    this.root.classList.add('is-ios-settling');
 
-    if (!this.host.contains(this.core.orb)) {
-      this.releaseOrb = this.core.claim(this.host, {
-        mode:'menu',
-        ariaLabel:'Orbe das Realidades, centro do menu'
-      });
-    }
+    this.releaseOrb = this.core.claim(this.host, {
+      mode:'menu',
+      ariaLabel:'Orbe das Realidades, centro do menu'
+    });
     this.host.classList.add('has-living-orb');
     await frame();
     if (token !== this.motionToken || !this.targetOpen) return false;
-    if (!reversing) {
-      this.core.pulse?.('menu-open', { intensity:0.66 });
-      nativePulse('Light');
-    }
+    this.core.pulse?.('menu-open', { intensity:0.66 });
+    nativePulse('Light');
     await wait(reducedMotion() ? 30 : OPEN_MS);
     if (token !== this.motionToken || !this.targetOpen) return false;
-    this.publish(MENU_STATE.OPEN, reversing ? 'settled-reverse-open' : 'settled-open');
+    this.publish('open', 'settled');
     this.root.classList.remove('is-ios-settling');
     this.live.textContent = 'Menu aberto. Escolha uma realidade.';
-    safeFocus(this.core.orb);
+    try { this.core.orb?.focus?.({ preventScroll:true }); } catch {}
     return true;
   }
 
-  async close({ restoreFocus = false, reason = 'close', immediate = false, preserveClaim = false, navigating = false } = {}) {
-    if (!this.targetOpen && this.state === MENU_STATE.CLOSED) return false;
-    const reversing = this.targetOpen && MOVING_STATES.has(this.state);
+  async close({ restoreFocus = false, reason = 'close', immediate = false, preserveClaim = false } = {}) {
+    if (!this.targetOpen && this.state === 'closed') return false;
     this.targetOpen = false;
     const token = ++this.motionToken;
     this.setMenuButton(false);
-    this.publish(reversing ? MENU_STATE.REVERSING : MENU_STATE.CLOSING, reversing ? 'reverse-close' : reason);
-    this.setRootInteractive(false);
-    this.root.classList.remove('is-open');
-    this.root.classList.add('is-closing', 'is-ios-settling');
-    if (navigating) {
-      if (reversing) this.publish(MENU_STATE.CLOSING, 'navigation-close');
-      this.publish(MENU_STATE.NAVIGATING, reason);
-    }
+    this.publish('closing', reason);
+    this.root.classList.remove('is-open', 'is-ios-settling');
+    this.root.classList.add('is-closing');
     await wait(immediate ? 0 : reducedMotion() ? 24 : CLOSE_MS);
     if (token !== this.motionToken || this.targetOpen) return false;
 
@@ -502,43 +364,16 @@ export class OrbitalMenuV502 {
     delete this.root.dataset.destination;
     document.documentElement.classList.remove('db502-menu-open');
     document.body?.classList.remove('db502-menu-open');
-    if (!navigating) {
-      this.unlockBackground();
-      this.publish(MENU_STATE.CLOSED, reason);
+    this.publish('closed', reason);
+    this.live.textContent = '';
+    if (restoreFocus) {
+      try { (this.lastFocus?.isConnected ? this.lastFocus : this.menuButton).focus({ preventScroll:true }); } catch {}
     }
-    this.live.textContent = '';
-    if (restoreFocus && !navigating) safeFocus(this.lastFocus?.isConnected ? this.lastFocus : this.menuButton);
-    return true;
-  }
-
-  finishNavigation(reason = 'navigation-complete') {
-    this.motionToken += 1;
-    this.targetOpen = false;
-    try { this.releaseOrb?.(); } catch {}
-    this.releaseOrb = null;
-    this.host.classList.remove('has-living-orb');
-    this.root.classList.remove('is-open', 'is-closing', 'is-departing', 'is-ios-settling');
-    this.root.hidden = true;
-    this.root.setAttribute('aria-hidden', 'true');
-    this.setRootInteractive(false);
-    delete this.root.dataset.destination;
-    this.buttons.forEach(button => {
-      button.classList.remove('is-chosen', 'is-touching');
-      button.removeAttribute('aria-busy');
-    });
-    document.documentElement.classList.remove('db502-menu-open');
-    document.body?.classList.remove('db502-menu-open');
-    this.unlockBackground();
-    this.navigating = false;
-    this.setMenuButton(false);
-    this.live.textContent = '';
-    if (this.state !== MENU_STATE.CLOSED) this.publish(MENU_STATE.CLOSED, reason);
-    this.lastFocus = null;
     return true;
   }
 
   async activate(portal) {
-    if (this.navigating || !this.targetOpen || ![MENU_STATE.OPENING, MENU_STATE.OPEN, MENU_STATE.REVERSING].includes(this.state)) return;
+    if (this.navigating || !this.targetOpen) return;
     const route = portal.dataset.v502Route;
     const label = portal.querySelector('.db502-portal__label')?.textContent || 'realidade';
     this.navigating = true;
@@ -564,11 +399,9 @@ export class OrbitalMenuV502 {
     const closing = this.close({
       restoreFocus:false,
       reason:`route:${route}`,
-      preserveClaim:true,
-      navigating:true
+      immediate:true,
+      preserveClaim:true
     });
-    // A jornada V577 reconhece este identificador legado para capturar a
-    // mesma Orbe física; o motor visual não é trocado nesta macroetapa.
     const travel = Promise.resolve(this.core.navigate(route, {
       source:'orbital-menu-v502',
       target:origin
@@ -582,7 +415,7 @@ export class OrbitalMenuV502 {
       if (!outcome.ok) throw outcome.error;
       // returnHome() devolve o corpo físico ao berço. Reassentamos o modo na
       // realidade que terminou de abrir para preservar uma única consciência.
-      this.core.settleRoute?.(route, 'menu-route-complete-v579');
+      this.core.settleRoute?.(route, 'menu-route-complete-v502');
       this.syncRoute(route);
     } catch (error) {
       console.error(`[Divina] o portal ${route} não abriu`, error);
@@ -590,7 +423,13 @@ export class OrbitalMenuV502 {
         detail:'Este caminho não abriu agora. A Home foi preservada.'
       }));
     } finally {
-      this.finishNavigation(outcome.ok ? 'route-complete' : 'route-error');
+      // A autoridade anterior já foi entregue ao motor; esta liberação apenas
+      // invalida o recibo do menu e nunca move a Orbe assentada no Tarot.
+      try { this.releaseOrb?.(); } catch {}
+      this.releaseOrb = null;
+      portal.classList.remove('is-chosen');
+      portal.removeAttribute('aria-busy');
+      this.navigating = false;
     }
   }
 
@@ -619,11 +458,7 @@ export class OrbitalMenuV502 {
       extraApiCalls:0,
       webVibration:false,
       nativeHapticsOnly:true,
-      fluidityTuning:'v579-reversible-single-authority',
-      stateModel:Object.values(MENU_STATE),
-      reversibleFromCurrentFrame:true,
-      backgroundInert:this.backgroundLocked,
-      singleMenuAuthority:true,
+      fluidityTuning:'v551-ios-single-motion',
       opensOverCurrentRoute:true,
       duplicateCloseButton:false,
       livingUniverseBackdrop:true,
@@ -638,7 +473,6 @@ export class OrbitalMenuV502 {
     try { this.releaseOrb?.(); }
     catch { this.core?.returnHome?.(); }
     this.releaseOrb = null;
-    this.unlockBackground();
     this.host?.classList.remove('has-living-orb');
     this.root?.classList.remove('is-open', 'is-closing', 'is-departing', 'is-ios-settling');
     this.root?.remove();
@@ -649,7 +483,6 @@ export class OrbitalMenuV502 {
     delete document.documentElement.dataset.menuAuthority;
     delete document.documentElement.dataset.menuState;
     if (this.legacy && 'inert' in this.legacy) this.legacy.inert = false;
-    delete globalThis.divinaMenuV579;
     delete globalThis.divinaMenuV502;
     delete globalThis[INSTANCE];
   }
@@ -659,13 +492,12 @@ export function installMenuOrbitalV502(options = {}) {
   if (globalThis[INSTANCE]) return globalThis[INSTANCE];
   const instance = new OrbitalMenuV502(options);
   globalThis[INSTANCE] = instance;
-  globalThis.divinaMenuV579 = instance;
   globalThis.divinaMenuV502 = instance;
   document.dispatchEvent(new CustomEvent('divina:orbital-menu-ready', {
-    detail:Object.freeze({ version:VERSION, authority:AUTHORITY, portals:13, oneLivingOrb:true, v500LoaderActive:false })
+    detail:Object.freeze({ version:VERSION, portals:13, oneLivingOrb:true, v500LoaderActive:false })
   }));
   return instance;
 }
 
-// Nome preservado para o bootstrap; a autoridade interna publicada é V579.
+// Nome explícito usado pelo bootstrap V502.
 export const installOrbitalMenuV502 = installMenuOrbitalV502;
