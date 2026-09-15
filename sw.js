@@ -1,15 +1,15 @@
-/* DIVINA BRUXA 4.0 — ORBE SUPREMA · FÍSICA APPLE · CACHE V569
+/* DIVINA BRUXA 4.0 — ORBE SUPREMA · PRESENÇA VIVA · CACHE V570
    Cache seletivo e versionado. Nunca guarda Auth, respostas online da Whit, billing,
    Admin, consultas seguras ou outras respostas de autoridade. Lembretes V561 usam
    texto fixo e respeitam o silêncio de Brasília sem revelar cartas. */
 
-const VERSION=569;
+const VERSION=570;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v569-shell';
-const CONTENT_CACHE='divina-bruxa-v569-content';
-const IMAGE_CACHE='divina-bruxa-v569-images';
-const OFFLINE_CACHE='divina-bruxa-v569-offline-core';
-const PREMIUM_CACHE='divina-bruxa-v569-premium-static';
+const SHELL_CACHE='divina-bruxa-v570-shell';
+const CONTENT_CACHE='divina-bruxa-v570-content';
+const IMAGE_CACHE='divina-bruxa-v570-images';
+const OFFLINE_CACHE='divina-bruxa-v570-offline-core';
+const PREMIUM_CACHE='divina-bruxa-v570-premium-static';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE,PREMIUM_CACHE]);
 const NAVIGATION_TIMEOUT_MS=3500;
 const MAX_CONTENT_ENTRIES=180;

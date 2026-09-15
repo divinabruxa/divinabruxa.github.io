@@ -1,5 +1,5 @@
 /*
- * DIVINA BRUXA — WORK7.0 · ORBE 2.0 V208 · TOQUE ORGÂNICO · FLUIDEZ V535
+ * DIVINA BRUXA — ORBE 2.0 V208 · PRESENÇA VIVA V570 · FLUIDEZ V535
  *
  * A borda da esfera nunca se move. A vida acontece dentro dela:
  * respiração orgânica, matéria líquida, profundidade óptica, cáusticas,
@@ -20,9 +20,26 @@ const lerp = (from, to, amount) => from + (to - from) * amount;
 const follow = (rate, seconds) => 1 - Math.exp(-rate * seconds);
 const clock = () => performance.now();
 const PORTAL_COMMIT_DELAY_MS_V535 = 64;
-const navigationFrameRateV535 = () => {
-  if (document.documentElement.dataset.orbNavigationState !== 'active') return 0;
-  return document.documentElement.dataset.performanceTier === 'constrained' ? 24 : 30;
+export const ORB_PRESENCE_PROFILES_V570 = Object.freeze({
+  serene:Object.freeze({ energy:.16, breathFloor:.10, breathScale:1 }),
+  attentive:Object.freeze({ energy:.21, breathFloor:.12, breathScale:1.02 }),
+  listening:Object.freeze({ energy:.32, breathFloor:.16, breathScale:1.04 }),
+  responding:Object.freeze({ energy:.25, breathFloor:.14, breathScale:1.03 }),
+  traveling:Object.freeze({ energy:.18, breathFloor:.08, breathScale:.72 }),
+  sleeping:Object.freeze({ energy:.10, breathFloor:.06, breathScale:.42 })
+});
+const persistentPresenceEnabledV570 = () =>
+  document.documentElement.dataset.orbPresenceEngine === 'event-driven-v570';
+const hasPresenceProfileV570 = state =>
+  Object.prototype.hasOwnProperty.call(ORB_PRESENCE_PROFILES_V570, state);
+const navigationFrameRateV535 = presenceState => {
+  const constrainedDevice = document.documentElement.dataset.performanceTier === 'constrained';
+  if (document.documentElement.dataset.orbNavigationState === 'active') return constrainedDevice ? 24 : 30;
+  if (!persistentPresenceEnabledV570()) return 0;
+  if (presenceState === 'sleeping') return 15;
+  const route = String(document.body?.dataset?.screen || location.hash || 'home').replace(/^#/,'').toLowerCase();
+  if (route === 'home') return 0;
+  return constrainedDevice ? 24 : 30;
 };
 
 export const ORB_LIFE_STATES_V208 = Object.freeze({
@@ -234,6 +251,9 @@ export class RealityOrbEngine {
     this.destroyed = false;
     this.visible = true;
     this.routeActive = this.shell?.closest('.screen')?.classList.contains('active') !== false;
+    this.presenceState = hasPresenceProfileV570(document.documentElement.dataset.orbPresenceState)
+      ? document.documentElement.dataset.orbPresenceState
+      : 'serene';
     this.ready = false;
     this.contextLost = false;
     this.lifeState = ORB_LIFE_STATES_V208.BOOT;
@@ -261,8 +281,8 @@ export class RealityOrbEngine {
     this.pointer = { x: .5, y: .5, targetX: .5, targetY: .5, previousX: .5, previousY: .5 };
     this.velocity = { x: 0, y: 0 };
     this.ripple = { x: .5, y: .5, age: 99 };
-    this.energy = .16;
-    this.targetEnergy = .16;
+    this.energy = ORB_PRESENCE_PROFILES_V570[this.presenceState].energy;
+    this.targetEnergy = ORB_PRESENCE_PROFILES_V570[this.presenceState].energy;
     this.pressure = 0;
     this.targetPressure = 0;
     this.spin = 0;
@@ -277,10 +297,11 @@ export class RealityOrbEngine {
     this.imageSource = document.documentElement.dataset.orbImage || DEFAULT_ORB_IMAGE;
     this.onSkinImage = event => this.replaceTexture(event.detail?.src);
     document.addEventListener('divina:orb-image', this.onSkinImage);
+    if (this.shell) this.shell.dataset.orbPresenceState = this.presenceState;
     this.motionClient = orbMotionV207.register({
       id: 'main-orb',
       isActive: () => this.canRender(),
-      frameRate: reduced => reduced ? 15 : navigationFrameRateV535(),
+      frameRate: reduced => reduced ? 15 : navigationFrameRateV535(this.presenceState),
       onFrame: (time, seconds, elapsed) => this.draw(time, seconds, elapsed),
       onActivate: () => this.resume('surface'),
       onDeactivate: () => this.suspend('surface'),
@@ -296,6 +317,31 @@ export class RealityOrbEngine {
   canRender() {
     const connected = this.canvas.isConnected && (this.shell?.isConnected ?? true);
     return this.ready && !this.destroyed && !this.contextLost && connected && this.visible && this.routeActive && Boolean(this.gl);
+  }
+
+  presenceProfile() {
+    return ORB_PRESENCE_PROFILES_V570[this.presenceState] || ORB_PRESENCE_PROFILES_V570.serene;
+  }
+
+  setPresenceState(state, reason = 'event') {
+    if (!hasPresenceProfileV570(state)) return false;
+    this.presenceState = state;
+    if (this.shell) {
+      this.shell.dataset.orbPresenceState = state;
+      this.shell.dataset.orbPresenceReason = reason;
+    }
+    if (persistentPresenceEnabledV570()) this.routeActive = true;
+    const floor = this.presenceProfile().energy;
+    this.targetEnergy = state === 'sleeping' ? floor : Math.max(this.targetEnergy, floor);
+    if (state === 'sleeping') {
+      this.targetPressure = 0;
+      this.hovering = false;
+    }
+    if (!document.hidden && this.visible && this.lifeState === ORB_LIFE_STATES_V208.SUSPENDED) {
+      this.resume('presence');
+    }
+    this.requestFrame();
+    return true;
   }
 
   setLifeState(next) {
@@ -349,7 +395,7 @@ export class RealityOrbEngine {
     this.pointerId = null;
     this.keyboardActive = false;
     this.targetPressure = 0;
-    this.targetEnergy = .16;
+    this.targetEnergy = this.presenceProfile().energy;
     this.shell?.classList.remove('is-touching');
     try {
       if (pointerId != null && this.shell?.hasPointerCapture?.(pointerId)) this.shell.releasePointerCapture(pointerId);
@@ -519,12 +565,16 @@ export class RealityOrbEngine {
     this.onKeyUp = event => this.keyUp(event);
     this.onResize = () => this.resize();
     this.onRouteSettled = event => {
-      const next = String(event.detail?.id || document.body.dataset.screen || 'home') === 'home';
+      const routeIsHome = String(event.detail?.id || document.body.dataset.screen || 'home') === 'home';
+      const next = persistentPresenceEnabledV570() ? true : routeIsHome;
       if (next === this.routeActive) return;
       this.routeActive = next;
       if (next) this.resume('route');
       else this.suspend('route');
       this.requestFrame();
+    };
+    this.onPresenceState = event => {
+      this.setPresenceState(String(event.detail?.state || 'serene'), String(event.detail?.reason || 'event'));
     };
 
     this.shell?.addEventListener('pointerdown', this.onPointerDown, { passive: false });
@@ -541,6 +591,7 @@ export class RealityOrbEngine {
     window.addEventListener('resize', this.onResize, { passive: true });
     document.addEventListener('divina:route-ready', this.onRouteSettled);
     document.addEventListener('divina:route-error', this.onRouteSettled);
+    document.addEventListener('divina:orb-presence-state', this.onPresenceState);
 
     if ('ResizeObserver' in window) {
       this.resizeObserver = new ResizeObserver(() => this.resize());
@@ -655,7 +706,7 @@ export class RealityOrbEngine {
     this.pointerId = null;
     this.keyboardActive = false;
     this.targetPressure = 0;
-    this.targetEnergy = animate ? .38 : .16;
+    this.targetEnergy = animate ? Math.max(.38, this.presenceProfile().energy) : this.presenceProfile().energy;
     this.ripple = { x: point.x, y: point.y, age: 0 };
     this.shell?.classList.remove('is-touching');
     if (animate) {
@@ -744,7 +795,7 @@ export class RealityOrbEngine {
     clearTimeout(this.pulseTimer);
     this.pulseTimer = setTimeout(() => {
       if (!this.down && !this.opening) {
-        this.targetEnergy = .17;
+        this.targetEnergy = this.presenceProfile().energy;
         this.settleToIdle();
       }
     }, 520);
@@ -771,7 +822,7 @@ export class RealityOrbEngine {
       this.opening = false;
       this.gesture.endNavigation();
       this.targetPressure = 0;
-      this.targetEnergy = .16;
+      this.targetEnergy = this.presenceProfile().energy;
       this.settleToIdle();
     }, 1100);
   }
@@ -799,7 +850,9 @@ export class RealityOrbEngine {
     const lung = wave * wave * (3 - 2 * wave);
     const firstPulse = gaussian(phase, .535, .025);
     const secondPulse = gaussian(phase, .615, .034) * .62;
-    return clamp(.10 + lung * .76 + firstPulse * .17 + secondPulse * .13, 0, 1.08);
+    const raw = clamp(.10 + lung * .76 + firstPulse * .17 + secondPulse * .13, 0, 1.08);
+    const profile = this.presenceProfile();
+    return clamp(profile.breathFloor + (raw - .10) * profile.breathScale, 0, 1.08);
   }
 
   resize() {
@@ -837,7 +890,8 @@ export class RealityOrbEngine {
         this.announce('A Orbe guarda a sua intenção', 'INTENÇÃO');
       }
     } else {
-      this.targetEnergy = Math.max(this.hovering ? .24 : .16, this.targetEnergy * Math.exp(-1.9 * seconds));
+      const floor = this.presenceProfile().energy;
+      this.targetEnergy = Math.max(this.hovering ? Math.max(.24, floor) : floor, this.targetEnergy * Math.exp(-1.9 * seconds));
     }
     this.energy = lerp(this.energy, this.targetEnergy, follow(this.down ? 8.5 : 3.4, seconds));
     this.pressure = lerp(this.pressure, this.targetPressure, follow(this.down ? 7.8 : 5.2, seconds));
@@ -929,6 +983,7 @@ export class RealityOrbEngine {
     window.removeEventListener('resize', this.onResize);
     document.removeEventListener('divina:route-ready', this.onRouteSettled);
     document.removeEventListener('divina:route-error', this.onRouteSettled);
+    document.removeEventListener('divina:orb-presence-state', this.onPresenceState);
     document.removeEventListener('divina:orb-image', this.onSkinImage);
     this.canvas?.removeEventListener('webglcontextlost', this.onContextLost);
     this.shell?.removeEventListener('pointerdown', this.onPointerDown);
@@ -957,6 +1012,10 @@ export class RealityOrbEngine {
     }
     this.motionClient?.destroy();
     this.cssState.clear();
+    if (this.shell) {
+      delete this.shell.dataset.orbPresenceState;
+      delete this.shell.dataset.orbPresenceReason;
+    }
     if (globalThis[ORB_INSTANCE_KEY] === this) delete globalThis[ORB_INSTANCE_KEY];
   }
 }
