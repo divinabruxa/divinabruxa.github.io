@@ -1,0 +1,27 @@
+{
+  "release": "V578",
+  "macroStage": "1 — Home e Orbe",
+  "result": "PASS",
+  "automatedChecks": {
+    "passed": 45,
+    "total": 45,
+    "syntax": "PASS",
+    "diffWhitespace": "PASS",
+    "staticHttp": "PASS"
+  },
+  "verified": [
+    "uma única Orbe canônica e um único canvas vivo",
+    "Home sem conteúdo editorial residual",
+    "entrada do Menu preservada",
+    "geometria estável entre primeiro quadro e estado vivo",
+    "contratos de viewport dinâmico e áreas seguras do iPhone",
+    "recuperação de carregamento preservada",
+    "HTML do Tarot Livre protegido por hash",
+    "HTML da Carta do Dia protegido por hash",
+    "12 arquivos críticos protegidos por SHA-256",
+    "todos os arquivos obrigatórios do shell presentes",
+    "cinco caches V578 isolados"
+  ],
+  "physicalIPhoneGate": "PENDENTE APÓS INSTALAÇÃO",
+  "note": "A sessão remota de navegador não abriu o domínio durante a validação; o aceite visual e tátil final permanece reservado ao iPhone real."
+}
