@@ -1,15 +1,15 @@
-/* DIVINA BRUXA 4.0 — ORBE SUPREMA · VOZ DA ORBE · CACHE V571
+/* DIVINA BRUXA 4.0 — ORBE SUPREMA · MAGIA LEVE · CACHE V572
    Cache seletivo e versionado. Nunca guarda Auth, respostas online da Whit, billing,
    Admin, consultas seguras ou outras respostas de autoridade. Lembretes V561 usam
    texto fixo e respeitam o silêncio de Brasília sem revelar cartas. */
 
-const VERSION=571;
+const VERSION=572;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v571-shell';
-const CONTENT_CACHE='divina-bruxa-v571-content';
-const IMAGE_CACHE='divina-bruxa-v571-images';
-const OFFLINE_CACHE='divina-bruxa-v571-offline-core';
-const PREMIUM_CACHE='divina-bruxa-v571-premium-static';
+const SHELL_CACHE='divina-bruxa-v572-shell';
+const CONTENT_CACHE='divina-bruxa-v572-content';
+const IMAGE_CACHE='divina-bruxa-v572-images';
+const OFFLINE_CACHE='divina-bruxa-v572-offline-core';
+const PREMIUM_CACHE='divina-bruxa-v572-premium-static';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE,PREMIUM_CACHE]);
 const NAVIGATION_TIMEOUT_MS=3500;
 const MAX_CONTENT_ENTRIES=180;

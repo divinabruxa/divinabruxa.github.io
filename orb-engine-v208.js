@@ -1,11 +1,13 @@
 /*
- * DIVINA BRUXA — ORBE 2.0 V208 · PRESENÇA VIVA V570 · FLUIDEZ V535
+ * DIVINA BRUXA — ORBE 2.0 V208 · MAGIA LEVE V572 · PRESENÇA VIVA V570
  *
  * A borda da esfera nunca se move. A vida acontece dentro dela:
  * respiração orgânica, matéria líquida, profundidade óptica, cáusticas,
  * resposta localizada ao toque, memória curta do gesto e dois pulsos vitais.
  * O motor usa WebGL 1 para máxima compatibilidade e conserva a fotografia
  * como fallback permanente — inclusive em computadores sem aceleração gráfica.
+ * A magia microscópica V572 nasce apenas das luzes da própria fotografia,
+ * reutiliza este shader e cede completamente à viagem ou ao desempenho.
  */
 
 import { orbMotionV207, requestNativeHapticV207 } from './orb-motion-core-v207.js?v=207';
@@ -28,6 +30,24 @@ export const ORB_PRESENCE_PROFILES_V570 = Object.freeze({
   traveling:Object.freeze({ energy:.18, breathFloor:.08, breathScale:.72 }),
   sleeping:Object.freeze({ energy:.10, breathFloor:.06, breathScale:.42 })
 });
+export const ORB_MAGIC_PROFILES_V572 = Object.freeze({
+  serene:.10,
+  attentive:.24,
+  listening:.58,
+  responding:.42,
+  traveling:0,
+  sleeping:0
+});
+export function orbMagicBudgetV572(
+  presenceState = 'serene',
+  { reducedMotion = false, constrainedDevice = false, frameAverage = 16.7 } = {}
+) {
+  const base = ORB_MAGIC_PROFILES_V572[presenceState] ?? ORB_MAGIC_PROFILES_V572.serene;
+  const average = Number.isFinite(Number(frameAverage)) ? Number(frameAverage) : 16.7;
+  if (base <= 0 || reducedMotion || constrainedDevice || average >= 22.5) return 0;
+  if (average > 20) return base * .35;
+  return base;
+}
 const persistentPresenceEnabledV570 = () =>
   document.documentElement.dataset.orbPresenceEngine === 'event-driven-v570';
 const hasPresenceProfileV570 = state =>
@@ -76,6 +96,7 @@ const FRAGMENT_SHADER = `
   uniform float uRippleAge;
   uniform float uSpin;
   uniform float uReduced;
+  uniform float uMagic;
   uniform vec2 uPointer;
   uniform vec2 uVelocity;
   uniform vec2 uRippleOrigin;
@@ -193,6 +214,21 @@ const FRAGMENT_SHADER = `
     color += mix(vec3(.88, .77, 1.0), vec3(1.0, .72, .30), slowNoise) *
       starTwinkle * (.075 + uBreath * .055);
 
+    // Magia V572: microclarões nascem só das luzes reais da textura.
+    // O ramo inteiro sai do orçamento quando movimento ou desempenho vêm primeiro.
+    if(uMagic > .001){
+      float magicCell = hash21(floor(sampleUv * 112.0) + vec2(17.0, 29.0));
+      float magicSource = pow(smoothstep(.76, .99, sourceLight), 3.0);
+      float magicRhythm = .5 + .5 * sin(time * (1.65 + magicCell * .85) +
+        magicCell * 52.0 + fineNoise * 9.0);
+      float microscopicLight = pow(magicRhythm, 16.0) *
+        smoothstep(.94, .995, magicCell) * magicSource;
+      float responseMagic = clamp((energy - .14) * 1.35 + uTouch * .30 +
+        abs(rippleWave) * .22, 0.0, 1.0);
+      color += mix(vec3(.78, .60, 1.0), vec3(1.0, .74, .31), slowNoise) *
+        microscopicLight * responseMagic * uMagic * .19;
+    }
+
     float touchCore = exp(-fingerDistance * fingerDistance * 31.0);
     color += vec3(.86, .20, 1.0) * touchField * energy * .11;
     color += vec3(1.0, .88, .72) * touchCore * (uTouch + uPressure) * .22;
@@ -294,6 +330,8 @@ export class RealityOrbEngine {
     this.clickSuppressTimer = 0;
     this.cssState = new Map();
     this.lastCssSync = 0;
+    document.documentElement.dataset.orbMagicEngine = 'source-born-microlight-v572';
+    this.syncMagicState(this.magicLevel(), true);
     this.imageSource = document.documentElement.dataset.orbImage || DEFAULT_ORB_IMAGE;
     this.onSkinImage = event => this.replaceTexture(event.detail?.src);
     document.addEventListener('divina:orb-image', this.onSkinImage);
@@ -323,6 +361,26 @@ export class RealityOrbEngine {
     return ORB_PRESENCE_PROFILES_V570[this.presenceState] || ORB_PRESENCE_PROFILES_V570.serene;
   }
 
+  magicLevel() {
+    return orbMagicBudgetV572(this.presenceState, {
+      reducedMotion:this.reducedMotion,
+      constrainedDevice:document.documentElement.dataset.performanceTier === 'constrained',
+      frameAverage:this.frameAverage
+    });
+  }
+
+  syncMagicState(level = this.magicLevel(), force = false) {
+    const base = ORB_MAGIC_PROFILES_V572[this.presenceState] ?? ORB_MAGIC_PROFILES_V572.serene;
+    const next = level <= .001 ? 'off' : level + .001 < base ? 'reduced' : 'active';
+    if (force || document.documentElement.dataset.orbMagicState !== next) {
+      document.documentElement.dataset.orbMagicState = next;
+    }
+    if (this.shell && (force || this.shell.dataset.orbMagicState !== next)) {
+      this.shell.dataset.orbMagicState = next;
+    }
+    return next;
+  }
+
   setPresenceState(state, reason = 'event') {
     if (!hasPresenceProfileV570(state)) return false;
     this.presenceState = state;
@@ -337,6 +395,7 @@ export class RealityOrbEngine {
       this.targetPressure = 0;
       this.hovering = false;
     }
+    this.syncMagicState();
     if (!document.hidden && this.visible && this.lifeState === ORB_LIFE_STATES_V208.SUSPENDED) {
       this.resume('presence');
     }
@@ -353,6 +412,7 @@ export class RealityOrbEngine {
   setReducedMotion(reduced) {
     this.reducedMotion = Boolean(reduced);
     this.pixelRatio = Math.min(devicePixelRatio || 1, this.reducedMotion ? 1.25 : 2);
+    this.syncMagicState();
     this.resize();
     this.requestFrame();
   }
@@ -477,7 +537,7 @@ export class RealityOrbEngine {
     this.uniforms = {};
     [
       'uTexture', 'uTime', 'uBreath', 'uEnergy', 'uPressure', 'uTouch',
-      'uRippleAge', 'uSpin', 'uReduced', 'uPointer', 'uVelocity', 'uRippleOrigin'
+      'uRippleAge', 'uSpin', 'uReduced', 'uMagic', 'uPointer', 'uVelocity', 'uRippleOrigin'
     ].forEach(name => { this.uniforms[name] = gl.getUniformLocation(program, name); });
     gl.uniform1i(this.uniforms.uTexture, 0);
 
@@ -930,6 +990,9 @@ export class RealityOrbEngine {
     gl.uniform1f(this.uniforms.uRippleAge, this.ripple.age);
     gl.uniform1f(this.uniforms.uSpin, clamp(this.spin, -.8, .8));
     gl.uniform1f(this.uniforms.uReduced, this.reducedMotion ? 1 : 0);
+    const magic = this.magicLevel();
+    this.syncMagicState(magic);
+    gl.uniform1f(this.uniforms.uMagic, magic);
     gl.uniform2f(this.uniforms.uPointer, this.pointer.x, 1 - this.pointer.y);
     gl.uniform2f(this.uniforms.uVelocity, this.velocity.x, this.velocity.y);
     gl.uniform2f(this.uniforms.uRippleOrigin, this.ripple.x, 1 - this.ripple.y);
@@ -952,6 +1015,7 @@ export class RealityOrbEngine {
       this.pixelRatio = next;
       this.lastQualityChange = time;
       this.resize();
+      this.syncMagicState();
     }
   }
 
@@ -959,6 +1023,7 @@ export class RealityOrbEngine {
     this.ready = false;
     this.stop();
     this.canvas.style.opacity = '0';
+    this.syncMagicState(0, true);
     this.shell?.classList.remove('orb-loading', 'orb-live');
     this.shell?.classList.add('webgl-fallback');
     if (this.shell) this.shell.dataset.orbFallback = reason;
@@ -1015,7 +1080,10 @@ export class RealityOrbEngine {
     if (this.shell) {
       delete this.shell.dataset.orbPresenceState;
       delete this.shell.dataset.orbPresenceReason;
+      delete this.shell.dataset.orbMagicState;
     }
+    delete document.documentElement.dataset.orbMagicEngine;
+    delete document.documentElement.dataset.orbMagicState;
     if (globalThis[ORB_INSTANCE_KEY] === this) delete globalThis[ORB_INSTANCE_KEY];
   }
 }

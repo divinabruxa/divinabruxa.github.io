@@ -1,12 +1,13 @@
-/* DIVINA BRUXA 4.0 — ORBE SUPREMA · MACROETAPA 4 · VOZ DA ORBE
-   Preserva o Átomo Único, a Física Apple e a Presença Viva. Um único balão
+/* DIVINA BRUXA 4.0 — ORBE SUPREMA · MACROETAPA 5 · MAGIA LEVE
+   Preserva o Átomo Único, a Física Apple, a Presença Viva e a Voz. Um único balão
    acessível nasce da posição física da #orb, recolhe antes de qualquer viagem
-   e só fala depois do pouso. Não usa voz sintética nem outro loop de animação.
+   e só fala depois do pouso. A micro-luz vive no renderer existente, nunca no voo,
+   e não cria partículas, canvas, cópias ou outro loop de animação.
 */
 
 import { worldForRouteV535 } from './world-truth-registry-v535.js?v=535';
 
-const VERSION = 571;
+const VERSION = 572;
 const INSTANCE = Symbol.for('divina.orb.persistent.journey.v565');
 const ROOT_ID = 'divinaOrbPersistentJourneyV565';
 const STYLE_ID = 'divinaOrbPersistentJourneyV565Styles';
@@ -224,11 +225,15 @@ export class OrbPersistentJourneyV565 {
     this.voiceState = 'hidden';
     this.createPersistentLayer();
     this.bind();
-    document.documentElement.dataset.orbPersistentMotor = 'orbe-suprema-voice-v571';
+    document.documentElement.dataset.orbPersistentMotor = 'orbe-suprema-light-magic-v572';
     document.documentElement.dataset.orbPhysics = 'critical-damped-v569';
     document.documentElement.dataset.orbPresenceEngine = 'event-driven-v570';
     document.documentElement.dataset.orbVoiceEngine = 'anchored-bubble-v571';
     document.documentElement.dataset.orbVoiceState = 'hidden';
+    document.documentElement.dataset.orbMagicEngine = 'source-born-microlight-v572';
+    if (!document.documentElement.dataset.orbMagicState) {
+      document.documentElement.dataset.orbMagicState = 'pending';
+    }
     this.setPresence(document.hidden ? 'sleeping' : 'serene', { reason:'boot', force:true });
     requestAnimationFrame(() => this.syncRestingOrb('boot'));
     emit('divina:orb-ios-journey-ready', this.status());
@@ -562,6 +567,7 @@ export class OrbPersistentJourneyV565 {
     this.root.dataset.state = state;
     document.documentElement.dataset.orbJourneyState = state;
     if (TRAVEL_STATES_V570.has(state)) {
+      document.documentElement.dataset.orbMagicState = 'off';
       this.hideVoice(`journey-${state}`,true);
       this.setPresence('traveling', { reason:`journey-${state}`, force:true });
     }
@@ -959,7 +965,7 @@ export class OrbPersistentJourneyV565 {
   }
 
   status() {
-    return Object.freeze({ version:VERSION, engine:'OrbPersistentJourneyV565OrbVoice', work:'ORBE-SUPREMA-MACROETAPA-4',
+    return Object.freeze({ version:VERSION, engine:'OrbPersistentJourneyV565LightMagic', work:'ORBE-SUPREMA-MACROETAPA-5',
       active:this.active, state:this.state, route:this.route, persistentLayer:Boolean(this.root?.isConnected), layerCreations:1,
       perRouteRecreation:false, oneLivingOrb:true, physicalOrbTransport:true, physicalOrbConnected:Boolean(this.core?.orb?.isConnected),
       travelerCopies:0, snapshotCadence:'none', handoffFade:false, teleportFallback:false, permanentAnimationLoops:0,
@@ -972,6 +978,11 @@ export class OrbPersistentJourneyV565 {
       voiceAnchoredToLivingOrb:Boolean(this.voice?.isConnected && this.core?.orb?.isConnected),
       voiceDuringFlight:false, voiceModel:'anchored-bubble-v571', speechSynthesisUsed:false,
       voiceTextLimit:VOICE_TEXT_LIMIT_V571, voiceState:this.voiceState, voiceMessages:this.voiceMessages,
+      microscopicMagic:true, magicModel:'source-born-microlight-v572',
+      magicState:document.documentElement.dataset.orbMagicState || 'pending',
+      magicInsideLivingRenderer:true, magicDuringFlight:false, magicSourcePixelsOnly:true,
+      magicPerformanceGate:true, magicReducedMotionOff:true,
+      additionalParticleNodes:0, additionalCanvasNodes:0,
       tactileResponsePreserved:true, lastMotion:this.lastMotion || null,
       completedNavigations:this.completed, interruptedNavigations:this.interrupted });
   }
@@ -1000,6 +1011,8 @@ export class OrbPersistentJourneyV565 {
     delete document.documentElement.dataset.orbPresenceState;
     delete document.documentElement.dataset.orbVoiceEngine;
     delete document.documentElement.dataset.orbVoiceState;
+    delete document.documentElement.dataset.orbMagicEngine;
+    delete document.documentElement.dataset.orbMagicState;
     if (livingOrb) delete livingOrb.dataset.orbPresenceState;
     delete globalThis[INSTANCE];
   }
