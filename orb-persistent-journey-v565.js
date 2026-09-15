@@ -1,13 +1,13 @@
-/* DIVINA BRUXA 4.0 — ORBE SUPREMA · MACROETAPA 5 · MAGIA LEVE
-   Preserva o Átomo Único, a Física Apple, a Presença Viva e a Voz. Um único balão
+/* DIVINA BRUXA 4.0 — ORBE SUPREMA · MACROETAPA 6 · CONTINUIDADE IPHONE/PWA
+   Preserva o Átomo Único, a Física Apple, a Presença Viva, a Voz e a Magia Leve. Um único balão
    acessível nasce da posição física da #orb, recolhe antes de qualquer viagem
-   e só fala depois do pouso. A micro-luz vive no renderer existente, nunca no voo,
-   e não cria partículas, canvas, cópias ou outro loop de animação.
+   e só fala depois do pouso. A mesma Orbe atravessa retorno do app, BFCache,
+   rotação e Visual Viewport sem cópias, teletransporte ou outro loop.
 */
 
 import { worldForRouteV535 } from './world-truth-registry-v535.js?v=535';
 
-const VERSION = 573;
+const VERSION = 574;
 const INSTANCE = Symbol.for('divina.orb.persistent.journey.v565');
 const ROOT_ID = 'divinaOrbPersistentJourneyV565';
 const STYLE_ID = 'divinaOrbPersistentJourneyV565Styles';
@@ -51,10 +51,15 @@ const routeNow = () => String(
   location.hash ||
   'home'
 ).replace(/^#/,'').toLowerCase();
-const viewport = () => ({
-  width:Math.max(1, globalThis.visualViewport?.width || document.documentElement.clientWidth || innerWidth),
-  height:Math.max(1, globalThis.visualViewport?.height || document.documentElement.clientHeight || innerHeight)
-});
+export function visualViewportSnapshotV574() {
+  const visual = globalThis.visualViewport;
+  const width = Math.max(1,Number(visual?.width || document.documentElement.clientWidth || globalThis.innerWidth || 1));
+  const height = Math.max(1,Number(visual?.height || document.documentElement.clientHeight || globalThis.innerHeight || 1));
+  const left = Math.max(0,Number(visual?.offsetLeft || 0));
+  const top = Math.max(0,Number(visual?.offsetTop || 0));
+  return { width, height, left, top, right:left+width, bottom:top+height };
+}
+const viewport = visualViewportSnapshotV574;
 
 const budgets = () => reducedMotion()
   ? { depart:36, arrive:42, wait:90, samples:2, profile:'reduced-apple-physics' }
@@ -159,7 +164,7 @@ function rectOf(node) {
   const rect = node.getBoundingClientRect?.();
   if (!rect || rect.width < 8 || rect.height < 8) return null;
   const view = viewport();
-  if (rect.right < -4 || rect.bottom < -4 || rect.left > view.width + 4 || rect.top > view.height + 4) return null;
+  if (rect.right < view.left-4 || rect.bottom < view.top-4 || rect.left > view.right+4 || rect.top > view.bottom+4) return null;
   return { node, left:rect.left, top:rect.top, width:rect.width, height:rect.height,
     x:rect.left + rect.width / 2, y:rect.top + rect.height / 2 };
 }
@@ -205,9 +210,14 @@ export class OrbPersistentJourneyV565 {
     this.scale = 1;
     this.completed = 0;
     this.interrupted = 0;
+    this.continuityChecks = 0;
+    this.continuityRecoveries = 0;
+    this.lastContinuity = null;
+    this.lastPageTransition = null;
     this.landingHost = null;
     this.landingAnchor = null;
     this.trackFrame = 0;
+    this.trackSettleFrame = 0;
     this.settleToken = 0;
     this.pendingMenuOrigin = null;
     this.pendingMenuOriginAt = 0;
@@ -225,17 +235,18 @@ export class OrbPersistentJourneyV565 {
     this.voiceState = 'hidden';
     this.createPersistentLayer();
     this.bind();
-    document.documentElement.dataset.orbPersistentMotor = 'orbe-suprema-light-magic-v573';
+    document.documentElement.dataset.orbPersistentMotor = 'orbe-suprema-iphone-pwa-v574';
     document.documentElement.dataset.orbPhysics = 'critical-damped-v569';
     document.documentElement.dataset.orbPresenceEngine = 'event-driven-v570';
     document.documentElement.dataset.orbVoiceEngine = 'anchored-bubble-v571';
     document.documentElement.dataset.orbVoiceState = 'hidden';
     document.documentElement.dataset.orbMagicEngine = 'source-born-microlight-v573';
+    document.documentElement.dataset.orbContinuityEngine = 'iphone-pwa-v574';
     if (!document.documentElement.dataset.orbMagicState) {
       document.documentElement.dataset.orbMagicState = 'pending';
     }
     this.setPresence(document.hidden ? 'sleeping' : 'serene', { reason:'boot', force:true });
-    requestAnimationFrame(() => this.syncRestingOrb('boot'));
+    requestAnimationFrame(() => this.reconcileContinuity('boot'));
     emit('divina:orb-ios-journey-ready', this.status());
     emit('divina:orb-persistent-ready', this.status());
   }
@@ -288,8 +299,9 @@ export class OrbPersistentJourneyV565 {
     const view = viewport();
     const margin = 12;
     const gap = 12;
-    const measured = this.voice.getBoundingClientRect?.();
     const availableWidth = Math.max(80,view.width-margin*2);
+    this.voice.style.maxWidth = `${availableWidth.toFixed(2)}px`;
+    const measured = this.voice.getBoundingClientRect?.();
     const width = clamp(
       measured?.width > 16 ? measured.width : Math.min(280,availableWidth),
       Math.min(80,availableWidth),availableWidth
@@ -301,13 +313,15 @@ export class OrbPersistentJourneyV565 {
     );
     const belowTop = orbRect.top+orbRect.height+gap;
     const aboveTop = orbRect.top-gap-height;
-    const belowFits = belowTop+height <= view.height-margin;
-    const aboveFits = aboveTop >= margin;
+    const belowFits = belowTop+height <= view.bottom-margin;
+    const aboveFits = aboveTop >= view.top+margin;
     const side = belowFits || !aboveFits ? 'below' : 'above';
-    const maximumLeft = Math.max(margin,view.width-width-margin);
-    const maximumTop = Math.max(margin,view.height-height-margin);
-    const left = clamp(orbRect.x-width/2,margin,maximumLeft);
-    const top = clamp(side === 'below' ? belowTop : aboveTop,margin,maximumTop);
+    const minimumLeft = view.left+margin;
+    const minimumTop = view.top+margin;
+    const maximumLeft = Math.max(minimumLeft,view.right-width-margin);
+    const maximumTop = Math.max(minimumTop,view.bottom-height-margin);
+    const left = clamp(orbRect.x-width/2,minimumLeft,maximumLeft);
+    const top = clamp(side === 'below' ? belowTop : aboveTop,minimumTop,maximumTop);
     const tailX = clamp(orbRect.x-left,18,Math.max(18,width-18));
     this.voice.dataset.side = side;
     this.voice.style.left = `${left.toFixed(2)}px`;
@@ -413,24 +427,45 @@ export class OrbPersistentJourneyV565 {
         this.setPresence('attentive', {
           reason:'visibility-return', restAfter:reducedMotion() ? 180 : 900, force:true
         });
-        this.scheduleTrack('visibility');
+        this.reconcileContinuity('visibility-return');
+        this.scheduleTrack('visibility-return');
       }
     }, { signal });
-    addEventListener('pagehide', () => {
+    addEventListener('pagehide', event => {
+      this.lastPageTransition = { type:'pagehide', persisted:Boolean(event?.persisted) };
       this.hideVoice('pagehide',true);
       this.setPresence('sleeping', { reason:'pagehide', force:true });
       this.finishImmediately('pagehide');
     }, { signal });
-    addEventListener('pageshow', () => {
-      this.syncRestingOrb('pageshow');
+    addEventListener('pageshow', event => {
+      const reason = event?.persisted ? 'pageshow-bfcache' : 'pageshow';
+      this.lastPageTransition = { type:'pageshow', persisted:Boolean(event?.persisted) };
+      this.reconcileContinuity(reason);
+      this.scheduleTrack(reason);
       this.setPresence('attentive', {
-        reason:'pageshow', restAfter:reducedMotion() ? 180 : 900, force:true
+        reason, restAfter:reducedMotion() ? 180 : 900, force:true
+      });
+    }, { signal });
+    document.addEventListener('freeze', () => {
+      this.hideVoice('freeze',true);
+      this.setPresence('sleeping', { reason:'freeze', force:true });
+      if (this.active) this.finishImmediately('freeze');
+    }, { signal });
+    document.addEventListener('resume', () => {
+      this.reconcileContinuity('resume');
+      this.scheduleTrack('resume');
+      this.setPresence('attentive', {
+        reason:'resume', restAfter:reducedMotion() ? 180 : 900, force:true
       });
     }, { signal });
     addEventListener('resize', () => this.scheduleTrack('resize'), { signal, passive:true });
     addEventListener('orientationchange', () => this.scheduleTrack('orientation'), { signal, passive:true });
     addEventListener('scroll', () => this.scheduleTrack('scroll'), { signal, passive:true, capture:true });
-    globalThis.visualViewport?.addEventListener?.('resize', () => this.scheduleTrack('visual-viewport'), { signal, passive:true });
+    for (const type of ['popstate','hashchange']) {
+      addEventListener(type, () => requestAnimationFrame(() => this.reconcileContinuity(type)), { signal, passive:true });
+    }
+    globalThis.visualViewport?.addEventListener?.('resize', () => this.scheduleTrack('visual-viewport-resize'), { signal, passive:true });
+    globalThis.visualViewport?.addEventListener?.('scroll', () => this.scheduleTrack('visual-viewport-scroll'), { signal, passive:true });
     for (const type of ['divina:skin-change','orbe:skin-change','skin:changed']) {
       document.addEventListener(type, () => {
         copyVariables(this.core?.orb,this.root);
@@ -605,7 +640,7 @@ export class OrbPersistentJourneyV565 {
 
   centerFallback() {
     const view = viewport();
-    return { node:null, x:view.width/2, y:Math.min(view.height*.42,380), width:76, height:76, kind:'viewport-safe' };
+    return { node:null, x:view.left+view.width/2, y:view.top+Math.min(view.height*.42,380), width:76, height:76, kind:'viewport-safe' };
   }
 
   resolveOrigin() {
@@ -640,7 +675,10 @@ export class OrbPersistentJourneyV565 {
   gateway(route) {
     const view = viewport();
     const point = worldForRouteV535(route)?.gateway || [0.5,0.43];
-    return { x:clamp(point[0]*view.width,42,view.width-42), y:clamp(point[1]*view.height,84,view.height-92) };
+    return {
+      x:clamp(view.left+point[0]*view.width,view.left+42,view.right-42),
+      y:clamp(view.top+point[1]*view.height,view.top+84,view.bottom-92)
+    };
   }
 
   transform(point, scale = 1) {
@@ -708,9 +746,9 @@ export class OrbPersistentJourneyV565 {
     this.universe?.pause?.('atom-one-flight');
   }
 
-  resumeHeavyEffects() {
+  resumeHeavyEffects(wake = true) {
     document.documentElement.removeAttribute(FLIGHT_ATTR);
-    this.universe?.start?.('atom-one-flight');
+    if (wake) this.universe?.start?.('atom-one-flight');
   }
 
   async depart({ from, to, serial, source } = {}) {
@@ -865,8 +903,13 @@ export class OrbPersistentJourneyV565 {
       this.core.renderer?.resize?.();
       return true;
     }
-    const anchor = destination?.node?.isConnected ? destination.node : this.resolveDestination(this.route).node;
-    if (!anchor) return false;
+    const fallback = destination || this.centerFallback();
+    const anchor = fallback?.node?.isConnected ? fallback.node : this.resolveDestination(this.route)?.node;
+    if (!anchor) {
+      this.clearLandingAnchor();
+      this.root.hidden = false;
+      return this.placeStage(fallback);
+    }
     this.landingAnchor = anchor;
     anchor.dataset.orbPhysicalLanding = 'true';
     document.documentElement.setAttribute(REST_ATTR,this.route);
@@ -895,14 +938,27 @@ export class OrbPersistentJourneyV565 {
 
   scheduleTrack(reason = 'layout') {
     cancelAnimationFrame(this.trackFrame);
-    this.trackFrame = requestAnimationFrame(() => {
-      this.trackFrame = 0;
+    cancelAnimationFrame(this.trackSettleFrame);
+    this.trackSettleFrame = 0;
+    const sync = pass => {
       if (this.active || this.destroyed) return;
-      if (this.landingAnchor?.isConnected && this.core?.orb?.parentNode === this.stage) {
-        this.placeStage(rectOf(this.landingAnchor));
-        emit('divina:orb-physical-rest-synced',{reason,route:this.route});
+      if (this.core?.orb?.parentNode === this.stage) {
+        const restingTarget = this.landingAnchor?.isConnected
+          ? rectOf(this.landingAnchor) || this.centerFallback()
+          : this.resolveDestination(this.route) || this.centerFallback();
+        this.placeStage(restingTarget);
+        emit('divina:orb-physical-rest-synced',{reason,pass,route:this.route});
       }
       this.positionVoice();
+    };
+    this.trackFrame = requestAnimationFrame(() => {
+      this.trackFrame = 0;
+      sync('first-frame');
+      if (!/^(visual-viewport|orientation|pageshow|visibility-return|resume)/.test(reason)) return;
+      this.trackSettleFrame = requestAnimationFrame(() => {
+        this.trackSettleFrame = 0;
+        sync('settled-frame');
+      });
     });
   }
 
@@ -915,11 +971,65 @@ export class OrbPersistentJourneyV565 {
     }
     if (rectOf(this.core?.orb) && this.core?.orb?.parentNode !== this.stage) return true;
     const destination = this.resolveDestination(route);
-    if (!destination?.node) return false;
+    if (!destination) return false;
     if (this.core?.orb?.parentNode !== this.stage) this.capturePhysicalOrb(destination);
-    this.settlePhysicalOrb(route,destination);
+    if (!this.settlePhysicalOrb(route,destination)) return false;
     emit('divina:orb-physical-rest-synced',{reason,route});
     return true;
+  }
+
+  reconcileContinuity(reason = 'lifecycle') {
+    if (this.destroyed) return false;
+    this.continuityChecks += 1;
+    if (this.active) {
+      this.lastContinuity = { reason, route:this.route, deferred:true, recovered:false };
+      return false;
+    }
+    let recovered = false;
+    const host = document.body || document.documentElement;
+    installStyles();
+    if (this.root && !this.root.isConnected) {
+      host.append(this.root);
+      recovered = true;
+    }
+    if (this.voice && !this.voice.isConnected) {
+      host.append(this.voice);
+      recovered = true;
+    }
+    if (document.documentElement.dataset.orbGlobalFlight === 'active' ||
+      document.documentElement.getAttribute?.(FLIGHT_ATTR) === 'active') {
+      this.resumeHeavyEffects();
+      recovered = true;
+    }
+    const orb = this.core?.orb;
+    const route = routeNow();
+    this.route = route;
+    if (!orb) {
+      this.lastContinuity = { reason, route, deferred:false, recovered, connected:false };
+      return false;
+    }
+    if (!orb.isConnected) {
+      if (route === 'home') this.core?.returnHome?.();
+      else {
+        const destination = this.resolveDestination(route);
+        this.capturePhysicalOrb(destination);
+        this.settlePhysicalOrb(route,destination);
+      }
+      recovered = orb.isConnected || recovered;
+    }
+    const synced = this.syncRestingOrb(reason);
+    copyVariables(orb,this.root);
+    copyVariables(orb,this.voice);
+    this.core?.renderer?.resize?.();
+    this.core?.renderer?.resume?.('iphone-pwa-v574');
+    this.positionVoice();
+    if (recovered) this.continuityRecoveries += 1;
+    const connected = Boolean(orb.isConnected && this.root?.isConnected && this.voice?.isConnected);
+    this.lastContinuity = { reason, route, deferred:false, recovered, connected, synced:Boolean(synced) };
+    emit('divina:orb-continuity-reconciled', {
+      reason, route, recovered, connected, visualViewport:viewport()
+    });
+    return connected && synced !== false;
   }
 
   async recover({ from, serial } = {}) {
@@ -945,7 +1055,8 @@ export class OrbPersistentJourneyV565 {
     this.settleToken += 1;
     this.animations.forEach(animation => { try { animation.cancel(); } catch {} });
     this.animations.clear();
-    this.resumeHeavyEffects();
+    const sleeping = document.hidden || ['pagehide','visibility','freeze','destroy'].includes(reason);
+    this.resumeHeavyEffects(!sleeping);
     this.active = false;
     this.state = 'rest';
     this.root.dataset.state = 'rest';
@@ -954,7 +1065,6 @@ export class OrbPersistentJourneyV565 {
     const destination = this.resolveDestination(route);
     this.settlePhysicalOrb(route,destination);
     if (reason !== 'destroy') {
-      const sleeping = document.hidden || reason === 'pagehide';
       this.setPresence(sleeping ? 'sleeping' : 'responding', {
         reason:`journey-${reason}`,
         restAfter:sleeping ? 0 : reducedMotion() ? 180 : 720,
@@ -965,7 +1075,7 @@ export class OrbPersistentJourneyV565 {
   }
 
   status() {
-    return Object.freeze({ version:VERSION, engine:'OrbPersistentJourneyV565LightMagic', work:'ORBE-SUPREMA-MACROETAPA-5',
+    return Object.freeze({ version:VERSION, engine:'OrbPersistentJourneyV565IPhoneContinuity', work:'ORBE-SUPREMA-MACROETAPA-6',
       active:this.active, state:this.state, route:this.route, persistentLayer:Boolean(this.root?.isConnected), layerCreations:1,
       perRouteRecreation:false, oneLivingOrb:true, physicalOrbTransport:true, physicalOrbConnected:Boolean(this.core?.orb?.isConnected),
       travelerCopies:0, snapshotCadence:'none', handoffFade:false, teleportFallback:false, permanentAnimationLoops:0,
@@ -983,6 +1093,15 @@ export class OrbPersistentJourneyV565 {
       magicInsideLivingRenderer:true, magicDuringFlight:false, magicSourcePixelsOnly:true,
       magicPerformanceGate:true, magicReducedMotionOff:true,
       additionalParticleNodes:0, additionalCanvasNodes:0,
+      continuityModel:'iphone-pwa-v574', bfcacheAware:true, freezeResumeAware:true,
+      visualViewportAware:true, visualViewportScrollTracking:true, visualViewportSettledPass:true,
+      historyRecoveryAware:true,
+      rendererContextRestoreAware:true, continuityChecks:this.continuityChecks,
+      continuityRecoveries:this.continuityRecoveries, lastContinuity:this.lastContinuity,
+      rendererState:document.documentElement.dataset.orbRendererState || 'pending',
+      rendererContextRestoreAttempts:Number(this.core?.renderer?.contextRestoreAttempts || 0),
+      rendererContextRestoreSuccesses:Number(this.core?.renderer?.contextRestoreSuccesses || 0),
+      visualViewport:viewport(), lastPageTransition:this.lastPageTransition,
       tactileResponsePreserved:true, lastMotion:this.lastMotion || null,
       completedNavigations:this.completed, interruptedNavigations:this.interrupted });
   }
@@ -993,6 +1112,7 @@ export class OrbPersistentJourneyV565 {
     this.destroyed = true;
     this.finishImmediately('destroy');
     cancelAnimationFrame(this.trackFrame);
+    cancelAnimationFrame(this.trackSettleFrame);
     cancelAnimationFrame(this.voiceFrame);
     clearTimeout(this.presenceTimer);
     clearTimeout(this.voiceTimer);
@@ -1013,6 +1133,7 @@ export class OrbPersistentJourneyV565 {
     delete document.documentElement.dataset.orbVoiceState;
     delete document.documentElement.dataset.orbMagicEngine;
     delete document.documentElement.dataset.orbMagicState;
+    delete document.documentElement.dataset.orbContinuityEngine;
     if (livingOrb) delete livingOrb.dataset.orbPresenceState;
     delete globalThis[INSTANCE];
   }

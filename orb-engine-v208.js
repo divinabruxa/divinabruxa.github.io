@@ -1,5 +1,5 @@
 /*
- * DIVINA BRUXA — ORBE 2.0 V208 · MAGIA LEVE V573 · PRESENÇA VIVA V570
+ * DIVINA BRUXA — ORBE 2.0 V208 · CONTINUIDADE IPHONE/PWA V574
  *
  * A borda da esfera nunca se move. A vida acontece dentro dela:
  * respiração orgânica, matéria líquida, profundidade óptica, cáusticas,
@@ -8,6 +8,8 @@
  * como fallback permanente — inclusive em computadores sem aceleração gráfica.
  * A magia microscópica V573 nasce apenas das luzes da própria fotografia,
  * reutiliza este shader e cede completamente à viagem ou ao desempenho.
+ * A continuidade V574 recupera o mesmo canvas após perda de contexto e retorno
+ * do app, sem recriar a Orbe, abrir outro relógio ou sacrificar o fallback.
  */
 
 import { orbMotionV207, requestNativeHapticV207 } from './orb-motion-core-v207.js?v=207';
@@ -292,6 +294,9 @@ export class RealityOrbEngine {
       : 'serene';
     this.ready = false;
     this.contextLost = false;
+    this.contextEventsBound = false;
+    this.contextRestoreAttempts = 0;
+    this.contextRestoreSuccesses = 0;
     this.lifeState = ORB_LIFE_STATES_V208.BOOT;
     this.resumeState = ORB_LIFE_STATES_V208.IDLE;
     if (this.shell) this.shell.dataset.orbLife = ORB_LIFE_STATES_V208.BOOT;
@@ -331,6 +336,9 @@ export class RealityOrbEngine {
     this.cssState = new Map();
     this.lastCssSync = 0;
     document.documentElement.dataset.orbMagicEngine = 'source-born-microlight-v573';
+    document.documentElement.dataset.orbRendererContinuity = 'iphone-pwa-v574';
+    document.documentElement.dataset.orbRendererState = 'pending';
+    if (this.shell) this.shell.dataset.orbRendererState = 'pending';
     this.syncMagicState(this.magicLevel(), true);
     this.imageSource = document.documentElement.dataset.orbImage || DEFAULT_ORB_IMAGE;
     this.onSkinImage = event => this.replaceTexture(event.detail?.src);
@@ -359,6 +367,15 @@ export class RealityOrbEngine {
 
   presenceProfile() {
     return ORB_PRESENCE_PROFILES_V570[this.presenceState] || ORB_PRESENCE_PROFILES_V570.serene;
+  }
+
+  setRendererState(state) {
+    const next = ['pending','live','fallback','restoring','destroyed'].includes(state)
+      ? state
+      : 'fallback';
+    document.documentElement.dataset.orbRendererState = next;
+    if (this.shell) this.shell.dataset.orbRendererState = next;
+    return next;
   }
 
   magicLevel() {
@@ -481,7 +498,9 @@ export class RealityOrbEngine {
     this.contextLost = false;
     this.shell?.classList.remove('orb-loading', 'webgl-fallback');
     this.shell?.classList.add('orb-live');
+    if (this.shell) delete this.shell.dataset.orbFallback;
     this.setLifeState(ORB_LIFE_STATES_V208.IDLE);
+    this.setRendererState('live');
     this.syncMagicState();
     this.announce('A Orbe está respirando', 'RESPIRA');
     this.requestFrame();
@@ -543,12 +562,50 @@ export class RealityOrbEngine {
     ].forEach(name => { this.uniforms[name] = gl.getUniformLocation(program, name); });
     gl.uniform1i(this.uniforms.uTexture, 0);
 
-    this.onContextLost = event => {
-      event.preventDefault();
+    if (!this.contextEventsBound) {
+      this.onContextLost = event => {
+        event.preventDefault();
+        this.contextLost = true;
+        this.fallback('contexto');
+      };
+      this.onContextRestored = () => { void this.restoreContext(); };
+      this.canvas.addEventListener('webglcontextlost', this.onContextLost, { passive: false });
+      this.canvas.addEventListener('webglcontextrestored', this.onContextRestored, { passive: true });
+      this.contextEventsBound = true;
+    }
+  }
+
+  async restoreContext() {
+    if (this.destroyed || !this.canvas?.isConnected || !this.image?.naturalWidth) return false;
+    this.contextRestoreAttempts += 1;
+    this.ready = false;
+    this.contextLost = false;
+    this.setRendererState('restoring');
+    this.syncMagicState(0, true);
+    try {
+      this.setupWebGL();
+      this.resize();
+      this.ready = true;
+      this.contextLost = false;
+      this.canvas.style.opacity = '';
+      this.shell?.classList.remove('orb-loading', 'webgl-fallback');
+      this.shell?.classList.add('orb-live');
+      if (this.shell) delete this.shell.dataset.orbFallback;
+      this.setLifeState(ORB_LIFE_STATES_V208.IDLE);
+      this.setRendererState('live');
+      this.syncMagicState();
+      this.contextRestoreSuccesses += 1;
+      this.announce('A Orbe retomou sua respiração', 'RESPIRA');
+      this.requestFrame();
+      document.dispatchEvent(new CustomEvent('divina:orb-renderer-restored', {
+        detail:{ version:574, reusedCanvas:true, attempts:this.contextRestoreAttempts }
+      }));
+      return true;
+    } catch (error) {
       this.contextLost = true;
-      this.fallback('contexto');
-    };
-    this.canvas.addEventListener('webglcontextlost', this.onContextLost, { passive: false });
+      this.fallback(error?.message || 'context-restore');
+      return false;
+    }
   }
 
   async replaceTexture(source) {
@@ -1029,6 +1086,7 @@ export class RealityOrbEngine {
     this.shell?.classList.remove('orb-loading', 'orb-live');
     this.shell?.classList.add('webgl-fallback');
     if (this.shell) this.shell.dataset.orbFallback = reason;
+    this.setRendererState('fallback');
     this.setLifeState(ORB_LIFE_STATES_V208.FALLBACK);
     this.announce('A Orbe está respirando', 'RESPIRA');
   }
@@ -1053,6 +1111,7 @@ export class RealityOrbEngine {
     document.removeEventListener('divina:orb-presence-state', this.onPresenceState);
     document.removeEventListener('divina:orb-image', this.onSkinImage);
     this.canvas?.removeEventListener('webglcontextlost', this.onContextLost);
+    this.canvas?.removeEventListener('webglcontextrestored', this.onContextRestored);
     this.shell?.removeEventListener('pointerdown', this.onPointerDown);
     this.shell?.removeEventListener('pointermove', this.onPointerMove);
     this.shell?.removeEventListener('pointerup', this.onPointerUp);
@@ -1083,9 +1142,12 @@ export class RealityOrbEngine {
       delete this.shell.dataset.orbPresenceState;
       delete this.shell.dataset.orbPresenceReason;
       delete this.shell.dataset.orbMagicState;
+      delete this.shell.dataset.orbRendererState;
     }
     delete document.documentElement.dataset.orbMagicEngine;
     delete document.documentElement.dataset.orbMagicState;
+    delete document.documentElement.dataset.orbRendererContinuity;
+    delete document.documentElement.dataset.orbRendererState;
     if (globalThis[ORB_INSTANCE_KEY] === this) delete globalThis[ORB_INSTANCE_KEY];
   }
 }
