@@ -1,21 +1,42 @@
-/* DIVINA BRUXA 4.0 — ORBE SUPREMA · MACROETAPA 3 · PRESENÇA VIVA
-   Mantém o Átomo Único e a Física Apple aprovados. A mesma #orb agora sustenta
-   uma presença global orientada por eventos: serena, atenta, escutando,
-   respondendo, viajando ou dormindo. Não existe um segundo loop de animação.
+/* DIVINA BRUXA 4.0 — ORBE SUPREMA · MACROETAPA 4 · VOZ DA ORBE
+   Preserva o Átomo Único, a Física Apple e a Presença Viva. Um único balão
+   acessível nasce da posição física da #orb, recolhe antes de qualquer viagem
+   e só fala depois do pouso. Não usa voz sintética nem outro loop de animação.
 */
 
 import { worldForRouteV535 } from './world-truth-registry-v535.js?v=535';
 
-const VERSION = 570;
+const VERSION = 571;
 const INSTANCE = Symbol.for('divina.orb.persistent.journey.v565');
 const ROOT_ID = 'divinaOrbPersistentJourneyV565';
 const STYLE_ID = 'divinaOrbPersistentJourneyV565Styles';
+const VOICE_ID = 'divinaOrbVoiceV571';
 const FLIGHT_ATTR = 'data-orb-global-flight';
 const REST_ATTR = 'data-orb-physical-rest';
+const VOICE_TEXT_LIMIT_V571 = 140;
 export const ORB_PRESENCE_STATES_V570 = Object.freeze([
   'serene', 'attentive', 'listening', 'responding', 'traveling', 'sleeping'
 ]);
 const TRAVEL_STATES_V570 = new Set(['depart','flight','portal','arrival','settle','recovery']);
+export const ORB_ROUTE_VOICE_V571 = Object.freeze({
+  home:'Voltamos ao centro.',
+  tarot:'O Tarot Livre está aberto.',
+  daily:'Seu encontro de hoje está aqui.',
+  spreads:'As posições estão prontas.',
+  school:'O próximo aprendizado começa aqui.',
+  library:'A Biblioteca está aberta.',
+  ai:'Whit está pronta para escutar.',
+  journal:'Seu espaço privado permanece seu.',
+  store:'A Loja Mística está aberta.',
+  consultations:'O santuário de consultas está aberto.',
+  subscriptions:'Seus benefícios aparecem com clareza.',
+  skins:'A mesma Orbe, uma nova pele.',
+  videos:'As histórias estão prontas para você.',
+  music:'Sua música encontra esta realidade.',
+  notifications:'Você escolhe quais sinais receber.',
+  login:'Sua continuidade começa pela Conta.',
+  admin:'A Central permanece protegida.'
+});
 
 const clamp = (value, minimum, maximum) => Math.min(maximum, Math.max(minimum, value));
 const frame = () => new Promise(resolve => requestAnimationFrame(resolve));
@@ -99,7 +120,34 @@ function installStyles() {
     [data-supreme-orb-host="active"]>[data-supreme-orb="living"]{width:100%!important;height:auto!important;max-width:100%!important;max-height:100%!important;margin:0!important;aspect-ratio:1!important}
     [data-orb-physical-landing="true"]{pointer-events:none!important;background:transparent!important;box-shadow:none!important}
     [data-orb-physical-landing="true"]::before,[data-orb-physical-landing="true"]::after,[data-orb-physical-landing="true"]>*{visibility:hidden!important}
-    @media(prefers-reduced-motion:reduce){#${ROOT_ID} .db565-physical-stage{will-change:auto}}
+    #${VOICE_ID}{
+      position:fixed;left:12px;top:12px;z-index:2147483000;box-sizing:border-box;
+      width:max-content;max-width:min(19rem,calc(100vw - 24px));padding:10px 14px;
+      pointer-events:none;user-select:none;-webkit-user-select:none;contain:layout style;
+      color:rgba(255,255,255,.96);background:rgba(24,11,43,.82);
+      border:1px solid rgba(255,255,255,.19);border-radius:17px;
+      box-shadow:0 14px 38px rgba(8,2,19,.34),inset 0 1px 0 rgba(255,255,255,.12);
+      -webkit-backdrop-filter:blur(18px) saturate(1.22);backdrop-filter:blur(18px) saturate(1.22);
+      font:600 clamp(13px,3.45vw,15px)/1.35 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;
+      letter-spacing:-.012em;text-align:center;text-wrap:balance;
+      opacity:0;transform:translate3d(0,var(--db571-entry-y,-5px),0) scale(.985);
+      transform-origin:var(--db571-tail-x,50%) 0;
+      transition:opacity 180ms ease,transform 180ms cubic-bezier(.2,.8,.2,1);
+    }
+    #${VOICE_ID}[hidden]{display:none!important}
+    #${VOICE_ID}[data-visible="true"]{opacity:1;transform:translate3d(0,0,0) scale(1)}
+    #${VOICE_ID}[data-side="above"]{--db571-entry-y:5px;transform-origin:var(--db571-tail-x,50%) 100%}
+    #${VOICE_ID}::after{
+      content:"";position:absolute;left:clamp(18px,calc(var(--db571-tail-x,50%) - 6px),calc(100% - 30px));
+      width:11px;height:11px;background:rgba(24,11,43,.86);transform:rotate(45deg);
+    }
+    #${VOICE_ID}[data-side="below"]::after{top:-6px;border-left:1px solid rgba(255,255,255,.16);border-top:1px solid rgba(255,255,255,.16)}
+    #${VOICE_ID}[data-side="above"]::after{bottom:-6px;border-right:1px solid rgba(255,255,255,.16);border-bottom:1px solid rgba(255,255,255,.16)}
+    #${VOICE_ID} .db571-orb-voice__text{display:block;max-width:100%;overflow-wrap:anywhere}
+    @media(prefers-reduced-motion:reduce){
+      #${ROOT_ID} .db565-physical-stage{will-change:auto}
+      #${VOICE_ID}{transition:none;transform:none}
+    }
   `;
   document.head.append(style);
   return style;
@@ -168,11 +216,19 @@ export class OrbPersistentJourneyV565 {
     this.presenceState = null;
     this.presenceTransitions = 0;
     this.presenceTimer = 0;
+    this.voiceTimer = 0;
+    this.voiceHideTimer = 0;
+    this.voiceFrame = 0;
+    this.voiceSerial = 0;
+    this.voiceMessages = 0;
+    this.voiceState = 'hidden';
     this.createPersistentLayer();
     this.bind();
-    document.documentElement.dataset.orbPersistentMotor = 'orbe-suprema-presence-v570';
+    document.documentElement.dataset.orbPersistentMotor = 'orbe-suprema-voice-v571';
     document.documentElement.dataset.orbPhysics = 'critical-damped-v569';
     document.documentElement.dataset.orbPresenceEngine = 'event-driven-v570';
+    document.documentElement.dataset.orbVoiceEngine = 'anchored-bubble-v571';
+    document.documentElement.dataset.orbVoiceState = 'hidden';
     this.setPresence(document.hidden ? 'sleeping' : 'serene', { reason:'boot', force:true });
     requestAnimationFrame(() => this.syncRestingOrb('boot'));
     emit('divina:orb-ios-journey-ready', this.status());
@@ -192,12 +248,160 @@ export class OrbPersistentJourneyV565 {
     (document.body || document.documentElement).append(root);
     this.root = root;
     this.stage = stage;
+    this.createVoiceBubble();
+  }
+
+  createVoiceBubble() {
+    for (const duplicate of document.querySelectorAll(`#${VOICE_ID}`)) duplicate.remove();
+    const voice = document.createElement('div');
+    voice.id = VOICE_ID;
+    voice.hidden = true;
+    voice.dataset.visible = 'false';
+    voice.dataset.side = 'below';
+    voice.setAttribute('role','status');
+    voice.setAttribute('aria-live','polite');
+    voice.setAttribute('aria-atomic','true');
+    voice.setAttribute('aria-hidden','true');
+    const text = document.createElement('span');
+    text.className = 'db571-orb-voice__text';
+    voice.append(text);
+    (document.body || document.documentElement).append(voice);
+    this.voice = voice;
+    this.voiceText = text;
+    return voice;
+  }
+
+  voiceCopy(route) {
+    const id = String(route || routeNow()).replace(/^#/,'').toLowerCase();
+    return ORB_ROUTE_VOICE_V571[id] || ORB_ROUTE_VOICE_V571.home;
+  }
+
+  positionVoice() {
+    if (this.destroyed || this.active || !this.voice || this.voice.hidden) return false;
+    const orbRect = rectOf(this.core?.orb);
+    if (!orbRect) return false;
+    const view = viewport();
+    const margin = 12;
+    const gap = 12;
+    const measured = this.voice.getBoundingClientRect?.();
+    const availableWidth = Math.max(80,view.width-margin*2);
+    const width = clamp(
+      measured?.width > 16 ? measured.width : Math.min(280,availableWidth),
+      Math.min(80,availableWidth),availableWidth
+    );
+    const availableHeight = Math.max(32,view.height-margin*2);
+    const height = clamp(
+      measured?.height > 16 ? measured.height : 48,
+      Math.min(32,availableHeight),availableHeight
+    );
+    const belowTop = orbRect.top+orbRect.height+gap;
+    const aboveTop = orbRect.top-gap-height;
+    const belowFits = belowTop+height <= view.height-margin;
+    const aboveFits = aboveTop >= margin;
+    const side = belowFits || !aboveFits ? 'below' : 'above';
+    const maximumLeft = Math.max(margin,view.width-width-margin);
+    const maximumTop = Math.max(margin,view.height-height-margin);
+    const left = clamp(orbRect.x-width/2,margin,maximumLeft);
+    const top = clamp(side === 'below' ? belowTop : aboveTop,margin,maximumTop);
+    const tailX = clamp(orbRect.x-left,18,Math.max(18,width-18));
+    this.voice.dataset.side = side;
+    this.voice.style.left = `${left.toFixed(2)}px`;
+    this.voice.style.top = `${top.toFixed(2)}px`;
+    this.voice.style.setProperty('--db571-tail-x',`${tailX.toFixed(2)}px`);
+    return true;
+  }
+
+  showVoice(copy, { duration = 2400, reason = 'response', route = this.route } = {}) {
+    if (this.destroyed || this.active || document.hidden || !this.voice || !rectOf(this.core?.orb)) {
+      this.hideVoice('unavailable',true);
+      return false;
+    }
+    const safeCopy = String(copy || '').replace(/\s+/g,' ').trim().slice(0,VOICE_TEXT_LIMIT_V571);
+    if (!safeCopy) {
+      this.hideVoice('empty',true);
+      return false;
+    }
+    const token = ++this.voiceSerial;
+    clearTimeout(this.voiceTimer);
+    clearTimeout(this.voiceHideTimer);
+    cancelAnimationFrame(this.voiceFrame);
+    this.voiceTimer = 0;
+    this.voiceHideTimer = 0;
+    this.voiceFrame = 0;
+    this.voiceText.textContent = safeCopy;
+    this.voice.dataset.visible = 'false';
+    this.voice.dataset.route = String(route || routeNow());
+    this.voice.dataset.reason = String(reason || 'response');
+    this.voice.hidden = false;
+    this.voice.setAttribute('aria-hidden','false');
+    copyVariables(this.core?.orb,this.voice);
+    this.positionVoice();
+    this.voiceState = 'showing';
+    document.documentElement.dataset.orbVoiceState = 'showing';
+    this.voiceFrame = requestAnimationFrame(() => {
+      this.voiceFrame = 0;
+      if (this.destroyed || this.active || token !== this.voiceSerial || document.hidden) return;
+      this.positionVoice();
+      this.voice.dataset.visible = 'true';
+      this.voiceState = 'visible';
+      document.documentElement.dataset.orbVoiceState = 'visible';
+      this.voiceMessages += 1;
+      emit('divina:orb-voice-state', {
+        state:'visible', reason, route:String(route || routeNow()), anchored:true
+      });
+      if (duration > 0) {
+        this.voiceTimer = setTimeout(() => {
+          this.voiceTimer = 0;
+          this.hideVoice('auto-hide');
+        },Math.max(360,Number(duration) || 0));
+      }
+    });
+    return true;
+  }
+
+  hideVoice(reason = 'hidden', immediate = false) {
+    if (!this.voice) return false;
+    const wasExposed = this.voiceState !== 'hidden' || !this.voice.hidden || this.voice.dataset.visible === 'true';
+    ++this.voiceSerial;
+    clearTimeout(this.voiceTimer);
+    clearTimeout(this.voiceHideTimer);
+    cancelAnimationFrame(this.voiceFrame);
+    this.voiceTimer = 0;
+    this.voiceHideTimer = 0;
+    this.voiceFrame = 0;
+    this.voice.dataset.visible = 'false';
+    this.voice.setAttribute('aria-hidden','true');
+    this.voiceState = 'hidden';
+    document.documentElement.dataset.orbVoiceState = 'hidden';
+    if (wasExposed) {
+      emit('divina:orb-voice-state', {
+        state:'hidden', reason, route:this.route, anchored:true
+      });
+    }
+    if (immediate || reducedMotion() || this.voice.hidden) {
+      this.voice.hidden = true;
+    } else {
+      this.voiceHideTimer = setTimeout(() => {
+        this.voiceHideTimer = 0;
+        if (this.voice?.dataset.visible !== 'true') this.voice.hidden = true;
+      },190);
+    }
+    return true;
+  }
+
+  speakRoute(route, reason = 'arrival') {
+    const id = String(route || routeNow()).replace(/^#/,'').toLowerCase();
+    if (this.active || TRAVEL_STATES_V570.has(this.state)) return false;
+    return this.showVoice(this.voiceCopy(id), {
+      duration:reducedMotion() ? 1800 : 2600, reason, route:id
+    });
   }
 
   bind() {
     const { signal } = this.abort;
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
+        this.hideVoice('visibility-hidden',true);
         this.setPresence('sleeping', { reason:'visibility-hidden', force:true });
         if (this.active) this.finishImmediately('visibility');
       } else {
@@ -208,6 +412,7 @@ export class OrbPersistentJourneyV565 {
       }
     }, { signal });
     addEventListener('pagehide', () => {
+      this.hideVoice('pagehide',true);
       this.setPresence('sleeping', { reason:'pagehide', force:true });
       this.finishImmediately('pagehide');
     }, { signal });
@@ -222,13 +427,23 @@ export class OrbPersistentJourneyV565 {
     addEventListener('scroll', () => this.scheduleTrack('scroll'), { signal, passive:true, capture:true });
     globalThis.visualViewport?.addEventListener?.('resize', () => this.scheduleTrack('visual-viewport'), { signal, passive:true });
     for (const type of ['divina:skin-change','orbe:skin-change','skin:changed']) {
-      document.addEventListener(type, () => copyVariables(this.core?.orb, this.root), { signal });
+      document.addEventListener(type, () => {
+        copyVariables(this.core?.orb,this.root);
+        copyVariables(this.core?.orb,this.voice);
+      }, { signal });
     }
     for (const type of ['divina:route-ready','divina:page-ready','divina:orb-presence-created']) {
-      document.addEventListener(type, () => this.syncRestingOrb(type), { signal });
+      document.addEventListener(type, event => {
+        this.syncRestingOrb(type);
+        if (type === 'divina:route-ready' && !this.active) {
+          requestAnimationFrame(() => this.speakRoute(event.detail?.id || routeNow(),'route-ready'));
+        }
+      }, { signal });
     }
     document.addEventListener('divina:menu-state', event => {
-      if (event.detail?.state !== 'closing') return;
+      const menuState = String(event.detail?.state || 'closed');
+      if (menuState !== 'closed') this.hideVoice(`menu-${menuState}`,true);
+      if (menuState !== 'closing') return;
       const origin = rectOf(this.core?.orb);
       if (!origin) return;
       this.pendingMenuOrigin = { ...origin, node:null, kind:'menu-living-orb' };
@@ -250,7 +465,17 @@ export class OrbPersistentJourneyV565 {
         ? 0
         : reducedMotion() ? 180 : state === 'attentive' ? 680 : 920;
       this.setPresence(state, { reason:`pulse-${kind}`, restAfter });
+      if (kind === 'intent') this.hideVoice('navigation-intent',true);
+      else if (kind === 'present') this.speakRoute(event.detail?.route || routeNow(),'already-present');
+      else if (['press','keyboard'].includes(kind)) {
+        this.showVoice('Estou ouvindo.', { duration:0, reason:`pulse-${kind}`, route:routeNow() });
+      } else if (kind === 'release') {
+        this.showVoice('Estou aqui.', { duration:1600, reason:'pulse-release', route:routeNow() });
+      }
     }, { signal });
+    for (const type of ['divina:supreme-orb-intent','divina:supreme-orb-will-navigate','divina:route-start']) {
+      document.addEventListener(type, () => this.hideVoice(type,true), { signal });
+    }
     document.addEventListener('pointerover', event => {
       if (event.target?.closest?.('[data-supreme-orb="living"]') !== this.core?.orb) return;
       this.setPresence('attentive', {
@@ -268,6 +493,7 @@ export class OrbPersistentJourneyV565 {
       this.setPresence('responding', {
         reason:'pointer-cancel', restAfter:reducedMotion() ? 180 : 720
       });
+      this.showVoice('Estou aqui.', { duration:1600, reason:'pointer-cancel', route:routeNow() });
     }, { signal });
     document.addEventListener('keyup', event => {
       if (!['Enter',' '].includes(event.key)) return;
@@ -275,12 +501,14 @@ export class OrbPersistentJourneyV565 {
       this.setPresence('responding', {
         reason:'keyboard-release', restAfter:reducedMotion() ? 180 : 720
       });
+      this.showVoice('Estou aqui.', { duration:1600, reason:'keyboard-release', route:routeNow() });
     }, { signal });
   }
 
   attach(core) {
     this.core = core || this.core;
     copyVariables(this.core?.orb, this.root);
+    copyVariables(this.core?.orb, this.voice);
     if (this.core && !this.claimBridge) {
       this.originalClaim = this.core.claim;
       this.claimBridge = (host, options = {}) => {
@@ -334,6 +562,7 @@ export class OrbPersistentJourneyV565 {
     this.root.dataset.state = state;
     document.documentElement.dataset.orbJourneyState = state;
     if (TRAVEL_STATES_V570.has(state)) {
+      this.hideVoice(`journey-${state}`,true);
       this.setPresence('traveling', { reason:`journey-${state}`, force:true });
     }
     emit('divina:orb-ios-journey-state', { state, route:this.route, ...detail });
@@ -560,6 +789,7 @@ export class OrbPersistentJourneyV565 {
     this.setPresence('responding', {
       reason:'arrival-complete', restAfter:reducedMotion() ? 180 : 920, force:true
     });
+    this.speakRoute(String(to || this.route),'arrival-complete');
     emit('divina:orb-persistent-finished',{reason:'complete',route:this.route});
     return this.status();
   }
@@ -601,6 +831,7 @@ export class OrbPersistentJourneyV565 {
     this.setPresence('responding', {
       reason:'claim-settled', restAfter:reducedMotion() ? 180 : 820, force:true
     });
+    this.speakRoute(this.route,'claim-settled');
     emit('divina:orb-physical-claim-settled',{route:this.route,host:host.id||null});
     return true;
   }
@@ -665,6 +896,7 @@ export class OrbPersistentJourneyV565 {
         this.placeStage(rectOf(this.landingAnchor));
         emit('divina:orb-physical-rest-synced',{reason,route:this.route});
       }
+      this.positionVoice();
     });
   }
 
@@ -696,11 +928,13 @@ export class OrbPersistentJourneyV565 {
     this.setPresence('responding', {
       reason:'recovery-complete', restAfter:reducedMotion() ? 180 : 760, force:true
     });
+    this.speakRoute(String(from || routeNow()),'recovery-complete');
     emit('divina:orb-persistent-finished',{reason:'recovered',route:this.route});
     return this.status();
   }
 
   finishImmediately(reason = 'complete', countInterruption = true) {
+    this.hideVoice(`journey-${reason}`,true);
     if (countInterruption && this.active && !['complete','recovered'].includes(reason)) this.interrupted += 1;
     this.settleToken += 1;
     this.animations.forEach(animation => { try { animation.cancel(); } catch {} });
@@ -725,7 +959,7 @@ export class OrbPersistentJourneyV565 {
   }
 
   status() {
-    return Object.freeze({ version:VERSION, engine:'OrbPersistentJourneyV565LivingPresence', work:'ORBE-SUPREMA-MACROETAPA-3',
+    return Object.freeze({ version:VERSION, engine:'OrbPersistentJourneyV565OrbVoice', work:'ORBE-SUPREMA-MACROETAPA-4',
       active:this.active, state:this.state, route:this.route, persistentLayer:Boolean(this.root?.isConnected), layerCreations:1,
       perRouteRecreation:false, oneLivingOrb:true, physicalOrbTransport:true, physicalOrbConnected:Boolean(this.core?.orb?.isConnected),
       travelerCopies:0, snapshotCadence:'none', handoffFade:false, teleportFallback:false, permanentAnimationLoops:0,
@@ -734,28 +968,39 @@ export class OrbPersistentJourneyV565 {
       presenceState:this.presenceState, presenceStates:ORB_PRESENCE_STATES_V570,
       presenceModel:'event-driven-v570', presenceTransitions:this.presenceTransitions,
       globalLivingRenderer:true, addedAnimationLoops:0, idleTimers:1,
+      voiceBubble:true, voiceNodes:document.querySelectorAll(`#${VOICE_ID}`).length,
+      voiceAnchoredToLivingOrb:Boolean(this.voice?.isConnected && this.core?.orb?.isConnected),
+      voiceDuringFlight:false, voiceModel:'anchored-bubble-v571', speechSynthesisUsed:false,
+      voiceTextLimit:VOICE_TEXT_LIMIT_V571, voiceState:this.voiceState, voiceMessages:this.voiceMessages,
       tactileResponsePreserved:true, lastMotion:this.lastMotion || null,
       completedNavigations:this.completed, interruptedNavigations:this.interrupted });
   }
 
   destroy() {
     if (this.destroyed) return;
+    const livingOrb = this.core?.orb;
     this.destroyed = true;
     this.finishImmediately('destroy');
     cancelAnimationFrame(this.trackFrame);
+    cancelAnimationFrame(this.voiceFrame);
     clearTimeout(this.presenceTimer);
+    clearTimeout(this.voiceTimer);
+    clearTimeout(this.voiceHideTimer);
     this.abort.abort();
     this.clearLandingAnchor();
     this.core?.returnHome?.();
     this.detach(this.core);
     this.root?.remove();
+    this.voice?.remove();
     document.getElementById(STYLE_ID)?.remove();
     delete document.documentElement.dataset.orbPersistentMotor;
     delete document.documentElement.dataset.orbPhysics;
     delete document.documentElement.dataset.orbJourneyState;
     delete document.documentElement.dataset.orbPresenceEngine;
     delete document.documentElement.dataset.orbPresenceState;
-    if (this.core?.orb) delete this.core.orb.dataset.orbPresenceState;
+    delete document.documentElement.dataset.orbVoiceEngine;
+    delete document.documentElement.dataset.orbVoiceState;
+    if (livingOrb) delete livingOrb.dataset.orbPresenceState;
     delete globalThis[INSTANCE];
   }
 }
