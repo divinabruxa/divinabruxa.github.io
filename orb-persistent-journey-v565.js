@@ -7,7 +7,7 @@
 
 import { worldForRouteV535 } from './world-truth-registry-v535.js?v=535';
 
-const VERSION = 572;
+const VERSION = 573;
 const INSTANCE = Symbol.for('divina.orb.persistent.journey.v565');
 const ROOT_ID = 'divinaOrbPersistentJourneyV565';
 const STYLE_ID = 'divinaOrbPersistentJourneyV565Styles';
@@ -225,12 +225,12 @@ export class OrbPersistentJourneyV565 {
     this.voiceState = 'hidden';
     this.createPersistentLayer();
     this.bind();
-    document.documentElement.dataset.orbPersistentMotor = 'orbe-suprema-light-magic-v572';
+    document.documentElement.dataset.orbPersistentMotor = 'orbe-suprema-light-magic-v573';
     document.documentElement.dataset.orbPhysics = 'critical-damped-v569';
     document.documentElement.dataset.orbPresenceEngine = 'event-driven-v570';
     document.documentElement.dataset.orbVoiceEngine = 'anchored-bubble-v571';
     document.documentElement.dataset.orbVoiceState = 'hidden';
-    document.documentElement.dataset.orbMagicEngine = 'source-born-microlight-v572';
+    document.documentElement.dataset.orbMagicEngine = 'source-born-microlight-v573';
     if (!document.documentElement.dataset.orbMagicState) {
       document.documentElement.dataset.orbMagicState = 'pending';
     }
@@ -978,7 +978,7 @@ export class OrbPersistentJourneyV565 {
       voiceAnchoredToLivingOrb:Boolean(this.voice?.isConnected && this.core?.orb?.isConnected),
       voiceDuringFlight:false, voiceModel:'anchored-bubble-v571', speechSynthesisUsed:false,
       voiceTextLimit:VOICE_TEXT_LIMIT_V571, voiceState:this.voiceState, voiceMessages:this.voiceMessages,
-      microscopicMagic:true, magicModel:'source-born-microlight-v572',
+      microscopicMagic:true, magicModel:'source-born-microlight-v573',
       magicState:document.documentElement.dataset.orbMagicState || 'pending',
       magicInsideLivingRenderer:true, magicDuringFlight:false, magicSourcePixelsOnly:true,
       magicPerformanceGate:true, magicReducedMotionOff:true,

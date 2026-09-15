@@ -1,12 +1,12 @@
 /*
- * DIVINA BRUXA — ORBE 2.0 V208 · MAGIA LEVE V572 · PRESENÇA VIVA V570
+ * DIVINA BRUXA — ORBE 2.0 V208 · MAGIA LEVE V573 · PRESENÇA VIVA V570
  *
  * A borda da esfera nunca se move. A vida acontece dentro dela:
  * respiração orgânica, matéria líquida, profundidade óptica, cáusticas,
  * resposta localizada ao toque, memória curta do gesto e dois pulsos vitais.
  * O motor usa WebGL 1 para máxima compatibilidade e conserva a fotografia
  * como fallback permanente — inclusive em computadores sem aceleração gráfica.
- * A magia microscópica V572 nasce apenas das luzes da própria fotografia,
+ * A magia microscópica V573 nasce apenas das luzes da própria fotografia,
  * reutiliza este shader e cede completamente à viagem ou ao desempenho.
  */
 
@@ -214,7 +214,7 @@ const FRAGMENT_SHADER = `
     color += mix(vec3(.88, .77, 1.0), vec3(1.0, .72, .30), slowNoise) *
       starTwinkle * (.075 + uBreath * .055);
 
-    // Magia V572: microclarões nascem só das luzes reais da textura.
+    // Magia V573: microclarões nascem só das luzes reais da textura.
     // O ramo inteiro sai do orçamento quando movimento ou desempenho vêm primeiro.
     if(uMagic > .001){
       float magicCell = hash21(floor(sampleUv * 112.0) + vec2(17.0, 29.0));
@@ -330,7 +330,7 @@ export class RealityOrbEngine {
     this.clickSuppressTimer = 0;
     this.cssState = new Map();
     this.lastCssSync = 0;
-    document.documentElement.dataset.orbMagicEngine = 'source-born-microlight-v572';
+    document.documentElement.dataset.orbMagicEngine = 'source-born-microlight-v573';
     this.syncMagicState(this.magicLevel(), true);
     this.imageSource = document.documentElement.dataset.orbImage || DEFAULT_ORB_IMAGE;
     this.onSkinImage = event => this.replaceTexture(event.detail?.src);
@@ -362,6 +362,7 @@ export class RealityOrbEngine {
   }
 
   magicLevel() {
+    if (!this.ready || !this.gl || this.contextLost) return 0;
     return orbMagicBudgetV572(this.presenceState, {
       reducedMotion:this.reducedMotion,
       constrainedDevice:document.documentElement.dataset.performanceTier === 'constrained',
@@ -481,6 +482,7 @@ export class RealityOrbEngine {
     this.shell?.classList.remove('orb-loading', 'webgl-fallback');
     this.shell?.classList.add('orb-live');
     this.setLifeState(ORB_LIFE_STATES_V208.IDLE);
+    this.syncMagicState();
     this.announce('A Orbe está respirando', 'RESPIRA');
     this.requestFrame();
   }
