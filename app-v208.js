@@ -1,10 +1,10 @@
-/* DIVINA BRUXA 4.0 — ORBE SUPREMA 2.0 · MACROETAPA 2 · BASE V577
-   A única Orbe física atravessa Home, menu e todas as realidades. Seus altares
-   funcionais são preparados antes da chegada. */
+/* DIVINA BRUXA 2.0 — ESSÊNCIA SUPREMA · MACROETAPA 2 · MENU · BASE V578
+   O visual aprovado permanece. A V579 entrega ao Menu uma única autoridade
+   reversível sem alterar a Orbe, as realidades ou suas funções. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
-import { createNavigation } from './navigation.js?v=535-fluid-navigation';
+import { createNavigation } from './navigation.js?v=579-menu-authority';
 import { orbMotionV207 } from './orb-motion-core-v207.js?v=207';
 import { RealityOrbEngine } from './orb-engine-v208.js?v=576-foundation';
 import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=576-foundation';
@@ -83,11 +83,14 @@ const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
     document.documentElement.dataset.orbMenuSupremeError = 'v327';
   });
 
-const startOrbitalMenuV502 = () => import('./orbital-menu-v502.js?v=576-foundation')
+const startOrbitalMenuV579 = () => import('./orbital-menu-v502.js?v=579-essence-state')
   .then(module => module.installOrbitalMenuV502?.({ core:supremeOrb, go }))
   .catch(error => {
-    console.error('[Divina] Menu Orbital Vivo V502 não iniciou', error);
-    document.documentElement.dataset.menuOrbitalError = 'v502';
+    console.error('[Divina] Menu Orbital Essência V579 não iniciou', error);
+    if (!globalThis.divinaMenuV579 && /^v579/.test(document.documentElement.dataset.menuAuthority || '')) {
+      delete document.documentElement.dataset.menuAuthority;
+    }
+    document.documentElement.dataset.menuOrbitalError = 'v579';
   });
 
 const startSpreadsSupremeV331 = () => import('./spreads-supreme-v331.js?v=554')
@@ -292,6 +295,7 @@ const toast = message => {
 };
 
 safely('runtime visual', installRuntimeV12);
+document.documentElement.dataset.menuAuthority = 'v579-pending';
 const navigation = createNavigation();
 const navigationGo = navigation.go;
 let supremeOrb = null;
@@ -2378,7 +2382,7 @@ const awaken = async () => {
     }));
 
     // O menu é opcional para o boot: a Home abre mesmo se esta camada falhar.
-    startOrbitalMenuV502();
+    startOrbitalMenuV579();
     startSpreadsSupremeV331();
     startLibraryDeepV332();
 
@@ -2409,7 +2413,7 @@ const awaken = async () => {
     // Último fail-open visual: o HTML da Home existe e deve continuar acessível.
     document.documentElement.dataset.appShell = 'v180-emergency';
     loadingPortal.end(ORB_BOOT_REQUEST_V152);
-    startOrbitalMenuV502();
+    startOrbitalMenuV579();
     startSpreadsSupremeV331();
     startLibraryDeepV332();
     startPwaAfterBootV537();
