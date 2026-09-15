@@ -1,21 +1,21 @@
-/* DIVINA BRUXA 4.0 — ORBE SUPREMA 2.0 · MACROETAPA 1 · CACHE V576
+/* DIVINA BRUXA 4.0 — ORBE SUPREMA 2.0 · MACROETAPA 2 · CACHE V577
    Cache seletivo e versionado. Nunca guarda Auth, respostas online da Whit, billing,
    Admin, consultas seguras ou outras respostas de autoridade. Lembretes V561 usam
    texto fixo e respeitam o silêncio de Brasília sem revelar cartas. */
 
-const VERSION=576;
+const VERSION=577;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v576-shell';
-const CONTENT_CACHE='divina-bruxa-v576-content';
-const IMAGE_CACHE='divina-bruxa-v576-images';
-const OFFLINE_CACHE='divina-bruxa-v576-offline-core';
-const PREMIUM_CACHE='divina-bruxa-v576-premium-static';
+const SHELL_CACHE='divina-bruxa-v577-shell';
+const CONTENT_CACHE='divina-bruxa-v577-content';
+const IMAGE_CACHE='divina-bruxa-v577-images';
+const OFFLINE_CACHE='divina-bruxa-v577-offline-core';
+const PREMIUM_CACHE='divina-bruxa-v577-premium-static';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE,PREMIUM_CACHE]);
 const NAVIGATION_TIMEOUT_MS=3500;
 const MAX_CONTENT_ENTRIES=180;
 const MAX_IMAGE_ENTRIES=96;
 const MAX_RUNTIME_IMAGE_BYTES=1800000;
-const RELEASE_CRITICAL_PATTERN_V576=/(?:^|\/)(?:app-v208|orb-engine-v208|page-loader-v1|orb-persistent-journey-v565|orbital-menu-v502|supreme-orb-core-v501|tarot-livre-orbe-os-v517)\.js$/;
+const RELEASE_CRITICAL_PATTERN_V577=/(?:^|\/)(?:app-v208|orb-engine-v208|page-loader-v1|orb-persistent-journey-v565|orb-universal-presence-v526|orbital-menu-v502|supreme-orb-core-v501|tarot-livre-orbe-os-v517)\.js$/;
 const PRIVATE_ROUTE_PATTERN=/(?:^|\/)(?:admin|account|conta|diario|journal|checkout|billing|pagamento|consulta-individual)(?:[./-]|$)/i;
 const ETHICAL_NOTIFICATION_TEMPLATES_V561=Object.freeze({
   daily:Object.freeze({title:'Divina Bruxa',body:'Sua Carta do Dia está pronta para ser encontrada.',url:'#daily'}),
@@ -100,7 +100,7 @@ const REQUIRED_SHELL=Object.freeze([
 ]);
 
 // Fechamento transitivo dos imports estáticos de app-v208.js. Se qualquer um
-// falhar, a V576 não assume o controle e o worker anterior continua íntegro.
+// falhar, a V577 não assume o controle e o worker anterior continua íntegro.
 const BOOT_DEPENDENCIES=Object.freeze([
   './account-consultations-world-v319.js','./account-engine-v201.js','./account-state-copy-v201.js',
   './ai-policy.js','./auth-client-v201.js','./auth-client-v6.js','./card-library-policy.js',
@@ -351,7 +351,7 @@ const appShellIsValid=async(url,response)=>{
   const isShell=pathname===new URL('./',self.registration.scope).pathname||pathname.endsWith('/index.html');
   if(!isShell)return true;
   const html=await response.clone().text();
-  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=576/.test(html);
+  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=577/.test(html);
 };
 
 const offlinePageFor=async url=>{
@@ -459,7 +459,7 @@ self.addEventListener('fetch',event=>{
 
   // A fundação da Orbe nunca nasce de uma mistura entre duas gerações. Em
   // rede, estes módulos entram juntos; offline, o shell atômico é o fallback.
-  if(RELEASE_CRITICAL_PATTERN_V576.test(url.pathname)){
+  if(RELEASE_CRITICAL_PATTERN_V577.test(url.pathname)){
     event.respondWith(networkFirst(request));return;
   }
 

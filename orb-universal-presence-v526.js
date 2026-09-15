@@ -1,7 +1,7 @@
-/* DIVINA BRUXA 4.0 — PRESENÇA UNIVERSAL V526 · FÍSICA ÚNICA V550
-   A única Orbe física ganha um pouso semântico em cada realidade. Cada pouso é
-   somente uma janela Retina do canvas vivo V501: nenhum novo motor, universo,
-   estado de Tarot ou loop permanente é criado aqui.
+/* DIVINA BRUXA 4.0 — ORBE SUPREMA 2.0 · POUSO UNIVERSAL V577
+   Cada presença semântica também é um altar físico para a única Orbe V501.
+   A projeção existe somente enquanto a Orbe está em outra realidade; no pouso,
+   o próprio #orb ocupa o altar. Nenhum motor, canvas vivo ou loop é duplicado.
 */
 
 import { orbPresenceProfilesV535 } from './world-truth-registry-v535.js?v=535';
@@ -118,6 +118,7 @@ export class OrbUniversalPresenceV526 {
     anchor.dataset.orbProjectionQuality = 'retina';
     anchor.dataset.orbJourneyAnchor = 'v526';
     anchor.dataset.orbPresenceV526 = 'true';
+    anchor.dataset.orbPhysicalHostV577 = 'true';
     anchor.setAttribute('aria-label', profile.aria);
     anchor.innerHTML = `
       <span class="db526-orb-presence__mist" aria-hidden="true"></span>
@@ -143,6 +144,7 @@ export class OrbUniversalPresenceV526 {
     node.dataset.orbProjectionQuality = 'retina';
     node.dataset.orbJourneyAnchor = 'v526';
     node.dataset.orbPresenceV526 = 'true';
+    node.dataset.orbPhysicalHostV577 = 'true';
     node.setAttribute('role','button');
     node.setAttribute('tabindex','0');
     node.setAttribute('aria-label',profile.aria);
@@ -290,7 +292,7 @@ export class OrbUniversalPresenceV526 {
       route:current,
       reason,
       hasDedicatedLanding:Boolean(this.anchors.get(current)?.isConnected),
-      physicalHost:['home','tarot'].includes(current)
+      physicalHost:current === 'home' || current === 'tarot' || Boolean(this.anchors.get(current)?.isConnected)
     });
   }
 
@@ -323,7 +325,7 @@ export class OrbUniversalPresenceV526 {
       version:VERSION,
       engine:'OrbUniversalPresenceV526',
       currentRoute:routeNow(),
-      physicalHosts:['home','tarot'],
+      physicalHosts:['home','tarot',...connected.map(([route]) => route)],
       dedicatedProjectionRoutes:connected.map(([route]) => route),
       dedicatedProjectionCount:connected.length,
       expectedProjectionCount:ROUTES.length,
@@ -331,7 +333,8 @@ export class OrbUniversalPresenceV526 {
       onePhysicalOrb:true,
       independentOrbEngines:0,
       liveCanvasProjections:false,
-      projectionMode:'event-snapshot-v550',
+      projectionMode:'inactive-route-snapshot-v577',
+      physicalLandingModel:'one-orb-every-route-v577',
       retinaProjectionRequested:true,
       permanentAnimationLoops:0,
       skinReactive:true,
@@ -354,7 +357,7 @@ export class OrbUniversalPresenceV526 {
       if (!anchor?.isConnected || anchor.closest?.(`[${CREATED_ATTR}]`)) continue;
       const snapshot = this.existingSnapshots.get(anchor);
       anchor.classList.remove('db526-orb-presence','db526-orb-presence--existing','is-current','is-awake','is-arriving');
-      ['route','orbSurface','orbProjection','orbProjectionQuality','orbJourneyAnchor','orbPresenceV526']
+      ['route','orbSurface','orbProjection','orbProjectionQuality','orbJourneyAnchor','orbPresenceV526','orbPhysicalHostV577']
         .forEach(key => delete anchor.dataset[key]);
       if (snapshot?.role == null) anchor.removeAttribute('role'); else anchor.setAttribute('role',snapshot.role);
       if (snapshot?.tabindex == null) anchor.removeAttribute('tabindex'); else anchor.setAttribute('tabindex',snapshot.tabindex);

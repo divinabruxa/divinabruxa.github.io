@@ -1,6 +1,6 @@
-/* DIVINA BRUXA 4.0 — ORBE SUPREMA 2.0 · MACROETAPA 1 · V576
-   O Tarot Livre é construído antes do commit da rota. Assim a única Orbe
-   física encontra o altar definitivo durante a chegada, nunca depois dela. */
+/* DIVINA BRUXA 4.0 — ORBE SUPREMA 2.0 · MACROETAPA 2 · V577
+   Toda realidade possui altar físico estável. Mundos em que a Orbe executa
+   uma função própria são construídos antes do commit visual da rota. */
 
 import {
   normalizeRouteId,
@@ -14,7 +14,11 @@ const pageTasks = new Map();
 const sharedTasks = new Map();
 const LOAD_TIMEOUT_MS = 15000;
 export const NAVIGATION_PREPARE_BUDGET_MS_V535 = 48;
-const ARRIVAL_CRITICAL_ROUTES_V576 = new Set(['tarot']);
+/* A viagem só cruza o portal depois que a realidade definitiva existe. Assim
+   nenhum mundo troca o altar sob a Orbe depois do pouso. */
+const ARRIVAL_CRITICAL_ROUTES_V577 = new Set([
+  'tarot','daily','library','school','ai','journal'
+]);
 const PORTAL_STYLES_ID = 'divinaPortalStylesV180';
 const PORTAL_STYLES_HREF = 'divina-core-v179.css?v=179';
 let loadingSequence = 0;
@@ -506,9 +510,9 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     )){
       return Promise.resolve({id,state:'ready'});
     }
-    // A chegada da Orbe ao Tarot não admite alvo provisório. O mundo e o
-    // listener de revelação precisam existir antes de a rota ficar visível.
-    if(ARRIVAL_CRITICAL_ROUTES_V576.has(id)){
+    // Mundos em que a Orbe revela, descobre, continua, escuta ou escreve não
+    // admitem alvo provisório: altar e gesto existem antes da rota visível.
+    if(ARRIVAL_CRITICAL_ROUTES_V577.has(id)){
       return load(id).then(instance=>({
         id,
         state:'ready-for-arrival',
@@ -519,8 +523,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     const budget=document.documentElement.dataset.performanceTier==='constrained'
       ? 24
       : NAVIGATION_PREPARE_BUDGET_MS_V535;
-    // Nos mundos não críticos, somente import/CSS entram no orçamento da
-    // viagem. O Tarot foi resolvido acima e já possui altar antes do commit.
+    // Nos demais mundos, o altar universal estável já é o destino definitivo;
+    // o conteúdo secundário continua entrando pelo orçamento curto.
     const settled=prime(id).then(
       ()=>({id,state:'primed',deferred:true}),
       error=>({id,state:'prime-error',error,deferred:true})

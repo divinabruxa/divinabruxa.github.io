@@ -1,0 +1,38 @@
+DIVINA BRUXA — V577 — ORBE SUPREMA 2.0 — MACROETAPA 2
+
+OBJETIVO
+Levar a base aprovada do Tarot Livre para as 17 realidades do site:
+- uma única Orbe física;
+- viagem contínua do menu ao destino;
+- pouso físico no altar definitivo;
+- nenhum teleporte e nenhuma Orbe duplicada visível;
+- centralização estável no iPhone;
+- Tarot Livre V576 preservado sem alteração.
+
+INSTALAÇÃO
+1. Parta do site com a V576 já instalada e aprovada.
+2. Extraia este ZIP.
+3. Envie todos os arquivos diretamente para a raiz do site.
+4. Substitua os arquivos de mesmo nome.
+5. Não crie pastas.
+6. Abra o site uma vez com internet para o Service Worker V577 renovar o shell.
+
+TESTE DE GATE
+Home → menu → abrir cada realidade → confirmar que a mesma Orbe viaja e repousa
+no centro do altar. Depois: Home → menu → Tarot Livre → revelar uma carta.
+
+ARQUIVOS DO PACOTE
+- index.html
+- app-v208.js
+- page-loader-v1.js
+- orb-persistent-journey-v565.js
+- orb-universal-presence-v526.js
+- orb-universal-presence-v526.css
+- sw.js
+- qa-v577-orbe-suprema2-universal.mjs
+- QA-RESULTADO-V577-ORBE-SUPREMA-2.json
+- DIAGNOSTICO-V577-ORBE-SUPREMA-2-MACROETAPA-2.md
+- MANIFESTO-V577-ORBE-SUPREMA-2-MACROETAPA-2.json
+- HASHES-SHA256-V577.txt
+
+Nenhum arquivo do Tarot Livre foi reenviado ou alterado nesta entrega.

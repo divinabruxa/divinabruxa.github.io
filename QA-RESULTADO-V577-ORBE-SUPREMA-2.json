@@ -1,0 +1,17 @@
+{
+  "release": "V577",
+  "macroStage": "Orbe Suprema 2.0 / Macroetapa 2",
+  "state": "PASS",
+  "passed": 105,
+  "total": 105,
+  "routes": 17,
+  "onePhysicalOrb": true,
+  "travelerCopies": 0,
+  "teleportFallback": false,
+  "universalPhysicalLanding": true,
+  "tarotV576Frozen": true,
+  "tarotFirstRevealRegression": "PASS",
+  "iphonePriority": true,
+  "remoteBrowserLocalhost": "BLOCKED_BY_CLIENT",
+  "physicalDeviceGate": "PENDING_OWNER_INSTALLATION"
+}

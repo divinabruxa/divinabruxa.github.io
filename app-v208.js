@@ -1,6 +1,6 @@
-/* DIVINA BRUXA 4.0 — ORBE SUPREMA 2.0 · MACROETAPA 1 · BASE V576
-   Uma única Orbe física entre Home, menu e Tarot Livre, com altar e gesto
-   preparados antes da chegada. */
+/* DIVINA BRUXA 4.0 — ORBE SUPREMA 2.0 · MACROETAPA 2 · BASE V577
+   A única Orbe física atravessa Home, menu e todas as realidades. Seus altares
+   funcionais são preparados antes da chegada. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -8,8 +8,8 @@ import { createNavigation } from './navigation.js?v=535-fluid-navigation';
 import { orbMotionV207 } from './orb-motion-core-v207.js?v=207';
 import { RealityOrbEngine } from './orb-engine-v208.js?v=576-foundation';
 import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=576-foundation';
-import { createOrbPersistentJourneyV565 } from './orb-persistent-journey-v565.js?v=576-foundation';
-import { createOrbUniversalPresenceV526 } from './orb-universal-presence-v526.js?v=550-single-physics';
+import { createOrbPersistentJourneyV565 } from './orb-persistent-journey-v565.js?v=577-universal';
+import { createOrbUniversalPresenceV526 } from './orb-universal-presence-v526.js?v=577-universal';
 import { installRealityLifecycleV511 } from './reality-lifecycle-v511.js?v=511';
 import { createLivingUniverseV524 } from './living-universe-core-v524.js?v=537-no-fire';
 import { installSkinPerformanceCoreV518 } from './skin-performance-core-v518.js?v=535-mobile-fluidity';
@@ -18,7 +18,7 @@ import { AccountEngineV201 } from './account-engine-v201.js?v=556-journal-consen
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=558-consultations-supreme';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=576-foundation';
+import { createPageLoader } from './page-loader-v1.js?v=577-universal';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -342,7 +342,7 @@ supremeOrb = safely('Núcleo da Orbe Suprema V501', () => createSupremeOrbCoreV5
   loading:loadingPortal
 }));
 
-const orbIOSJourney = safely('Orbe Suprema 2.0 · Base V576', () =>
+const orbIOSJourney = safely('Orbe Suprema 2.0 · Pouso Universal V577', () =>
   createOrbPersistentJourneyV565({ core:supremeOrb, universe:livingUniverse })
 );
 supremeOrb?.setJourneyEngine?.(orbIOSJourney);
@@ -529,14 +529,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v576-app';
+  window.__divinaSWBootstrap = 'v577-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=576', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=577', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v576';
+        document.documentElement.dataset.releaseEpoch = 'v577';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V576 registrado');
+        console.info('[Divina] PWA V577 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -1160,6 +1160,28 @@ window.divinaSingleOrbPhysicsReleaseV550 = Object.freeze({
     presence:orbUniversalPresence?.status?.()||null,
     journey:orbIOSJourney?.status?.()||null,
     motion:orbMotionV207.snapshot?.()||null
+  })
+});
+
+window.divinaOrbSuprema2UniversalV577 = Object.freeze({
+  version:577,
+  plan:'orbe-suprema-2.0',
+  macroStage:'2',
+  title:'Pouso físico universal',
+  preserves:'Tarot Livre V576',
+  iphonePriority:true,
+  routeCount:17,
+  oneCanonicalOrb:true,
+  travelerCopies:0,
+  provisionalLandings:0,
+  teleportFallback:false,
+  stableUniversalHostsBeforeCommit:true,
+  functionalOrbWorldsPreparedBeforeCommit:true,
+  status:()=>Object.freeze({
+    release:'V577',
+    orb:supremeOrb?.snapshot?.()||null,
+    presence:orbUniversalPresence?.status?.()||null,
+    journey:orbIOSJourney?.status?.()||null
   })
 });
 
@@ -2253,13 +2275,13 @@ const awaken = async () => {
         realityLifecycle:'v511',
         transitionAuthority:'supreme-orb-v501-plus-orbos-v525',
         orbOS:'v525',
-        orbUniversalPresence:'v526',
+        orbUniversalPresence:'v577-physical-hosts',
         orbPresenceMacroStage:'2-of-10',
-        physicalOrbHosts:['home','tarot'],
+        physicalOrbHosts:['home','tarot','daily','library','school','spreads','ai','journal','store','consultations','subscriptions','skins','videos','music','notifications','login','admin'],
         dedicatedOrbLandingRoutes:15,
         semanticOrbLandings:true,
         retinaOrbProjections:true,
-        projectionCadence:document.documentElement.dataset.performanceTier === 'constrained' ? 12 : 24,
+        projectionCadence:'inactive-route-event-snapshot',
         presencePermanentAnimationLoops:0,
         touchPresenceWakesUniverse:true,
         whitCoreSupreme:'v527',

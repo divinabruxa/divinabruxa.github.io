@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — ORBOS · PRESENÇA UNIVERSAL V526 */
+/* DIVINA BRUXA — ORBE SUPREMA 2.0 · POUSO FÍSICO UNIVERSAL V577 */
 
 :root {
   /* A atmosfera pertence à skin global. O canvas continua vindo da única
@@ -82,6 +82,34 @@
     0 0 15px color-mix(in srgb, var(--db526-presence-secondary) 46%, transparent),
     0 0 38px color-mix(in srgb, var(--db526-presence-primary) 28%, transparent);
   transition: filter 260ms ease, box-shadow 320ms ease;
+}
+
+/* Quando esta realidade está ativa, a presença deixa de representar a Orbe:
+   ela se torna o altar da própria Orbe física. */
+.db526-orb-presence[data-orb-physical-authority="living"] {
+  overflow: visible;
+  background: transparent;
+  box-shadow: none;
+}
+
+.db526-orb-presence[data-orb-physical-authority="living"] > :not([data-supreme-orb="living"]) {
+  visibility: hidden !important;
+}
+
+.db526-orb-presence[data-orb-physical-authority="living"] > [data-supreme-orb="living"] {
+  display: grid !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  transform: none !important;
+  translate: none !important;
+  scale: 1 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .db526-orb-presence::before {
