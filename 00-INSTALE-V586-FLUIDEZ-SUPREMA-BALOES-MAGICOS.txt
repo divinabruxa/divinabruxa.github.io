@@ -1,0 +1,67 @@
+DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA
+MACROETAPA 7 DE 10 — SISTEMA DE BALÕES MÁGICOS VIVOS
+RELEASE V586 · BASE OBRIGATÓRIA V585
+
+INSTALAÇÃO
+
+1. Confirme que a V585 já está instalada.
+2. Envie para a raiz do site e substitua SOMENTE estes 5 arquivos:
+
+   app-v208.js
+   index.html
+   magical-bubble-system-v586.js
+   magical-bubble-system-v586.css
+   sw.js
+
+3. Mantenha os nomes exatamente como estão.
+4. Não apague nenhum outro arquivo e não reinstale pacotes antigos.
+5. Abra o site e aguarde a atualização automática do portal V586.
+
+O QUE ESTA ETAPA ENTREGA
+
+- Um único balão físico reutilizável para todo o universo. Nunca há enxame,
+  card circular repetido ou segundo corpo competindo com a Orbe.
+- Quatro microintenções inéditas para cada uma das 16 realidades fora da
+  Home: 64 intenções no total, sempre com no máximo quatro palavras.
+- A Home continua absoluta: universo e Orbe, sem balão visível.
+- O balão surge apenas depois de uma chegada concluída ou gesto vertical com
+  sentido. Ele vive por alguns segundos e retorna naturalmente ao silêncio.
+- Na mesma sessão, uma intenção já vivida não se repete. Depois das quatro
+  intenções de uma realidade, o sistema escolhe o silêncio.
+- Cinco formas orgânicas podem aparecer sem sequência mecânica; a forma é
+  imprevisível, mas o significado continua ligado à realidade atual.
+- Tocar no balão abre o mergulho vertical já criado pela V585. Ele não inventa
+  outra navegação nem cria um portal visual concorrente.
+- Durante viagem ou menu, o balão é removido fisicamente do DOM e seus efeitos
+  param imediatamente. O movimento da Orbe mantém prioridade absoluta.
+- Whit permanece dentro da única Orbe e só responde quando chamada. Os balões
+  têm voz do universo, não acionam fala, IA, rede ou dados privados.
+- Tarot Livre e Carta do Dia recebem magia mínima sem alteração de cartas,
+  mesa, sessão, sorteio, política ou pouso funcional.
+- Loja, Consultas, Premium, Conta, Notificações, Música e Central usam magia
+  curta com origem, limites, consentimento e clareza prática.
+- O mesmo estado atravessa iPhone compacto e iPhone Duo aberto sem recriar a
+  Orbe ou o balão. Teclado, safe areas, rotação e movimento reduzido são
+  respeitados.
+
+ARQUIVOS DE AUDITORIA
+
+Os arquivos qa-*.mjs, RELATORIO e MANIFESTO documentam a entrega e não precisam
+ser enviados ao servidor para o site funcionar.
+
+RESULTADO DA AUDITORIA AUTOMÁTICA
+
+- Sistema de Balões Mágicos V586: 138/138 PASS
+- Runtime do balão único: 35/35 PASS
+- Service Worker V586: 30/30 PASS
+- Regressão da Linguagem Viva V585: 21/21 PASS
+- Regressão da navegação física da Orbe: 8/8 PASS
+- Total: 232/232 verificações aprovadas
+- Perfis geométricos: 8, incluindo iPhone Duo fechado e aberto
+- P0: 0
+- P1: 0
+
+PRÓXIMA MACROETAPA
+
+Macroetapa 8 de 10: lapidar realidade por realidade, começando por Tarot Livre
+e Carta do Dia, preservando os motores já aprovados.

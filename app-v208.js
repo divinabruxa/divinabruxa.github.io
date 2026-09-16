@@ -1,7 +1,6 @@
-/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · LINGUAGEM VIVA V585
-   A tela revela coordenadas do mesmo universo. Cada realidade começa com uma
-   intenção mínima; a única Orbe pousa no limiar e a profundidade já existente
-   continua abaixo. Home, Tarot Livre e Carta do Dia permanecem protegidos. */
+/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · BALÕES MÁGICOS VIVOS V586
+   A tela revela coordenadas do mesmo universo. Um único balão físico oferece
+   intenções raras e abre profundidade; Home, viagem, Orbe e silêncio mandam. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -57,6 +56,7 @@ import { createPwaPerformanceRecoveryCoreV546 } from './pwa-performance-recovery
 import { createSecurityPrivacyCoreV547 } from './security-privacy-core-v547.js?v=547';
 import { createPageDesignSupremeV560 } from './page-design-supreme-v560.js?v=560';
 import { createRealityIntentionLanguageV585 } from './reality-intention-language-v585.js?v=585';
+import { createMagicalBubbleSystemV586 } from './magical-bubble-system-v586.js?v=586';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -500,6 +500,15 @@ const realityIntentionLanguage = safely('Linguagem Viva das Realidades V585', ()
   })
 );
 
+// A V586 reutiliza um único balão físico. Ele só aparece depois de uma
+// chegada ou gesto vertical, nunca na Home, no menu ou durante a viagem.
+const magicalBubbles = safely('Sistema de Balões Mágicos Vivos V586', () =>
+  createMagicalBubbleSystemV586({
+    language:realityIntentionLanguage,
+    universe:livingUniverse
+  })
+);
+
 // A V561 se conecta apenas a eventos e ações explícitas. O Diário continua
 // privado; analytics só cria identificador pseudônimo após opt-in registrado.
 const ethicalReturn = safely('Retorno Ético e Conteúdo Diário V561', () =>
@@ -564,14 +573,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v585-app';
+  window.__divinaSWBootstrap = 'v586-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=585', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=586', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v585';
+        document.documentElement.dataset.releaseEpoch = 'v586';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V585 registrado');
+        console.info('[Divina] PWA V586 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -612,6 +621,7 @@ window.orbe = {
   security:securityPrivacy,
   design:pageDesignSupreme,
   language:realityIntentionLanguage,
+  bubbles:magicalBubbles,
   returnGarden:ethicalReturn,
   qaLaunch:qaSupremeLaunch,
   observatory:null,
@@ -789,6 +799,54 @@ window.divinaFluidezSupremaV585 = Object.freeze({
       depthRequiresExplicitGesture:true,
       verticalLivingInformation:true,
       automaticWhitEveryTouch:false,
+      silenceIsPresence:true,
+      duplicateOrb:false,
+      teleport:false,
+      flicker:false,
+      heavyEffectsPausedDuringTravel:true,
+      iphoneFirst:true,
+      iphoneDuo:'continuous-compact-to-expanded',
+      tarotProtected:true,
+      dailyProtected:true,
+      newCanvases:0,
+      newAnimationLoops:0,
+      mutationObservers:0
+    });
+  }
+});
+window.divinaFluidezSupremaV586 = Object.freeze({
+  version:586,
+  base:'V585',
+  stage:'living-magical-bubbles',
+  orb:supremeOrb,
+  bubbles:magicalBubbles,
+  status:() => {
+    const bubbles = magicalBubbles?.status?.() || null;
+    return Object.freeze({
+      release:'V586',
+      base:'V585',
+      macroStage:'7-of-10',
+      screenModel:'coordinate-reveal',
+      axes:Object.freeze({
+        horizontal:'travel-between-realities',
+        vertical:'immersion',
+        depth:'contextual-discovery'
+      }),
+      onePhysicalOrb:supremeOrb?.snapshot?.().oneLivingOrb === true,
+      bubbles,
+      supportedRealities:bubbles?.supportedRealities || 16,
+      totalMicroIntents:bubbles?.totalMicroIntents || 64,
+      microIntentsPerReality:bubbles?.microIntentsPerReality || 4,
+      maximumWords:bubbles?.maximumWords || 4,
+      simultaneousBubbles:1,
+      samePhysicalBubble:true,
+      homeVisibleBubbles:0,
+      verticalDepthPortal:true,
+      repeatWithinSession:false,
+      unpredictableForm:true,
+      coherentMeaning:true,
+      automaticWhitEveryTouch:false,
+      whitSilentUntilInvited:true,
       silenceIsPresence:true,
       duplicateOrb:false,
       teleport:false,
@@ -1978,6 +2036,7 @@ window.divinaOrbV208 = Object.freeze({
   security:securityPrivacy,
   design:pageDesignSupreme,
   language:realityIntentionLanguage,
+  bubbles:magicalBubbles,
   returnGarden:ethicalReturn,
   miniOrbs:supremeOrb?.projections?.() || [],
   snapshot:() => supremeOrb?.snapshot?.() || orbMotionV207.snapshot()
@@ -2006,6 +2065,7 @@ window.divinaOrbSupremeV501 = Object.freeze({
   security:securityPrivacy,
   design:pageDesignSupreme,
   language:realityIntentionLanguage,
+  bubbles:magicalBubbles,
   returnGarden:ethicalReturn,
   navigate:go,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
@@ -2562,6 +2622,15 @@ const awaken = async () => {
         livingRealityLanguageTruthWordsMax:5,
         livingRealityLanguageDepth:'explicit-vertical-gesture',
         livingRealityLanguageHomeThresholds:0,
+        livingMagicalBubbles:'v586',
+        livingMagicalBubblesMacroStage:'7-of-10',
+        livingMagicalBubbleRoutes:16,
+        livingMagicalBubbleIntents:64,
+        livingMagicalBubbleMaxWords:4,
+        livingMagicalBubblePhysicalBodies:1,
+        livingMagicalBubbleHomeVisible:0,
+        livingMagicalBubbleWhit:'silent-until-invited',
+        livingMagicalBubbleTravelPolicy:'remove-immediately',
         iphoneDuoContinuity:'compact-to-expanded-without-restart',
         routeCurtain:false,
         webVibration:false,

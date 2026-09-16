@@ -1,0 +1,154 @@
+DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA
+RELATÓRIO TÉCNICO · MACROETAPA 7 DE 10 · RELEASE V586
+SISTEMA DE BALÕES MÁGICOS VIVOS
+
+1. RESULTADO
+
+A V586 cria uma gramática viva de balões sem transformar a experiência em um
+painel de cards. Há um único botão-balão físico, criado uma vez e reutilizado.
+Ele nasce somente quando há contexto, abre profundidade vertical por gesto
+explícito e deixa o DOM quando chega a hora do silêncio.
+
+O sistema contém 64 microintenções semanticamente curadas: quatro para cada
+uma das 16 realidades fora da Home. Todas são únicas e têm de duas a quatro
+palavras. A Home continua com zero balões visíveis.
+
+2. AUDITORIA DA BASE PUBLICADA V585
+
+Antes da implementação, a experiência publicada em https://divinabruxa.com.br/
+foi aberta e exercitada até a realidade Escola. A auditoria confirmou:
+
+- app-v208.js?v=585-linguagem-viva carregado após renovação do shell;
+- data-reality-language="v585" ativo;
+- 16 limiares de intenção presentes;
+- uma única ocorrência de #orb;
+- viagem até Escola concluída em estado rest;
+- retorno da mesma Orbe à Home;
+- zero erros ou avisos com origem divinabruxa.com.br no console observado.
+
+Mensagens produzidas pela extensão do navegador de auditoria foram isoladas e
+não pertencem ao site.
+
+3. MODELO DE VIDA
+
+CHEGADA
+
+- O balão só é agendado depois do fim físico da viagem.
+- Eventos equivalentes da mesma chegada são deduplicados por rota e tempo.
+- A aparição tem atraso curto e variável para não parecer resposta mecânica.
+
+PRESENÇA
+
+- No máximo um balão existe no DOM.
+- A intenção é escolhida entre as ainda não vividas naquela realidade.
+- A forma é escolhida entre cinco famílias, sem repetir a forma imediatamente.
+- O balão permanece entre 4,7 e 6,1 segundos e então volta ao silêncio.
+- Não existe keyframe, requestAnimationFrame, MutationObserver ou loop próprio.
+
+MERGULHO
+
+- O balão é um botão acessível com alvo mínimo, foco visível e aria-live="off".
+- O toque reutiliza a autoridade vertical da V585; nenhum roteador paralelo foi
+  criado.
+- Um gesto direto em MERGULHAR também pode revelar outra microintenção depois
+  que o movimento vertical assenta.
+
+SILÊNCIO
+
+- Cada intenção aparece no máximo uma vez por sessão.
+- Quando as quatro intenções da realidade já viveram, nenhuma lista reinicia.
+- Home, aba oculta, teclado aberto, menu e viagem mantêm o balão ausente.
+- Whit não fala em nome dos balões e não recebe acionamento automático.
+
+4. FORMAS SEM MECÂNICA REPETITIVA
+
+As cinco formas são seed, veil, crescent, comet e portal. Elas mudam contorno,
+luz e inclinação usando o mesmo corpo. Nenhuma forma cria canvas, imagem,
+renderer, relógio ou animação permanente. O desenho é orgânico, translúcido e
+finito; não imita cards circulares.
+
+5. CONTEÚDO E CLAREZA
+
+Cada realidade mantém coerência própria. Exemplos:
+
+- Tarot Livre: “Escolha com as mãos”;
+- Carta do Dia: “Receba antes de explicar”;
+- Escola: “Pratique até florescer”;
+- Whit: “Chame Whit quando quiser”;
+- Loja: “A origem fica visível”;
+- Consultas: “Limites também acolhem”;
+- Premium: “O essencial permanece livre”;
+- Música: “Nenhuma reprodução automática”;
+- Notificações: “Só chega com permissão”;
+- Conta: “Sua sessão permanece sua”.
+
+6. FLUIDEZ E IPHONE
+
+- Durante viagem e menu, o balão é removido, timers são cancelados e sombras e
+  transições deixam de existir.
+- O posicionamento usa Visual Viewport e limites seguros; nenhum polling é
+  executado.
+- Mudanças de largura reposicionam o mesmo corpo, preservando a continuidade do
+  iPhone fechado ao iPhone Duo aberto.
+- O teclado virtual remove o balão para não encobrir campos.
+- prefers-reduced-motion, forced-colors, contraste alto, modo econômico e tier
+  constrained têm caminhos explícitos.
+- A geometria foi verificada em oito perfis entre 320×568 e 820×1180.
+
+7. PROTEÇÕES ACUMULADAS
+
+Permaneceram byte a byte iguais os motores protegidos da Fundação V580, do
+Universo V581, da Orbe V582, da Viagem V583, do Menu V584 e da Linguagem V585,
+incluindo navigation.js, orb-engine-v208.js, orb-motion-core-v207.js,
+orb-gesture-core-v208.js, supreme-orb-core-v501.js,
+orb-persistent-journey-v565.js, universe-coordinate-law-v583.js,
+orbital-menu-v502.js/.css, living-universe-core-v524.js,
+whit-orb-soul-bridge-v581.js, os núcleos Whit protegidos, Tarot Livre, Carta do
+Dia, tarot-session.js, tarot-data.js e reality-intention-language-v585.js/.css.
+
+8. PRIVACIDADE E REDE
+
+O novo sistema executa:
+
+- zero fetch;
+- zero chamada de API;
+- zero leitura ou escrita em localStorage/sessionStorage;
+- zero leitura de dados privados;
+- zero fala automática;
+- zero novo canvas;
+- zero novo loop de animação.
+
+O Service Worker V586 adiciona JS e CSS dos balões ao shell atômico, valida o
+HTML V586 antes de guardá-lo e continua falhando fechado para rotas privadas.
+
+9. QA
+
+- qa-v586-baloes-magicos.mjs: 138/138 PASS
+- qa-v586-bubble-runtime.mjs: 35/35 PASS
+- qa-v586-service-worker-runtime.mjs: 30/30 PASS
+- qa-v585-language-runtime.mjs: 21/21 PASS
+- qa-v549-orb-navigation-runtime.mjs: 8/8 PASS
+- agregado: 232/232 PASS
+- P0: 0
+- P1: 0
+
+O runtime simulou Home silenciosa, chegada, deduplicação, ausência de repetição,
+troca de forma, pausa em viagem/menu, portal vertical, exaustão em silêncio,
+redimensionamento iPhone Duo e destruição limpa. O worker foi instalado,
+ativado, usado offline, corrompido de propósito e reparado.
+
+10. DELTA DE PRODUÇÃO
+
+Somente cinco arquivos precisam ir ao servidor:
+
+- app-v208.js
+- index.html
+- magical-bubble-system-v586.js
+- magical-bubble-system-v586.css
+- sw.js
+
+11. PRÓXIMO PASSO
+
+Macroetapa 8 de 10: lapidar Tarot Livre e Carta do Dia como primeiras
+realidades completas, sem tocar nos contratos de 78 cartas sem repetição,
+orientação direta, sessão, gesto ou Orbe única.

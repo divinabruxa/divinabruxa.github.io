@@ -1,0 +1,261 @@
+/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · BALÕES MÁGICOS VIVOS V586
+   Um só corpo, aparições finitas, nenhuma órbita em loop. */
+
+html[data-magic-bubbles="v586"]{
+  --db586-gold:#f6dda0;
+  --db586-pearl:#fff8ff;
+  --db586-violet:rgba(181,94,232,.28);
+  --db586-deep:rgba(20,7,31,.9);
+}
+
+.db586-magic-bubble{
+  --db586-x:50vw;
+  --db586-y:50svh;
+  --db586-tilt:-1.5deg;
+  position:fixed;
+  z-index:72;
+  left:var(--db586-x);
+  top:var(--db586-y);
+  inline-size:min(74vw,244px);
+  min-block-size:58px;
+  display:grid;
+  place-items:center;
+  margin:0;
+  padding:15px 21px;
+  border:1px solid rgba(246,221,160,.42);
+  border-radius:58% 42% 54% 46% / 51% 62% 38% 49%;
+  overflow:hidden;
+  isolation:isolate;
+  contain:layout paint style;
+  background:
+    radial-gradient(circle at 24% 18%,rgba(255,255,255,.18),transparent 24%),
+    radial-gradient(circle at 76% 82%,rgba(201,112,242,.2),transparent 46%),
+    linear-gradient(138deg,rgba(50,17,67,.88),var(--db586-deep));
+  color:var(--db586-pearl);
+  box-shadow:
+    0 18px 54px rgba(3,0,8,.34),
+    0 0 34px rgba(193,107,237,.14),
+    inset 0 1px rgba(255,255,255,.1);
+  opacity:0;
+  transform:translate(-50%,-50%) scale(.82) rotate(var(--db586-tilt));
+  transform-origin:50% 55%;
+  transition:
+    opacity 320ms ease,
+    transform 480ms cubic-bezier(.2,.82,.2,1),
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  cursor:pointer;
+}
+
+.db586-magic-bubble[hidden]{
+  display:none!important;
+}
+
+.db586-magic-bubble::before,
+.db586-magic-bubble::after{
+  content:"";
+  position:absolute;
+  pointer-events:none;
+}
+
+.db586-magic-bubble::before{
+  z-index:-1;
+  inset:7%;
+  border:1px solid rgba(255,246,221,.12);
+  border-radius:inherit;
+  opacity:.64;
+  transform:scale(.93);
+  transition:opacity 260ms ease,transform 440ms cubic-bezier(.2,.82,.2,1);
+}
+
+.db586-magic-bubble::after{
+  inline-size:8px;
+  block-size:8px;
+  inset-block-start:15%;
+  inset-inline-end:17%;
+  border-radius:50%;
+  background:#fff7df;
+  box-shadow:0 0 16px 4px rgba(244,205,255,.5);
+  opacity:.7;
+  transition:opacity 240ms ease,transform 440ms cubic-bezier(.2,.82,.2,1);
+}
+
+.db586-magic-bubble>span{
+  position:relative;
+  z-index:1;
+  max-inline-size:20ch;
+  color:inherit;
+  font:600 clamp(.92rem,3.6vw,1.08rem)/1.18 Georgia,"Times New Roman",serif;
+  letter-spacing:.005em;
+  text-align:center;
+  text-wrap:balance;
+  text-shadow:0 1px 18px rgba(0,0,0,.32);
+}
+
+.db586-magic-bubble.is-visible{
+  opacity:1;
+  transform:translate(-50%,-50%) scale(1) rotate(var(--db586-tilt));
+}
+
+.db586-magic-bubble.is-visible::before{
+  opacity:1;
+  transform:scale(1);
+}
+
+.db586-magic-bubble.is-opening{
+  opacity:.16;
+  transform:translate(-50%,-50%) scale(1.12) rotate(0deg);
+  pointer-events:none;
+}
+
+.db586-magic-bubble.is-opening::after{
+  opacity:0;
+  transform:scale(2.2);
+}
+
+.db586-magic-bubble[data-v586-form="seed"]{
+  --db586-tilt:-2deg;
+  border-radius:62% 38% 56% 44% / 67% 58% 42% 33%;
+}
+
+.db586-magic-bubble[data-v586-form="veil"]{
+  --db586-tilt:1.4deg;
+  border-radius:74% 26% 67% 33% / 44% 66% 34% 56%;
+  background:
+    linear-gradient(112deg,rgba(255,255,255,.1),transparent 34%),
+    radial-gradient(ellipse at 70% 76%,rgba(118,145,255,.16),transparent 54%),
+    linear-gradient(142deg,rgba(46,16,67,.88),rgba(14,6,28,.92));
+}
+
+.db586-magic-bubble[data-v586-form="crescent"]{
+  --db586-tilt:-.8deg;
+  border-radius:68% 32% 42% 58% / 39% 61% 39% 61%;
+  box-shadow:
+    -9px 13px 48px rgba(3,0,8,.34),
+    10px -3px 30px rgba(208,125,244,.14),
+    inset -12px 0 22px rgba(8,2,16,.2);
+}
+
+.db586-magic-bubble[data-v586-form="comet"]{
+  --db586-tilt:2deg;
+  inline-size:min(78vw,268px);
+  border-radius:76% 24% 72% 28% / 55% 70% 30% 45%;
+}
+
+.db586-magic-bubble[data-v586-form="portal"]{
+  --db586-tilt:0deg;
+  border-radius:48% 52% 46% 54% / 61% 47% 53% 39%;
+  border-color:rgba(246,221,160,.55);
+  box-shadow:
+    0 18px 54px rgba(3,0,8,.34),
+    0 0 0 5px rgba(196,112,235,.035),
+    0 0 38px rgba(193,107,237,.18),
+    inset 0 0 22px rgba(240,210,255,.06);
+}
+
+.db586-magic-bubble:focus-visible{
+  outline:2px solid #fff6da;
+  outline-offset:5px;
+}
+
+.db586-magic-bubble:is(:hover,:focus-visible){
+  border-color:rgba(255,238,193,.68);
+  box-shadow:
+    0 20px 58px rgba(3,0,8,.38),
+    0 0 42px rgba(209,131,245,.2),
+    inset 0 1px rgba(255,255,255,.14);
+}
+
+.db586-magic-bubble:active{
+  transform:translate(-50%,-50%) scale(.97) rotate(0deg);
+}
+
+html[data-v585-motion="travel"] .db586-magic-bubble,
+html[data-v586-bubble-state="paused"] .db586-magic-bubble,
+html[data-v585-menu]:not([data-v585-menu="closed"]) .db586-magic-bubble{
+  opacity:0!important;
+  transition:none!important;
+  box-shadow:none!important;
+  pointer-events:none!important;
+}
+
+html[data-v585-keyboard="open"] .db586-magic-bubble{
+  display:none!important;
+}
+
+html[data-performance-tier="constrained"] .db586-magic-bubble,
+html[data-save-data="true"] .db586-magic-bubble{
+  background:rgba(24,8,36,.94);
+  box-shadow:0 14px 36px rgba(3,0,8,.3);
+}
+
+@media (max-width:430px){
+  .db586-magic-bubble{
+    inline-size:min(74vw,236px);
+    min-block-size:56px;
+    padding:14px 19px;
+  }
+
+  .db586-magic-bubble[data-v586-form="comet"]{
+    inline-size:min(78vw,252px);
+  }
+}
+
+@media (min-width:700px){
+  .db586-magic-bubble{
+    inline-size:min(30vw,286px);
+    min-block-size:66px;
+    padding:17px 24px;
+  }
+}
+
+@media (orientation:landscape) and (max-height:560px){
+  .db586-magic-bubble{
+    inline-size:min(34vw,250px);
+    min-block-size:50px;
+    padding:11px 18px;
+  }
+}
+
+@media (hover:none){
+  .db586-magic-bubble:hover{
+    border-color:rgba(246,221,160,.42);
+    box-shadow:
+      0 18px 54px rgba(3,0,8,.34),
+      0 0 34px rgba(193,107,237,.14),
+      inset 0 1px rgba(255,255,255,.1);
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .db586-magic-bubble,
+  .db586-magic-bubble::before,
+  .db586-magic-bubble::after{
+    transition:none!important;
+  }
+}
+
+@media (prefers-contrast:more){
+  .db586-magic-bubble{
+    border-color:#fff;
+    background:#160822;
+    color:#fff;
+  }
+}
+
+@media (forced-colors:active){
+  .db586-magic-bubble{
+    border:2px solid ButtonText;
+    background:ButtonFace;
+    color:ButtonText;
+    box-shadow:none;
+    forced-color-adjust:auto;
+  }
+
+  .db586-magic-bubble::before,
+  .db586-magic-bubble::after{
+    display:none;
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "release": "V586",
+  "base": "V585",
+  "plan": "Divina Bruxa 2.0 — Fluidez Suprema",
+  "macroStage": {
+    "number": 7,
+    "total": 10,
+    "name": "Sistema de Balões Mágicos Vivos"
+  },
+  "installation": {
+    "type": "flat-incremental-replacement",
+    "requiredBase": "V585",
+    "productionFiles": [
+      "app-v208.js",
+      "index.html",
+      "magical-bubble-system-v586.js",
+      "magical-bubble-system-v586.css",
+      "sw.js"
+    ]
+  },
+  "contracts": {
+    "screenModel": "coordinate-reveal",
+    "axes": {
+      "horizontal": "travel-between-realities",
+      "vertical": "immersion",
+      "depth": "contextual-discovery"
+    },
+    "supportedRealities": 16,
+    "microIntentsPerReality": 4,
+    "totalMicroIntents": 64,
+    "uniqueMicroIntents": 64,
+    "maximumWords": 4,
+    "organicForms": 5,
+    "simultaneousBubbles": 1,
+    "samePhysicalBubble": true,
+    "homeVisibleBubbles": 0,
+    "homeMinimal": true,
+    "onePhysicalOrb": true,
+    "duplicateOrb": false,
+    "teleport": false,
+    "flicker": false,
+    "opensVerticalDepth": true,
+    "unpredictableForm": true,
+    "coherentMeaning": true,
+    "repeatWithinSession": false,
+    "silenceAfterExhaustion": true,
+    "automaticWhitEveryTouch": false,
+    "whitSilentUntilInvited": true,
+    "travelPolicy": "remove-immediately",
+    "menuPolicy": "remove-immediately",
+    "newCanvases": 0,
+    "newAnimationLoops": 0,
+    "mutationObservers": 0,
+    "privateReads": 0,
+    "storageReads": 0,
+    "storageWrites": 0,
+    "apiCalls": 0,
+    "iphoneFirst": true,
+    "iphoneDuo": "continuous-compact-to-expanded",
+    "safeAreas": true,
+    "softwareKeyboardAware": true,
+    "reducedMotion": true
+  },
+  "protected": {
+    "tarotLivre": true,
+    "cartaDoDia": true,
+    "livingRealityLanguageV585": true,
+    "legendaryMenuV584": true,
+    "universeCoordinateLawV583": true,
+    "whitOrbSoulBridgeV581": true,
+    "navigationRegistry": true,
+    "privateDataCached": false
+  },
+  "liveBaseAudit": {
+    "url": "https://divinabruxa.com.br/",
+    "observedRelease": "V585",
+    "appQuery": "app-v208.js?v=585-linguagem-viva",
+    "realityLanguage": "v585",
+    "thresholds": 16,
+    "canonicalOrbCount": 1,
+    "siteOriginConsoleErrors": 0,
+    "returnHomeVerified": true
+  },
+  "qa": {
+    "magicalBubbles": { "passed": 138, "total": 138, "state": "PASS" },
+    "bubbleRuntime": { "passed": 35, "total": 35, "state": "PASS" },
+    "serviceWorkerRuntime": { "passed": 30, "total": 30, "state": "PASS" },
+    "languageRuntimeRegression": { "passed": 21, "total": 21, "state": "PASS" },
+    "orbNavigationRuntime": { "passed": 8, "total": 8, "state": "PASS" },
+    "aggregate": { "passed": 232, "total": 232, "state": "PASS" },
+    "iphoneProfiles": 8,
+    "p0": 0,
+    "p1": 0
+  },
+  "payloadSha256": {
+    "app-v208.js": "7f5ce2faed18ccc553c45a0481c87bf5e06955480adbe15cc5d9e37a07a349ac",
+    "index.html": "2455204acb6ffeba5cb80fb8f8f6211737baceff71d68102fb58ed30e79fe8b6",
+    "magical-bubble-system-v586.js": "b98c465d0519af348289c11e9abe4e6da28298459b3e24d84f81a654dd7c755e",
+    "magical-bubble-system-v586.css": "3c6a30c9ff78c1a3aaabcf26cfcde4dcbe163209c2c5ec774a15bf762d064bab",
+    "sw.js": "dfc5148326f016a84793cc1043d5e2f558a172a247cc1a406218ef88e67f87f8",
+    "qa-v586-baloes-magicos.mjs": "c92c6c95d7949fa1242972e5d9e8047669a227f1233b212212491c0ed187c666",
+    "qa-v586-bubble-runtime.mjs": "b8511bdd227769947496f15b67b6bba3e944276bc91d1d3e3ddd57b747abd8d6",
+    "qa-v586-service-worker-runtime.mjs": "cc34798ead494dfd1ee797d45bd69ca228bb7abc662f3a2e46b7122bf1f04d48"
+  }
+}
