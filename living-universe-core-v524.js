@@ -1,12 +1,15 @@
-/* DIVINA BRUXA — UNIVERSO VIVO V524 · CORTE DE FLUIDEZ V537
-   O céu Retina aprovado ganha pigmentação física por skin e nuvens errantes
-   que cedem ao toque. A Orbe permanece ancorada enquanto o universo responde. */
+/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · UNIVERSO VIVO GLOBAL V581
+   Evolução compatível do núcleo V524: um só céu, um só canvas e um só relógio
+   atravessam as 17 realidades. A cadência respira conforme a atividade, pausas
+   têm autoridade composta e a presença ficcional Whit irradia apenas pela Orbe. */
 
 const VERSION = 524;
+const RELEASE = 581;
 export const CELESTIAL_FIRE_ENABLED_V537 = false;
 const STYLE_ID = 'divinaLivingUniverseV524Styles';
 const ROOT_ID = 'divinaLivingUniverseV524';
 const COSMOS_TEXTURE = './divina-universe-retina-v523.webp';
+const PRESENCE_STATES_V581 = new Set(['serene','aware','listening','responding','reflecting','traveling','resting']);
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 const reducedMotion = () => globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
 const constrained = () => document.documentElement.dataset.performanceTier === 'constrained';
@@ -113,6 +116,14 @@ class LivingUniverseCoreV524 {
     this.resolutionLocked = false;
     this.resizeCount = 0;
     this.frameCadence = 'full';
+    this.cadenceMode = 'active';
+    this.suspensions = new Set();
+    this.lastDemandAt = performance.now();
+    this.demandUntil = this.lastDemandAt + 2600;
+    this.framesRendered = 0;
+    this.framesSkipped = 0;
+    this.presenceState = 'serene';
+    this.presenceSignals = 0;
     this.lastSuccessfulDraw = 0;
     this.energy = 0.18;
     this.pointer = { x:0.5, y:0.45 };
@@ -186,7 +197,9 @@ class LivingUniverseCoreV524 {
     this.root.dataset.cosmicDepth = 'four-galaxies-three-star-planes';
     this.root.dataset.constellations = '2-fluid-11-segments';
     this.root.dataset.animationCadence = 'single-raf';
+    this.root.dataset.cadenceMode = this.cadenceMode;
     document.documentElement.dataset.livingUniverse = 'v524';
+    document.documentElement.dataset.livingUniverseRelease = 'v581';
     document.body.classList.remove('db516-universe-active','db519-universe-active','db520-universe-active','db521-universe-active','db522-universe-active','db523-universe-active');
     document.body.classList.add('db524-universe-active');
 
@@ -196,10 +209,11 @@ class LivingUniverseCoreV524 {
     this.loadCosmosTexture();
     this.resize();
     this.bind();
-    this.start();
+    this.start('boot');
 
     const readiness = Object.freeze({
       version:VERSION,
+      release:`V${RELEASE}`,
       engine:'LivingUniverseCoreV524',
       renderer:this.mode,
       staticUniverseImage:false,
@@ -213,6 +227,8 @@ class LivingUniverseCoreV524 {
       retinaSupersampling:true,
       stableRetinaSession:true,
       adaptiveFrameCadence:true,
+      demandAwareCadence:true,
+      compositeSuspension:true,
       photographicCosmosDetail:true,
       spectralStarHalos:true,
       calmStarField:true,
@@ -238,6 +254,7 @@ class LivingUniverseCoreV524 {
       whiteOverexposure:false,
       firePalette:'none',
       skinReactive:true,
+      whitOrbSoulBridgeReady:true,
       selectiveSkinPigment:true,
       physicalOrbTouchMotion:false,
       pausesWhenHidden:true,
@@ -867,7 +884,7 @@ class LivingUniverseCoreV524 {
     this.root.dataset.cosmosTexture = `${image.naturalWidth}x${image.naturalHeight}-retina-live`;
     if (!this.gl || !this.cosmos.texture) {
       this.cosmos.mix = 1;
-      this.start();
+      this.start('texture-ready');
       return true;
     }
     try {
@@ -878,7 +895,7 @@ class LivingUniverseCoreV524 {
         this.gl.TEXTURE_2D, 0, this.gl.RGBA,
         this.gl.RGBA, this.gl.UNSIGNED_BYTE, image
       );
-      this.start();
+      this.start('texture-ready');
       return true;
     } catch (error) {
       this.cosmos.ready = false;
@@ -937,11 +954,28 @@ class LivingUniverseCoreV524 {
       if (this.visible) {
         this.lastFrame = 0;
         this.orbGeometryDirty = true;
-        this.start();
+        this.markDemand('visibility-return', 1100);
+        this.start('document-hidden');
       }
-      else this.pause();
+      else this.pause('document-hidden');
     };
     document.addEventListener('visibilitychange', this.onVisibility);
+    this.onPageHide = () => this.pause('page-lifecycle');
+    this.onPageShow = () => {
+      this.orbGeometryDirty = true;
+      this.markDemand('page-show', 1200);
+      this.start('page-lifecycle');
+    };
+    this.onFreeze = () => this.pause('document-freeze');
+    this.onResume = () => {
+      this.orbGeometryDirty = true;
+      this.markDemand('document-resume', 1200);
+      this.start('document-freeze');
+    };
+    addEventListener('pagehide', this.onPageHide, { passive:true });
+    addEventListener('pageshow', this.onPageShow, { passive:true });
+    document.addEventListener('freeze', this.onFreeze);
+    document.addEventListener('resume', this.onResume);
     this.onPointerMove = event => {
       const next = {
         x:clamp(event.clientX / Math.max(innerWidth, 1), 0, 1),
@@ -964,6 +998,7 @@ class LivingUniverseCoreV524 {
         x:(this.pointerTarget.x - 0.5) * 0.085,
         y:(this.pointerTarget.y - 0.5) * 0.055
       };
+      this.markDemand('pointer-flow', event.pointerType === 'touch' ? 2200 : 900);
     };
     this.onPointerDown = event => {
       this.pointerTarget = {
@@ -985,12 +1020,14 @@ class LivingUniverseCoreV524 {
       };
       this.energy = Math.max(this.energy, 1);
       this.orbEnergy = Math.max(this.orbEnergy, 0.72);
+      this.markDemand('pointer-down', 2600);
     };
     this.onPointerUp = () => {
       this.touch.active = false;
       this.touch.target = Math.max(this.touch.target, 0.34);
       this.touch.velocityTarget.x *= 0.42;
       this.touch.velocityTarget.y *= 0.42;
+      this.markDemand('pointer-release', 1600);
     };
     addEventListener('pointermove', this.onPointerMove, { passive:true });
     addEventListener('pointerdown', this.onPointerDown, { passive:true });
@@ -1037,13 +1074,15 @@ class LivingUniverseCoreV524 {
       this.touch.lastMoveAt = performance.now();
       this.energy = Math.max(this.energy, intensity);
       this.orbGeometryDirty = true;
-      this.start();
+      this.markDemand('orb-pulse', 2800);
+      this.start('orb-pulse');
     };
     document.addEventListener('divina:supreme-orb-pulse', this.onOrbPulse);
     this.onOrbJourney = event => {
       this.orbGeometryDirty = true;
       this.orbEnergy = Math.max(this.orbEnergy, 0.82);
       if (event?.detail?.to) this.setRoute(event.detail.to);
+      this.markDemand('orb-journey', 2400);
     };
     this.onOrbJourneyError = () => this.setRoute(routeNow());
     document.addEventListener('divina:supreme-orb-will-navigate', this.onOrbJourney);
@@ -1054,11 +1093,11 @@ class LivingUniverseCoreV524 {
     document.addEventListener('divina:orbital-menu-ready', this.onOrbJourney);
     this.onContextLost = event => {
       event.preventDefault();
-      this.pause();
+      this.pause('context-loss');
       this.root.dataset.context = 'lost-fallback';
       this.useCanvasFallback();
       this.resize({ force:true });
-      this.start();
+      this.start('context-loss');
     };
     this.contextEventCanvas = this.canvas;
     this.contextEventCanvas.addEventListener('webglcontextlost', this.onContextLost, { passive:false });
@@ -1088,6 +1127,64 @@ class LivingUniverseCoreV524 {
     this.energy = Math.max(this.energy, 0.82);
     this.orbGeometryDirty = true;
     this.root.dataset.route = next;
+    this.markDemand('route-morph', 3200);
+    this.start('route-morph');
+  }
+
+  markDemand(reason = 'activity', duration = 1800) {
+    const now = performance.now();
+    this.lastDemandAt = now;
+    this.demandUntil = Math.max(this.demandUntil || 0, now + Math.max(0, Number(duration) || 0));
+    if (this.root) this.root.dataset.lastDemand = String(reason || 'activity').slice(0, 48);
+    return this.demandUntil;
+  }
+
+  signalPresence({ state = 'aware', strength = 0.34 } = {}) {
+    const next = PRESENCE_STATES_V581.has(state) ? state : 'aware';
+    const energy = clamp(Number(strength) || 0.34, 0.08, 0.88);
+    this.presenceState = next;
+    this.presenceSignals += 1;
+    this.root.dataset.whitOrbPresence = next;
+    this.orbEnergy = Math.max(this.orbEnergy, next === 'traveling' ? 0.28 : energy);
+    if (!['traveling','resting'].includes(next)) {
+      this.energy = Math.max(this.energy, energy * 0.72);
+      this.touch.target = Math.max(this.touch.target, energy * 0.58);
+      this.markDemand(`whit-${next}`, next === 'reflecting' ? 3200 : 1900);
+      this.start('whit-presence');
+    }
+    return Object.freeze({ release:`V${RELEASE}`, state:next, strength:energy, visualOnly:true });
+  }
+
+  cadenceFor(timestamp = performance.now()) {
+    const mobile = this.width < 700;
+    const sinceDemand = Math.max(0, timestamp - Math.max(this.lastDemandAt || 0, this.touch.lastMoveAt || 0));
+    const active = this.touch.active
+      || timestamp < (this.demandUntil || 0)
+      || this.energy > 0.34
+      || this.orbEnergy > 0.32;
+    let mode = 'active';
+    let fps = this.requestedFps;
+    if (reducedMotion()) {
+      mode = 'reduced';
+      fps = Math.min(fps, 20);
+    } else if (constrained() || this.qualityProfile === 'protected') {
+      mode = active ? 'protected-active' : 'protected-idle';
+      fps = Math.min(fps, active ? 30 : 20);
+    } else if (!active && sinceDemand > 9000) {
+      mode = 'deep-idle';
+      fps = Math.min(fps, mobile ? 24 : 30);
+    } else if (!active) {
+      mode = 'ambient';
+      fps = Math.min(fps, mobile ? 30 : 40);
+    }
+    if (this.degraded) fps = Math.min(fps, Math.max(30, this.requestedFps - 15));
+    this.targetFps = clamp(Math.round(fps), 20, 60);
+    if (mode !== this.cadenceMode) {
+      this.cadenceMode = mode;
+      this.root.dataset.cadenceMode = mode;
+    }
+    this.frameCadence = mode;
+    return this.targetFps;
   }
 
   updateOrbGeometry() {
@@ -1366,7 +1463,10 @@ class LivingUniverseCoreV524 {
   adapt(delta) {
     const interval = 1000 / Math.max(20, this.targetFps);
     this.frameTimeEma += (delta - this.frameTimeEma) * 0.055;
-    if (reducedMotion() || constrained() || this.requestedFps <= 40) return;
+    if (this.cadenceMode !== 'active' || reducedMotion() || constrained() || this.requestedFps <= 40) {
+      this.slowFrames = Math.max(0, this.slowFrames - 1);
+      return;
+    }
 
     if (delta > interval * 1.52 || this.frameTimeEma > interval * 1.32) {
       this.slowFrames += 1;
@@ -1380,24 +1480,23 @@ class LivingUniverseCoreV524 {
       this.slowFrames = 0;
       this.calmFrames = 0;
       this.degraded = true;
-      this.targetFps = Math.max(45, this.requestedFps - 15);
-      this.frameCadence = 'calm-45';
       this.root.dataset.adaptiveQuality = 'stable-retina-calm-cadence';
       return;
     }
 
     if (this.degraded && this.calmFrames >= Math.round(this.targetFps * 8)) {
       this.calmFrames = 0;
-      this.targetFps = this.requestedFps;
       this.degraded = false;
-      this.frameCadence = 'full';
       this.root.dataset.adaptiveQuality = 'stable-retina-recovered';
     }
   }
 
   frame(timestamp) {
-    if (this.destroyed || !this.visible) return;
-    const interval = 1000 / this.targetFps;
+    if (this.destroyed || !this.visible || this.suspensions.size) {
+      this.raf = 0;
+      return;
+    }
+    const interval = 1000 / this.cadenceFor(timestamp);
     if (timestamp - this.lastDraw >= interval - 0.5) {
       const delta = this.lastFrame ? Math.min(80, timestamp - this.lastFrame) : interval;
       this.lastFrame = timestamp;
@@ -1432,21 +1531,32 @@ class LivingUniverseCoreV524 {
       if (this.mode === 'webgl-procedural') this.drawWebGL(timestamp);
       else this.drawCanvas(timestamp);
       this.lastSuccessfulDraw = timestamp;
+      this.framesRendered += 1;
       this.adapt(delta);
-    }
+    } else this.framesSkipped += 1;
     this.raf = requestAnimationFrame(next => this.frame(next));
   }
 
-  start() {
-    if (this.destroyed || !this.visible || this.raf) return;
+  start(reason = 'manual') {
+    const key = String(reason || 'manual');
+    if (this.suspensions.has(key)) this.suspensions.delete(key);
+    if (this.destroyed || !this.visible || this.suspensions.size || this.raf) {
+      this.root.dataset.suspended = this.suspensions.size ? [...this.suspensions].join(' ') : 'false';
+      return false;
+    }
     this.lastFrame = 0;
     this.lastDraw = 0;
+    this.root.dataset.suspended = 'false';
     this.raf = requestAnimationFrame(timestamp => this.frame(timestamp));
+    return true;
   }
 
-  pause() {
+  pause(reason = 'manual') {
+    this.suspensions.add(String(reason || 'manual'));
     if (this.raf) cancelAnimationFrame(this.raf);
     this.raf = 0;
+    this.root.dataset.suspended = [...this.suspensions].join(' ');
+    return true;
   }
 
   ignite({ x=0.5, y=0.5, strength=1 }={}) {
@@ -1460,12 +1570,14 @@ class LivingUniverseCoreV524 {
     this.touch.target = Math.max(this.touch.target, clamp(strength,0.35,1.2));
     this.touch.lastMoveAt = performance.now();
     this.orbEnergy = Math.max(this.orbEnergy, clamp(strength * 0.72, 0.2, 1.2));
-    this.start();
+    this.markDemand('ignite', 2600);
+    this.start('interaction');
   }
 
   status() {
     return Object.freeze({
       version:VERSION,
+      release:`V${RELEASE}`,
       renderer:this.mode,
       route:this.route,
       staticUniverseImage:false,
@@ -1492,6 +1604,10 @@ class LivingUniverseCoreV524 {
       adaptivePixelBudget:false,
       adaptiveFrameCadence:true,
       frameCadence:this.frameCadence,
+      cadenceMode:this.cadenceMode,
+      demandAwareCadence:true,
+      framesRendered:this.framesRendered,
+      framesSkipped:this.framesSkipped,
       spectralStarHalos:true,
       calmStarField:true,
       synchronizedBlinking:false,
@@ -1513,6 +1629,9 @@ class LivingUniverseCoreV524 {
       parallaxCamera:true,
       scrollParallax:true,
       orbGravityField:true,
+      whitOrbPresenceState:this.presenceState,
+      whitOrbPresenceSignals:this.presenceSignals,
+      whitPresenceVisualOnly:true,
       clockPausesWhenHidden:true,
       skinReactive:true,
       selectiveSkinPigment:true,
@@ -1527,13 +1646,15 @@ class LivingUniverseCoreV524 {
       birthProgress:-1,
       contextFallback:true,
       continuousAnimationLoops:1,
+      compositeSuspension:true,
+      suspensionReasons:Object.freeze([...this.suspensions]),
       paused:!this.raf
     });
   }
 
   destroy() {
     this.destroyed = true;
-    this.pause();
+    this.pause('destroy');
     clearTimeout(this.resizeTimer);
     this.observer?.disconnect();
     removeEventListener('resize', this.onResize);
@@ -1545,6 +1666,10 @@ class LivingUniverseCoreV524 {
     removeEventListener('pointerup', this.onPointerUp);
     removeEventListener('pointercancel', this.onPointerUp);
     document.removeEventListener('visibilitychange', this.onVisibility);
+    removeEventListener('pagehide', this.onPageHide);
+    removeEventListener('pageshow', this.onPageShow);
+    document.removeEventListener('freeze', this.onFreeze);
+    document.removeEventListener('resume', this.onResume);
     ['divina:skin-change','divina:skin-applied','skin:changed','orbe:skin-change']
       .forEach(type => document.removeEventListener(type, this.onSkinChange));
     document.removeEventListener('divina:route-ready', this.onRouteEvent);
@@ -1566,6 +1691,7 @@ class LivingUniverseCoreV524 {
     this.root.remove();
     document.body.classList.remove('db524-universe-active');
     delete document.documentElement.dataset.livingUniverse;
+    delete document.documentElement.dataset.livingUniverseRelease;
     if (globalThis.divinaLivingUniverseV524 === this) delete globalThis.divinaLivingUniverseV524;
     if (globalThis.divinaLivingUniverseV523 === this) delete globalThis.divinaLivingUniverseV523;
     if (globalThis.divinaLivingUniverseV522 === this) delete globalThis.divinaLivingUniverseV522;

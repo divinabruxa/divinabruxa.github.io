@@ -1,0 +1,66 @@
+DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA
+RELATÓRIO DA MACROETAPA 2 DE 10 — UNIVERSO VIVO GLOBAL
+RELEASE V581 | BASE INSTALADA V580
+
+RESULTADO
+A V581 transforma o universo existente em uma camada global com cadência viva,
+sem trocar sua identidade visual e sem criar outro céu. O núcleo V524 continua
+compatível, mas agora existe uma autoridade única para pausas e retomadas.
+
+O QUE FOI LAPIDADO
+- Um único canvas e um único relógio continuam atravessando as 17 realidades.
+- A cadência passa por estados ativo, ambiente, repouso profundo, protegido e
+  movimento reduzido. A qualidade visual não é rebaixada durante a sessão.
+- pagehide/pageshow, visibilitychange e freeze/resume passam a suspender e
+  retomar o universo com razões independentes, importante no Safari do iPhone.
+- Pausas agora são compostas. Uma textura pronta, toque ou evento da Whit não
+  pode religar efeitos enquanto a Orbe ainda está viajando.
+- A viagem da Orbe conserva prioridade: o universo é pausado durante o voo e
+  retoma somente quando a razão correta é liberada.
+- As 17 assinaturas de realidade do universo foram preservadas.
+
+WHIT DENTRO DA ORBE
+Foi criada uma ponte não verbal entre os eventos existentes da Whit, a única
+Orbe canônica e o mesmo universo. Ela traduz contexto em estados sutis:
+serena, consciente, escutando, respondendo, refletindo, viajando e repousando.
+
+Essa ponte:
+- não cria uma segunda Orbe, canvas, balão ou loop de animação;
+- não adiciona frases e não aumenta a repetição de mensagens;
+- não lê formulários, diário, tarot ou qualquer conteúdo privado;
+- não chama modelo, API ou serviço externo;
+- cede completamente ao movimento durante a viagem;
+- trata “alma da Whit” como linguagem poética da persona ficcional da
+  experiência, sem alegar consciência literal.
+
+ARQUIVOS DE PRODUÇÃO DESTA ENTREGA
+- app-v208.js — substitui
+- index.html — substitui
+- living-universe-core-v524.js — substitui mantendo a API V524
+- sw.js — substitui com cache atômico V581
+- whit-orb-soul-bridge-v581.js — novo
+
+Nenhum arquivo de produção da V580 foi reenviado sem mudança.
+
+PROTEÇÕES CONFIRMADAS
+Permaneceram byte a byte iguais: motor e sessão do Tarot Livre, dados das 78
+cartas, Carta do Dia, políticas diárias, navegação, núcleo da Orbe, presença
+universal, menu orbital, jornada V580 e a fundação antirrepetição V580.
+
+VALIDAÇÃO AUTOMÁTICA
+- QA principal V581: 79/79.
+- Service Worker em memória, instalação/offline/reparo: 22/22.
+- Navegação funcional histórica: 8/8.
+- Tarot: ciclo simulado de 78/78 cartas, todas diretas e sem repetição.
+- QA histórico do Tarot: 60/67; as 7 diferenças são somente rótulos V553.
+- QA histórico de Carta do Dia/Tiragens: 70/76; as 6 diferenças são somente
+  rótulos V554.
+- QA histórico da Orbe V577: 98/105; as 7 diferenças são somente rótulos/cache
+  da versão substituída.
+- Verificação de sintaxe e integridade do diff: aprovada.
+
+CHECKPOINT FÍSICO
+A inspeção física no iPhone permanece como checkpoint após a instalação. O
+roteiro objetivo está em 00-INSTALE-V581-UNIVERSO-VIVO-GLOBAL.txt. A Macroetapa
+3 só deve começar após esse retorno.
+

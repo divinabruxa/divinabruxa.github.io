@@ -1,4 +1,4 @@
-/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · FUNDAÇÃO V580 SOBRE BASE V577
+/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · UNIVERSO VIVO GLOBAL V581
    A única Orbe física atravessa Home, menu e todas as realidades. Seus altares
    funcionais são preparados antes da chegada. As mensagens compartilham uma
    única autoridade antirrepetição, sem novo efeito visual. */
@@ -12,7 +12,7 @@ import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=576-found
 import { createOrbPersistentJourneyV565 } from './orb-persistent-journey-v565.js?v=580-foundation';
 import { createOrbUniversalPresenceV526 } from './orb-universal-presence-v526.js?v=577-universal';
 import { installRealityLifecycleV511 } from './reality-lifecycle-v511.js?v=511';
-import { createLivingUniverseV524 } from './living-universe-core-v524.js?v=537-no-fire';
+import { createLivingUniverseV524 } from './living-universe-core-v524.js?v=581-living-universe';
 import { installSkinPerformanceCoreV518 } from './skin-performance-core-v518.js?v=535-mobile-fluidity';
 import { AuthClientV201 as AuthClient } from './auth-client-v201.js?v=532';
 import { AccountEngineV201 } from './account-engine-v201.js?v=556-journal-consent';
@@ -35,6 +35,7 @@ import { createWhitMindV312 } from './whit-mind-v312.js?v=557-event-driven';
 import { createWhitGenerationBridgeV313 } from './whit-generation-bridge-v313.js?v=316-silent1';
 import { createWhitSilentPresenceV316 } from './whit-silent-presence-v316.js?v=557-event-driven';
 import { createWhitCoreSupremeV527 } from './whit-core-supreme-v527.js?v=580-foundation';
+import { createWhitOrbSoulBridgeV581 } from './whit-orb-soul-bridge-v581.js?v=581-living-universe';
 import { createTarotUniverseCoreV528 } from './tarot-universe-core-v528.js?v=528';
 import { createWisdomUniverseCoreV529 } from './wisdom-universe-core-v529.js?v=529';
 import { createExperienceConversionCoreV530 } from './experience-conversion-core-v530.js?v=559-media-guard';
@@ -277,7 +278,7 @@ document.getElementById('divinaLivingUniverseV523')?.remove();
 document.getElementById('divinaLivingUniverseV523Styles')?.remove();
 document.body?.classList.remove('db523-universe-active');
 
-const livingUniverse = safely('Pele Cósmica Tátil V524', () =>
+const livingUniverse = safely('Universo Vivo Global V581', () =>
   createLivingUniverseV524()
 );
 
@@ -395,6 +396,14 @@ const whitSupreme = safely('Whit Core Suprema V527', () =>
     universe:livingUniverse,
     go,
     messageGovernor
+  })
+);
+
+const whitOrbSoul = safely('Whit na Orbe · Ponte Não Verbal V581', () =>
+  createWhitOrbSoulBridgeV581({
+    orbCore:supremeOrb,
+    universe:livingUniverse,
+    whit:whitSupreme
   })
 );
 
@@ -544,14 +553,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v580-app';
+  window.__divinaSWBootstrap = 'v581-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=580', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=581', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v580';
+        document.documentElement.dataset.releaseEpoch = 'v581';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V580 registrado');
+        console.info('[Divina] PWA V581 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -571,6 +580,7 @@ window.orbe = {
   journey:orbIOSJourney,
   presence:orbUniversalPresence,
   whit:whitSupreme,
+  whitSoul:whitOrbSoul,
   whitDeep,
   tarot:tarotUniverse,
   wisdom:wisdomUniverse,
@@ -612,6 +622,26 @@ window.divinaFluidezSupremaV580 = Object.freeze({
     tarotProtected:true,
     dailyProtected:true,
     newVisualEffects:0
+  })
+});
+window.divinaFluidezSupremaV581 = Object.freeze({
+  version:581,
+  base:'V580',
+  stage:'living-universe-global',
+  universe:livingUniverse,
+  whitSoul:whitOrbSoul,
+  status:() => Object.freeze({
+    release:'V581',
+    base:'V580',
+    oneUniverseCanvas:livingUniverse?.status?.().oneUniverseCanvas === true,
+    universe:livingUniverse?.status?.() || null,
+    whitSoul:whitOrbSoul?.status?.() || null,
+    onePhysicalOrb:supremeOrb?.snapshot?.().oneLivingOrb === true,
+    travelPausesUniverse:true,
+    tarotProtected:true,
+    dailyProtected:true,
+    newOrbEngines:0,
+    newAnimationLoops:0
   })
 });
 const skinPerformanceCore = safely('Skins, desempenho e acabamento V518', () =>
@@ -2344,8 +2374,8 @@ const awaken = async () => {
         webVibration:false,
         nativeHapticsOnly:true,
         loaderProjection:'supreme-orb-v501',
-        fluidity:'v524-retina-tactile-cloud-flow',
-        livingUniverse:'v524',
+        fluidity:'v581-demand-aware-retina-flow',
+        livingUniverse:'v581-on-v524-compatible-core',
         retinaTexture:'divina-universe-retina-v523.webp',
         retinaTextureBackedProceduralWorld:true,
         photographicCosmosDetail:true,
@@ -2368,6 +2398,10 @@ const awaken = async () => {
         horizontalDocumentPan:false,
         rootScrollClamp:true,
         clockPausesWhenHidden:true,
+        universePausesDuringOrbTravel:true,
+        universeCompositeSuspension:true,
+        universeDemandAwareCadence:true,
+        whitOrbSoulBridge:'v581-visual-only',
         contextFallback:true,
         globalUniverseCanvas:true,
         staticUniverseImage:false,
