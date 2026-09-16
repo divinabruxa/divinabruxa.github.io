@@ -1,5 +1,5 @@
 /*
- * DIVINA BRUXA — ORBE 2.0 V208 · CONTINUIDADE IPHONE/PWA V574
+ * DIVINA BRUXA 2.0 — ORBE VIVA SUPREMA · ALMA SIMBÓLICA V582
  *
  * A borda da esfera nunca se move. A vida acontece dentro dela:
  * respiração orgânica, matéria líquida, profundidade óptica, cáusticas,
@@ -10,6 +10,8 @@
  * reutiliza este shader e cede completamente à viagem ou ao desempenho.
  * A continuidade V574 recupera o mesmo canvas após perda de contexto e retorno
  * do app, sem recriar a Orbe, abrir outro relógio ou sacrificar o fallback.
+ * A V582 recebe a presença ficcional Whit no mesmo shader e no mesmo relógio:
+ * nenhuma segunda Orbe, nenhuma fala automática e nenhum loop adicional.
  */
 
 import { orbMotionV207, requestNativeHapticV207 } from './orb-motion-core-v207.js?v=207';
@@ -24,6 +26,15 @@ const lerp = (from, to, amount) => from + (to - from) * amount;
 const follow = (rate, seconds) => 1 - Math.exp(-rate * seconds);
 const clock = () => performance.now();
 const PORTAL_COMMIT_DELAY_MS_V535 = 64;
+export const ORB_SOUL_STATE_MAP_V582 = Object.freeze({
+  serene:'serene',
+  aware:'attentive',
+  listening:'listening',
+  responding:'responding',
+  reflecting:'listening',
+  traveling:'traveling',
+  resting:'sleeping'
+});
 export const ORB_PRESENCE_PROFILES_V570 = Object.freeze({
   serene:Object.freeze({ energy:.16, breathFloor:.10, breathScale:1 }),
   attentive:Object.freeze({ energy:.21, breathFloor:.12, breathScale:1.02 }),
@@ -333,10 +344,17 @@ export class RealityOrbEngine {
     this.portalTimer = 0;
     this.portalResetTimer = 0;
     this.clickSuppressTimer = 0;
+    this.soulState = 'serene';
+    this.soulExpressions = 0;
+    this.soulLastReason = 'boot';
+    this.ariaAnnouncements = 0;
+    this.ariaRepeatsSuppressed = 0;
+    this.announcementHistory = new Map();
     this.cssState = new Map();
     this.lastCssSync = 0;
     document.documentElement.dataset.orbMagicEngine = 'source-born-microlight-v573';
     document.documentElement.dataset.orbRendererContinuity = 'iphone-pwa-v574';
+    document.documentElement.dataset.orbLivingSoulRenderer = 'v582-existing-clock';
     document.documentElement.dataset.orbRendererState = 'pending';
     if (this.shell) this.shell.dataset.orbRendererState = 'pending';
     this.syncMagicState(this.magicLevel(), true);
@@ -419,6 +437,64 @@ export class RealityOrbEngine {
     }
     this.requestFrame();
     return true;
+  }
+
+  expressSoul({
+    state = 'aware',
+    strength = .24,
+    focus = null,
+    variation = {},
+    reason = 'whit-orb-soul'
+  } = {}) {
+    if (this.destroyed) return null;
+    const semantic = Object.prototype.hasOwnProperty.call(ORB_SOUL_STATE_MAP_V582, state)
+      ? state
+      : 'aware';
+    const physical = ORB_SOUL_STATE_MAP_V582[semantic];
+    const safeReason = String(reason || 'whit-orb-soul').replace(/\s+/g, '-').slice(0, 64);
+    this.soulState = semantic;
+    this.soulLastReason = safeReason;
+    this.soulExpressions += 1;
+    this.setPresenceState(physical, `soul-${safeReason}`);
+
+    const profile = this.presenceProfile();
+    const quiet = physical === 'traveling' || physical === 'sleeping';
+    if (quiet) {
+      this.targetPressure = 0;
+      this.targetEnergy = profile.energy;
+    } else {
+      const energy = clamp(Number(strength) || profile.energy, .08, .88);
+      const lift = clamp(Number(variation.energy) || 0, -.08, .16);
+      const givenX = Number(focus?.x);
+      const givenY = Number(focus?.y);
+      const x = Number.isFinite(givenX)
+        ? clamp(givenX)
+        : clamp(.5 + clamp(Number(variation.x) || 0, -.14, .14));
+      const y = Number.isFinite(givenY)
+        ? clamp(givenY)
+        : clamp(.5 + clamp(Number(variation.y) || 0, -.14, .14));
+      this.setTarget({ x, y });
+      this.ripple = { x, y, age:0 };
+      this.targetEnergy = Math.max(this.targetEnergy, clamp(profile.energy + energy * .62 + lift, .12, 1.18));
+      this.spin += clamp(Number(variation.spin) || 0, -.16, .16);
+    }
+
+    if (this.shell) {
+      this.shell.dataset.orbSoulState = semantic;
+      this.shell.dataset.orbSoulExpression = String(this.soulExpressions);
+      this.shell.dataset.orbSoulRelease = 'v582';
+    }
+    this.requestFrame();
+    return Object.freeze({
+      release:'V582',
+      state:semantic,
+      rendererState:physical,
+      expression:this.soulExpressions,
+      existingShader:true,
+      existingClock:true,
+      messageIncluded:false,
+      hapticTriggered:false
+    });
   }
 
   setLifeState(next) {
@@ -907,10 +983,20 @@ export class RealityOrbEngine {
   }
 
   pulse(message = 'A Orbe despertou', strength = 1) {
-    this.targetEnergy = Math.max(this.targetEnergy, strength);
-    this.ripple = { x: this.pointer.targetX, y: this.pointer.targetY, age: 0 };
-    this.announce(message, 'PULSO');
-    this.haptic(7);
+    const nonverbalSignal = message && typeof message === 'object';
+    const detail = nonverbalSignal ? message : null;
+    const resolvedStrength = nonverbalSignal
+      ? clamp(Number(detail.intensity) || .76, .2, 1.4)
+      : clamp(Number(strength) || 1, .2, 1.4);
+    if (nonverbalSignal && Number.isFinite(Number(detail.x)) && Number.isFinite(Number(detail.y))) {
+      this.setTarget({ x:clamp(Number(detail.x)), y:clamp(Number(detail.y)) });
+    }
+    this.targetEnergy = Math.max(this.targetEnergy, resolvedStrength);
+    this.ripple = { x:this.pointer.targetX, y:this.pointer.targetY, age:0 };
+    if (!nonverbalSignal) {
+      this.announce(message, 'PULSO');
+      this.haptic(7);
+    }
     clearTimeout(this.pulseTimer);
     this.pulseTimer = setTimeout(() => {
       if (!this.down && !this.opening) {
@@ -955,8 +1041,22 @@ export class RealityOrbEngine {
   }
 
   announce(message, phase) {
-    if (this.status) this.status.textContent = message;
     if (this.shell) this.shell.dataset.orbPhase = phase;
+    const text = typeof message === 'string' ? message.replace(/\s+/g, ' ').trim().slice(0, 140) : '';
+    if (!text || !this.status) return false;
+    const now = clock();
+    const previous = this.announcementHistory.get(text);
+    if (previous !== undefined && now - previous < 18000) {
+      this.ariaRepeatsSuppressed += 1;
+      return false;
+    }
+    this.announcementHistory.set(text, now);
+    for (const [entry, at] of this.announcementHistory) {
+      if (now - at > 45000) this.announcementHistory.delete(entry);
+    }
+    this.status.textContent = text;
+    this.ariaAnnouncements += 1;
+    return true;
   }
 
   haptic(pattern) {
@@ -1091,6 +1191,26 @@ export class RealityOrbEngine {
     this.announce('A Orbe está respirando', 'RESPIRA');
   }
 
+  snapshot() {
+    return Object.freeze({
+      version:208,
+      release:'V582',
+      rendererState:this.shell?.dataset?.orbRendererState || 'pending',
+      lifeState:this.lifeState,
+      presenceState:this.presenceState,
+      soulState:this.soulState,
+      soulLastReason:this.soulLastReason,
+      soulExpressions:this.soulExpressions,
+      ariaAnnouncements:this.ariaAnnouncements,
+      ariaRepeatsSuppressed:this.ariaRepeatsSuppressed,
+      oneCanvas:true,
+      existingShader:true,
+      sharedMotionClock:true,
+      newAnimationLoops:0,
+      messageIncludedBySoul:false
+    });
+  }
+
   destroy() {
     if (this.destroyed) return;
     this.setLifeState(ORB_LIFE_STATES_V208.DESTROYED);
@@ -1137,17 +1257,22 @@ export class RealityOrbEngine {
       this.shell.style.webkitTouchCallout = this.gestureStyle.webkitTouchCallout || '';
     }
     this.motionClient?.destroy();
+    this.announcementHistory.clear();
     this.cssState.clear();
     if (this.shell) {
       delete this.shell.dataset.orbPresenceState;
       delete this.shell.dataset.orbPresenceReason;
       delete this.shell.dataset.orbMagicState;
       delete this.shell.dataset.orbRendererState;
+      delete this.shell.dataset.orbSoulState;
+      delete this.shell.dataset.orbSoulExpression;
+      delete this.shell.dataset.orbSoulRelease;
     }
     delete document.documentElement.dataset.orbMagicEngine;
     delete document.documentElement.dataset.orbMagicState;
     delete document.documentElement.dataset.orbRendererContinuity;
     delete document.documentElement.dataset.orbRendererState;
+    delete document.documentElement.dataset.orbLivingSoulRenderer;
     if (globalThis[ORB_INSTANCE_KEY] === this) delete globalThis[ORB_INSTANCE_KEY];
   }
 }

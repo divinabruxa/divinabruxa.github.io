@@ -1,4 +1,4 @@
-/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · UNIVERSO VIVO GLOBAL V581
+/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · ORBE VIVA SUPREMA V582
    A única Orbe física atravessa Home, menu e todas as realidades. Seus altares
    funcionais são preparados antes da chegada. As mensagens compartilham uma
    única autoridade antirrepetição, sem novo efeito visual. */
@@ -7,7 +7,7 @@ import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
 import { createNavigation } from './navigation.js?v=535-fluid-navigation';
 import { orbMotionV207 } from './orb-motion-core-v207.js?v=207';
-import { RealityOrbEngine } from './orb-engine-v208.js?v=576-foundation';
+import { RealityOrbEngine } from './orb-engine-v208.js?v=582-living-soul';
 import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=576-foundation';
 import { createOrbPersistentJourneyV565 } from './orb-persistent-journey-v565.js?v=580-foundation';
 import { createOrbUniversalPresenceV526 } from './orb-universal-presence-v526.js?v=577-universal';
@@ -35,7 +35,7 @@ import { createWhitMindV312 } from './whit-mind-v312.js?v=557-event-driven';
 import { createWhitGenerationBridgeV313 } from './whit-generation-bridge-v313.js?v=316-silent1';
 import { createWhitSilentPresenceV316 } from './whit-silent-presence-v316.js?v=557-event-driven';
 import { createWhitCoreSupremeV527 } from './whit-core-supreme-v527.js?v=580-foundation';
-import { createWhitOrbSoulBridgeV581 } from './whit-orb-soul-bridge-v581.js?v=581-living-universe';
+import { createWhitOrbSoulBridgeV581 } from './whit-orb-soul-bridge-v581.js?v=582-living-soul';
 import { createTarotUniverseCoreV528 } from './tarot-universe-core-v528.js?v=528';
 import { createWisdomUniverseCoreV529 } from './wisdom-universe-core-v529.js?v=529';
 import { createExperienceConversionCoreV530 } from './experience-conversion-core-v530.js?v=559-media-guard';
@@ -399,7 +399,7 @@ const whitSupreme = safely('Whit Core Suprema V527', () =>
   })
 );
 
-const whitOrbSoul = safely('Whit na Orbe · Ponte Não Verbal V581', () =>
+const whitOrbSoul = safely('Orbe Viva Suprema · Alma Whit V582', () =>
   createWhitOrbSoulBridgeV581({
     orbCore:supremeOrb,
     universe:livingUniverse,
@@ -553,14 +553,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v581-app';
+  window.__divinaSWBootstrap = 'v582-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=581', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=582', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v581';
+        document.documentElement.dataset.releaseEpoch = 'v582';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V581 registrado');
+        console.info('[Divina] PWA V582 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -581,6 +581,7 @@ window.orbe = {
   presence:orbUniversalPresence,
   whit:whitSupreme,
   whitSoul:whitOrbSoul,
+  livingSoul:whitOrbSoul,
   whitDeep,
   tarot:tarotUniverse,
   wisdom:wisdomUniverse,
@@ -641,6 +642,29 @@ window.divinaFluidezSupremaV581 = Object.freeze({
     tarotProtected:true,
     dailyProtected:true,
     newOrbEngines:0,
+    newAnimationLoops:0
+  })
+});
+window.divinaFluidezSupremaV582 = Object.freeze({
+  version:582,
+  base:'V581',
+  stage:'supreme-living-orb',
+  orb:supremeOrb,
+  livingSoul:whitOrbSoul,
+  status:() => Object.freeze({
+    release:'V582',
+    base:'V581',
+    onePhysicalOrb:supremeOrb?.snapshot?.().oneLivingOrb === true,
+    renderer:supremeOrb?.snapshot?.().renderer || null,
+    livingSoul:whitOrbSoul?.status?.() || null,
+    sameRenderer:true,
+    sameMotionClock:true,
+    distinctExpressionProfiles:7,
+    speechAdded:false,
+    travelPriority:true,
+    tarotProtected:true,
+    dailyProtected:true,
+    newCanvases:0,
     newAnimationLoops:0
   })
 });
@@ -2401,7 +2425,12 @@ const awaken = async () => {
         universePausesDuringOrbTravel:true,
         universeCompositeSuspension:true,
         universeDemandAwareCadence:true,
-        whitOrbSoulBridge:'v581-visual-only',
+        whitOrbSoulBridge:'v582-physical-state-on-existing-renderer',
+        orbLivingSoul:'v582-seven-nonverbal-expressions',
+        orbLivingSoulUsesExistingShader:true,
+        orbLivingSoulUsesExistingClock:true,
+        orbLivingSoulSpeechAdded:false,
+        orbRepeatedAriaSuppression:true,
         contextFallback:true,
         globalUniverseCanvas:true,
         staticUniverseImage:false,
