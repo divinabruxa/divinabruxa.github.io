@@ -1,0 +1,89 @@
+DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA
+RELATÓRIO DA MACROETAPA 4 DE 10 — VIAGEM DA ORBE POR COORDENADAS
+RELEASE V583 | BASE INSTALADA V582
+
+RESULTADO
+A navegação deixa de ser tratada como troca conceitual de páginas. A mesma
+tela agora revela coordenadas de um universo contínuo, atravessadas pela mesma
+Orbe física antes, durante e depois da mudança de realidade.
+
+LEI ESPACIAL
+- X / horizontal: viagem entre realidades.
+- Y / vertical: grau de mergulho.
+- Z / profundidade: descoberta.
+- Home: origem 0:0:0.
+- As 17 realidades possuem posições horizontais exclusivas.
+- Todas as 272 transições dirigidas possíveis exigem deslocamento horizontal.
+- O retorno inverte naturalmente a direção da ida.
+
+MAPA CANÔNICO
+- Home 0:0:0
+- Tarot Livre -4:2:2
+- Carta do Dia -3:1:1
+- Tiragens -2:3:2
+- Biblioteca -1:2:2
+- Escola 1:3:3
+- Diário 2:3:2
+- Whit 3:3:3
+- Skins 4:1:1
+- Consultas 5:2:2
+- Loja 6:1:1
+- Música 7:2:2
+- Vídeos 8:2:2
+- Conta 9:0:1
+- Premium 10:2:2
+- Notificações 11:1:1
+- Central da Proprietária 12:3:3
+
+MOVIMENTO CONTÍNUO
+- A única #orb é transportada fisicamente pelo mesmo palco persistente.
+- A antiga fase visual “portal” foi substituída por “crossing”.
+- O caminho completo é: depart → flight → crossing → arrival → settle.
+- A forma varia entre quatro curvas sutis, sem alterar o sentido dos eixos.
+- A profundidade altera apenas a escala da própria Orbe, de forma limitada.
+- O fallback sem Web Animations percorre quadros intermediários reais.
+- Reduced Motion usa um percurso curto de três quadros; não salta ao destino.
+- A Orbe só devolve prioridade aos efeitos depois do pouso físico.
+
+IPHONE E PERFORMANCE
+- Coordenadas visuais ficam dentro da área segura de 390 × 844 na simulação.
+- Transformações usam translate3d e escala no elemento físico existente.
+- O Universo Vivo é pausado em toda travessia e retomado após o assentamento.
+- O renderer da Orbe não é pausado, porque o movimento tem prioridade.
+- Zero canvases, workers, timers permanentes ou loops permanentes novos.
+
+WHIT, SILÊNCIO E BALÕES
+- A alma simbólica Whit permanece na mesma Orbe e no mesmo renderer V582.
+- A chegada a uma coordenada é silenciosa por padrão.
+- Uma fala curta só pode nascer de intenção explícita dirigida à Orbe.
+- O governador V580 continua bloqueando repetição literal e semântica.
+- Cada realidade conserva três frases breves e únicas, com até quatro palavras.
+- Uma intenção por balão; silêncio também é vida.
+
+ARQUIVOS DE PRODUÇÃO DESTA ENTREGA
+- app-v208.js — substitui
+- index.html — substitui
+- orb-persistent-journey-v565.js — substitui
+- universe-coordinate-law-v583.js — adiciona a fonte única de coordenadas
+- sw.js — substitui
+
+Nenhum outro arquivo de produção da V582 foi reenviado.
+
+PROTEÇÕES CONFIRMADAS
+Permaneceram byte a byte iguais: Universo Vivo V581, renderer e relógio da
+Orbe Viva V582, gestos, ponte da alma Whit, Whit Suprema, núcleo canônico V501,
+presença universal, menu orbital, governador antirrepetição, fonte de verdade
+das 17 realidades, navegação, Tarot Livre, sessão/dados das 78 cartas, Carta do
+Dia e políticas diárias.
+
+VALIDAÇÃO AUTOMÁTICA
+- Lei espacial, física e regressões V583: 1179/1179.
+- Service Worker, cache offline e reparo atômico: 22/22.
+- Navegação funcional histórica: 8/8.
+- Matriz espacial: 17 realidades e 272 transições dirigidas.
+- Ciclo do Tarot: 78/78 cartas diretas e sem repetição.
+- Verificação de sintaxe e integridade do diff: aprovada.
+
+AUDITORIA FINAL
+A usuária escolheu continuidade sem inspeções intermediárias. A auditoria
+física consolidada no iPhone real permanece na Macroetapa 10.

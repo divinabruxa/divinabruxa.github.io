@@ -1,41 +1,48 @@
-/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · FUNDAÇÃO V580 SOBRE BASE V577
-   Uma única #orb física sai do menu, atravessa a troca de rota e repousa no
-   altar definitivo de cada realidade. Não há viajante, cópia ou pouso tardio.
-   A fala agora obedece à governança global: contexto, intervalo e silêncio.
+/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · VIAGEM POR COORDENADAS V583
+   Uma única #orb física atravessa o mesmo universo: horizontal é viagem entre
+   realidades, vertical é mergulho e profundidade é descoberta. Não há portal
+   visual, teleporte, pisca, cópia ou troca de corpo durante a travessia.
 */
 
 import { worldForRouteV535 } from './world-truth-registry-v535.js?v=535';
+import {
+  auditUniverseCoordinateLawV583,
+  installUniverseCoordinateLawV583,
+  universeCoordinateKeyV583,
+  universeCoordinateV583,
+  universeJourneyVectorV583
+} from './universe-coordinate-law-v583.js?v=583';
 
-const VERSION = 580;
+const VERSION = 583;
 const INSTANCE = Symbol.for('divina.orb.persistent.journey.v565');
 const ROOT_ID = 'divinaOrbPersistentJourneyV565';
 const STYLE_ID = 'divinaOrbPersistentJourneyV565Styles';
 const VOICE_ID = 'divinaOrbVoiceV571';
 const FLIGHT_ATTR = 'data-orb-global-flight';
 const REST_ATTR = 'data-orb-physical-rest';
-const VOICE_TEXT_LIMIT_V571 = 140;
+const VOICE_TEXT_LIMIT_V571 = 72;
 export const ORB_PRESENCE_STATES_V570 = Object.freeze([
   'serene', 'attentive', 'listening', 'responding', 'traveling', 'sleeping'
 ]);
-const TRAVEL_STATES_V570 = new Set(['depart','flight','portal','arrival','settle','recovery']);
+const TRAVEL_STATES_V570 = new Set(['depart','flight','crossing','arrival','settle','recovery']);
 export const ORB_ROUTE_VOICE_V580 = Object.freeze({
-  home:Object.freeze(['Voltamos ao centro.','A Home respira com você.','O centro está novamente aberto.']),
-  tarot:Object.freeze(['O Tarot Livre está aberto.','A mesa está pronta no seu ritmo.','As cartas esperam o seu toque.']),
-  daily:Object.freeze(['Seu encontro de hoje está aqui.','A Carta do Dia está pronta.','O ritual de hoje pode começar.']),
-  spreads:Object.freeze(['As posições estão prontas.','Escolha a tiragem que combina com sua pergunta.','O templo das tiragens está aberto.']),
-  school:Object.freeze(['O próximo aprendizado começa aqui.','A Escola abriu no seu ritmo.','Seu caminho de estudo está pronto.']),
-  library:Object.freeze(['A Biblioteca está aberta.','As 78 cartas estão ao seu alcance.','Este portal guarda cada símbolo.']),
-  ai:Object.freeze(['Whit está pronta para escutar.','A conversa pode começar quando você quiser.','Whit permanece aqui, sem pressa.']),
-  journal:Object.freeze(['Seu espaço privado permanece seu.','O Diário está aberto somente para você.','Seu Espelho continua protegido.']),
-  store:Object.freeze(['A Loja Mística está aberta.','A curadoria está pronta para ser explorada.','Escolha apenas o que fizer sentido.']),
-  consultations:Object.freeze(['O santuário de consultas está aberto.','Os caminhos de atendimento estão aqui.','Escolha a leitura que combina com sua pergunta.']),
-  subscriptions:Object.freeze(['Seus benefícios aparecem com clareza.','O universo Premium está organizado aqui.','Escolha somente o que deseja ampliar.']),
-  skins:Object.freeze(['A mesma Orbe, uma nova pele.','As formas da Orbe estão reunidas aqui.','A presença continua; a aparência pode mudar.']),
-  videos:Object.freeze(['As histórias estão prontas para você.','O portal de vídeos está aberto.','De Frente com o Tarot começa quando você escolher.']),
-  music:Object.freeze(['Sua música encontra esta realidade.','O universo musical está aberto.','Dê play somente quando quiser mudar o ritmo.']),
-  notifications:Object.freeze(['Você escolhe quais sinais receber.','O silêncio também continua disponível.','Somente os avisos escolhidos chegam até você.']),
-  login:Object.freeze(['Sua continuidade começa pela Conta.','Sua Conta está pronta para guardar preferências.','Entre somente quando quiser sincronizar seu universo.']),
-  admin:Object.freeze(['A Central permanece protegida.','O painel da proprietária está resguardado.','A administração continua sob acesso seguro.'])
+  home:Object.freeze(['O centro respira.','Estamos no centro.','Silêncio vivo.']),
+  tarot:Object.freeze(['As cartas aguardam.','A mesa respira.','Quando quiser.']),
+  daily:Object.freeze(['Hoje está aqui.','Seu encontro espera.','No seu tempo.']),
+  spreads:Object.freeze(['Escolha uma forma.','As posições aguardam.','Uma pergunta.']),
+  school:Object.freeze(['Aprenda no seu ritmo.','O caminho continua.','Uma lição.']),
+  library:Object.freeze(['Explore um símbolo.','As 78 aguardam.','Conhecimento aberto.']),
+  ai:Object.freeze(['Whit escuta.','Sem pressa.','Estou presente.']),
+  journal:Object.freeze(['Seu espaço.','Só para você.','Espelho protegido.']),
+  store:Object.freeze(['Escolha com calma.','Curadoria aberta.','Só o essencial.']),
+  consultations:Object.freeze(['Acolhimento primeiro.','Caminhos claros.','Escolha consciente.']),
+  subscriptions:Object.freeze(['Benefícios claros.','Amplie se quiser.','Nada escondido.']),
+  skins:Object.freeze(['Uma Orbe.','Outra pele.','A alma permanece.']),
+  videos:Object.freeze(['Uma história.','Assista quando quiser.','Luz em movimento.']),
+  music:Object.freeze(['Dê seu ritmo.','Som quando quiser.','Escute.']),
+  notifications:Object.freeze(['Você escolhe.','Silêncio disponível.','Só seus sinais.']),
+  login:Object.freeze(['Sua continuidade.','Entre quando quiser.','Conta protegida.']),
+  admin:Object.freeze(['Acesso protegido.','Central resguardada.','Somente a proprietária.'])
 });
 
 // Compatibilidade de leitura para módulos antigos que esperam uma frase única.
@@ -66,7 +73,7 @@ export function visualViewportSnapshotV574() {
 const viewport = visualViewportSnapshotV574;
 
 const budgets = () => reducedMotion()
-  ? { depart:36, arrive:42, wait:90, samples:2, profile:'reduced-apple-physics' }
+  ? { depart:84, arrive:96, wait:90, samples:3, profile:'reduced-continuous-physics' }
   : constrained()
     ? { depart:172, arrive:208, wait:140, samples:10, profile:'constrained-apple-physics' }
     : touchDevice()
@@ -215,6 +222,10 @@ export class OrbPersistentJourneyV565 {
     this.state = 'rest';
     this.serial = 0;
     this.route = routeNow();
+    this.coordinate = universeCoordinateV583(this.route);
+    this.journeyVector = null;
+    this.lastJourneyVector = null;
+    this.coordinateTransitions = 0;
     this.current = null;
     this.sourceSize = 88;
     this.scale = 1;
@@ -249,12 +260,14 @@ export class OrbPersistentJourneyV565 {
     this.voiceSerial = 0;
     this.voiceMessages = 0;
     this.voiceSuppressions = 0;
+    this.silenceChoices = 0;
     this.voiceState = 'hidden';
     this.voiceToken = null;
+    this.coordinateAudit = installUniverseCoordinateLawV583(document);
     this.createPersistentLayer();
     this.bind();
-    document.documentElement.dataset.orbPersistentMotor = 'fluidez-suprema-foundation-v580';
-    document.documentElement.dataset.orbPhysics = 'critical-damped-v569';
+    document.documentElement.dataset.orbPersistentMotor = 'coordinate-travel-v583';
+    document.documentElement.dataset.orbPhysics = 'continuous-coordinate-physics-v583';
     document.documentElement.dataset.orbPresenceEngine = 'event-driven-v570';
     document.documentElement.dataset.orbVoiceEngine = 'governed-anchored-bubble-v580';
     document.documentElement.dataset.orbVoiceState = 'hidden';
@@ -263,6 +276,7 @@ export class OrbPersistentJourneyV565 {
     if (!document.documentElement.dataset.orbMagicState) {
       document.documentElement.dataset.orbMagicState = 'pending';
     }
+    this.publishCoordinate('rest',this.route);
     this.setPresence(document.hidden ? 'sleeping' : 'serene', { reason:'boot', force:true });
     requestAnimationFrame(() => this.reconcileContinuity('boot'));
     emit('divina:orb-ios-journey-ready', this.status());
@@ -472,6 +486,14 @@ export class OrbPersistentJourneyV565 {
       this.hideVoice('home-silence',true);
       return false;
     }
+    // Chegar a uma coordenada não dispara fala. A presença pode permanecer em
+    // silêncio; uma frase breve só nasce de um pedido explícito à própria Orbe.
+    const explicit = ['already-present','explicit-orb-request'].includes(reason);
+    if (!explicit) {
+      this.silenceChoices += 1;
+      this.hideVoice('living-silence',true);
+      return false;
+    }
     if (this.active || TRAVEL_STATES_V570.has(this.state)) return false;
     return this.showVoice('', {
       variants:this.voiceVariants(id),
@@ -480,6 +502,7 @@ export class OrbPersistentJourneyV565 {
       cooldownKey:`route-arrival:${id}`,
       cooldownMs:90000,
       priority:20,
+      explicit:true,
       category:'route-arrival',
       duration:reducedMotion() ? 1800 : 2600, reason, route:id
     });
@@ -693,6 +716,40 @@ export class OrbPersistentJourneyV565 {
     if (!core || core === this.core) this.core = null;
   }
 
+  publishCoordinate(phase = 'rest', route = this.route, vector = this.journeyVector) {
+    const root = document.documentElement;
+    const resting = phase === 'rest' || !vector;
+    const point = resting
+      ? universeCoordinateV583(route)
+      : vector.destination;
+    this.coordinate = point;
+    root.dataset.universeCoordinatePhase = String(phase || 'rest');
+    root.dataset.universeCoordinate = universeCoordinateKeyV583(point.route);
+    root.dataset.universeImmersion = String(point.y);
+    root.dataset.universeDiscovery = String(point.z);
+    if (resting) {
+      delete root.dataset.universeFrom;
+      delete root.dataset.universeTo;
+      delete root.dataset.universeTravelDirection;
+      delete root.dataset.universeJourneyForm;
+    } else {
+      root.dataset.universeFrom = universeCoordinateKeyV583(vector.origin.route);
+      root.dataset.universeTo = universeCoordinateKeyV583(vector.destination.route);
+      root.dataset.universeTravelDirection = vector.horizontal.direction;
+      root.dataset.universeJourneyForm = vector.form.key;
+    }
+    const detail = Object.freeze({
+      phase:String(phase || 'rest'),
+      route:point.route,
+      coordinate:point,
+      vector:resting ? null : vector,
+      screenModel:'coordinate-reveal',
+      onePhysicalOrb:true
+    });
+    emit('divina:universe-coordinate-state',detail);
+    return detail;
+  }
+
   setState(state, detail = {}) {
     this.state = state;
     this.root.dataset.state = state;
@@ -702,6 +759,7 @@ export class OrbPersistentJourneyV565 {
       this.hideVoice(`journey-${state}`,true);
       this.setPresence('traveling', { reason:`journey-${state}`, force:true });
     }
+    this.publishCoordinate(state,this.route,this.journeyVector);
     emit('divina:orb-ios-journey-state', { state, route:this.route, ...detail });
     emit('divina:orb-persistent-state', { state, route:this.route, ...detail });
   }
@@ -835,12 +893,33 @@ export class OrbPersistentJourneyV565 {
     ]) || firstVisible(['.magic-dock .dock-orb']) || this.centerFallback();
   }
 
-  gateway(route) {
+  gateway(route, { from = this.route, origin = null, vector = null } = {}) {
     const view = viewport();
-    const point = worldForRouteV535(route)?.gateway || [0.5,0.43];
+    const journey = vector || universeJourneyVectorV583(from,route,this.serial);
+    const edge = clamp(view.width*.12,46,78);
+    const left = view.left+edge;
+    const right = view.right-edge;
+    let x = journey.horizontal.direction === 'left'
+      ? left
+      : journey.horizontal.direction === 'right' ? right : view.left+view.width*.5;
+    if (origin && journey.horizontal.sign !== 0) {
+      const minimumTravel = clamp(view.width*.28,94,168);
+      if (journey.horizontal.sign > 0 && x-origin.x < minimumTravel) {
+        x = clamp(origin.x+minimumTravel,left,right);
+      } else if (journey.horizontal.sign < 0 && origin.x-x < minimumTravel) {
+        x = clamp(origin.x-minimumTravel,left,right);
+      }
+    }
+    const immersionRatio = clamp(
+      .335 + journey.destination.y*.064 + journey.form.bend*.18,
+      .30,
+      .58
+    );
     return {
-      x:clamp(view.left+point[0]*view.width,view.left+42,view.right-42),
-      y:clamp(view.top+point[1]*view.height,view.top+84,view.bottom-92)
+      x:clamp(x,view.left+42,view.right-42),
+      y:clamp(view.top+immersionRatio*view.height,view.top+84,view.bottom-92),
+      kind:'coordinate-crossing',
+      coordinate:journey.destination
     };
   }
 
@@ -882,7 +961,10 @@ export class OrbPersistentJourneyV565 {
     const distance = Math.hypot(finish.x-start.x,finish.y-start.y);
     const distanceRatio = clamp(distance/Math.max(1,Math.hypot(view.width,view.height)),0,1.25);
     const sizeRatio = clamp(Math.abs(finishScale-this.scale),0,1.4);
-    const adaptiveDuration = Math.round(Math.max(1,duration)*clamp(.86+distanceRatio*.34+sizeRatio*.08,.84,1.18));
+    const adaptiveDuration = Math.max(
+      reducedMotion() ? 64 : 1,
+      Math.round(Math.max(1,duration)*clamp(.86+distanceRatio*.34+sizeRatio*.08,.84,1.18))
+    );
     const samples = Math.max(2,budgets().samples);
     const keyframes = Array.from({ length:samples+1 },(_,index) => {
       const offset = index/samples;
@@ -891,9 +973,17 @@ export class OrbPersistentJourneyV565 {
       const sampledScale = bezierNumber(scalePath,physicalProgress);
       return { transform:this.transform(point,sampledScale), offset };
     });
-    if (reducedMotion() || typeof this.stage.animate !== 'function') {
-      this.stage.style.transform = this.transform(finish,finishScale);
-      await wait(reducedMotion()?Math.min(48,adaptiveDuration):adaptiveDuration);
+    if (typeof this.stage.animate !== 'function') {
+      // Mesmo sem WAAPI ou com movimento reduzido, percorre quadros reais.
+      // O fallback nunca troca a Orbe de posição num único salto.
+      const manualSamples = reducedMotion() ? 3 : Math.max(4,Math.min(samples,12));
+      for (let index=1; index<=manualSamples; index+=1) {
+        await frame();
+        const physicalProgress = appleProgress(index/manualSamples);
+        const point = bezierPoint(path,physicalProgress);
+        const sampledScale = bezierNumber(scalePath,physicalProgress);
+        this.stage.style.transform = this.transform(point,sampledScale);
+      }
     } else {
       const animation = this.stage.animate(keyframes,{duration:adaptiveDuration,easing:'linear',fill:'forwards'});
       this.animations.add(animation);
@@ -942,6 +1032,9 @@ export class OrbPersistentJourneyV565 {
     this.active = true;
     this.serial = Number(serial || 0);
     this.route = String(to || 'home');
+    this.journeyVector = universeJourneyVectorV583(from,this.route,this.serial);
+    this.lastJourneyVector = this.journeyVector;
+    this.coordinateTransitions += 1;
     this.landingHost = null;
     const menuOriginIsFresh = source === 'orbital-menu-v502'
       && this.pendingMenuOrigin
@@ -950,17 +1043,44 @@ export class OrbPersistentJourneyV565 {
     this.pendingMenuOrigin = null;
     this.pendingMenuOriginAt = 0;
     this.capturePhysicalOrb(origin,{handoffClaim:true});
-    this.setState('depart',{from,to,serial:this.serial,source});
-    await frame();
     this.suspendHeavyEffects();
-    const target = this.gateway(this.route);
+    this.setState('depart',{
+      from,to,serial:this.serial,source,
+      coordinateVector:this.journeyVector
+    });
+    await frame();
+    const target = this.gateway(this.route,{
+      from,
+      origin,
+      vector:this.journeyVector
+    });
     const dx = target.x-origin.x;
     const dy = target.y-origin.y;
-    const arc = { x:origin.x+dx*.52+(dx>=0?-18:18), y:origin.y+dy*.42-clamp(Math.abs(dx)*.05,8,26) };
-    const targetScale = clamp(78/this.sourceSize,.28,1.04);
-    this.setState('flight',{from,to,serial:this.serial});
+    const view = viewport();
+    const bend = this.journeyVector.form.bend*clamp(view.height*.42,150,360);
+    const arc = {
+      x:origin.x+dx*this.journeyVector.form.crossing,
+      y:origin.y+dy*.44+bend
+    };
+    const targetScale = clamp(
+      (78/this.sourceSize)*this.journeyVector.depth.crossingScale,
+      .28,
+      1.08
+    );
+    this.setState('flight',{
+      from,to,serial:this.serial,
+      horizontal:this.journeyVector.horizontal,
+      vertical:this.journeyVector.vertical,
+      depth:this.journeyVector.depth,
+      form:this.journeyVector.form.key
+    });
     await this.move([arc,target],[1-(1-targetScale)*.46,targetScale],budgets().depart,'cubic-bezier(.22,.78,.18,1)');
-    this.setState('portal',{to,serial:this.serial});
+    this.setState('crossing',{
+      from,to,serial:this.serial,
+      continuous:true,
+      portalVisual:false,
+      teleport:false
+    });
     return this.status();
   }
 
@@ -992,11 +1112,20 @@ export class OrbPersistentJourneyV565 {
     if (!this.active || Number(serial || 0)!==this.serial) return null;
     await frame();
     let destination = await this.waitForDestination(String(to || this.route));
-    const start = this.current || this.gateway(this.route);
+    const vector = this.journeyVector || universeJourneyVectorV583(from,to,this.serial);
+    const start = this.current || this.gateway(this.route,{ from, vector });
     const dx = destination.x-start.x;
     const dy = destination.y-start.y;
-    const arc = { x:start.x+dx*.48-(dx>=0?1:-1)*clamp(Math.hypot(dx,dy)*.08,10,32), y:start.y+dy*.38-clamp(Math.abs(dx)*.04,6,22) };
-    const approach = { x:start.x+dx*.82, y:start.y+dy*.84 };
+    const view = viewport();
+    const bend = vector.form.bend*clamp(view.height*.30,110,260);
+    const arc = {
+      x:start.x+dx*(1-vector.form.crossing*.36),
+      y:start.y+dy*.38-bend*.72
+    };
+    const approach = {
+      x:start.x+dx*vector.form.approach,
+      y:start.y+dy*.84-bend*.16
+    };
     const targetScale = clamp(Math.max(destination.width,destination.height)/this.sourceSize,.18,5.5);
     this.setState('arrival',{from,to,serial:this.serial,destination:destination.kind||'route-anchor'});
     await this.move([arc,approach,destination],[this.scale+(targetScale-this.scale)*.38,this.scale+(targetScale-this.scale)*.78,targetScale],budgets().arrive,'cubic-bezier(.2,.82,.16,1)');
@@ -1021,13 +1150,15 @@ export class OrbPersistentJourneyV565 {
       destination = { ...claimedDestination, kind:'claimed-host' };
     }
     this.setState('settle',{to,serial:this.serial,destination:destination.kind||'route-anchor'});
-    this.resumeHeavyEffects();
     this.completed += 1;
     this.active = false;
     this.state = 'rest';
     this.root.dataset.state = 'rest';
     document.documentElement.dataset.orbJourneyState = 'rest';
     this.settlePhysicalOrb(String(to || this.route),destination);
+    this.publishCoordinate('rest',String(to || this.route),null);
+    this.journeyVector = null;
+    this.resumeHeavyEffects();
     this.setPresence('responding', {
       reason:'arrival-complete', restAfter:reducedMotion() ? 180 : 920, force:true
     });
@@ -1050,8 +1181,8 @@ export class OrbPersistentJourneyV565 {
     };
     const targetScale = clamp(Math.max(destination.width,destination.height)/this.sourceSize,.18,5.5);
     this.active = true;
-    this.setState('settle',{route:this.route,destination:'late-claimed-host'});
     this.suspendHeavyEffects();
+    this.setState('settle',{route:this.route,destination:'late-claimed-host'});
     await this.move(
       [approach,destination],
       [this.scale+(targetScale-this.scale)*.72,targetScale],
@@ -1059,7 +1190,6 @@ export class OrbPersistentJourneyV565 {
       'cubic-bezier(.2,.82,.16,1)'
     );
     if (token !== this.settleToken || this.destroyed) return false;
-    this.resumeHeavyEffects();
     this.active = false;
     this.state = 'rest';
     this.root.dataset.state = 'rest';
@@ -1071,6 +1201,8 @@ export class OrbPersistentJourneyV565 {
     this.scale = 1;
     this.setPhysicalAuthority(host,this.route);
     this.core.renderer?.resize?.();
+    this.publishCoordinate('rest',this.route,null);
+    this.resumeHeavyEffects();
     this.setPresence('responding', {
       reason:'claim-settled', restAfter:reducedMotion() ? 180 : 820, force:true
     });
@@ -1201,6 +1333,7 @@ export class OrbPersistentJourneyV565 {
     const orb = this.core?.orb;
     if (!orb) return false;
     this.route = route;
+    if (this.coordinate?.route !== route) this.publishCoordinate('rest',route,null);
     if (route === 'home') {
       this.clearPhysicalAuthority();
       if (orb.parentNode === this.stage || this.routeForHost(orb.parentElement) !== 'home') {
@@ -1315,13 +1448,19 @@ export class OrbPersistentJourneyV565 {
 
   async recover({ from, serial } = {}) {
     if (!this.active || Number(serial || 0)!==this.serial) return null;
+    this.journeyVector = universeJourneyVectorV583(this.route,from,this.serial);
+    this.lastJourneyVector = this.journeyVector;
     this.setState('recovery',{from,serial:this.serial});
     const destination = this.resolveDestination(String(from || routeNow()));
     await this.move([destination],[clamp(Math.max(destination.width,destination.height)/this.sourceSize,.18,5.5)],reducedMotion()?36:150,'cubic-bezier(.24,.72,.2,1)');
-    this.resumeHeavyEffects();
     this.active = false;
     this.state = 'rest';
+    this.root.dataset.state = 'rest';
+    document.documentElement.dataset.orbJourneyState = 'rest';
     this.settlePhysicalOrb(String(from || routeNow()),destination);
+    this.publishCoordinate('rest',String(from || routeNow()),null);
+    this.journeyVector = null;
+    this.resumeHeavyEffects();
     this.setPresence('responding', {
       reason:'recovery-complete', restAfter:reducedMotion() ? 180 : 760, force:true
     });
@@ -1337,7 +1476,6 @@ export class OrbPersistentJourneyV565 {
     this.animations.forEach(animation => { try { animation.cancel(); } catch {} });
     this.animations.clear();
     const sleeping = document.hidden || ['pagehide','visibility','freeze','destroy'].includes(reason);
-    this.resumeHeavyEffects(!sleeping);
     this.active = false;
     this.state = 'rest';
     this.root.dataset.state = 'rest';
@@ -1345,6 +1483,9 @@ export class OrbPersistentJourneyV565 {
     const route = routeNow();
     const destination = this.resolveDestination(route);
     this.settlePhysicalOrb(route,destination);
+    this.publishCoordinate('rest',route,null);
+    this.journeyVector = null;
+    this.resumeHeavyEffects(!sleeping);
     if (reason !== 'destroy') {
       this.setPresence(sleeping ? 'sleeping' : 'responding', {
         reason:`journey-${reason}`,
@@ -1356,12 +1497,21 @@ export class OrbPersistentJourneyV565 {
   }
 
   status() {
-    return Object.freeze({ version:VERSION, engine:'OrbPersistentJourneyV577Universal', work:'ORBE-SUPREMA-2-MACROETAPA-2',
+    return Object.freeze({ version:VERSION, engine:'OrbPersistentCoordinateJourneyV583', work:'FLUIDEZ-SUPREMA-MACROETAPA-4',
       active:this.active, state:this.state, route:this.route, persistentLayer:Boolean(this.root?.isConnected), layerCreations:1,
       perRouteRecreation:false, oneLivingOrb:true, physicalOrbTransport:true, physicalOrbConnected:Boolean(this.core?.orb?.isConnected),
-      travelerCopies:0, snapshotCadence:'none', handoffFade:false, teleportFallback:false, permanentAnimationLoops:0,
-      heavyEffectsPausedDuringFlight:true, orbRendererPausedDuringFlight:false, fluidityProfile:budgets().profile,
-      motionLaw:'critical-damped-bezier', adaptiveDuration:true, physicsSamples:budgets().samples,
+      travelerCopies:0, snapshotCadence:'none', handoffFade:false, teleportFallback:false, portalVisual:false,
+      flicker:false, permanentAnimationLoops:0, continuousManualFallback:true,
+      heavyEffectsPausedDuringFlight:true, heavyEffectsPausedDuringAnyTravel:true,
+      orbRendererPausedDuringFlight:false, fluidityProfile:budgets().profile,
+      motionLaw:'continuous-coordinate-bezier', adaptiveDuration:true, physicsSamples:budgets().samples,
+      screenModel:'coordinate-reveal', conceptualPages:false,
+      coordinateLaw:this.coordinateAudit || auditUniverseCoordinateLawV583(),
+      currentCoordinate:this.coordinate || universeCoordinateV583(this.route),
+      activeJourneyVector:this.journeyVector,
+      lastJourneyVector:this.lastJourneyVector,
+      coordinateTransitions:this.coordinateTransitions,
+      horizontalMeaning:'travel-between-realities', verticalMeaning:'immersion', depthMeaning:'discovery',
       presenceState:this.presenceState, presenceStates:ORB_PRESENCE_STATES_V570,
       presenceModel:'event-driven-v570', presenceTransitions:this.presenceTransitions,
       globalLivingRenderer:true, addedAnimationLoops:0, idleTimers:1,
@@ -1371,12 +1521,14 @@ export class OrbPersistentJourneyV565 {
       voiceTextLimit:VOICE_TEXT_LIMIT_V571, voiceState:this.voiceState, voiceMessages:this.voiceMessages,
       voiceSuppressions:this.voiceSuppressions, messageGovernorVersion:this.messageGovernor?.version || null,
       messageMemory:'ids-and-timestamps-only', repeatedTouchCooldownMs:45000,
+      automaticRouteVoice:false, explicitOrbVoiceOnly:true, silenceIsPresence:true,
+      silenceChoices:this.silenceChoices, oneIntentionPerBubble:true, fewWordsPerBubble:true,
       microscopicMagic:true, magicModel:'source-born-microlight-v573',
       magicState:document.documentElement.dataset.orbMagicState || 'pending',
       magicInsideLivingRenderer:true, magicDuringFlight:false, magicSourcePixelsOnly:true,
       magicPerformanceGate:true, magicReducedMotionOff:true,
       additionalParticleNodes:0, additionalCanvasNodes:0,
-      continuityModel:'iphone-pwa-v577-universal-foundation', bfcacheAware:true, freezeResumeAware:true,
+      continuityModel:'iphone-pwa-v583-coordinate-continuity', bfcacheAware:true, freezeResumeAware:true,
       visualViewportAware:true, visualViewportScrollTracking:true, visualViewportSettledPass:true,
       historyRecoveryAware:true,
       physicalAuthorityRoute:document.documentElement.dataset.orbPhysicalAuthority || null,
@@ -1424,6 +1576,14 @@ export class OrbPersistentJourneyV565 {
     delete document.documentElement.dataset.orbMagicState;
     delete document.documentElement.dataset.orbContinuityEngine;
     delete document.documentElement.dataset.orbPhysicalAuthority;
+    delete document.documentElement.dataset.universeCoordinatePhase;
+    delete document.documentElement.dataset.universeCoordinate;
+    delete document.documentElement.dataset.universeImmersion;
+    delete document.documentElement.dataset.universeDiscovery;
+    delete document.documentElement.dataset.universeFrom;
+    delete document.documentElement.dataset.universeTo;
+    delete document.documentElement.dataset.universeTravelDirection;
+    delete document.documentElement.dataset.universeJourneyForm;
     if (livingOrb) delete livingOrb.dataset.orbPresenceState;
     delete globalThis[INSTANCE];
   }

@@ -1,7 +1,7 @@
-/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · ORBE VIVA SUPREMA V582
-   A única Orbe física atravessa Home, menu e todas as realidades. Seus altares
-   funcionais são preparados antes da chegada. As mensagens compartilham uma
-   única autoridade antirrepetição, sem novo efeito visual. */
+/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · VIAGEM POR COORDENADAS V583
+   A tela revela coordenadas do mesmo universo. A única Orbe física atravessa
+   horizontalmente as realidades, mergulha na vertical e descobre profundidade,
+   com movimento prioritário e silêncio vivo. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -9,7 +9,7 @@ import { createNavigation } from './navigation.js?v=535-fluid-navigation';
 import { orbMotionV207 } from './orb-motion-core-v207.js?v=207';
 import { RealityOrbEngine } from './orb-engine-v208.js?v=582-living-soul';
 import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=576-foundation';
-import { createOrbPersistentJourneyV565 } from './orb-persistent-journey-v565.js?v=580-foundation';
+import { createOrbPersistentJourneyV565 } from './orb-persistent-journey-v565.js?v=583-coordinate-travel';
 import { createOrbUniversalPresenceV526 } from './orb-universal-presence-v526.js?v=577-universal';
 import { installRealityLifecycleV511 } from './reality-lifecycle-v511.js?v=511';
 import { createLivingUniverseV524 } from './living-universe-core-v524.js?v=581-living-universe';
@@ -353,7 +353,7 @@ supremeOrb = safely('Núcleo da Orbe Suprema V501', () => createSupremeOrbCoreV5
   loading:loadingPortal
 }));
 
-const orbIOSJourney = safely('Fluidez Suprema · Fundação V580', () =>
+const orbIOSJourney = safely('Fluidez Suprema · Viagem por Coordenadas V583', () =>
   createOrbPersistentJourneyV565({
     core:supremeOrb,
     universe:livingUniverse,
@@ -553,14 +553,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v582-app';
+  window.__divinaSWBootstrap = 'v583-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=582', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=583', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v582';
+        document.documentElement.dataset.releaseEpoch = 'v583';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V582 registrado');
+        console.info('[Divina] PWA V583 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -667,6 +667,47 @@ window.divinaFluidezSupremaV582 = Object.freeze({
     newCanvases:0,
     newAnimationLoops:0
   })
+});
+window.divinaFluidezSupremaV583 = Object.freeze({
+  version:583,
+  base:'V582',
+  stage:'coordinate-travel',
+  orb:supremeOrb,
+  journey:orbIOSJourney,
+  livingSoul:whitOrbSoul,
+  status:() => {
+    const journey = orbIOSJourney?.status?.() || null;
+    return Object.freeze({
+      release:'V583',
+      base:'V582',
+      screenModel:'coordinate-reveal',
+      conceptualPages:false,
+      axes:Object.freeze({
+        horizontal:'travel-between-realities',
+        vertical:'immersion',
+        depth:'discovery'
+      }),
+      coordinateLaw:journey?.coordinateLaw || null,
+      currentCoordinate:journey?.currentCoordinate || null,
+      onePhysicalOrb:supremeOrb?.snapshot?.().oneLivingOrb === true,
+      travelerCopies:0,
+      portalVisual:false,
+      teleport:false,
+      flicker:false,
+      travelPausesHeavyEffects:true,
+      orbMotionKeepsPriority:true,
+      automaticWhitEveryTouch:false,
+      silenceIsPresence:true,
+      oneIntentionPerBubble:true,
+      fewWordsPerBubble:true,
+      unpredictableFormCoherentMeaning:true,
+      iphoneFirst:true,
+      tarotProtected:true,
+      dailyProtected:true,
+      newCanvases:0,
+      newAnimationLoops:0
+    });
+  }
 });
 const skinPerformanceCore = safely('Skins, desempenho e acabamento V518', () =>
   installSkinPerformanceCoreV518()
@@ -2389,11 +2430,21 @@ const awaken = async () => {
         whitVoiceClone:false,
         whitSoulClaim:false,
         sharedElementOrbJourney:true,
-        spatialJourneyPhases:['lift','flight','arrival','settle'],
+        spatialJourneyPhases:['depart','flight','crossing','arrival','settle'],
         onePhysicalOrbDuringJourney:true,
-        temporaryLivingCanvasMirror:true,
+        temporaryLivingCanvasMirror:false,
         independentJourneyOrbEngine:false,
         sameUniverseAcrossNavigation:true,
+        universeScreenModel:'coordinate-reveal-v583',
+        universeHorizontalAxis:'travel-between-realities',
+        universeVerticalAxis:'immersion',
+        universeDepthAxis:'discovery',
+        journeyPortalVisual:false,
+        journeyTeleport:false,
+        journeyFlicker:false,
+        journeyTravelerCopies:0,
+        journeyAutomaticVoice:false,
+        journeySilenceIsPresence:true,
         routeCurtain:false,
         webVibration:false,
         nativeHapticsOnly:true,

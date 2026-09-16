@@ -1,0 +1,43 @@
+DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA
+MACROETAPA 4 DE 10 — VIAGEM DA ORBE POR COORDENADAS
+RELEASE V583 | BASE OBRIGATÓRIA V582
+
+ANTES DE INSTALAR
+Este ZIP é incremental e plano. Ele parte da V582 já instalada.
+Não apague nenhum arquivo existente e não crie pastas.
+
+INSTALAÇÃO
+1. Abra a raiz pública do site.
+2. Envie todos os arquivos deste ZIP diretamente para a raiz.
+3. Confirme a substituição dos arquivos com o mesmo nome.
+4. Aguarde a atualização automática do portal e do cache V583.
+
+ARQUIVOS DE PRODUÇÃO
+- app-v208.js — substituir
+- index.html — substituir
+- orb-persistent-journey-v565.js — substituir
+- universe-coordinate-law-v583.js — adicionar
+- sw.js — substituir
+
+Os arquivos de QA, manifesto e relatório não participam da execução do site.
+Podem permanecer fora da raiz pública.
+
+LEI V583
+- A tela revela coordenadas; não representa páginas conceituais.
+- Horizontal é viagem entre realidades.
+- Vertical é mergulho.
+- Profundidade é descoberta.
+- Existe uma única Orbe física.
+- Não há portal visual, teleporte, pisca ou cópia da Orbe.
+- Durante toda viagem, efeitos pesados ficam pausados; a Orbe mantém prioridade.
+- A Whit não fala automaticamente na chegada nem a cada toque.
+- Silêncio também é presença.
+- Balões da Orbe têm uma intenção e pouquíssimas palavras.
+
+PROTEÇÕES
+Tarot Livre, Carta do Dia, Universo Vivo V581, Orbe Viva V582, gestos,
+renderer, relógio, menu e navegação funcional permanecem preservados.
+
+AUDITORIA
+A validação física consolidada em iPhone continua programada para a
+Macroetapa 10, conforme a decisão oficial de execução contínua.
