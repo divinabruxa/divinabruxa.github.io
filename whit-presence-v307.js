@@ -1,28 +1,30 @@
-/* DIVINA BRUXA 2.0 — REBIRTH R008 · WHIT PRESENCE V307
+/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · WHIT PRESENCE V307/V580
    Presença local, sem API, atravessando todos os mundos.
-   Não lê conteúdo privado. Não gera respostas. Não altera a Orbe aprovada. */
+   Não lê conteúdo privado. Não gera respostas. Não altera a Orbe aprovada.
+   A V580 elimina reações duplicadas e submete toda fala ao governador global. */
 
 const STYLE_ID = 'whitPresenceV307Styles';
 const ROOT_ID = 'whitPresenceV307';
+const MARK = Symbol.for('divina.whit.presence.v307');
 
 const ROUTES = Object.freeze({
-  home: Object.freeze({ tone:'home', phrase:'', silent:true }),
-  tarot: Object.freeze({ tone:'tarot', phrase:'As cartas continuam livres. Eu só interpreto quando você me chamar.' }),
-  daily: Object.freeze({ tone:'daily', phrase:'Uma carta para hoje. Posso aprofundá-la somente quando você escolher.' }),
-  spreads: Object.freeze({ tone:'spreads', phrase:'A tiragem é sua. Eu só entro nela com o seu convite.' }),
-  library: Object.freeze({ tone:'library', phrase:'Estou perto da carta aberta. O significado editorial continua sendo a base.' }),
-  school: Object.freeze({ tone:'school', phrase:'A Escola está viva. Eu entro apenas na aula que você autorizar.' }),
-  journal: Object.freeze({ tone:'journal', phrase:'Seu Diário continua fechado para mim até você escolher uma única entrada.' }),
-  ai: Object.freeze({ tone:'ai', phrase:'Aqui a presença pode virar conversa — sempre com seu consentimento.' }),
-  consultations: Object.freeze({ tone:'consultations', phrase:'Este espaço é humano e profissional. Eu não substituo a consulta.' }),
-  store: Object.freeze({ tone:'store', phrase:'A Loja permanece separada da sua intimidade e das suas leituras.' }),
-  music: Object.freeze({ tone:'music', phrase:'A música abre outra passagem do mesmo universo.' }),
-  videos: Object.freeze({ tone:'videos', phrase:'A imagem também pode ser um portal.' }),
-  skins: Object.freeze({ tone:'skins', phrase:'A forma muda. A presença continua a mesma.' }),
-  subscriptions: Object.freeze({ tone:'subscriptions', phrase:'Planos e créditos não mudam sua privacidade.' }),
-  login: Object.freeze({ tone:'account', phrase:'Sua Conta governa preferências, memória e consentimentos.' }),
-  notifications: Object.freeze({ tone:'notifications', phrase:'Você decide quais sinais podem chegar até você.' }),
-  admin: Object.freeze({ tone:'admin', phrase:'Operação técnica nunca recebe o conteúdo íntimo das suas conversas.' })
+  home: Object.freeze({ tone:'home', phrases:Object.freeze([]), silent:true }),
+  tarot: Object.freeze({ tone:'tarot', phrases:Object.freeze(['As cartas continuam livres. Eu só interpreto quando você me chamar.','Primeiro a imagem; qualquer interpretação depende da sua escolha.']) }),
+  daily: Object.freeze({ tone:'daily', phrases:Object.freeze(['Uma carta para hoje. Posso aprofundá-la somente quando você escolher.','O encontro de hoje ilumina; não determina o seu caminho.']) }),
+  spreads: Object.freeze({ tone:'spreads', phrases:Object.freeze(['A tiragem é sua. Eu só entro nela com o seu convite.','Observe as posições no seu ritmo; eu espero seu chamado.']) }),
+  library: Object.freeze({ tone:'library', phrases:Object.freeze(['Estou perto da carta aberta. O significado editorial continua sendo a base.','Explore o símbolo primeiro; eu só amplio quando você pedir.']) }),
+  school: Object.freeze({ tone:'school', phrases:Object.freeze(['A Escola está viva. Eu entro apenas na aula que você autorizar.','Aprenda uma passagem por vez; eu acompanho somente quando convidada.']) }),
+  journal: Object.freeze({ tone:'journal', phrases:Object.freeze(['Seu Diário continua fechado para mim até você escolher uma única entrada.','Este espaço permanece privado; somente você abre uma passagem específica.']) }),
+  ai: Object.freeze({ tone:'ai', phrases:Object.freeze(['Aqui a presença pode virar conversa — sempre com seu consentimento.','Quando você escrever, eu respondo dentro dos limites que estão visíveis.']) }),
+  consultations: Object.freeze({ tone:'consultations', phrases:Object.freeze(['Este espaço é humano e profissional. Eu não substituo a consulta.','Aqui a tecnologia prepara o caminho para um atendimento humano.']) }),
+  store: Object.freeze({ tone:'store', phrases:Object.freeze(['A Loja permanece separada da sua intimidade e das suas leituras.','A curadoria está aqui; sua escolha continua livre.']) }),
+  music: Object.freeze({ tone:'music', phrases:Object.freeze(['A música abre outra passagem do mesmo universo.','Você decide quando o silêncio vira música.']) }),
+  videos: Object.freeze({ tone:'videos', phrases:Object.freeze(['A imagem também pode ser um portal.','Assista quando quiser abrir outra forma de encontro.']) }),
+  skins: Object.freeze({ tone:'skins', phrases:Object.freeze(['A forma muda. A presença continua a mesma.','Escolha uma nova pele sem perder a mesma Orbe.']) }),
+  subscriptions: Object.freeze({ tone:'subscriptions', phrases:Object.freeze(['Planos e créditos não mudam sua privacidade.','Veja os benefícios com clareza antes de escolher.']) }),
+  login: Object.freeze({ tone:'account', phrases:Object.freeze(['Sua Conta governa preferências, memória e consentimentos.','Entre somente quando quiser levar sua continuidade para outro dispositivo.']) }),
+  notifications: Object.freeze({ tone:'notifications', phrases:Object.freeze(['Você decide quais sinais podem chegar até você.','O silêncio também é uma escolha respeitada.']) }),
+  admin: Object.freeze({ tone:'admin', phrases:Object.freeze(['Operação técnica nunca recebe o conteúdo íntimo das suas conversas.','A Central permanece separada do conteúdo privado.']) })
 });
 
 function installStyle() {
@@ -47,10 +49,14 @@ function safeRoute(value) {
 }
 
 export class WhitPresenceV307 {
-  constructor({ core = globalThis.whit, go = globalThis.orbe?.go } = {}) {
+  constructor({ core = globalThis.whit, go = globalThis.orbe?.go, messageGovernor = null } = {}) {
     this.core = core || null;
     this.go = typeof go === 'function' ? go : null;
+    this.messageGovernor = messageGovernor || globalThis.divinaMessageGovernorV580 || null;
     this.timer = 0;
+    this.messageToken = null;
+    this.lastEnterRoute = null;
+    this.lastEnterAt = 0;
     this.route = safeRoute(currentRoute());
     this.visible = false;
     this.destroyed = false;
@@ -110,6 +116,11 @@ export class WhitPresenceV307 {
       document.documentElement.dataset.whitPresenceState =
         document.visibilityState === 'hidden' ? 'resting' : 'awake';
     }, { signal });
+
+    document.addEventListener('divina:experience-message-accepted', event => {
+      if (event.detail?.channel === 'whit-presence') return;
+      if (this.visible) this.hide(true, 'another-message-accepted');
+    }, { signal });
   }
 
   enter(rawRoute, { initial = false } = {}) {
@@ -117,6 +128,8 @@ export class WhitPresenceV307 {
     const route = safeRoute(rawRoute);
     this.route = route;
     const spec = ROUTES[route];
+    const now = performance.now?.() || Date.now();
+    const duplicateEvent = !initial && route === this.lastEnterRoute && now - this.lastEnterAt < 1400;
 
     document.documentElement.dataset.whitPresence = 'v307';
     document.documentElement.dataset.whitPage = route;
@@ -134,25 +147,86 @@ export class WhitPresenceV307 {
       return;
     }
 
+    // Na Fundação V580, a chegada pertence à Orbe ancorada. A Whit conserva
+    // respostas deliberadas, mas não agenda uma segunda fala automática.
+    if (this.messageGovernor?.routeMessageOwner === 'orb-voice') {
+      clearTimeout(this.timer);
+      this.hide(true, 'orb-owns-route-arrival');
+      return;
+    }
+
+    if (duplicateEvent) return;
+    this.lastEnterRoute = route;
+    this.lastEnterAt = now;
+
     const delay = initial ? 700 : 260;
     clearTimeout(this.timer);
-    this.timer = setTimeout(() => this.show(spec.phrase, { tone:spec.tone, duration:3600 }), delay);
+    this.timer = setTimeout(() => this.show('', {
+      variants:spec.phrases,
+      id:`whit-presence-route:${route}`,
+      route,
+      tone:spec.tone,
+      category:'route-guidance',
+      semanticKey:`route-arrival:${route}`,
+      cooldownKey:`route-arrival:${route}`,
+      cooldownMs:90000,
+      priority:10,
+      duration:3600
+    }), delay);
   }
 
-  show(message, { tone = 'awake', duration = 3600 } = {}) {
-    if (this.destroyed || !this.root || !message) return;
+  show(message, {
+    tone = 'awake',
+    duration = 3600,
+    variants = null,
+    id = '',
+    route = this.route,
+    category = 'presence',
+    semanticKey = '',
+    cooldownKey = '',
+    cooldownMs = 45000,
+    priority = 30,
+    explicit = false
+  } = {}) {
+    if (this.destroyed || !this.root || (!message && !variants?.length)) return false;
     clearTimeout(this.timer);
+    const consent = tone === 'consent';
+    const mustShow = explicit || consent;
+    const normalizedRoute = safeRoute(route);
+    const governedCategory = consent ? 'consent' : category;
+    const governedSemantic = consent ? `consent:${normalizedRoute}` : semanticKey;
+    const governedCooldown = consent ? `consent:${normalizedRoute}` : cooldownKey;
+    const decision = this.messageGovernor?.request?.({
+      id:id || `whit-presence:${tone}:${governedCategory}`,
+      text:message,
+      variants,
+      route:normalizedRoute,
+      channel:'whit-presence',
+      category:governedCategory,
+      semanticKey:governedSemantic,
+      cooldownKey:governedCooldown,
+      cooldownMs:mustShow ? 0 : cooldownMs,
+      duration,
+      priority:mustShow ? Math.max(90, priority) : priority,
+      explicit:mustShow
+    }) || { accepted:true, text:String(message || variants?.[0] || '') };
+    if (!decision.accepted || !decision.text) return false;
+    this.messageToken = decision.token || null;
     this.root.dataset.tone = tone;
-    if (this.copy) this.copy.textContent = message;
+    if (this.copy) this.copy.textContent = decision.text;
     this.root.classList.add('is-visible');
     this.root.setAttribute('aria-hidden', 'false');
     this.visible = true;
-    this.timer = setTimeout(() => this.hide(), duration);
+    this.timer = setTimeout(() => this.hide(false, 'auto-hide'), duration);
+    return true;
   }
 
-  hide(immediate = false) {
+  hide(immediate = false, reason = 'closed') {
     if (!this.root) return;
     clearTimeout(this.timer);
+    const token = this.messageToken;
+    this.messageToken = null;
+    if (token) this.messageGovernor?.release?.(token, reason);
     if (immediate) this.root.classList.add('no-transition');
     this.root.classList.remove('is-visible');
     this.root.setAttribute('aria-hidden', 'true');
@@ -168,7 +242,9 @@ export class WhitPresenceV307 {
       generation:false,
       route:this.route,
       visible:this.visible,
-      privateReads:false
+      privateReads:false,
+      messageGovernorVersion:this.messageGovernor?.version || null,
+      duplicateRouteEventsCoalesced:true
     });
   }
 
@@ -181,7 +257,15 @@ export class WhitPresenceV307 {
     delete document.documentElement.dataset.whitPage;
     delete document.documentElement.dataset.whitTone;
     delete document.documentElement.dataset.whitPresenceState;
+    if (globalThis[MARK] === this) delete globalThis[MARK];
   }
 }
 
-export const createWhitPresenceV307 = options => new WhitPresenceV307(options);
+export const createWhitPresenceV307 = options => {
+  const existing = globalThis[MARK];
+  if (existing && !existing.destroyed) return existing;
+  existing?.destroy?.();
+  const presence = new WhitPresenceV307(options);
+  globalThis[MARK] = presence;
+  return presence;
+};

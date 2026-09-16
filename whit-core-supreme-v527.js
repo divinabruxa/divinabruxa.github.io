@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — WHIT CORE SUPREMA V527 · MACROETAPA 3/10
+/* DIVINA BRUXA — WHIT CORE SUPREMA V527 · GOVERNANÇA DE FLUIDEZ V580
    Uma consciência de interface original, conectada à única Orbe Suprema.
 
    Esta camada coordena os módulos Whit V212–V316 e os estados da Orbe V501,
@@ -218,7 +218,8 @@ export class WhitCoreSupremeV527 {
     orbCore = globalThis.divinaOrbSupremeV501?.core,
     orbPresence = globalThis.divinaOrbUniversalPresenceV526?.engine,
     universe = globalThis.divinaLivingUniverseV524,
-    go = globalThis.orbe?.go
+    go = globalThis.orbe?.go,
+    messageGovernor = globalThis.divinaMessageGovernorV580
   } = {}) {
     this.version = VERSION;
     this.release = RELEASE;
@@ -235,6 +236,7 @@ export class WhitCoreSupremeV527 {
     this.orbPresence = orbPresence || null;
     this.universe = universe || null;
     this.go = typeof go === 'function' ? go : null;
+    this.messageGovernor = messageGovernor || null;
     this.abort = new AbortController();
     this.route = routeNow();
     this.state = document.visibilityState === 'hidden' ? 'resting' : 'aware';
@@ -250,6 +252,7 @@ export class WhitCoreSupremeV527 {
     this.hold = null;
     this.suppressAwakeUntil = 0;
     this.hideTimer = 0;
+    this.messageToken = null;
     this.arrivalTimer = 0;
     this.refreshFrame = 0;
     this.destroyed = false;
@@ -418,6 +421,11 @@ export class WhitCoreSupremeV527 {
       } else this.setState('aware', 'visible');
     }, { signal });
     addEventListener('pagehide', () => this.close(true), { signal });
+
+    document.addEventListener('divina:experience-message-accepted', event => {
+      if (event.detail?.channel === 'whit-supreme') return;
+      if (this.visible) this.close(true, 'another-message-accepted');
+    }, { signal });
   }
 
   observe() {
@@ -476,7 +484,8 @@ export class WhitCoreSupremeV527 {
       this.arrivalTimer = 0;
     }
 
-    if (offer && !AUTO_ROUTES_OFF.has(this.route) && !this.visited.has(this.route) && !this.arrivalTimer) {
+    const orbOwnsArrival = this.messageGovernor?.routeMessageOwner === 'orb-voice';
+    if (offer && !orbOwnsArrival && !AUTO_ROUTES_OFF.has(this.route) && !this.visited.has(this.route) && !this.arrivalTimer) {
       const expected = this.route;
       this.arrivalTimer = setTimeout(() => {
         this.arrivalTimer = 0;
@@ -571,15 +580,42 @@ export class WhitCoreSupremeV527 {
     if (this.destroyed || !this.root || !message) return false;
     const normalized = ROUTES.has(route) ? route : 'home';
     const world = WORLDS[normalized];
+    const sourceId = clean(source, 40) || 'local';
+    const arrival = sourceId === 'arrival';
+    const consent = sourceId === 'consent';
+    const orbTouch = sourceId === 'orb-touch';
+    const deliberate = expanded || ['explicit-open','consent','reflecting'].includes(sourceId);
+    const semanticKey = arrival
+      ? `route-arrival:${normalized}`
+      : consent
+        ? `consent:${normalized}`
+        : orbTouch
+          ? `orb-touch:${normalized}`
+          : `whit:${sourceId}:${normalized}`;
+    const decision = this.messageGovernor?.request?.({
+      id:arrival ? `whit-arrival:${normalized}` : `whit-supreme:${sourceId}:${normalized}`,
+      text:clean(message, 360),
+      route:normalized,
+      channel:'whit-supreme',
+      category:arrival ? 'route-guidance' : sourceId,
+      semanticKey,
+      cooldownKey:semanticKey,
+      cooldownMs:arrival ? 90000 : orbTouch ? 12000 : deliberate ? 0 : 45000,
+      duration,
+      priority:consent ? 100 : deliberate ? 80 : orbTouch ? 40 : arrival ? 12 : 32,
+      explicit:deliberate
+    }) || { accepted:true, text:clean(message, 360) };
+    if (!decision.accepted || !decision.text) return false;
+    this.messageToken = decision.token || null;
     this.route = normalized;
     this.world.textContent = `WHIT · ${world.label.toUpperCase()}`;
-    this.copy.textContent = clean(message, 360);
+    this.copy.textContent = decision.text;
     this.talk.textContent = normalized === 'ai' ? 'CONTINUAR CONVERSA' : 'CONVERSAR';
     this.privacy.textContent = `Neste momento, a Whit reconhece somente a página ${world.label}. Nenhum campo digitado, texto do Diário, tiragem ou aula foi lido por esta presença.`;
     this.privacy.hidden = true;
     this.privacyButton.setAttribute('aria-expanded','false');
     this.root.dataset.mode = expanded ? 'sheet' : 'whisper';
-    this.root.dataset.source = clean(source, 40);
+    this.root.dataset.source = sourceId;
     this.root.hidden = false;
     this.root.setAttribute('aria-hidden','false');
     this.root.classList.remove('is-entering');
@@ -622,9 +658,12 @@ export class WhitCoreSupremeV527 {
     return opening;
   }
 
-  close(immediate = false) {
+  close(immediate = false, reason = 'closed') {
     clearTimeout(this.hideTimer);
     if (!this.root || !this.visible) return false;
+    const token = this.messageToken;
+    this.messageToken = null;
+    if (token) this.messageGovernor?.release?.(token, reason);
     this.root.classList.remove('is-visible','is-expanded','is-entering');
     this.root.setAttribute('aria-hidden','true');
     this.visible = false;
@@ -753,6 +792,8 @@ export class WhitCoreSupremeV527 {
       soulClaim:false,
       originalPersona:true,
       explicitContextOnly:true,
+      messageGovernorVersion:this.messageGovernor?.version || null,
+      oneVisibleMessageAtATime:Boolean(this.messageGovernor),
       solEnabled:false,
       componentHealth:Object.freeze({
         core:Boolean(core),
@@ -778,6 +819,8 @@ export class WhitCoreSupremeV527 {
     clearTimeout(this.arrivalTimer);
     clearTimeout(this.hold?.timer);
     cancelAnimationFrame(this.refreshFrame);
+    if (this.messageToken) this.messageGovernor?.release?.(this.messageToken, 'destroy');
+    this.messageToken = null;
     this.abort.abort();
     this.domObserver?.disconnect();
     this.stateObserver?.disconnect();

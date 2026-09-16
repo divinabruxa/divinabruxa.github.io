@@ -231,7 +231,13 @@ export class WhitSignatureV311 {
       const phrase = kind && EVENT_LINES[kind]
         ? this.pick(EVENT_LINES[kind], `${kind}:${this.sequence++}`)
         : this.routePhrase(route);
-      if (phrase) this.show(phrase, { intensity:event.detail?.intensity || 'presence', force:true });
+      if (phrase) this.show(phrase, {
+        intensity:event.detail?.intensity || 'presence',
+        force:true,
+        route,
+        category:kind ? 'event-guidance' : 'route-guidance',
+        semanticKey:kind ? `whit-event:${kind}:${route}` : `route-arrival:${route}`
+      });
     }, { signal });
   }
 
@@ -244,10 +250,17 @@ export class WhitSignatureV311 {
 
   offerRouteLine(route, delay = 0) {
     if (route === 'home' || !ROUTE_LINES[route]) return;
+    if (this.presence?.messageGovernor?.routeMessageOwner === 'orb-voice') return;
     const run = () => {
       if (currentRoute() !== route) return;
       const phrase = this.routePhrase(route);
-      if (phrase) this.show(phrase, { intensity:'whisper' });
+      if (phrase) this.show(phrase, {
+        intensity:'whisper',
+        route,
+        category:'route-guidance',
+        semanticKey:`route-arrival:${route}`,
+        priority:8
+      });
     };
     if (delay) setTimeout(run, delay);
     else run();
@@ -257,21 +270,46 @@ export class WhitSignatureV311 {
     const family = EVENT_LINES[kind];
     if (!family?.length || currentRoute() === 'home') return;
     const phrase = this.pick(family, `${kind}:${this.sequence++}`);
-    this.show(phrase, { intensity:'presence', force });
+    this.show(phrase, {
+      intensity:'presence',
+      force,
+      route:currentRoute(),
+      category:'event-guidance',
+      semanticKey:`whit-event:${kind}:${currentRoute()}`,
+      priority:28
+    });
   }
 
   pick(family, key) {
     return family[hashIndex(key, family.length)];
   }
 
-  show(phrase, { intensity = 'presence', force = false } = {}) {
+  show(phrase, {
+    intensity = 'presence',
+    force = false,
+    route = currentRoute(),
+    category = 'signature',
+    semanticKey = '',
+    priority = 24
+  } = {}) {
     if (!phrase || this.destroyed || currentRoute() === 'home') return false;
     const now = performance.now?.() || Date.now();
     const minimum = intensity === 'crescendo' ? 2400 : intensity === 'presence' ? 5200 : 9000;
     if (!force && now - this.lastAt < minimum) return false;
     this.lastAt = now;
     const duration = intensity === 'crescendo' ? 5200 : intensity === 'presence' ? 4100 : 3000;
-    this.presence?.show?.(phrase, { tone:`signature-${intensity}`, duration });
+    const shown = this.presence?.show?.(phrase, {
+      tone:`signature-${intensity}`,
+      duration,
+      route,
+      category,
+      semanticKey,
+      cooldownKey:semanticKey,
+      cooldownMs:category === 'route-guidance' ? 90000 : 20000,
+      priority,
+      explicit:force
+    });
+    if (shown === false) return false;
     document.documentElement.dataset.whitSignatureIntensity = intensity;
     setTimeout(() => {
       if (document.documentElement.dataset.whitSignatureIntensity === intensity) {

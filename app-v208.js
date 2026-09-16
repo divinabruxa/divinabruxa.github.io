@@ -1,6 +1,7 @@
-/* DIVINA BRUXA 4.0 — ORBE SUPREMA 2.0 · MACROETAPA 2 · BASE V577
+/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · FUNDAÇÃO V580 SOBRE BASE V577
    A única Orbe física atravessa Home, menu e todas as realidades. Seus altares
-   funcionais são preparados antes da chegada. */
+   funcionais são preparados antes da chegada. As mensagens compartilham uma
+   única autoridade antirrepetição, sem novo efeito visual. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -8,7 +9,7 @@ import { createNavigation } from './navigation.js?v=535-fluid-navigation';
 import { orbMotionV207 } from './orb-motion-core-v207.js?v=207';
 import { RealityOrbEngine } from './orb-engine-v208.js?v=576-foundation';
 import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=576-foundation';
-import { createOrbPersistentJourneyV565 } from './orb-persistent-journey-v565.js?v=577-universal';
+import { createOrbPersistentJourneyV565 } from './orb-persistent-journey-v565.js?v=580-foundation';
 import { createOrbUniversalPresenceV526 } from './orb-universal-presence-v526.js?v=577-universal';
 import { installRealityLifecycleV511 } from './reality-lifecycle-v511.js?v=511';
 import { createLivingUniverseV524 } from './living-universe-core-v524.js?v=537-no-fire';
@@ -24,15 +25,16 @@ import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
 import { installIndexPolicyV193 } from './seo-index-policy-v193.js?v=323';
 import { createWhitCoreV212 } from './whit-core-v212.js?v=212';
-import { createWhitPresenceV307 } from './whit-presence-v307.js?v=307';
+import { createExperienceMessageGovernorV580 } from './experience-message-governor-v580.js?v=580-foundation';
+import { createWhitPresenceV307 } from './whit-presence-v307.js?v=580-foundation';
 import { createWhitNervousSystemV308 } from './whit-nervous-system-v308.js?v=308';
 import { createWhitContextBridgeV309 } from './whit-context-bridge-v309.js?v=309';
 import { createWhitMemoryGardenV310 } from './whit-memory-garden-v310.js?v=310';
-import { createWhitSignatureV311 } from './whit-signature-v311.js?v=311';
+import { createWhitSignatureV311 } from './whit-signature-v311.js?v=580-foundation';
 import { createWhitMindV312 } from './whit-mind-v312.js?v=557-event-driven';
 import { createWhitGenerationBridgeV313 } from './whit-generation-bridge-v313.js?v=316-silent1';
 import { createWhitSilentPresenceV316 } from './whit-silent-presence-v316.js?v=557-event-driven';
-import { createWhitCoreSupremeV527 } from './whit-core-supreme-v527.js?v=557-event-driven';
+import { createWhitCoreSupremeV527 } from './whit-core-supreme-v527.js?v=580-foundation';
 import { createTarotUniverseCoreV528 } from './tarot-universe-core-v528.js?v=528';
 import { createWisdomUniverseCoreV529 } from './wisdom-universe-core-v529.js?v=529';
 import { createExperienceConversionCoreV530 } from './experience-conversion-core-v530.js?v=559-media-guard';
@@ -307,6 +309,10 @@ safely('métricas editoriais locais', () => bindEditorialMetrics(document.body))
 safely('política de indexação V193', installIndexPolicyV193);
 addEventListener('orbe:toast', event => toast(event.detail));
 
+const messageGovernor = safely('Fundação de mensagens V580', () =>
+  createExperienceMessageGovernorV580()
+);
+
 const authClient = new AuthClient(CONFIG);
 window.divinaAuth = authClient;
 window.divinaAccount = safely('Conta V201', () => new AccountEngineV201($('#login'), authClient));
@@ -314,7 +320,11 @@ window.divinaAccountWorldV319 = safely('Conta World V319', () => new AccountWorl
 
 const whitCore = safely('Whit 2.0 Core V212', () => createWhitCoreV212({ authClient }));
 safely('presença local Whit V212', () => whitCore?.awaken());
-const whitPresence = safely('Whit Presence V307', () => createWhitPresenceV307({ core: whitCore, go }));
+const whitPresence = safely('Whit Presence V307', () => createWhitPresenceV307({
+  core:whitCore,
+  go,
+  messageGovernor
+}));
 const whitNerves = safely('Whit Nervous System V308', () => createWhitNervousSystemV308({ core: whitCore, presence: whitPresence }));
 const whitContext = safely('Whit Context Bridge V309', () => createWhitContextBridgeV309({ core: whitCore, presence: whitPresence, nervousSystem: whitNerves }));
 const whitMemory = safely('Whit Memory Garden V310', () => createWhitMemoryGardenV310({ core: whitCore, presence: whitPresence, authClient }));
@@ -342,8 +352,12 @@ supremeOrb = safely('Núcleo da Orbe Suprema V501', () => createSupremeOrbCoreV5
   loading:loadingPortal
 }));
 
-const orbIOSJourney = safely('Orbe Suprema 2.0 · Pouso Universal V577', () =>
-  createOrbPersistentJourneyV565({ core:supremeOrb, universe:livingUniverse })
+const orbIOSJourney = safely('Fluidez Suprema · Fundação V580', () =>
+  createOrbPersistentJourneyV565({
+    core:supremeOrb,
+    universe:livingUniverse,
+    messageGovernor
+  })
 );
 supremeOrb?.setJourneyEngine?.(orbIOSJourney);
 navigation.setRouteRequest(go);
@@ -379,7 +393,8 @@ const whitSupreme = safely('Whit Core Suprema V527', () =>
     orbCore:supremeOrb,
     orbPresence:orbUniversalPresence,
     universe:livingUniverse,
-    go
+    go,
+    messageGovernor
   })
 );
 
@@ -529,14 +544,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v577-app';
+  window.__divinaSWBootstrap = 'v580-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=577', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=580', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v577';
+        document.documentElement.dataset.releaseEpoch = 'v580';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V577 registrado');
+        console.info('[Divina] PWA V580 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -551,6 +566,7 @@ window.orbe = {
   loadPage:pageLoader.load,
   loading:loadingPortal,
   universe:livingUniverse,
+  messages:messageGovernor,
   supreme:supremeOrb,
   journey:orbIOSJourney,
   presence:orbUniversalPresence,
@@ -581,6 +597,23 @@ window.orbe = {
   returnHome:() => supremeOrb?.returnHome?.(),
   snapshot:() => supremeOrb?.snapshot?.() || orbMotionV207.snapshot()
 };
+
+window.divinaFluidezSupremaV580 = Object.freeze({
+  version:580,
+  base:'V577',
+  stage:'foundation',
+  messages:messageGovernor,
+  status:() => Object.freeze({
+    release:'V580',
+    base:'V577',
+    onePhysicalOrb:supremeOrb?.snapshot?.().oneLivingOrb === true,
+    messageGovernor:messageGovernor?.status?.() || null,
+    journey:orbIOSJourney?.status?.() || null,
+    tarotProtected:true,
+    dailyProtected:true,
+    newVisualEffects:0
+  })
+});
 const skinPerformanceCore = safely('Skins, desempenho e acabamento V518', () =>
   installSkinPerformanceCoreV518()
 );

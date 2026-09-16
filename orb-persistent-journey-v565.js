@@ -1,11 +1,12 @@
-/* DIVINA BRUXA 4.0 — ORBE SUPREMA 2.0 · MACROETAPA 2 · BASE V577
+/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · FUNDAÇÃO V580 SOBRE BASE V577
    Uma única #orb física sai do menu, atravessa a troca de rota e repousa no
    altar definitivo de cada realidade. Não há viajante, cópia ou pouso tardio.
+   A fala agora obedece à governança global: contexto, intervalo e silêncio.
 */
 
 import { worldForRouteV535 } from './world-truth-registry-v535.js?v=535';
 
-const VERSION = 577;
+const VERSION = 580;
 const INSTANCE = Symbol.for('divina.orb.persistent.journey.v565');
 const ROOT_ID = 'divinaOrbPersistentJourneyV565';
 const STYLE_ID = 'divinaOrbPersistentJourneyV565Styles';
@@ -17,25 +18,30 @@ export const ORB_PRESENCE_STATES_V570 = Object.freeze([
   'serene', 'attentive', 'listening', 'responding', 'traveling', 'sleeping'
 ]);
 const TRAVEL_STATES_V570 = new Set(['depart','flight','portal','arrival','settle','recovery']);
-export const ORB_ROUTE_VOICE_V571 = Object.freeze({
-  home:'Voltamos ao centro.',
-  tarot:'O Tarot Livre está aberto.',
-  daily:'Seu encontro de hoje está aqui.',
-  spreads:'As posições estão prontas.',
-  school:'O próximo aprendizado começa aqui.',
-  library:'A Biblioteca está aberta.',
-  ai:'Whit está pronta para escutar.',
-  journal:'Seu espaço privado permanece seu.',
-  store:'A Loja Mística está aberta.',
-  consultations:'O santuário de consultas está aberto.',
-  subscriptions:'Seus benefícios aparecem com clareza.',
-  skins:'A mesma Orbe, uma nova pele.',
-  videos:'As histórias estão prontas para você.',
-  music:'Sua música encontra esta realidade.',
-  notifications:'Você escolhe quais sinais receber.',
-  login:'Sua continuidade começa pela Conta.',
-  admin:'A Central permanece protegida.'
+export const ORB_ROUTE_VOICE_V580 = Object.freeze({
+  home:Object.freeze(['Voltamos ao centro.','A Home respira com você.','O centro está novamente aberto.']),
+  tarot:Object.freeze(['O Tarot Livre está aberto.','A mesa está pronta no seu ritmo.','As cartas esperam o seu toque.']),
+  daily:Object.freeze(['Seu encontro de hoje está aqui.','A Carta do Dia está pronta.','O ritual de hoje pode começar.']),
+  spreads:Object.freeze(['As posições estão prontas.','Escolha a tiragem que combina com sua pergunta.','O templo das tiragens está aberto.']),
+  school:Object.freeze(['O próximo aprendizado começa aqui.','A Escola abriu no seu ritmo.','Seu caminho de estudo está pronto.']),
+  library:Object.freeze(['A Biblioteca está aberta.','As 78 cartas estão ao seu alcance.','Este portal guarda cada símbolo.']),
+  ai:Object.freeze(['Whit está pronta para escutar.','A conversa pode começar quando você quiser.','Whit permanece aqui, sem pressa.']),
+  journal:Object.freeze(['Seu espaço privado permanece seu.','O Diário está aberto somente para você.','Seu Espelho continua protegido.']),
+  store:Object.freeze(['A Loja Mística está aberta.','A curadoria está pronta para ser explorada.','Escolha apenas o que fizer sentido.']),
+  consultations:Object.freeze(['O santuário de consultas está aberto.','Os caminhos de atendimento estão aqui.','Escolha a leitura que combina com sua pergunta.']),
+  subscriptions:Object.freeze(['Seus benefícios aparecem com clareza.','O universo Premium está organizado aqui.','Escolha somente o que deseja ampliar.']),
+  skins:Object.freeze(['A mesma Orbe, uma nova pele.','As formas da Orbe estão reunidas aqui.','A presença continua; a aparência pode mudar.']),
+  videos:Object.freeze(['As histórias estão prontas para você.','O portal de vídeos está aberto.','De Frente com o Tarot começa quando você escolher.']),
+  music:Object.freeze(['Sua música encontra esta realidade.','O universo musical está aberto.','Dê play somente quando quiser mudar o ritmo.']),
+  notifications:Object.freeze(['Você escolhe quais sinais receber.','O silêncio também continua disponível.','Somente os avisos escolhidos chegam até você.']),
+  login:Object.freeze(['Sua continuidade começa pela Conta.','Sua Conta está pronta para guardar preferências.','Entre somente quando quiser sincronizar seu universo.']),
+  admin:Object.freeze(['A Central permanece protegida.','O painel da proprietária está resguardado.','A administração continua sob acesso seguro.'])
 });
+
+// Compatibilidade de leitura para módulos antigos que esperam uma frase única.
+export const ORB_ROUTE_VOICE_V571 = Object.freeze(Object.fromEntries(
+  Object.entries(ORB_ROUTE_VOICE_V580).map(([route, phrases]) => [route, phrases[0]])
+));
 
 const clamp = (value, minimum, maximum) => Math.min(maximum, Math.max(minimum, value));
 const frame = () => new Promise(resolve => requestAnimationFrame(resolve));
@@ -197,10 +203,11 @@ function copyVariables(source, destination) {
 }
 
 export class OrbPersistentJourneyV565 {
-  constructor({ core = null, universe = null } = {}) {
+  constructor({ core = null, universe = null, messageGovernor = null } = {}) {
     this.version = VERSION;
     this.core = core;
     this.universe = universe;
+    this.messageGovernor = messageGovernor || globalThis.divinaMessageGovernorV580 || null;
     this.abort = new AbortController();
     this.animations = new Set();
     this.active = false;
@@ -241,13 +248,15 @@ export class OrbPersistentJourneyV565 {
     this.voiceFrame = 0;
     this.voiceSerial = 0;
     this.voiceMessages = 0;
+    this.voiceSuppressions = 0;
     this.voiceState = 'hidden';
+    this.voiceToken = null;
     this.createPersistentLayer();
     this.bind();
-    document.documentElement.dataset.orbPersistentMotor = 'orbe-suprema-2-universal-v577';
+    document.documentElement.dataset.orbPersistentMotor = 'fluidez-suprema-foundation-v580';
     document.documentElement.dataset.orbPhysics = 'critical-damped-v569';
     document.documentElement.dataset.orbPresenceEngine = 'event-driven-v570';
-    document.documentElement.dataset.orbVoiceEngine = 'anchored-bubble-v571';
+    document.documentElement.dataset.orbVoiceEngine = 'governed-anchored-bubble-v580';
     document.documentElement.dataset.orbVoiceState = 'hidden';
     document.documentElement.dataset.orbMagicEngine = 'source-born-microlight-v573';
     document.documentElement.dataset.orbContinuityEngine = 'universal-physical-authority-v577';
@@ -301,6 +310,11 @@ export class OrbPersistentJourneyV565 {
     return ORB_ROUTE_VOICE_V571[id] || ORB_ROUTE_VOICE_V571.home;
   }
 
+  voiceVariants(route) {
+    const id = String(route || routeNow()).replace(/^#/,'').toLowerCase();
+    return ORB_ROUTE_VOICE_V580[id] || ORB_ROUTE_VOICE_V580.home;
+  }
+
   positionVoice() {
     if (this.destroyed || this.active || !this.voice || this.voice.hidden) return false;
     const orbRect = rectOf(this.core?.orb);
@@ -339,16 +353,48 @@ export class OrbPersistentJourneyV565 {
     return true;
   }
 
-  showVoice(copy, { duration = 2400, reason = 'response', route = this.route } = {}) {
+  showVoice(copy, {
+    duration = 2400,
+    reason = 'response',
+    route = this.route,
+    id = '',
+    variants = null,
+    semanticKey = '',
+    cooldownKey = '',
+    cooldownMs = 45000,
+    priority = 20,
+    explicit = false,
+    category = 'orb-presence'
+  } = {}) {
     if (this.destroyed || this.active || document.hidden || !this.voice || !rectOf(this.core?.orb)) {
       this.hideVoice('unavailable',true);
       return false;
     }
-    const safeCopy = String(copy || '').replace(/\s+/g,' ').trim().slice(0,VOICE_TEXT_LIMIT_V571);
+    const routeId = String(route || routeNow()).replace(/^#/,'').toLowerCase();
+    const decision = this.messageGovernor?.request?.({
+      id:id || `orb-voice:${reason}:${routeId}`,
+      text:copy,
+      variants,
+      route:routeId,
+      channel:'orb-voice',
+      category,
+      semanticKey,
+      cooldownKey,
+      cooldownMs,
+      duration,
+      priority,
+      explicit
+    }) || { accepted:true, text:String(copy || variants?.[0] || '') };
+    if (!decision.accepted) {
+      this.voiceSuppressions += 1;
+      return false;
+    }
+    const safeCopy = String(decision.text || '').replace(/\s+/g,' ').trim().slice(0,VOICE_TEXT_LIMIT_V571);
     if (!safeCopy) {
       this.hideVoice('empty',true);
       return false;
     }
+    this.voiceToken = decision.token || null;
     const token = ++this.voiceSerial;
     clearTimeout(this.voiceTimer);
     clearTimeout(this.voiceHideTimer);
@@ -400,6 +446,9 @@ export class OrbPersistentJourneyV565 {
     this.voice.dataset.visible = 'false';
     this.voice.setAttribute('aria-hidden','true');
     this.voiceState = 'hidden';
+    const voiceToken = this.voiceToken;
+    this.voiceToken = null;
+    if (voiceToken) this.messageGovernor?.release?.(voiceToken, reason);
     document.documentElement.dataset.orbVoiceState = 'hidden';
     if (wasExposed) {
       emit('divina:orb-voice-state', {
@@ -419,8 +468,19 @@ export class OrbPersistentJourneyV565 {
 
   speakRoute(route, reason = 'arrival') {
     const id = String(route || routeNow()).replace(/^#/,'').toLowerCase();
+    if (id === 'home') {
+      this.hideVoice('home-silence',true);
+      return false;
+    }
     if (this.active || TRAVEL_STATES_V570.has(this.state)) return false;
-    return this.showVoice(this.voiceCopy(id), {
+    return this.showVoice('', {
+      variants:this.voiceVariants(id),
+      id:`orb-route:${id}`,
+      semanticKey:`route-arrival:${id}`,
+      cooldownKey:`route-arrival:${id}`,
+      cooldownMs:90000,
+      priority:20,
+      category:'route-arrival',
       duration:reducedMotion() ? 1800 : 2600, reason, route:id
     });
   }
@@ -481,6 +541,10 @@ export class OrbPersistentJourneyV565 {
         copyVariables(this.core?.orb,this.voice);
       }, { signal });
     }
+    document.addEventListener('divina:experience-message-accepted', event => {
+      if (event.detail?.channel === 'orb-voice') return;
+      if (this.voiceState !== 'hidden') this.hideVoice('another-message-accepted',true);
+    }, { signal });
     for (const type of ['divina:route-ready','divina:page-ready','divina:orb-presence-created']) {
       document.addEventListener(type, event => {
         this.syncRestingOrb(type);
@@ -519,11 +583,8 @@ export class OrbPersistentJourneyV565 {
       this.setPresence(state, { reason:`pulse-${kind}`, restAfter });
       if (kind === 'intent') this.hideVoice('navigation-intent',true);
       else if (kind === 'present') this.speakRoute(event.detail?.route || routeNow(),'already-present');
-      else if (['press','keyboard'].includes(kind)) {
-        this.showVoice('Estou ouvindo.', { duration:0, reason:`pulse-${kind}`, route:routeNow() });
-      } else if (kind === 'release') {
-        this.showVoice('Estou aqui.', { duration:1600, reason:'pulse-release', route:routeNow() });
-      }
+      // O toque já recebe resposta física da Orbe. A V580 remove a fala
+      // mecânica de cada soltura; contexto verbal só nasce de uma intenção real.
     }, { signal });
     for (const type of ['divina:supreme-orb-intent','divina:supreme-orb-will-navigate','divina:route-start']) {
       document.addEventListener(type, () => this.hideVoice(type,true), { signal });
@@ -545,7 +606,6 @@ export class OrbPersistentJourneyV565 {
       this.setPresence('responding', {
         reason:'pointer-cancel', restAfter:reducedMotion() ? 180 : 720
       });
-      this.showVoice('Estou aqui.', { duration:1600, reason:'pointer-cancel', route:routeNow() });
     }, { signal });
     document.addEventListener('keyup', event => {
       if (!['Enter',' '].includes(event.key)) return;
@@ -553,7 +613,6 @@ export class OrbPersistentJourneyV565 {
       this.setPresence('responding', {
         reason:'keyboard-release', restAfter:reducedMotion() ? 180 : 720
       });
-      this.showVoice('Estou aqui.', { duration:1600, reason:'keyboard-release', route:routeNow() });
     }, { signal });
   }
 
@@ -1310,6 +1369,8 @@ export class OrbPersistentJourneyV565 {
       voiceAnchoredToLivingOrb:Boolean(this.voice?.isConnected && this.core?.orb?.isConnected),
       voiceDuringFlight:false, voiceModel:'anchored-bubble-v571', speechSynthesisUsed:false,
       voiceTextLimit:VOICE_TEXT_LIMIT_V571, voiceState:this.voiceState, voiceMessages:this.voiceMessages,
+      voiceSuppressions:this.voiceSuppressions, messageGovernorVersion:this.messageGovernor?.version || null,
+      messageMemory:'ids-and-timestamps-only', repeatedTouchCooldownMs:45000,
       microscopicMagic:true, magicModel:'source-born-microlight-v573',
       magicState:document.documentElement.dataset.orbMagicState || 'pending',
       magicInsideLivingRenderer:true, magicDuringFlight:false, magicSourcePixelsOnly:true,
