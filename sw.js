@@ -1,21 +1,21 @@
-/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · VIAGEM POR COORDENADAS · CACHE V583
+/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · MENU LENDÁRIO · CACHE V584
    Cache seletivo e versionado. Nunca guarda Auth, respostas online da Whit, billing,
    Admin, consultas seguras ou outras respostas de autoridade. Lembretes V561 usam
    texto fixo e respeitam o silêncio de Brasília sem revelar cartas. */
 
-const VERSION=583;
+const VERSION=584;
 const OWNED_PREFIX='divina-bruxa-';
-const SHELL_CACHE='divina-bruxa-v583-shell';
-const CONTENT_CACHE='divina-bruxa-v583-content';
-const IMAGE_CACHE='divina-bruxa-v583-images';
-const OFFLINE_CACHE='divina-bruxa-v583-offline-core';
-const PREMIUM_CACHE='divina-bruxa-v583-premium-static';
+const SHELL_CACHE='divina-bruxa-v584-shell';
+const CONTENT_CACHE='divina-bruxa-v584-content';
+const IMAGE_CACHE='divina-bruxa-v584-images';
+const OFFLINE_CACHE='divina-bruxa-v584-offline-core';
+const PREMIUM_CACHE='divina-bruxa-v584-premium-static';
 const ACTIVE_CACHES=new Set([SHELL_CACHE,CONTENT_CACHE,IMAGE_CACHE,OFFLINE_CACHE,PREMIUM_CACHE]);
 const NAVIGATION_TIMEOUT_MS=3500;
 const MAX_CONTENT_ENTRIES=180;
 const MAX_IMAGE_ENTRIES=96;
 const MAX_RUNTIME_IMAGE_BYTES=1800000;
-const RELEASE_CRITICAL_PATTERN_V583=/(?:^|\/)(?:app-v208|experience-message-governor-v580|living-universe-core-v524|orb-engine-v208|page-loader-v1|orb-persistent-journey-v565|orb-universal-presence-v526|orbital-menu-v502|supreme-orb-core-v501|tarot-livre-orbe-os-v517|universe-coordinate-law-v583|whit-core-supreme-v527|whit-orb-soul-bridge-v581|whit-presence-v307|whit-signature-v311)\.js$/;
+const RELEASE_CRITICAL_PATTERN_V584=/(?:^|\/)(?:app-v208|experience-message-governor-v580|living-universe-core-v524|orb-engine-v208|page-loader-v1|orb-persistent-journey-v565|orb-universal-presence-v526|orbital-menu-v502|supreme-orb-core-v501|tarot-livre-orbe-os-v517|universe-coordinate-law-v583|whit-core-supreme-v527|whit-orb-soul-bridge-v581|whit-presence-v307|whit-signature-v311)\.js$/;
 const PRIVATE_ROUTE_PATTERN=/(?:^|\/)(?:admin|account|conta|diario|journal|checkout|billing|pagamento|consulta-individual)(?:[./-]|$)/i;
 const ETHICAL_NOTIFICATION_TEMPLATES_V561=Object.freeze({
   daily:Object.freeze({title:'Divina Bruxa',body:'Sua Carta do Dia está pronta para ser encontrada.',url:'#daily'}),
@@ -100,7 +100,7 @@ const REQUIRED_SHELL=Object.freeze([
 ]);
 
 // Fechamento transitivo dos imports estáticos de app-v208.js. Se qualquer um
-// falhar, a V583 não assume o controle e o worker anterior continua íntegro.
+// falhar, a V584 não assume o controle e o worker anterior continua íntegro.
 const BOOT_DEPENDENCIES=Object.freeze([
   './account-consultations-world-v319.js','./account-engine-v201.js','./account-state-copy-v201.js',
   './ai-policy.js','./auth-client-v201.js','./auth-client-v6.js','./card-library-policy.js',
@@ -351,7 +351,7 @@ const appShellIsValid=async(url,response)=>{
   const isShell=pathname===new URL('./',self.registration.scope).pathname||pathname.endsWith('/index.html');
   if(!isShell)return true;
   const html=await response.clone().text();
-  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=583/.test(html);
+  return html.length>1024&&/id=["']app["']/.test(html)&&/id=["']home["']/.test(html)&&/app-v208\.js\?v=584-menu-lendario/.test(html);
 };
 
 const offlinePageFor=async url=>{
@@ -459,7 +459,7 @@ self.addEventListener('fetch',event=>{
 
   // A viagem da Orbe nunca nasce de uma mistura entre duas gerações. Em rede,
   // estes módulos entram juntos; offline, o shell atômico é o fallback.
-  if(RELEASE_CRITICAL_PATTERN_V583.test(url.pathname)){
+  if(RELEASE_CRITICAL_PATTERN_V584.test(url.pathname)){
     event.respondWith(networkFirst(request));return;
   }
 

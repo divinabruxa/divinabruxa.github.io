@@ -1,0 +1,73 @@
+{
+  "release": "V584",
+  "base": "V583",
+  "plan": "Divina Bruxa 2.0 — Fluidez Suprema",
+  "macroStage": {
+    "number": 5,
+    "total": 10,
+    "name": "Menu Lendário"
+  },
+  "installation": {
+    "type": "flat-incremental-replacement",
+    "requiredBase": "V583",
+    "productionFiles": [
+      "app-v208.js",
+      "index.html",
+      "orbital-menu-v502.js",
+      "orbital-menu-v502.css",
+      "sw.js"
+    ]
+  },
+  "contracts": {
+    "screenModel": "coordinate-reveal",
+    "destinations": 14,
+    "portalBubbles": 13,
+    "homeViaLivingOrb": true,
+    "homeAlwaysAccessible": true,
+    "onePhysicalOrb": true,
+    "duplicateOrb": false,
+    "teleport": false,
+    "flicker": false,
+    "portalVisual": false,
+    "fullViewport": true,
+    "internalScrollbars": false,
+    "oneVisibleIntention": true,
+    "maximumIntentWords": 1,
+    "verticalLivingInformation": true,
+    "backgroundInteractionLocked": true,
+    "reversibleMotion": true,
+    "heavyEffectsPausedDuringMenuMotion": true,
+    "heavyEffectsPausedDuringTravel": true,
+    "automaticWhitEveryTouch": false,
+    "silenceIsPresence": true,
+    "newCanvases": 0,
+    "newAnimationLoops": 0,
+    "iphoneFirst": true
+  },
+  "protected": {
+    "tarotLivre": true,
+    "cartaDoDia": true,
+    "universeCoordinateLawV583": true,
+    "whitOrbSoulBridgeV581": true,
+    "navigationRegistry": true,
+    "privateDataCached": false
+  },
+  "qa": {
+    "menuLegendary": { "passed": 99, "total": 99, "state": "PASS" },
+    "serviceWorkerRuntime": { "passed": 22, "total": 22, "state": "PASS" },
+    "orbNavigationRuntime": { "passed": 8, "total": 8, "state": "PASS" },
+    "aggregate": { "passed": 129, "total": 129, "state": "PASS" },
+    "iphoneProfiles": 5,
+    "p0": 0,
+    "p1": 0
+  },
+  "payloadSha256": {
+    "app-v208.js": "b3e6e2084dd5d1872049d30cdd8d3fd572af0ff419c2902d026f14ffe33bab50",
+    "index.html": "e49bcc12fc98a1b02d7c3da5094a7891145f5787920c0c21978a74fb5f7c75ac",
+    "orbital-menu-v502.js": "0a2e0f2818078ec43f73e5b0e0892ecee66d212269057ecd8ba983023730b769",
+    "orbital-menu-v502.css": "cc1ed5ecf28f0e4e1f78b8b434c0715523a93a411b9ade8de09bde5fbc32b022",
+    "sw.js": "55a414bf611a974c622ddaf2bea022d1934caec89daa39484e2008d548016748",
+    "qa-v584-menu-lendario.mjs": "c08da5dbb70dfa006b038d4c640f0d40d8cbf2e4130a42317fbb98679eaadb4f",
+    "qa-v584-service-worker-runtime.mjs": "6b9813ca55b2c6e9484d307a75fac01f5426cfdb5b01311930af75cb0dd57cc6"
+  }
+}

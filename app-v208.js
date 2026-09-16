@@ -1,7 +1,7 @@
-/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · VIAGEM POR COORDENADAS V583
+/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · MENU LENDÁRIO V584
    A tela revela coordenadas do mesmo universo. A única Orbe física atravessa
-   horizontalmente as realidades, mergulha na vertical e descobre profundidade,
-   com movimento prioritário e silêncio vivo. */
+   as realidades e agora também é a origem viva do Menu: Início permanece
+   acessível, o texto é mínimo e vertical, e o movimento conserva prioridade. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -86,7 +86,7 @@ const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
     document.documentElement.dataset.orbMenuSupremeError = 'v327';
   });
 
-const startOrbitalMenuV502 = () => import('./orbital-menu-v502.js?v=576-foundation')
+const startOrbitalMenuV502 = () => import('./orbital-menu-v502.js?v=584-menu-lendario')
   .then(module => module.installOrbitalMenuV502?.({ core:supremeOrb, go }))
   .catch(error => {
     console.error('[Divina] Menu Orbital Vivo V502 não iniciou', error);
@@ -553,14 +553,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v583-app';
+  window.__divinaSWBootstrap = 'v584-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=583', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=584', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v583';
+        document.documentElement.dataset.releaseEpoch = 'v584';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V583 registrado');
+        console.info('[Divina] PWA V584 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -701,6 +701,43 @@ window.divinaFluidezSupremaV583 = Object.freeze({
       oneIntentionPerBubble:true,
       fewWordsPerBubble:true,
       unpredictableFormCoherentMeaning:true,
+      iphoneFirst:true,
+      tarotProtected:true,
+      dailyProtected:true,
+      newCanvases:0,
+      newAnimationLoops:0
+    });
+  }
+});
+window.divinaFluidezSupremaV584 = Object.freeze({
+  version:584,
+  base:'V583',
+  stage:'legendary-menu',
+  orb:supremeOrb,
+  menu:() => globalThis.divinaMenuV502 || null,
+  status:() => {
+    const menu = globalThis.divinaMenuV502?.status?.() || null;
+    return Object.freeze({
+      release:'V584',
+      base:'V583',
+      macroStage:'5-of-10',
+      screenModel:'coordinate-reveal',
+      onePhysicalOrb:supremeOrb?.snapshot?.().oneLivingOrb === true,
+      menu,
+      destinations:menu?.destinations || 14,
+      homeAlwaysAccessible:menu?.homeAlwaysAccessible === true,
+      homeViaLivingOrb:menu?.homeViaLivingOrb === true,
+      oneVisibleIntention:menu?.oneVisibleIntention === true,
+      verticalLivingInformation:menu?.verticalLivingInformation === true,
+      maximumIntentWords:1,
+      menuScrollbars:false,
+      duplicateOrb:false,
+      teleport:false,
+      flicker:false,
+      automaticWhitEveryTouch:false,
+      silenceIsPresence:true,
+      heavyEffectsPausedDuringMenuMotion:true,
+      heavyEffectsPausedDuringTravel:true,
       iphoneFirst:true,
       tarotProtected:true,
       dailyProtected:true,
@@ -2445,6 +2482,16 @@ const awaken = async () => {
         journeyTravelerCopies:0,
         journeyAutomaticVoice:false,
         journeySilenceIsPresence:true,
+        legendaryMenu:'v584',
+        legendaryMenuDestinations:14,
+        legendaryMenuHomeViaLivingOrb:true,
+        legendaryMenuSingleVisibleIntention:true,
+        legendaryMenuVerticalInformation:true,
+        legendaryMenuMaximumIntentWords:1,
+        legendaryMenuFullViewport:true,
+        legendaryMenuScrollbars:false,
+        legendaryMenuMotionPausesHeavyEffects:true,
+        legendaryMenuDuplicateOrb:false,
         routeCurtain:false,
         webVibration:false,
         nativeHapticsOnly:true,

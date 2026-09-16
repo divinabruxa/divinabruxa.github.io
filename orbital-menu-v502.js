@@ -1,34 +1,40 @@
-/* DIVINA BRUXA 4.0 — ORBE SUPREMA 2.0 · MENU ORBITAL · BASE V576
+/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · MENU LENDÁRIO · V584
    A Orbe Suprema V501 é o único corpo vivo. Este menu a recebe fisicamente,
-   organiza treze realidades e entrega o mesmo corpo ao motor de viagem.
+   revela treze realidades, mantém a origem acessível no próprio corpo e entrega
+   a mesma matéria ao motor de viagem por coordenadas, sem portal ou cópia.
 */
 
-const VERSION = 502;
+const VERSION = 584;
+const AUTHORITY = 'v584';
 const INSTANCE = Symbol.for('divina.orbital.menu.v502');
 const ROOT_ID = 'divinaOrbitalMenuV502';
 const STYLE_ID = 'divinaOrbitalMenuV502Styles';
-const STYLE_HREF = './orbital-menu-v502.css?v=551-ios-motion';
-const OPEN_MS = 300;
-const CLOSE_MS = 180;
+const STYLE_HREF = './orbital-menu-v502.css?v=584-menu-lendario';
+const OPEN_MS = 280;
+const CLOSE_MS = 170;
+const MENU_MOTION_REASON = 'legendary-menu-motion';
+const HOME = Object.freeze({ route:'home', label:'Início', intent:'Origem' });
 
 const INNER = Object.freeze([
-  { route:'tarot', label:'Tarot Livre', icon:'tarot' },
-  { route:'daily', label:'Carta do Dia', icon:'moon' },
-  { route:'spreads', label:'Tiragens', icon:'spread' },
-  { route:'school', label:'Escola', icon:'book' },
-  { route:'library', label:'Biblioteca', icon:'library' },
-  { route:'journal', label:'Diário', spoken:'Diário e Espelho', icon:'mirror' }
+  { route:'tarot', label:'Tarot Livre', intent:'Escolher', icon:'tarot' },
+  { route:'daily', label:'Carta do Dia', intent:'Receber', icon:'moon' },
+  { route:'spreads', label:'Tiragens', intent:'Aprofundar', icon:'spread' },
+  { route:'school', label:'Escola', intent:'Aprender', icon:'book' },
+  { route:'library', label:'Biblioteca', intent:'Descobrir', icon:'library' },
+  { route:'journal', label:'Diário', spoken:'Diário e Espelho', intent:'Escutar', icon:'mirror' }
 ]);
 
 const OUTER = Object.freeze([
-  { route:'ai', label:'Orbe IA', spoken:'Whit, Orbe IA', icon:'spark' },
-  { route:'store', label:'Loja', icon:'bag' },
-  { route:'consultations', label:'Consultas', icon:'message' },
-  { route:'music', label:'Música', icon:'music' },
-  { route:'videos', label:'Vídeo', icon:'play' },
-  { route:'skins', label:'Skins', icon:'gem' },
-  { route:'login', label:'Conta', icon:'user' }
+  { route:'ai', label:'Orbe IA', spoken:'Whit, Orbe IA', intent:'Conversar', icon:'spark' },
+  { route:'store', label:'Loja', intent:'Encontrar', icon:'bag' },
+  { route:'consultations', label:'Consultas', intent:'Acolher', icon:'message' },
+  { route:'music', label:'Música', intent:'Vibrar', icon:'music' },
+  { route:'videos', label:'Vídeo', intent:'Assistir', icon:'play' },
+  { route:'skins', label:'Skins', intent:'Transformar', icon:'gem' },
+  { route:'login', label:'Conta', intent:'Guardar', icon:'user' }
 ]);
+
+const DESTINATIONS = Object.freeze([HOME, ...INNER, ...OUTER]);
 
 const ICONS = Object.freeze({
   tarot:'<rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 8h6M12 6v10M9 14h6"/>',
@@ -78,7 +84,7 @@ function portalMarkup(item, ring, index, count) {
   const angle = start + ((360 / count) * index);
   const inverse = -angle;
   const spoken = item.spoken || item.label;
-  return `<button type="button" class="db502-portal db502-portal--${ring}" data-v502-route="${item.route}" data-go="${item.route}" aria-label="${spoken}" style="--portal-i:${index};--portal-angle:${angle}deg;--portal-inverse:${inverse}deg"><span class="db502-portal__jewel">${iconMarkup(item.icon)}<i aria-hidden="true"></i></span><span class="db502-portal__label">${item.label}</span></button>`;
+  return `<button type="button" class="db502-portal db502-portal--${ring}" data-v502-route="${item.route}" data-v584-intent="${item.intent}" data-go="${item.route}" aria-label="${spoken}" style="--portal-i:${index};--portal-angle:${angle}deg;--portal-inverse:${inverse}deg"><span class="db502-portal__jewel">${iconMarkup(item.icon)}<i aria-hidden="true"></i></span><span class="db502-portal__label">${item.label}</span></button>`;
 }
 
 function createScene() {
@@ -95,7 +101,7 @@ function createScene() {
     <div class="db502-menu__cosmos" aria-hidden="true"></div>
     <header class="db502-menu__heading">
       <span>ORBE DAS REALIDADES</span>
-      <h2 id="db502MenuTitle">Escolha uma realidade</h2>
+      <h2 id="db502MenuTitle">Coordenadas</h2>
     </header>
     <div class="db502-menu__orbit db502-menu__orbit--outer" aria-hidden="true"></div>
     <div class="db502-menu__orbit db502-menu__orbit--inner" aria-hidden="true"></div>
@@ -103,11 +109,13 @@ function createScene() {
       ${INNER.map((item, index) => portalMarkup(item, 'inner', index, INNER.length)).join('')}
       ${OUTER.map((item, index) => portalMarkup(item, 'outer', index, OUTER.length)).join('')}
     </nav>
-    <div class="db502-menu__center" data-v502-orb-host>
+    <div class="db502-menu__center" data-v502-orb-host data-v584-home>
       <span class="db502-menu__aura" aria-hidden="true"></span>
       <span class="db502-menu__halo" aria-hidden="true"></span>
+      <span class="db502-menu__home-label" aria-hidden="true">Início</span>
     </div>
-    <p class="db502-menu__hint" id="db502MenuHint">Toque em um portal. A Orbe abre o caminho.</p>
+    <p class="db502-menu__intention" aria-hidden="true"><span data-v584-intention>Origem</span></p>
+    <p class="db502-menu__hint" id="db502MenuHint">Toque. Viaje.</p>
     <span class="db502-menu__live" role="status" aria-live="polite" aria-atomic="true"></span>`;
 
   /* O Universo Vivo V524 já existe atrás de todas as realidades. Não criamos
@@ -151,6 +159,8 @@ export class OrbitalMenuV502 {
       ? go
       : globalThis.divinaOrbSupremeV501?.navigate || globalThis.orbe?.go || null;
     this.menuButton = document.querySelector('#menuBtn, [data-menu-toggle], [data-open-menu]');
+    this.homeButton = document.querySelector('.app-header .brand[data-go="home"], .app-header [data-go="home"]');
+    this.homeButtonLabel = this.homeButton?.getAttribute('aria-label');
     this.legacy = document.querySelector('#orbMenu');
     this.dockOrb = document.querySelector('.magic-dock .dock-orb, .dock-orb');
     if (!this.core?.claim || !this.core?.navigate || !this.go || !this.menuButton) {
@@ -163,6 +173,7 @@ export class OrbitalMenuV502 {
     this.root = createScene();
     document.body.append(this.root);
     this.host = this.root.querySelector('[data-v502-orb-host]');
+    this.intention = this.root.querySelector('[data-v584-intention]');
     this.live = this.root.querySelector('.db502-menu__live');
     this.buttons = [...this.root.querySelectorAll('[data-v502-route]')];
     this.abort = new AbortController();
@@ -172,8 +183,12 @@ export class OrbitalMenuV502 {
     this.lastFocus = null;
     this.motionToken = 0;
     this.navigating = false;
+    this.intentTimer = 0;
+    this.backgroundSnapshots = [];
+    this.backgroundLocked = false;
+    this.menuMotionPaused = false;
 
-    document.documentElement.dataset.menuAuthority = 'v502';
+    document.documentElement.dataset.menuAuthority = AUTHORITY;
     this.menuButton.setAttribute('aria-controls', ROOT_ID);
     this.menuButton.setAttribute('aria-haspopup', 'dialog');
     this.legacy?.setAttribute('aria-hidden', 'true');
@@ -212,6 +227,15 @@ export class OrbitalMenuV502 {
 
       if (!this.targetOpen || !this.root.contains(target)) return;
 
+      const home = target.closest('[data-v584-home]');
+      if (home && this.host.contains(target)) {
+        if (!['opening','open'].includes(this.state)) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        this.activateHome();
+        return;
+      }
+
       const portal = target.closest('[data-v502-route]');
       if (portal) {
         if (!['opening','open'].includes(this.state)) return;
@@ -232,8 +256,12 @@ export class OrbitalMenuV502 {
     document.addEventListener('pointerdown', event => {
       if (!this.targetOpen) return;
       const portal = event.target?.closest?.('[data-v502-route]');
-      if (!portal) return;
+      if (!portal) {
+        if (this.host.contains(event.target)) this.revealIntent('home');
+        return;
+      }
       portal.classList.add('is-touching');
+      this.revealIntent(portal.dataset.v502Route);
       this.core.prime?.(portal.dataset.v502Route, { source:'menu-touch-v517', target:portal });
       const clear = () => portal.classList.remove('is-touching');
       portal.addEventListener('pointerup', clear, { once:true });
@@ -241,10 +269,26 @@ export class OrbitalMenuV502 {
       setTimeout(clear, 520);
     }, { capture:true, passive:true, signal });
 
+    document.addEventListener('pointerover', event => {
+      if (!this.targetOpen) return;
+      const portal = event.target?.closest?.('[data-v502-route]');
+      if (portal) this.revealIntent(portal.dataset.v502Route);
+      else if (this.host.contains(event.target)) this.revealIntent('home');
+    }, { passive:true, signal });
+
+    document.addEventListener('pointerout', event => {
+      if (!this.targetOpen || !this.root.contains(event.target)) return;
+      if (event.relatedTarget && this.root.contains(event.relatedTarget)) return;
+      this.queueCurrentIntent();
+    }, { passive:true, signal });
+
     document.addEventListener('focusin', event => {
       const portal = event.target?.closest?.('[data-v502-route]');
       if (this.targetOpen && portal) {
         this.core.prime?.(portal.dataset.v502Route, { source:'menu-focus-v502', target:portal });
+        this.revealIntent(portal.dataset.v502Route);
+      } else if (this.targetOpen && this.host.contains(event.target)) {
+        this.revealIntent('home');
       }
     }, { signal });
 
@@ -257,7 +301,7 @@ export class OrbitalMenuV502 {
         return;
       }
       if (event.key !== 'Tab') return;
-      const focusable = [this.menuButton, ...this.buttons, this.core.orb]
+      const focusable = [this.homeButton, this.menuButton, this.core.orb, ...this.buttons]
         .filter(node => node instanceof HTMLElement && !node.hidden && !node.hasAttribute('disabled'));
       if (!focusable.length) return;
       const first = focusable[0];
@@ -300,22 +344,97 @@ export class OrbitalMenuV502 {
     this.root.dataset.state = state;
     document.documentElement.dataset.menuState = state;
     document.dispatchEvent(new CustomEvent('divina:menu-state', {
-      detail:Object.freeze({ version:VERSION, authority:'v502', previous, state, targetOpen:this.targetOpen, reason })
+      detail:Object.freeze({ version:VERSION, authority:AUTHORITY, previous, state, targetOpen:this.targetOpen, reason })
     }));
   }
 
+  destination(route) {
+    const normalized = String(route || 'home').replace(/^#/, '').toLowerCase();
+    return DESTINATIONS.find(item => item.route === normalized) || HOME;
+  }
+
+  revealIntent(route) {
+    if (!this.intention) return;
+    clearTimeout(this.intentTimer);
+    const destination = this.destination(route);
+    this.intention.textContent = destination.intent;
+    if (this.intention.parentElement?.dataset) this.intention.parentElement.dataset.route = destination.route;
+  }
+
+  queueCurrentIntent() {
+    clearTimeout(this.intentTimer);
+    this.intentTimer = setTimeout(() => this.revealIntent(routeNow()), 420);
+  }
+
+  setRootInteractive(interactive) {
+    if ('inert' in this.root) this.root.inert = !interactive;
+    this.root.setAttribute('aria-hidden', String(!interactive));
+  }
+
+  lockBackground() {
+    if (this.backgroundLocked) return;
+    const nodes = [
+      document.querySelector('#app'),
+      document.querySelector('.magic-dock'),
+      document.querySelector('.v562-skip-link'),
+      document.querySelector('#drawer')
+    ].filter(node => node instanceof HTMLElement && !this.root.contains(node));
+    this.backgroundSnapshots = nodes.map(node => ({
+      node,
+      inertValue:'inert' in node ? node.inert : null,
+      hadAriaHidden:node.hasAttribute('aria-hidden'),
+      ariaHidden:node.getAttribute('aria-hidden')
+    }));
+    this.backgroundSnapshots.forEach(({ node }) => {
+      if ('inert' in node) node.inert = true;
+      node.setAttribute('aria-hidden', 'true');
+    });
+    this.backgroundLocked = true;
+  }
+
+  unlockBackground() {
+    if (!this.backgroundLocked) return;
+    this.backgroundSnapshots.forEach(snapshot => {
+      const { node } = snapshot;
+      if (!node?.isConnected) return;
+      if ('inert' in node && snapshot.inertValue !== null) node.inert = snapshot.inertValue;
+      if (snapshot.hadAriaHidden) node.setAttribute('aria-hidden', snapshot.ariaHidden ?? 'true');
+      else node.removeAttribute('aria-hidden');
+    });
+    this.backgroundSnapshots = [];
+    this.backgroundLocked = false;
+  }
+
+  pauseMenuMotion() {
+    if (this.menuMotionPaused) return;
+    globalThis.divinaLivingUniverseV524?.pause?.(MENU_MOTION_REASON);
+    document.documentElement.dataset.menuMotion = 'active';
+    this.menuMotionPaused = true;
+  }
+
+  resumeMenuMotion() {
+    if (!this.menuMotionPaused) return;
+    globalThis.divinaLivingUniverseV524?.start?.(MENU_MOTION_REASON);
+    delete document.documentElement.dataset.menuMotion;
+    this.menuMotionPaused = false;
+  }
+
   async open() {
-    if (this.targetOpen || this.state !== 'closed') return false;
+    if (this.targetOpen || this.navigating || !['closed','closing'].includes(this.state)) return false;
+    const reversing = this.state === 'closing';
     this.targetOpen = true;
     const token = ++this.motionToken;
     this.lastFocus = document.activeElement instanceof HTMLElement ? document.activeElement : this.menuButton;
+    this.pauseMenuMotion();
     this.setMenuButton(true);
-    this.publish('opening', 'request');
+    this.homeButton?.setAttribute('aria-label', 'Voltar ao Início');
+    this.publish('opening', reversing ? 'reverse-open' : 'request');
 
     /* A cortina cósmica responde já no primeiro quadro. A V551 preserva a
        realidade atual e reclama temporariamente a mesma Orbe. */
     this.root.hidden = false;
-    this.root.setAttribute('aria-hidden', 'false');
+    this.setRootInteractive(true);
+    this.root.classList.remove('is-closing', 'is-departing');
     document.documentElement.classList.add('db502-menu-open');
     document.body?.classList.add('db502-menu-open');
     await frame();
@@ -323,11 +442,16 @@ export class OrbitalMenuV502 {
     this.root.classList.add('is-open');
     this.root.classList.add('is-ios-settling');
 
-    this.releaseOrb = this.core.claim(this.host, {
-      mode:'menu',
-      ariaLabel:'Orbe das Realidades, centro do menu'
-    });
+    if (!this.host.contains(this.core.orb)) {
+      this.releaseOrb = this.core.claim(this.host, {
+        mode:'menu',
+        ariaLabel:'Orbe central. Voltar ao Início'
+      });
+    }
     this.host.classList.add('has-living-orb');
+    this.lockBackground();
+    this.syncRoute(routeNow());
+    this.revealIntent(routeNow());
     await frame();
     if (token !== this.motionToken || !this.targetOpen) return false;
     this.core.pulse?.('menu-open', { intensity:0.66 });
@@ -336,7 +460,8 @@ export class OrbitalMenuV502 {
     if (token !== this.motionToken || !this.targetOpen) return false;
     this.publish('open', 'settled');
     this.root.classList.remove('is-ios-settling');
-    this.live.textContent = 'Menu aberto. Escolha uma realidade.';
+    this.resumeMenuMotion();
+    this.live.textContent = 'Menu aberto.';
     try { this.core.orb?.focus?.({ preventScroll:true }); } catch {}
     return true;
   }
@@ -345,8 +470,10 @@ export class OrbitalMenuV502 {
     if (!this.targetOpen && this.state === 'closed') return false;
     this.targetOpen = false;
     const token = ++this.motionToken;
+    this.pauseMenuMotion();
     this.setMenuButton(false);
     this.publish('closing', reason);
+    this.setRootInteractive(false);
     this.root.classList.remove('is-open', 'is-ios-settling');
     this.root.classList.add('is-closing');
     await wait(immediate ? 0 : reducedMotion() ? 24 : CLOSE_MS);
@@ -358,13 +485,19 @@ export class OrbitalMenuV502 {
       this.releaseOrb = null;
     }
     this.host.classList.remove('has-living-orb');
+    this.unlockBackground();
     this.root.classList.remove('is-closing', 'is-departing', 'is-ios-settling');
     this.root.hidden = true;
-    this.root.setAttribute('aria-hidden', 'true');
+    this.setRootInteractive(false);
     delete this.root.dataset.destination;
     document.documentElement.classList.remove('db502-menu-open');
     document.body?.classList.remove('db502-menu-open');
+    if (this.homeButton) {
+      if (this.homeButtonLabel === null) this.homeButton.removeAttribute('aria-label');
+      else this.homeButton.setAttribute('aria-label', this.homeButtonLabel);
+    }
     this.publish('closed', reason);
+    this.resumeMenuMotion();
     this.live.textContent = '';
     if (restoreFocus) {
       try { (this.lastFocus?.isConnected ? this.lastFocus : this.menuButton).focus({ preventScroll:true }); } catch {}
@@ -373,18 +506,37 @@ export class OrbitalMenuV502 {
   }
 
   async activate(portal) {
+    return this.activateDestination({
+      route:portal?.dataset?.v502Route,
+      label:portal?.querySelector?.('.db502-portal__label')?.textContent || 'Realidade',
+      origin:portal,
+      chosen:portal
+    });
+  }
+
+  async activateHome() {
+    return this.activateDestination({ route:'home', label:'Início', origin:this.host, chosen:this.host });
+  }
+
+  async activateDestination({ route, label, origin, chosen } = {}) {
     if (this.navigating || !this.targetOpen) return;
-    const route = portal.dataset.v502Route;
-    const label = portal.querySelector('.db502-portal__label')?.textContent || 'realidade';
+    route = String(route || 'home').replace(/^#/, '').toLowerCase();
+    if (route === routeNow()) {
+      this.core.pulse?.('menu-rest', { intensity:0.54 });
+      nativePulse('Light');
+      await this.close({ restoreFocus:true, reason:`current:${route}` });
+      return true;
+    }
     this.navigating = true;
     this.root.dataset.destination = route;
     this.root.classList.add('is-departing');
-    portal.classList.add('is-chosen');
-    portal.setAttribute('aria-busy', 'true');
-    this.live.textContent = `${label}: a Orbe está abrindo o caminho.`;
+    chosen?.classList?.add('is-chosen');
+    chosen?.setAttribute?.('aria-busy', 'true');
+    this.revealIntent(route);
+    this.live.textContent = `${label}. Viajando.`;
     this.core.pulse?.('portal', { intensity:1.02 });
-    this.core.prime?.(route, { source:'menu-flight-v517', target:portal });
-    const rect = portal.getBoundingClientRect();
+    this.core.prime?.(route, { source:'menu-flight-v584', target:origin });
+    const rect = origin.getBoundingClientRect();
     globalThis.divinaLivingUniverseV516?.ignite?.({
       x:(rect.left + rect.width / 2) / Math.max(innerWidth, 1),
       y:(rect.top + rect.height / 2) / Math.max(innerHeight, 1),
@@ -392,7 +544,7 @@ export class OrbitalMenuV502 {
     });
     nativePulse('Medium');
 
-    const origin = { getBoundingClientRect:() => rect };
+    const flightOrigin = { getBoundingClientRect:() => rect };
     if (!reducedMotion()) await frame();
     // O fechamento visual começa no mesmo instante, mas a posse do corpo não
     // volta à Home. A viagem captura a #orb do centro antes de o menu sumir.
@@ -404,7 +556,7 @@ export class OrbitalMenuV502 {
     });
     const travel = Promise.resolve(this.core.navigate(route, {
       source:'orbital-menu-v502',
-      target:origin
+      target:flightOrigin
     })).then(
       value => ({ ok:true, value }),
       error => ({ ok:false, error })
@@ -427,8 +579,8 @@ export class OrbitalMenuV502 {
       // invalida o recibo do menu e nunca move a Orbe assentada no Tarot.
       try { this.releaseOrb?.(); } catch {}
       this.releaseOrb = null;
-      portal.classList.remove('is-chosen');
-      portal.removeAttribute('aria-busy');
+      chosen?.classList?.remove('is-chosen');
+      chosen?.removeAttribute?.('aria-busy');
       this.navigating = false;
     }
   }
@@ -441,13 +593,19 @@ export class OrbitalMenuV502 {
       if (active) button.setAttribute('aria-current', 'page');
       else button.removeAttribute('aria-current');
     });
+    this.host.classList.toggle('is-current', current === 'home');
+    this.root.dataset.origin = current;
+    if (this.targetOpen) this.revealIntent(current);
   }
 
   status() {
     return Object.freeze({
       version:VERSION,
+      release:'V584',
+      authority:AUTHORITY,
       state:this.state,
       portals:this.buttons.length,
+      destinations:this.buttons.length + 1,
       innerRing:INNER.length,
       outerRing:OUTER.length,
       includesLibrary:true,
@@ -458,8 +616,16 @@ export class OrbitalMenuV502 {
       extraApiCalls:0,
       webVibration:false,
       nativeHapticsOnly:true,
-      fluidityTuning:'v551-ios-single-motion',
+      fluidityTuning:'v584-iphone-single-motion',
       opensOverCurrentRoute:true,
+      homeAlwaysAccessible:true,
+      homeViaLivingOrb:true,
+      oneVisibleIntention:true,
+      verticalLivingInformation:true,
+      maximumIntentWords:1,
+      heavyEffectsPausedDuringMenuMotion:true,
+      backgroundInteractionLocked:true,
+      fullViewportWithoutScroll:true,
       duplicateCloseButton:false,
       livingUniverseBackdrop:true,
       duplicateStarfield:false
@@ -470,17 +636,24 @@ export class OrbitalMenuV502 {
     this.abort.abort();
     this.motionToken += 1;
     this.targetOpen = false;
+    clearTimeout(this.intentTimer);
     try { this.releaseOrb?.(); }
     catch { this.core?.returnHome?.(); }
     this.releaseOrb = null;
+    this.unlockBackground();
+    this.resumeMenuMotion();
     this.host?.classList.remove('has-living-orb');
     this.root?.classList.remove('is-open', 'is-closing', 'is-departing', 'is-ios-settling');
     this.root?.remove();
     this.menuButton?.classList.remove('is-open');
     this.menuButton?.setAttribute('aria-expanded', 'false');
+    if (this.homeButton) {
+      if (this.homeButtonLabel === null) this.homeButton.removeAttribute('aria-label');
+      else this.homeButton.setAttribute('aria-label', this.homeButtonLabel);
+    }
     document.documentElement.classList.remove('db502-menu-open');
     document.body?.classList.remove('db502-menu-open');
-    delete document.documentElement.dataset.menuAuthority;
+    if (document.documentElement.dataset.menuAuthority === AUTHORITY) delete document.documentElement.dataset.menuAuthority;
     delete document.documentElement.dataset.menuState;
     if (this.legacy && 'inert' in this.legacy) this.legacy.inert = false;
     delete globalThis.divinaMenuV502;
@@ -494,7 +667,7 @@ export function installMenuOrbitalV502(options = {}) {
   globalThis[INSTANCE] = instance;
   globalThis.divinaMenuV502 = instance;
   document.dispatchEvent(new CustomEvent('divina:orbital-menu-ready', {
-    detail:Object.freeze({ version:VERSION, portals:13, oneLivingOrb:true, v500LoaderActive:false })
+    detail:Object.freeze({ version:VERSION, release:'V584', authority:AUTHORITY, portals:13, destinations:14, oneLivingOrb:true, homeViaLivingOrb:true, v500LoaderActive:false })
   }));
   return instance;
 }

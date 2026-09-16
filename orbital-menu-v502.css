@@ -1,4 +1,5 @@
-/* DIVINA BRUXA 4.0 — MENU ORBITAL V502 · MOVIMENTO ÚNICO iOS V551 */
+/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · MENU LENDÁRIO V584
+   Uma coordenada de tela inteira, uma Orbe física e uma intenção visível. */
 
 :root{
   --db502-gold:#f6d493;
@@ -11,9 +12,9 @@
   --db502-outer-radius:min(39vw,29dvh,224px);
   --db502-orb-size:min(31vw,20dvh,158px);
   --db502-curve:cubic-bezier(.22,.82,.24,1);
-  --db502-response:150ms;
-  --db502-settle:280ms;
-  --db502-exit:180ms;
+  --db502-response:140ms;
+  --db502-settle:260ms;
+  --db502-exit:170ms;
 }
 
 html.db502-menu-open .app-header{
@@ -21,6 +22,39 @@ html.db502-menu-open .app-header{
   background:linear-gradient(180deg,rgba(3,1,7,.82),transparent);
 }
 
+/* Enquanto o universo revela o Menu, só a Orbe física permanece visível.
+   A marca vira uma saída clara para a origem e o dock deixa de competir. */
+html.db502-menu-open .magic-dock{
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+
+html.db502-menu-open .app-header .brand{
+  position:relative;
+  min-width:74px;
+  color:var(--db502-gold-hot);
+}
+
+html.db502-menu-open .app-header .brand > *{
+  opacity:0!important;
+  visibility:hidden!important;
+}
+
+html.db502-menu-open .app-header .brand:after{
+  content:"INÍCIO";
+  position:absolute;
+  left:0;
+  top:50%;
+  translate:0 -50%;
+  color:rgba(255,239,202,.84);
+  font:650 10px/1 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  letter-spacing:.22em;
+  text-indent:.22em;
+  text-shadow:0 0 14px rgba(216,108,255,.35);
+}
+
+html[data-menu-authority="v584"] #orbMenu,
 html[data-menu-authority="v502"] #orbMenu{
   display:none!important;
   opacity:0!important;
@@ -58,6 +92,28 @@ html.db502-menu-open body{
   transition:opacity var(--db502-response) ease-out,visibility 0s linear var(--db502-exit);
 }
 
+/* page-design-supreme trata diálogos comuns como cartões. O Menu é uma
+   coordenada do universo e precisa ocupar o viewport inteiro, sem rolagem. */
+#divinaOrbitalMenuV502{
+  position:fixed!important;
+  inset:0!important;
+  inline-size:auto!important;
+  block-size:auto!important;
+  width:auto!important;
+  height:auto!important;
+  min-width:0!important;
+  min-height:0!important;
+  max-width:none!important;
+  max-height:none!important;
+  max-inline-size:none!important;
+  max-block-size:none!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border-radius:0!important;
+  overscroll-behavior:none!important;
+}
+
 .db502-menu.is-open,
 .db502-menu.is-closing{
   opacity:1;
@@ -77,9 +133,22 @@ html.db502-menu-open body{
 .db502-menu.is-closing .db502-menu__center,
 .db502-menu.is-closing .db502-menu__heading,
 .db502-menu.is-closing .db502-menu__close,
-.db502-menu.is-closing .db502-menu__hint{
+.db502-menu.is-closing .db502-menu__hint,
+.db502-menu.is-closing .db502-menu__intention,
+.db502-menu.is-closing .db502-menu__home-label{
   transition-delay:0ms!important;
   transition-duration:var(--db502-exit)!important;
+}
+
+html[data-menu-motion="active"] .db502-menu__backdrop:before,
+html[data-menu-motion="active"] .db502-menu__backdrop:after,
+html[data-menu-motion="active"] .db502-menu__aura,
+html[data-menu-motion="active"] .db502-menu__halo,
+.db502-menu.is-ios-settling .db502-menu__backdrop:before,
+.db502-menu.is-ios-settling .db502-menu__backdrop:after,
+.db502-menu.is-ios-settling .db502-menu__aura,
+.db502-menu.is-ios-settling .db502-menu__halo{
+  animation-play-state:paused!important;
 }
 
 .db502-menu__backdrop{
@@ -145,7 +214,7 @@ html.db502-menu-open body{
 .db502-menu__heading{
   position:absolute;
   z-index:8;
-  top:max(25px,env(safe-area-inset-top));
+  top:max(76px,calc(env(safe-area-inset-top) + 62px));
   left:50%;
   width:min(72vw,420px);
   translate:-50% 0;
@@ -172,7 +241,7 @@ html.db502-menu-open body{
 }
 
 .db502-menu__heading h2{
-  margin:8px 0 0;
+  margin:6px 0 0;
   color:#fff8e8;
   font:400 clamp(19px,5.1vw,31px)/1.08 Georgia,"Times New Roman",serif;
   letter-spacing:.045em;
@@ -395,9 +464,9 @@ html.db502-menu-open body{
   min-height:28px;
   margin:5px 0 0;
   padding:3px 4px;
-  color:#f8eedc;
+  color:rgba(248,238,220,.78);
   border-radius:9px;
-  background:linear-gradient(180deg,rgba(7,1,13,.56),rgba(4,0,8,.3));
+  background:linear-gradient(180deg,rgba(7,1,13,.38),rgba(4,0,8,.16));
   font:600 clamp(10px,2.75vw,12.5px)/1.18 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   letter-spacing:.01em;
   text-align:center;
@@ -476,6 +545,8 @@ html.db502-menu-open body{
   display:grid;
   place-items:center;
   border-radius:50%;
+  cursor:pointer;
+  touch-action:manipulation;
   opacity:0;
   transform:scale(.55);
   transition:opacity var(--db502-response) ease-out 18ms,transform var(--db502-settle) var(--db502-curve) 10ms;
@@ -494,6 +565,14 @@ html.db502-menu-open body{
 .db502-menu.is-open .db502-menu__center.has-living-orb{
   opacity:1;
   transform:scale(1);
+}
+
+.db502-menu__center.is-chosen{
+  z-index:30;
+}
+
+.db502-menu__center.is-chosen > [data-supreme-orb="living"]{
+  filter:saturate(1.16) brightness(1.1) drop-shadow(0 0 24px rgba(222,111,255,.42));
 }
 
 .db502-menu__center > [data-supreme-orb="living"]{
@@ -516,6 +595,80 @@ html.db502-menu-open body{
   position:absolute;
   pointer-events:none;
   border-radius:50%;
+}
+
+.db502-menu__center.is-current .db502-menu__halo{
+  border-color:rgba(255,237,197,.34);
+  box-shadow:inset 0 0 20px rgba(190,63,255,.16),0 0 28px rgba(255,217,151,.16);
+}
+
+.db502-menu__home-label{
+  position:absolute;
+  z-index:8;
+  left:50%;
+  top:calc(100% + 7px);
+  translate:-50% 0;
+  padding:2px 7px;
+  border-radius:999px;
+  color:rgba(255,239,207,.72);
+  background:rgba(5,1,10,.28);
+  font:650 9px/1.2 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  letter-spacing:.16em;
+  text-indent:.16em;
+  text-transform:uppercase;
+  text-shadow:0 0 10px rgba(200,82,255,.28);
+  opacity:0;
+  transform:translateY(5px);
+  transition:opacity 160ms ease 70ms,transform 240ms var(--db502-curve) 54ms;
+  pointer-events:none;
+}
+
+.db502-menu.is-open .db502-menu__home-label{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Uma única informação viva. Ela muda com a bolha tocada, permanece
+   transparente e usa o eixo vertical sem criar diálogo ou balão extra. */
+.db502-menu__intention{
+  position:absolute;
+  z-index:7;
+  left:calc(50% + var(--db502-outer-radius) + 28px);
+  top:52%;
+  max-height:38dvh;
+  margin:0;
+  translate:0 -50%;
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+  color:rgba(255,236,199,.48);
+  font:600 9px/1 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  letter-spacing:.30em;
+  text-transform:uppercase;
+  text-shadow:0 0 13px rgba(190,75,255,.44);
+  opacity:0;
+  transform:translateY(7px);
+  transition:opacity 160ms ease 80ms,transform 260ms var(--db502-curve) 62ms,color 160ms ease;
+  pointer-events:none;
+}
+
+.db502-menu__intention:before{
+  content:"";
+  display:block;
+  width:1px;
+  height:22px;
+  margin:0 auto 8px;
+  background:linear-gradient(180deg,transparent,rgba(246,212,147,.48),transparent);
+  box-shadow:0 0 8px rgba(176,70,255,.26);
+}
+
+.db502-menu.is-open .db502-menu__intention{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.db502-menu__intention[data-route="ai"],
+.db502-menu__intention[data-route="home"]{
+  color:rgba(190,225,255,.54);
 }
 
 .db502-menu__aura{
@@ -543,9 +696,11 @@ html.db502-menu-open body{
   width:min(78vw,430px);
   margin:0;
   translate:-50% 0;
-  color:rgba(241,223,205,.68);
-  font:400 clamp(11px,3vw,13px)/1.35 Georgia,"Times New Roman",serif;
-  letter-spacing:.025em;
+  color:rgba(241,223,205,.56);
+  font:600 clamp(9px,2.5vw,11px)/1.2 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  letter-spacing:.22em;
+  text-indent:.22em;
+  text-transform:uppercase;
   text-align:center;
   text-shadow:0 1px 8px #000;
   opacity:0;
@@ -568,15 +723,16 @@ html.db502-menu-open body{
 @media (max-width:370px){
   :root{
     --db502-inner-radius:min(25vw,19dvh,112px);
-    --db502-outer-radius:min(39vw,29dvh,156px);
+    --db502-outer-radius:min(38vw,29dvh,156px);
     --db502-orb-size:min(30vw,19dvh,116px);
   }
   .db502-portal{width:72px;min-height:64px}
   .db502-portal__jewel{width:42px;height:42px}
   .db502-portal__label{width:72px;font-size:10px}
-  .db502-menu__heading{top:max(18px,env(safe-area-inset-top))}
+  .db502-menu__heading{top:max(70px,calc(env(safe-area-inset-top) + 58px))}
   .db502-menu__heading h2{margin-top:5px}
   .db502-menu__close{right:max(10px,env(safe-area-inset-right));width:44px;height:44px}
+  .db502-menu__intention{left:auto;right:max(3px,env(safe-area-inset-right));font-size:8px;opacity:.72}
 }
 
 /* Nos dois pontos laterais em que as órbitas se aproximam, os rótulos da
@@ -609,15 +765,16 @@ html.db502-menu-open body{
 @media (max-height:690px){
   :root{
     --db502-inner-radius:min(25vw,18dvh,124px);
-    --db502-outer-radius:min(39vw,28dvh,184px);
+    --db502-outer-radius:min(38vw,28dvh,184px);
     --db502-orb-size:min(29vw,18dvh,130px);
   }
-  .db502-menu__heading{top:max(13px,env(safe-area-inset-top))}
+  .db502-menu__heading{top:max(62px,calc(env(safe-area-inset-top) + 52px))}
   .db502-menu__heading span{font-size:8px}
   .db502-menu__heading h2{margin-top:4px;font-size:18px}
   .db502-menu__hint{bottom:max(8px,env(safe-area-inset-bottom));font-size:10px}
   .db502-portal__jewel{width:42px;height:42px}
   .db502-portal__label{margin-top:3px;font-size:10px}
+  .db502-menu__home-label{top:calc(100% + 4px);font-size:8px}
 }
 
 @media (orientation:landscape) and (max-height:520px){
@@ -631,6 +788,7 @@ html.db502-menu-open body{
   .db502-menu__center{top:53%}
   .db502-menu__heading h2{display:none}
   .db502-menu__hint{display:none}
+  .db502-menu__intention{left:auto;right:max(7px,env(safe-area-inset-right));top:54%;max-height:64dvh}
 }
 
 @media (min-width:900px){
@@ -651,6 +809,7 @@ html.db502-menu-open body{
   }
   .db502-menu__backdrop{backdrop-filter:none;-webkit-backdrop-filter:none}
   .db502-menu__cosmos i:nth-child(n+13){display:none}
+  .db502-menu__intention{transition:none}
 }
 
 @media (forced-colors:active){
