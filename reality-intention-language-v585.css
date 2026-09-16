@@ -1,0 +1,372 @@
+/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · LINGUAGEM VIVA DAS REALIDADES V585
+   Uma intenção no limiar; o conteúdo existente permanece como profundidade.
+   Nenhuma nova animação permanente: a vida continua pertencendo à única Orbe. */
+
+html[data-reality-language="v585"]{
+  --db585-gold:#f4d993;
+  --db585-ink:#fff9ff;
+  --db585-muted:rgba(242,228,245,.72);
+  --db585-soft:rgba(242,228,245,.48);
+  --db585-line:rgba(244,217,147,.19);
+  --db585-line-strong:rgba(244,217,147,.38);
+  --db585-orb-size:clamp(138px,min(42vw,30svh),248px);
+  --db585-threshold-height:clamp(390px,calc(var(--db585-viewport-height,100svh) - 168px),820px);
+}
+
+html[data-reality-language="v585"] #app>.screen[data-v585-language]{
+  scroll-padding-block-start:max(86px,calc(env(safe-area-inset-top) + 70px));
+}
+
+html[data-reality-language="v585"] #app>.screen[data-v585-language]>.db585-intent-threshold{
+  position:relative;
+  isolation:isolate;
+  min-block-size:var(--db585-threshold-height);
+  inline-size:100%;
+  display:grid;
+  grid-template-rows:auto minmax(0,1fr) auto auto;
+  place-items:center;
+  gap:clamp(8px,1.8svh,16px);
+  margin-block-start:calc(-1 * var(--v560-page-block,24px));
+  margin-block-end:clamp(24px,6svh,68px);
+  padding-block-start:max(24px,calc(env(safe-area-inset-top) + 12px));
+  padding-block-end:clamp(18px,4svh,38px);
+  padding-inline:max(4px,env(safe-area-inset-left)) max(4px,env(safe-area-inset-right));
+  border-block-end:1px solid var(--db585-line);
+  overflow:hidden;
+  contain:layout paint;
+}
+
+html[data-reality-language="v585"] .db585-intent-threshold__atmosphere{
+  position:absolute;
+  z-index:-1;
+  inset:8% 4% 4%;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 50% 45%,rgba(188,102,230,.14),transparent 36%),
+    radial-gradient(ellipse at 50% 60%,rgba(244,217,147,.055),transparent 64%);
+  opacity:.82;
+  pointer-events:none;
+}
+
+html[data-reality-language="v585"] .db585-intent-threshold__coordinate{
+  display:block;
+  max-inline-size:min(100%,34ch);
+  color:var(--db585-soft);
+  font:750 clamp(.58rem,1.6vw,.7rem)/1.3 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;
+  letter-spacing:.24em;
+  text-align:center;
+  text-transform:uppercase;
+  text-wrap:balance;
+}
+
+html[data-reality-language="v585"] .db585-intent-threshold__stage{
+  align-self:center;
+  display:grid;
+  grid-template-columns:var(--db585-orb-size) 44px;
+  align-items:center;
+  justify-items:center;
+  gap:clamp(10px,3vw,24px);
+  min-inline-size:0;
+}
+
+html[data-reality-language="v585"] .db585-intent-threshold__orb-host{
+  position:relative;
+  inline-size:var(--db585-orb-size);
+  block-size:var(--db585-orb-size);
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid rgba(244,217,147,.13);
+  background:radial-gradient(circle,rgba(179,96,218,.075),rgba(27,8,40,.025) 62%,transparent 72%);
+  box-shadow:0 22px 72px rgba(0,0,0,.18),inset 0 0 40px rgba(174,92,218,.045);
+  overflow:visible;
+  transform:translateZ(0);
+}
+
+html[data-reality-language="v585"] .db585-intent-threshold__orb-host::before{
+  content:"";
+  position:absolute;
+  inset:-10%;
+  border:1px solid rgba(244,217,147,.07);
+  border-radius:50%;
+  pointer-events:none;
+}
+
+html[data-reality-language="v585"] .db585-intent-threshold__orb-host>#orb{
+  inline-size:100%!important;
+  block-size:100%!important;
+  min-inline-size:0!important;
+  min-block-size:0!important;
+  max-inline-size:none!important;
+  max-block-size:none!important;
+  margin:0!important;
+  transform:none;
+}
+
+html[data-reality-language="v585"] .db585-intent-threshold__orb-host>#orb>canvas{
+  inline-size:100%!important;
+  block-size:100%!important;
+}
+
+html[data-reality-language="v585"] .db585-intent-threshold__intention{
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+  display:block;
+  color:rgba(255,236,199,.58);
+  font:700 clamp(.66rem,1.7vw,.8rem)/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  text-shadow:0 0 24px rgba(218,151,244,.2);
+  user-select:none;
+}
+
+html[data-reality-language="v585"] .db585-intent-threshold__truth{
+  max-inline-size:26ch;
+  margin:0;
+  color:var(--db585-muted);
+  font:500 clamp(1.02rem,3.5vw,1.42rem)/1.25 Georgia,"Times New Roman",serif;
+  letter-spacing:-.015em;
+  text-align:center;
+  text-wrap:balance;
+}
+
+html[data-reality-language="v585"] .db585-intent-threshold__depth{
+  min-inline-size:132px;
+  min-block-size:44px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:11px;
+  margin:0;
+  padding:10px 17px;
+  border:1px solid var(--db585-line-strong);
+  border-radius:999px;
+  background:rgba(17,7,27,.58);
+  color:var(--db585-gold);
+  box-shadow:inset 0 1px rgba(255,255,255,.035),0 10px 36px rgba(0,0,0,.14);
+  -webkit-backdrop-filter:blur(12px) saturate(112%);
+  backdrop-filter:blur(12px) saturate(112%);
+  font:750 .66rem/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html[data-reality-language="v585"] .db585-intent-threshold__depth i{
+  color:rgba(255,247,225,.7);
+  font:400 1rem/1 Georgia,serif;
+  transition:transform 220ms cubic-bezier(.22,.8,.2,1);
+}
+
+html[data-reality-language="v585"] .db585-intent-threshold__depth:is(:hover,:focus-visible) i{
+  transform:translateY(3px);
+}
+
+html[data-reality-language="v585"] .db585-intent-threshold__depth:focus-visible{
+  outline:2px solid #fff6dd;
+  outline-offset:4px;
+}
+
+html[data-reality-language="v585"] [data-v585-depth-start="true"]{
+  scroll-margin-block-start:max(92px,calc(env(safe-area-inset-top) + 76px));
+}
+
+html[data-reality-language="v585"] [data-v585-secondary-landing="true"],
+html[data-reality-language="v585"] [data-v585-secondary-presence="true"]{
+  display:none!important;
+}
+
+html[data-reality-language="v585"] #app>.screen[data-v585-language="protected"]>.db585-intent-threshold--protected{
+  min-block-size:104px;
+  grid-template-columns:44px minmax(0,1fr) 44px;
+  grid-template-rows:auto auto;
+  column-gap:12px;
+  row-gap:2px;
+  margin-block-start:calc(-1 * var(--v560-page-block,24px));
+  margin-block-end:clamp(16px,3svh,28px);
+  padding-block:max(12px,env(safe-area-inset-top)) 14px;
+  border-block-end:1px solid var(--db585-line);
+  contain:layout paint;
+}
+
+html[data-reality-language="v585"] .db585-intent-threshold--protected .db585-intent-threshold__atmosphere{
+  inset:0;
+  opacity:.44;
+}
+
+html[data-reality-language="v585"] .db585-intent-threshold--protected .db585-intent-threshold__coordinate{
+  grid-column:2;
+  grid-row:1;
+  justify-self:center;
+}
+
+html[data-reality-language="v585"] .db585-intent-threshold--protected .db585-intent-threshold__stage{
+  grid-column:1;
+  grid-row:1/3;
+  display:grid;
+  grid-template-columns:44px;
+  align-self:center;
+}
+
+html[data-reality-language="v585"] .db585-intent-threshold--protected .db585-intent-threshold__truth{
+  grid-column:2;
+  grid-row:2;
+  align-self:center;
+  font-size:clamp(.94rem,3.6vw,1.15rem);
+}
+
+html[data-reality-language="v585"] .db585-intent-threshold--protected .db585-intent-threshold__depth{
+  grid-column:3;
+  grid-row:1/3;
+  min-inline-size:44px;
+  inline-size:44px;
+  padding:0;
+  border-color:var(--db585-line);
+}
+
+html[data-reality-language="v585"] .db585-intent-threshold--protected .db585-intent-threshold__depth span{
+  position:absolute;
+  inline-size:1px;
+  block-size:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
+
+html[data-v585-motion="travel"] .db585-intent-threshold__coordinate,
+html[data-v585-motion="travel"] .db585-intent-threshold__intention,
+html[data-v585-motion="travel"] .db585-intent-threshold__truth,
+html[data-v585-motion="travel"] .db585-intent-threshold__depth{
+  opacity:.18;
+  pointer-events:none;
+}
+
+html[data-v585-motion="travel"] .db585-intent-threshold__depth{
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
+  box-shadow:none;
+}
+
+html[data-v585-keyboard="open"] .db585-intent-threshold__depth{
+  visibility:hidden;
+  pointer-events:none;
+}
+
+html[data-v585-menu]:not([data-v585-menu="closed"]) .db585-intent-threshold__coordinate,
+html[data-v585-menu]:not([data-v585-menu="closed"]) .db585-intent-threshold__intention,
+html[data-v585-menu]:not([data-v585-menu="closed"]) .db585-intent-threshold__truth,
+html[data-v585-menu]:not([data-v585-menu="closed"]) .db585-intent-threshold__depth{
+  opacity:0;
+}
+
+@media (max-width:430px){
+  html[data-reality-language="v585"]{
+    --db585-orb-size:clamp(132px,min(46vw,27svh),196px);
+    --db585-threshold-height:max(380px,calc(var(--db585-viewport-height,100svh) - 154px));
+  }
+
+  html[data-reality-language="v585"] #app>.screen[data-v585-language]>.db585-intent-threshold:not(.db585-intent-threshold--protected){
+    margin-inline:-2px;
+  }
+
+  html[data-reality-language="v585"] .db585-intent-threshold__stage{
+    grid-template-columns:var(--db585-orb-size) 36px;
+    gap:8px;
+  }
+
+  html[data-reality-language="v585"] .db585-intent-threshold__truth{
+    max-inline-size:22ch;
+  }
+}
+
+@media (min-width:700px){
+  html[data-reality-language="v585"]{
+    --db585-orb-size:clamp(210px,min(31vw,35svh),330px);
+  }
+
+  html[data-reality-language="v585"] .db585-intent-threshold__stage{
+    grid-template-columns:var(--db585-orb-size) 52px;
+    gap:clamp(18px,4vw,42px);
+  }
+
+  html[data-reality-language="v585"] .db585-intent-threshold__truth{
+    max-inline-size:30ch;
+  }
+}
+
+@media (orientation:landscape) and (max-height:560px){
+  html[data-reality-language="v585"]{
+    --db585-orb-size:clamp(118px,min(28vw,38svh),188px);
+    --db585-threshold-height:max(286px,calc(var(--db585-viewport-height,100svh) - 96px));
+  }
+
+  html[data-reality-language="v585"] #app>.screen[data-v585-language]>.db585-intent-threshold{
+    grid-template-columns:auto minmax(0,1fr) auto;
+    grid-template-rows:auto 1fr auto;
+    column-gap:18px;
+    padding-block:10px 12px;
+  }
+
+  html[data-reality-language="v585"] .db585-intent-threshold:not(.db585-intent-threshold--protected) .db585-intent-threshold__coordinate{
+    grid-column:2;
+    grid-row:1;
+  }
+
+  html[data-reality-language="v585"] .db585-intent-threshold:not(.db585-intent-threshold--protected) .db585-intent-threshold__stage{
+    grid-column:2;
+    grid-row:2;
+  }
+
+  html[data-reality-language="v585"] .db585-intent-threshold:not(.db585-intent-threshold--protected) .db585-intent-threshold__truth{
+    grid-column:1;
+    grid-row:2;
+    max-inline-size:15ch;
+  }
+
+  html[data-reality-language="v585"] .db585-intent-threshold:not(.db585-intent-threshold--protected) .db585-intent-threshold__depth{
+    grid-column:3;
+    grid-row:2;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  html[data-reality-language="v585"] .db585-intent-threshold__depth i{
+    transition:none;
+  }
+}
+
+@media (prefers-contrast:more){
+  html[data-reality-language="v585"] .db585-intent-threshold__coordinate,
+  html[data-reality-language="v585"] .db585-intent-threshold__intention,
+  html[data-reality-language="v585"] .db585-intent-threshold__truth{
+    color:#fff;
+  }
+
+  html[data-reality-language="v585"] .db585-intent-threshold__depth,
+  html[data-reality-language="v585"] .db585-intent-threshold__orb-host{
+    border-color:#fff;
+  }
+}
+
+@media (forced-colors:active){
+  html[data-reality-language="v585"] .db585-intent-threshold{
+    border-block-end:1px solid CanvasText;
+  }
+
+  html[data-reality-language="v585"] .db585-intent-threshold__atmosphere,
+  html[data-reality-language="v585"] .db585-intent-threshold__orb-host::before{
+    display:none;
+  }
+
+  html[data-reality-language="v585"] .db585-intent-threshold__depth,
+  html[data-reality-language="v585"] .db585-intent-threshold__orb-host{
+    border:1px solid ButtonText;
+    background:Canvas;
+    color:CanvasText;
+    forced-color-adjust:auto;
+  }
+}

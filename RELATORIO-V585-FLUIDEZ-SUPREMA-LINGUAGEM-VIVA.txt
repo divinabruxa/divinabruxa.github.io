@@ -1,0 +1,120 @@
+DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA
+RELATÓRIO OFICIAL · V585 · MACROETAPA 6 DE 10
+LINGUAGEM VIVA DAS REALIDADES
+
+BASE PRESERVADA
+
+V584 — Menu Lendário.
+O site publicado foi inspecionado antes desta construção: V584 estava ativa,
+com a Orbe única no centro, 13 realidades + Início e viagem por coordenadas.
+A V585 foi construída sobre essa base sem reabrir etapas anteriores.
+
+VISÃO DE PRODUTO
+
+A interface agora obedece à linguagem de um produto contínuo: menos explicação
+na entrada, resposta imediata, hierarquia clara, alvos de toque de 44 px,
+safe areas, altura visual do iPhone, teclado de software, orientação e movimento
+reduzido. “iPhone Duo” é tratado como a mesma experiência em dois estados de
+tela: compacto e expandido. A Orbe cresce com o espaço disponível e conserva o
+mesmo corpo, estado e motor; não há recarga conceitual nem reinício visual.
+
+ENTREGA
+
+1. UMA REALIDADE É UMA INTENÇÃO
+   As 17 coordenadas possuem uma intenção exclusiva de uma palavra:
+
+   Início — Origem
+   Tarot Livre — Escolher
+   Carta do Dia — Receber
+   Tiragens — Aprofundar
+   Biblioteca — Descobrir
+   Escola — Aprender
+   Diário — Escutar
+   Whit — Conversar
+   Loja — Encontrar
+   Consultas — Acolher
+   Premium — Expandir
+   Skins — Transformar
+   Vídeos — Assistir
+   Música — Vibrar
+   Notificações — Permitir
+   Conta — Guardar
+   Central — Cuidar
+
+   Não há intenção repetida. Nenhuma intenção tem mais de uma palavra.
+
+2. VERDADE RESUMIDA
+   Cada coordenada recebe uma única frase contextual de até cinco palavras.
+   A informação é curta, transparente e coerente com o que a área realmente
+   faz. Exemplos práticos: “Magia com origem clara.” na Loja;
+   “Acolhimento, escopo e limites.” em Consultas; “Você escolhe o que chega.”
+   em Notificações; “Whit responde quando chamada.” na Orbe IA.
+
+3. ORBE NO LIMIAR
+   Em 14 realidades, o primeiro plano passa a ser um limiar vivo. O próprio
+   #orb físico é reclamado por esse destino antes do pouso e atravessa a viagem
+   da V583 até ele. Não existe imagem substituta, novo canvas, clone viajante,
+   segundo motor ou teleporte de encerramento.
+
+4. VERTICAL É MERGULHO
+   O conteúdo aprovado não foi apagado nem reescrito. Ele permanece abaixo do
+   limiar como profundidade. O controle “MERGULHAR” é um gesto explícito e usa
+   rolagem nativa; com Reduce Motion, a passagem é imediata.
+
+5. HOME É SILÊNCIO
+   Nenhum limiar foi criado na Home. Ela continua sendo somente universo e a
+   Orbe protagonista. O Menu Lendário V584 mantém a função de revelar caminhos.
+
+6. TAROT LIVRE E CARTA DO DIA PROTEGIDOS
+   As duas realidades recebem somente uma faixa compacta com intenção e verdade.
+   Seus anfitriões físicos, política de uma Carta do Dia, mesa de 78 cartas,
+   orientação direta e regra sem repetição não foram modificados. A lapidação
+   profunda continua reservada para a Macroetapa 8.
+
+7. WHIT PRESENTE, NÃO MECÂNICA
+   A V585 não conecta fala a toque, foco, viagem ou mergulho. Nenhuma API foi
+   chamada e nenhum dado privado foi lido. Whit permanece na matéria da Orbe e
+   só responde quando existe intenção explícita.
+
+8. MOVIMENTO PRIMEIRO
+   Durante a viagem, os textos contextuais perdem presença e o vidro deixa de
+   aplicar desfoque. A suspensão dos efeitos pesados continua pertencendo ao
+   motor V583/V581. A V585 não cria requestAnimationFrame, MutationObserver,
+   keyframe permanente, relógio, áudio ou rede.
+
+9. IPHONE E IPHONE DUO
+   Foram auditados oito perfis: 320×568, 375×667, 375×812, 393×852, 430×932,
+   iPhone Duo fechado 390×844, aberto 768×1024 e aberto amplo 820×1180.
+   Tamanho da Orbe e altura do limiar usam clamp contínuo, não um redesenho por
+   dispositivo. Retrato, paisagem, safe areas, alto contraste, cores forçadas,
+   teclado de software e Reduce Motion foram contemplados.
+
+PROTEÇÕES CONFIRMADAS
+
+- 17 coordenadas e 272 viagens direcionais preservadas.
+- Uma única #orb e um único renderizador.
+- Menu Lendário V584 preservado byte a byte.
+- Tarot Livre: 78 cartas diretas e sem repetição.
+- Carta do Dia e suas políticas intactas.
+- Universo Vivo, motor de gesto, motor de movimento e alma Whit intactos.
+- Sem teleporte, pisca, portal visual ou cópia viajante.
+- Sem novo canvas, loop permanente ou observador de mutação.
+- Nenhuma leitura privada, storage ou chamada de API.
+- Cache V585 atômico e reparável; rotas de autoridade continuam fail-closed.
+
+AUDITORIA
+
+- qa-v585-linguagem-viva.mjs: 119/119 PASS
+- qa-v585-language-runtime.mjs: 21/21 PASS
+- qa-v585-service-worker-runtime.mjs: 26/26 PASS
+- qa-v549-orb-navigation-runtime.mjs: 8/8 PASS
+- Total: 174/174 PASS
+- P0: 0
+- P1: 0
+
+ESCOPO DO ZIP
+
+Somente o delta necessário sobre a V584:
+5 arquivos de produção, 3 testes e 3 documentos. Nenhum arquivo antigo da
+V580, V581, V582, V583 ou V584 foi reenviado sem necessidade.
+

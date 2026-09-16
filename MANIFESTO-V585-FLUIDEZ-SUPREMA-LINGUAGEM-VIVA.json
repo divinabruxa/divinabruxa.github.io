@@ -1,0 +1,87 @@
+{
+  "release": "V585",
+  "base": "V584",
+  "plan": "Divina Bruxa 2.0 — Fluidez Suprema",
+  "macroStage": {
+    "number": 6,
+    "total": 10,
+    "name": "Linguagem Viva das Realidades"
+  },
+  "installation": {
+    "type": "flat-incremental-replacement",
+    "requiredBase": "V584",
+    "productionFiles": [
+      "app-v208.js",
+      "index.html",
+      "reality-intention-language-v585.js",
+      "reality-intention-language-v585.css",
+      "sw.js"
+    ]
+  },
+  "contracts": {
+    "screenModel": "coordinate-reveal",
+    "axes": {
+      "horizontal": "travel-between-realities",
+      "vertical": "immersion",
+      "depth": "contextual-discovery"
+    },
+    "realities": 17,
+    "uniqueIntentions": 17,
+    "maximumIntentionWords": 1,
+    "maximumTruthWords": 5,
+    "visibleThresholdRoutes": 16,
+    "physicalIntentionHosts": 14,
+    "protectedCompactRoutes": ["tarot", "daily"],
+    "homeThresholds": 0,
+    "homeMinimal": true,
+    "onePhysicalOrb": true,
+    "duplicateOrb": false,
+    "teleport": false,
+    "flicker": false,
+    "portalVisual": false,
+    "verticalDepthRequiresExplicitGesture": true,
+    "automaticWhitEveryTouch": false,
+    "silenceIsPresence": true,
+    "newCanvases": 0,
+    "newAnimationLoops": 0,
+    "mutationObservers": 0,
+    "privateReads": 0,
+    "storageReads": 0,
+    "storageWrites": 0,
+    "apiCalls": 0,
+    "iphoneFirst": true,
+    "iphoneDuo": "continuous-compact-to-expanded",
+    "safeAreas": true,
+    "softwareKeyboardAware": true,
+    "reducedMotion": true
+  },
+  "protected": {
+    "tarotLivre": true,
+    "cartaDoDia": true,
+    "legendaryMenuV584": true,
+    "universeCoordinateLawV583": true,
+    "whitOrbSoulBridgeV581": true,
+    "navigationRegistry": true,
+    "privateDataCached": false
+  },
+  "qa": {
+    "livingLanguage": { "passed": 119, "total": 119, "state": "PASS" },
+    "languageRuntime": { "passed": 21, "total": 21, "state": "PASS" },
+    "serviceWorkerRuntime": { "passed": 26, "total": 26, "state": "PASS" },
+    "orbNavigationRuntime": { "passed": 8, "total": 8, "state": "PASS" },
+    "aggregate": { "passed": 174, "total": 174, "state": "PASS" },
+    "iphoneProfiles": 8,
+    "p0": 0,
+    "p1": 0
+  },
+  "payloadSha256": {
+    "app-v208.js": "cda0094c5c0c3c7cab9fcdb8ae2a96bfaa874af5c73b506110c0d860ab0673d8",
+    "index.html": "e8eefc9fb51671ed7208af0e00d6ebc673b75017086daec700bafcc9567e7c1e",
+    "reality-intention-language-v585.js": "5ac0b25c0fcec3cdd48f39d4428de43f8055ef7df3b3997ca9cab80b8493d91b",
+    "reality-intention-language-v585.css": "1d6be387ff29d6401488276e562d43af28286232bded442650475eb6036e86f3",
+    "sw.js": "2d194f29dccb29933d41ac8b4ce15320c3bdb93fd3f5011400aa3fa91fb0354f",
+    "qa-v585-linguagem-viva.mjs": "8fe361a809cbb01c6b652db9cc18cc3497e5f04eeea5bed29a863d1b859b7385",
+    "qa-v585-language-runtime.mjs": "9794d42ad5fdab0e00d072640cbab532195f2bc8325012a4d2ba4acb90047bb8",
+    "qa-v585-service-worker-runtime.mjs": "fce53ffca6fbe64022be4a9d58abf0ac1ce68c4199d2889dcedd1119b3750212"
+  }
+}

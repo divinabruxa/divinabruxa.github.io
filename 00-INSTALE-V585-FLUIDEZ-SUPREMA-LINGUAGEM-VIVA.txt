@@ -1,0 +1,55 @@
+DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA
+MACROETAPA 6 DE 10 — LINGUAGEM VIVA DAS REALIDADES
+RELEASE V585 · BASE OBRIGATÓRIA V584
+
+INSTALAÇÃO
+
+1. Confirme que a V584 já está instalada.
+2. Envie para a raiz do site e substitua SOMENTE estes 5 arquivos:
+
+   app-v208.js
+   index.html
+   reality-intention-language-v585.js
+   reality-intention-language-v585.css
+   sw.js
+
+3. Mantenha os nomes exatamente como estão.
+4. Não apague nenhum outro arquivo e não reinstale pacotes antigos.
+5. Abra o site e aguarde a atualização automática do portal V585.
+
+O QUE ESTA ETAPA ENTREGA
+
+- Cada realidade passa a abrir com uma intenção única e uma verdade de até
+  cinco palavras.
+- A mesma Orbe física pousa no primeiro plano de 14 realidades; nenhum canvas,
+  corpo ou motor de Orbe foi duplicado.
+- O conteúdo completo que já existe permanece logo abaixo: tocar em
+  “MERGULHAR” inicia a descoberta vertical.
+- A Home continua mínima, sem faixa, título ou texto novo: universo e Orbe.
+- Tarot Livre e Carta do Dia recebem somente uma faixa compacta de intenção;
+  seus motores, cartas, regras e pousos próprios não foram alterados.
+- Whit não fala automaticamente. Em Orbe IA, a verdade é explícita:
+  “Whit responde quando chamada.”
+- Loja, Consultas, Conta, Premium, Notificações e Central mantêm magia com
+  clareza prática, limites e consentimento.
+- Durante a viagem, texto e vidro deixam de competir pelo quadro; o movimento
+  da Orbe continua com prioridade.
+- O desenho se adapta continuamente do iPhone compacto ao iPhone Duo aberto,
+  sem reiniciar a Orbe nem trocar de motor.
+
+ARQUIVOS DE AUDITORIA
+
+Os arquivos qa-*.mjs, RELATORIO e MANIFESTO documentam a entrega e não precisam
+ser enviados ao servidor para o site funcionar.
+
+RESULTADO DA AUDITORIA AUTOMÁTICA
+
+- Linguagem Viva V585: 119/119 PASS
+- Runtime da linguagem e Orbe física: 21/21 PASS
+- Service Worker V585: 26/26 PASS
+- Navegação física da Orbe: 8/8 PASS
+- Total: 174/174 verificações aprovadas
+- Perfis geométricos: 8, incluindo iPhone Duo fechado e aberto
+- P0: 0
+- P1: 0
+

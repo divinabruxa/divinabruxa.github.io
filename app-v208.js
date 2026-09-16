@@ -1,7 +1,7 @@
-/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · MENU LENDÁRIO V584
-   A tela revela coordenadas do mesmo universo. A única Orbe física atravessa
-   as realidades e agora também é a origem viva do Menu: Início permanece
-   acessível, o texto é mínimo e vertical, e o movimento conserva prioridade. */
+/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · LINGUAGEM VIVA V585
+   A tela revela coordenadas do mesmo universo. Cada realidade começa com uma
+   intenção mínima; a única Orbe pousa no limiar e a profundidade já existente
+   continua abaixo. Home, Tarot Livre e Carta do Dia permanecem protegidos. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -56,6 +56,7 @@ import { createInternationalParityCoreV545 } from './international-parity-core-v
 import { createPwaPerformanceRecoveryCoreV546 } from './pwa-performance-recovery-core-v546.js?v=546';
 import { createSecurityPrivacyCoreV547 } from './security-privacy-core-v547.js?v=547';
 import { createPageDesignSupremeV560 } from './page-design-supreme-v560.js?v=560';
+import { createRealityIntentionLanguageV585 } from './reality-intention-language-v585.js?v=585';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -489,6 +490,16 @@ const pageDesignSupreme = safely('Design de Páginas e Mobile Premium V560', () 
   })
 );
 
+// A V585 não substitui conteúdo nem cria uma segunda Orbe. Ela coloca uma
+// intenção curta no primeiro plano e mantém o material aprovado como mergulho
+// vertical. Tarot Livre e Carta do Dia recebem somente a faixa compacta.
+const realityIntentionLanguage = safely('Linguagem Viva das Realidades V585', () =>
+  createRealityIntentionLanguageV585({
+    orbCore:supremeOrb,
+    universe:livingUniverse
+  })
+);
+
 // A V561 se conecta apenas a eventos e ações explícitas. O Diário continua
 // privado; analytics só cria identificador pseudônimo após opt-in registrado.
 const ethicalReturn = safely('Retorno Ético e Conteúdo Diário V561', () =>
@@ -553,14 +564,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v584-app';
+  window.__divinaSWBootstrap = 'v585-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=584', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=585', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v584';
+        document.documentElement.dataset.releaseEpoch = 'v585';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V584 registrado');
+        console.info('[Divina] PWA V585 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -600,6 +611,7 @@ window.orbe = {
   recovery:pwaPerformanceRecovery,
   security:securityPrivacy,
   design:pageDesignSupreme,
+  language:realityIntentionLanguage,
   returnGarden:ethicalReturn,
   qaLaunch:qaSupremeLaunch,
   observatory:null,
@@ -743,6 +755,52 @@ window.divinaFluidezSupremaV584 = Object.freeze({
       dailyProtected:true,
       newCanvases:0,
       newAnimationLoops:0
+    });
+  }
+});
+window.divinaFluidezSupremaV585 = Object.freeze({
+  version:585,
+  base:'V584',
+  stage:'living-reality-language',
+  orb:supremeOrb,
+  language:realityIntentionLanguage,
+  status:() => {
+    const language = realityIntentionLanguage?.status?.() || null;
+    return Object.freeze({
+      release:'V585',
+      base:'V584',
+      macroStage:'6-of-10',
+      screenModel:'coordinate-reveal',
+      axes:Object.freeze({
+        horizontal:'travel-between-realities',
+        vertical:'immersion',
+        depth:'contextual-discovery'
+      }),
+      onePhysicalOrb:supremeOrb?.snapshot?.().oneLivingOrb === true,
+      language,
+      routeCount:language?.routeCount || 17,
+      thresholdRoutes:language?.visibleThresholdRoutes || 16,
+      physicalIntentionHosts:language?.physicalIntentionHosts || 14,
+      protectedCompactRoutes:language?.protectedCompactRoutes || ['tarot','daily'],
+      homeThresholds:0,
+      oneIntentionPerReality:true,
+      maximumIntentionWords:1,
+      maximumTruthWords:5,
+      depthRequiresExplicitGesture:true,
+      verticalLivingInformation:true,
+      automaticWhitEveryTouch:false,
+      silenceIsPresence:true,
+      duplicateOrb:false,
+      teleport:false,
+      flicker:false,
+      heavyEffectsPausedDuringTravel:true,
+      iphoneFirst:true,
+      iphoneDuo:'continuous-compact-to-expanded',
+      tarotProtected:true,
+      dailyProtected:true,
+      newCanvases:0,
+      newAnimationLoops:0,
+      mutationObservers:0
     });
   }
 });
@@ -1919,6 +1977,7 @@ window.divinaOrbV208 = Object.freeze({
   recovery:pwaPerformanceRecovery,
   security:securityPrivacy,
   design:pageDesignSupreme,
+  language:realityIntentionLanguage,
   returnGarden:ethicalReturn,
   miniOrbs:supremeOrb?.projections?.() || [],
   snapshot:() => supremeOrb?.snapshot?.() || orbMotionV207.snapshot()
@@ -1946,6 +2005,7 @@ window.divinaOrbSupremeV501 = Object.freeze({
   recovery:pwaPerformanceRecovery,
   security:securityPrivacy,
   design:pageDesignSupreme,
+  language:realityIntentionLanguage,
   returnGarden:ethicalReturn,
   navigate:go,
   pulse:(kind, detail) => supremeOrb?.pulse?.(kind, detail),
@@ -2492,6 +2552,17 @@ const awaken = async () => {
         legendaryMenuScrollbars:false,
         legendaryMenuMotionPausesHeavyEffects:true,
         legendaryMenuDuplicateOrb:false,
+        livingRealityLanguage:'v585',
+        livingRealityLanguageMacroStage:'6-of-10',
+        livingRealityLanguageRoutes:17,
+        livingRealityLanguageThresholds:16,
+        livingRealityLanguagePhysicalHosts:14,
+        livingRealityLanguageProtectedRoutes:['tarot','daily'],
+        livingRealityLanguageIntentWords:1,
+        livingRealityLanguageTruthWordsMax:5,
+        livingRealityLanguageDepth:'explicit-vertical-gesture',
+        livingRealityLanguageHomeThresholds:0,
+        iphoneDuoContinuity:'compact-to-expanded-without-restart',
         routeCurtain:false,
         webVibration:false,
         nativeHapticsOnly:true,
