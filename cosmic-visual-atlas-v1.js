@@ -1,30 +1,35 @@
-/* DIVINA BRUXA — HOME RECOVERY V587
-   Substitui SOMENTE cosmic-visual-atlas-v1.js.
-   Preserva a função legado V300 e adiciona um fail-open cirúrgico para
-   impedir que a Home fique presa eternamente em "Despertando a Divina Bruxa…".
-   Não altera Tarot Livre, Carta do Dia, WORK12, Orbe, balões ou conteúdo.
+/* DIVINA BRUXA — HOME FAIL-OPEN V588
+   Substitui cosmic-visual-atlas-v1.js.
+   Mantém o atlas legado aposentado e garante que a Home nunca fique presa
+   eternamente atrás do loader.
 */
 
 document.documentElement.dataset.legacyCosmicAtlas = 'retired-v300';
 document.dispatchEvent(new CustomEvent('divina:legacy-atlas-retired', { detail:{ version:300 } }));
 
 (() => {
-  const VERSION = 'v587-home-recovery';
+  const VERSION = 'v588';
   const root = document.documentElement;
-  let released = false;
+  let opened = false;
   let timer = 0;
 
-  const appIsReady = () =>
-    Boolean(root.dataset.appShell) ||
-    Boolean(document.body?.dataset?.screen) ||
-    Boolean(document.querySelector('#app .screen.active:not(#home)'));
+  const portal = () => document.getElementById('orbLoadingPortal');
 
-  const forceHomeVisible = () => {
+  const showHome = reason => {
+    if (opened) return;
+    opened = true;
+    clearTimeout(timer);
+
+    const p = portal();
     const body = document.body;
     const app = document.getElementById('app');
     const home = document.getElementById('home');
 
+    root.dataset.homeRecovery = VERSION;
+    root.dataset.homeRecoveryReason = reason;
+
     if (app) {
+      app.hidden = false;
       app.removeAttribute('aria-hidden');
       app.style.removeProperty('display');
       app.style.removeProperty('visibility');
@@ -32,108 +37,94 @@ document.dispatchEvent(new CustomEvent('divina:legacy-atlas-retired', { detail:{
       app.style.removeProperty('pointer-events');
     }
 
-    if (home && !document.querySelector('#app .screen.active')) {
+    if (home) {
+      home.hidden = false;
       home.classList.add('active');
       home.removeAttribute('aria-hidden');
+      home.style.removeProperty('display');
+      home.style.removeProperty('visibility');
+      home.style.removeProperty('opacity');
     }
 
     if (body && !body.dataset.screen) body.dataset.screen = 'home';
-  };
 
-  const releaseLoader = (reason = 'timeout') => {
-    if (released || appIsReady()) return false;
-    released = true;
-    clearTimeout(timer);
-
-    const portal = document.getElementById('orbLoadingPortal');
-
-    root.dataset.homeRecovery = VERSION;
-    root.dataset.homeRecoveryReason = reason;
-
-    forceHomeVisible();
-
-    if (portal) {
-      portal.classList.remove(
-        'is-visible',
-        'is-mounted',
-        'is-recovery',
-        'is-boot-error',
-        'is-refreshing'
-      );
-      portal.setAttribute('aria-hidden', 'true');
-      portal.style.pointerEvents = 'none';
-      portal.style.transition = 'opacity 180ms ease';
-      portal.style.opacity = '0';
-
+    if (p) {
+      p.setAttribute('aria-hidden', 'true');
+      p.classList.remove('is-visible','is-mounted','is-recovery','is-boot-error','is-refreshing');
+      p.style.setProperty('opacity', '0', 'important');
+      p.style.setProperty('visibility', 'hidden', 'important');
+      p.style.setProperty('pointer-events', 'none', 'important');
       setTimeout(() => {
-        if (!portal) return;
-        portal.hidden = true;
-        portal.style.display = 'none';
-      }, 190);
+        p.hidden = true;
+        p.style.setProperty('display', 'none', 'important');
+      }, 180);
     }
 
     document.body?.classList.remove(
-      'is-loading',
-      'db-loading',
-      'loading',
-      'boot-loading',
-      'orb-loading'
+      'is-loading','db-loading','loading','boot-loading','orb-loading'
     );
 
     try {
       document.dispatchEvent(new CustomEvent('divina:loading-bypass', {
-        detail: { source: VERSION, reason }
+        detail: { source:'home-fail-open-v588', reason }
       }));
       document.dispatchEvent(new CustomEvent('divina:home-recovered', {
-        detail: { version: 587, reason }
+        detail: { version:588, reason }
       }));
     } catch {}
 
-    console.warn(`[Divina ${VERSION}] Home liberada por fail-open: ${reason}`);
-    return true;
+    console.warn(`[Divina V588] Home liberada: ${reason}`);
+  };
+
+  const bootSucceeded = () => {
+    clearTimeout(timer);
+    opened = true;
+    root.dataset.homeRecovery = 'not-needed-v588';
   };
 
   const arm = () => {
-    if (appIsReady()) return;
+    // Se o boot verdadeiro terminar primeiro, não tocamos em nada.
+    document.addEventListener('divina:boot-ready', bootSucceeded, { once:true });
 
-    // Se o app principal terminar normalmente, o recovery não interfere.
-    addEventListener('divina:boot-ready', () => {
-      clearTimeout(timer);
-      released = true;
-      root.dataset.homeRecovery = 'not-needed';
-    }, { once: true });
-
-    // O botão existente deixa de recarregar em loop e passa a abrir a Home.
+    // O botão do loader agora SEMPRE abre a página — nunca entra em loop infinito.
     document.addEventListener('click', event => {
       const button = event.target?.closest?.('.db-orb-loader__recovery');
-      if (!button || appIsReady()) return;
+      if (!button) return;
       event.preventDefault();
       event.stopPropagation();
       event.stopImmediatePropagation?.();
-      releaseLoader('manual');
+      showHome('manual');
     }, true);
 
-    // Erro de módulo/script durante o boot: libera a interface em vez de prender.
+    // Falha de módulo/script: liberamos a Home imediatamente.
     addEventListener('error', event => {
-      if (appIsReady()) return;
+      if (opened) return;
       const target = event?.target;
-      const isBootAsset =
+      const bootAsset =
         target?.tagName === 'SCRIPT' ||
         target?.id === 'divinaAppModule' ||
         String(event?.filename || '').includes('.js');
-      if (isBootAsset) setTimeout(() => releaseLoader('boot-error'), 120);
+      if (bootAsset) setTimeout(() => showHome('boot-error'), 100);
     }, true);
 
     addEventListener('unhandledrejection', () => {
-      if (!appIsReady()) setTimeout(() => releaseLoader('promise-error'), 120);
-    }, { once: true });
+      if (!opened) setTimeout(() => showHome('promise-error'), 100);
+    }, { once:true });
 
-    // Limite absoluto: a Home nunca pode ficar eternamente no loader.
-    timer = setTimeout(() => releaseLoader('timeout'), 6200);
+    // Limite duro. Se a aplicação principal não concluiu em 4,5s,
+    // a usuária vê a Home mesmo assim.
+    timer = setTimeout(() => showHome('hard-timeout'), 4500);
+
+    // Se o SW V588 assumir, limpa o loader já na sessão atual.
+    navigator.serviceWorker?.addEventListener('message', event => {
+      if (event.data?.type === 'DIVINA_RECOVERY_ACTIVE' && !opened) {
+        setTimeout(() => showHome('service-worker-recovery'), 150);
+      }
+    });
   };
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', arm, { once: true });
+    document.addEventListener('DOMContentLoaded', arm, { once:true });
   } else {
     arm();
   }
