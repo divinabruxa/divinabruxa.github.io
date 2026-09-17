@@ -1,0 +1,23 @@
+DIVINA BRUXA — V587 HOME RECOVERY
+
+OBJETIVO
+Corrigir SOMENTE o carregamento infinito da página inicial.
+Este pacote NÃO mexe no WORK12, Tarot Livre, Carta do Dia, Orbe, balões ou conteúdo.
+
+INSTALAÇÃO
+1. Abra o repositório divinabruxa/divinabruxa.github.io.
+2. Na raiz, SUBSTITUA o arquivo:
+   cosmic-visual-atlas-v1.js
+3. Não apague mais nada.
+4. Aguarde o GitHub Pages publicar.
+5. Abra a Home novamente. Se o Safari ainda mostrar cache antigo, feche a aba e abra o site outra vez.
+
+O QUE MUDA
+- O loader "Despertando a Divina Bruxa…" ganha um limite absoluto.
+- Se o boot normal terminar, este recovery não interfere.
+- Se o boot falhar ou travar, a Home é liberada em ~6,2 s.
+- O botão de recuperação abre a página em vez de entrar em ciclo de refresh.
+- O atlas legado continua aposentado exatamente como antes.
+
+ARQUIVO DE SUBSTITUIÇÃO ÚNICO
+cosmic-visual-atlas-v1.js
