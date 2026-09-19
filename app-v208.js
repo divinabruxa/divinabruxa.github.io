@@ -1,7 +1,7 @@
-/* DIVINA BRUXA — WORK13 · COSMOS VIVO · CLAREZA VIVA V608
-   O WORK12 V600 e as etapas V602–V607 permanecem protegidos. Consultas,
-   Loja, Premium e Conta agora revelam um proximo passo por vez, sem alterar
-   seus motores, seus valores, a autoridade do servidor ou a unica Orbe. */
+/* DIVINA BRUXA — WORK13 · COSMOS VIVO · OBRA EM PRIMEIRO PLANO V609
+   O WORK12 V600 e as etapas V602–V608 permanecem protegidos. Música, Vídeos
+   e Skins deixam a interface recuar sem alterar seus motores, seus catálogos,
+   a autoridade do servidor ou a única Orbe. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -71,6 +71,7 @@ import { createCosmicSpreadReadingV605 } from './cosmic-spread-reading-v605.js?v
 import { createWhitSilenceTimingV606 } from './whit-silence-timing-v606.js?v=606-work13-whit-timing';
 import { createLivingWisdomPathV607 } from './living-wisdom-path-v607.js?v=607-work13-living-wisdom';
 import { createLivingCommercePathV608 } from './living-commerce-path-v608.js?v=608-work13-commerce-clarity';
+import { createLivingMediaSkinsV609 } from './living-media-skins-v609.js?v=609-work13-media-skins';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -635,6 +636,10 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK13_MEDIA_SKINS_ACTIVE') {
+    document.documentElement.dataset.work13MediaSkinsWorker = `v${event.data.mediaSkinsVersion || event.data.version || 609}`;
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK13_COMMERCE_CLARITY_ACTIVE') {
     document.documentElement.dataset.work13CommerceClarityWorker = `v${event.data.commerceClarityVersion || event.data.version || 608}`;
     return;
@@ -727,14 +732,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v608-work13-commerce-clarity-app';
+  window.__divinaSWBootstrap = 'v609-work13-media-skins-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=608', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=609', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v608';
+        document.documentElement.dataset.releaseEpoch = 'v609';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] WORK13 V608 registrado sobre V607 e WORK12 V600 protegidos');
+        console.info('[Divina] WORK13 V609 registrado sobre V608 e WORK12 V600 protegidos');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -2122,7 +2127,104 @@ window.divinaWork13Macro8V608 = Object.freeze({
   }
 });
 window.divinaCosmosVivoV608 = window.divinaWork13Macro8V608;
-window.divinaCosmosVivo = window.divinaWork13Macro8V608;
+
+// A V609 não substitui players, catálogo editorial ou registro de skins. Ela
+// afina somente a apresentação: obra primeiro, profundidade sob pedido e a
+// interface recolhida enquanto o player oficial ou a transformação aparecem.
+const livingMediaSkins = safely('WORK13 · Obra em Primeiro Plano V609', () =>
+  createLivingMediaSkinsV609({
+    contextMemory:cosmosContextMemory
+  })
+);
+window.orbe.livingMediaSkins = livingMediaSkins;
+window.orbe.mediaPresence = livingMediaSkins;
+document.documentElement.dataset.work13 = 'cosmos-vivo';
+document.documentElement.dataset.work13Macro = '9-media-skins-interface-recedes';
+window.divinaWork13Macro9V609 = Object.freeze({
+  version:609,
+  base:'V608-commerce-clarity-on-WORK12-V600-frozen-by-V601',
+  work:'WORK13',
+  stage:'musica-videos-skins-interface-recua',
+  livingMediaSkins,
+  livingCommerce:livingCommercePath,
+  timing:whitSilenceTiming,
+  contextMemory:cosmosContextMemory,
+  orb:supremeOrb,
+  coordinator:work12Foundation,
+  status:() => {
+    const mediaSkins = livingMediaSkins?.status?.() || null;
+    const mediaSkinsAudit = livingMediaSkins?.audit?.() || null;
+    const commerce = livingCommercePath?.status?.() || null;
+    const timing = whitSilenceTiming?.status?.() || null;
+    const context = cosmosContextMemory?.status?.() || null;
+    const orb = supremeOrb?.snapshot?.() || null;
+    const journey = orbIOSJourney?.status?.() || null;
+    return Object.freeze({
+      release:'V609',
+      macroStage:'9-of-10',
+      law:'one-orb-one-universe-one-presence-one-journey',
+      mediaSkins,
+      mediaSkinsAudit,
+      commerce,
+      timing,
+      context,
+      orb,
+      journey,
+      worlds:Object.freeze(['music','videos','skins']),
+      sequence:Object.freeze(['work-first','explicit-depth','single-player-on-demand','interface-recedes']),
+      contextModel:'V602-public-route-metadata-only',
+      musicEngine:'V559-unchanged',
+      musicArtist:'Hércules DX',
+      musicAlbums:Object.freeze(['Sobre as Estrelas','Z']),
+      musicAlbumYears:Object.freeze([2024,2026]),
+      musicTrackCounts:Object.freeze([10,8]),
+      musicVerifiedTracks:18,
+      musicAutoplay:false,
+      musicActivePlayersMaximum:1,
+      videoEngine:'V559-unchanged',
+      videoProject:'De Frente com o Tarot',
+      videoPublishedOnly:true,
+      videoPublishedEpisodesAtRelease:0,
+      videoInventedEpisodes:0,
+      videoAutoplay:false,
+      skinsEngine:'V201-unchanged',
+      skinRegistry:'V12-unchanged',
+      skinCount:30,
+      skinGlobalApplyWithoutReload:true,
+      skinCosmeticOnly:true,
+      maximumNewControlsSimultaneous:3,
+      realBilling:false,
+      frontendEntitlementGrants:false,
+      productionPublish:false,
+      automaticPlayback:false,
+      automaticNavigation:false,
+      automaticWhitSpeech:false,
+      whitTimingAuthority:'V606-unchanged',
+      onePhysicalOrb:orb?.oneLivingOrb === true,
+      sameEntity:orb?.entityPreserved === true,
+      travelerCopies:Number(journey?.travelerCopies || 0),
+      privateContentReads:0,
+      listeningHistoryReads:0,
+      viewingHistoryReads:0,
+      searchQueryReads:0,
+      accountProfileReads:0,
+      purchaseBodyReads:0,
+      storageReads:0,
+      storageWrites:0,
+      networkCalls:0,
+      modelCalls:0,
+      newCanvases:0,
+      newRenderers:0,
+      newPlayers:0,
+      newAnimationLoops:0,
+      newMutationObservers:0,
+      newDeferredTimers:0,
+      iphoneFirst:true
+    });
+  }
+});
+window.divinaCosmosVivoV609 = window.divinaWork13Macro9V609;
+window.divinaCosmosVivo = window.divinaWork13Macro9V609;
 window.whit = whitCore;
 
 window.divinaWhitV212 = Object.freeze({
@@ -3395,8 +3497,8 @@ const awaken = async () => {
         bootFirst:true,
         release:'V562',
         work12Base:'V600-frozen',
-        work13CosmosVivo:'V608',
-        work13MacroStage:'8-of-10-commerce-clarity-path',
+        work13CosmosVivo:'V609',
+        work13MacroStage:'9-of-10-media-skins-interface-recedes',
         contextMemoryModel:'session-route-metadata-only',
         contextMemoryAutomaticNavigation:false,
         contextMemoryAutomaticWhitSpeech:false,
@@ -3447,6 +3549,19 @@ const awaken = async () => {
         livingCommercePrivateContentReads:0,
         livingCommerceAutomaticNavigation:false,
         livingCommerceAutomaticWhitSpeech:false,
+        livingMediaSkins:'work-first-explicit-depth-single-player-interface-recedes',
+        livingMediaSkinsWorlds:['music','videos','skins'],
+        livingMediaSkinsAlbums:['Sobre as Estrelas','Z'],
+        livingMediaSkinsTracks:18,
+        livingMediaSkinsPublishedEpisodesAtRelease:0,
+        livingMediaSkinsInventedEpisodes:0,
+        livingMediaSkinsSkinCount:30,
+        livingMediaSkinsAutoplay:false,
+        livingMediaSkinsMaximumActivePlayers:1,
+        livingMediaSkinsRealBilling:false,
+        livingMediaSkinsPrivateContentReads:0,
+        livingMediaSkinsAutomaticNavigation:false,
+        livingMediaSkinsAutomaticWhitSpeech:false,
         supremePlan:'4.0-fluidity-supreme',
         supremePlanMacroStages:14,
         currentMacroStage:'14-of-14',

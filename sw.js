@@ -1,16 +1,16 @@
-/* DIVINA BRUXA — WORK13 · COSMOS VIVO · CLAREZA VIVA V608
-   O WORK12 V600 e as etapas V602–V607 permanecem protegidos. A instalacao so
+/* DIVINA BRUXA — WORK13 · COSMOS VIVO · OBRA EM PRIMEIRO PLANO V609
+   O WORK12 V600 e as etapas V602–V608 permanecem protegidos. A instalacao so
    assume o portal quando HTML, aplicacao, leituras, silencio, sabedoria e a
-   clareza comercial pertencem ao mesmo corte, sem alterar motores ou valores.
+   clareza comercial, mídia e skins pertencem ao mesmo corte, sem alterar motores.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
-const VERSION = 608;
+const VERSION = 609;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work13-v608-commerce-clarity';
+const CACHE_NAME = 'divina-bruxa-work13-v609-media-skins';
 const CORE = Object.freeze([
   './index.html',
-  './app-v208.js?v=608-work13-commerce-clarity',
+  './app-v208.js?v=609-work13-media-skins',
   './cosmos-context-memory-v602.js?v=602-work13-context',
   './cosmos-reality-resonance-v603.js?v=603-work13-resonance',
   './cosmos-reality-resonance-v603.css?v=603-work13-resonance',
@@ -23,6 +23,8 @@ const CORE = Object.freeze([
   './living-wisdom-path-v607.css?v=607-work13-living-wisdom',
   './living-commerce-path-v608.js?v=608-work13-commerce-clarity',
   './living-commerce-path-v608.css?v=608-work13-commerce-clarity',
+  './living-media-skins-v609.js?v=609-work13-media-skins',
+  './living-media-skins-v609.css?v=609-work13-media-skins',
   './work12-final-continuity-v598.js?v=598-work12-final',
   './work12-final-continuity-v598.css?v=599-live-audit',
   './experience-intelligence-v597.js?v=597-work12-intelligence',
@@ -61,7 +63,7 @@ const fetchCore = async path => {
 
 const validateCore = async responses => {
   const index = await responses.get('./index.html')?.clone().text();
-  const app = await responses.get('./app-v208.js?v=608-work13-commerce-clarity')?.clone().text();
+  const app = await responses.get('./app-v208.js?v=609-work13-media-skins')?.clone().text();
   const contextMemory = await responses.get('./cosmos-context-memory-v602.js?v=602-work13-context')?.clone().text();
   const realityResonance = await responses.get('./cosmos-reality-resonance-v603.js?v=603-work13-resonance')?.clone().text();
   const resonanceStyles = await responses.get('./cosmos-reality-resonance-v603.css?v=603-work13-resonance')?.clone().text();
@@ -74,6 +76,8 @@ const validateCore = async responses => {
   const livingWisdomStyles = await responses.get('./living-wisdom-path-v607.css?v=607-work13-living-wisdom')?.clone().text();
   const livingCommerce = await responses.get('./living-commerce-path-v608.js?v=608-work13-commerce-clarity')?.clone().text();
   const livingCommerceStyles = await responses.get('./living-commerce-path-v608.css?v=608-work13-commerce-clarity')?.clone().text();
+  const livingMediaSkins = await responses.get('./living-media-skins-v609.js?v=609-work13-media-skins')?.clone().text();
+  const livingMediaSkinsStyles = await responses.get('./living-media-skins-v609.css?v=609-work13-media-skins')?.clone().text();
   const finalContinuity = await responses.get('./work12-final-continuity-v598.js?v=598-work12-final')?.clone().text();
   const finalStyles = await responses.get('./work12-final-continuity-v598.css?v=599-live-audit')?.clone().text();
   const intelligence = await responses.get('./experience-intelligence-v597.js?v=597-work12-intelligence')?.clone().text();
@@ -98,10 +102,12 @@ const validateCore = async responses => {
   const soul = await responses.get('./whit-orb-soul-bridge-v581.js?v=592-work12-navigation')?.clone().text();
   if (!index?.includes('name="divina-work12" content="V600"')
     || !index.includes('name="divina-live-audit" content="V600"')
-    || !index.includes('name="divina-work13" content="V608"')) {
+    || !index.includes('name="divina-work13" content="V609"')) {
     throw new Error('work13-index-version-mismatch');
   }
-  if (!index.includes('app-v208.js?v=608-work13-commerce-clarity')
+  if (!index.includes('app-v208.js?v=609-work13-media-skins')
+    || !index.includes('living-media-skins-v609.css?v=609-work13-media-skins')
+    || !index.includes('id="divinaLivingMediaSkinsV609"')
     || !index.includes('living-commerce-path-v608.css?v=608-work13-commerce-clarity')
     || !index.includes('id="divinaLivingCommercePathV608"')
     || !index.includes('living-wisdom-path-v607.css?v=607-work13-living-wisdom')
@@ -189,6 +195,12 @@ const validateCore = async responses => {
     || !app.includes('divinaWork13Macro8V608')
     || !app.includes("stage:'consultas-loja-premium-conta-com-clareza'")) {
     throw new Error('work13-app-commerce-clarity-mismatch');
+  }
+  if (!app.includes("living-media-skins-v609.js?v=609-work13-media-skins")
+    || !app.includes('createLivingMediaSkinsV609({')
+    || !app.includes('divinaWork13Macro9V609')
+    || !app.includes("stage:'musica-videos-skins-interface-recua'")) {
+    throw new Error('work13-app-media-skins-mismatch');
   }
   if (!contextMemory?.includes('COSMOS_CONTEXT_MEMORY_CONTRACT_V602')
     || !contextMemory.includes("model:'local-session-route-metadata-only'")
@@ -332,6 +344,37 @@ const validateCore = async responses => {
     || !livingCommerceStyles.includes('@media(prefers-reduced-motion:reduce)')
     || /@keyframes|backdrop-filter|filter\s*:/.test(livingCommerceStyles)) {
     throw new Error('work13-commerce-clarity-styles-missing');
+  }
+  if (!livingMediaSkins?.includes('LIVING_MEDIA_SKINS_CONTRACT_V609')
+    || !livingMediaSkins.includes("sequence:Object.freeze([\n    'work-first','explicit-depth','single-player-on-demand','interface-recedes'")
+    || !livingMediaSkins.includes("engine:'V559'")
+    || !livingMediaSkins.includes("title:'Sobre as Estrelas'")
+    || !livingMediaSkins.includes("title:'Z'")
+    || !livingMediaSkins.includes('verifiedTracks:18')
+    || !livingMediaSkins.includes('publishedEpisodesAtRelease:0')
+    || !livingMediaSkins.includes('inventedEpisodes:0')
+    || !livingMediaSkins.includes("engine:'V201'")
+    || !livingMediaSkins.includes('count:30')
+    || !livingMediaSkins.includes('globalApplyWithoutReload:true')
+    || !livingMediaSkins.includes('activePlayersMaximum:1')
+    || !livingMediaSkins.includes('automaticPlayback:false')
+    || !livingMediaSkins.includes('automaticNavigation:false')
+    || !livingMediaSkins.includes('automaticWhitSpeech:false')
+    || !livingMediaSkins.includes('privateContentReads:0')
+    || !livingMediaSkins.includes('newPlayers:0')
+    || !livingMediaSkins.includes('permanentAnimationLoops:0')) {
+    throw new Error('work13-media-skins-contract-missing');
+  }
+  if (!livingMediaSkinsStyles?.includes('[data-living-media-skins="v609"]')
+    || !livingMediaSkinsStyles.includes('[data-v609-phase="focus"]')
+    || !livingMediaSkinsStyles.includes('[data-v609-phase="detail"]')
+    || !livingMediaSkinsStyles.includes('[data-v609-phase="immersive"]')
+    || !livingMediaSkinsStyles.includes('[data-v609-phase="gallery"]')
+    || !livingMediaSkinsStyles.includes('#skinsApp>#skinsWorldV318')
+    || !livingMediaSkinsStyles.includes('@media(max-width:430px)')
+    || !livingMediaSkinsStyles.includes('@media(prefers-reduced-motion:reduce)')
+    || /@keyframes|backdrop-filter|filter\s*:/.test(livingMediaSkinsStyles)) {
+    throw new Error('work13-media-skins-styles-missing');
   }
   if (!finalContinuity?.includes('FINAL_CONTINUITY_CONTRACT_V598')
     || !finalContinuity.includes("homeSingleTap:'call-intentions'")
@@ -479,6 +522,7 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK13_WHIT_TIMING_ACTIVE', version:VERSION, whitTimingVersion:606, livingPresenceVersion:594, base:600 });
         client.postMessage({ type:'DIVINA_WORK13_LIVING_WISDOM_ACTIVE', version:VERSION, livingWisdomVersion:607, whitTimingVersion:606, base:600 });
         client.postMessage({ type:'DIVINA_WORK13_COMMERCE_CLARITY_ACTIVE', version:VERSION, commerceClarityVersion:608, livingWisdomVersion:607, base:600 });
+        client.postMessage({ type:'DIVINA_WORK13_MEDIA_SKINS_ACTIVE', version:VERSION, mediaSkinsVersion:609, commerceClarityVersion:608, base:600 });
         client.postMessage({ type:'DIVINA_RELEASE_READY', version:VERSION });
       } catch {}
     }

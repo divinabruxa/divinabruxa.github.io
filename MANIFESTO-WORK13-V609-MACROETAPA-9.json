@@ -1,0 +1,157 @@
+{
+  "release": "V609",
+  "work": "WORK13",
+  "name": "Cosmos Vivo",
+  "macroStage": "9-of-10",
+  "title": "Música, Vídeos e Skins com a Interface Recuando",
+  "baseRequired": "V608",
+  "baseCommit": "996a023964d194978107883339037c7e49a918d3",
+  "frozenBase": "WORK12-V600",
+  "law": "one-orb-one-universe-one-presence-one-journey",
+  "installation": "flat-root-overlay",
+  "packageFiles": 14,
+  "production": {
+    "replaced": [
+      "app-v208.js",
+      "index.html",
+      "sw.js"
+    ],
+    "added": [
+      "living-media-skins-v609.js",
+      "living-media-skins-v609.css"
+    ],
+    "newStylesheets": 1,
+    "existingWorldEnginesRewritten": false
+  },
+  "livingMediaSkins": {
+    "worlds": ["music", "videos", "skins"],
+    "sequence": [
+      "work-first",
+      "explicit-depth",
+      "single-player-on-demand",
+      "interface-recedes"
+    ],
+    "contextModel": "V602-public-route-metadata-only",
+    "maximumNewControlsSimultaneous": 3,
+    "newSurfaces": 0,
+    "music": {
+      "engine": "V559-unchanged",
+      "artist": "Hércules DX",
+      "albums": [
+        { "title": "Sobre as Estrelas", "year": 2024, "tracks": 10 },
+        { "title": "Z", "year": 2026, "tracks": 8 }
+      ],
+      "verifiedTracks": 18,
+      "activePlayersMaximum": 1,
+      "autoplay": false,
+      "playerLoadsAfterExplicitGesture": true
+    },
+    "videos": {
+      "engine": "V559-unchanged",
+      "project": "De Frente com o Tarot",
+      "publishedOnly": true,
+      "publishedEpisodesAtRelease": 0,
+      "inventedEpisodes": 0,
+      "autoplay": false,
+      "playerLoadsAfterExplicitGesture": true
+    },
+    "skins": {
+      "engine": "V201-unchanged",
+      "registry": "V12-unchanged",
+      "count": 30,
+      "freeSkin": "classic",
+      "paidSkins": 29,
+      "globalApplyWithoutReload": true,
+      "cosmeticOnly": true,
+      "environment": "staging",
+      "realBilling": false,
+      "frontendEntitlementGrants": false,
+      "serverAuthority": true
+    },
+    "automaticPlayback": false,
+    "automaticNavigation": false,
+    "automaticWhitSpeech": false,
+    "whitTimingAuthority": "V606-unchanged"
+  },
+  "privacy": {
+    "publicRouteMetadataOnly": true,
+    "privateContentReads": 0,
+    "listeningHistoryReads": 0,
+    "viewingHistoryReads": 0,
+    "searchQueryReads": 0,
+    "accountProfileReads": 0,
+    "purchaseBodyReads": 0,
+    "emotionInference": false,
+    "storageReads": 0,
+    "storageWrites": 0,
+    "networkCalls": 0,
+    "modelCalls": 0
+  },
+  "performance": {
+    "newSurfaces": 0,
+    "newCanvases": 0,
+    "newRenderers": 0,
+    "newPlayers": 0,
+    "newPermanentAnimationLoops": 0,
+    "newMutationObservers": 0,
+    "newDeferredTimers": 0,
+    "newKeyframes": 0,
+    "heavyFilters": 0,
+    "serviceWorkerCoreAssets": 40,
+    "eventDrivenSingleFrame": true,
+    "iphoneFirst": true,
+    "reducedMotionPreservesMeaning": true
+  },
+  "protected": {
+    "work12RuntimeFilesVerifiedUnchanged": 24,
+    "priorWork13FilesVerifiedUnchanged": 12,
+    "existingMediaSkinEngineFilesVerifiedUnchanged": 12,
+    "work13V602ContextMemoryUnchanged": true,
+    "work13V603RealityResonanceUnchanged": true,
+    "work13V604DailyReadingUnchanged": true,
+    "work13V605SpreadReadingUnchanged": true,
+    "work13V606WhitTimingUnchanged": true,
+    "work13V607LivingWisdomUnchanged": true,
+    "work13V608CommerceClarityUnchanged": true,
+    "work12Snapshot": "SNAPSHOT-WORK12-V600-PROTEGIDO.zip",
+    "work12SnapshotSha256": "871a9118fa58eb1f1dd118110bda21a68f071ef3d00cb56b8ae6109aa1ac816d",
+    "canonicalOrbs": 1,
+    "canonicalCanvases": 1,
+    "musicVideoEngineChanged": false,
+    "skinEngineChanged": false,
+    "skinRegistryChanged": false,
+    "realBillingAuthorized": false,
+    "productionPublishAuthorized": false
+  },
+  "hashes": {
+    "app-v208.js": "f58109a8a81b4445f67cd102c8febeecfdffbf5f603499d944ed39204d7853f1",
+    "index.html": "39f51fa90b05b7b5fdff5308b5c9f5177ec174a771dc4dc1cf69b0073987e48f",
+    "sw.js": "e99f0e50eaaecdfb0169c86e9f09b5c52d5803a588a935f66e59d28cd02b9237",
+    "living-media-skins-v609.js": "bad73908f8410e64098b1207660daa05ebc14713509ea741a21da05630fd2d01",
+    "living-media-skins-v609.css": "f408eef7980d3e21f8d7629a34e3e2b5db6ad5e0bc77bf263873480c874b9eee"
+  },
+  "quality": {
+    "work13V609ChecksPassed": 598,
+    "work13V602ToV608CompatibleRuntimeChecksPassed": 1585,
+    "compatibleWork12RegressionChecksPassed": 386,
+    "totalChecksPassed": 2569,
+    "failed": 0,
+    "stressMediaSignals": 96,
+    "stressSkinWorldSignals": 88,
+    "stressSkinAppliedSignals": 72,
+    "automaticPlayerOpens": 0,
+    "automaticGalleryOpens": 0,
+    "privateCanariesRetained": false,
+    "cleanOverlayOnV608": "PASS",
+    "physicalIPhoneSupremeTest": "reserved-for-macro-10"
+  },
+  "verificationFiles": [
+    "qa-work13-v609-media-skins.mjs",
+    "qa-work13-v609-media-skins-runtime.mjs",
+    "qa-work13-v609-continuity-runtime.mjs",
+    "qa-work13-v609-service-worker-runtime.mjs",
+    "qa-work13-v609-boot-runtime.mjs"
+  ],
+  "nextAuthorizedStage": "WORK13-macro-10-final-orchestra-supreme-iphone-test",
+  "work14CorrectiveStage": false
+}
