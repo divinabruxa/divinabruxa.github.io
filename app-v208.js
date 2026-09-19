@@ -1,7 +1,7 @@
-/* DIVINA BRUXA — WORK13 · COSMOS VIVO · SABEDORIA VIVA V607
-   O WORK12 V600 e as etapas V602–V606 permanecem protegidos. Biblioteca,
-   Escola e Diario agora respiram na mesma linguagem progressiva: uma
-   descoberta, uma aula e uma escrita, sempre na unica Orbe. */
+/* DIVINA BRUXA — WORK13 · COSMOS VIVO · CLAREZA VIVA V608
+   O WORK12 V600 e as etapas V602–V607 permanecem protegidos. Consultas,
+   Loja, Premium e Conta agora revelam um proximo passo por vez, sem alterar
+   seus motores, seus valores, a autoridade do servidor ou a unica Orbe. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -70,6 +70,7 @@ import { createCosmicDailyReadingV604 } from './cosmic-daily-reading-v604.js?v=6
 import { createCosmicSpreadReadingV605 } from './cosmic-spread-reading-v605.js?v=605-work13-spread-reading';
 import { createWhitSilenceTimingV606 } from './whit-silence-timing-v606.js?v=606-work13-whit-timing';
 import { createLivingWisdomPathV607 } from './living-wisdom-path-v607.js?v=607-work13-living-wisdom';
+import { createLivingCommercePathV608 } from './living-commerce-path-v608.js?v=608-work13-commerce-clarity';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -634,6 +635,10 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK13_COMMERCE_CLARITY_ACTIVE') {
+    document.documentElement.dataset.work13CommerceClarityWorker = `v${event.data.commerceClarityVersion || event.data.version || 608}`;
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK13_LIVING_WISDOM_ACTIVE') {
     document.documentElement.dataset.work13LivingWisdomWorker = `v${event.data.livingWisdomVersion || event.data.version || 607}`;
     return;
@@ -722,14 +727,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v607-work13-living-wisdom-app';
+  window.__divinaSWBootstrap = 'v608-work13-commerce-clarity-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=607', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=608', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v607';
+        document.documentElement.dataset.releaseEpoch = 'v608';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] WORK13 V607 registrado sobre V606 e WORK12 V600 protegidos');
+        console.info('[Divina] WORK13 V608 registrado sobre V607 e WORK12 V600 protegidos');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -2022,7 +2027,102 @@ window.divinaWork13Macro7V607 = Object.freeze({
   }
 });
 window.divinaCosmosVivoV607 = window.divinaWork13Macro7V607;
-window.divinaCosmosVivo = window.divinaWork13Macro7V607;
+
+// A V608 nao altera autenticacao, billing, catalogo, afiliacao ou protocolo.
+// Ela deixa cada mundo chegar por uma unica entrada clara e so entao revela
+// as escolhas dos motores V558, V543, V191 e V201 ja existentes.
+const livingCommercePath = safely('WORK13 · Clareza Viva V608', () =>
+  createLivingCommercePathV608({
+    contextMemory:cosmosContextMemory,
+    chambers:realityChambers,
+    account:window.divinaAccount
+  })
+);
+window.orbe.livingCommerce = livingCommercePath;
+window.orbe.commercePath = livingCommercePath;
+document.documentElement.dataset.work13 = 'cosmos-vivo';
+document.documentElement.dataset.work13Macro = '8-commerce-clarity-path';
+window.divinaWork13Macro8V608 = Object.freeze({
+  version:608,
+  base:'V607-living-wisdom-on-WORK12-V600-frozen-by-V601',
+  work:'WORK13',
+  stage:'consultas-loja-premium-conta-com-clareza',
+  livingCommerce:livingCommercePath,
+  livingWisdom:livingWisdomPath,
+  timing:whitSilenceTiming,
+  contextMemory:cosmosContextMemory,
+  chambers:realityChambers,
+  orb:supremeOrb,
+  coordinator:work12Foundation,
+  status:() => {
+    const commerce = livingCommercePath?.status?.() || null;
+    const commerceAudit = livingCommercePath?.audit?.() || null;
+    const wisdom = livingWisdomPath?.status?.() || null;
+    const timing = whitSilenceTiming?.status?.() || null;
+    const context = cosmosContextMemory?.status?.() || null;
+    const orb = supremeOrb?.snapshot?.() || null;
+    const journey = orbIOSJourney?.status?.() || null;
+    return Object.freeze({
+      release:'V608',
+      macroStage:'8-of-10',
+      law:'one-orb-one-universe-one-presence-one-journey',
+      commerce,
+      commerceAudit,
+      wisdom,
+      timing,
+      context,
+      orb,
+      journey,
+      worlds:Object.freeze(['consultations','store','subscriptions','login']),
+      sequence:Object.freeze(['one-clear-entry','explicit-choice','existing-engine','one-natural-next-step']),
+      contextModel:'V602-public-route-metadata-only',
+      consultationEngine:'V558-unchanged',
+      consultationPricesCents:Object.freeze([25000,20000,15000,5000]),
+      consultationContact:'orbedasrealidades@hotmail.com',
+      consultationAutomaticEmail:false,
+      storeEngine:'V543-unchanged',
+      storeProductsPreserved:21,
+      storeAssociateTag:'orbedasrealid-20',
+      storeCheckout:'external-amazon-only',
+      premiumEngine:'V191-unchanged',
+      premiumLifetimeCents:19990,
+      aiMonthlyCents:8990,
+      aiCreditsPerCycle:400,
+      extraCreditPacks:Object.freeze([[200,3990],[600,9990],[1500,19990]]),
+      accountEngine:'V201-unchanged',
+      accountServerAuthority:true,
+      accountJournalCloudConsentDefault:false,
+      maximumPrimaryActionsAtEntry:1,
+      realBilling:false,
+      frontendEntitlementGrants:false,
+      automaticNavigation:false,
+      automaticWhitSpeech:false,
+      whitTimingAuthority:'V606-unchanged',
+      onePhysicalOrb:orb?.oneLivingOrb === true,
+      sameEntity:orb?.entityPreserved === true,
+      travelerCopies:Number(journey?.travelerCopies || 0),
+      privateContentReads:0,
+      formValueReads:0,
+      consultationBodyReads:0,
+      consultationProtocolReads:0,
+      accountProfileReads:0,
+      purchaseBodyReads:0,
+      searchQueryReads:0,
+      storageReads:0,
+      storageWrites:0,
+      networkCalls:0,
+      modelCalls:0,
+      newCanvases:0,
+      newRenderers:0,
+      newAnimationLoops:0,
+      newMutationObservers:0,
+      newDeferredTimers:0,
+      iphoneFirst:true
+    });
+  }
+});
+window.divinaCosmosVivoV608 = window.divinaWork13Macro8V608;
+window.divinaCosmosVivo = window.divinaWork13Macro8V608;
 window.whit = whitCore;
 
 window.divinaWhitV212 = Object.freeze({
@@ -3295,8 +3395,8 @@ const awaken = async () => {
         bootFirst:true,
         release:'V562',
         work12Base:'V600-frozen',
-        work13CosmosVivo:'V607',
-        work13MacroStage:'7-of-10-living-wisdom-path',
+        work13CosmosVivo:'V608',
+        work13MacroStage:'8-of-10-commerce-clarity-path',
         contextMemoryModel:'session-route-metadata-only',
         contextMemoryAutomaticNavigation:false,
         contextMemoryAutomaticWhitSpeech:false,
@@ -3334,6 +3434,19 @@ const awaken = async () => {
         livingWisdomJournalPrivateContentReads:0,
         livingWisdomAutomaticNavigation:false,
         livingWisdomAutomaticWhitSpeech:false,
+        livingCommercePath:'one-clear-entry-explicit-choice-existing-engine',
+        livingCommerceWorlds:['consultations','store','subscriptions','login'],
+        livingCommerceMaximumPrimaryActionsAtEntry:1,
+        livingCommerceConsultationPricesCents:[25000,20000,15000,5000],
+        livingCommerceStoreProductsPreserved:21,
+        livingCommerceStoreAssociateTag:'orbedasrealid-20',
+        livingCommercePremiumLifetimeCents:19990,
+        livingCommerceAiMonthlyCents:8990,
+        livingCommerceAiCreditsPerCycle:400,
+        livingCommerceRealBilling:false,
+        livingCommercePrivateContentReads:0,
+        livingCommerceAutomaticNavigation:false,
+        livingCommerceAutomaticWhitSpeech:false,
         supremePlan:'4.0-fluidity-supreme',
         supremePlanMacroStages:14,
         currentMacroStage:'14-of-14',

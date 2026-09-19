@@ -1,16 +1,16 @@
-/* DIVINA BRUXA — WORK13 · COSMOS VIVO · SABEDORIA VIVA V607
-   O WORK12 V600 e as etapas V602–V606 permanecem protegidos. A instalacao so
-   assume o portal quando HTML, aplicacao, leituras, silencio e a jornada viva
-   pertencem ao mesmo corte, sem alterar a Orbe ou os motores de cada mundo.
+/* DIVINA BRUXA — WORK13 · COSMOS VIVO · CLAREZA VIVA V608
+   O WORK12 V600 e as etapas V602–V607 permanecem protegidos. A instalacao so
+   assume o portal quando HTML, aplicacao, leituras, silencio, sabedoria e a
+   clareza comercial pertencem ao mesmo corte, sem alterar motores ou valores.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
-const VERSION = 607;
+const VERSION = 608;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work13-v607-living-wisdom';
+const CACHE_NAME = 'divina-bruxa-work13-v608-commerce-clarity';
 const CORE = Object.freeze([
   './index.html',
-  './app-v208.js?v=607-work13-living-wisdom',
+  './app-v208.js?v=608-work13-commerce-clarity',
   './cosmos-context-memory-v602.js?v=602-work13-context',
   './cosmos-reality-resonance-v603.js?v=603-work13-resonance',
   './cosmos-reality-resonance-v603.css?v=603-work13-resonance',
@@ -21,6 +21,8 @@ const CORE = Object.freeze([
   './whit-silence-timing-v606.js?v=606-work13-whit-timing',
   './living-wisdom-path-v607.js?v=607-work13-living-wisdom',
   './living-wisdom-path-v607.css?v=607-work13-living-wisdom',
+  './living-commerce-path-v608.js?v=608-work13-commerce-clarity',
+  './living-commerce-path-v608.css?v=608-work13-commerce-clarity',
   './work12-final-continuity-v598.js?v=598-work12-final',
   './work12-final-continuity-v598.css?v=599-live-audit',
   './experience-intelligence-v597.js?v=597-work12-intelligence',
@@ -59,7 +61,7 @@ const fetchCore = async path => {
 
 const validateCore = async responses => {
   const index = await responses.get('./index.html')?.clone().text();
-  const app = await responses.get('./app-v208.js?v=607-work13-living-wisdom')?.clone().text();
+  const app = await responses.get('./app-v208.js?v=608-work13-commerce-clarity')?.clone().text();
   const contextMemory = await responses.get('./cosmos-context-memory-v602.js?v=602-work13-context')?.clone().text();
   const realityResonance = await responses.get('./cosmos-reality-resonance-v603.js?v=603-work13-resonance')?.clone().text();
   const resonanceStyles = await responses.get('./cosmos-reality-resonance-v603.css?v=603-work13-resonance')?.clone().text();
@@ -70,6 +72,8 @@ const validateCore = async responses => {
   const whitTiming = await responses.get('./whit-silence-timing-v606.js?v=606-work13-whit-timing')?.clone().text();
   const livingWisdom = await responses.get('./living-wisdom-path-v607.js?v=607-work13-living-wisdom')?.clone().text();
   const livingWisdomStyles = await responses.get('./living-wisdom-path-v607.css?v=607-work13-living-wisdom')?.clone().text();
+  const livingCommerce = await responses.get('./living-commerce-path-v608.js?v=608-work13-commerce-clarity')?.clone().text();
+  const livingCommerceStyles = await responses.get('./living-commerce-path-v608.css?v=608-work13-commerce-clarity')?.clone().text();
   const finalContinuity = await responses.get('./work12-final-continuity-v598.js?v=598-work12-final')?.clone().text();
   const finalStyles = await responses.get('./work12-final-continuity-v598.css?v=599-live-audit')?.clone().text();
   const intelligence = await responses.get('./experience-intelligence-v597.js?v=597-work12-intelligence')?.clone().text();
@@ -94,10 +98,12 @@ const validateCore = async responses => {
   const soul = await responses.get('./whit-orb-soul-bridge-v581.js?v=592-work12-navigation')?.clone().text();
   if (!index?.includes('name="divina-work12" content="V600"')
     || !index.includes('name="divina-live-audit" content="V600"')
-    || !index.includes('name="divina-work13" content="V607"')) {
+    || !index.includes('name="divina-work13" content="V608"')) {
     throw new Error('work13-index-version-mismatch');
   }
-  if (!index.includes('app-v208.js?v=607-work13-living-wisdom')
+  if (!index.includes('app-v208.js?v=608-work13-commerce-clarity')
+    || !index.includes('living-commerce-path-v608.css?v=608-work13-commerce-clarity')
+    || !index.includes('id="divinaLivingCommercePathV608"')
     || !index.includes('living-wisdom-path-v607.css?v=607-work13-living-wisdom')
     || !index.includes('id="divinaLivingWisdomPathV607"')
     || !index.includes('cosmic-spread-reading-v605.css?v=605-work13-spread-reading')
@@ -177,6 +183,12 @@ const validateCore = async responses => {
     || !app.includes('divinaWork13Macro7V607')
     || !app.includes("stage:'biblioteca-escola-diario-vivos'")) {
     throw new Error('work13-app-living-wisdom-mismatch');
+  }
+  if (!app.includes("living-commerce-path-v608.js?v=608-work13-commerce-clarity")
+    || !app.includes('createLivingCommercePathV608({')
+    || !app.includes('divinaWork13Macro8V608')
+    || !app.includes("stage:'consultas-loja-premium-conta-com-clareza'")) {
+    throw new Error('work13-app-commerce-clarity-mismatch');
   }
   if (!contextMemory?.includes('COSMOS_CONTEXT_MEMORY_CONTRACT_V602')
     || !contextMemory.includes("model:'local-session-route-metadata-only'")
@@ -292,6 +304,34 @@ const validateCore = async responses => {
     || !livingWisdomStyles.includes('@media(prefers-reduced-motion:reduce)')
     || /@keyframes|backdrop-filter|filter\s*:/.test(livingWisdomStyles)) {
     throw new Error('work13-living-wisdom-styles-missing');
+  }
+  if (!livingCommerce?.includes('LIVING_COMMERCE_PATH_CONTRACT_V608')
+    || !livingCommerce.includes("sequence:Object.freeze([\n    'one-clear-entry','explicit-choice','existing-engine','one-natural-next-step'")
+    || !livingCommerce.includes("engine:'V558'")
+    || !livingCommerce.includes('priceCents:Object.freeze([25000,20000,15000,5000])')
+    || !livingCommerce.includes("associateTag:'orbedasrealid-20'")
+    || !livingCommerce.includes('productsPreserved:21')
+    || !livingCommerce.includes('premiumLifetimeCents:19990')
+    || !livingCommerce.includes('aiMonthlyCents:8990')
+    || !livingCommerce.includes('aiCreditsPerCycle:400')
+    || !livingCommerce.includes("existingGuideReused:'AccountWorldV319'")
+    || !livingCommerce.includes('maximumPrimaryActionsAtEntry:1')
+    || !livingCommerce.includes('realBilling:false')
+    || !livingCommerce.includes('frontendEntitlementGrants:false')
+    || !livingCommerce.includes('automaticNavigation:false')
+    || !livingCommerce.includes('automaticWhitSpeech:false')
+    || !livingCommerce.includes('privateContentReads:0')
+    || !livingCommerce.includes('permanentAnimationLoops:0')) {
+    throw new Error('work13-commerce-clarity-contract-missing');
+  }
+  if (!livingCommerceStyles?.includes('[data-living-commerce-path="v608"]')
+    || !livingCommerceStyles.includes('[data-v608-commerce-mode="guide"]')
+    || !livingCommerceStyles.includes('[data-v608-premium-section="premium"]')
+    || !livingCommerceStyles.includes('#accountWorldV319')
+    || !livingCommerceStyles.includes('@media(max-width:430px)')
+    || !livingCommerceStyles.includes('@media(prefers-reduced-motion:reduce)')
+    || /@keyframes|backdrop-filter|filter\s*:/.test(livingCommerceStyles)) {
+    throw new Error('work13-commerce-clarity-styles-missing');
   }
   if (!finalContinuity?.includes('FINAL_CONTINUITY_CONTRACT_V598')
     || !finalContinuity.includes("homeSingleTap:'call-intentions'")
@@ -438,6 +478,7 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK13_SPREAD_READING_ACTIVE', version:VERSION, spreadReadingVersion:605, dailyReadingVersion:604, spreadMethods:15, base:600 });
         client.postMessage({ type:'DIVINA_WORK13_WHIT_TIMING_ACTIVE', version:VERSION, whitTimingVersion:606, livingPresenceVersion:594, base:600 });
         client.postMessage({ type:'DIVINA_WORK13_LIVING_WISDOM_ACTIVE', version:VERSION, livingWisdomVersion:607, whitTimingVersion:606, base:600 });
+        client.postMessage({ type:'DIVINA_WORK13_COMMERCE_CLARITY_ACTIVE', version:VERSION, commerceClarityVersion:608, livingWisdomVersion:607, base:600 });
         client.postMessage({ type:'DIVINA_RELEASE_READY', version:VERSION });
       } catch {}
     }
