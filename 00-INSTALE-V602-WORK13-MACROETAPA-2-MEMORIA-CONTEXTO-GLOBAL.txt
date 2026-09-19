@@ -1,0 +1,33 @@
+DIVINA BRUXA — WORK13 · COSMOS VIVO
+MACROETAPA 2 DE 10 — MEMÓRIA DE CONTEXTO GLOBAL
+RELEASE V602
+
+COMO INSTALAR
+1. Abra a raiz atual do site, onde a V601 já está instalada.
+2. Envie TODOS os arquivos deste ZIP diretamente para a raiz.
+3. Autorize a substituição somente de app-v208.js, index.html e sw.js.
+4. Os outros 9 arquivos são novos.
+5. Não apague pastas, cartas, imagens, CNAME ou o snapshot da V601.
+6. No iPhone, feche e abra novamente o Safari ou o app instalado após o envio.
+
+O QUE MUDA
+- O universo lembra a realidade atual, a origem, o retorno e a fase pública da experiência.
+- Existe no máximo um próximo passo natural; quando não existe, permanece silêncio.
+- A memória fica somente na sessão deste aparelho e expira após 6 horas.
+- Nenhuma navegação ou fala da Whit acontece automaticamente.
+
+O QUE NÃO MUDA
+- Uma Orbe, um canvas, uma física e uma camada visual.
+- Home, menu, Tarot Livre, Carta do Dia, conteúdo, preços e skins.
+- WORK12 V600 e o cofre V601 permanecem protegidos.
+
+VERIFICAÇÃO OPCIONAL
+  sha256sum -c HASHES-SHA256-WORK13-V602.txt
+  node qa-work13-v602-context-memory.mjs
+  node qa-work13-v602-context-runtime.mjs
+  node qa-work13-v602-service-worker-runtime.mjs
+  node qa-work13-v602-boot-runtime.mjs
+
+RESULTADO ESPERADO
+Todos os testes terminam em PASS. A aparência permanece igual; a continuidade passa a existir por baixo dela.
+

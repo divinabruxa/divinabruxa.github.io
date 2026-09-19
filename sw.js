@@ -1,16 +1,17 @@
-/* DIVINA BRUXA — WORK12 · MACROETAPA 10 · FECHAMENTO VIVO V600
-   Uma identidade de estilo para uma única camada visual. A instalação só
-   assume o portal quando HTML, aplicação, continuidade final, auditoria viva,
-   rito, navegação, universo e Orbe pertencem ao mesmo corte.
+/* DIVINA BRUXA — WORK13 · COSMOS VIVO · MEMORIA DE CONTEXTO GLOBAL V602
+   O WORK12 V600 permanece congelado. A instalação só assume o portal quando
+   HTML, aplicação, continuidade final e a memória local pertencem ao mesmo
+   corte, sem alterar a Orbe, o rito, a navegação ou os mundos protegidos.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
-const VERSION = 600;
+const VERSION = 602;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work12-v600-one-style';
+const CACHE_NAME = 'divina-bruxa-work13-v602-context-memory';
 const CORE = Object.freeze([
   './index.html',
-  './app-v208.js?v=598-work12-final',
+  './app-v208.js?v=602-work13-context',
+  './cosmos-context-memory-v602.js?v=602-work13-context',
   './work12-final-continuity-v598.js?v=598-work12-final',
   './work12-final-continuity-v598.css?v=599-live-audit',
   './experience-intelligence-v597.js?v=597-work12-intelligence',
@@ -49,7 +50,8 @@ const fetchCore = async path => {
 
 const validateCore = async responses => {
   const index = await responses.get('./index.html')?.clone().text();
-  const app = await responses.get('./app-v208.js?v=598-work12-final')?.clone().text();
+  const app = await responses.get('./app-v208.js?v=602-work13-context')?.clone().text();
+  const contextMemory = await responses.get('./cosmos-context-memory-v602.js?v=602-work13-context')?.clone().text();
   const finalContinuity = await responses.get('./work12-final-continuity-v598.js?v=598-work12-final')?.clone().text();
   const finalStyles = await responses.get('./work12-final-continuity-v598.css?v=599-live-audit')?.clone().text();
   const intelligence = await responses.get('./experience-intelligence-v597.js?v=597-work12-intelligence')?.clone().text();
@@ -73,10 +75,11 @@ const validateCore = async responses => {
   const journey = await responses.get('./orb-persistent-journey-v565.js?v=583-coordinate-travel')?.clone().text();
   const soul = await responses.get('./whit-orb-soul-bridge-v581.js?v=592-work12-navigation')?.clone().text();
   if (!index?.includes('name="divina-work12" content="V600"')
-    || !index.includes('name="divina-live-audit" content="V600"')) {
-    throw new Error('work12-index-version-mismatch');
+    || !index.includes('name="divina-live-audit" content="V600"')
+    || !index.includes('name="divina-work13" content="V602"')) {
+    throw new Error('work13-index-version-mismatch');
   }
-  if (!index.includes('app-v208.js?v=598-work12-final')
+  if (!index.includes('app-v208.js?v=602-work13-context')
     || !index.includes('work12-final-continuity-v598.css?v=599-live-audit')
     || !index.includes('id="divinaWork12FinalContinuityV598"')
     || index.includes('id="divinaWork12FinalContinuityV599"')
@@ -112,6 +115,23 @@ const validateCore = async responses => {
     || !app.includes("work12-final-continuity-v598.js?v=598-work12-final")
     || !app.includes("stage:'fluidez-suprema-final'")) {
     throw new Error('work12-app-final-continuity-mismatch');
+  }
+  if (!app.includes("cosmos-context-memory-v602.js?v=602-work13-context")
+    || !app.includes('createCosmosContextMemoryV602()')
+    || !app.includes('divinaWork13Macro2V602')
+    || !app.includes("stage:'memoria-de-contexto-global'")) {
+    throw new Error('work13-app-context-memory-mismatch');
+  }
+  if (!contextMemory?.includes('COSMOS_CONTEXT_MEMORY_CONTRACT_V602')
+    || !contextMemory.includes("model:'local-session-route-metadata-only'")
+    || !contextMemory.includes('maximumSuggestedSteps:1')
+    || !contextMemory.includes('automaticNavigation:false')
+    || !contextMemory.includes('automaticWhitSpeech:false')
+    || !contextMemory.includes('privateContentReads:0')
+    || !contextMemory.includes('formValueReads:0')
+    || !contextMemory.includes('cardIdentityReads:0')
+    || !contextMemory.includes('permanentAnimationLoops:0')) {
+    throw new Error('work13-context-memory-contract-missing');
   }
   if (!finalContinuity?.includes('FINAL_CONTINUITY_CONTRACT_V598')
     || !finalContinuity.includes("homeSingleTap:'call-intentions'")
@@ -252,6 +272,7 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK12_CHAMBERS_ACTIVE', version:VERSION });
         client.postMessage({ type:'DIVINA_WORK12_INTELLIGENCE_ACTIVE', version:VERSION });
         client.postMessage({ type:'DIVINA_WORK12_FINAL_ACTIVE', version:VERSION });
+        client.postMessage({ type:'DIVINA_WORK13_CONTEXT_ACTIVE', version:VERSION, base:600 });
         client.postMessage({ type:'DIVINA_RELEASE_READY', version:VERSION });
       } catch {}
     }

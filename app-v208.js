@@ -1,7 +1,7 @@
-/* DIVINA BRUXA — WORK12 · MACROETAPA 10 · FLUIDEZ SUPREMA FINAL V598
-   A base V589–V597 permanece soberana. A ultima camada retira da percepcao
-   tudo que ainda parecia interface: na Origem, a unica Orbe chama o universo;
-   nas realidades, o Sopro preserva os caminhos. Whit vive na mesma materia. */
+/* DIVINA BRUXA — WORK13 · COSMOS VIVO · MEMORIA DE CONTEXTO GLOBAL V602
+   O WORK12 V600 permanece congelado. Esta camada acrescenta somente o fio
+   local da sessao: origem, realidade, retorno e um proximo passo possivel.
+   A unica Orbe, a fisica, o silencio e todos os mundos continuam soberanos. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -64,6 +64,7 @@ import { createReadingRitualCoreV595 } from './reading-ritual-core-v595.js?v=595
 import { createRealityChambersV596 } from './reality-chambers-v596.js?v=596-work12-chambers';
 import { createExperienceIntelligenceV597 } from './experience-intelligence-v597.js?v=597-work12-intelligence';
 import { createWork12FinalContinuityV598 } from './work12-final-continuity-v598.js?v=598-work12-final';
+import { createCosmosContextMemoryV602 } from './cosmos-context-memory-v602.js?v=602-work13-context';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -628,6 +629,10 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK13_CONTEXT_ACTIVE') {
+    document.documentElement.dataset.work13ContextWorker = `v${event.data.version || 602}`;
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK12_FINAL_ACTIVE') {
     document.documentElement.dataset.work12FinalWorker = `v${event.data.version || 598}`;
     work12Foundation?.audit?.('final-worker-active');
@@ -692,14 +697,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v598-work12-app';
+  window.__divinaSWBootstrap = 'v602-work13-context-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=598', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=602', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v598';
+        document.documentElement.dataset.releaseEpoch = 'v602';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] WORK12 V598 registrado');
+        console.info('[Divina] WORK13 V602 registrado sobre WORK12 V600 protegido');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -1532,6 +1537,61 @@ window.divinaWork12Macro10V598 = Object.freeze({
   }
 });
 window.divinaFluidezSupremaV598 = window.divinaWork12Macro10V598;
+
+// O WORK13 nasce sobre o fechamento congelado, sem reabrir a arquitetura.
+// A memoria observa apenas eventos publicos que os maestros do WORK12 ja
+// emitem. Ela nao navega, nao fala, nao le campos e nao cria outra materia.
+const cosmosContextMemory = safely('WORK13 · Memória de Contexto Global V602', () =>
+  createCosmosContextMemoryV602()
+);
+window.orbe.contextMemory = cosmosContextMemory;
+window.orbe.cosmos = cosmosContextMemory;
+document.documentElement.dataset.work13 = 'cosmos-vivo';
+document.documentElement.dataset.work13Macro = '2-context-memory';
+window.divinaWork13Macro2V602 = Object.freeze({
+  version:602,
+  base:'WORK12-V600-frozen-by-V601',
+  work:'WORK13',
+  stage:'memoria-de-contexto-global',
+  contextMemory:cosmosContextMemory,
+  orb:supremeOrb,
+  coordinator:work12Foundation,
+  finalContinuity,
+  status:() => {
+    const context = cosmosContextMemory?.status?.() || null;
+    const audit = cosmosContextMemory?.audit?.() || null;
+    const orb = supremeOrb?.snapshot?.() || null;
+    const journey = orbIOSJourney?.status?.() || null;
+    return Object.freeze({
+      release:'V602',
+      macroStage:'2-of-10',
+      law:'one-orb-one-universe-one-presence-one-journey',
+      context,
+      audit,
+      orb,
+      journey,
+      oneNaturalNextStep:true,
+      automaticNavigation:false,
+      automaticWhitSpeech:false,
+      onePhysicalOrb:orb?.oneLivingOrb === true,
+      sameEntity:orb?.entityPreserved === true,
+      travelerCopies:Number(journey?.travelerCopies || 0),
+      teleport:journey?.teleportFallback === true,
+      flicker:journey?.flicker === true,
+      privateContentReads:0,
+      formValueReads:0,
+      cardIdentityReads:0,
+      emotionInference:false,
+      localSessionOnly:true,
+      iphoneFirst:true,
+      newCanvases:0,
+      newRenderers:0,
+      newAnimationLoops:0,
+      newMutationObservers:0
+    });
+  }
+});
+window.divinaCosmosVivoV602 = window.divinaWork13Macro2V602;
 window.whit = whitCore;
 
 window.divinaWhitV212 = Object.freeze({
@@ -2803,6 +2863,13 @@ const awaken = async () => {
         recovery:'v326',
         bootFirst:true,
         release:'V562',
+        work12Base:'V600-frozen',
+        work13CosmosVivo:'V602',
+        work13MacroStage:'2-of-10-context-memory',
+        contextMemoryModel:'session-route-metadata-only',
+        contextMemoryAutomaticNavigation:false,
+        contextMemoryAutomaticWhitSpeech:false,
+        contextMemoryPrivateContentReads:0,
         supremePlan:'4.0-fluidity-supreme',
         supremePlanMacroStages:14,
         currentMacroStage:'14-of-14',
