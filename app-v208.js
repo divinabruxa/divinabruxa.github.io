@@ -1,7 +1,7 @@
-/* DIVINA BRUXA — WORK13 · COSMOS VIVO · LEITURA COSMICA EM CAMADAS V604
-   O WORK12 V600 e as etapas V602/V603 permanecem protegidos. Na Carta do Dia,
-   o rito existente agora revela uma unica frase de essencia depois do silencio
-   e conserva toda profundidade sob pedido. A unica Orbe segue soberana. */
+/* DIVINA BRUXA — WORK13 · COSMOS VIVO · CARTAS QUE CONVERSAM V605
+   O WORK12 V600 e as etapas V602–V604 permanecem protegidos. As tiragens agora
+   respiram por camadas e encontram uma sintese curta, sem tocar no Tarot Livre,
+   na pergunta privada, no sorteio ou na unica Orbe soberana. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -67,6 +67,7 @@ import { createWork12FinalContinuityV598 } from './work12-final-continuity-v598.
 import { createCosmosContextMemoryV602 } from './cosmos-context-memory-v602.js?v=602-work13-context';
 import { createCosmosRealityResonanceV603 } from './cosmos-reality-resonance-v603.js?v=603-work13-resonance';
 import { createCosmicDailyReadingV604 } from './cosmic-daily-reading-v604.js?v=604-work13-daily-reading';
+import { createCosmicSpreadReadingV605 } from './cosmic-spread-reading-v605.js?v=605-work13-spread-reading';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -631,6 +632,10 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK13_SPREAD_READING_ACTIVE') {
+    document.documentElement.dataset.work13SpreadReadingWorker = `v${event.data.spreadReadingVersion || event.data.version || 605}`;
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK13_DAILY_READING_ACTIVE') {
     document.documentElement.dataset.work13DailyReadingWorker = `v${event.data.dailyReadingVersion || event.data.version || 604}`;
     return;
@@ -707,14 +712,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v604-work13-daily-reading-app';
+  window.__divinaSWBootstrap = 'v605-work13-spread-reading-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=604', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=605', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v604';
+        document.documentElement.dataset.releaseEpoch = 'v605';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] WORK13 V604 registrado sobre WORK12 V600 protegido');
+        console.info('[Divina] WORK13 V605 registrado sobre V604 e WORK12 V600 protegidos');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -1747,7 +1752,88 @@ window.divinaWork13Macro4V604 = Object.freeze({
   }
 });
 window.divinaCosmosVivoV604 = window.divinaWork13Macro4V604;
-window.divinaCosmosVivo = window.divinaWork13Macro4V604;
+
+// A V605 nao cria outra leitura nem toca na pergunta privada. Ela encontra o
+// motor de Tiragens ja carregado, usa somente cartas reveladas e reorganiza a
+// apresentacao em carta, silencio, essencia, conversa, sintese e profundidade
+// chamada. O Tarot Livre continua sem significados automaticos.
+const cosmicSpreadReading = safely('WORK13 · Cartas que Conversam V605', () =>
+  createCosmicSpreadReadingV605()
+);
+window.orbe.spreadReading = cosmicSpreadReading;
+window.orbe.cosmicSpreadReading = cosmicSpreadReading;
+document.documentElement.dataset.work13 = 'cosmos-vivo';
+document.documentElement.dataset.work13Macro = '5-cards-converse';
+window.divinaWork13Macro5V605 = Object.freeze({
+  version:605,
+  base:'V604-layered-daily-reading-on-WORK12-V600-frozen-by-V601',
+  work:'WORK13',
+  stage:'cartas-conversam-sintese-em-camadas',
+  spreadReading:cosmicSpreadReading,
+  dailyReading:cosmicDailyReading,
+  ritual:readingRitual,
+  resonance:cosmosRealityResonance,
+  contextMemory:cosmosContextMemory,
+  orb:supremeOrb,
+  coordinator:work12Foundation,
+  status:() => {
+    const reading = cosmicSpreadReading?.status?.() || null;
+    const audit = cosmicSpreadReading?.audit?.() || null;
+    const dailyReadingStatus = cosmicDailyReading?.status?.() || null;
+    const resonance = cosmosRealityResonance?.status?.() || null;
+    const context = cosmosContextMemory?.status?.() || null;
+    const orb = supremeOrb?.snapshot?.() || null;
+    const journey = orbIOSJourney?.status?.() || null;
+    return Object.freeze({
+      release:'V605',
+      macroStage:'5-of-10',
+      law:'one-orb-one-universe-one-presence-one-journey',
+      reading,
+      audit,
+      dailyReading:dailyReadingStatus,
+      resonance,
+      context,
+      orb,
+      journey,
+      route:'spreads',
+      sequence:Object.freeze(['revealed-card','silence','one-sentence-essence','cards-in-conversation','one-sentence-synthesis','depth-on-explicit-request']),
+      cardsConverse:true,
+      oneSentenceSynthesis:true,
+      depthRequiresExplicitGesture:true,
+      spreadMethodsPreserved:15,
+      spreadFreeMethodsPreserved:4,
+      spreadPremiumMethodsPreserved:11,
+      celticCrossPositionsPreserved:10,
+      royalTableCardsPreserved:78,
+      tarotFreeAutomaticMeanings:false,
+      tarotFreeChanged:false,
+      cardSelectionChanged:false,
+      spreadPersistenceChanged:false,
+      premiumAuthorityChanged:false,
+      automaticNavigation:false,
+      automaticWhitSpeech:false,
+      onePhysicalOrb:orb?.oneLivingOrb === true,
+      sameEntity:orb?.entityPreserved === true,
+      travelerCopies:Number(journey?.travelerCopies || 0),
+      privateContentReads:0,
+      intentionReads:0,
+      questionReads:0,
+      journalBodyReads:0,
+      unrevealedCardReads:0,
+      storageReads:0,
+      storageWrites:0,
+      networkCalls:0,
+      modelCalls:0,
+      iphoneFirst:true,
+      newCanvases:0,
+      newRenderers:0,
+      newAnimationLoops:0,
+      newMutationObservers:0
+    });
+  }
+});
+window.divinaCosmosVivoV605 = window.divinaWork13Macro5V605;
+window.divinaCosmosVivo = window.divinaWork13Macro5V605;
 window.whit = whitCore;
 
 window.divinaWhitV212 = Object.freeze({
@@ -3020,8 +3106,8 @@ const awaken = async () => {
         bootFirst:true,
         release:'V562',
         work12Base:'V600-frozen',
-        work13CosmosVivo:'V604',
-        work13MacroStage:'4-of-10-layered-daily-reading',
+        work13CosmosVivo:'V605',
+        work13MacroStage:'5-of-10-cards-converse',
         contextMemoryModel:'session-route-metadata-only',
         contextMemoryAutomaticNavigation:false,
         contextMemoryAutomaticWhitSpeech:false,
@@ -3034,6 +3120,14 @@ const awaken = async () => {
         cosmicDailyReadingDepthExplicit:true,
         cosmicDailyReadingAutomaticWhitSpeech:false,
         cosmicDailyReadingPrivateContentReads:0,
+        cosmicSpreadReading:'card-silence-essence-conversation-one-sentence-synthesis-depth-on-request',
+        cosmicSpreadReadingRoute:'spreads',
+        cosmicSpreadReadingMethodsPreserved:15,
+        cosmicSpreadReadingRoyalTableCardsPreserved:78,
+        cosmicSpreadReadingTarotFreeAutomaticMeanings:false,
+        cosmicSpreadReadingDepthExplicit:true,
+        cosmicSpreadReadingAutomaticWhitSpeech:false,
+        cosmicSpreadReadingPrivateContentReads:0,
         supremePlan:'4.0-fluidity-supreme',
         supremePlanMacroStages:14,
         currentMacroStage:'14-of-14',

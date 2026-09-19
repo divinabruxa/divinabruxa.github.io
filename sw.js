@@ -1,21 +1,23 @@
-/* DIVINA BRUXA — WORK13 · COSMOS VIVO · LEITURA COSMICA EM CAMADAS V604
-   O WORK12 V600 e as etapas V602/V603 permanecem protegidos. A instalação só
-   assume o portal quando HTML, aplicação, memória, ressonância e leitura diária
-   pertencem ao mesmo corte, sem alterar a Orbe, o rito ou os mundos protegidos.
+/* DIVINA BRUXA — WORK13 · COSMOS VIVO · CARTAS QUE CONVERSAM V605
+   O WORK12 V600 e as etapas V602–V604 permanecem protegidos. A instalação só
+   assume o portal quando HTML, aplicação, memória, ressonância, leitura diária
+   e tiragens em camadas pertencem ao mesmo corte, sem alterar a Orbe ou o rito.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
-const VERSION = 604;
+const VERSION = 605;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work13-v604-layered-daily-reading';
+const CACHE_NAME = 'divina-bruxa-work13-v605-cards-converse';
 const CORE = Object.freeze([
   './index.html',
-  './app-v208.js?v=604-work13-daily-reading',
+  './app-v208.js?v=605-work13-spread-reading',
   './cosmos-context-memory-v602.js?v=602-work13-context',
   './cosmos-reality-resonance-v603.js?v=603-work13-resonance',
   './cosmos-reality-resonance-v603.css?v=603-work13-resonance',
   './cosmic-daily-reading-v604.js?v=604-work13-daily-reading',
   './cosmic-daily-reading-v604.css?v=604-work13-daily-reading',
+  './cosmic-spread-reading-v605.js?v=605-work13-spread-reading',
+  './cosmic-spread-reading-v605.css?v=605-work13-spread-reading',
   './work12-final-continuity-v598.js?v=598-work12-final',
   './work12-final-continuity-v598.css?v=599-live-audit',
   './experience-intelligence-v597.js?v=597-work12-intelligence',
@@ -54,12 +56,14 @@ const fetchCore = async path => {
 
 const validateCore = async responses => {
   const index = await responses.get('./index.html')?.clone().text();
-  const app = await responses.get('./app-v208.js?v=604-work13-daily-reading')?.clone().text();
+  const app = await responses.get('./app-v208.js?v=605-work13-spread-reading')?.clone().text();
   const contextMemory = await responses.get('./cosmos-context-memory-v602.js?v=602-work13-context')?.clone().text();
   const realityResonance = await responses.get('./cosmos-reality-resonance-v603.js?v=603-work13-resonance')?.clone().text();
   const resonanceStyles = await responses.get('./cosmos-reality-resonance-v603.css?v=603-work13-resonance')?.clone().text();
   const dailyReading = await responses.get('./cosmic-daily-reading-v604.js?v=604-work13-daily-reading')?.clone().text();
   const dailyReadingStyles = await responses.get('./cosmic-daily-reading-v604.css?v=604-work13-daily-reading')?.clone().text();
+  const spreadReading = await responses.get('./cosmic-spread-reading-v605.js?v=605-work13-spread-reading')?.clone().text();
+  const spreadReadingStyles = await responses.get('./cosmic-spread-reading-v605.css?v=605-work13-spread-reading')?.clone().text();
   const finalContinuity = await responses.get('./work12-final-continuity-v598.js?v=598-work12-final')?.clone().text();
   const finalStyles = await responses.get('./work12-final-continuity-v598.css?v=599-live-audit')?.clone().text();
   const intelligence = await responses.get('./experience-intelligence-v597.js?v=597-work12-intelligence')?.clone().text();
@@ -84,10 +88,12 @@ const validateCore = async responses => {
   const soul = await responses.get('./whit-orb-soul-bridge-v581.js?v=592-work12-navigation')?.clone().text();
   if (!index?.includes('name="divina-work12" content="V600"')
     || !index.includes('name="divina-live-audit" content="V600"')
-    || !index.includes('name="divina-work13" content="V604"')) {
+    || !index.includes('name="divina-work13" content="V605"')) {
     throw new Error('work13-index-version-mismatch');
   }
-  if (!index.includes('app-v208.js?v=604-work13-daily-reading')
+  if (!index.includes('app-v208.js?v=605-work13-spread-reading')
+    || !index.includes('cosmic-spread-reading-v605.css?v=605-work13-spread-reading')
+    || !index.includes('id="divinaCosmicSpreadReadingV605"')
     || !index.includes('cosmic-daily-reading-v604.css?v=604-work13-daily-reading')
     || !index.includes('id="divinaCosmicDailyReadingV604"')
     || !index.includes('cosmos-reality-resonance-v603.css?v=603-work13-resonance')
@@ -146,6 +152,12 @@ const validateCore = async responses => {
     || !app.includes("stage:'leitura-cosmica-em-camadas-carta-do-dia'")) {
     throw new Error('work13-app-daily-reading-mismatch');
   }
+  if (!app.includes("cosmic-spread-reading-v605.js?v=605-work13-spread-reading")
+    || !app.includes('createCosmicSpreadReadingV605()')
+    || !app.includes('divinaWork13Macro5V605')
+    || !app.includes("stage:'cartas-conversam-sintese-em-camadas'")) {
+    throw new Error('work13-app-spread-reading-mismatch');
+  }
   if (!contextMemory?.includes('COSMOS_CONTEXT_MEMORY_CONTRACT_V602')
     || !contextMemory.includes("model:'local-session-route-metadata-only'")
     || !contextMemory.includes('maximumSuggestedSteps:1')
@@ -197,6 +209,31 @@ const validateCore = async responses => {
     || !dailyReadingStyles.includes('@media(max-width:430px)')
     || !dailyReadingStyles.includes('@media(prefers-reduced-motion:reduce)')) {
     throw new Error('work13-daily-reading-styles-missing');
+  }
+  if (!spreadReading?.includes('COSMIC_SPREAD_READING_CONTRACT_V605')
+    || !spreadReading.includes("route:'spreads'")
+    || !spreadReading.includes("sequence:Object.freeze(['revealed-card','silence','one-sentence-essence','cards-in-conversation','one-sentence-synthesis','depth-on-explicit-request'])")
+    || !spreadReading.includes('maximumConversationVoices:3')
+    || !spreadReading.includes('maximumVisibleSynthesisSentences:1')
+    || !spreadReading.includes('depthRequiresExplicitGesture:true')
+    || !spreadReading.includes('methodsPreserved:15')
+    || !spreadReading.includes('royalTableCardsPreserved:78')
+    || !spreadReading.includes('tarotFreeAutomaticMeanings:false')
+    || !spreadReading.includes('changesCardSelection:false')
+    || !spreadReading.includes('automaticWhitSpeech:false')
+    || !spreadReading.includes('privateContentReads:0')
+    || !spreadReading.includes('questionReads:0')
+    || !spreadReading.includes('unrevealedCardReads:0')
+    || !spreadReading.includes('permanentAnimationLoops:0')) {
+    throw new Error('work13-spread-reading-contract-missing');
+  }
+  if (!spreadReadingStyles?.includes('[data-cosmic-spread-reading="v605"]')
+    || !spreadReadingStyles.includes('[data-cosmic-spread-phase="silence"]')
+    || !spreadReadingStyles.includes('[data-cosmic-spread-synthesis="v605"]')
+    || !spreadReadingStyles.includes('.db605-depth-call')
+    || !spreadReadingStyles.includes('@media(max-width:430px)')
+    || !spreadReadingStyles.includes('@media(prefers-reduced-motion:reduce)')) {
+    throw new Error('work13-spread-reading-styles-missing');
   }
   if (!finalContinuity?.includes('FINAL_CONTINUITY_CONTRACT_V598')
     || !finalContinuity.includes("homeSingleTap:'call-intentions'")
@@ -340,6 +377,7 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK13_CONTEXT_ACTIVE', version:VERSION, contextVersion:602, base:600 });
         client.postMessage({ type:'DIVINA_WORK13_RESONANCE_ACTIVE', version:VERSION, resonanceVersion:603, contextVersion:602, base:600 });
         client.postMessage({ type:'DIVINA_WORK13_DAILY_READING_ACTIVE', version:VERSION, dailyReadingVersion:604, ritualVersion:595, base:600 });
+        client.postMessage({ type:'DIVINA_WORK13_SPREAD_READING_ACTIVE', version:VERSION, spreadReadingVersion:605, dailyReadingVersion:604, spreadMethods:15, base:600 });
         client.postMessage({ type:'DIVINA_RELEASE_READY', version:VERSION });
       } catch {}
     }
