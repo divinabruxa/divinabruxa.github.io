@@ -1,0 +1,36 @@
+# DIVINA BRUXA — WORK12 V594
+# MACROETAPA 6 DE 10 — WHIT, PRESENÇA VIVA
+# BASE INSTALADA: V593 / commit b9b8886
+#
+# SHA-256 DOS ARQUIVOS ENTREGUES
+
+e6b985573c3fb96c33cae28a83e80d977c9bc9cdd3bdabed21c192a1170fd628  app-v208.js
+77516288edc4199b2021fbf4ac1b4727d4b363f7456233f40b06b6ddf5618416  index.html
+d41d40ba9d3f0fd4d2f928306eea43140db02780aba9645bcd13f3ff0e94c096  sw.js
+8572a154f2ec4a35089de489b5dc4472d2cebc17c219b991d290ba8ab1833fc0  whit-living-presence-v594.js
+a7c4d88d31240e8e1ada0a428d4d34ba48e81e95c1655464f812c68600d10409  00-INSTALE-V594-WORK12-MACROETAPA-6-WHIT-PRESENCA-VIVA.txt
+444361519cff72417f9bf9d5de7e580e0702f20482566c6d2ba439a61f122d25  RELATORIO-WORK12-V594-MACROETAPA-6-WHIT-PRESENCA-VIVA.md
+9dc6eda23ffd0ed420df116b4cae72ef3700c4df8349f99532c539fc5932476b  MANIFESTO-WORK12-V594-MACROETAPA-6.json
+6f88ac0397ef57b6798257baf4d893a1856912d8e34d9d728c62d24027922011  qa-work12-v594-whit-presenca-viva.mjs
+017b42a48eca3090da1b817b237746be107024b7649629a37b9175b3eade669a  qa-work12-v594-whit-runtime.mjs
+682a8c279a85bbc2cde2af35266741165129479bf8fd1b25e3359b058879b0aa  qa-work12-v594-service-worker-runtime.mjs
+528fdee2ba55c72e6c83b4a98d885e434ede0af022cfc34581108be2099cc684  qa-work12-v594-boot-runtime.mjs
+
+#
+# ARQUIVOS DE PRODUÇÃO ALTERADOS: 3
+# ARQUIVOS DE PRODUÇÃO NOVOS: 1
+# ARQUIVOS NOVOS DE DOCUMENTAÇÃO E QA: 8
+# TOTAL NO ZIP PLANO: 12
+#
+# QA APROVADO
+# - V594 estrutural, contratos, privacidade e conteúdo protegido: 187/187
+# - V594 presença, silêncio e contexto: 34/34
+# - V594 service worker atômico: 97/97
+# - V594 boot recuperável: 8/8
+# - V593 SOPRO e menu vivo: 45/45
+# - V592 histórico coordenado: 33/33
+# - V591 Orbe persistente: 41/41
+# - V590 Universo Vivo: 33/33
+# - V586 balões mágicos: 35/35
+# - V585 linguagem das realidades: 21/21
+# - TOTAL: 534/534

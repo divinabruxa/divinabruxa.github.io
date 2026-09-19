@@ -1,0 +1,99 @@
+{
+  "project": "Divina Bruxa",
+  "work": "WORK12",
+  "release": "V594",
+  "base": {
+    "release": "V593",
+    "commit": "b9b8886"
+  },
+  "macroStage": {
+    "number": 6,
+    "total": 10,
+    "slug": "whit-presenca-viva",
+    "title": "Whit, Presença Viva"
+  },
+  "law": "one-orb-one-universe-one-physics-one-presence",
+  "experience": {
+    "ordinaryTouchSpeech": false,
+    "deliberateInvitationPreserved": true,
+    "presenceModel": "timing-context-silence",
+    "residence": "canonical-orb",
+    "maximumContextualOffersPerSession": 2,
+    "maximumContextualOffersPerRoute": 1,
+    "eligibleRoutes": [
+      "spreads",
+      "library",
+      "school",
+      "skins",
+      "music",
+      "videos"
+    ],
+    "automaticSilenceRoutes": [
+      "home",
+      "tarot",
+      "daily",
+      "journal",
+      "ai",
+      "consultations",
+      "store",
+      "subscriptions",
+      "login",
+      "notifications",
+      "admin"
+    ],
+    "travelPolicy": "absolute-silence",
+    "menuPolicy": "absolute-silence"
+  },
+  "safety": {
+    "privateContentReads": 0,
+    "formFieldReads": 0,
+    "journalBodyReads": 0,
+    "emotionInference": false,
+    "emotionalSalesPressure": false,
+    "storageReads": 0,
+    "storageWrites": 0,
+    "modelCalls": 0,
+    "apiCalls": 0
+  },
+  "performance": {
+    "newDomNodes": 0,
+    "newCanvases": 0,
+    "newRenderers": 0,
+    "newAnimationLoops": 0,
+    "newMutationObservers": 0,
+    "deferredTimersMaximum": 1,
+    "iphoneFirst": true
+  },
+  "production": {
+    "replaced": [
+      "app-v208.js",
+      "index.html",
+      "sw.js"
+    ],
+    "added": [
+      "whit-living-presence-v594.js"
+    ]
+  },
+  "qa": {
+    "state": "PASS",
+    "passed": 534,
+    "failed": 0,
+    "suites": [
+      "qa-work12-v594-whit-presenca-viva.mjs",
+      "qa-work12-v594-whit-runtime.mjs",
+      "qa-work12-v594-service-worker-runtime.mjs",
+      "qa-work12-v594-boot-runtime.mjs",
+      "qa-work12-v593-menu-runtime.mjs",
+      "qa-work12-v592-history-runtime.mjs",
+      "qa-work12-v591-orbe-runtime.mjs",
+      "qa-work12-v590-universe-runtime.mjs",
+      "qa-v586-bubble-runtime.mjs",
+      "qa-v585-language-runtime.mjs"
+    ]
+  },
+  "installation": {
+    "shape": "flat-root-overlay",
+    "deleteExistingFiles": false,
+    "atomicUpload": true
+  }
+}

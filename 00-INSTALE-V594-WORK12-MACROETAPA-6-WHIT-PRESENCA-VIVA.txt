@@ -1,0 +1,73 @@
+DIVINA BRUXA — WORK12
+MACROETAPA 6 DE 10 — WHIT, PRESENÇA VIVA
+ENTREGA V594
+
+BASE OBRIGATÓRIA
+Esta entrega continua diretamente a V593 já instalada.
+Não apague nenhum outro arquivo do projeto.
+
+COMO INSTALAR
+1. Abra a raiz do repositório da Divina Bruxa.
+2. Extraia o ZIP diretamente nessa raiz, sem criar uma pasta interna.
+3. Confirme a substituição destes 3 arquivos de produção:
+   - app-v208.js
+   - index.html
+   - sw.js
+4. Confirme a inclusão deste novo núcleo:
+   - whit-living-presence-v594.js
+5. Envie todos os arquivos extraídos em uma única atualização.
+6. Aguarde a publicação e feche/reabra o site ou o app instalado no iPhone.
+
+O QUE NASCE NESTA ETAPA
+- Whit passa a viver como timing dentro da única Orbe canônica.
+- Toque comum não abre mais fala da Whit.
+- Segurar a Orbe continua sendo o convite deliberado para encontrá-la.
+- Uma pausa real pode gerar um único sopro contextual usando o balão existente.
+- A oferta contextual é rara: no máximo duas por sessão e uma por realidade.
+- Viagem, menu, Home e movimento da pessoa são silêncio absoluto.
+- Nenhum corpo, canvas, renderer, animação ou loop novo foi criado.
+
+ONDE WHIT PODE OFERECER UM SOPRO
+- Tiragens
+- Biblioteca
+- Escola
+- Skins
+- Música
+- Vídeos
+
+ONDE WHIT PERMANECE EM SILÊNCIO AUTOMÁTICO
+- Home
+- Tarot Livre
+- Carta do Dia
+- Diário
+- Whit / conversa
+- Consultas
+- Loja
+- Premium
+- Conta
+- Notificações
+- Central
+
+GARANTIAS
+- Base V593 preservada.
+- Uma Orbe, um canvas, um renderer e uma física.
+- Nenhum teleporte, pisca ou cópia da Orbe.
+- SOPRO continua com no máximo duas intenções.
+- Tarot Livre e Carta do Dia não foram alterados.
+- Whit não lê campos, Diário, cartas, emoções ou conteúdo privado.
+- Nenhuma chamada de IA, API ou armazenamento foi adicionada.
+- Nenhuma emoção é usada para vender.
+- Efeitos continuam pausados durante qualquer viagem.
+- 534 verificações aprovadas nesta entrega.
+
+ARQUIVOS DE QA E DOCUMENTAÇÃO
+Os arquivos iniciados por qa-, o relatório, o manifesto e os hashes são
+evidências da entrega. Eles não substituem nenhum núcleo antigo.
+
+SINAL DE INSTALAÇÃO CORRETA
+Um toque comum na Orbe produz presença e movimento, mas não abre texto da Whit.
+Ao manter pressionado, o convite deliberado continua disponível. Só existe uma
+Orbe e a Home permanece limpa.
+
+Toque. Resposta. Silêncio.
+

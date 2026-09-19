@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — WORK12 · MACROETAPA 5 · MENU LENDÁRIO V593
-   Fundação, Universo, Orbe e navegação V592 permanecem soberanos. A V593
-   dissolve a grade e revela no máximo duas intenções vivas por sopro. */
+/* DIVINA BRUXA — WORK12 · MACROETAPA 6 · WHIT PRESENÇA VIVA V594
+   Fundação, Universo, Orbe, navegação e SOPRO V593 permanecem soberanos.
+   Whit habita a única Orbe como timing: convite deliberado, contexto e silêncio. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -58,6 +58,7 @@ import { createPageDesignSupremeV560 } from './page-design-supreme-v560.js?v=560
 import { createRealityIntentionLanguageV585 } from './reality-intention-language-v585.js?v=585';
 import { createMagicalBubbleSystemV586 } from './magical-bubble-system-v586.js?v=586';
 import { createWork12FoundationV589 } from './work12-foundation-v589.js?v=592-work12-navigation';
+import { createWhitLivingPresenceV594 } from './whit-living-presence-v594.js?v=594-work12-whit';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -529,6 +530,19 @@ work12Foundation = safely('WORK12 · Navegação Coordenada V592', () =>
   })
 );
 
+// Whit não recebe outro corpo nem outro motor visual. A V594 governa timing e
+// silêncio sobre os núcleos existentes: toque comum não abre fala, convite
+// deliberado continua vivo e só uma pausa contextual rara pode gerar um sopro.
+const whitLivingPresence = safely('WORK12 · Whit Presença Viva V594', () =>
+  createWhitLivingPresenceV594({
+    soul:whitOrbSoul,
+    whit:whitSupreme,
+    bubbles:magicalBubbles,
+    foundation:work12Foundation,
+    governor:messageGovernor
+  })
+);
+
 // A V561 se conecta apenas a eventos e ações explícitas. O Diário continua
 // privado; analytics só cria identificador pseudônimo após opt-in registrado.
 const ethicalReturn = safely('Retorno Ético e Conteúdo Diário V561', () =>
@@ -580,6 +594,11 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK12_WHIT_ACTIVE') {
+    document.documentElement.dataset.work12WhitWorker = `v${event.data.version || 594}`;
+    work12Foundation?.audit?.('whit-worker-active');
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK12_MENU_ACTIVE') {
     document.documentElement.dataset.work12MenuWorker = `v${event.data.version || 593}`;
     work12Foundation?.audit?.('menu-worker-active');
@@ -619,14 +638,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v593-work12-app';
+  window.__divinaSWBootstrap = 'v594-work12-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=593', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=594', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v593';
+        document.documentElement.dataset.releaseEpoch = 'v594';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] WORK12 V593 registrado');
+        console.info('[Divina] WORK12 V594 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -671,6 +690,7 @@ window.orbe = {
   bubbles:magicalBubbles,
   work12:work12Foundation,
   navigation:work12Foundation,
+  whitLiving:whitLivingPresence,
   returnGarden:ethicalReturn,
   qaLaunch:qaSupremeLaunch,
   observatory:null,
@@ -1130,6 +1150,62 @@ window.divinaWork12Macro5V593 = Object.freeze({
   }
 });
 window.divinaFluidezSupremaV593 = window.divinaWork12Macro5V593;
+document.documentElement.dataset.work12Macro = '6-whit-presenca-viva';
+document.documentElement.dataset.work12Whit = 'v594';
+document.documentElement.dataset.work12Presence = 'silent-contextual-v594';
+window.divinaWork12Macro6V594 = Object.freeze({
+  version:594,
+  base:'V593',
+  work:'WORK12',
+  stage:'whit-presenca-viva',
+  presence:whitLivingPresence,
+  soul:whitOrbSoul,
+  orb:supremeOrb,
+  coordinator:work12Foundation,
+  status:() => {
+    const presence = whitLivingPresence?.status?.() || null;
+    const soul = whitOrbSoul?.status?.() || null;
+    const orb = supremeOrb?.snapshot?.() || null;
+    const journey = orbIOSJourney?.status?.() || null;
+    return Object.freeze({
+      release:'V594',
+      macroStage:'6-of-10',
+      law:'one-orb-one-universe-one-physics-one-presence',
+      presence,
+      soul,
+      orb,
+      journey,
+      whitLivesInsideCanonicalOrb:presence?.residence === 'canonical-orb' && soul?.canonicalOrbOnly === true,
+      ordinaryTouchSpeech:false,
+      deliberateInvitationPreserved:true,
+      silenceIsPresence:true,
+      maximumContextualOffersPerSession:presence?.maximumContextualOffersPerSession || 2,
+      onePhysicalOrb:orb?.oneLivingOrb === true,
+      sameEntity:orb?.entityPreserved === true,
+      sameRenderer:soul?.sameRenderer === true,
+      sameMotionClock:soul?.sameMotionClock === true,
+      travelerCopies:Number(journey?.travelerCopies || 0),
+      teleport:journey?.teleportFallback === true,
+      flicker:journey?.flicker === true,
+      travelIsAbsoluteSilence:true,
+      helpBeforeSale:true,
+      emotionalSalesPressure:false,
+      privateContentReads:0,
+      formFieldReads:0,
+      storageReads:0,
+      apiCalls:0,
+      iphoneFirst:true,
+      tarotProtected:true,
+      dailyProtected:true,
+      homeSilent:true,
+      newWhitBodies:0,
+      newCanvases:0,
+      newAnimationLoops:0,
+      newMutationObservers:0
+    });
+  }
+});
+window.divinaFluidezSupremaV594 = window.divinaWork12Macro6V594;
 const skinPerformanceCore = safely('Skins, desempenho e acabamento V518', () =>
   installSkinPerformanceCoreV518()
 );
