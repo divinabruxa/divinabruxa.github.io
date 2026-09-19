@@ -1,0 +1,155 @@
+{
+  "release": "V589",
+  "base": {
+    "experience": "V586",
+    "recovery": "V588",
+    "repositoryCommit": "927496ca55d77c7c2fe2ca76e654c6807ed3f282"
+  },
+  "work": "WORK12 — Divina Bruxa, Universo Vivo",
+  "macroStage": {
+    "number": 1,
+    "total": 10,
+    "name": "Fundação e Verdade"
+  },
+  "installation": {
+    "type": "flat-incremental-replacement",
+    "requiredBase": "V586 + recovery V588",
+    "productionFiles": [
+      "app-v208.js",
+      "cosmic-visual-atlas-v1.js",
+      "index.html",
+      "sw.js",
+      "work12-foundation-v589.js"
+    ],
+    "auditFiles": [
+      "qa-work12-v589-foundation.mjs",
+      "qa-work12-v589-runtime.mjs",
+      "qa-work12-v589-service-worker-runtime.mjs",
+      "00-INSTALE-V589-WORK12-MACROETAPA-1-FUNDACAO-VERDADE.txt",
+      "RELATORIO-V589-WORK12-MACROETAPA-1-FUNDACAO-VERDADE.txt",
+      "MANIFESTO-V589-WORK12-MACROETAPA-1-FUNDACAO-VERDADE.json"
+    ]
+  },
+  "constitution": {
+    "law": "one-orb-one-universe-one-physics-one-presence",
+    "ritual": ["touch", "response", "silence"],
+    "states": ["REST", "AWAKEN", "OFFER", "ACCEPT", "QUIET", "DEPART", "TRAVEL", "ARRIVE", "REVEAL"],
+    "axes": {
+      "horizontal": "travel-between-realities",
+      "vertical": "immersion",
+      "depth": "discovery"
+    },
+    "interfaceModel": "coordinate-reveal",
+    "conceptualPages": false,
+    "maximumSimultaneousIntentions": 2,
+    "duplicateOrb": false,
+    "teleport": false,
+    "dryScreenSwap": false,
+    "automaticWhitEveryTouch": false,
+    "silenceIsPresence": true
+  },
+  "foundation": {
+    "centralFile": "work12-foundation-v589.js",
+    "singleStateAuthority": true,
+    "singleNavigationAuthority": true,
+    "intentionBeforePreparation": true,
+    "intentionBeforeDestination": true,
+    "existingOrbEngineDelegated": true,
+    "existingJourneyEngineDelegated": true,
+    "outOfOrderSemanticRecovery": true,
+    "timelineEntriesInMemory": 32,
+    "violationEntriesInMemory": 16,
+    "persistentMemoryAdded": false
+  },
+  "boot": {
+    "singleGuardianOnV589": true,
+    "slowNoticeMs": 3200,
+    "hardFailOpenMs": 4500,
+    "manualFailOpen": true,
+    "reloadLoop": false,
+    "legacyV588PartialInstallFallback": true
+  },
+  "serviceWorker": {
+    "version": 589,
+    "atomicCoreAssets": 5,
+    "validatesIndexVersion": true,
+    "validatesAppWiring": true,
+    "validatesFoundationContract": true,
+    "codeStrategy": "network-first-cache-fallback",
+    "navigationFallback": "validated-index",
+    "imageCatalogRuntimeCache": false,
+    "deletesOldCachesAfterActivation": true,
+    "skipWaitingBeforeValidation": false
+  },
+  "performance": {
+    "newVisualEffects": 0,
+    "newCanvases": 0,
+    "newRenderers": 0,
+    "newAnimationLoops": 0,
+    "requestAnimationFrames": 0,
+    "intervals": 0,
+    "mutationObservers": 0,
+    "privateReads": 0,
+    "storageReads": 0,
+    "storageWrites": 0,
+    "apiCalls": 0
+  },
+  "protected": {
+    "sha256ProtectedFiles": 28,
+    "hashAuthority": "qa-work12-v589-foundation.mjs",
+    "tarotLivre": true,
+    "cartaDoDia": true,
+    "tarotSession": true,
+    "tarotData": true,
+    "dailyPolicies": true,
+    "livingUniverseV581": true,
+    "livingOrbV582": true,
+    "coordinateJourneyV583": true,
+    "legendaryMenuV584": true,
+    "livingLanguageV585": true,
+    "magicalBubblesV586": true,
+    "whitLivesInCanonicalOrb": true,
+    "realBillingEnabled": false
+  },
+  "liveBaseAudit": {
+    "date": "2026-09-19",
+    "url": "https://divinabruxa.com.br/",
+    "observedExperienceRelease": "V586",
+    "observedRecoveryRelease": "V588",
+    "appQuery": "app-v208.js?v=586-baloes-vivos",
+    "canonicalOrbCount": 1,
+    "livingOrbCount": 1,
+    "routesExercised": ["home", "tarot", "home", "daily"],
+    "returnHomeVerified": true,
+    "journeySettled": true,
+    "existingCanvasCount": 22,
+    "existingVisibleHomeCanvases": 4,
+    "newCanvasCountV589": 0,
+    "siteOriginConsoleErrors": 0,
+    "expectedRecoveryWarnings": 1
+  },
+  "qa": {
+    "foundation": { "passed": 105, "total": 105, "state": "PASS" },
+    "runtime": { "passed": 56, "total": 56, "state": "PASS" },
+    "serviceWorkerRuntime": { "passed": 27, "total": 27, "state": "PASS" },
+    "orbNavigationRegression": { "passed": 8, "total": 8, "state": "PASS" },
+    "languageRuntimeRegression": { "passed": 21, "total": 21, "state": "PASS" },
+    "bubbleRuntimeRegression": { "passed": 35, "total": 35, "state": "PASS" },
+    "loaderRegression": { "worldsCovered": 13, "state": "PASS" },
+    "productionImports": { "checked": 64, "missing": 0, "state": "PASS" },
+    "aggregate": { "passed": 252, "total": 252, "state": "PASS" },
+    "p0": 0,
+    "p1": 0
+  },
+  "payloadSha256": {
+    "app-v208.js": "2a6ce795e071f0e38f0af95c327bc104762aa8667d7f322fb1dd6b6f99f34b15",
+    "cosmic-visual-atlas-v1.js": "f6b006538788961cd23e41175c02d0aa11d4d166604f29289cb46e7d743f3b9e",
+    "index.html": "b9ef43d2ea5f766bd68f5924231b36d6f73d1bb51f7bfea278d94b6fa2a3404b",
+    "sw.js": "793828799249fdb31d17b608e2c16786d8dbd33fb40be12ea09d542b335a67fa",
+    "work12-foundation-v589.js": "3a9bef9f0295bd4ba0bdc085877ed460dc07c804f8a0df1ef9b9271cd2590806",
+    "qa-work12-v589-foundation.mjs": "f3ebd663858a746fb65c198af231f6ed603c6d69e2706fbf0e96a6c7216ed08c",
+    "qa-work12-v589-runtime.mjs": "86d19e93a883716a40c22b366d8c6dcc23af223b9f51996b85010a072ba9d401",
+    "qa-work12-v589-service-worker-runtime.mjs": "61f0850e504df5a9c1f50008d92f888a409e076e64b38e6278d527579f484e54"
+  },
+  "nextMacroStage": "WORK12 2/10 — Universo Vivo Global"
+}

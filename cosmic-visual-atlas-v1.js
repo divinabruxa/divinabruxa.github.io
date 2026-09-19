@@ -1,7 +1,7 @@
-/* DIVINA BRUXA — HOME FAIL-OPEN V588
-   Substitui cosmic-visual-atlas-v1.js.
-   Mantém o atlas legado aposentado e garante que a Home nunca fique presa
-   eternamente atrás do loader.
+/* DIVINA BRUXA — WORK12 · PONTE DE RECUPERAÇÃO V589
+   Mantém o atlas legado aposentado. Na V589 o único guardião de boot vive no
+   shell do WORK12; o recovery V588 só permanece como proteção de instalação
+   parcial enquanto os arquivos novos ainda não chegaram juntos.
 */
 
 document.documentElement.dataset.legacyCosmicAtlas = 'retired-v300';
@@ -10,6 +10,12 @@ document.dispatchEvent(new CustomEvent('divina:legacy-atlas-retired', { detail:{
 (() => {
   const VERSION = 'v588';
   const root = document.documentElement;
+  const managedByWork12 = document.querySelector('meta[name="divina-work12"][content="V589"]');
+  if (managedByWork12) {
+    root.dataset.homeRecovery = 'delegated-work12-v589';
+    root.dataset.homeRecoveryReason = 'single-boot-guardian';
+    return;
+  }
   let opened = false;
   let timer = 0;
 

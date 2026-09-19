@@ -1,6 +1,6 @@
-/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · BALÕES MÁGICOS VIVOS V586
-   A tela revela coordenadas do mesmo universo. Um único balão físico oferece
-   intenções raras e abre profundidade; Home, viagem, Orbe e silêncio mandam. */
+/* DIVINA BRUXA — WORK12 · FUNDAÇÃO E VERDADE V589
+   Uma Orbe, um universo, uma física, uma presença. A V589 não acrescenta
+   espetáculo: reúne a experiência existente sob uma única fonte de verdade. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -57,6 +57,7 @@ import { createSecurityPrivacyCoreV547 } from './security-privacy-core-v547.js?v
 import { createPageDesignSupremeV560 } from './page-design-supreme-v560.js?v=560';
 import { createRealityIntentionLanguageV585 } from './reality-intention-language-v585.js?v=585';
 import { createMagicalBubbleSystemV586 } from './magical-bubble-system-v586.js?v=586';
+import { createWork12FoundationV589 } from './work12-foundation-v589.js?v=589';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -300,7 +301,9 @@ const navigation = createNavigation();
 const navigationGo = navigation.go;
 let supremeOrb = null;
 let pageLoader = null;
+let work12Foundation = null;
 const go = (id, options) => {
+  if (work12Foundation?.navigate) return work12Foundation.navigate(id, options || {});
   pageLoader?.prime?.(id).catch?.(() => {});
   return supremeOrb?.navigate?.(id, options) || navigationGo(id);
 };
@@ -509,6 +512,23 @@ const magicalBubbles = safely('Sistema de Balões Mágicos Vivos V586', () =>
   })
 );
 
+// O WORK12 nasce sem outro renderer, outro canvas ou outro relógio. A partir
+// daqui toda intenção pública atravessa o mesmo condutor e delega a viagem aos
+// motores já aprovados, preservando integralmente Tarot Livre e Carta do Dia.
+const directSupremeNavigateV589 = supremeOrb?.navigate?.bind(supremeOrb);
+work12Foundation = safely('WORK12 · Fundação e Verdade V589', () =>
+  createWork12FoundationV589({
+    orbCore:supremeOrb,
+    universe:livingUniverse,
+    journey:orbIOSJourney,
+    bubbles:magicalBubbles,
+    whit:whitSupreme,
+    messageGovernor,
+    prepare:id => pageLoader?.prime?.(id),
+    navigate:(id, options) => directSupremeNavigateV589?.(id, options) || navigationGo(id)
+  })
+);
+
 // A V561 se conecta apenas a eventos e ações explícitas. O Diário continua
 // privado; analytics só cria identificador pseudônimo após opt-in registrado.
 const ethicalReturn = safely('Retorno Ético e Conteúdo Diário V561', () =>
@@ -560,6 +580,11 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK12_FOUNDATION_ACTIVE') {
+    document.documentElement.dataset.work12Worker = `v${event.data.version || 589}`;
+    work12Foundation?.audit?.('service-worker-active');
+    return;
+  }
   if (event.data?.type === 'DIVINA_RELEASE_READY') {
     document.documentElement.dataset.releaseReady = String(event.data.version || 'unknown');
     reloadForNewReleaseV537(event.data.version);
@@ -573,14 +598,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v586-app';
+  window.__divinaSWBootstrap = 'v589-work12-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=586', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=589', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v586';
+        document.documentElement.dataset.releaseEpoch = 'v589';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] PWA V586 registrado');
+        console.info('[Divina] WORK12 V589 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -622,6 +647,7 @@ window.orbe = {
   design:pageDesignSupreme,
   language:realityIntentionLanguage,
   bubbles:magicalBubbles,
+  work12:work12Foundation,
   returnGarden:ethicalReturn,
   qaLaunch:qaSupremeLaunch,
   observatory:null,
@@ -861,6 +887,32 @@ window.divinaFluidezSupremaV586 = Object.freeze({
       mutationObservers:0
     });
   }
+});
+window.divinaWork12 = work12Foundation;
+window.divinaWork12Macro1V589 = Object.freeze({
+  version:589,
+  base:'V586+V588-recovery',
+  work:'WORK12',
+  stage:'foundation-truth',
+  foundation:work12Foundation,
+  status:() => Object.freeze({
+    release:'V589',
+    macroStage:'1-of-10',
+    law:'one-orb-one-universe-one-physics-one-presence',
+    foundation:work12Foundation?.status?.() || null,
+    onePhysicalOrb:supremeOrb?.snapshot?.().oneLivingOrb === true,
+    oneUniverse:livingUniverse?.status?.().oneUniverseCanvas === true,
+    journey:orbIOSJourney?.status?.() || null,
+    bubbles:magicalBubbles?.status?.() || null,
+    automaticWhitEveryTouch:false,
+    silenceIsPresence:true,
+    tarotProtected:true,
+    dailyProtected:true,
+    newVisualEffects:0,
+    newCanvases:0,
+    newAnimationLoops:0,
+    mutationObservers:0
+  })
 });
 const skinPerformanceCore = safely('Skins, desempenho e acabamento V518', () =>
   installSkinPerformanceCoreV518()
