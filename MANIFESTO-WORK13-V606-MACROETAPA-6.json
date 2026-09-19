@@ -1,0 +1,135 @@
+{
+  "release": "V606",
+  "work": "WORK13",
+  "name": "Cosmos Vivo",
+  "macroStage": "6-of-10",
+  "title": "Whit Viva — Silencio, Utilidade e Timing",
+  "baseRequired": "V605",
+  "baseCommit": "e324a0651b5ac6f0d59224a0c565d4e84e484ff5",
+  "frozenBase": "WORK12-V600",
+  "law": "one-orb-one-universe-one-presence-one-journey",
+  "installation": "flat-root-overlay",
+  "packageFiles": 13,
+  "production": {
+    "replaced": [
+      "app-v208.js",
+      "index.html",
+      "sw.js"
+    ],
+    "added": [
+      "whit-silence-timing-v606.js"
+    ],
+    "newCssFiles": 0,
+    "newDomNodes": 0
+  },
+  "whitTiming": {
+    "residence": "canonical-orb",
+    "defaultResponse": "silence",
+    "structuralResponse": "nonverbal-through-existing-orb-soul",
+    "visibleSpeechPolicy": "explicit-invitation-or-consent-only",
+    "contextualOfferAuthority": "V594-qualified-pause-unchanged",
+    "maximumContextualOffersPerSession": 2,
+    "ordinaryTouchSpeech": false,
+    "routeArrivalSpeech": false,
+    "automaticRevealSpeech": false,
+    "automaticCompletionSpeech": false,
+    "automaticSkinSpeech": false,
+    "automaticLegacyWhisperSpeech": false,
+    "travelSilence": "absolute",
+    "menuSilence": "absolute",
+    "hiddenPageSilence": "absolute",
+    "deliberateInvitationPreserved": true,
+    "consentMessagesPreserved": true,
+    "contextMemoryTriggersWhit": false,
+    "patchedRuntimeMethods": 2,
+    "patchesReversibleOnDestroy": true
+  },
+  "explicitSignalsPreserved": [
+    "library-whit-invite",
+    "spread-whit-invite",
+    "school-whit-invite",
+    "journal-whit-invite",
+    "consent-required",
+    "consent-changed"
+  ],
+  "structuralSignalsKeptSilent": [
+    "world-ready",
+    "library-card-open",
+    "spread-reveal",
+    "school-complete",
+    "daily-save",
+    "account-state",
+    "skin-change",
+    "notification-choice",
+    "legacy-whisper",
+    "whit-supreme-guidance"
+  ],
+  "privacy": {
+    "publicStructuralMetadataOnly": true,
+    "privateContentReads": 0,
+    "formValueReads": 0,
+    "journalBodyReads": 0,
+    "questionReads": 0,
+    "cardIdentityReads": 0,
+    "emotionInference": false,
+    "storageReads": 0,
+    "storageWrites": 0,
+    "networkCalls": 0,
+    "modelCalls": 0
+  },
+  "performance": {
+    "newCanvases": 0,
+    "newRenderers": 0,
+    "newPermanentAnimationLoops": 0,
+    "newMutationObservers": 0,
+    "newDeferredTimers": 0,
+    "newStylesheets": 0,
+    "eventDrivenOnly": true,
+    "iphoneFirst": true
+  },
+  "protected": {
+    "work12RuntimeFilesVerifiedUnchanged": 24,
+    "whitCoreFilesVerifiedUnchanged": 10,
+    "work13V602ContextMemoryUnchanged": true,
+    "work13V603RealityResonanceUnchanged": true,
+    "work13V604DailyReadingUnchanged": true,
+    "work13V605SpreadReadingUnchanged": true,
+    "work12WhitV594Unchanged": true,
+    "messageGovernorV580Unchanged": true,
+    "work12Snapshot": "SNAPSHOT-WORK12-V600-PROTEGIDO.zip",
+    "work12SnapshotSha256": "871a9118fa58eb1f1dd118110bda21a68f071ef3d00cb56b8ae6109aa1ac816d",
+    "canonicalOrbs": 1,
+    "canonicalCanvases": 1,
+    "tarotFreeChanged": false,
+    "dailyReadingChanged": false,
+    "spreadReadingChanged": false,
+    "pricesChanged": false,
+    "realBillingAuthorized": false
+  },
+  "hashes": {
+    "app-v208.js": "9a966e65a0a1659338917dbbcffbd13637055bbfdb33da7c8801eb876caf441f",
+    "index.html": "85c22095f88dbf50f0d055312278ed6d13b6c37785b7bed942edc05a28f83fb3",
+    "sw.js": "303c24bf992659ff750146cc842eb4294e0e78f6b268dd2e4a8e090f7d7d7706",
+    "whit-silence-timing-v606.js": "db625f3495efd65109144b780b8ea47b2177a4996ccc7e1fb215b27eff946e2a"
+  },
+  "quality": {
+    "work13V606ChecksPassed": 551,
+    "work13V605CompatibleRuntimeChecksPassed": 598,
+    "work13V604CompatibleRuntimeChecksPassed": 371,
+    "work13V603CompatibleRuntimeChecksPassed": 128,
+    "work13V602CompatibleRuntimeChecksPassed": 63,
+    "compatibleWork12RegressionChecksPassed": 320,
+    "totalChecksPassed": 2031,
+    "failed": 0,
+    "serviceWorkerCoreAssets": 34,
+    "cleanOverlayOnV605": "PASS"
+  },
+  "verificationFiles": [
+    "qa-work13-v606-whit-silence-timing.mjs",
+    "qa-work13-v606-whit-runtime.mjs",
+    "qa-work13-v606-event-runtime.mjs",
+    "qa-work13-v606-service-worker-runtime.mjs",
+    "qa-work13-v606-boot-runtime.mjs"
+  ],
+  "nextAuthorizedStage": "WORK13-macro-7-library-school-journal-living-language"
+}

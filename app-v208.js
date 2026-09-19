@@ -1,7 +1,7 @@
-/* DIVINA BRUXA — WORK13 · COSMOS VIVO · CARTAS QUE CONVERSAM V605
-   O WORK12 V600 e as etapas V602–V604 permanecem protegidos. As tiragens agora
-   respiram por camadas e encontram uma sintese curta, sem tocar no Tarot Livre,
-   na pergunta privada, no sorteio ou na unica Orbe soberana. */
+/* DIVINA BRUXA — WORK13 · COSMOS VIVO · WHIT SILENCIO E TIMING V606
+   O WORK12 V600 e as etapas V602–V605 permanecem protegidos. Sinais publicos
+   continuam vivos na unica Orbe, mas nao viram fala automatica: Whit aparece
+   somente por convite, consentimento ou pausa contextual qualificada. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -68,6 +68,7 @@ import { createCosmosContextMemoryV602 } from './cosmos-context-memory-v602.js?v
 import { createCosmosRealityResonanceV603 } from './cosmos-reality-resonance-v603.js?v=603-work13-resonance';
 import { createCosmicDailyReadingV604 } from './cosmic-daily-reading-v604.js?v=604-work13-daily-reading';
 import { createCosmicSpreadReadingV605 } from './cosmic-spread-reading-v605.js?v=605-work13-spread-reading';
+import { createWhitSilenceTimingV606 } from './whit-silence-timing-v606.js?v=606-work13-whit-timing';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -632,6 +633,10 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK13_WHIT_TIMING_ACTIVE') {
+    document.documentElement.dataset.work13WhitTimingWorker = `v${event.data.whitTimingVersion || event.data.version || 606}`;
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK13_SPREAD_READING_ACTIVE') {
     document.documentElement.dataset.work13SpreadReadingWorker = `v${event.data.spreadReadingVersion || event.data.version || 605}`;
     return;
@@ -712,14 +717,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v605-work13-spread-reading-app';
+  window.__divinaSWBootstrap = 'v606-work13-whit-timing-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=605', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=606', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v605';
+        document.documentElement.dataset.releaseEpoch = 'v606';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] WORK13 V605 registrado sobre V604 e WORK12 V600 protegidos');
+        console.info('[Divina] WORK13 V606 registrado sobre V605 e WORK12 V600 protegidos');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -1833,7 +1838,100 @@ window.divinaWork13Macro5V605 = Object.freeze({
   }
 });
 window.divinaCosmosVivoV605 = window.divinaWork13Macro5V605;
-window.divinaCosmosVivo = window.divinaWork13Macro5V605;
+
+// A V606 nao cria outro corpo, texto ou motor para a Whit. Ela afina os
+// nucleos existentes: eventos estruturais continuam chegando ao sistema
+// nervoso e a Orbe pode responder sem palavras, mas nenhuma revelacao, aula,
+// skin ou sussurro legado vira fala visivel sem convite explicito.
+const whitSilenceTiming = safely('WORK13 · Whit Silencio, Utilidade e Timing V606', () =>
+  createWhitSilenceTimingV606({
+    livingPresence:whitLivingPresence,
+    soul:whitOrbSoul,
+    presence:whitPresence,
+    nervousSystem:whitNerves,
+    signature:whitSignature,
+    supreme:whitSupreme,
+    governor:messageGovernor
+  })
+);
+window.orbe.whitTiming = whitSilenceTiming;
+window.orbe.whitSilence = whitSilenceTiming;
+document.documentElement.dataset.work13 = 'cosmos-vivo';
+document.documentElement.dataset.work13Macro = '6-whit-silence-timing';
+window.divinaWork13Macro6V606 = Object.freeze({
+  version:606,
+  base:'V605-cards-converse-on-WORK12-V600-frozen-by-V601',
+  work:'WORK13',
+  stage:'whit-viva-silencio-utilidade-timing',
+  timing:whitSilenceTiming,
+  livingPresence:whitLivingPresence,
+  soul:whitOrbSoul,
+  spreadReading:cosmicSpreadReading,
+  dailyReading:cosmicDailyReading,
+  contextMemory:cosmosContextMemory,
+  orb:supremeOrb,
+  coordinator:work12Foundation,
+  status:() => {
+    const timing = whitSilenceTiming?.status?.() || null;
+    const timingAudit = whitSilenceTiming?.audit?.() || null;
+    const presence = whitLivingPresence?.status?.() || null;
+    const soul = whitOrbSoul?.status?.() || null;
+    const orb = supremeOrb?.snapshot?.() || null;
+    const journey = orbIOSJourney?.status?.() || null;
+    return Object.freeze({
+      release:'V606',
+      macroStage:'6-of-10',
+      law:'one-orb-one-universe-one-presence-one-journey',
+      timing,
+      timingAudit,
+      presence,
+      soul,
+      orb,
+      journey,
+      residence:'canonical-orb',
+      defaultResponse:'silence',
+      visibleSpeechPolicy:'explicit-invitation-or-consent-only',
+      contextualOfferAuthority:'V594-qualified-pause-unchanged',
+      nonverbalStructuralResponse:true,
+      ordinaryTouchSpeech:false,
+      routeArrivalSpeech:false,
+      automaticRevealSpeech:false,
+      automaticCompletionSpeech:false,
+      automaticSkinSpeech:false,
+      automaticLegacyWhisperSpeech:false,
+      contextMemoryTriggersWhit:false,
+      travelIsAbsoluteSilence:true,
+      menuIsAbsoluteSilence:true,
+      hiddenPageIsAbsoluteSilence:true,
+      deliberateInvitationPreserved:true,
+      consentMessagesPreserved:true,
+      onePhysicalOrb:orb?.oneLivingOrb === true,
+      sameEntity:orb?.entityPreserved === true,
+      sameRenderer:soul?.sameRenderer === true,
+      travelerCopies:Number(journey?.travelerCopies || 0),
+      privateContentReads:0,
+      formValueReads:0,
+      journalBodyReads:0,
+      questionReads:0,
+      cardIdentityReads:0,
+      storageReads:0,
+      storageWrites:0,
+      networkCalls:0,
+      modelCalls:0,
+      newWhitBodies:0,
+      newDomNodes:0,
+      newStylesheets:0,
+      newCanvases:0,
+      newRenderers:0,
+      newAnimationLoops:0,
+      newMutationObservers:0,
+      newDeferredTimers:0,
+      iphoneFirst:true
+    });
+  }
+});
+window.divinaCosmosVivoV606 = window.divinaWork13Macro6V606;
+window.divinaCosmosVivo = window.divinaWork13Macro6V606;
 window.whit = whitCore;
 
 window.divinaWhitV212 = Object.freeze({
@@ -3106,8 +3204,8 @@ const awaken = async () => {
         bootFirst:true,
         release:'V562',
         work12Base:'V600-frozen',
-        work13CosmosVivo:'V605',
-        work13MacroStage:'5-of-10-cards-converse',
+        work13CosmosVivo:'V606',
+        work13MacroStage:'6-of-10-whit-silence-timing',
         contextMemoryModel:'session-route-metadata-only',
         contextMemoryAutomaticNavigation:false,
         contextMemoryAutomaticWhitSpeech:false,
@@ -3128,6 +3226,14 @@ const awaken = async () => {
         cosmicSpreadReadingDepthExplicit:true,
         cosmicSpreadReadingAutomaticWhitSpeech:false,
         cosmicSpreadReadingPrivateContentReads:0,
+        whitTiming:'silence-until-useful',
+        whitVisibleSpeechPolicy:'explicit-invitation-or-consent-only',
+        whitNonverbalStructuralResponse:true,
+        whitAutomaticRevealSpeech:false,
+        whitAutomaticCompletionSpeech:false,
+        whitAutomaticSkinSpeech:false,
+        whitContextMemoryTriggersSpeech:false,
+        whitPrivateContentReads:0,
         supremePlan:'4.0-fluidity-supreme',
         supremePlanMacroStages:14,
         currentMacroStage:'14-of-14',
