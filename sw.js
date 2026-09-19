@@ -1,18 +1,18 @@
-/* DIVINA BRUXA — WORK12 · MACROETAPA 10 · FLUIDEZ SUPREMA FINAL V598
-   Service Worker mínimo, atômico e recuperável. A instalação só assume o
-   portal quando HTML, aplicação, continuidade final, inteligência, câmaras,
+/* DIVINA BRUXA — WORK12 · MACROETAPA 10 · AUDITORIA VIVA V599
+   Correção cirúrgica da Fluidez Suprema Final. A instalação só assume o
+   portal quando HTML, aplicação, continuidade final, auditoria visual,
    rito, navegação, universo e Orbe pertencem ao mesmo corte.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
-const VERSION = 598;
+const VERSION = 599;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work12-v598-final-fluidity';
+const CACHE_NAME = 'divina-bruxa-work12-v599-live-audit';
 const CORE = Object.freeze([
   './index.html',
   './app-v208.js?v=598-work12-final',
   './work12-final-continuity-v598.js?v=598-work12-final',
-  './work12-final-continuity-v598.css?v=598-work12-final',
+  './work12-final-continuity-v598.css?v=599-live-audit',
   './experience-intelligence-v597.js?v=597-work12-intelligence',
   './experience-intelligence-v597.css?v=597-work12-intelligence',
   './reality-chambers-v596.js?v=596-work12-chambers',
@@ -51,7 +51,7 @@ const validateCore = async responses => {
   const index = await responses.get('./index.html')?.clone().text();
   const app = await responses.get('./app-v208.js?v=598-work12-final')?.clone().text();
   const finalContinuity = await responses.get('./work12-final-continuity-v598.js?v=598-work12-final')?.clone().text();
-  const finalStyles = await responses.get('./work12-final-continuity-v598.css?v=598-work12-final')?.clone().text();
+  const finalStyles = await responses.get('./work12-final-continuity-v598.css?v=599-live-audit')?.clone().text();
   const intelligence = await responses.get('./experience-intelligence-v597.js?v=597-work12-intelligence')?.clone().text();
   const intelligenceStyles = await responses.get('./experience-intelligence-v597.css?v=597-work12-intelligence')?.clone().text();
   const chambers = await responses.get('./reality-chambers-v596.js?v=596-work12-chambers')?.clone().text();
@@ -72,9 +72,12 @@ const validateCore = async responses => {
   const renderer = await responses.get('./orb-engine-v208.js?v=591-work12-orb')?.clone().text();
   const journey = await responses.get('./orb-persistent-journey-v565.js?v=583-coordinate-travel')?.clone().text();
   const soul = await responses.get('./whit-orb-soul-bridge-v581.js?v=592-work12-navigation')?.clone().text();
-  if (!index?.includes('name="divina-work12" content="V598"')) throw new Error('work12-index-version-mismatch');
+  if (!index?.includes('name="divina-work12" content="V599"')
+    || !index.includes('name="divina-live-audit" content="V599"')) {
+    throw new Error('work12-index-version-mismatch');
+  }
   if (!index.includes('app-v208.js?v=598-work12-final')
-    || !index.includes('work12-final-continuity-v598.css?v=598-work12-final')
+    || !index.includes('work12-final-continuity-v598.css?v=599-live-audit')
     || !index.includes('experience-intelligence-v597.css?v=597-work12-intelligence')
     || !index.includes('reality-chambers-v596.css?v=596-work12-chambers')
     || !index.includes('reading-ritual-core-v595.css?v=595-work12-ritual')) {
@@ -117,6 +120,11 @@ const validateCore = async responses => {
     throw new Error('work12-final-continuity-contract-missing');
   }
   if (!finalStyles?.includes('body[data-screen="home"] .app-header')
+    || !finalStyles.includes('[data-work12-final-route="home"] body .app-header')
+    || !finalStyles.includes(':not([data-work12-final-route="home"]) body:not([data-screen="home"])')
+    || !finalStyles.includes('#menuBtn.menu-button span::after')
+    || !finalStyles.includes('content:"SOPRO"')
+    || !finalStyles.includes('content:"SILÊNCIO"')
     || !finalStyles.includes('body .magic-dock')
     || !finalStyles.includes('#tarot[data-tarot-world="orbe-os-v517"] .tl517__header')
     || !finalStyles.includes('@media(max-width:430px)')) {

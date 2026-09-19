@@ -1,0 +1,61 @@
+DIVINA BRUXA — WORK12
+MACROETAPA 10 DE 10 — AUDITORIA VIVA
+RELEASE V599
+
+LEI PRESERVADA
+Uma Orbe. Um Universo. Uma física. Uma presença.
+Toque. Resposta. Silêncio. Viagem. Chegada.
+
+COMO INSTALAR
+1. Abra a raiz atual do site, onde a V598 já está instalada.
+2. Envie TODOS os arquivos deste ZIP diretamente para essa raiz.
+3. Autorize a substituição de index.html, sw.js e work12-final-continuity-v598.css.
+4. Não apague nenhuma pasta nem qualquer outro arquivo já existente.
+5. Aguarde o envio terminar por completo antes de abrir o site.
+6. No iPhone, feche e abra novamente o Safari ou o app instalado. O service worker V599 assume a correção de forma atômica.
+
+IMPORTANTE
+- Este ZIP é uma sobreposição plana e depende da V598 já instalada.
+- Não é WORK13. É a correção cirúrgica encontrada na auditoria viva da Macroetapa 10.
+- Nenhum arquivo de comportamento, Orbe, Tarot, Whit, viagem ou conteúdo foi refeito.
+- Não reenvie arquivos antigos: eles continuam preservados.
+
+O QUE A V599 CORRIGE
+- Na primeira abertura da Home, “Sopro” não aparece antes da hora.
+- A Home nasce somente com Universo e a única Orbe.
+- Nas realidades, o texto legado “Menu” deixa de ser percebido: aparece “SOPRO”.
+- Quando o Sopro está aberto, a palavra se torna “SILÊNCIO”.
+- Nenhuma animação, canvas, renderer, timer ou efeito novo foi adicionado.
+
+ARQUIVOS SUBSTITUÍDOS
+- index.html
+- sw.js
+- work12-final-continuity-v598.css
+
+ARQUIVOS NOVOS DE VERIFICAÇÃO E DOCUMENTAÇÃO
+- qa-work12-v599-live-audit.mjs
+- qa-work12-v599-service-worker-runtime.mjs
+- qa-work12-v599-boot-runtime.mjs
+- RELATORIO-WORK12-V599-MACROETAPA-10-AUDITORIA-VIVA.md
+- MANIFESTO-WORK12-V599-MACROETAPA-10.json
+- HASHES-SHA256-WORK12-V599.txt
+
+VERIFICAÇÃO OPCIONAL
+Na raiz do site, execute:
+
+  sha256sum -c HASHES-SHA256-WORK12-V599.txt
+
+Depois, se Node.js estiver disponível:
+
+  node qa-work12-v599-live-audit.mjs
+  node qa-work12-v599-service-worker-runtime.mjs
+  node qa-work12-v599-boot-runtime.mjs
+  node qa-work12-v598-final-runtime.mjs
+
+RESULTADO ESPERADO
+Os três relatórios V599 e o runtime final V598 terminam em PASS: 461 verificações.
+Com 325 regressões funcionais preservadas, a auditoria soma 786 verificações aprovadas.
+
+FIM DA CORREÇÃO DA MACROETAPA 10.
+Home: Universo e Orbe. Realidades: Sopro. Aberto: Silêncio.
+
