@@ -1,15 +1,17 @@
-/* DIVINA BRUXA — WORK12 · MACROETAPA 8 · REALIDADES COMO CÂMARAS V596
+/* DIVINA BRUXA — WORK12 · MACROETAPA 9 · INTELIGÊNCIA DA EXPERIÊNCIA V597
    Service Worker mínimo, atômico e recuperável. A instalação só assume o
    portal quando HTML, aplicação, câmaras, rito, navegação, universo e Orbe pertencem ao corte.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
-const VERSION = 596;
+const VERSION = 597;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work12-v596-reality-chambers';
+const CACHE_NAME = 'divina-bruxa-work12-v597-experience-intelligence';
 const CORE = Object.freeze([
   './index.html',
-  './app-v208.js?v=596-work12-chambers',
+  './app-v208.js?v=597-work12-intelligence',
+  './experience-intelligence-v597.js?v=597-work12-intelligence',
+  './experience-intelligence-v597.css?v=597-work12-intelligence',
   './reality-chambers-v596.js?v=596-work12-chambers',
   './reality-chambers-v596.css?v=596-work12-chambers',
   './school-world-v306.js?v=596-work12-chambers',
@@ -44,7 +46,9 @@ const fetchCore = async path => {
 
 const validateCore = async responses => {
   const index = await responses.get('./index.html')?.clone().text();
-  const app = await responses.get('./app-v208.js?v=596-work12-chambers')?.clone().text();
+  const app = await responses.get('./app-v208.js?v=597-work12-intelligence')?.clone().text();
+  const intelligence = await responses.get('./experience-intelligence-v597.js?v=597-work12-intelligence')?.clone().text();
+  const intelligenceStyles = await responses.get('./experience-intelligence-v597.css?v=597-work12-intelligence')?.clone().text();
   const chambers = await responses.get('./reality-chambers-v596.js?v=596-work12-chambers')?.clone().text();
   const chamberStyles = await responses.get('./reality-chambers-v596.css?v=596-work12-chambers')?.clone().text();
   const school = await responses.get('./school-world-v306.js?v=596-work12-chambers')?.clone().text();
@@ -63,8 +67,9 @@ const validateCore = async responses => {
   const renderer = await responses.get('./orb-engine-v208.js?v=591-work12-orb')?.clone().text();
   const journey = await responses.get('./orb-persistent-journey-v565.js?v=583-coordinate-travel')?.clone().text();
   const soul = await responses.get('./whit-orb-soul-bridge-v581.js?v=592-work12-navigation')?.clone().text();
-  if (!index?.includes('name="divina-work12" content="V596"')) throw new Error('work12-index-version-mismatch');
-  if (!index.includes('app-v208.js?v=596-work12-chambers')
+  if (!index?.includes('name="divina-work12" content="V597"')) throw new Error('work12-index-version-mismatch');
+  if (!index.includes('app-v208.js?v=597-work12-intelligence')
+    || !index.includes('experience-intelligence-v597.css?v=597-work12-intelligence')
     || !index.includes('reality-chambers-v596.css?v=596-work12-chambers')
     || !index.includes('reading-ritual-core-v595.css?v=595-work12-ritual')) {
     throw new Error('work12-index-chambers-mismatch');
@@ -87,6 +92,22 @@ const validateCore = async responses => {
   }
   if (!app.includes('divinaWork12Macro8V596') || !app.includes("reality-chambers-v596.js?v=596-work12-chambers")) {
     throw new Error('work12-app-reality-chambers-mismatch');
+  }
+  if (!app.includes('divinaWork12Macro9V597')
+    || !app.includes("experience-intelligence-v597.js?v=597-work12-intelligence")) {
+    throw new Error('work12-app-experience-intelligence-mismatch');
+  }
+  if (!intelligence?.includes('EXPERIENCE_INTELLIGENCE_CONTRACT_V597')
+    || !intelligence.includes('local-deterministic-context-coordinator')
+    || !intelligence.includes('automaticWhitSpeech:false')
+    || !intelligence.includes('privateContentReads:0')
+    || !intelligence.includes("this.setBudget('essential', 'movement'")) {
+    throw new Error('work12-experience-intelligence-contract-missing');
+  }
+  if (!intelligenceStyles?.includes('[data-experience-budget="essential"]')
+    || !intelligenceStyles.includes('[data-experience-state="focus"]')
+    || !intelligenceStyles.includes('@media(max-width:430px)')) {
+    throw new Error('work12-experience-intelligence-styles-missing');
   }
   if (!chambers?.includes('REALITY_CHAMBERS_CONTRACT_V596')
     || !chambers.includes("states:Object.freeze(['threshold','awakening','present','engaged','travel'])")
@@ -194,6 +215,7 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK12_WHIT_ACTIVE', version:VERSION });
         client.postMessage({ type:'DIVINA_WORK12_RITUAL_ACTIVE', version:VERSION });
         client.postMessage({ type:'DIVINA_WORK12_CHAMBERS_ACTIVE', version:VERSION });
+        client.postMessage({ type:'DIVINA_WORK12_INTELLIGENCE_ACTIVE', version:VERSION });
         client.postMessage({ type:'DIVINA_RELEASE_READY', version:VERSION });
       } catch {}
     }

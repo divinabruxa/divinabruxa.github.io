@@ -1,0 +1,42 @@
+DIVINA BRUXA — WORK12 V597
+MACROETAPA 9 DE 10 — INTELIGÊNCIA DA EXPERIÊNCIA
+
+ESTE ZIP É CUMULATIVO E TEM RAIZ PLANA.
+
+COMO INSTALAR
+1. Abra a raiz do repositório/site Divina Bruxa.
+2. Extraia todos os arquivos deste ZIP diretamente nessa raiz.
+3. Confirme a substituição de app-v208.js, index.html, sw.js e do QA V596 reparado.
+4. Confirme a adição de experience-intelligence-v597.js e experience-intelligence-v597.css.
+5. Publique normalmente. Não mova os arquivos para uma subpasta.
+
+IMPORTANTE
+- Não apague nenhum arquivo antigo que não esteja neste pacote.
+- Esta entrega também repara dois arquivos que chegaram com zero bytes na instalação V596:
+  app-v208.js e qa-work12-v596-chambers-runtime.mjs.
+- O service worker V597 usa um cache novo e só ativa depois de validar os 24 arquivos essenciais.
+- Se o iPhone mantiver a versão anterior aberta, feche a aba e abra o site novamente após a publicação.
+
+LEI PRESERVADA
+Uma Orbe. Um universo. Uma física. Uma presença.
+Toque. Resposta. Silêncio.
+
+ARQUIVOS DE PRODUÇÃO NOVOS OU SUBSTITUÍDOS
+- app-v208.js
+- index.html
+- sw.js
+- experience-intelligence-v597.js
+- experience-intelligence-v597.css
+
+ARQUIVO V596 REPARADO
+- qa-work12-v596-chambers-runtime.mjs
+
+PROVAS V597 INCLUÍDAS
+- qa-work12-v597-inteligencia-da-experiencia.mjs
+- qa-work12-v597-intelligence-runtime.mjs
+- qa-work12-v597-service-worker-runtime.mjs
+- qa-work12-v597-boot-runtime.mjs
+
+Não existe fala automática da Whit nesta entrega. Ela vive dentro da Orbe como
+timing, repouso e silêncio. Nenhum texto de formulário, Diário ou pergunta é lido.
+

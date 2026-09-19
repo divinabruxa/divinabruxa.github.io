@@ -1,0 +1,97 @@
+/* DIVINA BRUXA — WORK12 · MACROETAPA 9 · PERFORMANCE É MAGIA V597
+   Nenhum efeito novo. Esta folha somente ensina a decoração a sair do caminho
+   quando movimento, foco ou silêncio têm prioridade. */
+
+html[data-experience-intelligence="v597"]{
+  --db597-motion-state:rest;
+  --db597-transition:cubic-bezier(.2,.78,.2,1);
+}
+
+html[data-experience-intelligence="v597"][data-experience-state="moving"]{
+  --db597-motion-state:travel;
+}
+
+/* A Orbe e o Universo continuam vivos. Só camadas decorativas secundárias
+   dormem durante a coreografia crítica. */
+html[data-experience-intelligence="v597"][data-experience-budget="essential"]
+  :is(
+    .v560-world-mark,
+    .db585-intent-threshold__atmosphere,
+    .db595-reading-atmosphere,
+    .jwv317__cosmos,
+    .jwv317__pulse,
+    .school-progress-orbit,
+    .consultation-sanctuary-seal,
+    .amazon-v543__seal,
+    .editorial-celestial-map,
+    .journal-celestial-map,
+    .school-celestial-map,
+    .spreads-celestial-map,
+    .ai-celestial-map
+  ){
+  animation-play-state:paused!important;
+  transition-duration:0s!important;
+}
+
+html[data-experience-intelligence="v597"][data-experience-budget="essential"]
+  .school-progress-orbit::before,
+html[data-experience-intelligence="v597"][data-experience-budget="essential"]
+  .school-progress-orbit::after{
+  animation-play-state:paused!important;
+  transition-duration:0s!important;
+}
+
+html[data-experience-intelligence="v597"][data-experience-budget="essential"]
+  :is(.v560-world-mark,.db585-intent-threshold__atmosphere,.db595-reading-atmosphere){
+  opacity:.28!important;
+}
+
+/* Teclado aberto é uma realidade prática: o cosmos não disputa atenção com o
+   campo, mas a pessoa continua dentro do mesmo universo. */
+html[data-experience-intelligence="v597"][data-experience-state="focus"]
+  :is(
+    .v560-world-mark,
+    .db585-intent-threshold__atmosphere,
+    .db595-reading-atmosphere,
+    .jwv317__cosmos,
+    .jwv317__pulse,
+    .school-progress-orbit,
+    .consultation-sanctuary-seal,
+    .amazon-v543__seal
+  ){
+  animation-play-state:paused!important;
+  opacity:.16!important;
+}
+
+html[data-experience-intelligence="v597"][data-experience-state="focus"]
+  :is(input,textarea,select,[contenteditable="true"],[role="textbox"]){
+  scroll-margin-block:max(104px,calc(env(safe-area-inset-top) + 84px));
+}
+
+html[data-experience-intelligence="v597"][data-experience-budget="sleeping"]
+  :is(.v560-world-mark,.db585-intent-threshold__atmosphere,.db595-reading-atmosphere){
+  animation-play-state:paused!important;
+}
+
+/* Movimento reduzido preserva a ordem e a alma, nunca exige transições para
+   comunicar o estado. */
+@media(prefers-reduced-motion:reduce){
+  html[data-experience-intelligence="v597"] *,
+  html[data-experience-intelligence="v597"] *::before,
+  html[data-experience-intelligence="v597"] *::after{
+    scroll-behavior:auto!important;
+  }
+
+  html[data-experience-intelligence="v597"]
+    :is(.v560-world-mark,.db585-intent-threshold__atmosphere,.db595-reading-atmosphere){
+    animation:none!important;
+    transition:none!important;
+  }
+}
+
+@media(max-width:430px){
+  html[data-experience-intelligence="v597"][data-experience-budget="essential"]
+    :is(.v560-world-mark,.db585-intent-threshold__atmosphere,.db595-reading-atmosphere){
+    visibility:hidden!important;
+  }
+}
