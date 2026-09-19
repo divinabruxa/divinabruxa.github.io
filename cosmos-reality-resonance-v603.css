@@ -1,0 +1,79 @@
+/* DIVINA BRUXA — WORK13 · COSMOS VIVO · MACROETAPA 3 · V603
+   Uma ressonancia discreta no veu que ja pertence ao universo V524.
+   Sem novo elemento, canvas, renderer, filtro, keyframe ou loop. */
+
+@property --db603-focus-x {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 50%;
+}
+
+@property --db603-focus-y {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 50%;
+}
+
+@property --db603-accent-strength {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 2.2%;
+}
+
+@property --db603-warm-strength {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: .8%;
+}
+
+@property --db603-horizon-strength {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 1.4%;
+}
+
+@property --db603-vignette-strength {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 28%;
+}
+
+html[data-cosmos-resonance="v603"] #divinaLivingUniverseV524 .db524-universe__veil {
+  background:
+    radial-gradient(
+      ellipse 94% 72% at var(--db603-focus-x) var(--db603-focus-y),
+      color-mix(in srgb,var(--db-skin-accent,#a565d6) var(--db603-accent-strength),transparent),
+      transparent 64%
+    ),
+    radial-gradient(
+      ellipse 72% 54% at calc(100% - var(--db603-focus-x)) calc(100% - var(--db603-focus-y)),
+      color-mix(in srgb,var(--db-supreme-gold,var(--cosmic-gold,#ffd77e)) var(--db603-warm-strength),transparent),
+      transparent 69%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb,var(--db-skin-accent,#a565d6) var(--db603-horizon-strength),transparent),
+      transparent 18% 78%,
+      color-mix(in srgb,var(--db-supreme-gold,var(--cosmic-gold,#ffd77e)) var(--db603-horizon-strength),transparent)
+    ),
+    radial-gradient(ellipse at 50% 46%,transparent 20%,rgba(2,0,8,.055) 70%,rgba(0,0,3,var(--db603-vignette-strength)) 100%),
+    linear-gradient(180deg,rgba(0,0,4,.14),transparent 15% 80%,rgba(0,0,4,.23));
+  transition:
+    --db603-focus-x 980ms cubic-bezier(.2,.8,.2,1),
+    --db603-focus-y 980ms cubic-bezier(.2,.8,.2,1),
+    --db603-accent-strength 820ms ease,
+    --db603-warm-strength 820ms ease,
+    --db603-horizon-strength 820ms ease,
+    --db603-vignette-strength 820ms ease;
+}
+
+html[data-cosmos-resonance="v603"][data-cosmos-resonance-state="travel"] #divinaLivingUniverseV524 .db524-universe__veil,
+html[data-cosmos-resonance="v603"][data-experience-budget="essential"] #divinaLivingUniverseV524 .db524-universe__veil {
+  transition-duration: 180ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-cosmos-resonance="v603"] #divinaLivingUniverseV524 .db524-universe__veil {
+    transition-duration: .001ms;
+  }
+}

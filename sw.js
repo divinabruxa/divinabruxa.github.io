@@ -1,17 +1,19 @@
-/* DIVINA BRUXA — WORK13 · COSMOS VIVO · MEMORIA DE CONTEXTO GLOBAL V602
+/* DIVINA BRUXA — WORK13 · COSMOS VIVO · RESSONANCIA DAS REALIDADES V603
    O WORK12 V600 permanece congelado. A instalação só assume o portal quando
-   HTML, aplicação, continuidade final e a memória local pertencem ao mesmo
-   corte, sem alterar a Orbe, o rito, a navegação ou os mundos protegidos.
+   HTML, aplicação, memória e ressonância pertencem ao mesmo corte, sem
+   alterar a Orbe, o rito, a navegação ou os mundos protegidos.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
-const VERSION = 602;
+const VERSION = 603;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work13-v602-context-memory';
+const CACHE_NAME = 'divina-bruxa-work13-v603-reality-resonance';
 const CORE = Object.freeze([
   './index.html',
-  './app-v208.js?v=602-work13-context',
+  './app-v208.js?v=603-work13-resonance',
   './cosmos-context-memory-v602.js?v=602-work13-context',
+  './cosmos-reality-resonance-v603.js?v=603-work13-resonance',
+  './cosmos-reality-resonance-v603.css?v=603-work13-resonance',
   './work12-final-continuity-v598.js?v=598-work12-final',
   './work12-final-continuity-v598.css?v=599-live-audit',
   './experience-intelligence-v597.js?v=597-work12-intelligence',
@@ -50,8 +52,10 @@ const fetchCore = async path => {
 
 const validateCore = async responses => {
   const index = await responses.get('./index.html')?.clone().text();
-  const app = await responses.get('./app-v208.js?v=602-work13-context')?.clone().text();
+  const app = await responses.get('./app-v208.js?v=603-work13-resonance')?.clone().text();
   const contextMemory = await responses.get('./cosmos-context-memory-v602.js?v=602-work13-context')?.clone().text();
+  const realityResonance = await responses.get('./cosmos-reality-resonance-v603.js?v=603-work13-resonance')?.clone().text();
+  const resonanceStyles = await responses.get('./cosmos-reality-resonance-v603.css?v=603-work13-resonance')?.clone().text();
   const finalContinuity = await responses.get('./work12-final-continuity-v598.js?v=598-work12-final')?.clone().text();
   const finalStyles = await responses.get('./work12-final-continuity-v598.css?v=599-live-audit')?.clone().text();
   const intelligence = await responses.get('./experience-intelligence-v597.js?v=597-work12-intelligence')?.clone().text();
@@ -76,10 +80,12 @@ const validateCore = async responses => {
   const soul = await responses.get('./whit-orb-soul-bridge-v581.js?v=592-work12-navigation')?.clone().text();
   if (!index?.includes('name="divina-work12" content="V600"')
     || !index.includes('name="divina-live-audit" content="V600"')
-    || !index.includes('name="divina-work13" content="V602"')) {
+    || !index.includes('name="divina-work13" content="V603"')) {
     throw new Error('work13-index-version-mismatch');
   }
-  if (!index.includes('app-v208.js?v=602-work13-context')
+  if (!index.includes('app-v208.js?v=603-work13-resonance')
+    || !index.includes('cosmos-reality-resonance-v603.css?v=603-work13-resonance')
+    || !index.includes('id="divinaCosmosRealityResonanceV603"')
     || !index.includes('work12-final-continuity-v598.css?v=599-live-audit')
     || !index.includes('id="divinaWork12FinalContinuityV598"')
     || index.includes('id="divinaWork12FinalContinuityV599"')
@@ -122,6 +128,12 @@ const validateCore = async responses => {
     || !app.includes("stage:'memoria-de-contexto-global'")) {
     throw new Error('work13-app-context-memory-mismatch');
   }
+  if (!app.includes("cosmos-reality-resonance-v603.js?v=603-work13-resonance")
+    || !app.includes('createCosmosRealityResonanceV603({')
+    || !app.includes('divinaWork13Macro3V603')
+    || !app.includes("stage:'universo-reage-a-cada-realidade'")) {
+    throw new Error('work13-app-reality-resonance-mismatch');
+  }
   if (!contextMemory?.includes('COSMOS_CONTEXT_MEMORY_CONTRACT_V602')
     || !contextMemory.includes("model:'local-session-route-metadata-only'")
     || !contextMemory.includes('maximumSuggestedSteps:1')
@@ -132,6 +144,24 @@ const validateCore = async responses => {
     || !contextMemory.includes('cardIdentityReads:0')
     || !contextMemory.includes('permanentAnimationLoops:0')) {
     throw new Error('work13-context-memory-contract-missing');
+  }
+  if (!realityResonance?.includes('COSMOS_REALITY_RESONANCE_CONTRACT_V603')
+    || !realityResonance.includes("inputModel:'public-route-and-public-phase-only'")
+    || !realityResonance.includes('reusesExistingUniverse:true')
+    || !realityResonance.includes('reusesExistingVeil:true')
+    || !realityResonance.includes('automaticNavigation:false')
+    || !realityResonance.includes('automaticWhitSpeech:false')
+    || !realityResonance.includes('privateContentReads:0')
+    || !realityResonance.includes('newCanvases:0')
+    || !realityResonance.includes('permanentAnimationLoops:0')) {
+    throw new Error('work13-reality-resonance-contract-missing');
+  }
+  if (!resonanceStyles?.includes('#divinaLivingUniverseV524 .db524-universe__veil')
+    || !resonanceStyles.includes('--db603-focus-x')
+    || !resonanceStyles.includes('var(--db-skin-accent')
+    || !resonanceStyles.includes('@media (prefers-reduced-motion: reduce)')
+    || /@keyframes|animation\s*:|backdrop-filter|filter\s*:/.test(resonanceStyles)) {
+    throw new Error('work13-reality-resonance-styles-missing');
   }
   if (!finalContinuity?.includes('FINAL_CONTINUITY_CONTRACT_V598')
     || !finalContinuity.includes("homeSingleTap:'call-intentions'")
@@ -272,7 +302,8 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK12_CHAMBERS_ACTIVE', version:VERSION });
         client.postMessage({ type:'DIVINA_WORK12_INTELLIGENCE_ACTIVE', version:VERSION });
         client.postMessage({ type:'DIVINA_WORK12_FINAL_ACTIVE', version:VERSION });
-        client.postMessage({ type:'DIVINA_WORK13_CONTEXT_ACTIVE', version:VERSION, base:600 });
+        client.postMessage({ type:'DIVINA_WORK13_CONTEXT_ACTIVE', version:VERSION, contextVersion:602, base:600 });
+        client.postMessage({ type:'DIVINA_WORK13_RESONANCE_ACTIVE', version:VERSION, contextVersion:602, base:600 });
         client.postMessage({ type:'DIVINA_RELEASE_READY', version:VERSION });
       } catch {}
     }

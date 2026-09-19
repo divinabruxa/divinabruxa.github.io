@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — WORK13 · COSMOS VIVO · MEMORIA DE CONTEXTO GLOBAL V602
-   O WORK12 V600 permanece congelado. Esta camada acrescenta somente o fio
-   local da sessao: origem, realidade, retorno e um proximo passo possivel.
+/* DIVINA BRUXA — WORK13 · COSMOS VIVO · RESSONANCIA DAS REALIDADES V603
+   O WORK12 V600 permanece congelado. A memoria V602 continua local e agora
+   cada realidade muda discretamente o veu do unico universo que ja existe.
    A unica Orbe, a fisica, o silencio e todos os mundos continuam soberanos. */
 
 import { CONFIG } from './config-v200.js?v=559';
@@ -65,6 +65,7 @@ import { createRealityChambersV596 } from './reality-chambers-v596.js?v=596-work
 import { createExperienceIntelligenceV597 } from './experience-intelligence-v597.js?v=597-work12-intelligence';
 import { createWork12FinalContinuityV598 } from './work12-final-continuity-v598.js?v=598-work12-final';
 import { createCosmosContextMemoryV602 } from './cosmos-context-memory-v602.js?v=602-work13-context';
+import { createCosmosRealityResonanceV603 } from './cosmos-reality-resonance-v603.js?v=603-work13-resonance';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -629,8 +630,12 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK13_RESONANCE_ACTIVE') {
+    document.documentElement.dataset.work13ResonanceWorker = `v${event.data.version || 603}`;
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK13_CONTEXT_ACTIVE') {
-    document.documentElement.dataset.work13ContextWorker = `v${event.data.version || 602}`;
+    document.documentElement.dataset.work13ContextWorker = `v${event.data.contextVersion || event.data.version || 602}`;
     return;
   }
   if (event.data?.type === 'DIVINA_WORK12_FINAL_ACTIVE') {
@@ -697,14 +702,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v602-work13-context-app';
+  window.__divinaSWBootstrap = 'v603-work13-resonance-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=602', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=603', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v602';
+        document.documentElement.dataset.releaseEpoch = 'v603';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] WORK13 V602 registrado sobre WORK12 V600 protegido');
+        console.info('[Divina] WORK13 V603 registrado sobre WORK12 V600 protegido');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -1592,6 +1597,77 @@ window.divinaWork13Macro2V602 = Object.freeze({
   }
 });
 window.divinaCosmosVivoV602 = window.divinaWork13Macro2V602;
+
+// A V603 nao acrescenta materia ao cosmos. Ela reutiliza o mesmo veu do
+// universo V524 e recebe da memoria somente rota e fase publicas. Assim cada
+// realidade ganha uma respiracao propria sem tocar em conteudo ou chamar Whit.
+const cosmosRealityResonance = safely('WORK13 · Ressonância Viva das Realidades V603', () =>
+  createCosmosRealityResonanceV603({
+    universe:livingUniverse,
+    contextMemory:cosmosContextMemory
+  })
+);
+window.orbe.resonance = cosmosRealityResonance;
+window.orbe.realityResonance = cosmosRealityResonance;
+document.documentElement.dataset.work13 = 'cosmos-vivo';
+document.documentElement.dataset.work13Macro = '3-reality-resonance';
+window.divinaWork13Macro3V603 = Object.freeze({
+  version:603,
+  base:'V602-context-memory-on-WORK12-V600-frozen-by-V601',
+  work:'WORK13',
+  stage:'universo-reage-a-cada-realidade',
+  resonance:cosmosRealityResonance,
+  contextMemory:cosmosContextMemory,
+  universe:livingUniverse,
+  orb:supremeOrb,
+  coordinator:work12Foundation,
+  status:() => {
+    const resonance = cosmosRealityResonance?.status?.() || null;
+    const audit = cosmosRealityResonance?.audit?.() || null;
+    const context = cosmosContextMemory?.status?.() || null;
+    const universe = livingUniverse?.status?.() || null;
+    const orb = supremeOrb?.snapshot?.() || null;
+    const journey = orbIOSJourney?.status?.() || null;
+    return Object.freeze({
+      release:'V603',
+      macroStage:'3-of-10',
+      law:'one-orb-one-universe-one-presence-one-journey',
+      resonance,
+      audit,
+      context,
+      universe,
+      orb,
+      journey,
+      existingUniverseVeilOnly:true,
+      respectsCurrentSkin:true,
+      automaticNavigation:false,
+      automaticWhitSpeech:false,
+      onePhysicalOrb:orb?.oneLivingOrb === true,
+      sameEntity:orb?.entityPreserved === true,
+      oneUniverseCanvas:universe?.oneUniverseCanvas === true,
+      travelerCopies:Number(journey?.travelerCopies || 0),
+      teleport:journey?.teleportFallback === true,
+      flicker:journey?.flicker === true,
+      privateContentReads:0,
+      formValueReads:0,
+      journalBodyReads:0,
+      cardIdentityReads:0,
+      emotionInference:false,
+      storageReads:0,
+      storageWrites:0,
+      networkCalls:0,
+      modelCalls:0,
+      iphoneFirst:true,
+      newDomNodes:0,
+      newCanvases:0,
+      newRenderers:0,
+      newAnimationLoops:0,
+      newMutationObservers:0
+    });
+  }
+});
+window.divinaCosmosVivoV603 = window.divinaWork13Macro3V603;
+window.divinaCosmosVivo = window.divinaWork13Macro3V603;
 window.whit = whitCore;
 
 window.divinaWhitV212 = Object.freeze({
@@ -2864,12 +2940,15 @@ const awaken = async () => {
         bootFirst:true,
         release:'V562',
         work12Base:'V600-frozen',
-        work13CosmosVivo:'V602',
-        work13MacroStage:'2-of-10-context-memory',
+        work13CosmosVivo:'V603',
+        work13MacroStage:'3-of-10-reality-resonance',
         contextMemoryModel:'session-route-metadata-only',
         contextMemoryAutomaticNavigation:false,
         contextMemoryAutomaticWhitSpeech:false,
         contextMemoryPrivateContentReads:0,
+        realityResonance:'existing-universe-veil-only',
+        realityResonanceAutomaticWhitSpeech:false,
+        realityResonancePrivateContentReads:0,
         supremePlan:'4.0-fluidity-supreme',
         supremePlanMacroStages:14,
         currentMacroStage:'14-of-14',

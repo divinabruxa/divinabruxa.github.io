@@ -1,0 +1,14 @@
+DIVINA BRUXA — WORK13 V603 — MACROETAPA 3
+UNIVERSO REAGE LEVEMENTE A CADA REALIDADE
+
+BASE OBRIGATÓRIA: V602 já instalada.
+
+1. Extraia o ZIP.
+2. Envie os 13 arquivos diretamente para a raiz do repositório.
+3. Substitua somente: app-v208.js, index.html e sw.js.
+4. Os outros 10 arquivos são novos. Não apague nenhum arquivo existente.
+5. Feche e reabra o Safari/PWA no iPhone após a publicação.
+
+Resultado esperado: o mesmo universo muda discretamente de presença entre as
+realidades e fases públicas. Não existe nova Orbe, novo canvas ou fala da Whit.
+

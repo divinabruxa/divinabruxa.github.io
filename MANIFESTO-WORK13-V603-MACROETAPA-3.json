@@ -1,0 +1,99 @@
+{
+  "release": "V603",
+  "work": "WORK13",
+  "name": "Cosmos Vivo",
+  "macroStage": "3-of-10",
+  "title": "Universo reage levemente a cada realidade",
+  "baseRequired": "V602",
+  "baseCommit": "2a0202ff3b27410cb8d33a4a385da0585d55bd37",
+  "frozenBase": "WORK12-V600",
+  "law": "one-orb-one-universe-one-presence-one-journey",
+  "installation": "flat-root-overlay",
+  "production": {
+    "replaced": [
+      "app-v208.js",
+      "index.html",
+      "sw.js"
+    ],
+    "added": [
+      "cosmos-reality-resonance-v603.js",
+      "cosmos-reality-resonance-v603.css"
+    ],
+    "newCssFiles": 1
+  },
+  "realityResonance": {
+    "model": "public-route-and-public-phase-only",
+    "routeSignatures": 17,
+    "readingPhaseSignatures": 6,
+    "chamberPhaseSignatures": 5,
+    "existingUniverseVeilOnly": true,
+    "respectsCurrentSkin": true,
+    "eventDriven": true,
+    "automaticNavigation": false,
+    "automaticWhitSpeech": false,
+    "visibleMessages": 0,
+    "suggestedSteps": 0
+  },
+  "privacy": {
+    "privateContentReads": 0,
+    "formValueReads": 0,
+    "journalBodyReads": 0,
+    "privateQuestionReads": 0,
+    "cardIdentityReads": 0,
+    "cardHistoryReads": 0,
+    "emotionInference": false,
+    "locationReads": 0,
+    "networkCalls": 0,
+    "modelCalls": 0
+  },
+  "performance": {
+    "newDomNodes": 0,
+    "newCanvases": 0,
+    "newRenderers": 0,
+    "newPermanentAnimationLoops": 0,
+    "newMutationObservers": 0,
+    "newDeferredTimers": 0,
+    "newClickListeners": 0,
+    "newInputListeners": 0,
+    "usesExistingCssVeil": true,
+    "iphoneFirst": true,
+    "reducedMotionPreservesMeaning": true
+  },
+  "protected": {
+    "work12RuntimeFilesVerifiedUnchanged": 24,
+    "work13V602ContextMemoryUnchanged": true,
+    "work12Snapshot": "SNAPSHOT-WORK12-V600-PROTEGIDO.zip",
+    "work12SnapshotSha256": "871a9118fa58eb1f1dd118110bda21a68f071ef3d00cb56b8ae6109aa1ac816d",
+    "canonicalOrbs": 1,
+    "canonicalCanvases": 1,
+    "universeCanvases": 1,
+    "finalStyleReferences": 1,
+    "tarotFreeChanged": false,
+    "dailyCardChanged": false,
+    "pricesChanged": false,
+    "realBillingAuthorized": false
+  },
+  "hashes": {
+    "app-v208.js": "d8a64a51abf31f5840dc7df0b96e87676649264d85e021800329b8fd97578e1f",
+    "index.html": "c6a8a7b684135ec20677f23a6a67aa97bcd12dd432a720a3159d17c59488d200",
+    "sw.js": "bd071fb998945a3e2e3fa7f151d092a51e7dba354cb60f28b7355ecac8513e74",
+    "cosmos-reality-resonance-v603.js": "d16da25d2552b8aa3023cc94fd0caac0911f6302cdbabc3d99b7a9a4dbb79d51",
+    "cosmos-reality-resonance-v603.css": "d6166c2802567a28e5575adc5c73c085f6ee8a530a6876e1a0e71e67677f14ad"
+  },
+  "quality": {
+    "work13V603ChecksPassed": 465,
+    "work13V602CompatibleRuntimeChecksPassed": 63,
+    "compatibleWork12RegressionChecksPassed": 320,
+    "totalChecksPassed": 848,
+    "failed": 0,
+    "serviceWorkerCoreAssets": 29,
+    "cleanOverlayOnV602": "PASS"
+  },
+  "verificationFiles": [
+    "qa-work13-v603-reality-resonance.mjs",
+    "qa-work13-v603-resonance-runtime.mjs",
+    "qa-work13-v603-service-worker-runtime.mjs",
+    "qa-work13-v603-boot-runtime.mjs"
+  ],
+  "nextAuthorizedStage": "WORK13-macro-4-layered-cosmic-reading-daily-first"
+}
