@@ -1,0 +1,16 @@
+DIVINA BRUXA — WORK13 V610 — MACROETAPA 10
+ORQUESTRA FINAL — TUDO RESPIRA JUNTO
+
+BASE OBRIGATÓRIA: V609 já instalada.
+
+1. Extraia o ZIP.
+2. Envie os 14 arquivos diretamente para a raiz do repositório.
+3. Substitua somente: app-v208.js, index.html e sw.js.
+4. Os outros 11 arquivos são novos. Não apague nenhum arquivo existente.
+5. Publique, feche o Safari/PWA e reabra no iPhone.
+6. Confirmação física final: passe por Início, Carta do Dia, Tiragens, Música e
+   Skins; gire retrato/paisagem, use voltar/avançar e reabra a PWA.
+
+Resultado esperado: a mesma Orbe e o mesmo canvas atravessam a jornada, nenhuma
+mídia inicia sozinha, a interface não pesa nem transborda e as realidades
+continuam respondendo como um único universo. O WORK13 termina nesta V610.

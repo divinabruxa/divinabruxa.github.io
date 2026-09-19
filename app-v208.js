@@ -1,7 +1,7 @@
-/* DIVINA BRUXA — WORK13 · COSMOS VIVO · OBRA EM PRIMEIRO PLANO V609
-   O WORK12 V600 e as etapas V602–V608 permanecem protegidos. Música, Vídeos
-   e Skins deixam a interface recuar sem alterar seus motores, seus catálogos,
-   a autoridade do servidor ou a única Orbe. */
+/* DIVINA BRUXA — WORK13 · COSMOS VIVO · ORQUESTRA FINAL V610
+   O WORK12 V600 e as etapas V602–V609 permanecem protegidos. O fechamento
+   reúne somente sinais estruturais públicos, sem aparência nova, sem outro
+   motor, sem outra Orbe e sem reabrir o WORK13 depois desta etapa. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -72,6 +72,7 @@ import { createWhitSilenceTimingV606 } from './whit-silence-timing-v606.js?v=606
 import { createLivingWisdomPathV607 } from './living-wisdom-path-v607.js?v=607-work13-living-wisdom';
 import { createLivingCommercePathV608 } from './living-commerce-path-v608.js?v=608-work13-commerce-clarity';
 import { createLivingMediaSkinsV609 } from './living-media-skins-v609.js?v=609-work13-media-skins';
+import { createCosmosFinalOrchestraV610 } from './cosmos-final-orchestra-v610.js?v=610-work13-final-orchestra';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -636,6 +637,10 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK13_FINAL_ORCHESTRA_ACTIVE') {
+    document.documentElement.dataset.work13FinalOrchestraWorker = `v${event.data.finalOrchestraVersion || event.data.version || 610}`;
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK13_MEDIA_SKINS_ACTIVE') {
     document.documentElement.dataset.work13MediaSkinsWorker = `v${event.data.mediaSkinsVersion || event.data.version || 609}`;
     return;
@@ -732,14 +737,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v609-work13-media-skins-app';
+  window.__divinaSWBootstrap = 'v610-work13-final-orchestra-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=609', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=610', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v609';
+        document.documentElement.dataset.releaseEpoch = 'v610';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] WORK13 V609 registrado sobre V608 e WORK12 V600 protegidos');
+        console.info('[Divina] WORK13 V610 concluído sobre V609 e WORK12 V600 protegidos');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -2224,7 +2229,108 @@ window.divinaWork13Macro9V609 = Object.freeze({
   }
 });
 window.divinaCosmosVivoV609 = window.divinaWork13Macro9V609;
-window.divinaCosmosVivo = window.divinaWork13Macro9V609;
+
+// A V610 não redesenha nenhuma realidade. A orquestra final confere, em um
+// único quadro por conjunto de sinais, se todas as camadas continuam reunidas
+// na mesma Orbe, no mesmo canvas e na mesma jornada antes de selar o WORK13.
+const cosmosFinalOrchestra = safely('WORK13 · Orquestra Final V610', () =>
+  createCosmosFinalOrchestraV610({
+    systems:{
+      contextMemory:cosmosContextMemory,
+      realityResonance:cosmosRealityResonance,
+      dailyReading:cosmicDailyReading,
+      spreadReading:cosmicSpreadReading,
+      whitTiming:whitSilenceTiming,
+      livingWisdom:livingWisdomPath,
+      livingCommerce:livingCommercePath,
+      livingMediaSkins
+    },
+    orb:supremeOrb,
+    journey:orbIOSJourney
+  })
+);
+window.orbe.finalOrchestra = cosmosFinalOrchestra;
+window.orbe.cosmosSeal = cosmosFinalOrchestra;
+document.documentElement.dataset.work13 = 'cosmos-vivo';
+document.documentElement.dataset.work13Macro = '10-final-orchestra';
+window.divinaWork13Macro10V610 = Object.freeze({
+  version:610,
+  base:'V609-media-skins-on-WORK12-V600-frozen-by-V601',
+  work:'WORK13',
+  stage:'orquestra-final-tudo-respira-junto',
+  finalOrchestra:cosmosFinalOrchestra,
+  contextMemory:cosmosContextMemory,
+  resonance:cosmosRealityResonance,
+  dailyReading:cosmicDailyReading,
+  spreadReading:cosmicSpreadReading,
+  timing:whitSilenceTiming,
+  livingWisdom:livingWisdomPath,
+  livingCommerce:livingCommercePath,
+  livingMediaSkins,
+  orb:supremeOrb,
+  journey:orbIOSJourney,
+  coordinator:work12Foundation,
+  status:() => {
+    const orchestra = cosmosFinalOrchestra?.status?.() || null;
+    const orchestraAudit = cosmosFinalOrchestra?.lastAudit || cosmosFinalOrchestra?.audit?.('status') || null;
+    const orb = supremeOrb?.snapshot?.() || null;
+    const journey = orbIOSJourney?.status?.() || null;
+    return Object.freeze({
+      release:'V610',
+      work:'WORK13',
+      macroStage:'10-of-10',
+      stage:'orquestra-final-tudo-respira-junto',
+      law:'one-orb-one-universe-one-presence-one-journey',
+      orchestra,
+      orchestraAudit,
+      orb,
+      journey,
+      complete:orchestraAudit?.sealed === true,
+      work13EndsHere:true,
+      nextWork:null,
+      work14:false,
+      livingLayers:Object.freeze([602,603,604,605,606,607,608,609]),
+      worldsPreserved:17,
+      onePhysicalOrb:orchestraAudit?.onePhysicalOrb === true,
+      oneCanonicalCanvas:orchestraAudit?.oneCanonicalCanvas === true,
+      oneActiveReality:orchestraAudit?.oneActiveReality === true,
+      sameEntity:orb?.entityPreserved === true,
+      travelerCopies:Number(journey?.travelerCopies || 0),
+      maximumActivePlayers:1,
+      visualChanges:0,
+      newStylesheets:0,
+      productionPublish:false,
+      realBilling:false,
+      frontendEntitlementGrants:false,
+      automaticPlayback:false,
+      automaticNavigation:false,
+      automaticWhitSpeech:false,
+      privateContentReads:0,
+      storageReads:0,
+      storageWrites:0,
+      networkCalls:0,
+      modelCalls:0,
+      newDomNodes:0,
+      newCanvases:0,
+      newRenderers:0,
+      newPlayers:0,
+      newAnimationLoops:0,
+      newMutationObservers:0,
+      newDeferredTimers:0,
+      iphoneFirst:true,
+      portraitAndLandscape:true,
+      safeAreasPreserved:true,
+      keyboardViewportPreserved:true,
+      backForwardPreserved:true,
+      pwaReopenPreserved:true,
+      offlineFloorPreserved:true,
+      reducedMotionPreservesMeaning:true,
+      physicalDeviceClaim:false
+    });
+  }
+});
+window.divinaCosmosVivoV610 = window.divinaWork13Macro10V610;
+window.divinaCosmosVivo = window.divinaWork13Macro10V610;
 window.whit = whitCore;
 
 window.divinaWhitV212 = Object.freeze({
@@ -3497,8 +3603,8 @@ const awaken = async () => {
         bootFirst:true,
         release:'V562',
         work12Base:'V600-frozen',
-        work13CosmosVivo:'V609',
-        work13MacroStage:'9-of-10-media-skins-interface-recedes',
+        work13CosmosVivo:'V610',
+        work13MacroStage:'10-of-10-final-orchestra',
         contextMemoryModel:'session-route-metadata-only',
         contextMemoryAutomaticNavigation:false,
         contextMemoryAutomaticWhitSpeech:false,
@@ -3562,6 +3668,21 @@ const awaken = async () => {
         livingMediaSkinsPrivateContentReads:0,
         livingMediaSkinsAutomaticNavigation:false,
         livingMediaSkinsAutomaticWhitSpeech:false,
+        cosmosFinalOrchestra:'public-structural-signal-one-frame-audit-silence',
+        cosmosFinalOrchestraLivingLayers:[602,603,604,605,606,607,608,609],
+        cosmosFinalOrchestraWorldsPreserved:17,
+        cosmosFinalOrchestraVisualChanges:0,
+        cosmosFinalOrchestraNewStylesheets:0,
+        cosmosFinalOrchestraMaximumActivePlayers:1,
+        cosmosFinalOrchestraAutomaticPlayback:false,
+        cosmosFinalOrchestraAutomaticNavigation:false,
+        cosmosFinalOrchestraAutomaticWhitSpeech:false,
+        cosmosFinalOrchestraPrivateContentReads:0,
+        cosmosFinalOrchestraPhysicalDeviceClaim:false,
+        work13Complete:true,
+        work13EndsHere:true,
+        work13NextWork:null,
+        work14:false,
         supremePlan:'4.0-fluidity-supreme',
         supremePlanMacroStages:14,
         currentMacroStage:'14-of-14',

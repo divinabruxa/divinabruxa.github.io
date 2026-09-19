@@ -1,16 +1,16 @@
-/* DIVINA BRUXA — WORK13 · COSMOS VIVO · OBRA EM PRIMEIRO PLANO V609
-   O WORK12 V600 e as etapas V602–V608 permanecem protegidos. A instalacao so
+/* DIVINA BRUXA — WORK13 · COSMOS VIVO · ORQUESTRA FINAL V610
+   O WORK12 V600 e as etapas V602–V609 permanecem protegidos. A instalacao so
    assume o portal quando HTML, aplicacao, leituras, silencio, sabedoria e a
-   clareza comercial, mídia e skins pertencem ao mesmo corte, sem alterar motores.
+   jornada inteira pertencem ao mesmo corte, sem alterar motores ou aparência.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
-const VERSION = 609;
+const VERSION = 610;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work13-v609-media-skins';
+const CACHE_NAME = 'divina-bruxa-work13-v610-final-orchestra';
 const CORE = Object.freeze([
   './index.html',
-  './app-v208.js?v=609-work13-media-skins',
+  './app-v208.js?v=610-work13-final-orchestra',
   './cosmos-context-memory-v602.js?v=602-work13-context',
   './cosmos-reality-resonance-v603.js?v=603-work13-resonance',
   './cosmos-reality-resonance-v603.css?v=603-work13-resonance',
@@ -25,6 +25,7 @@ const CORE = Object.freeze([
   './living-commerce-path-v608.css?v=608-work13-commerce-clarity',
   './living-media-skins-v609.js?v=609-work13-media-skins',
   './living-media-skins-v609.css?v=609-work13-media-skins',
+  './cosmos-final-orchestra-v610.js?v=610-work13-final-orchestra',
   './work12-final-continuity-v598.js?v=598-work12-final',
   './work12-final-continuity-v598.css?v=599-live-audit',
   './experience-intelligence-v597.js?v=597-work12-intelligence',
@@ -63,7 +64,7 @@ const fetchCore = async path => {
 
 const validateCore = async responses => {
   const index = await responses.get('./index.html')?.clone().text();
-  const app = await responses.get('./app-v208.js?v=609-work13-media-skins')?.clone().text();
+  const app = await responses.get('./app-v208.js?v=610-work13-final-orchestra')?.clone().text();
   const contextMemory = await responses.get('./cosmos-context-memory-v602.js?v=602-work13-context')?.clone().text();
   const realityResonance = await responses.get('./cosmos-reality-resonance-v603.js?v=603-work13-resonance')?.clone().text();
   const resonanceStyles = await responses.get('./cosmos-reality-resonance-v603.css?v=603-work13-resonance')?.clone().text();
@@ -78,6 +79,7 @@ const validateCore = async responses => {
   const livingCommerceStyles = await responses.get('./living-commerce-path-v608.css?v=608-work13-commerce-clarity')?.clone().text();
   const livingMediaSkins = await responses.get('./living-media-skins-v609.js?v=609-work13-media-skins')?.clone().text();
   const livingMediaSkinsStyles = await responses.get('./living-media-skins-v609.css?v=609-work13-media-skins')?.clone().text();
+  const finalOrchestra = await responses.get('./cosmos-final-orchestra-v610.js?v=610-work13-final-orchestra')?.clone().text();
   const finalContinuity = await responses.get('./work12-final-continuity-v598.js?v=598-work12-final')?.clone().text();
   const finalStyles = await responses.get('./work12-final-continuity-v598.css?v=599-live-audit')?.clone().text();
   const intelligence = await responses.get('./experience-intelligence-v597.js?v=597-work12-intelligence')?.clone().text();
@@ -102,10 +104,10 @@ const validateCore = async responses => {
   const soul = await responses.get('./whit-orb-soul-bridge-v581.js?v=592-work12-navigation')?.clone().text();
   if (!index?.includes('name="divina-work12" content="V600"')
     || !index.includes('name="divina-live-audit" content="V600"')
-    || !index.includes('name="divina-work13" content="V609"')) {
+    || !index.includes('name="divina-work13" content="V610"')) {
     throw new Error('work13-index-version-mismatch');
   }
-  if (!index.includes('app-v208.js?v=609-work13-media-skins')
+  if (!index.includes('app-v208.js?v=610-work13-final-orchestra')
     || !index.includes('living-media-skins-v609.css?v=609-work13-media-skins')
     || !index.includes('id="divinaLivingMediaSkinsV609"')
     || !index.includes('living-commerce-path-v608.css?v=608-work13-commerce-clarity')
@@ -201,6 +203,14 @@ const validateCore = async responses => {
     || !app.includes('divinaWork13Macro9V609')
     || !app.includes("stage:'musica-videos-skins-interface-recua'")) {
     throw new Error('work13-app-media-skins-mismatch');
+  }
+  if (!app.includes("cosmos-final-orchestra-v610.js?v=610-work13-final-orchestra")
+    || !app.includes('createCosmosFinalOrchestraV610({')
+    || !app.includes('divinaWork13Macro10V610')
+    || !app.includes("stage:'orquestra-final-tudo-respira-junto'")
+    || !app.includes('work13EndsHere:true')
+    || !app.includes('work14:false')) {
+    throw new Error('work13-app-final-orchestra-mismatch');
   }
   if (!contextMemory?.includes('COSMOS_CONTEXT_MEMORY_CONTRACT_V602')
     || !contextMemory.includes("model:'local-session-route-metadata-only'")
@@ -376,6 +386,22 @@ const validateCore = async responses => {
     || /@keyframes|backdrop-filter|filter\s*:/.test(livingMediaSkinsStyles)) {
     throw new Error('work13-media-skins-styles-missing');
   }
+  if (!finalOrchestra?.includes('COSMOS_FINAL_ORCHESTRA_CONTRACT_V610')
+    || !finalOrchestra.includes("closure:'WORK13-completes-inside-WORK13'")
+    || !finalOrchestra.includes('livingLayers:Object.freeze([602,603,604,605,606,607,608,609])')
+    || !finalOrchestra.includes('expectedWorlds:17')
+    || !finalOrchestra.includes('maximumActivePlayers:1')
+    || !finalOrchestra.includes('maximumPendingFrames:1')
+    || !finalOrchestra.includes('visualChanges:0')
+    || !finalOrchestra.includes('newStylesheets:0')
+    || !finalOrchestra.includes('automaticPlayback:false')
+    || !finalOrchestra.includes('automaticNavigation:false')
+    || !finalOrchestra.includes('automaticWhitSpeech:false')
+    || !finalOrchestra.includes('privateContentReads:0')
+    || !finalOrchestra.includes('physicalDeviceClaim:false')
+    || !finalOrchestra.includes('work14:false')) {
+    throw new Error('work13-final-orchestra-contract-missing');
+  }
   if (!finalContinuity?.includes('FINAL_CONTINUITY_CONTRACT_V598')
     || !finalContinuity.includes("homeSingleTap:'call-intentions'")
     || !finalContinuity.includes("homeDoubleTap:'tarot-free'")
@@ -523,6 +549,7 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK13_LIVING_WISDOM_ACTIVE', version:VERSION, livingWisdomVersion:607, whitTimingVersion:606, base:600 });
         client.postMessage({ type:'DIVINA_WORK13_COMMERCE_CLARITY_ACTIVE', version:VERSION, commerceClarityVersion:608, livingWisdomVersion:607, base:600 });
         client.postMessage({ type:'DIVINA_WORK13_MEDIA_SKINS_ACTIVE', version:VERSION, mediaSkinsVersion:609, commerceClarityVersion:608, base:600 });
+        client.postMessage({ type:'DIVINA_WORK13_FINAL_ORCHESTRA_ACTIVE', version:VERSION, finalOrchestraVersion:610, mediaSkinsVersion:609, base:600, complete:true });
         client.postMessage({ type:'DIVINA_RELEASE_READY', version:VERSION });
       } catch {}
     }
