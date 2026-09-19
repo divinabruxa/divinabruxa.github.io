@@ -1,7 +1,7 @@
-/* DIVINA BRUXA 4.0 — MACROETAPA 6/14 · CARTA DO DIA V554 + PONTE ÉTICA V561
+/* DIVINA BRUXA 4.0 — CARTA DO DIA V554 + WORK12 RITO V595
    A Orbe canônica ocupa o altar. O céu só anima em respostas breves ao toque;
-   uma carta direta nasce por dia, com autoridade de Brasília. A ponte V561
-   anuncia somente que o ritual aconteceu; nunca expõe carta ou intenção. */
+   uma carta direta nasce por dia, com autoridade de Brasília. No WORK12,
+   Whit não antecipa nem comenta automaticamente: ela sustenta o silêncio. */
 
 import { CARDS } from './tarot-data.js';
 import { store, escapeHTML } from './storage.js';
@@ -304,6 +304,8 @@ export class DailyWorldV509 {
     this.root.classList.add('daily-world-v509-host');
     this.root.dataset.dailyWorld = '554';
     this.build();
+    this.world.dataset.readingRitualAuthority = 'work12-v595';
+    this.world.dataset.whitTiming = 'explicit-only';
     this.aurora = new DailyAuroraEngineV509(this.cosmos, this.sanctuary);
     this.bind();
     this.scheduleNextCycle();
@@ -324,6 +326,9 @@ export class DailyWorldV509 {
       onePerDay:true,
       accountAuthorityPreserved:true,
       localContinuityPreserved:true,
+      readingRitualAuthority:'V595',
+      automaticWhitSpeech:false,
+      depthRequiresExplicitGesture:true,
       serverSchemaChanged:false,
       extraApiCalls:0
     });
@@ -366,7 +371,7 @@ export class DailyWorldV509 {
         <article class="dw509__layer" data-daily-layer-panel aria-live="polite" hidden></article>
         <footer class="dw509__actions" data-daily-actions hidden>
           <button type="button" data-daily-save>Guardar no Diário</button>
-          <button type="button" data-daily-whit>Whit, fica comigo nesta carta</button>
+          <button type="button" data-daily-whit>Whit, fica</button>
         </footer>
         <p class="dw509__source" data-daily-source hidden></p>
         <p class="dw509__sr" data-daily-live role="status" aria-live="polite" aria-atomic="true"></p>
@@ -626,9 +631,6 @@ export class DailyWorldV509 {
     this.live.textContent = 'A Orbe está encontrando a carta deste dia.';
     this.orbCore.pulse?.('daily-summon', { intensity:1.08 });
     this.aurora?.pulse(1.1);
-    globalThis.dispatchEvent?.(new CustomEvent('whit:whisper', {
-      detail:{ phrase:'Só existe uma carta para hoje. Eu vou ficar por perto, sem decidir o significado por você.' }
-    }));
 
     try {
       const identity = await this.identityPromise;
@@ -735,11 +737,7 @@ export class DailyWorldV509 {
     this.live.textContent = animate ? `${card.name}, direta. Sua Carta do Dia foi revelada.` : `${card.name}, direta. Carta deste dia.`;
     this.refreshOrbGeometry();
 
-    if (animate) {
-      const phrase = WHIT_AFTER_REVEAL[Math.floor(Math.random() * WHIT_AFTER_REVEAL.length)](card);
-      setTimeout(() => globalThis.dispatchEvent?.(new CustomEvent('whit:whisper', { detail:{ phrase } })), reducedMotion() ? 60 : 1180);
-      setTimeout(() => this.world?.classList.remove('is-born'), reducedMotion() ? 180 : 1250);
-    }
+    if (animate) setTimeout(() => this.world?.classList.remove('is-born'), reducedMotion() ? 180 : 620);
   }
 
   renderLayer() {
@@ -780,7 +778,9 @@ export class DailyWorldV509 {
   askWhitToStay() {
     if (!this.currentCard) return;
     const phrase = WHIT_AFTER_REVEAL[Math.floor(Math.random() * WHIT_AFTER_REVEAL.length)](this.currentCard);
-    globalThis.dispatchEvent?.(new CustomEvent('whit:whisper', { detail:{ phrase } }));
+    globalThis.dispatchEvent?.(new CustomEvent('whit:whisper', {
+      detail:{ phrase, source:'daily-explicit-ritual' }
+    }));
   }
 
   refreshOrbGeometry() {
@@ -862,6 +862,9 @@ export class DailyWorldV509 {
       auroraCanvas:Boolean(this.aurora?.context),
       permanentAnimationLoops:0,
       interactionBurstMaxMs:320,
+      readingRitualAuthority:'V595',
+      automaticWhitSpeech:false,
+      depthRequiresExplicitGesture:true,
       accountAuthority:this.data?.selectionVersion === DAILY_ACCOUNT_SELECTION_VERSION
     });
   }

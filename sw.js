@@ -1,15 +1,18 @@
-/* DIVINA BRUXA — WORK12 · MACROETAPA 6 · WHIT PRESENÇA VIVA V594
+/* DIVINA BRUXA — WORK12 · MACROETAPA 7 · LEITURAS COMO RITO V595
    Service Worker mínimo, atômico e recuperável. A instalação só assume o
-   portal quando HTML, aplicação, Whit, intenções, navegação, universo e Orbe pertencem ao corte.
+   portal quando HTML, aplicação, rito, Whit, navegação, universo e Orbe pertencem ao corte.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
-const VERSION = 594;
+const VERSION = 595;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work12-v594-whit';
+const CACHE_NAME = 'divina-bruxa-work12-v595-reading-ritual';
 const CORE = Object.freeze([
   './index.html',
-  './app-v208.js?v=594-work12-whit',
+  './app-v208.js?v=595-work12-ritual',
+  './reading-ritual-core-v595.js?v=595-work12-ritual',
+  './reading-ritual-core-v595.css?v=595-work12-ritual',
+  './daily-world-v509.js?v=595-work12-ritual',
   './whit-living-presence-v594.js?v=594-work12-whit',
   './orbital-menu-v502.js?v=593-work12-menu',
   './orbital-menu-v502.css?v=593-work12-menu',
@@ -37,7 +40,10 @@ const fetchCore = async path => {
 
 const validateCore = async responses => {
   const index = await responses.get('./index.html')?.clone().text();
-  const app = await responses.get('./app-v208.js?v=594-work12-whit')?.clone().text();
+  const app = await responses.get('./app-v208.js?v=595-work12-ritual')?.clone().text();
+  const ritual = await responses.get('./reading-ritual-core-v595.js?v=595-work12-ritual')?.clone().text();
+  const ritualStyles = await responses.get('./reading-ritual-core-v595.css?v=595-work12-ritual')?.clone().text();
+  const daily = await responses.get('./daily-world-v509.js?v=595-work12-ritual')?.clone().text();
   const whitPresence = await responses.get('./whit-living-presence-v594.js?v=594-work12-whit')?.clone().text();
   const menu = await responses.get('./orbital-menu-v502.js?v=593-work12-menu')?.clone().text();
   const menuStyles = await responses.get('./orbital-menu-v502.css?v=593-work12-menu')?.clone().text();
@@ -49,8 +55,10 @@ const validateCore = async responses => {
   const renderer = await responses.get('./orb-engine-v208.js?v=591-work12-orb')?.clone().text();
   const journey = await responses.get('./orb-persistent-journey-v565.js?v=583-coordinate-travel')?.clone().text();
   const soul = await responses.get('./whit-orb-soul-bridge-v581.js?v=592-work12-navigation')?.clone().text();
-  if (!index?.includes('name="divina-work12" content="V594"')) throw new Error('work12-index-version-mismatch');
-  if (!index.includes('app-v208.js?v=594-work12-whit')) throw new Error('work12-index-app-mismatch');
+  if (!index?.includes('name="divina-work12" content="V595"')) throw new Error('work12-index-version-mismatch');
+  if (!index.includes('app-v208.js?v=595-work12-ritual') || !index.includes('reading-ritual-core-v595.css?v=595-work12-ritual')) {
+    throw new Error('work12-index-ritual-mismatch');
+  }
   if (!app?.includes("./navigation.js?v=592-work12-navigation")) throw new Error('work12-app-router-mismatch');
   if (!app.includes("./work12-foundation-v589.js?v=592-work12-navigation")) throw new Error('work12-app-foundation-mismatch');
   if (!app.includes("./living-universe-core-v524.js?v=590-work12-universe")) throw new Error('work12-app-universe-mismatch');
@@ -63,6 +71,25 @@ const validateCore = async responses => {
   }
   if (!app.includes('divinaWork12Macro6V594') || !app.includes("whit-living-presence-v594.js?v=594-work12-whit")) {
     throw new Error('work12-app-whit-mismatch');
+  }
+  if (!app.includes('divinaWork12Macro7V595') || !app.includes("reading-ritual-core-v595.js?v=595-work12-ritual")) {
+    throw new Error('work12-app-reading-ritual-mismatch');
+  }
+  if (!ritual?.includes('READING_RITUAL_CONTRACT_V595')
+    || !ritual.includes("sequence:Object.freeze(['symbol','silence','essence','depth-on-request'])")
+    || !ritual.includes('automaticWhitSpeech:false')
+    || !ritual.includes('oneDeferredTimer:true')) {
+    throw new Error('work12-reading-ritual-contract-missing');
+  }
+  if (!ritualStyles?.includes('.db595-reading-intention')
+    || !ritualStyles.includes('[data-reading-phase="silence"]')
+    || !ritualStyles.includes('[data-reading-phase="depth"]')) {
+    throw new Error('work12-reading-ritual-styles-missing');
+  }
+  if (!daily?.includes("readingRitualAuthority = 'work12-v595'")
+    || !daily.includes("source:'daily-explicit-ritual'")
+    || daily.includes("phrase:'Só existe uma carta para hoje")) {
+    throw new Error('work12-daily-ritual-contract-missing');
   }
   if (!whitPresence?.includes('WHIT_LIVING_PRESENCE_CONTRACT_V594')
     || !whitPresence.includes('ordinaryTouchSpeech:false')
@@ -83,6 +110,9 @@ const validateCore = async responses => {
   }
   if (!pageLoader?.includes('globalThis.divinaWork12V592') || !pageLoader.includes("source:'route-retry'")) {
     throw new Error('work12-page-loader-contract-missing');
+  }
+  if (!pageLoader.includes("daily-world-v509.js?v=595-work12-ritual")) {
+    throw new Error('work12-page-loader-daily-ritual-mismatch');
   }
   if (!universe?.includes('const RELEASE = 590;') || !universe.includes('essentialUniverseDuringTravel:true')) {
     throw new Error('work12-universe-contract-missing');
@@ -129,6 +159,7 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK12_ORB_ACTIVE', version:VERSION });
         client.postMessage({ type:'DIVINA_WORK12_MENU_ACTIVE', version:VERSION });
         client.postMessage({ type:'DIVINA_WORK12_WHIT_ACTIVE', version:VERSION });
+        client.postMessage({ type:'DIVINA_WORK12_RITUAL_ACTIVE', version:VERSION });
         client.postMessage({ type:'DIVINA_RELEASE_READY', version:VERSION });
       } catch {}
     }

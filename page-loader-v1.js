@@ -232,7 +232,7 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       const module=await loadModuleAfterStylesV562([
         ensureStyle('divinaDailyLivingV509','daily-world-v509.css?v=554'),
         ensureStyle('divinaDailySpreadsSupremeV554','daily-spreads-supreme-v554.css?v=554')
-      ],import('./daily-world-v509.js?v=561'));
+      ],import('./daily-world-v509.js?v=595-work12-ritual'));
       const instance=new module.DailyWorldV509($('#dailyCard'),{
         onSave:remember,
         authClient,
@@ -356,7 +356,7 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     daily:()=>Promise.all([
       ensureStyle('divinaDailyLivingV509','daily-world-v509.css?v=554'),
       ensureStyle('divinaDailySpreadsSupremeV554','daily-spreads-supreme-v554.css?v=554'),
-      import('./daily-world-v509.js?v=561')
+      import('./daily-world-v509.js?v=595-work12-ritual')
     ]),
     library:()=>Promise.all([
       ensureStyle('divinaLibraryRebirthV302','library-world-v302.css?v=555'),

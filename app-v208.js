@@ -1,6 +1,7 @@
-/* DIVINA BRUXA — WORK12 · MACROETAPA 6 · WHIT PRESENÇA VIVA V594
-   Fundação, Universo, Orbe, navegação e SOPRO V593 permanecem soberanos.
-   Whit habita a única Orbe como timing: convite deliberado, contexto e silêncio. */
+/* DIVINA BRUXA — WORK12 · MACROETAPA 7 · LEITURAS COMO RITO V595
+   A base V589–V594 permanece soberana. Tarot Livre e Carta do Dia agora
+   respiram pela mesma sequência: símbolo, silêncio, essência e profundidade
+   somente quando chamada. Whit sustenta o tempo dentro da única Orbe. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -59,6 +60,7 @@ import { createRealityIntentionLanguageV585 } from './reality-intention-language
 import { createMagicalBubbleSystemV586 } from './magical-bubble-system-v586.js?v=586';
 import { createWork12FoundationV589 } from './work12-foundation-v589.js?v=592-work12-navigation';
 import { createWhitLivingPresenceV594 } from './whit-living-presence-v594.js?v=594-work12-whit';
+import { createReadingRitualCoreV595 } from './reading-ritual-core-v595.js?v=595-work12-ritual';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -543,6 +545,19 @@ const whitLivingPresence = safely('WORK12 · Whit Presença Viva V594', () =>
   })
 );
 
+// Uma única máquina de rito escuta os dois mundos já aprovados. Ela não cria
+// carta, interpretação, Orbe ou renderer: apenas governa quando cada camada
+// pode nascer e mantém Whit em silêncio até um convite explícito.
+const readingRitual = safely('WORK12 · Leituras como Rito V595', () =>
+  createReadingRitualCoreV595({
+    go,
+    soul:whitOrbSoul,
+    presence:whitLivingPresence,
+    universe:livingUniverse,
+    foundation:work12Foundation
+  })
+);
+
 // A V561 se conecta apenas a eventos e ações explícitas. O Diário continua
 // privado; analytics só cria identificador pseudônimo após opt-in registrado.
 const ethicalReturn = safely('Retorno Ético e Conteúdo Diário V561', () =>
@@ -594,6 +609,11 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK12_RITUAL_ACTIVE') {
+    document.documentElement.dataset.work12RitualWorker = `v${event.data.version || 595}`;
+    work12Foundation?.audit?.('ritual-worker-active');
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK12_WHIT_ACTIVE') {
     document.documentElement.dataset.work12WhitWorker = `v${event.data.version || 594}`;
     work12Foundation?.audit?.('whit-worker-active');
@@ -638,14 +658,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v594-work12-app';
+  window.__divinaSWBootstrap = 'v595-work12-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=594', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=595', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v594';
+        document.documentElement.dataset.releaseEpoch = 'v595';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] WORK12 V594 registrado');
+        console.info('[Divina] WORK12 V595 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -691,6 +711,7 @@ window.orbe = {
   work12:work12Foundation,
   navigation:work12Foundation,
   whitLiving:whitLivingPresence,
+  readingRitual,
   returnGarden:ethicalReturn,
   qaLaunch:qaSupremeLaunch,
   observatory:null,
@@ -1206,6 +1227,67 @@ window.divinaWork12Macro6V594 = Object.freeze({
   }
 });
 window.divinaFluidezSupremaV594 = window.divinaWork12Macro6V594;
+document.documentElement.dataset.work12Macro = '7-leituras-como-rito';
+document.documentElement.dataset.work12Ritual = 'v595';
+document.documentElement.dataset.work12ReadingSequence = 'symbol-silence-essence-depth';
+window.divinaWork12Macro7V595 = Object.freeze({
+  version:595,
+  base:'V594',
+  work:'WORK12',
+  stage:'leituras-como-rito',
+  ritual:readingRitual,
+  presence:whitLivingPresence,
+  soul:whitOrbSoul,
+  orb:supremeOrb,
+  coordinator:work12Foundation,
+  status:() => {
+    const ritual = readingRitual?.status?.() || null;
+    const ritualAudit = readingRitual?.audit?.() || null;
+    const presence = whitLivingPresence?.status?.() || null;
+    const soul = whitOrbSoul?.status?.() || null;
+    const orb = supremeOrb?.snapshot?.() || null;
+    const journey = orbIOSJourney?.status?.() || null;
+    const tarot = globalThis.divinaTarotLivreV517?.status?.() || null;
+    const daily = globalThis.divinaDailyWorldV509?.snapshot?.() || null;
+    return Object.freeze({
+      release:'V595',
+      macroStage:'7-of-10',
+      law:'one-orb-one-universe-one-physics-one-presence',
+      ritual,
+      ritualAudit,
+      presence,
+      soul,
+      orb,
+      journey,
+      tarot,
+      daily,
+      sequence:Object.freeze(['symbol','silence','essence','depth-on-request']),
+      oneRitualStateMachine:ritualAudit?.oneStateMachine === true,
+      onePhysicalOrb:orb?.oneLivingOrb === true,
+      sameEntity:orb?.entityPreserved === true,
+      sameRenderer:soul?.sameRenderer === true,
+      sameMotionClock:soul?.sameMotionClock === true,
+      whitLivesInsideCanonicalOrb:presence?.residence === 'canonical-orb' && soul?.canonicalOrbOnly === true,
+      whitAutomaticSpeech:false,
+      silenceIsReadingPhase:true,
+      tarotFreeAutomaticMeanings:false,
+      dailyDepthRequiresExplicitGesture:true,
+      travelerCopies:Number(journey?.travelerCopies || 0),
+      teleport:journey?.teleportFallback === true,
+      flicker:journey?.flicker === true,
+      heavyEffectsQuietDuringRitual:true,
+      heavyEffectsPausedDuringTravel:journey?.heavyEffectsPausedDuringAnyTravel === true,
+      privateContentReads:0,
+      storageReads:0,
+      apiCalls:0,
+      iphoneFirst:true,
+      newCanvases:0,
+      newAnimationLoops:0,
+      newMutationObservers:0
+    });
+  }
+});
+window.divinaFluidezSupremaV595 = window.divinaWork12Macro7V595;
 const skinPerformanceCore = safely('Skins, desempenho e acabamento V518', () =>
   installSkinPerformanceCoreV518()
 );
