@@ -1,7 +1,7 @@
-/* DIVINA BRUXA — WORK13 · COSMOS VIVO · WHIT SILENCIO E TIMING V606
-   O WORK12 V600 e as etapas V602–V605 permanecem protegidos. Sinais publicos
-   continuam vivos na unica Orbe, mas nao viram fala automatica: Whit aparece
-   somente por convite, consentimento ou pausa contextual qualificada. */
+/* DIVINA BRUXA — WORK13 · COSMOS VIVO · SABEDORIA VIVA V607
+   O WORK12 V600 e as etapas V602–V606 permanecem protegidos. Biblioteca,
+   Escola e Diario agora respiram na mesma linguagem progressiva: uma
+   descoberta, uma aula e uma escrita, sempre na unica Orbe. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -69,6 +69,7 @@ import { createCosmosRealityResonanceV603 } from './cosmos-reality-resonance-v60
 import { createCosmicDailyReadingV604 } from './cosmic-daily-reading-v604.js?v=604-work13-daily-reading';
 import { createCosmicSpreadReadingV605 } from './cosmic-spread-reading-v605.js?v=605-work13-spread-reading';
 import { createWhitSilenceTimingV606 } from './whit-silence-timing-v606.js?v=606-work13-whit-timing';
+import { createLivingWisdomPathV607 } from './living-wisdom-path-v607.js?v=607-work13-living-wisdom';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -633,6 +634,10 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK13_LIVING_WISDOM_ACTIVE') {
+    document.documentElement.dataset.work13LivingWisdomWorker = `v${event.data.livingWisdomVersion || event.data.version || 607}`;
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK13_WHIT_TIMING_ACTIVE') {
     document.documentElement.dataset.work13WhitTimingWorker = `v${event.data.whitTimingVersion || event.data.version || 606}`;
     return;
@@ -717,14 +722,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v606-work13-whit-timing-app';
+  window.__divinaSWBootstrap = 'v607-work13-living-wisdom-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=606', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=607', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v606';
+        document.documentElement.dataset.releaseEpoch = 'v607';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] WORK13 V606 registrado sobre V605 e WORK12 V600 protegidos');
+        console.info('[Divina] WORK13 V607 registrado sobre V606 e WORK12 V600 protegidos');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -1931,7 +1936,93 @@ window.divinaWork13Macro6V606 = Object.freeze({
   }
 });
 window.divinaCosmosVivoV606 = window.divinaWork13Macro6V606;
-window.divinaCosmosVivo = window.divinaWork13Macro6V606;
+
+// A V607 nao reescreve nenhum mundo. Ela reorganiza somente a revelacao dos
+// motores V555/V556: Biblioteca com uma descoberta antes do catalogo, Escola
+// com uma aula antes do programa e Diario diretamente na escrita depois do
+// mergulho explicito. O contexto usado e apenas rota publica da V602.
+const livingWisdomPath = safely('WORK13 · Sabedoria Viva V607', () =>
+  createLivingWisdomPathV607({
+    contextMemory:cosmosContextMemory,
+    chambers:realityChambers,
+    navigate:go
+  })
+);
+window.orbe.livingWisdom = livingWisdomPath;
+window.orbe.wisdomPath = livingWisdomPath;
+document.documentElement.dataset.work13 = 'cosmos-vivo';
+document.documentElement.dataset.work13Macro = '7-living-wisdom-path';
+window.divinaWork13Macro7V607 = Object.freeze({
+  version:607,
+  base:'V606-whit-silence-timing-on-WORK12-V600-frozen-by-V601',
+  work:'WORK13',
+  stage:'biblioteca-escola-diario-vivos',
+  livingWisdom:livingWisdomPath,
+  timing:whitSilenceTiming,
+  contextMemory:cosmosContextMemory,
+  chambers:realityChambers,
+  orb:supremeOrb,
+  coordinator:work12Foundation,
+  status:() => {
+    const wisdom = livingWisdomPath?.status?.() || null;
+    const wisdomAudit = livingWisdomPath?.audit?.() || null;
+    const timing = whitSilenceTiming?.status?.() || null;
+    const context = cosmosContextMemory?.status?.() || null;
+    const orb = supremeOrb?.snapshot?.() || null;
+    const journey = orbIOSJourney?.status?.() || null;
+    return Object.freeze({
+      release:'V607',
+      macroStage:'7-of-10',
+      law:'one-orb-one-universe-one-presence-one-journey',
+      wisdom,
+      wisdomAudit,
+      timing,
+      context,
+      orb,
+      journey,
+      worlds:Object.freeze(['library','school','journal']),
+      sequence:Object.freeze(['one-discovery','one-lesson','direct-writing']),
+      contextModel:'V602-public-route-metadata-only',
+      libraryEntry:'one-discovery-through-canonical-orb',
+      libraryCatalogue:'explicit-request-only',
+      libraryCardsPreserved:78,
+      schoolEntry:'one-natural-next-lesson',
+      schoolProgramme:'explicit-request-only',
+      schoolModulesPreserved:17,
+      schoolLessonsPreserved:124,
+      journalEntry:'direct-writing-after-explicit-depth',
+      journalReview:'explicit-request-only',
+      journalPrivateByDefault:true,
+      maximumContextualContinuations:1,
+      automaticNavigation:false,
+      automaticWhitSpeech:false,
+      whitTimingAuthority:'V606-unchanged',
+      onePhysicalOrb:orb?.oneLivingOrb === true,
+      sameEntity:orb?.entityPreserved === true,
+      travelerCopies:Number(journey?.travelerCopies || 0),
+      privateContentReads:0,
+      formValueReads:0,
+      journalBodyReads:0,
+      journalDraftReads:0,
+      journalHistoryReads:0,
+      schoolNoteReads:0,
+      questionReads:0,
+      cardIdentityReads:0,
+      storageReads:0,
+      storageWrites:0,
+      networkCalls:0,
+      modelCalls:0,
+      newCanvases:0,
+      newRenderers:0,
+      newAnimationLoops:0,
+      newMutationObservers:0,
+      newDeferredTimers:0,
+      iphoneFirst:true
+    });
+  }
+});
+window.divinaCosmosVivoV607 = window.divinaWork13Macro7V607;
+window.divinaCosmosVivo = window.divinaWork13Macro7V607;
 window.whit = whitCore;
 
 window.divinaWhitV212 = Object.freeze({
@@ -3204,8 +3295,8 @@ const awaken = async () => {
         bootFirst:true,
         release:'V562',
         work12Base:'V600-frozen',
-        work13CosmosVivo:'V606',
-        work13MacroStage:'6-of-10-whit-silence-timing',
+        work13CosmosVivo:'V607',
+        work13MacroStage:'7-of-10-living-wisdom-path',
         contextMemoryModel:'session-route-metadata-only',
         contextMemoryAutomaticNavigation:false,
         contextMemoryAutomaticWhitSpeech:false,
@@ -3234,6 +3325,15 @@ const awaken = async () => {
         whitAutomaticSkinSpeech:false,
         whitContextMemoryTriggersSpeech:false,
         whitPrivateContentReads:0,
+        livingWisdomPath:'one-discovery-one-lesson-direct-writing',
+        livingWisdomWorlds:['library','school','journal'],
+        livingWisdomLibraryCardsPreserved:78,
+        livingWisdomSchoolModulesPreserved:17,
+        livingWisdomSchoolLessonsPreserved:124,
+        livingWisdomJournalPrivateByDefault:true,
+        livingWisdomJournalPrivateContentReads:0,
+        livingWisdomAutomaticNavigation:false,
+        livingWisdomAutomaticWhitSpeech:false,
         supremePlan:'4.0-fluidity-supreme',
         supremePlanMacroStages:14,
         currentMacroStage:'14-of-14',

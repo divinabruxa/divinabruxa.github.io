@@ -1,0 +1,136 @@
+{
+  "release": "V607",
+  "work": "WORK13",
+  "name": "Cosmos Vivo",
+  "macroStage": "7-of-10",
+  "title": "Biblioteca, Escola e Diario Vivos",
+  "baseRequired": "V606",
+  "baseCommit": "99a0fa86ee3ebf5b12c7ae9a4be22f301bf10573",
+  "frozenBase": "WORK12-V600",
+  "law": "one-orb-one-universe-one-presence-one-journey",
+  "installation": "flat-root-overlay",
+  "packageFiles": 14,
+  "production": {
+    "replaced": [
+      "app-v208.js",
+      "index.html",
+      "sw.js"
+    ],
+    "added": [
+      "living-wisdom-path-v607.js",
+      "living-wisdom-path-v607.css"
+    ],
+    "newStylesheets": 1,
+    "existingWorldEnginesRewritten": false
+  },
+  "livingWisdom": {
+    "worlds": [
+      "library",
+      "school",
+      "journal"
+    ],
+    "sequence": [
+      "one-discovery",
+      "one-lesson",
+      "direct-writing"
+    ],
+    "contextModel": "V602-public-route-metadata-only",
+    "library": {
+      "entry": "one-discovery-through-canonical-orb",
+      "catalogue": "explicit-request-only",
+      "cardsPreserved": 78,
+      "nextStep": "school-after-explicit-choice"
+    },
+    "school": {
+      "entry": "one-natural-next-lesson",
+      "programme": "explicit-request-only",
+      "modulesPreserved": 17,
+      "lessonsPreserved": 124
+    },
+    "journal": {
+      "entry": "direct-writing-after-depth",
+      "review": "explicit-request-only",
+      "privateByDefault": true,
+      "returnAfterConfirmedSave": true
+    },
+    "maximumContextualContinuations": 1,
+    "automaticNavigation": false,
+    "automaticWhitSpeech": false,
+    "whitTimingAuthority": "V606-unchanged"
+  },
+  "privacy": {
+    "publicRouteMetadataOnly": true,
+    "privateContentReads": 0,
+    "formValueReads": 0,
+    "journalBodyReads": 0,
+    "journalDraftReads": 0,
+    "journalHistoryReads": 0,
+    "schoolNoteReads": 0,
+    "questionReads": 0,
+    "cardIdentityReads": 0,
+    "emotionInference": false,
+    "storageReads": 0,
+    "storageWrites": 0,
+    "networkCalls": 0,
+    "modelCalls": 0
+  },
+  "performance": {
+    "newCanvases": 0,
+    "newRenderers": 0,
+    "newPermanentAnimationLoops": 0,
+    "newMutationObservers": 0,
+    "newDeferredTimers": 0,
+    "newKeyframes": 0,
+    "heavyFilters": 0,
+    "serviceWorkerCoreAssets": 36,
+    "eventDrivenOnly": true,
+    "iphoneFirst": true
+  },
+  "protected": {
+    "work12RuntimeFilesVerifiedUnchanged": 24,
+    "wisdomWorldFilesVerifiedUnchanged": 13,
+    "priorWork13FilesVerifiedUnchanged": 8,
+    "work13V602ContextMemoryUnchanged": true,
+    "work13V603RealityResonanceUnchanged": true,
+    "work13V604DailyReadingUnchanged": true,
+    "work13V605SpreadReadingUnchanged": true,
+    "work13V606WhitTimingUnchanged": true,
+    "work12Snapshot": "SNAPSHOT-WORK12-V600-PROTEGIDO.zip",
+    "work12SnapshotSha256": "871a9118fa58eb1f1dd118110bda21a68f071ef3d00cb56b8ae6109aa1ac816d",
+    "canonicalOrbs": 1,
+    "canonicalCanvases": 1,
+    "libraryEngineChanged": false,
+    "schoolEngineChanged": false,
+    "journalEngineChanged": false,
+    "pricesChanged": false,
+    "realBillingAuthorized": false
+  },
+  "hashes": {
+    "app-v208.js": "dfef328966b60cbdb5efeb494ebfebdeb9f88440411c95d602b1f01bc02c3a2c",
+    "index.html": "d68cd9f064cff4ffc18fb1517125d733b5dff356ee45273c23877258d7cdd164",
+    "sw.js": "b6891a1448c0dde3dcf88782b2027e3bb20604518b09d1d1e6e9d19df3712c0b",
+    "living-wisdom-path-v607.js": "cbd5c9b41c8aa390beadcf463934cf72d033aa7c04c102f24a8ce86f045d8377",
+    "living-wisdom-path-v607.css": "765e5f3a8ca8670c465df6c62838ceaa54a7b7568a4307da94e0e987f1a37118"
+  },
+  "quality": {
+    "work13V607ChecksPassed": 596,
+    "work13V602ToV606CompatibleRuntimeChecksPassed": 1291,
+    "compatibleWork12RegressionChecksPassed": 386,
+    "totalChecksPassed": 2273,
+    "failed": 0,
+    "stressLibraryDiscoveries": 78,
+    "stressSchoolSignals": 124,
+    "stressJournalSignals": 40,
+    "privateCanariesRetained": false,
+    "automaticNavigationCalls": 0,
+    "cleanOverlayOnV606": "PASS"
+  },
+  "verificationFiles": [
+    "qa-work13-v607-living-wisdom.mjs",
+    "qa-work13-v607-living-runtime.mjs",
+    "qa-work13-v607-continuity-runtime.mjs",
+    "qa-work13-v607-service-worker-runtime.mjs",
+    "qa-work13-v607-boot-runtime.mjs"
+  ],
+  "nextAuthorizedStage": "WORK13-macro-8-consultations-store-premium-account-clarity"
+}
