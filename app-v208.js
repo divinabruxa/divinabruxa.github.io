@@ -1,13 +1,13 @@
-/* DIVINA BRUXA — WORK12 · MACROETAPA 2 · UNIVERSO VIVO GLOBAL V590
-   A Fundação V589 permanece soberana. A V590 lapida o shell já existente:
-   um céu, um canvas e um relógio acompanham a única Orbe entre realidades. */
+/* DIVINA BRUXA — WORK12 · MACROETAPA 3 · ORBE PERSISTENTE V591
+   Fundação V589 e Universo V590 permanecem soberanos. A V591 sela a mesma
+   matéria, renderer, física e alma Whit da única Orbe em toda travessia. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
 import { createNavigation } from './navigation.js?v=535-fluid-navigation';
 import { orbMotionV207 } from './orb-motion-core-v207.js?v=207';
-import { RealityOrbEngine } from './orb-engine-v208.js?v=582-living-soul';
-import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=576-foundation';
+import { RealityOrbEngine } from './orb-engine-v208.js?v=591-work12-orb';
+import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=591-work12-orb';
 import { createOrbPersistentJourneyV565 } from './orb-persistent-journey-v565.js?v=583-coordinate-travel';
 import { createOrbUniversalPresenceV526 } from './orb-universal-presence-v526.js?v=577-universal';
 import { installRealityLifecycleV511 } from './reality-lifecycle-v511.js?v=511';
@@ -34,7 +34,7 @@ import { createWhitMindV312 } from './whit-mind-v312.js?v=557-event-driven';
 import { createWhitGenerationBridgeV313 } from './whit-generation-bridge-v313.js?v=316-silent1';
 import { createWhitSilentPresenceV316 } from './whit-silent-presence-v316.js?v=557-event-driven';
 import { createWhitCoreSupremeV527 } from './whit-core-supreme-v527.js?v=580-foundation';
-import { createWhitOrbSoulBridgeV581 } from './whit-orb-soul-bridge-v581.js?v=582-living-soul';
+import { createWhitOrbSoulBridgeV581 } from './whit-orb-soul-bridge-v581.js?v=591-work12-orb';
 import { createTarotUniverseCoreV528 } from './tarot-universe-core-v528.js?v=528';
 import { createWisdomUniverseCoreV529 } from './wisdom-universe-core-v529.js?v=529';
 import { createExperienceConversionCoreV530 } from './experience-conversion-core-v530.js?v=559-media-guard';
@@ -580,13 +580,19 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK12_ORB_ACTIVE') {
+    document.documentElement.dataset.work12OrbWorker = `v${event.data.version || 591}`;
+    supremeOrb?.auditPersistence?.('orb-worker-active');
+    work12Foundation?.audit?.('orb-worker-active');
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK12_UNIVERSE_ACTIVE') {
-    document.documentElement.dataset.work12UniverseWorker = `v${event.data.version || 590}`;
+    document.documentElement.dataset.work12UniverseWorker = `v${event.data.version || 591}`;
     work12Foundation?.audit?.('universe-worker-active');
     return;
   }
   if (event.data?.type === 'DIVINA_WORK12_FOUNDATION_ACTIVE') {
-    document.documentElement.dataset.work12Worker = `v${event.data.version || 590}`;
+    document.documentElement.dataset.work12Worker = `v${event.data.version || 591}`;
     work12Foundation?.audit?.('service-worker-active');
     return;
   }
@@ -603,14 +609,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v590-work12-app';
+  window.__divinaSWBootstrap = 'v591-work12-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=590', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=591', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v590';
+        document.documentElement.dataset.releaseEpoch = 'v591';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] WORK12 V590 registrado');
+        console.info('[Divina] WORK12 V591 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -627,6 +633,7 @@ window.orbe = {
   universe:livingUniverse,
   messages:messageGovernor,
   supreme:supremeOrb,
+  renderer:realityOrb,
   journey:orbIOSJourney,
   presence:orbUniversalPresence,
   whit:whitSupreme,
@@ -946,6 +953,61 @@ window.divinaWork12Macro2V590 = Object.freeze({
       tarotProtected:true,
       dailyProtected:true,
       newUniverseRoots:0,
+      newCanvases:0,
+      newAnimationLoops:0,
+      newMutationObservers:0
+    });
+  }
+});
+document.documentElement.dataset.work12Macro = '3-orbe-persistente';
+document.documentElement.dataset.work12Orb = 'v591';
+document.documentElement.dataset.orbPersistence = 'one-entity-v591';
+window.divinaWork12Macro3V591 = Object.freeze({
+  version:591,
+  base:'V590',
+  work:'WORK12',
+  stage:'orbe-persistente',
+  orb:supremeOrb,
+  renderer:realityOrb,
+  journey:orbIOSJourney,
+  soul:whitOrbSoul,
+  status:() => {
+    const orb = supremeOrb?.snapshot?.() || null;
+    const renderer = realityOrb?.snapshot?.() || null;
+    const journey = orbIOSJourney?.status?.() || null;
+    const soul = whitOrbSoul?.status?.() || null;
+    return Object.freeze({
+      release:'V591',
+      macroStage:'3-of-10',
+      law:'one-orb-one-universe-one-physics-one-presence',
+      orb,
+      renderer,
+      journey,
+      soul,
+      onePhysicalOrb:orb?.oneLivingOrb === true,
+      sameEntity:orb?.entityPreserved === true,
+      oneRenderer:orb?.oneRenderer === true && renderer?.oneRenderer === true,
+      onePhysics:orb?.onePhysics === true && renderer?.sharedMotionClock === true,
+      oneCanonicalCanvas:renderer?.rendererCanvasIsCanonical === true,
+      physicalTravel:journey?.physicalOrbTransport === true,
+      naturalReturn:typeof supremeOrb?.returnHome === 'function',
+      travelerCopies:Number(journey?.travelerCopies || 0),
+      teleport:journey?.teleportFallback === true,
+      flicker:journey?.flicker === true,
+      skinsPreserved:true,
+      skin:orb?.skin || document.documentElement.dataset.skin || 'classic',
+      whitInsideCanonicalOrb:soul?.canonicalOrbOnly === true,
+      whitUsesSameRenderer:soul?.sameRenderer === true,
+      whitUsesSameClock:soul?.sameMotionClock === true,
+      work12StateAuthority:soul?.work12StateAuthority === true,
+      automaticWhitEveryTouch:false,
+      silenceIsPresence:true,
+      heavyEffectsPausedDuringTravel:journey?.heavyEffectsPausedDuringAnyTravel === true,
+      iphoneFirst:true,
+      tarotProtected:true,
+      dailyProtected:true,
+      conceptualOrbCopies:0,
+      newVisualEffects:0,
       newCanvases:0,
       newAnimationLoops:0,
       newMutationObservers:0

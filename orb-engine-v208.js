@@ -1,5 +1,5 @@
 /*
- * DIVINA BRUXA 2.0 — ORBE VIVA SUPREMA · ALMA SIMBÓLICA V582
+ * DIVINA BRUXA — WORK12 · MACROETAPA 3 · MATÉRIA ÚNICA V591
  *
  * A borda da esfera nunca se move. A vida acontece dentro dela:
  * respiração orgânica, matéria líquida, profundidade óptica, cáusticas,
@@ -10,8 +10,9 @@
  * reutiliza este shader e cede completamente à viagem ou ao desempenho.
  * A continuidade V574 recupera o mesmo canvas após perda de contexto e retorno
  * do app, sem recriar a Orbe, abrir outro relógio ou sacrificar o fallback.
- * A V582 recebe a presença ficcional Whit no mesmo shader e no mesmo relógio:
- * nenhuma segunda Orbe, nenhuma fala automática e nenhum loop adicional.
+ * A V591 mantém a presença ficcional Whit no mesmo shader e no mesmo relógio,
+ * torna chamadas de estado idempotentes e recusa um segundo motor físico:
+ * nenhuma segunda Orbe, fala automática, física ou loop adicional.
  */
 
 import { orbMotionV207, requestNativeHapticV207 } from './orb-motion-core-v207.js?v=207';
@@ -26,6 +27,7 @@ const lerp = (from, to, amount) => from + (to - from) * amount;
 const follow = (rate, seconds) => 1 - Math.exp(-rate * seconds);
 const clock = () => performance.now();
 const PORTAL_COMMIT_DELAY_MS_V535 = 64;
+const ORB_RENDERER_RELEASE = 591;
 export const ORB_SOUL_STATE_MAP_V582 = Object.freeze({
   serene:'serene',
   aware:'attentive',
@@ -288,9 +290,14 @@ export class RealityOrbEngine {
   constructor(canvas, { onOpen, onIntent } = {}) {
     if (!canvas) throw new Error('O canvas da Orbe não foi encontrado.');
     const current = globalThis[ORB_INSTANCE_KEY];
-    if (current && !current.destroyed) return current;
+    if (current && !current.destroyed) {
+      current.constructorReuses = Number(current.constructorReuses || 0) + 1;
+      if (current.canvas !== canvas) current.foreignCanvasAttempts = Number(current.foreignCanvasAttempts || 0) + 1;
+      return current;
+    }
     globalThis[ORB_INSTANCE_KEY] = this;
     this.canvas = canvas;
+    this.motionCore = orbMotionV207;
     this.shell = canvas.closest('.orb-shell');
     this.status = document.querySelector('#orbStatus');
     this.onOpen = onOpen;
@@ -308,6 +315,10 @@ export class RealityOrbEngine {
     this.contextEventsBound = false;
     this.contextRestoreAttempts = 0;
     this.contextRestoreSuccesses = 0;
+    this.constructorReuses = 0;
+    this.foreignCanvasAttempts = 0;
+    this.presenceTransitions = 0;
+    this.presenceRefreshes = 0;
     this.lifeState = ORB_LIFE_STATES_V208.BOOT;
     this.resumeState = ORB_LIFE_STATES_V208.IDLE;
     if (this.shell) this.shell.dataset.orbLife = ORB_LIFE_STATES_V208.BOOT;
@@ -355,6 +366,7 @@ export class RealityOrbEngine {
     document.documentElement.dataset.orbMagicEngine = 'source-born-microlight-v573';
     document.documentElement.dataset.orbRendererContinuity = 'iphone-pwa-v574';
     document.documentElement.dataset.orbLivingSoulRenderer = 'v582-existing-clock';
+    document.documentElement.dataset.orbRendererWork12 = 'v591-one-engine';
     document.documentElement.dataset.orbRendererState = 'pending';
     if (this.shell) this.shell.dataset.orbRendererState = 'pending';
     this.syncMagicState(this.magicLevel(), true);
@@ -362,7 +374,7 @@ export class RealityOrbEngine {
     this.onSkinImage = event => this.replaceTexture(event.detail?.src);
     document.addEventListener('divina:orb-image', this.onSkinImage);
     if (this.shell) this.shell.dataset.orbPresenceState = this.presenceState;
-    this.motionClient = orbMotionV207.register({
+    this.motionClient = this.motionCore.register({
       id: 'main-orb',
       isActive: () => this.canRender(),
       frameRate: reduced => reduced ? 15 : navigationFrameRateV535(this.presenceState),
@@ -419,12 +431,22 @@ export class RealityOrbEngine {
 
   setPresenceState(state, reason = 'event') {
     if (!hasPresenceProfileV570(state)) return false;
+    const previous = this.presenceState;
+    const repeated = previous === state;
     this.presenceState = state;
     if (this.shell) {
       this.shell.dataset.orbPresenceState = state;
       this.shell.dataset.orbPresenceReason = reason;
     }
     if (persistentPresenceEnabledV570()) this.routeActive = true;
+    if (repeated) {
+      this.presenceRefreshes += 1;
+      if (!document.hidden && this.visible && this.lifeState === ORB_LIFE_STATES_V208.SUSPENDED) {
+        this.resume('presence-refresh');
+      }
+      return false;
+    }
+    this.presenceTransitions += 1;
     const floor = this.presenceProfile().energy;
     this.targetEnergy = state === 'sleeping' ? floor : Math.max(this.targetEnergy, floor);
     if (state === 'sleeping') {
@@ -482,11 +504,11 @@ export class RealityOrbEngine {
     if (this.shell) {
       this.shell.dataset.orbSoulState = semantic;
       this.shell.dataset.orbSoulExpression = String(this.soulExpressions);
-      this.shell.dataset.orbSoulRelease = 'v582';
+      this.shell.dataset.orbSoulRelease = 'v591';
     }
     this.requestFrame();
     return Object.freeze({
-      release:'V582',
+      release:'V591',
       state:semantic,
       rendererState:physical,
       expression:this.soulExpressions,
@@ -1194,7 +1216,7 @@ export class RealityOrbEngine {
   snapshot() {
     return Object.freeze({
       version:208,
-      release:'V582',
+      release:`V${ORB_RENDERER_RELEASE}`,
       rendererState:this.shell?.dataset?.orbRendererState || 'pending',
       lifeState:this.lifeState,
       presenceState:this.presenceState,
@@ -1203,7 +1225,17 @@ export class RealityOrbEngine {
       soulExpressions:this.soulExpressions,
       ariaAnnouncements:this.ariaAnnouncements,
       ariaRepeatsSuppressed:this.ariaRepeatsSuppressed,
-      oneCanvas:true,
+      presenceTransitions:this.presenceTransitions,
+      presenceRefreshes:this.presenceRefreshes,
+      constructorReuses:this.constructorReuses,
+      foreignCanvasAttempts:this.foreignCanvasAttempts,
+      oneCanvas:this.canvas?.id === 'orbCanvas',
+      oneRenderer:this.foreignCanvasAttempts === 0,
+      onePhysics:this.motionCore === orbMotionV207,
+      motionCoreShared:this.motionCore === orbMotionV207,
+      rendererCanvasIsCanonical:this.canvas?.id === 'orbCanvas',
+      physicsAuthority:'orb-motion-v207-shared',
+      gestureAuthority:'orb-gesture-v208-single-arbiter',
       existingShader:true,
       sharedMotionClock:true,
       newAnimationLoops:0,
@@ -1273,6 +1305,7 @@ export class RealityOrbEngine {
     delete document.documentElement.dataset.orbRendererContinuity;
     delete document.documentElement.dataset.orbRendererState;
     delete document.documentElement.dataset.orbLivingSoulRenderer;
+    delete document.documentElement.dataset.orbRendererWork12;
     if (globalThis[ORB_INSTANCE_KEY] === this) delete globalThis[ORB_INSTANCE_KEY];
   }
 }

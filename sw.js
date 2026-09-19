@@ -1,17 +1,21 @@
-/* DIVINA BRUXA — WORK12 · MACROETAPA 2 · UNIVERSO VIVO GLOBAL V590
+/* DIVINA BRUXA — WORK12 · MACROETAPA 3 · ORBE PERSISTENTE V591
    Service Worker mínimo, atômico e recuperável. A instalação só assume o
-   portal quando HTML, aplicação, fundação e universo pertencem ao mesmo corte.
+   portal quando HTML, aplicação, fundação, universo e Orbe pertencem ao corte.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
-const VERSION = 590;
+const VERSION = 591;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work12-v590-universe';
+const CACHE_NAME = 'divina-bruxa-work12-v591-orb';
 const CORE = Object.freeze([
   './index.html',
-  './app-v208.js?v=590-work12-universe',
+  './app-v208.js?v=591-work12-orb',
   './work12-foundation-v589.js?v=589',
   './living-universe-core-v524.js?v=590-work12-universe',
+  './supreme-orb-core-v501.js?v=591-work12-orb',
+  './orb-engine-v208.js?v=591-work12-orb',
+  './orb-persistent-journey-v565.js?v=583-coordinate-travel',
+  './whit-orb-soul-bridge-v581.js?v=591-work12-orb',
   './divina-shell-v180.css?v=180',
   './cosmic-visual-atlas-v1.js?v=590-work12-bridge'
 ]);
@@ -28,16 +32,35 @@ const fetchCore = async path => {
 
 const validateCore = async responses => {
   const index = await responses.get('./index.html')?.clone().text();
-  const app = await responses.get('./app-v208.js?v=590-work12-universe')?.clone().text();
+  const app = await responses.get('./app-v208.js?v=591-work12-orb')?.clone().text();
   const foundation = await responses.get('./work12-foundation-v589.js?v=589')?.clone().text();
   const universe = await responses.get('./living-universe-core-v524.js?v=590-work12-universe')?.clone().text();
-  if (!index?.includes('name="divina-work12" content="V590"')) throw new Error('work12-index-version-mismatch');
-  if (!index.includes('app-v208.js?v=590-work12-universe')) throw new Error('work12-index-app-mismatch');
+  const orb = await responses.get('./supreme-orb-core-v501.js?v=591-work12-orb')?.clone().text();
+  const renderer = await responses.get('./orb-engine-v208.js?v=591-work12-orb')?.clone().text();
+  const journey = await responses.get('./orb-persistent-journey-v565.js?v=583-coordinate-travel')?.clone().text();
+  const soul = await responses.get('./whit-orb-soul-bridge-v581.js?v=591-work12-orb')?.clone().text();
+  if (!index?.includes('name="divina-work12" content="V591"')) throw new Error('work12-index-version-mismatch');
+  if (!index.includes('app-v208.js?v=591-work12-orb')) throw new Error('work12-index-app-mismatch');
   if (!app?.includes("./work12-foundation-v589.js?v=589")) throw new Error('work12-app-foundation-mismatch');
   if (!app.includes("./living-universe-core-v524.js?v=590-work12-universe")) throw new Error('work12-app-universe-mismatch');
+  if (!app.includes("./supreme-orb-core-v501.js?v=591-work12-orb") || !app.includes('divinaWork12Macro3V591')) {
+    throw new Error('work12-app-orb-mismatch');
+  }
   if (!foundation?.includes('WORK12_CONSTITUTION_V589')) throw new Error('work12-foundation-contract-missing');
   if (!universe?.includes('const RELEASE = 590;') || !universe.includes('essentialUniverseDuringTravel:true')) {
     throw new Error('work12-universe-contract-missing');
+  }
+  if (!orb?.includes('const WORK12_RELEASE = 591;') || !orb.includes('auditPersistence(reason')) {
+    throw new Error('work12-orb-identity-contract-missing');
+  }
+  if (!renderer?.includes('const ORB_RENDERER_RELEASE = 591;') || !renderer.includes('sharedMotionClock:true')) {
+    throw new Error('work12-orb-renderer-contract-missing');
+  }
+  if (!journey?.includes('travelerCopies:0') || !journey.includes('physicalOrbTransport:true')) {
+    throw new Error('work12-orb-journey-contract-missing');
+  }
+  if (!soul?.includes('const VERSION = 591;') || !soul.includes("'divina:work12-state'")) {
+    throw new Error('work12-orb-soul-contract-missing');
   }
   return true;
 };
@@ -65,6 +88,7 @@ self.addEventListener('activate', event => {
       try {
         client.postMessage({ type:'DIVINA_WORK12_FOUNDATION_ACTIVE', version:VERSION });
         client.postMessage({ type:'DIVINA_WORK12_UNIVERSE_ACTIVE', version:VERSION });
+        client.postMessage({ type:'DIVINA_WORK12_ORB_ACTIVE', version:VERSION });
         client.postMessage({ type:'DIVINA_RELEASE_READY', version:VERSION });
       } catch {}
     }

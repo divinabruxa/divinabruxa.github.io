@@ -1,13 +1,28 @@
-/* DIVINA BRUXA 2.0 — ORBE VIVA SUPREMA · ALMA WHIT V582
-   Evolução compatível da ponte V581. A persona ficcional Whit vive poeticamente
-   como estado da única Orbe canônica e usa o shader, o relógio e a autoridade de
-   presença já existentes. Não cria Orbe, canvas, balão, fala ou loop adicional.
+/* DIVINA BRUXA — WORK12 · MACROETAPA 3 · ALMA WHIT NA ORBE V591
+   Evolução compatível da ponte V581/V582. A persona ficcional Whit vive
+   poeticamente como estado da única Orbe canônica e agora escuta a máquina de
+   estados central do WORK12. Sinais equivalentes são coalescidos: uma intenção
+   produz uma resposta física, seguida de silêncio — nunca uma reação mecânica
+   duplicada. Não cria Orbe, canvas, balão, fala ou loop adicional.
 */
 
-const VERSION = 582;
+const VERSION = 591;
 const API_COMPATIBILITY = 581;
+const PREVIOUS_RELEASE = 582;
 const MARK = Symbol.for('divina.whit.orb.soul.bridge.v581');
+const MIN_EXPRESSION_INTERVAL = 180;
 const STATES = new Set(['serene','aware','listening','responding','reflecting','traveling','resting']);
+const WORK12_STATE_MAP = Object.freeze({
+  REST:'aware',
+  AWAKEN:'listening',
+  OFFER:'aware',
+  ACCEPT:'listening',
+  QUIET:'serene',
+  DEPART:'traveling',
+  TRAVEL:'traveling',
+  ARRIVE:'traveling',
+  REVEAL:'aware'
+});
 const RENDERER_STATE = Object.freeze({
   serene:'serene',
   aware:'attentive',
@@ -94,17 +109,23 @@ export class WhitOrbSoulBridgeV581 {
     this.lastExpression = 'quiet-dawn';
     this.lastSignalKey = '';
     this.lastSignalAt = 0;
+    this.lastExpressionAt = 0;
     this.coalescedSignals = 0;
+    this.coalescedExpressions = 0;
     this.traveling = false;
     this.suppressedDuringTravel = 0;
     this.lastReason = 'boot';
+    this.work12State = 'REST';
+    this.work12Transitions = 0;
+    this.work12Silences = 0;
     this.history = [];
     this.destroyed = false;
 
     if (this.documentElement) {
-      this.documentElement.dataset.whitOrbSoul = 'v582';
+      this.documentElement.dataset.whitOrbSoul = 'v591';
       this.documentElement.dataset.whitOrbSoulState = this.state;
-      this.documentElement.dataset.orbLivingSoul = 'v582';
+      this.documentElement.dataset.orbLivingSoul = 'v591';
+      this.documentElement.dataset.whitOrbSoulAuthority = 'work12-state-machine';
     }
     this.bind();
     this.setState(this.hidden() ? 'resting' : 'serene', 'boot', { radiate:false });
@@ -126,6 +147,7 @@ export class WhitOrbSoulBridgeV581 {
     if (this.previousOrb && this.previousOrb !== orb && this.previousOrb.dataset) {
       delete this.previousOrb.dataset.whitSoulV581;
       delete this.previousOrb.dataset.orbLivingSoulV582;
+      delete this.previousOrb.dataset.orbLivingSoulV591;
       delete this.previousOrb.dataset.orbSoulExpression;
       delete this.previousOrb.dataset.whitResidence;
     }
@@ -133,6 +155,7 @@ export class WhitOrbSoulBridgeV581 {
     if (!orb?.dataset) return null;
     orb.dataset.whitSoulV581 = this.state;
     orb.dataset.orbLivingSoulV582 = this.state;
+    orb.dataset.orbLivingSoulV591 = this.state;
     orb.dataset.orbSoulExpression = this.lastExpression;
     orb.dataset.whitResidence = 'canonical-orb';
     return orb;
@@ -145,6 +168,22 @@ export class WhitOrbSoulBridgeV581 {
   bind() {
     const doc = this.documentTarget;
     const win = this.windowTarget;
+
+    this.listen(doc, 'divina:work12-state', event => {
+      const work12State = clean(event.detail?.state, 20).toUpperCase();
+      const mapped = WORK12_STATE_MAP[work12State];
+      if (!mapped) return;
+      this.work12State = work12State;
+      this.work12Transitions += 1;
+      this.traveling = ['DEPART','TRAVEL','ARRIVE'].includes(work12State);
+      const silence = work12State === 'REST' || work12State === 'QUIET';
+      if (silence) this.work12Silences += 1;
+      this.setState(mapped, `work12-${work12State.toLowerCase()}`, {
+        radiate:!silence && !this.traveling,
+        transient:0,
+        strength:STRENGTH[mapped]
+      });
+    });
 
     this.listen(doc, 'whit:supreme-state', event => {
       const state = clean(event.detail?.state, 30);
@@ -202,10 +241,12 @@ export class WhitOrbSoulBridgeV581 {
     });
 
     this.listen(doc, 'divina:supreme-orb-will-navigate', () => {
+      if (this.work12AuthorityActive()) return;
       this.traveling = true;
       this.setState('traveling', 'journey-start', { radiate:false });
     });
     this.listen(doc, 'divina:orb-ios-journey-state', event => {
+      if (this.work12AuthorityActive()) return;
       const phase = clean(event.detail?.state, 30);
       if (['depart','flight','portal','arrival','recovery'].includes(phase)) {
         this.traveling = true;
@@ -216,10 +257,12 @@ export class WhitOrbSoulBridgeV581 {
       }
     });
     this.listen(doc, 'divina:supreme-orb-did-navigate', () => {
+      if (this.work12AuthorityActive()) return;
       this.traveling = false;
       this.setState('aware', 'journey-complete', { transient:1100, strength:0.28 });
     });
     const recoverJourney = () => {
+      if (this.work12AuthorityActive()) return;
       this.traveling = false;
       this.setState('aware', 'journey-recovered', { transient:700, strength:0.20 });
     };
@@ -250,6 +293,11 @@ export class WhitOrbSoulBridgeV581 {
     });
   }
 
+  work12AuthorityActive() {
+    return this.documentElement?.dataset?.work12NavigationAuthority === 'v589'
+      || /^v(?:589|590|591)$/.test(String(this.documentElement?.dataset?.work12 || ''));
+  }
+
   chooseExpression(state, reason) {
     const seed = hash(`${state}:${reason}`);
     let index = (seed + this.expressionCursor) % EXPRESSIONS.length;
@@ -266,7 +314,6 @@ export class WhitOrbSoulBridgeV581 {
     const journey = this.orbCore?.journeyEngine;
     const renderer = this.orbCore?.renderer;
     const force = state === 'traveling' || state === 'resting';
-    journey?.setPresence?.(rendererState, { reason:physicalReason, restAfter:0, force });
     const result = renderer?.expressSoul?.({
       state,
       strength,
@@ -274,6 +321,9 @@ export class WhitOrbSoulBridgeV581 {
       variation:expression,
       reason:physicalReason
     }) || renderer?.setPresenceState?.(rendererState, physicalReason) || null;
+    // O renderer recebe a expressão primeiro. O journey apenas sincroniza a
+    // semântica em seguida; a chamada idempotente não produz uma segunda física.
+    journey?.setPresence?.(rendererState, { reason:physicalReason, restAfter:0, force });
     this.rendererState = rendererState;
     this.physicalExpressions += 1;
     return result;
@@ -291,6 +341,14 @@ export class WhitOrbSoulBridgeV581 {
     }
     this.lastSignalKey = signalKey;
     this.lastSignalAt = now;
+
+    if (this.state === next && this.physicalExpressions > 0
+      && (['traveling','resting'].includes(next) || now - this.lastExpressionAt < MIN_EXPRESSION_INTERVAL)) {
+      this.coalescedExpressions += 1;
+      this.lastReason = safeReason;
+      this.syncOrb();
+      return this.state;
+    }
 
     const navigationActive = this.traveling
       || this.documentElement?.dataset?.orbNavigationState === 'active'
@@ -320,6 +378,7 @@ export class WhitOrbSoulBridgeV581 {
       focus:options.focus || null,
       expression
     });
+    this.lastExpressionAt = now;
 
     if (options.radiate !== false && !this.hidden()) {
       this.universe?.signalPresence?.({ state:next, strength });
@@ -365,7 +424,8 @@ export class WhitOrbSoulBridgeV581 {
   status() {
     return Object.freeze({
       version:VERSION,
-      release:'V582',
+      release:'V591',
+      previousRelease:PREVIOUS_RELEASE,
       apiCompatibility:API_COMPATIBILITY,
       state:this.state,
       rendererState:this.rendererState,
@@ -374,11 +434,16 @@ export class WhitOrbSoulBridgeV581 {
       transitions:this.transitions,
       sameStateRefreshes:this.sameStateRefreshes,
       coalescedSignals:this.coalescedSignals,
+      coalescedExpressions:this.coalescedExpressions,
       physicalExpressions:this.physicalExpressions,
       distinctExpressionProfiles:EXPRESSIONS.length,
       radiations:this.radiations,
       traveling:this.traveling,
       suppressedDuringTravel:this.suppressedDuringTravel,
+      work12State:this.work12State,
+      work12Transitions:this.work12Transitions,
+      work12Silences:this.work12Silences,
+      work12StateAuthority:this.work12AuthorityActive(),
       history:Object.freeze([...this.history]),
       canonicalOrbOnly:true,
       sameRenderer:true,
@@ -407,6 +472,7 @@ export class WhitOrbSoulBridgeV581 {
     if (this.previousOrb?.dataset) {
       delete this.previousOrb.dataset.whitSoulV581;
       delete this.previousOrb.dataset.orbLivingSoulV582;
+      delete this.previousOrb.dataset.orbLivingSoulV591;
       delete this.previousOrb.dataset.orbSoulExpression;
       delete this.previousOrb.dataset.whitResidence;
     }
@@ -414,6 +480,7 @@ export class WhitOrbSoulBridgeV581 {
       delete this.documentElement.dataset.whitOrbSoul;
       delete this.documentElement.dataset.whitOrbSoulState;
       delete this.documentElement.dataset.orbLivingSoul;
+      delete this.documentElement.dataset.whitOrbSoulAuthority;
     }
     if (globalThis[MARK] === this) delete globalThis[MARK];
     if (globalThis.divinaWhitOrbSoulV581 === this) delete globalThis.divinaWhitOrbSoulV581;
@@ -434,6 +501,7 @@ export function createWhitOrbSoulBridgeV581(options = {}) {
 
 export const ORB_LIVING_SOUL_CONTRACT_V582 = Object.freeze({
   version:VERSION,
+  previousRelease:PREVIOUS_RELEASE,
   apiCompatibility:API_COMPATIBILITY,
   canonicalOrbOnly:true,
   sameRenderer:true,
@@ -450,6 +518,9 @@ export const ORB_LIVING_SOUL_CONTRACT_V582 = Object.freeze({
   modelCalls:0,
   apiCalls:0,
   speechAdded:false,
+  work12StateMachine:true,
+  duplicatePhysicalResponses:false,
+  minimumExpressionIntervalMs:MIN_EXPRESSION_INTERVAL,
   expressionProfiles:EXPRESSIONS.length
 });
 

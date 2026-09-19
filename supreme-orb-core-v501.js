@@ -1,8 +1,11 @@
-/* DIVINA BRUXA 4.0 — ORBE SUPREMA V501 · CONTINUIDADE iOS V551
+/* DIVINA BRUXA — WORK12 · MACROETAPA 3 · ORBE PERSISTENTE V591
+   Evolução compatível do Núcleo da Orbe Suprema V501.
+
    Uma presença, um estado e um caminho para todos os mundos. O toque ilumina
    o interior sem deslocar o corpo; somente uma viagem de realidade autorizada
    conduz a própria presença visual da Orbe pelo mesmo universo contínuo.
-   V535 elimina filas de toques e usa o Registro Vivo como fonte de rotas.
+   A V591 sela a identidade da matéria canônica e audita, sem criar outro
+   efeito, que a mesma Orbe, canvas, renderer e física atravessam e retornam.
 */
 
 import {
@@ -12,9 +15,11 @@ import {
 } from './world-truth-registry-v535.js?v=535';
 
 const VERSION = 501;
+const WORK12_RELEASE = 591;
 const MARK = Symbol.for('divina.supreme.orb.v501');
 const STYLE_ID = 'divinaSupremeOrbCoreV501Styles';
 const STYLE_HREF = './supreme-orb-core-v501.css?v=501';
+const ENTITY_ID = 'divina-orb-canonical';
 const PROJECTION_SELECTOR = [
   '[data-orb-projection]',
   '[data-mini-orb]',
@@ -135,6 +140,10 @@ export class SupremeOrbCoreV501 {
     this.claimedHost = null;
     this.journeyClaimHandoffs = 0;
     this.journeyEngine = null;
+    this.entityNode = this.orb;
+    this.persistenceAudits = 0;
+    this.persistenceFailures = 0;
+    this.lastPersistenceAudit = null;
 
     installStyles();
     this.layer = createTransitionLayer();
@@ -150,8 +159,10 @@ export class SupremeOrbCoreV501 {
     this.bind();
     this.observe();
     this.setMode(this.mode, { route:this.route, reason:'boot' });
+    this.auditPersistence('boot');
 
     document.documentElement.dataset.supremeOrb = 'v501';
+    document.documentElement.dataset.orbPersistentWork12 = 'v591';
     emit('divina:supreme-orb-ready', this.snapshot());
   }
 
@@ -159,6 +170,7 @@ export class SupremeOrbCoreV501 {
     if (!this.orb) return;
     this.orb.dataset.supremeOrb = 'living';
     this.orb.dataset.supremeOrbVersion = String(VERSION);
+    this.orb.dataset.orbEntity = ENTITY_ID;
     this.orb.setAttribute('draggable', 'false');
     if (!this.orb.matches('button,a,[role="button"]')) {
       this.orb.setAttribute('role', 'button');
@@ -168,6 +180,57 @@ export class SupremeOrbCoreV501 {
       this.orb.setAttribute('aria-label', 'Orbe das Realidades');
     }
     this.canvas?.setAttribute?.('aria-hidden', 'true');
+    if (this.canvas?.dataset) this.canvas.dataset.orbRendererCanvas = 'canonical';
+  }
+
+  auditPersistence(reason = 'manual') {
+    const canonicalOrbs = [...document.querySelectorAll('#orb')];
+    const canonicalCanvases = [...document.querySelectorAll('#orbCanvas')];
+    const livingOrbs = [...document.querySelectorAll('[data-supreme-orb="living"]')];
+    const entityPreserved = canonicalOrbs.length === 1
+      && canonicalOrbs[0] === this.entityNode
+      && this.orb === this.entityNode
+      && this.entityNode?.isConnected === true;
+    const rendererPreserved = canonicalCanvases.length === 1
+      && canonicalCanvases[0] === this.canvas
+      && this.renderer?.canvas === this.canvas;
+    const physicsPreserved = Boolean(
+      this.motion
+      && this.renderer?.motionClient
+      && this.renderer?.motionCore === this.motion
+    );
+    const journeySharesEntity = !this.journeyEngine
+      || (this.journeyEngine.core === this && Number(this.journeyEngine?.status?.().travelerCopies || 0) === 0);
+    const healthy = entityPreserved
+      && rendererPreserved
+      && physicsPreserved
+      && journeySharesEntity
+      && livingOrbs.length === 1;
+
+    this.persistenceAudits += 1;
+    if (!healthy) this.persistenceFailures += 1;
+    this.lastPersistenceAudit = Object.freeze({
+      release:`V${WORK12_RELEASE}`,
+      reason:String(reason || 'manual').slice(0,48),
+      healthy,
+      entityPreserved,
+      rendererPreserved,
+      physicsPreserved,
+      journeySharesEntity,
+      canonicalOrbs:canonicalOrbs.length,
+      livingOrbs:livingOrbs.length,
+      canonicalCanvases:canonicalCanvases.length,
+      conceptualOrbCopies:0,
+      projectionSurfaces:this.projections().length
+    });
+
+    const root = document.documentElement;
+    root.dataset.orbPersistentIntegrity = healthy ? 'ok' : 'degraded';
+    root.dataset.orbPersistentEntity = 'v591-one';
+    root.dataset.orbRendererAuthority = 'v591-one';
+    root.dataset.orbPhysicsAuthority = 'v207-shared';
+    if (!healthy) emit('divina:orb-persistence-warning', this.lastPersistenceAudit);
+    return this.lastPersistenceAudit;
   }
 
   scheduleProjectionAdoption(root = document) {
@@ -322,10 +385,12 @@ export class SupremeOrbCoreV501 {
 
     document.addEventListener('divina:route-ready', event => {
       this.settleRoute(event.detail?.id, 'route-ready');
+      this.auditPersistence('route-ready');
     }, { signal });
 
     document.addEventListener('divina:page-ready', event => {
       this.settleRoute(event.detail?.id, 'page-ready');
+      this.auditPersistence('page-ready');
     }, { signal });
 
     document.addEventListener('divina:page-loading', event => {
@@ -347,6 +412,10 @@ export class SupremeOrbCoreV501 {
       if (!/skin|orb/i.test(event.key || '')) return;
       this.syncSkin(event.newValue || '');
     }, { signal });
+
+    globalThis.addEventListener?.('pageshow', () => {
+      this.auditPersistence('pageshow');
+    }, { signal, passive:true });
 
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) callFirst(this.renderer, ['pause','sleep','suspend']);
@@ -549,6 +618,7 @@ export class SupremeOrbCoreV501 {
       active:Boolean(this.journeyEngine),
       journeyVersion:this.journeyEngine?.version || null
     });
+    this.auditPersistence('journey-attached');
     return this.journeyEngine;
   }
 
@@ -625,6 +695,7 @@ export class SupremeOrbCoreV501 {
     target.append(this.orb);
     if (mode) this.setMode(mode, { route:this.route, reason:'claim' });
     callFirst(this.renderer, ['resize','refresh']);
+    this.auditPersistence('claim');
     emit('divina:supreme-orb-claimed', { mode:this.mode, host:target.id || null });
     let released = false;
     return () => {
@@ -643,6 +714,7 @@ export class SupremeOrbCoreV501 {
       else this.orb.removeAttribute('aria-label');
       this.setMode(previous.mode, { route:this.route, reason:'claim-restored-v551' });
       callFirst(this.renderer, ['resize','refresh']);
+      this.auditPersistence('claim-restored');
       emit('divina:supreme-orb-claim-restored', {
         host:this.claimedHost?.id || null,
         mode:this.mode
@@ -682,6 +754,7 @@ export class SupremeOrbCoreV501 {
     this.orb.setAttribute('aria-label', 'Orbe das Realidades');
     callFirst(this.renderer, ['resize','refresh']);
     this.settleRoute('home', 'return-home');
+    this.auditPersistence('return-home');
     emit('divina:supreme-orb-returned-home', { route:'home' });
     return true;
   }
@@ -693,8 +766,10 @@ export class SupremeOrbCoreV501 {
     try { renderer = this.renderer?.snapshot?.() || null; } catch {}
     try { motion = this.motion?.snapshot?.() || null; } catch {}
     try { journey = this.journeyEngine?.status?.() || null; } catch {}
+    const persistence = this.auditPersistence('snapshot');
     return {
       version:VERSION,
+      release:`V${WORK12_RELEASE}`,
       route:this.route,
       mode:this.mode,
       direction:this.direction,
@@ -713,7 +788,16 @@ export class SupremeOrbCoreV501 {
       renderer,
       motion,
       journey,
-      oneLivingOrb:true,
+      persistence,
+      entityId:ENTITY_ID,
+      entityPreserved:persistence.entityPreserved,
+      oneLivingOrb:persistence.canonicalOrbs === 1 && persistence.livingOrbs === 1,
+      oneRenderer:persistence.rendererPreserved,
+      onePhysics:persistence.physicsPreserved,
+      conceptualOrbCopies:0,
+      projectionSurfacesAreNotEntities:true,
+      persistenceAudits:this.persistenceAudits,
+      persistenceFailures:this.persistenceFailures,
       physicalTouchMotion:false,
       spatialRouteTravel:Boolean(this.journeyEngine),
       routeCurtain:false,
@@ -738,6 +822,13 @@ export class SupremeOrbCoreV501 {
     document.documentElement.removeAttribute('data-supreme-orb-mode');
     document.documentElement.removeAttribute('data-orb-navigation-state');
     document.documentElement.removeAttribute('data-orb-navigation-authority');
+    document.documentElement.removeAttribute('data-orb-persistent-work12');
+    document.documentElement.removeAttribute('data-orb-persistent-integrity');
+    document.documentElement.removeAttribute('data-orb-persistent-entity');
+    document.documentElement.removeAttribute('data-orb-renderer-authority');
+    document.documentElement.removeAttribute('data-orb-physics-authority');
+    if (this.orb?.dataset) delete this.orb.dataset.orbEntity;
+    if (this.canvas?.dataset) delete this.canvas.dataset.orbRendererCanvas;
     delete globalThis[MARK];
   }
 }
