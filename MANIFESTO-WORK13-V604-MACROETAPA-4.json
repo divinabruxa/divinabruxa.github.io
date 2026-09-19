@@ -1,0 +1,111 @@
+{
+  "release": "V604",
+  "work": "WORK13",
+  "name": "Cosmos Vivo",
+  "macroStage": "4-of-10",
+  "title": "Leitura Cósmica em Camadas — Carta do Dia",
+  "baseRequired": "V603",
+  "baseCommit": "4c85b0f455ac766e27623c5590fc7ca006f7c254",
+  "frozenBase": "WORK12-V600",
+  "law": "one-orb-one-universe-one-presence-one-journey",
+  "installation": "flat-root-overlay",
+  "production": {
+    "replaced": [
+      "app-v208.js",
+      "index.html",
+      "sw.js"
+    ],
+    "added": [
+      "cosmic-daily-reading-v604.js",
+      "cosmic-daily-reading-v604.css"
+    ],
+    "newCssFiles": 1
+  },
+  "layeredDailyReading": {
+    "route": "daily",
+    "sequence": [
+      "card",
+      "silence",
+      "one-sentence-essence",
+      "depth-on-explicit-request"
+    ],
+    "ritualAuthority": "WORK12-V595",
+    "dailyAuthority": "V554",
+    "editorialAuthority": "daily-meaning-runtime-v183",
+    "editorialCardsValidated": 78,
+    "maximumEssenceSentences": 1,
+    "depthControlReused": true,
+    "depthRequiresExplicitGesture": true,
+    "changesCardSelection": false,
+    "changesDailyPersistence": false,
+    "changesBrasiliaCycle": false,
+    "automaticNavigation": false,
+    "automaticWhitSpeech": false
+  },
+  "privacy": {
+    "approvedEditorialMeaningReadsAtMostPerCard": 1,
+    "privateContentReads": 0,
+    "intentionReads": 0,
+    "questionReads": 0,
+    "journalBodyReads": 0,
+    "cardIdentityReads": 0,
+    "storageReads": 0,
+    "storageWrites": 0,
+    "networkCalls": 0,
+    "modelCalls": 0
+  },
+  "performance": {
+    "newDomNodesMaximum": 1,
+    "newCanvases": 0,
+    "newRenderers": 0,
+    "newPermanentAnimationLoops": 0,
+    "newMutationObservers": 0,
+    "newDeferredTimers": 0,
+    "newClickListeners": 0,
+    "newInputListeners": 0,
+    "iphoneFirst": true,
+    "landscapeCompact": true,
+    "reducedMotionPreservesMeaning": true,
+    "forcedColorsSupported": true
+  },
+  "protected": {
+    "work12RuntimeFilesVerifiedUnchanged": 24,
+    "work13V602ContextMemoryUnchanged": true,
+    "work13V603RealityResonanceUnchanged": true,
+    "dailyWorldV554Unchanged": true,
+    "readingRitualV595Unchanged": true,
+    "work12Snapshot": "SNAPSHOT-WORK12-V600-PROTEGIDO.zip",
+    "work12SnapshotSha256": "871a9118fa58eb1f1dd118110bda21a68f071ef3d00cb56b8ae6109aa1ac816d",
+    "canonicalOrbs": 1,
+    "canonicalCanvases": 1,
+    "finalStyleReferences": 1,
+    "tarotFreeChanged": false,
+    "spreadsChanged": false,
+    "pricesChanged": false,
+    "realBillingAuthorized": false
+  },
+  "hashes": {
+    "app-v208.js": "e84820e753e0a4d6a61e584741d19798868cbded244d79d6d9392a336e28fc37",
+    "index.html": "d9fe8e8433833764e270620194d92bf5c157e798e078967990145886e07b5c9a",
+    "sw.js": "634365595d917a003000123c05173924353eb571c17ab4205d3078e416bf0f01",
+    "cosmic-daily-reading-v604.js": "747db49e21fd1b6fa8f6484d4841b99b3cc54984a27b9dddebcd7b7e61a5803c",
+    "cosmic-daily-reading-v604.css": "04e30e0ceb1d538dda594294cfd52f318b4cebb05a828d78489e101cec0f0de5"
+  },
+  "quality": {
+    "work13V604ChecksPassed": 727,
+    "work13V603CompatibleRuntimeChecksPassed": 128,
+    "work13V602CompatibleRuntimeChecksPassed": 63,
+    "compatibleWork12RegressionChecksPassed": 320,
+    "totalChecksPassed": 1238,
+    "failed": 0,
+    "serviceWorkerCoreAssets": 31,
+    "cleanOverlayOnV603": "PASS"
+  },
+  "verificationFiles": [
+    "qa-work13-v604-layered-daily-reading.mjs",
+    "qa-work13-v604-daily-runtime.mjs",
+    "qa-work13-v604-service-worker-runtime.mjs",
+    "qa-work13-v604-boot-runtime.mjs"
+  ],
+  "nextAuthorizedStage": "WORK13-macro-5-spreads-cards-converse-and-synthesize"
+}

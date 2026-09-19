@@ -1,0 +1,86 @@
+/* DIVINA BRUXA — WORK13 · COSMOS VIVO · MACROETAPA 4 · V604
+   Uma frase entre o silencio e o mergulho. Nenhum efeito permanente novo. */
+
+html[data-cosmic-daily-reading="v604"]{
+  --db604-essence-ink:color-mix(in srgb,var(--db-skin-light,#f0d68a) 24%,#fffaff);
+  --db604-essence-line:color-mix(in srgb,var(--db-skin-light,#f0d68a) 30%,transparent);
+}
+
+#dailyCard .dw509[data-cosmic-reading="v604"] .db604-daily-essence{
+  position:relative;
+  z-index:5;
+  width:min(36ch,94%);
+  margin:2px auto 0;
+  padding:clamp(13px,3.2vw,18px) clamp(14px,4vw,24px) 0;
+  border-block-start:1px solid var(--db604-essence-line);
+  color:var(--db604-essence-ink);
+  font:500 clamp(1.08rem,3.9vw,1.34rem)/1.48 Georgia,"Times New Roman",serif;
+  letter-spacing:-.012em;
+  text-align:center;
+  text-wrap:balance;
+}
+
+#dailyCard .dw509[data-cosmic-reading="v604"] .db604-daily-essence[hidden]{
+  display:none!important;
+}
+
+#dailyCard .dw509[data-cosmic-reading="v604"]:not([data-state="revealed"]) .db604-daily-essence,
+#dailyCard .dw509[data-cosmic-reading="v604"]:is([data-reading-phase="rest"],[data-reading-phase="symbol"],[data-reading-phase="silence"],[data-reading-phase="travel"]) .db604-daily-essence{
+  display:none!important;
+}
+
+#dailyCard .dw509[data-cosmic-reading="v604"]:is([data-reading-phase="essence"],[data-reading-phase="depth"]) .db604-daily-essence:not([hidden]){
+  display:block;
+  animation:db604-essence-arrive 440ms cubic-bezier(.2,.78,.2,1) both;
+}
+
+/* Na primeira camada, nome e frase bastam. As palavras-chave voltam somente
+   quando a pessoa chama a profundidade já existente. */
+#dailyCard .dw509[data-cosmic-reading="v604"][data-reading-phase="essence"] .dw509__identity p{
+  display:none!important;
+}
+
+#dailyCard .dw509[data-cosmic-reading="v604"][data-reading-phase="depth"] .db604-daily-essence{
+  color:color-mix(in srgb,var(--db604-essence-ink) 76%,transparent);
+}
+
+#dailyCard .dw509[data-cosmic-reading="v604"] [data-reading-depth-call="daily"][data-cosmic-depth-call="v604"]{
+  min-width:142px;
+}
+
+@keyframes db604-essence-arrive{
+  from{opacity:0;transform:translate3d(0,10px,0)}
+  to{opacity:1;transform:translate3d(0,0,0)}
+}
+
+@media(max-width:430px){
+  #dailyCard .dw509[data-cosmic-reading="v604"] .db604-daily-essence{
+    width:min(32ch,96%);
+    padding-inline:8px;
+    font-size:clamp(1.04rem,4.8vw,1.2rem);
+    line-height:1.46;
+  }
+}
+
+@media(orientation:landscape) and (max-height:520px){
+  #dailyCard .dw509[data-cosmic-reading="v604"] .db604-daily-essence{
+    width:min(48ch,96%);
+    padding-block-start:10px;
+    font-size:1rem;
+    line-height:1.4;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  #dailyCard .dw509[data-cosmic-reading="v604"] .db604-daily-essence{
+    animation:none!important;
+    transition:none!important;
+  }
+}
+
+@media(forced-colors:active){
+  #dailyCard .dw509[data-cosmic-reading="v604"] .db604-daily-essence{
+    border-color:CanvasText;
+    color:CanvasText;
+  }
+}

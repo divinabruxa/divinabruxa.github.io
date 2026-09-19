@@ -1,0 +1,13 @@
+DIVINA BRUXA — WORK13 V604 — MACROETAPA 4
+LEITURA CÓSMICA EM CAMADAS · CARTA DO DIA
+
+BASE OBRIGATÓRIA: V603 já instalada.
+
+1. Extraia o ZIP.
+2. Envie os 13 arquivos diretamente para a raiz do repositório.
+3. Substitua somente: app-v208.js, index.html e sw.js.
+4. Os outros 10 arquivos são novos. Não apague nenhum arquivo existente.
+5. Feche e reabra o Safari/PWA no iPhone após a publicação.
+
+Resultado esperado: carta → silêncio → uma frase de essência → “Aprofundar”.
+As camadas completas só aparecem após esse toque. Whit permanece em silêncio.
