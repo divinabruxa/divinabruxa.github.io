@@ -1,0 +1,70 @@
+DIVINA BRUXA — WORK12
+MACROETAPA 10 DE 10 — FLUIDEZ SUPREMA FINAL
+RELEASE V598
+
+LEI DESTA ENTREGA
+Uma Orbe. Um Universo. Uma física. Uma presença.
+Toque. Resposta. Silêncio. Viagem. Chegada.
+
+COMO INSTALAR
+1. Abra a raiz atual do site, onde já está instalada a V597.
+2. Envie TODOS os arquivos deste ZIP diretamente para essa raiz.
+3. Autorize a substituição de app-v208.js, index.html e sw.js.
+4. Não apague nenhuma pasta nem qualquer outro arquivo já existente.
+5. Aguarde o envio terminar por completo antes de abrir o site.
+6. No iPhone, feche e abra novamente o Safari ou o app instalado. O service worker V598 assume a atualização de forma atômica.
+
+IMPORTANTE
+- O ZIP é plano: os arquivos já estão na posição certa.
+- Esta entrega depende da V597 que você acabou de instalar.
+- Não reenvie arquivos antigos. Eles foram preservados e verificados por hash.
+- Nenhum conteúdo, destino, Tarot, Carta do Dia, Escola, Diário, Consulta ou Loja foi apagado.
+
+O QUE NASCE NA V598
+- A Home fica somente com Universo e a única Orbe viva.
+- Um toque na Orbe chama o Universo e revela até duas intenções.
+- Dois toques continuam levando ao Tarot Livre pela viagem da Orbe.
+- Marca, mini-Orbe e dock deixam de competir com a Orbe verdadeira.
+- Nas realidades, “Sopro” é o acesso mínimo a todos os caminhos.
+- O Tarot Livre começa pelo encontro: símbolo, Orbe e silêncio.
+- Whit permanece dentro da matéria da Orbe e não fala automaticamente.
+- Toda viagem conserva prioridade sobre efeitos pesados.
+
+ARQUIVOS SUBSTITUÍDOS
+- app-v208.js
+- index.html
+- sw.js
+
+ARQUIVOS NOVOS DE EXECUÇÃO
+- work12-final-continuity-v598.js
+- work12-final-continuity-v598.css
+
+ARQUIVOS DE VERIFICAÇÃO E DOCUMENTAÇÃO
+- qa-work12-v598-fluidez-suprema-final.mjs
+- qa-work12-v598-final-runtime.mjs
+- qa-work12-v598-service-worker-runtime.mjs
+- qa-work12-v598-boot-runtime.mjs
+- RELATORIO-WORK12-V598-MACROETAPA-10-FLUIDEZ-SUPREMA-FINAL.md
+- MANIFESTO-WORK12-V598-MACROETAPA-10.json
+- HASHES-SHA256-WORK12-V598.txt
+
+VERIFICAÇÃO OPCIONAL
+Na raiz do site, execute:
+
+  sha256sum -c HASHES-SHA256-WORK12-V598.txt
+
+Depois, se Node.js estiver disponível:
+
+  node qa-work12-v598-fluidez-suprema-final.mjs
+  node qa-work12-v598-final-runtime.mjs
+  node qa-work12-v598-service-worker-runtime.mjs
+  node qa-work12-v598-boot-runtime.mjs
+
+RESULTADO ESPERADO
+Todos os quatro relatórios terminam em PASS: 454 verificações novas.
+Com as 325 regressões funcionais preservadas, o fechamento soma 779 verificações aprovadas.
+
+FIM DA MACROETAPA 10.
+Não existe outra Orbe escondida. Não existe corte seco. Não existe fala obrigatória.
+Fica o inevitável: toque, resposta, silêncio.
+

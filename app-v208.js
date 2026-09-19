@@ -1,7 +1,7 @@
-/* DIVINA BRUXA — WORK12 · MACROETAPA 9 · INTELIGÊNCIA DA EXPERIÊNCIA V597
-   A base V589–V596 permanece soberana. Um único coordenador local agora lê
-   somente a física pública da sessão para proteger movimento, silêncio, foco
-   e presença. Whit continua dentro da única Orbe, sem fala automática. */
+/* DIVINA BRUXA — WORK12 · MACROETAPA 10 · FLUIDEZ SUPREMA FINAL V598
+   A base V589–V597 permanece soberana. A ultima camada retira da percepcao
+   tudo que ainda parecia interface: na Origem, a unica Orbe chama o universo;
+   nas realidades, o Sopro preserva os caminhos. Whit vive na mesma materia. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -63,6 +63,7 @@ import { createWhitLivingPresenceV594 } from './whit-living-presence-v594.js?v=5
 import { createReadingRitualCoreV595 } from './reading-ritual-core-v595.js?v=595-work12-ritual';
 import { createRealityChambersV596 } from './reality-chambers-v596.js?v=596-work12-chambers';
 import { createExperienceIntelligenceV597 } from './experience-intelligence-v597.js?v=597-work12-intelligence';
+import { createWork12FinalContinuityV598 } from './work12-final-continuity-v598.js?v=598-work12-final';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -307,6 +308,7 @@ const navigationGo = navigation.go;
 let supremeOrb = null;
 let pageLoader = null;
 let work12Foundation = null;
+let finalContinuity = null;
 const go = (id, options) => {
   if (work12Foundation?.navigate) return work12Foundation.navigate(id, options || {});
   pageLoader?.prime?.(id).catch?.(() => {});
@@ -350,7 +352,10 @@ pageLoader = createPageLoader({ config: CONFIG, go:navigationGo, authClient });
 navigation.setBeforeEnter(pageLoader.prepare);
 
 const realityOrb = safely('motor da Orbe V208', () => new RealityOrbEngine($('#orbCanvas'), {
-  onIntent: () => pageLoader.prime('tarot').catch(() => {}),
+  onIntent: () => {
+    pageLoader.prime('tarot').catch(() => {});
+    finalContinuity?.onCanonicalOrbIntent?.('touch');
+  },
   onOpen: () => go('tarot', { source:'home-orb-double-tap' })
 }));
 
@@ -623,6 +628,11 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK12_FINAL_ACTIVE') {
+    document.documentElement.dataset.work12FinalWorker = `v${event.data.version || 598}`;
+    work12Foundation?.audit?.('final-worker-active');
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK12_INTELLIGENCE_ACTIVE') {
     document.documentElement.dataset.work12IntelligenceWorker = `v${event.data.version || 597}`;
     work12Foundation?.audit?.('intelligence-worker-active');
@@ -682,14 +692,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v597-work12-app';
+  window.__divinaSWBootstrap = 'v598-work12-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=597', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=598', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v597';
+        document.documentElement.dataset.releaseEpoch = 'v598';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] WORK12 V597 registrado');
+        console.info('[Divina] WORK12 V598 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -1443,6 +1453,85 @@ window.divinaWork12Macro9V597 = Object.freeze({
   }
 });
 window.divinaFluidezSupremaV597 = window.divinaWork12Macro9V597;
+// A camada final nao cria outra materia. Ela faz a unica Orbe assumir tambem
+// o chamado das intencoes na Origem e silencia as projecoes de interface.
+finalContinuity = safely('WORK12 · Fluidez Suprema Final V598', () =>
+  createWork12FinalContinuityV598({
+    orbCore:supremeOrb,
+    journey:orbIOSJourney,
+    intelligence:experienceIntelligence,
+    menuResolver:() => globalThis.divinaMenuV502
+  })
+);
+window.orbe.finalContinuity = finalContinuity;
+window.orbe.fluidezSuprema = finalContinuity;
+document.documentElement.dataset.work12Macro = '10-fluidez-suprema-final';
+document.documentElement.dataset.work12Final = 'v598';
+window.divinaWork12Macro10V598 = Object.freeze({
+  version:598,
+  base:'V597',
+  work:'WORK12',
+  stage:'fluidez-suprema-final',
+  finalContinuity,
+  intelligence:experienceIntelligence,
+  chambers:realityChambers,
+  ritual:readingRitual,
+  presence:whitLivingPresence,
+  orb:supremeOrb,
+  journey:orbIOSJourney,
+  universe:livingUniverse,
+  coordinator:work12Foundation,
+  status:() => {
+    const final = finalContinuity?.status?.() || null;
+    const finalAudit = finalContinuity?.audit?.() || null;
+    const orb = supremeOrb?.snapshot?.() || null;
+    const journey = orbIOSJourney?.status?.() || null;
+    const universe = livingUniverse?.status?.() || null;
+    const intelligence = experienceIntelligence?.status?.() || null;
+    return Object.freeze({
+      release:'V598',
+      macroStage:'10-of-10',
+      law:'one-orb-one-universe-one-physics-one-presence',
+      final,
+      finalAudit,
+      orb,
+      journey,
+      universe,
+      intelligence,
+      screenModel:'continuous-universe-coordinates',
+      navigationGrammar:Object.freeze(['touch','response','silence','travel','arrival']),
+      homeOnlyUniverseAndOrb:true,
+      interfaceDisappears:true,
+      homeTapCallsUniverse:true,
+      homeDoubleTapOpensTarot:true,
+      realityAccessIsBreath:true,
+      maximumVisibleIntentions:2,
+      onePhysicalOrb:orb?.oneLivingOrb === true,
+      sameEntity:orb?.entityPreserved === true,
+      onePhysics:orb?.onePhysics === true,
+      travelerCopies:Number(journey?.travelerCopies || 0),
+      teleport:journey?.teleportFallback === true,
+      flicker:journey?.flicker === true,
+      heavyEffectsPausedDuringTravel:journey?.heavyEffectsPausedDuringAnyTravel === true,
+      automaticWhitSpeech:false,
+      whitResidence:'canonical-orb',
+      silenceIsPresence:true,
+      movementFirst:true,
+      legacyDestinationsPreserved:true,
+      iphoneFirst:true,
+      privateContentReads:0,
+      storageReads:0,
+      storageWrites:0,
+      modelCalls:0,
+      apiCalls:0,
+      newCanvases:0,
+      newRenderers:0,
+      newAnimationLoops:0,
+      newMutationObservers:0
+    });
+  }
+});
+window.divinaFluidezSupremaV598 = window.divinaWork12Macro10V598;
 window.whit = whitCore;
 
 window.divinaWhitV212 = Object.freeze({
