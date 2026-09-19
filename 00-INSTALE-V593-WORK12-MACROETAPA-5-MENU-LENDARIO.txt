@@ -1,0 +1,52 @@
+DIVINA BRUXA — WORK12
+MACROETAPA 5 DE 10 — MENU LENDÁRIO
+ENTREGA V593
+
+BASE OBRIGATÓRIA
+Esta entrega continua diretamente a V592 já instalada.
+Não apague nenhum outro arquivo do projeto.
+
+COMO INSTALAR
+1. Abra a raiz do repositório da Divina Bruxa.
+2. Extraia o ZIP diretamente nessa raiz, sem criar uma pasta interna.
+3. Confirme a substituição destes 5 arquivos de produção:
+   - app-v208.js
+   - index.html
+   - orbital-menu-v502.js
+   - orbital-menu-v502.css
+   - sw.js
+4. Envie todos os arquivos extraídos em uma única atualização.
+5. Aguarde a publicação e feche/reabra o site ou o app instalado no iPhone.
+
+O QUE NASCE NESTA ETAPA
+- MENU deixa de ser lista e passa a ser SOPRO.
+- No máximo duas intenções aparecem por vez.
+- Toque no céu ou deslize horizontalmente para revelar outro sopro.
+- A Orbe física permanece única e leva de verdade à realidade escolhida.
+- A própria Orbe e a marca mantêm a Origem sempre acessível.
+- Não existe rotação automática: o silêncio também permanece vivo.
+- Efeitos são pausados durante nascimento, dissolução e viagem.
+
+PRIMEIRO SOPRO
+- Revelar · Tarot
+- Receber · Hoje
+
+GARANTIAS
+- Base V592 preservada.
+- Uma Orbe e um canvas.
+- Nenhum teleporte, pisca ou cópia da Orbe.
+- Tarot Livre e Carta do Dia não foram alterados.
+- Whit não fala a cada toque.
+- Navegação, histórico e retorno natural continuam sob a mesma autoridade.
+- 459 verificações aprovadas nesta entrega.
+
+ARQUIVOS DE QA E DOCUMENTAÇÃO
+Os arquivos iniciados por qa-, o relatório, o manifesto e os hashes são
+evidências da entrega. Eles não substituem nenhum núcleo antigo.
+
+SINAL DE INSTALAÇÃO CORRETA
+No topo aparece SOPRO. Ao tocar, nasce somente uma dupla de intenções ao redor
+da única Orbe. O toque no céu dissolve essa dupla e revela a próxima.
+
+Toque. Resposta. Silêncio.
+

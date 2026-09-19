@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — WORK12 · MACROETAPA 4 · NAVEGAÇÃO COORDENADA V592
-   Fundação, Universo e Orbe permanecem soberanos. A V592 faz toque, deep link,
-   voltar e avançar atravessarem a mesma coreografia até uma chegada real. */
+/* DIVINA BRUXA — WORK12 · MACROETAPA 5 · MENU LENDÁRIO V593
+   Fundação, Universo, Orbe e navegação V592 permanecem soberanos. A V593
+   dissolve a grade e revela no máximo duas intenções vivas por sopro. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -88,11 +88,11 @@ const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
     document.documentElement.dataset.orbMenuSupremeError = 'v327';
   });
 
-const startOrbitalMenuV502 = () => import('./orbital-menu-v502.js?v=584-menu-lendario')
+const startOrbitalMenuV502 = () => import('./orbital-menu-v502.js?v=593-work12-menu')
   .then(module => module.installOrbitalMenuV502?.({ core:supremeOrb, go }))
   .catch(error => {
-    console.error('[Divina] Menu Orbital Vivo V502 não iniciou', error);
-    document.documentElement.dataset.menuOrbitalError = 'v502';
+    console.error('[Divina] Sopro de Intenções V593 não iniciou', error);
+    document.documentElement.dataset.menuOrbitalError = 'v593';
   });
 
 const startSpreadsSupremeV331 = () => import('./spreads-supreme-v331.js?v=554')
@@ -580,6 +580,11 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK12_MENU_ACTIVE') {
+    document.documentElement.dataset.work12MenuWorker = `v${event.data.version || 593}`;
+    work12Foundation?.audit?.('menu-worker-active');
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK12_NAVIGATION_ACTIVE') {
     document.documentElement.dataset.work12NavigationWorker = `v${event.data.version || 592}`;
     work12Foundation?.audit?.('navigation-worker-active');
@@ -614,14 +619,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v592-work12-app';
+  window.__divinaSWBootstrap = 'v593-work12-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=592', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=593', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v592';
+        document.documentElement.dataset.releaseEpoch = 'v593';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] WORK12 V592 registrado');
+        console.info('[Divina] WORK12 V593 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -1071,6 +1076,60 @@ window.divinaWork12Macro4V592 = Object.freeze({
     });
   }
 });
+document.documentElement.dataset.work12Macro = '5-menu-lendario';
+document.documentElement.dataset.work12Menu = 'v593';
+document.documentElement.dataset.work12Intentions = 'progressive-two-maximum';
+window.divinaWork12Macro5V593 = Object.freeze({
+  version:593,
+  base:'V592',
+  work:'WORK12',
+  stage:'menu-lendario',
+  coordinator:work12Foundation,
+  orb:supremeOrb,
+  menu:() => globalThis.divinaMenuV502 || null,
+  status:() => {
+    const menu = globalThis.divinaMenuV502?.status?.() || null;
+    const orb = supremeOrb?.snapshot?.() || null;
+    const journey = orbIOSJourney?.status?.() || null;
+    return Object.freeze({
+      release:'V593',
+      macroStage:'5-of-10',
+      law:'one-orb-one-universe-one-physics-one-presence',
+      menu,
+      orb,
+      journey,
+      menuIsIntention:true,
+      menuList:false,
+      menuGrid:false,
+      progressiveReveal:menu?.progressiveReveal === true,
+      maximumVisibleIntentions:menu?.maximumVisibleIntentions || 2,
+      visibleIntentions:menu?.visibleIntentions || 0,
+      oneIntentionPerBubble:menu?.oneIntentionPerBubble === true,
+      homeAlwaysAccessible:menu?.homeAlwaysAccessible === true,
+      homeViaLivingOrb:menu?.homeViaLivingOrb === true,
+      horizontalDiscovery:menu?.horizontalDiscovery === true,
+      automaticRotation:false,
+      onePhysicalOrb:orb?.oneLivingOrb === true,
+      sameEntity:orb?.entityPreserved === true,
+      oneRenderer:orb?.oneRenderer === true,
+      onePhysics:orb?.onePhysics === true,
+      travelerCopies:Number(journey?.travelerCopies || 0),
+      teleport:journey?.teleportFallback === true,
+      flicker:journey?.flicker === true,
+      heavyEffectsPausedDuringMenuMotion:menu?.heavyEffectsPausedDuringMenuMotion === true,
+      heavyEffectsPausedDuringTravel:journey?.heavyEffectsPausedDuringAnyTravel === true,
+      automaticWhitEveryTouch:false,
+      silenceIsPresence:true,
+      iphoneFirst:true,
+      tarotProtected:true,
+      dailyProtected:true,
+      newCanvases:0,
+      javascriptAnimationLoops:0,
+      newMutationObservers:0
+    });
+  }
+});
+window.divinaFluidezSupremaV593 = window.divinaWork12Macro5V593;
 const skinPerformanceCore = safely('Skins, desempenho e acabamento V518', () =>
   installSkinPerformanceCoreV518()
 );

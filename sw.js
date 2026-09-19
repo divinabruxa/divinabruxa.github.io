@@ -1,15 +1,17 @@
-/* DIVINA BRUXA — WORK12 · MACROETAPA 4 · NAVEGAÇÃO COORDENADA V592
+/* DIVINA BRUXA — WORK12 · MACROETAPA 5 · MENU LENDÁRIO V593
    Service Worker mínimo, atômico e recuperável. A instalação só assume o
-   portal quando HTML, aplicação, navegação, universo e Orbe pertencem ao corte.
+   portal quando HTML, aplicação, intenções, navegação, universo e Orbe pertencem ao corte.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
-const VERSION = 592;
+const VERSION = 593;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work12-v592-navigation';
+const CACHE_NAME = 'divina-bruxa-work12-v593-menu';
 const CORE = Object.freeze([
   './index.html',
-  './app-v208.js?v=592-work12-navigation',
+  './app-v208.js?v=593-work12-menu',
+  './orbital-menu-v502.js?v=593-work12-menu',
+  './orbital-menu-v502.css?v=593-work12-menu',
   './navigation.js?v=592-work12-navigation',
   './work12-foundation-v589.js?v=592-work12-navigation',
   './page-loader-v1.js?v=592-work12-navigation',
@@ -34,7 +36,9 @@ const fetchCore = async path => {
 
 const validateCore = async responses => {
   const index = await responses.get('./index.html')?.clone().text();
-  const app = await responses.get('./app-v208.js?v=592-work12-navigation')?.clone().text();
+  const app = await responses.get('./app-v208.js?v=593-work12-menu')?.clone().text();
+  const menu = await responses.get('./orbital-menu-v502.js?v=593-work12-menu')?.clone().text();
+  const menuStyles = await responses.get('./orbital-menu-v502.css?v=593-work12-menu')?.clone().text();
   const navigation = await responses.get('./navigation.js?v=592-work12-navigation')?.clone().text();
   const foundation = await responses.get('./work12-foundation-v589.js?v=592-work12-navigation')?.clone().text();
   const pageLoader = await responses.get('./page-loader-v1.js?v=592-work12-navigation')?.clone().text();
@@ -43,8 +47,8 @@ const validateCore = async responses => {
   const renderer = await responses.get('./orb-engine-v208.js?v=591-work12-orb')?.clone().text();
   const journey = await responses.get('./orb-persistent-journey-v565.js?v=583-coordinate-travel')?.clone().text();
   const soul = await responses.get('./whit-orb-soul-bridge-v581.js?v=592-work12-navigation')?.clone().text();
-  if (!index?.includes('name="divina-work12" content="V592"')) throw new Error('work12-index-version-mismatch');
-  if (!index.includes('app-v208.js?v=592-work12-navigation')) throw new Error('work12-index-app-mismatch');
+  if (!index?.includes('name="divina-work12" content="V593"')) throw new Error('work12-index-version-mismatch');
+  if (!index.includes('app-v208.js?v=593-work12-menu')) throw new Error('work12-index-app-mismatch');
   if (!app?.includes("./navigation.js?v=592-work12-navigation")) throw new Error('work12-app-router-mismatch');
   if (!app.includes("./work12-foundation-v589.js?v=592-work12-navigation")) throw new Error('work12-app-foundation-mismatch');
   if (!app.includes("./living-universe-core-v524.js?v=590-work12-universe")) throw new Error('work12-app-universe-mismatch');
@@ -52,6 +56,15 @@ const validateCore = async responses => {
     throw new Error('work12-app-orb-mismatch');
   }
   if (!app.includes('divinaWork12Macro4V592')) throw new Error('work12-app-navigation-mismatch');
+  if (!app.includes('divinaWork12Macro5V593') || !app.includes("orbital-menu-v502.js?v=593-work12-menu")) {
+    throw new Error('work12-app-menu-mismatch');
+  }
+  if (!menu?.includes('const VERSION = 593;') || !menu.includes('maximumVisibleIntentions:2') || !menu.includes('progressiveReveal:true')) {
+    throw new Error('work12-menu-contract-missing');
+  }
+  if (!menuStyles?.includes('db593IntentionBreath') || !menuStyles.includes('.db502-menu.has-intentions .db502-portal.is-offered')) {
+    throw new Error('work12-menu-styles-contract-missing');
+  }
   if (!navigation?.includes('const WORK12_HISTORY_RELEASE = 592;') || !navigation.includes("source:'history'")) {
     throw new Error('work12-router-contract-missing');
   }
@@ -104,6 +117,7 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK12_NAVIGATION_ACTIVE', version:VERSION });
         client.postMessage({ type:'DIVINA_WORK12_UNIVERSE_ACTIVE', version:VERSION });
         client.postMessage({ type:'DIVINA_WORK12_ORB_ACTIVE', version:VERSION });
+        client.postMessage({ type:'DIVINA_WORK12_MENU_ACTIVE', version:VERSION });
         client.postMessage({ type:'DIVINA_RELEASE_READY', version:VERSION });
       } catch {}
     }
