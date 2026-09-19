@@ -294,8 +294,8 @@ export class WhitOrbSoulBridgeV581 {
   }
 
   work12AuthorityActive() {
-    return this.documentElement?.dataset?.work12NavigationAuthority === 'v589'
-      || /^v(?:589|590|591)$/.test(String(this.documentElement?.dataset?.work12 || ''));
+    return /^v(?:589|592)$/.test(String(this.documentElement?.dataset?.work12NavigationAuthority || ''))
+      || /^v(?:589|590|591|592)$/.test(String(this.documentElement?.dataset?.work12 || ''));
   }
 
   chooseExpression(state, reason) {

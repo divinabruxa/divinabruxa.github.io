@@ -552,7 +552,12 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     const route=normalizeRouteId(id);
     pageTasks.delete(route);
     clearRecovery(document.getElementById(route));
-    return Promise.resolve(go?go(route):load(route));
+    const coordinator=globalThis.divinaWork12V592;
+    return Promise.resolve(
+      coordinator?.navigate
+        ? coordinator.navigate(route,{source:'route-retry'})
+        : go?go(route):load(route)
+    );
   };
 
   const primeFromIntent=event=>{

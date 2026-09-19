@@ -1,19 +1,20 @@
-/* DIVINA BRUXA — WORK12 · MACROETAPA 1 · FUNDAÇÃO E VERDADE V589
+/* DIVINA BRUXA — WORK12 · MACROETAPA 4 · NAVEGAÇÃO COORDENADA V592
    Uma Orbe, um universo, uma física, uma presença.
 
-   Este núcleo não desenha, não anima e não cria outra navegação. Ele torna
-   explícita a única fonte de verdade que as próximas macroetapas usarão:
-   intenção -> silêncio -> viagem -> chegada. Tudo que já funciona continua
-   pertencendo aos motores aprovados; o WORK12 apenas os rege por uma lei só.
+   A Fundação V589 amadurece sem trocar de corpo: agora toque, entrada direta,
+   histórico, voltar e avançar atravessam a mesma máquina de estados. Este
+   núcleo não desenha, não anima e não cria outra viagem; ele coordena a que já
+   existe até a chegada respirar e voltar ao silêncio.
 */
 
-const VERSION = 589;
-const INSTANCE = Symbol.for('divina.work12.foundation.v589');
+const VERSION = 592;
+const FOUNDATION_VERSION = 589;
+const INSTANCE = Symbol.for('divina.work12.navigation.v592');
 const MAX_INTENTIONS = 2;
 const TIMELINE_LIMIT = 32;
 const VIOLATION_LIMIT = 16;
 
-export const WORK12_STATES_V589 = Object.freeze([
+export const WORK12_STATES_V592 = Object.freeze([
   'REST',
   'AWAKEN',
   'OFFER',
@@ -24,12 +25,14 @@ export const WORK12_STATES_V589 = Object.freeze([
   'ARRIVE',
   'REVEAL'
 ]);
+export const WORK12_STATES_V589 = WORK12_STATES_V592;
 
-export const WORK12_CONSTITUTION_V589 = Object.freeze({
+export const WORK12_CONSTITUTION_V592 = Object.freeze({
   version:VERSION,
+  foundationVersion:FOUNDATION_VERSION,
   work:'WORK12',
-  macroStage:'1-of-10',
-  title:'Fundação e Verdade',
+  macroStage:'4-of-10',
+  title:'Navegação Coordenada',
   law:'one-orb-one-universe-one-physics-one-presence',
   ritual:Object.freeze(['touch','response','silence']),
   journey:Object.freeze(['intention','quiet','depart','travel','arrive','reveal','rest']),
@@ -56,6 +59,7 @@ export const WORK12_CONSTITUTION_V589 = Object.freeze({
   storageWrites:0,
   apiCalls:0
 });
+export const WORK12_CONSTITUTION_V589 = WORK12_CONSTITUTION_V592;
 
 const KNOWN_ROUTES = new Set([
   'home','tarot','daily','library','spreads','school','journal','consultations',
@@ -136,6 +140,14 @@ export class Work12FoundationV589 {
     this.ready = false;
     this.destroyed = false;
     this.navigation = null;
+    this.queuedNavigation = null;
+    this.navigationSequence = 0;
+    this.historyTraversals = 0;
+    this.deepLinks = 0;
+    this.arrivals = 0;
+    this.historyRepairs = 0;
+    this.lastArrival = null;
+    this.lastRevealKey = null;
     this.orbNavigateOriginal = null;
     this.orbNavigateProxy = null;
     this.intentions = [];
@@ -148,25 +160,28 @@ export class Work12FoundationV589 {
     this.installIdentity();
     this.bind();
     this.attachNavigationAuthority();
-    this.record('REST','foundation-created',{ route:this.route });
-    this.audit('foundation-created');
+    this.record('REST','navigation-coordinator-created',{ route:this.route });
+    this.audit('navigation-coordinator-created');
     emit(this.eventTarget,'divina:work12-ready',{
       version:VERSION,
+      foundationVersion:FOUNDATION_VERSION,
       state:this.state,
       route:this.route,
-      law:WORK12_CONSTITUTION_V589.law
+      law:WORK12_CONSTITUTION_V592.law
     });
   }
 
   installIdentity() {
     const root = this.documentElement;
     if (!root?.dataset) return;
-    root.dataset.work12 = 'v589';
-    root.dataset.work12Macro = '1-foundation-truth';
+    root.dataset.work12 = 'v592';
+    root.dataset.work12Macro = '4-navigation-coordinated';
     root.dataset.work12Law = 'one-orb-one-universe-one-physics-one-presence';
     root.dataset.work12State = 'rest';
     root.dataset.work12Route = this.route;
     root.dataset.work12Silence = 'presence';
+    root.dataset.work12NavigationAuthority = 'v592';
+    root.dataset.work12History = 'coordinated-v592';
   }
 
   listen(target, type, handler, options = {}) {
@@ -237,10 +252,28 @@ export class Work12FoundationV589 {
     });
 
     this.listen(documentTarget,'divina:route-ready',event => {
-      this.previousRoute = this.route;
-      this.route = normalizeRoute(event.detail?.id || currentRoute());
-      this.syncRoute();
+      const readyRoute = normalizeRoute(event.detail?.id || currentRoute());
+      if (this.navigation || ['DEPART','TRAVEL','ARRIVE'].includes(this.state)) {
+        this.destination = readyRoute;
+        this.record(this.state,'reality-ready-before-arrival',{
+          route:this.route,
+          destination:readyRoute,
+          source:clean(event.detail?.source,48)
+        });
+      } else {
+        this.previousRoute = this.route;
+        this.route = readyRoute;
+        this.syncRoute();
+      }
       this.audit('route-ready');
+    });
+    this.listen(documentTarget,'divina:work12-history',event => {
+      const action = clean(event.detail?.action,24).toLowerCase();
+      if (action === 'canonicalized') this.historyRepairs += 1;
+      this.record(this.state,`history-${action || 'sync'}`,{
+        route:normalizeRoute(event.detail?.route || this.route),
+        source:clean(event.detail?.source,48)
+      });
     });
     const onBootReady = () => {
       if (this.ready) return;
@@ -261,8 +294,14 @@ export class Work12FoundationV589 {
     });
 
     this.listen(globalThis,'pageshow',() => {
-      this.route = currentRoute();
-      this.syncRoute();
+      const pageRoute = currentRoute();
+      if (!this.navigation) {
+        this.previousRoute = this.route;
+        this.route = pageRoute;
+        this.destination = null;
+        this.syncRoute();
+        if (this.state !== 'REST') this.transition('REST','pageshow-rest',{ route:this.route });
+      }
       this.audit('pageshow');
     }, { passive:true });
     this.listen(globalThis,'pagehide',() => {
@@ -281,7 +320,7 @@ export class Work12FoundationV589 {
     this.orbNavigateOriginal = core.navigate;
     this.orbNavigateProxy = (route,options = {}) => this.navigate(route,options);
     core.navigate = this.orbNavigateProxy;
-    if (this.documentElement?.dataset) this.documentElement.dataset.work12NavigationAuthority = 'v589';
+    if (this.documentElement?.dataset) this.documentElement.dataset.work12NavigationAuthority = 'v592';
     return true;
   }
 
@@ -381,6 +420,7 @@ export class Work12FoundationV589 {
     this.destination = normalizeRoute(detail.to || this.destination || currentRoute());
     this.route = this.previousRoute;
     this.syncRoute();
+    if (this.documentElement?.dataset) this.documentElement.dataset.work12NavigationPhase = 'depart';
     this.bubbles?.hide?.({ immediate:true, reason:'travel' });
     this.messageGovernor?.release?.(null,'work12-travel');
     this.transition('DEPART','journey-depart',{
@@ -393,6 +433,7 @@ export class Work12FoundationV589 {
   followJourney(detail = {}) {
     const phase = clean(detail.state, 24).toLowerCase();
     const route = normalizeRoute(detail.route || this.destination || this.route);
+    if (this.documentElement?.dataset && phase) this.documentElement.dataset.work12NavigationPhase = phase;
     if (phase === 'depart') this.transition('DEPART','journey-depart',{ route, destination:this.destination });
     else if (phase === 'flight' || phase === 'crossing' || phase === 'recovery') {
       this.transition('TRAVEL',`journey-${phase}`,{ route, destination:this.destination });
@@ -405,17 +446,39 @@ export class Work12FoundationV589 {
 
   reveal(detail = {}) {
     const route = normalizeRoute(detail.to || detail.route || this.destination || currentRoute());
+    const revealKey = `${this.navigation?.serial || this.navigationSequence}:${route}`;
+    if (this.lastRevealKey === revealKey) {
+      this.record(this.state,'arrival-coalesced',{ route, destination:route });
+      return false;
+    }
+    this.lastRevealKey = revealKey;
     this.previousRoute = this.route;
     this.route = route;
     this.destination = null;
     this.syncRoute();
+    this.arrivals += 1;
+    this.lastArrival = freeze({
+      route,
+      from:this.previousRoute,
+      serial:this.navigation?.serial || this.navigationSequence,
+      at:now()
+    });
+    if (this.documentElement?.dataset) this.documentElement.dataset.work12NavigationPhase = 'reveal';
     this.transition('REVEAL','reality-revealed',{ route });
-    const sequence = this.sequence;
+    emit(this.eventTarget,'divina:work12-arrival',{
+      version:VERSION,
+      route,
+      from:this.previousRoute,
+      serial:this.lastArrival.serial
+    });
+    const settledRevealKey = revealKey;
     queueMicrotask(() => {
-      if (!this.destroyed && this.state === 'REVEAL' && this.sequence === sequence) {
+      if (!this.destroyed && this.state === 'REVEAL' && this.lastRevealKey === settledRevealKey) {
         this.transition('REST','reality-breathes',{ route:this.route });
+        if (this.documentElement?.dataset) this.documentElement.dataset.work12NavigationPhase = 'rest';
       }
     });
+    return true;
   }
 
   recover(reason = 'recovery', detail = {}) {
@@ -423,6 +486,7 @@ export class Work12FoundationV589 {
     this.destination = null;
     this.route = normalizeRoute(detail.from || detail.id || currentRoute());
     this.syncRoute();
+    if (this.documentElement?.dataset) this.documentElement.dataset.work12NavigationPhase = 'rest';
     this.transition('REST',reason,{ route:this.route });
     this.audit(reason);
   }
@@ -477,26 +541,104 @@ export class Work12FoundationV589 {
     return true;
   }
 
+  queueNavigation(route, options = {}) {
+    if (!this.queuedNavigation) {
+      let resolve;
+      let reject;
+      const promise = new Promise((onResolve,onReject) => {
+        resolve = onResolve;
+        reject = onReject;
+      });
+      this.queuedNavigation = {
+        route,
+        options:{ ...options },
+        promise,
+        resolve,
+        reject,
+        retargets:0
+      };
+    } else {
+      this.queuedNavigation.route = route;
+      this.queuedNavigation.options = { ...options };
+      this.queuedNavigation.retargets += 1;
+    }
+    if (this.documentElement?.dataset) this.documentElement.dataset.work12QueuedRoute = route;
+    this.record(this.state,'navigation-latest-intention',{
+      route:this.route,
+      destination:route,
+      source:clean(options.source,48)
+    });
+    return this.queuedNavigation.promise;
+  }
+
+  drainQueuedNavigation() {
+    const queued = this.queuedNavigation;
+    if (!queued || this.destroyed || this.navigation) return false;
+    this.queuedNavigation = null;
+    if (this.documentElement?.dataset) delete this.documentElement.dataset.work12QueuedRoute;
+    const settledRoute = normalizeRoute(this.route || currentRoute());
+    if (queued.route === settledRoute) {
+      this.record(this.state,'navigation-latest-already-arrived',{
+        route:settledRoute,
+        destination:queued.route,
+        source:clean(queued.options?.source,48)
+      });
+      queued.resolve(settledRoute);
+      return true;
+    }
+    queueMicrotask(() => {
+      if (this.destroyed) {
+        queued.resolve(null);
+        return;
+      }
+      this.navigate(queued.route, queued.options).then(queued.resolve,queued.reject);
+    });
+    return true;
+  }
+
   navigate(destination, options = {}) {
     const route = normalizeRoute(destination);
     if (!this.navigateDelegate) return Promise.resolve(null);
+    if (options?.initial === true && route === this.route && route === currentRoute()) {
+      if (this.documentElement?.dataset) this.documentElement.dataset.work12NavigationPhase = 'rest';
+      this.record('REST','initial-coordinate-present',{ route, source:clean(options.source,48) });
+      return Promise.resolve(route);
+    }
     if (this.navigation?.promise) {
-      this.record(this.state,'navigation-coalesced',{
-        route:this.route,
-        destination:this.navigation.route,
-        source:clean(options.source,48)
-      });
-      return this.navigation.promise;
+      if (route === this.navigation.route && !this.queuedNavigation) {
+        this.record(this.state,'navigation-coalesced',{
+          route:this.route,
+          destination:this.navigation.route,
+          source:clean(options.source,48)
+        });
+        return this.navigation.promise;
+      }
+      return this.queueNavigation(route,options);
     }
 
+    const source = clean(options.source,48) || 'work12';
+    const historyMode = clean(
+      options.historyMode || (source === 'history' ? 'traverse' : source === 'deep-link' ? 'deep-link' : 'push'),
+      24
+    ) || 'push';
+    const serial = ++this.navigationSequence;
     const id = `route:${route}`;
     const offered = this.offer({
       id,
       context:this.route,
       destination:route,
-      source:options.source || 'work12'
+      source
     });
     if (offered.accepted) this.accept(id);
+
+    if (source === 'history' || historyMode === 'traverse') this.historyTraversals += 1;
+    if (source === 'deep-link' || historyMode === 'deep-link') this.deepLinks += 1;
+    if (this.documentElement?.dataset) {
+      this.documentElement.dataset.work12NavigationSource = source;
+      this.documentElement.dataset.work12HistoryMode = historyMode;
+      this.documentElement.dataset.work12NavigationPhase = 'intention';
+      this.documentElement.dataset.work12NavigationSequence = String(serial);
+    }
 
     // A preparação só começa depois que a intenção semântica nasceu e foi
     // aceita. Ela corre em paralelo e nunca pode prender a viagem.
@@ -504,7 +646,7 @@ export class Work12FoundationV589 {
     catch {}
 
     const promise = Promise.resolve().then(() => this.navigateDelegate(route, options));
-    this.navigation = { route, id, promise };
+    this.navigation = { route, id, promise, serial, source, historyMode };
     promise.catch(error => {
       this.violation('navigation-rejected',{
         destination:route,
@@ -513,8 +655,19 @@ export class Work12FoundationV589 {
       this.recover('navigation-rejected',{ from:this.route });
     }).finally(() => {
       this.completeIntention(id,'fulfilled');
-      if (this.navigation?.promise === promise) this.navigation = null;
-      if (!['DEPART','TRAVEL','ARRIVE','REVEAL'].includes(this.state)) this.quiet('navigation-complete');
+      if (this.navigation?.promise === promise) {
+        this.navigation = null;
+        if (this.documentElement?.dataset) {
+          delete this.documentElement.dataset.work12NavigationSource;
+          delete this.documentElement.dataset.work12HistoryMode;
+          delete this.documentElement.dataset.work12NavigationSequence;
+          if (!['DEPART','TRAVEL','ARRIVE','REVEAL'].includes(this.state)) {
+            this.documentElement.dataset.work12NavigationPhase = 'rest';
+          }
+        }
+      }
+      if (!['REST','DEPART','TRAVEL','ARRIVE','REVEAL'].includes(this.state)) this.quiet('navigation-complete');
+      this.drainQueuedNavigation();
     });
     return promise;
   }
@@ -547,8 +700,11 @@ export class Work12FoundationV589 {
       noTeleport:journey?.teleportFallback !== true && journey?.portalVisual !== true,
       bubblesWithinLaw:counts.magicBubbles <= MAX_INTENTIONS,
       intentionLimit:this.intentions.length <= MAX_INTENTIONS,
+      oneNavigationFlight:!this.queuedNavigation || Boolean(this.navigation),
+      routeSettlesAtArrival:this.state !== 'REST' || this.route === normalizeRoute(currentRoute()),
+      historyCoordinated:this.documentElement?.dataset?.work12NavigationAuthority === 'v592',
       travelPausesHeavyEffects:journey?.heavyEffectsPausedDuringAnyTravel !== false,
-      whitSilence:WORK12_CONSTITUTION_V589.automaticWhitSpeech === false
+      whitSilence:WORK12_CONSTITUTION_V592.automaticWhitSpeech === false
     });
     const failing = Object.entries(checks).filter(([,valid]) => !valid).map(([name]) => name);
     const health = failing.length ? 'degraded' : 'ok';
@@ -579,14 +735,23 @@ export class Work12FoundationV589 {
 
   status() {
     return freeze({
-      ...WORK12_CONSTITUTION_V589,
+      ...WORK12_CONSTITUTION_V592,
       state:this.state,
       route:this.route,
       previousRoute:this.previousRoute,
       destination:this.destination,
       ready:this.ready,
       activeNavigation:this.navigation?.route || null,
-      navigationAuthority:this.orbNavigateProxy ? 'work12-v589' : 'delegate-only',
+      queuedNavigation:this.queuedNavigation?.route || null,
+      navigationAuthority:this.orbNavigateProxy ? 'work12-v592' : 'delegate-only',
+      navigationSequence:this.navigationSequence,
+      historyTraversals:this.historyTraversals,
+      deepLinks:this.deepLinks,
+      historyRepairs:this.historyRepairs,
+      arrivals:this.arrivals,
+      lastArrival:this.lastArrival,
+      historyMode:this.navigation?.historyMode || null,
+      navigationSource:this.navigation?.source || null,
       activeIntentions:this.intentions.length,
       intentionIds:freeze(this.intentions.map(item => item.id)),
       transitions:this.timeline.length,
@@ -608,9 +773,16 @@ export class Work12FoundationV589 {
   snapshot() {
     return freeze({
       version:VERSION,
+      release:'V592',
+      foundationVersion:FOUNDATION_VERSION,
       state:this.state,
       route:this.route,
       destination:this.destination,
+      activeNavigation:this.navigation?.route || null,
+      queuedNavigation:this.queuedNavigation?.route || null,
+      historyTraversals:this.historyTraversals,
+      deepLinks:this.deepLinks,
+      arrivals:this.arrivals,
       activeIntentions:this.intentions.length,
       health:this.lastAudit?.health || 'checking',
       sequence:this.sequence
@@ -623,17 +795,22 @@ export class Work12FoundationV589 {
     this.controller.abort();
     this.intentions = [];
     this.navigation = null;
+    if (this.queuedNavigation) this.queuedNavigation.resolve(null);
+    this.queuedNavigation = null;
     if (this.orbCore && this.orbNavigateProxy && this.orbCore.navigate === this.orbNavigateProxy) {
       this.orbCore.navigate = this.orbNavigateOriginal;
     }
     this.orbNavigateOriginal = null;
     this.orbNavigateProxy = null;
     const root = this.documentElement;
-    if (root?.dataset?.work12 === 'v589') {
-      ['work12','work12Macro','work12Law','work12State','work12Route','work12Silence','work12Health','work12Audit','work12NavigationAuthority']
+    if (root?.dataset?.work12 === 'v592') {
+      ['work12','work12Macro','work12Law','work12State','work12Route','work12Silence','work12Health','work12Audit',
+        'work12NavigationAuthority','work12History','work12NavigationSource','work12HistoryMode','work12NavigationPhase',
+        'work12NavigationSequence','work12QueuedRoute']
         .forEach(key => delete root.dataset[key]);
     }
     if (globalThis[INSTANCE] === this) delete globalThis[INSTANCE];
+    if (globalThis.divinaWork12V592 === this) delete globalThis.divinaWork12V592;
     return true;
   }
 }
@@ -645,7 +822,10 @@ export function createWork12FoundationV589(options = {}) {
   const foundation = new Work12FoundationV589(options);
   globalThis[INSTANCE] = foundation;
   globalThis.divinaWork12V589 = foundation;
+  globalThis.divinaWork12V592 = foundation;
   return foundation;
 }
+
+export const createWork12NavigationV592 = createWork12FoundationV589;
 
 export default createWork12FoundationV589;

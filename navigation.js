@@ -1,7 +1,10 @@
-// DIVINA BRUXA V210 — MENU 2.0 · ROTEAMENTO ÚNICO · FLUIDEZ V535
-// Preserva integralmente a geometria/visual V180. Esta versão troca apenas
-// a autoridade interna do Menu Mágico: uma intenção, um estado, uma passagem.
+// DIVINA BRUXA — WORK12 · MACROETAPA 4 · NAVEGAÇÃO COORDENADA V592
+// Preserva integralmente a geometria/visual V180. Rotas continuam existindo
+// apenas como coordenadas técnicas: entrada direta, voltar, avançar e toque
+// atravessam a mesma autoridade e nunca cortam a viagem da Orbe.
 import { isKnownRoute, normalizeRouteId, routeFromLocation } from './route-registry-v180.js?v=180';
+
+const WORK12_HISTORY_RELEASE = 592;
 
 const MENU_STATE = Object.freeze({
   CLOSED: 'CLOSED',
@@ -25,8 +28,56 @@ export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoS
   let routeRequest = null;
   let navigationToken = 0;
   let routeSyncQueued = false;
+  let queuedLocationEvent = null;
   let lastSyncedLocation = '';
+  let historySequence = Number(globalThis.history?.state?.work12?.entry || 0);
   let started = false;
+
+  const locationKey = () => `${location.pathname}${location.search}${location.hash}`;
+  const historyObject = () => {
+    const state = globalThis.history?.state;
+    return state && typeof state === 'object' ? state : {};
+  };
+  const historyEntry = (id, action = 'replace', source = 'navigation') => {
+    const existing = historyObject();
+    const previous = existing.work12 && typeof existing.work12 === 'object' ? existing.work12 : {};
+    const entry = action === 'push'
+      ? ++historySequence
+      : Number(previous.entry || historySequence || 0) || ++historySequence;
+    historySequence = Math.max(historySequence, entry);
+    return {
+      ...existing,
+      screen:id,
+      work12:{
+        release:WORK12_HISTORY_RELEASE,
+        route:id,
+        entry,
+        action,
+        source:String(source || 'navigation').slice(0,48)
+      }
+    };
+  };
+  const publishHistory = (route, action, source, eventState = null) => {
+    document.dispatchEvent(new CustomEvent('divina:work12-history', {
+      detail:{
+        release:WORK12_HISTORY_RELEASE,
+        route,
+        action,
+        source,
+        entry:Number(globalThis.history?.state?.work12?.entry || 0),
+        eventState:eventState && typeof eventState === 'object' ? eventState.screen || null : null
+      }
+    }));
+  };
+  const writeHistory = (id, { push = false, action = 'replace', source = 'navigation', url = null } = {}) => {
+    const targetUrl = url || (id === 'home' ? './' : `#${id}`);
+    const payload = historyEntry(id, push ? 'push' : action, source);
+    if (push) history.pushState(payload, '', targetUrl);
+    else history.replaceState(payload, '', targetUrl);
+    lastSyncedLocation = locationKey();
+    publishHistory(id, push ? 'push' : action, source);
+    return payload;
+  };
 
   // V180 criou os atalhos sem alterar a geometria principal; V210 preserva isso byte a byte em intenção.
   const ensureMenuPortals = () => {
@@ -246,7 +297,8 @@ export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoS
     }
 
     if (open && !home.classList.contains('active')) {
-      const ready = await go('home');
+      const request = routeRequest || go;
+      const ready = await request('home', { source:'menu-return-home' });
       if (!ready) return { state: menuState, cancelled: true, reason: 'home-unavailable' };
       return transitionOrbMenu(true, { shouldRestore });
     }
@@ -293,8 +345,14 @@ export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoS
   const closeOrbMenu = (shouldRestore = false) => transitionOrbMenu(false, { shouldRestore });
   const toggleOrbMenu = () => transitionOrbMenu(!menuTargetOpen, { shouldRestore: true });
 
-  const commit = (requestedId, push = true) => {
+  const commit = (requestedId, navigationOptions = true) => {
     let id = normalizeRouteId(requestedId);
+    const options = navigationOptions && typeof navigationOptions === 'object'
+      ? navigationOptions
+      : { push:navigationOptions !== false };
+    const source = String(options.source || html.dataset.work12NavigationSource || 'navigation').slice(0,48);
+    const historyMode = String(options.historyMode || html.dataset.work12HistoryMode || 'push');
+    const push = options.push !== false && !['replace','traverse','deep-link','boot'].includes(historyMode);
     const screens = [...document.querySelectorAll('.screen')];
 
     if (id === 'skins' && !document.getElementById('skins')) {
@@ -320,17 +378,33 @@ export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoS
     // scroll concorrente custa quadros no iPhone e não acrescenta informação.
     window.scrollTo({ top: 0, behavior: 'auto' });
 
-    const current = location.hash.slice(1) || 'home';
-    if (push && current !== id) history.pushState({ screen: id }, '', id === 'home' ? './' : `#${id}`);
-    lastSyncedLocation = `${location.pathname}${location.search}${location.hash}`;
+    const current = routeFromLocation();
+    if (push && current !== id) {
+      writeHistory(id, { push:true, source });
+    } else {
+      const action = historyMode === 'traverse'
+        ? 'traverse'
+        : historyMode === 'deep-link' ? 'deep-link'
+          : historyMode === 'boot' ? 'boot' : 'replace';
+      writeHistory(id, { action, source, url:id === 'home' ? './' : `#${id}` });
+    }
     return id;
   };
 
-  const go = async (requestedId, push = true) => {
+  const go = async (requestedId, navigationOptions = true) => {
     const id = normalizeRouteId(requestedId);
+    const options = navigationOptions && typeof navigationOptions === 'object'
+      ? navigationOptions
+      : { push:navigationOptions !== false };
+    const source = String(options.source || html.dataset.work12NavigationSource || 'navigation').slice(0,48);
+    const historyMode = String(
+      options.historyMode || html.dataset.work12HistoryMode || (options.push === false ? 'replace' : 'push')
+    );
     const token = ++navigationToken;
     html.dataset.routePending = id;
-    document.dispatchEvent(new CustomEvent('divina:route-start', { detail: { id } }));
+    document.dispatchEvent(new CustomEvent('divina:route-start', {
+      detail:{ id, source, historyMode, release:WORK12_HISTORY_RELEASE }
+    }));
 
     // A próxima página prepara em paralelo ao fechamento do Menu. A rota não
     // aguarda a animação inteira: o commit reassenta o menu no mesmo quadro.
@@ -345,11 +419,17 @@ export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoS
     const { error } = await preparation;
     if (token !== navigationToken) return false;
 
-    const committed = commit(id, push);
+    const committed = commit(id, { ...options, source, historyMode });
     await Promise.resolve(menuClosure).catch(() => null);
     delete html.dataset.routePending;
     document.dispatchEvent(new CustomEvent(error ? 'divina:route-error' : 'divina:route-ready', {
-      detail: { id: committed || id, recoverable: Boolean(error) }
+      detail:{
+        id:committed || id,
+        recoverable:Boolean(error),
+        source,
+        historyMode,
+        release:WORK12_HISTORY_RELEASE
+      }
     }));
     return !error;
   };
@@ -380,13 +460,23 @@ export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoS
     }
   });
 
-  const syncFromLocation = () => {
-    const locationKey = `${location.pathname}${location.search}${location.hash}`;
-    if (locationKey === lastSyncedLocation || routeSyncQueued) return;
+  const syncFromLocation = event => {
+    const nextLocationKey = locationKey();
+    if (nextLocationKey === lastSyncedLocation || routeSyncQueued) return;
+    queuedLocationEvent = event || null;
     routeSyncQueued = true;
     queueMicrotask(() => {
       routeSyncQueued = false;
-      go(routeFromLocation(), false).catch(() => {});
+      const locationEvent = queuedLocationEvent;
+      queuedLocationEvent = null;
+      const id = routeFromLocation();
+      const request = routeRequest || go;
+      Promise.resolve(request(id, {
+        source:'history',
+        historyMode:'traverse',
+        push:false,
+        historyState:locationEvent?.state || null
+      })).catch(() => {});
     });
   };
   addEventListener('popstate', syncFromLocation);
@@ -401,10 +491,27 @@ export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoS
     started = true;
     const raw = location.hash.slice(1) || 'home';
     const id = routeFromLocation();
-    const ready = await go(id, false);
+    const request = routeRequest || go;
+    const ready = await request(id, {
+      source:id === 'home' ? 'boot' : 'deep-link',
+      historyMode:id === 'home' ? 'boot' : 'deep-link',
+      push:false,
+      initial:true
+    });
     if (!isKnownRoute(raw) || raw !== id) {
-      history.replaceState({ screen: id }, '', id === 'home' ? './' : `#${id}`);
-      lastSyncedLocation = `${location.pathname}${location.search}${location.hash}`;
+      writeHistory(id, {
+        action:'canonicalized',
+        source:'deep-link-normalized',
+        url:id === 'home' ? './' : `#${id}`
+      });
+    } else if (globalThis.history?.state?.work12?.release !== WORK12_HISTORY_RELEASE) {
+      writeHistory(id, {
+        action:id === 'home' ? 'boot' : 'deep-link',
+        source:id === 'home' ? 'boot' : 'deep-link',
+        url:id === 'home' ? './' : `#${id}`
+      });
+    } else {
+      lastSyncedLocation = locationKey();
     }
     return ready;
   };
@@ -420,7 +527,10 @@ export function createNavigation({ beforeEnter: initialBeforeEnter = null, autoS
   const menuSnapshot = () => Object.freeze({
     state: menuState,
     targetOpen: menuTargetOpen,
-    routePending: html.dataset.routePending || null
+    routePending: html.dataset.routePending || null,
+    historyRelease:WORK12_HISTORY_RELEASE,
+    historyEntry:Number(globalThis.history?.state?.work12?.entry || 0),
+    route:routeFromLocation()
   });
 
   if (autoStart) start().catch(() => {});

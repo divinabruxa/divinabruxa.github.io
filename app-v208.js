@@ -1,10 +1,10 @@
-/* DIVINA BRUXA — WORK12 · MACROETAPA 3 · ORBE PERSISTENTE V591
-   Fundação V589 e Universo V590 permanecem soberanos. A V591 sela a mesma
-   matéria, renderer, física e alma Whit da única Orbe em toda travessia. */
+/* DIVINA BRUXA — WORK12 · MACROETAPA 4 · NAVEGAÇÃO COORDENADA V592
+   Fundação, Universo e Orbe permanecem soberanos. A V592 faz toque, deep link,
+   voltar e avançar atravessarem a mesma coreografia até uma chegada real. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
-import { createNavigation } from './navigation.js?v=535-fluid-navigation';
+import { createNavigation } from './navigation.js?v=592-work12-navigation';
 import { orbMotionV207 } from './orb-motion-core-v207.js?v=207';
 import { RealityOrbEngine } from './orb-engine-v208.js?v=591-work12-orb';
 import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=591-work12-orb';
@@ -18,7 +18,7 @@ import { AccountEngineV201 } from './account-engine-v201.js?v=556-journal-consen
 import { AccountWorldV319 } from './account-consultations-world-v319.js?v=558-consultations-supreme';
 import { installVisualGuard } from './visual-guard-v6.js?v=134';
 import { installTarotExperience } from './tarot-experience-v6.js';
-import { createPageLoader } from './page-loader-v1.js?v=577-universal';
+import { createPageLoader } from './page-loader-v1.js?v=592-work12-navigation';
 import { createOrbLoadingPortal, ORB_BOOT_REQUEST_V152 } from './orb-loading-portal-v1.js?v=152';
 import { installCosmicMedia } from './cosmic-media-v1.js?v=1341';
 import { bindEditorialMetrics } from './editorial-metrics-v192.js?v=192';
@@ -34,7 +34,7 @@ import { createWhitMindV312 } from './whit-mind-v312.js?v=557-event-driven';
 import { createWhitGenerationBridgeV313 } from './whit-generation-bridge-v313.js?v=316-silent1';
 import { createWhitSilentPresenceV316 } from './whit-silent-presence-v316.js?v=557-event-driven';
 import { createWhitCoreSupremeV527 } from './whit-core-supreme-v527.js?v=580-foundation';
-import { createWhitOrbSoulBridgeV581 } from './whit-orb-soul-bridge-v581.js?v=591-work12-orb';
+import { createWhitOrbSoulBridgeV581 } from './whit-orb-soul-bridge-v581.js?v=592-work12-navigation';
 import { createTarotUniverseCoreV528 } from './tarot-universe-core-v528.js?v=528';
 import { createWisdomUniverseCoreV529 } from './wisdom-universe-core-v529.js?v=529';
 import { createExperienceConversionCoreV530 } from './experience-conversion-core-v530.js?v=559-media-guard';
@@ -57,7 +57,7 @@ import { createSecurityPrivacyCoreV547 } from './security-privacy-core-v547.js?v
 import { createPageDesignSupremeV560 } from './page-design-supreme-v560.js?v=560';
 import { createRealityIntentionLanguageV585 } from './reality-intention-language-v585.js?v=585';
 import { createMagicalBubbleSystemV586 } from './magical-bubble-system-v586.js?v=586';
-import { createWork12FoundationV589 } from './work12-foundation-v589.js?v=589';
+import { createWork12FoundationV589 } from './work12-foundation-v589.js?v=592-work12-navigation';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -516,7 +516,7 @@ const magicalBubbles = safely('Sistema de Balões Mágicos Vivos V586', () =>
 // daqui toda intenção pública atravessa o mesmo condutor e delega a viagem aos
 // motores já aprovados, preservando integralmente Tarot Livre e Carta do Dia.
 const directSupremeNavigateV589 = supremeOrb?.navigate?.bind(supremeOrb);
-work12Foundation = safely('WORK12 · Fundação e Verdade V589', () =>
+work12Foundation = safely('WORK12 · Navegação Coordenada V592', () =>
   createWork12FoundationV589({
     orbCore:supremeOrb,
     universe:livingUniverse,
@@ -580,19 +580,24 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK12_NAVIGATION_ACTIVE') {
+    document.documentElement.dataset.work12NavigationWorker = `v${event.data.version || 592}`;
+    work12Foundation?.audit?.('navigation-worker-active');
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK12_ORB_ACTIVE') {
-    document.documentElement.dataset.work12OrbWorker = `v${event.data.version || 591}`;
+    document.documentElement.dataset.work12OrbWorker = `v${event.data.version || 592}`;
     supremeOrb?.auditPersistence?.('orb-worker-active');
     work12Foundation?.audit?.('orb-worker-active');
     return;
   }
   if (event.data?.type === 'DIVINA_WORK12_UNIVERSE_ACTIVE') {
-    document.documentElement.dataset.work12UniverseWorker = `v${event.data.version || 591}`;
+    document.documentElement.dataset.work12UniverseWorker = `v${event.data.version || 592}`;
     work12Foundation?.audit?.('universe-worker-active');
     return;
   }
   if (event.data?.type === 'DIVINA_WORK12_FOUNDATION_ACTIVE') {
-    document.documentElement.dataset.work12Worker = `v${event.data.version || 591}`;
+    document.documentElement.dataset.work12Worker = `v${event.data.version || 592}`;
     work12Foundation?.audit?.('service-worker-active');
     return;
   }
@@ -609,14 +614,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v591-work12-app';
+  window.__divinaSWBootstrap = 'v592-work12-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=591', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=592', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v591';
+        document.documentElement.dataset.releaseEpoch = 'v592';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] WORK12 V591 registrado');
+        console.info('[Divina] WORK12 V592 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -660,6 +665,7 @@ window.orbe = {
   language:realityIntentionLanguage,
   bubbles:magicalBubbles,
   work12:work12Foundation,
+  navigation:work12Foundation,
   returnGarden:ethicalReturn,
   qaLaunch:qaSupremeLaunch,
   observatory:null,
@@ -1007,6 +1013,57 @@ window.divinaWork12Macro3V591 = Object.freeze({
       tarotProtected:true,
       dailyProtected:true,
       conceptualOrbCopies:0,
+      newVisualEffects:0,
+      newCanvases:0,
+      newAnimationLoops:0,
+      newMutationObservers:0
+    });
+  }
+});
+document.documentElement.dataset.work12Macro = '4-navigation-coordinated';
+document.documentElement.dataset.work12Navigation = 'v592';
+document.documentElement.dataset.work12History = 'coordinated-v592';
+window.divinaWork12Macro4V592 = Object.freeze({
+  version:592,
+  base:'V591',
+  work:'WORK12',
+  stage:'navegacao-coordenada',
+  coordinator:work12Foundation,
+  navigation,
+  orb:supremeOrb,
+  journey:orbIOSJourney,
+  status:() => {
+    const coordinator = work12Foundation?.status?.() || null;
+    const orb = supremeOrb?.snapshot?.() || null;
+    const journey = orbIOSJourney?.status?.() || null;
+    return Object.freeze({
+      release:'V592',
+      macroStage:'4-of-10',
+      law:'one-orb-one-universe-one-physics-one-presence',
+      coordinator,
+      history:navigation?.menuSnapshot?.() || null,
+      orb,
+      journey,
+      oneStateMachine:coordinator?.navigationAuthority === 'work12-v592',
+      touchUsesJourney:true,
+      deepLinksUseJourney:true,
+      backUsesJourney:true,
+      forwardUsesJourney:true,
+      arrivalReturnsToRest:coordinator?.state === 'REST',
+      latestIntentionWins:true,
+      onePhysicalOrb:orb?.oneLivingOrb === true,
+      sameEntity:orb?.entityPreserved === true,
+      oneRenderer:orb?.oneRenderer === true,
+      onePhysics:orb?.onePhysics === true,
+      travelerCopies:Number(journey?.travelerCopies || 0),
+      teleport:journey?.teleportFallback === true,
+      flicker:journey?.flicker === true,
+      heavyEffectsPausedDuringTravel:journey?.heavyEffectsPausedDuringAnyTravel === true,
+      automaticWhitEveryTouch:false,
+      silenceIsPresence:true,
+      iphoneFirst:true,
+      tarotProtected:true,
+      dailyProtected:true,
       newVisualEffects:0,
       newCanvases:0,
       newAnimationLoops:0,

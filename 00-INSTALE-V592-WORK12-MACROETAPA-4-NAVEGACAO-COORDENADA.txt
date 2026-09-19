@@ -1,0 +1,48 @@
+DIVINA BRUXA — WORK12
+V592 — MACROETAPA 4/10 — NAVEGAÇÃO COORDENADA
+
+BASE EXATA
+V591 instalada / commit e7038d38003e7bbe29a43227318f54c07512b13a
+
+INSTALE SUBSTITUINDO SOMENTE ESTES 7 ARQUIVOS PRINCIPAIS
+1. app-v208.js
+2. index.html
+3. navigation.js
+4. page-loader-v1.js
+5. sw.js
+6. whit-orb-soul-bridge-v581.js
+7. work12-foundation-v589.js
+
+Os arquivos RELATORIO, MANIFESTO, HASHES e qa-* são documentação e provas.
+Podem permanecer no repositório; não substituem nenhuma experiência existente.
+
+O QUE ESTA MACROETAPA SELA
+- toque, link direto, voltar e avançar usam a mesma máquina de estados;
+- a rota técnica não corta mais a viagem da Orbe;
+- a realidade só é considerada presente depois da chegada;
+- eventos popstate + hashchange viram uma única intenção;
+- durante uma viagem, somente a intenção mais recente fica aguardando;
+- a chegada sempre dissolve a intenção e volta a REST;
+- o retorno ao Início para abrir o menu também atravessa a mesma Orbe;
+- “tentar novamente” entra pelo coordenador, sem rota paralela;
+- a alma Whit reconhece a autoridade V592 e não duplica respostas físicas.
+
+LEIS PRESERVADAS
+- uma Orbe física;
+- um renderer;
+- uma física;
+- um universo;
+- zero teleporte;
+- zero pisca;
+- zero nova animação visual;
+- efeitos pesados pausados durante a viagem;
+- Tarot Livre e Carta do Dia intactos.
+
+DEPOIS DE INSTALAR
+Abra o site uma vez com internet. O service worker V592 assume o corte completo
+e remove o cache V591 apenas depois de validar os 12 arquivos essenciais.
+
+PRÓXIMA MACROETAPA
+5/10 — Menu Lendário: a nova cara começa a aparecer como intenções vivas,
+progressivas e orgânicas ao redor da única Orbe.
+
