@@ -1,0 +1,33 @@
+DIVINA BRUXA — WORK13 · COSMOS VIVO
+MACROETAPA 1 DE 10 — CONGELAMENTO E SNAPSHOT
+RELEASE V601
+
+ESTA ETAPA NÃO MUDA O SITE.
+
+COMO INSTALAR
+1. Extraia o ZIP V601.
+2. Envie os 6 arquivos diretamente para a raiz do GitHub.
+3. Todos são NOVOS. Não substitua index.html, sw.js ou qualquer motor do site.
+4. Não extraia SNAPSHOT-WORK12-V600-PROTEGIDO.zip dentro do site; ele é o cofre de restauração.
+
+ARQUIVOS NOVOS
+- 00-INSTALE-V601-WORK13-MACROETAPA-1-CONGELAMENTO-SNAPSHOT.txt
+- RELATORIO-WORK13-V601-MACROETAPA-1-CONGELAMENTO-SNAPSHOT.md
+- MANIFESTO-WORK13-V601-MACROETAPA-1.json
+- HASHES-SHA256-WORK13-V601.txt
+- qa-work13-v601-congelamento-snapshot.mjs
+- SNAPSHOT-WORK12-V600-PROTEGIDO.zip
+
+VERIFICAÇÃO OPCIONAL
+  sha256sum -c HASHES-SHA256-WORK13-V601.txt
+  node qa-work13-v601-congelamento-snapshot.mjs
+
+RESULTADO ESPERADO
+- PASS;
+- base WORK12 V600 intacta;
+- 27 arquivos executáveis protegidos por SHA-256;
+- uma Orbe, um canvas, uma camada visual;
+- zero alteração de runtime.
+
+Guarde o snapshot. Não o instale.
+
