@@ -1,15 +1,19 @@
-/* DIVINA BRUXA — WORK12 · MACROETAPA 7 · LEITURAS COMO RITO V595
+/* DIVINA BRUXA — WORK12 · MACROETAPA 8 · REALIDADES COMO CÂMARAS V596
    Service Worker mínimo, atômico e recuperável. A instalação só assume o
-   portal quando HTML, aplicação, rito, Whit, navegação, universo e Orbe pertencem ao corte.
+   portal quando HTML, aplicação, câmaras, rito, navegação, universo e Orbe pertencem ao corte.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
-const VERSION = 595;
+const VERSION = 596;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work12-v595-reading-ritual';
+const CACHE_NAME = 'divina-bruxa-work12-v596-reality-chambers';
 const CORE = Object.freeze([
   './index.html',
-  './app-v208.js?v=595-work12-ritual',
+  './app-v208.js?v=596-work12-chambers',
+  './reality-chambers-v596.js?v=596-work12-chambers',
+  './reality-chambers-v596.css?v=596-work12-chambers',
+  './school-world-v306.js?v=596-work12-chambers',
+  './journal-world-v317.js?v=596-work12-chambers',
   './reading-ritual-core-v595.js?v=595-work12-ritual',
   './reading-ritual-core-v595.css?v=595-work12-ritual',
   './daily-world-v509.js?v=595-work12-ritual',
@@ -40,7 +44,11 @@ const fetchCore = async path => {
 
 const validateCore = async responses => {
   const index = await responses.get('./index.html')?.clone().text();
-  const app = await responses.get('./app-v208.js?v=595-work12-ritual')?.clone().text();
+  const app = await responses.get('./app-v208.js?v=596-work12-chambers')?.clone().text();
+  const chambers = await responses.get('./reality-chambers-v596.js?v=596-work12-chambers')?.clone().text();
+  const chamberStyles = await responses.get('./reality-chambers-v596.css?v=596-work12-chambers')?.clone().text();
+  const school = await responses.get('./school-world-v306.js?v=596-work12-chambers')?.clone().text();
+  const journal = await responses.get('./journal-world-v317.js?v=596-work12-chambers')?.clone().text();
   const ritual = await responses.get('./reading-ritual-core-v595.js?v=595-work12-ritual')?.clone().text();
   const ritualStyles = await responses.get('./reading-ritual-core-v595.css?v=595-work12-ritual')?.clone().text();
   const daily = await responses.get('./daily-world-v509.js?v=595-work12-ritual')?.clone().text();
@@ -55,9 +63,11 @@ const validateCore = async responses => {
   const renderer = await responses.get('./orb-engine-v208.js?v=591-work12-orb')?.clone().text();
   const journey = await responses.get('./orb-persistent-journey-v565.js?v=583-coordinate-travel')?.clone().text();
   const soul = await responses.get('./whit-orb-soul-bridge-v581.js?v=592-work12-navigation')?.clone().text();
-  if (!index?.includes('name="divina-work12" content="V595"')) throw new Error('work12-index-version-mismatch');
-  if (!index.includes('app-v208.js?v=595-work12-ritual') || !index.includes('reading-ritual-core-v595.css?v=595-work12-ritual')) {
-    throw new Error('work12-index-ritual-mismatch');
+  if (!index?.includes('name="divina-work12" content="V596"')) throw new Error('work12-index-version-mismatch');
+  if (!index.includes('app-v208.js?v=596-work12-chambers')
+    || !index.includes('reality-chambers-v596.css?v=596-work12-chambers')
+    || !index.includes('reading-ritual-core-v595.css?v=595-work12-ritual')) {
+    throw new Error('work12-index-chambers-mismatch');
   }
   if (!app?.includes("./navigation.js?v=592-work12-navigation")) throw new Error('work12-app-router-mismatch');
   if (!app.includes("./work12-foundation-v589.js?v=592-work12-navigation")) throw new Error('work12-app-foundation-mismatch');
@@ -74,6 +84,25 @@ const validateCore = async responses => {
   }
   if (!app.includes('divinaWork12Macro7V595') || !app.includes("reading-ritual-core-v595.js?v=595-work12-ritual")) {
     throw new Error('work12-app-reading-ritual-mismatch');
+  }
+  if (!app.includes('divinaWork12Macro8V596') || !app.includes("reality-chambers-v596.js?v=596-work12-chambers")) {
+    throw new Error('work12-app-reality-chambers-mismatch');
+  }
+  if (!chambers?.includes('REALITY_CHAMBERS_CONTRACT_V596')
+    || !chambers.includes("states:Object.freeze(['threshold','awakening','present','engaged','travel'])")
+    || !chambers.includes('maximumVisibleIntentions:2')
+    || !chambers.includes('automaticWhitSpeech:false')) {
+    throw new Error('work12-reality-chambers-contract-missing');
+  }
+  if (!chamberStyles?.includes('[data-db596-chamber-state="threshold"]')
+    || !chamberStyles.includes('.db596-school-paths')
+    || !chamberStyles.includes('.db596-store-return')
+    || !chamberStyles.includes('scroll-snap-type:x mandatory')) {
+    throw new Error('work12-reality-chambers-styles-missing');
+  }
+  if (!school?.includes("document.documentElement.dataset.realityChambers==='v596'")
+    || !journal?.includes("document.documentElement.dataset.realityChambers === 'v596'")) {
+    throw new Error('work12-reality-chambers-orb-authority-missing');
   }
   if (!ritual?.includes('READING_RITUAL_CONTRACT_V595')
     || !ritual.includes("sequence:Object.freeze(['symbol','silence','essence','depth-on-request'])")
@@ -113,6 +142,10 @@ const validateCore = async responses => {
   }
   if (!pageLoader.includes("daily-world-v509.js?v=595-work12-ritual")) {
     throw new Error('work12-page-loader-daily-ritual-mismatch');
+  }
+  if (!pageLoader.includes("school-world-v306.js?v=596-work12-chambers")
+    || !pageLoader.includes("journal-world-v317.js?v=596-work12-chambers")) {
+    throw new Error('work12-page-loader-chambers-mismatch');
   }
   if (!universe?.includes('const RELEASE = 590;') || !universe.includes('essentialUniverseDuringTravel:true')) {
     throw new Error('work12-universe-contract-missing');
@@ -160,6 +193,7 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK12_MENU_ACTIVE', version:VERSION });
         client.postMessage({ type:'DIVINA_WORK12_WHIT_ACTIVE', version:VERSION });
         client.postMessage({ type:'DIVINA_WORK12_RITUAL_ACTIVE', version:VERSION });
+        client.postMessage({ type:'DIVINA_WORK12_CHAMBERS_ACTIVE', version:VERSION });
         client.postMessage({ type:'DIVINA_RELEASE_READY', version:VERSION });
       } catch {}
     }

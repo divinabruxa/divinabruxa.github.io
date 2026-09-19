@@ -1,0 +1,66 @@
+DIVINA BRUXA — WORK12
+MACROETAPA 8 DE 10 — REALIDADES COMO CÂMARAS
+ENTREGA V596
+
+BASE OBRIGATÓRIA
+Esta entrega continua diretamente a V595 já instalada.
+Não apague nenhum outro arquivo do projeto.
+
+COMO INSTALAR
+1. Abra a raiz do repositório da Divina Bruxa.
+2. Extraia o ZIP diretamente nessa raiz, sem criar uma pasta interna.
+3. Confirme a substituição destes 6 arquivos de produção:
+   - app-v208.js
+   - index.html
+   - journal-world-v317.js
+   - page-loader-v1.js
+   - school-world-v306.js
+   - sw.js
+4. Confirme a inclusão destes 2 novos núcleos:
+   - reality-chambers-v596.js
+   - reality-chambers-v596.css
+5. Envie todos os arquivos extraídos em uma única atualização.
+6. Aguarde a publicação e feche/reabra o site ou o app instalado no iPhone.
+
+O QUE NASCE NESTA ETAPA
+- Escola, Diário, Consultas e Loja viram câmaras do mesmo universo.
+- Ao chegar, a pessoa encontra primeiro a única Orbe e uma intenção curta.
+- O conteúdo só nasce depois de Mergulhar; profundidade exige novo gesto.
+- Escola começa pelo próximo passo e oferece no máximo duas escolhas visíveis.
+- Diário começa por Escrever ou Espelho; calendário permanece disponível dentro
+  da profundidade, sem lotar o limiar.
+- Consultas preservam serviços, valores, formulário e acompanhamento, mas a
+  chegada agora mostra apenas o essencial.
+- Loja começa por intenção; catálogo, filtros e produtos aparecem depois.
+- Os antigos motores continuam intactos. A V596 governa presença e ordem.
+- Whit sustenta o tempo dentro da Orbe e não cria fala automática.
+- Durante viagem e nascimento de uma câmara, efeitos pesados dormem.
+
+FÍSICA DA CÂMARA
+Limiar. Intenção. Presença. Profundidade.
+
+GARANTIAS
+- Base V595 preservada.
+- Uma Orbe, um canvas, um renderer e uma física.
+- Nenhum teleporte, pisca ou cópia da Orbe.
+- Nenhum novo canvas, renderer, loop ou observador permanente.
+- Nenhum motor de Escola, Diário, Consultas ou Loja foi substituído.
+- Nenhuma fala automática da Whit foi adicionada.
+- Nenhuma leitura de Diário, formulário, emoção ou conteúdo privado.
+- Nenhuma chamada de IA, API ou armazenamento foi adicionada.
+- Uma única máquina de estados e no máximo um timer adiável.
+- Movimento reduzido preserva a mesma ordem semântica.
+- Prioridade iPhone e fluidez.
+- 706 verificações aprovadas nesta entrega.
+
+ARQUIVOS DE QA E DOCUMENTAÇÃO
+Os arquivos iniciados por qa-, o relatório, o manifesto e os hashes são
+evidências da entrega. Eles não substituem nenhum núcleo antigo.
+
+SINAL DE INSTALAÇÃO CORRETA
+Ao entrar em Escola, Diário, Consultas ou Loja, aparece primeiro o limiar com a
+mesma Orbe. Depois de Mergulhar, a realidade nasce abaixo dela em poucas
+escolhas. A profundidade só aparece quando chamada. Whit sabe ficar em silêncio.
+
+Uma Orbe. Um universo. Quatro câmaras vivas.
+

@@ -1,5 +1,6 @@
-/* DIVINA BRUXA 4.0 — MACROETAPA 7/14 · ESCOLA ORGANIZADA V555
-   Uma única jornada visível, três níveis pedagógicos e a Orbe canônica como tutora. */
+/* DIVINA BRUXA 4.0 — ESCOLA ORGANIZADA V555 + WORK12 CÂMARA V596
+   Uma única jornada visível, três níveis pedagógicos e a Orbe canônica.
+   Na V596, a Orbe permanece no limiar e a Escola nasce abaixo dela. */
 
 import { SchoolEngine } from './school-engine.js?v=555';
 import { SCHOOL_MODULES, SCHOOL_STAGES, SCHOOL_LESSON_TOTAL } from './school-policy.js?v=555';
@@ -87,6 +88,10 @@ export class SchoolWorldV306{
   }
 
   syncOrb(){
+    if(document.documentElement.dataset.realityChambers==='v596'){
+      this.releaseOrb();
+      return false;
+    }
     if(routeNow()!=='school'||!this.orbCore?.claim||!this.orb)return false;
     const host=this.root.querySelector('[data-school-orb-host]');if(!host)return false;
     if(host.contains(this.orb))return true;

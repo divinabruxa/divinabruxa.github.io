@@ -1,6 +1,7 @@
-/* DIVINA BRUXA 4.0 — MACROETAPA 8/14 · DIÁRIO & ESPELHO V556
+/* DIVINA BRUXA 4.0 — DIÁRIO & ESPELHO V556 + WORK12 CÂMARA V596
    Mundo vivo construído SOBRE o JournalEngine V187 real.
-   Não duplica armazenamento, editor, calendário, timeline, Espelho ou consentimento da IA. */
+   Não duplica armazenamento, editor, calendário, timeline, Espelho ou consentimento da IA.
+   Na V596, a Orbe permanece no limiar e o espaço privado nasce abaixo dela. */
 
 import { JournalEngine } from './journal-engine.js?v=556';
 import { RhythmEngine } from './rhythm-v6.js?v=556';
@@ -251,6 +252,10 @@ export class JournalWorldV317 {
   }
 
   syncOrb() {
+    if (document.documentElement.dataset.realityChambers === 'v596') {
+      this.releaseOrb();
+      return false;
+    }
     if (routeNow() !== 'journal' || !this.orbCore?.claim || !this.orb) return false;
     const host = this.root.querySelector('[data-journal-orb-host]');
     if (!host) return false;

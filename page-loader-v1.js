@@ -1,6 +1,7 @@
-/* DIVINA BRUXA 4.0 — ORBE SUPREMA 2.0 · MACROETAPA 2 · V577
+/* DIVINA BRUXA 4.0 — ORBE SUPREMA 2.0 + WORK12 CÂMARAS V596
    Toda realidade possui altar físico estável. Mundos em que a Orbe executa
-   uma função própria são construídos antes do commit visual da rota. */
+   uma função própria são construídos antes do commit visual da rota.
+   Escola e Diário respeitam a autoridade do limiar único V596. */
 
 import {
   normalizeRouteId,
@@ -136,7 +137,7 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     const module=await loadModuleAfterStylesV562([
       ensureStyle('divinaJournalRebirthV317','journal-world-v317.css?v=556'),
       ensureStyle('divinaJournalMirrorSupremeV556','journal-mirror-supreme-v556.css?v=556')
-    ],import('./journal-world-v317.js?v=556'));
+    ],import('./journal-world-v317.js?v=596-work12-chambers'));
     const instance=new module.JournalWorldV317($('#journalApp'),{orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme});
     globalThis.divinaJournalWorldV317=instance;
     return instance;
@@ -255,7 +256,7 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       const module=await loadModuleAfterStylesV562([
         ensureStyle('divinaSchoolRebirthV306','school-world-v306.css?v=555'),
         ensureStyle('divinaSchoolLibrarySupremeV555','school-library-supreme-v555.css?v=555')
-      ],import('./school-world-v306.js?v=555'));
+      ],import('./school-world-v306.js?v=596-work12-chambers'));
       const instance=new module.SchoolWorldV306($('#schoolApp'),{authClient,orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme});
       globalThis.divinaSchoolWorldV306=instance;
       return instance;
@@ -372,12 +373,12 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     school:()=>Promise.all([
       ensureStyle('divinaSchoolRebirthV306','school-world-v306.css?v=555'),
       ensureStyle('divinaSchoolLibrarySupremeV555','school-library-supreme-v555.css?v=555'),
-      import('./school-world-v306.js?v=555')
+      import('./school-world-v306.js?v=596-work12-chambers')
     ]),
     journal:()=>Promise.all([
       ensureStyle('divinaJournalRebirthV317','journal-world-v317.css?v=556'),
       ensureStyle('divinaJournalMirrorSupremeV556','journal-mirror-supreme-v556.css?v=556'),
-      import('./journal-world-v317.js?v=556')
+      import('./journal-world-v317.js?v=596-work12-chambers')
     ]),
     ai:()=>Promise.all([
       ensureStyle('divinaWhitPresenceDeepV540','whit-presence-deep-v540.css?v=557'),
