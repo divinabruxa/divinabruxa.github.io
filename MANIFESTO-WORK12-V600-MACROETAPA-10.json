@@ -1,0 +1,62 @@
+{
+  "release": "V600",
+  "work": "WORK12",
+  "macroStage": "10-of-10",
+  "title": "Fechamento Vivo",
+  "baseRequired": "V599",
+  "scope": "one-style-identity-within-macro-10",
+  "law": "one-orb-one-universe-one-physics-one-presence",
+  "correction": {
+    "problem": "duplicate-reference-to-the-same-final-stylesheet",
+    "cause": "html-style-id-did-not-match-runtime-canonical-id",
+    "canonicalStyleId": "divinaWork12FinalContinuityV598",
+    "preservedStyleHref": "work12-final-continuity-v598.css?v=599-live-audit",
+    "expectedFinalStyleReferences": 1
+  },
+  "preserved": {
+    "canonicalOrb": true,
+    "canonicalCanvas": true,
+    "homeFirstFrame": true,
+    "singleTapIntentions": true,
+    "doubleTapTarot": true,
+    "maximumVisibleIntentions": 2,
+    "sopro": true,
+    "silencio": true,
+    "whitResidence": "canonical-orb",
+    "automaticWhitSpeech": false,
+    "heavyEffectsPausedDuringTravel": true
+  },
+  "performanceDelta": {
+    "duplicateFinalStyleReferencesRemoved": 1,
+    "newCssFiles": 0,
+    "newJavaScriptExperienceFiles": 0,
+    "newCanvases": 0,
+    "newRenderers": 0,
+    "newTimers": 0,
+    "newAnimationLoops": 0
+  },
+  "replacedFiles": [
+    "index.html",
+    "sw.js"
+  ],
+  "verificationFiles": [
+    "qa-work12-v600-one-style.mjs",
+    "qa-work12-v600-service-worker-runtime.mjs",
+    "qa-work12-v600-boot-runtime.mjs"
+  ],
+  "documentationFiles": [
+    "00-INSTALE-V600-WORK12-MACROETAPA-10-FECHAMENTO-VIVO.txt",
+    "RELATORIO-WORK12-V600-MACROETAPA-10-FECHAMENTO-VIVO.md",
+    "HASHES-SHA256-WORK12-V600.txt"
+  ],
+  "validation": {
+    "v600ChecksPassed": 405,
+    "v598FinalRuntimeChecksPassed": 61,
+    "earlierFunctionalRegressionChecksPassed": 325,
+    "totalChecksPassed": 791,
+    "cleanOverlayOnV599": "PASS",
+    "protectedFilesBySha256": 20
+  },
+  "removedFiles": [],
+  "installation": "flat-root-overlay"
+}

@@ -1,13 +1,13 @@
-/* DIVINA BRUXA — WORK12 · MACROETAPA 10 · AUDITORIA VIVA V599
-   Correção cirúrgica da Fluidez Suprema Final. A instalação só assume o
-   portal quando HTML, aplicação, continuidade final, auditoria visual,
+/* DIVINA BRUXA — WORK12 · MACROETAPA 10 · FECHAMENTO VIVO V600
+   Uma identidade de estilo para uma única camada visual. A instalação só
+   assume o portal quando HTML, aplicação, continuidade final, auditoria viva,
    rito, navegação, universo e Orbe pertencem ao mesmo corte.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
-const VERSION = 599;
+const VERSION = 600;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work12-v599-live-audit';
+const CACHE_NAME = 'divina-bruxa-work12-v600-one-style';
 const CORE = Object.freeze([
   './index.html',
   './app-v208.js?v=598-work12-final',
@@ -72,12 +72,14 @@ const validateCore = async responses => {
   const renderer = await responses.get('./orb-engine-v208.js?v=591-work12-orb')?.clone().text();
   const journey = await responses.get('./orb-persistent-journey-v565.js?v=583-coordinate-travel')?.clone().text();
   const soul = await responses.get('./whit-orb-soul-bridge-v581.js?v=592-work12-navigation')?.clone().text();
-  if (!index?.includes('name="divina-work12" content="V599"')
-    || !index.includes('name="divina-live-audit" content="V599"')) {
+  if (!index?.includes('name="divina-work12" content="V600"')
+    || !index.includes('name="divina-live-audit" content="V600"')) {
     throw new Error('work12-index-version-mismatch');
   }
   if (!index.includes('app-v208.js?v=598-work12-final')
     || !index.includes('work12-final-continuity-v598.css?v=599-live-audit')
+    || !index.includes('id="divinaWork12FinalContinuityV598"')
+    || index.includes('id="divinaWork12FinalContinuityV599"')
     || !index.includes('experience-intelligence-v597.css?v=597-work12-intelligence')
     || !index.includes('reality-chambers-v596.css?v=596-work12-chambers')
     || !index.includes('reading-ritual-core-v595.css?v=595-work12-ritual')) {

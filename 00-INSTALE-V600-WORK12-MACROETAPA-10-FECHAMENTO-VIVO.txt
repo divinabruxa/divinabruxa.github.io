@@ -1,0 +1,65 @@
+DIVINA BRUXA — WORK12
+MACROETAPA 10 DE 10 — FECHAMENTO VIVO
+RELEASE V600
+
+LEI PRESERVADA
+Uma Orbe. Um Universo. Uma física. Uma presença.
+Uma camada visual. Nenhum trabalho duplicado.
+
+COMO INSTALAR
+1. Abra a raiz atual do site, onde a V599 já está instalada.
+2. Envie TODOS os arquivos deste ZIP diretamente para essa raiz.
+3. Autorize a substituição somente de index.html e sw.js.
+4. Não apague nenhuma pasta nem qualquer outro arquivo já existente.
+5. Aguarde o envio terminar por completo antes de abrir o site.
+6. No iPhone, feche e abra novamente o Safari ou o app instalado. O service worker V600 assume o fechamento de forma atômica.
+
+IMPORTANTE
+- Este ZIP é plano e depende da V599 já instalada.
+- Não é WORK13. É o fechamento técnico da auditoria viva da Macroetapa 10.
+- Nenhum CSS, JavaScript de experiência, conteúdo ou imagem é reenviado.
+- Nenhuma aparência, gesto ou física foi alterada.
+
+O QUE A AUDITORIA ENCONTROU
+- A V599 aparecia corretamente e toda a experiência funcionava.
+- O HTML nomeava a camada final como V599.
+- O núcleo V598 procurava a mesma camada pelo identificador canônico V598.
+- Por segurança, o núcleo acrescentava uma segunda referência para o mesmo CSS.
+
+O QUE A V600 FAZ
+- Alinha o identificador do HTML com o identificador canônico do núcleo.
+- Mantém a folha visual V599 já instalada.
+- Impede o segundo carregamento da mesma camada.
+- Atualiza o cache atômico e o boot para V600.
+
+ARQUIVOS SUBSTITUÍDOS
+- index.html
+- sw.js
+
+ARQUIVOS NOVOS DE VERIFICAÇÃO E DOCUMENTAÇÃO
+- qa-work12-v600-one-style.mjs
+- qa-work12-v600-service-worker-runtime.mjs
+- qa-work12-v600-boot-runtime.mjs
+- RELATORIO-WORK12-V600-MACROETAPA-10-FECHAMENTO-VIVO.md
+- MANIFESTO-WORK12-V600-MACROETAPA-10.json
+- HASHES-SHA256-WORK12-V600.txt
+
+VERIFICAÇÃO OPCIONAL
+Na raiz do site, execute:
+
+  sha256sum -c HASHES-SHA256-WORK12-V600.txt
+
+Depois, se Node.js estiver disponível:
+
+  node qa-work12-v600-one-style.mjs
+  node qa-work12-v600-service-worker-runtime.mjs
+  node qa-work12-v600-boot-runtime.mjs
+  node qa-work12-v598-final-runtime.mjs
+
+RESULTADO ESPERADO
+Os três relatórios V600 e o runtime final V598 terminam em PASS: 466 verificações.
+Com 325 regressões funcionais preservadas, o fechamento soma 791 verificações aprovadas.
+
+FIM DA MACROETAPA 10.
+Uma Orbe. Uma camada. Um Universo vivo.
+
