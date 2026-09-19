@@ -1,0 +1,205 @@
+DIVINA BRUXA — WORK12 · UNIVERSO VIVO
+RELATÓRIO TÉCNICO · MACROETAPA 2 DE 10 · RELEASE V590
+APP SHELL / UNIVERSO ÚNICO
+
+1. RESULTADO
+
+A V590 transforma o Universo Vivo já aprovado no corpo persistente do WORK12.
+Não existe outro céu, outro canvas, outro renderer ou outro relógio. A mesma
+raiz cósmica permanece montada enquanto as realidades mudam ao redor da Orbe.
+
+O ponto crítico da base foi corrigido sem tocar na física da Orbe: na V589, a
+viagem pausava o canvas inteiro. Agora somente as camadas caras adormecem. A
+textura cósmica, a gravidade visual da Orbe e o deslocamento horizontal seguem
+em uma cadência essencial, dando prioridade absoluta ao movimento.
+
+2. BASE EXATA
+
+A implementação partiu do repositório público após a instalação da V589:
+
+- commit: 6c5e574041a247ed057b386963c5b14a5b2b260d;
+- meta pública: V589 / WORK12 Macroetapa 1;
+- Fundação V589 ativa e saudável;
+- universo anterior: núcleo V524, release visual V581;
+- Tarot Livre, Carta do Dia, Orbe V582, viagem V583, Menu V584, linguagem
+  V585 e balões V586 presentes.
+
+Os 188 testes da Fundação V589 foram executados antes da alteração e passaram.
+
+3. AUDITORIA DO SITE PUBLICADO
+
+Em 19/09/2026, https://divinabruxa.com.br/ foi aberta novamente antes da V590.
+O fluxo real exercitado foi Home → menu/intenção → Tarot Livre → Home → Carta
+do Dia. A observação confirmou:
+
+- V589 publicada;
+- estado WORK12 saudável;
+- uma única #orb e um único #orbCanvas;
+- uma única raiz #divinaLivingUniverseV524 e um canvas dentro dela;
+- estado TRAVEL sem duplicação durante a passagem;
+- chegada de Tarot e Carta do Dia em REST;
+- retorno natural para Home;
+- zero overflow horizontal ao chegar na Carta do Dia;
+- zero erro de console com origem no site.
+
+4. APP SHELL VIVO
+
+O shell não é uma nova camada DOM. O próprio LivingUniverseCoreV524 passa a
+declarar e provar:
+
+- persistentAppShell;
+- persistentRootIdentity;
+- oneUniverseCanvas;
+- oneRenderClock;
+- uma montagem do mesmo corpo cósmico;
+- mudança de perfil por realidade sem reconstruir a raiz;
+- ciclo de vida de foreground/background;
+- integração direta com os estados do WORK12.
+
+O app expõe o corte V590 sem substituir a Fundação V589. A Fundação continua
+sendo a autoridade de intenção e navegação; o universo apenas traduz o estado
+semântico em orçamento visual.
+
+5. RESPIRAÇÃO ESSENCIAL DURANTE A VIAGEM
+
+As chamadas físicas existentes continuam iguais:
+
+  universe.pause('atom-one-flight')
+  universe.start('atom-one-flight')
+
+O núcleo V590 interpreta esse motivo como suspensão composta suave:
+
+- não cancela o único requestAnimationFrame;
+- não apaga nem substitui o canvas;
+- não cria bitmap viajante;
+- não cria camada espelho;
+- mantém o cosmos em 24 fps no iPhone e 30 fps em telas amplas;
+- respeita 20 fps em Reduced Motion ou dispositivo restrito;
+- acorda integralmente somente depois da chegada.
+
+Pausas reais continuam reais para document-hidden, pagehide, freeze e ritos que
+explicitamente precisam de silêncio total. Assim, o universo não gasta bateria
+em segundo plano e nenhuma retomada indevida vence outra autoridade de pausa.
+
+6. CAMADAS PESADAS
+
+No WebGL, a V590 usa o mesmo programa e acrescenta um orçamento uniforme. Em
+viagem, o shader retorna cedo depois da textura cósmica, da coloração mínima e
+da aura da Orbe. Ficam temporariamente fora do frame:
+
+- nuvens fractais de alta frequência;
+- filamentos e rendas;
+- quatro galáxias procedurais;
+- constelações fluidas;
+- poeira e microdetalhe profundo.
+
+No fallback Canvas 2D, o mesmo princípio mantém apenas estrelas calmas e aura,
+sem nuvens ou constelações. Ao chegar, a interpolação já existente devolve a
+profundidade sem corte visual.
+
+7. EIXOS DO UNIVERSO
+
+- X / horizontal: a direção mais curta entre a realidade de origem e destino
+  cria uma corrente de câmera contínua.
+- Y / vertical: rolagem e gesto continuam alimentando mergulho e paralaxe.
+- Z / profundidade: o perfil do destino começa a interpolar durante a viagem e
+  ganha profundidade plena na revelação.
+
+Não existe tradução literal de página. Existe mudança contínua de coordenada.
+
+8. IPHONE E PERFORMANCE
+
+A resolução Retina da sessão permanece estável; pressão reduz cadência, nunca
+redimensiona o canvas durante o movimento. Isso evita recomposição, estouro de
+memória, pisca do backing buffer e disputa de GPU com a Orbe.
+
+Orçamento durante viagem:
+
+- iPhone normal: até 24 fps para o universo;
+- tela ampla normal: até 30 fps;
+- Reduced Motion ou tier restrito: até 20 fps;
+- Orbe: renderer e física existentes, sem limitação nova;
+- uma única fila RAF protegida por this.raf;
+- zero loop, canvas, observer ou módulo visual adicional.
+
+9. SERVICE WORKER ATÔMICO
+
+O worker V590 valida seis peças como uma unidade:
+
+- index.html V590;
+- app-v208.js V590;
+- Fundação V589 preservada;
+- living-universe-core-v524.js release V590;
+- CSS crítico V180;
+- ponte de recuperação WORK12 V590.
+
+Se o universo não contém o contrato V590, a instalação é rejeitada antes de
+skipWaiting. O cache V589 só é removido depois que o conjunto V590 foi validado
+e ativado. Código continua network-first com cache seguro para offline.
+
+10. PROTEÇÃO DO QUE FUNCIONA
+
+Vinte e oito arquivos vitais permaneceram byte a byte iguais e foram conferidos
+por SHA-256. Entre eles:
+
+- Fundação WORK12 V589;
+- motores, gesto e movimento da Orbe;
+- viagem física e lei de coordenadas;
+- Menu, linguagem e balões;
+- Whit Soul/Core/Presence/Signature;
+- Tarot Livre, sessão e 78 cartas;
+- Carta do Dia e suas duas políticas;
+- navegação, rotas e registro de mundos.
+
+O living-universe-core-v524.js é o único motor visual alterado porque é o alvo
+declarado desta macroetapa. Tarot Livre e Carta do Dia foram exercitados em
+runtime: 78 cartas sem repetição, orientação direta e ciclo diário de Brasília
+permanecem íntegros.
+
+11. QA
+
+- qa-work12-v590-universe.mjs: 173/173 PASS
+- qa-work12-v590-universe-runtime.mjs: 33/33 PASS
+- qa-work12-v590-continuity-runtime.mjs: 29/29 PASS
+- qa-work12-v590-service-worker-runtime.mjs: 30/30 PASS
+- total contado: 265/265 PASS
+- 28 arquivos protegidos por SHA-256
+- 64 imports de produção, 0 ausentes
+- sintaxe JavaScript: PASS
+- git diff --check: PASS
+- P0: 0
+- P1: 0
+
+Os testes cobrem instalação íntegra e corrompida, rede/offline, boot normal,
+watchdog e abertura manual, pausas concorrentes, iPhone/Reduced Motion,
+DEPART/TRAVEL/ARRIVE/REVEAL, identidade da raiz, Tarot e Carta do Dia.
+
+12. DELTA DE PRODUÇÃO
+
+Somente cinco arquivos precisam ir ao servidor:
+
+- app-v208.js
+- cosmic-visual-atlas-v1.js
+- index.html
+- living-universe-core-v524.js
+- sw.js
+
+A Fundação V589 não é reenviada porque permaneceu idêntica.
+
+13. CRITÉRIO DE ACEITE
+
+A Macroetapa 2 está concluída quando:
+
+- existe uma raiz e um canvas do universo;
+- a identidade dessa raiz sobrevive a toda rota;
+- o universo não congela nem compete com a Orbe durante a viagem;
+- camadas caras dormem enquanto o movimento é prioritário;
+- background/freeze ainda economizam bateria;
+- Tarot Livre e Carta do Dia continuam verdadeiros;
+- nenhuma segunda Orbe ou física aparece.
+
+14. PRÓXIMO PASSO
+
+WORK12 · Macroetapa 3 de 10 — Orbe Persistente. A próxima lapidação trabalha a
+matéria única da Orbe e a presença Whit dentro dela, sobre o universo contínuo
+que a V590 acaba de firmar.

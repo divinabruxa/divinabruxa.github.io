@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — WORK12 · FUNDAÇÃO E VERDADE V589
-   Uma Orbe, um universo, uma física, uma presença. A V589 não acrescenta
-   espetáculo: reúne a experiência existente sob uma única fonte de verdade. */
+/* DIVINA BRUXA — WORK12 · MACROETAPA 2 · UNIVERSO VIVO GLOBAL V590
+   A Fundação V589 permanece soberana. A V590 lapida o shell já existente:
+   um céu, um canvas e um relógio acompanham a única Orbe entre realidades. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -11,7 +11,7 @@ import { createSupremeOrbCoreV501 } from './supreme-orb-core-v501.js?v=576-found
 import { createOrbPersistentJourneyV565 } from './orb-persistent-journey-v565.js?v=583-coordinate-travel';
 import { createOrbUniversalPresenceV526 } from './orb-universal-presence-v526.js?v=577-universal';
 import { installRealityLifecycleV511 } from './reality-lifecycle-v511.js?v=511';
-import { createLivingUniverseV524 } from './living-universe-core-v524.js?v=581-living-universe';
+import { createLivingUniverseV524 } from './living-universe-core-v524.js?v=590-work12-universe';
 import { installSkinPerformanceCoreV518 } from './skin-performance-core-v518.js?v=535-mobile-fluidity';
 import { AuthClientV201 as AuthClient } from './auth-client-v201.js?v=532';
 import { AccountEngineV201 } from './account-engine-v201.js?v=556-journal-consent';
@@ -280,7 +280,7 @@ document.getElementById('divinaLivingUniverseV523')?.remove();
 document.getElementById('divinaLivingUniverseV523Styles')?.remove();
 document.body?.classList.remove('db523-universe-active');
 
-const livingUniverse = safely('Universo Vivo Global V581', () =>
+const livingUniverse = safely('WORK12 · Universo Vivo Global V590', () =>
   createLivingUniverseV524()
 );
 
@@ -580,8 +580,13 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK12_UNIVERSE_ACTIVE') {
+    document.documentElement.dataset.work12UniverseWorker = `v${event.data.version || 590}`;
+    work12Foundation?.audit?.('universe-worker-active');
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK12_FOUNDATION_ACTIVE') {
-    document.documentElement.dataset.work12Worker = `v${event.data.version || 589}`;
+    document.documentElement.dataset.work12Worker = `v${event.data.version || 590}`;
     work12Foundation?.audit?.('service-worker-active');
     return;
   }
@@ -598,14 +603,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v589-work12-app';
+  window.__divinaSWBootstrap = 'v590-work12-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=589', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=590', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v589';
+        document.documentElement.dataset.releaseEpoch = 'v590';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] WORK12 V589 registrado');
+        console.info('[Divina] WORK12 V590 registrado');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -913,6 +918,39 @@ window.divinaWork12Macro1V589 = Object.freeze({
     newAnimationLoops:0,
     mutationObservers:0
   })
+});
+document.documentElement.dataset.work12Macro = '2-app-shell-universe';
+document.documentElement.dataset.work12Universe = 'v590';
+document.documentElement.dataset.work12Shell = 'persistent';
+window.divinaWork12Macro2V590 = Object.freeze({
+  version:590,
+  base:'V589',
+  work:'WORK12',
+  stage:'app-shell-universo-unico',
+  universe:livingUniverse,
+  foundation:work12Foundation,
+  status:() => {
+    const universe = livingUniverse?.status?.() || null;
+    return Object.freeze({
+      release:'V590',
+      macroStage:'2-of-10',
+      law:'one-orb-one-universe-one-physics-one-presence',
+      foundation:work12Foundation?.snapshot?.() || null,
+      universe,
+      persistentAppShell:universe?.persistentAppShell === true,
+      oneUniverse:universe?.oneUniverseCanvas === true,
+      oneRenderClock:universe?.oneRenderClock === true,
+      essentialUniverseDuringTravel:universe?.essentialUniverseDuringTravel === true,
+      heavyLayersPausedDuringTravel:universe?.heavyLayersPausedDuringTravel === true,
+      onePhysicalOrb:supremeOrb?.snapshot?.().oneLivingOrb === true,
+      tarotProtected:true,
+      dailyProtected:true,
+      newUniverseRoots:0,
+      newCanvases:0,
+      newAnimationLoops:0,
+      newMutationObservers:0
+    });
+  }
 });
 const skinPerformanceCore = safely('Skins, desempenho e acabamento V518', () =>
   installSkinPerformanceCoreV518()

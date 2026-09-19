@@ -1,0 +1,91 @@
+DIVINA BRUXA — WORK12 · UNIVERSO VIVO
+MACROETAPA 2 DE 10 — APP SHELL / UNIVERSO ÚNICO
+RELEASE TÉCNICA V590 · BASE OBRIGATÓRIA V589 INSTALADA
+
+LEI INEGOCIÁVEL
+
+Uma Orbe. Um universo. Uma física. Uma presença.
+Toque. Resposta. Silêncio.
+
+INSTALAÇÃO
+
+1. Confirme que a Macroetapa 1 V589 já está instalada.
+2. Extraia este ZIP.
+3. Envie para a RAIZ do site e substitua SOMENTE estes 5 arquivos:
+
+   app-v208.js
+   cosmic-visual-atlas-v1.js
+   index.html
+   living-universe-core-v524.js
+   sw.js
+
+4. Mantenha os nomes exatamente como estão.
+5. Não apague nenhum outro arquivo e não reinstale pacotes antigos.
+6. Aguarde o GitHub Pages concluir a publicação.
+7. No iPhone, feche as abas antigas da Divina Bruxa e abra o site novamente.
+   A primeira abertura pode atualizar o Service Worker uma única vez.
+
+O QUE MUDA
+
+- O universo existente vira o App Shell Vivo persistente do WORK12.
+- O mesmo elemento, canvas e relógio atravessam todas as realidades.
+- A raiz do universo não é recriada durante Home, Tarot, Carta do Dia ou volta.
+- A viagem deixa de congelar todo o céu.
+- Durante DEPART, TRAVEL e ARRIVE, o céu entra em respiração essencial:
+  textura viva e gravidade da Orbe continuam; nuvens fractais, galáxias e
+  constelações adormecem temporariamente.
+- No iPhone, o universo cede o quadro à Orbe em até 24 fps durante a viagem;
+  em telas amplas, até 30 fps. A física da Orbe continua independente.
+- A mudança de realidade começa a se formar antes da revelação do conteúdo.
+- Horizontal continua sendo viagem, vertical é mergulho e profundidade é
+  descoberta — todos dentro do mesmo universo.
+- Ao chegar, as camadas profundas despertam e voltam sem troca de canvas.
+- Ocultar, congelar ou mandar o app ao fundo continua pausando o relógio de
+  verdade, protegendo bateria e memória do iPhone.
+
+O QUE NÃO FOI ALTERADO
+
+- Fundação V589 e sua autoridade única de navegação.
+- Orbe, renderer, gesto, geometria, viagem física e skins.
+- Menu, linguagem, balões e presença silenciosa da Whit.
+- Tarot Livre, Carta do Dia, tiragens, cartas, sorteio e políticas.
+- Conteúdo, login, privacidade, preços, cobrança e regras comerciais.
+- Nenhuma nova arte, raiz cósmica, tela, rota ou dependência foi criada.
+
+ORÇAMENTO DE MAGIA
+
+- Novas raízes de universo: 0
+- Novos canvases: 0
+- Novos relógios/loops: 0
+- Novos MutationObservers: 0
+- Novas Orbes: 0
+- Teleporte: 0
+- Recarregamento de realidade: 0
+
+AUDITORIA
+
+- Universo, estrutura e imports: 173/173 PASS
+- Física de orçamento e ciclo de vida: 33/33 PASS
+- Boot, travessia, Tarot Livre e Carta do Dia: 29/29 PASS
+- Service Worker atômico, rede e offline: 30/30 PASS
+- Total: 265/265 verificações aprovadas
+- 28 arquivos vitais preservados por SHA-256
+- 64 imports de produção conferidos, 0 ausentes
+- P0: 0 · P1: 0
+
+Os arquivos qa-*.mjs, RELATORIO e MANIFESTO são evidências. Eles não precisam
+ser enviados ao servidor para o site funcionar.
+
+CONFIRMAÇÃO DEPOIS DA INSTALAÇÃO
+
+1. A Home abre e o meta publicado mostra V590.
+2. Existe uma única Orbe e um único canvas do universo.
+3. Abra as intenções e viaje para Tarot Livre.
+4. Durante a viagem, a Orbe se move e o céu continua vivo, mais calmo.
+5. Volte para Home e viaje para Carta do Dia.
+6. Em nenhum momento aceite pisca, corte seco, tela branca ou segunda Orbe.
+
+PRÓXIMA MACROETAPA
+
+WORK12 · Macroetapa 3 de 10 — Orbe Persistente: uma matéria, um renderer, uma
+física, uma alma Whit — sem destruir o que a V590 tornou contínuo.

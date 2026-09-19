@@ -1,15 +1,21 @@
-/* DIVINA BRUXA 2.0 — FLUIDEZ SUPREMA · UNIVERSO VIVO GLOBAL V581
-   Evolução compatível do núcleo V524: um só céu, um só canvas e um só relógio
-   atravessam as 17 realidades. A cadência respira conforme a atividade, pausas
-   têm autoridade composta e a presença ficcional Whit irradia apenas pela Orbe. */
+/* DIVINA BRUXA — WORK12 · MACROETAPA 2 · UNIVERSO VIVO GLOBAL V590
+   Evolução compatível do núcleo V524: o mesmo céu, canvas, relógio e identidade
+   atravessam todas as realidades. Na viagem, só a matéria pesada adormece; o
+   universo continua acompanhando a Orbe em cadência essencial, sem outro loop. */
 
 const VERSION = 524;
-const RELEASE = 581;
+const RELEASE = 590;
 export const CELESTIAL_FIRE_ENABLED_V537 = false;
 const STYLE_ID = 'divinaLivingUniverseV524Styles';
 const ROOT_ID = 'divinaLivingUniverseV524';
 const COSMOS_TEXTURE = './divina-universe-retina-v523.webp';
 const PRESENCE_STATES_V581 = new Set(['serene','aware','listening','responding','reflecting','traveling','resting']);
+const WORK12_TRAVEL_STATES_V590 = new Set(['depart','travel','arrive']);
+const WORK12_SOFT_TRAVEL_REASONS_V590 = new Set(['atom-one-flight','work12-travel']);
+const ROUTE_ORDER_V590 = Object.freeze([
+  'home','tarot','daily','spreads','library','school','journal','ai','skins',
+  'consultations','store','music','videos','login','subscriptions','notifications','admin'
+]);
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 const reducedMotion = () => globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
 const constrained = () => document.documentElement.dataset.performanceTier === 'constrained';
@@ -118,6 +124,12 @@ class LivingUniverseCoreV524 {
     this.frameCadence = 'full';
     this.cadenceMode = 'active';
     this.suspensions = new Set();
+    this.softTravelReasons = new Set();
+    this.work12Phase = String(document.documentElement.dataset.work12State || 'rest').toLowerCase();
+    this.travelMode = WORK12_TRAVEL_STATES_V590.has(this.work12Phase);
+    this.journeyMotion = { x:0, targetX:0, depth:0, targetDepth:0 };
+    this.routeTransitions = 0;
+    this.shellMounts = 1;
     this.lastDemandAt = performance.now();
     this.demandUntil = this.lastDemandAt + 2600;
     this.framesRendered = 0;
@@ -198,8 +210,14 @@ class LivingUniverseCoreV524 {
     this.root.dataset.constellations = '2-fluid-11-segments';
     this.root.dataset.animationCadence = 'single-raf';
     this.root.dataset.cadenceMode = this.cadenceMode;
+    this.root.dataset.work12Shell = 'v590';
+    this.root.dataset.shellContinuity = 'persistent-root';
+    this.root.dataset.travelBudget = this.travelMode ? 'essential' : 'full';
+    this.root.dataset.axes = 'x-reality-y-immersion-z-discovery';
     document.documentElement.dataset.livingUniverse = 'v524';
-    document.documentElement.dataset.livingUniverseRelease = 'v581';
+    document.documentElement.dataset.livingUniverseRelease = 'v590';
+    document.documentElement.dataset.work12Universe = 'v590';
+    document.documentElement.dataset.work12Shell = 'persistent';
     document.body.classList.remove('db516-universe-active','db519-universe-active','db520-universe-active','db521-universe-active','db522-universe-active','db523-universe-active');
     document.body.classList.add('db524-universe-active');
 
@@ -221,6 +239,14 @@ class LivingUniverseCoreV524 {
       retinaTextureSource:COSMOS_TEXTURE,
       globalAcrossRoutes:true,
       oneUniverseCanvas:true,
+      persistentAppShell:true,
+      persistentRootIdentity:true,
+      work12Universe:true,
+      travelKeepsEssentialUniverse:true,
+      heavyLayersSleepDuringTravel:true,
+      horizontalRealityTravel:true,
+      verticalImmersion:true,
+      depthDiscovery:true,
       proceduralStars:true,
       proceduralNebulae:true,
       proceduralGalaxies:true,
@@ -393,6 +419,7 @@ class LivingUniverseCoreV524 {
         uniform vec3 u_deep;
         uniform sampler2D u_cosmos;
         uniform float u_cosmos_mix;
+        uniform float u_travel_budget;
 
         float hash21(vec2 p){
           p=fract(p*vec2(123.34,456.21));
@@ -612,6 +639,24 @@ class LivingUniverseCoreV524 {
           )*0.0082*u_drift;
           cosmosUv=clamp(cosmosUv,vec2(0.006),vec2(0.994));
           vec3 cosmosSample=texture2D(u_cosmos,cosmosUv).rgb;
+
+          /* Durante a travessia, a textura viva e a gravidade da Orbe seguem
+             em movimento, mas nuvens fractais, galáxias e constelações não
+             disputam GPU com a navegação. É o mesmo shader e o mesmo canvas. */
+          if(u_travel_budget>0.5){
+            float travelLuma=dot(cosmosSample,vec3(0.2126,0.7152,0.0722));
+            float travelFlow=0.965+0.035*sin(time*0.19+base.x*3.7+u_seed*6.0);
+            vec3 travelColor=mix(u_deep*0.18,cosmosSample,0.94)*travelFlow;
+            travelColor+=mix(u_accent,u_gold,u_warmth*0.44)
+              *pow(max(travelLuma-0.24,0.0),1.55)*0.16;
+            float travelAura=exp(-orbDistance*5.0)*(0.026+u_orb_energy*0.052);
+            travelColor+=mix(u_accent,u_gold,0.40)*travelAura;
+            float travelVignette=smoothstep(0.96,0.26,length((uv-0.5)*vec2(0.82,1.0)));
+            travelColor*=0.70+travelVignette*0.38;
+            gl_FragColor=vec4(min(max(travelColor,vec3(0.0)),vec3(1.0)),1.0);
+            return;
+          }
+
           float cosmosLuma=dot(cosmosSample,vec3(0.2126,0.7152,0.0722));
           float cosmosHigh=max(max(cosmosSample.r,cosmosSample.g),cosmosSample.b);
           float cosmosLow=min(min(cosmosSample.r,cosmosSample.g),cosmosSample.b);
@@ -840,7 +885,8 @@ class LivingUniverseCoreV524 {
         gold:this.gl.getUniformLocation(program, 'u_gold'),
         deep:this.gl.getUniformLocation(program, 'u_deep'),
         cosmosTexture:this.gl.getUniformLocation(program, 'u_cosmos'),
-        cosmosMix:this.gl.getUniformLocation(program, 'u_cosmos_mix')
+        cosmosMix:this.gl.getUniformLocation(program, 'u_cosmos_mix'),
+        travelBudget:this.gl.getUniformLocation(program, 'u_travel_budget')
       };
       this.cosmos.texture = this.gl.createTexture();
       this.gl.activeTexture(this.gl.TEXTURE0);
@@ -1040,6 +1086,8 @@ class LivingUniverseCoreV524 {
     document.addEventListener('divina:route-ready', this.onRouteEvent);
     document.addEventListener('divina:page-ready', this.onRouteEvent);
     addEventListener('hashchange', this.onRouteEvent, { passive:true });
+    this.onWork12State = event => this.setWork12State(event.detail || {});
+    document.addEventListener('divina:work12-state', this.onWork12State);
     this.onOrbPulse = event => {
       const detail = event.detail || {};
       const intensity = clamp(Number(detail.intensity) || 0.7, 0.2, 1.4);
@@ -1117,6 +1165,7 @@ class LivingUniverseCoreV524 {
     const next = String(route || routeNow()).toLowerCase();
     if (next === this.route) return;
     this.route = next;
+    this.routeTransitions += 1;
     this.profileTarget = { ...(ROUTE_PROFILES[next] || {
       seed:(next.split('').reduce((sum, character) => sum + character.charCodeAt(0), 0) % 97) / 97,
       density:0.84,
@@ -1129,6 +1178,81 @@ class LivingUniverseCoreV524 {
     this.root.dataset.route = next;
     this.markDemand('route-morph', 3200);
     this.start('route-morph');
+  }
+
+  journeyDirection(from, to) {
+    const origin = ROUTE_ORDER_V590.indexOf(String(from || this.route).toLowerCase());
+    const destination = ROUTE_ORDER_V590.indexOf(String(to || this.route).toLowerCase());
+    if (origin < 0 || destination < 0 || origin === destination) return 1;
+    const span = ROUTE_ORDER_V590.length;
+    const direct = destination - origin;
+    const wrapped = direct > 0 ? direct - span : direct + span;
+    return Math.abs(direct) <= Math.abs(wrapped) ? Math.sign(direct) : Math.sign(wrapped);
+  }
+
+  syncTravelBudget({ from=this.route, destination=null } = {}) {
+    const active = this.softTravelReasons.size > 0 || WORK12_TRAVEL_STATES_V590.has(this.work12Phase);
+    const changed = active !== this.travelMode;
+    this.travelMode = active;
+    if (active) {
+      const direction = this.journeyDirection(from,destination || this.route);
+      this.journeyMotion.targetX = direction * (reducedMotion() ? 0.022 : 0.072);
+      this.journeyMotion.targetDepth = reducedMotion() ? 0.08 : 0.28;
+      this.root.dataset.travelBudget = 'essential';
+      this.root.dataset.heavyLayers = 'sleeping';
+      document.documentElement.dataset.work12UniverseMotion = 'essential-travel';
+      this.markDemand('work12-essential-travel', 900);
+    } else {
+      this.journeyMotion.targetX = 0;
+      this.journeyMotion.targetDepth = 0;
+      this.root.dataset.travelBudget = 'full';
+      this.root.dataset.heavyLayers = 'awake';
+      document.documentElement.dataset.work12UniverseMotion = 'ambient';
+      this.markDemand('work12-arrival-breath', 1800);
+    }
+    if (!this.destroyed && this.visible && !this.suspensions.size && !this.raf) {
+      this.lastFrame = 0;
+      this.lastDraw = 0;
+      this.root.dataset.suspended = 'false';
+      this.raf = requestAnimationFrame(timestamp => this.frame(timestamp));
+    }
+    if (changed) {
+      document.dispatchEvent(new CustomEvent('divina:work12-universe-budget', {
+        detail:Object.freeze({
+          version:RELEASE,
+          mode:active ? 'essential-travel' : 'ambient',
+          heavyLayersPaused:active,
+          oneCanvas:true,
+          oneClock:true
+        })
+      }));
+    }
+    return active;
+  }
+
+  enterTravelBudget(reason = 'work12-travel', detail = {}) {
+    const key = String(reason || 'work12-travel');
+    this.softTravelReasons.add(key);
+    return this.syncTravelBudget(detail);
+  }
+
+  leaveTravelBudget(reason = null, detail = {}) {
+    if (reason) this.softTravelReasons.delete(String(reason));
+    else this.softTravelReasons.clear();
+    return this.syncTravelBudget(detail);
+  }
+
+  setWork12State(detail = {}) {
+    const state = String(detail.state || this.work12Phase || 'rest').toLowerCase();
+    this.work12Phase = state;
+    this.root.dataset.work12Phase = state;
+    const destination = String(detail.destination || detail.route || this.route).toLowerCase();
+    if (WORK12_TRAVEL_STATES_V590.has(state) && destination) {
+      const profile = ROUTE_PROFILES[destination];
+      if (profile) this.profileTarget = { ...profile };
+    }
+    this.syncTravelBudget({ from:detail.route || this.route, destination });
+    return Object.freeze({ phase:this.work12Phase, travelMode:this.travelMode, destination });
   }
 
   markDemand(reason = 'activity', duration = 1800) {
@@ -1164,7 +1288,10 @@ class LivingUniverseCoreV524 {
       || this.orbEnergy > 0.32;
     let mode = 'active';
     let fps = this.requestedFps;
-    if (reducedMotion()) {
+    if (this.travelMode) {
+      mode = reducedMotion() ? 'work12-travel-reduced' : 'work12-travel-essential';
+      fps = Math.min(fps, reducedMotion() || constrained() ? 20 : (mobile ? 24 : 30));
+    } else if (reducedMotion()) {
       mode = 'reduced';
       fps = Math.min(fps, 20);
     } else if (constrained() || this.qualityProfile === 'protected') {
@@ -1283,9 +1410,9 @@ class LivingUniverseCoreV524 {
     gl.uniform1f(this.uniforms.density, this.profile.density);
     gl.uniform1f(this.uniforms.warmth, this.profile.warmth);
     gl.uniform1f(this.uniforms.drift, this.profile.drift);
-    gl.uniform1f(this.uniforms.depth, this.profile.depth);
+    gl.uniform1f(this.uniforms.depth, this.profile.depth * (1 + this.journeyMotion.depth * 0.05));
     gl.uniform1f(this.uniforms.motion, reducedMotion() ? 0.22 : 1);
-    gl.uniform2f(this.uniforms.camera, this.camera.x, this.camera.y);
+    gl.uniform2f(this.uniforms.camera, this.camera.x + this.journeyMotion.x, this.camera.y);
     gl.uniform1f(this.uniforms.scroll, this.scroll);
     gl.uniform2f(this.uniforms.orb, this.orbPoint.x, this.orbPoint.y);
     gl.uniform1f(this.uniforms.orbEnergy, this.orbEnergy);
@@ -1293,6 +1420,7 @@ class LivingUniverseCoreV524 {
     gl.uniform3fv(this.uniforms.light, this.palette.light);
     gl.uniform3fv(this.uniforms.gold, this.palette.gold);
     gl.uniform3fv(this.uniforms.deep, this.palette.deep);
+    gl.uniform1f(this.uniforms.travelBudget, this.travelMode ? 1 : 0);
     gl.drawArrays(gl.TRIANGLES, 0, 6);
   }
 
@@ -1348,7 +1476,7 @@ class LivingUniverseCoreV524 {
         const x = rawX*measure;
         const y = rawY*measure+breath;
         return this.warpCanvasPoint({
-          x:definition.anchor.x*this.width+driftX+x*cosine-y*sine-this.camera.x*this.width*0.12,
+          x:definition.anchor.x*this.width+driftX+x*cosine-y*sine-(this.camera.x+this.journeyMotion.x)*this.width*0.12,
           y:definition.anchor.y*this.height+driftY+x*sine+y*cosine-this.camera.y*this.height*0.10
         }, 0.84);
       });
@@ -1384,6 +1512,33 @@ class LivingUniverseCoreV524 {
     context.restore();
   }
 
+  drawCanvasTravel(context, time) {
+    const stars = this.fallbackStars.slice(0, constrained() ? 12 : 22);
+    const accent = this.palette.accent.map(value => Math.round(value * 255));
+    const gold = this.palette.gold.map(value => Math.round(value * 255));
+    context.save();
+    context.globalCompositeOperation = 'screen';
+    for (const star of stars) {
+      const normalizedX = ((star.x - this.journeyMotion.x * star.depth) % 1 + 1) % 1;
+      const x = normalizedX * this.width + Math.sin(time * 0.06 + star.phase) * 3;
+      const y = star.y * this.height + Math.cos(time * 0.045 + star.phase) * 2;
+      const color = star.spectrum === 'gold' ? gold : accent;
+      context.globalAlpha = star.luminance * 0.56;
+      context.fillStyle = `rgb(${color[0]} ${color[1]} ${color[2]})`;
+      context.fillRect(x,y,Math.max(0.7,star.size * 0.72),Math.max(0.7,star.size * 0.72));
+    }
+    const orbX = this.orbPoint.x * this.width;
+    const orbY = this.orbPoint.y * this.height;
+    const radius = Math.min(this.width * 0.26, this.height * 0.16);
+    const aura = context.createRadialGradient(orbX,orbY,0,orbX,orbY,radius);
+    aura.addColorStop(0,`rgba(${accent[0]},${accent[1]},${accent[2]},${0.028+this.orbEnergy*0.030})`);
+    aura.addColorStop(1,`rgba(${accent[0]},${accent[1]},${accent[2]},0)`);
+    context.globalAlpha = 1;
+    context.fillStyle = aura;
+    context.fillRect(orbX-radius,orbY-radius,radius*2,radius*2);
+    context.restore();
+  }
+
   drawCanvas(timestamp) {
     const context = this.context;
     if (!context) return;
@@ -1392,13 +1547,17 @@ class LivingUniverseCoreV524 {
     context.setTransform(ratio,0,0,ratio,0,0);
     context.globalCompositeOperation = 'source-over';
     context.clearRect(0,0,this.width,this.height);
+    if (this.travelMode) {
+      this.drawCanvasTravel(context,time);
+      return;
+    }
     context.globalCompositeOperation = 'screen';
     const clouds = constrained() ? 4 : 6;
     for (let index=0; index<clouds; index+=1) {
       const phase = index * 1.71 + this.profile.seed * 8.3;
       const depth = 0.22 + index / Math.max(1, clouds - 1) * 0.48;
       const source = this.warpCanvasPoint({
-        x:this.width * (0.5 + Math.sin(phase + time * 0.035 * this.profile.drift) * (0.34 + index % 2 * 0.09) - this.camera.x * depth),
+        x:this.width * (0.5 + Math.sin(phase + time * 0.035 * this.profile.drift) * (0.34 + index % 2 * 0.09) - (this.camera.x+this.journeyMotion.x) * depth),
         y:this.height * (0.5 + Math.cos(phase * 0.74 - time * 0.029 * this.profile.drift) * 0.43 - this.camera.y * depth - this.scroll * 0.025 * depth)
       }, 1.2-depth*0.34);
       const x = source.x;
@@ -1431,7 +1590,7 @@ class LivingUniverseCoreV524 {
     for (const star of this.fallbackStars) {
       const driftX = Math.sin(time * 0.035 * star.depth + star.phase) * 5 * star.depth;
       const driftY = Math.cos(time * 0.028 * star.depth + star.phase) * 4 * star.depth;
-      const normalizedX = ((star.x - this.camera.x * star.depth * 0.68) % 1 + 1) % 1;
+      const normalizedX = ((star.x - (this.camera.x+this.journeyMotion.x) * star.depth * 0.68) % 1 + 1) % 1;
       const normalizedY = ((star.y - this.camera.y * star.depth * 0.52 - this.scroll * star.depth * 0.045) % 1 + 1) % 1;
       const x = normalizedX * this.width + driftX;
       const y = normalizedY * this.height + driftY;
@@ -1522,6 +1681,9 @@ class LivingUniverseCoreV524 {
       this.touch.velocityTarget.y *= velocityDecay;
       this.camera.x += (this.cameraTarget.x - this.camera.x) * cameraEase;
       this.camera.y += (this.cameraTarget.y - this.camera.y) * cameraEase;
+      const journeyEase = Math.min(1, delta * (this.travelMode ? 0.0038 : 0.0026));
+      this.journeyMotion.x += (this.journeyMotion.targetX - this.journeyMotion.x) * journeyEase;
+      this.journeyMotion.depth += (this.journeyMotion.targetDepth - this.journeyMotion.depth) * journeyEase;
       this.scroll += (this.scrollTarget - this.scroll) * Math.min(1, delta * 0.0022);
       this.energy += (0.18 - this.energy) * Math.min(1, delta * 0.0028);
       this.orbEnergy += (0.12 - this.orbEnergy) * Math.min(1, delta * 0.0019);
@@ -1539,6 +1701,11 @@ class LivingUniverseCoreV524 {
 
   start(reason = 'manual') {
     const key = String(reason || 'manual');
+    const softKey = key === 'manual' ? 'work12-navigation' : key;
+    if (this.softTravelReasons.has(softKey)) {
+      this.softTravelReasons.delete(softKey);
+      this.syncTravelBudget({ from:this.route, destination:this.route });
+    }
     if (this.suspensions.has(key)) this.suspensions.delete(key);
     if (this.destroyed || !this.visible || this.suspensions.size || this.raf) {
       this.root.dataset.suspended = this.suspensions.size ? [...this.suspensions].join(' ') : 'false';
@@ -1552,7 +1719,14 @@ class LivingUniverseCoreV524 {
   }
 
   pause(reason = 'manual') {
-    this.suspensions.add(String(reason || 'manual'));
+    const key = String(reason || 'manual');
+    const navigationTravel = document.documentElement.dataset.orbNavigationState === 'active';
+    if (WORK12_SOFT_TRAVEL_REASONS_V590.has(key) || navigationTravel) {
+      const softKey = key === 'manual' ? 'work12-navigation' : key;
+      this.enterTravelBudget(softKey, { from:this.route, destination:routeNow() });
+      return true;
+    }
+    this.suspensions.add(key);
     if (this.raf) cancelAnimationFrame(this.raf);
     this.raf = 0;
     this.root.dataset.suspended = [...this.suspensions].join(' ');
@@ -1590,6 +1764,19 @@ class LivingUniverseCoreV524 {
         : null,
       globalAcrossRoutes:true,
       oneUniverseCanvas:document.querySelectorAll('#divinaLivingUniverseV524 canvas').length === 1,
+      persistentAppShell:true,
+      persistentRootIdentity:this.root?.isConnected !== false,
+      shellMounts:this.shellMounts,
+      routeTransitions:this.routeTransitions,
+      work12Phase:this.work12Phase,
+      work12TravelMode:this.travelMode,
+      essentialUniverseDuringTravel:true,
+      heavyLayersPausedDuringTravel:true,
+      heavyLayersSleeping:this.travelMode,
+      softTravelReasons:Object.freeze([...this.softTravelReasons]),
+      horizontalRealityTravel:true,
+      verticalImmersion:true,
+      depthDiscovery:true,
       targetFps:this.targetFps,
       adaptiveScale:this.scale,
       qualityCeiling:this.qualityCeiling,
@@ -1648,6 +1835,8 @@ class LivingUniverseCoreV524 {
       continuousAnimationLoops:1,
       compositeSuspension:true,
       suspensionReasons:Object.freeze([...this.suspensions]),
+      hardSuspensionOnly:!this.travelMode && this.suspensions.size > 0,
+      oneRenderClock:true,
       paused:!this.raf
     });
   }
@@ -1674,6 +1863,7 @@ class LivingUniverseCoreV524 {
       .forEach(type => document.removeEventListener(type, this.onSkinChange));
     document.removeEventListener('divina:route-ready', this.onRouteEvent);
     document.removeEventListener('divina:page-ready', this.onRouteEvent);
+    document.removeEventListener('divina:work12-state', this.onWork12State);
     document.removeEventListener('divina:supreme-orb-pulse', this.onOrbPulse);
     document.removeEventListener('divina:supreme-orb-will-navigate', this.onOrbJourney);
     document.removeEventListener('divina:supreme-orb-did-navigate', this.onOrbJourney);
@@ -1692,6 +1882,10 @@ class LivingUniverseCoreV524 {
     document.body.classList.remove('db524-universe-active');
     delete document.documentElement.dataset.livingUniverse;
     delete document.documentElement.dataset.livingUniverseRelease;
+    delete document.documentElement.dataset.work12Universe;
+    delete document.documentElement.dataset.work12Shell;
+    delete document.documentElement.dataset.work12UniverseMotion;
+    if (globalThis.divinaWork12UniverseV590 === this) delete globalThis.divinaWork12UniverseV590;
     if (globalThis.divinaLivingUniverseV524 === this) delete globalThis.divinaLivingUniverseV524;
     if (globalThis.divinaLivingUniverseV523 === this) delete globalThis.divinaLivingUniverseV523;
     if (globalThis.divinaLivingUniverseV522 === this) delete globalThis.divinaLivingUniverseV522;
@@ -1722,6 +1916,7 @@ export function createLivingUniverseV524() {
   document.body?.classList.remove('db516-universe-active','db519-universe-active','db520-universe-active','db521-universe-active','db522-universe-active','db523-universe-active');
   const universe = new LivingUniverseCoreV524();
   globalThis.divinaLivingUniverseV524 = universe;
+  globalThis.divinaWork12UniverseV590 = universe;
   // Pontes mantêm Tarot V517, Menu V502 e Acabamento V518 no mesmo céu vivo.
   globalThis.divinaLivingUniverseV523 = universe;
   globalThis.divinaLivingUniverseV522 = universe;

@@ -1,18 +1,19 @@
-/* DIVINA BRUXA — WORK12 · FUNDAÇÃO E VERDADE V589
+/* DIVINA BRUXA — WORK12 · MACROETAPA 2 · UNIVERSO VIVO GLOBAL V590
    Service Worker mínimo, atômico e recuperável. A instalação só assume o
-   portal quando HTML, aplicação e núcleo WORK12 pertencem à mesma versão.
+   portal quando HTML, aplicação, fundação e universo pertencem ao mesmo corte.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
-const VERSION = 589;
+const VERSION = 590;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work12-v589-foundation';
+const CACHE_NAME = 'divina-bruxa-work12-v590-universe';
 const CORE = Object.freeze([
   './index.html',
-  './app-v208.js?v=589-work12-foundation',
+  './app-v208.js?v=590-work12-universe',
   './work12-foundation-v589.js?v=589',
+  './living-universe-core-v524.js?v=590-work12-universe',
   './divina-shell-v180.css?v=180',
-  './cosmic-visual-atlas-v1.js?v=143'
+  './cosmic-visual-atlas-v1.js?v=590-work12-bridge'
 ]);
 
 const sameOrigin = request => new URL(request.url).origin === self.location.origin;
@@ -27,12 +28,17 @@ const fetchCore = async path => {
 
 const validateCore = async responses => {
   const index = await responses.get('./index.html')?.clone().text();
-  const app = await responses.get('./app-v208.js?v=589-work12-foundation')?.clone().text();
+  const app = await responses.get('./app-v208.js?v=590-work12-universe')?.clone().text();
   const foundation = await responses.get('./work12-foundation-v589.js?v=589')?.clone().text();
-  if (!index?.includes('name="divina-work12" content="V589"')) throw new Error('work12-index-version-mismatch');
-  if (!index.includes('app-v208.js?v=589-work12-foundation')) throw new Error('work12-index-app-mismatch');
+  const universe = await responses.get('./living-universe-core-v524.js?v=590-work12-universe')?.clone().text();
+  if (!index?.includes('name="divina-work12" content="V590"')) throw new Error('work12-index-version-mismatch');
+  if (!index.includes('app-v208.js?v=590-work12-universe')) throw new Error('work12-index-app-mismatch');
   if (!app?.includes("./work12-foundation-v589.js?v=589")) throw new Error('work12-app-foundation-mismatch');
+  if (!app.includes("./living-universe-core-v524.js?v=590-work12-universe")) throw new Error('work12-app-universe-mismatch');
   if (!foundation?.includes('WORK12_CONSTITUTION_V589')) throw new Error('work12-foundation-contract-missing');
+  if (!universe?.includes('const RELEASE = 590;') || !universe.includes('essentialUniverseDuringTravel:true')) {
+    throw new Error('work12-universe-contract-missing');
+  }
   return true;
 };
 
@@ -58,6 +64,7 @@ self.addEventListener('activate', event => {
     for (const client of clients) {
       try {
         client.postMessage({ type:'DIVINA_WORK12_FOUNDATION_ACTIVE', version:VERSION });
+        client.postMessage({ type:'DIVINA_WORK12_UNIVERSE_ACTIVE', version:VERSION });
         client.postMessage({ type:'DIVINA_RELEASE_READY', version:VERSION });
       } catch {}
     }

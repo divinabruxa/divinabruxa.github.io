@@ -1,7 +1,6 @@
-/* DIVINA BRUXA — WORK12 · PONTE DE RECUPERAÇÃO V589
-   Mantém o atlas legado aposentado. Na V589 o único guardião de boot vive no
-   shell do WORK12; o recovery V588 só permanece como proteção de instalação
-   parcial enquanto os arquivos novos ainda não chegaram juntos.
+/* DIVINA BRUXA — WORK12 · PONTE DE RECUPERAÇÃO V590
+   Mantém o atlas legado aposentado. Desde a V589, o único guardião de boot
+   vive no shell do WORK12; o recovery V588 só protege instalações parciais.
 */
 
 document.documentElement.dataset.legacyCosmicAtlas = 'retired-v300';
@@ -10,9 +9,10 @@ document.dispatchEvent(new CustomEvent('divina:legacy-atlas-retired', { detail:{
 (() => {
   const VERSION = 'v588';
   const root = document.documentElement;
-  const managedByWork12 = document.querySelector('meta[name="divina-work12"][content="V589"]');
-  if (managedByWork12) {
-    root.dataset.homeRecovery = 'delegated-work12-v589';
+  const work12Meta = document.querySelector('meta[name="divina-work12"]');
+  const work12Version = Number(String(work12Meta?.content || '').replace(/\D/g,''));
+  if (work12Version >= 589) {
+    root.dataset.homeRecovery = `delegated-work12-v${work12Version}`;
     root.dataset.homeRecoveryReason = 'single-boot-guardian';
     return;
   }
