@@ -1,0 +1,63 @@
+{
+  "release": "V610",
+  "work": "WORK13",
+  "correction": "lapidacao-final-presenca-das-realidades",
+  "base": {
+    "work12": "V600-protegido",
+    "work13": "V610-instalado",
+    "home_rebuilt": false,
+    "orb_engine_changed": false,
+    "universe_engine_changed": false,
+    "work14": false
+  },
+  "outcome": {
+    "invitation": "Entrá",
+    "entry_intentions": 1,
+    "public_worlds": 15,
+    "static_screens": 17,
+    "canonical_orbs": 1,
+    "canonical_canvases": 1,
+    "maximum_visible_bubbles": 2,
+    "all_menu_destinations_have_full_screens": true,
+    "automatic_navigation_added": false,
+    "permanent_animation_loops_added": 0
+  },
+  "production_files": {
+    "replaced": [
+      "app-v208.js",
+      "index.html",
+      "sw.js",
+      "cosmos-entry-intention-v610.js",
+      "cosmos-entry-intention-v610.css"
+    ],
+    "new": [
+      "cosmos-world-presence-v610.js",
+      "cosmos-world-presence-v610.css"
+    ]
+  },
+  "qa_files": {
+    "replaced": [
+      "qa-work13-v610-boot-runtime.mjs",
+      "qa-work13-v610-entry-iphone-cycle.mjs",
+      "qa-work13-v610-entry-runtime.mjs",
+      "qa-work13-v610-entry-structural.mjs",
+      "qa-work13-v610-final-orchestra.mjs",
+      "qa-work13-v610-iphone-supreme.mjs",
+      "qa-work13-v610-service-worker-runtime.mjs"
+    ],
+    "new": [
+      "qa-work13-v610-world-presence-runtime.mjs"
+    ]
+  },
+  "validation": {
+    "state": "PASS",
+    "passed": 880,
+    "failed": 0,
+    "iphone_profiles": 8,
+    "public_routes_exercised": 15,
+    "orchestra_routes_exercised": 17,
+    "core_cache_assets": 45,
+    "physical_device_claim": false
+  },
+  "protected_orchestra_sha256": "ebfe097bc1851540a24494a7a64eb3122c31aa04f35e3809a5288baac16ceca0"
+}

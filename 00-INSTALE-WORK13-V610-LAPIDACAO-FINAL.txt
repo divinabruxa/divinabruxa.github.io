@@ -1,0 +1,9 @@
+WORK13 V610 — LAPIDAÇÃO FINAL
+
+1. Extraia este ZIP na raiz do site já instalado.
+2. Confirme a substituição dos arquivos existentes.
+3. Não apague nem renomeie nenhum outro arquivo.
+4. Reabra o site e atualize uma vez para o novo cache assumir.
+
+Este pacote não reconstrói a Home, a Orbe ou o Universo.
+Não existe WORK14.

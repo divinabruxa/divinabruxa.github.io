@@ -109,10 +109,10 @@ function harness() {
 check('boot:script-found', Boolean(bootScript));
 check('boot:work13-meta-v610', indexSource.includes('name="divina-work13" content="V610"'));
 check('boot:work12-meta-v600', indexSource.includes('name="divina-work12" content="V600"'));
-check('boot:app-v610', indexSource.includes('app-v208.js?v=610-work13-final-orchestra'));
-check('boot:worker-v610', indexSource.includes("register('./sw.js?v=610'"));
-check('boot:v610-bootstrap', indexSource.includes("__divinaSWBootstrap='v610-work13-final-orchestra-inline'"));
-check('boot:v610-no-style', !indexSource.includes('cosmos-final-orchestra-v610.css'));
+check('boot:app-v610', indexSource.includes('app-v208.js?v=610-work13-final-presence'));
+check('boot:worker-v610', indexSource.includes("register('./sw.js?v=610-final-presence'"));
+check('boot:v610-bootstrap', indexSource.includes("__divinaSWBootstrap='v610-work13-final-presence-inline'"));
+check('boot:v610-presence-style', indexSource.includes('cosmos-world-presence-v610.css?v=610-work13-final-presence'));
 check('boot:v609-style-preserved', indexSource.includes('living-media-skins-v609.css?v=609-work13-media-skins'));
 check('boot:v608-style-preserved', indexSource.includes('living-commerce-path-v608.css?v=608-work13-commerce-clarity'));
 check('boot:v607-style-preserved', indexSource.includes('living-wisdom-path-v607.css?v=607-work13-living-wisdom'));
@@ -124,7 +124,8 @@ check('boot:final-style-v599', indexSource.includes('work12-final-continuity-v59
 for (const id of [
   'divinaLivingMediaSkinsV609','divinaLivingCommercePathV608','divinaLivingWisdomPathV607',
   'divinaCosmicSpreadReadingV605','divinaCosmicDailyReadingV604',
-  'divinaCosmosRealityResonanceV603','divinaWork12FinalContinuityV598'
+  'divinaCosmosRealityResonanceV603','divinaWork12FinalContinuityV598',
+  'divinaCosmosEntryIntentionV610','divinaCosmosWorldPresenceV610'
 ]) check(`boot:one-style:${id}`, [...indexSource.matchAll(new RegExp(`id="${id}"`, 'g'))].length === 1);
 check('boot:one-orb', [...indexSource.matchAll(/id="orb"/g)].length === 1);
 check('boot:one-canvas', [...indexSource.matchAll(/id="orbCanvas"/g)].length === 1);
@@ -154,14 +155,14 @@ check('boot:healthy-work13-ready', healthy.root.dataset.work13Boot === 'ready-v6
 check('boot:healthy-never-bypassed', !healthy.home.classList.contains('active'));
 healthy.fire('load');
 await Promise.resolve();
-check('boot:registers-v610', healthy.registrations.some(item => item.url === './sw.js?v=610'));
+check('boot:registers-v610', healthy.registrations.some(item => item.url === './sw.js?v=610-final-presence'));
 check('boot:no-cache-registration', healthy.registrations.some(item => item.options?.updateViaCache === 'none'));
 
 const failures = checks.filter(item => !item.pass);
 console.log(JSON.stringify({
   release:'V610',
   work:'WORK13',
-  macroStage:'10-of-10 / final-orchestra-boot-runtime',
+  macroStage:'10-of-10 / final-presence-boot-runtime',
   state:failures.length ? 'FAIL' : 'PASS',
   passed:checks.length - failures.length,
   failed:failures.length,

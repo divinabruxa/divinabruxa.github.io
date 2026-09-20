@@ -25,19 +25,16 @@
   -webkit-tap-highlight-color:transparent;
   touch-action:manipulation;
 }
-.cosmos-entry-intent::after{
-  content:"";
-  position:absolute;
-  left:50%;
-  bottom:7px;
-  width:20px;
-  height:1px;
-  background:currentColor;
-  opacity:.35;
-  transform:translateX(-50%);
-}
 .cosmos-entry-intent:active{color:#fff3d3;opacity:1;transform:translate(-50%,2px)}
 .cosmos-entry-intent:focus-visible{outline:1px solid rgba(244,215,156,.72);outline-offset:3px}
+.cosmos-entry-intent[data-response="answering"]{
+  color:#fff3d3;
+  letter-spacing:.13em;
+  opacity:1;
+  transform:translate(-50%,2px) scale(.985);
+}
+.cosmos-entry-intent[data-response="crossing"],
+.cosmos-entry-intent[data-response="silent"]{pointer-events:none;opacity:0;transform:translate(-50%,8px)}
 .cosmos-entry-intent[aria-hidden="true"]{pointer-events:none;opacity:0;transform:translate(-50%,8px)}
 html:not([data-work12-final-route="home"]) .cosmos-entry-intent,
 html[data-menu-state]:not([data-menu-state="closed"]) .cosmos-entry-intent,

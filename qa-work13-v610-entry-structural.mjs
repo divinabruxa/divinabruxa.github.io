@@ -3,14 +3,20 @@ import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 
 const read = name => readFile(new URL(name, import.meta.url), 'utf8');
-const [html, app, sw, js, css, orchestra] = await Promise.all([
+const [html, app, sw, entryJs, entryCss, presenceJs, presenceCss, orchestra] = await Promise.all([
   read('./index.html'), read('./app-v208.js'), read('./sw.js'),
   read('./cosmos-entry-intention-v610.js'), read('./cosmos-entry-intention-v610.css'),
+  read('./cosmos-world-presence-v610.js'), read('./cosmos-world-presence-v610.css'),
   read('./cosmos-final-orchestra-v610.js')
 ]);
+
 let checks = 0;
 const ok = (condition, message) => { assert.ok(condition, message); checks += 1; };
 const count = (source, pattern) => (source.match(pattern) || []).length;
+const publicRoutes = Object.freeze([
+  'tarot','daily','spreads','library','school','journal','ai','consultations',
+  'store','skins','music','videos','subscriptions','login','notifications'
+]);
 
 ok(count(html, /id="orb"/g) === 1, 'uma Orbe física');
 ok(count(html, /id="orbCanvas"/g) === 1, 'um canvas canônico');
@@ -19,51 +25,75 @@ ok(count(html, /<span>Entrá<\/span>/g) === 1, 'texto exato Entrá');
 ok(/<div class="orb-stage-ref">[\s\S]*id="orb"[\s\S]*id="cosmosEntryIntent"[\s\S]*<\/div>/.test(html), 'convite junto da Orbe');
 ok(html.includes('aria-label="Entrar no universo"'), 'nome acessível');
 ok(html.includes('aria-controls="divinaOrbitalMenuV502"'), 'controle do menu vivo');
-ok(html.includes('name="divina-work13-correction" content="V610-ENTRADA"'), 'correção dentro do V610');
-ok(html.includes('cosmos-entry-intention-v610.css?v=610-work13-entry'), 'estilo ligado');
-ok(html.includes('app-v208.js?v=610-work13-entry'), 'aplicação ligada');
-ok(html.includes("./sw.js?v=610-entry"), 'worker ligado');
+ok(html.includes('name="divina-work13-correction" content="V610-LAPIDACAO-FINAL"'), 'lapidação dentro do V610');
+ok(html.includes('cosmos-entry-intention-v610.css?v=610-work13-final-presence'), 'entrada ligada');
+ok(html.includes('cosmos-world-presence-v610.css?v=610-work13-final-presence'), 'presença ligada');
+ok(html.includes('app-v208.js?v=610-work13-final-presence'), 'aplicação ligada');
+ok(html.includes("./sw.js?v=610-final-presence"), 'worker ligado');
+ok(!/sopro/i.test(html), 'ornamento textual removido do HTML');
 
-ok(app.includes("createCosmosEntryIntentionV610"), 'controlador importado');
+for (const route of publicRoutes) {
+  ok(count(html, new RegExp(`<section id="${route}"`, 'g')) === 1, `tela completa: ${route}`);
+}
+ok(count(html, /<section id="/g) === 17, 'dezessete realidades estáticas, incluindo Skins');
+ok(html.includes('<section id="skins" class="screen skins-celestial-screen"'), 'Skins tem página própria');
+ok(html.includes('<div id="skinsApp"></div>'), 'motor existente de Skins tem destino');
+
+ok(app.includes('createCosmosEntryIntentionV610'), 'controlador de entrada importado');
+ok(app.includes('createCosmosWorldPresenceV610'), 'controlador de presença importado');
 ok(app.includes('continuity:finalContinuity'), 'continuidade V598 reutilizada');
 ok(app.includes('orbCore:supremeOrb'), 'Orbe Suprema reutilizada');
 ok(app.includes('menuResolver:() => globalThis.divinaMenuV502'), 'menu V593 reutilizado');
 ok(app.includes('window.orbe.entryIntention = cosmosEntryIntention'), 'entrada publicada');
-ok(app.includes("invitation:'Entrá'"), 'contrato da aplicação');
+ok(app.includes('window.orbe.worldPresence = cosmosWorldPresence'), 'presença publicada');
+ok(app.includes("correction:'lapidacao-final-presenca-das-realidades'"), 'fechamento permanece no WORK13');
 ok(app.includes('work14:false'), 'nenhum WORK14');
+ok(!/sopro/i.test(app), 'rótulo ornamental ausente da aplicação');
 
-ok(js.includes('COSMOS_ENTRY_INTENTION_CONTRACT_V610'), 'contrato dedicado');
-ok(js.includes("invitation:'Entrá'"), 'convite único');
-ok(js.includes('entryIntentions:1'), 'somente uma intenção');
-ok(js.includes('reusesCanonicalOrb:true'), 'Orbe canônica');
-ok(js.includes('reusesLivingMenuV593:true'), 'menu vivo preservado');
-ok(js.includes("this.continuity?.callUniverse?.(source)"), 'abertura pela continuidade');
-ok(js.includes("this.orbCore?.pulse?.('work13-entry-response'"), 'resposta imediata');
-ok(js.includes("root.querySelectorAll('[data-v502-route]')"), 'destinos reais do V593');
-ok(!/createElement|requestAnimationFrame|setInterval|setTimeout|MutationObserver/.test(js), 'sem DOM dinâmico ou loops');
-ok(!/\.navigate\s*\(|\bgo\s*\(/.test(js), 'sem novo roteador');
+ok(entryJs.includes('COSMOS_ENTRY_INTENTION_CONTRACT_V610'), 'contrato de entrada');
+ok(entryJs.includes("invitation:'Entrá'"), 'convite único');
+ok(entryJs.includes('entryIntentions:1'), 'somente uma intenção');
+ok(entryJs.includes("responseModel:'touch-answer-silence'"), 'toque, resposta e silêncio');
+ok(entryJs.includes('reusesCanonicalOrb:true'), 'Orbe canônica');
+ok(entryJs.includes('reusesLivingMenuV593:true'), 'menu vivo preservado');
+ok(entryJs.includes("this.continuity?.callUniverse?.(source)"), 'abertura pela continuidade');
+ok(entryJs.includes("this.orbCore?.pulse?.('work13-entry-response'"), 'resposta imediata');
+ok(!/createElement|requestAnimationFrame|setInterval|setTimeout|MutationObserver/.test(entryJs), 'entrada sem DOM ou loops novos');
+ok(!/location\.(?:href|assign|replace)/.test(entryJs), 'entrada sem troca seca');
 
-const names = ['Tarot Livre','Carta do Dia','Tiragens','Biblioteca','Escola','Diário','Orbe IA','Consultas','Loja','Skins','Música','Vídeos','Premium','Conta','Notificações'];
-for (const name of names) ok(js.includes(`:'${name}'`), `nome público: ${name}`);
+ok(presenceJs.includes('COSMOS_WORLD_PRESENCE_CONTRACT_V610'), 'contrato das realidades');
+ok(presenceJs.includes('allMenuDestinationsHaveFullScreens:true'), 'todos os destinos têm tela');
+ok(presenceJs.includes('reusesCoordinatedNavigationV592:true'), 'travessia existente preservada');
+ok(presenceJs.includes('touchesOrbEngine:false'), 'motor da Orbe intocado');
+ok(presenceJs.includes('touchesUniverseEngine:false'), 'motor do Universo intocado');
+ok(presenceJs.includes('automaticNavigation:false'), 'nenhum roteador paralelo');
+ok(presenceJs.includes('permanentAnimationLoops:0'), 'nenhum loop permanente novo');
+ok(!/createElement|requestAnimationFrame|setInterval|setTimeout|MutationObserver/.test(presenceJs), 'presença sem peso estrutural');
+ok(!/location\.(?:href|assign|replace)/.test(presenceJs), 'presença sem teleporte');
 
-ok(css.includes('background:transparent'), 'não é caixa');
-ok(css.includes('border:0'), 'não é botão comum');
-ok(css.includes('min-height:48px'), 'alvo de toque confortável');
-ok(css.includes('.db502-portal__verb'), 'verbos explicativos ocultos');
-ok(css.includes('.db502-menu__intention'), 'instrução do menu oculta');
-ok(css.includes('@media(max-width:430px)'), 'iPhone retrato');
-ok(css.includes('@media(max-height:620px) and (orientation:landscape)'), 'iPhone paisagem');
-ok(css.includes('@media(prefers-reduced-motion:reduce)'), 'movimento reduzido');
-ok(!/@keyframes|backdrop-filter|filter\s*:/.test(css), 'sem efeito pesado');
+ok(entryCss.includes('background:transparent'), 'Entrá não é caixa');
+ok(entryCss.includes('border:0'), 'Entrá não é botão comum');
+ok(entryCss.includes('min-height:48px'), 'alvo de toque confortável');
+ok(entryCss.includes('[data-response="answering"]'), 'resposta imediata visível');
+ok(entryCss.includes('[data-response="silent"]'), 'silêncio após resposta');
+ok(presenceCss.includes('.db502-portal.is-touching'), 'balão responde ao toque');
+ok(presenceCss.includes('[data-work13-world-presence="approaching"]'), 'chegada progressiva');
+ok(presenceCss.includes('[data-work13-world-presence="leaving"]'), 'saída progressiva');
+ok(presenceCss.includes('min-block-size:100dvh'), 'cada mundo ocupa a tela');
+for (const route of publicRoutes) ok(presenceCss.includes(`#${route}[data-work13-world]`), `identidade própria: ${route}`);
+for (const css of [entryCss,presenceCss]) {
+  ok(css.includes('@media(prefers-reduced-motion:reduce)'), 'movimento reduzido preservado');
+  ok(!/@keyframes|backdrop-filter|filter\s*:/.test(css), 'sem efeito pesado');
+}
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core, /^\s*'\.\//gm) === 43, '43 ativos centrais');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v610-entry'"), 'cache isolado da correção');
-ok(sw.includes('DIVINA_WORK13_ENTRY_ACTIVE'), 'ativação comunicada');
-ok(sw.includes('COSMOS_ENTRY_INTENTION_CONTRACT_V610'), 'worker valida contrato');
-ok(sw.includes('cosmos-entry-intention-v610.css?v=610-work13-entry'), 'worker inclui estilo');
+ok(count(core, /^\s*'\.\//gm) === 45, '45 ativos centrais');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v610-final-presence'"), 'cache isolado');
+ok(sw.includes('DIVINA_WORK13_FINAL_PRESENCE_ACTIVE'), 'ativação comunicada');
+ok(sw.includes('COSMOS_WORLD_PRESENCE_CONTRACT_V610'), 'worker valida presença');
+ok(sw.includes('cosmos-world-presence-v610.css?v=610-work13-final-presence'), 'worker inclui estilo');
 
-const hash = createHash('sha256').update(orchestra).digest('hex');
-ok(hash === 'ebfe097bc1851540a24494a7a64eb3122c31aa04f35e3809a5288baac16ceca0', 'orquestra V610 protegida byte a byte');
+const orchestraHash = createHash('sha256').update(orchestra).digest('hex');
+ok(orchestraHash === 'ebfe097bc1851540a24494a7a64eb3122c31aa04f35e3809a5288baac16ceca0', 'orquestra V610 protegida byte a byte');
 
-console.log(`PASS ${checks}/${checks} — estrutura da Entrada da Orbe V610`);
+console.log(`PASS ${checks}/${checks} — lapidação estrutural do WORK13 V610`);

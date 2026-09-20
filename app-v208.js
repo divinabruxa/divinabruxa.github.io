@@ -73,7 +73,8 @@ import { createLivingWisdomPathV607 } from './living-wisdom-path-v607.js?v=607-w
 import { createLivingCommercePathV608 } from './living-commerce-path-v608.js?v=608-work13-commerce-clarity';
 import { createLivingMediaSkinsV609 } from './living-media-skins-v609.js?v=609-work13-media-skins';
 import { createCosmosFinalOrchestraV610 } from './cosmos-final-orchestra-v610.js?v=610-work13-final-orchestra';
-import { createCosmosEntryIntentionV610 } from './cosmos-entry-intention-v610.js?v=610-work13-entry';
+import { createCosmosEntryIntentionV610 } from './cosmos-entry-intention-v610.js?v=610-work13-final-presence';
+import { createCosmosWorldPresenceV610 } from './cosmos-world-presence-v610.js?v=610-work13-final-presence';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -107,7 +108,7 @@ const startOrbMenuSupremeV327 = () => import('./orb-menu-supreme-v327.js?v=327')
 const startOrbitalMenuV502 = () => import('./orbital-menu-v502.js?v=593-work12-menu')
   .then(module => module.installOrbitalMenuV502?.({ core:supremeOrb, go }))
   .catch(error => {
-    console.error('[Divina] Sopro de Intenções V593 não iniciou', error);
+    console.error('[Divina] Menu vivo V593 não iniciou', error);
     document.documentElement.dataset.menuOrbitalError = 'v593';
   });
 
@@ -551,7 +552,7 @@ work12Foundation = safely('WORK12 · Navegação Coordenada V592', () =>
 
 // Whit não recebe outro corpo nem outro motor visual. A V594 governa timing e
 // silêncio sobre os núcleos existentes: toque comum não abre fala, convite
-// deliberado continua vivo e só uma pausa contextual rara pode gerar um sopro.
+// deliberado continua vivo e só uma pausa contextual rara pode gerar presença.
 const whitLivingPresence = safely('WORK12 · Whit Presença Viva V594', () =>
   createWhitLivingPresenceV594({
     soul:whitOrbSoul,
@@ -638,6 +639,10 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK13_FINAL_PRESENCE_ACTIVE') {
+    document.documentElement.dataset.work13FinalPresenceWorker = 'v610';
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK13_ENTRY_ACTIVE') {
     document.documentElement.dataset.work13EntryWorker = 'v610-entry';
     return;
@@ -742,11 +747,11 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v610-work13-entry-app';
+  window.__divinaSWBootstrap = 'v610-work13-final-presence-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=610-entry', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=610-final-presence', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v610-entry';
+        document.documentElement.dataset.releaseEpoch = 'v610-final-presence';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
         console.info('[Divina] WORK13 V610 concluído sobre V609 e WORK12 V600 protegidos');
@@ -2261,9 +2266,15 @@ const cosmosEntryIntention = safely('WORK13 · Entrada da Orbe V610', () =>
     menuResolver:() => globalThis.divinaMenuV502 || null
   })
 );
+const cosmosWorldPresence = safely('WORK13 · Presença das Realidades V610', () =>
+  createCosmosWorldPresenceV610({
+    menuResolver:() => globalThis.divinaMenuV502 || null
+  })
+);
 window.orbe.finalOrchestra = cosmosFinalOrchestra;
 window.orbe.cosmosSeal = cosmosFinalOrchestra;
 window.orbe.entryIntention = cosmosEntryIntention;
+window.orbe.worldPresence = cosmosWorldPresence;
 document.documentElement.dataset.work13 = 'cosmos-vivo';
 document.documentElement.dataset.work13Macro = '10-final-orchestra';
 window.divinaWork13Macro10V610 = Object.freeze({
@@ -2273,6 +2284,7 @@ window.divinaWork13Macro10V610 = Object.freeze({
   stage:'orquestra-final-tudo-respira-junto',
   finalOrchestra:cosmosFinalOrchestra,
   entryIntention:cosmosEntryIntention,
+  worldPresence:cosmosWorldPresence,
   contextMemory:cosmosContextMemory,
   resonance:cosmosRealityResonance,
   dailyReading:cosmicDailyReading,
@@ -2303,10 +2315,12 @@ window.divinaWork13Macro10V610 = Object.freeze({
       work13EndsHere:true,
       nextWork:null,
       work14:false,
-      correction:'entrada-da-orbe',
+      correction:'lapidacao-final-presenca-das-realidades',
       invitation:'Entrá',
       entryIntentions:1,
       entryStatus:cosmosEntryIntention?.status?.() || null,
+      worldPresenceStatus:cosmosWorldPresence?.status?.() || null,
+      allMenuDestinationsHaveFullScreens:cosmosWorldPresence?.audit?.().everyMenuDestinationHasFullScreen === true,
       livingLayers:Object.freeze([602,603,604,605,606,607,608,609]),
       worldsPreserved:17,
       onePhysicalOrb:orchestraAudit?.onePhysicalOrb === true,
@@ -2315,8 +2329,8 @@ window.divinaWork13Macro10V610 = Object.freeze({
       sameEntity:orb?.entityPreserved === true,
       travelerCopies:Number(journey?.travelerCopies || 0),
       maximumActivePlayers:1,
-      visualChanges:0,
-      newStylesheets:0,
+      visualChanges:1,
+      newStylesheets:1,
       productionPublish:false,
       realBilling:false,
       frontendEntitlementGrants:false,
@@ -2328,7 +2342,7 @@ window.divinaWork13Macro10V610 = Object.freeze({
       storageWrites:0,
       networkCalls:0,
       modelCalls:0,
-      newDomNodes:0,
+      newDomNodes:2,
       newCanvases:0,
       newRenderers:0,
       newPlayers:0,

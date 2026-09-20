@@ -9,6 +9,7 @@ export const COSMOS_ENTRY_INTENTION_CONTRACT_V610 = Object.freeze({
   correction:'entrada-da-orbe',
   invitation:'Entrá',
   entryIntentions:1,
+  responseModel:'touch-answer-silence',
   reusesCanonicalOrb:true,
   reusesLivingMenuV593:true,
   reusesFinalContinuityV598:true,
@@ -78,6 +79,10 @@ export class CosmosEntryIntentionV610 {
 
   respond(source = 'entry') {
     if (!this.isHomeReady()) return false;
+    if (this.entry?.dataset) this.entry.dataset.response = 'answering';
+    if (this.documentTarget?.documentElement?.dataset) {
+      this.documentTarget.documentElement.dataset.work13EntryResponse = 'answering';
+    }
     this.pulses += 1;
     this.orbCore?.pulse?.('work13-entry-response', { intensity:source === 'orb' ? .42 : .54 });
     return true;
@@ -89,11 +94,13 @@ export class CosmosEntryIntentionV610 {
     const opened = this.continuity?.callUniverse?.(source);
     if (opened) {
       this.openCalls += 1;
+      if (this.entry?.dataset) this.entry.dataset.response = 'crossing';
       return true;
     }
     const menu = this.menuResolver?.();
     if (!menu?.open) return false;
     this.openCalls += 1;
+    if (this.entry?.dataset) this.entry.dataset.response = 'crossing';
     menu.open();
     return true;
   }
@@ -121,6 +128,7 @@ export class CosmosEntryIntentionV610 {
   sync(reason = 'sync') {
     if (!this.entry) return false;
     const visible = this.isHomeReady();
+    if (visible && !this.entry.dataset.response) this.entry.dataset.response = 'ready';
     this.entry.setAttribute('aria-hidden', String(!visible));
     this.entry.setAttribute('aria-expanded', String(this.menuState !== 'closed'));
     this.entry.tabIndex = visible ? 0 : -1;
@@ -128,6 +136,7 @@ export class CosmosEntryIntentionV610 {
     if (root?.dataset) {
       root.dataset.work13Entry = visible ? 'invitation' : 'resting';
       root.dataset.work13EntryReason = reason;
+      if (visible && !root.dataset.work13EntryResponse) root.dataset.work13EntryResponse = 'ready';
     }
     return visible;
   }
@@ -137,18 +146,33 @@ export class CosmosEntryIntentionV610 {
       event.stopPropagation?.();
       this.respond('entry');
     }, { passive:true });
+    const restEntry = () => {
+      if (this.menuState !== 'closed' || !this.entry?.dataset) return;
+      this.entry.dataset.response = 'ready';
+      if (this.documentTarget?.documentElement?.dataset) {
+        this.documentTarget.documentElement.dataset.work13EntryResponse = 'ready';
+      }
+    };
+    this.listen(this.entry, 'pointerup', restEntry, { passive:true });
+    this.listen(this.entry, 'pointercancel', restEntry, { passive:true });
     this.listen(this.entry, 'click', event => {
       event.preventDefault?.();
       event.stopPropagation?.();
       this.openUniverse(event.detail === 0 ? 'keyboard' : 'touch');
     });
     this.listen(this.orb, 'pointerdown', () => this.respond('orb'), { passive:true });
+    this.listen(this.orb, 'pointerup', restEntry, { passive:true });
+    this.listen(this.orb, 'pointercancel', restEntry, { passive:true });
     this.listen(this.documentTarget, 'divina:orbital-menu-ready', () => {
       this.renameMenu();
       this.sync('menu-ready');
     });
     this.listen(this.documentTarget, 'divina:menu-state', event => {
       this.menuState = String(event?.detail?.state || 'closed').toLowerCase();
+      if (this.entry?.dataset) this.entry.dataset.response = this.menuState === 'closed' ? 'ready' : 'silent';
+      if (this.documentTarget?.documentElement?.dataset) {
+        this.documentTarget.documentElement.dataset.work13EntryResponse = this.menuState === 'closed' ? 'ready' : 'silent';
+      }
       this.renameMenu();
       this.sync('menu');
     });

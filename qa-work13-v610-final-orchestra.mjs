@@ -14,6 +14,8 @@ const check = (id, condition, detail = '') => checks.push({ id, pass:Boolean(con
 
 const required = [
   'index.html','app-v208.js','sw.js','cosmos-final-orchestra-v610.js',
+  'cosmos-entry-intention-v610.js','cosmos-entry-intention-v610.css',
+  'cosmos-world-presence-v610.js','cosmos-world-presence-v610.css',
   'cosmos-context-memory-v602.js','cosmos-reality-resonance-v603.js','cosmos-reality-resonance-v603.css',
   'cosmic-daily-reading-v604.js','cosmic-daily-reading-v604.css',
   'cosmic-spread-reading-v605.js','cosmic-spread-reading-v605.css','whit-silence-timing-v606.js',
@@ -77,17 +79,17 @@ check('index:fluidity-v610', index.includes('name="divina-fluidity-release" cont
 check('index:macro-ten', index.includes('data-macroetapa="work13-10-orquestra-final-tudo-respira-junto"'));
 check('index:work12-v600', index.includes('name="divina-work12" content="V600"'));
 check('index:live-audit-v600', index.includes('name="divina-live-audit" content="V600"'));
-check('index:app-v610', index.includes('app-v208.js?v=610-work13-final-orchestra'));
-check('index:worker-v610', index.includes("register('./sw.js?v=610'"));
+check('index:app-v610', index.includes('app-v208.js?v=610-work13-final-presence'));
+check('index:worker-v610', index.includes("register('./sw.js?v=610-final-presence'"));
 check('index:ready-v610', index.includes("work13Boot='ready-v610'"));
 check('index:released-v610', index.includes("work13Boot='released-v610'"));
 check('index:viewport-cover', index.includes('viewport-fit=cover'));
 check('index:keyboard-resizes', index.includes('interactive-widget=resizes-content'));
 check('index:one-orb', occurrences(index, /id="orb"/g) === 1, occurrences(index, /id="orb"/g));
 check('index:one-canvas', occurrences(index, /id="orbCanvas"/g) === 1, occurrences(index, /id="orbCanvas"/g));
-check('index:sixteen-static-worlds', occurrences(index, /<section id="(?:home|tarot|daily|library|school|spreads|ai|journal|store|consultations|subscriptions|videos|music|notifications|login|admin)"/g) === 16);
-check('index:no-duplicate-static-skins', !index.includes('<section id="skins"'));
-check('runtime-v12:seventeenth-skins-world', skinRuntime.includes("screen = document.createElement('section')") && skinRuntime.includes("screen.id = 'skins'"));
+check('index:seventeen-static-worlds', occurrences(index, /<section id="(?:home|tarot|daily|library|school|spreads|ai|journal|store|consultations|subscriptions|videos|music|skins|notifications|login|admin)"/g) === 17);
+check('index:one-static-skins', occurrences(index, /<section id="skins"/g) === 1);
+check('runtime-v12:skins-engine-preserved', skinRuntime.includes("screen.id = 'skins'") && skinRuntime.includes('skinsApp'));
 check('index:no-v610-style', !/cosmos-final-orchestra-v610\.css|divinaCosmosFinalOrchestraV610/.test(index));
 for (const id of [
   'divinaLivingMediaSkinsV609','divinaLivingCommercePathV608','divinaLivingWisdomPathV607',
@@ -103,10 +105,10 @@ check('app:v610-on-orbe', app.includes('window.orbe.finalOrchestra = cosmosFinal
 check('app:v610-no-work14', app.includes('work13EndsHere:true') && app.includes('work14:false'));
 check('app:v610-layers', app.includes('livingLayers:Object.freeze([602,603,604,605,606,607,608,609])'));
 check('app:v610-worlds', app.includes('worldsPreserved:17'));
-check('app:v610-no-visual', app.includes('visualChanges:0') && app.includes('newStylesheets:0'));
+check('app:v610-final-presence', app.includes('visualChanges:1') && app.includes('newStylesheets:1'));
 check('app:v610-no-production', app.includes('productionPublish:false') && app.includes('realBilling:false'));
 check('app:v610-worker-handler', app.includes("event.data?.type === 'DIVINA_WORK13_FINAL_ORCHESTRA_ACTIVE'"));
-check('app:v610-worker-registration', app.includes("register('./sw.js?v=610'"));
+check('app:v610-worker-registration', app.includes("register('./sw.js?v=610-final-presence'"));
 check('app:v610-boot', app.includes("work13CosmosVivo:'V610'") && app.includes("work13MacroStage:'10-of-10-final-orchestra'"));
 for (const version of [602,603,604,605,606,607,608,609]) check(`app:v${version}-preserved`, app.includes(`window.divinaWork13Macro${version - 600}V${version}`));
 check('app:one-navigation', occurrences(app, /createNavigation\(/g) === 1, occurrences(app, /createNavigation\(/g));
@@ -147,8 +149,9 @@ for (const value of [
 ]) check(`runtime:privacy:${value}`, runtime.includes(value));
 
 check('worker:v610', worker.includes('const VERSION = 610;'));
-check('worker:cache-v610', worker.includes('divina-bruxa-work13-v610-final-orchestra'));
-check('worker:app-v610', worker.includes("'./app-v208.js?v=610-work13-final-orchestra'"));
+check('worker:cache-v610', worker.includes('divina-bruxa-work13-v610-final-presence'));
+check('worker:app-v610', worker.includes("'./app-v208.js?v=610-work13-final-presence'"));
+check('worker:world-presence-v610', worker.includes("'./cosmos-world-presence-v610.js?v=610-work13-final-presence'"));
 check('worker:runtime-v610', worker.includes("'./cosmos-final-orchestra-v610.js?v=610-work13-final-orchestra'"));
 check('worker:runtime-validates', worker.includes('work13-final-orchestra-contract-missing'));
 check('worker:v609-preserved', worker.includes("'./living-media-skins-v609.js?v=609-work13-media-skins'"));
@@ -168,9 +171,9 @@ console.log(JSON.stringify({
   frozenWork12FilesChecked,
   protectedPriorWork13FilesChecked:Object.keys(protectedWork13).length,
   protectedV609EvidenceFilesChecked:Object.keys(protectedV609Evidence).length,
-  changedProductionFiles:['app-v208.js','index.html','sw.js'],
-  newRuntimeFiles:['cosmos-final-orchestra-v610.js'],
-  newStylesheets:0,
+  changedProductionFiles:['app-v208.js','index.html','sw.js','cosmos-entry-intention-v610.js','cosmos-entry-intention-v610.css'],
+  newRuntimeFiles:['cosmos-world-presence-v610.js'],
+  newStylesheets:1,
   failures:failures.map(({ id, detail }) => ({ id, detail }))
 }, null, 2));
 

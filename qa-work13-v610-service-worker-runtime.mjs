@@ -116,12 +116,16 @@ function createHarness({ brokenAsset = '', brokenContent = false } = {}) {
 
 const checks = [];
 const check = (id, condition, detail = '') => checks.push({ id, pass:Boolean(condition), detail:condition ? '' : String(detail) });
-const cacheName = 'divina-bruxa-work13-v610-final-orchestra';
+const cacheName = 'divina-bruxa-work13-v610-final-presence';
 const harness = createHarness();
 
-check('core:forty-one-assets-declared', coreAssets.length === 41, coreAssets.length);
+check('core:forty-five-assets-declared', coreAssets.length === 45, coreAssets.length);
 check('core:unique-assets', new Set(coreAssets).size === coreAssets.length);
-check('core:app-v610', coreAssets.includes('./app-v208.js?v=610-work13-final-orchestra'));
+check('core:app-v610', coreAssets.includes('./app-v208.js?v=610-work13-final-presence'));
+check('core:entry-js', coreAssets.includes('./cosmos-entry-intention-v610.js?v=610-work13-final-presence'));
+check('core:entry-css', coreAssets.includes('./cosmos-entry-intention-v610.css?v=610-work13-final-presence'));
+check('core:world-presence-js', coreAssets.includes('./cosmos-world-presence-v610.js?v=610-work13-final-presence'));
+check('core:world-presence-css', coreAssets.includes('./cosmos-world-presence-v610.css?v=610-work13-final-presence'));
 check('core:final-orchestra-js', coreAssets.includes('./cosmos-final-orchestra-v610.js?v=610-work13-final-orchestra'));
 check('core:media-skins-js', coreAssets.includes('./living-media-skins-v609.js?v=609-work13-media-skins'));
 check('core:media-skins-css', coreAssets.includes('./living-media-skins-v609.css?v=609-work13-media-skins'));
@@ -139,7 +143,7 @@ for (const event of ['install','activate','fetch','message']) check(`listener:${
 await harness.wait('install');
 const cache = harness.stores.get(cacheName);
 check('install:atomic-cache-created', cache instanceof Map);
-check('install:forty-one-core-assets', cache?.size === 41, cache?.size);
+check('install:forty-five-core-assets', cache?.size === 45, cache?.size);
 for (const asset of coreAssets) check(`install:${asset}`, cache?.has(asset));
 check('install:skip-after-validation', harness.counters().skipped === 1, harness.counters().skipped);
 
@@ -154,7 +158,11 @@ for (const asset of coreAssets) {
 
 for (const asset of [
   './index.html',
-  './app-v208.js?v=610-work13-final-orchestra',
+  './app-v208.js?v=610-work13-final-presence',
+  './cosmos-entry-intention-v610.js?v=610-work13-final-presence',
+  './cosmos-entry-intention-v610.css?v=610-work13-final-presence',
+  './cosmos-world-presence-v610.js?v=610-work13-final-presence',
+  './cosmos-world-presence-v610.css?v=610-work13-final-presence',
   './cosmos-final-orchestra-v610.js?v=610-work13-final-orchestra',
   './living-media-skins-v609.js?v=609-work13-media-skins',
   './living-media-skins-v609.css?v=609-work13-media-skins',
@@ -184,7 +192,8 @@ for (const type of [
   'DIVINA_WORK13_DAILY_READING_ACTIVE','DIVINA_WORK13_SPREAD_READING_ACTIVE',
   'DIVINA_WORK13_WHIT_TIMING_ACTIVE','DIVINA_WORK13_LIVING_WISDOM_ACTIVE',
   'DIVINA_WORK13_COMMERCE_CLARITY_ACTIVE','DIVINA_WORK13_MEDIA_SKINS_ACTIVE',
-  'DIVINA_WORK13_FINAL_ORCHESTRA_ACTIVE',
+  'DIVINA_WORK13_FINAL_ORCHESTRA_ACTIVE','DIVINA_WORK13_ENTRY_ACTIVE',
+  'DIVINA_WORK13_FINAL_PRESENCE_ACTIVE',
   'DIVINA_RELEASE_READY'
 ]) check(`activate:${type}`, harness.clientMessages.some(item => item.type === type && item.version === 610));
 check('activate:context-version-v602', harness.clientMessages.some(item => item.contextVersion === 602));
@@ -196,6 +205,7 @@ check('activate:wisdom-version-v607', harness.clientMessages.some(item => item.l
 check('activate:commerce-version-v608', harness.clientMessages.some(item => item.commerceClarityVersion === 608));
 check('activate:media-skins-version-v609', harness.clientMessages.some(item => item.mediaSkinsVersion === 609));
 check('activate:final-orchestra-version-v610', harness.clientMessages.some(item => item.finalOrchestraVersion === 610 && item.complete === true));
+check('activate:final-presence-v610', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_FINAL_PRESENCE_ACTIVE' && item.publicWorlds === 15 && item.complete === true));
 
 const onlineNavigation = await harness.fetchEvent(new FakeRequest('https://divina.test/index.html#music', { mode:'navigate' }));
 check('fetch:navigation-network', (await onlineNavigation.text()).includes('name="divina-work13" content="V610"'));
@@ -205,7 +215,11 @@ check('fetch:navigation-offline', (await offlineNavigation.text()).includes('nam
 harness.offline(false);
 
 for (const [file, needle] of [
-  ['app-v208.js?v=610-work13-final-orchestra','divinaWork13Macro10V610'],
+  ['app-v208.js?v=610-work13-final-presence','divinaWork13Macro10V610'],
+  ['cosmos-entry-intention-v610.js?v=610-work13-final-presence','COSMOS_ENTRY_INTENTION_CONTRACT_V610'],
+  ['cosmos-entry-intention-v610.css?v=610-work13-final-presence','.cosmos-entry-intent'],
+  ['cosmos-world-presence-v610.js?v=610-work13-final-presence','COSMOS_WORLD_PRESENCE_CONTRACT_V610'],
+  ['cosmos-world-presence-v610.css?v=610-work13-final-presence','[data-work13-world]'],
   ['cosmos-final-orchestra-v610.js?v=610-work13-final-orchestra','COSMOS_FINAL_ORCHESTRA_CONTRACT_V610'],
   ['living-media-skins-v609.js?v=609-work13-media-skins','LIVING_MEDIA_SKINS_CONTRACT_V609'],
   ['living-media-skins-v609.css?v=609-work13-media-skins','[data-living-media-skins="v609"]'],
@@ -229,7 +243,7 @@ for (const [file, needle] of [
 
 await harness.message({ type:'WORK12_STATUS' });
 check('message:status-version', harness.sourceMessages.some(item => item.type === 'WORK12_STATUS' && item.version === 610));
-check('message:status-forty-one-assets', harness.sourceMessages.some(item => item.core?.length === 41));
+check('message:status-forty-five-assets', harness.sourceMessages.some(item => item.core?.length === 45));
 await harness.message({ type:'CLEAR_DIVINA_CACHES' });
 check('message:clear-caches', !harness.stores.has(cacheName));
 check('message:clear-confirmed', harness.sourceMessages.some(item => item.type === 'DIVINA_CACHES_CLEARED' && item.version === 610));
@@ -238,7 +252,7 @@ const failures = checks.filter(item => !item.pass);
 console.log(JSON.stringify({
   release:'V610',
   work:'WORK13',
-  macroStage:'10-of-10 / final-orchestra-service-worker-runtime',
+  macroStage:'10-of-10 / final-presence-service-worker-runtime',
   state:failures.length ? 'FAIL' : 'PASS',
   passed:checks.length - failures.length,
   failed:failures.length,

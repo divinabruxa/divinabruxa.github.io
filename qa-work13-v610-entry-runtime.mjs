@@ -55,6 +55,7 @@ const fire = (target, type, detail = {}) => {
 
 ok(entry.attrs['aria-hidden'] === 'false', 'convite nasce visível');
 ok(entry.tabIndex === 0, 'convite focável');
+ok(entry.dataset.response === 'ready', 'convite nasce pronto para responder');
 ok(controller.status().renamedRealities === 15, '15 realidades nomeadas');
 ok(homeLabel.textContent === 'Início', 'centro retorna ao Início');
 for (const portal of portals) {
@@ -64,19 +65,25 @@ for (const portal of portals) {
 
 fire(entry, 'pointerdown');
 ok(pulses === 1, 'resposta imediata ao toque em Entrá');
+ok(entry.dataset.response === 'answering', 'o toque é respondido antes da abertura');
 fire(entry, 'click', 1);
 ok(cancellations === 1, 'espera anterior cancelada');
 ok(calls === 1, 'universo chamado uma vez');
 ok(controller.status().openCalls === 1, 'abertura registrada');
+ok(entry.dataset.response === 'crossing', 'convite entrega a travessia');
 
 fire(doc, 'divina:menu-state', { state:'opening' });
 ok(entry.attrs['aria-hidden'] === 'true', 'convite recua ao nascer o menu');
 ok(entry.tabIndex === -1, 'convite fora da ordem durante menu');
+ok(entry.dataset.response === 'silent', 'resposta termina em silêncio');
 fire(doc, 'divina:menu-state', { state:'closed' });
 ok(entry.attrs['aria-hidden'] === 'false', 'convite retorna com a Orbe');
 
 fire(orb, 'pointerdown');
 ok(pulses === 2, 'Orbe responde imediatamente sem outro gesto');
+ok(entry.dataset.response === 'answering', 'toque na Orbe acende a mesma entrada');
+fire(orb, 'pointerup');
+ok(entry.dataset.response === 'ready', 'gesto da Orbe termina sem estado preso');
 ok(calls === 1, 'pointerdown não duplica a navegação existente');
 ok(controller.status().oneCanonicalOrb === true, 'mesma Orbe canônica');
 ok(controller.status().work14 === false, 'correção termina no WORK13');
