@@ -1,16 +1,18 @@
-/* DIVINA BRUXA — WORK13 · COSMOS VIVO · ORQUESTRA FINAL V610
-   O WORK12 V600 e as etapas V602–V609 permanecem protegidos. A instalacao so
-   assume o portal quando HTML, aplicacao, leituras, silencio, sabedoria e a
-   jornada inteira pertencem ao mesmo corte, sem alterar motores ou aparência.
+/* DIVINA BRUXA — WORK13 · COSMOS VIVO · ENTRADA DA ORBE V610
+   O WORK12 V600 e as etapas V602–V610 permanecem protegidos. A instalacao so
+   assume o portal quando a unica intencao Entrá, a mesma Orbe, o menu vivo e
+   toda a jornada pertencem ao mesmo corte, sem reconstruir a Home.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
 const VERSION = 610;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work13-v610-final-orchestra';
+const CACHE_NAME = 'divina-bruxa-work13-v610-entry';
 const CORE = Object.freeze([
   './index.html',
-  './app-v208.js?v=610-work13-final-orchestra',
+  './app-v208.js?v=610-work13-entry',
+  './cosmos-entry-intention-v610.js?v=610-work13-entry',
+  './cosmos-entry-intention-v610.css?v=610-work13-entry',
   './cosmos-context-memory-v602.js?v=602-work13-context',
   './cosmos-reality-resonance-v603.js?v=603-work13-resonance',
   './cosmos-reality-resonance-v603.css?v=603-work13-resonance',
@@ -64,7 +66,9 @@ const fetchCore = async path => {
 
 const validateCore = async responses => {
   const index = await responses.get('./index.html')?.clone().text();
-  const app = await responses.get('./app-v208.js?v=610-work13-final-orchestra')?.clone().text();
+  const app = await responses.get('./app-v208.js?v=610-work13-entry')?.clone().text();
+  const entryIntention = await responses.get('./cosmos-entry-intention-v610.js?v=610-work13-entry')?.clone().text();
+  const entryStyles = await responses.get('./cosmos-entry-intention-v610.css?v=610-work13-entry')?.clone().text();
   const contextMemory = await responses.get('./cosmos-context-memory-v602.js?v=602-work13-context')?.clone().text();
   const realityResonance = await responses.get('./cosmos-reality-resonance-v603.js?v=603-work13-resonance')?.clone().text();
   const resonanceStyles = await responses.get('./cosmos-reality-resonance-v603.css?v=603-work13-resonance')?.clone().text();
@@ -107,7 +111,12 @@ const validateCore = async responses => {
     || !index.includes('name="divina-work13" content="V610"')) {
     throw new Error('work13-index-version-mismatch');
   }
-  if (!index.includes('app-v208.js?v=610-work13-final-orchestra')
+  if (!index.includes('app-v208.js?v=610-work13-entry')
+    || !index.includes('name="divina-work13-correction" content="V610-ENTRADA"')
+    || !index.includes('id="divinaCosmosEntryIntentionV610"')
+    || !index.includes('cosmos-entry-intention-v610.css?v=610-work13-entry')
+    || !index.includes('id="cosmosEntryIntent"')
+    || !index.includes('<span>Entrá</span>')
     || !index.includes('living-media-skins-v609.css?v=609-work13-media-skins')
     || !index.includes('id="divinaLivingMediaSkinsV609"')
     || !index.includes('living-commerce-path-v608.css?v=608-work13-commerce-clarity')
@@ -211,6 +220,30 @@ const validateCore = async responses => {
     || !app.includes('work13EndsHere:true')
     || !app.includes('work14:false')) {
     throw new Error('work13-app-final-orchestra-mismatch');
+  }
+  if (!app.includes("cosmos-entry-intention-v610.js?v=610-work13-entry")
+    || !app.includes('createCosmosEntryIntentionV610({')
+    || !app.includes('entryIntention:cosmosEntryIntention')
+    || !app.includes("invitation:'Entrá'")) {
+    throw new Error('work13-entry-app-mismatch');
+  }
+  if (!entryIntention?.includes('COSMOS_ENTRY_INTENTION_CONTRACT_V610')
+    || !entryIntention.includes("invitation:'Entrá'")
+    || !entryIntention.includes('entryIntentions:1')
+    || !entryIntention.includes('reusesCanonicalOrb:true')
+    || !entryIntention.includes('reusesLivingMenuV593:true')
+    || !entryIntention.includes('publicRealityNames:15')
+    || !entryIntention.includes('automaticNavigation:false')
+    || !entryIntention.includes('newCanvases:0')
+    || !entryIntention.includes('work14:false')) {
+    throw new Error('work13-entry-contract-missing');
+  }
+  if (!entryStyles?.includes('.cosmos-entry-intent')
+    || !entryStyles.includes('.db502-portal__verb')
+    || !entryStyles.includes('@media(max-width:430px)')
+    || !entryStyles.includes('@media(prefers-reduced-motion:reduce)')
+    || /@keyframes|backdrop-filter|filter\s*:/.test(entryStyles)) {
+    throw new Error('work13-entry-styles-missing');
   }
   if (!contextMemory?.includes('COSMOS_CONTEXT_MEMORY_CONTRACT_V602')
     || !contextMemory.includes("model:'local-session-route-metadata-only'")
@@ -550,6 +583,7 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK13_COMMERCE_CLARITY_ACTIVE', version:VERSION, commerceClarityVersion:608, livingWisdomVersion:607, base:600 });
         client.postMessage({ type:'DIVINA_WORK13_MEDIA_SKINS_ACTIVE', version:VERSION, mediaSkinsVersion:609, commerceClarityVersion:608, base:600 });
         client.postMessage({ type:'DIVINA_WORK13_FINAL_ORCHESTRA_ACTIVE', version:VERSION, finalOrchestraVersion:610, mediaSkinsVersion:609, base:600, complete:true });
+        client.postMessage({ type:'DIVINA_WORK13_ENTRY_ACTIVE', version:VERSION, correction:'entrada-da-orbe', base:600, complete:true });
         client.postMessage({ type:'DIVINA_RELEASE_READY', version:VERSION });
       } catch {}
     }

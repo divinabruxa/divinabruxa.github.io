@@ -1,7 +1,7 @@
-/* DIVINA BRUXA — WORK13 · COSMOS VIVO · ORQUESTRA FINAL V610
-   O WORK12 V600 e as etapas V602–V609 permanecem protegidos. O fechamento
-   reúne somente sinais estruturais públicos, sem aparência nova, sem outro
-   motor, sem outra Orbe e sem reabrir o WORK13 depois desta etapa. */
+/* DIVINA BRUXA — WORK13 · COSMOS VIVO · V610
+   O WORK12 V600 e as etapas V602–V610 permanecem protegidos. A correção de
+   entrada acrescenta só o convite Entrá e reutiliza a mesma Orbe, o menu vivo
+   e a continuidade existentes, sem reconstruir a Home ou abrir um WORK14. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -73,6 +73,7 @@ import { createLivingWisdomPathV607 } from './living-wisdom-path-v607.js?v=607-w
 import { createLivingCommercePathV608 } from './living-commerce-path-v608.js?v=608-work13-commerce-clarity';
 import { createLivingMediaSkinsV609 } from './living-media-skins-v609.js?v=609-work13-media-skins';
 import { createCosmosFinalOrchestraV610 } from './cosmos-final-orchestra-v610.js?v=610-work13-final-orchestra';
+import { createCosmosEntryIntentionV610 } from './cosmos-entry-intention-v610.js?v=610-work13-entry';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -637,6 +638,10 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK13_ENTRY_ACTIVE') {
+    document.documentElement.dataset.work13EntryWorker = 'v610-entry';
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK13_FINAL_ORCHESTRA_ACTIVE') {
     document.documentElement.dataset.work13FinalOrchestraWorker = `v${event.data.finalOrchestraVersion || event.data.version || 610}`;
     return;
@@ -737,11 +742,11 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v610-work13-final-orchestra-app';
+  window.__divinaSWBootstrap = 'v610-work13-entry-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=610', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=610-entry', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v610';
+        document.documentElement.dataset.releaseEpoch = 'v610-entry';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
         console.info('[Divina] WORK13 V610 concluído sobre V609 e WORK12 V600 protegidos');
@@ -2249,8 +2254,16 @@ const cosmosFinalOrchestra = safely('WORK13 · Orquestra Final V610', () =>
     journey:orbIOSJourney
   })
 );
+const cosmosEntryIntention = safely('WORK13 · Entrada da Orbe V610', () =>
+  createCosmosEntryIntentionV610({
+    continuity:finalContinuity,
+    orbCore:supremeOrb,
+    menuResolver:() => globalThis.divinaMenuV502 || null
+  })
+);
 window.orbe.finalOrchestra = cosmosFinalOrchestra;
 window.orbe.cosmosSeal = cosmosFinalOrchestra;
+window.orbe.entryIntention = cosmosEntryIntention;
 document.documentElement.dataset.work13 = 'cosmos-vivo';
 document.documentElement.dataset.work13Macro = '10-final-orchestra';
 window.divinaWork13Macro10V610 = Object.freeze({
@@ -2259,6 +2272,7 @@ window.divinaWork13Macro10V610 = Object.freeze({
   work:'WORK13',
   stage:'orquestra-final-tudo-respira-junto',
   finalOrchestra:cosmosFinalOrchestra,
+  entryIntention:cosmosEntryIntention,
   contextMemory:cosmosContextMemory,
   resonance:cosmosRealityResonance,
   dailyReading:cosmicDailyReading,
@@ -2289,6 +2303,10 @@ window.divinaWork13Macro10V610 = Object.freeze({
       work13EndsHere:true,
       nextWork:null,
       work14:false,
+      correction:'entrada-da-orbe',
+      invitation:'Entrá',
+      entryIntentions:1,
+      entryStatus:cosmosEntryIntention?.status?.() || null,
       livingLayers:Object.freeze([602,603,604,605,606,607,608,609]),
       worldsPreserved:17,
       onePhysicalOrb:orchestraAudit?.onePhysicalOrb === true,

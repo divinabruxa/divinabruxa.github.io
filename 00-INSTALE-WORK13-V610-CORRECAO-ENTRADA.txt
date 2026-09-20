@@ -1,0 +1,16 @@
+DIVINA BRUXA — WORK13 V610 — CORREÇÃO SUPREMA DA ENTRADA
+
+BASE OBRIGATÓRIA
+WORK12 + WORK13 V610 já instalados.
+
+INSTALAÇÃO
+1. Extraia este ZIP na raiz do site.
+2. Substitua somente app-v208.js, index.html e sw.js.
+3. Acrescente os demais arquivos.
+4. Publique e feche/reabra o PWA uma vez para o novo cache assumir.
+
+TESTE FINAL NO IPHONE
+Home → Entrá → menu → realidade → volta para a Orbe → outra realidade.
+Repita também tocando diretamente na Orbe.
+
+Não remova arquivos anteriores. Não existe WORK14 neste pacote.
