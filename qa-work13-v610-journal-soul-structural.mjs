@@ -116,7 +116,7 @@ ok(entry.includes("!['engaged','travel'].includes(state)"), 'depois do mergulho 
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
 ok(count(core,/^\s*'\.\//gm) === 58, '58 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v613-menu-global-vivo'"), 'cache próprio');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v614-tarot-livre-camara-violeta'"), 'cache próprio');
 ok(sw.includes("'./diario-soul-v610.js?v=610-work13-journal-soul'"), 'JS no cache');
 ok(sw.includes("'./diario-soul-v610.css?v=610-work13-journal-soul'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_JOURNAL_SOUL_ACTIVE'), 'ativação comunicada');
@@ -129,7 +129,7 @@ ok(hash(wisdomStyles) === '765e5f3a8ca8670c465df6c62838ceaa54a7b7568a4307da94e0e
 ok(hash(journalWorld) === '20b58bd2b928dbf68de42bc730bf32b3abdf01afc9734c3351a381924313809e', 'mundo V317 protegido byte a byte');
 ok(hash(chambers) === '1ae6b54a8f53d5e8e89230e042c6cf24bc6c662928e118afbe6be18dc2869fad', 'câmaras V596 protegidas byte a byte');
 ok(hash(chamberStyles) === 'bfc65e0566c7ea5c4acb42aac42245b4fa5079cc25ce124067ce99dfaad25033', 'visual das câmaras protegido byte a byte');
-ok(hash(tarot) === 'df82aab23d6b74b52d455202484d95aa802cc0e3ed3383e28005b49950594568', 'Tarot protegido byte a byte');
+ok(hash(tarot) === '7c6ed126a83031f429eb1e887926c97b0b3614c175caebea3335e422a1ac1fe0', 'Câmara Violeta V614 protegida byte a byte');
 ok(hash(tarotStyles) === '53bd7cd30891f4473fe85addbebfe1f09c8edb7768e9bc945572e33c5e0da3a6', 'visual do Tarot protegido byte a byte');
 ok(hash(daily) === 'c5ca4de3881fc03a3425cc4a2e1d5c4703f9ce188e4640649f63bc136f68783f', 'Carta do Dia protegida byte a byte');
 ok(hash(dailyStyles) === '4ab92a4f206d75d51bd7b276408b6d057dcd9886a58f941c65a1777d898c7014', 'visual diário protegido byte a byte');

@@ -86,7 +86,7 @@ ok(cosmicStyles.includes('[data-reading-phase="essence"]') && cosmicStyles.inclu
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
 ok(count(core,/^\s*'\.\//gm) === 58, '58 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v613-menu-global-vivo'"), 'cache próprio');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v614-tarot-livre-camara-violeta'"), 'cache próprio');
 ok(sw.includes("'./carta-do-dia-soul-v610.js?v=610-work13-daily-soul'"), 'JS no cache');
 ok(sw.includes("'./carta-do-dia-soul-v610.css?v=610-work13-daily-soul'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_DAILY_SOUL_ACTIVE'), 'ativação comunicada');
@@ -94,7 +94,7 @@ ok(sw.includes('work13-carta-do-dia-soul-contract-missing'), 'contrato validado 
 ok(sw.includes('work13-carta-do-dia-soul-styles-missing'), 'estilo validado pelo worker');
 
 ok(hash(orchestra) === 'ebfe097bc1851540a24494a7a64eb3122c31aa04f35e3809a5288baac16ceca0', 'orquestra protegida byte a byte');
-ok(hash(tarot) === 'df82aab23d6b74b52d455202484d95aa802cc0e3ed3383e28005b49950594568', 'alma do Tarot protegida byte a byte');
+ok(hash(tarot) === '7c6ed126a83031f429eb1e887926c97b0b3614c175caebea3335e422a1ac1fe0', 'Câmara Violeta V614 protegida byte a byte');
 ok(hash(tarotStyles) === '53bd7cd30891f4473fe85addbebfe1f09c8edb7768e9bc945572e33c5e0da3a6', 'visual do Tarot protegido byte a byte');
 ok(hash(cosmic) === '747db49e21fd1b6fa8f6484d4841b99b3cc54984a27b9dddebcd7b7e61a5803c', 'leitura V604 protegida byte a byte');
 ok(hash(cosmicStyles) === '04e30e0ceb1d538dda594294cfd52f318b4cebb05a828d78489e101cec0f0de5', 'visual V604 protegido byte a byte');

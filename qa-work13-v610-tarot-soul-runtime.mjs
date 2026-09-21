@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import {
+  TAROT_LIVRE_WORLD_CONTRACT_V614,
   TAROT_LIVRE_SOUL_CONTRACT_V610,
   createTarotLivreSoulV610
 } from './tarot-livre-soul-v610.js';
@@ -47,6 +48,8 @@ class FakeDocument extends EventTarget {
     this.add(new FakeNode({ id:'remaining', text:'78 cartas sem repetição' }));
     this.add(new FakeNode({ id:'shuffleDeck' }));
     this.add(new FakeNode({ id:'resetDeck' }));
+    this.add(new FakeNode({ id:'orbitalCards' }));
+    this.add(new FakeNode({ id:'realTableViewport' }));
     const table = this.add(new FakeNode({ id:'realTable' }));
     table.setAttribute('aria-rowcount','13');
     table.setAttribute('aria-colcount','6');
@@ -77,15 +80,19 @@ const fire = (target, type, detail = 1) => {
 
 let checks = 0;
 const ok = (value, message) => { assert.ok(value, message); checks += 1; };
-const contract = TAROT_LIVRE_SOUL_CONTRACT_V610;
+const contract = TAROT_LIVRE_WORLD_CONTRACT_V614;
 
-ok(contract.version === 610 && contract.work === 'WORK13', 'permanece no WORK13 V610');
-ok(contract.sequence.join('|') === 'orb|card|silence|freedom', 'sequência essencial');
+ok(contract === TAROT_LIVRE_SOUL_CONTRACT_V610, 'alias público aponta para um único contrato');
+ok(contract.version === 614 && contract.work === 'WORK13', 'renovação permanece no WORK13 V614');
+ok(contract.universe === 'camara-do-vazio-violeta', 'mundo próprio declarado');
+ok(contract.sequence.join('|') === 'arrival|orb-alone|touch|card|silence|freedom', 'sequência essencial');
 ok(contract.cards === 78 && contract.rows === 13 && contract.columns === 6, 'mesa completa');
 ok(contract.reversedCards === false, 'sem invertidas');
 ok(contract.repetitionBeforeReset === false, 'sem repetição');
 ok(contract.automaticMeanings === false && contract.meaningsAdded === 0, 'sem significado automático');
 ok(contract.cardSelectionChanges === 0 && contract.shuffleChanges === 0 && contract.resetChanges === 0, 'motor intocado');
+ok(contract.orbAloneOutsideMenu && contract.orbitingListsVisible === false, 'Orbe sozinha fora do menu');
+ok(contract.revealEvent === 'tarot:supreme-revealed' && contract.tableDeferredRendering, 'evento real e mesa adiada');
 ok(contract.reusesCanonicalOrb === true && contract.newCanvases === 0, 'uma Orbe e um canvas');
 ok(contract.permanentAnimationLoops === 0 && contract.mutationObservers === 0 && contract.deferredTimers === 0, 'sem peso permanente');
 ok(contract.work14 === false, 'sem WORK14');
@@ -99,18 +106,21 @@ const soul = createTarotLivreSoulV610({
   orbCore:{ pulse() { pulses += 1; } }
 });
 
-ok(doc.documentElement.dataset.work13TarotSoul === 'v610', 'identidade instalada');
-ok(doc.active.dataset.tarotSoul === 'v610', 'Tarot marcado como mundo próprio');
+ok(doc.documentElement.dataset.work13TarotSoul === 'v614', 'identidade instalada');
+ok(doc.documentElement.dataset.work13TarotWorld === 'v614', 'mundo instalado');
+ok(doc.active.dataset.tarotSoul === 'v614' && doc.active.dataset.tarotWorld === 'v614', 'Tarot marcado como mundo próprio');
 ok(doc.active.dataset.tarotSoulPresence === 'present', 'presença na rota Tarot');
 ok(doc.active.dataset.tarotSoulPhase === 'origin', 'origem silenciosa');
 ok(doc.head.children.length === 1, 'uma folha de estilo instalada');
-ok(doc.head.children[0].href.includes('tarot-livre-soul-v610.css'), 'estilo correto');
+ok(doc.head.children[0].href.includes('tarot-livre-world-v614.css'), 'estilo correto');
 
 const audit = soul.audit();
 ok(audit.tarotScreenPresent && audit.revealOrbPresent, 'altar preservado');
 ok(audit.shufflePreserved && audit.resetPreserved, 'controles preservados');
 ok(audit.mesaRealPreserved && audit.mesaRealPositions === 78, 'Mesa Real preservada');
 ok(audit.oneCanonicalOrb && audit.oneCanonicalCanvas, 'unicidade preservada');
+ok(audit.orbAloneOutsideMenu && audit.orbitingListsVisible === false, 'órbitas antigas silenciosas');
+ok(audit.orbitalCardsPresentButSilent && audit.tableDeferredRendering, 'nós preservados sem peso inicial');
 ok(audit.cardSelectionChanges === 0 && audit.automaticMeanings === false, 'sem mudança de regra');
 
 const tableOrb = doc.getElementById('tableOrb');
@@ -118,11 +128,13 @@ fire(tableOrb,'pointerdown');
 ok(soul.phase === 'answering', 'toque responde imediatamente');
 ok(pulses === 1, 'pulso na Orbe existente');
 fire(tableOrb,'pointerup');
-ok(soul.phase === 'silence', 'resposta deixa silêncio');
+ok(soul.phase === 'receiving', 'soltar aguarda a carta');
 doc.getElementById('current').classList.remove('empty');
 doc.getElementById('count').textContent = '1/78';
 doc.getElementById('remaining').textContent = '77 cartas restantes';
 fire(tableOrb,'click',1);
+ok(soul.phase === 'receiving', 'clique não inventa revelação');
+fire(win,'tarot:supreme-revealed');
 ok(soul.phase === 'silence', 'carta permanece em silêncio');
 ok(soul.status().revealsObserved === 1, 'revelação observada sem interferência');
 ok(soul.status().revealed === 1 && soul.status().remaining === 77, 'estado público refletido');
@@ -146,6 +158,6 @@ ok(soul.status().automaticNavigation === false, 'sem navegação automática');
 ok(soul.status().networkCalls === 0 && soul.status().storageWrites === 0, 'sem rede ou escrita');
 ok(soul.status().work14 === false, 'termina dentro do WORK13');
 soul.destroy();
-ok(doc.getElementById('divinaTarotLivreSoulV610').removed === true, 'desmontagem limpa');
+ok(doc.getElementById('divinaTarotLivreWorldV614').removed === true, 'desmontagem limpa');
 
-console.log(`PASS ${checks}/${checks} — alma funcional do Tarot Livre V610`);
+console.log(`PASS ${checks}/${checks} — Câmara do Vazio Violeta V614`);

@@ -75,7 +75,7 @@ import { createLivingMediaSkinsV609 } from './living-media-skins-v609.js?v=609-w
 import { createCosmosFinalOrchestraV610 } from './cosmos-final-orchestra-v610.js?v=610-work13-final-orchestra';
 import { createCosmosEntryIntentionV610 } from './cosmos-entry-intention-v610.js?v=613-menu-global-vivo';
 import { createCosmosWorldPresenceV610 } from './cosmos-world-presence-v610.js?v=610-work13-final-presence';
-import { createTarotLivreSoulV610 } from './tarot-livre-soul-v610.js?v=610-work13-tarot-soul';
+import { createTarotLivreSoulV610 } from './tarot-livre-soul-v610.js?v=614-camara-vazio-violeta';
 import { createCartaDoDiaSoulV610 } from './carta-do-dia-soul-v610.js?v=610-work13-daily-soul';
 import { createTiragensSoulV610 } from './tiragens-soul-v610.js?v=610-work13-spreads-soul';
 import { createEscolaSoulV610 } from './escola-soul-v610.js?v=610-work13-school-soul';
@@ -2301,7 +2301,7 @@ const cosmosWorldPresence = safely('WORK13 · Presença das Realidades V610', ()
     menuResolver:() => globalThis.divinaMenuV502 || null
   })
 );
-const tarotLivreSoul = safely('WORK13 · Alma do Tarot Livre V610', () =>
+const tarotLivreSoul = safely('WORK13 · Tarot Livre · Câmara do Vazio Violeta V614', () =>
   createTarotLivreSoulV610({ orbCore:supremeOrb })
 );
 const cartaDoDiaSoul = safely('WORK13 · Alma da Carta do Dia V610', () =>
@@ -2576,7 +2576,40 @@ document.documentElement.dataset.work13Macro = 'menu-global-vivo-persistente';
 document.documentElement.dataset.work13Menu = 'pentagram-v613';
 window.orbe.pentagramMenu = window.divinaWork13MenuGlobalVivoV613;
 window.divinaCosmosVivoV613 = window.divinaWork13MenuGlobalVivoV613;
-window.divinaCosmosVivo = window.divinaWork13MenuGlobalVivoV613;
+window.divinaWork13TarotLivreWorldV614 = Object.freeze({
+  version:614,
+  work:'WORK13',
+  stage:'renovacao-dos-mundos-1-tarot-livre',
+  universe:'camara-do-vazio-violeta',
+  base:window.divinaWork13MenuGlobalVivoV613,
+  world:tarotLivreSoul,
+  status:() => Object.freeze({
+    release:'V614',
+    reality:'tarot',
+    orbAloneOutsideMenu:true,
+    orbitingListsVisible:false,
+    onePrimaryGesture:true,
+    tarotOrbAction:'reveal-only',
+    tarotOrbOpensMenu:false,
+    cards:78,
+    reversedCards:false,
+    repetitionBeforeReset:false,
+    automaticMeanings:false,
+    tableDeferredRendering:true,
+    pentagramAlwaysAvailable:true,
+    onePhysicalOrb:document.querySelectorAll?.('#orb')?.length === 1,
+    oneCanonicalCanvas:document.querySelectorAll?.('#orbCanvas')?.length === 1,
+    newRenderers:0,
+    permanentAnimationLoops:0,
+    work14:false,
+    tarot:tarotLivreSoul?.status?.() || null
+  })
+});
+document.documentElement.dataset.work13Macro = 'tarot-livre-camara-violeta';
+document.documentElement.dataset.work13TarotWorld = 'v614';
+window.orbe.tarotLivreWorld = window.divinaWork13TarotLivreWorldV614;
+window.divinaCosmosVivoV614 = window.divinaWork13TarotLivreWorldV614;
+window.divinaCosmosVivo = window.divinaWork13TarotLivreWorldV614;
 window.whit = whitCore;
 
 window.divinaWhitV212 = Object.freeze({

@@ -1,19 +1,19 @@
-/* DIVINA BRUXA — WORK13 · MENU GLOBAL VIVO E PERSISTENTE · V613
-   O WORK12 V600 e as almas V602–V612 permanecem protegidos. A instalacao so
-   assume o portal quando o pentagrama sobrevive a todas as chegadas, abre e
-   fecha o campo vivo, e a Orbe do Tarot continua apenas revelando.
+/* DIVINA BRUXA — WORK13 · TAROT LIVRE · CÂMARA DO VAZIO VIOLETA · V614
+   O WORK12 V600 e o menu global V613 permanecem protegidos. A instalacao so
+   assume o portal quando o Tarot Livre conserva uma Orbe, revela sem abrir o
+   menu e deixa a Câmara respirar sem listas orbitais nem peso permanente.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
-const VERSION = 613;
+const VERSION = 614;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work13-v613-menu-global-vivo';
+const CACHE_NAME = 'divina-bruxa-work13-v614-tarot-livre-camara-violeta';
 const CORE = Object.freeze([
   './index.html',
-  './app-v208.js?v=613-menu-global-vivo',
+  './app-v208.js?v=614-tarot-livre-camara-violeta',
   './pentagrama-menu-vivo-v611.webp',
-  './tarot-livre-soul-v610.js?v=610-work13-tarot-soul',
-  './tarot-livre-soul-v610.css?v=610-work13-tarot-soul',
+  './tarot-livre-soul-v610.js?v=614-camara-vazio-violeta',
+  './tarot-livre-world-v614.css?v=614-camara-vazio-violeta',
   './carta-do-dia-soul-v610.js?v=610-work13-daily-soul',
   './carta-do-dia-soul-v610.css?v=610-work13-daily-soul',
   './tiragens-soul-v610.js?v=610-work13-spreads-soul',
@@ -81,9 +81,9 @@ const fetchCore = async path => {
 
 const validateCore = async responses => {
   const index = await responses.get('./index.html')?.clone().text();
-  const app = await responses.get('./app-v208.js?v=613-menu-global-vivo')?.clone().text();
-  const tarotLivreSoul = await responses.get('./tarot-livre-soul-v610.js?v=610-work13-tarot-soul')?.clone().text();
-  const tarotLivreSoulStyles = await responses.get('./tarot-livre-soul-v610.css?v=610-work13-tarot-soul')?.clone().text();
+  const app = await responses.get('./app-v208.js?v=614-tarot-livre-camara-violeta')?.clone().text();
+  const tarotLivreSoul = await responses.get('./tarot-livre-soul-v610.js?v=614-camara-vazio-violeta')?.clone().text();
+  const tarotLivreSoulStyles = await responses.get('./tarot-livre-world-v614.css?v=614-camara-vazio-violeta')?.clone().text();
   const cartaDoDiaSoul = await responses.get('./carta-do-dia-soul-v610.js?v=610-work13-daily-soul')?.clone().text();
   const cartaDoDiaSoulStyles = await responses.get('./carta-do-dia-soul-v610.css?v=610-work13-daily-soul')?.clone().text();
   const tiragensSoul = await responses.get('./tiragens-soul-v610.js?v=610-work13-spreads-soul')?.clone().text();
@@ -137,11 +137,11 @@ const validateCore = async responses => {
   const soul = await responses.get('./whit-orb-soul-bridge-v581.js?v=592-work12-navigation')?.clone().text();
   if (!index?.includes('name="divina-work12" content="V600"')
     || !index.includes('name="divina-live-audit" content="V600"')
-    || !index.includes('name="divina-work13" content="V613"')) {
+    || !index.includes('name="divina-work13" content="V614"')) {
     throw new Error('work13-index-version-mismatch');
   }
-  if (!index.includes('app-v208.js?v=613-menu-global-vivo')
-    || !index.includes('name="divina-work13-correction" content="V613-MENU-GLOBAL-VIVO-PERSISTENTE"')
+  if (!index.includes('app-v208.js?v=614-tarot-livre-camara-violeta')
+    || !index.includes('name="divina-work13-correction" content="V614-TAROT-LIVRE-CAMARA-DO-VAZIO-VIOLETA"')
     || !index.includes('id="divinaCosmosEntryIntentionV610"')
     || !index.includes('cosmos-entry-intention-v610.css?v=613-menu-global-vivo')
     || !index.includes('id="divinaCosmosWorldPresenceV610"')
@@ -271,14 +271,16 @@ const validateCore = async responses => {
     || !app.includes("correction:'lapidacao-final-presenca-das-realidades'")) {
     throw new Error('work13-world-presence-app-mismatch');
   }
-  if (!app.includes("tarot-livre-soul-v610.js?v=610-work13-tarot-soul")
+  if (!app.includes("tarot-livre-soul-v610.js?v=614-camara-vazio-violeta")
     || !app.includes('createTarotLivreSoulV610({ orbCore:supremeOrb })')
     || !app.includes('window.orbe.tarotLivreSoul = tarotLivreSoul')
-    || !app.includes("stage:'primeira-realidade-alma-propria'")) {
+    || !app.includes('divinaWork13TarotLivreWorldV614')
+    || !app.includes("stage:'renovacao-dos-mundos-1-tarot-livre'")) {
     throw new Error('work13-tarot-livre-soul-app-mismatch');
   }
-  if (!tarotLivreSoul?.includes('TAROT_LIVRE_SOUL_CONTRACT_V610')
-    || !tarotLivreSoul.includes("sequence:Object.freeze(['orb','card','silence','freedom'])")
+  if (!tarotLivreSoul?.includes('TAROT_LIVRE_WORLD_CONTRACT_V614')
+    || !tarotLivreSoul.includes("sequence:Object.freeze(['arrival','orb-alone','touch','card','silence','freedom'])")
+    || !tarotLivreSoul.includes("universe:'camara-do-vazio-violeta'")
     || !tarotLivreSoul.includes('cards:78')
     || !tarotLivreSoul.includes('rows:13')
     || !tarotLivreSoul.includes('columns:6')
@@ -286,15 +288,23 @@ const validateCore = async responses => {
     || !tarotLivreSoul.includes('repetitionBeforeReset:false')
     || !tarotLivreSoul.includes('automaticMeanings:false')
     || !tarotLivreSoul.includes('cardSelectionChanges:0')
+    || !tarotLivreSoul.includes('orbAloneOutsideMenu:true')
+    || !tarotLivreSoul.includes('orbitingListsVisible:false')
+    || !tarotLivreSoul.includes("revealEvent:'tarot:supreme-revealed'")
+    || !tarotLivreSoul.includes('tableDeferredRendering:true')
     || !tarotLivreSoul.includes('reusesCanonicalOrb:true')
     || !tarotLivreSoul.includes('permanentAnimationLoops:0')
     || !tarotLivreSoul.includes('mutationObservers:0')
     || !tarotLivreSoul.includes('work14:false')) {
     throw new Error('work13-tarot-livre-soul-contract-missing');
   }
-  if (!tarotLivreSoulStyles?.includes('[data-tarot-soul="v610"]')
+  if (!tarotLivreSoulStyles?.includes('[data-tarot-world="v614"]')
     || !tarotLivreSoulStyles.includes('[data-tarot-soul-phase="answering"]')
+    || !tarotLivreSoulStyles.includes('[data-tarot-soul-phase="receiving"]')
     || !tarotLivreSoulStyles.includes('[data-tarot-soul-phase="silence"]')
+    || !tarotLivreSoulStyles.includes('.orbital-cards')
+    || !tarotLivreSoulStyles.includes('.altar-rings')
+    || !tarotLivreSoulStyles.includes('content-visibility:auto')
     || !tarotLivreSoulStyles.includes('#realTableViewport')
     || !tarotLivreSoulStyles.includes('@media(max-width:430px)')
     || !tarotLivreSoulStyles.includes('@media(prefers-reduced-motion:reduce)')
@@ -949,7 +959,8 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK13_PENTAGRAM_MENU_ACTIVE', version:VERSION, symbol:'pentagrama-vermelho', position:'top-corner', global:true, globalMenuOnEveryPage:true, pentagramVisibleWhileMenuOpen:true, pentagramTogglesMenu:true, arrivalStateRecovery:true, publicWorlds:15, maximumVisibleIntentions:2, menuLife:'birth-breath-answer-silence', whitInsideMenu:true, tarotOrbAction:'reveal-only', tarotOrbOpensMenu:false, tarotOrbMenuListenersBypassed:true, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_FINAL_PRESENCE_ACTIVE', version:VERSION, correction:'lapidacao-final-presenca-das-realidades', publicWorlds:15, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_GLOBAL_MENU_ACTIVE', version:VERSION, correction:'menu-global-ciclo-vivo', publicWorlds:15, oneOrb:true, base:600, complete:true });
-        client.postMessage({ type:'DIVINA_WORK13_TAROT_SOUL_ACTIVE', version:VERSION, reality:'tarot', cards:78, reversed:false, meanings:false, oneOrb:true, base:600, complete:true });
+        client.postMessage({ type:'DIVINA_WORK13_TAROT_SOUL_ACTIVE', version:VERSION, reality:'tarot', universe:'camara-do-vazio-violeta', cards:78, reversed:false, meanings:false, orbAlone:true, orbitingLists:false, tableDeferred:true, oneOrb:true, base:600, complete:true });
+        client.postMessage({ type:'DIVINA_WORK13_TAROT_WORLD_ACTIVE', version:VERSION, reality:'tarot', universe:'camara-do-vazio-violeta', sequence:['arrival','orb-alone','touch','card','silence','freedom'], revealEvent:'tarot:supreme-revealed', tarotOrbAction:'reveal-only', pentagramMenu:true, oneOrb:true, base:613, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_DAILY_SOUL_ACTIVE', version:VERSION, reality:'daily', cardsPerBrasiliaDay:1, timeZone:'America/Sao_Paulo', reversed:false, oneSentenceEssence:true, depthExplicit:true, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_SPREADS_SOUL_ACTIVE', version:VERSION, reality:'spreads', methods:15, freeMethods:4, premiumMethods:11, celticCrossPositions:10, royalTableCards:78, oneSentenceSynthesis:true, depthExplicit:true, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_SCHOOL_SOUL_ACTIVE', version:VERSION, reality:'school', universe:'jardim-arcano-do-conhecimento', stages:3, modules:17, lessons:124, cardLessons:78, oneNextLesson:true, programmeExplicit:true, oneOrb:true, base:600, complete:true });

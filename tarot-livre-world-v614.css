@@ -1,0 +1,381 @@
+/* DIVINA BRUXA — WORK13 V614 · TAROT LIVRE · CÂMARA DO VAZIO VIOLETA
+   Fora do menu, a Orbe brilha sozinha. Sem órbitas de escolhas, sem listas
+   circulares, sem fogo, sem filtro e sem animação permanente nova. */
+
+html[data-work13-tarot-world="v614"] #tarot[data-tarot-world="v614"]{
+  --tl614-gold:248,215,154;
+  --tl614-violet:174,82,238;
+  --tl614-lilac:218,170,255;
+  --tl614-night:4,1,10;
+  position:relative;
+  box-sizing:border-box;
+  min-block-size:100dvh;
+  padding-block-start:max(18px,env(safe-area-inset-top));
+  padding-block-end:max(52px,env(safe-area-inset-bottom));
+  background:
+    radial-gradient(ellipse 82% 44% at 50% 30%,rgba(var(--tl614-violet),.12),transparent 70%),
+    radial-gradient(ellipse 70% 32% at 50% 76%,rgba(var(--tl614-lilac),.055),transparent 74%),
+    linear-gradient(180deg,rgba(var(--tl614-night),.24),rgba(var(--tl614-night),.68) 68%,rgba(var(--tl614-night),.86));
+  isolation:isolate;
+}
+
+html[data-work13-tarot-world="v614"] #tarot[data-tarot-world="v614"]::before,
+html[data-work13-tarot-world="v614"] #tarot[data-tarot-world="v614"]::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-2;
+  pointer-events:none;
+}
+
+html[data-work13-tarot-world="v614"] #tarot[data-tarot-world="v614"]::before{
+  background:
+    radial-gradient(circle at 12% 20%,rgba(255,242,211,.32) 0 1px,transparent 1.5px),
+    radial-gradient(circle at 84% 17%,rgba(222,184,255,.28) 0 1px,transparent 1.5px),
+    radial-gradient(circle at 23% 61%,rgba(255,242,211,.18) 0 1px,transparent 1.5px),
+    radial-gradient(circle at 76% 72%,rgba(222,184,255,.20) 0 1px,transparent 1.5px);
+  background-size:197px 223px,239px 269px,283px 307px,337px 361px;
+  opacity:.44;
+  transition:opacity 240ms ease;
+}
+
+html[data-work13-tarot-world="v614"] #tarot[data-tarot-world="v614"]::after{
+  z-index:-1;
+  background:radial-gradient(circle at 50% 43%,rgba(var(--tl614-violet),.095),transparent 31%);
+  opacity:.72;
+  transition:opacity 180ms ease,transform 220ms cubic-bezier(.2,.78,.2,1);
+}
+
+html[data-work13-tarot-world="v614"] #tarot[data-tarot-soul-presence="away"]::before,
+html[data-work13-tarot-world="v614"] #tarot[data-tarot-soul-presence="away"]::after{
+  opacity:0;
+}
+
+/* O pentagrama V613 é o único menu global. Os caminhos antigos não entram
+   na Câmara do Vazio Violeta. */
+html[data-work13-tarot-world="v614"] body[data-screen="tarot"] .app-header,
+html[data-work13-tarot-world="v614"] body[data-screen="tarot"] .magic-dock,
+html[data-work13-tarot-world="v614"] body[data-screen="tarot"] #orbMenu{
+  visibility:hidden!important;
+  pointer-events:none!important;
+  opacity:0!important;
+}
+
+html[data-work13-tarot-world="v614"] #tarot>.section-head{
+  width:min(calc(100% - 36px),720px);
+  margin:0 auto clamp(8px,2.4vh,18px);
+  padding:0;
+  align-items:end;
+  border:0;
+  background:transparent;
+}
+
+html[data-work13-tarot-world="v614"] #tarot>.section-head :is(.eyebrow,h2){
+  display:none!important;
+}
+
+html[data-work13-tarot-world="v614"] #tarot #remaining{
+  margin:0;
+  color:rgba(255,244,225,.52);
+  font:500 9px/1.4 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+
+html[data-work13-tarot-world="v614"] #tarot #count{
+  color:rgba(255,244,220,.82);
+  font:400 clamp(20px,5.6vw,30px)/1 Georgia,"Times New Roman",serif;
+  text-shadow:0 0 22px rgba(var(--tl614-gold),.14);
+}
+
+html[data-work13-tarot-world="v614"] #tarot>.deck-progress{
+  width:min(calc(100% - 40px),680px);
+  height:1px;
+  margin:0 auto clamp(12px,3vh,24px);
+  border:0;
+  overflow:hidden;
+  background:rgba(255,238,207,.08);
+}
+
+html[data-work13-tarot-world="v614"] #tarot>.deck-progress>i{
+  display:block;
+  height:1px;
+  border-radius:999px;
+  background:linear-gradient(90deg,rgba(var(--tl614-violet),.68),rgba(var(--tl614-gold),.78));
+  box-shadow:0 0 12px rgba(var(--tl614-violet),.18);
+}
+
+html[data-work13-tarot-world="v614"] #tarot #revealAltar{
+  position:relative;
+  display:flex!important;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:clamp(18px,4vh,34px);
+  width:min(calc(100% - 24px),760px);
+  min-block-size:clamp(470px,72svh,760px);
+  margin-inline:auto;
+  padding:clamp(20px,5vw,42px) clamp(10px,3vw,24px) clamp(26px,6vw,48px);
+  border:0;
+  border-radius:clamp(34px,10vw,84px);
+  background:
+    radial-gradient(circle at 50% 56%,rgba(var(--tl614-violet),.105),transparent 30%),
+    radial-gradient(ellipse 62% 46% at 50% 50%,rgba(var(--tl614-gold),.035),transparent 74%);
+  box-shadow:inset 0 1px 0 rgba(255,245,223,.055),0 34px 88px rgba(0,0,0,.13);
+  overflow:hidden;
+  isolation:isolate;
+}
+
+html[data-work13-tarot-world="v614"] #tarot #revealAltar::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  left:50%;
+  top:58%;
+  inline-size:min(78vw,430px);
+  aspect-ratio:1;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(var(--tl614-violet),.14),rgba(var(--tl614-violet),.045) 38%,transparent 72%);
+  opacity:.48;
+  transform:translate(-50%,-50%) scale(.96);
+  transition:opacity 160ms ease,transform 200ms cubic-bezier(.2,.78,.2,1);
+}
+
+html[data-work13-tarot-world="v614"] #tarot[data-tarot-soul-phase="answering"] #revealAltar::before{
+  opacity:.86;
+  transform:translate(-50%,-50%) scale(1.035);
+}
+
+html[data-work13-tarot-world="v614"] #tarot[data-tarot-soul-phase="receiving"] #revealAltar::before{
+  opacity:.64;
+  transform:translate(-50%,-50%) scale(1.01);
+}
+
+html[data-work13-tarot-world="v614"] #tarot[data-tarot-soul-phase="silence"] #revealAltar::before{
+  opacity:.28;
+  transform:translate(-50%,-50%) scale(1);
+}
+
+/* Nenhuma lista, carta orbital, estatística ou anel cerca a Orbe. Os nós
+   permanecem para o motor protegido, mas ficam visualmente silenciosos. */
+html[data-work13-tarot-world="v614"] #tarot :is(
+  .ritual-sky,
+  .altar-rings,
+  .ritual-constellation,
+  .orbital-cards,
+  .ritual-stats
+){
+  display:none!important;
+}
+
+html[data-work13-tarot-world="v614"] #tarot .ritual-wheel{
+  order:1;
+  display:grid!important;
+  place-items:center;
+  width:100%;
+  min-block-size:clamp(220px,36svh,390px);
+  border:0;
+  background:transparent;
+}
+
+html[data-work13-tarot-world="v614"] #tarot[data-tarot-card-state="empty"] .ritual-wheel{
+  display:none!important;
+}
+
+html[data-work13-tarot-world="v614"] #tarot .ritual-card-center{
+  position:relative!important;
+  inset:auto!important;
+  display:grid;
+  place-items:center;
+  width:100%;
+  transform:none!important;
+}
+
+html[data-work13-tarot-world="v614"] #tarot #current{
+  position:relative!important;
+  inset:auto!important;
+  margin:0 auto!important;
+  opacity:1;
+  transform:none!important;
+  transition:opacity 130ms ease,transform 180ms cubic-bezier(.2,.78,.2,1);
+}
+
+html[data-work13-tarot-world="v614"] #tarot #current.empty{
+  display:none!important;
+}
+
+html[data-work13-tarot-world="v614"] #tarot[data-tarot-soul-phase="answering"] #current{
+  opacity:.82;
+  transform:translateY(2px) scale(.995)!important;
+}
+
+html[data-work13-tarot-world="v614"] #tarot #tableOrb{
+  order:2;
+  position:relative!important;
+  inset:auto!important;
+  margin:0 auto!important;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  transform:none!important;
+}
+
+html[data-work13-tarot-world="v614"] #tarot #tableOrb .table-orb-aura{
+  opacity:.52;
+  transform:scale(.97);
+  transition:opacity 120ms ease,transform 180ms cubic-bezier(.2,.78,.2,1),box-shadow 180ms ease;
+}
+
+html[data-work13-tarot-world="v614"] #tarot[data-tarot-soul-phase="answering"] #tableOrb .table-orb-aura{
+  opacity:.96;
+  transform:scale(1.045);
+  box-shadow:0 0 44px rgba(var(--tl614-violet),.36),0 0 86px rgba(var(--tl614-gold),.12);
+}
+
+html[data-work13-tarot-world="v614"] #tarot[data-tarot-soul-phase="receiving"] #tableOrb .table-orb-aura{
+  opacity:.72;
+  transform:scale(1.015);
+}
+
+html[data-work13-tarot-world="v614"] #tarot[data-tarot-soul-phase="silence"] #tableOrb .table-orb-aura{
+  opacity:.32;
+  transform:scale(1);
+}
+
+html[data-work13-tarot-world="v614"] #tarot #orbState{
+  color:rgba(255,240,214,.56);
+  font-size:9px;
+  letter-spacing:.18em;
+  text-shadow:0 0 15px rgba(var(--tl614-violet),.18);
+  transition:opacity 140ms ease,color 140ms ease;
+}
+
+html[data-work13-tarot-world="v614"] #tarot[data-tarot-soul-phase="answering"] #orbState{
+  color:rgba(255,248,232,.94);
+  opacity:1;
+}
+
+html[data-work13-tarot-world="v614"] #tarot[data-tarot-soul-phase="silence"] #orbState{
+  opacity:.26;
+}
+
+html[data-work13-tarot-world="v614"] #tarot>.free-rule{
+  display:none!important;
+}
+
+html[data-work13-tarot-world="v614"] #tarot>.real-table-head{
+  width:min(calc(100% - 28px),980px);
+  margin:clamp(34px,8vh,72px) auto 14px;
+  padding:0 2px 14px;
+  border-block-end:1px solid rgba(255,237,205,.09);
+  background:transparent;
+}
+
+html[data-work13-tarot-world="v614"] #tarot>.real-table-head p{
+  color:rgba(255,234,196,.44);
+  letter-spacing:.20em;
+}
+
+html[data-work13-tarot-world="v614"] #tarot>.real-table-head h3{
+  color:rgba(255,245,226,.84);
+  font-weight:400;
+}
+
+html[data-work13-tarot-world="v614"] #tarot .table-actions .text-button,
+html[data-work13-tarot-world="v614"] #tarot .table-view-actions button{
+  min-block-size:44px;
+  border-color:rgba(255,232,194,.14);
+  background:rgba(8,3,14,.22);
+  box-shadow:none;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  transition:color 130ms ease,border-color 130ms ease,background-color 130ms ease,transform 90ms ease;
+}
+
+html[data-work13-tarot-world="v614"] #tarot .table-actions .text-button:active,
+html[data-work13-tarot-world="v614"] #tarot .table-view-actions button:active{
+  transform:translateY(1px);
+}
+
+html[data-work13-tarot-world="v614"] #tarot>.real-table-tools,
+html[data-work13-tarot-world="v614"] #tarot>.real-table-viewport{
+  width:min(calc(100% - 28px),980px);
+  margin-inline:auto;
+}
+
+html[data-work13-tarot-world="v614"] #tarot>.real-table-tools>p{
+  color:rgba(255,241,216,.50);
+}
+
+html[data-work13-tarot-world="v614"] #tarot #realTableViewport{
+  border-color:rgba(255,235,201,.08);
+  background:rgba(4,1,9,.20);
+  box-shadow:inset 0 22px 52px rgba(0,0,0,.16);
+  content-visibility:auto;
+  contain-intrinsic-block-size:620px;
+}
+
+html[data-experience-budget="essential"][data-work13-tarot-world="v614"] #tarot::before{
+  opacity:.20;
+}
+
+@media(max-width:430px){
+  html[data-work13-tarot-world="v614"] #tarot[data-tarot-world="v614"]{
+    min-block-size:100svh;
+    padding-block-start:max(12px,env(safe-area-inset-top));
+  }
+
+  html[data-work13-tarot-world="v614"] #tarot>.section-head{
+    width:calc(100% - 36px);
+    margin-block-end:6px;
+  }
+
+  html[data-work13-tarot-world="v614"] #tarot #revealAltar{
+    width:calc(100% - 16px);
+    min-block-size:clamp(450px,76svh,690px);
+    border-radius:34px;
+    padding-inline:8px;
+  }
+
+  html[data-work13-tarot-world="v614"] #tarot #revealAltar::before{
+    inline-size:min(88vw,390px);
+  }
+
+  html[data-work13-tarot-world="v614"] #tarot>.real-table-head,
+  html[data-work13-tarot-world="v614"] #tarot>.real-table-tools,
+  html[data-work13-tarot-world="v614"] #tarot>.real-table-viewport{
+    width:calc(100% - 20px);
+  }
+}
+
+@media(orientation:landscape) and (max-height:500px){
+  html[data-work13-tarot-world="v614"] #tarot #revealAltar{
+    min-block-size:360px;
+    flex-direction:row;
+    gap:clamp(18px,5vw,48px);
+  }
+
+  html[data-work13-tarot-world="v614"] #tarot .ritual-wheel{
+    width:min(48vw,420px);
+    min-block-size:300px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-work13-tarot-world="v614"] #tarot::before,
+  html[data-work13-tarot-world="v614"] #tarot::after,
+  html[data-work13-tarot-world="v614"] #tarot #revealAltar::before,
+  html[data-work13-tarot-world="v614"] #tarot :is(#current,#orbState),
+  html[data-work13-tarot-world="v614"] #tarot #tableOrb .table-orb-aura,
+  html[data-work13-tarot-world="v614"] #tarot .table-actions .text-button,
+  html[data-work13-tarot-world="v614"] #tarot .table-view-actions button{
+    transition:none!important;
+  }
+}
+
+@media(forced-colors:active){
+  html[data-work13-tarot-world="v614"] #tarot #revealAltar,
+  html[data-work13-tarot-world="v614"] #tarot #realTableViewport{
+    border:1px solid CanvasText;
+    background:Canvas;
+  }
+}

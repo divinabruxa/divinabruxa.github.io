@@ -98,7 +98,7 @@ ok(entry.includes('globalOrbMenuCycle:true') && entry.includes('everyRealityCanC
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
 ok(count(core,/^\s*'\.\//gm) === 58, '58 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v613-menu-global-vivo'"), 'cache próprio');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v614-tarot-livre-camara-violeta'"), 'cache próprio');
 ok(sw.includes("'./biblioteca-soul-v610.js?v=610-work13-library-soul'"), 'JS no cache');
 ok(sw.includes("'./biblioteca-soul-v610.css?v=610-work13-library-soul'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_LIBRARY_SOUL_ACTIVE'), 'ativação comunicada');
@@ -108,7 +108,7 @@ ok(sw.includes('work13-biblioteca-soul-styles-missing'), 'estilo validado pelo w
 ok(hash(orchestra) === 'ebfe097bc1851540a24494a7a64eb3122c31aa04f35e3809a5288baac16ceca0', 'orquestra protegida byte a byte');
 ok(hash(wisdom) === 'cbd5c9b41c8aa390beadcf463934cf72d033aa7c04c102f24a8ce86f045d8377', 'rito V607 protegido byte a byte');
 ok(hash(wisdomStyles) === '765e5f3a8ca8670c465df6c62838ceaa54a7b7568a4307da94e0e987f1a37118', 'visual V607 protegido byte a byte');
-ok(hash(tarot) === 'df82aab23d6b74b52d455202484d95aa802cc0e3ed3383e28005b49950594568', 'Tarot protegido byte a byte');
+ok(hash(tarot) === '7c6ed126a83031f429eb1e887926c97b0b3614c175caebea3335e422a1ac1fe0', 'Câmara Violeta V614 protegida byte a byte');
 ok(hash(tarotStyles) === '53bd7cd30891f4473fe85addbebfe1f09c8edb7768e9bc945572e33c5e0da3a6', 'visual do Tarot protegido byte a byte');
 ok(hash(daily) === 'c5ca4de3881fc03a3425cc4a2e1d5c4703f9ce188e4640649f63bc136f68783f', 'Carta do Dia protegida byte a byte');
 ok(hash(dailyStyles) === '4ab92a4f206d75d51bd7b276408b6d057dcd9886a58f941c65a1777d898c7014', 'visual diário protegido byte a byte');

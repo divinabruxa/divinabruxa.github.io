@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
-const css = await readFile(new URL('./tarot-livre-soul-v610.css', import.meta.url),'utf8');
+const css = await readFile(new URL('./tarot-livre-world-v614.css', import.meta.url),'utf8');
 const profiles = Object.freeze([
   ['iphone-se-p',375,667,2],['iphone-13-p',390,844,3],
   ['iphone-14-pro-p',393,852,3],['iphone-15-pro-max-p',430,932,3],
@@ -32,5 +32,8 @@ ok(css.includes('touch-action:manipulation'), 'toque sem atraso');
 ok(css.includes('-webkit-tap-highlight-color:transparent'), 'resposta limpa no Safari');
 ok(css.includes('@media(prefers-reduced-motion:reduce)'), 'movimento reduzido');
 ok(!/@keyframes|backdrop-filter|filter\s*:|animation\s*:/.test(css), 'sem peso contínuo');
+ok(css.includes('[data-tarot-world="v614"]'), 'Câmara ativa nas oito geometrias');
+ok(css.includes('.orbital-cards') && css.includes('.altar-rings'), 'listas e anéis antigos removidos do campo');
+ok(css.includes('content-visibility:auto'), 'Mesa Real renderizada somente ao aproximar');
 
-console.log(`PASS ${checks}/${checks} — Tarot Livre em 8 geometrias iPhone`);
+console.log(`PASS ${checks}/${checks} — Câmara Violeta em 8 geometrias iPhone`);

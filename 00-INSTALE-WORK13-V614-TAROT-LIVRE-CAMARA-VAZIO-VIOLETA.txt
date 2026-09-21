@@ -1,0 +1,17 @@
+DIVINA BRUXA — WORK13 V614
+TAROT LIVRE · CÂMARA DO VAZIO VIOLETA
+
+PRÉ-REQUISITO
+WORK13 V613 instalado.
+
+INSTALAÇÃO
+1. Faça backup da instalação atual.
+2. Extraia este ZIP na raiz do site.
+3. Autorize a substituição dos arquivos com o mesmo nome.
+4. Não remova arquivos anteriores.
+5. Publique e abra o site uma vez com internet para o cache V614 assumir.
+
+TESTE CURTO
+Menu → Tarot Livre → toque a Orbe → veja uma carta → abra o pentagrama → volte.
+A Orbe revela; o pentagrama abre o menu.
+
