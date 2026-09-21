@@ -98,7 +98,7 @@ ok(entry.includes('globalOrbMenuCycle:true') && entry.includes('everyRealityCanC
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
 ok(count(core,/^\s*'\.\//gm) === 58, '58 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v612-global-pentagram-tarot-fix'"), 'cache próprio');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v613-menu-global-vivo'"), 'cache próprio');
 ok(sw.includes("'./biblioteca-soul-v610.js?v=610-work13-library-soul'"), 'JS no cache');
 ok(sw.includes("'./biblioteca-soul-v610.css?v=610-work13-library-soul'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_LIBRARY_SOUL_ACTIVE'), 'ativação comunicada');

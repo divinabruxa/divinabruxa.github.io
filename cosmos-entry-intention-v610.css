@@ -1,4 +1,4 @@
-/* WORK13 V612 — pentagrama global no canto; a Orbe do Tarot só revela. */
+/* WORK13 V613 — o menu global vive antes, durante e depois de cada travessia. */
 .cosmos-entry-intent{
   appearance:none;
   position:fixed;
@@ -67,18 +67,29 @@
   transform:scale(.88);
 }
 .cosmos-entry-intent[data-response="answering"] img{animation-duration:720ms}
+.cosmos-entry-intent[data-response="menu-open"]{
+  opacity:.9;
+  transform:scale(.86);
+}
+.cosmos-entry-intent[data-response="menu-open"]::before{
+  opacity:1;
+  transform:scale(1.08);
+}
+.cosmos-entry-intent[data-response="menu-open"] img{animation-duration:2.7s}
+.cosmos-entry-intent[data-response="closing"]{
+  pointer-events:none;
+  opacity:.48;
+  transform:scale(.78);
+}
 .cosmos-entry-intent:focus-visible{outline:2px solid rgba(255,222,174,.9);outline-offset:4px}
-.cosmos-entry-intent[data-response="crossing"],
-.cosmos-entry-intent[data-response="silent"],
 .cosmos-entry-intent[aria-hidden="true"]{
   pointer-events:none;
   opacity:0;
   transform:translateY(-8px) scale(.72);
 }
-html[data-menu-state]:not([data-menu-state="closed"]) .cosmos-entry-intent,
-html[data-work12-state="DEPART"] .cosmos-entry-intent,
-html[data-work12-state="TRAVEL"] .cosmos-entry-intent,
-html[data-work12-state="ARRIVE"] .cosmos-entry-intent{
+html[data-menu-state="closed"][data-work12-state="depart" i] .cosmos-entry-intent,
+html[data-menu-state="closed"][data-work12-state="travel" i] .cosmos-entry-intent,
+html[data-menu-state="closed"][data-work12-state="arrive" i] .cosmos-entry-intent{
   pointer-events:none;
   opacity:0;
   transform:translateY(-8px) scale(.72);
@@ -91,7 +102,7 @@ html[data-menu-state="closed"][data-experience-state="moving"] .cosmos-entry-int
 
 /* O pentagrama substitui visualmente o antigo gatilho, sem remover o nó que
    o menu V593 usa como âncora de acessibilidade. */
-html[data-work13-menu="pentagram-v612"] #menuBtn.menu-button{
+html[data-work13-menu="pentagram-v613"] #menuBtn.menu-button{
   visibility:hidden!important;
   pointer-events:none!important;
 }
@@ -113,6 +124,22 @@ html[data-work13-menu="pentagram-v612"] #menuBtn.menu-button{
   background:radial-gradient(circle,rgba(255,245,217,.98),rgba(255,65,60,.56) 38%,transparent 72%);
 }
 
+/* Vida do menu: o motor V593 continua mostrando só duas realidades por
+   respiração. Esta camada move apenas luz e corrente, nunca cria outro menu. */
+html[data-work13-menu="pentagram-v613"] #divinaOrbitalMenuV502 .db502-menu__backdrop::after{
+  transform-origin:50% 52%;
+  animation:db613MenuCurrent 12s ease-in-out infinite;
+}
+html[data-work13-menu="pentagram-v613"] #divinaOrbitalMenuV502[data-bubble-state="breath"] .db502-portal.is-offered .db502-portal__light{
+  animation:db613MenuSoul 5.8s ease-in-out infinite;
+}
+html[data-work13-menu="pentagram-v613"] #divinaOrbitalMenuV502[data-bubble-state="breath"] .db502-portal.is-offered:nth-child(even) .db502-portal__light{
+  animation-delay:-2.7s;
+}
+html[data-work13-menu="pentagram-v613"] #divinaOrbitalMenuV502 .db502-menu__center.has-living-orb .db502-menu__halo{
+  animation:db613MenuSoul 5.8s ease-in-out infinite;
+}
+
 @keyframes db611PentagramBreath{
   0%,100%{opacity:.78;transform:scale(.94)}
   50%{opacity:1;transform:scale(1)}
@@ -125,6 +152,14 @@ html[data-work13-menu="pentagram-v612"] #menuBtn.menu-button{
   0%,42%,100%{opacity:.66;transform:translate(-50%,-50%) scale(.68)}
   50%{opacity:1;transform:translate(-50%,-50%) scale(1.04)}
   58%{opacity:.78;transform:translate(-50%,-50%) scale(.82)}
+}
+@keyframes db613MenuCurrent{
+  0%,100%{opacity:.22;transform:rotate(-5deg) scale(.98)}
+  50%{opacity:.38;transform:rotate(3deg) scale(1.035)}
+}
+@keyframes db613MenuSoul{
+  0%,100%{opacity:.48;scale:.9}
+  50%{opacity:.88;scale:1.08}
 }
 
 @media(max-width:430px){

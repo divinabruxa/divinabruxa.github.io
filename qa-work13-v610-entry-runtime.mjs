@@ -61,13 +61,20 @@ const fire = (target, type, detail = {}) => {
 ok(entry.attrs['aria-hidden'] === 'false', 'convite nasce visível');
 ok(entry.tabIndex === 0, 'convite focável');
 ok(entry.dataset.response === 'ready', 'convite nasce pronto para responder');
-ok(entry.dataset.work13MenuSymbol === 'pentagram-v612', 'pentagrama assume o gesto do menu');
+ok(entry.dataset.work13MenuSymbol === 'pentagram-v613', 'pentagrama assume o gesto do menu global');
 ok(entry.dataset.work13MenuPosition === 'top-corner', 'pentagrama vive no canto superior');
+ok(entry.dataset.work13MenuRole === 'global-toggle', 'pentagrama abre e fecha o campo vivo');
 ok(entry.parentElement === doc.body, 'pentagrama movido para a camada global');
 ok(entry.attrs['aria-label'] === 'Abrir o menu mágico', 'pentagrama tem nome acessível sem texto visível');
 ok(controller.status().pentagramReady === true, 'imagem do pentagrama pronta');
 ok(controller.status().visibleEntryWords === 0, 'nenhuma palavra de entrada visível');
 ok(controller.status().globalPentagram === true, 'pentagrama disponível em todas as realidades');
+ok(controller.status().globalMenuOnEveryPage === true, 'menu pertence a todas as páginas');
+ok(controller.status().pentagramVisibleWhileMenuOpen === true, 'pentagrama permanece dentro do ciclo do menu');
+ok(controller.status().pentagramTogglesMenu === true, 'mesmo gesto abre e fecha');
+ok(controller.status().arrivalStateRecovery === true, 'chegada acorda o menu novamente');
+ok(controller.status().maximumVisibleIntentions === 2, 'duas realidades respiram por vez');
+ok(controller.status().menuLife === 'birth-breath-answer-silence', 'menu tem nascimento, respiração, resposta e silêncio');
 ok(controller.status().movedGlobal === true, 'camada global confirmada');
 ok(controller.status().renamedRealities === 15, '15 realidades nomeadas');
 ok(homeLabel.textContent === 'Início', 'centro retorna ao Início');
@@ -89,11 +96,24 @@ ok(controller.status().openCalls === 1, 'abertura registrada');
 ok(entry.dataset.response === 'crossing', 'convite entrega a travessia');
 
 fire(doc, 'divina:menu-state', { state:'opening' });
-ok(entry.attrs['aria-hidden'] === 'true', 'convite recua ao nascer o menu');
-ok(entry.tabIndex === -1, 'convite fora da ordem durante menu');
-ok(entry.dataset.response === 'silent', 'resposta termina em silêncio');
+ok(entry.attrs['aria-hidden'] === 'false', 'pentagrama permanece visível dentro do menu');
+ok(entry.tabIndex === 0, 'pentagrama continua alcançável durante o menu');
+ok(entry.dataset.response === 'menu-open', 'pentagrama reconhece o campo aberto');
+ok(entry.attrs['aria-label'] === 'Fechar o menu mágico', 'gesto aberto anuncia o fechamento');
+ok(entry.attrs['aria-expanded'] === 'true', 'estado expandido exposto');
+let closesFromPentagram = 0;
+controller.menuResolver = () => ({
+  root:menuRoot, state:'opening', targetOpen:true,
+  open() { throw new Error('menu já aberto'); },
+  close() { closesFromPentagram += 1; return true; }
+});
+fire(entry, 'click', 1);
+ok(closesFromPentagram === 1, 'mesmo pentagrama fecha o menu');
+ok(controller.status().closeCalls === 1, 'fechamento global auditável');
+ok(entry.dataset.response === 'closing', 'fechamento responde sem corte seco');
 fire(doc, 'divina:menu-state', { state:'closed' });
 ok(entry.attrs['aria-hidden'] === 'false', 'convite retorna com a Orbe');
+ok(entry.attrs['aria-label'] === 'Abrir o menu mágico', 'gesto fechado volta a anunciar abertura');
 
 fire(orb, 'pointerdown');
 ok(pulses === 2, 'Orbe responde imediatamente sem outro gesto');
@@ -112,6 +132,8 @@ for (const route of routes) {
   ok(entry.attrs['aria-hidden'] === 'false', `pentagrama permanece disponível em ${route}`);
   ok(controller.openUniverse('orb-world') === true, `menu abre em ${route}`);
   fire(doc, 'divina:menu-state', { state:'open' });
+  ok(entry.attrs['aria-hidden'] === 'false', `pentagrama permanece no menu de ${route}`);
+  ok(entry.dataset.response === 'menu-open', `campo vivo reconhecido em ${route}`);
   ok(controller.openUniverse('orb-world') === false, `sem abertura duplicada em ${route}`);
   fire(doc, 'divina:menu-state', { state:'closed' });
 }
@@ -119,6 +141,20 @@ ok(worldMenuOpens === routes.length, 'uma abertura por realidade');
 ok(controller.status().worldOpenCalls === routes.length, 'ciclo global auditável');
 ok(controller.status().openFailures === 0, 'nenhuma falha de abertura');
 ok(orb.attrs['aria-label'] === 'Orbe viva. Toque para abrir o universo', 'Orbe anuncia o caminho global');
+
+root.dataset.work12State = 'arrive';
+entry.dataset.response = 'silent';
+fire(doc, 'divina:route-ready', { id:'tarot' });
+ok(entry.attrs['aria-hidden'] === 'true', 'pentagrama aguarda a chegada física terminar');
+root.dataset.work12State = 'rest';
+fire(doc, 'divina:work12-state', { state:'REST', route:'tarot' });
+ok(entry.attrs['aria-hidden'] === 'false', 'estado REST devolve o menu ao Tarot');
+ok(entry.dataset.response === 'ready', 'estado silencioso antigo não prende o pentagrama');
+entry.parentElement = new NodeLike();
+fire(win, 'pageshow');
+ok(entry.parentElement === doc.body, 'pageshow recoloca o menu na camada global');
+ok(controller.status().rehomes === 2, 'reconexão global registrada sem duplicar o nó');
+
 const tarotOrbTarget = {
   closest(selector) {
     if (selector === '#orb') return orb;

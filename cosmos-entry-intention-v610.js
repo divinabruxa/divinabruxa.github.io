@@ -1,12 +1,12 @@
-/* DIVINA BRUXA — WORK13 · PENTAGRAMA GLOBAL E TAROT PROTEGIDO · V612
-   O pentagrama vermelho vive no canto superior de todas as realidades e abre
-   o menu V593. No Tarot Livre, a Orbe pertence somente ao gesto de revelar. */
+/* DIVINA BRUXA — WORK13 · MENU GLOBAL VIVO E PERSISTENTE · V613
+   O pentagrama vermelho sobrevive a cada chegada, abre e fecha o mesmo menu
+   vivo em todas as realidades. No Tarot Livre, a Orbe continua só revelando. */
 
-const VERSION = 612;
+const VERSION = 613;
 
 export const COSMOS_ENTRY_INTENTION_CONTRACT_V610 = Object.freeze({
   work:'WORK13',
-  correction:'pentagrama-global-tarot-protegido',
+  correction:'menu-global-vivo-persistente',
   invitation:'pentagrama-vermelho',
   entryIntentions:1,
   visibleEntryWords:0,
@@ -14,6 +14,12 @@ export const COSMOS_ENTRY_INTENTION_CONTRACT_V610 = Object.freeze({
   pentagramIsMenu:true,
   globalPentagram:true,
   pentagramPosition:'top-corner',
+  globalMenuOnEveryPage:true,
+  pentagramVisibleWhileMenuOpen:true,
+  pentagramTogglesMenu:true,
+  arrivalStateRecovery:true,
+  maximumVisibleIntentions:2,
+  menuLife:'birth-breath-answer-silence',
   whitInsideMenu:true,
   whitResidence:'canonical-orb',
   tarotOrbAction:'reveal-only',
@@ -74,20 +80,20 @@ export class CosmosEntryIntentionV610 {
     this.route = routeNow(this.documentTarget, this.windowTarget);
     this.menuState = 'closed';
     this.openCalls = 0;
+    this.closeCalls = 0;
     this.worldOpenCalls = 0;
     this.openFailures = 0;
     this.pendingOpen = false;
     this.pulses = 0;
     this.renamedRealities = 0;
+    this.rehomes = 0;
     this.abortController = typeof AbortController === 'function' ? new AbortController() : null;
     this.movedGlobal = false;
-    if (this.entry && this.documentTarget?.body?.append && this.entry.parentElement !== this.documentTarget.body) {
-      this.documentTarget.body.append(this.entry);
-      this.movedGlobal = true;
-    }
+    this.ensureGlobalHost();
     if (this.entry?.dataset) {
-      this.entry.dataset.work13MenuSymbol = 'pentagram-v612';
+      this.entry.dataset.work13MenuSymbol = 'pentagram-v613';
       this.entry.dataset.work13MenuPosition = 'top-corner';
+      this.entry.dataset.work13MenuRole = 'global-toggle';
       this.entry.dataset.whitResidence = 'canonical-orb';
     }
     this.bind();
@@ -101,15 +107,31 @@ export class CosmosEntryIntentionV610 {
     target.addEventListener(type, handler, signal ? { ...options, signal } : options);
   }
 
+  ensureGlobalHost() {
+    const body = this.documentTarget?.body;
+    if (!this.entry || !body?.append || this.entry.parentElement === body) return false;
+    body.append(this.entry);
+    this.movedGlobal = true;
+    this.rehomes += 1;
+    return true;
+  }
+
+  isTraveling() {
+    const root = this.documentTarget?.documentElement;
+    return root?.dataset?.experienceState === 'moving'
+      || ['DEPART','TRAVEL','ARRIVE'].includes(String(root?.dataset?.work12State || '').toUpperCase());
+  }
+
   isHomeReady() {
     return this.route === 'home' && this.isUniverseReady();
   }
 
   isUniverseReady() {
-    const root = this.documentTarget?.documentElement;
-    const moving = root?.dataset?.experienceState === 'moving'
-      || ['DEPART','TRAVEL','ARRIVE'].includes(String(root?.dataset?.work12State || '').toUpperCase());
-    return this.menuState === 'closed' && !moving;
+    return this.menuState === 'closed' && !this.isTraveling();
+  }
+
+  isLauncherAvailable() {
+    return this.menuState !== 'closed' || !this.isTraveling();
   }
 
   isCanonicalOrbTarget(target) {
@@ -140,13 +162,14 @@ export class CosmosEntryIntentionV610 {
   }
 
   respond(source = 'entry') {
-    if (!this.isUniverseReady()) return false;
+    if (!this.isLauncherAvailable()) return false;
     if (this.entry?.dataset) this.entry.dataset.response = 'answering';
     if (this.documentTarget?.documentElement?.dataset) {
       this.documentTarget.documentElement.dataset.work13EntryResponse = 'answering';
     }
     this.pulses += 1;
-    this.orbCore?.pulse?.('work13-entry-response', { intensity:source === 'orb' ? .42 : .54 });
+    const intensity = source === 'orb' ? .42 : source === 'entry-close' ? .34 : .54;
+    this.orbCore?.pulse?.('work13-entry-response', { intensity });
     return true;
   }
 
@@ -178,6 +201,30 @@ export class CosmosEntryIntentionV610 {
     return true;
   }
 
+  closeUniverse(source = 'touch') {
+    const menu = this.menuResolver?.();
+    if (!menu?.close || (this.menuState === 'closed' && !menu?.targetOpen)) return false;
+    this.pendingOpen = false;
+    this.closeCalls += 1;
+    if (this.entry?.dataset) this.entry.dataset.response = 'closing';
+    try {
+      Promise.resolve(menu.close({ restoreFocus:false, reason:`pentagram:${source}` }))
+        .catch(() => { this.openFailures += 1; });
+    } catch {
+      this.openFailures += 1;
+      return false;
+    }
+    return true;
+  }
+
+  toggleUniverse(source = 'touch') {
+    const menu = this.menuResolver?.();
+    const open = this.menuState !== 'closed'
+      || menu?.targetOpen === true
+      || ['opening','open'].includes(String(menu?.state || '').toLowerCase());
+    return open ? this.closeUniverse(source) : this.openUniverse(source);
+  }
+
   renameMenu() {
     const menu = this.menuResolver?.();
     const root = menu?.root || this.documentTarget?.getElementById?.('divinaOrbitalMenuV502');
@@ -201,6 +248,7 @@ export class CosmosEntryIntentionV610 {
 
   sync(reason = 'sync') {
     if (!this.entry) return false;
+    this.ensureGlobalHost();
     const journalThreshold = this.journalThresholdOwnsOrb(this.orb);
     if (this.orb) this.orb.setAttribute?.(
       'aria-label',
@@ -218,17 +266,26 @@ export class CosmosEntryIntentionV610 {
           ? 'Orbe viva. Toque para entrar e escrever no Diário'
         : 'Orbe viva. Toque para abrir o universo'
     );
-    const visible = this.isUniverseReady();
-    if (visible && !this.entry.dataset.response) this.entry.dataset.response = 'ready';
-    this.entry.setAttribute('aria-label', 'Abrir o menu mágico');
+    const menuOpen = this.menuState !== 'closed';
+    const traveling = this.isTraveling();
+    const visible = menuOpen || !traveling;
+    const interactive = visible && !traveling && this.menuState !== 'closing';
+    if (this.entry?.dataset) {
+      this.entry.dataset.response = menuOpen
+        ? this.menuState === 'closing' ? 'closing' : 'menu-open'
+        : visible ? 'ready' : 'traveling';
+      this.entry.dataset.route = this.route;
+    }
+    this.entry.setAttribute('aria-label', menuOpen ? 'Fechar o menu mágico' : 'Abrir o menu mágico');
     this.entry.setAttribute('aria-hidden', String(!visible));
-    this.entry.setAttribute('aria-expanded', String(this.menuState !== 'closed'));
-    this.entry.tabIndex = visible ? 0 : -1;
+    this.entry.setAttribute('aria-expanded', String(menuOpen));
+    this.entry.tabIndex = interactive ? 0 : -1;
     const root = this.documentTarget?.documentElement;
     if (root?.dataset) {
-      root.dataset.work13Entry = visible ? 'invitation' : 'resting';
+      root.dataset.work13Entry = menuOpen ? 'menu-open' : visible ? 'invitation' : 'traveling';
       root.dataset.work13EntryReason = reason;
-      if (visible && !root.dataset.work13EntryResponse) root.dataset.work13EntryResponse = 'ready';
+      root.dataset.work13EntryResponse = menuOpen ? 'menu-open' : visible ? 'ready' : 'traveling';
+      root.dataset.work13MenuAccess = visible ? 'present' : 'traveling';
     }
     return visible;
   }
@@ -236,7 +293,7 @@ export class CosmosEntryIntentionV610 {
   bind() {
     this.listen(this.entry, 'pointerdown', event => {
       event.stopPropagation?.();
-      this.respond('entry');
+      this.respond(this.menuState === 'closed' ? 'entry' : 'entry-close');
     }, { passive:true });
     const restEntry = () => {
       if (this.menuState !== 'closed' || !this.entry?.dataset) return;
@@ -250,7 +307,7 @@ export class CosmosEntryIntentionV610 {
     this.listen(this.entry, 'click', event => {
       event.preventDefault?.();
       event.stopPropagation?.();
-      this.openUniverse(event.detail === 0 ? 'keyboard' : 'touch');
+      this.toggleUniverse(event.detail === 0 ? 'keyboard' : 'touch');
     });
     this.listen(this.orb, 'pointerdown', () => {
       if (this.route === 'tarot') return;
@@ -287,23 +344,29 @@ export class CosmosEntryIntentionV610 {
     });
     this.listen(this.documentTarget, 'divina:menu-state', event => {
       this.menuState = String(event?.detail?.state || 'closed').toLowerCase();
-      if (this.entry?.dataset) this.entry.dataset.response = this.menuState === 'closed' ? 'ready' : 'silent';
-      if (this.documentTarget?.documentElement?.dataset) {
-        this.documentTarget.documentElement.dataset.work13EntryResponse = this.menuState === 'closed' ? 'ready' : 'silent';
-      }
       this.renameMenu();
       this.sync('menu');
     });
     const onRoute = event => {
-      this.route = String(event?.detail?.id || event?.detail?.route || routeNow(this.documentTarget, this.windowTarget)).toLowerCase();
+      this.route = String(event?.detail?.id || event?.detail?.route || event?.detail?.to || routeNow(this.documentTarget, this.windowTarget)).toLowerCase();
       this.menuState = 'closed';
       this.sync('route');
     };
     this.listen(this.documentTarget, 'divina:route-ready', onRoute);
     this.listen(this.documentTarget, 'divina:page-ready', onRoute);
+    this.listen(this.documentTarget, 'divina:supreme-orb-did-navigate', onRoute);
+    this.listen(this.documentTarget, 'divina:work12-state', event => {
+      const state = String(event?.detail?.state || '').toUpperCase();
+      this.sync(['REST','QUIET','REVEAL'].includes(state) ? 'work12-rest' : 'work12-travel');
+    });
+    this.listen(this.documentTarget, 'divina:experience-intelligence-state', () => this.sync('experience-state'));
     this.listen(this.windowTarget, 'hashchange', () => {
       this.route = routeNow(this.documentTarget, this.windowTarget);
       this.sync('hash');
+    }, { passive:true });
+    this.listen(this.windowTarget, 'pageshow', () => {
+      this.route = routeNow(this.documentTarget, this.windowTarget);
+      this.sync('pageshow');
     }, { passive:true });
   }
 
@@ -315,7 +378,14 @@ export class CosmosEntryIntentionV610 {
       pentagramReady:Boolean(this.pentagram),
       globalPentagram:true,
       pentagramPosition:'top-corner',
+      globalMenuOnEveryPage:true,
+      pentagramVisibleWhileMenuOpen:true,
+      pentagramTogglesMenu:true,
+      arrivalStateRecovery:true,
+      maximumVisibleIntentions:2,
+      menuLife:'birth-breath-answer-silence',
       movedGlobal:this.movedGlobal,
+      rehomes:this.rehomes,
       whitInsideMenu:true,
       whitResidence:'canonical-orb',
       tarotOrbAction:'reveal-only',
@@ -324,6 +394,7 @@ export class CosmosEntryIntentionV610 {
       route:this.route,
       menuState:this.menuState,
       openCalls:this.openCalls,
+      closeCalls:this.closeCalls,
       worldOpenCalls:this.worldOpenCalls,
       openFailures:this.openFailures,
       pendingOpen:this.pendingOpen,

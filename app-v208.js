@@ -73,7 +73,7 @@ import { createLivingWisdomPathV607 } from './living-wisdom-path-v607.js?v=607-w
 import { createLivingCommercePathV608 } from './living-commerce-path-v608.js?v=608-work13-commerce-clarity';
 import { createLivingMediaSkinsV609 } from './living-media-skins-v609.js?v=609-work13-media-skins';
 import { createCosmosFinalOrchestraV610 } from './cosmos-final-orchestra-v610.js?v=610-work13-final-orchestra';
-import { createCosmosEntryIntentionV610 } from './cosmos-entry-intention-v610.js?v=612-global-pentagram-tarot-fix';
+import { createCosmosEntryIntentionV610 } from './cosmos-entry-intention-v610.js?v=613-menu-global-vivo';
 import { createCosmosWorldPresenceV610 } from './cosmos-world-presence-v610.js?v=610-work13-final-presence';
 import { createTarotLivreSoulV610 } from './tarot-livre-soul-v610.js?v=610-work13-tarot-soul';
 import { createCartaDoDiaSoulV610 } from './carta-do-dia-soul-v610.js?v=610-work13-daily-soul';
@@ -670,11 +670,11 @@ navigator.serviceWorker?.addEventListener('message', event => {
     return;
   }
   if (event.data?.type === 'DIVINA_WORK13_ENTRY_ACTIVE') {
-    document.documentElement.dataset.work13EntryWorker = `v${event.data.version || 612}-pentagram`;
+    document.documentElement.dataset.work13EntryWorker = `v${event.data.version || 613}-global-menu`;
     return;
   }
   if (event.data?.type === 'DIVINA_WORK13_PENTAGRAM_MENU_ACTIVE') {
-    document.documentElement.dataset.work13MenuWorker = `v${event.data.version || 612}-global-pentagram`;
+    document.documentElement.dataset.work13MenuWorker = `v${event.data.version || 613}-living-global-menu`;
     return;
   }
   if (event.data?.type === 'DIVINA_WORK13_FINAL_ORCHESTRA_ACTIVE') {
@@ -2289,7 +2289,7 @@ const cosmosFinalOrchestra = safely('WORK13 · Orquestra Final V610', () =>
     journey:orbIOSJourney
   })
 );
-const cosmosEntryIntention = safely('WORK13 · Pentagrama Global e Tarot Protegido V612', () =>
+const cosmosEntryIntention = safely('WORK13 · Menu Global Vivo e Persistente V613', () =>
   createCosmosEntryIntentionV610({
     continuity:finalContinuity,
     orbCore:supremeOrb,
@@ -2547,7 +2547,36 @@ document.documentElement.dataset.work13Macro = 'pentagrama-global-tarot-protegid
 document.documentElement.dataset.work13Menu = 'pentagram-v612';
 window.orbe.pentagramMenu = window.divinaWork13PentagramMenuV612;
 window.divinaCosmosVivoV612 = window.divinaWork13PentagramMenuV612;
-window.divinaCosmosVivo = window.divinaWork13PentagramMenuV612;
+window.divinaWork13MenuGlobalVivoV613 = Object.freeze({
+  version:613,
+  work:'WORK13',
+  correction:'menu-global-vivo-persistente',
+  base:window.divinaWork13PentagramMenuV612,
+  entryIntention:cosmosEntryIntention,
+  status:() => Object.freeze({
+    release:'V613',
+    globalMenuOnEveryPage:true,
+    pentagramPosition:'top-corner',
+    pentagramVisibleWhileMenuOpen:true,
+    pentagramTogglesMenu:true,
+    arrivalStateRecovery:true,
+    menuRealities:15,
+    maximumVisibleIntentions:2,
+    menuLife:'birth-breath-answer-silence',
+    tarotOrbAction:'reveal-only',
+    tarotOrbOpensMenu:false,
+    onePhysicalOrb:document.querySelectorAll?.('#orb')?.length === 1,
+    oneCanonicalCanvas:document.querySelectorAll?.('#orbCanvas')?.length === 1,
+    automaticWhitSpeech:false,
+    work14:false,
+    entry:cosmosEntryIntention?.status?.() || null
+  })
+});
+document.documentElement.dataset.work13Macro = 'menu-global-vivo-persistente';
+document.documentElement.dataset.work13Menu = 'pentagram-v613';
+window.orbe.pentagramMenu = window.divinaWork13MenuGlobalVivoV613;
+window.divinaCosmosVivoV613 = window.divinaWork13MenuGlobalVivoV613;
+window.divinaCosmosVivo = window.divinaWork13MenuGlobalVivoV613;
 window.whit = whitCore;
 
 window.divinaWhitV212 = Object.freeze({

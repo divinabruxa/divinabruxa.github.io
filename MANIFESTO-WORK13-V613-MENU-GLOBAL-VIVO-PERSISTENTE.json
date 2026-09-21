@@ -1,0 +1,71 @@
+{
+  "release": "V613",
+  "work": "WORK13",
+  "correction": "menu-global-vivo-persistente",
+  "protectedBase": "WORK13 V612 Pentagrama Global e Tarot Protegido",
+  "law": "one-orb-one-universe-one-presence-one-journey",
+  "rootCause": "route-ready ocorria durante ARRIVE; o pentagrama era silenciado e não escutava a transição posterior para REST",
+  "result": {
+    "globalMenuSymbol": "pentagrama-vermelho",
+    "position": "top-corner",
+    "availableOnEveryPublicReality": true,
+    "publicRealities": 15,
+    "visibleWhileMenuOpen": true,
+    "sameSymbolOpensAndCloses": true,
+    "arrivalStateRecovery": true,
+    "pageShowRecovery": true,
+    "maximumVisibleIntentions": 2,
+    "menuLife": "birth-breath-answer-silence",
+    "whitInsideMenu": true,
+    "tarotOrbAction": "reveal-only",
+    "tarotOrbOpensMenu": false,
+    "oldMenuTriggerVisible": false,
+    "visibleEntryWord": null
+  },
+  "requiredExistingAsset": "pentagrama-menu-vivo-v611.webp",
+  "productionFiles": [
+    { "file": "index.html", "action": "replace" },
+    { "file": "app-v208.js", "action": "replace" },
+    { "file": "cosmos-entry-intention-v610.js", "action": "replace" },
+    { "file": "cosmos-entry-intention-v610.css", "action": "replace" },
+    { "file": "sw.js", "action": "replace" }
+  ],
+  "preserved": {
+    "home": true,
+    "universe": true,
+    "canonicalOrb": 1,
+    "canonicalCanvas": 1,
+    "pentagramAsset": 1,
+    "work12": true,
+    "work13": true,
+    "realitySouls": 6,
+    "routes": 17,
+    "tarotCore": true,
+    "privateJournal": true,
+    "work14": false
+  },
+  "performance": {
+    "newImages": 0,
+    "newRenderers": 0,
+    "newCanvases": 0,
+    "newOrbs": 0,
+    "javascriptAnimationLoops": 0,
+    "newCssKeyframes": 2,
+    "mutationObservers": 0,
+    "networkCalls": 0,
+    "modelCallsAtRuntime": 0,
+    "reducedMotion": true,
+    "forcedColors": true,
+    "safeAreaTopRight": true
+  },
+  "qa": {
+    "suites": 26,
+    "checksPassed": 2768,
+    "checksTotal": 2768,
+    "publicRealityCycles": 15,
+    "serviceWorkerAssets": 58,
+    "serviceWorkerAtomicAssetsChecked": 58,
+    "iphoneGeometries": 8,
+    "physicalDeviceClaim": false
+  }
+}

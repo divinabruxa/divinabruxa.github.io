@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — WORK13 V610 · QA DO BOOT RECUPERÁVEL */
+/* DIVINA BRUXA — WORK13 V613 · QA DO BOOT RECUPERÁVEL */
 import fs from 'node:fs';
 import vm from 'node:vm';
 
@@ -91,7 +91,7 @@ function harness() {
     }
   };
   context.window = context;
-  vm.runInContext(bootScript, vm.createContext(context), { filename:'work13-inline-boot-v610.js' });
+  vm.runInContext(bootScript, vm.createContext(context), { filename:'work13-inline-boot-v613.js' });
   const runDelay = delay => {
     for (const [id, timer] of [...timers]) {
       if (timer.delay !== delay) continue;
@@ -107,11 +107,11 @@ function harness() {
 }
 
 check('boot:script-found', Boolean(bootScript));
-check('boot:work13-meta-v612', indexSource.includes('name="divina-work13" content="V612"'));
+check('boot:work13-meta-v613', indexSource.includes('name="divina-work13" content="V613"'));
 check('boot:work12-meta-v600', indexSource.includes('name="divina-work12" content="V600"'));
-check('boot:app-v612', indexSource.includes('app-v208.js?v=612-global-pentagram-tarot-fix'));
-check('boot:worker-v612', indexSource.includes("register('./sw.js?v=612-global-pentagram-tarot-fix'"));
-check('boot:v612-bootstrap', indexSource.includes("__divinaSWBootstrap='v612-global-pentagram-tarot-fix-inline'"));
+check('boot:app-v613', indexSource.includes('app-v208.js?v=613-menu-global-vivo'));
+check('boot:worker-v613', indexSource.includes("register('./sw.js?v=613-menu-global-vivo'"));
+check('boot:v613-bootstrap', indexSource.includes("__divinaSWBootstrap='v613-menu-global-vivo-inline'"));
 check('boot:v610-presence-style', indexSource.includes('cosmos-world-presence-v610.css?v=610-work13-final-presence'));
 check('boot:v609-style-preserved', indexSource.includes('living-media-skins-v609.css?v=609-work13-media-skins'));
 check('boot:v608-style-preserved', indexSource.includes('living-commerce-path-v608.css?v=608-work13-commerce-clarity'));
@@ -137,32 +137,32 @@ watchdog.runDelay(180);
 check('boot:watchdog-reveals-home', watchdog.home.classList.contains('active') && watchdog.body.dataset.screen === 'home');
 check('boot:watchdog-hides-portal', watchdog.portal.hidden && watchdog.portal.attributes.get('aria-hidden') === 'true');
 check('boot:watchdog-work12-v600', watchdog.root.dataset.work12Boot === 'released-v600' && watchdog.root.dataset.work12BootReason === 'boot-watchdog');
-check('boot:watchdog-work13-v610', watchdog.root.dataset.work13Boot === 'released-v610');
+check('boot:watchdog-work13-orchestra-v610', watchdog.root.dataset.work13Boot === 'released-v610');
 check('boot:watchdog-event-work12', watchdog.events.some(event => event.type === 'divina:work12-boot-release' && event.detail.version === 600));
 check('boot:recovery-source-v600', watchdog.events.some(event => event.type === 'divina:loading-bypass' && event.detail.source === 'work12-one-style-v600'));
 
 const manual = harness();
 manual.click();
 check('boot:manual-opens', manual.home.classList.contains('active') && manual.root.dataset.work12BootReason === 'manual');
-check('boot:manual-work13', manual.root.dataset.work13Boot === 'released-v610');
+check('boot:manual-work13-orchestra', manual.root.dataset.work13Boot === 'released-v610');
 
 const healthy = harness();
 healthy.root.dataset.appShell = 'v180';
 healthy.fire('divina:boot-ready');
 healthy.runDelay(4500);
 check('boot:healthy-work12-ready', healthy.root.dataset.work12Boot === 'ready-v600');
-check('boot:healthy-work13-ready', healthy.root.dataset.work13Boot === 'ready-v610');
+check('boot:healthy-work13-orchestra-ready', healthy.root.dataset.work13Boot === 'ready-v610');
 check('boot:healthy-never-bypassed', !healthy.home.classList.contains('active'));
 healthy.fire('load');
 await Promise.resolve();
-check('boot:registers-v612', healthy.registrations.some(item => item.url === './sw.js?v=612-global-pentagram-tarot-fix'));
+check('boot:registers-v613', healthy.registrations.some(item => item.url === './sw.js?v=613-menu-global-vivo'));
 check('boot:no-cache-registration', healthy.registrations.some(item => item.options?.updateViaCache === 'none'));
 
 const failures = checks.filter(item => !item.pass);
 console.log(JSON.stringify({
-  release:'V610',
+  release:'V613',
   work:'WORK13',
-  macroStage:'10-of-10 / final-presence-boot-runtime',
+  macroStage:'WORK13 / menu-global-vivo-boot-runtime',
   state:failures.length ? 'FAIL' : 'PASS',
   passed:checks.length - failures.length,
   failed:failures.length,

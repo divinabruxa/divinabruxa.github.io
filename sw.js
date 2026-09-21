@@ -1,16 +1,16 @@
-/* DIVINA BRUXA — WORK13 · PENTAGRAMA GLOBAL E TAROT PROTEGIDO · V612
-   O WORK12 V600 e as almas V602–V611 permanecem protegidos. A instalacao so
-   assume o portal quando o pentagrama global e a Orbe reveladora do Tarot
-   convivem sem disputa de gesto.
+/* DIVINA BRUXA — WORK13 · MENU GLOBAL VIVO E PERSISTENTE · V613
+   O WORK12 V600 e as almas V602–V612 permanecem protegidos. A instalacao so
+   assume o portal quando o pentagrama sobrevive a todas as chegadas, abre e
+   fecha o campo vivo, e a Orbe do Tarot continua apenas revelando.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
-const VERSION = 612;
+const VERSION = 613;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work13-v612-global-pentagram-tarot-fix';
+const CACHE_NAME = 'divina-bruxa-work13-v613-menu-global-vivo';
 const CORE = Object.freeze([
   './index.html',
-  './app-v208.js?v=612-global-pentagram-tarot-fix',
+  './app-v208.js?v=613-menu-global-vivo',
   './pentagrama-menu-vivo-v611.webp',
   './tarot-livre-soul-v610.js?v=610-work13-tarot-soul',
   './tarot-livre-soul-v610.css?v=610-work13-tarot-soul',
@@ -24,8 +24,8 @@ const CORE = Object.freeze([
   './biblioteca-soul-v610.css?v=610-work13-library-soul',
   './diario-soul-v610.js?v=610-work13-journal-soul',
   './diario-soul-v610.css?v=610-work13-journal-soul',
-  './cosmos-entry-intention-v610.js?v=612-global-pentagram-tarot-fix',
-  './cosmos-entry-intention-v610.css?v=612-global-pentagram-tarot-fix',
+  './cosmos-entry-intention-v610.js?v=613-menu-global-vivo',
+  './cosmos-entry-intention-v610.css?v=613-menu-global-vivo',
   './cosmos-world-presence-v610.js?v=610-work13-final-presence',
   './cosmos-world-presence-v610.css?v=610-work13-final-presence',
   './cosmos-context-memory-v602.js?v=602-work13-context',
@@ -81,7 +81,7 @@ const fetchCore = async path => {
 
 const validateCore = async responses => {
   const index = await responses.get('./index.html')?.clone().text();
-  const app = await responses.get('./app-v208.js?v=612-global-pentagram-tarot-fix')?.clone().text();
+  const app = await responses.get('./app-v208.js?v=613-menu-global-vivo')?.clone().text();
   const tarotLivreSoul = await responses.get('./tarot-livre-soul-v610.js?v=610-work13-tarot-soul')?.clone().text();
   const tarotLivreSoulStyles = await responses.get('./tarot-livre-soul-v610.css?v=610-work13-tarot-soul')?.clone().text();
   const cartaDoDiaSoul = await responses.get('./carta-do-dia-soul-v610.js?v=610-work13-daily-soul')?.clone().text();
@@ -94,8 +94,8 @@ const validateCore = async responses => {
   const bibliotecaSoulStyles = await responses.get('./biblioteca-soul-v610.css?v=610-work13-library-soul')?.clone().text();
   const diarioSoul = await responses.get('./diario-soul-v610.js?v=610-work13-journal-soul')?.clone().text();
   const diarioSoulStyles = await responses.get('./diario-soul-v610.css?v=610-work13-journal-soul')?.clone().text();
-  const entryIntention = await responses.get('./cosmos-entry-intention-v610.js?v=612-global-pentagram-tarot-fix')?.clone().text();
-  const entryStyles = await responses.get('./cosmos-entry-intention-v610.css?v=612-global-pentagram-tarot-fix')?.clone().text();
+  const entryIntention = await responses.get('./cosmos-entry-intention-v610.js?v=613-menu-global-vivo')?.clone().text();
+  const entryStyles = await responses.get('./cosmos-entry-intention-v610.css?v=613-menu-global-vivo')?.clone().text();
   const worldPresence = await responses.get('./cosmos-world-presence-v610.js?v=610-work13-final-presence')?.clone().text();
   const worldStyles = await responses.get('./cosmos-world-presence-v610.css?v=610-work13-final-presence')?.clone().text();
   const contextMemory = await responses.get('./cosmos-context-memory-v602.js?v=602-work13-context')?.clone().text();
@@ -137,13 +137,13 @@ const validateCore = async responses => {
   const soul = await responses.get('./whit-orb-soul-bridge-v581.js?v=592-work12-navigation')?.clone().text();
   if (!index?.includes('name="divina-work12" content="V600"')
     || !index.includes('name="divina-live-audit" content="V600"')
-    || !index.includes('name="divina-work13" content="V612"')) {
+    || !index.includes('name="divina-work13" content="V613"')) {
     throw new Error('work13-index-version-mismatch');
   }
-  if (!index.includes('app-v208.js?v=612-global-pentagram-tarot-fix')
-    || !index.includes('name="divina-work13-correction" content="V612-PENTAGRAMA-GLOBAL-TAROT-PROTEGIDO"')
+  if (!index.includes('app-v208.js?v=613-menu-global-vivo')
+    || !index.includes('name="divina-work13-correction" content="V613-MENU-GLOBAL-VIVO-PERSISTENTE"')
     || !index.includes('id="divinaCosmosEntryIntentionV610"')
-    || !index.includes('cosmos-entry-intention-v610.css?v=612-global-pentagram-tarot-fix')
+    || !index.includes('cosmos-entry-intention-v610.css?v=613-menu-global-vivo')
     || !index.includes('id="divinaCosmosWorldPresenceV610"')
     || !index.includes('cosmos-world-presence-v610.css?v=610-work13-final-presence')
     || !index.includes('id="cosmosEntryIntent"')
@@ -256,11 +256,11 @@ const validateCore = async responses => {
     || !app.includes('work14:false')) {
     throw new Error('work13-app-final-orchestra-mismatch');
   }
-  if (!app.includes("cosmos-entry-intention-v610.js?v=612-global-pentagram-tarot-fix")
+  if (!app.includes("cosmos-entry-intention-v610.js?v=613-menu-global-vivo")
     || !app.includes('createCosmosEntryIntentionV610({')
     || !app.includes('entryIntention:cosmosEntryIntention')
     || !app.includes("invitation:'pentagrama-vermelho'")
-    || !app.includes('divinaWork13PentagramMenuV612')
+    || !app.includes('divinaWork13MenuGlobalVivoV613')
     || !app.includes('visibleEntryWords:0')
     || !app.includes('whitInsideMenu:true')) {
     throw new Error('work13-entry-app-mismatch');
@@ -529,11 +529,17 @@ const validateCore = async responses => {
   if (!entryIntention?.includes('COSMOS_ENTRY_INTENTION_CONTRACT_V610')
     || !entryIntention.includes("invitation:'pentagrama-vermelho'")
     || !entryIntention.includes('entryIntentions:1')
-    || !entryIntention.includes("correction:'pentagrama-global-tarot-protegido'")
+    || !entryIntention.includes("correction:'menu-global-vivo-persistente'")
     || !entryIntention.includes('visibleEntryWords:0')
     || !entryIntention.includes('pentagramIsMenu:true')
     || !entryIntention.includes('globalPentagram:true')
     || !entryIntention.includes("pentagramPosition:'top-corner'")
+    || !entryIntention.includes('globalMenuOnEveryPage:true')
+    || !entryIntention.includes('pentagramVisibleWhileMenuOpen:true')
+    || !entryIntention.includes('pentagramTogglesMenu:true')
+    || !entryIntention.includes('arrivalStateRecovery:true')
+    || !entryIntention.includes('maximumVisibleIntentions:2')
+    || !entryIntention.includes("menuLife:'birth-breath-answer-silence'")
     || !entryIntention.includes('whitInsideMenu:true')
     || !entryIntention.includes("tarotOrbAction:'reveal-only'")
     || !entryIntention.includes('tarotOrbOpensMenu:false')
@@ -546,7 +552,12 @@ const validateCore = async responses => {
     || !entryIntention.includes('realityOwnedOrbActionsPreserved:true')
     || !entryIntention.includes('journalThresholdOrbActionPreserved:true')
     || (entryIntention.match(/if \(this\.route === 'tarot'\) return;/g) || []).length < 3
-    || !entryIntention.includes('this.documentTarget.body.append(this.entry)')
+    || !entryIntention.includes('body.append(this.entry)')
+    || !entryIntention.includes("'divina:work12-state'")
+    || !entryIntention.includes("'divina:supreme-orb-did-navigate'")
+    || !entryIntention.includes("'divina:experience-intelligence-state'")
+    || !entryIntention.includes('this.toggleUniverse(')
+    || !entryIntention.includes('menu.close({ restoreFocus:false')
     || !entryIntention.includes("target?.closest?.('[data-daily-orb-host]')")
     || !entryIntention.includes("target?.closest?.('#spreadResult')")
     || !entryIntention.includes("target.closest('[data-v585-orb-host]')")
@@ -561,7 +572,10 @@ const validateCore = async responses => {
   if (!entryStyles?.includes('.cosmos-entry-intent')
     || !entryStyles.includes('position:fixed')
     || !entryStyles.includes('env(safe-area-inset-right)')
-    || !entryStyles.includes('[data-work13-menu="pentagram-v612"] #menuBtn.menu-button')
+    || !entryStyles.includes('[data-work13-menu="pentagram-v613"] #menuBtn.menu-button')
+    || !entryStyles.includes('[data-response="menu-open"]')
+    || !entryStyles.includes('db613MenuCurrent')
+    || !entryStyles.includes('db613MenuSoul')
     || !entryStyles.includes('.cosmos-entry-intent__whit')
     || !entryStyles.includes('db611PentagramBreath')
     || !entryStyles.includes('db611WhitHeartbeat')
@@ -931,8 +945,8 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK13_COMMERCE_CLARITY_ACTIVE', version:VERSION, commerceClarityVersion:608, livingWisdomVersion:607, base:600 });
         client.postMessage({ type:'DIVINA_WORK13_MEDIA_SKINS_ACTIVE', version:VERSION, mediaSkinsVersion:609, commerceClarityVersion:608, base:600 });
         client.postMessage({ type:'DIVINA_WORK13_FINAL_ORCHESTRA_ACTIVE', version:VERSION, finalOrchestraVersion:610, mediaSkinsVersion:609, base:600, complete:true });
-        client.postMessage({ type:'DIVINA_WORK13_ENTRY_ACTIVE', version:VERSION, correction:'pentagrama-global-tarot-protegido', symbol:'pentagrama-vermelho', position:'top-corner', visibleEntryWords:0, whitInsideMenu:true, tarotOrbAction:'reveal-only', tarotOrbMenuListenersBypassed:true, base:600, complete:true });
-        client.postMessage({ type:'DIVINA_WORK13_PENTAGRAM_MENU_ACTIVE', version:VERSION, symbol:'pentagrama-vermelho', position:'top-corner', global:true, publicWorlds:15, whitInsideMenu:true, tarotOrbAction:'reveal-only', tarotOrbOpensMenu:false, tarotOrbMenuListenersBypassed:true, oneOrb:true, base:600, complete:true });
+        client.postMessage({ type:'DIVINA_WORK13_ENTRY_ACTIVE', version:VERSION, correction:'menu-global-vivo-persistente', symbol:'pentagrama-vermelho', position:'top-corner', globalMenuOnEveryPage:true, pentagramVisibleWhileMenuOpen:true, pentagramTogglesMenu:true, arrivalStateRecovery:true, visibleEntryWords:0, whitInsideMenu:true, tarotOrbAction:'reveal-only', tarotOrbMenuListenersBypassed:true, base:600, complete:true });
+        client.postMessage({ type:'DIVINA_WORK13_PENTAGRAM_MENU_ACTIVE', version:VERSION, symbol:'pentagrama-vermelho', position:'top-corner', global:true, globalMenuOnEveryPage:true, pentagramVisibleWhileMenuOpen:true, pentagramTogglesMenu:true, arrivalStateRecovery:true, publicWorlds:15, maximumVisibleIntentions:2, menuLife:'birth-breath-answer-silence', whitInsideMenu:true, tarotOrbAction:'reveal-only', tarotOrbOpensMenu:false, tarotOrbMenuListenersBypassed:true, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_FINAL_PRESENCE_ACTIVE', version:VERSION, correction:'lapidacao-final-presenca-das-realidades', publicWorlds:15, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_GLOBAL_MENU_ACTIVE', version:VERSION, correction:'menu-global-ciclo-vivo', publicWorlds:15, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_TAROT_SOUL_ACTIVE', version:VERSION, reality:'tarot', cards:78, reversed:false, meanings:false, oneOrb:true, base:600, complete:true });

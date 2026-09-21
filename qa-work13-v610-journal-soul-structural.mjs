@@ -116,7 +116,7 @@ ok(entry.includes("!['engaged','travel'].includes(state)"), 'depois do mergulho 
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
 ok(count(core,/^\s*'\.\//gm) === 58, '58 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v612-global-pentagram-tarot-fix'"), 'cache próprio');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v613-menu-global-vivo'"), 'cache próprio');
 ok(sw.includes("'./diario-soul-v610.js?v=610-work13-journal-soul'"), 'JS no cache');
 ok(sw.includes("'./diario-soul-v610.css?v=610-work13-journal-soul'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_JOURNAL_SOUL_ACTIVE'), 'ativação comunicada');
