@@ -78,6 +78,7 @@ import { createCosmosWorldPresenceV610 } from './cosmos-world-presence-v610.js?v
 import { createTarotLivreSoulV610 } from './tarot-livre-soul-v610.js?v=610-work13-tarot-soul';
 import { createCartaDoDiaSoulV610 } from './carta-do-dia-soul-v610.js?v=610-work13-daily-soul';
 import { createTiragensSoulV610 } from './tiragens-soul-v610.js?v=610-work13-spreads-soul';
+import { createEscolaSoulV610 } from './escola-soul-v610.js?v=610-work13-school-soul';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -642,6 +643,10 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK13_SCHOOL_SOUL_ACTIVE') {
+    document.documentElement.dataset.work13SchoolSoulWorker = 'v610';
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK13_SPREADS_SOUL_ACTIVE') {
     document.documentElement.dataset.work13SpreadsSoulWorker = 'v610';
     return;
@@ -2291,6 +2296,9 @@ const cartaDoDiaSoul = safely('WORK13 · Alma da Carta do Dia V610', () =>
 const tiragensSoul = safely('WORK13 · Alma das Tiragens V610', () =>
   createTiragensSoulV610({ orbCore:supremeOrb })
 );
+const escolaSoul = safely('WORK13 · Alma da Escola V610', () =>
+  createEscolaSoulV610({ orbCore:supremeOrb })
+);
 window.orbe.finalOrchestra = cosmosFinalOrchestra;
 window.orbe.cosmosSeal = cosmosFinalOrchestra;
 window.orbe.entryIntention = cosmosEntryIntention;
@@ -2298,6 +2306,7 @@ window.orbe.worldPresence = cosmosWorldPresence;
 window.orbe.tarotLivreSoul = tarotLivreSoul;
 window.orbe.cartaDoDiaSoul = cartaDoDiaSoul;
 window.orbe.tiragensSoul = tiragensSoul;
+window.orbe.escolaSoul = escolaSoul;
 window.divinaWork13TarotLivreSoulV610 = Object.freeze({
   version:610,
   work:'WORK13',
@@ -2325,6 +2334,16 @@ window.divinaWork13TiragensSoulV610 = Object.freeze({
   status:() => tiragensSoul?.status?.() || null,
   work14:false
 });
+window.divinaWork13EscolaSoulV610 = Object.freeze({
+  version:610,
+  work:'WORK13',
+  stage:'quarta-realidade-alma-propria',
+  reality:'school',
+  universe:'jardim-arcano-do-conhecimento',
+  soul:escolaSoul,
+  status:() => escolaSoul?.status?.() || null,
+  work14:false
+});
 document.documentElement.dataset.work13 = 'cosmos-vivo';
 document.documentElement.dataset.work13Macro = '10-final-orchestra';
 window.divinaWork13Macro10V610 = Object.freeze({
@@ -2338,6 +2357,7 @@ window.divinaWork13Macro10V610 = Object.freeze({
   tarotLivreSoul,
   cartaDoDiaSoul,
   tiragensSoul,
+  escolaSoul,
   contextMemory:cosmosContextMemory,
   resonance:cosmosRealityResonance,
   dailyReading:cosmicDailyReading,
@@ -2376,7 +2396,8 @@ window.divinaWork13Macro10V610 = Object.freeze({
       tarotLivreSoulStatus:tarotLivreSoul?.status?.() || null,
       cartaDoDiaSoulStatus:cartaDoDiaSoul?.status?.() || null,
       tiragensSoulStatus:tiragensSoul?.status?.() || null,
-      realitySouls:3,
+      escolaSoulStatus:escolaSoul?.status?.() || null,
+      realitySouls:4,
       allMenuDestinationsHaveFullScreens:cosmosWorldPresence?.audit?.().everyMenuDestinationHasFullScreen === true,
       livingLayers:Object.freeze([602,603,604,605,606,607,608,609]),
       worldsPreserved:17,

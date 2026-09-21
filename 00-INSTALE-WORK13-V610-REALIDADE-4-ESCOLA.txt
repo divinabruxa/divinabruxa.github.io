@@ -1,0 +1,14 @@
+DIVINA BRUXA · WORK13 V610 · REALIDADE 4 · ESCOLA
+
+1. Faça um backup da instalação atual.
+2. Envie para a raiz do site os 4 arquivos de produção deste pacote.
+3. Substitua somente app-v208.js e sw.js.
+4. Mantenha escola-soul-v610.js e escola-soul-v610.css na mesma raiz.
+5. Abra o site uma vez online, atualize e feche/reabra o PWA.
+
+Teste no iPhone:
+Home → Entrá → Escola → mergulhar → Continuar → aula → prática/concluir → Orbe/menu → voltar.
+
+Não apague os demais arquivos. Não crie WORK14.
+
+Uma Orbe. Um universo. Conhecimento que cria raiz. Uma jornada.

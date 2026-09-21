@@ -32,7 +32,7 @@ ok(app.includes('window.orbe.tiragensSoul = tiragensSoul'), 'alma publicada na O
 ok(app.includes('window.divinaWork13TiragensSoulV610'), 'estado público próprio');
 ok(app.includes("stage:'terceira-realidade-alma-propria'"), 'terceira realidade declarada');
 ok(app.includes('tiragensSoulStatus:tiragensSoul?.status?.() || null'), 'auditoria reunida');
-ok(app.includes('realitySouls:3'), 'três realidades concluídas');
+ok(app.includes('realitySouls:4'), 'quatro realidades acumuladas');
 ok(app.includes("event.data?.type === 'DIVINA_WORK13_SPREADS_SOUL_ACTIVE'"), 'worker ouvido');
 ok(app.includes('work14:false'), 'nenhum WORK14');
 
@@ -93,8 +93,8 @@ ok(spread.includes('privateContentReads:0') && spread.includes('questionReads:0'
 ok(spreadStyles.includes('[data-cosmic-spread-phase="silence"]') && spreadStyles.includes('.db605-conversation'), 'camadas visuais V605 preservadas');
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core,/^\s*'\.\//gm) === 51, '51 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v610-tiragens-soul'"), 'cache próprio');
+ok(count(core,/^\s*'\.\//gm) === 53, '53 ativos atômicos');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v610-escola-soul'"), 'cache próprio');
 ok(sw.includes("'./tiragens-soul-v610.js?v=610-work13-spreads-soul'"), 'JS no cache');
 ok(sw.includes("'./tiragens-soul-v610.css?v=610-work13-spreads-soul'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_SPREADS_SOUL_ACTIVE'), 'ativação comunicada');

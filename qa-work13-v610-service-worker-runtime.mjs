@@ -116,10 +116,10 @@ function createHarness({ brokenAsset = '', brokenContent = false } = {}) {
 
 const checks = [];
 const check = (id, condition, detail = '') => checks.push({ id, pass:Boolean(condition), detail:condition ? '' : String(detail) });
-const cacheName = 'divina-bruxa-work13-v610-tiragens-soul';
+const cacheName = 'divina-bruxa-work13-v610-escola-soul';
 const harness = createHarness();
 
-check('core:fifty-one-assets-declared', coreAssets.length === 51, coreAssets.length);
+check('core:fifty-three-assets-declared', coreAssets.length === 53, coreAssets.length);
 check('core:unique-assets', new Set(coreAssets).size === coreAssets.length);
 check('core:app-v610', coreAssets.includes('./app-v208.js?v=610-work13-final-presence'));
 check('core:tarot-soul-js', coreAssets.includes('./tarot-livre-soul-v610.js?v=610-work13-tarot-soul'));
@@ -128,6 +128,8 @@ check('core:daily-soul-js', coreAssets.includes('./carta-do-dia-soul-v610.js?v=6
 check('core:daily-soul-css', coreAssets.includes('./carta-do-dia-soul-v610.css?v=610-work13-daily-soul'));
 check('core:spreads-soul-js', coreAssets.includes('./tiragens-soul-v610.js?v=610-work13-spreads-soul'));
 check('core:spreads-soul-css', coreAssets.includes('./tiragens-soul-v610.css?v=610-work13-spreads-soul'));
+check('core:school-soul-js', coreAssets.includes('./escola-soul-v610.js?v=610-work13-school-soul'));
+check('core:school-soul-css', coreAssets.includes('./escola-soul-v610.css?v=610-work13-school-soul'));
 check('core:entry-js', coreAssets.includes('./cosmos-entry-intention-v610.js?v=610-work13-final-presence'));
 check('core:entry-css', coreAssets.includes('./cosmos-entry-intention-v610.css?v=610-work13-final-presence'));
 check('core:world-presence-js', coreAssets.includes('./cosmos-world-presence-v610.js?v=610-work13-final-presence'));
@@ -149,7 +151,7 @@ for (const event of ['install','activate','fetch','message']) check(`listener:${
 await harness.wait('install');
 const cache = harness.stores.get(cacheName);
 check('install:atomic-cache-created', cache instanceof Map);
-check('install:fifty-one-core-assets', cache?.size === 51, cache?.size);
+check('install:fifty-three-core-assets', cache?.size === 53, cache?.size);
 for (const asset of coreAssets) check(`install:${asset}`, cache?.has(asset));
 check('install:skip-after-validation', harness.counters().skipped === 1, harness.counters().skipped);
 
@@ -169,6 +171,8 @@ for (const asset of [
   './carta-do-dia-soul-v610.css?v=610-work13-daily-soul',
   './tiragens-soul-v610.js?v=610-work13-spreads-soul',
   './tiragens-soul-v610.css?v=610-work13-spreads-soul',
+  './escola-soul-v610.js?v=610-work13-school-soul',
+  './escola-soul-v610.css?v=610-work13-school-soul',
   './cosmos-entry-intention-v610.js?v=610-work13-final-presence',
   './cosmos-entry-intention-v610.css?v=610-work13-final-presence',
   './cosmos-world-presence-v610.js?v=610-work13-final-presence',
@@ -206,6 +210,7 @@ for (const type of [
   'DIVINA_WORK13_FINAL_PRESENCE_ACTIVE',
   'DIVINA_WORK13_DAILY_SOUL_ACTIVE',
   'DIVINA_WORK13_SPREADS_SOUL_ACTIVE',
+  'DIVINA_WORK13_SCHOOL_SOUL_ACTIVE',
   'DIVINA_RELEASE_READY'
 ]) check(`activate:${type}`, harness.clientMessages.some(item => item.type === type && item.version === 610));
 check('activate:context-version-v602', harness.clientMessages.some(item => item.contextVersion === 602));
@@ -222,6 +227,7 @@ check('activate:global-menu-v610', harness.clientMessages.some(item => item.type
 check('activate:tarot-soul-v610', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_TAROT_SOUL_ACTIVE' && item.reality === 'tarot' && item.cards === 78 && item.reversed === false && item.meanings === false && item.oneOrb === true));
 check('activate:daily-soul-v610', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_DAILY_SOUL_ACTIVE' && item.reality === 'daily' && item.cardsPerBrasiliaDay === 1 && item.timeZone === 'America/Sao_Paulo' && item.reversed === false && item.oneSentenceEssence === true && item.depthExplicit === true && item.oneOrb === true));
 check('activate:spreads-soul-v610', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_SPREADS_SOUL_ACTIVE' && item.reality === 'spreads' && item.methods === 15 && item.freeMethods === 4 && item.premiumMethods === 11 && item.celticCrossPositions === 10 && item.royalTableCards === 78 && item.oneSentenceSynthesis === true && item.depthExplicit === true && item.oneOrb === true));
+check('activate:school-soul-v610', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_SCHOOL_SOUL_ACTIVE' && item.reality === 'school' && item.universe === 'jardim-arcano-do-conhecimento' && item.stages === 3 && item.modules === 17 && item.lessons === 124 && item.cardLessons === 78 && item.oneNextLesson === true && item.programmeExplicit === true && item.oneOrb === true));
 
 const onlineNavigation = await harness.fetchEvent(new FakeRequest('https://divina.test/index.html#music', { mode:'navigate' }));
 check('fetch:navigation-network', (await onlineNavigation.text()).includes('name="divina-work13" content="V610"'));
@@ -236,6 +242,8 @@ for (const [file, needle] of [
   ['carta-do-dia-soul-v610.css?v=610-work13-daily-soul','[data-daily-soul="v610"]'],
   ['tiragens-soul-v610.js?v=610-work13-spreads-soul','TIRAGENS_SOUL_CONTRACT_V610'],
   ['tiragens-soul-v610.css?v=610-work13-spreads-soul','[data-spreads-soul="v610"]'],
+  ['escola-soul-v610.js?v=610-work13-school-soul','ESCOLA_SOUL_CONTRACT_V610'],
+  ['escola-soul-v610.css?v=610-work13-school-soul','[data-school-soul="v610"]'],
   ['cosmos-entry-intention-v610.js?v=610-work13-final-presence','COSMOS_ENTRY_INTENTION_CONTRACT_V610'],
   ['cosmos-entry-intention-v610.css?v=610-work13-final-presence','.cosmos-entry-intent'],
   ['cosmos-world-presence-v610.js?v=610-work13-final-presence','COSMOS_WORLD_PRESENCE_CONTRACT_V610'],
@@ -263,7 +271,7 @@ for (const [file, needle] of [
 
 await harness.message({ type:'WORK12_STATUS' });
 check('message:status-version', harness.sourceMessages.some(item => item.type === 'WORK12_STATUS' && item.version === 610));
-check('message:status-fifty-one-assets', harness.sourceMessages.some(item => item.core?.length === 51));
+check('message:status-fifty-three-assets', harness.sourceMessages.some(item => item.core?.length === 53));
 await harness.message({ type:'CLEAR_DIVINA_CACHES' });
 check('message:clear-caches', !harness.stores.has(cacheName));
 check('message:clear-confirmed', harness.sourceMessages.some(item => item.type === 'DIVINA_CACHES_CLEARED' && item.version === 610));

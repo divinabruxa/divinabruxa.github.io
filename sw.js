@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — WORK13 · ALMA DAS TIRAGENS · V610
-   O WORK12 V600, as etapas V602–V610 e as duas primeiras almas permanecem
+/* DIVINA BRUXA — WORK13 · ALMA DA ESCOLA · V610
+   O WORK12 V600, as etapas V602–V610 e as tres primeiras almas permanecem
    protegidos. A instalacao so assume o portal quando a mesma Orbe, o menu vivo,
    o rito diario e as quinze realidades completas pertencem ao mesmo corte.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
@@ -7,7 +7,7 @@
 
 const VERSION = 610;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work13-v610-tiragens-soul';
+const CACHE_NAME = 'divina-bruxa-work13-v610-escola-soul';
 const CORE = Object.freeze([
   './index.html',
   './app-v208.js?v=610-work13-final-presence',
@@ -17,6 +17,8 @@ const CORE = Object.freeze([
   './carta-do-dia-soul-v610.css?v=610-work13-daily-soul',
   './tiragens-soul-v610.js?v=610-work13-spreads-soul',
   './tiragens-soul-v610.css?v=610-work13-spreads-soul',
+  './escola-soul-v610.js?v=610-work13-school-soul',
+  './escola-soul-v610.css?v=610-work13-school-soul',
   './cosmos-entry-intention-v610.js?v=610-work13-final-presence',
   './cosmos-entry-intention-v610.css?v=610-work13-final-presence',
   './cosmos-world-presence-v610.js?v=610-work13-final-presence',
@@ -81,6 +83,8 @@ const validateCore = async responses => {
   const cartaDoDiaSoulStyles = await responses.get('./carta-do-dia-soul-v610.css?v=610-work13-daily-soul')?.clone().text();
   const tiragensSoul = await responses.get('./tiragens-soul-v610.js?v=610-work13-spreads-soul')?.clone().text();
   const tiragensSoulStyles = await responses.get('./tiragens-soul-v610.css?v=610-work13-spreads-soul')?.clone().text();
+  const escolaSoul = await responses.get('./escola-soul-v610.js?v=610-work13-school-soul')?.clone().text();
+  const escolaSoulStyles = await responses.get('./escola-soul-v610.css?v=610-work13-school-soul')?.clone().text();
   const entryIntention = await responses.get('./cosmos-entry-intention-v610.js?v=610-work13-final-presence')?.clone().text();
   const entryStyles = await responses.get('./cosmos-entry-intention-v610.css?v=610-work13-final-presence')?.clone().text();
   const worldPresence = await responses.get('./cosmos-world-presence-v610.js?v=610-work13-final-presence')?.clone().text();
@@ -354,6 +358,51 @@ const validateCore = async responses => {
     || !tiragensSoulStyles.includes('@media(prefers-reduced-motion:reduce)')
     || /@keyframes|animation\s*:|backdrop-filter|filter\s*:/.test(tiragensSoulStyles)) {
     throw new Error('work13-tiragens-soul-styles-missing');
+  }
+  if (!app.includes("escola-soul-v610.js?v=610-work13-school-soul")
+    || !app.includes('createEscolaSoulV610({ orbCore:supremeOrb })')
+    || !app.includes('window.orbe.escolaSoul = escolaSoul')
+    || !app.includes("stage:'quarta-realidade-alma-propria'")) {
+    throw new Error('work13-escola-soul-app-mismatch');
+  }
+  if (!escolaSoul?.includes('ESCOLA_SOUL_CONTRACT_V610')
+    || !escolaSoul.includes("universe:'jardim-arcano-do-conhecimento'")
+    || !escolaSoul.includes("sequence:Object.freeze(['seed','one-next-step','path','one-whole-lesson','practice','root','silence'])")
+    || !escolaSoul.includes("existingSchoolAuthority:'V555-preserved'")
+    || !escolaSoul.includes("existingChamberAuthority:'V596-preserved'")
+    || !escolaSoul.includes("existingLivingWisdomAuthority:'V607-preserved'")
+    || !escolaSoul.includes('stagesPreserved:3')
+    || !escolaSoul.includes('modulesPreserved:17')
+    || !escolaSoul.includes('lessonsPreserved:124')
+    || !escolaSoul.includes('cardLessonsPreserved:78')
+    || !escolaSoul.includes('oneNaturalNextLesson:true')
+    || !escolaSoul.includes('programmeRequiresExplicitGesture:true')
+    || !escolaSoul.includes('progressAuthorityChanges:0')
+    || !escolaSoul.includes('lessonContentChanges:0')
+    || !escolaSoul.includes('premiumAuthorityChanges:0')
+    || !escolaSoul.includes('reusesCanonicalOrb:true')
+    || !escolaSoul.includes('privateContentReads:0')
+    || !escolaSoul.includes('lessonBodyReads:0')
+    || !escolaSoul.includes('schoolNoteReads:0')
+    || !escolaSoul.includes('searchQueryReads:0')
+    || !escolaSoul.includes('permanentAnimationLoops:0')
+    || !escolaSoul.includes('mutationObservers:0')
+    || !escolaSoul.includes('deferredTimers:0')
+    || !escolaSoul.includes('work14:false')) {
+    throw new Error('work13-escola-soul-contract-missing');
+  }
+  if (!escolaSoulStyles?.includes('[data-school-soul="v610"]')
+    || !escolaSoulStyles.includes('[data-school-soul-phase="germinating"]')
+    || !escolaSoulStyles.includes('[data-school-soul-phase="lesson"]')
+    || !escolaSoulStyles.includes('[data-school-soul-phase="rooted"]')
+    || !escolaSoulStyles.includes('.school-dashboard')
+    || !escolaSoulStyles.includes('.school-v555-stages')
+    || !escolaSoulStyles.includes('.school-lesson')
+    || !escolaSoulStyles.includes('@media(max-width:430px)')
+    || !escolaSoulStyles.includes('@media(orientation:landscape)')
+    || !escolaSoulStyles.includes('@media(prefers-reduced-motion:reduce)')
+    || /@keyframes|backdrop-filter|filter\s*:/.test(escolaSoulStyles)) {
+    throw new Error('work13-escola-soul-styles-missing');
   }
   if (!entryIntention?.includes('COSMOS_ENTRY_INTENTION_CONTRACT_V610')
     || !entryIntention.includes("invitation:'Entrá'")
@@ -745,6 +794,7 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK13_TAROT_SOUL_ACTIVE', version:VERSION, reality:'tarot', cards:78, reversed:false, meanings:false, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_DAILY_SOUL_ACTIVE', version:VERSION, reality:'daily', cardsPerBrasiliaDay:1, timeZone:'America/Sao_Paulo', reversed:false, oneSentenceEssence:true, depthExplicit:true, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_SPREADS_SOUL_ACTIVE', version:VERSION, reality:'spreads', methods:15, freeMethods:4, premiumMethods:11, celticCrossPositions:10, royalTableCards:78, oneSentenceSynthesis:true, depthExplicit:true, oneOrb:true, base:600, complete:true });
+        client.postMessage({ type:'DIVINA_WORK13_SCHOOL_SOUL_ACTIVE', version:VERSION, reality:'school', universe:'jardim-arcano-do-conhecimento', stages:3, modules:17, lessons:124, cardLessons:78, oneNextLesson:true, programmeExplicit:true, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_RELEASE_READY', version:VERSION });
       } catch {}
     }

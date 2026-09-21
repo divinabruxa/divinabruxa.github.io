@@ -96,8 +96,8 @@ for (const css of [entryCss,presenceCss]) {
 }
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core, /^\s*'\.\//gm) === 51, '51 ativos centrais');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v610-tiragens-soul'"), 'cache isolado');
+ok(count(core, /^\s*'\.\//gm) === 53, '53 ativos centrais');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v610-escola-soul'"), 'cache isolado');
 ok(sw.includes('DIVINA_WORK13_FINAL_PRESENCE_ACTIVE'), 'ativação comunicada');
 ok(sw.includes('DIVINA_WORK13_GLOBAL_MENU_ACTIVE'), 'menu global comunicado');
 ok(sw.includes('COSMOS_WORLD_PRESENCE_CONTRACT_V610'), 'worker valida presença');
