@@ -7,7 +7,7 @@
 
 const VERSION = 610;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work13-v610-final-presence';
+const CACHE_NAME = 'divina-bruxa-work13-v610-global-menu-cycle';
 const CORE = Object.freeze([
   './index.html',
   './app-v208.js?v=610-work13-final-presence',
@@ -246,6 +246,9 @@ const validateCore = async responses => {
     || !entryIntention.includes('entryIntentions:1')
     || !entryIntention.includes('reusesCanonicalOrb:true')
     || !entryIntention.includes('reusesLivingMenuV593:true')
+    || !entryIntention.includes('globalOrbMenuCycle:true')
+    || !entryIntention.includes('everyRealityCanCallUniverse:true')
+    || !entryIntention.includes("this.openUniverse('orb-world')")
     || !entryIntention.includes('publicRealityNames:15')
     || !entryIntention.includes('automaticNavigation:false')
     || !entryIntention.includes('newCanvases:0')
@@ -273,6 +276,8 @@ const validateCore = async responses => {
   }
   if (!worldStyles?.includes('[data-work13-world]')
     || !worldStyles.includes('.db502-portal.is-touching')
+    || !worldStyles.includes('#menuBtn.menu-button i')
+    || !worldStyles.includes('display:block!important')
     || !worldStyles.includes('#skins[data-work13-world]')
     || !worldStyles.includes('@media(max-width:430px)')
     || !worldStyles.includes('@media(prefers-reduced-motion:reduce)')
@@ -618,6 +623,7 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK13_FINAL_ORCHESTRA_ACTIVE', version:VERSION, finalOrchestraVersion:610, mediaSkinsVersion:609, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_ENTRY_ACTIVE', version:VERSION, correction:'entrada-da-orbe', base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_FINAL_PRESENCE_ACTIVE', version:VERSION, correction:'lapidacao-final-presenca-das-realidades', publicWorlds:15, base:600, complete:true });
+        client.postMessage({ type:'DIVINA_WORK13_GLOBAL_MENU_ACTIVE', version:VERSION, correction:'menu-global-ciclo-vivo', publicWorlds:15, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_RELEASE_READY', version:VERSION });
       } catch {}
     }

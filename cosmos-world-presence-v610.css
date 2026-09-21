@@ -8,6 +8,41 @@ html[data-work13-final-presence="v610"] #menuBtn{
   padding-inline:12px;
 }
 
+/* Fora da Origem, resta somente uma coordenada funcional. A camada V598
+   escondia estes dois tracos quando escrevia “Sopro”; aqui o texto some e o
+   acesso global volta a existir sem criar outra Orbe. */
+html[data-work13-final-presence="v610"]:not([data-work12-final-route="home"])
+body:not([data-screen="home"]) #menuBtn.menu-button i{
+  display:block!important;
+  inline-size:17px!important;
+  block-size:1px!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:rgba(255,239,210,.72)!important;
+  box-shadow:0 0 10px rgba(194,107,255,.22)!important;
+  transform-origin:center!important;
+  transition:transform 160ms ease,opacity 160ms ease!important;
+}
+
+html[data-work13-final-presence="v610"]:not([data-work12-final-route="home"])
+body:not([data-screen="home"]) #menuBtn.menu-button{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex-direction:column!important;
+  gap:5px!important;
+}
+
+html[data-work13-final-presence="v610"]:not([data-work12-final-route="home"])
+body:not([data-screen="home"]) #menuBtn.menu-button.is-open i:first-of-type{
+  transform:translateY(3px) rotate(45deg)!important;
+}
+html[data-work13-final-presence="v610"]:not([data-work12-final-route="home"])
+body:not([data-screen="home"]) #menuBtn.menu-button.is-open i:last-of-type{
+  transform:translateY(-3px) rotate(-45deg)!important;
+}
+
 html[data-work13-final-presence="v610"] #divinaOrbitalMenuV502 :is(
   .db502-menu__heading,.db502-menu__hint,.db502-menu__intention
 ){display:none!important}
@@ -86,6 +121,7 @@ html[data-experience-budget="essential"] #app>.screen[data-work13-world]::before
 }
 
 @media(prefers-reduced-motion:reduce){
+  html[data-work13-final-presence="v610"] #menuBtn.menu-button i{transition:none!important}
   html[data-work13-final-presence="v610"] #app>.screen[data-work13-world]::before,
   html[data-work13-final-presence="v610"] #divinaOrbitalMenuV502 .db502-portal.is-touching{transition:none!important}
   html[data-work13-final-presence="v610"] #app>.screen[data-work13-world]::before{transform:none!important}

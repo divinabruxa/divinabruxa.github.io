@@ -88,5 +88,20 @@ ok(calls === 1, 'pointerdown não duplica a navegação existente');
 ok(controller.status().oneCanonicalOrb === true, 'mesma Orbe canônica');
 ok(controller.status().work14 === false, 'correção termina no WORK13');
 
+let worldMenuOpens = 0;
+controller.menuResolver = () => ({ root:menuRoot, open() { worldMenuOpens += 1; return true; } });
+for (const route of routes) {
+  fire(doc, 'divina:route-ready', { id:route });
+  ok(controller.route === route, `Orbe acompanha ${route}`);
+  ok(controller.openUniverse('orb-world') === true, `menu abre em ${route}`);
+  fire(doc, 'divina:menu-state', { state:'open' });
+  ok(controller.openUniverse('orb-world') === false, `sem abertura duplicada em ${route}`);
+  fire(doc, 'divina:menu-state', { state:'closed' });
+}
+ok(worldMenuOpens === routes.length, 'uma abertura por realidade');
+ok(controller.status().worldOpenCalls === routes.length, 'ciclo global auditável');
+ok(controller.status().openFailures === 0, 'nenhuma falha de abertura');
+ok(orb.attrs['aria-label'] === 'Orbe viva. Toque para abrir o universo', 'Orbe anuncia o caminho global');
+
 controller.destroy();
 console.log(`PASS ${checks}/${checks} — resposta, menu vivo e nomes públicos`);

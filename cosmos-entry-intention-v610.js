@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — WORK13 · CORRECAO SUPREMA DA ENTRADA · V610
-   Uma unica intencao convida a pessoa a tocar. A resposta reutiliza a Orbe,
-   o menu vivo V593 e a continuidade V598; nao cria rota, motor ou copia. */
+/* DIVINA BRUXA — WORK13 · ENTRADA E CICLO GLOBAL DA ORBE · V610
+   Uma unica intencao convida a pessoa a tocar. Em cada realidade, a mesma
+   Orbe reabre o menu vivo V593; nao cria rota, motor, gesto ou copia. */
 
 const VERSION = 610;
 
@@ -13,6 +13,8 @@ export const COSMOS_ENTRY_INTENTION_CONTRACT_V610 = Object.freeze({
   reusesCanonicalOrb:true,
   reusesLivingMenuV593:true,
   reusesFinalContinuityV598:true,
+  globalOrbMenuCycle:true,
+  everyRealityCanCallUniverse:true,
   publicRealityNames:15,
   explanatoryCopy:0,
   automaticNavigation:false,
@@ -59,6 +61,8 @@ export class CosmosEntryIntentionV610 {
     this.route = routeNow(this.documentTarget, this.windowTarget);
     this.menuState = 'closed';
     this.openCalls = 0;
+    this.worldOpenCalls = 0;
+    this.openFailures = 0;
     this.pulses = 0;
     this.renamedRealities = 0;
     this.abortController = typeof AbortController === 'function' ? new AbortController() : null;
@@ -77,8 +81,20 @@ export class CosmosEntryIntentionV610 {
     return this.route === 'home' && this.menuState === 'closed';
   }
 
+  isUniverseReady() {
+    const root = this.documentTarget?.documentElement;
+    const moving = root?.dataset?.experienceState === 'moving'
+      || ['DEPART','TRAVEL','ARRIVE'].includes(String(root?.dataset?.work12State || '').toUpperCase());
+    return this.menuState === 'closed' && !moving;
+  }
+
+  isCanonicalOrbTarget(target) {
+    const candidate = target?.closest?.('#orb');
+    return Boolean(candidate && candidate === this.orb);
+  }
+
   respond(source = 'entry') {
-    if (!this.isHomeReady()) return false;
+    if (!this.isUniverseReady()) return false;
     if (this.entry?.dataset) this.entry.dataset.response = 'answering';
     if (this.documentTarget?.documentElement?.dataset) {
       this.documentTarget.documentElement.dataset.work13EntryResponse = 'answering';
@@ -89,9 +105,9 @@ export class CosmosEntryIntentionV610 {
   }
 
   openUniverse(source = 'touch') {
-    if (!this.isHomeReady()) return false;
+    if (!this.isUniverseReady()) return false;
     this.continuity?.cancelHomeTap?.('entry-intention');
-    const opened = this.continuity?.callUniverse?.(source);
+    const opened = this.route === 'home' ? this.continuity?.callUniverse?.(source) : false;
     if (opened) {
       this.openCalls += 1;
       if (this.entry?.dataset) this.entry.dataset.response = 'crossing';
@@ -100,8 +116,14 @@ export class CosmosEntryIntentionV610 {
     const menu = this.menuResolver?.();
     if (!menu?.open) return false;
     this.openCalls += 1;
+    if (this.route !== 'home') this.worldOpenCalls += 1;
     if (this.entry?.dataset) this.entry.dataset.response = 'crossing';
-    menu.open();
+    try {
+      Promise.resolve(menu.open()).catch(() => { this.openFailures += 1; });
+    } catch {
+      this.openFailures += 1;
+      return false;
+    }
     return true;
   }
 
@@ -127,6 +149,12 @@ export class CosmosEntryIntentionV610 {
 
   sync(reason = 'sync') {
     if (!this.entry) return false;
+    if (this.orb) this.orb.setAttribute?.(
+      'aria-label',
+      this.route === 'home'
+        ? 'Orbe viva. Toque para abrir o universo; toque duplo abre o Tarot Livre'
+        : 'Orbe viva. Toque para abrir o universo'
+    );
     const visible = this.isHomeReady();
     if (visible && !this.entry.dataset.response) this.entry.dataset.response = 'ready';
     this.entry.setAttribute('aria-hidden', String(!visible));
@@ -163,6 +191,20 @@ export class CosmosEntryIntentionV610 {
     this.listen(this.orb, 'pointerdown', () => this.respond('orb'), { passive:true });
     this.listen(this.orb, 'pointerup', restEntry, { passive:true });
     this.listen(this.orb, 'pointercancel', restEntry, { passive:true });
+    this.listen(this.documentTarget, 'click', event => {
+      if (this.route === 'home' || !this.isCanonicalOrbTarget(event?.target)) return;
+      event.preventDefault?.();
+      event.stopImmediatePropagation?.();
+      this.openUniverse('orb-world');
+    }, { capture:true });
+    this.listen(this.documentTarget, 'keydown', event => {
+      if (this.route === 'home' || !this.isCanonicalOrbTarget(event?.target)) return;
+      if (!['Enter',' '].includes(event?.key) || event?.repeat) return;
+      event.preventDefault?.();
+      event.stopImmediatePropagation?.();
+      this.respond('orb-keyboard');
+      this.openUniverse('keyboard-world');
+    }, { capture:true });
     this.listen(this.documentTarget, 'divina:orbital-menu-ready', () => {
       this.renameMenu();
       this.sync('menu-ready');
@@ -196,6 +238,8 @@ export class CosmosEntryIntentionV610 {
       route:this.route,
       menuState:this.menuState,
       openCalls:this.openCalls,
+      worldOpenCalls:this.worldOpenCalls,
+      openFailures:this.openFailures,
       pulses:this.pulses,
       renamedRealities:this.renamedRealities,
       oneCanonicalOrb:Boolean(this.orb),

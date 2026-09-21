@@ -56,7 +56,10 @@ ok(entryJs.includes('entryIntentions:1'), 'somente uma intenção');
 ok(entryJs.includes("responseModel:'touch-answer-silence'"), 'toque, resposta e silêncio');
 ok(entryJs.includes('reusesCanonicalOrb:true'), 'Orbe canônica');
 ok(entryJs.includes('reusesLivingMenuV593:true'), 'menu vivo preservado');
+ok(entryJs.includes('globalOrbMenuCycle:true'), 'menu global pela Orbe');
+ok(entryJs.includes('everyRealityCanCallUniverse:true'), 'todas as realidades reabrem o universo');
 ok(entryJs.includes("this.continuity?.callUniverse?.(source)"), 'abertura pela continuidade');
+ok(entryJs.includes("this.openUniverse('orb-world')"), 'Orbe chama o menu fora da Home');
 ok(entryJs.includes("this.orbCore?.pulse?.('work13-entry-response'"), 'resposta imediata');
 ok(!/createElement|requestAnimationFrame|setInterval|setTimeout|MutationObserver/.test(entryJs), 'entrada sem DOM ou loops novos');
 ok(!/location\.(?:href|assign|replace)/.test(entryJs), 'entrada sem troca seca');
@@ -77,6 +80,8 @@ ok(entryCss.includes('min-height:48px'), 'alvo de toque confortável');
 ok(entryCss.includes('[data-response="answering"]'), 'resposta imediata visível');
 ok(entryCss.includes('[data-response="silent"]'), 'silêncio após resposta');
 ok(presenceCss.includes('.db502-portal.is-touching'), 'balão responde ao toque');
+ok(presenceCss.includes('#menuBtn.menu-button i'), 'acesso global funcional visível');
+ok(presenceCss.includes('display:block!important'), 'coordenada do menu não fica invisível');
 ok(presenceCss.includes('[data-work13-world-presence="approaching"]'), 'chegada progressiva');
 ok(presenceCss.includes('[data-work13-world-presence="leaving"]'), 'saída progressiva');
 ok(presenceCss.includes('min-block-size:100dvh'), 'cada mundo ocupa a tela');
@@ -88,8 +93,9 @@ for (const css of [entryCss,presenceCss]) {
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
 ok(count(core, /^\s*'\.\//gm) === 45, '45 ativos centrais');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v610-final-presence'"), 'cache isolado');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v610-global-menu-cycle'"), 'cache isolado');
 ok(sw.includes('DIVINA_WORK13_FINAL_PRESENCE_ACTIVE'), 'ativação comunicada');
+ok(sw.includes('DIVINA_WORK13_GLOBAL_MENU_ACTIVE'), 'menu global comunicado');
 ok(sw.includes('COSMOS_WORLD_PRESENCE_CONTRACT_V610'), 'worker valida presença');
 ok(sw.includes('cosmos-world-presence-v610.css?v=610-work13-final-presence'), 'worker inclui estilo');
 

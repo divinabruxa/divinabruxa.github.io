@@ -116,7 +116,7 @@ function createHarness({ brokenAsset = '', brokenContent = false } = {}) {
 
 const checks = [];
 const check = (id, condition, detail = '') => checks.push({ id, pass:Boolean(condition), detail:condition ? '' : String(detail) });
-const cacheName = 'divina-bruxa-work13-v610-final-presence';
+const cacheName = 'divina-bruxa-work13-v610-global-menu-cycle';
 const harness = createHarness();
 
 check('core:forty-five-assets-declared', coreAssets.length === 45, coreAssets.length);
@@ -206,6 +206,7 @@ check('activate:commerce-version-v608', harness.clientMessages.some(item => item
 check('activate:media-skins-version-v609', harness.clientMessages.some(item => item.mediaSkinsVersion === 609));
 check('activate:final-orchestra-version-v610', harness.clientMessages.some(item => item.finalOrchestraVersion === 610 && item.complete === true));
 check('activate:final-presence-v610', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_FINAL_PRESENCE_ACTIVE' && item.publicWorlds === 15 && item.complete === true));
+check('activate:global-menu-v610', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_GLOBAL_MENU_ACTIVE' && item.publicWorlds === 15 && item.oneOrb === true && item.complete === true));
 
 const onlineNavigation = await harness.fetchEvent(new FakeRequest('https://divina.test/index.html#music', { mode:'navigate' }));
 check('fetch:navigation-network', (await onlineNavigation.text()).includes('name="divina-work13" content="V610"'));

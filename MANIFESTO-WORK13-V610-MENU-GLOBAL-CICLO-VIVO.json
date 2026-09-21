@@ -1,0 +1,30 @@
+{
+  "project": "Divina Bruxa",
+  "work": "WORK13",
+  "version": 610,
+  "stage": "menu-global-ciclo-vivo",
+  "protected_base_commit": "8836b14",
+  "law": "uma-orbe-um-universo-um-menu-vivo-muitas-realidades-uma-jornada",
+  "public_realities": 15,
+  "deterministic_checks": 936,
+  "iphone_geometries": 8,
+  "physical_device_claim": false,
+  "new_orbs": 0,
+  "new_canvases": 0,
+  "new_renderers": 0,
+  "automatic_navigation": false,
+  "work14": false,
+  "install": "substituir-somente-os-arquivos-do-pacote",
+  "files": [
+    "cosmos-entry-intention-v610.js",
+    "cosmos-world-presence-v610.css",
+    "sw.js",
+    "qa-work13-v610-entry-runtime.mjs",
+    "qa-work13-v610-entry-structural.mjs",
+    "qa-work13-v610-service-worker-runtime.mjs",
+    "00-INSTALE-WORK13-V610-MENU-GLOBAL-CICLO-VIVO.txt",
+    "RELATORIO-WORK13-V610-MENU-GLOBAL-CICLO-VIVO.md",
+    "MANIFESTO-WORK13-V610-MENU-GLOBAL-CICLO-VIVO.json",
+    "HASHES-SHA256-WORK13-V610-MENU-GLOBAL-CICLO-VIVO.txt"
+  ]
+}
