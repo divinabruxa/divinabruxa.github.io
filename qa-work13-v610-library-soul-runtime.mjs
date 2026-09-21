@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import {
+  BIBLIOTECA_WORLD_CONTRACT_V615,
   BIBLIOTECA_SOUL_CONTRACT_V610,
   createBibliotecaSoulV610
 } from './biblioteca-soul-v610.js';
@@ -94,12 +95,13 @@ class FakeWindow extends EventTarget {
 const fire = (target, type, detail = {}) => target.dispatchEvent(new FakeCustomEvent(type, { detail }));
 let checks = 0;
 const ok = (value, message) => { assert.ok(value, message); checks += 1; };
-const contract = BIBLIOTECA_SOUL_CONTRACT_V610;
+const contract = BIBLIOTECA_WORLD_CONTRACT_V615;
 
-ok(contract.version === 610 && contract.work === 'WORK13', 'permanece no WORK13 V610');
-ok(contract.reality === 'library' && contract.stage === 'quinta-realidade-alma-propria', 'quinta realidade declarada');
-ok(contract.universe === 'arquivo-de-luz', 'universo novo declarado');
-ok(contract.sequence.join('|') === 'threshold|orb|one-discovery|silence|symbolic-thread|related-doors|catalogue-on-explicit-request', 'travessia completa');
+ok(contract === BIBLIOTECA_SOUL_CONTRACT_V610, 'alias antigo aponta para um único contrato');
+ok(contract.version === 615 && contract.work === 'WORK13', 'renovação permanece no WORK13 V615');
+ok(contract.reality === 'library' && contract.stage === 'renovacao-dos-mundos-2-biblioteca', 'segunda realidade renovada');
+ok(contract.universe === 'arquivo-de-luz-sala-dos-fios-vivos', 'novo mundo declarado');
+ok(contract.sequence.join('|') === 'arrival|threshold|one-discovery|silence|symbolic-thread|related-doors|catalogue-on-explicit-request', 'travessia completa');
 ok(contract.existingLibraryWorldAuthority === 'V302-preserved', 'mundo V302 preservado');
 ok(contract.existingLibraryDepthAuthority === 'V332-preserved', 'profundidade V332 preservada');
 ok(contract.existingPublicLibraryAuthority === 'V544-preserved', 'catálogo V544 preservado');
@@ -107,6 +109,9 @@ ok(contract.existingLivingWisdomAuthority === 'V607-preserved', 'descoberta V607
 ok(contract.cardsPreserved === 78 && contract.uprightCardsOnly && !contract.reversedCards, '78 cartas diretas preservadas');
 ok(contract.cataloguePageSizePreserved === 18 && contract.gridFullImageRequestsPreserved === 0, 'catálogo leve preservado');
 ok(contract.oneDiscoveryFirst && contract.catalogueRequiresExplicitGesture, 'descoberta antes do catálogo');
+ok(contract.onePrimaryChoice && contract.catalogueRecedesAtArrival && contract.searchAppearsOnRequest, 'uma escolha antes das ferramentas');
+ok(contract.catalogueDeferredRendering && contract.readerDeferredRendering, 'profundidade renderizada quando necessária');
+ok(contract.worldMatter.join('|') === 'obsidian|pearl|ancient-coral|opal-light', 'matéria visual própria');
 ok(contract.symbolicThreadsPreserved.join('|') === 'symbol|element|number|archetype|related-cards', 'fios simbólicos preservados');
 ok(contract.searchLanguagesPreserved.join('|') === 'pt-BR|en|es' && contract.searchDiacriticsInsensitive, 'busca internacional preservada');
 ok(contract.cardMeaningChanges === 0 && contract.cardSelectionChanges === 0, 'significados e escolha intactos');
@@ -125,14 +130,15 @@ const soul = createBibliotecaSoulV610({
   orbCore:{ pulse() { pulses += 1; } }
 });
 
-ok(doc.documentElement.dataset.work13LibrarySoul === 'v610', 'identidade instalada');
-ok(doc.screen.dataset.librarySoul === 'v610', 'Biblioteca marcada como mundo próprio');
-ok(doc.screen.dataset.librarySoulUniverse === 'arquivo-de-luz', 'Arquivo de Luz marcado');
+ok(doc.documentElement.dataset.work13LibrarySoul === 'v615', 'identidade instalada');
+ok(doc.documentElement.dataset.work13LibraryWorld === 'v615', 'novo mundo instalado');
+ok(doc.screen.dataset.librarySoul === 'v615' && doc.screen.dataset.libraryWorld === 'v615', 'Biblioteca marcada como mundo próprio');
+ok(doc.screen.dataset.librarySoulUniverse === 'arquivo-de-luz-sala-dos-fios-vivos', 'Sala dos Fios Vivos marcada');
 ok(doc.screen.dataset.librarySoulPresence === 'present', 'presença ativa na rota');
 ok(doc.screen.dataset.librarySoulPhase === 'threshold', 'mundo nasce no limiar');
-ok(doc.screen.dataset.librarySoulSequence === 'threshold-orb-discovery-silence-thread-doors-catalogue', 'ordem pública marcada');
-ok(doc.app.dataset.librarySoul === 'v610', 'app existente recebe a alma');
-ok(doc.head.children.length === 1 && doc.head.children[0].href.includes('biblioteca-soul-v610.css'), 'estilo único instalado');
+ok(doc.screen.dataset.librarySoulSequence === 'arrival-threshold-discovery-silence-thread-doors-catalogue', 'ordem pública marcada');
+ok(doc.app.dataset.librarySoul === 'v615' && doc.app.dataset.libraryWorld === 'v615', 'app existente recebe o mundo');
+ok(doc.head.children.length === 1 && doc.head.children[0].href.includes('biblioteca-world-v615.css'), 'estilo único instalado');
 
 const invitation = new FakeNode({ tag:'button', dataset:{ v607Action:'library-primary' } });
 doc.app.append(invitation);
@@ -182,6 +188,8 @@ const audit = soul.audit();
 ok(audit.libraryScreenPresent && audit.libraryAppPresent, 'mundo funcional presente');
 ok(audit.oneCanonicalOrb && audit.oneCanonicalCanvas && audit.duplicateOrbs === 0, 'unicidade preservada');
 ok(audit.cardsPreserved === 78 && audit.cataloguePageSizePreserved === 18, 'estrutura preservada no audit');
+ok(audit.onePrimaryChoice && audit.catalogueRecedesAtArrival, 'audit confirma entrada progressiva');
+ok(audit.catalogueDeferredRendering && audit.readerDeferredRendering, 'audit confirma profundidade adiada');
 ok(audit.privateContentReads === 0 && audit.cardIdentityReads === 0 && audit.cardMeaningReads === 0, 'audit confirma privacidade');
 
 fire(doc,'divina:route-ready',{ id:'school' });
@@ -199,8 +207,8 @@ ok(soul.status().networkCalls === 0 && soul.status().storageWrites === 0, 'sem r
 ok(soul.status().work14 === false, 'termina no WORK13');
 
 soul.destroy();
-ok(doc.getElementById('divinaBibliotecaSoulV610').removed === true, 'desmontagem remove o estilo');
+ok(doc.getElementById('divinaBibliotecaWorldV615').removed === true, 'desmontagem remove o estilo');
 ok(!doc.documentElement.dataset.work13LibrarySoul, 'desmontagem remove a identidade');
 ok(!doc.screen.dataset.librarySoul && !doc.app.dataset.librarySoul, 'desmontagem libera mundo e app');
 
-console.log(`PASS ${checks}/${checks} — alma funcional da Biblioteca V610`);
+console.log(`PASS ${checks}/${checks} — Sala dos Fios Vivos V615`);

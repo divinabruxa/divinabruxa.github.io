@@ -1,27 +1,26 @@
-/* DIVINA BRUXA — WORK13 · ALMA DA BIBLIOTECA · V610
-   A Biblioteca existente nao e refeita. V302 continua sustentando o mundo,
-   V332 continua aprofundando as cartas, V544 continua guardando o catalogo e
-   V607 continua oferecendo uma descoberta antes das 78. Esta camada escuta
-   somente gestos e estados publicos e faz o Arquivo de Luz responder: portal,
-   Orbe, descoberta, silencio e fio simbolico. Uma Orbe, nenhuma copia. */
+/* DIVINA BRUXA — WORK13 · BIBLIOTECA · SALA DOS FIOS VIVOS · V615
+   O Arquivo de Luz abre uma carta antes do catálogo. V302 sustenta o mundo,
+   V332 aprofunda, V544 guarda as 78 portas e V607 conduz a descoberta. Esta
+   camada apenas dá presença aos gestos e estados públicos: limiar, resposta,
+   carta, silêncio e fios. Uma Orbe, nenhum motor paralelo. */
 
-const VERSION = 610;
-const STYLE_ID = 'divinaBibliotecaSoulV610';
-const STYLE_HREF = './biblioteca-soul-v610.css?v=610-work13-library-soul';
-const INSTANCE = Symbol.for('divina.work13.biblioteca.soul.v610');
+const VERSION = 615;
+const STYLE_ID = 'divinaBibliotecaWorldV615';
+const STYLE_HREF = './biblioteca-world-v615.css?v=615-sala-dos-fios-vivos';
+const INSTANCE = Symbol.for('divina.work13.biblioteca.world.v615');
 const PHASES = new Set([
   'rest','threshold','answering','discovery','thread','catalogue','search',
   'portal','travel','silence'
 ]);
 
-export const BIBLIOTECA_SOUL_CONTRACT_V610 = Object.freeze({
+export const BIBLIOTECA_WORLD_CONTRACT_V615 = Object.freeze({
   version:VERSION,
   work:'WORK13',
   reality:'library',
-  stage:'quinta-realidade-alma-propria',
-  universe:'arquivo-de-luz',
+  stage:'renovacao-dos-mundos-2-biblioteca',
+  universe:'arquivo-de-luz-sala-dos-fios-vivos',
   sequence:Object.freeze([
-    'threshold','orb','one-discovery','silence','symbolic-thread',
+    'arrival','threshold','one-discovery','silence','symbolic-thread',
     'related-doors','catalogue-on-explicit-request'
   ]),
   existingLibraryWorldAuthority:'V302-preserved',
@@ -34,7 +33,12 @@ export const BIBLIOTECA_SOUL_CONTRACT_V610 = Object.freeze({
   cataloguePageSizePreserved:18,
   gridFullImageRequestsPreserved:0,
   oneDiscoveryFirst:true,
+  onePrimaryChoice:true,
   catalogueRequiresExplicitGesture:true,
+  catalogueRecedesAtArrival:true,
+  searchAppearsOnRequest:true,
+  cardReaderBecomesWorld:true,
+  worldMatter:Object.freeze(['obsidian','pearl','ancient-coral','opal-light']),
   symbolicThreadsPreserved:Object.freeze(['symbol','element','number','archetype','related-cards']),
   searchLanguagesPreserved:Object.freeze(['pt-BR','en','es']),
   searchDiacriticsInsensitive:true,
@@ -48,6 +52,11 @@ export const BIBLIOTECA_SOUL_CONTRACT_V610 = Object.freeze({
   persistenceChanges:0,
   reusesCanonicalOrb:true,
   reusesGlobalLivingMenu:true,
+  pentagramAlwaysAvailable:true,
+  libraryHeaderRecedes:true,
+  legacyDockRecedes:true,
+  catalogueDeferredRendering:true,
+  readerDeferredRendering:true,
   visibleCopyAdded:0,
   automaticNavigation:false,
   automaticWhitSpeech:false,
@@ -69,6 +78,10 @@ export const BIBLIOTECA_SOUL_CONTRACT_V610 = Object.freeze({
   deferredTimers:0,
   work14:false
 });
+
+/* Consumidores V610 continuam apontando para o mesmo mundo, sem instância
+   paralela nem duas almas ativas. */
+export const BIBLIOTECA_SOUL_CONTRACT_V610 = BIBLIOTECA_WORLD_CONTRACT_V615;
 
 const normalizeRoute = value => String(value || 'home')
   .trim().toLowerCase().replace(/^#/,'').split(/[?&/]/)[0] || 'home';
@@ -122,6 +135,7 @@ export class BibliotecaSoulV610 {
     this.bind();
     this.sync('boot');
     emit(this.documentTarget, 'divina:library-soul-ready', this.status());
+    emit(this.documentTarget, 'divina:library-world-renewed', this.status());
   }
 
   installStyle() {
@@ -137,13 +151,17 @@ export class BibliotecaSoulV610 {
   }
 
   installIdentity() {
-    if (this.root?.dataset) this.root.dataset.work13LibrarySoul = 'v610';
+    if (this.root?.dataset) {
+      this.root.dataset.work13LibrarySoul = 'v615';
+      this.root.dataset.work13LibraryWorld = 'v615';
+    }
     if (!this.screen?.dataset) return false;
-    this.screen.dataset.librarySoul = 'v610';
-    this.screen.dataset.librarySoulUniverse = 'arquivo-de-luz';
+    this.screen.dataset.librarySoul = 'v615';
+    this.screen.dataset.libraryWorld = 'v615';
+    this.screen.dataset.librarySoulUniverse = 'arquivo-de-luz-sala-dos-fios-vivos';
     this.screen.dataset.librarySoulPhase = 'rest';
     this.screen.dataset.librarySoulPresence = 'away';
-    this.screen.dataset.librarySoulSequence = 'threshold-orb-discovery-silence-thread-doors-catalogue';
+    this.screen.dataset.librarySoulSequence = 'arrival-threshold-discovery-silence-thread-doors-catalogue';
     return true;
   }
 
@@ -163,7 +181,8 @@ export class BibliotecaSoulV610 {
       this.attachments += 1;
     }
     if (this.app?.dataset) {
-      this.app.dataset.librarySoul = 'v610';
+      this.app.dataset.librarySoul = 'v615';
+      this.app.dataset.libraryWorld = 'v615';
       this.app.dataset.librarySoulPhase = this.phase;
     }
     return this.app;
@@ -336,6 +355,11 @@ export class BibliotecaSoulV610 {
       cataloguePageSizePreserved:18,
       gridFullImageRequestsPreserved:0,
       oneDiscoveryFirst:true,
+      onePrimaryChoice:true,
+      catalogueRecedesAtArrival:true,
+      catalogueDeferredRendering:true,
+      readerDeferredRendering:true,
+      pentagramAlwaysAvailable:true,
       privateContentReads:0,
       cardIdentityReads:0,
       cardMeaningReads:0,
@@ -349,7 +373,7 @@ export class BibliotecaSoulV610 {
 
   status() {
     return Object.freeze({
-      ...BIBLIOTECA_SOUL_CONTRACT_V610,
+      ...BIBLIOTECA_WORLD_CONTRACT_V615,
       route:this.route,
       phase:this.phase,
       discovered:this.discovered,
@@ -373,18 +397,24 @@ export class BibliotecaSoulV610 {
     this.documentTarget?.getElementById?.(STYLE_ID)?.remove?.();
     if (this.app?.dataset) {
       delete this.app.dataset.librarySoul;
+      delete this.app.dataset.libraryWorld;
       delete this.app.dataset.librarySoulPhase;
     }
     if (this.screen?.dataset) {
       delete this.screen.dataset.librarySoul;
+      delete this.screen.dataset.libraryWorld;
       delete this.screen.dataset.librarySoulUniverse;
       delete this.screen.dataset.librarySoulPhase;
       delete this.screen.dataset.librarySoulPresence;
       delete this.screen.dataset.librarySoulSequence;
     }
-    if (this.root?.dataset) delete this.root.dataset.work13LibrarySoul;
+    if (this.root?.dataset) {
+      delete this.root.dataset.work13LibrarySoul;
+      delete this.root.dataset.work13LibraryWorld;
+    }
     if (globalThis[INSTANCE] === this) delete globalThis[INSTANCE];
     if (globalThis.divinaBibliotecaSoulV610 === this) delete globalThis.divinaBibliotecaSoulV610;
+    if (globalThis.divinaBibliotecaWorldV615 === this) delete globalThis.divinaBibliotecaWorldV615;
     return true;
   }
 }
@@ -396,7 +426,10 @@ export function createBibliotecaSoulV610(options = {}) {
   const instance = new BibliotecaSoulV610(options);
   globalThis[INSTANCE] = instance;
   globalThis.divinaBibliotecaSoulV610 = instance;
+  globalThis.divinaBibliotecaWorldV615 = instance;
   return instance;
 }
 
+export const BibliotecaWorldV615 = BibliotecaSoulV610;
+export const createBibliotecaWorldV615 = createBibliotecaSoulV610;
 export default createBibliotecaSoulV610;

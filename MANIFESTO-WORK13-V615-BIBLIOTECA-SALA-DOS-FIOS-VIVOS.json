@@ -1,0 +1,62 @@
+{
+  "release": "V615",
+  "work": "WORK13",
+  "stage": "renovacao-dos-mundos-2-biblioteca",
+  "universe": "arquivo-de-luz-sala-dos-fios-vivos",
+  "baseRequired": "WORK13 V614",
+  "work14": false,
+  "production": {
+    "new": [
+      "biblioteca-world-v615.css"
+    ],
+    "replaced": [
+      "index.html",
+      "app-v208.js",
+      "biblioteca-soul-v610.js",
+      "sw.js"
+    ]
+  },
+  "protected": {
+    "home": true,
+    "globalMenuV613": true,
+    "tarotWorldV614": true,
+    "canonicalOrb": 1,
+    "canonicalCanvas": 1,
+    "libraryWorldAuthority": "V302-preserved",
+    "libraryDepthAuthority": "V332-preserved",
+    "publicLibraryAuthority": "V544-preserved",
+    "livingWisdomAuthority": "V607-preserved",
+    "cards": 78,
+    "uprightOnly": true,
+    "cataloguePageSize": 18
+  },
+  "experience": {
+    "oneDiscoveryFirst": true,
+    "onePrimaryChoice": true,
+    "catalogueRequiresExplicitGesture": true,
+    "symbolicThreads": [
+      "symbol",
+      "element",
+      "number",
+      "archetype",
+      "related-cards"
+    ],
+    "worldMatter": [
+      "obsidian",
+      "pearl",
+      "ancient-coral",
+      "opal-light"
+    ],
+    "catalogueDeferredRendering": true,
+    "readerDeferredRendering": true,
+    "pentagramAlwaysAvailable": true
+  },
+  "validation": {
+    "suites": 26,
+    "checks": 2827,
+    "failures": 0,
+    "iphoneGeometries": 8,
+    "physicalDeviceLab": false
+  }
+}
+

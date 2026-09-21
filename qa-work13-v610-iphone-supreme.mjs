@@ -35,7 +35,7 @@ const styles = Object.freeze({
   worldPresence:read('cosmos-world-presence-v610.css'),
   spreadsSoul:read('tiragens-soul-v610.css'),
   schoolSoul:read('escola-soul-v610.css'),
-  librarySoul:read('biblioteca-soul-v610.css'),
+  librarySoul:read('biblioteca-world-v615.css'),
   journalSoul:read('diario-soul-v610.css')
 });
 

@@ -13,7 +13,7 @@ const [
   read('./living-wisdom-path-v607.js'),read('./living-wisdom-path-v607.css'),
   read('./cosmos-entry-intention-v610.js'),read('./journal-world-v317.js'),
   read('./reality-chambers-v596.js'),read('./reality-chambers-v596.css'),
-  read('./biblioteca-soul-v610.js'),read('./biblioteca-soul-v610.css'),
+  read('./biblioteca-soul-v610.js'),read('./biblioteca-world-v615.css'),
   read('./escola-soul-v610.js'),read('./escola-soul-v610.css'),
   read('./tiragens-soul-v610.js'),read('./tiragens-soul-v610.css'),
   read('./carta-do-dia-soul-v610.js'),read('./carta-do-dia-soul-v610.css'),
@@ -116,7 +116,7 @@ ok(entry.includes("!['engaged','travel'].includes(state)"), 'depois do mergulho 
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
 ok(count(core,/^\s*'\.\//gm) === 58, '58 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v614-tarot-livre-camara-violeta'"), 'cache próprio');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v615-biblioteca-sala-fios-vivos'"), 'cache próprio');
 ok(sw.includes("'./diario-soul-v610.js?v=610-work13-journal-soul'"), 'JS no cache');
 ok(sw.includes("'./diario-soul-v610.css?v=610-work13-journal-soul'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_JOURNAL_SOUL_ACTIVE'), 'ativação comunicada');
@@ -137,7 +137,7 @@ ok(hash(spreads) === '3eb2ccac06370f3ee48eaee8df8bf473449dbba234e737c6e21d555169
 ok(hash(spreadsStyles) === '8a89a6a1edc5e4682c959de13449462b226132011e74c4ae2ba92fbd3b8d3771', 'visual das Tiragens protegido byte a byte');
 ok(hash(school) === '23446ccfb872519528ae52f8ce99d01ce2bb886f95dd3832b78f525c998ee3eb', 'Escola protegida byte a byte');
 ok(hash(schoolStyles) === '2073c5fdc6d1b1b3b32484f32ac2ef28283335432de58c8042b2fa1016b43ba4', 'Jardim Arcano protegido byte a byte');
-ok(hash(library) === 'a4614af1571897d81cd42d92975131dc7ab08b3a1b1285fd14e3079a4d0f8fa6', 'Biblioteca protegida byte a byte');
-ok(hash(libraryStyles) === 'a32563fe78e59828b8fdf18a432e488d96a66ba8f2c5419c1764c3b449d71314', 'Arquivo de Luz protegido byte a byte');
+ok(hash(library) === '1dcf29e6e20ebb824fe291de52452d2ff7e03d07d4099a81b62c3920a33f32ad', 'Sala dos Fios Vivos protegida byte a byte');
+ok(hash(libraryStyles) === '4c5bde57ea184568bcaa8205dc52c6ec04a1bf024abe71db4a3e93f9970092d3', 'visual da Sala dos Fios Vivos protegido byte a byte');
 
 console.log(`PASS ${checks}/${checks} — estrutura da alma do Diário e Espelho V610`);

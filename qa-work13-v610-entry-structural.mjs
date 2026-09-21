@@ -27,11 +27,11 @@ ok(count(html, /pentagrama-menu-vivo-v611\.webp/g) === 2, 'pentagrama único lig
 ok(/<div class="orb-stage-ref">[\s\S]*id="orb"[\s\S]*id="cosmosEntryIntent"[\s\S]*<\/div>/.test(html), 'pentagrama nasce do palco protegido da Orbe');
 ok(html.includes('aria-label="Abrir o menu mágico"'), 'nome acessível');
 ok(html.includes('aria-controls="divinaOrbitalMenuV502"'), 'controle do menu vivo');
-ok(html.includes('name="divina-work13-correction" content="V614-TAROT-LIVRE-CAMARA-DO-VAZIO-VIOLETA"'), 'renovação permanece no WORK13');
+ok(html.includes('name="divina-work13-correction" content="V615-BIBLIOTECA-SALA-DOS-FIOS-VIVOS"'), 'renovação permanece no WORK13');
 ok(html.includes('cosmos-entry-intention-v610.css?v=613-menu-global-vivo'), 'menu global vivo ligado');
 ok(html.includes('cosmos-world-presence-v610.css?v=610-work13-final-presence'), 'presença ligada');
-ok(html.includes('app-v208.js?v=614-tarot-livre-camara-violeta'), 'aplicação ligada');
-ok(html.includes("./sw.js?v=614-tarot-livre-camara-violeta"), 'worker ligado');
+ok(html.includes('app-v208.js?v=615-biblioteca-sala-dos-fios-vivos'), 'aplicação ligada');
+ok(html.includes("./sw.js?v=615-biblioteca-sala-dos-fios-vivos"), 'worker ligado');
 ok(!/sopro/i.test(html), 'ornamento textual removido do HTML');
 ok(pentagram.length > 20000 && pentagram.length < 100000, 'imagem retina leve');
 ok(pentagram.subarray(0,4).toString('ascii') === 'RIFF' && pentagram.subarray(8,12).toString('ascii') === 'WEBP', 'imagem WebP válida');
@@ -51,7 +51,7 @@ ok(app.includes('menuResolver:() => globalThis.divinaMenuV502'), 'menu V593 reut
 ok(app.includes('window.orbe.entryIntention = cosmosEntryIntention'), 'entrada publicada');
 ok(app.includes('divinaWork13PentagramMenuV612'), 'base protegida V612 preservada');
 ok(app.includes('divinaWork13MenuGlobalVivoV613'), 'correção V613 publicada');
-ok(app.includes("dataset.work13Macro = 'tarot-livre-camara-violeta'"), 'macro do WORK13 atualizado');
+ok(app.includes("dataset.work13Macro = 'biblioteca-sala-dos-fios-vivos'"), 'macro do WORK13 atualizado');
 ok(app.includes("dataset.work13Menu = 'pentagram-v613'"), 'pentagrama V613 assume o menu');
 ok(app.includes("pentagramPosition:'top-corner'"), 'posição global publicada');
 ok(app.includes("tarotOrbAction:'reveal-only'"), 'gesto revelador do Tarot publicado');
@@ -153,7 +153,7 @@ ok(!/@keyframes/.test(presenceCss), 'presença das páginas sem loop novo');
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
 ok(count(core, /^\s*'\.\//gm) === 58, '58 ativos centrais');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v614-tarot-livre-camara-violeta'"), 'cache isolado');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v615-biblioteca-sala-fios-vivos'"), 'cache isolado');
 ok(sw.includes("'./pentagrama-menu-vivo-v611.webp'"), 'imagem disponível offline');
 ok(sw.includes('DIVINA_WORK13_PENTAGRAM_MENU_ACTIVE'), 'pentagrama comunicado');
 ok(sw.includes('DIVINA_WORK13_FINAL_PRESENCE_ACTIVE'), 'ativação comunicada');
@@ -164,4 +164,4 @@ ok(sw.includes('cosmos-world-presence-v610.css?v=610-work13-final-presence'), 'w
 const orchestraHash = createHash('sha256').update(orchestra).digest('hex');
 ok(orchestraHash === 'ebfe097bc1851540a24494a7a64eb3122c31aa04f35e3809a5288baac16ceca0', 'orquestra V610 protegida byte a byte');
 
-console.log(`PASS ${checks}/${checks} — menu V613 preservado dentro do WORK13 V614`);
+console.log(`PASS ${checks}/${checks} — menu V613 preservado dentro do WORK13 V615`);

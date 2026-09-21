@@ -1,16 +1,16 @@
-/* DIVINA BRUXA — WORK13 · TAROT LIVRE · CÂMARA DO VAZIO VIOLETA · V614
-   O WORK12 V600 e o menu global V613 permanecem protegidos. A instalacao so
-   assume o portal quando o Tarot Livre conserva uma Orbe, revela sem abrir o
-   menu e deixa a Câmara respirar sem listas orbitais nem peso permanente.
+/* DIVINA BRUXA — WORK13 · BIBLIOTECA · SALA DOS FIOS VIVOS · V615
+   O WORK12 V600, o menu V613 e o Tarot V614 permanecem protegidos. A
+   instalacao só assume quando uma descoberta precede as 78 portas, a Orbe
+   continua única e o Arquivo de Luz não cria peso permanente.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
-const VERSION = 614;
+const VERSION = 615;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work13-v614-tarot-livre-camara-violeta';
+const CACHE_NAME = 'divina-bruxa-work13-v615-biblioteca-sala-fios-vivos';
 const CORE = Object.freeze([
   './index.html',
-  './app-v208.js?v=614-tarot-livre-camara-violeta',
+  './app-v208.js?v=615-biblioteca-sala-dos-fios-vivos',
   './pentagrama-menu-vivo-v611.webp',
   './tarot-livre-soul-v610.js?v=614-camara-vazio-violeta',
   './tarot-livre-world-v614.css?v=614-camara-vazio-violeta',
@@ -20,8 +20,8 @@ const CORE = Object.freeze([
   './tiragens-soul-v610.css?v=610-work13-spreads-soul',
   './escola-soul-v610.js?v=610-work13-school-soul',
   './escola-soul-v610.css?v=610-work13-school-soul',
-  './biblioteca-soul-v610.js?v=610-work13-library-soul',
-  './biblioteca-soul-v610.css?v=610-work13-library-soul',
+  './biblioteca-soul-v610.js?v=615-sala-dos-fios-vivos',
+  './biblioteca-world-v615.css?v=615-sala-dos-fios-vivos',
   './diario-soul-v610.js?v=610-work13-journal-soul',
   './diario-soul-v610.css?v=610-work13-journal-soul',
   './cosmos-entry-intention-v610.js?v=613-menu-global-vivo',
@@ -81,7 +81,7 @@ const fetchCore = async path => {
 
 const validateCore = async responses => {
   const index = await responses.get('./index.html')?.clone().text();
-  const app = await responses.get('./app-v208.js?v=614-tarot-livre-camara-violeta')?.clone().text();
+  const app = await responses.get('./app-v208.js?v=615-biblioteca-sala-dos-fios-vivos')?.clone().text();
   const tarotLivreSoul = await responses.get('./tarot-livre-soul-v610.js?v=614-camara-vazio-violeta')?.clone().text();
   const tarotLivreSoulStyles = await responses.get('./tarot-livre-world-v614.css?v=614-camara-vazio-violeta')?.clone().text();
   const cartaDoDiaSoul = await responses.get('./carta-do-dia-soul-v610.js?v=610-work13-daily-soul')?.clone().text();
@@ -90,8 +90,8 @@ const validateCore = async responses => {
   const tiragensSoulStyles = await responses.get('./tiragens-soul-v610.css?v=610-work13-spreads-soul')?.clone().text();
   const escolaSoul = await responses.get('./escola-soul-v610.js?v=610-work13-school-soul')?.clone().text();
   const escolaSoulStyles = await responses.get('./escola-soul-v610.css?v=610-work13-school-soul')?.clone().text();
-  const bibliotecaSoul = await responses.get('./biblioteca-soul-v610.js?v=610-work13-library-soul')?.clone().text();
-  const bibliotecaSoulStyles = await responses.get('./biblioteca-soul-v610.css?v=610-work13-library-soul')?.clone().text();
+  const bibliotecaSoul = await responses.get('./biblioteca-soul-v610.js?v=615-sala-dos-fios-vivos')?.clone().text();
+  const bibliotecaSoulStyles = await responses.get('./biblioteca-world-v615.css?v=615-sala-dos-fios-vivos')?.clone().text();
   const diarioSoul = await responses.get('./diario-soul-v610.js?v=610-work13-journal-soul')?.clone().text();
   const diarioSoulStyles = await responses.get('./diario-soul-v610.css?v=610-work13-journal-soul')?.clone().text();
   const entryIntention = await responses.get('./cosmos-entry-intention-v610.js?v=613-menu-global-vivo')?.clone().text();
@@ -137,11 +137,11 @@ const validateCore = async responses => {
   const soul = await responses.get('./whit-orb-soul-bridge-v581.js?v=592-work12-navigation')?.clone().text();
   if (!index?.includes('name="divina-work12" content="V600"')
     || !index.includes('name="divina-live-audit" content="V600"')
-    || !index.includes('name="divina-work13" content="V614"')) {
+    || !index.includes('name="divina-work13" content="V615"')) {
     throw new Error('work13-index-version-mismatch');
   }
-  if (!index.includes('app-v208.js?v=614-tarot-livre-camara-violeta')
-    || !index.includes('name="divina-work13-correction" content="V614-TAROT-LIVRE-CAMARA-DO-VAZIO-VIOLETA"')
+  if (!index.includes('app-v208.js?v=615-biblioteca-sala-dos-fios-vivos')
+    || !index.includes('name="divina-work13-correction" content="V615-BIBLIOTECA-SALA-DOS-FIOS-VIVOS"')
     || !index.includes('id="divinaCosmosEntryIntentionV610"')
     || !index.includes('cosmos-entry-intention-v610.css?v=613-menu-global-vivo')
     || !index.includes('id="divinaCosmosWorldPresenceV610"')
@@ -428,15 +428,16 @@ const validateCore = async responses => {
     || /@keyframes|backdrop-filter|filter\s*:/.test(escolaSoulStyles)) {
     throw new Error('work13-escola-soul-styles-missing');
   }
-  if (!app.includes("biblioteca-soul-v610.js?v=610-work13-library-soul")
+  if (!app.includes("biblioteca-soul-v610.js?v=615-sala-dos-fios-vivos")
     || !app.includes('createBibliotecaSoulV610({ orbCore:supremeOrb })')
     || !app.includes('window.orbe.bibliotecaSoul = bibliotecaSoul')
-    || !app.includes("stage:'quinta-realidade-alma-propria'")) {
+    || !app.includes('divinaWork13BibliotecaWorldV615')
+    || !app.includes("stage:'renovacao-dos-mundos-2-biblioteca'")) {
     throw new Error('work13-biblioteca-soul-app-mismatch');
   }
-  if (!bibliotecaSoul?.includes('BIBLIOTECA_SOUL_CONTRACT_V610')
-    || !bibliotecaSoul.includes("universe:'arquivo-de-luz'")
-    || !bibliotecaSoul.includes("'threshold','orb','one-discovery','silence','symbolic-thread'")
+  if (!bibliotecaSoul?.includes('BIBLIOTECA_WORLD_CONTRACT_V615')
+    || !bibliotecaSoul.includes("universe:'arquivo-de-luz-sala-dos-fios-vivos'")
+    || !bibliotecaSoul.includes("'arrival','threshold','one-discovery','silence','symbolic-thread'")
     || !bibliotecaSoul.includes("existingLibraryWorldAuthority:'V302-preserved'")
     || !bibliotecaSoul.includes("existingLibraryDepthAuthority:'V332-preserved'")
     || !bibliotecaSoul.includes("existingPublicLibraryAuthority:'V544-preserved'")
@@ -447,7 +448,11 @@ const validateCore = async responses => {
     || !bibliotecaSoul.includes('cataloguePageSizePreserved:18')
     || !bibliotecaSoul.includes('gridFullImageRequestsPreserved:0')
     || !bibliotecaSoul.includes('oneDiscoveryFirst:true')
+    || !bibliotecaSoul.includes('onePrimaryChoice:true')
     || !bibliotecaSoul.includes('catalogueRequiresExplicitGesture:true')
+    || !bibliotecaSoul.includes('catalogueRecedesAtArrival:true')
+    || !bibliotecaSoul.includes('catalogueDeferredRendering:true')
+    || !bibliotecaSoul.includes('readerDeferredRendering:true')
     || !bibliotecaSoul.includes("'symbol','element','number','archetype','related-cards'")
     || !bibliotecaSoul.includes("'pt-BR','en','es'")
     || !bibliotecaSoul.includes('cardMeaningChanges:0')
@@ -464,7 +469,7 @@ const validateCore = async responses => {
     || !bibliotecaSoul.includes('work14:false')) {
     throw new Error('work13-biblioteca-soul-contract-missing');
   }
-  if (!bibliotecaSoulStyles?.includes('[data-library-soul="v610"]')
+  if (!bibliotecaSoulStyles?.includes('[data-library-world="v615"]')
     || !bibliotecaSoulStyles.includes('[data-library-soul-phase="answering"]')
     || !bibliotecaSoulStyles.includes('[data-library-soul-phase="discovery"]')
     || !bibliotecaSoulStyles.includes('[data-library-soul-phase="thread"]')
@@ -473,6 +478,8 @@ const validateCore = async responses => {
     || !bibliotecaSoulStyles.includes('.lb302__sanctuary')
     || !bibliotecaSoulStyles.includes('.lb302__paths')
     || !bibliotecaSoulStyles.includes('.pl544')
+    || !bibliotecaSoulStyles.includes('content-visibility:auto')
+    || !bibliotecaSoulStyles.includes('contain-intrinsic-block-size:760px')
     || !bibliotecaSoulStyles.includes('@media(max-width:430px)')
     || !bibliotecaSoulStyles.includes('@media(orientation:landscape)')
     || !bibliotecaSoulStyles.includes('@media(prefers-reduced-motion:reduce)')
@@ -964,7 +971,8 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK13_DAILY_SOUL_ACTIVE', version:VERSION, reality:'daily', cardsPerBrasiliaDay:1, timeZone:'America/Sao_Paulo', reversed:false, oneSentenceEssence:true, depthExplicit:true, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_SPREADS_SOUL_ACTIVE', version:VERSION, reality:'spreads', methods:15, freeMethods:4, premiumMethods:11, celticCrossPositions:10, royalTableCards:78, oneSentenceSynthesis:true, depthExplicit:true, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_SCHOOL_SOUL_ACTIVE', version:VERSION, reality:'school', universe:'jardim-arcano-do-conhecimento', stages:3, modules:17, lessons:124, cardLessons:78, oneNextLesson:true, programmeExplicit:true, oneOrb:true, base:600, complete:true });
-        client.postMessage({ type:'DIVINA_WORK13_LIBRARY_SOUL_ACTIVE', version:VERSION, reality:'library', universe:'arquivo-de-luz', cards:78, uprightOnly:true, reversed:false, pageSize:18, oneDiscoveryFirst:true, catalogueExplicit:true, symbolicThreads:5, oneOrb:true, base:600, complete:true });
+        client.postMessage({ type:'DIVINA_WORK13_LIBRARY_SOUL_ACTIVE', version:VERSION, reality:'library', universe:'arquivo-de-luz-sala-dos-fios-vivos', cards:78, uprightOnly:true, reversed:false, pageSize:18, oneDiscoveryFirst:true, onePrimaryChoice:true, catalogueExplicit:true, catalogueDeferred:true, readerDeferred:true, symbolicThreads:5, oneOrb:true, base:600, complete:true });
+        client.postMessage({ type:'DIVINA_WORK13_LIBRARY_WORLD_ACTIVE', version:VERSION, reality:'library', universe:'arquivo-de-luz-sala-dos-fios-vivos', sequence:['arrival','threshold','one-discovery','silence','symbolic-thread','related-doors','catalogue-on-explicit-request'], pentagramMenu:true, oneOrb:true, base:614, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_JOURNAL_SOUL_ACTIVE', version:VERSION, reality:'journal', universe:'camara-da-tinta-lunar', privateByDefault:true, directWritingFirst:true, silentAutosave:true, timelinePageSize:12, mirrorAggregateOnly:true, mirrorDiagnosis:false, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_RELEASE_READY', version:VERSION });
       } catch {}

@@ -64,7 +64,7 @@ ok(styles.includes('body[data-screen="tarot"] .app-header') && styles.includes('
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
 ok(count(core,/^\s*'\.\//gm) === 58, '58 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v614-tarot-livre-camara-violeta'"), 'cache cumulativo próprio');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v615-biblioteca-sala-fios-vivos'"), 'cache cumulativo próprio');
 ok(sw.includes("'./tarot-livre-soul-v610.js?v=614-camara-vazio-violeta'"), 'JS no cache');
 ok(sw.includes("'./tarot-livre-world-v614.css?v=614-camara-vazio-violeta'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_TAROT_SOUL_ACTIVE'), 'ativação comunicada');

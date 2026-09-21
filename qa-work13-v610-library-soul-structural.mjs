@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto';
 const read = name => readFile(new URL(name, import.meta.url), 'utf8');
 const [html,app,sw,soul,styles,wisdom,wisdomStyles,entry,school,schoolStyles,spreads,spreadsStyles,daily,dailyStyles,tarot,tarotStyles,orchestra] = await Promise.all([
   read('./index.html'),read('./app-v208.js'),read('./sw.js'),
-  read('./biblioteca-soul-v610.js'),read('./biblioteca-soul-v610.css'),
+  read('./biblioteca-soul-v610.js'),read('./biblioteca-world-v615.css'),
   read('./living-wisdom-path-v607.js'),read('./living-wisdom-path-v607.css'),
   read('./cosmos-entry-intention-v610.js'),read('./escola-soul-v610.js'),
   read('./escola-soul-v610.css'),read('./tiragens-soul-v610.js'),
@@ -26,25 +26,28 @@ ok(count(html,/id="cardLibraryApp"/g) === 1, 'um app Biblioteca');
 ok(!/id="(?:biblioteca|library)OrbV610"/.test(html), 'nenhuma Orbe duplicada');
 
 ok(count(app,/createBibliotecaSoulV610/g) === 2, 'importação e criação únicas');
-ok(app.includes("biblioteca-soul-v610.js?v=610-work13-library-soul"), 'alma ligada ao app');
+ok(app.includes("biblioteca-soul-v610.js?v=615-sala-dos-fios-vivos"), 'mundo ligado ao app');
 ok(app.includes('createBibliotecaSoulV610({ orbCore:supremeOrb })'), 'mesma Orbe reutilizada');
 ok(app.includes('window.orbe.bibliotecaSoul = bibliotecaSoul'), 'alma publicada na Orbe');
 ok(app.includes('window.divinaWork13BibliotecaSoulV610'), 'estado público próprio');
-ok(app.includes("stage:'quinta-realidade-alma-propria'"), 'quinta realidade declarada');
-ok(app.includes("universe:'arquivo-de-luz'"), 'Arquivo de Luz declarado');
+ok(app.includes('window.divinaWork13BibliotecaWorldV615'), 'mundo V615 publicado');
+ok(app.includes("stage:'renovacao-dos-mundos-2-biblioteca'"), 'segunda realidade renovada');
+ok(app.includes("universe:'arquivo-de-luz-sala-dos-fios-vivos'"), 'Sala dos Fios Vivos declarada');
 ok(app.includes('bibliotecaSoulStatus:bibliotecaSoul?.status?.() || null'), 'auditoria reunida');
 ok(app.includes('realitySouls:6'), 'seis realidades concluídas');
 ok(app.includes("event.data?.type === 'DIVINA_WORK13_LIBRARY_SOUL_ACTIVE'"), 'worker ouvido');
 ok(app.includes('work14:false'), 'nenhum WORK14');
 
 for (const token of [
-  'BIBLIOTECA_SOUL_CONTRACT_V610',"universe:'arquivo-de-luz'",
-  "'threshold','orb','one-discovery','silence','symbolic-thread'",
+  'BIBLIOTECA_WORLD_CONTRACT_V615',"universe:'arquivo-de-luz-sala-dos-fios-vivos'",
+  "'arrival','threshold','one-discovery','silence','symbolic-thread'",
   "existingLibraryWorldAuthority:'V302-preserved'","existingLibraryDepthAuthority:'V332-preserved'",
   "existingPublicLibraryAuthority:'V544-preserved'","existingLivingWisdomAuthority:'V607-preserved'",
   'cardsPreserved:78','uprightCardsOnly:true','reversedCards:false',
   'cataloguePageSizePreserved:18','gridFullImageRequestsPreserved:0','oneDiscoveryFirst:true',
-  'catalogueRequiresExplicitGesture:true',"'symbol','element','number','archetype','related-cards'",
+  'onePrimaryChoice:true','catalogueRequiresExplicitGesture:true','catalogueRecedesAtArrival:true',
+  'searchAppearsOnRequest:true','catalogueDeferredRendering:true','readerDeferredRendering:true',
+  "'obsidian','pearl','ancient-coral','opal-light'","'symbol','element','number','archetype','related-cards'",
   "'pt-BR','en','es'",'searchDiacriticsInsensitive:true','cardMeaningChanges:0',
   'cardSelectionChanges:0','searchChanges:0','filterChanges:0','comparisonChanges:0',
   'favouriteChanges:0','premiumAuthorityChanges:0','persistenceChanges:0',
@@ -68,12 +71,13 @@ ok(soul.includes("'divina:menu-state'"), 'acompanha a Orbe global');
 ok(!/\.value\b|\.textContent\b|\.innerText\b/.test(soul), 'não lê carta, significado ou busca');
 
 for (const token of [
-  '[data-library-soul="v610"]','[data-library-soul-phase="answering"]',
+  '[data-library-world="v615"]','[data-library-soul-phase="answering"]',
   '[data-library-soul-phase="discovery"]','[data-library-soul-phase="thread"]',
   '[data-library-soul-phase="catalogue"]','[data-library-soul-phase="search"]',
   '[data-library-soul-phase="portal"]','.db607-library-guide','.lb302','.lb302__head',
   '.lb302__sanctuary','.lb302__paths','.lb302__field','.lb302__hint','.pl544',
-  '[data-library-grid]','[data-library-card]','[data-library-reader]',
+  '[data-library-grid]','[data-library-card]','[data-library-reader]','content-visibility:auto',
+  'contain-intrinsic-block-size:760px','contain-intrinsic-block-size:920px',
   'scroll-snap-type:x mandatory','overscroll-behavior-inline:contain',
   '-webkit-overflow-scrolling:touch','@media(max-width:430px)',
   '@media(orientation:landscape)','@media(prefers-reduced-motion:reduce)',
@@ -98,10 +102,11 @@ ok(entry.includes('globalOrbMenuCycle:true') && entry.includes('everyRealityCanC
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
 ok(count(core,/^\s*'\.\//gm) === 58, '58 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v614-tarot-livre-camara-violeta'"), 'cache próprio');
-ok(sw.includes("'./biblioteca-soul-v610.js?v=610-work13-library-soul'"), 'JS no cache');
-ok(sw.includes("'./biblioteca-soul-v610.css?v=610-work13-library-soul'"), 'CSS no cache');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v615-biblioteca-sala-fios-vivos'"), 'cache próprio');
+ok(sw.includes("'./biblioteca-soul-v610.js?v=615-sala-dos-fios-vivos'"), 'JS no cache');
+ok(sw.includes("'./biblioteca-world-v615.css?v=615-sala-dos-fios-vivos'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_LIBRARY_SOUL_ACTIVE'), 'ativação comunicada');
+ok(sw.includes('DIVINA_WORK13_LIBRARY_WORLD_ACTIVE'), 'novo mundo comunicado');
 ok(sw.includes('work13-biblioteca-soul-contract-missing'), 'contrato validado pelo worker');
 ok(sw.includes('work13-biblioteca-soul-styles-missing'), 'estilo validado pelo worker');
 
@@ -117,4 +122,4 @@ ok(hash(spreadsStyles) === '8a89a6a1edc5e4682c959de13449462b226132011e74c4ae2ba9
 ok(hash(school) === '23446ccfb872519528ae52f8ce99d01ce2bb886f95dd3832b78f525c998ee3eb', 'Escola protegida byte a byte');
 ok(hash(schoolStyles) === '2073c5fdc6d1b1b3b32484f32ac2ef28283335432de58c8042b2fa1016b43ba4', 'Jardim Arcano protegido byte a byte');
 
-console.log(`PASS ${checks}/${checks} — estrutura da alma da Biblioteca V610`);
+console.log(`PASS ${checks}/${checks} — estrutura da Sala dos Fios Vivos V615`);

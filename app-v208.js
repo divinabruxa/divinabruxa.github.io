@@ -79,7 +79,7 @@ import { createTarotLivreSoulV610 } from './tarot-livre-soul-v610.js?v=614-camar
 import { createCartaDoDiaSoulV610 } from './carta-do-dia-soul-v610.js?v=610-work13-daily-soul';
 import { createTiragensSoulV610 } from './tiragens-soul-v610.js?v=610-work13-spreads-soul';
 import { createEscolaSoulV610 } from './escola-soul-v610.js?v=610-work13-school-soul';
-import { createBibliotecaSoulV610 } from './biblioteca-soul-v610.js?v=610-work13-library-soul';
+import { createBibliotecaSoulV610 } from './biblioteca-soul-v610.js?v=615-sala-dos-fios-vivos';
 import { createDiarioSoulV610 } from './diario-soul-v610.js?v=610-work13-journal-soul';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
@@ -645,12 +645,16 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK13_LIBRARY_WORLD_ACTIVE') {
+    document.documentElement.dataset.work13LibraryWorldWorker = `v${event.data.version || 615}`;
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK13_JOURNAL_SOUL_ACTIVE') {
     document.documentElement.dataset.work13JournalSoulWorker = 'v610';
     return;
   }
   if (event.data?.type === 'DIVINA_WORK13_LIBRARY_SOUL_ACTIVE') {
-    document.documentElement.dataset.work13LibrarySoulWorker = 'v610';
+    document.documentElement.dataset.work13LibrarySoulWorker = `v${event.data.version || 615}`;
     return;
   }
   if (event.data?.type === 'DIVINA_WORK13_SCHOOL_SOUL_ACTIVE') {
@@ -2313,7 +2317,7 @@ const tiragensSoul = safely('WORK13 · Alma das Tiragens V610', () =>
 const escolaSoul = safely('WORK13 · Alma da Escola V610', () =>
   createEscolaSoulV610({ orbCore:supremeOrb })
 );
-const bibliotecaSoul = safely('WORK13 · Alma da Biblioteca V610', () =>
+const bibliotecaSoul = safely('WORK13 · Biblioteca · Sala dos Fios Vivos V615', () =>
   createBibliotecaSoulV610({ orbCore:supremeOrb })
 );
 const diarioSoul = safely('WORK13 · Alma do Diário e Espelho V610', () =>
@@ -2609,7 +2613,41 @@ document.documentElement.dataset.work13Macro = 'tarot-livre-camara-violeta';
 document.documentElement.dataset.work13TarotWorld = 'v614';
 window.orbe.tarotLivreWorld = window.divinaWork13TarotLivreWorldV614;
 window.divinaCosmosVivoV614 = window.divinaWork13TarotLivreWorldV614;
-window.divinaCosmosVivo = window.divinaWork13TarotLivreWorldV614;
+window.divinaWork13BibliotecaWorldV615 = Object.freeze({
+  version:615,
+  work:'WORK13',
+  stage:'renovacao-dos-mundos-2-biblioteca',
+  universe:'arquivo-de-luz-sala-dos-fios-vivos',
+  base:window.divinaWork13TarotLivreWorldV614,
+  world:bibliotecaSoul,
+  status:() => Object.freeze({
+    release:'V615',
+    reality:'library',
+    oneDiscoveryFirst:true,
+    onePrimaryChoice:true,
+    catalogueRequiresExplicitGesture:true,
+    catalogueRecedesAtArrival:true,
+    symbolicThreads:['symbol','element','number','archetype','related-cards'],
+    cards:78,
+    uprightOnly:true,
+    reversedCards:false,
+    cataloguePageSize:18,
+    catalogueDeferredRendering:true,
+    readerDeferredRendering:true,
+    pentagramAlwaysAvailable:true,
+    onePhysicalOrb:document.querySelectorAll?.('#orb')?.length === 1,
+    oneCanonicalCanvas:document.querySelectorAll?.('#orbCanvas')?.length === 1,
+    newRenderers:0,
+    permanentAnimationLoops:0,
+    work14:false,
+    library:bibliotecaSoul?.status?.() || null
+  })
+});
+document.documentElement.dataset.work13Macro = 'biblioteca-sala-dos-fios-vivos';
+document.documentElement.dataset.work13LibraryWorld = 'v615';
+window.orbe.bibliotecaWorld = window.divinaWork13BibliotecaWorldV615;
+window.divinaCosmosVivoV615 = window.divinaWork13BibliotecaWorldV615;
+window.divinaCosmosVivo = window.divinaWork13BibliotecaWorldV615;
 window.whit = whitCore;
 
 window.divinaWhitV212 = Object.freeze({

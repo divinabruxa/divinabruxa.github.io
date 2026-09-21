@@ -1,0 +1,538 @@
+/* DIVINA BRUXA — WORK13 V615 · BIBLIOTECA · SALA DOS FIOS VIVOS
+   Obsidiana, pérola, coral antigo e luz opalina. Uma descoberta antes das 78.
+   Sem animação permanente, filtro, renderer, imagem ou camada fixa nova. */
+
+html[data-work13-library-world="v615"] #library[data-library-world="v615"]{
+  --bl615-obsidian:5,8,10;
+  --bl615-ink:12,17,18;
+  --bl615-pearl:247,239,222;
+  --bl615-coral:211,126,116;
+  --bl615-amber:228,190,116;
+  --bl615-opal:126,213,199;
+  position:relative;
+  isolation:isolate;
+  box-sizing:border-box;
+  min-block-size:100dvh;
+  padding:max(18px,env(safe-area-inset-top)) 0 max(64px,env(safe-area-inset-bottom));
+  color:rgba(var(--bl615-pearl),.92);
+  background:
+    radial-gradient(ellipse 78% 46% at 50% 11%,rgba(var(--bl615-opal),.075),transparent 72%),
+    radial-gradient(ellipse 42% 60% at 0 64%,rgba(var(--bl615-coral),.09),transparent 75%),
+    radial-gradient(ellipse 48% 58% at 100% 78%,rgba(var(--bl615-amber),.055),transparent 74%),
+    linear-gradient(164deg,rgba(var(--bl615-ink),.83),rgba(var(--bl615-obsidian),.98) 62%,rgb(3,5,7))!important;
+  overflow:clip;
+}
+
+html[data-work13-library-world="v615"] #library[data-library-world="v615"]::before,
+html[data-work13-library-world="v615"] #library[data-library-world="v615"]::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-2;
+  pointer-events:none;
+}
+
+html[data-work13-library-world="v615"] #library[data-library-world="v615"]::before{
+  background:
+    linear-gradient(116deg,transparent 0 42%,rgba(var(--bl615-pearl),.045) 42.15% 42.32%,transparent 42.48%) 0 0/271px 307px,
+    linear-gradient(64deg,transparent 0 61%,rgba(var(--bl615-opal),.038) 61.14% 61.31%,transparent 61.48%) 0 0/337px 251px,
+    radial-gradient(circle at 19% 23%,rgba(var(--bl615-pearl),.25) 0 1px,transparent 1.5px) 0 0/211px 229px,
+    radial-gradient(circle at 81% 72%,rgba(var(--bl615-coral),.22) 0 1px,transparent 1.5px) 0 0/283px 263px;
+  opacity:.54;
+  transform:translateY(0) scale(1);
+  transition:opacity 220ms ease,transform 360ms cubic-bezier(.2,.76,.2,1);
+}
+
+html[data-work13-library-world="v615"] #library[data-library-world="v615"]::after{
+  z-index:-1;
+  background:
+    radial-gradient(circle at 50% 32%,rgba(var(--bl615-pearl),.065),transparent 20%),
+    radial-gradient(ellipse 52% 38% at 50% 62%,rgba(var(--bl615-opal),.045),transparent 72%);
+  opacity:.8;
+  transition:opacity 180ms ease;
+}
+
+html[data-work13-library-world="v615"] #library[data-library-soul-presence="away"]::before,
+html[data-work13-library-world="v615"] #library[data-library-soul-presence="away"]::after,
+html[data-work13-library-world="v615"] #library[data-library-soul-phase="travel"]::before,
+html[data-work13-library-world="v615"] #library[data-library-soul-phase="travel"]::after{
+  opacity:0;
+}
+
+html[data-work13-library-world="v615"] #library[data-library-soul-phase="answering"]::before{
+  opacity:.88;
+  transform:translateY(-2px) scale(1.006);
+}
+
+html[data-work13-library-world="v615"] #library:is([data-library-soul-phase="discovery"],[data-library-soul-phase="silence"])::before{
+  opacity:.26;
+  transform:scale(.998);
+}
+
+html[data-work13-library-world="v615"] #library[data-library-soul-phase="portal"]::before{
+  opacity:.14;
+  transform:scale(.988);
+}
+
+/* O pentagrama V613 permanece como único menu. A navegação legada recua
+   somente dentro desta realidade. */
+html[data-work13-library-world="v615"] body[data-screen="library"] .app-header,
+html[data-work13-library-world="v615"] body[data-screen="library"] .magic-dock,
+html[data-work13-library-world="v615"] body[data-screen="library"] #orbMenu{
+  visibility:hidden!important;
+  pointer-events:none!important;
+  opacity:0!important;
+}
+
+html[data-work13-library-world="v615"] #library> :is(.eyebrow,h2,.lead){
+  display:none!important;
+}
+
+html[data-work13-library-world="v615"] #library #cardLibraryApp{
+  width:min(calc(100% - 24px),1180px);
+  margin-inline:auto;
+}
+
+html[data-work13-library-world="v615"] #library #cardLibraryApp .lb302{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  min-block-size:min(88svh,940px);
+  padding:clamp(10px,2.5vw,28px);
+  border:0;
+  border-radius:clamp(30px,7vw,72px);
+  background:
+    radial-gradient(ellipse 48% 26% at 50% 0,rgba(var(--bl615-pearl),.055),transparent 80%),
+    linear-gradient(180deg,rgba(var(--bl615-pearl),.018),rgba(var(--bl615-obsidian),.16));
+  box-shadow:inset 0 1px 0 rgba(var(--bl615-pearl),.045);
+  overflow:hidden;
+}
+
+html[data-work13-library-world="v615"] #library #cardLibraryApp .lb302__head{
+  display:none!important;
+}
+
+/* Limiar: uma escolha principal e o catálogo em voz baixa. */
+html[data-work13-library-world="v615"] #cardLibraryApp[data-living-wisdom="v607"] .db607-library-guide{
+  position:relative;
+  order:-2;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(180px,230px);
+  align-items:end;
+  gap:clamp(22px,5vw,56px);
+  width:min(860px,calc(100% - 20px));
+  margin:clamp(8px,2.4vh,22px) auto clamp(18px,4vh,38px);
+  padding:clamp(26px,5vw,54px) clamp(22px,6vw,64px) clamp(24px,5vw,44px);
+  border:0;
+  border-block-start:1px solid rgba(var(--bl615-pearl),.14);
+  border-block-end:1px solid rgba(var(--bl615-pearl),.08);
+  border-radius:52% 52% 28px 28px / 84px 84px 28px 28px;
+  background:
+    radial-gradient(ellipse 52% 76% at 50% 0,rgba(var(--bl615-pearl),.075),transparent 70%),
+    linear-gradient(145deg,rgba(var(--bl615-coral),.045),rgba(var(--bl615-opal),.018) 52%,rgba(var(--bl615-obsidian),.20));
+  box-shadow:none;
+  transition:opacity 190ms ease,transform 220ms cubic-bezier(.2,.76,.2,1),border-color 180ms ease;
+}
+
+html[data-work13-library-world="v615"] #cardLibraryApp .db607-library-guide::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:14px;
+  inline-size:min(52%,310px);
+  block-size:1px;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,transparent,rgba(var(--bl615-opal),.38),rgba(var(--bl615-pearl),.26),transparent);
+  pointer-events:none;
+}
+
+html[data-work13-library-world="v615"] #library[data-library-soul-phase="answering"] .db607-library-guide{
+  border-block-start-color:rgba(var(--bl615-opal),.36);
+  transform:translateY(-2px) scale(.997);
+}
+
+html[data-work13-library-world="v615"] #cardLibraryApp .db607-library-guide__copy .eyebrow{
+  margin-block:0 10px;
+  color:rgba(var(--bl615-opal),.78);
+  font:750 9px/1.3 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  letter-spacing:.23em;
+}
+
+html[data-work13-library-world="v615"] #cardLibraryApp .db607-library-guide__copy h3{
+  max-width:14ch;
+  margin:0;
+  color:rgba(var(--bl615-pearl),.98);
+  font:400 clamp(32px,5vw,58px)/.98 Georgia,"Times New Roman",serif;
+  letter-spacing:-.045em;
+  text-wrap:balance;
+  text-shadow:0 0 38px rgba(var(--bl615-coral),.10);
+}
+
+html[data-work13-library-world="v615"] #cardLibraryApp .db607-library-guide__copy>p:last-child{
+  max-width:48ch;
+  margin-block:16px 0;
+  color:rgba(var(--bl615-pearl),.54);
+  line-height:1.62;
+}
+
+html[data-work13-library-world="v615"] #cardLibraryApp .db607-library-guide__actions{
+  display:grid;
+  grid-template-columns:1fr;
+  align-content:end;
+  gap:10px;
+}
+
+html[data-work13-library-world="v615"] #library :is(.db607-primary,.db607-secondary){
+  min-block-size:48px;
+  padding:12px 18px;
+  border:1px solid rgba(var(--bl615-pearl),.12);
+  border-radius:999px;
+  color:rgba(var(--bl615-pearl),.84);
+  background:rgba(var(--bl615-pearl),.018);
+  box-shadow:none;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  transition:transform 90ms ease,border-color 150ms ease,background-color 150ms ease,color 150ms ease;
+}
+
+html[data-work13-library-world="v615"] #library .db607-primary{
+  border-color:rgba(var(--bl615-coral),.34);
+  color:rgba(var(--bl615-pearl),.96);
+  background:linear-gradient(110deg,rgba(var(--bl615-coral),.14),rgba(var(--bl615-opal),.055));
+}
+
+html[data-work13-library-world="v615"] #library .db607-secondary{
+  color:rgba(var(--bl615-pearl),.48);
+}
+
+html[data-work13-library-world="v615"] #library :is(.db607-primary,.db607-secondary):active{
+  transform:scale(.975);
+  border-color:rgba(var(--bl615-pearl),.40);
+}
+
+html[data-work13-library-world="v615"] #library :is(.db607-primary,.db607-secondary):focus-visible{
+  outline:2px solid rgba(var(--bl615-pearl),.92);
+  outline-offset:3px;
+}
+
+/* Câmara central: a Orbe é a única presença antes da carta. */
+html[data-work13-library-world="v615"] #cardLibraryApp[data-v607-library-mode="focus"] .lb302__sanctuary{
+  position:relative;
+  display:grid;
+  place-items:center;
+  width:min(720px,100%);
+  min-block-size:clamp(390px,61svh,680px)!important;
+  margin:0 auto clamp(18px,4vh,40px)!important;
+  padding:clamp(28px,8vw,76px);
+  border:0;
+  border-radius:50% 50% 28px 28px / 108px 108px 28px 28px;
+  background:
+    radial-gradient(circle at 50% 43%,rgba(var(--bl615-pearl),.09),transparent 22%),
+    radial-gradient(ellipse 74% 56% at 50% 100%,rgba(var(--bl615-opal),.06),transparent 72%),
+    linear-gradient(180deg,rgba(var(--bl615-pearl),.018),rgba(var(--bl615-obsidian),.18));
+  box-shadow:inset 0 1px 0 rgba(var(--bl615-pearl),.07);
+  overflow:hidden;
+  transition:background-color 180ms ease,transform 220ms cubic-bezier(.2,.76,.2,1),box-shadow 180ms ease;
+}
+
+html[data-work13-library-world="v615"] #cardLibraryApp[data-v607-library-mode="focus"] .lb302__sanctuary::before,
+html[data-work13-library-world="v615"] #cardLibraryApp[data-v607-library-mode="focus"] .lb302__sanctuary::after{
+  content:"";
+  position:absolute;
+  pointer-events:none;
+}
+
+html[data-work13-library-world="v615"] #cardLibraryApp[data-v607-library-mode="focus"] .lb302__sanctuary::before{
+  inset:clamp(14px,4vw,34px);
+  border:1px solid rgba(var(--bl615-pearl),.07);
+  border-block-end-color:rgba(var(--bl615-opal),.11);
+  border-radius:50% 50% 22px 22px / 88px 88px 22px 22px;
+}
+
+html[data-work13-library-world="v615"] #cardLibraryApp[data-v607-library-mode="focus"] .lb302__sanctuary::after{
+  left:50%;
+  bottom:10%;
+  inline-size:min(76%,480px);
+  block-size:1px;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,transparent,rgba(var(--bl615-coral),.26),rgba(var(--bl615-opal),.26),transparent);
+}
+
+html[data-work13-library-world="v615"] #library[data-library-soul-phase="answering"] .lb302__sanctuary{
+  transform:translateY(-2px) scale(.997);
+  box-shadow:inset 0 1px 0 rgba(var(--bl615-pearl),.10),0 24px 70px rgba(var(--bl615-opal),.035);
+}
+
+html[data-work13-library-world="v615"] #library:is([data-library-soul-phase="discovery"],[data-library-soul-phase="thread"]) .lb302__sanctuary{
+  background:
+    radial-gradient(circle at 50% 43%,rgba(var(--bl615-coral),.07),transparent 24%),
+    radial-gradient(ellipse 72% 56% at 50% 100%,rgba(var(--bl615-opal),.045),transparent 72%),
+    rgba(var(--bl615-obsidian),.15);
+}
+
+html[data-work13-library-world="v615"] #cardLibraryApp .lb302__sanctuary :is([data-library-orb-host],[data-orb]){
+  position:relative;
+  border-radius:48% 52% 49% 51% / 54% 46% 54% 46%;
+  background:radial-gradient(circle,rgba(var(--bl615-pearl),.09),rgba(var(--bl615-opal),.038) 48%,transparent 72%);
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+
+html[data-work13-library-world="v615"] #cardLibraryApp .lb302__hint{
+  max-width:32ch;
+  color:rgba(var(--bl615-pearl),.46)!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-style:italic;
+  letter-spacing:.01em;
+  text-align:center;
+}
+
+/* Os fios aparecem depois da descoberta ou quando o catálogo é chamado. */
+html[data-work13-library-world="v615"] #cardLibraryApp .lb302__paths{
+  display:flex;
+  gap:9px;
+  width:min(900px,100%);
+  margin-inline:auto;
+  padding:6px 2px 14px;
+  overflow-x:auto;
+  scroll-snap-type:x proximity;
+  overscroll-behavior-inline:contain;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+
+html[data-work13-library-world="v615"] #cardLibraryApp .lb302__paths::-webkit-scrollbar{
+  display:none;
+}
+
+html[data-work13-library-world="v615"] #cardLibraryApp .lb302__paths [data-path]{
+  flex:none;
+  min-block-size:44px;
+  padding-inline:18px;
+  scroll-snap-align:start;
+  border:1px solid rgba(var(--bl615-pearl),.10);
+  border-radius:999px;
+  color:rgba(var(--bl615-pearl),.62);
+  background:rgba(var(--bl615-pearl),.016);
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  transition:transform 90ms ease,border-color 150ms ease,color 150ms ease;
+}
+
+html[data-work13-library-world="v615"] #cardLibraryApp .lb302__paths [data-path]:active{
+  transform:scale(.98);
+  border-color:rgba(var(--bl615-opal),.34);
+}
+
+html[data-work13-library-world="v615"] #cardLibraryApp .lb302__field{
+  width:min(900px,100%);
+  margin:clamp(10px,3vw,22px) auto;
+  padding:9px;
+  border:1px solid rgba(var(--bl615-pearl),.10);
+  border-radius:999px;
+  background:rgba(var(--bl615-obsidian),.42);
+}
+
+html[data-work13-library-world="v615"] #cardLibraryApp .lb302__field :is(input,button){
+  min-block-size:44px;
+  color:rgba(var(--bl615-pearl),.88);
+  touch-action:manipulation;
+}
+
+html[data-work13-library-world="v615"] #cardLibraryApp .lb302__field input{
+  border-color:transparent;
+  border-radius:999px;
+  background:rgba(var(--bl615-pearl),.025);
+}
+
+/* As 78 portas deixam de ser grade esmagada: no iPhone, uma respira por vez. */
+html[data-work13-library-world="v615"] #cardLibraryApp .pl544{
+  width:min(1080px,100%);
+  margin-inline:auto;
+  padding:clamp(12px,3vw,26px);
+  border:0;
+  border-block-start:1px solid rgba(var(--bl615-pearl),.08);
+  border-radius:30px;
+  background:linear-gradient(180deg,rgba(var(--bl615-pearl),.018),rgba(var(--bl615-obsidian),.14));
+}
+
+html[data-work13-library-world="v615"] #cardLibraryApp .pl544 :is([data-library-grid],.pl544__grid,.pl544__cards,.pl544-grid){
+  gap:clamp(13px,2.8vw,24px);
+  content-visibility:auto;
+  contain-intrinsic-block-size:760px;
+}
+
+html[data-work13-library-world="v615"] #cardLibraryApp :is([data-library-card],.pl544__card,.lb302__card,.library-card){
+  min-block-size:184px;
+  border:1px solid rgba(var(--bl615-pearl),.10);
+  border-radius:48% 48% 18px 18px / 36px 36px 18px 18px;
+  background:
+    radial-gradient(ellipse 72% 34% at 50% 0,rgba(var(--bl615-pearl),.045),transparent 80%),
+    rgba(var(--bl615-ink),.62);
+  box-shadow:inset 0 1px 0 rgba(var(--bl615-pearl),.035),0 14px 36px rgba(0,0,0,.15);
+  scroll-snap-align:center;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  transition:transform 100ms ease,border-color 160ms ease,background-color 160ms ease;
+}
+
+html[data-work13-library-world="v615"] #cardLibraryApp :is([data-library-card],.pl544__card,.lb302__card,.library-card):active{
+  border-color:rgba(var(--bl615-coral),.34);
+  transform:scale(.982);
+}
+
+html[data-work13-library-world="v615"] #library[data-library-soul-phase="thread"] #cardLibraryApp :is([data-related-card],[data-library-related]){
+  border-color:rgba(var(--bl615-opal),.30);
+  background-color:rgba(var(--bl615-opal),.045);
+}
+
+/* Ao abrir uma carta, o leitor se torna o mundo; nenhuma caixa genérica. */
+html[data-work13-library-world="v615"] #cardLibraryApp :is([data-library-reader],.lb302__reader,.lb332,.library-reader){
+  width:min(900px,100%);
+  margin-inline:auto;
+  padding:clamp(24px,6vw,58px);
+  border:0;
+  border-block-start:1px solid rgba(var(--bl615-coral),.16);
+  border-block-end:1px solid rgba(var(--bl615-opal),.10);
+  border-radius:56px 56px 26px 26px / 88px 88px 26px 26px;
+  background:
+    radial-gradient(ellipse 58% 30% at 50% 0,rgba(var(--bl615-pearl),.065),transparent 76%),
+    linear-gradient(180deg,rgba(var(--bl615-coral),.025),rgba(var(--bl615-obsidian),.25));
+  content-visibility:auto;
+  contain-intrinsic-block-size:920px;
+}
+
+html[data-work13-library-world="v615"] #library[data-library-soul-phase="discovery"] .db607-library-guide{
+  opacity:.48;
+}
+
+html[data-work13-library-world="v615"] #library:is([data-library-soul-phase="catalogue"],[data-library-soul-phase="search"]) .db607-library-guide{
+  width:min(1040px,calc(100% - 20px));
+  border-radius:34px;
+}
+
+html[data-experience-budget="essential"][data-work13-library-world="v615"] #library::before{
+  opacity:.18;
+}
+
+@media(max-width:700px){
+  html[data-work13-library-world="v615"] #cardLibraryApp[data-living-wisdom="v607"] .db607-library-guide{
+    grid-template-columns:1fr;
+    align-items:start;
+    gap:18px;
+  }
+
+  html[data-work13-library-world="v615"] #cardLibraryApp .db607-library-guide__actions{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:430px){
+  html[data-work13-library-world="v615"] #library[data-library-world="v615"]{
+    min-block-size:100svh;
+    padding-block-start:max(12px,env(safe-area-inset-top));
+    padding-block-end:max(54px,env(safe-area-inset-bottom));
+  }
+
+  html[data-work13-library-world="v615"] #library #cardLibraryApp{
+    width:calc(100% - 14px);
+  }
+
+  html[data-work13-library-world="v615"] #library #cardLibraryApp .lb302{
+    min-block-size:calc(100svh - max(76px,env(safe-area-inset-top)));
+    padding:7px;
+    border-radius:34px;
+  }
+
+  html[data-work13-library-world="v615"] #cardLibraryApp[data-living-wisdom="v607"] .db607-library-guide,
+  html[data-work13-library-world="v615"] #library:is([data-library-soul-phase="catalogue"],[data-library-soul-phase="search"]) .db607-library-guide{
+    width:100%;
+    margin-block:4px 14px;
+    padding:28px 16px 20px;
+    border-radius:38px 38px 20px 20px / 58px 58px 20px 20px;
+  }
+
+  html[data-work13-library-world="v615"] #cardLibraryApp .db607-library-guide__copy h3{
+    max-width:12ch;
+    font-size:clamp(32px,10vw,44px);
+  }
+
+  html[data-work13-library-world="v615"] #cardLibraryApp .db607-library-guide__actions{
+    grid-template-columns:1fr;
+  }
+
+  html[data-work13-library-world="v615"] #cardLibraryApp[data-v607-library-mode="focus"] .lb302__sanctuary{
+    width:100%;
+    min-block-size:min(57svh,500px)!important;
+    padding:24px 12px;
+    border-radius:46px 46px 20px 20px / 78px 78px 20px 20px;
+  }
+
+  html[data-work13-library-world="v615"] #cardLibraryApp[data-v607-library-mode="catalogue"] .lb302__paths [data-path]{
+    flex-basis:min(68%,238px);
+  }
+
+  html[data-work13-library-world="v615"] #cardLibraryApp[data-v607-library-mode="catalogue"] .pl544 :is([data-library-grid],.pl544__grid,.pl544__cards,.pl544-grid){
+    display:grid;
+    grid-template-columns:none;
+    grid-auto-flow:column;
+    grid-auto-columns:min(76%,278px);
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    overscroll-behavior-inline:contain;
+    -webkit-overflow-scrolling:touch;
+    padding:5px 6px 16px;
+    scrollbar-width:none;
+  }
+
+  html[data-work13-library-world="v615"] #cardLibraryApp[data-v607-library-mode="catalogue"] .pl544 :is([data-library-grid],.pl544__grid,.pl544__cards,.pl544-grid)::-webkit-scrollbar{
+    display:none;
+  }
+
+  html[data-work13-library-world="v615"] #cardLibraryApp :is([data-library-reader],.lb302__reader,.lb332,.library-reader){
+    padding:26px 15px;
+    border-radius:34px 34px 18px 18px / 50px 50px 18px 18px;
+  }
+}
+
+@media(orientation:landscape) and (max-height:520px){
+  html[data-work13-library-world="v615"] #library[data-library-world="v615"]{
+    padding-block-start:max(8px,env(safe-area-inset-top));
+    padding-inline:max(10px,env(safe-area-inset-left)) max(10px,env(safe-area-inset-right));
+  }
+
+  html[data-work13-library-world="v615"] #cardLibraryApp[data-living-wisdom="v607"] .db607-library-guide{
+    grid-template-columns:minmax(0,1fr) minmax(180px,224px);
+    padding:18px 24px;
+    border-radius:30px;
+  }
+
+  html[data-work13-library-world="v615"] #cardLibraryApp[data-v607-library-mode="focus"] .lb302__sanctuary{
+    min-block-size:260px!important;
+    padding-block:14px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-work13-library-world="v615"] #library,
+  html[data-work13-library-world="v615"] #library *,
+  html[data-work13-library-world="v615"] #library *::before,
+  html[data-work13-library-world="v615"] #library *::after{
+    scroll-behavior:auto!important;
+    transition:none!important;
+  }
+}
+
+@media(forced-colors:active){
+  html[data-work13-library-world="v615"] #library :is(
+    .lb302,.db607-library-guide,.lb302__sanctuary,.lb302__field,.pl544,
+    [data-library-card],.pl544__card,.lb302__card,.library-card,
+    [data-library-reader],.lb302__reader,.lb332,.library-reader,
+    .db607-primary,.db607-secondary
+  ){
+    border:1px solid CanvasText!important;
+    background:Canvas!important;
+    color:CanvasText!important;
+    forced-color-adjust:auto;
+  }
+}
