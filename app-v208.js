@@ -75,6 +75,7 @@ import { createLivingMediaSkinsV609 } from './living-media-skins-v609.js?v=609-w
 import { createCosmosFinalOrchestraV610 } from './cosmos-final-orchestra-v610.js?v=610-work13-final-orchestra';
 import { createCosmosEntryIntentionV610 } from './cosmos-entry-intention-v610.js?v=610-work13-final-presence';
 import { createCosmosWorldPresenceV610 } from './cosmos-world-presence-v610.js?v=610-work13-final-presence';
+import { createTarotLivreSoulV610 } from './tarot-livre-soul-v610.js?v=610-work13-tarot-soul';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -2271,10 +2272,23 @@ const cosmosWorldPresence = safely('WORK13 · Presença das Realidades V610', ()
     menuResolver:() => globalThis.divinaMenuV502 || null
   })
 );
+const tarotLivreSoul = safely('WORK13 · Alma do Tarot Livre V610', () =>
+  createTarotLivreSoulV610({ orbCore:supremeOrb })
+);
 window.orbe.finalOrchestra = cosmosFinalOrchestra;
 window.orbe.cosmosSeal = cosmosFinalOrchestra;
 window.orbe.entryIntention = cosmosEntryIntention;
 window.orbe.worldPresence = cosmosWorldPresence;
+window.orbe.tarotLivreSoul = tarotLivreSoul;
+window.divinaWork13TarotLivreSoulV610 = Object.freeze({
+  version:610,
+  work:'WORK13',
+  stage:'primeira-realidade-alma-propria',
+  reality:'tarot',
+  soul:tarotLivreSoul,
+  status:() => tarotLivreSoul?.status?.() || null,
+  work14:false
+});
 document.documentElement.dataset.work13 = 'cosmos-vivo';
 document.documentElement.dataset.work13Macro = '10-final-orchestra';
 window.divinaWork13Macro10V610 = Object.freeze({
@@ -2285,6 +2299,7 @@ window.divinaWork13Macro10V610 = Object.freeze({
   finalOrchestra:cosmosFinalOrchestra,
   entryIntention:cosmosEntryIntention,
   worldPresence:cosmosWorldPresence,
+  tarotLivreSoul,
   contextMemory:cosmosContextMemory,
   resonance:cosmosRealityResonance,
   dailyReading:cosmicDailyReading,
@@ -2320,6 +2335,7 @@ window.divinaWork13Macro10V610 = Object.freeze({
       entryIntentions:1,
       entryStatus:cosmosEntryIntention?.status?.() || null,
       worldPresenceStatus:cosmosWorldPresence?.status?.() || null,
+      tarotLivreSoulStatus:tarotLivreSoul?.status?.() || null,
       allMenuDestinationsHaveFullScreens:cosmosWorldPresence?.audit?.().everyMenuDestinationHasFullScreen === true,
       livingLayers:Object.freeze([602,603,604,605,606,607,608,609]),
       worldsPreserved:17,

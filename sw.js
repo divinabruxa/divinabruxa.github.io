@@ -7,10 +7,12 @@
 
 const VERSION = 610;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work13-v610-global-menu-cycle';
+const CACHE_NAME = 'divina-bruxa-work13-v610-tarot-livre-soul';
 const CORE = Object.freeze([
   './index.html',
   './app-v208.js?v=610-work13-final-presence',
+  './tarot-livre-soul-v610.js?v=610-work13-tarot-soul',
+  './tarot-livre-soul-v610.css?v=610-work13-tarot-soul',
   './cosmos-entry-intention-v610.js?v=610-work13-final-presence',
   './cosmos-entry-intention-v610.css?v=610-work13-final-presence',
   './cosmos-world-presence-v610.js?v=610-work13-final-presence',
@@ -69,6 +71,8 @@ const fetchCore = async path => {
 const validateCore = async responses => {
   const index = await responses.get('./index.html')?.clone().text();
   const app = await responses.get('./app-v208.js?v=610-work13-final-presence')?.clone().text();
+  const tarotLivreSoul = await responses.get('./tarot-livre-soul-v610.js?v=610-work13-tarot-soul')?.clone().text();
+  const tarotLivreSoulStyles = await responses.get('./tarot-livre-soul-v610.css?v=610-work13-tarot-soul')?.clone().text();
   const entryIntention = await responses.get('./cosmos-entry-intention-v610.js?v=610-work13-final-presence')?.clone().text();
   const entryStyles = await responses.get('./cosmos-entry-intention-v610.css?v=610-work13-final-presence')?.clone().text();
   const worldPresence = await responses.get('./cosmos-world-presence-v610.js?v=610-work13-final-presence')?.clone().text();
@@ -241,6 +245,36 @@ const validateCore = async responses => {
     || !app.includes("correction:'lapidacao-final-presenca-das-realidades'")) {
     throw new Error('work13-world-presence-app-mismatch');
   }
+  if (!app.includes("tarot-livre-soul-v610.js?v=610-work13-tarot-soul")
+    || !app.includes('createTarotLivreSoulV610({ orbCore:supremeOrb })')
+    || !app.includes('window.orbe.tarotLivreSoul = tarotLivreSoul')
+    || !app.includes("stage:'primeira-realidade-alma-propria'")) {
+    throw new Error('work13-tarot-livre-soul-app-mismatch');
+  }
+  if (!tarotLivreSoul?.includes('TAROT_LIVRE_SOUL_CONTRACT_V610')
+    || !tarotLivreSoul.includes("sequence:Object.freeze(['orb','card','silence','freedom'])")
+    || !tarotLivreSoul.includes('cards:78')
+    || !tarotLivreSoul.includes('rows:13')
+    || !tarotLivreSoul.includes('columns:6')
+    || !tarotLivreSoul.includes('reversedCards:false')
+    || !tarotLivreSoul.includes('repetitionBeforeReset:false')
+    || !tarotLivreSoul.includes('automaticMeanings:false')
+    || !tarotLivreSoul.includes('cardSelectionChanges:0')
+    || !tarotLivreSoul.includes('reusesCanonicalOrb:true')
+    || !tarotLivreSoul.includes('permanentAnimationLoops:0')
+    || !tarotLivreSoul.includes('mutationObservers:0')
+    || !tarotLivreSoul.includes('work14:false')) {
+    throw new Error('work13-tarot-livre-soul-contract-missing');
+  }
+  if (!tarotLivreSoulStyles?.includes('[data-tarot-soul="v610"]')
+    || !tarotLivreSoulStyles.includes('[data-tarot-soul-phase="answering"]')
+    || !tarotLivreSoulStyles.includes('[data-tarot-soul-phase="silence"]')
+    || !tarotLivreSoulStyles.includes('#realTableViewport')
+    || !tarotLivreSoulStyles.includes('@media(max-width:430px)')
+    || !tarotLivreSoulStyles.includes('@media(prefers-reduced-motion:reduce)')
+    || /@keyframes|backdrop-filter|filter\s*:/.test(tarotLivreSoulStyles)) {
+    throw new Error('work13-tarot-livre-soul-styles-missing');
+  }
   if (!entryIntention?.includes('COSMOS_ENTRY_INTENTION_CONTRACT_V610')
     || !entryIntention.includes("invitation:'Entrá'")
     || !entryIntention.includes('entryIntentions:1')
@@ -248,6 +282,8 @@ const validateCore = async responses => {
     || !entryIntention.includes('reusesLivingMenuV593:true')
     || !entryIntention.includes('globalOrbMenuCycle:true')
     || !entryIntention.includes('everyRealityCanCallUniverse:true')
+    || !entryIntention.includes('realityOwnedOrbActionsPreserved:true')
+    || !entryIntention.includes("target?.closest?.('#tableOrb')")
     || !entryIntention.includes("this.openUniverse('orb-world')")
     || !entryIntention.includes('publicRealityNames:15')
     || !entryIntention.includes('automaticNavigation:false')
@@ -624,6 +660,7 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK13_ENTRY_ACTIVE', version:VERSION, correction:'entrada-da-orbe', base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_FINAL_PRESENCE_ACTIVE', version:VERSION, correction:'lapidacao-final-presenca-das-realidades', publicWorlds:15, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_GLOBAL_MENU_ACTIVE', version:VERSION, correction:'menu-global-ciclo-vivo', publicWorlds:15, oneOrb:true, base:600, complete:true });
+        client.postMessage({ type:'DIVINA_WORK13_TAROT_SOUL_ACTIVE', version:VERSION, reality:'tarot', cards:78, reversed:false, meanings:false, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_RELEASE_READY', version:VERSION });
       } catch {}
     }

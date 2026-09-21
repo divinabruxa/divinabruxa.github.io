@@ -116,12 +116,14 @@ function createHarness({ brokenAsset = '', brokenContent = false } = {}) {
 
 const checks = [];
 const check = (id, condition, detail = '') => checks.push({ id, pass:Boolean(condition), detail:condition ? '' : String(detail) });
-const cacheName = 'divina-bruxa-work13-v610-global-menu-cycle';
+const cacheName = 'divina-bruxa-work13-v610-tarot-livre-soul';
 const harness = createHarness();
 
-check('core:forty-five-assets-declared', coreAssets.length === 45, coreAssets.length);
+check('core:forty-seven-assets-declared', coreAssets.length === 47, coreAssets.length);
 check('core:unique-assets', new Set(coreAssets).size === coreAssets.length);
 check('core:app-v610', coreAssets.includes('./app-v208.js?v=610-work13-final-presence'));
+check('core:tarot-soul-js', coreAssets.includes('./tarot-livre-soul-v610.js?v=610-work13-tarot-soul'));
+check('core:tarot-soul-css', coreAssets.includes('./tarot-livre-soul-v610.css?v=610-work13-tarot-soul'));
 check('core:entry-js', coreAssets.includes('./cosmos-entry-intention-v610.js?v=610-work13-final-presence'));
 check('core:entry-css', coreAssets.includes('./cosmos-entry-intention-v610.css?v=610-work13-final-presence'));
 check('core:world-presence-js', coreAssets.includes('./cosmos-world-presence-v610.js?v=610-work13-final-presence'));
@@ -143,7 +145,7 @@ for (const event of ['install','activate','fetch','message']) check(`listener:${
 await harness.wait('install');
 const cache = harness.stores.get(cacheName);
 check('install:atomic-cache-created', cache instanceof Map);
-check('install:forty-five-core-assets', cache?.size === 45, cache?.size);
+check('install:forty-seven-core-assets', cache?.size === 47, cache?.size);
 for (const asset of coreAssets) check(`install:${asset}`, cache?.has(asset));
 check('install:skip-after-validation', harness.counters().skipped === 1, harness.counters().skipped);
 
@@ -207,6 +209,7 @@ check('activate:media-skins-version-v609', harness.clientMessages.some(item => i
 check('activate:final-orchestra-version-v610', harness.clientMessages.some(item => item.finalOrchestraVersion === 610 && item.complete === true));
 check('activate:final-presence-v610', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_FINAL_PRESENCE_ACTIVE' && item.publicWorlds === 15 && item.complete === true));
 check('activate:global-menu-v610', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_GLOBAL_MENU_ACTIVE' && item.publicWorlds === 15 && item.oneOrb === true && item.complete === true));
+check('activate:tarot-soul-v610', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_TAROT_SOUL_ACTIVE' && item.reality === 'tarot' && item.cards === 78 && item.reversed === false && item.meanings === false && item.oneOrb === true));
 
 const onlineNavigation = await harness.fetchEvent(new FakeRequest('https://divina.test/index.html#music', { mode:'navigate' }));
 check('fetch:navigation-network', (await onlineNavigation.text()).includes('name="divina-work13" content="V610"'));
@@ -244,7 +247,7 @@ for (const [file, needle] of [
 
 await harness.message({ type:'WORK12_STATUS' });
 check('message:status-version', harness.sourceMessages.some(item => item.type === 'WORK12_STATUS' && item.version === 610));
-check('message:status-forty-five-assets', harness.sourceMessages.some(item => item.core?.length === 45));
+check('message:status-forty-seven-assets', harness.sourceMessages.some(item => item.core?.length === 47));
 await harness.message({ type:'CLEAR_DIVINA_CACHES' });
 check('message:clear-caches', !harness.stores.has(cacheName));
 check('message:clear-confirmed', harness.sourceMessages.some(item => item.type === 'DIVINA_CACHES_CLEARED' && item.version === 610));

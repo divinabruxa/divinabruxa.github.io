@@ -15,6 +15,7 @@ export const COSMOS_ENTRY_INTENTION_CONTRACT_V610 = Object.freeze({
   reusesFinalContinuityV598:true,
   globalOrbMenuCycle:true,
   everyRealityCanCallUniverse:true,
+  realityOwnedOrbActionsPreserved:true,
   publicRealityNames:15,
   explanatoryCopy:0,
   automaticNavigation:false,
@@ -93,6 +94,11 @@ export class CosmosEntryIntentionV610 {
     return Boolean(candidate && candidate === this.orb);
   }
 
+  isRealityOwnedOrbTarget(target) {
+    if (this.route !== 'tarot') return false;
+    return Boolean(target?.closest?.('#tableOrb'));
+  }
+
   respond(source = 'entry') {
     if (!this.isUniverseReady()) return false;
     if (this.entry?.dataset) this.entry.dataset.response = 'answering';
@@ -153,6 +159,8 @@ export class CosmosEntryIntentionV610 {
       'aria-label',
       this.route === 'home'
         ? 'Orbe viva. Toque para abrir o universo; toque duplo abre o Tarot Livre'
+        : this.route === 'tarot'
+          ? 'Orbe viva. Toque para revelar a próxima carta'
         : 'Orbe viva. Toque para abrir o universo'
     );
     const visible = this.isHomeReady();
@@ -193,12 +201,14 @@ export class CosmosEntryIntentionV610 {
     this.listen(this.orb, 'pointercancel', restEntry, { passive:true });
     this.listen(this.documentTarget, 'click', event => {
       if (this.route === 'home' || !this.isCanonicalOrbTarget(event?.target)) return;
+      if (this.isRealityOwnedOrbTarget(event?.target)) return;
       event.preventDefault?.();
       event.stopImmediatePropagation?.();
       this.openUniverse('orb-world');
     }, { capture:true });
     this.listen(this.documentTarget, 'keydown', event => {
       if (this.route === 'home' || !this.isCanonicalOrbTarget(event?.target)) return;
+      if (this.isRealityOwnedOrbTarget(event?.target)) return;
       if (!['Enter',' '].includes(event?.key) || event?.repeat) return;
       event.preventDefault?.();
       event.stopImmediatePropagation?.();

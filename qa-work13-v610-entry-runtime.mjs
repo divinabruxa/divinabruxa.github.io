@@ -102,6 +102,17 @@ ok(worldMenuOpens === routes.length, 'uma abertura por realidade');
 ok(controller.status().worldOpenCalls === routes.length, 'ciclo global auditável');
 ok(controller.status().openFailures === 0, 'nenhuma falha de abertura');
 ok(orb.attrs['aria-label'] === 'Orbe viva. Toque para abrir o universo', 'Orbe anuncia o caminho global');
+const tarotOrbTarget = {
+  closest(selector) {
+    if (selector === '#orb') return orb;
+    if (selector === '#tableOrb') return { id:'tableOrb' };
+    return null;
+  }
+};
+fire(doc, 'divina:route-ready', { id:'tarot' });
+ok(controller.isCanonicalOrbTarget(tarotOrbTarget) === true, 'alvo usa a Orbe canônica');
+ok(controller.isRealityOwnedOrbTarget(tarotOrbTarget) === true, 'Tarot mantém o toque de revelar');
+ok(orb.attrs['aria-label'] === 'Orbe viva. Toque para revelar a próxima carta', 'Orbe anuncia a ação do Tarot');
 
 controller.destroy();
 console.log(`PASS ${checks}/${checks} — resposta, menu vivo e nomes públicos`);

@@ -1,0 +1,17 @@
+DIVINA BRUXA — WORK13 V610 — REALIDADE 1 — ALMA DO TAROT LIVRE
+
+1. Mantenha o WORK12 e todos os pacotes anteriores do WORK13 instalados.
+2. Substitua somente os arquivos homônimos deste pacote e adicione os arquivos novos.
+3. Recarregue o site duas vezes para o novo cache assumir o controle.
+4. Teste: Home → Entrá → Tarot Livre → toque na Orbe → carta → silêncio → Mesa Real → menu global.
+
+Arquivos de execução substituídos:
+- app-v208.js
+- cosmos-entry-intention-v610.js
+- sw.js
+
+Arquivos de execução novos:
+- tarot-livre-soul-v610.js
+- tarot-livre-soul-v610.css
+
+Não há WORK14. Home, Universo, motores da Orbe, cartas, Tarot e Mesa Real não foram reconstruídos.
