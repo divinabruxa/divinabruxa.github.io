@@ -56,8 +56,8 @@ ok(!/url\(|data:image|<svg/.test(styles), 'nenhum ativo visual novo');
 ok(styles.includes('#tarot>.free-rule') && styles.includes('display:none!important'), 'explicação repetida removida');
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core,/^\s*'\.\//gm) === 55, '55 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v610-biblioteca-soul'"), 'cache cumulativo próprio');
+ok(count(core,/^\s*'\.\//gm) === 57, '57 ativos atômicos');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v610-diario-soul'"), 'cache cumulativo próprio');
 ok(sw.includes("'./tarot-livre-soul-v610.js?v=610-work13-tarot-soul'"), 'JS no cache');
 ok(sw.includes("'./tarot-livre-soul-v610.css?v=610-work13-tarot-soul'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_TAROT_SOUL_ACTIVE'), 'ativação comunicada');

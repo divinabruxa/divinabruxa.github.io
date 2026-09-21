@@ -1,0 +1,136 @@
+{
+  "release": "WORK13-V610",
+  "reality": 6,
+  "route": "journal",
+  "title": "Diário e Espelho — Alma Viva",
+  "base": {
+    "installedCommit": "ba9b00d56ccb1220184015bc9b3184889ca9027b",
+    "protectedReality": "Biblioteca",
+    "protectedWork": [
+      "WORK12",
+      "WORK13-V602-V610",
+      "Tarot Livre",
+      "Carta do Dia",
+      "Tiragens",
+      "Escola",
+      "Biblioteca"
+    ]
+  },
+  "productionFiles": {
+    "new": [
+      "diario-soul-v610.js",
+      "diario-soul-v610.css"
+    ],
+    "replaced": [
+      "app-v208.js",
+      "cosmos-entry-intention-v610.js",
+      "sw.js"
+    ]
+  },
+  "qualityFiles": {
+    "new": [
+      "qa-work13-v610-journal-soul-runtime.mjs",
+      "qa-work13-v610-journal-soul-structural.mjs",
+      "qa-work13-v610-journal-soul-iphone.mjs"
+    ],
+    "replaced": [
+      "qa-work13-v610-entry-runtime.mjs",
+      "qa-work13-v610-entry-structural.mjs",
+      "qa-work13-v610-daily-soul-structural.mjs",
+      "qa-work13-v610-spreads-soul-structural.mjs",
+      "qa-work13-v610-tarot-soul-structural.mjs",
+      "qa-work13-v610-school-soul-structural.mjs",
+      "qa-work13-v610-library-soul-structural.mjs",
+      "qa-work13-v610-iphone-supreme.mjs",
+      "qa-work13-v610-service-worker-runtime.mjs"
+    ]
+  },
+  "experience": {
+    "identity": "camara-da-tinta-lunar",
+    "sequence": [
+      "threshold",
+      "direct-writing",
+      "silent-autosave",
+      "optional-details",
+      "explicit-memories",
+      "aggregate-mirror",
+      "return",
+      "silence"
+    ],
+    "privateByDefault": true,
+    "localFirst": true,
+    "syncDefault": "off-until-explicit-account-consent",
+    "timelinePageSize": 12,
+    "timelineFullImageRequests": 0,
+    "capabilitiesPreserved": [
+      "title",
+      "text",
+      "date-time",
+      "optional-mood",
+      "tags",
+      "favourites",
+      "tarot-relations",
+      "autosave",
+      "local-drafts",
+      "search",
+      "filters",
+      "calendar",
+      "timeline",
+      "export",
+      "import",
+      "edit",
+      "delete",
+      "offline",
+      "sync-conflicts"
+    ]
+  },
+  "invariants": {
+    "oneCanonicalOrb": true,
+    "oneCanonicalCanvas": true,
+    "directWritingFirst": true,
+    "silentAutosavePreserved": true,
+    "memoriesRequireExplicitGesture": true,
+    "mirrorRequiresExplicitGesture": true,
+    "mirrorAggregateOnly": true,
+    "mirrorDiagnosis": false,
+    "mirrorPrediction": false,
+    "changesJournalFunctions": false,
+    "changesPersistence": false,
+    "changesSync": false,
+    "automaticNavigation": false,
+    "automaticWhitSpeech": false,
+    "whitSilentRead": false,
+    "whitEntryShareRequiresTemporaryConsent": true,
+    "adminBodyAccess": false,
+    "analyticsBodyAccess": false,
+    "privateContentReads": 0,
+    "titleReads": 0,
+    "journalBodyReads": 0,
+    "tagReads": 0,
+    "questionReads": 0,
+    "draftReads": 0,
+    "historyReads": 0,
+    "formValueReads": 0,
+    "networkCalls": 0,
+    "newCanvases": 0,
+    "newRenderers": 0,
+    "permanentAnimationLoops": 0,
+    "mutationObservers": 0,
+    "deferredTimers": 0,
+    "work14": false
+  },
+  "quality": {
+    "state": "PASS",
+    "suites": 26,
+    "checks": 2563,
+    "failures": 0,
+    "iphoneGeometries": 8,
+    "serviceWorkerCoreAssets": 57,
+    "physicalDeviceClaim": false
+  },
+  "installation": {
+    "flatZip": true,
+    "destination": "site-root",
+    "productionFilesToUpload": 5
+  }
+}

@@ -1,13 +1,13 @@
-/* DIVINA BRUXA — WORK13 · ALMA DA BIBLIOTECA · V610
-   O WORK12 V600, as etapas V602–V610 e as quatro primeiras almas permanecem
+/* DIVINA BRUXA — WORK13 · ALMA DO DIARIO E ESPELHO · V610
+   O WORK12 V600, as etapas V602–V610 e as cinco primeiras almas permanecem
    protegidos. A instalacao so assume o portal quando a mesma Orbe, o menu vivo,
-   o rito diario e as quinze realidades completas pertencem ao mesmo corte.
+   a escrita privada e as quinze realidades completas pertencem ao mesmo corte.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
 const VERSION = 610;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work13-v610-biblioteca-soul';
+const CACHE_NAME = 'divina-bruxa-work13-v610-diario-soul';
 const CORE = Object.freeze([
   './index.html',
   './app-v208.js?v=610-work13-final-presence',
@@ -21,6 +21,8 @@ const CORE = Object.freeze([
   './escola-soul-v610.css?v=610-work13-school-soul',
   './biblioteca-soul-v610.js?v=610-work13-library-soul',
   './biblioteca-soul-v610.css?v=610-work13-library-soul',
+  './diario-soul-v610.js?v=610-work13-journal-soul',
+  './diario-soul-v610.css?v=610-work13-journal-soul',
   './cosmos-entry-intention-v610.js?v=610-work13-final-presence',
   './cosmos-entry-intention-v610.css?v=610-work13-final-presence',
   './cosmos-world-presence-v610.js?v=610-work13-final-presence',
@@ -89,6 +91,8 @@ const validateCore = async responses => {
   const escolaSoulStyles = await responses.get('./escola-soul-v610.css?v=610-work13-school-soul')?.clone().text();
   const bibliotecaSoul = await responses.get('./biblioteca-soul-v610.js?v=610-work13-library-soul')?.clone().text();
   const bibliotecaSoulStyles = await responses.get('./biblioteca-soul-v610.css?v=610-work13-library-soul')?.clone().text();
+  const diarioSoul = await responses.get('./diario-soul-v610.js?v=610-work13-journal-soul')?.clone().text();
+  const diarioSoulStyles = await responses.get('./diario-soul-v610.css?v=610-work13-journal-soul')?.clone().text();
   const entryIntention = await responses.get('./cosmos-entry-intention-v610.js?v=610-work13-final-presence')?.clone().text();
   const entryStyles = await responses.get('./cosmos-entry-intention-v610.css?v=610-work13-final-presence')?.clone().text();
   const worldPresence = await responses.get('./cosmos-world-presence-v610.js?v=610-work13-final-presence')?.clone().text();
@@ -459,6 +463,63 @@ const validateCore = async responses => {
     || /@keyframes|animation\s*:|backdrop-filter|filter\s*:/.test(bibliotecaSoulStyles)) {
     throw new Error('work13-biblioteca-soul-styles-missing');
   }
+  if (!app.includes("diario-soul-v610.js?v=610-work13-journal-soul")
+    || !app.includes('createDiarioSoulV610({ orbCore:supremeOrb })')
+    || !app.includes('window.orbe.diarioSoul = diarioSoul')
+    || !app.includes("stage:'sexta-realidade-alma-propria'")
+    || !app.includes('realitySouls:6')) {
+    throw new Error('work13-diario-soul-app-mismatch');
+  }
+  if (!diarioSoul?.includes('DIARIO_SOUL_CONTRACT_V610')
+    || !diarioSoul.includes("universe:'camara-da-tinta-lunar'")
+    || !diarioSoul.includes("'threshold','direct-writing','silent-autosave','optional-details'")
+    || !diarioSoul.includes("existingJournalAuthority:'V556-preserved'")
+    || !diarioSoul.includes("existingJournalWorldAuthority:'V317-preserved'")
+    || !diarioSoul.includes("existingChamberAuthority:'V596-preserved'")
+    || !diarioSoul.includes("existingLivingWisdomAuthority:'V607-preserved'")
+    || !diarioSoul.includes('directWritingFirst:true')
+    || !diarioSoul.includes('memoriesRequireExplicitGesture:true')
+    || !diarioSoul.includes('mirrorRequiresExplicitGesture:true')
+    || !diarioSoul.includes('silentAutosavePreserved:true')
+    || !diarioSoul.includes("syncDefault:'off-until-explicit-account-consent'")
+    || !diarioSoul.includes('timelinePageSizePreserved:12')
+    || !diarioSoul.includes('timelineFullImageRequestsPreserved:0')
+    || !diarioSoul.includes('mirrorAggregateOnly:true')
+    || !diarioSoul.includes('mirrorDiagnosis:false')
+    || !diarioSoul.includes('mirrorPrediction:false')
+    || !diarioSoul.includes('reusesCanonicalOrb:true')
+    || !diarioSoul.includes('privateContentReads:0')
+    || !diarioSoul.includes('journalBodyReads:0')
+    || !diarioSoul.includes('titleReads:0')
+    || !diarioSoul.includes('tagReads:0')
+    || !diarioSoul.includes('draftReads:0')
+    || !diarioSoul.includes('historyReads:0')
+    || !diarioSoul.includes('formValueReads:0')
+    || !diarioSoul.includes('permanentAnimationLoops:0')
+    || !diarioSoul.includes('mutationObservers:0')
+    || !diarioSoul.includes('deferredTimers:0')
+    || !diarioSoul.includes('work14:false')) {
+    throw new Error('work13-diario-soul-contract-missing');
+  }
+  if (!diarioSoulStyles?.includes('[data-journal-soul="v610"]')
+    || !diarioSoulStyles.includes('[data-journal-soul-phase="opening"]')
+    || !diarioSoulStyles.includes('[data-journal-soul-phase="writing"]')
+    || !diarioSoulStyles.includes('[data-journal-soul-phase="saving"]')
+    || !diarioSoulStyles.includes('[data-journal-soul-phase="saved"]')
+    || !diarioSoulStyles.includes('[data-journal-soul-phase="mirror"]')
+    || !diarioSoulStyles.includes('.db585-intent-threshold')
+    || !diarioSoulStyles.includes('.db607-journal-path')
+    || !diarioSoulStyles.includes('.journal-editor')
+    || !diarioSoulStyles.includes('#journalForm')
+    || !diarioSoulStyles.includes('.journal-mirror')
+    || !diarioSoulStyles.includes('.journal-explorer')
+    || !diarioSoulStyles.includes('.journal-timeline')
+    || !diarioSoulStyles.includes('@media(max-width:430px)')
+    || !diarioSoulStyles.includes('@media(orientation:landscape)')
+    || !diarioSoulStyles.includes('@media(prefers-reduced-motion:reduce)')
+    || /@keyframes|animation\s*:|backdrop-filter|filter\s*:/.test(diarioSoulStyles)) {
+    throw new Error('work13-diario-soul-styles-missing');
+  }
   if (!entryIntention?.includes('COSMOS_ENTRY_INTENTION_CONTRACT_V610')
     || !entryIntention.includes("invitation:'Entrá'")
     || !entryIntention.includes('entryIntentions:1')
@@ -467,9 +528,12 @@ const validateCore = async responses => {
     || !entryIntention.includes('globalOrbMenuCycle:true')
     || !entryIntention.includes('everyRealityCanCallUniverse:true')
     || !entryIntention.includes('realityOwnedOrbActionsPreserved:true')
+    || !entryIntention.includes('journalThresholdOrbActionPreserved:true')
     || !entryIntention.includes("target?.closest?.('#tableOrb')")
     || !entryIntention.includes("target?.closest?.('[data-daily-orb-host]')")
     || !entryIntention.includes("target?.closest?.('#spreadResult')")
+    || !entryIntention.includes("target.closest('[data-v585-orb-host]')")
+    || !entryIntention.includes('Orbe viva. Toque para entrar e escrever no Diário')
     || !entryIntention.includes("this.openUniverse('orb-world')")
     || !entryIntention.includes('publicRealityNames:15')
     || !entryIntention.includes('automaticNavigation:false')
@@ -851,6 +915,7 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK13_SPREADS_SOUL_ACTIVE', version:VERSION, reality:'spreads', methods:15, freeMethods:4, premiumMethods:11, celticCrossPositions:10, royalTableCards:78, oneSentenceSynthesis:true, depthExplicit:true, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_SCHOOL_SOUL_ACTIVE', version:VERSION, reality:'school', universe:'jardim-arcano-do-conhecimento', stages:3, modules:17, lessons:124, cardLessons:78, oneNextLesson:true, programmeExplicit:true, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_LIBRARY_SOUL_ACTIVE', version:VERSION, reality:'library', universe:'arquivo-de-luz', cards:78, uprightOnly:true, reversed:false, pageSize:18, oneDiscoveryFirst:true, catalogueExplicit:true, symbolicThreads:5, oneOrb:true, base:600, complete:true });
+        client.postMessage({ type:'DIVINA_WORK13_JOURNAL_SOUL_ACTIVE', version:VERSION, reality:'journal', universe:'camara-da-tinta-lunar', privateByDefault:true, directWritingFirst:true, silentAutosave:true, timelinePageSize:12, mirrorAggregateOnly:true, mirrorDiagnosis:false, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_RELEASE_READY', version:VERSION });
       } catch {}
     }

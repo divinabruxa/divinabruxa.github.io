@@ -80,6 +80,7 @@ import { createCartaDoDiaSoulV610 } from './carta-do-dia-soul-v610.js?v=610-work
 import { createTiragensSoulV610 } from './tiragens-soul-v610.js?v=610-work13-spreads-soul';
 import { createEscolaSoulV610 } from './escola-soul-v610.js?v=610-work13-school-soul';
 import { createBibliotecaSoulV610 } from './biblioteca-soul-v610.js?v=610-work13-library-soul';
+import { createDiarioSoulV610 } from './diario-soul-v610.js?v=610-work13-journal-soul';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -644,6 +645,10 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK13_JOURNAL_SOUL_ACTIVE') {
+    document.documentElement.dataset.work13JournalSoulWorker = 'v610';
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK13_LIBRARY_SOUL_ACTIVE') {
     document.documentElement.dataset.work13LibrarySoulWorker = 'v610';
     return;
@@ -2307,6 +2312,9 @@ const escolaSoul = safely('WORK13 · Alma da Escola V610', () =>
 const bibliotecaSoul = safely('WORK13 · Alma da Biblioteca V610', () =>
   createBibliotecaSoulV610({ orbCore:supremeOrb })
 );
+const diarioSoul = safely('WORK13 · Alma do Diário e Espelho V610', () =>
+  createDiarioSoulV610({ orbCore:supremeOrb })
+);
 window.orbe.finalOrchestra = cosmosFinalOrchestra;
 window.orbe.cosmosSeal = cosmosFinalOrchestra;
 window.orbe.entryIntention = cosmosEntryIntention;
@@ -2316,6 +2324,7 @@ window.orbe.cartaDoDiaSoul = cartaDoDiaSoul;
 window.orbe.tiragensSoul = tiragensSoul;
 window.orbe.escolaSoul = escolaSoul;
 window.orbe.bibliotecaSoul = bibliotecaSoul;
+window.orbe.diarioSoul = diarioSoul;
 window.divinaWork13TarotLivreSoulV610 = Object.freeze({
   version:610,
   work:'WORK13',
@@ -2363,6 +2372,16 @@ window.divinaWork13BibliotecaSoulV610 = Object.freeze({
   status:() => bibliotecaSoul?.status?.() || null,
   work14:false
 });
+window.divinaWork13DiarioSoulV610 = Object.freeze({
+  version:610,
+  work:'WORK13',
+  stage:'sexta-realidade-alma-propria',
+  reality:'journal',
+  universe:'camara-da-tinta-lunar',
+  soul:diarioSoul,
+  status:() => diarioSoul?.status?.() || null,
+  work14:false
+});
 document.documentElement.dataset.work13 = 'cosmos-vivo';
 document.documentElement.dataset.work13Macro = '10-final-orchestra';
 window.divinaWork13Macro10V610 = Object.freeze({
@@ -2378,6 +2397,7 @@ window.divinaWork13Macro10V610 = Object.freeze({
   tiragensSoul,
   escolaSoul,
   bibliotecaSoul,
+  diarioSoul,
   contextMemory:cosmosContextMemory,
   resonance:cosmosRealityResonance,
   dailyReading:cosmicDailyReading,
@@ -2418,7 +2438,8 @@ window.divinaWork13Macro10V610 = Object.freeze({
       tiragensSoulStatus:tiragensSoul?.status?.() || null,
       escolaSoulStatus:escolaSoul?.status?.() || null,
       bibliotecaSoulStatus:bibliotecaSoul?.status?.() || null,
-      realitySouls:5,
+      diarioSoulStatus:diarioSoul?.status?.() || null,
+      realitySouls:6,
       allMenuDestinationsHaveFullScreens:cosmosWorldPresence?.audit?.().everyMenuDestinationHasFullScreen === true,
       livingLayers:Object.freeze([602,603,604,605,606,607,608,609]),
       worldsPreserved:17,

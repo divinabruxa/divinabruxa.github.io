@@ -1,0 +1,23 @@
+DIVINA BRUXA · WORK13 V610 · REALIDADE 6 · DIÁRIO E ESPELHO
+SHA-256 dos arquivos entregues, exceto este índice:
+
+de6b0309d2666fba7521bb2117680e6ed145ed7507a6801ecaf838a9b0c48a46  00-INSTALE-WORK13-V610-REALIDADE-6-DIARIO.txt
+a2f0d2cd63f4f2989b192c8c6af13585bb8d4962d56835c227a81055112ead3a  MANIFESTO-WORK13-V610-REALIDADE-6-DIARIO.json
+d0f64aaf5412e7b63d5aaab448990245c45a5f10050554c216dd920709a614d9  RELATORIO-WORK13-V610-REALIDADE-6-DIARIO.md
+7bef2e70b9310c87b67d82abdccf9887b91d3fb4ca27242b68f5a85defead4f2  app-v208.js
+adccb7e62b0f82abd88e1a2800bf8ac7e2b99f6255e0f81edf95d057379f84a7  cosmos-entry-intention-v610.js
+ee49209aa961b58b0a1c6dcdff65b18584db35e49aed5daa273ed9fe627692f7  sw.js
+9eb5d5a6f79f8caddfed446f6cfa269faedfa9dc389594401582a30c4af0abe1  diario-soul-v610.js
+6f3e4f63c01a4c235801e3856c247672ff2d235fa3ab9bf098be807cb14d6dfc  diario-soul-v610.css
+25a343472918a5200534cc9893cc3f4a63d28e4e580d486aa0c1e27f0ebcc6e3  qa-work13-v610-journal-soul-runtime.mjs
+e5c92a0c2578fb8689c1d4d1737d8b202ee1ac6a8c49bfc174745b837f822ff2  qa-work13-v610-journal-soul-structural.mjs
+711971735798b2802a4db9d0cb3c8232a2088229f54addb971ac33de213d2aa0  qa-work13-v610-journal-soul-iphone.mjs
+1639592d4e6f59afa751f7c1cc3d5d1d332ded7fbf98fdb12d8ab518715e27f7  qa-work13-v610-entry-runtime.mjs
+984742c3b34753fb797d61ac79b04729b2635a90243cf5885da85cc316adf68e  qa-work13-v610-entry-structural.mjs
+13ec810354e6e4e2aae112231ee0a6fceb290dc11f3b5674006231cb3425b280  qa-work13-v610-daily-soul-structural.mjs
+f799995927815488315fc2b99291672f2edfa5c96468c995ae8c7dc6d453240a  qa-work13-v610-spreads-soul-structural.mjs
+bb305c4f90c843a54ab3d7fedc398724e88c79533d1d7c7b4393a9128df25272  qa-work13-v610-tarot-soul-structural.mjs
+75434d8dcc14d922f049c5470eff15afe0b85cf511be428c8113830f1081144b  qa-work13-v610-school-soul-structural.mjs
+17ed48d805e9d0284e83da4b3b7c8f194635364a7a4d6a595e4f901563b9f8d2  qa-work13-v610-library-soul-structural.mjs
+cbb02c67ac3b8a4c0f5f01b08b1f3e1a993a05ae79567f98b3146ca2bef50cfd  qa-work13-v610-iphone-supreme.mjs
+6520e7873abfac7f33c1fc67184b29abbadf3db383039c5dcea63f9bc828ce52  qa-work13-v610-service-worker-runtime.mjs

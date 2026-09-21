@@ -26,10 +26,11 @@ menuRoot.querySelector = selector => selector === '.db502-menu__home-label' ? ho
 const entry = new NodeLike({ text:'Entrá' });
 const orb = new NodeLike();
 const root = new NodeLike({ dataset:{} });
+const journalScreen = new NodeLike({ dataset:{ db596ChamberState:'threshold' } });
 const doc = new NodeLike();
 doc.documentElement = root;
 doc.body = { dataset:{ screen:'home' } };
-doc.getElementById = id => ({ cosmosEntryIntent:entry, orb, divinaOrbitalMenuV502:menuRoot })[id] || null;
+doc.getElementById = id => ({ cosmosEntryIntent:entry, orb, journal:journalScreen, divinaOrbitalMenuV502:menuRoot })[id] || null;
 const win = new NodeLike();
 win.location = { hash:'#home' };
 let calls = 0;
@@ -155,6 +156,24 @@ ok(controller.isRealityOwnedOrbTarget(libraryOrbTarget) === true, 'Biblioteca ma
 ok(orb.attrs['aria-label'] === 'Orbe viva. Toque para descobrir uma carta', 'Orbe anuncia a descoberta');
 fire(doc, 'divina:orb-physical-claim-settled', { route:'library' });
 ok(root.dataset.work13EntryReason === 'orb-claim-settled', 'rótulo acompanha a chegada física da Orbe');
+
+const journalHost = { dataset:{ v585OrbHost:'' } };
+const journalOrbTarget = {
+  closest(selector) {
+    if (selector === '#orb') return orb;
+    if (selector === '[data-v585-orb-host]') return journalHost;
+    return null;
+  }
+};
+orb.closest = selector => selector === '[data-v585-orb-host]' ? journalHost : null;
+fire(doc, 'divina:route-ready', { id:'journal' });
+ok(controller.isCanonicalOrbTarget(journalOrbTarget) === true, 'Diário usa a Orbe canônica');
+ok(controller.isRealityOwnedOrbTarget(journalOrbTarget) === true, 'limiar do Diário mantém o toque de entrar');
+ok(orb.attrs['aria-label'] === 'Orbe viva. Toque para entrar e escrever no Diário', 'Orbe anuncia a escrita direta');
+journalScreen.dataset.db596ChamberState = 'engaged';
+fire(doc, 'divina:orb-physical-claim-settled', { route:'journal' });
+ok(controller.isRealityOwnedOrbTarget(journalOrbTarget) === false, 'depois do mergulho a Orbe recupera o menu global');
+ok(orb.attrs['aria-label'] === 'Orbe viva. Toque para abrir o universo', 'ciclo global retorna após entrar');
 
 controller.destroy();
 console.log(`PASS ${checks}/${checks} — resposta, menu vivo e nomes públicos`);

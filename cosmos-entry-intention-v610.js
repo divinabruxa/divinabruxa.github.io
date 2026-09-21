@@ -16,6 +16,7 @@ export const COSMOS_ENTRY_INTENTION_CONTRACT_V610 = Object.freeze({
   globalOrbMenuCycle:true,
   everyRealityCanCallUniverse:true,
   realityOwnedOrbActionsPreserved:true,
+  journalThresholdOrbActionPreserved:true,
   publicRealityNames:15,
   explanatoryCopy:0,
   automaticNavigation:false,
@@ -94,6 +95,16 @@ export class CosmosEntryIntentionV610 {
     return Boolean(candidate && candidate === this.orb);
   }
 
+  journalThresholdOwnsOrb(target = this.orb) {
+    if (this.route !== 'journal' || !target?.closest) return false;
+    if (target.closest('[data-journal-orb-host]')) return true;
+    const state = String(
+      this.documentTarget?.getElementById?.('journal')?.dataset?.db596ChamberState || 'threshold'
+    ).toLowerCase();
+    return !['engaged','travel'].includes(state)
+      && Boolean(target.closest('[data-v585-orb-host]'));
+  }
+
   isRealityOwnedOrbTarget(target) {
     if (this.route === 'tarot') return Boolean(target?.closest?.('#tableOrb'));
     if (this.route === 'daily') return Boolean(target?.closest?.('[data-daily-orb-host]'));
@@ -102,6 +113,7 @@ export class CosmosEntryIntentionV610 {
       target?.closest?.('[data-library-orb-host]')
       || target?.closest?.('#cardLibraryApp [data-orb]')
     );
+    if (this.route === 'journal') return this.journalThresholdOwnsOrb(target);
     return false;
   }
 
@@ -161,6 +173,7 @@ export class CosmosEntryIntentionV610 {
 
   sync(reason = 'sync') {
     if (!this.entry) return false;
+    const journalThreshold = this.journalThresholdOwnsOrb(this.orb);
     if (this.orb) this.orb.setAttribute?.(
       'aria-label',
       this.route === 'home'
@@ -173,6 +186,8 @@ export class CosmosEntryIntentionV610 {
           ? 'Orbe viva. Toque para revelar a próxima posição'
         : this.route === 'library' && this.orb?.closest?.('[data-library-orb-host], #cardLibraryApp [data-orb]')
           ? 'Orbe viva. Toque para descobrir uma carta'
+        : journalThreshold
+          ? 'Orbe viva. Toque para entrar e escrever no Diário'
         : 'Orbe viva. Toque para abrir o universo'
     );
     const visible = this.isHomeReady();
