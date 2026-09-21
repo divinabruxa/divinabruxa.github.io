@@ -3,11 +3,12 @@ import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 
 const read = name => readFile(new URL(name, import.meta.url), 'utf8');
-const [html, app, sw, entryJs, entryCss, presenceJs, presenceCss, orchestra] = await Promise.all([
+const readBytes = name => readFile(new URL(name, import.meta.url));
+const [html, app, sw, entryJs, entryCss, presenceJs, presenceCss, orchestra, pentagram] = await Promise.all([
   read('./index.html'), read('./app-v208.js'), read('./sw.js'),
   read('./cosmos-entry-intention-v610.js'), read('./cosmos-entry-intention-v610.css'),
   read('./cosmos-world-presence-v610.js'), read('./cosmos-world-presence-v610.css'),
-  read('./cosmos-final-orchestra-v610.js')
+  read('./cosmos-final-orchestra-v610.js'), readBytes('./pentagrama-menu-vivo-v611.webp')
 ]);
 
 let checks = 0;
@@ -21,16 +22,19 @@ const publicRoutes = Object.freeze([
 ok(count(html, /id="orb"/g) === 1, 'uma Orbe física');
 ok(count(html, /id="orbCanvas"/g) === 1, 'um canvas canônico');
 ok(count(html, /id="cosmosEntryIntent"/g) === 1, 'uma intenção de entrada');
-ok(count(html, /<span>Entrá<\/span>/g) === 1, 'texto exato Entrá');
+ok(count(html, /<span>Entrá<\/span>/g) === 0, 'palavra Entrá removida');
+ok(count(html, /pentagrama-menu-vivo-v611\.webp/g) === 2, 'pentagrama único ligado e pré-carregado');
 ok(/<div class="orb-stage-ref">[\s\S]*id="orb"[\s\S]*id="cosmosEntryIntent"[\s\S]*<\/div>/.test(html), 'convite junto da Orbe');
-ok(html.includes('aria-label="Entrar no universo"'), 'nome acessível');
+ok(html.includes('aria-label="Abrir o menu mágico"'), 'nome acessível');
 ok(html.includes('aria-controls="divinaOrbitalMenuV502"'), 'controle do menu vivo');
-ok(html.includes('name="divina-work13-correction" content="V610-LAPIDACAO-FINAL"'), 'lapidação dentro do V610');
-ok(html.includes('cosmos-entry-intention-v610.css?v=610-work13-final-presence'), 'entrada ligada');
+ok(html.includes('name="divina-work13-correction" content="V611-PENTAGRAMA-MENU-WHIT"'), 'lapidação permanece no WORK13');
+ok(html.includes('cosmos-entry-intention-v610.css?v=611-pentagram-menu-whit'), 'pentagrama ligado');
 ok(html.includes('cosmos-world-presence-v610.css?v=610-work13-final-presence'), 'presença ligada');
-ok(html.includes('app-v208.js?v=610-work13-final-presence'), 'aplicação ligada');
-ok(html.includes("./sw.js?v=610-final-presence"), 'worker ligado');
+ok(html.includes('app-v208.js?v=611-pentagram-menu-whit'), 'aplicação ligada');
+ok(html.includes("./sw.js?v=611-pentagram-menu-whit"), 'worker ligado');
 ok(!/sopro/i.test(html), 'ornamento textual removido do HTML');
+ok(pentagram.length > 20000 && pentagram.length < 100000, 'imagem retina leve');
+ok(pentagram.subarray(0,4).toString('ascii') === 'RIFF' && pentagram.subarray(8,12).toString('ascii') === 'WEBP', 'imagem WebP válida');
 
 for (const route of publicRoutes) {
   ok(count(html, new RegExp(`<section id="${route}"`, 'g')) === 1, `tela completa: ${route}`);
@@ -45,14 +49,20 @@ ok(app.includes('continuity:finalContinuity'), 'continuidade V598 reutilizada');
 ok(app.includes('orbCore:supremeOrb'), 'Orbe Suprema reutilizada');
 ok(app.includes('menuResolver:() => globalThis.divinaMenuV502'), 'menu V593 reutilizado');
 ok(app.includes('window.orbe.entryIntention = cosmosEntryIntention'), 'entrada publicada');
+ok(app.includes('divinaWork13PentagramMenuV611'), 'correção V611 publicada');
+ok(app.includes('window.orbe.pentagramMenu'), 'menu pentagrama publicado na Orbe');
 ok(app.includes('window.orbe.worldPresence = cosmosWorldPresence'), 'presença publicada');
 ok(app.includes("correction:'lapidacao-final-presenca-das-realidades'"), 'fechamento permanece no WORK13');
 ok(app.includes('work14:false'), 'nenhum WORK14');
 ok(!/sopro/i.test(app), 'rótulo ornamental ausente da aplicação');
 
 ok(entryJs.includes('COSMOS_ENTRY_INTENTION_CONTRACT_V610'), 'contrato de entrada');
-ok(entryJs.includes("invitation:'Entrá'"), 'convite único');
+ok(entryJs.includes("invitation:'pentagrama-vermelho'"), 'convite virou símbolo');
 ok(entryJs.includes('entryIntentions:1'), 'somente uma intenção');
+ok(entryJs.includes('visibleEntryWords:0'), 'entrada sem palavra visível');
+ok(entryJs.includes('pentagramIsMenu:true'), 'pentagrama é o menu');
+ok(entryJs.includes('whitInsideMenu:true'), 'Whit dentro do menu');
+ok(entryJs.includes("ai:'Whit'"), 'Whit nomeada no balão');
 ok(entryJs.includes("responseModel:'touch-answer-silence'"), 'toque, resposta e silêncio');
 ok(entryJs.includes('reusesCanonicalOrb:true'), 'Orbe canônica');
 ok(entryJs.includes('reusesLivingMenuV593:true'), 'menu vivo preservado');
@@ -73,6 +83,8 @@ ok(entryJs.includes("'divina:orb-physical-claim-settled'"), 'rótulo acompanha a
 ok(entryJs.includes("this.continuity?.callUniverse?.(source)"), 'abertura pela continuidade');
 ok(entryJs.includes("this.openUniverse('orb-world')"), 'Orbe chama o menu fora da Home');
 ok(entryJs.includes("this.orbCore?.pulse?.('work13-entry-response'"), 'resposta imediata');
+ok(entryJs.includes('this.pendingOpen = true'), 'toque aguarda menu sem se perder');
+ok(entryJs.includes("if (shouldOpen) this.openUniverse('menu-ready')"), 'balões nascem após prontidão');
 ok(!/createElement|requestAnimationFrame|setInterval|setTimeout|MutationObserver/.test(entryJs), 'entrada sem DOM ou loops novos');
 ok(!/location\.(?:href|assign|replace)/.test(entryJs), 'entrada sem troca seca');
 
@@ -86,9 +98,12 @@ ok(presenceJs.includes('permanentAnimationLoops:0'), 'nenhum loop permanente nov
 ok(!/createElement|requestAnimationFrame|setInterval|setTimeout|MutationObserver/.test(presenceJs), 'presença sem peso estrutural');
 ok(!/location\.(?:href|assign|replace)/.test(presenceJs), 'presença sem teleporte');
 
-ok(entryCss.includes('background:transparent'), 'Entrá não é caixa');
-ok(entryCss.includes('border:0'), 'Entrá não é botão comum');
+ok(entryCss.includes('pentagrama vermelho'), 'identidade visual do pentagrama');
+ok(entryCss.includes('border:0'), 'pentagrama não é botão comum');
 ok(entryCss.includes('min-height:48px'), 'alvo de toque confortável');
+ok(entryCss.includes('.cosmos-entry-intent__whit'), 'presença de Whit no centro');
+ok(entryCss.includes('db611PentagramBreath'), 'pentagrama respira');
+ok(entryCss.includes('db611WhitHeartbeat'), 'Whit tem pulso contido');
 ok(entryCss.includes('[data-response="answering"]'), 'resposta imediata visível');
 ok(entryCss.includes('[data-response="silent"]'), 'silêncio após resposta');
 ok(presenceCss.includes('.db502-portal.is-touching'), 'balão responde ao toque');
@@ -98,14 +113,16 @@ ok(presenceCss.includes('[data-work13-world-presence="approaching"]'), 'chegada 
 ok(presenceCss.includes('[data-work13-world-presence="leaving"]'), 'saída progressiva');
 ok(presenceCss.includes('min-block-size:100dvh'), 'cada mundo ocupa a tela');
 for (const route of publicRoutes) ok(presenceCss.includes(`#${route}[data-work13-world]`), `identidade própria: ${route}`);
-for (const css of [entryCss,presenceCss]) {
-  ok(css.includes('@media(prefers-reduced-motion:reduce)'), 'movimento reduzido preservado');
-  ok(!/@keyframes|backdrop-filter|filter\s*:/.test(css), 'sem efeito pesado');
-}
+for (const css of [entryCss,presenceCss]) ok(css.includes('@media(prefers-reduced-motion:reduce)'), 'movimento reduzido preservado');
+ok(!/backdrop-filter|filter\s*:/.test(entryCss + presenceCss), 'sem filtro pesado');
+ok((entryCss.match(/@keyframes/g) || []).length === 3, 'somente três respirações CSS leves');
+ok(!/@keyframes/.test(presenceCss), 'presença das páginas sem loop novo');
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core, /^\s*'\.\//gm) === 57, '57 ativos centrais');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v610-diario-soul'"), 'cache isolado');
+ok(count(core, /^\s*'\.\//gm) === 58, '58 ativos centrais');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v611-pentagram-menu-whit'"), 'cache isolado');
+ok(sw.includes("'./pentagrama-menu-vivo-v611.webp'"), 'imagem disponível offline');
+ok(sw.includes('DIVINA_WORK13_PENTAGRAM_MENU_ACTIVE'), 'pentagrama comunicado');
 ok(sw.includes('DIVINA_WORK13_FINAL_PRESENCE_ACTIVE'), 'ativação comunicada');
 ok(sw.includes('DIVINA_WORK13_GLOBAL_MENU_ACTIVE'), 'menu global comunicado');
 ok(sw.includes('COSMOS_WORLD_PRESENCE_CONTRACT_V610'), 'worker valida presença');

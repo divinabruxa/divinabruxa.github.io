@@ -93,8 +93,8 @@ ok(spread.includes('privateContentReads:0') && spread.includes('questionReads:0'
 ok(spreadStyles.includes('[data-cosmic-spread-phase="silence"]') && spreadStyles.includes('.db605-conversation'), 'camadas visuais V605 preservadas');
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core,/^\s*'\.\//gm) === 57, '57 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v610-diario-soul'"), 'cache próprio');
+ok(count(core,/^\s*'\.\//gm) === 58, '58 ativos atômicos');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v611-pentagram-menu-whit'"), 'cache próprio');
 ok(sw.includes("'./tiragens-soul-v610.js?v=610-work13-spreads-soul'"), 'JS no cache');
 ok(sw.includes("'./tiragens-soul-v610.css?v=610-work13-spreads-soul'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_SPREADS_SOUL_ACTIVE'), 'ativação comunicada');

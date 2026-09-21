@@ -1,0 +1,23 @@
+DIVINA BRUXA · WORK13 V611 · PENTAGRAMA, MENU VIVO E WHIT
+SHA-256 dos arquivos entregues, exceto este índice:
+
+1ad419ecb102bdd7d8ff279a0da31912221d5b66aa0d2cb99fcfa2dd7abf5123  00-INSTALE-WORK13-V611-PENTAGRAMA-MENU-WHIT.txt
+f74dde002ff63fefdda29736ca2859c99d5a45c6404c79fb95f3be7afa18bf62  MANIFESTO-WORK13-V611-PENTAGRAMA-MENU-WHIT.json
+37ad64df9f64bc00b96d89749632c41e70456ed251d9ac8e5c9d4d3bb27b6974  RELATORIO-WORK13-V611-PENTAGRAMA-MENU-WHIT.md
+59b2f3890a09cb1bc47a40e5b2f1abb3170eb4ba01d28ce38061b3d5ee717c9e  index.html
+ca9f9aa303a6161098b08cac6d8894abeb0ad97d6a1b965b9d4792e751cbb0a4  app-v208.js
+6571cf8f61ccc9f33597cedbea130bf6c06ddd536625fe0f88182eb9db61f3fe  cosmos-entry-intention-v610.js
+ee6da21a55228bd7be34956b544f494bb910247e74395021b8b3c95359e60dd3  cosmos-entry-intention-v610.css
+a12058edb573542ea6ce5e3e46dd7022d7acbfa135f7fe76419e70c028b74d75  sw.js
+02dfbb490a9796090d0a85b77078373e2b5765e2d93aa17b0dfeb5f9caae8f62  pentagrama-menu-vivo-v611.webp
+a719add6df2024c55ca0d8f285323237ce06cfdac558d93b99a9ff9445e9cc6f  qa-work13-v610-boot-runtime.mjs
+988f0e3872d03a85222e1cfdbe166b87422ae3af54f698d3a3b166fdab09f9e9  qa-work13-v610-daily-soul-structural.mjs
+78011876be95335a50dd8d678146135557844124c976a9d83f0aa31ea379f944  qa-work13-v610-entry-iphone-cycle.mjs
+555738ee97a2d3da5c434396e4297b0f8f9208c56c532d31e5bae7cfdf9b5f36  qa-work13-v610-entry-runtime.mjs
+3d42875be0dd279417812b1c0fc3312e17017a3e8b138647cadb0f0462dbdbfd  qa-work13-v610-entry-structural.mjs
+4f243a0ef0dbadef27850a6c0c60b0148625b10269c3d46d44e576fa8ed097df  qa-work13-v610-journal-soul-structural.mjs
+85c00fc2db4ae88f0599bd0dbe747a1bf78c58ad94463c5f773a794dc5393661  qa-work13-v610-library-soul-structural.mjs
+06afdea119210dfc33d168bc5eb3139c3bead86f39a5b029178294fe3bec10be  qa-work13-v610-school-soul-structural.mjs
+6101d10e1c9e96be55ff064eb89ff24bef1a2c5f6d5b16aebaba2724f75afa7f  qa-work13-v610-service-worker-runtime.mjs
+d9b663edec10dcf2562eb639bb92a7caf1f8b03a3fcb6223aea1124fea1e4f75  qa-work13-v610-spreads-soul-structural.mjs
+653b60acf57ca014a7f155ee6354d5fd3c6f4b6e0154096632ca4868e4644747  qa-work13-v610-tarot-soul-structural.mjs

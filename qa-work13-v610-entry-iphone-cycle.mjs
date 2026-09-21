@@ -31,16 +31,20 @@ for (const [name, width, height] of profiles) {
 
 ok(entryCss.includes('touch-action:manipulation'), 'toque direto sem atraso artificial');
 ok(entryCss.includes('-webkit-tap-highlight-color:transparent'), 'resposta integrada no iOS');
-ok(entryCss.includes('[data-response="answering"]'), 'Entrá responde no pointerdown');
+ok(entryCss.includes('[data-response="answering"]'), 'pentagrama responde no pointerdown');
 ok(entryCss.includes('[data-response="silent"]'), 'resposta termina em silêncio');
+ok(html.includes('pentagrama-menu-vivo-v611.webp'), 'imagem retina ligada à Home');
+ok(html.includes('aria-label="Abrir o menu mágico"'), 'gesto legível pelo VoiceOver');
 ok(presenceCss.includes('min-block-size:100dvh') && presenceCss.includes('min-block-size:100svh'), 'mundos inteiros em viewport dinâmica');
 ok(presenceCss.includes('.db502-portal.is-touching'), 'balões respondem no primeiro toque');
 ok(entryCss.includes('@media(prefers-reduced-motion:reduce)'), 'entrada acessível com movimento reduzido');
 ok(presenceCss.includes('@media(prefers-reduced-motion:reduce)'), 'travessia acessível com movimento reduzido');
-ok(!/@keyframes|backdrop-filter|filter\s*:/.test(entryCss + presenceCss), 'efeito pesado removido');
+ok(!/backdrop-filter|filter\s*:/.test(entryCss + presenceCss), 'filtro pesado removido');
+ok((entryCss.match(/@keyframes/g) || []).length === 3, 'três respirações CSS pequenas');
+ok(entryCss.includes('@media(forced-colors:active)'), 'pentagrama preservado em alto contraste');
 
 for (const route of routes) {
-  ok(new RegExp(`<section id="${route}"`).test(html), `Entrá → menu → ${route}`);
+  ok(new RegExp(`<section id="${route}"`).test(html), `pentagrama → menu → ${route}`);
   ok(presenceJs.includes(`${route}:`) || presenceJs.includes(`'${route}'`), `${route}: presença reconhecida`);
 }
 ok(routes.length === 15, 'todas as 15 realidades públicas');

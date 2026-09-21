@@ -73,7 +73,7 @@ import { createLivingWisdomPathV607 } from './living-wisdom-path-v607.js?v=607-w
 import { createLivingCommercePathV608 } from './living-commerce-path-v608.js?v=608-work13-commerce-clarity';
 import { createLivingMediaSkinsV609 } from './living-media-skins-v609.js?v=609-work13-media-skins';
 import { createCosmosFinalOrchestraV610 } from './cosmos-final-orchestra-v610.js?v=610-work13-final-orchestra';
-import { createCosmosEntryIntentionV610 } from './cosmos-entry-intention-v610.js?v=610-work13-final-presence';
+import { createCosmosEntryIntentionV610 } from './cosmos-entry-intention-v610.js?v=611-pentagram-menu-whit';
 import { createCosmosWorldPresenceV610 } from './cosmos-world-presence-v610.js?v=610-work13-final-presence';
 import { createTarotLivreSoulV610 } from './tarot-livre-soul-v610.js?v=610-work13-tarot-soul';
 import { createCartaDoDiaSoulV610 } from './carta-do-dia-soul-v610.js?v=610-work13-daily-soul';
@@ -670,7 +670,11 @@ navigator.serviceWorker?.addEventListener('message', event => {
     return;
   }
   if (event.data?.type === 'DIVINA_WORK13_ENTRY_ACTIVE') {
-    document.documentElement.dataset.work13EntryWorker = 'v610-entry';
+    document.documentElement.dataset.work13EntryWorker = `v${event.data.version || 611}-pentagram`;
+    return;
+  }
+  if (event.data?.type === 'DIVINA_WORK13_PENTAGRAM_MENU_ACTIVE') {
+    document.documentElement.dataset.work13MenuWorker = `v${event.data.version || 611}-pentagram-whit`;
     return;
   }
   if (event.data?.type === 'DIVINA_WORK13_FINAL_ORCHESTRA_ACTIVE') {
@@ -2285,7 +2289,7 @@ const cosmosFinalOrchestra = safely('WORK13 · Orquestra Final V610', () =>
     journey:orbIOSJourney
   })
 );
-const cosmosEntryIntention = safely('WORK13 · Entrada da Orbe V610', () =>
+const cosmosEntryIntention = safely('WORK13 · Pentagrama, Menu Vivo e Whit V611', () =>
   createCosmosEntryIntentionV610({
     continuity:finalContinuity,
     orbCore:supremeOrb,
@@ -2429,7 +2433,10 @@ window.divinaWork13Macro10V610 = Object.freeze({
       nextWork:null,
       work14:false,
       correction:'lapidacao-final-presenca-das-realidades',
-      invitation:'Entrá',
+      invitation:'pentagrama-vermelho',
+      visibleEntryWords:0,
+      whitInsideMenu:true,
+      whitResidence:'canonical-orb',
       entryIntentions:1,
       entryStatus:cosmosEntryIntention?.status?.() || null,
       worldPresenceStatus:cosmosWorldPresence?.status?.() || null,
@@ -2482,7 +2489,38 @@ window.divinaWork13Macro10V610 = Object.freeze({
   }
 });
 window.divinaCosmosVivoV610 = window.divinaWork13Macro10V610;
-window.divinaCosmosVivo = window.divinaWork13Macro10V610;
+window.divinaWork13PentagramMenuV611 = Object.freeze({
+  version:611,
+  work:'WORK13',
+  correction:'pentagrama-menu-whit',
+  base:window.divinaWork13Macro10V610,
+  entryIntention:cosmosEntryIntention,
+  menu:() => globalThis.divinaMenuV502 || null,
+  whit:whitLivingPresence,
+  soul:whitOrbSoul,
+  status:() => Object.freeze({
+    release:'V611',
+    symbol:'pentagrama-vermelho',
+    visibleEntryWords:0,
+    menuReady:Boolean(globalThis.divinaMenuV502?.open),
+    menuRealities:15,
+    whitInsideMenu:true,
+    whitResidence:'canonical-orb',
+    onePhysicalOrb:document.querySelectorAll?.('#orb')?.length === 1,
+    oneCanonicalCanvas:document.querySelectorAll?.('#orbCanvas')?.length === 1,
+    newOrbs:0,
+    newCanvases:0,
+    newRenderers:0,
+    automaticWhitSpeech:false,
+    work14:false,
+    entry:cosmosEntryIntention?.status?.() || null
+  })
+});
+document.documentElement.dataset.work13Macro = 'pentagrama-menu-whit';
+document.documentElement.dataset.work13Menu = 'pentagram-v611';
+window.orbe.pentagramMenu = window.divinaWork13PentagramMenuV611;
+window.divinaCosmosVivoV611 = window.divinaWork13PentagramMenuV611;
+window.divinaCosmosVivo = window.divinaWork13PentagramMenuV611;
 window.whit = whitCore;
 
 window.divinaWhitV212 = Object.freeze({

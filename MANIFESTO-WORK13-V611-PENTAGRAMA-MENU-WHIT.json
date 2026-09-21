@@ -1,0 +1,68 @@
+{
+  "release": "V611",
+  "work": "WORK13",
+  "correction": "pentagrama-menu-whit",
+  "protectedBase": "WORK13 V610 Diario e Espelho",
+  "law": "one-orb-one-universe-one-presence-one-journey",
+  "result": {
+    "visibleEntryWord": null,
+    "entrySymbol": "pentagrama-vermelho",
+    "pentagramIsMenu": true,
+    "touchResponse": "immediate",
+    "menuBirth": "organic-bubbles",
+    "publicRealities": 15,
+    "whitMenuLabel": "Whit",
+    "whitResidence": "canonical-orb",
+    "automaticWhitSpeech": false,
+    "pendingTouchSurvivesMenuBoot": true
+  },
+  "image": {
+    "file": "pentagrama-menu-vivo-v611.webp",
+    "width": 512,
+    "height": 512,
+    "alpha": true,
+    "sizeBytes": 70506,
+    "generatedForProject": true
+  },
+  "productionFiles": [
+    { "file": "index.html", "action": "replace" },
+    { "file": "app-v208.js", "action": "replace" },
+    { "file": "cosmos-entry-intention-v610.js", "action": "replace" },
+    { "file": "cosmos-entry-intention-v610.css", "action": "replace" },
+    { "file": "sw.js", "action": "replace" },
+    { "file": "pentagrama-menu-vivo-v611.webp", "action": "add" }
+  ],
+  "preserved": {
+    "home": true,
+    "universe": true,
+    "canonicalOrb": 1,
+    "canonicalCanvas": 1,
+    "work12": true,
+    "realitySouls": 6,
+    "routes": 17,
+    "tarotCore": true,
+    "privateJournal": true,
+    "work14": false
+  },
+  "performance": {
+    "newRenderers": 0,
+    "newCanvases": 0,
+    "newOrbs": 0,
+    "javascriptAnimationLoops": 0,
+    "mutationObservers": 0,
+    "networkCalls": 0,
+    "modelCallsAtRuntime": 0,
+    "reducedMotion": true,
+    "forcedColors": true,
+    "offlineAsset": true
+  },
+  "qa": {
+    "suites": 26,
+    "checksPassed": 2601,
+    "checksTotal": 2601,
+    "serviceWorkerAssets": 58,
+    "serviceWorkerAtomicAssetsChecked": 58,
+    "iphoneGeometries": 8,
+    "physicalDeviceClaim": false
+  }
+}

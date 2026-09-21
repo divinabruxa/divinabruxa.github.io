@@ -1,14 +1,19 @@
-/* DIVINA BRUXA — WORK13 · ENTRADA E CICLO GLOBAL DA ORBE · V610
-   Uma unica intencao convida a pessoa a tocar. Em cada realidade, a mesma
-   Orbe reabre o menu vivo V593; nao cria rota, motor, gesto ou copia. */
+/* DIVINA BRUXA — WORK13 · PENTAGRAMA, MENU VIVO E WHIT · V611
+   O pentagrama vermelho substitui a palavra de entrada. Em cada realidade,
+   a mesma Orbe reabre o menu V593; Whit permanece dentro da Orbe canonica. */
 
-const VERSION = 610;
+const VERSION = 611;
 
 export const COSMOS_ENTRY_INTENTION_CONTRACT_V610 = Object.freeze({
   work:'WORK13',
-  correction:'entrada-da-orbe',
-  invitation:'Entrá',
+  correction:'pentagrama-menu-whit',
+  invitation:'pentagrama-vermelho',
   entryIntentions:1,
+  visibleEntryWords:0,
+  pentagramAssets:1,
+  pentagramIsMenu:true,
+  whitInsideMenu:true,
+  whitResidence:'canonical-orb',
   responseModel:'touch-answer-silence',
   reusesCanonicalOrb:true,
   reusesLivingMenuV593:true,
@@ -33,7 +38,7 @@ const REALITY_NAMES = Object.freeze({
   library:'Biblioteca',
   school:'Escola',
   journal:'Diário',
-  ai:'Orbe IA',
+  ai:'Whit',
   consultations:'Consultas',
   store:'Loja',
   skins:'Skins',
@@ -59,15 +64,21 @@ export class CosmosEntryIntentionV610 {
     this.orbCore = options.orbCore || null;
     this.menuResolver = options.menuResolver || (() => globalThis.divinaMenuV502 || null);
     this.entry = this.documentTarget?.getElementById?.('cosmosEntryIntent') || null;
+    this.pentagram = this.entry?.querySelector?.('img') || null;
     this.orb = this.documentTarget?.getElementById?.('orb') || null;
     this.route = routeNow(this.documentTarget, this.windowTarget);
     this.menuState = 'closed';
     this.openCalls = 0;
     this.worldOpenCalls = 0;
     this.openFailures = 0;
+    this.pendingOpen = false;
     this.pulses = 0;
     this.renamedRealities = 0;
     this.abortController = typeof AbortController === 'function' ? new AbortController() : null;
+    if (this.entry?.dataset) {
+      this.entry.dataset.work13MenuSymbol = 'pentagram-v611';
+      this.entry.dataset.whitResidence = 'canonical-orb';
+    }
     this.bind();
     this.renameMenu();
     this.sync('boot');
@@ -138,7 +149,12 @@ export class CosmosEntryIntentionV610 {
       return true;
     }
     const menu = this.menuResolver?.();
-    if (!menu?.open) return false;
+    if (!menu?.open) {
+      this.pendingOpen = true;
+      if (this.entry?.dataset) this.entry.dataset.response = 'answering';
+      return true;
+    }
+    this.pendingOpen = false;
     this.openCalls += 1;
     if (this.route !== 'home') this.worldOpenCalls += 1;
     if (this.entry?.dataset) this.entry.dataset.response = 'crossing';
@@ -163,6 +179,7 @@ export class CosmosEntryIntentionV610 {
       const label = portal.querySelector?.('.db502-portal__label');
       if (label) label.textContent = name;
       portal.setAttribute?.('aria-label', name);
+      if (route === 'ai' && portal.dataset) portal.dataset.work13Whit = 'inside-canonical-orb';
       count += 1;
     });
     const homeLabel = root.querySelector?.('.db502-menu__home-label');
@@ -192,6 +209,7 @@ export class CosmosEntryIntentionV610 {
     );
     const visible = this.isHomeReady();
     if (visible && !this.entry.dataset.response) this.entry.dataset.response = 'ready';
+    this.entry.setAttribute('aria-label', 'Abrir o menu mágico');
     this.entry.setAttribute('aria-hidden', String(!visible));
     this.entry.setAttribute('aria-expanded', String(this.menuState !== 'closed'));
     this.entry.tabIndex = visible ? 0 : -1;
@@ -243,8 +261,10 @@ export class CosmosEntryIntentionV610 {
       this.openUniverse('keyboard-world');
     }, { capture:true });
     this.listen(this.documentTarget, 'divina:orbital-menu-ready', () => {
+      const shouldOpen = this.pendingOpen;
       this.renameMenu();
       this.sync('menu-ready');
+      if (shouldOpen) this.openUniverse('menu-ready');
     });
     this.listen(this.documentTarget, 'divina:orb-physical-claim-settled', () => {
       this.sync('orb-claim-settled');
@@ -274,12 +294,17 @@ export class CosmosEntryIntentionV610 {
   status() {
     return Object.freeze({
       version:VERSION,
-      invitation:this.entry?.textContent?.trim() || '',
+      invitation:'pentagrama-vermelho',
+      visibleEntryWords:0,
+      pentagramReady:Boolean(this.pentagram),
+      whitInsideMenu:true,
+      whitResidence:'canonical-orb',
       route:this.route,
       menuState:this.menuState,
       openCalls:this.openCalls,
       worldOpenCalls:this.worldOpenCalls,
       openFailures:this.openFailures,
+      pendingOpen:this.pendingOpen,
       pulses:this.pulses,
       renamedRealities:this.renamedRealities,
       oneCanonicalOrb:Boolean(this.orb),

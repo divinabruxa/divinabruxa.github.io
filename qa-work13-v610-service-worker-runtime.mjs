@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — WORK13 V610 · QA DO SERVICE WORKER ATÔMICO */
+/* DIVINA BRUXA — WORK13 V611 · QA DO SERVICE WORKER ATÔMICO */
 import fs from 'node:fs';
 import vm from 'node:vm';
 import path from 'node:path';
@@ -87,7 +87,7 @@ function createHarness({ brokenAsset = '', brokenContent = false } = {}) {
   };
   vm.runInContext(source, vm.createContext({
     self,caches,fetch,Request:FakeRequest,URL,Object,Map,Set,Promise,Error,RegExp,console
-  }), { filename:'sw-v610.js' });
+  }), { filename:'sw-v611.js' });
   const wait = async (type, event = {}) => {
     let promise = Promise.resolve();
     listeners.get(type)?.({ ...event, waitUntil:value => { promise = Promise.resolve(value); } });
@@ -116,12 +116,13 @@ function createHarness({ brokenAsset = '', brokenContent = false } = {}) {
 
 const checks = [];
 const check = (id, condition, detail = '') => checks.push({ id, pass:Boolean(condition), detail:condition ? '' : String(detail) });
-const cacheName = 'divina-bruxa-work13-v610-diario-soul';
+const cacheName = 'divina-bruxa-work13-v611-pentagram-menu-whit';
 const harness = createHarness();
 
-check('core:fifty-seven-assets-declared', coreAssets.length === 57, coreAssets.length);
+check('core:fifty-eight-assets-declared', coreAssets.length === 58, coreAssets.length);
 check('core:unique-assets', new Set(coreAssets).size === coreAssets.length);
-check('core:app-v610', coreAssets.includes('./app-v208.js?v=610-work13-final-presence'));
+check('core:app-v611', coreAssets.includes('./app-v208.js?v=611-pentagram-menu-whit'));
+check('core:pentagram-image', coreAssets.includes('./pentagrama-menu-vivo-v611.webp'));
 check('core:tarot-soul-js', coreAssets.includes('./tarot-livre-soul-v610.js?v=610-work13-tarot-soul'));
 check('core:tarot-soul-css', coreAssets.includes('./tarot-livre-soul-v610.css?v=610-work13-tarot-soul'));
 check('core:daily-soul-js', coreAssets.includes('./carta-do-dia-soul-v610.js?v=610-work13-daily-soul'));
@@ -134,8 +135,8 @@ check('core:library-soul-js', coreAssets.includes('./biblioteca-soul-v610.js?v=6
 check('core:library-soul-css', coreAssets.includes('./biblioteca-soul-v610.css?v=610-work13-library-soul'));
 check('core:journal-soul-js', coreAssets.includes('./diario-soul-v610.js?v=610-work13-journal-soul'));
 check('core:journal-soul-css', coreAssets.includes('./diario-soul-v610.css?v=610-work13-journal-soul'));
-check('core:entry-js', coreAssets.includes('./cosmos-entry-intention-v610.js?v=610-work13-final-presence'));
-check('core:entry-css', coreAssets.includes('./cosmos-entry-intention-v610.css?v=610-work13-final-presence'));
+check('core:entry-js', coreAssets.includes('./cosmos-entry-intention-v610.js?v=611-pentagram-menu-whit'));
+check('core:entry-css', coreAssets.includes('./cosmos-entry-intention-v610.css?v=611-pentagram-menu-whit'));
 check('core:world-presence-js', coreAssets.includes('./cosmos-world-presence-v610.js?v=610-work13-final-presence'));
 check('core:world-presence-css', coreAssets.includes('./cosmos-world-presence-v610.css?v=610-work13-final-presence'));
 check('core:final-orchestra-js', coreAssets.includes('./cosmos-final-orchestra-v610.js?v=610-work13-final-orchestra'));
@@ -155,7 +156,7 @@ for (const event of ['install','activate','fetch','message']) check(`listener:${
 await harness.wait('install');
 const cache = harness.stores.get(cacheName);
 check('install:atomic-cache-created', cache instanceof Map);
-check('install:fifty-seven-core-assets', cache?.size === 57, cache?.size);
+check('install:fifty-eight-core-assets', cache?.size === 58, cache?.size);
 for (const asset of coreAssets) check(`install:${asset}`, cache?.has(asset));
 check('install:skip-after-validation', harness.counters().skipped === 1, harness.counters().skipped);
 
@@ -170,7 +171,7 @@ for (const asset of coreAssets) {
 
 for (const asset of [
   './index.html',
-  './app-v208.js?v=610-work13-final-presence',
+  './app-v208.js?v=611-pentagram-menu-whit',
   './carta-do-dia-soul-v610.js?v=610-work13-daily-soul',
   './carta-do-dia-soul-v610.css?v=610-work13-daily-soul',
   './tiragens-soul-v610.js?v=610-work13-spreads-soul',
@@ -181,8 +182,8 @@ for (const asset of [
   './biblioteca-soul-v610.css?v=610-work13-library-soul',
   './diario-soul-v610.js?v=610-work13-journal-soul',
   './diario-soul-v610.css?v=610-work13-journal-soul',
-  './cosmos-entry-intention-v610.js?v=610-work13-final-presence',
-  './cosmos-entry-intention-v610.css?v=610-work13-final-presence',
+  './cosmos-entry-intention-v610.js?v=611-pentagram-menu-whit',
+  './cosmos-entry-intention-v610.css?v=611-pentagram-menu-whit',
   './cosmos-world-presence-v610.js?v=610-work13-final-presence',
   './cosmos-world-presence-v610.css?v=610-work13-final-presence',
   './cosmos-final-orchestra-v610.js?v=610-work13-final-orchestra',
@@ -202,7 +203,7 @@ for (const asset of [
 harness.stores.set('divina-bruxa-work13-v609-media-skins', new Map());
 await harness.wait('activate');
 check('activate:claims-clients', harness.counters().claimed === 1);
-check('activate:keeps-v610', harness.stores.has(cacheName));
+check('activate:keeps-v611', harness.stores.has(cacheName));
 check('activate:deletes-v609-cache', !harness.stores.has('divina-bruxa-work13-v609-media-skins'));
 for (const type of [
   'DIVINA_WORK12_FOUNDATION_ACTIVE','DIVINA_WORK12_NAVIGATION_ACTIVE',
@@ -215,6 +216,7 @@ for (const type of [
   'DIVINA_WORK13_WHIT_TIMING_ACTIVE','DIVINA_WORK13_LIVING_WISDOM_ACTIVE',
   'DIVINA_WORK13_COMMERCE_CLARITY_ACTIVE','DIVINA_WORK13_MEDIA_SKINS_ACTIVE',
   'DIVINA_WORK13_FINAL_ORCHESTRA_ACTIVE','DIVINA_WORK13_ENTRY_ACTIVE',
+  'DIVINA_WORK13_PENTAGRAM_MENU_ACTIVE',
   'DIVINA_WORK13_FINAL_PRESENCE_ACTIVE',
   'DIVINA_WORK13_DAILY_SOUL_ACTIVE',
   'DIVINA_WORK13_SPREADS_SOUL_ACTIVE',
@@ -222,7 +224,7 @@ for (const type of [
   'DIVINA_WORK13_LIBRARY_SOUL_ACTIVE',
   'DIVINA_WORK13_JOURNAL_SOUL_ACTIVE',
   'DIVINA_RELEASE_READY'
-]) check(`activate:${type}`, harness.clientMessages.some(item => item.type === type && item.version === 610));
+]) check(`activate:${type}`, harness.clientMessages.some(item => item.type === type && item.version === 611));
 check('activate:context-version-v602', harness.clientMessages.some(item => item.contextVersion === 602));
 check('activate:resonance-version-v603', harness.clientMessages.some(item => item.resonanceVersion === 603));
 check('activate:daily-version-v604', harness.clientMessages.some(item => item.dailyReadingVersion === 604));
@@ -240,16 +242,17 @@ check('activate:spreads-soul-v610', harness.clientMessages.some(item => item.typ
 check('activate:school-soul-v610', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_SCHOOL_SOUL_ACTIVE' && item.reality === 'school' && item.universe === 'jardim-arcano-do-conhecimento' && item.stages === 3 && item.modules === 17 && item.lessons === 124 && item.cardLessons === 78 && item.oneNextLesson === true && item.programmeExplicit === true && item.oneOrb === true));
 check('activate:library-soul-v610', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_LIBRARY_SOUL_ACTIVE' && item.reality === 'library' && item.universe === 'arquivo-de-luz' && item.cards === 78 && item.uprightOnly === true && item.reversed === false && item.pageSize === 18 && item.oneDiscoveryFirst === true && item.catalogueExplicit === true && item.symbolicThreads === 5 && item.oneOrb === true));
 check('activate:journal-soul-v610', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_JOURNAL_SOUL_ACTIVE' && item.reality === 'journal' && item.universe === 'camara-da-tinta-lunar' && item.privateByDefault === true && item.directWritingFirst === true && item.silentAutosave === true && item.timelinePageSize === 12 && item.mirrorAggregateOnly === true && item.mirrorDiagnosis === false && item.oneOrb === true));
+check('activate:pentagram-menu-v611', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_PENTAGRAM_MENU_ACTIVE' && item.symbol === 'pentagrama-vermelho' && item.publicWorlds === 15 && item.whitInsideMenu === true && item.oneOrb === true));
 
 const onlineNavigation = await harness.fetchEvent(new FakeRequest('https://divina.test/index.html#music', { mode:'navigate' }));
-check('fetch:navigation-network', (await onlineNavigation.text()).includes('name="divina-work13" content="V610"'));
+check('fetch:navigation-network', (await onlineNavigation.text()).includes('name="divina-work13" content="V611"'));
 harness.offline(true);
 const offlineNavigation = await harness.fetchEvent(new FakeRequest('https://divina.test/index.html#skins', { mode:'navigate' }));
 check('fetch:navigation-offline', (await offlineNavigation.text()).includes('name="divina-work12" content="V600"'));
 harness.offline(false);
 
 for (const [file, needle] of [
-  ['app-v208.js?v=610-work13-final-presence','divinaWork13Macro10V610'],
+  ['app-v208.js?v=611-pentagram-menu-whit','divinaWork13PentagramMenuV611'],
   ['carta-do-dia-soul-v610.js?v=610-work13-daily-soul','CARTA_DO_DIA_SOUL_CONTRACT_V610'],
   ['carta-do-dia-soul-v610.css?v=610-work13-daily-soul','[data-daily-soul="v610"]'],
   ['tiragens-soul-v610.js?v=610-work13-spreads-soul','TIRAGENS_SOUL_CONTRACT_V610'],
@@ -260,8 +263,8 @@ for (const [file, needle] of [
   ['biblioteca-soul-v610.css?v=610-work13-library-soul','[data-library-soul="v610"]'],
   ['diario-soul-v610.js?v=610-work13-journal-soul','DIARIO_SOUL_CONTRACT_V610'],
   ['diario-soul-v610.css?v=610-work13-journal-soul','[data-journal-soul="v610"]'],
-  ['cosmos-entry-intention-v610.js?v=610-work13-final-presence','COSMOS_ENTRY_INTENTION_CONTRACT_V610'],
-  ['cosmos-entry-intention-v610.css?v=610-work13-final-presence','.cosmos-entry-intent'],
+  ['cosmos-entry-intention-v610.js?v=611-pentagram-menu-whit','COSMOS_ENTRY_INTENTION_CONTRACT_V610'],
+  ['cosmos-entry-intention-v610.css?v=611-pentagram-menu-whit','.cosmos-entry-intent'],
   ['cosmos-world-presence-v610.js?v=610-work13-final-presence','COSMOS_WORLD_PRESENCE_CONTRACT_V610'],
   ['cosmos-world-presence-v610.css?v=610-work13-final-presence','[data-work13-world]'],
   ['cosmos-final-orchestra-v610.js?v=610-work13-final-orchestra','COSMOS_FINAL_ORCHESTRA_CONTRACT_V610'],
@@ -286,17 +289,17 @@ for (const [file, needle] of [
 }
 
 await harness.message({ type:'WORK12_STATUS' });
-check('message:status-version', harness.sourceMessages.some(item => item.type === 'WORK12_STATUS' && item.version === 610));
-check('message:status-fifty-seven-assets', harness.sourceMessages.some(item => item.core?.length === 57));
+check('message:status-version', harness.sourceMessages.some(item => item.type === 'WORK12_STATUS' && item.version === 611));
+check('message:status-fifty-eight-assets', harness.sourceMessages.some(item => item.core?.length === 58));
 await harness.message({ type:'CLEAR_DIVINA_CACHES' });
 check('message:clear-caches', !harness.stores.has(cacheName));
-check('message:clear-confirmed', harness.sourceMessages.some(item => item.type === 'DIVINA_CACHES_CLEARED' && item.version === 610));
+check('message:clear-confirmed', harness.sourceMessages.some(item => item.type === 'DIVINA_CACHES_CLEARED' && item.version === 611));
 
 const failures = checks.filter(item => !item.pass);
 console.log(JSON.stringify({
-  release:'V610',
+  release:'V611',
   work:'WORK13',
-  macroStage:'10-of-10 / final-presence-service-worker-runtime',
+  macroStage:'WORK13 / pentagram-menu-whit-service-worker-runtime',
   state:failures.length ? 'FAIL' : 'PASS',
   passed:checks.length - failures.length,
   failed:failures.length,

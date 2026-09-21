@@ -23,7 +23,9 @@ const menuRoot = new NodeLike();
 menuRoot.querySelectorAll = selector => selector === '[data-v502-route]' ? portals : [];
 menuRoot.querySelector = selector => selector === '.db502-menu__home-label' ? homeLabel : null;
 
-const entry = new NodeLike({ text:'Entrá' });
+const entry = new NodeLike({ text:'' });
+const pentagram = new NodeLike();
+entry.querySelector = selector => selector === 'img' ? pentagram : null;
 const orb = new NodeLike();
 const root = new NodeLike({ dataset:{} });
 const journalScreen = new NodeLike({ dataset:{ db596ChamberState:'threshold' } });
@@ -57,15 +59,22 @@ const fire = (target, type, detail = {}) => {
 ok(entry.attrs['aria-hidden'] === 'false', 'convite nasce visível');
 ok(entry.tabIndex === 0, 'convite focável');
 ok(entry.dataset.response === 'ready', 'convite nasce pronto para responder');
+ok(entry.dataset.work13MenuSymbol === 'pentagram-v611', 'pentagrama assume o gesto do menu');
+ok(entry.attrs['aria-label'] === 'Abrir o menu mágico', 'pentagrama tem nome acessível sem texto visível');
+ok(controller.status().pentagramReady === true, 'imagem do pentagrama pronta');
+ok(controller.status().visibleEntryWords === 0, 'nenhuma palavra de entrada visível');
 ok(controller.status().renamedRealities === 15, '15 realidades nomeadas');
 ok(homeLabel.textContent === 'Início', 'centro retorna ao Início');
 for (const portal of portals) {
   ok(portal.label.textContent === portal.attrs['aria-label'], `nome único de ${portal.dataset.v502Route}`);
   ok(portal.label.textContent !== 'antigo', `rótulo atualizado de ${portal.dataset.v502Route}`);
 }
+const whitPortal = portals.find(portal => portal.dataset.v502Route === 'ai');
+ok(whitPortal.label.textContent === 'Whit', 'Whit vive como realidade do menu');
+ok(whitPortal.dataset.work13Whit === 'inside-canonical-orb', 'Whit permanece dentro da Orbe canônica');
 
 fire(entry, 'pointerdown');
-ok(pulses === 1, 'resposta imediata ao toque em Entrá');
+ok(pulses === 1, 'resposta imediata ao toque no pentagrama');
 ok(entry.dataset.response === 'answering', 'o toque é respondido antes da abertura');
 fire(entry, 'click', 1);
 ok(cancellations === 1, 'espera anterior cancelada');
@@ -174,6 +183,17 @@ journalScreen.dataset.db596ChamberState = 'engaged';
 fire(doc, 'divina:orb-physical-claim-settled', { route:'journal' });
 ok(controller.isRealityOwnedOrbTarget(journalOrbTarget) === false, 'depois do mergulho a Orbe recupera o menu global');
 ok(orb.attrs['aria-label'] === 'Orbe viva. Toque para abrir o universo', 'ciclo global retorna após entrar');
+
+fire(doc, 'divina:route-ready', { id:'home' });
+controller.continuity = { cancelHomeTap() { return true; }, callUniverse() { return false; } };
+controller.menuResolver = () => null;
+ok(controller.openUniverse('pentagram-before-menu') === true, 'toque não morre enquanto o menu acorda');
+ok(controller.status().pendingOpen === true, 'intenção de abertura fica guardada');
+let delayedOpen = 0;
+controller.menuResolver = () => ({ root:menuRoot, open() { delayedOpen += 1; return true; } });
+fire(doc, 'divina:orbital-menu-ready');
+ok(delayedOpen === 1, 'menu abre assim que os balões ficam prontos');
+ok(controller.status().pendingOpen === false, 'fila de abertura termina limpa');
 
 controller.destroy();
 console.log(`PASS ${checks}/${checks} — resposta, menu vivo e nomes públicos`);
