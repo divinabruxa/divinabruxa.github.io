@@ -1,0 +1,14 @@
+DIVINA BRUXA · WORK13 V610 · REALIDADE 5 · BIBLIOTECA
+
+1. Faça um backup da instalação atual.
+2. Envie para a raiz do site os 5 arquivos de produção deste pacote.
+3. Substitua somente app-v208.js, cosmos-entry-intention-v610.js e sw.js.
+4. Mantenha biblioteca-soul-v610.js e biblioteca-soul-v610.css na mesma raiz.
+5. Abra o site uma vez online, atualize e feche/reabra o PWA.
+
+Teste no iPhone:
+Home → Entrá → Biblioteca → Descobrir uma carta → fio simbólico → explorar as 78 → menu vivo → voltar.
+
+Não apague os demais arquivos. Não crie WORK14.
+
+Uma Orbe. Um universo. Uma descoberta acende a próxima. Uma jornada.

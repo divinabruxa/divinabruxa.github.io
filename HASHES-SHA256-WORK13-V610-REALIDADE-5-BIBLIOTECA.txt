@@ -1,0 +1,22 @@
+DIVINA BRUXA · WORK13 V610 · REALIDADE 5 · BIBLIOTECA
+SHA-256 dos arquivos entregues, exceto este índice:
+
+985161e58f395d9a81f5c927c2259c20686bcce98079ce72dc24eaf89c4d98d8  00-INSTALE-WORK13-V610-REALIDADE-5-BIBLIOTECA.txt
+cc27fe4a2edef2a196daa9b1623ee8e375649eadb434950601d290fd5efaf87e  MANIFESTO-WORK13-V610-REALIDADE-5-BIBLIOTECA.json
+296661f2facf85a591ec0bf64005a3b7b5d3f85cafe01c55014407b0b49dca9f  RELATORIO-WORK13-V610-REALIDADE-5-BIBLIOTECA.md
+ecad9f5b8d0260c142ac0283b34006559f31d2f13cfcf27b688888ff88953f65  app-v208.js
+a6792f7a4346ba4b5912e52968f940b182f32018d6af710c31c34b44b2229b29  cosmos-entry-intention-v610.js
+36b77e63c57b344e5441570da6cd52b919551ef332be600c453596bf787c4fb6  sw.js
+a4614af1571897d81cd42d92975131dc7ab08b3a1b1285fd14e3079a4d0f8fa6  biblioteca-soul-v610.js
+a32563fe78e59828b8fdf18a432e488d96a66ba8f2c5419c1764c3b449d71314  biblioteca-soul-v610.css
+8cae1bfd01492ea3ca2b0a452017a10c8b846dd22f8082f2d6dc6888b624b14c  qa-work13-v610-library-soul-runtime.mjs
+a825b68b7a494285e4e214bb16334ac83651db6af824783512f2efa322329db5  qa-work13-v610-library-soul-structural.mjs
+be4d408d36a9ee6595d2f2b0f353c166d01cd2aadf14330212cdf79438e28f59  qa-work13-v610-library-soul-iphone.mjs
+7f1523d5796e3da4e890fe30a4414d8eff5d9ccfd88cbe473419fe80a9700e4b  qa-work13-v610-entry-runtime.mjs
+d4ac89ac4a277eeed6e7045dd69c73363ae10130c74022a147cce53d6b81c1f8  qa-work13-v610-entry-structural.mjs
+f243359d6167f291af96422ad7274edc5b2b0d3467b8a23fd07abcfef3797c1f  qa-work13-v610-daily-soul-structural.mjs
+54da94c731809184cf82425ceacd0a4dff2663e2f5fd1961a8b1aa5f6e4495cc  qa-work13-v610-spreads-soul-structural.mjs
+0c9303cda9e11e3b68b5970980b39c9d88ec3a9dc6af2c8f9c1f70e29cff78a7  qa-work13-v610-tarot-soul-structural.mjs
+2b5dd1f4c949aeb4e49869dd753acf2bb1caff9ded56c52d3d58df11d5aff17f  qa-work13-v610-school-soul-structural.mjs
+1c9798557d85f2f6d223f363a92b5f9a3b00c831b7044171e7ca7e434a87651b  qa-work13-v610-iphone-supreme.mjs
+75efed752761a907f7f1ec164742c1433c5efaf782469e238b929ce01a4454df  qa-work13-v610-service-worker-runtime.mjs

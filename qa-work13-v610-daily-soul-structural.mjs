@@ -29,7 +29,7 @@ ok(app.includes('window.orbe.cartaDoDiaSoul = cartaDoDiaSoul'), 'alma publicada 
 ok(app.includes('window.divinaWork13CartaDoDiaSoulV610'), 'estado público próprio');
 ok(app.includes("stage:'segunda-realidade-alma-propria'"), 'segunda realidade declarada');
 ok(app.includes('cartaDoDiaSoulStatus:cartaDoDiaSoul?.status?.() || null'), 'auditoria reunida');
-ok(app.includes('realitySouls:4'), 'quatro realidades acumuladas');
+ok(app.includes('realitySouls:5'), 'cinco realidades acumuladas');
 ok(app.includes('work14:false'), 'nenhum WORK14');
 
 ok(entry.includes('realityOwnedOrbActionsPreserved:true'), 'menu preserva ações locais');
@@ -84,8 +84,8 @@ ok(cosmic.includes('maximumEssenceSentences:1'), 'uma frase preservada');
 ok(cosmicStyles.includes('[data-reading-phase="essence"]') && cosmicStyles.includes('[data-reading-phase="depth"]'), 'camadas existentes preservadas');
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core,/^\s*'\.\//gm) === 53, '53 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v610-escola-soul'"), 'cache próprio');
+ok(count(core,/^\s*'\.\//gm) === 55, '55 ativos atômicos');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v610-biblioteca-soul'"), 'cache próprio');
 ok(sw.includes("'./carta-do-dia-soul-v610.js?v=610-work13-daily-soul'"), 'JS no cache');
 ok(sw.includes("'./carta-do-dia-soul-v610.css?v=610-work13-daily-soul'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_DAILY_SOUL_ACTIVE'), 'ativação comunicada');

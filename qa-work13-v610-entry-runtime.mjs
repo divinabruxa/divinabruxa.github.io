@@ -140,5 +140,21 @@ ok(controller.isCanonicalOrbTarget(spreadsOrbTarget) === true, 'Tiragens usam a 
 ok(controller.isRealityOwnedOrbTarget(spreadsOrbTarget) === true, 'Tiragens mantêm o toque de revelar');
 ok(orb.attrs['aria-label'] === 'Orbe viva. Toque para revelar a próxima posição', 'Orbe anuncia a próxima posição');
 
+const libraryHost = { dataset:{ libraryOrbHost:'' } };
+const libraryOrbTarget = {
+  closest(selector) {
+    if (selector === '#orb') return orb;
+    if (selector === '[data-library-orb-host]') return libraryHost;
+    return null;
+  }
+};
+orb.closest = selector => selector === '[data-library-orb-host], #cardLibraryApp [data-orb]' ? libraryHost : null;
+fire(doc, 'divina:route-ready', { id:'library' });
+ok(controller.isCanonicalOrbTarget(libraryOrbTarget) === true, 'Biblioteca usa a Orbe canônica');
+ok(controller.isRealityOwnedOrbTarget(libraryOrbTarget) === true, 'Biblioteca mantém o toque de descobrir');
+ok(orb.attrs['aria-label'] === 'Orbe viva. Toque para descobrir uma carta', 'Orbe anuncia a descoberta');
+fire(doc, 'divina:orb-physical-claim-settled', { route:'library' });
+ok(root.dataset.work13EntryReason === 'orb-claim-settled', 'rótulo acompanha a chegada física da Orbe');
+
 controller.destroy();
 console.log(`PASS ${checks}/${checks} — resposta, menu vivo e nomes públicos`);

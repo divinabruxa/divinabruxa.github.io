@@ -33,7 +33,7 @@ ok(app.includes('window.divinaWork13EscolaSoulV610'), 'estado público próprio'
 ok(app.includes("stage:'quarta-realidade-alma-propria'"), 'quarta realidade declarada');
 ok(app.includes("universe:'jardim-arcano-do-conhecimento'"), 'Jardim Arcano declarado');
 ok(app.includes('escolaSoulStatus:escolaSoul?.status?.() || null'), 'auditoria reunida');
-ok(app.includes('realitySouls:4'), 'quatro realidades concluídas');
+ok(app.includes('realitySouls:5'), 'cinco realidades concluídas');
 ok(app.includes("event.data?.type === 'DIVINA_WORK13_SCHOOL_SOUL_ACTIVE'"), 'worker ouvido');
 ok(app.includes('work14:false'), 'nenhum WORK14');
 
@@ -97,8 +97,8 @@ ok(chamberStyles.includes('.db596-school-paths') && chamberStyles.includes('scro
 ok(entry.includes('globalOrbMenuCycle:true') && entry.includes('everyRealityCanCallUniverse:true'), 'Orbe continua abrindo o menu global');
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core,/^\s*'\.\//gm) === 53, '53 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v610-escola-soul'"), 'cache próprio');
+ok(count(core,/^\s*'\.\//gm) === 55, '55 ativos atômicos');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v610-biblioteca-soul'"), 'cache próprio');
 ok(sw.includes("'./escola-soul-v610.js?v=610-work13-school-soul'"), 'JS no cache');
 ok(sw.includes("'./escola-soul-v610.css?v=610-work13-school-soul'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_SCHOOL_SOUL_ACTIVE'), 'ativação comunicada');

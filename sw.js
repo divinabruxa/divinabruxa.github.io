@@ -1,5 +1,5 @@
-/* DIVINA BRUXA — WORK13 · ALMA DA ESCOLA · V610
-   O WORK12 V600, as etapas V602–V610 e as tres primeiras almas permanecem
+/* DIVINA BRUXA — WORK13 · ALMA DA BIBLIOTECA · V610
+   O WORK12 V600, as etapas V602–V610 e as quatro primeiras almas permanecem
    protegidos. A instalacao so assume o portal quando a mesma Orbe, o menu vivo,
    o rito diario e as quinze realidades completas pertencem ao mesmo corte.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
@@ -7,7 +7,7 @@
 
 const VERSION = 610;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work13-v610-escola-soul';
+const CACHE_NAME = 'divina-bruxa-work13-v610-biblioteca-soul';
 const CORE = Object.freeze([
   './index.html',
   './app-v208.js?v=610-work13-final-presence',
@@ -19,6 +19,8 @@ const CORE = Object.freeze([
   './tiragens-soul-v610.css?v=610-work13-spreads-soul',
   './escola-soul-v610.js?v=610-work13-school-soul',
   './escola-soul-v610.css?v=610-work13-school-soul',
+  './biblioteca-soul-v610.js?v=610-work13-library-soul',
+  './biblioteca-soul-v610.css?v=610-work13-library-soul',
   './cosmos-entry-intention-v610.js?v=610-work13-final-presence',
   './cosmos-entry-intention-v610.css?v=610-work13-final-presence',
   './cosmos-world-presence-v610.js?v=610-work13-final-presence',
@@ -85,6 +87,8 @@ const validateCore = async responses => {
   const tiragensSoulStyles = await responses.get('./tiragens-soul-v610.css?v=610-work13-spreads-soul')?.clone().text();
   const escolaSoul = await responses.get('./escola-soul-v610.js?v=610-work13-school-soul')?.clone().text();
   const escolaSoulStyles = await responses.get('./escola-soul-v610.css?v=610-work13-school-soul')?.clone().text();
+  const bibliotecaSoul = await responses.get('./biblioteca-soul-v610.js?v=610-work13-library-soul')?.clone().text();
+  const bibliotecaSoulStyles = await responses.get('./biblioteca-soul-v610.css?v=610-work13-library-soul')?.clone().text();
   const entryIntention = await responses.get('./cosmos-entry-intention-v610.js?v=610-work13-final-presence')?.clone().text();
   const entryStyles = await responses.get('./cosmos-entry-intention-v610.css?v=610-work13-final-presence')?.clone().text();
   const worldPresence = await responses.get('./cosmos-world-presence-v610.js?v=610-work13-final-presence')?.clone().text();
@@ -403,6 +407,57 @@ const validateCore = async responses => {
     || !escolaSoulStyles.includes('@media(prefers-reduced-motion:reduce)')
     || /@keyframes|backdrop-filter|filter\s*:/.test(escolaSoulStyles)) {
     throw new Error('work13-escola-soul-styles-missing');
+  }
+  if (!app.includes("biblioteca-soul-v610.js?v=610-work13-library-soul")
+    || !app.includes('createBibliotecaSoulV610({ orbCore:supremeOrb })')
+    || !app.includes('window.orbe.bibliotecaSoul = bibliotecaSoul')
+    || !app.includes("stage:'quinta-realidade-alma-propria'")) {
+    throw new Error('work13-biblioteca-soul-app-mismatch');
+  }
+  if (!bibliotecaSoul?.includes('BIBLIOTECA_SOUL_CONTRACT_V610')
+    || !bibliotecaSoul.includes("universe:'arquivo-de-luz'")
+    || !bibliotecaSoul.includes("'threshold','orb','one-discovery','silence','symbolic-thread'")
+    || !bibliotecaSoul.includes("existingLibraryWorldAuthority:'V302-preserved'")
+    || !bibliotecaSoul.includes("existingLibraryDepthAuthority:'V332-preserved'")
+    || !bibliotecaSoul.includes("existingPublicLibraryAuthority:'V544-preserved'")
+    || !bibliotecaSoul.includes("existingLivingWisdomAuthority:'V607-preserved'")
+    || !bibliotecaSoul.includes('cardsPreserved:78')
+    || !bibliotecaSoul.includes('uprightCardsOnly:true')
+    || !bibliotecaSoul.includes('reversedCards:false')
+    || !bibliotecaSoul.includes('cataloguePageSizePreserved:18')
+    || !bibliotecaSoul.includes('gridFullImageRequestsPreserved:0')
+    || !bibliotecaSoul.includes('oneDiscoveryFirst:true')
+    || !bibliotecaSoul.includes('catalogueRequiresExplicitGesture:true')
+    || !bibliotecaSoul.includes("'symbol','element','number','archetype','related-cards'")
+    || !bibliotecaSoul.includes("'pt-BR','en','es'")
+    || !bibliotecaSoul.includes('cardMeaningChanges:0')
+    || !bibliotecaSoul.includes('cardSelectionChanges:0')
+    || !bibliotecaSoul.includes('premiumAuthorityChanges:0')
+    || !bibliotecaSoul.includes('reusesCanonicalOrb:true')
+    || !bibliotecaSoul.includes('privateContentReads:0')
+    || !bibliotecaSoul.includes('cardIdentityReads:0')
+    || !bibliotecaSoul.includes('cardMeaningReads:0')
+    || !bibliotecaSoul.includes('searchQueryReads:0')
+    || !bibliotecaSoul.includes('permanentAnimationLoops:0')
+    || !bibliotecaSoul.includes('mutationObservers:0')
+    || !bibliotecaSoul.includes('deferredTimers:0')
+    || !bibliotecaSoul.includes('work14:false')) {
+    throw new Error('work13-biblioteca-soul-contract-missing');
+  }
+  if (!bibliotecaSoulStyles?.includes('[data-library-soul="v610"]')
+    || !bibliotecaSoulStyles.includes('[data-library-soul-phase="answering"]')
+    || !bibliotecaSoulStyles.includes('[data-library-soul-phase="discovery"]')
+    || !bibliotecaSoulStyles.includes('[data-library-soul-phase="thread"]')
+    || !bibliotecaSoulStyles.includes('[data-library-soul-phase="catalogue"]')
+    || !bibliotecaSoulStyles.includes('.db607-library-guide')
+    || !bibliotecaSoulStyles.includes('.lb302__sanctuary')
+    || !bibliotecaSoulStyles.includes('.lb302__paths')
+    || !bibliotecaSoulStyles.includes('.pl544')
+    || !bibliotecaSoulStyles.includes('@media(max-width:430px)')
+    || !bibliotecaSoulStyles.includes('@media(orientation:landscape)')
+    || !bibliotecaSoulStyles.includes('@media(prefers-reduced-motion:reduce)')
+    || /@keyframes|animation\s*:|backdrop-filter|filter\s*:/.test(bibliotecaSoulStyles)) {
+    throw new Error('work13-biblioteca-soul-styles-missing');
   }
   if (!entryIntention?.includes('COSMOS_ENTRY_INTENTION_CONTRACT_V610')
     || !entryIntention.includes("invitation:'Entrá'")
@@ -795,6 +850,7 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK13_DAILY_SOUL_ACTIVE', version:VERSION, reality:'daily', cardsPerBrasiliaDay:1, timeZone:'America/Sao_Paulo', reversed:false, oneSentenceEssence:true, depthExplicit:true, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_SPREADS_SOUL_ACTIVE', version:VERSION, reality:'spreads', methods:15, freeMethods:4, premiumMethods:11, celticCrossPositions:10, royalTableCards:78, oneSentenceSynthesis:true, depthExplicit:true, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_SCHOOL_SOUL_ACTIVE', version:VERSION, reality:'school', universe:'jardim-arcano-do-conhecimento', stages:3, modules:17, lessons:124, cardLessons:78, oneNextLesson:true, programmeExplicit:true, oneOrb:true, base:600, complete:true });
+        client.postMessage({ type:'DIVINA_WORK13_LIBRARY_SOUL_ACTIVE', version:VERSION, reality:'library', universe:'arquivo-de-luz', cards:78, uprightOnly:true, reversed:false, pageSize:18, oneDiscoveryFirst:true, catalogueExplicit:true, symbolicThreads:5, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_RELEASE_READY', version:VERSION });
       } catch {}
     }

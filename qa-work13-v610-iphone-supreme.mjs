@@ -34,7 +34,8 @@ const styles = Object.freeze({
   entry:read('cosmos-entry-intention-v610.css'),
   worldPresence:read('cosmos-world-presence-v610.css'),
   spreadsSoul:read('tiragens-soul-v610.css'),
-  schoolSoul:read('escola-soul-v610.css')
+  schoolSoul:read('escola-soul-v610.css'),
+  librarySoul:read('biblioteca-soul-v610.css')
 });
 
 check('matrix:eight-profiles', contract.iphoneProfiles.length === 8);
@@ -101,17 +102,17 @@ check('layout:touch-action-controls', styleBundle.includes('touch-action:manipul
 check('layout:media-inline-safe', styles.mediaSkins.includes('safe-area-inset-left') && styles.mediaSkins.includes('safe-area-inset-right'));
 check('layout:media-bottom-safe', styles.mediaSkins.includes('safe-area-inset-bottom'));
 
-for (const key of ['shell','ritual','chambers','intelligence','finalContinuity','daily','spread','wisdom','commerce','mediaSkins','entry','worldPresence','spreadsSoul','schoolSoul']) {
+for (const key of ['shell','ritual','chambers','intelligence','finalContinuity','daily','spread','wisdom','commerce','mediaSkins','entry','worldPresence','spreadsSoul','schoolSoul','librarySoul']) {
   check(`portrait:${key}`, /@media\s*\(?max-width\s*:\s*430px\)?/.test(styles[key]), key);
 }
-for (const key of ['shell','orbitalMenu','ritual','chambers','daily','spread','spreadsSoul','schoolSoul']) {
+for (const key of ['shell','orbitalMenu','ritual','chambers','daily','spread','spreadsSoul','schoolSoul','librarySoul']) {
   check(`landscape:${key}`, /orientation\s*:\s*landscape/.test(styles[key]), key);
 }
 for (const [key, source] of Object.entries(styles)) {
   check(`reduced-motion:${key}`, /prefers-reduced-motion\s*:\s*reduce/.test(source), key);
 }
 
-for (const key of ['shell','ritual','chambers','finalContinuity','spread','wisdom','commerce','mediaSkins','schoolSoul']) {
+for (const key of ['shell','ritual','chambers','finalContinuity','spread','wisdom','commerce','mediaSkins','schoolSoul','librarySoul']) {
   check(`touch-target:${key}`, /min-(?:height|width)\s*:\s*(?:4[4-9]|[5-9]\d)px/.test(styles[key]), key);
 }
 check('touch-target:loader-recovery-48', index.includes('db-orb-loader__recovery{display:none;min-height:48px'));
@@ -143,8 +144,8 @@ check('route:skins-engine', read('runtime-v12.js').includes("screen.id = 'skins'
 check('route:one-orb', (index.match(/id="orb"/g) || []).length === 1);
 check('route:one-canvas', (index.match(/id="orbCanvas"/g) || []).length === 1);
 
-check('offline:cache-v610', worker.includes("divina-bruxa-work13-v610-escola-soul"));
-check('offline:fifty-three-core-assets', (worker.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1].match(/'[^']+'/g) || []).length === 53);
+check('offline:cache-v610', worker.includes("divina-bruxa-work13-v610-biblioteca-soul"));
+check('offline:fifty-five-core-assets', (worker.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1].match(/'[^']+'/g) || []).length === 55);
 check('offline:final-orchestra-cached', worker.includes("'./cosmos-final-orchestra-v610.js?v=610-work13-final-orchestra'"));
 check('offline:navigation-falls-to-index', worker.includes("networkFirst(request,'./index.html')"));
 check('offline:network-first-code', worker.includes('if (isCode(url))'));

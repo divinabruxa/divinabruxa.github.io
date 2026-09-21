@@ -98,6 +98,10 @@ export class CosmosEntryIntentionV610 {
     if (this.route === 'tarot') return Boolean(target?.closest?.('#tableOrb'));
     if (this.route === 'daily') return Boolean(target?.closest?.('[data-daily-orb-host]'));
     if (this.route === 'spreads') return Boolean(target?.closest?.('#spreadResult'));
+    if (this.route === 'library') return Boolean(
+      target?.closest?.('[data-library-orb-host]')
+      || target?.closest?.('#cardLibraryApp [data-orb]')
+    );
     return false;
   }
 
@@ -167,6 +171,8 @@ export class CosmosEntryIntentionV610 {
           ? 'Orbe viva. Toque para abrir a Carta do Dia'
         : this.route === 'spreads' && this.orb?.closest?.('#spreadResult')
           ? 'Orbe viva. Toque para revelar a próxima posição'
+        : this.route === 'library' && this.orb?.closest?.('[data-library-orb-host], #cardLibraryApp [data-orb]')
+          ? 'Orbe viva. Toque para descobrir uma carta'
         : 'Orbe viva. Toque para abrir o universo'
     );
     const visible = this.isHomeReady();
@@ -224,6 +230,9 @@ export class CosmosEntryIntentionV610 {
     this.listen(this.documentTarget, 'divina:orbital-menu-ready', () => {
       this.renameMenu();
       this.sync('menu-ready');
+    });
+    this.listen(this.documentTarget, 'divina:orb-physical-claim-settled', () => {
+      this.sync('orb-claim-settled');
     });
     this.listen(this.documentTarget, 'divina:menu-state', event => {
       this.menuState = String(event?.detail?.state || 'closed').toLowerCase();

@@ -62,6 +62,10 @@ ok(entryJs.includes('realityOwnedOrbActionsPreserved:true'), 'ação própria da
 ok(entryJs.includes("target?.closest?.('#tableOrb')"), 'Tarot Livre não é interceptado pelo menu');
 ok(entryJs.includes("target?.closest?.('[data-daily-orb-host]')"), 'Carta do Dia não é interceptada pelo menu');
 ok(entryJs.includes("target?.closest?.('#spreadResult')"), 'Tiragens não são interceptadas pelo menu');
+ok(entryJs.includes("target?.closest?.('[data-library-orb-host]')"), 'Biblioteca não é interceptada pelo menu');
+ok(entryJs.includes("target?.closest?.('#cardLibraryApp [data-orb]')"), 'descoberta canônica da Biblioteca preservada');
+ok(entryJs.includes('Orbe viva. Toque para descobrir uma carta'), 'ação local da Biblioteca anunciada');
+ok(entryJs.includes("'divina:orb-physical-claim-settled'"), 'rótulo acompanha a chegada da Orbe');
 ok(entryJs.includes("this.continuity?.callUniverse?.(source)"), 'abertura pela continuidade');
 ok(entryJs.includes("this.openUniverse('orb-world')"), 'Orbe chama o menu fora da Home');
 ok(entryJs.includes("this.orbCore?.pulse?.('work13-entry-response'"), 'resposta imediata');
@@ -96,8 +100,8 @@ for (const css of [entryCss,presenceCss]) {
 }
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core, /^\s*'\.\//gm) === 53, '53 ativos centrais');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v610-escola-soul'"), 'cache isolado');
+ok(count(core, /^\s*'\.\//gm) === 55, '55 ativos centrais');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v610-biblioteca-soul'"), 'cache isolado');
 ok(sw.includes('DIVINA_WORK13_FINAL_PRESENCE_ACTIVE'), 'ativação comunicada');
 ok(sw.includes('DIVINA_WORK13_GLOBAL_MENU_ACTIVE'), 'menu global comunicado');
 ok(sw.includes('COSMOS_WORLD_PRESENCE_CONTRACT_V610'), 'worker valida presença');
