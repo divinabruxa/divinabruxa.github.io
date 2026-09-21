@@ -1,0 +1,293 @@
+/* DIVINA BRUXA — WORK13 · ALMA DA CARTA DO DIA · V610
+   Um observatorio de amanhecer. A resposta nasce do estado; nenhum loop,
+   filtro, imagem, canvas ou efeito permanente novo. */
+
+html[data-work13-daily-soul="v610"] #daily[data-daily-soul="v610"]{
+  --cd610-dawn:248,194,119;
+  --cd610-rose:223,112,164;
+  --cd610-violet:137,87,193;
+  --cd610-night:5,3,12;
+  box-sizing:border-box;
+  min-block-size:100dvh;
+  padding-block-start:max(20px,env(safe-area-inset-top));
+  padding-block-end:max(52px,env(safe-area-inset-bottom));
+  background:
+    radial-gradient(ellipse 92% 46% at 50% 8%,rgba(var(--cd610-dawn),.15),transparent 72%),
+    radial-gradient(ellipse 64% 42% at 78% 42%,rgba(var(--cd610-rose),.065),transparent 76%),
+    linear-gradient(180deg,rgba(var(--cd610-night),.08),rgba(var(--cd610-night),.58) 76%,rgba(var(--cd610-night),.76));
+}
+
+html[data-work13-daily-soul="v610"] #daily[data-daily-soul="v610"]::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    radial-gradient(circle at 18% 16%,rgba(255,242,207,.28) 0 1px,transparent 1.5px),
+    radial-gradient(circle at 81% 24%,rgba(255,206,154,.22) 0 1px,transparent 1.5px),
+    radial-gradient(circle at 30% 57%,rgba(225,184,255,.18) 0 1px,transparent 1.5px),
+    radial-gradient(circle at 76% 74%,rgba(255,239,205,.16) 0 1px,transparent 1.5px);
+  background-size:181px 197px,223px 241px,263px 281px,311px 337px;
+  opacity:.46;
+  transition:opacity 320ms ease;
+}
+
+html[data-work13-daily-soul="v610"] #daily[data-daily-soul="v610"][data-daily-soul-presence="away"]::after{
+  opacity:0;
+}
+
+html[data-work13-daily-soul="v610"] #daily #dailyCard{
+  width:min(100%,820px);
+  margin-inline:auto;
+  padding-inline:clamp(10px,3vw,24px);
+}
+
+html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"]{
+  width:100%;
+  gap:clamp(10px,2svh,18px);
+}
+
+html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"] .dw509__head{
+  margin-block-end:0;
+}
+
+html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"] .dw509__head time{
+  color:rgba(255,235,205,.64);
+  font-size:.69rem;
+  letter-spacing:.11em;
+  text-transform:lowercase;
+  text-shadow:0 0 22px rgba(var(--cd610-dawn),.16);
+}
+
+html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"] .dw509__sanctuary{
+  position:relative;
+  min-block-size:clamp(500px,68svh,720px);
+  border:1px solid rgba(var(--cd610-dawn),.10)!important;
+  border-radius:clamp(36px,10vw,88px)!important;
+  background:
+    radial-gradient(circle at 50% 43%,rgba(var(--cd610-dawn),.075),transparent 29%),
+    radial-gradient(ellipse 74% 46% at 50% 59%,rgba(var(--cd610-violet),.075),transparent 72%),
+    linear-gradient(180deg,rgba(20,8,27,.14),rgba(5,2,12,.34))!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,244,220,.07),
+    inset 0 -50px 100px rgba(0,0,0,.18),
+    0 34px 96px rgba(0,0,0,.15)!important;
+  isolation:isolate;
+  overflow:hidden;
+  transition:border-color 180ms ease,box-shadow 220ms ease,background-color 220ms ease;
+}
+
+html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"].is-revealed .dw509__sanctuary{
+  min-block-size:clamp(620px,77svh,800px);
+}
+
+html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"] .dw509__portal{
+  opacity:.24;
+  transition:opacity 180ms ease,transform 220ms cubic-bezier(.2,.78,.2,1),border-color 180ms ease;
+}
+
+html[data-work13-daily-soul="v610"] #daily[data-daily-soul-phase="answering"] .dw509__sanctuary,
+html[data-work13-daily-soul="v610"] #daily[data-daily-soul-phase="symbol"] .dw509__sanctuary{
+  border-color:rgba(var(--cd610-dawn),.25)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,247,226,.12),
+    inset 0 -42px 92px rgba(0,0,0,.15),
+    0 28px 90px rgba(0,0,0,.14),
+    0 0 54px rgba(var(--cd610-rose),.08)!important;
+}
+
+html[data-work13-daily-soul="v610"] #daily[data-daily-soul-phase="answering"] .dw509__portal,
+html[data-work13-daily-soul="v610"] #daily[data-daily-soul-phase="symbol"] .dw509__portal{
+  opacity:.72;
+  transform:scale(1.025);
+  border-color:rgba(var(--cd610-dawn),.28);
+}
+
+html[data-work13-daily-soul="v610"] #daily[data-daily-soul-phase="silence"] .dw509__portal{
+  opacity:.12;
+  transform:scale(1);
+}
+
+html[data-work13-daily-soul="v610"] #daily[data-daily-soul-phase="silence"] .dw509__cosmos{
+  opacity:.48;
+  transition:opacity 260ms ease;
+}
+
+html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"] .dw509__orb-host{
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+
+html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"] .dw509__orb-host::before,
+html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"] .dw509__orb-host::after{
+  opacity:.34;
+  transition:opacity 150ms ease,transform 190ms cubic-bezier(.2,.78,.2,1);
+}
+
+html[data-work13-daily-soul="v610"] #daily[data-daily-soul-phase="answering"] .dw509__orb-host::before,
+html[data-work13-daily-soul="v610"] #daily[data-daily-soul-phase="answering"] .dw509__orb-host::after{
+  opacity:.88;
+  transform:scale(1.045);
+}
+
+html[data-work13-daily-soul="v610"] #daily[data-daily-soul-phase="silence"] .dw509__orb-host::before,
+html[data-work13-daily-soul="v610"] #daily[data-daily-soul-phase="silence"] .dw509__orb-host::after{
+  opacity:.18;
+  transform:scale(1);
+}
+
+html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"] .dw509__sealed{
+  max-width:32ch;
+}
+
+html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"] .dw509__whisper{
+  color:rgba(255,246,229,.86);
+  font:400 clamp(1.12rem,4.5vw,1.42rem)/1.48 Georgia,"Times New Roman",serif;
+  text-wrap:balance;
+}
+
+html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"] .dw509__whisper span{
+  color:rgba(255,232,201,.56);
+  font:500 .72rem/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  letter-spacing:.10em;
+}
+
+html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"] .dw509__truth{
+  color:rgba(255,226,190,.42);
+  font-size:.62rem;
+  letter-spacing:.10em;
+}
+
+html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"] .dw509__intention-toggle{
+  min-block-size:44px;
+  border-color:rgba(var(--cd610-dawn),.12);
+  background:transparent;
+  color:rgba(255,233,204,.58);
+  box-shadow:none;
+  -webkit-tap-highlight-color:transparent;
+  transition:color 140ms ease,border-color 140ms ease,transform 100ms ease;
+}
+
+html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"] .dw509__intention-toggle:active{
+  transform:translateY(1px);
+}
+
+html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"] .dw509__card{
+  opacity:1;
+  transform:translate3d(0,0,0);
+  transition:opacity 180ms ease,transform 240ms cubic-bezier(.2,.78,.2,1);
+}
+
+html[data-work13-daily-soul="v610"] #daily[data-daily-soul-phase="answering"] .dw509__card{
+  opacity:.76;
+  transform:translate3d(0,5px,0) scale(.985);
+}
+
+html[data-work13-daily-soul="v610"] #daily[data-daily-soul-phase="silence"] .dw509__card,
+html[data-work13-daily-soul="v610"] #daily[data-daily-soul-phase="essence"] .dw509__card,
+html[data-work13-daily-soul="v610"] #daily[data-daily-soul-phase="depth"] .dw509__card{
+  opacity:1;
+  transform:translate3d(0,0,0) scale(1);
+}
+
+html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"] .dw509__identity h3{
+  color:rgba(255,247,231,.96);
+  font-weight:400;
+  text-shadow:0 0 28px rgba(var(--cd610-dawn),.17);
+}
+
+html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"] .db604-daily-essence{
+  max-width:34ch;
+  border-block-start-color:rgba(var(--cd610-dawn),.20);
+  color:rgba(255,247,232,.94);
+  text-shadow:0 0 22px rgba(var(--cd610-dawn),.10);
+}
+
+html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"] .db595-reading-intention{
+  min-block-size:46px;
+  padding-inline:24px;
+  border-color:rgba(var(--cd610-dawn),.20);
+  background:linear-gradient(145deg,rgba(var(--cd610-violet),.09),rgba(8,3,14,.18));
+  box-shadow:inset 0 0 24px rgba(var(--cd610-dawn),.025),0 10px 30px rgba(0,0,0,.12);
+  color:rgba(255,238,210,.82);
+}
+
+html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"][data-reading-phase="depth"] .dw509__constellation button{
+  min-block-size:48px;
+  border-color:rgba(var(--cd610-dawn),.14);
+  background:rgba(10,4,17,.24);
+  color:rgba(255,238,214,.72);
+  box-shadow:none;
+}
+
+html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"][data-reading-phase="depth"] .dw509__constellation button[aria-pressed="true"]{
+  border-color:rgba(var(--cd610-dawn),.34);
+  background:rgba(var(--cd610-dawn),.08);
+  color:rgba(255,248,232,.96);
+}
+
+html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"][data-reading-phase="depth"] .dw509__layer{
+  border-color:rgba(var(--cd610-dawn),.12)!important;
+  border-radius:28px;
+  background:linear-gradient(155deg,rgba(33,12,39,.52),rgba(6,3,13,.58))!important;
+  box-shadow:inset 0 1px 0 rgba(255,243,219,.05);
+}
+
+html[data-experience-budget="essential"][data-work13-daily-soul="v610"] #daily::after{
+  opacity:.24;
+}
+
+@media(max-width:430px){
+  html[data-work13-daily-soul="v610"] #daily[data-daily-soul="v610"]{
+    min-block-size:100svh;
+    padding-block-start:max(14px,env(safe-area-inset-top));
+  }
+
+  html[data-work13-daily-soul="v610"] #daily #dailyCard{
+    padding-inline:4px;
+  }
+
+  html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"] .dw509__sanctuary{
+    min-block-size:max(500px,66svh);
+    border-radius:36px!important;
+    padding-inline:10px;
+  }
+
+  html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"].is-revealed .dw509__sanctuary{
+    min-block-size:max(620px,75svh);
+  }
+
+  html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"] .dw509__card{
+    width:min(64vw,236px);
+  }
+}
+
+@media(orientation:landscape) and (max-height:520px){
+  html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"] .dw509__sanctuary,
+  html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"].is-revealed .dw509__sanctuary{
+    min-block-size:440px;
+  }
+
+  html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"] .dw509__card{
+    width:min(34vw,210px);
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-work13-daily-soul="v610"] #daily::after,
+  html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"] :is(
+    .dw509__sanctuary,.dw509__portal,.dw509__cosmos,.dw509__orb-host::before,
+    .dw509__orb-host::after,.dw509__intention-toggle,.dw509__card
+  ){
+    transition:none!important;
+  }
+}
+
+@media(forced-colors:active){
+  html[data-work13-daily-soul="v610"] #dailyCard .dw509[data-daily-soul="v610"] :is(
+    .dw509__sanctuary,.dw509__intention-toggle,.db595-reading-intention,.dw509__layer
+  ){
+    border-color:CanvasText!important;
+  }
+}

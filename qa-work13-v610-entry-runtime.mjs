@@ -114,5 +114,17 @@ ok(controller.isCanonicalOrbTarget(tarotOrbTarget) === true, 'alvo usa a Orbe ca
 ok(controller.isRealityOwnedOrbTarget(tarotOrbTarget) === true, 'Tarot mantém o toque de revelar');
 ok(orb.attrs['aria-label'] === 'Orbe viva. Toque para revelar a próxima carta', 'Orbe anuncia a ação do Tarot');
 
+const dailyOrbTarget = {
+  closest(selector) {
+    if (selector === '#orb') return orb;
+    if (selector === '[data-daily-orb-host]') return { dataset:{ dailyOrbHost:'' } };
+    return null;
+  }
+};
+fire(doc, 'divina:route-ready', { id:'daily' });
+ok(controller.isCanonicalOrbTarget(dailyOrbTarget) === true, 'Carta do Dia usa a Orbe canônica');
+ok(controller.isRealityOwnedOrbTarget(dailyOrbTarget) === true, 'Carta do Dia mantém o toque ritual');
+ok(orb.attrs['aria-label'] === 'Orbe viva. Toque para abrir a Carta do Dia', 'Orbe anuncia o rito diário');
+
 controller.destroy();
 console.log(`PASS ${checks}/${checks} — resposta, menu vivo e nomes públicos`);

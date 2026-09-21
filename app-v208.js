@@ -1,7 +1,7 @@
 /* DIVINA BRUXA — WORK13 · COSMOS VIVO · V610
-   O WORK12 V600 e as etapas V602–V610 permanecem protegidos. A correção de
-   entrada acrescenta só o convite Entrá e reutiliza a mesma Orbe, o menu vivo
-   e a continuidade existentes, sem reconstruir a Home ou abrir um WORK14. */
+   O WORK12 V600 e as etapas V602–V610 permanecem protegidos. A lapidacao segue
+   por almas isoladas que reutilizam a mesma Orbe, o menu vivo e a continuidade,
+   sem reconstruir a Home, trocar motores ou abrir um WORK14. */
 
 import { CONFIG } from './config-v200.js?v=559';
 import { installRuntimeV12 } from './runtime-v12.js?v=152';
@@ -76,6 +76,7 @@ import { createCosmosFinalOrchestraV610 } from './cosmos-final-orchestra-v610.js
 import { createCosmosEntryIntentionV610 } from './cosmos-entry-intention-v610.js?v=610-work13-final-presence';
 import { createCosmosWorldPresenceV610 } from './cosmos-world-presence-v610.js?v=610-work13-final-presence';
 import { createTarotLivreSoulV610 } from './tarot-livre-soul-v610.js?v=610-work13-tarot-soul';
+import { createCartaDoDiaSoulV610 } from './carta-do-dia-soul-v610.js?v=610-work13-daily-soul';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -640,6 +641,10 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK13_DAILY_SOUL_ACTIVE') {
+    document.documentElement.dataset.work13DailySoulWorker = 'v610';
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK13_FINAL_PRESENCE_ACTIVE') {
     document.documentElement.dataset.work13FinalPresenceWorker = 'v610';
     return;
@@ -2241,7 +2246,7 @@ window.divinaWork13Macro9V609 = Object.freeze({
 });
 window.divinaCosmosVivoV609 = window.divinaWork13Macro9V609;
 
-// A V610 não redesenha nenhuma realidade. A orquestra final confere, em um
+// A orquestra final V610 não redesenha nenhuma realidade. Ela confere, em um
 // único quadro por conjunto de sinais, se todas as camadas continuam reunidas
 // na mesma Orbe, no mesmo canvas e na mesma jornada antes de selar o WORK13.
 const cosmosFinalOrchestra = safely('WORK13 · Orquestra Final V610', () =>
@@ -2275,11 +2280,15 @@ const cosmosWorldPresence = safely('WORK13 · Presença das Realidades V610', ()
 const tarotLivreSoul = safely('WORK13 · Alma do Tarot Livre V610', () =>
   createTarotLivreSoulV610({ orbCore:supremeOrb })
 );
+const cartaDoDiaSoul = safely('WORK13 · Alma da Carta do Dia V610', () =>
+  createCartaDoDiaSoulV610({ orbCore:supremeOrb })
+);
 window.orbe.finalOrchestra = cosmosFinalOrchestra;
 window.orbe.cosmosSeal = cosmosFinalOrchestra;
 window.orbe.entryIntention = cosmosEntryIntention;
 window.orbe.worldPresence = cosmosWorldPresence;
 window.orbe.tarotLivreSoul = tarotLivreSoul;
+window.orbe.cartaDoDiaSoul = cartaDoDiaSoul;
 window.divinaWork13TarotLivreSoulV610 = Object.freeze({
   version:610,
   work:'WORK13',
@@ -2287,6 +2296,15 @@ window.divinaWork13TarotLivreSoulV610 = Object.freeze({
   reality:'tarot',
   soul:tarotLivreSoul,
   status:() => tarotLivreSoul?.status?.() || null,
+  work14:false
+});
+window.divinaWork13CartaDoDiaSoulV610 = Object.freeze({
+  version:610,
+  work:'WORK13',
+  stage:'segunda-realidade-alma-propria',
+  reality:'daily',
+  soul:cartaDoDiaSoul,
+  status:() => cartaDoDiaSoul?.status?.() || null,
   work14:false
 });
 document.documentElement.dataset.work13 = 'cosmos-vivo';
@@ -2300,6 +2318,7 @@ window.divinaWork13Macro10V610 = Object.freeze({
   entryIntention:cosmosEntryIntention,
   worldPresence:cosmosWorldPresence,
   tarotLivreSoul,
+  cartaDoDiaSoul,
   contextMemory:cosmosContextMemory,
   resonance:cosmosRealityResonance,
   dailyReading:cosmicDailyReading,
@@ -2336,6 +2355,8 @@ window.divinaWork13Macro10V610 = Object.freeze({
       entryStatus:cosmosEntryIntention?.status?.() || null,
       worldPresenceStatus:cosmosWorldPresence?.status?.() || null,
       tarotLivreSoulStatus:tarotLivreSoul?.status?.() || null,
+      cartaDoDiaSoulStatus:cartaDoDiaSoul?.status?.() || null,
+      realitySouls:2,
       allMenuDestinationsHaveFullScreens:cosmosWorldPresence?.audit?.().everyMenuDestinationHasFullScreen === true,
       livingLayers:Object.freeze([602,603,604,605,606,607,608,609]),
       worldsPreserved:17,

@@ -141,8 +141,8 @@ check('route:skins-engine', read('runtime-v12.js').includes("screen.id = 'skins'
 check('route:one-orb', (index.match(/id="orb"/g) || []).length === 1);
 check('route:one-canvas', (index.match(/id="orbCanvas"/g) || []).length === 1);
 
-check('offline:cache-v610', worker.includes("divina-bruxa-work13-v610-final-presence"));
-check('offline:forty-seven-core-assets', (worker.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1].match(/'[^']+'/g) || []).length === 47);
+check('offline:cache-v610', worker.includes("divina-bruxa-work13-v610-carta-do-dia-soul"));
+check('offline:forty-nine-core-assets', (worker.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1].match(/'[^']+'/g) || []).length === 49);
 check('offline:final-orchestra-cached', worker.includes("'./cosmos-final-orchestra-v610.js?v=610-work13-final-orchestra'"));
 check('offline:navigation-falls-to-index', worker.includes("networkFirst(request,'./index.html')"));
 check('offline:network-first-code', worker.includes('if (isCode(url))'));

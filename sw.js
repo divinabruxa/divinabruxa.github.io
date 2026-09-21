@@ -1,18 +1,20 @@
-/* DIVINA BRUXA — WORK13 · COSMOS VIVO · LAPIDACAO FINAL V610
-   O WORK12 V600 e as etapas V602–V610 permanecem protegidos. A instalacao so
-   assume o portal quando a unica intencao Entrá, a mesma Orbe, o menu vivo e
-   as quinze realidades completas pertencem ao mesmo corte, sem reconstruir a Home.
+/* DIVINA BRUXA — WORK13 · ALMA DA CARTA DO DIA · V610
+   O WORK12 V600, as etapas V602–V610 e o Tarot Livre instalado permanecem
+   protegidos. A instalacao so assume o portal quando a mesma Orbe, o menu vivo,
+   o rito diario e as quinze realidades completas pertencem ao mesmo corte.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
 const VERSION = 610;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work13-v610-tarot-livre-soul';
+const CACHE_NAME = 'divina-bruxa-work13-v610-carta-do-dia-soul';
 const CORE = Object.freeze([
   './index.html',
   './app-v208.js?v=610-work13-final-presence',
   './tarot-livre-soul-v610.js?v=610-work13-tarot-soul',
   './tarot-livre-soul-v610.css?v=610-work13-tarot-soul',
+  './carta-do-dia-soul-v610.js?v=610-work13-daily-soul',
+  './carta-do-dia-soul-v610.css?v=610-work13-daily-soul',
   './cosmos-entry-intention-v610.js?v=610-work13-final-presence',
   './cosmos-entry-intention-v610.css?v=610-work13-final-presence',
   './cosmos-world-presence-v610.js?v=610-work13-final-presence',
@@ -73,6 +75,8 @@ const validateCore = async responses => {
   const app = await responses.get('./app-v208.js?v=610-work13-final-presence')?.clone().text();
   const tarotLivreSoul = await responses.get('./tarot-livre-soul-v610.js?v=610-work13-tarot-soul')?.clone().text();
   const tarotLivreSoulStyles = await responses.get('./tarot-livre-soul-v610.css?v=610-work13-tarot-soul')?.clone().text();
+  const cartaDoDiaSoul = await responses.get('./carta-do-dia-soul-v610.js?v=610-work13-daily-soul')?.clone().text();
+  const cartaDoDiaSoulStyles = await responses.get('./carta-do-dia-soul-v610.css?v=610-work13-daily-soul')?.clone().text();
   const entryIntention = await responses.get('./cosmos-entry-intention-v610.js?v=610-work13-final-presence')?.clone().text();
   const entryStyles = await responses.get('./cosmos-entry-intention-v610.css?v=610-work13-final-presence')?.clone().text();
   const worldPresence = await responses.get('./cosmos-world-presence-v610.js?v=610-work13-final-presence')?.clone().text();
@@ -275,6 +279,38 @@ const validateCore = async responses => {
     || /@keyframes|backdrop-filter|filter\s*:/.test(tarotLivreSoulStyles)) {
     throw new Error('work13-tarot-livre-soul-styles-missing');
   }
+  if (!app.includes("carta-do-dia-soul-v610.js?v=610-work13-daily-soul")
+    || !app.includes('createCartaDoDiaSoulV610({ orbCore:supremeOrb })')
+    || !app.includes('window.orbe.cartaDoDiaSoul = cartaDoDiaSoul')
+    || !app.includes("stage:'segunda-realidade-alma-propria'")) {
+    throw new Error('work13-carta-do-dia-soul-app-mismatch');
+  }
+  if (!cartaDoDiaSoul?.includes('CARTA_DO_DIA_SOUL_CONTRACT_V610')
+    || !cartaDoDiaSoul.includes("sequence:Object.freeze(['orb','card','silence','one-sentence-essence','depth-on-explicit-request'])")
+    || !cartaDoDiaSoul.includes('cardsPerBrasiliaDay:1')
+    || !cartaDoDiaSoul.includes("timeZone:'America/Sao_Paulo'")
+    || !cartaDoDiaSoul.includes('manualReveal:true')
+    || !cartaDoDiaSoul.includes('automaticReveal:false')
+    || !cartaDoDiaSoul.includes('reversedCards:false')
+    || !cartaDoDiaSoul.includes('maximumEssenceSentences:1')
+    || !cartaDoDiaSoul.includes('depthRequiresExplicitGesture:true')
+    || !cartaDoDiaSoul.includes('cardSelectionChanges:0')
+    || !cartaDoDiaSoul.includes('reusesCanonicalOrb:true')
+    || !cartaDoDiaSoul.includes('permanentAnimationLoops:0')
+    || !cartaDoDiaSoul.includes('mutationObservers:0')
+    || !cartaDoDiaSoul.includes('work14:false')) {
+    throw new Error('work13-carta-do-dia-soul-contract-missing');
+  }
+  if (!cartaDoDiaSoulStyles?.includes('[data-daily-soul="v610"]')
+    || !cartaDoDiaSoulStyles.includes('[data-daily-soul-phase="answering"]')
+    || !cartaDoDiaSoulStyles.includes('[data-daily-soul-phase="silence"]')
+    || !cartaDoDiaSoulStyles.includes('[data-reading-phase="depth"]')
+    || !cartaDoDiaSoulStyles.includes('.db604-daily-essence')
+    || !cartaDoDiaSoulStyles.includes('@media(max-width:430px)')
+    || !cartaDoDiaSoulStyles.includes('@media(prefers-reduced-motion:reduce)')
+    || /@keyframes|animation\s*:|backdrop-filter|filter\s*:/.test(cartaDoDiaSoulStyles)) {
+    throw new Error('work13-carta-do-dia-soul-styles-missing');
+  }
   if (!entryIntention?.includes('COSMOS_ENTRY_INTENTION_CONTRACT_V610')
     || !entryIntention.includes("invitation:'Entrá'")
     || !entryIntention.includes('entryIntentions:1')
@@ -284,6 +320,7 @@ const validateCore = async responses => {
     || !entryIntention.includes('everyRealityCanCallUniverse:true')
     || !entryIntention.includes('realityOwnedOrbActionsPreserved:true')
     || !entryIntention.includes("target?.closest?.('#tableOrb')")
+    || !entryIntention.includes("target?.closest?.('[data-daily-orb-host]')")
     || !entryIntention.includes("this.openUniverse('orb-world')")
     || !entryIntention.includes('publicRealityNames:15')
     || !entryIntention.includes('automaticNavigation:false')
@@ -661,6 +698,7 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK13_FINAL_PRESENCE_ACTIVE', version:VERSION, correction:'lapidacao-final-presenca-das-realidades', publicWorlds:15, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_GLOBAL_MENU_ACTIVE', version:VERSION, correction:'menu-global-ciclo-vivo', publicWorlds:15, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_TAROT_SOUL_ACTIVE', version:VERSION, reality:'tarot', cards:78, reversed:false, meanings:false, oneOrb:true, base:600, complete:true });
+        client.postMessage({ type:'DIVINA_WORK13_DAILY_SOUL_ACTIVE', version:VERSION, reality:'daily', cardsPerBrasiliaDay:1, timeZone:'America/Sao_Paulo', reversed:false, oneSentenceEssence:true, depthExplicit:true, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_RELEASE_READY', version:VERSION });
       } catch {}
     }
