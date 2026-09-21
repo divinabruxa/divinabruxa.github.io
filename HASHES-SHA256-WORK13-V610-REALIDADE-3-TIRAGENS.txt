@@ -1,0 +1,20 @@
+DIVINA BRUXA · WORK13 V610 · REALIDADE 3 · TIRAGENS
+SHA-256 dos arquivos entregues, exceto este índice:
+
+42637730e547d6748077d45322f92538ebe42706a1829f7daeb44253bc8b7d38  00-INSTALE-WORK13-V610-REALIDADE-3-TIRAGENS.txt
+84dff57a9d7464d85a7d6b43f9fff736652f1eaa0d7c9d9d63e5a59fe6254736  MANIFESTO-WORK13-V610-REALIDADE-3-TIRAGENS.json
+176db5aef1e6b731250ce55cc960c6c11ce3f0a9605509ad58de2204ea544468  RELATORIO-WORK13-V610-REALIDADE-3-TIRAGENS.md
+26a07a023f0a0cc763033fe8a07428a82b89bbad142943f048df6623bc85ccf1  app-v208.js
+90256023ffd8f59d444408eed8aebc4a62aee9bc83bd3233aa687cc995072c76  cosmos-entry-intention-v610.js
+7558d8dda83d32eb6768ffb5627ab44fb36add017b4c42316e229060361dcac8  sw.js
+3eb2ccac06370f3ee48eaee8df8bf473449dbba234e737c6e21d555169a24c04  tiragens-soul-v610.js
+8a89a6a1edc5e4682c959de13449462b226132011e74c4ae2ba92fbd3b8d3771  tiragens-soul-v610.css
+01f186c88f7ca953f8b646a89a7fd75610a3f5e3db6c5899eb9d112439bc2d77  qa-work13-v610-daily-soul-structural.mjs
+1ffb55e7a168f4da969f32ebb5b468e69c54978ec58ca6e070a425ba95f2cee7  qa-work13-v610-entry-runtime.mjs
+cfdc437608cd3f7256124351d1c4e1a30cc1c65dc69e85d9adea435a7a5147e1  qa-work13-v610-entry-structural.mjs
+0f6b4cf51384f70553bb2eed5f3737848c1bb63ba71c395588e6abbcd55215af  qa-work13-v610-iphone-supreme.mjs
+970570bd26ffefff294fcf5b5caab0a0385ff35def9b666a799981690324290d  qa-work13-v610-service-worker-runtime.mjs
+527a252f55038fff2c36c92493b277912c5a0cdd48a0c654610ed80e2044b7e2  qa-work13-v610-tarot-soul-structural.mjs
+375519e60e1d79ebb11baa207bdd32b28931627489a4912c77ddd2970080b756  qa-work13-v610-spreads-soul-runtime.mjs
+4814f982de871e5d5f4fdf2adced68c355a23ed1771222633878a4cb30f37795  qa-work13-v610-spreads-soul-structural.mjs
+375e9682be748c7eecedf68f63aa1aa13d59e93ed303c57676339b48d0094944  qa-work13-v610-spreads-soul-iphone.mjs

@@ -97,6 +97,7 @@ export class CosmosEntryIntentionV610 {
   isRealityOwnedOrbTarget(target) {
     if (this.route === 'tarot') return Boolean(target?.closest?.('#tableOrb'));
     if (this.route === 'daily') return Boolean(target?.closest?.('[data-daily-orb-host]'));
+    if (this.route === 'spreads') return Boolean(target?.closest?.('#spreadResult'));
     return false;
   }
 
@@ -164,6 +165,8 @@ export class CosmosEntryIntentionV610 {
           ? 'Orbe viva. Toque para revelar a próxima carta'
         : this.route === 'daily'
           ? 'Orbe viva. Toque para abrir a Carta do Dia'
+        : this.route === 'spreads' && this.orb?.closest?.('#spreadResult')
+          ? 'Orbe viva. Toque para revelar a próxima posição'
         : 'Orbe viva. Toque para abrir o universo'
     );
     const visible = this.isHomeReady();

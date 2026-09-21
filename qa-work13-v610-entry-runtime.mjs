@@ -126,5 +126,19 @@ ok(controller.isCanonicalOrbTarget(dailyOrbTarget) === true, 'Carta do Dia usa a
 ok(controller.isRealityOwnedOrbTarget(dailyOrbTarget) === true, 'Carta do Dia mantém o toque ritual');
 ok(orb.attrs['aria-label'] === 'Orbe viva. Toque para abrir a Carta do Dia', 'Orbe anuncia o rito diário');
 
+const spreadResult = { id:'spreadResult' };
+const spreadsOrbTarget = {
+  closest(selector) {
+    if (selector === '#orb') return orb;
+    if (selector === '#spreadResult') return spreadResult;
+    return null;
+  }
+};
+orb.closest = selector => selector === '#spreadResult' ? spreadResult : null;
+fire(doc, 'divina:route-ready', { id:'spreads' });
+ok(controller.isCanonicalOrbTarget(spreadsOrbTarget) === true, 'Tiragens usam a Orbe canônica');
+ok(controller.isRealityOwnedOrbTarget(spreadsOrbTarget) === true, 'Tiragens mantêm o toque de revelar');
+ok(orb.attrs['aria-label'] === 'Orbe viva. Toque para revelar a próxima posição', 'Orbe anuncia a próxima posição');
+
 controller.destroy();
 console.log(`PASS ${checks}/${checks} — resposta, menu vivo e nomes públicos`);
