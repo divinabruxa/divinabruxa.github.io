@@ -33,7 +33,8 @@ ok(app.includes('realitySouls:6'), 'seis realidades acumuladas');
 ok(app.includes('work14:false'), 'nenhum WORK14');
 
 ok(entry.includes('realityOwnedOrbActionsPreserved:true'), 'menu preserva ações locais');
-ok(entry.includes("target?.closest?.('#tableOrb')"), 'Tarot Livre continua protegido');
+ok(entry.includes("if (this.route === 'tarot') return true;"), 'Tarot Livre continua protegido em toda a Orbe');
+ok(entry.includes('tarotOrbOpensMenu:false'), 'menu não captura a revelação do Tarot');
 ok(entry.includes("target?.closest?.('[data-daily-orb-host]')"), 'Carta do Dia recebe o toque da Orbe');
 ok(entry.includes("this.route === 'daily'"), 'rótulo diário tem contexto');
 
@@ -85,7 +86,7 @@ ok(cosmicStyles.includes('[data-reading-phase="essence"]') && cosmicStyles.inclu
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
 ok(count(core,/^\s*'\.\//gm) === 58, '58 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v611-pentagram-menu-whit'"), 'cache próprio');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v612-global-pentagram-tarot-fix'"), 'cache próprio');
 ok(sw.includes("'./carta-do-dia-soul-v610.js?v=610-work13-daily-soul'"), 'JS no cache');
 ok(sw.includes("'./carta-do-dia-soul-v610.css?v=610-work13-daily-soul'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_DAILY_SOUL_ACTIVE'), 'ativação comunicada');

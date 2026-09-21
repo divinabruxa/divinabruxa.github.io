@@ -27,14 +27,23 @@ for (const [name, width, height] of profiles) {
   ok(html.includes('env(safe-area-inset'), `${name}: safe areas herdadas`);
   ok(html.includes('viewport-fit=cover'), `${name}: viewport iOS`);
   ok(html.includes('interactive-widget=resizes-content'), `${name}: teclado não quebra a tela`);
+  ok(entryCss.includes('position:fixed'), `${name}: pentagrama fixo no canto`);
+  ok(entryCss.includes('env(safe-area-inset-right)'), `${name}: canto direito seguro`);
+  ok(entryCss.includes('env(safe-area-inset-top)'), `${name}: topo seguro`);
 }
 
 ok(entryCss.includes('touch-action:manipulation'), 'toque direto sem atraso artificial');
 ok(entryCss.includes('-webkit-tap-highlight-color:transparent'), 'resposta integrada no iOS');
 ok(entryCss.includes('[data-response="answering"]'), 'pentagrama responde no pointerdown');
 ok(entryCss.includes('[data-response="silent"]'), 'resposta termina em silêncio');
-ok(html.includes('pentagrama-menu-vivo-v611.webp'), 'imagem retina ligada à Home');
+ok(html.includes('pentagrama-menu-vivo-v611.webp'), 'imagem retina ligada ao universo global');
 ok(html.includes('aria-label="Abrir o menu mágico"'), 'gesto legível pelo VoiceOver');
+ok(entryJs.includes('this.documentTarget.body.append(this.entry)'), 'pentagrama sai do palco central e entra na camada global');
+ok(entryJs.includes('globalPentagram:true'), 'menu disponível em todas as páginas');
+ok(entryJs.includes("tarotOrbAction:'reveal-only'"), 'Orbe do Tarot revela');
+ok(entryJs.includes('tarotOrbOpensMenu:false'), 'Orbe do Tarot não abre o menu');
+ok((entryJs.match(/if \(this\.route === 'tarot'\) return;/g) || []).length === 3, 'gestos globais não capturam o Tarot');
+ok(entryCss.includes('[data-work13-menu="pentagram-v612"] #menuBtn.menu-button'), 'somente o pentagrama representa o menu');
 ok(presenceCss.includes('min-block-size:100dvh') && presenceCss.includes('min-block-size:100svh'), 'mundos inteiros em viewport dinâmica');
 ok(presenceCss.includes('.db502-portal.is-touching'), 'balões respondem no primeiro toque');
 ok(entryCss.includes('@media(prefers-reduced-motion:reduce)'), 'entrada acessível com movimento reduzido');
@@ -46,6 +55,7 @@ ok(entryCss.includes('@media(forced-colors:active)'), 'pentagrama preservado em 
 for (const route of routes) {
   ok(new RegExp(`<section id="${route}"`).test(html), `pentagrama → menu → ${route}`);
   ok(presenceJs.includes(`${route}:`) || presenceJs.includes(`'${route}'`), `${route}: presença reconhecida`);
+  ok(!entryCss.includes(`data-work12-final-route="${route}"`) || route === 'home', `${route}: CSS não esconde o pentagrama por rota`);
 }
 ok(routes.length === 15, 'todas as 15 realidades públicas');
 ok((html.match(/id="orb"/g) || []).length === 1, 'uma Orbe em todo o ciclo');
@@ -53,4 +63,4 @@ ok((html.match(/id="orbCanvas"/g) || []).length === 1, 'um canvas em todo o cicl
 ok(!/location\.(?:href|assign|replace)/.test(entryJs + presenceJs), 'nenhuma troca seca criada');
 ok(!/requestAnimationFrame|setInterval|setTimeout|MutationObserver/.test(presenceJs), 'nenhum peso contínuo novo');
 
-console.log(`PASS ${checks}/${checks} — 8 perfis iPhone e ciclo das 15 realidades`);
+console.log(`PASS ${checks}/${checks} — pentagrama global, Tarot e 8 perfis iPhone`);

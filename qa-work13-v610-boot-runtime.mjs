@@ -107,11 +107,11 @@ function harness() {
 }
 
 check('boot:script-found', Boolean(bootScript));
-check('boot:work13-meta-v611', indexSource.includes('name="divina-work13" content="V611"'));
+check('boot:work13-meta-v612', indexSource.includes('name="divina-work13" content="V612"'));
 check('boot:work12-meta-v600', indexSource.includes('name="divina-work12" content="V600"'));
-check('boot:app-v611', indexSource.includes('app-v208.js?v=611-pentagram-menu-whit'));
-check('boot:worker-v611', indexSource.includes("register('./sw.js?v=611-pentagram-menu-whit'"));
-check('boot:v611-bootstrap', indexSource.includes("__divinaSWBootstrap='v611-pentagram-menu-whit-inline'"));
+check('boot:app-v612', indexSource.includes('app-v208.js?v=612-global-pentagram-tarot-fix'));
+check('boot:worker-v612', indexSource.includes("register('./sw.js?v=612-global-pentagram-tarot-fix'"));
+check('boot:v612-bootstrap', indexSource.includes("__divinaSWBootstrap='v612-global-pentagram-tarot-fix-inline'"));
 check('boot:v610-presence-style', indexSource.includes('cosmos-world-presence-v610.css?v=610-work13-final-presence'));
 check('boot:v609-style-preserved', indexSource.includes('living-media-skins-v609.css?v=609-work13-media-skins'));
 check('boot:v608-style-preserved', indexSource.includes('living-commerce-path-v608.css?v=608-work13-commerce-clarity'));
@@ -155,7 +155,7 @@ check('boot:healthy-work13-ready', healthy.root.dataset.work13Boot === 'ready-v6
 check('boot:healthy-never-bypassed', !healthy.home.classList.contains('active'));
 healthy.fire('load');
 await Promise.resolve();
-check('boot:registers-v611', healthy.registrations.some(item => item.url === './sw.js?v=611-pentagram-menu-whit'));
+check('boot:registers-v612', healthy.registrations.some(item => item.url === './sw.js?v=612-global-pentagram-tarot-fix'));
 check('boot:no-cache-registration', healthy.registrations.some(item => item.options?.updateViaCache === 'none'));
 
 const failures = checks.filter(item => !item.pass);

@@ -30,7 +30,9 @@ ok(app.includes('window.orbe.tarotLivreSoul = tarotLivreSoul'), 'alma publicada 
 ok(app.includes("stage:'primeira-realidade-alma-propria'"), 'primeira realidade declarada');
 ok(app.includes('work14:false'), 'nenhum WORK14');
 ok(entry.includes('realityOwnedOrbActionsPreserved:true'), 'menu global preserva ação local');
-ok(entry.includes("target?.closest?.('#tableOrb')"), 'toque da Orbe chega ao Tarot Livre');
+ok(entry.includes("if (this.route === 'tarot') return true;"), 'toda a Orbe física pertence ao Tarot Livre');
+ok((entry.match(/if \(this\.route === 'tarot'\) return;/g) || []).length === 3, 'pointer, clique e teclado globais cedem ao Tarot');
+ok(entry.includes("tarotOrbAction:'reveal-only'") && entry.includes('tarotOrbOpensMenu:false'), 'toque da Orbe revela e não abre o menu');
 
 for (const token of [
   'TAROT_LIVRE_SOUL_CONTRACT_V610',"sequence:Object.freeze(['orb','card','silence','freedom'])",
@@ -57,7 +59,7 @@ ok(styles.includes('#tarot>.free-rule') && styles.includes('display:none!importa
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
 ok(count(core,/^\s*'\.\//gm) === 58, '58 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v611-pentagram-menu-whit'"), 'cache cumulativo próprio');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v612-global-pentagram-tarot-fix'"), 'cache cumulativo próprio');
 ok(sw.includes("'./tarot-livre-soul-v610.js?v=610-work13-tarot-soul'"), 'JS no cache');
 ok(sw.includes("'./tarot-livre-soul-v610.css?v=610-work13-tarot-soul'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_TAROT_SOUL_ACTIVE'), 'ativação comunicada');

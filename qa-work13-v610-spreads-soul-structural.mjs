@@ -37,7 +37,8 @@ ok(app.includes("event.data?.type === 'DIVINA_WORK13_SPREADS_SOUL_ACTIVE'"), 'wo
 ok(app.includes('work14:false'), 'nenhum WORK14');
 
 ok(entry.includes('realityOwnedOrbActionsPreserved:true'), 'menu global preserva ações locais');
-ok(entry.includes("target?.closest?.('#tableOrb')"), 'Tarot Livre continua protegido');
+ok(entry.includes("if (this.route === 'tarot') return true;"), 'Tarot Livre continua protegido em toda a Orbe');
+ok(entry.includes('tarotOrbOpensMenu:false'), 'menu não captura a revelação do Tarot');
 ok(entry.includes("target?.closest?.('[data-daily-orb-host]')"), 'Carta do Dia continua protegida');
 ok(entry.includes("target?.closest?.('#spreadResult')"), 'Orbe da tiragem recebe o gesto');
 ok(entry.includes("this.route === 'spreads'"), 'rótulo da Orbe tem contexto de Tiragens');
@@ -94,7 +95,7 @@ ok(spreadStyles.includes('[data-cosmic-spread-phase="silence"]') && spreadStyles
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
 ok(count(core,/^\s*'\.\//gm) === 58, '58 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v611-pentagram-menu-whit'"), 'cache próprio');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v612-global-pentagram-tarot-fix'"), 'cache próprio');
 ok(sw.includes("'./tiragens-soul-v610.js?v=610-work13-spreads-soul'"), 'JS no cache');
 ok(sw.includes("'./tiragens-soul-v610.css?v=610-work13-spreads-soul'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_SPREADS_SOUL_ACTIVE'), 'ativação comunicada');

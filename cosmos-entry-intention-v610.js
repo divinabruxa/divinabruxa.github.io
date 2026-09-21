@@ -1,19 +1,24 @@
-/* DIVINA BRUXA — WORK13 · PENTAGRAMA, MENU VIVO E WHIT · V611
-   O pentagrama vermelho substitui a palavra de entrada. Em cada realidade,
-   a mesma Orbe reabre o menu V593; Whit permanece dentro da Orbe canonica. */
+/* DIVINA BRUXA — WORK13 · PENTAGRAMA GLOBAL E TAROT PROTEGIDO · V612
+   O pentagrama vermelho vive no canto superior de todas as realidades e abre
+   o menu V593. No Tarot Livre, a Orbe pertence somente ao gesto de revelar. */
 
-const VERSION = 611;
+const VERSION = 612;
 
 export const COSMOS_ENTRY_INTENTION_CONTRACT_V610 = Object.freeze({
   work:'WORK13',
-  correction:'pentagrama-menu-whit',
+  correction:'pentagrama-global-tarot-protegido',
   invitation:'pentagrama-vermelho',
   entryIntentions:1,
   visibleEntryWords:0,
   pentagramAssets:1,
   pentagramIsMenu:true,
+  globalPentagram:true,
+  pentagramPosition:'top-corner',
   whitInsideMenu:true,
   whitResidence:'canonical-orb',
+  tarotOrbAction:'reveal-only',
+  tarotOrbOpensMenu:false,
+  tarotOrbMenuListenersBypassed:true,
   responseModel:'touch-answer-silence',
   reusesCanonicalOrb:true,
   reusesLivingMenuV593:true,
@@ -75,8 +80,14 @@ export class CosmosEntryIntentionV610 {
     this.pulses = 0;
     this.renamedRealities = 0;
     this.abortController = typeof AbortController === 'function' ? new AbortController() : null;
+    this.movedGlobal = false;
+    if (this.entry && this.documentTarget?.body?.append && this.entry.parentElement !== this.documentTarget.body) {
+      this.documentTarget.body.append(this.entry);
+      this.movedGlobal = true;
+    }
     if (this.entry?.dataset) {
-      this.entry.dataset.work13MenuSymbol = 'pentagram-v611';
+      this.entry.dataset.work13MenuSymbol = 'pentagram-v612';
+      this.entry.dataset.work13MenuPosition = 'top-corner';
       this.entry.dataset.whitResidence = 'canonical-orb';
     }
     this.bind();
@@ -91,7 +102,7 @@ export class CosmosEntryIntentionV610 {
   }
 
   isHomeReady() {
-    return this.route === 'home' && this.menuState === 'closed';
+    return this.route === 'home' && this.isUniverseReady();
   }
 
   isUniverseReady() {
@@ -117,7 +128,7 @@ export class CosmosEntryIntentionV610 {
   }
 
   isRealityOwnedOrbTarget(target) {
-    if (this.route === 'tarot') return Boolean(target?.closest?.('#tableOrb'));
+    if (this.route === 'tarot') return true;
     if (this.route === 'daily') return Boolean(target?.closest?.('[data-daily-orb-host]'));
     if (this.route === 'spreads') return Boolean(target?.closest?.('#spreadResult'));
     if (this.route === 'library') return Boolean(
@@ -207,7 +218,7 @@ export class CosmosEntryIntentionV610 {
           ? 'Orbe viva. Toque para entrar e escrever no Diário'
         : 'Orbe viva. Toque para abrir o universo'
     );
-    const visible = this.isHomeReady();
+    const visible = this.isUniverseReady();
     if (visible && !this.entry.dataset.response) this.entry.dataset.response = 'ready';
     this.entry.setAttribute('aria-label', 'Abrir o menu mágico');
     this.entry.setAttribute('aria-hidden', String(!visible));
@@ -241,11 +252,15 @@ export class CosmosEntryIntentionV610 {
       event.stopPropagation?.();
       this.openUniverse(event.detail === 0 ? 'keyboard' : 'touch');
     });
-    this.listen(this.orb, 'pointerdown', () => this.respond('orb'), { passive:true });
+    this.listen(this.orb, 'pointerdown', () => {
+      if (this.route === 'tarot') return;
+      this.respond('orb');
+    }, { passive:true });
     this.listen(this.orb, 'pointerup', restEntry, { passive:true });
     this.listen(this.orb, 'pointercancel', restEntry, { passive:true });
     this.listen(this.documentTarget, 'click', event => {
       if (this.route === 'home' || !this.isCanonicalOrbTarget(event?.target)) return;
+      if (this.route === 'tarot') return;
       if (this.isRealityOwnedOrbTarget(event?.target)) return;
       event.preventDefault?.();
       event.stopImmediatePropagation?.();
@@ -253,6 +268,7 @@ export class CosmosEntryIntentionV610 {
     }, { capture:true });
     this.listen(this.documentTarget, 'keydown', event => {
       if (this.route === 'home' || !this.isCanonicalOrbTarget(event?.target)) return;
+      if (this.route === 'tarot') return;
       if (this.isRealityOwnedOrbTarget(event?.target)) return;
       if (!['Enter',' '].includes(event?.key) || event?.repeat) return;
       event.preventDefault?.();
@@ -297,8 +313,14 @@ export class CosmosEntryIntentionV610 {
       invitation:'pentagrama-vermelho',
       visibleEntryWords:0,
       pentagramReady:Boolean(this.pentagram),
+      globalPentagram:true,
+      pentagramPosition:'top-corner',
+      movedGlobal:this.movedGlobal,
       whitInsideMenu:true,
       whitResidence:'canonical-orb',
+      tarotOrbAction:'reveal-only',
+      tarotOrbOpensMenu:false,
+      tarotOrbMenuListenersBypassed:true,
       route:this.route,
       menuState:this.menuState,
       openCalls:this.openCalls,

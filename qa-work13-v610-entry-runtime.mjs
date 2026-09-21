@@ -7,6 +7,7 @@ class NodeLike extends EventTarget {
   }
   setAttribute(name, value) { this.attrs[name] = String(value); }
   getAttribute(name) { return this.attrs[name] ?? null; }
+  append(node) { this.appended = node; node.parentElement = this; }
   querySelector() { return null; }
   querySelectorAll() { return []; }
 }
@@ -26,12 +27,13 @@ menuRoot.querySelector = selector => selector === '.db502-menu__home-label' ? ho
 const entry = new NodeLike({ text:'' });
 const pentagram = new NodeLike();
 entry.querySelector = selector => selector === 'img' ? pentagram : null;
+entry.parentElement = new NodeLike();
 const orb = new NodeLike();
 const root = new NodeLike({ dataset:{} });
 const journalScreen = new NodeLike({ dataset:{ db596ChamberState:'threshold' } });
 const doc = new NodeLike();
 doc.documentElement = root;
-doc.body = { dataset:{ screen:'home' } };
+doc.body = new NodeLike({ dataset:{ screen:'home' } });
 doc.getElementById = id => ({ cosmosEntryIntent:entry, orb, journal:journalScreen, divinaOrbitalMenuV502:menuRoot })[id] || null;
 const win = new NodeLike();
 win.location = { hash:'#home' };
@@ -59,10 +61,14 @@ const fire = (target, type, detail = {}) => {
 ok(entry.attrs['aria-hidden'] === 'false', 'convite nasce visível');
 ok(entry.tabIndex === 0, 'convite focável');
 ok(entry.dataset.response === 'ready', 'convite nasce pronto para responder');
-ok(entry.dataset.work13MenuSymbol === 'pentagram-v611', 'pentagrama assume o gesto do menu');
+ok(entry.dataset.work13MenuSymbol === 'pentagram-v612', 'pentagrama assume o gesto do menu');
+ok(entry.dataset.work13MenuPosition === 'top-corner', 'pentagrama vive no canto superior');
+ok(entry.parentElement === doc.body, 'pentagrama movido para a camada global');
 ok(entry.attrs['aria-label'] === 'Abrir o menu mágico', 'pentagrama tem nome acessível sem texto visível');
 ok(controller.status().pentagramReady === true, 'imagem do pentagrama pronta');
 ok(controller.status().visibleEntryWords === 0, 'nenhuma palavra de entrada visível');
+ok(controller.status().globalPentagram === true, 'pentagrama disponível em todas as realidades');
+ok(controller.status().movedGlobal === true, 'camada global confirmada');
 ok(controller.status().renamedRealities === 15, '15 realidades nomeadas');
 ok(homeLabel.textContent === 'Início', 'centro retorna ao Início');
 for (const portal of portals) {
@@ -103,6 +109,7 @@ controller.menuResolver = () => ({ root:menuRoot, open() { worldMenuOpens += 1; 
 for (const route of routes) {
   fire(doc, 'divina:route-ready', { id:route });
   ok(controller.route === route, `Orbe acompanha ${route}`);
+  ok(entry.attrs['aria-hidden'] === 'false', `pentagrama permanece disponível em ${route}`);
   ok(controller.openUniverse('orb-world') === true, `menu abre em ${route}`);
   fire(doc, 'divina:menu-state', { state:'open' });
   ok(controller.openUniverse('orb-world') === false, `sem abertura duplicada em ${route}`);
@@ -122,7 +129,20 @@ const tarotOrbTarget = {
 fire(doc, 'divina:route-ready', { id:'tarot' });
 ok(controller.isCanonicalOrbTarget(tarotOrbTarget) === true, 'alvo usa a Orbe canônica');
 ok(controller.isRealityOwnedOrbTarget(tarotOrbTarget) === true, 'Tarot mantém o toque de revelar');
+ok(controller.isRealityOwnedOrbTarget(orb) === true, 'Orbe do host físico também pertence ao Tarot');
+ok(controller.status().tarotOrbAction === 'reveal-only', 'ação da Orbe no Tarot é somente revelar');
+ok(controller.status().tarotOrbOpensMenu === false, 'Orbe do Tarot nunca abre o menu');
+ok(controller.status().tarotOrbMenuListenersBypassed === true, 'listeners do menu cedem o gesto ao Tarot');
 ok(orb.attrs['aria-label'] === 'Orbe viva. Toque para revelar a próxima carta', 'Orbe anuncia a ação do Tarot');
+const pulsesBeforeTarot = pulses;
+fire(orb, 'pointerdown');
+ok(pulses === pulsesBeforeTarot, 'pointerdown do Tarot não pulsa o menu global');
+const tarotMenuOpensBeforeClick = worldMenuOpens;
+const tarotClick = new Event('click', { cancelable:true });
+Object.defineProperty(tarotClick, 'target', { value:tarotOrbTarget });
+doc.dispatchEvent(tarotClick);
+ok(tarotClick.defaultPrevented === false, 'clique revelador do Tarot não é cancelado');
+ok(worldMenuOpens === tarotMenuOpensBeforeClick, 'clique revelador do Tarot não abre o menu');
 
 const dailyOrbTarget = {
   closest(selector) {

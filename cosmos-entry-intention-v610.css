@@ -1,13 +1,14 @@
-/* WORK13 V611 — o pentagrama vermelho abre o mesmo universo da Orbe. */
+/* WORK13 V612 — pentagrama global no canto; a Orbe do Tarot só revela. */
 .cosmos-entry-intent{
   appearance:none;
-  position:absolute;
-  left:50%;
-  top:calc(50% + clamp(116px,29vw,164px));
-  z-index:8;
+  position:fixed;
+  left:auto;
+  right:max(12px,env(safe-area-inset-right));
+  top:max(12px,env(safe-area-inset-top));
+  z-index:2147481200;
   display:grid;
   place-items:center;
-  width:clamp(62px,18vw,86px);
+  width:clamp(56px,15vw,68px);
   aspect-ratio:1;
   min-width:48px;
   min-height:48px;
@@ -18,7 +19,7 @@
   background:radial-gradient(circle,rgba(255,52,47,.12),rgba(92,0,9,.04) 54%,transparent 72%);
   cursor:pointer;
   opacity:.92;
-  transform:translate(-50%,0) scale(.96);
+  transform:scale(.96);
   transition:opacity 180ms ease,transform 180ms cubic-bezier(.2,.8,.2,1);
   -webkit-tap-highlight-color:transparent;
   touch-action:manipulation;
@@ -63,7 +64,7 @@
 .cosmos-entry-intent:active,
 .cosmos-entry-intent[data-response="answering"]{
   opacity:1;
-  transform:translate(-50%,1px) scale(.88);
+  transform:scale(.88);
 }
 .cosmos-entry-intent[data-response="answering"] img{animation-duration:720ms}
 .cosmos-entry-intent:focus-visible{outline:2px solid rgba(255,222,174,.9);outline-offset:4px}
@@ -72,14 +73,27 @@
 .cosmos-entry-intent[aria-hidden="true"]{
   pointer-events:none;
   opacity:0;
-  transform:translate(-50%,8px) scale(.72);
+  transform:translateY(-8px) scale(.72);
 }
-html:not([data-work12-final-route="home"]) .cosmos-entry-intent,
 html[data-menu-state]:not([data-menu-state="closed"]) .cosmos-entry-intent,
-html[data-experience-state="moving"] .cosmos-entry-intent{
+html[data-work12-state="DEPART"] .cosmos-entry-intent,
+html[data-work12-state="TRAVEL"] .cosmos-entry-intent,
+html[data-work12-state="ARRIVE"] .cosmos-entry-intent{
   pointer-events:none;
   opacity:0;
-  transform:translate(-50%,8px) scale(.72);
+  transform:translateY(-8px) scale(.72);
+}
+html[data-menu-state="closed"][data-experience-state="moving"] .cosmos-entry-intent{
+  pointer-events:none;
+  opacity:.42;
+  transform:scale(.9);
+}
+
+/* O pentagrama substitui visualmente o antigo gatilho, sem remover o nó que
+   o menu V593 usa como âncora de acessibilidade. */
+html[data-work13-menu="pentagram-v612"] #menuBtn.menu-button{
+  visibility:hidden!important;
+  pointer-events:none!important;
 }
 
 /* O menu continua sendo o campo vivo V593: nome, respiro e resposta. */
@@ -114,10 +128,10 @@ html[data-experience-state="moving"] .cosmos-entry-intent{
 }
 
 @media(max-width:430px){
-  .cosmos-entry-intent{top:calc(50% + clamp(110px,32vw,144px));width:clamp(60px,18vw,76px)}
+  .cosmos-entry-intent{right:max(10px,env(safe-area-inset-right));top:max(10px,env(safe-area-inset-top));width:58px}
 }
 @media(max-height:620px) and (orientation:landscape){
-  .cosmos-entry-intent{left:calc(50% + clamp(112px,23vw,162px));top:50%;width:62px}
+  .cosmos-entry-intent{right:max(10px,env(safe-area-inset-right));top:max(8px,env(safe-area-inset-top));width:54px}
 }
 @media(prefers-reduced-motion:reduce){
   .cosmos-entry-intent,.cosmos-entry-intent::before,.cosmos-entry-intent img,.cosmos-entry-intent__whit{animation:none;transition:none}
