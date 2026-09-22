@@ -81,6 +81,7 @@ import { createCartaDoDiaWorldV616 } from './carta-do-dia-world-v616.js?v=616-sa
 import { createTiragensSoulV610 } from './tiragens-soul-v610.js?v=610-work13-spreads-soul';
 import { createTiragensWorldV617 } from './tiragens-world-v617.js?v=617-concilio-das-constelacoes';
 import { createEscolaSoulV610 } from './escola-soul-v610.js?v=610-work13-school-soul';
+import { createEscolaWorldV618 } from './escola-world-v618.js?v=618-jardim-das-78-sementes';
 import { createBibliotecaSoulV610 } from './biblioteca-soul-v610.js?v=615-sala-dos-fios-vivos';
 import { createDiarioSoulV610 } from './diario-soul-v610.js?v=610-work13-journal-soul';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
@@ -647,6 +648,10 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK13_SCHOOL_WORLD_ACTIVE') {
+    document.documentElement.dataset.work13SchoolWorldWorker = `v${event.data.version || 618}`;
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK13_LIBRARY_WORLD_ACTIVE') {
     document.documentElement.dataset.work13LibraryWorldWorker = `v${event.data.version || 615}`;
     return;
@@ -2333,6 +2338,9 @@ const tiragensWorld = safely('WORK13 · Tiragens · Concílio das Constelações
 const escolaSoul = safely('WORK13 · Alma da Escola V610', () =>
   createEscolaSoulV610({ orbCore:supremeOrb })
 );
+const escolaWorld = safely('WORK13 · Escola · Jardim das 78 Sementes V618', () =>
+  createEscolaWorldV618()
+);
 const bibliotecaSoul = safely('WORK13 · Biblioteca · Sala dos Fios Vivos V615', () =>
   createBibliotecaSoulV610({ orbCore:supremeOrb })
 );
@@ -2349,6 +2357,7 @@ window.orbe.cartaDoDiaWorld = cartaDoDiaWorld;
 window.orbe.tiragensSoul = tiragensSoul;
 window.orbe.tiragensWorld = tiragensWorld;
 window.orbe.escolaSoul = escolaSoul;
+window.orbe.escolaWorld = escolaWorld;
 window.orbe.bibliotecaSoul = bibliotecaSoul;
 window.orbe.diarioSoul = diarioSoul;
 window.divinaWork13TarotLivreSoulV610 = Object.freeze({
@@ -2408,6 +2417,17 @@ window.divinaWork13EscolaSoulV610 = Object.freeze({
   status:() => escolaSoul?.status?.() || null,
   work14:false
 });
+window.divinaWork13EscolaWorldV618 = Object.freeze({
+  version:618,
+  work:'WORK13',
+  stage:'renovacao-dos-mundos-5-escola',
+  reality:'school',
+  universe:'jardim-das-78-sementes',
+  base:window.divinaWork13TiragensWorldV617,
+  world:escolaWorld,
+  status:() => escolaWorld?.status?.() || null,
+  work14:false
+});
 window.divinaWork13BibliotecaSoulV610 = Object.freeze({
   version:610,
   work:'WORK13',
@@ -2444,6 +2464,7 @@ window.divinaWork13Macro10V610 = Object.freeze({
   tiragensSoul,
   tiragensWorld,
   escolaSoul,
+  escolaWorld,
   bibliotecaSoul,
   diarioSoul,
   contextMemory:cosmosContextMemory,
@@ -2490,6 +2511,7 @@ window.divinaWork13Macro10V610 = Object.freeze({
       tiragensSoulStatus:tiragensSoul?.status?.() || null,
       tiragensWorldStatus:tiragensWorld?.status?.() || null,
       escolaSoulStatus:escolaSoul?.status?.() || null,
+      escolaWorldStatus:escolaWorld?.status?.() || null,
       bibliotecaSoulStatus:bibliotecaSoul?.status?.() || null,
       diarioSoulStatus:diarioSoul?.status?.() || null,
       realitySouls:6,
@@ -2691,9 +2713,11 @@ window.orbe.bibliotecaWorld = window.divinaWork13BibliotecaWorldV615;
 window.divinaCosmosVivoV615 = window.divinaWork13BibliotecaWorldV615;
 window.divinaCosmosVivoV616 = window.divinaWork13CartaDoDiaWorldV616;
 window.divinaCosmosVivoV617 = window.divinaWork13TiragensWorldV617;
-document.documentElement.dataset.work13Macro = 'tiragens-concilio-das-constelacoes';
+window.divinaCosmosVivoV618 = window.divinaWork13EscolaWorldV618;
+document.documentElement.dataset.work13Macro = 'escola-jardim-das-78-sementes';
 document.documentElement.dataset.work13SpreadsWorld = 'v617';
-window.divinaCosmosVivo = window.divinaWork13TiragensWorldV617;
+document.documentElement.dataset.work13SchoolWorld = 'v618';
+window.divinaCosmosVivo = window.divinaWork13EscolaWorldV618;
 window.whit = whitCore;
 
 window.divinaWhitV212 = Object.freeze({

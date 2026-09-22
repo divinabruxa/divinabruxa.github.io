@@ -1,0 +1,25 @@
+# SHA-256 — DIVINA BRUXA WORK13 V618
+# ESCOLA · JARDIM DAS 78 SEMENTES
+
+f791c8b927e8b71921f689142ccb3130440ab3dd883a345343e076ff2d698554  00-INSTALE-WORK13-V618-ESCOLA-JARDIM-DAS-78-SEMENTES.txt
+583e26db38099a4e860ee58cb8f7e32655e440f868077d0daeaac88817b9e794  MANIFESTO-WORK13-V618-ESCOLA-JARDIM-DAS-78-SEMENTES.json
+b31240f4fa8bd5132f2eb4b6ec4eb57aff2f2a8361819a1c928cea8251722803  RELATORIO-WORK13-V618-ESCOLA-JARDIM-DAS-78-SEMENTES.md
+0a9c1abeaff5a7aa0598820b2aa290e5b8723b4867c73c1f7cb9eed998bb50db  app-v208.js
+5671ea6d3ffc5f6ea0fa06c2bf650e29299b0d201870e6660c0aca87fd6c3722  escola-world-v618.css
+1759853cd6423acd3bb6fd7262f917f36b4b437b2e23a7bec5343522f51c4bd3  escola-world-v618.js
+bf398594bd5c62d0fbc1b196132d16541b391ea54326c17dc95c337f8c70d4a0  index.html
+335b2a3ef3901de2f7dd8ec611e1e77333e143eb48162999155cff936b03966d  qa-work13-v610-boot-runtime.mjs
+0765730069fe7f5c792df933b76dd81a107bb0bd0a47136b6617172362292942  qa-work13-v610-daily-soul-structural.mjs
+375cc73d139a82e6b4a6f9178e73e6a8b47e58d2b6da52d2a8e62fd23f103e40  qa-work13-v610-entry-structural.mjs
+7c64e84d7f5074a67e3943b2e51487dc4c4568bde3d69fb27696f8f4752f877b  qa-work13-v610-journal-soul-structural.mjs
+f36e4f605ff2aa389c8ad29a61647817878c13799688f41866f57fbddf405727  qa-work13-v610-library-soul-structural.mjs
+133eff0fccef2febbfc555e062d39cc0a5952386a8d3fd804e7edec033311afa  qa-work13-v610-school-soul-structural.mjs
+e28c3a541851e2e5b194e3004f40d741bcb98dbf98f09ee34d0b4b723df2a4d2  qa-work13-v610-service-worker-runtime.mjs
+9f5bf7e0301964f0b24bbb3fd032795af6a192ffc24c29b97820dd64d38cd715  qa-work13-v610-spreads-soul-structural.mjs
+2b486fb71b9d0bffb24224455a1c28a6f3a4a39166224ed40be3122d4e504532  qa-work13-v610-tarot-soul-structural.mjs
+681dd5f3834fff71d78fb5a98d74b107ba16874a6c84fcc3ffbc9d882df4e659  qa-work13-v616-daily-world-structural.mjs
+78de1f032722d0936c5206e81baa5f1cd76ba3f4132bf317ef2de2b3a3b195ec  qa-work13-v617-spreads-world-structural.mjs
+eed1142035b2f700b2a38b8d735fe39ae604291e87422d503fe23de6d42f8782  qa-work13-v618-school-world-iphone.mjs
+df3bc9e17a22ce8ade6731213c06e00ac2a872217c6d8fae6cb449f688054dc3  qa-work13-v618-school-world-runtime.mjs
+f25423dc4d283c024a8c87a11bacc107625e65f72d3ad9262c6898ced93df05e  qa-work13-v618-school-world-structural.mjs
+e4071740ac718a376558baec0c503bd2053bf70ba0daf20d81aaef47c4fbdd87  sw.js

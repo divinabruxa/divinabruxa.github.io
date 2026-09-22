@@ -30,8 +30,8 @@ ok(count(html,/id="spreadGrid"/g) === 1, 'uma escolha de métodos');
 ok(count(html,/id="spreadResult"/g) === 1, 'um altar de leitura');
 ok(count(html,/id="spreadIntention"/g) === 1, 'uma intenção existente');
 ok(!/id="(?:tiragens|spreads)OrbV617"/.test(html), 'nenhuma Orbe duplicada');
-ok(html.includes('name="divina-work13" content="V617"') && html.includes('V617-TIRAGENS-CONCILIO-DAS-CONSTELACOES'), 'release V617');
-ok(html.includes('app-v208.js?v=617-tiragens-concilio-das-constelacoes'), 'app V617');
+ok(html.includes('name="divina-work13" content="V618"') && html.includes('V618-ESCOLA-JARDIM-DAS-78-SEMENTES'), 'release cumulativa V618');
+ok(html.includes('app-v208.js?v=618-escola-jardim-das-78-sementes'), 'app cumulativo V618');
 
 ok(count(app,/createTiragensWorldV617/g) === 2, 'importação e criação únicas');
 ok(app.includes("tiragens-world-v617.js?v=617-concilio-das-constelacoes"), 'mundo ligado ao app');
@@ -43,7 +43,7 @@ ok(app.includes("universe:'concilio-das-constelacoes'"), 'universo declarado');
 ok(app.includes('tiragensWorldStatus:tiragensWorld?.status?.() || null'), 'auditoria reunida');
 ok(app.includes("event.data?.type === 'DIVINA_WORK13_SPREADS_WORLD_ACTIVE'"), 'worker ouvido');
 ok(app.includes('window.divinaCosmosVivoV617'), 'continuidade pública V617');
-ok(app.includes("document.documentElement.dataset.work13Macro = 'tiragens-concilio-das-constelacoes'"), 'macroetapa ativa');
+ok(app.includes("document.documentElement.dataset.work13Macro = 'escola-jardim-das-78-sementes'"), 'macroetapa cumulativa ativa');
 ok(app.includes('work14:false'), 'nenhum WORK14');
 
 for (const token of [
@@ -105,8 +105,8 @@ ok(entry.includes("target?.closest?.('#spreadResult')"), 'menu global não captu
 ok(entry.includes('globalMenuOnEveryPage:true') && entry.includes('pentagramVisibleWhileMenuOpen:true'), 'menu mágico permanece global');
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core,/^\s*'\.\//gm) === 62, '62 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v617-tiragens-concilio-constelacoes'"), 'cache próprio');
+ok(count(core,/^\s*'\.\//gm) === 64, '64 ativos atômicos');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v618-escola-jardim-78-sementes'"), 'cache próprio');
 ok(sw.includes("'./tiragens-world-v617.js?v=617-concilio-das-constelacoes'"), 'JS no cache');
 ok(sw.includes("'./tiragens-world-v617.css?v=617-concilio-das-constelacoes'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_SPREADS_WORLD_ACTIVE'), 'ativação comunicada');

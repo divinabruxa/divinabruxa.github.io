@@ -1,16 +1,16 @@
-/* DIVINA BRUXA — WORK13 · TIRAGENS · CONCILIO DAS CONSTELACOES · V617
-   O WORK12 V600 e os mundos V614-V616 permanecem protegidos. A instalacao so
-   assume quando as Tiragens preservam os 15 metodos, fazem as cartas conversar,
-   concluem em uma sintese curta e continuam usando a mesma Orbe.
+/* DIVINA BRUXA — WORK13 · ESCOLA · JARDIM DAS 78 SEMENTES · V618
+   O WORK12 V600 e os mundos V614-V617 permanecem protegidos. A instalacao so
+   assume quando a Escola preserva 17 modulos e 124 aulas, oferece um unico
+   proximo passo e continua usando a mesma Orbe.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
-const VERSION = 617;
+const VERSION = 618;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work13-v617-tiragens-concilio-constelacoes';
+const CACHE_NAME = 'divina-bruxa-work13-v618-escola-jardim-78-sementes';
 const CORE = Object.freeze([
   './index.html',
-  './app-v208.js?v=617-tiragens-concilio-das-constelacoes',
+  './app-v208.js?v=618-escola-jardim-das-78-sementes',
   './pentagrama-menu-vivo-v611.webp',
   './tarot-livre-soul-v610.js?v=614-camara-vazio-violeta',
   './tarot-livre-world-v614.css?v=614-camara-vazio-violeta',
@@ -24,6 +24,8 @@ const CORE = Object.freeze([
   './tiragens-world-v617.css?v=617-concilio-das-constelacoes',
   './escola-soul-v610.js?v=610-work13-school-soul',
   './escola-soul-v610.css?v=610-work13-school-soul',
+  './escola-world-v618.js?v=618-jardim-das-78-sementes',
+  './escola-world-v618.css?v=618-jardim-das-78-sementes',
   './biblioteca-soul-v610.js?v=615-sala-dos-fios-vivos',
   './biblioteca-world-v615.css?v=615-sala-dos-fios-vivos',
   './diario-soul-v610.js?v=610-work13-journal-soul',
@@ -85,7 +87,7 @@ const fetchCore = async path => {
 
 const validateCore = async responses => {
   const index = await responses.get('./index.html')?.clone().text();
-  const app = await responses.get('./app-v208.js?v=617-tiragens-concilio-das-constelacoes')?.clone().text();
+  const app = await responses.get('./app-v208.js?v=618-escola-jardim-das-78-sementes')?.clone().text();
   const tarotLivreSoul = await responses.get('./tarot-livre-soul-v610.js?v=614-camara-vazio-violeta')?.clone().text();
   const tarotLivreSoulStyles = await responses.get('./tarot-livre-world-v614.css?v=614-camara-vazio-violeta')?.clone().text();
   const cartaDoDiaSoul = await responses.get('./carta-do-dia-soul-v610.js?v=610-work13-daily-soul')?.clone().text();
@@ -98,6 +100,8 @@ const validateCore = async responses => {
   const tiragensWorldStyles = await responses.get('./tiragens-world-v617.css?v=617-concilio-das-constelacoes')?.clone().text();
   const escolaSoul = await responses.get('./escola-soul-v610.js?v=610-work13-school-soul')?.clone().text();
   const escolaSoulStyles = await responses.get('./escola-soul-v610.css?v=610-work13-school-soul')?.clone().text();
+  const escolaWorld = await responses.get('./escola-world-v618.js?v=618-jardim-das-78-sementes')?.clone().text();
+  const escolaWorldStyles = await responses.get('./escola-world-v618.css?v=618-jardim-das-78-sementes')?.clone().text();
   const bibliotecaSoul = await responses.get('./biblioteca-soul-v610.js?v=615-sala-dos-fios-vivos')?.clone().text();
   const bibliotecaSoulStyles = await responses.get('./biblioteca-world-v615.css?v=615-sala-dos-fios-vivos')?.clone().text();
   const diarioSoul = await responses.get('./diario-soul-v610.js?v=610-work13-journal-soul')?.clone().text();
@@ -145,11 +149,11 @@ const validateCore = async responses => {
   const soul = await responses.get('./whit-orb-soul-bridge-v581.js?v=592-work12-navigation')?.clone().text();
   if (!index?.includes('name="divina-work12" content="V600"')
     || !index.includes('name="divina-live-audit" content="V600"')
-    || !index.includes('name="divina-work13" content="V617"')) {
+    || !index.includes('name="divina-work13" content="V618"')) {
     throw new Error('work13-index-version-mismatch');
   }
-  if (!index.includes('app-v208.js?v=617-tiragens-concilio-das-constelacoes')
-    || !index.includes('name="divina-work13-correction" content="V617-TIRAGENS-CONCILIO-DAS-CONSTELACOES"')
+  if (!index.includes('app-v208.js?v=618-escola-jardim-das-78-sementes')
+    || !index.includes('name="divina-work13-correction" content="V618-ESCOLA-JARDIM-DAS-78-SEMENTES"')
     || !index.includes('id="divinaCosmosEntryIntentionV610"')
     || !index.includes('cosmos-entry-intention-v610.css?v=613-menu-global-vivo')
     || !index.includes('id="divinaCosmosWorldPresenceV610"')
@@ -505,6 +509,56 @@ const validateCore = async responses => {
     || !escolaSoulStyles.includes('@media(prefers-reduced-motion:reduce)')
     || /@keyframes|backdrop-filter|filter\s*:/.test(escolaSoulStyles)) {
     throw new Error('work13-escola-soul-styles-missing');
+  }
+  if (!app.includes("escola-world-v618.js?v=618-jardim-das-78-sementes")
+    || !app.includes('createEscolaWorldV618()')
+    || !app.includes('window.orbe.escolaWorld = escolaWorld')
+    || !app.includes('window.divinaWork13EscolaWorldV618')
+    || !app.includes("stage:'renovacao-dos-mundos-5-escola'")
+    || !app.includes("universe:'jardim-das-78-sementes'")) {
+    throw new Error('work13-escola-world-app-mismatch');
+  }
+  if (!escolaWorld?.includes('ESCOLA_WORLD_CONTRACT_V618')
+    || !escolaWorld.includes("universe:'jardim-das-78-sementes'")
+    || !escolaWorld.includes("'arrival','one-living-seed','one-next-lesson','one-whole-lesson'")
+    || !escolaWorld.includes("'practice','root','silence','programme-on-explicit-request'")
+    || !escolaWorld.includes("schoolAuthority:'V555-preserved'")
+    || !escolaWorld.includes("chamberAuthority:'V596-preserved'")
+    || !escolaWorld.includes("livingWisdomAuthority:'V607-preserved'")
+    || !escolaWorld.includes("soulAuthority:'V610-preserved'")
+    || !escolaWorld.includes('stagesPreserved:3')
+    || !escolaWorld.includes('modulesPreserved:17')
+    || !escolaWorld.includes('lessonsPreserved:124')
+    || !escolaWorld.includes('cardLessonsPreserved:78')
+    || !escolaWorld.includes('theoryPracticeLessonsPreserved:46')
+    || !escolaWorld.includes('freeLessonsPreserved:17')
+    || !escolaWorld.includes('premiumLessonsPreserved:107')
+    || !escolaWorld.includes('foundationsFreePreserved:true')
+    || !escolaWorld.includes('premiumOfflinePreserved:true')
+    || !escolaWorld.includes('oneNaturalNextLesson:true')
+    || !escolaWorld.includes('oneWholeLessonAtATime:true')
+    || !escolaWorld.includes('programmeRequiresExplicitGesture:true')
+    || !escolaWorld.includes('privateContentReads:0')
+    || !escolaWorld.includes('schoolNoteReads:0')
+    || !escolaWorld.includes('answerReads:0')
+    || !escolaWorld.includes('networkCalls:0')
+    || !escolaWorld.includes('permanentAnimationLoops:0')
+    || !escolaWorld.includes('mutationObservers:0')
+    || !escolaWorld.includes('deferredTimers:0')
+    || !escolaWorld.includes('work14:false')) {
+    throw new Error('work13-escola-world-contract-missing');
+  }
+  if (!escolaWorldStyles?.includes('[data-work13-school-world="v618"]')
+    || !escolaWorldStyles.includes('[data-school-world="v618"]')
+    || !escolaWorldStyles.includes('[data-school-world-phase="germinating"]')
+    || !escolaWorldStyles.includes('[data-school-world-phase="lesson"]')
+    || !escolaWorldStyles.includes('[data-school-world-phase="rooted"]')
+    || !escolaWorldStyles.includes('content-visibility:auto')
+    || !escolaWorldStyles.includes('@media(max-width:430px)')
+    || !escolaWorldStyles.includes('@media(orientation:landscape)')
+    || !escolaWorldStyles.includes('@media(prefers-reduced-motion:reduce)')
+    || /@keyframes|backdrop-filter|filter\s*:/.test(escolaWorldStyles)) {
+    throw new Error('work13-escola-world-styles-missing');
   }
   if (!app.includes("biblioteca-soul-v610.js?v=615-sala-dos-fios-vivos")
     || !app.includes('createBibliotecaSoulV610({ orbCore:supremeOrb })')
@@ -1051,6 +1105,7 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK13_SPREADS_SOUL_ACTIVE', version:VERSION, reality:'spreads', methods:15, freeMethods:4, premiumMethods:11, celticCrossPositions:10, royalTableCards:78, oneSentenceSynthesis:true, depthExplicit:true, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_SPREADS_WORLD_ACTIVE', version:VERSION, reality:'spreads', universe:'concilio-das-constelacoes', sequence:['arrival','choice','orb','card-and-position','silence','essence','cards-in-conversation','one-sentence-synthesis','depth-on-explicit-request'], methods:15, freeMethods:4, premiumMethods:11, celticCrossPositions:10, royalTableCards:78, royalTableGeometry:'13x6', oneSentenceSynthesis:true, depthExplicit:true, pentagramMenu:true, oneOrb:true, base:616, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_SCHOOL_SOUL_ACTIVE', version:VERSION, reality:'school', universe:'jardim-arcano-do-conhecimento', stages:3, modules:17, lessons:124, cardLessons:78, oneNextLesson:true, programmeExplicit:true, oneOrb:true, base:600, complete:true });
+        client.postMessage({ type:'DIVINA_WORK13_SCHOOL_WORLD_ACTIVE', version:VERSION, reality:'school', universe:'jardim-das-78-sementes', sequence:['arrival','one-living-seed','one-next-lesson','one-whole-lesson','practice','root','silence','programme-on-explicit-request'], stages:3, modules:17, lessons:124, cardLessons:78, theoryPracticeLessons:46, freeLessons:17, premiumLessons:107, oneNextLesson:true, oneWholeLesson:true, programmeExplicit:true, foundationsFree:true, premiumOffline:true, pentagramMenu:true, oneOrb:true, base:617, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_LIBRARY_SOUL_ACTIVE', version:VERSION, reality:'library', universe:'arquivo-de-luz-sala-dos-fios-vivos', cards:78, uprightOnly:true, reversed:false, pageSize:18, oneDiscoveryFirst:true, onePrimaryChoice:true, catalogueExplicit:true, catalogueDeferred:true, readerDeferred:true, symbolicThreads:5, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_LIBRARY_WORLD_ACTIVE', version:VERSION, reality:'library', universe:'arquivo-de-luz-sala-dos-fios-vivos', sequence:['arrival','threshold','one-discovery','silence','symbolic-thread','related-doors','catalogue-on-explicit-request'], pentagramMenu:true, oneOrb:true, base:614, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_JOURNAL_SOUL_ACTIVE', version:VERSION, reality:'journal', universe:'camara-da-tinta-lunar', privateByDefault:true, directWritingFirst:true, silentAutosave:true, timelinePageSize:12, mirrorAggregateOnly:true, mirrorDiagnosis:false, oneOrb:true, base:600, complete:true });

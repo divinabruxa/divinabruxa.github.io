@@ -115,8 +115,8 @@ ok(entry.includes('Orbe viva. Toque para entrar e escrever no Diário'), 'ação
 ok(entry.includes("!['engaged','travel'].includes(state)"), 'depois do mergulho a Orbe recupera o menu global');
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core,/^\s*'\.\//gm) === 62, '62 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v617-tiragens-concilio-constelacoes'"), 'cache próprio');
+ok(count(core,/^\s*'\.\//gm) === 64, '64 ativos atômicos');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v618-escola-jardim-78-sementes'"), 'cache próprio');
 ok(sw.includes("'./diario-soul-v610.js?v=610-work13-journal-soul'"), 'JS no cache');
 ok(sw.includes("'./diario-soul-v610.css?v=610-work13-journal-soul'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_JOURNAL_SOUL_ACTIVE'), 'ativação comunicada');

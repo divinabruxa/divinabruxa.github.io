@@ -1,0 +1,83 @@
+{
+  "release": "V618",
+  "work": "WORK13",
+  "stage": "renovacao-dos-mundos-5-escola",
+  "universe": "jardim-das-78-sementes",
+  "base": "V617-tiragens-concilio-das-constelacoes",
+  "law": "one-orb-one-universe-one-presence-one-journey",
+  "sequence": [
+    "arrival",
+    "one-living-seed",
+    "one-next-lesson",
+    "one-whole-lesson",
+    "practice",
+    "root",
+    "silence",
+    "programme-on-explicit-request"
+  ],
+  "school": {
+    "stages": 3,
+    "modules": 17,
+    "lessons": 124,
+    "cardLessons": 78,
+    "theoryPracticeLessons": 46,
+    "freeLessons": 17,
+    "premiumLessons": 107,
+    "foundationsFree": true,
+    "premiumOffline": true,
+    "oneNaturalNextLesson": true,
+    "oneWholeLessonAtATime": true,
+    "programmeRequiresExplicitGesture": true
+  },
+  "privacy": {
+    "progressModel": "public-aggregate-only",
+    "privateContentReads": 0,
+    "lessonBodyReads": 0,
+    "schoolNoteReads": 0,
+    "answerReads": 0,
+    "searchQueryReads": 0
+  },
+  "performance": {
+    "newCanvases": 0,
+    "newRenderers": 0,
+    "permanentAnimationLoops": 0,
+    "mutationObservers": 0,
+    "deferredTimers": 0,
+    "networkCalls": 0,
+    "modelCalls": 0
+  },
+  "validation": {
+    "suites": 35,
+    "checks": 3630,
+    "failures": 0,
+    "atomicAssets": 64,
+    "iphoneGeometries": 8,
+    "physicalDeviceLab": false
+  },
+  "files": [
+    "00-INSTALE-WORK13-V618-ESCOLA-JARDIM-DAS-78-SEMENTES.txt",
+    "HASHES-WORK13-V618-ESCOLA-JARDIM-DAS-78-SEMENTES.txt",
+    "MANIFESTO-WORK13-V618-ESCOLA-JARDIM-DAS-78-SEMENTES.json",
+    "RELATORIO-WORK13-V618-ESCOLA-JARDIM-DAS-78-SEMENTES.md",
+    "app-v208.js",
+    "escola-world-v618.css",
+    "escola-world-v618.js",
+    "index.html",
+    "qa-work13-v610-boot-runtime.mjs",
+    "qa-work13-v610-daily-soul-structural.mjs",
+    "qa-work13-v610-entry-structural.mjs",
+    "qa-work13-v610-journal-soul-structural.mjs",
+    "qa-work13-v610-library-soul-structural.mjs",
+    "qa-work13-v610-school-soul-structural.mjs",
+    "qa-work13-v610-service-worker-runtime.mjs",
+    "qa-work13-v610-spreads-soul-structural.mjs",
+    "qa-work13-v610-tarot-soul-structural.mjs",
+    "qa-work13-v616-daily-world-structural.mjs",
+    "qa-work13-v617-spreads-world-structural.mjs",
+    "qa-work13-v618-school-world-iphone.mjs",
+    "qa-work13-v618-school-world-runtime.mjs",
+    "qa-work13-v618-school-world-structural.mjs",
+    "sw.js"
+  ],
+  "work14": false
+}

@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — WORK13 V617 · QA DO BOOT RECUPERÁVEL */
+/* DIVINA BRUXA — WORK13 V618 · QA DO BOOT RECUPERÁVEL */
 import fs from 'node:fs';
 import vm from 'node:vm';
 
@@ -107,11 +107,11 @@ function harness() {
 }
 
 check('boot:script-found', Boolean(bootScript));
-check('boot:work13-meta-v617', indexSource.includes('name="divina-work13" content="V617"'));
+check('boot:work13-meta-v618', indexSource.includes('name="divina-work13" content="V618"'));
 check('boot:work12-meta-v600', indexSource.includes('name="divina-work12" content="V600"'));
-check('boot:app-v617', indexSource.includes('app-v208.js?v=617-tiragens-concilio-das-constelacoes'));
-check('boot:worker-v617', indexSource.includes("register('./sw.js?v=617-tiragens-concilio-das-constelacoes'"));
-check('boot:v617-bootstrap', indexSource.includes("__divinaSWBootstrap='v617-tiragens-concilio-das-constelacoes-inline'"));
+check('boot:app-v618', indexSource.includes('app-v208.js?v=618-escola-jardim-das-78-sementes'));
+check('boot:worker-v618', indexSource.includes("register('./sw.js?v=618-escola-jardim-das-78-sementes'"));
+check('boot:v618-bootstrap', indexSource.includes("__divinaSWBootstrap='v618-escola-jardim-das-78-sementes-inline'"));
 check('boot:v610-presence-style', indexSource.includes('cosmos-world-presence-v610.css?v=610-work13-final-presence'));
 check('boot:v609-style-preserved', indexSource.includes('living-media-skins-v609.css?v=609-work13-media-skins'));
 check('boot:v608-style-preserved', indexSource.includes('living-commerce-path-v608.css?v=608-work13-commerce-clarity'));
@@ -155,14 +155,14 @@ check('boot:healthy-work13-orchestra-ready', healthy.root.dataset.work13Boot ===
 check('boot:healthy-never-bypassed', !healthy.home.classList.contains('active'));
 healthy.fire('load');
 await Promise.resolve();
-check('boot:registers-v617', healthy.registrations.some(item => item.url === './sw.js?v=617-tiragens-concilio-das-constelacoes'));
+check('boot:registers-v618', healthy.registrations.some(item => item.url === './sw.js?v=618-escola-jardim-das-78-sementes'));
 check('boot:no-cache-registration', healthy.registrations.some(item => item.options?.updateViaCache === 'none'));
 
 const failures = checks.filter(item => !item.pass);
 console.log(JSON.stringify({
-  release:'V617',
+  release:'V618',
   work:'WORK13',
-  macroStage:'WORK13 / tiragens-concilio-das-constelacoes-boot-runtime',
+  macroStage:'WORK13 / escola-jardim-das-78-sementes-boot-runtime',
   state:failures.length ? 'FAIL' : 'PASS',
   passed:checks.length - failures.length,
   failed:failures.length,
