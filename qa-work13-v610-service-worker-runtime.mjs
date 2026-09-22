@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — WORK13 V616 · QA DO SERVICE WORKER ATÔMICO */
+/* DIVINA BRUXA — WORK13 V617 · QA DO SERVICE WORKER ATÔMICO */
 import fs from 'node:fs';
 import vm from 'node:vm';
 import path from 'node:path';
@@ -116,12 +116,12 @@ function createHarness({ brokenAsset = '', brokenContent = false } = {}) {
 
 const checks = [];
 const check = (id, condition, detail = '') => checks.push({ id, pass:Boolean(condition), detail:condition ? '' : String(detail) });
-const cacheName = 'divina-bruxa-work13-v616-carta-dia-santuario-aurora';
+const cacheName = 'divina-bruxa-work13-v617-tiragens-concilio-constelacoes';
 const harness = createHarness();
 
-check('core:sixty-assets-declared', coreAssets.length === 60, coreAssets.length);
+check('core:sixty-two-assets-declared', coreAssets.length === 62, coreAssets.length);
 check('core:unique-assets', new Set(coreAssets).size === coreAssets.length);
-check('core:app-v616', coreAssets.includes('./app-v208.js?v=616-carta-do-dia-santuario-da-aurora'));
+check('core:app-v617', coreAssets.includes('./app-v208.js?v=617-tiragens-concilio-das-constelacoes'));
 check('core:pentagram-image', coreAssets.includes('./pentagrama-menu-vivo-v611.webp'));
 check('core:tarot-world-js', coreAssets.includes('./tarot-livre-soul-v610.js?v=614-camara-vazio-violeta'));
 check('core:tarot-world-css', coreAssets.includes('./tarot-livre-world-v614.css?v=614-camara-vazio-violeta'));
@@ -131,6 +131,8 @@ check('core:daily-world-js', coreAssets.includes('./carta-do-dia-world-v616.js?v
 check('core:daily-world-css', coreAssets.includes('./carta-do-dia-world-v616.css?v=616-santuario-da-aurora'));
 check('core:spreads-soul-js', coreAssets.includes('./tiragens-soul-v610.js?v=610-work13-spreads-soul'));
 check('core:spreads-soul-css', coreAssets.includes('./tiragens-soul-v610.css?v=610-work13-spreads-soul'));
+check('core:spreads-world-js', coreAssets.includes('./tiragens-world-v617.js?v=617-concilio-das-constelacoes'));
+check('core:spreads-world-css', coreAssets.includes('./tiragens-world-v617.css?v=617-concilio-das-constelacoes'));
 check('core:school-soul-js', coreAssets.includes('./escola-soul-v610.js?v=610-work13-school-soul'));
 check('core:school-soul-css', coreAssets.includes('./escola-soul-v610.css?v=610-work13-school-soul'));
 check('core:library-world-js', coreAssets.includes('./biblioteca-soul-v610.js?v=615-sala-dos-fios-vivos'));
@@ -158,7 +160,7 @@ for (const event of ['install','activate','fetch','message']) check(`listener:${
 await harness.wait('install');
 const cache = harness.stores.get(cacheName);
 check('install:atomic-cache-created', cache instanceof Map);
-check('install:sixty-core-assets', cache?.size === 60, cache?.size);
+check('install:sixty-two-core-assets', cache?.size === 62, cache?.size);
 for (const asset of coreAssets) check(`install:${asset}`, cache?.has(asset));
 check('install:skip-after-validation', harness.counters().skipped === 1, harness.counters().skipped);
 
@@ -173,7 +175,7 @@ for (const asset of coreAssets) {
 
 for (const asset of [
   './index.html',
-  './app-v208.js?v=616-carta-do-dia-santuario-da-aurora',
+  './app-v208.js?v=617-tiragens-concilio-das-constelacoes',
   './tarot-livre-soul-v610.js?v=614-camara-vazio-violeta',
   './tarot-livre-world-v614.css?v=614-camara-vazio-violeta',
   './carta-do-dia-soul-v610.js?v=610-work13-daily-soul',
@@ -182,6 +184,8 @@ for (const asset of [
   './carta-do-dia-world-v616.css?v=616-santuario-da-aurora',
   './tiragens-soul-v610.js?v=610-work13-spreads-soul',
   './tiragens-soul-v610.css?v=610-work13-spreads-soul',
+  './tiragens-world-v617.js?v=617-concilio-das-constelacoes',
+  './tiragens-world-v617.css?v=617-concilio-das-constelacoes',
   './escola-soul-v610.js?v=610-work13-school-soul',
   './escola-soul-v610.css?v=610-work13-school-soul',
   './biblioteca-soul-v610.js?v=615-sala-dos-fios-vivos',
@@ -209,7 +213,7 @@ for (const asset of [
 harness.stores.set('divina-bruxa-work13-v609-media-skins', new Map());
 await harness.wait('activate');
 check('activate:claims-clients', harness.counters().claimed === 1);
-check('activate:keeps-v616', harness.stores.has(cacheName));
+check('activate:keeps-v617', harness.stores.has(cacheName));
 check('activate:deletes-v609-cache', !harness.stores.has('divina-bruxa-work13-v609-media-skins'));
 for (const type of [
   'DIVINA_WORK12_FOUNDATION_ACTIVE','DIVINA_WORK12_NAVIGATION_ACTIVE',
@@ -230,12 +234,13 @@ for (const type of [
   'DIVINA_WORK13_DAILY_SOUL_ACTIVE',
   'DIVINA_WORK13_DAILY_WORLD_ACTIVE',
   'DIVINA_WORK13_SPREADS_SOUL_ACTIVE',
+  'DIVINA_WORK13_SPREADS_WORLD_ACTIVE',
   'DIVINA_WORK13_SCHOOL_SOUL_ACTIVE',
   'DIVINA_WORK13_LIBRARY_SOUL_ACTIVE',
   'DIVINA_WORK13_LIBRARY_WORLD_ACTIVE',
   'DIVINA_WORK13_JOURNAL_SOUL_ACTIVE',
   'DIVINA_RELEASE_READY'
-]) check(`activate:${type}`, harness.clientMessages.some(item => item.type === type && item.version === 616));
+]) check(`activate:${type}`, harness.clientMessages.some(item => item.type === type && item.version === 617));
 check('activate:context-version-v602', harness.clientMessages.some(item => item.contextVersion === 602));
 check('activate:resonance-version-v603', harness.clientMessages.some(item => item.resonanceVersion === 603));
 check('activate:daily-version-v604', harness.clientMessages.some(item => item.dailyReadingVersion === 604));
@@ -252,6 +257,7 @@ check('activate:tarot-world-v614', harness.clientMessages.some(item => item.type
 check('activate:daily-soul-v610', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_DAILY_SOUL_ACTIVE' && item.reality === 'daily' && item.cardsPerBrasiliaDay === 1 && item.timeZone === 'America/Sao_Paulo' && item.reversed === false && item.oneSentenceEssence === true && item.depthExplicit === true && item.oneOrb === true));
 check('activate:daily-world-v616', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_DAILY_WORLD_ACTIVE' && item.reality === 'daily' && item.universe === 'santuario-da-aurora' && item.cardsPerBrasiliaDay === 1 && item.timeZone === 'America/Sao_Paulo' && item.reversed === false && item.oneSentenceEssence === true && item.depthExplicit === true && item.pentagramMenu === true && item.oneOrb === true && item.base === 615));
 check('activate:spreads-soul-v610', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_SPREADS_SOUL_ACTIVE' && item.reality === 'spreads' && item.methods === 15 && item.freeMethods === 4 && item.premiumMethods === 11 && item.celticCrossPositions === 10 && item.royalTableCards === 78 && item.oneSentenceSynthesis === true && item.depthExplicit === true && item.oneOrb === true));
+check('activate:spreads-world-v617', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_SPREADS_WORLD_ACTIVE' && item.reality === 'spreads' && item.universe === 'concilio-das-constelacoes' && item.methods === 15 && item.freeMethods === 4 && item.premiumMethods === 11 && item.celticCrossPositions === 10 && item.royalTableCards === 78 && item.royalTableGeometry === '13x6' && item.oneSentenceSynthesis === true && item.depthExplicit === true && item.pentagramMenu === true && item.oneOrb === true && item.base === 616));
 check('activate:school-soul-v610', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_SCHOOL_SOUL_ACTIVE' && item.reality === 'school' && item.universe === 'jardim-arcano-do-conhecimento' && item.stages === 3 && item.modules === 17 && item.lessons === 124 && item.cardLessons === 78 && item.oneNextLesson === true && item.programmeExplicit === true && item.oneOrb === true));
 check('activate:library-soul-v615', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_LIBRARY_SOUL_ACTIVE' && item.reality === 'library' && item.universe === 'arquivo-de-luz-sala-dos-fios-vivos' && item.cards === 78 && item.uprightOnly === true && item.reversed === false && item.pageSize === 18 && item.oneDiscoveryFirst === true && item.onePrimaryChoice === true && item.catalogueExplicit === true && item.catalogueDeferred === true && item.readerDeferred === true && item.symbolicThreads === 5 && item.oneOrb === true));
 check('activate:library-world-v615', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_LIBRARY_WORLD_ACTIVE' && item.universe === 'arquivo-de-luz-sala-dos-fios-vivos' && item.pentagramMenu === true && item.oneOrb === true && item.base === 614));
@@ -259,14 +265,14 @@ check('activate:journal-soul-v610', harness.clientMessages.some(item => item.typ
 check('activate:pentagram-menu-v613', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_PENTAGRAM_MENU_ACTIVE' && item.symbol === 'pentagrama-vermelho' && item.position === 'top-corner' && item.global === true && item.globalMenuOnEveryPage === true && item.pentagramVisibleWhileMenuOpen === true && item.pentagramTogglesMenu === true && item.arrivalStateRecovery === true && item.publicWorlds === 15 && item.maximumVisibleIntentions === 2 && item.menuLife === 'birth-breath-answer-silence' && item.whitInsideMenu === true && item.tarotOrbAction === 'reveal-only' && item.tarotOrbOpensMenu === false && item.tarotOrbMenuListenersBypassed === true && item.oneOrb === true));
 
 const onlineNavigation = await harness.fetchEvent(new FakeRequest('https://divina.test/index.html#music', { mode:'navigate' }));
-check('fetch:navigation-network', (await onlineNavigation.text()).includes('name="divina-work13" content="V616"'));
+check('fetch:navigation-network', (await onlineNavigation.text()).includes('name="divina-work13" content="V617"'));
 harness.offline(true);
 const offlineNavigation = await harness.fetchEvent(new FakeRequest('https://divina.test/index.html#skins', { mode:'navigate' }));
 check('fetch:navigation-offline', (await offlineNavigation.text()).includes('name="divina-work12" content="V600"'));
 harness.offline(false);
 
 for (const [file, needle] of [
-  ['app-v208.js?v=616-carta-do-dia-santuario-da-aurora','divinaWork13CartaDoDiaWorldV616'],
+  ['app-v208.js?v=617-tiragens-concilio-das-constelacoes','divinaWork13TiragensWorldV617'],
   ['tarot-livre-soul-v610.js?v=614-camara-vazio-violeta','TAROT_LIVRE_WORLD_CONTRACT_V614'],
   ['tarot-livre-world-v614.css?v=614-camara-vazio-violeta','[data-tarot-world="v614"]'],
   ['carta-do-dia-soul-v610.js?v=610-work13-daily-soul','CARTA_DO_DIA_SOUL_CONTRACT_V610'],
@@ -275,6 +281,8 @@ for (const [file, needle] of [
   ['carta-do-dia-world-v616.css?v=616-santuario-da-aurora','[data-daily-world="v616"]'],
   ['tiragens-soul-v610.js?v=610-work13-spreads-soul','TIRAGENS_SOUL_CONTRACT_V610'],
   ['tiragens-soul-v610.css?v=610-work13-spreads-soul','[data-spreads-soul="v610"]'],
+  ['tiragens-world-v617.js?v=617-concilio-das-constelacoes','TIRAGENS_WORLD_CONTRACT_V617'],
+  ['tiragens-world-v617.css?v=617-concilio-das-constelacoes','[data-spreads-world="v617"]'],
   ['escola-soul-v610.js?v=610-work13-school-soul','ESCOLA_SOUL_CONTRACT_V610'],
   ['escola-soul-v610.css?v=610-work13-school-soul','[data-school-soul="v610"]'],
   ['biblioteca-soul-v610.js?v=615-sala-dos-fios-vivos','BIBLIOTECA_WORLD_CONTRACT_V615'],
@@ -307,17 +315,17 @@ for (const [file, needle] of [
 }
 
 await harness.message({ type:'WORK12_STATUS' });
-check('message:status-version', harness.sourceMessages.some(item => item.type === 'WORK12_STATUS' && item.version === 616));
-check('message:status-sixty-assets', harness.sourceMessages.some(item => item.core?.length === 60));
+check('message:status-version', harness.sourceMessages.some(item => item.type === 'WORK12_STATUS' && item.version === 617));
+check('message:status-sixty-two-assets', harness.sourceMessages.some(item => item.core?.length === 62));
 await harness.message({ type:'CLEAR_DIVINA_CACHES' });
 check('message:clear-caches', !harness.stores.has(cacheName));
-check('message:clear-confirmed', harness.sourceMessages.some(item => item.type === 'DIVINA_CACHES_CLEARED' && item.version === 616));
+check('message:clear-confirmed', harness.sourceMessages.some(item => item.type === 'DIVINA_CACHES_CLEARED' && item.version === 617));
 
 const failures = checks.filter(item => !item.pass);
 console.log(JSON.stringify({
-  release:'V616',
+  release:'V617',
   work:'WORK13',
-  macroStage:'WORK13 / carta-do-dia-santuario-da-aurora-service-worker-runtime',
+  macroStage:'WORK13 / tiragens-concilio-das-constelacoes-service-worker-runtime',
   state:failures.length ? 'FAIL' : 'PASS',
   passed:checks.length - failures.length,
   failed:failures.length,

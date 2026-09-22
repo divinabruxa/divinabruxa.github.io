@@ -1,16 +1,16 @@
-/* DIVINA BRUXA — WORK13 · CARTA DO DIA · SANTUARIO DA AURORA · V616
-   O WORK12 V600, o menu V613, o Tarot V614 e a Biblioteca V615 permanecem
-   protegidos. A instalacao só assume quando o rito diario conserva uma carta,
-   silencio, uma frase e profundidade pedida, sempre com a mesma Orbe.
+/* DIVINA BRUXA — WORK13 · TIRAGENS · CONCILIO DAS CONSTELACOES · V617
+   O WORK12 V600 e os mundos V614-V616 permanecem protegidos. A instalacao so
+   assume quando as Tiragens preservam os 15 metodos, fazem as cartas conversar,
+   concluem em uma sintese curta e continuam usando a mesma Orbe.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
-const VERSION = 616;
+const VERSION = 617;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work13-v616-carta-dia-santuario-aurora';
+const CACHE_NAME = 'divina-bruxa-work13-v617-tiragens-concilio-constelacoes';
 const CORE = Object.freeze([
   './index.html',
-  './app-v208.js?v=616-carta-do-dia-santuario-da-aurora',
+  './app-v208.js?v=617-tiragens-concilio-das-constelacoes',
   './pentagrama-menu-vivo-v611.webp',
   './tarot-livre-soul-v610.js?v=614-camara-vazio-violeta',
   './tarot-livre-world-v614.css?v=614-camara-vazio-violeta',
@@ -20,6 +20,8 @@ const CORE = Object.freeze([
   './carta-do-dia-world-v616.css?v=616-santuario-da-aurora',
   './tiragens-soul-v610.js?v=610-work13-spreads-soul',
   './tiragens-soul-v610.css?v=610-work13-spreads-soul',
+  './tiragens-world-v617.js?v=617-concilio-das-constelacoes',
+  './tiragens-world-v617.css?v=617-concilio-das-constelacoes',
   './escola-soul-v610.js?v=610-work13-school-soul',
   './escola-soul-v610.css?v=610-work13-school-soul',
   './biblioteca-soul-v610.js?v=615-sala-dos-fios-vivos',
@@ -83,7 +85,7 @@ const fetchCore = async path => {
 
 const validateCore = async responses => {
   const index = await responses.get('./index.html')?.clone().text();
-  const app = await responses.get('./app-v208.js?v=616-carta-do-dia-santuario-da-aurora')?.clone().text();
+  const app = await responses.get('./app-v208.js?v=617-tiragens-concilio-das-constelacoes')?.clone().text();
   const tarotLivreSoul = await responses.get('./tarot-livre-soul-v610.js?v=614-camara-vazio-violeta')?.clone().text();
   const tarotLivreSoulStyles = await responses.get('./tarot-livre-world-v614.css?v=614-camara-vazio-violeta')?.clone().text();
   const cartaDoDiaSoul = await responses.get('./carta-do-dia-soul-v610.js?v=610-work13-daily-soul')?.clone().text();
@@ -92,6 +94,8 @@ const validateCore = async responses => {
   const cartaDoDiaWorldStyles = await responses.get('./carta-do-dia-world-v616.css?v=616-santuario-da-aurora')?.clone().text();
   const tiragensSoul = await responses.get('./tiragens-soul-v610.js?v=610-work13-spreads-soul')?.clone().text();
   const tiragensSoulStyles = await responses.get('./tiragens-soul-v610.css?v=610-work13-spreads-soul')?.clone().text();
+  const tiragensWorld = await responses.get('./tiragens-world-v617.js?v=617-concilio-das-constelacoes')?.clone().text();
+  const tiragensWorldStyles = await responses.get('./tiragens-world-v617.css?v=617-concilio-das-constelacoes')?.clone().text();
   const escolaSoul = await responses.get('./escola-soul-v610.js?v=610-work13-school-soul')?.clone().text();
   const escolaSoulStyles = await responses.get('./escola-soul-v610.css?v=610-work13-school-soul')?.clone().text();
   const bibliotecaSoul = await responses.get('./biblioteca-soul-v610.js?v=615-sala-dos-fios-vivos')?.clone().text();
@@ -141,11 +145,11 @@ const validateCore = async responses => {
   const soul = await responses.get('./whit-orb-soul-bridge-v581.js?v=592-work12-navigation')?.clone().text();
   if (!index?.includes('name="divina-work12" content="V600"')
     || !index.includes('name="divina-live-audit" content="V600"')
-    || !index.includes('name="divina-work13" content="V616"')) {
+    || !index.includes('name="divina-work13" content="V617"')) {
     throw new Error('work13-index-version-mismatch');
   }
-  if (!index.includes('app-v208.js?v=616-carta-do-dia-santuario-da-aurora')
-    || !index.includes('name="divina-work13-correction" content="V616-CARTA-DO-DIA-SANTUARIO-DA-AURORA"')
+  if (!index.includes('app-v208.js?v=617-tiragens-concilio-das-constelacoes')
+    || !index.includes('name="divina-work13-correction" content="V617-TIRAGENS-CONCILIO-DAS-CONSTELACOES"')
     || !index.includes('id="divinaCosmosEntryIntentionV610"')
     || !index.includes('cosmos-entry-intention-v610.css?v=613-menu-global-vivo')
     || !index.includes('id="divinaCosmosWorldPresenceV610"')
@@ -419,6 +423,43 @@ const validateCore = async responses => {
     || !tiragensSoulStyles.includes('@media(prefers-reduced-motion:reduce)')
     || /@keyframes|animation\s*:|backdrop-filter|filter\s*:/.test(tiragensSoulStyles)) {
     throw new Error('work13-tiragens-soul-styles-missing');
+  }
+  if (!app.includes("tiragens-world-v617.js?v=617-concilio-das-constelacoes")
+    || !app.includes('createTiragensWorldV617({ orbCore:supremeOrb })')
+    || !app.includes('window.orbe.tiragensWorld = tiragensWorld')
+    || !app.includes("universe:'concilio-das-constelacoes'")) {
+    throw new Error('work13-tiragens-world-app-mismatch');
+  }
+  if (!tiragensWorld?.includes('TIRAGENS_WORLD_CONTRACT_V617')
+    || !tiragensWorld.includes("sequence:Object.freeze(['arrival','choice','orb','card-and-position','silence','essence','cards-in-conversation','one-sentence-synthesis','depth-on-explicit-request'])")
+    || !tiragensWorld.includes("universe:'concilio-das-constelacoes'")
+    || !tiragensWorld.includes('methodsPreserved:15')
+    || !tiragensWorld.includes('freeMethodsPreserved:4')
+    || !tiragensWorld.includes('premiumMethodsPreserved:11')
+    || !tiragensWorld.includes('celticCrossPositionsPreserved:10')
+    || !tiragensWorld.includes('royalTableCardsPreserved:78')
+    || !tiragensWorld.includes("royalTableGeometryPreserved:'13x6'")
+    || !tiragensWorld.includes('maximumConversationVoices:3')
+    || !tiragensWorld.includes('maximumSynthesisSentences:1')
+    || !tiragensWorld.includes('depthRequiresExplicitGesture:true')
+    || !tiragensWorld.includes("canonicalOrbAction:'reveal-next-position'")
+    || !tiragensWorld.includes('premiumAuthorityChanges:0')
+    || !tiragensWorld.includes('reusesCanonicalOrb:true')
+    || !tiragensWorld.includes('permanentAnimationLoops:0')
+    || !tiragensWorld.includes('mutationObservers:0')
+    || !tiragensWorld.includes('work14:false')) {
+    throw new Error('work13-tiragens-world-contract-missing');
+  }
+  if (!tiragensWorldStyles?.includes('[data-spreads-world="v617"]')
+    || !tiragensWorldStyles.includes('[data-spreads-world-phase="answering"]')
+    || !tiragensWorldStyles.includes('[data-spreads-world-phase="silence"]')
+    || !tiragensWorldStyles.includes('[data-cosmic-spread-synthesis="v605"]')
+    || !tiragensWorldStyles.includes('content-visibility:auto')
+    || !tiragensWorldStyles.includes('.royal-table')
+    || !tiragensWorldStyles.includes('@media(max-width:430px)')
+    || !tiragensWorldStyles.includes('@media(prefers-reduced-motion:reduce)')
+    || /@keyframes|animation\s*:|backdrop-filter|filter\s*:/.test(tiragensWorldStyles)) {
+    throw new Error('work13-tiragens-world-styles-missing');
   }
   if (!app.includes("escola-soul-v610.js?v=610-work13-school-soul")
     || !app.includes('createEscolaSoulV610({ orbCore:supremeOrb })')
@@ -1008,6 +1049,7 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK13_DAILY_SOUL_ACTIVE', version:VERSION, reality:'daily', cardsPerBrasiliaDay:1, timeZone:'America/Sao_Paulo', reversed:false, oneSentenceEssence:true, depthExplicit:true, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_DAILY_WORLD_ACTIVE', version:VERSION, reality:'daily', universe:'santuario-da-aurora', sequence:['arrival','orb','touch','card','silence','one-sentence-essence','depth-on-explicit-request'], cardsPerBrasiliaDay:1, timeZone:'America/Sao_Paulo', reversed:false, oneSentenceEssence:true, depthExplicit:true, pentagramMenu:true, oneOrb:true, base:615, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_SPREADS_SOUL_ACTIVE', version:VERSION, reality:'spreads', methods:15, freeMethods:4, premiumMethods:11, celticCrossPositions:10, royalTableCards:78, oneSentenceSynthesis:true, depthExplicit:true, oneOrb:true, base:600, complete:true });
+        client.postMessage({ type:'DIVINA_WORK13_SPREADS_WORLD_ACTIVE', version:VERSION, reality:'spreads', universe:'concilio-das-constelacoes', sequence:['arrival','choice','orb','card-and-position','silence','essence','cards-in-conversation','one-sentence-synthesis','depth-on-explicit-request'], methods:15, freeMethods:4, premiumMethods:11, celticCrossPositions:10, royalTableCards:78, royalTableGeometry:'13x6', oneSentenceSynthesis:true, depthExplicit:true, pentagramMenu:true, oneOrb:true, base:616, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_SCHOOL_SOUL_ACTIVE', version:VERSION, reality:'school', universe:'jardim-arcano-do-conhecimento', stages:3, modules:17, lessons:124, cardLessons:78, oneNextLesson:true, programmeExplicit:true, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_LIBRARY_SOUL_ACTIVE', version:VERSION, reality:'library', universe:'arquivo-de-luz-sala-dos-fios-vivos', cards:78, uprightOnly:true, reversed:false, pageSize:18, oneDiscoveryFirst:true, onePrimaryChoice:true, catalogueExplicit:true, catalogueDeferred:true, readerDeferred:true, symbolicThreads:5, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_LIBRARY_WORLD_ACTIVE', version:VERSION, reality:'library', universe:'arquivo-de-luz-sala-dos-fios-vivos', sequence:['arrival','threshold','one-discovery','silence','symbolic-thread','related-doors','catalogue-on-explicit-request'], pentagramMenu:true, oneOrb:true, base:614, complete:true });

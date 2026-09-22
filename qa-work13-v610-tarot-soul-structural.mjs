@@ -63,8 +63,8 @@ ok(styles.includes('#tarot>.free-rule') && styles.includes('display:none!importa
 ok(styles.includes('body[data-screen="tarot"] .app-header') && styles.includes('body[data-screen="tarot"] .magic-dock'), 'navegação antiga recua diante do pentagrama');
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core,/^\s*'\.\//gm) === 60, '60 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v616-carta-dia-santuario-aurora'"), 'cache cumulativo próprio');
+ok(count(core,/^\s*'\.\//gm) === 62, '62 ativos atômicos');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v617-tiragens-concilio-constelacoes'"), 'cache cumulativo próprio');
 ok(sw.includes("'./tarot-livre-soul-v610.js?v=614-camara-vazio-violeta'"), 'JS no cache');
 ok(sw.includes("'./tarot-livre-world-v614.css?v=614-camara-vazio-violeta'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_TAROT_SOUL_ACTIVE'), 'ativação comunicada');
