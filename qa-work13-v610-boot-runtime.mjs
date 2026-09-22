@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — WORK13 V621 · QA DO BOOT RECUPERÁVEL */
+/* DIVINA BRUXA — WORK13 V622 · QA DO BOOT RECUPERÁVEL */
 import fs from 'node:fs';
 import vm from 'node:vm';
 
@@ -107,11 +107,11 @@ function harness() {
 }
 
 check('boot:script-found', Boolean(bootScript));
-check('boot:work13-meta-v621', indexSource.includes('name="divina-work13" content="V621"'));
+check('boot:work13-meta-v622', indexSource.includes('name="divina-work13" content="V622"'));
 check('boot:work12-meta-v600', indexSource.includes('name="divina-work12" content="V600"'));
-check('boot:app-v621', indexSource.includes('app-v208.js?v=621-consultas-templo-do-encontro'));
-check('boot:worker-v621', indexSource.includes("register('./sw.js?v=621-consultas-templo-do-encontro'"));
-check('boot:v621-bootstrap', indexSource.includes("__divinaSWBootstrap='v621-consultas-templo-do-encontro-inline'"));
+check('boot:app-v622', indexSource.includes('app-v208.js?v=622-loja-casa-das-escolhas-vivas'));
+check('boot:worker-v622', indexSource.includes("register('./sw.js?v=622-loja-casa-das-escolhas-vivas'"));
+check('boot:v622-bootstrap', indexSource.includes("__divinaSWBootstrap='v622-loja-casa-das-escolhas-vivas-inline'"));
 check('boot:v610-presence-style', indexSource.includes('cosmos-world-presence-v610.css?v=610-work13-final-presence'));
 check('boot:v609-style-preserved', indexSource.includes('living-media-skins-v609.css?v=609-work13-media-skins'));
 check('boot:v608-style-preserved', indexSource.includes('living-commerce-path-v608.css?v=608-work13-commerce-clarity'));
@@ -155,14 +155,14 @@ check('boot:healthy-work13-orchestra-ready', healthy.root.dataset.work13Boot ===
 check('boot:healthy-never-bypassed', !healthy.home.classList.contains('active'));
 healthy.fire('load');
 await Promise.resolve();
-check('boot:registers-v621', healthy.registrations.some(item => item.url === './sw.js?v=621-consultas-templo-do-encontro'));
+check('boot:registers-v622', healthy.registrations.some(item => item.url === './sw.js?v=622-loja-casa-das-escolhas-vivas'));
 check('boot:no-cache-registration', healthy.registrations.some(item => item.options?.updateViaCache === 'none'));
 
 const failures = checks.filter(item => !item.pass);
 console.log(JSON.stringify({
-  release:'V621',
+  release:'V622',
   work:'WORK13',
-  macroStage:'WORK13 / consultas-templo-do-encontro-boot-runtime',
+  macroStage:'WORK13 / loja-casa-das-escolhas-vivas-boot-runtime',
   state:failures.length ? 'FAIL' : 'PASS',
   passed:checks.length - failures.length,
   failed:failures.length,

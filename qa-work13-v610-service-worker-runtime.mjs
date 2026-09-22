@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — WORK13 V621 · QA DO SERVICE WORKER ATÔMICO */
+/* DIVINA BRUXA — WORK13 V622 · QA DO SERVICE WORKER ATÔMICO */
 import fs from 'node:fs';
 import vm from 'node:vm';
 import path from 'node:path';
@@ -87,7 +87,7 @@ function createHarness({ brokenAsset = '', brokenContent = false } = {}) {
   };
   vm.runInContext(source, vm.createContext({
     self,caches,fetch,Request:FakeRequest,URL,Object,Map,Set,Promise,Error,RegExp,console
-  }), { filename:'sw-v621.js' });
+  }), { filename:'sw-v622.js' });
   const wait = async (type, event = {}) => {
     let promise = Promise.resolve();
     listeners.get(type)?.({ ...event, waitUntil:value => { promise = Promise.resolve(value); } });
@@ -116,12 +116,12 @@ function createHarness({ brokenAsset = '', brokenContent = false } = {}) {
 
 const checks = [];
 const check = (id, condition, detail = '') => checks.push({ id, pass:Boolean(condition), detail:condition ? '' : String(detail) });
-const cacheName = 'divina-bruxa-work13-v621-consultas-templo-do-encontro';
+const cacheName = 'divina-bruxa-work13-v622-loja-casa-das-escolhas-vivas';
 const harness = createHarness();
 
-check('core:seventy-assets-declared', coreAssets.length === 70, coreAssets.length);
+check('core:seventy-two-assets-declared', coreAssets.length === 72, coreAssets.length);
 check('core:unique-assets', new Set(coreAssets).size === coreAssets.length);
-check('core:app-v621', coreAssets.includes('./app-v208.js?v=621-consultas-templo-do-encontro'));
+check('core:app-v622', coreAssets.includes('./app-v208.js?v=622-loja-casa-das-escolhas-vivas'));
 check('core:pentagram-image', coreAssets.includes('./pentagrama-menu-vivo-v611.webp'));
 check('core:tarot-world-js', coreAssets.includes('./tarot-livre-soul-v610.js?v=614-camara-vazio-violeta'));
 check('core:tarot-world-css', coreAssets.includes('./tarot-livre-world-v614.css?v=614-camara-vazio-violeta'));
@@ -147,6 +147,8 @@ check('core:whit-world-js', coreAssets.includes('./whit-world-v620.js?v=620-pres
 check('core:whit-world-css', coreAssets.includes('./whit-world-v620.css?v=620-presenca-entre-mundos'));
 check('core:consultas-world-js', coreAssets.includes('./consultas-world-v621.js?v=621-templo-do-encontro'));
 check('core:consultas-world-css', coreAssets.includes('./consultas-world-v621.css?v=621-templo-do-encontro'));
+check('core:loja-world-js', coreAssets.includes('./loja-world-v622.js?v=622-casa-das-escolhas-vivas'));
+check('core:loja-world-css', coreAssets.includes('./loja-world-v622.css?v=622-casa-das-escolhas-vivas'));
 check('core:entry-js', coreAssets.includes('./cosmos-entry-intention-v610.js?v=613-menu-global-vivo'));
 check('core:entry-css', coreAssets.includes('./cosmos-entry-intention-v610.css?v=613-menu-global-vivo'));
 check('core:world-presence-js', coreAssets.includes('./cosmos-world-presence-v610.js?v=610-work13-final-presence'));
@@ -168,7 +170,7 @@ for (const event of ['install','activate','fetch','message']) check(`listener:${
 await harness.wait('install');
 const cache = harness.stores.get(cacheName);
 check('install:atomic-cache-created', cache instanceof Map);
-check('install:seventy-core-assets', cache?.size === 70, cache?.size);
+check('install:seventy-two-core-assets', cache?.size === 72, cache?.size);
 for (const asset of coreAssets) check(`install:${asset}`, cache?.has(asset));
 check('install:skip-after-validation', harness.counters().skipped === 1, harness.counters().skipped);
 
@@ -183,7 +185,7 @@ for (const asset of coreAssets) {
 
 for (const asset of [
   './index.html',
-  './app-v208.js?v=621-consultas-templo-do-encontro',
+  './app-v208.js?v=622-loja-casa-das-escolhas-vivas',
   './tarot-livre-soul-v610.js?v=614-camara-vazio-violeta',
   './tarot-livre-world-v614.css?v=614-camara-vazio-violeta',
   './carta-do-dia-soul-v610.js?v=610-work13-daily-soul',
@@ -208,6 +210,8 @@ for (const asset of [
   './whit-world-v620.css?v=620-presenca-entre-mundos',
   './consultas-world-v621.js?v=621-templo-do-encontro',
   './consultas-world-v621.css?v=621-templo-do-encontro',
+  './loja-world-v622.js?v=622-casa-das-escolhas-vivas',
+  './loja-world-v622.css?v=622-casa-das-escolhas-vivas',
   './cosmos-entry-intention-v610.js?v=613-menu-global-vivo',
   './cosmos-entry-intention-v610.css?v=613-menu-global-vivo',
   './cosmos-world-presence-v610.js?v=610-work13-final-presence',
@@ -229,7 +233,7 @@ for (const asset of [
 harness.stores.set('divina-bruxa-work13-v609-media-skins', new Map());
 await harness.wait('activate');
 check('activate:claims-clients', harness.counters().claimed === 1);
-check('activate:keeps-v621', harness.stores.has(cacheName));
+check('activate:keeps-v622', harness.stores.has(cacheName));
 check('activate:deletes-v609-cache', !harness.stores.has('divina-bruxa-work13-v609-media-skins'));
 for (const type of [
   'DIVINA_WORK12_FOUNDATION_ACTIVE','DIVINA_WORK12_NAVIGATION_ACTIVE',
@@ -259,8 +263,9 @@ for (const type of [
   'DIVINA_WORK13_JOURNAL_WORLD_ACTIVE',
   'DIVINA_WORK13_WHIT_WORLD_ACTIVE',
   'DIVINA_WORK13_CONSULTAS_WORLD_ACTIVE',
+  'DIVINA_WORK13_LOJA_WORLD_ACTIVE',
   'DIVINA_RELEASE_READY'
-]) check(`activate:${type}`, harness.clientMessages.some(item => item.type === type && item.version === 621));
+]) check(`activate:${type}`, harness.clientMessages.some(item => item.type === type && item.version === 622));
 check('activate:context-version-v602', harness.clientMessages.some(item => item.contextVersion === 602));
 check('activate:resonance-version-v603', harness.clientMessages.some(item => item.resonanceVersion === 603));
 check('activate:daily-version-v604', harness.clientMessages.some(item => item.dailyReadingVersion === 604));
@@ -286,17 +291,18 @@ check('activate:journal-soul-v610', harness.clientMessages.some(item => item.typ
 check('activate:journal-world-v619', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_JOURNAL_WORLD_ACTIVE' && item.reality === 'journal' && item.universe === 'camara-da-tinta-viva' && item.directWritingFirst === true && item.blankPageFirst === true && item.silentAutosave === true && item.privateByDefault === true && item.adminBodyAccess === false && item.analyticsBodyAccess === false && item.whitSilentRead === false && item.whitShareRequiresExplicitTemporaryConsent === true && item.timelinePageSize === 12 && item.mirrorAggregateOnly === true && item.mirrorDiagnosis === false && item.mirrorPrediction === false && item.offline === true && item.syncConflictProtection === true && item.pentagramMenu === true && item.oneOrb === true && item.base === 618));
 check('activate:whit-world-v620', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_WHIT_WORLD_ACTIVE' && item.reality === 'ai' && item.universe === 'presenca-entre-mundos' && item.localDefault === true && item.accountRequired === false && item.sessionMemoryTurns === 6 && item.sessionMemoryPersistent === false && item.sessionMemoryVisible === true && item.contextExplicitConsent === true && item.privateByDefault === true && item.privateContentReads === 0 && item.automaticSpeech === false && item.pentagramMenu === true && item.oneOrb === true && item.base === 619));
 check('activate:consultas-world-v621', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_CONSULTAS_WORLD_ACTIVE' && item.reality === 'consultations' && item.universe === 'templo-do-encontro' && item.services === 4 && item.servicePricesCents?.join('|') === '25000|20000|15000|5000' && item.priceSnapshot === true && item.futurePricesAdminEditable === true && item.previousOrdersImmutable === true && item.humanReadingOnly === true && item.separateFromPremium === true && item.emailRequired === true && item.phoneRequired === true && item.whatsappRequired === false && item.operationalContact === 'orbedasrealidades@hotmail.com' && item.emailOnly === true && item.onlineOnly === true && item.automaticEmail === false && item.realBilling === false && item.privateContentReads === 0 && item.formValueReads === 0 && item.questionReads === 0 && item.contactReads === 0 && item.protocolReads === 0 && item.pentagramMenu === true && item.oneOrb === true && item.base === 620));
+check('activate:loja-world-v622', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_LOJA_WORLD_ACTIVE' && item.reality === 'store' && item.universe === 'casa-das-escolhas-vivas' && item.products === 21 && item.intentionPaths === 4 && item.categories === 9 && item.productCategories === 8 && item.featuredChoices === 7 && item.destinationHost === 'www.amazon.com.br' && item.checkout === 'external-amazon-only' && item.affiliateDisclosureAdjacent === true && item.affiliateTagAuthority === 'V543-config-preserved' && item.affiliateTagHardcodedByV622 === false && item.priceCache === false && item.stockCache === false && item.ratingCache === false && item.fakeDiscountClaims === 0 && item.fakeScarcityClaims === 0 && item.officialPartnershipClaim === false && item.searchLocalOnly === true && item.favoritesLocalOnly === true && item.privateContentReads === 0 && item.searchTextReads === 0 && item.favoritesReads === 0 && item.affiliateUrlReads === 0 && item.pentagramMenu === true && item.oneOrb === true && item.base === 621));
 check('activate:pentagram-menu-v613', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_PENTAGRAM_MENU_ACTIVE' && item.symbol === 'pentagrama-vermelho' && item.position === 'top-corner' && item.global === true && item.globalMenuOnEveryPage === true && item.pentagramVisibleWhileMenuOpen === true && item.pentagramTogglesMenu === true && item.arrivalStateRecovery === true && item.publicWorlds === 15 && item.maximumVisibleIntentions === 2 && item.menuLife === 'birth-breath-answer-silence' && item.whitInsideMenu === true && item.tarotOrbAction === 'reveal-only' && item.tarotOrbOpensMenu === false && item.tarotOrbMenuListenersBypassed === true && item.oneOrb === true));
 
 const onlineNavigation = await harness.fetchEvent(new FakeRequest('https://divina.test/index.html#music', { mode:'navigate' }));
-check('fetch:navigation-network', (await onlineNavigation.text()).includes('name="divina-work13" content="V621"'));
+check('fetch:navigation-network', (await onlineNavigation.text()).includes('name="divina-work13" content="V622"'));
 harness.offline(true);
 const offlineNavigation = await harness.fetchEvent(new FakeRequest('https://divina.test/index.html#skins', { mode:'navigate' }));
 check('fetch:navigation-offline', (await offlineNavigation.text()).includes('name="divina-work12" content="V600"'));
 harness.offline(false);
 
 for (const [file, needle] of [
-  ['app-v208.js?v=621-consultas-templo-do-encontro','divinaWork13ConsultasWorldV621'],
+  ['app-v208.js?v=622-loja-casa-das-escolhas-vivas','divinaWork13LojaWorldV622'],
   ['tarot-livre-soul-v610.js?v=614-camara-vazio-violeta','TAROT_LIVRE_WORLD_CONTRACT_V614'],
   ['tarot-livre-world-v614.css?v=614-camara-vazio-violeta','[data-tarot-world="v614"]'],
   ['carta-do-dia-soul-v610.js?v=610-work13-daily-soul','CARTA_DO_DIA_SOUL_CONTRACT_V610'],
@@ -321,6 +327,8 @@ for (const [file, needle] of [
   ['whit-world-v620.css?v=620-presenca-entre-mundos','[data-work13-whit-world="v620"]'],
   ['consultas-world-v621.js?v=621-templo-do-encontro','CONSULTAS_WORLD_CONTRACT_V621'],
   ['consultas-world-v621.css?v=621-templo-do-encontro','[data-work13-consultas-world="v621"]'],
+  ['loja-world-v622.js?v=622-casa-das-escolhas-vivas','LOJA_WORLD_CONTRACT_V622'],
+  ['loja-world-v622.css?v=622-casa-das-escolhas-vivas','[data-work13-loja-world="v622"]'],
   ['cosmos-entry-intention-v610.js?v=613-menu-global-vivo','COSMOS_ENTRY_INTENTION_CONTRACT_V610'],
   ['cosmos-entry-intention-v610.css?v=613-menu-global-vivo','.cosmos-entry-intent'],
   ['cosmos-world-presence-v610.js?v=610-work13-final-presence','COSMOS_WORLD_PRESENCE_CONTRACT_V610'],
@@ -347,17 +355,17 @@ for (const [file, needle] of [
 }
 
 await harness.message({ type:'WORK12_STATUS' });
-check('message:status-version', harness.sourceMessages.some(item => item.type === 'WORK12_STATUS' && item.version === 621));
-check('message:status-seventy-assets', harness.sourceMessages.some(item => item.core?.length === 70));
+check('message:status-version', harness.sourceMessages.some(item => item.type === 'WORK12_STATUS' && item.version === 622));
+check('message:status-seventy-two-assets', harness.sourceMessages.some(item => item.core?.length === 72));
 await harness.message({ type:'CLEAR_DIVINA_CACHES' });
 check('message:clear-caches', !harness.stores.has(cacheName));
-check('message:clear-confirmed', harness.sourceMessages.some(item => item.type === 'DIVINA_CACHES_CLEARED' && item.version === 621));
+check('message:clear-confirmed', harness.sourceMessages.some(item => item.type === 'DIVINA_CACHES_CLEARED' && item.version === 622));
 
 const failures = checks.filter(item => !item.pass);
 console.log(JSON.stringify({
-  release:'V621',
+  release:'V622',
   work:'WORK13',
-  macroStage:'WORK13 / consultas-templo-do-encontro-service-worker-runtime',
+  macroStage:'WORK13 / loja-casa-das-escolhas-vivas-service-worker-runtime',
   state:failures.length ? 'FAIL' : 'PASS',
   passed:checks.length - failures.length,
   failed:failures.length,

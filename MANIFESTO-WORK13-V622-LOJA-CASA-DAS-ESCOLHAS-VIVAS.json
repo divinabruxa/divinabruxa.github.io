@@ -1,0 +1,102 @@
+{
+  "release": "V622",
+  "work": "WORK13",
+  "world": "Loja",
+  "universe": "casa-das-escolhas-vivas",
+  "baseRequired": "V621",
+  "work14": false,
+  "law": "one-orb-one-universe-one-presence-one-journey",
+  "identity": "night-emerald-patina-copper-amber-parchment",
+  "sequence": [
+    "arrival",
+    "one-clear-intention",
+    "four-curated-paths",
+    "one-explicit-path",
+    "twenty-one-curated-choices",
+    "category-search-or-favorites-on-explicit-request",
+    "product-truth",
+    "external-amazon-passage",
+    "return",
+    "silence"
+  ],
+  "catalog": {
+    "storeAuthority": "V543-preserved",
+    "products": 21,
+    "intentionPaths": 4,
+    "categories": 9,
+    "productCategories": 8,
+    "featuredChoices": 7,
+    "manualCurated": true,
+    "freeAccess": true
+  },
+  "protected": {
+    "work12": "V600",
+    "home": true,
+    "canonicalOrb": true,
+    "canonicalCanvas": true,
+    "globalPentagramMenu": "V613",
+    "tarot": "V614",
+    "library": "V615",
+    "daily": "V616",
+    "spreads": "V617",
+    "school": "V618",
+    "journal": "V619",
+    "whit": "V620",
+    "consultations": "V621",
+    "realityChambers": "V596",
+    "livingCommerce": "V608"
+  },
+  "commerce": {
+    "destinationHost": "www.amazon.com.br",
+    "checkout": "external-amazon-only",
+    "checkoutInternal": false,
+    "realBilling": false,
+    "priceCache": false,
+    "stockCache": false,
+    "ratingCache": false,
+    "fakeDiscountClaims": 0,
+    "fakeScarcityClaims": 0,
+    "officialPartnershipClaim": false,
+    "affiliateDisclosureAdjacent": true,
+    "affiliateTagAuthority": "V543-config-preserved",
+    "affiliateTagHardcodedByV622": false,
+    "affiliateTagChanges": 0
+  },
+  "privacy": {
+    "privateByDefault": true,
+    "searchLocalOnly": true,
+    "favoritesLocalOnly": true,
+    "privateContentReads": 0,
+    "searchTextReads": 0,
+    "favoritesReads": 0,
+    "affiliateUrlReads": 0,
+    "accountDataReads": 0,
+    "paymentDataReads": 0,
+    "journalBodyReads": 0,
+    "consultationBodyReads": 0,
+    "networkCallsAdded": 0,
+    "modelCallsAdded": 0
+  },
+  "performance": {
+    "coreAssets": 72,
+    "newImages": 0,
+    "newCanvases": 0,
+    "newRenderers": 0,
+    "permanentAnimationLoops": 0,
+    "mutationObservers": 0,
+    "deferredTimers": 0
+  },
+  "validation": {
+    "suites": 47,
+    "checks": 4880,
+    "failures": 0,
+    "iphoneAutomatedGeometries": 8,
+    "physicalDeviceTest": false,
+    "productionPublish": false
+  },
+  "install": {
+    "flatZip": true,
+    "deleteOtherFiles": false,
+    "replaceExistingNamesOnly": true
+  }
+}

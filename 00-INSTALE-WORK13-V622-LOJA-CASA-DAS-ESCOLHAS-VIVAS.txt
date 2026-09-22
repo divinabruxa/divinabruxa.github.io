@@ -1,0 +1,35 @@
+DIVINA BRUXA — WORK13 V622
+LOJA · CASA DAS ESCOLHAS VIVAS
+
+BASE OBRIGATÓRIA
+WORK13 V621 já instalado.
+
+INSTALAÇÃO
+1. Faça uma cópia de segurança da instalação V621.
+2. Abra este ZIP e envie todos os arquivos diretamente para a raiz do site.
+3. Substitua somente os arquivos com nomes já existentes.
+4. Não apague nenhum outro arquivo do site.
+5. Limpe o cache da hospedagem/CDN, se houver.
+6. No iPhone, feche o site, abra novamente e aceite uma única atualização.
+
+TESTE CURTO
+1. Abra o pentagrama e entre em Loja.
+2. Confirme a Casa das Escolhas Vivas em esmeralda noturna, cobre, âmbar e pergaminho.
+3. Toque em “Escolher uma intenção”: devem surgir quatro caminhos antes do catálogo.
+4. Escolha um caminho, use uma categoria, a busca e um favorito.
+5. Abra uma escolha: preço, estoque, vendedor e compra devem continuar confirmados na Amazon.
+6. Volte, abra o pentagrama, visite outra realidade e retorne à Loja.
+7. Confirme: uma Orbe, um menu, 21 escolhas preservadas e nenhum travamento.
+
+VERDADE COMERCIAL
+- A Loja é curadoria editorial com acesso gratuito.
+- A compra continua externa, diretamente na Amazon.
+- A V622 não inventa preço, estoque, avaliação, desconto, escassez ou parceria oficial.
+- A identificação de associado continua sob a configuração existente da V543; este pacote não a altera nem a replica.
+
+ESTE PACOTE NÃO RECRIA A HOME, NÃO ALTERA A ORBE, NÃO TROCA O MENU E NÃO CRIA WORK14.
+
+VALIDAÇÃO
+47 suítes · 4.880 verificações · 0 falhas
+8 geometrias iPhone automatizadas: 4 retratos e 4 paisagens.
+

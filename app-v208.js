@@ -87,6 +87,7 @@ import { createDiarioSoulV610 } from './diario-soul-v610.js?v=610-work13-journal
 import { createDiarioWorldV619 } from './diario-world-v619.js?v=619-camara-da-tinta-viva';
 import { createWhitWorldV620 } from './whit-world-v620.js?v=620-presenca-entre-mundos';
 import { createConsultasWorldV621 } from './consultas-world-v621.js?v=621-templo-do-encontro';
+import { createLojaWorldV622 } from './loja-world-v622.js?v=622-casa-das-escolhas-vivas';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -651,6 +652,10 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK13_LOJA_WORLD_ACTIVE') {
+    document.documentElement.dataset.work13LojaWorldWorker = `v${event.data.version || 622}`;
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK13_CONSULTAS_WORLD_ACTIVE') {
     document.documentElement.dataset.work13ConsultasWorldWorker = `v${event.data.version || 621}`;
     return;
@@ -811,14 +816,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v621-consultas-templo-do-encontro-app';
+  window.__divinaSWBootstrap = 'v622-loja-casa-das-escolhas-vivas-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=621-consultas-templo-do-encontro', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=622-loja-casa-das-escolhas-vivas', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v621-consultas-templo-do-encontro';
+        document.documentElement.dataset.releaseEpoch = 'v622-loja-casa-das-escolhas-vivas';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] WORK13 V621 · Templo do Encontro; V620 e WORK12 V600 protegidos');
+        console.info('[Divina] WORK13 V622 · Casa das Escolhas Vivas; V621 e WORK12 V600 protegidos');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -2378,6 +2383,13 @@ const consultasWorld = safely('WORK13 · Consultas · Templo do Encontro V621', 
     chambers:realityChambers
   })
 );
+const lojaWorld = safely('WORK13 · Loja · Casa das Escolhas Vivas V622', () =>
+  createLojaWorldV622({
+    amazonStore,
+    livingCommerce:livingCommercePath,
+    chambers:realityChambers
+  })
+);
 window.orbe.finalOrchestra = cosmosFinalOrchestra;
 window.orbe.cosmosSeal = cosmosFinalOrchestra;
 window.orbe.entryIntention = cosmosEntryIntention;
@@ -2394,6 +2406,7 @@ window.orbe.diarioSoul = diarioSoul;
 window.orbe.diarioWorld = diarioWorld;
 window.orbe.whitWorld = whitWorld;
 window.orbe.consultasWorld = consultasWorld;
+window.orbe.lojaWorld = lojaWorld;
 window.divinaWork13TarotLivreSoulV610 = Object.freeze({
   version:610,
   work:'WORK13',
@@ -2515,6 +2528,17 @@ window.divinaWork13ConsultasWorldV621 = Object.freeze({
   status:() => consultasWorld?.status?.() || null,
   work14:false
 });
+window.divinaWork13LojaWorldV622 = Object.freeze({
+  version:622,
+  work:'WORK13',
+  stage:'renovacao-dos-mundos-9-loja',
+  reality:'store',
+  universe:'casa-das-escolhas-vivas',
+  base:window.divinaWork13ConsultasWorldV621,
+  world:lojaWorld,
+  status:() => lojaWorld?.status?.() || null,
+  work14:false
+});
 document.documentElement.dataset.work13 = 'cosmos-vivo';
 document.documentElement.dataset.work13Macro = '10-final-orchestra';
 window.divinaWork13Macro10V610 = Object.freeze({
@@ -2537,6 +2561,7 @@ window.divinaWork13Macro10V610 = Object.freeze({
   diarioWorld,
   whitWorld,
   consultasWorld,
+  lojaWorld,
   contextMemory:cosmosContextMemory,
   resonance:cosmosRealityResonance,
   dailyReading:cosmicDailyReading,
@@ -2587,6 +2612,7 @@ window.divinaWork13Macro10V610 = Object.freeze({
       diarioWorldStatus:diarioWorld?.status?.() || null,
       whitWorldStatus:whitWorld?.status?.() || null,
       consultasWorldStatus:consultasWorld?.status?.() || null,
+      lojaWorldStatus:lojaWorld?.status?.() || null,
       realitySouls:6,
       allMenuDestinationsHaveFullScreens:cosmosWorldPresence?.audit?.().everyMenuDestinationHasFullScreen === true,
       livingLayers:Object.freeze([602,603,604,605,606,607,608,609]),
@@ -2790,13 +2816,15 @@ window.divinaCosmosVivoV618 = window.divinaWork13EscolaWorldV618;
 window.divinaCosmosVivoV619 = window.divinaWork13DiarioWorldV619;
 window.divinaCosmosVivoV620 = window.divinaWork13WhitWorldV620;
 window.divinaCosmosVivoV621 = window.divinaWork13ConsultasWorldV621;
-document.documentElement.dataset.work13Macro = 'consultas-templo-do-encontro';
+window.divinaCosmosVivoV622 = window.divinaWork13LojaWorldV622;
+document.documentElement.dataset.work13Macro = 'loja-casa-das-escolhas-vivas';
 document.documentElement.dataset.work13SpreadsWorld = 'v617';
 document.documentElement.dataset.work13SchoolWorld = 'v618';
 document.documentElement.dataset.work13JournalWorld = 'v619';
 document.documentElement.dataset.work13WhitWorld = 'v620';
 document.documentElement.dataset.work13ConsultasWorld = 'v621';
-window.divinaCosmosVivo = window.divinaWork13ConsultasWorldV621;
+document.documentElement.dataset.work13LojaWorld = 'v622';
+window.divinaCosmosVivo = window.divinaWork13LojaWorldV622;
 window.whit = whitCore;
 
 window.divinaWhitV212 = Object.freeze({
