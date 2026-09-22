@@ -1,16 +1,16 @@
-/* DIVINA BRUXA — WORK13 · DIARIO · CAMARA DA TINTA VIVA · V619
-   O WORK12 V600 e os mundos V614-V618 permanecem protegidos. A instalacao so
-   assume quando o Diario preserva escrita direta, autosave, privacidade,
-   memorias e Espelho agregado, sempre usando a mesma Orbe.
+/* DIVINA BRUXA — WORK13 · WHIT · PRESENCA ENTRE MUNDOS · V620
+   O WORK12 V600 e os mundos V614-V619 permanecem protegidos. A instalacao so
+   assume quando Whit preserva silencio, privacidade, memoria local e contexto
+   consentido, sempre usando a mesma Orbe e o mesmo corpo funcional.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
-const VERSION = 619;
+const VERSION = 620;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work13-v619-diario-camara-tinta-viva';
+const CACHE_NAME = 'divina-bruxa-work13-v620-whit-presenca-entre-mundos';
 const CORE = Object.freeze([
   './index.html',
-  './app-v208.js?v=619-diario-camara-da-tinta-viva',
+  './app-v208.js?v=620-whit-presenca-entre-mundos',
   './pentagrama-menu-vivo-v611.webp',
   './tarot-livre-soul-v610.js?v=614-camara-vazio-violeta',
   './tarot-livre-world-v614.css?v=614-camara-vazio-violeta',
@@ -32,6 +32,8 @@ const CORE = Object.freeze([
   './diario-soul-v610.css?v=610-work13-journal-soul',
   './diario-world-v619.js?v=619-camara-da-tinta-viva',
   './diario-world-v619.css?v=619-camara-da-tinta-viva',
+  './whit-world-v620.js?v=620-presenca-entre-mundos',
+  './whit-world-v620.css?v=620-presenca-entre-mundos',
   './cosmos-entry-intention-v610.js?v=613-menu-global-vivo',
   './cosmos-entry-intention-v610.css?v=613-menu-global-vivo',
   './cosmos-world-presence-v610.js?v=610-work13-final-presence',
@@ -89,7 +91,7 @@ const fetchCore = async path => {
 
 const validateCore = async responses => {
   const index = await responses.get('./index.html')?.clone().text();
-  const app = await responses.get('./app-v208.js?v=619-diario-camara-da-tinta-viva')?.clone().text();
+  const app = await responses.get('./app-v208.js?v=620-whit-presenca-entre-mundos')?.clone().text();
   const tarotLivreSoul = await responses.get('./tarot-livre-soul-v610.js?v=614-camara-vazio-violeta')?.clone().text();
   const tarotLivreSoulStyles = await responses.get('./tarot-livre-world-v614.css?v=614-camara-vazio-violeta')?.clone().text();
   const cartaDoDiaSoul = await responses.get('./carta-do-dia-soul-v610.js?v=610-work13-daily-soul')?.clone().text();
@@ -110,6 +112,8 @@ const validateCore = async responses => {
   const diarioSoulStyles = await responses.get('./diario-soul-v610.css?v=610-work13-journal-soul')?.clone().text();
   const diarioWorld = await responses.get('./diario-world-v619.js?v=619-camara-da-tinta-viva')?.clone().text();
   const diarioWorldStyles = await responses.get('./diario-world-v619.css?v=619-camara-da-tinta-viva')?.clone().text();
+  const whitWorld = await responses.get('./whit-world-v620.js?v=620-presenca-entre-mundos')?.clone().text();
+  const whitWorldStyles = await responses.get('./whit-world-v620.css?v=620-presenca-entre-mundos')?.clone().text();
   const entryIntention = await responses.get('./cosmos-entry-intention-v610.js?v=613-menu-global-vivo')?.clone().text();
   const entryStyles = await responses.get('./cosmos-entry-intention-v610.css?v=613-menu-global-vivo')?.clone().text();
   const worldPresence = await responses.get('./cosmos-world-presence-v610.js?v=610-work13-final-presence')?.clone().text();
@@ -153,11 +157,11 @@ const validateCore = async responses => {
   const soul = await responses.get('./whit-orb-soul-bridge-v581.js?v=592-work12-navigation')?.clone().text();
   if (!index?.includes('name="divina-work12" content="V600"')
     || !index.includes('name="divina-live-audit" content="V600"')
-    || !index.includes('name="divina-work13" content="V619"')) {
+    || !index.includes('name="divina-work13" content="V620"')) {
     throw new Error('work13-index-version-mismatch');
   }
-  if (!index.includes('app-v208.js?v=619-diario-camara-da-tinta-viva')
-    || !index.includes('name="divina-work13-correction" content="V619-DIARIO-CAMARA-DA-TINTA-VIVA"')
+  if (!index.includes('app-v208.js?v=620-whit-presenca-entre-mundos')
+    || !index.includes('name="divina-work13-correction" content="V620-WHIT-PRESENCA-ENTRE-MUNDOS"')
     || !index.includes('id="divinaCosmosEntryIntentionV610"')
     || !index.includes('cosmos-entry-intention-v610.css?v=613-menu-global-vivo')
     || !index.includes('id="divinaCosmosWorldPresenceV610"')
@@ -739,6 +743,69 @@ const validateCore = async responses => {
     || /@keyframes|animation\s*:|backdrop-filter|filter\s*:/.test(diarioWorldStyles)) {
     throw new Error('work13-diario-world-styles-missing');
   }
+  if (!app.includes("whit-world-v620.js?v=620-presenca-entre-mundos")
+    || !app.includes('createWhitWorldV620({')
+    || !app.includes('window.orbe.whitWorld = whitWorld')
+    || !app.includes('window.divinaWork13WhitWorldV620')
+    || !app.includes("stage:'renovacao-dos-mundos-7-whit'")
+    || !app.includes("universe:'presenca-entre-mundos'")) {
+    throw new Error('work13-whit-world-app-mismatch');
+  }
+  if (!whitWorld?.includes('WHIT_WORLD_CONTRACT_V620')
+    || !whitWorld.includes("universe:'presenca-entre-mundos'")
+    || !whitWorld.includes("identity:'midnight-indigo-opal-electric-cyan'")
+    || !whitWorld.includes("'arrival','silence','one-explicit-invitation','listening'")
+    || !whitWorld.includes("'one-local-response','visible-session-trace'")
+    || !whitWorld.includes("'context-on-explicit-consent','return','silence'")
+    || !whitWorld.includes("localWhitAuthority:'V557-preserved'")
+    || !whitWorld.includes("orbSoulAuthority:'V581-preserved'")
+    || !whitWorld.includes("livingPresenceAuthority:'V594-preserved'")
+    || !whitWorld.includes("silenceTimingAuthority:'V606-preserved'")
+    || !whitWorld.includes('localDefaultPreserved:true')
+    || !whitWorld.includes('accountRequired:false')
+    || !whitWorld.includes('localApiCallsPreserved:0')
+    || !whitWorld.includes('localModelCallsPreserved:0')
+    || !whitWorld.includes('localCreditsUsedPreserved:0')
+    || !whitWorld.includes('sessionMemoryTurnsPreserved:6')
+    || !whitWorld.includes('sessionMemoryPersistent:false')
+    || !whitWorld.includes('visibleContextOnly:true')
+    || !whitWorld.includes('sendConsentRequired:true')
+    || !whitWorld.includes("defaultResponse:'silence'")
+    || !whitWorld.includes("visibleSpeechPolicy:'explicit-invitation-or-consent-only'")
+    || !whitWorld.includes('privateByDefault:true')
+    || !whitWorld.includes('journalSilentReads:0')
+    || !whitWorld.includes('schoolNoteSilentReads:0')
+    || !whitWorld.includes('tarotQuestionSilentReads:0')
+    || !whitWorld.includes('privateContentReads:0')
+    || !whitWorld.includes('formValueReads:0')
+    || !whitWorld.includes('messageBodyReads:0')
+    || !whitWorld.includes('storageReads:0')
+    || !whitWorld.includes('networkCalls:0')
+    || !whitWorld.includes('modelCalls:0')
+    || !whitWorld.includes('existingWhitBodyReused:true')
+    || !whitWorld.includes('separateWhitBody:false')
+    || !whitWorld.includes('reusesCanonicalOrb:true')
+    || !whitWorld.includes('permanentAnimationLoops:0')
+    || !whitWorld.includes('mutationObservers:0')
+    || !whitWorld.includes('deferredTimers:0')
+    || !whitWorld.includes('work14:false')) {
+    throw new Error('work13-whit-world-contract-missing');
+  }
+  if (!whitWorldStyles?.includes('[data-work13-whit-world="v620"]')
+    || !whitWorldStyles.includes('[data-whit-world="v620"]')
+    || !whitWorldStyles.includes('[data-whit-world-phase="listening"]')
+    || !whitWorldStyles.includes('[data-whit-world-phase="responding"]')
+    || !whitWorldStyles.includes('[data-whit-world-phase="present"]')
+    || !whitWorldStyles.includes('[data-whit-world-phase="silence"]')
+    || !whitWorldStyles.includes('#aiApp')
+    || !whitWorldStyles.includes('content-visibility:auto')
+    || !whitWorldStyles.includes('env(safe-area-inset-top)')
+    || !whitWorldStyles.includes('@media(max-width:430px)')
+    || !whitWorldStyles.includes('@media(orientation:landscape)')
+    || !whitWorldStyles.includes('@media(prefers-reduced-motion:reduce)')
+    || /@keyframes|animation\s*:|backdrop-filter|filter\s*:/.test(whitWorldStyles)) {
+    throw new Error('work13-whit-world-styles-missing');
+  }
   if (!entryIntention?.includes('COSMOS_ENTRY_INTENTION_CONTRACT_V610')
     || !entryIntention.includes("invitation:'pentagrama-vermelho'")
     || !entryIntention.includes('entryIntentions:1')
@@ -1174,6 +1241,7 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK13_LIBRARY_WORLD_ACTIVE', version:VERSION, reality:'library', universe:'arquivo-de-luz-sala-dos-fios-vivos', sequence:['arrival','threshold','one-discovery','silence','symbolic-thread','related-doors','catalogue-on-explicit-request'], pentagramMenu:true, oneOrb:true, base:614, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_JOURNAL_SOUL_ACTIVE', version:VERSION, reality:'journal', universe:'camara-da-tinta-lunar', privateByDefault:true, directWritingFirst:true, silentAutosave:true, timelinePageSize:12, mirrorAggregateOnly:true, mirrorDiagnosis:false, oneOrb:true, base:600, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_JOURNAL_WORLD_ACTIVE', version:VERSION, reality:'journal', universe:'camara-da-tinta-viva', sequence:['arrival','orb-threshold','blank-page','direct-writing','silent-autosave','ink-settles','optional-details','memories-on-explicit-request','aggregate-mirror-on-explicit-request','return','silence'], directWritingFirst:true, blankPageFirst:true, silentAutosave:true, privateByDefault:true, adminBodyAccess:false, analyticsBodyAccess:false, whitSilentRead:false, whitShareRequiresExplicitTemporaryConsent:true, timelinePageSize:12, mirrorAggregateOnly:true, mirrorDiagnosis:false, mirrorPrediction:false, offline:true, syncConflictProtection:true, pentagramMenu:true, oneOrb:true, base:618, complete:true });
+        client.postMessage({ type:'DIVINA_WORK13_WHIT_WORLD_ACTIVE', version:VERSION, reality:'ai', universe:'presenca-entre-mundos', sequence:['arrival','silence','one-explicit-invitation','listening','one-local-response','visible-session-trace','context-on-explicit-consent','return','silence'], localDefault:true, accountRequired:false, sessionMemoryTurns:6, sessionMemoryPersistent:false, sessionMemoryVisible:true, contextExplicitConsent:true, privateByDefault:true, privateContentReads:0, journalSilentReads:0, schoolNoteSilentReads:0, tarotQuestionSilentReads:0, automaticSpeech:false, pentagramMenu:true, oneOrb:true, base:619, complete:true });
         client.postMessage({ type:'DIVINA_RELEASE_READY', version:VERSION });
       } catch {}
     }

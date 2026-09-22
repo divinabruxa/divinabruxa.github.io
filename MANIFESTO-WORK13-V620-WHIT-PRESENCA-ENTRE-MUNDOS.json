@@ -1,0 +1,74 @@
+{
+  "release": "V620",
+  "work": "WORK13",
+  "world": "Whit",
+  "universe": "presenca-entre-mundos",
+  "baseRequired": "V619",
+  "work14": false,
+  "law": "one-orb-one-universe-one-presence-one-journey",
+  "identity": "midnight-indigo-opal-electric-cyan",
+  "sequence": [
+    "arrival",
+    "silence",
+    "one-explicit-invitation",
+    "listening",
+    "one-local-response",
+    "visible-session-trace",
+    "context-on-explicit-consent",
+    "return",
+    "silence"
+  ],
+  "protected": {
+    "work12": "V600",
+    "home": true,
+    "canonicalOrb": true,
+    "canonicalCanvas": true,
+    "globalPentagramMenu": "V613",
+    "tarot": "V614",
+    "library": "V615",
+    "daily": "V616",
+    "spreads": "V617",
+    "school": "V618",
+    "journal": "V619",
+    "whitLocal": "V557",
+    "whitOrbSoul": "V581",
+    "whitLivingPresence": "V594",
+    "whitSilenceTiming": "V606"
+  },
+  "privacy": {
+    "privateByDefault": true,
+    "sessionMemoryTurns": 6,
+    "sessionMemoryPersistent": false,
+    "persistentMemoryExplicitOnly": true,
+    "contextConsentRequired": true,
+    "privateContentReads": 0,
+    "formValueReads": 0,
+    "messageBodyReads": 0,
+    "journalSilentReads": 0,
+    "schoolNoteSilentReads": 0,
+    "tarotQuestionSilentReads": 0,
+    "networkCallsAdded": 0,
+    "modelCallsAdded": 0
+  },
+  "performance": {
+    "coreAssets": 68,
+    "newCanvases": 0,
+    "newRenderers": 0,
+    "permanentAnimationLoops": 0,
+    "mutationObservers": 0,
+    "deferredTimers": 0
+  },
+  "validation": {
+    "suites": 41,
+    "checks": 4224,
+    "failures": 0,
+    "iphoneAutomatedGeometries": 8,
+    "physicalDeviceTest": false,
+    "productionPublish": false
+  },
+  "install": {
+    "flatZip": true,
+    "deleteOtherFiles": false,
+    "replaceExistingNamesOnly": true
+  }
+}
