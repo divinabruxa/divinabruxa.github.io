@@ -25,8 +25,8 @@ ok(count(html,/id="orbCanvas"/g) === 1, 'um canvas canônico');
 ok(count(html,/<section id="ai"/g) === 1, 'um mundo Whit');
 ok(count(html,/id="aiApp"/g) === 1, 'um app Whit');
 ok(!/id="(?:whit|ai)OrbV620"/.test(html), 'nenhuma Orbe duplicada');
-ok(html.includes('name="divina-work13" content="V620"') && html.includes('V620-WHIT-PRESENCA-ENTRE-MUNDOS'), 'release V620');
-ok(html.includes('app-v208.js?v=620-whit-presenca-entre-mundos'), 'app V620');
+ok(html.includes('name="divina-work13" content="V621"') && html.includes('V621-CONSULTAS-TEMPLO-DO-ENCONTRO'), 'release cumulativa V621');
+ok(html.includes('app-v208.js?v=621-consultas-templo-do-encontro'), 'app cumulativo V621');
 
 ok(count(app,/createWhitWorldV620/g) === 2, 'importação e criação únicas');
 ok(app.includes("whit-world-v620.js?v=620-presenca-entre-mundos"), 'mundo ligado ao app');
@@ -38,7 +38,7 @@ ok(app.includes("universe:'presenca-entre-mundos'"), 'universo declarado');
 ok(app.includes('whitWorldStatus:whitWorld?.status?.() || null'), 'auditoria reunida');
 ok(app.includes("event.data?.type === 'DIVINA_WORK13_WHIT_WORLD_ACTIVE'"), 'worker ouvido');
 ok(app.includes('window.divinaCosmosVivoV620'), 'continuidade pública V620');
-ok(app.includes("document.documentElement.dataset.work13Macro = 'whit-presenca-entre-mundos'"), 'macroetapa ativa');
+ok(app.includes("document.documentElement.dataset.work13Macro = 'consultas-templo-do-encontro'"), 'macroetapa seguinte ativa');
 ok(app.includes("document.documentElement.dataset.work13JournalWorld = 'v619'"), 'Diário V619 permanece');
 ok(app.includes('work14:false'), 'nenhum WORK14');
 
@@ -106,8 +106,8 @@ ok(soul.includes("'divina:work12-state'") && soul.includes('const API_COMPATIBIL
 ok(entry.includes('globalMenuOnEveryPage:true') && entry.includes('pentagramVisibleWhileMenuOpen:true'), 'menu mágico permanece global');
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core,/^\s*'\.\//gm) === 68, '68 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v620-whit-presenca-entre-mundos'"), 'cache próprio');
+ok(count(core,/^\s*'\.\//gm) === 70, '70 ativos atômicos');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v621-consultas-templo-do-encontro'"), 'cache próprio');
 ok(sw.includes("'./whit-world-v620.js?v=620-presenca-entre-mundos'"), 'JS no cache');
 ok(sw.includes("'./whit-world-v620.css?v=620-presenca-entre-mundos'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_WHIT_WORLD_ACTIVE'), 'ativação comunicada');

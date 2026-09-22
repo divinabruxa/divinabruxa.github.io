@@ -1,0 +1,413 @@
+/* DIVINA BRUXA — WORK13 · CONSULTAS · TEMPLO DO ENCONTRO · V621
+   Granada, madeira rosada, ouro de vela e marfim lunar. O motor V558 permanece
+   inteiro; esta camada somente revela a arquitetura viva do encontro. */
+
+html[data-work13-consultas-world="v621"] #consultations[data-consultas-world="v621"]{
+  --cw621-void:12,4,10;
+  --cw621-wine:45,8,22;
+  --cw621-garnet:103,22,47;
+  --cw621-rosewood:133,66,72;
+  --cw621-gold:227,180,103;
+  --cw621-ivory:255,244,221;
+  --cw621-ash:193,168,165;
+  position:relative;
+  isolation:isolate;
+  box-sizing:border-box;
+  min-block-size:100dvh;
+  padding-block-start:max(18px,env(safe-area-inset-top));
+  padding-block-end:max(78px,env(safe-area-inset-bottom));
+  overflow-x:clip;
+  color:rgba(var(--cw621-ivory),.92);
+  background:
+    radial-gradient(ellipse 48% 38% at 50% 0,rgba(var(--cw621-gold),.13),transparent 72%),
+    radial-gradient(ellipse 58% 72% at 0 58%,rgba(var(--cw621-garnet),.24),transparent 76%),
+    radial-gradient(ellipse 52% 68% at 100% 76%,rgba(var(--cw621-rosewood),.17),transparent 78%),
+    linear-gradient(164deg,rgb(var(--cw621-wine)),rgb(var(--cw621-void)) 76%);
+}
+
+html[data-work13-consultas-world="v621"] #consultations[data-consultas-world="v621"]::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  pointer-events:none;
+  inset:clamp(54px,9svh,112px) 50% auto auto;
+  inline-size:min(78%,720px);
+  block-size:min(72svh,760px);
+  border:1px solid rgba(var(--cw621-gold),.15);
+  border-block-end-color:transparent;
+  border-radius:50% 50% 18px 18px / 30% 30% 18px 18px;
+  transform:translateX(50%) scale(1);
+  opacity:.78;
+  transition:opacity 240ms ease,transform 380ms cubic-bezier(.2,.78,.2,1),border-color 240ms ease;
+}
+
+html[data-work13-consultas-world="v621"] #consultations[data-consultas-world="v621"]::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  pointer-events:none;
+  inset:auto 12% max(78px,env(safe-area-inset-bottom));
+  block-size:1px;
+  background:linear-gradient(90deg,transparent,rgba(var(--cw621-gold),.30),transparent);
+  opacity:.52;
+  transition:opacity 230ms ease,transform 320ms ease;
+}
+
+html[data-work13-consultas-world="v621"] #consultations:is(
+  [data-consultas-world-phase="invitation"],
+  [data-consultas-world-phase="choices"]
+)::before{
+  border-color:rgba(var(--cw621-gold),.34);
+  border-block-end-color:transparent;
+  transform:translateX(50%) scale(1.012);
+}
+
+html[data-work13-consultas-world="v621"] #consultations:is(
+  [data-consultas-world-phase="request"],
+  [data-consultas-world-phase="details"],
+  [data-consultas-world-phase="review"]
+)::before{
+  opacity:.38;
+  transform:translateX(50%) scale(.984);
+}
+
+html[data-work13-consultas-world="v621"] #consultations:is(
+  [data-consultas-world-phase="portal"],
+  [data-consultas-world-phase="travel"]
+)::before,
+html[data-work13-consultas-world="v621"] #consultations:is(
+  [data-consultas-world-phase="portal"],
+  [data-consultas-world-phase="travel"]
+)::after{
+  opacity:0;
+}
+
+html[data-work13-consultas-world="v621"] #consultations > :is(.eyebrow,.lead){
+  display:none!important;
+}
+
+html[data-work13-consultas-world="v621"] #consultations > h2{
+  position:relative;
+  z-index:1;
+  width:min(calc(100% - 32px),760px);
+  margin:clamp(20px,6svh,64px) auto clamp(28px,5svh,54px);
+  color:rgba(var(--cw621-ivory),.98);
+  font:400 clamp(1.72rem,5.5vw,2.9rem)/1.08 Georgia,"Times New Roman",serif;
+  letter-spacing:-.035em;
+  text-align:center;
+  text-wrap:balance;
+  text-shadow:0 0 34px rgba(var(--cw621-gold),.12);
+  transition:opacity 190ms ease,transform 230ms ease;
+}
+
+html[data-work13-consultas-world="v621"] #consultations > h2::before{
+  content:"CONSULTAS · TEMPLO DO ENCONTRO";
+  display:block;
+  margin-block-end:13px;
+  color:rgba(var(--cw621-gold),.76);
+  font:780 .62rem/1.4 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  letter-spacing:.21em;
+}
+
+html[data-work13-consultas-world="v621"] #consultations:is(
+  [data-consultas-world-phase="request"],
+  [data-consultas-world-phase="details"],
+  [data-consultas-world-phase="review"],
+  [data-consultas-world-phase="handoff"],
+  [data-consultas-world-phase="protocol"]
+) > h2{
+  opacity:0;
+  transform:translateY(-8px);
+  block-size:0;
+  margin-block:0;
+  overflow:hidden;
+}
+
+html[data-work13-consultas-world="v621"] #consultations #consultationApp{
+  position:relative;
+  z-index:1;
+  width:min(calc(100% - 28px),1040px);
+  margin-inline:auto;
+  padding-block:clamp(4px,2svh,20px) clamp(28px,5svh,60px);
+}
+
+html[data-work13-consultas-world="v621"] #consultations #consultationApp[data-consultas-world="v621"] :is(
+  button,a,input,select,textarea,summary,[contenteditable="true"]
+){
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+
+html[data-work13-consultas-world="v621"] #consultations #consultationApp[data-consultas-world="v621"] :is(button,a,summary){
+  min-block-size:48px;
+}
+
+html[data-work13-consultas-world="v621"] #consultations :is(
+  .db585-intent-threshold,.db608-commerce-guide,.consultations-v147-shell,
+  .consultation-sanctuary,.consultation-flow-stage,.consultation-tracker
+){
+  border-color:rgba(var(--cw621-gold),.17)!important;
+  color:rgba(var(--cw621-ivory),.92)!important;
+  background:
+    radial-gradient(ellipse at 50% 0,rgba(var(--cw621-gold),.055),transparent 48%),
+    linear-gradient(154deg,rgba(var(--cw621-garnet),.22),rgba(var(--cw621-void),.82))!important;
+  box-shadow:inset 0 1px 0 rgba(var(--cw621-ivory),.045),0 34px 86px rgba(0,0,0,.24)!important;
+}
+
+html[data-work13-consultas-world="v621"] #consultations .db608-commerce-guide{
+  width:min(940px,100%);
+  border-radius:62px 86px 54px 76px / 78px 58px 82px 52px!important;
+}
+
+html[data-work13-consultas-world="v621"] #consultations .db608-commerce-guide__seal{
+  border-color:rgba(var(--cw621-gold),.35)!important;
+  color:rgb(var(--cw621-gold))!important;
+  background:rgba(var(--cw621-garnet),.18)!important;
+}
+
+html[data-work13-consultas-world="v621"] #consultations :is(
+  .db608-commerce-guide h3,.consultation-flow-heading h3,
+  .consultation-v147-service h3,.consultation-tracker h3
+){
+  color:rgba(var(--cw621-ivory),.98)!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-weight:400!important;
+  letter-spacing:-.026em!important;
+  text-wrap:balance;
+}
+
+html[data-work13-consultas-world="v621"] #consultations :is(
+  .db608-commerce-guide p,.db608-commerce-guide li,
+  .consultation-flow-stage p,.consultation-v147-service p,
+  .consultation-ideal,.consultation-tracker p,label,legend,small
+){
+  color:rgba(var(--cw621-ash),.78)!important;
+}
+
+html[data-work13-consultas-world="v621"] #consultations :is(
+  .db608-primary,.consultation-v147-service button,
+  .consultation-flow-stage button,.consultation-track-shortcut,
+  [data-open-tracking],[data-toggle-tracking]
+){
+  min-block-size:48px!important;
+  border:1px solid rgba(var(--cw621-gold),.27)!important;
+  border-radius:24px 36px 24px 36px!important;
+  color:rgba(var(--cw621-ivory),.95)!important;
+  background:linear-gradient(142deg,rgba(var(--cw621-garnet),.40),rgba(var(--cw621-wine),.72))!important;
+  box-shadow:inset 0 1px 0 rgba(var(--cw621-ivory),.065)!important;
+  transition:transform 130ms ease,border-color 150ms ease,background-color 150ms ease!important;
+}
+
+html[data-work13-consultas-world="v621"] #consultations :is(
+  .db608-primary,.consultation-v147-service button,
+  .consultation-flow-stage button,.consultation-track-shortcut,
+  [data-open-tracking],[data-toggle-tracking]
+):active{
+  transform:translateY(2px) scale(.986)!important;
+  border-color:rgba(var(--cw621-gold),.68)!important;
+}
+
+html[data-work13-consultas-world="v621"] #consultations .consultation-services-stage{
+  width:min(960px,100%);
+  margin-inline:auto;
+}
+
+html[data-work13-consultas-world="v621"] #consultations .consultation-v147-services{
+  gap:12px!important;
+  padding:4px 3px 16px!important;
+  scroll-padding-inline:3px;
+}
+
+html[data-work13-consultas-world="v621"] #consultations .consultation-v147-service{
+  box-sizing:border-box;
+  min-block-size:304px!important;
+  border:1px solid rgba(var(--cw621-gold),.16)!important;
+  border-radius:46px 64px 40px 58px / 58px 44px 62px 42px!important;
+  color:rgba(var(--cw621-ivory),.93)!important;
+  background:
+    radial-gradient(ellipse at 18% 0,rgba(var(--cw621-gold),.09),transparent 46%),
+    linear-gradient(158deg,rgba(var(--cw621-garnet),.30),rgba(var(--cw621-void),.78))!important;
+  box-shadow:inset 0 1px 0 rgba(var(--cw621-ivory),.045),0 20px 52px rgba(0,0,0,.20)!important;
+  transition:transform 170ms ease,border-color 170ms ease!important;
+}
+
+html[data-work13-consultas-world="v621"] #consultations[data-consultas-world-phase="choices"]
+  .consultation-v147-service > :is(p,.consultation-ideal){
+  display:block!important;
+}
+
+html[data-work13-consultas-world="v621"] #consultations .consultation-v147-service > strong{
+  color:rgb(var(--cw621-gold))!important;
+  font-variant-numeric:tabular-nums;
+}
+
+html[data-work13-consultas-world="v621"] #consultations .consultation-flow-stage{
+  width:min(820px,100%);
+  margin-inline:auto;
+  padding:clamp(18px,4vw,34px)!important;
+  border-radius:48px 66px 42px 60px!important;
+}
+
+html[data-work13-consultas-world="v621"] #consultations :is(
+  form,.consultation-step,.consultation-request,.consultation-review
+){
+  box-sizing:border-box;
+  width:min(760px,100%);
+  margin-inline:auto;
+}
+
+html[data-work13-consultas-world="v621"] #consultations :is(input,select,textarea,[contenteditable="true"]){
+  min-block-size:52px;
+  border:1px solid rgba(var(--cw621-gold),.18)!important;
+  border-radius:20px 28px 20px 28px!important;
+  color:rgba(var(--cw621-ivory),.97)!important;
+  caret-color:rgb(var(--cw621-gold))!important;
+  background:rgba(var(--cw621-void),.55)!important;
+  box-shadow:inset 0 1px 0 rgba(var(--cw621-ivory),.035)!important;
+}
+
+html[data-work13-consultas-world="v621"] #consultations textarea{
+  min-block-size:clamp(126px,22svh,220px);
+  resize:vertical;
+}
+
+html[data-work13-consultas-world="v621"] #consultations :is(input,textarea)::placeholder{
+  color:rgba(var(--cw621-ash),.48)!important;
+}
+
+html[data-work13-consultas-world="v621"] #consultations[data-consultas-world-phase="details"]
+  :is(input,select,textarea,[contenteditable="true"]):focus{
+  border-color:rgba(var(--cw621-gold),.55)!important;
+  background:rgba(var(--cw621-garnet),.12)!important;
+}
+
+html[data-work13-consultas-world="v621"] #consultations .consultation-tracker{
+  width:min(780px,100%);
+  margin-inline:auto;
+  border-radius:44px 62px 40px 58px!important;
+  content-visibility:auto;
+  contain-intrinsic-size:420px;
+}
+
+html[data-work13-consultas-world="v621"] #consultations :is(
+  #consultationApp>*,.db608-commerce-guide,form,.consultation-v147-service,.consultation-tracker
+) :is(button,a,input,select,textarea,summary,[contenteditable="true"]):focus-visible{
+  outline:2px solid rgba(var(--cw621-gold),.94)!important;
+  outline-offset:3px!important;
+}
+
+html[data-experience-budget="essential"][data-work13-consultas-world="v621"] #consultations::before,
+html[data-experience-budget="essential"][data-work13-consultas-world="v621"] #consultations::after{
+  opacity:.18;
+}
+
+@media(min-width:760px){
+  html[data-work13-consultas-world="v621"] #consultations .consultation-v147-services{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    overflow:visible!important;
+  }
+
+  html[data-work13-consultas-world="v621"] #consultations .consultation-v147-service{
+    min-inline-size:0!important;
+  }
+}
+
+@media(max-width:430px){
+  html[data-work13-consultas-world="v621"] #consultations[data-consultas-world="v621"]{
+    min-block-size:100svh;
+    padding-block-start:max(14px,env(safe-area-inset-top));
+    padding-block-end:max(84px,env(safe-area-inset-bottom));
+  }
+
+  html[data-work13-consultas-world="v621"] #consultations[data-consultas-world="v621"]::before{
+    inline-size:calc(100% - 28px);
+    block-size:min(68svh,620px);
+    inset-block-start:62px;
+  }
+
+  html[data-work13-consultas-world="v621"] #consultations > h2{
+    width:min(calc(100% - 28px),390px);
+    margin-block:26px 36px;
+    font-size:clamp(1.58rem,8vw,2.15rem);
+  }
+
+  html[data-work13-consultas-world="v621"] #consultations #consultationApp{
+    width:calc(100% - 16px);
+  }
+
+  html[data-work13-consultas-world="v621"] #consultations .db608-commerce-guide{
+    border-radius:40px 54px 36px 50px / 48px 38px 54px 36px!important;
+  }
+
+  html[data-work13-consultas-world="v621"] #consultations .consultation-v147-service{
+    flex-basis:min(86%,350px)!important;
+    min-block-size:286px!important;
+    border-radius:38px 52px 34px 48px / 46px 36px 52px 34px!important;
+  }
+
+  html[data-work13-consultas-world="v621"] #consultations .consultation-flow-stage{
+    padding:18px 12px!important;
+    border-radius:36px 48px 32px 44px!important;
+  }
+
+  html[data-work13-consultas-world="v621"] #consultations textarea{
+    min-block-size:clamp(112px,20svh,176px);
+  }
+}
+
+@media(orientation:landscape) and (max-height:520px){
+  html[data-work13-consultas-world="v621"] #consultations[data-consultas-world="v621"]{
+    min-block-size:100svh;
+    padding-block-start:max(8px,env(safe-area-inset-top));
+    padding-inline-start:max(8px,env(safe-area-inset-left));
+    padding-inline-end:max(8px,env(safe-area-inset-right));
+  }
+
+  html[data-work13-consultas-world="v621"] #consultations > h2{
+    margin-block:10px 18px;
+    font-size:1.42rem;
+  }
+
+  html[data-work13-consultas-world="v621"] #consultations[data-consultas-world="v621"]::before{
+    block-size:82svh;
+    inset-block-start:22px;
+  }
+
+  html[data-work13-consultas-world="v621"] #consultations #consultationApp{
+    width:min(calc(100% - 16px),960px);
+    padding-block-end:24px;
+  }
+
+  html[data-work13-consultas-world="v621"] #consultations .consultation-v147-service{
+    min-block-size:228px!important;
+  }
+
+  html[data-work13-consultas-world="v621"] #consultations textarea{
+    min-block-size:92px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-work13-consultas-world="v621"] #consultations *,
+  html[data-work13-consultas-world="v621"] #consultations *::before,
+  html[data-work13-consultas-world="v621"] #consultations *::after,
+  html[data-work13-consultas-world="v621"] #consultations::before,
+  html[data-work13-consultas-world="v621"] #consultations::after{
+    scroll-behavior:auto!important;
+    transition:none!important;
+  }
+}
+
+@media(forced-colors:active){
+  html[data-work13-consultas-world="v621"] #consultations :is(
+    #consultationApp>*,.db608-commerce-guide,.consultation-v147-service,
+    .consultation-flow-stage,.consultation-tracker,button,input,select,textarea
+  ){
+    border-color:ButtonText!important;
+    background:Canvas!important;
+    color:CanvasText!important;
+    box-shadow:none!important;
+    forced-color-adjust:auto;
+  }
+}

@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — WORK13 V620 · QA DO BOOT RECUPERÁVEL */
+/* DIVINA BRUXA — WORK13 V621 · QA DO BOOT RECUPERÁVEL */
 import fs from 'node:fs';
 import vm from 'node:vm';
 
@@ -107,11 +107,11 @@ function harness() {
 }
 
 check('boot:script-found', Boolean(bootScript));
-check('boot:work13-meta-v620', indexSource.includes('name="divina-work13" content="V620"'));
+check('boot:work13-meta-v621', indexSource.includes('name="divina-work13" content="V621"'));
 check('boot:work12-meta-v600', indexSource.includes('name="divina-work12" content="V600"'));
-check('boot:app-v620', indexSource.includes('app-v208.js?v=620-whit-presenca-entre-mundos'));
-check('boot:worker-v620', indexSource.includes("register('./sw.js?v=620-whit-presenca-entre-mundos'"));
-check('boot:v620-bootstrap', indexSource.includes("__divinaSWBootstrap='v620-whit-presenca-entre-mundos-inline'"));
+check('boot:app-v621', indexSource.includes('app-v208.js?v=621-consultas-templo-do-encontro'));
+check('boot:worker-v621', indexSource.includes("register('./sw.js?v=621-consultas-templo-do-encontro'"));
+check('boot:v621-bootstrap', indexSource.includes("__divinaSWBootstrap='v621-consultas-templo-do-encontro-inline'"));
 check('boot:v610-presence-style', indexSource.includes('cosmos-world-presence-v610.css?v=610-work13-final-presence'));
 check('boot:v609-style-preserved', indexSource.includes('living-media-skins-v609.css?v=609-work13-media-skins'));
 check('boot:v608-style-preserved', indexSource.includes('living-commerce-path-v608.css?v=608-work13-commerce-clarity'));
@@ -155,14 +155,14 @@ check('boot:healthy-work13-orchestra-ready', healthy.root.dataset.work13Boot ===
 check('boot:healthy-never-bypassed', !healthy.home.classList.contains('active'));
 healthy.fire('load');
 await Promise.resolve();
-check('boot:registers-v620', healthy.registrations.some(item => item.url === './sw.js?v=620-whit-presenca-entre-mundos'));
+check('boot:registers-v621', healthy.registrations.some(item => item.url === './sw.js?v=621-consultas-templo-do-encontro'));
 check('boot:no-cache-registration', healthy.registrations.some(item => item.options?.updateViaCache === 'none'));
 
 const failures = checks.filter(item => !item.pass);
 console.log(JSON.stringify({
-  release:'V620',
+  release:'V621',
   work:'WORK13',
-  macroStage:'WORK13 / whit-presenca-entre-mundos-boot-runtime',
+  macroStage:'WORK13 / consultas-templo-do-encontro-boot-runtime',
   state:failures.length ? 'FAIL' : 'PASS',
   passed:checks.length - failures.length,
   failed:failures.length,

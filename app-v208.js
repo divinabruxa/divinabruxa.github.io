@@ -86,6 +86,7 @@ import { createBibliotecaSoulV610 } from './biblioteca-soul-v610.js?v=615-sala-d
 import { createDiarioSoulV610 } from './diario-soul-v610.js?v=610-work13-journal-soul';
 import { createDiarioWorldV619 } from './diario-world-v619.js?v=619-camara-da-tinta-viva';
 import { createWhitWorldV620 } from './whit-world-v620.js?v=620-presenca-entre-mundos';
+import { createConsultasWorldV621 } from './consultas-world-v621.js?v=621-templo-do-encontro';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -650,6 +651,10 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK13_CONSULTAS_WORLD_ACTIVE') {
+    document.documentElement.dataset.work13ConsultasWorldWorker = `v${event.data.version || 621}`;
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK13_WHIT_WORLD_ACTIVE') {
     document.documentElement.dataset.work13WhitWorldWorker = `v${event.data.version || 620}`;
     return;
@@ -806,14 +811,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v620-whit-presenca-entre-mundos-app';
+  window.__divinaSWBootstrap = 'v621-consultas-templo-do-encontro-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=620-whit-presenca-entre-mundos', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=621-consultas-templo-do-encontro', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v620-whit-presenca-entre-mundos';
+        document.documentElement.dataset.releaseEpoch = 'v621-consultas-templo-do-encontro';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] WORK13 V620 · Whit entre mundos; V619 e WORK12 V600 protegidos');
+        console.info('[Divina] WORK13 V621 · Templo do Encontro; V620 e WORK12 V600 protegidos');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -2367,6 +2372,12 @@ const whitWorld = safely('WORK13 · Whit · Presença Entre Mundos V620', () =>
     soul:whitOrbSoul
   })
 );
+const consultasWorld = safely('WORK13 · Consultas · Templo do Encontro V621', () =>
+  createConsultasWorldV621({
+    livingCommerce:livingCommercePath,
+    chambers:realityChambers
+  })
+);
 window.orbe.finalOrchestra = cosmosFinalOrchestra;
 window.orbe.cosmosSeal = cosmosFinalOrchestra;
 window.orbe.entryIntention = cosmosEntryIntention;
@@ -2382,6 +2393,7 @@ window.orbe.bibliotecaSoul = bibliotecaSoul;
 window.orbe.diarioSoul = diarioSoul;
 window.orbe.diarioWorld = diarioWorld;
 window.orbe.whitWorld = whitWorld;
+window.orbe.consultasWorld = consultasWorld;
 window.divinaWork13TarotLivreSoulV610 = Object.freeze({
   version:610,
   work:'WORK13',
@@ -2492,6 +2504,17 @@ window.divinaWork13WhitWorldV620 = Object.freeze({
   status:() => whitWorld?.status?.() || null,
   work14:false
 });
+window.divinaWork13ConsultasWorldV621 = Object.freeze({
+  version:621,
+  work:'WORK13',
+  stage:'renovacao-dos-mundos-8-consultas',
+  reality:'consultations',
+  universe:'templo-do-encontro',
+  base:window.divinaWork13WhitWorldV620,
+  world:consultasWorld,
+  status:() => consultasWorld?.status?.() || null,
+  work14:false
+});
 document.documentElement.dataset.work13 = 'cosmos-vivo';
 document.documentElement.dataset.work13Macro = '10-final-orchestra';
 window.divinaWork13Macro10V610 = Object.freeze({
@@ -2513,6 +2536,7 @@ window.divinaWork13Macro10V610 = Object.freeze({
   diarioSoul,
   diarioWorld,
   whitWorld,
+  consultasWorld,
   contextMemory:cosmosContextMemory,
   resonance:cosmosRealityResonance,
   dailyReading:cosmicDailyReading,
@@ -2562,6 +2586,7 @@ window.divinaWork13Macro10V610 = Object.freeze({
       diarioSoulStatus:diarioSoul?.status?.() || null,
       diarioWorldStatus:diarioWorld?.status?.() || null,
       whitWorldStatus:whitWorld?.status?.() || null,
+      consultasWorldStatus:consultasWorld?.status?.() || null,
       realitySouls:6,
       allMenuDestinationsHaveFullScreens:cosmosWorldPresence?.audit?.().everyMenuDestinationHasFullScreen === true,
       livingLayers:Object.freeze([602,603,604,605,606,607,608,609]),
@@ -2764,12 +2789,14 @@ window.divinaCosmosVivoV617 = window.divinaWork13TiragensWorldV617;
 window.divinaCosmosVivoV618 = window.divinaWork13EscolaWorldV618;
 window.divinaCosmosVivoV619 = window.divinaWork13DiarioWorldV619;
 window.divinaCosmosVivoV620 = window.divinaWork13WhitWorldV620;
-document.documentElement.dataset.work13Macro = 'whit-presenca-entre-mundos';
+window.divinaCosmosVivoV621 = window.divinaWork13ConsultasWorldV621;
+document.documentElement.dataset.work13Macro = 'consultas-templo-do-encontro';
 document.documentElement.dataset.work13SpreadsWorld = 'v617';
 document.documentElement.dataset.work13SchoolWorld = 'v618';
 document.documentElement.dataset.work13JournalWorld = 'v619';
 document.documentElement.dataset.work13WhitWorld = 'v620';
-window.divinaCosmosVivo = window.divinaWork13WhitWorldV620;
+document.documentElement.dataset.work13ConsultasWorld = 'v621';
+window.divinaCosmosVivo = window.divinaWork13ConsultasWorldV621;
 window.whit = whitCore;
 
 window.divinaWhitV212 = Object.freeze({
