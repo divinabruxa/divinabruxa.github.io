@@ -85,8 +85,8 @@ ok(cosmic.includes('maximumEssenceSentences:1'), 'uma frase preservada');
 ok(cosmicStyles.includes('[data-reading-phase="essence"]') && cosmicStyles.includes('[data-reading-phase="depth"]'), 'camadas existentes preservadas');
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core,/^\s*'\.\//gm) === 58, '58 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v615-biblioteca-sala-fios-vivos'"), 'cache próprio');
+ok(count(core,/^\s*'\.\//gm) === 60, '60 ativos atômicos');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v616-carta-dia-santuario-aurora'"), 'cache próprio');
 ok(sw.includes("'./carta-do-dia-soul-v610.js?v=610-work13-daily-soul'"), 'JS no cache');
 ok(sw.includes("'./carta-do-dia-soul-v610.css?v=610-work13-daily-soul'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_DAILY_SOUL_ACTIVE'), 'ativação comunicada');

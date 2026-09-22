@@ -1,0 +1,23 @@
+DIVINA BRUXA — WORK13 V616
+CARTA DO DIA · SANTUÁRIO DA AURORA
+
+1. Instale sobre o WORK13 V615 já instalado.
+2. Envie todos os arquivos deste ZIP para a raiz do site.
+3. Quando o GitHub perguntar, escolha substituir os arquivos existentes.
+4. Não apague nenhum outro arquivo.
+5. Aguarde a publicação e abra o site novamente.
+
+TESTE CURTO NO IPHONE
+Home → pentagrama → Carta do Dia → toque na Orbe → carta → silêncio →
+uma frase → Aprofundar → Recolher → pentagrama → outra realidade.
+
+RESULTADO ESPERADO
+- Uma única Orbe.
+- Uma carta direta por dia, no ciclo de Brasília.
+- A Orbe revela a carta; não abre o menu dentro do altar diário.
+- A carta chega antes das palavras.
+- Somente uma frase aparece antes de Aprofundar.
+- O pentagrama permanece disponível para sair e voltar.
+
+Este pacote contém somente arquivos novos ou realmente substituídos.
+Não existe WORK14.
