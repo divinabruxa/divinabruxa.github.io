@@ -84,6 +84,7 @@ import { createEscolaSoulV610 } from './escola-soul-v610.js?v=610-work13-school-
 import { createEscolaWorldV618 } from './escola-world-v618.js?v=618-jardim-das-78-sementes';
 import { createBibliotecaSoulV610 } from './biblioteca-soul-v610.js?v=615-sala-dos-fios-vivos';
 import { createDiarioSoulV610 } from './diario-soul-v610.js?v=610-work13-journal-soul';
+import { createDiarioWorldV619 } from './diario-world-v619.js?v=619-camara-da-tinta-viva';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -648,6 +649,10 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK13_JOURNAL_WORLD_ACTIVE') {
+    document.documentElement.dataset.work13JournalWorldWorker = `v${event.data.version || 619}`;
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK13_SCHOOL_WORLD_ACTIVE') {
     document.documentElement.dataset.work13SchoolWorldWorker = `v${event.data.version || 618}`;
     return;
@@ -2347,6 +2352,9 @@ const bibliotecaSoul = safely('WORK13 · Biblioteca · Sala dos Fios Vivos V615'
 const diarioSoul = safely('WORK13 · Alma do Diário e Espelho V610', () =>
   createDiarioSoulV610({ orbCore:supremeOrb })
 );
+const diarioWorld = safely('WORK13 · Diário · Câmara da Tinta Viva V619', () =>
+  createDiarioWorldV619()
+);
 window.orbe.finalOrchestra = cosmosFinalOrchestra;
 window.orbe.cosmosSeal = cosmosFinalOrchestra;
 window.orbe.entryIntention = cosmosEntryIntention;
@@ -2360,6 +2368,7 @@ window.orbe.escolaSoul = escolaSoul;
 window.orbe.escolaWorld = escolaWorld;
 window.orbe.bibliotecaSoul = bibliotecaSoul;
 window.orbe.diarioSoul = diarioSoul;
+window.orbe.diarioWorld = diarioWorld;
 window.divinaWork13TarotLivreSoulV610 = Object.freeze({
   version:610,
   work:'WORK13',
@@ -2448,6 +2457,17 @@ window.divinaWork13DiarioSoulV610 = Object.freeze({
   status:() => diarioSoul?.status?.() || null,
   work14:false
 });
+window.divinaWork13DiarioWorldV619 = Object.freeze({
+  version:619,
+  work:'WORK13',
+  stage:'renovacao-dos-mundos-6-diario',
+  reality:'journal',
+  universe:'camara-da-tinta-viva',
+  base:window.divinaWork13EscolaWorldV618,
+  world:diarioWorld,
+  status:() => diarioWorld?.status?.() || null,
+  work14:false
+});
 document.documentElement.dataset.work13 = 'cosmos-vivo';
 document.documentElement.dataset.work13Macro = '10-final-orchestra';
 window.divinaWork13Macro10V610 = Object.freeze({
@@ -2467,6 +2487,7 @@ window.divinaWork13Macro10V610 = Object.freeze({
   escolaWorld,
   bibliotecaSoul,
   diarioSoul,
+  diarioWorld,
   contextMemory:cosmosContextMemory,
   resonance:cosmosRealityResonance,
   dailyReading:cosmicDailyReading,
@@ -2514,6 +2535,7 @@ window.divinaWork13Macro10V610 = Object.freeze({
       escolaWorldStatus:escolaWorld?.status?.() || null,
       bibliotecaSoulStatus:bibliotecaSoul?.status?.() || null,
       diarioSoulStatus:diarioSoul?.status?.() || null,
+      diarioWorldStatus:diarioWorld?.status?.() || null,
       realitySouls:6,
       allMenuDestinationsHaveFullScreens:cosmosWorldPresence?.audit?.().everyMenuDestinationHasFullScreen === true,
       livingLayers:Object.freeze([602,603,604,605,606,607,608,609]),
@@ -2714,10 +2736,12 @@ window.divinaCosmosVivoV615 = window.divinaWork13BibliotecaWorldV615;
 window.divinaCosmosVivoV616 = window.divinaWork13CartaDoDiaWorldV616;
 window.divinaCosmosVivoV617 = window.divinaWork13TiragensWorldV617;
 window.divinaCosmosVivoV618 = window.divinaWork13EscolaWorldV618;
-document.documentElement.dataset.work13Macro = 'escola-jardim-das-78-sementes';
+window.divinaCosmosVivoV619 = window.divinaWork13DiarioWorldV619;
+document.documentElement.dataset.work13Macro = 'diario-camara-da-tinta-viva';
 document.documentElement.dataset.work13SpreadsWorld = 'v617';
 document.documentElement.dataset.work13SchoolWorld = 'v618';
-window.divinaCosmosVivo = window.divinaWork13EscolaWorldV618;
+document.documentElement.dataset.work13JournalWorld = 'v619';
+window.divinaCosmosVivo = window.divinaWork13DiarioWorldV619;
 window.whit = whitCore;
 
 window.divinaWhitV212 = Object.freeze({

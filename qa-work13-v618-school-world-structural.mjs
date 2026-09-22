@@ -31,8 +31,8 @@ ok(count(html,/id="orbCanvas"/g) === 1, 'um canvas canônico');
 ok(count(html,/<section id="school"/g) === 1, 'um mundo Escola');
 ok(count(html,/id="schoolApp"/g) === 1, 'um app Escola');
 ok(!/id="(?:school|escola)OrbV618"/.test(html), 'nenhuma Orbe duplicada');
-ok(html.includes('name="divina-work13" content="V618"') && html.includes('V618-ESCOLA-JARDIM-DAS-78-SEMENTES'), 'release V618');
-ok(html.includes('app-v208.js?v=618-escola-jardim-das-78-sementes'), 'app V618');
+ok(html.includes('name="divina-work13" content="V619"') && html.includes('V619-DIARIO-CAMARA-DA-TINTA-VIVA'), 'release cumulativa V619');
+ok(html.includes('app-v208.js?v=619-diario-camara-da-tinta-viva'), 'app cumulativo V619');
 
 ok(count(app,/createEscolaWorldV618/g) === 2, 'importação e criação únicas');
 ok(app.includes("escola-world-v618.js?v=618-jardim-das-78-sementes"), 'mundo ligado ao app');
@@ -44,7 +44,7 @@ ok(app.includes("universe:'jardim-das-78-sementes'"), 'universo declarado');
 ok(app.includes('escolaWorldStatus:escolaWorld?.status?.() || null'), 'auditoria reunida');
 ok(app.includes("event.data?.type === 'DIVINA_WORK13_SCHOOL_WORLD_ACTIVE'"), 'worker ouvido');
 ok(app.includes('window.divinaCosmosVivoV618'), 'continuidade pública V618');
-ok(app.includes("document.documentElement.dataset.work13Macro = 'escola-jardim-das-78-sementes'"), 'macroetapa ativa');
+ok(app.includes("document.documentElement.dataset.work13SchoolWorld = 'v618'"), 'mundo Escola preservado');
 ok(app.includes('work14:false'), 'nenhum WORK14');
 
 for (const token of [
@@ -108,8 +108,8 @@ ok(chambers.includes("school:Object.freeze({ label:'Escola', intention:'aprender
 ok(entry.includes('globalMenuOnEveryPage:true') && entry.includes('pentagramVisibleWhileMenuOpen:true'), 'menu mágico permanece global');
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core,/^\s*'\.\//gm) === 64, '64 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v618-escola-jardim-78-sementes'"), 'cache próprio');
+ok(count(core,/^\s*'\.\//gm) === 66, '66 ativos atômicos');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v619-diario-camara-tinta-viva'"), 'cache próprio');
 ok(sw.includes("'./escola-world-v618.js?v=618-jardim-das-78-sementes'"), 'JS no cache');
 ok(sw.includes("'./escola-world-v618.css?v=618-jardim-das-78-sementes'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_SCHOOL_WORLD_ACTIVE'), 'ativação comunicada');
