@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — WORK13 V624 · QA DO SERVICE WORKER ATÔMICO */
+/* DIVINA BRUXA — WORK13 V625 · QA DO SERVICE WORKER ATÔMICO */
 import fs from 'node:fs';
 import vm from 'node:vm';
 import path from 'node:path';
@@ -87,7 +87,7 @@ function createHarness({ brokenAsset = '', brokenContent = false } = {}) {
   };
   vm.runInContext(source, vm.createContext({
     self,caches,fetch,Request:FakeRequest,URL,Object,Map,Set,Promise,Error,RegExp,console
-  }), { filename:'sw-v622.js' });
+  }), { filename:'sw-v625.js' });
   const wait = async (type, event = {}) => {
     let promise = Promise.resolve();
     listeners.get(type)?.({ ...event, waitUntil:value => { promise = Promise.resolve(value); } });
@@ -116,12 +116,12 @@ function createHarness({ brokenAsset = '', brokenContent = false } = {}) {
 
 const checks = [];
 const check = (id, condition, detail = '') => checks.push({ id, pass:Boolean(condition), detail:condition ? '' : String(detail) });
-const cacheName = 'divina-bruxa-work13-v624-conta-casa-do-retorno';
+const cacheName = 'divina-bruxa-work13-v625-musica-palco-das-estrelas';
 const harness = createHarness();
 
-check('core:seventy-six-assets-declared', coreAssets.length === 76, coreAssets.length);
+check('core:seventy-eight-assets-declared', coreAssets.length === 78, coreAssets.length);
 check('core:unique-assets', new Set(coreAssets).size === coreAssets.length);
-check('core:app-v624', coreAssets.includes('./app-v208.js?v=624-conta-casa-do-retorno'));
+check('core:app-v625', coreAssets.includes('./app-v208.js?v=625-musica-palco-das-estrelas'));
 check('core:pentagram-image', coreAssets.includes('./pentagrama-menu-vivo-v611.webp'));
 check('core:tarot-world-js', coreAssets.includes('./tarot-livre-soul-v610.js?v=614-camara-vazio-violeta'));
 check('core:tarot-world-css', coreAssets.includes('./tarot-livre-world-v614.css?v=614-camara-vazio-violeta'));
@@ -153,6 +153,8 @@ check('core:premium-world-js', coreAssets.includes('./premium-world-v623.js?v=62
 check('core:premium-world-css', coreAssets.includes('./premium-world-v623.css?v=623-sala-das-chaves'));
 check('core:conta-world-js', coreAssets.includes('./conta-world-v624.js?v=624-casa-do-retorno'));
 check('core:conta-world-css', coreAssets.includes('./conta-world-v624.css?v=624-casa-do-retorno'));
+check('core:musica-world-js', coreAssets.includes('./musica-world-v625.js?v=625-palco-das-estrelas'));
+check('core:musica-world-css', coreAssets.includes('./musica-world-v625.css?v=625-palco-das-estrelas'));
 check('core:entry-js', coreAssets.includes('./cosmos-entry-intention-v610.js?v=613-menu-global-vivo'));
 check('core:entry-css', coreAssets.includes('./cosmos-entry-intention-v610.css?v=613-menu-global-vivo'));
 check('core:world-presence-js', coreAssets.includes('./cosmos-world-presence-v610.js?v=610-work13-final-presence'));
@@ -174,7 +176,7 @@ for (const event of ['install','activate','fetch','message']) check(`listener:${
 await harness.wait('install');
 const cache = harness.stores.get(cacheName);
 check('install:atomic-cache-created', cache instanceof Map);
-check('install:seventy-six-core-assets', cache?.size === 76, cache?.size);
+check('install:seventy-eight-core-assets', cache?.size === 78, cache?.size);
 for (const asset of coreAssets) check(`install:${asset}`, cache?.has(asset));
 check('install:skip-after-validation', harness.counters().skipped === 1, harness.counters().skipped);
 
@@ -189,7 +191,7 @@ for (const asset of coreAssets) {
 
 for (const asset of [
   './index.html',
-  './app-v208.js?v=624-conta-casa-do-retorno',
+  './app-v208.js?v=625-musica-palco-das-estrelas',
   './tarot-livre-soul-v610.js?v=614-camara-vazio-violeta',
   './tarot-livre-world-v614.css?v=614-camara-vazio-violeta',
   './carta-do-dia-soul-v610.js?v=610-work13-daily-soul',
@@ -216,6 +218,8 @@ for (const asset of [
   './consultas-world-v621.css?v=621-templo-do-encontro',
   './loja-world-v622.js?v=622-casa-das-escolhas-vivas',
   './loja-world-v622.css?v=622-casa-das-escolhas-vivas',
+  './musica-world-v625.js?v=625-palco-das-estrelas',
+  './musica-world-v625.css?v=625-palco-das-estrelas',
   './cosmos-entry-intention-v610.js?v=613-menu-global-vivo',
   './cosmos-entry-intention-v610.css?v=613-menu-global-vivo',
   './cosmos-world-presence-v610.js?v=610-work13-final-presence',
@@ -237,7 +241,7 @@ for (const asset of [
 harness.stores.set('divina-bruxa-work13-v609-media-skins', new Map());
 await harness.wait('activate');
 check('activate:claims-clients', harness.counters().claimed === 1);
-check('activate:keeps-v622', harness.stores.has(cacheName));
+check('activate:keeps-v625', harness.stores.has(cacheName));
 check('activate:deletes-v609-cache', !harness.stores.has('divina-bruxa-work13-v609-media-skins'));
 for (const type of [
   'DIVINA_WORK12_FOUNDATION_ACTIVE','DIVINA_WORK12_NAVIGATION_ACTIVE',
@@ -270,8 +274,9 @@ for (const type of [
   'DIVINA_WORK13_LOJA_WORLD_ACTIVE',
   'DIVINA_WORK13_PREMIUM_WORLD_ACTIVE',
   'DIVINA_WORK13_CONTA_WORLD_ACTIVE',
+  'DIVINA_WORK13_MUSICA_WORLD_ACTIVE',
   'DIVINA_RELEASE_READY'
-]) check(`activate:${type}`, harness.clientMessages.some(item => item.type === type && item.version === 624));
+]) check(`activate:${type}`, harness.clientMessages.some(item => item.type === type && item.version === 625));
 check('activate:context-version-v602', harness.clientMessages.some(item => item.contextVersion === 602));
 check('activate:resonance-version-v603', harness.clientMessages.some(item => item.resonanceVersion === 603));
 check('activate:daily-version-v604', harness.clientMessages.some(item => item.dailyReadingVersion === 604));
@@ -300,17 +305,18 @@ check('activate:consultas-world-v621', harness.clientMessages.some(item => item.
 check('activate:loja-world-v622', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_LOJA_WORLD_ACTIVE' && item.reality === 'store' && item.universe === 'casa-das-escolhas-vivas' && item.products === 21 && item.intentionPaths === 4 && item.categories === 9 && item.productCategories === 8 && item.featuredChoices === 7 && item.destinationHost === 'www.amazon.com.br' && item.checkout === 'external-amazon-only' && item.affiliateDisclosureAdjacent === true && item.affiliateTagAuthority === 'V543-config-preserved' && item.affiliateTagHardcodedByV622 === false && item.priceCache === false && item.stockCache === false && item.ratingCache === false && item.fakeDiscountClaims === 0 && item.fakeScarcityClaims === 0 && item.officialPartnershipClaim === false && item.searchLocalOnly === true && item.favoritesLocalOnly === true && item.privateContentReads === 0 && item.searchTextReads === 0 && item.favoritesReads === 0 && item.affiliateUrlReads === 0 && item.pentagramMenu === true && item.oneOrb === true && item.base === 621));
 check('activate:premium-world-v623', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_PREMIUM_WORLD_ACTIVE' && item.reality === 'subscriptions' && item.universe === 'sala-das-chaves' && item.premiumLifetimeCents === 19990 && item.premiumBillingMode === 'one-time' && item.skinsIncluded === 30 && item.aiIncludedInPremium === false && item.aiMonthlyCents === 8990 && item.aiCreditsPerCycle === 400 && item.environment === 'staging' && item.simulatorOnly === true && item.realBilling === false && item.serverAuthority === true && item.frontendEntitlementGrants === false && item.billingPayloadReads === 0 && item.paymentDataReads === 0 && item.privateContentReads === 0 && item.pentagramMenu === true && item.oneOrb === true && item.base === 622));
 check('activate:conta-world-v624', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_CONTA_WORLD_ACTIVE' && item.reality === 'login' && item.universe === 'casa-do-retorno' && item.accountAuthority === 'V201-preserved' && item.accountWorldAuthority === 'V319-preserved' && item.authSessionStorageOnly === true && item.authLocalStorageTokens === false && item.serverAuthority === true && item.rowLevelSecurityPreserved === true && item.emailVerificationPreserved === true && item.passwordResetPreserved === true && item.logoutPreserved === true && item.globalSessionExitPreserved === true && item.exportPreserved === true && item.accountDeletionPreserved === true && item.journalCloudConsentDefault === false && item.journalCloudSyncOptInOnly === true && item.marketingConsentDefault === false && item.formValueReads === 0 && item.passwordReads === 0 && item.emailReads === 0 && item.profileReads === 0 && item.authPayloadReads === 0 && item.journalBodyReads === 0 && item.privateContentReads === 0 && item.pentagramMenu === true && item.oneOrb === true && item.base === 623));
+check('activate:musica-world-v625', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_MUSICA_WORLD_ACTIVE' && item.reality === 'music' && item.universe === 'palco-das-estrelas' && item.artist === 'Hércules DX' && item.albums?.join('|') === 'Sobre as Estrelas|Z' && item.albumYears?.join('|') === '2024|2026' && item.trackCounts?.join('|') === '10|8' && item.verifiedTracks === 18 && item.futureReleasesAdminEditable === true && item.publishedCatalogueOnly === true && item.officialPlayer === 'spotify-embed-or-official-link' && item.playerLoadsAfterExplicitGesture === true && item.playbackNeverStartsOnArrival === true && item.autoplay === false && item.maximumActivePlayers === 1 && item.canonicalOrbResponse === 'existing-pulse-only' && item.privateContentReads === 0 && item.pentagramMenu === true && item.oneOrb === true && item.base === 624));
 check('activate:pentagram-menu-v613', harness.clientMessages.some(item => item.type === 'DIVINA_WORK13_PENTAGRAM_MENU_ACTIVE' && item.symbol === 'pentagrama-vermelho' && item.position === 'top-corner' && item.global === true && item.globalMenuOnEveryPage === true && item.pentagramVisibleWhileMenuOpen === true && item.pentagramTogglesMenu === true && item.arrivalStateRecovery === true && item.publicWorlds === 15 && item.maximumVisibleIntentions === 2 && item.menuLife === 'birth-breath-answer-silence' && item.whitInsideMenu === true && item.tarotOrbAction === 'reveal-only' && item.tarotOrbOpensMenu === false && item.tarotOrbMenuListenersBypassed === true && item.oneOrb === true));
 
 const onlineNavigation = await harness.fetchEvent(new FakeRequest('https://divina.test/index.html#music', { mode:'navigate' }));
-check('fetch:navigation-network', (await onlineNavigation.text()).includes('name="divina-work13" content="V624"'));
+check('fetch:navigation-network', (await onlineNavigation.text()).includes('name="divina-work13" content="V625"'));
 harness.offline(true);
 const offlineNavigation = await harness.fetchEvent(new FakeRequest('https://divina.test/index.html#skins', { mode:'navigate' }));
 check('fetch:navigation-offline', (await offlineNavigation.text()).includes('name="divina-work12" content="V600"'));
 harness.offline(false);
 
 for (const [file, needle] of [
-  ['app-v208.js?v=624-conta-casa-do-retorno','divinaWork13ContaWorldV624'],
+  ['app-v208.js?v=625-musica-palco-das-estrelas','divinaWork13MusicaWorldV625'],
   ['tarot-livre-soul-v610.js?v=614-camara-vazio-violeta','TAROT_LIVRE_WORLD_CONTRACT_V614'],
   ['tarot-livre-world-v614.css?v=614-camara-vazio-violeta','[data-tarot-world="v614"]'],
   ['carta-do-dia-soul-v610.js?v=610-work13-daily-soul','CARTA_DO_DIA_SOUL_CONTRACT_V610'],
@@ -341,6 +347,8 @@ for (const [file, needle] of [
   ['premium-world-v623.css?v=623-sala-das-chaves','[data-work13-premium-world="v623"]'],
   ['conta-world-v624.js?v=624-casa-do-retorno','CONTA_WORLD_CONTRACT_V624'],
   ['conta-world-v624.css?v=624-casa-do-retorno','[data-work13-conta-world="v624"]'],
+  ['musica-world-v625.js?v=625-palco-das-estrelas','MUSICA_WORLD_CONTRACT_V625'],
+  ['musica-world-v625.css?v=625-palco-das-estrelas','[data-work13-musica-world="v625"]'],
   ['cosmos-entry-intention-v610.js?v=613-menu-global-vivo','COSMOS_ENTRY_INTENTION_CONTRACT_V610'],
   ['cosmos-entry-intention-v610.css?v=613-menu-global-vivo','.cosmos-entry-intent'],
   ['cosmos-world-presence-v610.js?v=610-work13-final-presence','COSMOS_WORLD_PRESENCE_CONTRACT_V610'],
@@ -367,17 +375,17 @@ for (const [file, needle] of [
 }
 
 await harness.message({ type:'WORK12_STATUS' });
-check('message:status-version', harness.sourceMessages.some(item => item.type === 'WORK12_STATUS' && item.version === 624));
-check('message:status-seventy-six-assets', harness.sourceMessages.some(item => item.core?.length === 76));
+check('message:status-version', harness.sourceMessages.some(item => item.type === 'WORK12_STATUS' && item.version === 625));
+check('message:status-seventy-eight-assets', harness.sourceMessages.some(item => item.core?.length === 78));
 await harness.message({ type:'CLEAR_DIVINA_CACHES' });
 check('message:clear-caches', !harness.stores.has(cacheName));
-check('message:clear-confirmed', harness.sourceMessages.some(item => item.type === 'DIVINA_CACHES_CLEARED' && item.version === 624));
+check('message:clear-confirmed', harness.sourceMessages.some(item => item.type === 'DIVINA_CACHES_CLEARED' && item.version === 625));
 
 const failures = checks.filter(item => !item.pass);
 console.log(JSON.stringify({
-  release:'V624',
+  release:'V625',
   work:'WORK13',
-  macroStage:'WORK13 / conta-casa-do-retorno-service-worker-runtime',
+  macroStage:'WORK13 / musica-palco-das-estrelas-service-worker-runtime',
   state:failures.length ? 'FAIL' : 'PASS',
   passed:checks.length - failures.length,
   failed:failures.length,

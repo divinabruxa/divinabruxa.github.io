@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — WORK13 V624 · QA DO BOOT RECUPERÁVEL */
+/* DIVINA BRUXA — WORK13 V625 · QA DO BOOT RECUPERÁVEL */
 import fs from 'node:fs';
 import vm from 'node:vm';
 
@@ -107,11 +107,11 @@ function harness() {
 }
 
 check('boot:script-found', Boolean(bootScript));
-check('boot:work13-meta-v624', indexSource.includes('name="divina-work13" content="V624"'));
+check('boot:work13-meta-v625', indexSource.includes('name="divina-work13" content="V625"'));
 check('boot:work12-meta-v600', indexSource.includes('name="divina-work12" content="V600"'));
-check('boot:app-v624', indexSource.includes('app-v208.js?v=624-conta-casa-do-retorno'));
-check('boot:worker-v624', indexSource.includes("register('./sw.js?v=624-conta-casa-do-retorno'"));
-check('boot:v624-bootstrap', indexSource.includes("__divinaSWBootstrap='v624-conta-casa-do-retorno-inline'"));
+check('boot:app-v625', indexSource.includes('app-v208.js?v=625-musica-palco-das-estrelas'));
+check('boot:worker-v625', indexSource.includes("register('./sw.js?v=625-musica-palco-das-estrelas'"));
+check('boot:v625-bootstrap', indexSource.includes("__divinaSWBootstrap='v625-musica-palco-das-estrelas-inline'"));
 check('boot:v610-presence-style', indexSource.includes('cosmos-world-presence-v610.css?v=610-work13-final-presence'));
 check('boot:v609-style-preserved', indexSource.includes('living-media-skins-v609.css?v=609-work13-media-skins'));
 check('boot:v608-style-preserved', indexSource.includes('living-commerce-path-v608.css?v=608-work13-commerce-clarity'));
@@ -155,14 +155,14 @@ check('boot:healthy-work13-orchestra-ready', healthy.root.dataset.work13Boot ===
 check('boot:healthy-never-bypassed', !healthy.home.classList.contains('active'));
 healthy.fire('load');
 await Promise.resolve();
-check('boot:registers-v624', healthy.registrations.some(item => item.url === './sw.js?v=624-conta-casa-do-retorno'));
+check('boot:registers-v625', healthy.registrations.some(item => item.url === './sw.js?v=625-musica-palco-das-estrelas'));
 check('boot:no-cache-registration', healthy.registrations.some(item => item.options?.updateViaCache === 'none'));
 
 const failures = checks.filter(item => !item.pass);
 console.log(JSON.stringify({
-  release:'V624',
+  release:'V625',
   work:'WORK13',
-  macroStage:'WORK13 / conta-casa-do-retorno-boot-runtime',
+  macroStage:'WORK13 / musica-palco-das-estrelas-boot-runtime',
   state:failures.length ? 'FAIL' : 'PASS',
   passed:checks.length - failures.length,
   failed:failures.length,

@@ -101,8 +101,8 @@ ok(entry.includes("'divina:orb-physical-claim-settled'"), 'ação é sincronizad
 ok(entry.includes('globalOrbMenuCycle:true') && entry.includes('everyRealityCanCallUniverse:true'), 'menu global continua acessível');
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core,/^\s*'\.\//gm) === 76, '76 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v624-conta-casa-do-retorno'"), 'cache próprio');
+ok(count(core,/^\s*'\.\//gm) === 78, '78 ativos atômicos');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v625-musica-palco-das-estrelas'"), 'cache próprio');
 ok(sw.includes("'./biblioteca-soul-v610.js?v=615-sala-dos-fios-vivos'"), 'JS no cache');
 ok(sw.includes("'./biblioteca-world-v615.css?v=615-sala-dos-fios-vivos'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_LIBRARY_SOUL_ACTIVE'), 'ativação comunicada');

@@ -26,8 +26,8 @@ ok(count(html,/id="orbCanvas"/g) === 1, 'um canvas canônico');
 ok(count(html,/<section id="journal"/g) === 1, 'um mundo Diário');
 ok(count(html,/id="journalApp"/g) === 1, 'um app Diário');
 ok(!/id="(?:journal|diario)OrbV619"/.test(html), 'nenhuma Orbe duplicada');
-ok(html.includes('name="divina-work13" content="V624"') && html.includes('V624-CONTA-CASA-DO-RETORNO'), 'release cumulativa V624');
-ok(html.includes('app-v208.js?v=624-conta-casa-do-retorno'), 'app cumulativo V624');
+ok(html.includes('name="divina-work13" content="V625"') && html.includes('V625-MUSICA-PALCO-DAS-ESTRELAS'), 'release cumulativa V625');
+ok(html.includes('app-v208.js?v=625-musica-palco-das-estrelas'), 'app cumulativo V625');
 
 ok(count(app,/createDiarioWorldV619/g) === 2, 'importação e criação únicas');
 ok(app.includes("diario-world-v619.js?v=619-camara-da-tinta-viva"), 'mundo ligado ao app');
@@ -39,7 +39,7 @@ ok(app.includes("universe:'camara-da-tinta-viva'"), 'universo declarado');
 ok(app.includes('diarioWorldStatus:diarioWorld?.status?.() || null'), 'auditoria reunida');
 ok(app.includes("event.data?.type === 'DIVINA_WORK13_JOURNAL_WORLD_ACTIVE'"), 'worker ouvido');
 ok(app.includes('window.divinaCosmosVivoV619'), 'continuidade pública V619');
-ok(app.includes("document.documentElement.dataset.work13Macro = 'conta-casa-do-retorno'"), 'macroetapa seguinte ativa');
+ok(app.includes("document.documentElement.dataset.work13Macro = 'musica-palco-das-estrelas'"), 'macroetapa seguinte ativa');
 ok(app.includes("document.documentElement.dataset.work13JournalWorld = 'v619'"), 'Diário instalado permanece marcado');
 ok(app.includes("document.documentElement.dataset.work13SchoolWorld = 'v618'"), 'Escola V618 permanece');
 ok(app.includes('work14:false'), 'nenhum WORK14');
@@ -108,8 +108,8 @@ ok(chambers.includes("journal:Object.freeze({ label:'Diário', intention:'escuta
 ok(entry.includes('globalMenuOnEveryPage:true') && entry.includes('pentagramVisibleWhileMenuOpen:true'), 'menu mágico permanece global');
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core,/^\s*'\.\//gm) === 76, '76 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v624-conta-casa-do-retorno'"), 'cache próprio');
+ok(count(core,/^\s*'\.\//gm) === 78, '78 ativos atômicos');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v625-musica-palco-das-estrelas'"), 'cache próprio');
 ok(sw.includes("'./diario-world-v619.js?v=619-camara-da-tinta-viva'"), 'JS no cache');
 ok(sw.includes("'./diario-world-v619.css?v=619-camara-da-tinta-viva'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_JOURNAL_WORLD_ACTIVE'), 'ativação comunicada');

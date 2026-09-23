@@ -30,8 +30,8 @@ ok(count(html,/id="spreadGrid"/g) === 1, 'uma escolha de métodos');
 ok(count(html,/id="spreadResult"/g) === 1, 'um altar de leitura');
 ok(count(html,/id="spreadIntention"/g) === 1, 'uma intenção existente');
 ok(!/id="(?:tiragens|spreads)OrbV617"/.test(html), 'nenhuma Orbe duplicada');
-ok(html.includes('name="divina-work13" content="V624"') && html.includes('V624-CONTA-CASA-DO-RETORNO'), 'release cumulativa V624');
-ok(html.includes('app-v208.js?v=624-conta-casa-do-retorno'), 'app cumulativo V624');
+ok(html.includes('name="divina-work13" content="V625"') && html.includes('V625-MUSICA-PALCO-DAS-ESTRELAS'), 'release cumulativa V625');
+ok(html.includes('app-v208.js?v=625-musica-palco-das-estrelas'), 'app cumulativo V625');
 
 ok(count(app,/createTiragensWorldV617/g) === 2, 'importação e criação únicas');
 ok(app.includes("tiragens-world-v617.js?v=617-concilio-das-constelacoes"), 'mundo ligado ao app');
@@ -105,8 +105,8 @@ ok(entry.includes("target?.closest?.('#spreadResult')"), 'menu global não captu
 ok(entry.includes('globalMenuOnEveryPage:true') && entry.includes('pentagramVisibleWhileMenuOpen:true'), 'menu mágico permanece global');
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core,/^\s*'\.\//gm) === 76, '76 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v624-conta-casa-do-retorno'"), 'cache próprio');
+ok(count(core,/^\s*'\.\//gm) === 78, '78 ativos atômicos');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v625-musica-palco-das-estrelas'"), 'cache próprio');
 ok(sw.includes("'./tiragens-world-v617.js?v=617-concilio-das-constelacoes'"), 'JS no cache');
 ok(sw.includes("'./tiragens-world-v617.css?v=617-concilio-das-constelacoes'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_SPREADS_WORLD_ACTIVE'), 'ativação comunicada');

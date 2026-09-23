@@ -1,0 +1,112 @@
+{
+  "release": "V625",
+  "work": "WORK13",
+  "world": "Música",
+  "universe": "palco-das-estrelas",
+  "baseRequired": "V624",
+  "work14": false,
+  "law": "one-orb-one-universe-one-presence-one-journey",
+  "identity": "cosmic-black-violet-magenta-champagne-starlight",
+  "sequence": [
+    "arrival",
+    "two-real-albums",
+    "one-explicit-album",
+    "tracks-on-explicit-request",
+    "one-official-player",
+    "work-in-focus",
+    "return",
+    "silence"
+  ],
+  "catalogue": {
+    "artist": "Hércules DX",
+    "albums": [
+      {
+        "title": "Sobre as Estrelas",
+        "year": 2024,
+        "tracks": 10
+      },
+      {
+        "title": "Z",
+        "year": 2026,
+        "tracks": 8
+      }
+    ],
+    "verifiedAlbums": 2,
+    "verifiedTracks": 18,
+    "inventedAlbums": 0,
+    "inventedTracks": 0,
+    "futureReleaseTypes": ["album", "ep", "single"],
+    "futureReleasesAdminEditable": true,
+    "draftPublishedFlowPreserved": true,
+    "publishedCatalogueOnly": true
+  },
+  "player": {
+    "authority": "V559-preserved",
+    "officialPlayer": "spotify-embed-or-official-link",
+    "loadsAfterExplicitGesture": true,
+    "startsOnArrival": false,
+    "autoplay": false,
+    "maximumActivePlayers": 1,
+    "anotherPlayerStopsBeforePlayback": true
+  },
+  "protected": {
+    "work12": "V600",
+    "home": true,
+    "canonicalOrb": true,
+    "canonicalCanvas": true,
+    "globalPentagramMenu": "V613",
+    "installedWorlds": "V614-V624",
+    "musicEngine": "V559",
+    "livingMedia": "V609",
+    "accountWorld": "V624"
+  },
+  "privacy": {
+    "privateByDefault": true,
+    "listeningHistoryStored": false,
+    "listeningHistoryReads": 0,
+    "accountDataReads": 0,
+    "externalUrlReads": 0,
+    "privateContentReads": 0,
+    "storageReads": 0,
+    "storageWrites": 0,
+    "networkCallsAdded": 0,
+    "modelCallsAdded": 0
+  },
+  "performance": {
+    "coreAssets": 78,
+    "newImages": 0,
+    "newCanvases": 0,
+    "newRenderers": 0,
+    "newPlayers": 0,
+    "permanentAnimationLoops": 0,
+    "mutationObservers": 0,
+    "deferredTimers": 0
+  },
+  "validation": {
+    "suitesExecuted": 4,
+    "checksPassed": 198,
+    "failures": 0,
+    "javascriptFilesSyntaxChecked": 24,
+    "iphoneAutomatedGeometries": 8,
+    "cumulativeQaFilesUpdated": 18,
+    "atomicWorkerFullRootSuiteIncluded": true,
+    "physicalDeviceTest": false,
+    "productionPublish": false
+  },
+  "files": {
+    "production": [
+      "index.html",
+      "app-v208.js",
+      "sw.js",
+      "musica-world-v625.js",
+      "musica-world-v625.css"
+    ],
+    "qa": 21,
+    "flatZip": true
+  },
+  "install": {
+    "deleteOtherFiles": false,
+    "replaceExistingNames": true,
+    "addNewVersionFiles": true
+  }
+}

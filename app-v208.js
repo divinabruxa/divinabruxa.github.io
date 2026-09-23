@@ -90,6 +90,7 @@ import { createConsultasWorldV621 } from './consultas-world-v621.js?v=621-templo
 import { createLojaWorldV622 } from './loja-world-v622.js?v=622-casa-das-escolhas-vivas';
 import { createPremiumWorldV623 } from './premium-world-v623.js?v=623-sala-das-chaves';
 import { createContaWorldV624 } from './conta-world-v624.js?v=624-casa-do-retorno';
+import { createMusicaWorldV625 } from './musica-world-v625.js?v=625-palco-das-estrelas';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -654,6 +655,10 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK13_MUSICA_WORLD_ACTIVE') {
+    document.documentElement.dataset.work13MusicaWorldWorker = `v${event.data.version || 625}`;
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK13_CONTA_WORLD_ACTIVE') {
     document.documentElement.dataset.work13ContaWorldWorker = `v${event.data.version || 624}`;
     return;
@@ -826,14 +831,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v624-conta-casa-do-retorno-app';
+  window.__divinaSWBootstrap = 'v625-musica-palco-das-estrelas-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=624-conta-casa-do-retorno', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=625-musica-palco-das-estrelas', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v624-conta-casa-do-retorno';
+        document.documentElement.dataset.releaseEpoch = 'v625-musica-palco-das-estrelas';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] WORK13 V624 · Casa do Retorno; V623 e WORK12 V600 protegidos');
+        console.info('[Divina] WORK13 V625 · Palco das Estrelas; V624 e WORK12 V600 protegidos');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -2410,6 +2415,13 @@ const contaWorld = safely('WORK13 · Conta · Casa do Retorno V624', () =>
     livingCommerce:livingCommercePath
   })
 );
+const musicaWorld = safely('WORK13 · Música · Palco das Estrelas V625', () =>
+  createMusicaWorldV625({
+    media:window.divinaMediaSupremeReleaseV559,
+    livingMedia:livingMediaSkins,
+    orbCore:supremeOrb
+  })
+);
 window.orbe.finalOrchestra = cosmosFinalOrchestra;
 window.orbe.cosmosSeal = cosmosFinalOrchestra;
 window.orbe.entryIntention = cosmosEntryIntention;
@@ -2429,6 +2441,7 @@ window.orbe.consultasWorld = consultasWorld;
 window.orbe.lojaWorld = lojaWorld;
 window.orbe.premiumWorld = premiumWorld;
 window.orbe.contaWorld = contaWorld;
+window.orbe.musicaWorld = musicaWorld;
 window.divinaWork13TarotLivreSoulV610 = Object.freeze({
   version:610,
   work:'WORK13',
@@ -2583,6 +2596,17 @@ window.divinaWork13ContaWorldV624 = Object.freeze({
   status:() => contaWorld?.status?.() || null,
   work14:false
 });
+window.divinaWork13MusicaWorldV625 = Object.freeze({
+  version:625,
+  work:'WORK13',
+  stage:'renovacao-dos-mundos-12-musica',
+  reality:'music',
+  universe:'palco-das-estrelas',
+  base:window.divinaWork13ContaWorldV624,
+  world:musicaWorld,
+  status:() => musicaWorld?.status?.() || null,
+  work14:false
+});
 document.documentElement.dataset.work13 = 'cosmos-vivo';
 document.documentElement.dataset.work13Macro = '10-final-orchestra';
 window.divinaWork13Macro10V610 = Object.freeze({
@@ -2606,6 +2630,7 @@ window.divinaWork13Macro10V610 = Object.freeze({
   whitWorld,
   consultasWorld,
   lojaWorld,
+  musicaWorld,
   contextMemory:cosmosContextMemory,
   resonance:cosmosRealityResonance,
   dailyReading:cosmicDailyReading,
@@ -2659,6 +2684,7 @@ window.divinaWork13Macro10V610 = Object.freeze({
       lojaWorldStatus:lojaWorld?.status?.() || null,
       premiumWorldStatus:premiumWorld?.status?.() || null,
       contaWorldStatus:contaWorld?.status?.() || null,
+      musicaWorldStatus:musicaWorld?.status?.() || null,
       realitySouls:6,
       allMenuDestinationsHaveFullScreens:cosmosWorldPresence?.audit?.().everyMenuDestinationHasFullScreen === true,
       livingLayers:Object.freeze([602,603,604,605,606,607,608,609]),
@@ -2865,7 +2891,8 @@ window.divinaCosmosVivoV621 = window.divinaWork13ConsultasWorldV621;
 window.divinaCosmosVivoV622 = window.divinaWork13LojaWorldV622;
 window.divinaCosmosVivoV623 = window.divinaWork13PremiumWorldV623;
 window.divinaCosmosVivoV624 = window.divinaWork13ContaWorldV624;
-document.documentElement.dataset.work13Macro = 'conta-casa-do-retorno';
+window.divinaCosmosVivoV625 = window.divinaWork13MusicaWorldV625;
+document.documentElement.dataset.work13Macro = 'musica-palco-das-estrelas';
 document.documentElement.dataset.work13SpreadsWorld = 'v617';
 document.documentElement.dataset.work13SchoolWorld = 'v618';
 document.documentElement.dataset.work13JournalWorld = 'v619';
@@ -2874,7 +2901,8 @@ document.documentElement.dataset.work13ConsultasWorld = 'v621';
 document.documentElement.dataset.work13LojaWorld = 'v622';
 document.documentElement.dataset.work13PremiumWorld = 'v623';
 document.documentElement.dataset.work13ContaWorld = 'v624';
-window.divinaCosmosVivo = window.divinaWork13ContaWorldV624;
+document.documentElement.dataset.work13MusicaWorld = 'v625';
+window.divinaCosmosVivo = window.divinaWork13MusicaWorldV625;
 window.whit = whitCore;
 
 window.divinaWhitV212 = Object.freeze({
@@ -4212,6 +4240,13 @@ const awaken = async () => {
         livingMediaSkinsPrivateContentReads:0,
         livingMediaSkinsAutomaticNavigation:false,
         livingMediaSkinsAutomaticWhitSpeech:false,
+        musicaWorld:'v625-palco-das-estrelas',
+        musicaWorldAlbums:['Sobre as Estrelas','Z'],
+        musicaWorldTracks:18,
+        musicaWorldAutoplay:false,
+        musicaWorldMaximumActivePlayers:1,
+        musicaWorldPlayerLoadsAfterExplicitGesture:true,
+        musicaWorldCanonicalOrbResponse:'existing-pulse-only',
         cosmosFinalOrchestra:'public-structural-signal-one-frame-audit-silence',
         cosmosFinalOrchestraLivingLayers:[602,603,604,605,606,607,608,609],
         cosmosFinalOrchestraWorldsPreserved:17,
