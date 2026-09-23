@@ -1,0 +1,31 @@
+DIVINA BRUXA — WORK13 — V628
+NOTIFICAÇÕES · SINAIS DO COSMOS
+
+PRÉ-REQUISITO
+- V627 · Skins · Ateliê dos Universos já instalada.
+
+INSTALAÇÃO
+1. Extraia o ZIP.
+2. Envie os arquivos soltos para a raiz do site.
+3. Substitua somente page-loader-v1.js.
+4. Adicione notifications-world-v628.js e notifications-world-v628.css.
+5. Não apague nenhum outro arquivo da V627.
+6. Abra o site, faça uma recarga e entre em Notificações pelo menu.
+
+O QUE MUDA
+- 10 categorias com escolha individual.
+- Interruptor principal desligado por padrão.
+- Permissão do navegador pedida somente após toque explícito.
+- Marketing separado e desligado por padrão.
+- Silêncio padrão das 22:00 às 08:00 em America/Sao_Paulo.
+- Carta do Dia nunca revela a carta na notificação.
+- Diário, perguntas, tiragens, cartas, Whit e notas privadas nunca segmentam sinais.
+- Teste somente local; provedor, envio e agenda automáticos continuam desligados.
+
+NÃO HÁ SQL, EDGE FUNCTION OU CONFIGURAÇÃO SUPABASE NESTA ETAPA.
+Nenhuma cobrança real e nenhum disparo real são ativados.
+
+ROLLBACK
+- Reponha apenas o page-loader-v1.js da V627.
+- Remova os dois arquivos notifications-world-v628.* se desejar.
+- Todos os demais mundos continuam intactos.
