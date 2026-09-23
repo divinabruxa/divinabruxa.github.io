@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — WORK13 · COSMOS VIVO · V610
+/* DIVINA BRUXA — WORK13 · VÍDEOS · CINEMA DA ORBE · V626
    O WORK12 V600 e as etapas V602–V610 permanecem protegidos. A lapidacao segue
    por almas isoladas que reutilizam a mesma Orbe, o menu vivo e a continuidade,
    sem reconstruir a Home, trocar motores ou abrir um WORK14. */
@@ -91,6 +91,7 @@ import { createLojaWorldV622 } from './loja-world-v622.js?v=622-casa-das-escolha
 import { createPremiumWorldV623 } from './premium-world-v623.js?v=623-sala-das-chaves';
 import { createContaWorldV624 } from './conta-world-v624.js?v=624-casa-do-retorno';
 import { createMusicaWorldV625 } from './musica-world-v625.js?v=625-palco-das-estrelas';
+import { createVideosWorldV626 } from './videos-world-v626.js?v=626-cinema-da-orbe';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -655,6 +656,10 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK13_VIDEOS_WORLD_ACTIVE') {
+    document.documentElement.dataset.work13VideosWorldWorker = `v${event.data.version || 626}`;
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK13_MUSICA_WORLD_ACTIVE') {
     document.documentElement.dataset.work13MusicaWorldWorker = `v${event.data.version || 625}`;
     return;
@@ -831,14 +836,14 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v625-musica-palco-das-estrelas-app';
+  window.__divinaSWBootstrap = 'v626-videos-cinema-da-orbe-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=625-musica-palco-das-estrelas', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=626-videos-cinema-da-orbe', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v625-musica-palco-das-estrelas';
+        document.documentElement.dataset.releaseEpoch = 'v626-videos-cinema-da-orbe';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] WORK13 V625 · Palco das Estrelas; V624 e WORK12 V600 protegidos');
+        console.info('[Divina] WORK13 V626 · Cinema da Orbe; V625 e WORK12 V600 protegidos');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
@@ -2422,6 +2427,15 @@ const musicaWorld = safely('WORK13 · Música · Palco das Estrelas V625', () =>
     orbCore:supremeOrb
   })
 );
+const videosWorld = safely('WORK13 · Vídeos · Cinema da Orbe V626', () =>
+  createVideosWorldV626({
+    config:CONFIG,
+    go,
+    media:window.divinaMediaSupremeReleaseV559,
+    livingMedia:livingMediaSkins,
+    orbCore:supremeOrb
+  })
+);
 window.orbe.finalOrchestra = cosmosFinalOrchestra;
 window.orbe.cosmosSeal = cosmosFinalOrchestra;
 window.orbe.entryIntention = cosmosEntryIntention;
@@ -2442,6 +2456,8 @@ window.orbe.lojaWorld = lojaWorld;
 window.orbe.premiumWorld = premiumWorld;
 window.orbe.contaWorld = contaWorld;
 window.orbe.musicaWorld = musicaWorld;
+window.orbe.videosWorld = videosWorld;
+window.orbe.cinemaDaOrbe = videosWorld;
 window.divinaWork13TarotLivreSoulV610 = Object.freeze({
   version:610,
   work:'WORK13',
@@ -2607,6 +2623,18 @@ window.divinaWork13MusicaWorldV625 = Object.freeze({
   status:() => musicaWorld?.status?.() || null,
   work14:false
 });
+window.divinaWork13VideosWorldV626 = Object.freeze({
+  version:626,
+  work:'WORK13',
+  stage:'renovacao-dos-mundos-13-videos',
+  reality:'videos',
+  universe:'cinema-da-orbe',
+  channels:Object.freeze(['memoji-native','de-frente-com-o-tarot-youtube']),
+  base:window.divinaWork13MusicaWorldV625,
+  world:videosWorld,
+  status:() => videosWorld?.status?.() || null,
+  work14:false
+});
 document.documentElement.dataset.work13 = 'cosmos-vivo';
 document.documentElement.dataset.work13Macro = '10-final-orchestra';
 window.divinaWork13Macro10V610 = Object.freeze({
@@ -2631,6 +2659,7 @@ window.divinaWork13Macro10V610 = Object.freeze({
   consultasWorld,
   lojaWorld,
   musicaWorld,
+  videosWorld,
   contextMemory:cosmosContextMemory,
   resonance:cosmosRealityResonance,
   dailyReading:cosmicDailyReading,
@@ -2685,6 +2714,7 @@ window.divinaWork13Macro10V610 = Object.freeze({
       premiumWorldStatus:premiumWorld?.status?.() || null,
       contaWorldStatus:contaWorld?.status?.() || null,
       musicaWorldStatus:musicaWorld?.status?.() || null,
+      videosWorldStatus:videosWorld?.status?.() || null,
       realitySouls:6,
       allMenuDestinationsHaveFullScreens:cosmosWorldPresence?.audit?.().everyMenuDestinationHasFullScreen === true,
       livingLayers:Object.freeze([602,603,604,605,606,607,608,609]),
@@ -2892,7 +2922,8 @@ window.divinaCosmosVivoV622 = window.divinaWork13LojaWorldV622;
 window.divinaCosmosVivoV623 = window.divinaWork13PremiumWorldV623;
 window.divinaCosmosVivoV624 = window.divinaWork13ContaWorldV624;
 window.divinaCosmosVivoV625 = window.divinaWork13MusicaWorldV625;
-document.documentElement.dataset.work13Macro = 'musica-palco-das-estrelas';
+window.divinaCosmosVivoV626 = window.divinaWork13VideosWorldV626;
+document.documentElement.dataset.work13Macro = 'videos-cinema-da-orbe';
 document.documentElement.dataset.work13SpreadsWorld = 'v617';
 document.documentElement.dataset.work13SchoolWorld = 'v618';
 document.documentElement.dataset.work13JournalWorld = 'v619';
@@ -2902,7 +2933,8 @@ document.documentElement.dataset.work13LojaWorld = 'v622';
 document.documentElement.dataset.work13PremiumWorld = 'v623';
 document.documentElement.dataset.work13ContaWorld = 'v624';
 document.documentElement.dataset.work13MusicaWorld = 'v625';
-window.divinaCosmosVivo = window.divinaWork13MusicaWorldV625;
+document.documentElement.dataset.work13VideosWorld = 'v626';
+window.divinaCosmosVivo = window.divinaWork13VideosWorldV626;
 window.whit = whitCore;
 
 window.divinaWhitV212 = Object.freeze({
@@ -4247,6 +4279,19 @@ const awaken = async () => {
         musicaWorldMaximumActivePlayers:1,
         musicaWorldPlayerLoadsAfterExplicitGesture:true,
         musicaWorldCanonicalOrbResponse:'existing-pulse-only',
+        videosWorld:'v626-cinema-da-orbe',
+        videosWorldChannels:['memoji-native','de-frente-com-o-tarot-youtube'],
+        videosWorldPrimaryChannel:'memoji-native',
+        videosWorldMemojiUpload:'signed-resumable-tus',
+        videosWorldMemojiPrivateStorage:true,
+        videosWorldMemojiPublicSignedPlayback:true,
+        videosWorldOwnerMfaRequired:true,
+        videosWorldEditorialStates:['draft','review','scheduled','published','archived'],
+        videosWorldOfficialEpisodesAtRelease:0,
+        videosWorldInventedEpisodes:0,
+        videosWorldAutoplay:false,
+        videosWorldMaximumActivePlayers:1,
+        videosWorldPlayerLoadsAfterExplicitGesture:true,
         cosmosFinalOrchestra:'public-structural-signal-one-frame-audit-silence',
         cosmosFinalOrchestraLivingLayers:[602,603,604,605,606,607,608,609],
         cosmosFinalOrchestraWorldsPreserved:17,

@@ -1,16 +1,16 @@
-/* DIVINA BRUXA — WORK13 · MÚSICA · PALCO DAS ESTRELAS · V625
-   O WORK12 V600 e os mundos V614-V624 permanecem protegidos. A instalacao so
-   assume quando Música preserva os dois álbuns reais, um único player oficial,
-   nenhum autoplay e a mesma Orbe canônica.
+/* DIVINA BRUXA — WORK13 · VÍDEOS · CINEMA DA ORBE · V626
+   O WORK12 V600 e os mundos V614-V625 permanecem protegidos. A instalacao so
+   assume quando Memojis e De Frente com o Tarot preservam publicação honesta,
+   um único player, nenhum autoplay e a mesma Orbe canônica.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
-const VERSION = 625;
+const VERSION = 626;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work13-v625-musica-palco-das-estrelas';
+const CACHE_NAME = 'divina-bruxa-work13-v626-videos-cinema-da-orbe';
 const CORE = Object.freeze([
   './index.html',
-  './app-v208.js?v=625-musica-palco-das-estrelas',
+  './app-v208.js?v=626-videos-cinema-da-orbe',
   './pentagrama-menu-vivo-v611.webp',
   './tarot-livre-soul-v610.js?v=614-camara-vazio-violeta',
   './tarot-livre-world-v614.css?v=614-camara-vazio-violeta',
@@ -44,6 +44,8 @@ const CORE = Object.freeze([
   './conta-world-v624.css?v=624-casa-do-retorno',
   './musica-world-v625.js?v=625-palco-das-estrelas',
   './musica-world-v625.css?v=625-palco-das-estrelas',
+  './videos-world-v626.js?v=626-cinema-da-orbe',
+  './videos-world-v626.css?v=626-cinema-da-orbe',
   './cosmos-entry-intention-v610.js?v=613-menu-global-vivo',
   './cosmos-entry-intention-v610.css?v=613-menu-global-vivo',
   './cosmos-world-presence-v610.js?v=610-work13-final-presence',
@@ -101,7 +103,7 @@ const fetchCore = async path => {
 
 const validateCore = async responses => {
   const index = await responses.get('./index.html')?.clone().text();
-  const app = await responses.get('./app-v208.js?v=625-musica-palco-das-estrelas')?.clone().text();
+  const app = await responses.get('./app-v208.js?v=626-videos-cinema-da-orbe')?.clone().text();
   const tarotLivreSoul = await responses.get('./tarot-livre-soul-v610.js?v=614-camara-vazio-violeta')?.clone().text();
   const tarotLivreSoulStyles = await responses.get('./tarot-livre-world-v614.css?v=614-camara-vazio-violeta')?.clone().text();
   const cartaDoDiaSoul = await responses.get('./carta-do-dia-soul-v610.js?v=610-work13-daily-soul')?.clone().text();
@@ -134,6 +136,8 @@ const validateCore = async responses => {
   const contaWorldStyles = await responses.get('./conta-world-v624.css?v=624-casa-do-retorno')?.clone().text();
   const musicaWorld = await responses.get('./musica-world-v625.js?v=625-palco-das-estrelas')?.clone().text();
   const musicaWorldStyles = await responses.get('./musica-world-v625.css?v=625-palco-das-estrelas')?.clone().text();
+  const videosWorld = await responses.get('./videos-world-v626.js?v=626-cinema-da-orbe')?.clone().text();
+  const videosWorldStyles = await responses.get('./videos-world-v626.css?v=626-cinema-da-orbe')?.clone().text();
   const entryIntention = await responses.get('./cosmos-entry-intention-v610.js?v=613-menu-global-vivo')?.clone().text();
   const entryStyles = await responses.get('./cosmos-entry-intention-v610.css?v=613-menu-global-vivo')?.clone().text();
   const worldPresence = await responses.get('./cosmos-world-presence-v610.js?v=610-work13-final-presence')?.clone().text();
@@ -177,11 +181,11 @@ const validateCore = async responses => {
   const soul = await responses.get('./whit-orb-soul-bridge-v581.js?v=592-work12-navigation')?.clone().text();
   if (!index?.includes('name="divina-work12" content="V600"')
     || !index.includes('name="divina-live-audit" content="V600"')
-    || !index.includes('name="divina-work13" content="V625"')) {
+    || !index.includes('name="divina-work13" content="V626"')) {
     throw new Error('work13-index-version-mismatch');
   }
-  if (!index.includes('app-v208.js?v=625-musica-palco-das-estrelas')
-    || !index.includes('name="divina-work13-correction" content="V625-MUSICA-PALCO-DAS-ESTRELAS"')
+  if (!index.includes('app-v208.js?v=626-videos-cinema-da-orbe')
+    || !index.includes('name="divina-work13-correction" content="V626-VIDEOS-CINEMA-DA-ORBE"')
     || !index.includes('id="divinaCosmosEntryIntentionV610"')
     || !index.includes('cosmos-entry-intention-v610.css?v=613-menu-global-vivo')
     || !index.includes('id="divinaCosmosWorldPresenceV610"')
@@ -1119,6 +1123,52 @@ const validateCore = async responses => {
     || /@keyframes|animation\s*:|backdrop-filter|filter\s*:/.test(musicaWorldStyles)) {
     throw new Error('work13-musica-world-styles-missing');
   }
+  if (!app.includes("videos-world-v626.js?v=626-cinema-da-orbe")
+    || !app.includes('createVideosWorldV626({')
+    || !app.includes('window.orbe.videosWorld = videosWorld')
+    || !app.includes('window.divinaWork13VideosWorldV626')
+    || !app.includes("event.data?.type === 'DIVINA_WORK13_VIDEOS_WORLD_ACTIVE'")
+    || !app.includes("stage:'renovacao-dos-mundos-13-videos'")
+    || !app.includes("universe:'cinema-da-orbe'")) {
+    throw new Error('work13-videos-world-app-mismatch');
+  }
+  if (!index.includes('VÍDEOS · CINEMA DA ORBE · V626')
+    || !index.includes('Seus Memojis têm palco')
+    || !index.includes('id="adminMemojiV626Host"')
+    || !index.includes('kyphdsamyygavmkzyezr.storage.supabase.co')) {
+    throw new Error('work13-videos-world-index-mismatch');
+  }
+  if (!videosWorld?.includes('VIDEOS_WORLD_CONTRACT_V626')
+    || !videosWorld.includes("universe:'cinema-da-orbe'")
+    || !videosWorld.includes("channels:Object.freeze(['memoji-native','de-frente-com-o-tarot-youtube'])")
+    || !videosWorld.includes("memojiUpload:'signed-resumable-tus'")
+    || !videosWorld.includes('iphoneDirectUpload:true')
+    || !videosWorld.includes('privateStorage:true')
+    || !videosWorld.includes('publicSignedPlayback:true')
+    || !videosWorld.includes("adminAuthority:'owner-confirmed-email-mfa-aal2-active-session-recovery-codes'")
+    || !videosWorld.includes('officialEpisodesAtRelease:0')
+    || !videosWorld.includes('inventedEpisodes:0')
+    || !videosWorld.includes('playerLoadsAfterExplicitGesture:true')
+    || !videosWorld.includes('autoplay:false')
+    || !videosWorld.includes('maximumActivePlayers:1')
+    || !videosWorld.includes("video.setAttribute('playsinline','')")
+    || !videosWorld.includes("safeCall(engine,'unloadPlayer',true)")
+    || !videosWorld.includes("action:'prepare_upload'")
+    || !videosWorld.includes("'Tus-Resumable':'1.0.0'")
+    || !videosWorld.includes('CHUNK_BYTES = 6 * 1024 * 1024')
+    || !videosWorld.includes('work14:false')) {
+    throw new Error('work13-videos-world-contract-missing');
+  }
+  if (!videosWorldStyles?.includes('#videos[data-videos-world="v626"]')
+    || !videosWorldStyles.includes('.vw626-portals')
+    || !videosWorldStyles.includes('.vw626-player-shell video')
+    || !videosWorldStyles.includes('.am626-portals')
+    || !videosWorldStyles.includes('.am626-progress')
+    || !videosWorldStyles.includes('env(safe-area-inset-bottom)')
+    || !videosWorldStyles.includes('@media (max-width:540px)')
+    || !videosWorldStyles.includes('@media (prefers-reduced-motion:reduce)')) {
+    throw new Error('work13-videos-world-styles-missing');
+  }
   if (!entryIntention?.includes('COSMOS_ENTRY_INTENTION_CONTRACT_V610')
     || !entryIntention.includes("invitation:'pentagrama-vermelho'")
     || !entryIntention.includes('entryIntentions:1')
@@ -1560,6 +1610,7 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK13_PREMIUM_WORLD_ACTIVE', version:VERSION, reality:'subscriptions', universe:'sala-das-chaves', sequence:['arrival','one-clear-intention','three-explicit-keys','one-explicit-chamber','price-truth','staging-action','server-confirmed-rights','return','silence'], premiumLifetimeCents:19990, premiumBillingMode:'one-time', skinsIncluded:30, aiIncludedInPremium:false, aiMonthlyCents:8990, aiCreditsPerCycle:400, extraCreditPacks:[[200,3990],[600,9990],[1500,19990]], environment:'staging', simulatorOnly:true, realBilling:false, serverAuthority:true, frontendEntitlementGrants:false, billingPayloadReads:0, paymentDataReads:0, privateContentReads:0, pentagramMenu:true, oneOrb:true, base:622, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_CONTA_WORLD_ACTIVE', version:VERSION, reality:'login', universe:'casa-do-retorno', sequence:['arrival','one-clear-intention','authenticate-or-continue','one-explicit-area','server-confirmed-state','control-data-and-sessions','return','silence'], accountAuthority:'V201-preserved', accountWorldAuthority:'V319-preserved', authSessionStorageOnly:true, authLocalStorageTokens:false, serverAuthority:true, rowLevelSecurityPreserved:true, emailVerificationPreserved:true, passwordResetPreserved:true, logoutPreserved:true, globalSessionExitPreserved:true, exportPreserved:true, accountDeletionPreserved:true, journalCloudConsentDefault:false, journalCloudSyncOptInOnly:true, marketingConsentDefault:false, formValueReads:0, passwordReads:0, emailReads:0, profileReads:0, authPayloadReads:0, journalBodyReads:0, privateContentReads:0, pentagramMenu:true, oneOrb:true, base:623, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_MUSICA_WORLD_ACTIVE', version:VERSION, reality:'music', universe:'palco-das-estrelas', sequence:['arrival','two-real-albums','one-explicit-album','tracks-on-explicit-request','one-official-player','work-in-focus','return','silence'], artist:'Hércules DX', albums:['Sobre as Estrelas','Z'], albumYears:[2024,2026], trackCounts:[10,8], verifiedTracks:18, futureReleaseTypes:['album','ep','single'], futureReleasesAdminEditable:true, draftPublishedFlowPreserved:true, publishedCatalogueOnly:true, officialPlayer:'spotify-embed-or-official-link', playerLoadsAfterExplicitGesture:true, playbackNeverStartsOnArrival:true, autoplay:false, maximumActivePlayers:1, canonicalOrbResponse:'existing-pulse-only', listeningHistoryReads:0, privateContentReads:0, pentagramMenu:true, oneOrb:true, base:624, complete:true });
+        client.postMessage({ type:'DIVINA_WORK13_VIDEOS_WORLD_ACTIVE', version:VERSION, reality:'videos', universe:'cinema-da-orbe', channels:['memoji-native','de-frente-com-o-tarot-youtube'], primaryChannel:'memoji-native', memojiRole:'rosto-e-voz-da-orbe', memojiUpload:'signed-resumable-tus', iphoneDirectUpload:true, acceptedVideoTypes:['video/mp4','video/quicktime','video/webm','video/x-m4v'], privateStorage:true, publicSignedPlayback:true, ownerMfaRequired:true, editorialStates:['draft','review','scheduled','published','archived'], officialEpisodesAtRelease:0, inventedEpisodes:0, publicPublishedOnly:true, playerLoadsAfterExplicitGesture:true, autoplay:false, maximumActivePlayers:1, pentagramMenu:true, oneOrb:true, base:625, complete:true });
         client.postMessage({ type:'DIVINA_RELEASE_READY', version:VERSION });
       } catch {}
     }

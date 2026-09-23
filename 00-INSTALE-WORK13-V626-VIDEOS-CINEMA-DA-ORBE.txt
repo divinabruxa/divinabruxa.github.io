@@ -1,0 +1,39 @@
+DIVINA BRUXA · WORK13 · V626 · VÍDEOS · CINEMA DA ORBE
+
+BASE OBRIGATÓRIA
+V625 · Música · Palco das Estrelas
+
+ORDEM SEGURA
+1. Guarde o ZIP V625 para rollback.
+2. Ative o backend seguindo ATIVACAO-V626-MEMOJIS.md:
+   - aplique SUPABASE-SETUP-V626-MEMOJIS.sql por migration;
+   - publique memoji-videos-v626-edge.ts como a função memoji-videos-v626.
+3. Sobreponha no site somente os cinco arquivos de frontend:
+   - index.html
+   - app-v208.js
+   - sw.js
+   - videos-world-v626.js
+   - videos-world-v626.css
+4. Não renomeie os arquivos e não crie subpastas no pacote de instalação.
+5. Abra o site uma vez online e aguarde o Service Worker V626 assumir.
+6. Feche e reabra o PWA no iPhone.
+7. Entre na Conta proprietária, conclua o MFA e abra Admin → Publicar Memoji.
+
+O QUE MUDA
+- Vídeos passa a ser o Cinema da Orbe.
+- Memojis ganha palco nativo, capa opcional, categoria e descrição acessível.
+- Admin permite rascunhar, revisar, agendar, publicar, editar, ordenar e ocultar.
+- O envio vai direto ao Storage privado em blocos retomáveis de 6 MB.
+- O público recebe somente itens efetivamente publicados e URLs temporárias.
+- De Frente com o Tarot continua no motor V559 e recebe somente links oficiais do YouTube.
+- Permanecem zero episódios oficiais cadastrados nesta entrega; nada foi inventado.
+- Um único player pode ficar ativo e não existe autoplay.
+
+ARQUIVOS TÉCNICOS E DE QA
+Os arquivos SQL, TS, MD, MJS, manifesto, relatório e hashes não precisam ser enviados à raiz pública do site. Eles acompanham o ZIP para implantação, auditoria e repetição dos testes.
+
+ROLLBACK
+Restaure index.html, app-v208.js e sw.js do ZIP V625. Os dois arquivos videos-world-v626.* podem permanecer inertes ou ser removidos. A tabela e o bucket privados podem permanecer sem uso; não apague mídia sem backup.
+
+PRÓXIMA REALIDADE DO PLANO
+Skins. Este pacote não abre WORK14.

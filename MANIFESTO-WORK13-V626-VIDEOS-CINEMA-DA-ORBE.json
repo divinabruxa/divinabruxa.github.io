@@ -1,0 +1,75 @@
+{
+  "project": "Divina Bruxa · Orbe das Realidades",
+  "work": "WORK13",
+  "release": "V626",
+  "stage": "renovacao-dos-mundos-13-videos",
+  "reality": "videos",
+  "universe": "cinema-da-orbe",
+  "base": "V625-MUSICA-PALCO-DAS-ESTRELAS",
+  "flatPackage": true,
+  "work14": false,
+  "productionPublish": false,
+  "backendActivationRequired": true,
+  "channels": [
+    "memoji-native",
+    "de-frente-com-o-tarot-youtube"
+  ],
+  "memoji": {
+    "role": "rosto-e-voz-da-orbe",
+    "upload": "signed-resumable-tus",
+    "chunkBytes": 6291456,
+    "maxVideoBytes": 536870912,
+    "privateStorage": true,
+    "publicSignedPlayback": true,
+    "ownerMfaRequired": true,
+    "states": ["draft", "review", "scheduled", "published", "archived"],
+    "editable": true,
+    "reorderable": true,
+    "hideable": true
+  },
+  "deFrenteComOTarot": {
+    "authority": "V559-preserved",
+    "officialEpisodesAtRelease": 0,
+    "inventedEpisodes": 0,
+    "source": "official-youtube-links-only"
+  },
+  "playback": {
+    "autoplay": false,
+    "maximumActivePlayers": 1,
+    "loadsAfterExplicitGesture": true,
+    "stopsOnCloseChannelChangeAndRouteLeave": true
+  },
+  "continuity": {
+    "oneCanonicalOrb": true,
+    "oneCanonicalCanvas": true,
+    "preservesV625": true,
+    "nextReality": "skins"
+  },
+  "qa": {
+    "state": "PASS",
+    "v626Suites": 4,
+    "v626Assertions": 211,
+    "inheritedSuites": 4,
+    "inheritedAssertions": 198,
+    "totalSuites": 8,
+    "totalAssertions": 409
+  },
+  "files": [
+    "00-INSTALE-WORK13-V626-VIDEOS-CINEMA-DA-ORBE.txt",
+    "ATIVACAO-V626-MEMOJIS.md",
+    "HASHES-WORK13-V626-VIDEOS-CINEMA-DA-ORBE.txt",
+    "MANIFESTO-WORK13-V626-VIDEOS-CINEMA-DA-ORBE.json",
+    "RELATORIO-WORK13-V626-VIDEOS-CINEMA-DA-ORBE.md",
+    "SUPABASE-SETUP-V626-MEMOJIS.sql",
+    "app-v208.js",
+    "index.html",
+    "memoji-videos-v626-edge.ts",
+    "qa-work13-v626-videos-backend.mjs",
+    "qa-work13-v626-videos-iphone.mjs",
+    "qa-work13-v626-videos-runtime.mjs",
+    "qa-work13-v626-videos-structural.mjs",
+    "sw.js",
+    "videos-world-v626.css",
+    "videos-world-v626.js"
+  ]
+}
