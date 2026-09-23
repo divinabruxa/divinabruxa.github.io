@@ -1,0 +1,18 @@
+SHA-256 — arquivos funcionais e QA da V629
+
+66ff2f2e2167836dbd1c582e067c4cf39c9825b6fb0a7b3f5cd31686a2f89b90  cosmos-supreme-orchestra-v629.js
+b6785b978186e718d1e9aa9bf1c75dae84ccd2838da2a82ca9895a13285f5d0c  page-loader-v1.js
+af6573613f3420492a38ef35365d280f8d1cc71fa70a4117638f422ea953ce03  qa-work13-v629-orchestra-structural.mjs
+1ce3b8522a5bdf0c6e968f78954f0a541cef42b91b91a6991b843d7651192c0e  qa-work13-v629-orchestra-runtime.mjs
+d8940870f464a7e84cde3bd6d571973546359bc8e3fc049deb2b8b10d1699144  qa-work13-v629-orchestra-iphone.mjs
+90c38c25fcbe61b818a28a72d6790278d9a2469cab12db329072768c3d12f1c7  00-INSTALE-WORK13-V629-ORQUESTRA-SUPREMA.txt
+4a0dbbc263b034dd5ca8c39e3eae5ac1127e42801949c2217252a208e005a3db  RELATORIO-WORK13-V629-ORQUESTRA-SUPREMA.md
+
+QA executado: 591/591 PASS
+- V629 estrutural: 59/59
+- V629 runtime e jornada: 74/74
+- V629 iPhone/PWA: 80/80
+- regressão V628 Notificações: 167/167
+- regressão V626 Vídeos/Memojis: 211/211
+
+Aceitação final restante: prova sensorial no iPhone físico após instalação.

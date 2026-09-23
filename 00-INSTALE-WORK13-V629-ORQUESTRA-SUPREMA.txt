@@ -1,0 +1,33 @@
+DIVINA BRUXA — WORK13 — V629
+ORQUESTRA SUPREMA DOS MUNDOS · FECHAMENTO DO WORK13
+
+PRÉ-REQUISITO
+- V628 · Notificações · Sinais do Cosmos instalada.
+
+INSTALAÇÃO
+1. Extraia o ZIP.
+2. Envie os arquivos soltos para a raiz do site.
+3. Substitua somente page-loader-v1.js.
+4. Adicione cosmos-supreme-orchestra-v629.js.
+5. Não apague nenhum arquivo das versões anteriores.
+6. Recarregue o site e percorra Home → pentagrama → mundo → ação → pentagrama → outro mundo.
+
+O QUE A V629 FAZ
+- Une quinze mundos pela mesma continuidade global.
+- Garante somente um player ativo e silencia mídia ao sair do mundo.
+- Reconcilia retorno do Safari, PWA reaberto, online/offline e atualização do Service Worker.
+- Respeita movimento reduzido sem criar outro efeito, loop, Orbe ou canvas.
+- Mantém Skins V627 e Notificações V628 como autoridades das respectivas rotas.
+
+O QUE CONTINUA BLOQUEADO
+- Publicação de produção, DNS, billing real, lojas, campanhas e modo Sol da Orbe IA.
+- Nenhum WORK14 foi aberto.
+
+ROLLBACK
+- Reponha somente page-loader-v1.js da V628.
+- Remova cosmos-supreme-orchestra-v629.js.
+- Todos os quinze mundos continuam instalados e independentes.
+
+VALIDAÇÃO FÍSICA FINAL
+- Depois da instalação, faça uma exploração real no seu iPhone em retrato e paisagem.
+- Confirme que o pentagrama sempre retorna, que nenhum áudio fica preso e que não surge uma segunda Orbe.

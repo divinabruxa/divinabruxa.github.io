@@ -1,0 +1,48 @@
+{
+  "project": "Divina Bruxa",
+  "work": "WORK13",
+  "version": 629,
+  "stage": 16,
+  "name": "Orquestra Suprema dos Mundos",
+  "prerequisite": "V628 · Notificações · Sinais do Cosmos",
+  "package_type": "incremental-flat-new-and-replacement-files-only",
+  "replace": ["page-loader-v1.js"],
+  "add": ["cosmos-supreme-orchestra-v629.js"],
+  "production_files": 2,
+  "documentation": [
+    "00-INSTALE-WORK13-V629-ORQUESTRA-SUPREMA.txt",
+    "RELATORIO-WORK13-V629-ORQUESTRA-SUPREMA.md",
+    "MANIFESTO-WORK13-V629-ORQUESTRA-SUPREMA.json",
+    "HASHES-WORK13-V629-ORQUESTRA-SUPREMA.txt"
+  ],
+  "qa": {
+    "v629_checks": 213,
+    "v628_regression_checks": 167,
+    "v626_regression_checks": 211,
+    "executed_total": 591,
+    "status": "PASS",
+    "physical_iphone_acceptance": "required-after-installation"
+  },
+  "contracts": {
+    "world_count": 15,
+    "single_canonical_orb": true,
+    "single_canonical_canvas": true,
+    "single_menu": true,
+    "maximum_active_players": 1,
+    "route_reload_added": false,
+    "animation_loop_added": false,
+    "safari_return": true,
+    "pwa_resume": true,
+    "offline_continuity": true,
+    "reduced_motion": true,
+    "production_publish_authorized": false,
+    "dns_changes_authorized": false,
+    "real_billing_authorized": false,
+    "store_submission_authorized": false,
+    "campaigns_authorized": false,
+    "orbe_ai_sol_enabled": false,
+    "work14": false
+  },
+  "release_state": "READY FOR OWNER REVIEW",
+  "next": "physical-iphone-acceptance-and-work13-seal"
+}

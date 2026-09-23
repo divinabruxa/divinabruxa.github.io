@@ -1,6 +1,6 @@
-/* DIVINA BRUXA — WORK13 · V628 · NOTIFICAÇÕES · SINAIS DO COSMOS
-   O carregador preserva os mundos anteriores e troca somente a autoridade
-   da rota Notificações. Skins V627 permanece preferencial, com fallback seguro. */
+/* DIVINA BRUXA — WORK13 · V629 · ORQUESTRA SUPREMA DOS MUNDOS
+   Quinze realidades permanecem distintas, mas atravessadas pela mesma Orbe,
+   menu, continuidade, mídia exclusiva e retorno seguro. WORK13 se fecha aqui. */
 
 import {
   normalizeRouteId,
@@ -9,6 +9,7 @@ import {
   routeNeedsPortalStyles
 } from './route-registry-v180.js?v=300';
 import { connectTarotMesaBridgeV517 } from './tarot-mesa-bridge-v517.js?v=517';
+import { createCosmosSupremeOrchestraV629 } from './cosmos-supreme-orchestra-v629.js?v=629-orquestra-suprema';
 
 const pageTasks = new Map();
 const sharedTasks = new Map();
@@ -141,6 +142,12 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       detail:{target:String(event.data?.target||'notifications')}
     }));
   },{signal:abort.signal});
+
+  const orchestra=createCosmosSupremeOrchestraV629({
+    go,
+    document,
+    window:globalThis
+  });
 
   const ensureJournal=()=>once(sharedTasks,'journal',async()=>{
     const module=await loadModuleAfterStylesV562([
@@ -651,9 +658,12 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     go:id=>Promise.resolve(go?go(normalizeRouteId(id)):load(id)),
     portalStylesReady:()=>Boolean(document.getElementById(PORTAL_STYLES_ID)?.sheet),
     navigationPrepareBudgetMs:NAVIGATION_PREPARE_BUDGET_MS_V535,
+    orchestra,
+    orchestraStatus:()=>orchestra?.status?.()||null,
     destroy:()=>{
       abort.abort();
       observer?.disconnect();
+      orchestra?.destroy?.();
       cancelAnimationFrame(deferredFrame);
       clearTimeout(deferredTimer);
       deferredRoute=null;
