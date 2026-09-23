@@ -1,0 +1,87 @@
+{
+  "project": "Divina Bruxa · Orbe das Realidades",
+  "work": "WORK13",
+  "release": "V627",
+  "stage": "renovacao-dos-mundos-14-skins",
+  "planReality": 12,
+  "reality": "skins",
+  "universe": "atelie-dos-universos",
+  "base": "V626-VIDEOS-CINEMA-DA-ORBE",
+  "flatPackage": true,
+  "work14": false,
+  "productionPublish": false,
+  "backendActivationRequired": false,
+  "catalog": {
+    "total": 30,
+    "free": 1,
+    "paid": 29,
+    "freeSkin": "classic",
+    "individualPurchase": true,
+    "premiumIncludesAll": true,
+    "priceTiersCents": [1990, 2990, 3990, 4990]
+  },
+  "experience": {
+    "arrivalAction": "open-atelier",
+    "galleryDeferredUntilExplicitGesture": true,
+    "previewRequiresOwnership": false,
+    "previewGrantsEntitlement": false,
+    "globalApplyWithoutReload": true,
+    "threeWorldContinuityCheck": true,
+    "autoplay": false,
+    "dragRequired": false,
+    "soundDefault": "off"
+  },
+  "authority": {
+    "entitlements": "account-server-snapshot",
+    "activePreference": "runtime-v12-and-account-server",
+    "frontendEntitlementGrants": false,
+    "realBilling": false,
+    "restoreAcrossDevices": true,
+    "offlineActiveSkin": true,
+    "fallbackSkin": "classic"
+  },
+  "continuity": {
+    "cosmeticOnly": true,
+    "tarotLogicChanges": 0,
+    "tarotResultChanges": 0,
+    "oneCanonicalOrb": true,
+    "oneCanonicalCanvas": true,
+    "newRenderers": 0,
+    "permanentAnimationLoops": 0,
+    "preservesV626": true,
+    "nextReality": "notifications"
+  },
+  "qa": {
+    "state": "PASS",
+    "v627Suites": 3,
+    "v627Assertions": 195,
+    "inheritedSuites": 8,
+    "inheritedAssertions": 409,
+    "totalSuites": 11,
+    "totalAssertions": 604,
+    "physicalDeviceClaim": false
+  },
+  "productionFiles": [
+    "index.html",
+    "app-v208.js",
+    "page-loader-v1.js",
+    "sw.js",
+    "skins-world-v627.js",
+    "skins-world-v627.css"
+  ],
+  "files": [
+    "00-INSTALE-WORK13-V627-SKINS-ATELIE-DOS-UNIVERSOS.txt",
+    "HASHES-WORK13-V627-SKINS-ATELIE-DOS-UNIVERSOS.txt",
+    "MANIFESTO-WORK13-V627-SKINS-ATELIE-DOS-UNIVERSOS.json",
+    "RELATORIO-WORK13-V627-SKINS-ATELIE-DOS-UNIVERSOS.md",
+    "app-v208.js",
+    "index.html",
+    "page-loader-v1.js",
+    "qa-work13-v627-skins-iphone.mjs",
+    "qa-work13-v627-skins-runtime.mjs",
+    "qa-work13-v627-skins-structural.mjs",
+    "skins-world-v627.css",
+    "skins-world-v627.js",
+    "sw.js"
+  ]
+}

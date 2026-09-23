@@ -1,7 +1,6 @@
-/* DIVINA BRUXA 4.0 — ORBE SUPREMA 2.0 + WORK12 CÂMARAS V596
-   Toda realidade possui altar físico estável. Mundos em que a Orbe executa
-   uma função própria são construídos antes do commit visual da rota.
-   Escola e Diário respeitam a autoridade do limiar único V596. */
+/* DIVINA BRUXA — CARREGAMENTO V627 · ATELIÊ DOS UNIVERSOS
+   Preserva a navegação V592 e entrega Skins ao mundo WORK13 V627 sem criar
+   uma segunda instância, outra Orbe ou outro canvas. */
 
 import {
   normalizeRouteId,
@@ -15,11 +14,6 @@ const pageTasks = new Map();
 const sharedTasks = new Map();
 const LOAD_TIMEOUT_MS = 15000;
 export const NAVIGATION_PREPARE_BUDGET_MS_V535 = 48;
-/* A viagem só cruza o portal depois que a realidade definitiva existe. Assim
-   nenhum mundo troca o altar sob a Orbe depois do pouso. */
-const ARRIVAL_CRITICAL_ROUTES_V577 = new Set([
-  'tarot','daily','library','school','ai','journal'
-]);
 const PORTAL_STYLES_ID = 'divinaPortalStylesV180';
 const PORTAL_STYLES_HREF = 'divina-core-v179.css?v=179';
 let loadingSequence = 0;
@@ -55,19 +49,6 @@ function ensureStyle(id,href){
     link.addEventListener('error',()=>reject(new Error(`Estilo indisponível: ${href}`)),{once:true});
     document.head.append(link);
   }),LOAD_TIMEOUT_MS,`Tempo esgotado ao carregar ${href}.`));
-}
-
-// CSS e módulo continuam carregando em paralelo, mas o módulo passa a ser
-// identificado pela sua posição final em um único contrato. Isso impede que a
-// adição de uma folha de estilo transforme acidentalmente um <link> em módulo.
-export async function loadModuleAfterStylesV562(styleTasks=[],moduleTask){
-  const tasks=Array.isArray(styleTasks)?styleTasks:[styleTasks];
-  const results=await Promise.all([...tasks,moduleTask]);
-  const loadedModule=results[results.length-1];
-  if(!loadedModule||!['object','function'].includes(typeof loadedModule)){
-    throw new TypeError('module_load_invalid_v562');
-  }
-  return loadedModule;
 }
 function ensureImage(href){
   return once(sharedTasks,`image:${href}`,()=>new Promise(resolve=>{
@@ -134,10 +115,11 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
   let deferredTimer=0;
 
   const ensureJournal=()=>once(sharedTasks,'journal',async()=>{
-    const module=await loadModuleAfterStylesV562([
+    const [,,module]=await Promise.all([
       ensureStyle('divinaJournalRebirthV317','journal-world-v317.css?v=556'),
-      ensureStyle('divinaJournalMirrorSupremeV556','journal-mirror-supreme-v556.css?v=556')
-    ],import('./journal-world-v317.js?v=596-work12-chambers'));
+      ensureStyle('divinaJournalMirrorSupremeV556','journal-mirror-supreme-v556.css?v=556'),
+      import('./journal-world-v317.js?v=556')
+    ]);
     const instance=new module.JournalWorldV317($('#journalApp'),{orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme});
     globalThis.divinaJournalWorldV317=instance;
     return instance;
@@ -154,9 +136,10 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
   });
 
   const ensureMedia=()=>once(sharedTasks,'media',async()=>{
-    const module=await loadModuleAfterStylesV562([
-      ensureStyle('divinaMusicVideoSupremeV559','music-video-supreme-v559.css?v=559')
-    ],import('./music-video-supreme-v559.js?v=559'));
+    const [,module]=await Promise.all([
+      ensureStyle('divinaMusicVideoSupremeV559','music-video-supreme-v559.css?v=559'),
+      import('./music-video-supreme-v559.js?v=559')
+    ]);
     const instance=new module.MusicVideoSupremeV559({videos:$('#videoApp'),music:$('#musicApp')},config);
     globalThis.divinaMusicVideoSupremeV559=instance;
     return instance;
@@ -164,12 +147,6 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
 
   const loaders=Object.freeze({
     tarot: async()=>{
-      const current=globalThis.divinaTarotLivreV517;
-      if(current?.foundationRelease===576&&current.root===$('#tarot')&&!current.destroyed){
-        return current;
-      }
-      current?.destroy?.();
-      delete globalThis.divinaTarotLivreV517;
       // Retira somente estilos antigos. Os arquivos V500 permanecem seguros e inertes.
       globalThis.divinaFreeTarotV345?.destroy?.();
       delete globalThis.divinaFreeTarotV345;
@@ -216,10 +193,11 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
         'divinaTarotLivreOrbOSV515',
         'divinaTarotLivreOrbOSV516'
       ].forEach(styleId=>document.getElementById(styleId)?.remove());
-      const module=await loadModuleAfterStylesV562([
+      const [,module]=await Promise.all([
         ensureStyle('divinaTarotLivreOrbOSV517','tarot-livre-orbe-os-v517.css?v=538-fluid'),
-        ensureStyle('divinaTarotFreeSupremeV553','tarot-free-supreme-v553.css?v=553')
-      ],import('./tarot-livre-orbe-os-v517.js?v=576-foundation'));
+        ensureStyle('divinaTarotFreeSupremeV553','tarot-free-supreme-v553.css?v=553'),
+        import('./tarot-livre-orbe-os-v517.js?v=553-supreme')
+      ]);
       const instance=new module.TarotLivreOrbOSV517($('#tarot'),{
         orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme
       });
@@ -230,10 +208,11 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       globalThis.divinaDailyWorldV509?.destroy?.();
       delete globalThis.divinaDailyWorldV509;
       document.getElementById('divinaDailyRebirthV303')?.remove();
-      const module=await loadModuleAfterStylesV562([
+      const [,module]=await Promise.all([
         ensureStyle('divinaDailyLivingV509','daily-world-v509.css?v=554'),
-        ensureStyle('divinaDailySpreadsSupremeV554','daily-spreads-supreme-v554.css?v=554')
-      ],import('./daily-world-v509.js?v=595-work12-ritual'));
+        ensureStyle('divinaDailySpreadsSupremeV554','daily-spreads-supreme-v554.css?v=554'),
+        import('./daily-world-v509.js?v=554')
+      ]);
       const instance=new module.DailyWorldV509($('#dailyCard'),{
         onSave:remember,
         authClient,
@@ -243,29 +222,32 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       return instance;
     },
     library: async()=>{
-      const module=await loadModuleAfterStylesV562([
+      const [,module]=await Promise.all([
         ensureStyle('divinaLibraryRebirthV302','library-world-v302.css?v=555'),
         ensureStyle('divinaPublicLibraryV544','public-library-core-v544.css?v=555'),
-        ensureStyle('divinaSchoolLibrarySupremeV555','school-library-supreme-v555.css?v=555')
-      ],import('./library-world-v302.js?v=555'));
+        ensureStyle('divinaSchoolLibrarySupremeV555','school-library-supreme-v555.css?v=555'),
+        import('./library-world-v302.js?v=555')
+      ]);
       const instance=new module.LibraryWorldV302($('#cardLibraryApp'),{onSave:remember,orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme});
       globalThis.divinaLibraryWorldV302=instance;
       return instance;
     },
     school: async()=>{
-      const module=await loadModuleAfterStylesV562([
+      const [,module]=await Promise.all([
         ensureStyle('divinaSchoolRebirthV306','school-world-v306.css?v=555'),
-        ensureStyle('divinaSchoolLibrarySupremeV555','school-library-supreme-v555.css?v=555')
-      ],import('./school-world-v306.js?v=596-work12-chambers'));
+        ensureStyle('divinaSchoolLibrarySupremeV555','school-library-supreme-v555.css?v=555'),
+        import('./school-world-v306.js?v=555')
+      ]);
       const instance=new module.SchoolWorldV306($('#schoolApp'),{authClient,orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme});
       globalThis.divinaSchoolWorldV306=instance;
       return instance;
     },
     spreads: async()=>{
-      const module=await loadModuleAfterStylesV562([
+      const [,module]=await Promise.all([
         ensureStyle('divinaSpreadsRebirthV305','spreads-world-v305.css?v=554'),
-        ensureStyle('divinaDailySpreadsSupremeV554','daily-spreads-supreme-v554.css?v=554')
-      ],import('./spreads-world-v305.js?v=554'));
+        ensureStyle('divinaDailySpreadsSupremeV554','daily-spreads-supreme-v554.css?v=554'),
+        import('./spreads-world-v305.js?v=554')
+      ]);
       const instance=new module.SpreadsWorldV305({
         grid:$('#spreadGrid'),
         result:$('#spreadResult'),
@@ -278,48 +260,58 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     },
     journal:ensureJournal,
     ai:async()=>{
-      const module=await loadModuleAfterStylesV562([
+      const [,,module]=await Promise.all([
         ensureStyle('divinaWhitPresenceDeepV540','whit-presence-deep-v540.css?v=557'),
-        ensureStyle('divinaWhitLocalSupremeV557','whit-local-supreme-v557.css?v=557')
-      ],import('./ai-engine.js?v=557'));
+        ensureStyle('divinaWhitLocalSupremeV557','whit-local-supreme-v557.css?v=557'),
+        import('./ai-engine.js?v=557')
+      ]);
       const instance=new module.AIEngine($('#aiApp'),config,{authClient,orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme});
       globalThis.divinaWhitLocalV557=instance;
       return instance;
     },
     store:async()=>{
       await ensureCommerce();
-      const module=await loadModuleAfterStylesV562([
+      const [,module]=await Promise.all([
         ensureStyle('divinaMediaCommerceRebirthV320','media-commerce-world-v320.css?v=320'),
-        ensureStyle('divinaAmazonStoreV543','amazon-store-core-v543.css?v=543')
-      ],import('./media-commerce-world-v320.js?v=543'));
+        ensureStyle('divinaAmazonStoreV543','amazon-store-core-v543.css?v=543'),
+        import('./media-commerce-world-v320.js?v=543')
+      ]);
       return new module.StoreWorldV320($('#storeApp'),config);
     },
     consultations:async()=>{
       await ensureCommerce();
-      const module=await loadModuleAfterStylesV562([
+      const [,,module]=await Promise.all([
         ensureStyle('divinaAccountConsultationsRebirthV319','account-consultations-world-v319.css?v=319'),
-        ensureStyle('divinaConsultationsSupremeV558','consultations-supreme-v558.css?v=558')
-      ],import('./account-consultations-world-v319.js?v=558-consultations-supreme'));
+        ensureStyle('divinaConsultationsSupremeV558','consultations-supreme-v558.css?v=558'),
+        import('./account-consultations-world-v319.js?v=558-consultations-supreme')
+      ]);
       return new module.ConsultationsWorldV319($('#consultationApp'),config);
     },
     subscriptions:async()=>{
-      const module=await loadModuleAfterStylesV562([
-        ensureStyle('divinaCrownRebirthV318','skins-premium-world-v318.css?v=546')
-      ],import('./skins-premium-world-v318.js?v=546'));
+      const [,module]=await Promise.all([
+        ensureStyle('divinaCrownRebirthV318','skins-premium-world-v318.css?v=546'),
+        import('./skins-premium-world-v318.js?v=546')
+      ]);
       return new module.PremiumWorldV318($('#subscriptionApp'));
     },
     skins:async()=>{
-      const module=await loadModuleAfterStylesV562([
-        ensureStyle('divinaCrownRebirthV318','skins-premium-world-v318.css?v=546')
-      ],import('./skins-premium-world-v318.js?v=546'));
-      return new module.SkinsWorldV318($('#skinsApp'));
+      const [,module]=await Promise.all([
+        ensureStyle('divinaSkinsWorldV627','skins-world-v627.css?v=627-atelie-dos-universos'),
+        import('./skins-world-v627.js?v=627-atelie-dos-universos')
+      ]);
+      return globalThis.divinaWork13SkinsInstanceV627 || module.createSkinsWorldV627({
+        root:$('#skinsApp'),
+        orbCore:globalThis.divinaOrbSupremeV501?.core||globalThis.orbe?.supreme,
+        livingMedia:globalThis.orbe?.livingMediaSkins
+      });
     },
     videos:ensureMedia,
     music:ensureMedia,
     notifications:async()=>{
-      const module=await loadModuleAfterStylesV562([
-        ensureStyle('divinaNotificationsRebirthV321','notifications-world-v321.css?v=321')
-      ],import('./notifications-world-v321.js?v=321'));
+      const [,module]=await Promise.all([
+        ensureStyle('divinaNotificationsRebirthV321','notifications-world-v321.css?v=321'),
+        import('./notifications-world-v321.js?v=321')
+      ]);
       return new module.NotificationsWorldV321($('#notificationApp'),go);
     },
     admin:async()=>{
@@ -331,7 +323,7 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
         ensureStyle('divinaCompletionCenterV548Styles','completion-center-v548.css?v=548'),
         import('./admin-engine.js?v=548'),
         import('./admin-media-supreme-v559.js?v=559'),
-        import('./admin-intelligence-v322.js?v=561'),
+        import('./admin-intelligence-v322.js?v=547'),
         import('./owner-observatory-v532.js?v=548'),
         import('./completion-center-v548.js?v=548')
       ]);
@@ -352,12 +344,12 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     tarot:()=>Promise.all([
       ensureStyle('divinaTarotLivreOrbOSV517','tarot-livre-orbe-os-v517.css?v=538-fluid'),
       ensureStyle('divinaTarotFreeSupremeV553','tarot-free-supreme-v553.css?v=553'),
-      import('./tarot-livre-orbe-os-v517.js?v=576-foundation')
+      import('./tarot-livre-orbe-os-v517.js?v=553-supreme')
     ]),
     daily:()=>Promise.all([
       ensureStyle('divinaDailyLivingV509','daily-world-v509.css?v=554'),
       ensureStyle('divinaDailySpreadsSupremeV554','daily-spreads-supreme-v554.css?v=554'),
-      import('./daily-world-v509.js?v=595-work12-ritual')
+      import('./daily-world-v509.js?v=554')
     ]),
     library:()=>Promise.all([
       ensureStyle('divinaLibraryRebirthV302','library-world-v302.css?v=555'),
@@ -373,12 +365,12 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     school:()=>Promise.all([
       ensureStyle('divinaSchoolRebirthV306','school-world-v306.css?v=555'),
       ensureStyle('divinaSchoolLibrarySupremeV555','school-library-supreme-v555.css?v=555'),
-      import('./school-world-v306.js?v=596-work12-chambers')
+      import('./school-world-v306.js?v=555')
     ]),
     journal:()=>Promise.all([
       ensureStyle('divinaJournalRebirthV317','journal-world-v317.css?v=556'),
       ensureStyle('divinaJournalMirrorSupremeV556','journal-mirror-supreme-v556.css?v=556'),
-      import('./journal-world-v317.js?v=596-work12-chambers')
+      import('./journal-world-v317.js?v=556')
     ]),
     ai:()=>Promise.all([
       ensureStyle('divinaWhitPresenceDeepV540','whit-presence-deep-v540.css?v=557'),
@@ -386,8 +378,8 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       import('./ai-engine.js?v=557')
     ]),
     skins:()=>Promise.all([
-      ensureStyle('divinaCrownRebirthV318','skins-premium-world-v318.css?v=546'),
-      import('./skins-premium-world-v318.js?v=546')
+      ensureStyle('divinaSkinsWorldV627','skins-world-v627.css?v=627-atelie-dos-universos'),
+      import('./skins-world-v627.js?v=627-atelie-dos-universos')
     ]),
     subscriptions:()=>Promise.all([
       ensureStyle('divinaCrownRebirthV318','skins-premium-world-v318.css?v=546'),
@@ -421,7 +413,7 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
       ensureStyle('divinaCompletionCenterV548Styles','completion-center-v548.css?v=548'),
       import('./admin-engine.js?v=548'),
       import('./admin-media-supreme-v559.js?v=559'),
-      import('./admin-intelligence-v322.js?v=561'),
+      import('./admin-intelligence-v322.js?v=547'),
       import('./owner-observatory-v532.js?v=548'),
       import('./completion-center-v548.js?v=548')
     ]),
@@ -451,12 +443,6 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     if(!routeHasModule(id)) return Promise.resolve(null);
     const loader=loaders[id];
     if(!loader) return Promise.reject(new Error(`Motor ausente para ${id}`));
-    if(id==='tarot'&&pageTasks.has(id)){
-      const current=globalThis.divinaTarotLivreV517;
-      if(current?.foundationRelease!==576||current.destroyed||current.root!==$('#tarot')){
-        pageTasks.delete(id);
-      }
-    }
 
     return once(pageTasks,id,async()=>{
       const screen=document.getElementById(id);
@@ -506,26 +492,14 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     const id=normalizeRouteId(rawId);
     if(!routeHasModule(id))return Promise.resolve({id,state:'static'});
     const screen=document.getElementById(id);
-    if(screen?.getAttribute('data-module-state')==='ready'&&(
-      id!=='tarot'||globalThis.divinaTarotLivreV517?.foundationRelease===576
-    )){
+    if(screen?.getAttribute('data-module-state')==='ready'){
       return Promise.resolve({id,state:'ready'});
-    }
-    // Mundos em que a Orbe revela, descobre, continua, escuta ou escreve não
-    // admitem alvo provisório: altar e gesto existem antes da rota visível.
-    if(ARRIVAL_CRITICAL_ROUTES_V577.has(id)){
-      return load(id).then(instance=>({
-        id,
-        state:'ready-for-arrival',
-        deferred:false,
-        instance
-      }));
     }
     const budget=document.documentElement.dataset.performanceTier==='constrained'
       ? 24
       : NAVIGATION_PREPARE_BUDGET_MS_V535;
-    // Nos demais mundos, o altar universal estável já é o destino definitivo;
-    // o conteúdo secundário continua entrando pelo orçamento curto.
+    // Somente import/CSS entram no orçamento da viagem. A construção do mundo
+    // ocorre depois do pouso, para não bloquear o quadro de chegada da Orbe.
     const settled=prime(id).then(
       ()=>({id,state:'primed',deferred:true}),
       error=>({id,state:'prime-error',error,deferred:true})
@@ -553,12 +527,7 @@ export function createPageLoader({config,go,authClient=globalThis.divinaAuth}={}
     const route=normalizeRouteId(id);
     pageTasks.delete(route);
     clearRecovery(document.getElementById(route));
-    const coordinator=globalThis.divinaWork12V592;
-    return Promise.resolve(
-      coordinator?.navigate
-        ? coordinator.navigate(route,{source:'route-retry'})
-        : go?go(route):load(route)
-    );
+    return Promise.resolve(go?go(route):load(route));
   };
 
   const primeFromIntent=event=>{

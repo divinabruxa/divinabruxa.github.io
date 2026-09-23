@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — WORK13 · VÍDEOS · CINEMA DA ORBE · V626
+/* DIVINA BRUXA — WORK13 · SKINS · ATELIÊ DOS UNIVERSOS · V627
    O WORK12 V600 e as etapas V602–V610 permanecem protegidos. A lapidacao segue
    por almas isoladas que reutilizam a mesma Orbe, o menu vivo e a continuidade,
    sem reconstruir a Home, trocar motores ou abrir um WORK14. */
@@ -92,6 +92,7 @@ import { createPremiumWorldV623 } from './premium-world-v623.js?v=623-sala-das-c
 import { createContaWorldV624 } from './conta-world-v624.js?v=624-casa-do-retorno';
 import { createMusicaWorldV625 } from './musica-world-v625.js?v=625-palco-das-estrelas';
 import { createVideosWorldV626 } from './videos-world-v626.js?v=626-cinema-da-orbe';
+import { createSkinsWorldV627 } from './skins-world-v627.js?v=627-atelie-dos-universos';
 import { getPrivacyPreferences } from './privacy-center-v9.js?v=561';
 import { createEthicalReturnCoreV561 } from './ethical-return-core-v561.js?v=561';
 import { createQaSupremeLaunchV562 } from './qa-supreme-launch-v562.js?v=562';
@@ -331,6 +332,20 @@ const toast = message => {
 };
 
 safely('runtime visual', installRuntimeV12);
+const stabilizeAtelierShortcutV627 = () => {
+  const menu = document.querySelector('.magic-menu-extra');
+  if (!menu) return false;
+  const shortcuts = [...menu.querySelectorAll('[data-go="skins"]')];
+  const canonical = shortcuts.find(button => button.textContent?.includes('Ateliê')) || shortcuts[0];
+  shortcuts.forEach(button => { if (button !== canonical) button.remove(); });
+  if (canonical) {
+    canonical.type = 'button';
+    canonical.textContent = 'Skins · Ateliê';
+    canonical.setAttribute('aria-label', 'Abrir Skins · Ateliê dos Universos');
+  }
+  return shortcuts.length > 0;
+};
+safely('atalho único do Ateliê V627', stabilizeAtelierShortcutV627);
 const navigation = createNavigation();
 const navigationGo = navigation.go;
 let supremeOrb = null;
@@ -656,6 +671,10 @@ const reloadForNewReleaseV537 = version => {
 };
 
 navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'DIVINA_WORK13_SKINS_WORLD_ACTIVE') {
+    document.documentElement.dataset.work13SkinsWorldWorker = `v${event.data.version || 627}`;
+    return;
+  }
   if (event.data?.type === 'DIVINA_WORK13_VIDEOS_WORLD_ACTIVE') {
     document.documentElement.dataset.work13VideosWorldWorker = `v${event.data.version || 626}`;
     return;
@@ -836,21 +855,21 @@ navigator.serviceWorker?.addEventListener('message', event => {
 });
 
 if ('serviceWorker' in navigator && !window.__divinaSWBootstrap) {
-  window.__divinaSWBootstrap = 'v626-videos-cinema-da-orbe-app';
+  window.__divinaSWBootstrap = 'v627-skins-atelie-dos-universos-app';
   addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=626-videos-cinema-da-orbe', { updateViaCache:'none' })
+    navigator.serviceWorker.register('./sw.js?v=627-skins-atelie-dos-universos', { updateViaCache:'none' })
       .then(async registration => {
-        document.documentElement.dataset.releaseEpoch = 'v626-videos-cinema-da-orbe';
+        document.documentElement.dataset.releaseEpoch = 'v627-skins-atelie-dos-universos';
         await registration.update().catch(() => null);
         registration.waiting?.postMessage?.({ type:'SKIP_WAITING' });
-        console.info('[Divina] WORK13 V626 · Cinema da Orbe; V625 e WORK12 V600 protegidos');
+        console.info('[Divina] WORK13 V627 · Ateliê dos Universos; V626 e WORK12 V600 protegidos');
       })
       .catch(error => console.error('[Divina] falha ao registrar PWA', error));
   }, { once:true });
 }
 
 const skinsHeading = document.querySelector('#skins h2');
-if (skinsHeading) skinsHeading.textContent = 'Trinta formas de sentir o universo.';
+if (skinsHeading) skinsHeading.textContent = 'Mude o cosmos sem mudar a sua leitura.';
 
 window.divinaLoading = loadingPortal;
 window.orbe = {
@@ -2436,6 +2455,13 @@ const videosWorld = safely('WORK13 · Vídeos · Cinema da Orbe V626', () =>
     orbCore:supremeOrb
   })
 );
+const skinsWorld = safely('WORK13 · Skins · Ateliê dos Universos V627', () =>
+  createSkinsWorldV627({
+    root:document.getElementById('skinsApp'),
+    orbCore:supremeOrb,
+    livingMedia:livingMediaSkins
+  })
+);
 window.orbe.finalOrchestra = cosmosFinalOrchestra;
 window.orbe.cosmosSeal = cosmosFinalOrchestra;
 window.orbe.entryIntention = cosmosEntryIntention;
@@ -2458,6 +2484,8 @@ window.orbe.contaWorld = contaWorld;
 window.orbe.musicaWorld = musicaWorld;
 window.orbe.videosWorld = videosWorld;
 window.orbe.cinemaDaOrbe = videosWorld;
+window.orbe.skinsWorld = skinsWorld;
+window.orbe.atelieDosUniversos = skinsWorld;
 window.divinaWork13TarotLivreSoulV610 = Object.freeze({
   version:610,
   work:'WORK13',
@@ -2635,6 +2663,18 @@ window.divinaWork13VideosWorldV626 = Object.freeze({
   status:() => videosWorld?.status?.() || null,
   work14:false
 });
+window.divinaWork13SkinsWorldV627 = Object.freeze({
+  version:627,
+  work:'WORK13',
+  stage:'renovacao-dos-mundos-14-skins',
+  planReality:12,
+  reality:'skins',
+  universe:'atelie-dos-universos',
+  base:window.divinaWork13VideosWorldV626,
+  world:skinsWorld,
+  status:() => skinsWorld?.status?.() || null,
+  work14:false
+});
 document.documentElement.dataset.work13 = 'cosmos-vivo';
 document.documentElement.dataset.work13Macro = '10-final-orchestra';
 window.divinaWork13Macro10V610 = Object.freeze({
@@ -2660,6 +2700,7 @@ window.divinaWork13Macro10V610 = Object.freeze({
   lojaWorld,
   musicaWorld,
   videosWorld,
+  skinsWorld,
   contextMemory:cosmosContextMemory,
   resonance:cosmosRealityResonance,
   dailyReading:cosmicDailyReading,
@@ -2715,6 +2756,7 @@ window.divinaWork13Macro10V610 = Object.freeze({
       contaWorldStatus:contaWorld?.status?.() || null,
       musicaWorldStatus:musicaWorld?.status?.() || null,
       videosWorldStatus:videosWorld?.status?.() || null,
+      skinsWorldStatus:skinsWorld?.status?.() || null,
       realitySouls:6,
       allMenuDestinationsHaveFullScreens:cosmosWorldPresence?.audit?.().everyMenuDestinationHasFullScreen === true,
       livingLayers:Object.freeze([602,603,604,605,606,607,608,609]),
@@ -2923,7 +2965,8 @@ window.divinaCosmosVivoV623 = window.divinaWork13PremiumWorldV623;
 window.divinaCosmosVivoV624 = window.divinaWork13ContaWorldV624;
 window.divinaCosmosVivoV625 = window.divinaWork13MusicaWorldV625;
 window.divinaCosmosVivoV626 = window.divinaWork13VideosWorldV626;
-document.documentElement.dataset.work13Macro = 'videos-cinema-da-orbe';
+window.divinaCosmosVivoV627 = window.divinaWork13SkinsWorldV627;
+document.documentElement.dataset.work13Macro = 'skins-atelie-dos-universos';
 document.documentElement.dataset.work13SpreadsWorld = 'v617';
 document.documentElement.dataset.work13SchoolWorld = 'v618';
 document.documentElement.dataset.work13JournalWorld = 'v619';
@@ -2934,7 +2977,8 @@ document.documentElement.dataset.work13PremiumWorld = 'v623';
 document.documentElement.dataset.work13ContaWorld = 'v624';
 document.documentElement.dataset.work13MusicaWorld = 'v625';
 document.documentElement.dataset.work13VideosWorld = 'v626';
-window.divinaCosmosVivo = window.divinaWork13VideosWorldV626;
+document.documentElement.dataset.work13SkinsWorld = 'v627';
+window.divinaCosmosVivo = window.divinaWork13SkinsWorldV627;
 window.whit = whitCore;
 
 window.divinaWhitV212 = Object.freeze({
@@ -4292,6 +4336,18 @@ const awaken = async () => {
         videosWorldAutoplay:false,
         videosWorldMaximumActivePlayers:1,
         videosWorldPlayerLoadsAfterExplicitGesture:true,
+        skinsWorld:'v627-atelie-dos-universos',
+        skinsWorldTotal:30,
+        skinsWorldFree:1,
+        skinsWorldPaid:29,
+        skinsWorldPriceTiersCents:[1990,2990,3990,4990],
+        skinsWorldPreviewGrantsEntitlement:false,
+        skinsWorldEntitlementAuthority:'account-server-snapshot',
+        skinsWorldGlobalApplyWithoutReload:true,
+        skinsWorldTarotLogicChanges:0,
+        skinsWorldNewOrbs:0,
+        skinsWorldNewCanvases:0,
+        skinsWorldRealBilling:false,
         cosmosFinalOrchestra:'public-structural-signal-one-frame-audit-silence',
         cosmosFinalOrchestraLivingLayers:[602,603,604,605,606,607,608,609],
         cosmosFinalOrchestraWorldsPreserved:17,
