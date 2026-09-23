@@ -1,0 +1,253 @@
+/* DIVINA BRUXA — WORK13 · CONTA · CASA DO RETORNO · V624
+   Azul meia-noite, vidro-mar, prata de aurora e marfim. Infraestrutura
+   silenciosa sobre os corpos V201/V319, sem imagem, renderer ou loop. */
+
+html[data-work13-conta-world="v624"] #login[data-conta-world="v624"]{
+  --cw624-void:3,8,15;
+  --cw624-night:7,20,34;
+  --cw624-blue:20,63,91;
+  --cw624-glass:76,151,151;
+  --cw624-silver:177,204,211;
+  --cw624-dawn:222,202,159;
+  --cw624-ivory:246,244,235;
+  --cw624-mist:176,193,201;
+  position:relative;
+  isolation:isolate;
+  box-sizing:border-box;
+  min-block-size:100dvh;
+  padding-block-start:max(18px,env(safe-area-inset-top));
+  padding-block-end:max(80px,env(safe-area-inset-bottom));
+  overflow-x:clip;
+  color:rgba(var(--cw624-ivory),.94);
+  background:
+    radial-gradient(ellipse 58% 38% at 50% -7%,rgba(var(--cw624-silver),.13),transparent 72%),
+    radial-gradient(ellipse 44% 68% at -7% 58%,rgba(var(--cw624-blue),.29),transparent 75%),
+    radial-gradient(ellipse 42% 60% at 107% 82%,rgba(var(--cw624-glass),.15),transparent 76%),
+    linear-gradient(158deg,rgb(var(--cw624-night)),rgb(var(--cw624-void)) 76%);
+}
+
+html[data-work13-conta-world="v624"] #login[data-conta-world="v624"]::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  pointer-events:none;
+  inset:clamp(58px,9svh,116px) 50% auto auto;
+  inline-size:min(76%,700px);
+  block-size:min(66svh,700px);
+  border:1px solid rgba(var(--cw624-silver),.17);
+  border-block-end-color:rgba(var(--cw624-glass),.07);
+  border-radius:48% 52% 38px 38px / 25% 28% 42px 42px;
+  transform:translateX(50%) scale(1);
+  opacity:.72;
+  transition:opacity 220ms ease,transform 360ms cubic-bezier(.2,.78,.2,1),border-color 220ms ease;
+}
+
+html[data-work13-conta-world="v624"] #login[data-conta-world="v624"]::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  pointer-events:none;
+  inset:auto 11% max(78px,env(safe-area-inset-bottom));
+  block-size:1px;
+  background:linear-gradient(90deg,transparent,rgba(var(--cw624-silver),.34),transparent);
+  opacity:.50;
+  transition:opacity 220ms ease,transform 320ms ease;
+}
+
+html[data-work13-conta-world="v624"] #login:is(
+  [data-conta-world-phase="invitation"],[data-conta-world-phase="authentication"]
+)::before{
+  border-color:rgba(var(--cw624-silver),.34);
+  transform:translateX(50%) scale(1.012);
+}
+
+html[data-work13-conta-world="v624"] #login:is(
+  [data-conta-world-phase="continuity"],[data-conta-world-phase="security"],
+  [data-conta-world-phase="data"],[data-conta-world-phase="critical"],
+  [data-conta-world-phase="settled"]
+)::before{opacity:.30;transform:translateX(50%) scale(.984)}
+
+html[data-work13-conta-world="v624"] #login:is(
+  [data-conta-world-phase="portal"],[data-conta-world-phase="travel"]
+)::before,
+html[data-work13-conta-world="v624"] #login:is(
+  [data-conta-world-phase="portal"],[data-conta-world-phase="travel"]
+)::after{opacity:0}
+
+html[data-work13-conta-world="v624"] #login > :is(.eyebrow,.lead){display:none!important}
+
+html[data-work13-conta-world="v624"] #login > h2{
+  position:relative;
+  z-index:1;
+  width:min(calc(100% - 32px),800px);
+  margin:clamp(20px,6svh,64px) auto clamp(28px,5svh,54px);
+  color:rgba(var(--cw624-ivory),.98);
+  font:400 clamp(1.66rem,5.4vw,2.86rem)/1.1 Georgia,"Times New Roman",serif;
+  letter-spacing:-.035em;
+  text-align:center;
+  text-wrap:balance;
+  text-shadow:0 0 34px rgba(var(--cw624-silver),.10);
+  transition:opacity 190ms ease,transform 230ms ease;
+}
+
+html[data-work13-conta-world="v624"] #login > h2::before{
+  content:"CONTA · CASA DO RETORNO";
+  display:block;
+  margin-block-end:13px;
+  color:rgba(var(--cw624-dawn),.82);
+  font:780 .62rem/1.4 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  letter-spacing:.21em;
+}
+
+html[data-work13-conta-world="v624"] #login:is(
+  [data-conta-world-phase="continuity"],[data-conta-world-phase="security"],
+  [data-conta-world-phase="data"],[data-conta-world-phase="critical"],
+  [data-conta-world-phase="settled"]
+) > h2{
+  opacity:0;
+  transform:translateY(-8px);
+  block-size:0;
+  margin-block:0;
+  overflow:hidden;
+}
+
+html[data-work13-conta-world="v624"] #login > :is(.account-v189-shell,#accountWorldV319,.account-v201-network,.account-v201-critical,.account-v189-live){
+  position:relative;
+  z-index:1;
+  box-sizing:border-box;
+  width:min(calc(100% - 28px),980px);
+  margin-inline:auto;
+}
+
+html[data-work13-conta-world="v624"] #login :is(
+  #accountWorldV319,.account-v189-stage,.account-v189-form,.account-v189-profile,
+  .account-v189-sync,.account-v189-security,.account-v189-trust article,
+  .account-v201-network,.account-v201-critical,.account-v189-live
+){
+  border-color:rgba(var(--cw624-silver),.18)!important;
+  color:rgba(var(--cw624-ivory),.94)!important;
+  background:
+    radial-gradient(ellipse at 50% 0,rgba(var(--cw624-silver),.05),transparent 48%),
+    linear-gradient(154deg,rgba(var(--cw624-blue),.20),rgba(var(--cw624-void),.86))!important;
+  box-shadow:inset 0 1px 0 rgba(var(--cw624-ivory),.045),0 28px 72px rgba(0,0,0,.23)!important;
+}
+
+html[data-work13-conta-world="v624"] #login #accountWorldV319{
+  border-radius:62px 84px 56px 76px / 78px 56px 84px 52px!important;
+}
+
+html[data-work13-conta-world="v624"] #login :is(
+  #accountWorldV319 h3,.account-v189-shell h3,.account-v189-shell h4
+){
+  color:rgba(var(--cw624-ivory),.98)!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-weight:400!important;
+  letter-spacing:-.025em!important;
+  text-wrap:balance;
+}
+
+html[data-work13-conta-world="v624"] #login :is(
+  #accountWorldV319 p,.account-v189-shell p,.account-v189-shell small,
+  .account-v189-shell label,.account-v189-shell li
+){color:rgba(var(--cw624-mist),.80)!important}
+
+html[data-work13-conta-world="v624"] #login :is(
+  button,a,input,select,textarea,summary,[contenteditable="true"]
+){
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+
+html[data-work13-conta-world="v624"] #login :is(button,a,summary){min-block-size:48px}
+
+html[data-work13-conta-world="v624"] #login :is(
+  #accountWorldV319 button,.account-v189-shell button
+){
+  border-color:rgba(var(--cw624-silver),.25)!important;
+  color:rgba(var(--cw624-ivory),.95)!important;
+  background:linear-gradient(142deg,rgba(var(--cw624-blue),.36),rgba(var(--cw624-night),.74))!important;
+  box-shadow:inset 0 1px 0 rgba(var(--cw624-ivory),.06)!important;
+  transition:transform 130ms ease,border-color 150ms ease,background-color 150ms ease!important;
+}
+
+html[data-work13-conta-world="v624"] #login :is(
+  #accountWorldV319 button,.account-v189-shell button
+):active{
+  transform:translateY(2px) scale(.986)!important;
+  border-color:rgba(var(--cw624-dawn),.70)!important;
+}
+
+html[data-work13-conta-world="v624"] #login .account-v189-shell :is(input,select,textarea){
+  min-block-size:50px;
+  border-color:rgba(var(--cw624-silver),.22)!important;
+  color:rgb(var(--cw624-ivory))!important;
+  background:rgba(var(--cw624-void),.66)!important;
+}
+
+html[data-work13-conta-world="v624"] #login .account-v189-shell :is(input,select,textarea):focus{
+  border-color:rgba(var(--cw624-dawn),.68)!important;
+  outline:2px solid rgba(var(--cw624-silver),.22)!important;
+  outline-offset:2px;
+}
+
+html[data-work13-conta-world="v624"] #login :is(.account-v189-profile,.account-v189-sync,.account-v189-security){
+  border-radius:30px 40px 28px 42px!important;
+}
+
+html[data-work13-conta-world="v624"] #login .account-v201-critical{
+  border-color:rgba(222,154,141,.36)!important;
+  background:linear-gradient(152deg,rgba(91,38,44,.20),rgba(var(--cw624-void),.88))!important;
+}
+
+html[data-work13-conta-world="v624"] #login[data-conta-world-phase="critical"]::before{
+  border-color:rgba(222,154,141,.30);
+}
+
+@media(max-width:700px){
+  html[data-work13-conta-world="v624"] #login .account-v189-trust{
+    grid-template-columns:1fr!important;
+  }
+}
+
+@media(max-width:430px){
+  html[data-work13-conta-world="v624"] #login{
+    min-block-size:100svh;
+    padding-inline:max(8px,env(safe-area-inset-left)) max(8px,env(safe-area-inset-right));
+  }
+  html[data-work13-conta-world="v624"] #login > h2{
+    width:min(calc(100% - 18px),800px);
+    margin-block-start:clamp(18px,4svh,34px);
+    font-size:clamp(1.55rem,7.4vw,2.15rem);
+  }
+  html[data-work13-conta-world="v624"] #login > :is(.account-v189-shell,#accountWorldV319,.account-v201-network,.account-v201-critical,.account-v189-live){
+    width:min(calc(100% - 8px),980px);
+  }
+  html[data-work13-conta-world="v624"] #login #accountWorldV319{
+    border-radius:38px 50px 34px 46px / 48px 34px 52px 36px!important;
+  }
+}
+
+@media(orientation:landscape) and (max-height:520px){
+  html[data-work13-conta-world="v624"] #login > h2{
+    margin-block:12px 20px;
+    font-size:clamp(1.36rem,4vw,1.88rem);
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-work13-conta-world="v624"] #login::before,
+  html[data-work13-conta-world="v624"] #login::after,
+  html[data-work13-conta-world="v624"] #login > h2,
+  html[data-work13-conta-world="v624"] #login :is(button,a,summary){transition:none!important}
+}
+
+@media(forced-colors:active){
+  html[data-work13-conta-world="v624"] #login,
+  html[data-work13-conta-world="v624"] #login :is(
+    #accountWorldV319,.account-v189-shell>*,button,input,select,textarea
+  ){
+    color:CanvasText!important;
+    border-color:CanvasText!important;
+    background:Canvas!important;
+  }
+}

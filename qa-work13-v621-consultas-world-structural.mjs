@@ -25,8 +25,8 @@ ok(count(html,/id="orbCanvas"/g) === 1, 'um canvas canônico');
 ok(count(html,/<section id="consultations"/g) === 1, 'um mundo Consultas');
 ok(count(html,/id="consultationApp"/g) === 1, 'um app Consultas');
 ok(!/id="(?:consultas|consultation)OrbV621"/.test(html), 'nenhuma Orbe duplicada');
-ok(html.includes('name="divina-work13" content="V623"') && html.includes('V623-PREMIUM-SALA-DAS-CHAVES'), 'release cumulativa V623');
-ok(html.includes('app-v208.js?v=623-premium-sala-das-chaves'), 'app cumulativo V623');
+ok(html.includes('name="divina-work13" content="V624"') && html.includes('V624-CONTA-CASA-DO-RETORNO'), 'release cumulativa V624');
+ok(html.includes('app-v208.js?v=624-conta-casa-do-retorno'), 'app cumulativo V624');
 
 ok(count(app,/createConsultasWorldV621/g) === 2, 'importação e criação únicas');
 ok(app.includes("consultas-world-v621.js?v=621-templo-do-encontro"), 'mundo ligado ao app');
@@ -38,7 +38,7 @@ ok(app.includes("universe:'templo-do-encontro'"), 'universo declarado');
 ok(app.includes('consultasWorldStatus:consultasWorld?.status?.() || null'), 'auditoria reunida');
 ok(app.includes("event.data?.type === 'DIVINA_WORK13_CONSULTAS_WORLD_ACTIVE'"), 'worker ouvido');
 ok(app.includes('window.divinaCosmosVivoV621'), 'continuidade pública V621');
-ok(app.includes("document.documentElement.dataset.work13Macro = 'premium-sala-das-chaves'"), 'macroetapa ativa');
+ok(app.includes("document.documentElement.dataset.work13Macro = 'conta-casa-do-retorno'"), 'macroetapa ativa');
 ok(app.includes("document.documentElement.dataset.work13WhitWorld = 'v620'"), 'Whit V620 permanece');
 ok(app.includes('work14:false'), 'nenhum WORK14');
 
@@ -108,8 +108,8 @@ ok(commerce.includes('privateContentReads:0') && commerce.includes('formValueRea
 ok(entry.includes('globalMenuOnEveryPage:true') && entry.includes('pentagramVisibleWhileMenuOpen:true'), 'menu mágico permanece global');
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core,/^\s*'\.\//gm) === 74, '74 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v623-premium-sala-das-chaves'"), 'cache próprio');
+ok(count(core,/^\s*'\.\//gm) === 76, '76 ativos atômicos');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v624-conta-casa-do-retorno'"), 'cache próprio');
 ok(sw.includes("'./consultas-world-v621.js?v=621-templo-do-encontro'"), 'JS no cache');
 ok(sw.includes("'./consultas-world-v621.css?v=621-templo-do-encontro'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_CONSULTAS_WORLD_ACTIVE'), 'ativação comunicada');

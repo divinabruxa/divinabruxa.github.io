@@ -1,0 +1,95 @@
+{
+  "release": "V624",
+  "work": "WORK13",
+  "world": "Conta",
+  "universe": "casa-do-retorno",
+  "baseRequired": "V623",
+  "work14": false,
+  "law": "one-orb-one-universe-one-presence-one-journey",
+  "identity": "midnight-blue-sea-glass-silver-dawn-ivory",
+  "sequence": [
+    "arrival",
+    "one-clear-intention",
+    "authenticate-or-continue",
+    "one-explicit-area",
+    "server-confirmed-state",
+    "control-data-and-sessions",
+    "return",
+    "silence"
+  ],
+  "account": {
+    "engine": "V201-preserved",
+    "world": "V319-preserved",
+    "livingCommerce": "V608-preserved",
+    "identityRights": "V542-preserved",
+    "authClient": "V201-preserved",
+    "serverAuthority": true,
+    "sessionStorageOnly": true,
+    "authTokensInLocalStorage": false,
+    "emailVerification": true,
+    "passwordReset": true,
+    "logout": true,
+    "globalSessionExit": true,
+    "safeExport": true,
+    "accountDeletion": true,
+    "criticalActionsRequireServerConfirmation": true,
+    "ownerMfaRequirementPreserved": true,
+    "adminAccessForCommonUser": false
+  },
+  "consent": {
+    "privateByDefault": true,
+    "journalCloudSyncOptInOnly": true,
+    "journalCloudConsentDefault": false,
+    "marketingConsentDefault": false,
+    "notificationQuietHours": "22:00-08:00 America/Sao_Paulo"
+  },
+  "protected": {
+    "work12": "V600",
+    "home": true,
+    "canonicalOrb": true,
+    "canonicalCanvas": true,
+    "globalPentagramMenu": "V613",
+    "installedWorlds": "V614-V623",
+    "accountEngine": "V201",
+    "accountWorld": "V319",
+    "livingCommerce": "V608",
+    "identityRights": "V542"
+  },
+  "privacy": {
+    "privateByDefault": true,
+    "formValueReads": 0,
+    "passwordReads": 0,
+    "emailReads": 0,
+    "profileReads": 0,
+    "authPayloadReads": 0,
+    "journalBodyReads": 0,
+    "billingPayloadReads": 0,
+    "privateContentReads": 0,
+    "storageReads": 0,
+    "storageWrites": 0,
+    "networkCallsAdded": 0,
+    "modelCallsAdded": 0
+  },
+  "performance": {
+    "coreAssets": 76,
+    "newImages": 0,
+    "newCanvases": 0,
+    "newRenderers": 0,
+    "permanentAnimationLoops": 0,
+    "mutationObservers": 0,
+    "deferredTimers": 0
+  },
+  "validation": {
+    "suites": 53,
+    "checks": 4326,
+    "failures": 0,
+    "iphoneAutomatedGeometries": 8,
+    "physicalDeviceTest": false,
+    "productionPublish": false
+  },
+  "install": {
+    "flatZip": true,
+    "deleteOtherFiles": false,
+    "replaceExistingNamesOnly": true
+  }
+}

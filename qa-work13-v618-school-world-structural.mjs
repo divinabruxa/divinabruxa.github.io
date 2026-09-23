@@ -31,8 +31,8 @@ ok(count(html,/id="orbCanvas"/g) === 1, 'um canvas canônico');
 ok(count(html,/<section id="school"/g) === 1, 'um mundo Escola');
 ok(count(html,/id="schoolApp"/g) === 1, 'um app Escola');
 ok(!/id="(?:school|escola)OrbV618"/.test(html), 'nenhuma Orbe duplicada');
-ok(html.includes('name="divina-work13" content="V623"') && html.includes('V623-PREMIUM-SALA-DAS-CHAVES'), 'release cumulativa V623');
-ok(html.includes('app-v208.js?v=623-premium-sala-das-chaves'), 'app cumulativo V623');
+ok(html.includes('name="divina-work13" content="V624"') && html.includes('V624-CONTA-CASA-DO-RETORNO'), 'release cumulativa V624');
+ok(html.includes('app-v208.js?v=624-conta-casa-do-retorno'), 'app cumulativo V624');
 
 ok(count(app,/createEscolaWorldV618/g) === 2, 'importação e criação únicas');
 ok(app.includes("escola-world-v618.js?v=618-jardim-das-78-sementes"), 'mundo ligado ao app');
@@ -108,8 +108,8 @@ ok(chambers.includes("school:Object.freeze({ label:'Escola', intention:'aprender
 ok(entry.includes('globalMenuOnEveryPage:true') && entry.includes('pentagramVisibleWhileMenuOpen:true'), 'menu mágico permanece global');
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core,/^\s*'\.\//gm) === 74, '74 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v623-premium-sala-das-chaves'"), 'cache próprio');
+ok(count(core,/^\s*'\.\//gm) === 76, '76 ativos atômicos');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v624-conta-casa-do-retorno'"), 'cache próprio');
 ok(sw.includes("'./escola-world-v618.js?v=618-jardim-das-78-sementes'"), 'JS no cache');
 ok(sw.includes("'./escola-world-v618.css?v=618-jardim-das-78-sementes'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_SCHOOL_WORLD_ACTIVE'), 'ativação comunicada');
