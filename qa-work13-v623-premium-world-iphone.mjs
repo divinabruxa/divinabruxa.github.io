@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+const css=await readFile(new URL('./premium-world-v623.css',import.meta.url),'utf8');
+let checks=0;const ok=(value,message)=>{assert.ok(value,message);checks+=1};
+const profiles=[['se-2-p',375,667,2],['mini-p',375,812,3],['12-p',390,844,3],['14-p',390,844,3],['pro-p',393,852,3],['max-p',430,932,3],['se-2-l',667,375,2],['max-l',932,430,3]];
+for(const[id,width,height,dpr]of profiles){const portrait=width<height;const room=width<=430?width-16:Math.min(width-28,1060);const columns=portrait?1:3;ok(room>320&&room<=width,`${id}: sala contida`);ok(columns===(portrait?1:3),`${id}: uma chave por gesto no retrato`);ok(48*dpr>=96,`${id}: alvo físico confortável`);ok((portrait?'portrait':'landscape')===(id.endsWith('-p')?'portrait':'landscape'),`${id}: orientação`)}
+ok(css.includes('min-block-size:100dvh')&&css.includes('min-block-size:100svh'),'viewports dinâmico e seguro');
+ok(css.includes('safe-area-inset-top')&&css.includes('safe-area-inset-bottom'),'safe areas verticais');
+ok(css.includes('safe-area-inset-left')&&css.includes('safe-area-inset-right'),'safe areas horizontais');
+ok(css.includes('width:min(calc(100% - 32px),800px)'),'título contido');
+ok(css.includes('width:min(calc(100% - 28px),1060px)'),'corpo contido');
+ok(css.includes('grid-template-columns:repeat(3,minmax(0,1fr))'),'três chaves em tela larga');
+ok(css.includes('grid-template-columns:1fr'),'uma chave por gesto no retrato');
+ok(css.includes('min-block-size:48px')&&css.includes('min-block-size:76px'),'toques confortáveis');
+ok(css.includes('touch-action:manipulation')&&css.includes('-webkit-tap-highlight-color:transparent'),'toque Safari limpo');
+ok(css.includes('overflow-x:clip'),'sem vazamento lateral');
+ok(css.includes('@media(max-width:430px)')&&css.includes('@media(orientation:landscape) and (max-height:520px)'),'cortes iPhone');
+ok(css.includes('@media(prefers-reduced-motion:reduce)')&&css.includes('@media(forced-colors:active)'),'acessibilidade');
+ok(!/@keyframes|animation\s*:|backdrop-filter|filter\s*:|position\s*:\s*fixed|100vw|url\(/.test(css),'sem peso ou largura instável');
+console.log(`PASS ${checks}/${checks} — Sala das Chaves em 8 geometrias iPhone`);

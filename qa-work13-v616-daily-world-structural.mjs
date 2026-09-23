@@ -22,8 +22,8 @@ ok(count(html,/id="orb"/g) === 1, 'uma Orbe física');
 ok(count(html,/id="orbCanvas"/g) === 1, 'um canvas canônico');
 ok(count(html,/<section id="daily"/g) === 1, 'uma realidade diária');
 ok(count(html,/id="dailyCard"/g) === 1, 'um altar diário');
-ok(html.includes('content="V622"') && html.includes('V622-LOJA-CASA-DAS-ESCOLHAS-VIVAS'), 'release cumulativa V622');
-ok(html.includes('app-v208.js?v=622-loja-casa-das-escolhas-vivas'), 'app cumulativo V622');
+ok(html.includes('content="V623"') && html.includes('V623-PREMIUM-SALA-DAS-CHAVES'), 'release cumulativa V623');
+ok(html.includes('app-v208.js?v=623-premium-sala-das-chaves'), 'app cumulativo V623');
 
 ok(count(app,/createCartaDoDiaWorldV616/g) === 2, 'importação e criação únicas');
 ok(app.includes("carta-do-dia-world-v616.js?v=616-santuario-da-aurora"), 'mundo ligado ao app');
@@ -80,8 +80,8 @@ ok(cosmic.includes('maximumEssenceSentences:1'), 'uma frase preservada');
 ok(entry.includes("target?.closest?.('[data-daily-orb-host]')"), 'menu não captura a Orbe diária');
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core,/^\s*'\.\//gm) === 72, '72 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v622-loja-casa-das-escolhas-vivas'"), 'cache cumulativo próprio');
+ok(count(core,/^\s*'\.\//gm) === 74, '74 ativos atômicos');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v623-premium-sala-das-chaves'"), 'cache cumulativo próprio');
 ok(sw.includes("'./carta-do-dia-world-v616.js?v=616-santuario-da-aurora'"), 'JS no cache');
 ok(sw.includes("'./carta-do-dia-world-v616.css?v=616-santuario-da-aurora'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_DAILY_WORLD_ACTIVE'), 'ativação comunicada');

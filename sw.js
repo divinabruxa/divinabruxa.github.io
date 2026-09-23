@@ -1,16 +1,16 @@
-/* DIVINA BRUXA — WORK13 · LOJA · CASA DAS ESCOLHAS VIVAS · V622
-   O WORK12 V600 e os mundos V614-V621 permanecem protegidos. A instalacao so
-   assume quando a Loja preserva as 21 escolhas, quatro caminhos, verdade
-   comercial e passagem externa para a Amazon, usando a mesma Orbe e o mesmo corpo.
+/* DIVINA BRUXA — WORK13 · PREMIUM · SALA DAS CHAVES · V623
+   O WORK12 V600 e os mundos V614-V622 permanecem protegidos. A instalacao so
+   assume quando Premium, Orbe IA e Acessos permanecem claros, separados e
+   governados pelo servidor STAGING, usando a mesma Orbe e o mesmo corpo.
    Rede primeiro para código; cache apenas como chão seguro, nunca como prisão.
 */
 
-const VERSION = 622;
+const VERSION = 623;
 const CACHE_PREFIX = 'divina-bruxa-';
-const CACHE_NAME = 'divina-bruxa-work13-v622-loja-casa-das-escolhas-vivas';
+const CACHE_NAME = 'divina-bruxa-work13-v623-premium-sala-das-chaves';
 const CORE = Object.freeze([
   './index.html',
-  './app-v208.js?v=622-loja-casa-das-escolhas-vivas',
+  './app-v208.js?v=623-premium-sala-das-chaves',
   './pentagrama-menu-vivo-v611.webp',
   './tarot-livre-soul-v610.js?v=614-camara-vazio-violeta',
   './tarot-livre-world-v614.css?v=614-camara-vazio-violeta',
@@ -38,6 +38,8 @@ const CORE = Object.freeze([
   './consultas-world-v621.css?v=621-templo-do-encontro',
   './loja-world-v622.js?v=622-casa-das-escolhas-vivas',
   './loja-world-v622.css?v=622-casa-das-escolhas-vivas',
+  './premium-world-v623.js?v=623-sala-das-chaves',
+  './premium-world-v623.css?v=623-sala-das-chaves',
   './cosmos-entry-intention-v610.js?v=613-menu-global-vivo',
   './cosmos-entry-intention-v610.css?v=613-menu-global-vivo',
   './cosmos-world-presence-v610.js?v=610-work13-final-presence',
@@ -95,7 +97,7 @@ const fetchCore = async path => {
 
 const validateCore = async responses => {
   const index = await responses.get('./index.html')?.clone().text();
-  const app = await responses.get('./app-v208.js?v=622-loja-casa-das-escolhas-vivas')?.clone().text();
+  const app = await responses.get('./app-v208.js?v=623-premium-sala-das-chaves')?.clone().text();
   const tarotLivreSoul = await responses.get('./tarot-livre-soul-v610.js?v=614-camara-vazio-violeta')?.clone().text();
   const tarotLivreSoulStyles = await responses.get('./tarot-livre-world-v614.css?v=614-camara-vazio-violeta')?.clone().text();
   const cartaDoDiaSoul = await responses.get('./carta-do-dia-soul-v610.js?v=610-work13-daily-soul')?.clone().text();
@@ -122,6 +124,8 @@ const validateCore = async responses => {
   const consultasWorldStyles = await responses.get('./consultas-world-v621.css?v=621-templo-do-encontro')?.clone().text();
   const lojaWorld = await responses.get('./loja-world-v622.js?v=622-casa-das-escolhas-vivas')?.clone().text();
   const lojaWorldStyles = await responses.get('./loja-world-v622.css?v=622-casa-das-escolhas-vivas')?.clone().text();
+  const premiumWorld = await responses.get('./premium-world-v623.js?v=623-sala-das-chaves')?.clone().text();
+  const premiumWorldStyles = await responses.get('./premium-world-v623.css?v=623-sala-das-chaves')?.clone().text();
   const entryIntention = await responses.get('./cosmos-entry-intention-v610.js?v=613-menu-global-vivo')?.clone().text();
   const entryStyles = await responses.get('./cosmos-entry-intention-v610.css?v=613-menu-global-vivo')?.clone().text();
   const worldPresence = await responses.get('./cosmos-world-presence-v610.js?v=610-work13-final-presence')?.clone().text();
@@ -165,11 +169,11 @@ const validateCore = async responses => {
   const soul = await responses.get('./whit-orb-soul-bridge-v581.js?v=592-work12-navigation')?.clone().text();
   if (!index?.includes('name="divina-work12" content="V600"')
     || !index.includes('name="divina-live-audit" content="V600"')
-    || !index.includes('name="divina-work13" content="V622"')) {
+    || !index.includes('name="divina-work13" content="V623"')) {
     throw new Error('work13-index-version-mismatch');
   }
-  if (!index.includes('app-v208.js?v=622-loja-casa-das-escolhas-vivas')
-    || !index.includes('name="divina-work13-correction" content="V622-LOJA-CASA-DAS-ESCOLHAS-VIVAS"')
+  if (!index.includes('app-v208.js?v=623-premium-sala-das-chaves')
+    || !index.includes('name="divina-work13-correction" content="V623-PREMIUM-SALA-DAS-CHAVES"')
     || !index.includes('id="divinaCosmosEntryIntentionV610"')
     || !index.includes('cosmos-entry-intention-v610.css?v=613-menu-global-vivo')
     || !index.includes('id="divinaCosmosWorldPresenceV610"')
@@ -955,6 +959,54 @@ const validateCore = async responses => {
     || /@keyframes|animation\s*:|backdrop-filter|filter\s*:/.test(lojaWorldStyles)) {
     throw new Error('work13-loja-world-styles-missing');
   }
+  if (!app.includes("premium-world-v623.js?v=623-sala-das-chaves")
+    || !app.includes('createPremiumWorldV623({')
+    || !app.includes('window.orbe.premiumWorld = premiumWorld')
+    || !app.includes('window.divinaWork13PremiumWorldV623')
+    || !app.includes("stage:'renovacao-dos-mundos-10-premium'")
+    || !app.includes("universe:'sala-das-chaves'")) {
+    throw new Error('work13-premium-world-app-mismatch');
+  }
+  if (!premiumWorld?.includes('PREMIUM_WORLD_CONTRACT_V623')
+    || !premiumWorld.includes("universe:'sala-das-chaves'")
+    || !premiumWorld.includes("identity:'obsidian-champagne-gold-peacock-teal-ivory'")
+    || !premiumWorld.includes('premiumLifetimeCents:19990')
+    || !premiumWorld.includes('skinsIncluded:30')
+    || !premiumWorld.includes('aiIncludedInPremium:false')
+    || !premiumWorld.includes('aiMonthlyCents:8990')
+    || !premiumWorld.includes('aiCreditsPerCycle:400')
+    || !premiumWorld.includes("environment:'staging'")
+    || !premiumWorld.includes('simulatorOnly:true')
+    || !premiumWorld.includes('realBilling:false')
+    || !premiumWorld.includes('serverAuthority:true')
+    || !premiumWorld.includes('frontendEntitlementGrants:false')
+    || !premiumWorld.includes('billingPayloadReads:0')
+    || !premiumWorld.includes('paymentDataReads:0')
+    || !premiumWorld.includes('privateContentReads:0')
+    || !premiumWorld.includes('networkCalls:0')
+    || !premiumWorld.includes('reusesCanonicalOrb:true')
+    || !premiumWorld.includes('permanentAnimationLoops:0')
+    || !premiumWorld.includes('mutationObservers:0')
+    || !premiumWorld.includes('deferredTimers:0')
+    || !premiumWorld.includes('work14:false')) {
+    throw new Error('work13-premium-world-contract-missing');
+  }
+  if (!premiumWorldStyles?.includes('[data-work13-premium-world="v623"]')
+    || !premiumWorldStyles.includes('[data-premium-world="v623"]')
+    || !premiumWorldStyles.includes('[data-premium-world-phase="keys"]')
+    || !premiumWorldStyles.includes('[data-premium-world-phase="premium"]')
+    || !premiumWorldStyles.includes('[data-premium-world-phase="ai"]')
+    || !premiumWorldStyles.includes('[data-premium-world-phase="access"]')
+    || !premiumWorldStyles.includes('.premium-v191-hero')
+    || !premiumWorldStyles.includes('.premium-v191-ai')
+    || !premiumWorldStyles.includes('.premium-v191-lifecycle')
+    || !premiumWorldStyles.includes('env(safe-area-inset-top)')
+    || !premiumWorldStyles.includes('@media(max-width:430px)')
+    || !premiumWorldStyles.includes('@media(orientation:landscape)')
+    || !premiumWorldStyles.includes('@media(prefers-reduced-motion:reduce)')
+    || /@keyframes|animation\s*:|backdrop-filter|filter\s*:/.test(premiumWorldStyles)) {
+    throw new Error('work13-premium-world-styles-missing');
+  }
   if (!entryIntention?.includes('COSMOS_ENTRY_INTENTION_CONTRACT_V610')
     || !entryIntention.includes("invitation:'pentagrama-vermelho'")
     || !entryIntention.includes('entryIntentions:1')
@@ -1393,6 +1445,7 @@ self.addEventListener('activate', event => {
         client.postMessage({ type:'DIVINA_WORK13_WHIT_WORLD_ACTIVE', version:VERSION, reality:'ai', universe:'presenca-entre-mundos', sequence:['arrival','silence','one-explicit-invitation','listening','one-local-response','visible-session-trace','context-on-explicit-consent','return','silence'], localDefault:true, accountRequired:false, sessionMemoryTurns:6, sessionMemoryPersistent:false, sessionMemoryVisible:true, contextExplicitConsent:true, privateByDefault:true, privateContentReads:0, journalSilentReads:0, schoolNoteSilentReads:0, tarotQuestionSilentReads:0, automaticSpeech:false, pentagramMenu:true, oneOrb:true, base:619, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_CONSULTAS_WORLD_ACTIVE', version:VERSION, reality:'consultations', universe:'templo-do-encontro', sequence:['arrival','one-clear-intention','four-human-readings','one-explicit-choice','essential-contact','private-question-or-context','review','email-handoff','private-protocol','return','silence'], services:4, servicePricesCents:[25000,20000,15000,5000], priceSnapshot:true, futurePricesAdminEditable:true, previousOrdersImmutable:true, humanReadingOnly:true, separateFromPremium:true, emailRequired:true, phoneRequired:true, whatsappRequired:false, operationalContact:'orbedasrealidades@hotmail.com', emailOnly:true, onlineOnly:true, automaticEmail:false, realBilling:false, privateContentReads:0, formValueReads:0, questionReads:0, contactReads:0, protocolReads:0, pentagramMenu:true, oneOrb:true, base:620, complete:true });
         client.postMessage({ type:'DIVINA_WORK13_LOJA_WORLD_ACTIVE', version:VERSION, reality:'store', universe:'casa-das-escolhas-vivas', sequence:['arrival','one-clear-intention','four-curated-paths','one-explicit-path','twenty-one-curated-choices','category-search-or-favorites-on-explicit-request','product-truth','external-amazon-passage','return','silence'], products:21, intentionPaths:4, categories:9, productCategories:8, featuredChoices:7, destinationHost:'www.amazon.com.br', checkout:'external-amazon-only', affiliateDisclosureAdjacent:true, affiliateTagAuthority:'V543-config-preserved', affiliateTagHardcodedByV622:false, priceCache:false, stockCache:false, ratingCache:false, fakeDiscountClaims:0, fakeScarcityClaims:0, officialPartnershipClaim:false, searchLocalOnly:true, favoritesLocalOnly:true, privateContentReads:0, searchTextReads:0, favoritesReads:0, affiliateUrlReads:0, pentagramMenu:true, oneOrb:true, base:621, complete:true });
+        client.postMessage({ type:'DIVINA_WORK13_PREMIUM_WORLD_ACTIVE', version:VERSION, reality:'subscriptions', universe:'sala-das-chaves', sequence:['arrival','one-clear-intention','three-explicit-keys','one-explicit-chamber','price-truth','staging-action','server-confirmed-rights','return','silence'], premiumLifetimeCents:19990, premiumBillingMode:'one-time', skinsIncluded:30, aiIncludedInPremium:false, aiMonthlyCents:8990, aiCreditsPerCycle:400, extraCreditPacks:[[200,3990],[600,9990],[1500,19990]], environment:'staging', simulatorOnly:true, realBilling:false, serverAuthority:true, frontendEntitlementGrants:false, billingPayloadReads:0, paymentDataReads:0, privateContentReads:0, pentagramMenu:true, oneOrb:true, base:622, complete:true });
         client.postMessage({ type:'DIVINA_RELEASE_READY', version:VERSION });
       } catch {}
     }

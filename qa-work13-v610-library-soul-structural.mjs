@@ -101,8 +101,8 @@ ok(entry.includes("'divina:orb-physical-claim-settled'"), 'ação é sincronizad
 ok(entry.includes('globalOrbMenuCycle:true') && entry.includes('everyRealityCanCallUniverse:true'), 'menu global continua acessível');
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core,/^\s*'\.\//gm) === 72, '72 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v622-loja-casa-das-escolhas-vivas'"), 'cache próprio');
+ok(count(core,/^\s*'\.\//gm) === 74, '74 ativos atômicos');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v623-premium-sala-das-chaves'"), 'cache próprio');
 ok(sw.includes("'./biblioteca-soul-v610.js?v=615-sala-dos-fios-vivos'"), 'JS no cache');
 ok(sw.includes("'./biblioteca-world-v615.css?v=615-sala-dos-fios-vivos'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_LIBRARY_SOUL_ACTIVE'), 'ativação comunicada');

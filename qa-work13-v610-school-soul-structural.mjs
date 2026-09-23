@@ -97,8 +97,8 @@ ok(chamberStyles.includes('.db596-school-paths') && chamberStyles.includes('scro
 ok(entry.includes('globalOrbMenuCycle:true') && entry.includes('everyRealityCanCallUniverse:true'), 'Orbe continua abrindo o menu global');
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core,/^\s*'\.\//gm) === 72, '72 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v622-loja-casa-das-escolhas-vivas'"), 'cache próprio');
+ok(count(core,/^\s*'\.\//gm) === 74, '74 ativos atômicos');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v623-premium-sala-das-chaves'"), 'cache próprio');
 ok(sw.includes("'./escola-soul-v610.js?v=610-work13-school-soul'"), 'JS no cache');
 ok(sw.includes("'./escola-soul-v610.css?v=610-work13-school-soul'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_SCHOOL_SOUL_ACTIVE'), 'ativação comunicada');

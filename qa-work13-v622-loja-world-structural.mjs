@@ -25,8 +25,8 @@ ok(count(html,/id="orbCanvas"/g) === 1, 'um canvas canônico');
 ok(count(html,/<section id="store"/g) === 1, 'um mundo Loja');
 ok(count(html,/id="storeApp"/g) === 1, 'um app Loja');
 ok(!/id="(?:loja|store)OrbV622"/.test(html), 'nenhuma Orbe duplicada');
-ok(html.includes('name="divina-work13" content="V622"') && html.includes('V622-LOJA-CASA-DAS-ESCOLHAS-VIVAS'), 'release V622');
-ok(html.includes('app-v208.js?v=622-loja-casa-das-escolhas-vivas'), 'app V622');
+ok(html.includes('name="divina-work13" content="V623"') && html.includes('V623-PREMIUM-SALA-DAS-CHAVES'), 'release cumulativa V623');
+ok(html.includes('app-v208.js?v=623-premium-sala-das-chaves'), 'app cumulativo V623');
 
 ok(count(app,/createLojaWorldV622/g) === 2, 'importação e criação únicas');
 ok(app.includes("loja-world-v622.js?v=622-casa-das-escolhas-vivas"), 'mundo ligado ao app');
@@ -38,7 +38,7 @@ ok(app.includes("universe:'casa-das-escolhas-vivas'"), 'universo declarado');
 ok(app.includes('lojaWorldStatus:lojaWorld?.status?.() || null'), 'auditoria reunida');
 ok(app.includes("event.data?.type === 'DIVINA_WORK13_LOJA_WORLD_ACTIVE'"), 'worker ouvido');
 ok(app.includes('window.divinaCosmosVivoV622'), 'continuidade pública V622');
-ok(app.includes("document.documentElement.dataset.work13Macro = 'loja-casa-das-escolhas-vivas'"), 'macroetapa ativa');
+ok(app.includes("document.documentElement.dataset.work13Macro = 'premium-sala-das-chaves'"), 'macroetapa seguinte ativa');
 ok(app.includes("document.documentElement.dataset.work13ConsultasWorld = 'v621'"), 'Consultas V621 permanece');
 ok(app.includes('work14:false'), 'nenhum WORK14');
 
@@ -116,8 +116,8 @@ ok(commerce.includes('searchQueryReads:0') && commerce.includes('purchaseBodyRea
 ok(entry.includes('globalMenuOnEveryPage:true') && entry.includes('pentagramVisibleWhileMenuOpen:true'), 'menu mágico permanece global');
 
 const core = sw.match(/const CORE = Object\.freeze\(\[([\s\S]*?)\]\);/)?.[1] || '';
-ok(count(core,/^\s*'\.\//gm) === 72, '72 ativos atômicos');
-ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v622-loja-casa-das-escolhas-vivas'"), 'cache próprio');
+ok(count(core,/^\s*'\.\//gm) === 74, '74 ativos atômicos');
+ok(sw.includes("CACHE_NAME = 'divina-bruxa-work13-v623-premium-sala-das-chaves'"), 'cache próprio');
 ok(sw.includes("'./loja-world-v622.js?v=622-casa-das-escolhas-vivas'"), 'JS no cache');
 ok(sw.includes("'./loja-world-v622.css?v=622-casa-das-escolhas-vivas'"), 'CSS no cache');
 ok(sw.includes('DIVINA_WORK13_LOJA_WORLD_ACTIVE'), 'ativação comunicada');
