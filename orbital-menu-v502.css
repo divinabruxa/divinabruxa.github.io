@@ -295,11 +295,9 @@ html.db502-menu-open body{
   filter:saturate(1) brightness(1);
 }
 
-.db502-menu[data-bubble-state="breath"].has-intentions .db502-portal.is-offered{
-  animation:db593IntentionBreath 5.8s ease-in-out infinite;
-}
+.db502-menu[data-bubble-state="breath"].has-intentions .db502-portal.is-offered{animation:none}
 
-.db502-menu[data-bubble-state="breath"].has-intentions .db502-portal.is-offered:nth-child(even){animation-delay:-2.7s}
+.db502-menu[data-bubble-state="breath"].has-intentions .db502-portal.is-offered:nth-child(even){animation-delay:0s}
 
 .db502-portal__light{
   position:absolute;
@@ -559,11 +557,6 @@ html[data-menu-motion="active"] .db502-portal,
   transition-duration:var(--db593-exit)!important;
 }
 
-@keyframes db593IntentionBreath{
-  0%,100%{transform:translate(-50%,-50%) translateY(0) rotate(var(--bubble-rotate)) scale(.985);filter:saturate(.98) brightness(.98)}
-  48%{transform:translate(-50%,-50%) translateY(-4px) rotate(var(--bubble-rotate)) scale(1.025);filter:saturate(1.06) brightness(1.045)}
-}
-
 @media (max-width:370px){
   :root{--db593-orb-size:clamp(102px,30vw,118px)}
   .db502-portal{width:104px;min-height:90px;padding:18px 10px 15px}
@@ -622,3 +615,20 @@ html[data-menu-motion="active"] .db502-portal,
   .db502-portal{forced-color-adjust:auto;border:2px solid ButtonText;background:Canvas}
   .db502-menu__current,.db502-menu__aura,.db502-menu__halo{display:none}
 }
+
+/* V630 · fechamento: nenhuma instrução técnica visível e nenhuma operação
+   gráfica permanente. A vida vem do toque, nascimento e travessia. */
+html[data-fechamento-menu="v630"] .db502-menu__hint{
+  position:fixed!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip-path:inset(50%)!important;
+  white-space:nowrap!important;
+  opacity:0!important;
+}
+html[data-fechamento-menu="v630"] .db502-portal,
+html[data-fechamento-menu="v630"] .db502-menu__center>[data-supreme-orb="living"]{filter:none!important}
+html[data-fechamento-menu="v630"] .db502-menu__aura{filter:none!important;opacity:.42}

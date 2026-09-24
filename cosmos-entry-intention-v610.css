@@ -1,4 +1,6 @@
-/* WORK13 V613 — o menu global vive antes, durante e depois de cada travessia. */
+/* DIVINA BRUXA — FECHAMENTO SUPREMO · PORTA ENTRÁ · V630
+   Presença por estado e toque; zero animação permanente. */
+
 .cosmos-entry-intent{
   appearance:none;
   position:fixed;
@@ -8,19 +10,20 @@
   z-index:2147481200;
   display:grid;
   place-items:center;
-  width:clamp(56px,15vw,68px);
+  width:clamp(54px,14vw,64px);
   aspect-ratio:1;
   min-width:48px;
   min-height:48px;
   margin:0;
   padding:0;
+  overflow:visible;
   border:0;
   border-radius:50%;
-  background:radial-gradient(circle,rgba(255,52,47,.12),rgba(92,0,9,.04) 54%,transparent 72%);
+  background:radial-gradient(circle,rgba(255,52,47,.13),rgba(92,0,9,.045) 54%,transparent 72%);
   cursor:pointer;
   opacity:.92;
   transform:scale(.96);
-  transition:opacity 180ms ease,transform 180ms cubic-bezier(.2,.8,.2,1);
+  transition:opacity 160ms ease,transform 180ms cubic-bezier(.2,.8,.2,1);
   -webkit-tap-highlight-color:transparent;
   touch-action:manipulation;
   isolation:isolate;
@@ -31,148 +34,72 @@
   position:absolute;
   inset:7%;
   z-index:-1;
-  border:1px solid rgba(255,76,61,.2);
+  border:1px solid rgba(255,76,61,.25);
   border-radius:50%;
-  box-shadow:0 0 18px rgba(255,22,37,.23),inset 0 0 16px rgba(255,52,47,.12);
-  opacity:.7;
-  animation:db611PentagramAura 3.8s ease-in-out infinite;
+  box-shadow:0 0 16px rgba(255,22,37,.22),inset 0 0 14px rgba(255,52,47,.1);
+  opacity:.72;
+  transition:opacity 160ms ease,transform 180ms cubic-bezier(.2,.8,.2,1);
 }
-.cosmos-entry-intent img{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  pointer-events:none;
-  user-select:none;
-  -webkit-user-drag:none;
-  animation:db611PentagramBreath 3.8s ease-in-out infinite;
-}
-.cosmos-entry-intent__whit{
+.cosmos-entry-intent::after{
+  content:"";
   position:absolute;
   left:50%;
-  top:50%;
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#fff4d7;
-  box-shadow:0 0 8px #fff0bb,0 0 18px rgba(255,52,47,.9);
-  opacity:.84;
-  transform:translate(-50%,-50%) scale(.72);
-  animation:db611WhitHeartbeat 3.8s ease-in-out infinite;
-  pointer-events:none;
-}
-.cosmos-entry-intent:active,
-.cosmos-entry-intent[data-response="answering"]{
-  opacity:1;
-  transform:scale(.88);
-}
-.cosmos-entry-intent[data-response="answering"] img{animation-duration:720ms}
-.cosmos-entry-intent[data-response="menu-open"]{
-  opacity:.9;
-  transform:scale(.86);
-}
-.cosmos-entry-intent[data-response="menu-open"]::before{
-  opacity:1;
-  transform:scale(1.08);
-}
-.cosmos-entry-intent[data-response="menu-open"] img{animation-duration:2.7s}
-.cosmos-entry-intent[data-response="closing"]{
-  pointer-events:none;
-  opacity:.48;
-  transform:scale(.78);
-}
-.cosmos-entry-intent:focus-visible{outline:2px solid rgba(255,222,174,.9);outline-offset:4px}
-.cosmos-entry-intent[aria-hidden="true"]{
-  pointer-events:none;
+  top:calc(100% + 7px);
+  translate:-50% 0;
+  white-space:nowrap;
+  color:rgba(255,237,203,.92);
+  font:650 13px/1 Georgia,"Times New Roman",serif;
+  letter-spacing:.08em;
+  text-shadow:0 0 14px rgba(212,82,255,.46),0 1px 5px #030106;
   opacity:0;
-  transform:translateY(-8px) scale(.72);
+  transform:translateY(3px);
+  transition:opacity 180ms ease,transform 180ms ease;
+  pointer-events:none;
 }
+.cosmos-entry-intent img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;user-select:none;-webkit-user-drag:none}
+.cosmos-entry-intent__whit{position:absolute;left:50%;top:50%;width:7px;height:7px;border-radius:50%;background:#fff4d7;box-shadow:0 0 8px #fff0bb,0 0 16px rgba(255,52,47,.82);opacity:.84;transform:translate(-50%,-50%) scale(.74);transition:opacity 160ms ease,transform 180ms ease;pointer-events:none}
+
+html[data-work13-entry="entra"] #home .orb-stage-ref{position:relative}
+html[data-work13-entry="entra"] #home .orb-stage-ref>.cosmos-entry-intent{
+  position:absolute;
+  left:50%;
+  right:auto;
+  top:calc(100% + clamp(16px,3.4vh,30px));
+  transform:translateX(-50%) scale(.96);
+}
+html[data-work13-entry="entra"] #home .orb-stage-ref>.cosmos-entry-intent::after{content:"Entrá";opacity:1;transform:translateY(0)}
+
+.cosmos-entry-intent:active,.cosmos-entry-intent[data-response="answering"]{opacity:1;transform:scale(.88)}
+html[data-work13-entry="entra"] #home .orb-stage-ref>.cosmos-entry-intent:active,
+html[data-work13-entry="entra"] #home .orb-stage-ref>.cosmos-entry-intent[data-response="answering"]{transform:translateX(-50%) scale(.88)}
+.cosmos-entry-intent[data-response="answering"]::before{opacity:1;transform:scale(1.08)}
+.cosmos-entry-intent[data-response="answering"] .cosmos-entry-intent__whit{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.cosmos-entry-intent[data-response="menu-open"]{opacity:.88;transform:scale(.86)}
+.cosmos-entry-intent[data-response="menu-open"]::before{opacity:1;transform:scale(1.08)}
+.cosmos-entry-intent[data-response="closing"]{pointer-events:none;opacity:.48;transform:scale(.78)}
+.cosmos-entry-intent:focus-visible{outline:2px solid rgba(255,222,174,.96);outline-offset:4px}
+.cosmos-entry-intent[aria-hidden="true"]{pointer-events:none;opacity:0;transform:translateY(-8px) scale(.72)}
+
 html[data-menu-state="closed"][data-work12-state="depart" i] .cosmos-entry-intent,
 html[data-menu-state="closed"][data-work12-state="travel" i] .cosmos-entry-intent,
-html[data-menu-state="closed"][data-work12-state="arrive" i] .cosmos-entry-intent{
-  pointer-events:none;
-  opacity:0;
-  transform:translateY(-8px) scale(.72);
-}
-html[data-menu-state="closed"][data-experience-state="moving"] .cosmos-entry-intent{
-  pointer-events:none;
-  opacity:.42;
-  transform:scale(.9);
-}
+html[data-menu-state="closed"][data-work12-state="arrive" i] .cosmos-entry-intent{pointer-events:none;opacity:0;transform:translateY(-8px) scale(.72)}
+html[data-menu-state="closed"][data-experience-state="moving"] .cosmos-entry-intent{pointer-events:none;opacity:.42}
 
-/* O pentagrama substitui visualmente o antigo gatilho, sem remover o nó que
-   o menu V593 usa como âncora de acessibilidade. */
-html[data-work13-menu="pentagram-v613"] #menuBtn.menu-button{
-  visibility:hidden!important;
-  pointer-events:none!important;
-}
+html[data-fechamento-menu="v630"] #menuBtn.menu-button{visibility:hidden!important;pointer-events:none!important}
 
-/* O menu continua sendo o campo vivo V593: nome, respiro e resposta. */
 #divinaOrbitalMenuV502 .db502-portal__verb,
 #divinaOrbitalMenuV502 .db502-menu__intention,
 #divinaOrbitalMenuV502 .db502-menu__heading>span{display:none!important}
-#divinaOrbitalMenuV502 .db502-portal__label{
-  font-size:clamp(16px,4.4vw,22px);
-  line-height:1.08;
-  letter-spacing:.01em;
-}
-#divinaOrbitalMenuV502 [data-v502-route="ai"]{
-  border-color:rgba(255,102,91,.66);
-  box-shadow:0 0 0 1px rgba(255,54,54,.12),0 0 28px rgba(255,20,42,.2);
-}
-#divinaOrbitalMenuV502 [data-v502-route="ai"] .db502-portal__light{
-  background:radial-gradient(circle,rgba(255,245,217,.98),rgba(255,65,60,.56) 38%,transparent 72%);
-}
+#divinaOrbitalMenuV502 .db502-portal__label{font-size:clamp(16px,4.4vw,22px);line-height:1.08;letter-spacing:.01em}
+#divinaOrbitalMenuV502 [data-v502-route="ai"]{border-color:rgba(255,102,91,.66);box-shadow:0 0 0 1px rgba(255,54,54,.12),0 0 25px rgba(255,20,42,.18)}
+#divinaOrbitalMenuV502 [data-v502-route="ai"] .db502-portal__light{background:radial-gradient(circle,rgba(255,245,217,.98),rgba(255,65,60,.56) 38%,transparent 72%)}
 
-/* Vida do menu: o motor V593 continua mostrando só duas realidades por
-   respiração. Esta camada move apenas luz e corrente, nunca cria outro menu. */
-html[data-work13-menu="pentagram-v613"] #divinaOrbitalMenuV502 .db502-menu__backdrop::after{
-  transform-origin:50% 52%;
-  animation:db613MenuCurrent 12s ease-in-out infinite;
-}
-html[data-work13-menu="pentagram-v613"] #divinaOrbitalMenuV502[data-bubble-state="breath"] .db502-portal.is-offered .db502-portal__light{
-  animation:db613MenuSoul 5.8s ease-in-out infinite;
-}
-html[data-work13-menu="pentagram-v613"] #divinaOrbitalMenuV502[data-bubble-state="breath"] .db502-portal.is-offered:nth-child(even) .db502-portal__light{
-  animation-delay:-2.7s;
-}
-html[data-work13-menu="pentagram-v613"] #divinaOrbitalMenuV502 .db502-menu__center.has-living-orb .db502-menu__halo{
-  animation:db613MenuSoul 5.8s ease-in-out infinite;
-}
+html[data-fechamento-menu="v630"] #divinaOrbitalMenuV502 *,
+html[data-fechamento-menu="v630"] #divinaOrbitalMenuV502 *::before,
+html[data-fechamento-menu="v630"] #divinaOrbitalMenuV502 *::after{animation:none!important}
 
-@keyframes db611PentagramBreath{
-  0%,100%{opacity:.78;transform:scale(.94)}
-  50%{opacity:1;transform:scale(1)}
-}
-@keyframes db611PentagramAura{
-  0%,100%{opacity:.42;transform:scale(.88)}
-  50%{opacity:.9;transform:scale(1.05)}
-}
-@keyframes db611WhitHeartbeat{
-  0%,42%,100%{opacity:.66;transform:translate(-50%,-50%) scale(.68)}
-  50%{opacity:1;transform:translate(-50%,-50%) scale(1.04)}
-  58%{opacity:.78;transform:translate(-50%,-50%) scale(.82)}
-}
-@keyframes db613MenuCurrent{
-  0%,100%{opacity:.22;transform:rotate(-5deg) scale(.98)}
-  50%{opacity:.38;transform:rotate(3deg) scale(1.035)}
-}
-@keyframes db613MenuSoul{
-  0%,100%{opacity:.48;scale:.9}
-  50%{opacity:.88;scale:1.08}
-}
+@media(max-width:430px){.cosmos-entry-intent{right:max(10px,env(safe-area-inset-right));top:max(10px,env(safe-area-inset-top));width:56px}}
+@media(max-height:620px) and (orientation:landscape){.cosmos-entry-intent{right:max(10px,env(safe-area-inset-right));top:max(8px,env(safe-area-inset-top));width:52px}html[data-work13-entry="entra"] #home .orb-stage-ref>.cosmos-entry-intent{top:calc(100% + 10px)}}
+@media(prefers-reduced-motion:reduce){.cosmos-entry-intent,.cosmos-entry-intent::before,.cosmos-entry-intent::after,.cosmos-entry-intent__whit{transition:none!important}}
+@media(forced-colors:active){.cosmos-entry-intent{border:2px solid ButtonText;background:Canvas}.cosmos-entry-intent__whit{background:ButtonText;box-shadow:none}.cosmos-entry-intent::after{color:ButtonText;text-shadow:none}}
 
-@media(max-width:430px){
-  .cosmos-entry-intent{right:max(10px,env(safe-area-inset-right));top:max(10px,env(safe-area-inset-top));width:58px}
-}
-@media(max-height:620px) and (orientation:landscape){
-  .cosmos-entry-intent{right:max(10px,env(safe-area-inset-right));top:max(8px,env(safe-area-inset-top));width:54px}
-}
-@media(prefers-reduced-motion:reduce){
-  .cosmos-entry-intent,.cosmos-entry-intent::before,.cosmos-entry-intent img,.cosmos-entry-intent__whit{animation:none;transition:none}
-  .cosmos-entry-intent img{opacity:1;transform:none}
-}
-@media(forced-colors:active){
-  .cosmos-entry-intent{border:2px solid ButtonText;background:Canvas}
-  .cosmos-entry-intent__whit{background:ButtonText;box-shadow:none}
-}

@@ -1,19 +1,21 @@
-/* DIVINA BRUXA — WORK13 · MENU GLOBAL VIVO E PERSISTENTE · V613
-   O pentagrama vermelho sobrevive a cada chegada, abre e fecha o mesmo menu
-   vivo em todas as realidades. No Tarot Livre, a Orbe continua só revelando. */
+/* DIVINA BRUXA — FECHAMENTO SUPREMO · MENU COMO ESPINHA DORSAL · V630
+   A porta Entrá nasce junto da única Orbe na Home. Durante a jornada, o mesmo
+   pentagrama acompanha todos os mundos. Nenhuma nova Orbe, menu ou física. */
 
-const VERSION = 613;
+const VERSION = 630;
 
 export const COSMOS_ENTRY_INTENTION_CONTRACT_V610 = Object.freeze({
-  work:'WORK13',
-  correction:'menu-global-vivo-persistente',
-  invitation:'pentagrama-vermelho',
+  phase:'FECHAMENTO-SUPREMO',
+  work13:'concluido-e-congelado',
+  correction:'menu-supremo-espinha-dorsal',
+  invitation:'entra-presenca',
   entryIntentions:1,
-  visibleEntryWords:0,
+  visibleEntryWordsHome:1,
+  visibleEntryWordsWorlds:0,
   pentagramAssets:1,
   pentagramIsMenu:true,
   globalPentagram:true,
-  pentagramPosition:'top-corner',
+  pentagramPosition:'home-orb-threshold/world-top-corner',
   globalMenuOnEveryPage:true,
   pentagramVisibleWhileMenuOpen:true,
   pentagramTogglesMenu:true,
@@ -39,6 +41,10 @@ export const COSMOS_ENTRY_INTENTION_CONTRACT_V610 = Object.freeze({
   newCanvases:0,
   newRenderers:0,
   permanentAnimationLoops:0,
+  technicalMenuCopy:0,
+  homePreserved:true,
+  worldsFrozen:true,
+  iphoneFirst:true,
   work14:false
 });
 
@@ -90,11 +96,17 @@ export class CosmosEntryIntentionV610 {
     this.abortController = typeof AbortController === 'function' ? new AbortController() : null;
     this.movedGlobal = false;
     this.ensureGlobalHost();
+    if (this.documentTarget?.documentElement?.dataset) {
+      this.documentTarget.documentElement.dataset.fechamentoSupremo = 'v630';
+      this.documentTarget.documentElement.dataset.fechamentoMenu = 'v630';
+      this.documentTarget.documentElement.dataset.work14 = 'false';
+    }
     if (this.entry?.dataset) {
-      this.entry.dataset.work13MenuSymbol = 'pentagram-v613';
+      this.entry.dataset.work13MenuSymbol = 'pentagram-v630';
       this.entry.dataset.work13MenuPosition = 'top-corner';
       this.entry.dataset.work13MenuRole = 'global-toggle';
       this.entry.dataset.whitResidence = 'canonical-orb';
+      this.entry.dataset.fechamentoEntry = 'entra-presenca';
     }
     this.bind();
     this.renameMenu();
@@ -109,9 +121,12 @@ export class CosmosEntryIntentionV610 {
 
   ensureGlobalHost() {
     const body = this.documentTarget?.body;
-    if (!this.entry || !body?.append || this.entry.parentElement === body) return false;
-    body.append(this.entry);
-    this.movedGlobal = true;
+    const homeHost = this.documentTarget?.querySelector?.('#home .orb-stage-ref') || null;
+    const shouldLiveByOrb = this.route === 'home' && this.menuState === 'closed' && !this.isTraveling();
+    const host = shouldLiveByOrb && homeHost?.append ? homeHost : body;
+    if (!this.entry || !host?.append || this.entry.parentElement === host) return false;
+    host.append(this.entry);
+    this.movedGlobal = host === body;
     this.rehomes += 1;
     return true;
   }
@@ -271,18 +286,25 @@ export class CosmosEntryIntentionV610 {
     const visible = menuOpen || !traveling;
     const interactive = visible && !traveling && this.menuState !== 'closing';
     if (this.entry?.dataset) {
+      this.entry.dataset.work13MenuPosition = this.route === 'home' && this.menuState === 'closed'
+        ? 'orb-threshold'
+        : 'top-corner';
       this.entry.dataset.response = menuOpen
         ? this.menuState === 'closing' ? 'closing' : 'menu-open'
         : visible ? 'ready' : 'traveling';
       this.entry.dataset.route = this.route;
     }
-    this.entry.setAttribute('aria-label', menuOpen ? 'Fechar o menu mágico' : 'Abrir o menu mágico');
+    this.entry.setAttribute('aria-label', menuOpen
+      ? 'Fechar o universo de caminhos'
+      : this.route === 'home'
+        ? 'Entrá na Divina Bruxa'
+        : 'Abrir o universo de caminhos');
     this.entry.setAttribute('aria-hidden', String(!visible));
     this.entry.setAttribute('aria-expanded', String(menuOpen));
     this.entry.tabIndex = interactive ? 0 : -1;
     const root = this.documentTarget?.documentElement;
     if (root?.dataset) {
-      root.dataset.work13Entry = menuOpen ? 'menu-open' : visible ? 'invitation' : 'traveling';
+      root.dataset.work13Entry = menuOpen ? 'menu-open' : visible ? this.route === 'home' ? 'entra' : 'invitation' : 'traveling';
       root.dataset.work13EntryReason = reason;
       root.dataset.work13EntryResponse = menuOpen ? 'menu-open' : visible ? 'ready' : 'traveling';
       root.dataset.work13MenuAccess = visible ? 'present' : 'traveling';
@@ -373,11 +395,12 @@ export class CosmosEntryIntentionV610 {
   status() {
     return Object.freeze({
       version:VERSION,
-      invitation:'pentagrama-vermelho',
-      visibleEntryWords:0,
+      phase:'FECHAMENTO-SUPREMO',
+      invitation:'entra-presenca',
+      visibleEntryWords:this.route === 'home' && this.menuState === 'closed' ? 1 : 0,
       pentagramReady:Boolean(this.pentagram),
       globalPentagram:true,
-      pentagramPosition:'top-corner',
+      pentagramPosition:this.route === 'home' && this.menuState === 'closed' ? 'orb-threshold' : 'top-corner',
       globalMenuOnEveryPage:true,
       pentagramVisibleWhileMenuOpen:true,
       pentagramTogglesMenu:true,
@@ -402,6 +425,9 @@ export class CosmosEntryIntentionV610 {
       renamedRealities:this.renamedRealities,
       oneCanonicalOrb:Boolean(this.orb),
       automaticNavigation:false,
+      technicalMenuCopy:0,
+      permanentAnimationLoops:0,
+      work13:'concluido-e-congelado',
       work14:false
     });
   }

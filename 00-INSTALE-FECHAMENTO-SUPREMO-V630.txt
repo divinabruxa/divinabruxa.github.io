@@ -1,0 +1,27 @@
+DIVINA BRUXA — FECHAMENTO SUPREMO V630
+
+Pré-requisito
+- WORK13/V629 já instalado.
+
+Instalação
+1. Faça uma cópia dos quatro arquivos atuais com estes mesmos nomes.
+2. Substitua somente:
+   - cosmos-entry-intention-v610.js
+   - cosmos-entry-intention-v610.css
+   - orbital-menu-v502.js
+   - orbital-menu-v502.css
+3. Não altere index.html, app-v208.js, sw.js, páginas, mundos, banco ou Supabase.
+4. Publique e faça uma única atualização completa no iPhone.
+
+Validação mínima no iPhone
+- Na Home, “Entrá” aparece junto da Orbe e responde ao toque.
+- O menu nasce da mesma Orbe, com no máximo dois balões visíveis.
+- Toque em um balão, entre no mundo e reabra o menu pela mesma presença.
+- Repita ida e volta em Música, Vídeos, Tarot, Loja e Conta.
+- Confirme que não existe segunda Orbe, painel, lista ou texto técnico visível.
+
+Reversão
+- Restaure apenas as cópias anteriores dos quatro arquivos substituídos.
+
+Este pacote não cria WORK14.
+

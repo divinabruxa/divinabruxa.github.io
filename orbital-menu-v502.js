@@ -1,20 +1,18 @@
-/* DIVINA BRUXA — WORK12 · MACROETAPA 5 · SOPRO DE INTENCOES V593
-   Nao existe grade de menu. A unica Orbe recebe, no maximo, duas intencoes
-   vivas por vez. O ceu e o gesto horizontal revelam o proximo sopro; a Orbe
-   continua sendo o corpo fisico que volta a Origem ou inicia a travessia.
-*/
+/* DIVINA BRUXA — FECHAMENTO SUPREMO · MENU VIVO DEFINITIVO · V630
+   Sem lista, painel ou segunda Orbe. Dois balões nascem ao redor da Orbe,
+   respondem, silenciam e entregam a mesma viagem física entre realidades. */
 
-const VERSION = 593;
-const AUTHORITY = 'v593';
+const VERSION = 630;
+const AUTHORITY = 'v630-fechamento-supremo';
 const INSTANCE = Symbol.for('divina.orbital.menu.v502');
 const ROOT_ID = 'divinaOrbitalMenuV502';
 const STYLE_ID = 'divinaOrbitalMenuV502Styles';
-const STYLE_HREF = './orbital-menu-v502.css?v=593-work12-menu';
-const OPEN_MS = 250;
-const CLOSE_MS = 160;
-const DISSOLVE_MS = 135;
-const BIRTH_MS = 225;
-const ACCEPT_MS = 90;
+const STYLE_HREF = './orbital-menu-v502.css?v=630-fechamento-supremo';
+const OPEN_MS = 210;
+const CLOSE_MS = 140;
+const DISSOLVE_MS = 110;
+const BIRTH_MS = 180;
+const ACCEPT_MS = 70;
 const MENU_MOTION_REASON = 'work12-intention-motion';
 const HOME = Object.freeze({ route:'home', label:'Origem', spoken:'Voltar ao Início', intent:'Origem' });
 
@@ -62,7 +60,7 @@ function installStyles() {
   link.id = STYLE_ID;
   link.rel = 'stylesheet';
   link.href = STYLE_HREF;
-  link.dataset.orbitalMenuStyle = 'v593';
+  link.dataset.orbitalMenuStyle = 'v630';
   document.head.append(link);
 }
 
@@ -98,7 +96,7 @@ function createScene() {
       <span class="db502-menu__home-label" aria-hidden="true">Origem</span>
     </div>
     <p class="db502-menu__intention" aria-hidden="true"><span data-v593-intention>Escute</span></p>
-    <p class="db502-menu__hint" id="db502MenuHint">Deslize · outro sopro</p>
+    <p class="db502-menu__hint" id="db502MenuHint">Toque no céu para descobrir outros caminhos.</p>
     <span class="db502-menu__live" role="status" aria-live="polite" aria-atomic="true"></span>`;
   return root;
 }
@@ -177,7 +175,9 @@ export class OrbitalMenuV502 {
     this.menuMotionPaused = false;
 
     document.documentElement.dataset.menuAuthority = AUTHORITY;
-    document.documentElement.dataset.work12Menu = 'v593';
+    document.documentElement.dataset.work12Menu = 'v630-compatible';
+    document.documentElement.dataset.fechamentoMenu = 'v630';
+    document.documentElement.dataset.work14 = 'false';
     this.menuButton.setAttribute('aria-controls', ROOT_ID);
     this.menuButton.setAttribute('aria-haspopup', 'dialog');
     this.legacy?.setAttribute('aria-hidden', 'true');
@@ -732,7 +732,7 @@ export class OrbitalMenuV502 {
   status() {
     return Object.freeze({
       version:VERSION,
-      release:'V593',
+      release:'V630-FECHAMENTO-SUPREMO',
       authority:AUTHORITY,
       macroStage:'5-of-10',
       state:this.state,
@@ -748,6 +748,10 @@ export class OrbitalMenuV502 {
       horizontalDiscovery:true,
       skyTouchBreath:true,
       automaticRotation:false,
+      permanentAnimationLoops:0,
+      technicalMenuCopy:0,
+      work13:'concluido-e-congelado',
+      work14:false,
       menuList:false,
       menuGrid:false,
       oneLivingOrb:true,
@@ -799,6 +803,7 @@ export class OrbitalMenuV502 {
     delete document.documentElement.dataset.menuState;
     delete document.documentElement.dataset.work12Menu;
     delete document.documentElement.dataset.work12MenuIntention;
+    delete document.documentElement.dataset.fechamentoMenu;
     if (this.legacy && 'inert' in this.legacy) this.legacy.inert = false;
     delete globalThis.divinaMenuV502;
     delete globalThis[INSTANCE];
@@ -813,7 +818,7 @@ export function installMenuOrbitalV502(options = {}) {
   document.dispatchEvent(new CustomEvent('divina:orbital-menu-ready', {
     detail:Object.freeze({
       version:VERSION,
-      release:'V593',
+      release:'V630-FECHAMENTO-SUPREMO',
       authority:AUTHORITY,
       destinations:INTENTIONS.length + 1,
       maximumVisibleIntentions:2,
@@ -825,5 +830,5 @@ export function installMenuOrbitalV502(options = {}) {
   return instance;
 }
 
-// Nome historico preservado para o bootstrap; a autoridade interna e V593.
+// Nome histórico preservado para o bootstrap; a autoridade interna é V630.
 export const installOrbitalMenuV502 = installMenuOrbitalV502;
