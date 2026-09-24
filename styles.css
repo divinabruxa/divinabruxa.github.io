@@ -2376,3 +2376,158 @@ body[data-menu="closing"] .orb__aura {
 @keyframes work13-bubble-birth {
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
+
+/* WORK13 — FLUIDEZ CONTÍNUA DO MENU
+   O canvas não muda de tamanho durante a travessia: nenhuma tela preta,
+   nenhum quadro vazio e nenhuma segunda Orbe. */
+
+.orb {
+  margin: 0 !important;
+  transform-origin: 50% 50%;
+  will-change: top, left, transform, filter;
+  transition:
+    top 720ms cubic-bezier(.2,.78,.2,1),
+    left 720ms cubic-bezier(.2,.78,.2,1),
+    transform 720ms cubic-bezier(.2,.78,.2,1),
+    filter 420ms ease !important;
+}
+
+.orb__wake,
+.orb__touch,
+.orb__aura {
+  display: none !important;
+}
+
+.orb__glass {
+  box-shadow: inset 0 -18px 34px rgb(16 2 28 / .18);
+}
+
+body[data-route="home"] .orb {
+  --orb-size: min(88vw, 45dvh, 420px);
+  left: 50%;
+  top: 50%;
+  width: var(--orb-size) !important;
+  height: var(--orb-size) !important;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+body[data-route="home"][data-menu="opening"] .orb,
+body[data-route="home"][data-menu="open"] .orb {
+  top: clamp(17.8rem, 40dvh, 21.2rem);
+  width: var(--orb-size) !important;
+  height: var(--orb-size) !important;
+  transform: translate(-50%, -50%) scale(.29);
+}
+
+body[data-route="home"][data-menu="closing"] .orb {
+  left: 50%;
+  top: 50%;
+  width: var(--orb-size) !important;
+  height: var(--orb-size) !important;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+body:not([data-route="home"]) .orb {
+  --orb-size: 88px;
+  left: 50%;
+  top: calc(100dvh - var(--safe-bottom) - 50px);
+  right: auto;
+  bottom: auto;
+  width: var(--orb-size) !important;
+  height: var(--orb-size) !important;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+body:not([data-route="home"])[data-menu="opening"] .orb,
+body:not([data-route="home"])[data-menu="open"] .orb {
+  left: 50%;
+  top: clamp(17.8rem, 40dvh, 21.2rem);
+  width: var(--orb-size) !important;
+  height: var(--orb-size) !important;
+  transform: translate(-50%, -50%) scale(1.18);
+}
+
+body:not([data-route="home"])[data-menu="closing"] .orb {
+  left: 50%;
+  top: calc(100dvh - var(--safe-bottom) - 50px);
+  width: var(--orb-size) !important;
+  height: var(--orb-size) !important;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.journey {
+  background:
+    radial-gradient(circle at 50% 42%, rgb(var(--world) / .11), transparent 26rem),
+    rgb(7 2 13 / .3);
+  -webkit-backdrop-filter: blur(4px) saturate(1.04);
+  backdrop-filter: blur(4px) saturate(1.04);
+  animation: work13-veil-continuous-in 700ms cubic-bezier(.2,.78,.2,1) both;
+}
+
+.journey[data-closing="true"] {
+  pointer-events: none;
+  animation: work13-veil-continuous-out 700ms cubic-bezier(.4,0,.2,1) both;
+}
+
+.living-pentagram path {
+  stroke: rgb(225 190 255 / .58);
+  stroke-width: .72;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  filter: drop-shadow(0 0 8px rgb(var(--world) / .34));
+  animation: work13-pentagram-complete 760ms 100ms cubic-bezier(.2,.78,.2,1) forwards;
+}
+
+@media (max-height: 720px) and (orientation: portrait) {
+  body[data-route="home"][data-menu="opening"] .orb,
+  body[data-route="home"][data-menu="open"] .orb {
+    top: clamp(15.8rem, 41dvh, 17.2rem);
+    transform: translate(-50%, -50%) scale(.25);
+  }
+
+  body:not([data-route="home"])[data-menu="opening"] .orb,
+  body:not([data-route="home"])[data-menu="open"] .orb {
+    top: clamp(15.8rem, 41dvh, 17.2rem);
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+}
+
+@media (orientation: landscape) and (max-height: 560px) {
+  body[data-route="home"] .orb {
+    --orb-size: min(62dvh, 38vw, 340px);
+  }
+
+  body[data-route="home"][data-menu="opening"] .orb,
+  body[data-route="home"][data-menu="open"] .orb {
+    left: 38%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(.3);
+  }
+
+  body:not([data-route="home"])[data-menu="opening"] .orb,
+  body:not([data-route="home"])[data-menu="open"] .orb {
+    left: 38%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb { transition-duration: .01ms !important; }
+  .journey,
+  .journey[data-closing="true"] { animation-duration: .01ms !important; }
+}
+
+@keyframes work13-veil-continuous-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes work13-veil-continuous-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes work13-pentagram-complete {
+  to { stroke-dashoffset: 0; }
+}

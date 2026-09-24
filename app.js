@@ -19,6 +19,7 @@ import { createLivingUniverseV524 } from './living-universe-core-v524.js';
 
 const REDUCED_MOTION = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const TAROT_KEY = 'divina-bruxa-3.tarot-livre.v1';
+const MENU_TRANSITION_MS = 720;
 
 const worlds = WORLDS;
 const INTENTIONS = Object.freeze({
@@ -295,7 +296,7 @@ function closeMap({ restoreFocus = true } = {}) {
     if (restoreFocus) (focusBeforeJourney instanceof HTMLElement ? focusBeforeJourney : journeyTrigger).focus({ preventScroll:true });
   };
   if (REDUCED_MOTION) finish();
-  else menuCloseTimer = setTimeout(finish, 260);
+  else menuCloseTimer = setTimeout(finish, MENU_TRANSITION_MS);
 }
 
 function handleOrb({ source = 'touch' } = {}) {
@@ -802,7 +803,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=3.0.3-work13-menu-supremo', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=3.0.4-work13-fluidez-menu', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {
