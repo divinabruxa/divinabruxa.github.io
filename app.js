@@ -262,6 +262,10 @@ function openMap({ focusClose = false } = {}) {
   clearTimeout(menuCloseTimer);
   delete journey.dataset.closing;
   focusBeforeJourney = document.activeElement;
+  // O universo permanece visualmente presente, mas congela enquanto o mapa
+  // recebe o toque. A Orbe continua viva no próprio motor, sem competir por
+  // outro frame loop com a abertura do pentagrama.
+  livingUniverse?.pause?.('menu-opening');
   body.dataset.menu = 'opening';
   journey.hidden = false;
   journey.setAttribute('aria-hidden', 'false');
@@ -292,6 +296,7 @@ function closeMap({ restoreFocus = true } = {}) {
     journey.setAttribute('aria-hidden', 'true');
     delete journey.dataset.closing;
     main.inert = false;
+    livingUniverse?.start?.('menu-closed');
     document.dispatchEvent(new CustomEvent('divina:menu-state', { detail:{ state:'closed', route:currentRoute } }));
     if (restoreFocus) (focusBeforeJourney instanceof HTMLElement ? focusBeforeJourney : journeyTrigger).focus({ preventScroll:true });
   };
@@ -803,7 +808,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=3.0.6-work13-orbe-stage', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=3.0.7-launch-macro0', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {
