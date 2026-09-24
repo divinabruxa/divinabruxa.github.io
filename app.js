@@ -257,7 +257,7 @@ function renderIntention(intention = null) {
   journeyHint.textContent = `${INTENTION_LABELS[selectedIntention]} — escolha uma realidade.`;
 }
 
-function openMap() {
+function openMap({ focusClose = false } = {}) {
   if (body.dataset.menu !== 'closed') return;
   clearTimeout(menuCloseTimer);
   delete journey.dataset.closing;
@@ -274,7 +274,7 @@ function openMap() {
     if (body.dataset.menu !== 'opening') return;
     body.dataset.menu = 'open';
     document.dispatchEvent(new CustomEvent('divina:menu-state', { detail:{ state:'open', route:currentRoute } }));
-    closeJourney.focus({ preventScroll:true });
+    if (focusClose) closeJourney.focus({ preventScroll:true });
   });
 }
 
@@ -302,14 +302,14 @@ function closeMap({ restoreFocus = true } = {}) {
 function handleOrb({ source = 'touch' } = {}) {
   pulseOrb();
   if (['opening','open','closing'].includes(body.dataset.menu)) return closeMap();
-  if (currentRoute === 'home') return openMap();
+  if (currentRoute === 'home') return openMap({ focusClose:source === 'keyboard' });
   if (currentRoute === 'tarot') return tarot.reveal();
   if (currentRoute === 'carta-do-dia') return daily.reveal();
   if (currentRoute === 'tiragens') return spreads.reveal();
-  openMap();
+  openMap({ focusClose:source === 'keyboard' });
 }
 
-journeyTrigger.addEventListener('click', openMap);
+journeyTrigger.addEventListener('click', event => openMap({ focusClose:event.detail === 0 }));
 closeJourney.addEventListener('click', () => closeMap());
 pathNodes.forEach(node => node.addEventListener('click', () => {
   renderIntention(node.dataset.intention);
@@ -803,7 +803,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=3.0.4-work13-fluidez-menu', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=3.0.5-work13-menu-estavel', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {
