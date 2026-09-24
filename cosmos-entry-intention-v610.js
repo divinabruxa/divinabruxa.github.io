@@ -1,13 +1,13 @@
-/* DIVINA BRUXA — FECHAMENTO SUPREMO · MENU COMO ESPINHA DORSAL · V630
+/* DIVINA BRUXA — FECHAMENTO SUPREMO · RETORNO PELA MESMA ORBE · V632
    A porta Entrá nasce junto da única Orbe na Home. Durante a jornada, o mesmo
    pentagrama acompanha todos os mundos. Nenhuma nova Orbe, menu ou física. */
 
-const VERSION = 630;
+const VERSION = 632;
 
 export const COSMOS_ENTRY_INTENTION_CONTRACT_V610 = Object.freeze({
   phase:'FECHAMENTO-SUPREMO',
   work13:'concluido-e-congelado',
-  correction:'menu-supremo-espinha-dorsal',
+  correction:'menu-supremo-retorno-pela-mesma-orbe',
   invitation:'entra-presenca',
   entryIntentions:1,
   visibleEntryWordsHome:1,
@@ -19,6 +19,9 @@ export const COSMOS_ENTRY_INTENTION_CONTRACT_V610 = Object.freeze({
   globalMenuOnEveryPage:true,
   pentagramVisibleWhileMenuOpen:true,
   pentagramTogglesMenu:true,
+  menuOpenOrbAction:'home',
+  menuOpenOrbDelegatesToMenu:true,
+  menuOpenOrbAriaLabel:'Orbe central. Toque para voltar ao Início',
   arrivalStateRecovery:true,
   maximumVisibleIntentions:2,
   menuLife:'birth-breath-answer-silence',
@@ -97,12 +100,12 @@ export class CosmosEntryIntentionV610 {
     this.movedGlobal = false;
     this.ensureGlobalHost();
     if (this.documentTarget?.documentElement?.dataset) {
-      this.documentTarget.documentElement.dataset.fechamentoSupremo = 'v630';
+      this.documentTarget.documentElement.dataset.fechamentoSupremo = 'v632';
       this.documentTarget.documentElement.dataset.fechamentoMenu = 'v630';
       this.documentTarget.documentElement.dataset.work14 = 'false';
     }
     if (this.entry?.dataset) {
-      this.entry.dataset.work13MenuSymbol = 'pentagram-v630';
+      this.entry.dataset.work13MenuSymbol = 'pentagram-v632';
       this.entry.dataset.work13MenuPosition = 'top-corner';
       this.entry.dataset.work13MenuRole = 'global-toggle';
       this.entry.dataset.whitResidence = 'canonical-orb';
@@ -264,10 +267,13 @@ export class CosmosEntryIntentionV610 {
   sync(reason = 'sync') {
     if (!this.entry) return false;
     this.ensureGlobalHost();
+    const menuOpen = this.menuState !== 'closed';
     const journalThreshold = this.journalThresholdOwnsOrb(this.orb);
     if (this.orb) this.orb.setAttribute?.(
       'aria-label',
-      this.route === 'home'
+      menuOpen
+        ? 'Orbe central. Toque para voltar ao Início'
+        : this.route === 'home'
         ? 'Orbe viva. Toque para abrir o universo; toque duplo abre o Tarot Livre'
         : this.route === 'tarot'
           ? 'Orbe viva. Toque para revelar a próxima carta'
@@ -281,7 +287,6 @@ export class CosmosEntryIntentionV610 {
           ? 'Orbe viva. Toque para entrar e escrever no Diário'
         : 'Orbe viva. Toque para abrir o universo'
     );
-    const menuOpen = this.menuState !== 'closed';
     const traveling = this.isTraveling();
     const visible = menuOpen || !traveling;
     const interactive = visible && !traveling && this.menuState !== 'closing';
@@ -339,6 +344,7 @@ export class CosmosEntryIntentionV610 {
     this.listen(this.orb, 'pointercancel', restEntry, { passive:true });
     this.listen(this.documentTarget, 'click', event => {
       if (this.route === 'home' || !this.isCanonicalOrbTarget(event?.target)) return;
+      if (this.menuState !== 'closed') return;
       if (this.route === 'tarot') return;
       if (this.isRealityOwnedOrbTarget(event?.target)) return;
       event.preventDefault?.();
@@ -347,6 +353,7 @@ export class CosmosEntryIntentionV610 {
     }, { capture:true });
     this.listen(this.documentTarget, 'keydown', event => {
       if (this.route === 'home' || !this.isCanonicalOrbTarget(event?.target)) return;
+      if (this.menuState !== 'closed') return;
       if (this.route === 'tarot') return;
       if (this.isRealityOwnedOrbTarget(event?.target)) return;
       if (!['Enter',' '].includes(event?.key) || event?.repeat) return;
@@ -404,6 +411,9 @@ export class CosmosEntryIntentionV610 {
       globalMenuOnEveryPage:true,
       pentagramVisibleWhileMenuOpen:true,
       pentagramTogglesMenu:true,
+      menuOpenOrbAction:'home',
+      menuOpenOrbDelegatesToMenu:true,
+      menuOpenOrbAriaLabel:'Orbe central. Toque para voltar ao Início',
       arrivalStateRecovery:true,
       maximumVisibleIntentions:2,
       menuLife:'birth-breath-answer-silence',

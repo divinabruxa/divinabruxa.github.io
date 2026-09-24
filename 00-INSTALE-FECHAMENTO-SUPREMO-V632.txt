@@ -1,0 +1,25 @@
+DIVINA BRUXA — FECHAMENTO SUPREMO V632
+RETORNO PELA MESMA ORBE
+
+Pré-requisito
+- V631 instalado.
+
+Instalação
+1. Faça uma cópia do arquivo atual `cosmos-entry-intention-v610.js`.
+2. Substitua somente `cosmos-entry-intention-v610.js` pelo arquivo deste pacote.
+3. Não altere CSS, menu, index.html, app-v208.js, sw.js, páginas, mundos ou backend.
+4. Publique e faça uma única atualização completa no iPhone.
+
+Prova física
+1. Entre em qualquer mundo pelo menu.
+2. Abra novamente o universo pelo pentagrama.
+3. Toque na Orbe central marcada como “Início”.
+4. Confirme que a mesma Orbe volta para a Home e o menu fecha.
+5. No Tarot Livre com o menu fechado, toque na Orbe e confirme que ela revela uma carta.
+6. No Tarot Livre com o menu aberto, toque na Orbe central e confirme o retorno à Home.
+
+Reversão
+- Restaure somente a cópia anterior de `cosmos-entry-intention-v610.js`.
+
+Este pacote não cria WORK14 e não modifica nenhum mundo.
+
