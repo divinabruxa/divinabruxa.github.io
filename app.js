@@ -1,7 +1,9 @@
 import { CARDS, DAILY_MESSAGES } from './data/cards.js';
+import { CONFIG } from './data/config.js';
 import { WORLDS } from './data/worlds.js';
 import { dailyCardIndex, dailyStorageKey, dateKeyInTimeZone } from './lib/daily-card.js';
-import { createSpreadState, revealSpreadPosition, SPREADS, spreadStorageKey, validateSpreadState } from './lib/spread-state.js';
+import { buildSpreadSynthesis, createSpreadState, revealSpreadPosition, SPREAD_LIST, SPREADS, spreadStorageKey, validateSpreadState } from './spread-state-v310.js';
+import { checkPremiumEntitlement } from './premium-entitlement-v310.js';
 import { createTarotState, revealNext, shuffleWaiting, validateTarotState } from './lib/tarot-state.js';
 import { createJournalWorld } from './worlds/journal.js';
 import { createLibraryWorld } from './worlds/library.js';
@@ -10,7 +12,7 @@ import { createWhitWorld } from './worlds/whit.js';
 import { createAccountWorld } from './worlds/account.js';
 import { createConsultationsWorld } from './worlds/consultations.js';
 import { createMusicWorld } from './worlds/music.js';
-import { createPremiumWorld } from './worlds/premium.js';
+import { createPremiumWorld } from './premium-world-v310.js';
 import { createSkinsWorld } from './skins-world-v301.js';
 import { createStoreWorld } from './worlds/store.js';
 import { createVideosWorld } from './worlds/videos.js';
@@ -146,7 +148,7 @@ function applyRoute(route, { push = true, focus = true, animate = true } = {}) {
     setActiveWorld(next);
     if (next === 'tarot') tarot.render();
     if (next === 'carta-do-dia') daily.render();
-    if (next === 'tiragens') spreads.render();
+    if (next === 'tiragens') spreads.activate();
     if (next === 'escola') school.activate();
     if (next === 'biblioteca') library.activate();
     if (next === 'diario') journal.activate();
@@ -612,6 +614,7 @@ daily.nodes.card.addEventListener('click', () => {
 });
 
 const CARD_IDS = CARDS.map(card => card.id);
+const CARD_BY_ID = new Map(CARDS.map(card => [card.id, card]));
 const CURRENT_SPREAD_KEY = 'divina-bruxa-3.tiragem-atual.v1';
 
 function rememberedSpreadId() {
@@ -631,10 +634,18 @@ function loadSpreadState(spreadId) {
 
 const spreads = {
   state:loadSpreadState(rememberedSpreadId()),
+  premiumAccess:{ active:false, status:'unknown', entitlementKey:null },
+  entitlementRequest:0,
   resetArmed:false,
   resetTimer:0,
   nodes: {
     picker:document.querySelector('#spreadPicker'),
+    catalogState:document.querySelector('#spreadCatalogState'),
+    gate:document.querySelector('#spreadPremiumGate'),
+    gateEyebrow:document.querySelector('#spreadGateEyebrow'),
+    gateTitle:document.querySelector('#spreadGateTitle'),
+    gateMessage:document.querySelector('#spreadGateMessage'),
+    premiumAction:document.querySelector('#spreadPremiumAction'),
     intention:document.querySelector('#spreadIntention'),
     eyebrow:document.querySelector('#spreadEyebrow'),
     name:document.querySelector('#spreadName'),
@@ -643,41 +654,166 @@ const spreads = {
     progress:document.querySelector('#spreadProgress'),
     board:document.querySelector('#spreadBoard'),
     guidance:document.querySelector('#spreadGuidance'),
-    reset:document.querySelector('#resetSpread')
+    reset:document.querySelector('#resetSpread'),
+    synthesis:document.querySelector('#spreadSynthesis'),
+    synthesisTitle:document.querySelector('#spreadSynthesisTitle'),
+    synthesisFacts:document.querySelector('#spreadSynthesisFacts'),
+    synthesisPrompt:document.querySelector('#spreadSynthesisPrompt')
   },
 
   get definition() { return SPREADS[this.state.spreadId]; },
 
+  canUse() {
+    return this.definition.access === 'free' || this.premiumAccess.active;
+  },
+
+  rememberSelection() {
+    try { localStorage.setItem(CURRENT_SPREAD_KEY, this.state.spreadId); } catch {}
+  },
+
   save() {
+    if (!this.canUse()) return;
     this.state.intention = this.nodes.intention.value.slice(0, 180);
     try {
       localStorage.setItem(spreadStorageKey(this.state.spreadId), JSON.stringify(this.state));
-      localStorage.setItem(CURRENT_SPREAD_KEY, this.state.spreadId);
     } catch {}
+    this.rememberSelection();
+  },
+
+  renderPicker() {
+    const groups = [
+      { access:'free', label:'ABERTAS' },
+      { access:'premium', label:'PREMIUM' }
+    ];
+    const fragment = document.createDocumentFragment();
+    groups.forEach(group => {
+      const section = document.createElement('section');
+      section.className = 'spread-picker__group';
+      const heading = document.createElement('p');
+      heading.textContent = group.label;
+      const tray = document.createElement('div');
+      SPREAD_LIST.filter(spread => spread.access === group.access).forEach(spread => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.dataset.spread = spread.id;
+        button.dataset.access = spread.access;
+        button.setAttribute('aria-pressed', 'false');
+        button.setAttribute('aria-label', `${spread.name}, ${spread.positions.length} ${spread.positions.length === 1 ? 'posição' : 'posições'}, ${spread.access === 'free' ? 'aberta' : 'Premium'}`);
+        const name = document.createElement('span');
+        name.textContent = spread.name;
+        const meta = document.createElement('small');
+        meta.textContent = spread.access === 'free' ? `${spread.positions.length} · ABERTA` : `${spread.positions.length} · ♢ PREMIUM`;
+        button.append(name, meta);
+        tray.append(button);
+      });
+      section.append(heading, tray);
+      fragment.append(section);
+    });
+    this.nodes.picker.replaceChildren(fragment);
+    const freeCount = SPREAD_LIST.filter(spread => spread.access === 'free').length;
+    this.nodes.catalogState.textContent = `${freeCount} abertas · ${SPREAD_LIST.length - freeCount} Premium`;
+  },
+
+  async verifyPremium({ force = false } = {}) {
+    if (this.definition.access !== 'premium') return;
+    if (this.premiumAccess.active && !force) return;
+    const requestId = ++this.entitlementRequest;
+    this.premiumAccess = { active:false, status:'checking', entitlementKey:null };
+    this.render();
+    const session = account.getSession();
+    if (requestId !== this.entitlementRequest || this.definition.access !== 'premium') return;
+    const result = await checkPremiumEntitlement({
+      session,
+      endpoint:`${CONFIG.functionsBase}/premium-entitlement`,
+      publishableKey:CONFIG.supabasePublishableKey
+    });
+    if (requestId !== this.entitlementRequest || this.definition.access !== 'premium') return;
+    this.premiumAccess = result;
+    this.render();
+    if (result.active) announce('Chave Premium confirmada pela sua conta. A tiragem está aberta.');
+    else if (result.status === 'signed-out') announce('Entre na sua Conta para confirmar a chave Premium.');
+    else if (result.status === 'inactive') announce('Esta tiragem requer a chave Divina Bruxa Premium.');
+    else announce('Não foi possível confirmar a chave agora. O acesso continua protegido.');
   },
 
   select(spreadId) {
-    if (!SPREADS[spreadId] || spreadId === this.state.spreadId) return;
+    if (!SPREADS[spreadId]) return;
+    if (spreadId === this.state.spreadId) {
+      if (this.definition.access === 'premium') void this.verifyPremium({ force:true });
+      return;
+    }
     this.save();
+    this.entitlementRequest += 1;
     this.state = loadSpreadState(spreadId);
-    this.nodes.intention.value = this.state.intention;
+    this.rememberSelection();
     this.disarmReset();
     this.render();
-    announce(`${this.definition.name}. ${this.definition.positions.length} posições.`);
+    announce(`${this.definition.name}. ${this.definition.positions.length} posições${this.definition.access === 'premium' ? ' em prévia Premium' : ''}.`);
+    if (this.definition.access === 'premium') void this.verifyPremium();
+  },
+
+  renderGate() {
+    const locked = this.definition.access === 'premium' && !this.premiumAccess.active;
+    this.nodes.gate.hidden = !locked;
+    if (!locked) return;
+    const states = {
+      checking:{ eyebrow:'CHAVE PREMIUM', title:'Confirmando sua passagem', message:'A liberação está sendo consultada com segurança na sua conta.', action:'CONSULTANDO…', disabled:true },
+      'signed-out':{ eyebrow:'CONTA NECESSÁRIA', title:'Entre para consultar o acesso', message:'A chave Premium nunca é liberada por um registro deste aparelho.', action:'ABRIR CONTA', disabled:false },
+      inactive:{ eyebrow:'CHAVE PREMIUM', title:'Esta tiragem é Premium', message:'Sua conta ainda não possui uma chave Premium ativa. Compras reais continuam desligadas nesta fase.', action:'CONHECER PREMIUM', disabled:false },
+      unavailable:{ eyebrow:'ACESSO PROTEGIDO', title:'Não foi possível confirmar agora', message:'Sem confirmação do servidor, a tiragem permanece fechada. Tente novamente quando a conexão estiver estável.', action:'TENTAR NOVAMENTE', disabled:false },
+      unknown:{ eyebrow:'CHAVE PREMIUM', title:'Confirme sua passagem', message:'A liberação depende de uma chave ativa confirmada pela sua conta.', action:'CONFIRMAR ACESSO', disabled:false }
+    };
+    const state = states[this.premiumAccess.status] || states.unknown;
+    this.nodes.gateEyebrow.textContent = state.eyebrow;
+    this.nodes.gateTitle.textContent = state.title;
+    this.nodes.gateMessage.textContent = state.message;
+    this.nodes.premiumAction.textContent = state.action;
+    this.nodes.premiumAction.disabled = state.disabled;
+  },
+
+  renderSynthesis(usable, revealed, total) {
+    if (!usable || revealed < total) {
+      this.nodes.synthesis.hidden = true;
+      this.nodes.synthesisFacts.replaceChildren();
+      return;
+    }
+    const cards = this.state.order.slice(0, total).map(cardId => CARD_BY_ID.get(cardId));
+    const synthesis = buildSpreadSynthesis(this.state.spreadId, cards);
+    if (!synthesis) {
+      this.nodes.synthesis.hidden = true;
+      return;
+    }
+    this.nodes.synthesisTitle.textContent = synthesis.title;
+    this.nodes.synthesisPrompt.textContent = synthesis.prompt;
+    this.nodes.synthesisFacts.replaceChildren(...synthesis.facts.map(fact => {
+      const item = document.createElement('li');
+      item.textContent = fact;
+      return item;
+    }));
+    this.nodes.synthesis.hidden = false;
   },
 
   render() {
     const definition = this.definition;
     const total = definition.positions.length;
+    const usable = this.canUse();
+    const revealed = usable ? this.state.revealed : 0;
     this.nodes.eyebrow.textContent = definition.eyebrow;
     this.nodes.name.textContent = definition.name;
-    this.nodes.revealed.textContent = String(this.state.revealed);
+    this.nodes.revealed.textContent = String(revealed);
     this.nodes.total.textContent = String(total);
-    this.nodes.progress.style.width = `${(this.state.revealed / total) * 100}%`;
+    this.nodes.progress.style.width = `${(revealed / total) * 100}%`;
     this.nodes.board.dataset.spread = definition.id;
+    this.nodes.board.dataset.count = String(total);
+    this.nodes.board.dataset.locked = String(!usable);
+    this.nodes.board.setAttribute('aria-disabled', String(!usable));
+    this.nodes.intention.disabled = !usable;
+    this.nodes.intention.value = usable ? this.state.intention : '';
+    this.nodes.reset.disabled = !usable;
     this.nodes.picker.querySelectorAll('[data-spread]').forEach(button => {
       button.setAttribute('aria-pressed', String(button.dataset.spread === definition.id));
     });
+    this.renderGate();
 
     const fragment = document.createDocumentFragment();
     definition.positions.forEach((position, index) => {
@@ -688,9 +824,9 @@ const spreads = {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'spread-card';
-      const visible = index < this.state.revealed;
+      const visible = usable && index < revealed;
       if (visible) {
-        const card = CARDS[this.state.order[index]];
+        const card = CARD_BY_ID.get(this.state.order[index]);
         button.classList.add('has-card');
         button.setAttribute('aria-label', `${position}: ${card.name}. Ampliar carta.`);
         const image = new Image();
@@ -703,7 +839,7 @@ const spreads = {
         button.addEventListener('click', () => showCardDialog(card, `${index + 1} · ${position.toUpperCase()}`));
       } else {
         button.disabled = true;
-        button.setAttribute('aria-label', `${position}: posição ainda oculta`);
+        button.setAttribute('aria-label', usable ? `${position}: posição ainda oculta` : `${position}: prévia Premium bloqueada`);
       }
       const label = document.createElement('p');
       label.innerHTML = `<b>${index + 1}</b>${position}`;
@@ -711,17 +847,26 @@ const spreads = {
       fragment.append(slot);
     });
     this.nodes.board.replaceChildren(fragment);
+    this.renderSynthesis(usable, revealed, total);
 
-    if (this.state.revealed >= total) {
+    if (!usable) {
+      this.nodes.guidance.textContent = 'As posições estão visíveis em prévia. Confirme a chave da sua conta para revelar cartas.';
+      if (currentRoute === 'tiragens') orbCue.textContent = 'Acesso Premium';
+    } else if (revealed >= total) {
       this.nodes.guidance.textContent = `${definition.name} completa. Observe relações, repetições e movimento antes de concluir.`;
       if (currentRoute === 'tiragens') orbCue.textContent = 'Tiragem completa';
     } else {
-      this.nodes.guidance.textContent = `Próxima: ${definition.positions[this.state.revealed]}. Toque na Orbe.`;
+      this.nodes.guidance.textContent = `Próxima: ${definition.positions[revealed]}. Toque na Orbe.`;
       if (currentRoute === 'tiragens') orbCue.textContent = 'Revelar posição';
     }
   },
 
   reveal() {
+    if (!this.canUse()) {
+      this.nodes.premiumAction.focus({ preventScroll:true });
+      announce('Esta tiragem permanece fechada até a confirmação segura da chave Premium.');
+      return;
+    }
     const result = revealSpreadPosition(this.state);
     if (result.cardId === null) {
       announce(`${this.definition.name} já está completa.`);
@@ -730,7 +875,7 @@ const spreads = {
     this.state = result.state;
     this.save();
     this.render();
-    const card = CARDS[result.cardId];
+    const card = CARD_BY_ID.get(result.cardId);
     const position = this.definition.positions[result.positionIndex];
     announce(`${position}: ${card.name}. Sempre direta.`);
     const slot = this.nodes.board.querySelector(`[data-position="${result.positionIndex + 1}"]`);
@@ -744,6 +889,10 @@ const spreads = {
   },
 
   reset() {
+    if (!this.canUse()) {
+      announce('A confirmação Premium é necessária antes de recomeçar esta tiragem.');
+      return;
+    }
     if (!this.resetArmed && (this.state.revealed || this.nodes.intention.value.trim())) {
       this.resetArmed = true;
       this.nodes.reset.textContent = 'Confirmar recomeço';
@@ -759,14 +908,29 @@ const spreads = {
     this.render();
     pulseOrb();
     announce(`${this.definition.name} recomeçada. Todas as posições aguardam.`);
+  },
+
+  activate() {
+    this.render();
+    if (this.definition.access === 'premium') void this.verifyPremium({ force:true });
   }
 };
 
-spreads.nodes.picker.querySelectorAll('[data-spread]').forEach(button => {
-  button.addEventListener('click', () => spreads.select(button.dataset.spread));
+spreads.nodes.picker.addEventListener('click', event => {
+  const button = event.target.closest('[data-spread]');
+  if (button) spreads.select(button.dataset.spread);
 });
-spreads.nodes.intention.addEventListener('input', () => spreads.save());
+spreads.nodes.intention.addEventListener('input', () => {
+  if (spreads.canUse()) spreads.save();
+});
 spreads.nodes.reset.addEventListener('click', () => spreads.reset());
+spreads.nodes.premiumAction.addEventListener('click', () => {
+  if (['unavailable', 'unknown'].includes(spreads.premiumAccess.status)) {
+    void spreads.verifyPremium({ force:true });
+    return;
+  }
+  applyRoute(spreads.premiumAccess.status === 'signed-out' ? 'conta' : 'premium');
+});
 
 const school = createSchoolWorld({ cards:CARDS, showCard:showCardDialog, announce });
 const library = createLibraryWorld({ cards:CARDS, showCard:showCardDialog });
@@ -790,7 +954,7 @@ cardDialog.addEventListener('click', event => {
 
 tarot.render();
 daily.render();
-spreads.nodes.intention.value = spreads.state.intention;
+spreads.renderPicker();
 spreads.render();
 
 livingUniverse = createLivingUniverseV524();
@@ -808,7 +972,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=3.0.7-launch-macro0', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=3.1.0-launch-macro1', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {

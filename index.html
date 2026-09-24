@@ -19,7 +19,7 @@
   <title>Divina Bruxa</title>
   <link rel="preload" href="assets/orbe.webp" as="image" type="image/webp">
   <link rel="preload" href="divina-universe-retina-v523.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=3.0.6-work13-orbe-stage">
+  <link rel="stylesheet" href="styles.css?v=3.1.0-launch-macro1">
 </head>
 <body data-route="home" data-menu="closed">
   <a class="skip-link" href="#main">Pular para a experiência</a>
@@ -133,13 +133,18 @@
       </div>
 
       <div class="spread-console">
-        <nav id="spreadPicker" class="spread-picker" aria-label="Escolher uma tiragem">
-          <button type="button" data-spread="conselho">Conselho</button>
-          <button type="button" data-spread="tres-tempos">Três Tempos</button>
-          <button type="button" data-spread="dois-caminhos">Dois Caminhos</button>
-          <button type="button" data-spread="cruz-celta">Cruz Celta</button>
-          <button type="button" data-spread="mesa-real">Mesa Real</button>
-        </nav>
+        <p id="spreadCatalogState" class="spread-catalog-state">4 abertas · 11 Premium</p>
+        <nav id="spreadPicker" class="spread-picker" aria-label="Escolher uma tiragem"></nav>
+
+        <aside id="spreadPremiumGate" class="spread-premium-gate" hidden>
+          <span aria-hidden="true">♢</span>
+          <div>
+            <p id="spreadGateEyebrow" class="eyebrow">CHAVE PREMIUM</p>
+            <h2 id="spreadGateTitle">Confirmando sua passagem</h2>
+            <p id="spreadGateMessage">A liberação é consultada com segurança na sua conta.</p>
+          </div>
+          <button id="spreadPremiumAction" type="button">ABRIR CONTA</button>
+        </aside>
 
         <label class="spread-intention">
           <span>Sua intenção fica somente neste aparelho</span>
@@ -158,6 +163,16 @@
         <div class="spread-viewport" tabindex="0" aria-label="Cartas da tiragem">
           <div id="spreadBoard" class="spread-board" role="list"></div>
         </div>
+
+        <section id="spreadSynthesis" class="spread-synthesis" aria-labelledby="spreadSynthesisTitle" hidden>
+          <p class="eyebrow">ESSÊNCIA PRIMEIRO · PROFUNDIDADE OPCIONAL</p>
+          <h3 id="spreadSynthesisTitle">Essência da composição</h3>
+          <p id="spreadSynthesisPrompt"></p>
+          <details>
+            <summary>Observar sinais da composição</summary>
+            <ul id="spreadSynthesisFacts"></ul>
+          </details>
+        </section>
 
         <div class="spread-footer">
           <p id="spreadGuidance" aria-live="polite">A primeira posição aguarda a Orbe.</p>
@@ -455,6 +470,6 @@
   </dialog>
 
   <div id="announcer" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
-  <script type="module" src="app.js?v=3.0.7-launch-macro0"></script>
+  <script type="module" src="app.js?v=3.1.0-launch-macro1"></script>
 </body>
 </html>
