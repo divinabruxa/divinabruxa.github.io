@@ -1,0 +1,42 @@
+DIVINA BRUXA 3.0 — GATE 0 — COFRE E INVENTÁRIO
+Data: 24/09/2026
+
+RESULTADO DESTA ETAPA
+
+1. O estado atual do repositório foi congelado na branch:
+   cofre-pre-divina-3-2026-09-24
+
+2. O cofre aponta para o mesmo commit do main:
+   187aaf2dfaf2f8cdf9ae5864ea9d86a60b9c8b4b
+
+3. O main permaneceu como branch padrão e não foi alterado.
+
+4. Nenhum arquivo foi excluído.
+
+5. Este pacote contém o inventário completo, hashes, diagnóstico estrutural e
+   a regra de triagem para construir a Divina Bruxa 3.0 sem transportar a
+   bagunça do legado.
+
+IMPORTANTE
+
+Este não é um pacote de instalação do novo site. É o ponto de recuperação e a
+prova objetiva necessária antes da reconstrução. A próxima etapa é criar a base
+limpa da 3.0 fora do main; somente depois de a nova experiência passar pela
+auditoria iPhone, acessibilidade, SEO, rotas e retorno é que o main será trocado
+em um único corte reversível.
+
+ORDEM DE LEITURA
+
+1. RELATORIO-GATE0-COFRE-E-LIMPEZA.md
+2. PLANO-DE-TRIAGEM-E-MIGRACAO.md
+3. DEPENDENCIAS-LEGADO-OBSERVADAS.md
+4. PROXIMO-PASSO-GATE1.md
+5. MANIFESTO-GATE0-COFRE-E-INVENTARIO.json
+6. CONTAGENS-POR-EXTENSAO.csv
+7. LISTA-COMPLETA-DE-ARQUIVOS.txt
+8. SHA256-DO-REPOSITORIO-ATUAL.txt
+
+LEI DE SEGURANÇA
+
+O cofre não deve receber alterações. A reconstrução não deve ser feita em cima
+dele nem diretamente no main.
