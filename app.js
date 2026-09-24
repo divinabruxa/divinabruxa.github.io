@@ -151,8 +151,12 @@ function applyRoute(route, { push = true, focus = true } = {}) {
     if (focus) document.querySelector(`#${titleIds[next] || 'homeTitle'}`)?.focus?.({ preventScroll:true });
   };
 
-  if (!REDUCED_MOTION && document.startViewTransition) document.startViewTransition(swap);
-  else swap();
+  if (!REDUCED_MOTION && document.startViewTransition) {
+    const transition = document.startViewTransition(swap);
+    transition.ready.catch(() => {});
+    transition.updateCallbackDone.catch(() => {});
+    transition.finished.catch(() => {});
+  } else swap();
 
   if (push && normalizedRoute(location.hash) !== next) history.pushState({ route:next }, '', `#/${next}`);
   selectedCategory = world.category;
