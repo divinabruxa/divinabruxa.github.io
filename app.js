@@ -1,5 +1,5 @@
 import { CARDS, DAILY_MESSAGES } from './data/cards.js';
-import { CATEGORY_LABELS, WORLDS } from './data/worlds.js';
+import { WORLDS } from './data/worlds.js';
 import { dailyCardIndex, dailyStorageKey, dateKeyInTimeZone } from './lib/daily-card.js';
 import { createSpreadState, revealSpreadPosition, SPREADS, spreadStorageKey, validateSpreadState } from './lib/spread-state.js';
 import { createTarotState, revealNext, shuffleWaiting, validateTarotState } from './lib/tarot-state.js';
@@ -21,7 +21,22 @@ const REDUCED_MOTION = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const TAROT_KEY = 'divina-bruxa-3.tarot-livre.v1';
 
 const worlds = WORLDS;
-const categoryLabels = CATEGORY_LABELS;
+const INTENTIONS = Object.freeze({
+  tarot:['tarot', 'carta-do-dia', 'tiragens', 'biblioteca'],
+  learn:['escola'],
+  inner:['diario', 'whit'],
+  universes:['musica', 'videos', 'skins'],
+  encounter:['consultas', 'loja', 'premium', 'conta']
+});
+const INTENTION_LABELS = Object.freeze({
+  tarot:'Tarot',
+  learn:'Aprender',
+  inner:'Interior',
+  universes:'Universos',
+  encounter:'Encontro'
+});
+const MENU_LABELS = Object.freeze({ diario:'Diário & Espelho' });
+const SECONDARY_ROUTES = new Set(['premium', 'conta']);
 
 const body = document.body;
 const main = document.querySelector('#main');
@@ -46,13 +61,14 @@ const journey = document.querySelector('#journey');
 const journeyTrigger = document.querySelector('#journeyTrigger');
 const closeJourney = document.querySelector('#closeJourney');
 const constellation = document.querySelector('#constellation');
+const livingMap = document.querySelector('#livingMap');
 const journeyHint = document.querySelector('#journeyHint');
 const announcer = document.querySelector('#announcer');
 const pathNodes = [...document.querySelectorAll('.path-node')];
 const routeLinks = [...document.querySelectorAll('[data-route-link]')];
 
 let currentRoute = 'home';
-let selectedCategory = 'oracles';
+let selectedIntention = null;
 let focusBeforeJourney = null;
 let livingUniverse = null;
 let orbEngine = null;
@@ -74,6 +90,10 @@ function pulseOrb() {
 function normalizedRoute(value = '') {
   const route = value.replace(/^#\/?/, '').replace(/^\//, '').trim() || 'home';
   return worlds[route] ? route : 'home';
+}
+
+function intentionForRoute(route) {
+  return Object.entries(INTENTIONS).find(([, routes]) => routes.includes(route))?.[0] || null;
 }
 
 function setActiveWorld(route) {
@@ -175,7 +195,7 @@ function applyRoute(route, { push = true, focus = true, animate = true } = {}) {
   swap();
 
   if (push && normalizedRoute(location.hash) !== next) history.pushState({ route:next }, '', `#/${next}`);
-  selectedCategory = world.category;
+  selectedIntention = intentionForRoute(next);
   announce(`${world.title}. ${world.description}`);
   clearTimeout(routeSettleTimer);
   const settle = () => {
@@ -191,18 +211,39 @@ function applyRoute(route, { push = true, focus = true, animate = true } = {}) {
   else settle();
 }
 
-function renderConstellation(category) {
-  selectedCategory = category;
-  pathNodes.forEach(node => node.setAttribute('aria-expanded', String(node.dataset.category === category)));
+function renderIntention(intention = null) {
+  selectedIntention = Object.hasOwn(INTENTIONS, intention) ? intention : null;
+  const currentIntention = intentionForRoute(currentRoute);
+  livingMap.dataset.intention = selectedIntention || '';
+  journey.dataset.depth = selectedIntention ? 'destinations' : 'intentions';
+  pathNodes.forEach(node => {
+    const expanded = node.dataset.intention === selectedIntention;
+    node.setAttribute('aria-expanded', String(expanded));
+    if (node.dataset.intention === currentIntention) node.setAttribute('aria-current', 'step');
+    else node.removeAttribute('aria-current');
+  });
   constellation.replaceChildren();
-  const destinations = Object.entries(worlds).filter(([, world]) => world.category === category);
+
+  if (!selectedIntention) {
+    delete constellation.dataset.count;
+    journeyHint.textContent = 'Escolha uma intenção.';
+    return;
+  }
+
+  const destinations = INTENTIONS[selectedIntention].map(route => [route, worlds[route]]);
+  constellation.dataset.count = String(destinations.length);
 
   destinations.forEach(([route, world], index) => {
     const button = document.createElement('button');
     button.type = 'button';
-    button.className = 'destination';
+    button.className = `destination${SECONDARY_ROUTES.has(route) ? ' destination--utility' : ''}`;
     button.dataset.route = route;
-    button.textContent = world.label;
+    const sigil = document.createElement('span');
+    sigil.setAttribute('aria-hidden', 'true');
+    sigil.textContent = world.sigil;
+    const label = document.createElement('b');
+    label.textContent = MENU_LABELS[route] || world.label;
+    button.append(sigil, label);
     button.style.animationDelay = `${index * 55}ms`;
     if (route === currentRoute) button.setAttribute('aria-current', 'page');
     button.addEventListener('click', () => {
@@ -212,7 +253,7 @@ function renderConstellation(category) {
     });
     constellation.append(button);
   });
-  journeyHint.textContent = `${categoryLabels[category]} — escolha uma realidade.`;
+  journeyHint.textContent = `${INTENTION_LABELS[selectedIntention]} — escolha uma realidade.`;
 }
 
 function openMap() {
@@ -220,20 +261,24 @@ function openMap() {
   clearTimeout(menuCloseTimer);
   delete journey.dataset.closing;
   focusBeforeJourney = document.activeElement;
-  body.dataset.menu = 'open';
+  body.dataset.menu = 'opening';
   journey.hidden = false;
   journey.setAttribute('aria-hidden', 'false');
   journeyTrigger.setAttribute('aria-expanded', 'true');
   main.inert = true;
-  const initialCategory = worlds[currentRoute].category === 'home' ? 'oracles' : worlds[currentRoute].category;
-  renderConstellation(initialCategory);
-  document.dispatchEvent(new CustomEvent('divina:menu-state', { detail:{ state:'open', route:currentRoute } }));
+  renderIntention(null);
+  document.dispatchEvent(new CustomEvent('divina:menu-state', { detail:{ state:'opening', route:currentRoute } }));
   pulseOrb();
-  requestAnimationFrame(() => closeJourney.focus({ preventScroll:true }));
+  requestAnimationFrame(() => {
+    if (body.dataset.menu !== 'opening') return;
+    body.dataset.menu = 'open';
+    document.dispatchEvent(new CustomEvent('divina:menu-state', { detail:{ state:'open', route:currentRoute } }));
+    closeJourney.focus({ preventScroll:true });
+  });
 }
 
 function closeMap({ restoreFocus = true } = {}) {
-  if (!['open','closing'].includes(body.dataset.menu)) return;
+  if (!['opening','open','closing'].includes(body.dataset.menu)) return;
   if (body.dataset.menu === 'closing') return;
   body.dataset.menu = 'closing';
   journey.dataset.closing = 'true';
@@ -255,11 +300,8 @@ function closeMap({ restoreFocus = true } = {}) {
 
 function handleOrb({ source = 'touch' } = {}) {
   pulseOrb();
-  if (['open','closing'].includes(body.dataset.menu)) return closeMap();
-  if (currentRoute === 'home') {
-    if (source === 'keyboard') openMap();
-    return;
-  }
+  if (['opening','open','closing'].includes(body.dataset.menu)) return closeMap();
+  if (currentRoute === 'home') return openMap();
   if (currentRoute === 'tarot') return tarot.reveal();
   if (currentRoute === 'carta-do-dia') return daily.reveal();
   if (currentRoute === 'tiragens') return spreads.reveal();
@@ -269,12 +311,7 @@ function handleOrb({ source = 'touch' } = {}) {
 journeyTrigger.addEventListener('click', openMap);
 closeJourney.addEventListener('click', () => closeMap());
 pathNodes.forEach(node => node.addEventListener('click', () => {
-  if (node.dataset.category === 'home') {
-    closeMap({ restoreFocus:false });
-    applyRoute('home');
-    return;
-  }
-  renderConstellation(node.dataset.category);
+  renderIntention(node.dataset.intention);
 }));
 routeLinks.forEach(link => link.addEventListener('click', event => {
   event.preventDefault();
@@ -765,7 +802,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=3.0.2-menu-limpo', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=3.0.3-work13-menu-supremo', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {

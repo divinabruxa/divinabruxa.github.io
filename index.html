@@ -19,7 +19,7 @@
   <title>Divina Bruxa</title>
   <link rel="preload" href="assets/orbe.webp" as="image" type="image/webp">
   <link rel="preload" href="divina-universe-retina-v523.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=3.0.2-menu-limpo">
+  <link rel="stylesheet" href="styles.css?v=3.0.3-work13-menu-supremo">
 </head>
 <body data-route="home" data-menu="closed">
   <a class="skip-link" href="#main">Pular para a experiência</a>
@@ -424,17 +424,21 @@
       </div>
     </div>
 
-    <div class="living-map" aria-label="Caminhos do universo">
-      <nav class="path-constellation" aria-label="Escolha um caminho">
-        <button class="path-node" type="button" data-category="oracles" aria-expanded="false"><span>☽</span><b>Oráculos</b></button>
-        <button class="path-node" type="button" data-category="wisdom" aria-expanded="false"><span>⌘</span><b>Sabedoria</b></button>
-        <button class="path-node" type="button" data-category="creations" aria-expanded="false"><span>✧</span><b>Criações</b></button>
-        <button class="path-node" type="button" data-category="encounter" aria-expanded="false"><span>◇</span><b>Encontro</b></button>
+    <div id="livingMap" class="living-map" data-intention="" aria-label="Cinco intenções da Orbe">
+      <svg class="living-pentagram" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+        <path d="M50 7 L61 39 L95 39 L68 59 L79 92 L50 72 L21 92 L32 59 L5 39 L39 39 Z"></path>
+      </svg>
+      <nav class="path-constellation" aria-label="Escolha uma intenção">
+        <button class="path-node path-node--tarot" type="button" data-intention="tarot" aria-expanded="false"><span>☽</span><b>Tarot</b></button>
+        <button class="path-node path-node--learn" type="button" data-intention="learn" aria-expanded="false"><span>⌘</span><b>Aprender</b></button>
+        <button class="path-node path-node--inner" type="button" data-intention="inner" aria-expanded="false"><span>◉</span><b>Interior</b></button>
+        <button class="path-node path-node--universes" type="button" data-intention="universes" aria-expanded="false"><span>✦</span><b>Universos</b></button>
+        <button class="path-node path-node--encounter" type="button" data-intention="encounter" aria-expanded="false"><span>◇</span><b>Encontro</b></button>
       </nav>
       <div id="constellation" class="constellation" role="group" aria-label="Destinos do caminho"></div>
     </div>
 
-    <p id="journeyHint" class="journey__hint" aria-live="polite">Escolha uma ponta do pentagrama.</p>
+    <p id="journeyHint" class="journey__hint" aria-live="polite">Escolha uma intenção.</p>
   </section>
 
   <dialog id="cardDialog" class="card-dialog" aria-labelledby="dialogCardName">
@@ -449,6 +453,6 @@
   </dialog>
 
   <div id="announcer" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
-  <script type="module" src="app.js?v=3.0.2-menu-limpo"></script>
+  <script type="module" src="app.js?v=3.0.3-work13-menu-supremo"></script>
 </body>
 </html>

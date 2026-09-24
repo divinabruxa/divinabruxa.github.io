@@ -2062,3 +2062,317 @@ body[data-menu="closing"] .orb__aura {
 @keyframes living-portal-in {
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
+
+/* WORK13 — FECHAMENTO SUPREMO DO MENU
+   Cinco intenções, uma única Orbe e uma travessia sem salto de layout. */
+
+body[data-menu="opening"] { overflow: hidden; }
+
+body[data-menu="opening"] .journey-bar,
+body[data-menu="closing"] .journey-bar { visibility: hidden; }
+
+body[data-menu="opening"] .orb,
+body[data-menu="open"] .orb,
+body[data-menu="closing"] .orb {
+  --orb-size: clamp(92px, 25vw, 116px);
+  top: clamp(17.8rem, 40dvh, 21.2rem);
+  left: 50%;
+  bottom: auto;
+  width: var(--orb-size) !important;
+  height: var(--orb-size) !important;
+  margin: calc(var(--orb-size) / -2) 0 0 calc(var(--orb-size) / -2) !important;
+  transform: none;
+  filter: drop-shadow(0 0 25px rgb(var(--world) / .36));
+}
+
+body[data-menu="opening"] .orb__wake,
+body[data-menu="open"] .orb__wake,
+body[data-menu="closing"] .orb__wake,
+body[data-menu="opening"] .orb__touch,
+body[data-menu="open"] .orb__touch,
+body[data-menu="closing"] .orb__touch {
+  border: 0;
+  box-shadow: none;
+  opacity: 0;
+  animation: none;
+}
+
+body[data-menu="opening"] .orb__aura,
+body[data-menu="open"] .orb__aura,
+body[data-menu="closing"] .orb__aura {
+  inset: -24%;
+  opacity: .76;
+  background: radial-gradient(circle, rgb(var(--world) / .28), transparent 68%);
+  filter: blur(18px);
+}
+
+.living-map {
+  position: absolute;
+  z-index: 4;
+  top: clamp(10.5rem, 22dvh, 12rem);
+  left: 50%;
+  width: min(78vw, 19rem);
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  isolation: isolate;
+}
+
+.living-pentagram {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  transform-origin: 50% 50%;
+  animation: work13-pentagram-birth 680ms cubic-bezier(.2,.78,.2,1) both;
+}
+
+.living-pentagram path {
+  fill: none;
+  stroke: rgb(214 171 255 / .32);
+  stroke-width: .5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 330;
+  stroke-dashoffset: 330;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 7px rgb(var(--world) / .24));
+  animation: work13-pentagram-draw 760ms 90ms cubic-bezier(.2,.78,.2,1) forwards;
+}
+
+.path-constellation {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: block;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.path-constellation .path-node {
+  position: absolute;
+  top: var(--point-y);
+  left: var(--point-x);
+  display: grid;
+  justify-items: center;
+  width: 5.35rem;
+  min-width: 0;
+  min-height: 3.2rem;
+  padding: .35rem .18rem;
+  gap: .2rem;
+  border: 0;
+  border-radius: 1.2rem;
+  color: rgb(255 255 255 / .7);
+  background: transparent;
+  box-shadow: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(.72);
+  transition: opacity 360ms ease, transform 420ms cubic-bezier(.2,.78,.2,1), color 280ms ease, filter 280ms ease;
+  animation: work13-point-birth 460ms var(--point-delay, 180ms) cubic-bezier(.2,.78,.2,1) forwards;
+}
+
+.path-node--tarot { --point-x: 50%; --point-y: 7%; --point-delay: 150ms; }
+.path-node--learn { --point-x: 95%; --point-y: 39%; --point-delay: 205ms; }
+.path-node--inner { --point-x: 79%; --point-y: 92%; --point-delay: 260ms; }
+.path-node--universes { --point-x: 21%; --point-y: 92%; --point-delay: 315ms; }
+.path-node--encounter { --point-x: 5%; --point-y: 39%; --point-delay: 370ms; }
+
+.path-constellation .path-node span {
+  display: block;
+  width: auto;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  color: var(--violet-bright);
+  background: transparent;
+  box-shadow: none;
+  font-size: 1.05rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px rgb(var(--world) / .42));
+  transition: color 280ms ease, transform 360ms cubic-bezier(.2,.78,.2,1), filter 280ms ease;
+}
+
+.path-constellation .path-node b {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: clamp(.48rem, 1.95vw, .59rem);
+  letter-spacing: .1em;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.living-map[data-intention]:not([data-intention=""]) .path-node:not([aria-expanded="true"]) {
+  color: rgb(255 255 255 / .3);
+  opacity: .3;
+  transform: translate(-50%, -50%) scale(.78);
+  filter: saturate(.55);
+}
+
+.path-constellation .path-node[aria-expanded="true"] {
+  color: var(--ink);
+  background: radial-gradient(circle, rgb(var(--world) / .18), transparent 72%);
+  box-shadow: none;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.path-constellation .path-node[aria-expanded="true"] span {
+  color: var(--gold);
+  transform: scale(1.14);
+  filter: drop-shadow(0 0 11px rgb(245 213 139 / .46));
+}
+
+.path-constellation .path-node[aria-current="step"]:not([aria-expanded="true"]) span {
+  color: rgb(245 213 139 / .72);
+}
+
+.living-map .constellation {
+  position: absolute;
+  z-index: 6;
+  top: calc(100% + .55rem);
+  left: 50%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .55rem;
+  width: min(90vw, 21rem);
+  margin: 0;
+  transform: translateX(-50%);
+  pointer-events: auto;
+}
+
+.living-map .constellation:empty { display: none; }
+
+.living-map .destination {
+  position: relative;
+  left: auto;
+  top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .42rem;
+  width: 100%;
+  min-height: 2.85rem;
+  padding: .56rem .66rem;
+  border: 1px solid rgb(255 255 255 / .12);
+  border-radius: 999px;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 22% 18%, rgb(255 255 255 / .08), transparent 42%),
+    rgb(11 5 18 / .72);
+  box-shadow: 0 10px 24px rgb(0 0 0 / .2), 0 0 16px rgb(var(--world) / .08);
+  opacity: 0;
+  transform: translateY(-8px) scale(.84);
+  animation: work13-bubble-birth 460ms cubic-bezier(.2,.78,.2,1) forwards;
+}
+
+.living-map .destination span {
+  color: var(--violet-bright);
+  font-size: .86rem;
+  filter: drop-shadow(0 0 7px rgb(var(--world) / .34));
+}
+
+.living-map .destination b {
+  font-size: .56rem;
+  letter-spacing: .075em;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.living-map .destination--utility {
+  min-height: 2.55rem;
+  color: rgb(255 255 255 / .72);
+  background: rgb(11 5 18 / .48);
+  box-shadow: 0 8px 18px rgb(0 0 0 / .14);
+}
+
+.living-map .constellation[data-count="1"] .destination {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: min(11rem, 100%);
+}
+
+.living-map .destination:active { transform: scale(.96); }
+
+.journey__hint {
+  bottom: calc(11px + var(--safe-bottom));
+  font-size: .55rem;
+  letter-spacing: .11em;
+}
+
+@media (max-height: 720px) and (orientation: portrait) {
+  body[data-menu="opening"] .orb,
+  body[data-menu="open"] .orb,
+  body[data-menu="closing"] .orb {
+    --orb-size: clamp(78px, 22vw, 96px);
+    top: clamp(15.8rem, 41dvh, 17.2rem);
+  }
+
+  .living-map {
+    top: clamp(8.6rem, 21dvh, 9.6rem);
+    width: min(70vw, 16.4rem);
+  }
+
+  .path-constellation .path-node { width: 4.7rem; min-height: 2.7rem; }
+  .living-map .constellation { top: calc(100% + .35rem); gap: .4rem; }
+  .living-map .destination { min-height: 2.45rem; padding-block: .42rem; }
+}
+
+@media (orientation: landscape) and (max-height: 560px) {
+  body[data-menu="opening"] .orb,
+  body[data-menu="open"] .orb,
+  body[data-menu="closing"] .orb {
+    --orb-size: min(22dvh, 90px);
+    top: 50%;
+    left: 38%;
+  }
+
+  .living-map {
+    top: 50%;
+    left: 38%;
+    width: min(64dvh, 17rem);
+    transform: translate(-50%, -50%);
+  }
+
+  .living-map .constellation {
+    top: 50%;
+    left: calc(100% + 7rem);
+    width: min(42vw, 19rem);
+    transform: translate(-50%, -50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .living-pentagram,
+  .living-pentagram path,
+  .path-constellation .path-node,
+  .living-map .destination {
+    animation-duration: .01ms !important;
+    animation-delay: 0ms !important;
+  }
+}
+
+@keyframes work13-pentagram-birth {
+  from { opacity: 0; transform: scale(.66) rotate(-3deg); }
+  to { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+@keyframes work13-pentagram-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes work13-point-birth {
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes work13-bubble-birth {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}

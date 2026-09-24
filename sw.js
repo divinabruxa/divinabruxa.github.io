@@ -1,5 +1,5 @@
 /* Divina Bruxa 3.0 · chão offline mínimo, código sempre rede-primeiro. */
-const CACHE = 'divina-bruxa-3-shell-20260924-menu-limpo-2';
+const CACHE = 'divina-bruxa-3-shell-20260924-work13-menu-supremo-3';
 const PREFIX = 'divina-bruxa-';
 const CORE = [
   './', './index.html', './styles.css', './app.js', './manifest.webmanifest', './assets/orbe.webp',
