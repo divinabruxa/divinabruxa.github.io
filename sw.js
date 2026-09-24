@@ -1,5 +1,5 @@
-/* Divina Bruxa 3.1 · chão offline mínimo, código sempre rede-primeiro. */
-const CACHE = 'divina-bruxa-3-shell-20260924-launch-macro1-1';
+/* Divina Bruxa 3.2 · chão offline mínimo, código sempre rede-primeiro. */
+const CACHE = 'divina-bruxa-3-shell-20260924-launch-macro2-1';
 const PREFIX = 'divina-bruxa-';
 const CORE = [
   './', './index.html', './styles.css', './app.js', './manifest.webmanifest', './assets/orbe.webp',
@@ -10,7 +10,7 @@ const CORE = [
   './lib/daily-card.js', './lib/tarot-state.js', './premium-entitlement-v310.js', './spread-state-v310.js',
   './worlds/account.js', './worlds/consultations.js', './worlds/journal.js', './worlds/library.js',
   './worlds/music.js', './premium-world-v310.js', './worlds/school.js',
-  './worlds/store.js', './worlds/videos.js', './worlds/whit.js'
+  './worlds/store.js', './videos-world-v311.js', './worlds/whit.js'
 ];
 
 self.addEventListener('install', event => {

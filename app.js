@@ -15,7 +15,7 @@ import { createMusicWorld } from './worlds/music.js';
 import { createPremiumWorld } from './premium-world-v310.js';
 import { createSkinsWorld } from './skins-world-v301.js';
 import { createStoreWorld } from './worlds/store.js';
-import { createVideosWorld } from './worlds/videos.js';
+import { createVideosWorld } from './videos-world-v311.js';
 import { RealityOrbEngine } from './orb-engine-v68.js';
 import { createLivingUniverseV524 } from './living-universe-core-v524.js';
 
@@ -759,7 +759,7 @@ const spreads = {
     const states = {
       checking:{ eyebrow:'CHAVE PREMIUM', title:'Confirmando sua passagem', message:'A liberação está sendo consultada com segurança na sua conta.', action:'CONSULTANDO…', disabled:true },
       'signed-out':{ eyebrow:'CONTA NECESSÁRIA', title:'Entre para consultar o acesso', message:'A chave Premium nunca é liberada por um registro deste aparelho.', action:'ABRIR CONTA', disabled:false },
-      inactive:{ eyebrow:'CHAVE PREMIUM', title:'Esta tiragem é Premium', message:'Sua conta ainda não possui uma chave Premium ativa. Compras reais continuam desligadas nesta fase.', action:'CONHECER PREMIUM', disabled:false },
+      inactive:{ eyebrow:'CHAVE PREMIUM', title:'Esta tiragem é Premium', message:'Sua conta ainda não possui uma chave Premium ativa.', action:'CONHECER PREMIUM', disabled:false },
       unavailable:{ eyebrow:'ACESSO PROTEGIDO', title:'Não foi possível confirmar agora', message:'Sem confirmação do servidor, a tiragem permanece fechada. Tente novamente quando a conexão estiver estável.', action:'TENTAR NOVAMENTE', disabled:false },
       unknown:{ eyebrow:'CHAVE PREMIUM', title:'Confirme sua passagem', message:'A liberação depende de uma chave ativa confirmada pela sua conta.', action:'CONFIRMAR ACESSO', disabled:false }
     };
@@ -972,7 +972,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=3.1.0-launch-macro1', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=3.2.0-launch-macro2', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {

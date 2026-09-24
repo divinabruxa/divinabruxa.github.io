@@ -1,4 +1,4 @@
-import { CREDIT_PACKS, PLANS as BASE_PLANS } from './data/plans.js';
+import { PLANS as BASE_PLANS } from './data/plans.js';
 import { money } from './data/consultations.js';
 
 const PLANS = Object.freeze(BASE_PLANS.map(plan => plan.id === 'premium' ? Object.freeze({
@@ -9,7 +9,6 @@ const PLANS = Object.freeze(BASE_PLANS.map(plan => plan.id === 'premium' ? Objec
 
 export function createPremiumWorld({ navigate, announce }) {
   const planRoot = document.querySelector('#premiumPlans');
-  const creditRoot = document.querySelector('#creditPacks');
   let ready = false;
 
   function render() {
@@ -27,12 +26,6 @@ export function createPremiumWorld({ navigate, announce }) {
         <ul>${plan.includes.map(item => `<li>${item}</li>`).join('')}</ul>
         <button type="button" data-plan="${plan.id}">${plan.id === 'presence' ? 'ENTRAR NO TAROT' : plan.id === 'premium' ? 'VER AS 11 TIRAGENS' : 'ENTRAR NA CONTA'}</button>`;
       return article;
-    }));
-
-    creditRoot.replaceChildren(...CREDIT_PACKS.map(pack => {
-      const card = document.createElement('article');
-      card.innerHTML = `<b>${pack.credits}</b><span>créditos</span><strong>${money(pack.priceCents)}</strong><small>compra única · indisponível até a abertura segura</small>`;
-      return card;
     }));
 
     planRoot.addEventListener('click', event => {
