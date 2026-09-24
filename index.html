@@ -19,7 +19,7 @@
   <title>Divina Bruxa</title>
   <link rel="preload" href="assets/orbe.webp" as="image" type="image/webp">
   <link rel="preload" href="divina-universe-retina-v523.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=3.0.5-work13-menu-estavel">
+  <link rel="stylesheet" href="styles.css?v=3.0.6-work13-orbe-stage">
 </head>
 <body data-route="home" data-menu="closed">
   <a class="skip-link" href="#main">Pular para a experiência</a>
@@ -401,14 +401,16 @@
 
   </main>
 
-  <button id="orb" class="orb orb-shell orb-loading" data-supreme-orb="living" type="button" aria-label="Orbe viva: toque para despertar; toque duplo abre o Tarot Livre" aria-describedby="orbCue">
-    <span class="orb__wake" aria-hidden="true"></span>
-    <span class="orb__aura" aria-hidden="true"></span>
-    <img class="orb__image" src="assets/orbe.webp" alt="" width="384" height="384">
-    <canvas id="orbCanvas" aria-hidden="true"></canvas>
-    <span class="orb__glass" aria-hidden="true"></span>
-    <span class="orb__touch" aria-hidden="true"></span>
-  </button>
+  <div id="orbStage" class="orb-stage">
+    <button id="orb" class="orb orb-shell orb-loading" data-supreme-orb="living" type="button" aria-label="Orbe viva: toque para despertar; toque duplo abre o Tarot Livre" aria-describedby="orbCue">
+      <span class="orb__wake" aria-hidden="true"></span>
+      <span class="orb__aura" aria-hidden="true"></span>
+      <img class="orb__image" src="assets/orbe.webp" alt="" width="384" height="384">
+      <canvas id="orbCanvas" aria-hidden="true"></canvas>
+      <span class="orb__glass" aria-hidden="true"></span>
+      <span class="orb__touch" aria-hidden="true"></span>
+    </button>
+  </div>
   <p id="orbCue" class="orb-cue sr-only" aria-live="polite">Toque para despertar. Toque duplo para abrir o Tarot Livre.</p>
   <span id="orbStatus" class="sr-only" aria-live="polite">A Orbe está respirando</span>
 
@@ -453,6 +455,6 @@
   </dialog>
 
   <div id="announcer" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
-  <script type="module" src="app.js?v=3.0.5-work13-menu-estavel"></script>
+  <script type="module" src="app.js?v=3.0.6-work13-orbe-stage"></script>
 </body>
 </html>

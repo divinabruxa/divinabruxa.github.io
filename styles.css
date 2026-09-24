@@ -2623,3 +2623,138 @@ body:not([data-route="home"])[data-menu="open"] .orb {
 @media (prefers-reduced-motion: reduce) {
   .orb { transition-duration: .01ms !important; }
 }
+
+/* WORK13 — PALCO ESTÁVEL DA ORBE
+   A camada conduz a viagem; a Orbe mantém o mesmo tamanho de pintura.
+   Isso impede o Safari de misturar centralização e escala e preserva o
+   mesmo canvas em todos os quadros da abertura e do fechamento. */
+
+body {
+  --menu-map-top: clamp(10.5rem, 22dvh, 12rem);
+  --menu-map-size: min(78vw, 19rem);
+  --menu-map-half: min(39vw, 9.5rem);
+  --menu-stage-x: 0px;
+  --menu-stage-y: calc(var(--menu-map-top) + var(--menu-map-half) - 50dvh);
+}
+
+.orb-stage {
+  position: fixed;
+  z-index: 50;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  transform-origin: 50% 50%;
+  will-change: transform;
+  transition: transform 720ms cubic-bezier(.2,.78,.2,1);
+}
+
+body[data-route] .orb-stage .orb {
+  --orb-size: min(88vw, 45dvh, 420px);
+  position: relative !important;
+  inset: auto !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: var(--orb-size) !important;
+  height: var(--orb-size) !important;
+  margin: 0 !important;
+  translate: none !important;
+  scale: 1;
+  transform: none !important;
+  transform-origin: 50% 50%;
+  animation: none !important;
+  pointer-events: auto;
+  will-change: scale, filter;
+  transition:
+    scale 720ms cubic-bezier(.2,.78,.2,1),
+    filter 420ms ease !important;
+}
+
+body:not([data-route="home"])[data-menu="closed"] .orb-stage,
+body:not([data-route="home"])[data-menu="closing"] .orb-stage {
+  transform: translate3d(0, calc(50dvh - var(--safe-bottom) - 50px), 0);
+}
+
+body:not([data-route="home"])[data-menu="closed"] .orb-stage .orb,
+body:not([data-route="home"])[data-menu="closing"] .orb-stage .orb {
+  scale: .21;
+}
+
+body[data-route][data-menu="opening"] .orb-stage,
+body[data-route][data-menu="open"] .orb-stage {
+  transform: translate3d(var(--menu-stage-x), var(--menu-stage-y), 0);
+}
+
+body[data-route][data-menu="opening"] .orb-stage .orb,
+body[data-route][data-menu="open"] .orb-stage .orb {
+  scale: .29;
+}
+
+.living-map {
+  top: var(--menu-map-top) !important;
+  left: 50% !important;
+  width: var(--menu-map-size) !important;
+  transform: translateX(-50%) !important;
+}
+
+.living-pentagram path {
+  stroke: rgb(236 207 255 / .72);
+  stroke-width: .92;
+  stroke-dasharray: none !important;
+  stroke-dashoffset: 0 !important;
+  filter:
+    drop-shadow(0 0 3px rgb(255 255 255 / .38))
+    drop-shadow(0 0 10px rgb(var(--world) / .48));
+  animation: work13-pentagram-alive 3.8s 680ms ease-in-out infinite;
+}
+
+@keyframes work13-pentagram-alive {
+  0%, 100% { stroke-opacity: .72; }
+  50% { stroke-opacity: 1; }
+}
+
+@media (max-height: 720px) and (orientation: portrait) {
+  body {
+    --menu-map-top: clamp(8.6rem, 21dvh, 9.6rem);
+    --menu-map-size: min(70vw, 16.4rem);
+    --menu-map-half: min(35vw, 8.2rem);
+  }
+
+  body[data-route][data-menu="opening"] .orb-stage .orb,
+  body[data-route][data-menu="open"] .orb-stage .orb { scale: .25; }
+
+  body:not([data-route="home"])[data-menu="closed"] .orb-stage .orb,
+  body:not([data-route="home"])[data-menu="closing"] .orb-stage .orb { scale: .24; }
+}
+
+@media (orientation: landscape) and (max-height: 560px) {
+  body {
+    --menu-map-top: 50%;
+    --menu-map-size: min(64dvh, 17rem);
+    --menu-map-half: 0px;
+    --menu-stage-x: -12vw;
+    --menu-stage-y: 0px;
+  }
+
+  body[data-route] .orb-stage .orb { --orb-size: min(62dvh, 38vw, 340px); }
+
+  body[data-route][data-menu="opening"] .orb-stage .orb,
+  body[data-route][data-menu="open"] .orb-stage .orb { scale: .3; }
+
+  body:not([data-route="home"])[data-menu="closed"] .orb-stage .orb,
+  body:not([data-route="home"])[data-menu="closing"] .orb-stage .orb { scale: .26; }
+
+  .living-map {
+    top: 50% !important;
+    left: 38% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb-stage,
+  body[data-route] .orb-stage .orb { transition-duration: .01ms !important; }
+}
