@@ -1,0 +1,44 @@
+{
+  "release": "V631",
+  "phase": "FECHAMENTO-SUPREMO",
+  "status": "CANDIDATA_A_VALIDACAO_FISICA",
+  "package_type": "incremental-flat-cumulative-from-v629",
+  "work13": "concluido-e-congelado",
+  "work14": false,
+  "replace": [
+    "cosmos-entry-intention-v610.js",
+    "cosmos-entry-intention-v610.css",
+    "orbital-menu-v502.js",
+    "orbital-menu-v502.css"
+  ],
+  "new_production_files": [],
+  "frozen": [
+    "index.html",
+    "app-v208.js",
+    "sw.js",
+    "worlds",
+    "public-pages",
+    "content",
+    "seo",
+    "backend",
+    "supabase"
+  ],
+  "contracts": {
+    "existing_pentagram": true,
+    "one_physical_orb": true,
+    "destinations": 16,
+    "intention_destinations": 15,
+    "maximum_visible_bubbles": 2,
+    "permanent_animation_loops": 0,
+    "automatic_navigation": false,
+    "legacy_menu_silenced": true,
+    "duplicate_origin_label": false,
+    "visible_administrative_header": false,
+    "one_shot_discovery_cue": true
+  },
+  "qa": {
+    "v631": { "passed": 538, "total": 538 },
+    "regressions": { "passed": 906, "total": 906 },
+    "all": { "passed": 1444, "total": 1444 }
+  }
+}

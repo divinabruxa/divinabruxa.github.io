@@ -1,20 +1,22 @@
-/* DIVINA BRUXA — FECHAMENTO SUPREMO · MENU VIVO DEFINITIVO · V630
+/* DIVINA BRUXA — FECHAMENTO SUPREMO · MENU VIVO DEFINITIVO · V631
    Sem lista, painel ou segunda Orbe. Dois balões nascem ao redor da Orbe,
    respondem, silenciam e entregam a mesma viagem física entre realidades. */
 
-const VERSION = 630;
-const AUTHORITY = 'v630-fechamento-supremo';
+const VERSION = 631;
+const AUTHORITY = 'v631-fechamento-supremo';
 const INSTANCE = Symbol.for('divina.orbital.menu.v502');
 const ROOT_ID = 'divinaOrbitalMenuV502';
 const STYLE_ID = 'divinaOrbitalMenuV502Styles';
-const STYLE_HREF = './orbital-menu-v502.css?v=630-fechamento-supremo';
+const STYLE_HREF = './orbital-menu-v502.css?v=631-fechamento-supremo';
 const OPEN_MS = 210;
 const CLOSE_MS = 140;
 const DISSOLVE_MS = 110;
 const BIRTH_MS = 180;
 const ACCEPT_MS = 70;
+const DISCOVERY_CUE_DELAY_MS = 260;
+const DISCOVERY_CUE_MS = 190;
 const MENU_MOTION_REASON = 'work12-intention-motion';
-const HOME = Object.freeze({ route:'home', label:'Origem', spoken:'Voltar ao Início', intent:'Origem' });
+const HOME = Object.freeze({ route:'home', label:'Início', spoken:'Voltar ao Início', intent:'Origem' });
 
 const INTENTIONS = Object.freeze([
   Object.freeze({ route:'tarot', label:'Tarot', spoken:'Tarot Livre', intent:'Revelar' }),
@@ -60,7 +62,7 @@ function installStyles() {
   link.id = STYLE_ID;
   link.rel = 'stylesheet';
   link.href = STYLE_HREF;
-  link.dataset.orbitalMenuStyle = 'v630';
+  link.dataset.orbitalMenuStyle = 'v631';
   document.head.append(link);
 }
 
@@ -93,7 +95,7 @@ function createScene() {
     <div class="db502-menu__center" data-v502-orb-host data-v584-home data-v593-home>
       <span class="db502-menu__aura" aria-hidden="true"></span>
       <span class="db502-menu__halo" aria-hidden="true"></span>
-      <span class="db502-menu__home-label" aria-hidden="true">Origem</span>
+      <span class="db502-menu__home-label" aria-hidden="true">Início</span>
     </div>
     <p class="db502-menu__intention" aria-hidden="true"><span data-v593-intention>Escute</span></p>
     <p class="db502-menu__hint" id="db502MenuHint">Toque no céu para descobrir outros caminhos.</p>
@@ -137,9 +139,11 @@ export class OrbitalMenuV502 {
       ? go
       : globalThis.divinaOrbSupremeV501?.navigate || globalThis.orbe?.go || null;
     this.menuButton = document.querySelector('#menuBtn, [data-menu-toggle], [data-open-menu]');
+    this.entryButton = document.querySelector('#cosmosEntryIntent');
     this.homeButton = document.querySelector('.app-header .brand[data-go="home"], .app-header [data-go="home"]');
     this.homeButtonLabel = this.homeButton?.getAttribute('aria-label');
     this.legacy = document.querySelector('#orbMenu');
+    this.legacySnapshot = null;
     this.dockOrb = document.querySelector('.magic-dock .dock-orb, .dock-orb');
     if (!this.core?.claim || !this.core?.navigate || !this.go || !this.menuButton) {
       throw new Error('A Orbe Suprema V501 ou o sopro de intenções não foi encontrado.');
@@ -167,6 +171,9 @@ export class OrbitalMenuV502 {
     this.navigating = false;
     this.cycleBusy = false;
     this.intentTimer = 0;
+    this.discoveryCueTimer = 0;
+    this.discoveryCueReleaseTimer = 0;
+    this.discoveryCueShown = false;
     this.gesture = null;
     this.suppressSkyClickUntil = 0;
     this.backgroundSnapshots = [];
@@ -180,8 +187,7 @@ export class OrbitalMenuV502 {
     document.documentElement.dataset.work14 = 'false';
     this.menuButton.setAttribute('aria-controls', ROOT_ID);
     this.menuButton.setAttribute('aria-haspopup', 'dialog');
-    this.legacy?.setAttribute('aria-hidden', 'true');
-    if (this.legacy && 'inert' in this.legacy) this.legacy.inert = true;
+    this.silenceLegacyMenu();
 
     this.bind();
     this.syncRoute(routeNow());
@@ -319,7 +325,7 @@ export class OrbitalMenuV502 {
         return;
       }
       if (event.key !== 'Tab') return;
-      const focusable = [this.homeButton, this.menuButton, this.core.orb, ...this.visibleButtons]
+      const focusable = [this.entryButton, this.core.orb, ...this.visibleButtons]
         .filter(node => node instanceof HTMLElement && !node.hidden && !node.hasAttribute('disabled'));
       if (!focusable.length) return;
       const first = focusable[0];
@@ -439,6 +445,7 @@ export class OrbitalMenuV502 {
 
   async cycleIntentions(direction = 1, { reason = 'next-breath' } = {}) {
     if (!this.targetOpen || this.navigating || this.cycleBusy || !['opening','open'].includes(this.state)) return false;
+    this.clearDiscoveryCue({ markShown:true });
     this.cycleBusy = true;
     const token = ++this.cycleToken;
     this.pauseMenuMotion('intention-cycle');
@@ -475,6 +482,59 @@ export class OrbitalMenuV502 {
   setRootInteractive(interactive) {
     if ('inert' in this.root) this.root.inert = !interactive;
     this.root.setAttribute('aria-hidden', String(!interactive));
+  }
+
+  silenceLegacyMenu() {
+    if (!this.legacy) return true;
+    if (!this.legacySnapshot) {
+      this.legacySnapshot = {
+        hidden:Boolean(this.legacy.hidden),
+        inert:'inert' in this.legacy ? Boolean(this.legacy.inert) : null,
+        hadAriaHidden:this.legacy.hasAttribute?.('aria-hidden') === true,
+        ariaHidden:this.legacy.getAttribute?.('aria-hidden')
+      };
+    }
+    this.legacy.hidden = true;
+    if ('inert' in this.legacy) this.legacy.inert = true;
+    this.legacy.setAttribute?.('aria-hidden', 'true');
+    if (this.legacy.dataset) this.legacy.dataset.retiredBy = AUTHORITY;
+    return this.legacy.hidden && this.legacy.getAttribute?.('aria-hidden') === 'true';
+  }
+
+  restoreLegacyMenu() {
+    if (!this.legacy || !this.legacySnapshot) return false;
+    const snapshot = this.legacySnapshot;
+    this.legacy.hidden = snapshot.hidden;
+    if ('inert' in this.legacy && snapshot.inert !== null) this.legacy.inert = snapshot.inert;
+    if (snapshot.hadAriaHidden) this.legacy.setAttribute?.('aria-hidden', snapshot.ariaHidden ?? 'true');
+    else this.legacy.removeAttribute?.('aria-hidden');
+    if (this.legacy.dataset) delete this.legacy.dataset.retiredBy;
+    this.legacySnapshot = null;
+    return true;
+  }
+
+  clearDiscoveryCue({ markShown = false } = {}) {
+    clearTimeout(this.discoveryCueTimer);
+    clearTimeout(this.discoveryCueReleaseTimer);
+    this.discoveryCueTimer = 0;
+    this.discoveryCueReleaseTimer = 0;
+    this.root?.classList?.remove('is-discovery-cue');
+    if (markShown) this.discoveryCueShown = true;
+  }
+
+  queueDiscoveryCue() {
+    if (this.discoveryCueShown || this.discoveryCueTimer || reducedMotion()) return false;
+    this.discoveryCueTimer = setTimeout(() => {
+      this.discoveryCueTimer = 0;
+      if (!this.targetOpen || this.state !== 'open') return;
+      this.discoveryCueShown = true;
+      this.root.classList.add('is-discovery-cue');
+      this.discoveryCueReleaseTimer = setTimeout(() => {
+        this.discoveryCueReleaseTimer = 0;
+        this.root?.classList?.remove('is-discovery-cue');
+      }, DISCOVERY_CUE_MS);
+    }, DISCOVERY_CUE_DELAY_MS);
+    return true;
   }
 
   lockBackground() {
@@ -581,12 +641,14 @@ export class OrbitalMenuV502 {
     this.root.classList.remove('is-ios-settling');
     this.resumeMenuMotion('open');
     this.live.textContent = 'Duas intenções respiram.';
+    this.queueDiscoveryCue();
     try { this.core.orb?.focus?.({ preventScroll:true }); } catch {}
     return true;
   }
 
   async close({ restoreFocus = false, reason = 'close', immediate = false, preserveClaim = false } = {}) {
     if (!this.targetOpen && this.state === 'closed') return false;
+    this.clearDiscoveryCue();
     this.targetOpen = false;
     const token = ++this.motionToken;
     this.cycleToken += 1;
@@ -732,7 +794,7 @@ export class OrbitalMenuV502 {
   status() {
     return Object.freeze({
       version:VERSION,
-      release:'V630-FECHAMENTO-SUPREMO',
+      release:'V631-FECHAMENTO-SUPREMO',
       authority:AUTHORITY,
       macroStage:'5-of-10',
       state:this.state,
@@ -747,6 +809,8 @@ export class OrbitalMenuV502 {
       progressiveReveal:true,
       horizontalDiscovery:true,
       skyTouchBreath:true,
+      oneShotDiscoveryCue:true,
+      discoveryCueShown:this.discoveryCueShown,
       automaticRotation:false,
       permanentAnimationLoops:0,
       technicalMenuCopy:0,
@@ -767,6 +831,9 @@ export class OrbitalMenuV502 {
       backgroundInteractionLocked:true,
       fullViewportWithoutScroll:true,
       duplicateCloseButton:false,
+      duplicateOriginLabel:false,
+      legacyMenuSilenced:Boolean(!this.legacy || (this.legacy.hidden && this.legacy.getAttribute?.('aria-hidden') === 'true')),
+      visibleAdministrativeHeader:false,
       duplicateStarfield:false,
       newCanvases:0,
       javascriptAnimationLoops:0,
@@ -781,6 +848,7 @@ export class OrbitalMenuV502 {
     this.cycleToken += 1;
     this.targetOpen = false;
     clearTimeout(this.intentTimer);
+    this.clearDiscoveryCue();
     try { this.releaseOrb?.(); }
     catch { this.core?.returnHome?.(); }
     this.releaseOrb = null;
@@ -804,7 +872,7 @@ export class OrbitalMenuV502 {
     delete document.documentElement.dataset.work12Menu;
     delete document.documentElement.dataset.work12MenuIntention;
     delete document.documentElement.dataset.fechamentoMenu;
-    if (this.legacy && 'inert' in this.legacy) this.legacy.inert = false;
+    this.restoreLegacyMenu();
     delete globalThis.divinaMenuV502;
     delete globalThis[INSTANCE];
   }
@@ -818,7 +886,7 @@ export function installMenuOrbitalV502(options = {}) {
   document.dispatchEvent(new CustomEvent('divina:orbital-menu-ready', {
     detail:Object.freeze({
       version:VERSION,
-      release:'V630-FECHAMENTO-SUPREMO',
+      release:'V631-FECHAMENTO-SUPREMO',
       authority:AUTHORITY,
       destinations:INTENTIONS.length + 1,
       maximumVisibleIntentions:2,
@@ -830,5 +898,5 @@ export function installMenuOrbitalV502(options = {}) {
   return instance;
 }
 
-// Nome histórico preservado para o bootstrap; a autoridade interna é V630.
+// Nome histórico preservado para o bootstrap; a autoridade interna é V631.
 export const installOrbitalMenuV502 = installMenuOrbitalV502;

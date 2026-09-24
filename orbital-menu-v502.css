@@ -1,4 +1,4 @@
-/* DIVINA BRUXA — WORK12 · MACROETAPA 5 · SOPRO DE INTENCOES V593
+/* DIVINA BRUXA — FECHAMENTO SUPREMO V631 · MENU VIVO
    Uma Orbe, um universo e no maximo duas intencoes respirando por vez. */
 
 :root{
@@ -16,8 +16,10 @@
 }
 
 html.db502-menu-open .app-header{
-  z-index:2147480600;
-  background:linear-gradient(180deg,rgba(3,1,7,.82),transparent);
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  background:none!important;
 }
 
 html.db502-menu-open .magic-dock{
@@ -26,33 +28,11 @@ html.db502-menu-open .magic-dock{
   pointer-events:none!important;
 }
 
-html.db502-menu-open .app-header .brand{
-  position:relative;
-  min-width:76px;
-  color:var(--db593-gold-hot);
-}
-
-html.db502-menu-open .app-header .brand > *{
-  opacity:0!important;
-  visibility:hidden!important;
-}
-
-html.db502-menu-open .app-header .brand:after{
-  content:"ORIGEM";
-  position:absolute;
-  left:0;
-  top:50%;
-  translate:0 -50%;
-  color:rgba(255,240,208,.86);
-  font:650 10px/1 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
-  letter-spacing:.22em;
-  text-indent:.22em;
-  text-shadow:0 0 16px rgba(205,93,255,.38);
-}
-
+html[data-menu-authority="v631-fechamento-supremo"] #orbMenu,
 html[data-menu-authority="v593"] #orbMenu,
 html[data-menu-authority="v584"] #orbMenu,
-html[data-menu-authority="v502"] #orbMenu{
+html[data-menu-authority="v502"] #orbMenu,
+#orbMenu[hidden][aria-hidden="true"]{
   display:none!important;
   opacity:0!important;
   visibility:hidden!important;
@@ -293,6 +273,17 @@ html.db502-menu-open body{
   opacity:1;
   transform:translate(-50%,-50%) rotate(var(--bubble-rotate)) scale(1);
   filter:saturate(1) brightness(1);
+}
+
+.db502-menu.is-discovery-cue.has-intentions .db502-portal.is-offered{
+  transform:translate(-50%,-50%) translateX(-8px) rotate(var(--bubble-rotate)) scale(.985);
+  border-color:rgba(255,239,205,.58);
+  box-shadow:
+    inset 0 0 20px rgba(255,229,186,.08),
+    inset 8px -12px 26px rgba(150,48,214,.17),
+    0 0 0 4px rgba(141,48,198,.045),
+    0 14px 42px rgba(1,0,4,.32),
+    0 0 31px rgba(198,78,255,.18);
 }
 
 .db502-menu[data-bubble-state="breath"].has-intentions .db502-portal.is-offered{animation:none}
@@ -616,7 +607,7 @@ html[data-menu-motion="active"] .db502-portal,
   .db502-menu__current,.db502-menu__aura,.db502-menu__halo{display:none}
 }
 
-/* V630 · fechamento: nenhuma instrução técnica visível e nenhuma operação
+/* V631 · fechamento: nenhuma instrução técnica visível e nenhuma operação
    gráfica permanente. A vida vem do toque, nascimento e travessia. */
 html[data-fechamento-menu="v630"] .db502-menu__hint{
   position:fixed!important;
