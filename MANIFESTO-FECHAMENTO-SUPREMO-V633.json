@@ -1,0 +1,72 @@
+{
+  "project": "Divina Bruxa",
+  "phase": "Fechamento Supremo",
+  "release": 633,
+  "name": "Orbe Sozinha · Mundos Reais",
+  "work13": "concluido-com-auditoria-real",
+  "work14": false,
+  "baseline": [629, 631, 632],
+  "decision": {
+    "worldsFrozen": false,
+    "reason": "A auditoria publicada comprovou que camadas antigas escondiam os mundos reais.",
+    "homePreserved": true,
+    "menuPreserved": true,
+    "canonicalOrbPreserved": true
+  },
+  "navigationLaw": {
+    "pentagram": "open-and-close-global-menu",
+    "worldOrb": "open-current-world",
+    "worldOrbOpensMenu": false,
+    "arrival": "one-orb-alone",
+    "technicalLayersVisible": false
+  },
+  "productionFiles": [
+    "cosmos-entry-intention-v610.js",
+    "cosmos-entry-intention-v610.css"
+  ],
+  "newDocumentationAndQA": [
+    "00-INSTALE-FECHAMENTO-SUPREMO-V633.txt",
+    "RELATORIO-FECHAMENTO-SUPREMO-V633.md",
+    "MANIFESTO-FECHAMENTO-SUPREMO-V633.json",
+    "HASHES-FECHAMENTO-SUPREMO-V633.txt",
+    "qa-fechamento-v633-structural.mjs",
+    "qa-fechamento-v633-entry-runtime.mjs",
+    "qa-fechamento-v633-iphone.mjs",
+    "qa-fechamento-v633-a11y.mjs"
+  ],
+  "worlds": [
+    "tarot",
+    "daily",
+    "spreads",
+    "library",
+    "school",
+    "journal",
+    "ai",
+    "consultations",
+    "store",
+    "skins",
+    "music",
+    "videos",
+    "subscriptions",
+    "login",
+    "notifications"
+  ],
+  "unlockActions": {
+    "consultations": "consultations-start",
+    "store": "store-start",
+    "subscriptions": "subscriptions-primary"
+  },
+  "performance": {
+    "newImages": 0,
+    "newCanvases": 0,
+    "newRenderers": 0,
+    "permanentAnimationLoops": 0,
+    "oneShotAnimations": 1
+  },
+  "qa": {
+    "passed": 1613,
+    "failed": 0,
+    "notRunHistoricalHarnesses": "Incremental source archives omit dependencies required by selected V610-V624 structural harnesses; those ENOENT runs are excluded rather than reported as passes."
+  },
+  "productionPublishAuthorized": false
+}
