@@ -1,5 +1,0 @@
-/* DIVINA BRUXA 3.0 — SEGURANÇA E PRIVACIDADE V547 · SEM EFEITOS */
-html[data-security-privacy="v547"] :where(a,button,input,select,textarea,summary):focus-visible{outline:2px solid #efcf87;outline-offset:3px}
-html[data-security-privacy="v547"] :where(input[autocomplete="one-time-code"],input[name*="recovery" i]){font-variant-numeric:tabular-nums;letter-spacing:.08em}
-html[data-security-privacy="v547"] iframe{color-scheme:dark}
-@media(prefers-reduced-motion:reduce){html[data-security-privacy="v547"]{scroll-behavior:auto}}

@@ -406,7 +406,7 @@ body.intl-home .intl-header { position: fixed; top: 0; right: 0; left: 0; border
   border-radius: 50%;
   content: "";
   pointer-events: none;
-  background: #0b0313 url("./divina-orb-v68.png?v=69") center/102% no-repeat;
+  background: #0b0313 url("./divina-orb-thumb-v1.webp?v=3.0.0") center/102% no-repeat;
   animation: intlOrbBreath 7.8s ease-in-out infinite;
 }
 .intl-orb-shell.orb-live::before { opacity: 0; }

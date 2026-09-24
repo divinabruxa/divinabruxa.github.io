@@ -1,8 +1,0 @@
-DIVINA BRUXA — WORK13 V610 — MENU GLOBAL, CICLO VIVO
-
-1. Mantenha o WORK12 e o WORK13 já instalados.
-2. Substitua somente os arquivos deste pacote, preservando os mesmos nomes e caminhos.
-3. Recarregue o site duas vezes para o novo cache assumir o controle.
-4. Teste: Home → Entrá → realidade → toque na mesma Orbe → menu → outra realidade.
-
-Não há WORK14. Não há nova Home, nova Orbe, novo canvas ou novo Universo.

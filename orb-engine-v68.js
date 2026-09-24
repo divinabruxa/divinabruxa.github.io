@@ -8,7 +8,7 @@
  * como fallback permanente — inclusive em computadores sem aceleração gráfica.
  */
 
-const DEFAULT_ORB_IMAGE = new URL('./divina-orb-v68.png?v=69', import.meta.url).href;
+const DEFAULT_ORB_IMAGE = new URL('./divina-orb-thumb-v1.webp?v=3.0.0', import.meta.url).href;
 const clamp = (value, min = 0, max = 1) => Math.max(min, Math.min(max, value));
 const lerp = (from, to, amount) => from + (to - from) * amount;
 const follow = (rate, seconds) => 1 - Math.exp(-rate * seconds);

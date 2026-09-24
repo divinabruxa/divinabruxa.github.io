@@ -1,9 +1,0 @@
-ROLLBACK SEGURO — WORK11 V565 PARA V563
-
-Se o site não abrir ou a navegação ficar impossível:
-1. Reinstale somente app-v208.js, index.html e sw.js do ZIP V563.
-2. Não apague orb-persistent-journey-v565.js; ele fica inativo sem o import da V565.
-3. Aguarde o GitHub Pages e abra “ATUALIZAR O PORTAL” uma vez.
-
-O rollback não altera conteúdo, banco de dados, DNS ou cobrança.
-

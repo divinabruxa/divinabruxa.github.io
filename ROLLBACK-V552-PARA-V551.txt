@@ -1,9 +1,0 @@
-ROLLBACK CIRÚRGICO — V552 PARA V551
-
-Se for necessário voltar apenas esta macroetapa:
-1. restaure index.html, app-v208.js, pwa-world-v196.js, pwa-world-v324.js, sw.js e manifest.webmanifest da V551;
-2. remova somente home-living-v552.css;
-3. mantenha todos os demais arquivos e conteúdos;
-4. não remova CNAME, cartas, imagens, dados locais ou arquivos do Tarot.
-
-O rollback não altera compras, skins, Diário, Whit, Escola ou conteúdo editorial.

@@ -1,19 +1,30 @@
 <!doctype html>
-<html lang="pt-BR" data-page-design="v560">
+<html lang="pt-BR">
 <head>
-  <meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://kyphdsamyygavmkzyezr.supabase.co wss://kyphdsamyygavmkzyezr.supabase.co; frame-src https://open.spotify.com https://www.youtube.com https://www.youtube-nocookie.com; media-src 'self' blob: https:; worker-src 'self' blob:; manifest-src 'self'; form-action 'self' https://kyphdsamyygavmkzyezr.supabase.co; upgrade-insecure-requests"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="divina-security-release" content="V547"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
-  <title>Portal não encontrado — Divina Bruxa</title>
-  <meta name="description" content="Este caminho se perdeu no universo da Divina Bruxa. Use a busca para encontrar cartas, tiragens e guias de Tarot.">
-  <meta name="robots" content="noindex,nofollow,noarchive">
-  <meta name="theme-color" content="#09040f"><link rel="icon" href="divina-icon-fast-v1.png?v=560" type="image/png">
-  <link rel="stylesheet" href="fallback-shell-v1.css?v=196">
-  <link rel="stylesheet" href="page-design-supreme-v560.css?v=560">
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'none'; style-src 'self'; img-src 'self'; upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#09050f">
+  <meta name="robots" content="noindex,follow">
+  <title>Caminho não encontrado — Divina Bruxa</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body><main class="fallback" data-view="404" data-skin="classica">
-  <div class="brand">Divina Bruxa<small>Orbe das Realidades</small></div>
-  <div class="orb" aria-hidden="true"></div>
-  <h1>Essa realidade não foi encontrada</h1>
-  <p>O caminho que você procurou atravessou um portal vazio. Volte à origem, abra o Tarot Livre ou busque outra página.</p>
-  <div class="actions"><a href="./index.html">Voltar para a Orbe</a><a class="secondary" href="./buscar.html">Buscar no portal</a><a class="secondary" href="./tarot-livre.html">Abrir Tarot Livre</a></div>
-  <div class="meta">Erro 404 · O universo continua aberto</div>
-</main></body></html>
+<body data-route="home" data-menu="closed">
+  <div class="cosmos" aria-hidden="true"><span class="cosmos__veil"></span><span class="cosmos__stars"></span></div>
+  <main id="main">
+    <section class="world home-world is-active" aria-labelledby="notFoundTitle">
+      <div class="home-copy">
+        <p class="eyebrow">ENTRE REALIDADES</p>
+        <h1 id="notFoundTitle">Este caminho<br>mudou de lugar.</h1>
+        <p>Nada se perdeu. A Orbe conhece o retorno.</p>
+      </div>
+    </section>
+  </main>
+  <a class="orb" href="./#/home" aria-label="Voltar ao início da Divina Bruxa">
+    <span class="orb__wake" aria-hidden="true"></span><span class="orb__aura" aria-hidden="true"></span>
+    <img src="assets/orbe.webp" alt="" width="384" height="384">
+    <span class="orb__touch" aria-hidden="true"></span>
+  </a>
+  <p class="orb-cue">Toque para voltar</p>
+</body>
+</html>
