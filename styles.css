@@ -1903,3 +1903,162 @@ body[data-travel="active"] .orb {
   0%, 100% { opacity: .72; transform: scale(.992); transform-origin: 50% 50%; }
   50% { opacity: 1; transform: scale(1.008); transform-origin: 50% 50%; }
 }
+
+/* DIVINA BRUXA 3.0.2 — Menu Limpo
+   A Orbe permanece viva, mas não encobre os portais e não recebe anéis. */
+
+body[data-menu="open"] .orb,
+body[data-menu="closing"] .orb {
+  --orb-size: clamp(96px, 27vw, 124px);
+  top: clamp(12.5rem, 30dvh, 15.5rem);
+  left: 50%;
+  bottom: auto;
+  width: var(--orb-size) !important;
+  height: var(--orb-size) !important;
+  margin: calc(var(--orb-size) / -2) 0 0 calc(var(--orb-size) / -2) !important;
+  filter: drop-shadow(0 0 24px rgb(var(--world) / .34));
+  transform: none;
+}
+
+body[data-menu="open"] .orb__wake,
+body[data-menu="open"] .orb__touch,
+body[data-menu="closing"] .orb__wake,
+body[data-menu="closing"] .orb__touch {
+  border: 0;
+  box-shadow: none;
+  opacity: 0;
+  animation: none;
+}
+
+body[data-menu="open"] .orb__aura,
+body[data-menu="closing"] .orb__aura {
+  inset: -22%;
+  opacity: .7;
+  background: radial-gradient(circle, rgb(var(--world) / .25), transparent 68%);
+  filter: blur(18px);
+}
+
+.living-map {
+  position: absolute;
+  z-index: 4;
+  top: clamp(18rem, 41dvh, 21.5rem);
+  left: 50%;
+  width: min(calc(100vw - 30px), 31rem);
+  transform: translateX(-50%);
+}
+
+.path-constellation {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .42rem;
+  padding: .32rem;
+  border: 1px solid rgb(255 255 255 / .075);
+  border-radius: 1.35rem;
+  background: rgb(8 3 13 / .34);
+  box-shadow: 0 16px 40px rgb(0 0 0 / .16), inset 0 1px rgb(255 255 255 / .025);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.path-constellation .path-node {
+  position: relative;
+  top: auto;
+  left: auto;
+  width: auto;
+  min-width: 0;
+  min-height: 3.5rem;
+  padding: .42rem .12rem;
+  gap: .24rem;
+  border-radius: 1rem;
+  color: rgb(255 255 255 / .58);
+  transform: none;
+  transition: color 260ms ease, background 260ms ease, box-shadow 260ms ease, transform 180ms ease;
+}
+
+.path-constellation .path-node span {
+  width: auto;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  color: var(--violet-bright);
+  background: transparent;
+  font-size: 1rem;
+  filter: drop-shadow(0 0 8px rgb(var(--world) / .32));
+}
+
+.path-constellation .path-node b {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: clamp(.46rem, 1.8vw, .58rem);
+  letter-spacing: .08em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.path-constellation .path-node[aria-expanded="true"] {
+  color: var(--ink);
+  background: linear-gradient(145deg, rgb(var(--world) / .18), rgb(255 255 255 / .035));
+  box-shadow: inset 0 0 0 1px rgb(245 213 139 / .18), 0 0 20px rgb(var(--world) / .1);
+}
+
+.path-constellation .path-node[aria-expanded="true"] span {
+  color: var(--gold);
+  transform: scale(1.08);
+  border: 0;
+  box-shadow: none;
+}
+
+.path-constellation .path-node:active { transform: scale(.96); }
+
+.living-map .constellation {
+  position: relative;
+  inset: auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .62rem;
+  margin-top: .8rem;
+  pointer-events: auto;
+}
+
+.living-map .destination {
+  position: relative;
+  left: auto;
+  top: auto;
+  width: 100%;
+  min-height: 3.35rem;
+  padding: .7rem .78rem;
+  border-color: rgb(255 255 255 / .11);
+  border-radius: 1.05rem;
+  background:
+    linear-gradient(145deg, rgb(var(--world) / .12), transparent 62%),
+    rgb(11 5 18 / .68);
+  box-shadow: 0 12px 28px rgb(0 0 0 / .18), inset 0 1px rgb(255 255 255 / .035);
+  transform: translateY(10px) scale(.97);
+  font-size: .64rem;
+  letter-spacing: .085em;
+  animation: living-portal-in 420ms cubic-bezier(.22,.78,.21,1) forwards;
+}
+
+.living-map .destination:active { transform: scale(.97); }
+
+.journey__hint {
+  bottom: calc(12px + var(--safe-bottom));
+  font-size: .56rem;
+  letter-spacing: .1em;
+}
+
+@media (max-height: 720px) and (orientation: portrait) {
+  body[data-menu="open"] .orb,
+  body[data-menu="closing"] .orb {
+    --orb-size: clamp(82px, 23vw, 102px);
+    top: clamp(10.8rem, 28dvh, 12.4rem);
+  }
+
+  .living-map { top: clamp(15.2rem, 39dvh, 17.6rem); }
+  .path-constellation .path-node { min-height: 3.05rem; }
+  .living-map .destination { min-height: 2.85rem; padding-block: .52rem; }
+}
+
+@keyframes living-portal-in {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}

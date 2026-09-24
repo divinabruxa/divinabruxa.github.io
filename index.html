@@ -19,7 +19,7 @@
   <title>Divina Bruxa</title>
   <link rel="preload" href="assets/orbe.webp" as="image" type="image/webp">
   <link rel="preload" href="divina-universe-retina-v523.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=3.0.1-orbe-viva-flat">
+  <link rel="stylesheet" href="styles.css?v=3.0.2-menu-limpo">
 </head>
 <body data-route="home" data-menu="closed">
   <a class="skip-link" href="#main">Pular para a experiência</a>
@@ -424,17 +424,13 @@
       </div>
     </div>
 
-    <div class="pentagram" aria-label="Cinco caminhos do universo">
-      <svg class="pentagram__lines" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
-        <circle cx="50" cy="50" r="43"></circle>
-        <path d="M50 7 L61 39 L95 39 L68 59 L79 92 L50 72 L21 92 L32 59 L5 39 L39 39 Z"></path>
-        <circle cx="50" cy="50" r="14"></circle>
-      </svg>
-      <button class="path-node path-node--home" type="button" data-category="home" aria-expanded="false" aria-label="Voltar para a tela inicial da Orbe"><span>⌂</span><b>Início</b></button>
-      <button class="path-node path-node--oracles" type="button" data-category="oracles" aria-expanded="false"><span>☽</span><b>Oráculos</b></button>
-      <button class="path-node path-node--wisdom" type="button" data-category="wisdom" aria-expanded="false"><span>⌘</span><b>Sabedoria</b></button>
-      <button class="path-node path-node--creations" type="button" data-category="creations" aria-expanded="false"><span>✧</span><b>Criações</b></button>
-      <button class="path-node path-node--encounter" type="button" data-category="encounter" aria-expanded="false"><span>◇</span><b>Encontro</b></button>
+    <div class="living-map" aria-label="Caminhos do universo">
+      <nav class="path-constellation" aria-label="Escolha um caminho">
+        <button class="path-node" type="button" data-category="oracles" aria-expanded="false"><span>☽</span><b>Oráculos</b></button>
+        <button class="path-node" type="button" data-category="wisdom" aria-expanded="false"><span>⌘</span><b>Sabedoria</b></button>
+        <button class="path-node" type="button" data-category="creations" aria-expanded="false"><span>✧</span><b>Criações</b></button>
+        <button class="path-node" type="button" data-category="encounter" aria-expanded="false"><span>◇</span><b>Encontro</b></button>
+      </nav>
       <div id="constellation" class="constellation" role="group" aria-label="Destinos do caminho"></div>
     </div>
 
@@ -453,6 +449,6 @@
   </dialog>
 
   <div id="announcer" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
-  <script type="module" src="app.js?v=3.0.1-orbe-viva-flat"></script>
+  <script type="module" src="app.js?v=3.0.2-menu-limpo"></script>
 </body>
 </html>

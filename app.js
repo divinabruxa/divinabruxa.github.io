@@ -196,11 +196,6 @@ function renderConstellation(category) {
   pathNodes.forEach(node => node.setAttribute('aria-expanded', String(node.dataset.category === category)));
   constellation.replaceChildren();
   const destinations = Object.entries(worlds).filter(([, world]) => world.category === category);
-  const coordinates = destinations.length === 1
-    ? [[50,50]]
-    : destinations.length === 3
-      ? [[50,7],[91,76],[9,76]]
-      : [[50,2],[94,50],[50,98],[6,50]];
 
   destinations.forEach(([route, world], index) => {
     const button = document.createElement('button');
@@ -208,8 +203,6 @@ function renderConstellation(category) {
     button.className = 'destination';
     button.dataset.route = route;
     button.textContent = world.label;
-    button.style.setProperty('--x', `${coordinates[index][0]}%`);
-    button.style.setProperty('--y', `${coordinates[index][1]}%`);
     button.style.animationDelay = `${index * 55}ms`;
     if (route === currentRoute) button.setAttribute('aria-current', 'page');
     button.addEventListener('click', () => {
@@ -772,7 +765,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=3.0.1-orbe-viva-flat', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=3.0.2-menu-limpo', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {
