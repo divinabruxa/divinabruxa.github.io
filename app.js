@@ -11,9 +11,11 @@ import { createAccountWorld } from './worlds/account.js';
 import { createConsultationsWorld } from './worlds/consultations.js';
 import { createMusicWorld } from './worlds/music.js';
 import { createPremiumWorld } from './worlds/premium.js';
-import { createSkinsWorld } from './worlds/skins.js';
+import { createSkinsWorld } from './skins-world-v301.js';
 import { createStoreWorld } from './worlds/store.js';
 import { createVideosWorld } from './worlds/videos.js';
+import { RealityOrbEngine } from './orb-engine-v68.js';
+import { createLivingUniverseV524 } from './living-universe-core-v524.js';
 
 const REDUCED_MOTION = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const TAROT_KEY = 'divina-bruxa-3.tarot-livre.v1';
@@ -52,6 +54,10 @@ const routeLinks = [...document.querySelectorAll('[data-route-link]')];
 let currentRoute = 'home';
 let selectedCategory = 'oracles';
 let focusBeforeJourney = null;
+let livingUniverse = null;
+let orbEngine = null;
+let menuCloseTimer = 0;
+let routeSettleTimer = 0;
 
 function announce(message) {
   announcer.textContent = '';
@@ -97,9 +103,19 @@ function setActiveWorld(route) {
   requestAnimationFrame(() => target.classList.add('is-active'));
 }
 
-function applyRoute(route, { push = true, focus = true } = {}) {
+function applyRoute(route, { push = true, focus = true, animate = true } = {}) {
   const next = normalizedRoute(route);
   const world = worlds[next];
+  const previous = currentRoute;
+  const travelling = animate && previous !== next;
+  if (travelling) {
+    body.dataset.travel = 'active';
+    body.dataset.nextRoute = next;
+    livingUniverse?.pause?.('route-travel');
+    document.dispatchEvent(new CustomEvent('divina:supreme-orb-will-navigate', {
+      detail:{ from:previous, to:next, source:'divina-3-recovery' }
+    }));
+  }
   const swap = () => {
     if (currentRoute === 'musica' && next !== 'musica') music.deactivate();
     if (currentRoute === 'videos' && next !== 'videos') videos.deactivate();
@@ -127,10 +143,13 @@ function applyRoute(route, { push = true, focus = true } = {}) {
       'carta-do-dia':['Revelar a Carta do Dia', 'Revelar a aurora'],
       tiragens:['Revelar a próxima posição da tiragem', 'Revelar posição']
     };
-    const [orbLabel, cue] = orbLabels[next] || ['Abrir o mapa vivo', next === 'home' ? 'Toque para entrar' : 'Toque para viajar'];
+    const [orbLabel, cue] = orbLabels[next] || [
+      next === 'home' ? 'Orbe viva: toque para despertar; toque duplo abre o Tarot Livre' : 'Abrir o mapa vivo',
+      next === 'home' ? 'Toque para despertar. Toque duplo para abrir o Tarot Livre.' : 'Toque para viajar'
+    ];
     orb.setAttribute('aria-label', orbLabel);
     orbCue.textContent = cue;
-    routeLinks.forEach(link => link.setAttribute('aria-current', next === 'home' ? 'page' : 'false'));
+    routeLinks.forEach(link => link.setAttribute('aria-current', link.dataset.routeLink === next ? 'page' : 'false'));
     const titleIds = {
       home:'homeTitle',
       tarot:'tarotTitle',
@@ -151,16 +170,25 @@ function applyRoute(route, { push = true, focus = true } = {}) {
     if (focus) document.querySelector(`#${titleIds[next] || 'homeTitle'}`)?.focus?.({ preventScroll:true });
   };
 
-  if (!REDUCED_MOTION && document.startViewTransition) {
-    const transition = document.startViewTransition(swap);
-    transition.ready.catch(() => {});
-    transition.updateCallbackDone.catch(() => {});
-    transition.finished.catch(() => {});
-  } else swap();
+  // A Orbe física nunca entra em uma captura de View Transition: isso evita
+  // a cópia visual que parecia uma segunda Orbe durante a viagem.
+  swap();
 
   if (push && normalizedRoute(location.hash) !== next) history.pushState({ route:next }, '', `#/${next}`);
   selectedCategory = world.category;
   announce(`${world.title}. ${world.description}`);
+  clearTimeout(routeSettleTimer);
+  const settle = () => {
+    delete body.dataset.travel;
+    delete body.dataset.nextRoute;
+    livingUniverse?.setRoute?.(next);
+    livingUniverse?.start?.('route-settle');
+    document.dispatchEvent(new CustomEvent('divina:supreme-orb-did-navigate', {
+      detail:{ from:previous, to:next, source:'divina-3-recovery' }
+    }));
+  };
+  if (travelling && !REDUCED_MOTION) routeSettleTimer = setTimeout(settle, 620);
+  else settle();
 }
 
 function renderConstellation(category) {
@@ -195,43 +223,69 @@ function renderConstellation(category) {
 }
 
 function openMap() {
-  if (body.dataset.menu === 'open') return;
+  if (body.dataset.menu !== 'closed') return;
+  clearTimeout(menuCloseTimer);
+  delete journey.dataset.closing;
   focusBeforeJourney = document.activeElement;
   body.dataset.menu = 'open';
   journey.hidden = false;
   journey.setAttribute('aria-hidden', 'false');
   journeyTrigger.setAttribute('aria-expanded', 'true');
   main.inert = true;
-  renderConstellation(worlds[currentRoute].category);
+  const initialCategory = worlds[currentRoute].category === 'home' ? 'oracles' : worlds[currentRoute].category;
+  renderConstellation(initialCategory);
+  document.dispatchEvent(new CustomEvent('divina:menu-state', { detail:{ state:'open', route:currentRoute } }));
   pulseOrb();
   requestAnimationFrame(() => closeJourney.focus({ preventScroll:true }));
 }
 
 function closeMap({ restoreFocus = true } = {}) {
-  if (body.dataset.menu !== 'open') return;
-  body.dataset.menu = 'closed';
-  journey.hidden = true;
-  journey.setAttribute('aria-hidden', 'true');
+  if (!['open','closing'].includes(body.dataset.menu)) return;
+  if (body.dataset.menu === 'closing') return;
+  body.dataset.menu = 'closing';
+  journey.dataset.closing = 'true';
   journeyTrigger.setAttribute('aria-expanded', 'false');
-  main.inert = false;
-  if (restoreFocus) (focusBeforeJourney instanceof HTMLElement ? focusBeforeJourney : journeyTrigger).focus({ preventScroll:true });
+  document.dispatchEvent(new CustomEvent('divina:menu-state', { detail:{ state:'closing', route:currentRoute } }));
+  clearTimeout(menuCloseTimer);
+  const finish = () => {
+    body.dataset.menu = 'closed';
+    journey.hidden = true;
+    journey.setAttribute('aria-hidden', 'true');
+    delete journey.dataset.closing;
+    main.inert = false;
+    document.dispatchEvent(new CustomEvent('divina:menu-state', { detail:{ state:'closed', route:currentRoute } }));
+    if (restoreFocus) (focusBeforeJourney instanceof HTMLElement ? focusBeforeJourney : journeyTrigger).focus({ preventScroll:true });
+  };
+  if (REDUCED_MOTION) finish();
+  else menuCloseTimer = setTimeout(finish, 260);
 }
 
-function handleOrb() {
+function handleOrb({ source = 'touch' } = {}) {
   pulseOrb();
-  if (body.dataset.menu === 'open') return closeMap();
+  if (['open','closing'].includes(body.dataset.menu)) return closeMap();
+  if (currentRoute === 'home') {
+    if (source === 'keyboard') openMap();
+    return;
+  }
   if (currentRoute === 'tarot') return tarot.reveal();
   if (currentRoute === 'carta-do-dia') return daily.reveal();
   if (currentRoute === 'tiragens') return spreads.reveal();
   openMap();
 }
 
-orb.addEventListener('click', handleOrb);
 journeyTrigger.addEventListener('click', openMap);
 closeJourney.addEventListener('click', () => closeMap());
-pathNodes.forEach(node => node.addEventListener('click', () => renderConstellation(node.dataset.category)));
+pathNodes.forEach(node => node.addEventListener('click', () => {
+  if (node.dataset.category === 'home') {
+    closeMap({ restoreFocus:false });
+    applyRoute('home');
+    return;
+  }
+  renderConstellation(node.dataset.category);
+}));
 routeLinks.forEach(link => link.addEventListener('click', event => {
   event.preventDefault();
+  closeMap({ restoreFocus:false });
   applyRoute(link.dataset.routeLink);
 }));
 
@@ -702,12 +756,23 @@ tarot.render();
 daily.render();
 spreads.nodes.intention.value = spreads.state.intention;
 spreads.render();
-applyRoute(normalizedRoute(location.hash), { push:false, focus:false });
+
+livingUniverse = createLivingUniverseV524();
+orbEngine = new RealityOrbEngine(document.querySelector('#orbCanvas'), {
+  onTap: detail => handleOrb(detail),
+  onDoubleTap: () => {
+    closeMap({ restoreFocus:false });
+    applyRoute('tarot');
+  }
+});
+globalThis.divinaRealityOrb = orbEngine;
+
+applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:false });
 
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=3.0.0-20260924', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=3.0.1-orbe-viva-flat', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {

@@ -18,7 +18,8 @@
   <link rel="manifest" href="manifest.webmanifest">
   <title>Divina Bruxa</title>
   <link rel="preload" href="assets/orbe.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="preload" href="divina-universe-retina-v523.webp" as="image" type="image/webp">
+  <link rel="stylesheet" href="styles.css?v=3.0.1-orbe-viva-flat">
 </head>
 <body data-route="home" data-menu="closed">
   <a class="skip-link" href="#main">Pular para a experiência</a>
@@ -33,7 +34,7 @@
       <span aria-hidden="true">✦</span>
       <b>DIVINA BRUXA</b>
     </a>
-    <button id="journeyTrigger" class="journey-trigger" type="button" aria-haspopup="dialog" aria-controls="journey" aria-expanded="false">
+    <button id="journeyTrigger" class="journey-trigger" type="button" aria-label="Abrir o Menu Mágico" aria-haspopup="dialog" aria-controls="journey" aria-expanded="false">
       <span class="journey-trigger__sigil" aria-hidden="true">⛤</span>
       <span>Viajar</span>
     </button>
@@ -41,12 +42,7 @@
 
   <main id="main" tabindex="-1">
     <section id="home" class="world home-world is-active" data-world="home" aria-labelledby="homeTitle">
-      <div class="home-copy">
-        <p class="eyebrow">DIVINA BRUXA</p>
-        <h1 id="homeTitle" tabindex="-1">Uma presença.<br>Um universo inteiro.</h1>
-        <p>Toque. A Orbe reconhece o caminho.</p>
-      </div>
-      <p class="home-whisper" aria-hidden="true">ENTRAR</p>
+      <h1 id="homeTitle" class="sr-only" tabindex="-1">Divina Bruxa — Orbe das Realidades</h1>
     </section>
 
     <section id="tarot" class="world tarot-world" data-world="tarot" aria-labelledby="tarotTitle" hidden>
@@ -405,13 +401,16 @@
 
   </main>
 
-  <button id="orb" class="orb" type="button" aria-label="Entrar na Divina Bruxa" aria-describedby="orbCue">
+  <button id="orb" class="orb orb-shell orb-loading" data-supreme-orb="living" type="button" aria-label="Orbe viva: toque para despertar; toque duplo abre o Tarot Livre" aria-describedby="orbCue">
     <span class="orb__wake" aria-hidden="true"></span>
     <span class="orb__aura" aria-hidden="true"></span>
-    <img src="assets/orbe.webp" alt="" width="384" height="384">
+    <img class="orb__image" src="assets/orbe.webp" alt="" width="384" height="384">
+    <canvas id="orbCanvas" aria-hidden="true"></canvas>
+    <span class="orb__glass" aria-hidden="true"></span>
     <span class="orb__touch" aria-hidden="true"></span>
   </button>
-  <p id="orbCue" class="orb-cue" aria-live="polite">Toque para entrar</p>
+  <p id="orbCue" class="orb-cue sr-only" aria-live="polite">Toque para despertar. Toque duplo para abrir o Tarot Livre.</p>
+  <span id="orbStatus" class="sr-only" aria-live="polite">A Orbe está respirando</span>
 
   <section id="journey" class="journey" role="dialog" aria-modal="true" aria-labelledby="journeyTitle" aria-hidden="true" hidden>
     <div class="journey__topline">
@@ -419,7 +418,10 @@
         <p class="eyebrow">MAPA VIVO</p>
         <h2 id="journeyTitle">Para onde a Orbe chama?</h2>
       </div>
-      <button id="closeJourney" class="journey__close" type="button" aria-label="Fechar o mapa">×</button>
+      <div class="journey__actions">
+        <button class="journey__home" type="button" data-route-link="home" aria-label="Voltar para a tela inicial da Orbe"><span aria-hidden="true">⌂</span><b>Início</b></button>
+        <button id="closeJourney" class="journey__close" type="button" aria-label="Fechar o mapa">×</button>
+      </div>
     </div>
 
     <div class="pentagram" aria-label="Cinco caminhos do universo">
@@ -428,7 +430,7 @@
         <path d="M50 7 L61 39 L95 39 L68 59 L79 92 L50 72 L21 92 L32 59 L5 39 L39 39 Z"></path>
         <circle cx="50" cy="50" r="14"></circle>
       </svg>
-      <button class="path-node path-node--home" type="button" data-category="home" aria-expanded="false"><span>✦</span><b>Origem</b></button>
+      <button class="path-node path-node--home" type="button" data-category="home" aria-expanded="false" aria-label="Voltar para a tela inicial da Orbe"><span>⌂</span><b>Início</b></button>
       <button class="path-node path-node--oracles" type="button" data-category="oracles" aria-expanded="false"><span>☽</span><b>Oráculos</b></button>
       <button class="path-node path-node--wisdom" type="button" data-category="wisdom" aria-expanded="false"><span>⌘</span><b>Sabedoria</b></button>
       <button class="path-node path-node--creations" type="button" data-category="creations" aria-expanded="false"><span>✧</span><b>Criações</b></button>
@@ -451,6 +453,6 @@
   </dialog>
 
   <div id="announcer" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
-  <script type="module" src="app.js"></script>
+  <script type="module" src="app.js?v=3.0.1-orbe-viva-flat"></script>
 </body>
 </html>

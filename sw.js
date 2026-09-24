@@ -1,13 +1,15 @@
 /* Divina Bruxa 3.0 · chão offline mínimo, código sempre rede-primeiro. */
-const CACHE = 'divina-bruxa-3-shell-20260924';
+const CACHE = 'divina-bruxa-3-shell-20260924-orbe-viva-flat-1';
 const PREFIX = 'divina-bruxa-';
 const CORE = [
   './', './index.html', './styles.css', './app.js', './manifest.webmanifest', './assets/orbe.webp',
+  './orb-engine-v68.js', './living-universe-core-v524.js', './living-universe-core-v524.css', './skins-world-v301.js',
+  './divina-orb-thumb-v1.webp', './divina-universe-retina-v523.webp',
   './data/cards.js', './data/config.js', './data/consultations.js', './data/library.js', './data/media.js',
   './data/plans.js', './data/school.js', './data/skins.js', './data/store.js', './data/worlds.js',
   './lib/daily-card.js', './lib/spread-state.js', './lib/tarot-state.js',
   './worlds/account.js', './worlds/consultations.js', './worlds/journal.js', './worlds/library.js',
-  './worlds/music.js', './worlds/premium.js', './worlds/school.js', './worlds/skins.js',
+  './worlds/music.js', './worlds/premium.js', './worlds/school.js',
   './worlds/store.js', './worlds/videos.js', './worlds/whit.js'
 ];
 

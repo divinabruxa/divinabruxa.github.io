@@ -1687,3 +1687,219 @@ html[data-skin]:not([data-skin="classic"]) .orb__aura {
 @keyframes destination-in {
   to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
+
+/* DIVINA BRUXA 3.0.1 — recuperação da essência viva
+   Uma única Orbe física, um único universo e nenhuma informação visual na Home. */
+
+html[data-living-universe="v524"] body .cosmos {
+  opacity: 0;
+  visibility: hidden;
+}
+
+body[data-route="home"] {
+  height: 100dvh;
+  min-height: 100svh;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+body[data-route="home"] .home-world {
+  position: fixed;
+  inset: 0;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body[data-route="home"] .journey-trigger {
+  visibility: visible;
+  pointer-events: auto;
+  width: 2.85rem;
+  height: 2.85rem;
+  justify-content: center;
+  padding: 0;
+  border-color: rgb(255 255 255 / .2);
+  background: rgb(8 3 13 / .44);
+  opacity: 1;
+  transform: translateY(0);
+  box-shadow: 0 0 24px rgb(var(--world) / .14), inset 0 0 18px rgb(255 255 255 / .035);
+}
+
+body[data-route="home"] .journey-trigger > span:last-child {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+body[data-route="home"] .journey-trigger__sigil {
+  font-size: 1.22rem;
+  filter: drop-shadow(0 0 8px rgb(202 130 255 / .48));
+}
+
+.orb {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  overflow: visible;
+  animation: none;
+  will-change: top, left, bottom, width, height, margin, transform;
+  transition:
+    top 560ms cubic-bezier(.22,.78,.21,1),
+    left 560ms cubic-bezier(.22,.78,.21,1),
+    width 560ms cubic-bezier(.22,.78,.21,1),
+    height 560ms cubic-bezier(.22,.78,.21,1),
+    margin 560ms cubic-bezier(.22,.78,.21,1),
+    transform 180ms cubic-bezier(.22,.78,.21,1),
+    filter 280ms ease;
+}
+
+body[data-route="home"] .orb {
+  --orb-size: min(88vw, 47dvh, 470px);
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  margin: calc(var(--orb-size) / -2) 0 0 calc(var(--orb-size) / -2);
+  filter: drop-shadow(0 0 24px rgb(var(--world) / .32));
+}
+
+.orb img,
+.orb canvas,
+.orb__glass {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  clip-path: circle(49.9% at 50% 50%);
+}
+
+.orb img {
+  z-index: 1;
+  object-fit: cover;
+  opacity: 1;
+  transition: opacity 260ms ease;
+}
+
+.orb canvas {
+  z-index: 2;
+  background: transparent;
+  opacity: 0;
+  transition: opacity 360ms ease;
+}
+
+.orb.orb-live canvas { opacity: 1; }
+.orb.orb-live img { opacity: 0; }
+.orb.webgl-fallback canvas { display: none; }
+.orb.webgl-fallback img { opacity: 1; }
+
+.orb__glass {
+  z-index: 3;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 30% 18%, rgb(255 255 255 / .17), transparent 27%),
+    radial-gradient(circle at 50% 112%, rgb(var(--world) / .13), transparent 51%);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / .08), inset 0 -18px 34px rgb(16 2 28 / .2);
+}
+
+.orb__wake {
+  inset: -5%;
+  border-color: rgb(225 181 255 / .26);
+  box-shadow: 0 0 34px rgb(var(--world) / .28), inset 0 0 26px rgb(255 255 255 / .075);
+}
+
+.orb__aura { animation: aura-breathe 6.8s ease-in-out infinite; }
+.orb:active { transform: none; }
+.orb.is-touching .orb__aura { opacity: 1; filter: blur(16px); }
+.orb.is-touching .orb__wake { border-color: rgb(245 213 139 / .46); }
+.orb.is-answering { animation: none; }
+
+body:not([data-route="home"]):not([data-menu="open"]) .orb {
+  --orb-size: 88px;
+  left: 50%;
+  top: calc(100dvh - var(--safe-bottom) - 50px);
+  right: auto;
+  bottom: auto;
+  margin: calc(var(--orb-size) / -2) 0 0 calc(var(--orb-size) / -2);
+}
+
+body[data-menu="open"] .orb {
+  --orb-size: min(31vw, 144px);
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  margin: calc(var(--orb-size) / -2) 0 0 calc(var(--orb-size) / -2);
+  filter: drop-shadow(0 0 22px rgb(var(--world) / .3));
+}
+
+body[data-travel="active"] .orb {
+  filter: drop-shadow(0 0 30px rgb(var(--world) / .4));
+}
+
+.journey {
+  background:
+    radial-gradient(circle at 50% 52%, rgb(var(--world) / .18), transparent 31rem),
+    rgb(3 1 7 / .66);
+  -webkit-backdrop-filter: blur(8px) saturate(1.08);
+  backdrop-filter: blur(8px) saturate(1.08);
+}
+
+.journey[data-closing="true"] {
+  pointer-events: none;
+  animation: veil-out 260ms cubic-bezier(.4,0,1,1) both;
+}
+
+.journey__actions {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+}
+
+.journey__home {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  min-height: 2.65rem;
+  padding: .45rem .72rem;
+  border: 1px solid rgb(245 213 139 / .28);
+  border-radius: 999px;
+  color: var(--ink);
+  background: rgb(13 6 20 / .58);
+}
+
+.journey__home span { color: var(--gold); font-size: 1rem; }
+.journey__home b { font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; }
+
+.pentagram__lines {
+  filter: drop-shadow(0 0 9px rgb(177 96 255 / .21));
+  animation: pentagram-breathe 6.4s ease-in-out infinite;
+}
+
+.constellation { inset: 14%; }
+.destination { width: 5rem; min-height: 2.55rem; padding: .45rem .5rem; font-size: .57rem; }
+.path-node { width: 4.65rem; }
+
+@media (max-width: 430px) and (orientation: portrait) {
+  body[data-route="home"] .orb { --orb-size: min(88vw, 45dvh, 420px); }
+  .journey h2 { max-width: 12.5rem; font-size: 1.38rem; }
+  .journey__home b { display: none; }
+  .journey__home { width: 2.65rem; justify-content: center; padding: 0; }
+}
+
+@media (orientation: landscape) and (max-height: 560px) {
+  body[data-route="home"] .orb { --orb-size: min(62dvh, 38vw, 340px); }
+  .pentagram { width: min(78vh, 72vw); }
+}
+
+@keyframes veil-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes pentagram-breathe {
+  0%, 100% { opacity: .72; transform: scale(.992); transform-origin: 50% 50%; }
+  50% { opacity: 1; transform: scale(1.008); transform-origin: 50% 50%; }
+}

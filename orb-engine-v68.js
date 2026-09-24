@@ -194,12 +194,13 @@ function gaussian(value, center, width) {
 }
 
 export class RealityOrbEngine {
-  constructor(canvas, { onOpen } = {}) {
+  constructor(canvas, { onTap, onDoubleTap, onOpen } = {}) {
     if (!canvas) throw new Error('O canvas da Orbe não foi encontrado.');
     this.canvas = canvas;
     this.shell = canvas.closest('.orb-shell');
     this.status = document.querySelector('#orbStatus');
-    this.onOpen = onOpen;
+    this.onTap = onTap;
+    this.onDoubleTap = onDoubleTap || onOpen;
     this.startedAt = clock();
     this.lastFrame = 0;
     this.lastTap = 0;
@@ -358,7 +359,11 @@ export class RealityOrbEngine {
     };
     this.onClick = event => {
       event.preventDefault();
-      if (event.detail === 0) this.open();
+      event.stopImmediatePropagation();
+      if (event.detail === 0) {
+        this.pulse('A Orbe reconheceu o teclado', .9);
+        this.onTap?.({ source:'keyboard', point:{ x:.5, y:.5 } });
+      }
     };
     this.onDoubleClick = event => event.preventDefault();
     this.onResize = () => this.resize();
@@ -376,7 +381,7 @@ export class RealityOrbEngine {
     this.shell?.addEventListener('pointercancel', this.onPointerCancel, { passive: false });
     this.shell?.addEventListener('pointerenter', this.onPointerEnter, { passive: true });
     this.shell?.addEventListener('pointerleave', this.onPointerLeave, { passive: true });
-    this.shell?.addEventListener('click', this.onClick);
+    this.shell?.addEventListener('click', this.onClick, { capture:true });
     this.shell?.addEventListener('dblclick', this.onDoubleClick);
     window.addEventListener('resize', this.onResize, { passive: true });
     document.addEventListener('visibilitychange', this.onVisibility);
@@ -493,7 +498,7 @@ export class RealityOrbEngine {
 
   handleTap(point) {
     const now = clock();
-    const closeInTime = now - this.lastTap < 430;
+    const closeInTime = now - this.lastTap < 330;
     const closeInSpace = Math.hypot(point.x - this.lastTapPoint.x, point.y - this.lastTapPoint.y) < .16;
     if (closeInTime && closeInSpace) {
       clearTimeout(this.tapTimer);
@@ -503,17 +508,28 @@ export class RealityOrbEngine {
     }
     this.lastTap = now;
     this.lastTapPoint = point;
-    this.pulse('A Orbe despertou — toque novamente para abrir', 1.05);
+    this.pulse('A Orbe despertou', 1.05);
     clearTimeout(this.tapTimer);
     this.tapTimer = setTimeout(() => {
-      if (!this.down && !this.opening) this.announce('A Orbe está respirando', 'RESPIRA');
-    }, 1500);
+      if (!this.down && !this.opening) {
+        this.onTap?.({ source:'touch', point:{ ...this.lastTapPoint } });
+        this.announce('A Orbe está respirando', 'RESPIRA');
+      }
+    }, 335);
   }
 
   pulse(message = 'A Orbe despertou', strength = 1) {
     this.targetEnergy = Math.max(this.targetEnergy, strength);
     this.ripple = { x: this.pointer.targetX, y: this.pointer.targetY, age: 0 };
     this.announce(message, 'PULSO');
+    document.dispatchEvent(new CustomEvent('divina:supreme-orb-pulse', {
+      detail:{
+        x:this.pointer.targetX,
+        y:this.pointer.targetY,
+        intensity:strength,
+        source:'orb-engine-v68'
+      }
+    }));
     this.haptic(7);
     setTimeout(() => {
       if (!this.down && !this.opening) this.targetEnergy = .17;
@@ -532,7 +548,7 @@ export class RealityOrbEngine {
     this.announce('O portal do Tarot Livre está se abrindo', 'PORTAL');
     this.haptic([12, 28, 18]);
     this.requestFrame();
-    setTimeout(() => this.onOpen?.(), 180);
+    setTimeout(() => this.onDoubleTap?.({ source:'double-tap' }), 180);
     setTimeout(() => {
       this.opening = false;
       this.targetPressure = 0;
@@ -554,7 +570,9 @@ export class RealityOrbEngine {
   }
 
   haptic(pattern) {
-    try { navigator.vibrate?.(pattern); } catch {}
+    document.dispatchEvent(new CustomEvent('divina:native-haptic', {
+      detail:{ pattern, source:'orb-engine-v68' }
+    }));
   }
 
   breathAt(seconds) {
@@ -697,7 +715,7 @@ export class RealityOrbEngine {
     this.shell?.removeEventListener('pointercancel', this.onPointerCancel);
     this.shell?.removeEventListener('pointerenter', this.onPointerEnter);
     this.shell?.removeEventListener('pointerleave', this.onPointerLeave);
-    this.shell?.removeEventListener('click', this.onClick);
+    this.shell?.removeEventListener('click', this.onClick, { capture:true });
     this.shell?.removeEventListener('dblclick', this.onDoubleClick);
     if (this.gl) {
       if (this.texture) this.gl.deleteTexture(this.texture);
