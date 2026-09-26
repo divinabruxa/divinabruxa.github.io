@@ -990,6 +990,37 @@ body[data-route="escola"] .cosmos__veil {
 .school-focus li { position: relative; padding: .65rem .75rem .65rem 2.1rem; border-radius: .8rem; color: rgb(255 255 255 / .72); background: rgb(255 255 255 / .035); }
 .school-focus li::before { content: "✦"; position: absolute; left: .75rem; color: var(--violet-bright); }
 
+.school-teaching,
+.school-practice {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid rgb(255 255 255 / .085);
+  border-radius: 1rem;
+  background: linear-gradient(145deg, rgb(var(--world) / .08), rgb(255 255 255 / .018));
+}
+
+.school-teaching p:not(.eyebrow),
+.school-practice > p:not(.eyebrow) {
+  margin: .65rem 0 0;
+  color: rgb(255 255 255 / .72);
+  font-size: .88rem;
+  line-height: 1.72;
+}
+
+.school-practice h3 {
+  margin: 0;
+  color: var(--ink);
+  font-family: Iowan Old Style, Baskerville, serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+.school-practice button { margin-top: .8rem; }
+.school-practice [hidden] { display: none !important; }
+.school-practice #schoolPracticeGuide { color: var(--gold); }
+.school-actions { display: flex; flex-wrap: wrap; gap: .55rem; }
+.school-actions button { flex: 1 1 12rem; }
+
 .school-cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(5.1rem, 1fr));
@@ -1009,6 +1040,36 @@ body[data-route="escola"] .cosmos__veil {
   color: var(--ink);
   background: rgb(255 255 255 / .025);
   text-align: left;
+}
+
+.spread-slot .spread-card__oracle {
+  order: 3;
+  margin: .55rem 0 0;
+  padding: .65rem .7rem;
+  border-left: 1px solid rgb(226 181 255 / .42);
+  color: rgb(255 255 255 / .72);
+  font-family: Iowan Old Style, Baskerville, "Times New Roman", serif;
+  font-size: .72rem;
+  line-height: 1.55;
+  text-align: left;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+}
+
+.spread-synthesis:not([hidden]) {
+  animation: oracle-voice-arrival 520ms var(--ease) both;
+}
+
+.spread-synthesis[data-complete="true"] {
+  border-color: rgb(245 213 139 / .32);
+  box-shadow: 0 0 32px rgb(var(--world) / .1);
+}
+
+@keyframes oracle-voice-arrival {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .school-card img { display: block; width: 100%; aspect-ratio: 2 / 3; border-radius: .45rem; object-fit: cover; }
@@ -1638,6 +1699,18 @@ html[data-skin]:not([data-skin="classic"]) .orb__aura {
 .card-dialog > div { text-align: center; }
 .card-dialog h2 { font-size: 2rem; }
 .card-dialog > div > h2 + p { color: var(--muted); font-size: .82rem; }
+.card-dialog > div > .card-dialog__oracle {
+  margin: .8rem 0 0;
+  padding: .8rem;
+  border: 1px solid rgb(218 174 255 / .18);
+  border-radius: .85rem;
+  color: rgb(255 255 255 / .82);
+  background: rgb(var(--world) / .07);
+  font-family: Iowan Old Style, Baskerville, "Times New Roman", serif;
+  font-size: .88rem;
+  line-height: 1.6;
+}
+.card-dialog__oracle[hidden] { display: none !important; }
 .card-dialog__public {
   display: inline-flex;
   justify-content: center;

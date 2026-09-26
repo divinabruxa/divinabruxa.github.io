@@ -20,7 +20,7 @@
   <title>Divina Bruxa</title>
   <link rel="preload" href="assets/orbe.webp" as="image" type="image/webp">
   <link rel="preload" href="divina-universe-retina-v523.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=3.2.1-brand-universe">
+  <link rel="stylesheet" href="styles.css?v=3.2.2-oracle-school-video">
 </head>
 <body data-route="home" data-menu="closed">
   <a class="skip-link" href="#main">Pular para a experiência</a>
@@ -169,11 +169,11 @@
         </div>
 
         <section id="spreadSynthesis" class="spread-synthesis" aria-labelledby="spreadSynthesisTitle" hidden>
-          <p class="eyebrow">ESSÊNCIA PRIMEIRO · PROFUNDIDADE OPCIONAL</p>
+          <p class="eyebrow">ORÁCULO VIVO · UMA CARTA RESPONDE À OUTRA</p>
           <h3 id="spreadSynthesisTitle">Essência da composição</h3>
           <p id="spreadSynthesisPrompt"></p>
           <details>
-            <summary>Observar sinais da composição</summary>
+            <summary>Ouvir o diálogo completo</summary>
             <ul id="spreadSynthesisFacts"></ul>
           </details>
         </section>
@@ -215,8 +215,22 @@
           </div>
           <p id="schoolLessonIntro" class="school-lesson__intro"></p>
           <ul id="schoolLessonFocus" class="school-focus"></ul>
+          <section class="school-teaching" aria-labelledby="schoolTeachingTitle">
+            <p id="schoolTeachingTitle" class="eyebrow">AULA VIVA</p>
+            <div id="schoolLessonBody"></div>
+          </section>
+          <section class="school-practice" aria-labelledby="schoolPracticeTitle">
+            <p class="eyebrow">PRÁTICA DO MÓDULO</p>
+            <h3 id="schoolPracticeTitle">Leve o símbolo para a experiência</h3>
+            <p id="schoolPracticePrompt"></p>
+            <button id="schoolPracticeToggle" type="button" aria-expanded="false">COMEÇAR PRÁTICA</button>
+            <p id="schoolPracticeGuide" hidden>Faça sem procurar uma resposta pronta. Registre a primeira percepção e só depois volte ao conteúdo da aula.</p>
+          </section>
           <div id="schoolCards" class="school-cards" aria-label="Cartas deste módulo"></div>
-          <button id="completeSchoolModule" class="wisdom-primary" type="button">Marcar módulo como concluído</button>
+          <div class="school-actions">
+            <button id="completeSchoolModule" class="wisdom-primary" type="button">Marcar módulo como concluído</button>
+            <button id="nextSchoolModule" type="button">Próximo módulo →</button>
+          </div>
         </article>
       </div>
     </section>
@@ -465,11 +479,12 @@
       <p id="dialogCardPosition" class="eyebrow"></p>
       <h2 id="dialogCardName"></h2>
       <p>Direta · a imagem fala antes das palavras.</p>
+      <p id="dialogCardOracle" class="card-dialog__oracle" hidden></p>
       <a id="dialogPublicLink" class="card-dialog__public" hidden>Conhecer a página pública desta carta</a>
     </div>
   </dialog>
 
   <div id="announcer" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
-  <script type="module" src="app.js?v=3.2.1-brand-universe"></script>
+  <script type="module" src="app.js?v=3.2.2-oracle-school-video"></script>
 </body>
 </html>

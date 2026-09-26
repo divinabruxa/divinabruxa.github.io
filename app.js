@@ -1,13 +1,13 @@
-import { CARDS, DAILY_MESSAGES } from './data/cards.js';
+import { CARDS } from './data/cards.js';
 import { CONFIG } from './data/config.js';
 import { WORLDS } from './data/worlds.js';
 import { dailyCardIndex, dailyStorageKey, dateKeyInTimeZone } from './lib/daily-card.js';
-import { buildSpreadSynthesis, createSpreadState, revealSpreadPosition, SPREAD_LIST, SPREADS, spreadStorageKey, validateSpreadState } from './spread-state-v310.js';
+import { createSpreadState, revealSpreadPosition, SPREAD_LIST, SPREADS, spreadStorageKey, validateSpreadState } from './spread-state-v310.js';
 import { checkPremiumEntitlement } from './premium-entitlement-v310.js';
 import { createTarotState, revealNext, shuffleWaiting, validateTarotState } from './lib/tarot-state.js';
 import { createJournalWorld } from './worlds/journal.js';
 import { createLibraryWorld } from './worlds/library.js';
-import { createSchoolWorld } from './worlds/school.js';
+import { createSchoolWorld } from './school-world-v322.js';
 import { createWhitWorld } from './worlds/whit.js';
 import { createAccountWorld } from './worlds/account.js';
 import { createConsultationsWorld } from './worlds/consultations.js';
@@ -18,6 +18,7 @@ import { createStoreWorld } from './worlds/store.js';
 import { createVideosWorld } from './videos-world-v311.js';
 import { RealityOrbEngine } from './orb-engine-v68.js';
 import { createLivingUniverseV524 } from './living-universe-core-v524.js';
+import { oracleConversation, oracleForCard, oracleHash, secureOracleSeed } from './oracle-voice-v321.js';
 
 const REDUCED_MOTION = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const TAROT_KEY = 'divina-bruxa-3.tarot-livre.v1';
@@ -140,8 +141,8 @@ function applyRoute(route, { push = true, focus = true, animate = true } = {}) {
     }));
   }
   const swap = () => {
-    if (currentRoute === 'musica' && next !== 'musica') music.deactivate();
-    if (currentRoute === 'videos' && next !== 'videos') videos.deactivate();
+    if (currentRoute === 'musica' && next !== 'musica') music.deactivate?.();
+    if (currentRoute === 'videos' && next !== 'videos') videos.deactivate?.();
     currentRoute = next;
     body.dataset.route = next;
     body.style.setProperty('--world', world.color);
@@ -518,13 +519,16 @@ const cardDialog = document.querySelector('#cardDialog');
 const dialogCardImage = document.querySelector('#dialogCardImage');
 const dialogCardName = document.querySelector('#dialogCardName');
 const dialogCardPosition = document.querySelector('#dialogCardPosition');
+const dialogCardOracle = document.querySelector('#dialogCardOracle');
 const dialogPublicLink = document.querySelector('#dialogPublicLink');
 
-function showCardDialog(card, position, publicHref = '') {
+function showCardDialog(card, position, publicHref = '', oracleText = '') {
   dialogCardImage.src = `assets/cards/${card.image}`;
   dialogCardImage.alt = card.name;
   dialogCardName.textContent = card.name;
   dialogCardPosition.textContent = position;
+  dialogCardOracle.textContent = oracleText;
+  dialogCardOracle.hidden = !oracleText;
   dialogPublicLink.hidden = !publicHref;
   if (publicHref) dialogPublicLink.href = publicHref;
   else dialogPublicLink.removeAttribute('href');
@@ -547,11 +551,27 @@ const daily = {
     name:document.querySelector('#dailyCardName'),
     position:document.querySelector('#dailyPosition'),
     meta:document.querySelector('#dailyCardMeta'),
+    messageTitle:document.querySelector('#dailyMessageTitle'),
     message:document.querySelector('#dailyMessage'),
     state:document.querySelector('#dailyState')
   },
 
   get card() { return CARDS[dailyCardIndex(this.dateKey, CARDS.length)]; },
+
+  get oracleSeedKey() { return `${dailyStorageKey(this.dateKey)}.oracle-seed`; },
+
+  oracleSeed(create = false) {
+    try {
+      const raw = localStorage.getItem(this.oracleSeedKey);
+      const stored = Number(raw);
+      if (raw !== null && Number.isInteger(stored) && stored >= 0) return stored >>> 0;
+      const seed = create ? secureOracleSeed() : oracleHash(`${this.dateKey}:${this.card.canonicalId}`);
+      localStorage.setItem(this.oracleSeedKey, String(seed));
+      return seed;
+    } catch {
+      return oracleHash(`${this.dateKey}:${this.card.canonicalId}`);
+    }
+  },
 
   get revealed() {
     try { return localStorage.getItem(dailyStorageKey(this.dateKey)) === 'revealed'; }
@@ -564,6 +584,7 @@ const daily = {
       return;
     }
     try { localStorage.setItem(dailyStorageKey(this.dateKey), 'revealed'); } catch {}
+    this.oracleSeed(true);
     this.render();
     announce(`Carta do Dia: ${this.card.name}. Sempre direta.`);
   },
@@ -591,6 +612,7 @@ const daily = {
       this.nodes.name.textContent = 'Toque na Orbe';
       this.nodes.position.textContent = 'RITUAL DIÁRIO';
       this.nodes.meta.textContent = 'Uma carta · um ciclo · sem invertidas';
+      this.nodes.messageTitle.textContent = 'Antes da palavra, a imagem.';
       this.nodes.message.textContent = 'Respire. Quando fizer sentido, toque na Orbe. A carta permanecerá até a próxima meia-noite em Brasília.';
       this.nodes.state.textContent = 'Ainda não revelada neste aparelho.';
       if (currentRoute === 'carta-do-dia') orbCue.textContent = 'Revelar a aurora';
@@ -602,15 +624,16 @@ const daily = {
     this.nodes.card.setAttribute('aria-label', `${card.name}. Ampliar Carta do Dia.`);
     this.nodes.name.textContent = card.name;
     this.nodes.position.textContent = 'SÍMBOLO DE HOJE';
-    this.nodes.meta.textContent = `${card.arcana} · ${card.element} · direta`;
-    this.nodes.message.textContent = DAILY_MESSAGES[card.suit] || DAILY_MESSAGES.Maiores;
+    this.nodes.meta.textContent = 'Uma presença · uma mensagem · sempre direta';
+    this.nodes.messageTitle.textContent = 'Mensagem da Orbe';
+    this.nodes.message.textContent = oracleForCard(card, this.oracleSeed(), 23);
     this.nodes.state.textContent = 'Guardada neste aparelho até o próximo ciclo de Brasília.';
     if (currentRoute === 'carta-do-dia') orbCue.textContent = 'Carta guardada';
   }
 };
 
 daily.nodes.card.addEventListener('click', () => {
-  if (daily.revealed) showCardDialog(daily.card, 'CARTA DO DIA');
+  if (daily.revealed) showCardDialog(daily.card, 'CARTA DO DIA', '', oracleForCard(daily.card, daily.oracleSeed(), 23));
 });
 
 const CARD_IDS = CARDS.map(card => card.id);
@@ -772,13 +795,14 @@ const spreads = {
   },
 
   renderSynthesis(usable, revealed, total) {
-    if (!usable || revealed < total) {
+    if (!usable || revealed < 1) {
       this.nodes.synthesis.hidden = true;
       this.nodes.synthesisFacts.replaceChildren();
       return;
     }
-    const cards = this.state.order.slice(0, total).map(cardId => CARD_BY_ID.get(cardId));
-    const synthesis = buildSpreadSynthesis(this.state.spreadId, cards);
+    const cards = this.state.order.slice(0, revealed).map(cardId => CARD_BY_ID.get(cardId));
+    const seed = oracleHash(`${this.state.spreadId}:${this.state.order.join(',')}`);
+    const synthesis = oracleConversation(cards, this.definition.positions.slice(0, revealed), seed, this.state.intention);
     if (!synthesis) {
       this.nodes.synthesis.hidden = true;
       return;
@@ -790,6 +814,7 @@ const spreads = {
       item.textContent = fact;
       return item;
     }));
+    this.nodes.synthesis.dataset.complete = String(revealed >= total);
     this.nodes.synthesis.hidden = false;
   },
 
@@ -827,6 +852,7 @@ const spreads = {
       const visible = usable && index < revealed;
       if (visible) {
         const card = CARD_BY_ID.get(this.state.order[index]);
+        const oracleSeed = oracleHash(`${this.state.spreadId}:${this.state.order.join(',')}`);
         button.classList.add('has-card');
         button.setAttribute('aria-label', `${position}: ${card.name}. Ampliar carta.`);
         const image = new Image();
@@ -836,14 +862,20 @@ const spreads = {
         image.width = 256;
         image.height = 384;
         button.append(image);
-        button.addEventListener('click', () => showCardDialog(card, `${index + 1} · ${position.toUpperCase()}`));
+        button.addEventListener('click', () => showCardDialog(card, `${index + 1} · ${position.toUpperCase()}`, '', oracleForCard(card, oracleSeed, index + 41)));
+
+        const oracle = document.createElement('p');
+        oracle.className = 'spread-card__oracle';
+        oracle.textContent = oracleForCard(card, oracleSeed, index + 41);
+        slot.append(button, oracle);
       } else {
         button.disabled = true;
         button.setAttribute('aria-label', usable ? `${position}: posição ainda oculta` : `${position}: prévia Premium bloqueada`);
       }
       const label = document.createElement('p');
       label.innerHTML = `<b>${index + 1}</b>${position}`;
-      slot.append(button, label);
+      if (!visible) slot.append(button);
+      slot.append(label);
       fragment.append(slot);
     });
     this.nodes.board.replaceChildren(fragment);
@@ -972,7 +1004,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=3.2.1-brand-universe', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=3.2.2-oracle-school-video', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {

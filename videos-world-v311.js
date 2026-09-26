@@ -181,5 +181,9 @@ export function createVideosWorld({ announce }) {
     void loadPublishedMemojis();
   }
 
-  return { activate };
+  function deactivate() {
+    closePlayer(false);
+  }
+
+  return Object.freeze({ activate, deactivate });
 }
