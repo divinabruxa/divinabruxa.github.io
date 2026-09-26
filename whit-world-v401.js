@@ -1,14 +1,14 @@
 /*
- * DIVINA BRUXA 4.0.1 · WHIT LIMPA
+ * DIVINA BRUXA 4.0.2 · WHIT PELO TAROT
  *
  * Whit existe somente em sua própria realidade, não interrompe outras
  * páginas e não executa caminhos sem um toque.
  */
 
 import { normalizePreferredName, safeResearchHref } from './matter-engine-v400.js';
-import { STORY_ENGINE_VERSION, storyResponse } from './story-engine-v401.js';
+import { STORY_ENGINE_VERSION, storyResponse } from './tarot-story-engine-v402.js';
 
-const STORAGE_KEY = 'divina-bruxa-3.whit.conversa-local.v6';
+const STORAGE_KEY = 'divina-bruxa-3.whit.conversa-local.v7';
 const PROFILE_KEY = 'divina-bruxa-3.whit.materia.v1';
 const SPIRIT_MODE_KEY = 'divina-bruxa-3.whit.espirito.v1';
 const MAX_MESSAGES = 36;
@@ -153,7 +153,7 @@ export function createWhitWorld({ announce, navigate, cards = [], worlds = {}, g
 
       if (message.role === 'whit') {
         const signature = document.createElement('em');
-        signature.textContent = `HISTÓRIA ${message.signature || 'LOCAL'} · FICÇÃO SIMBÓLICA`;
+        signature.textContent = `TAROT ${message.signature || 'LOCAL'} · HISTÓRIA CRIADA PELA CARTA`;
         item.append(signature);
       }
       fragment.append(item);
@@ -169,7 +169,7 @@ export function createWhitWorld({ announce, navigate, cards = [], worlds = {}, g
     nodes.conversation.setAttribute('aria-busy', String(active));
     nodes.input.disabled = active;
     nodes.submit.disabled = active;
-    nodes.submit.textContent = active ? 'Whit está criando…' : 'Conversar com Whit';
+    nodes.submit.textContent = active ? 'Whit está lendo o Tarot…' : 'Conversar com Whit';
   }
 
   nodes.form.addEventListener('submit', event => {
@@ -207,13 +207,13 @@ export function createWhitWorld({ announce, navigate, cards = [], worlds = {}, g
         save();
         render();
         if (creation.safety) announce?.('Whit priorizou apoio humano imediato.');
-        else announce?.('Whit concluiu uma história inteira e deixou a continuação sob sua escolha.');
+        else announce?.(`Whit respondeu pelo Tarot${creation.storyCard?.name ? ` com ${creation.storyCard.name}` : ''}.`);
       } catch {
         messages = [...messages, {
           role:'whit',
-          title:'Uma pausa antes de continuar',
-          text:'A história não conseguiu se formar inteira desta vez. O que você escreveu continua aqui, e nenhum caminho foi aberto. Quando quiser, conte a situação novamente com um fato, uma tensão e aquilo que você precisa decidir.',
-          signature:'RECOMEÇO',
+          title:'O Tarot permanece em silêncio por um instante',
+          text:'A carta não conseguiu completar sua história agora. Nenhum significado foi inventado fora do Tarot e nenhum caminho foi executado. Quando quiser, apresente a situação novamente ou escreva o nome de uma carta.',
+          signature:'SILÊNCIO',
           safety:false,
           actions:[]
         }].slice(-MAX_MESSAGES);

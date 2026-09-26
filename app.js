@@ -20,7 +20,7 @@ import { createVideosWorld } from './videos-world-v311.js';
 import { RealityOrbEngine } from './orb-engine-v68.js';
 import { createLivingUniverseV524 } from './living-universe-core-v524.js';
 import { arbitrioHash, secureArbitrioSeed } from './arbitrio-engine-v370.js';
-import { storyConversation, storyForCard } from './story-engine-v401.js';
+import { storyConversation, storyForCard } from './tarot-story-engine-v402.js';
 
 const REDUCED_MOTION = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const TAROT_KEY = 'divina-bruxa-3.tarot-livre.v1';
@@ -119,7 +119,7 @@ function conversationPresence(creation) {
 }
 
 function creationSignature(creation) {
-  return `HISTÓRIA ${creation?.signature || 'LOCAL'} · FICÇÃO CRIADA NESTE APARELHO`;
+  return `TAROT ${creation?.signature || 'LOCAL'} · HISTÓRIA CRIADA PELA CARTA`;
 }
 
 function pulseOrb() {
@@ -455,7 +455,7 @@ const tarot = {
   renderArbitrio(card) {
     const creation = card ? this.arbitrioByPosition.get(this.state.cursor) : null;
     this.nodes.arbitrioAction.disabled = !card;
-    this.nodes.arbitrioAction.textContent = creation ? 'WHIT, CONTE OUTRA HISTÓRIA' : 'WHIT, CONTE A HISTÓRIA';
+    this.nodes.arbitrioAction.textContent = creation ? 'RECONTAR PELA CARTA' : 'FAZER A CARTA FALAR';
     this.nodes.arbitrioPanel.hidden = !creation;
     if (!creation) return;
     this.nodes.arbitrioTitle.textContent = creation.title;
@@ -475,7 +475,7 @@ const tarot = {
     this.arbitrioByPosition.set(this.state.cursor, creation);
     this.renderArbitrio(card);
     pulseOrb();
-    announce(`Whit contou uma história completa a partir de ${card.name}. É ficção simbólica, não previsão.`);
+    announce(`${card.name} criou uma história inteira com seus próprios símbolos. É ficção do Tarot, não previsão.`);
   },
 
   render() {
@@ -497,7 +497,7 @@ const tarot = {
       this.nodes.empty.hidden = false;
       this.nodes.name.textContent = 'Toque na Orbe';
       this.nodes.position.textContent = 'O CÍRCULO AGUARDA';
-      this.nodes.meta.textContent = 'Sempre direta · uma história quando você chamar';
+      this.nodes.meta.textContent = 'Sempre direta · cada história nasce da carta';
       this.nodes.trail.replaceChildren();
       this.renderArbitrio(null);
       return;
@@ -512,7 +512,7 @@ const tarot = {
     this.nodes.current.setAttribute('aria-label', `${card.name}. Ampliar carta.`);
     this.nodes.name.textContent = card.name;
     this.nodes.position.textContent = `POSIÇÃO ${this.state.cursor + 1} DE ${revealed}`;
-    this.nodes.meta.textContent = 'Ficção direta · criada no instante · sem previsão';
+    this.nodes.meta.textContent = 'Tarot vivo · cada frase nasce desta carta';
     this.renderTrail();
     this.renderArbitrio(card);
   },
@@ -621,12 +621,12 @@ function renderDialogArbitrio(creation) {
   dialogArbitrio.hidden = !creation;
   dialogCardOracle.hidden = !creation;
   if (!creation) return;
-  dialogArbitrioLabel.textContent = 'HISTÓRIA COESA · FICÇÃO DE VIDA';
+  dialogArbitrioLabel.textContent = 'FICÇÃO NASCIDA DESTA CARTA';
   dialogArbitrioTitle.textContent = creation.title;
   dialogCardOracle.textContent = `${creationPresence(creation)}\n\n${creationStory(creation)}`;
   dialogArbitrioClosing.textContent = creation.closing;
   dialogArbitrioSignature.textContent = creationSignature(creation);
-  dialogArbitrioAction.textContent = 'WHIT, CONTE OUTRA HISTÓRIA';
+  dialogArbitrioAction.textContent = 'RECONTAR PELA CARTA';
 }
 
 function showCardDialog(card, position, publicHref = '', oracleText = '', options = {}) {
@@ -645,7 +645,7 @@ function showCardDialog(card, position, publicHref = '', oracleText = '', option
   } : null;
   dialogArbitrioAction.hidden = !arbitrioEnabled;
   dialogArbitrioNote.hidden = !arbitrioEnabled;
-  dialogArbitrioAction.textContent = 'WHIT, CONTE A HISTÓRIA';
+  dialogArbitrioAction.textContent = 'FAZER A CARTA FALAR';
   renderDialogArbitrio(options.initialCreation || null);
   dialogPublicLink.hidden = !publicHref;
   if (publicHref) dialogPublicLink.href = publicHref;
@@ -662,7 +662,7 @@ dialogArbitrioAction.addEventListener('click', () => {
   });
   renderDialogArbitrio(creation);
   pulseOrb();
-  announce(`Whit contou outra história completa a partir de ${dialogArbitrioContext.card.name}.`);
+  announce(`${dialogArbitrioContext.card.name} criou outra história a partir de seus próprios símbolos.`);
 });
 
 tarot.nodes.current.addEventListener('click', () => {
@@ -730,7 +730,7 @@ const daily = {
     this.render();
     this.nodes.depth.open = true;
     pulseOrb();
-    announce(`Whit contou outra história completa a partir de ${this.card.name}.`);
+    announce(`${this.card.name} criou outra história a partir de seus próprios símbolos.`);
   },
 
   get revealed() {
@@ -747,7 +747,7 @@ const daily = {
     try { localStorage.setItem(dailyStorageKey(this.dateKey), 'revealed'); } catch {}
     this.arbitrioSeed({ create:true });
     this.render();
-    announce(`Carta do Dia: ${this.card.name}. Whit contou uma história ficcional inteira para este instante.`);
+    announce(`Carta do Dia: ${this.card.name}. A história nasceu dos símbolos desta carta.`);
   },
 
   render() {
@@ -791,7 +791,7 @@ const daily = {
     this.nodes.card.setAttribute('aria-label', `${card.name}. Ampliar Carta do Dia.`);
     this.nodes.name.textContent = card.name;
     this.nodes.position.textContent = 'SÍMBOLO DE HOJE';
-    this.nodes.meta.textContent = 'Uma presença · uma ficção · sempre direta';
+    this.nodes.meta.textContent = 'Uma carta · seus símbolos · uma história';
     const creation = this.creation();
     this.nodes.messageTitle.textContent = creation.title;
     this.nodes.message.textContent = creationPresence(creation);
@@ -799,7 +799,7 @@ const daily = {
     this.nodes.closing.textContent = creation.closing;
     this.nodes.signature.textContent = creationSignature(creation);
     this.nodes.depth.hidden = false;
-    this.nodes.state.textContent = 'Carta e ficção guardadas neste aparelho até o próximo ciclo de Brasília.';
+    this.nodes.state.textContent = 'Carta e história do Tarot guardadas neste aparelho até o próximo ciclo de Brasília.';
     if (currentRoute === 'carta-do-dia') orbCue.textContent = 'Carta guardada';
   }
 };
@@ -904,7 +904,7 @@ const spreads = {
     this.arbitrioSeed({ renew:true });
     this.render();
     pulseOrb();
-    announce('Whit reuniu as cartas em outra história completa, com começo, movimento e consequência.');
+    announce('As cartas escreveram outra história. Cada capítulo nasceu da posição e dos símbolos revelados.');
   },
 
   renderPicker() {
@@ -1241,7 +1241,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=4.0.1-historias', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=4.0.2-tarot', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {
