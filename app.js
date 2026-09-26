@@ -1013,8 +1013,12 @@ const journal = createJournalWorld({ announce });
 const whit = createWhitWorld({ announce });
 const navigate = route => applyRoute(route);
 const consultations = createConsultationsWorld({ announce });
-const premium = createPremiumWorld({ navigate, announce });
 const account = createAccountWorld({ announce });
+const premium = createPremiumWorld({
+  navigate,
+  announce,
+  getSession:() => account.getSession()
+});
 const store = createStoreWorld({ announce });
 const music = createMusicWorld({ announce });
 const videos = createVideosWorld({ announce });
@@ -1046,7 +1050,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=3.4.0-worlds-last-mile', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=3.5.0-security-foundation', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {

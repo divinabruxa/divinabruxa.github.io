@@ -1,5 +1,5 @@
-/* Divina Bruxa 3.4.0 · Última milha dos mundos. */
-const CACHE = 'divina-bruxa-3-shell-20260926-worlds-last-mile-1';
+/* Divina Bruxa 3.5.0 · Fundação segura de produção e monetização. */
+const CACHE = 'divina-bruxa-3-shell-20260926-security-foundation-1';
 const PREFIX = 'divina-bruxa-';
 const CORE = [
   './index.html', './styles.css', './app.js', './manifest.webmanifest', './assets/orbe.webp',
