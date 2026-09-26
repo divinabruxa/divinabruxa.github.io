@@ -19,12 +19,22 @@
 
 html {
   min-height: 100%;
-  background: var(--deep);
+  background: #010005 url("./divina-universe-retina-v523.webp") center / cover fixed no-repeat;
   scroll-behavior: smooth;
+}
+
+html::before {
+  content: "";
+  position: fixed;
+  z-index: -3;
+  inset: -12vh -4vw;
+  pointer-events: none;
+  background: #010005 url("./divina-universe-retina-v523.webp") center / cover no-repeat;
 }
 
 body {
   min-height: 100dvh;
+  min-height: 100lvh;
   margin: 0;
   color: var(--ink);
   background:
@@ -114,17 +124,45 @@ a:focus-visible {
 }
 
 .wordmark {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: .55rem;
-  font-size: .67rem;
-  letter-spacing: .22em;
+  gap: .58rem;
   opacity: 0;
   transform: translateY(-8px);
   transition: opacity 500ms var(--ease), transform 500ms var(--ease);
 }
 
-.wordmark span { color: var(--gold); }
+.wordmark__orb {
+  width: 2.45rem;
+  height: 2.45rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: drop-shadow(0 0 10px rgb(193 104 255 / .48)) drop-shadow(0 0 3px rgb(245 213 139 / .35));
+}
+
+.wordmark__copy {
+  display: grid;
+  gap: .14rem;
+  color: var(--gold);
+  font-family: Iowan Old Style, Baskerville, "Times New Roman", serif;
+  line-height: 1;
+  text-shadow: 0 1px 8px rgb(0 0 0 / .82), 0 0 15px rgb(126 52 169 / .4);
+}
+
+.wordmark__copy b {
+  font-size: clamp(.82rem, 3.8vw, 1.08rem);
+  font-weight: 500;
+  letter-spacing: .16em;
+  white-space: nowrap;
+}
+
+.wordmark__copy small {
+  font-size: clamp(.43rem, 2vw, .56rem);
+  font-weight: 600;
+  letter-spacing: .25em;
+  white-space: nowrap;
+}
 
 .journey-trigger {
   display: flex;
@@ -154,8 +192,8 @@ body:not([data-route="home"]) .journey-trigger {
 
 body[data-route="home"] .wordmark,
 body[data-route="home"] .journey-trigger {
-  visibility: hidden;
-  pointer-events: none;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 body[data-menu="open"] .journey-bar { visibility: hidden; }
@@ -1717,7 +1755,7 @@ html[data-living-universe="v524"] body .cosmos {
 }
 
 body[data-route="home"] {
-  height: 100dvh;
+  height: 100lvh;
   min-height: 100svh;
   overflow: hidden;
   overscroll-behavior: none;
@@ -1743,6 +1781,23 @@ body[data-route="home"] .journey-trigger {
   opacity: 1;
   transform: translateY(0);
   box-shadow: 0 0 24px rgb(var(--world) / .14), inset 0 0 18px rgb(255 255 255 / .035);
+}
+
+body[data-route="home"] .wordmark {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 390px) {
+  .journey-bar {
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+  }
+
+  .wordmark { gap: .42rem; }
+  .wordmark__orb { width: 2.18rem; height: 2.18rem; }
+  .wordmark__copy b { font-size: .76rem; letter-spacing: .13em; }
+  .wordmark__copy small { font-size: .39rem; letter-spacing: .19em; }
 }
 
 body[data-route="home"] .journey-trigger > span:last-child {

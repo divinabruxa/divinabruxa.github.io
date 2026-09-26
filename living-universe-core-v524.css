@@ -6,7 +6,7 @@ html[data-living-universe="v524"] {
   max-width: 100%;
   overflow-x: hidden !important;
   overscroll-behavior-x: none;
-  background: #010005 !important;
+  background: #010005 url("./divina-universe-retina-v523.webp") center / cover fixed no-repeat !important;
 }
 
 body.db524-universe-active {
@@ -22,13 +22,15 @@ body.db524-universe-active {
 #divinaLivingUniverseV524.db524-universe {
   position: fixed;
   z-index: 0;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  inline-size: 100%;
-  max-inline-size: 100%;
-  block-size: 100vh;
-  block-size: 100dvh;
+  top: -4px;
+  right: -4px;
+  bottom: -12px;
+  left: -4px;
+  width: calc(100% + 8px) !important;
+  height: calc(100% + 16px) !important;
+  inline-size: calc(100% + 8px);
+  max-inline-size: none;
+  block-size: calc(100lvh + 16px);
   overflow: hidden;
   pointer-events: none;
   contain: strict;
@@ -58,8 +60,8 @@ body.db524-universe-active {
   position: absolute;
   inset: 0;
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
   opacity: 1;
   filter: none;
   transform: translateZ(0);

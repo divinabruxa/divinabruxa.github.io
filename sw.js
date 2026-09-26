@@ -1,5 +1,5 @@
-/* Divina Bruxa 3.2 · chão offline mínimo, código sempre rede-primeiro. */
-const CACHE = 'divina-bruxa-3-shell-20260924-launch-macro2-1';
+/* Divina Bruxa 3.2.1 · marca oficial e universo sem bordas. */
+const CACHE = 'divina-bruxa-3-shell-20260926-brand-universe-1';
 const PREFIX = 'divina-bruxa-';
 const CORE = [
   './', './index.html', './styles.css', './app.js', './manifest.webmanifest', './assets/orbe.webp',

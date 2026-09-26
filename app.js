@@ -972,7 +972,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=3.2.0-launch-macro2', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=3.2.1-brand-universe', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {

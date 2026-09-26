@@ -79,7 +79,7 @@ function installStyle() {
   const link = document.createElement('link');
   link.id = STYLE_ID;
   link.rel = 'stylesheet';
-  link.href = './living-universe-core-v524.css?v=524';
+  link.href = './living-universe-core-v524.css?v=524-brand-universe-1';
   document.head.append(link);
 }
 

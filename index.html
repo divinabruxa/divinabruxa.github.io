@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://kyphdsamyygavmkzyezr.supabase.co https://kyphdsamyygavmkzyezr.storage.supabase.co; connect-src 'self' https://kyphdsamyygavmkzyezr.supabase.co https://kyphdsamyygavmkzyezr.storage.supabase.co; frame-src https://open.spotify.com; media-src 'self' blob: https://kyphdsamyygavmkzyezr.supabase.co https://kyphdsamyygavmkzyezr.storage.supabase.co; worker-src 'self'; manifest-src 'self'; form-action 'self' https://kyphdsamyygavmkzyezr.supabase.co; upgrade-insecure-requests">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#09050f">
+  <meta name="theme-color" content="#240536">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="description" content="Divina Bruxa — uma Orbe, um universo, muitos caminhos.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -19,7 +20,7 @@
   <title>Divina Bruxa</title>
   <link rel="preload" href="assets/orbe.webp" as="image" type="image/webp">
   <link rel="preload" href="divina-universe-retina-v523.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=3.2.0-launch-macro2">
+  <link rel="stylesheet" href="styles.css?v=3.2.1-brand-universe">
 </head>
 <body data-route="home" data-menu="closed">
   <a class="skip-link" href="#main">Pular para a experiência</a>
@@ -30,9 +31,12 @@
   </div>
 
   <header class="journey-bar" aria-label="Navegação da jornada">
-    <a class="wordmark" href="#/home" data-route-link="home" aria-label="Divina Bruxa — início">
-      <span aria-hidden="true">✦</span>
-      <b>DIVINA BRUXA</b>
+    <a class="wordmark" href="#/home" data-route-link="home" aria-label="Divina Bruxa — Orbe das Realidades — início">
+      <img class="wordmark__orb" src="divina-orb-thumb-v1.webp" alt="" width="96" height="96" aria-hidden="true">
+      <span class="wordmark__copy">
+        <b>DIVINA BRUXA</b>
+        <small>ORBE DAS REALIDADES</small>
+      </span>
     </a>
     <button id="journeyTrigger" class="journey-trigger" type="button" aria-label="Abrir o Menu Mágico" aria-haspopup="dialog" aria-controls="journey" aria-expanded="false">
       <span class="journey-trigger__sigil" aria-hidden="true">⛤</span>
@@ -466,6 +470,6 @@
   </dialog>
 
   <div id="announcer" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
-  <script type="module" src="app.js?v=3.2.0-launch-macro2"></script>
+  <script type="module" src="app.js?v=3.2.1-brand-universe"></script>
 </body>
 </html>
