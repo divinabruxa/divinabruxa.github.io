@@ -20,7 +20,7 @@
   <title>Divina Bruxa</title>
   <link rel="preload" href="assets/orbe.webp" as="image" type="image/webp">
   <link rel="preload" href="divina-universe-retina-v523.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=3.8.0-mente">
+  <link rel="stylesheet" href="styles.css?v=3.9.0-espirito">
 </head>
 <body data-route="home" data-menu="closed">
   <a class="skip-link" href="#main">Pular para a experiência</a>
@@ -338,7 +338,7 @@
       <div class="world-heading">
         <p class="eyebrow">PRESENÇA ENTRE MUNDOS</p>
         <h1 id="whitTitle" tabindex="-1">Whit</h1>
-        <p>Uma presença local que escuta com Amor, pensa com clareza e encontra caminhos pelo universo sem decidir por você.</p>
+        <p>Uma presença local que escuta com Amor, pensa com clareza e, quando você escolhe, acrescenta uma reflexão espiritual simbólica sem decidir por você.</p>
       </div>
 
       <div class="whit-chamber">
@@ -357,7 +357,23 @@
             <span aria-hidden="true">⌘</span>
             <div><small>MOTOR DA MENTE · MAPA VIVO</small><b id="whitMindLabel">Pronta para compreender</b></div>
           </div>
+          <div id="whitSpiritState" class="whit-spirit-state" data-spirit-mode="livre" role="status" aria-live="polite">
+            <span aria-hidden="true">✧</span>
+            <div><small>MOTOR DO ESPÍRITO · ALMA DA WHIT</small><b id="whitSpiritLabel">Fé opcional · nenhuma voz ativada</b></div>
+          </div>
         </div>
+        <section class="whit-spirit-choice" aria-labelledby="whitSpiritChoiceTitle">
+          <div>
+            <small id="whitSpiritChoiceTitle">ESCOLHA ESPIRITUAL</small>
+            <p>Ative apenas se desejar. São reflexões originais de Whit — nunca falas literais, canalização ou ordem divina.</p>
+          </div>
+          <nav id="whitSpiritModes" class="whit-spirit-modes" aria-label="Escolher inspiração espiritual">
+            <button type="button" data-spirit-mode="livre" aria-pressed="true">Livre</button>
+            <button type="button" data-spirit-mode="jesus" aria-pressed="false">Jesus Cristo</button>
+            <button type="button" data-spirit-mode="cacurucaia" aria-pressed="false">Cacurucaia</button>
+            <button type="button" data-spirit-mode="duas-vozes" aria-pressed="false">Duas vozes</button>
+          </nav>
+        </section>
         <nav id="whitQuickPaths" class="whit-quick-paths" aria-label="Links rápidos da Whit"></nav>
         <div id="whitConversation" class="whit-conversation" role="log" aria-live="polite" aria-label="Conversa local com Whit"></div>
         <form id="whitForm" class="whit-form">
@@ -368,7 +384,7 @@
         <p class="whit-command-hint">Experimente: “abra a Carta do Dia”, “quero estudar” ou “mostre A Estrela”.</p>
         <div class="whit-privacy">
           <span aria-hidden="true">◌</span>
-          <p><b>Local, afetiva e com limites claros.</b> Whit conhece o mapa público do site, mas não lê o Diário, a Conta ou outras áreas privadas em silêncio. Links só abrem com o seu toque.</p>
+          <p><b>Local, afetiva e com limites claros.</b> Whit trabalha somente com o que você escreve aqui; não lê sua alma, o Diário, a Conta ou outras áreas privadas em silêncio. Links só abrem com o seu toque.</p>
           <button id="whitClear" type="button">Limpar conversa</button>
         </div>
       </div>
@@ -531,6 +547,6 @@
   </dialog>
 
   <div id="announcer" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
-  <script type="module" src="app.js?v=3.8.0-mente"></script>
+  <script type="module" src="app.js?v=3.9.0-espirito"></script>
 </body>
 </html>

@@ -9,7 +9,7 @@ import { createTarotState, revealNext, shuffleWaiting, validateTarotState } from
 import { createJournalWorld } from './worlds/journal.js';
 import { createLibraryWorld } from './worlds/library.js';
 import { createSchoolWorld } from './school-world-v322.js';
-import { createWhitWorld } from './whit-world-v380.js';
+import { createWhitWorld } from './whit-world-v390.js';
 import { createAccountWorld } from './worlds/account.js';
 import { createConsultationsWorld } from './worlds/consultations.js';
 import { createMusicWorld } from './worlds/music.js';
@@ -1240,7 +1240,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=3.8.0-mente', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=3.9.0-espirito', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {
