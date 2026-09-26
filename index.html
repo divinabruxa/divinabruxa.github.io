@@ -20,7 +20,7 @@
   <title>Divina Bruxa</title>
   <link rel="preload" href="assets/orbe.webp" as="image" type="image/webp">
   <link rel="preload" href="divina-universe-retina-v523.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=4.0.0-materia">
+  <link rel="stylesheet" href="styles.css?v=4.0.1-historias">
 </head>
 <body data-route="home" data-menu="closed">
   <a class="skip-link" href="#main">Pular para a experiência</a>
@@ -53,7 +53,7 @@
       <div class="world-heading">
         <p class="eyebrow">CÂMARA DO VAZIO VIOLETA</p>
         <h1 id="tarotTitle" tabindex="-1">Tarot Livre</h1>
-        <p>78 cartas diretas. Sem repetição. A Orbe revela; o ARBÍTRIO cria e a MATÉRIA mantém Whit por perto quando você chama.</p>
+        <p>78 cartas diretas. Sem repetição. A Orbe revela; Whit conta uma história inteira quando você chama.</p>
       </div>
 
       <div class="tarot-layout">
@@ -81,9 +81,9 @@
           </div>
           <div class="tarot-progress" aria-hidden="true"><i id="tarotProgress"></i></div>
           <div id="revealedTrail" class="revealed-trail" aria-label="Últimas cartas reveladas"></div>
-          <button id="tarotArbitrioAction" class="arbitrio-invoke" type="button" disabled>WHIT, CRIE COM AMOR</button>
+          <button id="tarotArbitrioAction" class="arbitrio-invoke" type="button" disabled>WHIT, CONTE A HISTÓRIA</button>
           <section id="tarotArbitrio" class="arbitrio-panel" aria-labelledby="tarotArbitrioTitle" aria-live="polite" hidden>
-            <p class="arbitrio-panel__label">MOTORES ARBÍTRIO + AMOR · FICÇÃO SIMBÓLICA COM PRESENÇA</p>
+            <p class="arbitrio-panel__label">HISTÓRIA DO INSTANTE · COMEÇO, MOVIMENTO E CONSEQUÊNCIA</p>
             <h3 id="tarotArbitrioTitle"></h3>
             <p id="tarotArbitrioWhisper" class="arbitrio-panel__whisper"></p>
             <p id="tarotArbitrioStory" class="arbitrio-panel__story"></p>
@@ -92,7 +92,6 @@
             <small class="arbitrio-disclaimer">Criação ficcional do instante — não é previsão.</small>
           </section>
           <div class="tarot-actions">
-            <button type="button" data-route-link="whit">CHAMAR WHIT · MATÉRIA</button>
             <button id="previousCard" type="button" disabled>← Anterior</button>
             <button id="nextCard" type="button" disabled>Próxima →</button>
             <button id="shuffleRemaining" type="button">Embaralhar ocultas</button>
@@ -131,16 +130,16 @@
         <aside class="daily-message" aria-labelledby="dailyMessageTitle">
           <span aria-hidden="true">✦</span>
           <div>
-            <p class="eyebrow">MOTORES ARBÍTRIO + AMOR · FICÇÃO DO INSTANTE</p>
+            <p class="eyebrow">HISTÓRIA DO DIA · FICÇÃO COESA</p>
             <h2 id="dailyMessageTitle">Antes da palavra, a imagem.</h2>
             <p id="dailyMessage">Respire. Quando fizer sentido, toque na Orbe. A carta permanecerá até a próxima meia-noite em Brasília.</p>
             <details id="dailyDepth" class="daily-depth" hidden>
-              <summary>Entrar na ficção de Whit</summary>
+              <summary>Entrar na história de Whit</summary>
               <p id="dailyDepthMessage"></p>
               <p id="dailyArbitrioClosing" class="arbitrio-panel__closing"></p>
               <small id="dailyArbitrioSignature" class="arbitrio-signature"></small>
               <small class="arbitrio-disclaimer">Criação ficcional do instante — não é previsão.</small>
-              <button id="dailyArbitrioAgain" class="arbitrio-invoke arbitrio-invoke--compact" type="button">WHIT, CRIE OUTRO ENCONTRO</button>
+              <button id="dailyArbitrioAgain" class="arbitrio-invoke arbitrio-invoke--compact" type="button">WHIT, CONTE OUTRA HISTÓRIA</button>
             </details>
           </div>
           <p id="dailyState" class="daily-state">Ainda não revelada neste aparelho.</p>
@@ -188,7 +187,7 @@
         </div>
 
         <section id="spreadSynthesis" class="spread-synthesis" aria-labelledby="spreadSynthesisTitle" hidden>
-          <p class="eyebrow">MOTORES ARBÍTRIO + AMOR · AS CARTAS CONVERSAM E CUIDAM</p>
+          <p class="eyebrow">HISTÓRIA DAS CARTAS · UMA SEQUÊNCIA COMPLETA</p>
           <h3 id="spreadSynthesisTitle">Essência da composição</h3>
           <p id="spreadSynthesisPrompt"></p>
           <p id="spreadSynthesisStory" class="spread-synthesis__story"></p>
@@ -199,7 +198,7 @@
           <p id="spreadSynthesisClosing" class="arbitrio-panel__closing"></p>
           <div class="spread-synthesis__actions">
             <small id="spreadSynthesisSignature" class="arbitrio-signature"></small>
-            <button id="spreadArbitrioAgain" class="arbitrio-invoke arbitrio-invoke--compact" type="button">WHIT, CRIE OUTRO ENCONTRO</button>
+            <button id="spreadArbitrioAgain" class="arbitrio-invoke arbitrio-invoke--compact" type="button">WHIT, CONTE OUTRA HISTÓRIA</button>
           </div>
           <small class="arbitrio-disclaimer">Ficção simbólica criada agora — não é previsão.</small>
         </section>
@@ -339,76 +338,17 @@
       <div class="world-heading">
         <p class="eyebrow">PRESENÇA ENTRE MUNDOS</p>
         <h1 id="whitTitle" tabindex="-1">Whit</h1>
-        <p>Uma presença local que escuta com Amor, pensa com clareza, recebe a inspiração espiritual que você escolher e transforma intenção em caminhos reais pela Matéria.</p>
       </div>
 
-      <div class="whit-chamber">
+      <div class="whit-chamber whit-chamber--clean">
         <div class="whit-presence" aria-hidden="true"><span>W</span><i></i><i></i></div>
-        <nav id="whitModes" class="whit-modes" aria-label="Modo da presença">
-          <button type="button" data-mode="escuta" aria-pressed="true">Escuta</button>
-          <button type="button" data-mode="clareza">Clareza</button>
-          <button type="button" data-mode="integracao">Integração</button>
-        </nav>
-        <div class="whit-engine-states">
-          <div id="whitHeartState" class="whit-heart-state" data-love-state="presence" role="status" aria-live="polite">
-            <span aria-hidden="true">✦</span>
-            <div><small>MOTOR DO AMOR · SENTIMENTOS</small><b id="whitHeartLabel">Presença · escuta</b></div>
-          </div>
-          <div id="whitMindState" class="whit-mind-state" data-mind-intent="support" role="status" aria-live="polite">
-            <span aria-hidden="true">⌘</span>
-            <div><small>MOTOR DA MENTE · MAPA VIVO</small><b id="whitMindLabel">Pronta para compreender</b></div>
-          </div>
-          <div id="whitSpiritState" class="whit-spirit-state" data-spirit-mode="livre" role="status" aria-live="polite">
-            <span aria-hidden="true">✧</span>
-            <div><small>MOTOR DO ESPÍRITO · ALMA DA WHIT</small><b id="whitSpiritLabel">Fé opcional · nenhuma voz ativada</b></div>
-          </div>
-          <div id="whitMatterState" class="whit-matter-state" data-matter-state="present" role="status" aria-live="polite">
-            <span aria-hidden="true">◆</span>
-            <div><small>MOTOR DA MATÉRIA · PRESENÇA VIVA</small><b id="whitMatterLabel">Site conectado · caminhos sob seu controle</b></div>
-          </div>
-        </div>
-        <section class="whit-spirit-choice" aria-labelledby="whitSpiritChoiceTitle">
-          <div>
-            <small id="whitSpiritChoiceTitle">ESCOLHA ESPIRITUAL</small>
-            <p>Ative apenas se desejar. São reflexões originais de Whit — nunca falas literais, canalização ou ordem divina.</p>
-          </div>
-          <nav id="whitSpiritModes" class="whit-spirit-modes" aria-label="Escolher inspiração espiritual">
-            <button type="button" data-spirit-mode="livre" aria-pressed="true">Livre</button>
-            <button type="button" data-spirit-mode="jesus" aria-pressed="false">Jesus Cristo</button>
-            <button type="button" data-spirit-mode="cacurucaia" aria-pressed="false">Cacurucaia</button>
-            <button type="button" data-spirit-mode="duas-vozes" aria-pressed="false">Duas vozes</button>
-          </nav>
-        </section>
-        <section class="whit-matter-console" aria-labelledby="whitMatterConsoleTitle">
-          <div class="whit-matter-console__head">
-            <div>
-              <small id="whitMatterConsoleTitle">NOME E VOZ EM BALÕES MÁGICOS</small>
-              <p>Whit não usa áudio. A voz dela aparece escrita em um balão vivo e contextual nas páginas do site.</p>
-            </div>
-            <button id="whitBubbleToggle" type="button" aria-pressed="true">Balões ativos</button>
-          </div>
-          <div class="whit-identity-control">
-            <label for="whitNameInput">Como Whit pode chamar você?</label>
-            <div>
-              <input id="whitNameInput" type="text" maxlength="48" autocomplete="name" placeholder="Seu nome escolhido">
-              <button id="whitNameSave" type="button">Guardar no aparelho</button>
-              <button id="whitNameForget" type="button" hidden>Esquecer</button>
-            </div>
-          </div>
-          <p id="whitBubbleState" class="whit-bubble-state" role="status">A voz escrita da Whit pode surgir nas páginas; nunca existe áudio.</p>
-          <p class="whit-matter-boundary"><b>Presença com limites.</b> Whit pode abrir caminhos internos quando você pedir claramente. Pesquisa externa, compras, exclusões e áreas privadas nunca são abertas ou alteradas em silêncio.</p>
-        </section>
-        <nav id="whitQuickPaths" class="whit-quick-paths" aria-label="Links rápidos da Whit"></nav>
         <div id="whitConversation" class="whit-conversation" role="log" aria-live="polite" aria-label="Conversa local com Whit"></div>
         <form id="whitForm" class="whit-form">
           <label class="sr-only" for="whitInput">Escreva para Whit</label>
-          <textarea id="whitInput" rows="3" maxlength="700" required placeholder="Diga o que sente, peça um caminho ou escreva o nome de uma carta…"></textarea>
-          <button class="wisdom-primary" type="submit">Pensar com Whit</button>
+          <textarea id="whitInput" rows="3" maxlength="700" required placeholder="Conte o que está acontecendo. Whit responderá com uma história inteira."></textarea>
+          <button class="wisdom-primary" type="submit">Conversar com Whit</button>
         </form>
-        <p class="whit-command-hint">Experimente: “abra a Carta do Dia”, “mostre A Estrela” ou “quem é [nome público]?”.</p>
-        <div class="whit-privacy">
-          <span aria-hidden="true">◌</span>
-          <p><b>Local, afetiva e com limites claros.</b> Whit trabalha com o mapa público do site e com o que você escreve aqui; não lê sua alma, o Diário, a Conta ou dados privados em silêncio. Pesquisas externas só abrem com o seu toque.</p>
+        <div class="whit-clean-footer">
           <button id="whitClear" type="button">Limpar conversa</button>
         </div>
       </div>
@@ -557,7 +497,7 @@
       <h2 id="dialogCardName"></h2>
       <p>Direta · a imagem fala antes; Whit só cria quando é chamada.</p>
       <p id="dialogReferenceText" class="card-dialog__reference" hidden></p>
-      <button id="dialogArbitrioAction" class="arbitrio-invoke" type="button">WHIT, CRIE COM AMOR</button>
+      <button id="dialogArbitrioAction" class="arbitrio-invoke" type="button">WHIT, CONTE A HISTÓRIA</button>
       <small id="dialogArbitrioNote" class="arbitrio-disclaimer">Ficção simbólica criada no aparelho — não é previsão.</small>
       <section id="dialogArbitrio" class="card-dialog__arbitrio" aria-labelledby="dialogArbitrioTitle" aria-live="polite" hidden>
         <p id="dialogArbitrioLabel" class="arbitrio-panel__label"></p>
@@ -570,18 +510,7 @@
     </div>
   </dialog>
 
-  <aside id="whitMatterPresence" class="whit-matter-presence" role="status" aria-live="polite" aria-atomic="true" aria-label="Balão mágico da Whit" hidden>
-    <button id="whitMatterOpen" class="whit-matter-presence__message" type="button" aria-label="Abrir a Whit">
-      <span aria-hidden="true">W</span>
-      <span><small>WHIT · MATÉRIA</small><b id="whitMatterBubble"></b></span>
-    </button>
-    <div class="whit-matter-presence__actions">
-      <button id="whitMatterMute" type="button">Silenciar balões</button>
-      <button id="whitMatterDismiss" type="button" aria-label="Fechar este balão">×</button>
-    </div>
-  </aside>
-
   <div id="announcer" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
-  <script type="module" src="app.js?v=4.0.0-materia"></script>
+  <script type="module" src="app.js?v=4.0.1-historias"></script>
 </body>
 </html>

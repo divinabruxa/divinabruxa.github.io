@@ -1252,7 +1252,7 @@ body[data-route="diario"] .cosmos__veil {
 .journal-actions > button:last-child,
 .journal-archive__head button,
 .journal-entry__actions button,
-.whit-privacy button { border: 1px solid rgb(255 255 255 / .11); border-radius: 999px; color: var(--muted); background: rgb(255 255 255 / .035); }
+.whit-clean-footer button { border: 1px solid rgb(255 255 255 / .11); border-radius: 999px; color: var(--muted); background: rgb(255 255 255 / .035); }
 .journal-private { margin: 0; color: rgb(255 255 255 / .46); font-size: .63rem; line-height: 1.45; text-align: center; }
 .journal-archive__head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: .8rem; }
 .journal-archive__head h2 { margin: 0; font-family: Iowan Old Style, Baskerville, serif; font-size: 1.75rem; font-weight: 400; }
@@ -1277,6 +1277,8 @@ body[data-route="whit"] .cosmos__veil {
 }
 
 .whit-chamber { position: relative; width: min(100%, 48rem); margin: 0 auto; padding: 1rem; border-radius: 1.7rem; overflow: hidden; }
+.whit-chamber--clean { width: min(100%, 42rem); padding: clamp(.7rem, 2vw, 1.15rem); }
+.whit-chamber--clean .whit-presence { margin-bottom: 1.15rem; }
 .whit-chamber { --love-color: 255 98 116; --love-gold: 245 196 96; }
 .whit-chamber[data-love-state="joy"],
 .whit-chamber[data-love-state="hope"] { --love-color: 255 174 80; --love-gold: 255 225 135; }
@@ -1351,7 +1353,6 @@ body[data-route="whit"] .cosmos__veil {
 .whit-identity-control > div { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: .38rem; }
 .whit-identity-control input { min-width: 0; min-height: 2.45rem; padding: .55rem .7rem; }
 .whit-identity-control button { white-space: nowrap; }
-.whit-bubble-state { color: rgb(145 235 216 / .58) !important; }
 .whit-matter-boundary { padding-top: .55rem; border-top: 1px solid rgb(255 255 255 / .065); }
 .whit-matter-boundary b { color: rgb(219 251 244 / .74); font-weight: 600; }
 .whit-quick-paths { display: flex; gap: .38rem; width: min(100%, 46rem); margin: .55rem auto 0; padding: .05rem .05rem .25rem; overflow-x: auto; scrollbar-width: none; }
@@ -1360,11 +1361,13 @@ body[data-route="whit"] .cosmos__veil {
 .whit-quick-paths a:focus-visible,
 .whit-quick-paths a:hover { border-color: rgb(171 189 255 / .42); color: var(--ink); background: rgb(91 105 208 / .15); }
 .whit-conversation { display: grid; gap: .65rem; min-height: 13rem; max-height: 29rem; margin: 1rem 0; padding: .8rem; overflow: auto; border: 1px solid rgb(255 255 255 / .07); border-radius: 1.1rem; background: rgb(3 2 7 / .36); }
+.whit-conversation[data-empty="true"] { min-height: 0; margin: 0; padding: 0; border: 0; background: transparent; }
 .whit-message { max-width: 88%; padding: .75rem .85rem; border-radius: 1rem; line-height: 1.55; white-space: pre-wrap; }
 .whit-message--whit { justify-self: start; border: 1px solid rgb(var(--love-color) / .12); color: rgb(255 255 255 / .8); background: linear-gradient(135deg, rgb(var(--love-color) / .095), rgb(var(--world) / .075)); }
 .whit-message--care { border-color: rgb(255 176 96 / .35); background: linear-gradient(135deg, rgb(135 38 45 / .24), rgb(53 19 28 / .22)); }
 .whit-message--user { justify-self: end; color: var(--ink); background: rgb(255 255 255 / .08); }
 .whit-message small { display: block; margin-bottom: .25rem; color: var(--gold); font-size: .5rem; letter-spacing: .1em; text-transform: uppercase; }
+.whit-story-title { margin: 0 0 .45rem; color: rgb(255 246 229 / .92); font-family: Iowan Old Style, Baskerville, serif; font-size: 1.12rem; font-weight: 400; line-height: 1.25; white-space: normal; }
 .whit-message em { display: block; margin-top: .55rem; color: rgb(255 255 255 / .33); font-family: inherit; font-size: .47rem; font-style: normal; letter-spacing: .08em; text-transform: uppercase; }
 .whit-spirit-response { display: grid; gap: .5rem; margin-top: .72rem; white-space: normal; }
 .whit-spirit-voice,
@@ -1387,6 +1390,9 @@ body[data-route="whit"] .cosmos__veil {
 .whit-form { display: grid; gap: .55rem; }
 .whit-form textarea { resize: vertical; min-height: 5.2rem; padding: .8rem .9rem; line-height: 1.55; }
 .whit-form button:disabled { cursor: wait; opacity: .7; }
+.whit-clean-footer { display: flex; justify-content: center; margin-top: .75rem; }
+.whit-clean-footer button { min-height: 2.2rem; padding: .4rem .7rem; font-size: .61rem; }
+.whit-chamber[data-thinking="true"] .whit-presence { filter: drop-shadow(0 0 28px rgb(var(--love-color) / .3)); }
 .whit-command-hint { margin: .45rem .2rem 0; color: rgb(255 255 255 / .37); font-size: .58rem; line-height: 1.45; text-align: center; }
 .whit-privacy { display: grid; grid-template-columns: auto 1fr; gap: .65rem; align-items: center; margin-top: .9rem; padding-top: .8rem; border-top: 1px solid rgb(255 255 255 / .08); }
 .whit-privacy > span { color: var(--gold); }
@@ -1429,62 +1435,6 @@ body[data-route="whit"] .cosmos__veil {
   .whit-chamber[data-thinking="true"] .whit-spirit-state > span,
   .whit-chamber[data-thinking="true"] .whit-matter-state > span { animation: none; }
   .whit-path { transition: none; }
-}
-
-.whit-matter-presence {
-  position: fixed;
-  z-index: 35;
-  left: max(12px, env(safe-area-inset-left));
-  bottom: calc(var(--safe-bottom) + 6.35rem);
-  display: grid;
-  width: min(calc(100vw - 24px), 22rem);
-  border: 1px solid rgb(130 236 217 / .24);
-  border-radius: 1.15rem;
-  color: var(--ink);
-  background:
-    radial-gradient(circle at 1.5rem 1.4rem, rgb(119 238 218 / .13), transparent 5rem),
-    rgb(8 6 15 / .9);
-  box-shadow: 0 16px 42px rgb(0 0 0 / .42), 0 0 28px rgb(80 206 187 / .08);
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
-  animation: whit-bubble-arrive 520ms var(--ease) both;
-}
-.whit-matter-presence::after {
-  content: "";
-  position: absolute;
-  bottom: -.42rem;
-  left: 1.55rem;
-  width: .8rem;
-  height: .8rem;
-  border-right: 1px solid rgb(130 236 217 / .2);
-  border-bottom: 1px solid rgb(130 236 217 / .2);
-  background: rgb(8 6 15 / .92);
-  transform: rotate(45deg);
-}
-.whit-matter-presence[hidden],
-body:is([data-menu="opening"], [data-menu="open"], [data-menu="closing"]) .whit-matter-presence,
-body[data-route="home"] .whit-matter-presence,
-body[data-route="whit"] .whit-matter-presence { display: none !important; }
-.whit-matter-presence__message { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .68rem; align-items: start; width: 100%; padding: .78rem .8rem .58rem; border: 0; color: inherit; background: transparent; text-align: left; }
-.whit-matter-presence__message > span:first-child { display: grid; place-items: center; width: 2.15rem; aspect-ratio: 1; border: 1px solid rgb(135 239 220 / .24); border-radius: 50%; color: rgb(181 255 240); background: radial-gradient(circle, rgb(70 194 174 / .2), transparent 72%); font-family: Iowan Old Style, Baskerville, serif; font-size: 1rem; box-shadow: 0 0 18px rgb(83 224 201 / .12); }
-.whit-matter-presence__message > span:last-child { display: grid; gap: .23rem; min-width: 0; }
-.whit-matter-presence__message small { color: rgb(145 235 216 / .74); font-size: .46rem; letter-spacing: .14em; }
-.whit-matter-presence__message b { color: rgb(255 255 255 / .82); font-family: Iowan Old Style, Baskerville, serif; font-size: .75rem; font-weight: 400; line-height: 1.48; }
-.whit-matter-presence__actions { display: flex; justify-content: flex-end; gap: .35rem; padding: 0 .6rem .58rem; }
-.whit-matter-presence__actions button { min-height: 1.85rem; padding: .33rem .55rem; border: 1px solid rgb(255 255 255 / .09); border-radius: 999px; color: rgb(255 255 255 / .45); background: rgb(255 255 255 / .025); font-size: .5rem; }
-.whit-matter-presence__actions button:last-child { display: grid; place-items: center; width: 1.85rem; padding: 0; font-size: .95rem; }
-
-@keyframes whit-bubble-arrive {
-  from { opacity: 0; transform: translate3d(0, 8px, 0) scale(.97); }
-  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
-}
-
-@media (max-width: 430px) {
-  .whit-matter-presence { bottom: calc(var(--safe-bottom) + 6rem); width: min(calc(100vw - 24px), 20rem); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .whit-matter-presence { animation: none; }
 }
 
 /* ENCONTRO + CRIAÇÕES · sete atmosferas, a mesma física */
