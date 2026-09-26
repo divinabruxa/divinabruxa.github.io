@@ -1,5 +1,5 @@
-/* Divina Bruxa 3.2.3 · Oráculo do Instante composicional. */
-const CACHE = 'divina-bruxa-3-shell-20260926-oracle-moment-1';
+/* Divina Bruxa 3.3.0 · Congelamento definitivo do Menu Mágico. */
+const CACHE = 'divina-bruxa-3-shell-20260926-menu-freeze-1';
 const PREFIX = 'divina-bruxa-';
 const CORE = [
   './index.html', './styles.css', './app.js', './manifest.webmanifest', './assets/orbe.webp',

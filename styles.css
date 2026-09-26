@@ -2906,3 +2906,22 @@ body[data-route][data-menu="open"] .orb-stage .orb {
   .orb-stage,
   body[data-route] .orb-stage .orb { transition-duration: .01ms !important; }
 }
+
+/* 3.3.0 — CONGELAMENTO DO MENU
+   Trava o mesmo quadro durante abrir/fechar, inclusive no Safari do iPhone. */
+body:is([data-menu="opening"], [data-menu="open"], [data-menu="closing"]) {
+  position: fixed;
+  top: calc(-1 * var(--menu-scroll-y, 0px));
+  right: 0;
+  left: 0;
+  height: 100dvh;
+  width: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+body:is([data-menu="opening"], [data-menu="open"], [data-menu="closing"]) .journey {
+  height: 100dvh;
+  max-height: 100dvh;
+  overscroll-behavior: none;
+}

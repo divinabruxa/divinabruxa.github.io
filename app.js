@@ -62,8 +62,10 @@ const skinsWorld = document.querySelector('#skins');
 const orb = document.querySelector('#orb');
 const orbCue = document.querySelector('#orbCue');
 const journey = document.querySelector('#journey');
+const journeyBar = document.querySelector('.journey-bar');
 const journeyTrigger = document.querySelector('#journeyTrigger');
 const closeJourney = document.querySelector('#closeJourney');
+const orbStage = document.querySelector('#orbStage');
 const constellation = document.querySelector('#constellation');
 const livingMap = document.querySelector('#livingMap');
 const journeyHint = document.querySelector('#journeyHint');
@@ -77,7 +79,25 @@ let focusBeforeJourney = null;
 let livingUniverse = null;
 let orbEngine = null;
 let menuCloseTimer = 0;
+let menuAfterClose = null;
 let routeSettleTimer = 0;
+let menuScrollY = 0;
+
+function setJourneyIsolation(active) {
+  main.inert = active;
+  journeyBar.inert = active;
+  orbStage.inert = active;
+}
+
+function lockJourneyViewport() {
+  menuScrollY = window.scrollY;
+  body.style.setProperty('--menu-scroll-y', `${menuScrollY}px`);
+}
+
+function unlockJourneyViewport() {
+  body.style.removeProperty('--menu-scroll-y');
+  window.scrollTo(0, menuScrollY);
+}
 
 function announce(message) {
   announcer.textContent = '';
@@ -252,15 +272,14 @@ function renderIntention(intention = null) {
     if (route === currentRoute) button.setAttribute('aria-current', 'page');
     button.addEventListener('click', () => {
       pulseOrb();
-      closeMap({ restoreFocus:false });
-      applyRoute(route);
+      closeMap({ restoreFocus:false, onClosed:() => applyRoute(route) });
     });
     constellation.append(button);
   });
   journeyHint.textContent = `${INTENTION_LABELS[selectedIntention]} — escolha uma realidade.`;
 }
 
-function openMap({ focusClose = false } = {}) {
+function openMap() {
   if (body.dataset.menu !== 'closed') return;
   clearTimeout(menuCloseTimer);
   delete journey.dataset.closing;
@@ -273,7 +292,8 @@ function openMap({ focusClose = false } = {}) {
   journey.hidden = false;
   journey.setAttribute('aria-hidden', 'false');
   journeyTrigger.setAttribute('aria-expanded', 'true');
-  main.inert = true;
+  lockJourneyViewport();
+  setJourneyIsolation(true);
   renderIntention(null);
   document.dispatchEvent(new CustomEvent('divina:menu-state', { detail:{ state:'opening', route:currentRoute } }));
   pulseOrb();
@@ -281,12 +301,18 @@ function openMap({ focusClose = false } = {}) {
     if (body.dataset.menu !== 'opening') return;
     body.dataset.menu = 'open';
     document.dispatchEvent(new CustomEvent('divina:menu-state', { detail:{ state:'open', route:currentRoute } }));
-    if (focusClose) closeJourney.focus({ preventScroll:true });
+    closeJourney.focus({ preventScroll:true });
   });
 }
 
-function closeMap({ restoreFocus = true } = {}) {
-  if (!['opening','open','closing'].includes(body.dataset.menu)) return;
+function closeMap({ restoreFocus = true, onClosed = null } = {}) {
+  if (typeof onClosed === 'function') menuAfterClose = onClosed;
+  if (!['opening','open','closing'].includes(body.dataset.menu)) {
+    const afterClose = menuAfterClose;
+    menuAfterClose = null;
+    afterClose?.();
+    return;
+  }
   if (body.dataset.menu === 'closing') return;
   body.dataset.menu = 'closing';
   journey.dataset.closing = 'true';
@@ -298,38 +324,41 @@ function closeMap({ restoreFocus = true } = {}) {
     journey.hidden = true;
     journey.setAttribute('aria-hidden', 'true');
     delete journey.dataset.closing;
-    main.inert = false;
+    setJourneyIsolation(false);
+    unlockJourneyViewport();
     livingUniverse?.start?.('menu-closed');
     document.dispatchEvent(new CustomEvent('divina:menu-state', { detail:{ state:'closed', route:currentRoute } }));
     if (restoreFocus) (focusBeforeJourney instanceof HTMLElement ? focusBeforeJourney : journeyTrigger).focus({ preventScroll:true });
+    const afterClose = menuAfterClose;
+    menuAfterClose = null;
+    afterClose?.();
   };
   if (REDUCED_MOTION) finish();
   else menuCloseTimer = setTimeout(finish, MENU_TRANSITION_MS);
 }
 
-function handleOrb({ source = 'touch' } = {}) {
+function handleOrb() {
   pulseOrb();
   if (['opening','open','closing'].includes(body.dataset.menu)) return closeMap();
-  if (currentRoute === 'home') return openMap({ focusClose:source === 'keyboard' });
+  if (currentRoute === 'home') return openMap();
   if (currentRoute === 'tarot') return tarot.reveal();
   if (currentRoute === 'carta-do-dia') return daily.reveal();
   if (currentRoute === 'tiragens') return spreads.reveal();
-  openMap({ focusClose:source === 'keyboard' });
+  openMap();
 }
 
-journeyTrigger.addEventListener('click', event => openMap({ focusClose:event.detail === 0 }));
+journeyTrigger.addEventListener('click', () => openMap());
 closeJourney.addEventListener('click', () => closeMap());
 pathNodes.forEach(node => node.addEventListener('click', () => {
   renderIntention(node.dataset.intention);
 }));
 routeLinks.forEach(link => link.addEventListener('click', event => {
   event.preventDefault();
-  closeMap({ restoreFocus:false });
-  applyRoute(link.dataset.routeLink);
+  closeMap({ restoreFocus:false, onClosed:() => applyRoute(link.dataset.routeLink) });
 }));
 
 document.addEventListener('keydown', event => {
-  if (body.dataset.menu !== 'open') return;
+  if (!['opening','open'].includes(body.dataset.menu)) return;
   if (event.key === 'Escape') return closeMap();
   if (event.key !== 'Tab') return;
   const focusable = [...journey.querySelectorAll('button:not(:disabled)')].filter(node => !node.hidden);
@@ -346,8 +375,8 @@ document.addEventListener('keydown', event => {
 });
 
 window.addEventListener('popstate', () => {
-  closeMap({ restoreFocus:false });
-  applyRoute(normalizedRoute(location.hash), { push:false, focus:false });
+  const route = normalizedRoute(location.hash);
+  closeMap({ restoreFocus:false, onClosed:() => applyRoute(route, { push:false, focus:false }) });
 });
 
 function initialTarotState() {
@@ -993,8 +1022,7 @@ livingUniverse = createLivingUniverseV524();
 orbEngine = new RealityOrbEngine(document.querySelector('#orbCanvas'), {
   onTap: detail => handleOrb(detail),
   onDoubleTap: () => {
-    closeMap({ restoreFocus:false });
-    applyRoute('tarot');
+    closeMap({ restoreFocus:false, onClosed:() => applyRoute('tarot') });
   }
 });
 globalThis.divinaRealityOrb = orbEngine;
@@ -1004,7 +1032,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=3.2.3-oracle-moment', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=3.3.0-menu-freeze', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {
