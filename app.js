@@ -9,7 +9,7 @@ import { createTarotState, revealNext, shuffleWaiting, validateTarotState } from
 import { createJournalWorld } from './worlds/journal.js';
 import { createLibraryWorld } from './worlds/library.js';
 import { createSchoolWorld } from './school-world-v322.js';
-import { createWhitWorld } from './whit-world-v390.js';
+import { createWhitWorld } from './whit-world-v400.js';
 import { createAccountWorld } from './worlds/account.js';
 import { createConsultationsWorld } from './worlds/consultations.js';
 import { createMusicWorld } from './worlds/music.js';
@@ -27,7 +27,7 @@ const MENU_TRANSITION_MS = 720;
 
 const worlds = WORLDS;
 const INTENTIONS = Object.freeze({
-  tarot:['tarot', 'carta-do-dia', 'tiragens', 'biblioteca'],
+  tarot:['tarot', 'carta-do-dia', 'tiragens', 'biblioteca', 'whit'],
   learn:['escola'],
   inner:['diario', 'whit'],
   universes:['musica', 'videos', 'skins'],
@@ -40,7 +40,7 @@ const INTENTION_LABELS = Object.freeze({
   universes:'Universos',
   encounter:'Encontro'
 });
-const MENU_LABELS = Object.freeze({ diario:'Diário & Espelho' });
+const MENU_LABELS = Object.freeze({ diario:'Diário & Espelho', whit:'Whit · Matéria' });
 const SECONDARY_ROUTES = new Set(['premium', 'conta']);
 
 const body = document.body;
@@ -71,6 +71,7 @@ const constellation = document.querySelector('#constellation');
 const livingMap = document.querySelector('#livingMap');
 const journeyHint = document.querySelector('#journeyHint');
 const announcer = document.querySelector('#announcer');
+const whitMatterPresence = document.querySelector('#whitMatterPresence');
 const pathNodes = [...document.querySelectorAll('.path-node')];
 const routeLinks = [...document.querySelectorAll('[data-route-link]')];
 
@@ -88,6 +89,7 @@ function setJourneyIsolation(active) {
   main.inert = active;
   journeyBar.inert = active;
   orbStage.inert = active;
+  whitMatterPresence.inert = active;
 }
 
 function lockJourneyViewport() {
@@ -135,6 +137,7 @@ function normalizedRoute(value = '') {
 }
 
 function intentionForRoute(route) {
+  if (route === 'whit') return 'inner';
   return Object.entries(INTENTIONS).find(([, routes]) => routes.includes(route))?.[0] || null;
 }
 
@@ -248,6 +251,7 @@ function applyRoute(route, { push = true, focus = true, animate = true } = {}) {
     document.dispatchEvent(new CustomEvent('divina:supreme-orb-did-navigate', {
       detail:{ from:previous, to:next, source:'divina-3-recovery' }
     }));
+    whit?.visit?.(next);
   };
   if (travelling && !REDUCED_MOTION) routeSettleTimer = setTimeout(settle, 620);
   else settle();
@@ -475,6 +479,7 @@ const tarot = {
     this.renderArbitrio(card);
     pulseOrb();
     announce(`Whit uniu o ARBÍTRIO ao Motor do Amor para ${card.name}. É ficção simbólica com cuidado, não previsão.`);
+    whit?.notify?.(`${card.name} abriu um novo balão de ficção. O ARBÍTRIO criou, o AMOR cuidou e sua escolha continua livre.`, { duration:9000 });
   },
 
   render() {
@@ -552,6 +557,7 @@ const tarot = {
     this.render();
     const card = CARDS[id];
     announce(`${card.name}, posição ${this.state.cursor + 1}. ${this.state.waiting.length} cartas ainda ocultas.`);
+    whit?.notify?.(`${card.name} ganhou forma na matéria. Observe primeiro a imagem; eu só crio palavras quando você me chama.`, { duration:7600 });
   },
 
   move(delta) {
@@ -747,6 +753,7 @@ const daily = {
     this.arbitrioSeed({ create:true });
     this.render();
     announce(`Carta do Dia: ${this.card.name}. ARBÍTRIO e AMOR criaram uma ficção simbólica para este instante.`);
+    whit?.notify?.(`${this.card.name} chegou ao dia. A carta permanece; nenhuma palavra transforma a imagem em sentença.`, { duration:9000 });
   },
 
   render() {
@@ -1125,6 +1132,7 @@ const spreads = {
     const card = CARD_BY_ID.get(result.cardId);
     const position = this.definition.positions[result.positionIndex];
     announce(`${position}: ${card.name}. Sempre direta.`);
+    whit?.notify?.(`${card.name} ocupou ${position}. As cartas podem conversar, mas a decisão continua sendo sua.`, { duration:8200 });
     const slot = this.nodes.board.querySelector(`[data-position="${result.positionIndex + 1}"]`);
     slot?.scrollIntoView?.({ behavior:REDUCED_MOTION ? 'auto' : 'smooth', block:'nearest', inline:'center' });
   },
@@ -1198,6 +1206,7 @@ const navigate = route => applyRoute(route);
 const whit = createWhitWorld({
   announce,
   navigate,
+  getCurrentRoute:() => currentRoute,
   cards:CARDS,
   worlds:WORLDS,
   guides:LIBRARY_GUIDES
@@ -1240,7 +1249,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=3.9.0-espirito', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=4.0.0-materia', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {
