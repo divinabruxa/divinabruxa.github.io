@@ -582,10 +582,17 @@ const daily = {
     meta:document.querySelector('#dailyCardMeta'),
     messageTitle:document.querySelector('#dailyMessageTitle'),
     message:document.querySelector('#dailyMessage'),
+    depth:document.querySelector('#dailyDepth'),
+    depthMessage:document.querySelector('#dailyDepthMessage'),
     state:document.querySelector('#dailyState')
   },
 
   get card() { return CARDS[dailyCardIndex(this.dateKey, CARDS.length)]; },
+
+  syncDateKey() {
+    const next = dateKeyInTimeZone();
+    if (next !== this.dateKey) this.dateKey = next;
+  },
 
   get oracleSeedKey() { return `${dailyStorageKey(this.dateKey)}.oracle-seed`; },
 
@@ -608,6 +615,7 @@ const daily = {
   },
 
   reveal() {
+    this.syncDateKey();
     if (this.revealed) {
       announce(`${this.card.name}. Esta é a sua Carta do Dia até a próxima meia-noite em Brasília.`);
       return;
@@ -619,6 +627,7 @@ const daily = {
   },
 
   render() {
+    this.syncDateKey();
     const displayDate = new Intl.DateTimeFormat('pt-BR', {
       timeZone:'America/Sao_Paulo',
       weekday:'long',
@@ -643,6 +652,9 @@ const daily = {
       this.nodes.meta.textContent = 'Uma carta · um ciclo · sem invertidas';
       this.nodes.messageTitle.textContent = 'Antes da palavra, a imagem.';
       this.nodes.message.textContent = 'Respire. Quando fizer sentido, toque na Orbe. A carta permanecerá até a próxima meia-noite em Brasília.';
+      this.nodes.depth.hidden = true;
+      this.nodes.depth.open = false;
+      this.nodes.depthMessage.textContent = '';
       this.nodes.state.textContent = 'Ainda não revelada neste aparelho.';
       if (currentRoute === 'carta-do-dia') orbCue.textContent = 'Revelar a aurora';
       return;
@@ -656,6 +668,8 @@ const daily = {
     this.nodes.meta.textContent = 'Uma presença · uma mensagem · sempre direta';
     this.nodes.messageTitle.textContent = 'Mensagem da Orbe';
     this.nodes.message.textContent = oracleForCard(card, this.oracleSeed(), 23);
+    this.nodes.depthMessage.textContent = oracleForCard(card, this.oracleSeed(), 71);
+    this.nodes.depth.hidden = false;
     this.nodes.state.textContent = 'Guardada neste aparelho até o próximo ciclo de Brasília.';
     if (currentRoute === 'carta-do-dia') orbCue.textContent = 'Carta guardada';
   }
@@ -1032,7 +1046,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=3.3.0-menu-freeze', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=3.4.0-worlds-last-mile', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {

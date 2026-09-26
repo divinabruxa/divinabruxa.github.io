@@ -2,6 +2,7 @@ import { SKINS, SKIN_COLLECTIONS, skinById } from './data/skins.js';
 import { money } from './data/consultations.js';
 
 const ACTIVE_KEY = 'divina-bruxa-3.active-skin.v1';
+const PREVIEW_KEY = 'divina-bruxa-3.preview-skin.v1';
 
 export function createSkinsWorld({ navigate, announce }) {
   const currentImage = document.querySelector('#skinCurrentImage');
@@ -15,7 +16,10 @@ export function createSkinsWorld({ navigate, announce }) {
   let active = 'classic';
   let ready = false;
 
-  try { active = skinById(localStorage.getItem(ACTIVE_KEY)).id; } catch {}
+  try {
+    const previewId = sessionStorage.getItem(PREVIEW_KEY);
+    active = previewId ? skinById(previewId).id : 'classic';
+  } catch {}
 
   function applySkin(id, { persist = true } = {}) {
     const skin = skinById(id);
@@ -32,9 +36,17 @@ export function createSkinsWorld({ navigate, announce }) {
     if (orbImage) orbImage.src = path;
     currentImage.src = path;
     currentName.textContent = skin.name;
-    currentState.textContent = skin.id === 'classic' ? 'Grátis para sempre e ativa neste aparelho.' : 'Prévia cosmética ativa neste aparelho. Disponível com a chave Premium.';
+    currentState.textContent = skin.id === 'classic' ? 'Grátis para sempre e ativa neste aparelho.' : 'Prévia cosmética ativa somente nesta aba. Disponível com a chave Premium.';
     classic.disabled = skin.id === 'classic';
-    if (persist) try { localStorage.setItem(ACTIVE_KEY, skin.id); } catch {}
+    if (persist) try {
+      if (skin.id === 'classic') {
+        localStorage.setItem(ACTIVE_KEY, 'classic');
+        sessionStorage.removeItem(PREVIEW_KEY);
+      } else {
+        sessionStorage.setItem(PREVIEW_KEY, skin.id);
+        localStorage.setItem(ACTIVE_KEY, 'classic');
+      }
+    } catch {}
     renderGrid();
     document.dispatchEvent(new CustomEvent('divina:orb-image', { detail:{ src:path, skin:skin.id } }));
     document.dispatchEvent(new CustomEvent('divina:skin-change', {
@@ -93,7 +105,7 @@ export function createSkinsWorld({ navigate, announce }) {
       classic.addEventListener('click', () => applySkin('classic'));
       const note = document.createElement('aside');
       note.className = 'skins-premium-passage';
-      note.innerHTML = '<p><span aria-hidden="true">♢</span><b>As 30 skins fazem parte do Premium vitalício.</b><small>Experimentar muda apenas a aparência neste aparelho.</small></p><button type="button">CONHECER O PREMIUM</button>';
+      note.innerHTML = '<p><span aria-hidden="true">♢</span><b>As 30 skins fazem parte do Premium vitalício.</b><small>Experimentar muda apenas a aparência nesta aba e não libera posse.</small></p><button type="button">CONHECER O PREMIUM</button>';
       note.querySelector('button').addEventListener('click', () => navigate('premium'));
       grid.after(note);
     }

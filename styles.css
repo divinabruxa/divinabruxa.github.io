@@ -642,7 +642,21 @@ body[data-route="carta-do-dia"] .cosmos__veil {
 
 .daily-message > span { color: var(--gold); font-size: 1.75rem; }
 .daily-message h2 { margin: 0; font-family: Iowan Old Style, Baskerville, serif; font-size: clamp(1.6rem, 6vw, 2.25rem); font-weight: 400; }
-.daily-message div > p:last-child { margin: .75rem 0 0; color: var(--muted); line-height: 1.68; }
+.daily-message #dailyMessage { margin: .75rem 0 0; color: var(--muted); line-height: 1.68; }
+.daily-depth {
+  margin-top: 1rem;
+  padding-top: .85rem;
+  border-top: 1px solid rgb(255 255 255 / .09);
+}
+.daily-depth summary {
+  width: fit-content;
+  color: var(--gold);
+  cursor: pointer;
+  font-size: .72rem;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+.daily-depth p { margin: .75rem 0 0; color: var(--ink); line-height: 1.68; }
 .daily-state { grid-column: 1 / -1; margin: .45rem 0 0; padding-top: .85rem; border-top: 1px solid rgb(255 255 255 / .09); color: rgb(255 255 255 / .55); font-size: .68rem; letter-spacing: .1em; line-height: 1.5; text-align: center; text-transform: uppercase; }
 
 body[data-route="tiragens"] .cosmos__veil {
