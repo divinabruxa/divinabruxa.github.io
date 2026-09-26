@@ -8,7 +8,7 @@ import { createTarotState, revealNext, shuffleWaiting, validateTarotState } from
 import { createJournalWorld } from './worlds/journal.js';
 import { createLibraryWorld } from './worlds/library.js';
 import { createSchoolWorld } from './school-world-v322.js';
-import { createWhitWorld } from './worlds/whit.js';
+import { createWhitWorld } from './whit-world-v370.js';
 import { createAccountWorld } from './worlds/account.js';
 import { createConsultationsWorld } from './worlds/consultations.js';
 import { createMusicWorld } from './worlds/music.js';
@@ -18,7 +18,7 @@ import { createStoreWorld } from './worlds/store.js';
 import { createVideosWorld } from './videos-world-v311.js';
 import { RealityOrbEngine } from './orb-engine-v68.js';
 import { createLivingUniverseV524 } from './living-universe-core-v524.js';
-import { arbitrioConversation, arbitrioForCard, arbitrioHash, secureArbitrioSeed } from './arbitrio-engine-v360.js';
+import { arbitrioConversation, arbitrioForCard, arbitrioHash, secureArbitrioSeed } from './arbitrio-engine-v370.js';
 
 const REDUCED_MOTION = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const TAROT_KEY = 'divina-bruxa-3.tarot-livre.v1';
@@ -106,6 +106,19 @@ function announce(message) {
 
 function creationStory(creation) {
   return creation?.paragraphs?.join('\n\n') || creation?.story || '';
+}
+
+function creationPresence(creation) {
+  return [creation?.heartline, creation?.whisper].filter(Boolean).join('\n\n');
+}
+
+function conversationPresence(creation) {
+  return [creation?.heartline, creation?.lead].filter(Boolean).join('\n\n');
+}
+
+function creationSignature(creation) {
+  const love = creation?.loveSignature ? ` · AMOR ${creation.loveSignature}` : '';
+  return `FICÇÃO ${creation?.signature || 'LOCAL'}${love} · CRIADA NESTE APARELHO`;
 }
 
 function pulseOrb() {
@@ -440,14 +453,14 @@ const tarot = {
   renderArbitrio(card) {
     const creation = card ? this.arbitrioByPosition.get(this.state.cursor) : null;
     this.nodes.arbitrioAction.disabled = !card;
-    this.nodes.arbitrioAction.textContent = creation ? 'WHIT, CRIE OUTRA REALIDADE' : 'WHIT, CRIE ESTA REALIDADE';
+    this.nodes.arbitrioAction.textContent = creation ? 'WHIT, CRIE OUTRO ENCONTRO' : 'WHIT, CRIE COM AMOR';
     this.nodes.arbitrioPanel.hidden = !creation;
     if (!creation) return;
     this.nodes.arbitrioTitle.textContent = creation.title;
-    this.nodes.arbitrioWhisper.textContent = creation.whisper;
+    this.nodes.arbitrioWhisper.textContent = creationPresence(creation);
     this.nodes.arbitrioStory.textContent = creationStory(creation);
     this.nodes.arbitrioClosing.textContent = creation.closing;
-    this.nodes.arbitrioSignature.textContent = `FICÇÃO ${creation.signature} · CRIADA NESTE APARELHO`;
+    this.nodes.arbitrioSignature.textContent = creationSignature(creation);
   },
 
   invent() {
@@ -460,7 +473,7 @@ const tarot = {
     this.arbitrioByPosition.set(this.state.cursor, creation);
     this.renderArbitrio(card);
     pulseOrb();
-    announce(`Whit criou uma ficção inédita para ${card.name}. Não é previsão; é uma realidade simbólica deste instante.`);
+    announce(`Whit uniu o ARBÍTRIO ao Motor do Amor para ${card.name}. É ficção simbólica com cuidado, não previsão.`);
   },
 
   render() {
@@ -606,12 +619,12 @@ function renderDialogArbitrio(creation) {
   dialogArbitrio.hidden = !creation;
   dialogCardOracle.hidden = !creation;
   if (!creation) return;
-  dialogArbitrioLabel.textContent = `MOTOR ${creation.engine} · ${creation.label}`;
+  dialogArbitrioLabel.textContent = `MOTORES ${creation.engine} + ${creation.emotionEngine || 'AMOR'} · ${creation.loveLabel || creation.label}`;
   dialogArbitrioTitle.textContent = creation.title;
-  dialogCardOracle.textContent = `${creation.whisper}\n\n${creationStory(creation)}`;
+  dialogCardOracle.textContent = `${creationPresence(creation)}\n\n${creationStory(creation)}`;
   dialogArbitrioClosing.textContent = creation.closing;
-  dialogArbitrioSignature.textContent = `FICÇÃO ${creation.signature} · CRIADA NESTE APARELHO`;
-  dialogArbitrioAction.textContent = 'WHIT, CRIE OUTRA REALIDADE';
+  dialogArbitrioSignature.textContent = creationSignature(creation);
+  dialogArbitrioAction.textContent = 'WHIT, CRIE OUTRO ENCONTRO';
 }
 
 function showCardDialog(card, position, publicHref = '', oracleText = '', options = {}) {
@@ -625,11 +638,12 @@ function showCardDialog(card, position, publicHref = '', oracleText = '', option
   dialogArbitrioContext = arbitrioEnabled ? {
     card,
     scope:options.scope || 'carta',
-    moment:position
+    moment:position,
+    intention:String(options.intention || '')
   } : null;
   dialogArbitrioAction.hidden = !arbitrioEnabled;
   dialogArbitrioNote.hidden = !arbitrioEnabled;
-  dialogArbitrioAction.textContent = 'WHIT, INVENTE UMA REALIDADE';
+  dialogArbitrioAction.textContent = 'WHIT, CRIE COM AMOR';
   renderDialogArbitrio(options.initialCreation || null);
   dialogPublicLink.hidden = !publicHref;
   if (publicHref) dialogPublicLink.href = publicHref;
@@ -641,11 +655,12 @@ dialogArbitrioAction.addEventListener('click', () => {
   if (!dialogArbitrioContext) return;
   const creation = arbitrioForCard(dialogArbitrioContext.card, secureArbitrioSeed(), {
     scope:dialogArbitrioContext.scope,
-    moment:dialogArbitrioContext.moment
+    moment:dialogArbitrioContext.moment,
+    intention:dialogArbitrioContext.intention
   });
   renderDialogArbitrio(creation);
   pulseOrb();
-  announce(`Whit criou uma nova ficção para ${dialogArbitrioContext.card.name}.`);
+  announce(`Whit criou outro encontro de ficção e cuidado para ${dialogArbitrioContext.card.name}.`);
 });
 
 tarot.nodes.current.addEventListener('click', () => {
@@ -713,7 +728,7 @@ const daily = {
     this.render();
     this.nodes.depth.open = true;
     pulseOrb();
-    announce(`Whit criou outra realidade ficcional para ${this.card.name}.`);
+    announce(`Whit criou outra realidade com o Motor do Amor para ${this.card.name}.`);
   },
 
   get revealed() {
@@ -730,7 +745,7 @@ const daily = {
     try { localStorage.setItem(dailyStorageKey(this.dateKey), 'revealed'); } catch {}
     this.arbitrioSeed({ create:true });
     this.render();
-    announce(`Carta do Dia: ${this.card.name}. O Motor ARBÍTRIO criou uma ficção simbólica para este instante.`);
+    announce(`Carta do Dia: ${this.card.name}. ARBÍTRIO e AMOR criaram uma ficção simbólica para este instante.`);
   },
 
   render() {
@@ -777,10 +792,10 @@ const daily = {
     this.nodes.meta.textContent = 'Uma presença · uma ficção · sempre direta';
     const creation = this.creation();
     this.nodes.messageTitle.textContent = creation.title;
-    this.nodes.message.textContent = creation.whisper;
+    this.nodes.message.textContent = creationPresence(creation);
     this.nodes.depthMessage.textContent = creationStory(creation);
     this.nodes.closing.textContent = creation.closing;
-    this.nodes.signature.textContent = `FICÇÃO ${creation.signature} · CRIADA NESTE APARELHO`;
+    this.nodes.signature.textContent = creationSignature(creation);
     this.nodes.depth.hidden = false;
     this.nodes.state.textContent = 'Carta e ficção guardadas neste aparelho até o próximo ciclo de Brasília.';
     if (currentRoute === 'carta-do-dia') orbCue.textContent = 'Carta guardada';
@@ -887,7 +902,7 @@ const spreads = {
     this.arbitrioSeed({ renew:true });
     this.render();
     pulseOrb();
-    announce('Whit reuniu as cartas outra vez e criou uma nova ficção para esta composição.');
+    announce('Whit reuniu as cartas outra vez; o ARBÍTRIO criou e o AMOR cuidou da composição.');
   },
 
   renderPicker() {
@@ -995,10 +1010,10 @@ const spreads = {
       return;
     }
     this.nodes.synthesisTitle.textContent = synthesis.title;
-    this.nodes.synthesisPrompt.textContent = synthesis.lead;
+    this.nodes.synthesisPrompt.textContent = conversationPresence(synthesis);
     this.nodes.synthesisStory.textContent = synthesis.story;
     this.nodes.synthesisClosing.textContent = synthesis.closing;
-    this.nodes.synthesisSignature.textContent = `FICÇÃO ${synthesis.signature} · CRIADA NESTE APARELHO`;
+    this.nodes.synthesisSignature.textContent = creationSignature(synthesis);
     this.nodes.synthesisFacts.replaceChildren(...synthesis.voices.map(fact => {
       const item = document.createElement('li');
       item.textContent = fact;
@@ -1045,7 +1060,8 @@ const spreads = {
         const arbitrioSeed = this.arbitrioSeed();
         const creation = arbitrioForCard(card, arbitrioSeed, {
           scope:`tiragem-${this.state.spreadId}`,
-          moment:`${index + 1}-${position}`
+          moment:`${index + 1}-${position}`,
+          intention:this.state.intention
         });
         button.classList.add('has-card');
         button.setAttribute('aria-label', `${position}: ${card.name}. Ampliar carta.`);
@@ -1058,12 +1074,13 @@ const spreads = {
         button.append(image);
         button.addEventListener('click', () => showCardDialog(card, `${index + 1} · ${position.toUpperCase()}`, '', '', {
           scope:`tiragem-${this.state.spreadId}`,
+          intention:this.state.intention,
           initialCreation:creation
         }));
 
         const oracle = document.createElement('p');
         oracle.className = 'spread-card__oracle';
-        oracle.textContent = creation.whisper;
+        oracle.textContent = creationPresence(creation);
         slot.append(button, oracle);
       } else {
         button.disabled = true;
@@ -1216,7 +1233,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=3.6.0-arbitrio', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=3.7.0-amor', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {

@@ -563,7 +563,7 @@ body[data-route="tarot"] .cosmos__veil {
 
 .tarot-persistence { margin: .9rem 0 0; color: var(--muted); font-size: .72rem; line-height: 1.5; text-align: center; }
 
-/* DIVINA BRUXA 3.6.0 · Motor ARBÍTRIO */
+/* DIVINA BRUXA 3.7.0 · Motores ARBÍTRIO + AMOR */
 .arbitrio-invoke {
   display: inline-flex;
   align-items: center;
@@ -630,6 +630,7 @@ body[data-route="tarot"] .cosmos__veil {
   font-family: Iowan Old Style, Baskerville, "Times New Roman", serif;
   font-size: .95rem;
   line-height: 1.58;
+  white-space: pre-line;
 }
 
 .arbitrio-panel__story {
@@ -991,7 +992,7 @@ body[data-route="tiragens"] .cosmos__veil {
 .spread-synthesis > p { margin: 0; }
 .spread-synthesis h3 { margin-top: .2rem; font-family: Iowan Old Style, Baskerville, serif; font-size: 1.35rem; font-weight: 400; }
 .spread-synthesis > p:last-of-type { margin-top: .5rem; color: var(--ink); font-size: .82rem; line-height: 1.55; }
-#spreadSynthesisPrompt { margin-top: .5rem; color: var(--ink); font-size: .82rem; line-height: 1.55; }
+#spreadSynthesisPrompt { margin-top: .5rem; color: var(--ink); font-size: .82rem; line-height: 1.55; white-space: pre-line; }
 .spread-synthesis .spread-synthesis__story { margin-top: .7rem; color: rgb(255 255 255 / .72); font-family: Iowan Old Style, Baskerville, "Times New Roman", serif; font-size: .82rem; line-height: 1.58; }
 .spread-synthesis details { margin-top: .8rem; padding-top: .7rem; border-top: 1px solid rgb(255 255 255 / .08); }
 .spread-synthesis summary { cursor: pointer; color: var(--muted); font-size: .67rem; letter-spacing: .08em; text-transform: uppercase; }
@@ -1176,6 +1177,7 @@ body[data-route="escola"] .cosmos__veil {
   font-size: .72rem;
   line-height: 1.55;
   text-align: left;
+  white-space: pre-line;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 5;
@@ -1268,30 +1270,57 @@ body[data-route="diario"] .cosmos__veil {
 
 body[data-route="whit"] .cosmos__veil {
   background:
-    radial-gradient(circle at 50% 24%, rgb(187 155 255 / .18), transparent 35%),
+    radial-gradient(circle at 50% 22%, rgb(255 72 83 / .13), transparent 24%),
+    radial-gradient(circle at 50% 30%, rgb(243 188 80 / .1), transparent 38%),
     radial-gradient(circle at 17% 76%, rgb(81 156 231 / .08), transparent 30%),
     radial-gradient(circle at 83% 73%, rgb(235 129 205 / .08), transparent 32%);
 }
 
 .whit-chamber { position: relative; width: min(100%, 48rem); margin: 0 auto; padding: 1rem; border-radius: 1.7rem; overflow: hidden; }
-.whit-presence { position: relative; display: grid; place-items: center; width: 7rem; height: 7rem; margin: .3rem auto .9rem; border-radius: 50%; color: var(--violet-bright); background: radial-gradient(circle, rgb(var(--world) / .22), transparent 66%); font-family: Iowan Old Style, Baskerville, serif; font-size: 2.25rem; }
+.whit-chamber { --love-color: 255 98 116; --love-gold: 245 196 96; }
+.whit-chamber[data-love-state="joy"],
+.whit-chamber[data-love-state="hope"] { --love-color: 255 174 80; --love-gold: 255 225 135; }
+.whit-chamber[data-love-state="sadness"],
+.whit-chamber[data-love-state="loneliness"] { --love-color: 136 151 255; --love-gold: 224 194 255; }
+.whit-chamber[data-love-state="fear"],
+.whit-chamber[data-love-state="confusion"] { --love-color: 177 125 255; --love-gold: 244 207 137; }
+.whit-chamber[data-love-state="anger"] { --love-color: 255 79 62; --love-gold: 255 190 76; }
+.whit-chamber[data-love-state="exhaustion"] { --love-color: 111 172 186; --love-gold: 213 221 184; }
+.whit-chamber[data-love-state="selfworth"] { --love-color: 236 120 200; --love-gold: 255 214 150; }
+.whit-presence { position: relative; display: grid; place-items: center; width: 7rem; height: 7rem; margin: .3rem auto .9rem; border-radius: 50%; color: rgb(var(--love-gold)); background: radial-gradient(circle, rgb(var(--love-color) / .23), rgb(var(--world) / .12) 38%, transparent 68%); font-family: Iowan Old Style, Baskerville, serif; font-size: 2.25rem; filter: drop-shadow(0 0 18px rgb(var(--love-color) / .16)); transition: color 420ms ease, filter 420ms ease, background 420ms ease; }
 .whit-presence > span { position: relative; z-index: 2; }
-.whit-presence i { position: absolute; inset: 12%; border: 1px solid rgb(255 255 255 / .14); border-radius: 50%; }
-.whit-presence i:last-child { inset: 25%; border-style: dashed; }
+.whit-presence i { position: absolute; inset: 12%; border: 1px solid rgb(var(--love-color) / .28); border-radius: 50%; animation: whit-love-breathe 5.6s ease-in-out infinite; }
+.whit-presence i:last-child { inset: 25%; border-color: rgb(var(--love-gold) / .27); border-style: dashed; animation-delay: -2.8s; }
 .whit-modes { display: flex; justify-content: center; gap: .45rem; }
 .whit-modes button { min-height: 2.45rem; padding: .5rem .75rem; border: 1px solid rgb(255 255 255 / .1); border-radius: 999px; color: var(--muted); background: rgb(255 255 255 / .03); }
-.whit-modes button[aria-pressed="true"] { border-color: rgb(218 174 255 / .48); color: var(--ink); background: rgb(var(--world) / .14); }
+.whit-modes button[aria-pressed="true"] { border-color: rgb(var(--love-color) / .48); color: var(--ink); background: rgb(var(--love-color) / .1); }
+.whit-heart-state { display: grid; grid-template-columns: auto 1fr; gap: .65rem; align-items: center; width: min(100%, 25rem); margin: .75rem auto 0; padding: .62rem .75rem; border: 1px solid rgb(var(--love-color) / .22); border-radius: 999px; background: linear-gradient(105deg, rgb(var(--love-color) / .09), rgb(var(--love-gold) / .035)); box-shadow: inset 0 1px rgb(255 255 255 / .04); transition: border-color 420ms ease, background 420ms ease; }
+.whit-heart-state > span { display: grid; place-items: center; width: 1.8rem; aspect-ratio: 1; border-radius: 50%; color: rgb(var(--love-gold)); background: rgb(var(--love-color) / .1); text-shadow: 0 0 12px rgb(var(--love-color) / .5); }
+.whit-heart-state div { display: grid; gap: .12rem; min-width: 0; }
+.whit-heart-state small { color: rgb(var(--love-gold) / .78); font-size: .48rem; letter-spacing: .12em; line-height: 1.3; text-transform: uppercase; }
+.whit-heart-state b { overflow: hidden; color: rgb(255 255 255 / .76); font-family: Iowan Old Style, Baskerville, serif; font-size: .8rem; font-weight: 400; line-height: 1.25; text-overflow: ellipsis; white-space: nowrap; }
 .whit-conversation { display: grid; gap: .65rem; min-height: 13rem; max-height: 29rem; margin: 1rem 0; padding: .8rem; overflow: auto; border: 1px solid rgb(255 255 255 / .07); border-radius: 1.1rem; background: rgb(3 2 7 / .36); }
 .whit-message { max-width: 88%; padding: .75rem .85rem; border-radius: 1rem; line-height: 1.55; white-space: pre-wrap; }
-.whit-message--whit { justify-self: start; color: rgb(255 255 255 / .78); background: rgb(var(--world) / .11); }
+.whit-message--whit { justify-self: start; border: 1px solid rgb(var(--love-color) / .12); color: rgb(255 255 255 / .8); background: linear-gradient(135deg, rgb(var(--love-color) / .095), rgb(var(--world) / .075)); }
+.whit-message--care { border-color: rgb(255 176 96 / .35); background: linear-gradient(135deg, rgb(135 38 45 / .24), rgb(53 19 28 / .22)); }
 .whit-message--user { justify-self: end; color: var(--ink); background: rgb(255 255 255 / .08); }
 .whit-message small { display: block; margin-bottom: .25rem; color: var(--gold); font-size: .5rem; letter-spacing: .1em; text-transform: uppercase; }
+.whit-message em { display: block; margin-top: .55rem; color: rgb(255 255 255 / .33); font-family: inherit; font-size: .47rem; font-style: normal; letter-spacing: .08em; text-transform: uppercase; }
 .whit-form { display: grid; gap: .55rem; }
 .whit-form textarea { resize: vertical; min-height: 5.2rem; padding: .8rem .9rem; line-height: 1.55; }
 .whit-privacy { display: grid; grid-template-columns: auto 1fr; gap: .65rem; align-items: center; margin-top: .9rem; padding-top: .8rem; border-top: 1px solid rgb(255 255 255 / .08); }
 .whit-privacy > span { color: var(--gold); }
 .whit-privacy p { margin: 0; color: rgb(255 255 255 / .5); font-size: .65rem; line-height: 1.45; }
 .whit-privacy button { grid-column: 2; justify-self: start; min-height: 2.2rem; padding: .4rem .65rem; font-size: .61rem; }
+
+@keyframes whit-love-breathe {
+  0%, 100% { opacity: .5; transform: scale(.96); }
+  50% { opacity: 1; transform: scale(1.035); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .whit-presence i { animation: none; }
+}
 
 /* ENCONTRO + CRIAÇÕES · sete atmosferas, a mesma física */
 .consultations-app,

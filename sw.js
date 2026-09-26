@@ -1,16 +1,17 @@
-/* Divina Bruxa 3.6.0 · Motor ARBÍTRIO. */
-const CACHE = 'divina-bruxa-3-shell-20260926-arbitrio-1';
+/* Divina Bruxa 3.7.0 · Motores ARBÍTRIO + AMOR. */
+const CACHE = 'divina-bruxa-3-shell-20260926-amor-1';
 const PREFIX = 'divina-bruxa-';
 const CORE = [
   './index.html', './styles.css', './app.js', './manifest.webmanifest', './assets/orbe.webp',
   './orb-engine-v68.js', './living-universe-core-v524.js', './living-universe-core-v524.css', './skins-world-v301.js',
   './divina-orb-thumb-v1.webp', './divina-universe-retina-v523.webp', './arbitrio-engine-v360.js',
+  './love-engine-v370.js', './arbitrio-engine-v370.js', './whit-world-v370.js',
   './data/cards.js', './data/config.js', './data/consultations.js', './data/library.js', './data/media.js',
   './data/plans.js', './school-data-v322.js', './data/skins.js', './data/store.js', './data/worlds.js',
   './lib/daily-card.js', './lib/tarot-state.js', './premium-entitlement-v310.js', './spread-state-v310.js',
   './worlds/account.js', './worlds/consultations.js', './worlds/journal.js', './worlds/library.js',
   './worlds/music.js', './premium-world-v310.js', './school-world-v322.js',
-  './worlds/store.js', './videos-world-v311.js', './worlds/whit.js'
+  './worlds/store.js', './videos-world-v311.js'
 ];
 
 self.addEventListener('install', event => {

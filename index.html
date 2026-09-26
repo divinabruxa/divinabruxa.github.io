@@ -20,7 +20,7 @@
   <title>Divina Bruxa</title>
   <link rel="preload" href="assets/orbe.webp" as="image" type="image/webp">
   <link rel="preload" href="divina-universe-retina-v523.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=3.6.0-arbitrio">
+  <link rel="stylesheet" href="styles.css?v=3.7.0-amor">
 </head>
 <body data-route="home" data-menu="closed">
   <a class="skip-link" href="#main">Pular para a experiência</a>
@@ -81,9 +81,9 @@
           </div>
           <div class="tarot-progress" aria-hidden="true"><i id="tarotProgress"></i></div>
           <div id="revealedTrail" class="revealed-trail" aria-label="Últimas cartas reveladas"></div>
-          <button id="tarotArbitrioAction" class="arbitrio-invoke" type="button" disabled>WHIT, CRIE ESTA REALIDADE</button>
+          <button id="tarotArbitrioAction" class="arbitrio-invoke" type="button" disabled>WHIT, CRIE COM AMOR</button>
           <section id="tarotArbitrio" class="arbitrio-panel" aria-labelledby="tarotArbitrioTitle" aria-live="polite" hidden>
-            <p class="arbitrio-panel__label">MOTOR ARBÍTRIO · FICÇÃO SIMBÓLICA CRIADA AGORA</p>
+            <p class="arbitrio-panel__label">MOTORES ARBÍTRIO + AMOR · FICÇÃO SIMBÓLICA COM PRESENÇA</p>
             <h3 id="tarotArbitrioTitle"></h3>
             <p id="tarotArbitrioWhisper" class="arbitrio-panel__whisper"></p>
             <p id="tarotArbitrioStory" class="arbitrio-panel__story"></p>
@@ -130,7 +130,7 @@
         <aside class="daily-message" aria-labelledby="dailyMessageTitle">
           <span aria-hidden="true">✦</span>
           <div>
-            <p class="eyebrow">MOTOR ARBÍTRIO · FICÇÃO DO INSTANTE</p>
+            <p class="eyebrow">MOTORES ARBÍTRIO + AMOR · FICÇÃO DO INSTANTE</p>
             <h2 id="dailyMessageTitle">Antes da palavra, a imagem.</h2>
             <p id="dailyMessage">Respire. Quando fizer sentido, toque na Orbe. A carta permanecerá até a próxima meia-noite em Brasília.</p>
             <details id="dailyDepth" class="daily-depth" hidden>
@@ -139,7 +139,7 @@
               <p id="dailyArbitrioClosing" class="arbitrio-panel__closing"></p>
               <small id="dailyArbitrioSignature" class="arbitrio-signature"></small>
               <small class="arbitrio-disclaimer">Criação ficcional do instante — não é previsão.</small>
-              <button id="dailyArbitrioAgain" class="arbitrio-invoke arbitrio-invoke--compact" type="button">WHIT, CRIE OUTRA REALIDADE</button>
+              <button id="dailyArbitrioAgain" class="arbitrio-invoke arbitrio-invoke--compact" type="button">WHIT, CRIE OUTRO ENCONTRO</button>
             </details>
           </div>
           <p id="dailyState" class="daily-state">Ainda não revelada neste aparelho.</p>
@@ -187,7 +187,7 @@
         </div>
 
         <section id="spreadSynthesis" class="spread-synthesis" aria-labelledby="spreadSynthesisTitle" hidden>
-          <p class="eyebrow">MOTOR ARBÍTRIO · AS CARTAS CONVERSAM</p>
+          <p class="eyebrow">MOTORES ARBÍTRIO + AMOR · AS CARTAS CONVERSAM E CUIDAM</p>
           <h3 id="spreadSynthesisTitle">Essência da composição</h3>
           <p id="spreadSynthesisPrompt"></p>
           <p id="spreadSynthesisStory" class="spread-synthesis__story"></p>
@@ -198,7 +198,7 @@
           <p id="spreadSynthesisClosing" class="arbitrio-panel__closing"></p>
           <div class="spread-synthesis__actions">
             <small id="spreadSynthesisSignature" class="arbitrio-signature"></small>
-            <button id="spreadArbitrioAgain" class="arbitrio-invoke arbitrio-invoke--compact" type="button">WHIT, CRIE OUTRA REALIDADE</button>
+            <button id="spreadArbitrioAgain" class="arbitrio-invoke arbitrio-invoke--compact" type="button">WHIT, CRIE OUTRO ENCONTRO</button>
           </div>
           <small class="arbitrio-disclaimer">Ficção simbólica criada agora — não é previsão.</small>
         </section>
@@ -338,7 +338,7 @@
       <div class="world-heading">
         <p class="eyebrow">PRESENÇA ENTRE MUNDOS</p>
         <h1 id="whitTitle" tabindex="-1">Whit</h1>
-        <p>Uma presença local para devolver contexto, pergunta e silêncio — nunca para decidir por você.</p>
+        <p>Uma presença local que escuta o sentimento antes de responder, ama sem possuir e nunca decide por você.</p>
       </div>
 
       <div class="whit-chamber">
@@ -348,6 +348,10 @@
           <button type="button" data-mode="clareza">Clareza</button>
           <button type="button" data-mode="integracao">Integração</button>
         </nav>
+        <div id="whitHeartState" class="whit-heart-state" data-love-state="presence" role="status" aria-live="polite">
+          <span aria-hidden="true">✦</span>
+          <div><small>MOTOR DO AMOR · SENTIMENTOS</small><b id="whitHeartLabel">Presença · escuta</b></div>
+        </div>
         <div id="whitConversation" class="whit-conversation" role="log" aria-live="polite" aria-label="Conversa local com Whit"></div>
         <form id="whitForm" class="whit-form">
           <label class="sr-only" for="whitInput">Escreva para Whit</label>
@@ -356,7 +360,7 @@
         </form>
         <div class="whit-privacy">
           <span aria-hidden="true">◌</span>
-          <p><b>Local e explícita.</b> Whit não lê o Diário, a Conta ou outras áreas sem você trazer o contexto para esta conversa.</p>
+          <p><b>Local, afetiva e livre.</b> Whit escuta somente o que você traz para esta conversa; não lê o Diário, a Conta ou outras áreas em silêncio.</p>
           <button id="whitClear" type="button">Limpar conversa</button>
         </div>
       </div>
@@ -505,7 +509,7 @@
       <h2 id="dialogCardName"></h2>
       <p>Direta · a imagem fala antes; Whit só cria quando é chamada.</p>
       <p id="dialogReferenceText" class="card-dialog__reference" hidden></p>
-      <button id="dialogArbitrioAction" class="arbitrio-invoke" type="button">WHIT, INVENTE UMA REALIDADE</button>
+      <button id="dialogArbitrioAction" class="arbitrio-invoke" type="button">WHIT, CRIE COM AMOR</button>
       <small id="dialogArbitrioNote" class="arbitrio-disclaimer">Ficção simbólica criada no aparelho — não é previsão.</small>
       <section id="dialogArbitrio" class="card-dialog__arbitrio" aria-labelledby="dialogArbitrioTitle" aria-live="polite" hidden>
         <p id="dialogArbitrioLabel" class="arbitrio-panel__label"></p>
@@ -519,6 +523,6 @@
   </dialog>
 
   <div id="announcer" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
-  <script type="module" src="app.js?v=3.6.0-arbitrio"></script>
+  <script type="module" src="app.js?v=3.7.0-amor"></script>
 </body>
 </html>
