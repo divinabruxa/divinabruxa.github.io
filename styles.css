@@ -563,6 +563,106 @@ body[data-route="tarot"] .cosmos__veil {
 
 .tarot-persistence { margin: .9rem 0 0; color: var(--muted); font-size: .72rem; line-height: 1.5; text-align: center; }
 
+/* DIVINA BRUXA 3.6.0 · Motor ARBÍTRIO */
+.arbitrio-invoke {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 3rem;
+  margin-top: 1rem;
+  padding: .72rem 1rem;
+  border: 1px solid rgb(245 213 139 / .38);
+  border-radius: 999px;
+  color: #fff4cf;
+  background:
+    radial-gradient(circle at 20% 0%, rgb(222 138 255 / .18), transparent 45%),
+    linear-gradient(120deg, rgb(93 43 148 / .3), rgb(28 11 46 / .72));
+  box-shadow: inset 0 1px rgb(255 255 255 / .08), 0 10px 28px rgb(0 0 0 / .2);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  line-height: 1.35;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.arbitrio-invoke:not(:disabled) { cursor: pointer; }
+.arbitrio-invoke:not(:disabled):active { transform: translateY(1px); }
+.arbitrio-invoke:disabled { cursor: not-allowed; opacity: .35; }
+.arbitrio-invoke--compact { min-height: 2.75rem; margin-top: .85rem; font-size: .62rem; }
+
+.arbitrio-panel {
+  margin-top: .8rem;
+  padding: 1rem;
+  border: 1px solid rgb(218 174 255 / .22);
+  border-radius: 1.15rem;
+  background:
+    radial-gradient(circle at 12% 10%, rgb(var(--world) / .12), transparent 36%),
+    rgb(8 4 14 / .42);
+  box-shadow: inset 0 1px rgb(255 255 255 / .035);
+  overflow-wrap: anywhere;
+  animation: oracle-voice-arrival 520ms var(--ease) both;
+}
+
+.arbitrio-panel[hidden] { display: none; }
+.arbitrio-panel h3,
+.card-dialog__arbitrio h3 {
+  margin: .28rem 0 0;
+  font-family: Iowan Old Style, Baskerville, "Times New Roman", serif;
+  font-size: 1.28rem;
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.arbitrio-panel__label {
+  margin: 0;
+  color: var(--gold);
+  font-size: .54rem;
+  letter-spacing: .13em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.arbitrio-panel__whisper {
+  margin: .7rem 0 0;
+  color: #fff5dc;
+  font-family: Iowan Old Style, Baskerville, "Times New Roman", serif;
+  font-size: .95rem;
+  line-height: 1.58;
+}
+
+.arbitrio-panel__story {
+  margin: .75rem 0 0;
+  color: rgb(255 255 255 / .74);
+  font-family: Iowan Old Style, Baskerville, "Times New Roman", serif;
+  font-size: .79rem;
+  line-height: 1.62;
+  white-space: pre-line;
+}
+
+.arbitrio-panel__closing {
+  margin: .75rem 0 0;
+  color: rgb(245 213 139 / .84);
+  font-family: Iowan Old Style, Baskerville, "Times New Roman", serif;
+  font-size: .78rem;
+  font-style: italic;
+  line-height: 1.55;
+}
+
+.arbitrio-signature,
+.arbitrio-disclaimer {
+  display: block;
+  margin-top: .72rem;
+  color: rgb(255 255 255 / .42);
+  font-size: .52rem;
+  letter-spacing: .09em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.arbitrio-disclaimer { margin-top: .35rem; letter-spacing: .05em; }
+
 body[data-route="carta-do-dia"] .cosmos__veil {
   background:
     radial-gradient(circle at 50% 18%, rgb(255 198 123 / .21), transparent 30%),
@@ -657,6 +757,10 @@ body[data-route="carta-do-dia"] .cosmos__veil {
   text-transform: uppercase;
 }
 .daily-depth p { margin: .75rem 0 0; color: var(--ink); line-height: 1.68; }
+.daily-depth #dailyDepthMessage { white-space: pre-line; }
+.daily-depth .arbitrio-panel__closing { color: rgb(245 213 139 / .84); font-size: .82rem; }
+.daily-depth .arbitrio-signature,
+.daily-depth .arbitrio-disclaimer { color: rgb(255 255 255 / .44); }
 .daily-state { grid-column: 1 / -1; margin: .45rem 0 0; padding-top: .85rem; border-top: 1px solid rgb(255 255 255 / .09); color: rgb(255 255 255 / .55); font-size: .68rem; letter-spacing: .1em; line-height: 1.5; text-align: center; text-transform: uppercase; }
 
 body[data-route="tiragens"] .cosmos__veil {
@@ -887,9 +991,15 @@ body[data-route="tiragens"] .cosmos__veil {
 .spread-synthesis > p { margin: 0; }
 .spread-synthesis h3 { margin-top: .2rem; font-family: Iowan Old Style, Baskerville, serif; font-size: 1.35rem; font-weight: 400; }
 .spread-synthesis > p:last-of-type { margin-top: .5rem; color: var(--ink); font-size: .82rem; line-height: 1.55; }
+#spreadSynthesisPrompt { margin-top: .5rem; color: var(--ink); font-size: .82rem; line-height: 1.55; }
+.spread-synthesis .spread-synthesis__story { margin-top: .7rem; color: rgb(255 255 255 / .72); font-family: Iowan Old Style, Baskerville, "Times New Roman", serif; font-size: .82rem; line-height: 1.58; }
 .spread-synthesis details { margin-top: .8rem; padding-top: .7rem; border-top: 1px solid rgb(255 255 255 / .08); }
 .spread-synthesis summary { cursor: pointer; color: var(--muted); font-size: .67rem; letter-spacing: .08em; text-transform: uppercase; }
 .spread-synthesis ul { display: grid; gap: .35rem; margin: .7rem 0 0; padding-left: 1.1rem; color: var(--muted); font-size: .7rem; line-height: 1.45; }
+#spreadSynthesisClosing { margin-top: .8rem; color: rgb(245 213 139 / .82); }
+.spread-synthesis__actions { display: grid; gap: .25rem; margin-top: .85rem; }
+.spread-synthesis__actions .arbitrio-signature { margin-top: 0; }
+.spread-synthesis__actions .arbitrio-invoke { margin-top: .4rem; }
 
 .spread-footer {
   display: flex;
@@ -1721,6 +1831,7 @@ html[data-skin]:not([data-skin="classic"]) .orb__aura {
 .card-dialog {
   width: min(92vw, 28rem);
   max-height: 92dvh;
+  overflow-y: auto;
   padding: 1rem;
   border: 1px solid rgb(255 255 255 / .15);
   border-radius: 1.6rem;
@@ -1734,6 +1845,13 @@ html[data-skin]:not([data-skin="classic"]) .orb__aura {
 .card-dialog > div { text-align: center; }
 .card-dialog h2 { font-size: 2rem; }
 .card-dialog > div > h2 + p { color: var(--muted); font-size: .82rem; }
+.card-dialog__reference {
+  margin: .75rem 0 0;
+  color: rgb(255 255 255 / .7);
+  font-size: .8rem;
+  line-height: 1.58;
+}
+.card-dialog__reference[hidden] { display: none; }
 .card-dialog > div > .card-dialog__oracle {
   margin: .8rem 0 0;
   padding: .8rem;
@@ -1744,6 +1862,32 @@ html[data-skin]:not([data-skin="classic"]) .orb__aura {
   font-family: Iowan Old Style, Baskerville, "Times New Roman", serif;
   font-size: .88rem;
   line-height: 1.6;
+}
+.card-dialog > div > .arbitrio-invoke { margin-top: .9rem; }
+.card-dialog > div > .arbitrio-disclaimer { margin-top: .45rem; }
+.card-dialog__arbitrio {
+  margin-top: .85rem;
+  padding: .9rem;
+  border: 1px solid rgb(218 174 255 / .18);
+  border-radius: .95rem;
+  background:
+    radial-gradient(circle at 18% 0%, rgb(var(--world) / .12), transparent 42%),
+    rgb(7 3 12 / .46);
+  overflow-wrap: anywhere;
+  text-align: left;
+  animation: oracle-voice-arrival 520ms var(--ease) both;
+}
+.card-dialog__arbitrio[hidden] { display: none; }
+.card-dialog__arbitrio .card-dialog__oracle {
+  margin: .75rem 0 0;
+  padding: 0;
+  border: 0;
+  color: rgb(255 255 255 / .82);
+  background: transparent;
+  font-family: Iowan Old Style, Baskerville, "Times New Roman", serif;
+  font-size: .88rem;
+  line-height: 1.62;
+  white-space: pre-line;
 }
 .card-dialog__oracle[hidden] { display: none !important; }
 .card-dialog__public {

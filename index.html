@@ -20,7 +20,7 @@
   <title>Divina Bruxa</title>
   <link rel="preload" href="assets/orbe.webp" as="image" type="image/webp">
   <link rel="preload" href="divina-universe-retina-v523.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=3.5.0-security-foundation">
+  <link rel="stylesheet" href="styles.css?v=3.6.0-arbitrio">
 </head>
 <body data-route="home" data-menu="closed">
   <a class="skip-link" href="#main">Pular para a experiência</a>
@@ -53,7 +53,7 @@
       <div class="world-heading">
         <p class="eyebrow">CÂMARA DO VAZIO VIOLETA</p>
         <h1 id="tarotTitle" tabindex="-1">Tarot Livre</h1>
-        <p>78 cartas diretas. Sem repetição. A Orbe revela; você interpreta.</p>
+        <p>78 cartas diretas. Sem repetição. A Orbe revela; o ARBÍTRIO cria quando você chama Whit.</p>
       </div>
 
       <div class="tarot-layout">
@@ -69,7 +69,7 @@
           <div class="card-caption" aria-live="polite">
             <p id="cardPosition">O CÍRCULO AGUARDA</p>
             <h2 id="cardName">Toque na Orbe</h2>
-            <span id="cardMeta">Sempre direta · sem significado automático</span>
+            <span id="cardMeta">Sempre direta · Whit fala quando é chamada</span>
           </div>
         </section>
 
@@ -81,6 +81,16 @@
           </div>
           <div class="tarot-progress" aria-hidden="true"><i id="tarotProgress"></i></div>
           <div id="revealedTrail" class="revealed-trail" aria-label="Últimas cartas reveladas"></div>
+          <button id="tarotArbitrioAction" class="arbitrio-invoke" type="button" disabled>WHIT, CRIE ESTA REALIDADE</button>
+          <section id="tarotArbitrio" class="arbitrio-panel" aria-labelledby="tarotArbitrioTitle" aria-live="polite" hidden>
+            <p class="arbitrio-panel__label">MOTOR ARBÍTRIO · FICÇÃO SIMBÓLICA CRIADA AGORA</p>
+            <h3 id="tarotArbitrioTitle"></h3>
+            <p id="tarotArbitrioWhisper" class="arbitrio-panel__whisper"></p>
+            <p id="tarotArbitrioStory" class="arbitrio-panel__story"></p>
+            <p id="tarotArbitrioClosing" class="arbitrio-panel__closing"></p>
+            <small id="tarotArbitrioSignature" class="arbitrio-signature"></small>
+            <small class="arbitrio-disclaimer">Criação ficcional do instante — não é previsão.</small>
+          </section>
           <div class="tarot-actions">
             <button id="previousCard" type="button" disabled>← Anterior</button>
             <button id="nextCard" type="button" disabled>Próxima →</button>
@@ -96,7 +106,7 @@
       <div class="world-heading">
         <p class="eyebrow">SANTUÁRIO DA AURORA</p>
         <h1 id="dailyTitle" tabindex="-1">Carta do Dia</h1>
-        <p>Uma imagem para atravessar o agora. A mesma data de Brasília, a mesma carta, sempre direta.</p>
+        <p>A mesma carta até a meia-noite de Brasília; uma ficção viva criada por Whit para o seu agora.</p>
       </div>
 
       <div class="daily-layout">
@@ -120,12 +130,16 @@
         <aside class="daily-message" aria-labelledby="dailyMessageTitle">
           <span aria-hidden="true">✦</span>
           <div>
-            <p class="eyebrow">SÍMBOLO PARA O AGORA</p>
+            <p class="eyebrow">MOTOR ARBÍTRIO · FICÇÃO DO INSTANTE</p>
             <h2 id="dailyMessageTitle">Antes da palavra, a imagem.</h2>
             <p id="dailyMessage">Respire. Quando fizer sentido, toque na Orbe. A carta permanecerá até a próxima meia-noite em Brasília.</p>
             <details id="dailyDepth" class="daily-depth" hidden>
-              <summary>Aprofundar a mensagem</summary>
+              <summary>Entrar na ficção de Whit</summary>
               <p id="dailyDepthMessage"></p>
+              <p id="dailyArbitrioClosing" class="arbitrio-panel__closing"></p>
+              <small id="dailyArbitrioSignature" class="arbitrio-signature"></small>
+              <small class="arbitrio-disclaimer">Criação ficcional do instante — não é previsão.</small>
+              <button id="dailyArbitrioAgain" class="arbitrio-invoke arbitrio-invoke--compact" type="button">WHIT, CRIE OUTRA REALIDADE</button>
             </details>
           </div>
           <p id="dailyState" class="daily-state">Ainda não revelada neste aparelho.</p>
@@ -173,13 +187,20 @@
         </div>
 
         <section id="spreadSynthesis" class="spread-synthesis" aria-labelledby="spreadSynthesisTitle" hidden>
-          <p class="eyebrow">ORÁCULO VIVO · UMA CARTA RESPONDE À OUTRA</p>
+          <p class="eyebrow">MOTOR ARBÍTRIO · AS CARTAS CONVERSAM</p>
           <h3 id="spreadSynthesisTitle">Essência da composição</h3>
           <p id="spreadSynthesisPrompt"></p>
+          <p id="spreadSynthesisStory" class="spread-synthesis__story"></p>
           <details>
-            <summary>Ouvir o diálogo completo</summary>
+            <summary>Ouvir todas as vozes</summary>
             <ul id="spreadSynthesisFacts"></ul>
           </details>
+          <p id="spreadSynthesisClosing" class="arbitrio-panel__closing"></p>
+          <div class="spread-synthesis__actions">
+            <small id="spreadSynthesisSignature" class="arbitrio-signature"></small>
+            <button id="spreadArbitrioAgain" class="arbitrio-invoke arbitrio-invoke--compact" type="button">WHIT, CRIE OUTRA REALIDADE</button>
+          </div>
+          <small class="arbitrio-disclaimer">Ficção simbólica criada agora — não é previsão.</small>
         </section>
 
         <div class="spread-footer">
@@ -243,7 +264,7 @@
       <div class="world-heading">
         <p class="eyebrow">SALA DOS FIOS VIVOS</p>
         <h1 id="libraryTitle" tabindex="-1">Biblioteca</h1>
-        <p>Cartas e guias ligados por imagem, elemento, naipe e pergunta.</p>
+        <p>Descubra cartas e guias; ao abrir uma carta, chame Whit para inventar uma realidade inédita.</p>
       </div>
 
       <div class="library-console">
@@ -482,13 +503,22 @@
     <div>
       <p id="dialogCardPosition" class="eyebrow"></p>
       <h2 id="dialogCardName"></h2>
-      <p>Direta · a imagem fala antes das palavras.</p>
-      <p id="dialogCardOracle" class="card-dialog__oracle" hidden></p>
+      <p>Direta · a imagem fala antes; Whit só cria quando é chamada.</p>
+      <p id="dialogReferenceText" class="card-dialog__reference" hidden></p>
+      <button id="dialogArbitrioAction" class="arbitrio-invoke" type="button">WHIT, INVENTE UMA REALIDADE</button>
+      <small id="dialogArbitrioNote" class="arbitrio-disclaimer">Ficção simbólica criada no aparelho — não é previsão.</small>
+      <section id="dialogArbitrio" class="card-dialog__arbitrio" aria-labelledby="dialogArbitrioTitle" aria-live="polite" hidden>
+        <p id="dialogArbitrioLabel" class="arbitrio-panel__label"></p>
+        <h3 id="dialogArbitrioTitle"></h3>
+        <p id="dialogCardOracle" class="card-dialog__oracle" hidden></p>
+        <p id="dialogArbitrioClosing" class="arbitrio-panel__closing"></p>
+        <small id="dialogArbitrioSignature" class="arbitrio-signature"></small>
+      </section>
       <a id="dialogPublicLink" class="card-dialog__public" hidden>Conhecer a página pública desta carta</a>
     </div>
   </dialog>
 
   <div id="announcer" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
-  <script type="module" src="app.js?v=3.5.0-security-foundation"></script>
+  <script type="module" src="app.js?v=3.6.0-arbitrio"></script>
 </body>
 </html>

@@ -18,7 +18,7 @@ import { createStoreWorld } from './worlds/store.js';
 import { createVideosWorld } from './videos-world-v311.js';
 import { RealityOrbEngine } from './orb-engine-v68.js';
 import { createLivingUniverseV524 } from './living-universe-core-v524.js';
-import { oracleConversation, oracleForCard, oracleHash, secureOracleSeed } from './oracle-moment-v323.js';
+import { arbitrioConversation, arbitrioForCard, arbitrioHash, secureArbitrioSeed } from './arbitrio-engine-v360.js';
 
 const REDUCED_MOTION = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const TAROT_KEY = 'divina-bruxa-3.tarot-livre.v1';
@@ -102,6 +102,10 @@ function unlockJourneyViewport() {
 function announce(message) {
   announcer.textContent = '';
   requestAnimationFrame(() => { announcer.textContent = message; });
+}
+
+function creationStory(creation) {
+  return creation?.paragraphs?.join('\n\n') || creation?.story || '';
 }
 
 function pulseOrb() {
@@ -390,6 +394,7 @@ function loadTarotState() {
 
 const tarot = {
   state: loadTarotState(),
+  arbitrioByPosition:new Map(),
   resetArmed: false,
   resetTimer: 0,
   nodes: {
@@ -407,7 +412,14 @@ const tarot = {
     next: document.querySelector('#nextCard'),
     shuffle: document.querySelector('#shuffleRemaining'),
     reset: document.querySelector('#resetTarot'),
-    persistence: document.querySelector('#tarotPersistence')
+    persistence: document.querySelector('#tarotPersistence'),
+    arbitrioAction:document.querySelector('#tarotArbitrioAction'),
+    arbitrioPanel:document.querySelector('#tarotArbitrio'),
+    arbitrioTitle:document.querySelector('#tarotArbitrioTitle'),
+    arbitrioWhisper:document.querySelector('#tarotArbitrioWhisper'),
+    arbitrioStory:document.querySelector('#tarotArbitrioStory'),
+    arbitrioClosing:document.querySelector('#tarotArbitrioClosing'),
+    arbitrioSignature:document.querySelector('#tarotArbitrioSignature')
   },
 
   save() {
@@ -424,6 +436,32 @@ const tarot = {
   },
 
   imagePath(card) { return `assets/cards/${card.image}`; },
+
+  renderArbitrio(card) {
+    const creation = card ? this.arbitrioByPosition.get(this.state.cursor) : null;
+    this.nodes.arbitrioAction.disabled = !card;
+    this.nodes.arbitrioAction.textContent = creation ? 'WHIT, CRIE OUTRA REALIDADE' : 'WHIT, CRIE ESTA REALIDADE';
+    this.nodes.arbitrioPanel.hidden = !creation;
+    if (!creation) return;
+    this.nodes.arbitrioTitle.textContent = creation.title;
+    this.nodes.arbitrioWhisper.textContent = creation.whisper;
+    this.nodes.arbitrioStory.textContent = creationStory(creation);
+    this.nodes.arbitrioClosing.textContent = creation.closing;
+    this.nodes.arbitrioSignature.textContent = `FICÇÃO ${creation.signature} · CRIADA NESTE APARELHO`;
+  },
+
+  invent() {
+    const card = this.current();
+    if (!card) return;
+    const creation = arbitrioForCard(card, secureArbitrioSeed(), {
+      scope:'tarot-livre',
+      moment:`posição-${this.state.cursor + 1}`
+    });
+    this.arbitrioByPosition.set(this.state.cursor, creation);
+    this.renderArbitrio(card);
+    pulseOrb();
+    announce(`Whit criou uma ficção inédita para ${card.name}. Não é previsão; é uma realidade simbólica deste instante.`);
+  },
 
   render() {
     const card = this.current();
@@ -444,8 +482,9 @@ const tarot = {
       this.nodes.empty.hidden = false;
       this.nodes.name.textContent = 'Toque na Orbe';
       this.nodes.position.textContent = 'O CÍRCULO AGUARDA';
-      this.nodes.meta.textContent = 'Sempre direta · sem significado automático';
+      this.nodes.meta.textContent = 'Sempre direta · Whit fala quando é chamada';
       this.nodes.trail.replaceChildren();
+      this.renderArbitrio(null);
       return;
     }
 
@@ -458,8 +497,9 @@ const tarot = {
     this.nodes.current.setAttribute('aria-label', `${card.name}. Ampliar carta.`);
     this.nodes.name.textContent = card.name;
     this.nodes.position.textContent = `POSIÇÃO ${this.state.cursor + 1} DE ${revealed}`;
-    this.nodes.meta.textContent = `${card.arcana} · ${card.element} · direta`;
+    this.nodes.meta.textContent = 'Ficção direta · criada no instante · sem previsão';
     this.renderTrail();
+    this.renderArbitrio(card);
   },
 
   renderTrail() {
@@ -532,6 +572,7 @@ const tarot = {
     this.resetArmed = false;
     this.nodes.reset.textContent = 'Novo círculo';
     this.state = initialTarotState();
+    this.arbitrioByPosition.clear();
     this.save();
     this.render();
     pulseOrb();
@@ -543,31 +584,77 @@ tarot.nodes.previous.addEventListener('click', () => tarot.move(-1));
 tarot.nodes.next.addEventListener('click', () => tarot.move(1));
 tarot.nodes.shuffle.addEventListener('click', () => tarot.shuffle());
 tarot.nodes.reset.addEventListener('click', () => tarot.reset());
+tarot.nodes.arbitrioAction.addEventListener('click', () => tarot.invent());
 
 const cardDialog = document.querySelector('#cardDialog');
 const dialogCardImage = document.querySelector('#dialogCardImage');
 const dialogCardName = document.querySelector('#dialogCardName');
 const dialogCardPosition = document.querySelector('#dialogCardPosition');
 const dialogCardOracle = document.querySelector('#dialogCardOracle');
+const dialogReferenceText = document.querySelector('#dialogReferenceText');
 const dialogPublicLink = document.querySelector('#dialogPublicLink');
+const dialogArbitrio = document.querySelector('#dialogArbitrio');
+const dialogArbitrioLabel = document.querySelector('#dialogArbitrioLabel');
+const dialogArbitrioTitle = document.querySelector('#dialogArbitrioTitle');
+const dialogArbitrioClosing = document.querySelector('#dialogArbitrioClosing');
+const dialogArbitrioSignature = document.querySelector('#dialogArbitrioSignature');
+const dialogArbitrioAction = document.querySelector('#dialogArbitrioAction');
+const dialogArbitrioNote = document.querySelector('#dialogArbitrioNote');
+let dialogArbitrioContext = null;
 
-function showCardDialog(card, position, publicHref = '', oracleText = '') {
+function renderDialogArbitrio(creation) {
+  dialogArbitrio.hidden = !creation;
+  dialogCardOracle.hidden = !creation;
+  if (!creation) return;
+  dialogArbitrioLabel.textContent = `MOTOR ${creation.engine} · ${creation.label}`;
+  dialogArbitrioTitle.textContent = creation.title;
+  dialogCardOracle.textContent = `${creation.whisper}\n\n${creationStory(creation)}`;
+  dialogArbitrioClosing.textContent = creation.closing;
+  dialogArbitrioSignature.textContent = `FICÇÃO ${creation.signature} · CRIADA NESTE APARELHO`;
+  dialogArbitrioAction.textContent = 'WHIT, CRIE OUTRA REALIDADE';
+}
+
+function showCardDialog(card, position, publicHref = '', oracleText = '', options = {}) {
+  const arbitrioEnabled = options.arbitrio !== false;
   dialogCardImage.src = `assets/cards/${card.image}`;
   dialogCardImage.alt = card.name;
   dialogCardName.textContent = card.name;
   dialogCardPosition.textContent = position;
-  dialogCardOracle.textContent = oracleText;
-  dialogCardOracle.hidden = !oracleText;
+  dialogReferenceText.textContent = oracleText;
+  dialogReferenceText.hidden = !oracleText;
+  dialogArbitrioContext = arbitrioEnabled ? {
+    card,
+    scope:options.scope || 'carta',
+    moment:position
+  } : null;
+  dialogArbitrioAction.hidden = !arbitrioEnabled;
+  dialogArbitrioNote.hidden = !arbitrioEnabled;
+  dialogArbitrioAction.textContent = 'WHIT, INVENTE UMA REALIDADE';
+  renderDialogArbitrio(options.initialCreation || null);
   dialogPublicLink.hidden = !publicHref;
   if (publicHref) dialogPublicLink.href = publicHref;
   else dialogPublicLink.removeAttribute('href');
   cardDialog.showModal();
 }
 
+dialogArbitrioAction.addEventListener('click', () => {
+  if (!dialogArbitrioContext) return;
+  const creation = arbitrioForCard(dialogArbitrioContext.card, secureArbitrioSeed(), {
+    scope:dialogArbitrioContext.scope,
+    moment:dialogArbitrioContext.moment
+  });
+  renderDialogArbitrio(creation);
+  pulseOrb();
+  announce(`Whit criou uma nova ficção para ${dialogArbitrioContext.card.name}.`);
+});
+
 tarot.nodes.current.addEventListener('click', () => {
   const card = tarot.current();
   if (!card) return;
-  showCardDialog(card, `POSIÇÃO ${tarot.state.cursor + 1}`);
+  showCardDialog(card, `POSIÇÃO ${tarot.state.cursor + 1}`, '', '', {
+    scope:'tarot-livre',
+    initialCreation:tarot.arbitrioByPosition.get(tarot.state.cursor)
+  });
 });
 
 const daily = {
@@ -584,6 +671,9 @@ const daily = {
     message:document.querySelector('#dailyMessage'),
     depth:document.querySelector('#dailyDepth'),
     depthMessage:document.querySelector('#dailyDepthMessage'),
+    closing:document.querySelector('#dailyArbitrioClosing'),
+    signature:document.querySelector('#dailyArbitrioSignature'),
+    again:document.querySelector('#dailyArbitrioAgain'),
     state:document.querySelector('#dailyState')
   },
 
@@ -594,19 +684,36 @@ const daily = {
     if (next !== this.dateKey) this.dateKey = next;
   },
 
-  get oracleSeedKey() { return `${dailyStorageKey(this.dateKey)}.oracle-seed`; },
+  get arbitrioSeedKey() { return `${dailyStorageKey(this.dateKey)}.arbitrio-seed.v1`; },
 
-  oracleSeed(create = false) {
+  arbitrioSeed({ create = false, renew = false } = {}) {
     try {
-      const raw = localStorage.getItem(this.oracleSeedKey);
-      const stored = Number(raw);
-      if (raw !== null && Number.isInteger(stored) && stored >= 0) return stored >>> 0;
-      const seed = create ? secureOracleSeed() : oracleHash(`${this.dateKey}:${this.card.canonicalId}`);
-      localStorage.setItem(this.oracleSeedKey, String(seed));
+      const raw = localStorage.getItem(this.arbitrioSeedKey);
+      if (!renew && raw) return raw;
+      const seed = create || renew
+        ? secureArbitrioSeed()
+        : arbitrioHash(`${this.dateKey}:${this.card.canonicalId}`).toString(16);
+      localStorage.setItem(this.arbitrioSeedKey, seed);
       return seed;
     } catch {
-      return oracleHash(`${this.dateKey}:${this.card.canonicalId}`);
+      return arbitrioHash(`${this.dateKey}:${this.card.canonicalId}`).toString(16);
     }
+  },
+
+  creation() {
+    return arbitrioForCard(this.card, this.arbitrioSeed(), {
+      scope:'carta-do-dia',
+      moment:this.dateKey
+    });
+  },
+
+  renewFiction() {
+    if (!this.revealed) return;
+    this.arbitrioSeed({ renew:true });
+    this.render();
+    this.nodes.depth.open = true;
+    pulseOrb();
+    announce(`Whit criou outra realidade ficcional para ${this.card.name}.`);
   },
 
   get revealed() {
@@ -621,9 +728,9 @@ const daily = {
       return;
     }
     try { localStorage.setItem(dailyStorageKey(this.dateKey), 'revealed'); } catch {}
-    this.oracleSeed(true);
+    this.arbitrioSeed({ create:true });
     this.render();
-    announce(`Carta do Dia: ${this.card.name}. Sempre direta.`);
+    announce(`Carta do Dia: ${this.card.name}. O Motor ARBÍTRIO criou uma ficção simbólica para este instante.`);
   },
 
   render() {
@@ -655,6 +762,8 @@ const daily = {
       this.nodes.depth.hidden = true;
       this.nodes.depth.open = false;
       this.nodes.depthMessage.textContent = '';
+      this.nodes.closing.textContent = '';
+      this.nodes.signature.textContent = '';
       this.nodes.state.textContent = 'Ainda não revelada neste aparelho.';
       if (currentRoute === 'carta-do-dia') orbCue.textContent = 'Revelar a aurora';
       return;
@@ -665,19 +774,26 @@ const daily = {
     this.nodes.card.setAttribute('aria-label', `${card.name}. Ampliar Carta do Dia.`);
     this.nodes.name.textContent = card.name;
     this.nodes.position.textContent = 'SÍMBOLO DE HOJE';
-    this.nodes.meta.textContent = 'Uma presença · uma mensagem · sempre direta';
-    this.nodes.messageTitle.textContent = 'Mensagem da Orbe';
-    this.nodes.message.textContent = oracleForCard(card, this.oracleSeed(), 23);
-    this.nodes.depthMessage.textContent = oracleForCard(card, this.oracleSeed(), 71);
+    this.nodes.meta.textContent = 'Uma presença · uma ficção · sempre direta';
+    const creation = this.creation();
+    this.nodes.messageTitle.textContent = creation.title;
+    this.nodes.message.textContent = creation.whisper;
+    this.nodes.depthMessage.textContent = creationStory(creation);
+    this.nodes.closing.textContent = creation.closing;
+    this.nodes.signature.textContent = `FICÇÃO ${creation.signature} · CRIADA NESTE APARELHO`;
     this.nodes.depth.hidden = false;
-    this.nodes.state.textContent = 'Guardada neste aparelho até o próximo ciclo de Brasília.';
+    this.nodes.state.textContent = 'Carta e ficção guardadas neste aparelho até o próximo ciclo de Brasília.';
     if (currentRoute === 'carta-do-dia') orbCue.textContent = 'Carta guardada';
   }
 };
 
 daily.nodes.card.addEventListener('click', () => {
-  if (daily.revealed) showCardDialog(daily.card, 'CARTA DO DIA', '', oracleForCard(daily.card, daily.oracleSeed(), 23));
+  if (daily.revealed) showCardDialog(daily.card, 'CARTA DO DIA', '', '', {
+    scope:'carta-do-dia',
+    initialCreation:daily.creation()
+  });
 });
+daily.nodes.again.addEventListener('click', () => daily.renewFiction());
 
 const CARD_IDS = CARDS.map(card => card.id);
 const CARD_BY_ID = new Map(CARDS.map(card => [card.id, card]));
@@ -724,7 +840,11 @@ const spreads = {
     synthesis:document.querySelector('#spreadSynthesis'),
     synthesisTitle:document.querySelector('#spreadSynthesisTitle'),
     synthesisFacts:document.querySelector('#spreadSynthesisFacts'),
-    synthesisPrompt:document.querySelector('#spreadSynthesisPrompt')
+    synthesisPrompt:document.querySelector('#spreadSynthesisPrompt'),
+    synthesisStory:document.querySelector('#spreadSynthesisStory'),
+    synthesisClosing:document.querySelector('#spreadSynthesisClosing'),
+    synthesisSignature:document.querySelector('#spreadSynthesisSignature'),
+    arbitrioAgain:document.querySelector('#spreadArbitrioAgain')
   },
 
   get definition() { return SPREADS[this.state.spreadId]; },
@@ -744,6 +864,30 @@ const spreads = {
       localStorage.setItem(spreadStorageKey(this.state.spreadId), JSON.stringify(this.state));
     } catch {}
     this.rememberSelection();
+  },
+
+  get arbitrioSeedKey() {
+    return `${spreadStorageKey(this.state.spreadId)}.arbitrio-seed.v1`;
+  },
+
+  arbitrioSeed({ renew = false } = {}) {
+    try {
+      const stored = localStorage.getItem(this.arbitrioSeedKey);
+      if (!renew && stored) return stored;
+      const seed = secureArbitrioSeed();
+      localStorage.setItem(this.arbitrioSeedKey, seed);
+      return seed;
+    } catch {
+      return arbitrioHash(`${this.state.spreadId}:${this.state.order.join(',')}`).toString(16);
+    }
+  },
+
+  renewFiction() {
+    if (!this.canUse() || this.state.revealed < 1) return;
+    this.arbitrioSeed({ renew:true });
+    this.render();
+    pulseOrb();
+    announce('Whit reuniu as cartas outra vez e criou uma nova ficção para esta composição.');
   },
 
   renderPicker() {
@@ -844,15 +988,18 @@ const spreads = {
       return;
     }
     const cards = this.state.order.slice(0, revealed).map(cardId => CARD_BY_ID.get(cardId));
-    const seed = oracleHash(`${this.state.spreadId}:${this.state.order.join(',')}`);
-    const synthesis = oracleConversation(cards, this.definition.positions.slice(0, revealed), seed, this.state.intention);
+    const seed = this.arbitrioSeed();
+    const synthesis = arbitrioConversation(cards, this.definition.positions.slice(0, revealed), seed, this.state.intention);
     if (!synthesis) {
       this.nodes.synthesis.hidden = true;
       return;
     }
     this.nodes.synthesisTitle.textContent = synthesis.title;
-    this.nodes.synthesisPrompt.textContent = synthesis.prompt;
-    this.nodes.synthesisFacts.replaceChildren(...synthesis.facts.map(fact => {
+    this.nodes.synthesisPrompt.textContent = synthesis.lead;
+    this.nodes.synthesisStory.textContent = synthesis.story;
+    this.nodes.synthesisClosing.textContent = synthesis.closing;
+    this.nodes.synthesisSignature.textContent = `FICÇÃO ${synthesis.signature} · CRIADA NESTE APARELHO`;
+    this.nodes.synthesisFacts.replaceChildren(...synthesis.voices.map(fact => {
       const item = document.createElement('li');
       item.textContent = fact;
       return item;
@@ -895,7 +1042,11 @@ const spreads = {
       const visible = usable && index < revealed;
       if (visible) {
         const card = CARD_BY_ID.get(this.state.order[index]);
-        const oracleSeed = oracleHash(`${this.state.spreadId}:${this.state.order.join(',')}`);
+        const arbitrioSeed = this.arbitrioSeed();
+        const creation = arbitrioForCard(card, arbitrioSeed, {
+          scope:`tiragem-${this.state.spreadId}`,
+          moment:`${index + 1}-${position}`
+        });
         button.classList.add('has-card');
         button.setAttribute('aria-label', `${position}: ${card.name}. Ampliar carta.`);
         const image = new Image();
@@ -905,11 +1056,14 @@ const spreads = {
         image.width = 256;
         image.height = 384;
         button.append(image);
-        button.addEventListener('click', () => showCardDialog(card, `${index + 1} · ${position.toUpperCase()}`, '', oracleForCard(card, oracleSeed, index + 41)));
+        button.addEventListener('click', () => showCardDialog(card, `${index + 1} · ${position.toUpperCase()}`, '', '', {
+          scope:`tiragem-${this.state.spreadId}`,
+          initialCreation:creation
+        }));
 
         const oracle = document.createElement('p');
         oracle.className = 'spread-card__oracle';
-        oracle.textContent = oracleForCard(card, oracleSeed, index + 41);
+        oracle.textContent = creation.whisper;
         slot.append(button, oracle);
       } else {
         button.disabled = true;
@@ -976,6 +1130,7 @@ const spreads = {
       return;
     }
     const spreadId = this.state.spreadId;
+    try { localStorage.removeItem(this.arbitrioSeedKey); } catch {}
     this.disarmReset();
     this.state = createSpreadState(spreadId, CARD_IDS);
     this.nodes.intention.value = '';
@@ -999,6 +1154,7 @@ spreads.nodes.intention.addEventListener('input', () => {
   if (spreads.canUse()) spreads.save();
 });
 spreads.nodes.reset.addEventListener('click', () => spreads.reset());
+spreads.nodes.arbitrioAgain.addEventListener('click', () => spreads.renewFiction());
 spreads.nodes.premiumAction.addEventListener('click', () => {
   if (['unavailable', 'unknown'].includes(spreads.premiumAccess.status)) {
     void spreads.verifyPremium({ force:true });
@@ -1007,8 +1163,18 @@ spreads.nodes.premiumAction.addEventListener('click', () => {
   applyRoute(spreads.premiumAccess.status === 'signed-out' ? 'conta' : 'premium');
 });
 
-const school = createSchoolWorld({ cards:CARDS, showCard:showCardDialog, announce });
-const library = createLibraryWorld({ cards:CARDS, showCard:showCardDialog });
+const school = createSchoolWorld({
+  cards:CARDS,
+  showCard:(card, position, publicHref = '', text = '') => showCardDialog(card, position, publicHref, text, { arbitrio:false }),
+  announce
+});
+const library = createLibraryWorld({
+  cards:CARDS,
+  showCard:(card, position, publicHref = '', text = '') => showCardDialog(card, position, publicHref, text, {
+    arbitrio:true,
+    scope:'biblioteca'
+  })
+});
 const journal = createJournalWorld({ announce });
 const whit = createWhitWorld({ announce });
 const navigate = route => applyRoute(route);
@@ -1050,7 +1216,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=3.5.0-security-foundation', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=3.6.0-arbitrio', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {
