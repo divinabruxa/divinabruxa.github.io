@@ -563,7 +563,7 @@ body[data-route="tarot"] .cosmos__veil {
 
 .tarot-persistence { margin: .9rem 0 0; color: var(--muted); font-size: .72rem; line-height: 1.5; text-align: center; }
 
-/* DIVINA BRUXA 3.7.0 · Motores ARBÍTRIO + AMOR */
+/* DIVINA BRUXA 3.8.0 · Motores ARBÍTRIO + AMOR + MENTE */
 .arbitrio-invoke {
   display: inline-flex;
   align-items: center;
@@ -1294,11 +1294,28 @@ body[data-route="whit"] .cosmos__veil {
 .whit-modes { display: flex; justify-content: center; gap: .45rem; }
 .whit-modes button { min-height: 2.45rem; padding: .5rem .75rem; border: 1px solid rgb(255 255 255 / .1); border-radius: 999px; color: var(--muted); background: rgb(255 255 255 / .03); }
 .whit-modes button[aria-pressed="true"] { border-color: rgb(var(--love-color) / .48); color: var(--ink); background: rgb(var(--love-color) / .1); }
-.whit-heart-state { display: grid; grid-template-columns: auto 1fr; gap: .65rem; align-items: center; width: min(100%, 25rem); margin: .75rem auto 0; padding: .62rem .75rem; border: 1px solid rgb(var(--love-color) / .22); border-radius: 999px; background: linear-gradient(105deg, rgb(var(--love-color) / .09), rgb(var(--love-gold) / .035)); box-shadow: inset 0 1px rgb(255 255 255 / .04); transition: border-color 420ms ease, background 420ms ease; }
-.whit-heart-state > span { display: grid; place-items: center; width: 1.8rem; aspect-ratio: 1; border-radius: 50%; color: rgb(var(--love-gold)); background: rgb(var(--love-color) / .1); text-shadow: 0 0 12px rgb(var(--love-color) / .5); }
-.whit-heart-state div { display: grid; gap: .12rem; min-width: 0; }
-.whit-heart-state small { color: rgb(var(--love-gold) / .78); font-size: .48rem; letter-spacing: .12em; line-height: 1.3; text-transform: uppercase; }
-.whit-heart-state b { overflow: hidden; color: rgb(255 255 255 / .76); font-family: Iowan Old Style, Baskerville, serif; font-size: .8rem; font-weight: 400; line-height: 1.25; text-overflow: ellipsis; white-space: nowrap; }
+.whit-engine-states { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .55rem; width: min(100%, 46rem); margin: .75rem auto 0; }
+.whit-heart-state,
+.whit-mind-state { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .65rem; align-items: center; min-width: 0; padding: .62rem .75rem; border-radius: 1rem; box-shadow: inset 0 1px rgb(255 255 255 / .04); transition: border-color 420ms ease, background 420ms ease; }
+.whit-heart-state { border: 1px solid rgb(var(--love-color) / .22); background: linear-gradient(105deg, rgb(var(--love-color) / .09), rgb(var(--love-gold) / .035)); }
+.whit-mind-state { border: 1px solid rgb(130 159 255 / .24); background: linear-gradient(105deg, rgb(77 94 196 / .105), rgb(184 153 255 / .045)); }
+.whit-heart-state > span,
+.whit-mind-state > span { display: grid; place-items: center; width: 1.8rem; aspect-ratio: 1; border-radius: 50%; }
+.whit-heart-state > span { color: rgb(var(--love-gold)); background: rgb(var(--love-color) / .1); text-shadow: 0 0 12px rgb(var(--love-color) / .5); }
+.whit-mind-state > span { color: rgb(187 204 255); background: rgb(116 133 255 / .1); text-shadow: 0 0 12px rgb(121 145 255 / .55); }
+.whit-heart-state div,
+.whit-mind-state div { display: grid; gap: .12rem; min-width: 0; }
+.whit-heart-state small,
+.whit-mind-state small { font-size: .48rem; letter-spacing: .12em; line-height: 1.3; text-transform: uppercase; }
+.whit-heart-state small { color: rgb(var(--love-gold) / .78); }
+.whit-mind-state small { color: rgb(173 192 255 / .82); }
+.whit-heart-state b,
+.whit-mind-state b { overflow: hidden; color: rgb(255 255 255 / .76); font-family: Iowan Old Style, Baskerville, serif; font-size: .78rem; font-weight: 400; line-height: 1.25; text-overflow: ellipsis; white-space: nowrap; }
+.whit-quick-paths { display: flex; gap: .38rem; width: min(100%, 46rem); margin: .55rem auto 0; padding: .05rem .05rem .25rem; overflow-x: auto; scrollbar-width: none; }
+.whit-quick-paths::-webkit-scrollbar { display: none; }
+.whit-quick-paths a { flex: 0 0 auto; min-height: 2.1rem; padding: .46rem .68rem; border: 1px solid rgb(137 158 255 / .16); border-radius: 999px; color: rgb(224 228 255 / .68); background: rgb(72 81 159 / .075); font-size: .56rem; letter-spacing: .06em; text-decoration: none; text-transform: uppercase; }
+.whit-quick-paths a:focus-visible,
+.whit-quick-paths a:hover { border-color: rgb(171 189 255 / .42); color: var(--ink); background: rgb(91 105 208 / .15); }
 .whit-conversation { display: grid; gap: .65rem; min-height: 13rem; max-height: 29rem; margin: 1rem 0; padding: .8rem; overflow: auto; border: 1px solid rgb(255 255 255 / .07); border-radius: 1.1rem; background: rgb(3 2 7 / .36); }
 .whit-message { max-width: 88%; padding: .75rem .85rem; border-radius: 1rem; line-height: 1.55; white-space: pre-wrap; }
 .whit-message--whit { justify-self: start; border: 1px solid rgb(var(--love-color) / .12); color: rgb(255 255 255 / .8); background: linear-gradient(135deg, rgb(var(--love-color) / .095), rgb(var(--world) / .075)); }
@@ -1306,8 +1323,16 @@ body[data-route="whit"] .cosmos__veil {
 .whit-message--user { justify-self: end; color: var(--ink); background: rgb(255 255 255 / .08); }
 .whit-message small { display: block; margin-bottom: .25rem; color: var(--gold); font-size: .5rem; letter-spacing: .1em; text-transform: uppercase; }
 .whit-message em { display: block; margin-top: .55rem; color: rgb(255 255 255 / .33); font-family: inherit; font-size: .47rem; font-style: normal; letter-spacing: .08em; text-transform: uppercase; }
+.whit-message__paths { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .45rem; margin-top: .7rem; white-space: normal; }
+.whit-path { display: grid; align-content: center; gap: .12rem; min-width: 0; min-height: 3.4rem; padding: .58rem .65rem; border: 1px solid rgb(135 158 255 / .2); border-radius: .8rem; color: rgb(244 244 255 / .86); background: linear-gradient(135deg, rgb(83 101 205 / .12), rgb(var(--love-color) / .055)); text-decoration: none; transition: border-color 180ms ease, background 180ms ease, transform 180ms ease; }
+.whit-path:hover,
+.whit-path:focus-visible { border-color: rgb(173 191 255 / .5); background: linear-gradient(135deg, rgb(91 112 230 / .2), rgb(var(--love-color) / .09)); transform: translateY(-1px); }
+.whit-path b { overflow: hidden; font-family: Iowan Old Style, Baskerville, serif; font-size: .76rem; font-weight: 400; line-height: 1.25; text-overflow: ellipsis; white-space: nowrap; }
+.whit-path small { display: -webkit-box; margin: 0; overflow: hidden; color: rgb(255 255 255 / .42); font-size: .49rem; letter-spacing: .02em; line-height: 1.35; text-transform: none; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
 .whit-form { display: grid; gap: .55rem; }
 .whit-form textarea { resize: vertical; min-height: 5.2rem; padding: .8rem .9rem; line-height: 1.55; }
+.whit-form button:disabled { cursor: wait; opacity: .7; }
+.whit-command-hint { margin: .45rem .2rem 0; color: rgb(255 255 255 / .37); font-size: .58rem; line-height: 1.45; text-align: center; }
 .whit-privacy { display: grid; grid-template-columns: auto 1fr; gap: .65rem; align-items: center; margin-top: .9rem; padding-top: .8rem; border-top: 1px solid rgb(255 255 255 / .08); }
 .whit-privacy > span { color: var(--gold); }
 .whit-privacy p { margin: 0; color: rgb(255 255 255 / .5); font-size: .65rem; line-height: 1.45; }
@@ -1318,8 +1343,24 @@ body[data-route="whit"] .cosmos__veil {
   50% { opacity: 1; transform: scale(1.035); }
 }
 
+@keyframes whit-mind-think {
+  0%, 100% { opacity: .48; transform: scale(.94) rotate(-2deg); }
+  50% { opacity: 1; transform: scale(1.04) rotate(2deg); }
+}
+
+.whit-chamber[data-thinking="true"] .whit-mind-state { border-color: rgb(171 189 255 / .48); background: linear-gradient(105deg, rgb(83 101 220 / .18), rgb(185 145 255 / .08)); }
+.whit-chamber[data-thinking="true"] .whit-mind-state > span { animation: whit-mind-think .9s ease-in-out infinite; }
+
+@media (max-width: 620px) {
+  .whit-engine-states { grid-template-columns: 1fr; }
+  .whit-message { max-width: 94%; }
+  .whit-message__paths { grid-template-columns: 1fr; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .whit-presence i { animation: none; }
+  .whit-presence i,
+  .whit-chamber[data-thinking="true"] .whit-mind-state > span { animation: none; }
+  .whit-path { transition: none; }
 }
 
 /* ENCONTRO + CRIAÇÕES · sete atmosferas, a mesma física */

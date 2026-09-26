@@ -20,7 +20,7 @@
   <title>Divina Bruxa</title>
   <link rel="preload" href="assets/orbe.webp" as="image" type="image/webp">
   <link rel="preload" href="divina-universe-retina-v523.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=3.7.0-amor">
+  <link rel="stylesheet" href="styles.css?v=3.8.0-mente">
 </head>
 <body data-route="home" data-menu="closed">
   <a class="skip-link" href="#main">Pular para a experiência</a>
@@ -338,7 +338,7 @@
       <div class="world-heading">
         <p class="eyebrow">PRESENÇA ENTRE MUNDOS</p>
         <h1 id="whitTitle" tabindex="-1">Whit</h1>
-        <p>Uma presença local que escuta o sentimento antes de responder, ama sem possuir e nunca decide por você.</p>
+        <p>Uma presença local que escuta com Amor, pensa com clareza e encontra caminhos pelo universo sem decidir por você.</p>
       </div>
 
       <div class="whit-chamber">
@@ -348,19 +348,27 @@
           <button type="button" data-mode="clareza">Clareza</button>
           <button type="button" data-mode="integracao">Integração</button>
         </nav>
-        <div id="whitHeartState" class="whit-heart-state" data-love-state="presence" role="status" aria-live="polite">
-          <span aria-hidden="true">✦</span>
-          <div><small>MOTOR DO AMOR · SENTIMENTOS</small><b id="whitHeartLabel">Presença · escuta</b></div>
+        <div class="whit-engine-states">
+          <div id="whitHeartState" class="whit-heart-state" data-love-state="presence" role="status" aria-live="polite">
+            <span aria-hidden="true">✦</span>
+            <div><small>MOTOR DO AMOR · SENTIMENTOS</small><b id="whitHeartLabel">Presença · escuta</b></div>
+          </div>
+          <div id="whitMindState" class="whit-mind-state" data-mind-intent="support" role="status" aria-live="polite">
+            <span aria-hidden="true">⌘</span>
+            <div><small>MOTOR DA MENTE · MAPA VIVO</small><b id="whitMindLabel">Pronta para compreender</b></div>
+          </div>
         </div>
+        <nav id="whitQuickPaths" class="whit-quick-paths" aria-label="Links rápidos da Whit"></nav>
         <div id="whitConversation" class="whit-conversation" role="log" aria-live="polite" aria-label="Conversa local com Whit"></div>
         <form id="whitForm" class="whit-form">
           <label class="sr-only" for="whitInput">Escreva para Whit</label>
-          <textarea id="whitInput" rows="3" maxlength="700" required placeholder="O que precisa ser escutado agora?"></textarea>
-          <button class="wisdom-primary" type="submit">Entregar à presença</button>
+          <textarea id="whitInput" rows="3" maxlength="700" required placeholder="Diga o que sente, peça um caminho ou escreva o nome de uma carta…"></textarea>
+          <button class="wisdom-primary" type="submit">Pensar com Whit</button>
         </form>
+        <p class="whit-command-hint">Experimente: “abra a Carta do Dia”, “quero estudar” ou “mostre A Estrela”.</p>
         <div class="whit-privacy">
           <span aria-hidden="true">◌</span>
-          <p><b>Local, afetiva e livre.</b> Whit escuta somente o que você traz para esta conversa; não lê o Diário, a Conta ou outras áreas em silêncio.</p>
+          <p><b>Local, afetiva e com limites claros.</b> Whit conhece o mapa público do site, mas não lê o Diário, a Conta ou outras áreas privadas em silêncio. Links só abrem com o seu toque.</p>
           <button id="whitClear" type="button">Limpar conversa</button>
         </div>
       </div>
@@ -523,6 +531,6 @@
   </dialog>
 
   <div id="announcer" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
-  <script type="module" src="app.js?v=3.7.0-amor"></script>
+  <script type="module" src="app.js?v=3.8.0-mente"></script>
 </body>
 </html>

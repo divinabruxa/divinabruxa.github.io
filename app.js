@@ -1,5 +1,6 @@
 import { CARDS } from './data/cards.js';
 import { CONFIG } from './data/config.js';
+import { LIBRARY_GUIDES } from './data/library.js';
 import { WORLDS } from './data/worlds.js';
 import { dailyCardIndex, dailyStorageKey, dateKeyInTimeZone } from './lib/daily-card.js';
 import { createSpreadState, revealSpreadPosition, SPREAD_LIST, SPREADS, spreadStorageKey, validateSpreadState } from './spread-state-v310.js';
@@ -8,7 +9,7 @@ import { createTarotState, revealNext, shuffleWaiting, validateTarotState } from
 import { createJournalWorld } from './worlds/journal.js';
 import { createLibraryWorld } from './worlds/library.js';
 import { createSchoolWorld } from './school-world-v322.js';
-import { createWhitWorld } from './whit-world-v370.js';
+import { createWhitWorld } from './whit-world-v380.js';
 import { createAccountWorld } from './worlds/account.js';
 import { createConsultationsWorld } from './worlds/consultations.js';
 import { createMusicWorld } from './worlds/music.js';
@@ -1193,8 +1194,14 @@ const library = createLibraryWorld({
   })
 });
 const journal = createJournalWorld({ announce });
-const whit = createWhitWorld({ announce });
 const navigate = route => applyRoute(route);
+const whit = createWhitWorld({
+  announce,
+  navigate,
+  cards:CARDS,
+  worlds:WORLDS,
+  guides:LIBRARY_GUIDES
+});
 const consultations = createConsultationsWorld({ announce });
 const account = createAccountWorld({ announce });
 const premium = createPremiumWorld({
@@ -1233,7 +1240,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=3.7.0-amor', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=3.8.0-mente', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {
