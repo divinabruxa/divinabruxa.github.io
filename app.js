@@ -18,7 +18,7 @@ import { createStoreWorld } from './worlds/store.js';
 import { createVideosWorld } from './videos-world-v311.js';
 import { RealityOrbEngine } from './orb-engine-v68.js';
 import { createLivingUniverseV524 } from './living-universe-core-v524.js';
-import { oracleConversation, oracleForCard, oracleHash, secureOracleSeed } from './oracle-voice-v321.js';
+import { oracleConversation, oracleForCard, oracleHash, secureOracleSeed } from './oracle-moment-v323.js';
 
 const REDUCED_MOTION = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const TAROT_KEY = 'divina-bruxa-3.tarot-livre.v1';
@@ -1004,7 +1004,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=3.2.2-oracle-school-video', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=3.2.3-oracle-moment', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {

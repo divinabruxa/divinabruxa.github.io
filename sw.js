@@ -1,10 +1,10 @@
-/* Divina Bruxa 3.2.2 · voz oracular, Escola viva e saída segura de Vídeos. */
-const CACHE = 'divina-bruxa-3-shell-20260926-oracle-school-video-1';
+/* Divina Bruxa 3.2.3 · Oráculo do Instante composicional. */
+const CACHE = 'divina-bruxa-3-shell-20260926-oracle-moment-1';
 const PREFIX = 'divina-bruxa-';
 const CORE = [
   './index.html', './styles.css', './app.js', './manifest.webmanifest', './assets/orbe.webp',
   './orb-engine-v68.js', './living-universe-core-v524.js', './living-universe-core-v524.css', './skins-world-v301.js',
-  './divina-orb-thumb-v1.webp', './divina-universe-retina-v523.webp', './oracle-voice-v321.js',
+  './divina-orb-thumb-v1.webp', './divina-universe-retina-v523.webp', './oracle-moment-v323.js',
   './data/cards.js', './data/config.js', './data/consultations.js', './data/library.js', './data/media.js',
   './data/plans.js', './school-data-v322.js', './data/skins.js', './data/store.js', './data/worlds.js',
   './lib/daily-card.js', './lib/tarot-state.js', './premium-entitlement-v310.js', './spread-state-v310.js',
