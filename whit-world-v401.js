@@ -1,14 +1,14 @@
 /*
- * DIVINA BRUXA 4.0.4 · WHIT PELO MOTOR DA VIDA
+ * DIVINA BRUXA 4.0.5 · WHIT PELA ORBE DAS REALIDADES
  *
  * Whit existe somente em sua própria realidade, não interrompe outras
  * páginas e não executa caminhos sem um toque.
  */
 
 import { normalizePreferredName, safeResearchHref } from './matter-engine-v400.js';
-import { STORY_ENGINE_VERSION, storyResponse } from './tarot-life-engine-v404.js';
+import { STORY_ENGINE_VERSION, storyResponse } from './tarot-orbe-realities-engine-v405.js';
 
-const STORAGE_KEY = 'divina-bruxa-3.whit.conversa-local.v9';
+const STORAGE_KEY = 'divina-bruxa-3.whit.conversa-local.v10';
 const PROFILE_KEY = 'divina-bruxa-3.whit.materia.v1';
 const SPIRIT_MODE_KEY = 'divina-bruxa-3.whit.espirito.v1';
 const MAX_MESSAGES = 36;
@@ -153,7 +153,7 @@ export function createWhitWorld({ announce, navigate, cards = [], worlds = {}, g
 
       if (message.role === 'whit') {
         const signature = document.createElement('em');
-        signature.textContent = `VIDA ${message.signature || 'LOCAL'} · MENSAGEM ABENÇOADA PELA CARTA`;
+        signature.textContent = `ORBE ${message.signature || 'LOCAL'} · LEITURA BASEADA NAS CARTAS`;
         item.append(signature);
       }
       fragment.append(item);
@@ -169,7 +169,7 @@ export function createWhitWorld({ announce, navigate, cards = [], worlds = {}, g
     nodes.conversation.setAttribute('aria-busy', String(active));
     nodes.input.disabled = active;
     nodes.submit.disabled = active;
-    nodes.submit.textContent = active ? 'Whit está encontrando a Mensagem da Vida…' : 'Conversar com Whit';
+    nodes.submit.textContent = active ? 'Whit está organizando sua leitura…' : 'Conversar com Whit';
   }
 
   nodes.form.addEventListener('submit', event => {
@@ -207,12 +207,12 @@ export function createWhitWorld({ announce, navigate, cards = [], worlds = {}, g
         save();
         render();
         if (creation.safety) announce?.('Whit priorizou apoio humano imediato.');
-        else announce?.(`Whit trouxe uma Mensagem da Vida${creation.storyCard?.name ? ` por ${creation.storyCard.name}` : ''}.`);
+        else announce?.(`Whit trouxe uma leitura de Tarot${creation.storyCard?.name ? ` por ${creation.storyCard.name}` : ''}.`);
       } catch {
         messages = [...messages, {
           role:'whit',
           title:'O Tarot permanece em silêncio por um instante',
-          text:'A Mensagem da Vida não conseguiu se organizar agora. Nenhum significado foi inventado e nenhum caminho foi executado. Quando quiser, apresente a situação novamente ou escreva o nome de uma carta.',
+          text:'A leitura não conseguiu se organizar agora. Nenhum significado foi inventado e nenhum caminho foi executado. Quando quiser, apresente a situação novamente ou escreva o nome de uma carta.',
           signature:'SILÊNCIO',
           safety:false,
           actions:[]
