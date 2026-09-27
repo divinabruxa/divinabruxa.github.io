@@ -1,14 +1,14 @@
 /*
- * DIVINA BRUXA 4.0.5 · WHIT PELA ORBE DAS REALIDADES
+ * DIVINA BRUXA 4.0.6 · WHIT TARÓLOGA
  *
  * Whit existe somente em sua própria realidade, não interrompe outras
  * páginas e não executa caminhos sem um toque.
  */
 
 import { normalizePreferredName, safeResearchHref } from './matter-engine-v400.js';
-import { STORY_ENGINE_VERSION, storyResponse } from './tarot-orbe-realities-engine-v405.js';
+import { STORY_ENGINE_VERSION, storyResponse } from './whit-tarot-reader-engine-v406.js';
 
-const STORAGE_KEY = 'divina-bruxa-3.whit.conversa-local.v10';
+const STORAGE_KEY = 'divina-bruxa-3.whit.conversa-local.v11';
 const PROFILE_KEY = 'divina-bruxa-3.whit.materia.v1';
 const SPIRIT_MODE_KEY = 'divina-bruxa-3.whit.espirito.v1';
 const MAX_MESSAGES = 36;
@@ -153,7 +153,7 @@ export function createWhitWorld({ announce, navigate, cards = [], worlds = {}, g
 
       if (message.role === 'whit') {
         const signature = document.createElement('em');
-        signature.textContent = `ORBE ${message.signature || 'LOCAL'} · LEITURA BASEADA NAS CARTAS`;
+        signature.textContent = `WHIT TARÓLOGA ${message.signature || 'LOCAL'} · CONSULTA BASEADA NAS CARTAS`;
         item.append(signature);
       }
       fragment.append(item);
@@ -169,7 +169,7 @@ export function createWhitWorld({ announce, navigate, cards = [], worlds = {}, g
     nodes.conversation.setAttribute('aria-busy', String(active));
     nodes.input.disabled = active;
     nodes.submit.disabled = active;
-    nodes.submit.textContent = active ? 'Whit está organizando sua leitura…' : 'Conversar com Whit';
+    nodes.submit.textContent = active ? 'Whit está lendo as cartas…' : 'Consultar Whit Taróloga';
   }
 
   nodes.form.addEventListener('submit', event => {
@@ -207,12 +207,12 @@ export function createWhitWorld({ announce, navigate, cards = [], worlds = {}, g
         save();
         render();
         if (creation.safety) announce?.('Whit priorizou apoio humano imediato.');
-        else announce?.(`Whit trouxe uma leitura de Tarot${creation.storyCard?.name ? ` por ${creation.storyCard.name}` : ''}.`);
+        else announce?.(`Whit Taróloga abriu uma consulta${creation.storyCard?.name ? ` por ${creation.storyCard.name}` : ''}.`);
       } catch {
         messages = [...messages, {
           role:'whit',
-          title:'O Tarot permanece em silêncio por um instante',
-          text:'A leitura não conseguiu se organizar agora. Nenhum significado foi inventado e nenhum caminho foi executado. Quando quiser, apresente a situação novamente ou escreva o nome de uma carta.',
+          title:'Whit fecha a mesa por um instante',
+          text:'A consulta não conseguiu se organizar agora. Nenhum significado foi inventado e nenhum caminho foi executado. Quando quiser, apresente a situação novamente ou escreva o nome de uma carta.',
           signature:'SILÊNCIO',
           safety:false,
           actions:[]

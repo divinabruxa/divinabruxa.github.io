@@ -81,9 +81,9 @@
           </div>
           <div class="tarot-progress" aria-hidden="true"><i id="tarotProgress"></i></div>
           <div id="revealedTrail" class="revealed-trail" aria-label="Últimas cartas reveladas"></div>
-          <button id="tarotArbitrioAction" class="arbitrio-invoke" type="button" disabled>RECEBER LEITURA DE TAROT</button>
+          <button id="tarotArbitrioAction" class="arbitrio-invoke" type="button" disabled>CONSULTAR WHIT TARÓLOGA</button>
           <section id="tarotArbitrio" class="arbitrio-panel" aria-labelledby="tarotArbitrioTitle" aria-live="polite" hidden>
-            <p class="arbitrio-panel__label">ORBE DAS REALIDADES · LEITURA DO SEU CAMINHO</p>
+            <p class="arbitrio-panel__label">WHIT TARÓLOGA · CONSULTA DA SUA VIDA</p>
             <h3 id="tarotArbitrioTitle"></h3>
             <p id="tarotArbitrioWhisper" class="arbitrio-panel__whisper"></p>
             <p id="tarotArbitrioStory" class="arbitrio-panel__story"></p>
@@ -130,16 +130,16 @@
         <aside class="daily-message" aria-labelledby="dailyMessageTitle">
           <span aria-hidden="true">✦</span>
           <div>
-            <p class="eyebrow">LEITURA DO DIA · PRESENTE, DESTINO E CONSELHO</p>
+            <p class="eyebrow">WHIT TARÓLOGA · CONSULTA DO SEU DIA</p>
             <h2 id="dailyMessageTitle">Antes da palavra, a imagem.</h2>
             <p id="dailyMessage">Respire. Quando fizer sentido, toque na Orbe. A carta permanecerá até a próxima meia-noite em Brasília.</p>
             <details id="dailyDepth" class="daily-depth" hidden>
-              <summary>Aprofundar minha leitura</summary>
+              <summary>Abrir a consulta completa</summary>
               <p id="dailyDepthMessage"></p>
               <p id="dailyArbitrioClosing" class="arbitrio-panel__closing"></p>
               <small id="dailyArbitrioSignature" class="arbitrio-signature"></small>
               <small class="arbitrio-disclaimer">Leitura espiritual e simbólica — seu caminho e suas escolhas continuam livres.</small>
-              <button id="dailyArbitrioAgain" class="arbitrio-invoke arbitrio-invoke--compact" type="button">RELER MINHA LEITURA</button>
+              <button id="dailyArbitrioAgain" class="arbitrio-invoke arbitrio-invoke--compact" type="button">RELER CONSULTA</button>
             </details>
           </div>
           <p id="dailyState" class="daily-state">Ainda não revelada neste aparelho.</p>
@@ -345,8 +345,8 @@
         <div id="whitConversation" class="whit-conversation" role="log" aria-live="polite" aria-label="Conversa local com Whit"></div>
         <form id="whitForm" class="whit-form">
           <label class="sr-only" for="whitInput">Escreva para Whit</label>
-          <textarea id="whitInput" rows="3" maxlength="700" required placeholder="Conte o que está acontecendo ou diga uma carta. Whit organizará uma leitura baseada no Tarot."></textarea>
-          <button class="wisdom-primary" type="submit">Conversar com Whit</button>
+          <textarea id="whitInput" rows="3" maxlength="700" required placeholder="Conte o que está acontecendo ou diga uma carta. Whit Taróloga abrirá uma consulta baseada no Tarot."></textarea>
+          <button class="wisdom-primary" type="submit">Consultar Whit Taróloga</button>
         </form>
         <div class="whit-clean-footer">
           <button id="whitClear" type="button">Limpar conversa</button>
@@ -497,7 +497,7 @@
       <h2 id="dialogCardName"></h2>
       <p>Direta · a imagem fala primeiro; a leitura revela situação, tendência e conselho.</p>
       <p id="dialogReferenceText" class="card-dialog__reference" hidden></p>
-      <button id="dialogArbitrioAction" class="arbitrio-invoke" type="button">RECEBER LEITURA DE TAROT</button>
+      <button id="dialogArbitrioAction" class="arbitrio-invoke" type="button">CONSULTAR WHIT TARÓLOGA</button>
       <small id="dialogArbitrioNote" class="arbitrio-disclaimer">Leitura espiritual e simbólica — seu caminho e suas escolhas continuam livres.</small>
       <section id="dialogArbitrio" class="card-dialog__arbitrio" aria-labelledby="dialogArbitrioTitle" aria-live="polite" hidden>
         <p id="dialogArbitrioLabel" class="arbitrio-panel__label"></p>
@@ -511,6 +511,6 @@
   </dialog>
 
   <div id="announcer" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
-  <script type="module" src="app.js?v=4.0.5-orbe-realidades"></script>
+  <script type="module" src="app.js?v=4.0.6-whit-tarologa"></script>
 </body>
 </html>

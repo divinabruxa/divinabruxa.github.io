@@ -20,7 +20,7 @@ import { createVideosWorld } from './videos-world-v311.js';
 import { RealityOrbEngine } from './orb-engine-v68.js';
 import { createLivingUniverseV524 } from './living-universe-core-v524.js';
 import { arbitrioHash, secureArbitrioSeed } from './arbitrio-engine-v370.js';
-import { storyConversation, storyForCard } from './tarot-orbe-realities-engine-v405.js';
+import { storyConversation, storyForCard } from './whit-tarot-reader-engine-v406.js';
 
 const REDUCED_MOTION = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const TAROT_KEY = 'divina-bruxa-3.tarot-livre.v1';
@@ -119,7 +119,7 @@ function conversationPresence(creation) {
 }
 
 function creationSignature(creation) {
-  return `ORBE ${creation?.signature || 'LOCAL'} · LEITURA BASEADA NAS CARTAS`;
+  return `WHIT TARÓLOGA ${creation?.signature || 'LOCAL'} · CONSULTA BASEADA NAS CARTAS`;
 }
 
 function pulseOrb() {
@@ -455,7 +455,7 @@ const tarot = {
   renderArbitrio(card) {
     const creation = card ? this.arbitrioByPosition.get(this.state.cursor) : null;
     this.nodes.arbitrioAction.disabled = !card;
-    this.nodes.arbitrioAction.textContent = creation ? 'RELER MINHA LEITURA' : 'RECEBER LEITURA DE TAROT';
+    this.nodes.arbitrioAction.textContent = creation ? 'RELER CONSULTA' : 'CONSULTAR WHIT TARÓLOGA';
     this.nodes.arbitrioPanel.hidden = !creation;
     if (!creation) return;
     this.nodes.arbitrioTitle.textContent = creation.title;
@@ -475,7 +475,7 @@ const tarot = {
     this.arbitrioByPosition.set(this.state.cursor, creation);
     this.renderArbitrio(card);
     pulseOrb();
-    announce(`${card.name} revelou presente, tendência e conselho para o seu caminho.`);
+    announce(`Whit Taróloga abriu a consulta de ${card.name} com história, tendência e conselho.`);
   },
 
   render() {
@@ -621,12 +621,12 @@ function renderDialogArbitrio(creation) {
   dialogArbitrio.hidden = !creation;
   dialogCardOracle.hidden = !creation;
   if (!creation) return;
-  dialogArbitrioLabel.textContent = 'ORBE DAS REALIDADES · LEITURA DO SEU CAMINHO';
+  dialogArbitrioLabel.textContent = 'WHIT TARÓLOGA · CONSULTA DA SUA VIDA';
   dialogArbitrioTitle.textContent = creation.title;
   dialogCardOracle.textContent = `${creationPresence(creation)}\n\n${creationStory(creation)}`;
   dialogArbitrioClosing.textContent = creation.closing;
   dialogArbitrioSignature.textContent = creationSignature(creation);
-  dialogArbitrioAction.textContent = 'RELER MINHA LEITURA';
+  dialogArbitrioAction.textContent = 'RELER CONSULTA';
 }
 
 function showCardDialog(card, position, publicHref = '', oracleText = '', options = {}) {
@@ -645,7 +645,7 @@ function showCardDialog(card, position, publicHref = '', oracleText = '', option
   } : null;
   dialogArbitrioAction.hidden = !arbitrioEnabled;
   dialogArbitrioNote.hidden = !arbitrioEnabled;
-  dialogArbitrioAction.textContent = 'RECEBER LEITURA DE TAROT';
+  dialogArbitrioAction.textContent = 'CONSULTAR WHIT TARÓLOGA';
   renderDialogArbitrio(options.initialCreation || null);
   dialogPublicLink.hidden = !publicHref;
   if (publicHref) dialogPublicLink.href = publicHref;
@@ -662,7 +662,7 @@ dialogArbitrioAction.addEventListener('click', () => {
   });
   renderDialogArbitrio(creation);
   pulseOrb();
-  announce(`A leitura de ${dialogArbitrioContext.card.name} revelou situação, tendência e conselho.`);
+  announce(`Whit Taróloga revelou a história, a tendência e o conselho de ${dialogArbitrioContext.card.name}.`);
 });
 
 tarot.nodes.current.addEventListener('click', () => {
@@ -730,7 +730,7 @@ const daily = {
     this.render();
     this.nodes.depth.open = true;
     pulseOrb();
-    announce(`A leitura de ${this.card.name} foi relida sem alterar a verdade da carta.`);
+    announce(`A consulta de ${this.card.name} foi relida sem alterar a verdade da carta.`);
   },
 
   get revealed() {
@@ -747,7 +747,7 @@ const daily = {
     try { localStorage.setItem(dailyStorageKey(this.dateKey), 'revealed'); } catch {}
     this.arbitrioSeed({ create:true });
     this.render();
-    announce(`Carta do Dia: ${this.card.name}. Sua leitura de presente, tendência e conselho foi revelada.`);
+    announce(`Carta do Dia: ${this.card.name}. Whit Taróloga abriu sua consulta de hoje.`);
   },
 
   render() {
@@ -791,7 +791,7 @@ const daily = {
     this.nodes.card.setAttribute('aria-label', `${card.name}. Ampliar Carta do Dia.`);
     this.nodes.name.textContent = card.name;
     this.nodes.position.textContent = 'SÍMBOLO DE HOJE';
-    this.nodes.meta.textContent = 'Uma carta · uma leitura · um caminho possível';
+    this.nodes.meta.textContent = 'Uma carta · uma consulta · cinco forças';
     const creation = this.creation();
     this.nodes.messageTitle.textContent = creation.title;
     this.nodes.message.textContent = creationPresence(creation);
@@ -799,7 +799,7 @@ const daily = {
     this.nodes.closing.textContent = creation.closing;
     this.nodes.signature.textContent = creationSignature(creation);
     this.nodes.depth.hidden = false;
-    this.nodes.state.textContent = 'Carta e leitura guardadas neste aparelho até o próximo ciclo de Brasília.';
+    this.nodes.state.textContent = 'Carta e consulta guardadas neste aparelho até o próximo ciclo de Brasília.';
     if (currentRoute === 'carta-do-dia') orbCue.textContent = 'Carta guardada';
   }
 };
@@ -904,7 +904,7 @@ const spreads = {
     this.arbitrioSeed({ renew:true });
     this.render();
     pulseOrb();
-    announce('A leitura foi refeita. As cartas preservam seus significados, suas posições e a história do caminho.');
+    announce('Whit Taróloga refez a consulta preservando cartas, posições e a história da mesa.');
   },
 
   renderPicker() {
@@ -1241,7 +1241,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=4.0.5-orbe-realidades', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=4.0.6-whit-tarologa', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {
