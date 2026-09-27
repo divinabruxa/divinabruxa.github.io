@@ -20,7 +20,7 @@ import { createVideosWorld } from './videos-world-v311.js';
 import { RealityOrbEngine } from './orb-engine-v68.js';
 import { createLivingUniverseV524 } from './living-universe-core-v524.js';
 import { arbitrioHash, secureArbitrioSeed } from './arbitrio-engine-v370.js';
-import { storyConversation, storyForCard } from './tarot-soul-engine-v403.js';
+import { storyConversation, storyForCard } from './tarot-life-engine-v404.js';
 
 const REDUCED_MOTION = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const TAROT_KEY = 'divina-bruxa-3.tarot-livre.v1';
@@ -119,7 +119,7 @@ function conversationPresence(creation) {
 }
 
 function creationSignature(creation) {
-  return `LEITURA ${creation?.signature || 'LOCAL'} · MENSAGEM BASEADA NA CARTA`;
+  return `VIDA ${creation?.signature || 'LOCAL'} · MENSAGEM ABENÇOADA PELA CARTA`;
 }
 
 function pulseOrb() {
@@ -455,7 +455,7 @@ const tarot = {
   renderArbitrio(card) {
     const creation = card ? this.arbitrioByPosition.get(this.state.cursor) : null;
     this.nodes.arbitrioAction.disabled = !card;
-    this.nodes.arbitrioAction.textContent = creation ? 'RELER A MENSAGEM' : 'RECEBER MENSAGEM DA CARTA';
+    this.nodes.arbitrioAction.textContent = creation ? 'RELER A MENSAGEM DA VIDA' : 'RECEBER MENSAGEM DA VIDA';
     this.nodes.arbitrioPanel.hidden = !creation;
     if (!creation) return;
     this.nodes.arbitrioTitle.textContent = creation.title;
@@ -475,7 +475,7 @@ const tarot = {
     this.arbitrioByPosition.set(this.state.cursor, creation);
     this.renderArbitrio(card);
     pulseOrb();
-    announce(`${card.name} revelou sua essência, sua tensão e um conselho possível para a vida real.`);
+    announce(`${card.name} revelou sua verdade, sua bênção e um caminho possível para a vida.`);
   },
 
   render() {
@@ -497,7 +497,7 @@ const tarot = {
       this.nodes.empty.hidden = false;
       this.nodes.name.textContent = 'Toque na Orbe';
       this.nodes.position.textContent = 'O CÍRCULO AGUARDA';
-      this.nodes.meta.textContent = 'Sempre direta · essência, vida real e conselho';
+      this.nodes.meta.textContent = 'Sempre direta · verdade, bênção e caminho';
       this.nodes.trail.replaceChildren();
       this.renderArbitrio(null);
       return;
@@ -512,7 +512,7 @@ const tarot = {
     this.nodes.current.setAttribute('aria-label', `${card.name}. Ampliar carta.`);
     this.nodes.name.textContent = card.name;
     this.nodes.position.textContent = `POSIÇÃO ${this.state.cursor + 1} DE ${revealed}`;
-    this.nodes.meta.textContent = 'Tarot vivo · mensagem clara baseada nesta carta';
+    this.nodes.meta.textContent = 'Tarot vivo · uma mensagem para sua jornada';
     this.renderTrail();
     this.renderArbitrio(card);
   },
@@ -621,12 +621,12 @@ function renderDialogArbitrio(creation) {
   dialogArbitrio.hidden = !creation;
   dialogCardOracle.hidden = !creation;
   if (!creation) return;
-  dialogArbitrioLabel.textContent = 'MENSAGEM DA CARTA · VERDADE E CONSELHO';
+  dialogArbitrioLabel.textContent = 'MOTOR DA VIDA · MENSAGEM PARA SUA JORNADA';
   dialogArbitrioTitle.textContent = creation.title;
   dialogCardOracle.textContent = `${creationPresence(creation)}\n\n${creationStory(creation)}`;
   dialogArbitrioClosing.textContent = creation.closing;
   dialogArbitrioSignature.textContent = creationSignature(creation);
-  dialogArbitrioAction.textContent = 'RELER A MENSAGEM';
+  dialogArbitrioAction.textContent = 'RELER A MENSAGEM DA VIDA';
 }
 
 function showCardDialog(card, position, publicHref = '', oracleText = '', options = {}) {
@@ -645,7 +645,7 @@ function showCardDialog(card, position, publicHref = '', oracleText = '', option
   } : null;
   dialogArbitrioAction.hidden = !arbitrioEnabled;
   dialogArbitrioNote.hidden = !arbitrioEnabled;
-  dialogArbitrioAction.textContent = 'RECEBER MENSAGEM DA CARTA';
+  dialogArbitrioAction.textContent = 'RECEBER MENSAGEM DA VIDA';
   renderDialogArbitrio(options.initialCreation || null);
   dialogPublicLink.hidden = !publicHref;
   if (publicHref) dialogPublicLink.href = publicHref;
@@ -662,7 +662,7 @@ dialogArbitrioAction.addEventListener('click', () => {
   });
   renderDialogArbitrio(creation);
   pulseOrb();
-  announce(`A mensagem de ${dialogArbitrioContext.card.name} foi apresentada com essência, tensão e conselho.`);
+  announce(`A mensagem de vida de ${dialogArbitrioContext.card.name} foi apresentada com verdade, bênção e conselho.`);
 });
 
 tarot.nodes.current.addEventListener('click', () => {
@@ -730,7 +730,7 @@ const daily = {
     this.render();
     this.nodes.depth.open = true;
     pulseOrb();
-    announce(`A mensagem de ${this.card.name} foi relida sem alterar o significado da carta.`);
+    announce(`A mensagem de vida de ${this.card.name} foi relida sem alterar a verdade da carta.`);
   },
 
   get revealed() {
@@ -747,7 +747,7 @@ const daily = {
     try { localStorage.setItem(dailyStorageKey(this.dateKey), 'revealed'); } catch {}
     this.arbitrioSeed({ create:true });
     this.render();
-    announce(`Carta do Dia: ${this.card.name}. Essência, vida cotidiana e conselho foram revelados.`);
+    announce(`Carta do Dia: ${this.card.name}. Sua mensagem de vida, bênção e conselho foram revelados.`);
   },
 
   render() {
@@ -791,7 +791,7 @@ const daily = {
     this.nodes.card.setAttribute('aria-label', `${card.name}. Ampliar Carta do Dia.`);
     this.nodes.name.textContent = card.name;
     this.nodes.position.textContent = 'SÍMBOLO DE HOJE';
-    this.nodes.meta.textContent = 'Uma carta · uma verdade central · um conselho';
+    this.nodes.meta.textContent = 'Uma carta · uma mensagem da vida · uma bênção';
     const creation = this.creation();
     this.nodes.messageTitle.textContent = creation.title;
     this.nodes.message.textContent = creationPresence(creation);
@@ -799,7 +799,7 @@ const daily = {
     this.nodes.closing.textContent = creation.closing;
     this.nodes.signature.textContent = creationSignature(creation);
     this.nodes.depth.hidden = false;
-    this.nodes.state.textContent = 'Carta e mensagem guardadas neste aparelho até o próximo ciclo de Brasília.';
+    this.nodes.state.textContent = 'Carta e Mensagem da Vida guardadas neste aparelho até o próximo ciclo de Brasília.';
     if (currentRoute === 'carta-do-dia') orbCue.textContent = 'Carta guardada';
   }
 };
@@ -904,7 +904,7 @@ const spreads = {
     this.arbitrioSeed({ renew:true });
     this.render();
     pulseOrb();
-    announce('A síntese foi relida. Os significados permanecem fiéis às cartas e às posições da tiragem.');
+    announce('A Jornada da Vida foi relida. As cartas preservam seus significados, suas posições e sua bênção comum.');
   },
 
   renderPicker() {
@@ -1241,7 +1241,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=4.0.3-alma-tarot', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=4.0.4-motor-vida', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {
