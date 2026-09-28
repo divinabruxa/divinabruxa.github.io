@@ -37,6 +37,11 @@ import {
   narrativeConsciousnessForCard,
   narrativeConsciousnessSpread
 } from './whit-tarot-narrative-consciousness-v414.js';
+import {
+  SOUL_VOICE_ENGINE_VERSION,
+  soulVoiceForCard,
+  soulVoiceSpread
+} from './whit-tarot-soul-voice-v415.js';
 
 export { tarotIdentity } from './whit-superior-tarot-engine-v407.js';
 
@@ -247,35 +252,42 @@ function divineCard(card, seed, { scope = 'carta', moment = 'agora', intention =
     positioned,
     human
   });
+  const soulVoice = soulVoiceForCard(card, {
+    position:moment,
+    question:intention,
+    positioned,
+    human,
+    narrative
+  });
   const choice = cardVoiceChoice(identity, base, intention, scope);
   const paragraphs = [];
-  const modules = ['consciência-narrativa'];
+  const modules = ['alma-e-voz', 'consciência-narrativa'];
 
   if (choice.mode === 'travessia') {
-    paragraphs.push(narrative.visible.preserved);
+    paragraphs.push(soulVoice.visible.preserved);
     modules.push('força-preservada');
   } else if (!human.context.hasContext && choice.mode === 'presença') {
-    paragraphs.push(narrative.visible.preserved);
+    paragraphs.push(soulVoice.visible.preserved);
     modules.push('força-preservada');
   }
 
   if (human.context.hasContext) {
-    paragraphs.push(narrative.visible.revelation);
+    paragraphs.push(soulVoice.visible.revelation);
     modules.push('revelação');
   }
   if (human.context.hasContext) {
     modules.push('realidade-humana');
   }
 
-  const tendency = narrative.visible.tendency;
+  const tendency = soulVoice.visible.tendency;
   paragraphs.push(tendency);
   modules.push('tendência');
 
-  const counsel = narrative.visible.counsel;
+  const counsel = soulVoice.visible.counsel;
   paragraphs.push(counsel);
   modules.push('livre-arbítrio', 'matéria');
 
-  const closing = narrative.visible.closing;
+  const closing = soulVoice.visible.closing;
   return Object.freeze({
     ...base,
     engine:STORY_ENGINE_NAME,
@@ -285,8 +297,8 @@ function divineCard(card, seed, { scope = 'carta', moment = 'agora', intention =
       ? 'WHIT ALMA DIVINA · MENSAGEM DO SEU DIA'
       : 'WHIT ALMA DIVINA · CONSULTA DA CARTA',
     title:`Whit Alma Divina · ${cardName(card)}`,
-    heartline:narrative.visible.opening,
-    whisper:narrative.visible.tension,
+    heartline:soulVoice.visible.opening,
+    whisper:soulVoice.visible.tension,
     paragraphs:Object.freeze(paragraphs),
     story:paragraphs.join('\n\n'),
     closing,
@@ -335,6 +347,11 @@ function divineCard(card, seed, { scope = 'carta', moment = 'agora', intention =
       completeArc:narrative.coverage.completeArc,
       repeatedMotorParagraphs:false,
       finalVoice:'Whit'
+    }),
+    soulVoiceProfile:Object.freeze({
+      version:SOUL_VOICE_ENGINE_VERSION,
+      ...soulVoice.profile,
+      integrity:soulVoice.integrity
     }),
     cohesion:Object.freeze({
       ...base.cohesion,
@@ -391,13 +408,21 @@ function divineSpread(cards, positions, seed, intention, inherited) {
     dialogue:dialogueMap,
     human:humanMap
   });
+  const soulVoiceMap = soulVoiceSpread(cards, positions, {
+    question:intention,
+    positioned:positionMap,
+    dialogue:dialogueMap,
+    human:humanMap,
+    narrative:narrativeMap
+  });
   const analysis = base.superiorProfile?.analysis || {};
   const openingIndex = positionMap?.axes?.openingIndex ?? 0;
   const directionIndex = positionMap?.axes?.tendencyIndex ?? (cards.length - 1);
   const choice = spreadVoiceChoice(base, intention, cards.length);
   const stableSeed = `${seed}:${cards.map(cardKey).join('→')}:${positions.join('→')}:${normalize(intention)}`;
-  const paragraphs = [...narrativeMap.visible.paragraphs];
+  const paragraphs = [...soulVoiceMap.visible.paragraphs];
   const modules = [
+    'alma-e-voz',
     'consciência-narrativa',
     'cartas-que-conversam',
     ...(narrativeMap.visible.human ? ['realidade-humana'] : []),
@@ -405,9 +430,9 @@ function divineSpread(cards, positions, seed, intention, inherited) {
     'livre-arbítrio',
     'matéria'
   ];
-  const tendency = narrativeMap.visible.tendency;
-  const counsel = narrativeMap.visible.counsel;
-  const closing = narrativeMap.visible.closing;
+  const tendency = soulVoiceMap.visible.tendency;
+  const counsel = soulVoiceMap.visible.counsel;
+  const closing = soulVoiceMap.visible.closing;
   return Object.freeze({
     ...base,
     engine:STORY_ENGINE_NAME,
@@ -415,8 +440,8 @@ function divineSpread(cards, positions, seed, intention, inherited) {
     storyEngine:STORY_ENGINE_NAME,
     label:'WHIT ALMA DIVINA · A ORBE DAS REALIDADES',
     title:`Whit Alma Divina · ${cardName(cards[openingIndex])} → ${cardName(cards[directionIndex])}`,
-    heartline:narrativeMap.visible.opening,
-    lead:narrativeMap.visible.tension,
+    heartline:soulVoiceMap.visible.opening,
+    lead:soulVoiceMap.visible.tension,
     paragraphs:Object.freeze(paragraphs),
     story:paragraphs.join('\n\n'),
     closing,
@@ -498,6 +523,12 @@ function divineSpread(cards, positions, seed, intention, inherited) {
       completeArc:narrativeMap.coverage.completeArc,
       repeatedMotorParagraphs:false,
       finalVoice:'Whit'
+    }),
+    soulVoiceProfile:Object.freeze({
+      version:SOUL_VOICE_ENGINE_VERSION,
+      ...soulVoiceMap.profile,
+      integrity:soulVoiceMap.integrity,
+      coverage:soulVoiceMap.coverage
     }),
     cohesion:Object.freeze({
       ...base.cohesion,
@@ -634,6 +665,7 @@ export function storyCapacity() {
     cardDialogue:DIALOGUE_ENGINE_VERSION,
     humanReality:HUMAN_REALITY_ENGINE_VERSION,
     narrativeConsciousness:NARRATIVE_CONSCIOUSNESS_ENGINE_VERSION,
+    soulVoice:SOUL_VOICE_ENGINE_VERSION,
     rule:'Whit fala até a leitura ficar inteira — e então sabe silenciar'
   });
 }
