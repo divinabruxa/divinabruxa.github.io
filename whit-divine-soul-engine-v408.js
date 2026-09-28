@@ -27,6 +27,11 @@ import {
   DIALOGUE_ENGINE_VERSION,
   tarotDialogueSpread
 } from './whit-tarot-dialogue-engine-v412.js';
+import {
+  HUMAN_REALITY_ENGINE_VERSION,
+  humanRealityForCard,
+  humanRealitySpread
+} from './whit-tarot-human-reality-v413.js';
 
 export { tarotIdentity } from './whit-superior-tarot-engine-v407.js';
 
@@ -76,55 +81,6 @@ const TERRITORY_LABEL = Object.freeze({
   love:'amor', relationship:'relacionamento', work:'trabalho', money:'dinheiro',
   family:'família', identity:'identidade', change:'mudança', decision:'decisão',
   spirituality:'espiritualidade', general:'momento atual'
-});
-
-const TERRITORY_VOICE = Object.freeze({
-  love:Object.freeze([
-    'No amor, não confunda intensidade com reciprocidade; esta leitura pede que o afeto também possa ser reconhecido nas atitudes.',
-    'O amor desta carta não pede que você adivinhe o outro; pede que observe o que realmente volta para suas mãos.',
-    'Sentimento pode existir e ainda assim precisar de verdade, limite e presença para se transformar em vínculo.'
-  ]),
-  relationship:Object.freeze([
-    'Um vínculo amadurece quando sentimento, palavra e atitude conseguem morar na mesma verdade.',
-    'Esta relação não precisa de uma promessa maior; precisa de uma presença que possa ser reconhecida na vida real.',
-    'O encontro só permanece inteiro quando ninguém precisa desaparecer para conservar a ligação.'
-  ]),
-  money:Object.freeze([
-    'Sua segurança merece escolhas que caibam nos recursos reais, sem transformar urgência em promessa.',
-    'No dinheiro, a leitura pede chão: valor, limite e continuidade precisam caminhar juntos.',
-    'Prosperidade começa quando desejo e realidade deixam de competir e passam a construir a mesma direção.'
-  ]),
-  work:Object.freeze([
-    'Seu esforço precisa construir caminho, não apenas manter você ocupada dentro da mesma espera.',
-    'No trabalho, talento ganha destino quando encontra prioridade, forma e continuidade.',
-    'A mesa não mede seu valor pela exaustão; ela pergunta qual esforço realmente produz futuro.'
-  ]),
-  family:Object.freeze([
-    'Cuidar não exige desaparecer; amor familiar também precisa aprender a respeitar limite e dignidade.',
-    'Nem toda responsabilidade que chegou às suas mãos precisa permanecer nelas para sempre.',
-    'A cura desta história familiar começa quando afeto e verdade deixam de ser tratados como inimigos.'
-  ]),
-  change:Object.freeze([
-    'A travessia não precisa estar pronta; precisa apenas reconhecer o primeiro passo que já se tornou verdadeiro.',
-    'Mudar não apaga o que foi vivido: transforma experiência em passagem para uma forma mais honesta.',
-    'O novo não pede que você negue o medo; pede que não entregue a ele o governo de toda a estrada.'
-  ]),
-  identity:Object.freeze([
-    'O que você sente merece cuidado, mas não possui o direito de definir todo o seu valor.',
-    'Existe uma parte sua que continua inteira mesmo quando o momento tenta contar outra história.',
-    'Sua identidade é maior do que a dor, o erro ou a espera que hoje ocupam seus pensamentos.'
-  ]),
-  decision:Object.freeze([
-    'A resposta amadurece quando fato, medo, desejo e hipótese deixam de falar com a mesma voz.',
-    'Escolher não exige certeza absoluta; exige um critério que continue digno depois da urgência.',
-    'A indecisão também cria destino, por isso esta mesa devolve a escolha às suas mãos.'
-  ]),
-  spirituality:Object.freeze([
-    'A espiritualidade desta leitura ilumina sua consciência; ela não pede que você abandone a realidade.',
-    'O sagrado aparece aqui como presença e discernimento, não como uma certeza imposta de fora.',
-    'Fé e livre-arbítrio caminham juntos quando o símbolo inspira sem ocupar o lugar da sua escolha.'
-  ]),
-  general:Object.freeze([])
 });
 
 const ELEMENT_REALITY = Object.freeze({
@@ -233,11 +189,6 @@ function spreadVoiceChoice(base, intention, count) {
   });
 }
 
-function territoryLine(territory, seed) {
-  const options = TERRITORY_VOICE[territory] || TERRITORY_VOICE.general;
-  return options.length ? choose(options, seed, `territory-${territory}`) : '';
-}
-
 function realityLine(element, seed) {
   return choose(ELEMENT_REALITY[element] || ELEMENT_REALITY.spirit, seed, `reality-${element}`);
 }
@@ -280,26 +231,30 @@ function divineCard(card, seed, { scope = 'carta', moment = 'agora', intention =
   const identity = tarotIdentity(card);
   const knowledge = tarotKnowledge(card);
   const positioned = positionedTarotCard(card, moment, { question:intention });
+  const human = humanRealityForCard(card, {
+    position:moment,
+    question:intention,
+    positioned
+  });
   const choice = cardVoiceChoice(identity, base, intention, scope);
   const place = cardPlace(scope, moment, choice.territory);
   const paragraphs = [];
   const modules = [];
 
-  if (choice.mode !== 'essência') {
+  if (human.context.hasContext) {
+    paragraphs.push(human.focusSentence);
+    modules.push('realidade-humana');
+  } else if (choice.mode !== 'essência') {
     paragraphs.push(sentence(realityLine(identity.element, stableSeed)));
     modules.push('realidade-da-orbe');
   }
 
-  const heart = territoryLine(choice.territory, stableSeed);
-  if (heart) {
-    paragraphs.push(sentence(heart));
-    modules.push('território-do-coração');
-  }
-
   const positionRole = positioned.classification.role;
-  const tendency = ['future', 'outcome'].includes(positionRole)
-    ? positioned.reading.possibility
-    : sentence(cardTendency(identity, base, stableSeed));
+  const tendency = human.context.hasContext
+    ? human.tendencySentence
+    : ['future', 'outcome'].includes(positionRole)
+      ? positioned.reading.possibility
+      : sentence(cardTendency(identity, base, stableSeed));
   if (!['future', 'outcome'].includes(positionRole)) paragraphs.push(tendency);
   modules.push('tendência');
 
@@ -308,22 +263,24 @@ function divineCard(card, seed, { scope = 'carta', moment = 'agora', intention =
     modules.push('livre-arbítrio');
   }
 
-  const counsel = positionRole !== 'general'
-    ? positioned.reading.possibility
-    : sentence(choose([
-      `Meu conselho é trazer a carta para a vida: você ${lower(identity.gesture)}`,
-      `A mudança possível começa num gesto: você ${lower(identity.gesture)}`,
-      `Não tente resolver tudo; comece assim: você ${lower(identity.gesture)}`
-    ], stableSeed, 'card-counsel'));
+  const counsel = human.context.hasContext
+    ? human.actionSentence
+    : positionRole !== 'general'
+      ? positioned.reading.possibility
+      : sentence(choose([
+        `Meu conselho é trazer a carta para a vida: você ${lower(identity.gesture)}`,
+        `A mudança possível começa num gesto: você ${lower(identity.gesture)}`,
+        `Não tente resolver tudo; comece assim: você ${lower(identity.gesture)}`
+      ], stableSeed, 'card-counsel'));
   paragraphs.push(counsel);
   modules.push('matéria');
 
-  if (choice.mode === 'travessia') {
+  if (choice.mode === 'travessia' && !human.context.hasContext) {
     paragraphs.push(sentence(`A bênção de ${cardName(card)} não promete ausência de dificuldade; ela lembra que ${lower(identity.consequence)}`));
     modules.push('bênção');
   }
 
-  const closing = closingLine(identity.element, stableSeed);
+  const closing = human.closingSentence || closingLine(identity.element, stableSeed);
   return Object.freeze({
     ...base,
     engine:STORY_ENGINE_NAME,
@@ -369,6 +326,15 @@ function divineCard(card, seed, { scope = 'carta', moment = 'agora', intention =
       reading:positioned.reading,
       positionChangesMeaning:true
     }),
+    humanRealityProfile:Object.freeze({
+      version:HUMAN_REALITY_ENGINE_VERSION,
+      context:human.context,
+      signals:human.signals,
+      tarotGoverns:true,
+      literalMindReading:false,
+      futureIsConditional:true,
+      privateSourcesUsed:false
+    }),
     cohesion:Object.freeze({
       ...base.cohesion,
       divineSoul:true,
@@ -405,24 +371,6 @@ function soulfulDepthAxes(voices = []) {
     .replace(/^Desfecho\s*·/u, 'O que deseja nascer ·')));
 }
 
-function spreadTendency(lastCard, last, positioned) {
-  if (['future', 'outcome'].includes(positioned?.classification?.role)) {
-    return `${positioned.reading.statement} ${positioned.reading.possibility}`;
-  }
-  return sentence(`Se o caminho permanecer igual, a tensão de ${cardName(lastCard)} tende a ocupar o centro: ${lower(last.pressure)}; isso é direção provável, não sentença`);
-}
-
-function spreadCounsel(last, seed, positioned) {
-  if (['advice', 'choice', 'freewill'].includes(positioned?.classification?.role)) {
-    return `${positioned.reading.statement} ${positioned.reading.possibility}`;
-  }
-  return sentence(choose([
-    `O gesto capaz de mudar esta realidade começa aqui: você ${lower(last.gesture)}`,
-    `Seu livre-arbítrio volta à história quando você ${lower(last.gesture)}`,
-    `A mesa devolve poder às suas mãos por meio deste gesto: você ${lower(last.gesture)}`
-  ], seed, 'spread-counsel'));
-}
-
 function divineSpread(cards, positions, seed, intention, inherited) {
   const base = inherited || superiorConversation(cards, positions, seed, intention);
   const identities = cards.map(tarotIdentity);
@@ -432,15 +380,18 @@ function divineSpread(cards, positions, seed, intention, inherited) {
     question:intention,
     positioned:positionMap
   });
+  const humanMap = humanRealitySpread(cards, positions, {
+    question:intention,
+    positioned:positionMap,
+    dialogue:dialogueMap
+  });
   const analysis = base.superiorProfile?.analysis || {};
   const openingIndex = 0;
   const middleIndex = positionMap?.axes?.tensionIndex ?? (Number.isInteger(analysis?.center?.index) ? analysis.center.index : Math.floor(cards.length / 2));
   const directionIndex = positionMap?.axes?.tendencyIndex ?? (cards.length - 1);
-  const counselIndex = positionMap?.axes?.counselIndex ?? (cards.length - 1);
   const first = identities[openingIndex];
   const pivot = identities[middleIndex];
   const last = identities[directionIndex];
-  const counselIdentity = identities[counselIndex];
   const choice = spreadVoiceChoice(base, intention, cards.length);
   const stableSeed = `${seed}:${cards.map(cardKey).join('→')}:${positions.join('→')}:${normalize(intention)}`;
   const paragraphs = [];
@@ -455,21 +406,20 @@ function divineSpread(cards, positions, seed, intention, inherited) {
     modules.push('discernimento');
   }
 
-  const heart = territoryLine(choice.territory, stableSeed);
-  if (heart) {
-    paragraphs.push(sentence(heart));
-    modules.push('território-do-coração');
+  if (humanMap.focusSentence) {
+    paragraphs.push(humanMap.focusSentence);
+    modules.push('realidade-humana');
   }
 
-  const tendency = spreadTendency(cards[directionIndex], last, positionMap.entries[directionIndex]);
+  const tendency = humanMap.tendencySentence;
   paragraphs.push(tendency);
   modules.push('tendência');
 
-  const counsel = spreadCounsel(counselIdentity, stableSeed, positionMap.entries[counselIndex]);
+  const counsel = humanMap.actionSentence;
   paragraphs.push(counsel);
   modules.push('matéria');
 
-  const closing = closingLine(analysis.dominantElement || last.element, stableSeed);
+  const closing = humanMap.closingSentence || closingLine(analysis.dominantElement || last.element, stableSeed);
   return Object.freeze({
     ...base,
     engine:STORY_ENGINE_NAME,
@@ -537,6 +487,19 @@ function divineSpread(cards, positions, seed, intention, inherited) {
       turningPair:dialogueMap.turningEdge?.pairKey || '',
       allCardsUsed:dialogueMap.coverage.allCardsUsed,
       allTransitionsRead:dialogueMap.coverage.allTransitionsRead,
+      singleVoice:true
+    }),
+    humanRealityProfile:Object.freeze({
+      version:HUMAN_REALITY_ENGINE_VERSION,
+      context:humanMap.context,
+      conflict:humanMap.humanConflict,
+      evidence:humanMap.evidence,
+      axes:humanMap.axes,
+      tarotGoverns:true,
+      wholeTableInherited:humanMap.integrity.wholeTableInherited,
+      literalMindReading:false,
+      futureIsConditional:true,
+      privateSourcesUsed:false,
       singleVoice:true
     }),
     cohesion:Object.freeze({
@@ -672,6 +635,7 @@ export function storyCapacity() {
     deepTarotKnowledge:KNOWLEDGE_ENGINE_VERSION,
     positionIntelligence:POSITION_ENGINE_VERSION,
     cardDialogue:DIALOGUE_ENGINE_VERSION,
+    humanReality:HUMAN_REALITY_ENGINE_VERSION,
     rule:'Whit fala até a leitura ficar inteira — e então sabe silenciar'
   });
 }
