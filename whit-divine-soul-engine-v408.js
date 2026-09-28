@@ -23,6 +23,10 @@ import {
   positionedTarotCard,
   positionedTarotSpread
 } from './whit-tarot-position-engine-v411.js';
+import {
+  DIALOGUE_ENGINE_VERSION,
+  tarotDialogueSpread
+} from './whit-tarot-dialogue-engine-v412.js';
 
 export { tarotIdentity } from './whit-superior-tarot-engine-v407.js';
 
@@ -67,6 +71,12 @@ const HEART_WORDS = /\b(?:amor|amar|coracao|saudade|relacao|relacionamento|famil
 const FUTURE_WORDS = /\b(?:futuro|destino|vai|voltar|acontecer|resultado|quando|certeza|garantia|sim ou nao)\b/;
 const DEEP_WORDS = /\b(?:aprofundar|profundo|detalhe|historia|jornada|vida inteira|alma|sentido maior)\b/;
 const TURNING_KEYS = new Set(['roda', 'enforcado', 'morte', 'diabo', 'torre', 'lua', 'julgamento', 'mundo']);
+
+const TERRITORY_LABEL = Object.freeze({
+  love:'amor', relationship:'relacionamento', work:'trabalho', money:'dinheiro',
+  family:'família', identity:'identidade', change:'mudança', decision:'decisão',
+  spirituality:'espiritualidade', general:'momento atual'
+});
 
 const TERRITORY_VOICE = Object.freeze({
   love:Object.freeze([
@@ -379,39 +389,13 @@ function spreadOpening(card, identity, position, seed, positioned) {
 }
 
 function spreadCenter(card, identity, position, territory, seed, positioned) {
-  const context = territory !== 'general' ? ` dentro da sua questão sobre ${territory}` : '';
+  const context = territory !== 'general' ? ` dentro da sua questão sobre ${TERRITORY_LABEL[territory] || territory}` : '';
   const positionTruth = lower(positioned?.reading?.statement || identity.truth);
   return choose([
     `Quando ${cardName(card)} alcança o centro${context}, a história muda: ${positionTruth}`,
     `O coração da tiragem está em ${cardName(card)}, na posição “${position}”: ${positionTruth}`,
     `${cardName(card)} ocupa o centro e revela a consciência que une a mesa: ${positionTruth}`
   ], seed, 'spread-center');
-}
-
-function spreadNarrative(firstCard, pivotCard, lastCard, first, pivot, last, seed) {
-  return choose([
-    `${cardName(lastCard)} não repete ${cardName(firstCard)} nem ${cardName(pivotCard)}; responde às duas ao mostrar que ${lower(last.consequence)}`,
-    `A verdade de ${cardName(firstCard)} encontra a tensão de ${cardName(pivotCard)}; ao chegar a ${cardName(lastCard)}, a história ganha esta direção: ${lower(last.consequence)}`,
-    `Entre ${cardName(firstCard)} e ${cardName(lastCard)}, ${cardName(pivotCard)} transforma tensão em consciência, até que ${lower(last.consequence)}`
-  ], seed, 'spread-narrative');
-}
-
-function spreadPattern(cards, identities, analysis) {
-  if (analysis?.contradiction) {
-    const expansive = cards[analysis.expansionIndex];
-    const challenging = cards[analysis.challengeIndex];
-    return sentence(`Eu não esconderia a contradição desta mesa: ${cardName(expansive)} abre possibilidade, enquanto ${cardName(challenging)} mostra o limite que precisa ser respeitado`);
-  }
-  if ((analysis?.transformations || 0) >= 2) {
-    return 'A transformação se repete porque a vida já não consegue caber inteira na forma antiga.';
-  }
-  if ((analysis?.decisions || 0) >= 2) {
-    return 'A escolha aparece mais de uma vez porque adiar também está construindo uma direção.';
-  }
-  if ((analysis?.stability || 0) >= 2 && (analysis?.transformations || 0) > 0) {
-    return 'A mesa reúne permanência e mudança: proteger tudo impediria justamente aquilo que deseja nascer.';
-  }
-  return '';
 }
 
 function soulfulDepthAxes(voices = []) {
@@ -444,8 +428,12 @@ function divineSpread(cards, positions, seed, intention, inherited) {
   const identities = cards.map(tarotIdentity);
   const knowledge = tarotKnowledgeDeck(cards);
   const positionMap = positionedTarotSpread(cards, positions, { question:intention });
+  const dialogueMap = tarotDialogueSpread(cards, positions, {
+    question:intention,
+    positioned:positionMap
+  });
   const analysis = base.superiorProfile?.analysis || {};
-  const openingIndex = positionMap?.axes?.openingIndex ?? 0;
+  const openingIndex = 0;
   const middleIndex = positionMap?.axes?.tensionIndex ?? (Number.isInteger(analysis?.center?.index) ? analysis.center.index : Math.floor(cards.length / 2));
   const directionIndex = positionMap?.axes?.tendencyIndex ?? (cards.length - 1);
   const counselIndex = positionMap?.axes?.counselIndex ?? (cards.length - 1);
@@ -458,10 +446,10 @@ function divineSpread(cards, positions, seed, intention, inherited) {
   const paragraphs = [];
   const modules = [];
 
-  paragraphs.push(sentence(spreadNarrative(cards[openingIndex], cards[middleIndex], cards[directionIndex], first, pivot, last, stableSeed)));
-  modules.push('narrativa');
+  paragraphs.push(dialogueMap.synthesis);
+  modules.push('cartas-que-conversam');
 
-  const pattern = spreadPattern(cards, identities, analysis);
+  const pattern = dialogueMap.patternSentence;
   if (pattern) {
     paragraphs.push(pattern);
     modules.push('discernimento');
@@ -473,11 +461,6 @@ function divineSpread(cards, positions, seed, intention, inherited) {
     modules.push('território-do-coração');
   }
 
-  if (choice.mode !== 'essência') {
-    paragraphs.push(sentence(realityLine(analysis.dominantElement || last.element, stableSeed)));
-    modules.push('realidade-da-orbe');
-  }
-
   const tendency = spreadTendency(cards[directionIndex], last, positionMap.entries[directionIndex]);
   paragraphs.push(tendency);
   modules.push('tendência');
@@ -485,11 +468,6 @@ function divineSpread(cards, positions, seed, intention, inherited) {
   const counsel = spreadCounsel(counselIdentity, stableSeed, positionMap.entries[counselIndex]);
   paragraphs.push(counsel);
   modules.push('matéria');
-
-  if (choice.mode === 'travessia') {
-    paragraphs.push(sentence(`A mensagem espiritual da combinação é simples: ${cardName(cards[middleIndex])} pede honestidade, e ${cardName(cards[directionIndex])} pede que essa verdade possa viver na realidade`));
-    modules.push('espírito');
-  }
 
   const closing = closingLine(analysis.dominantElement || last.element, stableSeed);
   return Object.freeze({
@@ -542,6 +520,24 @@ function divineSpread(cards, positions, seed, intention, inherited) {
       recognizedPositions:positionMap.recognizedPositions,
       inferredPositions:positionMap.inferredPositions,
       positionChangesMeaning:true
+    }),
+    dialogueProfile:Object.freeze({
+      version:DIALOGUE_ENGINE_VERSION,
+      edgeCount:dialogueMap.coverage.edgeCount,
+      cardsUsed:dialogueMap.coverage.cardCount,
+      uniqueKeys:dialogueMap.coverage.uniqueKeys,
+      sectorCount:dialogueMap.coverage.sectorCount,
+      sectors:Object.freeze(dialogueMap.sectors.map(sector => Object.freeze({
+        label:sector.label,
+        startIndex:sector.startIndex,
+        endIndex:sector.endIndex,
+        dominantKey:sector.dominant.key,
+        turningPair:sector.turningPair
+      }))),
+      turningPair:dialogueMap.turningEdge?.pairKey || '',
+      allCardsUsed:dialogueMap.coverage.allCardsUsed,
+      allTransitionsRead:dialogueMap.coverage.allTransitionsRead,
+      singleVoice:true
     }),
     cohesion:Object.freeze({
       ...base.cohesion,
@@ -675,6 +671,7 @@ export function storyCapacity() {
     dependencyDesign:false,
     deepTarotKnowledge:KNOWLEDGE_ENGINE_VERSION,
     positionIntelligence:POSITION_ENGINE_VERSION,
+    cardDialogue:DIALOGUE_ENGINE_VERSION,
     rule:'Whit fala até a leitura ficar inteira — e então sabe silenciar'
   });
 }

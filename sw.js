@@ -1,11 +1,11 @@
-/* Divina Bruxa 4.1.1 · Inteligência das posições do Tarot. */
-const CACHE = 'divina-bruxa-3-shell-20260928-inteligencia-posicoes-1';
+/* Divina Bruxa 4.1.2 · Cartas que conversam. */
+const CACHE = 'divina-bruxa-3-shell-20260928-cartas-conversam-1';
 const PREFIX = 'divina-bruxa-';
 const CORE = [
   './index.html', './styles.css', './app.js', './manifest.webmanifest', './assets/orbe.webp',
   './orb-engine-v68.js', './living-universe-core-v524.js', './living-universe-core-v524.css', './skins-world-v301.js',
   './divina-orb-thumb-v1.webp', './divina-universe-retina-v523.webp', './arbitrio-engine-v360.js',
-  './love-engine-v370.js', './arbitrio-engine-v370.js', './mind-engine-v380.js', './spirit-engine-v390.js', './matter-engine-v400.js', './tarot-story-engine-v402.js', './tarot-soul-engine-v403.js', './tarot-life-engine-v404.js', './tarot-orbe-realities-engine-v405.js', './whit-tarot-reader-engine-v406.js', './whit-superior-tarot-engine-v407.js', './whit-tarot-knowledge-v410.js', './whit-tarot-position-engine-v411.js', './whit-divine-soul-engine-v408.js', './whit-world-v401.js',
+  './love-engine-v370.js', './arbitrio-engine-v370.js', './mind-engine-v380.js', './spirit-engine-v390.js', './matter-engine-v400.js', './tarot-story-engine-v402.js', './tarot-soul-engine-v403.js', './tarot-life-engine-v404.js', './tarot-orbe-realities-engine-v405.js', './whit-tarot-reader-engine-v406.js', './whit-superior-tarot-engine-v407.js', './whit-tarot-knowledge-v410.js', './whit-tarot-position-engine-v411.js', './whit-tarot-dialogue-engine-v412.js', './whit-divine-soul-engine-v408.js', './whit-world-v401.js',
   './data/cards.js', './data/config.js', './data/consultations.js', './data/library.js', './data/media.js',
   './data/plans.js', './school-data-v322.js', './data/skins.js', './data/store.js', './data/worlds.js',
   './lib/daily-card.js', './lib/tarot-state.js', './premium-entitlement-v310.js', './spread-state-v310.js',
