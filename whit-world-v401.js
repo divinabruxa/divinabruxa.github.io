@@ -1,12 +1,12 @@
 /*
- * DIVINA BRUXA 4.0.6 · WHIT TARÓLOGA
+ * DIVINA BRUXA 4.0.7 · WHIT TARÓLOGA · INTELIGÊNCIA SUPERIOR
  *
  * Whit existe somente em sua própria realidade, não interrompe outras
  * páginas e não executa caminhos sem um toque.
  */
 
 import { normalizePreferredName, safeResearchHref } from './matter-engine-v400.js';
-import { STORY_ENGINE_VERSION, storyResponse } from './whit-tarot-reader-engine-v406.js';
+import { STORY_ENGINE_VERSION, storyResponse } from './whit-superior-tarot-engine-v407.js';
 
 const STORAGE_KEY = 'divina-bruxa-3.whit.conversa-local.v11';
 const PROFILE_KEY = 'divina-bruxa-3.whit.materia.v1';
@@ -92,6 +92,7 @@ export function createWhitWorld({ announce, navigate, cards = [], worlds = {}, g
   const preferredName = storedPreference();
   const spiritMode = storedSpiritMode();
   let messages = loadMessages();
+  let consultationContext = null;
   let thinking = false;
   let clearTimer = 0;
 
@@ -191,10 +192,12 @@ export function createWhitWorld({ announce, navigate, cards = [], worlds = {}, g
           preferredName,
           currentRoute:'whit',
           history,
+          consultationContext,
           cards,
           worlds,
           guides
         });
+        consultationContext = creation.consultationContext || consultationContext;
         const next = validMessage({
           role:'whit',
           text:creation.text,
@@ -242,6 +245,7 @@ export function createWhitWorld({ announce, navigate, cards = [], worlds = {}, g
     }
     clearTimeout(clearTimer);
     messages = [];
+    consultationContext = null;
     nodes.clear.dataset.armed = 'false';
     nodes.clear.textContent = 'Limpar conversa';
     save();

@@ -20,7 +20,7 @@ import { createVideosWorld } from './videos-world-v311.js';
 import { RealityOrbEngine } from './orb-engine-v68.js';
 import { createLivingUniverseV524 } from './living-universe-core-v524.js';
 import { arbitrioHash, secureArbitrioSeed } from './arbitrio-engine-v370.js';
-import { storyConversation, storyForCard } from './whit-tarot-reader-engine-v406.js';
+import { storyConversation, storyForCard } from './whit-superior-tarot-engine-v407.js';
 
 const REDUCED_MOTION = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const TAROT_KEY = 'divina-bruxa-3.tarot-livre.v1';
@@ -791,7 +791,7 @@ const daily = {
     this.nodes.card.setAttribute('aria-label', `${card.name}. Ampliar Carta do Dia.`);
     this.nodes.name.textContent = card.name;
     this.nodes.position.textContent = 'SÍMBOLO DE HOJE';
-    this.nodes.meta.textContent = 'Uma carta · uma consulta · cinco forças';
+    this.nodes.meta.textContent = 'Uma carta · uma leitura · uma direção';
     const creation = this.creation();
     this.nodes.messageTitle.textContent = creation.title;
     this.nodes.message.textContent = creationPresence(creation);
@@ -1241,7 +1241,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=4.0.6-whit-tarologa', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=4.0.7-whit-superior', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {
