@@ -13,6 +13,11 @@ import {
   storyResponse as superiorResponse,
   tarotIdentity
 } from './whit-superior-tarot-engine-v407.js';
+import {
+  KNOWLEDGE_ENGINE_VERSION,
+  tarotKnowledge,
+  tarotKnowledgeDeck
+} from './whit-tarot-knowledge-v410.js';
 
 export { tarotIdentity } from './whit-superior-tarot-engine-v407.js';
 
@@ -258,6 +263,7 @@ function divineCard(card, seed, { scope = 'carta', moment = 'agora', intention =
   const stableSeed = `${seed}:${cardKey(card)}:${scope}:${moment}:${normalize(intention)}`;
   const base = inherited || superiorForCard(card, stableSeed, { scope, moment, intention });
   const identity = tarotIdentity(card);
+  const knowledge = tarotKnowledge(card);
   const choice = cardVoiceChoice(identity, base, intention, scope);
   const place = cardPlace(scope, moment, choice.territory);
   const paragraphs = [];
@@ -328,6 +334,11 @@ function divineCard(card, seed, { scope = 'carta', moment = 'agora', intention =
       heartCentered:true,
       fictionalReality:true,
       dependencyDesign:false
+    }),
+    knowledgeProfile:Object.freeze({
+      version:KNOWLEDGE_ENGINE_VERSION,
+      card:knowledge,
+      visibleProse:false
     }),
     cohesion:Object.freeze({
       ...base.cohesion,
@@ -404,6 +415,7 @@ function spreadCounsel(last, seed) {
 function divineSpread(cards, positions, seed, intention, inherited) {
   const base = inherited || superiorConversation(cards, positions, seed, intention);
   const identities = cards.map(tarotIdentity);
+  const knowledge = tarotKnowledgeDeck(cards);
   const analysis = base.superiorProfile?.analysis || {};
   const middleIndex = Number.isInteger(analysis?.center?.index) ? analysis.center.index : Math.floor(cards.length / 2);
   const lastIndex = cards.length - 1;
@@ -480,6 +492,11 @@ function divineSpread(cards, positions, seed, intention, inherited) {
       heartCentered:true,
       fictionalReality:true,
       dependencyDesign:false
+    }),
+    knowledgeProfile:Object.freeze({
+      version:KNOWLEDGE_ENGINE_VERSION,
+      cards:knowledge,
+      visibleProse:false
     }),
     cohesion:Object.freeze({
       ...base.cohesion,
@@ -611,6 +628,7 @@ export function storyCapacity() {
     literalMindReading:false,
     privateSourcesUsed:false,
     dependencyDesign:false,
+    deepTarotKnowledge:KNOWLEDGE_ENGINE_VERSION,
     rule:'Whit fala até a leitura ficar inteira — e então sabe silenciar'
   });
 }
