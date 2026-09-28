@@ -1,12 +1,12 @@
 /*
- * DIVINA BRUXA 4.0.7 · WHIT TARÓLOGA · INTELIGÊNCIA SUPERIOR
+ * DIVINA BRUXA 4.0.8 · WHIT TARÓLOGA · ALMA DIVINA
  *
  * Whit existe somente em sua própria realidade, não interrompe outras
  * páginas e não executa caminhos sem um toque.
  */
 
 import { normalizePreferredName, safeResearchHref } from './matter-engine-v400.js';
-import { STORY_ENGINE_VERSION, storyResponse } from './whit-superior-tarot-engine-v407.js';
+import { STORY_ENGINE_VERSION, storyResponse } from './whit-divine-soul-engine-v408.js';
 
 const STORAGE_KEY = 'divina-bruxa-3.whit.conversa-local.v11';
 const PROFILE_KEY = 'divina-bruxa-3.whit.materia.v1';
