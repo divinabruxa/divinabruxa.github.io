@@ -32,6 +32,11 @@ import {
   humanRealityForCard,
   humanRealitySpread
 } from './whit-tarot-human-reality-v413.js';
+import {
+  NARRATIVE_CONSCIOUSNESS_ENGINE_VERSION,
+  narrativeConsciousnessForCard,
+  narrativeConsciousnessSpread
+} from './whit-tarot-narrative-consciousness-v414.js';
 
 export { tarotIdentity } from './whit-superior-tarot-engine-v407.js';
 
@@ -236,51 +241,41 @@ function divineCard(card, seed, { scope = 'carta', moment = 'agora', intention =
     question:intention,
     positioned
   });
+  const narrative = narrativeConsciousnessForCard(card, {
+    position:moment,
+    question:intention,
+    positioned,
+    human
+  });
   const choice = cardVoiceChoice(identity, base, intention, scope);
-  const place = cardPlace(scope, moment, choice.territory);
   const paragraphs = [];
-  const modules = [];
+  const modules = ['consciência-narrativa'];
+
+  if (choice.mode === 'travessia') {
+    paragraphs.push(narrative.visible.preserved);
+    modules.push('força-preservada');
+  } else if (!human.context.hasContext && choice.mode === 'presença') {
+    paragraphs.push(narrative.visible.preserved);
+    modules.push('força-preservada');
+  }
 
   if (human.context.hasContext) {
-    paragraphs.push(human.focusSentence);
+    paragraphs.push(narrative.visible.revelation);
+    modules.push('revelação');
+  }
+  if (human.context.hasContext) {
     modules.push('realidade-humana');
-  } else if (choice.mode !== 'essência') {
-    paragraphs.push(sentence(realityLine(identity.element, stableSeed)));
-    modules.push('realidade-da-orbe');
   }
 
-  const positionRole = positioned.classification.role;
-  const tendency = human.context.hasContext
-    ? human.tendencySentence
-    : ['future', 'outcome'].includes(positionRole)
-      ? positioned.reading.possibility
-      : sentence(cardTendency(identity, base, stableSeed));
-  if (!['future', 'outcome'].includes(positionRole)) paragraphs.push(tendency);
+  const tendency = narrative.visible.tendency;
+  paragraphs.push(tendency);
   modules.push('tendência');
 
-  if (choice.signals.future) {
-    paragraphs.push('Isso é uma tendência, não uma sentença; seu livre-arbítrio continua vivo.');
-    modules.push('livre-arbítrio');
-  }
-
-  const counsel = human.context.hasContext
-    ? human.actionSentence
-    : positionRole !== 'general'
-      ? positioned.reading.possibility
-      : sentence(choose([
-        `Meu conselho é trazer a carta para a vida: você ${lower(identity.gesture)}`,
-        `A mudança possível começa num gesto: você ${lower(identity.gesture)}`,
-        `Não tente resolver tudo; comece assim: você ${lower(identity.gesture)}`
-      ], stableSeed, 'card-counsel'));
+  const counsel = narrative.visible.counsel;
   paragraphs.push(counsel);
-  modules.push('matéria');
+  modules.push('livre-arbítrio', 'matéria');
 
-  if (choice.mode === 'travessia' && !human.context.hasContext) {
-    paragraphs.push(sentence(`A bênção de ${cardName(card)} não promete ausência de dificuldade; ela lembra que ${lower(identity.consequence)}`));
-    modules.push('bênção');
-  }
-
-  const closing = human.closingSentence || closingLine(identity.element, stableSeed);
+  const closing = narrative.visible.closing;
   return Object.freeze({
     ...base,
     engine:STORY_ENGINE_NAME,
@@ -290,10 +285,8 @@ function divineCard(card, seed, { scope = 'carta', moment = 'agora', intention =
       ? 'WHIT ALMA DIVINA · MENSAGEM DO SEU DIA'
       : 'WHIT ALMA DIVINA · CONSULTA DA CARTA',
     title:`Whit Alma Divina · ${cardName(card)}`,
-    heartline:sentence(cardReveal(card, identity, stableSeed)),
-    whisper:positioned.classification.role === 'general'
-      ? sentence(`${place}, ${lower(identity.pressure)}`)
-      : positioned.reading.statement,
+    heartline:narrative.visible.opening,
+    whisper:narrative.visible.tension,
     paragraphs:Object.freeze(paragraphs),
     story:paragraphs.join('\n\n'),
     closing,
@@ -335,6 +328,14 @@ function divineCard(card, seed, { scope = 'carta', moment = 'agora', intention =
       futureIsConditional:true,
       privateSourcesUsed:false
     }),
+    narrativeConsciousnessProfile:Object.freeze({
+      version:NARRATIVE_CONSCIOUSNESS_ENGINE_VERSION,
+      arc:narrative.arcProfile,
+      coverage:narrative.coverage,
+      completeArc:narrative.coverage.completeArc,
+      repeatedMotorParagraphs:false,
+      finalVoice:'Whit'
+    }),
     cohesion:Object.freeze({
       ...base.cohesion,
       divineSoul:true,
@@ -373,7 +374,6 @@ function soulfulDepthAxes(voices = []) {
 
 function divineSpread(cards, positions, seed, intention, inherited) {
   const base = inherited || superiorConversation(cards, positions, seed, intention);
-  const identities = cards.map(tarotIdentity);
   const knowledge = tarotKnowledgeDeck(cards);
   const positionMap = positionedTarotSpread(cards, positions, { question:intention });
   const dialogueMap = tarotDialogueSpread(cards, positions, {
@@ -385,41 +385,29 @@ function divineSpread(cards, positions, seed, intention, inherited) {
     positioned:positionMap,
     dialogue:dialogueMap
   });
+  const narrativeMap = narrativeConsciousnessSpread(cards, positions, {
+    question:intention,
+    positioned:positionMap,
+    dialogue:dialogueMap,
+    human:humanMap
+  });
   const analysis = base.superiorProfile?.analysis || {};
-  const openingIndex = 0;
-  const middleIndex = positionMap?.axes?.tensionIndex ?? (Number.isInteger(analysis?.center?.index) ? analysis.center.index : Math.floor(cards.length / 2));
+  const openingIndex = positionMap?.axes?.openingIndex ?? 0;
   const directionIndex = positionMap?.axes?.tendencyIndex ?? (cards.length - 1);
-  const first = identities[openingIndex];
-  const pivot = identities[middleIndex];
-  const last = identities[directionIndex];
   const choice = spreadVoiceChoice(base, intention, cards.length);
   const stableSeed = `${seed}:${cards.map(cardKey).join('→')}:${positions.join('→')}:${normalize(intention)}`;
-  const paragraphs = [];
-  const modules = [];
-
-  paragraphs.push(dialogueMap.synthesis);
-  modules.push('cartas-que-conversam');
-
-  const pattern = dialogueMap.patternSentence;
-  if (pattern) {
-    paragraphs.push(pattern);
-    modules.push('discernimento');
-  }
-
-  if (humanMap.focusSentence) {
-    paragraphs.push(humanMap.focusSentence);
-    modules.push('realidade-humana');
-  }
-
-  const tendency = humanMap.tendencySentence;
-  paragraphs.push(tendency);
-  modules.push('tendência');
-
-  const counsel = humanMap.actionSentence;
-  paragraphs.push(counsel);
-  modules.push('matéria');
-
-  const closing = humanMap.closingSentence || closingLine(analysis.dominantElement || last.element, stableSeed);
+  const paragraphs = [...narrativeMap.visible.paragraphs];
+  const modules = [
+    'consciência-narrativa',
+    'cartas-que-conversam',
+    ...(narrativeMap.visible.human ? ['realidade-humana'] : []),
+    'tendência',
+    'livre-arbítrio',
+    'matéria'
+  ];
+  const tendency = narrativeMap.visible.tendency;
+  const counsel = narrativeMap.visible.counsel;
+  const closing = narrativeMap.visible.closing;
   return Object.freeze({
     ...base,
     engine:STORY_ENGINE_NAME,
@@ -427,8 +415,8 @@ function divineSpread(cards, positions, seed, intention, inherited) {
     storyEngine:STORY_ENGINE_NAME,
     label:'WHIT ALMA DIVINA · A ORBE DAS REALIDADES',
     title:`Whit Alma Divina · ${cardName(cards[openingIndex])} → ${cardName(cards[directionIndex])}`,
-    heartline:sentence(spreadOpening(cards[openingIndex], first, positions[openingIndex], stableSeed, positionMap.entries[openingIndex])),
-    lead:sentence(spreadCenter(cards[middleIndex], pivot, positions[middleIndex], choice.territory, stableSeed, positionMap.entries[middleIndex])),
+    heartline:narrativeMap.visible.opening,
+    lead:narrativeMap.visible.tension,
     paragraphs:Object.freeze(paragraphs),
     story:paragraphs.join('\n\n'),
     closing,
@@ -501,6 +489,15 @@ function divineSpread(cards, positions, seed, intention, inherited) {
       futureIsConditional:true,
       privateSourcesUsed:false,
       singleVoice:true
+    }),
+    narrativeConsciousnessProfile:Object.freeze({
+      version:NARRATIVE_CONSCIOUSNESS_ENGINE_VERSION,
+      arc:narrativeMap.arcProfile,
+      pattern:narrativeMap.pattern,
+      coverage:narrativeMap.coverage,
+      completeArc:narrativeMap.coverage.completeArc,
+      repeatedMotorParagraphs:false,
+      finalVoice:'Whit'
     }),
     cohesion:Object.freeze({
       ...base.cohesion,
@@ -636,6 +633,7 @@ export function storyCapacity() {
     positionIntelligence:POSITION_ENGINE_VERSION,
     cardDialogue:DIALOGUE_ENGINE_VERSION,
     humanReality:HUMAN_REALITY_ENGINE_VERSION,
+    narrativeConsciousness:NARRATIVE_CONSCIOUSNESS_ENGINE_VERSION,
     rule:'Whit fala até a leitura ficar inteira — e então sabe silenciar'
   });
 }

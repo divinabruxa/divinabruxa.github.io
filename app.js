@@ -1241,7 +1241,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=4.1.3-realidade-humana', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=4.1.4-consciencia-narrativa', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {
