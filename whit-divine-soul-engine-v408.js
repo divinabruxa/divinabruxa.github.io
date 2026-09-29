@@ -52,6 +52,11 @@ import {
   supremeCounselForCard,
   supremeCounselSpread
 } from './whit-tarot-supreme-counsel-v417.js';
+import {
+  PROVING_GROUND_ENGINE_VERSION,
+  proveCardReading,
+  proveSpreadReading
+} from './whit-tarot-proving-ground-v418.js';
 
 export { tarotIdentity } from './whit-superior-tarot-engine-v407.js';
 
@@ -314,7 +319,7 @@ function divineCard(card, seed, { scope = 'carta', moment = 'agora', intention =
   modules.push('livre-arbítrio', 'matéria');
 
   const closing = soulVoice.visible.closing;
-  return Object.freeze({
+  const reading = {
     ...base,
     engine:STORY_ENGINE_NAME,
     version:STORY_ENGINE_VERSION,
@@ -397,6 +402,13 @@ function divineCard(card, seed, { scope = 'carta', moment = 'agora', intention =
       adaptiveDepth:true,
       heartCentered:true,
       singleVoice:true
+    })
+  };
+  return Object.freeze({
+    ...reading,
+    provingGroundProfile:proveCardReading(reading, card, {
+      position:moment,
+      question:intention
     })
   });
 }
@@ -490,7 +502,7 @@ function divineSpread(cards, positions, seed, intention, inherited) {
   const tendency = soulVoiceMap.visible.tendency;
   const counsel = supremeCounselMap.visible.counsel;
   const closing = soulVoiceMap.visible.closing;
-  return Object.freeze({
+  const reading = {
     ...base,
     engine:STORY_ENGINE_NAME,
     version:STORY_ENGINE_VERSION,
@@ -606,6 +618,12 @@ function divineSpread(cards, positions, seed, intention, inherited) {
       heartCentered:true,
       wholeTable:true,
       singleVoice:true
+    })
+  };
+  return Object.freeze({
+    ...reading,
+    provingGroundProfile:proveSpreadReading(reading, cards, positions, {
+      question:intention
     })
   });
 }
@@ -741,6 +759,7 @@ export function storyCapacity() {
     soulVoice:SOUL_VOICE_ENGINE_VERSION,
     livingDepth:LIVING_DEPTH_ENGINE_VERSION,
     supremeCounsel:SUPREME_COUNSEL_ENGINE_VERSION,
+    provingGround:PROVING_GROUND_ENGINE_VERSION,
     rule:'Whit fala até a leitura ficar inteira — e então sabe silenciar'
   });
 }
