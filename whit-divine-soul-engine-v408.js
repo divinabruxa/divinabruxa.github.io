@@ -53,6 +53,11 @@ import {
   supremeCounselSpread
 } from './whit-tarot-supreme-counsel-v417.js';
 import {
+  SOUL_CONSULTATION_ENGINE_VERSION,
+  soulConsultationForCard,
+  soulConsultationSpread
+} from './whit-tarot-soul-consultation-v419.js';
+import {
   PROVING_GROUND_ENGINE_VERSION,
   proveCardReading,
   proveSpreadReading
@@ -290,35 +295,21 @@ function divineCard(card, seed, { scope = 'carta', moment = 'agora', intention =
     soulVoice,
     supremeCounsel
   });
+  const soulConsultation = soulConsultationForCard(positioned, {
+    human,
+    narrative,
+    supremeCounsel
+  });
   const choice = cardVoiceChoice(identity, base, intention, scope);
-  const paragraphs = [];
-  const modules = ['conselho-supremo', 'alma-e-voz', 'consciência-narrativa'];
-
-  if (choice.mode === 'travessia') {
-    paragraphs.push(soulVoice.visible.preserved);
-    modules.push('força-preservada');
-  } else if (!human.context.hasContext && choice.mode === 'presença') {
-    paragraphs.push(soulVoice.visible.preserved);
-    modules.push('força-preservada');
-  }
-
-  if (human.context.hasContext) {
-    paragraphs.push(soulVoice.visible.revelation);
-    modules.push('revelação');
-  }
-  if (human.context.hasContext) {
-    modules.push('realidade-humana');
-  }
-
-  const tendency = soulVoice.visible.tendency;
-  paragraphs.push(tendency);
-  modules.push('tendência');
-
-  const counsel = supremeCounsel.visible.counsel;
-  paragraphs.push(counsel);
-  modules.push('livre-arbítrio', 'matéria');
-
-  const closing = soulVoice.visible.closing;
+  const paragraphs = [...soulConsultation.visible.paragraphs];
+  const modules = [
+    'alma-da-consulta', 'conselho-supremo', 'alma-e-voz',
+    'consciência-narrativa', 'realidade-humana', 'tendência',
+    'livre-arbítrio', 'matéria'
+  ];
+  const tendency = soulConsultation.visible.tendency;
+  const counsel = soulConsultation.visible.counsel;
+  const closing = soulConsultation.visible.closing;
   const reading = {
     ...base,
     engine:STORY_ENGINE_NAME,
@@ -328,15 +319,18 @@ function divineCard(card, seed, { scope = 'carta', moment = 'agora', intention =
       ? 'WHIT ALMA DIVINA · MENSAGEM DO SEU DIA'
       : 'WHIT ALMA DIVINA · CONSULTA DA CARTA',
     title:`Whit Alma Divina · ${cardName(card)}`,
-    heartline:soulVoice.visible.opening,
-    whisper:soulVoice.visible.tension,
+    heartline:soulConsultation.visible.opening,
+    whisper:soulConsultation.visible.tension,
     paragraphs:Object.freeze(paragraphs),
     story:paragraphs.join('\n\n'),
     closing,
     tendencyText:tendency,
     counselText:counsel,
     depthOptions:livingDepth.options,
-    depthResponses:livingDepth.responses,
+    depthResponses:Object.freeze({
+      ...livingDepth.responses,
+      ...soulConsultation.depthResponses
+    }),
     signature:signature(stableSeed, 'whit-divine-soul-card'),
     readerProfile:Object.freeze({
       ...base.readerProfile,
@@ -395,6 +389,10 @@ function divineCard(card, seed, { scope = 'carta', moment = 'agora', intention =
       version:SUPREME_COUNSEL_ENGINE_VERSION,
       ...supremeCounsel.profile,
       integrity:supremeCounsel.integrity
+    }),
+    soulConsultationProfile:Object.freeze({
+      version:SOUL_CONSULTATION_ENGINE_VERSION,
+      ...soulConsultation.profile
     }),
     cohesion:Object.freeze({
       ...base.cohesion,
@@ -481,15 +479,19 @@ function divineSpread(cards, positions, seed, intention, inherited) {
     soulVoice:soulVoiceMap,
     supremeCounsel:supremeCounselMap
   });
+  const soulConsultationMap = soulConsultationSpread(positionMap, {
+    human:humanMap,
+    narrative:narrativeMap,
+    supremeCounsel:supremeCounselMap
+  });
   const analysis = base.superiorProfile?.analysis || {};
   const openingIndex = positionMap?.axes?.openingIndex ?? 0;
   const directionIndex = positionMap?.axes?.tendencyIndex ?? (cards.length - 1);
   const choice = spreadVoiceChoice(base, intention, cards.length);
   const stableSeed = `${seed}:${cards.map(cardKey).join('→')}:${positions.join('→')}:${normalize(intention)}`;
-  const paragraphs = soulVoiceMap.visible.paragraphs.map(paragraph =>
-    paragraph === soulVoiceMap.visible.counsel ? supremeCounselMap.visible.counsel : paragraph
-  );
+  const paragraphs = [...soulConsultationMap.visible.paragraphs];
   const modules = [
+    'alma-da-consulta',
     'conselho-supremo',
     'alma-e-voz',
     'consciência-narrativa',
@@ -499,9 +501,9 @@ function divineSpread(cards, positions, seed, intention, inherited) {
     'livre-arbítrio',
     'matéria'
   ];
-  const tendency = soulVoiceMap.visible.tendency;
-  const counsel = supremeCounselMap.visible.counsel;
-  const closing = soulVoiceMap.visible.closing;
+  const tendency = soulConsultationMap.visible.tendency;
+  const counsel = soulConsultationMap.visible.counsel;
+  const closing = soulConsultationMap.visible.closing;
   const reading = {
     ...base,
     engine:STORY_ENGINE_NAME,
@@ -509,8 +511,8 @@ function divineSpread(cards, positions, seed, intention, inherited) {
     storyEngine:STORY_ENGINE_NAME,
     label:'WHIT ALMA DIVINA · A ORBE DAS REALIDADES',
     title:`Whit Alma Divina · ${cardName(cards[openingIndex])} → ${cardName(cards[directionIndex])}`,
-    heartline:soulVoiceMap.visible.opening,
-    lead:soulVoiceMap.visible.tension,
+    heartline:soulConsultationMap.visible.opening,
+    lead:soulConsultationMap.visible.tension,
     paragraphs:Object.freeze(paragraphs),
     story:paragraphs.join('\n\n'),
     closing,
@@ -518,7 +520,10 @@ function divineSpread(cards, positions, seed, intention, inherited) {
     tendencyText:tendency,
     counselText:counsel,
     depthOptions:livingDepthMap.options,
-    depthResponses:livingDepthMap.responses,
+    depthResponses:Object.freeze({
+      ...livingDepthMap.responses,
+      ...soulConsultationMap.depthResponses
+    }),
     signature:signature(stableSeed, 'whit-divine-soul-spread'),
     readerProfile:Object.freeze({
       ...base.readerProfile,
@@ -610,6 +615,10 @@ function divineSpread(cards, positions, seed, intention, inherited) {
       version:SUPREME_COUNSEL_ENGINE_VERSION,
       ...supremeCounselMap.profile,
       integrity:supremeCounselMap.integrity
+    }),
+    soulConsultationProfile:Object.freeze({
+      version:SOUL_CONSULTATION_ENGINE_VERSION,
+      ...soulConsultationMap.profile
     }),
     cohesion:Object.freeze({
       ...base.cohesion,
@@ -759,6 +768,7 @@ export function storyCapacity() {
     soulVoice:SOUL_VOICE_ENGINE_VERSION,
     livingDepth:LIVING_DEPTH_ENGINE_VERSION,
     supremeCounsel:SUPREME_COUNSEL_ENGINE_VERSION,
+    soulConsultation:SOUL_CONSULTATION_ENGINE_VERSION,
     provingGround:PROVING_GROUND_ENGINE_VERSION,
     rule:'Whit fala até a leitura ficar inteira — e então sabe silenciar'
   });
