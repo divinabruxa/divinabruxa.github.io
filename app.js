@@ -122,6 +122,31 @@ function creationSignature(creation) {
   return `WHIT TARÓLOGA ${creation?.signature || 'LOCAL'} · CONSULTA BASEADA NAS CARTAS`;
 }
 
+function renderLivingDepth(choices, response, creation) {
+  if (!choices || !response) return;
+  choices.replaceChildren();
+  response.textContent = '';
+  response.hidden = true;
+  const options = Array.isArray(creation?.depthOptions) ? creation.depthOptions : [];
+  choices.hidden = options.length === 0;
+  options.forEach(option => {
+    const text = creation?.depthResponses?.[option.key];
+    if (!text) return;
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = option.label;
+    button.setAttribute('aria-pressed', 'false');
+    button.addEventListener('click', () => {
+      choices.querySelectorAll('button').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+      response.textContent = text;
+      response.hidden = false;
+      announce(`Whit aprofundou: ${option.label}.`);
+    });
+    choices.append(button);
+  });
+  choices.hidden = choices.childElementCount === 0;
+}
+
 function pulseOrb() {
   orb.classList.remove('is-answering');
   void orb.offsetWidth;
@@ -434,6 +459,8 @@ const tarot = {
     arbitrioWhisper:document.querySelector('#tarotArbitrioWhisper'),
     arbitrioStory:document.querySelector('#tarotArbitrioStory'),
     arbitrioClosing:document.querySelector('#tarotArbitrioClosing'),
+    depthChoices:document.querySelector('#tarotDepthChoices'),
+    depthResponse:document.querySelector('#tarotDepthResponse'),
     arbitrioSignature:document.querySelector('#tarotArbitrioSignature')
   },
 
@@ -457,11 +484,15 @@ const tarot = {
     this.nodes.arbitrioAction.disabled = !card;
     this.nodes.arbitrioAction.textContent = creation ? 'RELER CONSULTA' : 'CONSULTAR WHIT TARÓLOGA';
     this.nodes.arbitrioPanel.hidden = !creation;
-    if (!creation) return;
+    if (!creation) {
+      renderLivingDepth(this.nodes.depthChoices, this.nodes.depthResponse, null);
+      return;
+    }
     this.nodes.arbitrioTitle.textContent = creation.title;
     this.nodes.arbitrioWhisper.textContent = creationPresence(creation);
     this.nodes.arbitrioStory.textContent = creationStory(creation);
     this.nodes.arbitrioClosing.textContent = creation.closing;
+    renderLivingDepth(this.nodes.depthChoices, this.nodes.depthResponse, creation);
     this.nodes.arbitrioSignature.textContent = creationSignature(creation);
   },
 
@@ -612,6 +643,8 @@ const dialogArbitrio = document.querySelector('#dialogArbitrio');
 const dialogArbitrioLabel = document.querySelector('#dialogArbitrioLabel');
 const dialogArbitrioTitle = document.querySelector('#dialogArbitrioTitle');
 const dialogArbitrioClosing = document.querySelector('#dialogArbitrioClosing');
+const dialogDepthChoices = document.querySelector('#dialogDepthChoices');
+const dialogDepthResponse = document.querySelector('#dialogDepthResponse');
 const dialogArbitrioSignature = document.querySelector('#dialogArbitrioSignature');
 const dialogArbitrioAction = document.querySelector('#dialogArbitrioAction');
 const dialogArbitrioNote = document.querySelector('#dialogArbitrioNote');
@@ -620,11 +653,15 @@ let dialogArbitrioContext = null;
 function renderDialogArbitrio(creation) {
   dialogArbitrio.hidden = !creation;
   dialogCardOracle.hidden = !creation;
-  if (!creation) return;
+  if (!creation) {
+    renderLivingDepth(dialogDepthChoices, dialogDepthResponse, null);
+    return;
+  }
   dialogArbitrioLabel.textContent = 'WHIT TARÓLOGA · CONSULTA DA SUA VIDA';
   dialogArbitrioTitle.textContent = creation.title;
   dialogCardOracle.textContent = `${creationPresence(creation)}\n\n${creationStory(creation)}`;
   dialogArbitrioClosing.textContent = creation.closing;
+  renderLivingDepth(dialogDepthChoices, dialogDepthResponse, creation);
   dialogArbitrioSignature.textContent = creationSignature(creation);
   dialogArbitrioAction.textContent = 'RELER CONSULTA';
 }
@@ -689,6 +726,8 @@ const daily = {
     depth:document.querySelector('#dailyDepth'),
     depthMessage:document.querySelector('#dailyDepthMessage'),
     closing:document.querySelector('#dailyArbitrioClosing'),
+    depthChoices:document.querySelector('#dailyDepthChoices'),
+    depthResponse:document.querySelector('#dailyDepthResponse'),
     signature:document.querySelector('#dailyArbitrioSignature'),
     again:document.querySelector('#dailyArbitrioAgain'),
     state:document.querySelector('#dailyState')
@@ -780,6 +819,7 @@ const daily = {
       this.nodes.depth.open = false;
       this.nodes.depthMessage.textContent = '';
       this.nodes.closing.textContent = '';
+      renderLivingDepth(this.nodes.depthChoices, this.nodes.depthResponse, null);
       this.nodes.signature.textContent = '';
       this.nodes.state.textContent = 'Ainda não revelada neste aparelho.';
       if (currentRoute === 'carta-do-dia') orbCue.textContent = 'Revelar a aurora';
@@ -797,6 +837,7 @@ const daily = {
     this.nodes.message.textContent = creationPresence(creation);
     this.nodes.depthMessage.textContent = creationStory(creation);
     this.nodes.closing.textContent = creation.closing;
+    renderLivingDepth(this.nodes.depthChoices, this.nodes.depthResponse, creation);
     this.nodes.signature.textContent = creationSignature(creation);
     this.nodes.depth.hidden = false;
     this.nodes.state.textContent = 'Carta e consulta guardadas neste aparelho até o próximo ciclo de Brasília.';
@@ -860,6 +901,8 @@ const spreads = {
     synthesisPrompt:document.querySelector('#spreadSynthesisPrompt'),
     synthesisStory:document.querySelector('#spreadSynthesisStory'),
     synthesisClosing:document.querySelector('#spreadSynthesisClosing'),
+    depthChoices:document.querySelector('#spreadDepthChoices'),
+    depthResponse:document.querySelector('#spreadDepthResponse'),
     synthesisSignature:document.querySelector('#spreadSynthesisSignature'),
     arbitrioAgain:document.querySelector('#spreadArbitrioAgain')
   },
@@ -1002,6 +1045,7 @@ const spreads = {
     if (!usable || revealed < 1) {
       this.nodes.synthesis.hidden = true;
       this.nodes.synthesisFacts.replaceChildren();
+      renderLivingDepth(this.nodes.depthChoices, this.nodes.depthResponse, null);
       return;
     }
     const cards = this.state.order.slice(0, revealed).map(cardId => CARD_BY_ID.get(cardId));
@@ -1009,12 +1053,14 @@ const spreads = {
     const synthesis = storyConversation(cards, this.definition.positions.slice(0, revealed), seed, this.state.intention);
     if (!synthesis) {
       this.nodes.synthesis.hidden = true;
+      renderLivingDepth(this.nodes.depthChoices, this.nodes.depthResponse, null);
       return;
     }
     this.nodes.synthesisTitle.textContent = synthesis.title;
     this.nodes.synthesisPrompt.textContent = conversationPresence(synthesis);
     this.nodes.synthesisStory.textContent = synthesis.story;
     this.nodes.synthesisClosing.textContent = synthesis.closing;
+    renderLivingDepth(this.nodes.depthChoices, this.nodes.depthResponse, synthesis);
     this.nodes.synthesisSignature.textContent = creationSignature(synthesis);
     this.nodes.synthesisFacts.replaceChildren(...synthesis.voices.map(fact => {
       const item = document.createElement('li');
@@ -1241,7 +1287,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=4.1.5-alma-e-voz', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=4.1.6-profundidade-viva', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {

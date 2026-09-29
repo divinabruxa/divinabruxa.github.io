@@ -42,6 +42,11 @@ import {
   soulVoiceForCard,
   soulVoiceSpread
 } from './whit-tarot-soul-voice-v415.js';
+import {
+  LIVING_DEPTH_ENGINE_VERSION,
+  livingDepthForCard,
+  livingDepthSpread
+} from './whit-tarot-living-depth-v416.js';
 
 export { tarotIdentity } from './whit-superior-tarot-engine-v407.js';
 
@@ -259,6 +264,14 @@ function divineCard(card, seed, { scope = 'carta', moment = 'agora', intention =
     human,
     narrative
   });
+  const livingDepth = livingDepthForCard(card, {
+    position:moment,
+    question:intention,
+    positioned,
+    human,
+    narrative,
+    soulVoice
+  });
   const choice = cardVoiceChoice(identity, base, intention, scope);
   const paragraphs = [];
   const modules = ['alma-e-voz', 'consciência-narrativa'];
@@ -304,6 +317,8 @@ function divineCard(card, seed, { scope = 'carta', moment = 'agora', intention =
     closing,
     tendencyText:tendency,
     counselText:counsel,
+    depthOptions:livingDepth.options,
+    depthResponses:livingDepth.responses,
     signature:signature(stableSeed, 'whit-divine-soul-card'),
     readerProfile:Object.freeze({
       ...base.readerProfile,
@@ -352,6 +367,11 @@ function divineCard(card, seed, { scope = 'carta', moment = 'agora', intention =
       version:SOUL_VOICE_ENGINE_VERSION,
       ...soulVoice.profile,
       integrity:soulVoice.integrity
+    }),
+    livingDepthProfile:Object.freeze({
+      version:LIVING_DEPTH_ENGINE_VERSION,
+      ...livingDepth.profile,
+      coverage:livingDepth.coverage
     }),
     cohesion:Object.freeze({
       ...base.cohesion,
@@ -415,6 +435,14 @@ function divineSpread(cards, positions, seed, intention, inherited) {
     human:humanMap,
     narrative:narrativeMap
   });
+  const livingDepthMap = livingDepthSpread(cards, positions, {
+    question:intention,
+    positioned:positionMap,
+    dialogue:dialogueMap,
+    human:humanMap,
+    narrative:narrativeMap,
+    soulVoice:soulVoiceMap
+  });
   const analysis = base.superiorProfile?.analysis || {};
   const openingIndex = positionMap?.axes?.openingIndex ?? 0;
   const directionIndex = positionMap?.axes?.tendencyIndex ?? (cards.length - 1);
@@ -448,6 +476,8 @@ function divineSpread(cards, positions, seed, intention, inherited) {
     voices:soulfulDepthAxes(base.voices),
     tendencyText:tendency,
     counselText:counsel,
+    depthOptions:livingDepthMap.options,
+    depthResponses:livingDepthMap.responses,
     signature:signature(stableSeed, 'whit-divine-soul-spread'),
     readerProfile:Object.freeze({
       ...base.readerProfile,
@@ -530,6 +560,11 @@ function divineSpread(cards, positions, seed, intention, inherited) {
       integrity:soulVoiceMap.integrity,
       coverage:soulVoiceMap.coverage
     }),
+    livingDepthProfile:Object.freeze({
+      version:LIVING_DEPTH_ENGINE_VERSION,
+      ...livingDepthMap.profile,
+      coverage:livingDepthMap.coverage
+    }),
     cohesion:Object.freeze({
       ...base.cohesion,
       divineSoul:true,
@@ -588,11 +623,15 @@ function followUpType(input) {
   const value = normalize(input);
   if (/\b(?:e o conselho|qual o conselho|so o conselho|somente o conselho)\b/.test(value)) return 'counsel';
   if (/\b(?:e a tendencia|qual a tendencia|e o futuro|para onde vai)\b/.test(value)) return 'tendency';
-  if (/\b(?:aprofundar|explique mais|entender as cartas|explicar a posicao)\b/.test(value)) return 'depth';
+  if (/\b(?:aprofundar o amor|e no amor|no amor)\b/.test(value)) return 'love';
+  if (/\b(?:entender as cartas|explique as cartas)\b/.test(value)) return 'cards';
+  if (/\b(?:explicar a posicao|explique a posicao|entender a posicao)\b/.test(value)) return 'position';
+  if (/\b(?:aprofundar|explique mais)\b/.test(value)) return 'depth';
   return '';
 }
 
 function responseText(reading, focus = '') {
+  if (reading.depthResponses?.[focus]) return reading.depthResponses[focus];
   if (focus === 'counsel') return [reading.counselText, reading.closing].filter(Boolean).join(' ');
   if (focus === 'tendency') {
     return [reading.tendencyText, 'O caminho continua vivo porque sua escolha ainda participa dele.'].filter(Boolean).join(' ');
@@ -666,6 +705,7 @@ export function storyCapacity() {
     humanReality:HUMAN_REALITY_ENGINE_VERSION,
     narrativeConsciousness:NARRATIVE_CONSCIOUSNESS_ENGINE_VERSION,
     soulVoice:SOUL_VOICE_ENGINE_VERSION,
+    livingDepth:LIVING_DEPTH_ENGINE_VERSION,
     rule:'Whit fala até a leitura ficar inteira — e então sabe silenciar'
   });
 }

@@ -1002,6 +1002,42 @@ body[data-route="tiragens"] .cosmos__veil {
 .spread-synthesis__actions .arbitrio-signature { margin-top: 0; }
 .spread-synthesis__actions .arbitrio-invoke { margin-top: .4rem; }
 
+.living-depth__choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .42rem;
+  margin-top: .78rem;
+}
+.living-depth__choices[hidden],
+.living-depth__response[hidden] { display: none; }
+.living-depth__choices button {
+  min-height: 2.25rem;
+  padding: .48rem .7rem;
+  border: 1px solid rgb(245 213 139 / .2);
+  border-radius: 999px;
+  background: rgb(255 255 255 / .035);
+  color: rgb(255 246 229 / .78);
+  font: inherit;
+  font-size: .68rem;
+  letter-spacing: .045em;
+}
+.living-depth__choices button:is(:hover, :focus-visible),
+.living-depth__choices button[aria-pressed="true"] {
+  border-color: rgb(245 213 139 / .54);
+  background: rgb(132 54 176 / .2);
+  color: rgb(255 248 232 / .96);
+}
+.living-depth__response {
+  margin: .72rem 0 0;
+  padding: .72rem .78rem;
+  border-left: 1px solid rgb(245 213 139 / .36);
+  color: rgb(255 255 255 / .78);
+  font-family: Iowan Old Style, Baskerville, "Times New Roman", serif;
+  font-size: .82rem;
+  line-height: 1.58;
+  white-space: pre-line;
+}
+
 .spread-footer {
   display: flex;
   align-items: center;
