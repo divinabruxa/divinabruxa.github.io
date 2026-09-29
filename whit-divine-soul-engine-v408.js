@@ -47,6 +47,11 @@ import {
   livingDepthForCard,
   livingDepthSpread
 } from './whit-tarot-living-depth-v416.js';
+import {
+  SUPREME_COUNSEL_ENGINE_VERSION,
+  supremeCounselForCard,
+  supremeCounselSpread
+} from './whit-tarot-supreme-counsel-v417.js';
 
 export { tarotIdentity } from './whit-superior-tarot-engine-v407.js';
 
@@ -264,17 +269,25 @@ function divineCard(card, seed, { scope = 'carta', moment = 'agora', intention =
     human,
     narrative
   });
+  const supremeCounsel = supremeCounselForCard(card, {
+    position:moment,
+    question:intention,
+    positioned,
+    human,
+    narrative
+  });
   const livingDepth = livingDepthForCard(card, {
     position:moment,
     question:intention,
     positioned,
     human,
     narrative,
-    soulVoice
+    soulVoice,
+    supremeCounsel
   });
   const choice = cardVoiceChoice(identity, base, intention, scope);
   const paragraphs = [];
-  const modules = ['alma-e-voz', 'consciência-narrativa'];
+  const modules = ['conselho-supremo', 'alma-e-voz', 'consciência-narrativa'];
 
   if (choice.mode === 'travessia') {
     paragraphs.push(soulVoice.visible.preserved);
@@ -296,7 +309,7 @@ function divineCard(card, seed, { scope = 'carta', moment = 'agora', intention =
   paragraphs.push(tendency);
   modules.push('tendência');
 
-  const counsel = soulVoice.visible.counsel;
+  const counsel = supremeCounsel.visible.counsel;
   paragraphs.push(counsel);
   modules.push('livre-arbítrio', 'matéria');
 
@@ -373,6 +386,11 @@ function divineCard(card, seed, { scope = 'carta', moment = 'agora', intention =
       ...livingDepth.profile,
       coverage:livingDepth.coverage
     }),
+    supremeCounselProfile:Object.freeze({
+      version:SUPREME_COUNSEL_ENGINE_VERSION,
+      ...supremeCounsel.profile,
+      integrity:supremeCounsel.integrity
+    }),
     cohesion:Object.freeze({
       ...base.cohesion,
       divineSoul:true,
@@ -435,21 +453,32 @@ function divineSpread(cards, positions, seed, intention, inherited) {
     human:humanMap,
     narrative:narrativeMap
   });
+  const supremeCounselMap = supremeCounselSpread(cards, positions, {
+    question:intention,
+    positioned:positionMap,
+    dialogue:dialogueMap,
+    human:humanMap,
+    narrative:narrativeMap
+  });
   const livingDepthMap = livingDepthSpread(cards, positions, {
     question:intention,
     positioned:positionMap,
     dialogue:dialogueMap,
     human:humanMap,
     narrative:narrativeMap,
-    soulVoice:soulVoiceMap
+    soulVoice:soulVoiceMap,
+    supremeCounsel:supremeCounselMap
   });
   const analysis = base.superiorProfile?.analysis || {};
   const openingIndex = positionMap?.axes?.openingIndex ?? 0;
   const directionIndex = positionMap?.axes?.tendencyIndex ?? (cards.length - 1);
   const choice = spreadVoiceChoice(base, intention, cards.length);
   const stableSeed = `${seed}:${cards.map(cardKey).join('→')}:${positions.join('→')}:${normalize(intention)}`;
-  const paragraphs = [...soulVoiceMap.visible.paragraphs];
+  const paragraphs = soulVoiceMap.visible.paragraphs.map(paragraph =>
+    paragraph === soulVoiceMap.visible.counsel ? supremeCounselMap.visible.counsel : paragraph
+  );
   const modules = [
+    'conselho-supremo',
     'alma-e-voz',
     'consciência-narrativa',
     'cartas-que-conversam',
@@ -459,7 +488,7 @@ function divineSpread(cards, positions, seed, intention, inherited) {
     'matéria'
   ];
   const tendency = soulVoiceMap.visible.tendency;
-  const counsel = soulVoiceMap.visible.counsel;
+  const counsel = supremeCounselMap.visible.counsel;
   const closing = soulVoiceMap.visible.closing;
   return Object.freeze({
     ...base,
@@ -564,6 +593,11 @@ function divineSpread(cards, positions, seed, intention, inherited) {
       version:LIVING_DEPTH_ENGINE_VERSION,
       ...livingDepthMap.profile,
       coverage:livingDepthMap.coverage
+    }),
+    supremeCounselProfile:Object.freeze({
+      version:SUPREME_COUNSEL_ENGINE_VERSION,
+      ...supremeCounselMap.profile,
+      integrity:supremeCounselMap.integrity
     }),
     cohesion:Object.freeze({
       ...base.cohesion,
@@ -706,6 +740,7 @@ export function storyCapacity() {
     narrativeConsciousness:NARRATIVE_CONSCIOUSNESS_ENGINE_VERSION,
     soulVoice:SOUL_VOICE_ENGINE_VERSION,
     livingDepth:LIVING_DEPTH_ENGINE_VERSION,
+    supremeCounsel:SUPREME_COUNSEL_ENGINE_VERSION,
     rule:'Whit fala até a leitura ficar inteira — e então sabe silenciar'
   });
 }

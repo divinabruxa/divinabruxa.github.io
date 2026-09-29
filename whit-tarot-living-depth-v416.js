@@ -96,7 +96,8 @@ export function livingDepthForCard(card, {
   positioned = null,
   human = null,
   narrative = null,
-  soulVoice = null
+  soulVoice = null,
+  supremeCounsel = null
 } = {}) {
   if (!card) return null;
   const entry = positioned || positionedTarotCard(card, position, { question });
@@ -121,7 +122,7 @@ export function livingDepthForCard(card, {
       sentence(narrativeMap.visible.tendency),
       sentence('O caminho ganha força se o padrão continuar, mas ainda responde às suas escolhas')
     ].join(' '),
-    counsel:[
+    counsel:supremeCounsel?.visible?.counsel || [
       sentence(narrativeMap.visible.counsel),
       sentence(`O gesto decisivo é ${lower(entry.reading.movement)}`)
     ].join(' '),
@@ -146,7 +147,8 @@ export function livingDepthSpread(cards = [], positions = [], {
   dialogue = null,
   human = null,
   narrative = null,
-  soulVoice = null
+  soulVoice = null,
+  supremeCounsel = null
 } = {}) {
   const validCards = (Array.isArray(cards) ? cards : []).filter(Boolean);
   if (!validCards.length) return null;
@@ -154,7 +156,7 @@ export function livingDepthSpread(cards = [], positions = [], {
     return livingDepthForCard(validCards[0], {
       position:positions?.[0] || 'Posição revelada', question,
       positioned:positioned?.entries?.[0], human:human?.card ? human : null,
-      narrative, soulVoice
+      narrative, soulVoice, supremeCounsel
     });
   }
   const safePositions = validCards.map((_, index) => clean(positions?.[index], 100) || `Posição ${index + 1}`);
@@ -200,7 +202,7 @@ export function livingDepthSpread(cards = [], positions = [], {
         `${inlineName(cardName(tension))} e ${inlineName(cardName(tendency))}`
       )
     ].join(' '),
-    counsel:[
+    counsel:supremeCounsel?.visible?.counsel || [
       sentence(narrativeMap.visible.counsel),
       sentence(`O gesto prático é ${lower(counsel.reading.movement)}`)
     ].join(' '),
