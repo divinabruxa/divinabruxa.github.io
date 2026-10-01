@@ -20,7 +20,7 @@ import { createVideosWorld } from './videos-world-v311.js';
 import { RealityOrbEngine } from './orb-engine-v68.js';
 import { createLivingUniverseV524 } from './living-universe-core-v524.js';
 import { arbitrioHash, secureArbitrioSeed } from './arbitrio-engine-v370.js';
-import { storyConversation, storyForCard } from './whit-divine-soul-engine-v408.js';
+import { whitTarotReading } from './whit-divine-soul-engine-v408.js';
 
 const REDUCED_MOTION = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const TAROT_KEY = 'divina-bruxa-3.tarot-livre.v1';
@@ -499,9 +499,11 @@ const tarot = {
   invent() {
     const card = this.current();
     if (!card) return;
-    const creation = storyForCard(card, secureArbitrioSeed(), {
-      scope:'tarot-livre',
-      moment:`posição-${this.state.cursor + 1}`
+    const creation = whitTarotReading({
+      cards:[card],
+      positions:[`posição-${this.state.cursor + 1}`],
+      seed:secureArbitrioSeed(),
+      scope:'tarot-livre'
     });
     this.arbitrioByPosition.set(this.state.cursor, creation);
     this.renderArbitrio(card);
@@ -692,10 +694,12 @@ function showCardDialog(card, position, publicHref = '', oracleText = '', option
 
 dialogArbitrioAction.addEventListener('click', () => {
   if (!dialogArbitrioContext) return;
-  const creation = storyForCard(dialogArbitrioContext.card, secureArbitrioSeed(), {
-    scope:dialogArbitrioContext.scope,
-    moment:dialogArbitrioContext.moment,
-    intention:dialogArbitrioContext.intention
+  const creation = whitTarotReading({
+    cards:[dialogArbitrioContext.card],
+    positions:[dialogArbitrioContext.moment],
+    seed:secureArbitrioSeed(),
+    question:dialogArbitrioContext.intention,
+    scope:dialogArbitrioContext.scope
   });
   renderDialogArbitrio(creation);
   pulseOrb();
@@ -757,9 +761,11 @@ const daily = {
   },
 
   creation() {
-    return storyForCard(this.card, this.arbitrioSeed(), {
-      scope:'carta-do-dia',
-      moment:this.dateKey
+    return whitTarotReading({
+      cards:[this.card],
+      positions:[this.dateKey],
+      seed:this.arbitrioSeed(),
+      scope:'carta-do-dia'
     });
   },
 
@@ -1050,7 +1056,13 @@ const spreads = {
     }
     const cards = this.state.order.slice(0, revealed).map(cardId => CARD_BY_ID.get(cardId));
     const seed = this.arbitrioSeed();
-    const synthesis = storyConversation(cards, this.definition.positions.slice(0, revealed), seed, this.state.intention);
+    const synthesis = whitTarotReading({
+      cards,
+      positions:this.definition.positions.slice(0, revealed),
+      seed,
+      question:this.state.intention,
+      scope:`tiragem-${this.state.spreadId}`
+    });
     if (!synthesis) {
       this.nodes.synthesis.hidden = true;
       renderLivingDepth(this.nodes.depthChoices, this.nodes.depthResponse, null);
@@ -1106,10 +1118,12 @@ const spreads = {
       if (visible) {
         const card = CARD_BY_ID.get(this.state.order[index]);
         const arbitrioSeed = this.arbitrioSeed();
-        const creation = storyForCard(card, arbitrioSeed, {
-          scope:`tiragem-${this.state.spreadId}`,
-          moment:`${index + 1}-${position}`,
-          intention:this.state.intention
+        const creation = whitTarotReading({
+          cards:[card],
+          positions:[`${index + 1}-${position}`],
+          seed:arbitrioSeed,
+          question:this.state.intention,
+          scope:`tiragem-${this.state.spreadId}`
         });
         button.classList.add('has-card');
         button.setAttribute('aria-label', `${position}: ${card.name}. Ampliar carta.`);
@@ -1287,7 +1301,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=4.1.9-alma-da-consulta', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=4.2.0-sintese-unica', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {

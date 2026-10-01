@@ -1,5 +1,5 @@
-/* Divina Bruxa 4.1.9 · Alma da Consulta. */
-const CACHE = 'divina-bruxa-3-shell-20260929-alma-da-consulta-1';
+/* Divina Bruxa 4.2.0 · Síntese Única da Whit. */
+const CACHE = 'divina-bruxa-3-shell-20261001-sintese-unica-1';
 const PREFIX = 'divina-bruxa-';
 const CORE = [
   './index.html', './styles.css', './app.js', './manifest.webmanifest', './assets/orbe.webp',

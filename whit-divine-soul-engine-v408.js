@@ -68,6 +68,7 @@ export { tarotIdentity } from './whit-superior-tarot-engine-v407.js';
 export const STORY_ENGINE_NAME = 'MOTOR WHIT ALMA DIVINA';
 export const STORY_ENGINE_VERSION = '4.0.8';
 export const STORY_ENGINE_LABEL = 'WHIT TARÓLOGA · ALMA, PRESENÇA E DESTINO';
+export const WHIT_READING_GATEWAY_VERSION = '4.2.0';
 
 export const DIVINE_SOUL_COVENANT = Object.freeze([
   'a Inteligência Superior e todos os motores anteriores continuam preservados',
@@ -101,6 +102,21 @@ const cardName = card => clean(card?.name, 100) || 'Carta do Tarot';
 const cardKey = card => `${card?.canonicalId ?? card?.id ?? 'carta'}:${cardName(card)}`;
 const choose = (items, seed, key) => items[loveHash(`${seed}¦${key}`) % items.length];
 const signature = (seed, key) => loveHash(`${seed}¦${key}`).toString(36).toUpperCase().padStart(8, '0');
+
+function finalEngineSignals(base, scope) {
+  const forces = base?.readerProfile?.forces || {};
+  return Object.freeze({
+    scope:clean(scope, 80),
+    faith:clean(forces.faith, 1200),
+    love:clean(forces.love, 1200),
+    mind:clean(forces.mind, 1200),
+    freedom:clean(forces.freedom, 1200),
+    matter:clean(base?.realityProfile?.counsel || forces.matter, 1200),
+    life:clean(base?.lifeProfile?.blessing || base?.lifeProfile?.affirmation, 1200),
+    present:clean(base?.realityProfile?.present, 1200),
+    tendency:clean(base?.realityProfile?.tendency || base?.realityProfile?.unchanged, 1200)
+  });
+}
 
 const HEART_WORDS = /\b(?:amor|amar|coracao|saudade|relacao|relacionamento|familia|filh[oa]|dor|medo|perda|sozinh[oa]|culpa|ansiedade|esperanca|recomeco)\b/;
 const FUTURE_WORDS = /\b(?:futuro|destino|vai|voltar|acontecer|resultado|quando|certeza|garantia|sim ou nao)\b/;
@@ -298,7 +314,8 @@ function divineCard(card, seed, { scope = 'carta', moment = 'agora', intention =
   const soulConsultation = soulConsultationForCard(positioned, {
     human,
     narrative,
-    supremeCounsel
+    supremeCounsel,
+    engineSignals:finalEngineSignals(base, scope)
   });
   const choice = cardVoiceChoice(identity, base, intention, scope);
   const paragraphs = [...soulConsultation.visible.paragraphs];
@@ -482,7 +499,8 @@ function divineSpread(cards, positions, seed, intention, inherited) {
   const soulConsultationMap = soulConsultationSpread(positionMap, {
     human:humanMap,
     narrative:narrativeMap,
-    supremeCounsel:supremeCounselMap
+    supremeCounsel:supremeCounselMap,
+    engineSignals:finalEngineSignals(base, 'tiragem')
   });
   const analysis = base.superiorProfile?.analysis || {};
   const openingIndex = positionMap?.axes?.openingIndex ?? 0;
@@ -637,23 +655,29 @@ function divineSpread(cards, positions, seed, intention, inherited) {
   });
 }
 
-export function storyForCard(card, seed = secureLoveSeed(), options = {}) {
-  return divineCard(card, seed, {
-    scope:options.scope || 'carta',
-    moment:options.moment || 'agora',
-    intention:options.intention || '',
-    inherited:options.inherited
-  });
-}
-
-export function storyConversation(cards = [], positions = [], seed = secureLoveSeed(), intention = '') {
+export function whitTarotReading({
+  cards = [],
+  positions = [],
+  seed = secureLoveSeed(),
+  question = '',
+  scope = 'tarot'
+} = {}) {
   const validCards = (Array.isArray(cards) ? cards : []).filter(Boolean);
   if (!validCards.length) return null;
   const safePositions = validCards.map((_, index) => clean(positions?.[index], 100) || `Posição ${index + 1}`);
+  const intention = clean(question, 700);
+  const isSpread = String(scope).startsWith('tiragem') || validCards.length > 1;
+  if (!isSpread && validCards.length === 1) {
+    return divineCard(validCards[0], seed, {
+      scope,
+      moment:safePositions[0] || 'agora',
+      intention
+    });
+  }
   const base = superiorConversation(validCards, safePositions, seed, intention);
   if (validCards.length === 1) {
     const single = divineCard(validCards[0], seed, {
-      scope:'tiragem', moment:safePositions[0], intention,
+      scope, moment:safePositions[0], intention,
       inherited:base
     });
     return Object.freeze({
@@ -665,6 +689,20 @@ export function storyConversation(cards = [], positions = [], seed = secureLoveS
     });
   }
   return divineSpread(validCards, safePositions, seed, intention, base);
+}
+
+export function storyForCard(card, seed = secureLoveSeed(), options = {}) {
+  return whitTarotReading({
+    cards:[card],
+    positions:[options.moment || 'agora'],
+    seed,
+    question:options.intention || '',
+    scope:options.scope || 'carta'
+  });
+}
+
+export function storyConversation(cards = [], positions = [], seed = secureLoveSeed(), intention = '') {
+  return whitTarotReading({ cards, positions, seed, question:intention, scope:'tiragem' });
 }
 
 function cardFromResponse(response, cards) {
@@ -749,6 +787,8 @@ export function storyResponse(input, options = {}) {
 export function storyCapacity() {
   return Object.freeze({
     cards:78,
+    readingGateway:WHIT_READING_GATEWAY_VERSION,
+    singleReadingGateway:true,
     previousEnginesPreserved:true,
     superiorIntelligencePreserved:true,
     adaptiveVoice:true,

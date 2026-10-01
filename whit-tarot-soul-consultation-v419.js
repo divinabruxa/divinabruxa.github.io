@@ -34,6 +34,12 @@ const sentence = value => {
 const name = entry => clean(entry?.card?.name, 120) || 'A carta';
 const core = entry => entry?.knowledge?.core || {};
 const territory = entry => entry?.territory || {};
+const signalTail = value => {
+  const text = clause(value).replace(/^[^—–]+[—–]\s*/u, '');
+  if (!text) return '';
+  const parts = text.split(/(?<=[.!?])\s+/u).map(clause).filter(Boolean);
+  return parts.at(-1) || text;
+};
 
 const HUMAN_OPENING = Object.freeze({
   return:'No amor, a saudade pode manter uma história aberta dentro de você, mas esta mesa separa o desejo de reencontro daquilo que realmente pode ser reconstruído.',
@@ -81,8 +87,9 @@ const TERRITORY_OPENING = Object.freeze({
   spirituality:'Você procura um sentido que aproxime fé, realidade e responsabilidade pela própria vida.'
 });
 
-function humanOpening(context, fallbackCard = '') {
+function humanOpening(context, fallbackCard = '', signals = {}) {
   if (!context?.hasContext) {
+    if (signals.present) return sentence(signals.present);
     return sentence(`${fallbackCard || 'Esta carta'} chega para iluminar o que merece sua atenção antes da próxima escolha`);
   }
   if (context.intent === 'general' && TERRITORY_OPENING[context.territory]) {
@@ -118,9 +125,12 @@ function cardInPosition(entry) {
   return sentence(`${prefix}, ${name(entry)} mostra que ${lower(truth)}`);
 }
 
-function tensionLine(entry) {
+function tensionLine(entry, context = {}, signals = {}) {
   const conflict = core(entry).conflict || entry?.reading?.emphasis || 'o padrão atual precisa ser reconhecido';
-  return sentence(`No centro da mesa, a tensão aparece com ${name(entry)}: ${lower(conflict)}`);
+  const mind = ['decision', 'understanding', 'future', 'timing'].includes(context?.intent)
+    ? signalTail(signals.mind)
+    : '';
+  return sentence(`No centro da mesa, a tensão aparece com ${name(entry)}: ${lower(conflict)}${mind ? `; por isso, ${lower(mind)}` : ''}`);
 }
 
 function revelationLine(entry, tensionEntry) {
@@ -131,15 +141,19 @@ function revelationLine(entry, tensionEntry) {
   return sentence(`${name(entry)} muda a direção da história; na prática, você ${lower(movement)}`);
 }
 
-function tendencyLine(entry) {
-  const consequence = core(entry).consequence || entry?.reading?.possibility || 'a situação encontra uma nova direção';
+function tendencyLine(entry, signals = {}) {
+  const consequence = signals.tendency || core(entry).consequence || entry?.reading?.possibility || 'a situação encontra uma nova direção';
   const role = entry?.classification?.role;
   const prefix = role === 'outcome' ? `Como resultado, ${name(entry)}` : name(entry);
-  return sentence(`${prefix} mostra que, se o padrão continuar, ${lower(consequence)}; esta é uma tendência, não uma sentença, e sua escolha ainda participa do caminho`);
+  const freedom = signalTail(signals.freedom);
+  return sentence(`${prefix} mostra que, se o padrão continuar, ${lower(consequence)}; esta é uma tendência, não uma sentença${freedom ? ' — seu livre-arbítrio permanece na escolha que ainda pode mudar o caminho' : ', e sua escolha ainda participa do caminho'}`);
 }
 
-function counselLine(action, entry) {
-  const practical = (clause(action) || clause(core(entry).movement) || 'Escolha uma atitude pequena que possa ser confirmada pela realidade')
+function counselLine(action, entry, signals = {}) {
+  const supplied = clause(action);
+  const material = signalTail(signals.matter);
+  const source = /^escolha uma a[cç][aã]o pequena\b/iu.test(supplied) && material ? material : supplied;
+  const practical = (source || clause(core(entry).movement) || 'Escolha uma atitude pequena que possa ser confirmada pela realidade')
     .replace(
       /antes de decidir, reúna dados verificáveis, registre limites e procure apoio humano adequado para confirmar o próximo passo/iu,
       'antes de decidir, reúna dados e apoio adequado; registre limites e confirme o próximo passo com um profissional'
@@ -162,7 +176,15 @@ function sequenceLine(entries, revelationEntry) {
   );
 }
 
-function closingLine(context) {
+function closingLine(context, signals = {}) {
+  if (['love', 'relationship'].includes(context?.territory)) {
+    const love = signalTail(signals.love);
+    if (love) return sentence(love);
+  }
+  if (context?.territory === 'spirituality' || String(signals.scope).includes('carta-do-dia')) {
+    const life = signalTail(signals.life || signals.faith);
+    if (life) return sentence(life);
+  }
   return TERRITORY_CLOSING[context?.territory] || TERRITORY_CLOSING.general;
 }
 
@@ -195,11 +217,11 @@ function positionDepth(entries) {
   }).join(' ');
 }
 
-function depthResponses(entries, context, tensionEntry, revelationEntry, tendencyEntry, counselEntry, action) {
+function depthResponses(entries, context, tensionEntry, revelationEntry, tendencyEntry, counselEntry, action, signals) {
   const responses = {
     cards:cardsDepth(entries, tensionEntry, revelationEntry),
-    tendency:tendencyLine(tendencyEntry),
-    counsel:counselLine(action, counselEntry),
+    tendency:tendencyLine(tendencyEntry, signals),
+    counsel:counselLine(action, counselEntry, signals),
     position:positionDepth(entries)
   };
   const love = loveDepth(context, tensionEntry, counselEntry);
@@ -209,22 +231,23 @@ function depthResponses(entries, context, tensionEntry, revelationEntry, tendenc
 
 export function soulConsultationForCard(entry, {
   human,
-  supremeCounsel
+  supremeCounsel,
+  engineSignals = {}
 } = {}) {
   if (!entry) return null;
   const context = human?.context || {};
   const action = supremeCounsel?.visible?.action || '';
-  const opening = humanOpening(context, name(entry));
+  const opening = humanOpening(context, name(entry), engineSignals);
   const lead = cardInPosition(entry);
-  const conflict = tensionLine(entry);
+  const conflict = tensionLine(entry, context, engineSignals);
   const revelation = revelationLine(entry, entry);
-  const tendency = tendencyLine(entry);
-  const counsel = counselLine(action, entry);
-  const closing = closingLine(context);
+  const tendency = tendencyLine(entry, engineSignals);
+  const counsel = counselLine(action, entry, engineSignals);
+  const closing = closingLine(context, engineSignals);
   const paragraphs = Object.freeze(context.hasContext
     ? [conflict, tendency, counsel]
     : [tendency, counsel]);
-  const responses = depthResponses([entry], context, entry, entry, entry, entry, action);
+  const responses = depthResponses([entry], context, entry, entry, entry, entry, action, engineSignals);
   return Object.freeze({
     engine:SOUL_CONSULTATION_ENGINE_NAME,
     version:SOUL_CONSULTATION_ENGINE_VERSION,
@@ -247,6 +270,7 @@ export function soulConsultationForCard(entry, {
       technicalLanguageVisible:false,
       singleVoice:true,
       literalConsciousnessClaim:false
+      ,integratedSignals:Object.freeze(Object.keys(engineSignals).filter(key => Boolean(engineSignals[key])))
     })
   });
 }
@@ -254,7 +278,8 @@ export function soulConsultationForCard(entry, {
 export function soulConsultationSpread(positioned, {
   human,
   narrative,
-  supremeCounsel
+  supremeCounsel,
+  engineSignals = {}
 } = {}) {
   const entries = positioned?.entries || [];
   if (!entries.length) return null;
@@ -268,14 +293,14 @@ export function soulConsultationSpread(positioned, {
   const tendencyEntry = at(arc.tendency);
   const counselEntry = at(arc.counsel);
   const action = supremeCounsel?.visible?.action || '';
-  const opening = humanOpening(context, name(openingEntry));
+  const opening = humanOpening(context, name(openingEntry), engineSignals);
   const lead = cardInPosition(openingEntry);
-  const tension = tensionLine(tensionEntry);
+  const tension = tensionLine(tensionEntry, context, engineSignals);
   const revelation = revelationLine(revelationEntry, tensionEntry);
   const sequence = sequenceLine(entries, revelationEntry);
-  const tendency = tendencyLine(tendencyEntry);
-  const counsel = counselLine(action, counselEntry);
-  const closing = closingLine(context);
+  const tendency = tendencyLine(tendencyEntry, engineSignals);
+  const counsel = counselLine(action, counselEntry, engineSignals);
+  const closing = closingLine(context, engineSignals);
   const paragraphs = Object.freeze(
     context.intent === 'general' && sequence
       ? [sequence, tendency, counsel]
@@ -293,7 +318,7 @@ export function soulConsultationSpread(positioned, {
       counsel,
       closing
     }),
-    depthResponses:depthResponses(entries, context, tensionEntry, revelationEntry, tendencyEntry, counselEntry, action),
+    depthResponses:depthResponses(entries, context, tensionEntry, revelationEntry, tendencyEntry, counselEntry, action, engineSignals),
     profile:Object.freeze({
       territory:context.territory || 'general',
       intent:context.intent || 'general',
@@ -303,6 +328,7 @@ export function soulConsultationSpread(positioned, {
       technicalLanguageVisible:false,
       singleVoice:true,
       literalConsciousnessClaim:false
+      ,integratedSignals:Object.freeze(Object.keys(engineSignals).filter(key => Boolean(engineSignals[key])))
     })
   });
 }
