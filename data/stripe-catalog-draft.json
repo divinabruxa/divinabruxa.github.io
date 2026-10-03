@@ -1,0 +1,88 @@
+{
+  "checked_on": "2026-10-03",
+  "status": "draft_inactive",
+  "checkout_enabled": false,
+  "entries": [
+    {
+      "key": "premium",
+      "product": "prod_VNIV8kB996ERCY",
+      "price": "price_1UMXuYJkYbL61ZQGBZY31Bph",
+      "amount": 19990,
+      "currency": "brl",
+      "cycle": "one_time",
+      "active": false
+    },
+    {
+      "key": "orbe-ia",
+      "product": "prod_VNIWAHfc2mZGJe",
+      "price": "price_1UMXvLJkYbL61ZQG4uQQUjm0",
+      "amount": 8990,
+      "currency": "brl",
+      "cycle": "month",
+      "active": false
+    },
+    {
+      "key": "credits-200",
+      "product": "prod_VNIWudex0Wc4Ea",
+      "price": "price_1UMXvMJkYbL61ZQGoCNL9eag",
+      "amount": 3990,
+      "currency": "brl",
+      "cycle": "one_time",
+      "active": false
+    },
+    {
+      "key": "credits-600",
+      "product": "prod_VNIWl16liDJpU5",
+      "price": "price_1UMXvNJkYbL61ZQGl5E7yXth",
+      "amount": 9990,
+      "currency": "brl",
+      "cycle": "one_time",
+      "active": false
+    },
+    {
+      "key": "credits-1500",
+      "product": "prod_VNIWQPdBzX7x1S",
+      "price": "price_1UMXvOJkYbL61ZQGvYsFaYOG",
+      "amount": 19990,
+      "currency": "brl",
+      "cycle": "one_time",
+      "active": false
+    },
+    {
+      "key": "mesa-real-profissional",
+      "product": "prod_VNIWCW5gJOmnE5",
+      "price": "price_1UMXvPJkYbL61ZQGAZZEi6rM",
+      "amount": 25000,
+      "currency": "brl",
+      "cycle": "one_time",
+      "active": false
+    },
+    {
+      "key": "leitura-mentes",
+      "product": "prod_VNIWkEigYsha9B",
+      "price": "price_1UMXvRJkYbL61ZQG7QqxoYoL",
+      "amount": 20000,
+      "currency": "brl",
+      "cycle": "one_time",
+      "active": false
+    },
+    {
+      "key": "carta-conselho",
+      "product": "prod_VNIWd41smjESqg",
+      "price": "price_1UMXvSJkYbL61ZQG5LBqxNU6",
+      "amount": 15000,
+      "currency": "brl",
+      "cycle": "one_time",
+      "active": false
+    },
+    {
+      "key": "pergunta-direta",
+      "product": "prod_VNIWJJWawQJXYb",
+      "price": "price_1UMXvTJkYbL61ZQGAqZ02OJq",
+      "amount": 5000,
+      "currency": "brl",
+      "cycle": "one_time",
+      "active": false
+    }
+  ]
+}
