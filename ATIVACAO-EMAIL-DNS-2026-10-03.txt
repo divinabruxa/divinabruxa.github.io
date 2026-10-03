@@ -1,9 +1,9 @@
 DIVINA BRUXA — ATIVAÇÃO DE E-MAIL
 Subdomínio cadastrado no Resend: avisos.divinabruxa.com.br
-Estado: aguardando DNS; envio ainda não ativado.
+Estado em 3/10/2026: quatro registros salvos no Registro.br e conferidos após reabrir a zona. Verificação Resend iniciada; domínio ainda pending. Envio automático ainda não ativado.
 Recebimento desativado. Rastreamento de abertura e cliques desativado.
 
-Adicionar na zona DNS de divinabruxa.com.br:
+Registros adicionados à zona DNS de divinabruxa.com.br:
 
 TIPO: TXT
 NOME: resend._domainkey.avisos
@@ -41,5 +41,10 @@ Não conectar os planos antigos ao checkout atual.
 Nenhum preço, assinatura ou cobrança foi alterado nesta revisão.
 
 SEARCH CONSOLE
-GSC Wizard sugerido, mas sua conexão ainda não foi confirmada.
+GSC Wizard conectado pela usuária. Operações do plugin ainda não expostas nesta sessão; indexação não consultada.
 Sitemap oficial: https://divinabruxa.com.br/sitemap.xml
+
+CONFIRMAÇÃO DNS
+Os quatro registros A existentes e o CNAME www foram preservados.
+CNAME de envio já verificado pelo Resend; TXT/DKIM e SPF ainda pendentes na última consulta.
+Nenhum envio de e-mail ou cobrança realizado.
