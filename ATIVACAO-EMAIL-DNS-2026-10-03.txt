@@ -1,6 +1,6 @@
 DIVINA BRUXA — ATIVAÇÃO DE E-MAIL
 Subdomínio cadastrado no Resend: avisos.divinabruxa.com.br
-Estado em 3/10/2026: quatro registros salvos no Registro.br e conferidos após reabrir a zona. Verificação Resend iniciada; domínio ainda pending. Envio automático ainda não ativado.
+Estado em 3/10/2026: quatro registros salvos no Registro.br e conferidos após reabrir a zona. Domínio confirmado como verified no Resend às 15:06 de 3/10/2026. Envio automático ainda não ativado.
 Recebimento desativado. Rastreamento de abertura e cliques desativado.
 
 Registros adicionados à zona DNS de divinabruxa.com.br:
@@ -46,5 +46,13 @@ Sitemap oficial: https://divinabruxa.com.br/sitemap.xml
 
 CONFIRMAÇÃO DNS
 Os quatro registros A existentes e o CNAME www foram preservados.
-CNAME de envio já verificado pelo Resend; TXT/DKIM e SPF ainda pendentes na última consulta.
+Domínio de envio totalmente verificado pelo Resend; DNS configurado e resolvendo publicamente.
 Nenhum envio de e-mail ou cobrança realizado.
+
+ACESSO AO PAINEL DO BACKEND
+Login pelo GitHub concluído, mas a conta escolhida não mostra organizações
+nem dá acesso ao projeto existente. Acesso da integração Supabase confirmado
+na revisão anterior; acesso ao painel para segredos ainda não estabelecido.
+Nenhuma nova chave privada foi criada ou publicada.
+Falta configurar credencial restrita, remetente e webhook no backend
+e validar as duas confirmações (cliente e responsável) antes de anunciar automação.
