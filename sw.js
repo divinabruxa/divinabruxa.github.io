@@ -1,5 +1,5 @@
 /* Divina Bruxa 4.2.1 · Lançamento público. */
-const CACHE = 'divina-bruxa-3-shell-20261003-consultas-manual-3';
+const CACHE = 'divina-bruxa-3-shell-20261003-rede-resiliente-4';
 const PREFIX = 'divina-bruxa-';
 const CORE = [
   './index.html', './styles.css', './app.js', './manifest.webmanifest', './assets/orbe.webp',
@@ -28,12 +28,16 @@ self.addEventListener('activate', event => {
 
 async function networkFirst(request) {
   const cache = await caches.open(CACHE);
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
   try {
-    const response = await fetch(new Request(request, { cache:'no-store' }));
+    const response = await fetch(new Request(request, { cache:'no-store', signal:controller.signal }));
     if (response.ok) await cache.put(request, response.clone());
     return response;
   } catch {
-    return (await cache.match(request)) || (request.mode === 'navigate' ? cache.match('./index.html') : Response.error());
+    return (await cache.match(request)) || (request.mode === 'navigate' ? (await cache.match('./index.html')) || Response.error() : Response.error());
+  } finally {
+    clearTimeout(timeout);
   }
 }
 
