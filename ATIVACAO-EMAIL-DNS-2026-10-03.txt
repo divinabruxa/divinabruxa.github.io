@@ -1,0 +1,45 @@
+DIVINA BRUXA — ATIVAÇÃO DE E-MAIL
+Subdomínio cadastrado no Resend: avisos.divinabruxa.com.br
+Estado: aguardando DNS; envio ainda não ativado.
+Recebimento desativado. Rastreamento de abertura e cliques desativado.
+
+Adicionar na zona DNS de divinabruxa.com.br:
+
+TIPO: TXT
+NOME: resend._domainkey.avisos
+VALOR: p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDoLgsa2OSnV3N5RJthjl+SQS8FNZ0fuuc1EGw1DPTxIdPEAV8cxqmJ8sFK20Hs/I4+TSDvLFL+Qxey0SjMjDrkDOfeKv4U07e+7dwYIcHHtt98gfLm4/SqKD7yFB0vZSZvXlXw1QyhaupC/LJmCRVYqAQ8XYQaN+wtZ7Yj5CqaSQIDAQAB
+TTL: Auto (ou o padrão oferecido pelo painel)
+
+TIPO: MX
+NOME: send.avisos
+VALOR: feedback-smtp.sa-east-1.amazonses.com
+PRIORIDADE: 10
+TTL: Auto (ou o padrão oferecido pelo painel)
+
+TIPO: TXT
+NOME: send.avisos
+VALOR: v=spf1 include:amazonses.com ~all
+TTL: Auto (ou o padrão oferecido pelo painel)
+
+TIPO: CNAME
+NOME: rsend.avisos
+VALOR: send.forge.rmta.net
+TTL: Auto (ou o padrão oferecido pelo painel)
+
+Não substituir os registros do site, do domínio raiz ou do e-mail existente.
+Se o painel exigir nome completo, acrescentar .divinabruxa.com.br ao nome acima.
+Depois: verificar domínio no Resend; configurar remetente e credencial restrita
+somente nos segredos do backend; configurar webhook assinado; validar entrega real.
+Nunca colocar chaves privadas no GitHub nem enviar credenciais no chat.
+O cadastro do domínio não ativa sozinho as confirmações de consultas.
+
+PAGAMENTOS — DIVERGÊNCIA ENCONTRADA
+Conta Stripe conectada: Divina Bruxa, modo real.
+Produtos ativos encontrados: Orbe Premium R$39,90/mês; Orbe Suprema R$69,90/mês.
+Site atual: Divina Bruxa Premium R$199,90 pagamento único; Orbe IA R$89,90/mês.
+Não conectar os planos antigos ao checkout atual.
+Nenhum preço, assinatura ou cobrança foi alterado nesta revisão.
+
+SEARCH CONSOLE
+GSC Wizard sugerido, mas sua conexão ainda não foi confirmada.
+Sitemap oficial: https://divinabruxa.com.br/sitemap.xml
