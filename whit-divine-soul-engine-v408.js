@@ -655,7 +655,7 @@ function divineSpread(cards, positions, seed, intention, inherited) {
   });
 }
 
-export function whitTarotReading({
+function generateTarotReading({
   cards = [],
   positions = [],
   seed = secureLoveSeed(),
@@ -689,6 +689,28 @@ export function whitTarotReading({
     });
   }
   return divineSpread(validCards, safePositions, seed, intention, base);
+}
+
+// One public gateway: full analysis remains available; the first reading is concise.
+export function whitTarotReading(options = {}) {
+  const reading = generateTarotReading(options);
+  if (!reading) return null;
+  const paragraphs = [...new Set([
+    reading.whisper || reading.lead,
+    ...(reading.paragraphs || [])
+  ].filter(Boolean))];
+  return Object.freeze({
+    ...reading,
+    essence:paragraphs.join(' '),
+    depthResponses:Object.freeze({
+      ...reading.depthResponses,
+      complete:[reading.heartline, ...paragraphs, reading.closing].filter(Boolean).join('\n\n')
+    }),
+    depthOptions:Object.freeze([
+      { key:'complete', label:'Aprofundar a leitura' },
+      ...(reading.depthOptions || [])
+    ])
+  });
 }
 
 export function storyForCard(card, seed = secureLoveSeed(), options = {}) {

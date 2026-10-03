@@ -7,12 +7,13 @@ import { CARDS } from '../data/cards.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
-test('a Home possui uma única imagem visual de Orbe e nenhum canvas', async () => {
+test('a Home preserva uma única Orbe com seu canvas decorativo aprovado', async () => {
   const html = await readFile(path.join(root, 'index.html'), 'utf8');
   const orbImages = html.match(/<img[^>]+src="assets\/orbe\.webp"/g) || [];
   assert.equal(orbImages.length, 1);
   assert.equal((html.match(/id="orb"/g) || []).length, 1);
-  assert.equal((html.match(/<canvas\b/g) || []).length, 0);
+  assert.equal((html.match(/<canvas\b/g) || []).length, 1);
+  assert.match(html, /<canvas id="orbCanvas" aria-hidden="true"><\/canvas>/);
 });
 
 test('não há IDs HTML duplicados', async () => {

@@ -64,6 +64,7 @@ export function createConsultationsWorld({ announce }) {
   let selected = '';
   let stage = 'services';
   let connection = 'loading';
+  let automaticEmail = false;
   let busy = false;
   let status = '';
   let draft = {};
@@ -165,7 +166,8 @@ export function createConsultationsWorld({ announce }) {
 
   function render() {
     const connectionLabel = connection === 'ready' ? 'REGISTRO CONECTADO' : connection === 'loading' ? 'VERIFICANDO REGISTRO' : 'RECONEXÃO NO ENVIO';
-    const central = stage === 'services' ? `<section class="consultation-choice"><header><p class="eyebrow">QUATRO CAMINHOS REAIS</p><h2>Qual leitura acolhe o seu momento?</h2><p>Compare finalidade e valor antes de escolher.</p></header>${serviceCards()}</section>` : stage === 'form' ? formMarkup() : stage === 'review' ? reviewMarkup() : successMarkup();
+    const contact = `<p class="consultation-status"><a href="mailto:${CONFIG.contactEmail}">SOLICITAR CONSULTA PELO E-MAIL OFICIAL</a>${connection === 'ready' && !automaticEmail ? '<br>A confirmação é manual por e-mail. Depois de registrar, envie seu protocolo pelo canal oficial para combinar o atendimento.' : ''}</p>`;
+    const central = (stage === 'services' ? `<section class="consultation-choice"><header><p class="eyebrow">QUATRO CAMINHOS REAIS</p><h2>Qual leitura acolhe o seu momento?</h2><p>Compare finalidade e valor antes de escolher.</p></header>${serviceCards()}</section>` : stage === 'form' ? formMarkup() : stage === 'review' ? reviewMarkup() : successMarkup()) + contact;
     root.innerHTML = `<section class="consultation-sanctuary"><div><p class="eyebrow">ATENDIMENTO HUMANO · PRIVADO</p><h2>Sua pergunta merece presença.</h2><p>Quatro leituras de R$ 50 a R$ 250. Você revisa tudo antes de registrar.</p></div><span class="consultation-connection is-${connection}"><i></i>${connectionLabel}</span></section>${central}${tracker()}`;
     bind();
   }
@@ -255,6 +257,7 @@ export function createConsultationsWorld({ announce }) {
     try {
       const result = await api();
       if (result?.environment !== 'staging' || result?.rules?.realBilling !== false || !Array.isArray(result.services)) throw new Error('INVALID_CATALOG');
+      automaticEmail = result.notifications?.providerConfigured === true;
       const remote = CONSULTATION_SERVICES.map(local => {
         const found = result.services.find(item => clean(item.service_key) === local.id);
         const price = Number(found?.price_brl_cents);

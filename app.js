@@ -1,4 +1,5 @@
 import { CARDS } from './data/cards.js';
+import { normalizedRoute } from './routes.js';
 import { CONFIG } from './data/config.js';
 import { LIBRARY_GUIDES } from './data/library.js';
 import { WORLDS } from './data/worlds.js';
@@ -111,12 +112,9 @@ function creationStory(creation) {
 }
 
 function creationPresence(creation) {
-  return [creation?.heartline, creation?.whisper].filter(Boolean).join('\n\n');
+  return creation?.essence || [creation?.heartline, creation?.whisper].filter(Boolean).join('\n\n');
 }
 
-function conversationPresence(creation) {
-  return [creation?.heartline, creation?.lead].filter(Boolean).join('\n\n');
-}
 
 function creationSignature(creation) {
   return `WHIT TARÓLOGA ${creation?.signature || 'LOCAL'} · CONSULTA BASEADA NAS CARTAS`;
@@ -152,11 +150,6 @@ function pulseOrb() {
   void orb.offsetWidth;
   orb.classList.add('is-answering');
   setTimeout(() => orb.classList.remove('is-answering'), 720);
-}
-
-function normalizedRoute(value = '') {
-  const route = value.replace(/^#\/?/, '').replace(/^\//, '').trim() || 'home';
-  return worlds[route] ? route : 'home';
 }
 
 function intentionForRoute(route) {
@@ -225,7 +218,7 @@ function applyRoute(route, { push = true, focus = true, animate = true } = {}) {
     if (next === 'musica') music.activate();
     if (next === 'videos') videos.activate();
     if (next === 'skins') skins.activate();
-    document.title = next === 'home' ? 'Divina Bruxa' : `${world.title} — Divina Bruxa`;
+    document.title = next === 'home' ? 'Divina Bruxa — Tarot online e Whit Taróloga' : `${world.title} — Divina Bruxa`;
     const orbLabels = {
       tarot:['Revelar a próxima carta', 'Revelar carta'],
       'carta-do-dia':['Revelar a Carta do Dia', 'Revelar a aurora'],
@@ -490,8 +483,8 @@ const tarot = {
     }
     this.nodes.arbitrioTitle.textContent = creation.title;
     this.nodes.arbitrioWhisper.textContent = creationPresence(creation);
-    this.nodes.arbitrioStory.textContent = creationStory(creation);
-    this.nodes.arbitrioClosing.textContent = creation.closing;
+    this.nodes.arbitrioStory.textContent = '';
+    this.nodes.arbitrioClosing.textContent = '';
     renderLivingDepth(this.nodes.depthChoices, this.nodes.depthResponse, creation);
     this.nodes.arbitrioSignature.textContent = creationSignature(creation);
   },
@@ -661,8 +654,8 @@ function renderDialogArbitrio(creation) {
   }
   dialogArbitrioLabel.textContent = 'WHIT TARÓLOGA · CONSULTA DA SUA VIDA';
   dialogArbitrioTitle.textContent = creation.title;
-  dialogCardOracle.textContent = `${creationPresence(creation)}\n\n${creationStory(creation)}`;
-  dialogArbitrioClosing.textContent = creation.closing;
+  dialogCardOracle.textContent = creationPresence(creation);
+  dialogArbitrioClosing.textContent = '';
   renderLivingDepth(dialogDepthChoices, dialogDepthResponse, creation);
   dialogArbitrioSignature.textContent = creationSignature(creation);
   dialogArbitrioAction.textContent = 'RELER CONSULTA';
@@ -680,7 +673,9 @@ function showCardDialog(card, position, publicHref = '', oracleText = '', option
     card,
     scope:options.scope || 'carta',
     moment:position,
-    intention:String(options.intention || '')
+    intention:String(options.intention || ''),
+    cards:options.cards || [card],
+    positions:options.positions || [position]
   } : null;
   dialogArbitrioAction.hidden = !arbitrioEnabled;
   dialogArbitrioNote.hidden = !arbitrioEnabled;
@@ -695,8 +690,8 @@ function showCardDialog(card, position, publicHref = '', oracleText = '', option
 dialogArbitrioAction.addEventListener('click', () => {
   if (!dialogArbitrioContext) return;
   const creation = whitTarotReading({
-    cards:[dialogArbitrioContext.card],
-    positions:[dialogArbitrioContext.moment],
+    cards:dialogArbitrioContext.cards,
+    positions:dialogArbitrioContext.positions,
     seed:secureArbitrioSeed(),
     question:dialogArbitrioContext.intention,
     scope:dialogArbitrioContext.scope
@@ -1048,6 +1043,7 @@ const spreads = {
   },
 
   renderSynthesis(usable, revealed, total) {
+    this.synthesis = null;
     if (!usable || revealed < 1) {
       this.nodes.synthesis.hidden = true;
       this.nodes.synthesisFacts.replaceChildren();
@@ -1068,17 +1064,14 @@ const spreads = {
       renderLivingDepth(this.nodes.depthChoices, this.nodes.depthResponse, null);
       return;
     }
+    this.synthesis = synthesis;
     this.nodes.synthesisTitle.textContent = synthesis.title;
-    this.nodes.synthesisPrompt.textContent = conversationPresence(synthesis);
-    this.nodes.synthesisStory.textContent = synthesis.story;
-    this.nodes.synthesisClosing.textContent = synthesis.closing;
+    this.nodes.synthesisPrompt.textContent = 'Essência da Tiragem';
+    this.nodes.synthesisStory.textContent = synthesis.essence;
+    this.nodes.synthesisClosing.textContent = '';
     renderLivingDepth(this.nodes.depthChoices, this.nodes.depthResponse, synthesis);
     this.nodes.synthesisSignature.textContent = creationSignature(synthesis);
-    this.nodes.synthesisFacts.replaceChildren(...synthesis.voices.map(fact => {
-      const item = document.createElement('li');
-      item.textContent = fact;
-      return item;
-    }));
+    this.nodes.synthesisFacts.replaceChildren();
     this.nodes.synthesis.dataset.complete = String(revealed >= total);
     this.nodes.synthesis.hidden = false;
   },
@@ -1105,6 +1098,7 @@ const spreads = {
     });
     this.renderGate();
 
+    this.renderSynthesis(usable, revealed, total);
     const fragment = document.createDocumentFragment();
     definition.positions.forEach((position, index) => {
       const slot = document.createElement('article');
@@ -1117,14 +1111,6 @@ const spreads = {
       const visible = usable && index < revealed;
       if (visible) {
         const card = CARD_BY_ID.get(this.state.order[index]);
-        const arbitrioSeed = this.arbitrioSeed();
-        const creation = whitTarotReading({
-          cards:[card],
-          positions:[`${index + 1}-${position}`],
-          seed:arbitrioSeed,
-          question:this.state.intention,
-          scope:`tiragem-${this.state.spreadId}`
-        });
         button.classList.add('has-card');
         button.setAttribute('aria-label', `${position}: ${card.name}. Ampliar carta.`);
         const image = new Image();
@@ -1137,13 +1123,12 @@ const spreads = {
         button.addEventListener('click', () => showCardDialog(card, `${index + 1} · ${position.toUpperCase()}`, '', '', {
           scope:`tiragem-${this.state.spreadId}`,
           intention:this.state.intention,
-          initialCreation:creation
+          initialCreation:this.synthesis,
+          cards:this.state.order.slice(0, revealed).map(cardId => CARD_BY_ID.get(cardId)),
+          positions:definition.positions.slice(0, revealed)
         }));
 
-        const oracle = document.createElement('p');
-        oracle.className = 'spread-card__oracle';
-        oracle.textContent = creationPresence(creation);
-        slot.append(button, oracle);
+        slot.append(button);
       } else {
         button.disabled = true;
         button.setAttribute('aria-label', usable ? `${position}: posição ainda oculta` : `${position}: prévia Premium bloqueada`);
@@ -1155,7 +1140,6 @@ const spreads = {
       fragment.append(slot);
     });
     this.nodes.board.replaceChildren(fragment);
-    this.renderSynthesis(usable, revealed, total);
 
     if (!usable) {
       this.nodes.guidance.textContent = 'As posições estão visíveis em prévia. Confirme a chave da sua conta para revelar cartas.';

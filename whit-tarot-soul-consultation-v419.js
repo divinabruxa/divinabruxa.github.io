@@ -89,7 +89,6 @@ const TERRITORY_OPENING = Object.freeze({
 
 function humanOpening(context, fallbackCard = '', signals = {}) {
   if (!context?.hasContext) {
-    if (signals.present) return sentence(signals.present);
     return sentence(`${fallbackCard || 'Esta carta'} chega para iluminar o que merece sua atenção antes da próxima escolha`);
   }
   if (context.intent === 'general' && TERRITORY_OPENING[context.territory]) {
@@ -149,10 +148,13 @@ function tendencyLine(entry, signals = {}) {
   return sentence(`${prefix} mostra que, se o padrão continuar, ${lower(consequence)}; esta é uma tendência, não uma sentença${freedom ? ' — seu livre-arbítrio permanece na escolha que ainda pode mudar o caminho' : ', e sua escolha ainda participa do caminho'}`);
 }
 
-function counselLine(action, entry, signals = {}) {
+function counselLine(action, entry, signals = {}, context = {}) {
   const supplied = clause(action);
   const material = signalTail(signals.matter);
-  const source = /^escolha uma a[cç][aã]o pequena\b/iu.test(supplied) && material ? material : supplied;
+  const generic = /(?:escolha uma a[cç][aã]o pequena|torne a leitura real|atitude pequena e verific[aá]vel)/iu;
+  const source = generic.test(supplied)
+    ? clause(territory(entry).action || core(entry).movement || material)
+    : supplied;
   const practical = (source || clause(core(entry).movement) || 'Escolha uma atitude pequena que possa ser confirmada pela realidade')
     .replace(
       /antes de decidir, reúna dados verificáveis, registre limites e procure apoio humano adequado para confirmar o próximo passo/iu,
@@ -162,7 +164,11 @@ function counselLine(action, entry, signals = {}) {
   if (/^escolha uma a[cç][aã]o pequena\b/iu.test(practical)) {
     return sentence(`Como conselho, ${name(entry)} leva esta verdade para a vida: você ${lower(core(entry).movement || practical)}`);
   }
-  return sentence(`Como conselho, ${name(entry)} pede um passo simples: ${lower(practical)}`);
+  const domain = territory(entry);
+  const grounding = context.hasContext && domain.key !== 'general'
+    ? `; na pergunta sobre ${domain.title}, ${lower(domain.boundary)}`
+    : '';
+  return sentence(`Como conselho, ${name(entry)} orienta: ${generic.test(supplied) ? 'você ' : ''}${lower(practical)}${grounding}`);
 }
 
 function sequenceLine(entries, revelationEntry) {
@@ -242,7 +248,7 @@ export function soulConsultationForCard(entry, {
   const conflict = tensionLine(entry, context, engineSignals);
   const revelation = revelationLine(entry, entry);
   const tendency = tendencyLine(entry, engineSignals);
-  const counsel = counselLine(action, entry, engineSignals);
+  const counsel = counselLine(action, entry, engineSignals, context);
   const closing = closingLine(context, engineSignals);
   const paragraphs = Object.freeze(context.hasContext
     ? [conflict, tendency, counsel]
@@ -283,7 +289,7 @@ export function soulConsultationSpread(positioned, {
 } = {}) {
   const entries = positioned?.entries || [];
   if (!entries.length) return null;
-  if (entries.length === 1) return soulConsultationForCard(entries[0], { human, supremeCounsel });
+  if (entries.length === 1) return soulConsultationForCard(entries[0], { human, supremeCounsel, engineSignals });
   const arc = narrative?.arcProfile || {};
   const context = human?.context || {};
   const at = node => entries[node?.index ?? 0] || entries[0];
@@ -299,7 +305,7 @@ export function soulConsultationSpread(positioned, {
   const revelation = revelationLine(revelationEntry, tensionEntry);
   const sequence = sequenceLine(entries, revelationEntry);
   const tendency = tendencyLine(tendencyEntry, engineSignals);
-  const counsel = counselLine(action, counselEntry, engineSignals);
+  const counsel = counselLine(action, counselEntry, engineSignals, context);
   const closing = closingLine(context, engineSignals);
   const paragraphs = Object.freeze(
     context.intent === 'general' && sequence

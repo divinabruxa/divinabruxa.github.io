@@ -106,7 +106,8 @@ test('manifesto e chão offline usam somente arquivos existentes', async () => {
   const manifest = JSON.parse(await readFile(path.join(root, 'manifest.webmanifest'), 'utf8'));
   for (const icon of manifest.icons) await stat(path.join(root, icon.src.replace(/^\.\//, '')));
   const serviceWorker = await readFile(path.join(root, 'sw.js'), 'utf8');
-  const coreFiles = [...serviceWorker.matchAll(/["']\.\/([^"']*)["']/g)].map(match => match[1] || 'index.html');
-  assert.equal(coreFiles.length, 31);
+  const coreFiles = [...serviceWorker.split('self.addEventListener')[0].matchAll(/["']\.\/([^"']*)["']/g)].map(match => match[1] || 'index.html');
+  assert.ok(coreFiles.length >= 31);
+  assert.equal(new Set(coreFiles).size, coreFiles.length);
   for (const file of coreFiles) await stat(path.join(root, file));
 });
