@@ -6,6 +6,16 @@ const TIMEOUT = 12000;
 const clean = value => String(value ?? '').trim();
 const escapeHTML = value => clean(value).replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
 
+export function consultationContactLink(receipt = null) {
+  const protocol = /^DB-[0-9]{8}-[A-Z0-9]{8}$/.test(clean(receipt?.protocol)) ? clean(receipt.protocol) : '';
+  const service = clean(receipt?.serviceName).replace(/[\r\n]+/g, ' ').slice(0, 120);
+  const subject = protocol ? `Consulta Divina Bruxa — ${protocol}` : 'Consulta Divina Bruxa';
+  const body = protocol
+    ? `Olá! Registrei uma solicitação de consulta.\nServiço: ${service || 'A combinar'}\nProtocolo: ${protocol}\nGostaria de combinar o atendimento. Obrigada!`
+    : 'Olá! Gostaria de conhecer os formatos de consulta e combinar um atendimento. Obrigada!';
+  return `mailto:${CONFIG.contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
 function randomToken() {
   const bytes = new Uint8Array(24);
   crypto.getRandomValues(bytes);
@@ -166,7 +176,7 @@ export function createConsultationsWorld({ announce }) {
 
   function render() {
     const connectionLabel = connection === 'ready' ? 'REGISTRO CONECTADO' : connection === 'loading' ? 'VERIFICANDO REGISTRO' : 'RECONEXÃO NO ENVIO';
-    const contact = `<p class="consultation-status"><a href="mailto:${CONFIG.contactEmail}">SOLICITAR CONSULTA PELO E-MAIL OFICIAL</a>${connection === 'ready' && !automaticEmail ? '<br>A confirmação é manual por e-mail. Depois de registrar, envie seu protocolo pelo canal oficial para combinar o atendimento.' : ''}</p>`;
+    const contact = `<p class="consultation-status"><a href="${escapeHTML(consultationContactLink(success))}">${success ? 'COMBINAR ATENDIMENTO PELO E-MAIL OFICIAL' : 'SOLICITAR CONSULTA PELO E-MAIL OFICIAL'}</a>${connection === 'ready' && !automaticEmail ? '<br>A confirmação é manual por e-mail. Depois de registrar, envie seu protocolo pelo canal oficial para combinar o atendimento.' : ''}</p>`;
     const central = (stage === 'services' ? `<section class="consultation-choice"><header><p class="eyebrow">QUATRO CAMINHOS REAIS</p><h2>Qual leitura acolhe o seu momento?</h2><p>Compare finalidade e valor antes de escolher.</p></header>${serviceCards()}</section>` : stage === 'form' ? formMarkup() : stage === 'review' ? reviewMarkup() : successMarkup()) + contact;
     root.innerHTML = `<section class="consultation-sanctuary"><div><p class="eyebrow">ATENDIMENTO HUMANO · PRIVADO</p><h2>Sua pergunta merece presença.</h2><p>Quatro leituras de R$ 50 a R$ 250. Você revisa tudo antes de registrar.</p></div><span class="consultation-connection is-${connection}"><i></i>${connectionLabel}</span></section>${central}${tracker()}`;
     bind();

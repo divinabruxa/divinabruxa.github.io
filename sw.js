@@ -1,5 +1,5 @@
 /* Divina Bruxa 4.2.1 · Lançamento público. */
-const CACHE = 'divina-bruxa-3-shell-20261003-acessibilidade-2';
+const CACHE = 'divina-bruxa-3-shell-20261003-consultas-manual-3';
 const PREFIX = 'divina-bruxa-';
 const CORE = [
   './index.html', './styles.css', './app.js', './manifest.webmanifest', './assets/orbe.webp',
