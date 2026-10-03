@@ -51,7 +51,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
 button { font: inherit; }
 
 button:focus-visible,
-a:focus-visible {
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex="0"]:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 5px;
 }
@@ -3283,4 +3287,11 @@ body:is([data-menu="opening"], [data-menu="open"], [data-menu="closing"]) .journ
   height: 100dvh;
   max-height: 100dvh;
   overscroll-behavior: none;
+}
+
+/* Campos legíveis ao editar em telas pequenas, sem alterar a Home ou a Orbe. */
+@media (max-width: 600px) {
+  input:not([type="checkbox"]):not([type="radio"]), textarea, select {
+    font-size: max(16px, 1rem);
+  }
 }

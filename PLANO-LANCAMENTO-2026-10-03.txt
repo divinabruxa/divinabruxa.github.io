@@ -23,6 +23,8 @@ A suíte atual tem 56 testes; isso não substitui avaliação humana contínua d
 
 4. EXPERIÊNCIA EM CELULAR E ACESSIBILIDADE — VALIDAÇÃO PARCIAL
 15 destinos do aplicativo conferidos no navegador; recursos offline verificados.
+Foco destacado também em formulários; campos em telas pequenas com fonte mínima de 16px.
+Menu conferido com teclado: contenção do foco e retorno ao fechar.
 Ainda realizar teste em iPhone/Safari físico, teclado, leitor de tela e rede lenta.
 Critério: jornada completa sem bloqueios, foco visível e leitura confortável.
 
