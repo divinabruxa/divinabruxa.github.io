@@ -1,0 +1,56 @@
+DIVINA BRUXA 33 — MACROETAPAS DE LANÇAMENTO E CRESCIMENTO
+Data: 3 de outubro de 2026
+Domínio: https://divinabruxa.com.br/
+Repositório: divinabruxa/divinabruxa.github.io
+
+1. PRESERVAR E PUBLICAR — CONCLUÍDA
+Backup launch-backup-2026-10-03-5452db7 preservado. Site publicado.
+Conservar Home, Orbe, pentagrama e motores de Tarot aprovados.
+Quatro controladores antigos sem uso removidos; motores ativos preservados.
+Critério: publicação acessível, rotas corretas, testes aprovados e retorno possível.
+
+2. IDENTIDADE E AUTORIA — PUBLICADA
+Apresentar Divina Bruxa 33, Orbe e Whit com nomes consistentes e proposta clara.
+Página Sobre explica a criação artística que une magia e tecnologia.
+Agradecimento público e data de lançamento registrados.
+Critério: título, descrição, conteúdo e dados estruturados concordam com a experiência.
+
+3. WHIT: QUALIDADE DA LEITURA — BASE VALIDADA; EVOLUÇÃO CONTÍNUA
+Essência primeiro; profundidade opcional. Pergunta, posição e cartas alteram a leitura.
+Manter tendência, conselho concreto e autonomia de quem consulta.
+Critério: leituras variadas revisadas, ausência de repetição artificial e conselho coerente.
+A suíte atual tem 56 testes; isso não substitui avaliação humana contínua das leituras.
+
+4. EXPERIÊNCIA EM CELULAR E ACESSIBILIDADE — VALIDAÇÃO PARCIAL
+15 destinos do aplicativo conferidos no navegador; recursos offline verificados.
+Ainda realizar teste em iPhone/Safari físico, teclado, leitor de tela e rede lenta.
+Critério: jornada completa sem bloqueios, foco visível e leitura confortável.
+
+5. DESCOBERTA NO GOOGLE — BASE PUBLICADA; SEARCH CONSOLE PENDENTE
+Títulos, descrição, canonical, robots e sitemaps publicados; guias públicos disponíveis.
+Verificar domínio na conta responsável do Search Console.
+Enviar https://divinabruxa.com.br/sitemap.xml e inspecionar as páginas essenciais.
+Critério: propriedade verificada, sitemap processado e cobertura acompanhada.
+Indexação e posições são decisões do buscador; não há garantia de primeiro lugar.
+
+6. CONSULTAS E COMUNICAÇÃO — CANAL MANUAL PUBLICADO
+Valores e canal oficial visíveis: orbedasrealidades@hotmail.com.
+Backend observado em staging; provedor de notificações não configurado.
+Configurar entrega, confirmação, falhas e rotina de atendimento antes de prometer automação.
+Critério: solicitação real confirmada e comunicação recebida pela cliente e responsável.
+
+7. PREMIUM E PAGAMENTOS — ATIVAÇÃO REAL PENDENTE
+Cobrança real permanece desativada. Não anunciar compra automática como concluída.
+Validar provedor, titularidade, preços, checkout, confirmação e liberação de acesso.
+Critério: fluxo de teste completo e configuração de produção validada pela responsável.
+
+8. CRESCIMENTO E REPUTAÇÃO — APÓS O LANÇAMENTO
+Publicar conteúdo útil e original, atualizar a Escola e ouvir visitantes.
+Medir buscas, visitas, retorno, satisfação e conversão com respeito à privacidade.
+Definir metas a partir de dados reais; revisar mensalmente qualidade e resultados.
+Critério: melhora mensurável; nenhuma alegação de maior site sem evidência independente.
+
+OBJETIVO DE HOJE
+Manter a publicação disponível, com identidade clara e jornadas gratuitas funcionais.
+Ativar serviços comerciais somente depois de sua configuração e validação completas.
+O lançamento é uma conquista concreta; liderança será construída com qualidade e confiança.
