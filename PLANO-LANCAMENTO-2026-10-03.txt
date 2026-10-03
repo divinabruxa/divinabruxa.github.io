@@ -19,7 +19,7 @@ Critério: título, descrição, conteúdo e dados estruturados concordam com a 
 Essência primeiro; profundidade opcional. Pergunta, posição e cartas alteram a leitura.
 Manter tendência, conselho concreto e autonomia de quem consulta.
 Critério: leituras variadas revisadas, ausência de repetição artificial e conselho coerente.
-A suíte atual tem 56 testes; isso não substitui avaliação humana contínua das leituras.
+A suíte atual tem 58 testes; isso não substitui avaliação humana contínua das leituras.
 
 4. EXPERIÊNCIA EM CELULAR E ACESSIBILIDADE — VALIDAÇÃO PARCIAL
 15 destinos do aplicativo conferidos no navegador; recursos offline verificados.
@@ -56,3 +56,23 @@ OBJETIVO DE HOJE
 Manter a publicação disponível, com identidade clara e jornadas gratuitas funcionais.
 Ativar serviços comerciais somente depois de sua configuração e validação completas.
 O lançamento é uma conquista concreta; liderança será construída com qualidade e confiança.
+
+FECHAMENTO DA REVISÃO TÉCNICA — 3/10/2026
+58 testes aprovados. As 316 URLs dos sitemaps foram conferidas: arquivos presentes,
+sem duplicatas, sem meta robots noindex, canonical correspondente e JSON-LD válido.
+Projeto Supabase ativo e saudável, identificado como staging.
+Funções de consultas, conta e Premium implantadas; isso não comprova fluxo comercial completo.
+Recomendações de segurança revisadas sem alterar permissões do banco.
+Proteção contra senhas vazadas desativada: ativação pendente no Supabase Auth.
+As duas funções sinalizadas SECURITY DEFINER usam contexto de usuário/sessão;
+nenhuma alteração automática foi aplicada por esse alerta isolado.
+Tabelas com RLS sem políticas mantêm negação por padrão; não liberar acesso para silenciar avisos.
+
+LIMITES DO FECHAMENTO
+Não foram enviados e-mails, efetuadas compras ou alteradas cobranças.
+Search Console não foi acessado; sitemap não foi enviado por esta revisão.
+Teste em iPhone/Safari físico e jornadas autenticadas completas ainda pendentes.
+Crescimento e reputação são trabalho contínuo, não uma etapa concluída pelo lançamento.
+
+REFERÊNCIA PARA A CONFIGURAÇÃO DE AUTENTICAÇÃO
+https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection
