@@ -1,0 +1,482 @@
+{
+  "schemaVersion": 1,
+  "commit": "f8abdccdf22b0023c3a5443c9e3be693dd59fc07",
+  "entry": "whit-divine-soul-engine-v408.js",
+  "limitation": "Imports ESM estáticos locais; não comprova execução no navegador ou publicação.",
+  "missing": [],
+  "files": [
+    {
+      "path": "app.js",
+      "sha256": "aa913c8d7d966be66a79cc183733fb7ae4250b9a889ba10f0f2aa6fd5d8b5e3d",
+      "bytes": 53952,
+      "imports": [
+        "data/cards.js",
+        "routes.js",
+        "data/config.js",
+        "data/library.js",
+        "data/worlds.js",
+        "lib/daily-card.js",
+        "spread-state-v310.js",
+        "premium-entitlement-v310.js",
+        "lib/tarot-state.js",
+        "worlds/journal.js",
+        "worlds/library.js",
+        "school-world-v322.js",
+        "whit-world-v401.js",
+        "worlds/account.js",
+        "worlds/consultations.js",
+        "worlds/music.js",
+        "premium-world-v310.js",
+        "skins-world-v301.js",
+        "worlds/store.js",
+        "videos-world-v311.js",
+        "orb-engine-v68.js",
+        "living-universe-core-v524.js",
+        "arbitrio-engine-v370.js",
+        "whit-divine-soul-engine-v408.js"
+      ]
+    },
+    {
+      "path": "arbitrio-engine-v360.js",
+      "sha256": "17d64d09cd6c44a0a747d79178bc56d2b3e30ec3e79117a21caf9b20224f34c8",
+      "bytes": 23417,
+      "imports": []
+    },
+    {
+      "path": "arbitrio-engine-v370.js",
+      "sha256": "7f726f53f387034e2058f58c3f72e7b1d65d59149655e7bab3d47a08e6d71ccf",
+      "bytes": 1927,
+      "imports": [
+        "arbitrio-engine-v360.js",
+        "love-engine-v370.js"
+      ]
+    },
+    {
+      "path": "carta-do-dia.html",
+      "sha256": "5043e6f0f678b8f9524e92bbf929d40a72101f11d0f9aa75ac413d1d52e0eac4",
+      "bytes": 13575,
+      "imports": []
+    },
+    {
+      "path": "data/cards.js",
+      "sha256": "18e5a1a3bcecf27fdb9c14c44c964a61f6eacfadc2f52ccaa76f0cbf60ee7cc3",
+      "bytes": 7459,
+      "imports": []
+    },
+    {
+      "path": "data/config.js",
+      "sha256": "4293458a67ce2892d42e8bc4311ef5aee5b348f4ab7a04d29df03dc729b786b6",
+      "bytes": 680,
+      "imports": []
+    },
+    {
+      "path": "data/consultations.js",
+      "sha256": "1cb90618e73347454e247320e1af05e5ba5739b5df22dc607122e1887e430432",
+      "bytes": 1987,
+      "imports": []
+    },
+    {
+      "path": "data/library.js",
+      "sha256": "aafde6cfbba93242347bd114f7f9db34fa434abe265b674c341617712a0bbe22",
+      "bytes": 2453,
+      "imports": []
+    },
+    {
+      "path": "data/media.js",
+      "sha256": "408a528762bb1a9009939a2d4c29872e69f0e9b4dd39a9accddcbea0afe6929a",
+      "bytes": 590,
+      "imports": []
+    },
+    {
+      "path": "data/plans.js",
+      "sha256": "91a1141d5640ef4036df7e8419138f87de6f2edb579afeb2c36ee8aa1a2b5f2d",
+      "bytes": 987,
+      "imports": []
+    },
+    {
+      "path": "data/skins.js",
+      "sha256": "e02cfe35f48944eb1df48e6b1c9f97e89041f336bc7154a7f50c8ef1619385ff",
+      "bytes": 3273,
+      "imports": []
+    },
+    {
+      "path": "data/store.js",
+      "sha256": "a1a4b6c429ab90978694b3078b2d6fdef38accc2223b7fce33575d5c032b91fd",
+      "bytes": 4522,
+      "imports": []
+    },
+    {
+      "path": "data/worlds.js",
+      "sha256": "d9a337b51082b4e0a837874ef2225896df7eb512ae7980cd261077f5ea861767",
+      "bytes": 3673,
+      "imports": []
+    },
+    {
+      "path": "index.html",
+      "sha256": "a96ff4db3377d476880681d3b9fdd3aed91003393a9b92a02c5f1e0f4727b384",
+      "bytes": 32908,
+      "imports": []
+    },
+    {
+      "path": "lib/daily-card.js",
+      "sha256": "7df0232afc2c0553bb109482f43795ee9f4434dde28aeeb3d6c1513b2cc48256",
+      "bytes": 1037,
+      "imports": []
+    },
+    {
+      "path": "lib/tarot-state.js",
+      "sha256": "7082db146e8bb73e50d086949c1e81fe4c4994c993407fbe02cc5217d39cb6e5",
+      "bytes": 2071,
+      "imports": []
+    },
+    {
+      "path": "living-universe-core-v524.js",
+      "sha256": "ac575bcfacca3bb3b2ef15c449f6a07ffc8e547481ef1e55f2c41ad73f93136c",
+      "bytes": 87083,
+      "imports": []
+    },
+    {
+      "path": "love-engine-v370.js",
+      "sha256": "7c061c4b4af0b385acc92dbe8b8ea7e45de1f49e1d66d2fa4dfb2c7db9fdfc9d",
+      "bytes": 40703,
+      "imports": []
+    },
+    {
+      "path": "matter-engine-v400.js",
+      "sha256": "a0dbcc4c104c9fe7b4b7bf721aece8bc62d5b87f9bc5127c61872e4d953a5713",
+      "bytes": 13972,
+      "imports": [
+        "love-engine-v370.js",
+        "spirit-engine-v390.js"
+      ]
+    },
+    {
+      "path": "mind-engine-v380.js",
+      "sha256": "63957984bbd295dc3c15d7bc8add533d335abf53063fd34b3ed7f7fb1a6b3f2f",
+      "bytes": 22548,
+      "imports": [
+        "love-engine-v370.js"
+      ]
+    },
+    {
+      "path": "orb-engine-v68.js",
+      "sha256": "c9b521fd86a846ed6a3429e0902c32676cf9048f2be03fb985f27513af95a15b",
+      "bytes": 28938,
+      "imports": []
+    },
+    {
+      "path": "premium-entitlement-v310.js",
+      "sha256": "bbc2f493b574c40ec60c0245e555cad28358ef73f24ed9b8bcea9aedf9d7c513",
+      "bytes": 1886,
+      "imports": []
+    },
+    {
+      "path": "premium-world-v310.js",
+      "sha256": "a63a45a36f83dc551a54bc9aba681748368f4a48565639c35a1ed212313a32dd",
+      "bytes": 9862,
+      "imports": [
+        "data/config.js",
+        "data/plans.js",
+        "data/consultations.js"
+      ]
+    },
+    {
+      "path": "routes.js",
+      "sha256": "ba22adb09e5db952d5763c58e8a70c500f11c4e0c8297b93cca3dae5b572c99b",
+      "bytes": 550,
+      "imports": [
+        "data/worlds.js"
+      ]
+    },
+    {
+      "path": "school-data-v322.js",
+      "sha256": "9b5ed69078fbe9a8aab96fbd207f5437622ecd5343abbaa6b5fdf448ad321252",
+      "bytes": 13372,
+      "imports": []
+    },
+    {
+      "path": "school-world-v322.js",
+      "sha256": "85475f172d01d6de7c262fac1e9d2d8b9a7623cf273df53ede15b0e5787648b8",
+      "bytes": 7512,
+      "imports": [
+        "school-data-v322.js"
+      ]
+    },
+    {
+      "path": "skins-world-v301.js",
+      "sha256": "a3d13940a18f9a705d2caba741b1cc62a752c1d0c2f22c8952e6b773a1280216",
+      "bytes": 5699,
+      "imports": [
+        "data/skins.js",
+        "data/consultations.js"
+      ]
+    },
+    {
+      "path": "spirit-engine-v390.js",
+      "sha256": "9851e9344e1796f678cb4b3e88fd0c99f83d45ffdaf1175c0e8aa8f5d3aedd9e",
+      "bytes": 20193,
+      "imports": [
+        "love-engine-v370.js",
+        "mind-engine-v380.js"
+      ]
+    },
+    {
+      "path": "spread-state-v310.js",
+      "sha256": "66ee2bd54059be69584626f3115a720eac2d9a79b0474a566d01e013c49669b4",
+      "bytes": 9920,
+      "imports": [
+        "lib/tarot-state.js"
+      ]
+    },
+    {
+      "path": "sw.js",
+      "sha256": "ec16afa92be7d209138357ea2f4bcb268fc2daf5802ef1edd13cac383349657d",
+      "bytes": 3746,
+      "imports": []
+    },
+    {
+      "path": "tarot-life-engine-v404.js",
+      "sha256": "c39a022851c069d16f3c94a018db85e2822a1a0a9888f391553508fe5dda5009",
+      "bytes": 20215,
+      "imports": [
+        "love-engine-v370.js",
+        "tarot-soul-engine-v403.js"
+      ]
+    },
+    {
+      "path": "tarot-livre.html",
+      "sha256": "cebd690c1b6ebc2542771e3b620c2f2e1ec10983bcfe419ac24d6676101cd197",
+      "bytes": 14549,
+      "imports": []
+    },
+    {
+      "path": "tarot-orbe-realities-engine-v405.js",
+      "sha256": "5be887b2af9b7447fe9b90c2c290469fe179390658e7a5972cdbf2aa99af4847",
+      "bytes": 23690,
+      "imports": [
+        "love-engine-v370.js",
+        "tarot-life-engine-v404.js"
+      ]
+    },
+    {
+      "path": "tarot-soul-engine-v403.js",
+      "sha256": "9f714824d3293cc8817d8f4e73dc11d25b1cd5a9e0e10fee93a746d18f0c5706",
+      "bytes": 20161,
+      "imports": [
+        "love-engine-v370.js",
+        "matter-engine-v400.js",
+        "tarot-story-engine-v402.js"
+      ]
+    },
+    {
+      "path": "tarot-story-engine-v402.js",
+      "sha256": "403efb6d75e2004f5288194e0f041f7d8d8b97f7657e298739af024efb544ceb",
+      "bytes": 86405,
+      "imports": [
+        "love-engine-v370.js",
+        "matter-engine-v400.js"
+      ]
+    },
+    {
+      "path": "tiragens-de-tarot.html",
+      "sha256": "e6e51c553fe4759170bacd408052947edc6b7dd0800b736e69d2007452b919a7",
+      "bytes": 22936,
+      "imports": []
+    },
+    {
+      "path": "videos-world-v311.js",
+      "sha256": "9185f3f06d7c2ff7bb0be76db4b669994d74281c8c6aab3369ab90fc100e3214",
+      "bytes": 7477,
+      "imports": [
+        "data/config.js",
+        "data/media.js"
+      ]
+    },
+    {
+      "path": "whit-divine-soul-engine-v408.js",
+      "sha256": "5547390d97be8993a96894124c3cfdaa8b00ecaa04aaa7616992693455e8308f",
+      "bytes": 31662,
+      "imports": [
+        "love-engine-v370.js",
+        "whit-superior-tarot-engine-v407.js",
+        "whit-tarot-knowledge-v410.js",
+        "whit-tarot-position-engine-v411.js",
+        "whit-tarot-dialogue-engine-v412.js",
+        "whit-tarot-human-reality-v413.js",
+        "whit-tarot-narrative-consciousness-v414.js",
+        "whit-tarot-soul-voice-v415.js",
+        "whit-tarot-living-depth-v416.js",
+        "whit-tarot-supreme-counsel-v417.js",
+        "whit-tarot-soul-consultation-v419.js",
+        "whit-tarot-proving-ground-v418.js"
+      ]
+    },
+    {
+      "path": "whit-superior-tarot-engine-v407.js",
+      "sha256": "2d9d22a7e11cb164068da5911333e2d33ebed6c5912c5882e5444782a66824db",
+      "bytes": 28293,
+      "imports": [
+        "love-engine-v370.js",
+        "whit-tarot-reader-engine-v406.js"
+      ]
+    },
+    {
+      "path": "whit-tarot-dialogue-engine-v412.js",
+      "sha256": "45d08384127dee8d07e538a3423f81a7db4db454f2ca542060a4e8dda3dfdbf7",
+      "bytes": 16905,
+      "imports": [
+        "whit-tarot-knowledge-v410.js",
+        "whit-tarot-position-engine-v411.js"
+      ]
+    },
+    {
+      "path": "whit-tarot-human-reality-v413.js",
+      "sha256": "b53cef3b936a7e3a065b9af21f6a6c9309f86db30c29d91cdeec2ce94fa73b35",
+      "bytes": 19584,
+      "imports": [
+        "whit-tarot-position-engine-v411.js",
+        "whit-tarot-dialogue-engine-v412.js"
+      ]
+    },
+    {
+      "path": "whit-tarot-knowledge-v410.js",
+      "sha256": "d8d795fbf6bcb0e9fe3954a3d4ddd18d802a26726aa74bcc1912e3a52ee04e08",
+      "bytes": 27217,
+      "imports": [
+        "tarot-story-engine-v402.js"
+      ]
+    },
+    {
+      "path": "whit-tarot-living-depth-v416.js",
+      "sha256": "51d46b9bef7511be9ed8aac06eb68bdccc33f897839f501b6bd496f7dcc5b2cd",
+      "bytes": 10479,
+      "imports": [
+        "whit-tarot-position-engine-v411.js",
+        "whit-tarot-dialogue-engine-v412.js",
+        "whit-tarot-human-reality-v413.js",
+        "whit-tarot-narrative-consciousness-v414.js",
+        "whit-tarot-soul-voice-v415.js"
+      ]
+    },
+    {
+      "path": "whit-tarot-narrative-consciousness-v414.js",
+      "sha256": "1c761e9d4f6e3f79240687fa990d80ea8dee1d8ec76354d195a9230bccb9b739",
+      "bytes": 18720,
+      "imports": [
+        "whit-tarot-position-engine-v411.js",
+        "whit-tarot-dialogue-engine-v412.js",
+        "whit-tarot-human-reality-v413.js"
+      ]
+    },
+    {
+      "path": "whit-tarot-position-engine-v411.js",
+      "sha256": "033db7668a675079ff0117f1eb7f6e52a4b8c14753a89499afcb8ecbc6ba473b",
+      "bytes": 13059,
+      "imports": [
+        "whit-tarot-knowledge-v410.js"
+      ]
+    },
+    {
+      "path": "whit-tarot-proving-ground-v418.js",
+      "sha256": "0fef78a55efd7a8fa99e7674396ccd99841034486f40540e5fcd1ad0c7089ebe",
+      "bytes": 7393,
+      "imports": []
+    },
+    {
+      "path": "whit-tarot-reader-engine-v406.js",
+      "sha256": "ff4a4e4e270a4a0fc73029aa6694521d624ed1d5b942f441ed328b74ac5d1ed0",
+      "bytes": 17628,
+      "imports": [
+        "love-engine-v370.js",
+        "tarot-orbe-realities-engine-v405.js"
+      ]
+    },
+    {
+      "path": "whit-tarot-soul-consultation-v419.js",
+      "sha256": "01128c477b8d598d84a837a1ba937a54b6dc72cc1b2b7eb1631c09945b2c2b10",
+      "bytes": 18613,
+      "imports": []
+    },
+    {
+      "path": "whit-tarot-soul-voice-v415.js",
+      "sha256": "0e7025918524d548a490115a35644e27018d979453f3ed0cc6abd6e820c0e879",
+      "bytes": 13956,
+      "imports": [
+        "whit-tarot-position-engine-v411.js",
+        "whit-tarot-dialogue-engine-v412.js",
+        "whit-tarot-human-reality-v413.js",
+        "whit-tarot-narrative-consciousness-v414.js"
+      ]
+    },
+    {
+      "path": "whit-tarot-supreme-counsel-v417.js",
+      "sha256": "9dcd3ed5ee53dcc4cb56bfedee94ae912ee9f1c85ef388c904a23aee61af97ed",
+      "bytes": 12615,
+      "imports": [
+        "whit-tarot-position-engine-v411.js",
+        "whit-tarot-dialogue-engine-v412.js",
+        "whit-tarot-human-reality-v413.js",
+        "whit-tarot-narrative-consciousness-v414.js"
+      ]
+    },
+    {
+      "path": "whit-world-v401.js",
+      "sha256": "e31ac7d621b8747ea922321c4a0ad8f7691fad6304b79c9364ef36c593d7906f",
+      "bytes": 9140,
+      "imports": [
+        "matter-engine-v400.js",
+        "whit-divine-soul-engine-v408.js"
+      ]
+    },
+    {
+      "path": "worlds/account.js",
+      "sha256": "7dd6d1b64c9fd82bf9b574f56c879d96af5401f2618152e3e3173a98743152be",
+      "bytes": 14988,
+      "imports": [
+        "data/config.js"
+      ]
+    },
+    {
+      "path": "worlds/consultations.js",
+      "sha256": "851b7410c6d64b723fb1f6b2d3e69ea309b4439e7ff1196c6ed21ce20147c373",
+      "bytes": 21298,
+      "imports": [
+        "data/config.js",
+        "data/consultations.js"
+      ]
+    },
+    {
+      "path": "worlds/journal.js",
+      "sha256": "4de87cdebbd8c8bca6ca26b3ad3b968dba13f9f3031efe6e960d254e3dd1472a",
+      "bytes": 8729,
+      "imports": [
+        "lib/daily-card.js"
+      ]
+    },
+    {
+      "path": "worlds/library.js",
+      "sha256": "3fa62ea2ca9ed9baf37545e465ae3fe618eb3f4e750e00e88bbe893cdd05487e",
+      "bytes": 3940,
+      "imports": [
+        "data/library.js"
+      ]
+    },
+    {
+      "path": "worlds/music.js",
+      "sha256": "3c283f22baf31ec68f8827c660dbb35fedd5a8df64679cf7878956aaf663280c",
+      "bytes": 2601,
+      "imports": [
+        "data/media.js"
+      ]
+    },
+    {
+      "path": "worlds/store.js",
+      "sha256": "e0c9190a1fa405e540e287336d47341c07ef0ddcf533e3cc39b381e96f17955c",
+      "bytes": 4555,
+      "imports": [
+        "data/config.js",
+        "data/store.js"
+      ]
+    }
+  ]
+}

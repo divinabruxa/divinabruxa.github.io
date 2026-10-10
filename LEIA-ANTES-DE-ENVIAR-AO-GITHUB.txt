@@ -1,0 +1,23 @@
+WHIT ALMA DIVINA — MACROETAPA 1/8
+
+Todos os arquivos deste ZIP estão soltos, sem pastas.
+Esta etapa entrega diagnóstico, ferramenta de auditoria e cópia parcial das fontes.
+Não altera a experiência pública e ainda não instala o novo motor.
+
+Você pode enviar os arquivos soltos à raiz do repositório no GitHub para guardar esta etapa. Não substitua app.js, index.html ou sw.js nesta etapa. Não adicione a ferramenta de auditoria como script no HTML.
+
+Conteúdo:
+- WHIT-ALMA-DIVINA-MACROETAPA-1.md: diagnóstico e plano concreto de migração.
+- WHIT-ALMA-DIVINA-MANIFESTO-BASE.json: imports, hashes e arquivos analisados.
+- WHIT-ALMA-DIVINA-LEITURAS-ANTES.json: oito exemplos reais do motor atual.
+- WHIT-ALMA-DIVINA-CHECKPOINT.json: backup parcial em texto das fontes analisadas.
+- whit-alma-divina-auditoria.mjs: ferramenta Node para repetir a coleta.
+- PLANO-SUPREMO-WHIT-ALMA-DIVINA.md: plano das oito macroetapas.
+- Este arquivo de instruções.
+
+Para repetir a auditoria em uma cópia local do repositório, com Node 20 ou superior:
+node whit-alma-divina-auditoria.mjs . ./whit-diagnostico
+
+A ferramenta grava manifesto e exemplos no diretório de saída. Ela carrega o motor do repositório no Node; execute somente numa cópia de código que você confia. Não muda os arquivos do aplicativo. O rastreamento é estático e não cobre imports dinâmicos.
+
+Não é necessário instalar dependências para essa ferramenta. Os testes existentes usam npm test.
