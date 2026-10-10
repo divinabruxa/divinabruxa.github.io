@@ -20,8 +20,8 @@ import { createStoreWorld } from './worlds/store.js';
 import { createVideosWorld } from './videos-world-v311.js';
 import { RealityOrbEngine } from './orb-engine-v68.js';
 import { createLivingUniverseV524 } from './living-universe-core-v524.js';
-import { arbitrioHash, secureArbitrioSeed } from './arbitrio-engine-v370.js';
-import { whitTarotReading } from './whit-divine-soul-engine-v408.js';
+import { whitHash as arbitrioHash, secureWhitSeed as secureArbitrioSeed } from './whit-alma-divina-utils-v1.js';
+import { whitTarotReading } from './whit-alma-divina-core-v1.js';
 
 const REDUCED_MOTION = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const TAROT_KEY = 'divina-bruxa-3.tarot-livre.v1';
@@ -117,7 +117,7 @@ function creationPresence(creation) {
 
 
 function creationSignature(creation) {
-  return `WHIT TARÓLOGA ${creation?.signature || 'LOCAL'} · CONSULTA BASEADA NAS CARTAS`;
+  return `WHIT TARÓLOGA · ${creation?.signature || 'ALMA DIVINA'} · FICÇÃO SIMBÓLICA PARA REFLEXÃO`;
 }
 
 function renderLivingDepth(choices, response, creation) {
@@ -1285,7 +1285,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=4.2.0-sintese-unica', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=alma-divina-1.0.0', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {

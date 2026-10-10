@@ -1,0 +1,28 @@
+WHIT ALMA DIVINA — MACROETAPA 3/8
+
+ESTA ENTREGA ATIVA O NOVO NÚCLEO DE INTERPRETAÇÃO.
+
+1. Extraia o ZIP. Todos os arquivos estão soltos, sem pastas.
+2. No GitHub, envie TODOS os arquivos desta entrega à raiz do mesmo repositório, juntos no mesmo envio.
+3. Confirme a substituição de app.js, index.html, whit-world-v401.js e sw.js.
+4. Aguarde a publicação do GitHub Pages e feche/reabra o site após atualizar.
+
+Pré-requisito: os três módulos da macroetapa 2 devem continuar na raiz:
+whit-alma-divina-base-v1.js
+whit-alma-divina-posicoes-v1.js
+whit-alma-divina-relacoes-v1.js
+
+Não crie pastas e não apague os motores antigos manualmente nesta etapa.
+Eles deixam de ser usados pelas entradas ativas de interpretação, mas ficam disponíveis para retorno até a limpeza planejada na etapa 7.
+
+Mudança visível: novas essências, histórias completas e botões de aprofundamento nas interfaces existentes. No Tarot Livre, consulte a carta atual e clique em “Ler a história completa”. Carta do Dia e tiragens usam o mesmo novo núcleo. Na área Whit, escreva nomes de cartas, peça para tirar uma carta ou acompanhe a leitura em andamento.
+
+O Tarot Livre continua lendo uma carta por consulta nesta etapa. A leitura da sequência completa vem na etapa 5. A voz e a riqueza literária serão lapidadas na etapa 4.
+
+Verificação local:
+node --test whit-alma-divina-*.test.mjs tests/*.test.mjs
+
+Retorno:
+Use o commit registrado no manifesto para restaurar os quatro arquivos substituídos. O JSON de retorno contém seus textos originais. Após uma publicação, o cache do service worker também deve receber uma versão nova para distribuir o retorno; não basta deixar um aparelho com o cache antigo.
+
+Os testes automatizados passaram. A interface ainda precisa de teste real em navegador e iPhone; este ZIP não contém essa certificação.

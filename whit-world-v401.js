@@ -5,8 +5,8 @@
  * páginas e não executa caminhos sem um toque.
  */
 
-import { normalizePreferredName, safeResearchHref } from './matter-engine-v400.js';
-import { STORY_ENGINE_VERSION, storyResponse } from './whit-divine-soul-engine-v408.js';
+import { normalizePreferredName, safeResearchHref } from './whit-alma-divina-utils-v1.js';
+import { STORY_ENGINE_VERSION, storyResponse } from './whit-alma-divina-core-v1.js';
 
 const STORAGE_KEY = 'divina-bruxa-3.whit.conversa-local.v11';
 const PROFILE_KEY = 'divina-bruxa-3.whit.materia.v1';
@@ -197,7 +197,7 @@ export function createWhitWorld({ announce, navigate, cards = [], worlds = {}, g
           worlds,
           guides
         });
-        consultationContext = creation.consultationContext || consultationContext;
+        consultationContext = creation.consultationContext ?? null;
         const next = validMessage({
           role:'whit',
           text:creation.text,
