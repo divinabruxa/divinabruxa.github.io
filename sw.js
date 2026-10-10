@@ -1,8 +1,8 @@
 /* Divina Bruxa 4.2.1 · Lançamento público. */
-const CACHE = 'divina-bruxa-3-shell-20261010-whit-alma-divina-1';
+const CACHE = 'divina-bruxa-3-shell-20261010-whit-alma-divina-voz-1-1';
 const PREFIX = 'divina-bruxa-';
 const CORE = [
-  './whit-alma-divina-utils-v1.js', './whit-alma-divina-core-v1.js', './whit-alma-divina-base-v1.js', './whit-alma-divina-posicoes-v1.js', './whit-alma-divina-relacoes-v1.js',
+  './whit-alma-divina-voz-v1.js', './whit-alma-divina-utils-v1.js', './whit-alma-divina-core-v1.js', './whit-alma-divina-base-v1.js', './whit-alma-divina-posicoes-v1.js', './whit-alma-divina-relacoes-v1.js',
   './index.html', './styles.css', './app.js', './manifest.webmanifest', './assets/orbe.webp',
   './orb-engine-v68.js', './living-universe-core-v524.js', './living-universe-core-v524.css', './skins-world-v301.js',
   './divina-orb-thumb-v1.webp', './divina-universe-retina-v523.webp', './arbitrio-engine-v360.js',

@@ -1,0 +1,21 @@
+WHIT ALMA DIVINA — MACROETAPA 4/8 — VOZ 1.1
+
+1. Extraia o ZIP. Todos os arquivos estão soltos, sem pastas.
+2. Envie TODOS os arquivos juntos à raiz de divinabruxa.github.io no GitHub.
+3. Substitua whit-alma-divina-core-v1.js, whit-world-v401.js, sw.js e index.html.
+4. Aguarde a publicação e atualize/reabra o site.
+
+Mantenha os módulos das etapas 2 e 3. Não apague motores antigos manualmente.
+
+Mudança visível: a opção “Ler a história completa” agora abre a nova composição literária. As essências e os aprofundamentos de vínculos, mente, atitudes e espiritualidade também mudaram. Na Carta do Dia, abra o aprofundamento; na Whit, peça uma leitura com nomes de cartas ou acompanhe a mesa atual.
+
+O novo arquivo whit-alma-divina-voz-v1.js é parte do núcleo único, não uma segunda inteligência independente.
+
+Nesta etapa, Tarot Livre continua consultando a carta atual. A leitura opcional da sequência e os ajustes da Carta do Dia vêm na etapa 5. Capítulos especiais de Cruz Celta e Mesa Real vêm na etapa 6.
+
+Verificação local:
+node --test whit-alma-divina-*.test.mjs tests/*.test.mjs
+
+Os 113 testes automatizados passaram. Teste visual real em navegador/Safari/iPhone continua pendente.
+
+Para retornar, use o commit do manifesto ou os textos dos quatro arquivos guardados no JSON de retorno. Após publicar um retorno, atualize a versão de cache do service worker. Não sobreponha alterações posteriores sem comparar os arquivos.

@@ -1,0 +1,1462 @@
+{
+  "count": 40,
+  "notice": "Exemplos fictícios para comparação editorial; não são leituras pessoais.",
+  "cases": [
+    {
+      "name": "dia-esperanca",
+      "variation": 0,
+      "input": {
+        "canonicalIds": [
+          "17-a-estrela"
+        ],
+        "scope": "carta-do-dia",
+        "question": "",
+        "seed": "dia-esperanca-0"
+      },
+      "words": 456,
+      "characters": 2893,
+      "milliseconds": 2.606375,
+      "title": "Uma esperança com raízes",
+      "essence": "Ficção simbólica para reflexão. Como contexto presente, depois de um desgaste, uma esperança pode voltar a ter espaço. O ponto delicado é usar a esperança para não olhar a realidade. Para o momento presente, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em renovação e confiança gradual, sem garantir um resultado. Retome um cuidado simples que torne a esperança praticável.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nImagine um jardim depois de uma noite longa. Nessa paisagem, depois de um desgaste, uma esperança pode voltar a ter espaço. O tempo desta cena é o agora: aquilo que pode receber atenção antes do próximo gesto. Uma luz pequena não apaga a noite; oferece um lugar por onde recomeçar. A força que dá início à passagem é renovação e confiança gradual; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO fio pode se apertar ao usar a esperança para não olhar a realidade. É nesse ponto que a imagem muda de tom: a força de renovação e confiança gradual também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nSem uma pergunta definida, essa passagem oferece um espelho aberto. Repare onde a imagem encontra eco na sua experiência e onde não encontra. Uma leitura se torna útil quando ajuda a nomear uma questão; não precisa servir como descrição inteira da sua vida. Nas trocas com outras pessoas, a força de renovação e confiança gradual pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma imagem pode encontrar sentido em mais de uma situação. Escolha aquela que você reconhece e examine o que sabe sobre ela. Não é necessário adaptar sua história à leitura para que a reflexão tenha valor. No pensamento, vale distinguir a força de renovação e confiança gradual do risco de usar a esperança para não olhar a realidade. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a imagem evoca a luz que permanece depois da noite. O símbolo convida a retomar uma confiança praticável e sustentar necessidades reais. Essa dimensão não precisa se afastar do cotidiano: pode existir numa pausa, num cuidado ou numa conversa que aproxime intenção e atitude. O sagrado, nesta história, é uma forma poética de reconhecer o valor do que está sendo vivido.\n\nRetome um cuidado simples que torne a esperança praticável. A direção da história encontra apoio em renovação e confiança gradual, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: onde você encontra espaço para retomar uma confiança praticável sem ignorar o limite que apareceu?",
+      "closing": "Onde você encontra espaço para retomar uma confiança praticável sem ignorar o limite que apareceu?",
+      "topic": "general",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "17-a-estrela",
+          "position": "Hoje",
+          "role": "present"
+        }
+      ]
+    },
+    {
+      "name": "dia-esperanca",
+      "variation": 1,
+      "input": {
+        "canonicalIds": [
+          "17-a-estrela"
+        ],
+        "scope": "carta-do-dia",
+        "question": "",
+        "seed": "dia-esperanca-1"
+      },
+      "words": 459,
+      "characters": 2907,
+      "milliseconds": 0.541214999999994,
+      "title": "O jardim depois da noite",
+      "essence": "Ficção simbólica para reflexão. Como contexto presente, depois de um desgaste, uma esperança pode voltar a ter espaço. O ponto delicado é usar a esperança para não olhar a realidade. Para o momento presente, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em renovação e confiança gradual, sem garantir um resultado. Retome um cuidado simples que torne a esperança praticável.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nComo cena simbólica, imagine um jardim depois de uma noite longa. Nessa paisagem, depois de um desgaste, uma esperança pode voltar a ter espaço. O tempo desta cena é o agora: aquilo que pode receber atenção antes do próximo gesto. Uma luz pequena não apaga a noite; oferece um lugar por onde recomeçar. A força que dá início à passagem é renovação e confiança gradual; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO contraste aparece no risco de usar a esperança para não olhar a realidade. É nesse ponto que a imagem muda de tom: a força de renovação e confiança gradual também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nSem uma pergunta definida, essa passagem oferece um espelho aberto. Repare onde a imagem encontra eco na sua experiência e onde não encontra. Uma leitura se torna útil quando ajuda a nomear uma questão; não precisa servir como descrição inteira da sua vida. Nas trocas com outras pessoas, a força de renovação e confiança gradual pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma imagem pode encontrar sentido em mais de uma situação. Escolha aquela que você reconhece e examine o que sabe sobre ela. Não é necessário adaptar sua história à leitura para que a reflexão tenha valor. No pensamento, vale distinguir a força de renovação e confiança gradual do risco de usar a esperança para não olhar a realidade. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a imagem evoca a luz que permanece depois da noite. O símbolo convida a retomar uma confiança praticável e sustentar necessidades reais. Essa dimensão não precisa se afastar do cotidiano: pode existir numa pausa, num cuidado ou numa conversa que aproxime intenção e atitude. O sagrado, nesta história, é uma forma poética de reconhecer o valor do que está sendo vivido.\n\nRetome um cuidado simples que torne a esperança praticável. A direção da história encontra apoio em renovação e confiança gradual, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: que parte desta imagem merece sua atenção hoje, e que parte você pode deixar passar?",
+      "closing": "Que parte desta imagem merece sua atenção hoje, e que parte você pode deixar passar?",
+      "topic": "general",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "17-a-estrela",
+          "position": "Hoje",
+          "role": "present"
+        }
+      ]
+    },
+    {
+      "name": "dia-esperanca",
+      "variation": 2,
+      "input": {
+        "canonicalIds": [
+          "17-a-estrela"
+        ],
+        "scope": "carta-do-dia",
+        "question": "",
+        "seed": "dia-esperanca-2"
+      },
+      "words": 456,
+      "characters": 2900,
+      "milliseconds": 0.15373199999999798,
+      "title": "O jardim depois da noite",
+      "essence": "Ficção simbólica para reflexão. Como contexto presente, depois de um desgaste, uma esperança pode voltar a ter espaço. O ponto delicado é usar a esperança para não olhar a realidade. Para o momento presente, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em renovação e confiança gradual, sem garantir um resultado. Retome um cuidado simples que torne a esperança praticável.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nImagine um jardim depois de uma noite longa. Nessa paisagem, depois de um desgaste, uma esperança pode voltar a ter espaço. O tempo desta cena é o agora: aquilo que pode receber atenção antes do próximo gesto. Uma luz pequena não apaga a noite; oferece um lugar por onde recomeçar. A força que dá início à passagem é renovação e confiança gradual; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO contraste aparece no risco de usar a esperança para não olhar a realidade. É nesse ponto que a imagem muda de tom: a força de renovação e confiança gradual também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nSem uma pergunta definida, essa passagem oferece um espelho aberto. Repare onde a imagem encontra eco na sua experiência e onde não encontra. Uma leitura se torna útil quando ajuda a nomear uma questão; não precisa servir como descrição inteira da sua vida. Nas trocas com outras pessoas, a força de renovação e confiança gradual pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma imagem pode encontrar sentido em mais de uma situação. Escolha aquela que você reconhece e examine o que sabe sobre ela. Não é necessário adaptar sua história à leitura para que a reflexão tenha valor. No pensamento, vale distinguir a força de renovação e confiança gradual do risco de usar a esperança para não olhar a realidade. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a imagem evoca a luz que permanece depois da noite. O símbolo convida a retomar uma confiança praticável e sustentar necessidades reais. Essa dimensão não precisa se afastar do cotidiano: pode existir numa pausa, num cuidado ou numa conversa que aproxime intenção e atitude. O sagrado, nesta história, é uma forma poética de reconhecer o valor do que está sendo vivido.\n\nRetome um cuidado simples que torne a esperança praticável. A direção da história encontra apoio em renovação e confiança gradual, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: onde você encontra espaço para retomar uma confiança praticável sem ignorar o limite que apareceu?",
+      "closing": "Onde você encontra espaço para retomar uma confiança praticável sem ignorar o limite que apareceu?",
+      "topic": "general",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "17-a-estrela",
+          "position": "Hoje",
+          "role": "present"
+        }
+      ]
+    },
+    {
+      "name": "dia-esperanca",
+      "variation": 3,
+      "input": {
+        "canonicalIds": [
+          "17-a-estrela"
+        ],
+        "scope": "carta-do-dia",
+        "question": "",
+        "seed": "dia-esperanca-3"
+      },
+      "words": 462,
+      "characters": 2912,
+      "milliseconds": 0.09089699999999823,
+      "title": "O jardim depois da noite",
+      "essence": "Ficção simbólica para reflexão. Como contexto presente, depois de um desgaste, uma esperança pode voltar a ter espaço. O ponto delicado é usar a esperança para não olhar a realidade. Para o momento presente, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em renovação e confiança gradual, sem garantir um resultado. Retome um cuidado simples que torne a esperança praticável.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nA história pode ser vista assim: imagine um jardim depois de uma noite longa. Nessa paisagem, depois de um desgaste, uma esperança pode voltar a ter espaço. O tempo desta cena é o agora: aquilo que pode receber atenção antes do próximo gesto. Uma luz pequena não apaga a noite; oferece um lugar por onde recomeçar. A força que dá início à passagem é renovação e confiança gradual; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO fio pode se apertar ao usar a esperança para não olhar a realidade. É nesse ponto que a imagem muda de tom: a força de renovação e confiança gradual também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nSem uma pergunta definida, essa passagem oferece um espelho aberto. Repare onde a imagem encontra eco na sua experiência e onde não encontra. Uma leitura se torna útil quando ajuda a nomear uma questão; não precisa servir como descrição inteira da sua vida. Nas trocas com outras pessoas, a força de renovação e confiança gradual pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma imagem pode encontrar sentido em mais de uma situação. Escolha aquela que você reconhece e examine o que sabe sobre ela. Não é necessário adaptar sua história à leitura para que a reflexão tenha valor. No pensamento, vale distinguir a força de renovação e confiança gradual do risco de usar a esperança para não olhar a realidade. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a imagem evoca a luz que permanece depois da noite. O símbolo convida a retomar uma confiança praticável e sustentar necessidades reais. Essa dimensão não precisa se afastar do cotidiano: pode existir numa pausa, num cuidado ou numa conversa que aproxime intenção e atitude. O sagrado, nesta história, é uma forma poética de reconhecer o valor do que está sendo vivido.\n\nRetome um cuidado simples que torne a esperança praticável. A direção da história encontra apoio em renovação e confiança gradual, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: que parte desta imagem merece sua atenção hoje, e que parte você pode deixar passar?",
+      "closing": "Que parte desta imagem merece sua atenção hoje, e que parte você pode deixar passar?",
+      "topic": "general",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "17-a-estrela",
+          "position": "Hoje",
+          "role": "present"
+        }
+      ]
+    },
+    {
+      "name": "dia-ruptura",
+      "variation": 0,
+      "input": {
+        "canonicalIds": [
+          "16-a-torre"
+        ],
+        "scope": "carta-do-dia",
+        "question": "",
+        "seed": "dia-ruptura-0"
+      },
+      "words": 462,
+      "characters": 2971,
+      "milliseconds": 0.11688600000000093,
+      "title": "Depois que a forma cede",
+      "essence": "Ficção simbólica para reflexão. Como contexto presente, uma estrutura encontra um limite que já não consegue esconder. O ponto delicado é negar sinais de desgaste ou provocar ruptura sem cuidado. Para o momento presente, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em revelação e reorganização, sem garantir um resultado. Proteja o essencial e reveja a base que deixou de funcionar.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nComo cena simbólica, imagine uma construção cuja rachadura finalmente se torna visível. Nessa paisagem, uma estrutura encontra um limite que já não consegue esconder. O tempo desta cena é o agora: aquilo que pode receber atenção antes do próximo gesto. Reconhecer uma rachadura permite cuidar da estrutura antes de chamar o desgaste de segurança. A força que dá início à passagem é revelação e reorganização; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO fio pode se apertar ao negar sinais de desgaste ou provocar ruptura sem cuidado. É nesse ponto que a imagem muda de tom: a força de revelação e reorganização também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nSem uma pergunta definida, essa passagem oferece um espelho aberto. Repare onde a imagem encontra eco na sua experiência e onde não encontra. Uma leitura se torna útil quando ajuda a nomear uma questão; não precisa servir como descrição inteira da sua vida. Nas trocas com outras pessoas, a força de revelação e reorganização pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma imagem pode encontrar sentido em mais de uma situação. Escolha aquela que você reconhece e examine o que sabe sobre ela. Não é necessário adaptar sua história à leitura para que a reflexão tenha valor. No pensamento, vale distinguir a força de revelação e reorganização do risco de negar sinais de desgaste ou provocar ruptura sem cuidado. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a imagem evoca a queda de uma forma que parecia incontestável. O símbolo convida a reorganizar o que perdeu sustentação e buscar clareza e responsabilidade. Essa dimensão não precisa se afastar do cotidiano: pode existir numa pausa, num cuidado ou numa conversa que aproxime intenção e atitude. O sagrado, nesta história, é uma forma poética de reconhecer o valor do que está sendo vivido.\n\nProteja o essencial e reveja a base que deixou de funcionar. A direção da história encontra apoio em revelação e reorganização, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: que parte desta imagem merece sua atenção hoje, e que parte você pode deixar passar?",
+      "closing": "Que parte desta imagem merece sua atenção hoje, e que parte você pode deixar passar?",
+      "topic": "general",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "16-a-torre",
+          "position": "Hoje",
+          "role": "present"
+        }
+      ]
+    },
+    {
+      "name": "dia-ruptura",
+      "variation": 1,
+      "input": {
+        "canonicalIds": [
+          "16-a-torre"
+        ],
+        "scope": "carta-do-dia",
+        "question": "",
+        "seed": "dia-ruptura-1"
+      },
+      "words": 460,
+      "characters": 2968,
+      "milliseconds": 0.8362389999999991,
+      "title": "Depois que a forma cede",
+      "essence": "Ficção simbólica para reflexão. Como contexto presente, uma estrutura encontra um limite que já não consegue esconder. O ponto delicado é negar sinais de desgaste ou provocar ruptura sem cuidado. Para o momento presente, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em revelação e reorganização, sem garantir um resultado. Proteja o essencial e reveja a base que deixou de funcionar.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nImagine uma construção cuja rachadura finalmente se torna visível. Nessa paisagem, uma estrutura encontra um limite que já não consegue esconder. O tempo desta cena é o agora: aquilo que pode receber atenção antes do próximo gesto. Reconhecer uma rachadura permite cuidar da estrutura antes de chamar o desgaste de segurança. A força que dá início à passagem é revelação e reorganização; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO fio pode se apertar ao negar sinais de desgaste ou provocar ruptura sem cuidado. É nesse ponto que a imagem muda de tom: a força de revelação e reorganização também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nSem uma pergunta definida, essa passagem oferece um espelho aberto. Repare onde a imagem encontra eco na sua experiência e onde não encontra. Uma leitura se torna útil quando ajuda a nomear uma questão; não precisa servir como descrição inteira da sua vida. Nas trocas com outras pessoas, a força de revelação e reorganização pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma imagem pode encontrar sentido em mais de uma situação. Escolha aquela que você reconhece e examine o que sabe sobre ela. Não é necessário adaptar sua história à leitura para que a reflexão tenha valor. No pensamento, vale distinguir a força de revelação e reorganização do risco de negar sinais de desgaste ou provocar ruptura sem cuidado. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a imagem evoca a queda de uma forma que parecia incontestável. O símbolo convida a reorganizar o que perdeu sustentação e buscar clareza e responsabilidade. Essa dimensão não precisa se afastar do cotidiano: pode existir numa pausa, num cuidado ou numa conversa que aproxime intenção e atitude. O sagrado, nesta história, é uma forma poética de reconhecer o valor do que está sendo vivido.\n\nProteja o essencial e reveja a base que deixou de funcionar. A direção da história encontra apoio em revelação e reorganização, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: onde você encontra espaço para reorganizar o que perdeu sustentação sem ignorar o limite que apareceu?",
+      "closing": "Onde você encontra espaço para reorganizar o que perdeu sustentação sem ignorar o limite que apareceu?",
+      "topic": "general",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "16-a-torre",
+          "position": "Hoje",
+          "role": "present"
+        }
+      ]
+    },
+    {
+      "name": "dia-ruptura",
+      "variation": 2,
+      "input": {
+        "canonicalIds": [
+          "16-a-torre"
+        ],
+        "scope": "carta-do-dia",
+        "question": "",
+        "seed": "dia-ruptura-2"
+      },
+      "words": 459,
+      "characters": 2950,
+      "milliseconds": 0.13562399999999997,
+      "title": "A rachadura e a luz",
+      "essence": "Ficção simbólica para reflexão. Como contexto presente, uma estrutura encontra um limite que já não consegue esconder. O ponto delicado é negar sinais de desgaste ou provocar ruptura sem cuidado. Para o momento presente, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em revelação e reorganização, sem garantir um resultado. Proteja o essencial e reveja a base que deixou de funcionar.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nImagine uma construção cuja rachadura finalmente se torna visível. Nessa paisagem, uma estrutura encontra um limite que já não consegue esconder. O tempo desta cena é o agora: aquilo que pode receber atenção antes do próximo gesto. Reconhecer uma rachadura permite cuidar da estrutura antes de chamar o desgaste de segurança. A força que dá início à passagem é revelação e reorganização; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO fio pode se apertar ao negar sinais de desgaste ou provocar ruptura sem cuidado. É nesse ponto que a imagem muda de tom: a força de revelação e reorganização também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nSem uma pergunta definida, essa passagem oferece um espelho aberto. Repare onde a imagem encontra eco na sua experiência e onde não encontra. Uma leitura se torna útil quando ajuda a nomear uma questão; não precisa servir como descrição inteira da sua vida. Nas trocas com outras pessoas, a força de revelação e reorganização pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma imagem pode encontrar sentido em mais de uma situação. Escolha aquela que você reconhece e examine o que sabe sobre ela. Não é necessário adaptar sua história à leitura para que a reflexão tenha valor. No pensamento, vale distinguir a força de revelação e reorganização do risco de negar sinais de desgaste ou provocar ruptura sem cuidado. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a imagem evoca a queda de uma forma que parecia incontestável. O símbolo convida a reorganizar o que perdeu sustentação e buscar clareza e responsabilidade. Essa dimensão não precisa se afastar do cotidiano: pode existir numa pausa, num cuidado ou numa conversa que aproxime intenção e atitude. O sagrado, nesta história, é uma forma poética de reconhecer o valor do que está sendo vivido.\n\nProteja o essencial e reveja a base que deixou de funcionar. A direção da história encontra apoio em revelação e reorganização, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: que parte desta imagem merece sua atenção hoje, e que parte você pode deixar passar?",
+      "closing": "Que parte desta imagem merece sua atenção hoje, e que parte você pode deixar passar?",
+      "topic": "general",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "16-a-torre",
+          "position": "Hoje",
+          "role": "present"
+        }
+      ]
+    },
+    {
+      "name": "dia-ruptura",
+      "variation": 3,
+      "input": {
+        "canonicalIds": [
+          "16-a-torre"
+        ],
+        "scope": "carta-do-dia",
+        "question": "",
+        "seed": "dia-ruptura-3"
+      },
+      "words": 463,
+      "characters": 2996,
+      "milliseconds": 0.14642999999999518,
+      "title": "Depois que a forma cede",
+      "essence": "Ficção simbólica para reflexão. Como contexto presente, uma estrutura encontra um limite que já não consegue esconder. O ponto delicado é negar sinais de desgaste ou provocar ruptura sem cuidado. Para o momento presente, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em revelação e reorganização, sem garantir um resultado. Proteja o essencial e reveja a base que deixou de funcionar.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nComo cena simbólica, imagine uma construção cuja rachadura finalmente se torna visível. Nessa paisagem, uma estrutura encontra um limite que já não consegue esconder. O tempo desta cena é o agora: aquilo que pode receber atenção antes do próximo gesto. Reconhecer uma rachadura permite cuidar da estrutura antes de chamar o desgaste de segurança. A força que dá início à passagem é revelação e reorganização; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO contraste aparece no risco de negar sinais de desgaste ou provocar ruptura sem cuidado. É nesse ponto que a imagem muda de tom: a força de revelação e reorganização também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nSem uma pergunta definida, essa passagem oferece um espelho aberto. Repare onde a imagem encontra eco na sua experiência e onde não encontra. Uma leitura se torna útil quando ajuda a nomear uma questão; não precisa servir como descrição inteira da sua vida. Nas trocas com outras pessoas, a força de revelação e reorganização pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma imagem pode encontrar sentido em mais de uma situação. Escolha aquela que você reconhece e examine o que sabe sobre ela. Não é necessário adaptar sua história à leitura para que a reflexão tenha valor. No pensamento, vale distinguir a força de revelação e reorganização do risco de negar sinais de desgaste ou provocar ruptura sem cuidado. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a imagem evoca a queda de uma forma que parecia incontestável. O símbolo convida a reorganizar o que perdeu sustentação e buscar clareza e responsabilidade. Essa dimensão não precisa se afastar do cotidiano: pode existir numa pausa, num cuidado ou numa conversa que aproxime intenção e atitude. O sagrado, nesta história, é uma forma poética de reconhecer o valor do que está sendo vivido.\n\nProteja o essencial e reveja a base que deixou de funcionar. A direção da história encontra apoio em revelação e reorganização, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: onde você encontra espaço para reorganizar o que perdeu sustentação sem ignorar o limite que apareceu?",
+      "closing": "Onde você encontra espaço para reorganizar o que perdeu sustentação sem ignorar o limite que apareceu?",
+      "topic": "general",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "16-a-torre",
+          "position": "Hoje",
+          "role": "present"
+        }
+      ]
+    },
+    {
+      "name": "dia-perda",
+      "variation": 0,
+      "input": {
+        "canonicalIds": [
+          "26-5-de-copas"
+        ],
+        "scope": "carta-do-dia",
+        "question": "",
+        "seed": "dia-perda-0"
+      },
+      "words": 464,
+      "characters": 2936,
+      "milliseconds": 0.17722700000000202,
+      "title": "Dar lugar à ausência",
+      "essence": "Ficção simbólica para reflexão. Como contexto presente, uma perda ocupa o olhar enquanto algo ainda permanece. O ponto delicado é reduzir toda a experiência ao que não deu certo. Para o momento presente, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em reconhecimento da tristeza, sem garantir um resultado. Dê espaço à perda e identifique um apoio que continua presente.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nComo cena simbólica, imagine uma margem onde algo se foi e algo ainda oferece apoio. Nessa paisagem, uma perda ocupa o olhar enquanto algo ainda permanece. O tempo desta cena é o agora: aquilo que pode receber atenção antes do próximo gesto. Uma ausência merece espaço sem ocupar, sozinha, toda a paisagem. A força que dá início à passagem é reconhecimento da tristeza; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO contraste aparece no risco de reduzir toda a experiência ao que não deu certo. É nesse ponto que a imagem muda de tom: a força de reconhecimento da tristeza também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nSem uma pergunta definida, essa passagem oferece um espelho aberto. Repare onde a imagem encontra eco na sua experiência e onde não encontra. Uma leitura se torna útil quando ajuda a nomear uma questão; não precisa servir como descrição inteira da sua vida. Nas trocas com outras pessoas, a força de reconhecimento da tristeza pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma imagem pode encontrar sentido em mais de uma situação. Escolha aquela que você reconhece e examine o que sabe sobre ela. Não é necessário adaptar sua história à leitura para que a reflexão tenha valor. No pensamento, vale distinguir a força de reconhecimento da tristeza do risco de reduzir toda a experiência ao que não deu certo. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a imagem evoca o luto simbólico e a margem que resta. O símbolo convida a acolher o que deixou de estar presente e sustentar necessidades reais. Essa dimensão não precisa se afastar do cotidiano: pode existir numa pausa, num cuidado ou numa conversa que aproxime intenção e atitude. O sagrado, nesta história, é uma forma poética de reconhecer o valor do que está sendo vivido.\n\nDê espaço à perda e identifique um apoio que continua presente. A direção da história encontra apoio em reconhecimento da tristeza, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: onde você encontra espaço para acolher o que deixou de estar presente sem ignorar o limite que apareceu?",
+      "closing": "Onde você encontra espaço para acolher o que deixou de estar presente sem ignorar o limite que apareceu?",
+      "topic": "general",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "26-5-de-copas",
+          "position": "Hoje",
+          "role": "present"
+        }
+      ]
+    },
+    {
+      "name": "dia-perda",
+      "variation": 1,
+      "input": {
+        "canonicalIds": [
+          "26-5-de-copas"
+        ],
+        "scope": "carta-do-dia",
+        "question": "",
+        "seed": "dia-perda-1"
+      },
+      "words": 464,
+      "characters": 2921,
+      "milliseconds": 0.11361200000000338,
+      "title": "Dar lugar à ausência",
+      "essence": "Ficção simbólica para reflexão. Como contexto presente, uma perda ocupa o olhar enquanto algo ainda permanece. O ponto delicado é reduzir toda a experiência ao que não deu certo. Para o momento presente, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em reconhecimento da tristeza, sem garantir um resultado. Dê espaço à perda e identifique um apoio que continua presente.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nA história pode ser vista assim: imagine uma margem onde algo se foi e algo ainda oferece apoio. Nessa paisagem, uma perda ocupa o olhar enquanto algo ainda permanece. O tempo desta cena é o agora: aquilo que pode receber atenção antes do próximo gesto. Uma ausência merece espaço sem ocupar, sozinha, toda a paisagem. A força que dá início à passagem é reconhecimento da tristeza; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO fio pode se apertar ao reduzir toda a experiência ao que não deu certo. É nesse ponto que a imagem muda de tom: a força de reconhecimento da tristeza também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nSem uma pergunta definida, essa passagem oferece um espelho aberto. Repare onde a imagem encontra eco na sua experiência e onde não encontra. Uma leitura se torna útil quando ajuda a nomear uma questão; não precisa servir como descrição inteira da sua vida. Nas trocas com outras pessoas, a força de reconhecimento da tristeza pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma imagem pode encontrar sentido em mais de uma situação. Escolha aquela que você reconhece e examine o que sabe sobre ela. Não é necessário adaptar sua história à leitura para que a reflexão tenha valor. No pensamento, vale distinguir a força de reconhecimento da tristeza do risco de reduzir toda a experiência ao que não deu certo. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a imagem evoca o luto simbólico e a margem que resta. O símbolo convida a acolher o que deixou de estar presente e sustentar necessidades reais. Essa dimensão não precisa se afastar do cotidiano: pode existir numa pausa, num cuidado ou numa conversa que aproxime intenção e atitude. O sagrado, nesta história, é uma forma poética de reconhecer o valor do que está sendo vivido.\n\nDê espaço à perda e identifique um apoio que continua presente. A direção da história encontra apoio em reconhecimento da tristeza, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: que parte desta imagem merece sua atenção hoje, e que parte você pode deixar passar?",
+      "closing": "Que parte desta imagem merece sua atenção hoje, e que parte você pode deixar passar?",
+      "topic": "general",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "26-5-de-copas",
+          "position": "Hoje",
+          "role": "present"
+        }
+      ]
+    },
+    {
+      "name": "dia-perda",
+      "variation": 2,
+      "input": {
+        "canonicalIds": [
+          "26-5-de-copas"
+        ],
+        "scope": "carta-do-dia",
+        "question": "",
+        "seed": "dia-perda-2"
+      },
+      "words": 464,
+      "characters": 2936,
+      "milliseconds": 0.1270110000000031,
+      "title": "O que fica depois da perda",
+      "essence": "Ficção simbólica para reflexão. Como contexto presente, uma perda ocupa o olhar enquanto algo ainda permanece. O ponto delicado é reduzir toda a experiência ao que não deu certo. Para o momento presente, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em reconhecimento da tristeza, sem garantir um resultado. Dê espaço à perda e identifique um apoio que continua presente.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nComo cena simbólica, imagine uma margem onde algo se foi e algo ainda oferece apoio. Nessa paisagem, uma perda ocupa o olhar enquanto algo ainda permanece. O tempo desta cena é o agora: aquilo que pode receber atenção antes do próximo gesto. Uma ausência merece espaço sem ocupar, sozinha, toda a paisagem. A força que dá início à passagem é reconhecimento da tristeza; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO contraste aparece no risco de reduzir toda a experiência ao que não deu certo. É nesse ponto que a imagem muda de tom: a força de reconhecimento da tristeza também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nSem uma pergunta definida, essa passagem oferece um espelho aberto. Repare onde a imagem encontra eco na sua experiência e onde não encontra. Uma leitura se torna útil quando ajuda a nomear uma questão; não precisa servir como descrição inteira da sua vida. Nas trocas com outras pessoas, a força de reconhecimento da tristeza pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma imagem pode encontrar sentido em mais de uma situação. Escolha aquela que você reconhece e examine o que sabe sobre ela. Não é necessário adaptar sua história à leitura para que a reflexão tenha valor. No pensamento, vale distinguir a força de reconhecimento da tristeza do risco de reduzir toda a experiência ao que não deu certo. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a imagem evoca o luto simbólico e a margem que resta. O símbolo convida a acolher o que deixou de estar presente e sustentar necessidades reais. Essa dimensão não precisa se afastar do cotidiano: pode existir numa pausa, num cuidado ou numa conversa que aproxime intenção e atitude. O sagrado, nesta história, é uma forma poética de reconhecer o valor do que está sendo vivido.\n\nDê espaço à perda e identifique um apoio que continua presente. A direção da história encontra apoio em reconhecimento da tristeza, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: onde você encontra espaço para acolher o que deixou de estar presente sem ignorar o limite que apareceu?",
+      "closing": "Onde você encontra espaço para acolher o que deixou de estar presente sem ignorar o limite que apareceu?",
+      "topic": "general",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "26-5-de-copas",
+          "position": "Hoje",
+          "role": "present"
+        }
+      ]
+    },
+    {
+      "name": "dia-perda",
+      "variation": 3,
+      "input": {
+        "canonicalIds": [
+          "26-5-de-copas"
+        ],
+        "scope": "carta-do-dia",
+        "question": "",
+        "seed": "dia-perda-3"
+      },
+      "words": 461,
+      "characters": 2916,
+      "milliseconds": 0.08246399999999454,
+      "title": "Dar lugar à ausência",
+      "essence": "Ficção simbólica para reflexão. Como contexto presente, uma perda ocupa o olhar enquanto algo ainda permanece. O ponto delicado é reduzir toda a experiência ao que não deu certo. Para o momento presente, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em reconhecimento da tristeza, sem garantir um resultado. Dê espaço à perda e identifique um apoio que continua presente.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nComo cena simbólica, imagine uma margem onde algo se foi e algo ainda oferece apoio. Nessa paisagem, uma perda ocupa o olhar enquanto algo ainda permanece. O tempo desta cena é o agora: aquilo que pode receber atenção antes do próximo gesto. Uma ausência merece espaço sem ocupar, sozinha, toda a paisagem. A força que dá início à passagem é reconhecimento da tristeza; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nA parte delicada desta imagem é reduzir toda a experiência ao que não deu certo. É nesse ponto que a imagem muda de tom: a força de reconhecimento da tristeza também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nSem uma pergunta definida, essa passagem oferece um espelho aberto. Repare onde a imagem encontra eco na sua experiência e onde não encontra. Uma leitura se torna útil quando ajuda a nomear uma questão; não precisa servir como descrição inteira da sua vida. Nas trocas com outras pessoas, a força de reconhecimento da tristeza pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma imagem pode encontrar sentido em mais de uma situação. Escolha aquela que você reconhece e examine o que sabe sobre ela. Não é necessário adaptar sua história à leitura para que a reflexão tenha valor. No pensamento, vale distinguir a força de reconhecimento da tristeza do risco de reduzir toda a experiência ao que não deu certo. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a imagem evoca o luto simbólico e a margem que resta. O símbolo convida a acolher o que deixou de estar presente e sustentar necessidades reais. Essa dimensão não precisa se afastar do cotidiano: pode existir numa pausa, num cuidado ou numa conversa que aproxime intenção e atitude. O sagrado, nesta história, é uma forma poética de reconhecer o valor do que está sendo vivido.\n\nDê espaço à perda e identifique um apoio que continua presente. A direção da história encontra apoio em reconhecimento da tristeza, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: que parte desta imagem merece sua atenção hoje, e que parte você pode deixar passar?",
+      "closing": "Que parte desta imagem merece sua atenção hoje, e que parte você pode deixar passar?",
+      "topic": "general",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "26-5-de-copas",
+          "position": "Hoje",
+          "role": "present"
+        }
+      ]
+    },
+    {
+      "name": "amor-reconstrucao",
+      "variation": 0,
+      "input": {
+        "canonicalIds": [
+          "17-a-estrela",
+          "16-a-torre",
+          "19-o-sol"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como reconstruir meu relacionamento?",
+        "seed": "amor-reconstrucao-0"
+      },
+      "words": 539,
+      "characters": 3439,
+      "milliseconds": 0.3833369999999974,
+      "title": "Uma esperança com raízes",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, depois de um desgaste, uma esperança pode voltar a ter espaço. O ponto delicado é negar sinais de desgaste ou provocar ruptura sem cuidado. A esperança encontra uma estrutura que precisa ser revista; preservar a luz não exige preservar toda a forma. Para os vínculos, quando a pergunta procura reconstrução, a esperança precisa de condições. Renovar não é repetir uma promessa; pode exigir um acordo diferente, um limite ou outra maneira de agir. A direção da história encontra apoio em vitalidade e transparência, sem garantir um resultado. Diga com simplicidade o que ficou claro e celebre um avanço real.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nComo cena simbólica, imagine um jardim depois de uma noite longa. Nessa paisagem, depois de um desgaste, uma esperança pode voltar a ter espaço. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. Uma luz pequena não apaga a noite; oferece um lugar por onde recomeçar. A força que dá início à passagem é renovação e confiança gradual; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO fio pode se apertar ao negar sinais de desgaste ou provocar ruptura sem cuidado. É nesse ponto que a imagem muda de tom: a força de revelação e reorganização também pede medida. Quando a pergunta procura reconstrução, a esperança precisa de condições. Renovar não é repetir uma promessa; pode exigir um acordo diferente, um limite ou outra maneira de agir. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nA esperança encontra uma estrutura que precisa ser revista; preservar a luz não exige preservar toda a forma. Depois de uma quebra de estrutura, a clareza permite reconhecer o que merece ser reconstruído. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nSe essa imagem tocar sua vida afetiva, procure reciprocidade entre sentimento, disponibilidade e atitude. Uma relação não se sustenta apenas na intensidade de uma pessoa; precisa de espaço para duas presenças e para a verdade de ambas. Nas trocas com outras pessoas, a força de revelação e reorganização pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nNos vínculos, o desejo de receber uma resposta pode transformar um silêncio em muitas explicações. Antes de escolher uma delas, considere o que foi dito, o que foi feito e o que ainda permanece desconhecido. No pensamento, vale distinguir a força de revelação e reorganização do risco de negar sinais de desgaste ou provocar ruptura sem cuidado. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a luz que permanece depois da noite; a luz que torna visível o que pode ser vivido. Entre elas, o sentido convida a retomar uma confiança praticável, sustentar necessidades reais e reorganizar o que perdeu sustentação. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nDiga com simplicidade o que ficou claro e celebre um avanço real. A direção da história encontra apoio em vitalidade e transparência, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: que atitude mostra reciprocidade, e que parte desta história existe apenas na sua expectativa?",
+      "closing": "Que atitude mostra reciprocidade, e que parte desta história existe apenas na sua expectativa?",
+      "topic": "love",
+      "intent": "renewal",
+      "provenance": [
+        {
+          "canonicalId": "17-a-estrela",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "16-a-torre",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "19-o-sol",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "amor-reconstrucao",
+      "variation": 1,
+      "input": {
+        "canonicalIds": [
+          "17-a-estrela",
+          "16-a-torre",
+          "19-o-sol"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como reconstruir meu relacionamento?",
+        "seed": "amor-reconstrucao-1"
+      },
+      "words": 540,
+      "characters": 3445,
+      "milliseconds": 0.1256490000000028,
+      "title": "Uma esperança com raízes",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, depois de um desgaste, uma esperança pode voltar a ter espaço. O ponto delicado é negar sinais de desgaste ou provocar ruptura sem cuidado. A esperança encontra uma estrutura que precisa ser revista; preservar a luz não exige preservar toda a forma. Para os vínculos, quando a pergunta procura reconstrução, a esperança precisa de condições. Renovar não é repetir uma promessa; pode exigir um acordo diferente, um limite ou outra maneira de agir. A direção da história encontra apoio em vitalidade e transparência, sem garantir um resultado. Diga com simplicidade o que ficou claro e celebre um avanço real.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nComo cena simbólica, imagine um jardim depois de uma noite longa. Nessa paisagem, depois de um desgaste, uma esperança pode voltar a ter espaço. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. Uma luz pequena não apaga a noite; oferece um lugar por onde recomeçar. A força que dá início à passagem é renovação e confiança gradual; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO fio pode se apertar ao negar sinais de desgaste ou provocar ruptura sem cuidado. É nesse ponto que a imagem muda de tom: a força de revelação e reorganização também pede medida. Quando a pergunta procura reconstrução, a esperança precisa de condições. Renovar não é repetir uma promessa; pode exigir um acordo diferente, um limite ou outra maneira de agir. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nA esperança encontra uma estrutura que precisa ser revista; preservar a luz não exige preservar toda a forma. Depois de uma quebra de estrutura, a clareza permite reconhecer o que merece ser reconstruído. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nSe essa imagem tocar sua vida afetiva, procure reciprocidade entre sentimento, disponibilidade e atitude. Uma relação não se sustenta apenas na intensidade de uma pessoa; precisa de espaço para duas presenças e para a verdade de ambas. Nas trocas com outras pessoas, a força de revelação e reorganização pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nNos vínculos, o desejo de receber uma resposta pode transformar um silêncio em muitas explicações. Antes de escolher uma delas, considere o que foi dito, o que foi feito e o que ainda permanece desconhecido. No pensamento, vale distinguir a força de revelação e reorganização do risco de negar sinais de desgaste ou provocar ruptura sem cuidado. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a luz que permanece depois da noite; a luz que torna visível o que pode ser vivido. Entre elas, o sentido convida a retomar uma confiança praticável, sustentar necessidades reais e reorganizar o que perdeu sustentação. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nDiga com simplicidade o que ficou claro e celebre um avanço real. A direção da história encontra apoio em vitalidade e transparência, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: onde você encontra espaço para tornar uma percepção compreensível sem ignorar o limite que apareceu?",
+      "closing": "Onde você encontra espaço para tornar uma percepção compreensível sem ignorar o limite que apareceu?",
+      "topic": "love",
+      "intent": "renewal",
+      "provenance": [
+        {
+          "canonicalId": "17-a-estrela",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "16-a-torre",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "19-o-sol",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "amor-reconstrucao",
+      "variation": 2,
+      "input": {
+        "canonicalIds": [
+          "17-a-estrela",
+          "16-a-torre",
+          "19-o-sol"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como reconstruir meu relacionamento?",
+        "seed": "amor-reconstrucao-2"
+      },
+      "words": 536,
+      "characters": 3418,
+      "milliseconds": 0.1380280000000056,
+      "title": "A luz que permanece",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, depois de um desgaste, uma esperança pode voltar a ter espaço. O ponto delicado é negar sinais de desgaste ou provocar ruptura sem cuidado. A esperança encontra uma estrutura que precisa ser revista; preservar a luz não exige preservar toda a forma. Para os vínculos, quando a pergunta procura reconstrução, a esperança precisa de condições. Renovar não é repetir uma promessa; pode exigir um acordo diferente, um limite ou outra maneira de agir. A direção da história encontra apoio em vitalidade e transparência, sem garantir um resultado. Diga com simplicidade o que ficou claro e celebre um avanço real.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nImagine um jardim depois de uma noite longa. Nessa paisagem, depois de um desgaste, uma esperança pode voltar a ter espaço. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. Uma luz pequena não apaga a noite; oferece um lugar por onde recomeçar. A força que dá início à passagem é renovação e confiança gradual; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO fio pode se apertar ao negar sinais de desgaste ou provocar ruptura sem cuidado. É nesse ponto que a imagem muda de tom: a força de revelação e reorganização também pede medida. Quando a pergunta procura reconstrução, a esperança precisa de condições. Renovar não é repetir uma promessa; pode exigir um acordo diferente, um limite ou outra maneira de agir. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nA esperança encontra uma estrutura que precisa ser revista; preservar a luz não exige preservar toda a forma. Depois de uma quebra de estrutura, a clareza permite reconhecer o que merece ser reconstruído. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nSe essa imagem tocar sua vida afetiva, procure reciprocidade entre sentimento, disponibilidade e atitude. Uma relação não se sustenta apenas na intensidade de uma pessoa; precisa de espaço para duas presenças e para a verdade de ambas. Nas trocas com outras pessoas, a força de revelação e reorganização pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nNos vínculos, o desejo de receber uma resposta pode transformar um silêncio em muitas explicações. Antes de escolher uma delas, considere o que foi dito, o que foi feito e o que ainda permanece desconhecido. No pensamento, vale distinguir a força de revelação e reorganização do risco de negar sinais de desgaste ou provocar ruptura sem cuidado. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a luz que permanece depois da noite; a luz que torna visível o que pode ser vivido. Entre elas, o sentido convida a retomar uma confiança praticável, sustentar necessidades reais e reorganizar o que perdeu sustentação. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nDiga com simplicidade o que ficou claro e celebre um avanço real. A direção da história encontra apoio em vitalidade e transparência, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: que atitude mostra reciprocidade, e que parte desta história existe apenas na sua expectativa?",
+      "closing": "Que atitude mostra reciprocidade, e que parte desta história existe apenas na sua expectativa?",
+      "topic": "love",
+      "intent": "renewal",
+      "provenance": [
+        {
+          "canonicalId": "17-a-estrela",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "16-a-torre",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "19-o-sol",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "amor-reconstrucao",
+      "variation": 3,
+      "input": {
+        "canonicalIds": [
+          "17-a-estrela",
+          "16-a-torre",
+          "19-o-sol"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como reconstruir meu relacionamento?",
+        "seed": "amor-reconstrucao-3"
+      },
+      "words": 543,
+      "characters": 3457,
+      "milliseconds": 0.07898899999999287,
+      "title": "Uma esperança com raízes",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, depois de um desgaste, uma esperança pode voltar a ter espaço. O ponto delicado é negar sinais de desgaste ou provocar ruptura sem cuidado. A esperança encontra uma estrutura que precisa ser revista; preservar a luz não exige preservar toda a forma. Para os vínculos, quando a pergunta procura reconstrução, a esperança precisa de condições. Renovar não é repetir uma promessa; pode exigir um acordo diferente, um limite ou outra maneira de agir. A direção da história encontra apoio em vitalidade e transparência, sem garantir um resultado. Diga com simplicidade o que ficou claro e celebre um avanço real.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nA história pode ser vista assim: imagine um jardim depois de uma noite longa. Nessa paisagem, depois de um desgaste, uma esperança pode voltar a ter espaço. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. Uma luz pequena não apaga a noite; oferece um lugar por onde recomeçar. A força que dá início à passagem é renovação e confiança gradual; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO fio pode se apertar ao negar sinais de desgaste ou provocar ruptura sem cuidado. É nesse ponto que a imagem muda de tom: a força de revelação e reorganização também pede medida. Quando a pergunta procura reconstrução, a esperança precisa de condições. Renovar não é repetir uma promessa; pode exigir um acordo diferente, um limite ou outra maneira de agir. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nA esperança encontra uma estrutura que precisa ser revista; preservar a luz não exige preservar toda a forma. Depois de uma quebra de estrutura, a clareza permite reconhecer o que merece ser reconstruído. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nSe essa imagem tocar sua vida afetiva, procure reciprocidade entre sentimento, disponibilidade e atitude. Uma relação não se sustenta apenas na intensidade de uma pessoa; precisa de espaço para duas presenças e para a verdade de ambas. Nas trocas com outras pessoas, a força de revelação e reorganização pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nNos vínculos, o desejo de receber uma resposta pode transformar um silêncio em muitas explicações. Antes de escolher uma delas, considere o que foi dito, o que foi feito e o que ainda permanece desconhecido. No pensamento, vale distinguir a força de revelação e reorganização do risco de negar sinais de desgaste ou provocar ruptura sem cuidado. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a luz que permanece depois da noite; a luz que torna visível o que pode ser vivido. Entre elas, o sentido convida a retomar uma confiança praticável, sustentar necessidades reais e reorganizar o que perdeu sustentação. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nDiga com simplicidade o que ficou claro e celebre um avanço real. A direção da história encontra apoio em vitalidade e transparência, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: onde você encontra espaço para tornar uma percepção compreensível sem ignorar o limite que apareceu?",
+      "closing": "Onde você encontra espaço para tornar uma percepção compreensível sem ignorar o limite que apareceu?",
+      "topic": "love",
+      "intent": "renewal",
+      "provenance": [
+        {
+          "canonicalId": "17-a-estrela",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "16-a-torre",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "19-o-sol",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "amor-encerramento",
+      "variation": 0,
+      "input": {
+        "canonicalIds": [
+          "13-a-morte",
+          "18-a-lua",
+          "00-o-louco"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Devo encerrar meu relacionamento?",
+        "seed": "amor-encerramento-0"
+      },
+      "words": 524,
+      "characters": 3366,
+      "milliseconds": 0.13107700000000477,
+      "title": "O limiar e a memória",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, uma forma antiga perde espaço para uma passagem necessária. O ponto delicado é tratar medo ou intuição como prova. O percurso muda de encerramento e transformação para imaginação e sensibilidade; a tensão de insistir numa continuidade que já não se sustenta encontra a necessidade de confira uma informação antes de concluir o que ela significa. Para os vínculos, quando a pergunta procura um encerramento, o ponto não é sair ou ficar por obediência ao símbolo: é reconhecer o que ainda se sustenta e o que apenas prolonga desgaste. A direção da história encontra apoio em curiosidade e abertura, sem garantir um resultado. Experimente um passo pequeno e confira o terreno.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nImagine um limiar entre uma sala que se fecha e outra ainda sem nome. Nessa paisagem, uma forma antiga perde espaço para uma passagem necessária. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. O que termina pode deixar memória sem continuar comandando a passagem. A força que dá início à passagem é encerramento e transformação; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO contraste aparece no risco de tratar medo ou intuição como prova. É nesse ponto que a imagem muda de tom: a força de imaginação e sensibilidade também pede medida. Quando a pergunta procura um encerramento, o ponto não é sair ou ficar por obediência ao símbolo: é reconhecer o que ainda se sustenta e o que apenas prolonga desgaste. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO percurso muda de encerramento e transformação para imaginação e sensibilidade; a tensão de insistir numa continuidade que já não se sustenta encontra a necessidade de confira uma informação antes de concluir o que ela significa. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nSe essa imagem tocar sua vida afetiva, procure reciprocidade entre sentimento, disponibilidade e atitude. Uma relação não se sustenta apenas na intensidade de uma pessoa; precisa de espaço para duas presenças e para a verdade de ambas. Nas trocas com outras pessoas, a força de imaginação e sensibilidade pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nNos vínculos, o desejo de receber uma resposta pode transformar um silêncio em muitas explicações. Antes de escolher uma delas, considere o que foi dito, o que foi feito e o que ainda permanece desconhecido. No pensamento, vale distinguir a força de imaginação e sensibilidade do risco de tratar medo ou intuição como prova. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a passagem entre fim e renovação; a travessia do desconhecido. Entre elas, o sentido convida a reconhecer um encerramento, acompanhar uma transformação e aguardar informação suficiente. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nExperimente um passo pequeno e confira o terreno. A direção da história encontra apoio em curiosidade e abertura, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: onde você encontra espaço para abrir espaço para um começo sem ignorar o limite que apareceu?",
+      "closing": "Onde você encontra espaço para abrir espaço para um começo sem ignorar o limite que apareceu?",
+      "topic": "love",
+      "intent": "ending",
+      "provenance": [
+        {
+          "canonicalId": "13-a-morte",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "18-a-lua",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "00-o-louco",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "amor-encerramento",
+      "variation": 1,
+      "input": {
+        "canonicalIds": [
+          "13-a-morte",
+          "18-a-lua",
+          "00-o-louco"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Devo encerrar meu relacionamento?",
+        "seed": "amor-encerramento-1"
+      },
+      "words": 528,
+      "characters": 3393,
+      "milliseconds": 0.08037100000001374,
+      "title": "Depois da última porta",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, uma forma antiga perde espaço para uma passagem necessária. O ponto delicado é tratar medo ou intuição como prova. O percurso muda de encerramento e transformação para imaginação e sensibilidade; a tensão de insistir numa continuidade que já não se sustenta encontra a necessidade de confira uma informação antes de concluir o que ela significa. Para os vínculos, quando a pergunta procura um encerramento, o ponto não é sair ou ficar por obediência ao símbolo: é reconhecer o que ainda se sustenta e o que apenas prolonga desgaste. A direção da história encontra apoio em curiosidade e abertura, sem garantir um resultado. Experimente um passo pequeno e confira o terreno.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nA história pode ser vista assim: imagine um limiar entre uma sala que se fecha e outra ainda sem nome. Nessa paisagem, uma forma antiga perde espaço para uma passagem necessária. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. O que termina pode deixar memória sem continuar comandando a passagem. A força que dá início à passagem é encerramento e transformação; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO fio pode se apertar ao tratar medo ou intuição como prova. É nesse ponto que a imagem muda de tom: a força de imaginação e sensibilidade também pede medida. Quando a pergunta procura um encerramento, o ponto não é sair ou ficar por obediência ao símbolo: é reconhecer o que ainda se sustenta e o que apenas prolonga desgaste. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO percurso muda de encerramento e transformação para imaginação e sensibilidade; a tensão de insistir numa continuidade que já não se sustenta encontra a necessidade de confira uma informação antes de concluir o que ela significa. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nSe essa imagem tocar sua vida afetiva, procure reciprocidade entre sentimento, disponibilidade e atitude. Uma relação não se sustenta apenas na intensidade de uma pessoa; precisa de espaço para duas presenças e para a verdade de ambas. Nas trocas com outras pessoas, a força de imaginação e sensibilidade pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nNos vínculos, o desejo de receber uma resposta pode transformar um silêncio em muitas explicações. Antes de escolher uma delas, considere o que foi dito, o que foi feito e o que ainda permanece desconhecido. No pensamento, vale distinguir a força de imaginação e sensibilidade do risco de tratar medo ou intuição como prova. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a passagem entre fim e renovação; a travessia do desconhecido. Entre elas, o sentido convida a reconhecer um encerramento, acompanhar uma transformação e aguardar informação suficiente. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nExperimente um passo pequeno e confira o terreno. A direção da história encontra apoio em curiosidade e abertura, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: que atitude mostra reciprocidade, e que parte desta história existe apenas na sua expectativa?",
+      "closing": "Que atitude mostra reciprocidade, e que parte desta história existe apenas na sua expectativa?",
+      "topic": "love",
+      "intent": "ending",
+      "provenance": [
+        {
+          "canonicalId": "13-a-morte",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "18-a-lua",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "00-o-louco",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "amor-encerramento",
+      "variation": 2,
+      "input": {
+        "canonicalIds": [
+          "13-a-morte",
+          "18-a-lua",
+          "00-o-louco"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Devo encerrar meu relacionamento?",
+        "seed": "amor-encerramento-2"
+      },
+      "words": 527,
+      "characters": 3387,
+      "milliseconds": 0.06628999999999508,
+      "title": "Depois da última porta",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, uma forma antiga perde espaço para uma passagem necessária. O ponto delicado é tratar medo ou intuição como prova. O percurso muda de encerramento e transformação para imaginação e sensibilidade; a tensão de insistir numa continuidade que já não se sustenta encontra a necessidade de confira uma informação antes de concluir o que ela significa. Para os vínculos, quando a pergunta procura um encerramento, o ponto não é sair ou ficar por obediência ao símbolo: é reconhecer o que ainda se sustenta e o que apenas prolonga desgaste. A direção da história encontra apoio em curiosidade e abertura, sem garantir um resultado. Experimente um passo pequeno e confira o terreno.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nComo cena simbólica, imagine um limiar entre uma sala que se fecha e outra ainda sem nome. Nessa paisagem, uma forma antiga perde espaço para uma passagem necessária. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. O que termina pode deixar memória sem continuar comandando a passagem. A força que dá início à passagem é encerramento e transformação; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO contraste aparece no risco de tratar medo ou intuição como prova. É nesse ponto que a imagem muda de tom: a força de imaginação e sensibilidade também pede medida. Quando a pergunta procura um encerramento, o ponto não é sair ou ficar por obediência ao símbolo: é reconhecer o que ainda se sustenta e o que apenas prolonga desgaste. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO percurso muda de encerramento e transformação para imaginação e sensibilidade; a tensão de insistir numa continuidade que já não se sustenta encontra a necessidade de confira uma informação antes de concluir o que ela significa. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nSe essa imagem tocar sua vida afetiva, procure reciprocidade entre sentimento, disponibilidade e atitude. Uma relação não se sustenta apenas na intensidade de uma pessoa; precisa de espaço para duas presenças e para a verdade de ambas. Nas trocas com outras pessoas, a força de imaginação e sensibilidade pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nNos vínculos, o desejo de receber uma resposta pode transformar um silêncio em muitas explicações. Antes de escolher uma delas, considere o que foi dito, o que foi feito e o que ainda permanece desconhecido. No pensamento, vale distinguir a força de imaginação e sensibilidade do risco de tratar medo ou intuição como prova. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a passagem entre fim e renovação; a travessia do desconhecido. Entre elas, o sentido convida a reconhecer um encerramento, acompanhar uma transformação e aguardar informação suficiente. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nExperimente um passo pequeno e confira o terreno. A direção da história encontra apoio em curiosidade e abertura, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: onde você encontra espaço para abrir espaço para um começo sem ignorar o limite que apareceu?",
+      "closing": "Onde você encontra espaço para abrir espaço para um começo sem ignorar o limite que apareceu?",
+      "topic": "love",
+      "intent": "ending",
+      "provenance": [
+        {
+          "canonicalId": "13-a-morte",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "18-a-lua",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "00-o-louco",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "amor-encerramento",
+      "variation": 3,
+      "input": {
+        "canonicalIds": [
+          "13-a-morte",
+          "18-a-lua",
+          "00-o-louco"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Devo encerrar meu relacionamento?",
+        "seed": "amor-encerramento-3"
+      },
+      "words": 528,
+      "characters": 3393,
+      "milliseconds": 0.06714100000000656,
+      "title": "O que pode seguir de outro modo",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, uma forma antiga perde espaço para uma passagem necessária. O ponto delicado é tratar medo ou intuição como prova. O percurso muda de encerramento e transformação para imaginação e sensibilidade; a tensão de insistir numa continuidade que já não se sustenta encontra a necessidade de confira uma informação antes de concluir o que ela significa. Para os vínculos, quando a pergunta procura um encerramento, o ponto não é sair ou ficar por obediência ao símbolo: é reconhecer o que ainda se sustenta e o que apenas prolonga desgaste. A direção da história encontra apoio em curiosidade e abertura, sem garantir um resultado. Experimente um passo pequeno e confira o terreno.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nA história pode ser vista assim: imagine um limiar entre uma sala que se fecha e outra ainda sem nome. Nessa paisagem, uma forma antiga perde espaço para uma passagem necessária. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. O que termina pode deixar memória sem continuar comandando a passagem. A força que dá início à passagem é encerramento e transformação; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO fio pode se apertar ao tratar medo ou intuição como prova. É nesse ponto que a imagem muda de tom: a força de imaginação e sensibilidade também pede medida. Quando a pergunta procura um encerramento, o ponto não é sair ou ficar por obediência ao símbolo: é reconhecer o que ainda se sustenta e o que apenas prolonga desgaste. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO percurso muda de encerramento e transformação para imaginação e sensibilidade; a tensão de insistir numa continuidade que já não se sustenta encontra a necessidade de confira uma informação antes de concluir o que ela significa. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nSe essa imagem tocar sua vida afetiva, procure reciprocidade entre sentimento, disponibilidade e atitude. Uma relação não se sustenta apenas na intensidade de uma pessoa; precisa de espaço para duas presenças e para a verdade de ambas. Nas trocas com outras pessoas, a força de imaginação e sensibilidade pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nNos vínculos, o desejo de receber uma resposta pode transformar um silêncio em muitas explicações. Antes de escolher uma delas, considere o que foi dito, o que foi feito e o que ainda permanece desconhecido. No pensamento, vale distinguir a força de imaginação e sensibilidade do risco de tratar medo ou intuição como prova. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a passagem entre fim e renovação; a travessia do desconhecido. Entre elas, o sentido convida a reconhecer um encerramento, acompanhar uma transformação e aguardar informação suficiente. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nExperimente um passo pequeno e confira o terreno. A direção da história encontra apoio em curiosidade e abertura, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: que atitude mostra reciprocidade, e que parte desta história existe apenas na sua expectativa?",
+      "closing": "Que atitude mostra reciprocidade, e que parte desta história existe apenas na sua expectativa?",
+      "topic": "love",
+      "intent": "ending",
+      "provenance": [
+        {
+          "canonicalId": "13-a-morte",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "18-a-lua",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "00-o-louco",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "trabalho",
+      "variation": 0,
+      "input": {
+        "canonicalIds": [
+          "50-as-de-paus",
+          "65-2-de-ouros",
+          "76-rainha-de-ouros"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como mudar minha situação no trabalho?",
+        "seed": "trabalho-0"
+      },
+      "words": 514,
+      "characters": 3306,
+      "milliseconds": 0.27295100000000616,
+      "title": "Onde o começo respira",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, uma vontade criativa encontra um começo possível. O ponto delicado é confundir inspiração com um projeto já sustentado. O percurso muda de entusiasmo e impulso para flexibilidade; a tensão de confundir inspiração com um projeto já sustentado encontra a necessidade de reorganize duas prioridades e reconheça o que pode esperar. Para o trabalho e a construção, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em acolhimento e administração de recursos, sem garantir um resultado. Organize um cuidado viável também para você.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nA história pode ser vista assim: imagine uma porta que acaba de se abrir. Nessa paisagem, uma vontade criativa encontra um começo possível. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. A primeira luz ainda não mostra a estrada inteira. A força que dá início à passagem é entusiasmo e impulso; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO contraste aparece no risco de confundir inspiração com um projeto já sustentado. É nesse ponto que a imagem muda de tom: a força de entusiasmo e impulso também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO percurso muda de entusiasmo e impulso para flexibilidade; a tensão de confundir inspiração com um projeto já sustentado encontra a necessidade de reorganize duas prioridades e reconheça o que pode esperar. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nNo trabalho, essa passagem convida a aproximar vontade, capacidade e condições de realização. Um projeto precisa de acordos tão claros quanto sua intenção. Vale observar onde um esforço amadurece e onde apenas se repete sem produzir aprendizado. Nas trocas com outras pessoas, a força de entusiasmo e impulso pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma possibilidade profissional merece exame antes de virar obrigação. Separe o que é uma condição concreta, o que é uma expectativa sua e o que depende de uma conversa ou de um acordo. No pensamento, vale distinguir a força de entusiasmo e impulso do risco de confundir inspiração com um projeto já sustentado. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a centelha que procura matéria; o chão que acolhe e nutre. Entre elas, o sentido convida a examinar condições concretas, abrir espaço para um começo e converter intenção em gesto. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nOrganize um cuidado viável também para você. A direção da história encontra apoio em acolhimento e administração de recursos, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: onde você encontra espaço para sustentar necessidades reais sem ignorar o limite que apareceu?",
+      "closing": "Onde você encontra espaço para sustentar necessidades reais sem ignorar o limite que apareceu?",
+      "topic": "work",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "50-as-de-paus",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "65-2-de-ouros",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "76-rainha-de-ouros",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "trabalho",
+      "variation": 1,
+      "input": {
+        "canonicalIds": [
+          "50-as-de-paus",
+          "65-2-de-ouros",
+          "76-rainha-de-ouros"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como mudar minha situação no trabalho?",
+        "seed": "trabalho-1"
+      },
+      "words": 508,
+      "characters": 3254,
+      "milliseconds": 0.09457199999999943,
+      "title": "A porta antes do caminho",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, uma vontade criativa encontra um começo possível. O ponto delicado é confundir inspiração com um projeto já sustentado. O percurso muda de entusiasmo e impulso para flexibilidade; a tensão de confundir inspiração com um projeto já sustentado encontra a necessidade de reorganize duas prioridades e reconheça o que pode esperar. Para o trabalho e a construção, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em acolhimento e administração de recursos, sem garantir um resultado. Organize um cuidado viável também para você.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nImagine uma porta que acaba de se abrir. Nessa paisagem, uma vontade criativa encontra um começo possível. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. A primeira luz ainda não mostra a estrada inteira. A força que dá início à passagem é entusiasmo e impulso; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO fio pode se apertar ao confundir inspiração com um projeto já sustentado. É nesse ponto que a imagem muda de tom: a força de entusiasmo e impulso também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO percurso muda de entusiasmo e impulso para flexibilidade; a tensão de confundir inspiração com um projeto já sustentado encontra a necessidade de reorganize duas prioridades e reconheça o que pode esperar. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nNo trabalho, essa passagem convida a aproximar vontade, capacidade e condições de realização. Um projeto precisa de acordos tão claros quanto sua intenção. Vale observar onde um esforço amadurece e onde apenas se repete sem produzir aprendizado. Nas trocas com outras pessoas, a força de entusiasmo e impulso pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma possibilidade profissional merece exame antes de virar obrigação. Separe o que é uma condição concreta, o que é uma expectativa sua e o que depende de uma conversa ou de um acordo. No pensamento, vale distinguir a força de entusiasmo e impulso do risco de confundir inspiração com um projeto já sustentado. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a centelha que procura matéria; o chão que acolhe e nutre. Entre elas, o sentido convida a examinar condições concretas, abrir espaço para um começo e converter intenção em gesto. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nOrganize um cuidado viável também para você. A direção da história encontra apoio em acolhimento e administração de recursos, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: qual ajuste tornaria seu próximo passo mais viável, em vez de apenas mais urgente?",
+      "closing": "Qual ajuste tornaria seu próximo passo mais viável, em vez de apenas mais urgente?",
+      "topic": "work",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "50-as-de-paus",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "65-2-de-ouros",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "76-rainha-de-ouros",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "trabalho",
+      "variation": 2,
+      "input": {
+        "canonicalIds": [
+          "50-as-de-paus",
+          "65-2-de-ouros",
+          "76-rainha-de-ouros"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como mudar minha situação no trabalho?",
+        "seed": "trabalho-2"
+      },
+      "words": 508,
+      "characters": 3273,
+      "milliseconds": 0.09631500000000415,
+      "title": "A porta antes do caminho",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, uma vontade criativa encontra um começo possível. O ponto delicado é confundir inspiração com um projeto já sustentado. O percurso muda de entusiasmo e impulso para flexibilidade; a tensão de confundir inspiração com um projeto já sustentado encontra a necessidade de reorganize duas prioridades e reconheça o que pode esperar. Para o trabalho e a construção, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em acolhimento e administração de recursos, sem garantir um resultado. Organize um cuidado viável também para você.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nImagine uma porta que acaba de se abrir. Nessa paisagem, uma vontade criativa encontra um começo possível. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. A primeira luz ainda não mostra a estrada inteira. A força que dá início à passagem é entusiasmo e impulso; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO contraste aparece no risco de confundir inspiração com um projeto já sustentado. É nesse ponto que a imagem muda de tom: a força de entusiasmo e impulso também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO percurso muda de entusiasmo e impulso para flexibilidade; a tensão de confundir inspiração com um projeto já sustentado encontra a necessidade de reorganize duas prioridades e reconheça o que pode esperar. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nNo trabalho, essa passagem convida a aproximar vontade, capacidade e condições de realização. Um projeto precisa de acordos tão claros quanto sua intenção. Vale observar onde um esforço amadurece e onde apenas se repete sem produzir aprendizado. Nas trocas com outras pessoas, a força de entusiasmo e impulso pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma possibilidade profissional merece exame antes de virar obrigação. Separe o que é uma condição concreta, o que é uma expectativa sua e o que depende de uma conversa ou de um acordo. No pensamento, vale distinguir a força de entusiasmo e impulso do risco de confundir inspiração com um projeto já sustentado. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a centelha que procura matéria; o chão que acolhe e nutre. Entre elas, o sentido convida a examinar condições concretas, abrir espaço para um começo e converter intenção em gesto. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nOrganize um cuidado viável também para você. A direção da história encontra apoio em acolhimento e administração de recursos, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: onde você encontra espaço para sustentar necessidades reais sem ignorar o limite que apareceu?",
+      "closing": "Onde você encontra espaço para sustentar necessidades reais sem ignorar o limite que apareceu?",
+      "topic": "work",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "50-as-de-paus",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "65-2-de-ouros",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "76-rainha-de-ouros",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "trabalho",
+      "variation": 3,
+      "input": {
+        "canonicalIds": [
+          "50-as-de-paus",
+          "65-2-de-ouros",
+          "76-rainha-de-ouros"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como mudar minha situação no trabalho?",
+        "seed": "trabalho-3"
+      },
+      "words": 508,
+      "characters": 3261,
+      "milliseconds": 0.08325599999999156,
+      "title": "A porta antes do caminho",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, uma vontade criativa encontra um começo possível. O ponto delicado é confundir inspiração com um projeto já sustentado. O percurso muda de entusiasmo e impulso para flexibilidade; a tensão de confundir inspiração com um projeto já sustentado encontra a necessidade de reorganize duas prioridades e reconheça o que pode esperar. Para o trabalho e a construção, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em acolhimento e administração de recursos, sem garantir um resultado. Organize um cuidado viável também para você.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nImagine uma porta que acaba de se abrir. Nessa paisagem, uma vontade criativa encontra um começo possível. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. A primeira luz ainda não mostra a estrada inteira. A força que dá início à passagem é entusiasmo e impulso; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nA parte delicada desta imagem é confundir inspiração com um projeto já sustentado. É nesse ponto que a imagem muda de tom: a força de entusiasmo e impulso também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO percurso muda de entusiasmo e impulso para flexibilidade; a tensão de confundir inspiração com um projeto já sustentado encontra a necessidade de reorganize duas prioridades e reconheça o que pode esperar. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nNo trabalho, essa passagem convida a aproximar vontade, capacidade e condições de realização. Um projeto precisa de acordos tão claros quanto sua intenção. Vale observar onde um esforço amadurece e onde apenas se repete sem produzir aprendizado. Nas trocas com outras pessoas, a força de entusiasmo e impulso pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma possibilidade profissional merece exame antes de virar obrigação. Separe o que é uma condição concreta, o que é uma expectativa sua e o que depende de uma conversa ou de um acordo. No pensamento, vale distinguir a força de entusiasmo e impulso do risco de confundir inspiração com um projeto já sustentado. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a centelha que procura matéria; o chão que acolhe e nutre. Entre elas, o sentido convida a examinar condições concretas, abrir espaço para um começo e converter intenção em gesto. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nOrganize um cuidado viável também para você. A direção da história encontra apoio em acolhimento e administração de recursos, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: qual ajuste tornaria seu próximo passo mais viável, em vez de apenas mais urgente?",
+      "closing": "Qual ajuste tornaria seu próximo passo mais viável, em vez de apenas mais urgente?",
+      "topic": "work",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "50-as-de-paus",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "65-2-de-ouros",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "76-rainha-de-ouros",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "recursos",
+      "variation": 0,
+      "input": {
+        "canonicalIds": [
+          "68-5-de-ouros",
+          "69-6-de-ouros",
+          "70-7-de-ouros"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como organizar meus recursos?",
+        "seed": "recursos-0"
+      },
+      "words": 527,
+      "characters": 3454,
+      "milliseconds": 0.10544899999999302,
+      "title": "Dar lugar à ausência",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, uma sensação de falta torna importante reconhecer apoio acessível. O ponto delicado é tomar dificuldade material como medida de valor pessoal. O percurso muda de percepção da necessidade para generosidade e reciprocidade; a tensão de tomar dificuldade material como medida de valor pessoal encontra a necessidade de converse sobre condições e limites de uma troca. Para os recursos e as prioridades, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em paciência e acompanhamento, sem garantir um resultado. Confira os resultados e decida qual ajuste vale fazer.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nA história pode ser vista assim: imagine uma margem onde algo se foi e algo ainda oferece apoio. Nessa paisagem, uma sensação de falta torna importante reconhecer apoio acessível. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. Uma ausência merece espaço sem ocupar, sozinha, toda a paisagem. A força que dá início à passagem é percepção da necessidade; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO contraste aparece no risco de tomar dificuldade material como medida de valor pessoal. É nesse ponto que a imagem muda de tom: a força de percepção da necessidade também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO percurso muda de percepção da necessidade para generosidade e reciprocidade; a tensão de tomar dificuldade material como medida de valor pessoal encontra a necessidade de converse sobre condições e limites de uma troca. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nNo campo material, a imagem pede atenção ao que sustenta a vida, aos compromissos assumidos e ao espaço que ainda existe para ajustar prioridades. Segurança simbólica não é garantia de ganho; qualquer decisão precisa considerar condições reais. Nas trocas com outras pessoas, a força de percepção da necessidade pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma preocupação material pode misturar números, receios e expectativas. Conferir condições e compromissos ajuda a reduzir essa mistura. A leitura oferece reflexão, não uma previsão de ganho nem uma recomendação de investimento. No pensamento, vale distinguir a força de percepção da necessidade do risco de tomar dificuldade material como medida de valor pessoal. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a procura de abrigo numa passagem difícil; o cultivo que exige observar a estação. Entre elas, o sentido convida a acolher o que deixou de estar presente, examinar condições concretas e ajustar partes diferentes. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nConfira os resultados e decida qual ajuste vale fazer. A direção da história encontra apoio em paciência e acompanhamento, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: o que merece prioridade com os recursos disponíveis, e o que pode esperar?",
+      "closing": "O que merece prioridade com os recursos disponíveis, e o que pode esperar?",
+      "topic": "money",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "68-5-de-ouros",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "69-6-de-ouros",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "70-7-de-ouros",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "recursos",
+      "variation": 1,
+      "input": {
+        "canonicalIds": [
+          "68-5-de-ouros",
+          "69-6-de-ouros",
+          "70-7-de-ouros"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como organizar meus recursos?",
+        "seed": "recursos-1"
+      },
+      "words": 532,
+      "characters": 3482,
+      "milliseconds": 0.07548299999999131,
+      "title": "A margem que permanece",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, uma sensação de falta torna importante reconhecer apoio acessível. O ponto delicado é tomar dificuldade material como medida de valor pessoal. O percurso muda de percepção da necessidade para generosidade e reciprocidade; a tensão de tomar dificuldade material como medida de valor pessoal encontra a necessidade de converse sobre condições e limites de uma troca. Para os recursos e as prioridades, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em paciência e acompanhamento, sem garantir um resultado. Confira os resultados e decida qual ajuste vale fazer.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nA história pode ser vista assim: imagine uma margem onde algo se foi e algo ainda oferece apoio. Nessa paisagem, uma sensação de falta torna importante reconhecer apoio acessível. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. Uma ausência merece espaço sem ocupar, sozinha, toda a paisagem. A força que dá início à passagem é percepção da necessidade; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO fio pode se apertar ao tomar dificuldade material como medida de valor pessoal. É nesse ponto que a imagem muda de tom: a força de percepção da necessidade também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO percurso muda de percepção da necessidade para generosidade e reciprocidade; a tensão de tomar dificuldade material como medida de valor pessoal encontra a necessidade de converse sobre condições e limites de uma troca. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nNo campo material, a imagem pede atenção ao que sustenta a vida, aos compromissos assumidos e ao espaço que ainda existe para ajustar prioridades. Segurança simbólica não é garantia de ganho; qualquer decisão precisa considerar condições reais. Nas trocas com outras pessoas, a força de percepção da necessidade pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma preocupação material pode misturar números, receios e expectativas. Conferir condições e compromissos ajuda a reduzir essa mistura. A leitura oferece reflexão, não uma previsão de ganho nem uma recomendação de investimento. No pensamento, vale distinguir a força de percepção da necessidade do risco de tomar dificuldade material como medida de valor pessoal. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a procura de abrigo numa passagem difícil; o cultivo que exige observar a estação. Entre elas, o sentido convida a acolher o que deixou de estar presente, examinar condições concretas e ajustar partes diferentes. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nConfira os resultados e decida qual ajuste vale fazer. A direção da história encontra apoio em paciência e acompanhamento, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: onde você encontra espaço para criar um intervalo para observar e recompor sem ignorar o limite que apareceu?",
+      "closing": "Onde você encontra espaço para criar um intervalo para observar e recompor sem ignorar o limite que apareceu?",
+      "topic": "money",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "68-5-de-ouros",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "69-6-de-ouros",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "70-7-de-ouros",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "recursos",
+      "variation": 2,
+      "input": {
+        "canonicalIds": [
+          "68-5-de-ouros",
+          "69-6-de-ouros",
+          "70-7-de-ouros"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como organizar meus recursos?",
+        "seed": "recursos-2"
+      },
+      "words": 521,
+      "characters": 3421,
+      "milliseconds": 0.0516980000000018,
+      "title": "Dar lugar à ausência",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, uma sensação de falta torna importante reconhecer apoio acessível. O ponto delicado é tomar dificuldade material como medida de valor pessoal. O percurso muda de percepção da necessidade para generosidade e reciprocidade; a tensão de tomar dificuldade material como medida de valor pessoal encontra a necessidade de converse sobre condições e limites de uma troca. Para os recursos e as prioridades, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em paciência e acompanhamento, sem garantir um resultado. Confira os resultados e decida qual ajuste vale fazer.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nImagine uma margem onde algo se foi e algo ainda oferece apoio. Nessa paisagem, uma sensação de falta torna importante reconhecer apoio acessível. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. Uma ausência merece espaço sem ocupar, sozinha, toda a paisagem. A força que dá início à passagem é percepção da necessidade; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nA parte delicada desta imagem é tomar dificuldade material como medida de valor pessoal. É nesse ponto que a imagem muda de tom: a força de percepção da necessidade também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO percurso muda de percepção da necessidade para generosidade e reciprocidade; a tensão de tomar dificuldade material como medida de valor pessoal encontra a necessidade de converse sobre condições e limites de uma troca. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nNo campo material, a imagem pede atenção ao que sustenta a vida, aos compromissos assumidos e ao espaço que ainda existe para ajustar prioridades. Segurança simbólica não é garantia de ganho; qualquer decisão precisa considerar condições reais. Nas trocas com outras pessoas, a força de percepção da necessidade pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma preocupação material pode misturar números, receios e expectativas. Conferir condições e compromissos ajuda a reduzir essa mistura. A leitura oferece reflexão, não uma previsão de ganho nem uma recomendação de investimento. No pensamento, vale distinguir a força de percepção da necessidade do risco de tomar dificuldade material como medida de valor pessoal. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a procura de abrigo numa passagem difícil; o cultivo que exige observar a estação. Entre elas, o sentido convida a acolher o que deixou de estar presente, examinar condições concretas e ajustar partes diferentes. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nConfira os resultados e decida qual ajuste vale fazer. A direção da história encontra apoio em paciência e acompanhamento, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: o que merece prioridade com os recursos disponíveis, e o que pode esperar?",
+      "closing": "O que merece prioridade com os recursos disponíveis, e o que pode esperar?",
+      "topic": "money",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "68-5-de-ouros",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "69-6-de-ouros",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "70-7-de-ouros",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "recursos",
+      "variation": 3,
+      "input": {
+        "canonicalIds": [
+          "68-5-de-ouros",
+          "69-6-de-ouros",
+          "70-7-de-ouros"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como organizar meus recursos?",
+        "seed": "recursos-3"
+      },
+      "words": 532,
+      "characters": 3489,
+      "milliseconds": 0.04697000000000173,
+      "title": "O que fica depois da perda",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, uma sensação de falta torna importante reconhecer apoio acessível. O ponto delicado é tomar dificuldade material como medida de valor pessoal. O percurso muda de percepção da necessidade para generosidade e reciprocidade; a tensão de tomar dificuldade material como medida de valor pessoal encontra a necessidade de converse sobre condições e limites de uma troca. Para os recursos e as prioridades, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em paciência e acompanhamento, sem garantir um resultado. Confira os resultados e decida qual ajuste vale fazer.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nA história pode ser vista assim: imagine uma margem onde algo se foi e algo ainda oferece apoio. Nessa paisagem, uma sensação de falta torna importante reconhecer apoio acessível. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. Uma ausência merece espaço sem ocupar, sozinha, toda a paisagem. A força que dá início à passagem é percepção da necessidade; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO contraste aparece no risco de tomar dificuldade material como medida de valor pessoal. É nesse ponto que a imagem muda de tom: a força de percepção da necessidade também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO percurso muda de percepção da necessidade para generosidade e reciprocidade; a tensão de tomar dificuldade material como medida de valor pessoal encontra a necessidade de converse sobre condições e limites de uma troca. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nNo campo material, a imagem pede atenção ao que sustenta a vida, aos compromissos assumidos e ao espaço que ainda existe para ajustar prioridades. Segurança simbólica não é garantia de ganho; qualquer decisão precisa considerar condições reais. Nas trocas com outras pessoas, a força de percepção da necessidade pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma preocupação material pode misturar números, receios e expectativas. Conferir condições e compromissos ajuda a reduzir essa mistura. A leitura oferece reflexão, não uma previsão de ganho nem uma recomendação de investimento. No pensamento, vale distinguir a força de percepção da necessidade do risco de tomar dificuldade material como medida de valor pessoal. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a procura de abrigo numa passagem difícil; o cultivo que exige observar a estação. Entre elas, o sentido convida a acolher o que deixou de estar presente, examinar condições concretas e ajustar partes diferentes. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nConfira os resultados e decida qual ajuste vale fazer. A direção da história encontra apoio em paciência e acompanhamento, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: onde você encontra espaço para criar um intervalo para observar e recompor sem ignorar o limite que apareceu?",
+      "closing": "Onde você encontra espaço para criar um intervalo para observar e recompor sem ignorar o limite que apareceu?",
+      "topic": "money",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "68-5-de-ouros",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "69-6-de-ouros",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "70-7-de-ouros",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "familia",
+      "variation": 0,
+      "input": {
+        "canonicalIds": [
+          "27-6-de-copas",
+          "25-4-de-copas",
+          "35-rei-de-copas"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como cuidar da minha família?",
+        "seed": "familia-0"
+      },
+      "words": 534,
+      "characters": 3399,
+      "milliseconds": 0.08080200000000559,
+      "title": "O jardim da memória",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, uma lembrança traz afeto e pede um lugar no presente. O ponto delicado é confundir uma lembrança bonita com o que existe hoje. O percurso muda de memória e ternura para reavaliação emocional; a tensão de confundir uma lembrança bonita com o que existe hoje encontra a necessidade de reconheça o que falta antes de decidir sobre uma oferta. Para o pertencimento, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em maturidade afetiva, sem garantir um resultado. Reconheça o sentimento e escolha uma resposta proporcional.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nComo cena simbólica, imagine um jardim conhecido que já não é exatamente o mesmo. Nessa paisagem, uma lembrança traz afeto e pede um lugar no presente. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. Uma lembrança pode trazer ternura sem se tornar um contrato com o presente. A força que dá início à passagem é memória e ternura; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO contraste aparece no risco de confundir uma lembrança bonita com o que existe hoje. É nesse ponto que a imagem muda de tom: a força de memória e ternura também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO percurso muda de memória e ternura para reavaliação emocional; a tensão de confundir uma lembrança bonita com o que existe hoje encontra a necessidade de reconheça o que falta antes de decidir sobre uma oferta. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nNa família, histórias compartilhadas podem dar abrigo e também criar expectativas difíceis de nomear. Essa passagem convida a examinar o cuidado que aproxima, o limite que protege e a conversa que permite existir sem carregar toda a convivência. Nas trocas com outras pessoas, a força de memória e ternura pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma história familiar pode fazer uma frase do presente carregar o peso de muitas outras. Considere o que está acontecendo agora antes de tratar uma memória ou expectativa como descrição completa de alguém. No pensamento, vale distinguir a força de memória e ternura do risco de confundir uma lembrança bonita com o que existe hoje. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a visita ao jardim da memória; a travessia emocional conduzida com presença. Entre elas, o sentido convida a examinar o lugar de uma lembrança, examinar encontro e reciprocidade e criar um intervalo para observar e recompor. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nReconheça o sentimento e escolha uma resposta proporcional. A direção da história encontra apoio em maturidade afetiva, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: onde você encontra espaço para ajustar partes diferentes sem ignorar o limite que apareceu?",
+      "closing": "Onde você encontra espaço para ajustar partes diferentes sem ignorar o limite que apareceu?",
+      "topic": "family",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "27-6-de-copas",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "25-4-de-copas",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "35-rei-de-copas",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "familia",
+      "variation": 1,
+      "input": {
+        "canonicalIds": [
+          "27-6-de-copas",
+          "25-4-de-copas",
+          "35-rei-de-copas"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como cuidar da minha família?",
+        "seed": "familia-1"
+      },
+      "words": 536,
+      "characters": 3400,
+      "milliseconds": 0.06169199999999364,
+      "title": "O jardim da memória",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, uma lembrança traz afeto e pede um lugar no presente. O ponto delicado é confundir uma lembrança bonita com o que existe hoje. O percurso muda de memória e ternura para reavaliação emocional; a tensão de confundir uma lembrança bonita com o que existe hoje encontra a necessidade de reconheça o que falta antes de decidir sobre uma oferta. Para o pertencimento, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em maturidade afetiva, sem garantir um resultado. Reconheça o sentimento e escolha uma resposta proporcional.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nA história pode ser vista assim: imagine um jardim conhecido que já não é exatamente o mesmo. Nessa paisagem, uma lembrança traz afeto e pede um lugar no presente. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. Uma lembrança pode trazer ternura sem se tornar um contrato com o presente. A força que dá início à passagem é memória e ternura; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO contraste aparece no risco de confundir uma lembrança bonita com o que existe hoje. É nesse ponto que a imagem muda de tom: a força de memória e ternura também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO percurso muda de memória e ternura para reavaliação emocional; a tensão de confundir uma lembrança bonita com o que existe hoje encontra a necessidade de reconheça o que falta antes de decidir sobre uma oferta. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nNa família, histórias compartilhadas podem dar abrigo e também criar expectativas difíceis de nomear. Essa passagem convida a examinar o cuidado que aproxima, o limite que protege e a conversa que permite existir sem carregar toda a convivência. Nas trocas com outras pessoas, a força de memória e ternura pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma história familiar pode fazer uma frase do presente carregar o peso de muitas outras. Considere o que está acontecendo agora antes de tratar uma memória ou expectativa como descrição completa de alguém. No pensamento, vale distinguir a força de memória e ternura do risco de confundir uma lembrança bonita com o que existe hoje. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a visita ao jardim da memória; a travessia emocional conduzida com presença. Entre elas, o sentido convida a examinar o lugar de uma lembrança, examinar encontro e reciprocidade e criar um intervalo para observar e recompor. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nReconheça o sentimento e escolha uma resposta proporcional. A direção da história encontra apoio em maturidade afetiva, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: que acordo daria espaço às suas necessidades sem exigir que todos fossem iguais?",
+      "closing": "Que acordo daria espaço às suas necessidades sem exigir que todos fossem iguais?",
+      "topic": "family",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "27-6-de-copas",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "25-4-de-copas",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "35-rei-de-copas",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "familia",
+      "variation": 2,
+      "input": {
+        "canonicalIds": [
+          "27-6-de-copas",
+          "25-4-de-copas",
+          "35-rei-de-copas"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como cuidar da minha família?",
+        "seed": "familia-2"
+      },
+      "words": 531,
+      "characters": 3378,
+      "milliseconds": 0.06904400000000521,
+      "title": "A visita que não exige retorno",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, uma lembrança traz afeto e pede um lugar no presente. O ponto delicado é confundir uma lembrança bonita com o que existe hoje. O percurso muda de memória e ternura para reavaliação emocional; a tensão de confundir uma lembrança bonita com o que existe hoje encontra a necessidade de reconheça o que falta antes de decidir sobre uma oferta. Para o pertencimento, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em maturidade afetiva, sem garantir um resultado. Reconheça o sentimento e escolha uma resposta proporcional.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nImagine um jardim conhecido que já não é exatamente o mesmo. Nessa paisagem, uma lembrança traz afeto e pede um lugar no presente. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. Uma lembrança pode trazer ternura sem se tornar um contrato com o presente. A força que dá início à passagem é memória e ternura; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nA parte delicada desta imagem é confundir uma lembrança bonita com o que existe hoje. É nesse ponto que a imagem muda de tom: a força de memória e ternura também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO percurso muda de memória e ternura para reavaliação emocional; a tensão de confundir uma lembrança bonita com o que existe hoje encontra a necessidade de reconheça o que falta antes de decidir sobre uma oferta. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nNa família, histórias compartilhadas podem dar abrigo e também criar expectativas difíceis de nomear. Essa passagem convida a examinar o cuidado que aproxima, o limite que protege e a conversa que permite existir sem carregar toda a convivência. Nas trocas com outras pessoas, a força de memória e ternura pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma história familiar pode fazer uma frase do presente carregar o peso de muitas outras. Considere o que está acontecendo agora antes de tratar uma memória ou expectativa como descrição completa de alguém. No pensamento, vale distinguir a força de memória e ternura do risco de confundir uma lembrança bonita com o que existe hoje. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a visita ao jardim da memória; a travessia emocional conduzida com presença. Entre elas, o sentido convida a examinar o lugar de uma lembrança, examinar encontro e reciprocidade e criar um intervalo para observar e recompor. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nReconheça o sentimento e escolha uma resposta proporcional. A direção da história encontra apoio em maturidade afetiva, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: onde você encontra espaço para ajustar partes diferentes sem ignorar o limite que apareceu?",
+      "closing": "Onde você encontra espaço para ajustar partes diferentes sem ignorar o limite que apareceu?",
+      "topic": "family",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "27-6-de-copas",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "25-4-de-copas",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "35-rei-de-copas",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "familia",
+      "variation": 3,
+      "input": {
+        "canonicalIds": [
+          "27-6-de-copas",
+          "25-4-de-copas",
+          "35-rei-de-copas"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como cuidar da minha família?",
+        "seed": "familia-3"
+      },
+      "words": 530,
+      "characters": 3367,
+      "milliseconds": 0.19183900000000165,
+      "title": "A visita que não exige retorno",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, uma lembrança traz afeto e pede um lugar no presente. O ponto delicado é confundir uma lembrança bonita com o que existe hoje. O percurso muda de memória e ternura para reavaliação emocional; a tensão de confundir uma lembrança bonita com o que existe hoje encontra a necessidade de reconheça o que falta antes de decidir sobre uma oferta. Para o pertencimento, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em maturidade afetiva, sem garantir um resultado. Reconheça o sentimento e escolha uma resposta proporcional.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nImagine um jardim conhecido que já não é exatamente o mesmo. Nessa paisagem, uma lembrança traz afeto e pede um lugar no presente. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. Uma lembrança pode trazer ternura sem se tornar um contrato com o presente. A força que dá início à passagem é memória e ternura; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO contraste aparece no risco de confundir uma lembrança bonita com o que existe hoje. É nesse ponto que a imagem muda de tom: a força de memória e ternura também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO percurso muda de memória e ternura para reavaliação emocional; a tensão de confundir uma lembrança bonita com o que existe hoje encontra a necessidade de reconheça o que falta antes de decidir sobre uma oferta. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nNa família, histórias compartilhadas podem dar abrigo e também criar expectativas difíceis de nomear. Essa passagem convida a examinar o cuidado que aproxima, o limite que protege e a conversa que permite existir sem carregar toda a convivência. Nas trocas com outras pessoas, a força de memória e ternura pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma história familiar pode fazer uma frase do presente carregar o peso de muitas outras. Considere o que está acontecendo agora antes de tratar uma memória ou expectativa como descrição completa de alguém. No pensamento, vale distinguir a força de memória e ternura do risco de confundir uma lembrança bonita com o que existe hoje. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a visita ao jardim da memória; a travessia emocional conduzida com presença. Entre elas, o sentido convida a examinar o lugar de uma lembrança, examinar encontro e reciprocidade e criar um intervalo para observar e recompor. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nReconheça o sentimento e escolha uma resposta proporcional. A direção da história encontra apoio em maturidade afetiva, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: que acordo daria espaço às suas necessidades sem exigir que todos fossem iguais?",
+      "closing": "Que acordo daria espaço às suas necessidades sem exigir que todos fossem iguais?",
+      "topic": "family",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "27-6-de-copas",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "25-4-de-copas",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "35-rei-de-copas",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "identidade",
+      "variation": 0,
+      "input": {
+        "canonicalIds": [
+          "02-a-sacerdotisa",
+          "08-a-forca",
+          "21-o-mundo"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como expressar minha identidade?",
+        "seed": "identidade-0"
+      },
+      "words": 530,
+      "characters": 3383,
+      "milliseconds": 0.0749930000000063,
+      "title": "O que amadurece sem ruído",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, algo pede escuta antes de ganhar uma explicação. O ponto delicado é tomar silêncio por confirmação do que se deseja. O percurso muda de observação e reserva para coragem serena; a tensão de tomar silêncio por confirmação do que se deseja encontra a necessidade de expresse um limite com calma e mantenha-o nas atitudes. Para a própria presença, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em integração e conclusão, sem garantir um resultado. Reconheça o que foi concluído e decida o que levar adiante.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nA história pode ser vista assim: imagine um quarto silencioso com uma janela entreaberta. Nessa paisagem, algo pede escuta antes de ganhar uma explicação. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. O silêncio pode acolher uma pergunta antes que ela encontre palavras. A força que dá início à passagem é observação e reserva; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO contraste aparece no risco de tomar silêncio por confirmação do que se deseja. É nesse ponto que a imagem muda de tom: a força de observação e reserva também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO percurso muda de observação e reserva para coragem serena; a tensão de tomar silêncio por confirmação do que se deseja encontra a necessidade de expresse um limite com calma e mantenha-o nas atitudes. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nQuando a pergunta toca identidade, essa passagem convida a olhar para a distância entre aquilo que deseja expressar e aquilo que sente que deve apresentar para caber. A imagem não define quem você é; oferece um lugar para examinar essa distância. Nas trocas com outras pessoas, a força de observação e reserva pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma expectativa alheia pode acabar soando como uma regra interior. Vale distinguir o que você deseja, o que teme perder e o que reconhece como um valor próprio. Nenhuma carta substitui sua experiência de si. No pensamento, vale distinguir a força de observação e reserva do risco de tomar silêncio por confirmação do que se deseja. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: o mistério que amadurece em silêncio; a totalidade provisória de uma travessia. Entre elas, o sentido convida a escutar a experiência interna, aguardar informação suficiente e proteger uma margem necessária. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nReconheça o que foi concluído e decida o que levar adiante. A direção da história encontra apoio em integração e conclusão, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: onde você encontra espaço para reconhecer uma etapa concluída sem ignorar o limite que apareceu?",
+      "closing": "Onde você encontra espaço para reconhecer uma etapa concluída sem ignorar o limite que apareceu?",
+      "topic": "identity",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "02-a-sacerdotisa",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "08-a-forca",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "21-o-mundo",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "identidade",
+      "variation": 1,
+      "input": {
+        "canonicalIds": [
+          "02-a-sacerdotisa",
+          "08-a-forca",
+          "21-o-mundo"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como expressar minha identidade?",
+        "seed": "identidade-1"
+      },
+      "words": 529,
+      "characters": 3370,
+      "milliseconds": 0.09003500000000031,
+      "title": "O que amadurece sem ruído",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, algo pede escuta antes de ganhar uma explicação. O ponto delicado é tomar silêncio por confirmação do que se deseja. O percurso muda de observação e reserva para coragem serena; a tensão de tomar silêncio por confirmação do que se deseja encontra a necessidade de expresse um limite com calma e mantenha-o nas atitudes. Para a própria presença, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em integração e conclusão, sem garantir um resultado. Reconheça o que foi concluído e decida o que levar adiante.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nA história pode ser vista assim: imagine um quarto silencioso com uma janela entreaberta. Nessa paisagem, algo pede escuta antes de ganhar uma explicação. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. O silêncio pode acolher uma pergunta antes que ela encontre palavras. A força que dá início à passagem é observação e reserva; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nA parte delicada desta imagem é tomar silêncio por confirmação do que se deseja. É nesse ponto que a imagem muda de tom: a força de observação e reserva também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO percurso muda de observação e reserva para coragem serena; a tensão de tomar silêncio por confirmação do que se deseja encontra a necessidade de expresse um limite com calma e mantenha-o nas atitudes. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nQuando a pergunta toca identidade, essa passagem convida a olhar para a distância entre aquilo que deseja expressar e aquilo que sente que deve apresentar para caber. A imagem não define quem você é; oferece um lugar para examinar essa distância. Nas trocas com outras pessoas, a força de observação e reserva pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma expectativa alheia pode acabar soando como uma regra interior. Vale distinguir o que você deseja, o que teme perder e o que reconhece como um valor próprio. Nenhuma carta substitui sua experiência de si. No pensamento, vale distinguir a força de observação e reserva do risco de tomar silêncio por confirmação do que se deseja. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: o mistério que amadurece em silêncio; a totalidade provisória de uma travessia. Entre elas, o sentido convida a escutar a experiência interna, aguardar informação suficiente e proteger uma margem necessária. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nReconheça o que foi concluído e decida o que levar adiante. A direção da história encontra apoio em integração e conclusão, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: o que você deseja expressar com mais verdade, e que cuidado tornaria isso possível?",
+      "closing": "O que você deseja expressar com mais verdade, e que cuidado tornaria isso possível?",
+      "topic": "identity",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "02-a-sacerdotisa",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "08-a-forca",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "21-o-mundo",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "identidade",
+      "variation": 2,
+      "input": {
+        "canonicalIds": [
+          "02-a-sacerdotisa",
+          "08-a-forca",
+          "21-o-mundo"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como expressar minha identidade?",
+        "seed": "identidade-2"
+      },
+      "words": 530,
+      "characters": 3383,
+      "milliseconds": 0.052880000000001814,
+      "title": "A luz que vem de dentro",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, algo pede escuta antes de ganhar uma explicação. O ponto delicado é tomar silêncio por confirmação do que se deseja. O percurso muda de observação e reserva para coragem serena; a tensão de tomar silêncio por confirmação do que se deseja encontra a necessidade de expresse um limite com calma e mantenha-o nas atitudes. Para a própria presença, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em integração e conclusão, sem garantir um resultado. Reconheça o que foi concluído e decida o que levar adiante.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nA história pode ser vista assim: imagine um quarto silencioso com uma janela entreaberta. Nessa paisagem, algo pede escuta antes de ganhar uma explicação. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. O silêncio pode acolher uma pergunta antes que ela encontre palavras. A força que dá início à passagem é observação e reserva; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nA parte delicada desta imagem é tomar silêncio por confirmação do que se deseja. É nesse ponto que a imagem muda de tom: a força de observação e reserva também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO percurso muda de observação e reserva para coragem serena; a tensão de tomar silêncio por confirmação do que se deseja encontra a necessidade de expresse um limite com calma e mantenha-o nas atitudes. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nQuando a pergunta toca identidade, essa passagem convida a olhar para a distância entre aquilo que deseja expressar e aquilo que sente que deve apresentar para caber. A imagem não define quem você é; oferece um lugar para examinar essa distância. Nas trocas com outras pessoas, a força de observação e reserva pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma expectativa alheia pode acabar soando como uma regra interior. Vale distinguir o que você deseja, o que teme perder e o que reconhece como um valor próprio. Nenhuma carta substitui sua experiência de si. No pensamento, vale distinguir a força de observação e reserva do risco de tomar silêncio por confirmação do que se deseja. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: o mistério que amadurece em silêncio; a totalidade provisória de uma travessia. Entre elas, o sentido convida a escutar a experiência interna, aguardar informação suficiente e proteger uma margem necessária. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nReconheça o que foi concluído e decida o que levar adiante. A direção da história encontra apoio em integração e conclusão, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: onde você encontra espaço para reconhecer uma etapa concluída sem ignorar o limite que apareceu?",
+      "closing": "Onde você encontra espaço para reconhecer uma etapa concluída sem ignorar o limite que apareceu?",
+      "topic": "identity",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "02-a-sacerdotisa",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "08-a-forca",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "21-o-mundo",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "identidade",
+      "variation": 3,
+      "input": {
+        "canonicalIds": [
+          "02-a-sacerdotisa",
+          "08-a-forca",
+          "21-o-mundo"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como expressar minha identidade?",
+        "seed": "identidade-3"
+      },
+      "words": 523,
+      "characters": 3330,
+      "milliseconds": 0.04303399999999158,
+      "title": "A luz que vem de dentro",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, algo pede escuta antes de ganhar uma explicação. O ponto delicado é tomar silêncio por confirmação do que se deseja. O percurso muda de observação e reserva para coragem serena; a tensão de tomar silêncio por confirmação do que se deseja encontra a necessidade de expresse um limite com calma e mantenha-o nas atitudes. Para a própria presença, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em integração e conclusão, sem garantir um resultado. Reconheça o que foi concluído e decida o que levar adiante.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nImagine um quarto silencioso com uma janela entreaberta. Nessa paisagem, algo pede escuta antes de ganhar uma explicação. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. O silêncio pode acolher uma pergunta antes que ela encontre palavras. A força que dá início à passagem é observação e reserva; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO fio pode se apertar ao tomar silêncio por confirmação do que se deseja. É nesse ponto que a imagem muda de tom: a força de observação e reserva também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO percurso muda de observação e reserva para coragem serena; a tensão de tomar silêncio por confirmação do que se deseja encontra a necessidade de expresse um limite com calma e mantenha-o nas atitudes. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nQuando a pergunta toca identidade, essa passagem convida a olhar para a distância entre aquilo que deseja expressar e aquilo que sente que deve apresentar para caber. A imagem não define quem você é; oferece um lugar para examinar essa distância. Nas trocas com outras pessoas, a força de observação e reserva pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma expectativa alheia pode acabar soando como uma regra interior. Vale distinguir o que você deseja, o que teme perder e o que reconhece como um valor próprio. Nenhuma carta substitui sua experiência de si. No pensamento, vale distinguir a força de observação e reserva do risco de tomar silêncio por confirmação do que se deseja. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: o mistério que amadurece em silêncio; a totalidade provisória de uma travessia. Entre elas, o sentido convida a escutar a experiência interna, aguardar informação suficiente e proteger uma margem necessária. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nReconheça o que foi concluído e decida o que levar adiante. A direção da história encontra apoio em integração e conclusão, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: o que você deseja expressar com mais verdade, e que cuidado tornaria isso possível?",
+      "closing": "O que você deseja expressar com mais verdade, e que cuidado tornaria isso possível?",
+      "topic": "identity",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "02-a-sacerdotisa",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "08-a-forca",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "21-o-mundo",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "espiritualidade",
+      "variation": 0,
+      "input": {
+        "canonicalIds": [
+          "09-o-eremita",
+          "12-o-pendurado",
+          "14-a-temperanca"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como viver minha espiritualidade?",
+        "seed": "espiritualidade-0"
+      },
+      "words": 507,
+      "characters": 3351,
+      "milliseconds": 0.05743700000000729,
+      "title": "A janela do silêncio",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, a distância do ruído ajuda a reconhecer uma pergunta própria. O ponto delicado é transformar reflexão em isolamento sem retorno. O tema de escutar a experiência interna reaparece, mas passa de discernimento e recolhimento para mudança de perspectiva. Para o sentido e a espiritualidade, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em integração e medida, sem garantir um resultado. Faça um ajuste viável e observe seu efeito antes do próximo.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nComo cena simbólica, imagine um quarto silencioso com uma janela entreaberta. Nessa paisagem, a distância do ruído ajuda a reconhecer uma pergunta própria. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. O silêncio pode acolher uma pergunta antes que ela encontre palavras. A força que dá início à passagem é discernimento e recolhimento; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nA parte delicada desta imagem é transformar reflexão em isolamento sem retorno. É nesse ponto que a imagem muda de tom: a força de discernimento e recolhimento também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO tema de escutar a experiência interna reaparece, mas passa de discernimento e recolhimento para mudança de perspectiva. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nNa busca espiritual, a imagem pode aproximar propósito e cotidiano. Uma convicção ganha corpo no cuidado, na forma de tratar alguém e no que se escolhe sustentar. O mistério permanece uma linguagem simbólica, sem precisar fabricar uma confirmação sobrenatural. Nas trocas com outras pessoas, a força de discernimento e recolhimento pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma experiência simbólica pode emocionar sem se tornar uma prova externa. Dê espaço ao significado que encontra nela e preserve a distinção entre esse significado, uma interpretação e um fato verificável. No pensamento, vale distinguir a força de discernimento e recolhimento do risco de transformar reflexão em isolamento sem retorno. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a luz pequena que orienta uma busca interior; a mistura paciente que cria outra possibilidade. Entre elas, o sentido convida a escutar a experiência interna, buscar propósito e criar um intervalo para observar e recompor. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nFaça um ajuste viável e observe seu efeito antes do próximo. A direção da história encontra apoio em integração e medida, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: onde você encontra espaço para ajustar partes diferentes sem ignorar o limite que apareceu?",
+      "closing": "Onde você encontra espaço para ajustar partes diferentes sem ignorar o limite que apareceu?",
+      "topic": "spirit",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "09-o-eremita",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "12-o-pendurado",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "14-a-temperanca",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "espiritualidade",
+      "variation": 1,
+      "input": {
+        "canonicalIds": [
+          "09-o-eremita",
+          "12-o-pendurado",
+          "14-a-temperanca"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como viver minha espiritualidade?",
+        "seed": "espiritualidade-1"
+      },
+      "words": 506,
+      "characters": 3339,
+      "milliseconds": 0.05349100000000817,
+      "title": "A janela do silêncio",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, a distância do ruído ajuda a reconhecer uma pergunta própria. O ponto delicado é transformar reflexão em isolamento sem retorno. O tema de escutar a experiência interna reaparece, mas passa de discernimento e recolhimento para mudança de perspectiva. Para o sentido e a espiritualidade, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em integração e medida, sem garantir um resultado. Faça um ajuste viável e observe seu efeito antes do próximo.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nComo cena simbólica, imagine um quarto silencioso com uma janela entreaberta. Nessa paisagem, a distância do ruído ajuda a reconhecer uma pergunta própria. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. O silêncio pode acolher uma pergunta antes que ela encontre palavras. A força que dá início à passagem é discernimento e recolhimento; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nA parte delicada desta imagem é transformar reflexão em isolamento sem retorno. É nesse ponto que a imagem muda de tom: a força de discernimento e recolhimento também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO tema de escutar a experiência interna reaparece, mas passa de discernimento e recolhimento para mudança de perspectiva. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nNa busca espiritual, a imagem pode aproximar propósito e cotidiano. Uma convicção ganha corpo no cuidado, na forma de tratar alguém e no que se escolhe sustentar. O mistério permanece uma linguagem simbólica, sem precisar fabricar uma confirmação sobrenatural. Nas trocas com outras pessoas, a força de discernimento e recolhimento pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma experiência simbólica pode emocionar sem se tornar uma prova externa. Dê espaço ao significado que encontra nela e preserve a distinção entre esse significado, uma interpretação e um fato verificável. No pensamento, vale distinguir a força de discernimento e recolhimento do risco de transformar reflexão em isolamento sem retorno. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a luz pequena que orienta uma busca interior; a mistura paciente que cria outra possibilidade. Entre elas, o sentido convida a escutar a experiência interna, buscar propósito e criar um intervalo para observar e recompor. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nFaça um ajuste viável e observe seu efeito antes do próximo. A direção da história encontra apoio em integração e medida, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: que prática tornaria o sentido que você procura mais presente no seu cotidiano?",
+      "closing": "Que prática tornaria o sentido que você procura mais presente no seu cotidiano?",
+      "topic": "spirit",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "09-o-eremita",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "12-o-pendurado",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "14-a-temperanca",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "espiritualidade",
+      "variation": 2,
+      "input": {
+        "canonicalIds": [
+          "09-o-eremita",
+          "12-o-pendurado",
+          "14-a-temperanca"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como viver minha espiritualidade?",
+        "seed": "espiritualidade-2"
+      },
+      "words": 507,
+      "characters": 3344,
+      "milliseconds": 0.07918000000000802,
+      "title": "A janela do silêncio",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, a distância do ruído ajuda a reconhecer uma pergunta própria. O ponto delicado é transformar reflexão em isolamento sem retorno. O tema de escutar a experiência interna reaparece, mas passa de discernimento e recolhimento para mudança de perspectiva. Para o sentido e a espiritualidade, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em integração e medida, sem garantir um resultado. Faça um ajuste viável e observe seu efeito antes do próximo.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nComo cena simbólica, imagine um quarto silencioso com uma janela entreaberta. Nessa paisagem, a distância do ruído ajuda a reconhecer uma pergunta própria. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. O silêncio pode acolher uma pergunta antes que ela encontre palavras. A força que dá início à passagem é discernimento e recolhimento; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nO fio pode se apertar ao transformar reflexão em isolamento sem retorno. É nesse ponto que a imagem muda de tom: a força de discernimento e recolhimento também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO tema de escutar a experiência interna reaparece, mas passa de discernimento e recolhimento para mudança de perspectiva. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nNa busca espiritual, a imagem pode aproximar propósito e cotidiano. Uma convicção ganha corpo no cuidado, na forma de tratar alguém e no que se escolhe sustentar. O mistério permanece uma linguagem simbólica, sem precisar fabricar uma confirmação sobrenatural. Nas trocas com outras pessoas, a força de discernimento e recolhimento pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma experiência simbólica pode emocionar sem se tornar uma prova externa. Dê espaço ao significado que encontra nela e preserve a distinção entre esse significado, uma interpretação e um fato verificável. No pensamento, vale distinguir a força de discernimento e recolhimento do risco de transformar reflexão em isolamento sem retorno. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a luz pequena que orienta uma busca interior; a mistura paciente que cria outra possibilidade. Entre elas, o sentido convida a escutar a experiência interna, buscar propósito e criar um intervalo para observar e recompor. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nFaça um ajuste viável e observe seu efeito antes do próximo. A direção da história encontra apoio em integração e medida, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: onde você encontra espaço para ajustar partes diferentes sem ignorar o limite que apareceu?",
+      "closing": "Onde você encontra espaço para ajustar partes diferentes sem ignorar o limite que apareceu?",
+      "topic": "spirit",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "09-o-eremita",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "12-o-pendurado",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "14-a-temperanca",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    },
+    {
+      "name": "espiritualidade",
+      "variation": 3,
+      "input": {
+        "canonicalIds": [
+          "09-o-eremita",
+          "12-o-pendurado",
+          "14-a-temperanca"
+        ],
+        "scope": "tiragem-tres-tempos",
+        "question": "Como viver minha espiritualidade?",
+        "seed": "espiritualidade-3"
+      },
+      "words": 509,
+      "characters": 3351,
+      "milliseconds": 0.042463999999995394,
+      "title": "A janela do silêncio",
+      "essence": "Ficção simbólica para reflexão. Como antecedente simbólico, a distância do ruído ajuda a reconhecer uma pergunta própria. O ponto delicado é transformar reflexão em isolamento sem retorno. O tema de escutar a experiência interna reaparece, mas passa de discernimento e recolhimento para mudança de perspectiva. Para o sentido e a espiritualidade, quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. A direção da história encontra apoio em integração e medida, sem garantir um resultado. Faça um ajuste viável e observe seu efeito antes do próximo.",
+      "story": "Uma história simbólica criada a partir do Tarot para inspirar reflexão. Não revela fatos privados nem garante acontecimentos.\n\nA história pode ser vista assim: imagine um quarto silencioso com uma janela entreaberta. Nessa paisagem, a distância do ruído ajuda a reconhecer uma pergunta própria. A abertura guarda a imagem de um padrão que se afasta, sem afirmar que ele aconteceu na sua vida. O silêncio pode acolher uma pergunta antes que ela encontre palavras. A força que dá início à passagem é discernimento e recolhimento; ela precisa encontrar uma forma que possa ser vivida, não apenas desejada.\n\nA parte delicada desta imagem é transformar reflexão em isolamento sem retorno. É nesse ponto que a imagem muda de tom: a força de discernimento e recolhimento também pede medida. Quando a pergunta procura compreensão, reconhecer uma tensão pode ser mais útil que produzir uma resposta imediata. A clareza começa pelo que pode ser nomeado. Reconhecer duas necessidades diferentes pode ser mais fértil que tentar fazer uma delas desaparecer.\n\nO tema de escutar a experiência interna reaparece, mas passa de discernimento e recolhimento para mudança de perspectiva. O sentido nasce da conversa entre as imagens. Um movimento pode oferecer clareza e ainda precisar de tempo para ganhar forma. A direção deve encontrar um lugar nas condições que você conhece e no espaço que as pessoas envolvidas conseguem compartilhar.\n\nNa busca espiritual, a imagem pode aproximar propósito e cotidiano. Uma convicção ganha corpo no cuidado, na forma de tratar alguém e no que se escolhe sustentar. O mistério permanece uma linguagem simbólica, sem precisar fabricar uma confirmação sobrenatural. Nas trocas com outras pessoas, a força de discernimento e recolhimento pede uma forma de presença que possa ser reconhecida nas atitudes. Se essa passagem fizer sentido para você, procure um gesto que a aproxime da realidade: uma pergunta clara, um limite respeitado ou um cuidado que possa ser recebido.\n\nUma experiência simbólica pode emocionar sem se tornar uma prova externa. Dê espaço ao significado que encontra nela e preserve a distinção entre esse significado, uma interpretação e um fato verificável. No pensamento, vale distinguir a força de discernimento e recolhimento do risco de transformar reflexão em isolamento sem retorno. O que ainda não se sabe pode continuar sendo uma pergunta, enquanto um gesto possível é escolhido. Uma conversa cuidadosa pode trazer mais clareza que muitas explicações construídas em silêncio.\n\nEspiritualmente, a passagem coloca lado a lado duas imagens: a luz pequena que orienta uma busca interior; a mistura paciente que cria outra possibilidade. Entre elas, o sentido convida a escutar a experiência interna, buscar propósito e criar um intervalo para observar e recompor. Essa é uma linguagem para propósito, transformação e presença. Ela ganha corpo quando encontra um cuidado ou uma atitude que faça sentido para você.\n\nFaça um ajuste viável e observe seu efeito antes do próximo. A direção da história encontra apoio em integração e medida, sem garantir um resultado. Se fizer sentido, transforme essa atitude num gesto de escala pequena e observe seu efeito antes de exigir uma resposta definitiva. A história termina com uma abertura: que prática tornaria o sentido que você procura mais presente no seu cotidiano?",
+      "closing": "Que prática tornaria o sentido que você procura mais presente no seu cotidiano?",
+      "topic": "spirit",
+      "intent": "understanding",
+      "provenance": [
+        {
+          "canonicalId": "09-o-eremita",
+          "position": "Origem",
+          "role": "past"
+        },
+        {
+          "canonicalId": "12-o-pendurado",
+          "position": "Agora",
+          "role": "present"
+        },
+        {
+          "canonicalId": "14-a-temperanca",
+          "position": "Próximo movimento",
+          "role": "future"
+        }
+      ]
+    }
+  ]
+}

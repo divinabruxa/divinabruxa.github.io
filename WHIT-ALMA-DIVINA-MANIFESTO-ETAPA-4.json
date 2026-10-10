@@ -1,0 +1,95 @@
+{
+  "stage": 4,
+  "totalStages": 8,
+  "version": "1.1.0",
+  "baseCommit": "14ab598e4a7840df8f12bda90f5419b0f05f9711",
+  "replacements": [
+    "whit-alma-divina-core-v1.js",
+    "whit-world-v401.js",
+    "sw.js",
+    "index.html"
+  ],
+  "newModules": [
+    "whit-alma-divina-voz-v1.js"
+  ],
+  "tests": {
+    "passed": 113,
+    "failed": 0,
+    "newVoiceTests": 18,
+    "browserVerified": false,
+    "physicalIPhoneVerified": false
+  },
+  "editorialCorpus": {
+    "cases": 40,
+    "selectedExamples": 8,
+    "observedWordsMin": 456,
+    "observedWordsMax": 543
+  },
+  "files": [
+    {
+      "name": "whit-alma-divina-voz-v1.js",
+      "sha256": "97cbd98ef55ea9752d26d5f21d5580f9a990ca7a5aaa435eeb663683a853fe19",
+      "bytes": 22850
+    },
+    {
+      "name": "whit-alma-divina-voz.test.mjs",
+      "sha256": "2bcfe021c3f27026eb34117ab2cb319af230e8cc6e4f3e5220b1b91c4ae402df",
+      "bytes": 5796
+    },
+    {
+      "name": "whit-alma-divina-core-v1.js",
+      "sha256": "551b8f51f81dcdc0b192c25216c4d7374c7b5b899e748b04f454f3681b99aba6",
+      "bytes": 8058
+    },
+    {
+      "name": "whit-world-v401.js",
+      "sha256": "2558e925ae88be55e0db1949100a46bb20d61c0aa0877cbae5ba8cef5859f3eb",
+      "bytes": 9135
+    },
+    {
+      "name": "sw.js",
+      "sha256": "245336ff1a247f336b9ef4acdaba85a4aed02968d1474ada019fea71bc23197a",
+      "bytes": 3961
+    },
+    {
+      "name": "index.html",
+      "sha256": "845494803346b64f162315b43134a881e9c4bd1c00d0597accbadb00cf88a496",
+      "bytes": 32914
+    },
+    {
+      "name": "INSTALAR-WHIT-ALMA-DIVINA-ETAPA-4.txt",
+      "sha256": "bea0edb19c67bb0325ddf906681c316ead53520ea9bfe0f6c9ff63dd77cc1912",
+      "bytes": 1472
+    },
+    {
+      "name": "WHIT-ALMA-DIVINA-MACROETAPA-4.md",
+      "sha256": "1dfd1c71eb7b1f51abe053789d6c92aa30a4f6ccfe1f32ce9a59f4a8fb48d017",
+      "bytes": 4584
+    },
+    {
+      "name": "WHIT-ALMA-DIVINA-GUIA-DE-VOZ.md",
+      "sha256": "204998de6408517b2553b2cc3926bea9d9d0ef094b8c0a0c76339d64c50bc0c5",
+      "bytes": 2668
+    },
+    {
+      "name": "WHIT-ALMA-DIVINA-EXEMPLOS-ETAPA-4.md",
+      "sha256": "11fe5a51e441c61fae32593124a056dcf9473cf7681d027d9e76d6f08ef526cd",
+      "bytes": 26930
+    },
+    {
+      "name": "WHIT-ALMA-DIVINA-CORPUS-ETAPA-4.json",
+      "sha256": "2eadb814de8d3e73f8ca2515581bd18b94a91ec0ba8c4ddeab5aaa399e4198dc",
+      "bytes": 200355
+    },
+    {
+      "name": "WHIT-ALMA-DIVINA-VALIDACAO-ETAPA-4.txt",
+      "sha256": "283b7d181ccb246c8f4296570749d2847dc9c132b7c5f5f24669f4e55112c892",
+      "bytes": 9404
+    },
+    {
+      "name": "WHIT-ALMA-DIVINA-RETORNO-ETAPA-4.json",
+      "sha256": "cce88305bc810dcbae061c1f511feabd75505a9bb26e1eac37413378eb3f4e2c",
+      "bytes": 65128
+    }
+  ]
+}

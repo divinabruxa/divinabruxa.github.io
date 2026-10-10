@@ -56,7 +56,7 @@ function validAction(item) {
 
 function validMessage(item) {
   if (!item || !['user', 'whit'].includes(item.role)) return null;
-  const text = clean(item.text);
+  const text = clean(item.text, 18000);
   if (!text) return null;
   if (item.role === 'user') return { role:'user', text:clean(text, 700) };
   return {
