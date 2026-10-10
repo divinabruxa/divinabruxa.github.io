@@ -1,0 +1,14 @@
+WHIT ALMA DIVINA — MACROETAPA 2/8
+
+1. Extraia este ZIP. Todos os arquivos estão soltos, sem pasta.
+2. No GitHub, envie os arquivos para a raiz de divinabruxa.github.io.
+3. Confirme o envio normalmente. Não apague os motores antigos ainda.
+
+Esta etapa adiciona código novo para a base das 78 cartas e relações.
+Ela ainda não muda o texto das leituras na tela: a conexão virá na macroetapa 3.
+Não precisa editar HTML, app.js, service worker ou configurações.
+
+Para verificar numa cópia local do site:
+node --test whit-alma-divina-base.test.mjs tests/*.test.mjs
+
+Para desfazer apenas esta etapa antes da integração, remova os arquivos que este ZIP adicionou. Como não estão importados pelo aplicativo atual, a experiência anterior continua funcionando.

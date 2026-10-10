@@ -1,0 +1,55 @@
+{
+  "version": "1.0.0",
+  "macroStage": 2,
+  "totalStages": 8,
+  "baseCommit": "4758d73ce949f7d4c90abed93db829a0e0b9a420",
+  "activeInPublicApp": false,
+  "tests": {
+    "existing": 63,
+    "new": 17,
+    "passed": 80,
+    "failed": 0
+  },
+  "files": [
+    {
+      "name": "whit-alma-divina-base-v1.js",
+      "bytes": 35739,
+      "sha256": "64441f2953c95eea452f28a9482c9389fb51341a5a844e28b512f1ed201ec787"
+    },
+    {
+      "name": "whit-alma-divina-posicoes-v1.js",
+      "bytes": 6926,
+      "sha256": "b502048b067ac3bb886b969529071bb265b5d2f3ef0328b656c819225ba2cdaa"
+    },
+    {
+      "name": "whit-alma-divina-relacoes-v1.js",
+      "bytes": 7054,
+      "sha256": "dcfa37666a15cdd0d90d7872a8353116419d3c23380b6e1f0369b44de0bb243e"
+    },
+    {
+      "name": "whit-alma-divina-base.test.mjs",
+      "bytes": 7496,
+      "sha256": "90a7d8a2f87f1bee8f584e3644e3648ef7fa7b617d9e7f882e7db39f6b98639b"
+    },
+    {
+      "name": "WHIT-ALMA-DIVINA-MACROETAPA-2.md",
+      "bytes": 5330,
+      "sha256": "a1ca82e521517abf49d8f3a938f6296b808a5e75b314e7b7bf9b9a2024ab5f78"
+    },
+    {
+      "name": "INSTALAR-WHIT-ALMA-DIVINA-ETAPA-2.txt",
+      "bytes": 769,
+      "sha256": "beaeede68889f6be23431194373fd931bb233f5aa03fc246042dec6c1aeb5db3"
+    },
+    {
+      "name": "WHIT-ALMA-DIVINA-EXEMPLOS-ETAPA-2.md",
+      "bytes": 2114,
+      "sha256": "c4b576737022e5ec9acd4151f5ecd0314733b11ea63f2cb88fe6c5b386b46b47"
+    },
+    {
+      "name": "WHIT-ALMA-DIVINA-VALIDACAO-ETAPA-2.txt",
+      "bytes": 6577,
+      "sha256": "be52b68332641aad8f654553535c0a3b4963997d03a7043641217d0a353579f1"
+    }
+  ]
+}
