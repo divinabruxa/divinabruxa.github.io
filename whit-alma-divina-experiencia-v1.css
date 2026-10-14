@@ -1,0 +1,8 @@
+/* Organização local da leitura; preserva Home, Orbe e menu global. */
+.living-depth__choices > .whit-depth-group {width:100%;min-width:0;box-sizing:border-box;}
+.whit-depth-group summary {cursor:pointer;min-height:44px;display:flex;align-items:center;padding:.5rem 0;font-weight:600;}
+.whit-depth-buttons {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem;margin:.5rem 0 1rem;}
+.whit-depth-buttons button,.whit-depth-primary {min-height:44px;white-space:normal;overflow-wrap:anywhere;}
+.living-depth__choices > .whit-depth-primary {width:100%;}
+.whit-tarot-entry {display:inline-flex;align-items:center;min-height:44px;margin:.5rem 0;color:inherit;text-underline-offset:.25rem;}
+@media(max-width:600px){.whit-depth-buttons{grid-template-columns:1fr;}}

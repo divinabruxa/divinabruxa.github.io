@@ -1,0 +1,22 @@
+WHIT ALMA DIVINA — MACROETAPA 7/8
+
+1. Extraia o ZIP: todos os arquivos estão soltos, sem pastas.
+2. Envie TODOS os arquivos juntos à raiz de divinabruxa.github.io no GitHub.
+3. Substitua app.js, index.html, sw.js, arbitrio-engine-v360.js e arbitrio-engine-v370.js.
+4. Mantenha os módulos das etapas anteriores. Aguarde a publicação e atualize/reabra o site.
+
+COMO CONFERIR
+Nas leituras, “Ler a história completa” fica em destaque. Abra “Dimensões da reflexão” para amor, mente, atitudes e espiritualidade. Nas tiragens grandes, abra “Capítulos da tiragem”. Cada escolha abre seu texto no painel da leitura.
+
+No Tarot Livre, o link “Encontrar Whit Alma Divina” abre a área própria da Whit. O menu global não foi redesenhado.
+
+Os geradores dos dois arquivos de Arbítrio estão desativados. Eles mantêm apenas nomes compatíveis para utilidades neutras e avisam caso um código aposentado tente gerar histórias. Nenhuma leitura ativa depende deles.
+
+23 módulos antigos saíram do cache inicial. Os outros arquivos históricos ficam disponíveis somente para retorno e testes da versão anterior; não são importados pela aplicação ativa. Não é necessário apagar arquivos manualmente para ativar esta etapa.
+
+Verificação local:
+node --test whit-alma-divina-*.test.mjs tests/*.test.mjs
+
+157 testes automatizados aprovados. O teste dos controles usa um modelo mínimo de DOM; não certifica layout, Safari ou iPhone físico. A validação visual real continua pendente para o fechamento.
+
+Retorno: use os cinco textos no JSON de retorno ou o commit do manifesto. Se publicar um retorno, atualize também a versão de cache. Não sobreponha mudanças posteriores sem comparar os arquivos.

@@ -122,29 +122,42 @@ function creationSignature(creation) {
   return `WHIT TARÓLOGA · ${creation?.signature || 'ALMA DIVINA'} · FICÇÃO SIMBÓLICA PARA REFLEXÃO`;
 }
 
+const depthRenderState = new WeakMap();
 function renderLivingDepth(choices, response, creation) {
   if (!choices || !response) return;
+  const options = Array.isArray(creation?.depthOptions) ? creation.depthOptions.filter(o=>typeof creation.depthResponses?.[o.key]==='string' && creation.depthResponses[o.key]) : [];
+  const stamp=JSON.stringify(options.map(o=>[o.key,o.label,creation.depthResponses[o.key]]));
+  if(depthRenderState.get(choices)===stamp)return;
+  depthRenderState.set(choices,stamp);
   choices.replaceChildren();
   response.textContent = '';
   response.hidden = true;
-  const options = Array.isArray(creation?.depthOptions) ? creation.depthOptions : [];
   choices.hidden = options.length === 0;
-  options.forEach(option => {
-    const text = creation?.depthResponses?.[option.key];
-    if (!text) return;
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.textContent = option.label;
-    button.setAttribute('aria-pressed', 'false');
-    button.addEventListener('click', () => {
-      choices.querySelectorAll('button').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
-      response.textContent = text;
-      response.hidden = false;
+  function buttonFor(option) {
+    const button=document.createElement('button');
+    button.type='button';
+    button.textContent=option.label;
+    button.setAttribute('aria-pressed','false');
+    if(response.id)button.setAttribute('aria-controls',response.id);
+    button.addEventListener('click',()=>{
+      choices.querySelectorAll('button').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+      response.textContent=creation.depthResponses[option.key];
+      response.hidden=false;
       announce(`Whit aprofundou: ${option.label}.`);
     });
-    choices.append(button);
-  });
-  choices.hidden = choices.childElementCount === 0;
+    return button;
+  }
+  options.filter(o=>o.key==='complete').forEach(o=>{const button=buttonFor(o);button.className='whit-depth-primary';choices.append(button);});
+  const chapters=options.filter(o=>/^(?:celtic-|royal-)/.test(o.key));
+  const dimensions=options.filter(o=>o.key!=='complete'&&!chapters.includes(o));
+  for(const [label,items] of [['Dimensões da reflexão',dimensions],['Capítulos da tiragem',chapters]]) {
+    if(!items.length)continue;
+    const group=document.createElement('details');group.className='whit-depth-group';
+    const summary=document.createElement('summary');summary.textContent=label;
+    const buttons=document.createElement('div');buttons.className='whit-depth-buttons';
+    items.forEach(o=>buttons.append(buttonFor(o)));
+    group.append(summary,buttons);choices.append(group);
+  }
 }
 
 function pulseOrb() {
@@ -1337,7 +1350,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=alma-divina-sessoes-1.0.0', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=alma-divina-experiencia-1.0.0', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {

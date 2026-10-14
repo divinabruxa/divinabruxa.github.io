@@ -1,0 +1,84 @@
+{
+  "stage": 7,
+  "totalStages": 8,
+  "baseCommit": "44e04bbb60e2af2a8dfde14dac98dbb38f77d74d",
+  "replacements": [
+    "app.js",
+    "index.html",
+    "sw.js",
+    "arbitrio-engine-v360.js",
+    "arbitrio-engine-v370.js"
+  ],
+  "tests": {
+    "passed": 157,
+    "failed": 0,
+    "newExperienceTests": 11,
+    "browserVerified": false,
+    "physicalIPhoneVerified": false
+  },
+  "retiredPrecacheModules": 23,
+  "oldGeneratorSourcesReplaced": 2,
+  "allHistoricalSourcesDeleted": false,
+  "files": [
+    {
+      "name": "whit-alma-divina-experiencia-v1.css",
+      "bytes": 775,
+      "sha256": "e66cac79dce7b6049c49c33101cbed46aea170e62a905c526f5bc30c2052241b"
+    },
+    {
+      "name": "whit-alma-divina-experiencia.test.mjs",
+      "bytes": 6720,
+      "sha256": "a4533af7fd5a8fd632644feeaf68782bcf8ef60cf8042ce5b7b3be1a53b8ecfc"
+    },
+    {
+      "name": "app.js",
+      "bytes": 58529,
+      "sha256": "27352d5a2ab01c6635fcc7850c31c3bec3a54ad35edeb41770a7b87bb77cfa34"
+    },
+    {
+      "name": "index.html",
+      "bytes": 34324,
+      "sha256": "f7f70590b2f5373a3a26849cd800db2c70bc9ec22ad177ff59b96df2227cde4f"
+    },
+    {
+      "name": "sw.js",
+      "bytes": 3314,
+      "sha256": "8f5d51549cb1828e20929c448ce9edfb93f8e9fe69481ce3ad3476f337424768"
+    },
+    {
+      "name": "arbitrio-engine-v360.js",
+      "bytes": 794,
+      "sha256": "5d0da458cc2a153696ff0520f50d0a9855196aba19372c985de617592ed07e0b"
+    },
+    {
+      "name": "arbitrio-engine-v370.js",
+      "bytes": 308,
+      "sha256": "c61c6be8b25eafc4ac69174c71c4e2be7f3cf1a0b37cacb5d15ce85fa1889c3d"
+    },
+    {
+      "name": "INSTALAR-WHIT-ALMA-DIVINA-ETAPA-7.txt",
+      "bytes": 1724,
+      "sha256": "b9085b1a5733c94f90b7937965ebe81a40f0c904d0803224bf8d16b777c96187"
+    },
+    {
+      "name": "WHIT-ALMA-DIVINA-MACROETAPA-7.md",
+      "bytes": 4163,
+      "sha256": "9ad96789eb0de545b8f7b728bcd8b9a040e5d86bc0dee64210f624b26d07f59c"
+    },
+    {
+      "name": "WHIT-ALMA-DIVINA-MODULOS-APOSENTADOS.json",
+      "bytes": 1980,
+      "sha256": "a3487975042801ce4933618cc5dca66d3921d266d15f86e30fa3be86d9e128bc"
+    },
+    {
+      "name": "WHIT-ALMA-DIVINA-VALIDACAO-ETAPA-7.txt",
+      "bytes": 3344,
+      "sha256": "bbcc1869de813edd82d54b4dc901ab3959baad74f508169e9b8ee1c7898bfff7"
+    },
+    {
+      "name": "WHIT-ALMA-DIVINA-RETORNO-ETAPA-7.json",
+      "bytes": 126060,
+      "sha256": "eebcef5e8680cd97d59c53c98ef7208a4267c0266bfc5a6f258c6569adda857c"
+    }
+  ]
+}
