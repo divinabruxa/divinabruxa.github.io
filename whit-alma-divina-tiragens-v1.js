@@ -1,6 +1,6 @@
 /** Capítulos relacionais de Cruz Celta e Mesa Real. Não sorteia nem altera acesso. */
 import { WHIT_THEME_AXES } from './whit-alma-divina-base-v1.js';
-export const WHIT_SPREAD_NARRATIVE_VERSION='1.0.0';
+export const WHIT_SPREAD_NARRATIVE_VERSION='1.0.1';
 const lower=s=>s.charAt(0).toLocaleLowerCase('pt-BR')+s.slice(1);
 const unique=list=>[...new Set(list.filter(Boolean))];
 const natural=list=>list.length<2?list.join(''):list.slice(0,-1).join(', ')+' e '+list.at(-1);
@@ -70,8 +70,10 @@ export function enrichWhitSpread(text,layout){
   const all=ordered(layout),total=layout.spreadId==='cruz-celta'?10:78,complete=all.length===total;
   const chapters=layout.spreadId==='cruz-celta'?celtic(layout):royal(layout);
   const themeText=natural(themes(all));
+  const present=all.find(c=>c.position.index===0),obstacle=all.find(c=>c.position.index===1);
+  const knot=present&&obstacle?`A situação encontra força em ${present.card.strength}, mas é atravessada pelo risco de ${obstacle.card.tension}.`:present?present.functionText:'';
   const summary=layout.spreadId==='cruz-celta'
-    ? `A Cruz Celta reúne uma tensão central, suas raízes e uma direção possível. ${complete?'As dez posições estão presentes.':'A história está em formação: '+all.length+' de dez posições foram reveladas.'} Os temas que atravessam a composição convidam a ${themeText}. ${text.tendencyText} ${text.counselText}`
+    ? `A Cruz Celta reúne uma tensão central, suas raízes e uma direção possível. ${knot} ${complete?'As dez posições estão presentes.':'A história está em formação: '+all.length+' de dez posições foram reveladas.'} Os temas que atravessam a composição convidam a ${themeText}. ${text.tendencyText} ${text.counselText}`
     : `A Mesa Real reúne fios que precisam ser observados juntos. ${complete?'As 78 cartas estão presentes.':'A mesa está em formação: '+all.length+' de 78 cartas foram reveladas.'} Entre as imagens reveladas, os temas recorrentes convidam a ${themeText}. ${text.tendencyText} ${text.counselText}`;
   // Cada fio de linha contribui para a integração, sem transformar 78 cartas em 78 definições.
   const integration=layout.spreadId==='mesa-real'

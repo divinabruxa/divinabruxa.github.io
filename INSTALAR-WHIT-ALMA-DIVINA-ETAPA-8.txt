@@ -1,0 +1,21 @@
+WHIT ALMA DIVINA — PACOTE DE FECHAMENTO TÉCNICO — MACROETAPA 8
+
+1. Extraia o ZIP. Todos os arquivos estão soltos, sem pastas.
+2. Envie TODOS os arquivos juntos à raiz de divinabruxa.github.io.
+3. Substitua whit-alma-divina-tiragens-v1.js, sw.js, index.html e package.json.
+4. Mantenha todos os módulos novos das etapas anteriores. Aguarde a publicação e atualize/reabra o site.
+
+MUDANÇA DESTA ENTREGA
+A essência da Cruz Celta diferencia explicitamente a situação e o obstáculo. Trocar essas posições agora muda também a síntese inicial. O cache e a referência de carregamento foram atualizados.
+
+Para conferir todos os testes numa cópia local:
+npm test
+
+O comando agora inclui os testes do aplicativo e os testes novos da Whit. Resultado desta entrega: 161 aprovados, zero falhas.
+
+ESTADO DO FECHAMENTO
+O motor e as correções estão implementados e verificados por testes automatizados. A validação visual final ainda não foi concluída. A Home publicada abriu na sessão de Chrome usada para teste, mas a sessão deixou de responder ao tentar interagir, inclusive após uma recarga. Isso não prova defeito no site e impede certificar os fluxos nessa sessão.
+
+Permanecem pendentes: uso real em iPhone/Safari, aparência dos controles, teclado/leitor de tela e uma sessão PWA offline real. Não tratar este pacote como certificação de perfeição ou lançamento totalmente comprovado.
+
+Retorno: restaure os quatro arquivos do commit de referência ou use seus textos no JSON de retorno. Após publicar um retorno, atualize também a versão do cache e compare alterações posteriores antes de sobrescrever fontes.

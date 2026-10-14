@@ -1,0 +1,71 @@
+{
+  "stage": 8,
+  "totalStages": 8,
+  "status": "technical_package_ready_final_ui_validation_pending",
+  "baseCommit": "c837a3a01c66c11004638b3b98771bf1a5c923aa",
+  "replacements": [
+    "whit-alma-divina-tiragens-v1.js",
+    "sw.js",
+    "index.html",
+    "package.json"
+  ],
+  "tests": {
+    "passed": 161,
+    "failed": 0,
+    "newFinalTests": 4
+  },
+  "liveBrowser": {
+    "homeAccessibilityObserved": true,
+    "interactiveFlowsCompleted": false,
+    "blocker": "browser_session_timed_out_after_initial_home_observation_and_one_reload",
+    "physicalIPhoneVerified": false,
+    "offlineSessionVerified": false
+  },
+  "files": [
+    {
+      "name": "whit-alma-divina-fechamento.test.mjs",
+      "bytes": 2106,
+      "sha256": "dd41983f46d5c265fa06310cb061e425ad80fe087f82003efa2d3dba6bc88047"
+    },
+    {
+      "name": "whit-alma-divina-tiragens-v1.js",
+      "bytes": 10613,
+      "sha256": "ceb1a33ba5e0bfcfc7054363c52419699dc526cc0b43b5a2a563a6ca8e7c9d88"
+    },
+    {
+      "name": "sw.js",
+      "bytes": 3313,
+      "sha256": "46dd46a87371ae7c52f8b7cfdc652792278d187cfeff36f023442e9fc2f87700"
+    },
+    {
+      "name": "index.html",
+      "bytes": 34324,
+      "sha256": "747b23df41f5c36130b37e6c786374649fdbf9a8daef64730e1f5419df30e783"
+    },
+    {
+      "name": "package.json",
+      "bytes": 191,
+      "sha256": "1d1dbff0ecf98141709f00c98818efb3e0abe84a177bab65a145ce75aec54083"
+    },
+    {
+      "name": "INSTALAR-WHIT-ALMA-DIVINA-ETAPA-8.txt",
+      "bytes": 1645,
+      "sha256": "d2ae9f551bbdc60d4fffb48c64946c84a693a89b483641e1a3130ea747261ab8"
+    },
+    {
+      "name": "WHIT-ALMA-DIVINA-FECHAMENTO-TECNICO.md",
+      "bytes": 5497,
+      "sha256": "dcd6a7afcc7cb5415c5be0dea1ec1676d12cdb261cb23426fb75c1ca92851c73"
+    },
+    {
+      "name": "WHIT-ALMA-DIVINA-VALIDACAO-ETAPA-8.txt",
+      "bytes": 13508,
+      "sha256": "6ca9ef9dda69481694b89b5df86b19cf5a287df21e60927b84d4d092d3775b9b"
+    },
+    {
+      "name": "WHIT-ALMA-DIVINA-RETORNO-ETAPA-8.json",
+      "bytes": 51272,
+      "sha256": "81b07248398596de390fa5d93b464715784ddcf7a1c2ad92168a54f34fc9fb82"
+    }
+  ]
+}
