@@ -2,11 +2,12 @@
 import { CARDS } from './data/cards.js';
 import { SYMBOLIC_NOTICE } from './whit-alma-divina-base-v1.js';
 import { writeWhitNarrative } from './whit-alma-divina-voz-v1.js';
+import { enrichWhitSpread } from './whit-alma-divina-tiragens-v1.js';
 import { WHIT_SPREADS } from './whit-alma-divina-posicoes-v1.js';
 import { analyzeWhitLayout } from './whit-alma-divina-relacoes-v1.js';
 import { cleanWhitText, normalizeWhitText, whitHash, secureWhitSeed } from './whit-alma-divina-utils-v1.js';
-export const STORY_ENGINE_VERSION='alma-divina-1.1.0';
-export const WHIT_READING_GATEWAY_VERSION='alma-divina-1.1.0';
+export const STORY_ENGINE_VERSION='alma-divina-1.2.0';
+export const WHIT_READING_GATEWAY_VERSION='alma-divina-1.2.0';
 const freeze=v=>{if(v&&typeof v==='object'&&!Object.isFrozen(v)){Object.values(v).forEach(freeze);Object.freeze(v);}return v;};
 const TOPICS=[
   ['love',/\b(amor|amar|ama|namoro|casamento|relacionamento|relacionamentos|vinculo|sentimento|sentimentos|voltar|reciprocidade|gosta de mim|sente por mim)\b/],
@@ -70,7 +71,8 @@ export function whitTarotReading(options={}){
   const spreadId=spreadFrom(options);
   const layout=analyzeWhitLayout({cards:options.cards,spreadId,positions:adaptedPositions(spreadId,options)});
   const seed=cleanWhitText(options.seed,128)||whitHash(JSON.stringify([layout.contexts.map(c=>[c.card.canonicalId,c.position.index]),question,spreadId])).toString(16);
-  const text=writeWhitNarrative({layout,topic,intent,seed});
+  const initial=writeWhitNarrative({layout,topic,intent,seed});
+  const text=enrichWhitSpread({...initial,symbolicNotice:SYMBOLIC_NOTICE},layout);
   if(!text.essence||!text.story||!text.counselText||text.provenance.length!==options.cards.length)throw new Error('A leitura não passou pela verificação.');
   return freeze({...text,engine:'Whit Alma Divina',version:STORY_ENGINE_VERSION,signature:'ALMA DIVINA · SIMBÓLICA',
     symbolicNotice:SYMBOLIC_NOTICE,scope:options.scope||spreadId,spreadId,topic,intent,seed,
@@ -90,7 +92,7 @@ export function storyResponse(input,options={}){
   const named=CARDS.map(c=>({card:c,index:(' '+text+' ').indexOf(' '+normalizeWhitText(c.name)+' ')})).filter(v=>v.index>=0).sort((a,b)=>a.index-b.index).map(v=>v.card);
   const draw=/\b(tire|tirar|puxe|puxar|sortear|sorteie|revelar|revele)\b/.test(text)&&/\bcarta\b/.test(text);
   let cards=named,spreadId='tarot-livre',positions,seed=cleanWhitText(options.seed,128),question=raw;
-  if(!named.length&&!draw&&['alma-divina-1.0.0',STORY_ENGINE_VERSION].includes(context?.version)){
+  if(!named.length&&!draw&&['alma-divina-1.0.0','alma-divina-1.1.0',STORY_ENGINE_VERSION].includes(context?.version)){
     cards=context.canonicalIds.map(id=>CARDS.find(c=>c.canonicalId===id));
     spreadId=context.spreadId;positions=context.positions;seed=context.seed;
     question=classifyWhitQuestion(raw)!=='general'?raw:classifyWhitIntent(raw)!=='understanding'?`${context.question} ${raw}`:context.question;

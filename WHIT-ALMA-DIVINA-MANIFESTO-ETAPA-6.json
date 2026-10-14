@@ -1,0 +1,80 @@
+{
+  "stage": 6,
+  "totalStages": 8,
+  "version": "1.2.0",
+  "baseCommit": "09c2e6e55b54c362eac4d4b93bee1deb4909c6bc",
+  "replacements": [
+    "whit-alma-divina-core-v1.js",
+    "app.js",
+    "sw.js",
+    "index.html"
+  ],
+  "tests": {
+    "passed": 146,
+    "failed": 0,
+    "newSpreadTests": 17,
+    "browserVerified": false,
+    "physicalIPhoneVerified": false
+  },
+  "chapterCounts": {
+    "celticFull": 3,
+    "royalFull": 8
+  },
+  "files": [
+    {
+      "name": "whit-alma-divina-tiragens-v1.js",
+      "sha256": "9ab8e03d40f488c1a373742f511d7e05cb07d61c0e29213d7fce1a74a11dc349",
+      "bytes": 10328
+    },
+    {
+      "name": "whit-alma-divina-tiragens.test.mjs",
+      "sha256": "1024f986b3df9efb188ccefa06861142fc7d4688c94b267cec30cfca7c08d4d2",
+      "bytes": 5338
+    },
+    {
+      "name": "whit-alma-divina-core-v1.js",
+      "sha256": "4a274567b03c22e96f4f4ace6675949fdf1fac56711d6f2460166fc8e7ef4c8e",
+      "bytes": 8234
+    },
+    {
+      "name": "app.js",
+      "sha256": "7e5eae24ce2d91c018cc96d0c83bc3160e3e892e1ede4ec7aae80d0777c4bfd6",
+      "bytes": 57466
+    },
+    {
+      "name": "sw.js",
+      "sha256": "334447ac259446b013e83c21ffbd89fcf28631a35645a0b15b50a2aa3082c61b",
+      "bytes": 4074
+    },
+    {
+      "name": "index.html",
+      "sha256": "20e10ec9b5a2a93c0c4001f3083041587477dfb98c6f4f41513d6a3dd1cb7474",
+      "bytes": 34152
+    },
+    {
+      "name": "INSTALAR-WHIT-ALMA-DIVINA-ETAPA-6.txt",
+      "sha256": "d1e5bb4c4a499af04f97283c9e92baf6fdcd4e729d521f10bc2eb95cfade27b0",
+      "bytes": 1590
+    },
+    {
+      "name": "WHIT-ALMA-DIVINA-MACROETAPA-6.md",
+      "sha256": "350fba513fa546b3d246165898ca36f1edcb4ef3c3d9404413a1a7f6cc8626fc",
+      "bytes": 4790
+    },
+    {
+      "name": "WHIT-ALMA-DIVINA-EXEMPLOS-ETAPA-6.md",
+      "sha256": "e774951ff2f17669f3a5d904d33babf66024fc569326755cfa1d5b58e506ff3f",
+      "bytes": 28123
+    },
+    {
+      "name": "WHIT-ALMA-DIVINA-VALIDACAO-ETAPA-6.txt",
+      "sha256": "817e24cc49c34151e147ff9b3b424068729ac64130012ffcccd6a77b1ba29e84",
+      "bytes": 12052
+    },
+    {
+      "name": "WHIT-ALMA-DIVINA-RETORNO-ETAPA-6.json",
+      "sha256": "0aa369a4b52983adb7cd0750b802f5567010ad3405b63cb2713fbab1a34e2d7a",
+      "bytes": 108254
+    }
+  ]
+}

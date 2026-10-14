@@ -998,10 +998,9 @@ const spreads = {
 
   renewFiction() {
     if (!this.canUse() || this.state.revealed < 1) return;
-    this.arbitrioSeed({ renew:true });
     this.render();
     pulseOrb();
-    announce('Whit Taróloga refez a consulta preservando cartas, posições e a história da mesa.');
+    announce('Whit reabriu a mesma leitura, preservando cartas, posições e a história da mesa.');
   },
 
   renderPicker() {

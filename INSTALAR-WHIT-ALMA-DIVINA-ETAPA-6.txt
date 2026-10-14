@@ -1,0 +1,27 @@
+WHIT ALMA DIVINA — MACROETAPA 6/8
+
+1. Extraia o ZIP. Todos os arquivos estão soltos, sem pastas.
+2. Envie TODOS os arquivos juntos à raiz de divinabruxa.github.io no GitHub.
+3. Substitua whit-alma-divina-core-v1.js, app.js, sw.js e index.html.
+4. Mantenha os módulos das etapas anteriores. Aguarde a publicação e atualize/reabra o site.
+
+COMO CONFERIR
+Abra Tiragens e selecione Cruz Celta. Revele as cartas normalmente. Abra o aprofundamento da leitura: os capítulos aparecem conforme as posições forem reveladas.
+
+A Cruz Celta completa tem:
+- O nó central
+- Raízes e movimento
+- Postura, vínculos e direção
+
+Na Mesa Real, o acesso Premium existente permanece necessário. Com a mesa completa, o aprofundamento oferece seis capítulos de linha, o centro da mesa e relações entre as linhas. Uma mesa parcial só oferece capítulos das cartas efetivamente presentes.
+
+A essência continua aparecendo antes do texto completo. “Reler” preserva a mesma seed e leitura. Alterar cartas ou pergunta permite outra leitura; não há previsões factuais nem preenchimento de posições ocultas.
+
+Não apague motores antigos manualmente: a limpeza final será feita na etapa 7.
+
+Verificação local:
+node --test whit-alma-divina-*.test.mjs tests/*.test.mjs
+
+146 testes automatizados aprovados. A validação visual real em navegador/Safari/iPhone continua pendente.
+
+Retorno: use o commit do manifesto ou os textos dos quatro arquivos no JSON de retorno. Se publicar um retorno, atualize também a versão de cache. Compare alterações posteriores antes de sobrescrever arquivos.
