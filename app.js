@@ -22,6 +22,8 @@ import { RealityOrbEngine } from './orb-engine-v68.js';
 import { createLivingUniverseV524 } from './living-universe-core-v524.js';
 import { whitHash as arbitrioHash, secureWhitSeed as secureArbitrioSeed } from './whit-alma-divina-utils-v1.js';
 import { whitTarotReading } from './whit-alma-divina-core-v1.js';
+import { createWhitSessions } from './whit-alma-divina-sessoes-v1.js';
+const whitSessions = createWhitSessions({ getItem:key=>localStorage.getItem(key), setItem:(key,value)=>localStorage.setItem(key,value) });
 
 const REDUCED_MOTION = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const TAROT_KEY = 'divina-bruxa-3.tarot-livre.v1';
@@ -428,6 +430,7 @@ function loadTarotState() {
 const tarot = {
   state: loadTarotState(),
   arbitrioByPosition:new Map(),
+  sequenceReading:null,
   resetArmed: false,
   resetTimer: 0,
   nodes: {
@@ -446,6 +449,15 @@ const tarot = {
     shuffle: document.querySelector('#shuffleRemaining'),
     reset: document.querySelector('#resetTarot'),
     persistence: document.querySelector('#tarotPersistence'),
+    sequenceAction:document.querySelector('#tarotSequenceAction'),
+    sequenceQuestion:document.querySelector('#tarotSequenceQuestion'),
+    sequencePanel:document.querySelector('#tarotSequencePanel'),
+    sequenceTitle:document.querySelector('#tarotSequenceTitle'),
+    sequenceStatus:document.querySelector('#tarotSequenceStatus'),
+    sequenceEssence:document.querySelector('#tarotSequenceEssence'),
+    sequenceChoices:document.querySelector('#tarotSequenceChoices'),
+    sequenceResponse:document.querySelector('#tarotSequenceResponse'),
+    sequenceHistory:document.querySelector('#tarotSequenceHistory'),
     arbitrioAction:document.querySelector('#tarotArbitrioAction'),
     arbitrioPanel:document.querySelector('#tarotArbitrio'),
     arbitrioTitle:document.querySelector('#tarotArbitrioTitle'),
@@ -504,10 +516,42 @@ const tarot = {
     announce(`Whit Taróloga abriu a consulta de ${card.name} com história, tendência e conselho.`);
   },
 
+  readSequence() {
+    const cards = this.state.revealed.map(id=>CARDS[id]);
+    if (!cards.length) return;
+    try {
+      this.sequenceReading = whitSessions.sequence({ cards, question:this.nodes.sequenceQuestion.value.trim().slice(0,700), generate:whitTarotReading });
+      this.renderSequence();
+      announce(`Whit leu a sequência de ${cards.length} cartas sem alterar o sorteio.`);
+    } catch {
+      announce('Não foi possível organizar esta sequência. A mesa e o histórico foram preservados.');
+    }
+  },
+
+  renderSequence() {
+    const count=this.state.revealed.length;
+    this.nodes.sequenceAction.disabled = count===0;
+    const record=this.sequenceReading;
+    this.nodes.sequencePanel.hidden = !record;
+    const entries=whitSessions.history();
+    const selector=this.nodes.sequenceHistory;
+    selector.replaceChildren(new Option('Escolha uma leitura salva',''));
+    entries.forEach((entry,index)=>selector.add(new Option(`${index+1} · ${entry.canonicalIds.length} cartas${entry.question?' · '+entry.question.slice(0,48):''}`,String(index))));
+    selector.disabled=entries.length===0;
+    if(!record){this.nodes.sequenceAction.textContent='LER A SEQUÊNCIA REVELADA';return;}
+    const same=whitSessions.matches(record,this.state.revealed.map(id=>CARDS[id]),this.nodes.sequenceQuestion.value.trim());
+    this.nodes.sequenceAction.textContent=same?'RELER ESTA SEQUÊNCIA':'LER A SEQUÊNCIA REVELADA';
+    this.nodes.sequenceTitle.textContent=record.reading.title;
+    this.nodes.sequenceStatus.textContent=`Leitura de ${record.canonicalIds.length} cartas${same?' · corresponde à mesa e à pergunta atuais':' · versão anterior preservada; escolha ler para atualizar'}${record.persisted===false?' · memória temporária nesta sessão':''}.`;
+    this.nodes.sequenceEssence.textContent=record.reading.essence;
+    renderLivingDepth(this.nodes.sequenceChoices,this.nodes.sequenceResponse,record.reading);
+  },
+
   render() {
     const card = this.current();
     const revealed = this.state.revealed.length;
     const remaining = this.state.waiting.length;
+    this.renderSequence();
     this.nodes.revealed.textContent = String(revealed);
     this.nodes.remaining.textContent = String(remaining);
     this.nodes.progress.style.width = `${(revealed / CARDS.length) * 100}%`;
@@ -614,6 +658,8 @@ const tarot = {
     this.nodes.reset.textContent = 'Novo círculo';
     this.state = initialTarotState();
     this.arbitrioByPosition.clear();
+    this.sequenceReading=null;
+    this.nodes.sequenceQuestion.value='';
     this.save();
     this.render();
     pulseOrb();
@@ -626,6 +672,14 @@ tarot.nodes.next.addEventListener('click', () => tarot.move(1));
 tarot.nodes.shuffle.addEventListener('click', () => tarot.shuffle());
 tarot.nodes.reset.addEventListener('click', () => tarot.reset());
 tarot.nodes.arbitrioAction.addEventListener('click', () => tarot.invent());
+tarot.nodes.sequenceAction.addEventListener('click', () => tarot.readSequence());
+tarot.nodes.sequenceQuestion.addEventListener('input', () => tarot.renderSequence());
+tarot.nodes.sequenceHistory.addEventListener('change', () => {
+  const value=tarot.nodes.sequenceHistory.value;
+  if(value==='')return;
+  tarot.sequenceReading=whitSessions.history()[Number(value)]||null;
+  tarot.renderSequence();
+});
 
 const cardDialog = document.querySelector('#cardDialog');
 const dialogCardImage = document.querySelector('#dialogCardImage');
@@ -712,6 +766,7 @@ tarot.nodes.current.addEventListener('click', () => {
 
 const daily = {
   dateKey: dateKeyInTimeZone(),
+  revealedInMemory:new Set(),
   nodes: {
     date:document.querySelector('#dailyDate'),
     card:document.querySelector('#dailyCard'),
@@ -741,39 +796,28 @@ const daily = {
 
   get arbitrioSeedKey() { return `${dailyStorageKey(this.dateKey)}.arbitrio-seed.v1`; },
 
-  arbitrioSeed({ create = false, renew = false } = {}) {
+  arbitrioSeed() {
     try {
-      const raw = localStorage.getItem(this.arbitrioSeedKey);
-      if (!renew && raw) return raw;
-      const seed = create || renew
-        ? secureArbitrioSeed()
-        : arbitrioHash(`${this.dateKey}:${this.card.canonicalId}`).toString(16);
-      localStorage.setItem(this.arbitrioSeedKey, seed);
-      return seed;
-    } catch {
-      return arbitrioHash(`${this.dateKey}:${this.card.canonicalId}`).toString(16);
-    }
+      const saved=localStorage.getItem(this.arbitrioSeedKey);
+      if(saved)return saved;
+    } catch {}
+    return arbitrioHash(`${this.dateKey}:${this.card.canonicalId}`).toString(16);
   },
 
   creation() {
-    return whitTarotReading({
-      cards:[this.card],
-      positions:[this.dateKey],
-      seed:this.arbitrioSeed(),
-      scope:'carta-do-dia'
-    });
+    return whitSessions.daily({ dateKey:this.dateKey, card:this.card, seed:this.arbitrioSeed(), generate:whitTarotReading }).reading;
   },
 
   renewFiction() {
+    this.syncDateKey();
     if (!this.revealed) return;
-    this.arbitrioSeed({ renew:true });
     this.render();
     this.nodes.depth.open = true;
-    pulseOrb();
-    announce(`A consulta de ${this.card.name} foi relida sem alterar a verdade da carta.`);
+    announce('A mesma leitura de hoje foi reaberta, sem mudar a carta ou a história.');
   },
 
   get revealed() {
+    if(this.revealedInMemory.has(this.dateKey))return true;
     try { return localStorage.getItem(dailyStorageKey(this.dateKey)) === 'revealed'; }
     catch { return false; }
   },
@@ -784,6 +828,7 @@ const daily = {
       announce(`${this.card.name}. Esta é a sua Carta do Dia até a próxima meia-noite em Brasília.`);
       return;
     }
+    this.revealedInMemory.add(this.dateKey);
     try { localStorage.setItem(dailyStorageKey(this.dateKey), 'revealed'); } catch {}
     this.arbitrioSeed({ create:true });
     this.render();
@@ -841,18 +886,26 @@ const daily = {
     renderLivingDepth(this.nodes.depthChoices, this.nodes.depthResponse, creation);
     this.nodes.signature.textContent = creationSignature(creation);
     this.nodes.depth.hidden = false;
-    this.nodes.state.textContent = 'Carta e consulta guardadas neste aparelho até o próximo ciclo de Brasília.';
+    this.nodes.state.textContent = 'Carta e leitura de hoje permanecem iguais ao reler. Salvamento local quando disponível.';
     if (currentRoute === 'carta-do-dia') orbCue.textContent = 'Carta guardada';
   }
 };
 
 daily.nodes.card.addEventListener('click', () => {
+  if(dateKeyInTimeZone()!==daily.dateKey)daily.render();
   if (daily.revealed) showCardDialog(daily.card, 'CARTA DO DIA', '', '', {
     scope:'carta-do-dia',
     initialCreation:daily.creation()
   });
 });
 daily.nodes.again.addEventListener('click', () => daily.renewFiction());
+function refreshDailyCycle() {
+  if(currentRoute==='carta-do-dia' && dateKeyInTimeZone()!==daily.dateKey)daily.render();
+}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshDailyCycle();});
+window.addEventListener('focus',refreshDailyCycle);
+setInterval(()=>{if(!document.hidden)refreshDailyCycle();},30000);
+
 
 const CARD_IDS = CARDS.map(card => card.id);
 const CARD_BY_ID = new Map(CARDS.map(card => [card.id, card]));
@@ -1285,7 +1338,7 @@ applyRoute(normalizedRoute(location.hash), { push:false, focus:false, animate:fa
 if ('serviceWorker' in navigator) {
   addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js?v=alma-divina-1.0.0', { updateViaCache:'none' });
+      const registration = await navigator.serviceWorker.register('./sw.js?v=alma-divina-sessoes-1.0.0', { updateViaCache:'none' });
       await registration.update();
       if (registration.waiting) registration.waiting.postMessage({ type:'SKIP_WAITING' });
       registration.addEventListener('updatefound', () => {

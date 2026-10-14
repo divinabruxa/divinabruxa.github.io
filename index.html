@@ -28,6 +28,7 @@
   <link rel="preload" href="divina-universe-retina-v523.webp" as="image" type="image/webp">
   <link rel="stylesheet" href="styles.css?v=4.2.1-acessibilidade-20261003">
   <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://divinabruxa.com.br/#organization", "name": "Divina Bruxa", "alternateName": ["Divina Bruxa 33", "Orbe das Realidades"], "url": "https://divinabruxa.com.br/", "logo": "https://divinabruxa.com.br/icon-512.png"}, {"@type": "WebSite", "@id": "https://divinabruxa.com.br/#website", "name": "Divina Bruxa", "url": "https://divinabruxa.com.br/", "inLanguage": "pt-BR", "publisher": {"@id": "https://divinabruxa.com.br/#organization"}}, {"@type": "WebPage", "@id": "https://divinabruxa.com.br/#webpage", "url": "https://divinabruxa.com.br/", "name": "Divina Bruxa — Tarot online e Whit Taróloga", "description": "Tarot online com 78 cartas, Carta do Dia e tiragens interpretadas pela Whit Taróloga. Explore a Escola do Tarot, a biblioteca e consultas na Divina Bruxa.", "inLanguage": "pt-BR", "isPartOf": {"@id": "https://divinabruxa.com.br/#website"}}]}</script>
+  <link rel="stylesheet" href="whit-alma-divina-sessoes-v1.css">
 </head>
 <body data-route="home" data-menu="closed">
   <a class="skip-link" href="#main">Pular para a experiência</a>
@@ -101,6 +102,21 @@
             <small id="tarotArbitrioSignature" class="arbitrio-signature"></small>
             <small class="arbitrio-disclaimer">Leitura espiritual e simbólica — seu caminho e suas escolhas continuam livres.</small>
           </section>
+          <details class="daily-depth">
+            <summary>Whit · ler a sequência da mesa</summary>
+            <label for="tarotSequenceQuestion">Sua pergunta (opcional)</label>
+            <textarea id="tarotSequenceQuestion" rows="2" maxlength="700" placeholder="Que reflexão você busca nesta sequência?"></textarea>
+            <button id="tarotSequenceAction" class="arbitrio-invoke" type="button" disabled>LER A SEQUÊNCIA REVELADA</button>
+            <label for="tarotSequenceHistory">Leituras recentes (até 8)</label>
+            <select id="tarotSequenceHistory" disabled><option value="">Escolha uma leitura salva</option></select>
+            <section id="tarotSequencePanel" class="arbitrio-panel" aria-labelledby="tarotSequenceTitle" aria-live="polite" hidden>
+              <p id="tarotSequenceStatus"></p>
+              <h3 id="tarotSequenceTitle"></h3>
+              <p id="tarotSequenceEssence" class="arbitrio-panel__whisper"></p>
+              <div id="tarotSequenceChoices" class="living-depth__choices"></div>
+              <p id="tarotSequenceResponse" class="living-depth__response" hidden></p>
+            </section>
+          </details>
           <div class="tarot-actions">
             <button id="previousCard" type="button" disabled>← Anterior</button>
             <button id="nextCard" type="button" disabled>Próxima →</button>
@@ -527,6 +543,6 @@
   </dialog>
 
   <div id="announcer" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
-  <script type="module" src="app.js?v=whit-alma-divina-1.1.0"></script>
+  <script type="module" src="app.js?v=whit-alma-divina-etapa-5"></script>
 </body>
 </html>

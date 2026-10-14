@@ -1,0 +1,24 @@
+WHIT ALMA DIVINA — MACROETAPA 5/8
+
+1. Extraia o ZIP. Todos os arquivos estão soltos, sem pastas.
+2. Envie TODOS os arquivos juntos à raiz de divinabruxa.github.io.
+3. Substitua app.js, index.html e sw.js; mantenha os módulos das etapas anteriores.
+4. Aguarde a publicação no GitHub Pages e atualize/reabra o site.
+
+COMO USAR
+No Tarot Livre, revele suas cartas normalmente. Abra “Whit · ler a sequência da mesa”, escreva uma pergunta se quiser e toque em “LER A SEQUÊNCIA REVELADA”. A leitura usa todas as cartas já reveladas, na ordem real, e não sorteia outras.
+
+Revelar outra carta preserva a leitura anterior. Toque novamente em ler para interpretar a sequência ampliada. As oito leituras mais recentes podem ser reabertas no seletor. “Novo círculo” limpa a mesa atual, mas conserva esse histórico.
+
+Na Carta do Dia, “RELER CONSULTA” reabre a mesma carta e história. O texto fica guardado localmente desde a primeira consulta após esta atualização. Uma atualização posterior do compositor não troca silenciosamente a história guardada para esse dia.
+
+O ciclo segue Brasília. Ao voltar ao aplicativo ou interagir, a data é conferida; numa aba visível e ociosa, a conferência acontece a cada 30 segundos.
+
+Se o navegador impedir o salvamento, as leituras permanecem apenas na sessão. Limpar dados do navegador apaga as leituras locais. Esta entrega não adiciona sincronização de contas ou dispositivos.
+
+Verificação local:
+node --test whit-alma-divina-*.test.mjs tests/*.test.mjs
+
+129 testes automatizados passaram. A validação visual em navegador/Safari/iPhone continua pendente.
+
+Retorno: restaure os três arquivos da base registrada no manifesto ou use seus textos no JSON de retorno. Atualize a versão de cache caso publique um retorno. Compare alterações posteriores antes de sobrescrever arquivos.

@@ -1,0 +1,14 @@
+/* Controles locais da sequência: leitura confortável em telas pequenas. */
+#tarotSequenceQuestion,#tarotSequenceHistory {
+  display:block;width:100%;max-width:100%;box-sizing:border-box;
+  font:inherit;font-size:16px;line-height:1.5;color:inherit;
+  background:rgba(38,23,65,.4);border:1px solid rgba(215,186,125,.35);
+  border-radius:12px;padding:.75rem;margin:.5rem 0 1rem;
+}
+#tarotSequenceQuestion {resize:vertical;min-height:5rem;}
+#tarotSequenceQuestion::placeholder {color:rgba(255,255,255,.55);}
+label[for="tarotSequenceQuestion"],label[for="tarotSequenceHistory"] {display:block;margin-top:1rem;}
+#tarotSequenceStatus {font-size:.85rem;line-height:1.5;opacity:.8;}
+#tarotSequenceResponse {white-space:pre-line;overflow-wrap:anywhere;}
+#tarotSequenceAction {white-space:normal;}
+#tarotSequenceHistory option {background:#241737;color:#fff;}

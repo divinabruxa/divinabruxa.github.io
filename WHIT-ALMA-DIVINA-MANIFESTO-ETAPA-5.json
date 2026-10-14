@@ -1,0 +1,71 @@
+{
+  "stage": 5,
+  "totalStages": 8,
+  "baseCommit": "b4bf30b516f9f41db8c0ad8e8cf6b8b881fba44f",
+  "replacements": [
+    "app.js",
+    "index.html",
+    "sw.js"
+  ],
+  "tests": {
+    "passed": 129,
+    "failed": 0,
+    "newSessionTests": 16,
+    "browserVerified": false,
+    "physicalIPhoneVerified": false
+  },
+  "historyLimit": 8,
+  "syncAcrossDevices": false,
+  "files": [
+    {
+      "name": "whit-alma-divina-sessoes-v1.js",
+      "bytes": 4577,
+      "sha256": "fc7774c150c1a3aa16fd3fe54ff596f4c77732cc863ce2f52669ce99e847a083"
+    },
+    {
+      "name": "whit-alma-divina-sessoes-v1.css",
+      "bytes": 851,
+      "sha256": "2f800f3fd18fcdd4d855308ed703f732c249b5b12bc18f50de28a7ef4fa1b6c2"
+    },
+    {
+      "name": "whit-alma-divina-sessoes.test.mjs",
+      "bytes": 5998,
+      "sha256": "1eef430e8afc332def4c95ba7e4565916d55aee60d40cd1e61ea5a0bc3a857b8"
+    },
+    {
+      "name": "app.js",
+      "bytes": 57507,
+      "sha256": "ef3db76f1a35dbff09cbb0033529fddab42d861cf62e0412cffae8553033def5"
+    },
+    {
+      "name": "index.html",
+      "bytes": 34152,
+      "sha256": "7423a136dd1bdcd3da1207f1b35ee3bdb38e109610d301187064667d8623aa4a"
+    },
+    {
+      "name": "sw.js",
+      "bytes": 4036,
+      "sha256": "4f5ec82c2be13d4018a517dd96ee21487eb98b32acbffd722904ed57bcd92d5a"
+    },
+    {
+      "name": "INSTALAR-WHIT-ALMA-DIVINA-ETAPA-5.txt",
+      "bytes": 1860,
+      "sha256": "34318819837adb0b00260fcac9b19b07aa61d815be7661d9dfd06052875196c1"
+    },
+    {
+      "name": "WHIT-ALMA-DIVINA-MACROETAPA-5.md",
+      "bytes": 4748,
+      "sha256": "ceb883203e98de44ba615c856b2e3ad20ccbc42ec364f996f81ba29751134c39"
+    },
+    {
+      "name": "WHIT-ALMA-DIVINA-VALIDACAO-ETAPA-5.txt",
+      "bytes": 10693,
+      "sha256": "0b0fddf5965139bba92f36a4e64fd16e14e9db9ea9aeb5b5602e941e2a9e32de"
+    },
+    {
+      "name": "WHIT-ALMA-DIVINA-RETORNO-ETAPA-5.json",
+      "bytes": 94938,
+      "sha256": "828a8ffc4d404b47059c60e8d4c6f43ccf000898a6533dddcd03038d09eac09b"
+    }
+  ]
+}
